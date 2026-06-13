@@ -530,11 +530,6 @@
     display: none; align-items: center; justify-content: center; flex-direction: column; gap: 18px; z-index: 30; }
   #death-overlay h1 { color: #ddd; font-size: 44px; text-shadow: 2px 2px 8px #000; font-family: var(--title-font); }
   
-  /* Hide all other UI components while the start screen is visible to prevent keyboard focus leakage */
-  body:has(#start-screen:not([style*="display: none"])) #ui {
-    display: none !important;
-  }
-
   /* ---------- start screen ---------- */
   #start-screen {
     position: absolute;
@@ -1957,6 +1952,7 @@
   <canvas id="game-canvas"></canvas>
   <div id="nameplates"></div>
 
+  <template id="game-ui-template">
   <div id="ui">
     <div id="player-frame" class="unitframe">
       <div class="portrait-wrap">
@@ -2083,6 +2079,7 @@
   </div>
 
   <input id="chat-input" maxlength="200" placeholder="Say something… (/w name whisper, /r reply, /p party, /gu guild, /o officer, /g general)" autocomplete="off" />
+  </template>
 
   <main id="start-screen">
     <h1 class="visually-hidden">World of Claudecraft</h1>
