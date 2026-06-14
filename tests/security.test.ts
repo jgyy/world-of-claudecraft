@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 import { buildWebSocketAuthMessage, buildWebSocketUrl } from '../src/net/online';
 import { Sim } from '../src/sim/sim';
 import { offensiveUsername, validCharName, validUsername } from '../server/auth';
-import { rateLimited, requestIp } from '../server/ratelimit';
+import { rateLimited, requestIp, trackedHitCount } from '../server/ratelimit';
 
 function fakeReq(headers: Record<string, string>, remoteAddress: string) {
   const req: any = new EventEmitter();
@@ -109,6 +109,17 @@ describe('rate-limit client IP selection', () => {
     expect(aliceLimited).toBe(true);
     // ...while another player behind the same proxy is unaffected
     expect(rateLimited(fakeReq({ 'x-forwarded-for': '198.51.100.201' }, '172.18.0.1'))).toBe(false);
+  });
+
+  it('keeps a flooding IP from growing the limiter unbounded', () => {
+    // A single IP hammering far past the limit must not retain a timestamp per
+    // request — the limiter's memory has to stay bounded or it becomes its own
+    // DoS amplifier. We never need more than `maxPerMinute` timestamps to keep
+    // returning "limited", so the retained window caps there.
+    const flood = fakeReq({ 'x-forwarded-for': '203.0.113.250' }, '172.18.0.1');
+    for (let i = 0; i < 1000; i++) rateLimited(flood, 20);
+    expect(rateLimited(flood, 20)).toBe(true);
+    expect(trackedHitCount('203.0.113.250')).toBeLessThanOrEqual(20);
   });
 });
 

@@ -64,8 +64,21 @@ export function rateLimited(req: http.IncomingMessage, maxPerMinute = 20): boole
   const now = Date.now();
   const windowStart = now - WINDOW_MS;
   const list = (attempts.get(ip) ?? []).filter((t) => t > windowStart);
-  const updated = [...list, now];
-  attempts.set(ip, updated);
+  // Once the window is full this request is over the limit, and we never need
+  // more than `maxPerMinute` timestamps to decide. Stop appending past that so
+  // a sustained flood from a single IP can't grow its array without bound —
+  // otherwise the limiter's own memory scales with attack volume, defeating
+  // the point. The remaining timestamps age out, throttling a flooder to the
+  // intended ~maxPerMinute rate.
+  const limited = list.length >= maxPerMinute;
+  if (!limited) list.push(now);
+  attempts.set(ip, list);
   if (attempts.size > MAX_TRACKED_IPS) attempts.clear(); // memory backstop
-  return updated.length > maxPerMinute;
+  return limited;
+}
+
+// Test/observability helper: how many timestamps are currently retained for an
+// IP. Used to assert the per-IP window stays bounded under a flood.
+export function trackedHitCount(ip: string): number {
+  return attempts.get(ip)?.length ?? 0;
 }
