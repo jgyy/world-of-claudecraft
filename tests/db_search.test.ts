@@ -24,6 +24,17 @@ describe('character typeahead search', () => {
     expect(SOCIAL_SCHEMA).toContain('ON characters (realm, lower(name) text_pattern_ops)');
   });
 
+  it('enforces case-insensitive name uniqueness to match folded lookups', () => {
+    // The unique index must fold case so the DB rejects 'Bob' vs 'bob'; a
+    // verbatim (realm, name) unique index would let case-collisions coexist and
+    // make report-target / social name resolution ambiguous.
+    expect(SOCIAL_SCHEMA).toContain('CREATE UNIQUE INDEX IF NOT EXISTS characters_realm_lower_name');
+    expect(SOCIAL_SCHEMA).toContain('ON characters(realm, lower(name))');
+    // the old case-sensitive unique index must be dropped, not left behind
+    expect(SOCIAL_SCHEMA).toContain('DROP INDEX IF EXISTS characters_realm_name');
+    expect(SOCIAL_SCHEMA).not.toContain('CREATE UNIQUE INDEX IF NOT EXISTS characters_realm_name ');
+  });
+
   it('uses the lower-name prefix predicate and preserves wildcard escaping', async () => {
     dbMock.query.mockResolvedValueOnce({ rows: [{ name: 'Al%_', cls: 'mage', level: 12 }] });
 

@@ -17,7 +17,23 @@ CREATE INDEX IF NOT EXISTS characters_realm ON characters(realm);
 -- global unique on characters.name to a (realm, name) composite. This is a
 -- constraint relaxation, so existing globally-unique rows always satisfy it.
 ALTER TABLE characters DROP CONSTRAINT IF EXISTS characters_name_key;
-CREATE UNIQUE INDEX IF NOT EXISTS characters_realm_name ON characters(realm, name);
+-- Uniqueness must be CASE-INSENSITIVE to match every name lookup, which folds
+-- with lower() (findCharacterByName, report-target resolution, /who search).
+-- A verbatim (realm, name) unique index let 'Bob' and 'bob' coexist, making
+-- those lookups ambiguous/non-deterministic. Fold the unique index too so the
+-- DB rejects case-collisions (creation relies on the 23505 -> 409 path).
+-- Dedupe any pre-existing case-collisions first (keep the lowest id, suffix the
+-- rest) so the unique index can be built on legacy data.
+UPDATE characters c SET name = c.name || '_' || c.id
+WHERE EXISTS (
+  SELECT 1 FROM characters o
+  WHERE o.realm = c.realm AND lower(o.name) = lower(c.name) AND o.id < c.id
+);
+DROP INDEX IF EXISTS characters_realm_name;
+CREATE UNIQUE INDEX IF NOT EXISTS characters_realm_lower_name
+  ON characters(realm, lower(name));
+-- Kept for prefix typeahead (LIKE 'abc%'); the unique btree above can't serve
+-- text_pattern_ops range scans, so this is not redundant with it.
 CREATE INDEX IF NOT EXISTS characters_realm_lower_name_prefix
   ON characters (realm, lower(name) text_pattern_ops);
 
