@@ -1352,6 +1352,10 @@ export class Sim {
 
   private applyAbility(p: Entity, meta: PlayerMeta, res: ResolvedAbility): void {
     const ability = res.def;
+    // Toggling a buff off (re-casting a form/stance/stealth you already have) is
+    // free and must not re-arm the ability's cooldown — the cooldown only gates
+    // re-entry. See isToggleBuff and the cast-time gate in castAbility.
+    const togglingOff = isToggleBuff(ability) && p.auras.some((a) => a.id === ability.id);
     if (ability.id === 'conjure_water') {
       this.spendResource(p, res.cost);
       // higher ranks conjure better water (falls back if the item isn't defined)
@@ -1377,14 +1381,14 @@ export class Sim {
     // helpful spells never miss
     if (ability.targetType === 'friendly') {
       this.spendResource(p, res.cost);
-      if (ability.cooldown > 0) p.cooldowns.set(ability.id, ability.cooldown);
+      if (ability.cooldown > 0 && !togglingOff) p.cooldowns.set(ability.id, ability.cooldown);
       this.runEffects(p, meta, target, res);
       return;
     }
 
     if (target && ability.school !== 'physical') {
       this.spendResource(p, res.cost);
-      if (ability.cooldown > 0) p.cooldowns.set(ability.id, ability.cooldown);
+      if (ability.cooldown > 0 && !togglingOff) p.cooldowns.set(ability.id, ability.cooldown);
       this.emit({ type: 'spellfx', sourceId: p.id, targetId: target.id, school: ability.school, fx: 'projectile' });
       if (!this.rng.chance(spellHitChance(p.level, target.level))) {
         this.emit({ type: 'damage', sourceId: p.id, targetId: target.id, amount: 0, crit: false, school: ability.school, ability: ability.name, kind: 'miss' });
@@ -1396,7 +1400,7 @@ export class Sim {
     }
 
     this.spendAbilityCost(p, res);
-    if (ability.cooldown > 0) p.cooldowns.set(ability.id, ability.cooldown);
+    if (ability.cooldown > 0 && !togglingOff) p.cooldowns.set(ability.id, ability.cooldown);
     this.runEffects(p, meta, target, res);
   }
 
