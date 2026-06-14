@@ -56,7 +56,10 @@ export function requestIp(req: http.IncomingMessage): string {
   for (let i = chain.length - 1; i >= 0; i--) {
     if (!isTrustedProxy(chain[i])) return chain[i];
   }
-  return chain[0] ?? remote;
+  // Every hop was a trusted proxy (or the header was empty). The leftmost
+  // chain entry is client-supplied and spoofable, so fall back to the
+  // unspoofable socket peer instead of trusting chain[0].
+  return remote;
 }
 
 export function rateLimited(req: http.IncomingMessage, maxPerMinute = 20): boolean {
@@ -66,6 +69,15 @@ export function rateLimited(req: http.IncomingMessage, maxPerMinute = 20): boole
   const list = (attempts.get(ip) ?? []).filter((t) => t > windowStart);
   const updated = [...list, now];
   attempts.set(ip, updated);
-  if (attempts.size > MAX_TRACKED_IPS) attempts.clear(); // memory backstop
+  // Memory backstop: prune entries whose windows have fully expired rather
+  // than clearing the whole map. Wiping every entry would reset the live
+  // windows of legitimate clients too, letting an attacker who churns through
+  // many distinct IP keys periodically flush the limiter for everyone.
+  if (attempts.size > MAX_TRACKED_IPS) {
+    for (const [key, times] of attempts) {
+      if (key === ip) continue;
+      if (times.every((t) => t <= windowStart)) attempts.delete(key);
+    }
+  }
   return updated.length > maxPerMinute;
 }

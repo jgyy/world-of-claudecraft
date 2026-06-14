@@ -1,4 +1,11 @@
 import { beforeEach, describe, expect, it, vi, afterEach } from "vitest";
+
+// db.ts requires DATABASE_URL at import time; set it before importing so the
+// module loads. The accounts-count test spies on pool.query and never opens a
+// real connection.
+vi.hoisted(() => {
+  process.env.DATABASE_URL = "postgres://test/test";
+});
 import { pool, getAccountsCount } from "../server/db";
 import { t, setLanguage, getLanguage } from "../src/ui/i18n";
 import { Api } from "../src/net/online";

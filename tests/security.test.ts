@@ -110,6 +110,13 @@ describe('rate-limit client IP selection', () => {
     // ...while another player behind the same proxy is unaffected
     expect(rateLimited(fakeReq({ 'x-forwarded-for': '198.51.100.201' }, '172.18.0.1'))).toBe(false);
   });
+
+  it('falls back to the socket peer, not the spoofable leftmost hop, when every forwarded hop is trusted', () => {
+    // All hops are private/trusted, so there is no untrusted client to resolve.
+    // The leftmost entry is client-supplied; we must use the real socket peer.
+    const req = fakeReq({ 'x-forwarded-for': '10.0.0.9, 172.18.0.1' }, '172.18.0.5');
+    expect(requestIp(req)).toBe('172.18.0.5');
+  });
 });
 
 describe('malformed websocket frames cannot crash the server', () => {
