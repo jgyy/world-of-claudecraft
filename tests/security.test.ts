@@ -110,6 +110,32 @@ describe('rate-limit client IP selection', () => {
     // ...while another player behind the same proxy is unaffected
     expect(rateLimited(fakeReq({ 'x-forwarded-for': '198.51.100.201' }, '172.18.0.1'))).toBe(false);
   });
+
+  it('does not reset an active client when a flood overflows the tracking map', () => {
+    // Regression: the memory backstop used to call attempts.clear(), wiping
+    // EVERY client's counters at once — so an attacker spraying from enough
+    // distinct IPs could erase rate-limit state for legitimate users. An active
+    // client tripped before the flood must stay limited after it.
+    const flood = (start: number, count: number) => {
+      for (let i = 0; i < count; i++) {
+        const a = (start + i) >> 8 & 0xff;
+        const b = (start + i) & 0xff;
+        rateLimited(fakeReq({ 'x-forwarded-for': `100.64.${a}.${b}` }, '172.18.0.1'));
+      }
+    };
+
+    flood(0, 6000);
+    // Trip the limiter for our victim, tracked in the middle of the spray.
+    let victimLimited = false;
+    for (let i = 0; i < 21; i++) {
+      victimLimited = rateLimited(fakeReq({ 'x-forwarded-for': '203.0.113.222' }, '172.18.0.1'));
+    }
+    expect(victimLimited).toBe(true);
+    // Push past MAX_TRACKED_IPS (10k) to force the backstop to run.
+    flood(6000, 6000);
+    // The victim's counter survived (old clear()-based code would report false).
+    expect(rateLimited(fakeReq({ 'x-forwarded-for': '203.0.113.222' }, '172.18.0.1'))).toBe(true);
+  });
 });
 
 describe('malformed websocket frames cannot crash the server', () => {

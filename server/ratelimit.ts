@@ -59,6 +59,28 @@ export function requestIp(req: http.IncomingMessage): string {
   return chain[0] ?? remote;
 }
 
+// Memory backstop: keep the tracking map bounded WITHOUT wiping every client's
+// counters at once. A blanket `attempts.clear()` would let an attacker spraying
+// from many IPs reset the limiter for everyone. Instead we first drop entries
+// whose attempts have all aged out of the window (the common case — one-shot
+// IPs that are never seen again), and only if that fails to get us back under
+// the cap do we evict the oldest-tracked entries, bounded to the overflow.
+function pruneTracked(windowStart: number): void {
+  for (const [ip, list] of attempts) {
+    const live = list.filter((t) => t > windowStart);
+    if (live.length === 0) attempts.delete(ip);
+    else if (live.length !== list.length) attempts.set(ip, live);
+  }
+  if (attempts.size <= MAX_TRACKED_IPS) return;
+  // Still over budget (every tracked IP is currently active): evict the oldest
+  // insertions — Map preserves insertion order — rather than nuking all state.
+  let toEvict = attempts.size - MAX_TRACKED_IPS;
+  for (const ip of attempts.keys()) {
+    if (toEvict-- <= 0) break;
+    attempts.delete(ip);
+  }
+}
+
 export function rateLimited(req: http.IncomingMessage, maxPerMinute = 20): boolean {
   const ip = requestIp(req);
   const now = Date.now();
@@ -66,6 +88,6 @@ export function rateLimited(req: http.IncomingMessage, maxPerMinute = 20): boole
   const list = (attempts.get(ip) ?? []).filter((t) => t > windowStart);
   const updated = [...list, now];
   attempts.set(ip, updated);
-  if (attempts.size > MAX_TRACKED_IPS) attempts.clear(); // memory backstop
+  if (attempts.size > MAX_TRACKED_IPS) pruneTracked(windowStart);
   return updated.length > maxPerMinute;
 }
