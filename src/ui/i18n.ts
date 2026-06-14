@@ -6532,6 +6532,389 @@ const phase7 = {
 phase7.es_ES = phase7.es;
 phase7.fr_CA = phase7.fr_FR;
 
+const ITEM_ENTITY_IDS = [
+  "worn_sword", "gnarled_staff", "rusty_dagger", "training_mace", "rusty_hatchet", "recruit_tunic", "apprentice_robe", "footpad_jerkin",
+  "redbrook_blade", "apprentice_staff", "keen_dirk", "militia_vest", "woven_robe", "shadow_jerkin", "oiled_boots", "quilted_trousers",
+  "greyjaw_pelt_cloak", "baked_bread", "spring_water", "roasted_boar", "conjured_water", "conjured_water2", "conjured_water3",
+  "eastbrook_arming_sword", "bronzework_mace", "vale_carving_knife", "hickory_shortstaff", "eastbrook_chain_vest", "valespun_robe",
+  "tanned_leather_jerkin", "hobnail_boots", "eastbrook_wool_trousers", "gravecaller_blade", "widowfang_dirk", "gravecaller_staff",
+  "marrowtread_boots", "sextons_slippers", "gravewalker_softboots", "boar_hide", "gravecaller_sigil", "blessed_wax", "ghostly_essence",
+  "webwood_silk", "supply_crate", "greyjaw_fang", "weathered_ledger_page", "morthen_grimoire", "wolf_fang", "bandit_bandana",
+  "tough_jerky", "mudfin_scale", "tallow_candle", "spider_leg", "bone_fragments", "linen_scrap", "fen_muster_order",
+  "mire_prowler_pelt", "lost_caravan_goods", "waterlogged_idol", "widow_venom_sac", "rusted_censer", "troll_fetish", "grubjaw_tusk",
+  "cult_cipher", "bastion_ward_stone", "deacons_cleaver", "staff_of_drowned_prayers", "mistbinder_kris", "drownedguard_breastplate",
+  "fenmist_robe", "eelskin_tunic", "trollhide_leggings", "marshstrider_boots", "mistcallers_edge", "vaels_mist_staff", "riptide_dirk",
+  "knight_commanders_greaves", "tidescale_vest", "fenbridge_rye", "marsh_mint_tea", "smoked_eel", "silvermist_cordial", "bogiron_mace",
+  "fenreed_staff", "mirefen_skinner", "bogiron_hauberk", "marshcloth_robe", "reedwoven_jerkin", "fenwalker_boots", "reedwoven_trousers",
+  "bogiron_nugget", "soggy_moccasin", "cracked_fetish", "chipped_tusk", "deepfen_pearl", "highwatch_summons", "ridge_stalker_pelt",
+  "glowing_wax", "ogre_war_totem", "storm_core", "kazzix_heartshard", "wyrmcult_orders", "ritual_phylactery", "gravewyrm_sigil",
+  "blessed_embers", "sanctum_key_shard", "ridgestalker_treads", "boneplate_vest", "revenant_silk_robe", "nightwalk_jerkin",
+  "zealotsbane_blade", "emberwood_staff", "cultist_flayer", "drogmars_skullcleaver", "ogre_bonecharm_staff", "gutripper_shiv",
+  "stormshard_leggings", "korgaths_chainwraps", "boneguard_breastplate", "staff_of_velkhar", "shadowmeld_tunic",
+  "gravewyrm_scale_hauberk", "wyrmcult_grand_robe", "wyrmscale_jerkin", "wyrmfang_greatblade", "staff_of_the_gravewyrm",
+  "fang_of_korzul", "trail_hardtack", "meltwater_flask", "roast_mountain_goat", "glacier_melt", "highwatch_warblade", "craghorn_staff",
+  "icevein_dirk", "highwatch_breastplate", "peakwool_robe", "stalkerhide_jerkin", "cragwalker_boots", "windguard_leggings",
+  "ogre_toe_ring", "inert_storm_shard", "frayed_prayer_beads", "cracked_wyrm_scale",
+] as const;
+
+type ItemEntityId = typeof ITEM_ENTITY_IDS[number];
+type ItemEntityTranslation = { name: string };
+type ItemEntityTranslations = Record<ItemEntityId, ItemEntityTranslation>;
+
+function itemTranslations(names: readonly string[]): ItemEntityTranslations {
+  if (names.length !== ITEM_ENTITY_IDS.length) {
+    throw new Error(`Item translation count mismatch: expected ${ITEM_ENTITY_IDS.length}, got ${names.length}`);
+  }
+  const translations = {} as ItemEntityTranslations;
+  ITEM_ENTITY_IDS.forEach((id, index) => {
+    const name = names[index];
+    if (!name) throw new Error(`Missing item translation for ${id}`);
+    translations[id] = { name };
+  });
+  return translations;
+}
+
+const phase8En = {
+  itemUi: {
+    ...phase5.en.itemUi,
+    loot: { takeAll: "Take All" },
+  },
+  entities: {
+    ...phase7En.entities,
+    items: itemTranslations([
+      "Worn Shortsword", "Gnarled Staff", "Rusty Dagger", "Training Mace", "Rusty Hatchet", "Recruit's Tunic", "Apprentice's Robe", "Footpad's Jerkin",
+      "Redbrook Militia Blade", "Vale Apprentice Staff", "Keen Dirk", "Militia Chainvest", "Valewoven Robe", "Shadowstitch Jerkin", "Oiled Leather Boots", "Quilted Trousers",
+      "Greyjaw's Pelt Leggings", "Freshly Baked Bread", "Refreshing Spring Water", "Roasted Boar Meat", "Conjured Spring Water", "Conjured Mineral Water", "Conjured Sparkling Water",
+      "Eastbrook Arming Sword", "Bronzework Mace", "Vale Carving Knife", "Hickory Shortstaff", "Eastbrook Chainmail Vest", "Valespun Robe", "Tanned Leather Jerkin",
+      "Hobnailed Boots", "Eastbrook Wool Trousers", "Gravecaller's Broadblade", "Widowfang Dirk", "Staff of the Hollow", "Marrowtread Boots", "Sexton's Slippers",
+      "Gravewalker Softboots", "Bristly Boar Hide", "Gravecaller's Sigil", "Blessed Tallow", "Ghostly Essence", "Webwood Silk Gland", "Stolen Supply Crate",
+      "Old Greyjaw's Fang", "Weathered Ledger Page", "Morthen's Grimoire", "Cracked Wolf Fang", "Red Bandana", "Tough Jerky", "Slimy Murloc Scale", "Tallow Candle",
+      "Twitching Spider Leg", "Bone Fragments", "Linen Scrap", "Fenbridge Muster Order", "Mire Prowler Pelt", "Lost Caravan Goods", "Waterlogged Idol", "Widow Venom Sac",
+      "Rusted Censer", "Mirefen Troll Fetish", "Grubjaw's Tusk", "Gravecaller Cipher", "Bastion Ward Stone", "Deacon's Cleaver", "Staff of Drowned Prayers",
+      "Mistbinder Kris", "Drownedguard Breastplate", "Fenmist Robe", "Eelskin Tunic", "Trollhide Leggings", "Marshstrider Boots", "Mistcaller's Edge", "Vael's Mist-Staff",
+      "Riptide Dirk", "Knight-Commander's Greaves", "Tidescale Vest", "Fenbridge Rye Loaf", "Marsh Mint Tea", "Smoked Mirefen Eel", "Silvermist Cordial", "Bogiron Mace",
+      "Fenreed Staff", "Mirefen Skinner", "Bogiron Hauberk", "Marshcloth Robe", "Reedwoven Jerkin", "Fenwalker Boots", "Reedwoven Trousers", "Bogiron Nugget",
+      "Soggy Moccasin", "Cracked Fetish", "Chipped Tusk", "Deepfen Pearl", "Highwatch Summons", "Ridge Stalker Pelt", "Glowing Wax", "Ogre War Totem", "Storm Core",
+      "Kazzix's Heartshard", "Wyrmcult Orders", "Ritual Phylactery", "Gravewyrm Sigil", "Blessed Embers", "Sanctum Key Shard", "Ridgestalker Treads", "Boneplate Vest",
+      "Revenant Silk Robe", "Nightwalk Jerkin", "Zealotsbane Blade", "Emberwood Staff", "Cultist Flayer", "Drogmar's Skullcleaver", "Ogre Bonecharm Staff",
+      "Gutripper Shiv", "Stormshard Leggings", "Korgath's Chainwraps", "Boneguard Breastplate", "Staff of Velkhar", "Shadowmeld Tunic", "Gravewyrm Scale Hauberk",
+      "Wyrmcult Grand Robe", "Wyrmscale Jerkin", "Wyrmfang Greatblade", "Staff of the Gravewyrm", "Fang of Korzul", "Highwatch Trail Hardtack", "Meltwater Flask",
+      "Roast Mountain Goat", "Glacier Melt", "Highwatch Warblade", "Craghorn Staff", "Icevein Dirk", "Highwatch Breastplate", "Peakwool Robe", "Stalkerhide Jerkin",
+      "Cragwalker Boots", "Windguard Leggings", "Ogre Toe Ring", "Inert Storm Shard", "Frayed Prayer Beads", "Cracked Wyrm Scale",
+    ]),
+  },
+};
+
+const phase8 = {
+  en: phase8En,
+  es: {
+    itemUi: {
+      ...phase5.es.itemUi,
+      loot: { takeAll: "Recoger botín" },
+    },
+    entities: {
+      ...phase7.es.entities,
+      items: itemTranslations([
+        "Espada corta desgastada", "Bastón nudoso", "Daga oxidada", "Maza de entrenamiento", "Hachuela oxidada", "Túnica de recluta", "Toga de aprendiz", "Jubón de salteador",
+        "Hoja de la milicia de Redbrook", "Bastón de aprendiz del Valle", "Puñal afilado", "Coselete de malla de la milicia", "Toga Tejevalle", "Jubón Puntada Sombría", "Botas de cuero aceitado", "Pantalones acolchados",
+        "Leotardos de piel de Greyjaw", "Pan recién horneado", "Agua de manantial refrescante", "Carne de jabalí asada", "Agua de manantial conjurada", "Agua mineral conjurada", "Agua con gas conjurada",
+        "Espada de armar de Eastbrook", "Maza de broncista", "Cuchillo de trinchar del Valle", "Bastón corto de nogal", "Chaleco de cota de Eastbrook", "Toga Hilavalle", "Jubón de cuero curtido",
+        "Botas claveteadas", "Pantalones de lana de Eastbrook", "Mandoble de Gravecaller", "Puñal Colmillo de Viuda", "Bastón del Hueco", "Botas Pisatuétanos", "Zapatillas del sacristán",
+        "Botas blandas del Caminante de Tumbas", "Piel erizada de jabalí", "Sigilo de Gravecaller", "Sebo bendito", "Esencia fantasmal", "Glándula de seda de Webwood", "Cajón de suministros robado",
+        "Colmillo del viejo Greyjaw", "Página de libro mayor ajada", "Grimorio de Morthen", "Colmillo de lobo quebrado", "Pañuelo rojo", "Cecina dura", "Escama viscosa de múrloc", "Vela de sebo",
+        "Pata de araña crispada", "Fragmentos de hueso", "Retal de lino", "Orden de alistamiento de Fenbridge", "Piel de merodeador del pantano", "Bienes de la caravana perdida", "Ídolo empapado", "Saco de veneno de viuda",
+        "Incensario oxidado", "Fetiche trol de Mirefen", "Colmillo de Grubjaw", "Cifra de Gravecaller", "Piedra de guarda del Bastión", "Cuchilla del diácono", "Bastón de plegarias ahogadas",
+        "Cris atanieblas", "Coraza de Guardia Ahogada", "Toga de niebla del pantano", "Túnica de piel de anguila", "Leotardos de piel de trol", "Botas Zancapantanos", "Filo de Mistcaller", "Bastón de niebla de Vael",
+        "Puñal de marejada", "Grebas del caballero comandante", "Chaleco de escama de marea", "Hogaza de centeno de Fenbridge", "Té de menta del pantano", "Anguila ahumada de Mirefen", "Cordial de Niebla Plateada", "Maza de hierro de ciénaga",
+        "Bastón de caña del pantano", "Desollador de Mirefen", "Loriga de hierro de ciénaga", "Toga de paño de marisma", "Jubón tejido de juncos", "Botas Caminapantanos", "Pantalones tejidos de juncos", "Pepita de hierro de ciénaga",
+        "Mocasín empapado", "Fetiche agrietado", "Colmillo astillado", "Perla de Deepfen", "Citación de Highwatch", "Piel de acechador de la cresta", "Cera resplandeciente", "Tótem de guerra ogro", "Núcleo de tormenta",
+        "Fragmento del corazón de Kazzix", "Órdenes del Culto del Wyrm", "Filacteria ritual", "Sigilo del Gravewyrm", "Brasas benditas", "Fragmento de llave del santuario", "Botines Acechacrestas", "Chaleco de placas óseas",
+        "Toga de seda de aparecido", "Jubón Caminanoche", "Hoja Azote de Fanáticos", "Bastón de madera de ascuas", "Desollador de cultista", "Partecráneos de Drogmar", "Bastón de amuleto óseo ogro",
+        "Navaja Desgarratripas", "Leotardos de fragmento de tormenta", "Envolturas de malla de Korgath", "Coraza Guardahuesos", "Bastón de Velkhar", "Túnica Fundesombra", "Loriga de escamas de Gravewyrm",
+        "Gran toga del Culto del Wyrm", "Jubón de escamas de wyrm", "Gran hoja Colmillo de Wyrm", "Bastón del Gravewyrm", "Colmillo de Korzul", "Galleta de viaje de Highwatch", "Frasco de agua de deshielo",
+        "Cabra montesa asada", "Agua de glaciar", "Hoja de guerra de Highwatch", "Bastón de Cuernorroca", "Puñal Vena de Hielo", "Coraza de Highwatch", "Toga de lana de cumbre", "Jubón de piel de acechador",
+        "Botas Caminarrocas", "Leotardos Guardavientos", "Anillo de dedo de ogro", "Fragmento de tormenta inerte", "Cuentas de oración deshilachadas", "Escama de wyrm agrietada",
+      ]),
+    },
+  },
+  es_ES: {} as typeof phase8En,
+  fr_FR: {
+    itemUi: {
+      ...phase5.fr_FR.itemUi,
+      loot: { takeAll: "Tout prendre" },
+    },
+    entities: {
+      ...phase7.fr_FR.entities,
+      items: itemTranslations([
+        "Épée courte usée", "Bâton noueux", "Dague rouillée", "Masse d'entraînement", "Hachette rouillée", "Tunique de recrue", "Robe d'apprenti", "Pourpoint de coupe-jarret",
+        "Lame de milice de Redbrook", "Bâton d'apprenti du Val", "Dague acérée", "Cotte de mailles de milice", "Robe tissée du Val", "Pourpoint cousu d'ombre", "Bottes en cuir huilé", "Pantalon matelassé",
+        "Jambières de la peau de Greyjaw", "Pain fraîchement cuit", "Eau de source rafraîchissante", "Viande de sanglier rôtie", "Eau de source invoquée", "Eau minérale invoquée", "Eau pétillante invoquée",
+        "Épée d'armes d'Eastbrook", "Masse ouvragée en bronze", "Couteau à découper du Val", "Bâton court en hickory", "Gilet de mailles d'Eastbrook", "Robe filée du Val", "Pourpoint en cuir tanné",
+        "Bottes cloutées", "Pantalon de laine d'Eastbrook", "Grande lame de Gravecaller", "Dague Croc-de-veuve", "Bâton du Creux", "Bottes Fouletombe", "Mules du sacristain",
+        "Bottes souples Marchetombe", "Peau hérissée de sanglier", "Sceau de Gravecaller", "Suif béni", "Essence spectrale", "Glande de soie de Webwood", "Caisse de fournitures volée",
+        "Croc du vieux Greyjaw", "Page de registre usée", "Grimoire de Morthen", "Croc de loup fendu", "Bandana rouge", "Viande séchée coriace", "Écaille de murloc visqueuse", "Chandelle de suif",
+        "Patte d'araignée frémissante", "Fragments d'os", "Chute de lin", "Ordre de rassemblement de Fenbridge", "Peau de rôdeur du bourbier", "Marchandises de la caravane perdue", "Idole détrempée", "Sac à venin de veuve",
+        "Encensoir rouillé", "Fétiche troll de Mirefen", "Défense de Grubjaw", "Chiffre de Gravecaller", "Pierre de garde du Bastion", "Fendoir du diacre", "Bâton des prières noyées",
+        "Kris Lie-brume", "Cuirasse Garde-noyé", "Robe de brume des marais", "Tunique en peau d'anguille", "Jambières en peau de troll", "Bottes Marchemarais", "Tranchant de Mistcaller", "Bâton de brume de Vael",
+        "Dague de contre-courant", "Grèves du chevalier-commandant", "Gilet en écailles de marée", "Pain de seigle de Fenbridge", "Thé à la menthe des marais", "Anguille fumée de Mirefen", "Cordial Brume-d'argent", "Masse en fer des tourbières",
+        "Bâton de roseau du marais", "Écorcheur de Mirefen", "Haubert en fer des tourbières", "Robe de toile des marais", "Pourpoint tissé de roseaux", "Bottes Marchefen", "Pantalon tissé de roseaux", "Pépite de fer des tourbières",
+        "Mocassin détrempé", "Fétiche fissuré", "Défense ébréchée", "Perle de Deepfen", "Convocation de Highwatch", "Peau de rôdeur de la crête", "Cire luisante", "Totem de guerre ogre", "Noyau de tempête",
+        "Éclat de coeur de Kazzix", "Ordres du Culte du Wyrm", "Phylactère rituel", "Sceau du Gravewyrm", "Braises bénies", "Éclat de clé du sanctuaire", "Bottines Traquecrête", "Gilet de plaques d'os",
+        "Robe de soie revenante", "Pourpoint Marche-nuit", "Lame Fléau-des-zélotes", "Bâton de bois de braise", "Écorcheur de cultiste", "Fend-crâne de Drogmar", "Bâton charme-d'os ogre",
+        "Surin Éventreur", "Jambières d'éclat de tempête", "Enveloppes de mailles de Korgath", "Cuirasse Garde-os", "Bâton de Velkhar", "Tunique Fondombre", "Haubert d'écailles de Gravewyrm",
+        "Grande robe du Culte du Wyrm", "Pourpoint en écailles de wyrm", "Grande lame Croc-de-wyrm", "Bâton du Gravewyrm", "Croc de Korzul", "Biscuit de route de Highwatch", "Flasque d'eau de fonte",
+        "Chèvre de montagne rôtie", "Fonte de glacier", "Lame de guerre de Highwatch", "Bâton de corne-roche", "Dague Veine-de-glace", "Cuirasse de Highwatch", "Robe en laine des cimes", "Pourpoint en peau de rôdeur",
+        "Bottes Marchecrag", "Jambières Gardevent", "Anneau d'orteil ogre", "Éclat de tempête inerte", "Perles de prière effilochées", "Écaille de wyrm fendue",
+      ]),
+    },
+  },
+  fr_CA: {} as typeof phase8En,
+  en_CA: phase8En,
+  it_IT: {
+    itemUi: {
+      ...phase5.it_IT.itemUi,
+      loot: { takeAll: "Prendi tutto" },
+    },
+    entities: {
+      ...phase7.it_IT.entities,
+      items: itemTranslations([
+        "Spada corta logora", "Bastone nodoso", "Pugnale arrugginito", "Mazza da addestramento", "Accetta arrugginita", "Tunica da recluta", "Veste dell'apprendista", "Giaco del tagliaborse",
+        "Lama della milizia di Redbrook", "Bastone dell'apprendista della Valle", "Pugnale affilato", "Corpetto di maglia della milizia", "Veste Tessivalle", "Giaco Cucitura d'Ombra", "Stivali di cuoio oliato", "Pantaloni imbottiti",
+        "Gambiere di pelliccia di Greyjaw", "Pane appena sfornato", "Acqua di sorgente rinfrescante", "Carne di cinghiale arrosto", "Acqua di sorgente evocata", "Acqua minerale evocata", "Acqua frizzante evocata",
+        "Spada d'arme di Eastbrook", "Mazza bronzata", "Coltello da intaglio della Valle", "Bastone corto di noce americano", "Gilet di maglia di Eastbrook", "Veste Filovalle", "Giaco di cuoio conciato",
+        "Stivali chiodati", "Pantaloni di lana di Eastbrook", "Lama larga di Gravecaller", "Pugnale Zanna di Vedova", "Bastone del Vuoto", "Stivali Passomidollo", "Pantofole del sagrestano",
+        "Stivaletti morbidi del Camminatombe", "Pelle ispida di cinghiale", "Sigillo di Gravecaller", "Sego benedetto", "Essenza spettrale", "Ghiandola di seta di Webwood", "Cassa di rifornimenti rubata",
+        "Zanna del vecchio Greyjaw", "Pagina di registro logora", "Grimorio di Morthen", "Zanna di lupo incrinata", "Bandana rossa", "Carne secca dura", "Scaglia viscida di murloc", "Candela di sego",
+        "Zampa di ragno fremente", "Frammenti d'osso", "Ritaglio di lino", "Ordine di raduno di Fenbridge", "Pelliccia di predatore del pantano", "Merci della carovana perduta", "Idolo zuppo", "Sacca di veleno di vedova",
+        "Turibolo arrugginito", "Feticcio troll di Mirefen", "Zanna di Grubjaw", "Cifrario di Gravecaller", "Pietra di guardia del Bastione", "Mannaia del diacono", "Bastone delle preghiere annegate",
+        "Kris Leganebbia", "Corazza Guardia Annegata", "Veste di nebbia palustre", "Tunica di pelle d'anguilla", "Gambiere di pelle di troll", "Stivali Passapaludi", "Filo di Mistcaller", "Bastone di nebbia di Vael",
+        "Pugnale Marea", "Schinieri del comandante cavaliere", "Gilet Scagliamarea", "Pagnotta di segale di Fenbridge", "Tè alla menta di palude", "Anguilla affumicata di Mirefen", "Cordiale Nebbia d'Argento", "Mazza di ferro di palude",
+        "Bastone di canna palustre", "Scuoiatore di Mirefen", "Usbergo di ferro di palude", "Veste di stoffa palustre", "Giaco intrecciato di canne", "Stivali Camminapaludi", "Pantaloni intrecciati di canne", "Pepita di ferro di palude",
+        "Mocassino fradicio", "Feticcio incrinato", "Zanna scheggiata", "Perla di Deepfen", "Convocazione di Highwatch", "Pelliccia di predatore del crinale", "Cera luminosa", "Totem da guerra ogre", "Nucleo di tempesta",
+        "Scheggia del cuore di Kazzix", "Ordini del Culto del Wyrm", "Filatterio rituale", "Sigillo del Gravewyrm", "Braci benedette", "Scheggia di chiave del santuario", "Calzari Inseguicrinale", "Gilet di piastre ossee",
+        "Veste di seta revenant", "Giaco Camminanotte", "Lama Flagello degli Zeloti", "Bastone di legno ardente", "Scuoiatore cultista", "Spaccateschi di Drogmar", "Bastone amuleto d'osso ogre",
+        "Stiletto Sventraviscere", "Gambiere Scheggiatempesta", "Fasce di maglia di Korgath", "Corazza GuardiadiOssa", "Bastone di Velkhar", "Tunica Fondombra", "Usbergo di scaglie di Gravewyrm",
+        "Grande veste del Culto del Wyrm", "Giaco di scaglie di wyrm", "Spadone Zanna di Wyrm", "Bastone del Gravewyrm", "Zanna di Korzul", "Galletta da sentiero di Highwatch", "Fiasca di acqua di disgelo",
+        "Capra di montagna arrosto", "Fusione glaciale", "Lama da guerra di Highwatch", "Bastone di Corno Roccioso", "Pugnale Venaghiaccio", "Corazza di Highwatch", "Veste di lana delle vette", "Giaco di pelle di predatore",
+        "Stivali Camminarocce", "Gambiere Guardavento", "Anello da dito d'ogre", "Scheggia di tempesta inerte", "Grani di preghiera sfilacciati", "Scaglia di wyrm incrinata",
+      ]),
+    },
+  },
+  de_DE: {
+    itemUi: {
+      ...phase5.de_DE.itemUi,
+      loot: { takeAll: "Alles nehmen" },
+    },
+    entities: {
+      ...phase7.de_DE.entities,
+      items: itemTranslations([
+        "Abgenutztes Kurzschwert", "Knorriger Stab", "Rostiger Dolch", "Übungsstreitkolben", "Rostiges Beil", "Rekrutentunika", "Lehrlingsrobe", "Wams des Wegelagerers",
+        "Milizklinge von Redbrook", "Lehrlingsstab des Tals", "Scharfer Dolch", "Kettenweste der Miliz", "Talgewebte Robe", "Schattenstichwams", "Geölte Lederstiefel", "Gesteppte Hose",
+        "Gamaschen aus Greyjaws Pelz", "Frisch gebackenes Brot", "Erfrischendes Quellwasser", "Gebratenes Eberfleisch", "Herbeigezaubertes Quellwasser", "Herbeigezaubertes Mineralwasser", "Herbeigezaubertes Sprudelwasser",
+        "Eastbrook-Wehrschwert", "Bronzewerkstreitkolben", "Talschnitzmesser", "Hickory-Kurzstab", "Eastbrook-Kettenweste", "Talgesponnene Robe", "Gegerbtes Lederwams",
+        "Nagelstiefel", "Eastbrook-Wollhose", "Gravecallers Breitschwert", "Witwenzahn-Dolch", "Stab der Höhlung", "Markschrittstiefel", "Pantoffeln des Küsters",
+        "Weiche Grabwandlerstiefel", "Borstige Eberhaut", "Gravecallers Siegel", "Gesegneter Talg", "Geisterhafte Essenz", "Seidendrüse von Webwood", "Gestohlene Vorratskiste",
+        "Zahn des alten Greyjaw", "Verwitterte Buchseite", "Morthens Grimoire", "Gesprungener Wolfszahn", "Rotes Halstuch", "Zähes Dörrfleisch", "Schleimige Murlocschuppe", "Talgkerze",
+        "Zuckendes Spinnenbein", "Knochenfragmente", "Leinenfetzen", "Musterungsbefehl von Fenbridge", "Balg eines Moorpirschers", "Waren der verlorenen Karawane", "Durchnässtes Götzenbild", "Witwengiftsack",
+        "Rostiges Räuchergefäß", "Mirefen-Trollfetisch", "Grubjaws Hauer", "Gravecaller-Chiffre", "Bastion-Wachstein", "Beil des Diakons", "Stab ertrunkener Gebete",
+        "Nebelbinder-Kris", "Brustplatte der Ertrunkenenwache", "Fenmist-Robe", "Aalhaut-Tunika", "Trollhautgamaschen", "Marschschreiterstiefel", "Mistcallers Schneide", "Vaels Nebelstab",
+        "Springflutdolch", "Schienen des Ritterkommandanten", "Gezeitenpanzerweste", "Fenbridge-Roggenlaib", "Sumpfminztee", "Geräucherter Mirefen-Aal", "Silbernebel-Kordial", "Moor Eisenstreitkolben",
+        "Fenreed-Stab", "Mirefen-Häuter", "Moor Eisenhalsberge", "Sumpftuchrobe", "Schilfgewobenes Wams", "Fenwandererstiefel", "Schilfgewobene Hose", "Moor Eisennugget",
+        "Durchnässter Mokassin", "Rissiger Fetisch", "Angeschlagener Hauer", "Deepfen-Perle", "Einberufung von Highwatch", "Balg eines Gratpirschers", "Glühendes Wachs", "Ogerkriegstotem", "Sturmkern",
+        "Kazzix' Herzsplitter", "Befehle des Wyrmkults", "Rituelles Seelengefäß", "Gravewyrm-Siegel", "Gesegnete Glut", "Heiligtums-Schlüsselsplitter", "Gratpirschertreter", "Knochenplattenweste",
+        "Wiedergängerseidenrobe", "Nachtwanderwams", "Zelotenbannklinge", "Glutholzstab", "Kultistenhäuter", "Drogmars Schädelspalter", "Ogerknochenzauberstab",
+        "Bauchreißer-Shiv", "Sturmsplittergamaschen", "Korgaths Kettenwickel", "Knochenwachtbrustplatte", "Stab von Velkhar", "Schattenverschmelzungstunika", "Gravewyrm-Schuppenhalsberge",
+        "Große Robe des Wyrmkults", "Wyrmschuppenwams", "Wyrmzahn-Großklinge", "Stab des Gravewyrm", "Korzuls Fangzahn", "Highwatch-Reisezwieback", "Schmelzwasserflasche",
+        "Gebratene Bergziege", "Gletscherschmelze", "Highwatch-Kriegsklinge", "Felshornstab", "Eisaderdolch", "Highwatch-Brustplatte", "Gipfelwollrobe", "Pirschhauttunika",
+        "Felswandererstiefel", "Windwachtgamaschen", "Ogerzehenring", "Träger Sturmsplitter", "Ausgefranste Gebetsperlen", "Gesprungene Wyrmschuppe",
+      ]),
+    },
+  },
+  zh_CN: {
+    itemUi: {
+      ...phase5.zh_CN.itemUi,
+      loot: { takeAll: "全部拾取" },
+    },
+    entities: {
+      ...phase7.zh_CN.entities,
+      items: itemTranslations([
+        "破旧短剑", "多节法杖", "生锈匕首", "训练钉锤", "生锈手斧", "新兵外套", "学徒长袍", "窃贼皮甲",
+        "赤溪民兵之刃", "溪谷学徒法杖", "锋利短匕", "民兵链甲背心", "谷织长袍", "影缝皮甲", "浸油皮靴", "绗缝长裤",
+        "灰颚毛皮护腿", "新烤面包", "清爽泉水", "烤野猪肉", "魔法泉水", "魔法矿泉水", "魔法气泡水",
+        "东溪武装剑", "青铜工艺钉锤", "溪谷雕肉刀", "山胡桃短杖", "东溪链甲背心", "谷纺长袍", "鞣制皮甲",
+        "钉底靴", "东溪羊毛长裤", "唤墓者宽刃剑", "寡妇牙短匕", "空洞法杖", "踏髓长靴", "司事便鞋",
+        "墓行者软靴", "硬鬃野猪皮", "唤墓者徽记", "祝福油脂", "幽魂精华", "网木丝腺", "被盗补给箱",
+        "老灰颚的尖牙", "风化账页", "莫森的魔典", "裂开的狼牙", "红色面巾", "硬肉干", "黏滑鱼人鳞片", "油脂蜡烛",
+        "抽搐的蜘蛛腿", "骨头碎片", "亚麻碎布", "芬桥集结令", "泥沼潜伏者毛皮", "遗失商队货物", "浸水神像", "寡妇毒囊",
+        "生锈香炉", "泥沼巨魔护符", "格鲁布颚的獠牙", "唤墓者密文", "堡垒护符石", "执事劈刀", "溺亡祈祷法杖",
+        "缚雾短剑", "溺卫胸甲", "沼雾长袍", "鳗皮外套", "巨魔皮护腿", "沼行者长靴", "唤雾者之锋", "维尔的雾杖",
+        "激流短匕", "骑士指挥官胫甲", "潮鳞外衣", "芬桥黑麦面包", "沼泽薄荷茶", "烟熏泥沼鳗", "银雾甜酒", "沼铁钉锤",
+        "沼芦法杖", "泥沼剥皮刀", "沼铁锁甲", "沼布长袍", "芦织皮甲", "沼行靴", "芦织长裤", "沼铁矿块",
+        "湿透的软鞋", "裂纹护符", "缺口獠牙", "深沼珍珠", "高望召令", "山脊潜伏者毛皮", "发光蜡块", "食人魔战争图腾", "风暴核心",
+        "卡兹克斯的心裂片", "龙教命令", "仪式护命匣", "墓龙徽记", "祝福余烬", "圣所钥匙碎片", "山脊追猎者便鞋", "骨板外衣",
+        "亡魂丝袍", "夜行皮甲", "狂信者克星之刃", "烬木法杖", "邪教剥皮刀", "德罗格玛的碎颅斧", "食人魔骨符法杖",
+        "开膛短刀", "风暴碎片护腿", "科加斯链甲裹腿", "骨卫胸甲", "维尔卡法杖", "融影外套", "墓龙鳞锁甲",
+        "龙教大长袍", "龙鳞皮甲", "龙牙巨刃", "墓龙法杖", "科祖尔之牙", "高望行军硬饼", "融雪水瓶",
+        "烤山羊", "冰川融水", "高望战刃", "岩角法杖", "冰脉短匕", "高望胸甲", "峰羊毛长袍", "潜猎者皮甲",
+        "岩行者长靴", "风卫护腿", "食人魔趾环", "惰性风暴碎片", "磨损的祈祷珠", "裂开的龙鳞",
+      ]),
+    },
+  },
+  zh_TW: {
+    itemUi: {
+      ...phase5.zh_TW.itemUi,
+      loot: { takeAll: "全部拾取" },
+    },
+    entities: {
+      ...phase7.zh_TW.entities,
+      items: itemTranslations([
+        "破舊短劍", "多節法杖", "生鏽匕首", "訓練釘錘", "生鏽手斧", "新兵外套", "學徒長袍", "竊賊皮甲",
+        "赤溪民兵之刃", "溪谷學徒法杖", "鋒利短匕", "民兵鎖甲背心", "谷織長袍", "影縫皮甲", "浸油皮靴", "絎縫長褲",
+        "灰顎毛皮護腿", "新烤麵包", "清爽泉水", "烤野豬肉", "魔法泉水", "魔法礦泉水", "魔法氣泡水",
+        "東溪武裝劍", "青銅工藝釘錘", "溪谷雕肉刀", "山胡桃短杖", "東溪鎖甲背心", "谷紡長袍", "鞣製皮甲",
+        "釘底靴", "東溪羊毛長褲", "喚墓者寬刃劍", "寡婦牙短匕", "空洞法杖", "踏髓長靴", "司事便鞋",
+        "墓行者軟靴", "硬鬃野豬皮", "喚墓者徽記", "祝福油脂", "幽魂精華", "網木絲腺", "被盜補給箱",
+        "老灰顎的尖牙", "風化帳頁", "莫森的魔典", "裂開的狼牙", "紅色面巾", "硬肉乾", "黏滑魚人鱗片", "油脂蠟燭",
+        "抽搐的蜘蛛腿", "骨頭碎片", "亞麻碎布", "芬橋集結令", "泥沼潛伏者毛皮", "遺失商隊貨物", "浸水神像", "寡婦毒囊",
+        "生鏽香爐", "泥沼巨魔護符", "格魯布顎的獠牙", "喚墓者密文", "堡壘護符石", "執事劈刀", "溺亡祈禱法杖",
+        "縛霧短劍", "溺衛胸甲", "沼霧長袍", "鰻皮外套", "巨魔皮護腿", "沼行者長靴", "喚霧者之鋒", "維爾的霧杖",
+        "激流短匕", "騎士指揮官脛甲", "潮鱗外衣", "芬橋黑麥麵包", "沼澤薄荷茶", "煙燻泥沼鰻", "銀霧甜酒", "沼鐵釘錘",
+        "沼蘆法杖", "泥沼剝皮刀", "沼鐵鎖甲", "沼布長袍", "蘆織皮甲", "沼行靴", "蘆織長褲", "沼鐵礦塊",
+        "濕透的軟鞋", "裂紋護符", "缺口獠牙", "深沼珍珠", "高望召令", "山脊潛伏者毛皮", "發光蠟塊", "巨魔戰爭圖騰", "風暴核心",
+        "卡茲克斯的心裂片", "龍教命令", "儀式護命匣", "墓龍徽記", "祝福餘燼", "聖所鑰匙碎片", "山脊追獵者便鞋", "骨板外衣",
+        "亡魂絲袍", "夜行皮甲", "狂信者剋星之刃", "燼木法杖", "邪教剝皮刀", "德羅格瑪的碎顱斧", "巨魔骨符法杖",
+        "開膛短刀", "風暴碎片護腿", "科加斯鎖甲裹腿", "骨衛胸甲", "維爾卡法杖", "融影外套", "墓龍鱗鎖甲",
+        "龍教大長袍", "龍鱗皮甲", "龍牙巨刃", "墓龍法杖", "科祖爾之牙", "高望行軍硬餅", "融雪水瓶",
+        "烤山羊", "冰川融水", "高望戰刃", "岩角法杖", "冰脈短匕", "高望胸甲", "峰羊毛長袍", "潛獵者皮甲",
+        "岩行者長靴", "風衛護腿", "巨魔趾環", "惰性風暴碎片", "磨損的祈禱珠", "裂開的龍鱗",
+      ]),
+    },
+  },
+  ko_KR: {
+    itemUi: {
+      ...phase5.ko_KR.itemUi,
+      loot: { takeAll: "모두 가져가기" },
+    },
+    entities: {
+      ...phase7.ko_KR.entities,
+      items: itemTranslations([
+        "낡은 쇼트소드", "옹이진 지팡이", "녹슨 단검", "훈련용 철퇴", "녹슨 손도끼", "신병 튜닉", "견습생 로브", "노상강도의 웃옷",
+        "레드브룩 민병대 검", "계곡 견습생 지팡이", "날카로운 더크", "민병대 사슬조끼", "계곡직조 로브", "그림자바느질 웃옷", "기름먹인 가죽 장화", "누빈 바지",
+        "그레이죠의 털가죽 다리보호구", "갓 구운 빵", "상쾌한 샘물", "구운 멧돼지 고기", "창조된 샘물", "창조된 광천수", "창조된 탄산수",
+        "이스트브룩 무장검", "청동세공 철퇴", "계곡 조각칼", "히코리 짧은지팡이", "이스트브룩 사슬조끼", "계곡방적 로브", "무두질한 가죽 웃옷",
+        "징박은 장화", "이스트브룩 양모 바지", "무덤부름 넓은날검", "과부송곳니 더크", "공허의 지팡이", "골수밟이 장화", "성구지기의 슬리퍼",
+        "무덤걸음 부드러운장화", "억센 멧돼지 가죽", "무덤부름 인장", "축복받은 수지", "유령 정수", "그물나무 비단샘", "도난당한 보급 상자",
+        "늙은 그레이죠의 송곳니", "풍화된 장부 페이지", "모르덴의 마법서", "갈라진 늑대 송곳니", "붉은 두건", "질긴 육포", "끈적한 멀록 비늘", "수지 양초",
+        "꿈틀대는 거미 다리", "뼈 조각", "아마포 조각", "펜브리지 소집 명령서", "수렁 배회자 가죽", "잃어버린 대상단 물품", "물먹은 우상", "과부 독주머니",
+        "녹슨 향로", "마이어펜 트롤 부적", "그럽죠의 엄니", "무덤부름 암호문", "요새 수호석", "부제의 도끼", "익사한 기도의 지팡이",
+        "안개결속 크리스", "익사수호자 흉갑", "수렁안개 로브", "뱀장어가죽 튜닉", "트롤가죽 다리보호구", "늪지걸음 장화", "안개부름 칼날", "바엘의 안개지팡이",
+        "역조 더크", "기사대장 경갑", "조수비늘 조끼", "펜브리지 호밀빵", "늪박하 차", "훈제 마이어펜 장어", "은안개 코디얼", "늪철 철퇴",
+        "펜갈대 지팡이", "마이어펜 무두칼", "늪철 갑옷", "늪천 로브", "갈대직조 웃옷", "펜걸음 장화", "갈대직조 바지", "늪철 덩이",
+        "젖은 모카신", "금 간 부적", "이 빠진 엄니", "딥펜 진주", "하이워치 소환장", "산등성이 추적자 가죽", "빛나는 밀랍", "오우거 전쟁 토템", "폭풍 핵",
+        "카직스의 심장파편", "고룡교단 명령서", "의식 성물함", "무덤고룡 인장", "축복받은 불씨", "성소 열쇠 조각", "산등성이추적자 발보호구", "뼈판 조끼",
+        "망령 비단 로브", "밤걸음 웃옷", "광신자파멸 검", "잿불나무 지팡이", "교단 무두칼", "드로그마르의 해골가르개", "오우거 뼈부적 지팡이",
+        "내장가름 칼", "폭풍파편 다리보호구", "코르가스의 사슬싸개", "뼈수호 흉갑", "벨카르의 지팡이", "그림자녹임 튜닉", "무덤고룡 비늘갑옷",
+        "고룡교단 대로브", "고룡비늘 웃옷", "고룡송곳니 대검", "무덤고룡의 지팡이", "코르줄의 송곳니", "하이워치 여정 건빵", "눈녹은 물 플라스크",
+        "구운 산양", "빙하 녹은물", "하이워치 전투검", "바위뿔 지팡이", "얼음맥 더크", "하이워치 흉갑", "봉우리양모 로브", "추적자가죽 웃옷",
+        "바위걸음 장화", "바람수호 다리보호구", "오우거 발가락 반지", "비활성 폭풍 파편", "해진 기도 구슬", "갈라진 고룡 비늘",
+      ]),
+    },
+  },
+  ja_JP: {
+    itemUi: {
+      ...phase5.ja_JP.itemUi,
+      loot: { takeAll: "すべて取る" },
+    },
+    entities: {
+      ...phase7.ja_JP.entities,
+      items: itemTranslations([
+        "擦り切れたショートソード", "節くれだった杖", "錆びたダガー", "訓練用メイス", "錆びた手斧", "新兵のチュニック", "見習いのローブ", "追いはぎのジャーキン",
+        "レッドブルック民兵の刃", "谷の見習い杖", "鋭いダーク", "民兵の鎖帷子ベスト", "谷織りのローブ", "影縫いのジャーキン", "油を塗った革のブーツ", "キルトのズボン",
+        "グレイジョーの毛皮レギンス", "焼きたてのパン", "爽やかな泉の水", "焼いた猪肉", "召喚された泉の水", "召喚された鉱水", "召喚された発泡水",
+        "イーストブルックの武装剣", "青銅細工のメイス", "谷の彫りナイフ", "ヒッコリーの短杖", "イーストブルックの鎖帷子ベスト", "谷紡ぎのローブ", "なめし革のジャーキン",
+        "鋲打ちブーツ", "イーストブルックの羊毛ズボン", "グレイブコーラーの大刃", "ウィドウファングのダーク", "虚ろの杖", "髄踏みのブーツ", "墓守のスリッパ",
+        "墓歩きの柔らかいブーツ", "剛毛猪の皮", "グレイブコーラーの印章", "祝福された獣脂", "幽霊のエッセンス", "ウェブウッドの絹腺", "盗まれた補給箱",
+        "老グレイジョーの牙", "風化した帳簿のページ", "モーセンの魔導書", "割れた狼の牙", "赤いバンダナ", "硬い干し肉", "ぬめるマーロックの鱗", "獣脂のろうそく",
+        "ぴくつく蜘蛛の脚", "骨の破片", "リネンの切れ端", "フェンブリッジ召集令", "沼の徘徊者の毛皮", "失われた隊商の物資", "水浸しの偶像", "寡婦蜘蛛の毒嚢",
+        "錆びた香炉", "マイアフェン・トロルの護符", "グラブジョーの牙", "グレイブコーラーの暗号", "砦の護り石", "助祭の肉切り", "溺れた祈りの杖",
+        "霧縛りのクリス", "溺れ衛兵の胸当て", "沼霧のローブ", "ウナギ皮のチュニック", "トロル革のレギンス", "沼渡りのブーツ", "ミストコーラーの刃", "ヴァエルの霧杖",
+        "激流のダーク", "騎士司令官のグリーヴ", "潮鱗のベスト", "フェンブリッジのライ麦パン", "沼ミント茶", "燻製マイアフェンうなぎ", "銀霧のコーディアル", "沼鉄のメイス",
+        "フェンリードの杖", "マイアフェンの皮剥ぎ刀", "沼鉄のホーバーク", "沼布のローブ", "葦織りのジャーキン", "フェンウォーカーのブーツ", "葦織りのズボン", "沼鉄の塊",
+        "水浸しのモカシン", "ひび割れた護符", "欠けた牙", "ディープフェンの真珠", "ハイウォッチ召喚状", "尾根の追跡者の毛皮", "光る蝋", "オーガ戦のトーテム", "嵐の核",
+        "カジックスの心臓片", "ワーム教団の命令書", "儀式の経箱", "墓ワームの印章", "祝福された残り火", "聖所の鍵片", "尾根追跡者の靴", "骨板のベスト",
+        "亡霊絹のローブ", "夜歩きのジャーキン", "狂信者討ちの刃", "熾き木の杖", "教団員の皮剥ぎ刀", "ドログマーの頭蓋割り", "オーガ骨護符の杖",
+        "腹裂きのシヴ", "嵐片のレギンス", "コルガスの鎖巻き", "骨守りの胸当て", "ヴェルカーの杖", "影溶けのチュニック", "墓ワーム鱗のホーバーク",
+        "ワーム教団の大ローブ", "ワーム鱗のジャーキン", "ワーム牙の大剣", "墓ワームの杖", "コルズルの牙", "ハイウォッチの旅堅パン", "雪解け水のフラスコ",
+        "焼き山羊肉", "氷河の融け水", "ハイウォッチの戦刃", "岩角の杖", "氷脈のダーク", "ハイウォッチの胸当て", "峰羊毛のローブ", "追跡者革のジャーキン",
+        "岩歩きのブーツ", "風守りのレギンス", "オーガの足指輪", "不活性の嵐片", "ほつれた祈りの数珠", "割れたワームの鱗",
+      ]),
+    },
+  },
+  pt_BR: {
+    itemUi: {
+      ...phase5.pt_BR.itemUi,
+      loot: { takeAll: "Pegar tudo" },
+    },
+    entities: {
+      ...phase7.pt_BR.entities,
+      items: itemTranslations([
+        "Espada curta gasta", "Cajado nodoso", "Adaga enferrujada", "Maça de treino", "Machadinha enferrujada", "Túnica de recruta", "Veste de aprendiz", "Gibão de salteador",
+        "Lâmina da milícia de Redbrook", "Cajado de aprendiz do Vale", "Punhal afiado", "Colete de malha da milícia", "Veste Tecivale", "Gibão Costurasombra", "Botas de couro oleado", "Calças acolchoadas",
+        "Perneiras de pele de Greyjaw", "Pão recém-assado", "Água de nascente refrescante", "Carne de javali assada", "Água de nascente conjurada", "Água mineral conjurada", "Água com gás conjurada",
+        "Espada de armas de Eastbrook", "Maça de bronzeiro", "Faca de entalhe do Vale", "Cajado curto de nogueira", "Colete de cota de Eastbrook", "Veste Fiavale", "Gibão de couro curtido",
+        "Botas cravejadas", "Calças de lã de Eastbrook", "Lâmina larga de Gravecaller", "Punhal Presa-de-viúva", "Cajado do Vazio", "Botas Pisamedula", "Pantufas do sacristão",
+        "Botas macias do Andatumbas", "Pele eriçada de javali", "Sigilo de Gravecaller", "Sebo abençoado", "Essência espectral", "Glândula de seda de Webwood", "Caixote de suprimentos roubado",
+        "Presa do velho Greyjaw", "Página de livro-caixa gasta", "Grimório de Morthen", "Presa de lobo rachada", "Bandana vermelha", "Charque duro", "Escama viscosa de murloc", "Vela de sebo",
+        "Perna de aranha trêmula", "Fragmentos de osso", "Retalho de linho", "Ordem de convocação de Fenbridge", "Pele de espreitador do brejo", "Mercadorias da caravana perdida", "Ídolo encharcado", "Bolsa de veneno de viúva",
+        "Incensário enferrujado", "Fetiche troll de Mirefen", "Presa de Grubjaw", "Cifra de Gravecaller", "Pedra de guarda do Bastião", "Cutelo do diácono", "Cajado das preces afogadas",
+        "Kris Prendenévoa", "Peitoral da Guarda Afogada", "Veste de névoa do brejo", "Túnica de pele de enguia", "Perneiras de pele de troll", "Botas Passabrejo", "Gume de Mistcaller", "Cajado de névoa de Vael",
+        "Punhal da ressaca", "Grevas do cavaleiro-comandante", "Colete de escama de maré", "Pão de centeio de Fenbridge", "Chá de hortelã do brejo", "Enguia defumada de Mirefen", "Cordial Névoa Prateada", "Maça de ferro do brejo",
+        "Cajado de junco do brejo", "Esfolador de Mirefen", "Cota de ferro do brejo", "Veste de pano do brejo", "Gibão tecido de junco", "Botas Caminhabrejo", "Calças tecidas de junco", "Pepita de ferro do brejo",
+        "Mocassim encharcado", "Fetiche rachado", "Presa lascada", "Pérola de Deepfen", "Convocação de Highwatch", "Pele de espreitador da crista", "Cera brilhante", "Totem de guerra ogro", "Núcleo da tempestade",
+        "Estilhaço do coração de Kazzix", "Ordens do Culto do Wyrm", "Filactério ritual", "Sigilo do Gravewyrm", "Brasas abençoadas", "Estilhaço da chave do santuário", "Sapatilhas Espreita-crista", "Colete de placas ósseas",
+        "Veste de seda revenante", "Gibão Caminhanoite", "Lâmina Ruína dos Zelotes", "Cajado de madeira de brasa", "Esfolador cultista", "Rachacrânios de Drogmar", "Cajado amuleto de osso ogro",
+        "Faca Rasga-entranhas", "Perneiras de estilhaço de tempestade", "Envoltórios de malha de Korgath", "Peitoral Guardião dos Ossos", "Cajado de Velkhar", "Túnica Fundesombra", "Cota de escamas do Gravewyrm",
+        "Grande veste do Culto do Wyrm", "Gibão de escamas de wyrm", "Grande lâmina Presa de Wyrm", "Cajado do Gravewyrm", "Presa de Korzul", "Biscoito de trilha de Highwatch", "Frasco de água de degelo",
+        "Cabra montesa assada", "Derretimento glacial", "Lâmina de guerra de Highwatch", "Cajado Chifre de Rocha", "Punhal Veiogelo", "Peitoral de Highwatch", "Veste de lã das alturas", "Gibão de pele de espreitador",
+        "Botas Caminhapedra", "Perneiras Guardavento", "Anel de dedo de ogro", "Estilhaço de tempestade inerte", "Contas de oração desfiadas", "Escama de wyrm rachada",
+      ]),
+    },
+  },
+  ru_RU: {
+    itemUi: {
+      ...phase5.ru_RU.itemUi,
+      loot: { takeAll: "Взять все" },
+    },
+    entities: {
+      ...phase7.ru_RU.entities,
+      items: itemTranslations([
+        "Изношенный короткий меч", "Сучковатый посох", "Ржавый кинжал", "Учебная булава", "Ржавый топорик", "Китель рекрута", "Роба ученика", "Куртка налетчика",
+        "Клинок ополчения Редбрука", "Посох ученика долины", "Острый кортик", "Кольчужный жилет ополчения", "Долиннотканая роба", "Куртка Теневого шва", "Промасленные кожаные сапоги", "Стеганые штаны",
+        "Поножи из шкуры Серой Челюсти", "Свежевыпеченный хлеб", "Освежающая родниковая вода", "Жареное мясо кабана", "Сотворенная родниковая вода", "Сотворенная минеральная вода", "Сотворенная газированная вода",
+        "Истврукский строевой меч", "Бронзовая булава", "Долинный разделочный нож", "Короткий посох из гикори", "Истврукский кольчужный жилет", "Долиннопрядная роба", "Куртка из дубленой кожи",
+        "Подбитые гвоздями сапоги", "Истврукские шерстяные штаны", "Широкий клинок Могильного Зова", "Кортик Вдовьего Клыка", "Посох Пустоты", "Сапоги Костоступа", "Туфли пономаря",
+        "Мягкие сапоги Могильного Скитальца", "Щетинистая кабанья шкура", "Сигил Могильного Зова", "Благословенное сало", "Призрачная эссенция", "Шелковая железа Вебвуда", "Украденный ящик припасов",
+        "Клык старого Серочелюста", "Выветренная страница книги учета", "Гримуар Мортена", "Треснувший волчий клык", "Красная бандана", "Жесткое вяленое мясо", "Слизистая чешуя мурлока", "Сальная свеча",
+        "Дергающаяся нога паука", "Фрагменты костей", "Лоскут льна", "Приказ о сборе в Фенбридже", "Шкура болотного хищника", "Товары пропавшего каравана", "Размокший идол", "Ядовитый мешочек вдовы",
+        "Ржавое кадило", "Фетиш тролля Мирефена", "Клык Грубджо", "Шифр Могильного Зова", "Обереговый камень бастиона", "Тесак дьякона", "Посох утонувших молитв",
+        "Крис Туманной Связи", "Кираса Утонувшей стражи", "Болотная туманная роба", "Туника из кожи угря", "Поножи из кожи тролля", "Сапоги Болотного Странника", "Лезвие Зовущего Туман", "Туманный посох Ваэля",
+        "Кортик обратной волны", "Наголенники рыцаря-командора", "Жилет из приливной чешуи", "Ржаной каравай Фенбриджа", "Болотный мятный чай", "Копченый мирефенский угорь", "Серебристо-туманный кордиал", "Болотножелезная булава",
+        "Посох из болотного тростника", "Мирефенский шкуродер", "Болотножелезный хауберк", "Роба из болотной ткани", "Тростниковый плетеный жакет", "Сапоги Болотоступа", "Тростниковые плетеные штаны", "Кусок болотного железа",
+        "Промокший мокасин", "Треснувший фетиш", "Щербатый клык", "Жемчужина Глубокой Топи", "Призыв Хайвотча", "Шкура хребтового охотника", "Светящийся воск", "Боевой тотем огра", "Ядро бури",
+        "Осколок сердца Каззикса", "Приказы Культа Вирма", "Ритуальная филактерия", "Сигил Могильного Вирма", "Благословенные угли", "Осколок ключа святилища", "Поступь Хребтового Охотника", "Костепластинчатый жилет",
+        "Шелковая роба ревенанта", "Куртка Ночного Хода", "Клинок Гибель Фанатиков", "Посох из угольного дерева", "Шкуродер культиста", "Черепокол Дрогмара", "Посох огрского костяного оберега",
+        "Шив Живодера", "Поножи бурелома", "Кольчужные обмотки Коргата", "Кираса Костяной стражи", "Посох Велхара", "Туника Слияния с Тенью", "Хауберк из чешуи Могильного Вирма",
+        "Великая роба Культа Вирма", "Куртка из вирмовой чешуи", "Великий клинок Клык Вирма", "Посох Могильного Вирма", "Клык Корзула", "Походный сухарь Хайвотча", "Фляга талой воды",
+        "Жареный горный козел", "Ледниковая талая вода", "Боевой клинок Хайвотча", "Посох Камнерога", "Кортик Ледяной Жилы", "Кираса Хайвотча", "Роба из горной шерсти", "Куртка из шкуры охотника",
+        "Сапоги Камнехода", "Поножи Ветростража", "Кольцо на палец огра", "Инертный осколок бури", "Истрепанные молитвенные четки", "Треснувшая чешуя вирма",
+      ]),
+    },
+  },
+};
+
+phase8.es_ES = phase8.es;
+phase8.fr_CA = phase8.fr_FR;
+
 export const en = {
   nav: {
     home: "Home",
@@ -6666,6 +7049,7 @@ export const en = {
   ...phase4.en,
   ...phase5.en,
   ...phase7.en,
+  ...phase8.en,
 };
 
 export const es: typeof en = {
@@ -6802,6 +7186,7 @@ export const es: typeof en = {
   ...phase4.es,
   ...phase5.es,
   ...phase7.es,
+  ...phase8.es,
 };
 
 export const es_ES: typeof en = {
@@ -6938,6 +7323,7 @@ export const es_ES: typeof en = {
   ...phase4.es_ES,
   ...phase5.es_ES,
   ...phase7.es_ES,
+  ...phase8.es_ES,
 };
 
 export const fr_FR: typeof en = {
@@ -7074,6 +7460,7 @@ export const fr_FR: typeof en = {
   ...phase4.fr_FR,
   ...phase5.fr_FR,
   ...phase7.fr_FR,
+  ...phase8.fr_FR,
 };
 
 export const fr_CA: typeof en = {
@@ -7210,6 +7597,7 @@ export const fr_CA: typeof en = {
   ...phase4.fr_CA,
   ...phase5.fr_CA,
   ...phase7.fr_CA,
+  ...phase8.fr_CA,
 };
 
 export const en_CA: typeof en = {
@@ -7346,6 +7734,7 @@ export const en_CA: typeof en = {
   ...phase4.en_CA,
   ...phase5.en_CA,
   ...phase7.en_CA,
+  ...phase8.en_CA,
 };
 
 export const it_IT: typeof en = {
@@ -7482,6 +7871,7 @@ export const it_IT: typeof en = {
   ...phase4.it_IT,
   ...phase5.it_IT,
   ...phase7.it_IT,
+  ...phase8.it_IT,
 };
 
 export const de_DE: typeof en = {
@@ -7618,6 +8008,7 @@ export const de_DE: typeof en = {
   ...phase4.de_DE,
   ...phase5.de_DE,
   ...phase7.de_DE,
+  ...phase8.de_DE,
 };
 
 export const zh_CN: typeof en = {
@@ -7754,6 +8145,7 @@ export const zh_CN: typeof en = {
   ...phase4.zh_CN,
   ...phase5.zh_CN,
   ...phase7.zh_CN,
+  ...phase8.zh_CN,
 };
 
 export const zh_TW: typeof en = {
@@ -7890,6 +8282,7 @@ export const zh_TW: typeof en = {
   ...phase4.zh_TW,
   ...phase5.zh_TW,
   ...phase7.zh_TW,
+  ...phase8.zh_TW,
 };
 
 export const ko_KR: typeof en = {
@@ -8026,6 +8419,7 @@ export const ko_KR: typeof en = {
   ...phase4.ko_KR,
   ...phase5.ko_KR,
   ...phase7.ko_KR,
+  ...phase8.ko_KR,
 };
 
 export const ja_JP: typeof en = {
@@ -8162,6 +8556,7 @@ export const ja_JP: typeof en = {
   ...phase4.ja_JP,
   ...phase5.ja_JP,
   ...phase7.ja_JP,
+  ...phase8.ja_JP,
 };
 
 export const pt_BR: typeof en = {
@@ -8298,6 +8693,7 @@ export const pt_BR: typeof en = {
   ...phase4.pt_BR,
   ...phase5.pt_BR,
   ...phase7.pt_BR,
+  ...phase8.pt_BR,
 };
 
 export const ru_RU: typeof en = {
@@ -8434,6 +8830,7 @@ export const ru_RU: typeof en = {
   ...phase4.ru_RU,
   ...phase5.ru_RU,
   ...phase7.ru_RU,
+  ...phase8.ru_RU,
 };
 
 const translations = {

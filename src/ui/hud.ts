@@ -1937,7 +1937,7 @@ export class Hud {
     });
     const btn = document.createElement('button');
     btn.className = 'btn';
-    btn.textContent = 'Take All';
+    btn.textContent = t('itemUi.loot.takeAll');
     btn.addEventListener('click', () => { this.sim.lootCorpse(mobId); this.closeLoot(); });
     el.appendChild(btn);
     el.querySelector('[data-close]')?.addEventListener('click', () => this.closeLoot());
