@@ -239,6 +239,9 @@ export interface PlayerMeta {
   // Transient presence status. Set by /afk and /dnd, cleared when the player
   // chats again. Session-only — never persisted, so it resets on login.
   away: AwayStatus | null;
+  // Session-only: name of the last player who whispered us, for "/r" replies.
+  // Never persisted — a fresh login starts with no reply target.
+  lastWhisperFrom?: string;
 }
 
 // Away-from-keyboard / do-not-disturb presence. `afk` still delivers whispers
@@ -3800,8 +3803,19 @@ export class Sim {
       return null;
     }
 
+    // "/r message" — reply to the last player who whispered us. Rewrite it to
+    // the "/w <name> message" form so delivery, the echo, and case-matching
+    // all stay in the single whisper handler below.
+    const rm = /^\/r(?:eply)?\s+([\s\S]+)$/i.exec(raw);
+    let line = raw;
+    if (rm) {
+      const replyTo = r.meta.lastWhisperFrom;
+      if (!replyTo) { this.error(r.meta.entityId, 'You have no one to reply to.'); return null; }
+      line = `/w ${replyTo} ${rm[1]}`;
+    }
+
     // "/w name message" — private whisper to an online player
-    const wm = /^\/(?:w|whisper|t|tell)\s+(\S+)\s+([\s\S]+)$/i.exec(raw);
+    const wm = /^\/(?:w|whisper|t|tell)\s+(\S+)\s+([\s\S]+)$/i.exec(line);
     if (wm) {
       const targetName = wm[1];
       const msg = wm[2].trim();
@@ -3832,10 +3846,14 @@ export class Sim {
           return { channel: 'whisper', message: msg };
         }
       }
+      // classic-WoW "/r": the recipient's reply target is whoever last
+      // whispered them, so record it on the target (not the sender).
+      target.lastWhisperFrom = r.meta.name;
       this.emit({ type: 'chat', fromPid: r.meta.entityId, from: r.meta.name, text: msg, channel: 'whisper', pid: target.entityId });
       this.emit({ type: 'chat', fromPid: r.meta.entityId, from: r.meta.name, to: target.name, text: msg, channel: 'whisper', pid: r.meta.entityId });
       return { channel: 'whisper', message: msg };
     }
+
 
     // "/p message" goes to the party channel
     if (/^\/p(arty)?\s/i.test(raw)) {
