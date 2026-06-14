@@ -1,4 +1,12 @@
 import { beforeEach, describe, expect, it, vi, afterEach } from "vitest";
+
+// db.ts requires DATABASE_URL at import time (it throws otherwise). The db
+// helper tests below spy on the real `pool.query`, so we only need a dummy
+// connection string present before the module loads — set it in a hoisted
+// block so it runs ahead of the hoisted import graph.
+vi.hoisted(() => {
+  process.env.DATABASE_URL ??= "postgres://test/test";
+});
 import { pool, getAccountsCount } from "../server/db";
 import { t, setLanguage, getLanguage } from "../src/ui/i18n";
 import { Api } from "../src/net/online";
