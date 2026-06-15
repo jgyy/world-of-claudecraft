@@ -426,6 +426,8 @@ async function startGame(world: IWorld, offlineSim: Sim | null, online: ClientWo
     onMenu: () => {
       if (!hud.closeAll()) hud.toggleOptionsMenu();
     },
+    onCharacter: () => hud.toggleChar(),
+    onBags: () => hud.toggleBags(),
     onSocial: () => hud.toggleSocial(),
     onArena: () => hud.toggleArena(),
     onQuestLog: () => hud.toggleQuestLog(),
