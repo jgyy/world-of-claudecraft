@@ -22,6 +22,16 @@ describe('Settings', () => {
     expect(s.get('renderScale')).toBe(1);
     expect(s.get('fullscreen')).toBe(1);
     expect(s.get('mouseCamera')).toBe(false);
+    expect(s.get('mobileLeftHanded')).toBe(false);
+  });
+
+  it('persists the left-handed touch layout toggle', () => {
+    const a = new Settings();
+    expect(a.set('mobileLeftHanded', true)).toBe(true);
+    const b = new Settings();
+    expect(b.get('mobileLeftHanded')).toBe(true);
+    b.reset();
+    expect(b.get('mobileLeftHanded')).toBe(false);
   });
 
   it('clamps out-of-range values to the slider bounds', () => {

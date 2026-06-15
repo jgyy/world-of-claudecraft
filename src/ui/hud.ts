@@ -4144,6 +4144,7 @@ export class Hud {
     el.innerHTML = `<div class="panel-title"><span>Key Bindings</span><span class="x-btn" data-close>${svgIcon('close')}</span></div>`;
     this.settingToggleKeybind(el, 'Mouse Camera', 'mouseCamera');
     this.settingToggleKeybind(el, 'Click to Move', 'clickToMove');
+    this.settingToggleKeybind(el, 'Left-Handed Touch Layout', 'mobileLeftHanded');
     const note = document.createElement('div');
     note.className = 'kb-note';
     note.textContent = this.keybindNote

@@ -22,6 +22,10 @@ export const SETTING_RANGES = {
 
 export const BOOL_SETTINGS = {
   mouseCamera: { def: false },
+  // off by default: mirrors the on-screen touch controls (move joystick to the
+  // right, camera to the left, action buttons flipped) for left-handed players.
+  // No effect on desktop — only the touch overlay reads it.
+  mobileLeftHanded: { def: false },
 } as const;
 
 export type NumericSettingKey = keyof typeof SETTING_RANGES;

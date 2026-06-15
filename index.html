@@ -2795,6 +2795,22 @@
   body.mobile-touch #mobile-camera-joystick {
     left: auto; right: max(18px, env(safe-area-inset-right));
   }
+  /* Left-handed layout: mirror the touch overlay — move joystick to the right,
+     camera to the left, and flow the combat row right-to-left so the wide
+     Attack button sits on the camera (now left) side. Toggled in Key Bindings. */
+  body.mobile-touch.mobile-left-handed #mobile-move-joystick {
+    left: auto; right: max(18px, env(safe-area-inset-right));
+  }
+  body.mobile-touch.mobile-left-handed #mobile-camera-joystick {
+    right: auto; left: max(18px, env(safe-area-inset-left));
+  }
+  body.mobile-touch.mobile-left-handed #mobile-combat-controls { direction: rtl; }
+  body.mobile-touch.mobile-left-handed #mobile-more {
+    left: auto; right: calc(50% + 190px);
+  }
+  body.mobile-touch.mobile-left-handed #mobile-extra-controls {
+    left: auto; right: calc(50% + 190px);
+  }
   body.mobile-touch .mobile-stick {
     position: absolute; left: 50%; top: 50%; width: 54px; height: 54px; margin: -27px 0 0 -27px; border-radius: 50%;
     border: 2px solid #e3d475b8; background: radial-gradient(circle at 35% 30%, #867ab6aa, #1d1d2b9a 70%);
