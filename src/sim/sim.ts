@@ -4236,6 +4236,8 @@ export class Sim {
     // "/gear" (aliases /equip, /equipment) — self-only readout of equipped items
     if (/^\/(?:gear|equip|equipment)(?:\s|$)/i.test(raw)) {
       this.error(r.meta.entityId, this.gearReadout(r.meta));
+    if (/^\/(?:abilities|spells|spellbook)(?:\s|$)/i.test(raw)) {
+      this.error(r.meta.entityId, this.abilitiesReadout(r.meta, r.e));
       return null;
     }
 
@@ -5821,6 +5823,11 @@ export class Sim {
     });
     if (worn === 0) return 'You have nothing equipped.';
     return `Equipped (${worn}/${slots.length}): ${parts.join(', ')}.`;
+  private abilitiesReadout(meta: PlayerMeta, e: Entity): string {
+    const known = abilitiesKnownAt(meta.cls, e.level);
+    if (known.length === 0) return 'You have not learned any abilities yet.';
+    const list = known.map((k) => `${k.def.name} (Rank ${k.rank})`).join(', ');
+    return `Spellbook (${known.length}): ${list}.`;
   }
 }
 
