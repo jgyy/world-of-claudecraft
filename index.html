@@ -2825,7 +2825,10 @@
   body.mobile-touch .mobile-btn .mobile-label { display: block; margin-top: 1px; font-size: 8px; font-family: var(--ui-font); color: #bfb28a; }
   body.mobile-touch #mobile-extra-controls {
     position: fixed;
-    left: calc(50% + 190px);
+    /* Keep the More-aligned position on wide screens, but clamp the left edge so
+       the fixed-width 2-column grid (~214px) can't slide its rightmost button
+       column off short/narrow landscape phones (e.g. 667px wide). */
+    left: min(calc(50% + 190px), calc(100vw - 214px - max(12px, env(safe-area-inset-right, 0px))));
     bottom: calc(66px + env(safe-area-inset-bottom));
     display: none;
     grid-template-columns: repeat(2, 112px);
@@ -3114,7 +3117,9 @@
       bottom: calc(2px + env(safe-area-inset-bottom));
     }
     body.mobile-touch #mobile-extra-controls {
-      left: calc(50% + 176px);
+      /* Clamp the left edge so the 2-column grid (~214px) can't slide its rightmost
+         button column off short/narrow landscape phones (e.g. 667px wide). */
+      left: min(calc(50% + 176px), calc(100vw - 214px - max(12px, env(safe-area-inset-right, 0px))));
       bottom: calc(58px + env(safe-area-inset-bottom));
       grid-template-columns: repeat(2, 104px);
       grid-auto-rows: 38px;
@@ -4088,17 +4093,20 @@
       <button class="mobile-btn" id="mobile-target" title="Target nearest enemy" aria-label="Target nearest enemy" data-icon="target"><span class="mobile-label">Target</span></button>
       <button class="mobile-btn" id="mobile-chat" title="Chat" aria-label="Open chat" data-icon="chat"><span class="mobile-label">Chat</span></button>
       <button class="mobile-btn" id="mobile-more" title="More menus" aria-label="Show more menus" data-icon="more"><span class="mobile-label">More</span></button>
-      <div id="mobile-extra-controls">
-        <button class="mobile-btn" id="mobile-social" title="Social" aria-label="Social" data-icon="social"><span class="mobile-label">Social</span></button>
-        <button class="mobile-btn" id="mobile-arena" title="Arena" aria-label="Arena" data-icon="arena"><span class="mobile-label">Arena</span></button>
-        <button class="mobile-btn" id="mobile-menu" title="Game menu" aria-label="Game menu" data-icon="menu"><span class="mobile-label">Menu</span></button>
-        <button class="mobile-btn" id="mobile-interact" title="Interact or loot" aria-label="Interact or loot" data-icon="interact"><span class="mobile-label">Use</span></button>
-        <button class="mobile-btn" id="mobile-quest" title="Quest Log" aria-label="Quest Log" data-icon="questlog"><span class="mobile-label">Quests</span></button>
-        <button class="mobile-btn" id="mobile-spellbook" title="Spellbook" aria-label="Spellbook" data-icon="spellbook"><span class="mobile-label">Spellbook</span></button>
-        <button class="mobile-btn" id="mobile-talents" title="Talents" aria-label="Talents" data-icon="talents"><span class="mobile-label">Talents</span></button>
-        <button class="mobile-btn" id="mobile-meters" title="Meters" aria-label="Meters" data-icon="meters"><span class="mobile-label">Meters</span></button>
-        <button class="mobile-btn" id="mobile-map" title="Map" aria-label="Map" data-icon="map"><span class="mobile-label">Map</span></button>
-      </div>
+    </div>
+    <!-- The More tray lives outside #mobile-combat-controls: that row has a centering
+         transform, which would otherwise become this fixed element's containing block
+         and make its viewport-relative clamp (left: min(...)) resolve incorrectly. -->
+    <div id="mobile-extra-controls">
+      <button class="mobile-btn" id="mobile-social" title="Social" aria-label="Social" data-icon="social"><span class="mobile-label">Social</span></button>
+      <button class="mobile-btn" id="mobile-arena" title="Arena" aria-label="Arena" data-icon="arena"><span class="mobile-label">Arena</span></button>
+      <button class="mobile-btn" id="mobile-menu" title="Game menu" aria-label="Game menu" data-icon="menu"><span class="mobile-label">Menu</span></button>
+      <button class="mobile-btn" id="mobile-interact" title="Interact or loot" aria-label="Interact or loot" data-icon="interact"><span class="mobile-label">Use</span></button>
+      <button class="mobile-btn" id="mobile-quest" title="Quest Log" aria-label="Quest Log" data-icon="questlog"><span class="mobile-label">Quests</span></button>
+      <button class="mobile-btn" id="mobile-spellbook" title="Spellbook" aria-label="Spellbook" data-icon="spellbook"><span class="mobile-label">Spellbook</span></button>
+      <button class="mobile-btn" id="mobile-talents" title="Talents" aria-label="Talents" data-icon="talents"><span class="mobile-label">Talents</span></button>
+      <button class="mobile-btn" id="mobile-meters" title="Meters" aria-label="Meters" data-icon="meters"><span class="mobile-label">Meters</span></button>
+      <button class="mobile-btn" id="mobile-map" title="Map" aria-label="Map" data-icon="map"><span class="mobile-label">Map</span></button>
     </div>
   </div>
   <div id="mobile-preflight" role="dialog" aria-modal="true" aria-labelledby="mobile-preflight-title">
