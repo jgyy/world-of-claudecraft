@@ -18,6 +18,9 @@ export const SETTING_RANGES = {
   // off by default: always-on click-to-move would disrupt the precise melee
   // positioning the team wanted to preserve, so it's opt-in (#95)
   clickToMove: { min: 0, max: 1, def: 0 },
+  // 1.0 (fully opaque) by default; touch-only. Lets phone players dim the
+  // on-screen joysticks + buttons so they obscure less of the world.
+  touchOpacity: { min: 0.3, max: 1, def: 1 },
 } as const;
 
 export const BOOL_SETTINGS = {

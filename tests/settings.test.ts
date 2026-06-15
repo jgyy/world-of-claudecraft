@@ -32,6 +32,14 @@ describe('Settings', () => {
     expect(s.set('fullscreen', -1)).toBe(0);
   });
 
+  it('clamps touch opacity to its 0.3–1.0 bounds and defaults to fully opaque', () => {
+    const s = new Settings();
+    expect(s.get('touchOpacity')).toBe(SETTING_RANGES.touchOpacity.def);
+    expect(s.set('touchOpacity', 5)).toBe(SETTING_RANGES.touchOpacity.max);
+    expect(s.set('touchOpacity', 0)).toBe(SETTING_RANGES.touchOpacity.min);
+    expect(s.set('touchOpacity', 0.6)).toBe(0.6);
+  });
+
   it('ignores non-finite input, keeping a valid value', () => {
     const s = new Settings();
     s.set('brightness', NaN);

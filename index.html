@@ -2782,7 +2782,7 @@
   #rotate-device { display: none; }
   body.mobile-touch #game-canvas { touch-action: none; }
   body.mobile-touch #ui { touch-action: none; }
-  body.mobile-touch #mobile-controls { position: absolute; inset: 0; display: block; pointer-events: none; z-index: 60; }
+  body.mobile-touch #mobile-controls { position: absolute; inset: 0; display: block; pointer-events: none; z-index: 60; opacity: var(--touch-opacity, 1); }
   body.mobile-touch .mobile-joystick {
     position: absolute; left: max(18px, env(safe-area-inset-left)); bottom: calc(26px + env(safe-area-inset-bottom));
     width: 122px; height: 122px; border-radius: 50%; pointer-events: auto; touch-action: none;
