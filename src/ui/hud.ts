@@ -14,6 +14,7 @@ import {
 } from '../sim/types';
 import type { LeaderboardEntry } from '../world_api';
 import { xpBarView, formatXp } from './xp_bar';
+import { compassView } from './compass';
 import { t } from './i18n';
 import { terrainHeight, WATER_LEVEL, roadDistance, generateDecorations } from '../sim/world';
 import type { Decoration } from '../sim/world';
@@ -119,6 +120,10 @@ export class Hud {
   private bannerTimer: number | undefined;
   private minimapCtx: CanvasRenderingContext2D;
   private minimapBg: HTMLCanvasElement;
+  // heading compass: a pool of rose-label spans built once, repositioned per frame
+  private compassMarks = new Map<string, HTMLElement>();
+  private compassHeadingEl: HTMLElement | null = null;
+  private lastCompassHeading = '';
   private mapBg: HTMLCanvasElement | null = null;
   private openLootMobId: number | null = null;
   private openVendorNpcId: number | null = null;
@@ -183,6 +188,7 @@ export class Hud {
     mm.style.cursor = 'pointer';
     mm.title = 'Open world map';
     mm.addEventListener('click', () => this.toggleMap());
+    this.initCompass();
     $('#release-btn').addEventListener('click', () => { this.sim.releaseSpirit(); });
     // classic WoW: the player interaction menu opens from the target portrait
     $('#target-frame').addEventListener('contextmenu', (ev) => {
@@ -879,6 +885,7 @@ export class Hud {
     }
     this.arenaMatchSeen = inArenaMatch;
     this.updateMinimap();
+    this.updateCompass();
     if ($('#map-window').style.display === 'block') this.updateMapWindow();
     if ($('#social-window').classList.contains('open')) {
       const struct = this.socialStructSig();
@@ -994,6 +1001,43 @@ export class Hud {
     }
     ctx.putImageData(img, 0, 0);
     return c;
+  }
+
+  // Build the compass rose-label pool once. Each of the 8 points gets a span
+  // that we later slide horizontally; positioning happens in updateCompass().
+  private initCompass(): void {
+    const track = $('#compass-track');
+    if (!track) return;
+    for (const label of ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']) {
+      const el = document.createElement('span');
+      el.className = 'compass-mark' + (label.length === 1 ? ' major' : '');
+      el.textContent = label;
+      track.appendChild(el);
+      this.compassMarks.set(label, el);
+    }
+    this.compassHeadingEl = $('#compass-heading');
+  }
+
+  private updateCompass(): void {
+    if (this.compassMarks.size === 0) return;
+    const view = compassView(this.sim.player.facing);
+    const visible = new Set<string>();
+    for (const m of view.marks) {
+      const el = this.compassMarks.get(m.label);
+      if (!el) continue;
+      visible.add(m.label);
+      // offsetFrac -1..1 → 0..100% across the strip; fade marks near the edges
+      el.style.left = `${(m.offsetFrac * 0.5 + 0.5) * 100}%`;
+      el.style.opacity = `${Math.max(0.2, 1 - Math.abs(m.offsetFrac) * 0.85)}`;
+      el.style.display = 'block';
+    }
+    for (const [label, el] of this.compassMarks) {
+      if (!visible.has(label)) el.style.display = 'none';
+    }
+    if (this.compassHeadingEl && view.heading !== this.lastCompassHeading) {
+      this.lastCompassHeading = view.heading;
+      this.compassHeadingEl.textContent = view.heading;
+    }
   }
 
   private updateMinimap(): void {
