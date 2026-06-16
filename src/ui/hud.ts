@@ -125,6 +125,7 @@ export class Hud {
   private openGossipNpcId: number | null = null;
   private selectedQuestLogId: string | null = null;
   private lastPortraitTarget = -999;
+  private lastTotPortrait = -999;
   // trading: locally staged offer, pushed to the server on change
   private stagedTrade: { items: InvSlot[]; copper: number } = { items: [], copper: 0 };
   private tradeWasOpen = false;
@@ -196,6 +197,18 @@ export class Hud {
         // Mirror Sim.setMarker's markable criteria (live wild hostile mob) so the
         // menu never appears for a pet/non-hostile mob where it would be a no-op.
         this.openMarkerMenu(t.id, t.name, (ev as MouseEvent).clientX, (ev as MouseEvent).clientY);
+      }
+    });
+
+    // classic WoW: clicking the target-of-target frame switches to that unit
+    $('#target-of-target-frame').addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      const tid = this.sim.player.targetId;
+      const t = tid !== null ? this.sim.entities.get(tid) : null;
+      const totId = t ? t.targetId : null;
+      const tot = totId !== null ? this.sim.entities.get(totId) : null;
+      if (tot && tot.kind !== 'object' && !tot.dead && tot.id !== this.sim.playerId) {
+        this.sim.targetEntity(tot.id);
       }
     });
     $('#mm-char').addEventListener('click', () => this.toggleChar());
@@ -285,6 +298,29 @@ export class Hud {
     const s = canvas.width;
     ctx.clearRect(0, 0, s, s);
     ctx.drawImage(iconCanvas('crest', crestId, s), 0, 0, s, s);
+  }
+
+  // Classic target-of-target: a compact frame showing whom the current target
+  // is about to hit. Derived purely from the target's own `targetId` (already on
+  // every entity / snapshot), so it needs no new sim state. The "you" highlight
+  // is the key tank/PvP readability win — it shows aggro at a glance.
+  private updateTargetOfTarget(target: Entity): void {
+    const totFrame = $('#target-of-target-frame');
+    const view = targetOfTargetView(target, this.sim.entities, this.sim.playerId);
+    if (!view) {
+      totFrame.style.display = 'none';
+      this.lastTotPortrait = -999;
+      return;
+    }
+    totFrame.style.display = 'flex';
+    const nameEl = $('#tot-name') as HTMLElement;
+    nameEl.textContent = view.name;
+    nameEl.style.color = view.hostile ? 'var(--color-hostile)' : 'var(--color-friendly)';
+    ($('#tot-hp') as HTMLElement).style.transform = `scaleX(${view.hpFrac})`;
+    if (this.lastTotPortrait !== view.id) {
+      this.lastTotPortrait = view.id;
+      this.drawPortrait($('#tot-portrait') as unknown as HTMLCanvasElement, view.crestId);
+    }
   }
 
   private itemIcon(item: ItemDef): string {
@@ -707,6 +743,8 @@ export class Hud {
         this.drawPortrait($('#tf-portrait') as unknown as HTMLCanvasElement, crestId);
       }
       this.renderAuras($('#tf-debuffs'), target, 'debuffs');
+      // target-of-target: who/what the current target is about to hit
+      this.updateTargetOfTarget(target);
       // combo points
       const comboRow = $('#combo-row');
       if (p.resourceType === 'energy') {
@@ -727,6 +765,8 @@ export class Hud {
     } else {
       tf.style.display = 'none';
       this.lastPortraitTarget = -999;
+      $('#target-of-target-frame').style.display = 'none';
+      this.lastTotPortrait = -999;
     }
 
     // cast bar
@@ -4274,6 +4314,39 @@ export class Hud {
     }
     return closed;
   }
+}
+
+export interface TargetOfTargetView {
+  id: number;
+  name: string;
+  hpFrac: number;
+  hostile: boolean;
+  isSelf: boolean;
+  crestId: string;
+}
+
+// Pure resolution of the classic target-of-target frame: given the current
+// target, return a render-ready view of whom that target is hitting, or null
+// when nothing should show (no target's-target, an object, a corpse, or the
+// target pointing at itself). The viewer is shown as "You" and always flagged
+// hostile (something is attacking you) — the key tank/PvP readability cue.
+export function targetOfTargetView(
+  target: Pick<Entity, 'targetId' | 'id'>,
+  entities: Map<number, Entity>,
+  playerId: number,
+): TargetOfTargetView | null {
+  const totId = target.targetId;
+  const tot = totId !== null ? entities.get(totId) : null;
+  if (!tot || tot.kind === 'object' || tot.dead || tot.id === target.id) return null;
+  const isSelf = tot.id === playerId;
+  return {
+    id: tot.id,
+    name: isSelf ? 'You' : tot.name,
+    hpFrac: tot.hp / Math.max(1, tot.maxHp),
+    hostile: isSelf || tot.hostile,
+    isSelf,
+    crestId: tot.kind === 'npc' ? 'status_npc' : `family_${MOBS[tot.templateId]?.family ?? 'humanoid'}`,
+  };
 }
 
 function describeCost(known: ResolvedAbility, sim: IWorld): string {

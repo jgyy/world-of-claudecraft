@@ -316,6 +316,30 @@
   #target-frame .portrait-wrap { order: 2; }
   #target-frame .uf-bars { order: 1; margin-left: 0; margin-right: -8px; border-radius: 6px 0 0 6px; padding: 5px 14px 5px 8px; }
   #target-frame .level-chip { left: auto; right: -3px; }
+  /* Target-of-target: compact frame anchored to the lower-right of the target frame */
+  #target-of-target-frame {
+    position: absolute; right: -4px; bottom: -32px; z-index: 5;
+    display: none; align-items: center; gap: 5px;
+    padding: 3px 9px 3px 3px;
+    background: var(--panel-bg); border: 2px solid var(--border); outline: 1px solid #000;
+    border-radius: 18px; box-shadow: 0 2px 8px #000a; cursor: pointer;
+  }
+  #target-of-target-frame .tot-portrait {
+    width: 30px; height: 30px; border-radius: 50%; flex: 0 0 auto; overflow: hidden;
+    border: 2px solid var(--border); background: radial-gradient(circle at 35% 30%, #3a3a4e, #14141c);
+  }
+  #target-of-target-frame .tot-portrait canvas { border-radius: 50%; }
+  #target-of-target-frame .tot-info { display: flex; flex-direction: column; min-width: 0; }
+  #target-of-target-frame .tot-name {
+    font-size: 11px; font-weight: bold; font-family: var(--title-font); color: var(--gold);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 104px;
+    text-shadow: 1px 1px 1px #000;
+  }
+  #target-of-target-frame .tot-bar {
+    height: 6px; width: 104px; margin-top: 2px; overflow: hidden;
+    background: #1a1a1a; border: 1px solid #000; border-radius: 2px;
+  }
+  #target-of-target-frame .tot-hp { height: 100%; transform-origin: left; background-color: var(--color-hp); }
   .uf-name { font-size: 13px; font-weight: bold; font-family: var(--title-font); color: var(--gold);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 1px 1px 2px #000; }
   .bar { position: relative; height: 15px; background: #1a1a1a; border: 1px solid #000; margin-top: 3px; border-radius: 2px; overflow: hidden; }
@@ -3553,6 +3577,13 @@
         <div class="bar hp"><div class="bar-fill" id="tf-hp"></div><div class="bar-text" id="tf-hp-text"></div></div>
         <div class="combo-row" id="combo-row"></div>
         <div class="uf-buffs" id="tf-debuffs"></div>
+      </div>
+      <div id="target-of-target-frame" title="Target of target">
+        <div class="tot-portrait"><canvas id="tot-portrait" width="30" height="30"></canvas></div>
+        <div class="tot-info">
+          <div class="tot-name" id="tot-name"></div>
+          <div class="tot-bar"><div class="tot-hp" id="tot-hp"></div></div>
+        </div>
       </div>
     </div>
 
