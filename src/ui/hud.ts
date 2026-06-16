@@ -868,6 +868,9 @@ export class Hud {
       : Math.hypot(p.pos.x - hub.x, p.pos.z - hub.z) < hub.radius + 10 ? 'town' : currentZone.biome;
     music.update(zone, inCombat);
 
+    // classic combat indicator: crossed swords + red ring on the player portrait
+    $('#player-frame').classList.toggle('combat', inCombat);
+
     this.updateQuestTracker();
     this.updatePartyFrames();
     this.updateTradeWindow();
