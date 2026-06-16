@@ -5,7 +5,7 @@ The single source of truth a fresh session reads before doing anything. Record d
 ---
 
 ## Current status
-- **Active phase:** Phase 1 DONE (commits `573bd5a`, `20e8cca`, `d918244`); next up Phase 1 QA, then Phase 2
+- **Active phase:** Phase 2 DONE (commits `3f1ed8d`, `a92ff37`, `ffb40e5`); next up Phase 2 QA, then Phase 3. Phase 1 DONE + QA PASS.
 - **Branch:** `refactor/i18n-phase-naming` (Phase 0 - the `phaseN`->content-name rename - is DONE and lives here). Later phases may branch `feature/i18n-<slug>` off this; confirm with the user before branching (shared worktree).
 - **RFC:** `docs/design/i18n-translation-scaling.md` - the authoritative design. This packet implements it with the four decisions below applied.
 
@@ -86,7 +86,7 @@ Every behavior-preserving phase is gated by **byte-equivalence of the resolved 1
 | Phase | New files | New scripts | New tests | Notes |
 |---|---|---|---|---|
 | 1 | `src/ui/i18n.en.ts`; `src/ui/i18n.locales/{es,es_ES,fr_FR,fr_CA,en_CA,it_IT,de_DE,zh_CN,zh_TW,ko_KR,ja_JP,pt_BR,ru_RU}.ts`; `src/ui/i18n.resolved.sha256` | `scripts/i18n_resolved_hash.mjs` (`i18n:hash`) | `tests/i18n_resolved_equivalence.test.ts` | Monolith split into en base + 13 nested `: typeof en` locale files + thin runtime; all public exports preserved; resolved table byte-identical. Locale files are created NESTED here (Phase 3 flattens them). `en`/locales are assembled by spreading shared content layers (`shellStrings`..`mergeExtra`, now exported from `i18n.en`) + `worldNames` (from `world_entity_i18n`) + a `gameStrings` variant + inline literals; the data is NOT one literal per locale. |
-| 2 | - | - | - | (pending) |
+| 2 | `src/ui/i18n.resolved.generated.ts` (generated dense 14-locale table, committed + reproducibility-checked) | `scripts/i18n_build.mjs` (`i18n:build`; wired into `npm run build` before vite + `pretest`) | reproducibility check folded into `tests/i18n_resolved_equivalence.test.ts` (tracked-file + `git diff --exit-code` after regen) | Generated nested table, each locale `: EnTranslations` (= `typeof en`), do-not-edit banner; overlays each locale onto a deep copy of `en` and fills missing leaves from English. Runtime `translations` + the four read-paths (`t`/`translationValue`/`hasTranslation`/`tOptional`) repointed at it - the direct-read gotcha below is now CLOSED. `EnTranslations` added to `i18n.en`. Byte-identical to Phase 1 (SHA `d9db528..`). Generator imports the Phase 1 SOURCE modules (`i18n.en` + `i18n.locales/*`), never `i18n.ts` or the generated file, so no circular import. |
 | 3 | - | - | - | (pending) |
 | 4 | - | - | - | (pending) |
 | 5 | - | - | - | (pending) |
@@ -99,7 +99,8 @@ Every behavior-preserving phase is gated by **byte-equivalence of the resolved 1
 Project name "World of ClaudeCraft"; the 9 class names; ability names; zone/dungeon proper nouns. The release fill ships this glossary with every batch so per-locale terminology does not drift. (Authored in Phase 7.)
 
 ## Known gotchas / OPEN items
-- `tOptional`, `hasTranslation`, and internal `translationValue` read the table directly - under sparse overlays a key can be genuinely absent at runtime. They MUST be pointed at the dense resolved artifact, not the raw overlays, or their semantics change (Phase 2 correctness item).
+- CLOSED (Phase 2): `tOptional`, `hasTranslation`, and internal `translationValue` read the table directly - under sparse overlays a key can be genuinely absent at runtime. They are now pointed at the dense resolved artifact (the runtime `translations` is imported from `src/ui/i18n.resolved.generated.ts`), so all four read-paths read the dense table. Phase 3 onward must keep it that way - never repoint a read-path back at the raw `i18n.locales/*` overlays.
+- BUNDLE (Phase 2, watch in later phases): the dense generated table fully inlines all 14 locales, so it loses the cross-locale reference-sharing the spread-assembled table had. Main client bundle gzip grew 966.77 -> 1120.64 KB (+15.9%). A naive repoint is far worse (+479.8 KB gzip): the `gameStrings` re-export from `i18n.en` drags the entire ~1 MB `i18n.en` base into the client bundle alongside the inlined table. Phase 2 sources `gameStrings` from the generated `en.game` instead, recovering ~326 KB gzip. The remaining ~154 KB is partly `world_entity_i18n` entity data being inlined in the table AND still bundled for the `hud`/`entity_i18n` runtime resolver - a candidate dedup if a later phase routes entity resolution through the table.
 - The S3 guard is source-text scraping (regex over `sim.ts`/`hud.ts`); splitting it into `s3_registered`/`s3_localized` (Phase 6) preserves the scraping approach and its brittleness. Treat matcher coverage (including hud-local maps) as ongoing maintenance, not solved.
 - `world_entity_i18n.ts` already aliases `es_ES`/`fr_CA`; the main `i18n.ts` does not. Phase 4 (dialect dedup) and Phase 5 must account for the two tables being at different starting points.
 - The `{} as WorldEntityTranslations` cast escapes the `: typeof en` guarantee. Phase 4 replaces it with real overlay semantics.

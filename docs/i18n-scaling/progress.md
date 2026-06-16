@@ -6,7 +6,7 @@
 | 0 - Layer rename (pre-packet) | DONE | - | (on branch `refactor/i18n-phase-naming`) |
 | 1 - Foundation & split | DONE | 2026-06-16 | 2026-06-16 |
 | 1 QA | DONE (PASS) | 2026-06-16 | 2026-06-16 |
-| 2 - Resolved artifact | NOT STARTED | | |
+| 2 - Resolved artifact | DONE | 2026-06-16 | 2026-06-16 |
 | 2 QA | NOT STARTED | | |
 | 3 - Flatten overlays | NOT STARTED | | |
 | 3 QA | NOT STARTED | | |
@@ -36,11 +36,15 @@
 Commits: `573bd5a` (extract en base + types), `20e8cca` (thin runtime + locale split), `d918244` (byte-equivalence baseline + gate).
 Baseline: SHA-256 `d9db528bea1c7a1e02835c4d3edb3fabcee3687aad2186608f1f1d2ac83b3b9b`, 1,584,856 bytes (see state.md for why this differs from the doc's stale 1,583,881).
 
-### Phase 2 - Dense resolved artifact
-- [ ] `scripts/i18n_build.mjs` overlays locales onto `en`, emits `src/ui/i18n.resolved.generated.ts` (nested, `: typeof en`, do-not-edit banner)
-- [ ] Client + admin import the generated artifact; `tOptional`/`hasTranslation`/`translationValue` repointed at the dense table
-- [ ] `i18n:build` wired into `npm run build` + `pretest`; reproducibility `git diff --exit-code` test green
-- [ ] Resolved table byte-identical to Phase 1 output
+### Phase 2 - Dense resolved artifact - DONE (2026-06-16)
+- [x] `scripts/i18n_build.mjs` overlays locales onto `en`, emits `src/ui/i18n.resolved.generated.ts` (nested, `: EnTranslations` = `typeof en`, do-not-edit banner)
+- [x] Client imports the generated artifact through the runtime; `t`/`tOptional`/`hasTranslation`/`translationValue` repointed at the dense table. (Admin: N/A this phase - `src/admin/` is independent of `src/ui` and ships its own flat DICT; the main table is not an admin consumer, so the phase-doc "admin imports the generated artifact" line is a no-op here. Admin catalog is Phase 8.)
+- [x] `i18n:build` wired into `npm run build` (before vite) + `pretest`; reproducibility `git diff --exit-code` test green (plus a tracked-file assertion so the gate is not vacuous on an untracked artifact)
+- [x] Resolved table byte-identical to Phase 1 output (SHA-256 `d9db528..` unchanged)
+
+Commits: `3f1ed8d` (build script + generated dense table + `EnTranslations` + wiring), `a92ff37` (runtime consumes the dense table), `ffb40e5` (reproducibility test).
+Validation: `tsc --noEmit` clean; targeted suite 77/77 (localization_fixes + localization_coverage + server_i18n + i18n_resolved_equivalence); byte-equivalence SHA `d9db528bea1c7a1e02835c4d3edb3fabcee3687aad2186608f1f1d2ac83b3b9b` (14 locales, 1,584,856 bytes); regeneration byte-identical; `npm run build` clean (client + admin).
+Bundle delta (locale data now fully inlined, losing cross-locale spread-sharing): main bundle gzip 966.77 -> 1120.64 KB (+153.9 KB, +15.9%); admin bundle unchanged. A naive repoint balloons +479.8 KB gzip because the `gameStrings` re-export dragged the full ~1 MB `i18n.en` base in alongside the inlined table; sourcing `gameStrings` from the generated `en.game` recovers ~326 KB gzip of pure duplication. The residual +154 KB is inherent to a dense table (no cross-locale sharing) plus `world_entity_i18n` entity data being inlined in the table AND still bundled for the `hud`/`entity_i18n` resolver - see state.md gotchas.
 
 ### Phase 3 - Flatten non-English locales
 - [ ] 13 non-English locales (main table + `world_entity_i18n`/`talent_i18n` non-English data) converted to flat dotted-key overlays in `src/ui/i18n.locales/<lang>.ts`
