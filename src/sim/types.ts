@@ -199,6 +199,10 @@ export interface MobTemplate {
   // more physical damage from everyone until it expires. Rides the existing
   // sunder aura; no new aura kind.
   corrode?: { chance: number; armor: number; maxStacks: number; duration: number; name: string; school?: Aura['school'] };
+  // On-hit mechanic ("Mana Burn"): a landed melee swing has `chance` to drain a
+  // flat `amount` of mana from a mana-using victim (casters). Rage/energy users
+  // are unaffected. Drains only what mana the victim still has; no overkill.
+  manaBurn?: { chance: number; amount: number; name: string; school?: Aura['school'] };
   // Pet mechanic: this creature is a ranged caster (warlock Imp) — instead of
   // closing to melee, it stays at `range` and hurls bolts of `school` damage.
   // updatePet reads this; the bolt damage comes from the mob's weapon range.
