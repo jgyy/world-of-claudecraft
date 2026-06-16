@@ -134,6 +134,33 @@ export const gameStrings = {
     comingSoonTitle: "Talents coming soon",
     comingSoonBody: "This class does not have talent trees yet. You can keep playing normally; full trees will arrive in a future update.",
   },
+  // On-screen touch controls (phones/tablets). Shared by every locale via
+  // `game: gameStrings`; non-English translations are a follow-up, matching the
+  // rest of gameStrings. `*Aria` keys back the accessible name / hover title.
+  mobile: {
+    move: "Move",
+    camera: "Camera",
+    attack: "Attack",
+    attackAria: "Attack nearest enemy",
+    target: "Target",
+    targetAria: "Target nearest enemy",
+    chat: "Chat",
+    chatAria: "Open chat",
+    more: "More",
+    moreAria: "Show more menus",
+    social: "Social",
+    arena: "Arena",
+    menu: "Menu",
+    menuAria: "Game menu",
+    use: "Use",
+    useAria: "Interact or loot",
+    quests: "Quests",
+    questsAria: "Quest Log",
+    spellbook: "Spellbook",
+    talents: "Talents",
+    meters: "Meters",
+    map: "Map",
+  },
 };
 
 export const en = {

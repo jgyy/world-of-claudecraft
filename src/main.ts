@@ -1536,6 +1536,13 @@ function translatePage(): void {
       el.setAttribute('placeholder', t(key as any));
     }
   });
+
+  document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-title');
+    if (key) {
+      el.setAttribute('title', t(key as any));
+    }
+  });
 }
 
 async function loadProjectStats(): Promise<void> {
