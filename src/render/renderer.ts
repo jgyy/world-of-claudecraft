@@ -22,6 +22,7 @@ import { buildTerrain, TerrainView } from './terrain';
 import { buildWater, WaterView } from './water';
 import { buildClouds, buildSky, SkyView } from './sky';
 import { buildFoliage, FoliageView } from './foliage';
+import { buildCritters, CritterField } from './critters';
 import { shouldRenderStealthGhost } from './stealth';
 import { raidMarkerDataUrl } from '../ui/icons';
 import { isProjectedNameplateAnchorVisible } from './nameplate_projection';
@@ -131,6 +132,7 @@ export class Renderer {
   private waterView: WaterView;
   private terrainView: TerrainView;
   private foliage: FoliageView;
+  private critters: CritterField;
   private fogScratch = new THREE.Color();
   private flames: THREE.Mesh[];
   private fireLights: THREE.PointLight[];
@@ -309,6 +311,8 @@ export class Renderer {
 
     this.foliage = buildFoliage(this.sim.cfg.seed);
     this.scene.add(this.foliage.group);
+    this.critters = buildCritters(this.sim.cfg.seed);
+    this.scene.add(this.critters.group);
     const props = buildProps(this.sim.cfg.seed);
     this.scene.add(props.group);
     this.flames = props.flames;
@@ -958,6 +962,7 @@ export class Renderer {
     this.terrainView.update(this.camera.position.x, this.camera.position.z, fogFar);
     this.propsView.update(this.camera.position.x, this.camera.position.z, fogFar);
     this.foliage.update(p.pos.x, p.pos.z, this.camera.position.x, this.camera.position.z, fogFar);
+    this.critters.update(p.pos.x, p.pos.z, dt);
 
     this.vfx.update(dt);
 
