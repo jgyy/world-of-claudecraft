@@ -135,6 +135,9 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
       { itemId: 'inert_storm_shard', chance: 0.4 },
     ],
     scale: 1.1, color: 0x5dade2,
+    // A touch of the storm's cold numbs the limbs: each landed swing has a
+    // chance to slow the victim to half speed for a few seconds.
+    chillOnHit: { chance: 0.35, mult: 0.5, duration: 6, name: 'Numbing Chill' },
   },
   shardlord_kazzix: {
     id: 'shardlord_kazzix', name: 'Shardlord Kazzix', minLevel: 18, maxLevel: 18, family: 'elemental', rare: true,

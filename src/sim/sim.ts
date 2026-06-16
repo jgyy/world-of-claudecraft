@@ -4101,6 +4101,16 @@ export class Sim {
         school: (ms.school as Aura['school']) ?? 'physical',
       });
     }
+
+    // On-hit chill: frost-touched mobs numb the victim, slowing their movement.
+    const chill = MOBS[mob.templateId]?.chillOnHit;
+    if (chill && !mob.dead && !target.dead && this.rng.chance(chill.chance)) {
+      this.applyAura(target, {
+        id: mob.templateId + '_chill', name: chill.name, kind: 'slow',
+        remaining: chill.duration, duration: chill.duration, value: chill.mult,
+        sourceId: mob.id, school: 'frost',
+      });
+    }
   }
 
   // Apply (or refresh + stack) a corrosive armor-shred debuff on the victim.
