@@ -205,6 +205,11 @@ export interface MobTemplate {
   petRanged?: { range: number; school: Aura['school'] };
   petRole?: PetRole;
   petSpell?: { name: string; school: 'physical' | 'fire' | 'frost' | 'arcane' | 'shadow' | 'holy' | 'nature'; min: number; max: number; range: number; every: number };
+  // On-hit affix: a successful melee hit saps the player victim's attack power
+  // for a few seconds (classic Demoralizing Shout / Curse of Weakness), making
+  // the damage *they* deal weaker. `ap` is the attack-power reduction (applied
+  // as a negative buff_ap aura); `chance` defaults to 1 (every hit, refreshing).
+  demoralize?: { ap: number; duration: number; chance?: number; name?: string };
 }
 
 export type AbilityEffect =

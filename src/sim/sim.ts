@@ -4101,6 +4101,22 @@ export class Sim {
         school: (ms.school as Aura['school']) ?? 'physical',
       });
     }
+
+    // Demoralizing affix: a successful hit saps the player victim's attack
+    // power for a few seconds, weakening the damage they deal back.
+    const demo = MOBS[mob.templateId]?.demoralize;
+    if (demo && !mob.dead && target.kind === 'player' && this.rng.chance(demo.chance ?? 1)) {
+      this.applyAura(target, {
+        id: 'mob_demoralize',
+        name: demo.name ?? 'Demoralized',
+        kind: 'buff_ap',
+        remaining: demo.duration,
+        duration: demo.duration,
+        value: -Math.abs(demo.ap),
+        sourceId: mob.id,
+        school: 'physical',
+      });
+    }
   }
 
   // Apply (or refresh + stack) a corrosive armor-shred debuff on the victim.

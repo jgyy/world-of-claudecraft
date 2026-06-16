@@ -210,6 +210,8 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
       { itemId: 'ghostly_essence', chance: 0.55, questId: 'q_rite' },
     ],
     scale: 1.0, color: 0xd5dbdb,
+    // A grave-cold wail saps the strength from the living it strikes.
+    demoralize: { ap: 20, duration: 8, name: 'Withering Wail' },
   },
   gorrak: {
     id: 'gorrak', name: 'Gorrak the Ruthless', minLevel: 6, maxLevel: 6, family: 'humanoid',
