@@ -316,6 +316,18 @@
   #target-frame .portrait-wrap { order: 2; }
   #target-frame .uf-bars { order: 1; margin-left: 0; margin-right: -8px; border-radius: 6px 0 0 6px; padding: 5px 14px 5px 8px; }
   #target-frame .level-chip { left: auto; right: -3px; }
+  /* "resting" zZz marker on the player portrait while seated / eating / drinking */
+  .rest-indicator {
+    position: absolute; top: -6px; right: -6px; width: 22px; height: 22px;
+    border-radius: 50%; z-index: 3; display: none;
+    align-items: center; justify-content: center;
+    color: #aee3ff; font-weight: bold; font-size: 13px; font-style: italic;
+    text-shadow: 0 0 6px #4fc3ff, 1px 1px 1px #000;
+    background: radial-gradient(circle at 40% 35%, #14304a, #08141c);
+    border: 2px solid #4fc3ff88; box-shadow: 0 0 8px #4fc3ff66;
+  }
+  .rest-indicator.on { display: flex; animation: rest-pulse 2s ease-in-out infinite; }
+  @keyframes rest-pulse { 0%, 100% { opacity: 1; transform: translateY(0); } 50% { opacity: 0.55; transform: translateY(-2px); } }
   .uf-name { font-size: 13px; font-weight: bold; font-family: var(--title-font); color: var(--gold);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 1px 1px 2px #000; }
   .bar { position: relative; height: 15px; background: #1a1a1a; border: 1px solid #000; margin-top: 3px; border-radius: 2px; overflow: hidden; }
@@ -3595,6 +3607,7 @@
             <div class="portrait-wrap">
               <div class="portrait"><canvas id="pf-portrait" width="54" height="54"></canvas></div>
               <div class="level-chip" id="pf-level">1</div>
+              <div class="rest-indicator" id="pf-rest" title="Resting">z</div>
             </div>
             <div class="uf-bars">
               <div class="uf-name" id="pf-name">Adventurer</div>

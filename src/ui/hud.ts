@@ -14,6 +14,7 @@ import {
 } from '../sim/types';
 import type { LeaderboardEntry } from '../world_api';
 import { xpBarView, formatXp } from './xp_bar';
+import { restView } from './rest_indicator';
 import { t } from './i18n';
 import { terrainHeight, WATER_LEVEL, roadDistance, generateDecorations } from '../sim/world';
 import type { Decoration } from '../sim/world';
@@ -142,6 +143,7 @@ export class Hud {
   private arenaAllTime: { name: string; class: string; level: number; rating: number; wins: number; losses: number }[] | null = null;
   private arenaLbFetchedAt = 0;
   private lastCombatEventAt = 0;
+  private lastResting = false;
   private lastZoneId = '';
   private mapZoneId = ''; // zone the cached map-window canvas was rendered for
   private mapZoom = 1; // world-map zoom: 1 = whole zone, up to MAP_MAX_ZOOM
@@ -867,6 +869,16 @@ export class Hud {
     const zone = inDungeon ? 'dungeon'
       : Math.hypot(p.pos.x - hub.x, p.pos.z - hub.z) < hub.radius + 10 ? 'town' : currentZone.biome;
     music.update(zone, inCombat);
+
+    // classic "resting" zZz on the player portrait while seated / recovering.
+    // Reads the seated booleans IWorld exposes; works offline + online alike.
+    const rest = restView({ sitting: !!p.sitting, eating: !!p.eating, drinking: !!p.drinking });
+    if (rest.resting !== this.lastResting) {
+      this.lastResting = rest.resting;
+      const el = $('#pf-rest');
+      el.classList.toggle('on', rest.resting);
+      el.title = rest.label;
+    }
 
     this.updateQuestTracker();
     this.updatePartyFrames();
