@@ -25,6 +25,7 @@ import { svgIcon } from './ui_icons';
 import { Keybinds, BIND_ACTIONS, BIND_CATEGORIES, isReservedCode, keyLabel } from '../game/keybinds';
 import { Settings, GameSettings, BoolSettingKey, NumericSettingKey, SETTING_RANGES } from '../game/settings';
 import { chatPlayerContextActions } from './player_context_menu';
+import { type ChatClock, clampChatClock, formatChatTimestamp } from './chat_timestamp';
 import {
   talentsFor, computeTalentModifiers, validateAllocation, dormantNodes, pointsSpent,
   exportBuild, importBuild, cloneAllocation, talentPointsAtLevel, FIRST_TALENT_LEVEL,
@@ -107,10 +108,14 @@ export class Hud {
   private dragAction: { action: Exclude<HotbarAction, null>; sourceIndex: number | null } | null = null;
   private optionsHooks: OptionsHooks | null = null;
   private reportHooks: ReportHooks | null = null;
-  private optionsView: 'main' | 'keybinds' | 'graphics' | 'audio' = 'main';
+  private optionsView: 'main' | 'keybinds' | 'graphics' | 'audio' | 'interface' = 'main';
   private capturingKey: { action: string; index: number } | null = null; // binding awaiting a key
   private keybindNote = '';
   private chatLogEl = $('#chatlog');
+  // Classic "Show Timestamps" interface option — off by default, persisted to
+  // localStorage. New chat lines get a bracketed wall-clock prefix when on.
+  private chatTimestamps = localStorage.getItem('chatTimestamps') === '1';
+  private chatClock: ChatClock = clampChatClock(localStorage.getItem('chatClock'));
   private combatLogEl = $('#combatlog');
   private errorEl = $('#error-msg');
   private bannerEl = $('#banner');
@@ -1706,7 +1711,18 @@ export class Hud {
   }
 
   log(text: string, color = '#ccc'): void {
-    this.appendLog(this.chatLogEl, text, color);
+    this.appendLog(this.chatLogEl, text, color, true);
+  }
+
+  // Prepend a dim bracketed wall-clock prefix to a chat line when the "Show
+  // Timestamps" option is on. No-op otherwise. Wall-clock time is fine here —
+  // the determinism ban is sim-only.
+  private prependTimestamp(div: HTMLElement): void {
+    if (!this.chatTimestamps) return;
+    const ts = document.createElement('span');
+    ts.className = 'chat-ts';
+    ts.textContent = `${formatChatTimestamp(new Date(), this.chatClock)} `;
+    div.appendChild(ts);
   }
 
   private logZoneWelcome(zone: ZoneDef): void {
@@ -1718,6 +1734,7 @@ export class Hud {
     const wasNearBottom = this.chatLogEl.scrollHeight - this.chatLogEl.scrollTop - this.chatLogEl.clientHeight < 24;
     const div = document.createElement('div');
     div.style.color = color;
+    this.prependTimestamp(div);
     if (prefix) div.append(document.createTextNode(prefix));
     const sender = document.createElement('span');
     sender.className = 'chat-player-name';
@@ -1737,11 +1754,12 @@ export class Hud {
     this.appendLog(this.combatLogEl, text, color);
   }
 
-  private appendLog(el: HTMLElement, text: string, color: string): void {
+  private appendLog(el: HTMLElement, text: string, color: string, timestamp = false): void {
     const wasNearBottom = el.scrollHeight - el.scrollTop - el.clientHeight < 24;
     const div = document.createElement('div');
-    div.textContent = text;
     div.style.color = color;
+    if (timestamp) this.prependTimestamp(div);
+    div.append(document.createTextNode(text));
     el.appendChild(div);
     while (el.children.length > 200) el.removeChild(el.firstChild!);
     if (wasNearBottom) el.scrollTop = el.scrollHeight;
@@ -3953,6 +3971,7 @@ export class Hud {
     if (this.optionsView === 'keybinds') { this.renderKeybinds(); return; }
     if (this.optionsView === 'graphics') { this.renderGraphics(); return; }
     if (this.optionsView === 'audio') { this.renderAudio(); return; }
+    if (this.optionsView === 'interface') { this.renderInterface(); return; }
     const el = $('#options-menu');
     el.innerHTML = `<div class="panel-title"><span>Game Menu</span><span class="x-btn" data-close>${svgIcon('close')}</span></div>`;
     const list = document.createElement('div');
@@ -3964,10 +3983,11 @@ export class Hud {
       b.addEventListener('click', () => { audio.click(); onClick(); });
       list.appendChild(b);
     };
-    const goto = (view: 'keybinds' | 'graphics' | 'audio') => { this.optionsView = view; this.keybindNote = ''; this.renderOptions(); };
+    const goto = (view: 'keybinds' | 'graphics' | 'audio' | 'interface') => { this.optionsView = view; this.keybindNote = ''; this.renderOptions(); };
     add('Key Bindings', () => goto('keybinds'));
     add('Graphics', () => goto('graphics'));
     add('Audio', () => goto('audio'));
+    add('Interface', () => goto('interface'));
     add('Logout', () => this.optionsHooks?.logout());
     add('Return to Game', () => this.closeOptions());
     el.appendChild(list);
@@ -4091,6 +4111,82 @@ export class Hud {
     row.append(name, toggle);
     body.appendChild(row);
     this.settingsViewFooter();
+  }
+
+  // Interface options. Self-contained client-side toggles (persisted to
+  // localStorage, not the GameSettings store) — currently the classic "Show
+  // Timestamps" chat option plus its 12/24-hour clock format.
+  private renderInterface(): void {
+    const body = this.settingsViewShell('Interface');
+
+    // On/off toggle for chat timestamps.
+    const tsRow = document.createElement('div');
+    tsRow.className = 'set-row';
+    const tsName = document.createElement('span');
+    tsName.className = 'set-name';
+    tsName.textContent = 'Show Chat Timestamps';
+    const tsToggle = document.createElement('button');
+    tsToggle.className = 'btn set-toggle';
+
+    // 12/24-hour format selector — two segmented buttons, dimmed when off.
+    const fmtRow = document.createElement('div');
+    fmtRow.className = 'set-row';
+    const fmtName = document.createElement('span');
+    fmtName.className = 'set-name';
+    fmtName.textContent = 'Timestamp Format';
+    const seg = document.createElement('div');
+    seg.className = 'set-seg';
+    const btn12 = document.createElement('button');
+    btn12.className = 'btn set-seg-btn';
+    btn12.textContent = '12-hour';
+    const btn24 = document.createElement('button');
+    btn24.className = 'btn set-seg-btn';
+    btn24.textContent = '24-hour';
+    seg.append(btn12, btn24);
+    fmtRow.append(fmtName, seg);
+
+    const sync = () => {
+      tsToggle.textContent = this.chatTimestamps ? 'On' : 'Off';
+      tsToggle.classList.toggle('off', !this.chatTimestamps);
+      tsToggle.setAttribute('aria-pressed', String(this.chatTimestamps));
+      btn12.classList.toggle('active', this.chatClock === '12h');
+      btn24.classList.toggle('active', this.chatClock === '24h');
+      fmtRow.classList.toggle('disabled', !this.chatTimestamps);
+      btn12.disabled = !this.chatTimestamps;
+      btn24.disabled = !this.chatTimestamps;
+    };
+    sync();
+
+    tsToggle.addEventListener('click', () => {
+      audio.click();
+      this.chatTimestamps = !this.chatTimestamps;
+      localStorage.setItem('chatTimestamps', this.chatTimestamps ? '1' : '0');
+      sync();
+    });
+    const setClock = (clock: ChatClock) => {
+      if (!this.chatTimestamps) return;
+      audio.click();
+      this.chatClock = clock;
+      localStorage.setItem('chatClock', clock);
+      sync();
+    };
+    btn12.addEventListener('click', () => setClock('12h'));
+    btn24.addEventListener('click', () => setClock('24h'));
+
+    tsRow.append(tsName, tsToggle);
+    body.append(tsRow, fmtRow);
+
+    const note = document.createElement('div');
+    note.className = 'set-note';
+    note.textContent = 'Prefixes each new chat line with the time it arrived, e.g. [14:32]. Only affects messages received while the option is on.';
+    $('#options-menu').appendChild(note);
+
+    const back = document.createElement('button');
+    back.className = 'btn';
+    back.textContent = 'Back';
+    back.addEventListener('click', () => { audio.click(); this.optionsView = 'main'; this.renderOptions(); });
+    $('#options-menu').appendChild(back);
+    $('#options-menu').querySelector('[data-close]')?.addEventListener('click', () => this.closeOptions());
   }
 
   // Display name for an action row. Action-bar slots show the shortcut that
