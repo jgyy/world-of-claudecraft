@@ -37,8 +37,9 @@ import { tTalent, localizeTalentTitle } from './talent_i18n';
 import {
   talentsFor, computeTalentModifiers, validateAllocation, dormantNodes, pointsSpent,
   exportBuild, importBuild, cloneAllocation, talentPointsAtLevel, FIRST_TALENT_LEVEL,
-  type TalentAllocation, type TalentNode, type TalentEffect, type SpecDef, type Role,
+  type TalentAllocation, type TalentNode, type SpecDef, type Role,
 } from '../sim/content/talents';
+import { talentChoiceIconDataUrl, talentNodeIconDataUrl } from './talent_icons';
 import {
   clearHotbarSlot, encodeHotbarAction, HOTBAR_ACTION_MIME, HotbarAction, parseHotbarAction, parseHotbarActions,
   placeAbilityOnSlot, placeItemOnSlot, swapHotbarSlots, syncHotbarActions,
@@ -146,27 +147,6 @@ const ITEM_STAT_LABEL_KEYS: Partial<Record<keyof Stats, TranslationKey>> = {
 // string, used to color-code party members on the minimap and in the frames.
 const classCss = (cls: string): string =>
   '#' + ((CLASSES as Record<string, { color: number }>)[cls]?.color ?? 0x5fa8ff).toString(16).padStart(6, '0');
-
-// Talent icons derive from a node's effect — an ability-linked node shows that
-// ability's painted icon; a stat/global node shows a themed crest — so they
-// match the spellbook art and the 8 unwritten class trees inherit consistent
-// icons automatically, with no hand-set glyphs to keep in sync.
-const TALENT_STAT_CREST: Record<string, string> = {
-  armorPct: 'talent_armor', armor: 'talent_armor',
-  crit: 'talent_crit', spellPower: 'talent_crit',
-  dodge: 'talent_dodge',
-  ap: 'talent_ap', apPct: 'talent_ap',
-  maxHpPct: 'talent_health', sta: 'talent_health',
-  haste: 'talent_haste',
-};
-function talentEffectIcon(effect: TalentEffect | undefined, kind: string): string {
-  const ab = effect?.grant?.ability ?? effect?.ability?.[0]?.ability;
-  if (ab && ABILITIES[ab]) return iconDataUrl('ability', ab);
-  const stat = effect?.stats ? Object.keys(effect.stats)[0] : undefined;
-  if (stat) return iconDataUrl('crest', TALENT_STAT_CREST[stat] ?? 'talent_generic');
-  if (effect?.global) return iconDataUrl('crest', effect.global.threatPct ? 'talent_armor' : 'talent_crit');
-  return iconDataUrl('crest', kind === 'choice' ? 'talent_choice' : 'talent_generic');
-}
 
 // Party frames dim and the minimap pins members to the rim once they pass
 // this range (yards) — just inside the server's ~120 yd interest scope.
@@ -3962,7 +3942,7 @@ export class Hud {
     pop.setAttribute('aria-label', tTalent({ kind: 'talentNode', node, field: 'name' }));
     pop.innerHTML = (node.choices ?? []).map((o) => {
       const sel = stage.choices[node.id] === o.id;
-      return `<div class="tal-choice-opt${sel ? ' sel' : ''}" role="menuitemradio" tabindex="0" aria-checked="${sel}" data-opt="${esc(o.id)}"><span class="tco-icon">${esc(o.icon)}</span>`
+      return `<div class="tal-choice-opt${sel ? ' sel' : ''}" role="menuitemradio" tabindex="0" aria-checked="${sel}" data-opt="${esc(o.id)}"><span class="tco-icon" style="background-image:url(${esc(talentChoiceIconDataUrl(o))})"></span>`
         + `<span class="tco-text"><b>${esc(tTalent({ kind: 'talentChoice', choice: o, field: 'name' }))}</b><span>${esc(tTalent({ kind: 'talentChoice', choice: o, field: 'description' }))}</span></span></div>`;
     }).join('');
     document.body.appendChild(pop);
@@ -4295,7 +4275,7 @@ export class Hud {
       div.style.top = `${n.row * CH + TOP}px`;
       const icon = document.createElement('span');
       icon.className = 'tal-icon';
-      icon.textContent = chosen?.icon ?? n.icon;
+      icon.style.backgroundImage = `url(${chosen ? talentChoiceIconDataUrl(chosen) : talentNodeIconDataUrl(n)})`;
       div.appendChild(icon);
       if (ranks > 0 || n.maxRank > 1) {
         const badge = document.createElement('span'); badge.className = 'tal-rank'; badge.textContent = `${ranks}/${n.maxRank}`;
@@ -4349,7 +4329,7 @@ export class Hud {
     if (n.kind === 'choice') {
       for (const o of n.choices!) {
         const sel = stage.choices[n.id] === o.id;
-        html += `<div class="tt-sub" style="color:${sel ? '#ffd100' : '#aaa'}"><span class="tt-opt-icon">${esc(o.icon)}</span> ${esc(tTalent({ kind: 'talentChoice', choice: o, field: 'name' }))} — ${esc(tTalent({ kind: 'talentChoice', choice: o, field: 'description' }))}</div>`;
+        html += `<div class="tt-sub" style="color:${sel ? '#ffd100' : '#aaa'}"><span class="tt-opt-icon" style="background-image:url(${esc(talentChoiceIconDataUrl(o))})"></span> ${esc(tTalent({ kind: 'talentChoice', choice: o, field: 'name' }))} — ${esc(tTalent({ kind: 'talentChoice', choice: o, field: 'description' }))}</div>`;
       }
       html += `<div class="tt-sub" style="color:#8aa">${t('game.talents.cycleHint')}</div>`;
     } else {

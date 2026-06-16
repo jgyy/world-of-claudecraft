@@ -805,7 +805,7 @@
   .tal-tree { position: relative; margin: 6px auto; }
   .tal-arrows { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 0; }
   .tal-node { position: absolute; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #15110a; border: 2px solid #5a4a22; color: #e8dcb0; user-select: none; box-sizing: border-box; z-index: 1; }
-  .tal-node .tal-icon { position: absolute; inset: 2px; display: flex; align-items: center; justify-content: center; background: #15110a; z-index: 1; font: 26px/1 "Apple Color Emoji", "Segoe UI Emoji", var(--body-font); text-shadow: 0 1px 2px #000; }
+  .tal-node .tal-icon { position: absolute; inset: 2px; display: block; background-color: #15110a; background-size: cover; background-position: center; background-repeat: no-repeat; z-index: 1; }
   .tal-node.circle { border-radius: 50%; }
   .tal-node.circle .tal-icon { border-radius: 50%; }
   .tal-node.square { border-radius: 7px; }
@@ -884,7 +884,7 @@
   .tal-choice-opt:hover, .tal-choice-opt:focus-visible { background: #ffffff10; border-color: #6f5a2a; outline: none; }
   .tal-choice-opt.sel { background: #2c2410; border-color: var(--gold); box-shadow: inset 0 0 0 1px #ffd10033; }
   .tal-choice-opt.sel::after { content: "✓"; position: absolute; right: 8px; top: 8px; width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; color: #120d04; background: #ffd100; border-radius: 50%; font: 700 10px/1 var(--body-font); }
-  .tco-icon { width: 28px; height: 28px; flex: none; border-radius: 4px; display: flex; align-items: center; justify-content: center; background: #15110a; color: #fff; border: 1px solid #5a4a22; font: 18px/1 "Apple Color Emoji", "Segoe UI Emoji", var(--body-font); text-shadow: 0 1px 2px #000; }
+  .tco-icon { width: 28px; height: 28px; flex: none; border-radius: 4px; display: block; background-color: #15110a; background-size: cover; background-position: center; background-repeat: no-repeat; border: 1px solid #5a4a22; }
   .tco-text { display: flex; flex-direction: column; gap: 2px; font-size: 11px; color: #c8b888; }
   .tco-text b { color: #fff; font-size: 12px; }
 
@@ -1169,7 +1169,7 @@
     padding: 8px 10px; font-size: 12px; line-height: 1.5; }
   #tooltip .tt-title { font-family: var(--title-font); font-size: 13.5px; color: #fff; }
   #tooltip .tt-sub { color: #998d6a; font-size: 11px; }
-  .tt-opt-icon { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; vertical-align: -3px; border-radius: 3px; margin-right: 2px; font: 14px/1 "Apple Color Emoji", "Segoe UI Emoji", var(--body-font); }
+  .tt-opt-icon { width: 16px; height: 16px; display: inline-block; vertical-align: -3px; border-radius: 3px; margin-right: 2px; background-size: cover; background-position: center; background-repeat: no-repeat; }
   #tooltip .tt-desc { color: #ffd100; margin-top: 4px; font-size: 11.5px; }
   #tooltip .tt-stat { color: #fff; font-size: 11.5px; }
   #tooltip .tt-green { color: #1eff00; font-size: 11.5px; }

@@ -449,7 +449,7 @@ export class CharacterVisual {
     death.reset();
     death.setLoop(THREE.LoopOnce, 1);
     death.clampWhenFinished = true;
-    death.timeScale = 1.15;
+    death.timeScale = this.def.deathTimeScale ?? 1.15;
     if (!this.initialized) {
       // created already-dead (corpse entering interest): snap to the end pose
       if (prev && prev !== death) prev.stop();

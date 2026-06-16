@@ -559,7 +559,9 @@ export class ClientWorld implements IWorld {
       // real update (e.g. taking damage). Snap both poses to the destination so
       // it appears exactly where the server placed it.
       const teleDx = w.x - e.pos.x, teleDz = w.z - e.pos.z;
-      if (teleDx * teleDx + teleDz * teleDz > TELEPORT_SNAP_DIST_SQ) {
+      const wasDead = e.dead;
+      const nowDead = !!w.dead;
+      if ((wasDead && !nowDead) || teleDx * teleDx + teleDz * teleDz > TELEPORT_SNAP_DIST_SQ) {
         e.prevPos = { x: w.x, y: w.y, z: w.z };
         e.prevFacing = w.f;
       } else {
@@ -577,7 +579,7 @@ export class ClientWorld implements IWorld {
       e.overheadEmoteId = isOverheadEmoteId(w.emo) ? w.emo : null;
       e.overheadEmoteUntil = e.overheadEmoteId ? Number.POSITIVE_INFINITY : 0;
       if (typeof w.emoSeq === 'number') e.overheadEmoteSeq = w.emoSeq;
-      e.dead = !!w.dead;
+      e.dead = nowDead;
       e.lootable = !!w.loot;
       e.hostile = !!w.h;
       e.castingAbility = w.cast ?? null;
