@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 import { ACTIONS, encodeObs } from '../src/sim/obs';
 import { Entity, dist2d } from '../src/sim/types';
-import { CRYPT_DOOR_POS, DUNGEON_LIST, DUNGEON_X_THRESHOLD, ITEMS, LAKE, MOBS, NPCS, QUESTS, instanceOrigin, zoneAt, zoneWelcomeText } from '../src/sim/data';
+import { CLASSES, CRYPT_DOOR_POS, DUNGEON_LIST, DUNGEON_X_THRESHOLD, ITEMS, LAKE, MOBS, NPCS, QUESTS, instanceOrigin, zoneAt, zoneWelcomeText } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { groundHeight, WATER_LEVEL } from '../src/sim/world';
 import { cameraOcclusion, isBlocked, lineOfSightClear, resolvePosition } from '../src/sim/colliders';
@@ -907,6 +907,42 @@ describe('mob tap rights', () => {
     (sim as any).dealDamage(sim.player, m, 50, false, 'fire', 'test', 'hit');
     expect(m.hp).toBe(hpBefore); // nothing got through
     expect(m.tappedById).toBeNull(); // so nobody owns the tap yet
+  });
+});
+
+describe('ranged auto-attack crit suppression', () => {
+  // The crit chance a swing rolls against is the second rng.chance() call in
+  // both meleeSwing and rangedSwing (the first is the miss roll). Capture the
+  // args and return false so no miss/crit branches fire and perturb state.
+  function critChanceRolled(sim: Sim, swing: () => void): number {
+    const calls: number[] = [];
+    (sim as any).rng.chance = (p: number) => { calls.push(p); return false; };
+    swing();
+    return calls[1];
+  }
+
+  function setup(level: number, targetLevel: number) {
+    const sim = new Sim({ seed: SEED, playerClass: 'hunter' });
+    const hunter = sim.player;
+    if (level > 1) sim.setPlayerLevel(level);
+    hunter.critChance = 0.5;
+    const wolf = [...sim.entities.values()].find((e) => e.kind === 'mob')!;
+    wolf.level = targetLevel;
+    const ranged = CLASSES.hunter.ranged!;
+    return { sim, hunter, wolf, ranged };
+  }
+
+  it('suppresses crit against a higher-level target, matching melee', () => {
+    const { sim, hunter, wolf, ranged } = setup(10, 13); // +3 levels
+    const rolled = critChanceRolled(sim, () => (sim as any).rangedSwing(hunter, wolf, ranged));
+    // 0.5 base - 3 * 0.002 suppression = 0.494 (was a flat 0.5 before the fix)
+    expect(rolled).toBeCloseTo(0.5 - 3 * 0.002, 5);
+  });
+
+  it('does not suppress crit against an equal-or-lower-level target', () => {
+    const { sim, hunter, wolf, ranged } = setup(10, 8); // lower level
+    const rolled = critChanceRolled(sim, () => (sim as any).rangedSwing(hunter, wolf, ranged));
+    expect(rolled).toBeCloseTo(0.5, 5);
   });
 });
 
