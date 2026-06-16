@@ -14,6 +14,7 @@ import {
 } from '../sim/types';
 import type { LeaderboardEntry } from '../world_api';
 import { xpBarView, formatXp } from './xp_bar';
+import { clampMinimapZoom, nextMinimapZoom, isMinMinimapZoom, isMaxMinimapZoom, formatMinimapZoom, MINIMAP_ZOOM_DEFAULT } from './minimap_zoom';
 import { t } from './i18n';
 import { terrainHeight, WATER_LEVEL, roadDistance, generateDecorations } from '../sim/world';
 import type { Decoration } from '../sim/world';
@@ -119,6 +120,10 @@ export class Hud {
   private bannerTimer: number | undefined;
   private minimapCtx: CanvasRenderingContext2D;
   private minimapBg: HTMLCanvasElement;
+  // Minimap zoom: a multiplier on the minimap's base pixels-per-yard. Discrete
+  // presets (see minimap_zoom.ts), persisted to localStorage. 1 = shipped look.
+  private minimapZoom = MINIMAP_ZOOM_DEFAULT;
+  private minimapZoomLabel: HTMLElement | null = null;
   private mapBg: HTMLCanvasElement | null = null;
   private openLootMobId: number | null = null;
   private openVendorNpcId: number | null = null;
@@ -183,6 +188,7 @@ export class Hud {
     mm.style.cursor = 'pointer';
     mm.title = 'Open world map';
     mm.addEventListener('click', () => this.toggleMap());
+    this.initMinimapZoom(mm);
     $('#release-btn').addEventListener('click', () => { this.sim.releaseSpirit(); });
     // classic WoW: the player interaction menu opens from the target portrait
     $('#target-frame').addEventListener('contextmenu', (ev) => {
@@ -996,6 +1002,43 @@ export class Hud {
     return c;
   }
 
+  // Build the minimap zoom control: load the persisted level, wire the +/-
+  // buttons and a scroll-wheel handler over the minimap canvas. Pure DOM glue;
+  // all stepping/clamping math lives in minimap_zoom.ts.
+  private initMinimapZoom(mm: HTMLElement): void {
+    const saved = Number(localStorage.getItem('minimapZoom'));
+    this.minimapZoom = clampMinimapZoom(saved);
+    this.minimapZoomLabel = $('#minimap-zoom-label');
+    const inBtn = document.querySelector('#minimap-zoom-in');
+    const outBtn = document.querySelector('#minimap-zoom-out');
+    inBtn?.addEventListener('click', (e) => { e.stopPropagation(); this.setMinimapZoom(nextMinimapZoom(this.minimapZoom, +1)); });
+    outBtn?.addEventListener('click', (e) => { e.stopPropagation(); this.setMinimapZoom(nextMinimapZoom(this.minimapZoom, -1)); });
+    // scroll over the minimap to zoom (up = in), without scrolling the page
+    mm.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      this.setMinimapZoom(nextMinimapZoom(this.minimapZoom, (e as WheelEvent).deltaY < 0 ? +1 : -1));
+    }, { passive: false });
+    this.syncMinimapZoomUi();
+  }
+
+  private setMinimapZoom(z: number): void {
+    const next = clampMinimapZoom(z);
+    if (next === this.minimapZoom) return;
+    this.minimapZoom = next;
+    localStorage.setItem('minimapZoom', String(next));
+    this.syncMinimapZoomUi();
+  }
+
+  // Reflect the current zoom in the readout and disable the +/- buttons at the
+  // ends so the control communicates its own limits.
+  private syncMinimapZoomUi(): void {
+    if (this.minimapZoomLabel) this.minimapZoomLabel.textContent = formatMinimapZoom(this.minimapZoom);
+    const inBtn = document.querySelector('#minimap-zoom-in') as HTMLButtonElement | null;
+    const outBtn = document.querySelector('#minimap-zoom-out') as HTMLButtonElement | null;
+    if (inBtn) inBtn.disabled = isMaxMinimapZoom(this.minimapZoom);
+    if (outBtn) outBtn.disabled = isMinMinimapZoom(this.minimapZoom);
+  }
+
   private updateMinimap(): void {
     const ctx = this.minimapCtx;
     const S = 162;
@@ -1006,7 +1049,9 @@ export class Hud {
     ctx.arc(S / 2, S / 2, S / 2 - 2, 0, Math.PI * 2);
     ctx.clip();
     ctx.imageSmoothingEnabled = false;
-    const pxPerYard = 1.7;
+    // 1.7 is the historical base scale; the zoom multiplier shrinks the world
+    // radius shown so markers spread out as you zoom in (default 1 = unchanged).
+    const pxPerYard = 1.7 * this.minimapZoom;
     const bg = this.minimapBg;
     const bgPxPerYard = bg.width / (WORLD_MAX_X - WORLD_MIN_X);
     const sw = S / (pxPerYard / bgPxPerYard);
