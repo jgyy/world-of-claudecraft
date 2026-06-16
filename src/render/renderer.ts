@@ -1511,7 +1511,7 @@ export class Renderer {
         const template = MOBS[e.templateId];
         const elite = !!template?.elite;
         const color = e.dead ? '#999' : diff >= 3 ? '#ff4444' : diff >= 1 ? '#ffaa33' : diff >= -2 ? '#ffe97a' : diff >= -5 ? '#7fdc4f' : '#9d9d9d';
-        const mobName = mobDisplayName(e.templateId);
+        const mobName = e.ownerId !== null ? e.name : mobDisplayName(e.templateId);
         const name = e.dead ? t('worldContent.corpseName', { name: mobName }) : `[${e.level}${elite ? '+' : ''}] ${mobName}`;
         const hpDisplay = e.dead ? 'none' : '';
         const marker = e.lootable ? '$' : elite && !e.dead ? '◆' : '';

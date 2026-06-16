@@ -5861,7 +5861,7 @@ function dungeonDisplayNameFromSource(name: string): string {
 }
 
 function entityDisplayName(entity: Entity): string {
-  if (entity.kind === 'mob') return mobDisplayName(entity.templateId);
+  if (entity.kind === 'mob') return entity.ownerId !== null ? entity.name : mobDisplayName(entity.templateId);
   if (entity.kind === 'npc') return npcDisplayName(entity.templateId);
   return entity.name;
 }
