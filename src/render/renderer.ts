@@ -228,7 +228,7 @@ export class Renderer {
   private fogScratch = new THREE.Color();
   private flames: THREE.Mesh[];
   private fireLights: THREE.PointLight[];
-  private propsView!: { update(camX: number, camZ: number, fogFar: number): void };
+  private propsView!: { update(camX: number, camY: number, camZ: number, fogFar: number): void };
   private lightRank: { light: THREE.PointLight; d2: number; worldPos: THREE.Vector3 }[] = [];
   private doomedIds: number[] = [];
   private dungeons: DungeonInteriors | null = null;
@@ -1256,7 +1256,7 @@ export class Renderer {
     // frustum; the grass ring follows the player
     const fogFar = (this.scene.fog as THREE.Fog).far;
     this.terrainView.update(this.camera.position.x, this.camera.position.z, fogFar);
-    this.propsView.update(this.camera.position.x, this.camera.position.z, fogFar);
+    this.propsView.update(this.camera.position.x, this.camera.position.y, this.camera.position.z, fogFar);
     this.foliage.update(p.pos.x, p.pos.z, this.camera.position.x, this.camera.position.z, fogFar);
 
     this.vfx.update(dt);

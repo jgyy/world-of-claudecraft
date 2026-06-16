@@ -145,13 +145,17 @@ describe('collision & terrain', () => {
     expect(open.z).toBe(-40);
   });
 
-  it('camera occlusion pulls in at prop surfaces without blocking clear or overhead rays', () => {
+  it('camera ghosts through village buildings (hidden instead of pulling in)', () => {
     const groundY = groundHeight(10, 4, SEED);
     const eyeY = groundY + 2;
 
-    const hit = cameraOcclusion(SEED, 10, eyeY, 4, 10, eyeY + 1.5, 20, 0.35);
-    expect(hit).toBeGreaterThan(0);
-    expect(hit).toBeLessThan(1);
+    // ray sweeps straight through the house at (10,12): buildings are camGhost,
+    // so the chase cam no longer pulls in for them — the renderer hides them.
+    const through = cameraOcclusion(SEED, 10, eyeY, 4, 10, eyeY + 1.5, 20, 0.35);
+    expect(through).toBe(1);
+    // but movement still collides with that same house (camGhost is camera-only)
+    const blocked = resolvePosition(SEED, 10, 12, 0.5);
+    expect(Math.abs(blocked.x - 10) + Math.abs(blocked.z - 12)).toBeGreaterThan(0.5);
 
     const clear = cameraOcclusion(SEED, 0, eyeY, -40, 0, eyeY + 1.5, -48, 0.35);
     expect(clear).toBe(1);

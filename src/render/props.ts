@@ -29,8 +29,12 @@ export interface PropsResult {
   group: THREE.Group;
   flames: THREE.Mesh[]; // animated campfire flames
   fireLights: THREE.PointLight[];
-  /** hides merged/instanced prop bands that sit entirely past the fog far plane */
-  update(camX: number, camZ: number, fogFar: number): void;
+  /**
+   * Hides merged/instanced prop bands that sit entirely past the fog far plane,
+   * and hides any village structure the camera is currently standing inside
+   * (below its roof) so the chase cam can sit indoors without a wall in view.
+   */
+  update(camX: number, camY: number, camZ: number, fogFar: number): void;
 }
 
 const MERGE_BAND_DEPTH = GFX.standardMaterials ? 180 : 90;
@@ -274,6 +278,35 @@ export function buildProps(seed: number): PropsResult {
 
   const ground = (x: number, z: number) => terrainHeight(x, z, seed);
 
+  // Village structures the camera ghosts through (see colliders.ts `camGhost`):
+  // each stays an individual, un-merged group so it can be hidden while the
+  // camera sits inside its footprint. Footprints mirror the colliders so what
+  // hides is exactly what the camera passes through.
+  const hideables: Hideable[] = [];
+  const keepFromMerge = new Set<THREE.Object3D>();
+  /**
+   * Mark `g` un-mergeable and register it as hide-when-camera-inside. Each
+   * mesh's material is cloned so flipping colour/depth writes hides only this
+   * structure (and leaves the shadow pass untouched).
+   */
+  function registerHideable(g: THREE.Group, fp: Footprint): void {
+    const matMap = new Map<THREE.Material, ToggleMat>();
+    g.traverse((o) => {
+      const mesh = o as THREE.Mesh;
+      if (!mesh.isMesh) return;
+      keepFromMerge.add(mesh);
+      const src = mesh.material as THREE.Material;
+      let tm = matMap.get(src);
+      if (!tm) {
+        const mat = src.clone();
+        tm = { mat, depthWrite: mat.depthWrite };
+        matMap.set(src, tm);
+      }
+      mesh.material = tm.mat;
+    });
+    hideables.push({ group: g, mats: [...matMap.values()], hidden: false, ...fp });
+  }
+
   // live small materials (decals / glow) — shared, never per-instance
   const usePbr = GFX.standardMaterials;
   const lowProps = !usePbr;
@@ -337,6 +370,8 @@ export function buildProps(seed: number): PropsResult {
   for (const b of PROPS.buildings) {
     const key = b.x * 13.7 + b.z * 3.1;
     const y = ground(b.x, b.z);
+    // roof Y mirrors the camera collider height in colliders.ts
+    const roofY = y + (b.kind === 'chapel' ? 10.8 : b.kind === 'inn' ? 7.8 : 8.0);
     if (b.kind === 'chapel') {
       // composed chapel: tall bell tower at the rear + squat stone entry hall
       // in front; the hall door lands on the footprint's +z edge.
@@ -354,6 +389,7 @@ export function buildProps(seed: number): PropsResult {
       g.position.set(b.x, y - 0.12, b.z);
       g.rotation.y = b.rot;
       group.add(shadowed(g));
+      registerHideable(g, obbFootprint(b.x, b.z, b.w / 2, b.d / 2, b.rot, roofY));
       continue;
     }
     const asset: PropKey = b.kind === 'inn' ? 'inn' : housePool[Math.floor(keyRand(key, 3) * 0.999 * housePool.length)];
@@ -363,6 +399,7 @@ export function buildProps(seed: number): PropsResult {
     g.position.set(b.x, y - 0.12, b.z);
     g.rotation.y = b.rot;
     group.add(shadowed(g));
+    registerHideable(g, obbFootprint(b.x, b.z, b.w / 2, b.d / 2, b.rot, roofY));
   }
 
   // ---- market stalls (smith/armorer stalls get anvil + weapon stand) ------
@@ -386,6 +423,7 @@ export function buildProps(seed: number): PropsResult {
     g.position.set(s.x, ground(s.x, s.z) - 0.06, s.z);
     g.rotation.y = s.rot;
     group.add(shadowed(g));
+    registerHideable(g, circleFootprint(s.x, s.z, s.r, ground(s.x, s.z) + 3.1));
   });
 
   // ---- wells ---------------------------------------------------------------
@@ -396,6 +434,7 @@ export function buildProps(seed: number): PropsResult {
     g.position.set(w.x, ground(w.x, w.z) - 0.1, w.z);
     g.rotation.y = propRand(w.x, w.z, 1) * Math.PI;
     group.add(shadowed(g));
+    registerHideable(g, circleFootprint(w.x, w.z, w.r, ground(w.x, w.z) + 3.7));
   }
 
   // ---- graveyards: 4 headstone shapes, leaning, instanced ------------------
@@ -584,6 +623,9 @@ export function buildProps(seed: number): PropsResult {
     g.position.set(m.x, ground(m.x, m.z), m.z);
     g.rotation.y = m.rot;
     group.add(shadowed(g));
+    // mound circle behind the portal — same offset/radius as the collider
+    const mx = m.x - 3.4 * Math.sin(m.rot), mz = m.z - 3.4 * Math.cos(m.rot);
+    registerHideable(g, circleFootprint(mx, mz, 5, ground(mx, mz) + 5.2));
   }
 
   // ---- fishing docks: pirate-kit platforms, moored rowboat, stone hut ------
@@ -629,6 +671,11 @@ export function buildProps(seed: number): PropsResult {
     g.position.set(d.x, y, d.z);
     g.rotation.y = d.rot;
     group.add(shadowed(g));
+    // stone hut OBB — same offset/extents/rotation as the collider
+    const hc = Math.cos(d.rot), hs = Math.sin(d.rot);
+    const hx = d.x + d.hutLocal.x * hc + d.hutLocal.z * hs;
+    const hz = d.z - d.hutLocal.x * hs + d.hutLocal.z * hc;
+    registerHideable(g, obbFootprint(hx, hz, d.hutLocal.hw, d.hutLocal.hd, d.rot, ground(hx, hz) + 2.9));
   }
 
   // ---- flush instanced batches ---------------------------------------------
@@ -649,7 +696,10 @@ export function buildProps(seed: number): PropsResult {
     }
   }
 
-  const staticMeshes = mergeStaticMeshes(group, new Set(flames));
+  // animated flames + village structures (hidden individually) stay un-merged
+  const keep = new Set<THREE.Object3D>(flames);
+  for (const m of keepFromMerge) keep.add(m);
+  const staticMeshes = mergeStaticMeshes(group, keep);
   for (const sm of staticMeshes) {
     const bounds = cullableBounds(sm, sm.geometry.boundingBox, sm.geometry.boundingSphere);
     if (bounds) cullables.push(bounds);
@@ -659,12 +709,72 @@ export function buildProps(seed: number): PropsResult {
     group,
     flames,
     fireLights,
-    update(camX: number, camZ: number, fogFar: number): void {
+    update(camX: number, camY: number, camZ: number, fogFar: number): void {
       for (const c of cullables) {
         c.obj.visible = cullableVisible(c, camX, camZ, fogFar);
       }
+      for (const h of hideables) {
+        const dx = camX - h.x, dz = camZ - h.z;
+        if (Math.hypot(dx, dz) - h.cull >= fogFar) {
+          h.group.visible = false; // fully fogged: drop it (shadow is out of range too)
+          continue;
+        }
+        h.group.visible = true;
+        // hide from the camera (camera standing inside, below the roof) while
+        // still casting a shadow: disable colour + depth writes, not the object
+        const hide = camY < h.topY && cameraInsideFootprint(h, camX, camZ);
+        if (hide !== h.hidden) {
+          h.hidden = hide;
+          for (const m of h.mats) {
+            m.mat.colorWrite = !hide;
+            m.mat.depthWrite = hide ? false : m.depthWrite;
+          }
+        }
+      }
     },
   };
+}
+
+/** One material we flip on/off, remembering its original depth-write state. */
+interface ToggleMat { mat: THREE.Material; depthWrite: boolean }
+
+// A village structure that the camera ghosts through and the renderer hides
+// whenever the camera stands inside its footprint (below `topY`). Either a
+// circle (`r`) or an OBB (`hw`/`hd`/`rot`), matching the collider it mirrors.
+// "Hidden" disables colour/depth writes rather than `visible = false`, so the
+// structure stays in the shadow pass and keeps casting its shadow.
+interface Hideable {
+  group: THREE.Group;
+  mats: ToggleMat[]; // cloned per-structure so the toggle is local
+  hidden: boolean;
+  x: number; // footprint centre (world XZ)
+  z: number;
+  topY: number; // roof height; a camera above this never hides the structure
+  cull: number; // bounding radius for the fog-far cull
+  r?: number; // circle footprint
+  hw?: number; // OBB half-extents + yaw
+  hd?: number;
+  rot?: number;
+}
+
+type Footprint = Omit<Hideable, 'group' | 'mats' | 'hidden'>;
+
+function circleFootprint(x: number, z: number, r: number, topY: number): Footprint {
+  return { x, z, r, topY, cull: r };
+}
+
+function obbFootprint(x: number, z: number, hw: number, hd: number, rot: number, topY: number): Footprint {
+  return { x, z, hw, hd, rot, topY, cull: Math.hypot(hw, hd) };
+}
+
+function cameraInsideFootprint(h: Hideable, camX: number, camZ: number): boolean {
+  const dx = camX - h.x, dz = camZ - h.z;
+  if (h.r !== undefined) return dx * dx + dz * dz < h.r * h.r;
+  // world -> OBB local (three.js rotation.y convention), mirrors colliders.rotY
+  const c = Math.cos(h.rot!), s = Math.sin(h.rot!);
+  const lx = dx * c - dz * s;
+  const lz = dx * s + dz * c;
+  return Math.abs(lx) < h.hw! && Math.abs(lz) < h.hd!;
 }
 
 interface PropCullable {

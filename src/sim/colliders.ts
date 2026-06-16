@@ -16,6 +16,12 @@ export interface CircleCollider {
   r: number;
   /** Absolute world-space top used by camera occlusion; movement ignores it. */
   cameraTopY?: number;
+  /**
+   * When true the chase cam ray passes straight through this collider (no
+   * pull-in). Movement still collides. Used for village structures, which the
+   * renderer hides while the camera sits inside them instead of zooming in.
+   */
+  camGhost?: boolean;
 }
 
 export interface ObbCollider {
@@ -27,6 +33,8 @@ export interface ObbCollider {
   rot: number; // yaw, three.js rotation.y convention
   /** Absolute world-space top used by camera occlusion; movement ignores it. */
   cameraTopY?: number;
+  /** See {@link CircleCollider.camGhost}. */
+  camGhost?: boolean;
 }
 
 export type Collider = CircleCollider | ObbCollider;
@@ -48,28 +56,32 @@ function rotY(lx: number, lz: number, rot: number): { x: number; z: number } {
 function staticWorldColliders(seed: number): Collider[] {
   const out: Collider[] = [];
 
+  // Village structures (buildings, wells, stalls, mine mounds, dock huts,
+  // tents) are `camGhost`: they keep blocking movement but the chase cam no
+  // longer pulls in for them — the renderer hides whichever one the camera is
+  // standing inside instead.
   for (const b of PROPS.buildings) {
     const height = b.kind === 'chapel' ? 10.8 : b.kind === 'inn' ? 7.8 : 8.0;
-    out.push({ type: 'obb', x: b.x, z: b.z, hw: b.w / 2, hd: b.d / 2, rot: b.rot, cameraTopY: topY(seed, b.x, b.z, height) });
+    out.push({ type: 'obb', x: b.x, z: b.z, hw: b.w / 2, hd: b.d / 2, rot: b.rot, cameraTopY: topY(seed, b.x, b.z, height), camGhost: true });
   }
-  for (const w of PROPS.wells) out.push({ type: 'circle', x: w.x, z: w.z, r: w.r, cameraTopY: topY(seed, w.x, w.z, 3.7) });
-  for (const s of PROPS.stalls) out.push({ type: 'circle', x: s.x, z: s.z, r: s.r, cameraTopY: topY(seed, s.x, s.z, 3.1) });
+  for (const w of PROPS.wells) out.push({ type: 'circle', x: w.x, z: w.z, r: w.r, cameraTopY: topY(seed, w.x, w.z, 3.7), camGhost: true });
+  for (const s of PROPS.stalls) out.push({ type: 'circle', x: s.x, z: s.z, r: s.r, cameraTopY: topY(seed, s.x, s.z, 3.1), camGhost: true });
 
   // mines: mound behind the timber portal
   for (const m of PROPS.mines) {
     const mound = rotY(0, -3.4, m.rot);
     const x = m.x + mound.x, z = m.z + mound.z;
-    out.push({ type: 'circle', x, z, r: 5, cameraTopY: topY(seed, x, z, 5.2) });
+    out.push({ type: 'circle', x, z, r: 5, cameraTopY: topY(seed, x, z, 5.2), camGhost: true });
   }
 
   // dock huts
   for (const d of PROPS.docks) {
     const hut = rotY(d.hutLocal.x, d.hutLocal.z, d.rot);
     const x = d.x + hut.x, z = d.z + hut.z;
-    out.push({ type: 'obb', x, z, hw: d.hutLocal.hw, hd: d.hutLocal.hd, rot: d.rot, cameraTopY: topY(seed, x, z, 2.9) });
+    out.push({ type: 'obb', x, z, hw: d.hutLocal.hw, hd: d.hutLocal.hd, rot: d.rot, cameraTopY: topY(seed, x, z, 2.9), camGhost: true });
   }
 
-  for (const t of PROPS.tents) out.push({ type: 'circle', x: t.x, z: t.z, r: 1.5 * t.scale, cameraTopY: topY(seed, t.x, t.z, 3.4 * t.scale) });
+  for (const t of PROPS.tents) out.push({ type: 'circle', x: t.x, z: t.z, r: 1.5 * t.scale, cameraTopY: topY(seed, t.x, t.z, 3.4 * t.scale), camGhost: true });
   for (const [x, z] of PROPS.crates) out.push({ type: 'circle', x, z, r: 0.65, cameraTopY: topY(seed, x, z, 1.35) });
   for (const [x, z] of PROPS.campfires) out.push({ type: 'circle', x, z, r: 0.85, cameraTopY: topY(seed, x, z, 1.45) });
   for (const [x, z] of PROPS.mudHuts) out.push({ type: 'circle', x, z, r: 1.1, cameraTopY: topY(seed, x, z, 12.5) });
@@ -244,7 +256,8 @@ export function isBlocked(seed: number, x: number, z: number, r = 0.5): boolean 
 // you collide with). Returns the fraction of the a->b segment the camera may
 // travel before the first occluder (1 = unobstructed). Open-world colliders
 // carry precomputed `cameraTopY` values, so low props like campfires only block
-// low rays while buildings, tents and trunks still pull the camera in.
+// low rays while trees and trunks still pull the camera in. Village structures
+// are flagged `camGhost` and skipped entirely (the renderer hides them instead).
 
 // First entry param t along a->b for a circle (radius already padded).
 // Infinity = no hit; we also bail when `a` is already inside (never slam the
@@ -300,6 +313,7 @@ function sweepColliders(
 ): number {
   let best = 1;
   for (const c of list) {
+    if (c.camGhost) continue; // chase cam passes through; renderer hides it instead
     const t = c.type === 'circle'
       ? rayCircleEntry(ax, az, bx, bz, c.x, c.z, c.r + pad)
       : rayObbEntry(c, ax, az, bx, bz, pad);
