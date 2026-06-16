@@ -42,6 +42,8 @@ export class MobileControls {
   private mq: MediaQueryList | null = null;
 
   private root = document.getElementById('mobile-controls') as HTMLElement | null;
+  private moreButton = document.getElementById('mobile-more') as HTMLElement | null;
+  private moreScrim = document.getElementById('mobile-more-scrim') as HTMLElement | null;
   private moveJoystick = document.getElementById('mobile-move-joystick') as HTMLElement | null;
   private moveStick = document.getElementById('mobile-move-stick') as HTMLElement | null;
   private cameraJoystick = document.getElementById('mobile-camera-joystick') as HTMLElement | null;
@@ -77,18 +79,32 @@ export class MobileControls {
     this.bindButton('mobile-talents', () => this.callbacks.onTalents());
     this.bindButton('mobile-meters', () => this.callbacks.onMeters());
     this.bindButton('mobile-map', () => this.callbacks.onMap());
-    this.bindButton('mobile-more', () => {
-      this.root?.classList.toggle('expanded');
-      document.body.classList.toggle('mobile-more-open', this.root?.classList.contains('expanded') ?? false);
+    this.bindButton('mobile-more', () => this.setMoreOpen(!this.isMoreOpen()));
+
+    // Tap anywhere outside the tray to dismiss it, like a standard mobile menu.
+    this.moreScrim?.addEventListener('pointerdown', (e) => {
+      if (!this.active) return;
+      e.preventDefault();
+      this.setMoreOpen(false);
     });
+  }
+
+  private isMoreOpen(): boolean {
+    return this.root?.classList.contains('expanded') ?? false;
+  }
+
+  private setMoreOpen(open: boolean): void {
+    this.root?.classList.toggle('expanded', open);
+    document.body.classList.toggle('mobile-more-open', open);
+    this.moreButton?.setAttribute('aria-pressed', String(open));
   }
 
   private setActive(active: boolean): void {
     this.active = active;
     document.body.classList.toggle('mobile-touch', active);
     if (!active) {
-      this.root?.classList.remove('expanded');
-      document.body.classList.remove('mobile-more-open', 'mobile-chat-open');
+      this.setMoreOpen(false);
+      document.body.classList.remove('mobile-chat-open');
       this.releaseMove();
       this.releaseCamera();
     } else {
@@ -103,8 +119,7 @@ export class MobileControls {
       e.preventDefault();
       cb();
       if (button.closest('#mobile-extra-controls')) {
-        this.root?.classList.remove('expanded');
-        document.body.classList.remove('mobile-more-open');
+        this.setMoreOpen(false);
       }
     });
   }
