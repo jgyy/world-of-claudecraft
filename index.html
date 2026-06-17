@@ -3360,6 +3360,28 @@
   #rotate-device { display: none; }
   body.mobile-touch #game-canvas { touch-action: none; }
   body.mobile-touch #ui { touch-action: none; }
+  body.mobile-touch.game-active,
+  body.mobile-touch.game-active #ui,
+  body.mobile-touch.game-active #nameplates,
+  body.mobile-touch.game-active #mobile-controls,
+  body.mobile-touch.game-active #mobile-controls *,
+  body.mobile-touch.game-active #bottom-bar,
+  body.mobile-touch.game-active #bottom-bar *,
+  body.mobile-touch.game-active .action-btn,
+  body.mobile-touch.game-active .mobile-btn {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+  body.mobile-touch.game-active input,
+  body.mobile-touch.game-active textarea,
+  body.mobile-touch.game-active select,
+  body.mobile-touch.game-active [contenteditable=""],
+  body.mobile-touch.game-active [contenteditable="true"] {
+    user-select: text;
+    -webkit-user-select: text;
+    -webkit-touch-callout: default;
+  }
   body.mobile-touch.game-active #mobile-controls { position: absolute; inset: 0; display: block; pointer-events: none; z-index: 60; opacity: var(--touch-opacity, 1); }
   body.mobile-touch.game-active #ui,
   body.mobile-touch.game-active #nameplates,

@@ -53,6 +53,13 @@ describe('client HTML shell', () => {
     expect(html).toContain('body.mobile-touch.game-active *::-webkit-scrollbar:horizontal {\n    height: 0;\n    display: none;');
   });
 
+  it('suppresses mobile in-game text selection and touch callouts without blocking inputs', () => {
+    expect(html).toContain('body.mobile-touch.game-active #mobile-controls *,\n  body.mobile-touch.game-active #bottom-bar,');
+    expect(html).toContain('body.mobile-touch.game-active .mobile-btn {\n    user-select: none;\n    -webkit-user-select: none;\n    -webkit-touch-callout: none;');
+    expect(html).toContain('body.mobile-touch.game-active input,\n  body.mobile-touch.game-active textarea,\n  body.mobile-touch.game-active select,');
+    expect(html).toContain('-webkit-user-select: text;\n    -webkit-touch-callout: default;');
+  });
+
   it('hides only the in-game community donate affordance on mobile', () => {
     expect(html).toContain('<a class="donate-cta"');
     expect(html).toContain('<a class="community-link donate"');
