@@ -977,6 +977,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   power_word_shield: r('holy', 'silverWhite', ['shield'], ['sparkle', 'glow']),
   renew: r('holy', 'leafGreen', [{ p: 'heart', pal: 'leafGreen' }], ['sparkle']),
   mind_blast: r('shadow', 'shadowPurple', ['eye'], ['arcs', 'glow']),
+  inner_fire: r('holy', 'holyGold', ['shield', { p: 'flame', ...TR }], ['glow']),
   // shaman
   lightning_bolt: r('storm', 'sky', ['lightning'], ['glow']),
   rockbiter_weapon: r('earth', 'earthBrown', ['fist'], ['crack']),

@@ -117,7 +117,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     startWeapon: 'gnarled_staff',
     startChest: 'apprentice_robe',
     ranged: { min: 3, max: 6, speed: 1.8, maxRange: 30, minRange: 0, wand: true, school: 'holy' },
-    abilities: ['smite', 'lesser_heal', 'power_word_fortitude', 'shadow_word_pain', 'power_word_shield', 'renew', 'mind_blast', 'heal', 'mind_flay', 'flash_heal'],
+    abilities: ['smite', 'lesser_heal', 'power_word_fortitude', 'shadow_word_pain', 'power_word_shield', 'renew', 'mind_blast', 'inner_fire', 'heal', 'mind_flay', 'flash_heal'],
     color: 0xfffff0,
   },
   shaman: {
@@ -833,6 +833,16 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { rank: 3, level: 20, cost: 95, effects: [{ type: 'directDamage', min: 86, max: 94 }] },
     ],
     description: 'Blasts the target\'s mind for $d Shadow damage.',
+  },
+  inner_fire: {
+    id: 'inner_fire', name: 'Inner Fire', class: 'priest', learnLevel: 12,
+    cost: 35, castTime: 0, cooldown: 0, range: 0, school: 'holy',
+    requiresTarget: false,
+    effects: [{ type: 'selfBuff', kind: 'buff_armor', value: 60, duration: 600 }],
+    ranks: [
+      { rank: 2, level: 20, cost: 55, effects: [{ type: 'selfBuff', kind: 'buff_armor', value: 100, duration: 600 }] },
+    ],
+    description: 'Surrounds you with holy light, increasing armor by 60 for 10 min.',
   },
   heal: {
     id: 'heal', name: 'Heal', class: 'priest', learnLevel: 14,

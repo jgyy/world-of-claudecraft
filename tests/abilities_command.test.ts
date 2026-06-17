@@ -45,6 +45,15 @@ describe('/abilities command', () => {
     expect(text).toContain('Charge (Rank 1)');
   });
 
+  it('teaches the priest Inner Fire at level 12 and ranks it up at 20', () => {
+    expect(CLASSES.priest.abilities).toContain('inner_fire');
+    expect(ABILITIES.inner_fire.learnLevel).toBe(12);
+    expect(abilitiesKnownAt('priest', 11).map((a) => a.def.id)).not.toContain('inner_fire');
+    const at12 = abilitiesKnownAt('priest', 12).find((a) => a.def.id === 'inner_fire');
+    expect(at12?.rank).toBe(1);
+    expect(abilitiesKnownAt('priest', 20).find((a) => a.def.id === 'inner_fire')?.rank).toBe(2);
+  });
+
   it('accepts the /spells and /spellbook aliases', () => {
     const sim = makeWorld();
     const a = sim.addPlayer('mage', 'Bet');
