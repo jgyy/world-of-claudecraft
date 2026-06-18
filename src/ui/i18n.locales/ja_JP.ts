@@ -2201,4 +2201,12 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   "entities.mobs.sloomtooth_the_drowned.name": "溺れし者スルームトゥース",
   "entities.mobs.voskar_emberwing.name": "燃え翼のヴォスカル",
   "entities.mobs.wraithbinder_maldrec.name": "魂縛りマルドレク",
+  "entities.items.glade_pelt.name": "林間の毛皮",
+  "entities.items.soft_down.name": "柔らかな綿毛",
+  "entities.items.amber_hide.name": "琥珀色の革",
+  "entities.items.stag_antler.name": "枝分かれした角",
+  "entities.items.brightwood_venison.name": "ブライトウッドの鹿肉",
+  "entities.items.bramblehide_jerkin.name": "茨革のジャーキン",
+  "entities.items.monarch_crown_helm.name": "君主の王冠",
+  "entities.items.monarch_heart.name": "君主の心臓",
 };

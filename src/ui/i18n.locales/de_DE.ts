@@ -2201,4 +2201,12 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   "entities.mobs.sloomtooth_the_drowned.name": "Sloomzahn der Ertrunkene",
   "entities.mobs.voskar_emberwing.name": "Voskar Glutschwinge",
   "entities.mobs.wraithbinder_maldrec.name": "Maldrec der Geisterbinder",
+  "entities.items.glade_pelt.name": "Lichtungsfell",
+  "entities.items.soft_down.name": "Weicher Daunenbüschel",
+  "entities.items.amber_hide.name": "Bernsteinhaut",
+  "entities.items.stag_antler.name": "Verzweigtes Geweih",
+  "entities.items.brightwood_venison.name": "Hellholz-Wildbret",
+  "entities.items.bramblehide_jerkin.name": "Dornhaut-Wams",
+  "entities.items.monarch_crown_helm.name": "Krone des Monarchen",
+  "entities.items.monarch_heart.name": "Das Herz des Monarchen",
 };

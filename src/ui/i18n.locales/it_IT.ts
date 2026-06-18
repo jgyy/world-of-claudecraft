@@ -2201,4 +2201,12 @@ export const it_IT: Partial<Record<TranslationKey, string>> = {
   "entities.mobs.sloomtooth_the_drowned.name": "Sloomtooth l'Annegato",
   "entities.mobs.voskar_emberwing.name": "Voskar Aladibrace",
   "entities.mobs.wraithbinder_maldrec.name": "Maldrec il Legaspettri",
+  "entities.items.glade_pelt.name": "Pelliccia della radura",
+  "entities.items.soft_down.name": "Ciuffo di piumino morbido",
+  "entities.items.amber_hide.name": "Pelle d'ambra",
+  "entities.items.stag_antler.name": "Corno ramificato",
+  "entities.items.brightwood_venison.name": "Selvaggina di Brightwood",
+  "entities.items.bramblehide_jerkin.name": "Giubbotto di pelle di rovo",
+  "entities.items.monarch_crown_helm.name": "Corona del Monarca",
+  "entities.items.monarch_heart.name": "Il Cuore del Monarca",
 };

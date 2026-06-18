@@ -2201,4 +2201,12 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   "entities.mobs.sloomtooth_the_drowned.name": "Слумтус Утопший",
   "entities.mobs.voskar_emberwing.name": "Воскар Жарокрыл",
   "entities.mobs.wraithbinder_maldrec.name": "Малдрек Пленитель призраков",
+  "entities.items.glade_pelt.name": "Шкура поляны",
+  "entities.items.soft_down.name": "Пучок мягкого пуха",
+  "entities.items.amber_hide.name": "Янтарная шкура",
+  "entities.items.stag_antler.name": "Ветвистый рог",
+  "entities.items.brightwood_venison.name": "Оленина Брайтвуда",
+  "entities.items.bramblehide_jerkin.name": "Колет из терновой шкуры",
+  "entities.items.monarch_crown_helm.name": "Корона Монарха",
+  "entities.items.monarch_heart.name": "Сердце Монарха",
 };

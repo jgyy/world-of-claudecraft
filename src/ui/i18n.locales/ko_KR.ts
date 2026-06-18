@@ -2201,4 +2201,12 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   "entities.mobs.sloomtooth_the_drowned.name": "익사한 슬룸투스",
   "entities.mobs.voskar_emberwing.name": "잿불날개 보스카르",
   "entities.mobs.wraithbinder_maldrec.name": "영혼결속자 말드렉",
+  "entities.items.glade_pelt.name": "숲속 가죽",
+  "entities.items.soft_down.name": "부드러운 솜털 뭉치",
+  "entities.items.amber_hide.name": "호박색 가죽",
+  "entities.items.stag_antler.name": "가지진 사슴뿔",
+  "entities.items.brightwood_venison.name": "브라이트우드 사슴고기",
+  "entities.items.bramblehide_jerkin.name": "가시가죽 저킨",
+  "entities.items.monarch_crown_helm.name": "군주의 왕관",
+  "entities.items.monarch_heart.name": "군주의 심장",
 };

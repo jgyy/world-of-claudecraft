@@ -7754,6 +7754,7 @@ const ITEM_ENTITY_IDS = [
   "ogre_toe_ring", "inert_storm_shard", "frayed_prayer_beads", "cracked_wyrm_scale",
   "conjured_bread", "conjured_bread2", "conjured_bread3",
   "roadwardens_helm", "wayfarers_hood", "acolytes_circlet", "reinforced_pauldrons", "embroidered_mantle", "sturdy_belt", "silk_sash", "roughspun_gloves", "bristlehide_spaulders", "sableweb_cord", "gorraks_cleaver", "mossy_handwraps",
+  "glade_pelt", "soft_down", "amber_hide", "stag_antler", "brightwood_venison", "bramblehide_jerkin", "monarch_crown_helm", "monarch_heart",
 ] as const;
 
 type ItemEntityId = typeof ITEM_ENTITY_IDS[number];
@@ -7802,7 +7803,8 @@ const itemNamesEn = {
       "Cragwalker Boots", "Windguard Leggings", "Ogre Toe Ring", "Inert Storm Shard", "Frayed Prayer Beads", "Cracked Wyrm Scale",
           "Conjured Bread", "Conjured Pumpernickel", "Conjured Sweet Roll",
           "Roadwarden's Helm", "Wayfarer's Hood", "Acolyte's Circlet", "Reinforced Pauldrons", "Embroidered Mantle", "Sturdy Traveler's Belt", "Woven Silk Sash", "Roughspun Gloves", "Bristlehide Spaulders", "Sableweb Cord", "Gorrak's Cleaver", "Mossgrown Handwraps",
-    ]),
+          "Glade Pelt", "Soft Down Tuft", "Amber Hide", "Branching Antler", "Brightwood Venison", "Bramblehide Jerkin", "Monarch's Crown", "The Monarch's Heart",
+]),
   },
 };
 
@@ -7837,7 +7839,8 @@ export const itemNames = {
         "Botas Caminarrocas", "Leotardos Guardavientos", "Anillo de dedo de ogro", "Fragmento de tormenta inerte", "Cuentas de oración deshilachadas", "Escama de wyrm agrietada",
             "Pan invocado", "Pumpernickel invocado", "Bollo dulce invocado",
             "Yelmo del guardián del camino", "Capucha del viajero", "Diadema del acólito", "Hombreras reforzadas", "Manto bordado", "Cinturón resistente del viajero", "Faja de seda tejida", "Guantes de tela basta", "Hombreras de piel de cerdas", "Cordón de Sableweb", "Hendedor de Gorrak", "Envolturas cubiertas de musgo",
-    ]),
+            "Piel del claro", "Mechón de plumón suave", "Piel ambarina", "Asta ramificada", "Venado de Brightwood", "Jubón de piel de zarza", "Corona del Monarca", "El Corazón del Monarca",
+]),
     },
   },
   es_ES: {} as typeof itemNamesEn,
@@ -7870,7 +7873,8 @@ export const itemNames = {
         "Bottes Marchecrag", "Jambières Gardevent", "Anneau d'orteil ogre", "Éclat de tempête inerte", "Perles de prière effilochées", "Écaille de wyrm fendue",
             "Pain invoqué", "Pumpernickel invoqué", "Brioche invoquée",
             "Heaume du gardien des routes", "Capuche du voyageur", "Diadème de l'acolyte", "Spallières renforcées", "Manteau brodé", "Ceinture solide du voyageur", "Écharpe de soie tissée", "Gants de toile grossière", "Spallières en cuir hérissé", "Cordon de Sableweb", "Fendoir de Gorrak", "Mitaines moussues",
-    ]),
+            "Fourrure de clairière", "Touffe de duvet doux", "Peau d'ambre", "Andouiller ramifié", "Venaison de Brightwood", "Justaucorps en peau de ronces", "Couronne du Monarque", "Le Cœur du Monarque",
+]),
     },
   },
   fr_CA: {} as typeof itemNamesEn,
@@ -7904,7 +7908,8 @@ export const itemNames = {
         "Stivali Camminarocce", "Gambiere Guardavento", "Anello da dito d'ogre", "Scheggia di tempesta inerte", "Grani di preghiera sfilacciati", "Scaglia di wyrm incrinata",
             "Pane Evocato", "Pumpernickel Evocato", "Focaccia Dolce Evocata",
             "Elmo del guardiano della strada", "Cappuccio del viandante", "Cerchietto dell'accolito", "Spallacci rinforzati", "Mantello ricamato", "Cintura robusta del viandante", "Fascia di seta intrecciata", "Guanti di tela grezza", "Spallacci di pelle setolosa", "Cordone di Sableweb", "Mannaia di Gorrak", "Manopole muschiose",
-    ]),
+            "Pelliccia della radura", "Ciuffo di piumino morbido", "Pelle d'ambra", "Corno ramificato", "Selvaggina di Brightwood", "Giubbotto di pelle di rovo", "Corona del Monarca", "Il Cuore del Monarca",
+]),
     },
   },
   de_DE: {
@@ -7936,7 +7941,8 @@ export const itemNames = {
         "Felswandererstiefel", "Windwachtgamaschen", "Ogerzehenring", "Träger Sturmsplitter", "Ausgefranste Gebetsperlen", "Gesprungene Wyrmschuppe",
             "Herbeigezaubertes Brot", "Herbeigezaubertes Pumpernickel", "Herbeigezauberte Süße Schnecke",
             "Helm des Wegwächters", "Kapuze des Wanderers", "Reif des Akolythen", "Verstärkte Schulterstücke", "Bestickter Schultermantel", "Stabiler Reisegürtel", "Gewebte Seidenschärpe", "Grobe Handschuhe", "Borstenhaut-Schulterstücke", "Sableweb-Schnur", "Gorraks Hackbeil", "Bemooste Handwickel",
-    ]),
+            "Lichtungsfell", "Weicher Daunenbüschel", "Bernsteinhaut", "Verzweigtes Geweih", "Hellholz-Wildbret", "Dornhaut-Wams", "Krone des Monarchen", "Das Herz des Monarchen",
+]),
     },
   },
   zh_CN: {
@@ -7968,7 +7974,8 @@ export const itemNames = {
         "岩行者长靴", "风卫护腿", "食人魔趾环", "惰性风暴碎片", "磨损的祈祷珠", "裂开的龙鳞",
             "造出的面包", "造出的黑麦面包", "造出的甜面包卷",
             "路卫头盔", "旅人兜帽", "见习者头环", "强化肩甲", "绣纹披肩", "坚固旅行腰带", "编织丝绸腰带", "粗纺手套", "鬃皮肩甲", "黑网腰绳", "戈拉克的劈刀", "苔藓护手",
-    ]),
+            "林间兽皮", "柔软绒毛", "琥珀兽皮", "分叉鹿角", "明木鹿肉", "棘皮皮衣", "君主之冠", "君主之心",
+]),
     },
   },
   zh_TW: {
@@ -8000,7 +8007,8 @@ export const itemNames = {
         "岩行者長靴", "風衛護腿", "巨魔趾環", "惰性風暴碎片", "磨損的祈禱珠", "裂開的龍鱗",
             "造出的麵包", "造出的黑麥麵包", "造出的甜麵包捲",
             "路衛頭盔", "旅人兜帽", "見習者頭環", "強化肩甲", "繡紋披肩", "堅固旅行腰帶", "編織絲綢腰帶", "粗紡手套", "鬃皮肩甲", "黑網腰繩", "戈拉克的劈刀", "苔蘚護手",
-    ]),
+            "林間獸皮", "柔軟絨毛", "琥珀獸皮", "分岔鹿角", "明木鹿肉", "棘皮皮衣", "君主之冠", "君主之心",
+]),
     },
   },
   ko_KR: {
@@ -8032,7 +8040,8 @@ export const itemNames = {
         "바위걸음 장화", "바람수호 다리보호구", "오우거 발가락 반지", "비활성 폭풍 파편", "해진 기도 구슬", "갈라진 고룡 비늘",
             "창조된 빵", "창조된 호밀빵", "창조된 단빵",
             "도로 수호자의 투구", "방랑자의 두건", "수습 사제의 머리띠", "강화된 어깨보호구", "자수 망토", "튼튼한 여행자의 허리띠", "직조 비단 띠", "거친 장갑", "뻣뻣한 가죽 어깨보호구", "검은거미줄 끈", "고라크의 고기칼", "이끼 낀 손싸개",
-    ]),
+            "숲속 가죽", "부드러운 솜털 뭉치", "호박색 가죽", "가지진 사슴뿔", "브라이트우드 사슴고기", "가시가죽 저킨", "군주의 왕관", "군주의 심장",
+]),
     },
   },
   ja_JP: {
@@ -8064,7 +8073,8 @@ export const itemNames = {
         "岩歩きのブーツ", "風守りのレギンス", "オーガの足指輪", "不活性の嵐片", "ほつれた祈りの数珠", "割れたワームの鱗",
             "召喚されたパン", "召喚されたライ麦パン", "召喚された菓子パン",
             "道守りの兜", "旅人のフード", "見習いのサークレット", "強化された肩当て", "刺繍のマント", "丈夫な旅人のベルト", "織絹のサッシュ", "粗布の手袋", "剛毛革の肩当て", "セーブルウェブの紐", "ゴラクのクリーバー", "苔むした手甲",
-    ]),
+            "林間の毛皮", "柔らかな綿毛", "琥珀色の革", "枝分かれした角", "ブライトウッドの鹿肉", "茨革のジャーキン", "君主の王冠", "君主の心臓",
+]),
     },
   },
   pt_BR: {
@@ -8096,7 +8106,8 @@ export const itemNames = {
         "Botas Caminhapedra", "Perneiras Guardavento", "Anel de dedo de ogro", "Estilhaço de tempestade inerte", "Contas de oração desfiadas", "Escama de wyrm rachada",
             "Pão Conjurado", "Pumpernickel Conjurado", "Pão Doce Conjurado",
             "Elmo do guardião da estrada", "Capuz do viajante", "Diadema do acólito", "Ombreiras reforçadas", "Manto bordado", "Cinto resistente do viajante", "Faixa de seda tecida", "Luvas de tecido grosseiro", "Ombreiras de couro eriçado", "Cordão de Sableweb", "Cutelo de Gorrak", "Manoplas musgosas",
-    ]),
+            "Pele da clareira", "Tufo de penugem macia", "Couro âmbar", "Galhada ramificada", "Carne de veado de Brightwood", "Gibão de couro de sarça", "Coroa do Monarca", "O Coração do Monarca",
+]),
     },
   },
   ru_RU: {
@@ -8128,7 +8139,8 @@ export const itemNames = {
         "Сапоги Камнехода", "Поножи Ветростража", "Кольцо на палец огра", "Инертный осколок бури", "Истрепанные молитвенные четки", "Треснувшая чешуя вирма",
             "Сотворённый хлеб", "Сотворённый пумперникель", "Сотворённая сладкая булочка",
             "Шлем стража дорог", "Капюшон странника", "Венец послушника", "Укреплённые наплечники", "Расшитая мантия", "Прочный пояс путника", "Тканый шёлковый кушак", "Грубые перчатки", "Наплечники из щетинистой шкуры", "Шнур Чёрной паутины", "Тесак Горрака", "Замшелые обмотки",
-    ]),
+            "Шкура поляны", "Пучок мягкого пуха", "Янтарная шкура", "Ветвистый рог", "Оленина Брайтвуда", "Колет из терновой шкуры", "Корона Монарха", "Сердце Монарха",
+]),
     },
   },
 };

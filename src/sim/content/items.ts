@@ -393,6 +393,21 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   greyjaw_fang: { id: 'greyjaw_fang', name: "Old Greyjaw's Fang", kind: 'quest', sellValue: 0, questId: 'q_greyjaw' },
   weathered_ledger_page: { id: 'weathered_ledger_page', name: 'Weathered Ledger Page', kind: 'quest', sellValue: 0, questId: 'q_names_of_the_dead' },
   morthen_grimoire: { id: 'morthen_grimoire', name: "Morthen's Grimoire", kind: 'quest', sellValue: 0, questId: 'q_gravecallers_trail' },
+  monarch_heart: { id: 'monarch_heart', name: "The Monarch's Heart", kind: 'quest', sellValue: 0, questId: 'q_brightwood_monarch' },
+  // --- Brightwood Glade wildlife pack ---
+  glade_pelt: { id: 'glade_pelt', name: 'Glade Pelt', kind: 'junk', quality: 'poor', sellValue: 6 },
+  soft_down: { id: 'soft_down', name: 'Soft Down Tuft', kind: 'junk', quality: 'poor', sellValue: 4 },
+  amber_hide: { id: 'amber_hide', name: 'Amber Hide', kind: 'junk', quality: 'poor', sellValue: 9 },
+  stag_antler: { id: 'stag_antler', name: 'Branching Antler', kind: 'junk', quality: 'poor', sellValue: 8 },
+  brightwood_venison: { id: 'brightwood_venison', name: 'Brightwood Venison', kind: 'food', quality: 'common', foodHp: 92, sellValue: 4, buyValue: 35 },
+  bramblehide_jerkin: {
+    id: 'bramblehide_jerkin', name: 'Bramblehide Jerkin', kind: 'armor', slot: 'chest', quality: 'uncommon',
+    stats: { armor: 40, sta: 2, agi: 1 }, sellValue: 120,
+  },
+  monarch_crown_helm: {
+    id: 'monarch_crown_helm', name: "Monarch's Crown", kind: 'armor', slot: 'helmet', quality: 'rare',
+    stats: { armor: 46, sta: 3, agi: 2, str: 1 }, sellValue: 320,
+  },
   // --- junk (gray) ---
   wolf_fang: { id: 'wolf_fang', name: 'Cracked Wolf Fang', kind: 'junk', quality: 'poor', sellValue: 4 },
   bandit_bandana: { id: 'bandit_bandana', name: 'Red Bandana', kind: 'junk', quality: 'poor', sellValue: 6 },

@@ -29,6 +29,7 @@ export const ZONE1_ZONE: ZoneDef = {
     { x: -84, z: -64, label: 'Copper Dig' },
     { x: 76, z: -76, label: 'Bandit Camp' },
     { x: 80, z: 80, label: 'Fallen Chapel' },
+    { x: 40, z: 140, label: 'Brightwood Glade' },
   ],
   welcome: 'Find Marshal Redbrook in town — he has work for you.',
   welcomeQuestId: 'q_wolves',
@@ -297,6 +298,143 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     ],
     scale: 1.22, color: 0x6f7f8f,
   },
+  // -------------------------------------------------------------------------
+  // Brightwood Glade — a sunlit wildlife grove in the north of the Vale. Gentle
+  // beasts for low-level hunters to tame and cull, watched over by a lone ranger,
+  // and crowned by a rare great stag. All family:'beast' so hunters can tame them.
+  // -------------------------------------------------------------------------
+  brightwood_hare: {
+    id: 'brightwood_hare', name: 'Brightwood Hare', minLevel: 1, maxLevel: 2, family: 'beast',
+    hpBase: 18, hpPerLevel: 8, dmgBase: 2, dmgPerLevel: 1.2, attackSpeed: 1.8,
+    armorPerLevel: 6, moveSpeed: 9.5, aggroRadius: 0,
+    loot: [
+      { copper: 4, chance: 1 },
+      { itemId: 'soft_down', chance: 0.45 },
+    ],
+    scale: 0.45, color: 0xc8a972,
+  },
+  glade_fox: {
+    id: 'glade_fox', name: 'Glade Fox', minLevel: 2, maxLevel: 3, family: 'beast',
+    hpBase: 26, hpPerLevel: 12, dmgBase: 3, dmgPerLevel: 1.5, attackSpeed: 1.7,
+    armorPerLevel: 8, moveSpeed: 9, aggroRadius: 8,
+    loot: [
+      { copper: 8, chance: 1 },
+      { itemId: 'glade_pelt', chance: 0.5 },
+    ],
+    scale: 0.6, color: 0xd2691e,
+  },
+  spotted_fawn: {
+    id: 'spotted_fawn', name: 'Spotted Fawn', minLevel: 2, maxLevel: 3, family: 'beast',
+    hpBase: 24, hpPerLevel: 11, dmgBase: 2, dmgPerLevel: 1.3, attackSpeed: 2.0,
+    armorPerLevel: 7, moveSpeed: 8.5, aggroRadius: 0,
+    loot: [
+      { copper: 6, chance: 1 },
+      { itemId: 'glade_pelt', chance: 0.4 },
+      { itemId: 'brightwood_venison', chance: 0.3 },
+    ],
+    scale: 0.65, color: 0xb5895f,
+  },
+  meadow_crane: {
+    id: 'meadow_crane', name: 'Meadow Crane', minLevel: 3, maxLevel: 4, family: 'beast',
+    hpBase: 34, hpPerLevel: 14, dmgBase: 4, dmgPerLevel: 1.6, attackSpeed: 1.9,
+    armorPerLevel: 9, moveSpeed: 8.5, aggroRadius: 9,
+    loot: [
+      { copper: 10, chance: 1 },
+      { itemId: 'soft_down', chance: 0.55 },
+    ],
+    scale: 0.8, color: 0xeaeaea,
+  },
+  thornpelt_badger: {
+    id: 'thornpelt_badger', name: 'Thornpelt Badger', minLevel: 3, maxLevel: 4, family: 'beast',
+    hpBase: 44, hpPerLevel: 16, dmgBase: 5, dmgPerLevel: 1.8, attackSpeed: 2.1,
+    armorPerLevel: 14, moveSpeed: 7, aggroRadius: 10,
+    // A stubborn digger — its coarse coat pricks anyone who melees it.
+    thorns: { value: 3, name: 'Coarse Pelt' },
+    loot: [
+      { copper: 12, chance: 1 },
+      { itemId: 'glade_pelt', chance: 0.5 },
+    ],
+    scale: 0.7, color: 0x5d5d5d,
+  },
+  dawnmane_doe: {
+    id: 'dawnmane_doe', name: 'Dawnmane Doe', minLevel: 3, maxLevel: 4, family: 'beast',
+    hpBase: 40, hpPerLevel: 16, dmgBase: 4, dmgPerLevel: 1.7, attackSpeed: 2.0,
+    armorPerLevel: 10, moveSpeed: 8.5, aggroRadius: 8,
+    loot: [
+      { copper: 12, chance: 1 },
+      { itemId: 'glade_pelt', chance: 0.5 },
+      { itemId: 'brightwood_venison', chance: 0.4 },
+    ],
+    scale: 0.85, color: 0xa9763f,
+  },
+  bramble_lynx: {
+    id: 'bramble_lynx', name: 'Bramble Lynx', minLevel: 4, maxLevel: 5, family: 'beast',
+    hpBase: 50, hpPerLevel: 18, dmgBase: 6, dmgPerLevel: 2.0, attackSpeed: 1.7,
+    armorPerLevel: 12, moveSpeed: 8.5, aggroRadius: 11,
+    // Hunts in loose prides — a wounded lynx yowls and the pride goes savage.
+    packFrenzy: { radius: 12, hasteMult: 1.3, duration: 8 },
+    loot: [
+      { copper: 16, chance: 1 },
+      { itemId: 'glade_pelt', chance: 0.55 },
+    ],
+    scale: 0.8, color: 0x8a6d3b,
+  },
+  brightwood_stag: {
+    id: 'brightwood_stag', name: 'Brightwood Stag', minLevel: 4, maxLevel: 5, family: 'beast',
+    hpBase: 62, hpPerLevel: 20, dmgBase: 7, dmgPerLevel: 2.2, attackSpeed: 2.3,
+    armorPerLevel: 14, moveSpeed: 8, aggroRadius: 9,
+    // Lowers its antlers and bulls forward, swinging harder as the fight drags on.
+    frenzyOnHit: { chance: 0.2, hasteMult: 1.25, duration: 6, name: 'Goring Charge' },
+    loot: [
+      { copper: 20, chance: 1 },
+      { itemId: 'brightwood_venison', chance: 0.5 },
+      { itemId: 'stag_antler', chance: 0.45 },
+    ],
+    scale: 1.0, color: 0x946638,
+  },
+  grovetusk_boar: {
+    id: 'grovetusk_boar', name: 'Grovetusk Boar', minLevel: 5, maxLevel: 6, family: 'beast',
+    hpBase: 74, hpPerLevel: 22, dmgBase: 8, dmgPerLevel: 2.4, attackSpeed: 2.2,
+    armorPerLevel: 16, moveSpeed: 7.5, aggroRadius: 10,
+    thorns: { value: 4, name: 'Bristled Hide' },
+    loot: [
+      { copper: 24, chance: 1 },
+      { itemId: 'amber_hide', chance: 0.5 },
+      { itemId: 'brightwood_venison', chance: 0.4 },
+    ],
+    scale: 1.05, color: 0x6b4423,
+  },
+  sunhide_bear: {
+    id: 'sunhide_bear', name: 'Sunhide Bear', minLevel: 5, maxLevel: 6, family: 'beast',
+    hpBase: 98, hpPerLevel: 24, dmgBase: 9, dmgPerLevel: 2.6, attackSpeed: 2.5,
+    armorPerLevel: 20, moveSpeed: 7.2, aggroRadius: 11,
+    // A heavy bruiser that turns furious when cornered.
+    enrage: { belowHpPct: 0.35, dmgMult: 1.35, hasteMult: 1.2 },
+    loot: [
+      { copper: 30, chance: 1 },
+      { itemId: 'amber_hide', chance: 0.6 },
+      { itemId: 'brightwood_venison', chance: 0.3 },
+    ],
+    scale: 1.2, color: 0xc99a4b,
+  },
+  brightwood_monarch: {
+    id: 'brightwood_monarch', name: 'The Brightwood Monarch', minLevel: 6, maxLevel: 6, family: 'beast', rare: true,
+    elite: true, ccImmune: true, respawnMult: 432,
+    hpBase: 240, hpPerLevel: 48, dmgBase: 11, dmgPerLevel: 3.2, attackSpeed: 2.4,
+    armorPerLevel: 26, moveSpeed: 8, aggroRadius: 12,
+    // The great stag of the glade. It sweeps a wide arc with its crown of antlers
+    // and grows wild with fury as it is brought low.
+    aoePulse: { min: 12, max: 18, radius: 8, every: 9, name: 'Antler Sweep', school: 'physical' },
+    enrage: { belowHpPct: 0.30, dmgMult: 1.4, hasteMult: 1.3 },
+    loot: [
+      { copper: 140, chance: 1 },
+      { itemId: 'brightwood_venison', chance: 1 },
+      { itemId: 'monarch_heart', chance: 1, questId: 'q_brightwood_monarch' },
+      { itemId: 'stag_antler', chance: 1 },
+      { itemId: 'monarch_crown_helm', chance: 0.3 },
+    ],
+    scale: 1.3, color: 0xe0b84a,
+  },
   gorrak: {
     id: 'gorrak', name: 'Gorrak the Ruthless', minLevel: 6, maxLevel: 6, family: 'humanoid',
     hpBase: 160, hpPerLevel: 30, dmgBase: 8, dmgPerLevel: 2.4, attackSpeed: 2.4,
@@ -382,6 +520,13 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     pos: { x: -4, z: -14 }, facing: -2.14, color: 0xa04000,
     questIds: ['q_mine'],
     greeting: "Whole dig's crawling with those candle-headed vermin!",
+  },
+  ranger_elwyn: {
+    id: 'ranger_elwyn', name: 'Ranger Elwyn', title: 'Glade Warden',
+    // posted at the south edge of Brightwood Glade, watching the treeline
+    pos: { x: 35, z: 118 }, facing: 0, color: 0x3a7d44,
+    questIds: ['q_brightwood_thinning', 'q_brightwood_monarch'],
+    greeting: 'Quiet, $C — the glade is calm today, and I mean to keep it that way.',
   },
 };
 
@@ -576,6 +721,31 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     minLevel: 6,
     suggestedPlayers: 3,
   },
+  q_brightwood_thinning: {
+    id: 'q_brightwood_thinning', name: 'Thinning the Glade',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: 'Brightwood Glade is overrun, $N. The bramble lynx breed faster than I can cull them, and the herds trample what little grazing is left. Slay 8 Bramble Lynx and bring me 6 Glade Pelts so I can judge the health of the rest.',
+    completionText: 'Good. The pride is thinned and these pelts are sound — the glade will hold another season.',
+    objectives: [
+      { type: 'kill', targetMobId: 'bramble_lynx', count: 8, label: 'Bramble Lynx slain' },
+      { type: 'collect', itemId: 'glade_pelt', count: 6, label: 'Glade Pelt' },
+    ],
+    xpReward: 480, copperReward: 160,
+    itemRewards: { warrior: 'bramblehide_jerkin', mage: 'bramblehide_jerkin', rogue: 'bramblehide_jerkin' },
+    minLevel: 4,
+  },
+  q_brightwood_monarch: {
+    id: 'q_brightwood_monarch', name: 'The Brightwood Monarch',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: 'There is one beast I will not loose an arrow at alone: the Brightwood Monarch, the great stag that rules the deep glade. He has grown old and savage, goring any who near his hollow. He is more than a match for one hunter — bring a friend or two. Lay him to rest and bring me his heart, $N.',
+    completionText: 'So the old king has fallen. A heavy thing, this — but a kinder end than the wolves would have given him. Wear this crown of his antlers with respect, $N.',
+    objectives: [{ type: 'collect', itemId: 'monarch_heart', count: 1, label: "The Monarch's Heart" }],
+    xpReward: 900, copperReward: 450,
+    itemRewards: { warrior: 'monarch_crown_helm', mage: 'monarch_crown_helm', rogue: 'monarch_crown_helm' },
+    requiresQuest: 'q_brightwood_thinning',
+    minLevel: 5,
+    suggestedPlayers: 2,
+  },
 };
 
 export const ZONE1_QUEST_ORDER = [
@@ -584,6 +754,7 @@ export const ZONE1_QUEST_ORDER = [
   'q_whispers', 'q_names_of_the_dead', 'q_silence_the_call',
   'q_rite', 'q_sexton', 'q_hollow', 'q_gravecallers_trail',
   'q_mogger_tracks', 'q_mogger',
+  'q_brightwood_thinning', 'q_brightwood_monarch',
 ];
 
 // ---------------------------------------------------------------------------
@@ -616,6 +787,18 @@ export const ZONE1_CAMPS: CampDef[] = [
   // Undead: ruins northeast
   { mobId: 'restless_bones', center: { x: 80, z: 78 }, radius: 18, count: 8 },
   { mobId: 'captain_verlan', center: { x: 92, z: 90 }, radius: 4, count: 1 },
+  // Brightwood Glade: wildlife grove in the far north
+  { mobId: 'brightwood_hare', center: { x: 20, z: 132 }, radius: 22, count: 6 },
+  { mobId: 'glade_fox', center: { x: 48, z: 128 }, radius: 20, count: 5 },
+  { mobId: 'spotted_fawn', center: { x: 30, z: 145 }, radius: 18, count: 5 },
+  { mobId: 'meadow_crane', center: { x: 8, z: 150 }, radius: 16, count: 4 },
+  { mobId: 'thornpelt_badger', center: { x: 58, z: 150 }, radius: 16, count: 4 },
+  { mobId: 'dawnmane_doe', center: { x: 32, z: 138 }, radius: 20, count: 5 },
+  { mobId: 'bramble_lynx', center: { x: 60, z: 132 }, radius: 18, count: 6 },
+  { mobId: 'brightwood_stag', center: { x: 24, z: 156 }, radius: 16, count: 4 },
+  { mobId: 'grovetusk_boar', center: { x: 52, z: 162 }, radius: 14, count: 4 },
+  { mobId: 'sunhide_bear', center: { x: 36, z: 166 }, radius: 12, count: 3 },
+  { mobId: 'brightwood_monarch', center: { x: 38, z: 170 }, radius: 4, count: 1 },
 ];
 
 // Spawned LAST in the merged CAMPS array (see data.ts) so these appended draws

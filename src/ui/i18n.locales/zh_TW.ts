@@ -2201,4 +2201,12 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   "entities.mobs.sloomtooth_the_drowned.name": "溺亡者澇牙",
   "entities.mobs.voskar_emberwing.name": "熾翼沃斯卡",
   "entities.mobs.wraithbinder_maldrec.name": "縛魂者瑪爾德雷克",
+  "entities.items.glade_pelt.name": "林間獸皮",
+  "entities.items.soft_down.name": "柔軟絨毛",
+  "entities.items.amber_hide.name": "琥珀獸皮",
+  "entities.items.stag_antler.name": "分岔鹿角",
+  "entities.items.brightwood_venison.name": "明木鹿肉",
+  "entities.items.bramblehide_jerkin.name": "棘皮皮衣",
+  "entities.items.monarch_crown_helm.name": "君主之冠",
+  "entities.items.monarch_heart.name": "君主之心",
 };
