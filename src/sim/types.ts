@@ -47,7 +47,7 @@ export type AuraKind =
   | 'dot' | 'slow' | 'stun' | 'root' | 'incapacitate' | 'polymorph'
   | 'attackspeed' | 'debuff_ap' | 'buff_ap' | 'buff_armor' | 'buff_int' | 'buff_agi' | 'buff_dodge' | 'buff_speed' | 'buff_haste'
   | 'hot' | 'absorb' | 'imbue' | 'buff_sta' | 'buff_allstats' | 'thorns' | 'form_bear'
-  | 'form_cat' | 'stealth' | 'defensive_stance' | 'righteous_fury' | 'sunder' | 'mortal_wound' | 'silence' | 'vulnerability' | 'hex' | 'tongues' | 'cost_tax' | 'heal_absorb';
+  | 'form_cat' | 'stealth' | 'defensive_stance' | 'righteous_fury' | 'sunder' | 'mortal_wound' | 'silence' | 'vulnerability' | 'hex' | 'tongues' | 'cost_tax' | 'heal_absorb' | 'critvuln';
 
 export interface Aura {
   id: string; // ability id that applied it
@@ -326,6 +326,12 @@ export interface MobTemplate {
   // doctor / curse-of-weakness flavour. Rides a dedicated `hex` aura kind read in
   // dealDamage (outgoing) and applyHeal (outgoing).
   hex?: { chance: number; reductionPct: number; duration: number; name: string; school?: Aura['school'] };
+  // On-hit affix ("Find Weakness"): a landed melee swing has `chance` to leave the
+  // victim's flesh exposed, so CRITICAL hits against them (from anyone, any school)
+  // deal an extra `critDamage` fraction for `duration`s. Read once in the dealDamage
+  // funnel (crit-only). Distinct from a flat-damage vuln (expose/spellvuln) — this
+  // sharpens only the rare crits, the way a predator's bite finds the soft spot.
+  critVuln?: { chance: number; critDamage: number; duration: number; name: string; school?: Aura['school'] };
 }
 
 export type AbilityEffect =
