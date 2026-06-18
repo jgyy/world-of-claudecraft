@@ -278,6 +278,73 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     id: 'conjured_bread3', name: 'Conjured Sweet Roll', kind: 'food', quality: 'common',
     foodHp: 552, sellValue: 0,
   },
+  // --- Wildwood Provisions: Quartermaster Brenna's alchemist & cook stock ---
+  // A vendor-only provisions pack. The single existing battle elixir (Elixir of
+  // the Bear, +sta) left the rest of the stat-buff vein wide open, so this fills
+  // out the classic battle-elixir line — one per buffable stat plus higher-tier
+  // refinements — alongside a Greater rung for the healing/mana potion ladder and
+  // two top-tier cooked provisions. All ride the existing useItem() paths
+  // (applyAura for elixirs, instant restore for potions, sit-to-consume for
+  // food/drink); no engine changes. Sold via seedHouseListings (no rng) so the
+  // pack is fully deterministic and cannot perturb seed-fixed combat tests.
+  elixir_of_the_eagle: {
+    id: 'elixir_of_the_eagle', name: 'Elixir of the Eagle', kind: 'elixir', quality: 'uncommon',
+    elixir: { aura: 'Grace of the Eagle', kind: 'buff_agi', value: 12, duration: 900 },
+    sellValue: 20, buyValue: 100,
+  },
+  elixir_of_the_sage: {
+    id: 'elixir_of_the_sage', name: 'Elixir of the Sage', kind: 'elixir', quality: 'uncommon',
+    elixir: { aura: 'Wisdom of the Sage', kind: 'buff_int', value: 12, duration: 900 },
+    sellValue: 20, buyValue: 100,
+  },
+  elixir_of_the_owl: {
+    id: 'elixir_of_the_owl', name: 'Elixir of the Owl', kind: 'elixir', quality: 'uncommon',
+    elixir: { aura: 'Insight of the Owl', kind: 'buff_spi', value: 12, duration: 900 },
+    sellValue: 20, buyValue: 100,
+  },
+  elixir_of_stoneskin: {
+    id: 'elixir_of_stoneskin', name: 'Elixir of Stoneskin', kind: 'elixir', quality: 'uncommon',
+    elixir: { aura: 'Stoneskin', kind: 'buff_armor', value: 120, duration: 900 },
+    sellValue: 20, buyValue: 100,
+  },
+  elixir_of_brute_force: {
+    id: 'elixir_of_brute_force', name: 'Elixir of Brute Force', kind: 'elixir', quality: 'uncommon',
+    elixir: { aura: 'Brute Force', kind: 'buff_ap', value: 24, duration: 900 },
+    sellValue: 20, buyValue: 100,
+  },
+  elixir_of_the_wilds: {
+    id: 'elixir_of_the_wilds', name: 'Elixir of the Wilds', kind: 'elixir', quality: 'rare',
+    elixir: { aura: 'Blessing of the Wilds', kind: 'buff_allstats', value: 6, duration: 900 },
+    sellValue: 40, buyValue: 200,
+  },
+  greater_elixir_of_fortitude: {
+    id: 'greater_elixir_of_fortitude', name: 'Greater Elixir of Fortitude', kind: 'elixir', quality: 'rare',
+    elixir: { aura: 'Greater Fortitude', kind: 'buff_sta', value: 18, duration: 900 },
+    sellValue: 40, buyValue: 200,
+  },
+  elixir_of_brilliance: {
+    id: 'elixir_of_brilliance', name: 'Elixir of Brilliance', kind: 'elixir', quality: 'rare',
+    elixir: { aura: 'Brilliance', kind: 'buff_int', value: 18, duration: 900 },
+    sellValue: 40, buyValue: 200,
+  },
+  // Greater rung of the combat-potion ladder (Minor 90 -> Lesser 150 -> 280 -> Greater 480).
+  greater_healing_potion: {
+    id: 'greater_healing_potion', name: 'Greater Healing Potion', kind: 'potion', quality: 'common',
+    potionHp: 480, sellValue: 48, buyValue: 250,
+  },
+  greater_mana_potion: {
+    id: 'greater_mana_potion', name: 'Greater Mana Potion', kind: 'potion', quality: 'common',
+    potionMana: 600, sellValue: 48, buyValue: 250,
+  },
+  // Top-tier cooked provisions (foodHp/drinkMana pace the conjured tier-3 staples).
+  hunters_stew: {
+    id: 'hunters_stew', name: "Hearty Hunter's Stew", kind: 'food', quality: 'common',
+    foodHp: 552, sellValue: 12, buyValue: 120,
+  },
+  spiced_cider: {
+    id: 'spiced_cider', name: 'Spiced Mulled Cider', kind: 'drink', quality: 'common',
+    drinkMana: 552, sellValue: 12, buyValue: 120,
+  },
   // --- Smith Haldren's stock (common/white, levels 3-7) ---
   eastbrook_arming_sword: {
     id: 'eastbrook_arming_sword', name: 'Eastbrook Arming Sword', kind: 'weapon', slot: 'mainhand', quality: 'common',

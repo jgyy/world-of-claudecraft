@@ -7810,6 +7810,7 @@ const ITEM_ENTITY_IDS = [
   "roadwardens_helm", "wayfarers_hood", "acolytes_circlet", "reinforced_pauldrons", "embroidered_mantle", "sturdy_belt", "silk_sash", "roughspun_gloves", "bristlehide_spaulders", "sableweb_cord", "gorraks_cleaver", "mossy_handwraps",
   "crossroads_saber", "tradesman_hatchet", "drovers_staff", "caravan_warden_dirk", "outrider_brigandine", "caravan_quilted_vest", "wanderers_chestguard", "outrider_legguards", "trail_leggings", "pilgrims_leggings", "outrider_sabatons", "milepost_boots",
   "glade_pelt", "soft_down", "amber_hide", "stag_antler", "brightwood_venison", "bramblehide_jerkin", "monarch_crown_helm", "monarch_heart",
+  "elixir_of_the_eagle", "elixir_of_the_sage", "elixir_of_the_owl", "elixir_of_stoneskin", "elixir_of_brute_force", "elixir_of_the_wilds", "greater_elixir_of_fortitude", "elixir_of_brilliance", "greater_healing_potion", "greater_mana_potion", "hunters_stew", "spiced_cider",
 ] as const;
 
 type ItemEntityId = typeof ITEM_ENTITY_IDS[number];
@@ -7861,6 +7862,8 @@ const itemNamesEn = {
       "Crossroads Saber", "Tradesman's Hatchet", "Drover's Staff", "Caravan Warden Dirk", "Outrider Brigandine", "Caravan Quilted Vest", "Wanderer's Chestguard", "Outrider Legguards", "Trailworn Leggings", "Pilgrim's Leggings", "Outrider Sabatons", "Milepost Boots",
           "Glade Pelt", "Soft Down Tuft", "Amber Hide", "Branching Antler", "Brightwood Venison", "Bramblehide Jerkin", "Monarch's Crown", "The Monarch's Heart",
 ]),
+          "Elixir of the Eagle", "Elixir of the Sage", "Elixir of the Owl", "Elixir of Stoneskin", "Elixir of Brute Force", "Elixir of the Wilds", "Greater Elixir of Fortitude", "Elixir of Brilliance", "Greater Healing Potion", "Greater Mana Potion", "Hearty Hunter's Stew", "Spiced Mulled Cider",
+    ]),
   },
 };
 
@@ -7898,6 +7901,8 @@ export const itemNames = {
       "Sable de la Encrucijada", "Hachuela del mercader", "Bastón del arriero", "Daga del guardián de caravana", "Brigantina del jinete de avanzada", "Chaleco acolchado de caravana", "Peto del vagabundo", "Quijotes del jinete de avanzada", "Leotardos gastados del camino", "Leotardos del peregrino", "Escarpes del jinete de avanzada", "Botas de hito",
             "Piel del claro", "Mechón de plumón suave", "Piel ambarina", "Asta ramificada", "Venado de Brightwood", "Jubón de piel de zarza", "Corona del Monarca", "El Corazón del Monarca",
 ]),
+          "Elixir del Águila", "Elixir del Sabio", "Elixir del Búho", "Elixir de Piel de Piedra", "Elixir de Fuerza Bruta", "Elixir de lo Salvaje", "Gran Elixir de Fortaleza", "Elixir de Brillantez", "Poción de Sanación Mayor", "Poción de Maná Mayor", "Sustancioso Estofado del Cazador", "Sidra Caliente Especiada",
+    ]),
     },
   },
   es_ES: {} as typeof itemNamesEn,
@@ -7933,6 +7938,8 @@ export const itemNames = {
       "Sabre du carrefour", "Hachette du marchand", "Bâton du bouvier", "Dague du gardien de caravane", "Brigandine de l'éclaireur", "Veste matelassée de caravane", "Plastron du vagabond", "Jambières de l'éclaireur", "Jambières usées par la route", "Jambières du pèlerin", "Solerets de l'éclaireur", "Bottes de borne",
             "Fourrure de clairière", "Touffe de duvet doux", "Peau d'ambre", "Andouiller ramifié", "Venaison de Brightwood", "Justaucorps en peau de ronces", "Couronne du Monarque", "Le Cœur du Monarque",
 ]),
+          "Élixir de l'Aigle", "Élixir du Sage", "Élixir du Hibou", "Élixir de Peau de Pierre", "Élixir de Force Brute", "Élixir des Étendues Sauvages", "Grand Élixir de Robustesse", "Élixir de Brillance", "Potion de Soins Majeure", "Potion de Mana Majeure", "Copieux Ragoût du Chasseur", "Cidre Chaud Épicé",
+    ]),
     },
   },
   fr_CA: {} as typeof itemNamesEn,
@@ -7969,6 +7976,8 @@ export const itemNames = {
       "Sciabola del crocevia", "Accetta del mercante", "Bastone del mandriano", "Pugnale del guardiano della carovana", "Brigantina dell'esploratore", "Farsetto trapuntato da carovana", "Corazza del viandante", "Gambali dell'esploratore", "Gambali logori del cammino", "Gambali del pellegrino", "Scarpe d'arme dell'esploratore", "Stivali della pietra miliare",
             "Pelliccia della radura", "Ciuffo di piumino morbido", "Pelle d'ambra", "Corno ramificato", "Selvaggina di Brightwood", "Giubbotto di pelle di rovo", "Corona del Monarca", "Il Cuore del Monarca",
 ]),
+          "Elisir dell'Aquila", "Elisir del Saggio", "Elisir del Gufo", "Elisir della Pelle di Pietra", "Elisir di Forza Bruta", "Elisir delle Terre Selvagge", "Grande Elisir di Fortezza", "Elisir di Brillantezza", "Pozione di Cura Superiore", "Pozione di Mana Superiore", "Sostanzioso Stufato del Cacciatore", "Sidro Speziato Caldo",
+    ]),
     },
   },
   de_DE: {
@@ -8003,6 +8012,8 @@ export const itemNames = {
       "Kreuzweg-Säbel", "Beil des Händlers", "Stab des Viehtreibers", "Karawanenwächter-Dolch", "Vorreiter-Brigantine", "Gesteppte Karawanenweste", "Wanderer-Brustschutz", "Vorreiter-Beinschienen", "Abgewetzte Wegbeinlinge", "Pilgerbeinlinge", "Vorreiter-Panzerstiefel", "Meilenstein-Stiefel",
             "Lichtungsfell", "Weicher Daunenbüschel", "Bernsteinhaut", "Verzweigtes Geweih", "Hellholz-Wildbret", "Dornhaut-Wams", "Krone des Monarchen", "Das Herz des Monarchen",
 ]),
+          "Elixier des Adlers", "Elixier des Weisen", "Elixier der Eule", "Elixier der Steinhaut", "Elixier der rohen Gewalt", "Elixier der Wildnis", "Großes Elixier der Standhaftigkeit", "Elixier der Brillanz", "Großer Heiltrank", "Großer Manatrank", "Herzhafter Jägereintopf", "Gewürzter Glühmost",
+    ]),
     },
   },
   zh_CN: {
@@ -8037,6 +8048,8 @@ export const itemNames = {
       "十字路口军刀", "商贩短斧", "赶牲人之杖", "商队守卫匕首", "哨骑镶钉甲", "商队衬垫背心", "漫游者护胸", "哨骑护腿", "磨损的旅途护腿", "朝圣者护腿", "哨骑战靴", "里程靴",
             "林间兽皮", "柔软绒毛", "琥珀兽皮", "分叉鹿角", "明木鹿肉", "棘皮皮衣", "君主之冠", "君主之心",
 ]),
+          "雄鹰药剂", "贤者药剂", "枭智药剂", "石肤药剂", "蛮力药剂", "荒野药剂", "高级坚韧药剂", "璀璨药剂", "强效治疗药水", "强效法力药水", "丰盛猎人炖肉", "香料热苹果酒",
+    ]),
     },
   },
   zh_TW: {
@@ -8071,6 +8084,8 @@ export const itemNames = {
       "十字路口軍刀", "商販短斧", "趕牲人之杖", "商隊守衛匕首", "哨騎鑲釘甲", "商隊襯墊背心", "漫遊者護胸", "哨騎護腿", "磨損的旅途護腿", "朝聖者護腿", "哨騎戰靴", "里程靴",
             "林間獸皮", "柔軟絨毛", "琥珀獸皮", "分岔鹿角", "明木鹿肉", "棘皮皮衣", "君主之冠", "君主之心",
 ]),
+          "雄鷹藥劑", "賢者藥劑", "梟智藥劑", "石膚藥劑", "蠻力藥劑", "荒野藥劑", "高級堅韌藥劑", "璀璨藥劑", "強效治療藥水", "強效法力藥水", "豐盛獵人燉肉", "香料熱蘋果酒",
+    ]),
     },
   },
   ko_KR: {
@@ -8105,6 +8120,8 @@ export const itemNames = {
       "갈림길 세이버", "상인의 손도끼", "목동의 지팡이", "대상 경비병 단검", "척후병 브리간딘", "대상 누비 조끼", "방랑자의 가슴 보호구", "척후병 다리 보호구", "닳아버린 여정 각반", "순례자의 각반", "척후병 사바톤", "이정표 장화",
             "숲속 가죽", "부드러운 솜털 뭉치", "호박색 가죽", "가지진 사슴뿔", "브라이트우드 사슴고기", "가시가죽 저킨", "군주의 왕관", "군주의 심장",
 ]),
+          "독수리의 비약", "현자의 비약", "올빼미의 비약", "바위 피부 비약", "괴력의 비약", "야생의 비약", "상급 불굴의 비약", "총명함의 비약", "상급 치유 물약", "상급 마나 물약", "든든한 사냥꾼 스튜", "향신료 따뜻한 사과주",
+    ]),
     },
   },
   ja_JP: {
@@ -8139,6 +8156,8 @@ export const itemNames = {
       "十字路のサーベル", "商人のハチェット", "牛追いの杖", "隊商衛兵のダーク", "斥候騎兵のブリガンダイン", "隊商のキルトベスト", "放浪者の胸当て", "斥候騎兵の脚当て", "履き古した旅の脚甲", "巡礼者の脚甲", "斥候騎兵のサバトン", "道標のブーツ",
             "林間の毛皮", "柔らかな綿毛", "琥珀色の革", "枝分かれした角", "ブライトウッドの鹿肉", "茨革のジャーキン", "君主の王冠", "君主の心臓",
 ]),
+          "鷲のエリクサー", "賢者のエリクサー", "梟のエリクサー", "石肌のエリクサー", "剛力のエリクサー", "野生のエリクサー", "偉大なる不屈のエリクサー", "聡明のエリクサー", "上級回復ポーション", "上級マナポーション", "ハンターの具だくさんシチュー", "スパイス入りホットサイダー",
+    ]),
     },
   },
   pt_BR: {
@@ -8173,6 +8192,8 @@ export const itemNames = {
       "Sabre da Encruzilhada", "Machadinha do Mercador", "Cajado do Boiadeiro", "Adaga do Guarda de Caravana", "Brigantina do Batedor", "Colete Acolchoado de Caravana", "Peitoral do Andarilho", "Perneiras do Batedor", "Perneiras Gastas da Estrada", "Perneiras do Peregrino", "Soleretes do Batedor", "Botas de Marco",
             "Pele da clareira", "Tufo de penugem macia", "Couro âmbar", "Galhada ramificada", "Carne de veado de Brightwood", "Gibão de couro de sarça", "Coroa do Monarca", "O Coração do Monarca",
 ]),
+          "Elixir da Águia", "Elixir do Sábio", "Elixir da Coruja", "Elixir de Pele de Pedra", "Elixir de Força Bruta", "Elixir das Terras Selvagens", "Grande Elixir de Fortitude", "Elixir de Brilho", "Poção de Cura Maior", "Poção de Mana Maior", "Substancioso Ensopado do Caçador", "Cidra Quente com Especiarias",
+    ]),
     },
   },
   ru_RU: {
@@ -8207,6 +8228,8 @@ export const itemNames = {
       "Сабля перепутья", "Топорик торговца", "Посох погонщика", "Кинжал караванного стража", "Бригантина дозорного", "Стёганый караванный жилет", "Нагрудник скитальца", "Поножи дозорного", "Истёртые дорожные поножи", "Поножи пилигрима", "Сабатоны дозорного", "Сапоги вехи",
             "Шкура поляны", "Пучок мягкого пуха", "Янтарная шкура", "Ветвистый рог", "Оленина Брайтвуда", "Колет из терновой шкуры", "Корона Монарха", "Сердце Монарха",
 ]),
+          "Эликсир орла", "Эликсир мудреца", "Эликсир совы", "Эликсир каменной кожи", "Эликсир грубой силы", "Эликсир дикой природы", "Большой эликсир стойкости", "Эликсир великолепия", "Большое лечебное зелье", "Большое зелье маны", "Сытная похлёбка охотника", "Пряный горячий сидр",
+    ]),
     },
   },
 };

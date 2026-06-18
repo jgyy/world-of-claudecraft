@@ -9190,6 +9190,19 @@ export class Sim {
       { itemId: 'outrider_legguards', count: 1, price: 2100 },
       { itemId: 'pilgrims_leggings', count: 1, price: 1700 },
       { itemId: 'outrider_sabatons', count: 1, price: 1900 },
+      // Wildwood Provisions — Quartermaster Brenna's alchemist & cook stock.
+      { itemId: 'elixir_of_the_eagle', count: 5, price: 100 },
+      { itemId: 'elixir_of_the_sage', count: 5, price: 100 },
+      { itemId: 'elixir_of_the_owl', count: 5, price: 100 },
+      { itemId: 'elixir_of_stoneskin', count: 5, price: 100 },
+      { itemId: 'elixir_of_brute_force', count: 5, price: 100 },
+      { itemId: 'elixir_of_the_wilds', count: 3, price: 200 },
+      { itemId: 'greater_elixir_of_fortitude', count: 3, price: 200 },
+      { itemId: 'elixir_of_brilliance', count: 3, price: 200 },
+      { itemId: 'greater_healing_potion', count: 5, price: 250 },
+      { itemId: 'greater_mana_potion', count: 5, price: 250 },
+      { itemId: 'hunters_stew', count: 5, price: 120 },
+      { itemId: 'spiced_cider', count: 5, price: 120 },
     ];
     for (const s of stock) {
       if (!ITEMS[s.itemId]) continue;
