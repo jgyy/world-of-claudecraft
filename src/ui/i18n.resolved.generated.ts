@@ -2363,6 +2363,42 @@ export const en: EnTranslations = {
       "mossy_handwraps": {
         "name": "Mossgrown Handwraps"
       },
+      "elixir_of_the_eagle": {
+        "name": "Elixir of the Eagle"
+      },
+      "elixir_of_the_sage": {
+        "name": "Elixir of the Sage"
+      },
+      "elixir_of_the_owl": {
+        "name": "Elixir of the Owl"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Elixir of Stoneskin"
+      },
+      "elixir_of_brute_force": {
+        "name": "Elixir of Brute Force"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Elixir of the Wilds"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Greater Elixir of Fortitude"
+      },
+      "elixir_of_brilliance": {
+        "name": "Elixir of Brilliance"
+      },
+      "greater_healing_potion": {
+        "name": "Greater Healing Potion"
+      },
+      "greater_mana_potion": {
+        "name": "Greater Mana Potion"
+      },
+      "hunters_stew": {
+        "name": "Hearty Hunter's Stew"
+      },
+      "spiced_cider": {
+        "name": "Spiced Mulled Cider"
+      },
       "bristleback_maul": {
         "name": "Bristleback Maul"
       },
@@ -6410,6 +6446,42 @@ export const es: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Envolturas cubiertas de musgo"
+      },
+      "elixir_of_the_eagle": {
+        "name": "Elixir del Águila"
+      },
+      "elixir_of_the_sage": {
+        "name": "Elixir del Sabio"
+      },
+      "elixir_of_the_owl": {
+        "name": "Elixir del Búho"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Elixir de Piel de Piedra"
+      },
+      "elixir_of_brute_force": {
+        "name": "Elixir de Fuerza Bruta"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Elixir de lo Salvaje"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Gran Elixir de Fortaleza"
+      },
+      "elixir_of_brilliance": {
+        "name": "Elixir de Brillantez"
+      },
+      "greater_healing_potion": {
+        "name": "Poción de Sanación Mayor"
+      },
+      "greater_mana_potion": {
+        "name": "Poción de Maná Mayor"
+      },
+      "hunters_stew": {
+        "name": "Sustancioso Estofado del Cazador"
+      },
+      "spiced_cider": {
+        "name": "Sidra Caliente Especiada"
       },
       "bristleback_maul": {
         "name": "Maza Bristleback"
@@ -10459,6 +10531,42 @@ export const es_ES: EnTranslations = {
       "mossy_handwraps": {
         "name": "Envolturas cubiertas de musgo"
       },
+      "elixir_of_the_eagle": {
+        "name": "Elixir del Águila"
+      },
+      "elixir_of_the_sage": {
+        "name": "Elixir del Sabio"
+      },
+      "elixir_of_the_owl": {
+        "name": "Elixir del Búho"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Elixir de Piel de Piedra"
+      },
+      "elixir_of_brute_force": {
+        "name": "Elixir de Fuerza Bruta"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Elixir de lo Salvaje"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Gran Elixir de Fortaleza"
+      },
+      "elixir_of_brilliance": {
+        "name": "Elixir de Brillantez"
+      },
+      "greater_healing_potion": {
+        "name": "Poción de Sanación Mayor"
+      },
+      "greater_mana_potion": {
+        "name": "Poción de Maná Mayor"
+      },
+      "hunters_stew": {
+        "name": "Sustancioso Estofado del Cazador"
+      },
+      "spiced_cider": {
+        "name": "Sidra Caliente Especiada"
+      },
       "bristleback_maul": {
         "name": "Maza Bristleback"
       },
@@ -14506,6 +14614,42 @@ export const fr_FR: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Mitaines moussues"
+      },
+      "elixir_of_the_eagle": {
+        "name": "Élixir de l'Aigle"
+      },
+      "elixir_of_the_sage": {
+        "name": "Élixir du Sage"
+      },
+      "elixir_of_the_owl": {
+        "name": "Élixir du Hibou"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Élixir de Peau de Pierre"
+      },
+      "elixir_of_brute_force": {
+        "name": "Élixir de Force Brute"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Élixir des Étendues Sauvages"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Grand Élixir de Robustesse"
+      },
+      "elixir_of_brilliance": {
+        "name": "Élixir de Brillance"
+      },
+      "greater_healing_potion": {
+        "name": "Potion de Soins Majeure"
+      },
+      "greater_mana_potion": {
+        "name": "Potion de Mana Majeure"
+      },
+      "hunters_stew": {
+        "name": "Copieux Ragoût du Chasseur"
+      },
+      "spiced_cider": {
+        "name": "Cidre Chaud Épicé"
       },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
@@ -18555,6 +18699,42 @@ export const fr_CA: EnTranslations = {
       "mossy_handwraps": {
         "name": "Mitaines moussues"
       },
+      "elixir_of_the_eagle": {
+        "name": "Élixir de l'Aigle"
+      },
+      "elixir_of_the_sage": {
+        "name": "Élixir du Sage"
+      },
+      "elixir_of_the_owl": {
+        "name": "Élixir du Hibou"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Élixir de Peau de Pierre"
+      },
+      "elixir_of_brute_force": {
+        "name": "Élixir de Force Brute"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Élixir des Étendues Sauvages"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Grand Élixir de Robustesse"
+      },
+      "elixir_of_brilliance": {
+        "name": "Élixir de Brillance"
+      },
+      "greater_healing_potion": {
+        "name": "Potion de Soins Majeure"
+      },
+      "greater_mana_potion": {
+        "name": "Potion de Mana Majeure"
+      },
+      "hunters_stew": {
+        "name": "Copieux Ragoût du Chasseur"
+      },
+      "spiced_cider": {
+        "name": "Cidre Chaud Épicé"
+      },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
       },
@@ -22602,6 +22782,42 @@ export const en_CA: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Mossgrown Handwraps"
+      },
+      "elixir_of_the_eagle": {
+        "name": "Elixir of the Eagle"
+      },
+      "elixir_of_the_sage": {
+        "name": "Elixir of the Sage"
+      },
+      "elixir_of_the_owl": {
+        "name": "Elixir of the Owl"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Elixir of Stoneskin"
+      },
+      "elixir_of_brute_force": {
+        "name": "Elixir of Brute Force"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Elixir of the Wilds"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Greater Elixir of Fortitude"
+      },
+      "elixir_of_brilliance": {
+        "name": "Elixir of Brilliance"
+      },
+      "greater_healing_potion": {
+        "name": "Greater Healing Potion"
+      },
+      "greater_mana_potion": {
+        "name": "Greater Mana Potion"
+      },
+      "hunters_stew": {
+        "name": "Hearty Hunter's Stew"
+      },
+      "spiced_cider": {
+        "name": "Spiced Mulled Cider"
       },
       "bristleback_maul": {
         "name": "Bristleback Maul"
@@ -26651,6 +26867,42 @@ export const it_IT: EnTranslations = {
       "mossy_handwraps": {
         "name": "Manopole muschiose"
       },
+      "elixir_of_the_eagle": {
+        "name": "Elisir dell'Aquila"
+      },
+      "elixir_of_the_sage": {
+        "name": "Elisir del Saggio"
+      },
+      "elixir_of_the_owl": {
+        "name": "Elisir del Gufo"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Elisir della Pelle di Pietra"
+      },
+      "elixir_of_brute_force": {
+        "name": "Elisir di Forza Bruta"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Elisir delle Terre Selvagge"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Grande Elisir di Fortezza"
+      },
+      "elixir_of_brilliance": {
+        "name": "Elisir di Brillantezza"
+      },
+      "greater_healing_potion": {
+        "name": "Pozione di Cura Superiore"
+      },
+      "greater_mana_potion": {
+        "name": "Pozione di Mana Superiore"
+      },
+      "hunters_stew": {
+        "name": "Sostanzioso Stufato del Cacciatore"
+      },
+      "spiced_cider": {
+        "name": "Sidro Speziato Caldo"
+      },
       "bristleback_maul": {
         "name": "Maglio Bristleback"
       },
@@ -30698,6 +30950,42 @@ export const de_DE: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Bemooste Handwickel"
+      },
+      "elixir_of_the_eagle": {
+        "name": "Elixier des Adlers"
+      },
+      "elixir_of_the_sage": {
+        "name": "Elixier des Weisen"
+      },
+      "elixir_of_the_owl": {
+        "name": "Elixier der Eule"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Elixier der Steinhaut"
+      },
+      "elixir_of_brute_force": {
+        "name": "Elixier der rohen Gewalt"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Elixier der Wildnis"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Großes Elixier der Standhaftigkeit"
+      },
+      "elixir_of_brilliance": {
+        "name": "Elixier der Brillanz"
+      },
+      "greater_healing_potion": {
+        "name": "Großer Heiltrank"
+      },
+      "greater_mana_potion": {
+        "name": "Großer Manatrank"
+      },
+      "hunters_stew": {
+        "name": "Herzhafter Jägereintopf"
+      },
+      "spiced_cider": {
+        "name": "Gewürzter Glühmost"
       },
       "bristleback_maul": {
         "name": "Bristleback-Schlägel"
@@ -34747,6 +35035,42 @@ export const zh_CN: EnTranslations = {
       "mossy_handwraps": {
         "name": "苔藓护手"
       },
+      "elixir_of_the_eagle": {
+        "name": "雄鹰药剂"
+      },
+      "elixir_of_the_sage": {
+        "name": "贤者药剂"
+      },
+      "elixir_of_the_owl": {
+        "name": "枭智药剂"
+      },
+      "elixir_of_stoneskin": {
+        "name": "石肤药剂"
+      },
+      "elixir_of_brute_force": {
+        "name": "蛮力药剂"
+      },
+      "elixir_of_the_wilds": {
+        "name": "荒野药剂"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "高级坚韧药剂"
+      },
+      "elixir_of_brilliance": {
+        "name": "璀璨药剂"
+      },
+      "greater_healing_potion": {
+        "name": "强效治疗药水"
+      },
+      "greater_mana_potion": {
+        "name": "强效法力药水"
+      },
+      "hunters_stew": {
+        "name": "丰盛猎人炖肉"
+      },
+      "spiced_cider": {
+        "name": "香料热苹果酒"
+      },
       "bristleback_maul": {
         "name": "硬鬃重槌"
       },
@@ -38794,6 +39118,42 @@ export const zh_TW: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "苔蘚護手"
+      },
+      "elixir_of_the_eagle": {
+        "name": "雄鷹藥劑"
+      },
+      "elixir_of_the_sage": {
+        "name": "賢者藥劑"
+      },
+      "elixir_of_the_owl": {
+        "name": "梟智藥劑"
+      },
+      "elixir_of_stoneskin": {
+        "name": "石膚藥劑"
+      },
+      "elixir_of_brute_force": {
+        "name": "蠻力藥劑"
+      },
+      "elixir_of_the_wilds": {
+        "name": "荒野藥劑"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "高級堅韌藥劑"
+      },
+      "elixir_of_brilliance": {
+        "name": "璀璨藥劑"
+      },
+      "greater_healing_potion": {
+        "name": "強效治療藥水"
+      },
+      "greater_mana_potion": {
+        "name": "強效法力藥水"
+      },
+      "hunters_stew": {
+        "name": "豐盛獵人燉肉"
+      },
+      "spiced_cider": {
+        "name": "香料熱蘋果酒"
       },
       "bristleback_maul": {
         "name": "硬鬃重槌"
@@ -42843,6 +43203,42 @@ export const ko_KR: EnTranslations = {
       "mossy_handwraps": {
         "name": "이끼 낀 손싸개"
       },
+      "elixir_of_the_eagle": {
+        "name": "독수리의 비약"
+      },
+      "elixir_of_the_sage": {
+        "name": "현자의 비약"
+      },
+      "elixir_of_the_owl": {
+        "name": "올빼미의 비약"
+      },
+      "elixir_of_stoneskin": {
+        "name": "바위 피부 비약"
+      },
+      "elixir_of_brute_force": {
+        "name": "괴력의 비약"
+      },
+      "elixir_of_the_wilds": {
+        "name": "야생의 비약"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "상급 불굴의 비약"
+      },
+      "elixir_of_brilliance": {
+        "name": "총명함의 비약"
+      },
+      "greater_healing_potion": {
+        "name": "상급 치유 물약"
+      },
+      "greater_mana_potion": {
+        "name": "상급 마나 물약"
+      },
+      "hunters_stew": {
+        "name": "든든한 사냥꾼 스튜"
+      },
+      "spiced_cider": {
+        "name": "향신료 따뜻한 사과주"
+      },
       "bristleback_maul": {
         "name": "뻣센등뼈 철퇴"
       },
@@ -46890,6 +47286,42 @@ export const ja_JP: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "苔むした手甲"
+      },
+      "elixir_of_the_eagle": {
+        "name": "鷲のエリクサー"
+      },
+      "elixir_of_the_sage": {
+        "name": "賢者のエリクサー"
+      },
+      "elixir_of_the_owl": {
+        "name": "梟のエリクサー"
+      },
+      "elixir_of_stoneskin": {
+        "name": "石肌のエリクサー"
+      },
+      "elixir_of_brute_force": {
+        "name": "剛力のエリクサー"
+      },
+      "elixir_of_the_wilds": {
+        "name": "野生のエリクサー"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "偉大なる不屈のエリクサー"
+      },
+      "elixir_of_brilliance": {
+        "name": "聡明のエリクサー"
+      },
+      "greater_healing_potion": {
+        "name": "上級回復ポーション"
+      },
+      "greater_mana_potion": {
+        "name": "上級マナポーション"
+      },
+      "hunters_stew": {
+        "name": "ハンターの具だくさんシチュー"
+      },
+      "spiced_cider": {
+        "name": "スパイス入りホットサイダー"
       },
       "bristleback_maul": {
         "name": "ブリストルバックの大槌"
@@ -50939,6 +51371,42 @@ export const pt_BR: EnTranslations = {
       "mossy_handwraps": {
         "name": "Manoplas musgosas"
       },
+      "elixir_of_the_eagle": {
+        "name": "Elixir da Águia"
+      },
+      "elixir_of_the_sage": {
+        "name": "Elixir do Sábio"
+      },
+      "elixir_of_the_owl": {
+        "name": "Elixir da Coruja"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Elixir de Pele de Pedra"
+      },
+      "elixir_of_brute_force": {
+        "name": "Elixir de Força Bruta"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Elixir das Terras Selvagens"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Grande Elixir de Fortitude"
+      },
+      "elixir_of_brilliance": {
+        "name": "Elixir de Brilho"
+      },
+      "greater_healing_potion": {
+        "name": "Poção de Cura Maior"
+      },
+      "greater_mana_potion": {
+        "name": "Poção de Mana Maior"
+      },
+      "hunters_stew": {
+        "name": "Substancioso Ensopado do Caçador"
+      },
+      "spiced_cider": {
+        "name": "Cidra Quente com Especiarias"
+      },
       "bristleback_maul": {
         "name": "Malho Bristleback"
       },
@@ -54986,6 +55454,42 @@ export const ru_RU: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Замшелые обмотки"
+      },
+      "elixir_of_the_eagle": {
+        "name": "Эликсир орла"
+      },
+      "elixir_of_the_sage": {
+        "name": "Эликсир мудреца"
+      },
+      "elixir_of_the_owl": {
+        "name": "Эликсир совы"
+      },
+      "elixir_of_stoneskin": {
+        "name": "Эликсир каменной кожи"
+      },
+      "elixir_of_brute_force": {
+        "name": "Эликсир грубой силы"
+      },
+      "elixir_of_the_wilds": {
+        "name": "Эликсир дикой природы"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "Большой эликсир стойкости"
+      },
+      "elixir_of_brilliance": {
+        "name": "Эликсир великолепия"
+      },
+      "greater_healing_potion": {
+        "name": "Большое лечебное зелье"
+      },
+      "greater_mana_potion": {
+        "name": "Большое зелье маны"
+      },
+      "hunters_stew": {
+        "name": "Сытная похлёбка охотника"
+      },
+      "spiced_cider": {
+        "name": "Пряный горячий сидр"
       },
       "bristleback_maul": {
         "name": "Кувалда Щетиноспина"
@@ -59067,6 +59571,42 @@ export const en_XA: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "[Ɱóššĝŕóŵñ Ĥáñðŵŕáþš]"
+      },
+      "elixir_of_the_eagle": {
+        "name": "[Éļíẋíŕ óƒ ţĥé Éáĝļé]"
+      },
+      "elixir_of_the_sage": {
+        "name": "[Éļíẋíŕ óƒ ţĥé Šáĝé]"
+      },
+      "elixir_of_the_owl": {
+        "name": "[Éļíẋíŕ óƒ ţĥé Óŵļ]"
+      },
+      "elixir_of_stoneskin": {
+        "name": "[Éļíẋíŕ óƒ Šţóñéšķíñ]"
+      },
+      "elixir_of_brute_force": {
+        "name": "[Éļíẋíŕ óƒ Ɓŕúţé Ƒóŕçé]"
+      },
+      "elixir_of_the_wilds": {
+        "name": "[Éļíẋíŕ óƒ ţĥé Ŵíļðš]"
+      },
+      "greater_elixir_of_fortitude": {
+        "name": "[Ĝŕéáţéŕ Éļíẋíŕ óƒ Ƒóŕţíţúðé]"
+      },
+      "elixir_of_brilliance": {
+        "name": "[Éļíẋíŕ óƒ Ɓŕíļļíáñçé]"
+      },
+      "greater_healing_potion": {
+        "name": "[Ĝŕéáţéŕ Ĥéáļíñĝ Þóţíóñ]"
+      },
+      "greater_mana_potion": {
+        "name": "[Ĝŕéáţéŕ Ɱáñá Þóţíóñ]"
+      },
+      "hunters_stew": {
+        "name": "[Ĥéáŕţý Ĥúñţéŕ'š Šţéŵ]"
+      },
+      "spiced_cider": {
+        "name": "[Šþíçéð Ɱúļļéð Çíðéŕ]"
       },
       "bristleback_maul": {
         "name": "[Ɓŕíšţļéƀáçķ Ɱáúļ]"
