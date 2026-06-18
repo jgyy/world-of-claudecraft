@@ -2048,4 +2048,16 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   "auth.noAccountPrompt": "Впервые в мире?",
   "auth.haveAccountPrompt": "Уже есть аккаунт?",
 
+  "entities.items.raw_brook_minnow.name": "Сырой ручьевой гольян",
+  "entities.items.raw_silver_perch.name": "Сырой серебристый окунь",
+  "entities.items.raw_mossgill_snapper.name": "Сырой моховожаберный луциан",
+  "entities.items.waterlogged_boot.name": "Размокший сапог",
+  "entities.items.raw_mire_eel.name": "Сырой трясинный угорь",
+  "entities.items.raw_bogfin_catfish.name": "Сырой болотноплавниковый сом",
+  "entities.items.murky_tangleweed.name": "Мутная путанница-трава",
+  "entities.items.rusted_lockbox.name": "Ржавый ларец",
+  "entities.items.raw_thornpeak_grayling.name": "Сырой хариус Терновой Вершины",
+  "entities.items.raw_stormcrag_pike.name": "Сырая щука Грозового Утёса",
+  "entities.items.glacial_char.name": "Ледниковый голец",
+  "entities.items.anglers_lucky_coin.name": "Счастливая монета рыбака",
 };

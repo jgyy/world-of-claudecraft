@@ -2048,4 +2048,16 @@ export const it_IT: Partial<Record<TranslationKey, string>> = {
   "auth.noAccountPrompt": "Nuovo nel reame?",
   "auth.haveAccountPrompt": "Hai già un account?",
 
+  "entities.items.raw_brook_minnow.name": "Pesciolino di ruscello crudo",
+  "entities.items.raw_silver_perch.name": "Persico argentato crudo",
+  "entities.items.raw_mossgill_snapper.name": "Dentice dalle branchie muschiose crudo",
+  "entities.items.waterlogged_boot.name": "Stivale inzuppato",
+  "entities.items.raw_mire_eel.name": "Anguilla del pantano cruda",
+  "entities.items.raw_bogfin_catfish.name": "Pesce gatto delle paludi crudo",
+  "entities.items.murky_tangleweed.name": "Viluppalga torbida",
+  "entities.items.rusted_lockbox.name": "Cofanetto arrugginito",
+  "entities.items.raw_thornpeak_grayling.name": "Temolo del Picco Spinoso crudo",
+  "entities.items.raw_stormcrag_pike.name": "Luccio del Dirupo Tempestoso crudo",
+  "entities.items.glacial_char.name": "Salmerino glaciale",
+  "entities.items.anglers_lucky_coin.name": "Moneta portafortuna del pescatore",
 };

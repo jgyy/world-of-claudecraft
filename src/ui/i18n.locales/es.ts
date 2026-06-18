@@ -2048,4 +2048,16 @@ export const es: Partial<Record<TranslationKey, string>> = {
   "auth.noAccountPrompt": "¿Nuevo en el reino?",
   "auth.haveAccountPrompt": "¿Ya tienes una cuenta?",
 
+  "entities.items.raw_brook_minnow.name": "Pececillo de arroyo crudo",
+  "entities.items.raw_silver_perch.name": "Perca plateada cruda",
+  "entities.items.raw_mossgill_snapper.name": "Pargo de agallas musgosas crudo",
+  "entities.items.waterlogged_boot.name": "Bota empapada",
+  "entities.items.raw_mire_eel.name": "Anguila de la ciénaga cruda",
+  "entities.items.raw_bogfin_catfish.name": "Bagre de aletas cenagosas crudo",
+  "entities.items.murky_tangleweed.name": "Marañalga turbia",
+  "entities.items.rusted_lockbox.name": "Cofre oxidado",
+  "entities.items.raw_thornpeak_grayling.name": "Tímalo de la Cima Espinosa crudo",
+  "entities.items.raw_stormcrag_pike.name": "Lucio del Risco Tormentoso crudo",
+  "entities.items.glacial_char.name": "Salvelino glacial",
+  "entities.items.anglers_lucky_coin.name": "Moneda de la suerte del pescador",
 };

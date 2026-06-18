@@ -3,6 +3,7 @@ import {
   DUNGEON_X_THRESHOLD, GROUND_OBJECTS, GROUP_XP_BONUS, INSTANCE_SLOT_COUNT, isArenaPos,
   ITEMS, MOBS, NPCS, PLAYER_START, QUESTS, questRewardItemId, abilitiesKnownAt, instanceOrigin,
   DEEPFEN_SHALLOWS_LAKE,
+  FISHING_CATCHES, DEFAULT_FISHING_ZONE,
   zoneAt, ZONES,
 } from './data';
 import { ARENA_SPAWN_A, ARENA_SPAWN_B, ARENA_SPAWNS_A_2v2, ARENA_SPAWNS_B_2v2 } from './dungeon_layout';
@@ -5034,13 +5035,19 @@ export class Sim {
       this.addItem(THE_CODFATHER_ITEM_ID, 1, meta.entityId);
       return;
     }
-    const roll = this.rng.next();
-    if (roll < 0.7) {
-      this.addItem('raw_mirror_trout', 1, meta.entityId);
-    } else if (roll < 0.9) {
-      this.addItem('tangled_weed', 1, meta.entityId);
-    } else {
-      this.emit({ type: 'log', text: 'No fish are biting.', color: '#999', pid: p.id });
+    // Roll the zone-flavored catch table (data-as-code in content/fishing.ts).
+    // One deterministic rng draw, weighted selection in fixed iteration order;
+    // an empty itemId is a "no bite" miss.
+    const table = FISHING_CATCHES[zoneAt(p.pos.z).id] ?? FISHING_CATCHES[DEFAULT_FISHING_ZONE];
+    const total = table.reduce((sum, c) => sum + c.weight, 0);
+    let roll = this.rng.next() * total;
+    for (const c of table) {
+      roll -= c.weight;
+      if (roll < 0) {
+        if (c.itemId) this.addItem(c.itemId, 1, meta.entityId);
+        else this.emit({ type: 'log', text: 'No fish are biting.', color: '#999', pid: p.id });
+        return;
+      }
     }
   }
 

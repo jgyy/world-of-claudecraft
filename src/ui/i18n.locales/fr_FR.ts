@@ -2048,4 +2048,16 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   "auth.noAccountPrompt": "Nouveau dans le royaume ?",
   "auth.haveAccountPrompt": "Vous avez déjà un compte ?",
 
+  "entities.items.raw_brook_minnow.name": "Vairon de ruisseau cru",
+  "entities.items.raw_silver_perch.name": "Perche argentée crue",
+  "entities.items.raw_mossgill_snapper.name": "Vivaneau des ouïes moussues cru",
+  "entities.items.waterlogged_boot.name": "Botte gorgée d'eau",
+  "entities.items.raw_mire_eel.name": "Anguille des marais crue",
+  "entities.items.raw_bogfin_catfish.name": "Poisson-chat des fanges crues",
+  "entities.items.murky_tangleweed.name": "Enchevêtralgue trouble",
+  "entities.items.rusted_lockbox.name": "Coffret rouillé",
+  "entities.items.raw_thornpeak_grayling.name": "Ombre du Pic Épineux cru",
+  "entities.items.raw_stormcrag_pike.name": "Brochet du Rocher des Tempêtes cru",
+  "entities.items.glacial_char.name": "Omble glaciaire",
+  "entities.items.anglers_lucky_coin.name": "Pièce porte-bonheur du pêcheur",
 };

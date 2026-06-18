@@ -2048,4 +2048,16 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
   "auth.noAccountPrompt": "Novo no reino?",
   "auth.haveAccountPrompt": "Já tem uma conta?",
 
+  "entities.items.raw_brook_minnow.name": "Peixinho-de-Riacho Cru",
+  "entities.items.raw_silver_perch.name": "Perca-Prateada Crua",
+  "entities.items.raw_mossgill_snapper.name": "Pargo das Guelras-de-Musgo Cru",
+  "entities.items.waterlogged_boot.name": "Bota Encharcada",
+  "entities.items.raw_mire_eel.name": "Enguia do Brejo Crua",
+  "entities.items.raw_bogfin_catfish.name": "Bagre Barbatana-do-Pântano Cru",
+  "entities.items.murky_tangleweed.name": "Erva-Emaranhada Turva",
+  "entities.items.rusted_lockbox.name": "Cofre Enferrujado",
+  "entities.items.raw_thornpeak_grayling.name": "Escalo do Pico-Espinhoso Cru",
+  "entities.items.raw_stormcrag_pike.name": "Lúcio do Penhasco-Tempestuoso Cru",
+  "entities.items.glacial_char.name": "Salvelino Glacial",
+  "entities.items.anglers_lucky_coin.name": "Moeda da Sorte do Pescador",
 };

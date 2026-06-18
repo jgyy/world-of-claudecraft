@@ -1106,6 +1106,43 @@ const ITEM_RECIPES: Record<string, IconRecipe> = {
     { p: 'fang', pal: 'gold', x: 18, y: -1, s: 0.5, rot: 1.55 },
   ], ['sparkle']),
   tangled_weed: r('junk', 'venom', [{ p: 'tendrils', pal: 'venom' }]),
+  // --- fishing catch pack ---
+  raw_brook_minnow: r('drink', 'sky', [
+    { p: 'droplet', pal: 'sky', x: -4, y: 0, s: 0.85, rot: 1.55 },
+    { p: 'fang', pal: 'silverWhite', x: 14, y: -1, s: 0.4, rot: 1.55 },
+  ]),
+  raw_silver_perch: r('drink', 'silverWhite', [
+    { p: 'droplet', pal: 'silverWhite', x: -4, y: 0, s: 1.1, rot: 1.55 },
+    { p: 'fang', pal: 'steel', x: 18, y: -1, s: 0.45, rot: 1.55 },
+  ]),
+  raw_mossgill_snapper: r('drink', 'venom', [
+    { p: 'droplet', pal: 'venom', x: -4, y: 0, s: 1.15, rot: 1.55 },
+    { p: 'fang', pal: 'earthBrown', x: 18, y: -1, s: 0.5, rot: 1.55 },
+  ]),
+  waterlogged_boot: r('junk', 'leather', [{ p: 'boot', pal: 'leather' }, { p: 'droplet', pal: 'sky', x: 12, y: -12, s: 0.4 }]),
+  raw_mire_eel: r('drink', 'venom', [
+    { p: 'tendrils', pal: 'venom', x: -2, y: 0, s: 0.9 },
+    { p: 'fang', pal: 'shadowPurple', x: 16, y: -2, s: 0.45, rot: 1.55 },
+  ]),
+  raw_bogfin_catfish: r('drink', 'earthBrown', [
+    { p: 'droplet', pal: 'earthBrown', x: -4, y: 0, s: 1.2, rot: 1.55 },
+    { p: 'fang', pal: 'bone', x: 18, y: -1, s: 0.5, rot: 1.55 },
+  ]),
+  murky_tangleweed: r('junk', 'venom', [{ p: 'tendrils', pal: 'venom' }, { p: 'droplet', pal: 'earthBrown', x: 10, y: 10, s: 0.4 }]),
+  rusted_lockbox: r('junk', 'steel', ['crate', { p: 'gem', x: 0, y: 2, s: 0.4, pal: 'gold' }]),
+  raw_thornpeak_grayling: r('drink', 'ice', [
+    { p: 'droplet', pal: 'ice', x: -4, y: 0, s: 1.15, rot: 1.55 },
+    { p: 'fang', pal: 'silverWhite', x: 18, y: -1, s: 0.5, rot: 1.55 },
+  ]),
+  raw_stormcrag_pike: r('drink', 'sky', [
+    { p: 'droplet', pal: 'sky', x: -5, y: 0, s: 1.3, rot: 1.55 },
+    { p: 'fang', pal: 'steel', x: 19, y: -1, s: 0.55, rot: 1.55 },
+  ], ['arcs']),
+  glacial_char: r('frost', 'ice', [
+    { p: 'droplet', pal: 'ice', x: -5, y: 0, s: 1.3, rot: 1.55 },
+    { p: 'fang', pal: 'silverWhite', x: 19, y: -1, s: 0.55, rot: 1.55 },
+  ], ['sparkle']),
+  anglers_lucky_coin: r('treasure', 'gold', [{ p: 'gem', pal: 'gold' }], ['sparkle', 'glow']),
   roasted_boar: r('food', 'ember', ['meat']),
   conjured_water: r('arcane', 'sky', [{ p: 'potion', pal: 'sky' }], ['sparkle']),
   gravecaller_blade: r('shadow', 'steel', ['sword', { p: 'skull', ...BR }], ['glow']),

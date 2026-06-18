@@ -5,7 +5,7 @@ import {
   type SimEvent, dist2d, FISHING_CAST_ID, FISHING_CAST_TIME, MAX_LEVEL, xpForLevel, mobXpValue,
   rageConversion, rageFromDealing, rageFromTaking, spellHitChance, meleeMissChance,
 } from '../src/sim/types';
-import { DEEPFEN_SHALLOWS_LAKE, LAKE, QUESTS, GROUND_OBJECTS, ITEMS, abilitiesKnownAt } from '../src/sim/data';
+import { DEEPFEN_SHALLOWS_LAKE, LAKE, QUESTS, GROUND_OBJECTS, ITEMS, FISHING_CATCHES, DEFAULT_FISHING_ZONE, abilitiesKnownAt } from '../src/sim/data';
 import { GROUND_PICKUP_LINES } from '../src/sim/content/ground_pickup_lines';
 import { terrainHeight, WATER_LEVEL } from '../src/sim/world';
 
@@ -849,12 +849,19 @@ describe('food, drink, vendor', () => {
     sim.addItem('simple_fishing_pole', 1);
     sim.events = [];
     sim.useItem('simple_fishing_pole');
-    expect(sim.countItem('raw_mirror_trout') + sim.countItem('tangled_weed')).toBe(0);
+    // Mirror Lake sits in Eastbrook Vale (zone1); its catch table yields one of
+    // these data-driven items or a "no bite" miss.
+    const EASTBROOK_CATCHES = [
+      'raw_mirror_trout', 'raw_brook_minnow', 'raw_silver_perch',
+      'raw_mossgill_snapper', 'tangled_weed', 'waterlogged_boot',
+    ];
+    const totalCaught = () => EASTBROOK_CATCHES.reduce((n, id) => n + sim.countItem(id), 0);
+    expect(totalCaught()).toBe(0);
 
     const events: SimEvent[] = [];
     for (let i = 0; i < 20 * 6 && sim.player.castingAbility; i++) events.push(...sim.tick());
 
-    const catchCount = sim.countItem('raw_mirror_trout') + sim.countItem('tangled_weed');
+    const catchCount = totalCaught();
     expect(sim.player.castingAbility).toBe(null);
     expect(catchCount === 1 || catchCount === 0).toBe(true);
     if (catchCount === 0) {
@@ -864,6 +871,20 @@ describe('food, drink, vendor', () => {
       }));
     }
     expect(sim.countItem('simple_fishing_pole')).toBe(1);
+  });
+
+  it('every fishing catch references a real item and a default zone exists', () => {
+    expect(FISHING_CATCHES[DEFAULT_FISHING_ZONE]).toBeDefined();
+    for (const [zoneId, table] of Object.entries(FISHING_CATCHES)) {
+      expect(table.length, `${zoneId} table is empty`).toBeGreaterThan(0);
+      const total = table.reduce((s, c) => s + c.weight, 0);
+      expect(total, `${zoneId} total weight`).toBeGreaterThan(0);
+      for (const c of table) {
+        expect(c.weight).toBeGreaterThan(0);
+        // An empty itemId is the legal "no bite" sentinel; everything else must resolve.
+        if (c.itemId) expect(ITEMS[c.itemId], `${zoneId} -> ${c.itemId}`).toBeDefined();
+      }
+    }
   });
 
   it('catches The Codfather in Deepfen Shallows while its quest is active', () => {

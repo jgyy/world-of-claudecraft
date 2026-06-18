@@ -2048,4 +2048,16 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   "auth.noAccountPrompt": "Neu im Reich?",
   "auth.haveAccountPrompt": "Schon ein Konto?",
 
+  "entities.items.raw_brook_minnow.name": "Roher Bachelritzling",
+  "entities.items.raw_silver_perch.name": "Roher Silberbarsch",
+  "entities.items.raw_mossgill_snapper.name": "Roher Moosflossen-Schnapper",
+  "entities.items.waterlogged_boot.name": "Vollgesogener Stiefel",
+  "entities.items.raw_mire_eel.name": "Roher Sumpfaal",
+  "entities.items.raw_bogfin_catfish.name": "Roher Moorflossen-Wels",
+  "entities.items.murky_tangleweed.name": "Trübes Schlingkraut",
+  "entities.items.rusted_lockbox.name": "Verrostete Schatztruhe",
+  "entities.items.raw_thornpeak_grayling.name": "Rohe Dorngipfel-Äsche",
+  "entities.items.raw_stormcrag_pike.name": "Roher Sturmfels-Hecht",
+  "entities.items.glacial_char.name": "Gletscher-Saibling",
+  "entities.items.anglers_lucky_coin.name": "Glücksmünze des Anglers",
 };

@@ -2048,4 +2048,16 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   "auth.noAccountPrompt": "처음이신가요?",
   "auth.haveAccountPrompt": "이미 계정이 있으신가요?",
 
+  "entities.items.raw_brook_minnow.name": "날것 시냇물 피라미",
+  "entities.items.raw_silver_perch.name": "날것 은빛 농어",
+  "entities.items.raw_mossgill_snapper.name": "날것 이끼아가미 도미",
+  "entities.items.waterlogged_boot.name": "물에 잠긴 장화",
+  "entities.items.raw_mire_eel.name": "날것 늪지 뱀장어",
+  "entities.items.raw_bogfin_catfish.name": "날것 진흙지느러미 메기",
+  "entities.items.murky_tangleweed.name": "탁한 엉킨해초",
+  "entities.items.rusted_lockbox.name": "녹슨 자물쇠 상자",
+  "entities.items.raw_thornpeak_grayling.name": "날것 가시봉우리 사루기",
+  "entities.items.raw_stormcrag_pike.name": "날것 폭풍바위 강꼬치고기",
+  "entities.items.glacial_char.name": "빙하 곤들매기",
+  "entities.items.anglers_lucky_coin.name": "낚시꾼의 행운 동전",
 };

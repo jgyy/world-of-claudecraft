@@ -22,6 +22,7 @@ import {
   ZONE3_QUESTS, ZONE3_QUEST_ORDER, ZONE3_ROADS, ZONE3_ZONE,
 } from './content/zone3';
 import { DUNGEON_DEFS, DUNGEON_MOBS } from './content/dungeons';
+import { FISHING_CATCHES, FISHING_ITEMS, DEFAULT_FISHING_ZONE } from './content/fishing';
 import { WARLOCK_PET_MOBS } from './content/warlock_pets';
 import { GROUND_PICKUP_LINES } from './content/ground_pickup_lines';
 import {
@@ -50,7 +51,10 @@ export type {
 // Merged content tables
 // ---------------------------------------------------------------------------
 
-export const ITEMS: Record<string, ItemDef> = mergeItems(BASE_ITEMS, ZONE2_ITEMS, ZONE3_ITEMS, TEMPLE_ITEMS);
+export const ITEMS: Record<string, ItemDef> = mergeItems(BASE_ITEMS, ZONE2_ITEMS, ZONE3_ITEMS, TEMPLE_ITEMS, FISHING_ITEMS);
+
+export { FISHING_CATCHES, DEFAULT_FISHING_ZONE };
+export type { FishingCatch } from './content/fishing';
 
 export const MOBS: Record<string, MobTemplate> = {
   ...ZONE1_MOBS, ...ZONE2_MOBS, ...ZONE3_MOBS, ...DUNGEON_MOBS,

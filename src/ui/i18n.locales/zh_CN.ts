@@ -2048,4 +2048,16 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   "auth.noAccountPrompt": "初来乍到？",
   "auth.haveAccountPrompt": "已有账号？",
 
+  "entities.items.raw_brook_minnow.name": "生溪鳞鲦",
+  "entities.items.raw_silver_perch.name": "生银鳍鲈",
+  "entities.items.raw_mossgill_snapper.name": "生苔鳃鲷",
+  "entities.items.waterlogged_boot.name": "浸水的旧靴",
+  "entities.items.raw_mire_eel.name": "生沼泽鳗",
+  "entities.items.raw_bogfin_catfish.name": "生泥鳍鲶",
+  "entities.items.murky_tangleweed.name": "浑浊缠藻",
+  "entities.items.rusted_lockbox.name": "锈蚀的锁箱",
+  "entities.items.raw_thornpeak_grayling.name": "生荆峰茴鱼",
+  "entities.items.raw_stormcrag_pike.name": "生暴岩狗鱼",
+  "entities.items.glacial_char.name": "冰川红点鲑",
+  "entities.items.anglers_lucky_coin.name": "垂钓者的幸运币",
 };

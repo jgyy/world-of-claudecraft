@@ -2429,6 +2429,42 @@ export const en: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Aldric's Seal"
+      },
+      "raw_brook_minnow": {
+        "name": "Raw Brook Minnow"
+      },
+      "raw_silver_perch": {
+        "name": "Raw Silver Perch"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Raw Mossgill Snapper"
+      },
+      "waterlogged_boot": {
+        "name": "Waterlogged Boot"
+      },
+      "raw_mire_eel": {
+        "name": "Raw Mire Eel"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Raw Bogfin Catfish"
+      },
+      "murky_tangleweed": {
+        "name": "Murky Tangleweed"
+      },
+      "rusted_lockbox": {
+        "name": "Rusted Lockbox"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Raw Thornpeak Grayling"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Raw Stormcrag Pike"
+      },
+      "glacial_char": {
+        "name": "Glacial Char"
+      },
+      "anglers_lucky_coin": {
+        "name": "Angler's Lucky Coin"
       }
     },
     "mobs": {
@@ -6152,6 +6188,42 @@ export const es: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Sello de Aldric"
+      },
+      "raw_brook_minnow": {
+        "name": "Pececillo de arroyo crudo"
+      },
+      "raw_silver_perch": {
+        "name": "Perca plateada cruda"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Pargo de agallas musgosas crudo"
+      },
+      "waterlogged_boot": {
+        "name": "Bota empapada"
+      },
+      "raw_mire_eel": {
+        "name": "Anguila de la ciénaga cruda"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Bagre de aletas cenagosas crudo"
+      },
+      "murky_tangleweed": {
+        "name": "Marañalga turbia"
+      },
+      "rusted_lockbox": {
+        "name": "Cofre oxidado"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Tímalo de la Cima Espinosa crudo"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Lucio del Risco Tormentoso crudo"
+      },
+      "glacial_char": {
+        "name": "Salvelino glacial"
+      },
+      "anglers_lucky_coin": {
+        "name": "Moneda de la suerte del pescador"
       }
     },
     "mobs": {
@@ -9875,6 +9947,42 @@ export const es_ES: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Sello de Aldric"
+      },
+      "raw_brook_minnow": {
+        "name": "Pececillo de arroyo crudo"
+      },
+      "raw_silver_perch": {
+        "name": "Perca plateada cruda"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Pargo de agallas musgosas crudo"
+      },
+      "waterlogged_boot": {
+        "name": "Bota empapada"
+      },
+      "raw_mire_eel": {
+        "name": "Anguila de la ciénaga cruda"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Bagre de aletas cenagosas crudo"
+      },
+      "murky_tangleweed": {
+        "name": "Marañalga turbia"
+      },
+      "rusted_lockbox": {
+        "name": "Cofre oxidado"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Tímalo de la Cima Espinosa crudo"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Lucio del Risco Tormentoso crudo"
+      },
+      "glacial_char": {
+        "name": "Salvelino glacial"
+      },
+      "anglers_lucky_coin": {
+        "name": "Moneda de la suerte del pescador"
       }
     },
     "mobs": {
@@ -13598,6 +13706,42 @@ export const fr_FR: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Sceau d'Aldric"
+      },
+      "raw_brook_minnow": {
+        "name": "Vairon de ruisseau cru"
+      },
+      "raw_silver_perch": {
+        "name": "Perche argentée crue"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Vivaneau des ouïes moussues cru"
+      },
+      "waterlogged_boot": {
+        "name": "Botte gorgée d'eau"
+      },
+      "raw_mire_eel": {
+        "name": "Anguille des marais crue"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Poisson-chat des fanges crues"
+      },
+      "murky_tangleweed": {
+        "name": "Enchevêtralgue trouble"
+      },
+      "rusted_lockbox": {
+        "name": "Coffret rouillé"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Ombre du Pic Épineux cru"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Brochet du Rocher des Tempêtes cru"
+      },
+      "glacial_char": {
+        "name": "Omble glaciaire"
+      },
+      "anglers_lucky_coin": {
+        "name": "Pièce porte-bonheur du pêcheur"
       }
     },
     "mobs": {
@@ -17321,6 +17465,42 @@ export const fr_CA: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Sceau d'Aldric"
+      },
+      "raw_brook_minnow": {
+        "name": "Vairon de ruisseau cru"
+      },
+      "raw_silver_perch": {
+        "name": "Perche argentée crue"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Vivaneau des ouïes moussues cru"
+      },
+      "waterlogged_boot": {
+        "name": "Botte gorgée d'eau"
+      },
+      "raw_mire_eel": {
+        "name": "Anguille des marais crue"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Poisson-chat des fanges crues"
+      },
+      "murky_tangleweed": {
+        "name": "Enchevêtralgue trouble"
+      },
+      "rusted_lockbox": {
+        "name": "Coffret rouillé"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Ombre du Pic Épineux cru"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Brochet du Rocher des Tempêtes cru"
+      },
+      "glacial_char": {
+        "name": "Omble glaciaire"
+      },
+      "anglers_lucky_coin": {
+        "name": "Pièce porte-bonheur du pêcheur"
       }
     },
     "mobs": {
@@ -21044,6 +21224,42 @@ export const en_CA: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Aldric's Seal"
+      },
+      "raw_brook_minnow": {
+        "name": "Raw Brook Minnow"
+      },
+      "raw_silver_perch": {
+        "name": "Raw Silver Perch"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Raw Mossgill Snapper"
+      },
+      "waterlogged_boot": {
+        "name": "Waterlogged Boot"
+      },
+      "raw_mire_eel": {
+        "name": "Raw Mire Eel"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Raw Bogfin Catfish"
+      },
+      "murky_tangleweed": {
+        "name": "Murky Tangleweed"
+      },
+      "rusted_lockbox": {
+        "name": "Rusted Lockbox"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Raw Thornpeak Grayling"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Raw Stormcrag Pike"
+      },
+      "glacial_char": {
+        "name": "Glacial Char"
+      },
+      "anglers_lucky_coin": {
+        "name": "Angler's Lucky Coin"
       }
     },
     "mobs": {
@@ -24767,6 +24983,42 @@ export const it_IT: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Sigillo di Aldric"
+      },
+      "raw_brook_minnow": {
+        "name": "Pesciolino di ruscello crudo"
+      },
+      "raw_silver_perch": {
+        "name": "Persico argentato crudo"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Dentice dalle branchie muschiose crudo"
+      },
+      "waterlogged_boot": {
+        "name": "Stivale inzuppato"
+      },
+      "raw_mire_eel": {
+        "name": "Anguilla del pantano cruda"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Pesce gatto delle paludi crudo"
+      },
+      "murky_tangleweed": {
+        "name": "Viluppalga torbida"
+      },
+      "rusted_lockbox": {
+        "name": "Cofanetto arrugginito"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Temolo del Picco Spinoso crudo"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Luccio del Dirupo Tempestoso crudo"
+      },
+      "glacial_char": {
+        "name": "Salmerino glaciale"
+      },
+      "anglers_lucky_coin": {
+        "name": "Moneta portafortuna del pescatore"
       }
     },
     "mobs": {
@@ -28490,6 +28742,42 @@ export const de_DE: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Aldrics Siegel"
+      },
+      "raw_brook_minnow": {
+        "name": "Roher Bachelritzling"
+      },
+      "raw_silver_perch": {
+        "name": "Roher Silberbarsch"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Roher Moosflossen-Schnapper"
+      },
+      "waterlogged_boot": {
+        "name": "Vollgesogener Stiefel"
+      },
+      "raw_mire_eel": {
+        "name": "Roher Sumpfaal"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Roher Moorflossen-Wels"
+      },
+      "murky_tangleweed": {
+        "name": "Trübes Schlingkraut"
+      },
+      "rusted_lockbox": {
+        "name": "Verrostete Schatztruhe"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Rohe Dorngipfel-Äsche"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Roher Sturmfels-Hecht"
+      },
+      "glacial_char": {
+        "name": "Gletscher-Saibling"
+      },
+      "anglers_lucky_coin": {
+        "name": "Glücksmünze des Anglers"
       }
     },
     "mobs": {
@@ -32213,6 +32501,42 @@ export const zh_CN: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "奥德里克的徽印"
+      },
+      "raw_brook_minnow": {
+        "name": "生溪鳞鲦"
+      },
+      "raw_silver_perch": {
+        "name": "生银鳍鲈"
+      },
+      "raw_mossgill_snapper": {
+        "name": "生苔鳃鲷"
+      },
+      "waterlogged_boot": {
+        "name": "浸水的旧靴"
+      },
+      "raw_mire_eel": {
+        "name": "生沼泽鳗"
+      },
+      "raw_bogfin_catfish": {
+        "name": "生泥鳍鲶"
+      },
+      "murky_tangleweed": {
+        "name": "浑浊缠藻"
+      },
+      "rusted_lockbox": {
+        "name": "锈蚀的锁箱"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "生荆峰茴鱼"
+      },
+      "raw_stormcrag_pike": {
+        "name": "生暴岩狗鱼"
+      },
+      "glacial_char": {
+        "name": "冰川红点鲑"
+      },
+      "anglers_lucky_coin": {
+        "name": "垂钓者的幸运币"
       }
     },
     "mobs": {
@@ -35936,6 +36260,42 @@ export const zh_TW: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "奧德里克的徽印"
+      },
+      "raw_brook_minnow": {
+        "name": "生溪鱗鯈"
+      },
+      "raw_silver_perch": {
+        "name": "生銀鰭鱸"
+      },
+      "raw_mossgill_snapper": {
+        "name": "生苔鰓鯛"
+      },
+      "waterlogged_boot": {
+        "name": "浸水的舊靴"
+      },
+      "raw_mire_eel": {
+        "name": "生沼澤鰻"
+      },
+      "raw_bogfin_catfish": {
+        "name": "生泥鰭鯰"
+      },
+      "murky_tangleweed": {
+        "name": "渾濁纏藻"
+      },
+      "rusted_lockbox": {
+        "name": "鏽蝕的鎖箱"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "生荊峰茴魚"
+      },
+      "raw_stormcrag_pike": {
+        "name": "生暴岩狗魚"
+      },
+      "glacial_char": {
+        "name": "冰川紅點鮭"
+      },
+      "anglers_lucky_coin": {
+        "name": "垂釣者的幸運幣"
       }
     },
     "mobs": {
@@ -39659,6 +40019,42 @@ export const ko_KR: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "알드릭의 인장"
+      },
+      "raw_brook_minnow": {
+        "name": "날것 시냇물 피라미"
+      },
+      "raw_silver_perch": {
+        "name": "날것 은빛 농어"
+      },
+      "raw_mossgill_snapper": {
+        "name": "날것 이끼아가미 도미"
+      },
+      "waterlogged_boot": {
+        "name": "물에 잠긴 장화"
+      },
+      "raw_mire_eel": {
+        "name": "날것 늪지 뱀장어"
+      },
+      "raw_bogfin_catfish": {
+        "name": "날것 진흙지느러미 메기"
+      },
+      "murky_tangleweed": {
+        "name": "탁한 엉킨해초"
+      },
+      "rusted_lockbox": {
+        "name": "녹슨 자물쇠 상자"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "날것 가시봉우리 사루기"
+      },
+      "raw_stormcrag_pike": {
+        "name": "날것 폭풍바위 강꼬치고기"
+      },
+      "glacial_char": {
+        "name": "빙하 곤들매기"
+      },
+      "anglers_lucky_coin": {
+        "name": "낚시꾼의 행운 동전"
       }
     },
     "mobs": {
@@ -43382,6 +43778,42 @@ export const ja_JP: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "アルドリックの印章"
+      },
+      "raw_brook_minnow": {
+        "name": "生の小川のミノー"
+      },
+      "raw_silver_perch": {
+        "name": "生の銀パーチ"
+      },
+      "raw_mossgill_snapper": {
+        "name": "生の苔鰓フエダイ"
+      },
+      "waterlogged_boot": {
+        "name": "水浸しのブーツ"
+      },
+      "raw_mire_eel": {
+        "name": "生の沼ウナギ"
+      },
+      "raw_bogfin_catfish": {
+        "name": "生の泥鰭ナマズ"
+      },
+      "murky_tangleweed": {
+        "name": "濁った絡み藻"
+      },
+      "rusted_lockbox": {
+        "name": "錆びた施錠箱"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "生の棘峰カワヒメマス"
+      },
+      "raw_stormcrag_pike": {
+        "name": "生の嵐岩カワカマス"
+      },
+      "glacial_char": {
+        "name": "氷河イワナ"
+      },
+      "anglers_lucky_coin": {
+        "name": "釣り人の幸運コイン"
       }
     },
     "mobs": {
@@ -47105,6 +47537,42 @@ export const pt_BR: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Selo de Aldric"
+      },
+      "raw_brook_minnow": {
+        "name": "Peixinho-de-Riacho Cru"
+      },
+      "raw_silver_perch": {
+        "name": "Perca-Prateada Crua"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Pargo das Guelras-de-Musgo Cru"
+      },
+      "waterlogged_boot": {
+        "name": "Bota Encharcada"
+      },
+      "raw_mire_eel": {
+        "name": "Enguia do Brejo Crua"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Bagre Barbatana-do-Pântano Cru"
+      },
+      "murky_tangleweed": {
+        "name": "Erva-Emaranhada Turva"
+      },
+      "rusted_lockbox": {
+        "name": "Cofre Enferrujado"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Escalo do Pico-Espinhoso Cru"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Lúcio do Penhasco-Tempestuoso Cru"
+      },
+      "glacial_char": {
+        "name": "Salvelino Glacial"
+      },
+      "anglers_lucky_coin": {
+        "name": "Moeda da Sorte do Pescador"
       }
     },
     "mobs": {
@@ -50828,6 +51296,42 @@ export const ru_RU: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "Печать Алдрика"
+      },
+      "raw_brook_minnow": {
+        "name": "Сырой ручьевой гольян"
+      },
+      "raw_silver_perch": {
+        "name": "Сырой серебристый окунь"
+      },
+      "raw_mossgill_snapper": {
+        "name": "Сырой моховожаберный луциан"
+      },
+      "waterlogged_boot": {
+        "name": "Размокший сапог"
+      },
+      "raw_mire_eel": {
+        "name": "Сырой трясинный угорь"
+      },
+      "raw_bogfin_catfish": {
+        "name": "Сырой болотноплавниковый сом"
+      },
+      "murky_tangleweed": {
+        "name": "Мутная путанница-трава"
+      },
+      "rusted_lockbox": {
+        "name": "Ржавый ларец"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "Сырой хариус Терновой Вершины"
+      },
+      "raw_stormcrag_pike": {
+        "name": "Сырая щука Грозового Утёса"
+      },
+      "glacial_char": {
+        "name": "Ледниковый голец"
+      },
+      "anglers_lucky_coin": {
+        "name": "Счастливая монета рыбака"
       }
     },
     "mobs": {
@@ -54584,6 +55088,42 @@ export const en_XA: EnTranslations = {
       },
       "aldrics_seal": {
         "name": "[Áļðŕíç'š Šéáļ]"
+      },
+      "raw_brook_minnow": {
+        "name": "[Ŕáŵ Ɓŕóóķ Ɱíññóŵ]"
+      },
+      "raw_silver_perch": {
+        "name": "[Ŕáŵ Šíļʋéŕ Þéŕçĥ]"
+      },
+      "raw_mossgill_snapper": {
+        "name": "[Ŕáŵ Ɱóššĝíļļ Šñáþþéŕ]"
+      },
+      "waterlogged_boot": {
+        "name": "[Ŵáţéŕļóĝĝéð Ɓóóţ]"
+      },
+      "raw_mire_eel": {
+        "name": "[Ŕáŵ Ɱíŕé Ééļ]"
+      },
+      "raw_bogfin_catfish": {
+        "name": "[Ŕáŵ Ɓóĝƒíñ Çáţƒíšĥ]"
+      },
+      "murky_tangleweed": {
+        "name": "[Ɱúŕķý Ţáñĝļéŵééð]"
+      },
+      "rusted_lockbox": {
+        "name": "[Ŕúšţéð Ļóçķƀóẋ]"
+      },
+      "raw_thornpeak_grayling": {
+        "name": "[Ŕáŵ Ţĥóŕñþéáķ Ĝŕáýļíñĝ]"
+      },
+      "raw_stormcrag_pike": {
+        "name": "[Ŕáŵ Šţóŕɱçŕáĝ Þíķé]"
+      },
+      "glacial_char": {
+        "name": "[Ĝļáçíáļ Çĥáŕ]"
+      },
+      "anglers_lucky_coin": {
+        "name": "[Áñĝļéŕ'š Ļúçķý Çóíñ]"
       }
     },
     "mobs": {

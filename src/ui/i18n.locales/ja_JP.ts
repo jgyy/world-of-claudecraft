@@ -2048,4 +2048,16 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   "auth.noAccountPrompt": "初めてですか？",
   "auth.haveAccountPrompt": "アカウントをお持ちですか？",
 
+  "entities.items.raw_brook_minnow.name": "生の小川のミノー",
+  "entities.items.raw_silver_perch.name": "生の銀パーチ",
+  "entities.items.raw_mossgill_snapper.name": "生の苔鰓フエダイ",
+  "entities.items.waterlogged_boot.name": "水浸しのブーツ",
+  "entities.items.raw_mire_eel.name": "生の沼ウナギ",
+  "entities.items.raw_bogfin_catfish.name": "生の泥鰭ナマズ",
+  "entities.items.murky_tangleweed.name": "濁った絡み藻",
+  "entities.items.rusted_lockbox.name": "錆びた施錠箱",
+  "entities.items.raw_thornpeak_grayling.name": "生の棘峰カワヒメマス",
+  "entities.items.raw_stormcrag_pike.name": "生の嵐岩カワカマス",
+  "entities.items.glacial_char.name": "氷河イワナ",
+  "entities.items.anglers_lucky_coin.name": "釣り人の幸運コイン",
 };
