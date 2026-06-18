@@ -3283,6 +3283,15 @@ export class Sim {
       amount = Math.round(amount * 0.9);
     }
 
+    // Expose: a cracked-guard debuff amplifies the physical damage the victim
+    // takes (from any attacker) until it expires. Armor is already applied at the
+    // swing site, so this rides on top of the post-mitigation amount.
+    if (school === 'physical' && amount > 0) {
+      let exposeMult = 1;
+      for (const a of target.auras) if (a.kind === 'expose') exposeMult += a.value;
+      if (exposeMult !== 1) amount = Math.round(amount * exposeMult);
+    }
+
     // absorb shields soak damage first
     if (amount > 0) {
       for (let i = target.auras.length - 1; i >= 0 && amount > 0; i--) {
@@ -4356,6 +4365,23 @@ export class Sim {
         value: 0,
         sourceId: mob.id,
         school: concuss.school ?? 'physical',
+      });
+    }
+
+    // Expose: a landed hit can crack the victim's guard, raising the physical
+    // damage they take for a duration. Guarded on `hostile` so a friendly pet
+    // (mobSwing's other caller) never debuffs the party.
+    const expose = MOBS[mob.templateId]?.expose;
+    if (expose && mob.hostile && !target.dead && this.rng.chance(expose.chance)) {
+      this.applyAura(target, {
+        id: `expose_${mob.templateId}`,
+        name: expose.name,
+        kind: 'expose',
+        remaining: expose.duration,
+        duration: expose.duration,
+        value: expose.dmgIncrease,
+        sourceId: mob.id,
+        school: (expose.school as Aura['school']) ?? 'physical',
       });
     }
   }

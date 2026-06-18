@@ -215,6 +215,9 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     id: 'varkas_boneguard', name: 'Varkas Boneguard', minLevel: 18, maxLevel: 19, family: 'undead',
     hpBase: 64, hpPerLevel: 22, dmgBase: 12, dmgPerLevel: 2.8, attackSpeed: 2.3,
     armorPerLevel: 20, moveSpeed: 6.5, aggroRadius: 12,
+    // Shattering Maul: a landed hit can crack the victim's guard, leaving them
+    // taking +18% physical damage from every attacker for 8s.
+    expose: { chance: 0.25, dmgIncrease: 0.18, duration: 8, name: 'Cracked Guard' },
     loot: [],
     scale: 1.0, color: 0xc9c2b5,
   },
