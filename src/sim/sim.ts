@@ -8395,6 +8395,15 @@ export class Sim {
       { itemId: 'sturdy_belt', count: 1, price: 1700 },
       { itemId: 'silk_sash', count: 1, price: 1700 },
       { itemId: 'roughspun_gloves', count: 1, price: 1500 },
+      // Crossroads Outfitters — eight pieces kept in standing stock
+      { itemId: 'tradesman_hatchet', count: 1, price: 2300 },
+      { itemId: 'drovers_staff', count: 1, price: 2500 },
+      { itemId: 'caravan_warden_dirk', count: 1, price: 2400 },
+      { itemId: 'outrider_brigandine', count: 1, price: 2600 },
+      { itemId: 'caravan_quilted_vest', count: 1, price: 1800 },
+      { itemId: 'outrider_legguards', count: 1, price: 2100 },
+      { itemId: 'pilgrims_leggings', count: 1, price: 1700 },
+      { itemId: 'outrider_sabatons', count: 1, price: 1900 },
     ];
     for (const s of stock) {
       if (!ITEMS[s.itemId]) continue;

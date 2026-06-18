@@ -2363,6 +2363,42 @@ export const en: EnTranslations = {
       "mossy_handwraps": {
         "name": "Mossgrown Handwraps"
       },
+      "crossroads_saber": {
+        "name": "Crossroads Saber"
+      },
+      "tradesman_hatchet": {
+        "name": "Tradesman's Hatchet"
+      },
+      "drovers_staff": {
+        "name": "Drover's Staff"
+      },
+      "caravan_warden_dirk": {
+        "name": "Caravan Warden Dirk"
+      },
+      "outrider_brigandine": {
+        "name": "Outrider Brigandine"
+      },
+      "caravan_quilted_vest": {
+        "name": "Caravan Quilted Vest"
+      },
+      "wanderers_chestguard": {
+        "name": "Wanderer's Chestguard"
+      },
+      "outrider_legguards": {
+        "name": "Outrider Legguards"
+      },
+      "trail_leggings": {
+        "name": "Trailworn Leggings"
+      },
+      "pilgrims_leggings": {
+        "name": "Pilgrim's Leggings"
+      },
+      "outrider_sabatons": {
+        "name": "Outrider Sabatons"
+      },
+      "milepost_boots": {
+        "name": "Milepost Boots"
+      },
       "bristleback_maul": {
         "name": "Bristleback Maul"
       },
@@ -6410,6 +6446,42 @@ export const es: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Envolturas cubiertas de musgo"
+      },
+      "crossroads_saber": {
+        "name": "Sable de la Encrucijada"
+      },
+      "tradesman_hatchet": {
+        "name": "Hachuela del mercader"
+      },
+      "drovers_staff": {
+        "name": "Bastón del arriero"
+      },
+      "caravan_warden_dirk": {
+        "name": "Daga del guardián de caravana"
+      },
+      "outrider_brigandine": {
+        "name": "Brigantina del jinete de avanzada"
+      },
+      "caravan_quilted_vest": {
+        "name": "Chaleco acolchado de caravana"
+      },
+      "wanderers_chestguard": {
+        "name": "Peto del vagabundo"
+      },
+      "outrider_legguards": {
+        "name": "Quijotes del jinete de avanzada"
+      },
+      "trail_leggings": {
+        "name": "Leotardos gastados del camino"
+      },
+      "pilgrims_leggings": {
+        "name": "Leotardos del peregrino"
+      },
+      "outrider_sabatons": {
+        "name": "Escarpes del jinete de avanzada"
+      },
+      "milepost_boots": {
+        "name": "Botas de hito"
       },
       "bristleback_maul": {
         "name": "Maza Bristleback"
@@ -10459,6 +10531,42 @@ export const es_ES: EnTranslations = {
       "mossy_handwraps": {
         "name": "Envolturas cubiertas de musgo"
       },
+      "crossroads_saber": {
+        "name": "Sable de la Encrucijada"
+      },
+      "tradesman_hatchet": {
+        "name": "Hachuela del mercader"
+      },
+      "drovers_staff": {
+        "name": "Bastón del arriero"
+      },
+      "caravan_warden_dirk": {
+        "name": "Daga del guardián de caravana"
+      },
+      "outrider_brigandine": {
+        "name": "Brigantina del jinete de avanzada"
+      },
+      "caravan_quilted_vest": {
+        "name": "Chaleco acolchado de caravana"
+      },
+      "wanderers_chestguard": {
+        "name": "Peto del vagabundo"
+      },
+      "outrider_legguards": {
+        "name": "Quijotes del jinete de avanzada"
+      },
+      "trail_leggings": {
+        "name": "Leotardos gastados del camino"
+      },
+      "pilgrims_leggings": {
+        "name": "Leotardos del peregrino"
+      },
+      "outrider_sabatons": {
+        "name": "Escarpes del jinete de avanzada"
+      },
+      "milepost_boots": {
+        "name": "Botas de hito"
+      },
       "bristleback_maul": {
         "name": "Maza Bristleback"
       },
@@ -14506,6 +14614,42 @@ export const fr_FR: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Mitaines moussues"
+      },
+      "crossroads_saber": {
+        "name": "Sabre du carrefour"
+      },
+      "tradesman_hatchet": {
+        "name": "Hachette du marchand"
+      },
+      "drovers_staff": {
+        "name": "Bâton du bouvier"
+      },
+      "caravan_warden_dirk": {
+        "name": "Dague du gardien de caravane"
+      },
+      "outrider_brigandine": {
+        "name": "Brigandine de l'éclaireur"
+      },
+      "caravan_quilted_vest": {
+        "name": "Veste matelassée de caravane"
+      },
+      "wanderers_chestguard": {
+        "name": "Plastron du vagabond"
+      },
+      "outrider_legguards": {
+        "name": "Jambières de l'éclaireur"
+      },
+      "trail_leggings": {
+        "name": "Jambières usées par la route"
+      },
+      "pilgrims_leggings": {
+        "name": "Jambières du pèlerin"
+      },
+      "outrider_sabatons": {
+        "name": "Solerets de l'éclaireur"
+      },
+      "milepost_boots": {
+        "name": "Bottes de borne"
       },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
@@ -18555,6 +18699,42 @@ export const fr_CA: EnTranslations = {
       "mossy_handwraps": {
         "name": "Mitaines moussues"
       },
+      "crossroads_saber": {
+        "name": "Sabre du carrefour"
+      },
+      "tradesman_hatchet": {
+        "name": "Hachette du marchand"
+      },
+      "drovers_staff": {
+        "name": "Bâton du bouvier"
+      },
+      "caravan_warden_dirk": {
+        "name": "Dague du gardien de caravane"
+      },
+      "outrider_brigandine": {
+        "name": "Brigandine de l'éclaireur"
+      },
+      "caravan_quilted_vest": {
+        "name": "Veste matelassée de caravane"
+      },
+      "wanderers_chestguard": {
+        "name": "Plastron du vagabond"
+      },
+      "outrider_legguards": {
+        "name": "Jambières de l'éclaireur"
+      },
+      "trail_leggings": {
+        "name": "Jambières usées par la route"
+      },
+      "pilgrims_leggings": {
+        "name": "Jambières du pèlerin"
+      },
+      "outrider_sabatons": {
+        "name": "Solerets de l'éclaireur"
+      },
+      "milepost_boots": {
+        "name": "Bottes de borne"
+      },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
       },
@@ -22602,6 +22782,42 @@ export const en_CA: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Mossgrown Handwraps"
+      },
+      "crossroads_saber": {
+        "name": "Crossroads Saber"
+      },
+      "tradesman_hatchet": {
+        "name": "Tradesman's Hatchet"
+      },
+      "drovers_staff": {
+        "name": "Drover's Staff"
+      },
+      "caravan_warden_dirk": {
+        "name": "Caravan Warden Dirk"
+      },
+      "outrider_brigandine": {
+        "name": "Outrider Brigandine"
+      },
+      "caravan_quilted_vest": {
+        "name": "Caravan Quilted Vest"
+      },
+      "wanderers_chestguard": {
+        "name": "Wanderer's Chestguard"
+      },
+      "outrider_legguards": {
+        "name": "Outrider Legguards"
+      },
+      "trail_leggings": {
+        "name": "Trailworn Leggings"
+      },
+      "pilgrims_leggings": {
+        "name": "Pilgrim's Leggings"
+      },
+      "outrider_sabatons": {
+        "name": "Outrider Sabatons"
+      },
+      "milepost_boots": {
+        "name": "Milepost Boots"
       },
       "bristleback_maul": {
         "name": "Bristleback Maul"
@@ -26651,6 +26867,42 @@ export const it_IT: EnTranslations = {
       "mossy_handwraps": {
         "name": "Manopole muschiose"
       },
+      "crossroads_saber": {
+        "name": "Sciabola del crocevia"
+      },
+      "tradesman_hatchet": {
+        "name": "Accetta del mercante"
+      },
+      "drovers_staff": {
+        "name": "Bastone del mandriano"
+      },
+      "caravan_warden_dirk": {
+        "name": "Pugnale del guardiano della carovana"
+      },
+      "outrider_brigandine": {
+        "name": "Brigantina dell'esploratore"
+      },
+      "caravan_quilted_vest": {
+        "name": "Farsetto trapuntato da carovana"
+      },
+      "wanderers_chestguard": {
+        "name": "Corazza del viandante"
+      },
+      "outrider_legguards": {
+        "name": "Gambali dell'esploratore"
+      },
+      "trail_leggings": {
+        "name": "Gambali logori del cammino"
+      },
+      "pilgrims_leggings": {
+        "name": "Gambali del pellegrino"
+      },
+      "outrider_sabatons": {
+        "name": "Scarpe d'arme dell'esploratore"
+      },
+      "milepost_boots": {
+        "name": "Stivali della pietra miliare"
+      },
       "bristleback_maul": {
         "name": "Maglio Bristleback"
       },
@@ -30698,6 +30950,42 @@ export const de_DE: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Bemooste Handwickel"
+      },
+      "crossroads_saber": {
+        "name": "Kreuzweg-Säbel"
+      },
+      "tradesman_hatchet": {
+        "name": "Beil des Händlers"
+      },
+      "drovers_staff": {
+        "name": "Stab des Viehtreibers"
+      },
+      "caravan_warden_dirk": {
+        "name": "Karawanenwächter-Dolch"
+      },
+      "outrider_brigandine": {
+        "name": "Vorreiter-Brigantine"
+      },
+      "caravan_quilted_vest": {
+        "name": "Gesteppte Karawanenweste"
+      },
+      "wanderers_chestguard": {
+        "name": "Wanderer-Brustschutz"
+      },
+      "outrider_legguards": {
+        "name": "Vorreiter-Beinschienen"
+      },
+      "trail_leggings": {
+        "name": "Abgewetzte Wegbeinlinge"
+      },
+      "pilgrims_leggings": {
+        "name": "Pilgerbeinlinge"
+      },
+      "outrider_sabatons": {
+        "name": "Vorreiter-Panzerstiefel"
+      },
+      "milepost_boots": {
+        "name": "Meilenstein-Stiefel"
       },
       "bristleback_maul": {
         "name": "Bristleback-Schlägel"
@@ -34747,6 +35035,42 @@ export const zh_CN: EnTranslations = {
       "mossy_handwraps": {
         "name": "苔藓护手"
       },
+      "crossroads_saber": {
+        "name": "十字路口军刀"
+      },
+      "tradesman_hatchet": {
+        "name": "商贩短斧"
+      },
+      "drovers_staff": {
+        "name": "赶牲人之杖"
+      },
+      "caravan_warden_dirk": {
+        "name": "商队守卫匕首"
+      },
+      "outrider_brigandine": {
+        "name": "哨骑镶钉甲"
+      },
+      "caravan_quilted_vest": {
+        "name": "商队衬垫背心"
+      },
+      "wanderers_chestguard": {
+        "name": "漫游者护胸"
+      },
+      "outrider_legguards": {
+        "name": "哨骑护腿"
+      },
+      "trail_leggings": {
+        "name": "磨损的旅途护腿"
+      },
+      "pilgrims_leggings": {
+        "name": "朝圣者护腿"
+      },
+      "outrider_sabatons": {
+        "name": "哨骑战靴"
+      },
+      "milepost_boots": {
+        "name": "里程靴"
+      },
       "bristleback_maul": {
         "name": "硬鬃重槌"
       },
@@ -38794,6 +39118,42 @@ export const zh_TW: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "苔蘚護手"
+      },
+      "crossroads_saber": {
+        "name": "十字路口軍刀"
+      },
+      "tradesman_hatchet": {
+        "name": "商販短斧"
+      },
+      "drovers_staff": {
+        "name": "趕牲人之杖"
+      },
+      "caravan_warden_dirk": {
+        "name": "商隊守衛匕首"
+      },
+      "outrider_brigandine": {
+        "name": "哨騎鑲釘甲"
+      },
+      "caravan_quilted_vest": {
+        "name": "商隊襯墊背心"
+      },
+      "wanderers_chestguard": {
+        "name": "漫遊者護胸"
+      },
+      "outrider_legguards": {
+        "name": "哨騎護腿"
+      },
+      "trail_leggings": {
+        "name": "磨損的旅途護腿"
+      },
+      "pilgrims_leggings": {
+        "name": "朝聖者護腿"
+      },
+      "outrider_sabatons": {
+        "name": "哨騎戰靴"
+      },
+      "milepost_boots": {
+        "name": "里程靴"
       },
       "bristleback_maul": {
         "name": "硬鬃重槌"
@@ -42843,6 +43203,42 @@ export const ko_KR: EnTranslations = {
       "mossy_handwraps": {
         "name": "이끼 낀 손싸개"
       },
+      "crossroads_saber": {
+        "name": "갈림길 세이버"
+      },
+      "tradesman_hatchet": {
+        "name": "상인의 손도끼"
+      },
+      "drovers_staff": {
+        "name": "목동의 지팡이"
+      },
+      "caravan_warden_dirk": {
+        "name": "대상 경비병 단검"
+      },
+      "outrider_brigandine": {
+        "name": "척후병 브리간딘"
+      },
+      "caravan_quilted_vest": {
+        "name": "대상 누비 조끼"
+      },
+      "wanderers_chestguard": {
+        "name": "방랑자의 가슴 보호구"
+      },
+      "outrider_legguards": {
+        "name": "척후병 다리 보호구"
+      },
+      "trail_leggings": {
+        "name": "닳아버린 여정 각반"
+      },
+      "pilgrims_leggings": {
+        "name": "순례자의 각반"
+      },
+      "outrider_sabatons": {
+        "name": "척후병 사바톤"
+      },
+      "milepost_boots": {
+        "name": "이정표 장화"
+      },
       "bristleback_maul": {
         "name": "뻣센등뼈 철퇴"
       },
@@ -46890,6 +47286,42 @@ export const ja_JP: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "苔むした手甲"
+      },
+      "crossroads_saber": {
+        "name": "十字路のサーベル"
+      },
+      "tradesman_hatchet": {
+        "name": "商人のハチェット"
+      },
+      "drovers_staff": {
+        "name": "牛追いの杖"
+      },
+      "caravan_warden_dirk": {
+        "name": "隊商衛兵のダーク"
+      },
+      "outrider_brigandine": {
+        "name": "斥候騎兵のブリガンダイン"
+      },
+      "caravan_quilted_vest": {
+        "name": "隊商のキルトベスト"
+      },
+      "wanderers_chestguard": {
+        "name": "放浪者の胸当て"
+      },
+      "outrider_legguards": {
+        "name": "斥候騎兵の脚当て"
+      },
+      "trail_leggings": {
+        "name": "履き古した旅の脚甲"
+      },
+      "pilgrims_leggings": {
+        "name": "巡礼者の脚甲"
+      },
+      "outrider_sabatons": {
+        "name": "斥候騎兵のサバトン"
+      },
+      "milepost_boots": {
+        "name": "道標のブーツ"
       },
       "bristleback_maul": {
         "name": "ブリストルバックの大槌"
@@ -50939,6 +51371,42 @@ export const pt_BR: EnTranslations = {
       "mossy_handwraps": {
         "name": "Manoplas musgosas"
       },
+      "crossroads_saber": {
+        "name": "Sabre da Encruzilhada"
+      },
+      "tradesman_hatchet": {
+        "name": "Machadinha do Mercador"
+      },
+      "drovers_staff": {
+        "name": "Cajado do Boiadeiro"
+      },
+      "caravan_warden_dirk": {
+        "name": "Adaga do Guarda de Caravana"
+      },
+      "outrider_brigandine": {
+        "name": "Brigantina do Batedor"
+      },
+      "caravan_quilted_vest": {
+        "name": "Colete Acolchoado de Caravana"
+      },
+      "wanderers_chestguard": {
+        "name": "Peitoral do Andarilho"
+      },
+      "outrider_legguards": {
+        "name": "Perneiras do Batedor"
+      },
+      "trail_leggings": {
+        "name": "Perneiras Gastas da Estrada"
+      },
+      "pilgrims_leggings": {
+        "name": "Perneiras do Peregrino"
+      },
+      "outrider_sabatons": {
+        "name": "Soleretes do Batedor"
+      },
+      "milepost_boots": {
+        "name": "Botas de Marco"
+      },
       "bristleback_maul": {
         "name": "Malho Bristleback"
       },
@@ -54986,6 +55454,42 @@ export const ru_RU: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "Замшелые обмотки"
+      },
+      "crossroads_saber": {
+        "name": "Сабля перепутья"
+      },
+      "tradesman_hatchet": {
+        "name": "Топорик торговца"
+      },
+      "drovers_staff": {
+        "name": "Посох погонщика"
+      },
+      "caravan_warden_dirk": {
+        "name": "Кинжал караванного стража"
+      },
+      "outrider_brigandine": {
+        "name": "Бригантина дозорного"
+      },
+      "caravan_quilted_vest": {
+        "name": "Стёганый караванный жилет"
+      },
+      "wanderers_chestguard": {
+        "name": "Нагрудник скитальца"
+      },
+      "outrider_legguards": {
+        "name": "Поножи дозорного"
+      },
+      "trail_leggings": {
+        "name": "Истёртые дорожные поножи"
+      },
+      "pilgrims_leggings": {
+        "name": "Поножи пилигрима"
+      },
+      "outrider_sabatons": {
+        "name": "Сабатоны дозорного"
+      },
+      "milepost_boots": {
+        "name": "Сапоги вехи"
       },
       "bristleback_maul": {
         "name": "Кувалда Щетиноспина"
@@ -59067,6 +59571,42 @@ export const en_XA: EnTranslations = {
       },
       "mossy_handwraps": {
         "name": "[Ɱóššĝŕóŵñ Ĥáñðŵŕáþš]"
+      },
+      "crossroads_saber": {
+        "name": "[Çŕóššŕóáðš Šáƀéŕ]"
+      },
+      "tradesman_hatchet": {
+        "name": "[Ţŕáðéšɱáñ'š Ĥáţçĥéţ]"
+      },
+      "drovers_staff": {
+        "name": "[Ðŕóʋéŕ'š Šţáƒƒ]"
+      },
+      "caravan_warden_dirk": {
+        "name": "[Çáŕáʋáñ Ŵáŕðéñ Ðíŕķ]"
+      },
+      "outrider_brigandine": {
+        "name": "[Óúţŕíðéŕ Ɓŕíĝáñðíñé]"
+      },
+      "caravan_quilted_vest": {
+        "name": "[Çáŕáʋáñ Ɋúíļţéð Ʋéšţ]"
+      },
+      "wanderers_chestguard": {
+        "name": "[Ŵáñðéŕéŕ'š Çĥéšţĝúáŕð]"
+      },
+      "outrider_legguards": {
+        "name": "[Óúţŕíðéŕ Ļéĝĝúáŕðš]"
+      },
+      "trail_leggings": {
+        "name": "[Ţŕáíļŵóŕñ Ļéĝĝíñĝš]"
+      },
+      "pilgrims_leggings": {
+        "name": "[Þíļĝŕíɱ'š Ļéĝĝíñĝš]"
+      },
+      "outrider_sabatons": {
+        "name": "[Óúţŕíðéŕ Šáƀáţóñš]"
+      },
+      "milepost_boots": {
+        "name": "[Ɱíļéþóšţ Ɓóóţš]"
       },
       "bristleback_maul": {
         "name": "[Ɓŕíšţļéƀáçķ Ɱáúļ]"
