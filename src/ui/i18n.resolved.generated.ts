@@ -3839,6 +3839,112 @@ export const en: EnTranslations = {
           }
         }
       },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "Mogger's Trail",
         "text": "Before you take the road north, Eastbrook has one last thorn in its side: Mogger. The brute has been trampling the lower meadow and driving the boars mad. Clear the meadow around his trail so we can see where he lairs.",
@@ -7884,6 +7990,112 @@ export const es: EnTranslations = {
           },
           "2": {
             "label": "Anillo del rey"
+          }
+        }
+      },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
           }
         }
       },
@@ -11935,6 +12147,112 @@ export const es_ES: EnTranslations = {
           }
         }
       },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "El rastro de Mogger",
         "text": "Antes de tomar el camino al norte, Eastbrook tiene una última espina clavada: Mogger. La bestia pisotea el prado bajo y enloquece a los jabalíes. Limpia la zona de su rastro para que veamos dónde se esconde.",
@@ -15980,6 +16298,112 @@ export const fr_FR: EnTranslations = {
           },
           "2": {
             "label": "Chevaliere du roi"
+          }
+        }
+      },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
           }
         }
       },
@@ -20031,6 +20455,112 @@ export const fr_CA: EnTranslations = {
           }
         }
       },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "La piste de Mogger",
         "text": "Avant de prendre la route du nord, Eastbrook a une dernière épine dans le pied : Mogger. La brute piétine le pré bas et rend les sangliers fous. Nettoyez le pré autour de sa piste pour que nous voyions où il se terre.",
@@ -24076,6 +24606,112 @@ export const en_CA: EnTranslations = {
           },
           "2": {
             "label": "King's Signet"
+          }
+        }
+      },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
           }
         }
       },
@@ -28127,6 +28763,112 @@ export const it_IT: EnTranslations = {
           }
         }
       },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "La traccia di Mogger",
         "text": "Prima di prendere la strada a nord, Eastbrook ha un'ultima spina nel fianco: Mogger. Il bruto calpesta il prato basso e fa impazzire i cinghiali. Ripulisci il prato attorno alla sua traccia per scoprire dove si tana.",
@@ -32172,6 +32914,112 @@ export const de_DE: EnTranslations = {
           },
           "2": {
             "label": "Siegelring des Konigs"
+          }
+        }
+      },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
           }
         }
       },
@@ -36223,6 +37071,112 @@ export const zh_CN: EnTranslations = {
           }
         }
       },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "莫格的踪迹",
         "text": "在你踏上北路前，东溪还有最后一根刺：莫格。那蛮兽践踏下方草地，把野猪都逼疯了。清理它踪迹周围的草地，我们才能看出它藏在哪里。",
@@ -40268,6 +41222,112 @@ export const zh_TW: EnTranslations = {
           },
           "2": {
             "label": "國王印戒"
+          }
+        }
+      },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
           }
         }
       },
@@ -44319,6 +45379,112 @@ export const ko_KR: EnTranslations = {
           }
         }
       },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "모거의 흔적",
         "text": "북쪽 길을 떠나기 전에 이스트브룩에는 마지막 골칫거리, 모거가 남았습니다. 그 짐승은 아래 초원을 짓밟고 멧돼지를 미치게 합니다. 흔적 주변의 초원을 정리해 은신처를 찾아내십시오.",
@@ -48364,6 +49530,112 @@ export const ja_JP: EnTranslations = {
           },
           "2": {
             "label": "王の印章指輪"
+          }
+        }
+      },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
           }
         }
       },
@@ -52415,6 +53687,112 @@ export const pt_BR: EnTranslations = {
           }
         }
       },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "A trilha de Mogger",
         "text": "Antes de pegar a estrada ao norte, Eastbrook tem um último espinho: Mogger. A fera pisoteia o prado baixo e enlouquece os javalis. Limpe o prado ao redor da trilha para descobrirmos onde ele se esconde.",
@@ -56463,6 +57841,112 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_ledger_first_duty": {
+        "title": "A Warden's First Duty",
+        "text": "You want to earn your keep in Eastbrook, {playerName}? Then start where every warden starts. The boars in the west meadow have grown fat and fearless, rooting up the spring planting. Cull 8 Wild Boar and the ledger will remember your name.",
+        "completion": "Eight boars and the planting saved. Good. Every name in this ledger started just where you are standing.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "Teeth in the Dark",
+        "text": "The wolf packs have learned the patrol routes - they hit at dusk, when the light is thin and a lone traveler is easy meat. Break them, {playerName}. Slay 10 Forest Wolves and let the packs learn a new lesson.",
+        "completion": "Ten wolves, and the dusk road is ours again. The ledger grows kinder to you.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "Reedwater Patrol",
+        "text": "Redbrook sent you? Good - these old bones cannot wade the shallows anymore. The Mudfin have crept back to the reedwater and they are bolder than ever. Thin them: 8 Mudfin Skulkers, and mind the deep water.",
+        "completion": "That will keep the gurgling devils off my nets for a season. Tell the Marshal the lake is quiet again.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "Silk and Venom",
+        "text": "The ledger marks the eastern woods as warden ground too. The Webwood lurkers spin thicker every week - a child wandered too close last market day and we cut her free barely breathing. Kill 8 Webwood Lurkers before they take the wood entirely.",
+        "completion": "Eight fewer spinners in the dark. The wood breathes easier, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "The Spawning Dark",
+        "text": "Killing the lurkers only made room for the brood. The Sableweb hatchlings are pouring out of the deep nest, and a hundred small fangs kill a traveler as surely as one great one. Crush 8 Sableweb Hatchlings before they grow.",
+        "completion": "A grim work, drowning a nest. But mercy now is a hundred funerals spared later. The ledger is square.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Hatchling crushed"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "Vermin in the Deep",
+        "text": "The Marshal's ledger says you clear pests. Well, my dig has the worst of them. The tunnel rats breed faster than my crew can swing a pick - put down 12 Tunnel Rat Diggers and maybe we strike copper before winter.",
+        "completion": "Twelve of the candle-headed vermin, gone! Right, lads - back down the shaft. You have earned the Marshal a good word, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "The Highwaymen's Toll",
+        "text": "The southeast hills have become a bandit's toll road - they rob anyone fool enough to travel light. The ledger has a price on every one of them. Bring Eastbrook justice to 8 Vale Bandits.",
+        "completion": "Eight bandits answered for. Word is already spreading that the toll road has a new keeper - and he does not take coin, he takes heads.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "Vigil at the Chapel",
+        "text": "The Marshal sends his wardens to me when the trouble is past the reach of swords alone. The chapel dead will not lie still, and I am too old to stand the night vigil. Keep it for me, {playerName} - lay 10 Restless Bones back to their rest.",
+        "completion": "Ten souls returned to the earth, and a night of peace bought for the chapel. The Light remembers such vigils, even when the ledger forgets.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "The Great Bristleback",
+        "text": "There is an old bull boar in the western thickets - the Elder Bristleback, hide like bark and a temper to match. He has gored two of my hide-runners. Bring him down and clear 6 of the lesser Wild Boar that shelter behind him, and I will see your name set high in the ledger.",
+        "completion": "The Elder Bristleback, dead by your hand! That hide alone is worth a season of trade. You have made the ledger proud, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          },
+          "1": {
+            "label": "Wild Boar of the herd slain"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "The Outlaw Captain",
+        "text": "The last name in the ledger is the one I have wanted crossed out for a year: Captain Verlan, who turned half the Vale to banditry. He shelters behind his lieutenants in the southeast camp. Cut down 6 Vale Bandits to reach him, then end Verlan himself. Do not go alone.",
+        "completion": "Captain Verlan, dead, and his coat brought to my door. The ledger is closed, {playerName} - and the Vale will tell wardens-to-come the name of the one who closed it.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          },
+          "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -56699,19 +58183,535 @@ export const translations = {
 };
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "es_ES": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "fr_FR": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "fr_CA": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
-  "pt_BR": [],
-  "ru_RU": []
+  "it_IT": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "de_DE": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "zh_CN": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "zh_TW": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "ko_KR": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "ja_JP": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "pt_BR": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ],
+  "ru_RU": [
+    "entities.quests.q_ledger_brood.completion",
+    "entities.quests.q_ledger_brood.objectives.0.label",
+    "entities.quests.q_ledger_brood.text",
+    "entities.quests.q_ledger_brood.title",
+    "entities.quests.q_ledger_deepvermin.completion",
+    "entities.quests.q_ledger_deepvermin.objectives.0.label",
+    "entities.quests.q_ledger_deepvermin.text",
+    "entities.quests.q_ledger_deepvermin.title",
+    "entities.quests.q_ledger_first_duty.completion",
+    "entities.quests.q_ledger_first_duty.objectives.0.label",
+    "entities.quests.q_ledger_first_duty.text",
+    "entities.quests.q_ledger_first_duty.title",
+    "entities.quests.q_ledger_great_boar.completion",
+    "entities.quests.q_ledger_great_boar.objectives.0.label",
+    "entities.quests.q_ledger_great_boar.objectives.1.label",
+    "entities.quests.q_ledger_great_boar.text",
+    "entities.quests.q_ledger_great_boar.title",
+    "entities.quests.q_ledger_outlaw_captain.completion",
+    "entities.quests.q_ledger_outlaw_captain.objectives.0.label",
+    "entities.quests.q_ledger_outlaw_captain.objectives.1.label",
+    "entities.quests.q_ledger_outlaw_captain.text",
+    "entities.quests.q_ledger_outlaw_captain.title",
+    "entities.quests.q_ledger_reedwater.completion",
+    "entities.quests.q_ledger_reedwater.objectives.0.label",
+    "entities.quests.q_ledger_reedwater.text",
+    "entities.quests.q_ledger_reedwater.title",
+    "entities.quests.q_ledger_silk.completion",
+    "entities.quests.q_ledger_silk.objectives.0.label",
+    "entities.quests.q_ledger_silk.text",
+    "entities.quests.q_ledger_silk.title",
+    "entities.quests.q_ledger_teeth.completion",
+    "entities.quests.q_ledger_teeth.objectives.0.label",
+    "entities.quests.q_ledger_teeth.text",
+    "entities.quests.q_ledger_teeth.title",
+    "entities.quests.q_ledger_toll.completion",
+    "entities.quests.q_ledger_toll.objectives.0.label",
+    "entities.quests.q_ledger_toll.text",
+    "entities.quests.q_ledger_toll.title",
+    "entities.quests.q_ledger_vigil.completion",
+    "entities.quests.q_ledger_vigil.objectives.0.label",
+    "entities.quests.q_ledger_vigil.text",
+    "entities.quests.q_ledger_vigil.title"
+  ]
 };
 
 export const en_XA: EnTranslations = {
@@ -60541,6 +62541,112 @@ export const en_XA: EnTranslations = {
           },
           "2": {
             "label": "[Ķíñĝ'š Šíĝñéţ]"
+          }
+        }
+      },
+      "q_ledger_first_duty": {
+        "title": "[Á Ŵáŕðéñ'š Ƒíŕšţ Ðúţý]",
+        "text": "[Ýóú ŵáñţ ţó éáŕñ ýóúŕ ķééþ íñ Éášţƀŕóóķ, {playerName}? Ţĥéñ šţáŕţ ŵĥéŕé éʋéŕý ŵáŕðéñ šţáŕţš. Ţĥé ƀóáŕš íñ ţĥé ŵéšţ ɱéáðóŵ ĥáʋé ĝŕóŵñ ƒáţ áñð ƒéáŕļéšš, ŕóóţíñĝ úþ ţĥé šþŕíñĝ þļáñţíñĝ. Çúļļ 8 Ŵíļð Ɓóáŕ áñð ţĥé ļéðĝéŕ ŵíļļ ŕéɱéɱƀéŕ ýóúŕ ñáɱé.]",
+        "completion": "[Éíĝĥţ ƀóáŕš áñð ţĥé þļáñţíñĝ šáʋéð. Ĝóóð. Éʋéŕý ñáɱé íñ ţĥíš ļéðĝéŕ šţáŕţéð ĵúšţ ŵĥéŕé ýóú áŕé šţáñðíñĝ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵíļð Ɓóáŕ çúļļéð]"
+          }
+        }
+      },
+      "q_ledger_teeth": {
+        "title": "[Ţééţĥ íñ ţĥé Ðáŕķ]",
+        "text": "[Ţĥé ŵóļƒ þáçķš ĥáʋé ļéáŕñéð ţĥé þáţŕóļ ŕóúţéš - ţĥéý ĥíţ áţ ðúšķ, ŵĥéñ ţĥé ļíĝĥţ íš ţĥíñ áñð á ļóñé ţŕáʋéļéŕ íš éášý ɱéáţ. Ɓŕéáķ ţĥéɱ, {playerName}. Šļáý 10 Ƒóŕéšţ Ŵóļʋéš áñð ļéţ ţĥé þáçķš ļéáŕñ á ñéŵ ļéššóñ.]",
+        "completion": "[Ţéñ ŵóļʋéš, áñð ţĥé ðúšķ ŕóáð íš óúŕš áĝáíñ. Ţĥé ļéðĝéŕ ĝŕóŵš ķíñðéŕ ţó ýóú.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ šļáíñ]"
+          }
+        }
+      },
+      "q_ledger_reedwater": {
+        "title": "[Ŕééðŵáţéŕ Þáţŕóļ]",
+        "text": "[Ŕéðƀŕóóķ šéñţ ýóú? Ĝóóð - ţĥéšé óļð ƀóñéš çáññóţ ŵáðé ţĥé šĥáļļóŵš áñýɱóŕé. Ţĥé Ɱúðƒíñ ĥáʋé çŕéþţ ƀáçķ ţó ţĥé ŕééðŵáţéŕ áñð ţĥéý áŕé ƀóļðéŕ ţĥáñ éʋéŕ. Ţĥíñ ţĥéɱ: 8 Ɱúðƒíñ Šķúļķéŕš, áñð ɱíñð ţĥé ðééþ ŵáţéŕ.]",
+        "completion": "[Ţĥáţ ŵíļļ ķééþ ţĥé ĝúŕĝļíñĝ ðéʋíļš óƒƒ ɱý ñéţš ƒóŕ á šéášóñ. Ţéļļ ţĥé Ɱáŕšĥáļ ţĥé ļáķé íš ɋúíéţ áĝáíñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱúðƒíñ Šķúļķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_ledger_silk": {
+        "title": "[Šíļķ áñð Ʋéñóɱ]",
+        "text": "[Ţĥé ļéðĝéŕ ɱáŕķš ţĥé éášţéŕñ ŵóóðš áš ŵáŕðéñ ĝŕóúñð ţóó. Ţĥé Ŵéƀŵóóð ļúŕķéŕš šþíñ ţĥíçķéŕ éʋéŕý ŵééķ - á çĥíļð ŵáñðéŕéð ţóó çļóšé ļášţ ɱáŕķéţ ðáý áñð ŵé çúţ ĥéŕ ƒŕéé ƀáŕéļý ƀŕéáţĥíñĝ. Ķíļļ 8 Ŵéƀŵóóð Ļúŕķéŕš ƀéƒóŕé ţĥéý ţáķé ţĥé ŵóóð éñţíŕéļý.]",
+        "completion": "[Éíĝĥţ ƒéŵéŕ šþíññéŕš íñ ţĥé ðáŕķ. Ţĥé ŵóóð ƀŕéáţĥéš éášíéŕ, áñð šó ðó Í.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵéƀŵóóð Ļúŕķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_ledger_brood": {
+        "title": "[Ţĥé Šþáŵñíñĝ Ðáŕķ]",
+        "text": "[Ķíļļíñĝ ţĥé ļúŕķéŕš óñļý ɱáðé ŕóóɱ ƒóŕ ţĥé ƀŕóóð. Ţĥé Šáƀļéŵéƀ ĥáţçĥļíñĝš áŕé þóúŕíñĝ óúţ óƒ ţĥé ðééþ ñéšţ, áñð á ĥúñðŕéð šɱáļļ ƒáñĝš ķíļļ á ţŕáʋéļéŕ áš šúŕéļý áš óñé ĝŕéáţ óñé. Çŕúšĥ 8 Šáƀļéŵéƀ Ĥáţçĥļíñĝš ƀéƒóŕé ţĥéý ĝŕóŵ.]",
+        "completion": "[Á ĝŕíɱ ŵóŕķ, ðŕóŵñíñĝ á ñéšţ. Ɓúţ ɱéŕçý ñóŵ íš á ĥúñðŕéð ƒúñéŕáļš šþáŕéð ļáţéŕ. Ţĥé ļéðĝéŕ íš šɋúáŕé.]",
+        "objectives": {
+          "0": {
+            "label": "[Šáƀļéŵéƀ Ĥáţçĥļíñĝ çŕúšĥéð]"
+          }
+        }
+      },
+      "q_ledger_deepvermin": {
+        "title": "[Ʋéŕɱíñ íñ ţĥé Ðééþ]",
+        "text": "[Ţĥé Ɱáŕšĥáļ'š ļéðĝéŕ šáýš ýóú çļéáŕ þéšţš. Ŵéļļ, ɱý ðíĝ ĥáš ţĥé ŵóŕšţ óƒ ţĥéɱ. Ţĥé ţúññéļ ŕáţš ƀŕééð ƒášţéŕ ţĥáñ ɱý çŕéŵ çáñ šŵíñĝ á þíçķ - þúţ ðóŵñ 12 Ţúññéļ Ŕáţ Ðíĝĝéŕš áñð ɱáýƀé ŵé šţŕíķé çóþþéŕ ƀéƒóŕé ŵíñţéŕ.]",
+        "completion": "[Ţŵéļʋé óƒ ţĥé çáñðļé-ĥéáðéð ʋéŕɱíñ, ĝóñé! Ŕíĝĥţ, ļáðš - ƀáçķ ðóŵñ ţĥé šĥáƒţ. Ýóú ĥáʋé éáŕñéð ţĥé Ɱáŕšĥáļ á ĝóóð ŵóŕð, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţúññéļ Ŕáţ Ðíĝĝéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_ledger_toll": {
+        "title": "[Ţĥé Ĥíĝĥŵáýɱéñ'š Ţóļļ]",
+        "text": "[Ţĥé šóúţĥéášţ ĥíļļš ĥáʋé ƀéçóɱé á ƀáñðíţ'š ţóļļ ŕóáð - ţĥéý ŕóƀ áñýóñé ƒóóļ éñóúĝĥ ţó ţŕáʋéļ ļíĝĥţ. Ţĥé ļéðĝéŕ ĥáš á þŕíçé óñ éʋéŕý óñé óƒ ţĥéɱ. Ɓŕíñĝ Éášţƀŕóóķ ĵúšţíçé ţó 8 Ʋáļé Ɓáñðíţš.]",
+        "completion": "[Éíĝĥţ ƀáñðíţš áñšŵéŕéð ƒóŕ. Ŵóŕð íš áļŕéáðý šþŕéáðíñĝ ţĥáţ ţĥé ţóļļ ŕóáð ĥáš á ñéŵ ķééþéŕ - áñð ĥé ðóéš ñóţ ţáķé çóíñ, ĥé ţáķéš ĥéáðš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ʋáļé Ɓáñðíţ ƀŕóúĝĥţ ţó ĵúšţíçé]"
+          }
+        }
+      },
+      "q_ledger_vigil": {
+        "title": "[Ʋíĝíļ áţ ţĥé Çĥáþéļ]",
+        "text": "[Ţĥé Ɱáŕšĥáļ šéñðš ĥíš ŵáŕðéñš ţó ɱé ŵĥéñ ţĥé ţŕóúƀļé íš þášţ ţĥé ŕéáçĥ óƒ šŵóŕðš áļóñé. Ţĥé çĥáþéļ ðéáð ŵíļļ ñóţ ļíé šţíļļ, áñð Í áɱ ţóó óļð ţó šţáñð ţĥé ñíĝĥţ ʋíĝíļ. Ķééþ íţ ƒóŕ ɱé, {playerName} - ļáý 10 Ŕéšţļéšš Ɓóñéš ƀáçķ ţó ţĥéíŕ ŕéšţ.]",
+        "completion": "[Ţéñ šóúļš ŕéţúŕñéð ţó ţĥé éáŕţĥ, áñð á ñíĝĥţ óƒ þéáçé ƀóúĝĥţ ƒóŕ ţĥé çĥáþéļ. Ţĥé Ļíĝĥţ ŕéɱéɱƀéŕš šúçĥ ʋíĝíļš, éʋéñ ŵĥéñ ţĥé ļéðĝéŕ ƒóŕĝéţš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕéšţļéšš Ɓóñéš ļáíð ţó ŕéšţ]"
+          }
+        }
+      },
+      "q_ledger_great_boar": {
+        "title": "[Ţĥé Ĝŕéáţ Ɓŕíšţļéƀáçķ]",
+        "text": "[Ţĥéŕé íš áñ óļð ƀúļļ ƀóáŕ íñ ţĥé ŵéšţéŕñ ţĥíçķéţš - ţĥé Éļðéŕ Ɓŕíšţļéƀáçķ, ĥíðé ļíķé ƀáŕķ áñð á ţéɱþéŕ ţó ɱáţçĥ. Ĥé ĥáš ĝóŕéð ţŵó óƒ ɱý ĥíðé-ŕúññéŕš. Ɓŕíñĝ ĥíɱ ðóŵñ áñð çļéáŕ 6 óƒ ţĥé ļéššéŕ Ŵíļð Ɓóáŕ ţĥáţ šĥéļţéŕ ƀéĥíñð ĥíɱ, áñð Í ŵíļļ šéé ýóúŕ ñáɱé šéţ ĥíĝĥ íñ ţĥé ļéðĝéŕ.]",
+        "completion": "[Ţĥé Éļðéŕ Ɓŕíšţļéƀáçķ, ðéáð ƀý ýóúŕ ĥáñð! Ţĥáţ ĥíðé áļóñé íš ŵóŕţĥ á šéášóñ óƒ ţŕáðé. Ýóú ĥáʋé ɱáðé ţĥé ļéðĝéŕ þŕóúð, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Éļðéŕ Ɓŕíšţļéƀáçķ šļáíñ]"
+          },
+          "1": {
+            "label": "[Ŵíļð Ɓóáŕ óƒ ţĥé ĥéŕð šļáíñ]"
+          }
+        }
+      },
+      "q_ledger_outlaw_captain": {
+        "title": "[Ţĥé Óúţļáŵ Çáþţáíñ]",
+        "text": "[Ţĥé ļášţ ñáɱé íñ ţĥé ļéðĝéŕ íš ţĥé óñé Í ĥáʋé ŵáñţéð çŕóššéð óúţ ƒóŕ á ýéáŕ: Çáþţáíñ Ʋéŕļáñ, ŵĥó ţúŕñéð ĥáļƒ ţĥé Ʋáļé ţó ƀáñðíţŕý. Ĥé šĥéļţéŕš ƀéĥíñð ĥíš ļíéúţéñáñţš íñ ţĥé šóúţĥéášţ çáɱþ. Çúţ ðóŵñ 6 Ʋáļé Ɓáñðíţš ţó ŕéáçĥ ĥíɱ, ţĥéñ éñð Ʋéŕļáñ ĥíɱšéļƒ. Ðó ñóţ ĝó áļóñé.]",
+        "completion": "[Çáþţáíñ Ʋéŕļáñ, ðéáð, áñð ĥíš çóáţ ƀŕóúĝĥţ ţó ɱý ðóóŕ. Ţĥé ļéðĝéŕ íš çļóšéð, {playerName} - áñð ţĥé Ʋáļé ŵíļļ ţéļļ ŵáŕðéñš-ţó-çóɱé ţĥé ñáɱé óƒ ţĥé óñé ŵĥó çļóšéð íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ʋáļé Ɓáñðíţ çúţ ðóŵñ]"
+          },
+          "1": {
+            "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
           }
         }
       },
