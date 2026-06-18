@@ -4074,7 +4074,7 @@ export const es: EnTranslations = {
       "totalXp": "EXP total",
       "lv": "Nv",
       "toNext": "para el siguiente",
-      "rested": "Rested"
+      "rested": "Descansado"
     },
     "progression": {
       "heading": "Progreso",
@@ -4122,11 +4122,11 @@ export const es: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "Mostrar EXP excedente",
-      "weather": "Weather Effects"
+      "weather": "Efectos meteorológicos"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "Maná bajo",
+      "lowEnergy": "Energía baja"
     },
     "talents": {
       "title": "Talentos",
@@ -4187,13 +4187,13 @@ export const es: EnTranslations = {
       "comingSoonTitle": "Talentos próximamente",
       "comingSoonBody": "Esta clase aún no tiene árboles de talentos. Puedes seguir jugando normalmente; los árboles completos llegarán en una actualización futura.",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "Tu clase aún no tiene árbol de talentos.",
+        "locked": "Aún no has desbloqueado los talentos; comienzan en el nivel {level}.",
+        "noSpec": "sin especialización",
+        "summary": "Talentos: {head} — {spent}/{total} puntos gastados ({breakdown}).",
+        "breakdownClass": "Clase {classPts}",
+        "breakdownSpec": "Clase {classPts}, {spec} {specPts}",
+        "unspent": " {count} sin gastar."
       }
     }
   },
@@ -4554,8 +4554,8 @@ export const es: EnTranslations = {
       "levelLog": "Has alcanzado el nivel {level}.",
       "xpGain": "Ganas {amount} de experiencia.",
       "xpFloat": "+{amount} XP",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} descansado",
+      "xpGainRested": "Ganas {amount} de experiencia ({rested} de bonificación por descansar).",
       "deathTitle": "Has muerto.",
       "releaseSpirit": "Liberar espíritu",
       "chatTab": "Chat",
@@ -4585,7 +4585,7 @@ export const es: EnTranslations = {
       "keyBindings": "Atajos de teclado",
       "graphics": "Gráficos",
       "audio": "Audio",
-      "interface": "Interface",
+      "interface": "Interfaz",
       "logout": "Cerrar sesión",
       "returnToGame": "Volver al juego",
       "resetToDefaults": "Restablecer valores",
@@ -4609,33 +4609,33 @@ export const es: EnTranslations = {
       "terrainLow": "Bajo",
       "terrainHigh": "Alto",
       "touchOpacity": "Opacidad de controles táctiles",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "Invertir vista (táctil)",
       "graphicsReloadNote": "La calidad gráfica y el detalle del terreno se aplican al recargar.",
       "reloadNow": "Recargar ahora",
       "fullscreen": "Pantalla completa",
       "touchLookSpeed": "Velocidad de cámara táctil",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "Tamaño del joystick",
+      "buttonSize": "Tamaño de botones",
+      "joystickDeadzone": "Zona muerta del joystick",
       "leftHandedTouch": "Modo zurdo táctil",
       "filterProfanity": "Filtrar lenguaje",
       "clickMoveButton": "Botón de clic para mover",
       "clickToMove": "Clic para moverse",
       "graphicsNote": "Baja la velocidad de cámara para un control más tranquilo. La calidad de renderizado bajo 100% mejora los FPS en equipos modestos.",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "Campo de visión",
+      "hudOpacity": "Opacidad de la interfaz",
+      "tooltipScale": "Tamaño del texto de información",
+      "fctScale": "Tamaño del texto de combate",
+      "chatFontScale": "Tamaño del texto del chat",
+      "chatOpacity": "Opacidad del fondo del chat",
+      "compactChat": "Chat compacto",
+      "frostedPanels": "Paneles esmerilados",
+      "highContrastText": "Texto de alto contraste",
+      "reduceMotion": "Reducir movimiento",
+      "showFps": "Mostrar FPS",
+      "invertLookY": "Invertir vista (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "Estas opciones solo cambian tu propia vista y se guardan en este dispositivo.",
       "soundEffects": "Efectos de sonido",
       "musicVolume": "Volumen de música",
       "music": "Música",
@@ -5210,8 +5210,8 @@ export const es: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{kind} {quality}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "Equipado actualmente",
+      "ifYouEquip": "Si equipas esto",
       "damageSpeed": "{min} - {max} de daño Velocidad {speed}",
       "dps": "({dps} de daño por segundo)",
       "dagger": "Daga",
@@ -5336,12 +5336,12 @@ export const es: EnTranslations = {
         "description": "Aumenta tu poder de ataque en 20 durante 2 min."
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "Grito de mando",
+        "description": "Aumenta tu Aguante en 6 durante 2 min."
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "Grito desmoralizador",
+        "description": "Lanza un grito aterrador que reduce el poder de ataque de todos los enemigos cercanos en 30 durante 30 s."
       },
       "charge": {
         "name": "Cargar",
@@ -5412,8 +5412,8 @@ export const es: EnTranslations = {
         "description": "Crea 2 botellas de agua que restauran maná al beberlas. Los rangos superiores crean agua más pura."
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "Crear comida",
+        "description": "Crea 2 raciones de pan que restauran salud al comerlas. Los rangos superiores crean alimentos más sustanciosos."
       },
       "fire_blast": {
         "name": "Explosión de Fuego",
@@ -5440,8 +5440,8 @@ export const es: EnTranslations = {
         "description": "Agosta al enemigo por {damage} de daño de Fuego. Lanzamiento rápido."
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "Piroexplosión",
+        "description": "Lanza una enorme roca ígnea que causa {damage} de daño de Fuego y daño adicional en el tiempo."
       },
       "ice_barrier": {
         "name": "Barrera de Hielo",
@@ -5580,8 +5580,8 @@ export const es: EnTranslations = {
         "description": "Aumenta un 60% la amenaza generada por tu daño Sagrado durante 30 min. La piedra angular del paladín tanque."
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "Aura de represalia",
+        "description": "Te rodea de energía sagrada durante 30 min y causa 5 de daño Sagrado a cualquier enemigo que te golpee cuerpo a cuerpo."
       },
       "tame_beast": {
         "name": "Domesticar bestia",
@@ -5620,8 +5620,8 @@ export const es: EnTranslations = {
         "description": "Inflige una herida que ralentiza al enemigo un 40% durante 10 s."
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "Aspecto del mono",
+        "description": "Adoptas el aspecto del mono y aumentas tu probabilidad de esquivar un 8% durante 30 min."
       },
       "aspect_of_the_cheetah": {
         "name": "Aspecto del guepardo",
@@ -5700,16 +5700,16 @@ export const es: EnTranslations = {
         "description": "Abrasa al objetivo con fuego por 25 de daño más {damage} durante 12 s."
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "Arma Lengua de Fuego",
+        "description": "Imbuye tu arma con fuego elemental: cada golpe inflige 8 de daño de Fuego adicional durante 5 min."
       },
       "frost_shock": {
         "name": "Choque de Escarcha",
         "description": "Golpea al objetivo al instante con escarcha por {damage} de daño de Escarcha y reduce su velocidad de movimiento un 50% durante 8 s."
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "Arma Tizón de Escarcha",
+        "description": "Imbuye tu arma con escarcha mordiente: cada golpe inflige 8 de daño adicional durante 5 min."
       },
       "ghost_wolf": {
         "name": "Lobo fantasmal",
@@ -6993,7 +6993,7 @@ export const es: EnTranslations = {
         "name": "Súcubo"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "Grix el Rey Túnel"
       },
       "brutok_skullsmasher": {
         "name": "Brutok Rompecráneos"
@@ -8122,7 +8122,7 @@ export const es_ES: EnTranslations = {
       "totalXp": "EXP total",
       "lv": "Nv",
       "toNext": "para el siguiente",
-      "rested": "Rested"
+      "rested": "Descansado"
     },
     "progression": {
       "heading": "Progreso",
@@ -8170,11 +8170,11 @@ export const es_ES: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "Mostrar EXP excedente",
-      "weather": "Weather Effects"
+      "weather": "Efectos meteorológicos"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "Maná bajo",
+      "lowEnergy": "Energía baja"
     },
     "talents": {
       "title": "Talentos",
@@ -8235,13 +8235,13 @@ export const es_ES: EnTranslations = {
       "comingSoonTitle": "Talentos próximamente",
       "comingSoonBody": "Esta clase aún no tiene árboles de talentos. Puedes seguir jugando normalmente; los árboles completos llegarán en una actualización futura.",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "Tu clase aún no tiene árbol de talentos.",
+        "locked": "Aún no has desbloqueado los talentos; comienzan en el nivel {level}.",
+        "noSpec": "sin especialización",
+        "summary": "Talentos: {head} — {spent}/{total} puntos gastados ({breakdown}).",
+        "breakdownClass": "Clase {classPts}",
+        "breakdownSpec": "Clase {classPts}, {spec} {specPts}",
+        "unspent": " {count} sin gastar."
       }
     }
   },
@@ -8602,8 +8602,8 @@ export const es_ES: EnTranslations = {
       "levelLog": "Has alcanzado el nivel {level}.",
       "xpGain": "Ganas {amount} de experiencia.",
       "xpFloat": "+{amount} XP",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} descansado",
+      "xpGainRested": "Ganas {amount} de experiencia ({rested} de bonificación por descansar).",
       "deathTitle": "Has muerto.",
       "releaseSpirit": "Liberar espíritu",
       "chatTab": "Chat",
@@ -8633,7 +8633,7 @@ export const es_ES: EnTranslations = {
       "keyBindings": "Atajos de teclado",
       "graphics": "Gráficos",
       "audio": "Audio",
-      "interface": "Interface",
+      "interface": "Interfaz",
       "logout": "Cerrar sesión",
       "returnToGame": "Volver al juego",
       "resetToDefaults": "Restablecer valores",
@@ -8657,33 +8657,33 @@ export const es_ES: EnTranslations = {
       "terrainLow": "Bajo",
       "terrainHigh": "Alto",
       "touchOpacity": "Opacidad de controles táctiles",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "Invertir vista (táctil)",
       "graphicsReloadNote": "La calidad gráfica y el detalle del terreno se aplican al recargar.",
       "reloadNow": "Recargar ahora",
       "fullscreen": "Pantalla completa",
       "touchLookSpeed": "Velocidad de cámara táctil",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "Tamaño del joystick",
+      "buttonSize": "Tamaño de botones",
+      "joystickDeadzone": "Zona muerta del joystick",
       "leftHandedTouch": "Modo zurdo táctil",
       "filterProfanity": "Filtrar lenguaje",
       "clickMoveButton": "Botón de clic para mover",
       "clickToMove": "Clic para moverse",
       "graphicsNote": "Baja la velocidad de cámara para un control más tranquilo. La calidad de renderizado bajo 100% mejora los FPS en equipos modestos.",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "Campo de visión",
+      "hudOpacity": "Opacidad de la interfaz",
+      "tooltipScale": "Tamaño del texto de información",
+      "fctScale": "Tamaño del texto de combate",
+      "chatFontScale": "Tamaño del texto del chat",
+      "chatOpacity": "Opacidad del fondo del chat",
+      "compactChat": "Chat compacto",
+      "frostedPanels": "Paneles esmerilados",
+      "highContrastText": "Texto de alto contraste",
+      "reduceMotion": "Reducir movimiento",
+      "showFps": "Mostrar FPS",
+      "invertLookY": "Invertir vista (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "Estas opciones solo cambian tu propia vista y se guardan en este dispositivo.",
       "soundEffects": "Efectos de sonido",
       "musicVolume": "Volumen de música",
       "music": "Música",
@@ -9258,8 +9258,8 @@ export const es_ES: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{kind} {quality}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "Equipado actualmente",
+      "ifYouEquip": "Si equipas esto",
       "damageSpeed": "{min} - {max} de daño Velocidad {speed}",
       "dps": "({dps} de daño por segundo)",
       "dagger": "Daga",
@@ -9384,12 +9384,12 @@ export const es_ES: EnTranslations = {
         "description": "Aumenta tu poder de ataque en 20 durante 2 min."
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "Grito de mando",
+        "description": "Aumenta tu Aguante en 6 durante 2 min."
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "Grito desmoralizador",
+        "description": "Lanza un grito aterrador que reduce el poder de ataque de todos los enemigos cercanos en 30 durante 30 s."
       },
       "charge": {
         "name": "Cargar",
@@ -9460,8 +9460,8 @@ export const es_ES: EnTranslations = {
         "description": "Crea 2 botellas de agua que restauran maná al beberlas. Los rangos superiores crean agua más pura."
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "Crear comida",
+        "description": "Crea 2 raciones de pan que restauran salud al comerlas. Los rangos superiores crean alimentos más sustanciosos."
       },
       "fire_blast": {
         "name": "Explosión de Fuego",
@@ -9488,8 +9488,8 @@ export const es_ES: EnTranslations = {
         "description": "Agosta al enemigo por {damage} de daño de Fuego. Lanzamiento rápido."
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "Piroexplosión",
+        "description": "Lanza una enorme roca ígnea que causa {damage} de daño de Fuego y daño adicional en el tiempo."
       },
       "ice_barrier": {
         "name": "Barrera de Hielo",
@@ -9628,8 +9628,8 @@ export const es_ES: EnTranslations = {
         "description": "Aumenta un 60% la amenaza generada por tu daño Sagrado durante 30 min. La piedra angular del paladín tanque."
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "Aura de represalia",
+        "description": "Te rodea de energía sagrada durante 30 min y causa 5 de daño Sagrado a cualquier enemigo que te golpee cuerpo a cuerpo."
       },
       "tame_beast": {
         "name": "Domesticar bestia",
@@ -9668,8 +9668,8 @@ export const es_ES: EnTranslations = {
         "description": "Inflige una herida que ralentiza al enemigo un 40% durante 10 s."
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "Aspecto del mono",
+        "description": "Adoptas el aspecto del mono y aumentas tu probabilidad de esquivar un 8% durante 30 min."
       },
       "aspect_of_the_cheetah": {
         "name": "Aspecto del guepardo",
@@ -9748,16 +9748,16 @@ export const es_ES: EnTranslations = {
         "description": "Abrasa al objetivo con fuego por 25 de daño más {damage} durante 12 s."
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "Arma Lengua de Fuego",
+        "description": "Imbuye tu arma con fuego elemental: cada golpe inflige 8 de daño de Fuego adicional durante 5 min."
       },
       "frost_shock": {
         "name": "Choque de Escarcha",
         "description": "Golpea al objetivo al instante con escarcha por {damage} de daño de Escarcha y reduce su velocidad de movimiento un 50% durante 8 s."
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "Arma Tizón de Escarcha",
+        "description": "Imbuye tu arma con escarcha mordiente: cada golpe inflige 8 de daño adicional durante 5 min."
       },
       "ghost_wolf": {
         "name": "Lobo fantasmal",
@@ -11041,7 +11041,7 @@ export const es_ES: EnTranslations = {
         "name": "Súcubo"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "Grix el Rey Túnel"
       },
       "brutok_skullsmasher": {
         "name": "Brutok Rompecráneos"
@@ -12170,7 +12170,7 @@ export const fr_FR: EnTranslations = {
       "totalXp": "EXP totale",
       "lv": "Niv.",
       "toNext": "avant le suivant",
-      "rested": "Rested"
+      "rested": "Reposé"
     },
     "progression": {
       "heading": "Progression",
@@ -12218,11 +12218,11 @@ export const fr_FR: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "Afficher l'EXP excédentaire",
-      "weather": "Weather Effects"
+      "weather": "Effets météo"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "Mana faible",
+      "lowEnergy": "Énergie faible"
     },
     "talents": {
       "title": "Talents",
@@ -12283,13 +12283,13 @@ export const fr_FR: EnTranslations = {
       "comingSoonTitle": "Talents à venir",
       "comingSoonBody": "Cette classe n'a pas encore d'arbres de talents. Vous pouvez continuer à jouer normalement; les arbres complets arriveront dans une future mise à jour.",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "Votre classe n'a pas encore d'arbre de talents.",
+        "locked": "Vous n'avez pas encore débloqué les talents — ils commencent au niveau {level}.",
+        "noSpec": "aucune spécialisation",
+        "summary": "Talents: {head} — {spent}/{total} points dépensés ({breakdown}).",
+        "breakdownClass": "Classe {classPts}",
+        "breakdownSpec": "Classe {classPts}, {spec} {specPts}",
+        "unspent": " {count} non dépensés."
       }
     }
   },
@@ -12650,8 +12650,8 @@ export const fr_FR: EnTranslations = {
       "levelLog": "Vous avez atteint le niveau {level} !",
       "xpGain": "Vous gagnez {amount} points d'expérience.",
       "xpFloat": "+{amount} XP",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} repos",
+      "xpGainRested": "Vous gagnez {amount} points d'expérience ({rested} bonus de repos).",
       "deathTitle": "Vous êtes mort.",
       "releaseSpirit": "Libérer l'esprit",
       "chatTab": "Discussion",
@@ -12705,33 +12705,33 @@ export const fr_FR: EnTranslations = {
       "terrainLow": "Bas",
       "terrainHigh": "Élevé",
       "touchOpacity": "Opacité des commandes tactiles",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "Inverser la visée (tactile)",
       "graphicsReloadNote": "La qualité graphique et le détail du terrain s'appliquent après un rechargement.",
       "reloadNow": "Recharger maintenant",
       "fullscreen": "Plein écran",
       "touchLookSpeed": "Vitesse caméra tactile",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "Taille du joystick",
+      "buttonSize": "Taille des boutons",
+      "joystickDeadzone": "Zone morte du joystick",
       "leftHandedTouch": "Mode gaucher tactile",
       "filterProfanity": "Filtrer le langage",
       "clickMoveButton": "Bouton clic pour déplacer",
       "clickToMove": "Cliquer pour se déplacer",
       "graphicsNote": "Réduisez la vitesse de caméra pour une visée plus calme. Une qualité de rendu sous 100 % améliore les FPS sur les machines modestes.",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "Champ de vision",
+      "hudOpacity": "Opacité de l'interface",
+      "tooltipScale": "Taille du texte des infobulles",
+      "fctScale": "Taille du texte de combat",
+      "chatFontScale": "Taille du texte de discussion",
+      "chatOpacity": "Opacité du fond de discussion",
+      "compactChat": "Discussion compacte",
+      "frostedPanels": "Panneaux givrés",
+      "highContrastText": "Texte à contraste élevé",
+      "reduceMotion": "Réduire les animations",
+      "showFps": "Afficher les FPS",
+      "invertLookY": "Inverser la visée (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "Ces options ne changent que votre propre vue et sont enregistrées sur cet appareil.",
       "soundEffects": "Effets sonores",
       "musicVolume": "Volume de la musique",
       "music": "Musique",
@@ -13290,7 +13290,7 @@ export const fr_FR: EnTranslations = {
       "drink": "Boisson",
       "tool": "Outil",
       "potion": "Potion",
-      "elixir": "Elixir"
+      "elixir": "Élixir"
     },
     "stats": {
       "armor": "Armure",
@@ -13306,8 +13306,8 @@ export const fr_FR: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{kind} {quality}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "Actuellement équipé",
+      "ifYouEquip": "Si vous équipez ceci",
       "damageSpeed": "{min} - {max} points de dégâts Vitesse {speed}",
       "dps": "({dps} dégâts par seconde)",
       "dagger": "Dague",
@@ -13432,12 +13432,12 @@ export const fr_FR: EnTranslations = {
         "description": "Augmente votre puissance d'attaque de 20 pendant 2 min."
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "Cri de commandement",
+        "description": "Augmente votre Endurance de 6 pendant 2 min."
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "Cri démoralisant",
+        "description": "Pousse un cri terrifiant qui réduit la puissance d'attaque de tous les ennemis proches de 30 pendant 30 s."
       },
       "charge": {
         "name": "Charge",
@@ -13508,8 +13508,8 @@ export const fr_FR: EnTranslations = {
         "description": "Invoque 2 bouteilles d'eau qui restaurent du mana une fois bues. Les rangs supérieurs invoquent une eau plus pure."
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "Invocation de nourriture",
+        "description": "Invoque 2 portions de pain qui restaurent de la vie une fois mangées. Les rangs supérieurs invoquent une nourriture plus consistante."
       },
       "fire_blast": {
         "name": "Trait de feu",
@@ -13536,8 +13536,8 @@ export const fr_FR: EnTranslations = {
         "description": "Brûle l'ennemi pour {damage} points de dégâts de Feu. Incantation rapide."
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "Explosion pyrotechnique",
+        "description": "Projette un immense rocher enflammé qui inflige {damage} points de dégâts de Feu plus des dégâts supplémentaires sur la durée."
       },
       "ice_barrier": {
         "name": "Barrière de glace",
@@ -13676,8 +13676,8 @@ export const fr_FR: EnTranslations = {
         "description": "Augmente de 60% la menace générée par vos dégâts Sacrés pendant 30 min. La pierre angulaire du paladin tank."
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "Aura de châtiment",
+        "description": "Vous entoure d'énergie sacrée pendant 30 min, infligeant 5 points de dégâts Sacrés à tout ennemi qui vous frappe en mêlée."
       },
       "tame_beast": {
         "name": "Apprivoiser une bête",
@@ -13716,8 +13716,8 @@ export const fr_FR: EnTranslations = {
         "description": "Inflige une blessure qui ralentit l'ennemi de 40% pendant 10 s."
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "Aspect du singe",
+        "description": "Adopte l'aspect du singe et augmente vos chances d'esquive de 8% pendant 30 min."
       },
       "aspect_of_the_cheetah": {
         "name": "Aspect du guépard",
@@ -13796,16 +13796,16 @@ export const fr_FR: EnTranslations = {
         "description": "Brûle la cible par le feu pour 25 points de dégâts plus {damage} en 12 s."
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "Arme Langue de feu",
+        "description": "Imprègne votre arme de feu élémentaire: chaque frappe inflige 8 points de dégâts de Feu supplémentaires pendant 5 min."
       },
       "frost_shock": {
         "name": "Horion de givre",
         "description": "Frappe instantanément la cible par le givre pour {damage} points de dégâts de Givre et ralentit son déplacement de 50% pendant 8 s."
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "Arme Marque-givre",
+        "description": "Imprègne votre arme d'un givre mordant: chaque frappe inflige 8 points de dégâts supplémentaires pendant 5 min."
       },
       "ghost_wolf": {
         "name": "Loup fantôme",
@@ -15089,7 +15089,7 @@ export const fr_FR: EnTranslations = {
         "name": "Succube"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "Grix le Roi des tunnels"
       },
       "brutok_skullsmasher": {
         "name": "Brutok Brise-crânes"
@@ -16218,7 +16218,7 @@ export const fr_CA: EnTranslations = {
       "totalXp": "EXP totale",
       "lv": "Niv.",
       "toNext": "avant le suivant",
-      "rested": "Rested"
+      "rested": "Reposé"
     },
     "progression": {
       "heading": "Progression",
@@ -16266,11 +16266,11 @@ export const fr_CA: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "Afficher l'EXP excédentaire",
-      "weather": "Weather Effects"
+      "weather": "Effets météo"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "Mana faible",
+      "lowEnergy": "Énergie faible"
     },
     "talents": {
       "title": "Talents",
@@ -16331,13 +16331,13 @@ export const fr_CA: EnTranslations = {
       "comingSoonTitle": "Talents à venir",
       "comingSoonBody": "Cette classe n'a pas encore d'arbres de talents. Vous pouvez continuer à jouer normalement; les arbres complets arriveront dans une future mise à jour.",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "Votre classe n'a pas encore d'arbre de talents.",
+        "locked": "Vous n'avez pas encore débloqué les talents — ils commencent au niveau {level}.",
+        "noSpec": "aucune spécialisation",
+        "summary": "Talents: {head} — {spent}/{total} points dépensés ({breakdown}).",
+        "breakdownClass": "Classe {classPts}",
+        "breakdownSpec": "Classe {classPts}, {spec} {specPts}",
+        "unspent": " {count} non dépensés."
       }
     }
   },
@@ -16698,8 +16698,8 @@ export const fr_CA: EnTranslations = {
       "levelLog": "Vous avez atteint le niveau {level} !",
       "xpGain": "Vous gagnez {amount} points d'expérience.",
       "xpFloat": "+{amount} XP",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} repos",
+      "xpGainRested": "Vous gagnez {amount} points d'expérience ({rested} bonus de repos).",
       "deathTitle": "Vous êtes mort.",
       "releaseSpirit": "Libérer l'esprit",
       "chatTab": "Discussion",
@@ -16753,33 +16753,33 @@ export const fr_CA: EnTranslations = {
       "terrainLow": "Bas",
       "terrainHigh": "Élevé",
       "touchOpacity": "Opacité des commandes tactiles",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "Inverser la visée (tactile)",
       "graphicsReloadNote": "La qualité graphique et le détail du terrain s'appliquent après un rechargement.",
       "reloadNow": "Recharger maintenant",
       "fullscreen": "Plein écran",
       "touchLookSpeed": "Vitesse caméra tactile",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "Taille du joystick",
+      "buttonSize": "Taille des boutons",
+      "joystickDeadzone": "Zone morte du joystick",
       "leftHandedTouch": "Mode gaucher tactile",
       "filterProfanity": "Filtrer le langage",
       "clickMoveButton": "Bouton clic pour déplacer",
       "clickToMove": "Cliquer pour se déplacer",
       "graphicsNote": "Réduisez la vitesse de caméra pour une visée plus calme. Une qualité de rendu sous 100 % améliore les FPS sur les machines modestes.",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "Champ de vision",
+      "hudOpacity": "Opacité de l'interface",
+      "tooltipScale": "Taille du texte des infobulles",
+      "fctScale": "Taille du texte de combat",
+      "chatFontScale": "Taille du texte de discussion",
+      "chatOpacity": "Opacité du fond de discussion",
+      "compactChat": "Discussion compacte",
+      "frostedPanels": "Panneaux givrés",
+      "highContrastText": "Texte à contraste élevé",
+      "reduceMotion": "Réduire les animations",
+      "showFps": "Afficher les FPS",
+      "invertLookY": "Inverser la visée (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "Ces options ne changent que votre propre vue et sont enregistrées sur cet appareil.",
       "soundEffects": "Effets sonores",
       "musicVolume": "Volume de la musique",
       "music": "Musique",
@@ -17338,7 +17338,7 @@ export const fr_CA: EnTranslations = {
       "drink": "Boisson",
       "tool": "Outil",
       "potion": "Potion",
-      "elixir": "Elixir"
+      "elixir": "Élixir"
     },
     "stats": {
       "armor": "Armure",
@@ -17354,8 +17354,8 @@ export const fr_CA: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{kind} {quality}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "Actuellement équipé",
+      "ifYouEquip": "Si vous équipez ceci",
       "damageSpeed": "{min} - {max} points de dégâts Vitesse {speed}",
       "dps": "({dps} dégâts par seconde)",
       "dagger": "Dague",
@@ -17480,12 +17480,12 @@ export const fr_CA: EnTranslations = {
         "description": "Augmente votre puissance d'attaque de 20 pendant 2 min."
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "Cri de commandement",
+        "description": "Augmente votre Endurance de 6 pendant 2 min."
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "Cri démoralisant",
+        "description": "Pousse un cri terrifiant qui réduit la puissance d'attaque de tous les ennemis proches de 30 pendant 30 s."
       },
       "charge": {
         "name": "Charge",
@@ -17556,8 +17556,8 @@ export const fr_CA: EnTranslations = {
         "description": "Invoque 2 bouteilles d'eau qui restaurent du mana une fois bues. Les rangs supérieurs invoquent une eau plus pure."
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "Invocation de nourriture",
+        "description": "Invoque 2 portions de pain qui restaurent de la vie une fois mangées. Les rangs supérieurs invoquent une nourriture plus consistante."
       },
       "fire_blast": {
         "name": "Trait de feu",
@@ -17584,8 +17584,8 @@ export const fr_CA: EnTranslations = {
         "description": "Brûle l'ennemi pour {damage} points de dégâts de Feu. Incantation rapide."
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "Explosion pyrotechnique",
+        "description": "Projette un immense rocher enflammé qui inflige {damage} points de dégâts de Feu plus des dégâts supplémentaires sur la durée."
       },
       "ice_barrier": {
         "name": "Barrière de glace",
@@ -17724,8 +17724,8 @@ export const fr_CA: EnTranslations = {
         "description": "Augmente de 60% la menace générée par vos dégâts Sacrés pendant 30 min. La pierre angulaire du paladin tank."
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "Aura de châtiment",
+        "description": "Vous entoure d'énergie sacrée pendant 30 min, infligeant 5 points de dégâts Sacrés à tout ennemi qui vous frappe en mêlée."
       },
       "tame_beast": {
         "name": "Apprivoiser une bête",
@@ -17764,8 +17764,8 @@ export const fr_CA: EnTranslations = {
         "description": "Inflige une blessure qui ralentit l'ennemi de 40% pendant 10 s."
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "Aspect du singe",
+        "description": "Adopte l'aspect du singe et augmente vos chances d'esquive de 8% pendant 30 min."
       },
       "aspect_of_the_cheetah": {
         "name": "Aspect du guépard",
@@ -17844,16 +17844,16 @@ export const fr_CA: EnTranslations = {
         "description": "Brûle la cible par le feu pour 25 points de dégâts plus {damage} en 12 s."
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "Arme Langue de feu",
+        "description": "Imprègne votre arme de feu élémentaire: chaque frappe inflige 8 points de dégâts de Feu supplémentaires pendant 5 min."
       },
       "frost_shock": {
         "name": "Horion de givre",
         "description": "Frappe instantanément la cible par le givre pour {damage} points de dégâts de Givre et ralentit son déplacement de 50% pendant 8 s."
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "Arme Marque-givre",
+        "description": "Imprègne votre arme d'un givre mordant: chaque frappe inflige 8 points de dégâts supplémentaires pendant 5 min."
       },
       "ghost_wolf": {
         "name": "Loup fantôme",
@@ -19137,7 +19137,7 @@ export const fr_CA: EnTranslations = {
         "name": "Succube"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "Grix le Roi des tunnels"
       },
       "brutok_skullsmasher": {
         "name": "Brutok Brise-crânes"
@@ -24314,7 +24314,7 @@ export const it_IT: EnTranslations = {
       "totalXp": "PE totali",
       "lv": "Liv",
       "toNext": "al prossimo",
-      "rested": "Rested"
+      "rested": "Riposato"
     },
     "progression": {
       "heading": "Progressione",
@@ -24362,11 +24362,11 @@ export const it_IT: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "Mostra PE eccedenti",
-      "weather": "Weather Effects"
+      "weather": "Effetti meteo"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "Mana basso",
+      "lowEnergy": "Energia bassa"
     },
     "talents": {
       "title": "Talenti",
@@ -24427,13 +24427,13 @@ export const it_IT: EnTranslations = {
       "comingSoonTitle": "Talenti in arrivo",
       "comingSoonBody": "Questa classe non ha ancora alberi dei talenti. Puoi continuare a giocare normalmente; gli alberi completi arriveranno in un futuro aggiornamento.",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "La tua classe non ha ancora un albero dei talenti.",
+        "locked": "Non hai ancora sbloccato i talenti; iniziano al livello {level}.",
+        "noSpec": "nessuna specializzazione",
+        "summary": "Talenti: {head} — {spent}/{total} punti spesi ({breakdown}).",
+        "breakdownClass": "Classe {classPts}",
+        "breakdownSpec": "Classe {classPts}, {spec} {specPts}",
+        "unspent": " {count} non spesi."
       }
     }
   },
@@ -24794,8 +24794,8 @@ export const it_IT: EnTranslations = {
       "levelLog": "Hai raggiunto il livello {level}!",
       "xpGain": "Guadagni {amount} esperienza.",
       "xpFloat": "+{amount} PE",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} riposo",
+      "xpGainRested": "Guadagni {amount} esperienza ({rested} bonus dal riposo).",
       "deathTitle": "Sei morto.",
       "releaseSpirit": "Libera spirito",
       "chatTab": "Chat",
@@ -24825,7 +24825,7 @@ export const it_IT: EnTranslations = {
       "keyBindings": "Comandi da tastiera",
       "graphics": "Grafica",
       "audio": "Audio",
-      "interface": "Interface",
+      "interface": "Interfaccia",
       "logout": "Esci",
       "returnToGame": "Torna al gioco",
       "resetToDefaults": "Ripristina predefiniti",
@@ -24849,33 +24849,33 @@ export const it_IT: EnTranslations = {
       "terrainLow": "Basso",
       "terrainHigh": "Alto",
       "touchOpacity": "Opacità comandi touch",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "Inverti visuale (touch)",
       "graphicsReloadNote": "Qualità grafica e dettaglio terreno si applicano dopo un ricaricamento.",
       "reloadNow": "Ricarica ora",
       "fullscreen": "Schermo intero",
       "touchLookSpeed": "Velocità camera touch",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "Dimensione joystick",
+      "buttonSize": "Dimensione pulsanti",
+      "joystickDeadzone": "Zona morta joystick",
       "leftHandedTouch": "Touch per mancini",
       "filterProfanity": "Filtra linguaggio",
       "clickMoveButton": "Pulsante clic per muovere",
       "clickToMove": "Clicca per muoverti",
       "graphicsNote": "Riduci la velocità della camera per un mouselook più stabile. La qualità rendering sotto il 100% aumenta gli FPS sui dispositivi meno potenti.",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "Campo visivo",
+      "hudOpacity": "Opacità dell'interfaccia",
+      "tooltipScale": "Dimensione del testo dei suggerimenti",
+      "fctScale": "Dimensione del testo di combattimento",
+      "chatFontScale": "Dimensione del testo della chat",
+      "chatOpacity": "Opacità dello sfondo della chat",
+      "compactChat": "Chat compatta",
+      "frostedPanels": "Pannelli smerigliati",
+      "highContrastText": "Testo ad alto contrasto",
+      "reduceMotion": "Riduci animazioni",
+      "showFps": "Mostra FPS",
+      "invertLookY": "Inverti visuale (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "Queste opzioni cambiano solo la tua visuale e vengono salvate su questo dispositivo.",
       "soundEffects": "Effetti sonori",
       "musicVolume": "Volume musica",
       "music": "Musica",
@@ -25434,7 +25434,7 @@ export const it_IT: EnTranslations = {
       "drink": "Bevanda",
       "tool": "Strumento",
       "potion": "Pozione",
-      "elixir": "Elixir"
+      "elixir": "Elisir"
     },
     "stats": {
       "armor": "Armatura",
@@ -25450,8 +25450,8 @@ export const it_IT: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{kind} {quality}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "Attualmente equipaggiato",
+      "ifYouEquip": "Se equipaggi questo",
       "damageSpeed": "{min} - {max} danni Velocità {speed}",
       "dps": "({dps} danni al secondo)",
       "dagger": "Pugnale",
@@ -25576,12 +25576,12 @@ export const it_IT: EnTranslations = {
         "description": "Aumenta la tua potenza d'attacco di 20 per 2 min."
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "Urlo di Comando",
+        "description": "Aumenta la tua Tempra di 6 per 2 min."
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "Urlo Demoralizzante",
+        "description": "Emette un urlo terrificante, riducendo la potenza d'attacco di tutti i nemici vicini di 30 per 30 sec."
       },
       "charge": {
         "name": "Carica",
@@ -25652,8 +25652,8 @@ export const it_IT: EnTranslations = {
         "description": "Evoca 2 bottiglie d'acqua che ripristinano mana quando bevute. I ranghi superiori evocano acqua più pura."
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "Evoca Cibo",
+        "description": "Evoca 2 porzioni di pane che ripristinano salute quando mangiate. I ranghi superiori evocano cibo più sostanzioso."
       },
       "fire_blast": {
         "name": "Esplosione di Fuoco",
@@ -25680,8 +25680,8 @@ export const it_IT: EnTranslations = {
         "description": "Brucia il nemico per {damage} danni da Fuoco. Lancio rapido."
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "Piroesplosione",
+        "description": "Scaglia un immenso masso infuocato che infligge {damage} danni da Fuoco più danni aggiuntivi nel tempo."
       },
       "ice_barrier": {
         "name": "Barriera di Ghiaccio",
@@ -25820,8 +25820,8 @@ export const it_IT: EnTranslations = {
         "description": "Aumenta del 60% la minaccia generata dai tuoi danni Sacri per 30 min. Il cardine del paladino difensore."
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "Aura di Castigo",
+        "description": "Ti avvolge in energia sacra per 30 min, infliggendo 5 danni Sacri a ogni nemico che ti colpisce in mischia."
       },
       "tame_beast": {
         "name": "Addomestica Bestia",
@@ -25860,8 +25860,8 @@ export const it_IT: EnTranslations = {
         "description": "Infligge una ferita che rallenta il nemico del 40% per 10 s."
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "Aspetto della Scimmia",
+        "description": "Assumi l'aspetto della scimmia, aumentando la tua probabilità di schivata dell'8% per 30 min."
       },
       "aspect_of_the_cheetah": {
         "name": "Aspetto del Ghepardo",
@@ -25940,16 +25940,16 @@ export const it_IT: EnTranslations = {
         "description": "Brucia il bersaglio con il fuoco per 25 danni più {damage} in 12 s."
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "Arma Linguafiamma",
+        "description": "Imbeve la tua arma con fuoco elementale: ogni colpo infligge 8 danni da Fuoco aggiuntivi per 5 min."
       },
       "frost_shock": {
         "name": "Folgore del Gelo",
         "description": "Scuote istantaneamente il bersaglio col gelo per {damage} danni da Gelo e rallenta il movimento del 50% per 8 s."
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "Arma Marchiogelo",
+        "description": "Imbeve la tua arma con gelo pungente: ogni colpo infligge 8 danni aggiuntivi per 5 min."
       },
       "ghost_wolf": {
         "name": "Lupo Spettrale",
@@ -27233,7 +27233,7 @@ export const it_IT: EnTranslations = {
         "name": "Succube"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "Grix il Re dei Cunicoli"
       },
       "brutok_skullsmasher": {
         "name": "Brutok Spaccacranio"
@@ -28362,7 +28362,7 @@ export const de_DE: EnTranslations = {
       "totalXp": "EP gesamt",
       "lv": "St.",
       "toNext": "bis zur nächsten",
-      "rested": "Rested"
+      "rested": "Ausgeruht"
     },
     "progression": {
       "heading": "Fortschritt",
@@ -28410,11 +28410,11 @@ export const de_DE: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "Überschuss-EP anzeigen",
-      "weather": "Weather Effects"
+      "weather": "Wettereffekte"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "Wenig Mana",
+      "lowEnergy": "Wenig Energie"
     },
     "talents": {
       "title": "Talente",
@@ -28475,13 +28475,13 @@ export const de_DE: EnTranslations = {
       "comingSoonTitle": "Talente folgen bald",
       "comingSoonBody": "Diese Klasse hat noch keine Talentbäume. Ihr könnt normal weiterspielen; vollständige Bäume kommen in einem zukünftigen Update.",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "Eure Klasse hat noch keinen Talentbaum.",
+        "locked": "Ihr habt die Talente noch nicht freigeschaltet; sie beginnen auf Stufe {level}.",
+        "noSpec": "keine Spezialisierung",
+        "summary": "Talente: {head} — {spent}/{total} Punkte ausgegeben ({breakdown}).",
+        "breakdownClass": "Klasse {classPts}",
+        "breakdownSpec": "Klasse {classPts}, {spec} {specPts}",
+        "unspent": " {count} nicht ausgegeben."
       }
     }
   },
@@ -28842,8 +28842,8 @@ export const de_DE: EnTranslations = {
       "levelLog": "Ihr habt Stufe {level} erreicht!",
       "xpGain": "Ihr erhaltet {amount} Erfahrung.",
       "xpFloat": "+{amount} EP",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} ausgeruht",
+      "xpGainRested": "Ihr erhaltet {amount} Erfahrung ({rested} Bonus durch Ausruhen).",
       "deathTitle": "Ihr seid gestorben.",
       "releaseSpirit": "Geist freigeben",
       "chatTab": "Chat",
@@ -28873,7 +28873,7 @@ export const de_DE: EnTranslations = {
       "keyBindings": "Tastenbelegung",
       "graphics": "Grafik",
       "audio": "Audio",
-      "interface": "Interface",
+      "interface": "Benutzeroberfläche",
       "logout": "Ausloggen",
       "returnToGame": "Zurück zum Spiel",
       "resetToDefaults": "Standardwerte",
@@ -28897,33 +28897,33 @@ export const de_DE: EnTranslations = {
       "terrainLow": "Niedrig",
       "terrainHigh": "Hoch",
       "touchOpacity": "Deckkraft der Touch-Steuerung",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "Sicht umkehren (Touch)",
       "graphicsReloadNote": "Grafikqualität und Geländedetail werden nach dem Neuladen angewendet.",
       "reloadNow": "Jetzt neu laden",
       "fullscreen": "Vollbild",
       "touchLookSpeed": "Touch-Kamerageschwindigkeit",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "Joystick-Größe",
+      "buttonSize": "Schaltflächengröße",
+      "joystickDeadzone": "Joystick-Totzone",
       "leftHandedTouch": "Linkshänder-Touch",
       "filterProfanity": "Schimpfwörter filtern",
       "clickMoveButton": "Klick-Bewegungstaste",
       "clickToMove": "Klicken zum Bewegen",
       "graphicsNote": "Senkt die Kamerageschwindigkeit für ruhigere Maussteuerung. Renderqualität unter 100 % verbessert die FPS auf schwächeren Geräten.",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "Sichtfeld",
+      "hudOpacity": "HUD-Deckkraft",
+      "tooltipScale": "Tooltip-Textgröße",
+      "fctScale": "Kampftextgröße",
+      "chatFontScale": "Chat-Textgröße",
+      "chatOpacity": "Chat-Hintergrunddeckkraft",
+      "compactChat": "Kompakter Chat",
+      "frostedPanels": "Mattierte Fenster",
+      "highContrastText": "Text mit hohem Kontrast",
+      "reduceMotion": "Bewegung reduzieren",
+      "showFps": "FPS anzeigen",
+      "invertLookY": "Blick umkehren (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "Diese Optionen ändern nur Eure eigene Ansicht und werden auf diesem Gerät gespeichert.",
       "soundEffects": "Soundeffekte",
       "musicVolume": "Musiklautstärke",
       "music": "Musik",
@@ -29482,7 +29482,7 @@ export const de_DE: EnTranslations = {
       "drink": "Getränk",
       "tool": "Werkzeug",
       "potion": "Trank",
-      "elixir": "Elixir"
+      "elixir": "Elixier"
     },
     "stats": {
       "armor": "Rüstung",
@@ -29498,8 +29498,8 @@ export const de_DE: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{quality} {kind}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "Derzeit angelegt",
+      "ifYouEquip": "Wenn Ihr dies anlegt",
       "damageSpeed": "{min} - {max} Schaden Tempo {speed}",
       "dps": "({dps} Schaden pro Sekunde)",
       "dagger": "Dolch",
@@ -29624,12 +29624,12 @@ export const de_DE: EnTranslations = {
         "description": "Erhöht eure Angriffskraft 2 Min. lang um 20."
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "Befehlsruf",
+        "description": "Erhöht eure Ausdauer 2 Min. lang um 6."
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "Demoralisierender Ruf",
+        "description": "Stößt einen furchterregenden Ruf aus und verringert die Angriffskraft aller nahen Gegner 30 Sek. lang um 30."
       },
       "charge": {
         "name": "Sturmangriff",
@@ -29700,8 +29700,8 @@ export const de_DE: EnTranslations = {
         "description": "Beschwört 2 Flaschen Wasser, die beim Trinken Mana wiederherstellen. Höhere Ränge beschwören reineres Wasser."
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "Nahrung herbeizaubern",
+        "description": "Beschwört 2 Portionen Brot, die beim Essen Gesundheit wiederherstellen. Höhere Ränge beschwören nahrhaftere Speisen."
       },
       "fire_blast": {
         "name": "Feuerschlag",
@@ -29728,8 +29728,8 @@ export const de_DE: EnTranslations = {
         "description": "Versengt den Gegner für {damage} Feuerschaden. Schnell zu wirken."
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "Pyroschlag",
+        "description": "Schleudert einen gewaltigen Feuerbrocken, der {damage} Feuerschaden sowie zusätzlichen Schaden über Zeit verursacht."
       },
       "ice_barrier": {
         "name": "Eisbarriere",
@@ -29868,8 +29868,8 @@ export const de_DE: EnTranslations = {
         "description": "Erhöht die durch euren Heiligschaden erzeugte Bedrohung 30 Min. lang um 60%. Der Grundpfeiler des Tank-Paladins."
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "Vergeltungsaura",
+        "description": "Umgibt Euch 30 Min. lang mit heiliger Energie und fügt jedem Gegner, der Euch im Nahkampf trifft, 5 Heiligschaden zu."
       },
       "tame_beast": {
         "name": "Wildtier zähmen",
@@ -29908,8 +29908,8 @@ export const de_DE: EnTranslations = {
         "description": "Verursacht eine Wunde, die den Gegner 10 Sek. lang um 40% verlangsamt."
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "Aspekt des Affen",
+        "description": "Nehmt den Aspekt des Affen an und erhöht eure Ausweichchance 30 Min. lang um 8%."
       },
       "aspect_of_the_cheetah": {
         "name": "Aspekt des Geparden",
@@ -29988,16 +29988,16 @@ export const de_DE: EnTranslations = {
         "description": "Versengt das Ziel mit Feuer für 25 Schaden plus {damage} über 12 Sek."
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "Flammenzungenwaffe",
+        "description": "Erfüllt eure Waffe mit elementarem Feuer: Jeder Schlag verursacht 8 zusätzlichen Feuerschaden für 5 Min."
       },
       "frost_shock": {
         "name": "Frostschock",
         "description": "Schockt das Ziel sofort mit Frost für {damage} Frostschaden und verlangsamt seine Bewegung 8 Sek. lang um 50%."
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "Frostbrandwaffe",
+        "description": "Verzaubert Eure Waffe mit beißendem Frost: Jeder Schlag verursacht 8 zusätzlichen Schaden für 5 Min."
       },
       "ghost_wolf": {
         "name": "Geisterwolf",
@@ -31281,7 +31281,7 @@ export const de_DE: EnTranslations = {
         "name": "Sukkubus"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "Grix der Tunnelkönig"
       },
       "brutok_skullsmasher": {
         "name": "Brutok Schädelschmetterer"
@@ -32410,7 +32410,7 @@ export const zh_CN: EnTranslations = {
       "totalXp": "总经验",
       "lv": "等级",
       "toNext": "到下一级",
-      "rested": "Rested"
+      "rested": "充分休息"
     },
     "progression": {
       "heading": "进度",
@@ -32458,11 +32458,11 @@ export const zh_CN: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "显示溢出经验",
-      "weather": "Weather Effects"
+      "weather": "天气效果"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "法力不足",
+      "lowEnergy": "能量不足"
     },
     "talents": {
       "title": "天赋",
@@ -32523,13 +32523,13 @@ export const zh_CN: EnTranslations = {
       "comingSoonTitle": "天赋即将推出",
       "comingSoonBody": "此职业还没有天赋树。你可以继续正常游玩；完整天赋树会在未来更新中到来。",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "你的职业暂无天赋树。",
+        "locked": "你尚未解锁天赋，天赋将在 {level} 级开启。",
+        "noSpec": "未选择专精",
+        "summary": "天赋：{head} — 已用 {spent}/{total} 点（{breakdown}）。",
+        "breakdownClass": "职业 {classPts}",
+        "breakdownSpec": "职业 {classPts}，{spec} {specPts}",
+        "unspent": " 剩余 {count} 点未用。"
       }
     }
   },
@@ -32890,8 +32890,8 @@ export const zh_CN: EnTranslations = {
       "levelLog": "你已达到 {level} 级！",
       "xpGain": "你获得 {amount} 点经验。",
       "xpFloat": "+{amount} 经验",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} 休息",
+      "xpGainRested": "你获得 {amount} 点经验（休息奖励 {rested} 点）。",
       "deathTitle": "你已经死亡。",
       "releaseSpirit": "释放灵魂",
       "chatTab": "聊天",
@@ -32921,7 +32921,7 @@ export const zh_CN: EnTranslations = {
       "keyBindings": "按键绑定",
       "graphics": "图形",
       "audio": "音频",
-      "interface": "Interface",
+      "interface": "界面",
       "logout": "退出登录",
       "returnToGame": "返回游戏",
       "resetToDefaults": "恢复默认",
@@ -32945,33 +32945,33 @@ export const zh_CN: EnTranslations = {
       "terrainLow": "低",
       "terrainHigh": "高",
       "touchOpacity": "触控控件透明度",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "反转视角（触控）",
       "graphicsReloadNote": "图形质量和地形细节会在重新加载后生效。",
       "reloadNow": "立即重新加载",
       "fullscreen": "全屏",
       "touchLookSpeed": "触屏视角速度",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "摇杆大小",
+      "buttonSize": "按钮大小",
+      "joystickDeadzone": "摇杆死区",
       "leftHandedTouch": "左手触屏模式",
       "filterProfanity": "过滤脏话",
       "clickMoveButton": "点击移动按键",
       "clickToMove": "点击移动",
       "graphicsNote": "降低镜头速度可让鼠标视角更平稳。渲染质量低于 100% 可在较弱设备上提升 FPS。",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "视野",
+      "hudOpacity": "界面不透明度",
+      "tooltipScale": "提示文字大小",
+      "fctScale": "战斗文字大小",
+      "chatFontScale": "聊天文字大小",
+      "chatOpacity": "聊天背景不透明度",
+      "compactChat": "紧凑聊天框",
+      "frostedPanels": "毛玻璃面板",
+      "highContrastText": "高对比度文字",
+      "reduceMotion": "减少动画",
+      "showFps": "显示帧率",
+      "invertLookY": "反转视角（Y轴）",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "这些选项仅改变你自己的视图，并保存在此设备上。",
       "soundEffects": "音效",
       "musicVolume": "音乐音量",
       "music": "音乐",
@@ -33530,7 +33530,7 @@ export const zh_CN: EnTranslations = {
       "drink": "饮料",
       "tool": "工具",
       "potion": "药水",
-      "elixir": "Elixir"
+      "elixir": "药剂"
     },
     "stats": {
       "armor": "护甲",
@@ -33546,8 +33546,8 @@ export const zh_CN: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{quality}{kind}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "当前装备",
+      "ifYouEquip": "装备后",
       "damageSpeed": "{min} - {max} 伤害 速度 {speed}",
       "dps": "（每秒 {dps} 伤害）",
       "dagger": "匕首",
@@ -33672,12 +33672,12 @@ export const zh_CN: EnTranslations = {
         "description": "使你的攻击强度提高 20，持续 2 分钟。"
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "命令怒吼",
+        "description": "使你的耐力提高 6，持续 2 分钟。"
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "挫志怒吼",
+        "description": "发出可怕的怒吼，使附近所有敌人的攻击强度降低 30，持续 30 秒。"
       },
       "charge": {
         "name": "冲锋",
@@ -33748,8 +33748,8 @@ export const zh_CN: EnTranslations = {
         "description": "制造 2 瓶水，饮用后恢复法力。更高等级可制造更纯净的水。"
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "造食术",
+        "description": "制造 2 份面包，食用后恢复生命值。更高等级可制造更丰盛的食物。"
       },
       "fire_blast": {
         "name": "火焰冲击",
@@ -33776,8 +33776,8 @@ export const zh_CN: EnTranslations = {
         "description": "灼烧敌人，造成 {damage} 点火焰伤害。施法迅速。"
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "炎爆术",
+        "description": "投掷一颗巨大的火焰陨石，造成 {damage} 点火焰伤害，并在一段时间内造成额外伤害。"
       },
       "ice_barrier": {
         "name": "寒冰护体",
@@ -33916,8 +33916,8 @@ export const zh_CN: EnTranslations = {
         "description": "使你的神圣伤害产生的威胁值提高 60%，持续 30 分钟。防护圣骑士的核心技能。"
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "惩戒光环",
+        "description": "以神圣能量环绕自身，持续 30 分钟，对任何近战攻击你的敌人造成 5 点神圣伤害。"
       },
       "tame_beast": {
         "name": "驯服野兽",
@@ -33956,8 +33956,8 @@ export const zh_CN: EnTranslations = {
         "description": "造成伤口，使敌人移动速度降低 40%，持续 10 秒。"
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "猿猴守护",
+        "description": "获得猿猴守护，使躲闪几率提高 8%，持续 30 分钟。"
       },
       "aspect_of_the_cheetah": {
         "name": "猎豹守护",
@@ -34036,16 +34036,16 @@ export const zh_CN: EnTranslations = {
         "description": "用火焰灼烧目标，造成 25 点伤害，并在 12 秒内额外造成 {damage}。"
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "火舌武器",
+        "description": "用元素之火灌注你的武器：每次挥击额外造成 8 点火焰伤害，持续 5 分钟。"
       },
       "frost_shock": {
         "name": "冰霜震击",
         "description": "立即以冰霜冲击目标，造成 {damage} 点冰霜伤害，并使其移动速度降低 50%，持续 8 秒。"
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "霜刃武器",
+        "description": "为你的武器附上刺骨寒霜：每次挥击额外造成 8 点伤害，持续 5 分钟。"
       },
       "ghost_wolf": {
         "name": "幽魂之狼",
@@ -35329,7 +35329,7 @@ export const zh_CN: EnTranslations = {
         "name": "魅魔"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "隧道之王格里克斯"
       },
       "brutok_skullsmasher": {
         "name": "碎颅者布鲁托克"
@@ -36458,7 +36458,7 @@ export const zh_TW: EnTranslations = {
       "totalXp": "總經驗",
       "lv": "等級",
       "toNext": "到下一級",
-      "rested": "Rested"
+      "rested": "充分休息"
     },
     "progression": {
       "heading": "進度",
@@ -36506,11 +36506,11 @@ export const zh_TW: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "顯示溢出經驗",
-      "weather": "Weather Effects"
+      "weather": "天氣效果"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "法力不足",
+      "lowEnergy": "能量不足"
     },
     "talents": {
       "title": "天賦",
@@ -36571,13 +36571,13 @@ export const zh_TW: EnTranslations = {
       "comingSoonTitle": "天賦即將推出",
       "comingSoonBody": "此職業還沒有天賦樹。你可以繼續正常遊玩；完整天賦樹會在未來更新中到來。",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "你的職業尚無天賦樹。",
+        "locked": "你尚未解鎖天賦，天賦將在 {level} 級開啟。",
+        "noSpec": "未選擇專精",
+        "summary": "天賦：{head} — 已用 {spent}/{total} 點（{breakdown}）。",
+        "breakdownClass": "職業 {classPts}",
+        "breakdownSpec": "職業 {classPts}，{spec} {specPts}",
+        "unspent": " 剩餘 {count} 點未用。"
       }
     }
   },
@@ -36938,8 +36938,8 @@ export const zh_TW: EnTranslations = {
       "levelLog": "你已達到 {level} 級！",
       "xpGain": "你獲得 {amount} 點經驗值。",
       "xpFloat": "+{amount} 經驗值",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} 休息",
+      "xpGainRested": "你獲得 {amount} 點經驗值（休息獎勵 {rested} 點）。",
       "deathTitle": "你已經死亡。",
       "releaseSpirit": "釋放靈魂",
       "chatTab": "聊天",
@@ -36969,7 +36969,7 @@ export const zh_TW: EnTranslations = {
       "keyBindings": "按鍵設定",
       "graphics": "圖形",
       "audio": "音訊",
-      "interface": "Interface",
+      "interface": "介面",
       "logout": "登出",
       "returnToGame": "返回遊戲",
       "resetToDefaults": "恢復預設",
@@ -36993,33 +36993,33 @@ export const zh_TW: EnTranslations = {
       "terrainLow": "低",
       "terrainHigh": "高",
       "touchOpacity": "觸控控制透明度",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "反轉視角（觸控）",
       "graphicsReloadNote": "圖形品質和地形細節會在重新載入後生效。",
       "reloadNow": "立即重新載入",
       "fullscreen": "全螢幕",
       "touchLookSpeed": "觸控視角速度",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "搖桿大小",
+      "buttonSize": "按鍵大小",
+      "joystickDeadzone": "搖桿盲區",
       "leftHandedTouch": "左手觸控模式",
       "filterProfanity": "過濾髒話",
       "clickMoveButton": "點擊移動按鍵",
       "clickToMove": "點擊移動",
       "graphicsNote": "降低鏡頭速度可讓滑鼠視角更平穩。渲染品質低於 100% 可在較弱裝置上提升 FPS。",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "視野範圍",
+      "hudOpacity": "HUD 透明度",
+      "tooltipScale": "提示文字大小",
+      "fctScale": "戰鬥文字大小",
+      "chatFontScale": "聊天文字大小",
+      "chatOpacity": "聊天背景透明度",
+      "compactChat": "精簡聊天",
+      "frostedPanels": "霧面面板",
+      "highContrastText": "高對比文字",
+      "reduceMotion": "減少動態效果",
+      "showFps": "顯示 FPS",
+      "invertLookY": "反轉視角（Y 軸）",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "這些選項只會改變你自己的畫面，並儲存在此裝置上。",
       "soundEffects": "音效",
       "musicVolume": "音樂音量",
       "music": "音樂",
@@ -37578,7 +37578,7 @@ export const zh_TW: EnTranslations = {
       "drink": "飲料",
       "tool": "工具",
       "potion": "藥水",
-      "elixir": "Elixir"
+      "elixir": "藥劑"
     },
     "stats": {
       "armor": "護甲",
@@ -37594,8 +37594,8 @@ export const zh_TW: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{quality}{kind}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "目前已裝備",
+      "ifYouEquip": "裝備後",
       "damageSpeed": "{min} - {max} 傷害 速度 {speed}",
       "dps": "（每秒 {dps} 傷害）",
       "dagger": "匕首",
@@ -37720,12 +37720,12 @@ export const zh_TW: EnTranslations = {
         "description": "使你的攻擊強度提高 20，持續 2 分鐘。"
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "命令怒吼",
+        "description": "使你的耐力提高 6，持續 2 分鐘。"
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "挫志怒吼",
+        "description": "發出可怕的怒吼，使附近所有敵人的攻擊強度降低 30，持續 30 秒。"
       },
       "charge": {
         "name": "衝鋒",
@@ -37796,8 +37796,8 @@ export const zh_TW: EnTranslations = {
         "description": "製造 2 瓶水，飲用後恢復法力。更高等級可製造更純淨的水。"
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "造食術",
+        "description": "製造 2 份麵包，食用後恢復生命值。更高等級可製造更豐盛的食物。"
       },
       "fire_blast": {
         "name": "火焰衝擊",
@@ -37824,8 +37824,8 @@ export const zh_TW: EnTranslations = {
         "description": "灼燒敵人，造成 {damage} 點火焰傷害。施法迅速。"
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "炎爆術",
+        "description": "投擲一顆巨大的火焰隕石，造成 {damage} 點火焰傷害，並在一段時間內造成額外傷害。"
       },
       "ice_barrier": {
         "name": "寒冰護體",
@@ -37964,8 +37964,8 @@ export const zh_TW: EnTranslations = {
         "description": "使你的神聖傷害產生的威脅值提高 60%，持續 30 分鐘。防護聖騎士的核心技能。"
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "懲戒光環",
+        "description": "以神聖能量環繞自身，持續 30 分鐘，對任何近戰攻擊你的敵人造成 5 點神聖傷害。"
       },
       "tame_beast": {
         "name": "馴服野獸",
@@ -38004,8 +38004,8 @@ export const zh_TW: EnTranslations = {
         "description": "造成傷口，使敵人移動速度降低 40%，持續 10 秒。"
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "猿猴守護",
+        "description": "獲得猿猴守護，使閃躲機率提高 8%，持續 30 分鐘。"
       },
       "aspect_of_the_cheetah": {
         "name": "獵豹守護",
@@ -38084,16 +38084,16 @@ export const zh_TW: EnTranslations = {
         "description": "用火焰灼燒目標，造成 25 點傷害，並在 12 秒內額外造成 {damage}。"
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "火舌武器",
+        "description": "用元素之火灌注你的武器：每次揮擊額外造成 8 點火焰傷害，持續 5 分鐘。"
       },
       "frost_shock": {
         "name": "冰霜震擊",
         "description": "立即以冰霜衝擊目標，造成 {damage} 點冰霜傷害，並使其移動速度降低 50%，持續 8 秒。"
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "霜刃武器",
+        "description": "為你的武器附上刺骨寒霜：每次揮擊額外造成 8 點傷害，持續 5 分鐘。"
       },
       "ghost_wolf": {
         "name": "幽魂之狼",
@@ -39377,7 +39377,7 @@ export const zh_TW: EnTranslations = {
         "name": "魅魔"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "隧道之王葛瑞克斯"
       },
       "brutok_skullsmasher": {
         "name": "碎顱者布魯托克"
@@ -40506,7 +40506,7 @@ export const ko_KR: EnTranslations = {
       "totalXp": "총 경험치",
       "lv": "레벨",
       "toNext": "다음까지",
-      "rested": "Rested"
+      "rested": "휴식"
     },
     "progression": {
       "heading": "진행도",
@@ -40554,11 +40554,11 @@ export const ko_KR: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "초과 경험치 표시",
-      "weather": "Weather Effects"
+      "weather": "날씨 효과"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "마나 부족",
+      "lowEnergy": "기력 부족"
     },
     "talents": {
       "title": "특성",
@@ -40619,13 +40619,13 @@ export const ko_KR: EnTranslations = {
       "comingSoonTitle": "특성 준비 중",
       "comingSoonBody": "이 직업은 아직 특성 트리가 없습니다. 계속 정상적으로 플레이할 수 있으며 전체 트리는 향후 업데이트에 추가됩니다.",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "이 직업은 아직 특성 트리가 없습니다.",
+        "locked": "아직 특성을 해제하지 않았습니다 — 특성은 {level}레벨부터 시작됩니다.",
+        "noSpec": "전문화 없음",
+        "summary": "특성: {head} — {spent}/{total} 점 사용 ({breakdown}).",
+        "breakdownClass": "직업 {classPts}",
+        "breakdownSpec": "직업 {classPts}, {spec} {specPts}",
+        "unspent": " {count}점 미사용."
       }
     }
   },
@@ -40986,8 +40986,8 @@ export const ko_KR: EnTranslations = {
       "levelLog": "{level} 레벨이 되었습니다!",
       "xpGain": "경험치 {amount}을 획득했습니다.",
       "xpFloat": "+{amount} 경험치",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} 휴식",
+      "xpGainRested": "경험치 {amount}을 획득했습니다 (휴식 보너스 {rested}).",
       "deathTitle": "사망했습니다.",
       "releaseSpirit": "영혼 풀어주기",
       "chatTab": "채팅",
@@ -41017,7 +41017,7 @@ export const ko_KR: EnTranslations = {
       "keyBindings": "키 설정",
       "graphics": "그래픽",
       "audio": "오디오",
-      "interface": "Interface",
+      "interface": "인터페이스",
       "logout": "로그아웃",
       "returnToGame": "게임으로 돌아가기",
       "resetToDefaults": "기본값 복원",
@@ -41041,33 +41041,33 @@ export const ko_KR: EnTranslations = {
       "terrainLow": "낮음",
       "terrainHigh": "높음",
       "touchOpacity": "터치 조작 투명도",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "시점 반전 (터치)",
       "graphicsReloadNote": "그래픽 품질과 지형 세부 묘사는 새로고침 후 적용됩니다.",
       "reloadNow": "지금 새로고침",
       "fullscreen": "전체 화면",
       "touchLookSpeed": "터치 시점 속도",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "조이스틱 크기",
+      "buttonSize": "버튼 크기",
+      "joystickDeadzone": "조이스틱 무반응 구간",
       "leftHandedTouch": "왼손잡이 터치",
       "filterProfanity": "비속어 필터",
       "clickMoveButton": "클릭 이동 버튼",
       "clickToMove": "클릭하여 이동",
       "graphicsNote": "카메라 속도를 낮추면 마우스 시점이 더 안정됩니다. 렌더 품질을 100% 아래로 낮추면 낮은 사양 장치에서 FPS가 향상됩니다.",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "시야각",
+      "hudOpacity": "HUD 투명도",
+      "tooltipScale": "툴팁 글자 크기",
+      "fctScale": "전투 문자 크기",
+      "chatFontScale": "채팅 글자 크기",
+      "chatOpacity": "채팅 배경 투명도",
+      "compactChat": "간결한 채팅",
+      "frostedPanels": "반투명 패널",
+      "highContrastText": "고대비 문자",
+      "reduceMotion": "움직임 줄이기",
+      "showFps": "FPS 표시",
+      "invertLookY": "시점 반전 (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "이 옵션은 자신의 화면에만 적용되며 이 기기에 저장됩니다.",
       "soundEffects": "효과음",
       "musicVolume": "음악 음량",
       "music": "음악",
@@ -41626,7 +41626,7 @@ export const ko_KR: EnTranslations = {
       "drink": "음료",
       "tool": "도구",
       "potion": "물약",
-      "elixir": "Elixir"
+      "elixir": "비약"
     },
     "stats": {
       "armor": "방어도",
@@ -41642,8 +41642,8 @@ export const ko_KR: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{quality} {kind}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "현재 착용 중",
+      "ifYouEquip": "이것을 착용하면",
       "damageSpeed": "{min} - {max} 피해 속도 {speed}",
       "dps": "(초당 피해 {dps})",
       "dagger": "단검",
@@ -41768,12 +41768,12 @@ export const ko_KR: EnTranslations = {
         "description": "2분 동안 전투력이 20만큼 증가합니다."
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "지휘의 외침",
+        "description": "2분 동안 체력이 6만큼 증가합니다."
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "사기의 외침",
+        "description": "무시무시한 외침을 내질러 30초 동안 주위 모든 적의 전투력을 30만큼 감소시킵니다."
       },
       "charge": {
         "name": "돌진",
@@ -41844,8 +41844,8 @@ export const ko_KR: EnTranslations = {
         "description": "마시면 마나를 회복하는 물병 2개를 창조합니다. 높은 등급은 더 순수한 물을 창조합니다."
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "음식 창조",
+        "description": "먹으면 생명력을 회복하는 빵 2개를 창조합니다. 높은 등급은 더 든든한 음식을 창조합니다."
       },
       "fire_blast": {
         "name": "화염 작열",
@@ -41872,8 +41872,8 @@ export const ko_KR: EnTranslations = {
         "description": "적을 불태워 {damage}의 화염 피해를 입힙니다. 빠르게 시전합니다."
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "화염 폭발",
+        "description": "거대한 불덩이를 던져 {damage}의 화염 피해와 추가 지속 피해를 입힙니다."
       },
       "ice_barrier": {
         "name": "얼음 보호막",
@@ -42012,8 +42012,8 @@ export const ko_KR: EnTranslations = {
         "description": "30분 동안 자신의 신성 피해가 생성하는 위협 수준이 60%만큼 증가합니다. 방어 성기사의 핵심입니다."
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "응징의 오라",
+        "description": "30분 동안 신성한 기운으로 자신을 감싸 근접 공격으로 자신을 타격하는 모든 적에게 5의 신성 피해를 입힙니다."
       },
       "tame_beast": {
         "name": "야수 길들이기",
@@ -42052,8 +42052,8 @@ export const ko_KR: EnTranslations = {
         "description": "상처를 내어 10초 동안 적의 이동 속도를 40%만큼 감소시킵니다."
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "원숭이의 상",
+        "description": "원숭이의 상을 취해 30분 동안 회피 확률이 8%만큼 증가합니다."
       },
       "aspect_of_the_cheetah": {
         "name": "치타의 상",
@@ -42132,16 +42132,16 @@ export const ko_KR: EnTranslations = {
         "description": "대상을 불태워 25의 피해를 입히고 12초에 걸쳐 추가로 {damage}의 피해를 입힙니다."
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "화염의 무기",
+        "description": "원소의 불꽃으로 무기를 강화합니다. 5분 동안 매 공격마다 8의 추가 화염 피해를 입힙니다."
       },
       "frost_shock": {
         "name": "냉기 충격",
         "description": "대상을 즉시 냉기로 강타해 {damage}의 냉기 피해를 입히고 8초 동안 이동 속도를 50%만큼 감소시킵니다."
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "냉기의 무기",
+        "description": "살을 에는 냉기로 무기를 강화합니다. 5분 동안 매 공격마다 8의 추가 피해를 입힙니다."
       },
       "ghost_wolf": {
         "name": "늑대 정령",
@@ -43425,7 +43425,7 @@ export const ko_KR: EnTranslations = {
         "name": "서큐버스"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "땅굴왕 그릭스"
       },
       "brutok_skullsmasher": {
         "name": "해골분쇄자 브루톡"
@@ -44554,7 +44554,7 @@ export const ja_JP: EnTranslations = {
       "totalXp": "総経験値",
       "lv": "Lv",
       "toNext": "次まで",
-      "rested": "Rested"
+      "rested": "休息"
     },
     "progression": {
       "heading": "進行",
@@ -44602,11 +44602,11 @@ export const ja_JP: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "超過経験値を表示",
-      "weather": "Weather Effects"
+      "weather": "天候エフェクト"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "マナ低下",
+      "lowEnergy": "エネルギー低下"
     },
     "talents": {
       "title": "タレント",
@@ -44667,13 +44667,13 @@ export const ja_JP: EnTranslations = {
       "comingSoonTitle": "タレント準備中",
       "comingSoonBody": "このクラスにはまだタレントツリーがありません。通常通りプレイできます。完全なツリーは今後のアップデートで追加されます。",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "あなたのクラスにはまだタレントツリーがありません。",
+        "locked": "タレントはまだ解除されていません——レベル{level}から始まります。",
+        "noSpec": "専門化なし",
+        "summary": "タレント: {head}——{spent}/{total} ポイント使用済み（{breakdown}）。",
+        "breakdownClass": "クラス {classPts}",
+        "breakdownSpec": "クラス {classPts}、{spec} {specPts}",
+        "unspent": " 未使用 {count}。"
       }
     }
   },
@@ -45034,8 +45034,8 @@ export const ja_JP: EnTranslations = {
       "levelLog": "レベル {level}になりました！",
       "xpGain": "{amount}の経験値を獲得しました。",
       "xpFloat": "+{amount} 経験値",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} 休息",
+      "xpGainRested": "{amount}の経験値を獲得しました（休息ボーナス {rested}）。",
       "deathTitle": "死亡しました。",
       "releaseSpirit": "霊魂を解放",
       "chatTab": "チャット",
@@ -45065,7 +45065,7 @@ export const ja_JP: EnTranslations = {
       "keyBindings": "キー設定",
       "graphics": "グラフィック",
       "audio": "オーディオ",
-      "interface": "Interface",
+      "interface": "インターフェース",
       "logout": "ログアウト",
       "returnToGame": "ゲームに戻る",
       "resetToDefaults": "初期設定に戻す",
@@ -45089,33 +45089,33 @@ export const ja_JP: EnTranslations = {
       "terrainLow": "低",
       "terrainHigh": "高",
       "touchOpacity": "タッチ操作の不透明度",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "視点反転（タッチ）",
       "graphicsReloadNote": "グラフィック品質と地形の詳細は再読み込み後に適用されます。",
       "reloadNow": "今すぐ再読み込み",
       "fullscreen": "フルスクリーン",
       "touchLookSpeed": "タッチ視点速度",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "ジョイスティックの大きさ",
+      "buttonSize": "ボタンの大きさ",
+      "joystickDeadzone": "ジョイスティックの遊び",
       "leftHandedTouch": "左利きタッチ",
       "filterProfanity": "暴言フィルター",
       "clickMoveButton": "クリック移動ボタン",
       "clickToMove": "クリック移動",
       "graphicsNote": "カメラ速度を下げるとマウス視点が落ち着きます。描画品質を100%未満にすると、低性能環境でFPSが向上します。",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "視野",
+      "hudOpacity": "HUDの不透明度",
+      "tooltipScale": "ツールチップの文字サイズ",
+      "fctScale": "戦闘テキストのサイズ",
+      "chatFontScale": "チャットの文字サイズ",
+      "chatOpacity": "チャット背景の不透明度",
+      "compactChat": "コンパクトチャット",
+      "frostedPanels": "すりガラスパネル",
+      "highContrastText": "高コントラストの文字",
+      "reduceMotion": "モーションを減らす",
+      "showFps": "FPSを表示",
+      "invertLookY": "視点を反転 (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "これらのオプションは自分の表示のみを変更し、この端末に保存されます。",
       "soundEffects": "効果音",
       "musicVolume": "音楽音量",
       "music": "音楽",
@@ -45674,7 +45674,7 @@ export const ja_JP: EnTranslations = {
       "drink": "飲み物",
       "tool": "道具",
       "potion": "ポーション",
-      "elixir": "Elixir"
+      "elixir": "エリクサー"
     },
     "stats": {
       "armor": "防御力",
@@ -45690,8 +45690,8 @@ export const ja_JP: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{quality} {kind}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "現在の装備",
+      "ifYouEquip": "これを装備すると",
       "damageSpeed": "{min} - {max} ダメージ 速度 {speed}",
       "dps": "（秒間 {dps} ダメージ）",
       "dagger": "短剣",
@@ -45816,12 +45816,12 @@ export const ja_JP: EnTranslations = {
         "description": "2分間、攻撃力が20増加します。"
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "コマンディングシャウト",
+        "description": "2分間、スタミナが6増加します。"
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "デモラライジングシャウト",
+        "description": "恐ろしい雄叫びを上げ、30秒間、周囲の敵すべての攻撃力を30低下させます。"
       },
       "charge": {
         "name": "チャージ",
@@ -45892,8 +45892,8 @@ export const ja_JP: EnTranslations = {
         "description": "飲むとマナを回復する水の瓶を2本召喚します。高ランクではより純粋な水を召喚します。"
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "食料の召喚",
+        "description": "食べると体力を回復するパンを2食分召喚します。高ランクではより滋養のある食料を召喚します。"
       },
       "fire_blast": {
         "name": "ファイアブラスト",
@@ -45920,8 +45920,8 @@ export const ja_JP: EnTranslations = {
         "description": "敵を焼き、{damage} の火炎ダメージを与えます。詠唱が速い呪文です。"
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "パイロブラスト",
+        "description": "巨大な炎の岩塊を放ち、{damage} の火炎ダメージと追加の継続ダメージを与えます。"
       },
       "ice_barrier": {
         "name": "アイスバリア",
@@ -46060,8 +46060,8 @@ export const ja_JP: EnTranslations = {
         "description": "30分間、あなたの神聖ダメージが生成する脅威が60%増加します。タンク役パラディンの要です。"
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "リトリビューションオーラ",
+        "description": "30分間、聖なる力で身を包み、近接攻撃をしてきた敵に5の神聖ダメージを与えます。"
       },
       "tame_beast": {
         "name": "獣の調教",
@@ -46100,8 +46100,8 @@ export const ja_JP: EnTranslations = {
         "description": "傷を負わせ、10秒間、敵の移動速度を40%低下させます。"
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "猿の相",
+        "description": "猿の相を取り、30分間、回避率を8%増加させます。"
       },
       "aspect_of_the_cheetah": {
         "name": "チーターの相",
@@ -46180,16 +46180,16 @@ export const ja_JP: EnTranslations = {
         "description": "対象を炎で焼き、25ダメージに加えて12秒間で {damage} のダメージを与えます。"
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "フレイムタングウェポン",
+        "description": "元素の炎を武器に込めます。5分間、各スイングが8の追加火炎ダメージを与えます。"
       },
       "frost_shock": {
         "name": "フロストショック",
         "description": "対象を冷気で即座に打ち、{damage} の冷気ダメージを与え、8秒間、移動速度を50%低下させます。"
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "フロストブランドウェポン",
+        "description": "刺すような冷気を武器に込めます。5分間、各スイングが8の追加ダメージを与えます。"
       },
       "ghost_wolf": {
         "name": "ゴーストウルフ",
@@ -47473,7 +47473,7 @@ export const ja_JP: EnTranslations = {
         "name": "サキュバス"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "トンネルキングのグリックス"
       },
       "brutok_skullsmasher": {
         "name": "頭蓋砕きブルトーク"
@@ -48602,7 +48602,7 @@ export const pt_BR: EnTranslations = {
       "totalXp": "EXP total",
       "lv": "Nv",
       "toNext": "para o próximo",
-      "rested": "Rested"
+      "rested": "Descansado"
     },
     "progression": {
       "heading": "Progressão",
@@ -48650,11 +48650,11 @@ export const pt_BR: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "Mostrar EXP excedente",
-      "weather": "Weather Effects"
+      "weather": "Efeitos Climáticos"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "Mana Baixa",
+      "lowEnergy": "Energia Baixa"
     },
     "talents": {
       "title": "Talentos",
@@ -48715,13 +48715,13 @@ export const pt_BR: EnTranslations = {
       "comingSoonTitle": "Talentos em breve",
       "comingSoonBody": "Esta classe ainda não tem árvores de talentos. Você pode continuar jogando normalmente; as árvores completas chegarão em uma atualização futura.",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "Sua classe ainda não tem árvore de talentos.",
+        "locked": "Você ainda não desbloqueou talentos — eles começam no nível {level}.",
+        "noSpec": "sem especialização",
+        "summary": "Talentos: {head} — {spent}/{total} pontos gastos ({breakdown}).",
+        "breakdownClass": "Classe {classPts}",
+        "breakdownSpec": "Classe {classPts}, {spec} {specPts}",
+        "unspent": " {count} sem gastar."
       }
     }
   },
@@ -49082,8 +49082,8 @@ export const pt_BR: EnTranslations = {
       "levelLog": "Você alcançou o nível {level}!",
       "xpGain": "Você ganha {amount} de experiência.",
       "xpFloat": "+{amount} XP",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} descansado",
+      "xpGainRested": "Você ganha {amount} de experiência (bônus de {rested} por ter descansado).",
       "deathTitle": "Você morreu.",
       "releaseSpirit": "Liberar espírito",
       "chatTab": "Chat",
@@ -49137,33 +49137,33 @@ export const pt_BR: EnTranslations = {
       "terrainLow": "Baixo",
       "terrainHigh": "Alto",
       "touchOpacity": "Opacidade dos controles de toque",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "Inverter olhar (toque)",
       "graphicsReloadNote": "Qualidade gráfica e detalhe do terreno são aplicados após recarregar.",
       "reloadNow": "Recarregar agora",
       "fullscreen": "Tela cheia",
       "touchLookSpeed": "Velocidade da câmera por toque",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "Tamanho do joystick",
+      "buttonSize": "Tamanho dos botões",
+      "joystickDeadzone": "Zona morta do joystick",
       "leftHandedTouch": "Toque para canhotos",
       "filterProfanity": "Filtrar palavrões",
       "clickMoveButton": "Botão de clique para mover",
       "clickToMove": "Clique para mover",
       "graphicsNote": "Reduza a velocidade da câmera para um mouselook mais calmo. Qualidade de renderização abaixo de 100% melhora o FPS em máquinas mais fracas.",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "Campo de visão",
+      "hudOpacity": "Opacidade do HUD",
+      "tooltipScale": "Tamanho do texto das dicas",
+      "fctScale": "Tamanho do texto de combate",
+      "chatFontScale": "Tamanho do texto do chat",
+      "chatOpacity": "Opacidade do fundo do chat",
+      "compactChat": "Chat compacto",
+      "frostedPanels": "Painéis foscos",
+      "highContrastText": "Texto de alto contraste",
+      "reduceMotion": "Reduzir movimento",
+      "showFps": "Mostrar FPS",
+      "invertLookY": "Inverter olhar (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "Estas opções mudam apenas a sua própria visão e são salvas neste dispositivo.",
       "soundEffects": "Efeitos sonoros",
       "musicVolume": "Volume da música",
       "music": "Música",
@@ -49738,8 +49738,8 @@ export const pt_BR: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{kind} {quality}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "Atualmente equipado",
+      "ifYouEquip": "Se você equipar isto",
       "damageSpeed": "{min} - {max} de dano Velocidade {speed}",
       "dps": "({dps} de dano por segundo)",
       "dagger": "Adaga",
@@ -49864,12 +49864,12 @@ export const pt_BR: EnTranslations = {
         "description": "Aumenta seu poder de ataque em 20 por 2 min."
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "Grito de Comando",
+        "description": "Aumenta seu Vigor em 6 por 2 min."
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "Grito Desmoralizante",
+        "description": "Solta um grito apavorante, reduzindo o poder de ataque de todos os inimigos próximos em 30 por 30 s."
       },
       "charge": {
         "name": "Investida",
@@ -49940,8 +49940,8 @@ export const pt_BR: EnTranslations = {
         "description": "Conjura 2 garrafas de água que restauram mana quando bebidas. Graus superiores conjuram água mais pura."
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "Conjurar Comida",
+        "description": "Conjura 2 porções de pão que restauram vida quando comidas. Graus superiores conjuram alimentos mais substanciais."
       },
       "fire_blast": {
         "name": "Impacto de Fogo",
@@ -49968,8 +49968,8 @@ export const pt_BR: EnTranslations = {
         "description": "Chamusca o inimigo com {damage} de dano de Fogo. Lançamento rápido."
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "Piroexplosão",
+        "description": "Arremessa uma imensa rocha flamejante que causa {damage} de dano de Fogo mais dano adicional ao longo do tempo."
       },
       "ice_barrier": {
         "name": "Barreira de Gelo",
@@ -50108,8 +50108,8 @@ export const pt_BR: EnTranslations = {
         "description": "Aumenta a ameaça gerada pelo seu dano Sagrado em 60% por 30 min. A base do paladino tanque."
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "Aura de Retribuição",
+        "description": "Envolve você em energia sagrada por 30 min, causando 5 de dano Sagrado a qualquer inimigo que o atinja corpo a corpo."
       },
       "tame_beast": {
         "name": "Domar Fera",
@@ -50148,8 +50148,8 @@ export const pt_BR: EnTranslations = {
         "description": "Inflige um ferimento que reduz a velocidade do inimigo em 40% por 10 s."
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "Aspecto do Macaco",
+        "description": "Assume o aspecto do macaco, aumentando sua chance de esquiva em 8% por 30 min."
       },
       "aspect_of_the_cheetah": {
         "name": "Aspecto da Chita",
@@ -50228,16 +50228,16 @@ export const pt_BR: EnTranslations = {
         "description": "Queima o alvo com fogo, causando 25 de dano mais {damage} ao longo de 12 s."
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "Arma Língua de Fogo",
+        "description": "Imbui sua arma com fogo elemental: cada golpe causa 8 de dano adicional de Fogo por 5 min."
       },
       "frost_shock": {
         "name": "Choque Gélido",
         "description": "Choca o alvo instantaneamente com gelo, causando {damage} de dano de Gelo e reduzindo a velocidade de movimento em 50% por 8 s."
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "Arma de Gelo",
+        "description": "Imbui sua arma com gelo cortante: cada golpe causa 8 de dano adicional por 5 min."
       },
       "ghost_wolf": {
         "name": "Lobo Fantasma",
@@ -51521,7 +51521,7 @@ export const pt_BR: EnTranslations = {
         "name": "Súcubo"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "Grix o Rei dos Túneis"
       },
       "brutok_skullsmasher": {
         "name": "Brutok Quebra-crânios"
@@ -52650,7 +52650,7 @@ export const ru_RU: EnTranslations = {
       "totalXp": "всего опыта",
       "lv": "Ур.",
       "toNext": "до следующего",
-      "rested": "Rested"
+      "rested": "Отдых"
     },
     "progression": {
       "heading": "Прогресс",
@@ -52698,11 +52698,11 @@ export const ru_RU: EnTranslations = {
     },
     "settings": {
       "showOverflowXp": "Показывать лишний опыт",
-      "weather": "Weather Effects"
+      "weather": "Погодные эффекты"
     },
     "hud": {
-      "lowMana": "Low Mana",
-      "lowEnergy": "Low Energy"
+      "lowMana": "Мало маны",
+      "lowEnergy": "Мало энергии"
     },
     "talents": {
       "title": "Таланты",
@@ -52763,13 +52763,13 @@ export const ru_RU: EnTranslations = {
       "comingSoonTitle": "Таланты скоро появятся",
       "comingSoonBody": "У этого класса еще нет деревьев талантов. Можно продолжать играть как обычно; полные деревья появятся в будущем обновлении.",
       "readout": {
-        "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
-        "noSpec": "no specialization",
-        "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",
-        "breakdownClass": "Class {classPts}",
-        "breakdownSpec": "Class {classPts}, {spec} {specPts}",
-        "unspent": " {count} unspent."
+        "noTree": "У вашего класса пока нет дерева талантов.",
+        "locked": "Вы еще не открыли таланты — они появляются на уровне {level}.",
+        "noSpec": "без специализации",
+        "summary": "Таланты: {head} — потрачено очков: {spent}/{total} ({breakdown}).",
+        "breakdownClass": "Класс {classPts}",
+        "breakdownSpec": "Класс {classPts}, {spec} {specPts}",
+        "unspent": " не вложено: {count}."
       }
     }
   },
@@ -53130,8 +53130,8 @@ export const ru_RU: EnTranslations = {
       "levelLog": "Вы достигли уровня {level}!",
       "xpGain": "Вы получаете {amount} опыта.",
       "xpFloat": "+{amount} опыта",
-      "xpFloatRested": "+{amount} rested",
-      "xpGainRested": "You gain {amount} experience ({rested} bonus from resting).",
+      "xpFloatRested": "+{amount} за отдых",
+      "xpGainRested": "Вы получаете {amount} опыта (из них {rested} за отдых).",
       "deathTitle": "Вы погибли.",
       "releaseSpirit": "Освободить дух",
       "chatTab": "Чат",
@@ -53161,7 +53161,7 @@ export const ru_RU: EnTranslations = {
       "keyBindings": "Назначение клавиш",
       "graphics": "Графика",
       "audio": "Звук",
-      "interface": "Interface",
+      "interface": "Интерфейс",
       "logout": "Выйти",
       "returnToGame": "Вернуться в игру",
       "resetToDefaults": "Сбросить настройки",
@@ -53185,33 +53185,33 @@ export const ru_RU: EnTranslations = {
       "terrainLow": "Низкая",
       "terrainHigh": "Высокая",
       "touchOpacity": "Прозрачность сенсорного управления",
-      "invertLook": "Invert Look (Touch)",
+      "invertLook": "Инверсия обзора (касание)",
       "graphicsReloadNote": "Качество графики и детализация местности применяются после перезагрузки.",
       "reloadNow": "Перезагрузить сейчас",
       "fullscreen": "Полный экран",
       "touchLookSpeed": "Скорость обзора (касание)",
-      "joystickSize": "Joystick Size",
-      "buttonSize": "Button Size",
-      "joystickDeadzone": "Joystick Deadzone",
+      "joystickSize": "Размер джойстика",
+      "buttonSize": "Размер кнопок",
+      "joystickDeadzone": "Мертвая зона джойстика",
       "leftHandedTouch": "Управление для левшей",
       "filterProfanity": "Фильтр нецензурной лексики",
       "clickMoveButton": "Кнопка клика для движения",
       "clickToMove": "Движение по щелчку",
       "graphicsNote": "Уменьшите скорость камеры для более спокойного обзора мышью. Качество рендера ниже 100% повышает FPS на слабых устройствах.",
-      "fieldOfView": "Field of View",
-      "hudOpacity": "HUD Opacity",
-      "tooltipScale": "Tooltip Text Size",
-      "fctScale": "Combat Text Size",
-      "chatFontScale": "Chat Text Size",
-      "chatOpacity": "Chat Background Opacity",
-      "compactChat": "Compact Chat",
-      "frostedPanels": "Frosted Panels",
-      "highContrastText": "High-Contrast Text",
-      "reduceMotion": "Reduce Motion",
-      "showFps": "Show FPS",
-      "invertLookY": "Invert Look (Y)",
+      "fieldOfView": "Поле зрения",
+      "hudOpacity": "Прозрачность интерфейса",
+      "tooltipScale": "Размер текста подсказок",
+      "fctScale": "Размер боевого текста",
+      "chatFontScale": "Размер текста чата",
+      "chatOpacity": "Прозрачность фона чата",
+      "compactChat": "Компактный чат",
+      "frostedPanels": "Матовые панели",
+      "highContrastText": "Высококонтрастный текст",
+      "reduceMotion": "Уменьшить анимацию",
+      "showFps": "Показывать FPS",
+      "invertLookY": "Инверсия обзора (Y)",
       "fpsReadout": "{fps} FPS",
-      "interfaceNote": "These options change only your own view and are saved on this device.",
+      "interfaceNote": "Эти настройки меняют только ваш собственный вид и сохраняются на этом устройстве.",
       "soundEffects": "Звуковые эффекты",
       "musicVolume": "Громкость музыки",
       "music": "Музыка",
@@ -53770,7 +53770,7 @@ export const ru_RU: EnTranslations = {
       "drink": "Напиток",
       "tool": "Инструмент",
       "potion": "Зелье",
-      "elixir": "Elixir"
+      "elixir": "Эликсир"
     },
     "stats": {
       "armor": "Броня",
@@ -53786,8 +53786,8 @@ export const ru_RU: EnTranslations = {
     },
     "tooltip": {
       "qualityKind": "{quality} {kind}",
-      "currentlyEquipped": "Currently equipped",
-      "ifYouEquip": "If you equip this",
+      "currentlyEquipped": "Сейчас надето",
+      "ifYouEquip": "Если надеть это",
       "damageSpeed": "{min} - {max} урона Скорость {speed}",
       "dps": "({dps} урона в секунду)",
       "dagger": "Кинжал",
@@ -53912,12 +53912,12 @@ export const ru_RU: EnTranslations = {
         "description": "Повышает вашу силу атаки на 20 на 2 мин."
       },
       "commanding_shout": {
-        "name": "Commanding Shout",
-        "description": "Increases your Stamina by 6 for 2 min."
+        "name": "Командный крик",
+        "description": "Повышает вашу выносливость на 6 на 2 мин."
       },
       "demoralizing_shout": {
-        "name": "Demoralizing Shout",
-        "description": "Lets out a fearsome shout, reducing the attack power of all nearby enemies by 30 for 30 sec."
+        "name": "Деморализующий крик",
+        "description": "Издает устрашающий крик, снижая силу атаки всех противников поблизости на 30 на 30 сек."
       },
       "charge": {
         "name": "Рывок",
@@ -53988,8 +53988,8 @@ export const ru_RU: EnTranslations = {
         "description": "Создает 2 бутылки воды, восстанавливающей ману при питье. Более высокие ранги создают более чистую воду."
       },
       "conjure_food": {
-        "name": "Conjure Food",
-        "description": "Conjures 2 servings of bread, restoring health when eaten. Higher ranks conjure heartier fare."
+        "name": "Сотворение пищи",
+        "description": "Создает 2 порции хлеба, восстанавливающего здоровье при употреблении. Более высокие ранги создают более сытную пищу."
       },
       "fire_blast": {
         "name": "Огненный взрыв",
@@ -54016,8 +54016,8 @@ export const ru_RU: EnTranslations = {
         "description": "Обжигает врага, нанося {damage} ед. урона от огня. Быстрое заклинание."
       },
       "pyroblast": {
-        "name": "Pyroblast",
-        "description": "Hurls an immense fiery boulder that causes {damage} Fire damage plus additional damage over time."
+        "name": "Огненный взрыв",
+        "description": "Обрушивает на врага громадный пылающий камень, наносящий {damage} ед. урона от огня и дополнительный урон с течением времени."
       },
       "ice_barrier": {
         "name": "Ледяная преграда",
@@ -54156,8 +54156,8 @@ export const ru_RU: EnTranslations = {
         "description": "Повышает угрозу от вашего урона светлой магией на 60% на 30 мин. Основа паладина-танка."
       },
       "retribution_aura": {
-        "name": "Retribution Aura",
-        "description": "Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee."
+        "name": "Аура воздаяния",
+        "description": "Окружает вас священной энергией на 30 мин и наносит 5 ед. урона светлой магией любому врагу, атакующему вас в ближнем бою."
       },
       "tame_beast": {
         "name": "Приручение зверя",
@@ -54196,8 +54196,8 @@ export const ru_RU: EnTranslations = {
         "description": "Наносит рану, замедляющую врага на 40% на 10 сек."
       },
       "aspect_of_the_monkey": {
-        "name": "Aspect of the Monkey",
-        "description": "Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min."
+        "name": "Дух обезьяны",
+        "description": "Вы принимаете дух обезьяны, повышая вероятность уклонения на 8% на 30 мин."
       },
       "aspect_of_the_cheetah": {
         "name": "Дух гепарда",
@@ -54276,16 +54276,16 @@ export const ru_RU: EnTranslations = {
         "description": "Обжигает цель огнем, нанося 25 ед. урона и еще {damage} за 12 сек."
       },
       "flametongue_weapon": {
-        "name": "Flametongue Weapon",
-        "description": "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."
+        "name": "Оружие огненного языка",
+        "description": "Насыщает ваше оружие стихийным огнем: каждый удар наносит 8 ед. дополнительного урона от огня в течение 5 мин."
       },
       "frost_shock": {
         "name": "Ледяной шок",
         "description": "Мгновенно поражает цель льдом, нанося {damage} ед. урона от магии льда и снижая скорость передвижения на 50% на 8 сек."
       },
       "frostbrand_weapon": {
-        "name": "Frostbrand Weapon",
-        "description": "Imbues your weapon with biting frost: each swing deals 8 additional damage for 5 min."
+        "name": "Ледяное оружие",
+        "description": "Насыщает ваше оружие кусающим холодом: каждый удар наносит 8 ед. дополнительного урона в течение 5 мин."
       },
       "ghost_wolf": {
         "name": "Призрачный волк",
@@ -55569,7 +55569,7 @@ export const ru_RU: EnTranslations = {
         "name": "Суккуб"
       },
       "grix_the_tunnelking": {
-        "name": "Grix the Tunnelking"
+        "name": "Грикс, Король туннелей"
       },
       "brutok_skullsmasher": {
         "name": "Бруток Сокрушитель черепов"
@@ -56699,655 +56699,19 @@ export const translations = {
 };
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "es_ES": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "fr_FR": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "fr_CA": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
+  "es": [],
+  "es_ES": [],
+  "fr_FR": [],
+  "fr_CA": [],
   "en_CA": [],
-  "it_IT": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "de_DE": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "zh_CN": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "zh_TW": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "ko_KR": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "ja_JP": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "pt_BR": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ],
-  "ru_RU": [
-    "entities.abilities.aspect_of_the_monkey.description",
-    "entities.abilities.aspect_of_the_monkey.name",
-    "entities.abilities.commanding_shout.description",
-    "entities.abilities.commanding_shout.name",
-    "entities.abilities.conjure_food.description",
-    "entities.abilities.conjure_food.name",
-    "entities.abilities.demoralizing_shout.description",
-    "entities.abilities.demoralizing_shout.name",
-    "entities.abilities.flametongue_weapon.description",
-    "entities.abilities.flametongue_weapon.name",
-    "entities.abilities.frostbrand_weapon.description",
-    "entities.abilities.frostbrand_weapon.name",
-    "entities.abilities.pyroblast.description",
-    "entities.abilities.pyroblast.name",
-    "entities.abilities.retribution_aura.description",
-    "entities.abilities.retribution_aura.name",
-    "entities.mobs.grix_the_tunnelking.name",
-    "game.hud.lowEnergy",
-    "game.hud.lowMana",
-    "game.settings.weather",
-    "game.talents.readout.breakdownClass",
-    "game.talents.readout.breakdownSpec",
-    "game.talents.readout.locked",
-    "game.talents.readout.noSpec",
-    "game.talents.readout.noTree",
-    "game.talents.readout.summary",
-    "game.talents.readout.unspent",
-    "game.xp.rested",
-    "hud.core.xpFloatRested",
-    "hud.core.xpGainRested",
-    "hud.options.buttonSize",
-    "hud.options.chatFontScale",
-    "hud.options.chatOpacity",
-    "hud.options.compactChat",
-    "hud.options.fctScale",
-    "hud.options.fieldOfView",
-    "hud.options.fpsReadout",
-    "hud.options.frostedPanels",
-    "hud.options.highContrastText",
-    "hud.options.hudOpacity",
-    "hud.options.interface",
-    "hud.options.interfaceNote",
-    "hud.options.invertLook",
-    "hud.options.invertLookY",
-    "hud.options.joystickDeadzone",
-    "hud.options.joystickSize",
-    "hud.options.reduceMotion",
-    "hud.options.showFps",
-    "hud.options.tooltipScale",
-    "itemUi.kind.elixir",
-    "itemUi.tooltip.currentlyEquipped",
-    "itemUi.tooltip.ifYouEquip"
-  ]
+  "it_IT": [],
+  "de_DE": [],
+  "zh_CN": [],
+  "zh_TW": [],
+  "ko_KR": [],
+  "ja_JP": [],
+  "pt_BR": [],
+  "ru_RU": []
 };
 
 export const en_XA: EnTranslations = {
