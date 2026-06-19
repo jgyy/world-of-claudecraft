@@ -2608,6 +2608,42 @@ export const en: EnTranslations = {
       "monarch_heart": {
         "name": "The Monarch's Heart"
       },
+      "reedwarden_greathelm": {
+        "name": "Reedwarden's Greathelm"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Reedwarden's Pauldrons"
+      },
+      "reedwarden_girdle": {
+        "name": "Reedwarden's Girdle"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Reedwarden's Gauntlets"
+      },
+      "mistweaver_cowl": {
+        "name": "Mistweaver's Cowl"
+      },
+      "mistweaver_mantle": {
+        "name": "Mistweaver's Mantle"
+      },
+      "mistweaver_cord": {
+        "name": "Mistweaver's Cord"
+      },
+      "mistweaver_gloves": {
+        "name": "Mistweaver's Gloves"
+      },
+      "marshstalker_hood": {
+        "name": "Marshstalker's Hood"
+      },
+      "marshstalker_spaulders": {
+        "name": "Marshstalker's Spaulders"
+      },
+      "marshstalker_belt": {
+        "name": "Marshstalker's Belt"
+      },
+      "marshstalker_grips": {
+        "name": "Marshstalker's Grips"
+      },
       "bristleback_maul": {
         "name": "Bristleback Maul"
       },
@@ -7070,6 +7106,42 @@ export const es: EnTranslations = {
       },
       "monarch_heart": {
         "name": "El Corazón del Monarca"
+      },
+      "reedwarden_greathelm": {
+        "name": "Yelmo del Guardacañas"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Hombreras del Guardacañas"
+      },
+      "reedwarden_girdle": {
+        "name": "Cinturón del Guardacañas"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Guanteletes del Guardacañas"
+      },
+      "mistweaver_cowl": {
+        "name": "Cogulla del Tejedor de Niebla"
+      },
+      "mistweaver_mantle": {
+        "name": "Manto del Tejedor de Niebla"
+      },
+      "mistweaver_cord": {
+        "name": "Cordón del Tejedor de Niebla"
+      },
+      "mistweaver_gloves": {
+        "name": "Guantes del Tejedor de Niebla"
+      },
+      "marshstalker_hood": {
+        "name": "Capucha del Acechador del Pantano"
+      },
+      "marshstalker_spaulders": {
+        "name": "Hombreras del Acechador del Pantano"
+      },
+      "marshstalker_belt": {
+        "name": "Cinturón del Acechador del Pantano"
+      },
+      "marshstalker_grips": {
+        "name": "Empuñaduras del Acechador del Pantano"
       },
       "bristleback_maul": {
         "name": "Maza Bristleback"
@@ -11534,6 +11606,42 @@ export const es_ES: EnTranslations = {
       "monarch_heart": {
         "name": "El Corazón del Monarca"
       },
+      "reedwarden_greathelm": {
+        "name": "Yelmo del Guardacañas"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Hombreras del Guardacañas"
+      },
+      "reedwarden_girdle": {
+        "name": "Cinturón del Guardacañas"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Guanteletes del Guardacañas"
+      },
+      "mistweaver_cowl": {
+        "name": "Cogulla del Tejedor de Niebla"
+      },
+      "mistweaver_mantle": {
+        "name": "Manto del Tejedor de Niebla"
+      },
+      "mistweaver_cord": {
+        "name": "Cordón del Tejedor de Niebla"
+      },
+      "mistweaver_gloves": {
+        "name": "Guantes del Tejedor de Niebla"
+      },
+      "marshstalker_hood": {
+        "name": "Capucha del Acechador del Pantano"
+      },
+      "marshstalker_spaulders": {
+        "name": "Hombreras del Acechador del Pantano"
+      },
+      "marshstalker_belt": {
+        "name": "Cinturón del Acechador del Pantano"
+      },
+      "marshstalker_grips": {
+        "name": "Empuñaduras del Acechador del Pantano"
+      },
       "bristleback_maul": {
         "name": "Maza Bristleback"
       },
@@ -15996,6 +16104,42 @@ export const fr_FR: EnTranslations = {
       },
       "monarch_heart": {
         "name": "Le Cœur du Monarque"
+      },
+      "reedwarden_greathelm": {
+        "name": "Heaume du Gardien des roseaux"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Spallières du Gardien des roseaux"
+      },
+      "reedwarden_girdle": {
+        "name": "Ceinturon du Gardien des roseaux"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Gantelets du Gardien des roseaux"
+      },
+      "mistweaver_cowl": {
+        "name": "Coule du Tisse-brume"
+      },
+      "mistweaver_mantle": {
+        "name": "Mantelet du Tisse-brume"
+      },
+      "mistweaver_cord": {
+        "name": "Cordon du Tisse-brume"
+      },
+      "mistweaver_gloves": {
+        "name": "Gants du Tisse-brume"
+      },
+      "marshstalker_hood": {
+        "name": "Capuche du Traque-marais"
+      },
+      "marshstalker_spaulders": {
+        "name": "Épaulières du Traque-marais"
+      },
+      "marshstalker_belt": {
+        "name": "Ceinture du Traque-marais"
+      },
+      "marshstalker_grips": {
+        "name": "Poignes du Traque-marais"
       },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
@@ -20460,6 +20604,42 @@ export const fr_CA: EnTranslations = {
       "monarch_heart": {
         "name": "Le Cœur du Monarque"
       },
+      "reedwarden_greathelm": {
+        "name": "Heaume du Gardien des roseaux"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Spallières du Gardien des roseaux"
+      },
+      "reedwarden_girdle": {
+        "name": "Ceinturon du Gardien des roseaux"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Gantelets du Gardien des roseaux"
+      },
+      "mistweaver_cowl": {
+        "name": "Coule du Tisse-brume"
+      },
+      "mistweaver_mantle": {
+        "name": "Mantelet du Tisse-brume"
+      },
+      "mistweaver_cord": {
+        "name": "Cordon du Tisse-brume"
+      },
+      "mistweaver_gloves": {
+        "name": "Gants du Tisse-brume"
+      },
+      "marshstalker_hood": {
+        "name": "Capuche du Traque-marais"
+      },
+      "marshstalker_spaulders": {
+        "name": "Épaulières du Traque-marais"
+      },
+      "marshstalker_belt": {
+        "name": "Ceinture du Traque-marais"
+      },
+      "marshstalker_grips": {
+        "name": "Poignes du Traque-marais"
+      },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
       },
@@ -24922,6 +25102,42 @@ export const en_CA: EnTranslations = {
       },
       "monarch_heart": {
         "name": "The Monarch's Heart"
+      },
+      "reedwarden_greathelm": {
+        "name": "Reedwarden's Greathelm"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Reedwarden's Pauldrons"
+      },
+      "reedwarden_girdle": {
+        "name": "Reedwarden's Girdle"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Reedwarden's Gauntlets"
+      },
+      "mistweaver_cowl": {
+        "name": "Mistweaver's Cowl"
+      },
+      "mistweaver_mantle": {
+        "name": "Mistweaver's Mantle"
+      },
+      "mistweaver_cord": {
+        "name": "Mistweaver's Cord"
+      },
+      "mistweaver_gloves": {
+        "name": "Mistweaver's Gloves"
+      },
+      "marshstalker_hood": {
+        "name": "Marshstalker's Hood"
+      },
+      "marshstalker_spaulders": {
+        "name": "Marshstalker's Spaulders"
+      },
+      "marshstalker_belt": {
+        "name": "Marshstalker's Belt"
+      },
+      "marshstalker_grips": {
+        "name": "Marshstalker's Grips"
       },
       "bristleback_maul": {
         "name": "Bristleback Maul"
@@ -29386,6 +29602,42 @@ export const it_IT: EnTranslations = {
       "monarch_heart": {
         "name": "Il Cuore del Monarca"
       },
+      "reedwarden_greathelm": {
+        "name": "Elmo del Guardiano dei canneti"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Spallacci del Guardiano dei canneti"
+      },
+      "reedwarden_girdle": {
+        "name": "Cintura del Guardiano dei canneti"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Guanti d'arme del Guardiano dei canneti"
+      },
+      "mistweaver_cowl": {
+        "name": "Cappuccio del Tessitore di nebbia"
+      },
+      "mistweaver_mantle": {
+        "name": "Mantellina del Tessitore di nebbia"
+      },
+      "mistweaver_cord": {
+        "name": "Cordone del Tessitore di nebbia"
+      },
+      "mistweaver_gloves": {
+        "name": "Guanti del Tessitore di nebbia"
+      },
+      "marshstalker_hood": {
+        "name": "Cappuccio del Cacciatore di palude"
+      },
+      "marshstalker_spaulders": {
+        "name": "Spalline del Cacciatore di palude"
+      },
+      "marshstalker_belt": {
+        "name": "Cintura del Cacciatore di palude"
+      },
+      "marshstalker_grips": {
+        "name": "Prese del Cacciatore di palude"
+      },
       "bristleback_maul": {
         "name": "Maglio Bristleback"
       },
@@ -33848,6 +34100,42 @@ export const de_DE: EnTranslations = {
       },
       "monarch_heart": {
         "name": "Das Herz des Monarchen"
+      },
+      "reedwarden_greathelm": {
+        "name": "Schilfwächter-Schlachthelm"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Schilfwächter-Schulterstücke"
+      },
+      "reedwarden_girdle": {
+        "name": "Schilfwächter-Gürtel"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Schilfwächter-Panzerhandschuhe"
+      },
+      "mistweaver_cowl": {
+        "name": "Nebelweber-Kapuze"
+      },
+      "mistweaver_mantle": {
+        "name": "Nebelweber-Umhang"
+      },
+      "mistweaver_cord": {
+        "name": "Nebelweber-Kordel"
+      },
+      "mistweaver_gloves": {
+        "name": "Nebelweber-Handschuhe"
+      },
+      "marshstalker_hood": {
+        "name": "Sumpfpirscher-Kapuze"
+      },
+      "marshstalker_spaulders": {
+        "name": "Sumpfpirscher-Schulterstücke"
+      },
+      "marshstalker_belt": {
+        "name": "Sumpfpirscher-Gürtel"
+      },
+      "marshstalker_grips": {
+        "name": "Sumpfpirscher-Griffe"
       },
       "bristleback_maul": {
         "name": "Bristleback-Schlägel"
@@ -38312,6 +38600,42 @@ export const zh_CN: EnTranslations = {
       "monarch_heart": {
         "name": "君主之心"
       },
+      "reedwarden_greathelm": {
+        "name": "苇卫巨盔"
+      },
+      "reedwarden_pauldrons": {
+        "name": "苇卫肩铠"
+      },
+      "reedwarden_girdle": {
+        "name": "苇卫腰带"
+      },
+      "reedwarden_gauntlets": {
+        "name": "苇卫战手"
+      },
+      "mistweaver_cowl": {
+        "name": "织雾者头巾"
+      },
+      "mistweaver_mantle": {
+        "name": "织雾者披肩"
+      },
+      "mistweaver_cord": {
+        "name": "织雾者腰索"
+      },
+      "mistweaver_gloves": {
+        "name": "织雾者手套"
+      },
+      "marshstalker_hood": {
+        "name": "沼泽潜行者兜帽"
+      },
+      "marshstalker_spaulders": {
+        "name": "沼泽潜行者肩饰"
+      },
+      "marshstalker_belt": {
+        "name": "沼泽潜行者腰带"
+      },
+      "marshstalker_grips": {
+        "name": "沼泽潜行者手扣"
+      },
       "bristleback_maul": {
         "name": "硬鬃重槌"
       },
@@ -42774,6 +43098,42 @@ export const zh_TW: EnTranslations = {
       },
       "monarch_heart": {
         "name": "君主之心"
+      },
+      "reedwarden_greathelm": {
+        "name": "葦衛巨盔"
+      },
+      "reedwarden_pauldrons": {
+        "name": "葦衛肩鎧"
+      },
+      "reedwarden_girdle": {
+        "name": "葦衛腰帶"
+      },
+      "reedwarden_gauntlets": {
+        "name": "葦衛戰手"
+      },
+      "mistweaver_cowl": {
+        "name": "織霧者頭巾"
+      },
+      "mistweaver_mantle": {
+        "name": "織霧者披肩"
+      },
+      "mistweaver_cord": {
+        "name": "織霧者腰索"
+      },
+      "mistweaver_gloves": {
+        "name": "織霧者手套"
+      },
+      "marshstalker_hood": {
+        "name": "沼澤潛行者兜帽"
+      },
+      "marshstalker_spaulders": {
+        "name": "沼澤潛行者肩飾"
+      },
+      "marshstalker_belt": {
+        "name": "沼澤潛行者腰帶"
+      },
+      "marshstalker_grips": {
+        "name": "沼澤潛行者手扣"
       },
       "bristleback_maul": {
         "name": "硬鬃重槌"
@@ -47238,6 +47598,42 @@ export const ko_KR: EnTranslations = {
       "monarch_heart": {
         "name": "군주의 심장"
       },
+      "reedwarden_greathelm": {
+        "name": "갈대수호자의 대투구"
+      },
+      "reedwarden_pauldrons": {
+        "name": "갈대수호자의 견갑"
+      },
+      "reedwarden_girdle": {
+        "name": "갈대수호자의 허리띠"
+      },
+      "reedwarden_gauntlets": {
+        "name": "갈대수호자의 건틀릿"
+      },
+      "mistweaver_cowl": {
+        "name": "안개술사의 두건"
+      },
+      "mistweaver_mantle": {
+        "name": "안개술사의 망토"
+      },
+      "mistweaver_cord": {
+        "name": "안개술사의 끈"
+      },
+      "mistweaver_gloves": {
+        "name": "안개술사의 장갑"
+      },
+      "marshstalker_hood": {
+        "name": "늪추적자의 후드"
+      },
+      "marshstalker_spaulders": {
+        "name": "늪추적자의 어깨보호구"
+      },
+      "marshstalker_belt": {
+        "name": "늪추적자의 벨트"
+      },
+      "marshstalker_grips": {
+        "name": "늪추적자의 손아귀"
+      },
       "bristleback_maul": {
         "name": "뻣센등뼈 철퇴"
       },
@@ -51700,6 +52096,42 @@ export const ja_JP: EnTranslations = {
       },
       "monarch_heart": {
         "name": "君主の心臓"
+      },
+      "reedwarden_greathelm": {
+        "name": "葦守の大兜"
+      },
+      "reedwarden_pauldrons": {
+        "name": "葦守の肩当て"
+      },
+      "reedwarden_girdle": {
+        "name": "葦守の帯"
+      },
+      "reedwarden_gauntlets": {
+        "name": "葦守の篭手"
+      },
+      "mistweaver_cowl": {
+        "name": "霧織りのフード"
+      },
+      "mistweaver_mantle": {
+        "name": "霧織りのマント"
+      },
+      "mistweaver_cord": {
+        "name": "霧織りの腰紐"
+      },
+      "mistweaver_gloves": {
+        "name": "霧織りの手袋"
+      },
+      "marshstalker_hood": {
+        "name": "沼の追跡者のフード"
+      },
+      "marshstalker_spaulders": {
+        "name": "沼の追跡者の肩当て"
+      },
+      "marshstalker_belt": {
+        "name": "沼の追跡者のベルト"
+      },
+      "marshstalker_grips": {
+        "name": "沼の追跡者の握り"
       },
       "bristleback_maul": {
         "name": "ブリストルバックの大槌"
@@ -56164,6 +56596,42 @@ export const pt_BR: EnTranslations = {
       "monarch_heart": {
         "name": "O Coração do Monarca"
       },
+      "reedwarden_greathelm": {
+        "name": "Elmo do Guardião dos juncos"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Ombreiras do Guardião dos juncos"
+      },
+      "reedwarden_girdle": {
+        "name": "Cinturão do Guardião dos juncos"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Manoplas do Guardião dos juncos"
+      },
+      "mistweaver_cowl": {
+        "name": "Capuz do Tecelão de névoa"
+      },
+      "mistweaver_mantle": {
+        "name": "Manto do Tecelão de névoa"
+      },
+      "mistweaver_cord": {
+        "name": "Cordão do Tecelão de névoa"
+      },
+      "mistweaver_gloves": {
+        "name": "Luvas do Tecelão de névoa"
+      },
+      "marshstalker_hood": {
+        "name": "Capuz do Espreitador do pântano"
+      },
+      "marshstalker_spaulders": {
+        "name": "Espaldares do Espreitador do pântano"
+      },
+      "marshstalker_belt": {
+        "name": "Cinto do Espreitador do pântano"
+      },
+      "marshstalker_grips": {
+        "name": "Punhos do Espreitador do pântano"
+      },
       "bristleback_maul": {
         "name": "Malho Bristleback"
       },
@@ -60626,6 +61094,42 @@ export const ru_RU: EnTranslations = {
       },
       "monarch_heart": {
         "name": "Сердце Монарха"
+      },
+      "reedwarden_greathelm": {
+        "name": "Большой шлем Стража тростников"
+      },
+      "reedwarden_pauldrons": {
+        "name": "Наплечники Стража тростников"
+      },
+      "reedwarden_girdle": {
+        "name": "Пояс Стража тростников"
+      },
+      "reedwarden_gauntlets": {
+        "name": "Латные перчатки Стража тростников"
+      },
+      "mistweaver_cowl": {
+        "name": "Капюшон Ткача тумана"
+      },
+      "mistweaver_mantle": {
+        "name": "Накидка Ткача тумана"
+      },
+      "mistweaver_cord": {
+        "name": "Шнур Ткача тумана"
+      },
+      "mistweaver_gloves": {
+        "name": "Перчатки Ткача тумана"
+      },
+      "marshstalker_hood": {
+        "name": "Капюшон Болотного охотника"
+      },
+      "marshstalker_spaulders": {
+        "name": "Наплечники Болотного охотника"
+      },
+      "marshstalker_belt": {
+        "name": "Пояс Болотного охотника"
+      },
+      "marshstalker_grips": {
+        "name": "Хваты Болотного охотника"
       },
       "bristleback_maul": {
         "name": "Кувалда Щетиноспина"
@@ -67186,6 +67690,42 @@ export const en_XA: EnTranslations = {
       },
       "monarch_heart": {
         "name": "[Ţĥé Ɱóñáŕçĥ'š Ĥéáŕţ]"
+      },
+      "reedwarden_greathelm": {
+        "name": "[Ŕééðŵáŕðéñ'š Ĝŕéáţĥéļɱ]"
+      },
+      "reedwarden_pauldrons": {
+        "name": "[Ŕééðŵáŕðéñ'š Þáúļðŕóñš]"
+      },
+      "reedwarden_girdle": {
+        "name": "[Ŕééðŵáŕðéñ'š Ĝíŕðļé]"
+      },
+      "reedwarden_gauntlets": {
+        "name": "[Ŕééðŵáŕðéñ'š Ĝáúñţļéţš]"
+      },
+      "mistweaver_cowl": {
+        "name": "[Ɱíšţŵéáʋéŕ'š Çóŵļ]"
+      },
+      "mistweaver_mantle": {
+        "name": "[Ɱíšţŵéáʋéŕ'š Ɱáñţļé]"
+      },
+      "mistweaver_cord": {
+        "name": "[Ɱíšţŵéáʋéŕ'š Çóŕð]"
+      },
+      "mistweaver_gloves": {
+        "name": "[Ɱíšţŵéáʋéŕ'š Ĝļóʋéš]"
+      },
+      "marshstalker_hood": {
+        "name": "[Ɱáŕšĥšţáļķéŕ'š Ĥóóð]"
+      },
+      "marshstalker_spaulders": {
+        "name": "[Ɱáŕšĥšţáļķéŕ'š Šþáúļðéŕš]"
+      },
+      "marshstalker_belt": {
+        "name": "[Ɱáŕšĥšţáļķéŕ'š Ɓéļţ]"
+      },
+      "marshstalker_grips": {
+        "name": "[Ɱáŕšĥšţáļķéŕ'š Ĝŕíþš]"
       },
       "bristleback_maul": {
         "name": "[Ɓŕíšţļéƀáçķ Ɱáúļ]"
