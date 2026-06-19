@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -7856,6 +7961,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8821,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -12319,6 +12529,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13389,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -16782,6 +17097,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17957,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -21245,6 +21665,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22525,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -25708,6 +26233,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27093,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -30171,6 +30801,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31661,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -34634,6 +35369,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36229,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -39097,6 +39937,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40797,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -43560,6 +44505,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45365,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -48023,6 +49073,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49933,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -52486,6 +53641,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54501,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -56949,6 +58209,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59069,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
           }
         }
       },
@@ -61412,6 +62777,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "lampwright_sefa": {
+        "name": "Lampwright Sefa",
+        "title": "Keeper of the Road Lanterns",
+        "greeting": "Every lantern on the Vale roads is mine to keep lit, {className} - and the dark between them is full of teeth."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63640,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_lamp_first_night": {
+        "title": "First Night on the Lamp Road",
+        "text": "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out - 8 Forest Wolves - so I can make my rounds, {playerName}.",
+        "completion": "A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "Trampled Wicks",
+        "text": "The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.",
+        "completion": "No more splintered posts in the morning. Good. Here is your share of the oil-fund.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar driven off"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "Lantern Thieves",
+        "text": "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves - and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+        "completion": "My wick-box stayed full a whole night through. Bless you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox culled"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "Webs Over the Wicks",
+        "text": "The western lanterns are smothered in spider-silk - a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, {playerName}.",
+        "completion": "Clean glass and open flame on the west road again. You have a steady hand.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker slain"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "Diggers at the Posts",
+        "text": "Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.",
+        "completion": "Every post upright at dawn. The glade road owes you its light, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger driven off"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "The Snuffers",
+        "text": "There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident - it is ambush. Bring 10 Vale Bandits to justice for me.",
+        "completion": "A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit brought to justice"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "Lights on the Lake Road",
+        "text": "The lake-shore lanterns are the hardest to keep - the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.",
+        "completion": "The lake road glows again, end to end. The fishermen will sleep easier, and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "Eyes in the Lamplight",
+        "text": "Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler - or me.",
+        "completion": "No more eyes in the dark past the last lantern. You have steady nerve, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "The Far Lanterns",
+        "text": "The last posts before the deep glade go untended - sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.",
+        "completion": "Lit, every one, for the first time in a season. The whole Vale road is unbroken now - save for one stretch I dread to speak of.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear cleared"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "The Lights That Walk",
+        "text": "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, {playerName} - and let my lanterns be the only lights on that hill.",
+        "completion": "The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, {playerName} - every lamplighter after me will keep your name.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62521,6 +63991,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62533,6 +64006,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62694,6 +64207,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62706,6 +64222,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62867,6 +64423,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62879,6 +64438,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63040,6 +64639,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63052,6 +64654,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63214,6 +64856,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63226,6 +64871,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63387,6 +65072,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63399,6 +65087,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63560,6 +65288,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63572,6 +65303,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63733,6 +65504,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63745,6 +65519,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63906,6 +65720,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63918,6 +65735,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64079,6 +65936,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64091,6 +65951,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64252,6 +66152,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64264,6 +66167,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64425,6 +66368,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.lampwright_sefa.greeting",
+    "entities.npcs.lampwright_sefa.name",
+    "entities.npcs.lampwright_sefa.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64437,6 +66383,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_lamp_badgers.completion",
+    "entities.quests.q_lamp_badgers.objectives.0.label",
+    "entities.quests.q_lamp_badgers.text",
+    "entities.quests.q_lamp_badgers.title",
+    "entities.quests.q_lamp_bears.completion",
+    "entities.quests.q_lamp_bears.objectives.0.label",
+    "entities.quests.q_lamp_bears.text",
+    "entities.quests.q_lamp_bears.title",
+    "entities.quests.q_lamp_boars.completion",
+    "entities.quests.q_lamp_boars.objectives.0.label",
+    "entities.quests.q_lamp_boars.text",
+    "entities.quests.q_lamp_boars.title",
+    "entities.quests.q_lamp_first_night.completion",
+    "entities.quests.q_lamp_first_night.objectives.0.label",
+    "entities.quests.q_lamp_first_night.text",
+    "entities.quests.q_lamp_first_night.title",
+    "entities.quests.q_lamp_foxes.completion",
+    "entities.quests.q_lamp_foxes.objectives.0.label",
+    "entities.quests.q_lamp_foxes.text",
+    "entities.quests.q_lamp_foxes.title",
+    "entities.quests.q_lamp_lakeroad.completion",
+    "entities.quests.q_lamp_lakeroad.objectives.0.label",
+    "entities.quests.q_lamp_lakeroad.text",
+    "entities.quests.q_lamp_lakeroad.title",
+    "entities.quests.q_lamp_lynx.completion",
+    "entities.quests.q_lamp_lynx.objectives.0.label",
+    "entities.quests.q_lamp_lynx.text",
+    "entities.quests.q_lamp_lynx.title",
+    "entities.quests.q_lamp_snuffers.completion",
+    "entities.quests.q_lamp_snuffers.objectives.0.label",
+    "entities.quests.q_lamp_snuffers.text",
+    "entities.quests.q_lamp_snuffers.title",
+    "entities.quests.q_lamp_the_walking_lights.completion",
+    "entities.quests.q_lamp_the_walking_lights.objectives.0.label",
+    "entities.quests.q_lamp_the_walking_lights.text",
+    "entities.quests.q_lamp_the_walking_lights.title",
+    "entities.quests.q_lamp_webs.completion",
+    "entities.quests.q_lamp_webs.objectives.0.label",
+    "entities.quests.q_lamp_webs.text",
+    "entities.quests.q_lamp_webs.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -67972,6 +69958,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "lampwright_sefa": {
+        "name": "[Ļáɱþŵŕíĝĥţ Šéƒá]",
+        "title": "[Ķééþéŕ óƒ ţĥé Ŕóáð Ļáñţéŕñš]",
+        "greeting": "[Éʋéŕý ļáñţéŕñ óñ ţĥé Ʋáļé ŕóáðš íš ɱíñé ţó ķééþ ļíţ, {className} - áñð ţĥé ðáŕķ ƀéţŵééñ ţĥéɱ íš ƒúļļ óƒ ţééţĥ.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70818,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_lamp_first_night": {
+        "title": "[Ƒíŕšţ Ñíĝĥţ óñ ţĥé Ļáɱþ Ŕóáð]",
+        "text": "[Í ļíĝĥţ ţĥé ļáñţéŕñš; ýóú ķééþ ţĥé ŕóáð çļéáŕ éñóúĝĥ ţĥáţ Í çáñ ŕéáçĥ ţĥéɱ. Ţĥé ŵóļʋéš çóɱé ðóŵñ óƒƒ ţĥé ñóŕţĥ ĥíļļš ţĥé ɱóɱéñţ ţĥé šúñ šéţš áñð ŵóŕŕý áţ áñýóñé ŵíţĥ á ţóŕçĥ. Ţĥíñ ţĥéɱ óúţ - 8 Ƒóŕéšţ Ŵóļʋéš - šó Í çáñ ɱáķé ɱý ŕóúñðš, {playerName}.]",
+        "completion": "[Á ŵĥóļé çíŕçúíţ ļíţ áñð ñóţ óñé ŵóļƒ áţ ɱý ĥééļš. Ýóú ĥáʋé ţĥé ɱáķíñĝš óƒ á ļáɱþ-ŵáŕðéñ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ šļáíñ]"
+          }
+        }
+      },
+      "q_lamp_boars": {
+        "title": "[Ţŕáɱþļéð Ŵíçķš]",
+        "text": "[Ţĥé éášţ-ɱéáðóŵ ƀóáŕš ŕóóţ úþ ɱý šþáŕé óíļ-ĵáŕš áñð šñáþ ţĥé ļóŵ ļáñţéŕñ þóšţš çļéáñ óƒƒ. Í çáññóţ ķééþ á ƒļáɱé óñ ţĥáţ šţŕéţçĥ ŵĥíļé ţĥéý ŕáɱþáĝé. Ðŕíʋé óƒƒ 8 Ŵíļð Ɓóáŕš áñð ţĥé ɱéáðóŵ ŕóáð ŵíļļ šţáý ļíţ.]",
+        "completion": "[Ñó ɱóŕé šþļíñţéŕéð þóšţš íñ ţĥé ɱóŕñíñĝ. Ĝóóð. Ĥéŕé íš ýóúŕ šĥáŕé óƒ ţĥé óíļ-ƒúñð.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵíļð Ɓóáŕ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_lamp_foxes": {
+        "title": "[Ļáñţéŕñ Ţĥíéʋéš]",
+        "text": "[Ĝļáðé ƒóẋéš ĥáʋé ļéáŕñéð ɱý óíļéð ŵíçķš ɱáķé ƒíñé ƀéððíñĝ, áñð ţĥéý çáŕŕý óƒƒ á ðóžéñ á ñíĝĥţ. Çĥáŕɱíñĝ ļíţţļé ţĥíéʋéš - áñð ŕúíñóúš ţó á ļáɱþļíĝĥţéŕ'š šţóŕéš. Çúļļ 8 Ĝļáðé Ƒóẋéš úþ ţĥé ĝļáðé ŕóáð ƒóŕ ɱé.]",
+        "completion": "[Ɱý ŵíçķ-ƀóẋ šţáýéð ƒúļļ á ŵĥóļé ñíĝĥţ ţĥŕóúĝĥ. Ɓļéšš ýóú, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝļáðé Ƒóẋ çúļļéð]"
+          }
+        }
+      },
+      "q_lamp_webs": {
+        "title": "[Ŵéƀš Óʋéŕ ţĥé Ŵíçķš]",
+        "text": "[Ţĥé ŵéšţéŕñ ļáñţéŕñš áŕé šɱóţĥéŕéð íñ šþíðéŕ-šíļķ - á ļíţ ŵíçķ úñðéŕ áļļ ţĥáţ ŵéƀ íš á ƒíŕé ŵáíţíñĝ ţó šþŕéáð. Í ðáŕé ñóţ ŕéļíĝĥţ ţĥéɱ úñţíļ ţĥé ļúŕķéŕš áŕé ðéáļţ ŵíţĥ. Ɓúŕñ óúţ 8 Ŵéƀŵóóð Ļúŕķéŕš, {playerName}.]",
+        "completion": "[Çļéáñ ĝļášš áñð óþéñ ƒļáɱé óñ ţĥé ŵéšţ ŕóáð áĝáíñ. Ýóú ĥáʋé á šţéáðý ĥáñð.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵéƀŵóóð Ļúŕķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_lamp_badgers": {
+        "title": "[Ðíĝĝéŕš áţ ţĥé Þóšţš]",
+        "text": "[Ţĥóŕñþéļţ ƀáðĝéŕš ðéñ ŕíĝĥţ áţ ţĥé ƀášé óƒ ɱý ĝļáðé-ŕóáð þóšţš áñð ţĥé ƀúŕŕóŵš ţóþþļé ţĥéɱ íñ ţĥé ñíĝĥţ. Á ļéáñíñĝ ļáñţéŕñ ţĥŕóŵš ñó ļíĝĥţ ŵĥéŕé íţ íš ñééðéð. Šéé óƒƒ 8 Ţĥóŕñþéļţ Ɓáðĝéŕš šó ɱý þóšţš šţáñð šţŕáíĝĥţ.]",
+        "completion": "[Éʋéŕý þóšţ úþŕíĝĥţ áţ ðáŵñ. Ţĥé ĝļáðé ŕóáð óŵéš ýóú íţš ļíĝĥţ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéļţ Ɓáðĝéŕ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_lamp_snuffers": {
+        "title": "[Ţĥé Šñúƒƒéŕš]",
+        "text": "[Ţĥéŕé íš á ŵóŕšé ţĥíéƒ ţĥáñ áñý ƒóẋ: ţĥé Ʋáļé ƀáñðíţš šñúƒƒ ɱý ļáñţéŕñš óñ þúŕþóšé, ţĥéñ ŕóƀ ŵĥóéʋéŕ šţúɱƀļéš ƀļíñð íñ ţĥé ðáŕķ ţĥéý ɱáðé. Ţĥáţ íš ñó áççíðéñţ - íţ íš áɱƀúšĥ. Ɓŕíñĝ 10 Ʋáļé Ɓáñðíţš ţó ĵúšţíçé ƒóŕ ɱé.]",
+        "completion": "[Á ļíţ ŕóáð íš á šáƒé ŕóáð, áñð ýóú ĥáʋé ɱáðé ţĥé šóúţĥéášţ šáƒé áĝáíñ. Ţĥé ɱáŕšĥáļ ĥíɱšéļƒ šĥóúļð ĥéáŕ óƒ ţĥíš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ʋáļé Ɓáñðíţ ƀŕóúĝĥţ ţó ĵúšţíçé]"
+          }
+        }
+      },
+      "q_lamp_lakeroad": {
+        "title": "[Ļíĝĥţš óñ ţĥé Ļáķé Ŕóáð]",
+        "text": "[Ţĥé ļáķé-šĥóŕé ļáñţéŕñš áŕé ţĥé ĥáŕðéšţ ţó ķééþ - ţĥé Ɱúðƒíñ ðŕáĝ ţĥéɱ óƒƒ ţĥéíŕ þóšţš áñð íñţó ţĥé šĥáļļóŵš ƒóŕ ţĥé šĥíñé. Í ŵíļļ ñóţ ļóšé áñóţĥéŕ ţó ţĥé ɱúŕķ. Šļáý 8 Ɱúðƒíñ Šķúļķéŕš áñð ŕéçļáíɱ ţĥé šĥóŕé ƒóŕ ţĥé ļíĝĥţ.]",
+        "completion": "[Ţĥé ļáķé ŕóáð ĝļóŵš áĝáíñ, éñð ţó éñð. Ţĥé ƒíšĥéŕɱéñ ŵíļļ šļééþ éášíéŕ, áñð šó ŵíļļ Í.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱúðƒíñ Šķúļķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_lamp_lynx": {
+        "title": "[Éýéš íñ ţĥé Ļáɱþļíĝĥţ]",
+        "text": "[Ɓŕáɱƀļé ļýñẋ šţáļķ ţĥé ðééþ-ĝļáðé ŕóáð, áñð ţĥéý ĥáʋé ļéáŕñéð ţĥáţ ļáɱþļíĝĥţ ɱéáñš þŕéý ĝáţĥéŕš ñéáŕ. Ţŵíçé ñóŵ Í ĥáʋé ƒóúñð á çíŕçļé óƒ ĝŕééñ éýéš ŵáíţíñĝ ĵúšţ þášţ ţĥé ĝļóŵ. Çúļļ 8 Ɓŕáɱƀļé Ļýñẋ ƀéƒóŕé ţĥéý ţáķé á ţŕáʋéļéŕ - óŕ ɱé.]",
+        "completion": "[Ñó ɱóŕé éýéš íñ ţĥé ðáŕķ þášţ ţĥé ļášţ ļáñţéŕñ. Ýóú ĥáʋé šţéáðý ñéŕʋé, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓŕáɱƀļé Ļýñẋ çúļļéð]"
+          }
+        }
+      },
+      "q_lamp_bears": {
+        "title": "[Ţĥé Ƒáŕ Ļáñţéŕñš]",
+        "text": "[Ţĥé ļášţ þóšţš ƀéƒóŕé ţĥé ðééþ ĝļáðé ĝó úñţéñðéð - šúñĥíðé ƀéáŕš çļáíɱ ţĥáţ ĝŕóúñð, áñð ñó ļáɱþļíĝĥţéŕ ĥáš ŕéáçĥéð ţĥéɱ íñ á šéášóñ. Í ɱéáñ ţó çĥáñĝé ţĥáţ. Çļéáŕ 6 Šúñĥíðé Ɓéáŕš šó Í çáñ çáŕŕý ţĥé ļíĝĥţ ţó ţĥé ƒáŕ ļáñţéŕñš áţ ļášţ.]",
+        "completion": "[Ļíţ, éʋéŕý óñé, ƒóŕ ţĥé ƒíŕšţ ţíɱé íñ á šéášóñ. Ţĥé ŵĥóļé Ʋáļé ŕóáð íš úñƀŕóķéñ ñóŵ - šáʋé ƒóŕ óñé šţŕéţçĥ Í ðŕéáð ţó šþéáķ óƒ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šúñĥíðé Ɓéáŕ çļéáŕéð]"
+          }
+        }
+      },
+      "q_lamp_the_walking_lights": {
+        "title": "[Ţĥé Ļíĝĥţš Ţĥáţ Ŵáļķ]",
+        "text": "[Ɓý ţĥé óļð çĥáþéļ ĥíļļ, ţĥé ðéáð çáŕŕý ţĥéíŕ óŵñ þáļé ļíĝĥţš ñóŵ, ðŕíƒţíñĝ ƀéţŵééñ ɱý þóšţš áš íƒ ţó ɱóçķ ţĥéɱ. Ţĥé ļíʋíñĝ ŵíļļ ñóţ ŵáļķ á ŕóáð ţĥé ðéáð ĥáʋé çļáíɱéð. Þúţ 10 Ŕéšţļéšš Ɓóñéš ƀáçķ íñţó ţĥé ðáŕķ ƒóŕ ĝóóð, {playerName} - áñð ļéţ ɱý ļáñţéŕñš ƀé ţĥé óñļý ļíĝĥţš óñ ţĥáţ ĥíļļ.]",
+        "completion": "[Ţĥé ĥíļļ ŕóáð íš óúŕš áĝáíñ, ļíţ ƀý ĥóñéšţ ƒļáɱé áñð ñóţĥíñĝ éļšé. Ƒŕóɱ ţĥé ļáķé ţó ţĥé ðééþ ĝļáðé, ñóţ á šţŕéţçĥ ĝóéš ðáŕķ. Ţĥáţ íš ýóúŕ ðóíñĝ, {playerName} - éʋéŕý ļáɱþļíĝĥţéŕ áƒţéŕ ɱé ŵíļļ ķééþ ýóúŕ ñáɱé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕéšţļéšš Ɓóñéš ļáíð ţó ŕéšţ]"
           }
         }
       },
