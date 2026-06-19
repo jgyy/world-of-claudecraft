@@ -2763,6 +2763,42 @@ export const en: EnTranslations = {
       "marshstalker_grips": {
         "name": "Marshstalker's Grips"
       },
+      "drownhammer_warblade": {
+        "name": "Drownhammer Warblade"
+      },
+      "fensteel_longsword": {
+        "name": "Fensteel Longsword"
+      },
+      "marshwarden_maul": {
+        "name": "Marshwarden Maul"
+      },
+      "reedbinder_mace": {
+        "name": "Reedbinder Mace"
+      },
+      "silt_dirk": {
+        "name": "Silt-Worn Dirk"
+      },
+      "mirewhisper_dagger": {
+        "name": "Mirewhisper Dagger"
+      },
+      "eelhide_saber": {
+        "name": "Eelhide Saber"
+      },
+      "boglight_staff": {
+        "name": "Boglight Staff"
+      },
+      "fenmist_rod": {
+        "name": "Fenmist Rod"
+      },
+      "drownreed_cudgel": {
+        "name": "Drownreed Cudgel"
+      },
+      "marshlord_greatsword": {
+        "name": "Marshlord's Greatsword"
+      },
+      "venomreed_kris": {
+        "name": "Venomreed Kris"
+      },
       "bristleback_maul": {
         "name": "Bristleback Maul"
       },
@@ -3512,6 +3548,11 @@ export const en: EnTranslations = {
         "name": "Scout Maren",
         "title": "Marshal's Scout",
         "greeting": "Quiet feet and a short blade keep you breathing out here. Speak quick - I am due back in the reeds."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Captain Thessaly",
@@ -7595,6 +7636,42 @@ export const es: EnTranslations = {
       "marshstalker_grips": {
         "name": "Empuñaduras del Acechador del Pantano"
       },
+      "drownhammer_warblade": {
+        "name": "Espada de guerra del Martillo Ahogado"
+      },
+      "fensteel_longsword": {
+        "name": "Espadón de acero del pantano"
+      },
+      "marshwarden_maul": {
+        "name": "Mazo del Guardián de la Marisma"
+      },
+      "reedbinder_mace": {
+        "name": "Maza Atajuncos"
+      },
+      "silt_dirk": {
+        "name": "Daga gastada por el limo"
+      },
+      "mirewhisper_dagger": {
+        "name": "Daga susurro del cieno"
+      },
+      "eelhide_saber": {
+        "name": "Sable de piel de anguila"
+      },
+      "boglight_staff": {
+        "name": "Bastón de luz del pantano"
+      },
+      "fenmist_rod": {
+        "name": "Vara de niebla del pantano"
+      },
+      "drownreed_cudgel": {
+        "name": "Garrote de caña ahogada"
+      },
+      "marshlord_greatsword": {
+        "name": "Mandoble del Señor de la Marisma"
+      },
+      "venomreed_kris": {
+        "name": "Cris de caña venenosa"
+      },
       "bristleback_maul": {
         "name": "Maza Bristleback"
       },
@@ -8344,6 +8421,11 @@ export const es: EnTranslations = {
         "name": "Exploradora Maren",
         "title": "Exploradora del mariscal",
         "greeting": "Pies silenciosos y una hoja corta te mantienen con vida. Habla rápido: debo volver a los juncos."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Capitana Thessaly",
@@ -12427,6 +12509,42 @@ export const es_ES: EnTranslations = {
       "marshstalker_grips": {
         "name": "Empuñaduras del Acechador del Pantano"
       },
+      "drownhammer_warblade": {
+        "name": "Espada de guerra del Martillo Ahogado"
+      },
+      "fensteel_longsword": {
+        "name": "Espadón de acero del pantano"
+      },
+      "marshwarden_maul": {
+        "name": "Mazo del Guardián de la Marisma"
+      },
+      "reedbinder_mace": {
+        "name": "Maza Atajuncos"
+      },
+      "silt_dirk": {
+        "name": "Daga gastada por el limo"
+      },
+      "mirewhisper_dagger": {
+        "name": "Daga susurro del cieno"
+      },
+      "eelhide_saber": {
+        "name": "Sable de piel de anguila"
+      },
+      "boglight_staff": {
+        "name": "Bastón de luz del pantano"
+      },
+      "fenmist_rod": {
+        "name": "Vara de niebla del pantano"
+      },
+      "drownreed_cudgel": {
+        "name": "Garrote de caña ahogada"
+      },
+      "marshlord_greatsword": {
+        "name": "Mandoble del Señor de la Marisma"
+      },
+      "venomreed_kris": {
+        "name": "Cris de caña venenosa"
+      },
       "bristleback_maul": {
         "name": "Maza Bristleback"
       },
@@ -13176,6 +13294,11 @@ export const es_ES: EnTranslations = {
         "name": "Exploradora Maren",
         "title": "Exploradora del mariscal",
         "greeting": "Pies silenciosos y una hoja corta te mantienen con vida. Habla rápido: debo volver a los juncos."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Capitana Thessaly",
@@ -17259,6 +17382,42 @@ export const fr_FR: EnTranslations = {
       "marshstalker_grips": {
         "name": "Poignes du Traque-marais"
       },
+      "drownhammer_warblade": {
+        "name": "Lame de guerre du Marteau-noyé"
+      },
+      "fensteel_longsword": {
+        "name": "Épée longue en acier des fens"
+      },
+      "marshwarden_maul": {
+        "name": "Maillet du Gardien des marais"
+      },
+      "reedbinder_mace": {
+        "name": "Masse Lie-roseaux"
+      },
+      "silt_dirk": {
+        "name": "Dirk usé par le limon"
+      },
+      "mirewhisper_dagger": {
+        "name": "Dague Murmure-du-bourbier"
+      },
+      "eelhide_saber": {
+        "name": "Sabre en peau d'anguille"
+      },
+      "boglight_staff": {
+        "name": "Bâton de luciole des marais"
+      },
+      "fenmist_rod": {
+        "name": "Verge de brume des fens"
+      },
+      "drownreed_cudgel": {
+        "name": "Gourdin de roseau noyé"
+      },
+      "marshlord_greatsword": {
+        "name": "Grande épée du Seigneur des marais"
+      },
+      "venomreed_kris": {
+        "name": "Kris de roseau venimeux"
+      },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
       },
@@ -18008,6 +18167,11 @@ export const fr_FR: EnTranslations = {
         "name": "Éclaireuse Maren",
         "title": "Éclaireuse du maréchal",
         "greeting": "Des pas silencieux et une lame courte vous gardent en vie. Parlez vite, je dois retourner aux roseaux."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Capitaine Thessaly",
@@ -22091,6 +22255,42 @@ export const fr_CA: EnTranslations = {
       "marshstalker_grips": {
         "name": "Poignes du Traque-marais"
       },
+      "drownhammer_warblade": {
+        "name": "Lame de guerre du Marteau-noyé"
+      },
+      "fensteel_longsword": {
+        "name": "Épée longue en acier des fens"
+      },
+      "marshwarden_maul": {
+        "name": "Maillet du Gardien des marais"
+      },
+      "reedbinder_mace": {
+        "name": "Masse Lie-roseaux"
+      },
+      "silt_dirk": {
+        "name": "Dirk usé par le limon"
+      },
+      "mirewhisper_dagger": {
+        "name": "Dague Murmure-du-bourbier"
+      },
+      "eelhide_saber": {
+        "name": "Sabre en peau d'anguille"
+      },
+      "boglight_staff": {
+        "name": "Bâton de luciole des marais"
+      },
+      "fenmist_rod": {
+        "name": "Verge de brume des fens"
+      },
+      "drownreed_cudgel": {
+        "name": "Gourdin de roseau noyé"
+      },
+      "marshlord_greatsword": {
+        "name": "Grande épée du Seigneur des marais"
+      },
+      "venomreed_kris": {
+        "name": "Kris de roseau venimeux"
+      },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
       },
@@ -22840,6 +23040,11 @@ export const fr_CA: EnTranslations = {
         "name": "Éclaireuse Maren",
         "title": "Éclaireuse du maréchal",
         "greeting": "Des pas silencieux et une lame courte vous gardent en vie. Parlez vite, je dois retourner aux roseaux."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Capitaine Thessaly",
@@ -26923,6 +27128,42 @@ export const en_CA: EnTranslations = {
       "marshstalker_grips": {
         "name": "Marshstalker's Grips"
       },
+      "drownhammer_warblade": {
+        "name": "Drownhammer Warblade"
+      },
+      "fensteel_longsword": {
+        "name": "Fensteel Longsword"
+      },
+      "marshwarden_maul": {
+        "name": "Marshwarden Maul"
+      },
+      "reedbinder_mace": {
+        "name": "Reedbinder Mace"
+      },
+      "silt_dirk": {
+        "name": "Silt-Worn Dirk"
+      },
+      "mirewhisper_dagger": {
+        "name": "Mirewhisper Dagger"
+      },
+      "eelhide_saber": {
+        "name": "Eelhide Saber"
+      },
+      "boglight_staff": {
+        "name": "Boglight Staff"
+      },
+      "fenmist_rod": {
+        "name": "Fenmist Rod"
+      },
+      "drownreed_cudgel": {
+        "name": "Drownreed Cudgel"
+      },
+      "marshlord_greatsword": {
+        "name": "Marshlord's Greatsword"
+      },
+      "venomreed_kris": {
+        "name": "Venomreed Kris"
+      },
       "bristleback_maul": {
         "name": "Bristleback Maul"
       },
@@ -27672,6 +27913,11 @@ export const en_CA: EnTranslations = {
         "name": "Scout Maren",
         "title": "Marshal's Scout",
         "greeting": "Quiet feet and a short blade keep you breathing out here. Speak quick - I am due back in the reeds."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Captain Thessaly",
@@ -31755,6 +32001,42 @@ export const it_IT: EnTranslations = {
       "marshstalker_grips": {
         "name": "Prese del Cacciatore di palude"
       },
+      "drownhammer_warblade": {
+        "name": "Lama da guerra del Martello Annegato"
+      },
+      "fensteel_longsword": {
+        "name": "Spadone d'acciaio palustre"
+      },
+      "marshwarden_maul": {
+        "name": "Maglio del Guardiano della Palude"
+      },
+      "reedbinder_mace": {
+        "name": "Mazza Legacanne"
+      },
+      "silt_dirk": {
+        "name": "Daga consumata dal limo"
+      },
+      "mirewhisper_dagger": {
+        "name": "Pugnale Sussurro del Pantano"
+      },
+      "eelhide_saber": {
+        "name": "Sciabola di pelle d'anguilla"
+      },
+      "boglight_staff": {
+        "name": "Bastone di luce palustre"
+      },
+      "fenmist_rod": {
+        "name": "Verga di nebbia palustre"
+      },
+      "drownreed_cudgel": {
+        "name": "Randello di canna annegata"
+      },
+      "marshlord_greatsword": {
+        "name": "Spadone del Signore della Palude"
+      },
+      "venomreed_kris": {
+        "name": "Kris di canna velenosa"
+      },
       "bristleback_maul": {
         "name": "Maglio Bristleback"
       },
@@ -32504,6 +32786,11 @@ export const it_IT: EnTranslations = {
         "name": "Esploratrice Maren",
         "title": "Esploratrice del maresciallo",
         "greeting": "Passi silenziosi e una lama corta ti tengono in vita. Parla in fretta: devo tornare alle canne."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Capitano Thessaly",
@@ -36587,6 +36874,42 @@ export const de_DE: EnTranslations = {
       "marshstalker_grips": {
         "name": "Sumpfpirscher-Griffe"
       },
+      "drownhammer_warblade": {
+        "name": "Kriegsklinge des Ertränkhammers"
+      },
+      "fensteel_longsword": {
+        "name": "Fenstahl-Langschwert"
+      },
+      "marshwarden_maul": {
+        "name": "Marschwächter-Streithammer"
+      },
+      "reedbinder_mace": {
+        "name": "Schilfbinder-Streitkolben"
+      },
+      "silt_dirk": {
+        "name": "Schlickbenarbter Dolch"
+      },
+      "mirewhisper_dagger": {
+        "name": "Moorflüster-Dolch"
+      },
+      "eelhide_saber": {
+        "name": "Aalhaut-Säbel"
+      },
+      "boglight_staff": {
+        "name": "Moorlicht-Stab"
+      },
+      "fenmist_rod": {
+        "name": "Fennebel-Rute"
+      },
+      "drownreed_cudgel": {
+        "name": "Ertränkschilf-Knüppel"
+      },
+      "marshlord_greatsword": {
+        "name": "Großschwert des Marschfürsten"
+      },
+      "venomreed_kris": {
+        "name": "Giftschilf-Kris"
+      },
       "bristleback_maul": {
         "name": "Bristleback-Schlägel"
       },
@@ -37336,6 +37659,11 @@ export const de_DE: EnTranslations = {
         "name": "Späherin Maren",
         "title": "Späherin des Marschalls",
         "greeting": "Leise Schritte und eine kurze Klinge halten dich am Leben. Sprich schnell, ich muss zurück ins Schilf."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Hauptmann Thessaly",
@@ -41419,6 +41747,42 @@ export const zh_CN: EnTranslations = {
       "marshstalker_grips": {
         "name": "沼泽潜行者手扣"
       },
+      "drownhammer_warblade": {
+        "name": "溺锤战刃"
+      },
+      "fensteel_longsword": {
+        "name": "沼钢长剑"
+      },
+      "marshwarden_maul": {
+        "name": "沼泽守望者重槌"
+      },
+      "reedbinder_mace": {
+        "name": "缚芦钉锤"
+      },
+      "silt_dirk": {
+        "name": "淤泥磨蚀短刀"
+      },
+      "mirewhisper_dagger": {
+        "name": "沼语匕首"
+      },
+      "eelhide_saber": {
+        "name": "鳗皮军刀"
+      },
+      "boglight_staff": {
+        "name": "沼光法杖"
+      },
+      "fenmist_rod": {
+        "name": "沼雾魔杖"
+      },
+      "drownreed_cudgel": {
+        "name": "溺芦短棍"
+      },
+      "marshlord_greatsword": {
+        "name": "沼泽领主巨剑"
+      },
+      "venomreed_kris": {
+        "name": "毒芦波刃刀"
+      },
       "bristleback_maul": {
         "name": "硬鬃重槌"
       },
@@ -42168,6 +42532,11 @@ export const zh_CN: EnTranslations = {
         "name": "玛伦斥候",
         "title": "元帅的斥候",
         "greeting": "安静的脚步和短刃能保命。快说，我得回芦苇地去。"
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "瑟萨莉队长",
@@ -46251,6 +46620,42 @@ export const zh_TW: EnTranslations = {
       "marshstalker_grips": {
         "name": "沼澤潛行者手扣"
       },
+      "drownhammer_warblade": {
+        "name": "溺錘戰刃"
+      },
+      "fensteel_longsword": {
+        "name": "沼鋼長劍"
+      },
+      "marshwarden_maul": {
+        "name": "沼澤守望者重槌"
+      },
+      "reedbinder_mace": {
+        "name": "縛蘆釘錘"
+      },
+      "silt_dirk": {
+        "name": "淤泥磨蝕短刀"
+      },
+      "mirewhisper_dagger": {
+        "name": "沼語匕首"
+      },
+      "eelhide_saber": {
+        "name": "鰻皮軍刀"
+      },
+      "boglight_staff": {
+        "name": "沼光法杖"
+      },
+      "fenmist_rod": {
+        "name": "沼霧魔杖"
+      },
+      "drownreed_cudgel": {
+        "name": "溺蘆短棍"
+      },
+      "marshlord_greatsword": {
+        "name": "沼澤領主巨劍"
+      },
+      "venomreed_kris": {
+        "name": "毒蘆波刃刀"
+      },
       "bristleback_maul": {
         "name": "硬鬃重槌"
       },
@@ -47000,6 +47405,11 @@ export const zh_TW: EnTranslations = {
         "name": "瑪倫斥候",
         "title": "元帥的斥候",
         "greeting": "安靜的腳步和短刃能保命。快說，我得回蘆葦地去。"
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "瑟薩莉隊長",
@@ -51083,6 +51493,42 @@ export const ko_KR: EnTranslations = {
       "marshstalker_grips": {
         "name": "늪추적자의 손아귀"
       },
+      "drownhammer_warblade": {
+        "name": "익사망치 전투검"
+      },
+      "fensteel_longsword": {
+        "name": "펜강철 롱소드"
+      },
+      "marshwarden_maul": {
+        "name": "늪수호자 대형철퇴"
+      },
+      "reedbinder_mace": {
+        "name": "갈대결속 철퇴"
+      },
+      "silt_dirk": {
+        "name": "진흙에 닳은 더크"
+      },
+      "mirewhisper_dagger": {
+        "name": "수렁속삭임 단검"
+      },
+      "eelhide_saber": {
+        "name": "뱀장어가죽 세이버"
+      },
+      "boglight_staff": {
+        "name": "늪빛 지팡이"
+      },
+      "fenmist_rod": {
+        "name": "펜안개 봉"
+      },
+      "drownreed_cudgel": {
+        "name": "익사갈대 곤봉"
+      },
+      "marshlord_greatsword": {
+        "name": "늪군주의 대검"
+      },
+      "venomreed_kris": {
+        "name": "독갈대 크리스"
+      },
       "bristleback_maul": {
         "name": "뻣센등뼈 철퇴"
       },
@@ -51832,6 +52278,11 @@ export const ko_KR: EnTranslations = {
         "name": "정찰병 마렌",
         "title": "원수의 정찰병",
         "greeting": "조용한 발걸음과 짧은 칼날이 목숨을 지킵니다. 빨리 말하십시오. 갈대밭으로 돌아가야 합니다."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "대장 테살리",
@@ -55915,6 +56366,42 @@ export const ja_JP: EnTranslations = {
       "marshstalker_grips": {
         "name": "沼の追跡者の握り"
       },
+      "drownhammer_warblade": {
+        "name": "溺れ槌の戦刃"
+      },
+      "fensteel_longsword": {
+        "name": "沼鋼のロングソード"
+      },
+      "marshwarden_maul": {
+        "name": "沼守りのモール"
+      },
+      "reedbinder_mace": {
+        "name": "葦縛りのメイス"
+      },
+      "silt_dirk": {
+        "name": "泥磨きのダーク"
+      },
+      "mirewhisper_dagger": {
+        "name": "沼囁きのダガー"
+      },
+      "eelhide_saber": {
+        "name": "ウナギ皮のサーベル"
+      },
+      "boglight_staff": {
+        "name": "沼火の杖"
+      },
+      "fenmist_rod": {
+        "name": "沼霧のロッド"
+      },
+      "drownreed_cudgel": {
+        "name": "溺れ葦のカジェル"
+      },
+      "marshlord_greatsword": {
+        "name": "沼領主の大剣"
+      },
+      "venomreed_kris": {
+        "name": "毒葦のクリス"
+      },
       "bristleback_maul": {
         "name": "ブリストルバックの大槌"
       },
@@ -56664,6 +57151,11 @@ export const ja_JP: EnTranslations = {
         "name": "斥候マレン",
         "title": "元帥の斥候",
         "greeting": "静かな足取りと短い刃が命を守ります。手短に。葦原へ戻らねばなりません。"
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "隊長テサリー",
@@ -60747,6 +61239,42 @@ export const pt_BR: EnTranslations = {
       "marshstalker_grips": {
         "name": "Punhos do Espreitador do pântano"
       },
+      "drownhammer_warblade": {
+        "name": "Lâmina de guerra do Martelo Afogado"
+      },
+      "fensteel_longsword": {
+        "name": "Espada longa de aço do brejo"
+      },
+      "marshwarden_maul": {
+        "name": "Malho do Guardião do Pântano"
+      },
+      "reedbinder_mace": {
+        "name": "Maça Prendejunco"
+      },
+      "silt_dirk": {
+        "name": "Adaga gasta pelo lodo"
+      },
+      "mirewhisper_dagger": {
+        "name": "Adaga Sussurro do Brejo"
+      },
+      "eelhide_saber": {
+        "name": "Sabre de pele de enguia"
+      },
+      "boglight_staff": {
+        "name": "Cajado de luz do brejo"
+      },
+      "fenmist_rod": {
+        "name": "Vara de névoa do brejo"
+      },
+      "drownreed_cudgel": {
+        "name": "Cacete de junco afogado"
+      },
+      "marshlord_greatsword": {
+        "name": "Espadão do Senhor do Pântano"
+      },
+      "venomreed_kris": {
+        "name": "Kris de junco venenoso"
+      },
       "bristleback_maul": {
         "name": "Malho Bristleback"
       },
@@ -61496,6 +62024,11 @@ export const pt_BR: EnTranslations = {
         "name": "Batedora Maren",
         "title": "Batedora do marechal",
         "greeting": "Passos silenciosos e uma lâmina curta mantêm você vivo. Fale depressa: preciso voltar aos juncos."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Capitã Thessaly",
@@ -65579,6 +66112,42 @@ export const ru_RU: EnTranslations = {
       "marshstalker_grips": {
         "name": "Хваты Болотного охотника"
       },
+      "drownhammer_warblade": {
+        "name": "Боевой клинок Утонувшего Молота"
+      },
+      "fensteel_longsword": {
+        "name": "Болотностальной длинный меч"
+      },
+      "marshwarden_maul": {
+        "name": "Молот Болотного Стража"
+      },
+      "reedbinder_mace": {
+        "name": "Булава Вязателя Тростника"
+      },
+      "silt_dirk": {
+        "name": "Кортик, истёртый илом"
+      },
+      "mirewhisper_dagger": {
+        "name": "Кинжал Болотного Шёпота"
+      },
+      "eelhide_saber": {
+        "name": "Сабля из кожи угря"
+      },
+      "boglight_staff": {
+        "name": "Посох болотного огонька"
+      },
+      "fenmist_rod": {
+        "name": "Жезл болотного тумана"
+      },
+      "drownreed_cudgel": {
+        "name": "Дубина утонувшего тростника"
+      },
+      "marshlord_greatsword": {
+        "name": "Двуручный меч Владыки Болот"
+      },
+      "venomreed_kris": {
+        "name": "Крис ядовитого тростника"
+      },
       "bristleback_maul": {
         "name": "Кувалда Щетиноспина"
       },
@@ -66328,6 +66897,11 @@ export const ru_RU: EnTranslations = {
         "name": "Разведчица Марен",
         "title": "Разведчица маршала",
         "greeting": "Тихие шаги и короткий клинок сохраняют жизнь. Говорите быстро, мне пора в камыши."
+      },
+      "weaponsmith_drennan": {
+        "name": "Weaponsmith Drennan",
+        "title": "Fenbridge Weaponsmith",
+        "greeting": "Fen damp rusts a poor blade in a week, {className}. Mine come fen-forged - they bite long after the reeds rot."
       },
       "captain_thessaly": {
         "name": "Капитан Тессали",
@@ -67693,6 +68267,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -67977,6 +68554,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -68261,6 +68841,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -68545,6 +69128,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -68830,6 +69416,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -69114,6 +69703,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -69398,6 +69990,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -69682,6 +70277,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -69966,6 +70564,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -70250,6 +70851,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -70534,6 +71138,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -70818,6 +71425,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.sergeant_garrick.greeting",
     "entities.npcs.sergeant_garrick.name",
     "entities.npcs.sergeant_garrick.title",
+    "entities.npcs.weaponsmith_drennan.greeting",
+    "entities.npcs.weaponsmith_drennan.name",
+    "entities.npcs.weaponsmith_drennan.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -73840,6 +74450,42 @@ export const en_XA: EnTranslations = {
       "marshstalker_grips": {
         "name": "[Ɱáŕšĥšţáļķéŕ'š Ĝŕíþš]"
       },
+      "drownhammer_warblade": {
+        "name": "[Ðŕóŵñĥáɱɱéŕ Ŵáŕƀļáðé]"
+      },
+      "fensteel_longsword": {
+        "name": "[Ƒéñšţééļ Ļóñĝšŵóŕð]"
+      },
+      "marshwarden_maul": {
+        "name": "[Ɱáŕšĥŵáŕðéñ Ɱáúļ]"
+      },
+      "reedbinder_mace": {
+        "name": "[Ŕééðƀíñðéŕ Ɱáçé]"
+      },
+      "silt_dirk": {
+        "name": "[Šíļţ-Ŵóŕñ Ðíŕķ]"
+      },
+      "mirewhisper_dagger": {
+        "name": "[Ɱíŕéŵĥíšþéŕ Ðáĝĝéŕ]"
+      },
+      "eelhide_saber": {
+        "name": "[Ééļĥíðé Šáƀéŕ]"
+      },
+      "boglight_staff": {
+        "name": "[Ɓóĝļíĝĥţ Šţáƒƒ]"
+      },
+      "fenmist_rod": {
+        "name": "[Ƒéñɱíšţ Ŕóð]"
+      },
+      "drownreed_cudgel": {
+        "name": "[Ðŕóŵñŕééð Çúðĝéļ]"
+      },
+      "marshlord_greatsword": {
+        "name": "[Ɱáŕšĥļóŕð'š Ĝŕéáţšŵóŕð]"
+      },
+      "venomreed_kris": {
+        "name": "[Ʋéñóɱŕééð Ķŕíš]"
+      },
       "bristleback_maul": {
         "name": "[Ɓŕíšţļéƀáçķ Ɱáúļ]"
       },
@@ -74589,6 +75235,11 @@ export const en_XA: EnTranslations = {
         "name": "[Šçóúţ Ɱáŕéñ]",
         "title": "[Ɱáŕšĥáļ'š Šçóúţ]",
         "greeting": "[Ɋúíéţ ƒééţ áñð á šĥóŕţ ƀļáðé ķééþ ýóú ƀŕéáţĥíñĝ óúţ ĥéŕé. Šþéáķ ɋúíçķ - Í áɱ ðúé ƀáçķ íñ ţĥé ŕééðš.]"
+      },
+      "weaponsmith_drennan": {
+        "name": "[Ŵéáþóñšɱíţĥ Ðŕéññáñ]",
+        "title": "[Ƒéñƀŕíðĝé Ŵéáþóñšɱíţĥ]",
+        "greeting": "[Ƒéñ ðáɱþ ŕúšţš á þóóŕ ƀļáðé íñ á ŵééķ, {className}. Ɱíñé çóɱé ƒéñ-ƒóŕĝéð - ţĥéý ƀíţé ļóñĝ áƒţéŕ ţĥé ŕééðš ŕóţ.]"
       },
       "captain_thessaly": {
         "name": "[Çáþţáíñ Ţĥéššáļý]",

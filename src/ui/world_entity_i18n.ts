@@ -39,7 +39,7 @@ const MOB_IDS = [
 const NPC_IDS = [
   'the_merchant', 'marshal_redbrook', 'trader_wilkes', 'apothecary_lin', 'brother_aldric',
   'smith_haldren', 'fisherman_brandt', 'foreman_odell', 'warden_fenwick', 'brother_aldric_fen',
-  'provisioner_hale', 'herbalist_yara', 'scout_maren', 'captain_thessaly',
+  'provisioner_hale', 'herbalist_yara', 'scout_maren', 'weaponsmith_drennan', 'captain_thessaly',
   'brother_aldric_highwatch', 'scout_maren_highwatch', 'quartermaster_bree', 'armorer_hode',
   'loremaster_caddis', 'ranger_elwyn', 'sergeant_garrick',
 ] as const;

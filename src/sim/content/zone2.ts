@@ -361,6 +361,17 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     ],
     greeting: 'Quiet feet and a short blade keep you breathing out here. Speak quick — I am due back in the reeds.',
   },
+  weaponsmith_drennan: {
+    id: 'weaponsmith_drennan', name: 'Weaponsmith Drennan', title: 'Fenbridge Weaponsmith',
+    pos: { x: 12, z: 306 }, facing: -2.4, color: 0x616a6b,
+    questIds: [],
+    vendorItems: [
+      'drownhammer_warblade', 'fensteel_longsword', 'marshwarden_maul', 'reedbinder_mace',
+      'silt_dirk', 'mirewhisper_dagger', 'eelhide_saber', 'boglight_staff',
+      'fenmist_rod', 'drownreed_cudgel', 'marshlord_greatsword', 'venomreed_kris',
+    ],
+    greeting: 'Fen damp rusts a poor blade in a week, $C. Mine come fen-forged — they bite long after the reeds rot.',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -908,6 +919,57 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   marshstalker_grips: {
     id: 'marshstalker_grips', name: "Marshstalker's Grips", kind: 'armor', slot: 'gloves', quality: 'uncommon',
     stats: { armor: 40, agi: 3, sta: 1 }, sellValue: 260, buyValue: 2600, requiredClass: ROG,
+  // --- Drownhammer's Armory (Weaponsmith Drennan) ---
+  // A fen-forged weapon line covering every archetype, scaled a notch above the
+  // Provisioner's white gear and the zone2 reward weapons. Vendor-only (no loot
+  // rows) so the school of mob/loot RNG is untouched and seed-fixed tests hold.
+  drownhammer_warblade: {
+    id: 'drownhammer_warblade', name: 'Drownhammer Warblade', kind: 'weapon', slot: 'mainhand', quality: 'uncommon',
+    weapon: { min: 13, max: 21, speed: 2.5 }, stats: { str: 4, sta: 2 }, sellValue: 380, buyValue: 3800, requiredClass: WAR,
+  },
+  fensteel_longsword: {
+    id: 'fensteel_longsword', name: 'Fensteel Longsword', kind: 'weapon', slot: 'mainhand', quality: 'common',
+    weapon: { min: 10, max: 17, speed: 2.5 }, stats: { str: 2 }, sellValue: 300, buyValue: 3000, requiredClass: WAR,
+  },
+  marshwarden_maul: {
+    id: 'marshwarden_maul', name: 'Marshwarden Maul', kind: 'weapon', slot: 'mainhand', quality: 'uncommon',
+    weapon: { min: 18, max: 28, speed: 3.4 }, stats: { str: 5, sta: 3 }, sellValue: 420, buyValue: 4200, requiredClass: WAR,
+  },
+  reedbinder_mace: {
+    id: 'reedbinder_mace', name: 'Reedbinder Mace', kind: 'weapon', slot: 'mainhand', quality: 'common',
+    weapon: { min: 9, max: 15, speed: 2.6 }, stats: { sta: 2 }, sellValue: 300, buyValue: 3000, requiredClass: WAR,
+  },
+  silt_dirk: {
+    id: 'silt_dirk', name: 'Silt-Worn Dirk', kind: 'weapon', slot: 'mainhand', quality: 'common',
+    weapon: { min: 6, max: 11, speed: 1.7, dagger: true }, stats: { agi: 2 }, sellValue: 300, buyValue: 3000, requiredClass: ROG,
+  },
+  mirewhisper_dagger: {
+    id: 'mirewhisper_dagger', name: 'Mirewhisper Dagger', kind: 'weapon', slot: 'mainhand', quality: 'uncommon',
+    weapon: { min: 8, max: 13, speed: 1.7, dagger: true }, stats: { agi: 4, str: 1 }, sellValue: 380, buyValue: 3800, requiredClass: ROG,
+  },
+  eelhide_saber: {
+    id: 'eelhide_saber', name: 'Eelhide Saber', kind: 'weapon', slot: 'mainhand', quality: 'uncommon',
+    weapon: { min: 9, max: 14, speed: 1.9 }, stats: { agi: 3, sta: 1 }, sellValue: 360, buyValue: 3600, requiredClass: ROG,
+  },
+  boglight_staff: {
+    id: 'boglight_staff', name: 'Boglight Staff', kind: 'weapon', slot: 'mainhand', quality: 'uncommon',
+    weapon: { min: 11, max: 19, speed: 3.0 }, stats: { int: 5, spi: 3 }, sellValue: 400, buyValue: 4000, requiredClass: MAG,
+  },
+  fenmist_rod: {
+    id: 'fenmist_rod', name: 'Fenmist Rod', kind: 'weapon', slot: 'mainhand', quality: 'common',
+    weapon: { min: 7, max: 12, speed: 2.4 }, stats: { int: 3 }, sellValue: 300, buyValue: 3000, requiredClass: MAG,
+  },
+  drownreed_cudgel: {
+    id: 'drownreed_cudgel', name: 'Drownreed Cudgel', kind: 'weapon', slot: 'mainhand', quality: 'uncommon',
+    weapon: { min: 9, max: 15, speed: 2.6 }, stats: { spi: 4, int: 2 }, sellValue: 380, buyValue: 3800, requiredClass: MAG,
+  },
+  marshlord_greatsword: {
+    id: 'marshlord_greatsword', name: "Marshlord's Greatsword", kind: 'weapon', slot: 'mainhand', quality: 'rare',
+    weapon: { min: 16, max: 25, speed: 2.6 }, stats: { str: 6, sta: 3, agi: 1 }, sellValue: 600, buyValue: 6000, requiredClass: WAR,
+  },
+  venomreed_kris: {
+    id: 'venomreed_kris', name: 'Venomreed Kris', kind: 'weapon', slot: 'mainhand', quality: 'rare',
+    weapon: { min: 10, max: 16, speed: 1.8, dagger: true }, stats: { agi: 5, str: 2 }, sellValue: 600, buyValue: 6000, requiredClass: ROG,
   },
   // --- junk (gray) ---
   bogiron_nugget: { id: 'bogiron_nugget', name: 'Bogiron Nugget', kind: 'junk', quality: 'poor', sellValue: 12 },
