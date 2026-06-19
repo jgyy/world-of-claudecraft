@@ -4251,6 +4251,106 @@ export const en: EnTranslations = {
           }
         }
       },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "Mogger's Trail",
         "text": "Before you take the road north, Eastbrook has one last thorn in its side: Mogger. The brute has been trampling the lower meadow and driving the boars mad. Clear the meadow around his trail so we can see where he lairs.",
@@ -8711,6 +8811,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
           }
         }
       },
@@ -13177,6 +13377,106 @@ export const es_ES: EnTranslations = {
           }
         }
       },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "El rastro de Mogger",
         "text": "Antes de tomar el camino al norte, Eastbrook tiene una última espina clavada: Mogger. La bestia pisotea el prado bajo y enloquece a los jabalíes. Limpia la zona de su rastro para que veamos dónde se esconde.",
@@ -17637,6 +17937,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
           }
         }
       },
@@ -22103,6 +22503,106 @@ export const fr_CA: EnTranslations = {
           }
         }
       },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "La piste de Mogger",
         "text": "Avant de prendre la route du nord, Eastbrook a une dernière épine dans le pied : Mogger. La brute piétine le pré bas et rend les sangliers fous. Nettoyez le pré autour de sa piste pour que nous voyions où il se terre.",
@@ -26563,6 +27063,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
           }
         }
       },
@@ -31029,6 +31629,106 @@ export const it_IT: EnTranslations = {
           }
         }
       },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "La traccia di Mogger",
         "text": "Prima di prendere la strada a nord, Eastbrook ha un'ultima spina nel fianco: Mogger. Il bruto calpesta il prato basso e fa impazzire i cinghiali. Ripulisci il prato attorno alla sua traccia per scoprire dove si tana.",
@@ -35489,6 +36189,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
           }
         }
       },
@@ -39955,6 +40755,106 @@ export const zh_CN: EnTranslations = {
           }
         }
       },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "莫格的踪迹",
         "text": "在你踏上北路前，东溪还有最后一根刺：莫格。那蛮兽践踏下方草地，把野猪都逼疯了。清理它踪迹周围的草地，我们才能看出它藏在哪里。",
@@ -44415,6 +45315,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
           }
         }
       },
@@ -48881,6 +49881,106 @@ export const ko_KR: EnTranslations = {
           }
         }
       },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "모거의 흔적",
         "text": "북쪽 길을 떠나기 전에 이스트브룩에는 마지막 골칫거리, 모거가 남았습니다. 그 짐승은 아래 초원을 짓밟고 멧돼지를 미치게 합니다. 흔적 주변의 초원을 정리해 은신처를 찾아내십시오.",
@@ -53341,6 +54441,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
           }
         }
       },
@@ -57807,6 +59007,106 @@ export const pt_BR: EnTranslations = {
           }
         }
       },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "A trilha de Mogger",
         "text": "Antes de pegar a estrada ao norte, Eastbrook tem um último espinho: Mogger. A fera pisoteia o prado baixo e enlouquece os javalis. Limpe o prado ao redor da trilha para descobrirmos onde ele se esconde.",
@@ -62270,6 +63570,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_fenmoss_bloat": {
+        "title": "Caustic Harvest",
+        "text": "I cannot set foot in the eastern beds, {playerName} - the bog bloats have rooted there, and every one I lance bursts a cloud that withers a season's growth in a heartbeat. Put ten of them down out in the open water, away from my fenmoss, and let the marsh carry the spores off.",
+        "completion": "Ten fewer gas-bags between me and a clean harvest. The beds will breathe again. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat slain"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "Reagents from the Shallows",
+        "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
+        "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "Grave-Damp Roots",
+        "text": "Something in the reeds has gone wrong at the root, {playerName}. Where the drowned dead wander, the gravemoss turns black and bitter - useless to me, and worse than useless in a wound. Lay ten of the waterlogged dead to rest and the rot may recede.",
+        "completion": "The reeds nearest the causeway are greening already. The dead poison everything they touch - even the soil remembers them.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "Blood in the Water",
+        "text": "Mirejaw's brood has the whole western lake in a froth, and a forager cannot draw a bucket without losing fingers. I do not need the old monster himself - just break the frenzy. Eight of the lesser jaws should cool their blood enough for me to work the shallows.",
+        "completion": "The water has stopped boiling. You can count fingers, {playerName} - that is more than most who fish the Mirejaw waters can say.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw Frenzy slain"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "Quiet the Mourners",
+        "text": "Sister Nhalia's mourners drift the graveyard at the fen's heart, and where their dirge carries, my nightbloom will not open - it only opens to silence. I am no priest to banish them, {playerName}, but you can quiet eight. Do it gently or do it hard; the nightbloom does not care which.",
+        "completion": "Quiet at last. The nightbloom will open under tonight's moon, and I will have my sleeping-draughts by week's end. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Nhalia Mourner silenced"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "Cut the Creepers",
+        "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
+        "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "No Mending for the Dead",
+        "text": "It galls me, {playerName} - the Gravecaller menders use the same grave-mending art I do, but turned to keep their dead on their feet. Every one you fell saves the wardens three. Bring down six of the menders, and let their patients stay down.",
+        "completion": "Six menders, and the sect's lines are thinner for it. There is a right and a wrong way to use the green arts, and they chose theirs. You chose well.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "Break the Chant",
+        "text": "The summoners are the worst of the lot - their chanting calls the drowned up faster than the wardens can put them back, and their silencing shriek would gag a banshee. Break the chant at its source, {playerName}. Eight summoners, and the fen will fall quiet enough to hear birdsong again.",
+        "completion": "The chanting has stopped. Listen - that is a marsh wren, the first I have heard since spring. You have given the fen its voice back.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Summoner slain"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "Trollsbane Tincture",
+        "text": "I can brew a trollsbane that will turn their own regrowth against them, {playerName}, but I need the fen trolls thinned before I can gather near their wallows - they heal faster than I can cut, and twice as mean. Drop eight of them and I will have my wallow-weed and the wardens will have their tincture.",
+        "completion": "Eight trolls, and a sack of wallow-weed besides. The wardens will bless your name come the next troll-tide. The trollsbane is as good as brewed.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll slain"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "The Dirge of Nhalia",
+        "text": "You have cleared every weed but the deepest root, {playerName}. Sister Nhalia herself sings the dirge that withers my fen, and while she sings nothing will truly grow at its heart. This is no errand for one - gather a friend or two. End her dirge, and the Fenmoss Accord is kept.",
+        "completion": "Silence. True silence, for the first time in a year. The fen's heart is mine to tend again, and I will not forget who gave it back. The Accord is kept, {playerName} - go with the green's blessing.",
+        "objectives": {
+          "0": {
+            "label": "Sister Nhalia slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62533,6 +63933,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62706,6 +64146,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62879,6 +64359,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63052,6 +64572,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63226,6 +64786,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63399,6 +64999,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63572,6 +65212,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63745,6 +65425,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63918,6 +65638,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64091,6 +65851,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64264,6 +66064,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64437,6 +66277,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_fenmoss_bloat.completion",
+    "entities.quests.q_fenmoss_bloat.objectives.0.label",
+    "entities.quests.q_fenmoss_bloat.text",
+    "entities.quests.q_fenmoss_bloat.title",
+    "entities.quests.q_fenmoss_cultists.completion",
+    "entities.quests.q_fenmoss_cultists.objectives.0.label",
+    "entities.quests.q_fenmoss_cultists.text",
+    "entities.quests.q_fenmoss_cultists.title",
+    "entities.quests.q_fenmoss_drowned.completion",
+    "entities.quests.q_fenmoss_drowned.objectives.0.label",
+    "entities.quests.q_fenmoss_drowned.text",
+    "entities.quests.q_fenmoss_drowned.title",
+    "entities.quests.q_fenmoss_frenzy.completion",
+    "entities.quests.q_fenmoss_frenzy.objectives.0.label",
+    "entities.quests.q_fenmoss_frenzy.text",
+    "entities.quests.q_fenmoss_frenzy.title",
+    "entities.quests.q_fenmoss_menders.completion",
+    "entities.quests.q_fenmoss_menders.objectives.0.label",
+    "entities.quests.q_fenmoss_menders.text",
+    "entities.quests.q_fenmoss_menders.title",
+    "entities.quests.q_fenmoss_mourners.completion",
+    "entities.quests.q_fenmoss_mourners.objectives.0.label",
+    "entities.quests.q_fenmoss_mourners.text",
+    "entities.quests.q_fenmoss_mourners.title",
+    "entities.quests.q_fenmoss_nhalia.completion",
+    "entities.quests.q_fenmoss_nhalia.objectives.0.label",
+    "entities.quests.q_fenmoss_nhalia.text",
+    "entities.quests.q_fenmoss_nhalia.title",
+    "entities.quests.q_fenmoss_snappers.completion",
+    "entities.quests.q_fenmoss_snappers.objectives.0.label",
+    "entities.quests.q_fenmoss_snappers.text",
+    "entities.quests.q_fenmoss_snappers.title",
+    "entities.quests.q_fenmoss_summoners.completion",
+    "entities.quests.q_fenmoss_summoners.objectives.0.label",
+    "entities.quests.q_fenmoss_summoners.text",
+    "entities.quests.q_fenmoss_summoners.title",
+    "entities.quests.q_fenmoss_trolls.completion",
+    "entities.quests.q_fenmoss_trolls.objectives.0.label",
+    "entities.quests.q_fenmoss_trolls.text",
+    "entities.quests.q_fenmoss_trolls.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -68827,6 +70707,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_fenmoss_bloat": {
+        "title": "[Çáúšţíç Ĥáŕʋéšţ]",
+        "text": "[Í çáññóţ šéţ ƒóóţ íñ ţĥé éášţéŕñ ƀéðš, {playerName} - ţĥé ƀóĝ ƀļóáţš ĥáʋé ŕóóţéð ţĥéŕé, áñð éʋéŕý óñé Í ļáñçé ƀúŕšţš á çļóúð ţĥáţ ŵíţĥéŕš á šéášóñ'š ĝŕóŵţĥ íñ á ĥéáŕţƀéáţ. Þúţ ţéñ óƒ ţĥéɱ ðóŵñ óúţ íñ ţĥé óþéñ ŵáţéŕ, áŵáý ƒŕóɱ ɱý ƒéñɱóšš, áñð ļéţ ţĥé ɱáŕšĥ çáŕŕý ţĥé šþóŕéš óƒƒ.]",
+        "completion": "[Ţéñ ƒéŵéŕ ĝáš-ƀáĝš ƀéţŵééñ ɱé áñð á çļéáñ ĥáŕʋéšţ. Ţĥé ƀéðš ŵíļļ ƀŕéáţĥé áĝáíñ. Ɱý ţĥáñķš, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓóĝ Ɓļóáţ šļáíñ]"
+          }
+        }
+      },
+      "q_fenmoss_snappers": {
+        "title": "[Ŕéáĝéñţš ƒŕóɱ ţĥé Šĥáļļóŵš]",
+        "text": "[Ţĥé ƀéšţ šíļʋéŕļéáƒ ĝŕóŵš ŵĥéŕé ţĥé Ðééþƒéñ šñáþþéŕš ŵáðé, áñð ţĥéý ŵíļļ ñóţ šúƒƒéŕ á ƒóŕáĝéŕ ñéáŕ íţ. Í áɱ óúţ óƒ éʋéŕý ţíñçţúŕé Í šéļļ ţó Ĥáļé'š ĝúáŕð. Ţĥíñ ţĥé šñáþþéŕš - á ðóžéñ šĥóŕţ óƒ ţéñ, çáļļ íţ ţéñ - šó Í çáñ ŵáðé íñ áñð çúţ ŵĥáţ Í ñééð.]",
+        "completion": "[Ĝóóð. Í çáñ áļŕéáðý šɱéļļ ţĥé šíļʋéŕļéáƒ ƒŕóɱ ĥéŕé. Ýóú ĥáʋé á šţéáðíéŕ ĥáñð ţĥáñ ĥáļƒ ɱý áþþŕéñţíçéš, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþƒéñ Šñáþþéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_fenmoss_drowned": {
+        "title": "[Ĝŕáʋé-Ðáɱþ Ŕóóţš]",
+        "text": "[Šóɱéţĥíñĝ íñ ţĥé ŕééðš ĥáš ĝóñé ŵŕóñĝ áţ ţĥé ŕóóţ, {playerName}. Ŵĥéŕé ţĥé ðŕóŵñéð ðéáð ŵáñðéŕ, ţĥé ĝŕáʋéɱóšš ţúŕñš ƀļáçķ áñð ƀíţţéŕ - úšéļéšš ţó ɱé, áñð ŵóŕšé ţĥáñ úšéļéšš íñ á ŵóúñð. Ļáý ţéñ óƒ ţĥé ŵáţéŕļóĝĝéð ðéáð ţó ŕéšţ áñð ţĥé ŕóţ ɱáý ŕéçéðé.]",
+        "completion": "[Ţĥé ŕééðš ñéáŕéšţ ţĥé çáúšéŵáý áŕé ĝŕééñíñĝ áļŕéáðý. Ţĥé ðéáð þóíšóñ éʋéŕýţĥíñĝ ţĥéý ţóúçĥ - éʋéñ ţĥé šóíļ ŕéɱéɱƀéŕš ţĥéɱ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðŕóŵñéð Ðéáð ðéšţŕóýéð]"
+          }
+        }
+      },
+      "q_fenmoss_frenzy": {
+        "title": "[Ɓļóóð íñ ţĥé Ŵáţéŕ]",
+        "text": "[Ɱíŕéĵáŵ'š ƀŕóóð ĥáš ţĥé ŵĥóļé ŵéšţéŕñ ļáķé íñ á ƒŕóţĥ, áñð á ƒóŕáĝéŕ çáññóţ ðŕáŵ á ƀúçķéţ ŵíţĥóúţ ļóšíñĝ ƒíñĝéŕš. Í ðó ñóţ ñééð ţĥé óļð ɱóñšţéŕ ĥíɱšéļƒ - ĵúšţ ƀŕéáķ ţĥé ƒŕéñžý. Éíĝĥţ óƒ ţĥé ļéššéŕ ĵáŵš šĥóúļð çóóļ ţĥéíŕ ƀļóóð éñóúĝĥ ƒóŕ ɱé ţó ŵóŕķ ţĥé šĥáļļóŵš.]",
+        "completion": "[Ţĥé ŵáţéŕ ĥáš šţóþþéð ƀóíļíñĝ. Ýóú çáñ çóúñţ ƒíñĝéŕš, {playerName} - ţĥáţ íš ɱóŕé ţĥáñ ɱóšţ ŵĥó ƒíšĥ ţĥé Ɱíŕéĵáŵ ŵáţéŕš çáñ šáý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéĵáŵ Ƒŕéñžý šļáíñ]"
+          }
+        }
+      },
+      "q_fenmoss_mourners": {
+        "title": "[Ɋúíéţ ţĥé Ɱóúŕñéŕš]",
+        "text": "[Šíšţéŕ Ñĥáļíá'š ɱóúŕñéŕš ðŕíƒţ ţĥé ĝŕáʋéýáŕð áţ ţĥé ƒéñ'š ĥéáŕţ, áñð ŵĥéŕé ţĥéíŕ ðíŕĝé çáŕŕíéš, ɱý ñíĝĥţƀļóóɱ ŵíļļ ñóţ óþéñ - íţ óñļý óþéñš ţó šíļéñçé. Í áɱ ñó þŕíéšţ ţó ƀáñíšĥ ţĥéɱ, {playerName}, ƀúţ ýóú çáñ ɋúíéţ éíĝĥţ. Ðó íţ ĝéñţļý óŕ ðó íţ ĥáŕð; ţĥé ñíĝĥţƀļóóɱ ðóéš ñóţ çáŕé ŵĥíçĥ.]",
+        "completion": "[Ɋúíéţ áţ ļášţ. Ţĥé ñíĝĥţƀļóóɱ ŵíļļ óþéñ úñðéŕ ţóñíĝĥţ'š ɱóóñ, áñð Í ŵíļļ ĥáʋé ɱý šļééþíñĝ-ðŕáúĝĥţš ƀý ŵééķ'š éñð. Ŵéļļ ðóñé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ñĥáļíá Ɱóúŕñéŕ šíļéñçéð]"
+          }
+        }
+      },
+      "q_fenmoss_cultists": {
+        "title": "[Çúţ ţĥé Çŕééþéŕš]",
+        "text": "[Ţĥé Ĝŕáʋéçáļļéŕ çúļţíšţš ĥáʋé ƀééñ šáļţíñĝ ţĥé óļð ŕéáĝéñţ ƀéðš ŵíţĥ ţĥéíŕ ŕíţéš - Í ƒíñð ɱý ŕóóţš ðúĝ úþ áñð ƀóúñð íñ ţĥéíŕ ƀļáçķ ţĥŕéáð. Í ŵáñţ ţĥéɱ óƒƒ ɱý ļáñð, {playerName}. Ţéñ óƒ ţĥé çúļţíšţš, áñð ɱáķé íţ þļáíñ ţĥáţ áñ ĥéŕƀáļíšţ'š ƒéñ íš ñóţ ţĥéíŕš ţó ĥáŕʋéšţ.]",
+        "completion": "[Ţĥéý ŵíļļ ţĥíñķ ţŵíçé ƀéƒóŕé ţĥéý ðíĝ íñ ɱý ƀéðš áĝáíñ. Ýóú ŵóúļð ĥáʋé ɱáðé á ƒéáŕšóɱé ƒóŕáĝéŕ, {playerName} - ýóú þúļļ ŵééðš ƀý ţĥé ŕóóţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕáʋéçáļļéŕ Çúļţíšţ šļáíñ]"
+          }
+        }
+      },
+      "q_fenmoss_menders": {
+        "title": "[Ñó Ɱéñðíñĝ ƒóŕ ţĥé Ðéáð]",
+        "text": "[Íţ ĝáļļš ɱé, {playerName} - ţĥé Ĝŕáʋéçáļļéŕ ɱéñðéŕš úšé ţĥé šáɱé ĝŕáʋé-ɱéñðíñĝ áŕţ Í ðó, ƀúţ ţúŕñéð ţó ķééþ ţĥéíŕ ðéáð óñ ţĥéíŕ ƒééţ. Éʋéŕý óñé ýóú ƒéļļ šáʋéš ţĥé ŵáŕðéñš ţĥŕéé. Ɓŕíñĝ ðóŵñ šíẋ óƒ ţĥé ɱéñðéŕš, áñð ļéţ ţĥéíŕ þáţíéñţš šţáý ðóŵñ.]",
+        "completion": "[Šíẋ ɱéñðéŕš, áñð ţĥé šéçţ'š ļíñéš áŕé ţĥíññéŕ ƒóŕ íţ. Ţĥéŕé íš á ŕíĝĥţ áñð á ŵŕóñĝ ŵáý ţó úšé ţĥé ĝŕééñ áŕţš, áñð ţĥéý çĥóšé ţĥéíŕš. Ýóú çĥóšé ŵéļļ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕáʋéçáļļéŕ Ɱéñðéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_fenmoss_summoners": {
+        "title": "[Ɓŕéáķ ţĥé Çĥáñţ]",
+        "text": "[Ţĥé šúɱɱóñéŕš áŕé ţĥé ŵóŕšţ óƒ ţĥé ļóţ - ţĥéíŕ çĥáñţíñĝ çáļļš ţĥé ðŕóŵñéð úþ ƒášţéŕ ţĥáñ ţĥé ŵáŕðéñš çáñ þúţ ţĥéɱ ƀáçķ, áñð ţĥéíŕ šíļéñçíñĝ šĥŕíéķ ŵóúļð ĝáĝ á ƀáñšĥéé. Ɓŕéáķ ţĥé çĥáñţ áţ íţš šóúŕçé, {playerName}. Éíĝĥţ šúɱɱóñéŕš, áñð ţĥé ƒéñ ŵíļļ ƒáļļ ɋúíéţ éñóúĝĥ ţó ĥéáŕ ƀíŕðšóñĝ áĝáíñ.]",
+        "completion": "[Ţĥé çĥáñţíñĝ ĥáš šţóþþéð. Ļíšţéñ - ţĥáţ íš á ɱáŕšĥ ŵŕéñ, ţĥé ƒíŕšţ Í ĥáʋé ĥéáŕð šíñçé šþŕíñĝ. Ýóú ĥáʋé ĝíʋéñ ţĥé ƒéñ íţš ʋóíçé ƀáçķ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕáʋéçáļļéŕ Šúɱɱóñéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_fenmoss_trolls": {
+        "title": "[Ţŕóļļšƀáñé Ţíñçţúŕé]",
+        "text": "[Í çáñ ƀŕéŵ á ţŕóļļšƀáñé ţĥáţ ŵíļļ ţúŕñ ţĥéíŕ óŵñ ŕéĝŕóŵţĥ áĝáíñšţ ţĥéɱ, {playerName}, ƀúţ Í ñééð ţĥé ƒéñ ţŕóļļš ţĥíññéð ƀéƒóŕé Í çáñ ĝáţĥéŕ ñéáŕ ţĥéíŕ ŵáļļóŵš - ţĥéý ĥéáļ ƒášţéŕ ţĥáñ Í çáñ çúţ, áñð ţŵíçé áš ɱéáñ. Ðŕóþ éíĝĥţ óƒ ţĥéɱ áñð Í ŵíļļ ĥáʋé ɱý ŵáļļóŵ-ŵééð áñð ţĥé ŵáŕðéñš ŵíļļ ĥáʋé ţĥéíŕ ţíñçţúŕé.]",
+        "completion": "[Éíĝĥţ ţŕóļļš, áñð á šáçķ óƒ ŵáļļóŵ-ŵééð ƀéšíðéš. Ţĥé ŵáŕðéñš ŵíļļ ƀļéšš ýóúŕ ñáɱé çóɱé ţĥé ñéẋţ ţŕóļļ-ţíðé. Ţĥé ţŕóļļšƀáñé íš áš ĝóóð áš ƀŕéŵéð.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéƒéñ Ţŕóļļ šļáíñ]"
+          }
+        }
+      },
+      "q_fenmoss_nhalia": {
+        "title": "[Ţĥé Ðíŕĝé óƒ Ñĥáļíá]",
+        "text": "[Ýóú ĥáʋé çļéáŕéð éʋéŕý ŵééð ƀúţ ţĥé ðééþéšţ ŕóóţ, {playerName}. Šíšţéŕ Ñĥáļíá ĥéŕšéļƒ šíñĝš ţĥé ðíŕĝé ţĥáţ ŵíţĥéŕš ɱý ƒéñ, áñð ŵĥíļé šĥé šíñĝš ñóţĥíñĝ ŵíļļ ţŕúļý ĝŕóŵ áţ íţš ĥéáŕţ. Ţĥíš íš ñó éŕŕáñð ƒóŕ óñé - ĝáţĥéŕ á ƒŕíéñð óŕ ţŵó. Éñð ĥéŕ ðíŕĝé, áñð ţĥé Ƒéñɱóšš Áççóŕð íš ķéþţ.]",
+        "completion": "[Šíļéñçé. Ţŕúé šíļéñçé, ƒóŕ ţĥé ƒíŕšţ ţíɱé íñ á ýéáŕ. Ţĥé ƒéñ'š ĥéáŕţ íš ɱíñé ţó ţéñð áĝáíñ, áñð Í ŵíļļ ñóţ ƒóŕĝéţ ŵĥó ĝáʋé íţ ƀáçķ. Ţĥé Áççóŕð íš ķéþţ, {playerName} - ĝó ŵíţĥ ţĥé ĝŕééñ'š ƀļéššíñĝ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šíšţéŕ Ñĥáļíá šļáíñ]"
           }
         }
       },

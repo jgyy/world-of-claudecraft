@@ -63,6 +63,9 @@ const QUEST_IDS = [
   'q_ledger_first_duty', 'q_ledger_teeth', 'q_ledger_reedwater', 'q_ledger_silk',
   'q_ledger_brood', 'q_ledger_deepvermin', 'q_ledger_toll', 'q_ledger_vigil',
   'q_ledger_great_boar', 'q_ledger_outlaw_captain',
+  'q_fenmoss_bloat', 'q_fenmoss_snappers', 'q_fenmoss_drowned', 'q_fenmoss_frenzy',
+  'q_fenmoss_mourners', 'q_fenmoss_cultists', 'q_fenmoss_menders', 'q_fenmoss_summoners',
+  'q_fenmoss_trolls', 'q_fenmoss_nhalia',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
