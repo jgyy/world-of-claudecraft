@@ -536,6 +536,18 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     questIds: ['q_brightwood_thinning', 'q_brightwood_monarch'],
     greeting: 'Quiet, $C — the glade is calm today, and I mean to keep it that way.',
   },
+  postmaster_calder: {
+    id: 'postmaster_calder', name: 'Postmaster Calder', title: 'Keeper of the Vale Post',
+    // at the north edge of the square by the road out of town, where the old
+    // mail-cart used to stand before the roads went bad
+    pos: { x: -9, z: 15 }, facing: -0.6, color: 0x9a6b2f,
+    questIds: [
+      'q_post_firstrun', 'q_post_meadow', 'q_post_reedwater', 'q_post_eastwood',
+      'q_post_collapse', 'q_post_tollroad', 'q_post_greyjaw', 'q_post_chapelnight',
+      'q_post_cache', 'q_post_burned_post',
+    ],
+    greeting: 'A letter is a promise, $N — and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself.',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -867,6 +879,112 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     minLevel: 6,
     suggestedPlayers: 2,
   },
+
+  // --- The Vale Post Road: Postmaster Calder reopens the Eastbrook mail relay ---
+  q_post_firstrun: {
+    id: 'q_post_firstrun', name: 'The Dusk Run',
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: 'My riders carry the post north at dusk — and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, $N. Slay 10 Forest Wolves and give my couriers their twilight back.',
+    completionText: 'Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post — you have set it straight.',
+    objectives: [{ type: 'kill', targetMobId: 'forest_wolf', count: 10, label: 'Forest Wolf slain' }],
+    xpReward: 300, copperReward: 90, itemRewards: {},
+    minLevel: 2,
+  },
+  q_post_meadow: {
+    id: 'q_post_meadow', name: 'The Meadow Relay',
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: 'The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, $N, and let my riders keep their seat.',
+    completionText: 'Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it — that is an hour saved on every western run.',
+    objectives: [{ type: 'kill', targetMobId: 'wild_boar', count: 8, label: 'Wild Boar culled' }],
+    xpReward: 360, copperReward: 110, itemRewards: {},
+    requiresQuest: 'q_post_firstrun',
+    minLevel: 2,
+  },
+  q_post_reedwater: {
+    id: 'q_post_reedwater', name: 'The Lakeside Post',
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: 'The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, $N, so the lakeside post can run dry-shod again.',
+    completionText: 'The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.',
+    objectives: [{ type: 'kill', targetMobId: 'mudfin_murloc', count: 8, label: 'Mudfin Skulker driven off' }],
+    xpReward: 430, copperReward: 140, itemRewards: {},
+    requiresQuest: 'q_post_meadow',
+    minLevel: 3,
+  },
+  q_post_eastwood: {
+    id: 'q_post_eastwood', name: 'Silk Across the Road',
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: 'The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, $N, and let the farm post move again.',
+    completionText: 'The eastwood path is open to the sky once more. The farms have been a fortnight without word from town — you have just ended their silence.',
+    objectives: [{ type: 'kill', targetMobId: 'webwood_spider', count: 8, label: 'Webwood Lurker burned out' }],
+    xpReward: 470, copperReward: 160, itemRewards: {},
+    requiresQuest: 'q_post_reedwater',
+    minLevel: 3,
+  },
+  q_post_collapse: {
+    id: 'q_post_collapse', name: 'The Tunnel Cut-Through',
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs — but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, $N, and the shortcut is mine again.",
+    completionText: 'Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run — Odell and I both owe you a drink.',
+    objectives: [{ type: 'kill', targetMobId: 'tunnel_rat', count: 12, label: 'Tunnel Rat Digger slain' }],
+    xpReward: 520, copperReward: 190, itemRewards: {},
+    requiresQuest: 'q_post_eastwood',
+    minLevel: 4,
+  },
+  q_post_tollroad: {
+    id: 'q_post_tollroad', name: "The Robbers' Toll",
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: 'The southeast hills have turned to a robbers\' toll road, and the post is the richest prize on it — every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook\'s answer, $N: cut down 8 Vale Bandits and break their toll.',
+    completionText: 'Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again — and word is spreading that robbing the mail now costs a man his neck.',
+    objectives: [{ type: 'kill', targetMobId: 'vale_bandit', count: 8, label: 'Vale Bandit cut down' }],
+    xpReward: 560, copperReward: 220, itemRewards: {},
+    requiresQuest: 'q_post_collapse',
+    minLevel: 4,
+  },
+  q_post_greyjaw: {
+    id: 'q_post_greyjaw', name: 'The Courier-Eater',
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: 'There is one wolf the north riders will not name aloud — Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, $N, and you end the one nightmare my people still carry.',
+    completionText: 'Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf — you have killed a story that scared good people off the post.',
+    objectives: [{ type: 'kill', targetMobId: 'old_greyjaw', count: 1, label: 'Old Greyjaw slain' }],
+    xpReward: 720, copperReward: 260, itemRewards: {},
+    requiresQuest: 'q_post_tollroad',
+    minLevel: 5,
+  },
+  q_post_chapelnight: {
+    id: 'q_post_chapelnight', name: 'The Night Mail',
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: 'The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, $N, and give the night mail its road.',
+    completionText: 'Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet — Brother Aldric will rest easier too.',
+    objectives: [{ type: 'kill', targetMobId: 'restless_bones', count: 10, label: 'Restless Bones laid to rest' }],
+    xpReward: 760, copperReward: 280, itemRewards: {},
+    requiresQuest: 'q_post_greyjaw',
+    minLevel: 5,
+  },
+  q_post_cache: {
+    id: 'q_post_cache', name: 'The Stolen Mail-Cache',
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: 'The bandits did worse than rob a run — they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, $N. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale\'s mail home. Do not go alone.',
+    completionText: 'The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers\' letters home — all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.',
+    objectives: [
+      { type: 'kill', targetMobId: 'vale_bandit', count: 6, label: 'Vale Bandit carved through' },
+      { type: 'kill', targetMobId: 'gorrak', count: 1, label: 'Gorrak the Ruthless slain' },
+    ],
+    xpReward: 920, copperReward: 360, itemRewards: {},
+    requiresQuest: 'q_post_chapelnight',
+    minLevel: 6,
+    suggestedPlayers: 2,
+  },
+  q_post_burned_post: {
+    id: 'q_post_burned_post', name: 'The Man Who Burned the Post',
+    giverNpcId: 'postmaster_calder', turnInNpcId: 'postmaster_calder',
+    text: 'One name is behind all of it, $N. Captain Verlan — the deserter who torched the old post-house and turned the Vale\'s roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion — he does not die easy.',
+    completionText: 'Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving — because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, $N.',
+    objectives: [{ type: 'kill', targetMobId: 'captain_verlan', count: 1, label: 'Captain Verlan slain' }],
+    xpReward: 1100, copperReward: 440, itemRewards: {},
+    requiresQuest: 'q_post_cache',
+    minLevel: 6,
+    suggestedPlayers: 2,
+  },
 };
 
 export const ZONE1_QUEST_ORDER = [
@@ -880,6 +998,10 @@ export const ZONE1_QUEST_ORDER = [
   'q_ledger_first_duty', 'q_ledger_teeth', 'q_ledger_reedwater', 'q_ledger_silk',
   'q_ledger_brood', 'q_ledger_deepvermin', 'q_ledger_toll', 'q_ledger_vigil',
   'q_ledger_great_boar', 'q_ledger_outlaw_captain',
+  // The Vale Post Road courier chain
+  'q_post_firstrun', 'q_post_meadow', 'q_post_reedwater', 'q_post_eastwood',
+  'q_post_collapse', 'q_post_tollroad', 'q_post_greyjaw', 'q_post_chapelnight',
+  'q_post_cache', 'q_post_burned_post',
 ];
 
 // ---------------------------------------------------------------------------

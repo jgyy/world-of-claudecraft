@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4247,6 +4252,109 @@ export const en: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -7856,6 +7964,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8710,6 +8823,109 @@ export const es: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -12319,6 +12535,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13173,6 +13394,109 @@ export const es_ES: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -16782,6 +17106,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17636,6 +17965,109 @@ export const fr_FR: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -21245,6 +21677,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22099,6 +22536,109 @@ export const fr_CA: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -25708,6 +26248,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26562,6 +27107,109 @@ export const en_CA: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -30171,6 +30819,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31025,6 +31678,109 @@ export const it_IT: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -34634,6 +35390,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35488,6 +36249,109 @@ export const de_DE: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -39097,6 +39961,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39951,6 +40820,109 @@ export const zh_CN: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -43560,6 +44532,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44414,6 +45391,109 @@ export const zh_TW: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -48023,6 +49103,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48877,6 +49962,109 @@ export const ko_KR: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -52486,6 +53674,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53340,6 +54533,109 @@ export const ja_JP: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -56949,6 +58245,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57803,6 +59104,109 @@ export const pt_BR: EnTranslations = {
             "label": "Vale Bandit cut down"
           },
           "1": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
             "label": "Captain Verlan slain"
           }
         }
@@ -61412,6 +62816,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "postmaster_calder": {
+        "name": "Postmaster Calder",
+        "title": "Keeper of the Vale Post",
+        "greeting": "A letter is a promise, {playerName} - and the Vale has broken too many lately. Every road out of Eastbrook has gone to teeth and thieves, and my riders will not carry the post through them. Clear me a road and you keep the whole Vale talking to itself."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63679,109 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_post_firstrun": {
+        "title": "The Dusk Run",
+        "text": "My riders carry the post north at dusk - and at dusk the wolves own the north road. I have lost two mail-bags and nearly a rider this month to the packs. Thin them, {playerName}. Slay 10 Forest Wolves and give my couriers their twilight back.",
+        "completion": "Ten wolves, and the dusk run went through tonight without a torch lit in fear. The north road is the spine of the Vale post - you have set it straight.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "The Meadow Relay",
+        "text": "The west road cuts through the meadow where the boars root. A rider at a gallop and a charging bull boar make a broken leg and a scattered post-bag, every time. Cull 8 Wild Boar off the meadow relay, {playerName}, and let my riders keep their seat.",
+        "completion": "Eight boars off the relay and not a letter spilled since. A rider can canter the meadow now instead of picking through it - that is an hour saved on every western run.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "The Lakeside Post",
+        "text": "The shortest road to the fishing huts runs along the reedwater, and the Mudfin have made it a drowning-trap. They drag a rider into the shallows for the shine of a brass buckle. Drive off 8 Mudfin Skulkers, {playerName}, so the lakeside post can run dry-shod again.",
+        "completion": "The reedwater road is clear and my rider came back with dry boots and a full bag for the first time all season. The huts will have their letters by morning.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker driven off"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "Silk Across the Road",
+        "text": "The eastwood path is the only dry way to the outlying farms, and the Webwood lurkers have strung it shut. My last rider walked his horse home blind under a face full of web. Burn out 8 Webwood Lurkers, {playerName}, and let the farm post move again.",
+        "completion": "The eastwood path is open to the sky once more. The farms have been a fortnight without word from town - you have just ended their silence.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "The Tunnel Cut-Through",
+        "text": "Foreman Odell let my riders use the old mine cut-through to save a half-day on the south runs - but his tunnel rats have bred into the passage and they swarm a lantern the moment it shows. Put down 12 Tunnel Rat Diggers, {playerName}, and the shortcut is mine again.",
+        "completion": "Twelve of the candle-headed vermin cleared, and the cut-through carries the post once more. Half a day shaved off every southern run - Odell and I both owe you a drink.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger slain"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "The Robbers' Toll",
+        "text": "The southeast hills have turned to a robbers' toll road, and the post is the richest prize on it - every bag holds coin-letters and bank-notes. The Vale Bandits have taken three runs straight. Bring them Eastbrook's answer, {playerName}: cut down 8 Vale Bandits and break their toll.",
+        "completion": "Eight bandits down and the toll road quiet. My riders carry the coin-post through the hills again - and word is spreading that robbing the mail now costs a man his neck.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "The Courier-Eater",
+        "text": "There is one wolf the north riders will not name aloud - Old Greyjaw, a grey devil that has killed more couriers than the cold. He shadows the dusk run and takes the last rider in the line. End him, {playerName}, and you end the one nightmare my people still carry.",
+        "completion": "Old Greyjaw, dead by your hand. My riders will sleep tonight without listening for him on the north road. You have killed more than a wolf - you have killed a story that scared good people off the post.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "The Night Mail",
+        "text": "The fastest road east passes the old chapel, and the dead there will not let a living rider by after dark. My night-mail has gone the long way round for a month, and the long way is a day late. Lay 10 Restless Bones to rest, {playerName}, and give the night mail its road.",
+        "completion": "Ten of the restless laid down, and the night mail rode the chapel road for the first time since autumn. A day saved on every eastern run, and a haunted road made quiet - Brother Aldric will rest easier too.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "The Stolen Mail-Cache",
+        "text": "The bandits did worse than rob a run - they sacked my southern relay-house and carried off a whole cache of post, and Gorrak the Ruthless sits on it now in his camp. Months of letters, {playerName}. Carve through 6 Vale Bandits to reach him, kill Gorrak, and bring the Vale's mail home. Do not go alone.",
+        "completion": "The cache is recovered and Gorrak will rob no more riders. Wills, deeds, soldiers' letters home - all of it back in the sorting-room where it belongs. You have given a hundred families news they had given up on.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit carved through"
+          },
+          "1": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "The Man Who Burned the Post",
+        "text": "One name is behind all of it, {playerName}. Captain Verlan - the deserter who torched the old post-house and turned the Vale's roads to robbery so no warning could ride ahead of him. While he lives, no road in the Vale is ever truly open. End him at his camp, and the Vale post is whole again. Take a companion - he does not die easy.",
+        "completion": "Captain Verlan is dead, and with him the last hand strangling the Vale roads. Every relay open, every rider safe, every letter moving - because you would not let a road stay closed. The Vale Post will carry your name to every town it reaches, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62521,6 +64033,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62575,6 +64090,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62694,6 +64250,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62748,6 +64307,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62867,6 +64467,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62921,6 +64524,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63040,6 +64684,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63094,6 +64741,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63214,6 +64902,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63268,6 +64959,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63387,6 +65119,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63441,6 +65176,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63560,6 +65336,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63614,6 +65393,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63733,6 +65553,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63787,6 +65610,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63906,6 +65770,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63960,6 +65827,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64079,6 +65987,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64133,6 +66044,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64252,6 +66204,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64306,6 +66261,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64425,6 +66421,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.postmaster_calder.greeting",
+    "entities.npcs.postmaster_calder.name",
+    "entities.npcs.postmaster_calder.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64479,6 +66478,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_post_burned_post.completion",
+    "entities.quests.q_post_burned_post.objectives.0.label",
+    "entities.quests.q_post_burned_post.text",
+    "entities.quests.q_post_burned_post.title",
+    "entities.quests.q_post_cache.completion",
+    "entities.quests.q_post_cache.objectives.0.label",
+    "entities.quests.q_post_cache.objectives.1.label",
+    "entities.quests.q_post_cache.text",
+    "entities.quests.q_post_cache.title",
+    "entities.quests.q_post_chapelnight.completion",
+    "entities.quests.q_post_chapelnight.objectives.0.label",
+    "entities.quests.q_post_chapelnight.text",
+    "entities.quests.q_post_chapelnight.title",
+    "entities.quests.q_post_collapse.completion",
+    "entities.quests.q_post_collapse.objectives.0.label",
+    "entities.quests.q_post_collapse.text",
+    "entities.quests.q_post_collapse.title",
+    "entities.quests.q_post_eastwood.completion",
+    "entities.quests.q_post_eastwood.objectives.0.label",
+    "entities.quests.q_post_eastwood.text",
+    "entities.quests.q_post_eastwood.title",
+    "entities.quests.q_post_firstrun.completion",
+    "entities.quests.q_post_firstrun.objectives.0.label",
+    "entities.quests.q_post_firstrun.text",
+    "entities.quests.q_post_firstrun.title",
+    "entities.quests.q_post_greyjaw.completion",
+    "entities.quests.q_post_greyjaw.objectives.0.label",
+    "entities.quests.q_post_greyjaw.text",
+    "entities.quests.q_post_greyjaw.title",
+    "entities.quests.q_post_meadow.completion",
+    "entities.quests.q_post_meadow.objectives.0.label",
+    "entities.quests.q_post_meadow.text",
+    "entities.quests.q_post_meadow.title",
+    "entities.quests.q_post_reedwater.completion",
+    "entities.quests.q_post_reedwater.objectives.0.label",
+    "entities.quests.q_post_reedwater.text",
+    "entities.quests.q_post_reedwater.title",
+    "entities.quests.q_post_tollroad.completion",
+    "entities.quests.q_post_tollroad.objectives.0.label",
+    "entities.quests.q_post_tollroad.text",
+    "entities.quests.q_post_tollroad.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -67972,6 +70012,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "postmaster_calder": {
+        "name": "[Þóšţɱášţéŕ Çáļðéŕ]",
+        "title": "[Ķééþéŕ óƒ ţĥé Ʋáļé Þóšţ]",
+        "greeting": "[Á ļéţţéŕ íš á þŕóɱíšé, {playerName} - áñð ţĥé Ʋáļé ĥáš ƀŕóķéñ ţóó ɱáñý ļáţéļý. Éʋéŕý ŕóáð óúţ óƒ Éášţƀŕóóķ ĥáš ĝóñé ţó ţééţĥ áñð ţĥíéʋéš, áñð ɱý ŕíðéŕš ŵíļļ ñóţ çáŕŕý ţĥé þóšţ ţĥŕóúĝĥ ţĥéɱ. Çļéáŕ ɱé á ŕóáð áñð ýóú ķééþ ţĥé ŵĥóļé Ʋáļé ţáļķíñĝ ţó íţšéļƒ.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68826,6 +70871,109 @@ export const en_XA: EnTranslations = {
             "label": "[Ʋáļé Ɓáñðíţ çúţ ðóŵñ]"
           },
           "1": {
+            "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_post_firstrun": {
+        "title": "[Ţĥé Ðúšķ Ŕúñ]",
+        "text": "[Ɱý ŕíðéŕš çáŕŕý ţĥé þóšţ ñóŕţĥ áţ ðúšķ - áñð áţ ðúšķ ţĥé ŵóļʋéš óŵñ ţĥé ñóŕţĥ ŕóáð. Í ĥáʋé ļóšţ ţŵó ɱáíļ-ƀáĝš áñð ñéáŕļý á ŕíðéŕ ţĥíš ɱóñţĥ ţó ţĥé þáçķš. Ţĥíñ ţĥéɱ, {playerName}. Šļáý 10 Ƒóŕéšţ Ŵóļʋéš áñð ĝíʋé ɱý çóúŕíéŕš ţĥéíŕ ţŵíļíĝĥţ ƀáçķ.]",
+        "completion": "[Ţéñ ŵóļʋéš, áñð ţĥé ðúšķ ŕúñ ŵéñţ ţĥŕóúĝĥ ţóñíĝĥţ ŵíţĥóúţ á ţóŕçĥ ļíţ íñ ƒéáŕ. Ţĥé ñóŕţĥ ŕóáð íš ţĥé šþíñé óƒ ţĥé Ʋáļé þóšţ - ýóú ĥáʋé šéţ íţ šţŕáíĝĥţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ šļáíñ]"
+          }
+        }
+      },
+      "q_post_meadow": {
+        "title": "[Ţĥé Ɱéáðóŵ Ŕéļáý]",
+        "text": "[Ţĥé ŵéšţ ŕóáð çúţš ţĥŕóúĝĥ ţĥé ɱéáðóŵ ŵĥéŕé ţĥé ƀóáŕš ŕóóţ. Á ŕíðéŕ áţ á ĝáļļóþ áñð á çĥáŕĝíñĝ ƀúļļ ƀóáŕ ɱáķé á ƀŕóķéñ ļéĝ áñð á šçáţţéŕéð þóšţ-ƀáĝ, éʋéŕý ţíɱé. Çúļļ 8 Ŵíļð Ɓóáŕ óƒƒ ţĥé ɱéáðóŵ ŕéļáý, {playerName}, áñð ļéţ ɱý ŕíðéŕš ķééþ ţĥéíŕ šéáţ.]",
+        "completion": "[Éíĝĥţ ƀóáŕš óƒƒ ţĥé ŕéļáý áñð ñóţ á ļéţţéŕ šþíļļéð šíñçé. Á ŕíðéŕ çáñ çáñţéŕ ţĥé ɱéáðóŵ ñóŵ íñšţéáð óƒ þíçķíñĝ ţĥŕóúĝĥ íţ - ţĥáţ íš áñ ĥóúŕ šáʋéð óñ éʋéŕý ŵéšţéŕñ ŕúñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵíļð Ɓóáŕ çúļļéð]"
+          }
+        }
+      },
+      "q_post_reedwater": {
+        "title": "[Ţĥé Ļáķéšíðé Þóšţ]",
+        "text": "[Ţĥé šĥóŕţéšţ ŕóáð ţó ţĥé ƒíšĥíñĝ ĥúţš ŕúñš áļóñĝ ţĥé ŕééðŵáţéŕ, áñð ţĥé Ɱúðƒíñ ĥáʋé ɱáðé íţ á ðŕóŵñíñĝ-ţŕáþ. Ţĥéý ðŕáĝ á ŕíðéŕ íñţó ţĥé šĥáļļóŵš ƒóŕ ţĥé šĥíñé óƒ á ƀŕášš ƀúçķļé. Ðŕíʋé óƒƒ 8 Ɱúðƒíñ Šķúļķéŕš, {playerName}, šó ţĥé ļáķéšíðé þóšţ çáñ ŕúñ ðŕý-šĥóð áĝáíñ.]",
+        "completion": "[Ţĥé ŕééðŵáţéŕ ŕóáð íš çļéáŕ áñð ɱý ŕíðéŕ çáɱé ƀáçķ ŵíţĥ ðŕý ƀóóţš áñð á ƒúļļ ƀáĝ ƒóŕ ţĥé ƒíŕšţ ţíɱé áļļ šéášóñ. Ţĥé ĥúţš ŵíļļ ĥáʋé ţĥéíŕ ļéţţéŕš ƀý ɱóŕñíñĝ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱúðƒíñ Šķúļķéŕ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_post_eastwood": {
+        "title": "[Šíļķ Áçŕóšš ţĥé Ŕóáð]",
+        "text": "[Ţĥé éášţŵóóð þáţĥ íš ţĥé óñļý ðŕý ŵáý ţó ţĥé óúţļýíñĝ ƒáŕɱš, áñð ţĥé Ŵéƀŵóóð ļúŕķéŕš ĥáʋé šţŕúñĝ íţ šĥúţ. Ɱý ļášţ ŕíðéŕ ŵáļķéð ĥíš ĥóŕšé ĥóɱé ƀļíñð úñðéŕ á ƒáçé ƒúļļ óƒ ŵéƀ. Ɓúŕñ óúţ 8 Ŵéƀŵóóð Ļúŕķéŕš, {playerName}, áñð ļéţ ţĥé ƒáŕɱ þóšţ ɱóʋé áĝáíñ.]",
+        "completion": "[Ţĥé éášţŵóóð þáţĥ íš óþéñ ţó ţĥé šķý óñçé ɱóŕé. Ţĥé ƒáŕɱš ĥáʋé ƀééñ á ƒóŕţñíĝĥţ ŵíţĥóúţ ŵóŕð ƒŕóɱ ţóŵñ - ýóú ĥáʋé ĵúšţ éñðéð ţĥéíŕ šíļéñçé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵéƀŵóóð Ļúŕķéŕ ƀúŕñéð óúţ]"
+          }
+        }
+      },
+      "q_post_collapse": {
+        "title": "[Ţĥé Ţúññéļ Çúţ-Ţĥŕóúĝĥ]",
+        "text": "[Ƒóŕéɱáñ Óðéļļ ļéţ ɱý ŕíðéŕš úšé ţĥé óļð ɱíñé çúţ-ţĥŕóúĝĥ ţó šáʋé á ĥáļƒ-ðáý óñ ţĥé šóúţĥ ŕúñš - ƀúţ ĥíš ţúññéļ ŕáţš ĥáʋé ƀŕéð íñţó ţĥé þáššáĝé áñð ţĥéý šŵáŕɱ á ļáñţéŕñ ţĥé ɱóɱéñţ íţ šĥóŵš. Þúţ ðóŵñ 12 Ţúññéļ Ŕáţ Ðíĝĝéŕš, {playerName}, áñð ţĥé šĥóŕţçúţ íš ɱíñé áĝáíñ.]",
+        "completion": "[Ţŵéļʋé óƒ ţĥé çáñðļé-ĥéáðéð ʋéŕɱíñ çļéáŕéð, áñð ţĥé çúţ-ţĥŕóúĝĥ çáŕŕíéš ţĥé þóšţ óñçé ɱóŕé. Ĥáļƒ á ðáý šĥáʋéð óƒƒ éʋéŕý šóúţĥéŕñ ŕúñ - Óðéļļ áñð Í ƀóţĥ óŵé ýóú á ðŕíñķ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţúññéļ Ŕáţ Ðíĝĝéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_post_tollroad": {
+        "title": "[Ţĥé Ŕóƀƀéŕš' Ţóļļ]",
+        "text": "[Ţĥé šóúţĥéášţ ĥíļļš ĥáʋé ţúŕñéð ţó á ŕóƀƀéŕš' ţóļļ ŕóáð, áñð ţĥé þóšţ íš ţĥé ŕíçĥéšţ þŕížé óñ íţ - éʋéŕý ƀáĝ ĥóļðš çóíñ-ļéţţéŕš áñð ƀáñķ-ñóţéš. Ţĥé Ʋáļé Ɓáñðíţš ĥáʋé ţáķéñ ţĥŕéé ŕúñš šţŕáíĝĥţ. Ɓŕíñĝ ţĥéɱ Éášţƀŕóóķ'š áñšŵéŕ, {playerName}: çúţ ðóŵñ 8 Ʋáļé Ɓáñðíţš áñð ƀŕéáķ ţĥéíŕ ţóļļ.]",
+        "completion": "[Éíĝĥţ ƀáñðíţš ðóŵñ áñð ţĥé ţóļļ ŕóáð ɋúíéţ. Ɱý ŕíðéŕš çáŕŕý ţĥé çóíñ-þóšţ ţĥŕóúĝĥ ţĥé ĥíļļš áĝáíñ - áñð ŵóŕð íš šþŕéáðíñĝ ţĥáţ ŕóƀƀíñĝ ţĥé ɱáíļ ñóŵ çóšţš á ɱáñ ĥíš ñéçķ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ʋáļé Ɓáñðíţ çúţ ðóŵñ]"
+          }
+        }
+      },
+      "q_post_greyjaw": {
+        "title": "[Ţĥé Çóúŕíéŕ-Éáţéŕ]",
+        "text": "[Ţĥéŕé íš óñé ŵóļƒ ţĥé ñóŕţĥ ŕíðéŕš ŵíļļ ñóţ ñáɱé áļóúð - Óļð Ĝŕéýĵáŵ, á ĝŕéý ðéʋíļ ţĥáţ ĥáš ķíļļéð ɱóŕé çóúŕíéŕš ţĥáñ ţĥé çóļð. Ĥé šĥáðóŵš ţĥé ðúšķ ŕúñ áñð ţáķéš ţĥé ļášţ ŕíðéŕ íñ ţĥé ļíñé. Éñð ĥíɱ, {playerName}, áñð ýóú éñð ţĥé óñé ñíĝĥţɱáŕé ɱý þéóþļé šţíļļ çáŕŕý.]",
+        "completion": "[Óļð Ĝŕéýĵáŵ, ðéáð ƀý ýóúŕ ĥáñð. Ɱý ŕíðéŕš ŵíļļ šļééþ ţóñíĝĥţ ŵíţĥóúţ ļíšţéñíñĝ ƒóŕ ĥíɱ óñ ţĥé ñóŕţĥ ŕóáð. Ýóú ĥáʋé ķíļļéð ɱóŕé ţĥáñ á ŵóļƒ - ýóú ĥáʋé ķíļļéð á šţóŕý ţĥáţ šçáŕéð ĝóóð þéóþļé óƒƒ ţĥé þóšţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Óļð Ĝŕéýĵáŵ šļáíñ]"
+          }
+        }
+      },
+      "q_post_chapelnight": {
+        "title": "[Ţĥé Ñíĝĥţ Ɱáíļ]",
+        "text": "[Ţĥé ƒášţéšţ ŕóáð éášţ þáššéš ţĥé óļð çĥáþéļ, áñð ţĥé ðéáð ţĥéŕé ŵíļļ ñóţ ļéţ á ļíʋíñĝ ŕíðéŕ ƀý áƒţéŕ ðáŕķ. Ɱý ñíĝĥţ-ɱáíļ ĥáš ĝóñé ţĥé ļóñĝ ŵáý ŕóúñð ƒóŕ á ɱóñţĥ, áñð ţĥé ļóñĝ ŵáý íš á ðáý ļáţé. Ļáý 10 Ŕéšţļéšš Ɓóñéš ţó ŕéšţ, {playerName}, áñð ĝíʋé ţĥé ñíĝĥţ ɱáíļ íţš ŕóáð.]",
+        "completion": "[Ţéñ óƒ ţĥé ŕéšţļéšš ļáíð ðóŵñ, áñð ţĥé ñíĝĥţ ɱáíļ ŕóðé ţĥé çĥáþéļ ŕóáð ƒóŕ ţĥé ƒíŕšţ ţíɱé šíñçé áúţúɱñ. Á ðáý šáʋéð óñ éʋéŕý éášţéŕñ ŕúñ, áñð á ĥáúñţéð ŕóáð ɱáðé ɋúíéţ - Ɓŕóţĥéŕ Áļðŕíç ŵíļļ ŕéšţ éášíéŕ ţóó.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕéšţļéšš Ɓóñéš ļáíð ţó ŕéšţ]"
+          }
+        }
+      },
+      "q_post_cache": {
+        "title": "[Ţĥé Šţóļéñ Ɱáíļ-Çáçĥé]",
+        "text": "[Ţĥé ƀáñðíţš ðíð ŵóŕšé ţĥáñ ŕóƀ á ŕúñ - ţĥéý šáçķéð ɱý šóúţĥéŕñ ŕéļáý-ĥóúšé áñð çáŕŕíéð óƒƒ á ŵĥóļé çáçĥé óƒ þóšţ, áñð Ĝóŕŕáķ ţĥé Ŕúţĥļéšš šíţš óñ íţ ñóŵ íñ ĥíš çáɱþ. Ɱóñţĥš óƒ ļéţţéŕš, {playerName}. Çáŕʋé ţĥŕóúĝĥ 6 Ʋáļé Ɓáñðíţš ţó ŕéáçĥ ĥíɱ, ķíļļ Ĝóŕŕáķ, áñð ƀŕíñĝ ţĥé Ʋáļé'š ɱáíļ ĥóɱé. Ðó ñóţ ĝó áļóñé.]",
+        "completion": "[Ţĥé çáçĥé íš ŕéçóʋéŕéð áñð Ĝóŕŕáķ ŵíļļ ŕóƀ ñó ɱóŕé ŕíðéŕš. Ŵíļļš, ðééðš, šóļðíéŕš' ļéţţéŕš ĥóɱé - áļļ óƒ íţ ƀáçķ íñ ţĥé šóŕţíñĝ-ŕóóɱ ŵĥéŕé íţ ƀéļóñĝš. Ýóú ĥáʋé ĝíʋéñ á ĥúñðŕéð ƒáɱíļíéš ñéŵš ţĥéý ĥáð ĝíʋéñ úþ óñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ʋáļé Ɓáñðíţ çáŕʋéð ţĥŕóúĝĥ]"
+          },
+          "1": {
+            "label": "[Ĝóŕŕáķ ţĥé Ŕúţĥļéšš šļáíñ]"
+          }
+        }
+      },
+      "q_post_burned_post": {
+        "title": "[Ţĥé Ɱáñ Ŵĥó Ɓúŕñéð ţĥé Þóšţ]",
+        "text": "[Óñé ñáɱé íš ƀéĥíñð áļļ óƒ íţ, {playerName}. Çáþţáíñ Ʋéŕļáñ - ţĥé ðéšéŕţéŕ ŵĥó ţóŕçĥéð ţĥé óļð þóšţ-ĥóúšé áñð ţúŕñéð ţĥé Ʋáļé'š ŕóáðš ţó ŕóƀƀéŕý šó ñó ŵáŕñíñĝ çóúļð ŕíðé áĥéáð óƒ ĥíɱ. Ŵĥíļé ĥé ļíʋéš, ñó ŕóáð íñ ţĥé Ʋáļé íš éʋéŕ ţŕúļý óþéñ. Éñð ĥíɱ áţ ĥíš çáɱþ, áñð ţĥé Ʋáļé þóšţ íš ŵĥóļé áĝáíñ. Ţáķé á çóɱþáñíóñ - ĥé ðóéš ñóţ ðíé éášý.]",
+        "completion": "[Çáþţáíñ Ʋéŕļáñ íš ðéáð, áñð ŵíţĥ ĥíɱ ţĥé ļášţ ĥáñð šţŕáñĝļíñĝ ţĥé Ʋáļé ŕóáðš. Éʋéŕý ŕéļáý óþéñ, éʋéŕý ŕíðéŕ šáƒé, éʋéŕý ļéţţéŕ ɱóʋíñĝ - ƀéçáúšé ýóú ŵóúļð ñóţ ļéţ á ŕóáð šţáý çļóšéð. Ţĥé Ʋáļé Þóšţ ŵíļļ çáŕŕý ýóúŕ ñáɱé ţó éʋéŕý ţóŵñ íţ ŕéáçĥéš, {playerName}.]",
+        "objectives": {
+          "0": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
           }
         }
