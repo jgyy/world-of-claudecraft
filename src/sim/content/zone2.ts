@@ -356,6 +356,17 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     questIds: ['q_troll_fetishes', 'q_cult_camp', 'q_olen'],
     greeting: 'Quiet feet and a short blade keep you breathing out here. Speak quick — I am due back in the reeds.',
   },
+  anglermaster_pell: {
+    id: 'anglermaster_pell', name: 'Anglermaster Pell', title: 'Keeper of the Fenbridge Derby',
+    // out on the west dock over the deepfen lake, a rod across her knees
+    pos: { x: -18, z: 300 }, facing: -Math.PI / 2, color: 0x148f77,
+    questIds: [
+      'q_derby_nets', 'q_derby_reedline', 'q_derby_foul_shallows', 'q_derby_tangled_lines',
+      'q_derby_boathouse_webs', 'q_derby_brood_queen', 'q_derby_boatbreaker',
+      'q_derby_upstream_poachers', 'q_derby_grubjaw', 'q_derby_mirejaw',
+    ],
+    greeting: "The Fenbridge Derby drew anglers from three towns once, $N — before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you.",
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -579,6 +590,104 @@ export const ZONE2_QUESTS: Record<string, QuestDef> = {
     minLevel: 12,
     suggestedPlayers: 5,
   },
+
+  // --- The Fenbridge Derby: Anglermaster Pell's questline ---
+  // A fresh angling/fishing-derby chain. Every objective reuses an already-camped
+  // zone2 mob (no new camps => no world-gen RNG shift), rewards are XP + copper
+  // only (no new items => no item-i18n burden).
+  q_derby_nets: {
+    id: 'q_derby_nets', name: 'Raiders on the Nets',
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, $N. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+    completionText: "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, $N.",
+    objectives: [{ type: 'kill', targetMobId: 'deepfen_murloc', count: 10, label: 'Deepfen Murloc culled' }],
+    xpReward: 460, copperReward: 130, itemRewards: {},
+    minLevel: 8,
+  },
+  q_derby_reedline: {
+    id: 'q_derby_reedline', name: 'Prowlers on the Reedline',
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline — and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, $N: 10 Mire Prowlers from the beds south of the causeway.",
+    completionText: "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+    objectives: [{ type: 'kill', targetMobId: 'mire_prowler', count: 10, label: 'Mire Prowler slain' }],
+    xpReward: 500, copperReward: 150, itemRewards: {},
+    requiresQuest: 'q_derby_nets', minLevel: 8,
+  },
+  q_derby_foul_shallows: {
+    id: 'q_derby_foul_shallows', name: 'The Fouled Shallows',
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "No fish will rise where the bog bloats drift — they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, $N, and let the shallows breathe again.",
+    completionText: "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish — that's a Derby beat, $N.",
+    objectives: [{ type: 'kill', targetMobId: 'bog_bloat', count: 8, label: 'Bog Bloat burst' }],
+    xpReward: 560, copperReward: 170, itemRewards: {},
+    requiresQuest: 'q_derby_reedline', minLevel: 9,
+  },
+  q_derby_tangled_lines: {
+    id: 'q_derby_tangled_lines', name: 'Tangled Lines',
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, $N, before they cost me every length of line I own.",
+    completionText: "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+    objectives: [{ type: 'kill', targetMobId: 'drowned_dead', count: 8, label: 'Drowned Dead laid to rest' }],
+    xpReward: 620, copperReward: 200, itemRewards: {},
+    requiresQuest: 'q_derby_foul_shallows', minLevel: 9,
+  },
+  q_derby_boathouse_webs: {
+    id: 'q_derby_boathouse_webs', name: 'Webs in the Boathouse',
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, $N, and I can air the place out for the crowds.",
+    completionText: "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again — just as a weigh-in hall should. You've earned a dry seat at the front.",
+    objectives: [{ type: 'kill', targetMobId: 'mire_widow', count: 8, label: 'Mire Widow cleared' }],
+    xpReward: 680, copperReward: 230, itemRewards: {},
+    requiresQuest: 'q_derby_tangled_lines', minLevel: 10,
+  },
+  q_derby_brood_queen: {
+    id: 'q_derby_brood_queen', name: 'The Brood-Queen of the Thicket',
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "Clear the widows and more come — they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, $N. Take a steady hand or two with you and burn her nest out for good.",
+    completionText: "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+    objectives: [{ type: 'kill', targetMobId: 'mirefen_broodmother', count: 1, label: 'Mirefen Broodmother slain' }],
+    xpReward: 820, copperReward: 300, itemRewards: {},
+    requiresQuest: 'q_derby_boathouse_webs', minLevel: 10, suggestedPlayers: 2,
+  },
+  q_derby_boatbreaker: {
+    id: 'q_derby_boatbreaker', name: 'The Boat-Breaker',
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "There's a thing in the deep water the old anglers call Sloomtooth — a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, $N. Don't go alone.",
+    completionText: "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, $N.",
+    objectives: [{ type: 'kill', targetMobId: 'sloomtooth_the_drowned', count: 1, label: 'Sloomtooth the Drowned destroyed' }],
+    xpReward: 900, copperReward: 340, itemRewards: {},
+    requiresQuest: 'q_derby_brood_queen', minLevel: 11, suggestedPlayers: 2,
+  },
+  q_derby_upstream_poachers: {
+    id: 'q_derby_upstream_poachers', name: 'Poachers Upstream',
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs — no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, $N: cut down 10 Fen Trolls so the runs can flow free again.",
+    completionText: "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, $N — you've saved every Derby after it.",
+    objectives: [{ type: 'kill', targetMobId: 'fen_troll', count: 10, label: 'Fen Troll cut down' }],
+    xpReward: 980, copperReward: 380, itemRewards: {},
+    requiresQuest: 'q_derby_boatbreaker', minLevel: 11,
+  },
+  q_derby_grubjaw: {
+    id: 'q_derby_grubjaw', name: 'Grubjaw the Gluttonous',
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "One old devil has fattened himself on every fish the trolls' weirs trapped — Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, $N, and take a friend; he's swallowed hunters whole.",
+    completionText: "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+    objectives: [{ type: 'kill', targetMobId: 'grubjaw', count: 1, label: 'Grubjaw the Gluttonous slain' }],
+    xpReward: 1080, copperReward: 420, itemRewards: {},
+    requiresQuest: 'q_derby_upstream_poachers', minLevel: 12, suggestedPlayers: 2,
+  },
+  q_derby_mirejaw: {
+    id: 'q_derby_mirejaw', name: "The Derby's Grand Prize: Mirejaw",
+    giverNpcId: 'anglermaster_pell', turnInNpcId: 'anglermaster_pell',
+    text: "It's time, $N. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help — he is the lake's own fury made flesh.",
+    completionText: "Mirejaw the Ravenous — on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, $N, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+    objectives: [
+      { type: 'kill', targetMobId: 'mirejaw_the_ravenous', count: 1, label: 'Mirejaw the Ravenous landed' },
+      { type: 'kill', targetMobId: 'deepfen_murloc', count: 5, label: 'Deepfen Murloc guard driven off' },
+    ],
+    xpReward: 1400, copperReward: 560, itemRewards: {},
+    requiresQuest: 'q_derby_grubjaw', minLevel: 12, suggestedPlayers: 2,
+  },
 };
 
 export const ZONE2_QUEST_ORDER = [
@@ -587,6 +696,10 @@ export const ZONE2_QUEST_ORDER = [
   'q_drowned', 'q_drowned_censers', 'q_no_rest', 'q_trolls', 'q_troll_fetishes',
   'q_grubjaw', 'q_cult_camp', 'q_summoners', 'q_deacon', 'q_bastion_door',
   'q_olen', 'q_mistcaller',
+  // The Fenbridge Derby angling chain
+  'q_derby_nets', 'q_derby_reedline', 'q_derby_foul_shallows', 'q_derby_tangled_lines',
+  'q_derby_boathouse_webs', 'q_derby_brood_queen', 'q_derby_boatbreaker',
+  'q_derby_upstream_poachers', 'q_derby_grubjaw', 'q_derby_mirejaw',
 ];
 
 // ---------------------------------------------------------------------------
