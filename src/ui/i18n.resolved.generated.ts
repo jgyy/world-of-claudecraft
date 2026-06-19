@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,109 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -7856,6 +7964,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8824,109 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -12319,6 +12535,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13395,109 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -16782,6 +17106,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17966,109 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -21245,6 +21677,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22537,109 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -25708,6 +26248,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27108,109 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -30171,6 +30819,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31679,109 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -34634,6 +35390,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36250,109 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -39097,6 +39961,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40821,109 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -43560,6 +44532,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45392,109 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -48023,6 +49103,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49963,109 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -52486,6 +53674,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54534,109 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -56949,6 +58245,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59105,109 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
           }
         }
       },
@@ -61412,6 +62816,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "innkeeper_wenna": {
+        "name": "Innkeeper Wenna",
+        "title": "Keeper of the Brightwood Tap",
+        "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63679,109 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_tap_cellar_rats": {
+        "title": "Cellar Cleaning",
+        "text": "A season shuttered and the tap-cellar has become a warren, {playerName}. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone - clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+        "completion": "Listen to that - not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger cleared"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "Fowl for the Table",
+        "text": "A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, {playerName}, and I will have the spits turning by week's end.",
+        "completion": "Eight fat cranes - the smell alone will pull half the Vale to my door. Well hunted.",
+        "objectives": {
+          "0": {
+            "label": "Meadow Crane taken"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "A Boar for the Spit",
+        "text": "Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway - do the farmers a kindness and bring my larder 8 Wild Boar, {playerName}.",
+        "completion": "That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar felled"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "Wolves Off the Doorstep",
+        "text": "Word of a feast travels, and not only to honest folk - the forest wolves have grown bold enough to slink the north road after my supply carts. I'll not have guests savaged on their way to my door. Thin the pack, {playerName}: 10 Forest Wolves.",
+        "completion": "The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "Webs in the Stores",
+        "text": "No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, {playerName} - 8 Webwood Lurkers - so I can hang the larder properly.",
+        "completion": "Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "The Prized Tusker",
+        "text": "Every Harvest Feast wants a centerpiece, {playerName}, and there is none finer than Old Greyjaw - the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.",
+        "completion": "Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "The Unpaid Tab",
+        "text": "The vale bandits have a long tab at my tap and no intention of paying it - last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, {playerName}, and let the rest learn the Brightwood Tap is not an easy mark.",
+        "completion": "Word's already spread - the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit cut down"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "Venison for the Hall",
+        "text": "A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, {playerName} - clean kills, mind, I want the cuts unspoiled - and the Feast will want for no meat at all.",
+        "completion": "Eight stags, every cut clean as a butcher's. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag taken"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "Gorrak's Greed",
+        "text": "Disaster, {playerName} - Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.",
+        "completion": "Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, {playerName} - I'll not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "The Harvest Feast",
+        "text": "One last gather and the Brightwood Tap opens its doors, {playerName}. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.",
+        "completion": "Listen to that hall, {playerName} - fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar taken"
+          },
+          "1": {
+            "label": "Sunhide Bear taken"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62521,6 +64033,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62533,6 +64048,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62575,6 +64095,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62694,6 +64250,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62706,6 +64265,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62748,6 +64312,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62867,6 +64467,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62879,6 +64482,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62921,6 +64529,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63040,6 +64684,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63052,6 +64699,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63094,6 +64746,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63214,6 +64902,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63226,6 +64917,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63268,6 +64964,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63387,6 +65119,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63399,6 +65134,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63441,6 +65181,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63560,6 +65336,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63572,6 +65351,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63614,6 +65398,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63733,6 +65553,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63745,6 +65568,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63787,6 +65615,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63906,6 +65770,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63918,6 +65785,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63960,6 +65832,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64079,6 +65987,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64091,6 +66002,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64133,6 +66049,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64252,6 +66204,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64264,6 +66219,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64306,6 +66266,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64425,6 +66421,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.innkeeper_wenna.greeting",
+    "entities.npcs.innkeeper_wenna.name",
+    "entities.npcs.innkeeper_wenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64437,6 +66436,11 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_harvest_feast.completion",
+    "entities.quests.q_harvest_feast.objectives.0.label",
+    "entities.quests.q_harvest_feast.objectives.1.label",
+    "entities.quests.q_harvest_feast.text",
+    "entities.quests.q_harvest_feast.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64479,6 +66483,42 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_tap_cellar_rats.completion",
+    "entities.quests.q_tap_cellar_rats.objectives.0.label",
+    "entities.quests.q_tap_cellar_rats.text",
+    "entities.quests.q_tap_cellar_rats.title",
+    "entities.quests.q_tap_cellar_spiders.completion",
+    "entities.quests.q_tap_cellar_spiders.objectives.0.label",
+    "entities.quests.q_tap_cellar_spiders.text",
+    "entities.quests.q_tap_cellar_spiders.title",
+    "entities.quests.q_tap_gorrak_raid.completion",
+    "entities.quests.q_tap_gorrak_raid.objectives.0.label",
+    "entities.quests.q_tap_gorrak_raid.text",
+    "entities.quests.q_tap_gorrak_raid.title",
+    "entities.quests.q_tap_house_wolves.completion",
+    "entities.quests.q_tap_house_wolves.objectives.0.label",
+    "entities.quests.q_tap_house_wolves.text",
+    "entities.quests.q_tap_house_wolves.title",
+    "entities.quests.q_tap_prized_greyjaw.completion",
+    "entities.quests.q_tap_prized_greyjaw.objectives.0.label",
+    "entities.quests.q_tap_prized_greyjaw.text",
+    "entities.quests.q_tap_prized_greyjaw.title",
+    "entities.quests.q_tap_spit_boar.completion",
+    "entities.quests.q_tap_spit_boar.objectives.0.label",
+    "entities.quests.q_tap_spit_boar.text",
+    "entities.quests.q_tap_spit_boar.title",
+    "entities.quests.q_tap_table_fowl.completion",
+    "entities.quests.q_tap_table_fowl.objectives.0.label",
+    "entities.quests.q_tap_table_fowl.text",
+    "entities.quests.q_tap_table_fowl.title",
+    "entities.quests.q_tap_unpaid_tab.completion",
+    "entities.quests.q_tap_unpaid_tab.objectives.0.label",
+    "entities.quests.q_tap_unpaid_tab.text",
+    "entities.quests.q_tap_unpaid_tab.title",
+    "entities.quests.q_tap_venison.completion",
+    "entities.quests.q_tap_venison.objectives.0.label",
+    "entities.quests.q_tap_venison.text",
+    "entities.quests.q_tap_venison.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -67972,6 +70012,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "innkeeper_wenna": {
+        "name": "[Íññķééþéŕ Ŵéññá]",
+        "title": "[Ķééþéŕ óƒ ţĥé Ɓŕíĝĥţŵóóð Ţáþ]",
+        "greeting": "[Ţĥé Ɓŕíĝĥţŵóóð Ţáþ'š ƀééñ šĥúţţéŕéð á šéášóñ, {playerName}, ƀúţ Í ɱéáñ ţó ţĥŕóŵ á Ĥáŕʋéšţ Ƒéášţ ţĥáţ Éášţƀŕóóķ ŵíļļ ţáļķ áƀóúţ ƒóŕ ýéáŕš. Ļéñð ɱé á šţŕóñĝ áŕɱ áñð ţĥéŕé'š çóíñ - áñð á ŵáŕɱ ĥéáŕţĥ - íñ íţ ƒóŕ ýóú.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70872,109 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_tap_cellar_rats": {
+        "title": "[Çéļļáŕ Çļéáñíñĝ]",
+        "text": "[Á šéášóñ šĥúţţéŕéð áñð ţĥé ţáþ-çéļļáŕ ĥáš ƀéçóɱé á ŵáŕŕéñ, {playerName}. Ţúññéļ ŕáţš ĥáʋé çĥéŵéð ţĥŕóúĝĥ ĥáļƒ ɱý áļé-ƀáŕŕéļš áñð ñéšţ íñ ţĥé óļð ɱíñé-çúţ ƀéñéáţĥ ţĥé ƒļóóŕ. Í çáññóţ šéŕʋé á šóúļ úñţíļ ţĥéý áŕé ĝóñé - çļéáŕ óúţ 10 Ţúññéļ Ŕáţ Ðíĝĝéŕš áñð Í çáñ ŕóļļ ƒŕéšĥ çášķš íñ.]",
+        "completion": "[Ļíšţéñ ţó ţĥáţ - ñóţ á šɋúéáķ. Ţĥé çéļļáŕ íš ɱíñé áĝáíñ. Ĥáʋé á šéáţ ƀý ţĥé ĥéáŕţĥ ŵĥíļé Í ðŕáŵ ýóú šóɱéţĥíñĝ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţúññéļ Ŕáţ Ðíĝĝéŕ çļéáŕéð]"
+          }
+        }
+      },
+      "q_tap_table_fowl": {
+        "title": "[Ƒóŵļ ƒóŕ ţĥé Ţáƀļé]",
+        "text": "[Á ƒéášţ ñééðš á ŕóášţ, áñð ñóţĥíñĝ ŕóášţš šŵééţéŕ ţĥáñ ţĥé ļóñĝ-ļéĝĝéð çŕáñéš ţĥáţ ŵáðé ţĥé ĝļáðé ɱéáðóŵš. Ɓŕíñĝ ɱé 8 Ɱéáðóŵ Çŕáñéš, {playerName}, áñð Í ŵíļļ ĥáʋé ţĥé šþíţš ţúŕñíñĝ ƀý ŵééķ'š éñð.]",
+        "completion": "[Éíĝĥţ ƒáţ çŕáñéš - ţĥé šɱéļļ áļóñé ŵíļļ þúļļ ĥáļƒ ţĥé Ʋáļé ţó ɱý ðóóŕ. Ŵéļļ ĥúñţéð.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱéáðóŵ Çŕáñé ţáķéñ]"
+          }
+        }
+      },
+      "q_tap_spit_boar": {
+        "title": "[Á Ɓóáŕ ƒóŕ ţĥé Šþíţ]",
+        "text": "[Çŕáñéš ƒóŕ ţĥé ĝéñţŕý, ƀúţ ţĥé ƒáŕɱĥáñðš ŵáñţ þóŕķ, áñð þļéñţý óƒ íţ. Ţĥé ŵíļð ƀóáŕš ŕóóţ ţĥé ƒíéļðš éášţ óƒ ţóŵñ ĝóñé ţó ŕúíñ áñýŵáý - ðó ţĥé ƒáŕɱéŕš á ķíñðñéšš áñð ƀŕíñĝ ɱý ļáŕðéŕ 8 Ŵíļð Ɓóáŕ, {playerName}.]",
+        "completion": "[Ţĥáţ íš þóŕķ éñóúĝĥ ţó ƒééð á ƀáŕñ-ŕáíšíñĝ. Ţĥé ƒáŕɱéŕš ŵíļļ ţĥáñķ ýóú ñéáŕ áš ļóúð áš Í ðó.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵíļð Ɓóáŕ ƒéļļéð]"
+          }
+        }
+      },
+      "q_tap_house_wolves": {
+        "title": "[Ŵóļʋéš Óƒƒ ţĥé Ðóóŕšţéþ]",
+        "text": "[Ŵóŕð óƒ á ƒéášţ ţŕáʋéļš, áñð ñóţ óñļý ţó ĥóñéšţ ƒóļķ - ţĥé ƒóŕéšţ ŵóļʋéš ĥáʋé ĝŕóŵñ ƀóļð éñóúĝĥ ţó šļíñķ ţĥé ñóŕţĥ ŕóáð áƒţéŕ ɱý šúþþļý çáŕţš. Í'ļļ ñóţ ĥáʋé ĝúéšţš šáʋáĝéð óñ ţĥéíŕ ŵáý ţó ɱý ðóóŕ. Ţĥíñ ţĥé þáçķ, {playerName}: 10 Ƒóŕéšţ Ŵóļʋéš.]",
+        "completion": "[Ţĥé ŕóáð ƒééļš šáƒé éñóúĝĥ ƒóŕ á çáŕţéŕ ţó ŵĥíšţļé óñ ñóŵ. Ɱý ðŕóʋéŕš çáñ ŕóļļ íñ ŵíţĥóúţ áñ éšçóŕţ. Ĝóóð.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ šļáíñ]"
+          }
+        }
+      },
+      "q_tap_cellar_spiders": {
+        "title": "[Ŵéƀš íñ ţĥé Šţóŕéš]",
+        "text": "[Ñó šóóñéŕ ðó Í šţóçķ ţĥé ƀáçķ šţóŕéš ţĥáñ ŵéƀŵóóð ļúŕķéŕš šþíñ ţĥéɱ šĥúţ ƒŕóɱ ţĥé éášţéŕñ ŵóóðš. Ɱý ɱáíðš ŵíļļ ñóţ šéţ ƒóóţ íñ ţĥéŕé, áñð Í çáññóţ ƀļáɱé ţĥéɱ. Ɓúŕñ ţĥéɱ óúţ ƒóŕ ɱé, {playerName} - 8 Ŵéƀŵóóð Ļúŕķéŕš - šó Í çáñ ĥáñĝ ţĥé ļáŕðéŕ þŕóþéŕļý.]",
+        "completion": "[Éʋéŕý ŵéƀ šŵéþţ áñð ţĥé šţóŕéš ðŕý áñð çļéáñ. Í çáñ ƒíñáļļý ĥáñĝ ţĥé šɱóķéð ɱéáţ ŵĥéŕé íţ ƀéļóñĝš. Ɱý ţĥáñķš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵéƀŵóóð Ļúŕķéŕ ƀúŕñéð óúţ]"
+          }
+        }
+      },
+      "q_tap_prized_greyjaw": {
+        "title": "[Ţĥé Þŕížéð Ţúšķéŕ]",
+        "text": "[Éʋéŕý Ĥáŕʋéšţ Ƒéášţ ŵáñţš á çéñţéŕþíéçé, {playerName}, áñð ţĥéŕé íš ñóñé ƒíñéŕ ţĥáñ Óļð Ĝŕéýĵáŵ - ţĥé ĝŕéý-ţúšķéð ţéŕŕóŕ ţĥáţ ĥáš óúţŕúñ éʋéŕý ĥúñţéŕ íñ ţĥé Ʋáļé ƒóŕ á ðéçáðé. Ɓŕíñĝ ɱé ţĥáţ ƀéášţ áñð íţ ŵíļļ ţúŕñ óñ ɱý ĝŕáñðéšţ šþíţ. Ţáķé á ƒŕíéñð; ĥé ĥáš éáŕñéð ĥíš ñáɱé.]",
+        "completion": "[Óļð Ĝŕéýĵáŵ ĥíɱšéļƒ, óñ ɱý ţáƀļé! Ţĥéŕé íš ñóţ á ţáʋéŕñ ƒŕóɱ ĥéŕé ţó ţĥé çáþíţáļ ţĥáţ ŵíļļ ƀóášţ á çéñţéŕþíéçé ţó ɱáţçĥ íţ. Ýóú ĥáʋé ɱáðé ţĥíš ƒéášţ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Óļð Ĝŕéýĵáŵ šļáíñ]"
+          }
+        }
+      },
+      "q_tap_unpaid_tab": {
+        "title": "[Ţĥé Úñþáíð Ţáƀ]",
+        "text": "[Ţĥé ʋáļé ƀáñðíţš ĥáʋé á ļóñĝ ţáƀ áţ ɱý ţáþ áñð ñó íñţéñţíóñ óƒ þáýíñĝ íţ - ļášţ ñíĝĥţ ţĥéý ŵáýļáíð ţĥé çáŕţ çáŕŕýíñĝ ɱý ƒéášţ-ðáý çášķš. Í ŵáñţ ɱý áļé ƀáçķ áñð á ɱéššáĝé šéñţ. Çúţ ðóŵñ 10 Ʋáļé Ɓáñðíţš, {playerName}, áñð ļéţ ţĥé ŕéšţ ļéáŕñ ţĥé Ɓŕíĝĥţŵóóð Ţáþ íš ñóţ áñ éášý ɱáŕķ.]",
+        "completion": "[Ŵóŕð'š áļŕéáðý šþŕéáð - ţĥé ƀáñðíţš ĝíʋé ɱý çáŕţš á ŵíðé ƀéŕţĥ ñóŵ. Çóñšíðéŕ ţĥéíŕ ţáƀ þáíð íñ ƒúļļ, íñ ţĥé óñļý çóíñ ţĥéý úñðéŕšţáñð.]",
+        "objectives": {
+          "0": {
+            "label": "[Ʋáļé Ɓáñðíţ çúţ ðóŵñ]"
+          }
+        }
+      },
+      "q_tap_venison": {
+        "title": "[Ʋéñíšóñ ƒóŕ ţĥé Ĥáļļ]",
+        "text": "[Á ĝŕáñð ĥáļļ ŵáñţš ĝŕáñð ʋéñíšóñ, áñð ţĥé ƀŕíĝĥţŵóóð šţáĝš óƒ ţĥé ĝļáðé áŕé ţĥé þŕóúðéšţ ðééŕ íñ ţĥé ŕéáļɱ. Ţáķé 8 óƒ ţĥéɱ, {playerName} - çļéáñ ķíļļš, ɱíñð, Í ŵáñţ ţĥé çúţš úñšþóíļéð - áñð ţĥé Ƒéášţ ŵíļļ ŵáñţ ƒóŕ ñó ɱéáţ áţ áļļ.]",
+        "completion": "[Éíĝĥţ šţáĝš, éʋéŕý çúţ çļéáñ áš á ƀúţçĥéŕ'š. Ţĥé ĥáļļ ŵíļļ šɱéļļ óƒ ŕóášţ ʋéñíšóñ ƒóŕ á ŵééķ. Ýóú ĥúñţ ļíķé á þóáçĥéŕ áñð Í ɱéáñ ţĥáţ ķíñðļý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓŕíĝĥţŵóóð Šţáĝ ţáķéñ]"
+          }
+        }
+      },
+      "q_tap_gorrak_raid": {
+        "title": "[Ĝóŕŕáķ'š Ĝŕééð]",
+        "text": "[Ðíšášţéŕ, {playerName} - Ĝóŕŕáķ ţĥé Ŕúţĥļéšš áñð ĥíš ƀŕúţéš ĥáʋé šñíƒƒéð óúţ ɱý ƒéášţ-šţóŕéš áñð ɱéáñ ţó þļúñðéŕ ţĥé ļóţ ƀéƒóŕé ţĥé ƒíŕšţ ĝúéšţ áŕŕíʋéš. Ĥé çáɱþš íñ ţĥé šóúţĥéášţ ŵíţĥ ĥíš íļļ-ĝóţţéñ ĥáúļ. Éñð ĥíɱ áñð ţáķé ƀáçķ ŵĥáţ íš ɱíñé, óŕ ţĥéŕé ŵíļļ ƀé ñó Ƒéášţ áţ áļļ. Ĥé íš ñó çóɱɱóñ çúţţĥŕóáţ; ðó ñóţ ƒáçé ĥíɱ áļóñé.]",
+        "completion": "[Ĝóŕŕáķ, ðéáð, áñð ɱý šţóŕéš ĥáúļéð ƀáçķ ţó ţĥé çéļļáŕ ŵĥéŕé ţĥéý ƀéļóñĝ. Ýóú šáʋéð ţĥé Ƒéášţ óúţŕíĝĥţ, {playerName} - Í'ļļ ñóţ ƒóŕĝéţ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝóŕŕáķ ţĥé Ŕúţĥļéšš šļáíñ]"
+          }
+        }
+      },
+      "q_harvest_feast": {
+        "title": "[Ţĥé Ĥáŕʋéšţ Ƒéášţ]",
+        "text": "[Óñé ļášţ ĝáţĥéŕ áñð ţĥé Ɓŕíĝĥţŵóóð Ţáþ óþéñš íţš ðóóŕš, {playerName}. Ţĥé ĝŕáñð ƀóáŕð šţíļļ ŵáñţš íţš ƒíñéšţ ƒáŕé: 5 Ĝŕóʋéţúšķ Ɓóáŕ ƒóŕ ţĥé çŕáçķļíñĝ, áñð 5 Šúñĥíðé Ɓéáŕ šó Í çáñ ļáý óñ ƀéáŕ-šţéŵ ţĥé óļð ŵáý. Ɓŕíñĝ ţĥéɱ íñ áñð ţĥé Ĥáŕʋéšţ Ƒéášţ íš ýóúŕš ţó óþéñ ƀéšíðé ɱé.]",
+        "completion": "[Ļíšţéñ ţó ţĥáţ ĥáļļ, {playerName} - ƒíððļéš, ƒúļļ çúþš, áñð ñóţ áñ éɱþţý þļáţé íñ ţĥé ĥóúšé. Ţĥé Ɓŕíĝĥţŵóóð Ţáþ šţáñðš óþéñ ƀéçáúšé ýóú ɱáðé íţ šţáñð, áñð ýóúŕ šéáţ áţ ţĥé ĥéáð óƒ ţĥé ƀóáŕð íš ķéþţ ŵáŕɱ ƒóŕ áš ļóñĝ áš ýóú çáŕé ţó çļáíɱ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕóʋéţúšķ Ɓóáŕ ţáķéñ]"
+          },
+          "1": {
+            "label": "[Šúñĥíðé Ɓéáŕ ţáķéñ]"
           }
         }
       },
