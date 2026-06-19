@@ -536,6 +536,18 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     questIds: ['q_brightwood_thinning', 'q_brightwood_monarch'],
     greeting: 'Quiet, $C — the glade is calm today, and I mean to keep it that way.',
   },
+  timberwright_audra: {
+    id: 'timberwright_audra', name: 'Timberwright Audra', title: 'Mistress of the Brightwood Sawmill',
+    // posted at the sawmill on the northeast verge of Brightwood Glade, clear of
+    // the wildlife camps and downwind of Ranger Elwyn's watch-post
+    pos: { x: 50, z: 145 }, facing: -2.4, color: 0x8b5a2b,
+    questIds: [
+      'q_timber_logyard', 'q_timber_skidroad', 'q_timber_undermined', 'q_timber_pitchstores',
+      'q_timber_webbedcut', 'q_timber_woodpilequeen', 'q_timber_haulroad', 'q_timber_oxkiller',
+      'q_timber_flumebreaker', 'q_timber_thief',
+    ],
+    greeting: 'Eastbrook rebuilds on Brightwood beams, $N — and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing.',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -867,6 +879,112 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     minLevel: 6,
     suggestedPlayers: 2,
   },
+
+  // -------------------------------------------------------------------------
+  // The Brightwood Sawmill — Timberwright Audra's logging chain. Eastbrook
+  // rebuilds on Brightwood timber, and the woods fight every felled tree:
+  // beasts wreck the yard, predators stalk the haul roads, and a log-thieving
+  // ogre lurks at the end of it. Every objective is a kill on a mob that
+  // already roams the Vale, so the chain adds pacing and reward without
+  // touching spawns or determinism — and with no new items to localize.
+  // -------------------------------------------------------------------------
+  q_timber_logyard: {
+    id: 'q_timber_logyard', name: 'Clearing the Log-Yard',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "Welcome to the only sawmill north of Eastbrook, $N. We take edge-timber and deadfall — the warden would have my head if we touched the deep glade — but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+    completionText: "Stacks standing, wood sound. You've a logger's arm on you, $N — the saws will be glad of it.",
+    objectives: [{ type: 'kill', targetMobId: 'grovetusk_boar', count: 12, label: 'Grovetusk Boar driven off' }],
+    xpReward: 320, copperReward: 95, itemRewards: {},
+    minLevel: 3,
+  },
+  q_timber_skidroad: {
+    id: 'q_timber_skidroad', name: 'Cats on the Skid Road',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, $N — two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+    completionText: "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+    objectives: [{ type: 'kill', targetMobId: 'bramble_lynx', count: 10, label: 'Bramble Lynx culled' }],
+    xpReward: 340, copperReward: 100, itemRewards: {},
+    minLevel: 3,
+  },
+  q_timber_undermined: {
+    id: 'q_timber_undermined', name: 'Undermined',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "A timber-yard wants firm, level ground or the stacks topple — and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+    completionText: "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, $N.",
+    objectives: [{ type: 'kill', targetMobId: 'thornpelt_badger', count: 8, label: 'Thornpelt Badger cleared' }],
+    xpReward: 380, copperReward: 120, itemRewards: {},
+    requiresQuest: 'q_timber_logyard',
+  },
+  q_timber_pitchstores: {
+    id: 'q_timber_pitchstores', name: 'Pitch and Tallow',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "We seal green beams with pitch and grease the saw-frames with tallow — both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+    completionText: "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, $N — and now I've the pitch to seal them.",
+    objectives: [{ type: 'kill', targetMobId: 'sunhide_bear', count: 8, label: 'Sunhide Bear slain' }],
+    xpReward: 420, copperReward: 135, itemRewards: {},
+    requiresQuest: 'q_timber_skidroad',
+    minLevel: 4,
+  },
+  q_timber_webbedcut: {
+    id: 'q_timber_webbedcut', name: 'The Webbed Cut',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "My richest stand is the old western cut, where the tall timber grows — but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+    completionText: "The cut is open and the silk is ash. There's a season of fine timber standing in there, $N, and now my fellers will actually fell it.",
+    objectives: [{ type: 'kill', targetMobId: 'webwood_spider', count: 12, label: 'Webwood Lurker burned out' }],
+    xpReward: 440, copperReward: 145, itemRewards: {},
+    minLevel: 4,
+  },
+  q_timber_woodpilequeen: {
+    id: 'q_timber_woodpilequeen', name: 'Queen of the Woodpile',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch — a spider grown big as a cart — has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, $N, and bring a friend; she is more than a match for one.",
+    completionText: "By the saw, you actually dragged that thing down. The seasoning stacks are mine again — and the brood scattered with her dead. Well fought.",
+    objectives: [{ type: 'kill', targetMobId: 'sableweb_matriarch', count: 1, label: 'Sableweb Matriarch slain' }],
+    xpReward: 620, copperReward: 280, itemRewards: {},
+    requiresQuest: 'q_timber_webbedcut',
+    minLevel: 5,
+    suggestedPlayers: 2,
+  },
+  q_timber_haulroad: {
+    id: 'q_timber_haulroad', name: 'Wolves on the Haul Road',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "The milled beams go south to Eastbrook by ox-team down the north haul road — and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+    completionText: "The road's quiet and the oxen steady. That's timber to Eastbrook on time, $N — the masons there will never know your name, but I will.",
+    objectives: [{ type: 'kill', targetMobId: 'forest_wolf', count: 12, label: 'Forest Wolf thinned' }],
+    xpReward: 460, copperReward: 150, itemRewards: {},
+    requiresQuest: 'q_timber_undermined',
+  },
+  q_timber_oxkiller: {
+    id: 'q_timber_oxkiller', name: 'The Ox-Killer',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright — pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, $N. Hunt the old devil down in the deep north woods and put an end to him.",
+    completionText: "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it — and my thanks, which is worth more out here than the coin.",
+    objectives: [{ type: 'kill', targetMobId: 'old_greyjaw', count: 1, label: 'Old Greyjaw slain' }],
+    xpReward: 600, copperReward: 270, itemRewards: {},
+    requiresQuest: 'q_timber_haulroad',
+    minLevel: 5,
+  },
+  q_timber_flumebreaker: {
+    id: 'q_timber_flumebreaker', name: 'The Flume-Breaker',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "We float the heavy logs down a timber flume — a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+    completionText: "Those tusks could split a beam end to end — no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, $N.",
+    objectives: [{ type: 'kill', targetMobId: 'elder_bristleback', count: 1, label: 'Elder Bristleback slain' }],
+    xpReward: 640, copperReward: 290, itemRewards: {},
+    requiresQuest: 'q_timber_pitchstores',
+    minLevel: 5,
+  },
+  q_timber_thief: {
+    id: 'q_timber_thief', name: 'The Timber-Thief',
+    giverNpcId: 'timberwright_audra', turnInNpcId: 'timberwright_audra',
+    text: "There's one thief I've saved for last, $N, because no one crew could face him. Mogger — a hill-ogre — has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+    completionText: "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, $N. The saws will sing your name.",
+    objectives: [{ type: 'kill', targetMobId: 'mogger', count: 1, label: 'Mogger the Timber-Thief slain' }],
+    xpReward: 820, copperReward: 380, itemRewards: {},
+    requiresQuest: 'q_timber_flumebreaker',
+    minLevel: 6,
+    suggestedPlayers: 3,
+  },
 };
 
 export const ZONE1_QUEST_ORDER = [
@@ -880,6 +998,10 @@ export const ZONE1_QUEST_ORDER = [
   'q_ledger_first_duty', 'q_ledger_teeth', 'q_ledger_reedwater', 'q_ledger_silk',
   'q_ledger_brood', 'q_ledger_deepvermin', 'q_ledger_toll', 'q_ledger_vigil',
   'q_ledger_great_boar', 'q_ledger_outlaw_captain',
+  // The Brightwood Sawmill logging chain
+  'q_timber_logyard', 'q_timber_skidroad', 'q_timber_undermined', 'q_timber_pitchstores',
+  'q_timber_webbedcut', 'q_timber_woodpilequeen', 'q_timber_haulroad', 'q_timber_oxkiller',
+  'q_timber_flumebreaker', 'q_timber_thief',
 ];
 
 // ---------------------------------------------------------------------------

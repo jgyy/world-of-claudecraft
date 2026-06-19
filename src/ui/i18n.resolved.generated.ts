@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -7856,6 +7961,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8821,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -12319,6 +12529,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13389,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -16782,6 +17097,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17957,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -21245,6 +21665,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22525,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -25708,6 +26233,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27093,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -30171,6 +30801,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31661,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -34634,6 +35369,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36229,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -39097,6 +39937,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40797,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -43560,6 +44505,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45365,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -48023,6 +49073,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49933,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -52486,6 +53641,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54501,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -56949,6 +58209,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59069,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
           }
         }
       },
@@ -61412,6 +62777,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "timberwright_audra": {
+        "name": "Timberwright Audra",
+        "title": "Mistress of the Brightwood Sawmill",
+        "greeting": "Eastbrook rebuilds on Brightwood beams, {playerName} - and every beam I cut, the wood tries to take back. Mind the yard for me and the saws keep singing."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63640,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_timber_logyard": {
+        "title": "Clearing the Log-Yard",
+        "text": "Welcome to the only sawmill north of Eastbrook, {playerName}. We take edge-timber and deadfall - the warden would have my head if we touched the deep glade - but the grovetusk boars don't know the difference. They root through my felled-log stacks every night, scattering a day's haul and cracking the green wood. Drive off 12 of the brutes before they ruin the yard.",
+        "completion": "Stacks standing, wood sound. You've a logger's arm on you, {playerName} - the saws will be glad of it.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "Cats on the Skid Road",
+        "text": "The skid road is how we drag the logs down to the mill, and a logger hauling timber can't watch the brush. The bramble lynx have learned that, {playerName} - two of my haulers came back clawed this week, and one didn't come back at all. Cull 10 of the cats along the road so my people can work without one foot on a knife.",
+        "completion": "Ten fewer eyes in the brush. The haulers can keep their minds on the logs now, not their throats. Good work.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx culled"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "Undermined",
+        "text": "A timber-yard wants firm, level ground or the stacks topple - and the thornpelt badgers have honeycombed mine with their setts. A whole rack of beams came down into a sinkhole yesterday, and it's a wonder no one was under it. Clear out 8 of the badgers so I can fill their tunnels and re-lay the yard.",
+        "completion": "Solid ground again. Fill the setts, re-stack the racks, and we're back in business. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger cleared"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "Pitch and Tallow",
+        "text": "We seal green beams with pitch and grease the saw-frames with tallow - both of which a sunhide bear will tear a shed apart to get at. I've lost three barrels and a storehouse door to them already, and a mill that can't pitch its beams sells nothing. Put down 8 of the bears raiding my stores up the slope.",
+        "completion": "The stores are whole and the sheds shut tight. A sealed beam lasts a generation, {playerName} - and now I've the pitch to seal them.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear slain"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "The Webbed Cut",
+        "text": "My richest stand is the old western cut, where the tall timber grows - but the webwood spiders have claimed it for themselves. My fellers won't put an axe to a trunk that's curtained in grey silk, and I don't blame them. Burn 12 of the lurkers out of the western cut so the saws can reach the good wood.",
+        "completion": "The cut is open and the silk is ash. There's a season of fine timber standing in there, {playerName}, and now my fellers will actually fell it.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker burned out"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "Queen of the Woodpile",
+        "text": "Clearing the lurkers only stirred the worst of them. The Sableweb Matriarch - a spider grown big as a cart - has moved her brood into the seasoning stacks at the cut's edge, and now no one will go near them. As long as she nests there, the western cut is hers, not mine. End her, {playerName}, and bring a friend; she is more than a match for one.",
+        "completion": "By the saw, you actually dragged that thing down. The seasoning stacks are mine again - and the brood scattered with her dead. Well fought.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "Wolves on the Haul Road",
+        "text": "The milled beams go south to Eastbrook by ox-team down the north haul road - and the forest wolves have taken to shadowing the wagons, snapping at the oxen until one bolts and spills the whole load. A spooked team is a wrecked wagon and a week's timber in the ditch. Thin 12 of the wolves along the haul road so my teamsters can drive easy.",
+        "completion": "The road's quiet and the oxen steady. That's timber to Eastbrook on time, {playerName} - the masons there will never know your name, but I will.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "The Ox-Killer",
+        "text": "One wolf is worse than the whole pack. Old Greyjaw has stopped chasing wagons and started taking my draft oxen outright - pulled down the best beast in my string two nights ago and left me a team short. A sawmill without oxen is a woodpile, {playerName}. Hunt the old devil down in the deep north woods and put an end to him.",
+        "completion": "So someone finally caught the grey ghost. My string is safe to rebuild now. Take this for it - and my thanks, which is worth more out here than the coin.",
+        "objectives": {
+          "0": {
+            "label": "Old Greyjaw slain"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "The Flume-Breaker",
+        "text": "We float the heavy logs down a timber flume - a clay-and-plank trough that took my crews a whole spring to build. Something walked clean through it in the night and left the lower run smashed flat, and the tracks are tusked and a hand-span deep. That's Elder Bristleback, the great boar the wardens curse by name. Put him down before he breaks the rest of my flume.",
+        "completion": "Those tusks could split a beam end to end - no wonder the flume never stood a chance. We can rebuild now and know it'll stay built. Fine work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "The Timber-Thief",
+        "text": "There's one thief I've saved for last, {playerName}, because no one crew could face him. Mogger - a hill-ogre - has taken to hauling off my finished beams whole, dragging them east to wall up some crude lodge of his own. He's carried away a wagon's worth of cut timber and the porter who tried to stop him. End the brute and the sawmill is truly secure. Take companions; he'll fold a lone hand in half.",
+        "completion": "Dead, and my beams hauled back from that wretched lodge of his. The mill is safe, the wood flows to Eastbrook, and the whole Vale rebuilds on timber you kept turning. That's a thing to be proud of, {playerName}. The saws will sing your name.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Timber-Thief slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62524,6 +63994,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62575,6 +64048,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62697,6 +64210,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62748,6 +64264,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62870,6 +64426,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62921,6 +64480,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63043,6 +64642,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63094,6 +64696,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63217,6 +64859,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63268,6 +64913,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63390,6 +65075,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63441,6 +65129,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63563,6 +65291,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63614,6 +65345,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63736,6 +65507,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63787,6 +65561,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63909,6 +65723,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63960,6 +65777,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64082,6 +65939,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64133,6 +65993,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64255,6 +66155,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64306,6 +66209,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64428,6 +66371,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.timberwright_audra.greeting",
+    "entities.npcs.timberwright_audra.name",
+    "entities.npcs.timberwright_audra.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64479,6 +66425,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_timber_flumebreaker.completion",
+    "entities.quests.q_timber_flumebreaker.objectives.0.label",
+    "entities.quests.q_timber_flumebreaker.text",
+    "entities.quests.q_timber_flumebreaker.title",
+    "entities.quests.q_timber_haulroad.completion",
+    "entities.quests.q_timber_haulroad.objectives.0.label",
+    "entities.quests.q_timber_haulroad.text",
+    "entities.quests.q_timber_haulroad.title",
+    "entities.quests.q_timber_logyard.completion",
+    "entities.quests.q_timber_logyard.objectives.0.label",
+    "entities.quests.q_timber_logyard.text",
+    "entities.quests.q_timber_logyard.title",
+    "entities.quests.q_timber_oxkiller.completion",
+    "entities.quests.q_timber_oxkiller.objectives.0.label",
+    "entities.quests.q_timber_oxkiller.text",
+    "entities.quests.q_timber_oxkiller.title",
+    "entities.quests.q_timber_pitchstores.completion",
+    "entities.quests.q_timber_pitchstores.objectives.0.label",
+    "entities.quests.q_timber_pitchstores.text",
+    "entities.quests.q_timber_pitchstores.title",
+    "entities.quests.q_timber_skidroad.completion",
+    "entities.quests.q_timber_skidroad.objectives.0.label",
+    "entities.quests.q_timber_skidroad.text",
+    "entities.quests.q_timber_skidroad.title",
+    "entities.quests.q_timber_thief.completion",
+    "entities.quests.q_timber_thief.objectives.0.label",
+    "entities.quests.q_timber_thief.text",
+    "entities.quests.q_timber_thief.title",
+    "entities.quests.q_timber_undermined.completion",
+    "entities.quests.q_timber_undermined.objectives.0.label",
+    "entities.quests.q_timber_undermined.text",
+    "entities.quests.q_timber_undermined.title",
+    "entities.quests.q_timber_webbedcut.completion",
+    "entities.quests.q_timber_webbedcut.objectives.0.label",
+    "entities.quests.q_timber_webbedcut.text",
+    "entities.quests.q_timber_webbedcut.title",
+    "entities.quests.q_timber_woodpilequeen.completion",
+    "entities.quests.q_timber_woodpilequeen.objectives.0.label",
+    "entities.quests.q_timber_woodpilequeen.text",
+    "entities.quests.q_timber_woodpilequeen.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -67972,6 +69958,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "timberwright_audra": {
+        "name": "[Ţíɱƀéŕŵŕíĝĥţ Áúðŕá]",
+        "title": "[Ɱíšţŕéšš óƒ ţĥé Ɓŕíĝĥţŵóóð Šáŵɱíļļ]",
+        "greeting": "[Éášţƀŕóóķ ŕéƀúíļðš óñ Ɓŕíĝĥţŵóóð ƀéáɱš, {playerName} - áñð éʋéŕý ƀéáɱ Í çúţ, ţĥé ŵóóð ţŕíéš ţó ţáķé ƀáçķ. Ɱíñð ţĥé ýáŕð ƒóŕ ɱé áñð ţĥé šáŵš ķééþ šíñĝíñĝ.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70818,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_timber_logyard": {
+        "title": "[Çļéáŕíñĝ ţĥé Ļóĝ-Ýáŕð]",
+        "text": "[Ŵéļçóɱé ţó ţĥé óñļý šáŵɱíļļ ñóŕţĥ óƒ Éášţƀŕóóķ, {playerName}. Ŵé ţáķé éðĝé-ţíɱƀéŕ áñð ðéáðƒáļļ - ţĥé ŵáŕðéñ ŵóúļð ĥáʋé ɱý ĥéáð íƒ ŵé ţóúçĥéð ţĥé ðééþ ĝļáðé - ƀúţ ţĥé ĝŕóʋéţúšķ ƀóáŕš ðóñ'ţ ķñóŵ ţĥé ðíƒƒéŕéñçé. Ţĥéý ŕóóţ ţĥŕóúĝĥ ɱý ƒéļļéð-ļóĝ šţáçķš éʋéŕý ñíĝĥţ, šçáţţéŕíñĝ á ðáý'š ĥáúļ áñð çŕáçķíñĝ ţĥé ĝŕééñ ŵóóð. Ðŕíʋé óƒƒ 12 óƒ ţĥé ƀŕúţéš ƀéƒóŕé ţĥéý ŕúíñ ţĥé ýáŕð.]",
+        "completion": "[Šţáçķš šţáñðíñĝ, ŵóóð šóúñð. Ýóú'ʋé á ļóĝĝéŕ'š áŕɱ óñ ýóú, {playerName} - ţĥé šáŵš ŵíļļ ƀé ĝļáð óƒ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕóʋéţúšķ Ɓóáŕ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_timber_skidroad": {
+        "title": "[Çáţš óñ ţĥé Šķíð Ŕóáð]",
+        "text": "[Ţĥé šķíð ŕóáð íš ĥóŵ ŵé ðŕáĝ ţĥé ļóĝš ðóŵñ ţó ţĥé ɱíļļ, áñð á ļóĝĝéŕ ĥáúļíñĝ ţíɱƀéŕ çáñ'ţ ŵáţçĥ ţĥé ƀŕúšĥ. Ţĥé ƀŕáɱƀļé ļýñẋ ĥáʋé ļéáŕñéð ţĥáţ, {playerName} - ţŵó óƒ ɱý ĥáúļéŕš çáɱé ƀáçķ çļáŵéð ţĥíš ŵééķ, áñð óñé ðíðñ'ţ çóɱé ƀáçķ áţ áļļ. Çúļļ 10 óƒ ţĥé çáţš áļóñĝ ţĥé ŕóáð šó ɱý þéóþļé çáñ ŵóŕķ ŵíţĥóúţ óñé ƒóóţ óñ á ķñíƒé.]",
+        "completion": "[Ţéñ ƒéŵéŕ éýéš íñ ţĥé ƀŕúšĥ. Ţĥé ĥáúļéŕš çáñ ķééþ ţĥéíŕ ɱíñðš óñ ţĥé ļóĝš ñóŵ, ñóţ ţĥéíŕ ţĥŕóáţš. Ĝóóð ŵóŕķ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓŕáɱƀļé Ļýñẋ çúļļéð]"
+          }
+        }
+      },
+      "q_timber_undermined": {
+        "title": "[Úñðéŕɱíñéð]",
+        "text": "[Á ţíɱƀéŕ-ýáŕð ŵáñţš ƒíŕɱ, ļéʋéļ ĝŕóúñð óŕ ţĥé šţáçķš ţóþþļé - áñð ţĥé ţĥóŕñþéļţ ƀáðĝéŕš ĥáʋé ĥóñéýçóɱƀéð ɱíñé ŵíţĥ ţĥéíŕ šéţţš. Á ŵĥóļé ŕáçķ óƒ ƀéáɱš çáɱé ðóŵñ íñţó á šíñķĥóļé ýéšţéŕðáý, áñð íţ'š á ŵóñðéŕ ñó óñé ŵáš úñðéŕ íţ. Çļéáŕ óúţ 8 óƒ ţĥé ƀáðĝéŕš šó Í çáñ ƒíļļ ţĥéíŕ ţúññéļš áñð ŕé-ļáý ţĥé ýáŕð.]",
+        "completion": "[Šóļíð ĝŕóúñð áĝáíñ. Ƒíļļ ţĥé šéţţš, ŕé-šţáçķ ţĥé ŕáçķš, áñð ŵé'ŕé ƀáçķ íñ ƀúšíñéšš. Ɱý ţĥáñķš, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéļţ Ɓáðĝéŕ çļéáŕéð]"
+          }
+        }
+      },
+      "q_timber_pitchstores": {
+        "title": "[Þíţçĥ áñð Ţáļļóŵ]",
+        "text": "[Ŵé šéáļ ĝŕééñ ƀéáɱš ŵíţĥ þíţçĥ áñð ĝŕéášé ţĥé šáŵ-ƒŕáɱéš ŵíţĥ ţáļļóŵ - ƀóţĥ óƒ ŵĥíçĥ á šúñĥíðé ƀéáŕ ŵíļļ ţéáŕ á šĥéð áþáŕţ ţó ĝéţ áţ. Í'ʋé ļóšţ ţĥŕéé ƀáŕŕéļš áñð á šţóŕéĥóúšé ðóóŕ ţó ţĥéɱ áļŕéáðý, áñð á ɱíļļ ţĥáţ çáñ'ţ þíţçĥ íţš ƀéáɱš šéļļš ñóţĥíñĝ. Þúţ ðóŵñ 8 óƒ ţĥé ƀéáŕš ŕáíðíñĝ ɱý šţóŕéš úþ ţĥé šļóþé.]",
+        "completion": "[Ţĥé šţóŕéš áŕé ŵĥóļé áñð ţĥé šĥéðš šĥúţ ţíĝĥţ. Á šéáļéð ƀéáɱ ļášţš á ĝéñéŕáţíóñ, {playerName} - áñð ñóŵ Í'ʋé ţĥé þíţçĥ ţó šéáļ ţĥéɱ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šúñĥíðé Ɓéáŕ šļáíñ]"
+          }
+        }
+      },
+      "q_timber_webbedcut": {
+        "title": "[Ţĥé Ŵéƀƀéð Çúţ]",
+        "text": "[Ɱý ŕíçĥéšţ šţáñð íš ţĥé óļð ŵéšţéŕñ çúţ, ŵĥéŕé ţĥé ţáļļ ţíɱƀéŕ ĝŕóŵš - ƀúţ ţĥé ŵéƀŵóóð šþíðéŕš ĥáʋé çļáíɱéð íţ ƒóŕ ţĥéɱšéļʋéš. Ɱý ƒéļļéŕš ŵóñ'ţ þúţ áñ áẋé ţó á ţŕúñķ ţĥáţ'š çúŕţáíñéð íñ ĝŕéý šíļķ, áñð Í ðóñ'ţ ƀļáɱé ţĥéɱ. Ɓúŕñ 12 óƒ ţĥé ļúŕķéŕš óúţ óƒ ţĥé ŵéšţéŕñ çúţ šó ţĥé šáŵš çáñ ŕéáçĥ ţĥé ĝóóð ŵóóð.]",
+        "completion": "[Ţĥé çúţ íš óþéñ áñð ţĥé šíļķ íš ášĥ. Ţĥéŕé'š á šéášóñ óƒ ƒíñé ţíɱƀéŕ šţáñðíñĝ íñ ţĥéŕé, {playerName}, áñð ñóŵ ɱý ƒéļļéŕš ŵíļļ áçţúáļļý ƒéļļ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵéƀŵóóð Ļúŕķéŕ ƀúŕñéð óúţ]"
+          }
+        }
+      },
+      "q_timber_woodpilequeen": {
+        "title": "[Ɋúééñ óƒ ţĥé Ŵóóðþíļé]",
+        "text": "[Çļéáŕíñĝ ţĥé ļúŕķéŕš óñļý šţíŕŕéð ţĥé ŵóŕšţ óƒ ţĥéɱ. Ţĥé Šáƀļéŵéƀ Ɱáţŕíáŕçĥ - á šþíðéŕ ĝŕóŵñ ƀíĝ áš á çáŕţ - ĥáš ɱóʋéð ĥéŕ ƀŕóóð íñţó ţĥé šéášóñíñĝ šţáçķš áţ ţĥé çúţ'š éðĝé, áñð ñóŵ ñó óñé ŵíļļ ĝó ñéáŕ ţĥéɱ. Áš ļóñĝ áš šĥé ñéšţš ţĥéŕé, ţĥé ŵéšţéŕñ çúţ íš ĥéŕš, ñóţ ɱíñé. Éñð ĥéŕ, {playerName}, áñð ƀŕíñĝ á ƒŕíéñð; šĥé íš ɱóŕé ţĥáñ á ɱáţçĥ ƒóŕ óñé.]",
+        "completion": "[Ɓý ţĥé šáŵ, ýóú áçţúáļļý ðŕáĝĝéð ţĥáţ ţĥíñĝ ðóŵñ. Ţĥé šéášóñíñĝ šţáçķš áŕé ɱíñé áĝáíñ - áñð ţĥé ƀŕóóð šçáţţéŕéð ŵíţĥ ĥéŕ ðéáð. Ŵéļļ ƒóúĝĥţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šáƀļéŵéƀ Ɱáţŕíáŕçĥ šļáíñ]"
+          }
+        }
+      },
+      "q_timber_haulroad": {
+        "title": "[Ŵóļʋéš óñ ţĥé Ĥáúļ Ŕóáð]",
+        "text": "[Ţĥé ɱíļļéð ƀéáɱš ĝó šóúţĥ ţó Éášţƀŕóóķ ƀý óẋ-ţéáɱ ðóŵñ ţĥé ñóŕţĥ ĥáúļ ŕóáð - áñð ţĥé ƒóŕéšţ ŵóļʋéš ĥáʋé ţáķéñ ţó šĥáðóŵíñĝ ţĥé ŵáĝóñš, šñáþþíñĝ áţ ţĥé óẋéñ úñţíļ óñé ƀóļţš áñð šþíļļš ţĥé ŵĥóļé ļóáð. Á šþóóķéð ţéáɱ íš á ŵŕéçķéð ŵáĝóñ áñð á ŵééķ'š ţíɱƀéŕ íñ ţĥé ðíţçĥ. Ţĥíñ 12 óƒ ţĥé ŵóļʋéš áļóñĝ ţĥé ĥáúļ ŕóáð šó ɱý ţéáɱšţéŕš çáñ ðŕíʋé éášý.]",
+        "completion": "[Ţĥé ŕóáð'š ɋúíéţ áñð ţĥé óẋéñ šţéáðý. Ţĥáţ'š ţíɱƀéŕ ţó Éášţƀŕóóķ óñ ţíɱé, {playerName} - ţĥé ɱášóñš ţĥéŕé ŵíļļ ñéʋéŕ ķñóŵ ýóúŕ ñáɱé, ƀúţ Í ŵíļļ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ ţĥíññéð]"
+          }
+        }
+      },
+      "q_timber_oxkiller": {
+        "title": "[Ţĥé Óẋ-Ķíļļéŕ]",
+        "text": "[Óñé ŵóļƒ íš ŵóŕšé ţĥáñ ţĥé ŵĥóļé þáçķ. Óļð Ĝŕéýĵáŵ ĥáš šţóþþéð çĥášíñĝ ŵáĝóñš áñð šţáŕţéð ţáķíñĝ ɱý ðŕáƒţ óẋéñ óúţŕíĝĥţ - þúļļéð ðóŵñ ţĥé ƀéšţ ƀéášţ íñ ɱý šţŕíñĝ ţŵó ñíĝĥţš áĝó áñð ļéƒţ ɱé á ţéáɱ šĥóŕţ. Á šáŵɱíļļ ŵíţĥóúţ óẋéñ íš á ŵóóðþíļé, {playerName}. Ĥúñţ ţĥé óļð ðéʋíļ ðóŵñ íñ ţĥé ðééþ ñóŕţĥ ŵóóðš áñð þúţ áñ éñð ţó ĥíɱ.]",
+        "completion": "[Šó šóɱéóñé ƒíñáļļý çáúĝĥţ ţĥé ĝŕéý ĝĥóšţ. Ɱý šţŕíñĝ íš šáƒé ţó ŕéƀúíļð ñóŵ. Ţáķé ţĥíš ƒóŕ íţ - áñð ɱý ţĥáñķš, ŵĥíçĥ íš ŵóŕţĥ ɱóŕé óúţ ĥéŕé ţĥáñ ţĥé çóíñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Óļð Ĝŕéýĵáŵ šļáíñ]"
+          }
+        }
+      },
+      "q_timber_flumebreaker": {
+        "title": "[Ţĥé Ƒļúɱé-Ɓŕéáķéŕ]",
+        "text": "[Ŵé ƒļóáţ ţĥé ĥéáʋý ļóĝš ðóŵñ á ţíɱƀéŕ ƒļúɱé - á çļáý-áñð-þļáñķ ţŕóúĝĥ ţĥáţ ţóóķ ɱý çŕéŵš á ŵĥóļé šþŕíñĝ ţó ƀúíļð. Šóɱéţĥíñĝ ŵáļķéð çļéáñ ţĥŕóúĝĥ íţ íñ ţĥé ñíĝĥţ áñð ļéƒţ ţĥé ļóŵéŕ ŕúñ šɱášĥéð ƒļáţ, áñð ţĥé ţŕáçķš áŕé ţúšķéð áñð á ĥáñð-šþáñ ðééþ. Ţĥáţ'š Éļðéŕ Ɓŕíšţļéƀáçķ, ţĥé ĝŕéáţ ƀóáŕ ţĥé ŵáŕðéñš çúŕšé ƀý ñáɱé. Þúţ ĥíɱ ðóŵñ ƀéƒóŕé ĥé ƀŕéáķš ţĥé ŕéšţ óƒ ɱý ƒļúɱé.]",
+        "completion": "[Ţĥóšé ţúšķš çóúļð šþļíţ á ƀéáɱ éñð ţó éñð - ñó ŵóñðéŕ ţĥé ƒļúɱé ñéʋéŕ šţóóð á çĥáñçé. Ŵé çáñ ŕéƀúíļð ñóŵ áñð ķñóŵ íţ'ļļ šţáý ƀúíļţ. Ƒíñé ŵóŕķ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Éļðéŕ Ɓŕíšţļéƀáçķ šļáíñ]"
+          }
+        }
+      },
+      "q_timber_thief": {
+        "title": "[Ţĥé Ţíɱƀéŕ-Ţĥíéƒ]",
+        "text": "[Ţĥéŕé'š óñé ţĥíéƒ Í'ʋé šáʋéð ƒóŕ ļášţ, {playerName}, ƀéçáúšé ñó óñé çŕéŵ çóúļð ƒáçé ĥíɱ. Ɱóĝĝéŕ - á ĥíļļ-óĝŕé - ĥáš ţáķéñ ţó ĥáúļíñĝ óƒƒ ɱý ƒíñíšĥéð ƀéáɱš ŵĥóļé, ðŕáĝĝíñĝ ţĥéɱ éášţ ţó ŵáļļ úþ šóɱé çŕúðé ļóðĝé óƒ ĥíš óŵñ. Ĥé'š çáŕŕíéð áŵáý á ŵáĝóñ'š ŵóŕţĥ óƒ çúţ ţíɱƀéŕ áñð ţĥé þóŕţéŕ ŵĥó ţŕíéð ţó šţóþ ĥíɱ. Éñð ţĥé ƀŕúţé áñð ţĥé šáŵɱíļļ íš ţŕúļý šéçúŕé. Ţáķé çóɱþáñíóñš; ĥé'ļļ ƒóļð á ļóñé ĥáñð íñ ĥáļƒ.]",
+        "completion": "[Ðéáð, áñð ɱý ƀéáɱš ĥáúļéð ƀáçķ ƒŕóɱ ţĥáţ ŵŕéţçĥéð ļóðĝé óƒ ĥíš. Ţĥé ɱíļļ íš šáƒé, ţĥé ŵóóð ƒļóŵš ţó Éášţƀŕóóķ, áñð ţĥé ŵĥóļé Ʋáļé ŕéƀúíļðš óñ ţíɱƀéŕ ýóú ķéþţ ţúŕñíñĝ. Ţĥáţ'š á ţĥíñĝ ţó ƀé þŕóúð óƒ, {playerName}. Ţĥé šáŵš ŵíļļ šíñĝ ýóúŕ ñáɱé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱóĝĝéŕ ţĥé Ţíɱƀéŕ-Ţĥíéƒ šļáíñ]"
           }
         }
       },
