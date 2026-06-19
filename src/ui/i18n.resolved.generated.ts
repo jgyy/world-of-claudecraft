@@ -3597,6 +3597,10 @@ export const en: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -4676,6 +4680,20 @@ export const en: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -4716,6 +4734,40 @@ export const en: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -4856,6 +4908,43 @@ export const en: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -8668,6 +8757,10 @@ export const es: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -9747,6 +9840,20 @@ export const es: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -9787,6 +9894,40 @@ export const es: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -9927,6 +10068,43 @@ export const es: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -13739,6 +13917,10 @@ export const es_ES: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -14818,6 +15000,20 @@ export const es_ES: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -14858,6 +15054,40 @@ export const es_ES: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -14998,6 +15228,43 @@ export const es_ES: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -18810,6 +19077,10 @@ export const fr_FR: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -19889,6 +20160,20 @@ export const fr_FR: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -19929,6 +20214,40 @@ export const fr_FR: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -20069,6 +20388,43 @@ export const fr_FR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -23881,6 +24237,10 @@ export const fr_CA: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -24960,6 +25320,20 @@ export const fr_CA: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -25000,6 +25374,40 @@ export const fr_CA: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -25140,6 +25548,43 @@ export const fr_CA: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -28952,6 +29397,10 @@ export const en_CA: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -30031,6 +30480,20 @@ export const en_CA: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -30071,6 +30534,40 @@ export const en_CA: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -30211,6 +30708,43 @@ export const en_CA: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -34023,6 +34557,10 @@ export const it_IT: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -35102,6 +35640,20 @@ export const it_IT: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -35142,6 +35694,40 @@ export const it_IT: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -35282,6 +35868,43 @@ export const it_IT: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -39094,6 +39717,10 @@ export const de_DE: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -40173,6 +40800,20 @@ export const de_DE: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -40213,6 +40854,40 @@ export const de_DE: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -40353,6 +41028,43 @@ export const de_DE: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -44165,6 +44877,10 @@ export const zh_CN: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
@@ -45244,6 +45960,20 @@ export const zh_CN: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -45284,6 +46014,40 @@ export const zh_CN: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -45424,6 +46188,43 @@ export const zh_CN: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -49236,6 +50037,10 @@ export const zh_TW: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
@@ -50315,6 +51120,20 @@ export const zh_TW: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -50355,6 +51174,40 @@ export const zh_TW: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -50495,6 +51348,43 @@ export const zh_TW: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -54307,6 +55197,10 @@ export const ko_KR: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
@@ -55386,6 +56280,20 @@ export const ko_KR: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -55426,6 +56334,40 @@ export const ko_KR: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -55566,6 +56508,43 @@ export const ko_KR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -59378,6 +60357,10 @@ export const ja_JP: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
@@ -60457,6 +61440,20 @@ export const ja_JP: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -60497,6 +61494,40 @@ export const ja_JP: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -60637,6 +61668,43 @@ export const ja_JP: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -64449,6 +65517,10 @@ export const pt_BR: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -65528,6 +66600,20 @@ export const pt_BR: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -65568,6 +66654,40 @@ export const pt_BR: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -65708,6 +66828,43 @@ export const pt_BR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -69520,6 +70677,10 @@ export const ru_RU: EnTranslations = {
         "name": "Bounty Master Corwin",
         "title": "Keeper of the Wanted Board",
         "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
+      "cartographer_innes": {
+        "name": "Cartographer Innes",
+        "title": "Marsh Surveyor",
+        "greeting": "A map is only as honest as the surveyor is alive, {playerName}. The fen has eaten three of my chainmen already - help me finish the survey before it takes a fourth."
       },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
@@ -70599,6 +71760,20 @@ export const ru_RU: EnTranslations = {
         "title": "Reagents from the Shallows",
         "text": "The best silverleaf grows where the Deepfen snappers wade, and they will not suffer a forager near it. I am out of every tincture I sell to Hale's guard. Thin the snappers - a dozen short of ten, call it ten - so I can wade in and cut what I need.",
         "completion": "Good. I can already smell the silverleaf from here. You have a steadier hand than half my apprentices, {playerName}.",
+      "q_survey_sightlines": {
+        "title": "Clear the Sightlines",
+        "text": "I cannot sight a survey staff through a wall of teeth, {playerName}. The mire prowlers have claimed the open ground east of the causeway - the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+        "completion": "Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler culled"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "The Deepfen Traverse",
+        "text": "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, {playerName} - thin the deepfen murlocs to twelve and I'll have it.",
+        "completion": "Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.",
         "objectives": {
           "0": {
             "label": "Deepfen Snapper slain"
@@ -70639,6 +71814,40 @@ export const ru_RU: EnTranslations = {
         "title": "Cut the Creepers",
         "text": "The Gravecaller cultists have been salting the old reagent beds with their rites - I find my roots dug up and bound in their black thread. I want them off my land, {playerName}. Ten of the cultists, and make it plain that an herbalist's fen is not theirs to harvest.",
         "completion": "They will think twice before they dig in my beds again. You would have made a fearsome forager, {playerName} - you pull weeds by the root.",
+      "q_survey_widows": {
+        "title": "Triangulating the Thicket",
+        "text": "To fix the western edge of the map I must set a station inside the Widow Thicket - and the webs there are thick enough to swallow a survey chain whole. Burn me a path, {playerName}. Eight widows down and I can take the angle.",
+        "completion": "The angle holds. The thicket's true shape comes off my board at last - and a good thing, for the old maps had it half a mile wrong.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "Benchmarks on the Mounds",
+        "text": "The troll mounds are the highest ground in the fen - perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, {playerName}. Eight should clear the high mounds long enough to cut a mark in the stone.",
+        "completion": "Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven back"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "The Drowned Approach",
+        "text": "The approach to the Drowned Chapel must be drawn - pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, {playerName}, and I'll chart a route the living can follow.",
+        "completion": "The route is drawn, marked safe in daylight only. It will save lives, {playerName} - more than my survey staff ever could alone.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "Blank Spot on the Map",
+        "text": "There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, {playerName}, so my chainmen can walk it and measure it true.",
+        "completion": "The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.",
         "objectives": {
           "0": {
             "label": "Gravecaller Cultist slain"
@@ -70779,6 +71988,43 @@ export const ru_RU: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wraithbinder Maldrec slain"
+      "q_survey_caustic": {
+        "title": "Where the Water Burns",
+        "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
+        "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "The Glutton in the Reeds",
+        "text": "Grubjaw - the great glutton - has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, {playerName}. He must come off the reeds entirely. Take him down.",
+        "completion": "Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, {playerName} - and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "The Deepwater Cut",
+        "text": "One channel runs deeper than any other - the deepwater cut - and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, {playerName}, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+        "completion": "Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared - a full fathom past the old charts. Good that we know it now.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "The Last Blank Water",
+        "text": "One stretch of water remains unmarked on the whole survey - the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, {playerName}. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+        "completion": "It is done. Every reed and channel of the Mirefen, drawn honest and whole - and not one chainman lost to finish it. This map will outlive us both, {playerName}. Your name goes in the corner beside mine.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned slain"
           }
         }
       },
@@ -71036,6 +72282,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -71260,6 +72509,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -71406,6 +72695,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -71630,6 +72922,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -71776,6 +73108,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -72000,6 +73335,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -72146,6 +73521,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -72370,6 +73748,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -72517,6 +73935,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -72741,6 +74162,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -72887,6 +74348,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -73111,6 +74575,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -73257,6 +74761,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -73481,6 +74988,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -73627,6 +75174,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -73851,6 +75401,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -73997,6 +75587,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -74221,6 +75814,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -74367,6 +76000,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -74591,6 +76227,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -74737,6 +76413,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -74961,6 +76640,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -75107,6 +76826,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.bounty_master_corwin.greeting",
     "entities.npcs.bounty_master_corwin.name",
     "entities.npcs.bounty_master_corwin.title",
+    "entities.npcs.cartographer_innes.greeting",
+    "entities.npcs.cartographer_innes.name",
+    "entities.npcs.cartographer_innes.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -75331,6 +77053,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_muster_zealots.objectives.0.label",
     "entities.quests.q_muster_zealots.text",
     "entities.quests.q_muster_zealots.title",
+    "entities.quests.q_survey_blankwater.completion",
+    "entities.quests.q_survey_blankwater.objectives.0.label",
+    "entities.quests.q_survey_blankwater.text",
+    "entities.quests.q_survey_blankwater.title",
+    "entities.quests.q_survey_caustic.completion",
+    "entities.quests.q_survey_caustic.objectives.0.label",
+    "entities.quests.q_survey_caustic.text",
+    "entities.quests.q_survey_caustic.title",
+    "entities.quests.q_survey_chapel.completion",
+    "entities.quests.q_survey_chapel.objectives.0.label",
+    "entities.quests.q_survey_chapel.text",
+    "entities.quests.q_survey_chapel.title",
+    "entities.quests.q_survey_deepcut.completion",
+    "entities.quests.q_survey_deepcut.objectives.0.label",
+    "entities.quests.q_survey_deepcut.text",
+    "entities.quests.q_survey_deepcut.title",
+    "entities.quests.q_survey_encampment.completion",
+    "entities.quests.q_survey_encampment.objectives.0.label",
+    "entities.quests.q_survey_encampment.text",
+    "entities.quests.q_survey_encampment.title",
+    "entities.quests.q_survey_glutton.completion",
+    "entities.quests.q_survey_glutton.objectives.0.label",
+    "entities.quests.q_survey_glutton.text",
+    "entities.quests.q_survey_glutton.title",
+    "entities.quests.q_survey_mounds.completion",
+    "entities.quests.q_survey_mounds.objectives.0.label",
+    "entities.quests.q_survey_mounds.text",
+    "entities.quests.q_survey_mounds.title",
+    "entities.quests.q_survey_sightlines.completion",
+    "entities.quests.q_survey_sightlines.objectives.0.label",
+    "entities.quests.q_survey_sightlines.text",
+    "entities.quests.q_survey_sightlines.title",
+    "entities.quests.q_survey_snappers.completion",
+    "entities.quests.q_survey_snappers.objectives.0.label",
+    "entities.quests.q_survey_snappers.text",
+    "entities.quests.q_survey_snappers.title",
+    "entities.quests.q_survey_widows.completion",
+    "entities.quests.q_survey_widows.objectives.0.label",
+    "entities.quests.q_survey_widows.text",
+    "entities.quests.q_survey_widows.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -79052,6 +80814,10 @@ export const en_XA: EnTranslations = {
         "name": "[Ɓóúñţý Ɱášţéŕ Çóŕŵíñ]",
         "title": "[Ķééþéŕ óƒ ţĥé Ŵáñţéð Ɓóáŕð]",
         "greeting": "[Ñéŵ þóšţéŕš éʋéŕý ŵééķ, {className}, áñð ţĥé íñķ ñéʋéŕ ðŕíéš. Ŕéáð ţĥé ƀóáŕð - ţĥé ƀóļð óñéš éáŕñ çóíñ.]"
+      "cartographer_innes": {
+        "name": "[Çáŕţóĝŕáþĥéŕ Íññéš]",
+        "title": "[Ɱáŕšĥ Šúŕʋéýóŕ]",
+        "greeting": "[Á ɱáþ íš óñļý áš ĥóñéšţ áš ţĥé šúŕʋéýóŕ íš áļíʋé, {playerName}. Ţĥé ƒéñ ĥáš éáţéñ ţĥŕéé óƒ ɱý çĥáíñɱéñ áļŕéáðý - ĥéļþ ɱé ƒíñíšĥ ţĥé šúŕʋéý ƀéƒóŕé íţ ţáķéš á ƒóúŕţĥ.]"
       },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
@@ -80131,6 +81897,20 @@ export const en_XA: EnTranslations = {
         "title": "[Ŕéáĝéñţš ƒŕóɱ ţĥé Šĥáļļóŵš]",
         "text": "[Ţĥé ƀéšţ šíļʋéŕļéáƒ ĝŕóŵš ŵĥéŕé ţĥé Ðééþƒéñ šñáþþéŕš ŵáðé, áñð ţĥéý ŵíļļ ñóţ šúƒƒéŕ á ƒóŕáĝéŕ ñéáŕ íţ. Í áɱ óúţ óƒ éʋéŕý ţíñçţúŕé Í šéļļ ţó Ĥáļé'š ĝúáŕð. Ţĥíñ ţĥé šñáþþéŕš - á ðóžéñ šĥóŕţ óƒ ţéñ, çáļļ íţ ţéñ - šó Í çáñ ŵáðé íñ áñð çúţ ŵĥáţ Í ñééð.]",
         "completion": "[Ĝóóð. Í çáñ áļŕéáðý šɱéļļ ţĥé šíļʋéŕļéáƒ ƒŕóɱ ĥéŕé. Ýóú ĥáʋé á šţéáðíéŕ ĥáñð ţĥáñ ĥáļƒ ɱý áþþŕéñţíçéš, {playerName}.]",
+      "q_survey_sightlines": {
+        "title": "[Çļéáŕ ţĥé Šíĝĥţļíñéš]",
+        "text": "[Í çáññóţ šíĝĥţ á šúŕʋéý šţáƒƒ ţĥŕóúĝĥ á ŵáļļ óƒ ţééţĥ, {playerName}. Ţĥé ɱíŕé þŕóŵļéŕš ĥáʋé çļáíɱéð ţĥé óþéñ ĝŕóúñð éášţ óƒ ţĥé çáúšéŵáý - ţĥé ʋéŕý ĝŕóúñð Í ɱúšţ ɱéášúŕé ƒíŕšţ. Çúļļ ţéñ óƒ ţĥéɱ áñð ĝíʋé ɱý çĥáíñɱéñ á çĥáñçé ţó þļáñţ ţĥé ƀášéļíñé.]",
+        "completion": "[Ĝóóð. Ţĥé ƀášéļíñé íš þļáñţéð áñð ñóţ óñé çĥáíñɱáñ ƀļéð ƒóŕ íţ. Ñóŵ Í çáñ šţáŕţ ţĥé ŕéáļ ŵóŕķ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕé Þŕóŵļéŕ çúļļéð]"
+          }
+        }
+      },
+      "q_survey_snappers": {
+        "title": "[Ţĥé Ðééþƒéñ Ţŕáʋéŕšé]",
+        "text": "[Ɱý ţŕáʋéŕšé ŕúñš šţŕáíĝĥţ ţĥŕóúĝĥ ţĥé Ðééþƒéñ Šĥáļļóŵš, áñð ţĥé šñáþþéŕš ţĥéŕé šŵáŕɱ áñýţĥíñĝ ţĥáţ ŵáðéš íñ. Í ñééð á çļéáŕ ĥóúŕ ţó çĥáíñ ţĥé ðíšţáñçé, {playerName} - ţĥíñ ţĥé ðééþƒéñ ɱúŕļóçš ţó ţŵéļʋé áñð Í'ļļ ĥáʋé íţ.]",
+        "completion": "[Ţŵéļʋé ƒéŵéŕ šñáþþéŕš, óñé çļéáñ ţŕáʋéŕšé ļíñé. Ţĥé šĥáļļóŵš áŕé ƒíñáļļý óñ þáþéŕ.]",
         "objectives": {
           "0": {
             "label": "[Ðééþƒéñ Šñáþþéŕ šļáíñ]"
@@ -80171,6 +81951,40 @@ export const en_XA: EnTranslations = {
         "title": "[Çúţ ţĥé Çŕééþéŕš]",
         "text": "[Ţĥé Ĝŕáʋéçáļļéŕ çúļţíšţš ĥáʋé ƀééñ šáļţíñĝ ţĥé óļð ŕéáĝéñţ ƀéðš ŵíţĥ ţĥéíŕ ŕíţéš - Í ƒíñð ɱý ŕóóţš ðúĝ úþ áñð ƀóúñð íñ ţĥéíŕ ƀļáçķ ţĥŕéáð. Í ŵáñţ ţĥéɱ óƒƒ ɱý ļáñð, {playerName}. Ţéñ óƒ ţĥé çúļţíšţš, áñð ɱáķé íţ þļáíñ ţĥáţ áñ ĥéŕƀáļíšţ'š ƒéñ íš ñóţ ţĥéíŕš ţó ĥáŕʋéšţ.]",
         "completion": "[Ţĥéý ŵíļļ ţĥíñķ ţŵíçé ƀéƒóŕé ţĥéý ðíĝ íñ ɱý ƀéðš áĝáíñ. Ýóú ŵóúļð ĥáʋé ɱáðé á ƒéáŕšóɱé ƒóŕáĝéŕ, {playerName} - ýóú þúļļ ŵééðš ƀý ţĥé ŕóóţ.]",
+      "q_survey_widows": {
+        "title": "[Ţŕíáñĝúļáţíñĝ ţĥé Ţĥíçķéţ]",
+        "text": "[Ţó ƒíẋ ţĥé ŵéšţéŕñ éðĝé óƒ ţĥé ɱáþ Í ɱúšţ šéţ á šţáţíóñ íñšíðé ţĥé Ŵíðóŵ Ţĥíçķéţ - áñð ţĥé ŵéƀš ţĥéŕé áŕé ţĥíçķ éñóúĝĥ ţó šŵáļļóŵ á šúŕʋéý çĥáíñ ŵĥóļé. Ɓúŕñ ɱé á þáţĥ, {playerName}. Éíĝĥţ ŵíðóŵš ðóŵñ áñð Í çáñ ţáķé ţĥé áñĝļé.]",
+        "completion": "[Ţĥé áñĝļé ĥóļðš. Ţĥé ţĥíçķéţ'š ţŕúé šĥáþé çóɱéš óƒƒ ɱý ƀóáŕð áţ ļášţ - áñð á ĝóóð ţĥíñĝ, ƒóŕ ţĥé óļð ɱáþš ĥáð íţ ĥáļƒ á ɱíļé ŵŕóñĝ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéƒéñ Ŵíðóŵ šļáíñ]"
+          }
+        }
+      },
+      "q_survey_mounds": {
+        "title": "[Ɓéñçĥɱáŕķš óñ ţĥé Ɱóúñðš]",
+        "text": "[Ţĥé ţŕóļļ ɱóúñðš áŕé ţĥé ĥíĝĥéšţ ĝŕóúñð íñ ţĥé ƒéñ - þéŕƒéçţ ƒóŕ á ƀéñçĥɱáŕķ, íƒ ţĥé ţŕóļļš ðíð ñóţ ţĥŕóŵ ɱý çĥáíñɱéñ óƒƒ ţĥéɱ. Ðŕíʋé ţĥé ƒéñ ţŕóļļš ƀáçķ, {playerName}. Éíĝĥţ šĥóúļð çļéáŕ ţĥé ĥíĝĥ ɱóúñðš ļóñĝ éñóúĝĥ ţó çúţ á ɱáŕķ íñ ţĥé šţóñé.]",
+        "completion": "[Ɓéñçĥɱáŕķ çúţ áñð ŕéçóŕðéð. Ƒŕóɱ ţĥóšé ɱóúñðš Í çáñ ƒíñáļļý ţíé ţĥé ŵĥóļé éášţéŕñ ƒéñ ţóĝéţĥéŕ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéƒéñ Ţŕóļļ ðŕíʋéñ ƀáçķ]"
+          }
+        }
+      },
+      "q_survey_chapel": {
+        "title": "[Ţĥé Ðŕóŵñéð Áþþŕóáçĥ]",
+        "text": "[Ţĥé áþþŕóáçĥ ţó ţĥé Ðŕóŵñéð Çĥáþéļ ɱúšţ ƀé ðŕáŵñ - þíļĝŕíɱš šţíļļ ţŕý ţó ŕéáçĥ íţ áñð ðŕóŵñ ƒóŕ ţĥé ļáçķ óƒ áñ ĥóñéšţ ŕóáð. Ɓúţ ţĥé ðéáð ŵáðé ţĥé þáţĥ íñ ñúɱƀéŕš. Ļáý ţŵéļʋé óƒ ţĥé ðŕóŵñéð ðéáð ţó ŕéšţ, {playerName}, áñð Í'ļļ çĥáŕţ á ŕóúţé ţĥé ļíʋíñĝ çáñ ƒóļļóŵ.]",
+        "completion": "[Ţĥé ŕóúţé íš ðŕáŵñ, ɱáŕķéð šáƒé íñ ðáýļíĝĥţ óñļý. Íţ ŵíļļ šáʋé ļíʋéš, {playerName} - ɱóŕé ţĥáñ ɱý šúŕʋéý šţáƒƒ éʋéŕ çóúļð áļóñé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðŕóŵñéð Ðéáð ļáíð ţó ŕéšţ]"
+          }
+        }
+      },
+      "q_survey_encampment": {
+        "title": "[Ɓļáñķ Šþóţ óñ ţĥé Ɱáþ]",
+        "text": "[Ţĥéŕé íš á ƀļáñķ šþóţ óñ ɱý ɱáþ ŵĥéŕé ţĥé ĝŕáʋéçáļļéŕš ķééþ ţĥéíŕ éñçáɱþɱéñţ, áñð á ƀļáñķ šþóţ íš á ðáñĝéŕ ţó éʋéŕý þáţŕóļ ţĥáţ ţŕúšţš ţĥé çĥáŕţ. Í ŵíļļ ñóţ ðŕáŵ íţ ƒŕóɱ ŕúɱóŕ. Çļéáŕ ɱé ţéñ çúļţíšţš, {playerName}, šó ɱý çĥáíñɱéñ çáñ ŵáļķ íţ áñð ɱéášúŕé íţ ţŕúé.]",
+        "completion": "[Ţĥé éñçáɱþɱéñţ íš óñ ţĥé ɱáþ ñóŵ, éʋéŕý ţéñţ áñð ţŕéñçĥ óƒ íţ. Ţĥé Ŵáŕðéñ ŵíļļ ŵáñţ á çóþý ƀéƒóŕé ñíĝĥţƒáļļ.]",
         "objectives": {
           "0": {
             "label": "[Ĝŕáʋéçáļļéŕ Çúļţíšţ šļáíñ]"
@@ -80311,6 +82125,43 @@ export const en_XA: EnTranslations = {
         "objectives": {
           "0": {
             "label": "[Ŵŕáíţĥƀíñðéŕ Ɱáļðŕéç šļáíñ]"
+      "q_survey_caustic": {
+        "title": "[Ŵĥéŕé ţĥé Ŵáţéŕ Ɓúŕñš]",
+        "text": "[Ţĥé çáúšţíç þóóļš ɱúšţ ƀé ɱáŕķéð áš ĥážáŕð, óŕ šóɱé ţŕáðéŕ ŵíļļ ƒļóáţ á ƀáŕĝé íñţó ţĥéɱ áñð ļóšé ĥíš çŕéŵ. Ɓúţ ţĥé ƀóĝ ƀļóáţš ñéšţ ŕíĝĥţ ŵĥéŕé Í ñééð ţó šéţ ɱý ɱáŕķéŕš, áñð ţĥéý ƀúŕšţ ļíķé áçíð çášķš. Þóþ éíĝĥţ óƒ ţĥéɱ, {playerName}, áñð Í'ļļ þļáñţ ţĥé ĥážáŕð ƒļáĝš ɱýšéļƒ.]",
+        "completion": "[Ĥážáŕð ƒļáĝš šéţ, þóóļš ɱáŕķéð íñ ŕéð óñ éʋéŕý çóþý. Ñó ƀáŕĝé-ɱášţéŕ çáñ šáý ĥé ŵáš ñóţ ŵáŕñéð ñóŵ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓóĝ Ɓļóáţ ƀúŕšţ]"
+          }
+        }
+      },
+      "q_survey_glutton": {
+        "title": "[Ţĥé Ĝļúţţóñ íñ ţĥé Ŕééðš]",
+        "text": "[Ĝŕúƀĵáŵ - ţĥé ĝŕéáţ ĝļúţţóñ - ĥáš šéţţļéð šɋúáŕé áţóþ ɱý ļášţ ñóŕţĥéŕñ šţáţíóñ áñð éáţš áñýţĥíñĝ ţĥáţ çóɱéš ñéáŕ, çĥáíñɱéñ íñçļúðéð. Ţĥéŕé íš ñó çĥáŕţíñĝ áŕóúñð á ţĥíñĝ ţĥáţ šížé, {playerName}. Ĥé ɱúšţ çóɱé óƒƒ ţĥé ŕééðš éñţíŕéļý. Ţáķé ĥíɱ ðóŵñ.]",
+        "completion": "[Ĝŕúƀĵáŵ íš ðéáð áñð ţĥé ñóŕţĥéŕñ šţáţíóñ šţáñðš çļéáŕ. Ţĥé ƒéñ óŵéš ýóú á ɋúíéţéŕ ñíĝĥţ, {playerName} - áñð šó ðó Í.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕúƀĵáŵ ţĥé Ĝļúţţóñ šļáíñ]"
+          }
+        }
+      },
+      "q_survey_deepcut": {
+        "title": "[Ţĥé Ðééþŵáţéŕ Çúţ]",
+        "text": "[Óñé çĥáññéļ ŕúñš ðééþéŕ ţĥáñ áñý óţĥéŕ - ţĥé ðééþŵáţéŕ çúţ - áñð ñóţĥíñĝ ŕéţúŕñš ƒŕóɱ šóúñðíñĝ íţ ƀéçáúšé Ɱíŕéĵáŵ ţĥé Ŕáʋéñóúš óŵñš ţĥóšé ðéþţĥš. Í ɱúšţ ķñóŵ ĥóŵ ðééþ ţĥáţ çúţ ŕúñš, {playerName}, ƀúţ ñóţ áţ ţĥé çóšţ óƒ áñóţĥéŕ çĥáíñɱáñ. Ķíļļ ţĥé ƀéášţ áñð ţĥé šóúñðíñĝ íš ýóúŕš ţó ţáķé íñ þéáçé.]",
+        "completion": "[Ɱíŕéĵáŵ íš ĝóñé, áñð ɱý ļéáð ļíñé ţóúçĥéð ƀóţţóɱ áţ ļášţ. Ţĥé çúţ íš ðééþéŕ ţĥáñ Í ƒéáŕéð - á ƒúļļ ƒáţĥóɱ þášţ ţĥé óļð çĥáŕţš. Ĝóóð ţĥáţ ŵé ķñóŵ íţ ñóŵ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéĵáŵ ţĥé Ŕáʋéñóúš šļáíñ]"
+          }
+        }
+      },
+      "q_survey_blankwater": {
+        "title": "[Ţĥé Ļášţ Ɓļáñķ Ŵáţéŕ]",
+        "text": "[Óñé šţŕéţçĥ óƒ ŵáţéŕ ŕéɱáíñš úñɱáŕķéð óñ ţĥé ŵĥóļé šúŕʋéý - ţĥé šţíļļ þóóļ ţĥé ļóçáļš çáļļ Ɓļáñķŵáţéŕ, ŵĥéŕé Šļóóɱţóóţĥ ţĥé Ðŕóŵñéð ðŕáĝš ðóŵñ áñýóñé ŵĥó þóļéš áçŕóšš íţ. Ƒíñíšĥ ɱý ɱáþ, {playerName}. Ķíļļ Šļóóɱţóóţĥ, ţáķé ţĥé šóúñðíñĝ, áñð ţĥé Ɱíŕéƒéñ ŵíļļ ƀé çĥáŕţéð ţŕúé ƒóŕ ţĥé ƒíŕšţ ţíɱé íñ ļíʋíñĝ ɱéɱóŕý.]",
+        "completion": "[Íţ íš ðóñé. Éʋéŕý ŕééð áñð çĥáññéļ óƒ ţĥé Ɱíŕéƒéñ, ðŕáŵñ ĥóñéšţ áñð ŵĥóļé - áñð ñóţ óñé çĥáíñɱáñ ļóšţ ţó ƒíñíšĥ íţ. Ţĥíš ɱáþ ŵíļļ óúţļíʋé úš ƀóţĥ, {playerName}. Ýóúŕ ñáɱé ĝóéš íñ ţĥé çóŕñéŕ ƀéšíðé ɱíñé.]",
+        "objectives": {
+          "0": {
+            "label": "[Šļóóɱţóóţĥ ţĥé Ðŕóŵñéð šļáíñ]"
           }
         }
       },

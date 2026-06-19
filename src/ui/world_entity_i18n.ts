@@ -43,6 +43,7 @@ const NPC_IDS = [
   'brother_aldric_highwatch', 'scout_maren_highwatch', 'quartermaster_bree', 'armorer_hode',
   'loremaster_caddis', 'ranger_elwyn', 'sergeant_garrick',
   'loremaster_caddis', 'ranger_elwyn', 'bounty_master_corwin',
+  'loremaster_caddis', 'ranger_elwyn', 'cartographer_innes',
 ] as const;
 
 const QUEST_IDS = [
@@ -76,6 +77,9 @@ const QUEST_IDS = [
   'q_bounty_wolves', 'q_bounty_boars', 'q_bounty_bristleback', 'q_bounty_webwood',
   'q_bounty_matriarch', 'q_bounty_mudfin', 'q_bounty_bandits', 'q_bounty_restless',
   'q_bounty_verlan', 'q_bounty_maldrec',
+  'q_survey_sightlines', 'q_survey_snappers', 'q_survey_widows', 'q_survey_mounds',
+  'q_survey_chapel', 'q_survey_encampment', 'q_survey_caustic', 'q_survey_glutton',
+  'q_survey_deepcut', 'q_survey_blankwater',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
