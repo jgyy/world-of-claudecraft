@@ -533,7 +533,12 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     id: 'ranger_elwyn', name: 'Ranger Elwyn', title: 'Glade Warden',
     // posted at the south edge of Brightwood Glade, watching the treeline
     pos: { x: 35, z: 118 }, facing: 0, color: 0x3a7d44,
-    questIds: ['q_brightwood_thinning', 'q_brightwood_monarch'],
+    questIds: [
+      'q_brightwood_thinning', 'q_brightwood_monarch',
+      'q_glade_overbrowse', 'q_glade_foxes', 'q_glade_census', 'q_glade_diggers',
+      'q_glade_amber', 'q_glade_rut', 'q_glade_treeline', 'q_glade_snares',
+      'q_glade_apex', 'q_glade_long_watch',
+    ],
     greeting: 'Quiet, $C — the glade is calm today, and I mean to keep it that way.',
   },
 };
@@ -867,6 +872,128 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     minLevel: 6,
     suggestedPlayers: 2,
   },
+
+  // -------------------------------------------------------------------------
+  // The Glade Warden's Long Watch — a 10-step chain Ranger Elwyn hands out
+  // once the glade is first thinned. It follows a single season's work keeping
+  // Brightwood in balance: cull the overgrown herds, answer the predators they
+  // draw, and break the poachers who follow the blood. Every objective targets
+  // beasts and bandits that already roam Brightwood Glade, so the chain adds
+  // pacing and reward without touching spawns, loot tables, or determinism.
+  // -------------------------------------------------------------------------
+  q_glade_overbrowse: {
+    id: 'q_glade_overbrowse', name: 'The Overbrowsing Herds',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "Thinning the lynx was only half the work, $N. With the prides cut back, the deer have bred unchecked — the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+    completionText: 'Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.',
+    objectives: [
+      { type: 'kill', targetMobId: 'dawnmane_doe', count: 8, label: 'Dawnmane Doe culled' },
+      { type: 'collect', itemId: 'brightwood_venison', count: 6, label: 'Brightwood Venison' },
+    ],
+    xpReward: 500, copperReward: 170, itemRewards: {},
+    requiresQuest: 'q_brightwood_thinning',
+    minLevel: 4,
+  },
+  q_glade_foxes: {
+    id: 'q_glade_foxes', name: 'Foxes at the Fawning Ground',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, $N — slay 10 Glade Foxes and the fawns may yet survive.",
+    completionText: 'Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.',
+    objectives: [{ type: 'kill', targetMobId: 'glade_fox', count: 10, label: 'Glade Fox slain' }],
+    xpReward: 520, copperReward: 180, itemRewards: {},
+    requiresQuest: 'q_glade_overbrowse',
+    minLevel: 4,
+  },
+  q_glade_census: {
+    id: 'q_glade_census', name: 'A Census of Down',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "A warden who does not count cannot keep, $N. I judge the meadow crane flock by the down they shed — too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+    completionText: 'Good down, clean and dry — the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.',
+    objectives: [{ type: 'collect', itemId: 'soft_down', count: 8, label: 'Soft Down' }],
+    xpReward: 540, copperReward: 185, itemRewards: {},
+    requiresQuest: 'q_glade_foxes',
+    minLevel: 4,
+  },
+  q_glade_diggers: {
+    id: 'q_glade_diggers', name: 'Diggers Among the Roots',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "The thornpelt badgers have turned the old oak stand into a warren — and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+    completionText: 'Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.',
+    objectives: [{ type: 'kill', targetMobId: 'thornpelt_badger', count: 8, label: 'Thornpelt Badger slain' }],
+    xpReward: 560, copperReward: 195, itemRewards: {},
+    requiresQuest: 'q_glade_census',
+    minLevel: 4,
+  },
+  q_glade_amber: {
+    id: 'q_glade_amber', name: 'Against the Long Cold',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade — and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+    completionText: 'Six fine amber hides — enough to line the watch-hut against the worst of it. You think like a warden now, $N: every kill made to count twice.',
+    objectives: [
+      { type: 'kill', targetMobId: 'grovetusk_boar', count: 6, label: 'Grovetusk Boar slain' },
+      { type: 'collect', itemId: 'amber_hide', count: 6, label: 'Amber Hide' },
+    ],
+    xpReward: 620, copperReward: 220, itemRewards: {},
+    requiresQuest: 'q_glade_diggers',
+    minLevel: 5,
+  },
+  q_glade_rut: {
+    id: 'q_glade_rut', name: 'The Maddened Rut',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "The stag rut has turned to madness this year — the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+    completionText: 'Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.',
+    objectives: [
+      { type: 'kill', targetMobId: 'brightwood_stag', count: 8, label: 'Brightwood Stag felled' },
+      { type: 'collect', itemId: 'stag_antler', count: 5, label: 'Stag Antler' },
+    ],
+    xpReward: 660, copperReward: 235, itemRewards: {},
+    requiresQuest: 'q_glade_amber',
+    minLevel: 5,
+  },
+  q_glade_treeline: {
+    id: 'q_glade_treeline', name: 'Wolves at the Treeline',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk — soon they will not wait for the dead. Push them back, $N. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+    completionText: "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic — every answer raises a new question with teeth.",
+    objectives: [{ type: 'kill', targetMobId: 'forest_wolf', count: 12, label: 'Forest Wolf driven off' }],
+    xpReward: 700, copperReward: 250, itemRewards: {},
+    requiresQuest: 'q_glade_rut',
+    minLevel: 5,
+  },
+  q_glade_snares: {
+    id: 'q_glade_snares', name: 'Snares in the Green',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "I have found wire snares strung through the deer-runs — cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, $N.",
+    completionText: 'Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...',
+    objectives: [{ type: 'kill', targetMobId: 'vale_bandit', count: 8, label: 'Poaching Vale Bandit slain' }],
+    xpReward: 740, copperReward: 270, itemRewards: {},
+    requiresQuest: 'q_glade_treeline',
+    minLevel: 6,
+  },
+  q_glade_apex: {
+    id: 'q_glade_apex', name: 'The Apex Roused',
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "The poachers' snares maddened the sunhide bears worst of all — a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+    completionText: 'Eight, and the slope gone quiet. To kill the very thing a warden swears to keep — that is the weight of this work, $N. Bear it well. The glade is nearly whole again.',
+    objectives: [{ type: 'kill', targetMobId: 'sunhide_bear', count: 8, label: 'Maddened Sunhide Bear slain' }],
+    xpReward: 820, copperReward: 320, itemRewards: {},
+    requiresQuest: 'q_glade_snares',
+    minLevel: 6,
+  },
+  q_glade_long_watch: {
+    id: 'q_glade_long_watch', name: "The Warden's Long Watch",
+    giverNpcId: 'ranger_elwyn', turnInNpcId: 'ranger_elwyn',
+    text: "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned — using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+    completionText: "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, $N, and never with a better hand beside me. The glade will remember you — and so will I.",
+    objectives: [
+      { type: 'kill', targetMobId: 'bramble_lynx', count: 10, label: 'Bramble Lynx slain' },
+      { type: 'collect', itemId: 'amber_hide', count: 8, label: 'Amber Hide reclaimed' },
+    ],
+    xpReward: 1000, copperReward: 420, itemRewards: {},
+    requiresQuest: 'q_glade_apex',
+    minLevel: 6,
+    suggestedPlayers: 2,
+  },
 };
 
 export const ZONE1_QUEST_ORDER = [
@@ -880,6 +1007,10 @@ export const ZONE1_QUEST_ORDER = [
   'q_ledger_first_duty', 'q_ledger_teeth', 'q_ledger_reedwater', 'q_ledger_silk',
   'q_ledger_brood', 'q_ledger_deepvermin', 'q_ledger_toll', 'q_ledger_vigil',
   'q_ledger_great_boar', 'q_ledger_outlaw_captain',
+  // The Glade Warden's Long Watch chain (Ranger Elwyn)
+  'q_glade_overbrowse', 'q_glade_foxes', 'q_glade_census', 'q_glade_diggers',
+  'q_glade_amber', 'q_glade_rut', 'q_glade_treeline', 'q_glade_snares',
+  'q_glade_apex', 'q_glade_long_watch',
 ];
 
 // ---------------------------------------------------------------------------

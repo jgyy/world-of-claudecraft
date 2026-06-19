@@ -66,6 +66,9 @@ const QUEST_IDS = [
   'q_muster_recruit', 'q_muster_burrows', 'q_muster_sappers', 'q_muster_foothills',
   'q_muster_crushers', 'q_muster_stormcrag', 'q_muster_zealots', 'q_muster_necromancers',
   'q_muster_revenants', 'q_muster_commendation',
+  'q_glade_overbrowse', 'q_glade_foxes', 'q_glade_census', 'q_glade_diggers',
+  'q_glade_amber', 'q_glade_rut', 'q_glade_treeline', 'q_glade_snares',
+  'q_glade_apex', 'q_glade_long_watch',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
