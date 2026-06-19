@@ -2608,6 +2608,36 @@ export const en: EnTranslations = {
       "monarch_heart": {
         "name": "The Monarch's Heart"
       },
+      "stormtable_trencher": {
+        "name": "Stormtable Trencher"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Ridgeline Meat Pie"
+      },
+      "peakberry_tart": {
+        "name": "Peakberry Tart"
+      },
+      "smoked_summit_ram": {
+        "name": "Smoked Summit Ram"
+      },
+      "hearthstone_bread": {
+        "name": "Hearthstone Bread"
+      },
+      "pinewarden_tea": {
+        "name": "Pinewarden Tea"
+      },
+      "spiced_summit_cider": {
+        "name": "Spiced Summit Cider"
+      },
+      "frostmint_draught": {
+        "name": "Frostmint Draught"
+      },
+      "emberbark_brew": {
+        "name": "Emberbark Brew"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Highwatch Mulled Wine"
+      },
       "bristleback_maul": {
         "name": "Bristleback Maul"
       },
@@ -7070,6 +7100,36 @@ export const es: EnTranslations = {
       },
       "monarch_heart": {
         "name": "El Corazón del Monarca"
+      },
+      "stormtable_trencher": {
+        "name": "Trinchero de Stormtable"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Pastel de carne de la cordillera"
+      },
+      "peakberry_tart": {
+        "name": "Tarta de bayas de cumbre"
+      },
+      "smoked_summit_ram": {
+        "name": "Carnero ahumado de la cima"
+      },
+      "hearthstone_bread": {
+        "name": "Pan de piedra de hogar"
+      },
+      "pinewarden_tea": {
+        "name": "Té de Pinewarden"
+      },
+      "spiced_summit_cider": {
+        "name": "Sidra especiada de la cumbre"
+      },
+      "frostmint_draught": {
+        "name": "Brebaje de menta helada"
+      },
+      "emberbark_brew": {
+        "name": "Cerveza de corteza de brasa"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Vino caliente especiado de Highwatch"
       },
       "bristleback_maul": {
         "name": "Maza Bristleback"
@@ -11534,6 +11594,36 @@ export const es_ES: EnTranslations = {
       "monarch_heart": {
         "name": "El Corazón del Monarca"
       },
+      "stormtable_trencher": {
+        "name": "Trinchero de Stormtable"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Pastel de carne de la cordillera"
+      },
+      "peakberry_tart": {
+        "name": "Tarta de bayas de cumbre"
+      },
+      "smoked_summit_ram": {
+        "name": "Carnero ahumado de la cima"
+      },
+      "hearthstone_bread": {
+        "name": "Pan de piedra de hogar"
+      },
+      "pinewarden_tea": {
+        "name": "Té de Pinewarden"
+      },
+      "spiced_summit_cider": {
+        "name": "Sidra especiada de la cumbre"
+      },
+      "frostmint_draught": {
+        "name": "Brebaje de menta helada"
+      },
+      "emberbark_brew": {
+        "name": "Cerveza de corteza de brasa"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Vino caliente especiado de Highwatch"
+      },
       "bristleback_maul": {
         "name": "Maza Bristleback"
       },
@@ -15996,6 +16086,36 @@ export const fr_FR: EnTranslations = {
       },
       "monarch_heart": {
         "name": "Le Cœur du Monarque"
+      },
+      "stormtable_trencher": {
+        "name": "Tranchoir de Stormtable"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Tourte à la viande de la crête"
+      },
+      "peakberry_tart": {
+        "name": "Tarte aux baies des cimes"
+      },
+      "smoked_summit_ram": {
+        "name": "Bélier des sommets fumé"
+      },
+      "hearthstone_bread": {
+        "name": "Pain de l'âtre"
+      },
+      "pinewarden_tea": {
+        "name": "Thé de Pinewarden"
+      },
+      "spiced_summit_cider": {
+        "name": "Cidre épicé des sommets"
+      },
+      "frostmint_draught": {
+        "name": "Breuvage de menthe glaciale"
+      },
+      "emberbark_brew": {
+        "name": "Bière d'écorce de braise"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Vin chaud épicé de Highwatch"
       },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
@@ -20460,6 +20580,36 @@ export const fr_CA: EnTranslations = {
       "monarch_heart": {
         "name": "Le Cœur du Monarque"
       },
+      "stormtable_trencher": {
+        "name": "Tranchoir de Stormtable"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Tourte à la viande de la crête"
+      },
+      "peakberry_tart": {
+        "name": "Tarte aux baies des cimes"
+      },
+      "smoked_summit_ram": {
+        "name": "Bélier des sommets fumé"
+      },
+      "hearthstone_bread": {
+        "name": "Pain de l'âtre"
+      },
+      "pinewarden_tea": {
+        "name": "Thé de Pinewarden"
+      },
+      "spiced_summit_cider": {
+        "name": "Cidre épicé des sommets"
+      },
+      "frostmint_draught": {
+        "name": "Breuvage de menthe glaciale"
+      },
+      "emberbark_brew": {
+        "name": "Bière d'écorce de braise"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Vin chaud épicé de Highwatch"
+      },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
       },
@@ -24922,6 +25072,36 @@ export const en_CA: EnTranslations = {
       },
       "monarch_heart": {
         "name": "The Monarch's Heart"
+      },
+      "stormtable_trencher": {
+        "name": "Stormtable Trencher"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Ridgeline Meat Pie"
+      },
+      "peakberry_tart": {
+        "name": "Peakberry Tart"
+      },
+      "smoked_summit_ram": {
+        "name": "Smoked Summit Ram"
+      },
+      "hearthstone_bread": {
+        "name": "Hearthstone Bread"
+      },
+      "pinewarden_tea": {
+        "name": "Pinewarden Tea"
+      },
+      "spiced_summit_cider": {
+        "name": "Spiced Summit Cider"
+      },
+      "frostmint_draught": {
+        "name": "Frostmint Draught"
+      },
+      "emberbark_brew": {
+        "name": "Emberbark Brew"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Highwatch Mulled Wine"
       },
       "bristleback_maul": {
         "name": "Bristleback Maul"
@@ -29386,6 +29566,36 @@ export const it_IT: EnTranslations = {
       "monarch_heart": {
         "name": "Il Cuore del Monarca"
       },
+      "stormtable_trencher": {
+        "name": "Tagliere di Stormtable"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Torta di carne del crinale"
+      },
+      "peakberry_tart": {
+        "name": "Crostata di bacche di vetta"
+      },
+      "smoked_summit_ram": {
+        "name": "Montone affumicato della cima"
+      },
+      "hearthstone_bread": {
+        "name": "Pane del focolare"
+      },
+      "pinewarden_tea": {
+        "name": "Tè di Pinewarden"
+      },
+      "spiced_summit_cider": {
+        "name": "Sidro speziato di vetta"
+      },
+      "frostmint_draught": {
+        "name": "Bevanda di menta gelata"
+      },
+      "emberbark_brew": {
+        "name": "Birra di corteccia di brace"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Vin brulé speziato di Highwatch"
+      },
       "bristleback_maul": {
         "name": "Maglio Bristleback"
       },
@@ -33848,6 +34058,36 @@ export const de_DE: EnTranslations = {
       },
       "monarch_heart": {
         "name": "Das Herz des Monarchen"
+      },
+      "stormtable_trencher": {
+        "name": "Stormtable-Brettjause"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Bergkamm-Fleischpastete"
+      },
+      "peakberry_tart": {
+        "name": "Gipfelbeeren-Törtchen"
+      },
+      "smoked_summit_ram": {
+        "name": "Geräucherter Gipfelwidder"
+      },
+      "hearthstone_bread": {
+        "name": "Herdstein-Brot"
+      },
+      "pinewarden_tea": {
+        "name": "Pinewarden-Tee"
+      },
+      "spiced_summit_cider": {
+        "name": "Gewürzter Gipfelcider"
+      },
+      "frostmint_draught": {
+        "name": "Frostminze-Trunk"
+      },
+      "emberbark_brew": {
+        "name": "Glutborken-Bräu"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Highwatch-Glühwein"
       },
       "bristleback_maul": {
         "name": "Bristleback-Schlägel"
@@ -38312,6 +38552,36 @@ export const zh_CN: EnTranslations = {
       "monarch_heart": {
         "name": "君主之心"
       },
+      "stormtable_trencher": {
+        "name": "风暴餐桌木盘餐"
+      },
+      "ridgeline_meat_pie": {
+        "name": "山脊肉派"
+      },
+      "peakberry_tart": {
+        "name": "峰顶浆果挞"
+      },
+      "smoked_summit_ram": {
+        "name": "烟熏峰巅公羊"
+      },
+      "hearthstone_bread": {
+        "name": "炉石面包"
+      },
+      "pinewarden_tea": {
+        "name": "松卫茶"
+      },
+      "spiced_summit_cider": {
+        "name": "香料峰顶苹果酒"
+      },
+      "frostmint_draught": {
+        "name": "霜薄荷饮剂"
+      },
+      "emberbark_brew": {
+        "name": "余烬树皮酿"
+      },
+      "highwatch_mulled_wine": {
+        "name": "高守热红酒"
+      },
       "bristleback_maul": {
         "name": "硬鬃重槌"
       },
@@ -42774,6 +43044,36 @@ export const zh_TW: EnTranslations = {
       },
       "monarch_heart": {
         "name": "君主之心"
+      },
+      "stormtable_trencher": {
+        "name": "風暴餐桌木盤餐"
+      },
+      "ridgeline_meat_pie": {
+        "name": "山脊肉派"
+      },
+      "peakberry_tart": {
+        "name": "峰頂漿果撻"
+      },
+      "smoked_summit_ram": {
+        "name": "煙燻峰巔公羊"
+      },
+      "hearthstone_bread": {
+        "name": "爐石麵包"
+      },
+      "pinewarden_tea": {
+        "name": "松衛茶"
+      },
+      "spiced_summit_cider": {
+        "name": "香料峰頂蘋果酒"
+      },
+      "frostmint_draught": {
+        "name": "霜薄荷飲劑"
+      },
+      "emberbark_brew": {
+        "name": "餘燼樹皮釀"
+      },
+      "highwatch_mulled_wine": {
+        "name": "高守熱紅酒"
       },
       "bristleback_maul": {
         "name": "硬鬃重槌"
@@ -47238,6 +47538,36 @@ export const ko_KR: EnTranslations = {
       "monarch_heart": {
         "name": "군주의 심장"
       },
+      "stormtable_trencher": {
+        "name": "스톰테이블 나무판 요리"
+      },
+      "ridgeline_meat_pie": {
+        "name": "산등성이 고기 파이"
+      },
+      "peakberry_tart": {
+        "name": "봉우리 베리 타르트"
+      },
+      "smoked_summit_ram": {
+        "name": "정상 숫양 훈제구이"
+      },
+      "hearthstone_bread": {
+        "name": "화로석 빵"
+      },
+      "pinewarden_tea": {
+        "name": "파인워든 차"
+      },
+      "spiced_summit_cider": {
+        "name": "향신료 봉우리 사이다"
+      },
+      "frostmint_draught": {
+        "name": "서리박하 음료"
+      },
+      "emberbark_brew": {
+        "name": "잉걸나무껍질 양조주"
+      },
+      "highwatch_mulled_wine": {
+        "name": "하이워치 뱅쇼"
+      },
       "bristleback_maul": {
         "name": "뻣센등뼈 철퇴"
       },
@@ -51700,6 +52030,36 @@ export const ja_JP: EnTranslations = {
       },
       "monarch_heart": {
         "name": "君主の心臓"
+      },
+      "stormtable_trencher": {
+        "name": "ストームテーブルの木皿料理"
+      },
+      "ridgeline_meat_pie": {
+        "name": "尾根肉のミートパイ"
+      },
+      "peakberry_tart": {
+        "name": "頂のベリータルト"
+      },
+      "smoked_summit_ram": {
+        "name": "山頂雄羊の燻製"
+      },
+      "hearthstone_bread": {
+        "name": "炉石のパン"
+      },
+      "pinewarden_tea": {
+        "name": "パインワーデン茶"
+      },
+      "spiced_summit_cider": {
+        "name": "香辛料入り山頂サイダー"
+      },
+      "frostmint_draught": {
+        "name": "霜ミントの一杯"
+      },
+      "emberbark_brew": {
+        "name": "燃え差し樹皮の醸造酒"
+      },
+      "highwatch_mulled_wine": {
+        "name": "ハイウォッチのホットワイン"
       },
       "bristleback_maul": {
         "name": "ブリストルバックの大槌"
@@ -56164,6 +56524,36 @@ export const pt_BR: EnTranslations = {
       "monarch_heart": {
         "name": "O Coração do Monarca"
       },
+      "stormtable_trencher": {
+        "name": "Tábua de pão de Stormtable"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Torta de carne da cordilheira"
+      },
+      "peakberry_tart": {
+        "name": "Torta de frutas do cume"
+      },
+      "smoked_summit_ram": {
+        "name": "Carneiro defumado do cume"
+      },
+      "hearthstone_bread": {
+        "name": "Pão da lareira"
+      },
+      "pinewarden_tea": {
+        "name": "Chá de Pinewarden"
+      },
+      "spiced_summit_cider": {
+        "name": "Sidra especiada do cume"
+      },
+      "frostmint_draught": {
+        "name": "Poção de hortelã gélida"
+      },
+      "emberbark_brew": {
+        "name": "Cerveja de casca de brasa"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Vinho quente especiado de Highwatch"
+      },
       "bristleback_maul": {
         "name": "Malho Bristleback"
       },
@@ -60626,6 +61016,36 @@ export const ru_RU: EnTranslations = {
       },
       "monarch_heart": {
         "name": "Сердце Монарха"
+      },
+      "stormtable_trencher": {
+        "name": "Разделочная доска Штормстола"
+      },
+      "ridgeline_meat_pie": {
+        "name": "Мясной пирог с хребта"
+      },
+      "peakberry_tart": {
+        "name": "Тарт с горными ягодами"
+      },
+      "smoked_summit_ram": {
+        "name": "Копчёный горный баран"
+      },
+      "hearthstone_bread": {
+        "name": "Хлеб с очага"
+      },
+      "pinewarden_tea": {
+        "name": "Чай Пайнвардена"
+      },
+      "spiced_summit_cider": {
+        "name": "Пряный горный сидр"
+      },
+      "frostmint_draught": {
+        "name": "Морозно-мятный напиток"
+      },
+      "emberbark_brew": {
+        "name": "Эль из тлеющей коры"
+      },
+      "highwatch_mulled_wine": {
+        "name": "Пряный глинтвейн Хайвотча"
       },
       "bristleback_maul": {
         "name": "Кувалда Щетиноспина"
@@ -67186,6 +67606,36 @@ export const en_XA: EnTranslations = {
       },
       "monarch_heart": {
         "name": "[Ţĥé Ɱóñáŕçĥ'š Ĥéáŕţ]"
+      },
+      "stormtable_trencher": {
+        "name": "[Šţóŕɱţáƀļé Ţŕéñçĥéŕ]"
+      },
+      "ridgeline_meat_pie": {
+        "name": "[Ŕíðĝéļíñé Ɱéáţ Þíé]"
+      },
+      "peakberry_tart": {
+        "name": "[Þéáķƀéŕŕý Ţáŕţ]"
+      },
+      "smoked_summit_ram": {
+        "name": "[Šɱóķéð Šúɱɱíţ Ŕáɱ]"
+      },
+      "hearthstone_bread": {
+        "name": "[Ĥéáŕţĥšţóñé Ɓŕéáð]"
+      },
+      "pinewarden_tea": {
+        "name": "[Þíñéŵáŕðéñ Ţéá]"
+      },
+      "spiced_summit_cider": {
+        "name": "[Šþíçéð Šúɱɱíţ Çíðéŕ]"
+      },
+      "frostmint_draught": {
+        "name": "[Ƒŕóšţɱíñţ Ðŕáúĝĥţ]"
+      },
+      "emberbark_brew": {
+        "name": "[Éɱƀéŕƀáŕķ Ɓŕéŵ]"
+      },
+      "highwatch_mulled_wine": {
+        "name": "[Ĥíĝĥŵáţçĥ Ɱúļļéð Ŵíñé]"
       },
       "bristleback_maul": {
         "name": "[Ɓŕíšţļéƀáçķ Ɱáúļ]"

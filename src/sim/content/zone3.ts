@@ -422,6 +422,8 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
     questIds: ['q_stalker_pelts', 'q_glowing_wax'],
     vendorItems: [
       'trail_hardtack', 'meltwater_flask', 'roast_mountain_goat', 'glacier_melt',
+      'stormtable_trencher', 'ridgeline_meat_pie', 'peakberry_tart', 'smoked_summit_ram', 'hearthstone_bread',
+      'pinewarden_tea', 'spiced_summit_cider', 'frostmint_draught', 'emberbark_brew', 'highwatch_mulled_wine',
       'healing_potion', 'mana_potion',
       'highwatch_breastplate', 'peakwool_robe', 'stalkerhide_jerkin', 'cragwalker_boots', 'windguard_leggings',
     ],
@@ -1081,6 +1083,47 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   glacier_melt: {
     id: 'glacier_melt', name: 'Glacier Melt', kind: 'drink', quality: 'common',
     drinkMana: 900, sellValue: 150, buyValue: 2500,
+  },
+  // --- Highwatch Stormtable feast menu (Quartermaster Bree) ---
+  stormtable_trencher: {
+    id: 'stormtable_trencher', name: 'Stormtable Trencher', kind: 'food', quality: 'common',
+    foodHp: 600, sellValue: 90, buyValue: 1500,
+  },
+  ridgeline_meat_pie: {
+    id: 'ridgeline_meat_pie', name: 'Ridgeline Meat Pie', kind: 'food', quality: 'common',
+    foodHp: 720, sellValue: 120, buyValue: 2000,
+  },
+  peakberry_tart: {
+    id: 'peakberry_tart', name: 'Peakberry Tart', kind: 'food', quality: 'common',
+    foodHp: 660, sellValue: 100, buyValue: 1700,
+  },
+  smoked_summit_ram: {
+    id: 'smoked_summit_ram', name: 'Smoked Summit Ram', kind: 'food', quality: 'common',
+    foodHp: 820, sellValue: 150, buyValue: 2500,
+  },
+  hearthstone_bread: {
+    id: 'hearthstone_bread', name: 'Hearthstone Bread', kind: 'food', quality: 'common',
+    foodHp: 780, sellValue: 140, buyValue: 2300,
+  },
+  pinewarden_tea: {
+    id: 'pinewarden_tea', name: 'Pinewarden Tea', kind: 'drink', quality: 'common',
+    drinkMana: 700, sellValue: 90, buyValue: 1500,
+  },
+  spiced_summit_cider: {
+    id: 'spiced_summit_cider', name: 'Spiced Summit Cider', kind: 'drink', quality: 'common',
+    drinkMana: 760, sellValue: 120, buyValue: 2000,
+  },
+  frostmint_draught: {
+    id: 'frostmint_draught', name: 'Frostmint Draught', kind: 'drink', quality: 'common',
+    drinkMana: 850, sellValue: 150, buyValue: 2500,
+  },
+  emberbark_brew: {
+    id: 'emberbark_brew', name: 'Emberbark Brew', kind: 'drink', quality: 'common',
+    drinkMana: 800, sellValue: 130, buyValue: 2200,
+  },
+  highwatch_mulled_wine: {
+    id: 'highwatch_mulled_wine', name: 'Highwatch Mulled Wine', kind: 'drink', quality: 'common',
+    drinkMana: 930, sellValue: 150, buyValue: 2500,
   },
   // --- vendor whites (Armorer Hode + Quartermaster Bree) ---
   highwatch_warblade: {
