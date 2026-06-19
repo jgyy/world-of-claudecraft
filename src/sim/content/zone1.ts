@@ -571,6 +571,17 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
       'q_relic_gorrak', 'q_relic_looterking',
     ],
     greeting: 'Every spade-turn of this valley buries a story, $N — and something always crawls in to gnaw it.',
+  beekeeper_orla: {
+    id: 'beekeeper_orla', name: 'Beekeeper Orla', title: 'Brightwood Apiarist',
+    // tends her hive-stands at the glade's western edge, smoker in hand
+    pos: { x: 12, z: 124 }, facing: -0.6, color: 0xd9a441,
+    questIds: [
+      'q_apiary_clover', 'q_apiary_waxthieves', 'q_apiary_underminers',
+      'q_apiary_forage_path', 'q_apiary_honey_raiders', 'q_apiary_blossom_blight',
+      'q_apiary_trampled_meadow', 'q_apiary_north_road', 'q_apiary_clover_gluttons',
+      'q_apiary_moth_monarch',
+    ],
+    greeting: 'Mind the smoker, $C — calm bees make sweet honey, and angry ones make for a long day.',
   },
 };
 
@@ -1318,6 +1329,100 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     xpReward: 1150, copperReward: 500, itemRewards: {},
     requiresQuest: 'q_relic_gorrak',
     minLevel: 6,
+  // The Brightwood Apiary — Beekeeper Orla's pollinator-rounds chain.
+  // Every objective targets an already-camped Brightwood Glade / Vale mob, so
+  // the chain spawns nothing new and shifts no world-gen RNG. Copper + XP only,
+  // so no new item entities and no item-name localization.
+  // -------------------------------------------------------------------------
+  q_apiary_clover: {
+    id: 'q_apiary_clover', name: 'Sweet Clover',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, $N. Drive off 6 Grovetusk Boars and let the blossoms come back.',
+    completionText: 'Bless you. By midsummer that meadow will hum loud enough to hear from here.',
+    objectives: [{ type: 'kill', targetMobId: 'grovetusk_boar', count: 6, label: 'Grovetusk Boar driven off' }],
+    xpReward: 480, copperReward: 130, itemRewards: {},
+  },
+  q_apiary_waxthieves: {
+    id: 'q_apiary_waxthieves', name: 'Wax Thieves',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'The glade foxes have learned to tip my hive-stands and lick the comb clean — wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.',
+    completionText: 'Clever things, foxes. A pity, but a beekeeper must choose her bees.',
+    objectives: [{ type: 'kill', targetMobId: 'glade_fox', count: 6, label: 'Glade Fox thinned' }],
+    xpReward: 500, copperReward: 140, itemRewards: {},
+    requiresQuest: 'q_apiary_clover',
+  },
+  q_apiary_underminers: {
+    id: 'q_apiary_underminers', name: 'The Underminers',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.',
+    completionText: 'Solid ground under every hive now. The bees thank you, in their way.',
+    objectives: [{ type: 'kill', targetMobId: 'thornpelt_badger', count: 6, label: 'Thornpelt Badger culled' }],
+    xpReward: 520, copperReward: 150, itemRewards: {},
+    requiresQuest: 'q_apiary_waxthieves',
+  },
+  q_apiary_forage_path: {
+    id: 'q_apiary_forage_path', name: 'The Forage Path',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.',
+    completionText: 'I can walk my rounds in peace now. That is worth more than coin — but take the coin too.',
+    objectives: [{ type: 'kill', targetMobId: 'bramble_lynx', count: 6, label: 'Bramble Lynx cleared' }],
+    xpReward: 540, copperReward: 160, itemRewards: {},
+    requiresQuest: 'q_apiary_underminers',
+  },
+  q_apiary_honey_raiders: {
+    id: 'q_apiary_honey_raiders', name: 'Honey Raiders',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, $N, before they find my stands.',
+    completionText: 'My hives still stand because of you. I will not forget it.',
+    objectives: [{ type: 'kill', targetMobId: 'sunhide_bear', count: 5, label: 'Sunhide Bear driven off' }],
+    xpReward: 620, copperReward: 190, itemRewards: {},
+    requiresQuest: 'q_apiary_forage_path',
+    suggestedPlayers: 2,
+  },
+  q_apiary_blossom_blight: {
+    id: 'q_apiary_blossom_blight', name: 'Blossom Blight',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.',
+    completionText: 'The western blooms are open to the air again. Good honey comes of distant flowers.',
+    objectives: [{ type: 'kill', targetMobId: 'webwood_spider', count: 8, label: 'Webwood Lurker culled' }],
+    xpReward: 560, copperReward: 170, itemRewards: {},
+    requiresQuest: 'q_apiary_honey_raiders',
+  },
+  q_apiary_trampled_meadow: {
+    id: 'q_apiary_trampled_meadow', name: 'The Trampled Meadow',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.',
+    completionText: 'Wildflowers by spring, honey by summer. That is how it is meant to go.',
+    objectives: [{ type: 'kill', targetMobId: 'wild_boar', count: 8, label: 'Wild Boar thinned' }],
+    xpReward: 580, copperReward: 175, itemRewards: {},
+    requiresQuest: 'q_apiary_blossom_blight',
+  },
+  q_apiary_north_road: {
+    id: 'q_apiary_north_road', name: 'The Road North',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.',
+    completionText: 'The carters will ride again, and Eastbrook will have its honey. My thanks, $N.',
+    objectives: [{ type: 'kill', targetMobId: 'forest_wolf', count: 8, label: 'Forest Wolf thinned' }],
+    xpReward: 600, copperReward: 185, itemRewards: {},
+    requiresQuest: 'q_apiary_trampled_meadow',
+  },
+  q_apiary_clover_gluttons: {
+    id: 'q_apiary_clover_gluttons', name: 'Clover Gluttons',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'The brightwood hares have bred past all reason and they crop the clover to the root before it can flower — and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.',
+    completionText: 'A meadow shared is a meadow that flowers. The balance is kept, thanks to you.',
+    objectives: [{ type: 'kill', targetMobId: 'brightwood_hare', count: 8, label: 'Brightwood Hare thinned' }],
+    xpReward: 620, copperReward: 195, itemRewards: {},
+    requiresQuest: 'q_apiary_north_road',
+  },
+  q_apiary_moth_monarch: {
+    id: 'q_apiary_moth_monarch', name: 'The Monarch of the Glade',
+    giverNpcId: 'beekeeper_orla', turnInNpcId: 'beekeeper_orla',
+    text: 'There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, $N, and the Brightwood will bloom as it has not in living memory. Do not go alone.',
+    completionText: 'The glade is waking — you can smell the blossom from here. You have given my bees a future, $N, and Brightwood will taste it in every drop of honey.',
+    objectives: [{ type: 'kill', targetMobId: 'brightwood_monarch', count: 1, label: 'Brightwood Monarch ended' }],
+    xpReward: 1100, copperReward: 420, itemRewards: {},
+    requiresQuest: 'q_apiary_clover_gluttons',
     suggestedPlayers: 2,
   },
 };
@@ -1349,6 +1454,11 @@ export const ZONE1_QUEST_ORDER = [
   'q_relic_dust', 'q_relic_robbers', 'q_relic_tunnels', 'q_relic_web',
   'q_relic_matriarch', 'q_relic_drowned', 'q_relic_field', 'q_relic_custodian',
   'q_relic_gorrak', 'q_relic_looterking',
+  // The Brightwood Apiary chain
+  'q_apiary_clover', 'q_apiary_waxthieves', 'q_apiary_underminers',
+  'q_apiary_forage_path', 'q_apiary_honey_raiders', 'q_apiary_blossom_blight',
+  'q_apiary_trampled_meadow', 'q_apiary_north_road', 'q_apiary_clover_gluttons',
+  'q_apiary_moth_monarch',
 ];
 
 // ---------------------------------------------------------------------------

@@ -49,6 +49,7 @@ const NPC_IDS = [
   'loremaster_caddis', 'ranger_elwyn', 'anglermaster_pell',
   'loremaster_caddis', 'ranger_elwyn', 'wallwright_garrod',
   'loremaster_caddis', 'ranger_elwyn', 'antiquarian_veska',
+  'loremaster_caddis', 'ranger_elwyn', 'beekeeper_orla',
 ] as const;
 
 const QUEST_IDS = [
@@ -101,6 +102,10 @@ const QUEST_IDS = [
   'q_relic_dust', 'q_relic_robbers', 'q_relic_tunnels', 'q_relic_web',
   'q_relic_matriarch', 'q_relic_drowned', 'q_relic_field', 'q_relic_custodian',
   'q_relic_gorrak', 'q_relic_looterking',
+  'q_apiary_clover', 'q_apiary_waxthieves', 'q_apiary_underminers',
+  'q_apiary_forage_path', 'q_apiary_honey_raiders', 'q_apiary_blossom_blight',
+  'q_apiary_trampled_meadow', 'q_apiary_north_road', 'q_apiary_clover_gluttons',
+  'q_apiary_moth_monarch',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
