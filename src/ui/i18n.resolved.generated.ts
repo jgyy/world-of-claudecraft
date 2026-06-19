@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -7856,6 +7961,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8821,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -12319,6 +12529,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13389,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -16782,6 +17097,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17957,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -21245,6 +21665,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22525,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -25708,6 +26233,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27093,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -30171,6 +30801,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31661,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -34634,6 +35369,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36229,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -39097,6 +39937,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40797,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -43560,6 +44505,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45365,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -48023,6 +49073,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49933,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -52486,6 +53641,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54501,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -56949,6 +58209,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59069,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
           }
         }
       },
@@ -61412,6 +62777,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "saltmaster_calla": {
+        "name": "Saltmaster Calla",
+        "title": "Keeper of the Brine Pans",
+        "greeting": "No salt, no garrison - the fen rots a man's rations in a week without it. Mind the pans, {playerName}, and the pans will keep Fenbridge fed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63640,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_saltern_pansward": {
+        "title": "Salt Is Survival",
+        "text": "Every cask of cured eel and salt-pork that keeps this garrison standing comes off my brine pans, {playerName} - and lately the mire prowlers have learned that a salt-porter smells like a slow supper. Two of my carriers went into the reeds this week and only their yokes came back. Thin the brutes along the pan road: twelve, and do it where the rest can watch.",
+        "completion": "Twelve fewer mouths in the reeds, and my porters can breathe again. You've earned a place at the pans, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "Bloat in the Brine",
+        "text": "A clean pan boils down to white salt; a fouled one boils down to poison. The bog bloats have taken to wallowing in my evaporation flats overnight, and every pan they touch turns green by morning - a week's labour ruined in a night. Burst eight of the swollen things out among the reeds before they cost me the whole season.",
+        "completion": "The flats run clear again. Salt that won't sicken the men who eat it - that's worth more than gold out here, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat burst"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "Salt Thieves",
+        "text": "Now the Deepfen snappers have got a taste for it. They come up the channel at dusk and haul off the salt cakes drying on my racks - a whole night's yield gone in webbed fistfuls. I don't care why fish-men crave salt, {playerName}; I care that they stop. Cull twelve at the water's edge and put the fear of the pans into them.",
+        "completion": "Let them gum the mud and like it. The racks were untouched this morning - first time in a fortnight.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "Webs on the Racks",
+        "text": "Salt cakes dry on open reed racks, and reed racks make a fine frame for a Mirefen widow's web. My rackers won't reach in past those grey sheets - and I don't blame them, having seen what one bite does. Clear ten of the widows out of the drying yard so my people can work without losing a hand to it.",
+        "completion": "The racks are mine again, not theirs. My rackers send their thanks - and their fingers, all ten apiece.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow slain"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "The Pan-Breaker",
+        "text": "Something walked through my eastern flats in the night and left them in ruins - clay pan-walls a season's work to build, stamped flat as the road. The tracks are a hand-span deep and tusked. That's Grubjaw, {playerName}, the old marsh-boar the wardens curse by name. Put him down before he flattens the rest, or there'll be no pans left to keep.",
+        "completion": "By the brine, you actually dragged the brute down. Look at those tusks - bigger than my forearm. The eastern flats are safe to rebuild.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw slain"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "Salt the Restless",
+        "text": "Old salt-folk say brine keeps the dead in the ground. Whatever the truth, the drowned have started wading out of the channel and into my pans - standing there in the boiling flats like they're remembering being men. They foul the salt and they terrify my night crew. Give twelve of them the only rest the fen allows.",
+        "completion": "Back to the mud with them. Maybe the brine does hold the dead - but only if the living keep watch. You kept it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead destroyed"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "Reed-Burners",
+        "text": "Boiling brine takes fire, and fire takes dry reed - I keep stockpiles stacked the length of the pan road. Last night the fen trolls torched two ricks for sport and warmed their hides by my season's fuel. Without that reed the pans go cold and the salt stops. Cut down ten of the trolls before they leave me boiling salt over nothing.",
+        "completion": "Let them be cold, then. The ricks that are left will see us through to the dry months. Good work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll slain"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "The Brine Curse",
+        "text": "There's worse than beasts at my pans now, {playerName}. Gravecaller cultists have crept down to the flats by night and daubed their grave-marks on my pan-walls - and where they mark, the salt comes out grey and bitter and no good to anyone. They're cursing the brine itself. Break twelve of the cultists and scrub their filth off my walls.",
+        "completion": "Grey salt, cursed salt - I've poured out three pans' worth I daren't sell. But the marks have stopped spreading. Twelve fewer hands to daub them.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "Break the Blessing",
+        "text": "Kill a curser and two more take his place - because the gravecaller menders keep them on their feet, knitting wounds shut as fast as you open them. As long as the menders sing, my pans stay cursed. Hunt down eight of the menders, {playerName}. Cut the song and the curse-work dies with it.",
+        "completion": "The marks have faded and the new salt runs white again. You went for the root, not the branch - that's the only way anything stays dead in this fen.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Mender slain"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "The Brine-Devil",
+        "text": "There's one last thing keeping my crews off the deep pans, {playerName} - a shape in the saltiest flat where the brine runs thick as broth. Mirejaw, the wardens call it: a marsh-devil grown vast and patient in water that would pickle anything else alive. It took my best brineman last spring. End it, and the saltern is truly ours again. Don't go alone.",
+        "completion": "It's dead. After all these years, the deep pans are just pans again. The garrison will eat cured and salted through the worst the fen can throw, and they'll never know your name was the reason. I will, though. Thank you, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62524,6 +63994,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62575,6 +64048,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62697,6 +64210,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62748,6 +64264,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62870,6 +64426,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62921,6 +64480,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63043,6 +64642,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63094,6 +64696,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63217,6 +64859,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63268,6 +64913,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63390,6 +65075,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63441,6 +65129,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63563,6 +65291,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63614,6 +65345,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63736,6 +65507,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63787,6 +65561,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63909,6 +65723,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63960,6 +65777,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64082,6 +65939,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64133,6 +65993,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64255,6 +66155,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64306,6 +66209,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64428,6 +66371,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.saltmaster_calla.greeting",
+    "entities.npcs.saltmaster_calla.name",
+    "entities.npcs.saltmaster_calla.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64479,6 +66425,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_saltern_brinedevil.completion",
+    "entities.quests.q_saltern_brinedevil.objectives.0.label",
+    "entities.quests.q_saltern_brinedevil.text",
+    "entities.quests.q_saltern_brinedevil.title",
+    "entities.quests.q_saltern_cursers.completion",
+    "entities.quests.q_saltern_cursers.objectives.0.label",
+    "entities.quests.q_saltern_cursers.text",
+    "entities.quests.q_saltern_cursers.title",
+    "entities.quests.q_saltern_drowned.completion",
+    "entities.quests.q_saltern_drowned.objectives.0.label",
+    "entities.quests.q_saltern_drowned.text",
+    "entities.quests.q_saltern_drowned.title",
+    "entities.quests.q_saltern_foulpans.completion",
+    "entities.quests.q_saltern_foulpans.objectives.0.label",
+    "entities.quests.q_saltern_foulpans.text",
+    "entities.quests.q_saltern_foulpans.title",
+    "entities.quests.q_saltern_menders.completion",
+    "entities.quests.q_saltern_menders.objectives.0.label",
+    "entities.quests.q_saltern_menders.text",
+    "entities.quests.q_saltern_menders.title",
+    "entities.quests.q_saltern_panbreaker.completion",
+    "entities.quests.q_saltern_panbreaker.objectives.0.label",
+    "entities.quests.q_saltern_panbreaker.text",
+    "entities.quests.q_saltern_panbreaker.title",
+    "entities.quests.q_saltern_pansward.completion",
+    "entities.quests.q_saltern_pansward.objectives.0.label",
+    "entities.quests.q_saltern_pansward.text",
+    "entities.quests.q_saltern_pansward.title",
+    "entities.quests.q_saltern_reedburners.completion",
+    "entities.quests.q_saltern_reedburners.objectives.0.label",
+    "entities.quests.q_saltern_reedburners.text",
+    "entities.quests.q_saltern_reedburners.title",
+    "entities.quests.q_saltern_snappers.completion",
+    "entities.quests.q_saltern_snappers.objectives.0.label",
+    "entities.quests.q_saltern_snappers.text",
+    "entities.quests.q_saltern_snappers.title",
+    "entities.quests.q_saltern_webs.completion",
+    "entities.quests.q_saltern_webs.objectives.0.label",
+    "entities.quests.q_saltern_webs.text",
+    "entities.quests.q_saltern_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -67972,6 +69958,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "saltmaster_calla": {
+        "name": "[Šáļţɱášţéŕ Çáļļá]",
+        "title": "[Ķééþéŕ óƒ ţĥé Ɓŕíñé Þáñš]",
+        "greeting": "[Ñó šáļţ, ñó ĝáŕŕíšóñ - ţĥé ƒéñ ŕóţš á ɱáñ'š ŕáţíóñš íñ á ŵééķ ŵíţĥóúţ íţ. Ɱíñð ţĥé þáñš, {playerName}, áñð ţĥé þáñš ŵíļļ ķééþ Ƒéñƀŕíðĝé ƒéð.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70818,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_saltern_pansward": {
+        "title": "[Šáļţ Íš Šúŕʋíʋáļ]",
+        "text": "[Éʋéŕý çášķ óƒ çúŕéð ééļ áñð šáļţ-þóŕķ ţĥáţ ķééþš ţĥíš ĝáŕŕíšóñ šţáñðíñĝ çóɱéš óƒƒ ɱý ƀŕíñé þáñš, {playerName} - áñð ļáţéļý ţĥé ɱíŕé þŕóŵļéŕš ĥáʋé ļéáŕñéð ţĥáţ á šáļţ-þóŕţéŕ šɱéļļš ļíķé á šļóŵ šúþþéŕ. Ţŵó óƒ ɱý çáŕŕíéŕš ŵéñţ íñţó ţĥé ŕééðš ţĥíš ŵééķ áñð óñļý ţĥéíŕ ýóķéš çáɱé ƀáçķ. Ţĥíñ ţĥé ƀŕúţéš áļóñĝ ţĥé þáñ ŕóáð: ţŵéļʋé, áñð ðó íţ ŵĥéŕé ţĥé ŕéšţ çáñ ŵáţçĥ.]",
+        "completion": "[Ţŵéļʋé ƒéŵéŕ ɱóúţĥš íñ ţĥé ŕééðš, áñð ɱý þóŕţéŕš çáñ ƀŕéáţĥé áĝáíñ. Ýóú'ʋé éáŕñéð á þļáçé áţ ţĥé þáñš, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕé Þŕóŵļéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_saltern_foulpans": {
+        "title": "[Ɓļóáţ íñ ţĥé Ɓŕíñé]",
+        "text": "[Á çļéáñ þáñ ƀóíļš ðóŵñ ţó ŵĥíţé šáļţ; á ƒóúļéð óñé ƀóíļš ðóŵñ ţó þóíšóñ. Ţĥé ƀóĝ ƀļóáţš ĥáʋé ţáķéñ ţó ŵáļļóŵíñĝ íñ ɱý éʋáþóŕáţíóñ ƒļáţš óʋéŕñíĝĥţ, áñð éʋéŕý þáñ ţĥéý ţóúçĥ ţúŕñš ĝŕééñ ƀý ɱóŕñíñĝ - á ŵééķ'š ļáƀóúŕ ŕúíñéð íñ á ñíĝĥţ. Ɓúŕšţ éíĝĥţ óƒ ţĥé šŵóļļéñ ţĥíñĝš óúţ áɱóñĝ ţĥé ŕééðš ƀéƒóŕé ţĥéý çóšţ ɱé ţĥé ŵĥóļé šéášóñ.]",
+        "completion": "[Ţĥé ƒļáţš ŕúñ çļéáŕ áĝáíñ. Šáļţ ţĥáţ ŵóñ'ţ šíçķéñ ţĥé ɱéñ ŵĥó éáţ íţ - ţĥáţ'š ŵóŕţĥ ɱóŕé ţĥáñ ĝóļð óúţ ĥéŕé, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓóĝ Ɓļóáţ ƀúŕšţ]"
+          }
+        }
+      },
+      "q_saltern_snappers": {
+        "title": "[Šáļţ Ţĥíéʋéš]",
+        "text": "[Ñóŵ ţĥé Ðééþƒéñ šñáþþéŕš ĥáʋé ĝóţ á ţášţé ƒóŕ íţ. Ţĥéý çóɱé úþ ţĥé çĥáññéļ áţ ðúšķ áñð ĥáúļ óƒƒ ţĥé šáļţ çáķéš ðŕýíñĝ óñ ɱý ŕáçķš - á ŵĥóļé ñíĝĥţ'š ýíéļð ĝóñé íñ ŵéƀƀéð ƒíšţƒúļš. Í ðóñ'ţ çáŕé ŵĥý ƒíšĥ-ɱéñ çŕáʋé šáļţ, {playerName}; Í çáŕé ţĥáţ ţĥéý šţóþ. Çúļļ ţŵéļʋé áţ ţĥé ŵáţéŕ'š éðĝé áñð þúţ ţĥé ƒéáŕ óƒ ţĥé þáñš íñţó ţĥéɱ.]",
+        "completion": "[Ļéţ ţĥéɱ ĝúɱ ţĥé ɱúð áñð ļíķé íţ. Ţĥé ŕáçķš ŵéŕé úñţóúçĥéð ţĥíš ɱóŕñíñĝ - ƒíŕšţ ţíɱé íñ á ƒóŕţñíĝĥţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþƒéñ Šñáþþéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_saltern_webs": {
+        "title": "[Ŵéƀš óñ ţĥé Ŕáçķš]",
+        "text": "[Šáļţ çáķéš ðŕý óñ óþéñ ŕééð ŕáçķš, áñð ŕééð ŕáçķš ɱáķé á ƒíñé ƒŕáɱé ƒóŕ á Ɱíŕéƒéñ ŵíðóŵ'š ŵéƀ. Ɱý ŕáçķéŕš ŵóñ'ţ ŕéáçĥ íñ þášţ ţĥóšé ĝŕéý šĥééţš - áñð Í ðóñ'ţ ƀļáɱé ţĥéɱ, ĥáʋíñĝ šééñ ŵĥáţ óñé ƀíţé ðóéš. Çļéáŕ ţéñ óƒ ţĥé ŵíðóŵš óúţ óƒ ţĥé ðŕýíñĝ ýáŕð šó ɱý þéóþļé çáñ ŵóŕķ ŵíţĥóúţ ļóšíñĝ á ĥáñð ţó íţ.]",
+        "completion": "[Ţĥé ŕáçķš áŕé ɱíñé áĝáíñ, ñóţ ţĥéíŕš. Ɱý ŕáçķéŕš šéñð ţĥéíŕ ţĥáñķš - áñð ţĥéíŕ ƒíñĝéŕš, áļļ ţéñ áþíéçé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéƒéñ Ŵíðóŵ šļáíñ]"
+          }
+        }
+      },
+      "q_saltern_panbreaker": {
+        "title": "[Ţĥé Þáñ-Ɓŕéáķéŕ]",
+        "text": "[Šóɱéţĥíñĝ ŵáļķéð ţĥŕóúĝĥ ɱý éášţéŕñ ƒļáţš íñ ţĥé ñíĝĥţ áñð ļéƒţ ţĥéɱ íñ ŕúíñš - çļáý þáñ-ŵáļļš á šéášóñ'š ŵóŕķ ţó ƀúíļð, šţáɱþéð ƒļáţ áš ţĥé ŕóáð. Ţĥé ţŕáçķš áŕé á ĥáñð-šþáñ ðééþ áñð ţúšķéð. Ţĥáţ'š Ĝŕúƀĵáŵ, {playerName}, ţĥé óļð ɱáŕšĥ-ƀóáŕ ţĥé ŵáŕðéñš çúŕšé ƀý ñáɱé. Þúţ ĥíɱ ðóŵñ ƀéƒóŕé ĥé ƒļáţţéñš ţĥé ŕéšţ, óŕ ţĥéŕé'ļļ ƀé ñó þáñš ļéƒţ ţó ķééþ.]",
+        "completion": "[Ɓý ţĥé ƀŕíñé, ýóú áçţúáļļý ðŕáĝĝéð ţĥé ƀŕúţé ðóŵñ. Ļóóķ áţ ţĥóšé ţúšķš - ƀíĝĝéŕ ţĥáñ ɱý ƒóŕéáŕɱ. Ţĥé éášţéŕñ ƒļáţš áŕé šáƒé ţó ŕéƀúíļð.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕúƀĵáŵ šļáíñ]"
+          }
+        }
+      },
+      "q_saltern_drowned": {
+        "title": "[Šáļţ ţĥé Ŕéšţļéšš]",
+        "text": "[Óļð šáļţ-ƒóļķ šáý ƀŕíñé ķééþš ţĥé ðéáð íñ ţĥé ĝŕóúñð. Ŵĥáţéʋéŕ ţĥé ţŕúţĥ, ţĥé ðŕóŵñéð ĥáʋé šţáŕţéð ŵáðíñĝ óúţ óƒ ţĥé çĥáññéļ áñð íñţó ɱý þáñš - šţáñðíñĝ ţĥéŕé íñ ţĥé ƀóíļíñĝ ƒļáţš ļíķé ţĥéý'ŕé ŕéɱéɱƀéŕíñĝ ƀéíñĝ ɱéñ. Ţĥéý ƒóúļ ţĥé šáļţ áñð ţĥéý ţéŕŕíƒý ɱý ñíĝĥţ çŕéŵ. Ĝíʋé ţŵéļʋé óƒ ţĥéɱ ţĥé óñļý ŕéšţ ţĥé ƒéñ áļļóŵš.]",
+        "completion": "[Ɓáçķ ţó ţĥé ɱúð ŵíţĥ ţĥéɱ. Ɱáýƀé ţĥé ƀŕíñé ðóéš ĥóļð ţĥé ðéáð - ƀúţ óñļý íƒ ţĥé ļíʋíñĝ ķééþ ŵáţçĥ. Ýóú ķéþţ íţ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðŕóŵñéð Ðéáð ðéšţŕóýéð]"
+          }
+        }
+      },
+      "q_saltern_reedburners": {
+        "title": "[Ŕééð-Ɓúŕñéŕš]",
+        "text": "[Ɓóíļíñĝ ƀŕíñé ţáķéš ƒíŕé, áñð ƒíŕé ţáķéš ðŕý ŕééð - Í ķééþ šţóçķþíļéš šţáçķéð ţĥé ļéñĝţĥ óƒ ţĥé þáñ ŕóáð. Ļášţ ñíĝĥţ ţĥé ƒéñ ţŕóļļš ţóŕçĥéð ţŵó ŕíçķš ƒóŕ šþóŕţ áñð ŵáŕɱéð ţĥéíŕ ĥíðéš ƀý ɱý šéášóñ'š ƒúéļ. Ŵíţĥóúţ ţĥáţ ŕééð ţĥé þáñš ĝó çóļð áñð ţĥé šáļţ šţóþš. Çúţ ðóŵñ ţéñ óƒ ţĥé ţŕóļļš ƀéƒóŕé ţĥéý ļéáʋé ɱé ƀóíļíñĝ šáļţ óʋéŕ ñóţĥíñĝ.]",
+        "completion": "[Ļéţ ţĥéɱ ƀé çóļð, ţĥéñ. Ţĥé ŕíçķš ţĥáţ áŕé ļéƒţ ŵíļļ šéé úš ţĥŕóúĝĥ ţó ţĥé ðŕý ɱóñţĥš. Ĝóóð ŵóŕķ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒéñ Ţŕóļļ šļáíñ]"
+          }
+        }
+      },
+      "q_saltern_cursers": {
+        "title": "[Ţĥé Ɓŕíñé Çúŕšé]",
+        "text": "[Ţĥéŕé'š ŵóŕšé ţĥáñ ƀéášţš áţ ɱý þáñš ñóŵ, {playerName}. Ĝŕáʋéçáļļéŕ çúļţíšţš ĥáʋé çŕéþţ ðóŵñ ţó ţĥé ƒļáţš ƀý ñíĝĥţ áñð ðáúƀéð ţĥéíŕ ĝŕáʋé-ɱáŕķš óñ ɱý þáñ-ŵáļļš - áñð ŵĥéŕé ţĥéý ɱáŕķ, ţĥé šáļţ çóɱéš óúţ ĝŕéý áñð ƀíţţéŕ áñð ñó ĝóóð ţó áñýóñé. Ţĥéý'ŕé çúŕšíñĝ ţĥé ƀŕíñé íţšéļƒ. Ɓŕéáķ ţŵéļʋé óƒ ţĥé çúļţíšţš áñð šçŕúƀ ţĥéíŕ ƒíļţĥ óƒƒ ɱý ŵáļļš.]",
+        "completion": "[Ĝŕéý šáļţ, çúŕšéð šáļţ - Í'ʋé þóúŕéð óúţ ţĥŕéé þáñš' ŵóŕţĥ Í ðáŕéñ'ţ šéļļ. Ɓúţ ţĥé ɱáŕķš ĥáʋé šţóþþéð šþŕéáðíñĝ. Ţŵéļʋé ƒéŵéŕ ĥáñðš ţó ðáúƀ ţĥéɱ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕáʋéçáļļéŕ Çúļţíšţ šļáíñ]"
+          }
+        }
+      },
+      "q_saltern_menders": {
+        "title": "[Ɓŕéáķ ţĥé Ɓļéššíñĝ]",
+        "text": "[Ķíļļ á çúŕšéŕ áñð ţŵó ɱóŕé ţáķé ĥíš þļáçé - ƀéçáúšé ţĥé ĝŕáʋéçáļļéŕ ɱéñðéŕš ķééþ ţĥéɱ óñ ţĥéíŕ ƒééţ, ķñíţţíñĝ ŵóúñðš šĥúţ áš ƒášţ áš ýóú óþéñ ţĥéɱ. Áš ļóñĝ áš ţĥé ɱéñðéŕš šíñĝ, ɱý þáñš šţáý çúŕšéð. Ĥúñţ ðóŵñ éíĝĥţ óƒ ţĥé ɱéñðéŕš, {playerName}. Çúţ ţĥé šóñĝ áñð ţĥé çúŕšé-ŵóŕķ ðíéš ŵíţĥ íţ.]",
+        "completion": "[Ţĥé ɱáŕķš ĥáʋé ƒáðéð áñð ţĥé ñéŵ šáļţ ŕúñš ŵĥíţé áĝáíñ. Ýóú ŵéñţ ƒóŕ ţĥé ŕóóţ, ñóţ ţĥé ƀŕáñçĥ - ţĥáţ'š ţĥé óñļý ŵáý áñýţĥíñĝ šţáýš ðéáð íñ ţĥíš ƒéñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕáʋéçáļļéŕ Ɱéñðéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_saltern_brinedevil": {
+        "title": "[Ţĥé Ɓŕíñé-Ðéʋíļ]",
+        "text": "[Ţĥéŕé'š óñé ļášţ ţĥíñĝ ķééþíñĝ ɱý çŕéŵš óƒƒ ţĥé ðééþ þáñš, {playerName} - á šĥáþé íñ ţĥé šáļţíéšţ ƒļáţ ŵĥéŕé ţĥé ƀŕíñé ŕúñš ţĥíçķ áš ƀŕóţĥ. Ɱíŕéĵáŵ, ţĥé ŵáŕðéñš çáļļ íţ: á ɱáŕšĥ-ðéʋíļ ĝŕóŵñ ʋášţ áñð þáţíéñţ íñ ŵáţéŕ ţĥáţ ŵóúļð þíçķļé áñýţĥíñĝ éļšé áļíʋé. Íţ ţóóķ ɱý ƀéšţ ƀŕíñéɱáñ ļášţ šþŕíñĝ. Éñð íţ, áñð ţĥé šáļţéŕñ íš ţŕúļý óúŕš áĝáíñ. Ðóñ'ţ ĝó áļóñé.]",
+        "completion": "[Íţ'š ðéáð. Áƒţéŕ áļļ ţĥéšé ýéáŕš, ţĥé ðééþ þáñš áŕé ĵúšţ þáñš áĝáíñ. Ţĥé ĝáŕŕíšóñ ŵíļļ éáţ çúŕéð áñð šáļţéð ţĥŕóúĝĥ ţĥé ŵóŕšţ ţĥé ƒéñ çáñ ţĥŕóŵ, áñð ţĥéý'ļļ ñéʋéŕ ķñóŵ ýóúŕ ñáɱé ŵáš ţĥé ŕéášóñ. Í ŵíļļ, ţĥóúĝĥ. Ţĥáñķ ýóú, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéĵáŵ ţĥé Ŕáʋéñóúš šļáíñ]"
           }
         }
       },
