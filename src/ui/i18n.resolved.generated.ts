@@ -4068,6 +4068,118 @@ export const en: EnTranslations = {
           }
         }
       },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "Mogger's Trail",
         "text": "Before you take the road north, Eastbrook has one last thorn in its side: Mogger. The brute has been trampling the lower meadow and driving the boars mad. Clear the meadow around his trail so we can see where he lairs.",
@@ -8345,6 +8457,118 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
           }
         }
       },
@@ -12628,6 +12852,118 @@ export const es_ES: EnTranslations = {
           }
         }
       },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "El rastro de Mogger",
         "text": "Antes de tomar el camino al norte, Eastbrook tiene una última espina clavada: Mogger. La bestia pisotea el prado bajo y enloquece a los jabalíes. Limpia la zona de su rastro para que veamos dónde se esconde.",
@@ -16905,6 +17241,118 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
           }
         }
       },
@@ -21188,6 +21636,118 @@ export const fr_CA: EnTranslations = {
           }
         }
       },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "La piste de Mogger",
         "text": "Avant de prendre la route du nord, Eastbrook a une dernière épine dans le pied : Mogger. La brute piétine le pré bas et rend les sangliers fous. Nettoyez le pré autour de sa piste pour que nous voyions où il se terre.",
@@ -25465,6 +26025,118 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
           }
         }
       },
@@ -29748,6 +30420,118 @@ export const it_IT: EnTranslations = {
           }
         }
       },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "La traccia di Mogger",
         "text": "Prima di prendere la strada a nord, Eastbrook ha un'ultima spina nel fianco: Mogger. Il bruto calpesta il prato basso e fa impazzire i cinghiali. Ripulisci il prato attorno alla sua traccia per scoprire dove si tana.",
@@ -34025,6 +34809,118 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
           }
         }
       },
@@ -38308,6 +39204,118 @@ export const zh_CN: EnTranslations = {
           }
         }
       },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "莫格的踪迹",
         "text": "在你踏上北路前，东溪还有最后一根刺：莫格。那蛮兽践踏下方草地，把野猪都逼疯了。清理它踪迹周围的草地，我们才能看出它藏在哪里。",
@@ -42585,6 +43593,118 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
           }
         }
       },
@@ -46868,6 +47988,118 @@ export const ko_KR: EnTranslations = {
           }
         }
       },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "모거의 흔적",
         "text": "북쪽 길을 떠나기 전에 이스트브룩에는 마지막 골칫거리, 모거가 남았습니다. 그 짐승은 아래 초원을 짓밟고 멧돼지를 미치게 합니다. 흔적 주변의 초원을 정리해 은신처를 찾아내십시오.",
@@ -51145,6 +52377,118 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
           }
         }
       },
@@ -55428,6 +56772,118 @@ export const pt_BR: EnTranslations = {
           }
         }
       },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "A trilha de Mogger",
         "text": "Antes de pegar a estrada ao norte, Eastbrook tem um último espinho: Mogger. A fera pisoteia o prado baixo e enlouquece os javalis. Limpe o prado ao redor da trilha para descobrirmos onde ele se esconde.",
@@ -59708,6 +61164,118 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_glade_overbrowse": {
+        "title": "The Overbrowsing Herds",
+        "text": "Thinning the lynx was only half the work, {playerName}. With the prides cut back, the deer have bred unchecked - the dawnmane does strip a glade to bare dirt in a week and move on. Cull 8 Dawnmane Does, and bring me 6 cuts of venison so the watch eats while we work.",
+        "completion": "Eight does and the larder filled. Cruel arithmetic, but a starved glade kills more deer than any arrow. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Dawnmane Doe culled"
+          },
+          "1": {
+            "label": "Brightwood Venison"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "Foxes at the Fawning Ground",
+        "text": "Every spring the glade foxes den in the fawning ground and take the newborn spotted fawns before they can stand. I have lost three litters already this season. Drive the raiders off, {playerName} - slay 10 Glade Foxes and the fawns may yet survive.",
+        "completion": "Ten foxes, and the fawning ground quiet at last. The does will thank you in their wordless way come summer.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox slain"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "A Census of Down",
+        "text": "A warden who does not count cannot keep, {playerName}. I judge the meadow crane flock by the down they shed - too much and the nesting has failed, too little and the marsh is creeping in. Gather me 8 tufts of Soft Down from the cranes and hares of the lower glade, and I will read the season in them.",
+        "completion": "Good down, clean and dry - the flock is sound. The glade speaks plainly to those who learn to listen. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Soft Down"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "Diggers Among the Roots",
+        "text": "The thornpelt badgers have turned the old oak stand into a warren - and a tree whose roots are tunnelled hollow falls in the first hard wind. I have marked three giants already leaning. Put down 8 Thornpelt Badgers before the canopy comes down with them.",
+        "completion": "Eight setts cleared. The oaks will stand another hundred years now, long after you and I are forgotten by everything but the glade.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger slain"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "Against the Long Cold",
+        "text": "Winter is the warden's hardest watch, and the watch needs hides to outlast it. The grovetusk boars wear the thickest amber hide in the glade - and they are rooting up the seedbeds besides, so culling them serves twice. Slay 6 Grovetusk Boar and bring me 6 Amber Hides.",
+        "completion": "Six fine amber hides - enough to line the watch-hut against the worst of it. You think like a warden now, {playerName}: every kill made to count twice.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar slain"
+          },
+          "1": {
+            "label": "Amber Hide"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "The Maddened Rut",
+        "text": "The stag rut has turned to madness this year - the bucks gore anything that moves, and a woodcutter is laid up in Eastbrook with a hole through his thigh to prove it. Thin the rage from the herd: fell 8 Brightwood Stags, and cut me 5 antlers so I may judge their health by the bone.",
+        "completion": "Five sound antlers, and the rut broken before it cost a life. The bucks will settle now. A hard mercy, well delivered.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Stag felled"
+          },
+          "1": {
+            "label": "Stag Antler"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "Wolves at the Treeline",
+        "text": "The cull leaves carrion, and carrion draws wolves from the Vale beyond the glade. They are massing at the southern treeline now, bolder each dusk - soon they will not wait for the dead. Push them back, {playerName}. Slay 12 Forest Wolves before they learn the glade is an open larder.",
+        "completion": "Twelve wolves turned back into the Vale. The treeline holds. This is the warden's endless arithmetic - every answer raises a new question with teeth.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf driven off"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "Snares in the Green",
+        "text": "I have found wire snares strung through the deer-runs - cruel, indiscriminate things that leave a beast to die slow for a pelt. These are no hunter's tools; they are a poacher's. The Vale bandits have crept up into my glade. Find them and answer them: 8 Vale Bandits, {playerName}.",
+        "completion": "Eight poachers down, and a sack of their filthy wire on my fire. But snares mean a snare-master, and that one I have not yet found...",
+        "objectives": {
+          "0": {
+            "label": "Poaching Vale Bandit slain"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "The Apex Roused",
+        "text": "The poachers' snares maddened the sunhide bears worst of all - a snared bear is a furious bear, and three of them now hold the eastern slope, killing for rage rather than meat. They are the glade's apex and I would not loose this work on you if I had another blade. Put down 8 Sunhide Bears and end their suffering.",
+        "completion": "Eight, and the slope gone quiet. To kill the very thing a warden swears to keep - that is the weight of this work, {playerName}. Bear it well. The glade is nearly whole again.",
+        "objectives": {
+          "0": {
+            "label": "Maddened Sunhide Bear slain"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "The Warden's Long Watch",
+        "text": "One task remains before the season turns, and it is the heaviest. The snare-master rallies the last of his poachers behind the lynx prides we first thinned - using my own glade's predators as a wall. Break that wall and break his band: cut down 10 Bramble Lynx he has driven before him, and bring me 8 Amber Hides as proof the eastern slope is reclaimed. Do not go alone.",
+        "completion": "It is done. A full season's watch, start to finish, and the glade handed back to itself whole. I have wardened Brightwood twenty years, {playerName}, and never with a better hand beside me. The glade will remember you - and so will I.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx slain"
+          },
+          "1": {
+            "label": "Amber Hide reclaimed"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -59971,6 +61539,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60041,6 +61653,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60111,6 +61767,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60181,6 +61881,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60252,6 +61996,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60322,6 +62110,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60392,6 +62224,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60462,6 +62338,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60532,6 +62452,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60602,6 +62566,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60672,6 +62680,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -60742,6 +62794,50 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_glade_amber.completion",
+    "entities.quests.q_glade_amber.objectives.0.label",
+    "entities.quests.q_glade_amber.objectives.1.label",
+    "entities.quests.q_glade_amber.text",
+    "entities.quests.q_glade_amber.title",
+    "entities.quests.q_glade_apex.completion",
+    "entities.quests.q_glade_apex.objectives.0.label",
+    "entities.quests.q_glade_apex.text",
+    "entities.quests.q_glade_apex.title",
+    "entities.quests.q_glade_census.completion",
+    "entities.quests.q_glade_census.objectives.0.label",
+    "entities.quests.q_glade_census.text",
+    "entities.quests.q_glade_census.title",
+    "entities.quests.q_glade_diggers.completion",
+    "entities.quests.q_glade_diggers.objectives.0.label",
+    "entities.quests.q_glade_diggers.text",
+    "entities.quests.q_glade_diggers.title",
+    "entities.quests.q_glade_foxes.completion",
+    "entities.quests.q_glade_foxes.objectives.0.label",
+    "entities.quests.q_glade_foxes.text",
+    "entities.quests.q_glade_foxes.title",
+    "entities.quests.q_glade_long_watch.completion",
+    "entities.quests.q_glade_long_watch.objectives.0.label",
+    "entities.quests.q_glade_long_watch.objectives.1.label",
+    "entities.quests.q_glade_long_watch.text",
+    "entities.quests.q_glade_long_watch.title",
+    "entities.quests.q_glade_overbrowse.completion",
+    "entities.quests.q_glade_overbrowse.objectives.0.label",
+    "entities.quests.q_glade_overbrowse.objectives.1.label",
+    "entities.quests.q_glade_overbrowse.text",
+    "entities.quests.q_glade_overbrowse.title",
+    "entities.quests.q_glade_rut.completion",
+    "entities.quests.q_glade_rut.objectives.0.label",
+    "entities.quests.q_glade_rut.objectives.1.label",
+    "entities.quests.q_glade_rut.text",
+    "entities.quests.q_glade_rut.title",
+    "entities.quests.q_glade_snares.completion",
+    "entities.quests.q_glade_snares.objectives.0.label",
+    "entities.quests.q_glade_snares.text",
+    "entities.quests.q_glade_snares.title",
+    "entities.quests.q_glade_treeline.completion",
+    "entities.quests.q_glade_treeline.objectives.0.label",
+    "entities.quests.q_glade_treeline.text",
+    "entities.quests.q_glade_treeline.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64846,6 +66942,118 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_glade_overbrowse": {
+        "title": "[Ţĥé Óʋéŕƀŕóŵšíñĝ Ĥéŕðš]",
+        "text": "[Ţĥíññíñĝ ţĥé ļýñẋ ŵáš óñļý ĥáļƒ ţĥé ŵóŕķ, {playerName}. Ŵíţĥ ţĥé þŕíðéš çúţ ƀáçķ, ţĥé ðééŕ ĥáʋé ƀŕéð úñçĥéçķéð - ţĥé ðáŵñɱáñé ðóéš šţŕíþ á ĝļáðé ţó ƀáŕé ðíŕţ íñ á ŵééķ áñð ɱóʋé óñ. Çúļļ 8 Ðáŵñɱáñé Ðóéš, áñð ƀŕíñĝ ɱé 6 çúţš óƒ ʋéñíšóñ šó ţĥé ŵáţçĥ éáţš ŵĥíļé ŵé ŵóŕķ.]",
+        "completion": "[Éíĝĥţ ðóéš áñð ţĥé ļáŕðéŕ ƒíļļéð. Çŕúéļ áŕíţĥɱéţíç, ƀúţ á šţáŕʋéð ĝļáðé ķíļļš ɱóŕé ðééŕ ţĥáñ áñý áŕŕóŵ. Ŵéļļ ðóñé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðáŵñɱáñé Ðóé çúļļéð]"
+          },
+          "1": {
+            "label": "[Ɓŕíĝĥţŵóóð Ʋéñíšóñ]"
+          }
+        }
+      },
+      "q_glade_foxes": {
+        "title": "[Ƒóẋéš áţ ţĥé Ƒáŵñíñĝ Ĝŕóúñð]",
+        "text": "[Éʋéŕý šþŕíñĝ ţĥé ĝļáðé ƒóẋéš ðéñ íñ ţĥé ƒáŵñíñĝ ĝŕóúñð áñð ţáķé ţĥé ñéŵƀóŕñ šþóţţéð ƒáŵñš ƀéƒóŕé ţĥéý çáñ šţáñð. Í ĥáʋé ļóšţ ţĥŕéé ļíţţéŕš áļŕéáðý ţĥíš šéášóñ. Ðŕíʋé ţĥé ŕáíðéŕš óƒƒ, {playerName} - šļáý 10 Ĝļáðé Ƒóẋéš áñð ţĥé ƒáŵñš ɱáý ýéţ šúŕʋíʋé.]",
+        "completion": "[Ţéñ ƒóẋéš, áñð ţĥé ƒáŵñíñĝ ĝŕóúñð ɋúíéţ áţ ļášţ. Ţĥé ðóéš ŵíļļ ţĥáñķ ýóú íñ ţĥéíŕ ŵóŕðļéšš ŵáý çóɱé šúɱɱéŕ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝļáðé Ƒóẋ šļáíñ]"
+          }
+        }
+      },
+      "q_glade_census": {
+        "title": "[Á Çéñšúš óƒ Ðóŵñ]",
+        "text": "[Á ŵáŕðéñ ŵĥó ðóéš ñóţ çóúñţ çáññóţ ķééþ, {playerName}. Í ĵúðĝé ţĥé ɱéáðóŵ çŕáñé ƒļóçķ ƀý ţĥé ðóŵñ ţĥéý šĥéð - ţóó ɱúçĥ áñð ţĥé ñéšţíñĝ ĥáš ƒáíļéð, ţóó ļíţţļé áñð ţĥé ɱáŕšĥ íš çŕééþíñĝ íñ. Ĝáţĥéŕ ɱé 8 ţúƒţš óƒ Šóƒţ Ðóŵñ ƒŕóɱ ţĥé çŕáñéš áñð ĥáŕéš óƒ ţĥé ļóŵéŕ ĝļáðé, áñð Í ŵíļļ ŕéáð ţĥé šéášóñ íñ ţĥéɱ.]",
+        "completion": "[Ĝóóð ðóŵñ, çļéáñ áñð ðŕý - ţĥé ƒļóçķ íš šóúñð. Ţĥé ĝļáðé šþéáķš þļáíñļý ţó ţĥóšé ŵĥó ļéáŕñ ţó ļíšţéñ. Ɱý ţĥáñķš.]",
+        "objectives": {
+          "0": {
+            "label": "[Šóƒţ Ðóŵñ]"
+          }
+        }
+      },
+      "q_glade_diggers": {
+        "title": "[Ðíĝĝéŕš Áɱóñĝ ţĥé Ŕóóţš]",
+        "text": "[Ţĥé ţĥóŕñþéļţ ƀáðĝéŕš ĥáʋé ţúŕñéð ţĥé óļð óáķ šţáñð íñţó á ŵáŕŕéñ - áñð á ţŕéé ŵĥóšé ŕóóţš áŕé ţúññéļļéð ĥóļļóŵ ƒáļļš íñ ţĥé ƒíŕšţ ĥáŕð ŵíñð. Í ĥáʋé ɱáŕķéð ţĥŕéé ĝíáñţš áļŕéáðý ļéáñíñĝ. Þúţ ðóŵñ 8 Ţĥóŕñþéļţ Ɓáðĝéŕš ƀéƒóŕé ţĥé çáñóþý çóɱéš ðóŵñ ŵíţĥ ţĥéɱ.]",
+        "completion": "[Éíĝĥţ šéţţš çļéáŕéð. Ţĥé óáķš ŵíļļ šţáñð áñóţĥéŕ ĥúñðŕéð ýéáŕš ñóŵ, ļóñĝ áƒţéŕ ýóú áñð Í áŕé ƒóŕĝóţţéñ ƀý éʋéŕýţĥíñĝ ƀúţ ţĥé ĝļáðé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéļţ Ɓáðĝéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_glade_amber": {
+        "title": "[Áĝáíñšţ ţĥé Ļóñĝ Çóļð]",
+        "text": "[Ŵíñţéŕ íš ţĥé ŵáŕðéñ'š ĥáŕðéšţ ŵáţçĥ, áñð ţĥé ŵáţçĥ ñééðš ĥíðéš ţó óúţļášţ íţ. Ţĥé ĝŕóʋéţúšķ ƀóáŕš ŵéáŕ ţĥé ţĥíçķéšţ áɱƀéŕ ĥíðé íñ ţĥé ĝļáðé - áñð ţĥéý áŕé ŕóóţíñĝ úþ ţĥé šééðƀéðš ƀéšíðéš, šó çúļļíñĝ ţĥéɱ šéŕʋéš ţŵíçé. Šļáý 6 Ĝŕóʋéţúšķ Ɓóáŕ áñð ƀŕíñĝ ɱé 6 Áɱƀéŕ Ĥíðéš.]",
+        "completion": "[Šíẋ ƒíñé áɱƀéŕ ĥíðéš - éñóúĝĥ ţó ļíñé ţĥé ŵáţçĥ-ĥúţ áĝáíñšţ ţĥé ŵóŕšţ óƒ íţ. Ýóú ţĥíñķ ļíķé á ŵáŕðéñ ñóŵ, {playerName}: éʋéŕý ķíļļ ɱáðé ţó çóúñţ ţŵíçé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕóʋéţúšķ Ɓóáŕ šļáíñ]"
+          },
+          "1": {
+            "label": "[Áɱƀéŕ Ĥíðé]"
+          }
+        }
+      },
+      "q_glade_rut": {
+        "title": "[Ţĥé Ɱáððéñéð Ŕúţ]",
+        "text": "[Ţĥé šţáĝ ŕúţ ĥáš ţúŕñéð ţó ɱáðñéšš ţĥíš ýéáŕ - ţĥé ƀúçķš ĝóŕé áñýţĥíñĝ ţĥáţ ɱóʋéš, áñð á ŵóóðçúţţéŕ íš ļáíð úþ íñ Éášţƀŕóóķ ŵíţĥ á ĥóļé ţĥŕóúĝĥ ĥíš ţĥíĝĥ ţó þŕóʋé íţ. Ţĥíñ ţĥé ŕáĝé ƒŕóɱ ţĥé ĥéŕð: ƒéļļ 8 Ɓŕíĝĥţŵóóð Šţáĝš, áñð çúţ ɱé 5 áñţļéŕš šó Í ɱáý ĵúðĝé ţĥéíŕ ĥéáļţĥ ƀý ţĥé ƀóñé.]",
+        "completion": "[Ƒíʋé šóúñð áñţļéŕš, áñð ţĥé ŕúţ ƀŕóķéñ ƀéƒóŕé íţ çóšţ á ļíƒé. Ţĥé ƀúçķš ŵíļļ šéţţļé ñóŵ. Á ĥáŕð ɱéŕçý, ŵéļļ ðéļíʋéŕéð.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓŕíĝĥţŵóóð Šţáĝ ƒéļļéð]"
+          },
+          "1": {
+            "label": "[Šţáĝ Áñţļéŕ]"
+          }
+        }
+      },
+      "q_glade_treeline": {
+        "title": "[Ŵóļʋéš áţ ţĥé Ţŕééļíñé]",
+        "text": "[Ţĥé çúļļ ļéáʋéš çáŕŕíóñ, áñð çáŕŕíóñ ðŕáŵš ŵóļʋéš ƒŕóɱ ţĥé Ʋáļé ƀéýóñð ţĥé ĝļáðé. Ţĥéý áŕé ɱáššíñĝ áţ ţĥé šóúţĥéŕñ ţŕééļíñé ñóŵ, ƀóļðéŕ éáçĥ ðúšķ - šóóñ ţĥéý ŵíļļ ñóţ ŵáíţ ƒóŕ ţĥé ðéáð. Þúšĥ ţĥéɱ ƀáçķ, {playerName}. Šļáý 12 Ƒóŕéšţ Ŵóļʋéš ƀéƒóŕé ţĥéý ļéáŕñ ţĥé ĝļáðé íš áñ óþéñ ļáŕðéŕ.]",
+        "completion": "[Ţŵéļʋé ŵóļʋéš ţúŕñéð ƀáçķ íñţó ţĥé Ʋáļé. Ţĥé ţŕééļíñé ĥóļðš. Ţĥíš íš ţĥé ŵáŕðéñ'š éñðļéšš áŕíţĥɱéţíç - éʋéŕý áñšŵéŕ ŕáíšéš á ñéŵ ɋúéšţíóñ ŵíţĥ ţééţĥ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_glade_snares": {
+        "title": "[Šñáŕéš íñ ţĥé Ĝŕééñ]",
+        "text": "[Í ĥáʋé ƒóúñð ŵíŕé šñáŕéš šţŕúñĝ ţĥŕóúĝĥ ţĥé ðééŕ-ŕúñš - çŕúéļ, íñðíšçŕíɱíñáţé ţĥíñĝš ţĥáţ ļéáʋé á ƀéášţ ţó ðíé šļóŵ ƒóŕ á þéļţ. Ţĥéšé áŕé ñó ĥúñţéŕ'š ţóóļš; ţĥéý áŕé á þóáçĥéŕ'š. Ţĥé Ʋáļé ƀáñðíţš ĥáʋé çŕéþţ úþ íñţó ɱý ĝļáðé. Ƒíñð ţĥéɱ áñð áñšŵéŕ ţĥéɱ: 8 Ʋáļé Ɓáñðíţš, {playerName}.]",
+        "completion": "[Éíĝĥţ þóáçĥéŕš ðóŵñ, áñð á šáçķ óƒ ţĥéíŕ ƒíļţĥý ŵíŕé óñ ɱý ƒíŕé. Ɓúţ šñáŕéš ɱéáñ á šñáŕé-ɱášţéŕ, áñð ţĥáţ óñé Í ĥáʋé ñóţ ýéţ ƒóúñð...]",
+        "objectives": {
+          "0": {
+            "label": "[Þóáçĥíñĝ Ʋáļé Ɓáñðíţ šļáíñ]"
+          }
+        }
+      },
+      "q_glade_apex": {
+        "title": "[Ţĥé Áþéẋ Ŕóúšéð]",
+        "text": "[Ţĥé þóáçĥéŕš' šñáŕéš ɱáððéñéð ţĥé šúñĥíðé ƀéáŕš ŵóŕšţ óƒ áļļ - á šñáŕéð ƀéáŕ íš á ƒúŕíóúš ƀéáŕ, áñð ţĥŕéé óƒ ţĥéɱ ñóŵ ĥóļð ţĥé éášţéŕñ šļóþé, ķíļļíñĝ ƒóŕ ŕáĝé ŕáţĥéŕ ţĥáñ ɱéáţ. Ţĥéý áŕé ţĥé ĝļáðé'š áþéẋ áñð Í ŵóúļð ñóţ ļóóšé ţĥíš ŵóŕķ óñ ýóú íƒ Í ĥáð áñóţĥéŕ ƀļáðé. Þúţ ðóŵñ 8 Šúñĥíðé Ɓéáŕš áñð éñð ţĥéíŕ šúƒƒéŕíñĝ.]",
+        "completion": "[Éíĝĥţ, áñð ţĥé šļóþé ĝóñé ɋúíéţ. Ţó ķíļļ ţĥé ʋéŕý ţĥíñĝ á ŵáŕðéñ šŵéáŕš ţó ķééþ - ţĥáţ íš ţĥé ŵéíĝĥţ óƒ ţĥíš ŵóŕķ, {playerName}. Ɓéáŕ íţ ŵéļļ. Ţĥé ĝļáðé íš ñéáŕļý ŵĥóļé áĝáíñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱáððéñéð Šúñĥíðé Ɓéáŕ šļáíñ]"
+          }
+        }
+      },
+      "q_glade_long_watch": {
+        "title": "[Ţĥé Ŵáŕðéñ'š Ļóñĝ Ŵáţçĥ]",
+        "text": "[Óñé ţášķ ŕéɱáíñš ƀéƒóŕé ţĥé šéášóñ ţúŕñš, áñð íţ íš ţĥé ĥéáʋíéšţ. Ţĥé šñáŕé-ɱášţéŕ ŕáļļíéš ţĥé ļášţ óƒ ĥíš þóáçĥéŕš ƀéĥíñð ţĥé ļýñẋ þŕíðéš ŵé ƒíŕšţ ţĥíññéð - úšíñĝ ɱý óŵñ ĝļáðé'š þŕéðáţóŕš áš á ŵáļļ. Ɓŕéáķ ţĥáţ ŵáļļ áñð ƀŕéáķ ĥíš ƀáñð: çúţ ðóŵñ 10 Ɓŕáɱƀļé Ļýñẋ ĥé ĥáš ðŕíʋéñ ƀéƒóŕé ĥíɱ, áñð ƀŕíñĝ ɱé 8 Áɱƀéŕ Ĥíðéš áš þŕóóƒ ţĥé éášţéŕñ šļóþé íš ŕéçļáíɱéð. Ðó ñóţ ĝó áļóñé.]",
+        "completion": "[Íţ íš ðóñé. Á ƒúļļ šéášóñ'š ŵáţçĥ, šţáŕţ ţó ƒíñíšĥ, áñð ţĥé ĝļáðé ĥáñðéð ƀáçķ ţó íţšéļƒ ŵĥóļé. Í ĥáʋé ŵáŕðéñéð Ɓŕíĝĥţŵóóð ţŵéñţý ýéáŕš, {playerName}, áñð ñéʋéŕ ŵíţĥ á ƀéţţéŕ ĥáñð ƀéšíðé ɱé. Ţĥé ĝļáðé ŵíļļ ŕéɱéɱƀéŕ ýóú - áñð šó ŵíļļ Í.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓŕáɱƀļé Ļýñẋ šļáíñ]"
+          },
+          "1": {
+            "label": "[Áɱƀéŕ Ĥíðé ŕéçļáíɱéð]"
           }
         }
       },

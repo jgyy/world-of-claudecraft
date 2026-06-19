@@ -63,6 +63,9 @@ const QUEST_IDS = [
   'q_ledger_first_duty', 'q_ledger_teeth', 'q_ledger_reedwater', 'q_ledger_silk',
   'q_ledger_brood', 'q_ledger_deepvermin', 'q_ledger_toll', 'q_ledger_vigil',
   'q_ledger_great_boar', 'q_ledger_outlaw_captain',
+  'q_glade_overbrowse', 'q_glade_foxes', 'q_glade_census', 'q_glade_diggers',
+  'q_glade_amber', 'q_glade_rut', 'q_glade_treeline', 'q_glade_snares',
+  'q_glade_apex', 'q_glade_long_watch',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
