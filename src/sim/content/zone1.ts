@@ -551,6 +551,7 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
       'q_bounty_verlan', 'q_bounty_maldrec',
     ],
     greeting: 'New posters every week, $C, and the ink never dries. Read the board — the bold ones earn coin.',
+  },
   innkeeper_wenna: {
     id: 'innkeeper_wenna', name: 'Innkeeper Wenna', title: 'Keeper of the Brightwood Tap',
     // outside the tavern on the square's west side, sleeves rolled up
@@ -561,6 +562,7 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
       'q_tap_gorrak_raid', 'q_harvest_feast',
     ],
     greeting: "The Brightwood Tap's been shuttered a season, $N, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin — and a warm hearth — in it for you.",
+  },
   antiquarian_veska: {
     id: 'antiquarian_veska', name: 'Antiquarian Veska', title: 'Vale Antiquarian',
     // a cataloguer's table at the northeast edge of town, clear of every spawn camp
@@ -571,6 +573,7 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
       'q_relic_gorrak', 'q_relic_looterking',
     ],
     greeting: 'Every spade-turn of this valley buries a story, $N — and something always crawls in to gnaw it.',
+  },
   beekeeper_orla: {
     id: 'beekeeper_orla', name: 'Beekeeper Orla', title: 'Brightwood Apiarist',
     // tends her hive-stands at the glade's western edge, smoker in hand
@@ -582,6 +585,7 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
       'q_apiary_moth_monarch',
     ],
     greeting: 'Mind the smoker, $C — calm bees make sweet honey, and angry ones make for a long day.',
+  },
   lampwright_sefa: {
     id: 'lampwright_sefa', name: 'Lampwright Sefa', title: 'Keeper of the Road Lanterns',
     // by the great road-lantern on the north edge of town, oil-can in hand
@@ -592,6 +596,7 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
       'q_lamp_bears', 'q_lamp_the_walking_lights',
     ],
     greeting: 'Every lantern on the Vale roads is mine to keep lit, $C — and the dark between them is full of teeth.',
+  },
   postmaster_calder: {
     id: 'postmaster_calder', name: 'Postmaster Calder', title: 'Keeper of the Vale Post',
     // at the north edge of the square by the road out of town, where the old
@@ -1159,6 +1164,7 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     requiresQuest: 'q_bounty_verlan',
     minLevel: 7,
     suggestedPlayers: 2,
+  },
   // --- The Brightwood Tap: Innkeeper Wenna's Harvest Feast chain ---
   q_tap_cellar_rats: {
     id: 'q_tap_cellar_rats', name: 'Cellar Cleaning',
@@ -1252,6 +1258,7 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     ],
     xpReward: 1100, copperReward: 460, itemRewards: {},
     requiresQuest: 'q_tap_gorrak_raid', minLevel: 6,
+  },
   // The Eastbrook Reliquary — Antiquarian Veska's relic-recovery chain.
   // Every dig site is overrun by scavengers, looters and the restless dead
   // who hoard the Vale's buried history; clear them to reclaim the antiquities.
@@ -1350,6 +1357,7 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     xpReward: 1150, copperReward: 500, itemRewards: {},
     requiresQuest: 'q_relic_gorrak',
     minLevel: 6,
+  },
   // The Brightwood Apiary — Beekeeper Orla's pollinator-rounds chain.
   // Every objective targets an already-camped Brightwood Glade / Vale mob, so
   // the chain spawns nothing new and shifts no world-gen RNG. Copper + XP only,
@@ -1548,6 +1556,7 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     xpReward: 950, copperReward: 360, itemRewards: {},
     requiresQuest: 'q_lamp_bears',
     minLevel: 6,
+  },
   // --- The Vale Post Road: Postmaster Calder reopens the Eastbrook mail relay ---
   q_post_firstrun: {
     id: 'q_post_firstrun', name: 'The Dusk Run',

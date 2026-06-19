@@ -456,6 +456,7 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
       'q_muster_revenants', 'q_muster_commendation',
     ],
     greeting: 'A wall is only as strong as the blades behind it, $C. Want to prove yours is worth the steel? Then earn the muster.',
+  },
   prospector_dunmar: {
     id: 'prospector_dunmar', name: 'Prospector Dunmar', title: 'Deeprock Concessioner',
     pos: { x: 20, z: 660 }, facing: -1.9, color: 0xca8a2a,
@@ -465,6 +466,7 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
       'q_old_diggers', 'q_deeprock_concession',
     ],
     greeting: 'Highwatch sits on the richest ironvein this side of the pass, $N, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin.',
+  },
   wallwright_garrod: {
     id: 'wallwright_garrod', name: 'Wallwright Garrod', title: 'Master Wallwright',
     pos: { x: 18, z: 660 }, facing: -1.9, color: 0x9c6b3f,
@@ -475,6 +477,7 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
       'q_garrod_capstone',
     ],
     greeting: 'Thessaly holds the wall with soldiers, $C. I hold it with stone — and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years.',
+  },
   austringer_wrenna: {
     id: 'austringer_wrenna', name: 'Austringer Wrenna', title: 'Highwatch Falconer',
     pos: { x: -14, z: 648 }, facing: 0.7, color: 0x8e5a3b,
@@ -877,6 +880,7 @@ export const ZONE3_QUESTS: Record<string, QuestDef> = {
     xpReward: 4800, copperReward: 3000,
     itemRewards: { warrior: 'highwatch_breastplate', mage: 'peakwool_robe', rogue: 'stalkerhide_jerkin' },
     requiresQuest: 'q_muster_revenants', minLevel: 18, suggestedPlayers: 3,
+  },
   // --- The Deeprock Concession: Prospector Dunmar's mining chain ---
   q_deeprock_survey: {
     id: 'q_deeprock_survey', name: 'Survey the Ridge',
@@ -970,6 +974,7 @@ export const ZONE3_QUESTS: Record<string, QuestDef> = {
     ],
     xpReward: 3600, copperReward: 1900, itemRewards: {},
     requiresQuest: 'q_old_diggers', minLevel: 19,
+  },
   // --- Wallwright Garrod: the Highwatch fortification chain --------------
   q_garrod_quarry_road: {
     id: 'q_garrod_quarry_road', name: 'Clear the Quarry Road',
@@ -1060,6 +1065,7 @@ export const ZONE3_QUESTS: Record<string, QuestDef> = {
     objectives: [{ type: 'kill', targetMobId: 'ogre_crusher', count: 8, label: 'Thornpeak Crusher slain' }],
     xpReward: 4000, copperReward: 2500, itemRewards: {},
     requiresQuest: 'q_garrod_breakers', minLevel: 17, suggestedPlayers: 3,
+  },
   // --- The Highwatch Mews: Austringer Wrenna keeps the watch's hawks flying ---
   q_mews_ledge: {
     id: 'q_mews_ledge', name: 'Clear the Launch-Ledge',

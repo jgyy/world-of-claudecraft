@@ -376,6 +376,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
       'fenmist_rod', 'drownreed_cudgel', 'marshlord_greatsword', 'venomreed_kris',
     ],
     greeting: 'Fen damp rusts a poor blade in a week, $C. Mine come fen-forged — they bite long after the reeds rot.',
+  },
   cartographer_innes: {
     id: 'cartographer_innes', name: 'Cartographer Innes', title: 'Marsh Surveyor',
     pos: { x: 12, z: 308 }, facing: -Math.PI / 2, color: 0x148f77,
@@ -385,6 +386,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
       'q_survey_deepcut', 'q_survey_blankwater',
     ],
     greeting: 'A map is only as honest as the surveyor is alive, $N. The fen has eaten three of my chainmen already — help me finish the survey before it takes a fourth.',
+  },
   anglermaster_pell: {
     id: 'anglermaster_pell', name: 'Anglermaster Pell', title: 'Keeper of the Fenbridge Derby',
     // out on the west dock over the deepfen lake, a rod across her knees
@@ -395,6 +397,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
       'q_derby_upstream_poachers', 'q_derby_grubjaw', 'q_derby_mirejaw',
     ],
     greeting: "The Fenbridge Derby drew anglers from three towns once, $N — before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you.",
+  },
   salvager_brel: {
     id: 'salvager_brel', name: 'Salvage-Diver Brel', title: 'Deepfen Salvager',
     pos: { x: 12, z: 306 }, facing: -1.4, color: 0x1f618d,
@@ -404,6 +407,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
       'q_salvage_robes', 'q_salvage_glutton',
     ],
     greeting: 'A hundred years of caravans have sunk into this fen, $N — pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble.',
+  },
   saltmaster_calla: {
     id: 'saltmaster_calla', name: 'Saltmaster Calla', title: 'Keeper of the Brine Pans',
     pos: { x: 12, z: 308 }, facing: -Math.PI / 2, color: 0x95a5a6,
@@ -742,6 +746,7 @@ export const ZONE2_QUESTS: Record<string, QuestDef> = {
     requiresQuest: 'q_fenmoss_trolls',
     minLevel: 12,
     suggestedPlayers: 2,
+  },
   // -------------------------------------------------------------------------
   // The Reedwater Survey — Cartographer Innes maps the Mirefen
   // -------------------------------------------------------------------------
@@ -843,6 +848,7 @@ export const ZONE2_QUESTS: Record<string, QuestDef> = {
     xpReward: 1400, copperReward: 1000, itemRewards: {},
     requiresQuest: 'q_survey_deepcut',
     minLevel: 12,
+  },
   // --- The Fenbridge Derby: Anglermaster Pell's questline ---
   // A fresh angling/fishing-derby chain. Every objective reuses an already-camped
   // zone2 mob (no new camps => no world-gen RNG shift), rewards are XP + copper
@@ -939,6 +945,7 @@ export const ZONE2_QUESTS: Record<string, QuestDef> = {
     ],
     xpReward: 1400, copperReward: 560, itemRewards: {},
     requiresQuest: 'q_derby_grubjaw', minLevel: 12, suggestedPlayers: 2,
+  },
   // --- The Deepfen Salvage: Salvage-Diver Brel raises the sunken caravans ---
   q_salvage_bank: {
     id: 'q_salvage_bank', name: "Clear the Divers' Bank",
@@ -1029,6 +1036,7 @@ export const ZONE2_QUESTS: Record<string, QuestDef> = {
     objectives: [{ type: 'kill', targetMobId: 'grubjaw', count: 1, label: 'Grubjaw the Glutton slain' }],
     xpReward: 2800, copperReward: 1800, itemRewards: {},
     requiresQuest: 'q_salvage_robes',
+  },
   // --- The Mirefen Saltern: Saltmaster Calla's brine-pan chain (all-kill, zone2 camps) ---
   q_saltern_pansward: {
     id: 'q_saltern_pansward', name: 'Salt Is Survival',
@@ -1462,6 +1470,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   marshstalker_grips: {
     id: 'marshstalker_grips', name: "Marshstalker's Grips", kind: 'armor', slot: 'gloves', quality: 'uncommon',
     stats: { armor: 40, agi: 3, sta: 1 }, sellValue: 260, buyValue: 2600, requiredClass: ROG,
+  },
   // --- Drownhammer's Armory (Weaponsmith Drennan) ---
   // A fen-forged weapon line covering every archetype, scaled a notch above the
   // Provisioner's white gear and the zone2 reward weapons. Vendor-only (no loot
