@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -7856,6 +7961,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8821,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -12319,6 +12529,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13389,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -16782,6 +17097,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17957,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -21245,6 +21665,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22525,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -25708,6 +26233,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27093,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -30171,6 +30801,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31661,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -34634,6 +35369,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36229,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -39097,6 +39937,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40797,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -43560,6 +44505,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45365,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -48023,6 +49073,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49933,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -52486,6 +53641,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54501,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -56949,6 +58209,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59069,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
           }
         }
       },
@@ -61412,6 +62777,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "antiquarian_veska": {
+        "name": "Antiquarian Veska",
+        "title": "Vale Antiquarian",
+        "greeting": "Every spade-turn of this valley buries a story, {playerName} - and something always crawls in to gnaw it."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63640,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_relic_dust": {
+        "title": "Dust of Ages",
+        "text": "I have come to Eastbrook to catalogue what the soil keeps, {playerName}, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down - gently as you can, though I expect it will not be gentle.",
+        "completion": "Eight, and the trench is quiet at last. Look - a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "Grave-Robbers of the Vale",
+        "text": "Half of what I dig for has already been dug - by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, {playerName}. Ten of them, and perhaps the rest will find an honest trade.",
+        "completion": "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them - provenance lost, of course, but better in my ledger than a smuggler's.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit grave-robber slain"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "Below the Old Dig",
+        "text": "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation - candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+        "completion": "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, {playerName}. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Rat Digger driven off"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "The Cobwebbed Reliquary",
+        "text": "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, {playerName}, and I can finally read the altar-stone beneath their silk.",
+        "completion": "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker cleared"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "Keeper of the Web",
+        "text": "The lurkers were only the household. Their matriarch - the Sableweb - has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, {playerName}. Bring me the run of the vault.",
+        "completion": "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "Drowned Antiquities",
+        "text": "The northwest lake shore was a landing once - there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, {playerName}, before the lake claims the rest.",
+        "completion": "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one - the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "The Rooted Field",
+        "text": "My most promising trench is the east meadow - a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, {playerName}, before they plough my mosaic into gravel.",
+        "completion": "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work - we save what the world has not yet finished destroying.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar culled from the dig"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "The Hollow Custodian",
+        "text": "The northeast ruin has a guardian, {playerName} - Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+        "completion": "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "Gorrak's Plunder",
+        "text": "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, {playerName}. Cut him down and it is ours again.",
+        "completion": "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics - you have recovered the record itself.",
+        "objectives": {
+          "0": {
+            "label": "Gorrak the Ruthless slain"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "The Looter-King",
+        "text": "One thief remains above all the others, {playerName} - Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+        "completion": "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete - every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+        "objectives": {
+          "0": {
+            "label": "Mogger the Looter-King slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62521,6 +63991,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62575,6 +64048,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62694,6 +64207,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62748,6 +64264,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62867,6 +64423,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62921,6 +64480,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63040,6 +64639,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63094,6 +64696,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63214,6 +64856,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63268,6 +64913,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63387,6 +65072,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63441,6 +65129,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63560,6 +65288,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63614,6 +65345,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63733,6 +65504,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63787,6 +65561,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63906,6 +65720,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63960,6 +65777,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64079,6 +65936,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64133,6 +65993,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64252,6 +66152,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64306,6 +66209,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64425,6 +66368,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.antiquarian_veska.greeting",
+    "entities.npcs.antiquarian_veska.name",
+    "entities.npcs.antiquarian_veska.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64479,6 +66425,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_relic_custodian.completion",
+    "entities.quests.q_relic_custodian.objectives.0.label",
+    "entities.quests.q_relic_custodian.text",
+    "entities.quests.q_relic_custodian.title",
+    "entities.quests.q_relic_drowned.completion",
+    "entities.quests.q_relic_drowned.objectives.0.label",
+    "entities.quests.q_relic_drowned.text",
+    "entities.quests.q_relic_drowned.title",
+    "entities.quests.q_relic_dust.completion",
+    "entities.quests.q_relic_dust.objectives.0.label",
+    "entities.quests.q_relic_dust.text",
+    "entities.quests.q_relic_dust.title",
+    "entities.quests.q_relic_field.completion",
+    "entities.quests.q_relic_field.objectives.0.label",
+    "entities.quests.q_relic_field.text",
+    "entities.quests.q_relic_field.title",
+    "entities.quests.q_relic_gorrak.completion",
+    "entities.quests.q_relic_gorrak.objectives.0.label",
+    "entities.quests.q_relic_gorrak.text",
+    "entities.quests.q_relic_gorrak.title",
+    "entities.quests.q_relic_looterking.completion",
+    "entities.quests.q_relic_looterking.objectives.0.label",
+    "entities.quests.q_relic_looterking.text",
+    "entities.quests.q_relic_looterking.title",
+    "entities.quests.q_relic_matriarch.completion",
+    "entities.quests.q_relic_matriarch.objectives.0.label",
+    "entities.quests.q_relic_matriarch.text",
+    "entities.quests.q_relic_matriarch.title",
+    "entities.quests.q_relic_robbers.completion",
+    "entities.quests.q_relic_robbers.objectives.0.label",
+    "entities.quests.q_relic_robbers.text",
+    "entities.quests.q_relic_robbers.title",
+    "entities.quests.q_relic_tunnels.completion",
+    "entities.quests.q_relic_tunnels.objectives.0.label",
+    "entities.quests.q_relic_tunnels.text",
+    "entities.quests.q_relic_tunnels.title",
+    "entities.quests.q_relic_web.completion",
+    "entities.quests.q_relic_web.objectives.0.label",
+    "entities.quests.q_relic_web.text",
+    "entities.quests.q_relic_web.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -67972,6 +69958,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "antiquarian_veska": {
+        "name": "[Áñţíɋúáŕíáñ Ʋéšķá]",
+        "title": "[Ʋáļé Áñţíɋúáŕíáñ]",
+        "greeting": "[Éʋéŕý šþáðé-ţúŕñ óƒ ţĥíš ʋáļļéý ƀúŕíéš á šţóŕý, {playerName} - áñð šóɱéţĥíñĝ áļŵáýš çŕáŵļš íñ ţó ĝñáŵ íţ.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70818,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_relic_dust": {
+        "title": "[Ðúšţ óƒ Áĝéš]",
+        "text": "[Í ĥáʋé çóɱé ţó Éášţƀŕóóķ ţó çáţáļóĝúé ŵĥáţ ţĥé šóíļ ķééþš, {playerName}, ƀúţ Í çáññóţ ðíĝ ŵíţĥ ţĥé ðéáð þáŵíñĝ áţ ɱý þéĝš. Ţĥé ƀáŕŕóŵ óñ ţĥé ñóŕţĥéášţ ŕúíñš ĥáš šþíļļéð íţš šļééþéŕš, áñð ţĥéý çļúţçĥ ĝŕáʋé-ĝóóðš Í ŵóúļð ʋéŕý ɱúçĥ ļíķé ţó šţúðý íñţáçţ. Ļáý 8 Ŕéšţļéšš Ɓóñéš ƀáçķ ðóŵñ - ĝéñţļý áš ýóú çáñ, ţĥóúĝĥ Í éẋþéçţ íţ ŵíļļ ñóţ ƀé ĝéñţļé.]",
+        "completion": "[Éíĝĥţ, áñð ţĥé ţŕéñçĥ íš ɋúíéţ áţ ļášţ. Ļóóķ - á ƀéáðŵóŕķ çļášþ, óļðéŕ ţĥáñ ţĥé çĥáþéļ áƀóʋé íţ. Ţĥé Ʋáļé ŵáš ƀúŕýíñĝ íţš ðéáð ļóñĝ ƀéƒóŕé áñýóñé ţĥóúĝĥţ ţó ñáɱé íţ. Ŵé ĥáʋé óñļý ƀéĝúñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕéšţļéšš Ɓóñéš ļáíð ţó ŕéšţ]"
+          }
+        }
+      },
+      "q_relic_robbers": {
+        "title": "[Ĝŕáʋé-Ŕóƀƀéŕš óƒ ţĥé Ʋáļé]",
+        "text": "[Ĥáļƒ óƒ ŵĥáţ Í ðíĝ ƒóŕ ĥáš áļŕéáðý ƀééñ ðúĝ - ƀý ţĥíéʋéš. Ţĥé Ʋáļé Ɓáñðíţš íñ ţĥé šóúţĥéášţ ĥíļļš ĥáʋé ƀééñ šéļļíñĝ áñţíɋúíţíéš ţó áñýóñé ŵíţĥ çóíñ áñð ñó çóñšçíéñçé, áñð éʋéŕý þíéçé ţĥéý ƒéñçé íš á þáĝé ţóŕñ ƒŕóɱ ţĥé ŕéçóŕð. Ţĥíñ ţĥéɱ óúţ, {playerName}. Ţéñ óƒ ţĥéɱ, áñð þéŕĥáþš ţĥé ŕéšţ ŵíļļ ƒíñð áñ ĥóñéšţ ţŕáðé.]",
+        "completion": "[Ţéñ ƒéŵéŕ ĥáñðš ţúŕñíñĝ ɱý ĥíšţóŕý íñţó þóçķéţ-ɱóñéý. Ţĥéý ĥáð á šáţçĥéļ óƒ šéáļ-šţóñéš óñ ţĥéɱ - þŕóʋéñáñçé ļóšţ, óƒ çóúŕšé, ƀúţ ƀéţţéŕ íñ ɱý ļéðĝéŕ ţĥáñ á šɱúĝĝļéŕ'š.]",
+        "objectives": {
+          "0": {
+            "label": "[Ʋáļé Ɓáñðíţ ĝŕáʋé-ŕóƀƀéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_relic_tunnels": {
+        "title": "[Ɓéļóŵ ţĥé Óļð Ðíĝ]",
+        "text": "[Ţĥé ķóƀóļðš íñ ţĥé šóúţĥŵéšţ ɱíñé ĥáʋé ţúññéļļéð šţŕáíĝĥţ ţĥŕóúĝĥ á ƀúŕíéð ʋáúļţ Í ĥáð ɱáŕķéð ƒóŕ éẋçáʋáţíóñ - çáñðļé-ĥéáðéð ʋáñðáļš, ĝñáŵíñĝ þášţ ɱášóñŕý ţĥéý çáññóţ éʋéñ šéé. Ðŕíʋé 12 óƒ ţĥé Ţúññéļ Ŕáţš óúţ ƀéƒóŕé ţĥéý çóļļáþšé ţĥé ŵĥóļé çĥáɱƀéŕ óñ ŵĥáţ íš ļéƒţ óƒ íţ.]",
+        "completion": "[Ţŵéļʋé, áñð ţĥé šĥáƒţ ĥóļðš. Ţĥéý ĥáð ƀééñ úšíñĝ á çáŕʋéð ļíñţéļ-šţóñé áš á ðóóŕšţóþ, {playerName}. Á ðóóŕšţóþ! Ţĥé ţĥíñĝš Í ŕéšçúé ƒŕóɱ ŕúíñ áŕé ɱóšţļý ŕéšçúéð ƒŕóɱ ţĥé þéóþļé šţáñðíñĝ íñ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţúññéļ Ŕáţ Ðíĝĝéŕ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_relic_web": {
+        "title": "[Ţĥé Çóƀŵéƀƀéð Ŕéļíɋúáŕý]",
+        "text": "[Ţĥéŕé íš á šĥŕíñé íñ ţĥé ŵéšţéŕñ ŵóóðš Í ĥáʋé ŵáñţéð ţó éñţéŕ ƒóŕ á ɱóñţĥ, áñð á ɱóñţĥ íš ĥóŵ ļóñĝ ţĥé ŵéƀŵóóð šþíðéŕš ĥáʋé ĥéļð íţ. Ţĥé ŵĥóļé ŕéļíɋúáŕý íš šþúñ šĥúţ. Çļéáŕ 10 óƒ ţĥé Ŵéƀŵóóð Ļúŕķéŕš, {playerName}, áñð Í çáñ ƒíñáļļý ŕéáð ţĥé áļţáŕ-šţóñé ƀéñéáţĥ ţĥéíŕ šíļķ.]",
+        "completion": "[Ţéñ, áñð ţĥé šíļķ çóɱéš áŵáý íñ šĥééţš. Ţĥé áļţáŕ ñáɱéš á ŕíţé óļðéŕ ţĥáñ áñý çĥáþéļ ŕéçóŕð Í ĥóļð. Ŵóñðéŕƒúļ. Ţéŕŕíƒýíñĝ. Ɱóšţļý ŵóñðéŕƒúļ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵéƀŵóóð Ļúŕķéŕ çļéáŕéð]"
+          }
+        }
+      },
+      "q_relic_matriarch": {
+        "title": "[Ķééþéŕ óƒ ţĥé Ŵéƀ]",
+        "text": "[Ţĥé ļúŕķéŕš ŵéŕé óñļý ţĥé ĥóúšéĥóļð. Ţĥéíŕ ɱáţŕíáŕçĥ - ţĥé Šáƀļéŵéƀ - ĥáš ŵŕáþþéð ţĥé ŕéļíɋúáŕý'š íññéŕ ʋáúļţ íñ á çóçóóñ ţĥé šížé óƒ á çáŕţ, áñð Í ŵíļļ ñóţ ļóšé ŵĥáţ íš íñšíðé íţ ţó á šþíðéŕ'š ļáŕðéŕ. Éñð ĥéŕ, {playerName}. Ɓŕíñĝ ɱé ţĥé ŕúñ óƒ ţĥé ʋáúļţ.]",
+        "completion": "[Ţĥé Šáƀļéŵéƀ Ɱáţŕíáŕçĥ, ðéáð, áñð ţĥé íññéŕ ʋáúļţ óþéñ áţ ļášţ. Ŕéļíɋúáŕý-ƀŕóñžé, úñţóúçĥéð šíñçé íţ ŵáš šéáļéð. Ţĥíš šíñĝļé þíéçé ĵúšţíƒíéš ţĥé ŵĥóļé éẋþéðíţíóñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šáƀļéŵéƀ Ɱáţŕíáŕçĥ šļáíñ]"
+          }
+        }
+      },
+      "q_relic_drowned": {
+        "title": "[Ðŕóŵñéð Áñţíɋúíţíéš]",
+        "text": "[Ţĥé ñóŕţĥŵéšţ ļáķé šĥóŕé ŵáš á ļáñðíñĝ óñçé - ţĥéŕé áŕé ƒóóţíñĝš úñðéŕ ţĥé ŵáţéŕļíñé, áñð ţĥé Ɱúðƒíñ ɱúŕļóçš ĥáʋé ƀééñ ðŕéðĝíñĝ ʋóţíʋé óƒƒéŕíñĝš ƒŕóɱ ţĥé šíļţ áñð ĥóáŕðíñĝ ţĥéɱ íñ ţĥéíŕ ñéšţš. Ţĥéý ðó ñóţ ķñóŵ ŵĥáţ ţĥéý ĥóļð, óñļý ţĥáţ íţ šĥíñéš. Ţáķé ƀáçķ 10 óƒ ţĥé šķúļķéŕš, {playerName}, ƀéƒóŕé ţĥé ļáķé çļáíɱš ţĥé ŕéšţ.]",
+        "completion": "[Ţéñ šķúļķéŕš, áñð á ñéţƒúļ óƒ ʋóţíʋéš ŕéçóʋéŕéð ƒŕóɱ ţĥé ɱúçķ. Ļáķé-óƒƒéŕíñĝš, éʋéŕý óñé - ţĥé Ʋáļé'š óļð ƒóļķ ĝáʋé ţĥéíŕ ʋáļļéý ƀáçķ ţó ţĥé ŵáţéŕ. Í áɱ óñļý ƀóŕŕóŵíñĝ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱúðƒíñ Šķúļķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_relic_field": {
+        "title": "[Ţĥé Ŕóóţéð Ƒíéļð]",
+        "text": "[Ɱý ɱóšţ þŕóɱíšíñĝ ţŕéñçĥ íš ţĥé éášţ ɱéáðóŵ - á ƀúŕíéð ƒļóóŕ, ɱóšáíç ƀý ţĥé ƒééļ óƒ ţĥé šĥáŕðš. Áñð ţĥé ŵíļð ƀóáŕ ŕóóţ ţĥŕóúĝĥ íţ ñíĝĥţļý, çĥúŕñíñĝ á ţĥóúšáñð ýéáŕš óƒ óŕðéŕ íñţó ɱúð áñð ţúšķ-ɱáŕķš. Çúļļ 10 óƒ ţĥé ĥéŕð, {playerName}, ƀéƒóŕé ţĥéý þļóúĝĥ ɱý ɱóšáíç íñţó ĝŕáʋéļ.]",
+        "completion": "[Ţéñ, áñð ţĥé ɱéáðóŵ ļíéš šţíļļ ţóñíĝĥţ. Ŵĥáţ ţĥéý ļéƒţ óƒ ţĥé ɱóšáíç Í çáñ þíéçé ţóĝéţĥéŕ; ŵĥáţ ţĥéý šɱášĥéð íš ĝóñé ƒóŕ ĝóóð. Šúçĥ íš ţĥé ŵóŕķ - ŵé šáʋé ŵĥáţ ţĥé ŵóŕļð ĥáš ñóţ ýéţ ƒíñíšĥéð ðéšţŕóýíñĝ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵíļð Ɓóáŕ çúļļéð ƒŕóɱ ţĥé ðíĝ]"
+          }
+        }
+      },
+      "q_relic_custodian": {
+        "title": "[Ţĥé Ĥóļļóŵ Çúšţóðíáñ]",
+        "text": "[Ţĥé ñóŕţĥéášţ ŕúíñ ĥáš á ĝúáŕðíáñ, {playerName} - Çáþţáíñ Ʋéŕļáñ, ţĥéý çáļļ ţĥé ţĥíñĝ, áñ óƒƒíçéŕ ðéáð šó ļóñĝ ĥé ĥáš ƒóŕĝóţţéñ ĥé íš ðéáð, šţíļļ šţáñðíñĝ ŵáţçĥ óʋéŕ á ŵáŕ-ŕéļíç ĥé ŵíļļ ļéţ ñó ļíʋíñĝ ĥáñð ţóúçĥ. Í ŵáñţ ţĥáţ ŕéļíç, áñð íţ ŵíļļ ñóţ çóɱé ɋúíéţļý. Ðó ñóţ ƒáçé ţĥé Ĥóļļóŵ Çúšţóðíáñ áļóñé.]",
+        "completion": "[Ʋéŕļáñ ðóŵñ, áñð ĥíš çĥáŕĝé ļáíð ƀáŕé: á çáɱþáíĝñ šţáñðáŕð, ƒúŕļéð áñð ŕóţţíñĝ, ƒŕóɱ á ŵáŕ ñó çĥŕóñíçļé óƒ ɱíñé ŕéçóŕðš. Ĥé ĝúáŕðéð íţ þášţ ðéáţĥ íţšéļƒ. Ŵĥáţéʋéŕ íţ ɱéáñţ ţó ĥíɱ, íţ ɱéáñš á ñéŵ çĥáþţéŕ ţó ɱé.]",
+        "objectives": {
+          "0": {
+            "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_relic_gorrak": {
+        "title": "[Ĝóŕŕáķ'š Þļúñðéŕ]",
+        "text": "[Éʋéŕý ŕéļíç ţĥé ƀáñðíţš ƒéñçéð þáššéð ţĥŕóúĝĥ óñé šéţ óƒ ĥáñðš ƒíŕšţ: Ĝóŕŕáķ ţĥé Ŕúţĥļéšš, ŵĥó ķééþš ţĥé ŕíçĥéšţ óƒ ţĥé ĥáúļ ƒóŕ ĥíš óŵñ ðéñ íñ ţĥé ƒáŕ šóúţĥéášţ çáɱþ. Ĥé ĥáš á çĥéšţ óƒ ţĥé Ʋáļé'š šţóļéñ ĥíšţóŕý úñðéŕ ĥíš çóţ, {playerName}. Çúţ ĥíɱ ðóŵñ áñð íţ íš óúŕš áĝáíñ.]",
+        "completion": "[Ĝóŕŕáķ, ƒíñíšĥéð, áñð ĥíš þļúñðéŕ-çĥéšţ ĥáúļéð íñţó ţĥé ļíĝĥţ. Ĥáļƒ ţĥé þíéçéš ĥéŕé Í ĥáð ĝíʋéñ úþ áš ļóšţ ƒóŕéʋéŕ. Ýóú ĥáʋé ñóţ ĵúšţ ŕéçóʋéŕéð ŕéļíçš - ýóú ĥáʋé ŕéçóʋéŕéð ţĥé ŕéçóŕð íţšéļƒ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝóŕŕáķ ţĥé Ŕúţĥļéšš šļáíñ]"
+          }
+        }
+      },
+      "q_relic_looterking": {
+        "title": "[Ţĥé Ļóóţéŕ-Ķíñĝ]",
+        "text": "[Óñé ţĥíéƒ ŕéɱáíñš áƀóʋé áļļ ţĥé óţĥéŕš, {playerName} - Ɱóĝĝéŕ, ţĥé óĝŕé ŵĥó çáļļš ĥíɱšéļƒ á ķíñĝ áñð ţŕéáţš ţĥé ŵĥóļé Ʋáļé áš ĥíš ĥóáŕð. Éʋéŕý ŕéļíç ţĥáţ ðíð ñóţ þášš ţĥŕóúĝĥ Ĝóŕŕáķ'š ĥáñðš éñðéð íñ Ɱóĝĝéŕ'š. Éñð ĥíš ŕéíĝñ áţ ţĥé éášţ-ɱéáðóŵ ŕíšé, áñð ţĥé Éášţƀŕóóķ Ŕéļíɋúáŕý ŵíļļ áţ ļášţ ƀé ŵĥóļé.]",
+        "completion": "[Ɱóĝĝéŕ, ðéáð, áñð ţĥé ļášţ óƒ ţĥé Ʋáļé'š šçáţţéŕéð ĥíšţóŕý çáŕŕíéð ĥóɱé óñ ýóúŕ ƀáçķ. Ţĥé Ŕéļíɋúáŕý šţáñðš çóɱþļéţé - éʋéŕý ƀáŕŕóŵ, šĥŕíñé, ʋáúļţ áñð ļáñðíñĝ áççóúñţéð ƒóŕ. Ţĥéý ŵíļļ ŕéáð ţĥíš ʋáļļéý'š šţóŕý ñóŵ ƀéçáúšé ýóú ƒóúĝĥţ ţó ķééþ íţ ŕéáðáƀļé. Ĝó ŵéļļ, çúšţóðíáñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱóĝĝéŕ ţĥé Ļóóţéŕ-Ķíñĝ šļáíñ]"
           }
         }
       },

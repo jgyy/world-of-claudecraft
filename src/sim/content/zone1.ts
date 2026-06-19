@@ -536,6 +536,17 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     questIds: ['q_brightwood_thinning', 'q_brightwood_monarch'],
     greeting: 'Quiet, $C — the glade is calm today, and I mean to keep it that way.',
   },
+  antiquarian_veska: {
+    id: 'antiquarian_veska', name: 'Antiquarian Veska', title: 'Vale Antiquarian',
+    // a cataloguer's table at the northeast edge of town, clear of every spawn camp
+    pos: { x: 8, z: 8 }, facing: -0.6, color: 0x9c6b2f,
+    questIds: [
+      'q_relic_dust', 'q_relic_robbers', 'q_relic_tunnels', 'q_relic_web',
+      'q_relic_matriarch', 'q_relic_drowned', 'q_relic_field', 'q_relic_custodian',
+      'q_relic_gorrak', 'q_relic_looterking',
+    ],
+    greeting: 'Every spade-turn of this valley buries a story, $N — and something always crawls in to gnaw it.',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -867,6 +878,107 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     minLevel: 6,
     suggestedPlayers: 2,
   },
+
+  // The Eastbrook Reliquary — Antiquarian Veska's relic-recovery chain.
+  // Every dig site is overrun by scavengers, looters and the restless dead
+  // who hoard the Vale's buried history; clear them to reclaim the antiquities.
+  q_relic_dust: {
+    id: 'q_relic_dust', name: 'Dust of Ages',
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "I have come to Eastbrook to catalogue what the soil keeps, $N, but I cannot dig with the dead pawing at my pegs. The barrow on the northeast ruins has spilled its sleepers, and they clutch grave-goods I would very much like to study intact. Lay 8 Restless Bones back down — gently as you can, though I expect it will not be gentle.",
+    completionText: "Eight, and the trench is quiet at last. Look — a beadwork clasp, older than the chapel above it. The Vale was burying its dead long before anyone thought to name it. We have only begun.",
+    objectives: [{ type: 'kill', targetMobId: 'restless_bones', count: 8, label: 'Restless Bones laid to rest' }],
+    xpReward: 480, copperReward: 190, itemRewards: {},
+    minLevel: 5,
+  },
+  q_relic_robbers: {
+    id: 'q_relic_robbers', name: 'Grave-Robbers of the Vale',
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "Half of what I dig for has already been dug — by thieves. The Vale Bandits in the southeast hills have been selling antiquities to anyone with coin and no conscience, and every piece they fence is a page torn from the record. Thin them out, $N. Ten of them, and perhaps the rest will find an honest trade.",
+    completionText: "Ten fewer hands turning my history into pocket-money. They had a satchel of seal-stones on them — provenance lost, of course, but better in my ledger than a smuggler's.",
+    objectives: [{ type: 'kill', targetMobId: 'vale_bandit', count: 10, label: 'Vale Bandit grave-robber slain' }],
+    xpReward: 560, copperReward: 230, itemRewards: {},
+    requiresQuest: 'q_relic_dust',
+  },
+  q_relic_tunnels: {
+    id: 'q_relic_tunnels', name: 'Below the Old Dig',
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "The kobolds in the southwest mine have tunnelled straight through a buried vault I had marked for excavation — candle-headed vandals, gnawing past masonry they cannot even see. Drive 12 of the Tunnel Rats out before they collapse the whole chamber on what is left of it.",
+    completionText: "Twelve, and the shaft holds. They had been using a carved lintel-stone as a doorstop, $N. A doorstop! The things I rescue from ruin are mostly rescued from the people standing in it.",
+    objectives: [{ type: 'kill', targetMobId: 'tunnel_rat', count: 12, label: 'Tunnel Rat Digger driven off' }],
+    xpReward: 640, copperReward: 260, itemRewards: {},
+    requiresQuest: 'q_relic_robbers',
+  },
+  q_relic_web: {
+    id: 'q_relic_web', name: 'The Cobwebbed Reliquary',
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "There is a shrine in the western woods I have wanted to enter for a month, and a month is how long the webwood spiders have held it. The whole reliquary is spun shut. Clear 10 of the Webwood Lurkers, $N, and I can finally read the altar-stone beneath their silk.",
+    completionText: "Ten, and the silk comes away in sheets. The altar names a rite older than any chapel record I hold. Wonderful. Terrifying. Mostly wonderful.",
+    objectives: [{ type: 'kill', targetMobId: 'webwood_spider', count: 10, label: 'Webwood Lurker cleared' }],
+    xpReward: 700, copperReward: 280, itemRewards: {},
+    requiresQuest: 'q_relic_tunnels',
+  },
+  q_relic_matriarch: {
+    id: 'q_relic_matriarch', name: 'Keeper of the Web',
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "The lurkers were only the household. Their matriarch — the Sableweb — has wrapped the reliquary's inner vault in a cocoon the size of a cart, and I will not lose what is inside it to a spider's larder. End her, $N. Bring me the run of the vault.",
+    completionText: "The Sableweb Matriarch, dead, and the inner vault open at last. Reliquary-bronze, untouched since it was sealed. This single piece justifies the whole expedition.",
+    objectives: [{ type: 'kill', targetMobId: 'sableweb_matriarch', count: 1, label: 'Sableweb Matriarch slain' }],
+    xpReward: 820, copperReward: 320, itemRewards: {},
+    requiresQuest: 'q_relic_web',
+    minLevel: 6,
+  },
+  q_relic_drowned: {
+    id: 'q_relic_drowned', name: 'Drowned Antiquities',
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "The northwest lake shore was a landing once — there are footings under the waterline, and the Mudfin murlocs have been dredging votive offerings from the silt and hoarding them in their nests. They do not know what they hold, only that it shines. Take back 10 of the skulkers, $N, before the lake claims the rest.",
+    completionText: "Ten skulkers, and a netful of votives recovered from the muck. Lake-offerings, every one — the Vale's old folk gave their valley back to the water. I am only borrowing it.",
+    objectives: [{ type: 'kill', targetMobId: 'mudfin_murloc', count: 10, label: 'Mudfin Skulker slain' }],
+    xpReward: 760, copperReward: 300, itemRewards: {},
+    requiresQuest: 'q_relic_matriarch',
+  },
+  q_relic_field: {
+    id: 'q_relic_field', name: 'The Rooted Field',
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "My most promising trench is the east meadow — a buried floor, mosaic by the feel of the shards. And the wild boar root through it nightly, churning a thousand years of order into mud and tusk-marks. Cull 10 of the herd, $N, before they plough my mosaic into gravel.",
+    completionText: "Ten, and the meadow lies still tonight. What they left of the mosaic I can piece together; what they smashed is gone for good. Such is the work — we save what the world has not yet finished destroying.",
+    objectives: [{ type: 'kill', targetMobId: 'wild_boar', count: 10, label: 'Wild Boar culled from the dig' }],
+    xpReward: 800, copperReward: 320, itemRewards: {},
+    requiresQuest: 'q_relic_drowned',
+  },
+  q_relic_custodian: {
+    id: 'q_relic_custodian', name: 'The Hollow Custodian',
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "The northeast ruin has a guardian, $N — Captain Verlan, they call the thing, an officer dead so long he has forgotten he is dead, still standing watch over a war-relic he will let no living hand touch. I want that relic, and it will not come quietly. Do not face the Hollow Custodian alone.",
+    completionText: "Verlan down, and his charge laid bare: a campaign standard, furled and rotting, from a war no chronicle of mine records. He guarded it past death itself. Whatever it meant to him, it means a new chapter to me.",
+    objectives: [{ type: 'kill', targetMobId: 'captain_verlan', count: 1, label: 'Captain Verlan slain' }],
+    xpReward: 940, copperReward: 380, itemRewards: {},
+    requiresQuest: 'q_relic_field',
+    minLevel: 6,
+    suggestedPlayers: 2,
+  },
+  q_relic_gorrak: {
+    id: 'q_relic_gorrak', name: "Gorrak's Plunder",
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "Every relic the bandits fenced passed through one set of hands first: Gorrak the Ruthless, who keeps the richest of the haul for his own den in the far southeast camp. He has a chest of the Vale's stolen history under his cot, $N. Cut him down and it is ours again.",
+    completionText: "Gorrak, finished, and his plunder-chest hauled into the light. Half the pieces here I had given up as lost forever. You have not just recovered relics — you have recovered the record itself.",
+    objectives: [{ type: 'kill', targetMobId: 'gorrak', count: 1, label: 'Gorrak the Ruthless slain' }],
+    xpReward: 1000, copperReward: 420, itemRewards: {},
+    requiresQuest: 'q_relic_custodian',
+    minLevel: 6,
+    suggestedPlayers: 2,
+  },
+  q_relic_looterking: {
+    id: 'q_relic_looterking', name: 'The Looter-King',
+    giverNpcId: 'antiquarian_veska', turnInNpcId: 'antiquarian_veska',
+    text: "One thief remains above all the others, $N — Mogger, the ogre who calls himself a king and treats the whole Vale as his hoard. Every relic that did not pass through Gorrak's hands ended in Mogger's. End his reign at the east-meadow rise, and the Eastbrook Reliquary will at last be whole.",
+    completionText: "Mogger, dead, and the last of the Vale's scattered history carried home on your back. The Reliquary stands complete — every barrow, shrine, vault and landing accounted for. They will read this valley's story now because you fought to keep it readable. Go well, custodian.",
+    objectives: [{ type: 'kill', targetMobId: 'mogger', count: 1, label: 'Mogger the Looter-King slain' }],
+    xpReward: 1150, copperReward: 500, itemRewards: {},
+    requiresQuest: 'q_relic_gorrak',
+    minLevel: 6,
+    suggestedPlayers: 2,
+  },
 };
 
 export const ZONE1_QUEST_ORDER = [
@@ -880,6 +992,10 @@ export const ZONE1_QUEST_ORDER = [
   'q_ledger_first_duty', 'q_ledger_teeth', 'q_ledger_reedwater', 'q_ledger_silk',
   'q_ledger_brood', 'q_ledger_deepvermin', 'q_ledger_toll', 'q_ledger_vigil',
   'q_ledger_great_boar', 'q_ledger_outlaw_captain',
+  // The Eastbrook Reliquary chain
+  'q_relic_dust', 'q_relic_robbers', 'q_relic_tunnels', 'q_relic_web',
+  'q_relic_matriarch', 'q_relic_drowned', 'q_relic_field', 'q_relic_custodian',
+  'q_relic_gorrak', 'q_relic_looterking',
 ];
 
 // ---------------------------------------------------------------------------
