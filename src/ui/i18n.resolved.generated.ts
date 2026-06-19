@@ -2425,6 +2425,42 @@ export const en: EnTranslations = {
       "monarch_heart": {
         "name": "The Monarch's Heart"
       },
+      "highwatch_warhelm": {
+        "name": "Highwatch Warhelm"
+      },
+      "highwatch_pauldrons": {
+        "name": "Highwatch Pauldrons"
+      },
+      "highwatch_girdle": {
+        "name": "Highwatch War-Girdle"
+      },
+      "highwatch_gauntlets": {
+        "name": "Highwatch Gauntlets"
+      },
+      "peakwool_hood": {
+        "name": "Peakwool Hood"
+      },
+      "peakwool_mantle": {
+        "name": "Peakwool Mantle"
+      },
+      "peakwool_cord": {
+        "name": "Peakwool Cord"
+      },
+      "peakwool_gloves": {
+        "name": "Peakwool Gloves"
+      },
+      "ridgestalker_cowl": {
+        "name": "Ridgestalker Cowl"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Ridgestalker Spaulders"
+      },
+      "ridgestalker_belt": {
+        "name": "Ridgestalker Belt"
+      },
+      "ridgestalker_grips": {
+        "name": "Ridgestalker Grips"
+      },
       "bristleback_maul": {
         "name": "Bristleback Maul"
       },
@@ -3198,7 +3234,7 @@ export const en: EnTranslations = {
       "armorer_hode": {
         "name": "Armorer Hode",
         "title": "Master Armorer",
-        "greeting": "Forge is hot and the grindstone is turning. If it cuts, I sell it."
+        "greeting": "Forge is hot and the grindstone is turning. If it cuts or covers, I sell it."
       },
       "loremaster_caddis": {
         "name": "Loremaster Caddis",
@@ -6704,6 +6740,42 @@ export const es: EnTranslations = {
       },
       "monarch_heart": {
         "name": "El Corazón del Monarca"
+      },
+      "highwatch_warhelm": {
+        "name": "Yelmo de guerra de Highwatch"
+      },
+      "highwatch_pauldrons": {
+        "name": "Hombreras de Highwatch"
+      },
+      "highwatch_girdle": {
+        "name": "Faja de guerra de Highwatch"
+      },
+      "highwatch_gauntlets": {
+        "name": "Guanteletes de Highwatch"
+      },
+      "peakwool_hood": {
+        "name": "Capucha de lana de cumbre"
+      },
+      "peakwool_mantle": {
+        "name": "Manto de lana de cumbre"
+      },
+      "peakwool_cord": {
+        "name": "Cíngulo de lana de cumbre"
+      },
+      "peakwool_gloves": {
+        "name": "Guantes de lana de cumbre"
+      },
+      "ridgestalker_cowl": {
+        "name": "Capucha del acechador de crestas"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Hombreras del acechador de crestas"
+      },
+      "ridgestalker_belt": {
+        "name": "Cinturón del acechador de crestas"
+      },
+      "ridgestalker_grips": {
+        "name": "Guantes del acechador de crestas"
       },
       "bristleback_maul": {
         "name": "Maza Bristleback"
@@ -10985,6 +11057,42 @@ export const es_ES: EnTranslations = {
       "monarch_heart": {
         "name": "El Corazón del Monarca"
       },
+      "highwatch_warhelm": {
+        "name": "Yelmo de guerra de Highwatch"
+      },
+      "highwatch_pauldrons": {
+        "name": "Hombreras de Highwatch"
+      },
+      "highwatch_girdle": {
+        "name": "Faja de guerra de Highwatch"
+      },
+      "highwatch_gauntlets": {
+        "name": "Guanteletes de Highwatch"
+      },
+      "peakwool_hood": {
+        "name": "Capucha de lana de cumbre"
+      },
+      "peakwool_mantle": {
+        "name": "Manto de lana de cumbre"
+      },
+      "peakwool_cord": {
+        "name": "Cíngulo de lana de cumbre"
+      },
+      "peakwool_gloves": {
+        "name": "Guantes de lana de cumbre"
+      },
+      "ridgestalker_cowl": {
+        "name": "Capucha del acechador de crestas"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Hombreras del acechador de crestas"
+      },
+      "ridgestalker_belt": {
+        "name": "Cinturón del acechador de crestas"
+      },
+      "ridgestalker_grips": {
+        "name": "Guantes del acechador de crestas"
+      },
       "bristleback_maul": {
         "name": "Maza Bristleback"
       },
@@ -15264,6 +15372,42 @@ export const fr_FR: EnTranslations = {
       },
       "monarch_heart": {
         "name": "Le Cœur du Monarque"
+      },
+      "highwatch_warhelm": {
+        "name": "Heaume de guerre de Highwatch"
+      },
+      "highwatch_pauldrons": {
+        "name": "Épaulières de Highwatch"
+      },
+      "highwatch_girdle": {
+        "name": "Ceinturon de guerre de Highwatch"
+      },
+      "highwatch_gauntlets": {
+        "name": "Gantelets de Highwatch"
+      },
+      "peakwool_hood": {
+        "name": "Capuche en laine des cimes"
+      },
+      "peakwool_mantle": {
+        "name": "Mantelet en laine des cimes"
+      },
+      "peakwool_cord": {
+        "name": "Cordelière en laine des cimes"
+      },
+      "peakwool_gloves": {
+        "name": "Gants en laine des cimes"
+      },
+      "ridgestalker_cowl": {
+        "name": "Cagoule du rôdeur des crêtes"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Épaulières du rôdeur des crêtes"
+      },
+      "ridgestalker_belt": {
+        "name": "Ceinture du rôdeur des crêtes"
+      },
+      "ridgestalker_grips": {
+        "name": "Gants du rôdeur des crêtes"
       },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
@@ -19545,6 +19689,42 @@ export const fr_CA: EnTranslations = {
       "monarch_heart": {
         "name": "Le Cœur du Monarque"
       },
+      "highwatch_warhelm": {
+        "name": "Heaume de guerre de Highwatch"
+      },
+      "highwatch_pauldrons": {
+        "name": "Épaulières de Highwatch"
+      },
+      "highwatch_girdle": {
+        "name": "Ceinturon de guerre de Highwatch"
+      },
+      "highwatch_gauntlets": {
+        "name": "Gantelets de Highwatch"
+      },
+      "peakwool_hood": {
+        "name": "Capuche en laine des cimes"
+      },
+      "peakwool_mantle": {
+        "name": "Mantelet en laine des cimes"
+      },
+      "peakwool_cord": {
+        "name": "Cordelière en laine des cimes"
+      },
+      "peakwool_gloves": {
+        "name": "Gants en laine des cimes"
+      },
+      "ridgestalker_cowl": {
+        "name": "Cagoule du rôdeur des crêtes"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Épaulières du rôdeur des crêtes"
+      },
+      "ridgestalker_belt": {
+        "name": "Ceinture du rôdeur des crêtes"
+      },
+      "ridgestalker_grips": {
+        "name": "Gants du rôdeur des crêtes"
+      },
       "bristleback_maul": {
         "name": "Maillet Bristleback"
       },
@@ -23825,6 +24005,42 @@ export const en_CA: EnTranslations = {
       "monarch_heart": {
         "name": "The Monarch's Heart"
       },
+      "highwatch_warhelm": {
+        "name": "Highwatch Warhelm"
+      },
+      "highwatch_pauldrons": {
+        "name": "Highwatch Pauldrons"
+      },
+      "highwatch_girdle": {
+        "name": "Highwatch War-Girdle"
+      },
+      "highwatch_gauntlets": {
+        "name": "Highwatch Gauntlets"
+      },
+      "peakwool_hood": {
+        "name": "Peakwool Hood"
+      },
+      "peakwool_mantle": {
+        "name": "Peakwool Mantle"
+      },
+      "peakwool_cord": {
+        "name": "Peakwool Cord"
+      },
+      "peakwool_gloves": {
+        "name": "Peakwool Gloves"
+      },
+      "ridgestalker_cowl": {
+        "name": "Ridgestalker Cowl"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Ridgestalker Spaulders"
+      },
+      "ridgestalker_belt": {
+        "name": "Ridgestalker Belt"
+      },
+      "ridgestalker_grips": {
+        "name": "Ridgestalker Grips"
+      },
       "bristleback_maul": {
         "name": "Bristleback Maul"
       },
@@ -24598,7 +24814,7 @@ export const en_CA: EnTranslations = {
       "armorer_hode": {
         "name": "Armorer Hode",
         "title": "Master Armorer",
-        "greeting": "Forge is hot and the grindstone is turning. If it cuts, I sell it."
+        "greeting": "Forge is hot and the grindstone is turning. If it cuts or covers, I sell it."
       },
       "loremaster_caddis": {
         "name": "Loremaster Caddis",
@@ -28104,6 +28320,42 @@ export const it_IT: EnTranslations = {
       },
       "monarch_heart": {
         "name": "Il Cuore del Monarca"
+      },
+      "highwatch_warhelm": {
+        "name": "Elmo da guerra di Highwatch"
+      },
+      "highwatch_pauldrons": {
+        "name": "Spallacci di Highwatch"
+      },
+      "highwatch_girdle": {
+        "name": "Cintura da guerra di Highwatch"
+      },
+      "highwatch_gauntlets": {
+        "name": "Manopole di Highwatch"
+      },
+      "peakwool_hood": {
+        "name": "Cappuccio di lana delle vette"
+      },
+      "peakwool_mantle": {
+        "name": "Mantellina di lana delle vette"
+      },
+      "peakwool_cord": {
+        "name": "Cordone di lana delle vette"
+      },
+      "peakwool_gloves": {
+        "name": "Guanti di lana delle vette"
+      },
+      "ridgestalker_cowl": {
+        "name": "Cappuccio del predatore dei crinali"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Spalline del predatore dei crinali"
+      },
+      "ridgestalker_belt": {
+        "name": "Cintura del predatore dei crinali"
+      },
+      "ridgestalker_grips": {
+        "name": "Guanti del predatore dei crinali"
       },
       "bristleback_maul": {
         "name": "Maglio Bristleback"
@@ -32385,6 +32637,42 @@ export const de_DE: EnTranslations = {
       "monarch_heart": {
         "name": "Das Herz des Monarchen"
       },
+      "highwatch_warhelm": {
+        "name": "Highwatch-Kriegshelm"
+      },
+      "highwatch_pauldrons": {
+        "name": "Highwatch-Schulterplatten"
+      },
+      "highwatch_girdle": {
+        "name": "Highwatch-Kriegsgürtel"
+      },
+      "highwatch_gauntlets": {
+        "name": "Highwatch-Panzerhandschuhe"
+      },
+      "peakwool_hood": {
+        "name": "Gipfelwollkapuze"
+      },
+      "peakwool_mantle": {
+        "name": "Gipfelwollmantel"
+      },
+      "peakwool_cord": {
+        "name": "Gipfelwollkordel"
+      },
+      "peakwool_gloves": {
+        "name": "Gipfelwollhandschuhe"
+      },
+      "ridgestalker_cowl": {
+        "name": "Gratpirscher-Gugel"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Gratpirscher-Schulterstücke"
+      },
+      "ridgestalker_belt": {
+        "name": "Gratpirscher-Gürtel"
+      },
+      "ridgestalker_grips": {
+        "name": "Gratpirscher-Handschuhe"
+      },
       "bristleback_maul": {
         "name": "Bristleback-Schlägel"
       },
@@ -36664,6 +36952,42 @@ export const zh_CN: EnTranslations = {
       },
       "monarch_heart": {
         "name": "君主之心"
+      },
+      "highwatch_warhelm": {
+        "name": "高望战盔"
+      },
+      "highwatch_pauldrons": {
+        "name": "高望护肩"
+      },
+      "highwatch_girdle": {
+        "name": "高望战腰带"
+      },
+      "highwatch_gauntlets": {
+        "name": "高望护手"
+      },
+      "peakwool_hood": {
+        "name": "峰羊毛兜帽"
+      },
+      "peakwool_mantle": {
+        "name": "峰羊毛披肩"
+      },
+      "peakwool_cord": {
+        "name": "峰羊毛束带"
+      },
+      "peakwool_gloves": {
+        "name": "峰羊毛手套"
+      },
+      "ridgestalker_cowl": {
+        "name": "山脊追猎者头罩"
+      },
+      "ridgestalker_spaulders": {
+        "name": "山脊追猎者护肩"
+      },
+      "ridgestalker_belt": {
+        "name": "山脊追猎者腰带"
+      },
+      "ridgestalker_grips": {
+        "name": "山脊追猎者手套"
       },
       "bristleback_maul": {
         "name": "硬鬃重槌"
@@ -40945,6 +41269,42 @@ export const zh_TW: EnTranslations = {
       "monarch_heart": {
         "name": "君主之心"
       },
+      "highwatch_warhelm": {
+        "name": "高望戰盔"
+      },
+      "highwatch_pauldrons": {
+        "name": "高望護肩"
+      },
+      "highwatch_girdle": {
+        "name": "高望戰腰帶"
+      },
+      "highwatch_gauntlets": {
+        "name": "高望護手"
+      },
+      "peakwool_hood": {
+        "name": "峰羊毛兜帽"
+      },
+      "peakwool_mantle": {
+        "name": "峰羊毛披肩"
+      },
+      "peakwool_cord": {
+        "name": "峰羊毛束帶"
+      },
+      "peakwool_gloves": {
+        "name": "峰羊毛手套"
+      },
+      "ridgestalker_cowl": {
+        "name": "山脊追獵者頭罩"
+      },
+      "ridgestalker_spaulders": {
+        "name": "山脊追獵者護肩"
+      },
+      "ridgestalker_belt": {
+        "name": "山脊追獵者腰帶"
+      },
+      "ridgestalker_grips": {
+        "name": "山脊追獵者手套"
+      },
       "bristleback_maul": {
         "name": "硬鬃重槌"
       },
@@ -45224,6 +45584,42 @@ export const ko_KR: EnTranslations = {
       },
       "monarch_heart": {
         "name": "군주의 심장"
+      },
+      "highwatch_warhelm": {
+        "name": "하이워치 전투 투구"
+      },
+      "highwatch_pauldrons": {
+        "name": "하이워치 어깨갑옷"
+      },
+      "highwatch_girdle": {
+        "name": "하이워치 전투 허리띠"
+      },
+      "highwatch_gauntlets": {
+        "name": "하이워치 건틀릿"
+      },
+      "peakwool_hood": {
+        "name": "봉우리양모 두건"
+      },
+      "peakwool_mantle": {
+        "name": "봉우리양모 망토"
+      },
+      "peakwool_cord": {
+        "name": "봉우리양모 허리끈"
+      },
+      "peakwool_gloves": {
+        "name": "봉우리양모 장갑"
+      },
+      "ridgestalker_cowl": {
+        "name": "산등성이추적자 두건"
+      },
+      "ridgestalker_spaulders": {
+        "name": "산등성이추적자 어깨보호구"
+      },
+      "ridgestalker_belt": {
+        "name": "산등성이추적자 허리띠"
+      },
+      "ridgestalker_grips": {
+        "name": "산등성이추적자 손보호구"
       },
       "bristleback_maul": {
         "name": "뻣센등뼈 철퇴"
@@ -49505,6 +49901,42 @@ export const ja_JP: EnTranslations = {
       "monarch_heart": {
         "name": "君主の心臓"
       },
+      "highwatch_warhelm": {
+        "name": "ハイウォッチの戦兜"
+      },
+      "highwatch_pauldrons": {
+        "name": "ハイウォッチの肩当て"
+      },
+      "highwatch_girdle": {
+        "name": "ハイウォッチの戦帯"
+      },
+      "highwatch_gauntlets": {
+        "name": "ハイウォッチのガントレット"
+      },
+      "peakwool_hood": {
+        "name": "峰羊毛のフード"
+      },
+      "peakwool_mantle": {
+        "name": "峰羊毛のマント"
+      },
+      "peakwool_cord": {
+        "name": "峰羊毛の腰紐"
+      },
+      "peakwool_gloves": {
+        "name": "峰羊毛の手袋"
+      },
+      "ridgestalker_cowl": {
+        "name": "尾根追跡者の頭巾"
+      },
+      "ridgestalker_spaulders": {
+        "name": "尾根追跡者の肩当て"
+      },
+      "ridgestalker_belt": {
+        "name": "尾根追跡者のベルト"
+      },
+      "ridgestalker_grips": {
+        "name": "尾根追跡者の手甲"
+      },
       "bristleback_maul": {
         "name": "ブリストルバックの大槌"
       },
@@ -53785,6 +54217,42 @@ export const pt_BR: EnTranslations = {
       "monarch_heart": {
         "name": "O Coração do Monarca"
       },
+      "highwatch_warhelm": {
+        "name": "Elmo de guerra de Highwatch"
+      },
+      "highwatch_pauldrons": {
+        "name": "Ombreiras de Highwatch"
+      },
+      "highwatch_girdle": {
+        "name": "Cinturão de guerra de Highwatch"
+      },
+      "highwatch_gauntlets": {
+        "name": "Manoplas de Highwatch"
+      },
+      "peakwool_hood": {
+        "name": "Capuz de lã das alturas"
+      },
+      "peakwool_mantle": {
+        "name": "Manto de lã das alturas"
+      },
+      "peakwool_cord": {
+        "name": "Cordão de lã das alturas"
+      },
+      "peakwool_gloves": {
+        "name": "Luvas de lã das alturas"
+      },
+      "ridgestalker_cowl": {
+        "name": "Capuz do espreitador de cristas"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Ombreiras do espreitador de cristas"
+      },
+      "ridgestalker_belt": {
+        "name": "Cinto do espreitador de cristas"
+      },
+      "ridgestalker_grips": {
+        "name": "Luvas do espreitador de cristas"
+      },
       "bristleback_maul": {
         "name": "Malho Bristleback"
       },
@@ -58064,6 +58532,42 @@ export const ru_RU: EnTranslations = {
       },
       "monarch_heart": {
         "name": "Сердце Монарха"
+      },
+      "highwatch_warhelm": {
+        "name": "Боевой шлем Хайвотча"
+      },
+      "highwatch_pauldrons": {
+        "name": "Наплечники Хайвотча"
+      },
+      "highwatch_girdle": {
+        "name": "Боевой пояс Хайвотча"
+      },
+      "highwatch_gauntlets": {
+        "name": "Латные перчатки Хайвотча"
+      },
+      "peakwool_hood": {
+        "name": "Капюшон из горной шерсти"
+      },
+      "peakwool_mantle": {
+        "name": "Накидка из горной шерсти"
+      },
+      "peakwool_cord": {
+        "name": "Шнур из горной шерсти"
+      },
+      "peakwool_gloves": {
+        "name": "Перчатки из горной шерсти"
+      },
+      "ridgestalker_cowl": {
+        "name": "Клобук Хребтового Охотника"
+      },
+      "ridgestalker_spaulders": {
+        "name": "Оплечье Хребтового Охотника"
+      },
+      "ridgestalker_belt": {
+        "name": "Пояс Хребтового Охотника"
+      },
+      "ridgestalker_grips": {
+        "name": "Перчатки Хребтового Охотника"
       },
       "bristleback_maul": {
         "name": "Кувалда Щетиноспина"
@@ -63206,6 +63710,42 @@ export const en_XA: EnTranslations = {
       "monarch_heart": {
         "name": "[Ţĥé Ɱóñáŕçĥ'š Ĥéáŕţ]"
       },
+      "highwatch_warhelm": {
+        "name": "[Ĥíĝĥŵáţçĥ Ŵáŕĥéļɱ]"
+      },
+      "highwatch_pauldrons": {
+        "name": "[Ĥíĝĥŵáţçĥ Þáúļðŕóñš]"
+      },
+      "highwatch_girdle": {
+        "name": "[Ĥíĝĥŵáţçĥ Ŵáŕ-Ĝíŕðļé]"
+      },
+      "highwatch_gauntlets": {
+        "name": "[Ĥíĝĥŵáţçĥ Ĝáúñţļéţš]"
+      },
+      "peakwool_hood": {
+        "name": "[Þéáķŵóóļ Ĥóóð]"
+      },
+      "peakwool_mantle": {
+        "name": "[Þéáķŵóóļ Ɱáñţļé]"
+      },
+      "peakwool_cord": {
+        "name": "[Þéáķŵóóļ Çóŕð]"
+      },
+      "peakwool_gloves": {
+        "name": "[Þéáķŵóóļ Ĝļóʋéš]"
+      },
+      "ridgestalker_cowl": {
+        "name": "[Ŕíðĝéšţáļķéŕ Çóŵļ]"
+      },
+      "ridgestalker_spaulders": {
+        "name": "[Ŕíðĝéšţáļķéŕ Šþáúļðéŕš]"
+      },
+      "ridgestalker_belt": {
+        "name": "[Ŕíðĝéšţáļķéŕ Ɓéļţ]"
+      },
+      "ridgestalker_grips": {
+        "name": "[Ŕíðĝéšţáļķéŕ Ĝŕíþš]"
+      },
       "bristleback_maul": {
         "name": "[Ɓŕíšţļéƀáçķ Ɱáúļ]"
       },
@@ -63979,7 +64519,7 @@ export const en_XA: EnTranslations = {
       "armorer_hode": {
         "name": "[Áŕɱóŕéŕ Ĥóðé]",
         "title": "[Ɱášţéŕ Áŕɱóŕéŕ]",
-        "greeting": "[Ƒóŕĝé íš ĥóţ áñð ţĥé ĝŕíñðšţóñé íš ţúŕñíñĝ. Íƒ íţ çúţš, Í šéļļ íţ.]"
+        "greeting": "[Ƒóŕĝé íš ĥóţ áñð ţĥé ĝŕíñðšţóñé íš ţúŕñíñĝ. Íƒ íţ çúţš óŕ çóʋéŕš, Í šéļļ íţ.]"
       },
       "loremaster_caddis": {
         "name": "[Ļóŕéɱášţéŕ Çáððíš]",
