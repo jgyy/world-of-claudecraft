@@ -3639,6 +3639,10 @@ export const en: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -4978,6 +4982,30 @@ export const en: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -5171,6 +5199,76 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -9025,6 +9123,10 @@ export const es: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -10364,6 +10466,30 @@ export const es: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -10557,6 +10683,76 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -14411,6 +14607,10 @@ export const es_ES: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -15750,6 +15950,30 @@ export const es_ES: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -15943,6 +16167,76 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -19797,6 +20091,10 @@ export const fr_FR: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -21136,6 +21434,30 @@ export const fr_FR: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -21329,6 +21651,76 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -25183,6 +25575,10 @@ export const fr_CA: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -26522,6 +26918,30 @@ export const fr_CA: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -26715,6 +27135,76 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -30569,6 +31059,10 @@ export const en_CA: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -31908,6 +32402,30 @@ export const en_CA: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -32101,6 +32619,76 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -35955,6 +36543,10 @@ export const it_IT: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -37294,6 +37886,30 @@ export const it_IT: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -37487,6 +38103,76 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -41341,6 +42027,10 @@ export const de_DE: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -42680,6 +43370,30 @@ export const de_DE: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -42873,6 +43587,76 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -46727,6 +47511,10 @@ export const zh_CN: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
@@ -48066,6 +48854,30 @@ export const zh_CN: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -48259,6 +49071,76 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -52113,6 +52995,10 @@ export const zh_TW: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
@@ -53452,6 +54338,30 @@ export const zh_TW: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -53645,6 +54555,76 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -57499,6 +58479,10 @@ export const ko_KR: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
@@ -58838,6 +59822,30 @@ export const ko_KR: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -59031,6 +60039,76 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -62885,6 +63963,10 @@ export const ja_JP: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
@@ -64224,6 +65306,30 @@ export const ja_JP: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -64417,6 +65523,76 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -68271,6 +69447,10 @@ export const pt_BR: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -69610,6 +70790,30 @@ export const pt_BR: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -69803,6 +71007,76 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -73657,6 +74931,10 @@ export const ru_RU: EnTranslations = {
         "name": "Innkeeper Wenna",
         "title": "Keeper of the Brightwood Tap",
         "greeting": "The Brightwood Tap's been shuttered a season, {playerName}, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin - and a warm hearth - in it for you."
+      "anglermaster_pell": {
+        "name": "Anglermaster Pell",
+        "title": "Keeper of the Fenbridge Derby",
+        "greeting": "The Fenbridge Derby drew anglers from three towns once, {playerName} - before the lake turned mean. Help me make these waters safe to cast in again, and there's a purse and a place on the winners' board waiting for you."
       },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
@@ -74996,6 +76274,30 @@ export const ru_RU: EnTranslations = {
         "title": "Where the Water Burns",
         "text": "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, {playerName}, and I'll plant the hazard flags myself.",
         "completion": "Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.",
+      "q_derby_nets": {
+        "title": "Raiders on the Nets",
+        "text": "I cannot run a Derby when the deepfen murlocs slit every net I string across the shallows, {playerName}. They drag off the catch and leave the lines in ribbons. Cull 10 Deepfen Murlocs along the west shore and I can set my traps without losing them by morning.",
+        "completion": "The shallows are quiet and my floats are still where I left them. First time in a season I've hauled a full net. You've a feel for this work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Murloc culled"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "Prowlers on the Reedline",
+        "text": "Anglers won't wade out to the casting-stakes while mire prowlers stalk the reedline - and I don't blame them, the brutes have taken a leg off more than one fisher. Thin them out, {playerName}: 10 Mire Prowlers from the beds south of the causeway.",
+        "completion": "The reedline's safe to wade again. My regulars are already arguing over the best stakes. That's the sound of a Derby coming back to life.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler slain"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "The Fouled Shallows",
+        "text": "No fish will rise where the bog bloats drift - they foul the water with that gas of theirs and the whole eastern shelf goes dead and stinking. Pop 8 Bog Bloats out on the dry shelf, {playerName}, and let the shallows breathe again.",
+        "completion": "The water's clearing already, and I spotted a school of silverfin holding right where the bloats used to drift. Clean water, hungry fish - that's a Derby beat, {playerName}.",
         "objectives": {
           "0": {
             "label": "Bog Bloat burst"
@@ -75189,6 +76491,76 @@ export const ru_RU: EnTranslations = {
           },
           "1": {
             "label": "Sunhide Bear taken"
+      "q_derby_tangled_lines": {
+        "title": "Tangled Lines",
+        "text": "The drowned dead rise in the chapel shallows and walk straight through my trotlines, dragging hooks and floats down into the muck where no living hand can free them. Put 8 of the Drowned Dead back to rest, {playerName}, before they cost me every length of line I own.",
+        "completion": "My lines came up clean and whole this morning. Whatever's keeping those poor souls walking, at least they're not walking through my tackle. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead laid to rest"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "Webs in the Boathouse",
+        "text": "I'd open the old boathouse for the Derby weigh-in, but the mire widows have spun it shut from rafter to gunwale, and their bite drops a grown angler where they stand. Clear 8 Mire Widows out of the thicket, {playerName}, and I can air the place out for the crowds.",
+        "completion": "Swept the last web out of the rafters myself. The boathouse smells of pitch and old rope again - just as a weigh-in hall should. You've earned a dry seat at the front.",
+        "objectives": {
+          "0": {
+            "label": "Mire Widow cleared"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "The Brood-Queen of the Thicket",
+        "text": "Clear the widows and more come - they're hatching out of the Mirefen Broodmother deep in the thicket, and until she's dead the boathouse will never stay clear. She's a monster the size of a skiff, {playerName}. Take a steady hand or two with you and burn her nest out for good.",
+        "completion": "No more widows on the wind. With the Broodmother gone the thicket will stay quiet for years. The weigh-in hall is truly ours now.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Broodmother slain"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "The Boat-Breaker",
+        "text": "There's a thing in the deep water the old anglers call Sloomtooth - a drowned hulk that rises under a skiff and stoves it in for the joy of it. I've lost two boats and won't risk a third on Derby day. Find Sloomtooth the Drowned in the chapel shallows and end it, {playerName}. Don't go alone.",
+        "completion": "Sloomtooth's down in the silt where it belongs, and my skiffs can cross the deep water without a prayer on every stroke. Brave work, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Sloomtooth the Drowned destroyed"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "Poachers Upstream",
+        "text": "The fen trolls have dammed the upstream channels and net the spawning runs bare with their crude weirs - no fry reach the lake, and in a season there'll be nothing left to fish for. Break their hold, {playerName}: cut down 10 Fen Trolls so the runs can flow free again.",
+        "completion": "My scouts say the channels are open and the fry are running thick down into the lake. You've not just saved this Derby, {playerName} - you've saved every Derby after it.",
+        "objectives": {
+          "0": {
+            "label": "Fen Troll cut down"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "Grubjaw the Gluttonous",
+        "text": "One old devil has fattened himself on every fish the trolls' weirs trapped - Grubjaw, a maw on four legs that haunts the barrow-mounds in the southeast. While he lives he'll eat the runs faster than they recover. Put him down, {playerName}, and take a friend; he's swallowed hunters whole.",
+        "completion": "Grubjaw, the lake's greediest mouth, finally stilled. The fishers are already weighing their first honest catches in months. You've earned your place on the board twice over.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Gluttonous slain"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "The Derby's Grand Prize: Mirejaw",
+        "text": "It's time, {playerName}. Every Derby needs a grand prize, and ours has only ever had one: Mirejaw the Ravenous, the great lake-beast no angler has ever landed. Drive off the 5 Deepfen Murlocs that guard his deep, then land Mirejaw himself and the winners' board is yours to crown. Bring help - he is the lake's own fury made flesh.",
+        "completion": "Mirejaw the Ravenous - on the weigh-in dock, at last! The whole of Fenbridge is cheering your name, {playerName}, and there's a place at the head of the winners' board kept for you as long as anglers cast a line in these waters. The Fenbridge Derby lives again, because you made it live.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous landed"
+          },
+          "1": {
+            "label": "Deepfen Murloc guard driven off"
           }
         }
       },
@@ -75455,6 +76827,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -75627,6 +77002,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -75956,6 +77372,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -76128,6 +77547,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -76457,6 +77917,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -76629,6 +78092,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -76958,6 +78462,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -77130,6 +78637,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -77460,6 +79008,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -77632,6 +79183,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -77961,6 +79553,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -78133,6 +79728,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -78462,6 +80098,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -78634,6 +80273,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -78963,6 +80643,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -79135,6 +80818,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -79464,6 +81188,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -79636,6 +81363,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -79965,6 +81733,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -80137,6 +81908,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -80466,6 +82278,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -80638,6 +82453,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -80967,6 +82823,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.innkeeper_wenna.greeting",
     "entities.npcs.innkeeper_wenna.name",
     "entities.npcs.innkeeper_wenna.title",
+    "entities.npcs.anglermaster_pell.greeting",
+    "entities.npcs.anglermaster_pell.name",
+    "entities.npcs.anglermaster_pell.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -81139,6 +82998,47 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_harvest_feast.objectives.1.label",
     "entities.quests.q_harvest_feast.text",
     "entities.quests.q_harvest_feast.title",
+    "entities.quests.q_derby_boatbreaker.completion",
+    "entities.quests.q_derby_boatbreaker.objectives.0.label",
+    "entities.quests.q_derby_boatbreaker.text",
+    "entities.quests.q_derby_boatbreaker.title",
+    "entities.quests.q_derby_boathouse_webs.completion",
+    "entities.quests.q_derby_boathouse_webs.objectives.0.label",
+    "entities.quests.q_derby_boathouse_webs.text",
+    "entities.quests.q_derby_boathouse_webs.title",
+    "entities.quests.q_derby_brood_queen.completion",
+    "entities.quests.q_derby_brood_queen.objectives.0.label",
+    "entities.quests.q_derby_brood_queen.text",
+    "entities.quests.q_derby_brood_queen.title",
+    "entities.quests.q_derby_foul_shallows.completion",
+    "entities.quests.q_derby_foul_shallows.objectives.0.label",
+    "entities.quests.q_derby_foul_shallows.text",
+    "entities.quests.q_derby_foul_shallows.title",
+    "entities.quests.q_derby_grubjaw.completion",
+    "entities.quests.q_derby_grubjaw.objectives.0.label",
+    "entities.quests.q_derby_grubjaw.text",
+    "entities.quests.q_derby_grubjaw.title",
+    "entities.quests.q_derby_mirejaw.completion",
+    "entities.quests.q_derby_mirejaw.objectives.0.label",
+    "entities.quests.q_derby_mirejaw.objectives.1.label",
+    "entities.quests.q_derby_mirejaw.text",
+    "entities.quests.q_derby_mirejaw.title",
+    "entities.quests.q_derby_nets.completion",
+    "entities.quests.q_derby_nets.objectives.0.label",
+    "entities.quests.q_derby_nets.text",
+    "entities.quests.q_derby_nets.title",
+    "entities.quests.q_derby_reedline.completion",
+    "entities.quests.q_derby_reedline.objectives.0.label",
+    "entities.quests.q_derby_reedline.text",
+    "entities.quests.q_derby_reedline.title",
+    "entities.quests.q_derby_tangled_lines.completion",
+    "entities.quests.q_derby_tangled_lines.objectives.0.label",
+    "entities.quests.q_derby_tangled_lines.text",
+    "entities.quests.q_derby_tangled_lines.title",
+    "entities.quests.q_derby_upstream_poachers.completion",
+    "entities.quests.q_derby_upstream_poachers.objectives.0.label",
+    "entities.quests.q_derby_upstream_poachers.text",
+    "entities.quests.q_derby_upstream_poachers.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -85076,6 +86976,10 @@ export const en_XA: EnTranslations = {
         "name": "[Íññķééþéŕ Ŵéññá]",
         "title": "[Ķééþéŕ óƒ ţĥé Ɓŕíĝĥţŵóóð Ţáþ]",
         "greeting": "[Ţĥé Ɓŕíĝĥţŵóóð Ţáþ'š ƀééñ šĥúţţéŕéð á šéášóñ, {playerName}, ƀúţ Í ɱéáñ ţó ţĥŕóŵ á Ĥáŕʋéšţ Ƒéášţ ţĥáţ Éášţƀŕóóķ ŵíļļ ţáļķ áƀóúţ ƒóŕ ýéáŕš. Ļéñð ɱé á šţŕóñĝ áŕɱ áñð ţĥéŕé'š çóíñ - áñð á ŵáŕɱ ĥéáŕţĥ - íñ íţ ƒóŕ ýóú.]"
+      "anglermaster_pell": {
+        "name": "[Áñĝļéŕɱášţéŕ Þéļļ]",
+        "title": "[Ķééþéŕ óƒ ţĥé Ƒéñƀŕíðĝé Ðéŕƀý]",
+        "greeting": "[Ţĥé Ƒéñƀŕíðĝé Ðéŕƀý ðŕéŵ áñĝļéŕš ƒŕóɱ ţĥŕéé ţóŵñš óñçé, {playerName} - ƀéƒóŕé ţĥé ļáķé ţúŕñéð ɱéáñ. Ĥéļþ ɱé ɱáķé ţĥéšé ŵáţéŕš šáƒé ţó çášţ íñ áĝáíñ, áñð ţĥéŕé'š á þúŕšé áñð á þļáçé óñ ţĥé ŵíññéŕš' ƀóáŕð ŵáíţíñĝ ƒóŕ ýóú.]"
       },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
@@ -86415,6 +88319,30 @@ export const en_XA: EnTranslations = {
         "title": "[Ŵĥéŕé ţĥé Ŵáţéŕ Ɓúŕñš]",
         "text": "[Ţĥé çáúšţíç þóóļš ɱúšţ ƀé ɱáŕķéð áš ĥážáŕð, óŕ šóɱé ţŕáðéŕ ŵíļļ ƒļóáţ á ƀáŕĝé íñţó ţĥéɱ áñð ļóšé ĥíš çŕéŵ. Ɓúţ ţĥé ƀóĝ ƀļóáţš ñéšţ ŕíĝĥţ ŵĥéŕé Í ñééð ţó šéţ ɱý ɱáŕķéŕš, áñð ţĥéý ƀúŕšţ ļíķé áçíð çášķš. Þóþ éíĝĥţ óƒ ţĥéɱ, {playerName}, áñð Í'ļļ þļáñţ ţĥé ĥážáŕð ƒļáĝš ɱýšéļƒ.]",
         "completion": "[Ĥážáŕð ƒļáĝš šéţ, þóóļš ɱáŕķéð íñ ŕéð óñ éʋéŕý çóþý. Ñó ƀáŕĝé-ɱášţéŕ çáñ šáý ĥé ŵáš ñóţ ŵáŕñéð ñóŵ.]",
+      "q_derby_nets": {
+        "title": "[Ŕáíðéŕš óñ ţĥé Ñéţš]",
+        "text": "[Í çáññóţ ŕúñ á Ðéŕƀý ŵĥéñ ţĥé ðééþƒéñ ɱúŕļóçš šļíţ éʋéŕý ñéţ Í šţŕíñĝ áçŕóšš ţĥé šĥáļļóŵš, {playerName}. Ţĥéý ðŕáĝ óƒƒ ţĥé çáţçĥ áñð ļéáʋé ţĥé ļíñéš íñ ŕíƀƀóñš. Çúļļ 10 Ðééþƒéñ Ɱúŕļóçš áļóñĝ ţĥé ŵéšţ šĥóŕé áñð Í çáñ šéţ ɱý ţŕáþš ŵíţĥóúţ ļóšíñĝ ţĥéɱ ƀý ɱóŕñíñĝ.]",
+        "completion": "[Ţĥé šĥáļļóŵš áŕé ɋúíéţ áñð ɱý ƒļóáţš áŕé šţíļļ ŵĥéŕé Í ļéƒţ ţĥéɱ. Ƒíŕšţ ţíɱé íñ á šéášóñ Í'ʋé ĥáúļéð á ƒúļļ ñéţ. Ýóú'ʋé á ƒééļ ƒóŕ ţĥíš ŵóŕķ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþƒéñ Ɱúŕļóç çúļļéð]"
+          }
+        }
+      },
+      "q_derby_reedline": {
+        "title": "[Þŕóŵļéŕš óñ ţĥé Ŕééðļíñé]",
+        "text": "[Áñĝļéŕš ŵóñ'ţ ŵáðé óúţ ţó ţĥé çášţíñĝ-šţáķéš ŵĥíļé ɱíŕé þŕóŵļéŕš šţáļķ ţĥé ŕééðļíñé - áñð Í ðóñ'ţ ƀļáɱé ţĥéɱ, ţĥé ƀŕúţéš ĥáʋé ţáķéñ á ļéĝ óƒƒ ɱóŕé ţĥáñ óñé ƒíšĥéŕ. Ţĥíñ ţĥéɱ óúţ, {playerName}: 10 Ɱíŕé Þŕóŵļéŕš ƒŕóɱ ţĥé ƀéðš šóúţĥ óƒ ţĥé çáúšéŵáý.]",
+        "completion": "[Ţĥé ŕééðļíñé'š šáƒé ţó ŵáðé áĝáíñ. Ɱý ŕéĝúļáŕš áŕé áļŕéáðý áŕĝúíñĝ óʋéŕ ţĥé ƀéšţ šţáķéš. Ţĥáţ'š ţĥé šóúñð óƒ á Ðéŕƀý çóɱíñĝ ƀáçķ ţó ļíƒé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕé Þŕóŵļéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_derby_foul_shallows": {
+        "title": "[Ţĥé Ƒóúļéð Šĥáļļóŵš]",
+        "text": "[Ñó ƒíšĥ ŵíļļ ŕíšé ŵĥéŕé ţĥé ƀóĝ ƀļóáţš ðŕíƒţ - ţĥéý ƒóúļ ţĥé ŵáţéŕ ŵíţĥ ţĥáţ ĝáš óƒ ţĥéíŕš áñð ţĥé ŵĥóļé éášţéŕñ šĥéļƒ ĝóéš ðéáð áñð šţíñķíñĝ. Þóþ 8 Ɓóĝ Ɓļóáţš óúţ óñ ţĥé ðŕý šĥéļƒ, {playerName}, áñð ļéţ ţĥé šĥáļļóŵš ƀŕéáţĥé áĝáíñ.]",
+        "completion": "[Ţĥé ŵáţéŕ'š çļéáŕíñĝ áļŕéáðý, áñð Í šþóţţéð á šçĥóóļ óƒ šíļʋéŕƒíñ ĥóļðíñĝ ŕíĝĥţ ŵĥéŕé ţĥé ƀļóáţš úšéð ţó ðŕíƒţ. Çļéáñ ŵáţéŕ, ĥúñĝŕý ƒíšĥ - ţĥáţ'š á Ðéŕƀý ƀéáţ, {playerName}.]",
         "objectives": {
           "0": {
             "label": "[Ɓóĝ Ɓļóáţ ƀúŕšţ]"
@@ -86608,6 +88536,76 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Šúñĥíðé Ɓéáŕ ţáķéñ]"
+      "q_derby_tangled_lines": {
+        "title": "[Ţáñĝļéð Ļíñéš]",
+        "text": "[Ţĥé ðŕóŵñéð ðéáð ŕíšé íñ ţĥé çĥáþéļ šĥáļļóŵš áñð ŵáļķ šţŕáíĝĥţ ţĥŕóúĝĥ ɱý ţŕóţļíñéš, ðŕáĝĝíñĝ ĥóóķš áñð ƒļóáţš ðóŵñ íñţó ţĥé ɱúçķ ŵĥéŕé ñó ļíʋíñĝ ĥáñð çáñ ƒŕéé ţĥéɱ. Þúţ 8 óƒ ţĥé Ðŕóŵñéð Ðéáð ƀáçķ ţó ŕéšţ, {playerName}, ƀéƒóŕé ţĥéý çóšţ ɱé éʋéŕý ļéñĝţĥ óƒ ļíñé Í óŵñ.]",
+        "completion": "[Ɱý ļíñéš çáɱé úþ çļéáñ áñð ŵĥóļé ţĥíš ɱóŕñíñĝ. Ŵĥáţéʋéŕ'š ķééþíñĝ ţĥóšé þóóŕ šóúļš ŵáļķíñĝ, áţ ļéášţ ţĥéý'ŕé ñóţ ŵáļķíñĝ ţĥŕóúĝĥ ɱý ţáçķļé. Ɱý ţĥáñķš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðŕóŵñéð Ðéáð ļáíð ţó ŕéšţ]"
+          }
+        }
+      },
+      "q_derby_boathouse_webs": {
+        "title": "[Ŵéƀš íñ ţĥé Ɓóáţĥóúšé]",
+        "text": "[Í'ð óþéñ ţĥé óļð ƀóáţĥóúšé ƒóŕ ţĥé Ðéŕƀý ŵéíĝĥ-íñ, ƀúţ ţĥé ɱíŕé ŵíðóŵš ĥáʋé šþúñ íţ šĥúţ ƒŕóɱ ŕáƒţéŕ ţó ĝúñŵáļé, áñð ţĥéíŕ ƀíţé ðŕóþš á ĝŕóŵñ áñĝļéŕ ŵĥéŕé ţĥéý šţáñð. Çļéáŕ 8 Ɱíŕé Ŵíðóŵš óúţ óƒ ţĥé ţĥíçķéţ, {playerName}, áñð Í çáñ áíŕ ţĥé þļáçé óúţ ƒóŕ ţĥé çŕóŵðš.]",
+        "completion": "[Šŵéþţ ţĥé ļášţ ŵéƀ óúţ óƒ ţĥé ŕáƒţéŕš ɱýšéļƒ. Ţĥé ƀóáţĥóúšé šɱéļļš óƒ þíţçĥ áñð óļð ŕóþé áĝáíñ - ĵúšţ áš á ŵéíĝĥ-íñ ĥáļļ šĥóúļð. Ýóú'ʋé éáŕñéð á ðŕý šéáţ áţ ţĥé ƒŕóñţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕé Ŵíðóŵ çļéáŕéð]"
+          }
+        }
+      },
+      "q_derby_brood_queen": {
+        "title": "[Ţĥé Ɓŕóóð-Ɋúééñ óƒ ţĥé Ţĥíçķéţ]",
+        "text": "[Çļéáŕ ţĥé ŵíðóŵš áñð ɱóŕé çóɱé - ţĥéý'ŕé ĥáţçĥíñĝ óúţ óƒ ţĥé Ɱíŕéƒéñ Ɓŕóóðɱóţĥéŕ ðééþ íñ ţĥé ţĥíçķéţ, áñð úñţíļ šĥé'š ðéáð ţĥé ƀóáţĥóúšé ŵíļļ ñéʋéŕ šţáý çļéáŕ. Šĥé'š á ɱóñšţéŕ ţĥé šížé óƒ á šķíƒƒ, {playerName}. Ţáķé á šţéáðý ĥáñð óŕ ţŵó ŵíţĥ ýóú áñð ƀúŕñ ĥéŕ ñéšţ óúţ ƒóŕ ĝóóð.]",
+        "completion": "[Ñó ɱóŕé ŵíðóŵš óñ ţĥé ŵíñð. Ŵíţĥ ţĥé Ɓŕóóðɱóţĥéŕ ĝóñé ţĥé ţĥíçķéţ ŵíļļ šţáý ɋúíéţ ƒóŕ ýéáŕš. Ţĥé ŵéíĝĥ-íñ ĥáļļ íš ţŕúļý óúŕš ñóŵ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéƒéñ Ɓŕóóðɱóţĥéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_derby_boatbreaker": {
+        "title": "[Ţĥé Ɓóáţ-Ɓŕéáķéŕ]",
+        "text": "[Ţĥéŕé'š á ţĥíñĝ íñ ţĥé ðééþ ŵáţéŕ ţĥé óļð áñĝļéŕš çáļļ Šļóóɱţóóţĥ - á ðŕóŵñéð ĥúļķ ţĥáţ ŕíšéš úñðéŕ á šķíƒƒ áñð šţóʋéš íţ íñ ƒóŕ ţĥé ĵóý óƒ íţ. Í'ʋé ļóšţ ţŵó ƀóáţš áñð ŵóñ'ţ ŕíšķ á ţĥíŕð óñ Ðéŕƀý ðáý. Ƒíñð Šļóóɱţóóţĥ ţĥé Ðŕóŵñéð íñ ţĥé çĥáþéļ šĥáļļóŵš áñð éñð íţ, {playerName}. Ðóñ'ţ ĝó áļóñé.]",
+        "completion": "[Šļóóɱţóóţĥ'š ðóŵñ íñ ţĥé šíļţ ŵĥéŕé íţ ƀéļóñĝš, áñð ɱý šķíƒƒš çáñ çŕóšš ţĥé ðééþ ŵáţéŕ ŵíţĥóúţ á þŕáýéŕ óñ éʋéŕý šţŕóķé. Ɓŕáʋé ŵóŕķ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Šļóóɱţóóţĥ ţĥé Ðŕóŵñéð ðéšţŕóýéð]"
+          }
+        }
+      },
+      "q_derby_upstream_poachers": {
+        "title": "[Þóáçĥéŕš Úþšţŕéáɱ]",
+        "text": "[Ţĥé ƒéñ ţŕóļļš ĥáʋé ðáɱɱéð ţĥé úþšţŕéáɱ çĥáññéļš áñð ñéţ ţĥé šþáŵñíñĝ ŕúñš ƀáŕé ŵíţĥ ţĥéíŕ çŕúðé ŵéíŕš - ñó ƒŕý ŕéáçĥ ţĥé ļáķé, áñð íñ á šéášóñ ţĥéŕé'ļļ ƀé ñóţĥíñĝ ļéƒţ ţó ƒíšĥ ƒóŕ. Ɓŕéáķ ţĥéíŕ ĥóļð, {playerName}: çúţ ðóŵñ 10 Ƒéñ Ţŕóļļš šó ţĥé ŕúñš çáñ ƒļóŵ ƒŕéé áĝáíñ.]",
+        "completion": "[Ɱý šçóúţš šáý ţĥé çĥáññéļš áŕé óþéñ áñð ţĥé ƒŕý áŕé ŕúññíñĝ ţĥíçķ ðóŵñ íñţó ţĥé ļáķé. Ýóú'ʋé ñóţ ĵúšţ šáʋéð ţĥíš Ðéŕƀý, {playerName} - ýóú'ʋé šáʋéð éʋéŕý Ðéŕƀý áƒţéŕ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒéñ Ţŕóļļ çúţ ðóŵñ]"
+          }
+        }
+      },
+      "q_derby_grubjaw": {
+        "title": "[Ĝŕúƀĵáŵ ţĥé Ĝļúţţóñóúš]",
+        "text": "[Óñé óļð ðéʋíļ ĥáš ƒáţţéñéð ĥíɱšéļƒ óñ éʋéŕý ƒíšĥ ţĥé ţŕóļļš' ŵéíŕš ţŕáþþéð - Ĝŕúƀĵáŵ, á ɱáŵ óñ ƒóúŕ ļéĝš ţĥáţ ĥáúñţš ţĥé ƀáŕŕóŵ-ɱóúñðš íñ ţĥé šóúţĥéášţ. Ŵĥíļé ĥé ļíʋéš ĥé'ļļ éáţ ţĥé ŕúñš ƒášţéŕ ţĥáñ ţĥéý ŕéçóʋéŕ. Þúţ ĥíɱ ðóŵñ, {playerName}, áñð ţáķé á ƒŕíéñð; ĥé'š šŵáļļóŵéð ĥúñţéŕš ŵĥóļé.]",
+        "completion": "[Ĝŕúƀĵáŵ, ţĥé ļáķé'š ĝŕééðíéšţ ɱóúţĥ, ƒíñáļļý šţíļļéð. Ţĥé ƒíšĥéŕš áŕé áļŕéáðý ŵéíĝĥíñĝ ţĥéíŕ ƒíŕšţ ĥóñéšţ çáţçĥéš íñ ɱóñţĥš. Ýóú'ʋé éáŕñéð ýóúŕ þļáçé óñ ţĥé ƀóáŕð ţŵíçé óʋéŕ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕúƀĵáŵ ţĥé Ĝļúţţóñóúš šļáíñ]"
+          }
+        }
+      },
+      "q_derby_mirejaw": {
+        "title": "[Ţĥé Ðéŕƀý'š Ĝŕáñð Þŕížé: Ɱíŕéĵáŵ]",
+        "text": "[Íţ'š ţíɱé, {playerName}. Éʋéŕý Ðéŕƀý ñééðš á ĝŕáñð þŕížé, áñð óúŕš ĥáš óñļý éʋéŕ ĥáð óñé: Ɱíŕéĵáŵ ţĥé Ŕáʋéñóúš, ţĥé ĝŕéáţ ļáķé-ƀéášţ ñó áñĝļéŕ ĥáš éʋéŕ ļáñðéð. Ðŕíʋé óƒƒ ţĥé 5 Ðééþƒéñ Ɱúŕļóçš ţĥáţ ĝúáŕð ĥíš ðééþ, ţĥéñ ļáñð Ɱíŕéĵáŵ ĥíɱšéļƒ áñð ţĥé ŵíññéŕš' ƀóáŕð íš ýóúŕš ţó çŕóŵñ. Ɓŕíñĝ ĥéļþ - ĥé íš ţĥé ļáķé'š óŵñ ƒúŕý ɱáðé ƒļéšĥ.]",
+        "completion": "[Ɱíŕéĵáŵ ţĥé Ŕáʋéñóúš - óñ ţĥé ŵéíĝĥ-íñ ðóçķ, áţ ļášţ! Ţĥé ŵĥóļé óƒ Ƒéñƀŕíðĝé íš çĥééŕíñĝ ýóúŕ ñáɱé, {playerName}, áñð ţĥéŕé'š á þļáçé áţ ţĥé ĥéáð óƒ ţĥé ŵíññéŕš' ƀóáŕð ķéþţ ƒóŕ ýóú áš ļóñĝ áš áñĝļéŕš çášţ á ļíñé íñ ţĥéšé ŵáţéŕš. Ţĥé Ƒéñƀŕíðĝé Ðéŕƀý ļíʋéš áĝáíñ, ƀéçáúšé ýóú ɱáðé íţ ļíʋé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéĵáŵ ţĥé Ŕáʋéñóúš ļáñðéð]"
+          },
+          "1": {
+            "label": "[Ðééþƒéñ Ɱúŕļóç ĝúáŕð ðŕíʋéñ óƒƒ]"
           }
         }
       },

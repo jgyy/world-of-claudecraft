@@ -46,6 +46,7 @@ const NPC_IDS = [
   'loremaster_caddis', 'ranger_elwyn', 'cartographer_innes',
   'loremaster_caddis', 'ranger_elwyn', 'prospector_dunmar',
   'loremaster_caddis', 'ranger_elwyn', 'innkeeper_wenna',
+  'loremaster_caddis', 'ranger_elwyn', 'anglermaster_pell',
 ] as const;
 
 const QUEST_IDS = [
@@ -88,6 +89,9 @@ const QUEST_IDS = [
   'q_tap_cellar_rats', 'q_tap_table_fowl', 'q_tap_spit_boar', 'q_tap_house_wolves',
   'q_tap_cellar_spiders', 'q_tap_prized_greyjaw', 'q_tap_unpaid_tab', 'q_tap_venison',
   'q_tap_gorrak_raid', 'q_harvest_feast',
+  'q_derby_nets', 'q_derby_reedline', 'q_derby_foul_shallows', 'q_derby_tangled_lines',
+  'q_derby_boathouse_webs', 'q_derby_brood_queen', 'q_derby_boatbreaker',
+  'q_derby_upstream_poachers', 'q_derby_grubjaw', 'q_derby_mirejaw',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
