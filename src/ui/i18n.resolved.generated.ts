@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -7856,6 +7961,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8821,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -12319,6 +12529,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13389,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -16782,6 +17097,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17957,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -21245,6 +21665,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22525,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -25708,6 +26233,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27093,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -30171,6 +30801,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31661,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -34634,6 +35369,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36229,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -39097,6 +39937,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40797,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -43560,6 +44505,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45365,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -48023,6 +49073,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49933,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -52486,6 +53641,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54501,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -56949,6 +58209,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59069,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
           }
         }
       },
@@ -61412,6 +62777,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "austringer_wrenna": {
+        "name": "Austringer Wrenna",
+        "title": "Highwatch Falconer",
+        "greeting": "The whole watch sees by my hawks, {playerName} - every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63640,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_mews_ledge": {
+        "title": "Clear the Launch-Ledge",
+        "text": "I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them - 10, {playerName} - and give my young birds a clean launch.",
+        "completion": "The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker thinned"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "Thieves at the Nest-Crags",
+        "text": "My wild stock comes from the nest-crags east of here - gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, {playerName}, before they leave me nothing to raise.",
+        "completion": "The crags are theirs no longer. I banded four healthy chicks this morning - the next generation of the watch, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler driven off"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "The Foreman's Caged Gyr",
+        "text": "The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon - a white hen worth more than the armory - to pluck her for a trophy-cloak. She is in his dig, {playerName}. Kill him and cut her free, and I will not forget it.",
+        "completion": "She is back on her block, ruffled and furious but whole. You did not just kill a kobold, {playerName} - you saved the sharpest eye on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman slain"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "Ogres in the High Aeries",
+        "text": "A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, {playerName}, and give me my skies back.",
+        "completion": "My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one - and you have silenced them.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre culled"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "The Crushers on the Cliff-Path",
+        "text": "I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them - 8 crushers, {playerName} - and let me train in peace.",
+        "completion": "I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher broken"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "Drogmar Holds the Great Eyrie",
+        "text": "There is one eyrie above all others - a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, {playerName}, and the great eyrie is the watch's again.",
+        "completion": "The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again - you have given the mews its future.",
+        "objectives": {
+          "0": {
+            "label": "Warlord Drogmar slain"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "Storms in the Thermals",
+        "text": "A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags - their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, {playerName}, and let the air carry my birds clean again.",
+        "completion": "The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental scattered"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "The Killing Storm",
+        "text": "One storm is worse than all the rest - Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, {playerName}, and you break the curse over my whole mews.",
+        "completion": "The sky over the crags is open for the first time in a season. You did not clear a storm, {playerName} - you lifted a death-sentence off every hawk on this mountain.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "Blind the Watch No Longer",
+        "text": "The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, {playerName}, and tear their snares with them.",
+        "completion": "Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot cut down"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "The Carrion-Caller",
+        "text": "The cult's necromancers do the foulest thing of all - they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, {playerName}. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.",
+        "completion": "The risen birds dropped from the air the moment their callers fell - at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, {playerName}, and so do I.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer put down"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62521,6 +63991,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62575,6 +64048,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62694,6 +64207,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62748,6 +64264,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62867,6 +64423,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62921,6 +64480,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63040,6 +64639,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63094,6 +64696,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63214,6 +64856,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63268,6 +64913,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63387,6 +65072,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63441,6 +65129,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63560,6 +65288,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63614,6 +65345,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63733,6 +65504,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63787,6 +65561,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63906,6 +65720,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63960,6 +65777,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64079,6 +65936,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64133,6 +65993,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64252,6 +66152,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64306,6 +66209,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64425,6 +66368,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.austringer_wrenna.greeting",
+    "entities.npcs.austringer_wrenna.name",
+    "entities.npcs.austringer_wrenna.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64479,6 +66425,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_mews_aeries.completion",
+    "entities.quests.q_mews_aeries.objectives.0.label",
+    "entities.quests.q_mews_aeries.text",
+    "entities.quests.q_mews_aeries.title",
+    "entities.quests.q_mews_carrion.completion",
+    "entities.quests.q_mews_carrion.objectives.0.label",
+    "entities.quests.q_mews_carrion.text",
+    "entities.quests.q_mews_carrion.title",
+    "entities.quests.q_mews_cliffpath.completion",
+    "entities.quests.q_mews_cliffpath.objectives.0.label",
+    "entities.quests.q_mews_cliffpath.text",
+    "entities.quests.q_mews_cliffpath.title",
+    "entities.quests.q_mews_eggthieves.completion",
+    "entities.quests.q_mews_eggthieves.objectives.0.label",
+    "entities.quests.q_mews_eggthieves.text",
+    "entities.quests.q_mews_eggthieves.title",
+    "entities.quests.q_mews_eyrie.completion",
+    "entities.quests.q_mews_eyrie.objectives.0.label",
+    "entities.quests.q_mews_eyrie.text",
+    "entities.quests.q_mews_eyrie.title",
+    "entities.quests.q_mews_foreman.completion",
+    "entities.quests.q_mews_foreman.objectives.0.label",
+    "entities.quests.q_mews_foreman.text",
+    "entities.quests.q_mews_foreman.title",
+    "entities.quests.q_mews_killingstorm.completion",
+    "entities.quests.q_mews_killingstorm.objectives.0.label",
+    "entities.quests.q_mews_killingstorm.text",
+    "entities.quests.q_mews_killingstorm.title",
+    "entities.quests.q_mews_ledge.completion",
+    "entities.quests.q_mews_ledge.objectives.0.label",
+    "entities.quests.q_mews_ledge.text",
+    "entities.quests.q_mews_ledge.title",
+    "entities.quests.q_mews_netters.completion",
+    "entities.quests.q_mews_netters.objectives.0.label",
+    "entities.quests.q_mews_netters.text",
+    "entities.quests.q_mews_netters.title",
+    "entities.quests.q_mews_thermals.completion",
+    "entities.quests.q_mews_thermals.objectives.0.label",
+    "entities.quests.q_mews_thermals.text",
+    "entities.quests.q_mews_thermals.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -67972,6 +69958,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "austringer_wrenna": {
+        "name": "[Áúšţŕíñĝéŕ Ŵŕéññá]",
+        "title": "[Ĥíĝĥŵáţçĥ Ƒáļçóñéŕ]",
+        "greeting": "[Ţĥé ŵĥóļé ŵáţçĥ šééš ƀý ɱý ĥáŵķš, {playerName} - éʋéŕý ŵýŕɱ-šíĝñ óñ ţĥé þéáķš ŕéáçĥéš ţĥé çáþţáíñ ƀéçáúšé á ƀíŕð çáŕŕíéð íţ. Ɓúţ ţĥé ɱóúñţáíñ íš ɱúŕðéŕ óñ á ƒáļçóñ, áñð ɱý ɱéŵš íš ĥáļƒ-éɱþţý. Çļéáŕ ɱé šóɱé šķý áñð Í ŵíļļ ķééþ Ĥíĝĥŵáţçĥ šĥáŕþ-éýéð.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70818,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_mews_ledge": {
+        "title": "[Çļéáŕ ţĥé Ļáúñçĥ-Ļéðĝé]",
+        "text": "[Í çášţ ɱý ĥáŵķš ƒŕóɱ ţĥé ļóŵ ļéðĝé úñðéŕ ţĥé ɱéŵš, ŵĥéŕé ţĥé ţĥéŕɱáļš ƒíŕšţ ŕíšé. Ɓúţ ţĥé ŕíðĝé šţáļķéŕš ðéñ ŕíĝĥţ óñ íţ, áñð á šţáļķéŕ ŵíļļ ţáķé á ƒļéðĝļíñĝ óƒƒ ɱý ƒíšţ ƀéƒóŕé íţ éʋéŕ óþéñš íţš ŵíñĝš. Ţĥíñ ţĥéɱ - 10, {playerName} - áñð ĝíʋé ɱý ýóúñĝ ƀíŕðš á çļéáñ ļáúñçĥ.]",
+        "completion": "[Ţĥé ļéðĝé íš ɋúíéţ áñð ɱý ƒļéðĝļíñĝš ƒļéŵ ţĥéíŕ ƒíŕšţ çíŕçúíţ ŵíţĥóúţ á šíñĝļé šţóóþ ƒŕóɱ ƀéļóŵ. Ýóú ĥáʋé ĝíʋéñ ţĥé ŵáţçĥ á šéášóñ óƒ ñéŵ éýéš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕíðĝé Šţáļķéŕ ţĥíññéð]"
+          }
+        }
+      },
+      "q_mews_eggthieves": {
+        "title": "[Ţĥíéʋéš áţ ţĥé Ñéšţ-Çŕáĝš]",
+        "text": "[Ɱý ŵíļð šţóçķ çóɱéš ƒŕóɱ ţĥé ñéšţ-çŕáĝš éášţ óƒ ĥéŕé - ĝýŕƒáļçóñ éĝĝš Í ƀáñð áñð ŕáíšé. Ɓúţ ţĥé ðééþŕóçķ ķóƀóļðš ĥáʋé ļéáŕñéð ţĥé çļíɱƀ, áñð ţĥéý çŕáçķ á çļúţçĥ ƒóŕ á šíñĝļé ɱéáļ. Ðŕíʋé 10 óƒ ţĥé éĝĝ-ţĥíéʋéš óƒƒ ţĥé çŕáĝš, {playerName}, ƀéƒóŕé ţĥéý ļéáʋé ɱé ñóţĥíñĝ ţó ŕáíšé.]",
+        "completion": "[Ţĥé çŕáĝš áŕé ţĥéíŕš ñó ļóñĝéŕ. Í ƀáñðéð ƒóúŕ ĥéáļţĥý çĥíçķš ţĥíš ɱóŕñíñĝ - ţĥé ñéẋţ ĝéñéŕáţíóñ óƒ ţĥé ŵáţçĥ, ţĥáñķš ţó ýóú.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþŕóçķ Ţúññéļéŕ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_mews_foreman": {
+        "title": "[Ţĥé Ƒóŕéɱáñ'š Çáĝéð Ĝýŕ]",
+        "text": "[Ţĥé ķóƀóļðš ţóóķ ɱóŕé ţĥáñ éĝĝš. Ţĥéíŕ ƒóŕéɱáñ, Íŕóñʋéíñ, çáĝéð ɱý ƒíñéšţ ĝýŕƒáļçóñ - á ŵĥíţé ĥéñ ŵóŕţĥ ɱóŕé ţĥáñ ţĥé áŕɱóŕý - ţó þļúçķ ĥéŕ ƒóŕ á ţŕóþĥý-çļóáķ. Šĥé íš íñ ĥíš ðíĝ, {playerName}. Ķíļļ ĥíɱ áñð çúţ ĥéŕ ƒŕéé, áñð Í ŵíļļ ñóţ ƒóŕĝéţ íţ.]",
+        "completion": "[Šĥé íš ƀáçķ óñ ĥéŕ ƀļóçķ, ŕúƒƒļéð áñð ƒúŕíóúš ƀúţ ŵĥóļé. Ýóú ðíð ñóţ ĵúšţ ķíļļ á ķóƀóļð, {playerName} - ýóú šáʋéð ţĥé šĥáŕþéšţ éýé óñ ţĥíš ɱóúñţáíñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Íŕóñʋéíñ Ƒóŕéɱáñ šļáíñ]"
+          }
+        }
+      },
+      "q_mews_aeries": {
+        "title": "[Óĝŕéš íñ ţĥé Ĥíĝĥ Áéŕíéš]",
+        "text": "[Á ĥáŵķ ŵíļļ ñóţ ĥúñţ óʋéŕ ĝŕóúñð ţĥáţ ƒŕíĝĥţéñš íţ, áñð ñóţĥíñĝ ƒŕíĝĥţéñš á ƀíŕð ļíķé á ţĥóŕñþéáķ óĝŕé šŵíñĝíñĝ á ţŕéé. Ţĥéý ĥáʋé ɱóʋéð óñţó ţĥé ŵéšţéŕñ šļóþéš ŵĥéŕé ɱý ƀéšţ ĥúñţíñĝ-ĝŕóúñð ļíéš, áñð ɱý ĥáŵķš ŕéƒúšé ţĥé áíŕšþáçé. Çúļļ 10, {playerName}, áñð ĝíʋé ɱé ɱý šķíéš ƀáçķ.]",
+        "completion": "[Ɱý ƀíŕðš áŕé ŵóŕķíñĝ ţĥé ŵéšţéŕñ šļóþéš áĝáíñ, šţóóþíñĝ çļéáñ. Áñ óĝŕé çáññóţ ŕéáçĥ á ƒáļçóñ, ƀúţ íţš ñóíšé çáñ ĝŕóúñð óñé - áñð ýóú ĥáʋé šíļéñçéð ţĥéɱ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Óĝŕé çúļļéð]"
+          }
+        }
+      },
+      "q_mews_cliffpath": {
+        "title": "[Ţĥé Çŕúšĥéŕš óñ ţĥé Çļíƒƒ-Þáţĥ]",
+        "text": "[Í ŵáļķ ţĥé çļíƒƒ-þáţĥ ðáíļý ţó šŵíñĝ ţĥé ļúŕé áñð çáļļ ɱý ĥáŵķš ðóŵñ ţó ţĥé ƒíšţ. Ţĥé ţĥóŕñþéáķ çŕúšĥéŕš ĥáʋé ţáķéñ ţó áɱƀúšĥíñĝ ţĥáţ þáţĥ, áñð á ƒáļçóñéŕ çáññóţ ŵóŕķ á ƀíŕð ŵíţĥ óñé éýé óʋéŕ ĥíš šĥóúļðéŕ. Ɓŕéáķ ţĥéɱ - 8 çŕúšĥéŕš, {playerName} - áñð ļéţ ɱé ţŕáíñ íñ þéáçé.]",
+        "completion": "[Í ŵóŕķéð ţĥé ļúŕé ţĥé ŵĥóļé ļéñĝţĥ óƒ ţĥé þáţĥ ţóðáý áñð ñéʋéŕ óñçé ŕéáçĥéð ƒóŕ ɱý ķñíƒé. Á ĥáŵķ ţŕáíñéð ŵíţĥóúţ ƒéáŕ ƒļíéš ţŵíçé áš ţŕúé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Çŕúšĥéŕ ƀŕóķéñ]"
+          }
+        }
+      },
+      "q_mews_eyrie": {
+        "title": "[Ðŕóĝɱáŕ Ĥóļðš ţĥé Ĝŕéáţ Éýŕíé]",
+        "text": "[Ţĥéŕé íš óñé éýŕíé áƀóʋé áļļ óţĥéŕš - á ŵíñð-šçóúŕéð šþúŕ ŵĥéŕé ţĥé ŵíļð ĝýŕš ĥáʋé ñéšţéð šíñçé ƀéƒóŕé Ĥíĝĥŵáţçĥ šţóóð. Ŵáŕļóŕð Ðŕóĝɱáŕ ĥáš çļáíɱéð íţ ƒóŕ ĥíš ŵáŕ-çáɱþ, áñð ŵĥíļé ĥé ĥóļðš íţ ţĥé ƀļóóðļíñé ţĥáţ šţóçķš ɱý ɱéŵš íš ļóšţ ţó ɱé. Ķíļļ ĥíɱ, {playerName}, áñð ţĥé ĝŕéáţ éýŕíé íš ţĥé ŵáţçĥ'š áĝáíñ.]",
+        "completion": "[Ţĥé šþúŕ íš çļéáŕ áñð á ŵíļð þáíŕ íš áļŕéáðý çíŕçļíñĝ ƀáçķ ţó íţ. Ţĥé óļðéšţ ƀļóóðļíñé óñ ţĥé ɱóúñţáíñ ŵíļļ ƒļý ƒóŕ Ĥíĝĥŵáţçĥ áĝáíñ - ýóú ĥáʋé ĝíʋéñ ţĥé ɱéŵš íţš ƒúţúŕé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵáŕļóŕð Ðŕóĝɱáŕ šļáíñ]"
+          }
+        }
+      },
+      "q_mews_thermals": {
+        "title": "[Šţóŕɱš íñ ţĥé Ţĥéŕɱáļš]",
+        "text": "[Á ƒáļçóñ ŕíðéš ţĥé ŕíšíñĝ áíŕ ţó ĥúñţ-ĥéíĝĥţ, ƀúţ ţĥé šţóŕɱçŕáĝ éļéɱéñţáļš ĥáʋé ƒóúļéð ţĥé ţĥéŕɱáļš óʋéŕ ţĥé úþþéŕ çŕáĝš - ţĥéíŕ ļíĝĥţñíñĝ ķñóçķš á ƀíŕð ƒŕóɱ ţĥé šķý šţóñé-ðéáð. Í ĥáʋé ļóšţ ţŵó ĥáŵķš ţó ţĥéɱ ţĥíš ŵééķ. Šçáţţéŕ 10, {playerName}, áñð ļéţ ţĥé áíŕ çáŕŕý ɱý ƀíŕðš çļéáñ áĝáíñ.]",
+        "completion": "[Ţĥé ţĥéŕɱáļš áŕé çáļɱ áñð ɱý ĥáŵķš áŕé ţóŵéŕíñĝ ţó á þŕóþéŕ þíţçĥ óñçé ɱóŕé. Ñó ƒáļçóñéŕ šĥóúļð ĥáʋé ţó ŵáţçĥ ţĥé šķý ķíļļ ĥíš ƀíŕðš ƒóŕ ĥíɱ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šţóŕɱçŕáĝ Éļéɱéñţáļ šçáţţéŕéð]"
+          }
+        }
+      },
+      "q_mews_killingstorm": {
+        "title": "[Ţĥé Ķíļļíñĝ Šţóŕɱ]",
+        "text": "[Óñé šţóŕɱ íš ŵóŕšé ţĥáñ áļļ ţĥé ŕéšţ - Šĥáŕðļóŕð Ķážžíẋ, á ļíʋíñĝ šɋúáļļ ţĥáţ ðŕíƒţš ţĥé ĥíĝĥ çŕáĝš áñð ðóŵñš éʋéŕý ƀíŕð ţĥáţ çŕóššéš íţ, ŵíļð óŕ ɱíñé. Ŵĥíļé íţ ļíʋéš ñó ĥáŵķ íš šáƒé áţ ĥúñţ-ĥéíĝĥţ. Ɓŕéáķ íţ áþáŕţ, {playerName}, áñð ýóú ƀŕéáķ ţĥé çúŕšé óʋéŕ ɱý ŵĥóļé ɱéŵš.]",
+        "completion": "[Ţĥé šķý óʋéŕ ţĥé çŕáĝš íš óþéñ ƒóŕ ţĥé ƒíŕšţ ţíɱé íñ á šéášóñ. Ýóú ðíð ñóţ çļéáŕ á šţóŕɱ, {playerName} - ýóú ļíƒţéð á ðéáţĥ-šéñţéñçé óƒƒ éʋéŕý ĥáŵķ óñ ţĥíš ɱóúñţáíñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šĥáŕðļóŕð Ķážžíẋ šļáíñ]"
+          }
+        }
+      },
+      "q_mews_netters": {
+        "title": "[Ɓļíñð ţĥé Ŵáţçĥ Ñó Ļóñĝéŕ]",
+        "text": "[Ţĥé ŵýŕɱçúļţ ĥáš ŵóŕķéð óúţ ŵĥáţ ɱý ĥáŵķš áŕé. Ţĥéíŕ žéáļóţš šţŕíñĝ ñéţš áçŕóšš ţĥé ĥíĝĥ þáššéš ţó šñáŕé ɱý ƀíŕðš áñð ƀļíñð ţĥé ŵáţçĥ ƀéƒóŕé ţĥéý ɱóʋé. Éʋéŕý ñéţţéð ĥáŵķ íš á ŵýŕɱ-šíĝñ ţĥé çáþţáíñ ñéʋéŕ šééš. Çúţ ðóŵñ 10 óƒ ţĥé ñéţţéŕš, {playerName}, áñð ţéáŕ ţĥéíŕ šñáŕéš ŵíţĥ ţĥéɱ.]",
+        "completion": "[Ţĥéíŕ ñéţš áŕé ðóŵñ áñð ţĥŕéé óƒ ɱý ƀíŕðš Í ĥáð ĝíʋéñ úþ ƒóŕ ļóšţ çáɱé ĥóɱé ţó ţĥé ƒíšţ. Ţĥé çúļţ ŵáñţéð úš ƀļíñð ƒóŕ ŵĥáţ íš çóɱíñĝ. Ɓéçáúšé óƒ ýóú, ŵé áŕé ñóţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵýŕɱçúļţ Žéáļóţ çúţ ðóŵñ]"
+          }
+        }
+      },
+      "q_mews_carrion": {
+        "title": "[Ţĥé Çáŕŕíóñ-Çáļļéŕ]",
+        "text": "[Ţĥé çúļţ'š ñéçŕóɱáñçéŕš ðó ţĥé ƒóúļéšţ ţĥíñĝ óƒ áļļ - ţĥéý ŕáíšé ɱý ƒáļļéñ ĥáŵķš íñţó çáŕŕíóñ-ţĥíñĝš áñð šéñð ţĥéɱ ƀáçķ ţó ĥáŕŕý ţĥé ļíʋíñĝ ɱéŵš. Í ŵíļļ ñóţ ĥáʋé ɱý óŵñ ƀíŕðš ţúŕñéð áĝáíñšţ ɱé, {playerName}. Þúţ ðóŵñ 3 óƒ ţĥé çáŕŕíóñ-çáļļéŕš, áñð ļéţ ţĥé ðéáð ĥáŵķš ŕéšţ. Ƒíñíšĥ ţĥíš, áñð ţĥé ɱéŵš íš ŵĥóļé áĝáíñ.]",
+        "completion": "[Ţĥé ŕíšéñ ƀíŕðš ðŕóþþéð ƒŕóɱ ţĥé áíŕ ţĥé ɱóɱéñţ ţĥéíŕ çáļļéŕš ƒéļļ - áţ þéáçé áţ ļášţ. Ţĥé ŵáţçĥ šééš, ţĥé ɱéŵš íš ƒúļļ, áñð ţĥé šķý óʋéŕ Ĥíĝĥŵáţçĥ íš óúŕš. Ţĥé ĥáŵķš óŵé ýóú ţĥéíŕ ļíʋéš, {playerName}, áñð šó ðó Í.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵýŕɱçúļţ Ñéçŕóɱáñçéŕ þúţ ðóŵñ]"
           }
         }
       },

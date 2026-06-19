@@ -440,6 +440,16 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
     questIds: ['q_kobold_tunnels', 'q_elementals', 'q_shard_cores', 'q_kazzix'],
     greeting: 'Mind the loose shale, $C. The mountain has been... restless of late. I intend to learn why.',
   },
+  austringer_wrenna: {
+    id: 'austringer_wrenna', name: 'Austringer Wrenna', title: 'Highwatch Falconer',
+    pos: { x: -14, z: 648 }, facing: 0.7, color: 0x8e5a3b,
+    questIds: [
+      'q_mews_ledge', 'q_mews_eggthieves', 'q_mews_foreman', 'q_mews_aeries',
+      'q_mews_cliffpath', 'q_mews_eyrie', 'q_mews_thermals', 'q_mews_killingstorm',
+      'q_mews_netters', 'q_mews_carrion',
+    ],
+    greeting: 'The whole watch sees by my hawks, $N — every wyrm-sign on the peaks reaches the captain because a bird carried it. But the mountain is murder on a falcon, and my mews is half-empty. Clear me some sky and I will keep Highwatch sharp-eyed.',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -737,6 +747,98 @@ export const ZONE3_QUESTS: Record<string, QuestDef> = {
     itemRewards: { warrior: 'kings_signet', mage: 'kings_signet', rogue: 'kings_signet' },
     requiresQuest: 'q_nythraxis_sealed_crypt', minLevel: 20, suggestedPlayers: 5,
   },
+
+  // --- The Highwatch Mews: Austringer Wrenna keeps the watch's hawks flying ---
+  q_mews_ledge: {
+    id: 'q_mews_ledge', name: 'Clear the Launch-Ledge',
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'I cast my hawks from the low ledge under the mews, where the thermals first rise. But the ridge stalkers den right on it, and a stalker will take a fledgling off my fist before it ever opens its wings. Thin them — 10, $N — and give my young birds a clean launch.',
+    completionText: 'The ledge is quiet and my fledglings flew their first circuit without a single stoop from below. You have given the watch a season of new eyes.',
+    objectives: [{ type: 'kill', targetMobId: 'ridge_stalker', count: 10, label: 'Ridge Stalker thinned' }],
+    xpReward: 3000, copperReward: 1600, itemRewards: {},
+    minLevel: 13,
+  },
+  q_mews_eggthieves: {
+    id: 'q_mews_eggthieves', name: 'Thieves at the Nest-Crags',
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'My wild stock comes from the nest-crags east of here — gyrfalcon eggs I band and raise. But the deeprock kobolds have learned the climb, and they crack a clutch for a single meal. Drive 10 of the egg-thieves off the crags, $N, before they leave me nothing to raise.',
+    completionText: 'The crags are theirs no longer. I banded four healthy chicks this morning — the next generation of the watch, thanks to you.',
+    objectives: [{ type: 'kill', targetMobId: 'deeprock_kobold', count: 10, label: 'Deeprock Tunneler driven off' }],
+    xpReward: 3200, copperReward: 1700, itemRewards: {},
+    requiresQuest: 'q_mews_ledge',
+  },
+  q_mews_foreman: {
+    id: 'q_mews_foreman', name: "The Foreman's Caged Gyr",
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'The kobolds took more than eggs. Their foreman, Ironvein, caged my finest gyrfalcon — a white hen worth more than the armory — to pluck her for a trophy-cloak. She is in his dig, $N. Kill him and cut her free, and I will not forget it.',
+    completionText: 'She is back on her block, ruffled and furious but whole. You did not just kill a kobold, $N — you saved the sharpest eye on this mountain.',
+    objectives: [{ type: 'kill', targetMobId: 'ironvein_foreman', count: 1, label: 'Ironvein Foreman slain' }],
+    xpReward: 3500, copperReward: 2000, itemRewards: {},
+    requiresQuest: 'q_mews_eggthieves',
+  },
+  q_mews_aeries: {
+    id: 'q_mews_aeries', name: 'Ogres in the High Aeries',
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'A hawk will not hunt over ground that frightens it, and nothing frightens a bird like a thornpeak ogre swinging a tree. They have moved onto the western slopes where my best hunting-ground lies, and my hawks refuse the airspace. Cull 10, $N, and give me my skies back.',
+    completionText: 'My birds are working the western slopes again, stooping clean. An ogre cannot reach a falcon, but its noise can ground one — and you have silenced them.',
+    objectives: [{ type: 'kill', targetMobId: 'thornpeak_ogre', count: 10, label: 'Thornpeak Ogre culled' }],
+    xpReward: 3600, copperReward: 2100, itemRewards: {},
+    requiresQuest: 'q_mews_foreman',
+  },
+  q_mews_cliffpath: {
+    id: 'q_mews_cliffpath', name: 'The Crushers on the Cliff-Path',
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'I walk the cliff-path daily to swing the lure and call my hawks down to the fist. The thornpeak crushers have taken to ambushing that path, and a falconer cannot work a bird with one eye over his shoulder. Break them — 8 crushers, $N — and let me train in peace.',
+    completionText: 'I worked the lure the whole length of the path today and never once reached for my knife. A hawk trained without fear flies twice as true.',
+    objectives: [{ type: 'kill', targetMobId: 'ogre_crusher', count: 8, label: 'Thornpeak Crusher broken' }],
+    xpReward: 3800, copperReward: 2200, itemRewards: {},
+    requiresQuest: 'q_mews_aeries',
+  },
+  q_mews_eyrie: {
+    id: 'q_mews_eyrie', name: 'Drogmar Holds the Great Eyrie',
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'There is one eyrie above all others — a wind-scoured spur where the wild gyrs have nested since before Highwatch stood. Warlord Drogmar has claimed it for his war-camp, and while he holds it the bloodline that stocks my mews is lost to me. Kill him, $N, and the great eyrie is the watch\'s again.',
+    completionText: 'The spur is clear and a wild pair is already circling back to it. The oldest bloodline on the mountain will fly for Highwatch again — you have given the mews its future.',
+    objectives: [{ type: 'kill', targetMobId: 'warlord_drogmar', count: 1, label: 'Warlord Drogmar slain' }],
+    xpReward: 4000, copperReward: 2400, itemRewards: {},
+    requiresQuest: 'q_mews_cliffpath',
+  },
+  q_mews_thermals: {
+    id: 'q_mews_thermals', name: 'Storms in the Thermals',
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'A falcon rides the rising air to hunt-height, but the stormcrag elementals have fouled the thermals over the upper crags — their lightning knocks a bird from the sky stone-dead. I have lost two hawks to them this week. Scatter 10, $N, and let the air carry my birds clean again.',
+    completionText: 'The thermals are calm and my hawks are towering to a proper pitch once more. No falconer should have to watch the sky kill his birds for him.',
+    objectives: [{ type: 'kill', targetMobId: 'stormcrag_elemental', count: 10, label: 'Stormcrag Elemental scattered' }],
+    xpReward: 4100, copperReward: 2500, itemRewards: {},
+    requiresQuest: 'q_mews_eyrie',
+  },
+  q_mews_killingstorm: {
+    id: 'q_mews_killingstorm', name: 'The Killing Storm',
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'One storm is worse than all the rest — Shardlord Kazzix, a living squall that drifts the high crags and downs every bird that crosses it, wild or mine. While it lives no hawk is safe at hunt-height. Break it apart, $N, and you break the curse over my whole mews.',
+    completionText: 'The sky over the crags is open for the first time in a season. You did not clear a storm, $N — you lifted a death-sentence off every hawk on this mountain.',
+    objectives: [{ type: 'kill', targetMobId: 'shardlord_kazzix', count: 1, label: 'Shardlord Kazzix slain' }],
+    xpReward: 4300, copperReward: 2700, itemRewards: {},
+    requiresQuest: 'q_mews_thermals',
+  },
+  q_mews_netters: {
+    id: 'q_mews_netters', name: 'Blind the Watch No Longer',
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'The wyrmcult has worked out what my hawks are. Their zealots string nets across the high passes to snare my birds and blind the watch before they move. Every netted hawk is a wyrm-sign the captain never sees. Cut down 10 of the netters, $N, and tear their snares with them.',
+    completionText: 'Their nets are down and three of my birds I had given up for lost came home to the fist. The cult wanted us blind for what is coming. Because of you, we are not.',
+    objectives: [{ type: 'kill', targetMobId: 'wyrmcult_zealot', count: 10, label: 'Wyrmcult Zealot cut down' }],
+    xpReward: 4400, copperReward: 2800, itemRewards: {},
+    requiresQuest: 'q_mews_killingstorm',
+  },
+  q_mews_carrion: {
+    id: 'q_mews_carrion', name: 'The Carrion-Caller',
+    giverNpcId: 'austringer_wrenna', turnInNpcId: 'austringer_wrenna',
+    text: 'The cult\'s necromancers do the foulest thing of all — they raise my fallen hawks into carrion-things and send them back to harry the living mews. I will not have my own birds turned against me, $N. Put down 3 of the carrion-callers, and let the dead hawks rest. Finish this, and the mews is whole again.',
+    completionText: 'The risen birds dropped from the air the moment their callers fell — at peace at last. The watch sees, the mews is full, and the sky over Highwatch is ours. The hawks owe you their lives, $N, and so do I.',
+    objectives: [{ type: 'kill', targetMobId: 'wyrmcult_necromancer', count: 3, label: 'Wyrmcult Necromancer put down' }],
+    xpReward: 4800, copperReward: 3200, itemRewards: {},
+    requiresQuest: 'q_mews_netters',
+  },
 };
 
 export const ZONE3_QUEST_ORDER = [
@@ -747,6 +849,9 @@ export const ZONE3_QUEST_ORDER = [
   'q_voice_below', 'q_sanctum_gate', 'q_korgath', 'q_velkhar', 'q_gravewyrm',
   'q_nythraxis_restless_dead', 'q_nythraxis_graves', 'q_nythraxis_sealed_crypt',
   'q_nythraxis_bound_guardian',
+  'q_mews_ledge', 'q_mews_eggthieves', 'q_mews_foreman', 'q_mews_aeries',
+  'q_mews_cliffpath', 'q_mews_eyrie', 'q_mews_thermals', 'q_mews_killingstorm',
+  'q_mews_netters', 'q_mews_carrion',
 ];
 
 // ---------------------------------------------------------------------------
