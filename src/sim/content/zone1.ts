@@ -582,6 +582,16 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
       'q_apiary_moth_monarch',
     ],
     greeting: 'Mind the smoker, $C — calm bees make sweet honey, and angry ones make for a long day.',
+  lampwright_sefa: {
+    id: 'lampwright_sefa', name: 'Lampwright Sefa', title: 'Keeper of the Road Lanterns',
+    // by the great road-lantern on the north edge of town, oil-can in hand
+    pos: { x: 6, z: 12 }, facing: 0.4, color: 0xe0a020,
+    questIds: [
+      'q_lamp_first_night', 'q_lamp_boars', 'q_lamp_foxes', 'q_lamp_webs',
+      'q_lamp_badgers', 'q_lamp_snuffers', 'q_lamp_lakeroad', 'q_lamp_lynx',
+      'q_lamp_bears', 'q_lamp_the_walking_lights',
+    ],
+    greeting: 'Every lantern on the Vale roads is mine to keep lit, $C — and the dark between them is full of teeth.',
   },
 };
 
@@ -1425,6 +1435,109 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     requiresQuest: 'q_apiary_clover_gluttons',
     suggestedPlayers: 2,
   },
+  // The Eastbrook Lamplighters — Lampwright Sefa keeps the road-lanterns
+  // burning. As the nights lengthen, the dark between the lights fills with
+  // prowlers, and a snuffed lantern is an invitation. Every objective reuses
+  // mobs that already roam the Vale, so the chain adds no new spawns.
+  // -------------------------------------------------------------------------
+  q_lamp_first_night: {
+    id: 'q_lamp_first_night', name: 'First Night on the Lamp Road',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: "I light the lanterns; you keep the road clear enough that I can reach them. The wolves come down off the north hills the moment the sun sets and worry at anyone with a torch. Thin them out — 8 Forest Wolves — so I can make my rounds, $N.",
+    completionText: 'A whole circuit lit and not one wolf at my heels. You have the makings of a lamp-warden, $N.',
+    objectives: [{ type: 'kill', targetMobId: 'forest_wolf', count: 8, label: 'Forest Wolf slain' }],
+    xpReward: 240, copperReward: 70, itemRewards: {},
+  },
+  q_lamp_boars: {
+    id: 'q_lamp_boars', name: 'Trampled Wicks',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: 'The east-meadow boars root up my spare oil-jars and snap the low lantern posts clean off. I cannot keep a flame on that stretch while they rampage. Drive off 8 Wild Boars and the meadow road will stay lit.',
+    completionText: 'No more splintered posts in the morning. Good. Here is your share of the oil-fund.',
+    objectives: [{ type: 'kill', targetMobId: 'wild_boar', count: 8, label: 'Wild Boar driven off' }],
+    xpReward: 320, copperReward: 110, itemRewards: {},
+    requiresQuest: 'q_lamp_first_night',
+    minLevel: 2,
+  },
+  q_lamp_foxes: {
+    id: 'q_lamp_foxes', name: 'Lantern Thieves',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: "Glade foxes have learned my oiled wicks make fine bedding, and they carry off a dozen a night. Charming little thieves — and ruinous to a lamplighter's stores. Cull 8 Glade Foxes up the glade road for me.",
+    completionText: 'My wick-box stayed full a whole night through. Bless you, $N.',
+    objectives: [{ type: 'kill', targetMobId: 'glade_fox', count: 8, label: 'Glade Fox culled' }],
+    xpReward: 360, copperReward: 130, itemRewards: {},
+    requiresQuest: 'q_lamp_boars',
+    minLevel: 2,
+  },
+  q_lamp_webs: {
+    id: 'q_lamp_webs', name: 'Webs Over the Wicks',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: 'The western lanterns are smothered in spider-silk — a lit wick under all that web is a fire waiting to spread. I dare not relight them until the lurkers are dealt with. Burn out 8 Webwood Lurkers, $N.',
+    completionText: 'Clean glass and open flame on the west road again. You have a steady hand.',
+    objectives: [{ type: 'kill', targetMobId: 'webwood_spider', count: 8, label: 'Webwood Lurker slain' }],
+    xpReward: 420, copperReward: 150, itemRewards: {},
+    requiresQuest: 'q_lamp_foxes',
+    minLevel: 3,
+  },
+  q_lamp_badgers: {
+    id: 'q_lamp_badgers', name: 'Diggers at the Posts',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: 'Thornpelt badgers den right at the base of my glade-road posts and the burrows topple them in the night. A leaning lantern throws no light where it is needed. See off 8 Thornpelt Badgers so my posts stand straight.',
+    completionText: 'Every post upright at dawn. The glade road owes you its light, $N.',
+    objectives: [{ type: 'kill', targetMobId: 'thornpelt_badger', count: 8, label: 'Thornpelt Badger driven off' }],
+    xpReward: 480, copperReward: 170, itemRewards: {},
+    requiresQuest: 'q_lamp_webs',
+    minLevel: 3,
+  },
+  q_lamp_snuffers: {
+    id: 'q_lamp_snuffers', name: 'The Snuffers',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: 'There is a worse thief than any fox: the Vale bandits snuff my lanterns on purpose, then rob whoever stumbles blind in the dark they made. That is no accident — it is ambush. Bring 10 Vale Bandits to justice for me.',
+    completionText: 'A lit road is a safe road, and you have made the southeast safe again. The marshal himself should hear of this.',
+    objectives: [{ type: 'kill', targetMobId: 'vale_bandit', count: 10, label: 'Vale Bandit brought to justice' }],
+    xpReward: 600, copperReward: 210, itemRewards: {},
+    requiresQuest: 'q_lamp_badgers',
+    minLevel: 4,
+  },
+  q_lamp_lakeroad: {
+    id: 'q_lamp_lakeroad', name: 'Lights on the Lake Road',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: 'The lake-shore lanterns are the hardest to keep — the Mudfin drag them off their posts and into the shallows for the shine. I will not lose another to the murk. Slay 8 Mudfin Skulkers and reclaim the shore for the light.',
+    completionText: 'The lake road glows again, end to end. The fishermen will sleep easier, and so will I.',
+    objectives: [{ type: 'kill', targetMobId: 'mudfin_murloc', count: 8, label: 'Mudfin Skulker slain' }],
+    xpReward: 660, copperReward: 230, itemRewards: {},
+    requiresQuest: 'q_lamp_snuffers',
+    minLevel: 4,
+  },
+  q_lamp_lynx: {
+    id: 'q_lamp_lynx', name: 'Eyes in the Lamplight',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: 'Bramble lynx stalk the deep-glade road, and they have learned that lamplight means prey gathers near. Twice now I have found a circle of green eyes waiting just past the glow. Cull 8 Bramble Lynx before they take a traveler — or me.',
+    completionText: 'No more eyes in the dark past the last lantern. You have steady nerve, $N.',
+    objectives: [{ type: 'kill', targetMobId: 'bramble_lynx', count: 8, label: 'Bramble Lynx culled' }],
+    xpReward: 720, copperReward: 260, itemRewards: {},
+    requiresQuest: 'q_lamp_lakeroad',
+    minLevel: 5,
+  },
+  q_lamp_bears: {
+    id: 'q_lamp_bears', name: 'The Far Lanterns',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: 'The last posts before the deep glade go untended — sunhide bears claim that ground, and no lamplighter has reached them in a season. I mean to change that. Clear 6 Sunhide Bears so I can carry the light to the far lanterns at last.',
+    completionText: 'Lit, every one, for the first time in a season. The whole Vale road is unbroken now — save for one stretch I dread to speak of.',
+    objectives: [{ type: 'kill', targetMobId: 'sunhide_bear', count: 6, label: 'Sunhide Bear cleared' }],
+    xpReward: 800, copperReward: 290, itemRewards: {},
+    requiresQuest: 'q_lamp_lynx',
+    minLevel: 5,
+  },
+  q_lamp_the_walking_lights: {
+    id: 'q_lamp_the_walking_lights', name: 'The Lights That Walk',
+    giverNpcId: 'lampwright_sefa', turnInNpcId: 'lampwright_sefa',
+    text: "By the old chapel hill, the dead carry their own pale lights now, drifting between my posts as if to mock them. The living will not walk a road the dead have claimed. Put 10 Restless Bones back into the dark for good, $N — and let my lanterns be the only lights on that hill.",
+    completionText: 'The hill road is ours again, lit by honest flame and nothing else. From the lake to the deep glade, not a stretch goes dark. That is your doing, $N — every lamplighter after me will keep your name.',
+    objectives: [{ type: 'kill', targetMobId: 'restless_bones', count: 10, label: 'Restless Bones laid to rest' }],
+    xpReward: 950, copperReward: 360, itemRewards: {},
+    requiresQuest: 'q_lamp_bears',
+    minLevel: 6,
+  },
 };
 
 export const ZONE1_QUEST_ORDER = [
@@ -1459,6 +1572,10 @@ export const ZONE1_QUEST_ORDER = [
   'q_apiary_forage_path', 'q_apiary_honey_raiders', 'q_apiary_blossom_blight',
   'q_apiary_trampled_meadow', 'q_apiary_north_road', 'q_apiary_clover_gluttons',
   'q_apiary_moth_monarch',
+  // The Eastbrook Lamplighters chain
+  'q_lamp_first_night', 'q_lamp_boars', 'q_lamp_foxes', 'q_lamp_webs',
+  'q_lamp_badgers', 'q_lamp_snuffers', 'q_lamp_lakeroad', 'q_lamp_lynx',
+  'q_lamp_bears', 'q_lamp_the_walking_lights',
 ];
 
 // ---------------------------------------------------------------------------
