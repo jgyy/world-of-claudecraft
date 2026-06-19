@@ -354,6 +354,11 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     id: 'scout_maren', name: 'Scout Maren', title: "Marshal's Scout",
     pos: { x: 6, z: 312 }, facing: -0.6, color: 0x7d6608,
     questIds: ['q_troll_fetishes', 'q_cult_camp', 'q_olen'],
+    vendorItems: [
+      'reedwarden_greathelm', 'reedwarden_pauldrons', 'reedwarden_girdle', 'reedwarden_gauntlets',
+      'mistweaver_cowl', 'mistweaver_mantle', 'mistweaver_cord', 'mistweaver_gloves',
+      'marshstalker_hood', 'marshstalker_spaulders', 'marshstalker_belt', 'marshstalker_grips',
+    ],
     greeting: 'Quiet feet and a short blade keep you breathing out here. Speak quick — I am due back in the reeds.',
   },
 };
@@ -851,6 +856,58 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   reedwoven_trousers: {
     id: 'reedwoven_trousers', name: 'Reedwoven Trousers', kind: 'armor', slot: 'legs', quality: 'common',
     stats: { armor: 40 }, sellValue: 180, buyValue: 1800,
+  },
+  // --- Scout Maren's Field Kit (uncommon vendor gear, Marshal's Scout) ---
+  // Covers the helmet / shoulder / waist / gloves slots that Provisioner Hale's
+  // white line leaves bare. Three archetype lines (WAR / MAG / ROG); sold, not
+  // looted, so they add no spawns and stay determinism-safe.
+  reedwarden_greathelm: {
+    id: 'reedwarden_greathelm', name: "Reedwarden's Greathelm", kind: 'armor', slot: 'helmet', quality: 'uncommon',
+    stats: { armor: 80, str: 2, sta: 3 }, sellValue: 320, buyValue: 3200, requiredClass: WAR,
+  },
+  reedwarden_pauldrons: {
+    id: 'reedwarden_pauldrons', name: "Reedwarden's Pauldrons", kind: 'armor', slot: 'shoulder', quality: 'uncommon',
+    stats: { armor: 70, str: 2, sta: 2 }, sellValue: 300, buyValue: 3000, requiredClass: WAR,
+  },
+  reedwarden_girdle: {
+    id: 'reedwarden_girdle', name: "Reedwarden's Girdle", kind: 'armor', slot: 'waist', quality: 'uncommon',
+    stats: { armor: 55, sta: 3 }, sellValue: 240, buyValue: 2400, requiredClass: WAR,
+  },
+  reedwarden_gauntlets: {
+    id: 'reedwarden_gauntlets', name: "Reedwarden's Gauntlets", kind: 'armor', slot: 'gloves', quality: 'uncommon',
+    stats: { armor: 60, str: 3 }, sellValue: 260, buyValue: 2600, requiredClass: WAR,
+  },
+  mistweaver_cowl: {
+    id: 'mistweaver_cowl', name: "Mistweaver's Cowl", kind: 'armor', slot: 'helmet', quality: 'uncommon',
+    stats: { armor: 30, int: 4, spi: 2 }, sellValue: 320, buyValue: 3200, requiredClass: MAG,
+  },
+  mistweaver_mantle: {
+    id: 'mistweaver_mantle', name: "Mistweaver's Mantle", kind: 'armor', slot: 'shoulder', quality: 'uncommon',
+    stats: { armor: 26, int: 3, spi: 2 }, sellValue: 300, buyValue: 3000, requiredClass: MAG,
+  },
+  mistweaver_cord: {
+    id: 'mistweaver_cord', name: "Mistweaver's Cord", kind: 'armor', slot: 'waist', quality: 'uncommon',
+    stats: { armor: 20, int: 3, spi: 1 }, sellValue: 240, buyValue: 2400, requiredClass: MAG,
+  },
+  mistweaver_gloves: {
+    id: 'mistweaver_gloves', name: "Mistweaver's Gloves", kind: 'armor', slot: 'gloves', quality: 'uncommon',
+    stats: { armor: 22, int: 3, spi: 2 }, sellValue: 260, buyValue: 2600, requiredClass: MAG,
+  },
+  marshstalker_hood: {
+    id: 'marshstalker_hood', name: "Marshstalker's Hood", kind: 'armor', slot: 'helmet', quality: 'uncommon',
+    stats: { armor: 50, agi: 4, sta: 2 }, sellValue: 320, buyValue: 3200, requiredClass: ROG,
+  },
+  marshstalker_spaulders: {
+    id: 'marshstalker_spaulders', name: "Marshstalker's Spaulders", kind: 'armor', slot: 'shoulder', quality: 'uncommon',
+    stats: { armor: 44, agi: 3, sta: 2 }, sellValue: 300, buyValue: 3000, requiredClass: ROG,
+  },
+  marshstalker_belt: {
+    id: 'marshstalker_belt', name: "Marshstalker's Belt", kind: 'armor', slot: 'waist', quality: 'uncommon',
+    stats: { armor: 36, agi: 3 }, sellValue: 240, buyValue: 2400, requiredClass: ROG,
+  },
+  marshstalker_grips: {
+    id: 'marshstalker_grips', name: "Marshstalker's Grips", kind: 'armor', slot: 'gloves', quality: 'uncommon',
+    stats: { armor: 40, agi: 3, sta: 1 }, sellValue: 260, buyValue: 2600, requiredClass: ROG,
   },
   // --- junk (gray) ---
   bogiron_nugget: { id: 'bogiron_nugget', name: 'Bogiron Nugget', kind: 'junk', quality: 'poor', sellValue: 12 },
