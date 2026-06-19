@@ -431,8 +431,13 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
     id: 'armorer_hode', name: 'Armorer Hode', title: 'Master Armorer',
     pos: { x: -2, z: 672 }, facing: 2.8, color: 0x717d7e,
     questIds: [],
-    vendorItems: ['highwatch_warblade', 'craghorn_staff', 'icevein_dirk'],
-    greeting: 'Forge is hot and the grindstone is turning. If it cuts, I sell it.',
+    vendorItems: [
+      'highwatch_warblade', 'craghorn_staff', 'icevein_dirk',
+      'highwatch_warhelm', 'highwatch_pauldrons', 'highwatch_girdle', 'highwatch_gauntlets',
+      'peakwool_hood', 'peakwool_mantle', 'peakwool_cord', 'peakwool_gloves',
+      'ridgestalker_cowl', 'ridgestalker_spaulders', 'ridgestalker_belt', 'ridgestalker_grips',
+    ],
+    greeting: 'Forge is hot and the grindstone is turning. If it cuts or covers, I sell it.',
   },
   loremaster_caddis: {
     id: 'loremaster_caddis', name: 'Loremaster Caddis', title: 'Loremaster',
@@ -1223,6 +1228,60 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   windguard_leggings: {
     id: 'windguard_leggings', name: 'Windguard Leggings', kind: 'armor', slot: 'legs', quality: 'common',
     stats: { armor: 70 }, sellValue: 450, buyValue: 4500,
+  },
+  // --- Master Armorer's accessory line ----------------------------------
+  // Armorer Hode keeps a standing rack of helmet/shoulder/waist/glove pieces
+  // that complete the Highwatch (plate), Peakwool (cloth), and Ridgestalker
+  // (leather) sets the frontier vendors otherwise leave at chest/legs/feet.
+  // All uncommon, mountain-tier, sold (never dropped) so the RNG stream that
+  // the seed-fixed combat tests pin stays untouched.
+  highwatch_warhelm: {
+    id: 'highwatch_warhelm', name: 'Highwatch Warhelm', kind: 'armor', slot: 'helmet', quality: 'uncommon',
+    stats: { armor: 130, str: 2, sta: 1 }, sellValue: 620, buyValue: 6200, requiredClass: ['warrior', 'paladin', 'shaman'],
+  },
+  highwatch_pauldrons: {
+    id: 'highwatch_pauldrons', name: 'Highwatch Pauldrons', kind: 'armor', slot: 'shoulder', quality: 'uncommon',
+    stats: { armor: 120, str: 1, sta: 2 }, sellValue: 600, buyValue: 6000, requiredClass: ['warrior', 'paladin', 'shaman'],
+  },
+  highwatch_girdle: {
+    id: 'highwatch_girdle', name: 'Highwatch War-Girdle', kind: 'armor', slot: 'waist', quality: 'uncommon',
+    stats: { armor: 90, sta: 2 }, sellValue: 520, buyValue: 5200, requiredClass: ['warrior', 'paladin', 'shaman'],
+  },
+  highwatch_gauntlets: {
+    id: 'highwatch_gauntlets', name: 'Highwatch Gauntlets', kind: 'armor', slot: 'gloves', quality: 'uncommon',
+    stats: { armor: 100, str: 2 }, sellValue: 540, buyValue: 5400, requiredClass: ['warrior', 'paladin', 'shaman'],
+  },
+  peakwool_hood: {
+    id: 'peakwool_hood', name: 'Peakwool Hood', kind: 'armor', slot: 'helmet', quality: 'uncommon',
+    stats: { armor: 40, int: 3, spi: 1 }, sellValue: 560, buyValue: 5600, requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+  },
+  peakwool_mantle: {
+    id: 'peakwool_mantle', name: 'Peakwool Mantle', kind: 'armor', slot: 'shoulder', quality: 'uncommon',
+    stats: { armor: 34, int: 2, spi: 1 }, sellValue: 520, buyValue: 5200, requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+  },
+  peakwool_cord: {
+    id: 'peakwool_cord', name: 'Peakwool Cord', kind: 'armor', slot: 'waist', quality: 'uncommon',
+    stats: { armor: 26, int: 2 }, sellValue: 480, buyValue: 4800, requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+  },
+  peakwool_gloves: {
+    id: 'peakwool_gloves', name: 'Peakwool Gloves', kind: 'armor', slot: 'gloves', quality: 'uncommon',
+    stats: { armor: 30, int: 2, spi: 1 }, sellValue: 500, buyValue: 5000, requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+  },
+  ridgestalker_cowl: {
+    id: 'ridgestalker_cowl', name: 'Ridgestalker Cowl', kind: 'armor', slot: 'helmet', quality: 'uncommon',
+    stats: { armor: 75, agi: 3 }, sellValue: 580, buyValue: 5800, requiredClass: ['rogue', 'hunter'],
+  },
+  ridgestalker_spaulders: {
+    id: 'ridgestalker_spaulders', name: 'Ridgestalker Spaulders', kind: 'armor', slot: 'shoulder', quality: 'uncommon',
+    stats: { armor: 68, agi: 2, sta: 1 }, sellValue: 540, buyValue: 5400, requiredClass: ['rogue', 'hunter'],
+  },
+  ridgestalker_belt: {
+    id: 'ridgestalker_belt', name: 'Ridgestalker Belt', kind: 'armor', slot: 'waist', quality: 'uncommon',
+    stats: { armor: 52, agi: 2 }, sellValue: 500, buyValue: 5000, requiredClass: ['rogue', 'hunter'],
+  },
+  ridgestalker_grips: {
+    id: 'ridgestalker_grips', name: 'Ridgestalker Grips', kind: 'armor', slot: 'gloves', quality: 'uncommon',
+    stats: { armor: 60, agi: 2, sta: 1 }, sellValue: 520, buyValue: 5200, requiredClass: ['rogue', 'hunter'],
   },
   // --- junk (gray) ---
   ogre_toe_ring: { id: 'ogre_toe_ring', name: 'Ogre Toe Ring', kind: 'junk', quality: 'poor', sellValue: 25 },
