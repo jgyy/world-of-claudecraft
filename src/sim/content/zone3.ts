@@ -440,6 +440,16 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
     questIds: ['q_kobold_tunnels', 'q_elementals', 'q_shard_cores', 'q_kazzix'],
     greeting: 'Mind the loose shale, $C. The mountain has been... restless of late. I intend to learn why.',
   },
+  sergeant_garrick: {
+    id: 'sergeant_garrick', name: 'Sergeant Garrick', title: 'Highwatch Drillmaster',
+    pos: { x: 9, z: 660 }, facing: -2.2, color: 0x8d6e3a,
+    questIds: [
+      'q_muster_recruit', 'q_muster_burrows', 'q_muster_sappers', 'q_muster_foothills',
+      'q_muster_crushers', 'q_muster_stormcrag', 'q_muster_zealots', 'q_muster_necromancers',
+      'q_muster_revenants', 'q_muster_commendation',
+    ],
+    greeting: 'A wall is only as strong as the blades behind it, $C. Want to prove yours is worth the steel? Then earn the muster.',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -737,6 +747,102 @@ export const ZONE3_QUESTS: Record<string, QuestDef> = {
     itemRewards: { warrior: 'kings_signet', mage: 'kings_signet', rogue: 'kings_signet' },
     requiresQuest: 'q_nythraxis_sealed_crypt', minLevel: 20, suggestedPlayers: 5,
   },
+
+  // --- The Highwatch Muster: Sergeant Garrick's drill chain (reuses existing mobs) ---
+  q_muster_recruit: {
+    id: 'q_muster_recruit', name: 'Blooding the Recruits',
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'Every recruit on this wall starts the same way, $N: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.',
+    completionText: 'Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.',
+    objectives: [{ type: 'kill', targetMobId: 'ridge_stalker', count: 10, label: 'Ridge Stalker slain' }],
+    xpReward: 2100, copperReward: 900, itemRewards: {},
+    minLevel: 12,
+  },
+  q_muster_burrows: {
+    id: 'q_muster_burrows', name: 'Down the Burrows',
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'The Deeprock kobolds tunnel under our supply road, $N, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.',
+    completionText: 'Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.',
+    objectives: [{ type: 'kill', targetMobId: 'deeprock_kobold', count: 10, label: 'Deeprock Tunneler slain' }],
+    xpReward: 2400, copperReward: 1100, itemRewards: {},
+    requiresQuest: 'q_muster_recruit', minLevel: 14,
+  },
+  q_muster_sappers: {
+    id: 'q_muster_sappers', name: 'Silence the Sappers',
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, $N only test it. Kill eight Ironvein sappers before they light a fuse that lights you.',
+    completionText: 'Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.',
+    objectives: [{ type: 'kill', targetMobId: 'ironvein_sapper', count: 8, label: 'Ironvein Sapper slain' }],
+    xpReward: 2600, copperReward: 1200,
+    itemRewards: { warrior: 'cragwalker_boots', mage: 'cragwalker_boots', rogue: 'cragwalker_boots' },
+    requiresQuest: 'q_muster_burrows', minLevel: 14,
+  },
+  q_muster_foothills: {
+    id: 'q_muster_foothills', name: 'Bloody the Foothills',
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'Now for something that hits back harder than a cat, $N. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.',
+    completionText: 'Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.',
+    objectives: [{ type: 'kill', targetMobId: 'thornpeak_ogre', count: 12, label: 'Thornpeak Ogre slain' }],
+    xpReward: 2900, copperReward: 1400, itemRewards: {},
+    requiresQuest: 'q_muster_sappers', minLevel: 15,
+  },
+  q_muster_crushers: {
+    id: 'q_muster_crushers', name: 'Against the Crushers',
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'The ogre crushers are the muster I cannot drill into you, $N each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.',
+    completionText: 'Six crushers, and you brought your people home. That is the lesson, $N most of them die alone trying to prove they did not need anyone.',
+    objectives: [{ type: 'kill', targetMobId: 'ogre_crusher', count: 6, label: 'Thornpeak Crusher slain' }],
+    xpReward: 3400, copperReward: 1800, itemRewards: {},
+    requiresQuest: 'q_muster_foothills', minLevel: 16, suggestedPlayers: 2,
+  },
+  q_muster_stormcrag: {
+    id: 'q_muster_stormcrag', name: 'Steel Against Storm',
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'The Stormcrag elementals are not flesh, $N you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.',
+    completionText: 'Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.',
+    objectives: [{ type: 'kill', targetMobId: 'stormcrag_elemental', count: 10, label: 'Stormcrag Elemental slain' }],
+    xpReward: 3500, copperReward: 1900,
+    itemRewards: { warrior: 'windguard_leggings', mage: 'windguard_leggings', rogue: 'windguard_leggings' },
+    requiresQuest: 'q_muster_crushers', minLevel: 16,
+  },
+  q_muster_zealots: {
+    id: 'q_muster_zealots', name: 'Hold the Line',
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'The Wyrmcult zealots throw themselves at our blades singing, $N, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.',
+    completionText: 'Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.',
+    objectives: [{ type: 'kill', targetMobId: 'wyrmcult_zealot', count: 12, label: 'Wyrmcult Zealot slain' }],
+    xpReward: 3900, copperReward: 2000, itemRewards: {},
+    requiresQuest: 'q_muster_stormcrag', minLevel: 17,
+  },
+  q_muster_necromancers: {
+    id: 'q_muster_necromancers', name: 'Break the Casters',
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'A wall full of swordsmen still falls if it never learns to close on a caster, $N. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.',
+    completionText: 'Eight casters down before they could finish a single rite. You understand the shape of a battle now, $N where the danger really sits, and how fast you have to cross to reach it.',
+    objectives: [{ type: 'kill', targetMobId: 'wyrmcult_necromancer', count: 8, label: 'Wyrmcult Necromancer slain' }],
+    xpReward: 4100, copperReward: 2200, itemRewards: {},
+    requiresQuest: 'q_muster_zealots', minLevel: 18,
+  },
+  q_muster_revenants: {
+    id: 'q_muster_revenants', name: 'The Long Watch',
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'The boneclad revenants never tire, never break, never run, $N and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.',
+    completionText: 'Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, $N. That is the watch. That is the wall.',
+    objectives: [{ type: 'kill', targetMobId: 'boneclad_revenant', count: 14, label: 'Boneclad Revenant slain' }],
+    xpReward: 4400, copperReward: 2400,
+    itemRewards: { warrior: 'stalkerhide_jerkin', mage: 'peakwool_robe', rogue: 'stalkerhide_jerkin' },
+    requiresQuest: 'q_muster_necromancers', minLevel: 18,
+  },
+  q_muster_commendation: {
+    id: 'q_muster_commendation', name: "The Drillmaster's Commendation",
+    giverNpcId: 'sergeant_garrick', turnInNpcId: 'sergeant_garrick',
+    text: 'One muster left, $N, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.',
+    completionText: 'Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, $N. You are not a recruit anymore. You are Highwatch.',
+    objectives: [{ type: 'kill', targetMobId: 'old_cragmaw', count: 1, label: 'Old Cragmaw slain' }],
+    xpReward: 4800, copperReward: 3000,
+    itemRewards: { warrior: 'highwatch_breastplate', mage: 'peakwool_robe', rogue: 'stalkerhide_jerkin' },
+    requiresQuest: 'q_muster_revenants', minLevel: 18, suggestedPlayers: 3,
+  },
 };
 
 export const ZONE3_QUEST_ORDER = [
@@ -747,6 +853,9 @@ export const ZONE3_QUEST_ORDER = [
   'q_voice_below', 'q_sanctum_gate', 'q_korgath', 'q_velkhar', 'q_gravewyrm',
   'q_nythraxis_restless_dead', 'q_nythraxis_graves', 'q_nythraxis_sealed_crypt',
   'q_nythraxis_bound_guardian',
+  'q_muster_recruit', 'q_muster_burrows', 'q_muster_sappers', 'q_muster_foothills',
+  'q_muster_crushers', 'q_muster_stormcrag', 'q_muster_zealots', 'q_muster_necromancers',
+  'q_muster_revenants', 'q_muster_commendation',
 ];
 
 // ---------------------------------------------------------------------------

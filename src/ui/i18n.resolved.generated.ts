@@ -3210,6 +3210,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4065,6 +4070,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -7490,6 +7595,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8345,6 +8455,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -11770,6 +11980,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -12625,6 +12840,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -16050,6 +16365,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -16905,6 +17225,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -20330,6 +20750,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -21185,6 +21610,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -24610,6 +25135,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -25465,6 +25995,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -28890,6 +29520,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -29745,6 +30380,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -33170,6 +33905,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -34025,6 +34765,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -37450,6 +38290,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -38305,6 +39150,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -41730,6 +42675,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -42585,6 +43535,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -46010,6 +47060,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -46865,6 +47920,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -50290,6 +51445,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -51145,6 +52305,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -54570,6 +55830,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -55425,6 +56690,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
           }
         }
       },
@@ -58850,6 +60215,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "sergeant_garrick": {
+        "name": "Sergeant Garrick",
+        "title": "Highwatch Drillmaster",
+        "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -59708,6 +61078,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_muster_recruit": {
+        "title": "Blooding the Recruits",
+        "text": "Every recruit on this wall starts the same way, {playerName}: against the ridge cats. They are fast, they are mean, and they do not care that you are new. Put down ten ridge stalkers on the slopes south of the gate and come back able to call yourself a soldier.",
+        "completion": "Ten, and you still have all your fingers. Good. The wall has had worse first days walk through that gate.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "Down the Burrows",
+        "text": "The Deeprock kobolds tunnel under our supply road, {playerName}, and a soldier who cannot fight in a tight burrow is no use to me on a tight wall. Go into Deeprock and cut down ten tunnelers. Mind your footing in the dark.",
+        "completion": "Fought them in the cramp and the candle-smoke and won. That is half of soldiering right there knowing where your blade is when you cannot see it.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "Silence the Sappers",
+        "text": "Deeper in the burrows the Ironvein sappers set charges to bring the road down on our heads. A drillmaster cannot teach nerve, {playerName} only test it. Kill eight Ironvein sappers before they light a fuse that lights you.",
+        "completion": "Eight sappers, and not one charge blown. Steady hands. The kind I would want beside me when the wall actually shakes.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Sapper slain"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "Bloody the Foothills",
+        "text": "Now for something that hits back harder than a cat, {playerName}. The Thornpeak ogres camp in the eastern foothills, and they are twice your weight and half your sense. Drop twelve of them. A soldier who has stood toe-to-toe with an ogre fears the dark a little less.",
+        "completion": "Twelve ogres. You stand differently now wider, steadier. The foothills do that, or they break you. They did not break you.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "Against the Crushers",
+        "text": "The ogre crushers are the muster I cannot drill into you, {playerName} each is worth three trained soldiers, and they do not line up to be hit. Take a comrade or two and break six of them. Out here, knowing when to fight alone and when not to is its own lesson.",
+        "completion": "Six crushers, and you brought your people home. That is the lesson, {playerName} most of them die alone trying to prove they did not need anyone.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "Steel Against Storm",
+        "text": "The Stormcrag elementals are not flesh, {playerName} you cannot bleed a thing made of stone and lightning, only break it. Put down ten of them. A soldier who only knows how to kill the bleeding kind is a soldier with a short career on this mountain.",
+        "completion": "Ten elementals shattered. You have fought something that does not flinch, does not tire, does not fear you and you are still standing. That is rare.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "Hold the Line",
+        "text": "The Wyrmcult zealots throw themselves at our blades singing, {playerName}, and a recruit who has never faced a foe that wants to die fights all wrong against one. Cut down twelve zealots below the Sanctum and learn the difference.",
+        "completion": "Twelve zealots, and their song did not get into your head. Good. A foe who does not fear death is the hardest thing a soldier ever has to hold the line against.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "Break the Casters",
+        "text": "A wall full of swordsmen still falls if it never learns to close on a caster, {playerName}. The Wyrmcult necromancers raise our own dead against us from the back rank. Reach eight of them and end their chanting. Speed and nerve nothing else gets you there.",
+        "completion": "Eight casters down before they could finish a single rite. You understand the shape of a battle now, {playerName} where the danger really sits, and how fast you have to cross to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Necromancer slain"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "The Long Watch",
+        "text": "The boneclad revenants never tire, never break, never run, {playerName} and that is exactly the test. Anyone can win a short fight. Put fourteen revenants back in the ground and prove you can keep your edge when the fight simply will not end.",
+        "completion": "Fourteen, and you never let your guard drop, never got sloppy as the arms got heavy. Endurance, {playerName}. That is the watch. That is the wall.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant slain"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "The Drillmaster's Commendation",
+        "text": "One muster left, {playerName}, and it is no drill. Old Cragmaw has prowled these ridges longer than the wall has stood, and every recruit before you who tried him alone came back over a shield. Take companions, hunt the old beast down, and the Highwatch muster is yours in full.",
+        "completion": "Cragmaw, dead at last and you walked back through the gate to tell it. The muster is complete, {playerName}. You are not a recruit anymore. You are Highwatch.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -59962,6 +61432,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60013,6 +61486,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60032,6 +61545,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60083,6 +61599,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60102,6 +61658,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60153,6 +61712,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60172,6 +61771,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60223,6 +61825,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60243,6 +61885,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60294,6 +61939,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60313,6 +61998,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60364,6 +62052,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60383,6 +62111,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60434,6 +62165,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60453,6 +62224,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60504,6 +62278,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60523,6 +62337,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60574,6 +62391,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60593,6 +62450,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60644,6 +62504,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60663,6 +62563,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60714,6 +62617,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -60733,6 +62676,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.sergeant_garrick.greeting",
+    "entities.npcs.sergeant_garrick.name",
+    "entities.npcs.sergeant_garrick.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -60784,6 +62730,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_muster_burrows.completion",
+    "entities.quests.q_muster_burrows.objectives.0.label",
+    "entities.quests.q_muster_burrows.text",
+    "entities.quests.q_muster_burrows.title",
+    "entities.quests.q_muster_commendation.completion",
+    "entities.quests.q_muster_commendation.objectives.0.label",
+    "entities.quests.q_muster_commendation.text",
+    "entities.quests.q_muster_commendation.title",
+    "entities.quests.q_muster_crushers.completion",
+    "entities.quests.q_muster_crushers.objectives.0.label",
+    "entities.quests.q_muster_crushers.text",
+    "entities.quests.q_muster_crushers.title",
+    "entities.quests.q_muster_foothills.completion",
+    "entities.quests.q_muster_foothills.objectives.0.label",
+    "entities.quests.q_muster_foothills.text",
+    "entities.quests.q_muster_foothills.title",
+    "entities.quests.q_muster_necromancers.completion",
+    "entities.quests.q_muster_necromancers.objectives.0.label",
+    "entities.quests.q_muster_necromancers.text",
+    "entities.quests.q_muster_necromancers.title",
+    "entities.quests.q_muster_recruit.completion",
+    "entities.quests.q_muster_recruit.objectives.0.label",
+    "entities.quests.q_muster_recruit.text",
+    "entities.quests.q_muster_recruit.title",
+    "entities.quests.q_muster_revenants.completion",
+    "entities.quests.q_muster_revenants.objectives.0.label",
+    "entities.quests.q_muster_revenants.text",
+    "entities.quests.q_muster_revenants.title",
+    "entities.quests.q_muster_sappers.completion",
+    "entities.quests.q_muster_sappers.objectives.0.label",
+    "entities.quests.q_muster_sappers.text",
+    "entities.quests.q_muster_sappers.title",
+    "entities.quests.q_muster_stormcrag.completion",
+    "entities.quests.q_muster_stormcrag.objectives.0.label",
+    "entities.quests.q_muster_stormcrag.text",
+    "entities.quests.q_muster_stormcrag.title",
+    "entities.quests.q_muster_zealots.completion",
+    "entities.quests.q_muster_zealots.objectives.0.label",
+    "entities.quests.q_muster_zealots.text",
+    "entities.quests.q_muster_zealots.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "hud.options.npcVoices",
     "hud.options.voiceVolume"
@@ -63991,6 +65977,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "sergeant_garrick": {
+        "name": "[Šéŕĝéáñţ Ĝáŕŕíçķ]",
+        "title": "[Ĥíĝĥŵáţçĥ Ðŕíļļɱášţéŕ]",
+        "greeting": "[Á ŵáļļ íš óñļý áš šţŕóñĝ áš ţĥé ƀļáðéš ƀéĥíñð íţ, {className}. Ŵáñţ ţó þŕóʋé ýóúŕš íš ŵóŕţĥ ţĥé šţééļ? Ţĥéñ éáŕñ ţĥé ɱúšţéŕ.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -64846,6 +66837,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_muster_recruit": {
+        "title": "[Ɓļóóðíñĝ ţĥé Ŕéçŕúíţš]",
+        "text": "[Éʋéŕý ŕéçŕúíţ óñ ţĥíš ŵáļļ šţáŕţš ţĥé šáɱé ŵáý, {playerName}: áĝáíñšţ ţĥé ŕíðĝé çáţš. Ţĥéý áŕé ƒášţ, ţĥéý áŕé ɱéáñ, áñð ţĥéý ðó ñóţ çáŕé ţĥáţ ýóú áŕé ñéŵ. Þúţ ðóŵñ ţéñ ŕíðĝé šţáļķéŕš óñ ţĥé šļóþéš šóúţĥ óƒ ţĥé ĝáţé áñð çóɱé ƀáçķ áƀļé ţó çáļļ ýóúŕšéļƒ á šóļðíéŕ.]",
+        "completion": "[Ţéñ, áñð ýóú šţíļļ ĥáʋé áļļ ýóúŕ ƒíñĝéŕš. Ĝóóð. Ţĥé ŵáļļ ĥáš ĥáð ŵóŕšé ƒíŕšţ ðáýš ŵáļķ ţĥŕóúĝĥ ţĥáţ ĝáţé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕíðĝé Šţáļķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_muster_burrows": {
+        "title": "[Ðóŵñ ţĥé Ɓúŕŕóŵš]",
+        "text": "[Ţĥé Ðééþŕóçķ ķóƀóļðš ţúññéļ úñðéŕ óúŕ šúþþļý ŕóáð, {playerName}, áñð á šóļðíéŕ ŵĥó çáññóţ ƒíĝĥţ íñ á ţíĝĥţ ƀúŕŕóŵ íš ñó úšé ţó ɱé óñ á ţíĝĥţ ŵáļļ. Ĝó íñţó Ðééþŕóçķ áñð çúţ ðóŵñ ţéñ ţúññéļéŕš. Ɱíñð ýóúŕ ƒóóţíñĝ íñ ţĥé ðáŕķ.]",
+        "completion": "[Ƒóúĝĥţ ţĥéɱ íñ ţĥé çŕáɱþ áñð ţĥé çáñðļé-šɱóķé áñð ŵóñ. Ţĥáţ íš ĥáļƒ óƒ šóļðíéŕíñĝ ŕíĝĥţ ţĥéŕé ķñóŵíñĝ ŵĥéŕé ýóúŕ ƀļáðé íš ŵĥéñ ýóú çáññóţ šéé íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþŕóçķ Ţúññéļéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_muster_sappers": {
+        "title": "[Šíļéñçé ţĥé Šáþþéŕš]",
+        "text": "[Ðééþéŕ íñ ţĥé ƀúŕŕóŵš ţĥé Íŕóñʋéíñ šáþþéŕš šéţ çĥáŕĝéš ţó ƀŕíñĝ ţĥé ŕóáð ðóŵñ óñ óúŕ ĥéáðš. Á ðŕíļļɱášţéŕ çáññóţ ţéáçĥ ñéŕʋé, {playerName} óñļý ţéšţ íţ. Ķíļļ éíĝĥţ Íŕóñʋéíñ šáþþéŕš ƀéƒóŕé ţĥéý ļíĝĥţ á ƒúšé ţĥáţ ļíĝĥţš ýóú.]",
+        "completion": "[Éíĝĥţ šáþþéŕš, áñð ñóţ óñé çĥáŕĝé ƀļóŵñ. Šţéáðý ĥáñðš. Ţĥé ķíñð Í ŵóúļð ŵáñţ ƀéšíðé ɱé ŵĥéñ ţĥé ŵáļļ áçţúáļļý šĥáķéš.]",
+        "objectives": {
+          "0": {
+            "label": "[Íŕóñʋéíñ Šáþþéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_muster_foothills": {
+        "title": "[Ɓļóóðý ţĥé Ƒóóţĥíļļš]",
+        "text": "[Ñóŵ ƒóŕ šóɱéţĥíñĝ ţĥáţ ĥíţš ƀáçķ ĥáŕðéŕ ţĥáñ á çáţ, {playerName}. Ţĥé Ţĥóŕñþéáķ óĝŕéš çáɱþ íñ ţĥé éášţéŕñ ƒóóţĥíļļš, áñð ţĥéý áŕé ţŵíçé ýóúŕ ŵéíĝĥţ áñð ĥáļƒ ýóúŕ šéñšé. Ðŕóþ ţŵéļʋé óƒ ţĥéɱ. Á šóļðíéŕ ŵĥó ĥáš šţóóð ţóé-ţó-ţóé ŵíţĥ áñ óĝŕé ƒéáŕš ţĥé ðáŕķ á ļíţţļé ļéšš.]",
+        "completion": "[Ţŵéļʋé óĝŕéš. Ýóú šţáñð ðíƒƒéŕéñţļý ñóŵ ŵíðéŕ, šţéáðíéŕ. Ţĥé ƒóóţĥíļļš ðó ţĥáţ, óŕ ţĥéý ƀŕéáķ ýóú. Ţĥéý ðíð ñóţ ƀŕéáķ ýóú.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Óĝŕé šļáíñ]"
+          }
+        }
+      },
+      "q_muster_crushers": {
+        "title": "[Áĝáíñšţ ţĥé Çŕúšĥéŕš]",
+        "text": "[Ţĥé óĝŕé çŕúšĥéŕš áŕé ţĥé ɱúšţéŕ Í çáññóţ ðŕíļļ íñţó ýóú, {playerName} éáçĥ íš ŵóŕţĥ ţĥŕéé ţŕáíñéð šóļðíéŕš, áñð ţĥéý ðó ñóţ ļíñé úþ ţó ƀé ĥíţ. Ţáķé á çóɱŕáðé óŕ ţŵó áñð ƀŕéáķ šíẋ óƒ ţĥéɱ. Óúţ ĥéŕé, ķñóŵíñĝ ŵĥéñ ţó ƒíĝĥţ áļóñé áñð ŵĥéñ ñóţ ţó íš íţš óŵñ ļéššóñ.]",
+        "completion": "[Šíẋ çŕúšĥéŕš, áñð ýóú ƀŕóúĝĥţ ýóúŕ þéóþļé ĥóɱé. Ţĥáţ íš ţĥé ļéššóñ, {playerName} ɱóšţ óƒ ţĥéɱ ðíé áļóñé ţŕýíñĝ ţó þŕóʋé ţĥéý ðíð ñóţ ñééð áñýóñé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Çŕúšĥéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_muster_stormcrag": {
+        "title": "[Šţééļ Áĝáíñšţ Šţóŕɱ]",
+        "text": "[Ţĥé Šţóŕɱçŕáĝ éļéɱéñţáļš áŕé ñóţ ƒļéšĥ, {playerName} ýóú çáññóţ ƀļééð á ţĥíñĝ ɱáðé óƒ šţóñé áñð ļíĝĥţñíñĝ, óñļý ƀŕéáķ íţ. Þúţ ðóŵñ ţéñ óƒ ţĥéɱ. Á šóļðíéŕ ŵĥó óñļý ķñóŵš ĥóŵ ţó ķíļļ ţĥé ƀļééðíñĝ ķíñð íš á šóļðíéŕ ŵíţĥ á šĥóŕţ çáŕééŕ óñ ţĥíš ɱóúñţáíñ.]",
+        "completion": "[Ţéñ éļéɱéñţáļš šĥáţţéŕéð. Ýóú ĥáʋé ƒóúĝĥţ šóɱéţĥíñĝ ţĥáţ ðóéš ñóţ ƒļíñçĥ, ðóéš ñóţ ţíŕé, ðóéš ñóţ ƒéáŕ ýóú áñð ýóú áŕé šţíļļ šţáñðíñĝ. Ţĥáţ íš ŕáŕé.]",
+        "objectives": {
+          "0": {
+            "label": "[Šţóŕɱçŕáĝ Éļéɱéñţáļ šļáíñ]"
+          }
+        }
+      },
+      "q_muster_zealots": {
+        "title": "[Ĥóļð ţĥé Ļíñé]",
+        "text": "[Ţĥé Ŵýŕɱçúļţ žéáļóţš ţĥŕóŵ ţĥéɱšéļʋéš áţ óúŕ ƀļáðéš šíñĝíñĝ, {playerName}, áñð á ŕéçŕúíţ ŵĥó ĥáš ñéʋéŕ ƒáçéð á ƒóé ţĥáţ ŵáñţš ţó ðíé ƒíĝĥţš áļļ ŵŕóñĝ áĝáíñšţ óñé. Çúţ ðóŵñ ţŵéļʋé žéáļóţš ƀéļóŵ ţĥé Šáñçţúɱ áñð ļéáŕñ ţĥé ðíƒƒéŕéñçé.]",
+        "completion": "[Ţŵéļʋé žéáļóţš, áñð ţĥéíŕ šóñĝ ðíð ñóţ ĝéţ íñţó ýóúŕ ĥéáð. Ĝóóð. Á ƒóé ŵĥó ðóéš ñóţ ƒéáŕ ðéáţĥ íš ţĥé ĥáŕðéšţ ţĥíñĝ á šóļðíéŕ éʋéŕ ĥáš ţó ĥóļð ţĥé ļíñé áĝáíñšţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵýŕɱçúļţ Žéáļóţ šļáíñ]"
+          }
+        }
+      },
+      "q_muster_necromancers": {
+        "title": "[Ɓŕéáķ ţĥé Çášţéŕš]",
+        "text": "[Á ŵáļļ ƒúļļ óƒ šŵóŕðšɱéñ šţíļļ ƒáļļš íƒ íţ ñéʋéŕ ļéáŕñš ţó çļóšé óñ á çášţéŕ, {playerName}. Ţĥé Ŵýŕɱçúļţ ñéçŕóɱáñçéŕš ŕáíšé óúŕ óŵñ ðéáð áĝáíñšţ úš ƒŕóɱ ţĥé ƀáçķ ŕáñķ. Ŕéáçĥ éíĝĥţ óƒ ţĥéɱ áñð éñð ţĥéíŕ çĥáñţíñĝ. Šþééð áñð ñéŕʋé ñóţĥíñĝ éļšé ĝéţš ýóú ţĥéŕé.]",
+        "completion": "[Éíĝĥţ çášţéŕš ðóŵñ ƀéƒóŕé ţĥéý çóúļð ƒíñíšĥ á šíñĝļé ŕíţé. Ýóú úñðéŕšţáñð ţĥé šĥáþé óƒ á ƀáţţļé ñóŵ, {playerName} ŵĥéŕé ţĥé ðáñĝéŕ ŕéáļļý šíţš, áñð ĥóŵ ƒášţ ýóú ĥáʋé ţó çŕóšš ţó ŕéáçĥ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵýŕɱçúļţ Ñéçŕóɱáñçéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_muster_revenants": {
+        "title": "[Ţĥé Ļóñĝ Ŵáţçĥ]",
+        "text": "[Ţĥé ƀóñéçļáð ŕéʋéñáñţš ñéʋéŕ ţíŕé, ñéʋéŕ ƀŕéáķ, ñéʋéŕ ŕúñ, {playerName} áñð ţĥáţ íš éẋáçţļý ţĥé ţéšţ. Áñýóñé çáñ ŵíñ á šĥóŕţ ƒíĝĥţ. Þúţ ƒóúŕţééñ ŕéʋéñáñţš ƀáçķ íñ ţĥé ĝŕóúñð áñð þŕóʋé ýóú çáñ ķééþ ýóúŕ éðĝé ŵĥéñ ţĥé ƒíĝĥţ šíɱþļý ŵíļļ ñóţ éñð.]",
+        "completion": "[Ƒóúŕţééñ, áñð ýóú ñéʋéŕ ļéţ ýóúŕ ĝúáŕð ðŕóþ, ñéʋéŕ ĝóţ šļóþþý áš ţĥé áŕɱš ĝóţ ĥéáʋý. Éñðúŕáñçé, {playerName}. Ţĥáţ íš ţĥé ŵáţçĥ. Ţĥáţ íš ţĥé ŵáļļ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓóñéçļáð Ŕéʋéñáñţ šļáíñ]"
+          }
+        }
+      },
+      "q_muster_commendation": {
+        "title": "[Ţĥé Ðŕíļļɱášţéŕ'š Çóɱɱéñðáţíóñ]",
+        "text": "[Óñé ɱúšţéŕ ļéƒţ, {playerName}, áñð íţ íš ñó ðŕíļļ. Óļð Çŕáĝɱáŵ ĥáš þŕóŵļéð ţĥéšé ŕíðĝéš ļóñĝéŕ ţĥáñ ţĥé ŵáļļ ĥáš šţóóð, áñð éʋéŕý ŕéçŕúíţ ƀéƒóŕé ýóú ŵĥó ţŕíéð ĥíɱ áļóñé çáɱé ƀáçķ óʋéŕ á šĥíéļð. Ţáķé çóɱþáñíóñš, ĥúñţ ţĥé óļð ƀéášţ ðóŵñ, áñð ţĥé Ĥíĝĥŵáţçĥ ɱúšţéŕ íš ýóúŕš íñ ƒúļļ.]",
+        "completion": "[Çŕáĝɱáŵ, ðéáð áţ ļášţ áñð ýóú ŵáļķéð ƀáçķ ţĥŕóúĝĥ ţĥé ĝáţé ţó ţéļļ íţ. Ţĥé ɱúšţéŕ íš çóɱþļéţé, {playerName}. Ýóú áŕé ñóţ á ŕéçŕúíţ áñýɱóŕé. Ýóú áŕé Ĥíĝĥŵáţçĥ.]",
+        "objectives": {
+          "0": {
+            "label": "[Óļð Çŕáĝɱáŵ šļáíñ]"
           }
         }
       },
