@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -7856,6 +7961,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8821,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -12319,6 +12529,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13389,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -16782,6 +17097,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17957,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -21245,6 +21665,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22525,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -25708,6 +26233,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27093,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -30171,6 +30801,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31661,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -34634,6 +35369,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36229,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -39097,6 +39937,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40797,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -43560,6 +44505,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45365,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -48023,6 +49073,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49933,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -52486,6 +53641,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54501,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -56949,6 +58209,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59069,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
           }
         }
       },
@@ -61412,6 +62777,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "astronomer_veyra": {
+        "name": "Astronomer Veyra",
+        "title": "Keeper of the Highwatch Observatory",
+        "greeting": "A wyrm-star is rising over the Sanctum, {playerName}, and I am the only one on this wall who can read what it portends - if the peaks would only let me keep the sky in my glass."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63640,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_obs_sightlines": {
+        "title": "A Clear Horizon",
+        "text": "A telescope is only as good as the dark it stares into, {playerName}, and the ridge below my dome is anything but dark - every night the ridge stalkers prowl the scree and set the picket-hounds baying, and a startled astronomer is a blurred plate. I cannot chart the wyrm-star with one hand on a crossbow. Cull twelve of the brutes off the ridge and give me one quiet night to take my readings.",
+        "completion": "One quiet night, and the plate came out sharp as glass. The wyrm-star sits exactly where the old charts said it would not. That alone is worth the powder, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "Light in the Burrows",
+        "text": "There is a glow on my western horizon that no star ever made - the Deeprock kobolds and their wretched head-candles, swarming the burrow mouths till the whole slope flickers like a banked hearth. That stray light fogs every long exposure I attempt of the deep sky. Snuff twelve of the tunnelers and their candles with them; I need the west to go properly black.",
+        "completion": "The west has gone dark at last, and the faint stars behind the wyrm-star have come out of the glare. You have given me back half my sky, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "The Tripod-Breaker",
+        "text": "Some beast came up the scree in the dark and put a shoulder through my mounted glass - splintered the tripod, bent the great brass tube I waited two years to have hauled up the pass. The tracks are a bear's, and the wardens have a name for the old bull that ranges that slope: Cragmaw. I cannot replace that instrument, {playerName}. Put the beast down before it finishes what it started.",
+        "completion": "So that is the brute. Look at the reach on it - no wonder my tripod folded. The glass can be straightened; with Cragmaw dead, it will not be knocked down twice.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "Glare off the Crags",
+        "text": "The Stormcrag elementals have woken in numbers, and every time one of them discharges, the whole sky over the western crags whites out and my night-eye is ruined for an hour. I have lost three nights of the wyrm-star's transit to their lightning. Scatter ten of them off the high crags, {playerName} - I need an unbroken hour of true dark to time the thing's passage.",
+        "completion": "A whole hour without a single flash. I timed the transit clean from limb to limb - and the wyrm-star is moving faster than anything that far out has any right to. That troubles me more than the ogres do.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "The Living Lantern",
+        "text": "One of the storm-things has grown into something worse - Shardlord Kazzix, a walking thunderhead that lights the whole western sky from horizon to zenith when it rouses. While it lives I will never get a clean plate of the deep field. It is no errand for one; take companions out to the far crags beyond Stormcrag and bring the Shardlord down.",
+        "completion": "The west has stopped flickering. With Kazzix gone the deep field came out black and still, and the plates I pulled tonight are the finest I have ever taken on this peak. Whatever is coming, I will see it first.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix slain"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "Bonfires on the Foothills",
+        "text": "Now it is the east that betrays me. The Thornpeak ogres have lit war-bonfires the length of the eastern foothills, and the smoke-glow drowns the rising stars before they clear the ridge - I cannot fix the wyrm-star's position against anything on that side of the sky. Thin twelve of the brutes and let their fires burn down so the eastern horizon goes dark again.",
+        "completion": "The eastern fires are guttering and the rising-stars have come back to me. I have my reference points on both horizons now - I can finally pin the wyrm-star's true track across the whole vault.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "Stokers of the Pyres",
+        "text": "Thin the rank-and-file and the fires only flare higher, because it is the Thornpeak crushers who feed them - each one drags whole trees to the pyres to keep the foothills lit through the night. As long as the crushers stoke them, the eastern sky stays bright. They are elite and they hit like falling rock, {playerName}; take companions and break eight of them.",
+        "completion": "Eight crushers down, and the great pyres have burned to embers with no one left to feed them. The eastern dark is mine for as long as it takes to finish the survey.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "The Beacon-Bull",
+        "text": "There is one ogre worse than all the rest for my purposes - Brutok Skullsmasher, who keeps a signal-pyre roaring on the ridge north of the warband all night long, brighter than any fire on the slope. The wardens want him for his raids; I want him for his bonfire. Either way the brute must fall. Find Brutok on the high ridge and end him.",
+        "completion": "Brutok's beacon is cold ash. With the last great fire out, the northern ridge has gone dark to the eye - and the faint outer stars I have been hunting for a season are finally on my plates.",
+        "objectives": {
+          "0": {
+            "label": "Brutok Skullsmasher slain"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "They Watch It Too",
+        "text": "I am not the only one charting the wyrm-star, {playerName}. The Wyrmcult zealots have raised watch-fires at the Sanctum and stand staring up at the same point of light I do - and where I see a riddle, they see a summons. Whatever that star means to wake, they mean to help it. Cut twelve of the zealots down at their fires; I will not share my sky with men who pray to it.",
+        "completion": "Twelve fewer eyes turned upward in worship. They were timing their chants to the star's transit, {playerName} - the same transit I measured. We are reading the same clock. The difference is what we each intend to do when it strikes.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "Under the Wyrm-Star",
+        "text": "I have my answer, and I wish I did not. The wyrm-star is no star - it is a thing falling toward the peaks, and as it nears, the old battlefield wakes. The boneclad revenants are rising in numbers under its light, drawn upright by whatever it is. My survey means nothing if the dead overrun the wall before I can warn the Captain. Take companions to the battlefield and put ten of the revenants back down - buy me the nights I need to finish the warning.",
+        "completion": "Ten down, and the rest have stilled for now. Here - take my completed star-chart to the Captain; it shows when the thing falls and where. You gave me the dark to read the sky, {playerName}, and the sky has told us we have very little time. See that the wall is ready.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant destroyed"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62521,6 +63991,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62575,6 +64048,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62694,6 +64207,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62748,6 +64264,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62867,6 +64423,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62921,6 +64480,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63040,6 +64639,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63094,6 +64696,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63214,6 +64856,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63268,6 +64913,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63387,6 +65072,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63441,6 +65129,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63560,6 +65288,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63614,6 +65345,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63733,6 +65504,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63787,6 +65561,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63906,6 +65720,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63960,6 +65777,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64079,6 +65936,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64133,6 +65993,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64252,6 +66152,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64306,6 +66209,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64425,6 +66368,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.astronomer_veyra.greeting",
+    "entities.npcs.astronomer_veyra.name",
+    "entities.npcs.astronomer_veyra.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64479,6 +66425,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_obs_brutok.completion",
+    "entities.quests.q_obs_brutok.objectives.0.label",
+    "entities.quests.q_obs_brutok.text",
+    "entities.quests.q_obs_brutok.title",
+    "entities.quests.q_obs_burrowlight.completion",
+    "entities.quests.q_obs_burrowlight.objectives.0.label",
+    "entities.quests.q_obs_burrowlight.text",
+    "entities.quests.q_obs_burrowlight.title",
+    "entities.quests.q_obs_cragmaw.completion",
+    "entities.quests.q_obs_cragmaw.objectives.0.label",
+    "entities.quests.q_obs_cragmaw.text",
+    "entities.quests.q_obs_cragmaw.title",
+    "entities.quests.q_obs_crushers.completion",
+    "entities.quests.q_obs_crushers.objectives.0.label",
+    "entities.quests.q_obs_crushers.text",
+    "entities.quests.q_obs_crushers.title",
+    "entities.quests.q_obs_deadstar.completion",
+    "entities.quests.q_obs_deadstar.objectives.0.label",
+    "entities.quests.q_obs_deadstar.text",
+    "entities.quests.q_obs_deadstar.title",
+    "entities.quests.q_obs_ogrefires.completion",
+    "entities.quests.q_obs_ogrefires.objectives.0.label",
+    "entities.quests.q_obs_ogrefires.text",
+    "entities.quests.q_obs_ogrefires.title",
+    "entities.quests.q_obs_shardlord.completion",
+    "entities.quests.q_obs_shardlord.objectives.0.label",
+    "entities.quests.q_obs_shardlord.text",
+    "entities.quests.q_obs_shardlord.title",
+    "entities.quests.q_obs_sightlines.completion",
+    "entities.quests.q_obs_sightlines.objectives.0.label",
+    "entities.quests.q_obs_sightlines.text",
+    "entities.quests.q_obs_sightlines.title",
+    "entities.quests.q_obs_stormglare.completion",
+    "entities.quests.q_obs_stormglare.objectives.0.label",
+    "entities.quests.q_obs_stormglare.text",
+    "entities.quests.q_obs_stormglare.title",
+    "entities.quests.q_obs_wyrmwatchers.completion",
+    "entities.quests.q_obs_wyrmwatchers.objectives.0.label",
+    "entities.quests.q_obs_wyrmwatchers.text",
+    "entities.quests.q_obs_wyrmwatchers.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -67972,6 +69958,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "astronomer_veyra": {
+        "name": "[Ášţŕóñóɱéŕ Ʋéýŕá]",
+        "title": "[Ķééþéŕ óƒ ţĥé Ĥíĝĥŵáţçĥ Óƀšéŕʋáţóŕý]",
+        "greeting": "[Á ŵýŕɱ-šţáŕ íš ŕíšíñĝ óʋéŕ ţĥé Šáñçţúɱ, {playerName}, áñð Í áɱ ţĥé óñļý óñé óñ ţĥíš ŵáļļ ŵĥó çáñ ŕéáð ŵĥáţ íţ þóŕţéñðš - íƒ ţĥé þéáķš ŵóúļð óñļý ļéţ ɱé ķééþ ţĥé šķý íñ ɱý ĝļášš.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70818,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_obs_sightlines": {
+        "title": "[Á Çļéáŕ Ĥóŕížóñ]",
+        "text": "[Á ţéļéšçóþé íš óñļý áš ĝóóð áš ţĥé ðáŕķ íţ šţáŕéš íñţó, {playerName}, áñð ţĥé ŕíðĝé ƀéļóŵ ɱý ðóɱé íš áñýţĥíñĝ ƀúţ ðáŕķ - éʋéŕý ñíĝĥţ ţĥé ŕíðĝé šţáļķéŕš þŕóŵļ ţĥé šçŕéé áñð šéţ ţĥé þíçķéţ-ĥóúñðš ƀáýíñĝ, áñð á šţáŕţļéð ášţŕóñóɱéŕ íš á ƀļúŕŕéð þļáţé. Í çáññóţ çĥáŕţ ţĥé ŵýŕɱ-šţáŕ ŵíţĥ óñé ĥáñð óñ á çŕóššƀóŵ. Çúļļ ţŵéļʋé óƒ ţĥé ƀŕúţéš óƒƒ ţĥé ŕíðĝé áñð ĝíʋé ɱé óñé ɋúíéţ ñíĝĥţ ţó ţáķé ɱý ŕéáðíñĝš.]",
+        "completion": "[Óñé ɋúíéţ ñíĝĥţ, áñð ţĥé þļáţé çáɱé óúţ šĥáŕþ áš ĝļášš. Ţĥé ŵýŕɱ-šţáŕ šíţš éẋáçţļý ŵĥéŕé ţĥé óļð çĥáŕţš šáíð íţ ŵóúļð ñóţ. Ţĥáţ áļóñé íš ŵóŕţĥ ţĥé þóŵðéŕ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕíðĝé Šţáļķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_obs_burrowlight": {
+        "title": "[Ļíĝĥţ íñ ţĥé Ɓúŕŕóŵš]",
+        "text": "[Ţĥéŕé íš á ĝļóŵ óñ ɱý ŵéšţéŕñ ĥóŕížóñ ţĥáţ ñó šţáŕ éʋéŕ ɱáðé - ţĥé Ðééþŕóçķ ķóƀóļðš áñð ţĥéíŕ ŵŕéţçĥéð ĥéáð-çáñðļéš, šŵáŕɱíñĝ ţĥé ƀúŕŕóŵ ɱóúţĥš ţíļļ ţĥé ŵĥóļé šļóþé ƒļíçķéŕš ļíķé á ƀáñķéð ĥéáŕţĥ. Ţĥáţ šţŕáý ļíĝĥţ ƒóĝš éʋéŕý ļóñĝ éẋþóšúŕé Í áţţéɱþţ óƒ ţĥé ðééþ šķý. Šñúƒƒ ţŵéļʋé óƒ ţĥé ţúññéļéŕš áñð ţĥéíŕ çáñðļéš ŵíţĥ ţĥéɱ; Í ñééð ţĥé ŵéšţ ţó ĝó þŕóþéŕļý ƀļáçķ.]",
+        "completion": "[Ţĥé ŵéšţ ĥáš ĝóñé ðáŕķ áţ ļášţ, áñð ţĥé ƒáíñţ šţáŕš ƀéĥíñð ţĥé ŵýŕɱ-šţáŕ ĥáʋé çóɱé óúţ óƒ ţĥé ĝļáŕé. Ýóú ĥáʋé ĝíʋéñ ɱé ƀáçķ ĥáļƒ ɱý šķý, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþŕóçķ Ţúññéļéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_obs_cragmaw": {
+        "title": "[Ţĥé Ţŕíþóð-Ɓŕéáķéŕ]",
+        "text": "[Šóɱé ƀéášţ çáɱé úþ ţĥé šçŕéé íñ ţĥé ðáŕķ áñð þúţ á šĥóúļðéŕ ţĥŕóúĝĥ ɱý ɱóúñţéð ĝļášš - šþļíñţéŕéð ţĥé ţŕíþóð, ƀéñţ ţĥé ĝŕéáţ ƀŕášš ţúƀé Í ŵáíţéð ţŵó ýéáŕš ţó ĥáʋé ĥáúļéð úþ ţĥé þášš. Ţĥé ţŕáçķš áŕé á ƀéáŕ'š, áñð ţĥé ŵáŕðéñš ĥáʋé á ñáɱé ƒóŕ ţĥé óļð ƀúļļ ţĥáţ ŕáñĝéš ţĥáţ šļóþé: Çŕáĝɱáŵ. Í çáññóţ ŕéþļáçé ţĥáţ íñšţŕúɱéñţ, {playerName}. Þúţ ţĥé ƀéášţ ðóŵñ ƀéƒóŕé íţ ƒíñíšĥéš ŵĥáţ íţ šţáŕţéð.]",
+        "completion": "[Šó ţĥáţ íš ţĥé ƀŕúţé. Ļóóķ áţ ţĥé ŕéáçĥ óñ íţ - ñó ŵóñðéŕ ɱý ţŕíþóð ƒóļðéð. Ţĥé ĝļášš çáñ ƀé šţŕáíĝĥţéñéð; ŵíţĥ Çŕáĝɱáŵ ðéáð, íţ ŵíļļ ñóţ ƀé ķñóçķéð ðóŵñ ţŵíçé.]",
+        "objectives": {
+          "0": {
+            "label": "[Óļð Çŕáĝɱáŵ šļáíñ]"
+          }
+        }
+      },
+      "q_obs_stormglare": {
+        "title": "[Ĝļáŕé óƒƒ ţĥé Çŕáĝš]",
+        "text": "[Ţĥé Šţóŕɱçŕáĝ éļéɱéñţáļš ĥáʋé ŵóķéñ íñ ñúɱƀéŕš, áñð éʋéŕý ţíɱé óñé óƒ ţĥéɱ ðíšçĥáŕĝéš, ţĥé ŵĥóļé šķý óʋéŕ ţĥé ŵéšţéŕñ çŕáĝš ŵĥíţéš óúţ áñð ɱý ñíĝĥţ-éýé íš ŕúíñéð ƒóŕ áñ ĥóúŕ. Í ĥáʋé ļóšţ ţĥŕéé ñíĝĥţš óƒ ţĥé ŵýŕɱ-šţáŕ'š ţŕáñšíţ ţó ţĥéíŕ ļíĝĥţñíñĝ. Šçáţţéŕ ţéñ óƒ ţĥéɱ óƒƒ ţĥé ĥíĝĥ çŕáĝš, {playerName} - Í ñééð áñ úñƀŕóķéñ ĥóúŕ óƒ ţŕúé ðáŕķ ţó ţíɱé ţĥé ţĥíñĝ'š þáššáĝé.]",
+        "completion": "[Á ŵĥóļé ĥóúŕ ŵíţĥóúţ á šíñĝļé ƒļášĥ. Í ţíɱéð ţĥé ţŕáñšíţ çļéáñ ƒŕóɱ ļíɱƀ ţó ļíɱƀ - áñð ţĥé ŵýŕɱ-šţáŕ íš ɱóʋíñĝ ƒášţéŕ ţĥáñ áñýţĥíñĝ ţĥáţ ƒáŕ óúţ ĥáš áñý ŕíĝĥţ ţó. Ţĥáţ ţŕóúƀļéš ɱé ɱóŕé ţĥáñ ţĥé óĝŕéš ðó.]",
+        "objectives": {
+          "0": {
+            "label": "[Šţóŕɱçŕáĝ Éļéɱéñţáļ šļáíñ]"
+          }
+        }
+      },
+      "q_obs_shardlord": {
+        "title": "[Ţĥé Ļíʋíñĝ Ļáñţéŕñ]",
+        "text": "[Óñé óƒ ţĥé šţóŕɱ-ţĥíñĝš ĥáš ĝŕóŵñ íñţó šóɱéţĥíñĝ ŵóŕšé - Šĥáŕðļóŕð Ķážžíẋ, á ŵáļķíñĝ ţĥúñðéŕĥéáð ţĥáţ ļíĝĥţš ţĥé ŵĥóļé ŵéšţéŕñ šķý ƒŕóɱ ĥóŕížóñ ţó žéñíţĥ ŵĥéñ íţ ŕóúšéš. Ŵĥíļé íţ ļíʋéš Í ŵíļļ ñéʋéŕ ĝéţ á çļéáñ þļáţé óƒ ţĥé ðééþ ƒíéļð. Íţ íš ñó éŕŕáñð ƒóŕ óñé; ţáķé çóɱþáñíóñš óúţ ţó ţĥé ƒáŕ çŕáĝš ƀéýóñð Šţóŕɱçŕáĝ áñð ƀŕíñĝ ţĥé Šĥáŕðļóŕð ðóŵñ.]",
+        "completion": "[Ţĥé ŵéšţ ĥáš šţóþþéð ƒļíçķéŕíñĝ. Ŵíţĥ Ķážžíẋ ĝóñé ţĥé ðééþ ƒíéļð çáɱé óúţ ƀļáçķ áñð šţíļļ, áñð ţĥé þļáţéš Í þúļļéð ţóñíĝĥţ áŕé ţĥé ƒíñéšţ Í ĥáʋé éʋéŕ ţáķéñ óñ ţĥíš þéáķ. Ŵĥáţéʋéŕ íš çóɱíñĝ, Í ŵíļļ šéé íţ ƒíŕšţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šĥáŕðļóŕð Ķážžíẋ šļáíñ]"
+          }
+        }
+      },
+      "q_obs_ogrefires": {
+        "title": "[Ɓóñƒíŕéš óñ ţĥé Ƒóóţĥíļļš]",
+        "text": "[Ñóŵ íţ íš ţĥé éášţ ţĥáţ ƀéţŕáýš ɱé. Ţĥé Ţĥóŕñþéáķ óĝŕéš ĥáʋé ļíţ ŵáŕ-ƀóñƒíŕéš ţĥé ļéñĝţĥ óƒ ţĥé éášţéŕñ ƒóóţĥíļļš, áñð ţĥé šɱóķé-ĝļóŵ ðŕóŵñš ţĥé ŕíšíñĝ šţáŕš ƀéƒóŕé ţĥéý çļéáŕ ţĥé ŕíðĝé - Í çáññóţ ƒíẋ ţĥé ŵýŕɱ-šţáŕ'š þóšíţíóñ áĝáíñšţ áñýţĥíñĝ óñ ţĥáţ šíðé óƒ ţĥé šķý. Ţĥíñ ţŵéļʋé óƒ ţĥé ƀŕúţéš áñð ļéţ ţĥéíŕ ƒíŕéš ƀúŕñ ðóŵñ šó ţĥé éášţéŕñ ĥóŕížóñ ĝóéš ðáŕķ áĝáíñ.]",
+        "completion": "[Ţĥé éášţéŕñ ƒíŕéš áŕé ĝúţţéŕíñĝ áñð ţĥé ŕíšíñĝ-šţáŕš ĥáʋé çóɱé ƀáçķ ţó ɱé. Í ĥáʋé ɱý ŕéƒéŕéñçé þóíñţš óñ ƀóţĥ ĥóŕížóñš ñóŵ - Í çáñ ƒíñáļļý þíñ ţĥé ŵýŕɱ-šţáŕ'š ţŕúé ţŕáçķ áçŕóšš ţĥé ŵĥóļé ʋáúļţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Óĝŕé šļáíñ]"
+          }
+        }
+      },
+      "q_obs_crushers": {
+        "title": "[Šţóķéŕš óƒ ţĥé Þýŕéš]",
+        "text": "[Ţĥíñ ţĥé ŕáñķ-áñð-ƒíļé áñð ţĥé ƒíŕéš óñļý ƒļáŕé ĥíĝĥéŕ, ƀéçáúšé íţ íš ţĥé Ţĥóŕñþéáķ çŕúšĥéŕš ŵĥó ƒééð ţĥéɱ - éáçĥ óñé ðŕáĝš ŵĥóļé ţŕééš ţó ţĥé þýŕéš ţó ķééþ ţĥé ƒóóţĥíļļš ļíţ ţĥŕóúĝĥ ţĥé ñíĝĥţ. Áš ļóñĝ áš ţĥé çŕúšĥéŕš šţóķé ţĥéɱ, ţĥé éášţéŕñ šķý šţáýš ƀŕíĝĥţ. Ţĥéý áŕé éļíţé áñð ţĥéý ĥíţ ļíķé ƒáļļíñĝ ŕóçķ, {playerName}; ţáķé çóɱþáñíóñš áñð ƀŕéáķ éíĝĥţ óƒ ţĥéɱ.]",
+        "completion": "[Éíĝĥţ çŕúšĥéŕš ðóŵñ, áñð ţĥé ĝŕéáţ þýŕéš ĥáʋé ƀúŕñéð ţó éɱƀéŕš ŵíţĥ ñó óñé ļéƒţ ţó ƒééð ţĥéɱ. Ţĥé éášţéŕñ ðáŕķ íš ɱíñé ƒóŕ áš ļóñĝ áš íţ ţáķéš ţó ƒíñíšĥ ţĥé šúŕʋéý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Çŕúšĥéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_obs_brutok": {
+        "title": "[Ţĥé Ɓéáçóñ-Ɓúļļ]",
+        "text": "[Ţĥéŕé íš óñé óĝŕé ŵóŕšé ţĥáñ áļļ ţĥé ŕéšţ ƒóŕ ɱý þúŕþóšéš - Ɓŕúţóķ Šķúļļšɱášĥéŕ, ŵĥó ķééþš á šíĝñáļ-þýŕé ŕóáŕíñĝ óñ ţĥé ŕíðĝé ñóŕţĥ óƒ ţĥé ŵáŕƀáñð áļļ ñíĝĥţ ļóñĝ, ƀŕíĝĥţéŕ ţĥáñ áñý ƒíŕé óñ ţĥé šļóþé. Ţĥé ŵáŕðéñš ŵáñţ ĥíɱ ƒóŕ ĥíš ŕáíðš; Í ŵáñţ ĥíɱ ƒóŕ ĥíš ƀóñƒíŕé. Éíţĥéŕ ŵáý ţĥé ƀŕúţé ɱúšţ ƒáļļ. Ƒíñð Ɓŕúţóķ óñ ţĥé ĥíĝĥ ŕíðĝé áñð éñð ĥíɱ.]",
+        "completion": "[Ɓŕúţóķ'š ƀéáçóñ íš çóļð ášĥ. Ŵíţĥ ţĥé ļášţ ĝŕéáţ ƒíŕé óúţ, ţĥé ñóŕţĥéŕñ ŕíðĝé ĥáš ĝóñé ðáŕķ ţó ţĥé éýé - áñð ţĥé ƒáíñţ óúţéŕ šţáŕš Í ĥáʋé ƀééñ ĥúñţíñĝ ƒóŕ á šéášóñ áŕé ƒíñáļļý óñ ɱý þļáţéš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓŕúţóķ Šķúļļšɱášĥéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_obs_wyrmwatchers": {
+        "title": "[Ţĥéý Ŵáţçĥ Íţ Ţóó]",
+        "text": "[Í áɱ ñóţ ţĥé óñļý óñé çĥáŕţíñĝ ţĥé ŵýŕɱ-šţáŕ, {playerName}. Ţĥé Ŵýŕɱçúļţ žéáļóţš ĥáʋé ŕáíšéð ŵáţçĥ-ƒíŕéš áţ ţĥé Šáñçţúɱ áñð šţáñð šţáŕíñĝ úþ áţ ţĥé šáɱé þóíñţ óƒ ļíĝĥţ Í ðó - áñð ŵĥéŕé Í šéé á ŕíððļé, ţĥéý šéé á šúɱɱóñš. Ŵĥáţéʋéŕ ţĥáţ šţáŕ ɱéáñš ţó ŵáķé, ţĥéý ɱéáñ ţó ĥéļþ íţ. Çúţ ţŵéļʋé óƒ ţĥé žéáļóţš ðóŵñ áţ ţĥéíŕ ƒíŕéš; Í ŵíļļ ñóţ šĥáŕé ɱý šķý ŵíţĥ ɱéñ ŵĥó þŕáý ţó íţ.]",
+        "completion": "[Ţŵéļʋé ƒéŵéŕ éýéš ţúŕñéð úþŵáŕð íñ ŵóŕšĥíþ. Ţĥéý ŵéŕé ţíɱíñĝ ţĥéíŕ çĥáñţš ţó ţĥé šţáŕ'š ţŕáñšíţ, {playerName} - ţĥé šáɱé ţŕáñšíţ Í ɱéášúŕéð. Ŵé áŕé ŕéáðíñĝ ţĥé šáɱé çļóçķ. Ţĥé ðíƒƒéŕéñçé íš ŵĥáţ ŵé éáçĥ íñţéñð ţó ðó ŵĥéñ íţ šţŕíķéš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵýŕɱçúļţ Žéáļóţ šļáíñ]"
+          }
+        }
+      },
+      "q_obs_deadstar": {
+        "title": "[Úñðéŕ ţĥé Ŵýŕɱ-Šţáŕ]",
+        "text": "[Í ĥáʋé ɱý áñšŵéŕ, áñð Í ŵíšĥ Í ðíð ñóţ. Ţĥé ŵýŕɱ-šţáŕ íš ñó šţáŕ - íţ íš á ţĥíñĝ ƒáļļíñĝ ţóŵáŕð ţĥé þéáķš, áñð áš íţ ñéáŕš, ţĥé óļð ƀáţţļéƒíéļð ŵáķéš. Ţĥé ƀóñéçļáð ŕéʋéñáñţš áŕé ŕíšíñĝ íñ ñúɱƀéŕš úñðéŕ íţš ļíĝĥţ, ðŕáŵñ úþŕíĝĥţ ƀý ŵĥáţéʋéŕ íţ íš. Ɱý šúŕʋéý ɱéáñš ñóţĥíñĝ íƒ ţĥé ðéáð óʋéŕŕúñ ţĥé ŵáļļ ƀéƒóŕé Í çáñ ŵáŕñ ţĥé Çáþţáíñ. Ţáķé çóɱþáñíóñš ţó ţĥé ƀáţţļéƒíéļð áñð þúţ ţéñ óƒ ţĥé ŕéʋéñáñţš ƀáçķ ðóŵñ - ƀúý ɱé ţĥé ñíĝĥţš Í ñééð ţó ƒíñíšĥ ţĥé ŵáŕñíñĝ.]",
+        "completion": "[Ţéñ ðóŵñ, áñð ţĥé ŕéšţ ĥáʋé šţíļļéð ƒóŕ ñóŵ. Ĥéŕé - ţáķé ɱý çóɱþļéţéð šţáŕ-çĥáŕţ ţó ţĥé Çáþţáíñ; íţ šĥóŵš ŵĥéñ ţĥé ţĥíñĝ ƒáļļš áñð ŵĥéŕé. Ýóú ĝáʋé ɱé ţĥé ðáŕķ ţó ŕéáð ţĥé šķý, {playerName}, áñð ţĥé šķý ĥáš ţóļð úš ŵé ĥáʋé ʋéŕý ļíţţļé ţíɱé. Šéé ţĥáţ ţĥé ŵáļļ íš ŕéáðý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓóñéçļáð Ŕéʋéñáñţ ðéšţŕóýéð]"
           }
         }
       },
