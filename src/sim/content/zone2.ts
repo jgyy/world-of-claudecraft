@@ -356,6 +356,16 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     questIds: ['q_troll_fetishes', 'q_cult_camp', 'q_olen'],
     greeting: 'Quiet feet and a short blade keep you breathing out here. Speak quick — I am due back in the reeds.',
   },
+  cartographer_innes: {
+    id: 'cartographer_innes', name: 'Cartographer Innes', title: 'Marsh Surveyor',
+    pos: { x: 12, z: 308 }, facing: -Math.PI / 2, color: 0x148f77,
+    questIds: [
+      'q_survey_sightlines', 'q_survey_snappers', 'q_survey_widows', 'q_survey_mounds',
+      'q_survey_chapel', 'q_survey_encampment', 'q_survey_caustic', 'q_survey_glutton',
+      'q_survey_deepcut', 'q_survey_blankwater',
+    ],
+    greeting: 'A map is only as honest as the surveyor is alive, $N. The fen has eaten three of my chainmen already — help me finish the survey before it takes a fourth.',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -579,6 +589,109 @@ export const ZONE2_QUESTS: Record<string, QuestDef> = {
     minLevel: 12,
     suggestedPlayers: 5,
   },
+
+  // -------------------------------------------------------------------------
+  // The Reedwater Survey — Cartographer Innes maps the Mirefen
+  // -------------------------------------------------------------------------
+  q_survey_sightlines: {
+    id: 'q_survey_sightlines', name: 'Clear the Sightlines',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: "I cannot sight a survey staff through a wall of teeth, $N. The mire prowlers have claimed the open ground east of the causeway — the very ground I must measure first. Cull ten of them and give my chainmen a chance to plant the baseline.",
+    completionText: 'Good. The baseline is planted and not one chainman bled for it. Now I can start the real work.',
+    objectives: [{ type: 'kill', targetMobId: 'mire_prowler', count: 10, label: 'Mire Prowler culled' }],
+    xpReward: 420, copperReward: 260, itemRewards: {},
+    minLevel: 7,
+  },
+  q_survey_snappers: {
+    id: 'q_survey_snappers', name: 'The Deepfen Traverse',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: "My traverse runs straight through the Deepfen Shallows, and the snappers there swarm anything that wades in. I need a clear hour to chain the distance, $N — thin the deepfen murlocs to twelve and I'll have it.",
+    completionText: 'Twelve fewer snappers, one clean traverse line. The shallows are finally on paper.',
+    objectives: [{ type: 'kill', targetMobId: 'deepfen_murloc', count: 12, label: 'Deepfen Snapper slain' }],
+    xpReward: 460, copperReward: 280, itemRewards: {},
+    requiresQuest: 'q_survey_sightlines',
+    minLevel: 7,
+  },
+  q_survey_widows: {
+    id: 'q_survey_widows', name: 'Triangulating the Thicket',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: "To fix the western edge of the map I must set a station inside the Widow Thicket — and the webs there are thick enough to swallow a survey chain whole. Burn me a path, $N. Eight widows down and I can take the angle.",
+    completionText: "The angle holds. The thicket's true shape comes off my board at last — and a good thing, for the old maps had it half a mile wrong.",
+    objectives: [{ type: 'kill', targetMobId: 'mire_widow', count: 8, label: 'Mirefen Widow slain' }],
+    xpReward: 520, copperReward: 320, itemRewards: {},
+    requiresQuest: 'q_survey_snappers',
+    minLevel: 8,
+  },
+  q_survey_mounds: {
+    id: 'q_survey_mounds', name: 'Benchmarks on the Mounds',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: 'The troll mounds are the highest ground in the fen — perfect for a benchmark, if the trolls did not throw my chainmen off them. Drive the fen trolls back, $N. Eight should clear the high mounds long enough to cut a mark in the stone.',
+    completionText: 'Benchmark cut and recorded. From those mounds I can finally tie the whole eastern fen together.',
+    objectives: [{ type: 'kill', targetMobId: 'fen_troll', count: 8, label: 'Mirefen Troll driven back' }],
+    xpReward: 580, copperReward: 360, itemRewards: {},
+    requiresQuest: 'q_survey_widows',
+    minLevel: 9,
+  },
+  q_survey_chapel: {
+    id: 'q_survey_chapel', name: 'The Drowned Approach',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: "The approach to the Drowned Chapel must be drawn — pilgrims still try to reach it and drown for the lack of an honest road. But the dead wade the path in numbers. Lay twelve of the drowned dead to rest, $N, and I'll chart a route the living can follow.",
+    completionText: 'The route is drawn, marked safe in daylight only. It will save lives, $N — more than my survey staff ever could alone.',
+    objectives: [{ type: 'kill', targetMobId: 'drowned_dead', count: 12, label: 'Drowned Dead laid to rest' }],
+    xpReward: 640, copperReward: 400, itemRewards: {},
+    requiresQuest: 'q_survey_mounds',
+    minLevel: 10,
+  },
+  q_survey_encampment: {
+    id: 'q_survey_encampment', name: 'Blank Spot on the Map',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: 'There is a blank spot on my map where the gravecallers keep their encampment, and a blank spot is a danger to every patrol that trusts the chart. I will not draw it from rumor. Clear me ten cultists, $N, so my chainmen can walk it and measure it true.',
+    completionText: 'The encampment is on the map now, every tent and trench of it. The Warden will want a copy before nightfall.',
+    objectives: [{ type: 'kill', targetMobId: 'gravecaller_cultist', count: 10, label: 'Gravecaller Cultist slain' }],
+    xpReward: 700, copperReward: 440, itemRewards: {},
+    requiresQuest: 'q_survey_chapel',
+    minLevel: 10,
+  },
+  q_survey_caustic: {
+    id: 'q_survey_caustic', name: 'Where the Water Burns',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: "The caustic pools must be marked as hazard, or some trader will float a barge into them and lose his crew. But the bog bloats nest right where I need to set my markers, and they burst like acid casks. Pop eight of them, $N, and I'll plant the hazard flags myself.",
+    completionText: 'Hazard flags set, pools marked in red on every copy. No barge-master can say he was not warned now.',
+    objectives: [{ type: 'kill', targetMobId: 'bog_bloat', count: 8, label: 'Bog Bloat burst' }],
+    xpReward: 760, copperReward: 480, itemRewards: {},
+    requiresQuest: 'q_survey_encampment',
+    minLevel: 11,
+  },
+  q_survey_glutton: {
+    id: 'q_survey_glutton', name: 'The Glutton in the Reeds',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: "Grubjaw — the great glutton — has settled square atop my last northern station and eats anything that comes near, chainmen included. There is no charting around a thing that size, $N. He must come off the reeds entirely. Take him down.",
+    completionText: 'Grubjaw is dead and the northern station stands clear. The fen owes you a quieter night, $N — and so do I.',
+    objectives: [{ type: 'kill', targetMobId: 'grubjaw', count: 1, label: 'Grubjaw the Glutton slain' }],
+    xpReward: 900, copperReward: 600, itemRewards: {},
+    requiresQuest: 'q_survey_caustic',
+    minLevel: 11,
+  },
+  q_survey_deepcut: {
+    id: 'q_survey_deepcut', name: 'The Deepwater Cut',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: "One channel runs deeper than any other — the deepwater cut — and nothing returns from sounding it because Mirejaw the Ravenous owns those depths. I must know how deep that cut runs, $N, but not at the cost of another chainman. Kill the beast and the sounding is yours to take in peace.",
+    completionText: 'Mirejaw is gone, and my lead line touched bottom at last. The cut is deeper than I feared — a full fathom past the old charts. Good that we know it now.',
+    objectives: [{ type: 'kill', targetMobId: 'mirejaw_the_ravenous', count: 1, label: 'Mirejaw the Ravenous slain' }],
+    xpReward: 1000, copperReward: 700, itemRewards: {},
+    requiresQuest: 'q_survey_glutton',
+    minLevel: 12,
+  },
+  q_survey_blankwater: {
+    id: 'q_survey_blankwater', name: 'The Last Blank Water',
+    giverNpcId: 'cartographer_innes', turnInNpcId: 'cartographer_innes',
+    text: "One stretch of water remains unmarked on the whole survey — the still pool the locals call Blankwater, where Sloomtooth the Drowned drags down anyone who poles across it. Finish my map, $N. Kill Sloomtooth, take the sounding, and the Mirefen will be charted true for the first time in living memory.",
+    completionText: "It is done. Every reed and channel of the Mirefen, drawn honest and whole — and not one chainman lost to finish it. This map will outlive us both, $N. Your name goes in the corner beside mine.",
+    objectives: [{ type: 'kill', targetMobId: 'sloomtooth_the_drowned', count: 1, label: 'Sloomtooth the Drowned slain' }],
+    xpReward: 1400, copperReward: 1000, itemRewards: {},
+    requiresQuest: 'q_survey_deepcut',
+    minLevel: 12,
+  },
 };
 
 export const ZONE2_QUEST_ORDER = [
@@ -587,6 +700,9 @@ export const ZONE2_QUEST_ORDER = [
   'q_drowned', 'q_drowned_censers', 'q_no_rest', 'q_trolls', 'q_troll_fetishes',
   'q_grubjaw', 'q_cult_camp', 'q_summoners', 'q_deacon', 'q_bastion_door',
   'q_olen', 'q_mistcaller',
+  'q_survey_sightlines', 'q_survey_snappers', 'q_survey_widows', 'q_survey_mounds',
+  'q_survey_chapel', 'q_survey_encampment', 'q_survey_caustic', 'q_survey_glutton',
+  'q_survey_deepcut', 'q_survey_blankwater',
 ];
 
 // ---------------------------------------------------------------------------
