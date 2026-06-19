@@ -69,6 +69,9 @@ const QUEST_IDS = [
   'q_glade_overbrowse', 'q_glade_foxes', 'q_glade_census', 'q_glade_diggers',
   'q_glade_amber', 'q_glade_rut', 'q_glade_treeline', 'q_glade_snares',
   'q_glade_apex', 'q_glade_long_watch',
+  'q_fenmoss_bloat', 'q_fenmoss_snappers', 'q_fenmoss_drowned', 'q_fenmoss_frenzy',
+  'q_fenmoss_mourners', 'q_fenmoss_cultists', 'q_fenmoss_menders', 'q_fenmoss_summoners',
+  'q_fenmoss_trolls', 'q_fenmoss_nhalia',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
