@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -7856,6 +7961,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8821,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -12319,6 +12529,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13389,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -16782,6 +17097,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17957,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -21245,6 +21665,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22525,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -25708,6 +26233,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27093,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -30171,6 +30801,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31661,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -34634,6 +35369,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36229,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -39097,6 +39937,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40797,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -43560,6 +44505,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45365,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -48023,6 +49073,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49933,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -52486,6 +53641,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54501,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -56949,6 +58209,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59069,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
           }
         }
       },
@@ -61412,6 +62777,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "wallwright_garrod": {
+        "name": "Wallwright Garrod",
+        "title": "Master Wallwright",
+        "greeting": "Thessaly holds the wall with soldiers, {className}. I hold it with stone - and right now the stone is losing. Give me a strong back and I will give Highwatch another hundred years."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63640,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_garrod_quarry_road": {
+        "title": "Clear the Quarry Road",
+        "text": "I cannot quarry a single block while ridge stalkers pick my haulers off the switchbacks, {playerName}. Clear the road south for me - ten of the beasts, and my stone carts roll again.",
+        "completion": "The road is open and the first carts are rolling. Stone for the wall at last - my thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "Undermined",
+        "text": "Two hundred years my wall has stood, and now the Deeprock kobolds are hollowing the ground from under it. Every shaft they sink is a crack I will be patching come spring. Put twelve tunnelers down before they bring the footing with them.",
+        "completion": "Twelve fewer picks under my foundations. The ground will hold - for now.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "Quarried from the Quick",
+        "text": "The Stormcrag elementals are nothing but the mountain's own bones got up to walk - and bone like that, dressed right, makes ashlar no batter could crack. Break twelve of them on the high slopes. Mind the lightning in their fists, {playerName}.",
+        "completion": "Each block we dress from them rings like a struck anvil. Walls raised of this will outlast the both of us.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "Off the Scaffolds",
+        "text": "Open the road and the stalkers only climb higher - now they prowl my scaffolds while the masons work the upper courses. I will not lose another hand to a cat. Cull fourteen, {playerName}, and let my crews work in peace.",
+        "completion": "The scaffolds are quiet and the upper courses go up clean. You have given my masons their nerve back.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "The Eastern Course",
+        "text": "The eastern wall takes the worst of it - Thornpeak ogres come down off the foothills and throw themselves at the fresh mortar before it has set. Drive twelve back into the crags and give my work a night to cure.",
+        "completion": "Twelve driven off, and the mortar held through the night. The eastern course will stand, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "Collapse the Deeper Dig",
+        "text": "Drive the kobolds off the surface and they only dig deeper, {playerName} - there are shafts now that run clean under the gatehouse. Go down after them. Fourteen more tunnelers, and bring the lower galleries down on whatever is left.",
+        "completion": "The deep galleries are caved and the digging has stopped. The gatehouse rests on solid rock once more.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Tunneler slain"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "Breakers at the Gate",
+        "text": "The new gate is my finest work and the ogre crushers mean to make kindling of it. One of those brutes can stove in a postern with its bare fists. Take companions and break ten of them, {playerName}, before they break my gate.",
+        "completion": "Ten crushers down and the gate stands without a splinter out of place. It will hold an army now.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "The Stone Fights Back",
+        "text": "Strange thing, {playerName} - the more of the elementals we quarry, the more wake to take their place, and now they come down to the stoneworks themselves and shatter what we have dressed. Break fourteen at the works before they unbuild a season's labour.",
+        "completion": "The stoneworks stand and the dressed blocks with them. Whatever stirs them, it will not have my wall.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental slain"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "The Chant in the Mortar",
+        "text": "I will tell you a mason's secret, {playerName}: fresh mortar sings as it sets, and the Wyrmcult's chanting throws it off the note. Cracks run where they should not. Silence twelve zealots so my walls can cure to true.",
+        "completion": "The wind carries no chanting tonight, and the new courses set hard and clean. Stone keeps faith, {playerName} - men less so.",
+        "objectives": {
+          "0": {
+            "label": "Wyrmcult Zealot slain"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "Set the Capstone",
+        "text": "The wall is whole again but for the capstone over the gate - and the crushers know it, massing for one last rush before the keystone drops. Hold them off, {playerName}. Eight more, and I set the stone that closes Highwatch against the mountain. Bring companions; this is the last and the worst of it.",
+        "completion": "It is set. Feel that - the whole wall draws breath as one. Highwatch will stand another hundred years, and your name is in the stone of it, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Crusher slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62524,6 +63994,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62533,6 +64006,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62697,6 +64210,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62706,6 +64222,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62870,6 +64426,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62879,6 +64438,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63043,6 +64642,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63052,6 +64654,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63217,6 +64859,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63226,6 +64871,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63390,6 +65075,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63399,6 +65087,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63563,6 +65291,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63572,6 +65303,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63736,6 +65507,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63745,6 +65519,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63909,6 +65723,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63918,6 +65735,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64082,6 +65939,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64091,6 +65951,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64255,6 +66155,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64264,6 +66167,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64428,6 +66371,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.wallwright_garrod.greeting",
+    "entities.npcs.wallwright_garrod.name",
+    "entities.npcs.wallwright_garrod.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64437,6 +66383,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_garrod_breakers.completion",
+    "entities.quests.q_garrod_breakers.objectives.0.label",
+    "entities.quests.q_garrod_breakers.text",
+    "entities.quests.q_garrod_breakers.title",
+    "entities.quests.q_garrod_capstone.completion",
+    "entities.quests.q_garrod_capstone.objectives.0.label",
+    "entities.quests.q_garrod_capstone.text",
+    "entities.quests.q_garrod_capstone.title",
+    "entities.quests.q_garrod_chant_cracks.completion",
+    "entities.quests.q_garrod_chant_cracks.objectives.0.label",
+    "entities.quests.q_garrod_chant_cracks.text",
+    "entities.quests.q_garrod_chant_cracks.title",
+    "entities.quests.q_garrod_deeper_dig.completion",
+    "entities.quests.q_garrod_deeper_dig.objectives.0.label",
+    "entities.quests.q_garrod_deeper_dig.text",
+    "entities.quests.q_garrod_deeper_dig.title",
+    "entities.quests.q_garrod_eastern_wall.completion",
+    "entities.quests.q_garrod_eastern_wall.objectives.0.label",
+    "entities.quests.q_garrod_eastern_wall.text",
+    "entities.quests.q_garrod_eastern_wall.title",
+    "entities.quests.q_garrod_quarry_road.completion",
+    "entities.quests.q_garrod_quarry_road.objectives.0.label",
+    "entities.quests.q_garrod_quarry_road.text",
+    "entities.quests.q_garrod_quarry_road.title",
+    "entities.quests.q_garrod_scaffold_guard.completion",
+    "entities.quests.q_garrod_scaffold_guard.objectives.0.label",
+    "entities.quests.q_garrod_scaffold_guard.text",
+    "entities.quests.q_garrod_scaffold_guard.title",
+    "entities.quests.q_garrod_stoneflesh.completion",
+    "entities.quests.q_garrod_stoneflesh.objectives.0.label",
+    "entities.quests.q_garrod_stoneflesh.text",
+    "entities.quests.q_garrod_stoneflesh.title",
+    "entities.quests.q_garrod_storm_masons.completion",
+    "entities.quests.q_garrod_storm_masons.objectives.0.label",
+    "entities.quests.q_garrod_storm_masons.text",
+    "entities.quests.q_garrod_storm_masons.title",
+    "entities.quests.q_garrod_undermine.completion",
+    "entities.quests.q_garrod_undermine.objectives.0.label",
+    "entities.quests.q_garrod_undermine.text",
+    "entities.quests.q_garrod_undermine.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -67972,6 +69958,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "wallwright_garrod": {
+        "name": "[Ŵáļļŵŕíĝĥţ Ĝáŕŕóð]",
+        "title": "[Ɱášţéŕ Ŵáļļŵŕíĝĥţ]",
+        "greeting": "[Ţĥéššáļý ĥóļðš ţĥé ŵáļļ ŵíţĥ šóļðíéŕš, {className}. Í ĥóļð íţ ŵíţĥ šţóñé - áñð ŕíĝĥţ ñóŵ ţĥé šţóñé íš ļóšíñĝ. Ĝíʋé ɱé á šţŕóñĝ ƀáçķ áñð Í ŵíļļ ĝíʋé Ĥíĝĥŵáţçĥ áñóţĥéŕ ĥúñðŕéð ýéáŕš.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70818,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_quarry_road": {
+        "title": "[Çļéáŕ ţĥé Ɋúáŕŕý Ŕóáð]",
+        "text": "[Í çáññóţ ɋúáŕŕý á šíñĝļé ƀļóçķ ŵĥíļé ŕíðĝé šţáļķéŕš þíçķ ɱý ĥáúļéŕš óƒƒ ţĥé šŵíţçĥƀáçķš, {playerName}. Çļéáŕ ţĥé ŕóáð šóúţĥ ƒóŕ ɱé - ţéñ óƒ ţĥé ƀéášţš, áñð ɱý šţóñé çáŕţš ŕóļļ áĝáíñ.]",
+        "completion": "[Ţĥé ŕóáð íš óþéñ áñð ţĥé ƒíŕšţ çáŕţš áŕé ŕóļļíñĝ. Šţóñé ƒóŕ ţĥé ŵáļļ áţ ļášţ - ɱý ţĥáñķš, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕíðĝé Šţáļķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_undermine": {
+        "title": "[Úñðéŕɱíñéð]",
+        "text": "[Ţŵó ĥúñðŕéð ýéáŕš ɱý ŵáļļ ĥáš šţóóð, áñð ñóŵ ţĥé Ðééþŕóçķ ķóƀóļðš áŕé ĥóļļóŵíñĝ ţĥé ĝŕóúñð ƒŕóɱ úñðéŕ íţ. Éʋéŕý šĥáƒţ ţĥéý šíñķ íš á çŕáçķ Í ŵíļļ ƀé þáţçĥíñĝ çóɱé šþŕíñĝ. Þúţ ţŵéļʋé ţúññéļéŕš ðóŵñ ƀéƒóŕé ţĥéý ƀŕíñĝ ţĥé ƒóóţíñĝ ŵíţĥ ţĥéɱ.]",
+        "completion": "[Ţŵéļʋé ƒéŵéŕ þíçķš úñðéŕ ɱý ƒóúñðáţíóñš. Ţĥé ĝŕóúñð ŵíļļ ĥóļð - ƒóŕ ñóŵ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþŕóçķ Ţúññéļéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_stoneflesh": {
+        "title": "[Ɋúáŕŕíéð ƒŕóɱ ţĥé Ɋúíçķ]",
+        "text": "[Ţĥé Šţóŕɱçŕáĝ éļéɱéñţáļš áŕé ñóţĥíñĝ ƀúţ ţĥé ɱóúñţáíñ'š óŵñ ƀóñéš ĝóţ úþ ţó ŵáļķ - áñð ƀóñé ļíķé ţĥáţ, ðŕéššéð ŕíĝĥţ, ɱáķéš ášĥļáŕ ñó ƀáţţéŕ çóúļð çŕáçķ. Ɓŕéáķ ţŵéļʋé óƒ ţĥéɱ óñ ţĥé ĥíĝĥ šļóþéš. Ɱíñð ţĥé ļíĝĥţñíñĝ íñ ţĥéíŕ ƒíšţš, {playerName}.]",
+        "completion": "[Éáçĥ ƀļóçķ ŵé ðŕéšš ƒŕóɱ ţĥéɱ ŕíñĝš ļíķé á šţŕúçķ áñʋíļ. Ŵáļļš ŕáíšéð óƒ ţĥíš ŵíļļ óúţļášţ ţĥé ƀóţĥ óƒ úš.]",
+        "objectives": {
+          "0": {
+            "label": "[Šţóŕɱçŕáĝ Éļéɱéñţáļ šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_scaffold_guard": {
+        "title": "[Óƒƒ ţĥé Šçáƒƒóļðš]",
+        "text": "[Óþéñ ţĥé ŕóáð áñð ţĥé šţáļķéŕš óñļý çļíɱƀ ĥíĝĥéŕ - ñóŵ ţĥéý þŕóŵļ ɱý šçáƒƒóļðš ŵĥíļé ţĥé ɱášóñš ŵóŕķ ţĥé úþþéŕ çóúŕšéš. Í ŵíļļ ñóţ ļóšé áñóţĥéŕ ĥáñð ţó á çáţ. Çúļļ ƒóúŕţééñ, {playerName}, áñð ļéţ ɱý çŕéŵš ŵóŕķ íñ þéáçé.]",
+        "completion": "[Ţĥé šçáƒƒóļðš áŕé ɋúíéţ áñð ţĥé úþþéŕ çóúŕšéš ĝó úþ çļéáñ. Ýóú ĥáʋé ĝíʋéñ ɱý ɱášóñš ţĥéíŕ ñéŕʋé ƀáçķ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕíðĝé Šţáļķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_eastern_wall": {
+        "title": "[Ţĥé Éášţéŕñ Çóúŕšé]",
+        "text": "[Ţĥé éášţéŕñ ŵáļļ ţáķéš ţĥé ŵóŕšţ óƒ íţ - Ţĥóŕñþéáķ óĝŕéš çóɱé ðóŵñ óƒƒ ţĥé ƒóóţĥíļļš áñð ţĥŕóŵ ţĥéɱšéļʋéš áţ ţĥé ƒŕéšĥ ɱóŕţáŕ ƀéƒóŕé íţ ĥáš šéţ. Ðŕíʋé ţŵéļʋé ƀáçķ íñţó ţĥé çŕáĝš áñð ĝíʋé ɱý ŵóŕķ á ñíĝĥţ ţó çúŕé.]",
+        "completion": "[Ţŵéļʋé ðŕíʋéñ óƒƒ, áñð ţĥé ɱóŕţáŕ ĥéļð ţĥŕóúĝĥ ţĥé ñíĝĥţ. Ţĥé éášţéŕñ çóúŕšé ŵíļļ šţáñð, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Óĝŕé šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_deeper_dig": {
+        "title": "[Çóļļáþšé ţĥé Ðééþéŕ Ðíĝ]",
+        "text": "[Ðŕíʋé ţĥé ķóƀóļðš óƒƒ ţĥé šúŕƒáçé áñð ţĥéý óñļý ðíĝ ðééþéŕ, {playerName} - ţĥéŕé áŕé šĥáƒţš ñóŵ ţĥáţ ŕúñ çļéáñ úñðéŕ ţĥé ĝáţéĥóúšé. Ĝó ðóŵñ áƒţéŕ ţĥéɱ. Ƒóúŕţééñ ɱóŕé ţúññéļéŕš, áñð ƀŕíñĝ ţĥé ļóŵéŕ ĝáļļéŕíéš ðóŵñ óñ ŵĥáţéʋéŕ íš ļéƒţ.]",
+        "completion": "[Ţĥé ðééþ ĝáļļéŕíéš áŕé çáʋéð áñð ţĥé ðíĝĝíñĝ ĥáš šţóþþéð. Ţĥé ĝáţéĥóúšé ŕéšţš óñ šóļíð ŕóçķ óñçé ɱóŕé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþŕóçķ Ţúññéļéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_breakers": {
+        "title": "[Ɓŕéáķéŕš áţ ţĥé Ĝáţé]",
+        "text": "[Ţĥé ñéŵ ĝáţé íš ɱý ƒíñéšţ ŵóŕķ áñð ţĥé óĝŕé çŕúšĥéŕš ɱéáñ ţó ɱáķé ķíñðļíñĝ óƒ íţ. Óñé óƒ ţĥóšé ƀŕúţéš çáñ šţóʋé íñ á þóšţéŕñ ŵíţĥ íţš ƀáŕé ƒíšţš. Ţáķé çóɱþáñíóñš áñð ƀŕéáķ ţéñ óƒ ţĥéɱ, {playerName}, ƀéƒóŕé ţĥéý ƀŕéáķ ɱý ĝáţé.]",
+        "completion": "[Ţéñ çŕúšĥéŕš ðóŵñ áñð ţĥé ĝáţé šţáñðš ŵíţĥóúţ á šþļíñţéŕ óúţ óƒ þļáçé. Íţ ŵíļļ ĥóļð áñ áŕɱý ñóŵ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Çŕúšĥéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_storm_masons": {
+        "title": "[Ţĥé Šţóñé Ƒíĝĥţš Ɓáçķ]",
+        "text": "[Šţŕáñĝé ţĥíñĝ, {playerName} - ţĥé ɱóŕé óƒ ţĥé éļéɱéñţáļš ŵé ɋúáŕŕý, ţĥé ɱóŕé ŵáķé ţó ţáķé ţĥéíŕ þļáçé, áñð ñóŵ ţĥéý çóɱé ðóŵñ ţó ţĥé šţóñéŵóŕķš ţĥéɱšéļʋéš áñð šĥáţţéŕ ŵĥáţ ŵé ĥáʋé ðŕéššéð. Ɓŕéáķ ƒóúŕţééñ áţ ţĥé ŵóŕķš ƀéƒóŕé ţĥéý úñƀúíļð á šéášóñ'š ļáƀóúŕ.]",
+        "completion": "[Ţĥé šţóñéŵóŕķš šţáñð áñð ţĥé ðŕéššéð ƀļóçķš ŵíţĥ ţĥéɱ. Ŵĥáţéʋéŕ šţíŕš ţĥéɱ, íţ ŵíļļ ñóţ ĥáʋé ɱý ŵáļļ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šţóŕɱçŕáĝ Éļéɱéñţáļ šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_chant_cracks": {
+        "title": "[Ţĥé Çĥáñţ íñ ţĥé Ɱóŕţáŕ]",
+        "text": "[Í ŵíļļ ţéļļ ýóú á ɱášóñ'š šéçŕéţ, {playerName}: ƒŕéšĥ ɱóŕţáŕ šíñĝš áš íţ šéţš, áñð ţĥé Ŵýŕɱçúļţ'š çĥáñţíñĝ ţĥŕóŵš íţ óƒƒ ţĥé ñóţé. Çŕáçķš ŕúñ ŵĥéŕé ţĥéý šĥóúļð ñóţ. Šíļéñçé ţŵéļʋé žéáļóţš šó ɱý ŵáļļš çáñ çúŕé ţó ţŕúé.]",
+        "completion": "[Ţĥé ŵíñð çáŕŕíéš ñó çĥáñţíñĝ ţóñíĝĥţ, áñð ţĥé ñéŵ çóúŕšéš šéţ ĥáŕð áñð çļéáñ. Šţóñé ķééþš ƒáíţĥ, {playerName} - ɱéñ ļéšš šó.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵýŕɱçúļţ Žéáļóţ šļáíñ]"
+          }
+        }
+      },
+      "q_garrod_capstone": {
+        "title": "[Šéţ ţĥé Çáþšţóñé]",
+        "text": "[Ţĥé ŵáļļ íš ŵĥóļé áĝáíñ ƀúţ ƒóŕ ţĥé çáþšţóñé óʋéŕ ţĥé ĝáţé - áñð ţĥé çŕúšĥéŕš ķñóŵ íţ, ɱáššíñĝ ƒóŕ óñé ļášţ ŕúšĥ ƀéƒóŕé ţĥé ķéýšţóñé ðŕóþš. Ĥóļð ţĥéɱ óƒƒ, {playerName}. Éíĝĥţ ɱóŕé, áñð Í šéţ ţĥé šţóñé ţĥáţ çļóšéš Ĥíĝĥŵáţçĥ áĝáíñšţ ţĥé ɱóúñţáíñ. Ɓŕíñĝ çóɱþáñíóñš; ţĥíš íš ţĥé ļášţ áñð ţĥé ŵóŕšţ óƒ íţ.]",
+        "completion": "[Íţ íš šéţ. Ƒééļ ţĥáţ - ţĥé ŵĥóļé ŵáļļ ðŕáŵš ƀŕéáţĥ áš óñé. Ĥíĝĥŵáţçĥ ŵíļļ šţáñð áñóţĥéŕ ĥúñðŕéð ýéáŕš, áñð ýóúŕ ñáɱé íš íñ ţĥé šţóñé óƒ íţ, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Çŕúšĥéŕ šļáíñ]"
           }
         }
       },
