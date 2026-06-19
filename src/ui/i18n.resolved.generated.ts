@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -7856,6 +7961,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8821,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -12319,6 +12529,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13389,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -16782,6 +17097,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17957,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -21245,6 +21665,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22525,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -25708,6 +26233,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27093,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -30171,6 +30801,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31661,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -34634,6 +35369,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36229,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -39097,6 +39937,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40797,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -43560,6 +44505,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45365,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -48023,6 +49073,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49933,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -52486,6 +53641,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54501,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -56949,6 +58209,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59069,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
           }
         }
       },
@@ -61412,6 +62777,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "salvager_brel": {
+        "name": "Salvage-Diver Brel",
+        "title": "Deepfen Salvager",
+        "greeting": "A hundred years of caravans have sunk into this fen, {playerName} - pearls, strongboxes, whole cargo holds. I can dive for any of it. Keeping the water from killing me while I do is the trouble."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63640,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_salvage_bank": {
+        "title": "Clear the Divers' Bank",
+        "text": "I work my dives off the south bank, where the reeds are thin enough to lay out what I bring up. But the mire prowlers den right where I dry my haul, and a man cannot count pearls with teeth at his back. Thin them - 10 should buy me room, {playerName}.",
+        "completion": "Room to breathe, and to lay out a season of dives. Already I have a strongbox lid drying that has not seen air since your grandfather was a boy.",
+        "objectives": {
+          "0": {
+            "label": "Mire Prowler thinned"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "Snappers on the Sunken Cargo",
+        "text": "The richest wreck lies in the east lake shallows - a whole merchant barge, holds still latched. But the Deepfen snappers have claimed it for a nest and swarm any diver who nears the hull. Cut 10 of them down, {playerName}, and I can finally work the hold.",
+        "completion": "The hull is mine to crack now. Brass fittings, a sodden ledger, and - feel the weight of this - a purse that still jingles. We are in business.",
+        "objectives": {
+          "0": {
+            "label": "Deepfen Snapper slain"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "Mirejaw's Hoard",
+        "text": "One snapper grew fat and clever - Mirejaw the Ravenous, who drags every shiny thing he finds to a wallow at the lake bend and sits on it like a dragon on gold. Half my barge cargo is under him, {playerName}. Kill the brute and I will dive his hoard myself.",
+        "completion": "A coral crown, three signet rings, and a fistful of Deepfen pearls - all of it under his bulk. The greedy ones always do my sorting for me.",
+        "objectives": {
+          "0": {
+            "label": "Mirejaw the Ravenous slain"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "Silk Over the Wreck",
+        "text": "Not every wreck is underwater. A caravan toppled into the western thicket years back, and the mire widows have shrouded it so thick I cannot reach a crate. Clear them - 10 of the widows, {playerName} - before I lose a hand to that silk for the sake of a strongbox.",
+        "completion": "Webs cut, crates clear. Bolt-cloth and trade-iron, ruined by damp but the buckles are good silver. Every wreck pays something, if you live to reach it.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Widow cleared"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "Cut the Brood",
+        "text": "The silk comes back overnight, and it always will while the Broodmother nests in the toppled caravan. She has made a hatchery of the cargo, {playerName}. No salvage there until she is dead - and I do not have the arm for her.",
+        "completion": "The hatchery is cold and the crates are mine for good. Found a strongbox in the wagon-bed she was brooding on, still sealed. She guarded my fortune for me, the old horror.",
+        "objectives": {
+          "0": {
+            "label": "The Broodmother slain"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "Down Among the Drowned",
+        "text": "The oldest wreck of all lies north, under the Drowned Chapel - and its crew never left it. The drowned dead still crew the hold, and they take it ill when a living man reaches for the strongroom. Put 10 of them down, {playerName}, and the strongroom is ours.",
+        "completion": "They sank with a chapel-tithe in the strongroom - gold candlesticks, a reliquary, coin enough to choke a fish. The dead keep the best vaults, {playerName}, because no thief dares them. No thief but us.",
+        "objectives": {
+          "0": {
+            "label": "Drowned Dead put down"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "Gas in the Dive-Lane",
+        "text": "My safest dive-lane runs the eastern shelf - except the bog bloats have drifted into it, fat with marsh-gas, and one burst underwater will stop a diver’s heart. I will not send myself down through them. Pop 10 out on the shelf, {playerName}, and clear my lane.",
+        "completion": "The lane is clear and the water no longer fizzes with their stink. I can drop a line there now without wondering if I will come back up.",
+        "objectives": {
+          "0": {
+            "label": "Bog Bloat popped"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "Trolls on the Barrow-Cargo",
+        "text": "Not all the wealth sank - some was buried. The southeast barrow-mounds hold grave-goods from before the fen drowned the road, and the Mirefen trolls have dug in atop them to gnaw the bones. Drive off 10, {playerName}, and the barrows are open digging.",
+        "completion": "The mounds are quiet and the digging is good - torcs, amber, a bronze sword green with age but worth a noble’s ransom to the right collector. The trolls were sitting on a museum.",
+        "objectives": {
+          "0": {
+            "label": "Mirefen Troll driven off"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "Robes Over the Reliquary",
+        "text": "The deep fen holds the prize - a sunken reliquary barge, and I am not the only one who knows it. The Gravecallers have camped the deep reeds to dredge it for their own dark needs. Break their hold, {playerName} - 10 cultists - before they cart off what is rightfully salvage.",
+        "completion": "Their dredging-camp is broken and the reliquary is ours to raise. Whatever they wanted from it, they will not have. Let the dead things stay sold to honest buyers.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist slain"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "The Glutton's Belly",
+        "text": "One last haul, and the strangest. Grubjaw the Glutton swallowed a sealed strongbox whole when the reliquary barge broke up - I watched him do it, the greedy hill of a troll. Cut it out of him, {playerName}, and the Deepfen Salvage is finished, every wreck on the map raised.",
+        "completion": "There it is, {playerName} - the master-chest, slick but sealed, prised out of a glutton’s gut. Open it on the bridge tonight where the whole town can see: a hundred years of the fen’s drowned fortune, raised at last. We did it, diver. We raised the lot.",
+        "objectives": {
+          "0": {
+            "label": "Grubjaw the Glutton slain"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62524,6 +63994,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62575,6 +64048,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62697,6 +64210,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62748,6 +64264,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62870,6 +64426,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62921,6 +64480,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63043,6 +64642,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63094,6 +64696,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63217,6 +64859,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63268,6 +64913,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63390,6 +65075,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63441,6 +65129,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63563,6 +65291,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63614,6 +65345,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63736,6 +65507,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63787,6 +65561,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63909,6 +65723,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63960,6 +65777,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64082,6 +65939,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64133,6 +65993,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64255,6 +66155,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64306,6 +66209,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64428,6 +66371,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.npcs.salvager_brel.greeting",
+    "entities.npcs.salvager_brel.name",
+    "entities.npcs.salvager_brel.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64479,6 +66425,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_salvage_bank.completion",
+    "entities.quests.q_salvage_bank.objectives.0.label",
+    "entities.quests.q_salvage_bank.text",
+    "entities.quests.q_salvage_bank.title",
+    "entities.quests.q_salvage_barrows.completion",
+    "entities.quests.q_salvage_barrows.objectives.0.label",
+    "entities.quests.q_salvage_barrows.text",
+    "entities.quests.q_salvage_barrows.title",
+    "entities.quests.q_salvage_bloats.completion",
+    "entities.quests.q_salvage_bloats.objectives.0.label",
+    "entities.quests.q_salvage_bloats.text",
+    "entities.quests.q_salvage_bloats.title",
+    "entities.quests.q_salvage_brood.completion",
+    "entities.quests.q_salvage_brood.objectives.0.label",
+    "entities.quests.q_salvage_brood.text",
+    "entities.quests.q_salvage_brood.title",
+    "entities.quests.q_salvage_drowned.completion",
+    "entities.quests.q_salvage_drowned.objectives.0.label",
+    "entities.quests.q_salvage_drowned.text",
+    "entities.quests.q_salvage_drowned.title",
+    "entities.quests.q_salvage_glutton.completion",
+    "entities.quests.q_salvage_glutton.objectives.0.label",
+    "entities.quests.q_salvage_glutton.text",
+    "entities.quests.q_salvage_glutton.title",
+    "entities.quests.q_salvage_ravenous.completion",
+    "entities.quests.q_salvage_ravenous.objectives.0.label",
+    "entities.quests.q_salvage_ravenous.text",
+    "entities.quests.q_salvage_ravenous.title",
+    "entities.quests.q_salvage_robes.completion",
+    "entities.quests.q_salvage_robes.objectives.0.label",
+    "entities.quests.q_salvage_robes.text",
+    "entities.quests.q_salvage_robes.title",
+    "entities.quests.q_salvage_snappers.completion",
+    "entities.quests.q_salvage_snappers.objectives.0.label",
+    "entities.quests.q_salvage_snappers.text",
+    "entities.quests.q_salvage_snappers.title",
+    "entities.quests.q_salvage_webs.completion",
+    "entities.quests.q_salvage_webs.objectives.0.label",
+    "entities.quests.q_salvage_webs.text",
+    "entities.quests.q_salvage_webs.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -67972,6 +69958,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "salvager_brel": {
+        "name": "[Šáļʋáĝé-Ðíʋéŕ Ɓŕéļ]",
+        "title": "[Ðééþƒéñ Šáļʋáĝéŕ]",
+        "greeting": "[Á ĥúñðŕéð ýéáŕš óƒ çáŕáʋáñš ĥáʋé šúñķ íñţó ţĥíš ƒéñ, {playerName} - þéáŕļš, šţŕóñĝƀóẋéš, ŵĥóļé çáŕĝó ĥóļðš. Í çáñ ðíʋé ƒóŕ áñý óƒ íţ. Ķééþíñĝ ţĥé ŵáţéŕ ƒŕóɱ ķíļļíñĝ ɱé ŵĥíļé Í ðó íš ţĥé ţŕóúƀļé.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70818,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_salvage_bank": {
+        "title": "[Çļéáŕ ţĥé Ðíʋéŕš' Ɓáñķ]",
+        "text": "[Í ŵóŕķ ɱý ðíʋéš óƒƒ ţĥé šóúţĥ ƀáñķ, ŵĥéŕé ţĥé ŕééðš áŕé ţĥíñ éñóúĝĥ ţó ļáý óúţ ŵĥáţ Í ƀŕíñĝ úþ. Ɓúţ ţĥé ɱíŕé þŕóŵļéŕš ðéñ ŕíĝĥţ ŵĥéŕé Í ðŕý ɱý ĥáúļ, áñð á ɱáñ çáññóţ çóúñţ þéáŕļš ŵíţĥ ţééţĥ áţ ĥíš ƀáçķ. Ţĥíñ ţĥéɱ - 10 šĥóúļð ƀúý ɱé ŕóóɱ, {playerName}.]",
+        "completion": "[Ŕóóɱ ţó ƀŕéáţĥé, áñð ţó ļáý óúţ á šéášóñ óƒ ðíʋéš. Áļŕéáðý Í ĥáʋé á šţŕóñĝƀóẋ ļíð ðŕýíñĝ ţĥáţ ĥáš ñóţ šééñ áíŕ šíñçé ýóúŕ ĝŕáñðƒáţĥéŕ ŵáš á ƀóý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕé Þŕóŵļéŕ ţĥíññéð]"
+          }
+        }
+      },
+      "q_salvage_snappers": {
+        "title": "[Šñáþþéŕš óñ ţĥé Šúñķéñ Çáŕĝó]",
+        "text": "[Ţĥé ŕíçĥéšţ ŵŕéçķ ļíéš íñ ţĥé éášţ ļáķé šĥáļļóŵš - á ŵĥóļé ɱéŕçĥáñţ ƀáŕĝé, ĥóļðš šţíļļ ļáţçĥéð. Ɓúţ ţĥé Ðééþƒéñ šñáþþéŕš ĥáʋé çļáíɱéð íţ ƒóŕ á ñéšţ áñð šŵáŕɱ áñý ðíʋéŕ ŵĥó ñéáŕš ţĥé ĥúļļ. Çúţ 10 óƒ ţĥéɱ ðóŵñ, {playerName}, áñð Í çáñ ƒíñáļļý ŵóŕķ ţĥé ĥóļð.]",
+        "completion": "[Ţĥé ĥúļļ íš ɱíñé ţó çŕáçķ ñóŵ. Ɓŕášš ƒíţţíñĝš, á šóððéñ ļéðĝéŕ, áñð - ƒééļ ţĥé ŵéíĝĥţ óƒ ţĥíš - á þúŕšé ţĥáţ šţíļļ ĵíñĝļéš. Ŵé áŕé íñ ƀúšíñéšš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþƒéñ Šñáþþéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_salvage_ravenous": {
+        "title": "[Ɱíŕéĵáŵ'š Ĥóáŕð]",
+        "text": "[Óñé šñáþþéŕ ĝŕéŵ ƒáţ áñð çļéʋéŕ - Ɱíŕéĵáŵ ţĥé Ŕáʋéñóúš, ŵĥó ðŕáĝš éʋéŕý šĥíñý ţĥíñĝ ĥé ƒíñðš ţó á ŵáļļóŵ áţ ţĥé ļáķé ƀéñð áñð šíţš óñ íţ ļíķé á ðŕáĝóñ óñ ĝóļð. Ĥáļƒ ɱý ƀáŕĝé çáŕĝó íš úñðéŕ ĥíɱ, {playerName}. Ķíļļ ţĥé ƀŕúţé áñð Í ŵíļļ ðíʋé ĥíš ĥóáŕð ɱýšéļƒ.]",
+        "completion": "[Á çóŕáļ çŕóŵñ, ţĥŕéé šíĝñéţ ŕíñĝš, áñð á ƒíšţƒúļ óƒ Ðééþƒéñ þéáŕļš - áļļ óƒ íţ úñðéŕ ĥíš ƀúļķ. Ţĥé ĝŕééðý óñéš áļŵáýš ðó ɱý šóŕţíñĝ ƒóŕ ɱé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéĵáŵ ţĥé Ŕáʋéñóúš šļáíñ]"
+          }
+        }
+      },
+      "q_salvage_webs": {
+        "title": "[Šíļķ Óʋéŕ ţĥé Ŵŕéçķ]",
+        "text": "[Ñóţ éʋéŕý ŵŕéçķ íš úñðéŕŵáţéŕ. Á çáŕáʋáñ ţóþþļéð íñţó ţĥé ŵéšţéŕñ ţĥíçķéţ ýéáŕš ƀáçķ, áñð ţĥé ɱíŕé ŵíðóŵš ĥáʋé šĥŕóúðéð íţ šó ţĥíçķ Í çáññóţ ŕéáçĥ á çŕáţé. Çļéáŕ ţĥéɱ - 10 óƒ ţĥé ŵíðóŵš, {playerName} - ƀéƒóŕé Í ļóšé á ĥáñð ţó ţĥáţ šíļķ ƒóŕ ţĥé šáķé óƒ á šţŕóñĝƀóẋ.]",
+        "completion": "[Ŵéƀš çúţ, çŕáţéš çļéáŕ. Ɓóļţ-çļóţĥ áñð ţŕáðé-íŕóñ, ŕúíñéð ƀý ðáɱþ ƀúţ ţĥé ƀúçķļéš áŕé ĝóóð šíļʋéŕ. Éʋéŕý ŵŕéçķ þáýš šóɱéţĥíñĝ, íƒ ýóú ļíʋé ţó ŕéáçĥ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéƒéñ Ŵíðóŵ çļéáŕéð]"
+          }
+        }
+      },
+      "q_salvage_brood": {
+        "title": "[Çúţ ţĥé Ɓŕóóð]",
+        "text": "[Ţĥé šíļķ çóɱéš ƀáçķ óʋéŕñíĝĥţ, áñð íţ áļŵáýš ŵíļļ ŵĥíļé ţĥé Ɓŕóóðɱóţĥéŕ ñéšţš íñ ţĥé ţóþþļéð çáŕáʋáñ. Šĥé ĥáš ɱáðé á ĥáţçĥéŕý óƒ ţĥé çáŕĝó, {playerName}. Ñó šáļʋáĝé ţĥéŕé úñţíļ šĥé íš ðéáð - áñð Í ðó ñóţ ĥáʋé ţĥé áŕɱ ƒóŕ ĥéŕ.]",
+        "completion": "[Ţĥé ĥáţçĥéŕý íš çóļð áñð ţĥé çŕáţéš áŕé ɱíñé ƒóŕ ĝóóð. Ƒóúñð á šţŕóñĝƀóẋ íñ ţĥé ŵáĝóñ-ƀéð šĥé ŵáš ƀŕóóðíñĝ óñ, šţíļļ šéáļéð. Šĥé ĝúáŕðéð ɱý ƒóŕţúñé ƒóŕ ɱé, ţĥé óļð ĥóŕŕóŕ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥé Ɓŕóóðɱóţĥéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_salvage_drowned": {
+        "title": "[Ðóŵñ Áɱóñĝ ţĥé Ðŕóŵñéð]",
+        "text": "[Ţĥé óļðéšţ ŵŕéçķ óƒ áļļ ļíéš ñóŕţĥ, úñðéŕ ţĥé Ðŕóŵñéð Çĥáþéļ - áñð íţš çŕéŵ ñéʋéŕ ļéƒţ íţ. Ţĥé ðŕóŵñéð ðéáð šţíļļ çŕéŵ ţĥé ĥóļð, áñð ţĥéý ţáķé íţ íļļ ŵĥéñ á ļíʋíñĝ ɱáñ ŕéáçĥéš ƒóŕ ţĥé šţŕóñĝŕóóɱ. Þúţ 10 óƒ ţĥéɱ ðóŵñ, {playerName}, áñð ţĥé šţŕóñĝŕóóɱ íš óúŕš.]",
+        "completion": "[Ţĥéý šáñķ ŵíţĥ á çĥáþéļ-ţíţĥé íñ ţĥé šţŕóñĝŕóóɱ - ĝóļð çáñðļéšţíçķš, á ŕéļíɋúáŕý, çóíñ éñóúĝĥ ţó çĥóķé á ƒíšĥ. Ţĥé ðéáð ķééþ ţĥé ƀéšţ ʋáúļţš, {playerName}, ƀéçáúšé ñó ţĥíéƒ ðáŕéš ţĥéɱ. Ñó ţĥíéƒ ƀúţ úš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðŕóŵñéð Ðéáð þúţ ðóŵñ]"
+          }
+        }
+      },
+      "q_salvage_bloats": {
+        "title": "[Ĝáš íñ ţĥé Ðíʋé-Ļáñé]",
+        "text": "[Ɱý šáƒéšţ ðíʋé-ļáñé ŕúñš ţĥé éášţéŕñ šĥéļƒ - éẋçéþţ ţĥé ƀóĝ ƀļóáţš ĥáʋé ðŕíƒţéð íñţó íţ, ƒáţ ŵíţĥ ɱáŕšĥ-ĝáš, áñð óñé ƀúŕšţ úñðéŕŵáţéŕ ŵíļļ šţóþ á ðíʋéŕ’š ĥéáŕţ. Í ŵíļļ ñóţ šéñð ɱýšéļƒ ðóŵñ ţĥŕóúĝĥ ţĥéɱ. Þóþ 10 óúţ óñ ţĥé šĥéļƒ, {playerName}, áñð çļéáŕ ɱý ļáñé.]",
+        "completion": "[Ţĥé ļáñé íš çļéáŕ áñð ţĥé ŵáţéŕ ñó ļóñĝéŕ ƒížžéš ŵíţĥ ţĥéíŕ šţíñķ. Í çáñ ðŕóþ á ļíñé ţĥéŕé ñóŵ ŵíţĥóúţ ŵóñðéŕíñĝ íƒ Í ŵíļļ çóɱé ƀáçķ úþ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓóĝ Ɓļóáţ þóþþéð]"
+          }
+        }
+      },
+      "q_salvage_barrows": {
+        "title": "[Ţŕóļļš óñ ţĥé Ɓáŕŕóŵ-Çáŕĝó]",
+        "text": "[Ñóţ áļļ ţĥé ŵéáļţĥ šáñķ - šóɱé ŵáš ƀúŕíéð. Ţĥé šóúţĥéášţ ƀáŕŕóŵ-ɱóúñðš ĥóļð ĝŕáʋé-ĝóóðš ƒŕóɱ ƀéƒóŕé ţĥé ƒéñ ðŕóŵñéð ţĥé ŕóáð, áñð ţĥé Ɱíŕéƒéñ ţŕóļļš ĥáʋé ðúĝ íñ áţóþ ţĥéɱ ţó ĝñáŵ ţĥé ƀóñéš. Ðŕíʋé óƒƒ 10, {playerName}, áñð ţĥé ƀáŕŕóŵš áŕé óþéñ ðíĝĝíñĝ.]",
+        "completion": "[Ţĥé ɱóúñðš áŕé ɋúíéţ áñð ţĥé ðíĝĝíñĝ íš ĝóóð - ţóŕçš, áɱƀéŕ, á ƀŕóñžé šŵóŕð ĝŕééñ ŵíţĥ áĝé ƀúţ ŵóŕţĥ á ñóƀļé’š ŕáñšóɱ ţó ţĥé ŕíĝĥţ çóļļéçţóŕ. Ţĥé ţŕóļļš ŵéŕé šíţţíñĝ óñ á ɱúšéúɱ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱíŕéƒéñ Ţŕóļļ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_salvage_robes": {
+        "title": "[Ŕóƀéš Óʋéŕ ţĥé Ŕéļíɋúáŕý]",
+        "text": "[Ţĥé ðééþ ƒéñ ĥóļðš ţĥé þŕížé - á šúñķéñ ŕéļíɋúáŕý ƀáŕĝé, áñð Í áɱ ñóţ ţĥé óñļý óñé ŵĥó ķñóŵš íţ. Ţĥé Ĝŕáʋéçáļļéŕš ĥáʋé çáɱþéð ţĥé ðééþ ŕééðš ţó ðŕéðĝé íţ ƒóŕ ţĥéíŕ óŵñ ðáŕķ ñééðš. Ɓŕéáķ ţĥéíŕ ĥóļð, {playerName} - 10 çúļţíšţš - ƀéƒóŕé ţĥéý çáŕţ óƒƒ ŵĥáţ íš ŕíĝĥţƒúļļý šáļʋáĝé.]",
+        "completion": "[Ţĥéíŕ ðŕéðĝíñĝ-çáɱþ íš ƀŕóķéñ áñð ţĥé ŕéļíɋúáŕý íš óúŕš ţó ŕáíšé. Ŵĥáţéʋéŕ ţĥéý ŵáñţéð ƒŕóɱ íţ, ţĥéý ŵíļļ ñóţ ĥáʋé. Ļéţ ţĥé ðéáð ţĥíñĝš šţáý šóļð ţó ĥóñéšţ ƀúýéŕš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕáʋéçáļļéŕ Çúļţíšţ šļáíñ]"
+          }
+        }
+      },
+      "q_salvage_glutton": {
+        "title": "[Ţĥé Ĝļúţţóñ'š Ɓéļļý]",
+        "text": "[Óñé ļášţ ĥáúļ, áñð ţĥé šţŕáñĝéšţ. Ĝŕúƀĵáŵ ţĥé Ĝļúţţóñ šŵáļļóŵéð á šéáļéð šţŕóñĝƀóẋ ŵĥóļé ŵĥéñ ţĥé ŕéļíɋúáŕý ƀáŕĝé ƀŕóķé úþ - Í ŵáţçĥéð ĥíɱ ðó íţ, ţĥé ĝŕééðý ĥíļļ óƒ á ţŕóļļ. Çúţ íţ óúţ óƒ ĥíɱ, {playerName}, áñð ţĥé Ðééþƒéñ Šáļʋáĝé íš ƒíñíšĥéð, éʋéŕý ŵŕéçķ óñ ţĥé ɱáþ ŕáíšéð.]",
+        "completion": "[Ţĥéŕé íţ íš, {playerName} - ţĥé ɱášţéŕ-çĥéšţ, šļíçķ ƀúţ šéáļéð, þŕíšéð óúţ óƒ á ĝļúţţóñ’š ĝúţ. Óþéñ íţ óñ ţĥé ƀŕíðĝé ţóñíĝĥţ ŵĥéŕé ţĥé ŵĥóļé ţóŵñ çáñ šéé: á ĥúñðŕéð ýéáŕš óƒ ţĥé ƒéñ’š ðŕóŵñéð ƒóŕţúñé, ŕáíšéð áţ ļášţ. Ŵé ðíð íţ, ðíʋéŕ. Ŵé ŕáíšéð ţĥé ļóţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕúƀĵáŵ ţĥé Ĝļúţţóñ šļáíñ]"
           }
         }
       },
