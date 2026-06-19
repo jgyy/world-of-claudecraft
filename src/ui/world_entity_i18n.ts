@@ -51,6 +51,7 @@ const NPC_IDS = [
   'loremaster_caddis', 'ranger_elwyn', 'antiquarian_veska',
   'loremaster_caddis', 'ranger_elwyn', 'beekeeper_orla',
   'loremaster_caddis', 'ranger_elwyn', 'lampwright_sefa',
+  'loremaster_caddis', 'ranger_elwyn', 'salvager_brel',
 ] as const;
 
 const QUEST_IDS = [
@@ -110,6 +111,9 @@ const QUEST_IDS = [
   'q_lamp_first_night', 'q_lamp_boars', 'q_lamp_foxes', 'q_lamp_webs',
   'q_lamp_badgers', 'q_lamp_snuffers', 'q_lamp_lakeroad', 'q_lamp_lynx',
   'q_lamp_bears', 'q_lamp_the_walking_lights',
+  'q_salvage_bank', 'q_salvage_snappers', 'q_salvage_ravenous', 'q_salvage_webs',
+  'q_salvage_brood', 'q_salvage_drowned', 'q_salvage_bloats', 'q_salvage_barrows',
+  'q_salvage_robes', 'q_salvage_glutton',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
