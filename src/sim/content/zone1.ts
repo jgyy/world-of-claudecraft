@@ -551,6 +551,16 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
       'q_bounty_verlan', 'q_bounty_maldrec',
     ],
     greeting: 'New posters every week, $C, and the ink never dries. Read the board — the bold ones earn coin.',
+  innkeeper_wenna: {
+    id: 'innkeeper_wenna', name: 'Innkeeper Wenna', title: 'Keeper of the Brightwood Tap',
+    // outside the tavern on the square's west side, sleeves rolled up
+    pos: { x: -11, z: 16 }, facing: -2.4, color: 0xb9770e,
+    questIds: [
+      'q_tap_cellar_rats', 'q_tap_table_fowl', 'q_tap_spit_boar', 'q_tap_house_wolves',
+      'q_tap_cellar_spiders', 'q_tap_prized_greyjaw', 'q_tap_unpaid_tab', 'q_tap_venison',
+      'q_tap_gorrak_raid', 'q_harvest_feast',
+    ],
+    greeting: "The Brightwood Tap's been shuttered a season, $N, but I mean to throw a Harvest Feast that Eastbrook will talk about for years. Lend me a strong arm and there's coin — and a warm hearth — in it for you.",
   },
 };
 
@@ -1107,6 +1117,99 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     requiresQuest: 'q_bounty_verlan',
     minLevel: 7,
     suggestedPlayers: 2,
+  // --- The Brightwood Tap: Innkeeper Wenna's Harvest Feast chain ---
+  q_tap_cellar_rats: {
+    id: 'q_tap_cellar_rats', name: 'Cellar Cleaning',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: "A season shuttered and the tap-cellar has become a warren, $N. Tunnel rats have chewed through half my ale-barrels and nest in the old mine-cut beneath the floor. I cannot serve a soul until they are gone — clear out 10 Tunnel Rat Diggers and I can roll fresh casks in.",
+    completionText: 'Listen to that — not a squeak. The cellar is mine again. Have a seat by the hearth while I draw you something.',
+    objectives: [{ type: 'kill', targetMobId: 'tunnel_rat', count: 10, label: 'Tunnel Rat Digger cleared' }],
+    xpReward: 320, copperReward: 90, itemRewards: {},
+    minLevel: 4,
+  },
+  q_tap_table_fowl: {
+    id: 'q_tap_table_fowl', name: 'Fowl for the Table',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: 'A feast needs a roast, and nothing roasts sweeter than the long-legged cranes that wade the glade meadows. Bring me 8 Meadow Cranes, $N, and I will have the spits turning by week\'s end.',
+    completionText: 'Eight fat cranes — the smell alone will pull half the Vale to my door. Well hunted.',
+    objectives: [{ type: 'kill', targetMobId: 'meadow_crane', count: 8, label: 'Meadow Crane taken' }],
+    xpReward: 380, copperReward: 110, itemRewards: {},
+    requiresQuest: 'q_tap_cellar_rats', minLevel: 4,
+  },
+  q_tap_spit_boar: {
+    id: 'q_tap_spit_boar', name: 'A Boar for the Spit',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: 'Cranes for the gentry, but the farmhands want pork, and plenty of it. The wild boars root the fields east of town gone to ruin anyway — do the farmers a kindness and bring my larder 8 Wild Boar, $N.',
+    completionText: 'That is pork enough to feed a barn-raising. The farmers will thank you near as loud as I do.',
+    objectives: [{ type: 'kill', targetMobId: 'wild_boar', count: 8, label: 'Wild Boar felled' }],
+    xpReward: 420, copperReward: 130, itemRewards: {},
+    requiresQuest: 'q_tap_table_fowl', minLevel: 5,
+  },
+  q_tap_house_wolves: {
+    id: 'q_tap_house_wolves', name: 'Wolves Off the Doorstep',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: 'Word of a feast travels, and not only to honest folk — the forest wolves have grown bold enough to slink the north road after my supply carts. I\'ll not have guests savaged on their way to my door. Thin the pack, $N: 10 Forest Wolves.',
+    completionText: 'The road feels safe enough for a carter to whistle on now. My drovers can roll in without an escort. Good.',
+    objectives: [{ type: 'kill', targetMobId: 'forest_wolf', count: 10, label: 'Forest Wolf slain' }],
+    xpReward: 460, copperReward: 150, itemRewards: {},
+    requiresQuest: 'q_tap_spit_boar', minLevel: 5,
+  },
+  q_tap_cellar_spiders: {
+    id: 'q_tap_cellar_spiders', name: 'Webs in the Stores',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: 'No sooner do I stock the back stores than webwood lurkers spin them shut from the eastern woods. My maids will not set foot in there, and I cannot blame them. Burn them out for me, $N — 8 Webwood Lurkers — so I can hang the larder properly.',
+    completionText: 'Every web swept and the stores dry and clean. I can finally hang the smoked meat where it belongs. My thanks.',
+    objectives: [{ type: 'kill', targetMobId: 'webwood_spider', count: 8, label: 'Webwood Lurker burned out' }],
+    xpReward: 500, copperReward: 170, itemRewards: {},
+    requiresQuest: 'q_tap_house_wolves', minLevel: 5,
+  },
+  q_tap_prized_greyjaw: {
+    id: 'q_tap_prized_greyjaw', name: 'The Prized Tusker',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: 'Every Harvest Feast wants a centerpiece, $N, and there is none finer than Old Greyjaw — the grey-tusked terror that has outrun every hunter in the Vale for a decade. Bring me that beast and it will turn on my grandest spit. Take a friend; he has earned his name.',
+    completionText: 'Old Greyjaw himself, on my table! There is not a tavern from here to the capital that will boast a centerpiece to match it. You have made this feast, $N.',
+    objectives: [{ type: 'kill', targetMobId: 'old_greyjaw', count: 1, label: 'Old Greyjaw slain' }],
+    xpReward: 700, copperReward: 280, itemRewards: {},
+    requiresQuest: 'q_tap_cellar_spiders', minLevel: 5, suggestedPlayers: 2,
+  },
+  q_tap_unpaid_tab: {
+    id: 'q_tap_unpaid_tab', name: 'The Unpaid Tab',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: 'The vale bandits have a long tab at my tap and no intention of paying it — last night they waylaid the cart carrying my feast-day casks. I want my ale back and a message sent. Cut down 10 Vale Bandits, $N, and let the rest learn the Brightwood Tap is not an easy mark.',
+    completionText: 'Word\'s already spread — the bandits give my carts a wide berth now. Consider their tab paid in full, in the only coin they understand.',
+    objectives: [{ type: 'kill', targetMobId: 'vale_bandit', count: 10, label: 'Vale Bandit cut down' }],
+    xpReward: 560, copperReward: 200, itemRewards: {},
+    requiresQuest: 'q_tap_prized_greyjaw', minLevel: 5,
+  },
+  q_tap_venison: {
+    id: 'q_tap_venison', name: 'Venison for the Hall',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: 'A grand hall wants grand venison, and the brightwood stags of the glade are the proudest deer in the realm. Take 8 of them, $N — clean kills, mind, I want the cuts unspoiled — and the Feast will want for no meat at all.',
+    completionText: 'Eight stags, every cut clean as a butcher\'s. The hall will smell of roast venison for a week. You hunt like a poacher and I mean that kindly.',
+    objectives: [{ type: 'kill', targetMobId: 'brightwood_stag', count: 8, label: 'Brightwood Stag taken' }],
+    xpReward: 620, copperReward: 230, itemRewards: {},
+    requiresQuest: 'q_tap_unpaid_tab', minLevel: 6,
+  },
+  q_tap_gorrak_raid: {
+    id: 'q_tap_gorrak_raid', name: 'Gorrak\'s Greed',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: 'Disaster, $N — Gorrak the Ruthless and his brutes have sniffed out my feast-stores and mean to plunder the lot before the first guest arrives. He camps in the southeast with his ill-gotten haul. End him and take back what is mine, or there will be no Feast at all. He is no common cutthroat; do not face him alone.',
+    completionText: 'Gorrak, dead, and my stores hauled back to the cellar where they belong. You saved the Feast outright, $N — I\'ll not forget it.',
+    objectives: [{ type: 'kill', targetMobId: 'gorrak', count: 1, label: 'Gorrak the Ruthless slain' }],
+    xpReward: 760, copperReward: 320, itemRewards: {},
+    requiresQuest: 'q_tap_venison', minLevel: 6, suggestedPlayers: 2,
+  },
+  q_harvest_feast: {
+    id: 'q_harvest_feast', name: 'The Harvest Feast',
+    giverNpcId: 'innkeeper_wenna', turnInNpcId: 'innkeeper_wenna',
+    text: 'One last gather and the Brightwood Tap opens its doors, $N. The grand board still wants its finest fare: 5 Grovetusk Boar for the crackling, and 5 Sunhide Bear so I can lay on bear-stew the old way. Bring them in and the Harvest Feast is yours to open beside me.',
+    completionText: 'Listen to that hall, $N — fiddles, full cups, and not an empty plate in the house. The Brightwood Tap stands open because you made it stand, and your seat at the head of the board is kept warm for as long as you care to claim it.',
+    objectives: [
+      { type: 'kill', targetMobId: 'grovetusk_boar', count: 5, label: 'Grovetusk Boar taken' },
+      { type: 'kill', targetMobId: 'sunhide_bear', count: 5, label: 'Sunhide Bear taken' },
+    ],
+    xpReward: 1100, copperReward: 460, itemRewards: {},
+    requiresQuest: 'q_tap_gorrak_raid', minLevel: 6,
   },
 };
 
@@ -1129,6 +1232,10 @@ export const ZONE1_QUEST_ORDER = [
   'q_bounty_wolves', 'q_bounty_boars', 'q_bounty_bristleback', 'q_bounty_webwood',
   'q_bounty_matriarch', 'q_bounty_mudfin', 'q_bounty_bandits', 'q_bounty_restless',
   'q_bounty_verlan', 'q_bounty_maldrec',
+  // The Brightwood Tap Harvest Feast chain
+  'q_tap_cellar_rats', 'q_tap_table_fowl', 'q_tap_spit_boar', 'q_tap_house_wolves',
+  'q_tap_cellar_spiders', 'q_tap_prized_greyjaw', 'q_tap_unpaid_tab', 'q_tap_venison',
+  'q_tap_gorrak_raid', 'q_harvest_feast',
 ];
 
 // ---------------------------------------------------------------------------

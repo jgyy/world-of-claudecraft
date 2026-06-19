@@ -45,6 +45,7 @@ const NPC_IDS = [
   'loremaster_caddis', 'ranger_elwyn', 'bounty_master_corwin',
   'loremaster_caddis', 'ranger_elwyn', 'cartographer_innes',
   'loremaster_caddis', 'ranger_elwyn', 'prospector_dunmar',
+  'loremaster_caddis', 'ranger_elwyn', 'innkeeper_wenna',
 ] as const;
 
 const QUEST_IDS = [
@@ -84,6 +85,9 @@ const QUEST_IDS = [
   'q_deeprock_survey', 'q_deeprock_burrows', 'q_deeprock_foreman', 'q_ore_wagons',
   'q_crusher_threat', 'q_cragmaw_hunt', 'q_unstable_seams', 'q_shardlord',
   'q_old_diggers', 'q_deeprock_concession',
+  'q_tap_cellar_rats', 'q_tap_table_fowl', 'q_tap_spit_boar', 'q_tap_house_wolves',
+  'q_tap_cellar_spiders', 'q_tap_prized_greyjaw', 'q_tap_unpaid_tab', 'q_tap_venison',
+  'q_tap_gorrak_raid', 'q_harvest_feast',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
