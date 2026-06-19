@@ -3393,6 +3393,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4248,6 +4253,109 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -7856,6 +7964,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8711,6 +8824,109 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -12319,6 +12535,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13174,6 +13395,109 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -16782,6 +17106,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17637,6 +17966,109 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -21245,6 +21677,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22100,6 +22537,109 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -25708,6 +26248,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26563,6 +27108,109 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -30171,6 +30819,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -31026,6 +31679,109 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -34634,6 +35390,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35489,6 +36250,109 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -39097,6 +39961,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39952,6 +40821,109 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -43560,6 +44532,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44415,6 +45392,109 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -48023,6 +49103,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48878,6 +49963,109 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -52486,6 +53674,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53341,6 +54534,109 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -56949,6 +58245,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57804,6 +59105,109 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
           }
         }
       },
@@ -61412,6 +62816,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "prospector_dunmar": {
+        "name": "Prospector Dunmar",
+        "title": "Deeprock Concessioner",
+        "greeting": "Highwatch sits on the richest ironvein this side of the pass, {playerName}, and not one cart rolls because every shaft is full of teeth. Help me change that and the Concession pays in coin."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62270,6 +63679,109 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_deeprock_survey": {
+        "title": "Survey the Ridge",
+        "text": "Before a single pick swings, {playerName}, the road to the Deeprock Burrows has to be safe for an ore cart. Ridge stalkers have denned along the western ridge and they take down mules for sport. Cull eight of them and I can mark a haul route.",
+        "completion": "Eight fewer ambushes between here and the burrows. Good. Now we can talk about the burrows themselves.",
+        "objectives": {
+          "0": {
+            "label": "Ridge Stalker slain"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "Into the Burrows",
+        "text": "The Deeprock kobolds have claimed every shaft west of here, {playerName}, and they guard the ore like it was their own teeth. Thin them out - slay ten Deeprock Kobolds so my diggers can reach the seams.",
+        "completion": "That will give the diggers room to work. But there is one kobold who calls himself foreman, and he will not scatter so easily.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold slain"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "The Ironvein Foreman",
+        "text": "The kobolds answer to one of their own - the Ironvein Foreman - and while he holds the deepest shaft they will keep coming back. He is more than a match for one digger, {playerName}. Take companions, end him, and the burrows are ours.",
+        "completion": "The foreman is dead and the deep shaft is quiet. The Concession owes you, and the Concession pays.",
+        "objectives": {
+          "0": {
+            "label": "Ironvein Foreman defeated"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "Raiders on the Haul Road",
+        "text": "No sooner do the carts roll than the Thornpeak ogres tip them into the gullies for the iron banding. I cannot make payroll if my ore feeds ogre forges, {playerName}. Break their raiding bands - ten Thornpeak Ogres in the eastern foothills.",
+        "completion": "The wagons are getting through again. You have a knack for clearing my ledger of red ink.",
+        "objectives": {
+          "0": {
+            "label": "Thornpeak Ogre slain"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "Crushers at the Cut",
+        "text": "The ogres have brought up their heavy ones - the Crushers - to wall off the upper cut where the best ore lies. They are slow but they hit like a rockfall, {playerName}. Put down eight Ogre Crushers and the cut is open.",
+        "completion": "Eight crushers down. The upper cut is the richest ground on the mountain - you have earned a share of it.",
+        "objectives": {
+          "0": {
+            "label": "Ogre Crusher slain"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "Old Cragmaw",
+        "text": "Something old and mean prowls the ridge north of the road - the miners call it Old Cragmaw. It has dragged off two of my surveyors already. Hunt it down before it takes a third, {playerName}. Bring a friend; it is no common beast.",
+        "completion": "So the old terror is finished. My surveyors can sleep without one eye open. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Old Cragmaw slain"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "Unstable Seams",
+        "text": "The deeper we dig toward Stormcrag, the more the rock wakes up. Living storms - Stormcrag elementals - boil out of every fresh seam and cook my crews where they stand. Disperse ten of them, {playerName}, before the whole face goes live.",
+        "completion": "The seams have settled. I have never seen ore answer back before - but you handled it.",
+        "objectives": {
+          "0": {
+            "label": "Stormcrag Elemental dispersed"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "The Shardlord",
+        "text": "The elementals have a master - Shardlord Kazzix - and as long as it binds the storm into the rock, the face will never hold. This is a lord of its kind, {playerName}; gather a party worthy of it. Shatter Kazzix and Stormcrag is mine to mine.",
+        "completion": "Kazzix is broken into harmless gravel. The richest face on the mountain is open at last - and it is open because of you.",
+        "objectives": {
+          "0": {
+            "label": "Shardlord Kazzix shattered"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "The Old Diggers",
+        "text": "There were crews on this mountain long before mine, {playerName}, and the lower seams gave them no graves - only the rock that buried them. They walk now as boneclad revenants, and they do not take kindly to new diggers. Lay ten of them to rest.",
+        "completion": "Rest at last for the old crews. I will see a marker raised for them when the coin allows. You have my thanks.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant laid to rest"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "The Deeprock Concession",
+        "text": "One last sweep, {playerName}, and Highwatch has its mine back. The kobolds still test the burrows and the ogres still test the haul road - show them the Concession holds this ground. Clear five Deeprock Kobolds and five Thornpeak Ogres, and the first cart of clean iron rolls in your name.",
+        "completion": "Listen to that - wheels on stone, the first full cart in a year. The Deeprock Concession stands because you made it stand, {playerName}. Your share is waiting, and so is a place on the books whenever you want one.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Kobold cleared"
+          },
+          "1": {
+            "label": "Thornpeak Ogre cleared"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62521,6 +64033,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62533,6 +64048,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62575,6 +64115,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62694,6 +64250,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62706,6 +64265,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62748,6 +64332,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -62867,6 +64467,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -62879,6 +64482,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -62921,6 +64549,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63040,6 +64684,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63052,6 +64699,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63094,6 +64766,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63214,6 +64902,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63226,6 +64917,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63268,6 +64984,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63387,6 +65119,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63399,6 +65134,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63441,6 +65201,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63560,6 +65336,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63572,6 +65351,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63614,6 +65418,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63733,6 +65553,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63745,6 +65568,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63787,6 +65635,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -63906,6 +65770,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -63918,6 +65785,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -63960,6 +65852,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64079,6 +65987,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64091,6 +66002,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64133,6 +66069,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64252,6 +66204,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64264,6 +66219,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64306,6 +66286,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -64425,6 +66421,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.prospector_dunmar.greeting",
+    "entities.npcs.prospector_dunmar.name",
+    "entities.npcs.prospector_dunmar.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -64437,6 +66436,31 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_brightwood_thinning.objectives.1.label",
     "entities.quests.q_brightwood_thinning.text",
     "entities.quests.q_brightwood_thinning.title",
+    "entities.quests.q_cragmaw_hunt.completion",
+    "entities.quests.q_cragmaw_hunt.objectives.0.label",
+    "entities.quests.q_cragmaw_hunt.text",
+    "entities.quests.q_cragmaw_hunt.title",
+    "entities.quests.q_crusher_threat.completion",
+    "entities.quests.q_crusher_threat.objectives.0.label",
+    "entities.quests.q_crusher_threat.text",
+    "entities.quests.q_crusher_threat.title",
+    "entities.quests.q_deeprock_burrows.completion",
+    "entities.quests.q_deeprock_burrows.objectives.0.label",
+    "entities.quests.q_deeprock_burrows.text",
+    "entities.quests.q_deeprock_burrows.title",
+    "entities.quests.q_deeprock_concession.completion",
+    "entities.quests.q_deeprock_concession.objectives.0.label",
+    "entities.quests.q_deeprock_concession.objectives.1.label",
+    "entities.quests.q_deeprock_concession.text",
+    "entities.quests.q_deeprock_concession.title",
+    "entities.quests.q_deeprock_foreman.completion",
+    "entities.quests.q_deeprock_foreman.objectives.0.label",
+    "entities.quests.q_deeprock_foreman.text",
+    "entities.quests.q_deeprock_foreman.title",
+    "entities.quests.q_deeprock_survey.completion",
+    "entities.quests.q_deeprock_survey.objectives.0.label",
+    "entities.quests.q_deeprock_survey.text",
+    "entities.quests.q_deeprock_survey.title",
     "entities.quests.q_ledger_brood.completion",
     "entities.quests.q_ledger_brood.objectives.0.label",
     "entities.quests.q_ledger_brood.text",
@@ -64479,6 +66503,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_ledger_vigil.objectives.0.label",
     "entities.quests.q_ledger_vigil.text",
     "entities.quests.q_ledger_vigil.title",
+    "entities.quests.q_old_diggers.completion",
+    "entities.quests.q_old_diggers.objectives.0.label",
+    "entities.quests.q_old_diggers.text",
+    "entities.quests.q_old_diggers.title",
+    "entities.quests.q_ore_wagons.completion",
+    "entities.quests.q_ore_wagons.objectives.0.label",
+    "entities.quests.q_ore_wagons.text",
+    "entities.quests.q_ore_wagons.title",
+    "entities.quests.q_shardlord.completion",
+    "entities.quests.q_shardlord.objectives.0.label",
+    "entities.quests.q_shardlord.text",
+    "entities.quests.q_shardlord.title",
+    "entities.quests.q_unstable_seams.completion",
+    "entities.quests.q_unstable_seams.objectives.0.label",
+    "entities.quests.q_unstable_seams.text",
+    "entities.quests.q_unstable_seams.title",
     "entities.zones.eastbrook_vale.pois.8.label",
     "fiesta.augment.aug_apex_predator.desc",
     "fiesta.augment.aug_apex_predator.name",
@@ -67972,6 +70012,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "prospector_dunmar": {
+        "name": "[Þŕóšþéçţóŕ Ðúñɱáŕ]",
+        "title": "[Ðééþŕóçķ Çóñçéššíóñéŕ]",
+        "greeting": "[Ĥíĝĥŵáţçĥ šíţš óñ ţĥé ŕíçĥéšţ íŕóñʋéíñ ţĥíš šíðé óƒ ţĥé þášš, {playerName}, áñð ñóţ óñé çáŕţ ŕóļļš ƀéçáúšé éʋéŕý šĥáƒţ íš ƒúļļ óƒ ţééţĥ. Ĥéļþ ɱé çĥáñĝé ţĥáţ áñð ţĥé Çóñçéššíóñ þáýš íñ çóíñ.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68827,6 +70872,109 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_deeprock_survey": {
+        "title": "[Šúŕʋéý ţĥé Ŕíðĝé]",
+        "text": "[Ɓéƒóŕé á šíñĝļé þíçķ šŵíñĝš, {playerName}, ţĥé ŕóáð ţó ţĥé Ðééþŕóçķ Ɓúŕŕóŵš ĥáš ţó ƀé šáƒé ƒóŕ áñ óŕé çáŕţ. Ŕíðĝé šţáļķéŕš ĥáʋé ðéññéð áļóñĝ ţĥé ŵéšţéŕñ ŕíðĝé áñð ţĥéý ţáķé ðóŵñ ɱúļéš ƒóŕ šþóŕţ. Çúļļ éíĝĥţ óƒ ţĥéɱ áñð Í çáñ ɱáŕķ á ĥáúļ ŕóúţé.]",
+        "completion": "[Éíĝĥţ ƒéŵéŕ áɱƀúšĥéš ƀéţŵééñ ĥéŕé áñð ţĥé ƀúŕŕóŵš. Ĝóóð. Ñóŵ ŵé çáñ ţáļķ áƀóúţ ţĥé ƀúŕŕóŵš ţĥéɱšéļʋéš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕíðĝé Šţáļķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_deeprock_burrows": {
+        "title": "[Íñţó ţĥé Ɓúŕŕóŵš]",
+        "text": "[Ţĥé Ðééþŕóçķ ķóƀóļðš ĥáʋé çļáíɱéð éʋéŕý šĥáƒţ ŵéšţ óƒ ĥéŕé, {playerName}, áñð ţĥéý ĝúáŕð ţĥé óŕé ļíķé íţ ŵáš ţĥéíŕ óŵñ ţééţĥ. Ţĥíñ ţĥéɱ óúţ - šļáý ţéñ Ðééþŕóçķ Ķóƀóļðš šó ɱý ðíĝĝéŕš çáñ ŕéáçĥ ţĥé šéáɱš.]",
+        "completion": "[Ţĥáţ ŵíļļ ĝíʋé ţĥé ðíĝĝéŕš ŕóóɱ ţó ŵóŕķ. Ɓúţ ţĥéŕé íš óñé ķóƀóļð ŵĥó çáļļš ĥíɱšéļƒ ƒóŕéɱáñ, áñð ĥé ŵíļļ ñóţ šçáţţéŕ šó éášíļý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþŕóçķ Ķóƀóļð šļáíñ]"
+          }
+        }
+      },
+      "q_deeprock_foreman": {
+        "title": "[Ţĥé Íŕóñʋéíñ Ƒóŕéɱáñ]",
+        "text": "[Ţĥé ķóƀóļðš áñšŵéŕ ţó óñé óƒ ţĥéíŕ óŵñ - ţĥé Íŕóñʋéíñ Ƒóŕéɱáñ - áñð ŵĥíļé ĥé ĥóļðš ţĥé ðééþéšţ šĥáƒţ ţĥéý ŵíļļ ķééþ çóɱíñĝ ƀáçķ. Ĥé íš ɱóŕé ţĥáñ á ɱáţçĥ ƒóŕ óñé ðíĝĝéŕ, {playerName}. Ţáķé çóɱþáñíóñš, éñð ĥíɱ, áñð ţĥé ƀúŕŕóŵš áŕé óúŕš.]",
+        "completion": "[Ţĥé ƒóŕéɱáñ íš ðéáð áñð ţĥé ðééþ šĥáƒţ íš ɋúíéţ. Ţĥé Çóñçéššíóñ óŵéš ýóú, áñð ţĥé Çóñçéššíóñ þáýš.]",
+        "objectives": {
+          "0": {
+            "label": "[Íŕóñʋéíñ Ƒóŕéɱáñ ðéƒéáţéð]"
+          }
+        }
+      },
+      "q_ore_wagons": {
+        "title": "[Ŕáíðéŕš óñ ţĥé Ĥáúļ Ŕóáð]",
+        "text": "[Ñó šóóñéŕ ðó ţĥé çáŕţš ŕóļļ ţĥáñ ţĥé Ţĥóŕñþéáķ óĝŕéš ţíþ ţĥéɱ íñţó ţĥé ĝúļļíéš ƒóŕ ţĥé íŕóñ ƀáñðíñĝ. Í çáññóţ ɱáķé þáýŕóļļ íƒ ɱý óŕé ƒééðš óĝŕé ƒóŕĝéš, {playerName}. Ɓŕéáķ ţĥéíŕ ŕáíðíñĝ ƀáñðš - ţéñ Ţĥóŕñþéáķ Óĝŕéš íñ ţĥé éášţéŕñ ƒóóţĥíļļš.]",
+        "completion": "[Ţĥé ŵáĝóñš áŕé ĝéţţíñĝ ţĥŕóúĝĥ áĝáíñ. Ýóú ĥáʋé á ķñáçķ ƒóŕ çļéáŕíñĝ ɱý ļéðĝéŕ óƒ ŕéð íñķ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéáķ Óĝŕé šļáíñ]"
+          }
+        }
+      },
+      "q_crusher_threat": {
+        "title": "[Çŕúšĥéŕš áţ ţĥé Çúţ]",
+        "text": "[Ţĥé óĝŕéš ĥáʋé ƀŕóúĝĥţ úþ ţĥéíŕ ĥéáʋý óñéš - ţĥé Çŕúšĥéŕš - ţó ŵáļļ óƒƒ ţĥé úþþéŕ çúţ ŵĥéŕé ţĥé ƀéšţ óŕé ļíéš. Ţĥéý áŕé šļóŵ ƀúţ ţĥéý ĥíţ ļíķé á ŕóçķƒáļļ, {playerName}. Þúţ ðóŵñ éíĝĥţ Óĝŕé Çŕúšĥéŕš áñð ţĥé çúţ íš óþéñ.]",
+        "completion": "[Éíĝĥţ çŕúšĥéŕš ðóŵñ. Ţĥé úþþéŕ çúţ íš ţĥé ŕíçĥéšţ ĝŕóúñð óñ ţĥé ɱóúñţáíñ - ýóú ĥáʋé éáŕñéð á šĥáŕé óƒ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Óĝŕé Çŕúšĥéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_cragmaw_hunt": {
+        "title": "[Óļð Çŕáĝɱáŵ]",
+        "text": "[Šóɱéţĥíñĝ óļð áñð ɱéáñ þŕóŵļš ţĥé ŕíðĝé ñóŕţĥ óƒ ţĥé ŕóáð - ţĥé ɱíñéŕš çáļļ íţ Óļð Çŕáĝɱáŵ. Íţ ĥáš ðŕáĝĝéð óƒƒ ţŵó óƒ ɱý šúŕʋéýóŕš áļŕéáðý. Ĥúñţ íţ ðóŵñ ƀéƒóŕé íţ ţáķéš á ţĥíŕð, {playerName}. Ɓŕíñĝ á ƒŕíéñð; íţ íš ñó çóɱɱóñ ƀéášţ.]",
+        "completion": "[Šó ţĥé óļð ţéŕŕóŕ íš ƒíñíšĥéð. Ɱý šúŕʋéýóŕš çáñ šļééþ ŵíţĥóúţ óñé éýé óþéñ. Ŵéļļ ðóñé.]",
+        "objectives": {
+          "0": {
+            "label": "[Óļð Çŕáĝɱáŵ šļáíñ]"
+          }
+        }
+      },
+      "q_unstable_seams": {
+        "title": "[Úñšţáƀļé Šéáɱš]",
+        "text": "[Ţĥé ðééþéŕ ŵé ðíĝ ţóŵáŕð Šţóŕɱçŕáĝ, ţĥé ɱóŕé ţĥé ŕóçķ ŵáķéš úþ. Ļíʋíñĝ šţóŕɱš - Šţóŕɱçŕáĝ éļéɱéñţáļš - ƀóíļ óúţ óƒ éʋéŕý ƒŕéšĥ šéáɱ áñð çóóķ ɱý çŕéŵš ŵĥéŕé ţĥéý šţáñð. Ðíšþéŕšé ţéñ óƒ ţĥéɱ, {playerName}, ƀéƒóŕé ţĥé ŵĥóļé ƒáçé ĝóéš ļíʋé.]",
+        "completion": "[Ţĥé šéáɱš ĥáʋé šéţţļéð. Í ĥáʋé ñéʋéŕ šééñ óŕé áñšŵéŕ ƀáçķ ƀéƒóŕé - ƀúţ ýóú ĥáñðļéð íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šţóŕɱçŕáĝ Éļéɱéñţáļ ðíšþéŕšéð]"
+          }
+        }
+      },
+      "q_shardlord": {
+        "title": "[Ţĥé Šĥáŕðļóŕð]",
+        "text": "[Ţĥé éļéɱéñţáļš ĥáʋé á ɱášţéŕ - Šĥáŕðļóŕð Ķážžíẋ - áñð áš ļóñĝ áš íţ ƀíñðš ţĥé šţóŕɱ íñţó ţĥé ŕóçķ, ţĥé ƒáçé ŵíļļ ñéʋéŕ ĥóļð. Ţĥíš íš á ļóŕð óƒ íţš ķíñð, {playerName}; ĝáţĥéŕ á þáŕţý ŵóŕţĥý óƒ íţ. Šĥáţţéŕ Ķážžíẋ áñð Šţóŕɱçŕáĝ íš ɱíñé ţó ɱíñé.]",
+        "completion": "[Ķážžíẋ íš ƀŕóķéñ íñţó ĥáŕɱļéšš ĝŕáʋéļ. Ţĥé ŕíçĥéšţ ƒáçé óñ ţĥé ɱóúñţáíñ íš óþéñ áţ ļášţ - áñð íţ íš óþéñ ƀéçáúšé óƒ ýóú.]",
+        "objectives": {
+          "0": {
+            "label": "[Šĥáŕðļóŕð Ķážžíẋ šĥáţţéŕéð]"
+          }
+        }
+      },
+      "q_old_diggers": {
+        "title": "[Ţĥé Óļð Ðíĝĝéŕš]",
+        "text": "[Ţĥéŕé ŵéŕé çŕéŵš óñ ţĥíš ɱóúñţáíñ ļóñĝ ƀéƒóŕé ɱíñé, {playerName}, áñð ţĥé ļóŵéŕ šéáɱš ĝáʋé ţĥéɱ ñó ĝŕáʋéš - óñļý ţĥé ŕóçķ ţĥáţ ƀúŕíéð ţĥéɱ. Ţĥéý ŵáļķ ñóŵ áš ƀóñéçļáð ŕéʋéñáñţš, áñð ţĥéý ðó ñóţ ţáķé ķíñðļý ţó ñéŵ ðíĝĝéŕš. Ļáý ţéñ óƒ ţĥéɱ ţó ŕéšţ.]",
+        "completion": "[Ŕéšţ áţ ļášţ ƒóŕ ţĥé óļð çŕéŵš. Í ŵíļļ šéé á ɱáŕķéŕ ŕáíšéð ƒóŕ ţĥéɱ ŵĥéñ ţĥé çóíñ áļļóŵš. Ýóú ĥáʋé ɱý ţĥáñķš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓóñéçļáð Ŕéʋéñáñţ ļáíð ţó ŕéšţ]"
+          }
+        }
+      },
+      "q_deeprock_concession": {
+        "title": "[Ţĥé Ðééþŕóçķ Çóñçéššíóñ]",
+        "text": "[Óñé ļášţ šŵééþ, {playerName}, áñð Ĥíĝĥŵáţçĥ ĥáš íţš ɱíñé ƀáçķ. Ţĥé ķóƀóļðš šţíļļ ţéšţ ţĥé ƀúŕŕóŵš áñð ţĥé óĝŕéš šţíļļ ţéšţ ţĥé ĥáúļ ŕóáð - šĥóŵ ţĥéɱ ţĥé Çóñçéššíóñ ĥóļðš ţĥíš ĝŕóúñð. Çļéáŕ ƒíʋé Ðééþŕóçķ Ķóƀóļðš áñð ƒíʋé Ţĥóŕñþéáķ Óĝŕéš, áñð ţĥé ƒíŕšţ çáŕţ óƒ çļéáñ íŕóñ ŕóļļš íñ ýóúŕ ñáɱé.]",
+        "completion": "[Ļíšţéñ ţó ţĥáţ - ŵĥééļš óñ šţóñé, ţĥé ƒíŕšţ ƒúļļ çáŕţ íñ á ýéáŕ. Ţĥé Ðééþŕóçķ Çóñçéššíóñ šţáñðš ƀéçáúšé ýóú ɱáðé íţ šţáñð, {playerName}. Ýóúŕ šĥáŕé íš ŵáíţíñĝ, áñð šó íš á þļáçé óñ ţĥé ƀóóķš ŵĥéñéʋéŕ ýóú ŵáñţ óñé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ðééþŕóçķ Ķóƀóļð çļéáŕéð]"
+          },
+          "1": {
+            "label": "[Ţĥóŕñþéáķ Óĝŕé çļéáŕéð]"
           }
         }
       },
