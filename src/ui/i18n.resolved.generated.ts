@@ -3377,6 +3377,11 @@ export const en: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -4232,6 +4237,106 @@ export const en: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -7824,6 +7929,11 @@ export const es: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -8679,6 +8789,106 @@ export const es: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -12271,6 +12481,11 @@ export const es_ES: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigía de la Marea",
@@ -13126,6 +13341,106 @@ export const es_ES: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -16718,6 +17033,11 @@ export const fr_FR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -17573,6 +17893,106 @@ export const fr_FR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -21165,6 +21585,11 @@ export const fr_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Veille-marées",
@@ -22020,6 +22445,106 @@ export const fr_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -25612,6 +26137,11 @@ export const en_CA: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -26467,6 +26997,106 @@ export const en_CA: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -30059,6 +30689,11 @@ export const it_IT: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Guardamarea",
@@ -30914,6 +31549,106 @@ export const it_IT: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -34506,6 +35241,11 @@ export const de_DE: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Gezeitenwächter",
@@ -35361,6 +36101,106 @@ export const de_DE: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -38953,6 +39793,11 @@ export const zh_CN: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -39808,6 +40653,106 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -43400,6 +44345,11 @@ export const zh_TW: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -44255,6 +45205,106 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -47847,6 +48897,11 @@ export const ko_KR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
         "title": "조수지기",
@@ -48702,6 +49757,106 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -52294,6 +53449,11 @@ export const ja_JP: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -53149,6 +54309,106 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -56741,6 +58001,11 @@ export const pt_BR: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Vigia das Marés",
@@ -57596,6 +58861,106 @@ export const pt_BR: EnTranslations = {
           },
           "1": {
             "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
           }
         }
       },
@@ -61188,6 +62553,11 @@ export const ru_RU: EnTranslations = {
         "title": "Glade Warden",
         "greeting": "Quiet, {className} - the glade is calm today, and I mean to keep it that way."
       },
+      "beekeeper_orla": {
+        "name": "Beekeeper Orla",
+        "title": "Brightwood Apiarist",
+        "greeting": "Mind the smoker, {className} - calm bees make sweet honey, and angry ones make for a long day."
+      },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
         "title": "Страж приливов",
@@ -62046,6 +63416,106 @@ export const ru_RU: EnTranslations = {
           }
         }
       },
+      "q_apiary_clover": {
+        "title": "Sweet Clover",
+        "text": "My bees forage the clover meadows north of the glade, but the grovetusk boars root it all up before it can flower. No clover, no honey, {playerName}. Drive off 6 Grovetusk Boars and let the blossoms come back.",
+        "completion": "Bless you. By midsummer that meadow will hum loud enough to hear from here.",
+        "objectives": {
+          "0": {
+            "label": "Grovetusk Boar driven off"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "Wax Thieves",
+        "text": "The glade foxes have learned to tip my hive-stands and lick the comb clean - wax, brood and all. Thin 6 Glade Foxes before they teach the whole skulk that trick.",
+        "completion": "Clever things, foxes. A pity, but a beekeeper must choose her bees.",
+        "objectives": {
+          "0": {
+            "label": "Glade Fox thinned"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "The Underminers",
+        "text": "Thornpelt badgers dig their setts right under my hive-stands and the whole frame tips into the dirt come morning. Cull 6 Thornpelt Badgers so my stands sit level again.",
+        "completion": "Solid ground under every hive now. The bees thank you, in their way.",
+        "objectives": {
+          "0": {
+            "label": "Thornpelt Badger culled"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "The Forage Path",
+        "text": "I walk a circuit between the hives twice a day, and a bramble lynx has taken to stalking it. I cannot tend bees with one eye on the brush. Clear 6 Bramble Lynx from the forage path.",
+        "completion": "I can walk my rounds in peace now. That is worth more than coin - but take the coin too.",
+        "objectives": {
+          "0": {
+            "label": "Bramble Lynx cleared"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "Honey Raiders",
+        "text": "A sunhide bear can smash a season of work to splinters in a single night, chasing the honey. Five of them range the upper glade now. Drive off 5 Sunhide Bears, {playerName}, before they find my stands.",
+        "completion": "My hives still stand because of you. I will not forget it.",
+        "objectives": {
+          "0": {
+            "label": "Sunhide Bear driven off"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "Blossom Blight",
+        "text": "My bees range as far as the western woods for early blossom, but the webwood lurkers shroud every flowering branch in silk and the bees will not land. Cull 8 Webwood Lurkers and free the blossoms.",
+        "completion": "The western blooms are open to the air again. Good honey comes of distant flowers.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker culled"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "The Trampled Meadow",
+        "text": "The east meadow was my richest forage until the wild boars made a wallow of it. Thin 8 Wild Boars and give the wildflowers a season to recover.",
+        "completion": "Wildflowers by spring, honey by summer. That is how it is meant to go.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar thinned"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "The Road North",
+        "text": "I send my filled combs to Eastbrook by the north road, but the forest wolves have made it a gauntlet and no carter will take the run. Thin 8 Forest Wolves so my honey reaches the market.",
+        "completion": "The carters will ride again, and Eastbrook will have its honey. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf thinned"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "Clover Gluttons",
+        "text": "The brightwood hares have bred past all reason and they crop the clover to the root before it can flower - and a bee cannot forage a lawn. Thin 8 Brightwood Hares and leave some bloom for my bees.",
+        "completion": "A meadow shared is a meadow that flowers. The balance is kept, thanks to you.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Hare thinned"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "The Monarch of the Glade",
+        "text": "There is one I have feared to name: the Brightwood Monarch, the great moth of the deep glade. Where it roosts the blossom withers and the bees fall silent for days. End it, {playerName}, and the Brightwood will bloom as it has not in living memory. Do not go alone.",
+        "completion": "The glade is waking - you can smell the blossom from here. You have given my bees a future, {playerName}, and Brightwood will taste it in every drop of honey.",
+        "objectives": {
+          "0": {
+            "label": "Brightwood Monarch ended"
+          }
+        }
+      },
       "q_mogger_tracks": {
         "title": "След Моггера",
         "text": "Прежде чем идти на северную дорогу, у Истврука осталась последняя заноза: Моггер. Зверь топчет нижний луг и сводит кабанов с ума. Очистите луг вокруг его следа, чтобы мы поняли, где он прячется.",
@@ -62297,9 +63767,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62458,9 +63971,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62619,9 +64175,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62780,9 +64379,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -62942,9 +64584,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63103,9 +64788,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63264,9 +64992,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63425,9 +65196,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63586,9 +65400,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63747,9 +65604,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -63908,9 +65808,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -64069,9 +66012,52 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.beekeeper_orla.greeting",
+    "entities.npcs.beekeeper_orla.name",
+    "entities.npcs.beekeeper_orla.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
+    "entities.quests.q_apiary_blossom_blight.completion",
+    "entities.quests.q_apiary_blossom_blight.objectives.0.label",
+    "entities.quests.q_apiary_blossom_blight.text",
+    "entities.quests.q_apiary_blossom_blight.title",
+    "entities.quests.q_apiary_clover.completion",
+    "entities.quests.q_apiary_clover.objectives.0.label",
+    "entities.quests.q_apiary_clover.text",
+    "entities.quests.q_apiary_clover.title",
+    "entities.quests.q_apiary_clover_gluttons.completion",
+    "entities.quests.q_apiary_clover_gluttons.objectives.0.label",
+    "entities.quests.q_apiary_clover_gluttons.text",
+    "entities.quests.q_apiary_clover_gluttons.title",
+    "entities.quests.q_apiary_forage_path.completion",
+    "entities.quests.q_apiary_forage_path.objectives.0.label",
+    "entities.quests.q_apiary_forage_path.text",
+    "entities.quests.q_apiary_forage_path.title",
+    "entities.quests.q_apiary_honey_raiders.completion",
+    "entities.quests.q_apiary_honey_raiders.objectives.0.label",
+    "entities.quests.q_apiary_honey_raiders.text",
+    "entities.quests.q_apiary_honey_raiders.title",
+    "entities.quests.q_apiary_moth_monarch.completion",
+    "entities.quests.q_apiary_moth_monarch.objectives.0.label",
+    "entities.quests.q_apiary_moth_monarch.text",
+    "entities.quests.q_apiary_moth_monarch.title",
+    "entities.quests.q_apiary_north_road.completion",
+    "entities.quests.q_apiary_north_road.objectives.0.label",
+    "entities.quests.q_apiary_north_road.text",
+    "entities.quests.q_apiary_north_road.title",
+    "entities.quests.q_apiary_trampled_meadow.completion",
+    "entities.quests.q_apiary_trampled_meadow.objectives.0.label",
+    "entities.quests.q_apiary_trampled_meadow.text",
+    "entities.quests.q_apiary_trampled_meadow.title",
+    "entities.quests.q_apiary_underminers.completion",
+    "entities.quests.q_apiary_underminers.objectives.0.label",
+    "entities.quests.q_apiary_underminers.text",
+    "entities.quests.q_apiary_underminers.title",
+    "entities.quests.q_apiary_waxthieves.completion",
+    "entities.quests.q_apiary_waxthieves.objectives.0.label",
+    "entities.quests.q_apiary_waxthieves.text",
+    "entities.quests.q_apiary_waxthieves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -67588,6 +69574,11 @@ export const en_XA: EnTranslations = {
         "title": "[Ĝļáðé Ŵáŕðéñ]",
         "greeting": "[Ɋúíéţ, {className} - ţĥé ĝļáðé íš çáļɱ ţóðáý, áñð Í ɱéáñ ţó ķééþ íţ ţĥáţ ŵáý.]"
       },
+      "beekeeper_orla": {
+        "name": "[Ɓééķééþéŕ Óŕļá]",
+        "title": "[Ɓŕíĝĥţŵóóð Áþíáŕíšţ]",
+        "greeting": "[Ɱíñð ţĥé šɱóķéŕ, {className} - çáļɱ ƀééš ɱáķé šŵééţ ĥóñéý, áñð áñĝŕý óñéš ɱáķé ƒóŕ á ļóñĝ ðáý.]"
+      },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
         "title": "[Ţíðéŵáţçĥéŕ]",
@@ -68443,6 +70434,106 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_apiary_clover": {
+        "title": "[Šŵééţ Çļóʋéŕ]",
+        "text": "[Ɱý ƀééš ƒóŕáĝé ţĥé çļóʋéŕ ɱéáðóŵš ñóŕţĥ óƒ ţĥé ĝļáðé, ƀúţ ţĥé ĝŕóʋéţúšķ ƀóáŕš ŕóóţ íţ áļļ úþ ƀéƒóŕé íţ çáñ ƒļóŵéŕ. Ñó çļóʋéŕ, ñó ĥóñéý, {playerName}. Ðŕíʋé óƒƒ 6 Ĝŕóʋéţúšķ Ɓóáŕš áñð ļéţ ţĥé ƀļóššóɱš çóɱé ƀáçķ.]",
+        "completion": "[Ɓļéšš ýóú. Ɓý ɱíðšúɱɱéŕ ţĥáţ ɱéáðóŵ ŵíļļ ĥúɱ ļóúð éñóúĝĥ ţó ĥéáŕ ƒŕóɱ ĥéŕé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝŕóʋéţúšķ Ɓóáŕ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_apiary_waxthieves": {
+        "title": "[Ŵáẋ Ţĥíéʋéš]",
+        "text": "[Ţĥé ĝļáðé ƒóẋéš ĥáʋé ļéáŕñéð ţó ţíþ ɱý ĥíʋé-šţáñðš áñð ļíçķ ţĥé çóɱƀ çļéáñ - ŵáẋ, ƀŕóóð áñð áļļ. Ţĥíñ 6 Ĝļáðé Ƒóẋéš ƀéƒóŕé ţĥéý ţéáçĥ ţĥé ŵĥóļé šķúļķ ţĥáţ ţŕíçķ.]",
+        "completion": "[Çļéʋéŕ ţĥíñĝš, ƒóẋéš. Á þíţý, ƀúţ á ƀééķééþéŕ ɱúšţ çĥóóšé ĥéŕ ƀééš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ĝļáðé Ƒóẋ ţĥíññéð]"
+          }
+        }
+      },
+      "q_apiary_underminers": {
+        "title": "[Ţĥé Úñðéŕɱíñéŕš]",
+        "text": "[Ţĥóŕñþéļţ ƀáðĝéŕš ðíĝ ţĥéíŕ šéţţš ŕíĝĥţ úñðéŕ ɱý ĥíʋé-šţáñðš áñð ţĥé ŵĥóļé ƒŕáɱé ţíþš íñţó ţĥé ðíŕţ çóɱé ɱóŕñíñĝ. Çúļļ 6 Ţĥóŕñþéļţ Ɓáðĝéŕš šó ɱý šţáñðš šíţ ļéʋéļ áĝáíñ.]",
+        "completion": "[Šóļíð ĝŕóúñð úñðéŕ éʋéŕý ĥíʋé ñóŵ. Ţĥé ƀééš ţĥáñķ ýóú, íñ ţĥéíŕ ŵáý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ţĥóŕñþéļţ Ɓáðĝéŕ çúļļéð]"
+          }
+        }
+      },
+      "q_apiary_forage_path": {
+        "title": "[Ţĥé Ƒóŕáĝé Þáţĥ]",
+        "text": "[Í ŵáļķ á çíŕçúíţ ƀéţŵééñ ţĥé ĥíʋéš ţŵíçé á ðáý, áñð á ƀŕáɱƀļé ļýñẋ ĥáš ţáķéñ ţó šţáļķíñĝ íţ. Í çáññóţ ţéñð ƀééš ŵíţĥ óñé éýé óñ ţĥé ƀŕúšĥ. Çļéáŕ 6 Ɓŕáɱƀļé Ļýñẋ ƒŕóɱ ţĥé ƒóŕáĝé þáţĥ.]",
+        "completion": "[Í çáñ ŵáļķ ɱý ŕóúñðš íñ þéáçé ñóŵ. Ţĥáţ íš ŵóŕţĥ ɱóŕé ţĥáñ çóíñ - ƀúţ ţáķé ţĥé çóíñ ţóó.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓŕáɱƀļé Ļýñẋ çļéáŕéð]"
+          }
+        }
+      },
+      "q_apiary_honey_raiders": {
+        "title": "[Ĥóñéý Ŕáíðéŕš]",
+        "text": "[Á šúñĥíðé ƀéáŕ çáñ šɱášĥ á šéášóñ óƒ ŵóŕķ ţó šþļíñţéŕš íñ á šíñĝļé ñíĝĥţ, çĥášíñĝ ţĥé ĥóñéý. Ƒíʋé óƒ ţĥéɱ ŕáñĝé ţĥé úþþéŕ ĝļáðé ñóŵ. Ðŕíʋé óƒƒ 5 Šúñĥíðé Ɓéáŕš, {playerName}, ƀéƒóŕé ţĥéý ƒíñð ɱý šţáñðš.]",
+        "completion": "[Ɱý ĥíʋéš šţíļļ šţáñð ƀéçáúšé óƒ ýóú. Í ŵíļļ ñóţ ƒóŕĝéţ íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šúñĥíðé Ɓéáŕ ðŕíʋéñ óƒƒ]"
+          }
+        }
+      },
+      "q_apiary_blossom_blight": {
+        "title": "[Ɓļóššóɱ Ɓļíĝĥţ]",
+        "text": "[Ɱý ƀééš ŕáñĝé áš ƒáŕ áš ţĥé ŵéšţéŕñ ŵóóðš ƒóŕ éáŕļý ƀļóššóɱ, ƀúţ ţĥé ŵéƀŵóóð ļúŕķéŕš šĥŕóúð éʋéŕý ƒļóŵéŕíñĝ ƀŕáñçĥ íñ šíļķ áñð ţĥé ƀééš ŵíļļ ñóţ ļáñð. Çúļļ 8 Ŵéƀŵóóð Ļúŕķéŕš áñð ƒŕéé ţĥé ƀļóššóɱš.]",
+        "completion": "[Ţĥé ŵéšţéŕñ ƀļóóɱš áŕé óþéñ ţó ţĥé áíŕ áĝáíñ. Ĝóóð ĥóñéý çóɱéš óƒ ðíšţáñţ ƒļóŵéŕš.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵéƀŵóóð Ļúŕķéŕ çúļļéð]"
+          }
+        }
+      },
+      "q_apiary_trampled_meadow": {
+        "title": "[Ţĥé Ţŕáɱþļéð Ɱéáðóŵ]",
+        "text": "[Ţĥé éášţ ɱéáðóŵ ŵáš ɱý ŕíçĥéšţ ƒóŕáĝé úñţíļ ţĥé ŵíļð ƀóáŕš ɱáðé á ŵáļļóŵ óƒ íţ. Ţĥíñ 8 Ŵíļð Ɓóáŕš áñð ĝíʋé ţĥé ŵíļðƒļóŵéŕš á šéášóñ ţó ŕéçóʋéŕ.]",
+        "completion": "[Ŵíļðƒļóŵéŕš ƀý šþŕíñĝ, ĥóñéý ƀý šúɱɱéŕ. Ţĥáţ íš ĥóŵ íţ íš ɱéáñţ ţó ĝó.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵíļð Ɓóáŕ ţĥíññéð]"
+          }
+        }
+      },
+      "q_apiary_north_road": {
+        "title": "[Ţĥé Ŕóáð Ñóŕţĥ]",
+        "text": "[Í šéñð ɱý ƒíļļéð çóɱƀš ţó Éášţƀŕóóķ ƀý ţĥé ñóŕţĥ ŕóáð, ƀúţ ţĥé ƒóŕéšţ ŵóļʋéš ĥáʋé ɱáðé íţ á ĝáúñţļéţ áñð ñó çáŕţéŕ ŵíļļ ţáķé ţĥé ŕúñ. Ţĥíñ 8 Ƒóŕéšţ Ŵóļʋéš šó ɱý ĥóñéý ŕéáçĥéš ţĥé ɱáŕķéţ.]",
+        "completion": "[Ţĥé çáŕţéŕš ŵíļļ ŕíðé áĝáíñ, áñð Éášţƀŕóóķ ŵíļļ ĥáʋé íţš ĥóñéý. Ɱý ţĥáñķš, {playerName}.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ ţĥíññéð]"
+          }
+        }
+      },
+      "q_apiary_clover_gluttons": {
+        "title": "[Çļóʋéŕ Ĝļúţţóñš]",
+        "text": "[Ţĥé ƀŕíĝĥţŵóóð ĥáŕéš ĥáʋé ƀŕéð þášţ áļļ ŕéášóñ áñð ţĥéý çŕóþ ţĥé çļóʋéŕ ţó ţĥé ŕóóţ ƀéƒóŕé íţ çáñ ƒļóŵéŕ - áñð á ƀéé çáññóţ ƒóŕáĝé á ļáŵñ. Ţĥíñ 8 Ɓŕíĝĥţŵóóð Ĥáŕéš áñð ļéáʋé šóɱé ƀļóóɱ ƒóŕ ɱý ƀééš.]",
+        "completion": "[Á ɱéáðóŵ šĥáŕéð íš á ɱéáðóŵ ţĥáţ ƒļóŵéŕš. Ţĥé ƀáļáñçé íš ķéþţ, ţĥáñķš ţó ýóú.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓŕíĝĥţŵóóð Ĥáŕé ţĥíññéð]"
+          }
+        }
+      },
+      "q_apiary_moth_monarch": {
+        "title": "[Ţĥé Ɱóñáŕçĥ óƒ ţĥé Ĝļáðé]",
+        "text": "[Ţĥéŕé íš óñé Í ĥáʋé ƒéáŕéð ţó ñáɱé: ţĥé Ɓŕíĝĥţŵóóð Ɱóñáŕçĥ, ţĥé ĝŕéáţ ɱóţĥ óƒ ţĥé ðééþ ĝļáðé. Ŵĥéŕé íţ ŕóóšţš ţĥé ƀļóššóɱ ŵíţĥéŕš áñð ţĥé ƀééš ƒáļļ šíļéñţ ƒóŕ ðáýš. Éñð íţ, {playerName}, áñð ţĥé Ɓŕíĝĥţŵóóð ŵíļļ ƀļóóɱ áš íţ ĥáš ñóţ íñ ļíʋíñĝ ɱéɱóŕý. Ðó ñóţ ĝó áļóñé.]",
+        "completion": "[Ţĥé ĝļáðé íš ŵáķíñĝ - ýóú çáñ šɱéļļ ţĥé ƀļóššóɱ ƒŕóɱ ĥéŕé. Ýóú ĥáʋé ĝíʋéñ ɱý ƀééš á ƒúţúŕé, {playerName}, áñð Ɓŕíĝĥţŵóóð ŵíļļ ţášţé íţ íñ éʋéŕý ðŕóþ óƒ ĥóñéý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɓŕíĝĥţŵóóð Ɱóñáŕçĥ éñðéð]"
           }
         }
       },

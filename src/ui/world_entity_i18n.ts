@@ -41,7 +41,7 @@ const NPC_IDS = [
   'smith_haldren', 'fisherman_brandt', 'foreman_odell', 'warden_fenwick', 'brother_aldric_fen',
   'provisioner_hale', 'herbalist_yara', 'scout_maren', 'captain_thessaly',
   'brother_aldric_highwatch', 'scout_maren_highwatch', 'quartermaster_bree', 'armorer_hode',
-  'loremaster_caddis', 'ranger_elwyn',
+  'loremaster_caddis', 'ranger_elwyn', 'beekeeper_orla',
 ] as const;
 
 const QUEST_IDS = [
@@ -63,6 +63,10 @@ const QUEST_IDS = [
   'q_ledger_first_duty', 'q_ledger_teeth', 'q_ledger_reedwater', 'q_ledger_silk',
   'q_ledger_brood', 'q_ledger_deepvermin', 'q_ledger_toll', 'q_ledger_vigil',
   'q_ledger_great_boar', 'q_ledger_outlaw_captain',
+  'q_apiary_clover', 'q_apiary_waxthieves', 'q_apiary_underminers',
+  'q_apiary_forage_path', 'q_apiary_honey_raiders', 'q_apiary_blossom_blight',
+  'q_apiary_trampled_meadow', 'q_apiary_north_road', 'q_apiary_clover_gluttons',
+  'q_apiary_moth_monarch',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
