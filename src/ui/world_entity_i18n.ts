@@ -54,6 +54,7 @@ const NPC_IDS = [
   'loremaster_caddis', 'ranger_elwyn', 'salvager_brel',
   'loremaster_caddis', 'ranger_elwyn', 'austringer_wrenna',
   'loremaster_caddis', 'ranger_elwyn', 'postmaster_calder',
+  'loremaster_caddis', 'ranger_elwyn', 'saltmaster_calla',
 ] as const;
 
 const QUEST_IDS = [
@@ -122,6 +123,9 @@ const QUEST_IDS = [
   'q_post_firstrun', 'q_post_meadow', 'q_post_reedwater', 'q_post_eastwood',
   'q_post_collapse', 'q_post_tollroad', 'q_post_greyjaw', 'q_post_chapelnight',
   'q_post_cache', 'q_post_burned_post',
+  'q_saltern_pansward', 'q_saltern_foulpans', 'q_saltern_snappers', 'q_saltern_webs',
+  'q_saltern_panbreaker', 'q_saltern_drowned', 'q_saltern_reedburners',
+  'q_saltern_cursers', 'q_saltern_menders', 'q_saltern_brinedevil',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
