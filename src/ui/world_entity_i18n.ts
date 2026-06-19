@@ -41,7 +41,7 @@ const NPC_IDS = [
   'smith_haldren', 'fisherman_brandt', 'foreman_odell', 'warden_fenwick', 'brother_aldric_fen',
   'provisioner_hale', 'herbalist_yara', 'scout_maren', 'captain_thessaly',
   'brother_aldric_highwatch', 'scout_maren_highwatch', 'quartermaster_bree', 'armorer_hode',
-  'loremaster_caddis', 'ranger_elwyn',
+  'loremaster_caddis', 'ranger_elwyn', 'bounty_master_corwin',
 ] as const;
 
 const QUEST_IDS = [
@@ -63,6 +63,9 @@ const QUEST_IDS = [
   'q_ledger_first_duty', 'q_ledger_teeth', 'q_ledger_reedwater', 'q_ledger_silk',
   'q_ledger_brood', 'q_ledger_deepvermin', 'q_ledger_toll', 'q_ledger_vigil',
   'q_ledger_great_boar', 'q_ledger_outlaw_captain',
+  'q_bounty_wolves', 'q_bounty_boars', 'q_bounty_bristleback', 'q_bounty_webwood',
+  'q_bounty_matriarch', 'q_bounty_mudfin', 'q_bounty_bandits', 'q_bounty_restless',
+  'q_bounty_verlan', 'q_bounty_maldrec',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
