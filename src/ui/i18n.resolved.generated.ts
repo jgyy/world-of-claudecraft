@@ -450,6 +450,54 @@ export const en: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -5198,6 +5246,54 @@ export const es: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -9946,6 +10042,54 @@ export const es_ES: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -14694,6 +14838,54 @@ export const fr_FR: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -19442,6 +19634,54 @@ export const fr_CA: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -24190,6 +24430,54 @@ export const en_CA: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -28938,6 +29226,54 @@ export const it_IT: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -33686,6 +34022,54 @@ export const de_DE: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -38434,6 +38818,54 @@ export const zh_CN: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -43182,6 +43614,54 @@ export const zh_TW: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -47930,6 +48410,54 @@ export const ko_KR: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -52678,6 +53206,54 @@ export const ja_JP: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -57426,6 +58002,54 @@ export const pt_BR: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -62174,6 +62798,54 @@ export const ru_RU: EnTranslations = {
       "aug_ascendant": {
         "name": "Ascendant",
         "desc": "+45% healing, +25% spell damage, +20% maximum health."
+      },
+      "aug_bulwark": {
+        "name": "Bulwark",
+        "desc": "Gain 350 armor. Hold the line."
+      },
+      "aug_zealotry": {
+        "name": "Zealotry",
+        "desc": "Gain 200 attack power. Swing with purpose."
+      },
+      "aug_focus": {
+        "name": "Focus",
+        "desc": "+6% critical strike and +8% spell damage. Sharpen the mind."
+      },
+      "aug_second_wind": {
+        "name": "Second Wind",
+        "desc": "Heal for 8% of all damage you deal. Keep moving."
+      },
+      "aug_executioner": {
+        "name": "Executioner",
+        "desc": "+22% physical damage and +8% crit. Finish what you start."
+      },
+      "aug_stormcaller": {
+        "name": "Stormcaller",
+        "desc": "+22% spell damage and +12% move speed. Kite and burn."
+      },
+      "aug_bastion": {
+        "name": "Bastion",
+        "desc": "+15% maximum health, +350 armor and +5% dodge. Weather it."
+      },
+      "aug_revenant": {
+        "name": "Revenant",
+        "desc": "Heal for 18% of damage dealt and gain +10% maximum health."
+      },
+      "aug_warbringer": {
+        "name": "Warbringer",
+        "desc": "+35% physical damage, +12% crit and +250 attack power."
+      },
+      "aug_cataclysm": {
+        "name": "Cataclysm",
+        "desc": "+45% spell damage and +18% crit. Unmake them."
+      },
+      "aug_immortal": {
+        "name": "Immortal",
+        "desc": "+35% maximum health, +700 armor and +10% dodge. Refuse to fall."
+      },
+      "aug_bloodlord": {
+        "name": "Bloodlord",
+        "desc": "+25% all damage, heal for 20% of damage dealt, +15% move speed."
       }
     },
     "tier": {
@@ -66663,14 +67335,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -66683,16 +67369,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -66923,14 +67619,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -66943,16 +67653,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -67183,14 +67903,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -67203,16 +67937,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -67443,14 +68187,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -67463,16 +68221,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -67704,14 +68472,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -67724,16 +68506,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -67964,14 +68756,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -67984,16 +68790,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -68224,14 +69040,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -68244,16 +69074,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -68484,14 +69324,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -68504,16 +69358,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -68744,14 +69608,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -68764,16 +69642,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -69004,14 +69892,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -69024,16 +69926,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -69264,14 +70176,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -69284,16 +70210,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -69524,14 +70460,28 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_ascendant.name",
     "fiesta.augment.aug_avatar.desc",
     "fiesta.augment.aug_avatar.name",
+    "fiesta.augment.aug_bastion.desc",
+    "fiesta.augment.aug_bastion.name",
     "fiesta.augment.aug_bloodhunter.desc",
     "fiesta.augment.aug_bloodhunter.name",
+    "fiesta.augment.aug_bloodlord.desc",
+    "fiesta.augment.aug_bloodlord.name",
     "fiesta.augment.aug_bounty_hunter.desc",
     "fiesta.augment.aug_bounty_hunter.name",
     "fiesta.augment.aug_brutality.desc",
     "fiesta.augment.aug_brutality.name",
+    "fiesta.augment.aug_bulwark.desc",
+    "fiesta.augment.aug_bulwark.name",
+    "fiesta.augment.aug_cataclysm.desc",
+    "fiesta.augment.aug_cataclysm.name",
+    "fiesta.augment.aug_executioner.desc",
+    "fiesta.augment.aug_executioner.name",
     "fiesta.augment.aug_fleetfoot.desc",
     "fiesta.augment.aug_fleetfoot.name",
+    "fiesta.augment.aug_focus.desc",
+    "fiesta.augment.aug_focus.name",
+    "fiesta.augment.aug_immortal.desc",
+    "fiesta.augment.aug_immortal.name",
     "fiesta.augment.aug_ironhide.desc",
     "fiesta.augment.aug_ironhide.name",
     "fiesta.augment.aug_juggernaut.desc",
@@ -69544,16 +70494,26 @@ export const pending: Record<string, readonly string[]> = {
     "fiesta.augment.aug_mending.name",
     "fiesta.augment.aug_overdrive.desc",
     "fiesta.augment.aug_overdrive.name",
+    "fiesta.augment.aug_revenant.desc",
+    "fiesta.augment.aug_revenant.name",
+    "fiesta.augment.aug_second_wind.desc",
+    "fiesta.augment.aug_second_wind.name",
     "fiesta.augment.aug_spellfire.desc",
     "fiesta.augment.aug_spellfire.name",
+    "fiesta.augment.aug_stormcaller.desc",
+    "fiesta.augment.aug_stormcaller.name",
     "fiesta.augment.aug_toughness.desc",
     "fiesta.augment.aug_toughness.name",
     "fiesta.augment.aug_unkillable.desc",
     "fiesta.augment.aug_unkillable.name",
     "fiesta.augment.aug_vampirism.desc",
     "fiesta.augment.aug_vampirism.name",
+    "fiesta.augment.aug_warbringer.desc",
+    "fiesta.augment.aug_warbringer.name",
     "fiesta.augment.aug_warlords_might.desc",
     "fiesta.augment.aug_warlords_might.name",
+    "fiesta.augment.aug_zealotry.desc",
+    "fiesta.augment.aug_zealotry.name",
     "fiesta.augment.choose",
     "fiesta.banner.augmentGained",
     "fiesta.banner.powerup",
@@ -70063,6 +71023,54 @@ export const en_XA: EnTranslations = {
       "aug_ascendant": {
         "name": "[Ášçéñðáñţ]",
         "desc": "[+45% ĥéáļíñĝ, +25% šþéļļ ðáɱáĝé, +20% ɱáẋíɱúɱ ĥéáļţĥ.]"
+      },
+      "aug_bulwark": {
+        "name": "[Ɓúļŵáŕķ]",
+        "desc": "[Ĝáíñ 350 áŕɱóŕ. Ĥóļð ţĥé ļíñé.]"
+      },
+      "aug_zealotry": {
+        "name": "[Žéáļóţŕý]",
+        "desc": "[Ĝáíñ 200 áţţáçķ þóŵéŕ. Šŵíñĝ ŵíţĥ þúŕþóšé.]"
+      },
+      "aug_focus": {
+        "name": "[Ƒóçúš]",
+        "desc": "[+6% çŕíţíçáļ šţŕíķé áñð +8% šþéļļ ðáɱáĝé. Šĥáŕþéñ ţĥé ɱíñð.]"
+      },
+      "aug_second_wind": {
+        "name": "[Šéçóñð Ŵíñð]",
+        "desc": "[Ĥéáļ ƒóŕ 8% óƒ áļļ ðáɱáĝé ýóú ðéáļ. Ķééþ ɱóʋíñĝ.]"
+      },
+      "aug_executioner": {
+        "name": "[Éẋéçúţíóñéŕ]",
+        "desc": "[+22% þĥýšíçáļ ðáɱáĝé áñð +8% çŕíţ. Ƒíñíšĥ ŵĥáţ ýóú šţáŕţ.]"
+      },
+      "aug_stormcaller": {
+        "name": "[Šţóŕɱçáļļéŕ]",
+        "desc": "[+22% šþéļļ ðáɱáĝé áñð +12% ɱóʋé šþééð. Ķíţé áñð ƀúŕñ.]"
+      },
+      "aug_bastion": {
+        "name": "[Ɓášţíóñ]",
+        "desc": "[+15% ɱáẋíɱúɱ ĥéáļţĥ, +350 áŕɱóŕ áñð +5% ðóðĝé. Ŵéáţĥéŕ íţ.]"
+      },
+      "aug_revenant": {
+        "name": "[Ŕéʋéñáñţ]",
+        "desc": "[Ĥéáļ ƒóŕ 18% óƒ ðáɱáĝé ðéáļţ áñð ĝáíñ +10% ɱáẋíɱúɱ ĥéáļţĥ.]"
+      },
+      "aug_warbringer": {
+        "name": "[Ŵáŕƀŕíñĝéŕ]",
+        "desc": "[+35% þĥýšíçáļ ðáɱáĝé, +12% çŕíţ áñð +250 áţţáçķ þóŵéŕ.]"
+      },
+      "aug_cataclysm": {
+        "name": "[Çáţáçļýšɱ]",
+        "desc": "[+45% šþéļļ ðáɱáĝé áñð +18% çŕíţ. Úñɱáķé ţĥéɱ.]"
+      },
+      "aug_immortal": {
+        "name": "[Íɱɱóŕţáļ]",
+        "desc": "[+35% ɱáẋíɱúɱ ĥéáļţĥ, +700 áŕɱóŕ áñð +10% ðóðĝé. Ŕéƒúšé ţó ƒáļļ.]"
+      },
+      "aug_bloodlord": {
+        "name": "[Ɓļóóðļóŕð]",
+        "desc": "[+25% áļļ ðáɱáĝé, ĥéáļ ƒóŕ 20% óƒ ðáɱáĝé ðéáļţ, +15% ɱóʋé šþééð.]"
       }
     },
     "tier": {
