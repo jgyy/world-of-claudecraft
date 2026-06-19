@@ -48,6 +48,7 @@ const NPC_IDS = [
   'loremaster_caddis', 'ranger_elwyn', 'innkeeper_wenna',
   'loremaster_caddis', 'ranger_elwyn', 'anglermaster_pell',
   'loremaster_caddis', 'ranger_elwyn', 'wallwright_garrod',
+  'loremaster_caddis', 'ranger_elwyn', 'antiquarian_veska',
 ] as const;
 
 const QUEST_IDS = [
@@ -97,6 +98,9 @@ const QUEST_IDS = [
   'q_garrod_scaffold_guard', 'q_garrod_eastern_wall', 'q_garrod_deeper_dig',
   'q_garrod_breakers', 'q_garrod_storm_masons', 'q_garrod_chant_cracks',
   'q_garrod_capstone',
+  'q_relic_dust', 'q_relic_robbers', 'q_relic_tunnels', 'q_relic_web',
+  'q_relic_matriarch', 'q_relic_drowned', 'q_relic_field', 'q_relic_custodian',
+  'q_relic_gorrak', 'q_relic_looterking',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
