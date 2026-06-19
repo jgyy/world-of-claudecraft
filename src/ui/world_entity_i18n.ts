@@ -42,6 +42,7 @@ const NPC_IDS = [
   'provisioner_hale', 'herbalist_yara', 'scout_maren', 'weaponsmith_drennan', 'captain_thessaly',
   'brother_aldric_highwatch', 'scout_maren_highwatch', 'quartermaster_bree', 'armorer_hode',
   'loremaster_caddis', 'ranger_elwyn', 'sergeant_garrick',
+  'loremaster_caddis', 'ranger_elwyn', 'bounty_master_corwin',
 ] as const;
 
 const QUEST_IDS = [
@@ -72,6 +73,9 @@ const QUEST_IDS = [
   'q_fenmoss_bloat', 'q_fenmoss_snappers', 'q_fenmoss_drowned', 'q_fenmoss_frenzy',
   'q_fenmoss_mourners', 'q_fenmoss_cultists', 'q_fenmoss_menders', 'q_fenmoss_summoners',
   'q_fenmoss_trolls', 'q_fenmoss_nhalia',
+  'q_bounty_wolves', 'q_bounty_boars', 'q_bounty_bristleback', 'q_bounty_webwood',
+  'q_bounty_matriarch', 'q_bounty_mudfin', 'q_bounty_bandits', 'q_bounty_restless',
+  'q_bounty_verlan', 'q_bounty_maldrec',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;

@@ -3593,6 +3593,10 @@ export const en: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -4755,6 +4759,103 @@ export const en: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -8563,6 +8664,10 @@ export const es: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -9725,6 +9830,103 @@ export const es: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -13533,6 +13735,10 @@ export const es_ES: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -14695,6 +14901,103 @@ export const es_ES: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -18503,6 +18806,10 @@ export const fr_FR: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -19665,6 +19972,103 @@ export const fr_FR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -23473,6 +23877,10 @@ export const fr_CA: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -24635,6 +25043,103 @@ export const fr_CA: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -28443,6 +28948,10 @@ export const en_CA: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -29605,6 +30114,103 @@ export const en_CA: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -33413,6 +34019,10 @@ export const it_IT: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -34575,6 +35185,103 @@ export const it_IT: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -38383,6 +39090,10 @@ export const de_DE: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -39545,6 +40256,103 @@ export const de_DE: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -43353,6 +44161,10 @@ export const zh_CN: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
@@ -44515,6 +45327,103 @@ export const zh_CN: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -48323,6 +49232,10 @@ export const zh_TW: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
@@ -49485,6 +50398,103 @@ export const zh_TW: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -53293,6 +54303,10 @@ export const ko_KR: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
@@ -54455,6 +55469,103 @@ export const ko_KR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -58263,6 +59374,10 @@ export const ja_JP: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
@@ -59425,6 +60540,103 @@ export const ja_JP: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -63233,6 +64445,10 @@ export const pt_BR: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -64395,6 +65611,103 @@ export const pt_BR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -68203,6 +69516,10 @@ export const ru_RU: EnTranslations = {
         "name": "Sergeant Garrick",
         "title": "Highwatch Drillmaster",
         "greeting": "A wall is only as strong as the blades behind it, {className}. Want to prove yours is worth the steel? Then earn the muster."
+      "bounty_master_corwin": {
+        "name": "Bounty Master Corwin",
+        "title": "Keeper of the Wanted Board",
+        "greeting": "New posters every week, {className}, and the ink never dries. Read the board - the bold ones earn coin."
       },
       "tidewatcher_ondrel": {
         "name": "Ондрел Вейн",
@@ -69365,6 +70682,103 @@ export const ru_RU: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Sister Nhalia slain"
+      "q_bounty_wolves": {
+        "title": "Bounty: The North Road Pack",
+        "text": "First poster on the board, {playerName}: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack - slay 10 Forest Wolves and the coin is yours.",
+        "completion": "Ten tails, ten coppers a tail, and a safer road. The board likes you already.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf claimed"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "Bounty: Tuskers in the Meadow",
+        "text": "The east meadow boars have turned mean - gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.",
+        "completion": "Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar claimed"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "Wanted: Elder Bristleback",
+        "text": "Here is a named poster, {playerName}. Elder Bristleback is the old grey-tusked boar that leads the meadow herd - twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.",
+        "completion": "The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.",
+        "objectives": {
+          "0": {
+            "label": "Elder Bristleback slain"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "Bounty: Clear the Webwood",
+        "text": "The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.",
+        "completion": "The foresters can swing an axe again instead of cutting webs. Good coin earned.",
+        "objectives": {
+          "0": {
+            "label": "Webwood Lurker claimed"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "Wanted: The Sableweb Matriarch",
+        "text": "The lurkers all answer to one bloated queen, {playerName} - the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter's bounty for her.",
+        "completion": "The queen is dead and the brood will scatter. That is a poster I am glad to tear down.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Matriarch slain"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "Bounty: Mudfin Raiders",
+        "text": "The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.",
+        "completion": "Ten murlocs sent back to the mud. The nets are the fishers' own problem now.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker claimed"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "Bounty: Toll the Vale Road",
+        "text": "The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.",
+        "completion": "A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit claimed"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "Bounty: The Restless Dead",
+        "text": "Something walks the old chapel yard on the northeast hill - bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.",
+        "completion": "Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "Wanted: Captain Verlan",
+        "text": "The deadliest poster on my board, {playerName}. Captain Verlan rose from his own grave to command the dead in the northeast yard - a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.",
+        "completion": "Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself - you earned it.",
+        "objectives": {
+          "0": {
+            "label": "Captain Verlan slain"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "Wanted: Wraithbinder Maldrec",
+        "text": "One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, {playerName} - and the whole board has been leading you to it.",
+        "completion": "Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, {playerName}. Whatever the Vale calls you, it will say it with respect.",
+        "objectives": {
+          "0": {
+            "label": "Wraithbinder Maldrec slain"
           }
         }
       },
@@ -69619,6 +71033,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -69628,6 +71045,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -69946,6 +71403,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -69955,6 +71415,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -70273,6 +71773,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -70282,6 +71785,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -70600,6 +72143,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -70609,6 +72155,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -70928,6 +72514,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -70937,6 +72526,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -71255,6 +72884,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -71264,6 +72896,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -71582,6 +73254,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -71591,6 +73266,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -71909,6 +73624,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -71918,6 +73636,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -72236,6 +73994,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -72245,6 +74006,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -72563,6 +74364,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -72572,6 +74376,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -72890,6 +74734,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -72899,6 +74746,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -73217,6 +75104,9 @@ export const pending: Record<string, readonly string[]> = {
     "entities.mobs.spotted_fawn.name",
     "entities.mobs.sunhide_bear.name",
     "entities.mobs.thornpelt_badger.name",
+    "entities.npcs.bounty_master_corwin.greeting",
+    "entities.npcs.bounty_master_corwin.name",
+    "entities.npcs.bounty_master_corwin.title",
     "entities.npcs.ranger_elwyn.greeting",
     "entities.npcs.ranger_elwyn.name",
     "entities.npcs.ranger_elwyn.title",
@@ -73226,6 +75116,46 @@ export const pending: Record<string, readonly string[]> = {
     "entities.npcs.weaponsmith_drennan.greeting",
     "entities.npcs.weaponsmith_drennan.name",
     "entities.npcs.weaponsmith_drennan.title",
+    "entities.quests.q_bounty_bandits.completion",
+    "entities.quests.q_bounty_bandits.objectives.0.label",
+    "entities.quests.q_bounty_bandits.text",
+    "entities.quests.q_bounty_bandits.title",
+    "entities.quests.q_bounty_boars.completion",
+    "entities.quests.q_bounty_boars.objectives.0.label",
+    "entities.quests.q_bounty_boars.text",
+    "entities.quests.q_bounty_boars.title",
+    "entities.quests.q_bounty_bristleback.completion",
+    "entities.quests.q_bounty_bristleback.objectives.0.label",
+    "entities.quests.q_bounty_bristleback.text",
+    "entities.quests.q_bounty_bristleback.title",
+    "entities.quests.q_bounty_maldrec.completion",
+    "entities.quests.q_bounty_maldrec.objectives.0.label",
+    "entities.quests.q_bounty_maldrec.text",
+    "entities.quests.q_bounty_maldrec.title",
+    "entities.quests.q_bounty_matriarch.completion",
+    "entities.quests.q_bounty_matriarch.objectives.0.label",
+    "entities.quests.q_bounty_matriarch.text",
+    "entities.quests.q_bounty_matriarch.title",
+    "entities.quests.q_bounty_mudfin.completion",
+    "entities.quests.q_bounty_mudfin.objectives.0.label",
+    "entities.quests.q_bounty_mudfin.text",
+    "entities.quests.q_bounty_mudfin.title",
+    "entities.quests.q_bounty_restless.completion",
+    "entities.quests.q_bounty_restless.objectives.0.label",
+    "entities.quests.q_bounty_restless.text",
+    "entities.quests.q_bounty_restless.title",
+    "entities.quests.q_bounty_verlan.completion",
+    "entities.quests.q_bounty_verlan.objectives.0.label",
+    "entities.quests.q_bounty_verlan.text",
+    "entities.quests.q_bounty_verlan.title",
+    "entities.quests.q_bounty_webwood.completion",
+    "entities.quests.q_bounty_webwood.objectives.0.label",
+    "entities.quests.q_bounty_webwood.text",
+    "entities.quests.q_bounty_webwood.title",
+    "entities.quests.q_bounty_wolves.completion",
+    "entities.quests.q_bounty_wolves.objectives.0.label",
+    "entities.quests.q_bounty_wolves.text",
+    "entities.quests.q_bounty_wolves.title",
     "entities.quests.q_brightwood_monarch.completion",
     "entities.quests.q_brightwood_monarch.objectives.0.label",
     "entities.quests.q_brightwood_monarch.text",
@@ -77118,6 +79048,10 @@ export const en_XA: EnTranslations = {
         "name": "[Šéŕĝéáñţ Ĝáŕŕíçķ]",
         "title": "[Ĥíĝĥŵáţçĥ Ðŕíļļɱášţéŕ]",
         "greeting": "[Á ŵáļļ íš óñļý áš šţŕóñĝ áš ţĥé ƀļáðéš ƀéĥíñð íţ, {className}. Ŵáñţ ţó þŕóʋé ýóúŕš íš ŵóŕţĥ ţĥé šţééļ? Ţĥéñ éáŕñ ţĥé ɱúšţéŕ.]"
+      "bounty_master_corwin": {
+        "name": "[Ɓóúñţý Ɱášţéŕ Çóŕŵíñ]",
+        "title": "[Ķééþéŕ óƒ ţĥé Ŵáñţéð Ɓóáŕð]",
+        "greeting": "[Ñéŵ þóšţéŕš éʋéŕý ŵééķ, {className}, áñð ţĥé íñķ ñéʋéŕ ðŕíéš. Ŕéáð ţĥé ƀóáŕð - ţĥé ƀóļð óñéš éáŕñ çóíñ.]"
       },
       "tidewatcher_ondrel": {
         "name": "[Óñðŕéļ Ʋáñé]",
@@ -78280,6 +80214,103 @@ export const en_XA: EnTranslations = {
         "objectives": {
           "0": {
             "label": "[Šíšţéŕ Ñĥáļíá šļáíñ]"
+      "q_bounty_wolves": {
+        "title": "[Ɓóúñţý: Ţĥé Ñóŕţĥ Ŕóáð Þáçķ]",
+        "text": "[Ƒíŕšţ þóšţéŕ óñ ţĥé ƀóáŕð, {playerName}: ţĥé ŵóļƒ þáçķ óñ ţĥé ñóŕţĥ ŕóáð ĥáš çĥéŵéð ţĥŕóúĝĥ ţŵó ɱáíļ ŕíðéŕš ţĥíš ɱóñţĥ. Ţĥé ţóŵñ ĥáš šéţ á ƀóúñţý óñ ţĥé þáçķ - šļáý 10 Ƒóŕéšţ Ŵóļʋéš áñð ţĥé çóíñ íš ýóúŕš.]",
+        "completion": "[Ţéñ ţáíļš, ţéñ çóþþéŕš á ţáíļ, áñð á šáƒéŕ ŕóáð. Ţĥé ƀóáŕð ļíķéš ýóú áļŕéáðý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ çļáíɱéð]"
+          }
+        }
+      },
+      "q_bounty_boars": {
+        "title": "[Ɓóúñţý: Ţúšķéŕš íñ ţĥé Ɱéáðóŵ]",
+        "text": "[Ţĥé éášţ ɱéáðóŵ ƀóáŕš ĥáʋé ţúŕñéð ɱéáñ - ĝóŕéð á ĥéŕðšɱáñ áñð ţŕáɱþļéð ĥíš ƒéñçé. Ţĥéŕé íš á šţáñðíñĝ ƀóúñţý óñ ţĥé ƀŕúţéš. Þúţ ðóŵñ 8 Ŵíļð Ɓóáŕš áñð ƀŕíñĝ ŵóŕð ƀáçķ.]",
+        "completion": "[Éíĝĥţ ƒéŵéŕ ţúšķéŕš íñ ţĥé ƀáŕļéý. Ţĥé ĥéŕðšɱéñ çĥíþþéð íñ éẋţŕá ƒóŕ ţĥíš óñé.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵíļð Ɓóáŕ çļáíɱéð]"
+          }
+        }
+      },
+      "q_bounty_bristleback": {
+        "title": "[Ŵáñţéð: Éļðéŕ Ɓŕíšţļéƀáçķ]",
+        "text": "[Ĥéŕé íš á ñáɱéð þóšţéŕ, {playerName}. Éļðéŕ Ɓŕíšţļéƀáçķ íš ţĥé óļð ĝŕéý-ţúšķéð ƀóáŕ ţĥáţ ļéáðš ţĥé ɱéáðóŵ ĥéŕð - ţŵíçé ţĥé šížé óƒ ţĥé ŕéšţ áñð ţĥŕéé ţíɱéš áš çŕúéļ. Ĥé ķééþš ţó ţĥé ƒáŕ éášţ éðĝé óƒ ţĥé ɱéáðóŵ. Ţĥé ƀóúñţý íš ðóúƀļéð ƒóŕ ĥíš ĥéáð áļóñé.]",
+        "completion": "[Ţĥé óļð ĝŕéý ţéŕŕóŕ, ðéáð. Í ŵíļļ ñáíļ ĥíš þóšţéŕ úþ çŕóššéð-ţĥŕóúĝĥ ŵĥéŕé ţĥé óţĥéŕš çáñ šéé íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Éļðéŕ Ɓŕíšţļéƀáçķ šļáíñ]"
+          }
+        }
+      },
+      "q_bounty_webwood": {
+        "title": "[Ɓóúñţý: Çļéáŕ ţĥé Ŵéƀŵóóð]",
+        "text": "[Ţĥé ļúŕķéŕš íñ ţĥé ŵéšţéŕñ Ŵéƀŵóóð ĥáʋé šţŕúñĝ ţĥé óļð ļóĝĝíñĝ ţŕáíļ šĥúţ. Ƒóŕéšţéŕš ŵíļļ ñóţ ŵóŕķ íţ úñţíļ ţĥé šíļķ-šþíññéŕš áŕé ţĥíññéð. Çúļļ 10 Ŵéƀŵóóð Ļúŕķéŕš ƒóŕ ţĥé šţáñðíñĝ ƀóúñţý.]",
+        "completion": "[Ţĥé ƒóŕéšţéŕš çáñ šŵíñĝ áñ áẋé áĝáíñ íñšţéáð óƒ çúţţíñĝ ŵéƀš. Ĝóóð çóíñ éáŕñéð.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵéƀŵóóð Ļúŕķéŕ çļáíɱéð]"
+          }
+        }
+      },
+      "q_bounty_matriarch": {
+        "title": "[Ŵáñţéð: Ţĥé Šáƀļéŵéƀ Ɱáţŕíáŕçĥ]",
+        "text": "[Ţĥé ļúŕķéŕš áļļ áñšŵéŕ ţó óñé ƀļóáţéð ɋúééñ, {playerName} - ţĥé Šáƀļéŵéƀ Ɱáţŕíáŕçĥ, ðééþ íñ ţĥé Ŵéƀŵóóð ŵĥéŕé ţĥé šíļķ ĥáñĝš ţĥíçķéšţ. Ŵĥíļé šĥé ļíʋéš ţĥé ƀŕóóð ñéʋéŕ éñðš. Ţĥé ƀóáŕð þáýš á ĥúñţéŕ'š ƀóúñţý ƒóŕ ĥéŕ.]",
+        "completion": "[Ţĥé ɋúééñ íš ðéáð áñð ţĥé ƀŕóóð ŵíļļ šçáţţéŕ. Ţĥáţ íš á þóšţéŕ Í áɱ ĝļáð ţó ţéáŕ ðóŵñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Šáƀļéŵéƀ Ɱáţŕíáŕçĥ šļáíñ]"
+          }
+        }
+      },
+      "q_bounty_mudfin": {
+        "title": "[Ɓóúñţý: Ɱúðƒíñ Ŕáíðéŕš]",
+        "text": "[Ţĥé Ɱúðƒíñ ɱúŕļóçš ĥáʋé çŕáŵļéð úþ ƒŕóɱ ţĥé ļáķé šĥáļļóŵš áñð šţáŕţéð ŕáíðíñĝ ţĥé ŵéšţéŕñ ñéţš áñð çŕééļš. Ƒíšĥéŕɱéñ ŵáñţ ţĥéɱ ĝóñé áñð ĥáʋé þóóļéð á ƀóúñţý. Ðŕíʋé óƒƒ 10 Ɱúðƒíñ Šķúļķéŕš.]",
+        "completion": "[Ţéñ ɱúŕļóçš šéñţ ƀáçķ ţó ţĥé ɱúð. Ţĥé ñéţš áŕé ţĥé ƒíšĥéŕš' óŵñ þŕóƀļéɱ ñóŵ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ɱúðƒíñ Šķúļķéŕ çļáíɱéð]"
+          }
+        }
+      },
+      "q_bounty_bandits": {
+        "title": "[Ɓóúñţý: Ţóļļ ţĥé Ʋáļé Ŕóáð]",
+        "text": "[Ţĥé Ʋáļé Ɓáñðíţš íñ ţĥé šóúţĥéášţ ĥíļļš ĥáʋé šéţ úþ áñ úñļáŵƒúļ ţóļļ áñð ŕóƀ éʋéŕý ŵáĝóñ ţĥáţ þáššéš. Ţĥé Ɱáŕšĥáļ ŵáñţš ţĥéɱ ƀŕóķéñ áñð ţĥé ƀóáŕð çáŕŕíéš ĥíš þŕíçé. Çúţ ðóŵñ 12 Ʋáļé Ɓáñðíţš.]",
+        "completion": "[Á ðóžéñ ƀáñðíţš óƒƒ ţĥé ŕóáð áñð ţĥé ţóļļ-ŕóþé çúţ ðóŵñ. Çáŕáʋáñš ŵíļļ þášš ƒŕéé áĝáíñ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ʋáļé Ɓáñðíţ çļáíɱéð]"
+          }
+        }
+      },
+      "q_bounty_restless": {
+        "title": "[Ɓóúñţý: Ţĥé Ŕéšţļéšš Ðéáð]",
+        "text": "[Šóɱéţĥíñĝ ŵáļķš ţĥé óļð çĥáþéļ ýáŕð óñ ţĥé ñóŕţĥéášţ ĥíļļ - ƀóñéš ţĥáţ šĥóúļð ƀé šļééþíñĝ. Ɓŕóţĥéŕ Áļðŕíç ƀļéššéš ţĥé ƀóúñţý ĥíɱšéļƒ. Ļáý 10 Ŕéšţļéšš Ɓóñéš ƀáçķ íñţó ţĥé éáŕţĥ.]",
+        "completion": "[Ţéñ óƒ ţĥé ŵáļķíñĝ ðéáð þúţ ðóŵñ. Ɓŕóţĥéŕ Áļðŕíç ŵíļļ ŕéšţ éášíéŕ, áñð šó ŵíļļ ţĥéý.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŕéšţļéšš Ɓóñéš ļáíð ţó ŕéšţ]"
+          }
+        }
+      },
+      "q_bounty_verlan": {
+        "title": "[Ŵáñţéð: Çáþţáíñ Ʋéŕļáñ]",
+        "text": "[Ţĥé ðéáðļíéšţ þóšţéŕ óñ ɱý ƀóáŕð, {playerName}. Çáþţáíñ Ʋéŕļáñ ŕóšé ƒŕóɱ ĥíš óŵñ ĝŕáʋé ţó çóɱɱáñð ţĥé ðéáð íñ ţĥé ñóŕţĥéášţ ýáŕð - á ŵáŕļóŕð íñ ðéáţĥ áš ĥé ŵáš íñ ļíƒé. Ţĥé ƀóúñţý óñ ĥíɱ íš ţĥé ŕíçĥéšţ ţĥé ţóŵñ ĥáš éʋéŕ þóšţéð. Ðó ñóţ ƒáçé ĥíɱ áļóñé.]",
+        "completion": "[Ʋéŕļáñ, çúţ ðóŵñ á šéçóñð ţíɱé, áñð ƒóŕ ĝóóð ţĥíš ţíɱé. Ţĥáţ þóšţéŕ ĥáš ĥúñĝ óñ ɱý ƀóáŕð ƒóŕ á ýéáŕ. Ţéáŕ íţ ðóŵñ ýóúŕšéļƒ - ýóú éáŕñéð íţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Çáþţáíñ Ʋéŕļáñ šļáíñ]"
+          }
+        }
+      },
+      "q_bounty_maldrec": {
+        "title": "[Ŵáñţéð: Ŵŕáíţĥƀíñðéŕ Ɱáļðŕéç]",
+        "text": "[Óñé ñáɱé íš ļéƒţ, áñð íţ íš ţĥé ŵóŕšţ óƒ ţĥéɱ: Ŵŕáíţĥƀíñðéŕ Ɱáļðŕéç, ţĥé ñéçŕóɱáñçéŕ ŵĥóšé çĥáñţš ŕáíšé ţĥé çĥáþéļ ðéáð ñíĝĥţ áƒţéŕ ñíĝĥţ. Ķíļļ ĥíɱ áñð ţĥé óţĥéŕš šţáý ƀúŕíéð. Ţĥíš íš ţĥé ļášţ þóšţéŕ, {playerName} - áñð ţĥé ŵĥóļé ƀóáŕð ĥáš ƀééñ ļéáðíñĝ ýóú ţó íţ.]",
+        "completion": "[Ɱáļðŕéç íš ðéáð áñð ţĥé çĥáþéļ ýáŕð ĥáš ĝóñé ɋúíéţ áţ ļášţ. Ţĥé ƀóáŕð íš ƀáŕé ƒóŕ ţĥé ƒíŕšţ ţíɱé íñ á ýéáŕ, {playerName}. Ŵĥáţéʋéŕ ţĥé Ʋáļé çáļļš ýóú, íţ ŵíļļ šáý íţ ŵíţĥ ŕéšþéçţ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ŵŕáíţĥƀíñðéŕ Ɱáļðŕéç šļáíñ]"
           }
         }
       },

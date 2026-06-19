@@ -541,6 +541,17 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     ],
     greeting: 'Quiet, $C — the glade is calm today, and I mean to keep it that way.',
   },
+  bounty_master_corwin: {
+    id: 'bounty_master_corwin', name: 'Bounty Master Corwin', title: 'Keeper of the Wanted Board',
+    // beside the marshal's office, where the wanted board is nailed up
+    pos: { x: 9, z: 9 }, facing: -2.2, color: 0x8b5a2b,
+    questIds: [
+      'q_bounty_wolves', 'q_bounty_boars', 'q_bounty_bristleback', 'q_bounty_webwood',
+      'q_bounty_matriarch', 'q_bounty_mudfin', 'q_bounty_bandits', 'q_bounty_restless',
+      'q_bounty_verlan', 'q_bounty_maldrec',
+    ],
+    greeting: 'New posters every week, $C, and the ink never dries. Read the board — the bold ones earn coin.',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -994,6 +1005,109 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     minLevel: 6,
     suggestedPlayers: 2,
   },
+  // ---- The Eastbrook Bounty Board (Bounty Master Corwin) -------------------
+  // An escalating wanted-poster chain. Every objective is a bounty on a
+  // creature that already roams the Vale, so the board adds no new spawns —
+  // just coin for clearing threats players already meet.
+  q_bounty_wolves: {
+    id: 'q_bounty_wolves', name: 'Bounty: The North Road Pack',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'First poster on the board, $N: the wolf pack on the north road has chewed through two mail riders this month. The town has set a bounty on the pack — slay 10 Forest Wolves and the coin is yours.',
+    completionText: 'Ten tails, ten coppers a tail, and a safer road. The board likes you already.',
+    objectives: [{ type: 'kill', targetMobId: 'forest_wolf', count: 10, label: 'Forest Wolf claimed' }],
+    xpReward: 300, copperReward: 90, itemRewards: {},
+  },
+  q_bounty_boars: {
+    id: 'q_bounty_boars', name: 'Bounty: Tuskers in the Meadow',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'The east meadow boars have turned mean — gored a herdsman and trampled his fence. There is a standing bounty on the brutes. Put down 8 Wild Boars and bring word back.',
+    completionText: 'Eight fewer tuskers in the barley. The herdsmen chipped in extra for this one.',
+    objectives: [{ type: 'kill', targetMobId: 'wild_boar', count: 8, label: 'Wild Boar claimed' }],
+    xpReward: 340, copperReward: 110, itemRewards: {},
+    requiresQuest: 'q_bounty_wolves',
+  },
+  q_bounty_bristleback: {
+    id: 'q_bounty_bristleback', name: 'Wanted: Elder Bristleback',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'Here is a named poster, $N. Elder Bristleback is the old grey-tusked boar that leads the meadow herd — twice the size of the rest and three times as cruel. He keeps to the far east edge of the meadow. The bounty is doubled for his head alone.',
+    completionText: 'The old grey terror, dead. I will nail his poster up crossed-through where the others can see it.',
+    objectives: [{ type: 'kill', targetMobId: 'elder_bristleback', count: 1, label: 'Elder Bristleback slain' }],
+    xpReward: 450, copperReward: 180, itemRewards: {},
+    requiresQuest: 'q_bounty_boars',
+    minLevel: 4,
+  },
+  q_bounty_webwood: {
+    id: 'q_bounty_webwood', name: 'Bounty: Clear the Webwood',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'The lurkers in the western Webwood have strung the old logging trail shut. Foresters will not work it until the silk-spinners are thinned. Cull 10 Webwood Lurkers for the standing bounty.',
+    completionText: 'The foresters can swing an axe again instead of cutting webs. Good coin earned.',
+    objectives: [{ type: 'kill', targetMobId: 'webwood_spider', count: 10, label: 'Webwood Lurker claimed' }],
+    xpReward: 420, copperReward: 150, itemRewards: {},
+    requiresQuest: 'q_bounty_bristleback',
+    minLevel: 4,
+  },
+  q_bounty_matriarch: {
+    id: 'q_bounty_matriarch', name: 'Wanted: The Sableweb Matriarch',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'The lurkers all answer to one bloated queen, $N — the Sableweb Matriarch, deep in the Webwood where the silk hangs thickest. While she lives the brood never ends. The board pays a hunter\'s bounty for her.',
+    completionText: 'The queen is dead and the brood will scatter. That is a poster I am glad to tear down.',
+    objectives: [{ type: 'kill', targetMobId: 'sableweb_matriarch', count: 1, label: 'Sableweb Matriarch slain' }],
+    xpReward: 560, copperReward: 230, itemRewards: {},
+    requiresQuest: 'q_bounty_webwood',
+    minLevel: 5,
+  },
+  q_bounty_mudfin: {
+    id: 'q_bounty_mudfin', name: 'Bounty: Mudfin Raiders',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'The Mudfin murlocs have crawled up from the lake shallows and started raiding the western nets and creels. Fishermen want them gone and have pooled a bounty. Drive off 10 Mudfin Skulkers.',
+    completionText: 'Ten murlocs sent back to the mud. The nets are the fishers\' own problem now.',
+    objectives: [{ type: 'kill', targetMobId: 'mudfin_murloc', count: 10, label: 'Mudfin Skulker claimed' }],
+    xpReward: 520, copperReward: 200, itemRewards: {},
+    requiresQuest: 'q_bounty_matriarch',
+    minLevel: 5,
+  },
+  q_bounty_bandits: {
+    id: 'q_bounty_bandits', name: 'Bounty: Toll the Vale Road',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'The Vale Bandits in the southeast hills have set up an unlawful toll and rob every wagon that passes. The Marshal wants them broken and the board carries his price. Cut down 12 Vale Bandits.',
+    completionText: 'A dozen bandits off the road and the toll-rope cut down. Caravans will pass free again.',
+    objectives: [{ type: 'kill', targetMobId: 'vale_bandit', count: 12, label: 'Vale Bandit claimed' }],
+    xpReward: 600, copperReward: 240, itemRewards: {},
+    requiresQuest: 'q_bounty_mudfin',
+    minLevel: 5,
+  },
+  q_bounty_restless: {
+    id: 'q_bounty_restless', name: 'Bounty: The Restless Dead',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'Something walks the old chapel yard on the northeast hill — bones that should be sleeping. Brother Aldric blesses the bounty himself. Lay 10 Restless Bones back into the earth.',
+    completionText: 'Ten of the walking dead put down. Brother Aldric will rest easier, and so will they.',
+    objectives: [{ type: 'kill', targetMobId: 'restless_bones', count: 10, label: 'Restless Bones laid to rest' }],
+    xpReward: 700, copperReward: 280, itemRewards: {},
+    requiresQuest: 'q_bounty_bandits',
+    minLevel: 6,
+  },
+  q_bounty_verlan: {
+    id: 'q_bounty_verlan', name: 'Wanted: Captain Verlan',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'The deadliest poster on my board, $N. Captain Verlan rose from his own grave to command the dead in the northeast yard — a warlord in death as he was in life. The bounty on him is the richest the town has ever posted. Do not face him alone.',
+    completionText: 'Verlan, cut down a second time, and for good this time. That poster has hung on my board for a year. Tear it down yourself — you earned it.',
+    objectives: [{ type: 'kill', targetMobId: 'captain_verlan', count: 1, label: 'Captain Verlan slain' }],
+    xpReward: 900, copperReward: 360, itemRewards: {},
+    requiresQuest: 'q_bounty_restless',
+    minLevel: 6,
+    suggestedPlayers: 2,
+  },
+  q_bounty_maldrec: {
+    id: 'q_bounty_maldrec', name: 'Wanted: Wraithbinder Maldrec',
+    giverNpcId: 'bounty_master_corwin', turnInNpcId: 'bounty_master_corwin',
+    text: 'One name is left, and it is the worst of them: Wraithbinder Maldrec, the necromancer whose chants raise the chapel dead night after night. Kill him and the others stay buried. This is the last poster, $N — and the whole board has been leading you to it.',
+    completionText: 'Maldrec is dead and the chapel yard has gone quiet at last. The board is bare for the first time in a year, $N. Whatever the Vale calls you, it will say it with respect.',
+    objectives: [{ type: 'kill', targetMobId: 'wraithbinder_maldrec', count: 1, label: 'Wraithbinder Maldrec slain' }],
+    xpReward: 1100, copperReward: 450, itemRewards: {},
+    requiresQuest: 'q_bounty_verlan',
+    minLevel: 7,
+    suggestedPlayers: 2,
+  },
 };
 
 export const ZONE1_QUEST_ORDER = [
@@ -1011,6 +1125,10 @@ export const ZONE1_QUEST_ORDER = [
   'q_glade_overbrowse', 'q_glade_foxes', 'q_glade_census', 'q_glade_diggers',
   'q_glade_amber', 'q_glade_rut', 'q_glade_treeline', 'q_glade_snares',
   'q_glade_apex', 'q_glade_long_watch',
+  // The Eastbrook Bounty Board chain
+  'q_bounty_wolves', 'q_bounty_boars', 'q_bounty_bristleback', 'q_bounty_webwood',
+  'q_bounty_matriarch', 'q_bounty_mudfin', 'q_bounty_bandits', 'q_bounty_restless',
+  'q_bounty_verlan', 'q_bounty_maldrec',
 ];
 
 // ---------------------------------------------------------------------------
