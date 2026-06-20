@@ -8,7 +8,7 @@ import {
   pruneChatLogs, pruneClientPerfReports, searchCharacters, characterCountsByRealm, moderationStatusForAccount, renameCharacter,
   findCharacterReportTargetByName, topArenaRatings, topLifetimeXp, chatMuteStatusForAccount, loadAccountCosmetics,
   referralCountForAccount, primarySlugForAccount, lifetimeXpStanding,
-  getAccountInfo, passwordHashForAccount, updatePasswordHash, deleteAllTokensForAccount, deleteAccount,
+  getAccountInfo, passwordHashForAccount, updatePasswordHash, deleteAllTokensForAccount, deactivateAccount, updateEmail,
 } from './db';
 import { virtualLevel } from '../src/sim/types';
 import { Sim } from '../src/sim/sim';
@@ -18,7 +18,7 @@ import { cleanReportReason, createPlayerReport, createSuspiciousRegistrationRepo
 import { resolveReportTarget } from './report_target';
 import { bufferHandshakeMessages } from './ws_buffer';
 import {
-  hashPassword, verifyPassword, newToken, validUsernameShape, offensiveName, validPassword, normalizeCharName,
+  hashPassword, verifyPassword, newToken, validUsernameShape, offensiveName, validPassword, validEmail, normalizeCharName,
 } from './auth';
 import { json, readBody, isUniqueViolation } from './http_util';
 import { requestIp, rateLimited, authThrottled, recordAuthFailure, clearAuthFailures, cardUploadRateLimited } from './ratelimit';
@@ -498,14 +498,29 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
         }
         // Refuse while any of the account's characters are in the world: an
         // online character has a live in-memory session and unsaved state, and
-        // deleting it out from under the loop desyncs the server (mirrors the
-        // per-character rename/delete online-guard).
+        // deactivating it out from under the loop desyncs the server (mirrors
+        // the per-character rename/delete online-guard).
         if ([...game.clients.values()].some((s) => s.accountId === accountId)) {
-          return json(res, 400, { error: 'log out of all characters before deleting your account' });
+          return json(res, 400, { error: 'log out of all characters before deactivating your account' });
         }
-        const ok = await deleteAccount(accountId);
+        // Soft-deactivation, not a hard delete: the account is flagged inactive
+        // (login barred via moderationStatusForAccount) and all tokens revoked,
+        // but the data is retained. Reactivation is admin-only.
+        const ok = await deactivateAccount(accountId);
         return json(res, ok ? 200 : 404, ok ? { ok: true } : { error: 'account not found' });
       }
+    }
+    if (req.method === 'POST' && url === '/api/account/email') {
+      if (rateLimited(req)) return json(res, 429, { error: 'too many requests, slow down' });
+      const accountId = await bearerActiveAccount(req, res);
+      if (accountId === null) return;
+      const body = await readBody(req);
+      // Empty string clears the stored email; otherwise validate the shape. The
+      // address is unverified — there is no mail delivery (SES) yet.
+      const raw = typeof body.email === 'string' ? body.email.trim() : '';
+      if (raw !== '' && !validEmail(raw)) return json(res, 400, { error: 'enter a valid email address' });
+      await updateEmail(accountId, raw === '' ? null : raw);
+      return json(res, 200, { ok: true, email: raw === '' ? null : raw });
     }
     if (req.method === 'POST' && url === '/api/account/password') {
       if (rateLimited(req)) return json(res, 429, { error: 'too many requests, slow down' });

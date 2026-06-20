@@ -4398,6 +4398,8 @@
   .account-info dd { margin: 0; color: var(--color-text-light); text-align: right; }
   .account-danger h3 { color: #e06a6a; }
   .account-danger-warning { margin: 0; color: var(--color-text-muted); line-height: 1.45; font-size: 13px; }
+  .account-email-note { margin: 0; color: var(--color-text-muted); line-height: 1.45; font-size: 13px; }
+  #account-email-msg.is-ok { color: #6ec06e; }
   #account-password-msg.is-ok, #account-delete-msg.is-ok { color: #6ec06e; }
 
   /* ---------- Premium Class Details Panel ---------- */
@@ -7704,11 +7706,21 @@
           <h3 data-i18n="hudChrome.account.infoHeading">Account</h3>
           <dl class="account-info">
             <dt data-i18n="hudChrome.account.usernameLabel">Username</dt><dd id="account-info-username">—</dd>
+            <dt data-i18n="hudChrome.account.emailInfoLabel">Email</dt><dd id="account-info-email">—</dd>
             <dt data-i18n="hudChrome.account.memberSince">Member since</dt><dd id="account-info-created">—</dd>
             <dt data-i18n="hudChrome.account.lastLogin">Last login</dt><dd id="account-info-lastlogin">—</dd>
             <dt data-i18n="hudChrome.account.charactersLabel">Characters</dt><dd id="account-info-characters">—</dd>
           </dl>
         </section>
+
+        <form id="account-email-form" class="account-section" novalidate>
+          <h3 data-i18n="hudChrome.account.emailHeading">Contact Email</h3>
+          <p class="account-email-note" data-i18n="hudChrome.account.emailNote">Optional. Stored for future account recovery — we don't send email yet.</p>
+          <label for="account-email" class="auth-label" data-i18n="hudChrome.account.emailLabel">Email address</label>
+          <input id="account-email" type="email" autocomplete="email" />
+          <div id="account-email-msg" class="auth-error" aria-live="polite"></div>
+          <button type="submit" class="btn btn-primary" id="btn-account-save-email" data-i18n="hudChrome.account.saveEmailBtn">Save Email</button>
+        </form>
 
         <form id="account-password-form" class="account-section" novalidate>
           <h3 data-i18n="hudChrome.account.passwordHeading">Change Password</h3>
@@ -7723,14 +7735,14 @@
         </form>
 
         <section class="account-section account-danger">
-          <h3 data-i18n="hudChrome.account.dangerHeading">Delete Account</h3>
-          <p class="account-danger-warning" data-i18n="hudChrome.account.dangerWarning">This permanently deletes your account and every character on it. This cannot be undone.</p>
+          <h3 data-i18n="hudChrome.account.dangerHeading">Deactivate Account</h3>
+          <p class="account-danger-warning" data-i18n="hudChrome.account.dangerWarning">This deactivates your account and signs you out everywhere. Your characters are kept, but you won't be able to log back in — contact support to reactivate.</p>
           <label for="account-delete-password" class="auth-label" data-i18n="hudChrome.account.deletePasswordLabel">Password</label>
           <input id="account-delete-password" type="password" autocomplete="off" />
           <label for="account-delete-confirm" class="auth-label" data-i18n="hudChrome.account.deleteConfirmLabel">Type your username to confirm</label>
           <input id="account-delete-confirm" type="text" autocomplete="off" />
           <div id="account-delete-msg" class="auth-error" aria-live="polite"></div>
-          <button type="button" class="btn btn-danger" id="btn-account-delete" disabled data-i18n="hudChrome.account.deleteBtn">Delete Account Permanently</button>
+          <button type="button" class="btn btn-danger" id="btn-account-delete" disabled data-i18n="hudChrome.account.deleteBtn">Deactivate Account</button>
         </section>
 
         <div class="confirm-actions">

@@ -154,8 +154,10 @@ function userFacingApiError(err: unknown): string {
   // Account self-service (settings panel) error strings (server/main.ts).
   if (normalized === 'incorrect password') return t('hudChrome.account.errIncorrectPassword');
   if (normalized === 'new password must be different') return t('hudChrome.account.errSamePassword');
+  if (normalized === 'enter a valid email address') return t('hudChrome.account.errInvalidEmail');
   if (normalized === 'type your username to confirm account deletion') return t('hudChrome.account.errDeleteConfirm');
-  if (normalized === 'log out of all characters before deleting your account') return t('hudChrome.account.errDeleteOnline');
+  if (normalized === 'log out of all characters before deactivating your account') return t('hudChrome.account.errDeleteOnline');
+  if (normalized === 'this account has been deactivated.') return t('hudChrome.account.errDeactivated');
   if (normalized === 'account not found') return t('hudChrome.account.errAccountNotFound');
   if (normalized === 'too many requests, slow down') return t('hudChrome.account.errRateLimited');
   if (normalized === 'not authenticated' || normalized === 'authentication required') return t('errors.api.notAuthenticated');

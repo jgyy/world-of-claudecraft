@@ -13,7 +13,8 @@ vi.mock('pg', () => ({
 }));
 
 import {
-  getAccountInfo, passwordHashForAccount, updatePasswordHash, deleteAllTokensForAccount, deleteAccount,
+  getAccountInfo, passwordHashForAccount, updatePasswordHash, deleteAllTokensForAccount,
+  deactivateAccount, updateEmail,
 } from '../server/db';
 
 beforeEach(() => {
@@ -26,7 +27,7 @@ describe('getAccountInfo', () => {
     const created = new Date('2024-01-02T03:04:05.000Z');
     const login = new Date('2024-05-06T07:08:09.000Z');
     dbMock.query.mockResolvedValueOnce({
-      rows: [{ username: 'alice', created_at: created, last_login: login, character_count: 3 }],
+      rows: [{ username: 'alice', email: 'alice@example.com', created_at: created, last_login: login, character_count: 3 }],
     } as any);
 
     const info = await getAccountInfo(7);
@@ -36,19 +37,21 @@ describe('getAccountInfo', () => {
     expect(params).toEqual([7]);
     expect(info).toEqual({
       username: 'alice',
+      email: 'alice@example.com',
       createdAt: '2024-01-02T03:04:05.000Z',
       lastLogin: '2024-05-06T07:08:09.000Z',
       characterCount: 3,
     });
   });
 
-  it('keeps a null last_login as null (never-logged-in account)', async () => {
+  it('keeps a null last_login as null (never-logged-in account) and email null', async () => {
     dbMock.query.mockResolvedValueOnce({
-      rows: [{ username: 'bob', created_at: new Date('2024-01-01T00:00:00.000Z'), last_login: null, character_count: 0 }],
+      rows: [{ username: 'bob', email: null, created_at: new Date('2024-01-01T00:00:00.000Z'), last_login: null, character_count: 0 }],
     } as any);
 
     const info = await getAccountInfo(8);
     expect(info?.lastLogin).toBeNull();
+    expect(info?.email).toBeNull();
     expect(info?.characterCount).toBe(0);
   });
 
@@ -93,15 +96,42 @@ describe('deleteAllTokensForAccount', () => {
   });
 });
 
-describe('deleteAccount', () => {
-  it('deletes the account and reports whether a row was removed', async () => {
+describe('updateEmail', () => {
+  it('stores a trimmed address on the target row', async () => {
     dbMock.query.mockResolvedValueOnce({ rowCount: 1 } as any);
-    expect(await deleteAccount(7)).toBe(true);
+    await updateEmail(7, 'carol@example.com');
     const [sql, params] = dbMock.query.mock.calls[0];
-    expect(sql).toMatch(/DELETE FROM accounts WHERE id/i);
-    expect(params).toEqual([7]);
+    expect(sql).toMatch(/UPDATE accounts SET email/i);
+    expect(params).toEqual([7, 'carol@example.com']);
+  });
 
+  it('clears the email when passed null', async () => {
+    dbMock.query.mockResolvedValueOnce({ rowCount: 1 } as any);
+    await updateEmail(7, null);
+    expect(dbMock.query.mock.calls[0][1]).toEqual([7, null]);
+  });
+});
+
+describe('deactivateAccount', () => {
+  it('soft-deactivates the row and revokes its tokens', async () => {
+    dbMock.query
+      .mockResolvedValueOnce({ rowCount: 1 } as any) // UPDATE deactivated_at
+      .mockResolvedValueOnce({ rowCount: 2 } as any); // DELETE tokens
+    expect(await deactivateAccount(7)).toBe(true);
+
+    const [updateSql, updateParams] = dbMock.query.mock.calls[0];
+    expect(updateSql).toMatch(/UPDATE accounts SET deactivated_at = now\(\)/i);
+    expect(updateSql).toMatch(/deactivated_at IS NULL/i);
+    expect(updateParams).toEqual([7]);
+
+    const [tokenSql, tokenParams] = dbMock.query.mock.calls[1];
+    expect(tokenSql).toMatch(/DELETE FROM auth_tokens WHERE account_id/i);
+    expect(tokenParams).toEqual([7]);
+  });
+
+  it('returns false (and skips token revocation) when nothing was deactivated', async () => {
     dbMock.query.mockResolvedValueOnce({ rowCount: 0 } as any);
-    expect(await deleteAccount(999)).toBe(false);
+    expect(await deactivateAccount(999)).toBe(false);
+    expect(dbMock.query).toHaveBeenCalledTimes(1);
   });
 });

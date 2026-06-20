@@ -35,6 +35,7 @@ export interface CharacterSummary {
 
 export interface AccountInfo {
   username: string;
+  email: string | null;
   createdAt: string | null;
   lastLogin: string | null;
   characterCount: number;
@@ -197,10 +198,18 @@ export class Api {
     const data = await this.get('/api/account');
     return {
       username: data.username,
+      email: data.email ?? null,
       createdAt: data.createdAt ?? null,
       lastLogin: data.lastLogin ?? null,
       characterCount: data.characterCount ?? 0,
     };
+  }
+
+  // Set or clear (empty string) the account's optional contact email. Returns
+  // the stored value (null when cleared).
+  async updateEmail(email: string): Promise<string | null> {
+    const data = await this.post('/api/account/email', { email });
+    return data.email ?? null;
   }
 
   // Change password. The server revokes all existing tokens and returns a fresh
@@ -210,9 +219,10 @@ export class Api {
     if (typeof data.token === 'string') this.token = data.token;
   }
 
-  // Permanently delete the account. `confirm` must equal the username; the
-  // server also re-verifies the password.
-  async deleteAccount(password: string, confirm: string): Promise<void> {
+  // Deactivate (close) the account. `confirm` must equal the username; the
+  // server also re-verifies the password. This soft-deactivates rather than
+  // hard-deleting: data is retained and reactivation is admin-only.
+  async deactivateAccount(password: string, confirm: string): Promise<void> {
     await this.delete('/api/account', { password, confirm });
   }
 

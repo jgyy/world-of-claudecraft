@@ -118,6 +118,14 @@ export function validPassword(p: unknown): p is string {
   return typeof p === 'string' && p.length >= 6 && p.length <= 128;
 }
 
+// Optional contact email. We never send mail yet (no SES), so this is a lenient
+// shape check, not a verified address: reject obvious garbage, accept anything
+// resembling local@domain.tld within a sane length. An empty string means "no
+// email" and is handled by the caller (clears the column), not here.
+export function validEmail(e: unknown): e is string {
+  return typeof e === 'string' && e.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+}
+
 export function validCharName(n: unknown): n is string {
   return validCharNameShape(n) && !offensiveName(n);
 }

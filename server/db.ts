@@ -78,6 +78,12 @@ ALTER TABLE accounts ADD COLUMN IF NOT EXISTS created_user_agent TEXT;
 ALTER TABLE accounts ADD COLUMN IF NOT EXISTS last_login_ip TEXT;
 ALTER TABLE accounts ADD COLUMN IF NOT EXISTS last_login_user_agent TEXT;
 ALTER TABLE accounts ADD COLUMN IF NOT EXISTS cosmetics JSONB NOT NULL DEFAULT '{}'::jsonb;
+-- Optional self-service contact email (no mail infra / SES yet, so unverified).
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS email TEXT;
+-- Self-service account closure: soft-deactivation instead of a hard row delete,
+-- so the account's data is retained and a deactivated account is simply barred
+-- from logging in (see moderationStatusForAccount). Reactivation is admin-only.
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS deactivated_at TIMESTAMPTZ;
 CREATE INDEX IF NOT EXISTS accounts_created_at ON accounts(created_at DESC);
 CREATE INDEX IF NOT EXISTS accounts_created_ip_created ON accounts(created_ip, created_at DESC);
 CREATE INDEX IF NOT EXISTS accounts_created_user_agent_created ON accounts(created_user_agent, created_at DESC);
@@ -438,6 +444,7 @@ export async function accountForToken(token: string): Promise<number | null> {
 
 export interface AccountInfo {
   username: string;
+  email: string | null;
   createdAt: string;
   lastLogin: string | null;
   characterCount: number;
@@ -448,7 +455,7 @@ export interface AccountInfo {
 // what a "your account" overview implies.
 export async function getAccountInfo(accountId: number): Promise<AccountInfo | null> {
   const res = await pool.query(
-    `SELECT a.username, a.created_at, a.last_login,
+    `SELECT a.username, a.email, a.created_at, a.last_login,
             (SELECT COUNT(*)::int FROM characters c WHERE c.account_id = a.id) AS character_count
      FROM accounts a WHERE a.id = $1`,
     [accountId],
@@ -457,10 +464,17 @@ export async function getAccountInfo(accountId: number): Promise<AccountInfo | n
   if (!row) return null;
   return {
     username: row.username,
+    email: row.email ?? null,
     createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : String(row.created_at),
     lastLogin: row.last_login == null ? null : (row.last_login instanceof Date ? row.last_login.toISOString() : String(row.last_login)),
     characterCount: row.character_count ?? 0,
   };
+}
+
+// Set (or clear, when null) the account's optional contact email. The address is
+// stored as-is and unverified — there is no mail delivery yet.
+export async function updateEmail(accountId: number, email: string | null): Promise<void> {
+  await pool.query('UPDATE accounts SET email = $2 WHERE id = $1', [accountId, email]);
 }
 
 // Fetch the stored scrypt hash so a self-service action (change password,
@@ -481,12 +495,20 @@ export async function deleteAllTokensForAccount(accountId: number): Promise<void
   await pool.query('DELETE FROM auth_tokens WHERE account_id = $1', [accountId]);
 }
 
-// Permanently delete an account. All account-scoped rows (characters, tokens,
-// sessions, social links via characters, referrals, reports) are removed by
-// ON DELETE CASCADE / SET NULL foreign keys, so a single DELETE suffices.
-export async function deleteAccount(accountId: number): Promise<boolean> {
-  const res = await pool.query('DELETE FROM accounts WHERE id = $1', [accountId]);
-  return (res.rowCount ?? 0) > 0;
+// Soft-deactivate an account (self-service closure). We deliberately do NOT
+// delete the row: the account and its characters are retained, the account is
+// just flagged inactive (moderationStatusForAccount then bars login) and every
+// existing bearer token is revoked so no live session survives the closure.
+// Reactivation is admin-only. Returns false if the account no longer exists or
+// was already deactivated.
+export async function deactivateAccount(accountId: number): Promise<boolean> {
+  const res = await pool.query(
+    'UPDATE accounts SET deactivated_at = now() WHERE id = $1 AND deactivated_at IS NULL',
+    [accountId],
+  );
+  if ((res.rowCount ?? 0) === 0) return false;
+  await pool.query('DELETE FROM auth_tokens WHERE account_id = $1', [accountId]);
+  return true;
 }
 
 // ── Non-custodial Solana wallet links ──────────────────────────────────────
@@ -698,7 +720,7 @@ export async function lifetimeXpStanding(
 
 export async function moderationStatusForAccount(accountId: number): Promise<AccountModerationStatus> {
   const res = await pool.query(
-    `SELECT banned_at, suspended_until, moderation_reason, chat_muted_until, chat_strikes
+    `SELECT banned_at, suspended_until, moderation_reason, chat_muted_until, chat_strikes, deactivated_at
      FROM accounts WHERE id = $1`,
     [accountId],
   );
@@ -711,6 +733,20 @@ export async function moderationStatusForAccount(accountId: number): Promise<Acc
     ? mutedUntilDate.toISOString()
     : null;
   const chatStrikes = Number(row.chat_strikes ?? 0);
+  // Self-service deactivation bars all access (login + any live token) until an
+  // admin reactivates. Checked before ban/suspension so a closed account reads
+  // as deactivated rather than leaking a stale moderation message.
+  if (row.deactivated_at) {
+    return {
+      locked: true,
+      banned: false,
+      suspendedUntil: null,
+      reason: '',
+      message: 'This account has been deactivated.',
+      chatMutedUntil,
+      chatStrikes,
+    };
+  }
   if (row.banned_at) {
     return {
       locked: true,

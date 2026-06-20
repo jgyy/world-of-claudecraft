@@ -147,7 +147,7 @@ export const hudChromeStrings = {
   },
   // Player-facing account settings panel (open from the character-select screen
   // and the in-game options menu). Self-service account info, password change,
-  // and account deletion.
+  // and account deactivation (soft-close).
   account: {
     open: "Account",
     openAria: "Open account settings",
@@ -158,10 +158,19 @@ export const hudChromeStrings = {
     // Info section
     infoHeading: "Account",
     usernameLabel: "Username",
+    emailInfoLabel: "Email",
+    emailNone: "Not set",
     memberSince: "Member since",
     lastLogin: "Last login",
     lastLoginNever: "Never",
     charactersLabel: "Characters",
+    // Contact-email section
+    emailHeading: "Contact Email",
+    emailNote: "Optional. Stored for future account recovery — we don't send email yet.",
+    emailLabel: "Email address",
+    saveEmailBtn: "Save Email",
+    emailSaved: "Email saved.",
+    emailCleared: "Email cleared.",
     // Change-password section
     passwordHeading: "Change Password",
     currentPassword: "Current password",
@@ -170,18 +179,20 @@ export const hudChromeStrings = {
     changePasswordBtn: "Change Password",
     passwordChanged: "Password changed.",
     passwordMismatch: "New passwords don't match.",
-    // Delete-account section
-    dangerHeading: "Delete Account",
-    dangerWarning: "This permanently deletes your account and every character on it. This cannot be undone.",
+    // Deactivate-account section
+    dangerHeading: "Deactivate Account",
+    dangerWarning: "This deactivates your account and signs you out everywhere. Your characters are kept, but you won't be able to log back in — contact support to reactivate.",
     deletePasswordLabel: "Password",
     deleteConfirmLabel: "Type your username to confirm",
-    deleteBtn: "Delete Account Permanently",
-    deleted: "Account deleted.",
+    deleteBtn: "Deactivate Account",
+    deleted: "Account deactivated.",
     // Server-error localizations (mapped in userFacingApiError)
     errIncorrectPassword: "Incorrect password.",
     errSamePassword: "Your new password must be different from your current one.",
-    errDeleteConfirm: "Type your username exactly to confirm deletion.",
-    errDeleteOnline: "Log out of all characters before deleting your account.",
+    errInvalidEmail: "Enter a valid email address.",
+    errDeleteConfirm: "Type your username exactly to confirm deactivation.",
+    errDeleteOnline: "Log out of all characters before deactivating your account.",
+    errDeactivated: "This account has been deactivated. Contact support to reactivate it.",
     errAccountNotFound: "Account not found.",
     errRateLimited: "Too many requests — slow down and try again.",
   },
