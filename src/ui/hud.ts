@@ -94,6 +94,9 @@ import {
 // graphics, and logout, all of which live outside the HUD)
 export interface OptionsHooks {
   logout(): void;
+  // Open the account settings panel. Only wired in online play (offline mode has
+  // no account); when absent the options menu omits the entry.
+  openAccountSettings?(): void;
   captureKey(cb: (code: string | null) => void): void;
   settings: Settings;
   onSettingChange(key: keyof GameSettings, value: GameSettings[keyof GameSettings]): void;
@@ -8036,6 +8039,9 @@ export class Hud {
     add(t('hud.options.graphics'), () => goto('graphics'));
     add(t('hud.options.interface'), () => goto('interface'));
     add(t('hud.options.audio'), () => goto('audio'));
+    if (this.optionsHooks?.openAccountSettings) {
+      add(t('hudChrome.account.open'), () => { this.closeOptions(); this.optionsHooks?.openAccountSettings?.(); });
+    }
     add(t('hud.options.logout'), () => this.optionsHooks?.logout());
     add(t('hud.options.returnToGame'), () => this.closeOptions());
     el.appendChild(list);

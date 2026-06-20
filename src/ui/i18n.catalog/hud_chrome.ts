@@ -145,4 +145,44 @@ export const hudChromeStrings = {
       other: "Who: {count} players online on {realm}.",
     },
   },
+  // Player-facing account settings panel (open from the character-select screen
+  // and the in-game options menu). Self-service account info, password change,
+  // and account deletion.
+  account: {
+    open: "Account",
+    openAria: "Open account settings",
+    title: "Account Settings",
+    close: "Close",
+    closeAria: "Close account settings",
+    working: "Working…",
+    // Info section
+    infoHeading: "Account",
+    usernameLabel: "Username",
+    memberSince: "Member since",
+    lastLogin: "Last login",
+    lastLoginNever: "Never",
+    charactersLabel: "Characters",
+    // Change-password section
+    passwordHeading: "Change Password",
+    currentPassword: "Current password",
+    newPassword: "New password",
+    confirmNewPassword: "Confirm new password",
+    changePasswordBtn: "Change Password",
+    passwordChanged: "Password changed.",
+    passwordMismatch: "New passwords don't match.",
+    // Delete-account section
+    dangerHeading: "Delete Account",
+    dangerWarning: "This permanently deletes your account and every character on it. This cannot be undone.",
+    deletePasswordLabel: "Password",
+    deleteConfirmLabel: "Type your username to confirm",
+    deleteBtn: "Delete Account Permanently",
+    deleted: "Account deleted.",
+    // Server-error localizations (mapped in userFacingApiError)
+    errIncorrectPassword: "Incorrect password.",
+    errSamePassword: "Your new password must be different from your current one.",
+    errDeleteConfirm: "Type your username exactly to confirm deletion.",
+    errDeleteOnline: "Log out of all characters before deleting your account.",
+    errAccountNotFound: "Account not found.",
+    errRateLimited: "Too many requests — slow down and try again.",
+  },
 };

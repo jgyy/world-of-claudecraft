@@ -434,6 +434,61 @@ export async function accountForToken(token: string): Promise<number | null> {
   return res.rows[0]?.account_id ?? null;
 }
 
+// ── Player-facing account self-service (settings page) ─────────────────────
+
+export interface AccountInfo {
+  username: string;
+  createdAt: string;
+  lastLogin: string | null;
+  characterCount: number;
+}
+
+// Read-only account summary for the settings panel. The character count is
+// realm-agnostic (every character the account owns, across realms) to match
+// what a "your account" overview implies.
+export async function getAccountInfo(accountId: number): Promise<AccountInfo | null> {
+  const res = await pool.query(
+    `SELECT a.username, a.created_at, a.last_login,
+            (SELECT COUNT(*)::int FROM characters c WHERE c.account_id = a.id) AS character_count
+     FROM accounts a WHERE a.id = $1`,
+    [accountId],
+  );
+  const row = res.rows[0];
+  if (!row) return null;
+  return {
+    username: row.username,
+    createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : String(row.created_at),
+    lastLogin: row.last_login == null ? null : (row.last_login instanceof Date ? row.last_login.toISOString() : String(row.last_login)),
+    characterCount: row.character_count ?? 0,
+  };
+}
+
+// Fetch the stored scrypt hash so a self-service action (change password,
+// delete account) can re-verify the caller actually knows their password.
+export async function passwordHashForAccount(accountId: number): Promise<string | null> {
+  const res = await pool.query('SELECT password_hash FROM accounts WHERE id = $1', [accountId]);
+  return res.rows[0]?.password_hash ?? null;
+}
+
+export async function updatePasswordHash(accountId: number, passwordHash: string): Promise<void> {
+  await pool.query('UPDATE accounts SET password_hash = $2 WHERE id = $1', [accountId, passwordHash]);
+}
+
+// Revoke every bearer token for an account. Used after a password change so a
+// leaked/stale session elsewhere can no longer act; the caller re-issues a
+// fresh token for the active session immediately after.
+export async function deleteAllTokensForAccount(accountId: number): Promise<void> {
+  await pool.query('DELETE FROM auth_tokens WHERE account_id = $1', [accountId]);
+}
+
+// Permanently delete an account. All account-scoped rows (characters, tokens,
+// sessions, social links via characters, referrals, reports) are removed by
+// ON DELETE CASCADE / SET NULL foreign keys, so a single DELETE suffices.
+export async function deleteAccount(accountId: number): Promise<boolean> {
+  const res = await pool.query('DELETE FROM accounts WHERE id = $1', [accountId]);
+  return (res.rowCount ?? 0) > 0;
+}
+
 // ── Non-custodial Solana wallet links ──────────────────────────────────────
 
 export interface WalletLinkRow {

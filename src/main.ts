@@ -12,6 +12,7 @@ import { sfx } from './game/sfx';
 import { activePvpOpponentIds, handlePickedEntity, hoverCursorKind, isAttackableEntity } from './game/interactions';
 import { clickMoveShouldCancel, clickMoveShouldWalk, clickMoveStep, distance2d, latencyAdjustedStopDistance, stepAngleToward } from './game/click_move';
 import { Api, ClientWorld, CharacterSummary, type ReleaseEntry } from './net/online';
+import { initAccountSettings, type AccountSettingsController } from './ui/account_settings';
 import { setWocBalance, setWalletUiEnabled } from './ui/wallet_balance';
 import { absolutePublishedCardUrl, setCardUploader, setReferralProvider, setStandingProvider } from './ui/player_card_share';
 // The wallet module (Reown AppKit + @solana/web3.js, ~1MB) is loaded lazily via
@@ -150,6 +151,13 @@ function userFacingApiError(err: unknown): string {
   if (normalized === 'character not found' || normalized === 'no such character' || normalized === 'not found') return t('errors.api.characterNotFound');
   if (normalized === 'character is currently online') return t('errors.api.characterOnline');
   if (normalized === 'type the character name to confirm deletion') return t('errors.api.deleteConfirm');
+  // Account self-service (settings panel) error strings (server/main.ts).
+  if (normalized === 'incorrect password') return t('hudChrome.account.errIncorrectPassword');
+  if (normalized === 'new password must be different') return t('hudChrome.account.errSamePassword');
+  if (normalized === 'type your username to confirm account deletion') return t('hudChrome.account.errDeleteConfirm');
+  if (normalized === 'log out of all characters before deleting your account') return t('hudChrome.account.errDeleteOnline');
+  if (normalized === 'account not found') return t('hudChrome.account.errAccountNotFound');
+  if (normalized === 'too many requests, slow down') return t('hudChrome.account.errRateLimited');
   if (normalized === 'not authenticated' || normalized === 'authentication required') return t('errors.api.notAuthenticated');
   if (normalized === 'this account has been banned.') return t('errors.api.accountBanned');
   if (normalized === 'character already in world') return t('errors.api.alreadyInWorld');
@@ -826,6 +834,8 @@ async function startGame(world: IWorld, offlineSim: Sim | null, online: ClientWo
   // refs that only exist now (input/renderer) or are page-level (reload)
   hud.attachOptions({
     logout: () => location.reload(),
+    // Account settings are account-scoped, so only offer the entry in online play.
+    openAccountSettings: online ? () => openAccountSettings() : undefined,
     captureKey: (cb) => input.captureNextKey(cb),
     settings,
     onSettingChange: (key, value) => applySetting(key, value),
@@ -1418,6 +1428,22 @@ async function startOffline(playerClass: PlayerClass, name: string, skin = 0): P
 // ---------------------------------------------------------------------------
 
 const api = new Api();
+
+// Account settings panel (#account-settings-modal). Lazily initialized on first
+// open so its DOM/listener wiring only happens for logged-in players. Shared by
+// the character-select "Account" button and the in-game options menu.
+let accountSettings: AccountSettingsController | null = null;
+function getAccountSettings(): AccountSettingsController {
+  if (!accountSettings) {
+    accountSettings = initAccountSettings({
+      api,
+      localizeError: userFacingApiError,
+      onDeleted: () => { api.token = null; location.reload(); },
+    });
+  }
+  return accountSettings;
+}
+function openAccountSettings(): void { getAccountSettings().open(); }
 
 // Referral capture: a visitor who arrives from a shared player card link
 // (?ref=<slug>) carries the referrer's slug into registration. Read it once at
@@ -3742,6 +3768,7 @@ function wireStartScreens(): void {
   // New Character opens the dedicated create screen; create's Back returns here.
   $('#btn-new-character').addEventListener('click', () => show('#charcreate-panel'));
   $('#btn-charcreate-back').addEventListener('click', () => show('#charselect-panel'));
+  $('#btn-account-settings').addEventListener('click', () => openAccountSettings());
   // Close the realm dropdown on outside click or Escape.
   document.addEventListener('click', (e) => {
     if (!realmDropdownOpen) return;

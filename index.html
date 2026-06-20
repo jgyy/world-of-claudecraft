@@ -4359,6 +4359,47 @@
     margin-top: 14px;
   }
 
+  /* ---------- Account settings modal ---------- */
+  .account-modal {
+    width: min(460px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 20px;
+    text-align: left;
+  }
+  .account-modal h2 {
+    margin: 0 0 14px;
+    color: var(--color-text-light);
+    font-family: var(--font-heading);
+    font-size: 22px;
+  }
+  .account-section {
+    margin: 0 0 18px;
+    padding: 0 0 16px;
+    border-bottom: 1px solid var(--color-border-default);
+  }
+  .account-section:last-of-type { border-bottom: none; }
+  .account-section h3 {
+    margin: 0 0 10px;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 16px;
+  }
+  .account-section .auth-label { display: block; margin-top: 12px; }
+  .account-section input { width: 100%; box-sizing: border-box; margin-top: 4px; }
+  .account-section .btn { margin-top: 14px; }
+  .account-info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+    margin: 0;
+  }
+  .account-info dt { color: var(--color-text-muted); }
+  .account-info dd { margin: 0; color: var(--color-text-light); text-align: right; }
+  .account-danger h3 { color: #e06a6a; }
+  .account-danger-warning { margin: 0; color: var(--color-text-muted); line-height: 1.45; font-size: 13px; }
+  #account-password-msg.is-ok, #account-delete-msg.is-ok { color: #6ec06e; }
+
   /* ---------- Premium Class Details Panel ---------- */
   .class-details-panel {
     background: linear-gradient(135deg, rgba(20, 20, 30, 0.96) 0%, rgba(10, 10, 15, 0.98) 100%);
@@ -7450,6 +7491,7 @@
               <ul id="char-list" role="list"></ul>
               <div class="cs-list-actions">
                 <button type="button" class="btn btn-secondary" id="btn-charselect-back" data-i18n="auth.back">Back</button>
+                <button type="button" class="btn btn-secondary" id="btn-account-settings" data-i18n="hudChrome.account.open" data-i18n-aria="hudChrome.account.openAria" aria-label="Open account settings">Account</button>
                 <button type="button" class="btn btn-primary cs-new-btn" id="btn-new-character" data-i18n="auth.newCharacter">New Character</button>
               </div>
             </div>
@@ -7650,6 +7692,49 @@
         <div class="confirm-actions">
           <button type="button" class="btn btn-secondary" id="btn-cancel-delete-character" data-i18n="deleteCharacter.cancel">Cancel</button>
           <button type="button" class="btn btn-danger" id="btn-confirm-delete-character" disabled data-i18n="deleteCharacter.confirm">Delete Permanently</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="account-settings-modal" class="modal-backdrop" hidden>
+      <div class="account-modal panel auth-panel-premium" role="dialog" aria-modal="true" aria-labelledby="account-settings-title">
+        <h2 id="account-settings-title" data-i18n="hudChrome.account.title">Account Settings</h2>
+
+        <section class="account-section account-info-section">
+          <h3 data-i18n="hudChrome.account.infoHeading">Account</h3>
+          <dl class="account-info">
+            <dt data-i18n="hudChrome.account.usernameLabel">Username</dt><dd id="account-info-username">—</dd>
+            <dt data-i18n="hudChrome.account.memberSince">Member since</dt><dd id="account-info-created">—</dd>
+            <dt data-i18n="hudChrome.account.lastLogin">Last login</dt><dd id="account-info-lastlogin">—</dd>
+            <dt data-i18n="hudChrome.account.charactersLabel">Characters</dt><dd id="account-info-characters">—</dd>
+          </dl>
+        </section>
+
+        <form id="account-password-form" class="account-section" novalidate>
+          <h3 data-i18n="hudChrome.account.passwordHeading">Change Password</h3>
+          <label for="account-current-password" class="auth-label" data-i18n="hudChrome.account.currentPassword">Current password</label>
+          <input id="account-current-password" type="password" autocomplete="current-password" />
+          <label for="account-new-password" class="auth-label" data-i18n="hudChrome.account.newPassword">New password</label>
+          <input id="account-new-password" type="password" autocomplete="new-password" />
+          <label for="account-confirm-password" class="auth-label" data-i18n="hudChrome.account.confirmNewPassword">Confirm new password</label>
+          <input id="account-confirm-password" type="password" autocomplete="new-password" />
+          <div id="account-password-msg" class="auth-error" aria-live="polite"></div>
+          <button type="submit" class="btn btn-primary" id="btn-account-change-password" data-i18n="hudChrome.account.changePasswordBtn">Change Password</button>
+        </form>
+
+        <section class="account-section account-danger">
+          <h3 data-i18n="hudChrome.account.dangerHeading">Delete Account</h3>
+          <p class="account-danger-warning" data-i18n="hudChrome.account.dangerWarning">This permanently deletes your account and every character on it. This cannot be undone.</p>
+          <label for="account-delete-password" class="auth-label" data-i18n="hudChrome.account.deletePasswordLabel">Password</label>
+          <input id="account-delete-password" type="password" autocomplete="off" />
+          <label for="account-delete-confirm" class="auth-label" data-i18n="hudChrome.account.deleteConfirmLabel">Type your username to confirm</label>
+          <input id="account-delete-confirm" type="text" autocomplete="off" />
+          <div id="account-delete-msg" class="auth-error" aria-live="polite"></div>
+          <button type="button" class="btn btn-danger" id="btn-account-delete" disabled data-i18n="hudChrome.account.deleteBtn">Delete Account Permanently</button>
+        </section>
+
+        <div class="confirm-actions">
+          <button type="button" class="btn btn-secondary" id="btn-account-close" data-i18n="hudChrome.account.close" data-i18n-aria="hudChrome.account.closeAria" aria-label="Close account settings">Close</button>
         </div>
       </div>
     </div>

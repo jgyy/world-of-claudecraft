@@ -33,6 +33,13 @@ export interface CharacterSummary {
   forceRename: boolean;
 }
 
+export interface AccountInfo {
+  username: string;
+  createdAt: string | null;
+  lastLogin: string | null;
+  characterCount: number;
+}
+
 function stringList(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
 }
@@ -182,6 +189,31 @@ export class Api {
 
   async deleteCharacter(characterId: number, name: string): Promise<void> {
     await this.delete(`/api/characters/${characterId}`, { name });
+  }
+
+  // ── Account self-service (settings panel) ──────────────────────────────────
+  // Read-only summary for the account settings panel.
+  async accountInfo(): Promise<AccountInfo> {
+    const data = await this.get('/api/account');
+    return {
+      username: data.username,
+      createdAt: data.createdAt ?? null,
+      lastLogin: data.lastLogin ?? null,
+      characterCount: data.characterCount ?? 0,
+    };
+  }
+
+  // Change password. The server revokes all existing tokens and returns a fresh
+  // one for this session, so update our stored token to stay logged in.
+  async changePassword(currentPassword: string, newPassword: string): Promise<void> {
+    const data = await this.post('/api/account/password', { currentPassword, newPassword });
+    if (typeof data.token === 'string') this.token = data.token;
+  }
+
+  // Permanently delete the account. `confirm` must equal the username; the
+  // server also re-verifies the password.
+  async deleteAccount(password: string, confirm: string): Promise<void> {
+    await this.delete('/api/account', { password, confirm });
   }
 
   async reportPlayer(reporterCharacterId: number, targetPid: number, reason: string, details: string): Promise<void> {

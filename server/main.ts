@@ -8,6 +8,7 @@ import {
   pruneChatLogs, pruneClientPerfReports, searchCharacters, characterCountsByRealm, moderationStatusForAccount, renameCharacter,
   findCharacterReportTargetByName, topArenaRatings, topLifetimeXp, chatMuteStatusForAccount, loadAccountCosmetics,
   referralCountForAccount, primarySlugForAccount, lifetimeXpStanding,
+  getAccountInfo, passwordHashForAccount, updatePasswordHash, deleteAllTokensForAccount, deleteAccount,
 } from './db';
 import { virtualLevel } from '../src/sim/types';
 import { Sim } from '../src/sim/sim';
@@ -469,6 +470,63 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
       }
       const ok = await deleteCharacter(accountId, characterId);
       return json(res, ok ? 200 : 404, ok ? { ok: true } : { error: 'not found' });
+    }
+    // ── Player-facing account self-service (settings page) ──────────────────
+    if (url === '/api/account') {
+      if (req.method === 'GET') {
+        const accountId = await bearerActiveAccount(req, res);
+        if (accountId === null) return;
+        const info = await getAccountInfo(accountId);
+        if (!info) return json(res, 404, { error: 'account not found' });
+        return json(res, 200, info);
+      }
+      if (req.method === 'DELETE') {
+        if (rateLimited(req)) return json(res, 429, { error: 'too many requests, slow down' });
+        const accountId = await bearerActiveAccount(req, res);
+        if (accountId === null) return;
+        const body = await readBody(req);
+        const info = await getAccountInfo(accountId);
+        if (!info) return json(res, 404, { error: 'account not found' });
+        // Re-typing the username is the explicit destructive-action confirmation,
+        // mirroring the character-delete "type the name" guard.
+        if (normalizeDeleteConfirmation(body.confirm) !== normalizeDeleteConfirmation(info.username)) {
+          return json(res, 400, { error: 'type your username to confirm account deletion' });
+        }
+        const hash = await passwordHashForAccount(accountId);
+        if (!hash || !(await verifyPassword(String(body.password ?? ''), hash))) {
+          return json(res, 401, { error: 'incorrect password' });
+        }
+        // Refuse while any of the account's characters are in the world: an
+        // online character has a live in-memory session and unsaved state, and
+        // deleting it out from under the loop desyncs the server (mirrors the
+        // per-character rename/delete online-guard).
+        if ([...game.clients.values()].some((s) => s.accountId === accountId)) {
+          return json(res, 400, { error: 'log out of all characters before deleting your account' });
+        }
+        const ok = await deleteAccount(accountId);
+        return json(res, ok ? 200 : 404, ok ? { ok: true } : { error: 'account not found' });
+      }
+    }
+    if (req.method === 'POST' && url === '/api/account/password') {
+      if (rateLimited(req)) return json(res, 429, { error: 'too many requests, slow down' });
+      const accountId = await bearerActiveAccount(req, res);
+      if (accountId === null) return;
+      const body = await readBody(req);
+      const currentPassword = String(body.currentPassword ?? '');
+      const newPassword = body.newPassword;
+      if (!validPassword(newPassword)) return json(res, 400, { error: 'password must be at least 6 chars' });
+      if (newPassword === currentPassword) return json(res, 400, { error: 'new password must be different' });
+      const hash = await passwordHashForAccount(accountId);
+      if (!hash || !(await verifyPassword(currentPassword, hash))) {
+        return json(res, 401, { error: 'incorrect password' });
+      }
+      await updatePasswordHash(accountId, await hashPassword(newPassword));
+      // Invalidate every existing session (including any leaked tokens) and hand
+      // the caller a fresh token so the active page stays logged in.
+      await deleteAllTokensForAccount(accountId);
+      const token = newToken();
+      await saveToken(token, accountId);
+      return json(res, 200, { ok: true, token });
     }
     if (req.method === 'GET' && url === '/api/realms') {
       // optionally authenticated: with a token we also return how many
