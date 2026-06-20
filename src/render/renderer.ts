@@ -2805,7 +2805,14 @@ export class Renderer {
       const cdx = e.pos.x - p.pos.x, cdz = e.pos.z - p.pos.z;
       const d2 = cdx * cdx + cdz * cdz;
       if (id !== p.id) {
-        if (d2 > ENTITY_DRAW_RANGE * ENTITY_DRAW_RANGE) {
+        // Per-frame visibility uses the SAME 80/96 hysteresis as view
+        // create/destroy (above) so a rig hovering right at the 80yd draw edge
+        // doesn't toggle visible/invisible every frame — that hard cutoff is the
+        // actual on-screen boundary flicker. group.visible carries last frame's
+        // state: once shown, keep it until past the 96yd destroy radius (where
+        // the view is torn down anyway); while hidden, show only within 80yd.
+        const showCutoff = v.group.visible ? ENTITY_VIEW_DESTROY_RANGE_SQ : ENTITY_VIEW_CREATE_RANGE_SQ;
+        if (d2 > showCutoff) {
           v.group.visible = false;
           continue;
         }

@@ -858,6 +858,27 @@ describe('despawn grace (anti-flicker)', () => {
     expect(c.entities.has(2)).toBe(true);
   });
 
+  it('treats a `keep`-listed entity as present (tier-throttle is never "missing")', () => {
+    const c = bareClient(1);
+    const self = () => fullWire(1, 0, 0);
+
+    (c as any).applySnapshot(snap(self(), [fullWire(2, 95, 0)]));
+    expect(c.entities.has(2)).toBe(true);
+
+    // A distance-tier-throttled entity is omitted from `ents` but listed in
+    // `keep`, so it counts as seen — retained, and its grace timer stays clear.
+    clock += 50;
+    (c as any).applySnapshot(snap(self(), [], [2]));
+    expect(c.entities.has(2)).toBe(true);
+    expect((c as any).missingSince.has(2)).toBe(false);
+
+    // Because the timer was cleared, a genuine later miss starts a fresh grace
+    // window (held now, not deleted as if it had been missing since the throttle).
+    clock += 5000;
+    (c as any).applySnapshot(snap(self(), []));
+    expect(c.entities.has(2)).toBe(true);
+  });
+
   it('drops a close-range disappearance immediately (preserves instant stealth-vanish)', () => {
     const c = bareClient(1);
     const self = () => fullWire(1, 0, 0);
