@@ -50,8 +50,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.account.saveEmailBtn",
     "hudChrome.account.title",
     "hudChrome.account.usernameLabel",
-    "hudChrome.account.working",
-    "hudChrome.options.footstepSounds"
+    "hudChrome.account.working"
   ],
   "es_ES": [
     "hudChrome.account.changePasswordBtn",
@@ -94,8 +93,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.account.saveEmailBtn",
     "hudChrome.account.title",
     "hudChrome.account.usernameLabel",
-    "hudChrome.account.working",
-    "hudChrome.options.footstepSounds"
+    "hudChrome.account.working"
   ],
   "fr_FR": [
     "hudChrome.account.changePasswordBtn",
@@ -138,8 +136,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.account.saveEmailBtn",
     "hudChrome.account.title",
     "hudChrome.account.usernameLabel",
-    "hudChrome.account.working",
-    "hudChrome.options.footstepSounds"
+    "hudChrome.account.working"
   ],
   "fr_CA": [
     "hudChrome.account.changePasswordBtn",
@@ -182,8 +179,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.account.saveEmailBtn",
     "hudChrome.account.title",
     "hudChrome.account.usernameLabel",
-    "hudChrome.account.working",
-    "hudChrome.options.footstepSounds"
+    "hudChrome.account.working"
   ],
   "en_CA": [],
   "it_IT": [
@@ -227,8 +223,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.account.saveEmailBtn",
     "hudChrome.account.title",
     "hudChrome.account.usernameLabel",
-    "hudChrome.account.working",
-    "hudChrome.options.footstepSounds"
+    "hudChrome.account.working"
   ],
   "de_DE": [
     "hudChrome.account.changePasswordBtn",
@@ -271,8 +266,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.account.saveEmailBtn",
     "hudChrome.account.title",
     "hudChrome.account.usernameLabel",
-    "hudChrome.account.working",
-    "hudChrome.options.footstepSounds"
+    "hudChrome.account.working"
   ],
   "zh_CN": [],
   "zh_TW": [],
@@ -319,8 +313,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.account.saveEmailBtn",
     "hudChrome.account.title",
     "hudChrome.account.usernameLabel",
-    "hudChrome.account.working",
-    "hudChrome.options.footstepSounds"
+    "hudChrome.account.working"
   ],
   "ru_RU": []
 };
