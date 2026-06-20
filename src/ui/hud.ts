@@ -44,7 +44,7 @@ import { crestIdForEntity } from './unit_portrait';
 import { svgIcon } from './ui_icons';
 import { walletUiEnabled, wocBalance, wocBalanceVerified, verifiedWocBalance, onWalletUiChange } from './wallet_balance';
 import {
-  renderPlayerCardCanvas, cardCanvasToBlob, CARD_POSES,
+  renderPlayerCardCanvas, cardCanvasToBlob, cardCanvasToUploadBlob, CARD_POSES,
   type PlayerCardData, type PlayerCardStat,
 } from './player_card';
 import { cardHostingAvailable, publishCard, fetchReferralInfo, fetchStanding, type PublishedCard, type CharacterStanding } from './player_card_share';
@@ -6105,7 +6105,7 @@ export class Hud {
       if (state.published) return state.published;
       if (!state.canvas) throw new Error(t('playerCard.statusStillRendering'));
       setStatus(t('playerCard.statusPublishing'));
-      const pub = await publishCard(await cardCanvasToBlob(state.canvas));
+      const pub = await publishCard(await cardCanvasToUploadBlob(state.canvas));
       state.published = pub;
       linkInput.value = pub.url;
       linkRow.hidden = false;
