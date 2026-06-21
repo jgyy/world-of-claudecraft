@@ -2414,7 +2414,9 @@
   }
 
   /* Footer donate link keeps the social-link shape but warms up on hover. */
-  .footer-lang-row { display: flex; justify-content: center; }
+  .footer-lang-row,
+  .footer-legal-row { display: flex; justify-content: center; }
+  .footer-legal-row { gap: 14px; flex-wrap: wrap; }
   .social-link.donate:hover,
   .social-link.donate:focus-visible { color: #ff9db3; border-color: #ff6b8b; box-shadow: 0 0 10px rgba(255, 107, 139, 0.35); }
 
@@ -7975,6 +7977,10 @@
         </a>
       </div>
       <div id="game-version">v0.10</div>
+      </div>
+      <div class="footer-legal-row">
+        <a href="/terms" class="footer-link" data-i18n="footer.terms">Terms of Service</a>
+        <a href="/privacy" class="footer-link" data-i18n="footer.privacy">Privacy Policy</a>
       </div>
       <div class="footer-lang-row">
         <div class="language-selector">
