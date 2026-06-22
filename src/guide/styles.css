@@ -307,7 +307,14 @@ img { max-width: 100%; height: auto; }
   box-shadow: var(--g-shadow-cta);
   transition: filter var(--g-motion), box-shadow var(--g-motion);
 }
-.guide-cta:hover { filter: brightness(1.06); text-decoration: none; box-shadow: var(--g-shadow-cta-hover); }
+/* One hover for every solid CTA (header, footer, hero): the gold fill lifts to a brighter
+   gradient with a stronger glow. Uses an explicit gradient, not filter:brightness, so the
+   change reads clearly and is identical everywhere. */
+.guide-cta:hover {
+  background: linear-gradient(180deg, #fff7d1 0%, #ffe24a 100%);
+  box-shadow: var(--g-shadow-cta-hover);
+  text-decoration: none;
+}
 /* The CTA is a link, so pin its dark-on-gold text across every link state. Without this
    the generic a:hover (gold text) and the footer-links color both win on specificity and
    wash the label out against the gold fill. */
@@ -328,7 +335,7 @@ img { max-width: 100%; height: auto; }
 .guide-cta-ghost:visited,
 .guide-cta-ghost:hover,
 .guide-cta-ghost:focus { color: var(--g-gold); }
-.guide-cta-ghost:hover { background: var(--g-wash-gold); filter: none; }
+.guide-cta-ghost:hover { background: var(--g-wash-gold); }
 
 /* Hamburger toggle (mobile only). */
 .guide-menu-toggle {
@@ -867,8 +874,10 @@ body[data-guide-route="home"] .guide-main { padding-block-start: 0; }
   align-items: center;
   justify-content: center;
 }
-.guide-footer-links a { color: var(--g-text-dim); font-size: var(--g-text-base); }
-.guide-footer-links a:hover { color: var(--g-gold); }
+/* Exclude the CTA: it is styled by .guide-cta so the footer link color must not bleed in
+   (otherwise the footer Play button label washes out and its hover diverges from the rest). */
+.guide-footer-links a:not(.guide-cta) { color: var(--g-text-dim); font-size: var(--g-text-base); }
+.guide-footer-links a:not(.guide-cta):hover { color: var(--g-gold); }
 .guide-footer-rights { color: var(--g-text-muted); font-size: var(--g-text-sm); margin: 0; }
 
 /* -------------------------------------------------------------- responsive */
