@@ -230,10 +230,118 @@ export const fr_CA: EnTranslations = {
       "clickMoveRight": "Clic droit",
       "footstepSounds": "Sons de pas",
       "showWalletOnCharacterScreen": "Afficher le portefeuille sur l’écran des personnages",
-      "showWalletOnPlayerCard": "Afficher le portefeuille sur la carte de joueur"
+      "showWalletOnPlayerCard": "Afficher le portefeuille sur la carte de joueur",
+      "uiScale": "Échelle de l’interface",
+      "highContrastBackground": "Arrière-plan à contraste élevé"
+    },
+    "perf": {
+      "title": "Surcouche de performance",
+      "enable": "Afficher la surcouche de performance",
+      "description": "Choisissez les statistiques à afficher, l'emplacement de la surcouche et son apparence.",
+      "sectionPosition": "Position",
+      "sectionAppearance": "Apparence",
+      "sectionStats": "Statistiques",
+      "positionX": "Horizontale",
+      "positionY": "Verticale",
+      "resetPosition": "Réinitialiser la position",
+      "dragHint": "Faites glisser la surcouche pour la déplacer, ou utilisez les curseurs ci-dessous.",
+      "opacity": "Opacité de l'arrière-plan",
+      "solidBg": "Arrière-plan opaque",
+      "fontScale": "Taille du texte",
+      "textColor": "Couleur du texte",
+      "bgColor": "Couleur de l'arrière-plan",
+      "colorTheme": "Thème de couleurs",
+      "graph": "Graphique du temps par image",
+      "thresholds": "Avertissements par couleur",
+      "presetsLabel": "Préréglages rapides",
+      "presetMinimal": "Minimal",
+      "presetStandard": "Standard",
+      "presetEverything": "Tout",
+      "groups": {
+        "frame": "Images et cadence",
+        "network": "Réseau",
+        "renderer": "Rendu",
+        "system": "Système"
+      },
+      "labels": {
+        "fps": "FPS",
+        "frameTime": "Temps par image",
+        "fps1Low": "1 % min.",
+        "fps01Low": "0,1 % min.",
+        "ping": "Ping",
+        "jitter": "Gigue",
+        "snapshot": "Fréquence d'instantanés",
+        "connection": "Connexion",
+        "drawCalls": "Appels de rendu",
+        "triangles": "Triangles",
+        "geometries": "Géométries",
+        "textures": "Textures",
+        "programs": "Shaders",
+        "renderScale": "Échelle de rendu",
+        "gpu": "GPU",
+        "memory": "Mémoire",
+        "hitches": "Saccades",
+        "entities": "Entités"
+      },
+      "themes": {
+        "gold": "Or",
+        "frost": "Givre",
+        "ember": "Braise",
+        "jade": "Jade",
+        "crimson": "Carmin",
+        "mono": "Mono"
+      },
+      "units": {
+        "ms": "{value} ms",
+        "mb": "{value} Mo",
+        "memPair": "{used} / {limit} Mo",
+        "hz": "{value} Hz"
+      },
+      "badges": {
+        "backgrounded": "En arrière-plan",
+        "offline": "Hors ligne"
+      }
     },
     "playerCard": {
       "showWalletBadge": "Afficher l’insigne de portefeuille"
+    },
+    "landing": {
+      "highContrast": "Contraste élevé",
+      "highContrastAria": "Basculer l’arrière-plan à contraste élevé : désactive la bande-annonce animée pour que le texte de l’écran de démarrage reste lisible"
+    },
+    "statInfo": {
+      "fromYour": "Grâce à vos {value} en {stat} :",
+      "desc": {
+        "str": "Augmente votre puissance d'attaque, vos coups d'arme frappent donc plus fort.",
+        "agi": "Aiguise vos réflexes et votre précision, ce qui améliore plusieurs de vos statistiques de combat.",
+        "sta": "Endurcit votre corps, augmente vos points de vie maximum et la vitesse à laquelle vous récupérez des points de vie au repos.",
+        "int": "Augmente la réserve de mana d'un lanceur de sorts et améliore ses chances de porter un coup critique avec un sort.",
+        "spi": "Accélère la vitesse à laquelle le mana d'un lanceur de sorts se régénère au repos, hors combat.",
+        "armor": "Atténue les coups physiques reçus. La réduction est plus importante contre les attaquants de niveau inférieur et est plafonnée à 75 %.",
+        "attackPower": "Renforce vos attaques d'arme. Chaque tranche de 14 de puissance d'attaque ajoute 1 dégât par seconde.",
+        "dps": "Vos dégâts par seconde estimés à l'arme, combinant les dégâts et la vitesse de votre arme avec votre puissance d'attaque.",
+        "critChance": "Vos chances de porter un coup critique avec une attaque, infligeant le double des dégâts.",
+        "dodge": "Vos chances d'éviter complètement une attaque de mêlée, sans subir aucun dégât."
+      },
+      "effects": {
+        "attackPower": "+{value} Puissance d'attaque",
+        "rangedAttackPower": "+{value} Puissance d'attaque à distance",
+        "critPct": "+{value} % de chances de coup critique",
+        "dodgePct": "+{value} % d'esquive",
+        "armor": "+{value} Armure",
+        "maxHealth": "+{value} Points de vie maximum",
+        "maxMana": "+{value} Mana maximum",
+        "spellCritPct": "+{value} % de chances de coup critique des sorts",
+        "healthRegen": "Environ {value} points de vie toutes les 5 sec au repos",
+        "manaRegen": "Environ {value} mana toutes les 5 sec au repos",
+        "damageReduction": "Réduction des dégâts contre un attaquant de niveau {level} : {value} %",
+        "dpsFromAp": "Ajoute {value} dégâts par seconde à vos attaques"
+      },
+      "notes": {
+        "minorForClass": "De peu d'utilité pour votre classe.",
+        "baseChance": "Inclut 5 % de chances de base communes à tous les aventuriers.",
+        "dpsApprox": "Une estimation, elle exclut les coups critiques et les dégâts des capacités."
+      }
     },
     "talents": {
       "defaultBuildName": "Configuration {n}"
@@ -267,48 +375,52 @@ export const fr_CA: EnTranslations = {
         "other": "Qui : {count} joueurs en ligne sur {realm}."
       }
     },
+    "paperdoll": {
+      "unequipAria": "Déséquiper {item}",
+      "unequipHint": "Cliquez sur ×, faites un clic droit ou glissez vers les sacs pour déséquiper"
+    },
     "account": {
-      "open": "Account",
-      "openAria": "Open account settings",
-      "title": "Account Settings",
-      "close": "Close",
-      "closeAria": "Close account settings",
-      "working": "Working…",
-      "infoHeading": "Account",
-      "usernameLabel": "Username",
-      "emailInfoLabel": "Email",
-      "emailNone": "Not set",
-      "memberSince": "Member since",
-      "lastLogin": "Last login",
-      "lastLoginNever": "Never",
-      "charactersLabel": "Characters",
-      "emailHeading": "Contact Email",
-      "emailNote": "Optional. Stored for future account recovery — we don't send email yet.",
-      "emailLabel": "Email address",
-      "saveEmailBtn": "Save Email",
-      "emailSaved": "Email saved.",
-      "emailCleared": "Email cleared.",
-      "passwordHeading": "Change Password",
-      "currentPassword": "Current password",
-      "newPassword": "New password",
-      "confirmNewPassword": "Confirm new password",
-      "changePasswordBtn": "Change Password",
-      "passwordChanged": "Password changed.",
-      "passwordMismatch": "New passwords don't match.",
-      "dangerHeading": "Deactivate Account",
-      "dangerWarning": "This deactivates your account and signs you out everywhere. Your characters are kept, but you won't be able to log back in — contact support to reactivate.",
-      "deletePasswordLabel": "Password",
-      "deleteConfirmLabel": "Type your username to confirm",
-      "deleteBtn": "Deactivate Account",
-      "deleted": "Account deactivated.",
-      "errIncorrectPassword": "Incorrect password.",
-      "errSamePassword": "Your new password must be different from your current one.",
-      "errInvalidEmail": "Enter a valid email address.",
-      "errDeleteConfirm": "Type your username exactly to confirm deactivation.",
-      "errDeleteOnline": "Log out of all characters before deactivating your account.",
-      "errDeactivated": "This account has been deactivated. Contact support to reactivate it.",
-      "errAccountNotFound": "Account not found.",
-      "errRateLimited": "Too many requests — slow down and try again."
+      "title": "Compte",
+      "loggedOutPrompt": "Connectez-vous pour gérer votre compte.",
+      "memberSince": "Membre depuis {date}",
+      "sectionSettings": "Paramètres du compte",
+      "sectionWallet": "Portefeuille $WOC",
+      "sectionCharacters": "Personnages",
+      "sectionDanger": "Zone de danger",
+      "changePassword": "Changer le mot de passe",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmNewPassword": "Confirmer le nouveau mot de passe",
+      "savePassword": "Mettre à jour le mot de passe",
+      "passwordChanged": "Mot de passe mis à jour. Les autres appareils ont été déconnectés.",
+      "errCurrentRequired": "Saisissez votre mot de passe actuel.",
+      "errPasswordShort": "Le nouveau mot de passe doit contenir au moins 6 caractères.",
+      "errPasswordLong": "Le nouveau mot de passe doit contenir au plus 128 caractères.",
+      "errPasswordUnchanged": "Le nouveau mot de passe doit être différent de l'actuel.",
+      "errPasswordConfirm": "Les nouveaux mots de passe ne correspondent pas.",
+      "emailLabel": "E-mail (facultatif)",
+      "emailHint": "Utilisé uniquement pour la récupération du compte. Nous n'envoyons jamais d'e-mail marketing.",
+      "saveEmail": "Enregistrer l'e-mail",
+      "emailSaved": "E-mail enregistré.",
+      "errEmailInvalid": "Saisissez une adresse e-mail valide.",
+      "errCurrentPassword": "Votre mot de passe actuel est incorrect.",
+      "errUsernameMatch": "Ce nom d'utilisateur ne correspond pas à votre compte.",
+      "errPasswordIncorrect": "Votre mot de passe est incorrect.",
+      "errCharactersOnline": "Déconnectez tous vos personnages avant la désactivation.",
+      "deactivatedLocked": "Ce compte a été désactivé. Contactez un admin pour le rétablir.",
+      "charactersSummary": "Gérez vos personnages et entrez dans le monde.",
+      "charactersCount": "Personnages : {count}",
+      "goToCharacters": "Voir les personnages",
+      "walletSummary": "Vérifiez un portefeuille Solana pour afficher l'apparat de détenteur sur votre carte de joueur.",
+      "manageWallet": "Gérer le portefeuille",
+      "deactivate": "Désactiver le compte",
+      "deactivateWarning": "La désactivation verrouille votre compte et vous déconnecte partout. Contactez un admin pour le rétablir. Confirmez en saisissant de nouveau votre nom d'utilisateur et votre mot de passe.",
+      "confirmUsername": "Saisissez votre nom d'utilisateur pour confirmer",
+      "confirmPassword": "Mot de passe",
+      "deactivateConfirm": "Désactiver mon compte",
+      "deactivated": "Votre compte a été désactivé.",
+      "logOut": "Se déconnecter",
+      "logOutSummary": "Déconnectez-vous de cet appareil."
     }
   },
   "skinEvent": {
@@ -353,6 +465,8 @@ export const fr_CA: EnTranslations = {
     "news": "Actualités",
     "download": "Télécharger",
     "loginRegister": "Se connecter/S'enregistrer",
+    "account": "Compte",
+    "logout": "Déconnexion",
     "donate": "Faire un don"
   },
   "stats": {
@@ -544,6 +658,38 @@ export const fr_CA: EnTranslations = {
       "leviathan": {
         "name": "Léviathan",
         "flavor": "Les marchés sentent chacun de vos mouvements: 1 % de l'offre."
+      },
+      "tidelord": {
+        "name": "Seigneur des marées",
+        "flavor": "La marée répond à votre appel: 2 % de l'offre."
+      },
+      "stormcaller": {
+        "name": "Invocateur de tempêtes",
+        "flavor": "Les tempêtes se rassemblent à votre nom: 3 % de l'offre."
+      },
+      "krakencrown": {
+        "name": "Couronne du kraken",
+        "flavor": "Couronné par les profondeurs: 4 % de l'offre."
+      },
+      "titanforged": {
+        "name": "Forgé parmi les titans",
+        "flavor": "Forgé parmi les titans: 5 % de l'offre."
+      },
+      "starhoard": {
+        "name": "Trésor d'étoiles",
+        "flavor": "Un trésor qui courbe la lumière des étoiles: 6 % de l'offre."
+      },
+      "voidwarden": {
+        "name": "Gardien du vide",
+        "flavor": "Gardien au bord du vide: 7 % de l'offre."
+      },
+      "realmshaper": {
+        "name": "Façonneur de royaume",
+        "flavor": "Vous remodelez le royaume: 8 % de l'offre."
+      },
+      "worldforger": {
+        "name": "Forgeur de monde",
+        "flavor": "Vous forgez votre propre monde: 9 % de l'offre."
       },
       "worldbearer": {
         "name": "Porte-monde",
@@ -1215,6 +1361,7 @@ export const fr_CA: EnTranslations = {
         "unignoreChat": "Ne plus ignorer la discussion",
         "report": "Signaler le joueur",
         "removeParty": "Retirer du groupe",
+        "convertToRaid": "Convertir en raid",
         "cancel": "Annuler"
       }
     },
@@ -1380,6 +1527,25 @@ export const fr_CA: EnTranslations = {
       "friendOnline": "{name} vient de se connecter.",
       "friendOffline": "{name} vient de se déconnecter."
     },
+    "tutorial": {
+      "title": "Nouvel aventurier",
+      "stepLabel": "Étape {current} sur {total}",
+      "skip": "Passer le tutoriel",
+      "dismiss": "Fermer",
+      "doneTitle": "Prêt pour l'aventure",
+      "doneBody": "Tu maîtrises les bases, {name}. Le Val est à toi : appuie sur {questKey} à tout moment pour consulter tes quêtes. Bonne chasse !",
+      "moveTitle": "Trouve tes marques",
+      "moveBody": "Utilise {moveKeys} pour te déplacer et la souris pour regarder autour de toi. Fais quelques pas pour commencer.",
+      "seekTitle": "Trouve le maréchal",
+      "seekBody": "Le maréchal Redbrook attend en ville et a du travail pour une nouvelle lame. Suis le repère pour le rejoindre.",
+      "talkTitle": "Accepte la mission",
+      "talkBody": "Tiens-toi près du maréchal Redbrook et appuie sur {interactKey} pour lui parler, puis accepte sa mission.",
+      "slayTitle": "Des loups à la porte",
+      "slayBody": "Traque les loups des bois sur la route du nord. Cible-en un et attaque pour réduire la meute.",
+      "slayProgress": "Loups des bois tués : {current} / {needed}",
+      "returnTitle": "Réclame ta récompense",
+      "returnBody": "Ta mission est accomplie. Retourne voir le maréchal Redbrook et appuie sur {interactKey} pour la rendre."
+    },
     "markers": {
       "names": {
         "star": "Étoile",
@@ -1433,6 +1599,12 @@ export const fr_CA: EnTranslations = {
       "guildTab": "Guilde",
       "ignoreTab": "Ignorer",
       "leaveParty": "Quitter le groupe",
+      "raidTab": "Raid",
+      "raidEmpty": "Convertissez un groupe en raid pour gérer les groupes de raid ici.",
+      "raidGroupEmpty": "Aucun joueur dans ce groupe.",
+      "raidGroupTitle": "Groupe {position} ({count}/5)",
+      "raidMoveToGroup": "Déplacer vers le groupe {position}",
+      "raidLeader": "Chef de raid",
       "offlineEmpty": "Les amis, guildes et listes d'ignorés sont disponibles en jeu en ligne.",
       "friendsEmpty": "Aucun ami pour l'instant. Cherchez quelqu'un par nom ci-dessous.",
       "ignoreEmpty": "Votre liste d'ignorés est vide.",
@@ -1533,6 +1705,8 @@ export const fr_CA: EnTranslations = {
       "title": "Grimoire",
       "classSubtitle": "Techniques de {className}",
       "close": "Fermer le grimoire",
+      "resetBar": "Réinitialiser la barre",
+      "resetBarAria": "Réinitialise la barre d'action actuelle avec ses techniques par défaut",
       "trainableAtLevel": "Entraînable au niveau {level}",
       "learnAtLevel": "Vous apprendrez ceci au niveau {level}.",
       "knownAbilityAria": "{name}, rang {rank}. {summary}",
@@ -1668,7 +1842,8 @@ export const fr_CA: EnTranslations = {
       "common": "Commun",
       "uncommon": "Inhabituel",
       "rare": "Rare",
-      "epic": "Épique"
+      "epic": "Épique",
+      "legendary": "Légendaire"
     },
     "kind": {
       "weapon": "Arme",
@@ -1845,6 +2020,16 @@ export const fr_CA: EnTranslations = {
     "loot": {
       "takeAll": "Tout prendre",
       "close": "Fermer le butin"
+    },
+    "lootRoll": {
+      "title": "Jet de butin",
+      "need": "Besoin",
+      "greed": "Cupidité",
+      "pass": "Passer",
+      "needAria": "Besoin pour {item}",
+      "greedAria": "Cupidité pour {item}",
+      "passAria": "Passer pour {item}",
+      "everyonePassed": "Tout le monde a passé pour {item}."
     }
   },
   "entities": {
@@ -3365,6 +3550,36 @@ export const fr_CA: EnTranslations = {
       "event_skin_token": {
         "name": "Cache cosmétique mystérieuse"
       },
+      "deathless_heartwood": {
+        "name": "Bois-coeur de la Couronne immortelle"
+      },
+      "kingsbane_last_oath": {
+        "name": "Fléau-du-roi, dernier serment de Thornpeak"
+      },
+      "crownforged_dreadhelm": {
+        "name": "Heaume d'effroi Forgécouronne"
+      },
+      "crownforged_warspaulders": {
+        "name": "Spallières de guerre Forgécouronne"
+      },
+      "nighttalon_crown": {
+        "name": "Couronne Serre-de-nuit"
+      },
+      "nighttalon_shoulderguards": {
+        "name": "Garde-épaules Serre-de-nuit"
+      },
+      "soulflame_cowl": {
+        "name": "Capuche Flamme-d'âme"
+      },
+      "soulflame_mantle": {
+        "name": "Mantelet Flamme-d'âme"
+      },
+      "stormcallers_crown": {
+        "name": "Couronne d'Appel-tempête"
+      },
+      "stormcallers_spaulders": {
+        "name": "Spallières d'Appel-tempête"
+      },
       "unknown_alien_weaponry": {
         "name": "Armement alien inconnu"
       },
@@ -3579,6 +3794,12 @@ export const fr_CA: EnTranslations = {
       },
       "bound_guardian": {
         "name": "Gardien lié"
+      },
+      "nythraxis_skeleton_warrior": {
+        "name": "Garde royal relevé"
+      },
+      "nythraxis_scourge_of_thornpeak": {
+        "name": "Nythraxis, Fléau de Thornpeak"
       },
       "brightwood_hare": {
         "name": "Lièvre de Brightwood"
@@ -3831,6 +4052,11 @@ export const fr_CA: EnTranslations = {
         "name": "Rôdeuse Elwyn",
         "title": "Garde de la clairière",
         "greeting": "Silence, {className} - la clairière est calme aujourd'hui, et j'entends bien qu'elle le reste."
+      },
+      "brother_aldric_raid": {
+        "name": "Frère Aldric",
+        "title": "Prêtre du Val",
+        "greeting": "D'un cimetière de chapelle au toit du monde... la piste s'achève ici. Je sens la montagne écouter."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -4557,8 +4783,8 @@ export const fr_CA: EnTranslations = {
       },
       "q_nythraxis_bound_guardian": {
         "title": "Le Gardien lié",
-        "text": "Voss écrivit que les survivants scellèrent la Chevalière du roi derrière un gardien ancien, afin que nul n'atteigne la tombe de Nythraxis par accident ou par ambition. Portez la Clef de la crypte au cercle rituel sur le terrain plat à l'est de la crypte abandonnée et au sud-est de la tombe occidentale. Utilisez-la là-bas, brisez le gardien et rapportez la chevalière.",
-        "completion": "Les trois reliques racontent la même histoire : Aldren combattit pour défendre son roi, Malric franchit la frontière de la mort, et Voss tenta d'arrêter ce qui suivit. Le sceau faiblit, et cette chevalière est la clef de la tombe de Nythraxis. Vous êtes maintenant harmonisé pour entrer dans la Crypte de Nythraxis.",
+        "text": "Voss ecrivit que les survivants scellerent la Chevaliere du roi derriere un gardien ancien, afin que nul n atteigne la tombe de Nythraxis par accident ou par ambition. Portez la Clef de la crypte au cercle rituel sur le terrain plat a l est de la crypte abandonnee et au sud-est de la tombe occidentale. Utilisez-la la-bas, brisez le gardien et rapportez la chevaliere.",
+        "completion": "Les trois reliques racontent la meme histoire: Aldren combattit pour defendre son roi, Malric franchit la frontiere de la mort, et Voss tenta d arreter ce qui suivit. Le sceau faiblit, et cette chevaliere est la clef de la tombe de Nythraxis. Vous etes maintenant harmonise pour entrer dans la Crypte de Nythraxis. Retournez a la crypte abandonnee, ouvrez la porte royale et affrontez Nythraxis avant que la rage du vieux roi ne deborde Thornpeak.",
         "objectives": {
           "0": {
             "label": "Clef utilisée au cercle rituel"
@@ -4568,6 +4794,16 @@ export const fr_CA: EnTranslations = {
           },
           "2": {
             "label": "Chevalière du roi"
+          }
+        }
+      },
+      "q_nythraxis_scourges_end": {
+        "title": "La fin du Fléau",
+        "text": "La chevaliere a ouvert la voie, {playerName}, mais une tombe ouverte n'est pas une victoire. Nythraxis fut roi autrefois, et la ruine sous Thornpeak reste liee a sa volonte. Entrez dans la crypte avec des allies de confiance. Brisez la couronne immortelle avant que son ordre n'atteigne le champ de bataille au-dessus.",
+        "completion": "Alors la couronne se tait enfin. Thornpeak portera toujours ses morts, mais aucun roi sous la montagne ne les appellera plus a la guerre. Vous avez acheve ce qu'Aldren, Malric et Voss n'avaient pu que contenir.",
+        "objectives": {
+          "0": {
+            "label": "Nythraxis vaincu"
           }
         }
       },
@@ -4905,6 +5141,11 @@ export const fr_CA: EnTranslations = {
         "name": "Crypte abandonnée",
         "enterText": "Vous franchissez le seuil de la crypte abandonnée.",
         "leaveText": "Vous ressortez dans l'air froid de Thornpeak."
+      },
+      "nythraxis_boss_arena": {
+        "name": "Arène de raid de Nythraxis",
+        "enterText": "Vous franchissez la porte royale scellée.",
+        "leaveText": "Vous retrouvez l'air froid de Thornpeak."
       },
       "drowned_temple": {
         "name": "Le Temple noyé",

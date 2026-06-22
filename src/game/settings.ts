@@ -15,7 +15,7 @@ export const SETTING_RANGES = {
   brightness: { min: 0.6, max: 1.5, def: 1 },
   // 1 low, 2 medium, 3 high, 4 ultra, 5 advanced. The renderer reads this
   // from localStorage during startup because tier choice controls preload.
-  graphicsPreset: { min: 1, max: 5, def: 1 },
+  graphicsPreset: { min: 1, max: 5, def: 4 },
   // Advanced-only: 0 keeps terrain/foliage cheap, 1 enables high terrain.
   terrainDetail: { min: 0, max: 1, def: 1 },
   foliageDensity: { min: 0, max: 1, def: 1 },
@@ -76,6 +76,10 @@ export const SETTING_RANGES = {
   // Fades the HUD panels & windows as a whole; lets players see more of the
   // world behind their frames without hiding them entirely.
   hudOpacity: { min: 0.5, max: 1, def: 1 },
+  // Scales the ENTIRE in-game HUD layer (#ui) up or down via CSS zoom, so every
+  // fixed-px frame/label/button grows together — the global "fonts too small"
+  // remedy that the per-element tooltip/chat/fct scales can't cover. 1.0 = stock.
+  uiScale: { min: 0.85, max: 1.4, def: 1 },
 } as const;
 
 export const BOOL_SETTINGS = {
@@ -134,6 +138,11 @@ export const BOOL_SETTINGS = {
   // players who want them back can re-enable. Independent of the SFX volume
   // slider — jump/land/splash/swim and combat one-shots are unaffected.
   footstepSfx: { def: false },
+  // off by default: swap the looping landing-page trailer for a static, dimmed,
+  // high-contrast backdrop so the start-screen text stays legible (and the
+  // 5.7 MB video is never fetched). Forced on regardless for phones / Save-Data /
+  // prefers-reduced-motion — see shouldUseStaticBackdrop in landing_backdrop.ts.
+  landingHighContrast: { def: false },
 } as const;
 
 export type NumericSettingKey = keyof typeof SETTING_RANGES;

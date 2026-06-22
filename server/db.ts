@@ -140,6 +140,23 @@ CREATE TABLE IF NOT EXISTS account_moderation_actions (
   expires_at TIMESTAMPTZ
 );
 CREATE INDEX IF NOT EXISTS account_moderation_actions_account ON account_moderation_actions(account_id, created_at DESC);
+CREATE TABLE IF NOT EXISTS blocked_ips (
+  id SERIAL PRIMARY KEY,
+  ip TEXT NOT NULL UNIQUE,
+  reason TEXT NOT NULL DEFAULT '',
+  created_by_account_id INT REFERENCES accounts(id) ON DELETE SET NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  expires_at TIMESTAMPTZ
+);
+CREATE TABLE IF NOT EXISTS blocked_ip_actions (
+  id BIGSERIAL PRIMARY KEY,
+  ip TEXT NOT NULL,
+  action TEXT NOT NULL,
+  admin_account_id INT REFERENCES accounts(id) ON DELETE SET NULL,
+  reason TEXT NOT NULL DEFAULT '',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS blocked_ip_actions_ip ON blocked_ip_actions(ip, created_at DESC);
 CREATE TABLE IF NOT EXISTS world_state (
   key TEXT PRIMARY KEY,
   data JSONB NOT NULL,
@@ -440,75 +457,65 @@ export async function accountForToken(token: string): Promise<number | null> {
   return res.rows[0]?.account_id ?? null;
 }
 
-// ── Player-facing account self-service (settings page) ─────────────────────
-
-export interface AccountInfo {
+export interface AccountInfoRow {
+  id: number;
   username: string;
+  password_hash: string;
   email: string | null;
-  createdAt: string;
-  lastLogin: string | null;
-  characterCount: number;
+  created_at: string;
+  deactivated_at: string | null;
 }
 
-// Read-only account summary for the settings panel. The character count is
-// realm-agnostic (every character the account owns, across realms) to match
-// what a "your account" overview implies.
-export async function getAccountInfo(accountId: number): Promise<AccountInfo | null> {
+// Full account record by id — used by the self-service account portal
+// (whoami, password change, email, deactivate). Distinct from findAccount,
+// which keys on username for the login path.
+export async function accountById(accountId: number): Promise<AccountInfoRow | null> {
   const res = await pool.query(
-    `SELECT a.username, a.email, a.created_at, a.last_login,
-            (SELECT COUNT(*)::int FROM characters c WHERE c.account_id = a.id) AS character_count
-     FROM accounts a WHERE a.id = $1`,
+    'SELECT id, username, password_hash, email, created_at, deactivated_at FROM accounts WHERE id = $1',
     [accountId],
   );
-  const row = res.rows[0];
-  if (!row) return null;
-  return {
-    username: row.username,
-    email: row.email ?? null,
-    createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : String(row.created_at),
-    lastLogin: row.last_login == null ? null : (row.last_login instanceof Date ? row.last_login.toISOString() : String(row.last_login)),
-    characterCount: row.character_count ?? 0,
-  };
+  return res.rows[0] ?? null;
 }
 
-// Set (or clear, when null) the account's optional contact email. The address is
-// stored as-is and unverified — there is no mail delivery yet.
-export async function updateEmail(accountId: number, email: string | null): Promise<void> {
-  await pool.query('UPDATE accounts SET email = $2 WHERE id = $1', [accountId, email]);
-}
-
-// Fetch the stored scrypt hash so a self-service action (change password,
-// delete account) can re-verify the caller actually knows their password.
-export async function passwordHashForAccount(accountId: number): Promise<string | null> {
-  const res = await pool.query('SELECT password_hash FROM accounts WHERE id = $1', [accountId]);
-  return res.rows[0]?.password_hash ?? null;
+// Account-wide character count across every realm. The account portal is an
+// account-wide self-service surface, so it counts all of the account's
+// characters (unlike realm-scoped listCharacters).
+export async function characterCountForAccount(accountId: number): Promise<number> {
+  const res = await pool.query(
+    `SELECT COUNT(*)::int AS count FROM characters WHERE account_id = $1`,
+    [accountId],
+  );
+  return res.rows[0]?.count ?? 0;
 }
 
 export async function updatePasswordHash(accountId: number, passwordHash: string): Promise<void> {
   await pool.query('UPDATE accounts SET password_hash = $2 WHERE id = $1', [accountId, passwordHash]);
 }
 
-// Revoke every bearer token for an account. Used after a password change so a
-// leaked/stale session elsewhere can no longer act; the caller re-issues a
-// fresh token for the active session immediately after.
-export async function deleteAllTokensForAccount(accountId: number): Promise<void> {
-  await pool.query('DELETE FROM auth_tokens WHERE account_id = $1', [accountId]);
+// Revoke every token for an account except (optionally) the one in hand.
+// A password change keeps the current device signed in (pass its token);
+// a deactivate revokes everything (pass null).
+export async function revokeTokensExcept(accountId: number, keepToken: string | null): Promise<void> {
+  if (keepToken) {
+    await pool.query('DELETE FROM auth_tokens WHERE account_id = $1 AND token <> $2', [accountId, keepToken]);
+  } else {
+    await pool.query('DELETE FROM auth_tokens WHERE account_id = $1', [accountId]);
+  }
 }
 
-// Soft-deactivate an account (self-service closure). We deliberately do NOT
-// delete the row: the account and its characters are retained, the account is
-// just flagged inactive (moderationStatusForAccount then bars login) and every
-// existing bearer token is revoked so no live session survives the closure.
-// Reactivation is admin-only. Returns false if the account no longer exists or
-// was already deactivated.
-export async function deactivateAccount(accountId: number): Promise<boolean> {
-  const res = await pool.query(
-    'UPDATE accounts SET deactivated_at = now() WHERE id = $1 AND deactivated_at IS NULL',
-    [accountId],
+export async function revokeToken(token: string): Promise<void> {
+  await pool.query('DELETE FROM auth_tokens WHERE token = $1', [token]);
+}
+
+export async function setAccountEmail(accountId: number, email: string | null): Promise<void> {
+  await pool.query('UPDATE accounts SET email = $2 WHERE id = $1', [accountId, email]);
+}
+
+export async function setAccountDeactivated(accountId: number, deactivated: boolean): Promise<void> {
+  await pool.query(
+    `UPDATE accounts SET deactivated_at = CASE WHEN $2 THEN now() ELSE NULL END WHERE id = $1`,
+    [accountId, deactivated],
   );
-  if ((res.rowCount ?? 0) === 0) return false;
-  await pool.query('DELETE FROM auth_tokens WHERE account_id = $1', [accountId]);
-  return true;
 }
 
 // ── Non-custodial Solana wallet links ──────────────────────────────────────
@@ -733,20 +740,9 @@ export async function moderationStatusForAccount(accountId: number): Promise<Acc
     ? mutedUntilDate.toISOString()
     : null;
   const chatStrikes = Number(row.chat_strikes ?? 0);
-  // Self-service deactivation bars all access (login + any live token) until an
-  // admin reactivates. Checked before ban/suspension so a closed account reads
-  // as deactivated rather than leaking a stale moderation message.
-  if (row.deactivated_at) {
-    return {
-      locked: true,
-      banned: false,
-      suspendedUntil: null,
-      reason: '',
-      message: 'This account has been deactivated.',
-      chatMutedUntil,
-      chatStrikes,
-    };
-  }
+  // Admin-imposed states (ban, then active suspension) outrank a self-imposed
+  // deactivation: a banned+deactivated account must still surface the ban reason
+  // and label, not be relabelled "deactivated". All branches resolve to locked.
   if (row.banned_at) {
     return {
       locked: true,
@@ -766,6 +762,19 @@ export async function moderationStatusForAccount(accountId: number): Promise<Acc
       suspendedUntil: suspendedUntil.toISOString(),
       reason: row.moderation_reason ?? '',
       message: `This account is suspended until ${suspendedUntil.toUTCString()}.`,
+      chatMutedUntil,
+      chatStrikes,
+    };
+  }
+  // A self-deactivated account is locked out of login + WS auth (same gate as
+  // banned/suspended) until an admin reactivates it.
+  if (row.deactivated_at) {
+    return {
+      locked: true,
+      banned: false,
+      suspendedUntil: null,
+      reason: '',
+      message: 'This account has been deactivated.',
       chatMutedUntil,
       chatStrikes,
     };
