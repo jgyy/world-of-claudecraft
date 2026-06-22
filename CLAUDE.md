@@ -158,8 +158,9 @@ correct.
   subagent review your own diff: its job is COVERAGE (report every correctness or
   requirement gap with confidence and severity), not filtering, which happens in a later
   pass. The repo ships purpose-built reviewers in `.claude/agents/` (`cross-platform-sync`,
-  `migration-safety`, `privacy-security-review`, `qa-checklist`), a `feature-plan` skill,
-  and an `extract-and-test` skill; prefer those over ad-hoc subagents.
+  `migration-safety`, `privacy-security-review`, `qa-checklist`, and the `release-malware-audit`
+  release gate), a `feature-plan` skill, and an `extract-and-test` skill; prefer those over
+  ad-hoc subagents.
 - **State rule scope literally.** 4.8 follows instructions literally and will not
   generalize a rule across cases unless told. When an invariant covers every case (every
   player string is a `t()` key; all sim randomness goes through `Rng`), say "every" or
