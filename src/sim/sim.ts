@@ -9414,8 +9414,8 @@ export class Sim {
     if (!r) return;
     const p = r.e;
     let best: Entity | null = null;
-    let bestD2 = 40 * 40;
-    this.grid.forEachInRadius(p.pos.x, p.pos.z, 40, (e, d2) => {
+    let bestD2 = TAB_QUERY_RADIUS * TAB_QUERY_RADIUS;
+    this.grid.forEachInRadius(p.pos.x, p.pos.z, TAB_QUERY_RADIUS, (e, d2) => {
       if (!this.isEnemyTargetCandidate(p, e)) return;
       if (d2 < bestD2) {
         bestD2 = d2;

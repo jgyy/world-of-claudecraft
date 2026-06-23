@@ -77,6 +77,33 @@ describe('Sim.tabTarget on-screen / in-combat cycling', () => {
     expect(p.targetId).toBe(engagedFar.id);
   });
 
+  it('walks the fallback band from a clicked fallback target, then wraps into the cluster', () => {
+    const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+    const p = sim.entities.get(sim.playerId)!;
+    p.facing = 0; // facing +Z
+    (sim as any).rebucket(p);
+    // Isolate from world-spawned mobs so the fallback ordering is exactly ours.
+    for (const id of [...sim.entities.keys()]) {
+      if (id !== sim.playerId) (sim as any).dropEntity(id);
+    }
+    const near = spawnMob(sim, 900041, 0, 10); // on screen, idle, near: the cluster
+    const behindA = spawnMob(sim, 900042, 0, -8); // off screen behind: fallback
+    const behindB = spawnMob(sim, 900043, 0, -15); // off screen behind, farther: fallback
+
+    // Simulate clicking a fallback (off-screen) mob, which Tab alone never grabs
+    // while a cluster exists.
+    p.targetId = behindA.id;
+    // Tab from a fallback target walks the rest of the fallback band, nearest first.
+    sim.tabTarget();
+    expect(p.targetId).toBe(behindB.id);
+    // One more Tab wraps off the end of the fallback back into the cluster.
+    sim.tabTarget();
+    expect(p.targetId).toBe(near.id);
+    // And from the cluster it stays in the cluster (single mob wraps onto itself).
+    sim.tabTarget();
+    expect(p.targetId).toBe(near.id);
+  });
+
   it('cycles only the near fight cluster and wraps back, ignoring a distant idle mob', () => {
     const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
     const p = sim.entities.get(sim.playerId)!;
