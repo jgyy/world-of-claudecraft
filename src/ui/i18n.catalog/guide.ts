@@ -1,7 +1,7 @@
 // i18n source catalog - the public Guide (docs/wiki) surface at /guide. A curated,
 // branded front-of-house that explains the game, teaches the basics, and showcases
-// classes, the bestiary, quests, and group content, separate from the community
-// MediaWiki at /wiki. English values only; the 13 locale translations live in
+// classes, the bestiary, quests, and group content. It is the player wiki, served
+// at /wiki. English values only; the 13 locale translations live in
 // src/ui/i18n.locales/<lang>.ts (the runtime-authoritative overlays), filled by the
 // maintainer at release.
 //

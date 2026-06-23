@@ -537,7 +537,7 @@ function serveStatic(req: http.IncomingMessage, res: http.ServerResponse): void 
   let urlPath = (req.url ?? '/').split('?')[0];
   // The curated Guide is the site wiki: a client-routed SPA served at /wiki with its
   // own shell, so deep paths (/wiki/classes/...) fall back to guide.html rather than the
-  // game's index.html. (It previously 302'd to a standalone MediaWiki; that is retired.)
+  // game's index.html.
   const isGuide = urlPath === '/wiki' || urlPath.startsWith('/wiki/');
   const shell = isGuide ? 'guide.html' : isAdminRequest(req) ? 'admin.html' : 'index.html';
   // Pretty-URL aliases for standalone static pages.
