@@ -1,6 +1,7 @@
 import type { AccountCosmetics } from '../world_api';
 import { type AssistCandidate, resolveAssist } from './assist';
 import { lineOfSightClear, resolveMovement, resolvePosition } from './colliders';
+import { isVisionCreature } from './creature_reaction';
 import {
   AUGMENTS_BY_ID,
   type AugmentDef,
@@ -6362,7 +6363,7 @@ export class Sim {
 
     mob.combatTimer += DT;
 
-    if (mob.templateId.startsWith('vision_')) {
+    if (isVisionCreature(mob.templateId)) {
       mob.hostile = false;
       mob.aiState = 'idle';
       mob.inCombat = false;
@@ -11433,7 +11434,7 @@ export class Sim {
 
   isHostileTo(attacker: Entity, target: Entity): boolean {
     if (target.kind === 'mob') {
-      if (target.templateId.startsWith('vision_')) return false;
+      if (isVisionCreature(target.templateId)) return false;
       if (target.ownerId !== null) {
         const owner = this.entities.get(target.ownerId);
         return !!owner && owner.kind === 'player' && this.isHostileTo(attacker, owner);
