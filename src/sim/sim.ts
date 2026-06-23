@@ -98,9 +98,8 @@ import { questFallbackGrants } from './quest_fallback';
 import { sanitizeRemovedZone1Content } from './removed_zone1_content';
 import { Rng } from './rng';
 import { SpatialGrid } from './spatial';
-import { orderTabTargets, TAB_QUERY_RADIUS } from './tab_target';
 import { effectiveMasterLooter, meetsMasterThreshold } from './loot_master';
-import { orderTabTargets } from './tab_target';
+import { orderTabTargets, TAB_QUERY_RADIUS } from './tab_target';
 import {
   addThreat,
   clearThreat,
@@ -5912,6 +5911,8 @@ export class Sim {
       });
     }
     return out;
+  }
+
   // Opens a master-loot assignment when the tapping party uses master loot and
   // the drop is at/above the configured threshold. Returns false (so the caller
   // falls through to need/greed or looter-takes-all) when master loot does not

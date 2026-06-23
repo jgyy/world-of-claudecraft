@@ -10482,7 +10482,7 @@ export class Hud {
     const thr = (v: string, label: string) =>
       `<option value="${v}" ${m.threshold === v ? 'selected' : ''}>${esc(label)}</option>`;
     box.innerHTML = `
-      <label class="party-loot-row">
+      <label class="party-loot-row toggle">
         <input type="checkbox" id="ml-enable" ${m.enabled ? 'checked' : ''} aria-label="${esc(t('hudChrome.masterLoot.enableAria'))}">
         <span>${esc(t('hudChrome.masterLoot.enableLabel'))}</span>
       </label>

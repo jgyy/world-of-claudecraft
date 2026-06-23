@@ -5040,11 +5040,12 @@
   #party-frames.below-target { top: 96px; }
   .party-frame { --cls: #7fb8ff; width: 170px; padding: 4px 8px 5px; cursor: var(--cursor-point);
     transition: opacity 0.2s ease, box-shadow 0.2s ease; }
-  .party-loot { width: 170px; padding: 5px 8px 6px; display: flex; flex-direction: column; gap: 4px;
+  .party-loot { width: 170px; padding: 5px 8px 6px; display: flex; flex-direction: column; gap: 5px;
     font-size: 11px; font-family: var(--title-font); }
-  .party-loot .party-loot-row { display: flex; align-items: center; gap: 6px; justify-content: space-between; }
-  .party-loot .party-loot-row > span { color: var(--gold); white-space: nowrap; }
-  .party-loot select { flex: 1; min-width: 0; max-width: 104px; }
+  .party-loot .party-loot-row { display: flex; flex-direction: column; gap: 3px; }
+  .party-loot .party-loot-row.toggle { flex-direction: row; align-items: center; gap: 6px; }
+  .party-loot .party-loot-row > span { color: var(--gold); white-space: nowrap; letter-spacing: 0.3px; }
+  .party-loot select { width: 100%; min-width: 0; box-sizing: border-box; }
   .party-loot input[type="checkbox"] { width: 16px; height: 16px; flex-shrink: 0; }
   .loot-roll.master .loot-roll-actions { flex-wrap: wrap; gap: 4px; }
   .loot-roll.master .loot-roll-btn.assign { background: linear-gradient(#3a4a6a, #28324a); }
