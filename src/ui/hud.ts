@@ -10304,11 +10304,12 @@ export class Hud {
   private openSelfContextMenu(x: number, y: number): void {
     const el = $('#ctx-menu');
     const party = this.sim.partyInfo;
-    const canConvert =
-      !!party && party.leader === this.sim.playerId && !party.raid && party.members.length >= 5;
+    const isLeader = !!party && party.leader === this.sim.playerId;
+    const canConvert = isLeader && !party!.raid && party!.members.length >= 5;
+    const canUnconvert = isLeader && !!party!.raid && party!.members.length <= 5;
     let html = `<div class="ctx-title ctx-title-player">${portraitChipHtml({ cls: this.sim.cfg.playerClass, skin: this.sim.player.skin ?? 0, name: this.sim.player.name, variant: 'sm' })}<span class="ctx-title-name">${esc(this.sim.player.name)}</span></div>`;
-    if (canConvert)
-      html += `<div class="ctx-item" data-act="convert-raid">${esc(t('hud.chat.context.convertToRaid'))}</div>`;
+    if (canConvert) html += `<div class="ctx-item" data-act="convert-raid">${esc(t('hud.chat.context.convertToRaid'))}</div>`;
+    if (canUnconvert) html += `<div class="ctx-item" data-act="convert-party">${esc(t('hud.chat.context.convertToParty'))}</div>`;
     html += `<div class="ctx-item" data-act="close">${esc(t('hud.chat.context.cancel'))}</div>`;
     el.innerHTML = html;
     hydratePortraits(el);
@@ -10318,6 +10319,10 @@ export class Hud {
     this.bindContextMenuActions((act) => {
       if (act === 'convert-raid') {
         this.sim.convertPartyToRaid();
+        this.socialTab = 'raid';
+        if ($('#social-window').classList.contains('open')) this.renderSocial();
+      } else if (act === 'convert-party') {
+        this.sim.convertRaidToParty();
         this.socialTab = 'raid';
         if ($('#social-window').classList.contains('open')) this.renderSocial();
       }
@@ -10920,7 +10925,13 @@ export class Hud {
           .join('') || `<div class="soc-empty">${esc(t('hud.social.raidGroupEmpty'))}</div>`;
       return `<div class="raid-group"><div class="soc-guild-head">${esc(t('hud.social.raidGroupTitle', { position: formatNumber(group, { maximumFractionDigits: 0 }), count: formatNumber(groups[group].length, { maximumFractionDigits: 0 }) }))}</div>${rows}</div>`;
     };
-    return `<div class="raid-groups">${groupHtml(1)}${groupHtml(2)}</div>`;
+    // Raid groups cannot enter standard instances; let the leader fold a small raid
+    // (<= one party's worth) back into a normal party. Larger raids must shed members first.
+    const canUnconvert = leader && party.members.length <= 5;
+    const footer = canUnconvert
+      ? `<div class="soc-empty-action"><button type="button" class="soc-x" data-act="convert-party">${esc(t('hud.chat.context.convertToParty'))}</button></div>`
+      : '';
+    return `<div class="raid-groups">${groupHtml(1)}${groupHtml(2)}</div>${footer}`;
   }
 
   // The add/action row changes with the tab (and guild membership). Inputs
@@ -11073,6 +11084,10 @@ export class Hud {
             this.sim.moveRaidMember(pid, group);
         } else if (act === 'convert-raid') {
           this.sim.convertPartyToRaid();
+          this.socialTab = 'raid';
+          this.renderSocial();
+        } else if (act === 'convert-party') {
+          this.sim.convertRaidToParty();
           this.socialTab = 'raid';
           this.renderSocial();
         }

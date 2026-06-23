@@ -550,6 +550,12 @@ export const it_IT: EnTranslations = {
       "searchPlaceholder": "Cerca oggetti",
       "searchAria": "Cerca gli oggetti della borsa per nome",
       "noMatch": "Nessun oggetto corrisponde ai tuoi filtri."
+    },
+    "raidConvert": {
+      "toPartyDone": "Your raid has converted back to a party.",
+      "notRaid": "Your group is not a raid.",
+      "leaderOnly": "Only the raid leader may convert to a party.",
+      "tooLarge": "A raid with more than five members cannot convert back to a party."
     }
   },
   "guide": {
@@ -2270,6 +2276,7 @@ export const it_IT: EnTranslations = {
         "report": "Segnala giocatore",
         "removeParty": "Rimuovi dal gruppo",
         "convertToRaid": "Converti in incursione",
+        "convertToParty": "Convert to party",
         "cancel": "Annulla"
       }
     },

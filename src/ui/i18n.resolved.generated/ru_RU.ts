@@ -550,6 +550,12 @@ export const ru_RU: EnTranslations = {
       "searchPlaceholder": "Поиск предметов",
       "searchAria": "Поиск предметов в сумках по названию",
       "noMatch": "Нет предметов, соответствующих фильтрам."
+    },
+    "raidConvert": {
+      "toPartyDone": "Your raid has converted back to a party.",
+      "notRaid": "Your group is not a raid.",
+      "leaderOnly": "Only the raid leader may convert to a party.",
+      "tooLarge": "A raid with more than five members cannot convert back to a party."
     }
   },
   "guide": {
@@ -2270,6 +2276,7 @@ export const ru_RU: EnTranslations = {
         "report": "Пожаловаться на игрока",
         "removeParty": "Удалить из группы",
         "convertToRaid": "Преобразовать в рейд",
+        "convertToParty": "Convert to party",
         "cancel": "Отмена"
       }
     },

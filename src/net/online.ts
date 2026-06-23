@@ -1292,6 +1292,9 @@ export class ClientWorld implements IWorld {
   convertPartyToRaid(): void {
     this.cmd({ cmd: 'praid' });
   }
+  convertRaidToParty(): void {
+    this.cmd({ cmd: 'punraid' });
+  }
   moveRaidMember(targetPid: number, group: 1 | 2): void {
     this.cmd({ cmd: 'pmoveRaid', id: targetPid, group });
   }
