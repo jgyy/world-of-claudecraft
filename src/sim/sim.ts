@@ -9626,13 +9626,11 @@ export class Sim {
     const otherMatched = matched.filter((l) => l.house || l.sellerKey !== meta.name);
     const otherBudget = Math.max(0, MARKET_WIRE_LIMIT - mineMatched.length);
     const sorted = [...mineMatched, ...[...otherMatched].sort(byName).slice(0, otherBudget)].sort(byName);
-    const listings = sorted.slice(0, MARKET_WIRE_LIMIT).map((l) => ({
-    });
     // Always wire the seller their own listings first, then fill the rest of the
     // wire budget with everyone else's. Without this, on a busy shared market a
-    // seller's goods can sort past MARKET_WIRE_LIMIT and never reach them — the
+    // seller's goods can sort past MARKET_WIRE_LIMIT and never reach them: the
     // SELL tab would then read "12/12" while only a handful of their listings
-    // are visible. MARKET_MAX_LISTINGS (12) ≪ MARKET_WIRE_LIMIT (120), so a
+    // are visible. MARKET_MAX_LISTINGS (12) is far below MARKET_WIRE_LIMIT (120), so a
     // seller's own goods always fit alongside a healthy slice of the market.
     const isMine = (l: MarketListing) => !l.house && l.sellerKey === meta.name;
     const mineSorted = sorted.filter(isMine);
