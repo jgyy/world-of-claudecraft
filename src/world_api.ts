@@ -270,6 +270,9 @@ export interface IWorld {
   questState(questId: string): QuestState;
   castAbility(abilityId: string): void;
   castAbilityBySlot(slot: number): void;
+  // Push the local auto-face-on-cast preference into the world (offline: sets it
+  // on the primary player; online: sends it to the server, re-sent on reconnect).
+  setAutoFaceOnCast(enabled: boolean): void;
   targetEntity(id: number | null): void;
   tabTarget(): void;
   targetNearestFriendly(): void;

@@ -10085,6 +10085,7 @@ export class Hud {
     this.settingToggleKeybind(el, t('hud.options.clickToMove'), 'clickToMove');
     this.clickMoveMouseButtonRow(el);
     this.settingToggleKeybind(el, t('hud.keybinds.actions.attackMove'), 'attackMove');
+    this.settingToggleKeybind(el, t('hudChrome.options.autoFaceOnCast'), 'autoFaceOnCast', t('hudChrome.options.autoFaceOnCastHelp'));
     this.settingToggleKeybind(el, t('hud.options.leftHandedTouch'), 'leftHandedTouch');
     this.settingToggleKeybind(el, t('hud.options.filterProfanity'), 'filterProfanity');
     const note = document.createElement('div');

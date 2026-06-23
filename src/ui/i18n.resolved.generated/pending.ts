@@ -10,6 +10,8 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp",
     "hudChrome.options.keybindHelpLockCursorOnRotate",
     "hudChrome.options.lockCursorOnRotate",
     "hudChrome.theme.customColors",
@@ -35,6 +37,8 @@ export const pending: Record<string, readonly string[]> = {
     "realm.popTipOffline"
   ],
   "es_ES": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp",
     "hudChrome.options.keybindHelpLockCursorOnRotate",
     "hudChrome.options.lockCursorOnRotate",
     "hudChrome.theme.customColors",
@@ -60,6 +64,8 @@ export const pending: Record<string, readonly string[]> = {
     "realm.popTipOffline"
   ],
   "fr_FR": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp",
     "hudChrome.options.keybindHelpLockCursorOnRotate",
     "hudChrome.options.lockCursorOnRotate",
     "hudChrome.theme.customColors",
@@ -85,6 +91,8 @@ export const pending: Record<string, readonly string[]> = {
     "realm.popTipOffline"
   ],
   "fr_CA": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp",
     "hudChrome.options.keybindHelpLockCursorOnRotate",
     "hudChrome.options.lockCursorOnRotate",
     "hudChrome.theme.customColors",
@@ -111,6 +119,8 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "en_CA": [],
   "it_IT": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp",
     "hudChrome.options.keybindHelpLockCursorOnRotate",
     "hudChrome.options.lockCursorOnRotate",
     "hudChrome.theme.customColors",
@@ -136,6 +146,8 @@ export const pending: Record<string, readonly string[]> = {
     "realm.popTipOffline"
   ],
   "de_DE": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp",
     "hudChrome.options.keybindHelpLockCursorOnRotate",
     "hudChrome.options.lockCursorOnRotate",
     "hudChrome.theme.customColors",
@@ -160,11 +172,25 @@ export const pending: Record<string, readonly string[]> = {
     "realm.popTipMedium",
     "realm.popTipOffline"
   ],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
+  "zh_CN": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ],
+  "zh_TW": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ],
+  "ko_KR": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ],
+  "ja_JP": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ],
   "pt_BR": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp",
     "hudChrome.options.keybindHelpLockCursorOnRotate",
     "hudChrome.options.lockCursorOnRotate",
     "hudChrome.theme.customColors",
@@ -189,5 +215,8 @@ export const pending: Record<string, readonly string[]> = {
     "realm.popTipMedium",
     "realm.popTipOffline"
   ],
-  "ru_RU": []
+  "ru_RU": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ]
 };

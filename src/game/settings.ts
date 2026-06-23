@@ -184,6 +184,12 @@ export const BOOL_SETTINGS = {
   // to just its "Quests (N)" header. Toggled by clicking the tracker header; kept
   // here so the choice persists across sessions like the other HUD preferences.
   questTrackerCollapsed: { def: false },
+  // on by default: when casting a targeted ability, the character auto-pivots to
+  // face the target so swings and projectiles originate from the front. Off
+  // restores the classic facing requirement (an off-arc hostile cast is rejected
+  // with "You must be facing your target."). Server-authoritative: the preference
+  // is pushed to the sim, so it changes real cast behavior, not just visuals.
+  autoFaceOnCast: { def: true },
 } as const;
 
 export type NumericSettingKey = keyof typeof SETTING_RANGES;

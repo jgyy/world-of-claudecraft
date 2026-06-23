@@ -1028,6 +1028,12 @@ async function startGame(world: IWorld, offlineSim: Sim | null, online: ClientWo
       sfx.setFootstepsEnabled(settings.set('footstepSfx', !!value));
       return;
     }
+    if (key === 'autoFaceOnCast') {
+      // Server-authoritative cast preference: push it into the world (offline Sim
+      // sets it directly; online ClientWorld sends it and re-sends on reconnect).
+      world.setAutoFaceOnCast(settings.set('autoFaceOnCast', !!value));
+      return;
+    }
     if (key === 'landingHighContrast') {
       // Mirror of the start-screen toggle; keeps the persisted preference in sync
       // and re-applies the backdrop (the landing page is hidden in-game, but the

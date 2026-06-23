@@ -1211,6 +1211,7 @@ export class GameServer {
     switch (msg.cmd) {
       case 'castSlot': sim.castAbilityBySlot(msg.slot | 0, pid); break;
       case 'cast': if (typeof msg.ability === 'string') sim.castAbility(msg.ability, pid); break;
+      case 'setPref': if (typeof msg.autoFaceOnCast === 'boolean') sim.setAutoFaceOnCast(msg.autoFaceOnCast, pid); break;
       case 'target': sim.targetEntity(typeof msg.id === 'number' ? msg.id : null, pid); break;
       case 'tab': sim.tabTarget(pid); break;
       case 'targetNearest': sim.targetNearestEnemy(pid); break;

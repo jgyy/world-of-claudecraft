@@ -590,6 +590,10 @@ export class ClientWorld implements IWorld {
   // chat locally when the player's filter is on. Hard words never arrive here.
   profanityWords: string[] = [];
   private profanityDirty = false;
+  // Local auto-face-on-cast preference (mirrors the client setting). Sent to the
+  // server on connect and whenever it changes; the server holds it in memory
+  // only, so it must be re-sent on every reconnect. Default matches the sim.
+  private autoFaceOnCast = true;
   private pendingQuestCommands = new Map<string, 'accept' | 'turnin'>();
   private mouselookFacing: number | null = null;
   private sendTimer: number | undefined;
@@ -737,6 +741,9 @@ export class ClientWorld implements IWorld {
         this.profanityDirty = true;
       }
       this.connected = true;
+      // Re-assert client preferences the server only holds in memory, so a
+      // reconnect does not silently revert to the server-side default.
+      this.cmd({ cmd: 'setPref', autoFaceOnCast: this.autoFaceOnCast });
       return;
     }
     if (msg.t === 'censor') {
@@ -1108,6 +1115,14 @@ export class ClientWorld implements IWorld {
       return;
     }
     this.cmd({ cmd: 'castSlot', slot });
+  }
+
+  setAutoFaceOnCast(enabled: boolean): void {
+    // Remember the preference so it can be re-sent on every (re)connect; the
+    // server keeps it only in memory, so a fresh socket would otherwise revert
+    // to the server-side default.
+    this.autoFaceOnCast = enabled;
+    this.cmd({ cmd: 'setPref', autoFaceOnCast: enabled });
   }
 
   targetEntity(id: number | null): void {
