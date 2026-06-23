@@ -2573,6 +2573,9 @@ export class Sim {
       const d = dist2d(p.pos, target.pos);
       if (d > Math.max(ability.range, 5)) { this.error(p.id, 'Out of range.'); return; }
       if (this.lineOfSightBlocked(p, target, ability)) { this.error(p.id, 'Line of sight.'); return; }
+      // Pivot toward the ally being healed/buffed (but never self) so the spell
+      // visual reads correctly, matching the hostile-cast auto-face below.
+      if (target !== p) p.facing = angleTo(p.pos, target.pos);
     } else if (ability.requiresTarget) {
       target = p.targetId !== null ? this.entities.get(p.targetId) ?? null : null;
       if (!target || target.dead || !this.isHostileTo(p, target)) {
@@ -2584,8 +2587,10 @@ export class Sim {
       if (d > maxRange) { this.error(p.id, 'Out of range.'); return; }
       if (ability.minRange && d < ability.minRange) { this.error(p.id, 'Too close!'); return; }
       if (this.lineOfSightBlocked(p, target, ability)) { this.error(p.id, 'Line of sight.'); return; }
-      const facingDiff = Math.abs(normAngle(angleTo(p.pos, target.pos) - p.facing));
-      if (facingDiff > MELEE_ARC) { this.error(p.id, 'You must be facing your target.'); return; }
+      // Auto-face the target on a targeted cast (classic-style): the character
+      // pivots to face the enemy so swings and projectiles originate from the
+      // front instead of firing sideways out of the shoulder.
+      p.facing = angleTo(p.pos, target.pos);
       // execute-style gate: only usable while the target is nearly dead
       if (ability.requiresTargetHpBelow !== undefined
         && target.hp > target.maxHp * ability.requiresTargetHpBelow) {

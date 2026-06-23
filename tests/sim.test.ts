@@ -505,6 +505,26 @@ describe('combat', () => {
     expect(wolf.hp).toBeLessThan(hpBefore);
   });
 
+  it('auto-faces the target on a targeted cast instead of rejecting when turned away', () => {
+    const sim = makeSim('mage');
+    const wolf = nearestMob(sim, 'forest_wolf');
+    teleportTo(sim, wolf.pos.x + 15, wolf.pos.z);
+    sim.targetEntity(wolf.id);
+    // Turn the caster completely away from the target (180 degrees off).
+    const toward = Math.atan2(wolf.pos.x - sim.player.pos.x, wolf.pos.z - sim.player.pos.z);
+    sim.player.facing = toward + Math.PI;
+    sim.events = [];
+    const hpBefore = wolf.hp;
+    sim.castAbility('fireball');
+    // The cast is not rejected for facing, and the caster has pivoted to face the wolf.
+    expect(sim.events.find((e: any) => e.type === 'error' && /facing/.test(e.text ?? ''))).toBeUndefined();
+    const facingErr = Math.abs(Math.atan2(Math.sin(sim.player.facing - toward), Math.cos(sim.player.facing - toward)));
+    expect(facingErr).toBeLessThan(1e-6);
+    expect(sim.player.castingAbility).toBe('fireball');
+    for (let i = 0; i < 20 * 3; i++) sim.tick();
+    expect(wolf.hp).toBeLessThan(hpBefore);
+  });
+
   it('tags a cast on a dead target with reason target_dead (and not on a live one)', () => {
     const sim = makeSim('mage');
     const wolf = nearestMob(sim, 'forest_wolf');
