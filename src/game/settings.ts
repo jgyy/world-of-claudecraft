@@ -2,6 +2,8 @@
 // Esc options menu. Pure + persisted to localStorage; main.ts applies each
 // value to the live subsystem (Input / GameAudio / MusicDirector / Renderer).
 
+import { GFX_CONFIG_VERSION } from '../render/gfx';
+
 // Camera default is 0.7: the old fixed speed (1.0) was near the top of the
 // reasonable range and drew complaints, so out of the box it's calmer while
 // the slider still reaches 1.25 for players who liked it fast.
@@ -202,6 +204,30 @@ function clampNumeric(key: NumericSettingKey, v: number): number {
   return Math.min(r.max, Math.max(r.min, v));
 }
 
+/**
+ * One-time persisted-settings migrations keyed off the graphics config version
+ * (GFX_CONFIG_VERSION in render/gfx.ts). Pure so it unit-tests without a DOM.
+ *
+ * `Settings.save()` writes the whole resolved object, so any value left at its
+ * default the day a player saved settings gets frozen at *that day's* default
+ * and never follows a later change. When the WebGL default flipped low -> ultra,
+ * returning players stayed stuck on the old low preset baked into woc_settings.
+ * When the stored graphics version is behind, drop the persisted graphicsPreset
+ * so it re-resolves to the current default, and stamp the new version so this
+ * runs exactly once.
+ */
+export function migratePersistedSettings(
+  raw: Record<string, unknown>,
+  graphicsVersion: number,
+): { raw: Record<string, unknown>; changed: boolean } {
+  const stored = typeof raw.graphicsConfigVersion === 'number' ? raw.graphicsConfigVersion : 0;
+  if (stored === graphicsVersion) return { raw, changed: false };
+  const next = { ...raw };
+  delete next.graphicsPreset;
+  next.graphicsConfigVersion = graphicsVersion;
+  return { raw: next, changed: true };
+}
+
 export type ClickMoveMouseButton = 0 | 2;
 
 export function normalizeClickMoveButton(value: number): ClickMoveMouseButton {
@@ -214,6 +240,8 @@ export function clickMoveButtonLabel(value: number): string {
 
 export class Settings {
   private values: GameSettings;
+  // Stamped into woc_settings so the one-time graphics migration runs once.
+  private graphicsConfigVersion = GFX_CONFIG_VERSION;
 
   constructor() {
     this.values = this.load();
@@ -222,7 +250,17 @@ export class Settings {
   private load(): GameSettings {
     let stored: unknown = null;
     try { stored = JSON.parse(localStorage.getItem(STORE_KEY) ?? 'null'); } catch { /* corrupt */ }
-    const raw = stored && typeof stored === 'object' ? stored as Record<string, unknown> : {};
+    const hadStored = !!stored && typeof stored === 'object';
+    let raw = hadStored ? stored as Record<string, unknown> : {};
+    // Returning players only: migrate the persisted object in place. A genuinely
+    // fresh player keeps an empty/unwritten woc_settings until they change a
+    // setting, so they pick up the current defaults without a forced resave.
+    let migrated = false;
+    if (hadStored) {
+      const result = migratePersistedSettings(raw, GFX_CONFIG_VERSION);
+      raw = result.raw;
+      migrated = result.changed;
+    }
     const out = {} as GameSettings;
     for (const key of NUMERIC_KEYS) {
       const v = raw[key];
@@ -232,11 +270,20 @@ export class Settings {
       const v = raw[key];
       out[key] = typeof v === 'boolean' ? v : BOOL_SETTINGS[key].def;
     }
+    this.values = out;
+    // Persist the migration now so gfx.ts's raw localStorage read sees the reset
+    // preset on this same boot (it reads woc_settings directly, not via Settings).
+    if (migrated) this.save();
     return out;
   }
 
   private save(): void {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(this.values)); } catch { /* storage unavailable */ }
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        ...this.values,
+        graphicsConfigVersion: this.graphicsConfigVersion,
+      }));
+    } catch { /* storage unavailable */ }
   }
 
   get<K extends keyof GameSettings>(key: K): GameSettings[K] {

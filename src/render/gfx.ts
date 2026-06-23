@@ -10,7 +10,10 @@ import * as THREE from 'three';
 //   3. otherwise: persisted graphics preset, with missing values -> ultra
 
 export type GfxTier = 'low' | 'medium' | 'high' | 'ultra';
-export const GFX_CONFIG_VERSION = 14;
+// Bump whenever a graphics-config change should re-resolve persisted choices.
+// v15: returning players had the pre-ultra-default low preset (1) frozen into
+// woc_settings; this bump drops that stale preset once so it re-defaults.
+export const GFX_CONFIG_VERSION = 15;
 
 export const GFX_BUCKET_IDS = [
   'resolution',
@@ -329,6 +332,19 @@ function storedNumericSetting(key: string): number | undefined {
   }
 }
 
+// The persisted graphicsPreset, but only when it was saved under the current
+// graphics config version. A config bump (GFX_CONFIG_VERSION) intentionally
+// re-defaults the preset (Settings.migratePersistedSettings does the persisted
+// cleanup + version stamp). We mirror that gate here so the module-load tier is
+// already correct: gfx.ts reads localStorage directly, BEFORE Settings runs its
+// migration, so without this a returning player would resolve the stale low tier
+// at module load and only flip to the real tier in initGfxTier - a needless
+// first-boot tier change. Returning undefined here yields the ultra default.
+export function storedGraphicsPreset(): number | undefined {
+  if (storedNumericSetting('graphicsConfigVersion') !== GFX_CONFIG_VERSION) return undefined;
+  return storedNumericSetting('graphicsPreset');
+}
+
 function probeGpuRenderer(): string | undefined {
   if (typeof document === 'undefined') return undefined;
   try {
@@ -361,7 +377,7 @@ function runtimeHints(): GfxRuntimeHints {
       ? (matchMedia('(max-width: 940px)').matches || matchMedia('(max-height: 760px)').matches)
       : false,
     gpuRenderer: probeGpuRenderer(),
-    graphicsPreset: storedNumericSetting('graphicsPreset'),
+    graphicsPreset: storedGraphicsPreset(),
     terrainDetail: storedNumericSetting('terrainDetail'),
     foliageDensity: storedNumericSetting('foliageDensity'),
     effectsQuality: storedNumericSetting('effectsQuality'),

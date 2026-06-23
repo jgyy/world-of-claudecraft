@@ -4,7 +4,7 @@ import {
   configureMaskedDoubleSidedVegetationMaterial,
   forcedTierFromSearch, graphicsPresetLabel, isConstrainedBrowser, isWeakIntegratedGpu,
   shouldUseAutoGovernor, tierFromHints, GFX_BUDGETS, type GfxRuntimeHints,
-  GFX_BUCKET_BANDS, gfxInternalsForTest,
+  GFX_BUCKET_BANDS, gfxInternalsForTest, storedGraphicsPreset, GFX_CONFIG_VERSION,
 } from '../src/render/gfx';
 
 const desktop: GfxRuntimeHints = {
@@ -19,6 +19,28 @@ describe('graphics tier resolution', () => {
     expect(desktop.graphicsPreset).toBeUndefined();
     expect(graphicsPresetLabel(desktop.graphicsPreset)).toBe('ultra');
     expect(tierFromHints(desktop, false)).toBe('ultra');
+  });
+
+  it('ignores a graphicsPreset persisted under a stale graphics config version', () => {
+    const store = new Map<string, string>();
+    (globalThis as any).localStorage = {
+      getItem: (k: string) => (store.has(k) ? store.get(k)! : null),
+      setItem: (k: string, v: string) => { store.set(k, v); },
+      removeItem: (k: string) => { store.delete(k); },
+      clear: () => store.clear(),
+    };
+    try {
+      // Returning player frozen on the old low preset, no version stamp: the
+      // module-load read must already discard it (-> undefined -> ultra default)
+      // so there's no low->ultra tier flip during boot.
+      store.set('woc_settings', JSON.stringify({ graphicsPreset: 1 }));
+      expect(storedGraphicsPreset()).toBeUndefined();
+      // Once migrated/stamped at the current version, the preset is honored again.
+      store.set('woc_settings', JSON.stringify({ graphicsPreset: 1, graphicsConfigVersion: GFX_CONFIG_VERSION }));
+      expect(storedGraphicsPreset()).toBe(1);
+    } finally {
+      delete (globalThis as any).localStorage;
+    }
   });
 
   it('honors explicit URL tier overrides', () => {
