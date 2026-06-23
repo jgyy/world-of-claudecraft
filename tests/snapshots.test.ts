@@ -382,6 +382,55 @@ describe('delta snapshots', () => {
   });
 });
 
+describe('raid party wire', () => {
+  let server: GameServer;
+  let fcLeader: FakeClient;
+  let leader: ClientSession;
+  let fcMember: FakeClient;
+  let member: ClientSession;
+
+  beforeEach(() => {
+    server = new GameServer();
+    fcLeader = fakeWs();
+    leader = joinServer(server, fcLeader, 1, 'Leada');
+    fcMember = fakeWs();
+    member = joinServer(server, fcMember, 2, 'Memba');
+    // Form a party, then mark it a raid and split into two subgroups. The
+    // convert-to-raid command gates on a full five-player party, so we set the
+    // raid state directly: this test pins the WIRE serialization, not that gate.
+    const sim = server.sim;
+    sim.partyInvite(member.pid, leader.pid);
+    sim.partyAccept(member.pid);
+    const party = (sim as any).partyOf(leader.pid);
+    party.raid = true;
+    party.raidGroups.set(member.pid, 2);
+  });
+
+  it('self.party wire carries the raid flag and per-member subgroup', () => {
+    broadcast(server);
+    const snap = lastSnap(fcLeader.sent);
+    expect(snap.self.party).not.toBeNull();
+    // The raid flag must survive the wire so the HUD renders the raid roster.
+    expect(snap.self.party.raid).toBe(true);
+    // Every member must carry its subgroup so the social panel can bucket them.
+    for (const m of snap.self.party.members) {
+      expect(m, `member ${m.pid} missing group`).toHaveProperty('group');
+    }
+    const memberGroup = snap.self.party.members.find((m: any) => m.pid === member.pid)?.group;
+    expect(memberGroup).toBe(2);
+  });
+
+  it('online ClientWorld mirrors raid roster from the wire', () => {
+    broadcast(server);
+    const snap = lastSnap(fcLeader.sent);
+    const client = bareClient(leader.pid);
+    (client as any).applySnapshot(snap);
+    expect(client.partyInfo).not.toBeNull();
+    expect(client.partyInfo!.raid).toBe(true);
+    expect(client.partyInfo!.members.find((m) => m.pid === member.pid)?.group).toBe(2);
+  });
+});
+
 describe('restart countdown', () => {
   const restartMessages = [
     'Server restart in 10 minutes.',
