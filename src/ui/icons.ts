@@ -1361,16 +1361,29 @@ const AURA_RECIPES: Record<string, IconRecipe> = {
   aura_buff_ap: r('fury', 'gold', ['fist']),
   aura_buff_armor: r('steel', 'steel', ['shield']),
   aura_buff_int: r('arcane', 'arcanePink', ['eye']),
+  // Agility (Elixir/Scroll of Agility, and the mob Withering drain that rides
+  // buff_agi): a green wing in motion reads as quickness, distinct from the
+  // boot of buff_speed and the brown paw of form_bear.
+  aura_buff_agi: r('nature', 'leafGreen', ['wing'], ['motion']),
   aura_buff_dodge: r('storm', 'sky', ['shield'], ['motion']),
   aura_buff_speed: r('earth', 'leather', ['boot'], ['motion']),
   aura_buff_haste: r('storm', 'sky', ['lightning']),
   aura_absorb: r('holy', 'silverWhite', ['shield'], ['glow']),
   aura_imbue: r('holy', 'holyGold', ['sword', { p: 'sunburst', ...TL }]),
   aura_buff_allstats: r('arcane', 'arcanePink', ['gem']),
+  // Spirit (Elixir/Scroll of Spirit, and the mob Spirit Siphon drain that rides
+  // buff_spi): a luminous droplet for restorative regen, distinct from the heart
+  // of buff_sta and the eye of buff_int.
+  aura_buff_spi: r('holy', 'silverWhite', ['droplet'], ['glow']),
   aura_thorns: r('nature', 'leafGreen', ['leaf', { p: 'claw_slash', ...BR }]),
   aura_cost_tax: r('shadow', 'shadowPurple', ['gem', { p: 'droplet', ...BR }], ['drips']),
   aura_heal_absorb: r('shadow', 'shadowPurple', ['heart'], ['drips']),
   aura_form_bear: r('earth', 'earthBrown', ['paw']),
+  // 2v2 Fiesta power-ups (applied with non-ability ids, so they hit this generic
+  // path): buff_scale enlarges the body (a fiery roar = grow/empower), buff_jump
+  // raises jump height (a winged boot = leap).
+  aura_buff_scale: r('fury', 'ember', ['roar']),
+  aura_buff_jump: r('storm', 'sky', ['wing', { p: 'boot', ...BR }]),
 };
 
 // Crests: class / mob-family / status glyphs, painted with the same primitive
@@ -1830,6 +1843,13 @@ export function abilityIconRecipe(id: string): IconRecipe {
 }
 export function hasExplicitAbilityIcon(id: string): boolean {
   return id in ABILITY_RECIPES;
+}
+// True when a buff/debuff KIND (e.g. 'buff_agi') has a deliberate generic recipe in
+// AURA_RECIPES, used for auras applied with a non-ability id (elixirs, scrolls, Fiesta
+// power-ups, mob stat drains). Without one the buff bar shows the arbitrary
+// abilityFallback medallion. Guarded by tests/aura_icons.test.ts.
+export function hasExplicitAuraIcon(kind: string): boolean {
+  return `aura_${kind}` in AURA_RECIPES;
 }
 
 const DEFAULT_ICON_SIZE = 96; // crisp at 46px buttons on 2x displays

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { ABILITIES } from '../src/sim/data';
-import { iconDataUrl } from '../src/ui/icons';
+import { iconDataUrl, hasExplicitAuraIcon } from '../src/ui/icons';
 
 // Buff/debuff aura frames (the player buff bar and a mob's DoT debuffs, both via
 // Hud.renderAuras) request their icon with kind 'aura'. When the aura carries a
@@ -42,6 +42,31 @@ describe('aura icons reuse image-based ability art', () => {
       expect(iconDataUrl('aura', id), `aura ${id}`).toBe(expected);
       // and it matches what the action bar shows for the same ability
       expect(iconDataUrl('aura', id)).toBe(iconDataUrl('ability', id));
+    }
+  });
+});
+
+// Most active buffs come from a class ability and reuse that ability's art (above).
+// But a buff can also be applied with an id that is NOT an ability: an elixir
+// (`elixir_<itemId>`), a scroll, a Fiesta power-up, or a stat drain from a mob. For
+// those, Hud.renderAuras falls back to a generic `aura_<kind>` recipe (see the
+// `ABILITIES[a.id] ? a.id : `aura_${a.kind}`` gate). If a buff_* kind has no entry
+// in AURA_RECIPES it renders an arbitrary, meaningless medallion (the `abilityFallback`
+// icon) — the "old skill icon" players see on the buff bar. Every stat-buff kind must
+// therefore ship a deliberate aura recipe. Mirror of the AuraKind `buff_*` members in
+// src/sim/types.ts: add a kind there ⇒ add its recipe + this entry in the same change.
+const BUFF_AURA_KINDS = [
+  'buff_ap', 'buff_armor', 'buff_int', 'buff_agi', 'buff_dodge', 'buff_speed',
+  'buff_haste', 'buff_sta', 'buff_allstats', 'buff_spi', 'buff_scale', 'buff_jump',
+] as const;
+
+describe('every stat-buff aura kind has a deliberate buff-bar icon', () => {
+  it('no buff_* kind falls back to the generic medallion', () => {
+    for (const kind of BUFF_AURA_KINDS) {
+      expect(
+        hasExplicitAuraIcon(kind),
+        `aura_${kind} needs a deliberate AURA_RECIPES entry (currently renders the generic fallback)`,
+      ).toBe(true);
     }
   });
 });
