@@ -48,15 +48,20 @@ export const ZONE3_ROADS: { x: number; z: number }[][] = [
     { x: 0, z: 660 },
   ], // Fenbridge -> Highwatch
   [
-    { x: -6, z: 666 },
+    { x: -4, z: 664 },
+    { x: -6, z: 659 },
+    { x: -16, z: 658 },
+    { x: -30, z: 680 },
     { x: -60, z: 700 },
     { x: -110, z: 735 },
-  ], // -> ogre war-camp
+  ], // -> ogre war-camp (passes south of the inn and stalls)
   [
     { x: 6, z: 668 },
+    { x: 10, z: 675 },
+    { x: 22, z: 678 },
     { x: 70, z: 720 },
     { x: 110, z: 760 },
-  ], // -> Stormcrag
+  ], // -> Stormcrag (rounds the north side of the house)
   [
     { x: 0, z: 676 },
     { x: 0, z: 780 },

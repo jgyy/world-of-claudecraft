@@ -1036,27 +1036,31 @@ export const ZONE1_OBJECTS: GroundObjectDef[] = [
 export const ZONE1_ROADS: { x: number; z: number }[][] = [
   [
     { x: 0, z: 8 },
+    { x: -5, z: 14 },
     { x: -8, z: 30 },
     { x: -15, z: 55 },
     { x: -2, z: 78 },
-  ], // north to wolves
+  ], // north to wolves (bends west of the market stall)
   [
     { x: 8, z: 2 },
-    { x: 30, z: 8 },
+    { x: 24, z: 2 },
+    { x: 36, z: 8 },
     { x: 55, z: 12 },
-  ], // east to boars
+  ], // east to boars (dips south past the paddock fence)
   [
     { x: 6, z: -6 },
     { x: 30, z: -30 },
     { x: 50, z: -50 },
-    { x: 65, z: -65 },
-  ], // southeast to bandits
+    { x: 57, z: -58 },
+  ], // southeast to bandits (stops at the camp edge, not on the campfire)
   [
     { x: -8, z: 6 },
-    { x: -35, z: 25 },
+    { x: -13, z: 5 },
+    { x: -21, z: 0 },
+    { x: -34, z: 18 },
     { x: -58, z: 48 },
     { x: -66, z: 58 },
-  ], // northwest to lake
+  ], // northwest to lake (crosses below the fence's south end)
   [
     { x: -6, z: -6 },
     { x: -30, z: -28 },
@@ -1065,10 +1069,12 @@ export const ZONE1_ROADS: { x: number; z: number }[][] = [
   ], // southwest to mine
   [
     { x: 6, z: 8 },
-    { x: 35, z: 35 },
+    { x: 16, z: 5 },
+    { x: 24, z: 2 },
+    { x: 40, z: 28 },
     { x: 60, z: 60 },
     { x: 78, z: 74 },
-  ], // northeast to ruins
+  ], // northeast to ruins (skirts the house and crosses past the fence end)
 ];
 
 // ---------------------------------------------------------------------------
