@@ -148,9 +148,14 @@ beforeEach(() => {
   });
 });
 
-async function callUpload(url: string, body: Buffer, accountId = 1) {
+async function callUpload(
+  url: string,
+  body: Buffer,
+  accountId = 1,
+  liveLevelForCharacter?: (characterId: number) => number | null,
+) {
   const res = makeRes();
-  await handleCardUpload(makeBinaryReq(url, body), res, accountId);
+  await handleCardUpload(makeBinaryReq(url, body), res, accountId, liveLevelForCharacter);
   return { status: res.statusCode, data: res.body ? JSON.parse(String(res.body)) : {} };
 }
 
@@ -238,6 +243,28 @@ describe('POST /api/card', () => {
     expect(Buffer.isBuffer(storedPng) && storedPng.equals(validCardPng)).toBe(true);
     expect(insert?.[1][4]).toBe('Sir Test - Level 12 Paladin'); // title
     expect(insert?.[1][6]).toBe('en'); // locale
+  });
+
+  it('prefers the live in-session level over the stale persisted level', async () => {
+    // The DB row lags up to one autosave (30s) behind a level-up. The server runs
+    // the authoritative Sim, so the card title must use the live level, not the
+    // persisted one - otherwise a freshly-leveled player shares a card whose
+    // link-preview title disagrees with the level baked into the uploaded image.
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    slugRows = [];
+    const { status } = await callUpload('/api/card?character=5', validCardPng, 1, (id) => (id === 5 ? 15 : null));
+    expect(status).toBe(200);
+    const insert = dbMock.query.mock.calls.find((c) => String(c[0]).includes('INSERT INTO player_cards'));
+    expect(insert?.[1][4]).toBe('Sir Test - Level 15 Paladin'); // live level, not the persisted 12
+  });
+
+  it('falls back to the persisted level when the character is not online', async () => {
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    slugRows = [];
+    const { status } = await callUpload('/api/card?character=5', validCardPng, 1, () => null);
+    expect(status).toBe(200);
+    const insert = dbMock.query.mock.calls.find((c) => String(c[0]).includes('INSERT INTO player_cards'));
+    expect(insert?.[1][4]).toBe('Sir Test - Level 12 Paladin');
   });
 
   it('stores localized public-page metadata using the upload locale', async () => {

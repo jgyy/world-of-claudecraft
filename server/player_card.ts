@@ -422,6 +422,10 @@ export async function handleCardUpload(
   req: http.IncomingMessage,
   res: http.ServerResponse,
   accountId: number,
+  // The authoritative live level for a currently-online character, or null when
+  // the character is offline. The persisted `characters.level` column lags up to
+  // one autosave behind a level-up, so the card title prefers this when present.
+  liveLevelForCharacter?: (characterId: number) => number | null,
 ): Promise<void> {
   const params = new URLSearchParams((req.url ?? '').split('?')[1] ?? '');
   const characterId = Number(params.get('character'));
@@ -455,8 +459,11 @@ export async function handleCardUpload(
 
   const base = slugify(character.name) || `player-${characterId}`;
   const copy = PUBLIC_CARD_COPY[locale];
+  // Prefer the live, authoritative level for an online character; fall back to the
+  // persisted column (it can be up to one autosave stale) when offline.
+  const level = liveLevelForCharacter?.(characterId) ?? character.level;
   const levelClass = interpolate(copy.levelClass, {
-    level: character.level,
+    level,
     className: classDisplay(character.class, locale),
   });
   const title = `${character.name} - ${levelClass}`;

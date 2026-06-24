@@ -882,7 +882,7 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
         recordUsageMetric('card.publish.rate_limited');
         return json(res, 429, { error: 'rate limited' });
       }
-      return handleCardUpload(req, res, accountId);
+      return handleCardUpload(req, res, accountId, (id) => game.liveLevelForCharacter(id));
     }
     if (req.method === 'GET' && url === '/api/referrals') {
       const accountId = await bearerActiveAccount(req, res);

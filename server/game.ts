@@ -1132,6 +1132,19 @@ export class GameServer {
       : null;
   }
 
+  // The live, authoritative level for a currently-online character, or null when
+  // the character is offline. Uses the SERIALIZED level (not e.level) so a
+  // temporary 2v2 Fiesta level (20) never leaks onto a shared card, matching how
+  // saveCharacter persists the real level. Callers MUST ownership-check the
+  // characterId first (this is a raw by-id read); the sole caller does so via
+  // getCharacter(accountId, characterId) before reaching here.
+  liveLevelForCharacter(characterId: number): number | null {
+    const session = this.sessionsByCharacterId.get(characterId);
+    if (!session) return null;
+    const state = this.sim.serializeCharacter(session.pid);
+    return state ? state.level : null;
+  }
+
   disconnectAccount(accountId: number, reason: string): void {
     for (const session of [...this.clients.values()]) {
       if (session.accountId !== accountId) continue;
