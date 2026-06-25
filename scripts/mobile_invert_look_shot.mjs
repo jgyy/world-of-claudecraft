@@ -10,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { BROWSER_PATH } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 
 const require = createRequire(import.meta.url);
 const puppeteer = require('puppeteer-core');
@@ -42,14 +43,8 @@ try {
   await page.goto(GAME_URL, { waitUntil: 'domcontentloaded' });
   await sleep(1200);
 
-  // Offline entry: Play Offline → type a name → pick a class → Enter World.
-  await page.evaluate(() => document.getElementById('btn-offline')?.click());
-  await sleep(400);
-  await page.type('#char-name', 'Aethel');
-  await page.evaluate(() => document.querySelector('#offline-select .mini-class[data-class="warrior"]')?.click());
-  await sleep(200);
-  await page.evaluate(() => document.getElementById('btn-start-offline')?.click());
-  await sleep(2500);
+  // Offline entry: Play Offline -> type a name -> pick a class -> Enter World.
+  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Aethel', settleMs: 2500 });
   await page.evaluate(() => document.getElementById('mobile-preflight-continue')?.click());
   await sleep(1500);
 

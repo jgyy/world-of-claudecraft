@@ -6,6 +6,7 @@ import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 const URL = (process.env.GAME_URL ?? 'http://localhost:5173') + '/?gfx=ultra';
 const CLASS = process.env.GAME_CLASS ?? 'paladin';
 fs.mkdirSync('tmp', { recursive: true });
@@ -28,14 +29,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const tap = (sel) => page.evaluate((s) => document.querySelector(s)?.click(), sel);
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
-await page.evaluate(() => document.querySelector('#btn-offline').click());
-await wait(200);
-await page.evaluate(() => {
-  const n = document.querySelector('#char-name');
-  if (n) { n.value = 'Vorthos'; n.dispatchEvent(new Event('input', { bubbles: true })); }
-});
-await tap(`#offline-select .mini-class[data-class="${CLASS}"]`);
-await tap('#btn-start-offline');
+await enterOfflineGame(page, { charClass: CLASS, charName: 'Vorthos' });
 // On a phone-touch device the world-entry flow first shows an "add to home
 // screen" preflight that blocks until dismissed; tap Continue to proceed.
 await page.waitForSelector('#mobile-preflight-continue', { visible: true, timeout: 10000 }).catch(() => {});

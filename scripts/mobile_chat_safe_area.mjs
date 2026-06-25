@@ -10,6 +10,7 @@
 //
 // Usage: node scripts/mobile_chat_safe_area.mjs   (needs `npm run dev`)
 import { BROWSER_PATH } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 import puppeteer from 'puppeteer-core';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5174/';
@@ -28,16 +29,7 @@ async function enterGame(page) {
     if (el) { el.click(); return true; }
     return false;
   }, sel);
-  await clickIf('#btn-offline');         // Play Offline mode card
-  await sleep(600);
-  await page.evaluate(() => {             // name the character + pick first class
-    const n = document.getElementById('char-name');
-    if (n) { n.value = 'Tester'; n.dispatchEvent(new Event('input', { bubbles: true })); }
-    document.querySelector('.class-card,[data-class]')?.click();
-  });
-  await sleep(300);
-  await clickIf('#btn-start-offline');    // Enter World
-  await sleep(2000);
+  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Tester', settleMs: 2000 });
   await clickIf('#mobile-preflight-continue');
   await sleep(1000);
   // Force the touch UI + open the chat overlay (headless can't report coarse pointer).

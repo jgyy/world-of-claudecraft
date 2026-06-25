@@ -6,6 +6,7 @@ import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -27,13 +28,7 @@ page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
 page.on('console', (msg) => { if (msg.type() === 'error') errors.push('CONSOLE: ' + msg.text()); });
 
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-await page.waitForSelector('#btn-offline', { timeout: 30000 });
-await page.evaluate(() => document.querySelector('#btn-offline').click());
-await new Promise((r) => setTimeout(r, 200));
-await page.type('#char-name', 'Touchscreen');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
-await page.click('#btn-start-offline');
-await new Promise((r) => setTimeout(r, 2800));
+await enterOfflineGame(page, { charClass: 'warrior', charName: 'Touchscreen', settleMs: 2800 });
 
 // Dismiss the landscape/fullscreen preflight if it's up.
 await page.evaluate(() => {

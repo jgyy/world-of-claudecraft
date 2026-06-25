@@ -5,6 +5,7 @@ import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 const CLASS = process.env.GAME_CLASS ?? 'warrior';
 fs.mkdirSync('tmp', { recursive: true });
@@ -30,15 +31,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 // Menu buttons fail puppeteer's clickable-point check on mobile menus → click in-page.
 const tap = (sel) => page.evaluate((s) => document.querySelector(s)?.click(), sel);
 
-await page.evaluate(() => document.querySelector('#btn-offline').click());
-await wait(200);
-await page.evaluate(() => {
-  const n = document.querySelector('#char-name');
-  if (n) { n.value = 'Thorgar'; n.dispatchEvent(new Event('input', { bubbles: true })); }
-});
-await tap(`#offline-select .mini-class[data-class="${CLASS}"]`);
-await tap('#btn-start-offline');
-await wait(3000);
+await enterOfflineGame(page, { charClass: CLASS, charName: 'Thorgar', settleMs: 3000 });
 
 // Don't get eaten while posing for the camera.
 await page.evaluate(() => { const p = window.__game.sim.player; p.maxHp = 99999; p.hp = 99999; });

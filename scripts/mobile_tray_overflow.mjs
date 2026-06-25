@@ -8,6 +8,7 @@
 import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
 import { BROWSER_PATH as CHROME } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 const [W, H] = (process.env.VP ?? '740x360').split('x').map(Number);
@@ -25,13 +26,7 @@ await page.emulate({
   userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148',
 });
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-await page.waitForSelector('#btn-offline', { timeout: 30000 });
-await page.evaluate(() => document.querySelector('#btn-offline').click());
-await sleep(250);
-await page.type('#char-name', 'Mobile');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
-await page.click('#btn-start-offline');
-await sleep(2500);
+await enterOfflineGame(page, { charClass: 'warrior', charName: 'Mobile', settleMs: 2500 });
 await page.click('#mobile-more');
 await sleep(400);
 

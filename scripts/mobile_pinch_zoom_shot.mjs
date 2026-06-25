@@ -8,6 +8,7 @@
 import { mkdirSync } from 'node:fs';
 import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 
 const URL = 'http://localhost:5173/';
 const OUT = 'tmp/shots';
@@ -31,18 +32,8 @@ try {
   await page.goto(URL, { waitUntil: 'networkidle2' });
 
   // Offline flow: Play Offline → name → pick class → Start.
-  await page.waitForSelector('#btn-offline', { timeout: 15000 });
-  await page.evaluate(() => document.querySelector('#btn-offline').click());
-  await page.waitForSelector('#char-name', { visible: true });
-  await page.evaluate(() => {
-    const n = document.querySelector('#char-name');
-    n.value = 'Thorgar';
-    n.dispatchEvent(new Event('input', { bubbles: true }));
-    document.querySelector('.mini-class[data-class="warrior"]')?.click();
-  });
-  await page.evaluate(() => document.querySelector('#btn-start-offline').click());
+  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thorgar', settleMs: 2500 });
   await page.waitForSelector('#mobile-controls', { timeout: 15000 });
-  await sleep(2500);
 
   const camDist = () => page.evaluate(() => window.__game?.input?.camDist);
 

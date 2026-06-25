@@ -7,6 +7,7 @@
 import puppeteer from 'puppeteer-core';
 import { mkdirSync } from 'node:fs';
 import { BROWSER_PATH } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 
 const URL = 'http://localhost:5173/';
 const OUT = 'tmp/shots';
@@ -31,19 +32,9 @@ try {
   await client.send('Emulation.setEmulatedMedia', { features: [{ name: 'pointer', value: 'coarse' }] });
 
   await page.goto(URL, { waitUntil: 'domcontentloaded' });
-  await page.waitForSelector('#btn-offline', { visible: true });
 
   // Offline flow: pick mode → name → class → enter.
-  await page.evaluate(() => document.getElementById('btn-offline').click());
-  await sleep(250);
-  await page.evaluate(() => {
-    const n = document.getElementById('char-name');
-    n.value = 'Thorgar';
-    n.dispatchEvent(new Event('input', { bubbles: true }));
-    document.querySelector('.mini-class[data-class="mage"]').click();
-  });
-  await sleep(150);
-  await page.evaluate(() => document.getElementById('btn-start-offline').click());
+  await enterOfflineGame(page, { charClass: 'mage', charName: 'Thorgar' });
 
   // Let the world boot and the action bar populate.
   await page.waitForSelector('body.mobile-touch', { timeout: 8000 });

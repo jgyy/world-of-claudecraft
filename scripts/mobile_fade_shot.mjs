@@ -2,6 +2,7 @@
 // Usage: node scripts/mobile_shot.mjs   (needs `npm run dev` running on :5173)
 import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173/';
 const OUT = process.env.OUT_DIR ?? '/tmp';
@@ -22,15 +23,7 @@ page.on('console', (m) => { if (m.type() === 'error') console.log('PAGE ERR', m.
 
 await page.goto(URL, { waitUntil: 'networkidle2', timeout: 30000 });
 await sleep(500);
-await page.evaluate(() => document.querySelector('#btn-offline').click());
-await sleep(400);
-await page.click('#offline-select .mini-class[data-class="warrior"]');
-await sleep(200);
-await page.type('#char-name', 'Thumbwar');
-await sleep(150);
-await page.click('#btn-start-offline');
-// Let the world load and settle.
-await sleep(6000);
+await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thumbwar', settleMs: 6000 });
 
 const idlePath = `${OUT}/mobile-idle-fade.png`;
 await page.screenshot({ path: idlePath });

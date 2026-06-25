@@ -10,6 +10,7 @@
 // Needs `npm run dev` running. Writes before/after PNGs to /tmp.
 import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 
 const URL = process.env.URL || 'http://localhost:5173/';
 const INSET = 44; // simulated right-edge safe-area inset (px), e.g. a landscape notch
@@ -28,13 +29,7 @@ try {
   await page.goto(URL, { waitUntil: 'networkidle2' });
 
   // Enter the offline world: open the panel, pick a class, start.
-  await page.evaluate(() => document.querySelector('#btn-offline').click()).catch(() => {});
-  await sleep(300);
-  await page.type('#char-name', 'Adventurer').catch(() => {});
-  await page.click('#offline-select .mini-class[data-class="warrior"]').catch(() => {});
-  await sleep(150);
-  await page.click('#btn-start-offline').catch(() => {});
-  await sleep(2500);
+  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Adventurer', settleMs: 2500 });
   // Dismiss the mobile preflight gate if present.
   await page.evaluate(() => document.querySelector('#mobile-preflight-continue')?.click());
   await sleep(600);

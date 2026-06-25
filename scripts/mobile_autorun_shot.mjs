@@ -2,6 +2,7 @@
 // Needs `npm run dev` on :5173. No server/Postgres required (offline flow).
 import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';
+import { enterOfflineGame } from './enter_offline_game.mjs';
 
 const URL = process.env.URL || 'http://localhost:5173/';
 const OUT = process.env.OUT || '/tmp/woc-autorun';
@@ -22,17 +23,7 @@ await page.goto(URL, { waitUntil: 'networkidle2' });
 await sleep(800);
 
 // Offline flow: #btn-offline -> pick a class -> name -> start
-await page.evaluate(() => document.getElementById('btn-offline')?.click());
-await sleep(400);
-await page.evaluate(() => document.querySelector('.mini-class[data-class="warrior"]')?.click());
-await sleep(200);
-await page.evaluate(() => {
-  const n = document.getElementById('char-name');
-  if (n) { n.value = 'Trailblazer'; n.dispatchEvent(new Event('input', { bubbles: true })); }
-});
-await sleep(200);
-await page.evaluate(() => document.getElementById('btn-start-offline')?.click());
-await sleep(3500);
+await enterOfflineGame(page, { charClass: 'warrior', charName: 'Trailblazer', settleMs: 3500 });
 
 async function shot(name) {
   await page.screenshot({ path: `${OUT}-${name}.png` });
