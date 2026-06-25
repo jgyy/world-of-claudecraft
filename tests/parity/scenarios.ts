@@ -655,6 +655,61 @@ function delveDeath(): Scenario {
   };
 }
 
+// Party/raid state machine (A1): the full social flow, which draws NO rng of its
+// own. Forms a party of five, converts it to a raid, fills to a second subgroup,
+// moves a member across groups, then hands off leadership and drains the roster to
+// a disband. Pins the party emit stream (invite + join/convert/move/leave/handoff/
+// disband logs) in order; partyOf must keep resolving after the move. The draw-order
+// digest must stay byte-identical (this slice never touches rng), so any drift means
+// a surrounding draw shifted.
+function partyRaid(): Scenario {
+  return {
+    name: 'party_raid',
+    coverage: [
+      'partyInvite/partyAccept party formation (~11864/11901)',
+      'convertPartyToRaid full-party gate (RAID_MIN) + normalizeRaidGroups',
+      'raid fill to two subgroups (nextRaidGroupFor) + moveRaidMember (RAID_GROUP_MAX)',
+      'removeFromParty leadership handoff + disband + partyOf via SimContext',
+    ],
+    build: () => new Sim({ seed: 1014, playerClass: 'warrior', noPlayer: true }),
+    drive(rec: Recorder) {
+      const sim = rec.sim as AnySim;
+      const a = sim.addPlayer('warrior', 'Aaa');
+      const b = sim.addPlayer('mage', 'Bbb');
+      const c = sim.addPlayer('rogue', 'Ccc');
+      const d = sim.addPlayer('hunter', 'Ddd');
+      const e = sim.addPlayer('warlock', 'Eee');
+      const f = sim.addPlayer('paladin', 'Fff');
+      const g = sim.addPlayer('warrior', 'Ggg');
+      rec.track(a, b, c, d, e, f, g);
+      // 1) a invites four; each accepts -> a full party of five.
+      for (const m of [b, c, d, e]) {
+        sim.partyInvite(m, a);
+        sim.partyAccept(m);
+      }
+      rec.snapshot('party-of-5');
+      // 2) convert the full party to a raid (requires RAID_MIN members).
+      sim.convertPartyToRaid(a);
+      rec.snapshot('raid');
+      // 3) invite two more; subgroup 1 is full (5) so they land in subgroup 2.
+      for (const m of [f, g]) {
+        sim.partyInvite(m, a);
+        sim.partyAccept(m);
+      }
+      rec.snapshot('raid-of-7');
+      // 4) move a subgroup-1 member into subgroup 2.
+      sim.moveRaidMember(b, 2, a);
+      rec.snapshot('moved');
+      // 5) the leader leaves -> leadership hands off to the first remaining member.
+      sim.partyLeave(a);
+      rec.snapshot('leader-left');
+      // 6) drain the rest; the last departure triggers the disband branch.
+      for (const m of [c, d, e, f, g]) sim.partyLeave(m);
+      rec.snapshot('disband');
+    },
+  };
+}
+
 export const SCENARIOS: Scenario[] = [
   soloWarrior(),
   soloMage(),
@@ -667,6 +722,7 @@ export const SCENARIOS: Scenario[] = [
   fiesta(),
   delveLockpick(),
   partyLoot(),
+  partyRaid(),
   entityRoster(),
   delveDeath(),
 ];

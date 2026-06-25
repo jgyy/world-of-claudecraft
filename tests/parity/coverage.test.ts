@@ -128,6 +128,18 @@ describe('coverage: each scenario fires its subsystem', () => {
     expect((rec.allEvents as Ev[]).some((e) => e.type === 'lootRoll')).toBe(true);
   });
 
+  it('party_raid: the party state machine fires invite/convert/move/handoff/disband', () => {
+    const rec = run('party_raid');
+    const ev = rec.allEvents as Ev[];
+    const logs = ev.filter((e) => e.type === 'log').map((e) => String(e.text));
+    expect(ev.some((e) => e.type === 'partyInvite')).toBe(true);
+    expect(logs.some((t) => t.includes('joins the party'))).toBe(true);
+    expect(logs.some((t) => t.includes('converted to a raid'))).toBe(true);
+    expect(logs.some((t) => t.includes('moved to raid group'))).toBe(true);
+    expect(logs.some((t) => t.includes('is now the party leader'))).toBe(true);
+    expect(logs.some((t) => t.includes('has disbanded'))).toBe(true);
+  });
+
   it('entity_roster: both despawn branches drop, delayed drain runs, graveyard release at full hp', () => {
     const rec = run('entity_roster');
     const ents = entities(rec);
