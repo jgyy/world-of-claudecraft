@@ -41,7 +41,7 @@
     touch-action: none;
   }
   /* The HUD overlay must let one-finger panning reach scrollable windows (Bag,
-     Market, etc.) on iOS — Safari intersects touch-action down the ancestor
+     Market, etc.) on iOS: Safari intersects touch-action down the ancestor
      chain, so `none` here would block child scroll containers and a child's
      own `pan-y` could not re-enable it. `pan-x pan-y` still blocks pinch/
      double-tap zoom (also guarded globally in preventMobileZoom). */
