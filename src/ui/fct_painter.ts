@@ -77,6 +77,7 @@ import {
   type FctEvent,
   isDamageFctKind,
 } from './fct_core';
+import { type FctEntry, placeFctY } from './fct_layout';
 import type { PainterHostWriters } from './painter_host';
 
 /**
@@ -97,6 +98,11 @@ export type FctProject = (
  * bounded (the old createElement path had no ceiling at all).
  */
 export const FCT_POOL_CAP = 64;
+
+// How long a placed floater counts toward the anti-overlap stacking history, ms. Matches
+// the base (non-crit) floater lifetime (d.ttlMs is 1250 on the full tier via fct_core), so
+// a text stops reserving its row once it would have visually faded.
+const FCT_STACK_LIFE_MS = 1250;
 
 // Class / style-property names the painter drives. Named (not inlined) so the painter
 // references no bare DOM string magic and -- crucially -- no hex / px colour literal:
@@ -137,6 +143,10 @@ export class FctPainter {
   // Live slots in spawn order: new spawns append, TTL / eviction removes while preserving
   // order, so live[0] is always the oldest -> the eviction victim.
   private readonly live: FctSlot[] = [];
+  // Anti-overlap placement history (fct_layout.ts): a burst of same-anchor floaters (e.g. a
+  // dense elite pack all missing in one tick) stacks into legible rows instead of piling on
+  // top of each other. Pruned by age inside placeFctY itself via its lifeMs filter.
+  private fctEntries: FctEntry[] = [];
   private readonly random: () => number;
   // The pre-allocated pool size. On the full tiers this is also the live cap, so eviction
   // fires only at pool-full (the pre-tiering behavior); on low fctMaxConcurrent caps the
@@ -231,7 +241,7 @@ export class FctPainter {
     // pressure); the full tier scale is exactly 1, so 1250 * 1 = 1250 is byte-identical.
     slot.ttlMs = d.ttlMs * fctTtlScale(tier);
     this.applyContent(slot, d);
-    this.position(slot.node, v, d.jitterOffset, this.getScale());
+    this.position(slot.node, v, d.jitterOffset, this.getScale(), now);
     this.mount.appendChild(slot.node); // a detached node becomes visible on attach...
     if (evicted) this.restartAnimation(slot.node); // ...an evicted (attached) one needs the restart.
     this.live.push(slot);
@@ -281,15 +291,24 @@ export class FctPainter {
   /** Position via left / top in author space: (projected x + jitter) / uiScale and
    *  y / uiScale, written ONCE at spawn. EXACTLY the live fct() formula -- the getUiScale
    *  divide is load-bearing because worldToScreen returns the UNZOOMED viewport point while
-   *  #ui is scaled by `zoom`, so an undivided write mispositions whenever uiScale != 1. */
+   *  #ui is scaled by `zoom`, so an undivided write mispositions whenever uiScale != 1.
+   *  The y is then run through placeFctY: a burst of same-anchor floaters (a dense elite
+   *  pack all missing in one tick) stacks into legible rows instead of piling on top of
+   *  each other, exactly as the pre-pool fct() path did. */
   private position(
     node: HTMLElement,
     v: { x: number; y: number },
     jitterOffset: number,
     scale: number,
+    now: number,
   ): void {
-    this.writers.setStyleProp(node, LEFT_PROP, `${(v.x + jitterOffset) / scale}px`);
-    this.writers.setStyleProp(node, TOP_PROP, `${v.y / scale}px`);
+    const x = (v.x + jitterOffset) / scale;
+    const anchorY = v.y / scale;
+    this.fctEntries = this.fctEntries.filter((e) => now - e.bornMs < FCT_STACK_LIFE_MS);
+    const y = placeFctY(this.fctEntries, x, anchorY, now, { lifeMs: FCT_STACK_LIFE_MS });
+    this.fctEntries.push({ x, y, bornMs: now });
+    this.writers.setStyleProp(node, LEFT_PROP, `${x}px`);
+    this.writers.setStyleProp(node, TOP_PROP, `${y}px`);
   }
 
   /** Replay the CSS rise on a same-tick EVICTED (still-attached) node. A same-tick detach +
