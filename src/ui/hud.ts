@@ -899,6 +899,7 @@ export class Hud {
   private tradeWasOpen = false;
   private lastTradeSig = '';
   private lastPartySig = '';
+  private lastPartyFooterSig = '';
   private lastArenaSig = '';
   private lastArenaStatusSig = '';
   private arenaMatchSeen = false; // closes the queue panel once a bout starts
@@ -11616,52 +11617,81 @@ export class Hud {
     if (!info) {
       if (el.innerHTML !== '') el.innerHTML = '';
       this.lastPartySig = '';
+      this.lastPartyFooterSig = '';
       return;
+    }
+    // Two persistent sub-containers. Member frames rebuild on every hp/res tick;
+    // the footer (loot controls + leave) must NOT — otherwise the master-loot
+    // checkbox and dropdowns get destroyed under the cursor mid-interaction,
+    // which fights an in-flight change. So the footer rebuilds only when loot
+    // state or membership changes.
+    let membersEl = el.querySelector<HTMLElement>(':scope > .pf-members');
+    let footerEl = el.querySelector<HTMLElement>(':scope > .pf-footer');
+    if (!membersEl || !footerEl) {
+      el.innerHTML = '';
+      membersEl = document.createElement('div');
+      membersEl.className = 'pf-members';
+      footerEl = document.createElement('div');
+      footerEl.className = 'pf-footer';
+      el.append(membersEl, footerEl);
+      this.lastPartySig = '';
+      this.lastPartyFooterSig = '';
     }
     const myGroup = info.members.find((m) => m.pid === this.sim.playerId)?.group ?? 1;
     const others = selectPartyFrameMembers(info, this.sim.playerId, this.sim.player.pos);
-    // include combat/range state so the frames rebuild when a badge changes
-    const sig = `${others.map((m) => `${m.pid}:${m.group}:${m.hp}/${m.mhp}:${m.res}:${m.dead}:${m.inCombat}:${m.oor ? 1 : 0}:${m.level}`).join('|')}L${info.leader}:R${info.raid ? 1 : 0}:G${myGroup}:M${info.master.enabled ? 1 : 0}/${info.master.looter}/${info.master.threshold}`;
-    if (sig === this.lastPartySig) return;
-    this.lastPartySig = sig;
-    el.innerHTML = '';
-    for (const m of others) {
-      const frame = document.createElement('div');
-      frame.className =
-        'party-frame panel' +
-        (m.dead ? ' dead' : m.inCombat ? ' combat' : '') +
-        (m.oor ? ' oor' : '');
-      frame.style.setProperty('--cls', classCss(m.cls));
-      const resClass = m.rtype === 'rage' ? 'rage' : m.rtype === 'energy' ? 'energy' : 'mana';
-      const badge = m.dead
-        ? `<span class="pf-badge dead" title="${esc(t('hud.social.status.dead'))}">${svgIcon('skull')}</span>`
-        : m.inCombat
-          ? `<span class="pf-badge combat" title="${esc(t('hud.social.status.combat'))}">${svgIcon('arena')}</span>`
+    const isLeader = info.leader === this.sim.playerId;
+    // Member-frame signature: high-frequency (hp/res/combat/range badges).
+    const sig = `${others.map((m) => `${m.pid}:${m.group}:${m.hp}/${m.mhp}:${m.res}:${m.dead}:${m.inCombat}:${m.oor ? 1 : 0}:${m.level}`).join('|')}L${info.leader}:R${info.raid ? 1 : 0}:G${myGroup}`;
+    if (sig !== this.lastPartySig) {
+      this.lastPartySig = sig;
+      membersEl.innerHTML = '';
+      for (const m of others) {
+        const frame = document.createElement('div');
+        frame.className =
+          'party-frame panel' +
+          (m.dead ? ' dead' : m.inCombat ? ' combat' : '') +
+          (m.oor ? ' oor' : '');
+        frame.style.setProperty('--cls', classCss(m.cls));
+        const resClass = m.rtype === 'rage' ? 'rage' : m.rtype === 'energy' ? 'energy' : 'mana';
+        const badge = m.dead
+          ? `<span class="pf-badge dead" title="${esc(t('hud.social.status.dead'))}">${svgIcon('skull')}</span>`
+          : m.inCombat
+            ? `<span class="pf-badge combat" title="${esc(t('hud.social.status.combat'))}">${svgIcon('arena')}</span>`
+            : '';
+        const range = m.oor
+          ? `<span class="pf-badge oor" title="${esc(t('hud.errors.outOfRange'))}">⤢</span>`
           : '';
-      const range = m.oor
-        ? `<span class="pf-badge oor" title="${esc(t('hud.errors.outOfRange'))}">⤢</span>`
-        : '';
-      const crest = m.cls
-        ? `<img class="pfm-crest" src="${iconDataUrl('crest', `class_${m.cls}`, 20)}" alt="">`
-        : '';
-      frame.innerHTML = `
+        const crest = m.cls
+          ? `<img class="pfm-crest" src="${iconDataUrl('crest', `class_${m.cls}`, 20)}" alt="">`
+          : '';
+        frame.innerHTML = `
         <div class="pfm-name"><span class="pfm-id">${crest}${esc(m.name)}</span><span class="pfm-meta">${badge}${range}<span class="lead">${info.leader === m.pid ? '★' : ''}${m.level}</span></span></div>
         <div class="bar hp"><div class="bar-fill" style="transform:scaleX(${(m.hp / Math.max(1, m.mhp)).toFixed(3)})"></div></div>
         <div class="bar ${resClass}"><div class="bar-fill" style="transform:scaleX(${(m.res / Math.max(1, m.mres)).toFixed(3)})"></div></div>`;
-      frame.addEventListener('click', () => this.sim.targetEntity(m.pid));
-      frame.addEventListener('contextmenu', (ev) => {
-        ev.preventDefault();
-        this.openContextMenu(m.pid, m.name, ev.clientX, ev.clientY);
-      });
-      el.appendChild(frame);
+        frame.addEventListener('click', () => this.sim.targetEntity(m.pid));
+        frame.addEventListener('contextmenu', (ev) => {
+          ev.preventDefault();
+          this.openContextMenu(m.pid, m.name, ev.clientX, ev.clientY);
+        });
+        membersEl.appendChild(frame);
+      }
     }
-    if (info.leader === this.sim.playerId) this.renderMasterLootControl(el, info);
-    const leave = document.createElement('button');
-    leave.className = 'btn';
-    leave.id = 'party-leave';
-    leave.textContent = t('hud.social.leaveParty');
-    leave.addEventListener('click', () => this.sim.partyLeave());
-    el.appendChild(leave);
+    // Footer signature: loot state + membership + leadership only (no hp/res), so
+    // the loot controls are stable while you click them.
+    const footerSig = isLeader
+      ? `lead:M${info.master.enabled ? 1 : 0}/${info.master.looter}/${info.master.threshold}:${info.members.map((m) => `${m.pid}:${m.name}`).join(',')}`
+      : 'member';
+    if (footerSig !== this.lastPartyFooterSig) {
+      this.lastPartyFooterSig = footerSig;
+      footerEl.innerHTML = '';
+      if (isLeader) this.renderMasterLootControl(footerEl, info);
+      const leave = document.createElement('button');
+      leave.className = 'btn';
+      leave.id = 'party-leave';
+      leave.textContent = t('hud.social.leaveParty');
+      leave.addEventListener('click', () => this.sim.partyLeave());
+      footerEl.appendChild(leave);
+    }
   }
 
   // Leader-only loot-method control: enable master loot, choose the master looter
@@ -11670,6 +11700,16 @@ export class Hud {
     const m = info.master;
     const box = document.createElement('div');
     box.className = 'party-loot panel';
+    // A label-wrapped checkbox toggles on a primary click, but the browser also
+    // toggles it on right/middle-click here, which spuriously flips the setting.
+    // Suppress non-primary activation (and the context menu) on the whole panel.
+    box.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) e.preventDefault();
+    });
+    box.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
     const memberOptions = info.members
       .map((mem) => `<option value="${mem.pid}" ${m.looter === mem.pid ? 'selected' : ''}>${esc(mem.name)}</option>`)
       .join('');
@@ -11698,15 +11738,25 @@ export class Hud {
     const enable = box.querySelector<HTMLInputElement>('#ml-enable')!;
     const looter = box.querySelector<HTMLSelectElement>('#ml-looter')!;
     const threshold = box.querySelector<HTMLSelectElement>('#ml-threshold')!;
-    const apply = () =>
+    const applyMaster = (enabled: boolean) =>
       this.sim.setPartyLootMaster(
-        enable.checked,
+        enabled,
         Number(looter.value),
         threshold.value as MasterLootThreshold,
       );
-    enable.addEventListener('change', apply);
-    looter.addEventListener('change', apply);
-    threshold.addEventListener('change', apply);
+    // Controlled checkbox: suppress the browser's optimistic toggle and derive
+    // the next value from authoritative party state. The DOM checkbox is only
+    // updated by a server-confirmed rebuild, so it can never desync from the
+    // server (a checked box left over disabled dropdowns) or send a value read
+    // from a half-toggled DOM input.
+    enable.addEventListener('click', (e) => {
+      e.preventDefault();
+      applyMaster(!m.enabled);
+    });
+    // The selects are only enabled while master loot is on, so m.enabled is true
+    // here; keep it and update the looter / threshold.
+    looter.addEventListener('change', () => applyMaster(m.enabled));
+    threshold.addEventListener('change', () => applyMaster(m.enabled));
     el.appendChild(box);
   }
 
