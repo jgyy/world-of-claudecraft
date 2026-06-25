@@ -166,6 +166,7 @@ import {
 } from './entity_roster';
 import { createSimContext, type SimContext, type SimContextHost } from './sim_context';
 import { checkQuestReady, onInventoryChangedForQuests, onMobKilledForQuests } from './quests/quest_credit';
+import { PartyMachine } from './social/party';
 import { SpatialGrid } from './spatial';
 import { orderTabTargets, TAB_QUERY_RADIUS } from './tab_target';
 import {
@@ -196,7 +197,6 @@ import {
   type CrowdControlDrCategory,
   type CurrencyLootStrategy,
   canPrestige,
-  DEFAULT_PARTY_LOOT_STRATEGIES,
   type DelveDef,
   type DelveModuleDef,
   type DelveObjectState,
@@ -324,10 +324,8 @@ const NYTHRAXIS_ROOM_RADIUS = 260;
 // of the boss spawn: appears 50yd out, walks up to 30yd out (between door + boss).
 const NYTHRAXIS_ALDRIC_SPAWN_DIST = 50;
 const NYTHRAXIS_ALDRIC_WALK_DIST = 30;
-const PARTY_MAX = 5;
-const RAID_MIN = 5;
-const RAID_MAX = 10;
-const RAID_GROUP_MAX = 5;
+// PARTY_MAX / RAID_MIN / RAID_MAX / RAID_GROUP_MAX moved to social/party.ts (A1),
+// the only code that reads them.
 const RAID_ALLOWED_DUNGEON_IDS = new Set(['nythraxis_crypt', 'nythraxis_boss_arena']);
 const RAID_REQUIRED_DUNGEON_IDS = new Set(['nythraxis_boss_arena']);
 // Rested XP (classic inn-rested bonus). Resting inside an inn footprint accrues a
@@ -1079,6 +1077,11 @@ export class Sim {
   // through instead of reaching into Sim. Built once in the ctor (buildSimContext);
   // it moves no behavior. See src/sim/sim_context.ts.
   readonly ctx: SimContext;
+  // Party/raid state machine (A1): owns parties/partyByPid/partyInvites/nextPartyId
+  // and the invite/accept/convert/move/leave/kick/disband logic, moved off Sim
+  // behind SimContext. Built in the ctor after `ctx`. Sim keeps thin delegates
+  // (partyOf + the eight command methods) so IWorld + foreign call sites resolve.
+  private party!: PartyMachine;
   players = new Map<number, PlayerMeta>(); // keyed by entity id
   // spatial indexes for radius queries; re-bucketed at the end of each tick
   // and kept roster-exact on spawn/despawn/teleport
@@ -1092,11 +1095,9 @@ export class Sim {
   // it. Exposed as a live view via SimContext.
   private delayedEvents: DelayedEvent[] = [];
   // social systems
-  parties = new Map<number, Party>();
+  // parties / partyByPid / partyInvites / nextPartyId moved to the PartyMachine
+  // (src/sim/social/party.ts, session A1); reached via `this.party`.
   accountCosmetics: AccountCosmetics = { completedQuestIds: [], mechChromaIds: [] };
-  partyByPid = new Map<number, number>(); // pid -> party id
-  partyInvites = new Map<number, { fromPid: number; expires: number }>(); // invitee pid -> invite
-  nextPartyId = 1;
   private nextLootRollId = 1;
   private pendingLootRolls = new Map<number, PendingLootRoll>();
   // raid/target markers: partyId -> (enemy entityId -> markerId 0..7). A
@@ -1156,6 +1157,11 @@ export class Sim {
     // once here (the rng now exists); a live view + bound callbacks, it draws no rng
     // and mutates nothing, so it cannot perturb the construction draws below.
     this.ctx = this.buildSimContext();
+    // Party/raid machine (A1): constructed after ctx (it consumes the seam). The
+    // ctx party callbacks are lazy arrows, so this assignment before any tick/command
+    // is what they resolve against; nothing below this point draws on the machine
+    // during construction.
+    this.party = new PartyMachine(this.ctx);
 
     // NPCs — nudged out of buildings and deep water if their data position is bad
     for (const npcDef of Object.values(NPCS)) {
@@ -1517,8 +1523,10 @@ export class Sim {
     const leavingRun = this.delveRunForPlayer(pid);
     if (leavingRun?.lockpick && leavingRun.lockpick.ownerId === pid)
       this.abandonLockpick(leavingRun);
-    // leave social systems cleanly
-    this.removeFromParty(pid, 'has left the party');
+    // leave social systems cleanly. removeFromParty lives on the PartyMachine now
+    // (A1); reach it through the seam, keeping this call in its load-bearing
+    // teardown position (must run while the leaver is still in players/entities).
+    this.ctx.removeFromParty(pid, 'has left the party');
     const trade = this.trades.get(pid);
     if (trade) this.tradeCancel(pid);
     const duel = this.duels.get(pid);
@@ -1530,7 +1538,7 @@ export class Sim {
       const team = this.arenaTeamOf(match, pid);
       this.endArenaMatch(match, team === 'A' ? 'B' : team === 'B' ? 'A' : null, 'forfeit');
     }
-    this.partyInvites.delete(pid);
+    this.party.partyInvites.delete(pid);
     this.tradeInvites.delete(pid);
     this.duelInvites.delete(pid);
     // mobs forget the leaving player; persistent hunter pets are serialized
@@ -1949,6 +1957,15 @@ export class Sim {
       get entities() {
         return sim.entities;
       },
+      get players() {
+        return sim.players;
+      },
+      get tradeInvites() {
+        return sim.tradeInvites;
+      },
+      get duelInvites() {
+        return sim.duelInvites;
+      },
       get grid() {
         return sim.grid;
       },
@@ -1970,9 +1987,6 @@ export class Sim {
       get arenaMatches() {
         return sim.arenaMatches;
       },
-      get players() {
-        return sim.players;
-      },
       get duels() {
         return sim.duels;
       },
@@ -1980,6 +1994,7 @@ export class Sim {
         return sim.cfg;
       },
       emit: sim.emit.bind(sim),
+      error: sim.error.bind(sim),
       dealDamage: sim.dealDamage.bind(sim),
       handleDeath: sim.handleDeath.bind(sim),
       cancelCast: sim.cancelCast.bind(sim),
@@ -2007,8 +2022,15 @@ export class Sim {
       petOf: sim.petOf.bind(sim),
       completeTame: sim.completeTame.bind(sim),
       clearEntityMarker: sim.clearEntityMarker.bind(sim),
+      // partyOf stays bound to Sim's thin delegate (it forwards to this.party);
+      // removeFromParty + dropPartyMarkers route straight to the moved machine /
+      // the still-on-Sim marker store. points-at = social/party (A1) for the first
+      // two; dropPartyMarkers points at Sim until T1 owns the marker store.
       partyOf: sim.partyOf.bind(sim),
-      removeFromParty: sim.removeFromParty.bind(sim),
+      removeFromParty: (pid: number, verb: string) => sim.party.removeFromParty(pid, verb),
+      dropPartyMarkers: (partyId: number) => {
+        sim.partyMarkers.delete(partyId);
+      },
       // Q1 quest-credit trio now lives in quests/quest_credit.ts; the callbacks route
       // through `sim.ctx` (lazily read at call time, after the ctor sets it). countItem
       // stays on Sim (L2 inventory hub) and is consumed by the collect updater.
@@ -11135,30 +11157,17 @@ export class Sim {
   // Parties
   // -------------------------------------------------------------------------
 
+  // A1: the party/raid state machine lives in src/sim/social/party.ts. partyOf + the
+  // eight command methods stay as thin delegates so IWorld + the many foreign
+  // `this.partyOf` call sites (loot/xp/tap/quest/arena/dungeon/UI) resolve unchanged;
+  // hasPendingSocialInvite + partyCapacity stay reachable for the trade/duel invite
+  // and party-readout paths still on Sim.
   partyOf(pid: number): Party | null {
-    const partyId = this.partyByPid.get(pid);
-    return partyId !== undefined ? (this.parties.get(partyId) ?? null) : null;
-  }
-
-  private hasActiveInvite(
-    map: Map<number, { fromPid: number; expires: number }>,
-    targetPid: number,
-  ): boolean {
-    const invite = map.get(targetPid);
-    if (!invite) return false;
-    if (invite.expires < this.time) {
-      map.delete(targetPid);
-      return false;
-    }
-    return true;
+    return this.party.partyOf(pid);
   }
 
   private hasPendingSocialInvite(targetPid: number): boolean {
-    return (
-      this.hasActiveInvite(this.partyInvites, targetPid) ||
-      this.hasActiveInvite(this.tradeInvites, targetPid) ||
-      this.hasActiveInvite(this.duelInvites, targetPid)
-    );
+    return this.party.hasPendingSocialInvite(targetPid);
   }
 
   private entityInDungeon(e: Entity, dungeonId: string): boolean {
@@ -11166,274 +11175,43 @@ export class Sim {
   }
 
   private partyCapacity(party: Party | null): number {
-    return party?.raid ? RAID_MAX : PARTY_MAX;
+    return this.party.partyCapacity(party);
   }
 
   partyInvite(targetPid: number, pid?: number): void {
-    const r = this.resolve(pid);
-    const target = this.players.get(targetPid);
-    if (!r || !target) return;
-    if (targetPid === r.meta.entityId) return;
-    const myParty = this.partyOf(r.meta.entityId);
-    if (myParty && myParty.leader !== r.meta.entityId) {
-      this.error(r.meta.entityId, 'Only the party leader may invite.');
-      return;
-    }
-    if (myParty && myParty.members.length >= this.partyCapacity(myParty)) {
-      this.error(r.meta.entityId, myParty.raid ? 'Your raid is full.' : 'Your party is full.');
-      return;
-    }
-    if (this.partyOf(targetPid)) {
-      this.error(r.meta.entityId, `${target.name} is already in a party.`);
-      return;
-    }
-    if (this.hasPendingSocialInvite(targetPid)) {
-      this.error(r.meta.entityId, `${target.name} already has a pending invitation.`);
-      return;
-    }
-    this.partyInvites.set(targetPid, { fromPid: r.meta.entityId, expires: this.time + 30 });
-    this.emit({
-      type: 'partyInvite',
-      fromPid: r.meta.entityId,
-      fromName: r.meta.name,
-      pid: targetPid,
-    });
-    this.emit({
-      type: 'log',
-      text: `You have invited ${target.name} to your party.`,
-      color: '#aaf',
-      pid: r.meta.entityId,
-    });
+    this.party.partyInvite(targetPid, pid);
   }
 
   partyAccept(pid?: number): void {
-    const r = this.resolve(pid);
-    if (!r) return;
-    const invite = this.partyInvites.get(r.meta.entityId);
-    if (!invite || invite.expires < this.time) {
-      this.error(r.meta.entityId, 'The invitation has expired.');
-      return;
-    }
-    this.partyInvites.delete(r.meta.entityId);
-    // A player can hold a stale incoming invite while having since joined or
-    // formed a party of their own (inviting others never consumes one's own
-    // pending invite). Accepting now would add them to a second party's member
-    // list, corrupting the "at most one party" invariant.
-    if (this.partyOf(r.meta.entityId)) {
-      this.error(r.meta.entityId, 'You are already in a party.');
-      return;
-    }
-    const leaderMeta = this.players.get(invite.fromPid);
-    if (!leaderMeta) return;
-    let party = this.partyOf(invite.fromPid);
-    if (!party) {
-      party = {
-        id: this.nextPartyId++,
-        leader: invite.fromPid,
-        members: [invite.fromPid],
-        raid: false,
-        raidGroups: new Map([[invite.fromPid, 1]]),
-        lootStrategies: { ...DEFAULT_PARTY_LOOT_STRATEGIES },
-      };
-      this.parties.set(party.id, party);
-      this.partyByPid.set(invite.fromPid, party.id);
-    }
-    if (party.members.length >= this.partyCapacity(party)) {
-      this.error(r.meta.entityId, party.raid ? 'That raid is full.' : 'That party is full.');
-      return;
-    }
-    const raidGroup = this.nextRaidGroupFor(party);
-    party.members.push(r.meta.entityId);
-    party.raidGroups.set(r.meta.entityId, raidGroup);
-    this.partyByPid.set(r.meta.entityId, party.id);
-    for (const mPid of party.members) {
-      this.emit({ type: 'log', text: `${r.meta.name} joins the party.`, color: '#aaf', pid: mPid });
-    }
+    this.party.partyAccept(pid);
   }
 
   partyDecline(pid?: number): void {
-    const r = this.resolve(pid);
-    if (!r) return;
-    const invite = this.partyInvites.get(r.meta.entityId);
-    this.partyInvites.delete(r.meta.entityId);
-    if (invite) {
-      this.emit({
-        type: 'log',
-        text: `${r.meta.name} declines your invitation.`,
-        color: '#aaf',
-        pid: invite.fromPid,
-      });
-    }
+    this.party.partyDecline(pid);
   }
 
   partyLeave(pid?: number): void {
-    const r = this.resolve(pid);
-    if (!r) return;
-    this.removeFromParty(r.meta.entityId, 'leaves the party');
+    this.party.partyLeave(pid);
   }
 
   partyKick(targetPid: number, pid?: number): void {
-    const r = this.resolve(pid);
-    if (!r) return;
-    const party = this.partyOf(r.meta.entityId);
-    if (!party || party.leader !== r.meta.entityId) {
-      this.error(r.meta.entityId, 'You are not the party leader.');
-      return;
-    }
-    if (!party.members.includes(targetPid) || targetPid === r.meta.entityId) return;
-    this.removeFromParty(targetPid, 'has been removed from the party');
+    this.party.partyKick(targetPid, pid);
   }
 
   convertPartyToRaid(pid?: number): void {
-    const r = this.resolve(pid);
-    if (!r) return;
-    const party = this.partyOf(r.meta.entityId);
-    if (!party) {
-      this.error(r.meta.entityId, 'You need a full party of five before converting to raid.');
-      return;
-    }
-    if (party.leader !== r.meta.entityId) {
-      this.error(r.meta.entityId, 'Only the party leader may convert to raid.');
-      return;
-    }
-    if (party.raid) {
-      this.error(r.meta.entityId, 'Your group is already a raid.');
-      return;
-    }
-    if (party.members.length < RAID_MIN) {
-      this.error(r.meta.entityId, 'You need a full party of five before converting to raid.');
-      return;
-    }
-    party.raid = true;
-    this.normalizeRaidGroups(party);
-    for (const mPid of party.members) {
-      this.emit({
-        type: 'log',
-        text: 'Your party has converted to a raid group.',
-        color: '#aaf',
-        pid: mPid,
-      });
-    }
+    this.party.convertPartyToRaid(pid);
   }
 
   convertRaidToParty(pid?: number): void {
-    const r = this.resolve(pid);
-    if (!r) return;
-    const party = this.partyOf(r.meta.entityId);
-    if (!party) {
-      this.error(r.meta.entityId, 'You are not in a raid group.');
-      return;
-    }
-    if (party.leader !== r.meta.entityId) {
-      this.error(r.meta.entityId, 'Only the raid leader may convert to a party.');
-      return;
-    }
-    if (!party.raid) {
-      this.error(r.meta.entityId, 'Your group is not a raid.');
-      return;
-    }
-    // A raid can hold up to two subgroups; only one party's worth can fold back.
-    if (party.members.length > PARTY_MAX) {
-      this.error(
-        r.meta.entityId,
-        'A raid with more than five members cannot convert back to a party.',
-      );
-      return;
-    }
-    party.raid = false;
-    party.raidGroups.clear();
-    for (const mPid of party.members) {
-      this.emit({
-        type: 'log',
-        text: 'Your raid has converted back to a party.',
-        color: '#aaf',
-        pid: mPid,
-      });
-    }
+    this.party.convertRaidToParty(pid);
   }
 
   moveRaidMember(targetPid: number, group: 1 | 2, pid?: number): void {
-    const r = this.resolve(pid);
-    if (!r) return;
-    const party = this.partyOf(r.meta.entityId);
-    if (!party?.raid) {
-      this.error(r.meta.entityId, 'You are not in a raid group.');
-      return;
-    }
-    if (party.leader !== r.meta.entityId) {
-      this.error(r.meta.entityId, 'Only the raid leader may adjust groups.');
-      return;
-    }
-    if (!party.members.includes(targetPid)) return;
-    const current = party.raidGroups.get(targetPid) ?? 1;
-    if (current === group) return;
-    const inTargetGroup = party.members.filter(
-      (mPid) => (party.raidGroups.get(mPid) ?? 1) === group,
-    ).length;
-    if (inTargetGroup >= RAID_GROUP_MAX) {
-      this.error(r.meta.entityId, `Raid group ${group} is full.`);
-      return;
-    }
-    party.raidGroups.set(targetPid, group);
-    const moved = this.players.get(targetPid)?.name ?? 'Someone';
-    for (const mPid of party.members) {
-      this.emit({
-        type: 'log',
-        text: `${moved} has been moved to raid group ${group}.`,
-        color: '#aaf',
-        pid: mPid,
-      });
-    }
+    this.party.moveRaidMember(targetPid, group, pid);
   }
-
-  private nextRaidGroupFor(party: Party): 1 | 2 {
-    const g1 = party.members.filter((mPid) => (party.raidGroups.get(mPid) ?? 1) === 1).length;
-    return g1 < RAID_GROUP_MAX ? 1 : 2;
-  }
-
-  private normalizeRaidGroups(party: Party): void {
-    party.raidGroups.clear();
-    for (let i = 0; i < party.members.length; i++) {
-      party.raidGroups.set(party.members[i], i < RAID_GROUP_MAX ? 1 : 2);
-    }
-  }
-
-  private removeFromParty(pid: number, verb: string): void {
-    const party = this.partyOf(pid);
-    if (!party) return;
-    const meta = this.players.get(pid);
-    party.members = party.members.filter((m) => m !== pid);
-    party.raidGroups.delete(pid);
-    this.partyByPid.delete(pid);
-    for (const mPid of [...party.members, pid]) {
-      this.emit({
-        type: 'log',
-        text: `${meta?.name ?? 'Someone'} ${verb}.`,
-        color: '#aaf',
-        pid: mPid,
-      });
-    }
-    if (party.members.length <= 1) {
-      for (const mPid of party.members) {
-        this.partyByPid.delete(mPid);
-        this.emit({ type: 'log', text: 'Your party has disbanded.', color: '#aaf', pid: mPid });
-      }
-      this.parties.delete(party.id);
-      this.partyMarkers.delete(party.id);
-    } else if (party.leader === pid) {
-      party.leader = party.members[0];
-      const newLeader = this.players.get(party.leader);
-      for (const mPid of party.members) {
-        this.emit({
-          type: 'log',
-          text: `${newLeader?.name ?? 'Someone'} is now the party leader.`,
-          color: '#aaf',
-          pid: mPid,
-        });
-      }
-    }
-    if (party.raid) this.normalizeRaidGroups(party);
-  }
+  // nextRaidGroupFor / normalizeRaidGroups / removeFromParty moved to the
+  // PartyMachine (src/sim/social/party.ts, A1). removeFromParty is reachable by
+  // removePlayer through `this.ctx.removeFromParty` (the SimContext seam).
 
   // -------------------------------------------------------------------------
   // Raid markers (party-scoped target markers)
@@ -13484,8 +13262,8 @@ export class Sim {
   }
 
   private updateTradesAndInvites(): void {
-    // expire stale invites
-    for (const map of [this.partyInvites, this.tradeInvites, this.duelInvites]) {
+    // expire stale invites (partyInvites is the PartyMachine's field now, A1)
+    for (const map of [this.party.partyInvites, this.tradeInvites, this.duelInvites]) {
       for (const [pid, invite] of map) {
         if (invite.expires < this.time) map.delete(pid);
       }

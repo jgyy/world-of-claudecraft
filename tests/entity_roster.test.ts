@@ -63,6 +63,9 @@ function makeCtx() {
     get entities() {
       return entities;
     },
+    players: new Map(),
+    tradeInvites: new Map(),
+    duelInvites: new Map(),
     get grid() {
       return grid;
     },
@@ -85,6 +88,7 @@ function makeCtx() {
       return arenaMatches;
     },
     emit,
+    error: vi.fn(),
     clearEntityMarker,
     pulseGroundAoE,
     dealDamage: vi.fn(),
@@ -115,6 +119,7 @@ function makeCtx() {
     completeTame: vi.fn(),
     partyOf: vi.fn(() => null),
     removeFromParty: vi.fn(),
+    dropPartyMarkers: vi.fn(),
     onMobKilledForQuests: vi.fn(),
     onInventoryChangedForQuests: vi.fn(),
     checkQuestReady: vi.fn(),
@@ -128,7 +133,6 @@ function makeCtx() {
     delveRunForPlayer: vi.fn(() => null),
     delveModuleEntry: vi.fn(() => ({ x: 0, y: 0, z: 0 })),
     failDelveRun: vi.fn(),
-    players: new Map(),
     duels: new Map(),
     cfg: {} as SimContextHost['cfg'],
     grantXp: vi.fn(),
@@ -145,7 +149,6 @@ function makeCtx() {
     grantNythraxisLockout: vi.fn(),
     frenzyPackmates: vi.fn(),
     armDeathThroes: vi.fn(),
-    onMobKilledForQuests: vi.fn(),
     refreshKnownAbilities: vi.fn(),
     syncPetLevel: vi.fn(),
   };

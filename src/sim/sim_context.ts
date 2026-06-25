@@ -22,6 +22,7 @@ import type {
   CrowdControlDrCategory,
   DelveRun,
   Entity,
+  ErrorReason,
   QuestProgress,
   SimConfig,
   SimEvent,
@@ -37,6 +38,15 @@ export interface SimContextPrimitives {
   readonly time: number;
   readonly tickCount: number;
   readonly entities: Map<number, Entity>;
+  // Live player roster (keyed by entity id). Stays a Sim field; exposed here so the
+  // moved party machine (A1) resolves member names/metas through the seam.
+  readonly players: Map<number, PlayerMeta>;
+  // Social-invite maps owned by the trade (G2) and duel (A2) slices. The party
+  // machine (A1) reads them for hasPendingSocialInvite's cross-system pending check
+  // and lazily expires entries in place, so these are LIVE views: the backing fields
+  // stay on Sim (mutated in place), like E1's delayedEvents/groundAoEs.
+  readonly tradeInvites: Map<number, { fromPid: number; expires: number }>;
+  readonly duelInvites: Map<number, { fromPid: number; expires: number }>;
   // Spatial indexes kept roster-exact alongside `entities` (E1). Stay public on Sim
   // too (server/game.ts queries them); exposed here as live views for the roster ops.
   readonly grid: SpatialGrid;
@@ -53,10 +63,9 @@ export interface SimContextPrimitives {
   // live arena bouts keyed by every participant pid (A2); release-spirit early-bails
   // when the dead player is mid-bout.
   readonly arenaMatches: Map<number, ArenaMatch>;
-  // C1 damage-core live views. `players` (PlayerMeta keyed by entity id) and `duels`
+  // C1 damage-core live views. The shared `players` map (declared above) plus `duels`
   // (shared duel keyed by both pids) back the damage/death/xp paths; `cfg` supplies
   // respawn tuning on mob death. Backing fields stay on Sim.
-  readonly players: Map<number, PlayerMeta>;
   readonly duels: Map<number, DuelState>;
   readonly cfg: Required<Omit<SimConfig, 'noPlayer'>>;
 }
@@ -67,6 +76,9 @@ export interface SimContextPrimitives {
 export interface SimContextCallbacks {
   // Event sink (core). Routes to `Sim.emit`.
   emit(ev: SimEvent): void;
+  // Personal error toast/event to a player (core). Routes to `Sim.error`, which
+  // emits `{ type: 'error', text, pid, reason? }`.
+  error(pid: number, text: string, reason?: ErrorReason): void;
 
   // C1 damage/death hub + the casting/leash/arena/duel/fiesta/loot teardown it
   // drives mid-tick. `dealDamage` is the post-mitigation entry (crit/dodge/miss and
@@ -139,6 +151,9 @@ export interface SimContextCallbacks {
   clearEntityMarker(entityId: number): void;
   partyOf(pid: number): Party | null;
   removeFromParty(pid: number, verb: string): void;
+  // Drop a disbanded party's whole raid-marker set. The marker store is T1's
+  // (src/sim/targeting.ts) once T1 lands; until then this points at Sim.
+  dropPartyMarkers(partyId: number): void;
   onMobKilledForQuests(mob: Entity, meta: PlayerMeta): void;
   onInventoryChangedForQuests(meta: PlayerMeta): void;
   checkQuestReady(qp: QuestProgress, meta: PlayerMeta): void;
@@ -214,6 +229,15 @@ export function createSimContext(host: SimContextHost): SimContext {
     get entities() {
       return host.entities;
     },
+    get players() {
+      return host.players;
+    },
+    get tradeInvites() {
+      return host.tradeInvites;
+    },
+    get duelInvites() {
+      return host.duelInvites;
+    },
     get grid() {
       return host.grid;
     },
@@ -235,9 +259,6 @@ export function createSimContext(host: SimContextHost): SimContext {
     get arenaMatches() {
       return host.arenaMatches;
     },
-    get players() {
-      return host.players;
-    },
     get duels() {
       return host.duels;
     },
@@ -245,6 +266,7 @@ export function createSimContext(host: SimContextHost): SimContext {
       return host.cfg;
     },
     emit: host.emit,
+    error: host.error,
     dealDamage: host.dealDamage,
     handleDeath: host.handleDeath,
     cancelCast: host.cancelCast,
@@ -274,6 +296,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     clearEntityMarker: host.clearEntityMarker,
     partyOf: host.partyOf,
     removeFromParty: host.removeFromParty,
+    dropPartyMarkers: host.dropPartyMarkers,
     onMobKilledForQuests: host.onMobKilledForQuests,
     onInventoryChangedForQuests: host.onInventoryChangedForQuests,
     checkQuestReady: host.checkQuestReady,

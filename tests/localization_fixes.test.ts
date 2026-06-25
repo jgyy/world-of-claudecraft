@@ -695,7 +695,9 @@ function scanEmitCandidates(simSrc: string, serverSrc: string): Cand[] {
     cands.push({ type: m[1] as Cand['type'], tmpl: unq(m[2]) });
     cands.push({ type: m[1] as Cand['type'], tmpl: unq(m[3]) });
   }
-  const er = new RegExp(`this\\.error\\([^,]+,\\s*${lit}\\s*\\)`, 'g');
+  // `this.error(` on Sim, plus `this.ctx.error(` from extracted modules (A1+ route
+  // player errors through the SimContext seam, e.g. src/sim/social/party.ts).
+  const er = new RegExp(`this\\.(?:ctx\\.)?error\\([^,]+,\\s*${lit}\\s*\\)`, 'g');
   for (const m of simSrc.matchAll(er)) cands.push({ type: 'error', tmpl: unq(m[1]) });
   // Variable-routed sim emits: this.notice(pid, '<lit>') (emits 'log') and
   // this.stopFollow(p, '<lit>') (arg2 routes through this.error) — blind spots.
@@ -705,7 +707,7 @@ function scanEmitCandidates(simSrc: string, serverSrc: string): Cand[] {
   for (const m of simSrc.matchAll(nr)) cands.push({ type: 'log', tmpl: unq(m[1]) });
   // Ternary args to error/notice/stopFollow (both branches).
   const ert = new RegExp(
-    `this\\.(?:error|notice|stopFollow)\\([^,()\\n]+,\\s*${cond}\\?\\s*${lit}\\s*:\\s*${lit}`,
+    `this\\.(?:ctx\\.)?(?:error|notice|stopFollow)\\([^,()\\n]+,\\s*${cond}\\?\\s*${lit}\\s*:\\s*${lit}`,
     'g',
   );
   for (const m of simSrc.matchAll(ert)) {
@@ -748,15 +750,25 @@ function scanEmitCandidates(simSrc: string, serverSrc: string): Cand[] {
 // hud.ts source) + the real localizeServerText/localizeSimText fallbacks. ---
 describe('S3: every sim.ts emit is recognized (drift guard)', () => {
   const hudSrc = fs.readFileSync(path.resolve(process.cwd(), 'src/ui/hud.ts'), 'utf8');
-  // C1 moved the damage-core player-facing emits (the frenzy proc and the pet
-  // "<name> dies." line) out of sim.ts into src/sim/combat/damage.ts. Scan that
-  // module alongside sim.ts so those emits stay under the drift guard; both files
-  // are language-agnostic sim code re-localized client-side by the same matchers.
-  const simSrc =
-    `${fs.readFileSync(path.resolve(process.cwd(), 'src/sim/sim.ts'), 'utf8')}\n${fs.readFileSync(
-      path.resolve(process.cwd(), 'src/sim/combat/damage.ts'),
-      'utf8',
-    )}`;
+  // Extraction sessions moved player-facing emits out of sim.ts into sibling sim
+  // modules: C1 -> src/sim/combat/damage.ts (the frenzy proc + pet "<name> dies."
+  // line), A1+ -> src/sim/social/*.ts (the party machine, later duel/arena/fiesta/
+  // markers) emitting via this.ctx.emit / this.ctx.error. Scan ALL of them alongside
+  // sim.ts so every language-agnostic sim emit stays under the drift guard; they are
+  // re-localized client-side by the same matchers.
+  const socialDir = path.resolve(process.cwd(), 'src/sim/social');
+  const socialSrc = fs.existsSync(socialDir)
+    ? fs
+        .readdirSync(socialDir)
+        .filter((f) => f.endsWith('.ts'))
+        .map((f) => fs.readFileSync(path.join(socialDir, f), 'utf8'))
+        .join('\n')
+    : '';
+  const simSrc = [
+    fs.readFileSync(path.resolve(process.cwd(), 'src/sim/sim.ts'), 'utf8'),
+    fs.readFileSync(path.resolve(process.cwd(), 'src/sim/combat/damage.ts'), 'utf8'),
+    socialSrc,
+  ].join('\n');
   // Hardened S3: also scan the authoritative server's player-facing emits. The
   // server (server/game.ts) is language-agnostic like the sim and re-localized
   // client-side by localizeServerText; previously the guard read only sim.ts, so
@@ -946,6 +958,8 @@ describe('S3 scanner enumerates each hardened emit form (regression)', () => {
     "this.emit({ text: 'SYNTH_SIM_LOOT', type: 'loot' });", // e2 (text-before-type)
     "this.emit({ type: 'log', text: c ? 'SYNTH_SIM_TERN_A' : 'SYNTH_SIM_TERN_B' });", // e3
     "this.error(p.id, 'SYNTH_SIM_ERR');", // er
+    "this.ctx.emit({ type: 'log', text: 'SYNTH_CTX_LOG' });", // e1 (ctx form, A1+ extracted modules)
+    "this.ctx.error(p.id, 'SYNTH_CTX_ERR');", // er (ctx form)
     "this.notice(p.id, 'SYNTH_NOTICE');", // nr (notice)
     "this.stopFollow(p, 'SYNTH_STOPFOLLOW');", // nr (stopFollow)
     "this.error(p.id, flag ? 'SYNTH_ERR_TERN_A' : 'SYNTH_ERR_TERN_B');", // ert
@@ -967,6 +981,8 @@ describe('S3 scanner enumerates each hardened emit form (regression)', () => {
     ['sim emit ternary text, branch A (e3)', 'log', 'SYNTH_SIM_TERN_A'],
     ['sim emit ternary text, branch B (e3)', 'log', 'SYNTH_SIM_TERN_B'],
     ['sim this.error literal (er)', 'error', 'SYNTH_SIM_ERR'],
+    ['extracted-module this.ctx.emit log (e1 ctx)', 'log', 'SYNTH_CTX_LOG'],
+    ['extracted-module this.ctx.error literal (er ctx)', 'error', 'SYNTH_CTX_ERR'],
     ['sim this.notice literal (nr)', 'log', 'SYNTH_NOTICE'],
     ['sim this.stopFollow literal (nr)', 'log', 'SYNTH_STOPFOLLOW'],
     ['sim this.error ternary, branch A (ert)', 'error', 'SYNTH_ERR_TERN_A'],

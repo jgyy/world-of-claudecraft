@@ -18,6 +18,7 @@ import type { Entity, SimEvent } from '../src/sim/types';
 // name). Keep in sync with SimContextCallbacks.
 const CALLBACK_KEYS = [
   'emit',
+  'error',
   'dealDamage',
   'handleDeath',
   'cancelCast',
@@ -47,6 +48,7 @@ const CALLBACK_KEYS = [
   'clearEntityMarker',
   'partyOf',
   'removeFromParty',
+  'dropPartyMarkers',
   // Q1 quest-credit trio + the countItem it consumes.
   'onMobKilledForQuests',
   'onInventoryChangedForQuests',
@@ -78,7 +80,6 @@ const CALLBACK_KEYS = [
   'grantNythraxisLockout',
   'frenzyPackmates',
   'armDeathThroes',
-  'onMobKilledForQuests',
   'refreshKnownAbilities',
   'syncPetLevel',
 ] as const;
@@ -102,16 +103,19 @@ function makeFakeHost() {
     get entities() {
       return entities;
     },
+    players: new Map(),
+    tradeInvites: new Map(),
+    duelInvites: new Map(),
     grid: new SpatialGrid(),
     playerGrid: new SpatialGrid(),
     delayedEvents: [],
     groundAoEs: [],
     dungeonDoorIds: null,
     arenaMatches: new Map(),
-    players: new Map(),
     duels: new Map(),
     cfg: {} as SimContextHost['cfg'],
     emit: vi.fn(),
+    error: vi.fn(),
     dealDamage: vi.fn(),
     handleDeath: vi.fn(),
     cancelCast: vi.fn(),
@@ -141,6 +145,7 @@ function makeFakeHost() {
     clearEntityMarker: vi.fn(),
     partyOf: vi.fn(() => null),
     removeFromParty: vi.fn(),
+    dropPartyMarkers: vi.fn(),
     onMobKilledForQuests: vi.fn(),
     onInventoryChangedForQuests: vi.fn(),
     checkQuestReady: vi.fn(),
@@ -169,7 +174,6 @@ function makeFakeHost() {
     grantNythraxisLockout: vi.fn(),
     frenzyPackmates: vi.fn(),
     armDeathThroes: vi.fn(),
-    onMobKilledForQuests: vi.fn(),
     refreshKnownAbilities: vi.fn(),
     syncPetLevel: vi.fn(),
   };
