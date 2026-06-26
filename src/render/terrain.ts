@@ -8,6 +8,7 @@ import { loadTexture } from './assets/loader';
 import { registerPreload } from './assets/preload';
 import { GFX } from './gfx';
 import { impactCraterTerrainBlend } from './impact_terrain';
+import { chordSag, skirtDrop } from './terrain_skirt';
 import { groundDetailTexture, groundSplatMaps, macroNoiseTexture } from './textures';
 
 // Chunked terrain across the whole 360x1080 zone strip.
@@ -16,7 +17,8 @@ import { groundDetailTexture, groundSplatMaps, macroNoiseTexture } from './textu
 //   works (the old single-plane-per-zone terrain was always fully submitted).
 // - LOD by distance from the nearest hub at build time: settlements (where
 //   the camera lingers) get dense vertices, the wilderness gets coarse ones.
-// - 0.3u skirts hang from every chunk edge to hide LOD cracks.
+// - skirts hang from every chunk edge to hide LOD cracks, sized to the local
+//   chord sag (deep on convex ridge crests, shallow on flats); see terrain_skirt.ts.
 // - High tier: MeshStandardMaterial + splat shading (grass/dirt/rock/sand
 //   weights precomputed per vertex from slope/height/roadDistance into a vec4
 //   attribute) over the biome vertex-color tint, plus a world-space macro
@@ -24,7 +26,6 @@ import { groundDetailTexture, groundSplatMaps, macroNoiseTexture } from './textu
 // - Low tier: the legacy vertex-color Lambert look, still chunked for culling.
 
 const CHUNK_SIZE = 60;
-const SKIRT_DROP = 0.3;
 const SLOPE_EPS = 1.5; // matches the legacy color pass so tints don't shift
 
 // ---------------------------------------------------------------------------
@@ -286,10 +287,12 @@ function sampleVertex(x: number, z: number, seed: number): VertexSample {
 
 // ---------------------------------------------------------------------------
 // Chunk geometry: interior (nx+1)x(nz+1) grid wrapped in a skirt ring whose
-// vertices sit on the chunk border but 0.3u lower, hiding LOD cracks.
+// vertices sit on the chunk border but dropped below it (adaptively, by the
+// local chord sag) to hide LOD cracks.
 // ---------------------------------------------------------------------------
 
-function buildChunkGeometry(x0: number, z0: number, size: number, spacing: number, seed: number, withSplat: boolean): THREE.BufferGeometry {
+function buildChunkGeometry(x0: number, z0: number, size: number, spacing: number, maxSpacing: number, seed: number, withSplat: boolean): THREE.BufferGeometry {
+  const heightAt = (sx: number, sz: number): number => terrainHeight(sx, sz, seed);
   const nx = Math.max(4, Math.round(size / spacing));
   const nz = nx;
   const stepX = size / nx;
@@ -323,8 +326,12 @@ function buildChunkGeometry(x0: number, z0: number, size: number, spacing: numbe
         sampleCache.set(cacheKey, s);
       }
       const vi = gj * gw + gi;
+      // Skirt verts drop below the border height to hide LOD cracks; size the
+      // drop to the local chord sag a coarse neighbour can open (deep on convex
+      // ridge crests, shallow on flats) so steep seams stop showing through.
+      const drop = isSkirt ? skirtDrop(chordSag(s.height, x, z, maxSpacing, heightAt)) : 0;
       positions[vi * 3] = x;
-      positions[vi * 3 + 1] = s.height - (isSkirt ? SKIRT_DROP : 0);
+      positions[vi * 3 + 1] = s.height - drop;
       positions[vi * 3 + 2] = z;
       normals[vi * 3] = s.normal[0];
       normals[vi * 3 + 1] = s.normal[1];
@@ -589,8 +596,11 @@ export function buildTerrain(seed: number): TerrainView {
     return idx === -1 ? bands.length - 1 : idx;
   };
 
+  // The coarsest spacing any neighbour can use, so a skirt sizes for the worst
+  // chord a neighbour could draw across it.
+  const maxSpacing = bands[bands.length - 1].spacing;
   const addChunk = (x0: number, z0: number, size: number, spacing: number): void => {
-    const geo = buildChunkGeometry(x0, z0, size, spacing, seed, !lowGfx);
+    const geo = buildChunkGeometry(x0, z0, size, spacing, maxSpacing, seed, !lowGfx);
     const mesh = new THREE.Mesh(geo, mat);
     mesh.receiveShadow = true;
     group.add(mesh);
