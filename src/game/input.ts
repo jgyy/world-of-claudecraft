@@ -1,14 +1,18 @@
 // Default (Mouse Camera off): classic-MMO-style — WASD + A/D keyboard turn, Q/E strafe,
 // left-drag orbits, right-drag mouselooks, both buttons run forward.
 // Optional Mouse Camera (on): OSRS-style — WASD is camera-relative, A/D strafe,
-// mouse drag rotates the orbit (no pointer lock), no keyboard turn.
+// mouse drag rotates the orbit, no keyboard turn.
 // Shared: space jump, wheel zoom, Tab target, rebindable action bar, R autorun.
 
 import { sanitizeMoveFacing, sanitizeMoveInput } from '../sim/move_input';
 import type { MoveInput } from '../sim/types';
 import { cursorForHover, type HoverCursorKind } from './cursors';
 import { comboCode, isModifierCode, type Keybinds, makeCombo } from './keybinds';
-import { shouldEngagePointerLock, shouldReleasePointerLock } from './pointer_lock';
+import {
+  shouldEngagePointerLock,
+  shouldReleasePointerLock,
+  shouldRequestDragLock,
+} from './pointer_lock';
 import { clickPickFromMouseGesture, DEFAULT_CLICK_PICK_MAX_MS } from './pointer_pick';
 
 const BASE_LOOK_SENS = 0.0045;
@@ -141,7 +145,13 @@ export class Input {
   // +1 normal, -1 inverts the vertical mouselook axis (settings: invertLookY).
   private lookPitchSign = 1;
   private downButton = -1;
-  private pointerLockRequestedForDrag = false;
+  // True while a requestPointerLock() promise for the current drag is still
+  // unsettled. NOT a one-shot "ever requested" latch: requestPointerLock is
+  // async and can be rejected (Chrome throttles a request issued shortly after
+  // exitPointerLock), so we clear this when the request settles and re-attempt
+  // the lock on the next move, otherwise a single rejected request would leave
+  // the cursor free for the rest of the drag (it then slips onto a 2nd monitor).
+  private pointerLockPending = false;
   private downX = 0;
   private downY = 0;
   private downAt = 0;
@@ -189,7 +199,17 @@ export class Input {
     window.addEventListener('pointerup', (e) => this.onMouseUp(e));
     window.addEventListener('pointercancel', (e) => this.onMouseUp(e));
     document.addEventListener('pointerlockchange', () => {
+      // The request settled (locked or exited): no request is in flight anymore.
+      // Clearing here also covers browsers whose requestPointerLock returns void
+      // instead of a promise, so a failed lock is retried on the next move.
+      this.pointerLockPending = false;
       if (!document.pointerLockElement) this.releaseCapture('pointerlock');
+    });
+    document.addEventListener('pointerlockerror', () => {
+      // The lock was rejected (e.g. Chrome's post-exit cooldown). Clear the
+      // pending flag so the next move re-requests it instead of leaving the
+      // cursor free to slip onto a second monitor for the rest of the drag.
+      this.pointerLockPending = false;
     });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) this.releaseCapture('hidden');
@@ -279,7 +299,7 @@ export class Input {
     this.clickMoveMouseButton = button;
     if (button !== null && this.downButton === button) {
       this.cameraDragActive = false;
-      this.pointerLockRequestedForDrag = false;
+      this.pointerLockPending = false;
     }
     this.updateCursor();
   }
@@ -343,7 +363,7 @@ export class Input {
       // for the async pointerlockchange, so the in-flight drag cannot leave the
       // request flag latched (which would block re-acquiring the lock).
       this.cameraDragActive = false;
-      this.pointerLockRequestedForDrag = false;
+      this.pointerLockPending = false;
     }
     this.updateCursor();
   }
@@ -579,7 +599,7 @@ export class Input {
     this.rightDown = false;
     this.cameraDragActive = false;
     this.downButton = -1;
-    this.pointerLockRequestedForDrag = false;
+    this.pointerLockPending = false;
     // Focus loss (blur / tab hidden) means the OS will swallow the matching
     // keyup, so we must forget held movement keys or they'd stick on. A pointer
     // -lock exit is different: the window still has focus and keyup will fire
@@ -760,7 +780,7 @@ export class Input {
     // Pointer lock is requested lazily once a drag actually begins (see
     // onMouseMove) — NOT on every press, which spammed the browser "mouse
     // capture" banner on every right-click used to attack/look (#116).
-    this.pointerLockRequestedForDrag = false;
+    this.pointerLockPending = false;
     this.updateCursor();
   }
 
@@ -796,7 +816,7 @@ export class Input {
     if (pick) this.cb.onClickPick(pick.x, pick.y, pick.button);
     if (!this.leftDown && !this.rightDown) this.cameraDragActive = false;
     this.downButton = -1;
-    this.pointerLockRequestedForDrag = false;
+    this.pointerLockPending = false;
     this.updateCursor();
   }
 
@@ -816,33 +836,58 @@ export class Input {
     if (!this.cameraDragActive) {
       if (this.dragDistance < CAMERA_DRAG_START_DISTANCE && heldMs < CAMERA_DRAG_START_MS) return;
       this.cameraDragActive = true;
-      // Engage pointer lock the instant a press becomes a real camera drag, in
-      // BOTH camera modes, so rotation never begins with a free cursor that can
-      // reach the screen edge (movementX clamps to 0 and the camera freezes) or
-      // slip onto a second monitor. One lock per drag, none for a plain click
-      // (#116); fullscreen stays a plain drag because Chrome forces its own
-      // "press and hold Esc" prompt there.
-      if (
-        !this.pointerLockRequestedForDrag &&
-        shouldEngagePointerLock({
-          lockOnRotate: this.lockCursorOnRotate,
-          isFullscreen: this.isBrowserFullscreen(),
-          alreadyLocked: document.pointerLockElement === this.canvas,
-        })
-      ) {
-        this.pointerLockRequestedForDrag = true;
-        this.canvas.requestPointerLock?.();
-      }
+      this.maybeEngageDragLock();
       this.noteIntent('look');
       this.updateCursor();
       return;
     }
+    // Keep (re)attempting the lock while the drag continues: requestPointerLock
+    // is async and can be rejected, so the first attempt above may have failed.
+    // Retrying here is what stops the cursor escaping onto a second monitor.
+    this.maybeEngageDragLock();
     this.camYaw -= mx * this.lookSensitivity;
     this.camPitch = Math.min(
       1.35,
       Math.max(-0.4, this.camPitch + my * this.lookSensitivity * this.lookPitchSign),
     );
     if (mx !== 0 || my !== 0) this.noteIntent('look');
+  }
+
+  // Engage pointer lock the instant a press becomes a real camera drag, in BOTH
+  // camera modes, so rotation never begins with a free cursor that can reach the
+  // screen edge (movementX clamps to 0 and the camera freezes) or slip onto a
+  // second monitor. None for a plain click (#116); fullscreen stays a plain drag
+  // because Chrome forces its own "press and hold Esc" prompt there.
+  //
+  // requestPointerLock is async and can reject (e.g. Chrome throttles a request
+  // issued shortly after exitPointerLock, which happens on every drag release).
+  // We mark the request pending, clear it when it settles (promise, or the
+  // pointerlockchange/pointerlockerror events for void-returning browsers), and
+  // let onMouseMove call this again so a rejected lock is retried next move
+  // instead of leaving the cursor free for the rest of the drag.
+  private maybeEngageDragLock(): void {
+    if (
+      !shouldRequestDragLock({
+        dragActive: this.cameraDragActive,
+        lockOnRotate: this.lockCursorOnRotate,
+        isFullscreen: this.isBrowserFullscreen(),
+        alreadyLocked: document.pointerLockElement === this.canvas,
+        requestPending: this.pointerLockPending,
+      })
+    )
+      return;
+    this.pointerLockPending = true;
+    const req = this.canvas.requestPointerLock?.() as unknown as Promise<void> | undefined;
+    if (req && typeof req.then === 'function') {
+      req.then(
+        () => {
+          this.pointerLockPending = false;
+        },
+        () => {
+          this.pointerLockPending = false;
+        },
+      );
+    }
   }
 
   private noteIntent(kind: 'move' | 'look' | 'zoom'): void {

@@ -92,5 +92,36 @@ console.log('camera drag -> requestPointerLock calls:', dragResult.lockRequests,
 console.log('trace:', JSON.stringify(dragResult.trace));
 console.log('diag:', JSON.stringify(await page.evaluate(() => window.__diag)));
 
+// Regression for the dual-monitor bug: requestPointerLock is async and can be
+// REJECTED (Chrome throttles a request issued shortly after exitPointerLock, and
+// the drag-release path exits the lock every time). The old one-shot guard
+// latched after the first attempt, so a single rejection left the cursor free
+// for the rest of the drag and it slipped onto a second monitor. Reject the
+// first request and confirm a later move RE-REQUESTS it.
+const retryResult = await page.evaluate(async () => {
+  const canvas = document.querySelector('canvas');
+  let calls = 0;
+  Element.prototype.requestPointerLock = function () {
+    calls++;
+    // Reject the first attempt (Chrome's post-exit cooldown), accept after.
+    return calls === 1 ? Promise.reject(new Error('cooldown')) : Promise.resolve();
+  };
+  const rect = canvas.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  canvas.dispatchEvent(new MouseEvent('mousedown', { button: 2, clientX: cx, clientY: cy, bubbles: true }));
+  const trace = [];
+  for (let i = 1; i <= 6; i++) {
+    window.dispatchEvent(new MouseEvent('mousemove', { movementX: 12, movementY: 0, clientX: cx + i * 12, clientY: cy, bubbles: true }));
+    // Let the rejected promise settle so the pending flag clears before the next move.
+    await new Promise((r) => setTimeout(r, 20));
+    trace.push({ i, calls });
+  }
+  window.dispatchEvent(new MouseEvent('mouseup', { button: 2, clientX: cx + 80, clientY: cy, bubbles: true }));
+  return { totalCalls: calls, retried: calls >= 2, trace };
+});
+console.log('rejected-first-lock retry -> requestPointerLock calls:', retryResult.totalCalls, '| retried after failure:', retryResult.retried);
+console.log('retry trace:', JSON.stringify(retryResult.trace));
+
 await browser.close();
 console.log('wrote tmp/pointer-lock-1-keybind-panel.png and tmp/pointer-lock-2-after-drag.png');
