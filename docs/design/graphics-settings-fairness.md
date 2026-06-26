@@ -1,8 +1,10 @@
 # Graphics and performance settings are gameplay-neutral
 
-Status: principle adopted; implemented for the HUD effect tiers in frontend-modernization
-v0.16.0 (P14a + the 2026-06-26 fairness re-audit). One known open gap remains (see "Open
-issue" below), tracked with a ready-to-run remediation prompt in the appendix.
+Status: principle adopted and FULLY enforced. The HUD effect tiers shipped in
+frontend-modernization v0.16.0 (P14a + the 2026-06-26 fairness re-audit), and the one
+remaining wire-fidelity gap (negative-value stat-sap auras reading as buffs online) was
+closed in commit `a15c910c` (see "Resolved" below). No graphics or performance preset can
+hide actionable information.
 
 ## The principle
 
@@ -91,114 +93,41 @@ cache), `119b47fa` (FCT drop-kind uniformity test), `4915b6b7` (docs).
   DOM, or render import).
 - `scripts/perf_tour.mjs` per-tier run: `hudHotDomWrites` pinned across tiers (byte-equivalence)
   and the FCT cap engaging per tier.
+- `tests/snapshots.test.ts`: a real Sim aura to `wireEntity` to `ClientWorld` round trip pins that
+  a negative-value `buff_*` stat-sap carries its value over the wire (so `isAuraDebuff` agrees
+  online and offline), while positive buffs, absorb shields, and negative-value non-buff auras
+  (a fear angle) stay sparse and decode to 0 (no other online behavior changes); an old-server
+  wire with no value decodes to 0 (backward compatible).
+- `tests/auras_painter.test.ts`: a wire-faithful negative-value `buff_*` sap, driven through the
+  real `createAurasView` into the low painter, renders past the buff budget (the view to painter
+  cap path for the sap).
+- `tests/auras_view.test.ts`: `isAuraDebuff` classifies a negative-value `buff_*` sap identically
+  for the Sim aura and its `ClientWorld` mirror.
 
-## Open issue: negative-value stat-sap auras read as buffs online
+## Resolved: negative-value stat-sap auras now classify as debuffs in both worlds
 
-ONE residual gap remains, and it predates P14a. A negative-value `buff_*` stat-sap aura (an
-attack-power or intellect drain that rides a `buff_*` kind with a negative value) is classified
-as a debuff by `src/ui/auras_view.ts` `isAuraDebuff` only OFFLINE. The online wire does not send
-the aura value: `WireAura` (`server/game.ts:224`) omits it, and the client decode hardcodes
-`value: 0` (`src/net/online.ts:1164`). So online, `isAuraDebuff`'s `value < 0` branch never
-fires, the sap reads as a buff, and on the LOW preset it can therefore ride the buff budget and
-be hidden past the cap.
+The one residual gap (it predated P14a) is closed as of commit `a15c910c`. A negative-value
+`buff_*` stat-sap aura (an attack-power or intellect drain that rides a `buff_*` kind with a
+negative value) used to be classified as a debuff by `src/ui/auras_view.ts` `isAuraDebuff` only
+OFFLINE: the online wire did not send the aura value (`WireAura` omitted it and the client decode
+hardcoded `value: 0`), so `isAuraDebuff`'s `value < 0` branch never fired online. The sap read as
+a buff, and on the LOW preset it could ride the buff budget and be hidden past the debuff-priority
+cap. The same gap also made the debuff BORDER on such a sap offline-only.
 
-Scope and severity: online only, low preset only, and only for the rare negative-value stat-sap
-aura class (a stat drain, not a CC or a move-out mechanic). Every allowlisted debuff KIND (dot,
-stun, silence, sunder, and the rest of `DEBUFF_AURA_KINDS`) is value-independent and already
-classifies correctly online, because the kind is on the wire. This same gap also makes the
-debuff BORDER on such a sap offline-only, a pre-existing visual parity bug, not introduced by
-the graphics tiers.
+The fix gives the UI the input it was missing, keeping the classification in the UI (the wire only
+carries the data):
 
-This is the only place a graphics preset can still affect actionable information. Closing it is
-a wire / parity change (server + net + a parity test), a different subsystem than the
-presentation-only tiering work, so it is tracked here rather than folded into P14a.
+- `server/game.ts`: `WireAura` gained an optional `value`, emitted SPARSELY by the aura serializer
+  for exactly the case the classification reads it, `a.value < 0 && a.kind.startsWith('buff_')`,
+  sent raw so the sign survives the wire. Positive buffs, absorb shields, and negative-value
+  non-buff auras (a fear's random facing angle) stay off the wire.
+- `src/net/online.ts`: the aura decode reads `a.value ?? 0` (was hardcoded `0`), so a missing
+  value still decodes to `0` (an old server, or any sparse case) and the field is backward
+  compatible in both directions.
+- `src/ui/auras_view.ts` and `src/ui/auras_painter.ts`: doc-only updates; the `value < 0` branch
+  now fires identically in both worlds, so the debuff-priority cap can never hide such a sap.
 
-## Remediation
-
-Run the appendix prompt in a fresh session. The fix sends the aura value over the wire so
-`isAuraDebuff` classifies identically online and offline; the UI keeps ownership of the
-classification (it just receives the input it was missing). This also closes the pre-existing
-offline-only debuff-border parity bug for stat-saps.
-
-## Appendix: Opus 4.8 prompt to close the wire gap
-
-Paste the block below into a new Claude Code session.
-
-```
-Close the aura debuff wire-parity gap so a graphics/performance preset can never hide an
-actionable debuff. This is a small server + net + parity fix (NOT a presentation change).
-
-Model: Opus 4.8, xhigh effort. Harness: Claude Code.
-Worktree: /Users/fernando/Documents/wocc-v0.16.0 (branch feature/frontend-modernization-v016,
-off release/v0.16.0). Commit to that branch unless you decide a fix/ branch is cleaner; this is
-a server/net wire change, so treat it as such (it is not part of the presentation packet).
-
-BACKGROUND (verify before changing anything):
-- src/ui/auras_view.ts isAuraDebuff(aura) = DEBUFF_AURA_KINDS.has(aura.kind) ||
-  (aura.kind.startsWith('buff_') && aura.value < 0). The KIND half works in both worlds (kind
-  is on the wire). The value half is OFFLINE-ONLY because online aura.value is always 0.
-- server/game.ts: interface WireAura (around line 224) is { id, name, kind, rem, dur, stacks? }
-  with NO value; the entity serializer (around line 300) maps each sim aura to WireAura and
-  drops value.
-- src/net/online.ts (around line 1162) decodes a wire aura and hardcodes value: 0 (also
-  sourceId: 0, school: 'physical', which are SEPARATE pre-existing simplifications: do NOT
-  touch them in this change).
-- Net effect: a negative-value buff_* stat-sap (an AP/int drain) reads as a buff online, so on
-  the LOW graphics preset the debuff-priority aura cap (src/ui/auras_painter.ts) can hide it.
-
-GOAL: make isAuraDebuff classify a stat-sap identically online and offline by giving the UI the
-input it is missing (the aura value), so no graphics preset can hide an actionable debuff and
-the debuff border is consistent across worlds. Keep the classification in the UI (the wire just
-carries the data); do NOT move DEBUFF_AURA_KINDS into the server.
-
-PLAN (test-first):
-1. Reproduce: add or extend a parity test (tests/auras_view.test.ts already has the cross-world
-   parity block) that builds a Sim aura { kind: 'buff_ap', value: -50, ... } and its
-   ClientWorld mirror (the shape src/net/online.ts produces) and asserts BOTH classify
-   isAuraDebuff === true (and, if you exercise the painter, that the low cap does not cull it).
-   It should FAIL today on the mirror.
-2. Send value on the wire. Add value to WireAura (server/game.ts) and to the serializer map.
-   Prefer a SPARSE encoding to keep the common case free: only send it when it changes the
-   classification, e.g. ...(a.value < 0 ? { value: round2(a.value) } : {}). (Full value is also
-   acceptable if you prefer; grep first to confirm nothing else online consumes aura.value, so
-   you do not change other behavior.)
-3. Decode it on the client: in src/net/online.ts, replace value: 0 with value: a.value ?? 0.
-   Leave sourceId and school as they are.
-4. Update the isAuraDebuff JSDoc in src/ui/auras_view.ts to remove the OFFLINE-ONLY caveat (the
-   value < 0 branch now works in both worlds).
-5. Make the failing parity test pass. Confirm the low-tier aura cap now keeps such a sap (extend
-   the auras_painter or auras_view test as needed).
-
-INVARIANTS YOU MUST KEEP:
-- Server stays authoritative; this only changes what the snapshot CARRIES, not any outcome.
-- src/sim purity is untouched (tests/architecture.test.ts). The change is in server/ + src/net/
-  + a UI doc comment + tests; no sim/render/ui logic moves.
-- Sim-vs-ClientWorld parity: after the change, a Sim aura and its wire mirror must derive the
-  SAME isAuraDebuff for every case (allowlisted kinds AND the value<0 sap). This is the whole
-  point; assert it.
-- Wire compatibility: value is an OPTIONAL field, so an old client tolerates a new server and a
-  new client tolerates an old server (treat a missing value as 0). Keep it backward-compatible.
-- i18n: no new player strings. ASCII only: no em dashes, en dashes, or emojis.
-- Shared worktree: stage with EXPLICIT paths, never git add -A.
-
-VALIDATION + REVIEW:
-- npx tsc --noEmit; biome check on the changed .ts; the new/updated parity test green; full
-  npx vitest run.
-- Spawn the cross-platform-sync reviewer (this is a wire/IWorld-parity change, so it fires) and
-  the privacy-security-review reviewer (server snapshot surface). Do not commit until no
-  BLOCKING.
-
-ACCEPTANCE:
-- A negative-value buff_* stat-sap classifies as a debuff in BOTH worlds, so the low-tier aura
-  cap never hides it; the debuff border is consistent online and offline; tsc/biome/vitest
-  green; cross-platform-sync + privacy-security reviewers report no BLOCKING.
-- Update docs/design/graphics-settings-fairness.md: move the "Open issue" section to RESOLVED
-  with the commit hash, so the graphics-fairness invariant is then fully enforced.
-
-STOPPING RULES:
-- STOP if closing this seems to require moving DEBUFF_AURA_KINDS into the server or sim; the
-  classification stays in the UI core. The wire only needs to carry the value.
-- STOP if sending value changes any OTHER online behavior (grep aura.value consumers first); if
-  so, scope the field to the classification need (sparse negative-only) and note it.
-- STOP if the parity test cannot be made to model BOTH world shapes; that modeling is the test.
-```
+Every other allowlisted debuff KIND (dot, stun, silence, sunder, and the rest of
+`DEBUFF_AURA_KINDS`) was already value-independent and classified correctly online, because the
+kind is on the wire. With this change the graphics-fairness invariant is fully enforced: no
+graphics or performance preset can hide any actionable information.
