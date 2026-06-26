@@ -328,6 +328,8 @@ export const pl_PL: EnTranslations = {
       "clickFeedback": "Znacznik kliknięcia",
       "lockCursorOnRotate": "Blokuj kursor podczas obracania",
       "keybindHelpLockCursorOnRotate": "Utrzymuje kursor myszy wewnątrz okna podczas przeciągania w celu obracania kamery, aby nie mógł dotrzeć do krawędzi ekranu ani przejść na inny monitor. Wyłącz, jeśli wolisz swobodny kursor.",
+      "autoFaceOnCast": "Auto-Face Target on Cast",
+      "autoFaceOnCastHelp": "When you cast a targeted ability, your character turns to face the target so swings and projectiles come from the front. Turn off for the classic behavior, where a cast at a target you are not facing is rejected and you must turn yourself.",
       "showWalletOnCharacterScreen": "Pokaż sakiewkę na ekranie postaci",
       "showWalletOnPlayerCard": "Pokaż sakiewkę na karcie gracza",
       "uiScale": "Skala interfejsu",

@@ -289,6 +289,12 @@ export const hudChromeStrings = {
     lockCursorOnRotate: 'Lock Cursor While Rotating',
     keybindHelpLockCursorOnRotate:
       'Keeps the mouse cursor inside the window while you drag to rotate the camera, so it cannot reach the screen edge or move to another monitor. Turn off if you prefer a free cursor.',
+    // Keybind panel toggle: auto-pivot the character to face a targeted ability's
+    // target when casting (on by default). Off restores the classic facing
+    // requirement, rejecting an off-arc hostile cast.
+    autoFaceOnCast: 'Auto-Face Target on Cast',
+    autoFaceOnCastHelp:
+      'When you cast a targeted ability, your character turns to face the target so swings and projectiles come from the front. Turn off for the classic behavior, where a cast at a target you are not facing is rejected and you must turn yourself.',
     showWalletOnCharacterScreen: 'Show Wallet on Character Screen',
     showWalletOnPlayerCard: 'Show Wallet on Player Card',
     // Interface panel: global HUD zoom slider, and the mirror of the landing

@@ -29,7 +29,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "b3759337",
+      "state": "07023bf8",
       "events": "b36157a1",
       "rng": {
         "draws": 0,
@@ -41,6 +41,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -60,6 +61,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
@@ -90,7 +92,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -109,7 +110,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -138,7 +138,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -158,7 +157,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,
@@ -180,7 +178,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "b3759337",
+      "state": "07023bf8",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -192,6 +190,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -211,6 +210,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
@@ -241,7 +241,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -260,7 +259,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -289,7 +287,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -309,7 +306,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,
@@ -331,7 +327,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "b3759337",
+      "state": "07023bf8",
       "events": "2873f427",
       "rng": {
         "draws": 0,
@@ -343,6 +339,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -362,6 +359,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
@@ -392,7 +390,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -411,7 +408,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -440,7 +436,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -460,7 +455,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,
@@ -482,7 +476,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "a519d71b",
+      "state": "678ef69a",
       "events": "77206bf1",
       "rng": {
         "draws": 0,
@@ -494,6 +488,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -513,6 +508,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
@@ -555,7 +551,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -574,7 +569,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -603,7 +597,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -623,7 +616,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,
@@ -645,7 +637,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "b3759337",
+      "state": "07023bf8",
       "events": "72a2d48f",
       "rng": {
         "draws": 0,
@@ -657,6 +649,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -676,6 +669,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
@@ -706,7 +700,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -725,7 +718,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -754,7 +746,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -774,7 +765,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,
@@ -796,7 +786,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 390,
-      "state": "8273e187",
+      "state": "2776fe1c",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -808,6 +798,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -827,6 +818,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
@@ -857,7 +849,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -876,7 +867,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -905,7 +895,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -925,7 +914,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,

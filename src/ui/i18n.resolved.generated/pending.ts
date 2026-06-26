@@ -10,107 +10,150 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "es_ES": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "fr_FR": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "fr_CA": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "en_CA": [],
   "it_IT": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "de_DE": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
+  "zh_CN": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ],
+  "zh_TW": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ],
+  "ko_KR": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ],
+  "ja_JP": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ],
   "pt_BR": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
-  "ru_RU": [],
+  "ru_RU": [
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
+  ],
   "nl_NL": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "pl_PL": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "id_ID": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "tr_TR": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "sv_SE": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "vi_VN": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ],
   "da_DK": [
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hud.combat.floatingResist",
+    "hud.combat.resisted",
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail",
+    "hudChrome.options.autoFaceOnCast",
+    "hudChrome.options.autoFaceOnCastHelp"
   ]
 };

@@ -328,6 +328,8 @@ export const ru_RU: EnTranslations = {
       "clickFeedback": "Метка клика",
       "lockCursorOnRotate": "Блокировать курсор при вращении",
       "keybindHelpLockCursorOnRotate": "Удерживает курсор мыши внутри окна, пока вы вращаете камеру перетаскиванием, чтобы он не достигал края экрана и не переходил на другой монитор. Отключите, если предпочитаете свободный курсор.",
+      "autoFaceOnCast": "Auto-Face Target on Cast",
+      "autoFaceOnCastHelp": "When you cast a targeted ability, your character turns to face the target so swings and projectiles come from the front. Turn off for the classic behavior, where a cast at a target you are not facing is rejected and you must turn yourself.",
       "showWalletOnCharacterScreen": "Показывать кошелек на экране персонажей",
       "showWalletOnPlayerCard": "Показывать кошелек на карточке игрока",
       "uiScale": "Масштаб интерфейса",

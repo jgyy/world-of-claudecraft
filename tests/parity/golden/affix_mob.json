@@ -9,14 +9,14 @@
     "applyTaunt player-cast arm (taunt ability, ~4279)",
     "class:warrior"
   ],
-  "draws": 71,
-  "drawDigest": "60069de6",
+  "draws": 67,
+  "drawDigest": "80476701",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "f3159fdf",
+      "state": "1b850205",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -29,6 +29,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -59,7 +60,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -78,7 +78,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -100,33 +99,33 @@
       "tick": 20,
       "time": 1,
       "nextId": 391,
-      "state": "a6f7de29",
-      "events": "3bcebefe",
+      "state": "717a9913",
+      "events": "7aaac460",
       "rng": {
-        "draws": 14,
-        "digest": "97283cfb"
+        "draws": 15,
+        "digest": "c18c727a"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 391,
-      "state": "a2814025",
-      "events": "b1081a8d",
+      "state": "7779cfdb",
+      "events": "40a7d5b3",
       "rng": {
-        "draws": 28,
-        "digest": "9c413583"
+        "draws": 27,
+        "digest": "7af51137"
       }
     },
     {
       "tick": 50,
       "time": 2.5,
       "nextId": 391,
-      "state": "4d2a0484",
-      "events": "73540386",
+      "state": "fcb82a5b",
+      "events": "5b5dc793",
       "rng": {
-        "draws": 57,
-        "digest": "390c5ea3"
+        "draws": 53,
+        "digest": "4e713ade"
       },
       "label": "taunt",
       "players": [
@@ -135,11 +134,12 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 194
+            "damageTaken": 197
           },
           "delveClears": {},
           "delveDaily": {},
@@ -165,11 +165,11 @@
               "id": "bleed_ridge_stalker",
               "kind": "dot",
               "name": "Rending Claws",
-              "remaining": 8.5,
+              "remaining": 8.45,
               "school": "physical",
               "sourceId": 390,
               "tickInterval": 3,
-              "tickTimer": 2.5,
+              "tickTimer": 2.45,
               "value": 5
             }
           ],
@@ -182,14 +182,14 @@
           "critChance": 0.066,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.066,
+          "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.5,
-          "hp": 392,
+          "hp": 389,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 13,
-          "lootFfaTimer": "Infinity",
           "maxHp": 546,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -202,14 +202,13 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "resource": 12.025641,
+          "resource": 10.102564,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 32,
             "armor": 278,
@@ -260,7 +259,6 @@
             "z": -2
           },
           "level": 4,
-          "lootFfaTimer": "Infinity",
           "maxHp": 60000,
           "moveSpeed": 8.5,
           "onGround": true,
@@ -299,7 +297,7 @@
         {
           "aggroTargetId": 388,
           "aiState": "attack",
-          "combatTimer": 0.5,
+          "combatTimer": 0.55,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.05,
@@ -312,7 +310,6 @@
           "inCombat": true,
           "kind": "mob",
           "level": 13,
-          "lootFfaTimer": "Infinity",
           "maxHp": 60000,
           "moveSpeed": 8,
           "onGround": true,
@@ -345,11 +342,11 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 391,
-      "state": "49316be9",
+      "state": "1b6502ee",
       "events": "741638a5",
       "rng": {
-        "draws": 71,
-        "digest": "60069de6"
+        "draws": 67,
+        "digest": "80476701"
       },
       "label": "final",
       "players": [
@@ -358,11 +355,12 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 194
+            "damageTaken": 197
           },
           "delveClears": {},
           "delveDaily": {},
@@ -388,11 +386,11 @@
               "id": "bleed_ridge_stalker",
               "kind": "dot",
               "name": "Rending Claws",
-              "remaining": 8.3,
+              "remaining": 8.25,
               "school": "physical",
               "sourceId": 390,
               "tickInterval": 3,
-              "tickTimer": 2.3,
+              "tickTimer": 2.25,
               "value": 5
             }
           ],
@@ -406,14 +404,14 @@
           "critChance": 0.066,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.066,
+          "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.7,
-          "hp": 392,
+          "hp": 389,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 13,
-          "lootFfaTimer": "Infinity",
           "maxHp": 546,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -426,14 +424,13 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "resource": 12.025641,
+          "resource": 10.102564,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 32,
             "armor": 278,
@@ -485,7 +482,6 @@
             "z": -2
           },
           "level": 4,
-          "lootFfaTimer": "Infinity",
           "maxHp": 60000,
           "moveSpeed": 8.5,
           "onGround": true,
@@ -524,7 +520,7 @@
         {
           "aggroTargetId": 388,
           "aiState": "attack",
-          "combatTimer": 0.7,
+          "combatTimer": 0.75,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.05,
@@ -537,7 +533,6 @@
           "inCombat": true,
           "kind": "mob",
           "level": 13,
-          "lootFfaTimer": "Infinity",
           "maxHp": 60000,
           "moveSpeed": 8,
           "onGround": true,

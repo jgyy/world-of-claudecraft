@@ -644,6 +644,11 @@ export interface PlayerMeta {
   questsDone: Set<string>;
   counters: RewardCounters;
   autoEquip: boolean;
+  // Client preference (mirrored from local settings, pushed over the wire on
+  // connect and on change; never persisted server-side). When true the caster
+  // auto-pivots to face a targeted cast; when false the classic facing
+  // requirement applies and an off-arc hostile cast is rejected. Defaults true.
+  autoFaceOnCast: boolean;
   // sim.time when this character entered the world; powers /played. Session-only
   // (sim.time resets to 0 each server boot), so it reports time this session.
   joinedAt: number;
@@ -1169,6 +1174,7 @@ export class Sim {
       questsDone: new Set(),
       counters: freshCounters(),
       autoEquip: opts?.autoEquip ?? false,
+      autoFaceOnCast: true,
       joinedAt: this.time,
       lastActiveTick: this.tickCount,
       arenaRating: savedArena1v1.rating,
@@ -2996,6 +3002,12 @@ export class Sim {
     if (auraAffectsStats(removed)) {
       recalcPlayerStats(e, meta.cls, meta.equipment, this.playerMods(meta));
     }
+  // Apply a player's auto-face-on-cast preference. Mirrored from the client's
+  // local setting (offline: called directly; online: via the 'setPref' command).
+  setAutoFaceOnCast(enabled: boolean, pid?: number): void {
+    const r = this.resolve(pid);
+    if (!r) return;
+    r.meta.autoFaceOnCast = enabled;
   }
 
   private spendResource(p: Entity, cost: number): void {

@@ -264,6 +264,11 @@ export function castAbility(ctx: SimContext, abilityId: string, pid?: number): v
       ctx.error(p.id, 'Line of sight.');
       return;
     }
+    // Pivot toward the ally being healed/buffed (but never self) so the spell
+    // visual reads correctly, matching the hostile-cast auto-face below. Gated
+    // on the same client preference; friendly casts never had a facing
+    // requirement, so disabling it simply leaves the caster's facing alone.
+    if (meta.autoFaceOnCast && target !== p) p.facing = angleTo(p.pos, target.pos);
   } else if (ability.requiresTarget) {
     target = p.targetId !== null ? (ctx.entities.get(p.targetId) ?? null) : null;
     if (!target || target.dead || !ctx.isHostileTo(p, target)) {
@@ -284,10 +289,19 @@ export function castAbility(ctx: SimContext, abilityId: string, pid?: number): v
       ctx.error(p.id, 'Line of sight.');
       return;
     }
-    const facingDiff = Math.abs(normAngle(angleTo(p.pos, target.pos) - p.facing));
-    if (facingDiff > MELEE_ARC) {
-      ctx.error(p.id, 'You must be facing your target.');
-      return;
+    if (meta.autoFaceOnCast) {
+      // Auto-face the target on a targeted cast (classic-style): the character
+      // pivots to face the enemy so swings and projectiles originate from the
+      // front instead of firing sideways out of the shoulder.
+      p.facing = angleTo(p.pos, target.pos);
+    } else {
+      // Auto-face disabled: keep the classic facing requirement and reject an
+      // off-arc cast so the player must turn toward the target themselves.
+      const facingDiff = Math.abs(normAngle(angleTo(p.pos, target.pos) - p.facing));
+      if (facingDiff > MELEE_ARC) {
+        ctx.error(p.id, 'You must be facing your target.');
+        return;
+      }
     }
     // execute-style gate: only usable while the target is nearly dead
     if (

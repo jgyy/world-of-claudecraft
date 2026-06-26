@@ -328,6 +328,8 @@ export const id_ID: EnTranslations = {
       "clickFeedback": "Penanda Klik",
       "lockCursorOnRotate": "Kunci Kursor Saat Memutar",
       "keybindHelpLockCursorOnRotate": "Menjaga kursor mouse tetap di dalam jendela saat Anda menyeret untuk memutar kamera, sehingga tidak mencapai tepi layar atau berpindah ke monitor lain. Matikan jika Anda lebih suka kursor bebas.",
+      "autoFaceOnCast": "Auto-Face Target on Cast",
+      "autoFaceOnCastHelp": "When you cast a targeted ability, your character turns to face the target so swings and projectiles come from the front. Turn off for the classic behavior, where a cast at a target you are not facing is rejected and you must turn yourself.",
       "showWalletOnCharacterScreen": "Tampilkan Dompet di Layar Karakter",
       "showWalletOnPlayerCard": "Tampilkan Dompet di Kartu Pemain",
       "uiScale": "Skala UI",

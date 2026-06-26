@@ -328,6 +328,8 @@ export const es_ES: EnTranslations = {
       "clickFeedback": "Marcador de clic",
       "lockCursorOnRotate": "Bloquear cursor al rotar",
       "keybindHelpLockCursorOnRotate": "Mantiene el cursor del ratón dentro de la ventana mientras arrastras para rotar la cámara, para que no llegue al borde de la pantalla ni pase a otro monitor. Desactívalo si prefieres un cursor libre.",
+      "autoFaceOnCast": "Auto-Face Target on Cast",
+      "autoFaceOnCastHelp": "When you cast a targeted ability, your character turns to face the target so swings and projectiles come from the front. Turn off for the classic behavior, where a cast at a target you are not facing is rejected and you must turn yourself.",
       "showWalletOnCharacterScreen": "Mostrar cartera en la pantalla de personajes",
       "showWalletOnPlayerCard": "Mostrar cartera en la tarjeta de jugador",
       "uiScale": "Escala de la interfaz",

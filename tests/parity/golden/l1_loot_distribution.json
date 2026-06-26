@@ -30,8 +30,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 392,
-      "state": "29aea04c",
-      "events": "22557322",
+      "state": "aa6786fd",
+      "events": "7601bb8c",
       "rng": {
         "draws": 1,
         "digest": "b4f92bc7"
@@ -42,6 +42,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "copper": 33,
@@ -70,6 +71,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "copper": 33,
@@ -92,6 +94,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "copper": 34,
@@ -125,7 +128,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -144,7 +146,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -173,7 +174,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -193,7 +193,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,
@@ -222,7 +221,6 @@
           "id": 390,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 62,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -242,7 +240,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 25,
             "armor": 104,
@@ -262,7 +259,7 @@
         {
           "aiState": "idle",
           "combatTimer": 99,
-          "corpseTimer": 62,
+          "corpseTimer": 32,
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
@@ -285,7 +282,6 @@
               }
             ]
           },
-          "lootFfaTimer": "Infinity",
           "lootRecipientIds": [
             388,
             389,
@@ -325,7 +321,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 392,
-      "state": "9f9a9214",
+      "state": "6c3e74ab",
       "events": "6694308e",
       "rng": {
         "draws": 3,
@@ -337,6 +333,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "copper": 33,
@@ -369,6 +366,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "copper": 33,
@@ -391,6 +389,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "copper": 34,
@@ -424,7 +423,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -443,7 +441,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -472,7 +469,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -492,7 +488,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,
@@ -521,7 +516,6 @@
           "id": 390,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 62,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -541,7 +535,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 25,
             "armor": 104,
@@ -561,7 +554,7 @@
         {
           "aiState": "idle",
           "combatTimer": 99,
-          "corpseTimer": 61.95,
+          "corpseTimer": 31.95,
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
@@ -589,7 +582,6 @@
               }
             ]
           },
-          "lootFfaTimer": "Infinity",
           "lootRecipientIds": [
             388,
             389,
@@ -630,7 +622,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 392,
-      "state": "a1fb84e2",
+      "state": "24ed0548",
       "events": "904c6282",
       "rng": {
         "draws": 3,
@@ -642,6 +634,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "copper": 33,
@@ -674,6 +667,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "copper": 33,
@@ -706,6 +700,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "copper": 34,
@@ -739,7 +734,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -758,7 +752,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -787,7 +780,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -807,7 +799,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,
@@ -836,7 +827,6 @@
           "id": 390,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 62,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -856,7 +846,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 25,
             "armor": 104,
@@ -888,7 +877,6 @@
           "id": 391,
           "kind": "mob",
           "level": 2,
-          "lootFfaTimer": "Infinity",
           "lootRecipientIds": [
             388,
             389,
@@ -928,7 +916,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 392,
-      "state": "10b3481e",
+      "state": "971a90ec",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -940,6 +928,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "copper": 33,
@@ -972,6 +961,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "copper": 33,
@@ -1004,6 +994,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "copper": 34,
@@ -1038,7 +1029,6 @@
           "inCombat": true,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -1057,7 +1047,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -1086,7 +1075,6 @@
           "id": 389,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 54,
           "maxResource": 195,
           "moveSpeed": 7,
@@ -1106,7 +1094,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
           "stats": {
             "agi": 12,
             "armor": 57,
@@ -1135,7 +1122,6 @@
           "id": 390,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 62,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -1155,7 +1141,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 25,
             "armor": 104,
@@ -1193,7 +1178,6 @@
             "z": 22
           },
           "level": 2,
-          "lootFfaTimer": "Infinity",
           "maxHp": 42,
           "moveSpeed": 8,
           "onGround": true,

@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "d4c14b80",
+      "state": "62ac5d15",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -29,6 +29,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
@@ -59,7 +60,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 62,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -79,7 +79,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 25,
             "armor": 104,
@@ -102,7 +101,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 402,
-      "state": "de20c8c3",
+      "state": "492d63f8",
       "events": "f1c417ce",
       "rng": {
         "draws": 4,
@@ -113,7 +112,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 402,
-      "state": "86b30312",
+      "state": "979247f1",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -124,7 +123,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 402,
-      "state": "61ecc6d1",
+      "state": "2cd75c52",
       "events": "3a3cdaf4",
       "rng": {
         "draws": 5,
@@ -135,7 +134,7 @@
       "tick": 38,
       "time": 1.9,
       "nextId": 404,
-      "state": "c726d61d",
+      "state": "6697dd36",
       "events": "ddc6ffa8",
       "rng": {
         "draws": 8,
@@ -148,6 +147,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "copper": 21,
@@ -196,7 +196,6 @@
           "inCombat": true,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -215,7 +214,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 43,
             "armor": 188,
@@ -245,7 +243,6 @@
           "id": 397,
           "kind": "mob",
           "level": 4,
-          "lootFfaTimer": "Infinity",
           "maxHp": 103,
           "moveSpeed": 7,
           "onGround": true,
@@ -294,7 +291,6 @@
           "loot": {
             "copper": 439
           },
-          "lootFfaTimer": 59.6,
           "lootRecipientIds": [
             388
           ],
@@ -343,7 +339,6 @@
           "id": 402,
           "kind": "object",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "lootable": true,
           "maxHp": 1,
           "moveSpeed": 7,
@@ -374,7 +369,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 404,
-      "state": "fbc85cd0",
+      "state": "e40d56e6",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -385,7 +380,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 404,
-      "state": "fbc85cd0",
+      "state": "e40d56e6",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -398,6 +393,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "copper": 21,
@@ -446,7 +442,6 @@
           "inCombat": true,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -465,7 +460,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 43,
             "armor": 188,
@@ -495,7 +489,6 @@
           "id": 397,
           "kind": "mob",
           "level": 4,
-          "lootFfaTimer": "Infinity",
           "maxHp": 103,
           "moveSpeed": 7,
           "onGround": true,
@@ -544,7 +537,6 @@
           "loot": {
             "copper": 439
           },
-          "lootFfaTimer": 59.5,
           "lootRecipientIds": [
             388
           ],
@@ -593,7 +585,6 @@
           "id": 402,
           "kind": "object",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "lootable": true,
           "maxHp": 1,
           "moveSpeed": 7,

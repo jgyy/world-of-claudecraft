@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "f3159fdf",
+      "state": "1b850205",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -29,6 +29,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -59,7 +60,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -78,7 +78,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -100,7 +99,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 398,
-      "state": "d0e655fb",
+      "state": "e751fb2f",
       "events": "d91147c9",
       "rng": {
         "draws": 4,
@@ -111,7 +110,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 398,
-      "state": "8900f820",
+      "state": "6bb0f50c",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -122,7 +121,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 398,
-      "state": "4b074fe2",
+      "state": "cbc9ef42",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -133,7 +132,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 398,
-      "state": "e803ca6d",
+      "state": "680a5531",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -144,7 +143,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 398,
-      "state": "a690f728",
+      "state": "8ecca8c4",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -155,7 +154,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 398,
-      "state": "4ddfac5f",
+      "state": "17beb5a3",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -166,7 +165,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 398,
-      "state": "b4b7b18e",
+      "state": "90b1dd52",
       "events": "1155f484",
       "rng": {
         "draws": 6,
@@ -177,7 +176,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 398,
-      "state": "200a2fc2",
+      "state": "9d38fa12",
       "events": "741638a5",
       "rng": {
         "draws": 6,
@@ -188,7 +187,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 398,
-      "state": "200a2fc2",
+      "state": "9d38fa12",
       "events": "741638a5",
       "rng": {
         "draws": 6,
@@ -201,6 +200,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {
             "companion_tessa": 2
@@ -233,7 +233,6 @@
           "id": 388,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -251,7 +250,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 26,
             "armor": 194,
@@ -281,7 +279,6 @@
           "inCombat": true,
           "kind": "mob",
           "level": 5,
-          "lootFfaTimer": "Infinity",
           "maxHp": 119,
           "moveSpeed": 7,
           "onGround": true,
@@ -322,7 +319,6 @@
           "id": 394,
           "kind": "mob",
           "level": 9,
-          "lootFfaTimer": "Infinity",
           "maxHp": 40000,
           "moveSpeed": 7,
           "onGround": true,
@@ -355,7 +351,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 398,
-      "state": "ed48613f",
+      "state": "25b5a52f",
       "events": "f775654f",
       "rng": {
         "draws": 8,
@@ -368,6 +364,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {
             "companion_tessa": 2
@@ -402,7 +399,6 @@
           "inCombat": true,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -420,7 +416,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 26,
             "armor": 194,
@@ -450,7 +445,6 @@
           "inCombat": true,
           "kind": "mob",
           "level": 5,
-          "lootFfaTimer": "Infinity",
           "maxHp": 119,
           "moveSpeed": 7,
           "onGround": true,
@@ -497,7 +491,6 @@
             "z": -1170.237788
           },
           "level": 9,
-          "lootFfaTimer": "Infinity",
           "maxHp": 40000,
           "moveSpeed": 7,
           "onGround": true,
@@ -536,7 +529,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 398,
-      "state": "e565b425",
+      "state": "b9df6f19",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -547,7 +540,7 @@
       "tick": 49,
       "time": 2.45,
       "nextId": 398,
-      "state": "7239a8d6",
+      "state": "b2255a32",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -560,6 +553,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {
             "companion_tessa": 2
@@ -593,7 +587,6 @@
           "id": 388,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -611,7 +604,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 26,
             "armor": 194,
@@ -639,7 +631,6 @@
           "id": 393,
           "kind": "mob",
           "level": 5,
-          "lootFfaTimer": "Infinity",
           "maxHp": 119,
           "moveSpeed": 7,
           "onGround": true,
@@ -673,7 +664,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 398,
-      "state": "f9880eb1",
+      "state": "3aeaae53",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -684,7 +675,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 398,
-      "state": "58ae51a4",
+      "state": "f0683f72",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -697,6 +688,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {
             "companion_tessa": 2
@@ -730,7 +722,6 @@
           "id": 388,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -748,7 +739,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 26,
             "armor": 194,
@@ -776,7 +766,6 @@
           "id": 393,
           "kind": "mob",
           "level": 5,
-          "lootFfaTimer": "Infinity",
           "maxHp": 119,
           "moveSpeed": 7,
           "onGround": true,
@@ -811,7 +800,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 398,
-      "state": "58ae51a4",
+      "state": "f0683f72",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -824,6 +813,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {
             "companion_tessa": 2
@@ -857,7 +847,6 @@
           "id": 388,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -875,7 +864,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 26,
             "armor": 194,
@@ -903,7 +891,6 @@
           "id": 393,
           "kind": "mob",
           "level": 5,
-          "lootFfaTimer": "Infinity",
           "maxHp": 119,
           "moveSpeed": 7,
           "onGround": true,

@@ -1304,6 +1304,12 @@ export class OptionsWindow {
     this.settingToggleKeybind(el, t('hud.keybinds.actions.attackMove'), 'attackMove');
     this.settingToggleKeybind(el, t('hud.options.leftHandedTouch'), 'leftHandedTouch');
     this.settingToggleKeybind(el, t('hud.options.filterProfanity'), 'filterProfanity');
+    this.settingToggleKeybind(
+      el,
+      t('hudChrome.options.autoFaceOnCast'),
+      'autoFaceOnCast',
+      t('hudChrome.options.autoFaceOnCastHelp'),
+    );
     const note = document.createElement('div');
     note.className = 'kb-note';
     note.textContent = this.keybindNote || t('hud.options.keybindHelpMouseCamera');

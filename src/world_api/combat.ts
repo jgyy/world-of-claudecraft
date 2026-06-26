@@ -10,4 +10,7 @@ export interface IWorldCombat {
   startAutoAttack(): void;
   stopAutoAttack(): void;
   releaseSpirit(): void;
+  // Push the local auto-face-on-cast preference into the world (offline: sets it on
+  // the primary player; online: sends it to the server, re-sent on reconnect).
+  setAutoFaceOnCast(enabled: boolean): void;
 }

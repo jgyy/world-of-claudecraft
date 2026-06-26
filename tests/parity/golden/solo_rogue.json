@@ -8,14 +8,14 @@
     "meleeSwing weaponStrike (sinister_strike via castAbility ~3736)",
     "combo points"
   ],
-  "draws": 143,
-  "drawDigest": "9dafb67b",
+  "draws": 141,
+  "drawDigest": "3d03a3d5",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "d4c14b80",
+      "state": "62ac5d15",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -28,6 +28,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
@@ -58,7 +59,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 62,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -78,7 +78,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 25,
             "armor": 104,
@@ -101,44 +100,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 390,
-      "state": "35f9fd0f",
-      "events": "71b126e6",
+      "state": "827e22c0",
+      "events": "f9b79d6c",
       "rng": {
-        "draws": 9,
-        "digest": "8ecad8de"
+        "draws": 7,
+        "digest": "14806c1c"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 390,
-      "state": "1f4b6ff4",
+      "state": "59054bf1",
       "events": "33a84e8d",
       "rng": {
-        "draws": 15,
-        "digest": "843b3bf7"
+        "draws": 13,
+        "digest": "3fc203d8"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "3d670381",
+      "state": "a3602520",
       "events": "fd9e884b",
       "rng": {
-        "draws": 90,
-        "digest": "0f3d4b16"
+        "draws": 89,
+        "digest": "2c06bf7c"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 390,
-      "state": "0bd1b16b",
+      "state": "b99a3270",
       "events": "741638a5",
       "rng": {
-        "draws": 143,
-        "digest": "9dafb67b"
+        "draws": 141,
+        "digest": "3d03a3d5"
       },
       "label": "final",
       "players": [
@@ -147,11 +146,11 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 79,
-            "damageTaken": 9
+            "damageDealt": 79
           },
           "delveClears": {},
           "delveDaily": {},
@@ -181,12 +180,11 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
-          "hp": 49991,
+          "hp": 50000,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 10,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -206,7 +204,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 52,
             "armor": 230,
@@ -246,7 +243,6 @@
             "z": -2
           },
           "level": 5,
-          "lootFfaTimer": "Infinity",
           "maxHp": 9000,
           "moveSpeed": 8,
           "onGround": true,

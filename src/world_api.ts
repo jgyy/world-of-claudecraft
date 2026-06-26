@@ -259,6 +259,7 @@ export const COMMAND_NAMES = [
   'lockpick_abort',
   'collect_delve_chest_loot',
   'telemetry',
+  'setPref',
 ] as const;
 
 // The union both the send path (`online.ts`) and the dispatch switch
@@ -330,6 +331,7 @@ export const COMMAND_FACETS = {
   attack: 'IWorldCombat',
   stopattack: 'IWorldCombat',
   release: 'IWorldCombat',
+  setPref: 'IWorldCombat',
   // IWorldTargeting: target selection + tab cycling.
   target: 'IWorldTargeting',
   tab: 'IWorldTargeting',

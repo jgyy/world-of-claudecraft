@@ -328,6 +328,8 @@ export const nl_NL: EnTranslations = {
       "clickFeedback": "Klikmarkering",
       "lockCursorOnRotate": "Aanwijzer vergrendelen tijdens draaien",
       "keybindHelpLockCursorOnRotate": "Houdt de muisaanwijzer binnen het venster terwijl je sleept om de camera te draaien, zodat deze de schermrand niet kan bereiken of naar een ander beeldscherm kan gaan. Schakel uit als je liever een vrije aanwijzer hebt.",
+      "autoFaceOnCast": "Auto-Face Target on Cast",
+      "autoFaceOnCastHelp": "When you cast a targeted ability, your character turns to face the target so swings and projectiles come from the front. Turn off for the classic behavior, where a cast at a target you are not facing is rejected and you must turn yourself.",
       "showWalletOnCharacterScreen": "Portemonnee tonen op personagescherm",
       "showWalletOnPlayerCard": "Portemonnee tonen op spelerskaart",
       "uiScale": "UI-schaal",

@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "f3159fdf",
+      "state": "1b850205",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -29,6 +29,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -59,7 +60,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -78,7 +78,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 20,
             "armor": 110,
@@ -100,7 +99,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "1292a36c",
+      "state": "d57cb7f8",
       "events": "8eb40339",
       "rng": {
         "draws": 0,
@@ -113,6 +112,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
@@ -156,7 +156,6 @@
           "id": 388,
           "kind": "player",
           "level": 10,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -175,7 +174,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 29,
             "armor": 236,
@@ -197,7 +195,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 397,
-      "state": "bc6760ac",
+      "state": "32dbdb60",
       "events": "c5ae556e",
       "rng": {
         "draws": 32,
@@ -210,6 +208,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
@@ -258,7 +257,6 @@
           "inCombat": true,
           "kind": "player",
           "level": 10,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -277,7 +275,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 29,
             "armor": 236,
@@ -299,7 +296,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 397,
-      "state": "abbed217",
+      "state": "5b87102b",
       "events": "cbdf36a3",
       "rng": {
         "draws": 32,
@@ -312,6 +309,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "copper": 75,
@@ -355,7 +353,6 @@
           "inCombat": true,
           "kind": "player",
           "level": 10,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -374,7 +371,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 29,
             "armor": 236,
@@ -396,7 +392,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 397,
-      "state": "77a61eb3",
+      "state": "f39a438f",
       "events": "741638a5",
       "rng": {
         "draws": 32,
@@ -409,6 +405,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "copper": 75,
@@ -452,7 +449,6 @@
           "inCombat": true,
           "kind": "player",
           "level": 10,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -471,7 +467,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
           "stats": {
             "agi": 29,
             "armor": 236,

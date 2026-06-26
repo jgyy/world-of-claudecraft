@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "3cc2032c",
+      "state": "035b59a8",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -28,6 +28,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -58,7 +59,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 69,
           "maxResource": 93,
           "moveSpeed": 7,
@@ -79,7 +79,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 7,
           "stats": {
             "agi": 25,
             "armor": 109,
@@ -101,7 +100,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 392,
-      "state": "671b9546",
+      "state": "229a358e",
       "events": "bf8da7fe",
       "rng": {
         "draws": 6,
@@ -112,7 +111,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 392,
-      "state": "acf25cca",
+      "state": "239c359e",
       "events": "741638a5",
       "rng": {
         "draws": 6,
@@ -123,7 +122,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 392,
-      "state": "ede426f4",
+      "state": "11f5066c",
       "events": "b98e45cd",
       "rng": {
         "draws": 96,
@@ -134,7 +133,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 392,
-      "state": "ea1425c8",
+      "state": "70f63fc4",
       "events": "741638a5",
       "rng": {
         "draws": 195,
@@ -145,7 +144,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 392,
-      "state": "e716a4ce",
+      "state": "301c703e",
       "events": "6b3b0c7c",
       "rng": {
         "draws": 294,
@@ -156,7 +155,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 392,
-      "state": "f3940646",
+      "state": "f7d8695a",
       "events": "741638a5",
       "rng": {
         "draws": 398,
@@ -167,7 +166,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 392,
-      "state": "f3940646",
+      "state": "f7d8695a",
       "events": "741638a5",
       "rng": {
         "draws": 398,
@@ -180,6 +179,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -213,7 +213,6 @@
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -234,7 +233,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -266,7 +264,6 @@
           "inCombat": true,
           "kind": "mob",
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 101,
           "moveSpeed": 8,
           "onGround": true,
@@ -316,7 +313,6 @@
             "z": -2
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -368,7 +364,6 @@
           "inCombat": true,
           "kind": "mob",
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,

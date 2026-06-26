@@ -14,8 +14,8 @@
     "cancelCast fishing arm via dealDamage (FISHING_CAST_ID, not pushback)",
     "multi-class casters: mage/priest/warlock"
   ],
-  "draws": 624,
-  "drawDigest": "0927ccf7",
+  "draws": 627,
+  "drawDigest": "94487b1c",
   "frames": [
     {
       "tick": 0,
@@ -35,7 +35,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 392,
-      "state": "cd811932",
+      "state": "a8e4b533",
       "events": "d9f45c49",
       "rng": {
         "draws": 2,
@@ -47,6 +47,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
@@ -69,6 +70,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "priest",
           "companionUpgrades": {},
           "counters": {},
@@ -89,6 +91,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
@@ -125,7 +128,6 @@
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 954,
           "moveSpeed": 7,
@@ -145,7 +147,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 29,
           "stats": {
             "agi": 12,
             "armor": 101,
@@ -175,7 +176,6 @@
           "id": 389,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 791,
           "moveSpeed": 7,
@@ -194,7 +194,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 23,
           "stats": {
             "agi": 11,
             "armor": 94,
@@ -223,7 +222,6 @@
           "id": 390,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -243,7 +241,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -279,7 +276,6 @@
             "z": -40.03492
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 200000,
           "moveSpeed": 8,
           "onGround": true,
@@ -323,139 +319,139 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 392,
-      "state": "ce3189ea",
-      "events": "5d99c3f9",
+      "state": "bbeee125",
+      "events": "dc622207",
       "rng": {
-        "draws": 5,
-        "digest": "fafaf5ab"
+        "draws": 3,
+        "digest": "232163ca"
       }
     },
     {
       "tick": 10,
       "time": 0.5,
       "nextId": 392,
-      "state": "48908b1c",
+      "state": "1ca85e67",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "fafaf5ab"
+        "draws": 3,
+        "digest": "232163ca"
       }
     },
     {
       "tick": 15,
       "time": 0.75,
       "nextId": 392,
-      "state": "7a9d8245",
+      "state": "61a8091b",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "fafaf5ab"
+        "draws": 3,
+        "digest": "232163ca"
       }
     },
     {
       "tick": 20,
       "time": 1,
       "nextId": 392,
-      "state": "bddd9cdd",
+      "state": "d57846e7",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "fafaf5ab"
+        "draws": 3,
+        "digest": "232163ca"
       }
     },
     {
       "tick": 25,
       "time": 1.25,
       "nextId": 392,
-      "state": "d07e7bef",
+      "state": "f25bfec6",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "fafaf5ab"
+        "draws": 3,
+        "digest": "232163ca"
       }
     },
     {
       "tick": 30,
       "time": 1.5,
       "nextId": 392,
-      "state": "c3b34ffc",
+      "state": "58fc6393",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "fafaf5ab"
+        "draws": 3,
+        "digest": "232163ca"
       }
     },
     {
       "tick": 35,
       "time": 1.75,
       "nextId": 392,
-      "state": "d60c3102",
+      "state": "ab0d0e14",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "fafaf5ab"
+        "draws": 3,
+        "digest": "232163ca"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 392,
-      "state": "23c791a3",
+      "state": "dc596571",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "fafaf5ab"
+        "draws": 3,
+        "digest": "232163ca"
       }
     },
     {
       "tick": 45,
       "time": 2.25,
       "nextId": 392,
-      "state": "4c713fed",
+      "state": "0ffc56f4",
       "events": "dc622207",
       "rng": {
-        "draws": 24,
-        "digest": "df66d8be"
+        "draws": 22,
+        "digest": "ccf87dc0"
       }
     },
     {
       "tick": 50,
       "time": 2.5,
       "nextId": 392,
-      "state": "b366c583",
+      "state": "1f074e32",
       "events": "741638a5",
       "rng": {
-        "draws": 48,
-        "digest": "278176a2"
+        "draws": 46,
+        "digest": "eab21a47"
       }
     },
     {
       "tick": 55,
       "time": 2.75,
       "nextId": 392,
-      "state": "01d126ad",
+      "state": "356756cb",
       "events": "741638a5",
       "rng": {
-        "draws": 66,
-        "digest": "1004689a"
+        "draws": 64,
+        "digest": "c1f6906b"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 392,
-      "state": "dd11282c",
-      "events": "741638a5",
+      "state": "5999efd3",
+      "events": "9c9b266c",
       "rng": {
-        "draws": 82,
-        "digest": "e2e5902a"
+        "draws": 83,
+        "digest": "44898d8d"
       }
     },
     {
       "tick": 65,
       "time": 3.25,
       "nextId": 392,
-      "state": "15d1dd14",
+      "state": "e8f292ae",
       "events": "741638a5",
       "rng": {
         "draws": 103,
@@ -466,132 +462,132 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 392,
-      "state": "ea22734d",
-      "events": "575fdf9f",
+      "state": "7fc78b1a",
+      "events": "741638a5",
       "rng": {
-        "draws": 124,
-        "digest": "a995ff0f"
+        "draws": 127,
+        "digest": "faa8b9df"
       }
     },
     {
       "tick": 75,
       "time": 3.75,
       "nextId": 392,
-      "state": "1ac4b97c",
-      "events": "86382be0",
+      "state": "3ef0f72c",
+      "events": "741638a5",
       "rng": {
-        "draws": 149,
-        "digest": "60af83e6"
+        "draws": 151,
+        "digest": "f527e679"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 392,
-      "state": "1739fb68",
+      "state": "7532b6b9",
       "events": "741638a5",
       "rng": {
-        "draws": 162,
-        "digest": "310e2512"
+        "draws": 158,
+        "digest": "878ecdcb"
       }
     },
     {
       "tick": 85,
       "time": 4.25,
       "nextId": 392,
-      "state": "03cc3191",
+      "state": "495aac42",
       "events": "dc622207",
       "rng": {
-        "draws": 197,
-        "digest": "2245de47"
+        "draws": 191,
+        "digest": "790f5dc9"
       }
     },
     {
       "tick": 90,
       "time": 4.5,
       "nextId": 392,
-      "state": "5cc16734",
+      "state": "3bd82a18",
       "events": "741638a5",
       "rng": {
-        "draws": 225,
-        "digest": "de973eac"
+        "draws": 219,
+        "digest": "ab6dedec"
       }
     },
     {
       "tick": 95,
       "time": 4.75,
       "nextId": 392,
-      "state": "008f1a68",
+      "state": "5d1277fc",
       "events": "741638a5",
       "rng": {
-        "draws": 266,
-        "digest": "94e76999"
+        "draws": 262,
+        "digest": "2629a15e"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 392,
-      "state": "8016e1d2",
-      "events": "741638a5",
+      "state": "7a1fbee5",
+      "events": "5a2ebe34",
       "rng": {
-        "draws": 283,
-        "digest": "c4feb384"
+        "draws": 282,
+        "digest": "89125747"
       }
     },
     {
       "tick": 105,
       "time": 5.25,
       "nextId": 392,
-      "state": "ee0ab4c1",
+      "state": "4fc119a0",
       "events": "741638a5",
       "rng": {
-        "draws": 303,
-        "digest": "5e5c04dc"
+        "draws": 300,
+        "digest": "45b341bb"
       }
     },
     {
       "tick": 110,
       "time": 5.5,
       "nextId": 392,
-      "state": "bef9fe98",
+      "state": "7613bf24",
       "events": "741638a5",
       "rng": {
-        "draws": 323,
-        "digest": "46d881f5"
+        "draws": 318,
+        "digest": "6449033e"
       }
     },
     {
       "tick": 115,
       "time": 5.75,
       "nextId": 392,
-      "state": "f74add36",
-      "events": "5a2ebe34",
+      "state": "1842b9ce",
+      "events": "741638a5",
       "rng": {
-        "draws": 362,
-        "digest": "4701388b"
+        "draws": 352,
+        "digest": "d11bf86a"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 392,
-      "state": "7d272d02",
+      "state": "29f1b133",
       "events": "741638a5",
       "rng": {
-        "draws": 384,
-        "digest": "a21ba11c"
+        "draws": 378,
+        "digest": "3e73c519"
       }
     },
     {
       "tick": 123,
       "time": 6.15,
       "nextId": 392,
-      "state": "7f76c221",
+      "state": "bfca4f98",
       "events": "37971221",
       "rng": {
-        "draws": 411,
-        "digest": "f1455cd5"
+        "draws": 410,
+        "digest": "4558e97d"
       },
       "label": "priest-silence-cancel",
       "players": [
@@ -599,11 +595,12 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 67,
-            "damageTaken": 52
+            "damageDealt": 40,
+            "damageTaken": 40
           },
           "delveClears": {},
           "delveDaily": {},
@@ -622,6 +619,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "priest",
           "companionUpgrades": {},
           "counters": {},
@@ -642,6 +640,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
@@ -663,20 +662,19 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "castTotal": 3.5,
-          "combatTimer": 0.5,
+          "castTotal": 3,
+          "combatTimer": 1.2,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
           "facing": 0.54042,
           "fallStartY": -0.371544,
-          "fiveSecondRule": 2.7,
-          "hp": 19948,
+          "fiveSecondRule": 3.2,
+          "hp": 19960,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 954,
           "moveSpeed": 7,
@@ -696,7 +694,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 29,
           "stats": {
             "agi": 12,
             "armor": 101,
@@ -739,7 +736,6 @@
           "id": 389,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 791,
           "moveSpeed": 7,
@@ -758,7 +754,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 23,
           "stats": {
             "agi": 11,
             "armor": 94,
@@ -787,7 +782,6 @@
           "id": 390,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -807,7 +801,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -832,15 +825,15 @@
               "id": "fireball",
               "kind": "dot",
               "name": "Fireball",
-              "remaining": 3.5,
+              "remaining": 2.8,
               "school": "fire",
               "sourceId": 388,
               "tickInterval": 2,
-              "tickTimer": 1.5,
+              "tickTimer": 0.8,
               "value": 2
             }
           ],
-          "combatTimer": 0.5,
+          "combatTimer": 1.2,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.05,
@@ -848,7 +841,7 @@
           "fallStartY": -0.371544,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 199933,
+          "hp": 199960,
           "id": 391,
           "inCombat": true,
           "kind": "mob",
@@ -858,7 +851,6 @@
             "z": -41.049531
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 200000,
           "moveSpeed": 8,
           "onGround": true,
@@ -883,7 +875,7 @@
           "threat": [
             [
               388,
-              68
+              41
             ]
           ],
           "wanderTarget": {
@@ -904,29 +896,29 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 392,
-      "state": "bae7495b",
+      "state": "c7e2ba32",
       "events": "74882547",
       "rng": {
-        "draws": 421,
-        "digest": "36d7c20a"
+        "draws": 419,
+        "digest": "98c85500"
       }
     },
     {
       "tick": 130,
       "time": 6.5,
       "nextId": 392,
-      "state": "07f6e09a",
+      "state": "5b97318c",
       "events": "741638a5",
       "rng": {
-        "draws": 457,
-        "digest": "db64a726"
+        "draws": 449,
+        "digest": "54afa8d7"
       }
     },
     {
       "tick": 135,
       "time": 6.75,
       "nextId": 392,
-      "state": "0dac26a1",
+      "state": "c6937ce3",
       "events": "741638a5",
       "rng": {
         "draws": 488,
@@ -937,33 +929,33 @@
       "tick": 140,
       "time": 7,
       "nextId": 392,
-      "state": "e411321c",
-      "events": "741638a5",
+      "state": "c314e510",
+      "events": "5a2ebe34",
       "rng": {
-        "draws": 513,
-        "digest": "82ee6a89"
+        "draws": 516,
+        "digest": "0322c95b"
       }
     },
     {
       "tick": 145,
       "time": 7.25,
       "nextId": 392,
-      "state": "d37a77cf",
-      "events": "7b69a5ef",
+      "state": "4ef734e3",
+      "events": "5655b152",
       "rng": {
-        "draws": 538,
-        "digest": "f0ef76bf"
+        "draws": 542,
+        "digest": "8622daef"
       }
     },
     {
       "tick": 145,
       "time": 7.25,
       "nextId": 392,
-      "state": "5eca6275",
+      "state": "20c46839",
       "events": "d58ff44f",
       "rng": {
-        "draws": 538,
-        "digest": "f0ef76bf"
+        "draws": 542,
+        "digest": "8622daef"
       },
       "label": "warlock-channel-pushback",
       "players": [
@@ -971,11 +963,12 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 67,
-            "damageTaken": 52
+            "damageDealt": 42,
+            "damageTaken": 40
           },
           "delveClears": {},
           "delveDaily": {},
@@ -994,6 +987,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "priest",
           "companionUpgrades": {},
           "counters": {},
@@ -1014,9 +1008,11 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {
+            "damageDealt": 7,
             "damageTaken": 40
           },
           "delveClears": {},
@@ -1037,20 +1033,19 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "castTotal": 3.5,
-          "combatTimer": 1.6,
+          "castTotal": 3,
+          "combatTimer": 0.3,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
           "facing": 0.54042,
           "fallStartY": -0.371544,
-          "fiveSecondRule": 3.8,
-          "hp": 19948,
+          "fiveSecondRule": 4.3,
+          "hp": 19960,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 954,
           "moveSpeed": 7,
@@ -1070,7 +1065,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 29,
           "stats": {
             "agi": 12,
             "armor": 101,
@@ -1113,7 +1107,6 @@
           "id": 389,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 791,
           "moveSpeed": 7,
@@ -1132,7 +1125,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 23,
           "stats": {
             "agi": 11,
             "armor": 94,
@@ -1164,12 +1156,11 @@
           "fallStartY": -0.20935,
           "fiveSecondRule": 1.1,
           "gcdRemaining": 0.4,
-          "hp": 19460,
+          "hp": 19467,
           "id": 390,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -1189,7 +1180,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -1215,11 +1205,11 @@
               "id": "fireball",
               "kind": "dot",
               "name": "Fireball",
-              "remaining": 2.4,
+              "remaining": 1.7,
               "school": "fire",
               "sourceId": 388,
               "tickInterval": 2,
-              "tickTimer": 0.4,
+              "tickTimer": 1.7,
               "value": 2
             }
           ],
@@ -1230,7 +1220,7 @@
           "fallStartY": -0.371544,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 199933,
+          "hp": 199951,
           "id": 391,
           "inCombat": true,
           "kind": "mob",
@@ -1240,7 +1230,6 @@
             "z": -41.049531
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 200000,
           "moveSpeed": 8,
           "onGround": true,
@@ -1265,7 +1254,11 @@
           "threat": [
             [
               388,
-              68
+              43
+            ],
+            [
+              390,
+              10.5
             ]
           ],
           "wanderTarget": {
@@ -1286,22 +1279,22 @@
       "tick": 150,
       "time": 7.5,
       "nextId": 392,
-      "state": "448b8424",
-      "events": "cfd5b114",
+      "state": "a7867ad9",
+      "events": "741638a5",
       "rng": {
-        "draws": 574,
-        "digest": "4f593508"
+        "draws": 578,
+        "digest": "b0a65302"
       }
     },
     {
       "tick": 153,
       "time": 7.65,
       "nextId": 392,
-      "state": "cfc833e4",
-      "events": "0960f7a7",
+      "state": "9ab79b77",
+      "events": "f55a7986",
       "rng": {
-        "draws": 596,
-        "digest": "eb7df1f1"
+        "draws": 601,
+        "digest": "83c0c8aa"
       },
       "label": "warlock-fishing-cancel",
       "players": [
@@ -1309,11 +1302,12 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 69,
-            "damageTaken": 52
+            "damageDealt": 42,
+            "damageTaken": 40
           },
           "delveClears": {},
           "delveDaily": {},
@@ -1332,6 +1326,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "priest",
           "companionUpgrades": {},
           "counters": {},
@@ -1352,10 +1347,11 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 13,
+            "damageDealt": 7,
             "damageTaken": 60
           },
           "delveClears": {},
@@ -1376,19 +1372,19 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "castTotal": 3.5,
+          "castTotal": 3,
+          "combatTimer": 0.7,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
           "facing": 0.54042,
           "fallStartY": -0.371544,
-          "fiveSecondRule": 4.2,
-          "hp": 19948,
+          "fiveSecondRule": 4.7,
+          "hp": 19960,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 954,
           "moveSpeed": 7,
@@ -1408,7 +1404,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 29,
           "stats": {
             "agi": 12,
             "armor": 101,
@@ -1450,7 +1445,6 @@
           "id": 389,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 791,
           "moveSpeed": 7,
@@ -1469,7 +1463,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 23,
           "stats": {
             "agi": 11,
             "armor": 94,
@@ -1497,12 +1490,11 @@
           "facing": -0.725744,
           "fallStartY": -0.20935,
           "fiveSecondRule": 1.5,
-          "hp": 19453,
+          "hp": 19447,
           "id": 390,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -1522,7 +1514,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -1548,11 +1539,11 @@
               "id": "fireball",
               "kind": "dot",
               "name": "Fireball",
-              "remaining": 2,
+              "remaining": 1.3,
               "school": "fire",
               "sourceId": 388,
               "tickInterval": 2,
-              "tickTimer": 2,
+              "tickTimer": 1.3,
               "value": 2
             }
           ],
@@ -1563,7 +1554,7 @@
           "fallStartY": -0.371544,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 199918,
+          "hp": 199951,
           "id": 391,
           "inCombat": true,
           "kind": "mob",
@@ -1573,7 +1564,6 @@
             "z": -41.049531
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 200000,
           "moveSpeed": 8,
           "onGround": true,
@@ -1598,11 +1588,11 @@
           "threat": [
             [
               388,
-              70
+              43
             ],
             [
               390,
-              19.5
+              10.5
             ]
           ],
           "wanderTarget": {
@@ -1623,22 +1613,22 @@
       "tick": 155,
       "time": 7.75,
       "nextId": 392,
-      "state": "7494f5a2",
+      "state": "703e3998",
       "events": "741638a5",
       "rng": {
-        "draws": 610,
-        "digest": "3625c64e"
+        "draws": 613,
+        "digest": "7fa3b2d6"
       }
     },
     {
       "tick": 158,
       "time": 7.9,
       "nextId": 392,
-      "state": "6a2637f4",
+      "state": "fba7b5aa",
       "events": "741638a5",
       "rng": {
-        "draws": 624,
-        "digest": "0927ccf7"
+        "draws": 627,
+        "digest": "94487b1c"
       },
       "label": "final",
       "players": [
@@ -1646,11 +1636,12 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 69,
-            "damageTaken": 52
+            "damageDealt": 42,
+            "damageTaken": 40
           },
           "delveClears": {},
           "delveDaily": {},
@@ -1669,6 +1660,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "priest",
           "companionUpgrades": {},
           "counters": {},
@@ -1689,10 +1681,11 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 13,
+            "damageDealt": 7,
             "damageTaken": 60
           },
           "delveClears": {},
@@ -1713,20 +1706,19 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "castTotal": 3.5,
-          "combatTimer": 0.25,
+          "castTotal": 3,
+          "combatTimer": 0.95,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
           "facing": 0.54042,
           "fallStartY": -0.371544,
-          "fiveSecondRule": 4.45,
-          "hp": 19948,
+          "fiveSecondRule": 4.95,
+          "hp": 19960,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 954,
           "moveSpeed": 7,
@@ -1746,7 +1738,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 29,
           "stats": {
             "agi": 12,
             "armor": 101,
@@ -1788,7 +1779,6 @@
           "id": 389,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 791,
           "moveSpeed": 7,
@@ -1807,7 +1797,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 23,
           "stats": {
             "agi": 11,
             "armor": 94,
@@ -1836,12 +1825,11 @@
           "facing": -0.725744,
           "fallStartY": -0.20935,
           "fiveSecondRule": 1.75,
-          "hp": 19453,
+          "hp": 19447,
           "id": 390,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 20000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -1861,7 +1849,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -1887,11 +1874,11 @@
               "id": "fireball",
               "kind": "dot",
               "name": "Fireball",
-              "remaining": 1.75,
+              "remaining": 1.05,
               "school": "fire",
               "sourceId": 388,
               "tickInterval": 2,
-              "tickTimer": 1.75,
+              "tickTimer": 1.05,
               "value": 2
             }
           ],
@@ -1903,7 +1890,7 @@
           "fallStartY": -0.371544,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 199918,
+          "hp": 199951,
           "id": 391,
           "inCombat": true,
           "kind": "mob",
@@ -1913,7 +1900,6 @@
             "z": -41.049531
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 200000,
           "moveSpeed": 8,
           "onGround": true,
@@ -1938,11 +1924,11 @@
           "threat": [
             [
               388,
-              70
+              43
             ],
             [
               390,
-              19.5
+              10.5
             ]
           ],
           "wanderTarget": {

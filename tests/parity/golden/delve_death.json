@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "d4c14b80",
+      "state": "62ac5d15",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -28,6 +28,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
@@ -58,7 +59,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 62,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -78,7 +78,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 25,
             "armor": 104,
@@ -101,7 +100,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 398,
-      "state": "febeaecf",
+      "state": "62204590",
       "events": "38dd36be",
       "rng": {
         "draws": 1,
@@ -114,6 +113,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
@@ -145,7 +145,6 @@
           "id": 388,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 185,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -164,7 +163,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 43,
             "armor": 188,
@@ -187,7 +185,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 398,
-      "state": "4f9b2b50",
+      "state": "2b6114f9",
       "events": "a92d1726",
       "rng": {
         "draws": 1,
@@ -200,6 +198,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
@@ -231,7 +230,6 @@
           "id": 388,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 185,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -251,7 +249,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 43,
             "armor": 188,
@@ -274,7 +271,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 398,
-      "state": "4f9b2b50",
+      "state": "2b6114f9",
       "events": "741638a5",
       "rng": {
         "draws": 1,
@@ -287,6 +284,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
@@ -318,7 +316,6 @@
           "id": 388,
           "kind": "player",
           "level": 7,
-          "lootFfaTimer": "Infinity",
           "maxHp": 185,
           "maxResource": 100,
           "moveSpeed": 7,
@@ -338,7 +335,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
           "stats": {
             "agi": 43,
             "armor": 188,

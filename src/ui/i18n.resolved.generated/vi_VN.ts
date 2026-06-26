@@ -328,6 +328,8 @@ export const vi_VN: EnTranslations = {
       "clickFeedback": "Dấu Nhấp Chuột",
       "lockCursorOnRotate": "Khóa Con Trỏ Khi Xoay",
       "keybindHelpLockCursorOnRotate": "Giữ con trỏ chuột bên trong cửa sổ khi bạn kéo để xoay camera, để nó không thể chạm tới mép màn hình hoặc di chuyển sang màn hình khác. Hãy tắt nếu bạn thích con trỏ tự do.",
+      "autoFaceOnCast": "Auto-Face Target on Cast",
+      "autoFaceOnCastHelp": "When you cast a targeted ability, your character turns to face the target so swings and projectiles come from the front. Turn off for the classic behavior, where a cast at a target you are not facing is rejected and you must turn yourself.",
       "showWalletOnCharacterScreen": "Hiện Ví Tiền Ở Màn Hình Nhân Vật",
       "showWalletOnPlayerCard": "Hiện Ví Tiền Trên Thẻ Người Chơi",
       "uiScale": "Tỷ Lệ Giao Diện",

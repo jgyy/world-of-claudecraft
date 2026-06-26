@@ -16,14 +16,14 @@
     "petTaunt -> applyTaunt manual arm + PET_GROWL_INTERVAL cooldown",
     "stowPetForDelve/restorePetFromDelveStash (serializePet/restorePet round-trip)"
   ],
-  "draws": 158,
-  "drawDigest": "878ecdcb",
+  "draws": 156,
+  "drawDigest": "6a78189c",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "3cc2032c",
+      "state": "035b59a8",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -36,6 +36,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -66,7 +67,6 @@
           "id": 388,
           "kind": "player",
           "level": 1,
-          "lootFfaTimer": "Infinity",
           "maxHp": 69,
           "maxResource": 93,
           "moveSpeed": 7,
@@ -87,7 +87,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 7,
           "stats": {
             "agi": 25,
             "armor": 109,
@@ -109,7 +108,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 391,
-      "state": "aec74278",
+      "state": "3021d45c",
       "events": "d6431ee9",
       "rng": {
         "draws": 0,
@@ -122,6 +121,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -153,7 +153,6 @@
           "id": 388,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -174,7 +173,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -202,7 +200,6 @@
           "id": 390,
           "kind": "mob",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 182,
           "moveSpeed": 8,
           "onGround": true,
@@ -236,7 +233,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 391,
-      "state": "eeb453dc",
+      "state": "78a0ba9c",
       "events": "f1876688",
       "rng": {
         "draws": 0,
@@ -249,6 +246,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -280,7 +278,6 @@
           "id": 388,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -301,7 +298,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -343,7 +339,6 @@
           "id": 390,
           "kind": "mob",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 182,
           "moveSpeed": 8,
           "onGround": true,
@@ -377,7 +372,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 391,
-      "state": "934c4add",
+      "state": "1480a309",
       "events": "db641d7c",
       "rng": {
         "draws": 0,
@@ -388,7 +383,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 391,
-      "state": "07ada0f0",
+      "state": "a3b1fa58",
       "events": "db641d7c",
       "rng": {
         "draws": 0,
@@ -399,7 +394,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 392,
-      "state": "07f62f57",
+      "state": "c3fe5163",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -412,6 +407,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -443,7 +439,6 @@
           "id": 388,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -464,7 +459,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -507,7 +501,6 @@
           "inCombat": true,
           "kind": "mob",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 182,
           "moveSpeed": 8,
           "onGround": true,
@@ -557,7 +550,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -601,7 +593,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 392,
-      "state": "17a7649c",
+      "state": "26521460",
       "events": "88987647",
       "rng": {
         "draws": 0,
@@ -614,6 +606,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -645,7 +638,6 @@
           "id": 388,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -666,7 +658,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -703,7 +694,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -743,7 +733,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 394,
-      "state": "72623783",
+      "state": "3d0af9d7",
       "events": "650f3db1",
       "rng": {
         "draws": 0,
@@ -756,6 +746,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -787,7 +778,6 @@
           "id": 388,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -808,7 +798,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -845,7 +834,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -891,7 +879,6 @@
           "id": 393,
           "kind": "mob",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 182,
           "moveSpeed": 8,
           "onGround": true,
@@ -925,7 +912,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 394,
-      "state": "c0584c87",
+      "state": "551b69c3",
       "events": "f4ec9639",
       "rng": {
         "draws": 0,
@@ -938,6 +925,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -969,7 +957,6 @@
           "id": 388,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -990,7 +977,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -1027,7 +1013,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -1073,7 +1058,6 @@
           "id": 393,
           "kind": "mob",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 182,
           "moveSpeed": 8,
           "onGround": true,
@@ -1107,7 +1091,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 394,
-      "state": "17a7649c",
+      "state": "26521460",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1120,6 +1104,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -1151,7 +1136,6 @@
           "id": 388,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -1172,7 +1156,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -1209,7 +1192,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -1249,7 +1231,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 395,
-      "state": "17a7649c",
+      "state": "26521460",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1262,6 +1244,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -1293,7 +1276,6 @@
           "id": 388,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -1314,7 +1296,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -1351,7 +1332,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -1391,7 +1371,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 397,
-      "state": "3ccadc00",
+      "state": "601b46a8",
       "events": "5b636e6d",
       "rng": {
         "draws": 0,
@@ -1404,6 +1384,7 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
@@ -1424,6 +1405,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
@@ -1455,7 +1437,6 @@
           "id": 388,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -1476,7 +1457,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -1513,7 +1493,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -1566,7 +1545,6 @@
           "id": 395,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -1586,7 +1564,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -1614,7 +1591,6 @@
           "id": 396,
           "kind": "mob",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 162,
           "moveSpeed": 5.2,
           "onGround": true,
@@ -1637,8 +1613,8 @@
           },
           "templateId": "imp",
           "weapon": {
-            "max": 21,
-            "min": 14,
+            "max": 28,
+            "min": 18,
             "speed": 2
           }
         }
@@ -1648,33 +1624,33 @@
       "tick": 60,
       "time": 3,
       "nextId": 397,
-      "state": "98f025f7",
-      "events": "a19c527c",
+      "state": "94e4dd75",
+      "events": "4a181d87",
       "rng": {
-        "draws": 82,
-        "digest": "e2e5902a"
+        "draws": 80,
+        "digest": "cdfb4afc"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 397,
-      "state": "dd75f145",
+      "state": "4e083097",
       "events": "669474ea",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 156,
+        "digest": "6a78189c"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 397,
-      "state": "dd75f145",
+      "state": "4e083097",
       "events": "741638a5",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 156,
+        "digest": "6a78189c"
       },
       "label": "demon-heal-tick",
       "players": [
@@ -1683,11 +1659,10 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 10
-          },
+          "counters": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 388,
@@ -1705,6 +1680,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
@@ -1726,18 +1702,17 @@
         {
           "aiState": "idle",
           "attackPower": 83,
-          "combatTimer": 1.95,
+          "combatTimer": 103,
           "critChance": 0.079,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.079,
           "fallStartY": 1.5,
           "fiveSecondRule": 103,
-          "hp": 49990,
+          "hp": 50000,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -1758,7 +1733,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -1787,7 +1761,7 @@
           "forcedTargetId": 390,
           "forcedTargetTimer": 1,
           "hostile": true,
-          "hp": 49983,
+          "hp": 49975,
           "id": 391,
           "inCombat": true,
           "kind": "mob",
@@ -1797,7 +1771,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -1828,7 +1801,7 @@
             ],
             [
               394,
-              17
+              25
             ]
           ],
           "weapon": {
@@ -1856,7 +1829,6 @@
           "id": 395,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -1876,7 +1848,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -1904,7 +1875,6 @@
           "id": 396,
           "kind": "mob",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 162,
           "moveSpeed": 5.2,
           "onGround": true,
@@ -1927,8 +1897,8 @@
           },
           "templateId": "imp",
           "weapon": {
-            "max": 21,
-            "min": 14,
+            "max": 28,
+            "min": 18,
             "speed": 2
           }
         }
@@ -1938,11 +1908,11 @@
       "tick": 80,
       "time": 4,
       "nextId": 398,
-      "state": "9eec8b90",
+      "state": "88d33981",
       "events": "fea91c51",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 156,
+        "digest": "6a78189c"
       },
       "label": "demon-faded",
       "players": [
@@ -1951,11 +1921,10 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 10
-          },
+          "counters": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 388,
@@ -1973,6 +1942,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
@@ -1994,18 +1964,17 @@
         {
           "aiState": "idle",
           "attackPower": 83,
-          "combatTimer": 1.95,
+          "combatTimer": 103,
           "critChance": 0.079,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.079,
           "fallStartY": 1.5,
           "fiveSecondRule": 103,
-          "hp": 49990,
+          "hp": 50000,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -2026,7 +1995,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -2055,7 +2023,7 @@
           "forcedTargetId": 390,
           "forcedTargetTimer": 1,
           "hostile": true,
-          "hp": 49983,
+          "hp": 49975,
           "id": 391,
           "inCombat": true,
           "kind": "mob",
@@ -2065,7 +2033,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -2096,7 +2063,7 @@
             ],
             [
               394,
-              17
+              25
             ]
           ],
           "weapon": {
@@ -2124,7 +2091,6 @@
           "id": 395,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -2144,7 +2110,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -2166,11 +2131,11 @@
       "tick": 80,
       "time": 4,
       "nextId": 400,
-      "state": "47192443",
+      "state": "b02bae96",
       "events": "5f9f8407",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 156,
+        "digest": "6a78189c"
       },
       "label": "demon-despawned",
       "players": [
@@ -2179,11 +2144,10 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 10
-          },
+          "counters": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 388,
@@ -2201,6 +2165,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
@@ -2222,18 +2187,17 @@
         {
           "aiState": "idle",
           "attackPower": 83,
-          "combatTimer": 1.95,
+          "combatTimer": 103,
           "critChance": 0.079,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.079,
           "fallStartY": 1.5,
           "fiveSecondRule": 103,
-          "hp": 49990,
+          "hp": 50000,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -2254,7 +2218,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -2283,7 +2246,7 @@
           "forcedTargetId": 390,
           "forcedTargetTimer": 1,
           "hostile": true,
-          "hp": 49983,
+          "hp": 49975,
           "id": 391,
           "inCombat": true,
           "kind": "mob",
@@ -2293,7 +2256,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -2324,7 +2286,7 @@
             ],
             [
               394,
-              17
+              25
             ]
           ],
           "weapon": {
@@ -2352,7 +2314,6 @@
           "id": 395,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -2372,7 +2333,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -2403,7 +2363,6 @@
           "inCombat": true,
           "kind": "mob",
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -2443,11 +2402,11 @@
       "tick": 80,
       "time": 4,
       "nextId": 400,
-      "state": "47192443",
+      "state": "b02bae96",
       "events": "741638a5",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 156,
+        "digest": "6a78189c"
       },
       "label": "final",
       "players": [
@@ -2456,11 +2415,10 @@
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
+          "autoFaceOnCast": true,
           "cls": "hunter",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 10
-          },
+          "counters": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 388,
@@ -2478,6 +2436,7 @@
           "activeLoadout": -1,
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
+          "autoFaceOnCast": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
@@ -2499,18 +2458,17 @@
         {
           "aiState": "idle",
           "attackPower": 83,
-          "combatTimer": 1.95,
+          "combatTimer": 103,
           "critChance": 0.079,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.079,
           "fallStartY": 1.5,
           "fiveSecondRule": 103,
-          "hp": 49990,
+          "hp": 50000,
           "id": 388,
           "inCombat": true,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 358,
           "moveSpeed": 7,
@@ -2531,7 +2489,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
           "stats": {
             "agi": 58,
             "armor": 263,
@@ -2560,7 +2517,7 @@
           "forcedTargetId": 390,
           "forcedTargetTimer": 1,
           "hostile": true,
-          "hp": 49983,
+          "hp": 49975,
           "id": 391,
           "inCombat": true,
           "kind": "mob",
@@ -2570,7 +2527,6 @@
             "z": -1
           },
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -2601,7 +2557,7 @@
             ],
             [
               394,
-              17
+              25
             ]
           ],
           "weapon": {
@@ -2629,7 +2585,6 @@
           "id": 395,
           "kind": "player",
           "level": 12,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -2649,7 +2604,6 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -2680,7 +2634,6 @@
           "inCombat": true,
           "kind": "mob",
           "level": 8,
-          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,

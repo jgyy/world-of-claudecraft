@@ -205,6 +205,12 @@ export const BOOL_SETTINGS = {
   // applied in main.ts. Purely a display preference; the slots stay reachable via
   // their keybinds either way, so the row being hidden never disables those abilities.
   showSecondaryActionBar: { def: false },
+  // on by default: when casting a targeted ability, the character auto-pivots to face
+  // the target so swings and projectiles originate from the front. Off restores the
+  // classic facing requirement (an off-arc hostile cast is rejected with "You must be
+  // facing your target."). Server-authoritative: the preference is pushed to the sim,
+  // so it changes real cast behavior, not just visuals.
+  autoFaceOnCast: { def: true },
   // internal, never shown in the options UI: set true once main.ts has persisted a
   // device-appropriate graphicsPreset on a player's first run (a CONCLUSIVE detection).
   // It gates firstRunGraphicsPreset so a recognized device is classified at most once and
