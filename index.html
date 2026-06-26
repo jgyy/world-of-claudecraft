@@ -5228,6 +5228,10 @@
 
   /* ---------- trade window ---------- */
   #trade-window { width: 460px; box-sizing: border-box; overflow-x: hidden; }
+  /* display:contents keeps the Accept/Cancel buttons direct flex children of the
+     window (stacked, full width) on desktop and portrait; landscape mobile turns
+     this into a flex row so the actions sit side by side (see landscape block). */
+  .trade-actions { display: contents; }
   .trade-cols { display: flex; gap: 12px; }
   .trade-col { flex: 1; }
   .trade-col h4 { font-family: var(--title-font); font-size: 12.5px; color: var(--gold); margin-bottom: 6px; }
@@ -6872,6 +6876,14 @@
   }
 
   @media (orientation: landscape) {
+    /* In-game mobile play is landscape, where vertical space is scarce. The
+       generic mobile rule stacks the trade columns and actions, pushing Accept
+       and Cancel below the fold of the height-capped window. Use the wide
+       landscape width instead: offers side by side, actions side by side. */
+    body.mobile-touch #trade-window .trade-cols { flex-direction: row; }
+    body.mobile-touch #trade-window .trade-items { min-height: 88px; }
+    body.mobile-touch #trade-window .trade-actions { display: flex; gap: 8px; }
+    body.mobile-touch #trade-window .trade-actions .btn { flex: 1; }
     body.mobile-touch .play-console {
       width: 100%;
       max-width: 460px;

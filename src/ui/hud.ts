@@ -12689,7 +12689,12 @@ export class Hud {
     cancelBtn.className = 'btn';
     cancelBtn.textContent = t('hud.trade.cancel');
     cancelBtn.addEventListener('click', () => this.sim.tradeCancel());
-    el.append(acceptBtn, cancelBtn);
+    // Group the actions so landscape mobile can lay them side by side (the
+    // wrapper is display:contents elsewhere, so portrait/desktop are unchanged).
+    const actions = document.createElement('div');
+    actions.className = 'trade-actions';
+    actions.append(acceptBtn, cancelBtn);
+    el.append(actions);
     el.querySelector('[data-close]')?.addEventListener('click', () => this.sim.tradeCancel());
     el.querySelectorAll('.trade-item.mine').forEach((row) => {
       row.addEventListener('click', () => {
