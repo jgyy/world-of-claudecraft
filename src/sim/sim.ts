@@ -54,6 +54,21 @@ import {
 // moved to social/fiesta.ts with that logic; sim.ts keeps only the type used by
 // the PlayerMeta interface + the power-up catalog the fiestaMatchInfo accessor reads.
 import { type AugmentSpecial, type AugmentTier, POWERUPS_BY_ID } from './content/augments';
+// L1: the loot-distribution layer (party-loot strategy, the rollLoot roller, copper
+// split, need-greed roll lifecycle, corpse-loot helpers) moved to ./loot/loot_roll.ts;
+// Sim keeps thin same-named delegates that call these.
+import {
+  activeLootRolls as activeLootRollsImpl,
+  awardSharedLootItem as awardSharedLootItemImpl,
+  distributeLootCopper as distributeLootCopperImpl,
+  lootSlotVisibleTo as lootSlotVisibleToImpl,
+  partyLootCandidatesForMob as partyLootCandidatesForMobImpl,
+  type PendingLootRoll,
+  pruneCorpseLoot as pruneCorpseLootImpl,
+  resolveLootRoll as resolveLootRollImpl,
+  rollLoot as rollLootImpl,
+  submitLootRoll as submitLootRollImpl,
+} from './loot/loot_roll';
 import {
   classHasSkin,
   EVENT_SKIN_TOKEN_ID,
@@ -260,8 +275,6 @@ import {
   INSTANCE_EMPTY_TIMEOUT,
   INTERACT_RANGE,
   type InvSlot,
-  type ItemDef,
-  type ItemLootStrategy,
   isConsuming,
   isPetClass,
   isQuestTurnInNpc,
@@ -536,7 +549,7 @@ const PET_COMBAT_LINGER = 5;
 // DEMON_HEAL_DURATION / DEMON_HEAL_TICK / TAMED_TARGET_RESPAWN_SECONDS moved with the
 // slice to src/sim/pet/pet_commands.ts (P1b); DEMON_HEAL_CAST_ID -> ./types (shared
 // with the still-on-Sim updateCasting channel-tick arm).
-const LOOT_ROLL_TIMEOUT = 30;
+// LOOT_ROLL_TIMEOUT moved with the loot slice to src/sim/loot/loot_roll.ts (L1).
 
 export interface Party {
   id: number;
@@ -545,17 +558,6 @@ export interface Party {
   raid: boolean;
   raidGroups: Map<number, 1 | 2>; // pid -> raid subgroup
   lootStrategies: LootStrategies;
-}
-
-interface PendingLootRoll {
-  id: number;
-  mobId: number;
-  itemId: string;
-  itemName: string;
-  quality: ItemDef['quality'];
-  candidates: number[];
-  choices: Map<number, { choice: LootRollChoice; roll: number | null }>;
-  expiresAt: number;
 }
 
 export interface TradeSession {
@@ -1929,6 +1931,17 @@ export class Sim {
       get channelSubs() {
         return sim.channelSubs;
       },
+      // L1 loot-distribution state stays on Sim (live views): the pending need-greed
+      // rolls map (mutated in place) and the roll-id counter (bumped via ctx.nextLootRollId++).
+      get pendingLootRolls() {
+        return sim.pendingLootRolls;
+      },
+      get nextLootRollId() {
+        return sim.nextLootRollId;
+      },
+      set nextLootRollId(v) {
+        sim.nextLootRollId = v;
+      },
       // LATE-bound (not .bind(sim)): a moved emit site (C5 meleeSwing/rangedSwing)
       // now emits via ctx.emit, and tests swap (sim as any).emit post-construction to
       // observe events (mob_blind/mob_cleave). An early .bind(sim) would capture the
@@ -2468,39 +2481,11 @@ export class Sim {
       aura.id === 'nythraxis_transition_stun'
     );
   }
-  private partyLootStrategiesForMob(mob: Entity): LootStrategies | null {
-    if (mob.tappedById === null) return null;
-    return this.partyOf(mob.tappedById)?.lootStrategies ?? null;
-  }
+  // L1 loot distribution moved to loot/loot_roll.ts (behind SimContext). Sim keeps a
+  // thin delegate for partyLootCandidatesForMob because dead_party_loot.test.ts reaches
+  // it via cast; the strategy resolvers it used have no other caller and moved fully.
   private partyLootCandidatesForMob(mob: Entity): PlayerMeta[] {
-    if (mob.lootRecipientIds && mob.lootRecipientIds.length > 0) {
-      return mob.lootRecipientIds.flatMap((pid) => {
-        const candidate = this.players.get(pid);
-        return candidate ? [candidate] : [];
-      });
-    }
-    if (mob.tappedById === null) return [];
-    const party = this.partyOf(mob.tappedById);
-    if (!party || party.members.length <= 1) return [];
-    const candidates: PlayerMeta[] = [];
-    for (const pid of party.members) {
-      const candidate = this.players.get(pid);
-      const e = this.entities.get(pid);
-      // Before a corpse has a death-time snapshot, fall back to current range.
-      // Do not filter on `e.dead`: a downed member whose corpse is still in
-      // range keeps loot rights.
-      if (candidate && e && dist2d(e.pos, mob.pos) <= PARTY_XP_RANGE) candidates.push(candidate);
-    }
-    return candidates;
-  }
-  private effectiveCurrencyLootStrategy(mob: Entity): CurrencyLootStrategy {
-    return this.partyLootStrategiesForMob(mob)?.currency ?? 'looter-takes-all';
-  }
-  private effectiveItemLootStrategy(itemId: string, mob: Entity): ItemLootStrategy {
-    const q = ITEMS[itemId]?.quality ?? 'common';
-    const strategies = this.partyLootStrategiesForMob(mob);
-    if (!strategies) return 'looter-takes-all';
-    return q === 'poor' || q === 'common' ? strategies.commonItems : strategies.premiumItems;
+    return partyLootCandidatesForMobImpl(this.ctx, mob);
   }
   moveSpeedMult(e: Entity): number {
     let slow = 1,
@@ -3427,243 +3412,46 @@ export class Sim {
     return prestigeImpl(this.ctx, pid);
   }
 
-  private needsQuestDrop(entry: LootEntry, meta: PlayerMeta): boolean {
-    if (!entry.questId || !entry.itemId) return false;
-    const qp = meta.questLog.get(entry.questId);
-    if (qp?.state !== 'active') return false;
-    const quest = QUESTS[entry.questId];
-    const objIdx = quest.objectives.findIndex(
-      (o) => o.type === 'collect' && o.itemId === entry.itemId,
-    );
-    // A quest-gated drop is only "needed" while the player has an actual collect
-    // objective for this item that is still short of its required count. If the
-    // quest has no matching collect objective, the player never needs the item,
-    // so it must not drop (fail closed rather than dropping unconditionally).
-    return (
-      objIdx >= 0 && this.countItem(entry.itemId, meta.entityId) < quest.objectives[objIdx].count
-    );
-  }
-
+  // L1 loot distribution (party-loot strategy, rollLoot, copper split, need-greed
+  // lifecycle, corpse-loot helpers) moved to loot/loot_roll.ts behind SimContext.
+  // Sim keeps thin same-named delegates only where a foreign caller resolves them:
+  //  - rollLoot: ctx.rollLoot (combat/damage.ts handleDeath) + (sim as any) test casts.
+  //  - distributeLootCopper/awardSharedLootItem/lootSlotVisibleTo/pruneCorpseLoot:
+  //    the lootCorpse interaction handler (stays on Sim) calls them.
+  //  - resolveLootRoll: the updateLootRolls tick driver (stays on Sim) calls it.
+  //  - activeLootRolls/submitLootRoll: the public IWorld surface (HUD + player action).
+  // The strategy resolvers + copper/need-greed internals had no external caller and
+  // moved fully (no delegate).
   private rollLoot(mob: Entity, meta: PlayerMeta, eligible: PlayerMeta[] = [meta]): void {
-    const template = MOBS[mob.templateId];
-    if (!template) return;
-    let copper = 0;
-    const items: LootSlot[] = [];
-    const rolledGroups = new Set<string>();
-    for (const entry of template.loot) {
-      // Exclusive groups: a single rng draw is partitioned by the group
-      // entries' chances, so at most one matching entry drops.
-      // Exactly one rng.next() per group keeps replays deterministic.
-      if (entry.rollGroup) {
-        if (rolledGroups.has(entry.rollGroup)) continue;
-        rolledGroups.add(entry.rollGroup);
-        const group = template.loot.filter((l) => l.rollGroup === entry.rollGroup);
-        const roll = this.rng.next();
-        let cumulative = 0;
-        for (const g of group) {
-          cumulative += g.chance;
-          if (roll < cumulative) {
-            if (g.itemId) items.push({ itemId: g.itemId, count: 1 });
-            break;
-          }
-        }
-        continue;
-      }
-      if (entry.questId) {
-        const questRecipients = eligible.filter((m) => this.needsQuestDrop(entry, m));
-        if (questRecipients.length === 0) continue;
-        if (!this.rng.chance(entry.chance)) continue;
-        items.push({
-          itemId: entry.itemId!,
-          count: 1,
-          personalFor: questRecipients.map((m) => m.entityId),
-        });
-        continue;
-      }
-      if (!this.rng.chance(entry.chance)) continue;
-      if (entry.copper)
-        copper += this.rng.int(Math.ceil(entry.copper * 0.6), Math.ceil(entry.copper * 1.4));
-      if (entry.itemId) items.push({ itemId: entry.itemId, count: 1 });
-    }
-    if (copper > 0 || items.length > 0) {
-      mob.loot = { copper, items };
-      mob.lootable = true;
-    }
-  }
-
-  private grantLootCopper(meta: PlayerMeta, amount: number): void {
-    meta.copper += amount;
-    meta.counters.lootCopper += amount;
-    this.emit({ type: 'loot', text: `You loot ${formatMoney(amount)}.`, pid: meta.entityId });
-  }
-
-  private awardAllCopperToLooter(looter: PlayerMeta, copper: number): void {
-    this.grantLootCopper(looter, copper);
-  }
-
-  private tryAwardCopperByFairSplit(mob: Entity, copper: number): boolean {
-    if (this.effectiveCurrencyLootStrategy(mob) !== 'fair-split') return false;
-    const candidates = this.partyLootCandidatesForMob(mob);
-    if (candidates.length <= 1) return false;
-    const base = Math.floor(copper / candidates.length);
-    const remainder = copper % candidates.length;
-    const shares = new Map<PlayerMeta, number>(candidates.map((candidate) => [candidate, base]));
-    const order = [...candidates];
-    for (let i = 0; i < remainder; i++) {
-      const idx = this.rng.int(i, order.length - 1);
-      [order[i], order[idx]] = [order[idx], order[i]];
-      shares.set(order[i], (shares.get(order[i]) ?? 0) + 1);
-    }
-    for (const candidate of candidates) {
-      const amount = shares.get(candidate) ?? 0;
-      if (amount > 0) this.grantLootCopper(candidate, amount);
-    }
-    return true;
+    rollLootImpl(this.ctx, mob, meta, eligible);
   }
 
   private distributeLootCopper(mob: Entity, looter: PlayerMeta): void {
-    if (!mob.loot || mob.loot.copper <= 0) return;
-    const copper = mob.loot.copper;
-    if (!this.tryAwardCopperByFairSplit(mob, copper)) this.awardAllCopperToLooter(looter, copper);
-    mob.loot.copper = 0;
-  }
-
-  private startNeedGreedRoll(itemId: string, mob: Entity): boolean {
-    if (this.effectiveItemLootStrategy(itemId, mob) !== 'need-greed') return false;
-    const candidates = this.partyLootCandidatesForMob(mob);
-    if (candidates.length <= 1) return false;
-    const def = ITEMS[itemId];
-    const itemName = def?.name ?? itemId;
-    const roll: PendingLootRoll = {
-      id: this.nextLootRollId++,
-      mobId: mob.id,
-      itemId,
-      itemName,
-      quality: def?.quality,
-      candidates: candidates.map((candidate) => candidate.entityId),
-      choices: new Map(),
-      expiresAt: this.time + LOOT_ROLL_TIMEOUT,
-    };
-    this.pendingLootRolls.set(roll.id, roll);
-    mob.corpseTimer = Math.max(mob.corpseTimer, LOOT_ROLL_TIMEOUT + 2);
-    for (const candidate of candidates) {
-      this.emit({
-        type: 'lootRoll',
-        rollId: roll.id,
-        itemId,
-        itemName,
-        quality: roll.quality,
-        expiresAt: roll.expiresAt,
-        pid: candidate.entityId,
-      });
-    }
-    return true;
+    distributeLootCopperImpl(this.ctx, mob, looter);
   }
 
   private awardSharedLootItem(itemId: string, mob: Entity, looter: PlayerMeta): void {
-    if (!this.startNeedGreedRoll(itemId, mob)) this.addItem(itemId, 1, looter.entityId);
+    awardSharedLootItemImpl(this.ctx, itemId, mob, looter);
   }
 
-  // Open need-greed rolls the given player may still answer. Mirrors the
-  // `lootRoll` events but is reconciled from authoritative state, so a client
-  // that missed an event (reconnect, interest churn, a dropped frame) can
-  // re-show the prompt instead of losing the roll while groupmates roll.
   activeLootRolls(pid = this.playerId): LootRollPrompt[] {
-    const out: LootRollPrompt[] = [];
-    for (const roll of this.pendingLootRolls.values()) {
-      if (!roll.candidates.includes(pid) || roll.choices.has(pid)) continue;
-      out.push({
-        rollId: roll.id,
-        itemId: roll.itemId,
-        itemName: roll.itemName,
-        quality: roll.quality,
-        expiresAt: roll.expiresAt,
-      });
-    }
-    return out;
+    return activeLootRollsImpl(this.ctx, pid);
   }
 
   submitLootRoll(rollId: number, choice: LootRollChoice, pid?: number): void {
-    const r = this.resolve(pid);
-    if (!r) return;
-    const roll = this.pendingLootRolls.get(rollId);
-    if (!roll?.candidates.includes(r.meta.entityId) || roll.choices.has(r.meta.entityId)) return;
-    roll.choices.set(r.meta.entityId, {
-      choice,
-      roll: choice === 'need' || choice === 'greed' ? this.rng.int(1, 100) : null,
-    });
-    if (roll.choices.size >= roll.candidates.length) this.resolveLootRoll(roll);
+    submitLootRollImpl(this.ctx, rollId, choice, pid);
   }
 
   private resolveLootRoll(roll: PendingLootRoll): void {
-    if (!this.pendingLootRolls.delete(roll.id)) return;
-    const entries = roll.candidates
-      .map((pid) => ({
-        pid,
-        result: roll.choices.get(pid) ?? { choice: 'pass' as const, roll: null },
-      }))
-      .filter((entry) => entry.result.choice !== 'pass');
-    const needers = entries.filter((entry) => entry.result.choice === 'need');
-    const contenders =
-      needers.length > 0 ? needers : entries.filter((entry) => entry.result.choice === 'greed');
-    if (contenders.length === 0) {
-      this.returnLootRollItemToCorpse(roll);
-      for (const pid of roll.candidates)
-        this.emit({ type: 'loot', text: `Everyone passed on ${roll.itemName}.`, pid });
-      return;
-    }
-    let winner = contenders[0];
-    for (const contender of contenders.slice(1)) {
-      if ((contender.result.roll ?? 0) > (winner.result.roll ?? 0)) winner = contender;
-    }
-    const winnerMeta = this.players.get(winner.pid);
-    const winnerName = winnerMeta?.name ?? 'Unknown';
-    for (const pid of roll.candidates) {
-      this.emit({
-        type: 'loot',
-        text: `${winnerName} wins ${roll.itemName} (${winner.result.roll ?? 0})`,
-        pid,
-      });
-    }
-    this.addItem(roll.itemId, 1, winner.pid);
-  }
-
-  private returnLootRollItemToCorpse(roll: PendingLootRoll): void {
-    const mob = this.entities.get(roll.mobId);
-    if (!mob?.dead) return;
-    if (!mob.loot) mob.loot = { copper: 0, items: [] };
-    const existing = mob.loot.items.find(
-      (slot) => slot.openToAll && slot.itemId === roll.itemId && !slot.personalFor,
-    );
-    if (existing) existing.count += 1;
-    else mob.loot.items.push({ itemId: roll.itemId, count: 1, openToAll: true });
-    mob.lootable = true;
+    resolveLootRollImpl(this.ctx, roll);
   }
 
   private lootSlotVisibleTo(slot: LootSlot, pid: number): boolean {
-    return slot.openToAll || !slot.personalFor || slot.personalFor.includes(pid);
-  }
-
-  private hasPendingLootRollForMob(mobId: number): boolean {
-    return [...this.pendingLootRolls.values()].some((roll) => roll.mobId === mobId);
+    return lootSlotVisibleToImpl(slot, pid);
   }
 
   private pruneCorpseLoot(mob: Entity): void {
-    if (!mob.loot) return;
-    mob.loot.items = mob.loot.items.filter(
-      (s) => s.count > 0 && (!s.personalFor || s.personalFor.length > 0),
-    );
-    if (mob.loot.copper <= 0 && mob.loot.items.length === 0) {
-      if (this.hasPendingLootRollForMob(mob.id)) {
-        mob.loot = null;
-        mob.lootable = true;
-        mob.corpseTimer = Math.max(mob.corpseTimer, LOOT_ROLL_TIMEOUT + 2);
-        return;
-      }
-      mob.loot = null;
-      mob.lootable = false;
-      mob.corpseTimer = Math.min(mob.corpseTimer, 4);
-    }
+    pruneCorpseLootImpl(this.ctx, mob);
   }
 
   // -------------------------------------------------------------------------

@@ -12,6 +12,7 @@
 //  - arena + fiesta:           arena_1v1, fiesta
 //  - delve + lockpick:         delve_lockpick
 //  - loot roll:                solo_warrior (death->rollLoot), party_loot (need/greed)
+//  - loot distribution (L1):   l1_loot_distribution (fair-split remainder draw, need/greed/pass, personal/looter-takes-all)
 //
 // All drives are MOVE-safe: they only call public Sim methods + the documented
 // internal plumbing the existing tests use (createMob/addEntity, dealDamage,
@@ -1106,6 +1107,94 @@ function partyLoot(): Scenario {
         sim.submitLootRoll(rollEv.rollId, 'need', a);
         sim.submitLootRoll(rollEv.rollId, 'need', b);
       }
+      rec.tick(2);
+    },
+  };
+}
+
+// L1 loot distribution: a 3-member party loots a tagged corpse carrying copper
+// plus item slots, exercising every distribution path the loot slice owns:
+//  - fair-split currency with a NON-ZERO remainder (100 over 3) so the
+//    tryAwardCopperByFairSplit Fisher-Yates draw (rng.int(i, len-1)) FIRES -- the
+//    one shared-stream draw no other scenario hits;
+//  - two need-greed rolls on the premium item: one resolved need(a)/greed(b)/pass(c)
+//    in party-member order (need beats greed -> a wins, two rng.int(1,100) draws),
+//    one where everyone passes (returnLootRollItemToCorpse, no draw);
+//  - a common item via looter-takes-all (awardSharedLootItem direct add, no roll);
+//  - a personal slot only b may see (lootSlotVisibleTo skips a, then b claims it).
+// Candidates come from the death-time lootRecipientIds snapshot so the candidate
+// set + order are deterministic without depending on range.
+function l1LootDistribution(): Scenario {
+  return {
+    name: 'l1_loot_distribution',
+    coverage: [
+      'fair-split copper with remainder (Fisher-Yates rng.int draw)',
+      'need/greed/pass roll in party-member order (need beats greed)',
+      'everyone-passes returnLootRollItemToCorpse',
+      'looter-takes-all common item + personal-loot visibility',
+    ],
+    build: () => new Sim({ seed: 1021, playerClass: 'warrior', noPlayer: true }),
+    drive(rec: Recorder) {
+      const sim = rec.sim as AnySim;
+      const a = sim.addPlayer('warrior', 'Aaa');
+      const b = sim.addPlayer('mage', 'Bbb');
+      const c = sim.addPlayer('rogue', 'Ccc');
+      sim.partyInvite(b, a);
+      sim.partyAccept(b);
+      sim.partyInvite(c, a);
+      sim.partyAccept(c);
+      teleport(sim, sim.entities.get(a)!, 20, 20);
+      teleport(sim, sim.entities.get(b)!, 21, 20);
+      teleport(sim, sim.entities.get(c)!, 22, 20);
+      const mob = createMob(sim.nextId++, MOBS.forest_wolf, 2, {
+        x: 20,
+        y: terrainHeight(20, 22, sim.cfg.seed),
+        z: 22,
+      }) as AnyEntity;
+      mob.dead = true;
+      mob.lootable = true;
+      mob.tappedById = a;
+      mob.lootRecipientIds = [a, b, c];
+      mob.loot = {
+        copper: 100,
+        items: [
+          { itemId: 'greyjaw_hide_boots', count: 2 }, // uncommon -> two need-greed rolls
+          { itemId: 'worn_sword', count: 1 }, // common -> looter-takes-all direct add
+          { itemId: 'gnarled_staff', count: 1, personalFor: [b] }, // personal -> only b sees it
+        ],
+      };
+      sim.addEntity(mob);
+      rec.track(mob.id);
+      // a loots: fair-split copper (remainder 1 -> Fisher-Yates draw), starts two
+      // need-greed rolls for the premium item, takes the common item directly, and
+      // is denied the personal slot.
+      sim.lootCorpse(mob.id, a);
+      rec.snapshot('after-loot-a');
+      rec.tick(1);
+      const rollIds = [
+        ...new Set(
+          (rec.allEvents as { type: string; rollId?: number }[])
+            .filter((e) => e.type === 'lootRoll')
+            .map((e) => e.rollId as number),
+        ),
+      ];
+      rec.notes.rollIds = rollIds;
+      // Roll 1: need(a) beats greed(b); c passes -> a wins (two int(1,100) draws).
+      if (rollIds[0] !== undefined) {
+        sim.submitLootRoll(rollIds[0], 'need', a);
+        sim.submitLootRoll(rollIds[0], 'greed', b);
+        sim.submitLootRoll(rollIds[0], 'pass', c);
+      }
+      // Roll 2: everyone passes -> item returns to the corpse as openToAll (no draw).
+      if (rollIds[1] !== undefined) {
+        sim.submitLootRoll(rollIds[1], 'pass', a);
+        sim.submitLootRoll(rollIds[1], 'pass', b);
+        sim.submitLootRoll(rollIds[1], 'pass', c);
+      }
+      rec.snapshot('after-rolls');
+      // b claims the personal slot and the returned-to-corpse openToAll item.
+      sim.lootCorpse(mob.id, b);
+      rec.snapshot('after-loot-b');
       rec.tick(2);
     },
   };
@@ -3147,6 +3236,7 @@ export const SCENARIOS: Scenario[] = [
   delveLockpickFail(),
   partyLoot(),
   partyRaid(),
+  l1LootDistribution(),
   entityRoster(),
   delveDeath(),
   fiestaMidcastKill(),

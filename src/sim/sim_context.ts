@@ -14,6 +14,7 @@
 
 import type { TalentModifiers } from './content/talents';
 import type { DelayedEvent, GroundAoE } from './entity_roster';
+import type { PendingLootRoll } from './loot/loot_roll';
 import type { Rng } from './rng';
 import type {
   ArenaMatch,
@@ -129,6 +130,12 @@ export interface SimContextPrimitives {
   readonly partyInvites: Map<number, { fromPid: number; expires: number }>;
   readonly chatTokens: Map<number, { tokens: number; at: number }>;
   readonly channelSubs: Map<number, Set<JoinableChannel>>;
+  // L1 loot-distribution state. The pending need-greed rolls map is mutated in
+  // place (.set/.delete), so its identity is stable -> read-only view. The roll-id
+  // counter is bumped via `ctx.nextLootRollId++` in startNeedGreedRoll, so it is a
+  // read-write primitive (get + set). Backing fields stay on Sim.
+  readonly pendingLootRolls: Map<number, PendingLootRoll>;
+  nextLootRollId: number;
 }
 
 // Cross-system callbacks. Each signature mirrors the still-on-`Sim` method it
@@ -610,6 +617,15 @@ export function createSimContext(host: SimContextHost): SimContext {
     },
     get channelSubs() {
       return host.channelSubs;
+    },
+    get pendingLootRolls() {
+      return host.pendingLootRolls;
+    },
+    get nextLootRollId() {
+      return host.nextLootRollId;
+    },
+    set nextLootRollId(v) {
+      host.nextLootRollId = v;
     },
     emit: host.emit,
     error: host.error,

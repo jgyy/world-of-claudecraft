@@ -246,6 +246,19 @@ describe('coverage: each scenario fires its subsystem', () => {
     expect(logs.some((t) => t.includes('has disbanded'))).toBe(true);
   });
 
+  it('l1_loot_distribution: fair-split copper splits to every member, a roll resolves, everyone-passes returns to corpse', () => {
+    const rec = run('l1_loot_distribution');
+    const evs = rec.allEvents as Ev[];
+    // Fair-split copper reached more than just the looter (remainder shuffle ran).
+    const looters = evs.filter((e) => e.type === 'loot' && /You loot/.test(String(e.text)));
+    expect(new Set(looters.map((e) => e.pid)).size).toBeGreaterThan(1);
+    // A need/greed roll was offered and one resolved with a winner.
+    expect(evs.some((e) => e.type === 'lootRoll')).toBe(true);
+    expect(evs.some((e) => e.type === 'loot' && / wins /.test(String(e.text)))).toBe(true);
+    // The everyone-passes branch fired (item returned to the corpse).
+    expect(evs.some((e) => e.type === 'loot' && /Everyone passed/.test(String(e.text)))).toBe(true);
+  });
+
   it('entity_roster: both despawn branches drop, delayed drain runs, graveyard release at full hp', () => {
     const rec = run('entity_roster');
     const ents = entities(rec);

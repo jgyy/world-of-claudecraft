@@ -180,6 +180,8 @@ function makeCtx() {
     delveModuleEntry: vi.fn(() => ({ x: 0, y: 0, z: 0 })),
     failDelveRun: vi.fn(),
     duels: new Map(),
+    pendingLootRolls: new Map(),
+    nextLootRollId: 1,
     grantXp: vi.fn(),
     enterCombat: vi.fn(),
     hexOutputMult: vi.fn(() => 1),

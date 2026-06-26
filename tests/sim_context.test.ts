@@ -235,6 +235,8 @@ function makeFakeHost() {
     partyInvites: new Map(),
     chatTokens: new Map(),
     channelSubs: new Map(),
+    pendingLootRolls: new Map(),
+    nextLootRollId: 1,
     emit: vi.fn(),
     error: vi.fn(),
     dealDamage: vi.fn(),
