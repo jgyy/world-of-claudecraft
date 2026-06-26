@@ -727,7 +727,14 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
       const body = await readBody(req);
       if (!(await passesTurnstile(req, body)))
         return json(res, 403, { error: 'verification failed, please try again' });
-      const username = typeof body.username === 'string' ? body.username : '';
+      // Gate the username through the same shape check registration enforces
+      // BEFORE it keys the per-account throttle map. A username that can't match
+      // the shape can never match a real account (register requires it), so
+      // collapse it to the empty sentinel: this skips authThrottled/findAccount/
+      // recordAuthFailure entirely, keeping an attacker from bloating the O(n)
+      // authFailures map with arbitrarily long, distinct keys.
+      const rawUsername = typeof body.username === 'string' ? body.username : '';
+      const username = validUsernameShape(rawUsername) ? rawUsername : '';
       // Per-account brute-force throttle (#93). The message is identical to a
       // bad-password response so it never reveals whether the account exists.
       if (username && authThrottled(username)) {

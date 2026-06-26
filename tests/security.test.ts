@@ -5,7 +5,14 @@ import { join } from 'node:path';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { buildWebSocketAuthMessage, buildWebSocketUrl } from '../src/net/online';
 import { Sim } from '../src/sim/sim';
-import { normalizeCharName, offensiveName, offensiveUsername, validCharName, validUsername } from '../server/auth';
+import {
+  normalizeCharName,
+  offensiveName,
+  offensiveUsername,
+  validCharName,
+  validUsername,
+  validUsernameShape,
+} from '../server/auth';
 import {
   rateLimited,
   requestIp,
@@ -375,6 +382,40 @@ describe('per-account failed-login throttle (#93)', () => {
 
     // MAX_TRACKED_IPS is 10_000; allow a small margin for the just-recorded entry.
     expect(authFailureCount()).toBeLessThanOrEqual(10_001);
+  });
+
+  // Mirrors the login gate in server/main.ts: the raw body.username is run
+  // through validUsernameShape BEFORE it keys the throttle map, collapsing
+  // anything that can't be a real account to the empty sentinel (which short
+  // circuits authThrottled/findAccount/recordAuthFailure). Register already
+  // enforced the shape; login must too, or an attacker can flood the O(n)
+  // authFailures map with arbitrarily long, distinct keys.
+  const loginUsernameKey = (raw: unknown): string => {
+    const s = typeof raw === 'string' ? raw : '';
+    return validUsernameShape(s) ? s : '';
+  };
+
+  it('rejects unbounded/malformed login usernames before they key the throttle map', () => {
+    // Each of these can never match a registered account, so the gate must drop
+    // it to '' rather than letting it become a map key.
+    expect(loginUsernameKey('a'.repeat(5000))).toBe(''); // overlong (> 24)
+    expect(loginUsernameKey('a'.repeat(25))).toBe(''); // one past the 24 ceiling
+    expect(loginUsernameKey('ab')).toBe(''); // under the 3-char floor
+    expect(loginUsernameKey('bad name!')).toBe(''); // illegal chars
+    expect(loginUsernameKey(12345)).toBe(''); // non-string body field
+    // A legitimately shaped username passes through untouched.
+    expect(loginUsernameKey('Valid_User1')).toBe('Valid_User1');
+  });
+
+  it('keeps a flood of oversized login usernames out of the throttle map', () => {
+    // Without the gate, each distinct giant username becomes its own map entry,
+    // bloating memory and the per-call O(n) eviction scan. The gate funnels them
+    // all to '', which the route never records.
+    for (let i = 0; i < 2000; i++) {
+      const key = loginUsernameKey(`${'x'.repeat(4096)}_${i}`);
+      if (key) recordAuthFailure(key);
+    }
+    expect(authFailureCount()).toBe(0);
   });
 });
 
