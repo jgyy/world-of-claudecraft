@@ -16,7 +16,9 @@ import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
 import { BROWSER_PATH } from './browser_path.mjs';
 
-const URL = process.env.GAME_URL ?? 'http://localhost:5173';
+// Low tier makes the seam obvious: coarse far-band spacing (6.5u) sags ~4u under
+// the chord, vs ~1.5u on high. Force it so the before/after reads at a glance.
+const URL = (process.env.GAME_URL ?? 'http://localhost:5173') + '?gfx=low';
 const TAG = process.env.TAG ?? 'after';
 fs.mkdirSync('tmp', { recursive: true });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -39,9 +41,9 @@ await page.evaluate(() => {
   const el = document.querySelector('#offline-select .mini-class[data-class="mage"]');
   if (el) el.click();
 });
-await page.click('#btn-start-offline');
+await page.evaluate(() => document.querySelector('#btn-start-offline').click());
 await page.waitForFunction(() => window.__game && window.__game.sim && window.__game.sim.player,
-  { timeout: 90000 });
+  { timeout: 150000 });
 await sleep(800);
 
 const staged = await page.evaluate(async () => {
@@ -53,51 +55,91 @@ const staged = await page.evaluate(async () => {
   const p = sim.player;
   const gh = (x, z) => w.groundHeight(x, z, seed);
 
-  // The first zone-boundary ridge crest, off to the side of the central pass
-  // where the wall is tall (the worst chord-sag point from the unit test).
-  const ridgeZ = d.ZONES[0].zMax;
+  // Replicate terrain.ts bandIndexAt + chunk grid so we can find a real LOD
+  // boundary (where two chunks of different vertex spacing meet) that lands on
+  // the steep zone-boundary ridge: that exact seam is where the crack shows.
+  const CHUNK = 60;
+  const bandsLow = [95, 185, Infinity]; // maxHubDist edges (low tier)
+  const hubs = d.ZONES.map((zn) => zn.hub);
+  const WMINZ = d.WORLD_MIN_Z, WMAXZ = d.WORLD_MAX_Z, WMAXX = d.WORLD_MAX_X;
+  const worldDepth = WMAXZ - WMINZ;
+  const chunksX = Math.ceil((WMAXX * 2) / CHUNK);
+  const chunksZ = Math.ceil(worldDepth / CHUNK);
+  const bandIdx = (cx, cz) => {
+    const ccx = -WMAXX + cx * CHUNK + CHUNK / 2;
+    const ccz = WMINZ + cz * CHUNK + CHUNK / 2;
+    let hd = Infinity;
+    for (const h of hubs) hd = Math.min(hd, Math.hypot(ccx - h.x, ccz - h.z));
+    const i = bandsLow.findIndex((e) => hd <= e);
+    return i === -1 ? bandsLow.length - 1 : i;
+  };
+  const grad = (x, z) => Math.hypot(gh(x + 1, z) - gh(x - 1, z), gh(x, z + 1) - gh(x, z - 1)) / 2;
+
+  // Find the globally steepest VERTICAL chunk boundary (constant x) with a LOD
+  // jump, above water: the deepest chord sag, the most visible crack.
   let best = null;
-  for (let x = 20; x <= 160; x += 1) {
-    for (let dz = -8; dz <= 8; dz += 1) {
-      const z = ridgeZ + dz;
-      const h = gh(x, z);
-      // local convexity along x at this crest (what the chord sags under)
-      const sag = h - 0.5 * (gh(x - 3.5, z) + gh(x + 3.5, z));
-      if (!best || sag > best.sag) best = { x, z, h, sag };
+  for (let cx = 1; cx < chunksX; cx++) {
+    const bx = -WMAXX + cx * CHUNK;
+    if (Math.abs(bx) < CHUNK) continue; // skip the central pass
+    for (let cz = 0; cz < chunksZ; cz++) {
+      const jump = Math.abs(bandIdx(cx - 1, cz) - bandIdx(cx, cz));
+      if (jump === 0) continue;
+      const cz0 = WMINZ + cz * CHUNK;
+      for (let z = cz0 + 4; z < cz0 + CHUNK; z += 4) {
+        if (gh(bx, z) < 2) continue;
+        const gr = grad(bx, z);
+        const score = jump * 4 + gr;
+        if (!best || score > best.score) best = { bx, z, jump, gr, score };
+      }
     }
   }
 
-  // The seam runs ALONG x at constant z (the ridge latitude), so to read it as
-  // a long receding line (as in the report) the camera looks DOWN the ridge
-  // (+x), grazing the crest, not into the wall. Stand on the crest a touch
-  // downhill so the wall surface beyond stays in view.
-  const px = best.x, pz = best.z - 2;
-  p.pos.x = px; p.pos.z = pz; p.pos.y = gh(px, pz);
-  const r = g.renderer;
-  const yaw = Math.PI / 2; // look toward +x, along the ridge
-  p.facing = yaw;
-  r.camYaw = yaw;
-  r.camPitch = 0.04; // low, grazing angle
-  r.camDist = 10;
-
-  // god-mode so ridge mobs don't kill the camera, and pin the player so a few
-  // frames of input/AI cannot drift the framing.
+  // god-mode so mobs don't kill the camera; pin the player and drive the camera
+  // from g.__seamCam so the Node side can sweep angles without restaging.
   p.hp = p.maxHp = 100000;
+  g.__seamGh = (x, z) => gh(x, z);
+  g.__seamBest = best;
+  g.__seamCam = { px: best.bx, pz: best.z - 16, yaw: 0, pitch: 0.18, dist: 8 };
   if (!g.__seamHooked) {
     g.__seamHooked = true;
+    const r = g.renderer;
     const origSync = r.sync.bind(r);
     r.sync = (...args) => {
-      p.pos.x = px; p.pos.z = pz; p.pos.y = gh(px, pz);
-      p.facing = yaw;
+      const c = g.__seamCam;
+      p.pos.x = c.px; p.pos.z = c.pz; p.pos.y = g.__seamGh(c.px, c.pz);
+      p.facing = c.yaw;
+      r.camYaw = c.yaw; r.camPitch = c.pitch; r.camDist = c.dist;
       origSync(...args);
     };
   }
-  return { ok: true, best, px, pz };
+  return { ok: true, best };
 });
 console.log('staged:', JSON.stringify(staged));
 if (!staged.ok) { await browser.close(); process.exit(1); }
 
-await sleep(1200); // let camera/terrain settle
-await page.screenshot({ path: `tmp/terrain-seam-${TAG}.png` });
-console.log(`wrote tmp/terrain-seam-${TAG}.png`);
+// Sweep camera presets around the boundary point so one run yields a contact
+// sheet; pick the revealing angle and lock it for the final before/after.
+const presets = [
+  { dz: -16, yaw: 0, pitch: 0.18, dist: 8 },          // S, look N, grazing down
+  { dz: -9, yaw: 0, pitch: 0.05, dist: 5 },           // S, near-horizontal, close
+  { dz: 16, yaw: Math.PI, pitch: 0.18, dist: 8 },     // N, look S, grazing down
+  { dz: 9, yaw: Math.PI, pitch: 0.05, dist: 5 },      // N, near-horizontal, close
+  { dz: -24, yaw: 0, pitch: 0.34, dist: 12 },         // S, high, look down
+  { dx: -9, yaw: Math.PI / 2, pitch: 0.08, dist: 6 }, // look along +x (down boundary)
+];
+const only = process.env.FRAME != null ? [Number(process.env.FRAME)] : presets.map((_, i) => i);
+for (const i of only) {
+  const c = presets[i];
+  await page.evaluate((c) => {
+    const b = window.__game.__seamBest;
+    window.__game.__seamCam = {
+      px: b.bx + (c.dx ?? 0), pz: b.z + (c.dz ?? 0),
+      yaw: c.yaw, pitch: c.pitch, dist: c.dist,
+    };
+  }, c);
+  await sleep(700);
+  const out = process.env.FRAME != null ? `tmp/terrain-seam-${TAG}.png` : `tmp/seam-f${i}-${TAG}.png`;
+  await page.screenshot({ path: out });
+  console.log('wrote', out);
+}
 await browser.close();
