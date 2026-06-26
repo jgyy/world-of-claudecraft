@@ -24,6 +24,11 @@ private/*
 tmp/
 .codex-research/
 .playwright-mcp/
+# Vitest Browser Mode failure screenshots + attachments (opt-in test:browser suite)
+tests/browser/__screenshots__/
+.vitest-attachments/
+# Mobile safe-area E2E before/after PNG output (scripts/mobile_*_safe_area.mjs)
+screenshots/
 
 # i18n release-fill worklist (generated; regenerate via `npm run i18n:worklist`)
 docs/i18n-scaling/worklist/

@@ -26,6 +26,7 @@
     "ci:changed": "biome ci --changed --no-errors-on-unmatched",
     "pretest": "npm run i18n:build && npm run i18n:admin && npm run i18n:scan && npm run wiki:content",
     "test": "vitest run",
+    "test:browser": "vitest run --config vitest.browser.config.ts",
     "security:scan": "node scripts/malware_scan.mjs",
     "security:gate": "node scripts/malware_scan.mjs --gate",
     "i18n:build": "node scripts/i18n_build.mjs",
@@ -82,12 +83,16 @@
     "@types/pg": "^8.20.0",
     "@types/three": "^0.165.0",
     "@types/ws": "^8.18.1",
+    "@vitest/browser": "4.1.8",
+    "@vitest/browser-playwright": "4.1.8",
+    "axe-core": "4.12.1",
     "esbuild": "^0.28.1",
     "lightningcss": "1.32.0",
+    "playwright": "1.61.1",
     "puppeteer-core": "^25.1.0",
     "tsx": "^4.22.4",
     "typescript": "^5.5.0",
     "vite": "^8.0.16",
-    "vitest": "^4.1.8"
+    "vitest": "4.1.8"
   }
 }

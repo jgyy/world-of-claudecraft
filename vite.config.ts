@@ -179,6 +179,15 @@ export default defineConfig({
     },
   },
   test: {
-    exclude: ['**/node_modules/**', '**/dist/**', '**/.claude/**'],
+    // The opt-in browser suite (vitest.browser.config.ts, npm run test:browser) must NOT
+    // leak into a bare `vitest run`: exclude its files so the default Node run never imports
+    // the Playwright provider or launches a browser. Cross-engine CI turn-on is P17b.
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/.claude/**',
+      'tests/browser/**',
+      '**/*.browser.test.ts',
+    ],
   },
 });
