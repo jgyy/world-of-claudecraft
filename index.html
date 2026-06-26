@@ -6346,7 +6346,21 @@
   body.mobile-touch .mkt-filters.has-subtype { grid-template-columns: 1fr; }
   body.mobile-touch .mkt-select-btn { min-height: 40px; font-size: 16px; }
   body.mobile-touch .mkt-select-option { min-height: 40px; font-size: 16px; }
-  body.mobile-touch #social-window,
+  /* Each mobile window restates its full geometry (width/left/right/max-width)
+     so it never depends on a shared rule winning the cascade by source order.
+     Keep the two blocks self-contained: editing or reordering one must not
+     silently strip the other's width. */
+  body.mobile-touch #social-window {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: calc(100vw - 20px);
+    box-sizing: border-box;
+    overflow-x: hidden;
+    bottom: 10px;
+    height: min(560px, calc(100vh - 20px));
+  }
   body.mobile-touch #trade-window {
     position: fixed;
     left: 10px;
@@ -6355,12 +6369,6 @@
     max-width: calc(100vw - 20px);
     box-sizing: border-box;
     overflow-x: hidden;
-  }
-  body.mobile-touch #social-window {
-    bottom: 10px;
-    height: min(560px, calc(100vh - 20px));
-  }
-  body.mobile-touch #trade-window {
     top: 10px;
     transform: none;
     max-height: calc(100vh - 20px);
