@@ -2893,6 +2893,10 @@ export class Sim {
         'hit',
         false,
         threatOpts,
+        // Recurring ground-AoE ticks (Consecration, Rain of Fire, ...) are
+        // periodic, not a direct attack: like a DoT they must not walk a mob's
+        // leash anchor. The initial cast hit (effect_dispatch) stays direct.
+        false,
       );
     }
   }
@@ -3323,6 +3327,7 @@ export class Sim {
     kind: 'hit' | 'miss' | 'dodge',
     noRage = false,
     threatOpts?: { flat?: number; mult?: number },
+    direct = true,
   ): void {
     dealDamageImpl(
       this.ctx,
@@ -3335,6 +3340,7 @@ export class Sim {
       kind,
       noRage,
       threatOpts,
+      direct,
     );
   }
 

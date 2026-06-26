@@ -173,6 +173,7 @@ export interface SimContextCallbacks {
     kind: 'hit' | 'miss' | 'dodge',
     noRage?: boolean,
     threatOpts?: { flat?: number; mult?: number },
+    direct?: boolean,
   ): void;
   handleDeath(entity: Entity, killer: Entity | null): void;
   cancelCast(entity: Entity): void;
