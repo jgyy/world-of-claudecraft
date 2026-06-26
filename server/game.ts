@@ -78,6 +78,7 @@ import { SocialService } from './social';
 import { PgSocialDb } from './social_db';
 import { TickProfiler } from './tick_profiler';
 import { holderInfoForPubkey } from './woc_balance';
+import { isBackpressureExceeded } from './ws_backpressure';
 
 const WORLD_SEED = 20061;
 const ALDRIC_METEOR_QUEST_ID = 'q_aldrics_fallen_star';
@@ -3642,8 +3643,23 @@ export class GameServer {
   }
 
   private sendRaw(session: ClientSession, payload: string): void {
-    if (session.ws.readyState === 1) {
-      session.ws.send(payload);
+    if (session.ws.readyState !== 1) return;
+    // A client that has stopped draining its socket lets ws.bufferedAmount grow
+    // without bound (send() never blocks); left unchecked one stuck reader OOMs
+    // the process and starves everyone. Terminate the offender instead. close()
+    // would try to flush the already-huge buffer, so destroy the socket: the
+    // 'close' handler funnels into the idempotent leave() for normal cleanup.
+    if (isBackpressureExceeded(session.ws.bufferedAmount)) {
+      if (!session.left) {
+        try {
+          session.ws.terminate();
+        } catch {
+          /* socket already torn down */
+        }
+        void this.leave(session, 'backpressure');
+      }
+      return;
     }
+    session.ws.send(payload);
   }
 }
