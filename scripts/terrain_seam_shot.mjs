@@ -16,9 +16,13 @@ import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
 import { BROWSER_PATH } from './browser_path.mjs';
 
-// Low tier makes the seam obvious: coarse far-band spacing (6.5u) sags ~4u under
-// the chord, vs ~1.5u on high. Force it so the before/after reads at a glance.
-const URL = (process.env.GAME_URL ?? 'http://localhost:5173') + '?gfx=low';
+// High tier to match the live client where the seam was reported. GFX override
+// via GFX env (e.g. GFX=low). The report's HUD coords land on a LOD boundary.
+const URL = (process.env.GAME_URL ?? 'http://localhost:5173')
+  + (process.env.GFX ? `?gfx=${process.env.GFX}` : '');
+// Anchor on the Mirefen/Thornpeak ridge crest (z=540) near the reported x, the
+// mountain wall the bug screenshot looks NW toward. Override with AX/AZ.
+const ANCHOR = { x: Number(process.env.AX ?? 110), z: Number(process.env.AZ ?? 540) };
 const TAG = process.env.TAG ?? 'after';
 fs.mkdirSync('tmp', { recursive: true });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -46,7 +50,7 @@ await page.waitForFunction(() => window.__game && window.__game.sim && window.__
   { timeout: 150000 });
 await sleep(800);
 
-const staged = await page.evaluate(async () => {
+const staged = await page.evaluate(async (ANCHOR) => {
   const w = await import('/src/sim/world.ts');
   const d = await import('/src/sim/data.ts');
   const g = window.__game;
@@ -75,24 +79,10 @@ const staged = await page.evaluate(async () => {
   };
   const grad = (x, z) => Math.hypot(gh(x + 1, z) - gh(x - 1, z), gh(x, z + 1) - gh(x, z - 1)) / 2;
 
-  // Find the globally steepest VERTICAL chunk boundary (constant x) with a LOD
-  // jump, above water: the deepest chord sag, the most visible crack.
-  let best = null;
-  for (let cx = 1; cx < chunksX; cx++) {
-    const bx = -WMAXX + cx * CHUNK;
-    if (Math.abs(bx) < CHUNK) continue; // skip the central pass
-    for (let cz = 0; cz < chunksZ; cz++) {
-      const jump = Math.abs(bandIdx(cx - 1, cz) - bandIdx(cx, cz));
-      if (jump === 0) continue;
-      const cz0 = WMINZ + cz * CHUNK;
-      for (let z = cz0 + 4; z < cz0 + CHUNK; z += 4) {
-        if (gh(bx, z) < 2) continue;
-        const gr = grad(bx, z);
-        const score = jump * 4 + gr;
-        if (!best || score > best.score) best = { bx, z, jump, gr, score };
-      }
-    }
-  }
+  // Anchor at the reported location and look NW (as in the bug screenshot). Use
+  // the anchor directly as the focus point; it sits on a LOD band boundary.
+  const best = { bx: ANCHOR.x, z: ANCHOR.z, jump: 0, gr: grad(ANCHOR.x, ANCHOR.z), score: 0 };
+  void chunksX; void chunksZ; void bandIdx; // (kept for reference)
 
   // god-mode so mobs don't kill the camera; pin the player and drive the camera
   // from g.__seamCam so the Node side can sweep angles without restaging.
@@ -113,19 +103,22 @@ const staged = await page.evaluate(async () => {
     };
   }
   return { ok: true, best };
-});
+}, ANCHOR);
 console.log('staged:', JSON.stringify(staged));
 if (!staged.ok) { await browser.close(); process.exit(1); }
 
-// Sweep camera presets around the boundary point so one run yields a contact
-// sheet; pick the revealing angle and lock it for the final before/after.
+// Sweep camera presets around the anchor, mostly looking NW (yaw -pi/4) as in
+// the bug screenshot, at grazing angles; one run yields a contact sheet.
+// Stand in the Mirefen valley SOUTH of the ridge crest and look N/NW at the
+// mountain wall (matching the report), at gameplay camera angles.
+const N = 0, NW = -Math.PI / 4;
 const presets = [
-  { dz: -16, yaw: 0, pitch: 0.18, dist: 8 },          // S, look N, grazing down
-  { dz: -9, yaw: 0, pitch: 0.05, dist: 5 },           // S, near-horizontal, close
-  { dz: 16, yaw: Math.PI, pitch: 0.18, dist: 8 },     // N, look S, grazing down
-  { dz: 9, yaw: Math.PI, pitch: 0.05, dist: 5 },      // N, near-horizontal, close
-  { dz: -24, yaw: 0, pitch: 0.34, dist: 12 },         // S, high, look down
-  { dx: -9, yaw: Math.PI / 2, pitch: 0.08, dist: 6 }, // look along +x (down boundary)
+  { dz: -55, yaw: N, pitch: 0.16, dist: 9 },   // valley, look N at the wall
+  { dz: -55, yaw: NW, pitch: 0.16, dist: 9 },  // look NW (as reported)
+  { dz: -40, yaw: N, pitch: 0.10, dist: 8 },   // closer, flatter
+  { dz: -75, yaw: N, pitch: 0.22, dist: 11 },  // farther back, more sky
+  { dz: -55, yaw: NW, pitch: 0.08, dist: 8 },  // NW, grazing
+  { dz: -55, yaw: 0.4, pitch: 0.16, dist: 9 }, // pan NE
 ];
 const only = process.env.FRAME != null ? [Number(process.env.FRAME)] : presets.map((_, i) => i);
 for (const i of only) {
