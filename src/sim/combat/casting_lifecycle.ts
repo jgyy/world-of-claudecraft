@@ -28,13 +28,13 @@
 // tests/architecture.test.ts.
 
 import { ITEMS, MOBS } from '../data';
+import { isBehindTarget, withinMeleeArc } from '../positional';
 import { scheduleProjectile } from '../projectile_travel';
 import type { PlayerMeta, ResolvedAbility } from '../sim';
 import type { SimContext } from '../sim_context';
 import { abilityScalingPower, channelTickBonus } from '../spell_scaling';
 import type { AbilityDef, Entity } from '../types';
 import {
-  angleTo,
   CAST_COMPLETE_EPS,
   CAST_PUSHBACK_SEC,
   CHANNEL_PUSHBACK_FRACTION,
@@ -44,7 +44,6 @@ import {
   FISHING_CAST_ID,
   MELEE_ARC,
   MELEE_RANGE,
-  normAngle,
 } from '../types';
 import { isLockedOut, isSilenced, isStunned, tonguesMult } from './cc';
 import { isSpellResisted } from './spell_resist';
@@ -284,8 +283,7 @@ export function castAbility(ctx: SimContext, abilityId: string, pid?: number): v
       ctx.error(p.id, 'Line of sight.');
       return;
     }
-    const facingDiff = Math.abs(normAngle(angleTo(p.pos, target.pos) - p.facing));
-    if (facingDiff > MELEE_ARC) {
+    if (!withinMeleeArc(p.facing, p.pos, target.pos, MELEE_ARC)) {
       ctx.error(p.id, 'You must be facing your target.');
       return;
     }
@@ -306,8 +304,10 @@ export function castAbility(ctx: SimContext, abilityId: string, pid?: number): v
           ctx.error(p.id, 'You must wield a dagger.');
           return;
         }
-        const behindDiff = Math.abs(normAngle(angleTo(target.pos, p.pos) - target.facing));
-        if (behindDiff < Math.PI / 2) {
+        // `target.facing` is forgeable for a player target; see positional.ts.
+        // This gate is a bonus-ability requirement layered on top of the real
+        // server gates (range + a live hostile target), never a hittability gate.
+        if (!isBehindTarget(target.facing, target.pos, p.pos)) {
           ctx.error(p.id, 'You must be behind your target.');
           return;
         }

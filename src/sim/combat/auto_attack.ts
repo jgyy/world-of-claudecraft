@@ -28,19 +28,18 @@
 // `ctx.rng` stream, drawn in the exact pre-move positions.
 
 import { CLASSES, MOBS } from '../data';
+import { withinMeleeArc } from '../positional';
 import { scheduleProjectile } from '../projectile_travel';
 import type { PlayerMeta } from '../sim';
 import type { SimContext } from '../sim_context';
 import { addThreat } from '../threat';
 import {
-  angleTo,
   armorReduction,
   DT,
   dist2d,
   type Entity,
   MELEE_ARC,
   MELEE_RANGE,
-  normAngle,
   swingMissChance,
 } from '../types';
 import { spendResource } from './casting_lifecycle';
@@ -98,8 +97,7 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
   if (isStunned(p)) return;
   if (isDisarmed(p)) return; // weapon knocked away: no auto-attack swings
   const d = dist2d(p.pos, t.pos);
-  const facingDiff = Math.abs(normAngle(angleTo(p.pos, t.pos) - p.facing));
-  if (facingDiff > MELEE_ARC) return;
+  if (!withinMeleeArc(p.facing, p.pos, t.pos, MELEE_ARC)) return;
 
   // ranged auto-attack: hunters (auto shot, dead zone inside minRange) and
   // casters (wand-style, no dead zone so they don't run into melee — #94)
