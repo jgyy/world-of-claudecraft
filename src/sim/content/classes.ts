@@ -800,7 +800,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   aspect_of_the_hawk: {
     id: 'aspect_of_the_hawk', name: 'Aspect of the Hawk', class: 'hunter', learnLevel: 4,
     cost: 20, castTime: 0, cooldown: 0, range: 0, school: 'nature',
-    requiresTarget: false,
+    requiresTarget: false, exclusiveGroup: 'aspect',
     effects: [{ type: 'selfBuff', kind: 'buff_ap', value: 20, duration: 1800 }],
     ranks: [
       { rank: 2, level: 12, cost: 30, effects: [{ type: 'selfBuff', kind: 'buff_ap', value: 35, duration: 1800 }] },
@@ -855,14 +855,14 @@ export const ABILITIES: Record<string, AbilityDef> = {
   aspect_of_the_monkey: {
     id: 'aspect_of_the_monkey', name: 'Aspect of the Monkey', class: 'hunter', learnLevel: 10,
     cost: 20, castTime: 0, cooldown: 0, range: 0, school: 'nature',
-    requiresTarget: false,
+    requiresTarget: false, exclusiveGroup: 'aspect',
     effects: [{ type: 'selfBuff', kind: 'buff_dodge', value: 0.08, duration: 1800 }],
     description: 'Take on the aspect of the monkey, increasing your dodge chance by 8% for 30 min.',
   },
   aspect_of_the_cheetah: {
     id: 'aspect_of_the_cheetah', name: 'Aspect of the Cheetah', class: 'hunter', learnLevel: 14,
     cost: 20, castTime: 0, cooldown: 0, range: 0, school: 'nature',
-    requiresTarget: false,
+    requiresTarget: false, exclusiveGroup: 'aspect',
     effects: [{ type: 'selfBuff', kind: 'buff_speed', value: 1.3, duration: 1800 }],
     description: 'Take on the aspect of the cheetah, increasing movement speed by 30% for 30 min.',
   },

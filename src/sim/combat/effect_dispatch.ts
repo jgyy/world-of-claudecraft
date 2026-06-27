@@ -15,8 +15,10 @@
 // `src/sim`-pure: no DOM/Three, no Math.random/Date.now; all randomness is the
 // shared `ctx.rng` stream, drawn in the exact pre-move order.
 
+import { ABILITIES } from '../data';
 import { recalcPlayerStats } from '../entity';
 import type { GroundAoE } from '../entity_roster';
+import { exclusiveAuraConflicts } from './exclusive_aura';
 import type { PlayerMeta, ResolvedAbility } from '../sim';
 import type { SimContext } from '../sim_context';
 import { addThreat } from '../threat';
@@ -504,6 +506,18 @@ export function runEffects(
               ctx.emit({ type: 'aura', targetId: p.id, name: a.name, gained: false });
             }
           }
+        }
+        // Mutually exclusive self-buff group (hunter aspects): casting one cancels
+        // any active sibling so only one in the group is ever up at a time.
+        for (const i of exclusiveAuraConflicts(
+          ability.exclusiveGroup,
+          ability.id,
+          p.auras,
+          (id) => ABILITIES[id]?.exclusiveGroup,
+        )) {
+          const a = p.auras[i];
+          p.auras.splice(i, 1);
+          ctx.emit({ type: 'aura', targetId: p.id, name: a.name, gained: false });
         }
         ctx.applyAura(p, {
           id: ability.id,
