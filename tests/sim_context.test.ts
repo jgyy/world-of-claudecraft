@@ -86,6 +86,7 @@ const CALLBACK_KEYS = [
   'delveModuleEntry',
   'failDelveRun',
   'pulseGroundAoE',
+  'clearGroundAoEsFrom',
   // C1 damage-core surface.
   'grantXp',
   'enterCombat',
@@ -328,6 +329,7 @@ function makeFakeHost() {
     delveModuleEntry: vi.fn(() => ({ x: 0, y: 0, z: 0 })),
     failDelveRun: vi.fn(),
     pulseGroundAoE: vi.fn(),
+    clearGroundAoEsFrom: vi.fn(),
     grantXp: vi.fn(),
     enterCombat: vi.fn(),
     hexOutputMult: vi.fn(() => 1),

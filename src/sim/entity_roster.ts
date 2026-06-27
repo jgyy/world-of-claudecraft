@@ -152,6 +152,18 @@ export function tickGroundAoEs(ctx: SimContext): void {
   }
 }
 
+// Drop every ground-AoE field cast by this source. A GroundAoE stores a FIXED cast
+// position but resolves hostility through the live source entity, so a caster who
+// leaves the field's frame of reference (zone change / dungeon enter+leave / arena
+// teleport / death-respawn) would otherwise keep pulsing damage and kill credit at a
+// spot they have since left (#consecration-zone). Called at each warp site; the
+// per-tick drain (tickGroundAoEs) handles normal expiry.
+export function clearGroundAoEsFromSource(ctx: SimContext, sourceId: number): void {
+  for (let i = ctx.groundAoEs.length - 1; i >= 0; i--) {
+    if (ctx.groundAoEs[i].sourceId === sourceId) ctx.groundAoEs.splice(i, 1);
+  }
+}
+
 // -------------------------------------------------------------------------
 // Player death / respawn
 // -------------------------------------------------------------------------
@@ -167,6 +179,7 @@ export function releasePlayerSpirit(ctx: SimContext, pid?: number): void {
     return;
   }
   p.dead = false;
+  clearGroundAoEsFromSource(ctx, p.id); // respawn warps the spirit away; don't leave an orphan field
   // dying in a dungeon sends you to the graveyard of the zone its door is
   // in; dying outdoors, to your current zone's graveyard
   const dungeon = dungeonAt(p.pos.x);
@@ -202,6 +215,7 @@ export function releaseSpiritInDelve(ctx: SimContext, pid: number): void {
   }
   const p = r.e;
   p.dead = false;
+  clearGroundAoEsFromSource(ctx, p.id); // delve respawn warps to the module entry; drop the old field
   const entry = ctx.delveModuleEntry(run);
   p.pos = entry;
   p.prevPos = { ...entry };

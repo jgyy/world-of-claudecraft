@@ -117,6 +117,7 @@ import {
 } from './entity';
 import {
   addEntityToRoster,
+  clearGroundAoEsFromSource,
   type DelayedEvent,
   drainDelayedEvents,
   dropEntityFromRoster,
@@ -2000,6 +2001,7 @@ export class Sim {
       delveModuleEntry: sim.delveModuleEntry.bind(sim),
       failDelveRun: sim.failDelveRun.bind(sim),
       pulseGroundAoE: sim.pulseGroundAoE.bind(sim),
+      clearGroundAoEsFrom: sim.clearGroundAoEsFrom.bind(sim),
       enterCombat: sim.enterCombat.bind(sim),
       hexOutputMult: sim.hexOutputMult.bind(sim),
       critVulnBonus: sim.critVulnBonus.bind(sim),
@@ -2934,6 +2936,14 @@ export class Sim {
         direct,
       );
     }
+  }
+
+  // Drop a source's ground-AoE fields when it leaves the field's frame of reference
+  // (zone/instance change, teleport, respawn). Body lives in entity_roster.ts (the
+  // ground-AoE lifecycle owner); thin delegate keeps the seam binding and the
+  // server's dev_teleport path resolving on the Sim facade (#consecration-zone).
+  clearGroundAoEsFrom(sourceId: number): void {
+    clearGroundAoEsFromSource(this.ctx, sourceId);
   }
 
   // -------------------------------------------------------------------------

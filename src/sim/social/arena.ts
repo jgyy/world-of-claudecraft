@@ -689,6 +689,7 @@ export function placeInArena(
   origin: { x: number; z: number },
   spawn: { x: number; z: number; facing: number },
 ): void {
+  ctx.clearGroundAoEsFrom(e.id); // arena teleport warps off any field cast outside the bout
   e.pos = ctx.groundPos(origin.x + spawn.x, origin.z + spawn.z);
   e.prevPos = { ...e.pos };
   e.facing = spawn.facing;
@@ -862,6 +863,7 @@ export function returnFromArena(ctx: SimContext, match: ArenaMatch): void {
       }
     }
     resetForArena(ctx, e);
+    ctx.clearGroundAoEsFrom(e.id); // leaving the bout warps you off any field cast in the arena
     e.pos = ctx.groundPos(ret.x, ret.z);
     e.prevPos = { ...e.pos };
     e.facing = ret.facing;

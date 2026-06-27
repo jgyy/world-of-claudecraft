@@ -121,6 +121,7 @@ function makeCtx() {
     error: vi.fn(),
     clearEntityMarker,
     pulseGroundAoE,
+    clearGroundAoEsFrom: vi.fn(),
     dealDamage: vi.fn(),
     handleDeath: vi.fn(),
     cancelCast: vi.fn(),

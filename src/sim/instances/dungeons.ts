@@ -122,6 +122,7 @@ export function enterDungeon(ctx: SimContext, dungeonId: string, pid?: number): 
   }
   const origin = instanceOriginOf(inst);
   const p = r.e;
+  ctx.clearGroundAoEsFrom(p.id); // entering an instance warps you off any field you cast outside
   p.pos = ctx.groundPos(origin.x + dungeon.entry.x, origin.z + dungeon.entry.z);
   p.prevPos = { ...p.pos };
   ctx.rebucket(p);
@@ -180,6 +181,7 @@ export function leaveDungeon(ctx: SimContext, pid?: number): void {
       return;
     }
   }
+  ctx.clearGroundAoEsFrom(p.id); // leaving an instance warps you off any field you cast inside
   p.pos = ctx.groundPos(dungeon.doorPos.x, dungeon.doorPos.z - 4);
   p.prevPos = { ...p.pos };
   ctx.rebucket(p);

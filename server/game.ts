@@ -2603,6 +2603,7 @@ export class GameServer {
           const e = sim.entities.get(pid);
           if (e) {
             const p = sim.groundPos(msg.x, msg.z);
+            sim.clearGroundAoEsFrom(e.id); // teleport warps off any field cast at the old spot
             e.pos = p;
             e.prevPos = { ...p };
             sim.grid.update(e);

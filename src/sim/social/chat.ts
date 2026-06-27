@@ -788,6 +788,7 @@ export function handleDevChat(
     const e = ctx.entities.get(pid);
     if (e) {
       const p = ctx.groundPos(Number(tpM[1]), Number(tpM[2]));
+      ctx.clearGroundAoEsFrom(e.id); // teleport warps off any field cast at the old spot (matches server dev_teleport)
       e.pos = p;
       e.prevPos = { ...p };
       ctx.grid.update(e);

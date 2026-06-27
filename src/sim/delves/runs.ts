@@ -317,6 +317,7 @@ export function enterDelve(ctx: SimContext, delveId: string, tierId: string, pid
   stowPetForDelve(ctx, r.meta.entityId);
   const entry = delveModuleEntry(ctx, run);
   const p = r.e;
+  ctx.clearGroundAoEsFrom(p.id); // entering a delve warps you off any field cast outside
   p.pos = entry;
   p.prevPos = { ...entry };
   ctx.rebucket(p);
@@ -348,6 +349,7 @@ export function leaveDelve(ctx: SimContext, pid?: number): void {
   if (run?.companion) ctx.despawnDelveCompanion(run);
   restorePetFromDelveStash(ctx, r.meta.entityId);
   const p = r.e;
+  ctx.clearGroundAoEsFrom(p.id); // leaving a delve warps you off any field cast inside
   p.pos = ctx.groundPos(delve.doorPos.x, delve.doorPos.z - 4);
   p.prevPos = { ...p.pos };
   ctx.rebucket(p);
@@ -536,6 +538,7 @@ export function ejectToDelveDoor(ctx: SimContext, pid: number, delve: DelveDef):
   if (!r) return;
   const p = r.e;
   p.dead = false;
+  ctx.clearGroundAoEsFrom(p.id); // ejecting to the door warps you off any field cast in the module
   p.pos = ctx.groundPos(delve.doorPos.x, delve.doorPos.z - 4);
   p.prevPos = { ...p.pos };
   ctx.rebucket(p);
@@ -863,6 +866,7 @@ export function advanceDelveModule(ctx: SimContext, run: DelveRun): void {
   for (const pid of members) {
     const p = ctx.entities.get(pid);
     if (!p || p.dead) continue;
+    ctx.clearGroundAoEsFrom(p.id); // module-to-module travel is a teleport; drop the prior chamber's field
     p.pos = entry;
     p.prevPos = { ...entry };
     ctx.rebucket(p);

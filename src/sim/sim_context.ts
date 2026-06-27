@@ -326,6 +326,11 @@ export interface SimContextCallbacks {
     threatOpts?: { flat?: number; mult?: number },
     direct?: boolean,
   ): void;
+  // Drop every ground-AoE field a source owns when it leaves the field's frame of
+  // reference (zone/instance change, teleport, respawn), so the field can't keep
+  // pulsing at the spot the caster has left (#consecration-zone). Body in
+  // entity_roster.ts (the ground-AoE lifecycle owner).
+  clearGroundAoEsFrom(sourceId: number): void;
 
   // C1 damage core: the post-mitigation damage/death/xp hub the extracted module
   // (src/sim/combat/damage.ts) owns plus the helpers it consumes (all still on Sim
@@ -782,6 +787,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     delveModuleEntry: host.delveModuleEntry,
     failDelveRun: host.failDelveRun,
     pulseGroundAoE: host.pulseGroundAoE,
+    clearGroundAoEsFrom: host.clearGroundAoEsFrom,
     grantXp: host.grantXp,
     enterCombat: host.enterCombat,
     hexOutputMult: host.hexOutputMult,
