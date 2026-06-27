@@ -20,6 +20,7 @@
 
 import { t } from './i18n';
 import { iconDataUrl } from './icons';
+import { attachLongPress } from './long_press';
 import type { PainterHostWriters } from './painter_host';
 import type { PartyFrameMember } from './party_frames';
 import { svgIcon } from './ui_icons';
@@ -53,6 +54,10 @@ export interface PartyRowSlot {
 export interface PartyRowDeps {
   onTarget: (pid: number) => void;
   onContextMenu: (pid: number, name: string, x: number, y: number) => void;
+  // Touch parity: when this returns true (mobile layout), a long-press on the row
+  // opens the same context menu the desktop right-click does. Optional so Node tests
+  // and non-touch builds skip the gesture entirely.
+  isTouch?: () => boolean;
 }
 
 /** A pooled row: its container element, the live slot, the per-row family painter the
@@ -205,6 +210,17 @@ export function createPartyRow(
   row.append(nameRow, hpBar, resBar);
 
   const handlers = partyRowHandlers(slot, deps);
+  // Touch parity: long-press a party member's row to open their menu (invite to raid,
+  // trade, add-friend, ...). Wired BEFORE the click-to-target handler so its
+  // capture-phase click guard runs first and stops the hold from also re-targeting the
+  // member. Reads the LIVE slot, so a recycled row targets its current member.
+  if (deps.isTouch) {
+    attachLongPress(
+      row,
+      (x, y) => deps.onContextMenu(slot.member.pid, slot.member.name, x, y),
+      deps.isTouch,
+    );
+  }
   row.addEventListener('click', handlers.click);
   row.addEventListener('contextmenu', handlers.contextmenu);
   row.addEventListener('keydown', handlers.keydown);

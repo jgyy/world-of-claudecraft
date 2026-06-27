@@ -53,6 +53,9 @@ export interface PartyFramesPainterDeps {
   /** The localized "Leave Party" label, re-read each rebuild so an in-game language
    *  switch re-localizes it (through the elided setText). */
   leaveLabel: () => string;
+  /** Touch parity: when this returns true (mobile layout), a long-press on a member row
+   *  opens its context menu. Optional; threaded into each row's PartyRowDeps. */
+  isTouch?: () => boolean;
 }
 
 export class PartyFramesPainter {
@@ -83,7 +86,11 @@ export class PartyFramesPainter {
     // enough to make row construction Node-safe.
     private readonly doc: Document = document,
   ) {
-    this.rowDeps = { onTarget: deps.onTarget, onContextMenu: deps.onContextMenu };
+    this.rowDeps = {
+      onTarget: deps.onTarget,
+      onContextMenu: deps.onContextMenu,
+      isTouch: deps.isTouch,
+    };
   }
 
   /** Toggle the below-target offset on the container, every frame (cheap and elided),

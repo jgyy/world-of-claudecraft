@@ -1087,7 +1087,7 @@ export const guideStrings = {
     // Parties.
     partyHeading: 'Forming a party',
     partyBody:
-      'Invite another player by right-clicking their name and choosing to invite. A party holds up to five players, and one of you is the leader.',
+      'Invite another player by right-clicking their name (or long-pressing it on a touch screen) and choosing to invite, or with a chat command. A party holds up to five players, and one of you is the leader.',
     partyCredit:
       'Group members near each other share kill and quest credit, so questing together is faster, never slower. A party is also how you step into a dungeon as a team.',
     raidBody:

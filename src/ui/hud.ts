@@ -200,6 +200,7 @@ import { LeaderboardWindow } from './leaderboard_window';
 import { ReannounceMarker } from './live_region_reannounce';
 import { PICK_ACTION_HOTKEYS } from './lockpick_panel';
 import { LockpickWindow } from './lockpick_window';
+import { attachLongPress } from './long_press';
 import { reconcileLootRolls as computeLootRollReconcile } from './loot_roll_reconcile';
 import { lowHealthVignette } from './low_health';
 import { lowResourceView } from './low_resource';
@@ -1098,38 +1099,28 @@ export class Hud {
     });
     this.updateClock();
     // classic MMOs: the player interaction menu opens from the target portrait
-    $('#target-frame').addEventListener('contextmenu', (ev) => {
+    const targetFrame = $('#target-frame');
+    targetFrame.addEventListener('contextmenu', (ev) => {
       ev.preventDefault();
-      const tid = this.sim.player.targetId;
-      const t = tid !== null ? this.sim.entities.get(tid) : null;
-      if (t && t.kind === 'player' && t.id !== this.sim.playerId) {
-        this.openContextMenu(t.id, t.name, (ev as MouseEvent).clientX, (ev as MouseEvent).clientY);
-      } else if (t && t.kind === 'mob' && t.ownerId === this.sim.playerId) {
-        this.openPetMenu(
-          t.id,
-          t.name,
-          t.dead,
-          (ev as MouseEvent).clientX,
-          (ev as MouseEvent).clientY,
-        );
-      } else if (
-        t &&
-        t.kind === 'mob' &&
-        !t.dead &&
-        t.hostile &&
-        t.ownerId === null &&
-        this.sim.partyInfo
-      ) {
-        // classic MMOs: right-click an enemy's unit frame to set a raid marker.
-        // Mirror Sim.setMarker's markable criteria (live wild hostile mob) so the
-        // menu never appears for a pet/non-hostile mob where it would be a no-op.
-        this.openMarkerMenu(t.id, t.name, (ev as MouseEvent).clientX, (ev as MouseEvent).clientY);
-      }
+      this.openTargetFrameMenu((ev as MouseEvent).clientX, (ev as MouseEvent).clientY);
     });
-    $('#player-frame').addEventListener('contextmenu', (ev) => {
+    // Touch parity: phones have no right-click, so a long-press on the target
+    // frame opens the same player/pet/marker menu (party-invite, add-friend, ...).
+    attachLongPress(
+      targetFrame,
+      (x, y) => this.openTargetFrameMenu(x, y),
+      () => this.isMobileLayout(),
+    );
+    const playerFrame = $('#player-frame');
+    playerFrame.addEventListener('contextmenu', (ev) => {
       ev.preventDefault();
       this.openSelfContextMenu((ev as MouseEvent).clientX, (ev as MouseEvent).clientY);
     });
+    attachLongPress(
+      playerFrame,
+      (x, y) => this.openSelfContextMenu(x, y),
+      () => this.isMobileLayout(),
+    );
     $('#mm-char').addEventListener('click', () => this.toggleChar());
     $('#mm-spell').addEventListener('click', () => this.toggleSpellbook());
     $('#mm-talents')?.addEventListener('click', () => this.toggleTalents());
@@ -2470,6 +2461,7 @@ export class Hud {
       onContextMenu: (pid, name, x, y) => this.openContextMenu(pid, name, x, y),
       onLeave: () => this.sim.partyLeave(),
       leaveLabel: () => t('hud.social.leaveParty'),
+      isTouch: () => this.isMobileLayout(),
     },
   );
   // Overworld world-map painter (the delve branch stays with delvePainter). Owns
@@ -6689,6 +6681,13 @@ export class Hud {
       ev.preventDefault();
       this.openChatPlayerContextMenu(name, ev.clientX, ev.clientY);
     });
+    // Touch parity: long-press a chat name to open its menu (the Enter/Space
+    // path below already covers hardware keyboards).
+    attachLongPress(
+      sender,
+      (x, y) => this.openChatPlayerContextMenu(name, x, y),
+      () => this.isMobileLayout(),
+    );
     sender.addEventListener('keydown', (ev) => {
       if (ev.key !== 'Enter' && ev.key !== ' ') return;
       ev.preventDefault();
@@ -9864,6 +9863,30 @@ export class Hud {
         this.socialWindow.selectRaidTab();
       }
     });
+  }
+
+  // Open the right menu for whatever the player currently has targeted: the
+  // player-interaction menu for another player, the pet menu for an owned pet,
+  // or the raid-marker menu for a live wild hostile mob (mirrors Sim.setMarker's
+  // markable criteria). Shared by the desktop right-click and the touch
+  // long-press on the target frame.
+  private openTargetFrameMenu(x: number, y: number): void {
+    const tid = this.sim.player.targetId;
+    const t = tid !== null ? this.sim.entities.get(tid) : null;
+    if (t && t.kind === 'player' && t.id !== this.sim.playerId) {
+      this.openContextMenu(t.id, t.name, x, y);
+    } else if (t && t.kind === 'mob' && t.ownerId === this.sim.playerId) {
+      this.openPetMenu(t.id, t.name, t.dead, x, y);
+    } else if (
+      t &&
+      t.kind === 'mob' &&
+      !t.dead &&
+      t.hostile &&
+      t.ownerId === null &&
+      this.sim.partyInfo
+    ) {
+      this.openMarkerMenu(t.id, t.name, x, y);
+    }
   }
 
   openContextMenu(pid: number, name: string, x: number, y: number): void {
