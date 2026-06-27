@@ -26,6 +26,7 @@ import { addThreat } from '../threat';
 import type { AbilityDef, Entity } from '../types';
 import { armorReduction, meleeMissChance } from '../types';
 import { exclusiveAuraConflicts } from './exclusive_aura';
+import { comboScaledValue } from './finisher_scale';
 
 const CHARGE_MAX_DURATION = 3; // seconds before a blocked charge gives up
 
@@ -282,7 +283,11 @@ export function runEffects(
         const hybrid = res.effects.some(
           (e) => e.type === 'directDamage' || e.type === 'aoeDamage' || e.type === 'aoeRoot',
         );
-        const dotBase = Math.max(1, Math.round(eff.total / (eff.duration / eff.interval)));
+        // Combo finishers (Rupture, Rip) author `total` as the 5-point value;
+        // scale it by points spent before spreading it across ticks. Non-finisher
+        // DoTs pass spentCombo 0 and keep their authored total unchanged.
+        const dotTotal = comboScaledValue(eff.total, spentCombo);
+        const dotBase = Math.max(1, Math.round(dotTotal / (eff.duration / eff.interval)));
         // Physical bleeds (Rend, Rupture, Garrote, Rip) scale off melee Attack
         // Power here just like a spell DoT scales off Spell Power; `hybrid` still
         // suppresses the rider on a DoT that trails its own direct nuke.
@@ -638,10 +643,14 @@ export function runEffects(
           ctx.enterCombat(p, target);
           break;
         }
+        // Combo finishers (Expose Armor) author `armor` as the 5-point value;
+        // scale it by points spent. Warrior Sunder Armor passes spentCombo 0 and
+        // keeps its authored per-stack value.
+        const sunderArmor = comboScaledValue(eff.armor, spentCombo);
         const existing = target.auras.find((a) => a.kind === 'sunder');
         if (existing) {
           existing.stacks = Math.min(eff.maxStacks, (existing.stacks ?? 1) + 1);
-          existing.value = eff.armor;
+          existing.value = sunderArmor;
           existing.remaining = existing.duration;
           ctx.emit({ type: 'aura', targetId: target.id, name: ability.name, gained: true });
         } else {
@@ -651,7 +660,7 @@ export function runEffects(
             kind: 'sunder',
             remaining: 30,
             duration: 30,
-            value: eff.armor,
+            value: sunderArmor,
             stacks: 1,
             sourceId: p.id,
             school: 'physical',
