@@ -472,9 +472,11 @@ describe('coverage: each scenario fires its subsystem', () => {
     );
     const ents = entities(rec);
     const tank = ents.find((e) => e.id === rec.notes.tankPid);
-    // consumeHealAbsorb: the small shield depleted + was filtered out; the big survived.
-    expect(tank.auras?.some((a: Ev) => a.id === 'absorb_small')).toBe(false);
-    expect(tank.auras?.some((a: Ev) => a.id === 'absorb_big')).toBe(true);
+    // consumeHealAbsorb on the HoT path: the fresh shield was drained by the first HoT
+    // ticks, depleted, and filtered out -- proving a HoT no longer bypasses heal-absorb.
+    // (Heal-4's applyHeal absorb-drain -- small depletes, big survives -- is pinned in the
+    // golden 'heals' snapshot; those shields are cleared before this HoT phase.)
+    expect(tank.auras?.some((a: Ev) => a.id === 'hot_absorb')).toBe(false);
     // healingThreat split landed: each aware mob now lists healer ids in its hate table.
     const healerIds = rec.notes.healerIds as number[];
     const m1 = ents.find((e) => e.id === rec.notes.m1Id);

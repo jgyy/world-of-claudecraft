@@ -82,7 +82,10 @@ export function updateRegen(ctx: SimContext, p: Entity, _meta: PlayerMeta): void
     const c = p[slot];
     if (!c) continue;
     if (c.hpPer2s > 0 && p.hp < p.maxHp) {
-      const heal = Math.min(Math.round(c.hpPer2s * ctx.healingTakenMult(p)), p.maxHp - p.hp);
+      // Drain any heal-absorb shield first (same order as applyHeal), so a HoT-style
+      // eat/drink tick can't slip a heal past Grave Blight and waste the debuff.
+      const raw = ctx.consumeHealAbsorb(p, Math.round(c.hpPer2s * ctx.healingTakenMult(p)));
+      const heal = Math.min(raw, p.maxHp - p.hp);
       p.hp += heal;
       ctx.emit({ type: 'heal', targetId: p.id, amount: heal });
     }
@@ -155,7 +158,10 @@ export function updateAuras(ctx: SimContext, e: Entity): void {
           );
           if (e.dead) return;
         } else if (a.kind === 'hot') {
-          const healed = Math.min(Math.round(a.value * ctx.healingTakenMult(e)), e.maxHp - e.hp);
+          // A heal-over-time tick is still incoming healing: drain the target's
+          // heal-absorb shields first (matching applyHeal), then cap to missing hp.
+          const raw = ctx.consumeHealAbsorb(e, Math.round(a.value * ctx.healingTakenMult(e)));
+          const healed = Math.min(raw, e.maxHp - e.hp);
           if (healed > 0) {
             e.hp += healed;
             ctx.emit({

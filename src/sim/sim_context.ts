@@ -348,6 +348,10 @@ export interface SimContextCallbacks {
   // expiry; it STAYS on Sim (shared with the applyAura path).
   healingTakenMult(target: Entity): number;
   healingThreat(source: Entity, target: Entity, healed: number): void;
+  // consumeHealAbsorb (combat/heal.ts, C2) drains the target's heal-absorb shields
+  // against an incoming heal and returns the surviving amount. Routed through the seam
+  // so the eat/drink + HoT ticks here drain the shield the same way applyHeal does.
+  consumeHealAbsorb(target: Entity, healed: number): number;
   applyNonPlayerStatAura(target: Entity, aura: Aura, direction: 1 | -1): void;
   delveRunForMob(mobId: number): DelveRun | null;
   onDelveBossDefeated(run: DelveRun): void;
@@ -791,6 +795,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     clearNonPlayerStatAuras: host.clearNonPlayerStatAuras,
     healingTakenMult: host.healingTakenMult,
     healingThreat: host.healingThreat,
+    consumeHealAbsorb: host.consumeHealAbsorb,
     applyNonPlayerStatAura: host.applyNonPlayerStatAura,
     delveRunForMob: host.delveRunForMob,
     onDelveBossDefeated: host.onDelveBossDefeated,

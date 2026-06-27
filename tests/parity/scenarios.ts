@@ -2060,10 +2060,23 @@ function multiClassHeal(): Scenario {
       rec.snapshot('crit-vuln-damage');
 
       // HoT path: a druid Rejuvenation on the tank ticks through the `hot` aura
-      // branch -> healingTakenMult(~3089) + healingThreat(~3101) foreign callers.
-      // (The surviving absorb_big rides along untouched: the hot branch never calls
-      // consumeHealAbsorb, only applyHeal does.)
+      // branch -> consumeHealAbsorb (a HoT tick is incoming healing, so it drains the
+      // heal-absorb shield exactly like applyHeal) + healingTakenMult + healingThreat.
+      // We drop Heal-4's residual shields and brand the tank with a fresh, small shield
+      // so the first ticks are devoured, the shield depletes and is filtered out, and the
+      // later ticks land real healing -> the window pins BOTH the HoT absorb-drain AND the
+      // surviving heal2 + healingThreat fan-out.
       tank.hp = 2000;
+      tank.auras = tank.auras.filter((a: Aura) => a.kind !== 'heal_absorb');
+      tank.auras.push(
+        aura({
+          id: 'hot_absorb',
+          name: 'Necrotic',
+          kind: 'heal_absorb',
+          value: 450,
+          sourceId: m1.id,
+        }),
+      );
       tank.auras.push(
         aura({
           id: 'hot_tk',

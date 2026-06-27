@@ -204,6 +204,7 @@ function makeCtx() {
     clearNonPlayerStatAuras: vi.fn(),
     healingTakenMult: vi.fn(() => 1),
     healingThreat: vi.fn(),
+    consumeHealAbsorb: vi.fn((_t, healed) => healed),
     applyNonPlayerStatAura: vi.fn(),
     delveRunForMob: vi.fn(() => null),
     onDelveBossDefeated: vi.fn(),
