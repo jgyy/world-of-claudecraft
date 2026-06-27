@@ -3420,7 +3420,13 @@ export class GameServer {
       );
       return true;
     }
-    const hit = this.chatFilter.findHardHit(text);
+    // Only the first MAX_CHAT_MESSAGE_LEN chars are ever routed or stored, but a
+    // WS frame can carry up to maxPayload (16 KiB). Cap the text before scanning
+    // so the filter never burns ~64-170x CPU on bytes nobody will see (bounded
+    // only by the chat token bucket), and never mutes for a slur that is sliced
+    // off before delivery.
+    const scanned = text.length > MAX_CHAT_MESSAGE_LEN ? text.slice(0, MAX_CHAT_MESSAGE_LEN) : text;
+    const hit = this.chatFilter.findHardHit(scanned);
     if (!hit) return false;
 
     const outcome = this.chatFilter.escalate(session.chatStrikes);
@@ -3457,7 +3463,7 @@ export class GameServer {
       characterName: session.name,
       term: hit,
       channel,
-      message: text,
+      message: scanned,
       action: outcome.kind,
       muteSeconds: outcome.muteSeconds,
     }).catch((err) => console.error('recordChatViolation failed:', err));
