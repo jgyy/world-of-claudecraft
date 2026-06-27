@@ -311,19 +311,26 @@ export class Market {
       return;
     }
     meta.copper -= listing.price;
-    this.ctx.addItem(listing.itemId, listing.count, meta.entityId);
+    // Dupe invariant (mirrors lootCorpse / marketCancel): remove the listing (the
+    // source) BEFORE crediting the buyer's bags, so a future reentrant addItem can
+    // never buy the same listing twice. House listings are infinite stock and never
+    // consumed, so only player listings are spliced. The emits keep their original
+    // order (addItem's "You receive" first) to stay byte-identical for the parity gate.
+    let proceeds = 0;
+    let sellerMeta: PlayerMeta | null = null;
     if (!listing.house) {
-      const proceeds = Math.max(0, Math.floor(listing.price * (1 - MARKET_CUT)));
+      proceeds = Math.max(0, Math.floor(listing.price * (1 - MARKET_CUT)));
       this.collectionFor(listing.sellerKey).copper += proceeds;
       this.marketListings.splice(idx, 1);
-      const sellerMeta = this.metaByMarketSellerKey(listing.sellerKey);
-      if (sellerMeta) {
-        this.ctx.emit({
-          type: 'loot',
-          text: `${meta.name} bought your ${def.name} for ${formatMoney(listing.price)} - collect ${formatMoney(proceeds)} from the Merchant.`,
-          pid: sellerMeta.entityId,
-        });
-      }
+      sellerMeta = this.metaByMarketSellerKey(listing.sellerKey);
+    }
+    this.ctx.addItem(listing.itemId, listing.count, meta.entityId);
+    if (!listing.house && sellerMeta) {
+      this.ctx.emit({
+        type: 'loot',
+        text: `${meta.name} bought your ${def.name} for ${formatMoney(listing.price)} - collect ${formatMoney(proceeds)} from the Merchant.`,
+        pid: sellerMeta.entityId,
+      });
     }
     this.ctx.emit({
       type: 'loot',
@@ -349,6 +356,7 @@ export class Market {
       this.ctx.error(meta.entityId, 'That is not your listing.');
       return;
     }
+    // Dupe invariant (see marketBuy): remove the listing before crediting bags.
     this.marketListings.splice(idx, 1);
     this.ctx.addItem(listing.itemId, listing.count, meta.entityId);
     const def = ITEMS[listing.itemId];
