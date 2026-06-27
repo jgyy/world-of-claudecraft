@@ -665,7 +665,7 @@ const classAbilityNamesEn = {
       ["rockbiter_weapon", "Rockbiter Weapon", "Imbues your weapon with the fury of stone: each swing deals 5 additional damage for 5 min."],
       ["healing_wave", "Healing Wave", "Heals a friendly target for {damage}."],
       ["earth_shock", "Earth Shock", "Instantly shocks the target with concussive force for {damage} Nature damage."],
-      ["lightning_shield", "Lightning Shield", "Surrounds you with crackling lightning: melee attackers take 13 Nature damage."],
+      ["lightning_shield", "Lightning Shield", "Surrounds you with crackling lightning: melee attackers take 13 Nature damage, up to 3 charges and at most once every 5 seconds."],
       ["flame_shock", "Flame Shock", "Sears the target with fire for 25 damage plus {damage} over 12 sec."],
       ["flametongue_weapon", "Flametongue Weapon", "Imbues your weapon with elemental fire: each swing deals 8 additional Fire damage for 5 min."],
       ["frost_shock", "Frost Shock", "Instantly shocks the target with frost for {damage} Frost damage and slows its movement by 50% for 8 sec."],

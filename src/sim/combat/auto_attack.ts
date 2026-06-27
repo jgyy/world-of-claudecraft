@@ -44,6 +44,7 @@ import {
 } from '../types';
 import { spendResource } from './casting_lifecycle';
 import { blindMissBonus, isDisarmed, isStunned } from './cc';
+import { applyThornsReaction } from './thorns_charge';
 
 export function startAutoAttack(ctx: SimContext, pid?: number): void {
   const r = ctx.resolve(pid);
@@ -257,13 +258,10 @@ export function meleeSwing(
     false,
     { flat: opts.threatFlat ?? 0, mult: opts.threatMult ?? 1 },
   );
-  // thorns / lightning shield: melee attackers take damage back
+  // thorns / lightning shield: melee attackers take damage back. Charge-limited
+  // thorns (Lightning Shield) consume a charge and gate on an internal cooldown.
   if (!attacker.dead) {
-    for (const a of target.auras) {
-      if (a.kind === 'thorns') {
-        ctx.dealDamage(target, attacker, a.value, false, a.school, a.name, 'hit', true);
-      }
-    }
+    applyThornsReaction(ctx, target, attacker);
     // innate "spiked hide" mobs (e.g. bristleback boars) reflect on every hit
     const spikes = MOBS[target.templateId]?.thorns;
     if (spikes && !attacker.dead) {
