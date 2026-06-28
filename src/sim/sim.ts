@@ -132,6 +132,7 @@ import {
   tickGroundAoEs,
 } from './entity_roster';
 import { canEquipItem } from './equipment_rules';
+import { applyCooldowns, type SavedCooldowns, serializeCooldowns } from './cooldown_persist';
 import { formatMoney } from './format_money';
 import {
   LEADERBOARD_PAGE_SIZE,
@@ -803,6 +804,10 @@ export interface CharacterState {
   loadouts?: SavedLoadout[];
   activeLoadout?: number;
   raidLockouts?: Record<string, number>;
+  // Ability/potion cooldowns as remaining-time deltas (JSONB; optional so pre-fix
+  // saves load cleanly with no cooldowns). Persisted so logging out and back in no
+  // longer wipes cooldowns and lets a player bypass them by relogging.
+  cooldowns?: SavedCooldowns;
   pet?: PetState | null;
   skin?: number; // appearance index (JSONB; optional so pre-skin saves load as 0)
   skinCatalog?: SkinCatalog;
@@ -1330,6 +1335,9 @@ export class Sim {
             : 0;
     }
     player.swingTimer = 0;
+    // Restore ability/potion cooldowns so a relog cannot reset them (see
+    // cooldown_persist.ts). Re-anchored to this sim's clock; a fresh character has none.
+    player.potionCooldownUntil = applyCooldowns(savedState?.cooldowns, player.cooldowns, this.time);
     if (savedState?.pet) this.restorePet(player, savedState.pet);
     return player.id;
   }
@@ -1444,6 +1452,7 @@ export class Sim {
       raidLockouts: Object.fromEntries(
         [...meta.raidLockouts].filter(([, until]) => until > this.lockoutNowMs()),
       ),
+      cooldowns: serializeCooldowns(e.cooldowns, e.potionCooldownUntil, this.time),
       pet: this.serializePet(pid),
       skin: meta.skin,
       skinCatalog: meta.skinCatalog,
