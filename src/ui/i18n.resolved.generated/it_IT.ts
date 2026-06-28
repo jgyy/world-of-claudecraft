@@ -583,6 +583,11 @@ export const it_IT: EnTranslations = {
       "notRaid": "Il tuo gruppo non è un'incursione.",
       "leaderOnly": "Solo il capo incursione può convertire in un gruppo.",
       "tooLarge": "Un'incursione con più di cinque membri non può tornare a essere un gruppo."
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {

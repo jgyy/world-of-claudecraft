@@ -78,6 +78,7 @@ import {
 } from '../sim/data';
 import { DELVE_MODULE_LAYOUTS, type DelveModuleId } from '../sim/delve_layout';
 import { armorTypeForItem, weaponArchetypeForItem } from '../sim/equipment_rules';
+import { itemArmorTypeLabelKey } from './item_armor_type';
 import { LEADERBOARD_PAGE_SIZE } from '../sim/leaderboard_page';
 import type { Ante, PickAction } from '../sim/lockpick';
 import { PICK_ACTIONS } from '../sim/lockpick';
@@ -2450,7 +2451,14 @@ export class Hud {
       }),
     )}</div>`;
     if (item.slot) {
-      html += `<div class="tt-sub">${esc(itemSlotName(item.slot))}</div>`;
+      // Classic layout: slot name on the left, armor subtype (Cloth/Leather/Mail)
+      // right-aligned on the same line so it is clear which classes the gear suits.
+      const armorTypeKey = itemArmorTypeLabelKey(item);
+      if (armorTypeKey) {
+        html += `<div class="tt-sub tt-row"><span>${esc(itemSlotName(item.slot))}</span><span class="tt-armor">${esc(t(armorTypeKey))}</span></div>`;
+      } else {
+        html += `<div class="tt-sub">${esc(itemSlotName(item.slot))}</div>`;
+      }
     }
     if (item.weapon) {
       const dps = (item.weapon.min + item.weapon.max) / 2 / item.weapon.speed;

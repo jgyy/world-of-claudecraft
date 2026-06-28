@@ -583,6 +583,11 @@ export const de_DE: EnTranslations = {
       "notRaid": "Eure Gruppe ist kein Schlachtzug.",
       "leaderOnly": "Nur der Schlachtzugsleiter darf in eine Gruppe umwandeln.",
       "tooLarge": "Ein Schlachtzug mit mehr als fünf Mitgliedern kann nicht wieder in eine Gruppe umgewandelt werden."
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {

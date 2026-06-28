@@ -583,6 +583,11 @@ export const en: EnTranslations = {
       "notRaid": "Your group is not a raid.",
       "leaderOnly": "Only the raid leader may convert to a party.",
       "tooLarge": "A raid with more than five members cannot convert back to a party."
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {

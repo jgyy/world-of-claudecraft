@@ -583,6 +583,11 @@ export const ja_JP: EnTranslations = {
       "notRaid": "パーティはレイドではありません。",
       "leaderOnly": "パーティに変換できるのはレイドリーダーだけです。",
       "tooLarge": "メンバーが5人を超えるレイドはパーティに戻せません。"
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {

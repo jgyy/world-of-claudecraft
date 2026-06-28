@@ -583,6 +583,11 @@ export const pt_BR: EnTranslations = {
       "notRaid": "Seu grupo não é uma raide.",
       "leaderOnly": "Só o líder da raide pode converter em um grupo.",
       "tooLarge": "Uma raide com mais de cinco membros não pode ser convertida de volta em um grupo."
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {

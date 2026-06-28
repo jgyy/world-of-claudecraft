@@ -583,6 +583,11 @@ export const zh_CN: EnTranslations = {
       "notRaid": "你的队伍不是团队。",
       "leaderOnly": "只有团队领袖可以转换为队伍。",
       "tooLarge": "成员超过五人的团队无法转换回队伍。"
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {

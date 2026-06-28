@@ -583,6 +583,11 @@ export const ko_KR: EnTranslations = {
       "notRaid": "현재 파티는 공격대가 아닙니다.",
       "leaderOnly": "공격대장만 파티로 전환할 수 있습니다.",
       "tooLarge": "인원이 5명을 초과하는 공격대는 파티로 다시 전환할 수 없습니다."
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {

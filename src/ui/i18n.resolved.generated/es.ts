@@ -583,6 +583,11 @@ export const es: EnTranslations = {
       "notRaid": "Tu grupo no es una banda.",
       "leaderOnly": "Solo el líder de la banda puede convertir la banda en grupo.",
       "tooLarge": "Una banda con más de cinco miembros no puede volver a convertirse en grupo."
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {

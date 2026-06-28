@@ -2145,6 +2145,11 @@
     padding: 8px 10px; font-size: 12px; line-height: 1.5; }
   #tooltip .tt-title { font-family: var(--title-font); font-size: 13.5px; color: #fff; }
   #tooltip .tt-sub { color: var(--color-text-muted); font-size: 11px; }
+  /* slot line that also carries the armor subtype: slot left, type right-aligned.
+     The slot keeps the muted tt-sub color; the armor class reads brighter so the
+     newly surfaced "which class is this for" cue stands out. */
+  #tooltip .tt-row { display: flex; justify-content: space-between; gap: 12px; }
+  #tooltip .tt-row .tt-armor { color: var(--color-text-light); }
   .tt-opt-icon { width: 16px; height: 16px; display: inline-block; vertical-align: -3px; border-radius: 3px; margin-right: 2px; background-size: cover; background-position: center; background-repeat: no-repeat; }
   #tooltip .tt-desc { color: var(--color-accent); margin-top: 4px; font-size: 11.5px; }
   #tooltip .tt-stat { color: #fff; font-size: 11.5px; }

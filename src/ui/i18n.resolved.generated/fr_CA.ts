@@ -583,6 +583,11 @@ export const fr_CA: EnTranslations = {
       "notRaid": "Votre groupe n'est pas un raid.",
       "leaderOnly": "Seul le chef de raid peut convertir en groupe.",
       "tooLarge": "Un raid de plus de cinq membres ne peut pas être reconverti en groupe."
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {

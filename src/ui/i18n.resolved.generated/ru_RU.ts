@@ -583,6 +583,11 @@ export const ru_RU: EnTranslations = {
       "notRaid": "Ваша группа не является рейдом.",
       "leaderOnly": "Только лидер рейда может преобразовать рейд в группу.",
       "tooLarge": "Рейд, в котором более пяти участников, нельзя преобразовать обратно в группу."
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
     }
   },
   "guide": {
