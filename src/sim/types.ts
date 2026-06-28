@@ -1301,6 +1301,7 @@ export interface Entity {
   gm?: boolean;
   respawnTimer: number;
   corpseTimer: number;
+  lootFfaTimer: number; // seconds of owner-lock left before tap loot opens to all (FFA); Infinity until rollLoot starts it
   despawnTimer?: number;
   damageIdleDespawnTimer?: number;
   lootable: boolean;

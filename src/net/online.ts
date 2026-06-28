@@ -696,6 +696,7 @@ function blankEntity(id: number): Entity {
     aggroTargetId: null,
     respawnTimer: 0,
     corpseTimer: 0,
+    lootFfaTimer: Infinity,
     lootable: false,
     loot: null,
     xpValue: 0,
