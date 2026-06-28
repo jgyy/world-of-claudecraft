@@ -355,6 +355,7 @@ const ARENA_LADDER_SIZE = 10; // live online standings shipped to clients
 // imported back (above) for the fiestaMatchInfo presentation accessor, which stays
 // on Sim. (A2 already moved FIESTA_COUNTDOWN to social/arena.ts.)
 const PVP_ROOT_DR_RESET = 18; // seconds before a repeated PvP root is fresh again
+const PVP_STUN_DR_RESET = 18; // stuns share the root-style 100/50/25/immune scheme
 const PVP_POLYMORPH_DR_RESET = 60;
 const PVP_FEAR_DR_RESET = 60;
 const PVP_CC_DR_MULTIPLIERS = [1, 0.5, 0.25] as const;
@@ -3110,7 +3111,9 @@ export class Sim {
         ? PVP_POLYMORPH_DR_RESET
         : category === 'fear'
           ? PVP_FEAR_DR_RESET
-          : PVP_ROOT_DR_RESET;
+          : category === 'stun'
+            ? PVP_STUN_DR_RESET
+            : PVP_ROOT_DR_RESET;
     if (category === 'polymorph') {
       target.ccDr.set(category, { stage: stage + 1, resetAt: this.time + reset });
       return PVP_POLYMORPH_DR_DURATIONS[Math.min(stage, PVP_POLYMORPH_DR_DURATIONS.length - 1)];

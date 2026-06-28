@@ -196,7 +196,7 @@ export interface Aura {
   stacks?: number; // sunder armor: applications stack up to the effect's cap
 }
 
-export type CrowdControlDrCategory = 'root' | 'polymorph' | 'fear';
+export type CrowdControlDrCategory = 'root' | 'polymorph' | 'fear' | 'stun';
 
 export interface CrowdControlDrState {
   stage: number;

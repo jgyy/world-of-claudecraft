@@ -129,7 +129,13 @@ export function runEffects(
       }
       case 'finisherStun': {
         if (!target || target.dead || spentCombo <= 0) break;
-        const dur = eff.base + eff.perCombo * spentCombo;
+        const dur = ctx.diminishedCrowdControlDuration(
+          p,
+          target,
+          'stun',
+          eff.base + eff.perCombo * spentCombo,
+        );
+        if (dur === null) break;
         ctx.applyAura(target, {
           id: `${ability.id}_stun`,
           name: ability.name,
@@ -300,12 +306,14 @@ export function runEffects(
       }
       case 'stun': {
         if (!target || target.dead) break;
+        const remaining = ctx.diminishedCrowdControlDuration(p, target, 'stun', eff.duration);
+        if (remaining === null) break;
         ctx.applyAura(target, {
           id: `${ability.id}_stun`,
           name: ability.name,
           kind: 'stun',
-          remaining: eff.duration,
-          duration: eff.duration,
+          remaining,
+          duration: remaining,
           value: 0,
           sourceId: p.id,
           school: ability.school,
