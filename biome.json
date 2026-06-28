@@ -43,12 +43,25 @@
   },
   "overrides": [
     {
-      "includes": ["index.html", "play.html"],
+      "includes": ["index.html", "play.html", "guide.html"],
       "formatter": {
         "enabled": false
       },
       "linter": {
         "enabled": false
+      }
+    },
+    {
+      "includes": ["src/styles/**"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noImportantStyles": "off"
+          },
+          "style": {
+            "noDescendingSpecificity": "off"
+          }
+        }
       }
     },
     {
