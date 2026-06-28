@@ -1,7 +1,9 @@
 // Cowardly mobs (sentient families: humanoid/kobold/murloc/troll) panic at low HP
 // instead of fighting to the death: they turn and run from their attacker for a few
-// seconds, rallying nearby same-family allies, then recover their nerve. They flee
-// only ONCE per pull, and elites/bosses/beasts never flee.
+// seconds, then recover their nerve. A fleeing mob does NOT socially aggro: it runs
+// past nearby allies without rallying them into the fight (calling for help while
+// mobs are camped close together makes pulls cascade and the game too punishing).
+// They flee only ONCE per pull, and elites/bosses/beasts never flee.
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 import { DT, RUN_SPEED, dist2d } from '../src/sim/types';
@@ -137,13 +139,20 @@ describe('cowardly mobs flee at low HP', () => {
     expect(mob.hp).toBeLessThan(mob.maxHp);
   });
 
-  it('calls a nearby same-family ally into the fight when it flees', () => {
+  it('does NOT socially aggro a nearby same-family ally when it flees', () => {
     const sim = makeSim();
     const mobs = wildMobs(sim);
     const fleer = mobs[0];
     const ally = mobs.find((m) => m.id !== fleer.id)!;
     engageLowHp(sim, fleer, 'gravecaller_cultist', 0.12);
-    // an idle same-family ally standing right next to the fleer
+    // Move the player far away so the idle ally cannot detect it on its own (idle
+    // proximity aggro reaches at most 20yd). The fleer still panics: maybeFlee runs
+    // before any distance gate while it is in the attack state targeting the player.
+    // That isolates the flee path: only a flee call-for-help could pull the ally.
+    sim.player.pos = { x: fleer.pos.x + 200, z: fleer.pos.z, y: fleer.pos.y };
+    sim.player.prevPos = { ...sim.player.pos };
+    // an idle same-family ally standing right next to the fleer (well within the old
+    // 8yd flee-help radius), but far from the now-distant player
     ally.templateId = 'gravecaller_cultist';
     ally.hostile = true;
     ally.dead = false;
@@ -154,8 +163,10 @@ describe('cowardly mobs flee at low HP', () => {
 
     sim.tick();
 
-    expect(sim.entities.get(ally.id)!.aggroTargetId).toBe(sim.playerId);
-    expect(sim.entities.get(ally.id)!.aiState).toBe('chase');
+    // the fleer panics, but the ally it runs past stays idle and uncommitted
+    expect(sim.entities.get(fleer.id)!.aiState).toBe('flee');
+    expect(sim.entities.get(ally.id)!.aggroTargetId).toBe(null);
+    expect(sim.entities.get(ally.id)!.aiState).toBe('idle');
   });
 
   it('recovers its nerve after the flee window and re-engages', () => {

@@ -315,15 +315,16 @@ import { groundHeight, WATER_LEVEL } from './world';
 const MOVE_SLIDE_FAN = [0, 0.5, -0.5, 1.0, -1.0, 1.6, -1.6];
 const BACKPEDAL_MULT = 0.65;
 // Low-HP flee ("fear"): a cowardly mob at or below this HP fraction panics, turns
-// and runs from its attacker for FLEE_DURATION seconds at FLEE_SPEED_MULT speed,
-// calling same-family allies within FLEE_HELP_RADIUS to assist. It flees only once
-// per pull, then recovers its nerve and re-engages if it survived.
+// and runs from its attacker for FLEE_DURATION seconds at FLEE_SPEED_MULT speed.
+// A fleeing mob does NOT socially aggro: it runs past idle allies without pulling
+// them in (a flee call-for-help cascades pulls through camped mobs and makes the
+// game too punishing). It flees only once per pull, then recovers its nerve and
+// re-engages if it survived.
 const FLEE_HP_THRESHOLD = 0.2;
 const FLEE_DURATION = 5;
 const FLEE_SPEED_MULT = 1.4;
 const FLEE_MAX_SPEED = RUN_SPEED;
 // FLEE_RETURN_GRACE moved to mob/locomotion.ts (M2; used only by recoverFromFlee).
-const FLEE_HELP_RADIUS = 8;
 // Only sentient, cowardly families flee; beasts/undead/elementals/dragonkin fight
 // to the death. Elites, rares, and bosses never flee regardless of family.
 const FLEEING_FAMILIES: ReadonlySet<MobFamily> = new Set(['humanoid', 'kobold', 'murloc', 'troll']);
@@ -3607,8 +3608,12 @@ export class Sim {
   }
 
   // Cowardly mobs panic once per pull at low HP: turn and run from the attacker
-  // for a few seconds, rallying nearby same-family allies. Returns true if the mob
-  // entered (or is already in) the flee state so the caller can stop its turn.
+  // for a few seconds, then recover their nerve. A fleeing mob does NOT socially
+  // aggro: it runs past idle allies without rallying them (a flee call-for-help
+  // cascades pulls through camped mobs and makes the game too punishing). Returns
+  // true if the mob entered (or is already in) the flee state so the caller can
+  // stop its turn. (`_target` is unused now that flee no longer rallies allies, but
+  // the SimContext seam keeps the param so foreign callers pass the attacker.)
   private canFlee(mob: Entity): boolean {
     if (mob.hasFled || mob.enraged) return false;
     const tmpl = MOBS[mob.templateId];
@@ -3616,7 +3621,7 @@ export class Sim {
     return FLEEING_FAMILIES.has(tmpl.family);
   }
 
-  private maybeFlee(mob: Entity, target: Entity): boolean {
+  private maybeFlee(mob: Entity, _target: Entity): boolean {
     if (mob.maxHp <= 0 || mob.hp / mob.maxHp > FLEE_HP_THRESHOLD) return false;
     if (!this.canFlee(mob)) return false;
     mob.aiState = 'flee';
@@ -3628,33 +3633,7 @@ export class Sim {
       color: '#ffd966',
       entityId: mob.id,
     });
-    this.callForHelp(mob, target);
     return true;
-  }
-
-  // A fleeing mob shouts for aid: nearby idle same-family mobs join the fight,
-  // mirroring the social-pull seeding in aggroMob.
-  private callForHelp(mob: Entity, target: Entity): void {
-    const family = MOBS[mob.templateId]?.family;
-    if (!family) return;
-    this.grid.forEachInRadius(mob.pos.x, mob.pos.z, FLEE_HELP_RADIUS, (m, d2) => {
-      if (
-        m.kind === 'mob' &&
-        m.id !== mob.id &&
-        !m.dead &&
-        m.hostile &&
-        m.aiState === 'idle' &&
-        m.ownerId === null &&
-        MOBS[m.templateId]?.family === family &&
-        d2 < FLEE_HELP_RADIUS * FLEE_HELP_RADIUS
-      ) {
-        m.aiState = 'chase';
-        m.aggroTargetId = target.id;
-        m.inCombat = true;
-        m.leashAnchor = { ...m.pos };
-        addThreat(m, target.id, 1);
-      }
-    });
   }
 
   mobSwing(mob: Entity, target: Entity): void {
