@@ -1371,6 +1371,12 @@ export class ClientWorld implements IWorld {
     this.cmd({ cmd: 'castSlot', slot });
   }
 
+  cancelAura(auraId: string): void {
+    // Authoritative on the server; the dropped aura disappears on the next self
+    // snapshot. No optimistic local removal (stat recalc is server-owned).
+    this.cmd({ cmd: 'cancel_aura', aura: auraId });
+  }
+
   targetEntity(id: number | null): void {
     // optimistic local update for snappy UI
     const p = this.entities.get(this.playerId);

@@ -77,6 +77,7 @@ import {
   zoneAt,
 } from '../sim/data';
 import { DELVE_MODULE_LAYOUTS, type DelveModuleId } from '../sim/delve_layout';
+import { isDebuffAura } from '../sim/combat/aura_cancel';
 import { armorTypeForItem, weaponArchetypeForItem } from '../sim/equipment_rules';
 import { LEADERBOARD_PAGE_SIZE } from '../sim/leaderboard_page';
 import type { Ante, PickAction } from '../sim/lockpick';
@@ -4189,39 +4190,27 @@ export class Hud {
     if ((el as any).__sig === sig) return;
     (el as any).__sig = sig;
     el.innerHTML = '';
+    // Only the local player's own buff bar (mode 'all') offers right-click-cancel;
+    // a target's debuff strip is read-only. A buff is cancelable iff it renders as a
+    // helpful buff, so the two share one predicate (src/sim/combat/aura_cancel.ts).
+    const ownBuffBar = mode === 'all' && e.id === this.sim.playerId;
     for (const a of e.auras) {
       // A negative-value stat aura (e.g. a mob's Withering Wail sapping attack
       // power, or an Intellect-draining curse) is a debuff even though it reuses a buff_* kind.
-      const isDebuff =
-        [
-          'dot',
-          'slow',
-          'root',
-          'stun',
-          'incapacitate',
-          'polymorph',
-          'attackspeed',
-          'debuff_ap',
-          'sunder',
-          'mortal_wound',
-          'silence',
-          'disarm',
-          'blind',
-          'expose',
-          'spellvuln',
-          'lockout',
-          'vulnerability',
-          'hex',
-          'tongues',
-          'cost_tax',
-          'heal_absorb',
-          'critvuln',
-        ].includes(a.kind) ||
-        (a.kind.startsWith('buff_') && a.value < 0);
+      const isDebuff = isDebuffAura(a);
       if (mode === 'debuffs' && !isDebuff) continue;
       const d = document.createElement('div');
       d.className = `buff${isDebuff ? ' debuff' : ''}`;
       d.style.backgroundImage = `url(${iconDataUrl('aura', ABILITIES[a.id] ? a.id : `aura_${a.kind}`)})`;
+      const cancelable = ownBuffBar && !isDebuff;
+      if (cancelable) {
+        d.classList.add('cancelable');
+        d.addEventListener('contextmenu', (ev) => {
+          ev.preventDefault();
+          this.hideTooltip();
+          this.sim.cancelAura(a.id);
+        });
+      }
       const dur = document.createElement('div');
       dur.className = 'dur';
       dur.textContent = a.remaining < 99 ? `${Math.ceil(a.remaining)}s` : '';

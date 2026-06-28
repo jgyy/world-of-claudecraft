@@ -6,6 +6,7 @@ import type {
 } from '../world_api';
 import { type AssistCandidate, resolveAssist } from './assist';
 import { lineOfSightClear, resolveMovement, resolvePosition } from './colliders';
+import { auraAffectsStats, removeCancelableAura } from './combat/aura_cancel';
 import {
   cleanseFriendlyNpcAuras,
   isRejectedFriendlyNpcAura,
@@ -2941,6 +2942,22 @@ export class Sim {
 
   castAbility(abilityId: string, pid?: number): void {
     castAbilityImpl(this.ctx, abilityId, pid);
+  }
+
+  // Voluntarily cancel one of a player's own helpful auras (the HUD right-click-a-buff
+  // action). Authoritative: the pure predicate refuses debuffs, so a player can never
+  // strip a silence/hex/root off themselves. Mirrors clearAurasFromSource's fade-event
+  // + conditional stat recalc so a stripped buff_*/form_* actually un-folds.
+  cancelAura(auraId: string, pid?: number): void {
+    const r = this.resolve(pid);
+    if (!r) return;
+    const { e, meta } = r;
+    const removed = removeCancelableAura(e.auras, auraId);
+    if (!removed) return;
+    this.emit({ type: 'aura', targetId: e.id, name: removed.name, gained: false });
+    if (auraAffectsStats(removed)) {
+      recalcPlayerStats(e, meta.cls, meta.equipment, this.playerMods(meta));
+    }
   }
 
   private spendResource(p: Entity, cost: number): void {

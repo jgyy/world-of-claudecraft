@@ -363,6 +363,9 @@ export interface IWorld {
   questState(questId: string): QuestState;
   castAbility(abilityId: string): void;
   castAbilityBySlot(slot: number): void;
+  // Voluntarily cancel one of the local player's own helpful auras (right-click a
+  // buff). No-op if the id names a debuff or an aura the player does not carry.
+  cancelAura(auraId: string): void;
   targetEntity(id: number | null): void;
   tabTarget(): void;
   targetNearestFriendly(): void;
