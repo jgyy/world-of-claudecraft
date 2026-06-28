@@ -125,6 +125,7 @@ import {
   type OverheadEmoteId,
 } from '../world_api';
 import { absorbBarView } from './absorb_bar';
+import { auraEffectDescriptor } from './aura_effect';
 import {
   applyBagFilter,
   BAG_CATEGORIES,
@@ -4235,10 +4236,25 @@ export class Hud {
       const auraName = ABILITIES[a.id]
         ? abilityDisplayName(ABILITIES[a.id])
         : auraDisplayNameFromSource(a.name);
+      // One-line summary of what the aura does (pure descriptor -> localized text).
+      const effect = auraEffectDescriptor(a);
+      let effectHtml = '';
+      if (effect) {
+        const values: Record<string, string> = {};
+        if (effect.nums) {
+          for (const [k, n] of Object.entries(effect.nums)) {
+            values[k] = formatNumber(n, { maximumFractionDigits: 0 });
+          }
+        }
+        if (effect.school) {
+          values.school = t(`hudChrome.auraEffect.school.${effect.school}` as TranslationKey);
+        }
+        effectHtml = `<div class="tt-effect">${esc(t(effect.key as TranslationKey, values))}</div>`;
+      }
       this.attachTooltip(
         d,
         () =>
-          `<div class="tt-title">${esc(auraName)}</div><div class="tt-sub">${esc(tPlural('hudChrome.plurals.secondsRemaining', Math.ceil(a.remaining)))}</div>`,
+          `<div class="tt-title">${esc(auraName)}</div>${effectHtml}<div class="tt-sub">${esc(tPlural('hudChrome.plurals.secondsRemaining', Math.ceil(a.remaining)))}</div>`,
       );
       el.appendChild(d);
     }
