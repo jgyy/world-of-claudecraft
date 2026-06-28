@@ -67,14 +67,42 @@ describe('auraEffectDescriptor', () => {
     });
   });
 
-  it('shows the stack count on a stacking armor reduction', () => {
-    expect(desc({ kind: 'sunder', value: 0.04, stacks: 5 })).toEqual({
-      key: 'hudChrome.auraEffect.armorReduceStacks',
-      nums: { pct: 4, stacks: 5 },
+  it('shows flat total armor and stack count for a stacking sunder', () => {
+    // sunder value is a FLAT armor amount per stack (e.g. Sunder Armor: 25);
+    // total reduction = value * stacks (armor -= value * stacks in mitigation).
+    expect(desc({ kind: 'sunder', value: 25, stacks: 5 })).toEqual({
+      key: 'hudChrome.auraEffect.armorFlatStacks',
+      nums: { value: 125, stacks: 5 },
     });
-    expect(desc({ kind: 'sunder', value: 0.04, stacks: 1 })?.key).toBe(
-      'hudChrome.auraEffect.armorReduce',
-    );
+    expect(desc({ kind: 'sunder', value: 40, stacks: 1 })).toEqual({
+      key: 'hudChrome.auraEffect.armorFlat',
+      nums: { value: 40 },
+    });
+  });
+
+  it('reports the expose mob affix as increased physical damage taken', () => {
+    expect(desc({ kind: 'expose', value: 0.15 })).toEqual({
+      key: 'hudChrome.auraEffect.physVuln',
+      nums: { pct: 15 },
+    });
+  });
+
+  it('reports hex as an outgoing damage/healing reduction, not crowd control', () => {
+    expect(desc({ kind: 'hex', value: 0.3 })).toEqual({
+      key: 'hudChrome.auraEffect.hex',
+      nums: { pct: 30 },
+    });
+  });
+
+  it('picks dodge direction by sign (staggerHit applies a negative buff_dodge)', () => {
+    expect(desc({ kind: 'buff_dodge', value: 0.1 })).toEqual({
+      key: 'hudChrome.auraEffect.dodge',
+      nums: { pct: 10 },
+    });
+    expect(desc({ kind: 'buff_dodge', value: -0.05 })).toEqual({
+      key: 'hudChrome.auraEffect.dodgeReduce',
+      nums: { pct: 5 },
+    });
   });
 
   it('summarizes crowd control by the restriction, not a number', () => {

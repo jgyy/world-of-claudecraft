@@ -109,13 +109,25 @@ export function auraEffectDescriptor(a: AuraEffectInput): AuraEffectDescriptor |
     case 'buff_allstats':
       return flatStat('allStats', a.value);
     case 'buff_dodge':
-      return { key: `${KEY}.dodge`, nums: { pct: pctFromFrac(a.value) } };
+      // The staggerHit mob affix rides buff_dodge with a NEGATIVE value, so the
+      // sign picks the direction (mirrors flatStat).
+      return {
+        key: `${KEY}.${a.value < 0 ? 'dodgeReduce' : 'dodge'}`,
+        nums: { pct: pctFromFrac(a.value) },
+      };
 
-    case 'sunder':
+    case 'sunder': {
+      // value is a FLAT armor amount per stack; total reduction is value * stacks
+      // (armor -= a.value * (a.stacks ?? 1) in the mitigation pass).
+      const stacks = a.stacks ?? 1;
+      const total = round(a.value * stacks);
+      return stacks > 1
+        ? { key: `${KEY}.armorFlatStacks`, nums: { value: total, stacks } }
+        : { key: `${KEY}.armorFlat`, nums: { value: total } };
+    }
     case 'expose':
-      return a.stacks && a.stacks > 1
-        ? { key: `${KEY}.armorReduceStacks`, nums: { pct: pctFromFrac(a.value), stacks: a.stacks } }
-        : { key: `${KEY}.armorReduce`, nums: { pct: pctFromFrac(a.value) } };
+      // The mob expose affix raises physical damage taken (exposeMult += value).
+      return { key: `${KEY}.physVuln`, nums: { pct: pctFromFrac(a.value) } };
     case 'mortal_wound':
       return { key: `${KEY}.mortalWound`, nums: { pct: pctFromFrac(a.value) } };
     case 'vulnerability':
@@ -138,7 +150,9 @@ export function auraEffectDescriptor(a: AuraEffectInput): AuraEffectDescriptor |
     case 'polymorph':
       return { key: `${KEY}.polymorph` };
     case 'hex':
-      return { key: `${KEY}.hex` };
+      // Weakening Hex throttles outgoing damage AND healing by (1 - value); it is
+      // not a loss-of-control effect.
+      return { key: `${KEY}.hex`, nums: { pct: pctFromFrac(a.value) } };
     case 'blind':
       return { key: `${KEY}.blind` };
     case 'silence':
