@@ -1715,13 +1715,21 @@ describe('ranged auto-attack crit suppression', () => {
   // The crit chance a swing rolls against is the second rng.chance() call in
   // both meleeSwing and rangedSwing (the first is the miss roll). Capture the
   // args and return false so no miss/crit branches fire and perturb state.
-  function critChanceRolled(sim: Sim, swing: () => void): number {
+  function critChanceRolled(sim: Sim, swing: () => void, source: any, target: any): number {
     const calls: number[] = [];
     (sim as any).rng.chance = (p: number) => {
       calls.push(p);
       return false;
     };
     swing();
+    // The shot's miss + crit rolls now run when the projectile lands, not on the
+    // swing tick: resolve the scheduled bolt directly so this stays an isolated unit
+    // test (ticking the whole Sim would pollute `calls` with regen/AI rolls).
+    const pending = (sim as any).pendingProjectiles as Array<{
+      resolve: (s: any, t: any) => void;
+    }>;
+    for (const proj of pending) proj.resolve(source, target);
+    pending.length = 0;
     return calls[1];
   }
 
@@ -1738,14 +1746,24 @@ describe('ranged auto-attack crit suppression', () => {
 
   it('suppresses crit against a higher-level target, matching melee', () => {
     const { sim, hunter, wolf, ranged } = setup(10, 13); // +3 levels
-    const rolled = critChanceRolled(sim, () => (sim as any).rangedSwing(hunter, wolf, ranged));
+    const rolled = critChanceRolled(
+      sim,
+      () => (sim as any).rangedSwing(hunter, wolf, ranged),
+      hunter,
+      wolf,
+    );
     // 0.5 base - 3 * 0.002 suppression = 0.494 (was a flat 0.5 before the fix)
     expect(rolled).toBeCloseTo(0.5 - 3 * 0.002, 5);
   });
 
   it('does not suppress crit against an equal-or-lower-level target', () => {
     const { sim, hunter, wolf, ranged } = setup(10, 8); // lower level
-    const rolled = critChanceRolled(sim, () => (sim as any).rangedSwing(hunter, wolf, ranged));
+    const rolled = critChanceRolled(
+      sim,
+      () => (sim as any).rangedSwing(hunter, wolf, ranged),
+      hunter,
+      wolf,
+    );
     expect(rolled).toBeCloseTo(0.5, 5);
   });
 });

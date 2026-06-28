@@ -16,6 +16,7 @@ import type { TalentModifiers } from './content/talents';
 import type { DelayedEvent, GroundAoE } from './entity_roster';
 import type { PendingLootRoll } from './loot/loot_roll';
 import type { MarketListing } from './market';
+import type { PendingProjectile } from './projectile_travel';
 import type { Rng } from './rng';
 import type {
   ArenaMatch,
@@ -83,6 +84,10 @@ export interface SimContextPrimitives {
   // reached here as live views. `delayedEvents` is read-write (the drain reassigns
   // the pending list); `groundAoEs` is mutated in place (splice), so read-only.
   delayedEvents: DelayedEvent[];
+  // In-flight projectiles (projectile_travel.ts): launched by the ranged combat
+  // paths, drained in the tick prologue when their flight elapses. Read-write (the
+  // drain reassigns the pending list), exactly like delayedEvents.
+  pendingProjectiles: PendingProjectile[];
   readonly groundAoEs: GroundAoE[];
   // dungeon-door registry (I1) appended to on dungeon_door spawn; null until built.
   // Read-write: I1's updateDoorTriggers lazily assigns the array on first build.
@@ -598,6 +603,12 @@ export function createSimContext(host: SimContextHost): SimContext {
     },
     set delayedEvents(v) {
       host.delayedEvents = v;
+    },
+    get pendingProjectiles() {
+      return host.pendingProjectiles;
+    },
+    set pendingProjectiles(v) {
+      host.pendingProjectiles = v;
     },
     get groundAoEs() {
       return host.groundAoEs;
