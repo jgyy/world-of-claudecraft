@@ -29,6 +29,7 @@ import {
   visualPortraitDataUrl,
 } from '../render/characters/portrait';
 import type { Renderer } from '../render/renderer';
+import { isDebuffAura } from '../sim/aura_classify';
 import { type AugmentCategory, augmentCategory } from '../sim/content/augments';
 import {
   EVENT_SKIN_TIERS,
@@ -766,6 +767,7 @@ export class Hud {
   private pfResTextEl = $('#pf-res-text');
   private pfResourceEl = $('#pf-resource');
   private buffBarEl = $('#buff-bar');
+  private debuffBarEl = $('#debuff-bar');
   private targetFrameEl = $('#target-frame');
   private targetEliteTagEl = $('#tf-elite-tag');
   private targetNameEl = $('#tf-name');
@@ -3666,8 +3668,10 @@ export class Hud {
     if (this.pfResourceEl.className !== resClass) this.pfResourceEl.className = resClass;
     this.updateLowResource(p);
 
-    // buff bar (player buffs + debuffs)
-    this.renderAuras(this.buffBarEl, p, 'all');
+    // buff bar / debuff bar: buffs and debuffs render to separate rows (classic
+    // layout), so a fresh debuff is never lost in a wall of long-lived buffs.
+    this.renderAuras(this.buffBarEl, p, 'buffs');
+    this.renderAuras(this.debuffBarEl, p, 'debuffs');
 
     // target frame
     const target = p.targetId !== null ? sim.entities.get(p.targetId) : null;
@@ -4183,42 +4187,16 @@ export class Hud {
     }
   }
 
-  private renderAuras(el: HTMLElement, e: Entity, mode: 'all' | 'debuffs'): void {
+  private renderAuras(el: HTMLElement, e: Entity, mode: 'all' | 'buffs' | 'debuffs'): void {
     // cheap diff: rebuild only when the aura set changes
     const sig = e.auras.map((a) => `${a.id}${Math.ceil(a.remaining)}x${a.stacks ?? 0}`).join('|');
     if ((el as any).__sig === sig) return;
     (el as any).__sig = sig;
     el.innerHTML = '';
     for (const a of e.auras) {
-      // A negative-value stat aura (e.g. a mob's Withering Wail sapping attack
-      // power, or an Intellect-draining curse) is a debuff even though it reuses a buff_* kind.
-      const isDebuff =
-        [
-          'dot',
-          'slow',
-          'root',
-          'stun',
-          'incapacitate',
-          'polymorph',
-          'attackspeed',
-          'debuff_ap',
-          'sunder',
-          'mortal_wound',
-          'silence',
-          'disarm',
-          'blind',
-          'expose',
-          'spellvuln',
-          'lockout',
-          'vulnerability',
-          'hex',
-          'tongues',
-          'cost_tax',
-          'heal_absorb',
-          'critvuln',
-        ].includes(a.kind) ||
-        (a.kind.startsWith('buff_') && a.value < 0);
+      const isDebuff = isDebuffAura(a.kind, a.value);
       if (mode === 'debuffs' && !isDebuff) continue;
+      if (mode === 'buffs' && isDebuff) continue;
       const d = document.createElement('div');
       d.className = `buff${isDebuff ? ' debuff' : ''}`;
       d.style.backgroundImage = `url(${iconDataUrl('aura', ABILITIES[a.id] ? a.id : `aura_${a.kind}`)})`;

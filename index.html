@@ -823,6 +823,8 @@
 
   /* ---------- buff bar ---------- */
   #buff-bar { position: absolute; right: 196px; top: 14px; display: flex; flex-direction: row-reverse; flex-wrap: wrap; gap: 4px; max-width: 320px; pointer-events: auto; }
+  /* Debuffs sit in their own row beneath the buff row (classic layout). */
+  #debuff-bar { position: absolute; right: 196px; top: 50px; display: flex; flex-direction: row-reverse; flex-wrap: wrap; gap: 4px; max-width: 320px; pointer-events: auto; }
   .buff { width: 28px; height: 28px; border: 1px solid var(--color-buff); border-radius: 4px;
     position: relative; cursor: default; background-color: #10141c;
     background-size: cover; background-position: center; background-repeat: no-repeat; }
@@ -6276,6 +6278,7 @@
     font-size: 10px;
   }
   body.mobile-touch #buff-bar { right: max(10px, env(safe-area-inset-right)); top: max(140px, env(safe-area-inset-top)); max-width: 180px; }
+  body.mobile-touch #debuff-bar { right: max(10px, env(safe-area-inset-right)); top: calc(max(140px, env(safe-area-inset-top)) + 36px); max-width: 180px; }
   body.mobile-touch #minimap-wrap { right: max(8px, env(safe-area-inset-right)); top: max(8px, env(safe-area-inset-top)); transform: scale(0.72); transform-origin: right top; }
   body.mobile-touch #quest-tracker { right: max(10px, env(safe-area-inset-right)); top: max(150px, env(safe-area-inset-top)); width: 190px; font-size: 11px; }
   body.mobile-touch #meters-window {
@@ -6995,6 +6998,7 @@
       font-size: 9px;
     }
     body.mobile-touch #buff-bar { right: calc(98px + env(safe-area-inset-right)); top: max(8px, env(safe-area-inset-top)); max-width: 160px; transform: scale(0.85); transform-origin: right top; }
+    body.mobile-touch #debuff-bar { right: calc(98px + env(safe-area-inset-right)); top: calc(max(8px, env(safe-area-inset-top)) + 32px); max-width: 160px; transform: scale(0.85); transform-origin: right top; }
     body.mobile-touch #minimap-wrap { right: max(6px, env(safe-area-inset-right)); top: max(6px, env(safe-area-inset-top)); transform: scale(0.46); }
     body.mobile-touch #quest-tracker { display: none; }
     body.mobile-touch #meters-window {
@@ -8306,6 +8310,7 @@
     <div id="party-frames"></div>
 
     <div id="buff-bar"></div>
+    <div id="debuff-bar"></div>
 
     <div id="ctx-menu" class="panel"></div>
     <div id="prompt-stack"></div>
