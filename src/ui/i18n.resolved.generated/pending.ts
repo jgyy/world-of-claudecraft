@@ -9,17 +9,38 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "es_ES": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "fr_FR": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "fr_CA": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
+  "it_IT": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "de_DE": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
-  "pt_BR": [],
+  "pt_BR": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
   "ru_RU": []
 };

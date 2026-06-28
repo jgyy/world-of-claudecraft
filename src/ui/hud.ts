@@ -5943,7 +5943,7 @@ export class Hud {
         const tgt = sim.entities.get(ev.targetId);
         if (!tgt) return;
         const tp = tgt.pos;
-        if (ev.kind === 'miss' || ev.kind === 'dodge') {
+        if (ev.kind === 'miss' || ev.kind === 'dodge' || ev.kind === 'resist') {
           this.combat('combat_dodge', tp.x, tp.y, tp.z, 0.5);
           return;
         }
@@ -6096,21 +6096,28 @@ export class Hud {
           const isPlayerSource = ev.sourceId === sim.playerId;
           const isPlayerTarget = ev.targetId === sim.playerId;
           if (isPlayerSource || isPlayerTarget) this.lastCombatEventAt = performance.now();
-          if (ev.kind === 'miss' || ev.kind === 'dodge') {
-            this.fct(
-              tgt,
-              ev.kind === 'miss' ? t('hud.combat.floatingMiss') : t('hud.combat.floatingDodge'),
-              isPlayerTarget ? '#bbb' : '#fff',
-              false,
-            );
+          if (ev.kind === 'miss' || ev.kind === 'dodge' || ev.kind === 'resist') {
+            const floatWord =
+              ev.kind === 'miss'
+                ? t('hud.combat.floatingMiss')
+                : ev.kind === 'dodge'
+                  ? t('hud.combat.floatingDodge')
+                  : t('hud.combat.floatingResist');
+            this.fct(tgt, floatWord, isPlayerTarget ? '#bbb' : '#fff', false);
             // Fiesta: a dodge is a moment — pop a big exaggerated word for it.
             if (ev.kind === 'dodge' && (isPlayerSource || isPlayerTarget) && this.inFiesta()) {
               this.fiestaWordPop(t('fiesta.word.dodge'), '#7fd4ff', 1);
               this.renderer.addShake(0.15);
             }
             if (isPlayerSource) {
+              const logKey =
+                ev.kind === 'miss'
+                  ? 'hud.combat.miss'
+                  : ev.kind === 'dodge'
+                    ? 'hud.combat.dodged'
+                    : 'hud.combat.resisted';
               this.combatLog(
-                t(ev.kind === 'miss' ? 'hud.combat.miss' : 'hud.combat.dodged', {
+                t(logKey, {
                   ability: combatAbilityName(ev.ability),
                   target: entityDisplayName(tgt),
                 }),
