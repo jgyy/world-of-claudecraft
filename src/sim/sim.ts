@@ -158,7 +158,6 @@ import { MARKET_MAX_LISTINGS, Market, type MarketListing, type MarketSave } from
 import * as lifecycle from './mob/lifecycle';
 import { resetEvadingMob as resetEvadingMobFn, updateMob as updateMobFn } from './mob/locomotion';
 import { runMobSwingAffixes } from './mob/mob_swing';
-import { rallyFleeingAllies } from './mob/social_aggro';
 import {
   retargetMob as retargetMobFn,
   updateMobTarget as updateMobTargetFn,
@@ -3624,9 +3623,9 @@ export class Sim {
       color: '#ffd966',
       entityId: mob.id,
     });
-    // Call only the local same-family allies once, here at the panic spot. The fleer
-    // does NOT chain in mobs it runs past while sprinting (mob/social_aggro.ts).
-    rallyFleeingAllies(this.ctx, mob, target);
+    // The rally is NOT seeded here at the panic spot. The fleer runs first and rallies
+    // the first local same-family cluster it reaches, then turns back to fight with it;
+    // that per-tick scan lives in the flee arm (mob/locomotion.ts -> mob/social_aggro.ts).
     return true;
   }
 

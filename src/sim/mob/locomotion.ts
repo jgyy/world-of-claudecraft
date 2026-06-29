@@ -41,6 +41,7 @@ import {
   type Vec3,
 } from '../types';
 import { groundHeight, WATER_LEVEL } from '../world';
+import { rallyFleeingAllies } from './social_aggro';
 import { isTrivialTo, retargetMob, updateMobTarget } from './targeting';
 
 const EVADE_SPEED_MULT = 1.6;
@@ -454,9 +455,16 @@ export function updateMob(ctx: SimContext, mob: Entity): void {
         mob.swingTimer = Math.min(mob.swingTimer, 0.4);
         break;
       }
-      // No per-tick rally here: the local same-family allies were called once at the
-      // panic spot (maybeFlee -> rallyFleeingAllies). A fleer must NOT chain in every
-      // mob it runs past, or one pull cascades across the whole camp.
+      // Each tick of the flee, look for a local same-family ally to run back with. The
+      // instant the fleer reaches one (the first non-empty rally), that local cluster
+      // joins the fight and the fleer turns back to re-engage WITH it. Ending the flee on
+      // first contact is what keeps the rally LOCAL: the fleer pulls one cluster, then
+      // heads back the way it came, so it never chains the rest of the pack down the lane.
+      if (rallyFleeingAllies(ctx, mob, target) > 0) {
+        recoverFromFlee(mob, target, leash, leashAnchor);
+        mob.swingTimer = Math.min(mob.swingTimer, 0.4);
+        break;
+      }
       // Run directly away from the attacker. A root pins it in place (it just
       // cowers facing away); a stun is already handled by the early return above.
       const away = angleTo(target.pos, mob.pos);

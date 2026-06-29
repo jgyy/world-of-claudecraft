@@ -1,7 +1,8 @@
-// mob/social_aggro.ts: at the panic moment a fleeing mob rallies only its LOCAL idle
-// same-family allies (within FLEE_HELP_RADIUS), once. Driven through a real Sim so the
-// spatial grid, MOBS table, and threat seeding are the live ones; the module is also
-// exercised directly for its return count.
+// mob/social_aggro.ts: a fleeing mob rallies only its LOCAL idle same-family allies
+// (within FLEE_HELP_RADIUS). The flee arm calls this each tick and turns the fleer back
+// on the first non-empty rally, so only the first local cluster is pulled. Driven through
+// a real Sim so the spatial grid, MOBS table, and threat seeding are the live ones; the
+// module is also exercised directly for its return count.
 import { describe, expect, it } from 'vitest';
 import { FLEE_HELP_RADIUS, rallyFleeingAllies } from '../src/sim/mob/social_aggro';
 import { Sim } from '../src/sim/sim';
