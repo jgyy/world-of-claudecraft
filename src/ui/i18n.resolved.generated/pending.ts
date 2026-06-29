@@ -64,22 +64,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.options.autoFaceOnCast",
     "hudChrome.options.autoFaceOnCastHelp"
   ],
-  "zh_CN": [
-    "hudChrome.options.autoFaceOnCast",
-    "hudChrome.options.autoFaceOnCastHelp"
-  ],
-  "zh_TW": [
-    "hudChrome.options.autoFaceOnCast",
-    "hudChrome.options.autoFaceOnCastHelp"
-  ],
-  "ko_KR": [
-    "hudChrome.options.autoFaceOnCast",
-    "hudChrome.options.autoFaceOnCastHelp"
-  ],
-  "ja_JP": [
-    "hudChrome.options.autoFaceOnCast",
-    "hudChrome.options.autoFaceOnCastHelp"
-  ],
+  "zh_CN": [],
+  "zh_TW": [],
+  "ko_KR": [],
+  "ja_JP": [],
   "pt_BR": [
     "hud.combat.floatingResist",
     "hud.combat.resisted",
@@ -89,10 +77,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.options.autoFaceOnCast",
     "hudChrome.options.autoFaceOnCastHelp"
   ],
-  "ru_RU": [
-    "hudChrome.options.autoFaceOnCast",
-    "hudChrome.options.autoFaceOnCastHelp"
-  ],
+  "ru_RU": [],
   "nl_NL": [
     "hud.combat.floatingResist",
     "hud.combat.resisted",

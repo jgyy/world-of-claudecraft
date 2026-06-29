@@ -15,6 +15,9 @@ import type { TranslationKey } from '../i18n.catalog';
 
 export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.spectate.banner': '{name} 관전 중',
+  'hudChrome.options.autoFaceOnCast': '시전 시 대상 자동 조준',
+  'hudChrome.options.autoFaceOnCastHelp':
+    '대상을 지정하는 기술을 시전하면 캐릭터가 대상을 향해 돌아서서 공격과 투사체가 정면에서 나갑니다. 끄면 고전 방식으로 작동하여, 바라보지 않는 대상에게 시전하면 거부되고 직접 돌아서야 합니다.',
   'hudChrome.loot.chestTitle': '상자',
   'hudChrome.spellbook.addToBarAria': '{name}을(를) 행동 단축바에 추가',
   'hudChrome.spellbook.removeFromBarAria': '{name}을(를) 행동 단축바에서 제거',

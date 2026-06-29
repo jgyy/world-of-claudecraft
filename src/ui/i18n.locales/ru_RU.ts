@@ -15,6 +15,9 @@ import type { TranslationKey } from '../i18n.catalog';
 
 export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.spectate.banner': 'Наблюдение за {name}',
+  'hudChrome.options.autoFaceOnCast': 'Автоповорот к цели при касте',
+  'hudChrome.options.autoFaceOnCastHelp':
+    'Когда вы применяете способность по выбранной цели, ваш персонаж поворачивается лицом к ней, чтобы удары и снаряды исходили спереди. Отключите для классического поведения: применение по цели, к которой вы не повёрнуты, отклоняется, и вам нужно повернуться самостоятельно.',
   'hudChrome.loot.chestTitle': 'Сундук',
   'hudChrome.spellbook.addToBarAria': 'Добавить {name} на панель действий',
   'hudChrome.spellbook.removeFromBarAria': 'Убрать {name} с панели действий',

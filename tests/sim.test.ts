@@ -563,8 +563,12 @@ describe('combat', () => {
     const hpBefore = wolf.hp;
     sim.castAbility('fireball');
     // The cast is not rejected for facing, and the caster has pivoted to face the wolf.
-    expect(sim.events.find((e: any) => e.type === 'error' && /facing/.test(e.text ?? ''))).toBeUndefined();
-    const facingErr = Math.abs(Math.atan2(Math.sin(sim.player.facing - toward), Math.cos(sim.player.facing - toward)));
+    expect(
+      sim.events.find((e: any) => e.type === 'error' && /facing/.test(e.text ?? '')),
+    ).toBeUndefined();
+    const facingErr = Math.abs(
+      Math.atan2(Math.sin(sim.player.facing - toward), Math.cos(sim.player.facing - toward)),
+    );
     expect(facingErr).toBeLessThan(1e-6);
     expect(sim.player.castingAbility).toBe('fireball');
     for (let i = 0; i < 20 * 3; i++) sim.tick();
@@ -583,7 +587,9 @@ describe('combat', () => {
     sim.events = [];
     sim.castAbility('fireball');
     // Classic behavior: cast is rejected for facing and the caster does NOT pivot.
-    expect(sim.events.find((e: any) => e.type === 'error' && /facing/.test(e.text ?? ''))).toBeDefined();
+    expect(
+      sim.events.find((e: any) => e.type === 'error' && /facing/.test(e.text ?? '')),
+    ).toBeDefined();
     expect(sim.player.facing).toBe(away);
     expect(sim.player.castingAbility).toBeNull();
   });
@@ -597,7 +603,9 @@ describe('combat', () => {
     sim.player.facing = Math.atan2(wolf.pos.x - sim.player.pos.x, wolf.pos.z - sim.player.pos.z);
     sim.events = [];
     sim.castAbility('fireball');
-    expect(sim.events.find((e: any) => e.type === 'error' && /facing/.test(e.text ?? ''))).toBeUndefined();
+    expect(
+      sim.events.find((e: any) => e.type === 'error' && /facing/.test(e.text ?? '')),
+    ).toBeUndefined();
     expect(sim.player.castingAbility).toBe('fireball');
   });
 

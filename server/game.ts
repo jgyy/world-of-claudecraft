@@ -2130,8 +2130,7 @@ export class GameServer {
         if (typeof msg.aura === 'string') sim.cancelAura(msg.aura, pid);
         break;
       case 'setPref':
-        if (typeof msg.autoFaceOnCast === 'boolean')
-          sim.setAutoFaceOnCast(msg.autoFaceOnCast, pid);
+        if (typeof msg.autoFaceOnCast === 'boolean') sim.setAutoFaceOnCast(msg.autoFaceOnCast, pid);
         break;
       case 'target':
         sim.targetEntity(typeof msg.id === 'number' ? msg.id : null, pid);

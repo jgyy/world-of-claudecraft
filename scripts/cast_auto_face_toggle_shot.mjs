@@ -8,8 +8,9 @@
 //          projectile leaves from the front). Screenshot: tmp/cast-auto-face-on.png
 //   OFF -> the classic facing requirement applies; the off-arc cast is rejected
 //          and the caster keeps its backward facing. Screenshot: tmp/cast-auto-face-off.png
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';
 
 const URL = (process.env.GAME_URL ?? 'http://localhost:5173') + '/?gfx=ultra';
@@ -19,14 +20,23 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const browser = await puppeteer.launch({
   executablePath: BROWSER_PATH,
   headless: 'new',
-  args: ['--window-size=1600,900', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
-    '--no-sandbox', '--disable-crash-reporter', '--disable-breakpad', '--no-crashpad',
-    `--user-data-dir=${process.env.SHOT_PROFILE_DIR ?? '/tmp/cast-auto-face-toggle-profile'}`],
+  args: [
+    '--window-size=1600,900',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+    '--no-sandbox',
+    '--disable-crash-reporter',
+    '--disable-breakpad',
+    '--no-crashpad',
+    `--user-data-dir=${process.env.SHOT_PROFILE_DIR ?? '/tmp/cast-auto-face-toggle-profile'}`,
+  ],
   defaultViewport: { width: 1600, height: 900, deviceScaleFactor: 2 },
 });
 const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
-page.on('console', (m) => { if (m.type() === 'error') console.log('CONSOLE:', m.text()); });
+page.on('console', (m) => {
+  if (m.type() === 'error') console.log('CONSOLE:', m.text());
+});
 
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
 await page.waitForSelector('#btn-offline', { timeout: 60000 });
@@ -44,28 +54,43 @@ async function castWith(enabled) {
     const g = window.__game;
     const w = g.world;
     const p = w.player;
-    let mob = null, best = Infinity;
+    let mob = null,
+      best = Infinity;
     for (const e of w.entities.values()) {
       if (e.kind !== 'mob' || e.dead) continue;
-      const dx = e.pos.x - p.pos.x, dz = e.pos.z - p.pos.z;
+      const dx = e.pos.x - p.pos.x,
+        dz = e.pos.z - p.pos.z;
       const d = Math.hypot(dx, dz);
-      if (d < best) { best = d; mob = e; }
+      if (d < best) {
+        best = d;
+        mob = e;
+      }
     }
     if (!mob) return { error: 'no mob found' };
     // Stand 15yd east of the mob, on the ground, turned fully away from it.
-    p.pos.x = mob.pos.x + 15; p.pos.z = mob.pos.z;
+    p.pos.x = mob.pos.x + 15;
+    p.pos.z = mob.pos.z;
     p.prevPos = { ...p.pos };
     const toward = Math.atan2(mob.pos.x - p.pos.x, mob.pos.z - p.pos.z);
-    p.facing = toward + Math.PI; p.prevFacing = p.facing;
-    p.castingAbility = null; p.castRemaining = 0; p.castTotal = 0;
+    p.facing = toward + Math.PI;
+    p.prevFacing = p.facing;
+    p.castingAbility = null;
+    p.castRemaining = 0;
+    p.castTotal = 0;
     w.targetEntity(mob.id);
     w.setAutoFaceOnCast(enabled);
     const facingBefore = p.facing;
-    const wrap = (a) => { while (a > Math.PI) a -= 2 * Math.PI; while (a < -Math.PI) a += 2 * Math.PI; return a; };
+    const wrap = (a) => {
+      while (a > Math.PI) a -= 2 * Math.PI;
+      while (a < -Math.PI) a += 2 * Math.PI;
+      return a;
+    };
     w.castAbility('fireball');
     const facingAfter = p.facing;
     return {
-      toward, facingBefore, facingAfter,
+      toward,
+      facingBefore,
+      facingAfter,
       gapBefore: Math.abs(wrap(facingBefore - toward)),
       gapAfter: Math.abs(wrap(facingAfter - toward)),
       casting: p.castingAbility ?? null,
@@ -77,7 +102,7 @@ async function frameAndShoot(path) {
   await page.evaluate(() => {
     const r = window.__game.renderer;
     if ('camDist' in r) r.camDist = 16;
-    if ('camPitch' in r) r.camPitch = 0.30;
+    if ('camPitch' in r) r.camPitch = 0.3;
   });
   await sleep(700);
   await page.screenshot({ path });
@@ -97,9 +122,15 @@ console.log(JSON.stringify(off, null, 2));
 await frameAndShoot('tmp/cast-auto-face-off.png');
 console.log('screenshot -> tmp/cast-auto-face-off.png');
 
-const ok = !on.error && !off.error
-  && on.gapBefore > Math.PI - 0.2 && on.gapAfter < 1e-3 && on.casting === 'fireball'
-  && off.gapBefore > Math.PI - 0.2 && off.gapAfter > Math.PI - 0.2 && off.casting === null;
+const ok =
+  !on.error &&
+  !off.error &&
+  on.gapBefore > Math.PI - 0.2 &&
+  on.gapAfter < 1e-3 &&
+  on.casting === 'fireball' &&
+  off.gapBefore > Math.PI - 0.2 &&
+  off.gapAfter > Math.PI - 0.2 &&
+  off.casting === null;
 console.log('PASS:', ok);
 
 await browser.close();

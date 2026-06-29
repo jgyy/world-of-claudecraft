@@ -15,6 +15,9 @@ import type { TranslationKey } from '../i18n.catalog';
 
 export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.spectate.banner': '正在觀察 {name}',
+  'hudChrome.options.autoFaceOnCast': '施法時自動面向目標',
+  'hudChrome.options.autoFaceOnCastHelp':
+    '當你施放指定目標的技能時，你的角色會轉身面向目標，使近戰攻擊與投射物從正面發出。關閉後恢復經典行為：對未面向的目標施法會被拒絕，你必須自行轉身。',
   'hudChrome.loot.chestTitle': '寶箱',
   'hudChrome.spellbook.addToBarAria': '將 {name} 加入動作列',
   'hudChrome.spellbook.removeFromBarAria': '將 {name} 從動作列移除',

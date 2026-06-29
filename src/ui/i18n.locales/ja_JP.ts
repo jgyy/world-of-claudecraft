@@ -15,6 +15,9 @@ import type { TranslationKey } from '../i18n.catalog';
 
 export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.spectate.banner': '{name}を観戦中',
+  'hudChrome.options.autoFaceOnCast': '詠唱時に対象へ自動で向き直る',
+  'hudChrome.options.autoFaceOnCastHelp':
+    '対象を指定した能力を使用すると、キャラクターが対象の方へ向き直り、攻撃や投射物が正面から放たれます。オフにするとクラシックな挙動になり、向いていない対象への詠唱は拒否され、自分で向き直る必要があります。',
   'hudChrome.loot.chestTitle': '宝箱',
   'hudChrome.spellbook.addToBarAria': '{name}をアクションバーに追加',
   'hudChrome.spellbook.removeFromBarAria': '{name}をアクションバーから削除',
