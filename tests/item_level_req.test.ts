@@ -1,0 +1,67 @@
+import { describe, expect, it } from 'vitest';
+import { meetsLevelRequirement, requiredLevelFor } from '../src/sim/item_level_req';
+import type { ItemDef } from '../src/sim/types';
+import { MAX_LEVEL } from '../src/sim/types';
+
+function gear(quality: ItemDef['quality'], extra: Partial<ItemDef> = {}): ItemDef {
+  return {
+    id: 'test_item',
+    name: 'Test Item',
+    kind: 'armor',
+    slot: 'chest',
+    sellValue: 1,
+    quality,
+    ...extra,
+  };
+}
+
+describe('requiredLevelFor', () => {
+  it('derives an ascending required level from quality', () => {
+    expect(requiredLevelFor(gear('poor'))).toBe(1);
+    expect(requiredLevelFor(gear('common'))).toBe(1);
+    expect(requiredLevelFor(gear('uncommon'))).toBe(5);
+    expect(requiredLevelFor(gear('rare'))).toBe(12);
+    expect(requiredLevelFor(gear('epic'))).toBe(18);
+    expect(requiredLevelFor(gear('legendary'))).toBe(MAX_LEVEL);
+  });
+
+  it('treats a missing quality as common (ungated)', () => {
+    expect(requiredLevelFor(gear(undefined))).toBe(1);
+  });
+
+  it('lets an explicit requiredLevel override the quality default', () => {
+    expect(requiredLevelFor(gear('common', { requiredLevel: 10 }))).toBe(10);
+    expect(requiredLevelFor(gear('legendary', { requiredLevel: 3 }))).toBe(3);
+  });
+
+  it('clamps the requirement to [1, MAX_LEVEL]', () => {
+    expect(requiredLevelFor(gear('common', { requiredLevel: 0 }))).toBe(1);
+    expect(requiredLevelFor(gear('common', { requiredLevel: -5 }))).toBe(1);
+    expect(requiredLevelFor(gear('common', { requiredLevel: 999 }))).toBe(MAX_LEVEL);
+  });
+
+  it('never gates higher than the level cap, so the rarest gear stays reachable', () => {
+    for (const q of ['poor', 'common', 'uncommon', 'rare', 'epic', 'legendary'] as const) {
+      expect(requiredLevelFor(gear(q))).toBeLessThanOrEqual(MAX_LEVEL);
+    }
+  });
+});
+
+describe('meetsLevelRequirement', () => {
+  it('is false below the requirement and true at or above it', () => {
+    const rare = gear('rare'); // requires 12
+    expect(meetsLevelRequirement(11, rare)).toBe(false);
+    expect(meetsLevelRequirement(12, rare)).toBe(true);
+    expect(meetsLevelRequirement(20, rare)).toBe(true);
+  });
+
+  it('always passes common/poor starter gear at level 1', () => {
+    expect(meetsLevelRequirement(1, gear('common'))).toBe(true);
+    expect(meetsLevelRequirement(1, gear('poor'))).toBe(true);
+  });
+
+  it('is a pure function of its inputs (same inputs, same result)', () => {
+    const item = gear('epic');
+    expect(meetsLevelRequirement(18, item)).toEqual(meetsLevelRequirement(18, item));
+  });
+});
