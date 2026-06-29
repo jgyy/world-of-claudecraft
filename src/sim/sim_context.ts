@@ -85,8 +85,9 @@ export interface SimContextPrimitives {
   // the pending list); `groundAoEs` is mutated in place (splice), so read-only.
   delayedEvents: DelayedEvent[];
   // In-flight projectiles (projectile_travel.ts): launched by the ranged combat
-  // paths, drained in the tick prologue when their flight elapses. Read-write (the
-  // drain reassigns the pending list), exactly like delayedEvents.
+  // paths, stepped toward their live targets in the tick prologue and resolved on the
+  // tick they arrive. Read-write (the advance reassigns the pending list), like
+  // delayedEvents.
   pendingProjectiles: PendingProjectile[];
   readonly groundAoEs: GroundAoE[];
   // dungeon-door registry (I1) appended to on dungeon_door spawn; null until built.

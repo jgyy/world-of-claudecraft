@@ -174,7 +174,7 @@ import {
   talentPointBudget,
 } from './progression/talents';
 import { prestige as prestigeImpl, updateRested } from './progression/xp';
-import { drainPendingProjectiles, type PendingProjectile } from './projectile_travel';
+import { advancePendingProjectiles, type PendingProjectile } from './projectile_travel';
 import { questFallbackGrants } from './quest_fallback';
 import { sanitizeRemovedZone1Content } from './removed_zone1_content';
 import { Rng } from './rng';
@@ -2289,9 +2289,9 @@ export class Sim {
     tickGroundAoEs(this.ctx);
 
     runDespawnDecay(this.ctx);
-    // Land any projectiles whose flight has elapsed before this tick's casts/swings,
-    // so a deferred bolt resolves on a fixed, deterministic phase boundary.
-    drainPendingProjectiles(this.ctx);
+    // Step in-flight projectiles toward their live targets before this tick's casts and
+    // swings, so a homing bolt resolves on a fixed, deterministic phase boundary.
+    advancePendingProjectiles(this.ctx);
 
     for (const meta of this.players.values()) {
       const p = this.entities.get(meta.entityId);

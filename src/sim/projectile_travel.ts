@@ -8,39 +8,64 @@
 // crit/damage rng draws, dealDamage / runEffects) to run when the bolt reaches the
 // target, one or more ticks later. Because every rng draw is deferred to the landing
 // tick, a projectile whose caster or target dies or despawns mid-flight FIZZLES: it
-// draws nothing and deals nothing (drainPendingProjectiles' alive guard).
+// draws nothing and deals nothing (the alive guard in advancePendingProjectiles).
 //
-// `src/sim`-pure: the travel math (projectileTravelTime + constants) is a pure
-// function of numbers a Vitest drives directly; scheduleProjectile/drain take the
-// SimContext seam by TYPE only (no DOM/Three/Math.random/Date.now), so the
-// architecture guard (tests/architecture.test.ts) stays green.
+// The bolt HOMES on its live target, exactly like the renderer: each tick it steps
+// PROJECTILE_SPEED * DT yards toward the target's CURRENT position and impacts on the
+// tick it comes within reach. Storing a fixed launch-time landing tick would desync
+// from the visual whenever the target moves during flight (a target kiting away pushes
+// the bolt's real impact later; running in pulls it earlier); stepping toward the live
+// position tracks the renderer's homing instead.
+//
+// `src/sim`-pure: the homing math (stepProjectile + constants) is a pure function of
+// numbers a Vitest drives directly; scheduleProjectile/advance take the SimContext seam
+// by TYPE only (no DOM/Three/Math.random/Date.now), so the architecture guard
+// (tests/architecture.test.ts) stays green.
 
 import type { SimContext } from './sim_context';
-import { dist2d, type Entity } from './types';
+import { DT, type Entity } from './types';
 
 // Yards per second. Matches the homing projectile speed in src/render/vfx.ts so the
 // damage lands in step with the bolt the player actually sees. Keep the two in sync.
 export const PROJECTILE_SPEED = 26;
 
-// A bolt never spends more than this in flight, so a max-range shot (~40 yd) still
-// resolves promptly rather than letting an extreme distance stall its damage.
-export const PROJECTILE_MAX_TRAVEL = 2;
+// Impact radius in yards: the bolt lands once it is within this of the live target (or
+// one tick's step, whichever is larger). Mirrors the `Math.max(0.7, step)` arrival test
+// in src/render/vfx.ts so the sim resolves on the same tick the visual flashes.
+export const PROJECTILE_REACH = 0.7;
 
-/** Seconds a projectile spends in flight covering `dist` yards at `speed` yd/s,
- *  clamped to PROJECTILE_MAX_TRAVEL. Pure: same inputs give the same output, so a
- *  scheduled landing tick is deterministic. A non-positive distance or speed lands
- *  immediately (0), which the prologue drain still defers by at least one tick. */
-export function projectileTravelTime(dist: number, speed: number = PROJECTILE_SPEED): number {
-  if (!(dist > 0) || !(speed > 0)) return 0;
-  return Math.min(dist / speed, PROJECTILE_MAX_TRAVEL);
+// Seconds a bolt may spend chasing before it gives up and fizzles. Matches the bolt's
+// ttl in src/render/vfx.ts, so a projectile that can never catch a target kiting at or
+// above PROJECTILE_SPEED dies in the sim exactly when its visual does.
+export const PROJECTILE_MAX_FLIGHT = 3;
+
+/** One tick of homing: move (x, z) toward (tx, tz) by `step` yards. Returns the new
+ *  position and whether the bolt is now within reach (it impacts this tick). Pure:
+ *  same inputs give the same output, so a bolt's whole flight is deterministic. */
+export function stepProjectile(
+  x: number,
+  z: number,
+  tx: number,
+  tz: number,
+  step: number,
+): { x: number; z: number; hit: boolean } {
+  const dx = tx - x;
+  const dz = tz - z;
+  const dist = Math.sqrt(dx * dx + dz * dz);
+  if (dist <= Math.max(PROJECTILE_REACH, step)) return { x: tx, z: tz, hit: true };
+  const k = step / dist;
+  return { x: x + dx * k, z: z + dz * k, hit: false };
 }
 
 // A projectile in flight: re-resolved by id at the landing tick so a stale Entity ref
-// can never be hit. `resolve` runs only when both ends are still alive (see the drain).
+// can never be hit. `resolve` runs only when both ends are still alive (see advance).
+// `x`/`z` are the bolt's live horizontal position, stepped toward the target each tick.
 export type PendingProjectile = {
-  at: number; // sim time (seconds) the bolt reaches its target
+  x: number;
+  z: number;
   sourceId: number;
   targetId: number;
+  ttl: number; // seconds of flight remaining before the bolt gives up and fizzles
   resolve: (source: Entity, target: Entity) => void;
 };
 
@@ -53,22 +78,39 @@ export function scheduleProjectile(
   target: Entity,
   resolve: (source: Entity, target: Entity) => void,
 ): void {
-  const at = ctx.time + projectileTravelTime(dist2d(source.pos, target.pos));
-  ctx.pendingProjectiles.push({ at, sourceId: source.id, targetId: target.id, resolve });
+  ctx.pendingProjectiles.push({
+    x: source.pos.x,
+    z: source.pos.z,
+    sourceId: source.id,
+    targetId: target.id,
+    ttl: PROJECTILE_MAX_FLIGHT,
+    resolve,
+  });
 }
 
-/** Resolve every projectile whose flight has elapsed, in launch order (reordering IS
- *  drift). A bolt fizzles (resolves to nothing) when its caster or target has died or
- *  despawned mid-flight, so no damage, threat, or kill credit lands on a corpse. */
-export function drainPendingProjectiles(ctx: SimContext): void {
+/** Advance every in-flight projectile one tick toward its live target, in launch order
+ *  (reordering IS drift), resolving the ones that arrive. A bolt fizzles (resolves to
+ *  nothing) when its caster or target has died or despawned mid-flight, or when it has
+ *  chased past PROJECTILE_MAX_FLIGHT without catching the target, so no damage, threat,
+ *  or kill credit lands on a corpse or a runaway. */
+export function advancePendingProjectiles(ctx: SimContext): void {
   if (ctx.pendingProjectiles.length === 0) return;
-  const pending: PendingProjectile[] = [];
+  const step = PROJECTILE_SPEED * DT;
+  const stillFlying: PendingProjectile[] = [];
   for (const proj of ctx.pendingProjectiles) {
-    if (proj.at <= ctx.time) {
-      const source = ctx.entities.get(proj.sourceId);
-      const target = ctx.entities.get(proj.targetId);
-      if (source && !source.dead && target && !target.dead) proj.resolve(source, target);
-    } else pending.push(proj);
+    const source = ctx.entities.get(proj.sourceId);
+    const target = ctx.entities.get(proj.targetId);
+    if (!source || source.dead || !target || target.dead) continue; // fizzle
+    const next = stepProjectile(proj.x, proj.z, target.pos.x, target.pos.z, step);
+    if (next.hit) {
+      proj.resolve(source, target);
+      continue;
+    }
+    proj.ttl -= DT;
+    if (proj.ttl <= 0) continue; // never caught the target: give up, like the visual
+    proj.x = next.x;
+    proj.z = next.z;
+    stillFlying.push(proj);
   }
-  ctx.pendingProjectiles = pending;
+  ctx.pendingProjectiles = stillFlying;
 }

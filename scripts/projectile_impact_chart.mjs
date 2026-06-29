@@ -14,7 +14,7 @@
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
-import { PROJECTILE_SPEED, projectileTravelTime } from '../src/sim/projectile_travel.ts';
+import { PROJECTILE_SPEED } from '../src/sim/projectile_travel.ts';
 import { Sim } from '../src/sim/sim.ts';
 import { terrainHeight } from '../src/sim/world.ts';
 
@@ -54,7 +54,8 @@ function measure() {
 }
 
 const { landTick, dmg } = measure();
-const travelSec = projectileTravelTime(DIST);
+// Flight time is whatever the homing bolt actually took to reach the target in the sim.
+const travelSec = landTick > 0 ? landTick / 20 : 0;
 const ticks = Math.max(landTick, 16);
 
 // --- Render the SVG --------------------------------------------------------
