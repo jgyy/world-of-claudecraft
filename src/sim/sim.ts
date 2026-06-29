@@ -123,9 +123,9 @@ import {
   tickGroundAoEs,
 } from './entity_roster';
 import { canEquipItem } from './equipment_rules';
-import { meetsLevelRequirement } from './item_level_req';
 import { formatMoney } from './format_money';
 import * as interaction from './interaction';
+import { meetsLevelRequirement } from './item_level_req';
 import * as items from './items';
 import {
   LEADERBOARD_PAGE_SIZE,
