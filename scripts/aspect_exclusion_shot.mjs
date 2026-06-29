@@ -3,10 +3,12 @@
 // each aspect in turn (clearing the GCD between casts). Before the fix all three
 // stacked (+AP, +dodge, +speed at once); now only the most recent aspect is up.
 // Captures the buff bar holding a single aspect icon and logs the stat proof.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -17,7 +19,7 @@ const browser = await puppeteer.launch({
   defaultViewport: { width: 1600, height: 900 },
 });
 const page = await browser.newPage();
-page.on('pageerror', (e) => console.log('PAGEERROR: ' + e.message));
+page.on('pageerror', (e) => console.log(`PAGEERROR: ${e.message}`));
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
@@ -45,15 +47,20 @@ const result = await page.evaluate(() => {
   sim.setPlayerLevel(14); // hawk(4) + monkey(10) + cheetah(14) all trained
   p.gm = true; // survive the ambient world loop while we pose
   // Aspects trigger the GCD; settle 32 ticks (1.6s) between casts so each lands.
-  const settle = () => { for (let i = 0; i < 32; i++) sim.tick(); };
+  const settle = () => {
+    for (let i = 0; i < 32; i++) sim.tick();
+  };
   const aspects = () => p.auras.filter((a) => a.id.startsWith('aspect_of_the_')).map((a) => a.id);
 
   const base = { ap: p.attackPower, dodge: p.dodgeChance };
-  sim.castAbility('aspect_of_the_hawk'); settle();
+  sim.castAbility('aspect_of_the_hawk');
+  settle();
   const afterHawk = { aspects: aspects(), ap: p.attackPower };
-  sim.castAbility('aspect_of_the_monkey'); settle();
+  sim.castAbility('aspect_of_the_monkey');
+  settle();
   const afterMonkey = { aspects: aspects(), ap: p.attackPower, dodge: p.dodgeChance };
-  sim.castAbility('aspect_of_the_cheetah'); settle();
+  sim.castAbility('aspect_of_the_cheetah');
+  settle();
   const afterCheetah = { aspects: aspects() };
   return { base, afterHawk, afterMonkey, afterCheetah };
 });
@@ -81,8 +88,10 @@ if (box && box.w > 0) {
   await page.screenshot({
     path: 'tmp/aspect_exclusion_buff.png',
     clip: {
-      x: Math.max(0, box.x - pad), y: Math.max(0, box.y - pad),
-      width: box.w + pad * 2, height: box.h + pad * 2,
+      x: Math.max(0, box.x - pad),
+      y: Math.max(0, box.y - pad),
+      width: box.w + pad * 2,
+      height: box.h + pad * 2,
     },
   });
 }

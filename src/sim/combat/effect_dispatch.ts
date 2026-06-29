@@ -18,12 +18,12 @@
 import { ABILITIES } from '../data';
 import { recalcPlayerStats } from '../entity';
 import type { GroundAoE } from '../entity_roster';
-import { exclusiveAuraConflicts } from './exclusive_aura';
 import type { PlayerMeta, ResolvedAbility } from '../sim';
 import type { SimContext } from '../sim_context';
 import { addThreat } from '../threat';
 import type { AbilityDef, Entity } from '../types';
 import { armorReduction, meleeMissChance } from '../types';
+import { exclusiveAuraConflicts } from './exclusive_aura';
 
 const CHARGE_MAX_DURATION = 3; // seconds before a blocked charge gives up
 

@@ -190,7 +190,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   battle_shout: {
     id: 'battle_shout', name: 'Battle Shout', class: 'warrior', learnLevel: 1,
     cost: 10, castTime: 0, cooldown: 0, range: 0, school: 'physical',
-    requiresTarget: false,
+    requiresTarget: false, exclusiveGroup: 'warrior_shout',
     effects: [{ type: 'selfBuff', kind: 'buff_ap', value: 20, duration: 120 }],
     ranks: [
       { rank: 2, level: 12, cost: 10, effects: [{ type: 'selfBuff', kind: 'buff_ap', value: 35, duration: 120 }] },
@@ -201,7 +201,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   commanding_shout: {
     id: 'commanding_shout', name: 'Commanding Shout', class: 'warrior', learnLevel: 14,
     cost: 10, castTime: 0, cooldown: 0, range: 0, school: 'physical',
-    requiresTarget: false,
+    requiresTarget: false, exclusiveGroup: 'warrior_shout',
     effects: [{ type: 'selfBuff', kind: 'buff_sta', value: 6, duration: 120 }],
     ranks: [
       { rank: 2, level: 24, cost: 10, effects: [{ type: 'selfBuff', kind: 'buff_sta', value: 11, duration: 120 }] },
@@ -677,7 +677,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   devotion_aura: {
     id: 'devotion_aura', name: 'Devotion Aura', class: 'paladin', learnLevel: 1,
     cost: 0, castTime: 0, cooldown: 0, range: 0, school: 'holy',
-    requiresTarget: false,
+    requiresTarget: false, exclusiveGroup: 'paladin_aura',
     effects: [{ type: 'selfBuff', kind: 'buff_armor', value: 40, duration: 1800 }],
     ranks: [
       { rank: 2, level: 12, cost: 0, effects: [{ type: 'selfBuff', kind: 'buff_armor', value: 75, duration: 1800 }] },
@@ -758,7 +758,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   retribution_aura: {
     id: 'retribution_aura', name: 'Retribution Aura', class: 'paladin', learnLevel: 16,
     cost: 0, castTime: 0, cooldown: 0, range: 0, school: 'holy',
-    requiresTarget: false,
+    requiresTarget: false, exclusiveGroup: 'paladin_aura',
     effects: [{ type: 'selfBuff', kind: 'thorns', value: 5, duration: 1800 }],
     description: 'Surrounds you with holy energy for 30 min, dealing 5 Holy damage to any enemy that strikes you in melee.',
   },

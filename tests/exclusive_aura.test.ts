@@ -37,6 +37,8 @@ describe('exclusiveAuraConflicts', () => {
       { id: 'serpent_sting' },
       { id: 'aspect_of_the_cheetah' },
     ];
-    expect(exclusiveAuraConflicts('aspect', 'aspect_of_the_monkey', auras, groupOf)).toEqual([2, 0]);
+    expect(exclusiveAuraConflicts('aspect', 'aspect_of_the_monkey', auras, groupOf)).toEqual([
+      2, 0,
+    ]);
   });
 });

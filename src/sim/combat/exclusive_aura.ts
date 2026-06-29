@@ -1,5 +1,5 @@
-// Mutual-exclusion for self-buff groups (hunter aspects today; reusable for any
-// "only one of these may be active" kit). Pure and host-agnostic so a Vitest can
+// Mutual-exclusion for self-buff groups (aspects, auras, shouts, and other
+// "only one of these may be active" kits). Pure and host-agnostic so a Vitest can
 // drive it directly without constructing a Sim. Form toggles are NOT handled here:
 // they are excluded by aura kind in effect_dispatch, since their kinds are unique.
 

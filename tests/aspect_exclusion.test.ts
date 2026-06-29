@@ -21,11 +21,16 @@ const castAspect = (sim: Sim, id: string) => {
   for (let i = 0; i < 32; i++) sim.tick();
 };
 
+const castSelfBuff = (sim: Sim, id: string) => {
+  sim.castAbility(id);
+  for (let i = 0; i < 32; i++) sim.tick();
+};
+
 describe('hunter aspect mutual exclusion', () => {
   it('marks all three aspects with the shared exclusive group', () => {
-    expect(ABILITIES['aspect_of_the_hawk'].exclusiveGroup).toBe('aspect');
-    expect(ABILITIES['aspect_of_the_monkey'].exclusiveGroup).toBe('aspect');
-    expect(ABILITIES['aspect_of_the_cheetah'].exclusiveGroup).toBe('aspect');
+    expect(ABILITIES.aspect_of_the_hawk.exclusiveGroup).toBe('aspect');
+    expect(ABILITIES.aspect_of_the_monkey.exclusiveGroup).toBe('aspect');
+    expect(ABILITIES.aspect_of_the_cheetah.exclusiveGroup).toBe('aspect');
   });
 
   it('keeps only the most recently cast aspect active', () => {
@@ -69,5 +74,46 @@ describe('hunter aspect mutual exclusion', () => {
       return aspectAuras(sim);
     };
     expect(run()).toEqual(run());
+  });
+});
+
+describe('classic self-buff mutual exclusion groups', () => {
+  it('marks paladin auras and warrior shouts with their own exclusive groups', () => {
+    expect(ABILITIES.devotion_aura.exclusiveGroup).toBe('paladin_aura');
+    expect(ABILITIES.retribution_aura.exclusiveGroup).toBe('paladin_aura');
+    expect(ABILITIES.battle_shout.exclusiveGroup).toBe('warrior_shout');
+    expect(ABILITIES.commanding_shout.exclusiveGroup).toBe('warrior_shout');
+  });
+
+  it('keeps only one paladin aura active', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'paladin', autoEquip: true });
+    sim.setPlayerLevel(16); // devotion(1) + retribution(16) known
+
+    castSelfBuff(sim, 'devotion_aura');
+    expect(sim.player.auras.filter((a) => a.id.endsWith('_aura')).map((a) => a.id)).toEqual([
+      'devotion_aura',
+    ]);
+
+    castSelfBuff(sim, 'retribution_aura');
+    expect(sim.player.auras.filter((a) => a.id.endsWith('_aura')).map((a) => a.id)).toEqual([
+      'retribution_aura',
+    ]);
+  });
+
+  it('keeps only one self-applied warrior shout active', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    sim.setPlayerLevel(14); // battle(1) + commanding(14) known
+    const baseAp = sim.player.attackPower;
+
+    sim.player.resource = 100;
+    castSelfBuff(sim, 'battle_shout');
+    expect(sim.player.attackPower).toBeGreaterThan(baseAp);
+
+    sim.player.resource = 100;
+    castSelfBuff(sim, 'commanding_shout');
+    expect(sim.player.auras.filter((a) => a.id.endsWith('_shout')).map((a) => a.id)).toEqual([
+      'commanding_shout',
+    ]);
+    expect(sim.player.attackPower).toBe(baseAp);
   });
 });
