@@ -28,6 +28,7 @@
 import { isStunned } from '../combat/cc';
 import { ITEMS, MOBS, NPCS, QUESTS } from '../data';
 import { createMob, createNpc } from '../entity';
+import { nextRaidResetMs } from '../instances/raid_reset';
 import type { PlayerMeta } from '../sim';
 import type { SimContext } from '../sim_context';
 import { clearThreat, threatEntries } from '../threat';
@@ -80,7 +81,6 @@ const NYTHRAXIS_DEATHLESS_CHANNEL = 5;
 const NYTHRAXIS_DEATHLESS_STUN = 5;
 const NYTHRAXIS_DEATHLESS_SOUL_REND_LOCKOUT = 15;
 const NYTHRAXIS_PHASE_TWO_SETTLE_DELAY = 5;
-const NYTHRAXIS_LOCKOUT_MS = 24 * 60 * 60 * 1000;
 const NYTHRAXIS_TRANSITION_DURATION = 21;
 const NYTHRAXIS_TRANSITION_STUN = 21.5;
 const NYTHRAXIS_FINAL_STAND_HP = 0.05;
@@ -471,7 +471,9 @@ export function nythraxisRoomMetas(ctx: SimContext, boss: Entity): PlayerMeta[] 
 }
 
 export function grantNythraxisLockout(ctx: SimContext, boss: Entity): void {
-  const until = ctx.lockoutNowMs() + NYTHRAXIS_LOCKOUT_MS;
+  // Standardized daily reset: lock until the next us-east-1 (US Eastern) midnight
+  // instead of a rolling 24h-from-kill window, so raids share one reset boundary.
+  const until = nextRaidResetMs(ctx.lockoutNowMs());
   for (const meta of nythraxisRoomMetas(ctx, boss)) {
     meta.raidLockouts.set('nythraxis_boss_arena', until);
   }
