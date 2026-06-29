@@ -2119,6 +2119,9 @@
   #tooltip .tt-row .tt-armor {
     color: var(--color-text-light);
   }
+  #tooltip .tt-row .tt-armor.tt-armor-bad {
+    color: #ff5040;
+  }
   .tt-opt-icon {
     width: 16px;
     height: 16px;
