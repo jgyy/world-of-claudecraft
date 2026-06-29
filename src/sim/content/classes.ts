@@ -1230,9 +1230,9 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: false,
     offGcd: true,
     requiresOutOfCombat: true,
-    effects: [{ type: 'selfBuff', kind: 'stealth', value: 0.7, duration: 3600 }],
+    effects: [{ type: 'selfBuff', kind: 'stealth', value: 0.5, duration: 3600 }],
     description:
-      'Conceals you in the shadows: enemies barely notice you, but you move 30% slower. Attacking or taking damage breaks Stealth. Cast again to step out.',
+      'Conceals you in the shadows: enemies barely notice you, but you move 50% slower. Attacking or taking damage breaks Stealth. Cast again to step out.',
   },
   adrenaline_rush: {
     id: 'adrenaline_rush',
@@ -1378,9 +1378,9 @@ export const ABILITIES: Record<string, AbilityDef> = {
     school: 'physical',
     requiresTarget: false,
     offGcd: true,
-    effects: [{ type: 'selfBuff', kind: 'stealth', value: 0.7, duration: 10 }],
+    effects: [{ type: 'selfBuff', kind: 'stealth', value: 0.5, duration: 10 }],
     description:
-      'Vanish from sight, entering Stealth even in combat. You move 30% slower while hidden. Lasts up to 10 sec.',
+      'Vanish from sight, entering Stealth even in combat. You move 50% slower while hidden. Lasts up to 10 sec.',
   },
   instant_poison: {
     id: 'instant_poison',
