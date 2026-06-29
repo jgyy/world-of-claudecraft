@@ -3523,7 +3523,7 @@ export const en_CA: EnTranslations = {
       },
       "stealth": {
         "name": "Stealth",
-        "description": "Conceals you in the shadows: enemies barely notice you, but you move 30% slower. Attacking or taking damage breaks Stealth. Cast again to step out."
+        "description": "Conceals you in the shadows: enemies barely notice you, but you move 50% slower. Attacking or taking damage breaks Stealth. Cast again to step out."
       },
       "adrenaline_rush": {
         "name": "Adrenaline Rush",
@@ -3555,7 +3555,7 @@ export const en_CA: EnTranslations = {
       },
       "vanish": {
         "name": "Vanish",
-        "description": "Vanish from sight, entering Stealth even in combat. You move 30% slower while hidden. Lasts up to 10 sec."
+        "description": "Vanish from sight, entering Stealth even in combat. You move 50% slower while hidden. Lasts up to 10 sec."
       },
       "instant_poison": {
         "name": "Instant Poison",
@@ -3731,7 +3731,7 @@ export const en_CA: EnTranslations = {
       },
       "lightning_shield": {
         "name": "Lightning Shield",
-        "description": "Surrounds you with crackling lightning: melee attackers take 13 Nature damage."
+        "description": "Surrounds you with crackling lightning: melee attackers take 13 Nature damage, up to 3 charges and at most once every 5 seconds."
       },
       "flame_shock": {
         "name": "Flame Shock",
@@ -3963,7 +3963,7 @@ export const en_CA: EnTranslations = {
       },
       "prowl": {
         "name": "Prowl",
-        "description": "Enter stealth while in Wolf Form. Cannot be used in combat."
+        "description": "Enter stealth while in Wolf Form, moving 50% slower. Cannot be used in combat."
       },
       "rake": {
         "name": "Rake",
