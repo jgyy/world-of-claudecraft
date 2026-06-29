@@ -15,8 +15,8 @@
 // the sim equip path (src/sim/items.ts) AND the HUD item tooltip, so it stays
 // host-agnostic and is unit-tested directly.
 
-import { MAX_LEVEL } from './types';
 import type { ItemDef } from './types';
+import { MAX_LEVEL } from './types';
 
 type Quality = NonNullable<ItemDef['quality']>;
 

@@ -41,12 +41,26 @@ describe('armor proficiencies', () => {
   });
 
   it('allows caster weapons for caster and hybrid classes', () => {
-    expect(equip('mage', 'staff_of_the_gravewyrm').equipment.mainhand).toBe('staff_of_the_gravewyrm');
-    expect(equip('priest', 'staff_of_the_gravewyrm').equipment.mainhand).toBe('staff_of_the_gravewyrm');
-    expect(equip('warlock', 'staff_of_the_gravewyrm').equipment.mainhand).toBe('staff_of_the_gravewyrm');
-    expect(equip('shaman', 'staff_of_the_gravewyrm').equipment.mainhand).toBe('staff_of_the_gravewyrm');
-    expect(equip('paladin', 'staff_of_the_gravewyrm').equipment.mainhand).toBe('staff_of_the_gravewyrm');
-    expect(equip('druid', 'staff_of_the_gravewyrm').equipment.mainhand).toBe('staff_of_the_gravewyrm');
-    expect(equip('warrior', 'staff_of_the_gravewyrm').equipment.mainhand).not.toBe('staff_of_the_gravewyrm');
+    expect(equip('mage', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
+      'staff_of_the_gravewyrm',
+    );
+    expect(equip('priest', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
+      'staff_of_the_gravewyrm',
+    );
+    expect(equip('warlock', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
+      'staff_of_the_gravewyrm',
+    );
+    expect(equip('shaman', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
+      'staff_of_the_gravewyrm',
+    );
+    expect(equip('paladin', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
+      'staff_of_the_gravewyrm',
+    );
+    expect(equip('druid', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
+      'staff_of_the_gravewyrm',
+    );
+    expect(equip('warrior', 'staff_of_the_gravewyrm').equipment.mainhand).not.toBe(
+      'staff_of_the_gravewyrm',
+    );
   });
 });
