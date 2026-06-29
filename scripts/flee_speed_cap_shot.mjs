@@ -50,11 +50,14 @@ console.log('player base run speed:', RUN_SPEED);
 // Draw the before/after flee-speed chart on a canvas overlay and screenshot it.
 await page.evaluate(({ RUN_SPEED }) => {
   const FLEE_SPEED_MULT = 1.4;
-  const CAP = RUN_SPEED;
+  // Fleeing mobs are now capped at 65% of the player base run speed so the player
+  // reliably catches them (maintainer guidance on #979). The old cap was the full
+  // player run speed, which the BEFORE curve still multiplied past via the buff.
+  const FLEE_CAP = RUN_SPEED * 0.65;
   const buffMult = 1.4; // a fleeing mob under buff_speed / form_travel (+40%)
   // The fleeing mob is hasted; sample across plausible base move speeds.
-  const before = (base) => Math.min(base * FLEE_SPEED_MULT, CAP) * buffMult;
-  const after = (base) => Math.min(base * FLEE_SPEED_MULT * buffMult, CAP);
+  const before = (base) => Math.min(base * FLEE_SPEED_MULT, RUN_SPEED) * buffMult;
+  const after = (base) => Math.min(base * FLEE_SPEED_MULT * buffMult, FLEE_CAP);
 
   const cv = document.createElement('canvas');
   cv.id = 'flee-chart-overlay';
@@ -85,11 +88,14 @@ await page.evaluate(({ RUN_SPEED }) => {
   c.save(); c.translate(L - 80, (T + B) / 2 + 90); c.rotate(-Math.PI / 2);
   c.fillText('flee speed (yd/s)', 0, 0); c.restore();
 
-  // player base run speed line — the hard ceiling the user asked for
+  // player base run speed line — the speed the chasing player travels at
   c.strokeStyle = '#d8c14a'; c.setLineDash([10, 8]); c.lineWidth = 3;
-  c.beginPath(); c.moveTo(sx(xMin), sy(CAP)); c.lineTo(sx(xMax), sy(CAP)); c.stroke();
+  c.beginPath(); c.moveTo(sx(xMin), sy(RUN_SPEED)); c.lineTo(sx(xMax), sy(RUN_SPEED)); c.stroke();
+  c.fillStyle = '#d8c14a'; c.fillText('player base run speed = ' + RUN_SPEED + ' yd/s', L + 10, sy(RUN_SPEED) - 14);
+  // flee speed ceiling line — 65% of player run speed, so the player always closes the gap
+  c.strokeStyle = '#5aa0d8'; c.beginPath(); c.moveTo(sx(xMin), sy(FLEE_CAP)); c.lineTo(sx(xMax), sy(FLEE_CAP)); c.stroke();
   c.setLineDash([]);
-  c.fillStyle = '#d8c14a'; c.fillText('player base run speed = ' + CAP + ' yd/s (must never be exceeded)', L + 10, sy(CAP) - 14);
+  c.fillStyle = '#5aa0d8'; c.fillText('flee cap = 65% run speed = ' + FLEE_CAP.toFixed(2) + ' yd/s', L + 10, sy(FLEE_CAP) - 14);
 
   const plot = (fn, color, label, dy) => {
     c.strokeStyle = color; c.lineWidth = 4; c.beginPath();
@@ -102,7 +108,7 @@ await page.evaluate(({ RUN_SPEED }) => {
   };
   // BEFORE pokes above the ceiling for fast mobs; AFTER tracks it and clamps.
   plot(before, '#d9534f', 'before — buff escapes the cap (bug)', -16);
-  plot(after, '#4ea36b', 'after — capped at player base', 28);
+  plot(after, '#4ea36b', 'after — capped at 65% run speed', 28);
 }, { RUN_SPEED });
 
 await new Promise((r) => setTimeout(r, 200));
