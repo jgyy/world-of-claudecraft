@@ -26,14 +26,21 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const browser = await puppeteer.launch({
   executablePath: BROWSER_PATH,
   headless: 'new',
-  args: ['--window-size=1280,820', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
-    '--disable-background-timer-throttling', '--disable-backgrounding-occluded-windows',
-    '--disable-renderer-backgrounding'],
+  args: [
+    '--window-size=1280,820',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+    '--disable-background-timer-throttling',
+    '--disable-backgrounding-occluded-windows',
+    '--disable-renderer-backgrounding',
+  ],
   defaultViewport: { width: 1280, height: 820 },
 });
 const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
-page.on('console', (m) => { if (m.type() === 'error') console.log('CONSOLE:', m.text()); });
+page.on('console', (m) => {
+  if (m.type() === 'error') console.log('CONSOLE:', m.text());
+});
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
@@ -44,8 +51,9 @@ await page.evaluate(() => {
   if (el) el.click();
 });
 await page.click('#btn-start-offline');
-await page.waitForFunction(() => window.__game && window.__game.sim && window.__game.sim.player,
-  { timeout: 60000 });
+await page.waitForFunction(() => window.__game && window.__game.sim && window.__game.sim.player, {
+  timeout: 60000,
+});
 await sleep(1200);
 
 const series = await page.evaluate(() => {
@@ -61,10 +69,19 @@ const series = await page.evaluate(() => {
     p.facing = 0;
     p.auras = p.auras.filter((a) => a.kind !== 'stealth');
     if (value != null) {
-      p.auras.push({ id: 'stealth', name: 'Stealth', kind: 'stealth',
-        remaining: 3600, duration: 3600, value, sourceId: p.id, school: 'physical' });
+      p.auras.push({
+        id: 'stealth',
+        name: 'Stealth',
+        kind: 'stealth',
+        remaining: 3600,
+        duration: 3600,
+        value,
+        sourceId: p.id,
+        school: 'physical',
+      });
     }
-    const sx = p.pos.x, sz = p.pos.z;
+    const sx = p.pos.x,
+      sz = p.pos.z;
     const dists = [];
     for (let i = 0; i < TICKS; i++) {
       sim.moveInput.forward = true; // re-assert each tick (sync loop, no RAF interleave)
@@ -83,27 +100,43 @@ const series = await page.evaluate(() => {
 // Draw the chart on a canvas overlay and screenshot it.
 await page.evaluate((s) => {
   const TICKS = s.normal.length;
-  const W = 1180, H = 720, PAD = 80;
+  const W = 1180,
+    H = 720,
+    PAD = 80;
   const cv = document.createElement('canvas');
   cv.id = 'st-chart';
-  cv.width = W; cv.height = H;
-  Object.assign(cv.style, { position: 'fixed', left: '50px', top: '50px', zIndex: 99999,
-    background: '#11151c', border: '1px solid #2c3a4a', borderRadius: '8px' });
+  cv.width = W;
+  cv.height = H;
+  Object.assign(cv.style, {
+    position: 'fixed',
+    left: '50px',
+    top: '50px',
+    zIndex: 99999,
+    background: '#11151c',
+    border: '1px solid #2c3a4a',
+    borderRadius: '8px',
+  });
   document.body.appendChild(cv);
   const ctx = cv.getContext('2d');
-  ctx.fillStyle = '#11151c'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#11151c';
+  ctx.fillRect(0, 0, W, H);
 
   const all = [...s.normal, ...s.stealth];
   const maxD = Math.max(...all) * 1.05;
   const x = (t) => PAD + (t / (TICKS - 1)) * (W - PAD * 1.3);
   const y = (d) => H - PAD - (d / maxD) * (H - PAD * 2);
 
-  ctx.strokeStyle = '#39414f'; ctx.fillStyle = '#9aa6b8';
-  ctx.font = '15px system-ui, sans-serif'; ctx.lineWidth = 1;
+  ctx.strokeStyle = '#39414f';
+  ctx.fillStyle = '#9aa6b8';
+  ctx.font = '15px system-ui, sans-serif';
+  ctx.lineWidth = 1;
   for (let gy = 0; gy <= 5; gy++) {
     const d = (maxD / 5) * gy;
     const yy = y(d);
-    ctx.beginPath(); ctx.moveTo(PAD, yy); ctx.lineTo(W - PAD * 0.3, yy); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(PAD, yy);
+    ctx.lineTo(W - PAD * 0.3, yy);
+    ctx.stroke();
     ctx.fillText(`${d.toFixed(0)} yd`, 10, yy + 5);
   }
   for (let sec = 0; sec <= 15; sec += 3) {
@@ -112,15 +145,23 @@ await page.evaluate((s) => {
   }
 
   const line = (data, color, dash) => {
-    ctx.strokeStyle = color; ctx.lineWidth = 3.5; ctx.setLineDash(dash || []);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3.5;
+    ctx.setLineDash(dash || []);
     ctx.beginPath();
-    data.forEach((d, t) => { const xx = x(t), yy = y(d); t ? ctx.lineTo(xx, yy) : ctx.moveTo(xx, yy); });
-    ctx.stroke(); ctx.setLineDash([]);
+    data.forEach((d, t) => {
+      const xx = x(t),
+        yy = y(d);
+      t ? ctx.lineTo(xx, yy) : ctx.moveTo(xx, yy);
+    });
+    ctx.stroke();
+    ctx.setLineDash([]);
   };
   line(s.normal, '#6b7688');
   line(s.stealth, '#9a6ad0');
 
-  ctx.fillStyle = '#e8edf4'; ctx.font = '600 24px system-ui, sans-serif';
+  ctx.fillStyle = '#e8edf4';
+  ctx.font = '600 24px system-ui, sans-serif';
   ctx.fillText('Rogue Stealth - distance run over 15s (new value 0.5 -> 50% speed)', PAD, 38);
   const legend = [
     ['#6b7688', 'Normal (baseline, mult 1.0)'],
@@ -129,14 +170,20 @@ await page.evaluate((s) => {
   ctx.font = '16px system-ui, sans-serif';
   legend.forEach(([c, label], i) => {
     const ly = 70 + i * 26;
-    ctx.fillStyle = c; ctx.fillRect(PAD, ly - 12, 26, 6);
-    ctx.fillStyle = '#cdd6e3'; ctx.fillText(label, PAD + 38, ly - 4);
+    ctx.fillStyle = c;
+    ctx.fillRect(PAD, ly - 12, 26, 6);
+    ctx.fillStyle = '#cdd6e3';
+    ctx.fillText(label, PAD + 38, ly - 4);
   });
 
   const fd = (a) => a[a.length - 1].toFixed(1);
-  ctx.fillStyle = '#8b95a6'; ctx.font = '15px system-ui, sans-serif';
-  ctx.fillText(`final: normal ${fd(s.normal)} yd, stealth ${fd(s.stealth)} yd  (ratio ${(s.stealth.at(-1) / s.normal.at(-1)).toFixed(2)}x)`,
-    PAD, H - 18);
+  ctx.fillStyle = '#8b95a6';
+  ctx.font = '15px system-ui, sans-serif';
+  ctx.fillText(
+    `final: normal ${fd(s.normal)} yd, stealth ${fd(s.stealth)} yd  (ratio ${(s.stealth.at(-1) / s.normal.at(-1)).toFixed(2)}x)`,
+    PAD,
+    H - 18,
+  );
 }, series);
 
 await sleep(200);
@@ -148,11 +195,17 @@ console.log('wrote tmp/stealth-speed-chart.png');
 // the real pipeline (value 0.5) then sustain forward movement so the render loop
 // paints the ghosted rogue creeping at the reduced speed.
 await page.evaluate(() => {
-  const cv = document.querySelector('#st-chart'); if (cv) cv.remove();
+  const cv = document.querySelector('#st-chart');
+  if (cv) cv.remove();
   for (const b of document.querySelectorAll('button')) {
-    if (/skip/i.test(b.textContent || '')) { b.click(); break; }
+    if (/skip/i.test(b.textContent || '')) {
+      b.click();
+      break;
+    }
   }
-  const g = window.__game, sim = g.sim, p = sim.player;
+  const g = window.__game,
+    sim = g.sim,
+    p = sim.player;
   p.auras = p.auras.filter((a) => a.kind !== 'stealth');
   p.facing = Math.PI;
   g.input.recenterCameraBehind(Math.PI);
@@ -164,9 +217,14 @@ await sleep(2600);
 await page.screenshot({ path: 'tmp/stealth-speed-ultra.png' });
 await page.evaluate(() => window.__game.input.clearControllerMoveInput());
 console.log('wrote tmp/stealth-speed-ultra.png');
-console.log('final distances:',
-  'normal', series.normal.at(-1).toFixed(1),
-  'stealth', series.stealth.at(-1).toFixed(1),
-  'ratio stealth/normal', (series.stealth.at(-1) / series.normal.at(-1)).toFixed(2));
+console.log(
+  'final distances:',
+  'normal',
+  series.normal.at(-1).toFixed(1),
+  'stealth',
+  series.stealth.at(-1).toFixed(1),
+  'ratio stealth/normal',
+  (series.stealth.at(-1) / series.normal.at(-1)).toFixed(2),
+);
 
 await browser.close();
