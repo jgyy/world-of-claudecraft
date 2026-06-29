@@ -133,7 +133,6 @@ import {
   paginateLeaderboard,
 } from './leaderboard_page';
 import type { Ante, PickAction } from './lockpick';
-import { hasSharedLootRights as computeSharedLootRights, lootHasGoneFfa } from './loot/loot_ffa';
 // L1: the loot-distribution layer (party-loot strategy, the rollLoot roller, copper
 // split, need-greed roll lifecycle, corpse-loot helpers) moved to ./loot/loot_roll.ts;
 // Sim keeps thin same-named delegates that call these.
@@ -1332,7 +1331,12 @@ export class Sim {
       // A druid saved while shifted runs on rage/energy with its mana parked in
       // savedMana; persist the parked mana so reload (always caster form) restores
       // it instead of clamping the form bar into the mana pool.
-      resource: persistedResource(CLASSES[meta.cls].resourceType, e.resourceType, e.resource, e.savedMana),
+      resource: persistedResource(
+        CLASSES[meta.cls].resourceType,
+        e.resourceType,
+        e.resource,
+        e.savedMana,
+      ),
       pos: { x: e.pos.x, z: e.pos.z },
       facing: e.facing,
       equipment: { ...meta.equipment },
@@ -4276,51 +4280,6 @@ export class Sim {
   // on Sim (W4) and is reached through two append-only SimContext callbacks.
   lootCorpse(mobId: number, pid?: number): void {
     interaction.lootCorpse(this.ctx, mobId, pid);
-    const r = this.resolve(pid);
-    if (!r) return;
-    const { meta, e: p } = r;
-    const mob = this.entities.get(mobId);
-    if (!mob?.lootable || !mob.loot) return;
-    const tapperParty = mob.tappedById !== null ? this.partyOf(mob.tappedById) : null;
-    // owner-lock lapses LOOT_FFA_DELAY after the corpse became lootable: then anyone may loot.
-    const ffaUnlocked = lootHasGoneFfa(mob.lootFfaTimer);
-    const hasSharedLootRights = computeSharedLootRights(
-      meta.entityId,
-      mob.tappedById,
-      tapperParty?.members ?? null,
-      ffaUnlocked,
-    );
-    const hasPersonalLoot = mob.loot.items.some((s) => s.personalFor?.includes(meta.entityId));
-    const hasOpenLoot = mob.loot.items.some((s) => s.openToAll && s.count > 0);
-    if (!hasSharedLootRights && !hasPersonalLoot && !hasOpenLoot) {
-      this.error(meta.entityId, "You don't have permission to loot that.");
-      return;
-    }
-    if (dist2d(p.pos, mob.pos) > INTERACT_RANGE) {
-      this.error(meta.entityId, 'Too far away.');
-      return;
-    }
-    if (hasSharedLootRights) this.distributeLootCopper(mob, meta);
-    for (const s of [...mob.loot.items]) {
-      if (!this.lootSlotVisibleTo(s, meta.entityId)) continue;
-      if (s.openToAll) {
-        for (let i = 0; i < s.count; i++) this.addItem(s.itemId, 1, meta.entityId);
-        s.count = 0;
-        continue;
-      }
-      if (s.personalFor) {
-        this.addItem(s.itemId, 1, meta.entityId);
-        s.personalFor = s.personalFor.filter((id) => id !== meta.entityId);
-        continue;
-      }
-      if (!hasSharedLootRights) continue;
-      for (let i = 0; i < s.count; i++) {
-        this.awardSharedLootItem(s.itemId, mob, meta);
-      }
-      s.count = 0;
-    }
-    this.pruneCorpseLoot(mob);
-    if (p.targetId === mobId) p.targetId = null;
   }
 
   pickUpObject(objId: number, pid?: number): void {
