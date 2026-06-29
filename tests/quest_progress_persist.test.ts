@@ -22,7 +22,14 @@ function fakeWs() {
   return { sent, ws: { readyState: 1, send: (p: string) => sent.push(JSON.parse(p)) } };
 }
 
-function join(server: GameServer, fc: ReturnType<typeof fakeWs>, id: number, name: string, state: CharacterState | null, cls: PlayerClass = 'warrior'): ClientSession {
+function join(
+  server: GameServer,
+  fc: ReturnType<typeof fakeWs>,
+  id: number,
+  name: string,
+  state: CharacterState | null,
+  cls: PlayerClass = 'warrior',
+): ClientSession {
   const s = server.join(fc.ws as any, id, id, name, cls, state);
   if ('error' in s) throw new Error(s.error);
   s.blockListLoaded = true;
