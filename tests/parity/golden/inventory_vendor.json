@@ -35,7 +35,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "f3a390f2",
+      "state": "b9344375",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -58,6 +58,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -67,18 +68,18 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 90,
+          "hp": 812,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 90,
+          "level": 20,
+          "maxHp": 812,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -97,12 +98,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 22,
-            "str": 23
+            "sta": 60,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -117,7 +118,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "bfbaece0",
+      "state": "4ed4ff23",
       "events": "21673dd2",
       "rng": {
         "draws": 0,
@@ -154,6 +155,7 @@
               "itemId": "minor_healing_potion"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -163,18 +165,18 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 90,
+          "hp": 812,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 90,
+          "level": 20,
+          "maxHp": 812,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -193,12 +195,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 22,
-            "str": 23
+            "sta": 60,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -213,7 +215,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "628a8256",
+      "state": "535afe79",
       "events": "9df425a0",
       "rng": {
         "draws": 0,
@@ -255,6 +257,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -264,18 +267,18 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 120,
+          "hp": 842,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 120,
+          "level": 20,
+          "maxHp": 842,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -294,12 +297,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 158,
+            "agi": 39,
+            "armor": 424,
             "int": 10,
             "spi": 11,
-            "sta": 25,
-            "str": 23
+            "sta": 63,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -314,7 +317,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "96db94ae",
+      "state": "ecca29a3",
       "events": "dbe7ae9a",
       "rng": {
         "draws": 0,
@@ -356,6 +359,7 @@
               "itemId": "cryptbone_helm"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -365,18 +369,18 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 110,
+          "hp": 832,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 110,
+          "level": 20,
+          "maxHp": 832,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -395,12 +399,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 155,
+            "agi": 39,
+            "armor": 421,
             "int": 10,
             "spi": 11,
-            "sta": 24,
-            "str": 23
+            "sta": 62,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -415,7 +419,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "9d7aaca2",
+      "state": "4c2d9405",
       "events": "a0e9b547",
       "rng": {
         "draws": 0,
@@ -460,6 +464,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -469,18 +474,18 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 90,
+          "hp": 812,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 90,
+          "level": 20,
+          "maxHp": 812,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -499,12 +504,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 22,
-            "str": 23
+            "sta": 60,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -519,7 +524,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "d0bfe856",
+      "state": "72028b27",
       "events": "db521cfd",
       "rng": {
         "draws": 0,
@@ -556,6 +561,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -565,11 +571,11 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -584,11 +590,11 @@
           },
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 90,
+          "hp": 812,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 90,
+          "level": 20,
+          "maxHp": 812,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -608,12 +614,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 22,
-            "str": 23
+            "sta": 60,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -628,7 +634,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "d0914b9a",
+      "state": "0f8504b3",
       "events": "579898e6",
       "rng": {
         "draws": 0,
@@ -661,6 +667,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -670,11 +677,11 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -689,11 +696,11 @@
           },
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 90,
+          "hp": 812,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 90,
+          "level": 20,
+          "maxHp": 812,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -713,12 +720,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 22,
-            "str": 23
+            "sta": 60,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -733,7 +740,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "0104bf48",
+      "state": "7cf0d7d3",
       "events": "f087f305",
       "rng": {
         "draws": 0,
@@ -766,6 +773,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -775,7 +783,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "auras": [
             {
               "duration": 900,
@@ -789,9 +797,9 @@
             }
           ],
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -806,11 +814,11 @@
           },
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 210,
+          "hp": 932,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 210,
+          "level": 20,
+          "maxHp": 932,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -830,12 +838,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 34,
-            "str": 23
+            "sta": 72,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -850,7 +858,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "0c1d0b56",
+      "state": "2becf121",
       "events": "ef990a2a",
       "rng": {
         "draws": 0,
@@ -887,6 +895,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -896,7 +905,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "auras": [
             {
               "duration": 900,
@@ -910,9 +919,9 @@
             }
           ],
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -927,11 +936,11 @@
           },
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 210,
+          "hp": 932,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 210,
+          "level": 20,
+          "maxHp": 932,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -951,12 +960,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 34,
-            "str": 23
+            "sta": 72,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -971,7 +980,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "d957a7b9",
+      "state": "7ee257a8",
       "events": "b71a55c4",
       "rng": {
         "draws": 0,
@@ -1008,6 +1017,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1023,7 +1033,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "auras": [
             {
               "duration": 900,
@@ -1037,9 +1047,9 @@
             }
           ],
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -1054,11 +1064,11 @@
           },
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 210,
+          "hp": 932,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 210,
+          "level": 20,
+          "maxHp": 932,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -1078,12 +1088,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 34,
-            "str": 23
+            "sta": 72,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -1098,7 +1108,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "4c62201a",
+      "state": "6cc5457f",
       "events": "7521a204",
       "rng": {
         "draws": 0,
@@ -1131,6 +1141,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1150,7 +1161,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "auras": [
             {
               "duration": 900,
@@ -1164,9 +1175,9 @@
             }
           ],
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -1181,11 +1192,11 @@
           },
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 210,
+          "hp": 932,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 210,
+          "level": 20,
+          "maxHp": 932,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -1205,12 +1216,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 34,
-            "str": 23
+            "sta": 72,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -1225,7 +1236,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "61d4f7ec",
+      "state": "ed4b28c5",
       "events": "e277cc91",
       "rng": {
         "draws": 0,
@@ -1262,6 +1273,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1281,7 +1293,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "auras": [
             {
               "duration": 900,
@@ -1295,9 +1307,9 @@
             }
           ],
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -1312,11 +1324,11 @@
           },
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 210,
+          "hp": 932,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 210,
+          "level": 20,
+          "maxHp": 932,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -1336,12 +1348,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 34,
-            "str": 23
+            "sta": 72,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {
@@ -1356,7 +1368,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "61d4f7ec",
+      "state": "ed4b28c5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1393,6 +1405,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "lifetimeXp": 167200,
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1412,7 +1425,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 122,
           "auras": [
             {
               "duration": 900,
@@ -1426,9 +1439,9 @@
             }
           ],
           "combatTimer": 99,
-          "critChance": 0.06,
+          "critChance": 0.0695,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0695,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -1443,11 +1456,11 @@
           },
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 210,
+          "hp": 932,
           "id": 388,
           "kind": "player",
-          "level": 1,
-          "maxHp": 210,
+          "level": 20,
+          "maxHp": 932,
           "maxResource": 100,
           "moveSpeed": 7,
           "onGround": true,
@@ -1467,12 +1480,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 20,
-            "armor": 110,
+            "agi": 39,
+            "armor": 376,
             "int": 10,
             "spi": 11,
-            "sta": 34,
-            "str": 23
+            "sta": 72,
+            "str": 61
           },
           "templateId": "warrior",
           "weapon": {

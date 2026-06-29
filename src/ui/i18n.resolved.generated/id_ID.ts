@@ -690,6 +690,9 @@ export const id_ID: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "itemTooltip": {
+      "requiresLevel": "Requires Level {level}"
     }
   },
   "guide": {

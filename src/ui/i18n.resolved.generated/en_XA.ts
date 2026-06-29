@@ -690,6 +690,9 @@ export const en_XA: EnTranslations = {
     "nameplate": {
       "mob": "[[{level}] {name}]",
       "mobElite": "[[{level}+] {name}]"
+    },
+    "itemTooltip": {
+      "requiresLevel": "[Ŕéɋúíŕéš Ļéʋéļ {level}]"
     }
   },
   "guide": {

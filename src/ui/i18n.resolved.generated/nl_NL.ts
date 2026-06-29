@@ -690,6 +690,9 @@ export const nl_NL: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "itemTooltip": {
+      "requiresLevel": "Requires Level {level}"
     }
   },
   "guide": {
