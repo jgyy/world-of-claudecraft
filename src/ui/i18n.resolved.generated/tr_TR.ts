@@ -616,6 +616,9 @@ export const tr_TR: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "itemTooltip": {
+      "requiresLevel": "Requires Level {level}"
     }
   },
   "guide": {

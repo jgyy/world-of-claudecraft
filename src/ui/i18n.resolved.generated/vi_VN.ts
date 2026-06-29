@@ -616,6 +616,9 @@ export const vi_VN: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "itemTooltip": {
+      "requiresLevel": "Requires Level {level}"
     }
   },
   "guide": {

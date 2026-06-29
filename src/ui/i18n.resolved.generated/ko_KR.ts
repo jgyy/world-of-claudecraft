@@ -616,6 +616,9 @@ export const ko_KR: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "itemTooltip": {
+      "requiresLevel": "필요 레벨 {level}"
     }
   },
   "guide": {

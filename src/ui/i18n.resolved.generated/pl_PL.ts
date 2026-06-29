@@ -616,6 +616,9 @@ export const pl_PL: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "itemTooltip": {
+      "requiresLevel": "Requires Level {level}"
     }
   },
   "guide": {

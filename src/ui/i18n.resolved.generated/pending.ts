@@ -9,24 +9,52 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "es_ES": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "fr_FR": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "fr_CA": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
+  "it_IT": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "de_DE": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
-  "pt_BR": [],
+  "pt_BR": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
   "ru_RU": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "nl_NL": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "pl_PL": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "id_ID": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "tr_TR": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "sv_SE": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "vi_VN": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ],
+  "da_DK": [
+    "hudChrome.itemTooltip.requiresLevel"
+  ]
 };

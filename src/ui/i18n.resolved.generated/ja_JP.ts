@@ -616,6 +616,9 @@ export const ja_JP: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "itemTooltip": {
+      "requiresLevel": "必要レベル {level}"
     }
   },
   "guide": {

@@ -616,6 +616,9 @@ export const zh_TW: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "itemTooltip": {
+      "requiresLevel": "需要等級 {level}"
     }
   },
   "guide": {
