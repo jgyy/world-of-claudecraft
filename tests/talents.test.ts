@@ -531,14 +531,21 @@ describe('Sim integration — active talents & ability modifiers', () => {
 
   it('scales Consecration ground-AoE damage with Holy Shield (groundAoE effect)', () => {
     const base = effOf(abilitiesKnownAt('paladin', 20).find((k) => k.def.id === 'consecration'));
-    const mods = computeTalentModifiers('paladin', alloc({ spec: 'protection', ranks: { prot_holy_shield: 2 } }));
-    const buffed = effOf(abilitiesKnownAt('paladin', 20, mods).find((k) => k.def.id === 'consecration'));
+    const mods = computeTalentModifiers(
+      'paladin',
+      alloc({ spec: 'protection', ranks: { prot_holy_shield: 2 } }),
+    );
+    const buffed = effOf(
+      abilitiesKnownAt('paladin', 20, mods).find((k) => k.def.id === 'consecration'),
+    );
     // Holy Shield r2 => +24% Consecration damage on the groundAoE tick magnitudes.
     expect(buffed.min).toBe(Math.round(base.min * 1.24));
     expect(buffed.max).toBe(Math.round(base.max * 1.24));
     expect(buffed.min).toBeGreaterThan(base.min);
     // shared content data must NOT be mutated by the modifier pass
-    expect(effOf(abilitiesKnownAt('paladin', 20).find((k) => k.def.id === 'consecration')).min).toBe(base.min);
+    expect(
+      effOf(abilitiesKnownAt('paladin', 20).find((k) => k.def.id === 'consecration')).min,
+    ).toBe(base.min);
   });
 
   it('a choice node applies only the chosen option ability mod', () => {
