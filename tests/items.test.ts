@@ -58,7 +58,6 @@ describe('items.equipItem / unequipItem', () => {
     const sim = makeWorld();
     const { pid, meta } = vendorPlayer(sim);
     const ctx = ctxOf(sim);
-    sim.setPlayerLevel(20, pid); // clear the per-quality equip level gate (uncommon helms)
     sim.addItem('cryptbone_helm', 1, pid);
     sim.addItem('roadwardens_helm', 1, pid);
 
@@ -81,7 +80,6 @@ describe('items.equipItem / unequipItem', () => {
     const sim = makeWorld();
     const { pid, meta } = vendorPlayer(sim);
     const ctx = ctxOf(sim);
-    sim.setPlayerLevel(20, pid); // clear the per-quality equip level gate (uncommon helm)
     sim.addItem('cryptbone_helm', 1, pid);
     items.equipItem(ctx, 'cryptbone_helm', pid);
 

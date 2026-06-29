@@ -16,10 +16,10 @@ function gear(quality: ItemDef['quality'], extra: Partial<ItemDef> = {}): ItemDe
 }
 
 describe('requiredLevelFor', () => {
-  it('derives an ascending required level from quality', () => {
+  it('leaves the leveling greens ungated and gates rare and above', () => {
     expect(requiredLevelFor(gear('poor'))).toBe(1);
     expect(requiredLevelFor(gear('common'))).toBe(1);
-    expect(requiredLevelFor(gear('uncommon'))).toBe(5);
+    expect(requiredLevelFor(gear('uncommon'))).toBe(1);
     expect(requiredLevelFor(gear('rare'))).toBe(12);
     expect(requiredLevelFor(gear('epic'))).toBe(18);
     expect(requiredLevelFor(gear('legendary'))).toBe(MAX_LEVEL);

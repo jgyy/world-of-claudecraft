@@ -20,13 +20,18 @@ import { MAX_LEVEL } from './types';
 
 type Quality = NonNullable<ItemDef['quality']>;
 
-// Per-quality required level. Poor/common gear (the starter kit) is ungated;
-// each rarity step above raises the bar, topping out at the level cap for the
-// rarest pieces. Tune the feature HERE, not at the equip site.
+// Per-quality required level. The leveling tiers (poor/common/uncommon) are the
+// greens that quests and vendors hand you AS you level, so they stay ungated: a
+// flat band there would strand an early quest reward you just earned but are a
+// level or two short of. The gate begins at `rare` and up: dungeon/raid-grade
+// loot a low-level character could otherwise be twinked into. It tops out at the
+// level cap for the rarest pieces (a band above the cap would never be reachable).
+// An explicit `requiredLevel` on an item overrides any of this. Tune the feature
+// HERE, not at the equip site.
 const QUALITY_REQUIRED_LEVEL: Record<Quality, number> = {
   poor: 1,
   common: 1,
-  uncommon: 5,
+  uncommon: 1,
   rare: 12,
   epic: 18,
   legendary: MAX_LEVEL,
