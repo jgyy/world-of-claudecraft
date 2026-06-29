@@ -153,6 +153,7 @@ function slot(over: Partial<AuraSlotState> & { key: string }): AuraSlotState {
     name: over.key,
     remaining: 0,
     cancelable: false,
+    effectHtml: '',
     ...over,
   };
 }
@@ -178,8 +179,8 @@ describe('AurasPainter: keyed pool over the elided writers', () => {
       resolveIconUrl: (key) => iconUrl(key),
       renderTooltip: (name, remaining) => `${name}|${Math.ceil(remaining)}`,
       attachTooltip: tooltips.attachTooltip,
-    attachCancel: () => {},
-    onCancel: () => {},
+      attachCancel: () => {},
+      onCancel: () => {},
     };
     painter = new AurasPainter(facet.writers, container as unknown as HTMLElement, deps, fakeDoc);
   });
@@ -363,8 +364,8 @@ describe('AurasPainter: static-preset visible-count cap', () => {
       resolveIconUrl: (key) => `url(${key})`,
       renderTooltip: (name, remaining) => `${name}|${Math.ceil(remaining)}`,
       attachTooltip: tooltips.attachTooltip,
-    attachCancel: () => {},
-    onCancel: () => {},
+      attachCancel: () => {},
+      onCancel: () => {},
     };
     return new AurasPainter(
       facet.writers,
@@ -494,6 +495,7 @@ describe('AurasPainter: a wire-faithful buff_* stat-sap survives the low cap (vi
       auraName: (a) => a.name,
       formatStacks: (n) => String(n),
       durationUnitSuffix: () => 's',
+      auraEffectHtml: () => '',
     };
     const view = createAurasView('all', viewDeps);
     // cap+2 leading raid buffs (the worst case), then the negative-value sap last.
