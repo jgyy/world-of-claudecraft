@@ -14,8 +14,8 @@
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
-import { Sim } from '../src/sim/sim.ts';
 import { PROJECTILE_SPEED, projectileTravelTime } from '../src/sim/projectile_travel.ts';
+import { Sim } from '../src/sim/sim.ts';
 import { terrainHeight } from '../src/sim/world.ts';
 
 const DIST = 20; // yards between caster and target
