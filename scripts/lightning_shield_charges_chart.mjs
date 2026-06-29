@@ -165,7 +165,10 @@ await page.evaluate((data) => {
     ctx.strokeStyle = color;
     ctx.lineWidth = 3;
     ctx.beginPath();
-    arr.forEach((v, i) => (i === 0 ? ctx.moveTo(x(i), y(v)) : ctx.lineTo(x(i), y(v))));
+    arr.forEach((v, i) => {
+      if (i === 0) ctx.moveTo(x(i), y(v));
+      else ctx.lineTo(x(i), y(v));
+    });
     ctx.stroke();
   };
   line(before, '#e8554d'); // before: runaway red
