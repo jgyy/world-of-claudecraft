@@ -1,20 +1,21 @@
 // Cowardly mobs (sentient families: humanoid/kobold/murloc/troll) panic at low HP
 // instead of fighting to the death: they turn and run from their attacker for a few
-// seconds, then recover their nerve. A fleeing mob does NOT socially aggro: it runs
-// past nearby allies without rallying them into the fight (calling for help while
-// mobs are camped close together makes pulls cascade and the game too punishing).
-// They flee only ONCE per pull, and elites/bosses/beasts never flee.
+// seconds, rallying same-family allies they run past (including ones down the escape
+// lane, not just at the panic spot), then recover their nerve. They flee only ONCE
+// per pull, and elites/bosses/beasts never flee.
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { DT, RUN_SPEED, dist2d } from '../src/sim/types';
 import type { Entity } from '../src/sim/types';
+import { DT, dist2d, RUN_SPEED } from '../src/sim/types';
 
 function makeSim() {
   return new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
 }
 
 function wildMobs(sim: Sim): Entity[] {
-  return [...sim.entities.values()].filter((e) => e.kind === 'mob' && !e.dead && e.ownerId === null);
+  return [...sim.entities.values()].filter(
+    (e) => e.kind === 'mob' && !e.dead && e.ownerId === null,
+  );
 }
 
 // Put a wild mob into an active fight with the player at low HP, as a chosen family.
@@ -139,20 +140,18 @@ describe('cowardly mobs flee at low HP', () => {
     expect(mob.hp).toBeLessThan(mob.maxHp);
   });
 
-  it('does NOT socially aggro a nearby same-family ally when it flees', () => {
+  it('rallies a nearby same-family ally into the fight at the panic spot', () => {
     const sim = makeSim();
     const mobs = wildMobs(sim);
     const fleer = mobs[0];
     const ally = mobs.find((m) => m.id !== fleer.id)!;
     engageLowHp(sim, fleer, 'gravecaller_cultist', 0.12);
-    // Move the player far away so the idle ally cannot detect it on its own (idle
-    // proximity aggro reaches at most 20yd). The fleer still panics: maybeFlee runs
-    // before any distance gate while it is in the attack state targeting the player.
-    // That isolates the flee path: only a flee call-for-help could pull the ally.
-    sim.player.pos = { x: fleer.pos.x + 200, z: fleer.pos.z, y: fleer.pos.y };
+    // Park the player far away (-x) so the idle ally cannot detect it on its own
+    // (idle proximity aggro reaches at most 20yd). That isolates the flee path: only
+    // the flee rally can pull the ally. The fleer runs the opposite way (+x).
+    sim.player.pos = { x: fleer.pos.x - 200, z: fleer.pos.z, y: fleer.pos.y };
     sim.player.prevPos = { ...sim.player.pos };
-    // an idle same-family ally standing right next to the fleer (well within the old
-    // 8yd flee-help radius), but far from the now-distant player
+    // an idle same-family ally standing right next to the fleer (within the 8yd help radius)
     ally.templateId = 'gravecaller_cultist';
     ally.hostile = true;
     ally.dead = false;
@@ -160,13 +159,48 @@ describe('cowardly mobs flee at low HP', () => {
     ally.aggroTargetId = null;
     ally.pos = { x: fleer.pos.x + 2, z: fleer.pos.z, y: fleer.pos.y };
     ally.prevPos = { ...ally.pos };
+    // Re-bucket the spatial grid to the teleported positions: the panic-spot rally
+    // runs inside this first tick, before the end-of-tick re-bucket would catch up.
+    // (In live play the grid is at most one tick stale, so this is a test artifact.)
+    (sim as any).grid.refresh(sim.entities.values());
 
     sim.tick();
 
-    // the fleer panics, but the ally it runs past stays idle and uncommitted
-    expect(sim.entities.get(fleer.id)!.aiState).toBe('flee');
-    expect(sim.entities.get(ally.id)!.aggroTargetId).toBe(null);
+    expect(sim.entities.get(ally.id)!.aggroTargetId).toBe(sim.playerId);
+    expect(sim.entities.get(ally.id)!.aiState).toBe('chase');
+  });
+
+  it('rallies an idle same-family ally it runs PAST while fleeing (not just at the panic spot)', () => {
+    const sim = makeSim();
+    const mobs = wildMobs(sim);
+    const fleer = mobs[0];
+    const ally = mobs.find((m) => m.id !== fleer.id)!;
+    engageLowHp(sim, fleer, 'gravecaller_cultist', 0.12);
+    // Park the player far away (-x); the fleer runs the opposite way (+x) down a lane.
+    // Isolates the rally from idle proximity aggro (which reaches at most 20yd).
+    sim.player.pos = { x: fleer.pos.x - 200, z: fleer.pos.z, y: fleer.pos.y };
+    sim.player.prevPos = { ...sim.player.pos };
+    // Stand an idle ally 12yd down that escape lane: OUT of the 8yd help radius at the
+    // panic spot, so a one-shot call-for-help can never reach it. Only a per-tick rally
+    // while the mob runs past it can pull it in.
+    ally.templateId = 'gravecaller_cultist';
+    ally.hostile = true;
+    ally.dead = false;
+    ally.aiState = 'idle';
+    ally.aggroTargetId = null;
+    ally.pos = { x: fleer.pos.x + 12, z: fleer.pos.z, y: fleer.pos.y };
+    ally.prevPos = { ...ally.pos };
+    ally.spawnPos = { ...ally.pos };
+
+    sim.tick();
+    // Not pulled yet: the ally was outside the help radius when the fleer panicked.
     expect(sim.entities.get(ally.id)!.aiState).toBe('idle');
+
+    // Let the fleer sprint down the lane and pass the ally.
+    for (let i = 0; i < 20 && sim.entities.get(ally.id)!.aiState === 'idle'; i++) sim.tick();
+
+    expect(sim.entities.get(ally.id)!.aggroTargetId).toBe(sim.playerId);
+    expect(sim.entities.get(ally.id)!.aiState).toBe('chase');
   });
 
   it('recovers its nerve after the flee window and re-engages', () => {

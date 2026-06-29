@@ -158,6 +158,7 @@ import { MARKET_MAX_LISTINGS, Market, type MarketListing, type MarketSave } from
 import * as lifecycle from './mob/lifecycle';
 import { resetEvadingMob as resetEvadingMobFn, updateMob as updateMobFn } from './mob/locomotion';
 import { runMobSwingAffixes } from './mob/mob_swing';
+import { rallyFleeingAllies } from './mob/social_aggro';
 import {
   isTrivialTo as isTrivialToFn,
   retargetMob as retargetMobFn,
@@ -315,11 +316,9 @@ import { groundHeight, WATER_LEVEL } from './world';
 const MOVE_SLIDE_FAN = [0, 0.5, -0.5, 1.0, -1.0, 1.6, -1.6];
 const BACKPEDAL_MULT = 0.65;
 // Low-HP flee ("fear"): a cowardly mob at or below this HP fraction panics, turns
-// and runs from its attacker for FLEE_DURATION seconds at FLEE_SPEED_MULT speed.
-// A fleeing mob does NOT socially aggro: it runs past idle allies without pulling
-// them in (a flee call-for-help cascades pulls through camped mobs and makes the
-// game too punishing). It flees only once per pull, then recovers its nerve and
-// re-engages if it survived.
+// and runs from its attacker for FLEE_DURATION seconds at FLEE_SPEED_MULT speed,
+// rallying same-family allies it runs past (mob/social_aggro.ts). It flees only once
+// per pull, then recovers its nerve and re-engages if it survived.
 const FLEE_HP_THRESHOLD = 0.2;
 const FLEE_DURATION = 5;
 const FLEE_SPEED_MULT = 1.4;
@@ -2023,6 +2022,7 @@ export class Sim {
       updateProfiledMobCombat: sim.updateProfiledMobCombat.bind(sim),
       tryMobMeleeSwingInRange: sim.tryMobMeleeSwingInRange.bind(sim),
       maybeFlee: sim.maybeFlee.bind(sim),
+      rallyFleeingAllies: sim.rallyFleeingAllies.bind(sim),
       aggroMob: sim.aggroMob.bind(sim),
       // C3 moved the CC predicates to combat/cc.ts; ctx.isStunned/isRooted (consumed by
       // mob/locomotion.ts, M2) now point at those pure functions instead of Sim methods.
@@ -3608,12 +3608,9 @@ export class Sim {
   }
 
   // Cowardly mobs panic once per pull at low HP: turn and run from the attacker
-  // for a few seconds, then recover their nerve. A fleeing mob does NOT socially
-  // aggro: it runs past idle allies without rallying them (a flee call-for-help
-  // cascades pulls through camped mobs and makes the game too punishing). Returns
-  // true if the mob entered (or is already in) the flee state so the caller can
-  // stop its turn. (`_target` is unused now that flee no longer rallies allies, but
-  // the SimContext seam keeps the param so foreign callers pass the attacker.)
+  // for a few seconds, rallying nearby same-family allies, then recover their nerve.
+  // Returns true if the mob entered (or is already in) the flee state so the caller
+  // can stop its turn.
   private canFlee(mob: Entity): boolean {
     if (mob.hasFled || mob.enraged) return false;
     const tmpl = MOBS[mob.templateId];
@@ -3621,7 +3618,7 @@ export class Sim {
     return FLEEING_FAMILIES.has(tmpl.family);
   }
 
-  private maybeFlee(mob: Entity, _target: Entity): boolean {
+  private maybeFlee(mob: Entity, target: Entity): boolean {
     if (mob.maxHp <= 0 || mob.hp / mob.maxHp > FLEE_HP_THRESHOLD) return false;
     if (!this.canFlee(mob)) return false;
     mob.aiState = 'flee';
@@ -3633,7 +3630,15 @@ export class Sim {
       color: '#ffd966',
       entityId: mob.id,
     });
+    this.rallyFleeingAllies(mob, target);
     return true;
+  }
+
+  // Thin delegate: mob/social_aggro.ts owns the per-pass rally. maybeFlee calls it at
+  // the panic moment; mob/locomotion.ts calls ctx.rallyFleeingAllies every tick of the
+  // flee so allies the mob runs PAST (not just those by the panic spot) get pulled in.
+  private rallyFleeingAllies(mob: Entity, target: Entity): number {
+    return rallyFleeingAllies(this.ctx, mob, target);
   }
 
   mobSwing(mob: Entity, target: Entity): void {

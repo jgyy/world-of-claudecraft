@@ -360,6 +360,8 @@ export interface SimContextCallbacks {
   updateProfiledMobCombat(mob: Entity): void;
   tryMobMeleeSwingInRange(mob: Entity, target: Entity): boolean;
   maybeFlee(mob: Entity, target: Entity): boolean;
+  // mob/social_aggro.ts: rally idle same-family allies a fleeing mob runs past.
+  rallyFleeingAllies(mob: Entity, target: Entity): number;
   aggroMob(mob: Entity, target: Entity, social: boolean): void;
   isStunned(e: Entity): boolean;
   isRooted(e: Entity): boolean;
@@ -732,6 +734,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     updateProfiledMobCombat: host.updateProfiledMobCombat,
     tryMobMeleeSwingInRange: host.tryMobMeleeSwingInRange,
     maybeFlee: host.maybeFlee,
+    rallyFleeingAllies: host.rallyFleeingAllies,
     aggroMob: host.aggroMob,
     isStunned: host.isStunned,
     isRooted: host.isRooted,
