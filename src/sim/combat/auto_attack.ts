@@ -281,6 +281,8 @@ export function meleeSwing(
         spikes.name ?? 'Spiked Hide',
         'hit',
         true,
+        undefined,
+        false, // reflected damage shield: incidental, never walks the leash anchor
       );
     }
   }

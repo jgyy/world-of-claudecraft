@@ -52,7 +52,21 @@ export function consumeThornsCharge(a: ThornsState): boolean {
 export function applyThornsReaction(ctx: SimContext, defender: Entity, attacker: Entity): void {
   for (const a of defender.auras) {
     if (a.kind === 'thorns' && consumeThornsCharge(a)) {
-      ctx.dealDamage(defender, attacker, a.value, false, a.school, a.name, 'hit', true);
+      // Reflect (Thorns / Lightning Shield) is incidental, not a direct attack:
+      // pass direct=false so it never walks the mob's leash anchor (else a kited
+      // mob meleeing a shielded player would be re-anchored and never leash home).
+      ctx.dealDamage(
+        defender,
+        attacker,
+        a.value,
+        false,
+        a.school,
+        a.name,
+        'hit',
+        true,
+        undefined,
+        false,
+      );
     }
   }
   for (let i = defender.auras.length - 1; i >= 0; i--) {
