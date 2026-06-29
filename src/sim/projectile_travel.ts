@@ -34,9 +34,10 @@ export const PROJECTILE_SPEED = 26;
 // in src/render/vfx.ts so the sim resolves on the same tick the visual flashes.
 export const PROJECTILE_REACH = 0.7;
 
-// Seconds a bolt may spend chasing before it gives up and fizzles. Matches the bolt's
-// ttl in src/render/vfx.ts, so a projectile that can never catch a target kiting at or
-// above PROJECTILE_SPEED dies in the sim exactly when its visual does.
+// Seconds a bolt may spend chasing before it lands by force. A released projectile can
+// never be escaped, so a target kiting at or above PROJECTILE_SPEED (which the homing can
+// never physically catch) takes the hit at this deadline rather than getting away. Matches
+// the bolt's ttl in src/render/vfx.ts, so the damage lands as the visual gives up.
 export const PROJECTILE_MAX_FLIGHT = 3;
 
 /** One tick of homing: move (x, z) toward (tx, tz) by `step` yards. Returns the new
@@ -89,10 +90,12 @@ export function scheduleProjectile(
 }
 
 /** Advance every in-flight projectile one tick toward its live target, in launch order
- *  (reordering IS drift), resolving the ones that arrive. A bolt fizzles (resolves to
- *  nothing) when its caster or target has died or despawned mid-flight, or when it has
- *  chased past PROJECTILE_MAX_FLIGHT without catching the target, so no damage, threat,
- *  or kill credit lands on a corpse or a runaway. */
+ *  (reordering IS drift), resolving the ones that arrive. A bolt that chases past
+ *  PROJECTILE_MAX_FLIGHT without catching the target lands by force at the deadline: once
+ *  released, a projectile cannot be escaped by outrunning it (the only escape is being out
+ *  of cast range when it fires, gated at the launch sites). A bolt fizzles (resolves to
+ *  nothing) ONLY when its caster or target has died or despawned mid-flight, so no damage,
+ *  threat, or kill credit ever lands on a corpse. */
 export function advancePendingProjectiles(ctx: SimContext): void {
   if (ctx.pendingProjectiles.length === 0) return;
   const step = PROJECTILE_SPEED * DT;
@@ -107,7 +110,14 @@ export function advancePendingProjectiles(ctx: SimContext): void {
       continue;
     }
     proj.ttl -= DT;
-    if (proj.ttl <= 0) continue; // never caught the target: give up, like the visual
+    if (proj.ttl <= 0) {
+      // A released projectile cannot be escaped: a target faster than the bolt can never
+      // be physically caught, so at the flight deadline the bolt lands anyway rather than
+      // giving up. The only way to avoid a projectile is to be out of cast range when it
+      // FIRES (gated at every launch site), not to outrun it after launch.
+      proj.resolve(source, target);
+      continue;
+    }
     proj.x = next.x;
     proj.z = next.z;
     stillFlying.push(proj);

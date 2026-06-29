@@ -165,7 +165,7 @@ describe('scheduleProjectile + advancePendingProjectiles', () => {
     expect(landed.n).toBe(0);
   });
 
-  it('fizzles when the target outruns the bolt past the max flight time', () => {
+  it('lands on a target that outruns the bolt: a released projectile cannot be escaped', () => {
     const ctx = fakeCtx();
     const src = ent(1, 0, 0);
     const tgt = ent(2, 0, 10);
@@ -175,12 +175,15 @@ describe('scheduleProjectile + advancePendingProjectiles', () => {
     scheduleProjectile(ctx as any, src, tgt, () => {
       landed.n++;
     });
-    // Target flees faster than the bolt: it can never catch up and must give up.
+    // Target flees faster than the bolt: it can never be physically caught, but a
+    // released projectile is guaranteed to land, so it resolves at the flight deadline
+    // instead of fizzling. The only way to avoid it is to be out of cast range when it
+    // fires (gated at the call sites), not to outrun it after launch.
     for (let i = 1; i <= 200 && ctx.pendingProjectiles.length; i++) {
       tgt.pos.z += (PROJECTILE_SPEED + 5) * DT;
       advancePendingProjectiles(ctx as any);
     }
-    expect(landed.n).toBe(0);
+    expect(landed.n).toBe(1);
     expect(ctx.pendingProjectiles.length).toBe(0);
   });
 });
