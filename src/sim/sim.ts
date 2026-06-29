@@ -124,6 +124,7 @@ import {
   tickGroundAoEs,
 } from './entity_roster';
 import { canEquipItem } from './equipment_rules';
+import { meetsLevelRequirement } from './item_level_req';
 import { formatMoney } from './format_money';
 import * as interaction from './interaction';
 import * as items from './items';
@@ -4251,6 +4252,11 @@ export class Sim {
     const def = ITEMS[itemId];
     if (!def?.slot) return;
     if (!canEquipItem(meta.cls, def)) return;
+    // Skip silently (no error toast) if the piece is gated above the player's
+    // level: auto-equip is a convenience, the explicit equip path is where the
+    // "must be level N" message belongs.
+    const e = this.entities.get(meta.entityId);
+    if (e && !meetsLevelRequirement(e.level, def)) return;
     if (def.kind === 'weapon') {
       const cur = meta.equipment.mainhand ? ITEMS[meta.equipment.mainhand]?.weapon : null;
       const next = def.weapon;

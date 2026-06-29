@@ -62,4 +62,14 @@ describe('equip level requirement', () => {
     };
     expect(run()).toEqual(run());
   });
+
+  it('auto-equip skips gear above the level silently (no equip, no error toast)', () => {
+    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
+    const pid = sim.addPlayer('warrior', 'Tester', { autoEquip: true });
+    sim.setPlayerLevel(4, pid); // below the helmet's required level (5)
+    sim.drainEvents();
+    sim.addItem(HELM, 1, pid); // would trigger maybeAutoEquip
+    expect(sim.meta(pid)!.equipment.helmet).toBeUndefined();
+    expect(errorTexts(sim.drainEvents())).not.toContain('You must be level 5 to equip that.');
+  });
 });
