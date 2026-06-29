@@ -42,6 +42,7 @@ import {
   healingThreat as healingThreatImpl,
   hexOutputMult as hexOutputMultImpl,
 } from './combat/heal';
+import { isSpellResisted } from './combat/spell_resist';
 // A3: the augment/power-up content helpers used by the Fiesta match logic
 // (AUGMENTS_BY_ID/AugmentDef/eligibleAugments/POWERUPS/PowerupDef/tierForWave)
 // moved to social/fiesta.ts with that logic; sim.ts keeps only the type used by
@@ -174,6 +175,7 @@ import {
 import { prestige as prestigeImpl, updateRested } from './progression/xp';
 import { sanitizeRemovedZone1Content } from './removed_zone1_content';
 import { Rng } from './rng';
+import { persistedResource } from './serialize_resource';
 import { createSimContext, type SimContext, type SimContextHost } from './sim_context';
 import * as chatMod from './social/chat';
 import * as tradeMod from './social/trade';
@@ -283,7 +285,6 @@ import {
   type SimEvent,
   type SkinCatalog,
   type SkinRank,
-  spellHitChance,
   TURN_SPEED,
   type Vec3,
   virtualLevel,
@@ -1327,7 +1328,10 @@ export class Sim {
       restedXp: meta.restedXp,
       copper: meta.copper,
       hp: e.hp,
-      resource: e.resource,
+      // A druid saved while shifted runs on rage/energy with its mana parked in
+      // savedMana; persist the parked mana so reload (always caster form) restores
+      // it instead of clamping the form bar into the mana pool.
+      resource: persistedResource(CLASSES[meta.cls].resourceType, e.resourceType, e.resource, e.savedMana),
       pos: { x: e.pos.x, z: e.pos.z },
       facing: e.facing,
       equipment: { ...meta.equipment },
@@ -3670,7 +3674,8 @@ export class Sim {
       school: spell.school,
       fx: 'projectile',
     });
-    if (!this.rng.chance(spellHitChance(pet.level, target.level))) {
+    // Pet spells are resisted, not missed (same semantics as player casts).
+    if (isSpellResisted(this.rng, pet.level, target.level)) {
       this.emit({
         type: 'damage',
         sourceId: pet.id,
@@ -3679,7 +3684,7 @@ export class Sim {
         crit: false,
         school: spell.school,
         ability: spell.name,
-        kind: 'miss',
+        kind: 'resist',
       });
       this.enterCombat(pet, target);
     } else {
