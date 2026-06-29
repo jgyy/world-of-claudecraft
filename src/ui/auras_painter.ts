@@ -63,7 +63,7 @@ export interface AurasPainterDeps {
   /** Render the tooltip HTML from the LIVE aura name + remaining (host: the
    *  tt-title/tt-sub markup with esc + tPlural). Called lazily on hover, reading the
    *  pooled record's current fields. */
-  renderTooltip(name: string, remaining: number): string;
+  renderTooltip(name: string, remaining: number, effectHtml: string): string;
   /** Attach a lazily-built tooltip to a node (host: Hud.attachTooltip). Called ONCE per
    *  pooled node; the closure reads the live record. */
   attachTooltip(el: HTMLElement, html: () => string): void;
@@ -92,6 +92,9 @@ interface PooledAura {
   cancelable: boolean;
   name: string;
   remaining: number;
+  /** The one-line effect summary HTML (or '' when the aura has no descriptor), read live
+   *  by the tooltip closure alongside name/remaining. */
+  effectHtml: string;
   /** The last icon key written, so the expensive data-URL resolve + write fire only on
    *  change. null until the first paint (never equals a real key). */
   lastIconKey: string | null;
@@ -183,6 +186,7 @@ export class AurasPainter {
       rec.remaining = s.remaining;
       rec.auraId = s.key;
       rec.cancelable = s.cancelable;
+      rec.effectHtml = s.effectHtml;
       rec.seen = this.frame;
       // The icon: resolve the (expensive) data URL + write only when the key changes.
       if (rec.lastIconKey !== s.iconKey) {
@@ -239,10 +243,13 @@ export class AurasPainter {
       cancelable: false,
       name: '',
       remaining: 0,
+      effectHtml: '',
       lastIconKey: null,
       seen: 0,
     };
-    this.deps.attachTooltip(el, () => this.deps.renderTooltip(rec.name, rec.remaining));
+    this.deps.attachTooltip(el, () =>
+      this.deps.renderTooltip(rec.name, rec.remaining, rec.effectHtml),
+    );
     // Right-click-to-cancel, wired ONCE; the handler reads the LIVE record so a recycled
     // node cancels its current aura (and never fires for a read-only debuff strip).
     this.deps.attachCancel(el, () => {

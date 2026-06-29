@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -17,7 +18,7 @@ const browser = await puppeteer.launch({
   defaultViewport: { width: 1600, height: 900 },
 });
 const page = await browser.newPage();
-page.on('pageerror', (e) => console.log('PAGEERROR: ' + e.message));
+page.on('pageerror', (e) => console.log(`PAGEERROR: ${e.message}`));
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());

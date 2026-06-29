@@ -49,7 +49,12 @@ import { DungeonInteriors, ensureDungeonAssets } from './dungeon';
 import { objectDisplayName } from './entity_labels';
 import { releaseSelfFacing, stepSelfFacing } from './facing_smooth';
 import { buildFish, type FishView } from './fish';
-import { buildFoliage, type FoliagePerfStats, type FoliageView } from './foliage';
+import {
+  buildFoliage,
+  buildFoliageMaterialPrewarmGroup,
+  type FoliagePerfStats,
+  type FoliageView,
+} from './foliage';
 import {
   GFX,
   type GfxBucketBands,
@@ -1126,6 +1131,7 @@ export class Renderer {
     this.scene.add(this.birds.group);
     this.impactSite = buildImpactSite(this.sim.cfg.seed);
     this.scene.add(this.impactSite.group);
+    this.scene.add(this.impactSite.light);
     const props = buildProps(this.sim.cfg.seed, (delveId) =>
       tEntity({ kind: 'delve', id: delveId, field: 'name' }),
     );
@@ -1133,6 +1139,10 @@ export class Renderer {
     this.scene.add(props.group);
     this.flames = props.flames;
     this.fireLights = props.fireLights;
+    // The impact-site light rides the campfire point-light budget so the visible
+    // point-light count stays constant as the player travels (constant
+    // numPointLights -> materials never recompile for a light-count change).
+    this.fireLights.push(this.impactSite.light);
     this.propsView = props;
 
     // selection ring — a classic target reticle: a base ring plus four
@@ -2032,7 +2042,7 @@ export class Renderer {
     pool.push(object);
   }
 
-  private buildEntityPrewarmGroup(deadline: number): THREE.Group {
+  private buildEntityPrewarmGroup(): THREE.Group {
     const group = new THREE.Group();
     const p = this.sim.player;
     group.position.set(p.pos.x, p.pos.y, p.pos.z - 14);
@@ -2065,10 +2075,14 @@ export class Renderer {
     for (const templateId of PREWARM_MOB_TEMPLATE_IDS) build(templateId, PREWARM_MOB_POOL_COPIES);
     // Then every remaining mob whose visual MODEL hasn't been built yet — one copy,
     // so its shader program is compiled at load and never hitches in-world. Mobs that
-    // share a family model are built only once.
+    // share a family model are built only once. NOT deadline-gated: the distinct-model
+    // set is small (deduped by visualKeyFor) and is the whole point of this pass — a
+    // skipped model is a guaranteed in-world compile stall (real-GPU walk profiling
+    // caught a beast model linking ~4 programs / ~240ms when first seen north of spawn
+    // because the shared build deadline cut this loop off). The deadline still bounds
+    // the EXTRA pool copies above; one copy per model is cheap and mandatory.
     for (const templateId of Object.keys(MOBS)) {
       if (PREWARM_MOB_COMMON_IDS.has(templateId)) continue;
-      if (performance.now() >= deadline) break;
       const template = MOBS[templateId];
       if (!template) continue;
       const modelKey = visualKeyFor(
@@ -2149,6 +2163,14 @@ export class Renderer {
         const built = buildGroundQuestObject(itemId, -20_000 - idx);
         this.storePooledObject(key, built);
         built.group.visible = true;
+        // Hide the object's own point light (e.g. the ritual circle glow) during
+        // the prewarm: it must not inflate numPointLights, or every material would
+        // compile for one more light than the open world's constant budget ever
+        // shows and they would all recompile on first travel. Restored in the
+        // prewarm finally so the pooled object lights normally when reused live.
+        built.group.traverse((o) => {
+          if ((o as THREE.PointLight).isPointLight) o.visible = false;
+        });
         place(built.group);
       }
     }
@@ -2244,11 +2266,13 @@ export class Renderer {
     let createdViews = 0;
     let candidateViews = 0;
     let doorPrewarmGroup: THREE.Group | null = null;
+    let interiorPrewarmGroup: THREE.Group | null = null;
     let entityPrewarmGroup: THREE.Group | null = null;
     let npcPrewarmGroup: THREE.Group | null = null;
     let playerPrewarmGroup: THREE.Group | null = null;
     let objectPrewarmGroup: THREE.Group | null = null;
     let propMaterialPrewarmGroup: THREE.Group | null = null;
+    let foliagePrewarmGroup: THREE.Group | null = null;
 
     let renderPasses = 0;
     let playerPrewarmVisuals = 0;
@@ -2359,6 +2383,27 @@ export class Renderer {
         },
       },
       {
+        // Compile the dungeon interior shaders (kit + Halloween-bits pack
+        // materials, the Drowned Temple water shader, torch-glow decal) at boot
+        // so first entry / nearing a dungeon door does not link them live.
+        // Assets are boot-preloaded (see dungeon.ts), so the await is resolved.
+        id: 'interiors.materials',
+        category: 'objects',
+        priority: 32,
+        required: false,
+        run: async () => {
+          this.dungeons ??= new DungeonInteriors(
+            this.scene,
+            this.lowGfx,
+            this.flames,
+            this.fireLights,
+          );
+          interiorPrewarmGroup = await this.dungeons.buildPrewarmGroup();
+          this.scene.add(interiorPrewarmGroup);
+        },
+        detail: () => `objects=${interiorPrewarmGroup?.children.length ?? 0}`,
+      },
+      {
         // Players are the #1 shader-compile trigger in a crowd, so build their
         // archetypes first (before the long mob tail) — guaranteed within budget.
         id: 'entities.player-archetypes',
@@ -2380,7 +2425,7 @@ export class Renderer {
         priority: 35,
         required: true,
         run: () => {
-          entityPrewarmGroup = this.buildEntityPrewarmGroup(buildDeadline);
+          entityPrewarmGroup = this.buildEntityPrewarmGroup();
           this.scene.add(entityPrewarmGroup);
         },
         detail: () =>
@@ -2421,6 +2466,21 @@ export class Renderer {
           this.scene.add(propMaterialPrewarmGroup);
         },
         detail: () => `objects=${propMaterialPrewarmGroup?.children.length ?? 0}`,
+      },
+      {
+        // Compile every foliage shader (tree/rock/dressing species + far-tree
+        // impostors) at boot. The renderer streams foliage buckets in as you
+        // move, so distant-only species otherwise link their shaders mid-travel
+        // (the open-world hitch walking north out of spawn).
+        id: 'foliage.materials',
+        category: 'props',
+        priority: 46,
+        required: false,
+        run: () => {
+          foliagePrewarmGroup = buildFoliageMaterialPrewarmGroup();
+          this.scene.add(foliagePrewarmGroup);
+        },
+        detail: () => `objects=${foliagePrewarmGroup?.children.length ?? 0}`,
       },
       {
         id: 'textures.scene',
@@ -2545,11 +2605,21 @@ export class Renderer {
     } finally {
       this.vfx.clear();
       if (doorPrewarmGroup) this.scene.remove(doorPrewarmGroup);
+      if (interiorPrewarmGroup) this.scene.remove(interiorPrewarmGroup);
       if (entityPrewarmGroup) this.scene.remove(entityPrewarmGroup);
       if (npcPrewarmGroup) this.scene.remove(npcPrewarmGroup);
       if (playerPrewarmGroup) this.scene.remove(playerPrewarmGroup);
-      if (objectPrewarmGroup) this.scene.remove(objectPrewarmGroup);
+      if (objectPrewarmGroup) {
+        // Re-show the object lights hidden during the prewarm so the pooled objects
+        // (reused for the live ground objects) light normally. (Cast: the manifest
+        // closure assignment is invisible to TS flow analysis here.)
+        (objectPrewarmGroup as THREE.Group).traverse((o: THREE.Object3D) => {
+          if ((o as THREE.PointLight).isPointLight) o.visible = true;
+        });
+        this.scene.remove(objectPrewarmGroup);
+      }
       if (propMaterialPrewarmGroup) this.scene.remove(propMaterialPrewarmGroup);
+      if (foliagePrewarmGroup) this.scene.remove(foliagePrewarmGroup);
     }
 
     const elapsed = performance.now() - started;
@@ -4374,8 +4444,15 @@ export class Renderer {
         dz = entry.worldPos.z - pz;
       entry.d2 = dx * dx + dz * dz;
     }
-    // CONSTANT visible count (numPointLights never changes -> no light-count recompiles);
-    // the live governor only changes how many SHINE, not how many are counted.
+    // Keep a CONSTANT number of point lights `visible` so numPointLights in every
+    // material's program cache key never changes as the player travels. Three counts
+    // a light into numPointLights iff `visible` (intensity is irrelevant to the
+    // count), so toggling visibility as campfires budget in/out used to recompile
+    // every nearby material 0<->maxPointLights times - the dominant open-world travel
+    // freeze. Now the nearest maxPointLights lights stay visible (one stable program
+    // per material); lights past the live budget or out of range simply contribute
+    // nothing (intensity 0). maxPointLights is the per-tier constant, so the live
+    // governor (effectivePointLights) only changes how many SHINE, not the count.
     const visibleCount = GFX.maxPointLights;
     const liveBudget = this.effectivePointLights || GFX.maxPointLights;
     if (ranked.length > visibleCount) ranked.sort((a, b) => a.d2 - b.d2);
