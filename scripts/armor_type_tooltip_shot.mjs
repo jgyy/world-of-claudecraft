@@ -1,11 +1,14 @@
-// Visual proof of the armor-type tooltip line. Boots the offline game, drops one
-// chest piece of each armor class (mail / leather / cloth) into the bags, and
-// hovers each to capture the slot line now showing the armor subtype on the right.
+// Visual proof of the armor-type tooltip line. Boots the offline game as a MAGE
+// (cloth wearer), drops one chest piece of each armor class (mail / leather /
+// cloth) into the bags, and hovers each to capture the slot line now showing the
+// armor subtype on the right. As a mage, the mail and leather types render RED
+// (the class cannot wear them) and cloth renders in the normal light color.
 //   node scripts/armor_type_tooltip_shot.mjs    (needs `npm run dev` on :5173)
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -28,8 +31,8 @@ const jsClick = (sel) =>
 await new Promise((r) => setTimeout(r, 400));
 await jsClick('#btn-offline');
 await new Promise((r) => setTimeout(r, 300));
-await page.type('#char-name', 'Adventurer');
-await jsClick('#offline-select .mini-class[data-class="warrior"]');
+await page.type('#char-name', 'Magus');
+await jsClick('#offline-select .mini-class[data-class="mage"]');
 await jsClick('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 40000 });
 await new Promise((r) => setTimeout(r, 2000));
@@ -55,9 +58,7 @@ await new Promise((r) => setTimeout(r, 400));
 
 await page.keyboard.press('b'); // open bags
 await new Promise((r) => setTimeout(r, 600));
-const bagCount = await page.evaluate(
-  () => document.querySelectorAll('#bags .bag-item').length,
-);
+const bagCount = await page.evaluate(() => document.querySelectorAll('#bags .bag-item').length);
 console.log('bag rows:', bagCount);
 
 async function hoverItem(name, shot) {
@@ -120,7 +121,11 @@ await page.evaluate(() => {
   const b = row.getBoundingClientRect();
   for (const type of ['mouseenter', 'mouseover', 'mousemove']) {
     row.dispatchEvent(
-      new MouseEvent(type, { bubbles: true, clientX: b.x + b.width / 2, clientY: b.y + b.height / 2 }),
+      new MouseEvent(type, {
+        bubbles: true,
+        clientX: b.x + b.width / 2,
+        clientY: b.y + b.height / 2,
+      }),
     );
   }
 });
