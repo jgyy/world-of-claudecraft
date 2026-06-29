@@ -175,6 +175,7 @@ import {
 import { prestige as prestigeImpl, updateRested } from './progression/xp';
 import { sanitizeRemovedZone1Content } from './removed_zone1_content';
 import { Rng } from './rng';
+import { persistedResource } from './serialize_resource';
 import { createSimContext, type SimContext, type SimContextHost } from './sim_context';
 import * as chatMod from './social/chat';
 import * as tradeMod from './social/trade';
@@ -1327,7 +1328,10 @@ export class Sim {
       restedXp: meta.restedXp,
       copper: meta.copper,
       hp: e.hp,
-      resource: e.resource,
+      // A druid saved while shifted runs on rage/energy with its mana parked in
+      // savedMana; persist the parked mana so reload (always caster form) restores
+      // it instead of clamping the form bar into the mana pool.
+      resource: persistedResource(CLASSES[meta.cls].resourceType, e.resourceType, e.resource, e.savedMana),
       pos: { x: e.pos.x, z: e.pos.z },
       facing: e.facing,
       equipment: { ...meta.equipment },
