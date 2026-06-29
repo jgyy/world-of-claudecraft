@@ -9,10 +9,11 @@ function gear(quality: ItemDef['quality'], extra: Partial<ItemDef> = {}): ItemDe
     name: 'Test Item',
     kind: 'armor',
     slot: 'chest',
+    armorType: 'cloth',
     sellValue: 1,
     quality,
     ...extra,
-  };
+  } as ItemDef;
 }
 
 describe('requiredLevelFor', () => {
