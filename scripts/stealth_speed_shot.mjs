@@ -15,8 +15,9 @@
 //      (ghosted) rogue moving forward at the reduced speed.
 //
 // Needs `npm run dev` (override with GAME_URL). Writes tmp/stealth-speed-*.png.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173/?gfx=ultra';
