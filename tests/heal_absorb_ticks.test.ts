@@ -13,8 +13,14 @@ const makeSim = () => new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true
 
 function pushAbsorb(e: Entity, value: number): void {
   e.auras.push({
-    id: 'heal_absorb_test', name: 'Grave Blight', kind: 'heal_absorb',
-    remaining: 10, duration: 10, value, sourceId: 999, school: 'shadow',
+    id: 'heal_absorb_test',
+    name: 'Grave Blight',
+    kind: 'heal_absorb',
+    remaining: 10,
+    duration: 10,
+    value,
+    sourceId: 999,
+    school: 'shadow',
   });
 }
 
@@ -26,13 +32,21 @@ describe('heal-absorb drains every healing path', () => {
   it('absorbs a heal-over-time tick instead of letting it land', () => {
     const sim = makeSim();
     const p = sim.player;
-    p.maxHp = 1000; p.hp = 500;
+    p.maxHp = 1000;
+    p.hp = 500;
     pushAbsorb(p, 100);
     // A HoT that ticks immediately for 60 per tick.
     const hot: Aura = {
-      id: 'hot_test', name: 'Rejuvenation', kind: 'hot',
-      remaining: 10, duration: 10, value: 60, sourceId: p.id, school: 'nature',
-      tickInterval: 2, tickTimer: 0,
+      id: 'hot_test',
+      name: 'Rejuvenation',
+      kind: 'hot',
+      remaining: 10,
+      duration: 10,
+      value: 60,
+      sourceId: p.id,
+      school: 'nature',
+      tickInterval: 2,
+      tickTimer: 0,
     };
     p.auras.push(hot);
     updateAuras((sim as any).ctx, p);
@@ -44,7 +58,8 @@ describe('heal-absorb drains every healing path', () => {
   it('absorbs a food/drink regen tick', () => {
     const sim = makeSim();
     const p = sim.player;
-    p.maxHp = 1000; p.hp = 500;
+    p.maxHp = 1000;
+    p.hp = 500;
     p.inCombat = true; // isolate the food tick from passive out-of-combat regen
     pushAbsorb(p, 1000);
     p.eating = { itemId: 'test_food', kind: 'food', hpPer2s: 80, manaPer2s: 0, remaining: 20 };
@@ -58,7 +73,8 @@ describe('heal-absorb drains every healing path', () => {
   it('absorbs a healing-potion quaff', () => {
     const sim = makeSim();
     const p = sim.player;
-    p.maxHp = 1000; p.hp = 500;
+    p.maxHp = 1000;
+    p.hp = 500;
     (sim as any).addItem('minor_healing_potion', 1, p.id); // potionHp 90
     pushAbsorb(p, 1000);
     sim.useItem('minor_healing_potion', p.id);
@@ -70,11 +86,19 @@ describe('heal-absorb drains every healing path', () => {
   it('lets the HoT heal normally once the shield is gone', () => {
     const sim = makeSim();
     const p = sim.player;
-    p.maxHp = 1000; p.hp = 500;
+    p.maxHp = 1000;
+    p.hp = 500;
     const hot: Aura = {
-      id: 'hot_test', name: 'Rejuvenation', kind: 'hot',
-      remaining: 10, duration: 10, value: 60, sourceId: p.id, school: 'nature',
-      tickInterval: 2, tickTimer: 0,
+      id: 'hot_test',
+      name: 'Rejuvenation',
+      kind: 'hot',
+      remaining: 10,
+      duration: 10,
+      value: 60,
+      sourceId: p.id,
+      school: 'nature',
+      tickInterval: 2,
+      tickTimer: 0,
     };
     p.auras.push(hot);
     updateAuras((sim as any).ctx, p);
