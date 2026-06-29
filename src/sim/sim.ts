@@ -126,6 +126,7 @@ import {
   tickGroundAoEs,
 } from './entity_roster';
 import { canEquipItem } from './equipment_rules';
+import { fleeSpeed } from './flee_speed';
 import { formatMoney } from './format_money';
 import * as interaction from './interaction';
 import * as items from './items';
@@ -314,8 +315,7 @@ const BACKPEDAL_MULT = 0.65;
 // per pull, then recovers its nerve and re-engages if it survived.
 const FLEE_HP_THRESHOLD = 0.2;
 const FLEE_DURATION = 5;
-const FLEE_SPEED_MULT = 1.4;
-const FLEE_MAX_SPEED = RUN_SPEED;
+// FLEE_SPEED_MULT / FLEE_MAX_SPEED and the cap math live in ./flee_speed.ts.
 // FLEE_RETURN_GRACE moved to mob/locomotion.ts (M2; used only by recoverFromFlee).
 // Only sentient, cowardly families flee; beasts/undead/elementals/dragonkin fight
 // to the death. Elites, rares, and bosses never flee regardless of family.
@@ -2460,7 +2460,7 @@ export class Sim {
   }
 
   private fleeMoveSpeed(e: Entity): number {
-    return Math.min(e.moveSpeed * FLEE_SPEED_MULT, FLEE_MAX_SPEED) * this.moveSpeedMult(e);
+    return fleeSpeed(e.moveSpeed, this.moveSpeedMult(e));
   }
 
   // recoverFromFlee moved to mob/locomotion.ts (M2; called only by the flee arm).
