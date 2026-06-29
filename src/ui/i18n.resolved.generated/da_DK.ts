@@ -222,6 +222,9 @@ export const da_DK: EnTranslations = {
     "rest": {
       "resting": "Hviler"
     },
+    "abilityScaling": {
+      "bonus": "(+{value})"
+    },
     "unitFrame": {
       "playerLabel": "Din helt",
       "targetLabel": "Dit mål",
@@ -317,7 +320,10 @@ export const da_DK: EnTranslations = {
       "showWalletOnCharacterScreen": "Vis pengepung på karakterskærm",
       "showWalletOnPlayerCard": "Vis pengepung på spillerkort",
       "uiScale": "UI-skala",
-      "highContrastBackground": "Baggrund med høj kontrast"
+      "highContrastBackground": "Baggrund med høj kontrast",
+      "showItemLevel": "Vis genstandsniveau",
+      "itemLevelLine": "Genstandsniveau {level}",
+      "itemScoreLine": "Score {score}"
     },
     "controller": {
       "title": "Controller",
@@ -447,6 +453,10 @@ export const da_DK: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Tip: skriv /join world eller /join lfg for at chatte med spillere på tværs af realmet."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Denne opgave kan ikke deles.",
@@ -584,6 +594,26 @@ export const da_DK: EnTranslations = {
       "exportDone": "Dine data blev downloadet. Vi har sendt dig en bekræftelse på e-mail.",
       "exportFailed": "Kunne ikke eksportere dine data. Prøv igen om et øjeblik."
     },
+    "masterLoot": {
+      "title": "Master loot",
+      "enableLabel": "Master loot",
+      "enableAria": "Aktiver master loot",
+      "looterLabel": "Master looter",
+      "leaderOption": "Gruppeleder",
+      "thresholdLabel": "Tærskel",
+      "thresholdUncommon": "Uncommon og op",
+      "thresholdRare": "Rare og op",
+      "thresholdEpic": "Epic og op",
+      "assignPrompt": "Tildel {item}",
+      "assignAria": "Tildel {item} til {name}",
+      "rollButton": "Rul",
+      "selectAll": "Vaelg alle",
+      "methodMaster": "Lootmetode sat til master loot. Master looter: {name}.",
+      "methodGroup": "Lootmetode sat til gruppeloot.",
+      "assigned": "{looter} tildelte {item} til {target}.",
+      "unassigned": "{item} blev ikke tildelt og er frit for alle.",
+      "leaderOnly": "Kun gruppelederen kan aendre lootmetoden."
+    },
     "bags": {
       "filterGroupAria": "Filtrér tasker efter kategori",
       "filterAll": "Alle",
@@ -607,9 +637,9 @@ export const da_DK: EnTranslations = {
       "tooLarge": "Et raid med mere end fem medlemmer kan ikke konverteres tilbage til en gruppe."
     },
     "itemArmorType": {
-      "cloth": "Cloth",
-      "leather": "Leather",
-      "mail": "Mail"
+      "cloth": "Stof",
+      "leather": "Læder",
+      "mail": "Ringbrynje"
     },
     "auraEffect": {
       "dot": "Giver {value} {school}-skade hvert {interval}. sek",
@@ -2722,7 +2752,7 @@ export const da_DK: EnTranslations = {
     "combat": {
       "floatingMiss": "Forbier",
       "floatingDodge": "Undvigelse",
-      "floatingResist": "Resist",
+      "floatingResist": "Modstået",
       "cannotMove": "Kan ikke bevæge dig!",
       "attack": "angreb",
       "damageDone": "Din {ability} rammer {target} for {amount}.",
@@ -2731,7 +2761,7 @@ export const da_DK: EnTranslations = {
       "damageTakenCrit": "{source} rammer dig kritisk for {amount}.",
       "miss": "Din {ability} forfejler {target}.",
       "dodged": "Din {ability} undviges af {target}.",
-      "resisted": "Your {ability} is resisted by {target}.",
+      "resisted": "{target} modstår din {ability}.",
       "healSelf": "Din {ability} helbreder dig for {amount}.",
       "healSelfCrit": "Din {ability} helbreder dig kritisk for {amount}.",
       "healOther": "Din {ability} helbreder {target} for {amount}.",
@@ -3462,7 +3492,7 @@ export const da_DK: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Arkane Missiler",
-        "description": "Affyrer Arkane Missiler mod fjenden, der forvolder 8 Arkan skade hvert sekund i 3 sek."
+        "description": "Affyrer Arkane Missiler mod fjenden, der forvolder {damage} Arkan skade hvert sekund i 3 sek."
       },
       "polymorph": {
         "name": "Polymorfi",
@@ -3710,7 +3740,7 @@ export const da_DK: EnTranslations = {
       },
       "mind_flay": {
         "name": "Sindsflåning",
-        "description": "Angriber målets sind med skyggeenergi, hvilket volder 12 skade hvert sekund i 3 sek."
+        "description": "Angriber målets sind med skyggeenergi, hvilket volder {damage} skade hvert sekund i 3 sek."
       },
       "flash_heal": {
         "name": "Lynhelbredelse",
@@ -3786,7 +3816,7 @@ export const da_DK: EnTranslations = {
       },
       "drain_life": {
         "name": "Dræn Liv",
-        "description": "Dræner målets liv og overfører 7 helbred til dig hvert sekund i 5 sek."
+        "description": "Dræner målets liv og overfører {damage} helbred til dig hvert sekund i 5 sek."
       },
       "fear": {
         "name": "Frygt",
@@ -6362,6 +6392,43 @@ export const da_DK: EnTranslations = {
         "name": "Det Sammenstyrtede Relikvarium",
         "enterText": "Du stiger ned i det sammenstyrtede relikvarium.",
         "leaveText": "Du klatrer tilbage til Broder Halven ved relikvariets ruin."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Kronesmedet kampudstyr",
+        "bonus2": "Øger angrebskraft med 40.",
+        "bonus3": "Øger styrke med 15 og udholdenhed med 15."
+      },
+      "deathlord": {
+        "name": "Dødsherrens kampudstyr",
+        "bonus2": "Øger angrebskraft med 40.",
+        "bonus3": "Øger styrke med 15 og udholdenhed med 15."
+      },
+      "necromancers": {
+        "name": "Nekromantikerens klæder",
+        "bonus2": "Reducerer kastetilbageslag fra skade med 50%.",
+        "bonus3": "Skade forsinker ikke dine besværgelser."
+      },
+      "nighttalon": {
+        "name": "Natteklos læderudstyr",
+        "bonus2": "Øger angrebskraft med 40.",
+        "bonus3": "Øger smidighed med 15 og kritisk chance med 2%."
+      },
+      "soulflame": {
+        "name": "Sjæleflamme-klæder",
+        "bonus2": "Reducerer kastetilbageslag fra skade med 50%.",
+        "bonus3": "Skade forsinker ikke dine besværgelser."
+      },
+      "stormcallers": {
+        "name": "Stormkalderens klæder",
+        "bonus2": "Reducerer kastetilbageslag fra skade med 50%.",
+        "bonus3": "Skade forsinker ikke dine besværgelser."
+      },
+      "wyrmshadow": {
+        "name": "Wyrmskygge-udstyr",
+        "bonus2": "Øger angrebskraft med 40.",
+        "bonus3": "Øger smidighed med 15 og kritisk chance med 2%."
       }
     }
   },

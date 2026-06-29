@@ -10,52 +10,22 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "es_ES": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "fr_FR": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "fr_CA": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "en_CA": [],
   "it_IT": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "de_DE": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "zh_CN": [],
@@ -63,68 +33,28 @@ export const pending: Record<string, readonly string[]> = {
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "ru_RU": [],
   "nl_NL": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "pl_PL": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "id_ID": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "tr_TR": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "sv_SE": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "vi_VN": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ],
   "da_DK": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail",
     "hudChrome.itemTooltip.requiresLevel"
   ]
 };
