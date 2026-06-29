@@ -42,5 +42,33 @@ export const pending: Record<string, readonly string[]> = {
     "hud.combat.floatingResist",
     "hud.combat.resisted"
   ],
-  "ru_RU": []
+  "ru_RU": [],
+  "nl_NL": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "pl_PL": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "id_ID": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "tr_TR": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "sv_SE": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "vi_VN": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ],
+  "da_DK": [
+    "hud.combat.floatingResist",
+    "hud.combat.resisted"
+  ]
 };
