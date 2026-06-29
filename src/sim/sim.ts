@@ -69,6 +69,7 @@ import {
   type TalentAllocation,
   type TalentModifiers,
 } from './content/talents';
+import { applyCooldowns, type SavedCooldowns, serializeCooldowns } from './cooldown_persist';
 import type { DelveShopGate, DelveShopOffer } from './data';
 import {
   abilitiesKnownAt,
@@ -125,7 +126,6 @@ import {
   tickGroundAoEs,
 } from './entity_roster';
 import { canEquipItem } from './equipment_rules';
-import { applyCooldowns, type SavedCooldowns, serializeCooldowns } from './cooldown_persist';
 import { formatMoney } from './format_money';
 import * as interaction from './interaction';
 import * as items from './items';
@@ -3589,7 +3589,7 @@ export class Sim {
     return FLEEING_FAMILIES.has(tmpl.family);
   }
 
-  private maybeFlee(mob: Entity, target: Entity): boolean {
+  private maybeFlee(mob: Entity, _target: Entity): boolean {
     if (mob.maxHp <= 0 || mob.hp / mob.maxHp > FLEE_HP_THRESHOLD) return false;
     if (!this.canFlee(mob)) return false;
     mob.aiState = 'flee';
