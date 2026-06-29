@@ -1,0 +1,18 @@
+sequenceDiagram
+    autonumber
+    participant L as Leader (client)
+    participant S as Server (authoritative Sim)
+    participant M as Members (clients)
+    Note over L,M: Party / raid already formed (PartyMachine, session A1)
+    L->>S: readyCheck command (leader only)
+    S->>S: validate caller is leader, anti-spam cooldown
+    S-->>L: readyCheckStarted (you started it)
+    S-->>M: readyCheckStarted { fromName, expires }
+    Note over M: HUD shows a Ready prompt plus a countdown (~30s)
+    M->>S: readyCheckRespond (ready or not ready)
+    S->>S: record each member status, timeout counts as not ready
+    S-->>L: readyCheckUpdate { pid, status }
+    S-->>M: readyCheckUpdate { pid, status }
+    Note over L,M: Party frames show a green check or red X per member
+    S-->>L: readyCheckResult { allReady }
+    S-->>M: readyCheckResult { allReady }
