@@ -96,7 +96,6 @@ import {
 } from '../world_api';
 import { absorbBarView } from './absorb_bar';
 import { ActionBarPainter } from './action_bar_painter';
-import { type AuraEffectInput, auraEffectDescriptor } from './aura_effect';
 import {
   ABILITY_ICON_PREFIX,
   type ActionBarView,
@@ -106,6 +105,7 @@ import {
   ITEM_ICON_PREFIX,
 } from './action_bar_view';
 import { ArenaWindow } from './arena_window';
+import { type AuraEffectInput, auraEffectDescriptor } from './aura_effect';
 import { AurasPainter, type AurasPainterDeps } from './auras_painter';
 import { type AurasDeps, createAurasView } from './auras_view';
 import { BagsWindow } from './bags_window';
