@@ -19,6 +19,7 @@ import { recalcPlayerStats } from '../entity';
 import type { GroundAoE } from '../entity_roster';
 import type { PlayerMeta, ResolvedAbility } from '../sim';
 import type { SimContext } from '../sim_context';
+import { stunDrCategory } from '../stun_dr';
 import { addThreat } from '../threat';
 import type { AbilityDef, Entity } from '../types';
 import { armorReduction, meleeMissChance } from '../types';
@@ -132,7 +133,7 @@ export function runEffects(
         const dur = ctx.diminishedCrowdControlDuration(
           p,
           target,
-          'stun',
+          stunDrCategory(ability.id),
           eff.base + eff.perCombo * spentCombo,
         );
         if (dur === null) break;
@@ -306,7 +307,12 @@ export function runEffects(
       }
       case 'stun': {
         if (!target || target.dead) break;
-        const remaining = ctx.diminishedCrowdControlDuration(p, target, 'stun', eff.duration);
+        const remaining = ctx.diminishedCrowdControlDuration(
+          p,
+          target,
+          stunDrCategory(ability.id),
+          eff.duration,
+        );
         if (remaining === null) break;
         ctx.applyAura(target, {
           id: `${ability.id}_stun`,

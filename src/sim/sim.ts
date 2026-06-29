@@ -230,6 +230,7 @@ import {
 import * as fiestaBotsMod from './social/fiesta_bots';
 import { PartyMachine } from './social/party';
 import { SpatialGrid } from './spatial';
+import { isStunDrCategory } from './stun_dr';
 import { Targeting } from './targeting';
 import {
   addThreat,
@@ -3111,7 +3112,7 @@ export class Sim {
         ? PVP_POLYMORPH_DR_RESET
         : category === 'fear'
           ? PVP_FEAR_DR_RESET
-          : category === 'stun'
+          : isStunDrCategory(category)
             ? PVP_STUN_DR_RESET
             : PVP_ROOT_DR_RESET;
     if (category === 'polymorph') {

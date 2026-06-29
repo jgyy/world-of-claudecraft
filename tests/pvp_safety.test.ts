@@ -7,7 +7,12 @@ import type { Entity, Vec3 } from '../src/sim/types';
 import { dist2d } from '../src/sim/types';
 
 function twoPlayers(clsA = 'mage', clsB = 'warrior') {
-  const sim = new Sim({ seed: 42, playerClass: clsA as any, playerName: 'Caster', autoEquip: true });
+  const sim = new Sim({
+    seed: 42,
+    playerClass: clsA as any,
+    playerName: 'Caster',
+    autoEquip: true,
+  });
   const aPid = sim.primaryId;
   const bPid = sim.addPlayer(clsB as any, 'Victim', { autoEquip: true });
   const a = sim.entities.get(aPid)!;
@@ -48,7 +53,13 @@ function finishCast(sim: Sim, pid: number) {
 const pos = (e: Entity): Vec3 => ({ ...e.pos });
 
 const hasCc = (e: Entity) =>
-  e.auras.some((au) => au.kind === 'polymorph' || au.kind === 'stun' || au.kind === 'incapacitate' || au.kind === 'root');
+  e.auras.some(
+    (au) =>
+      au.kind === 'polymorph' ||
+      au.kind === 'stun' ||
+      au.kind === 'incapacitate' ||
+      au.kind === 'root',
+  );
 
 describe('PvP safety outside duels (#96)', () => {
   it('a player cannot polymorph another player', () => {
@@ -238,10 +249,48 @@ describe('PvP control abilities in active duels', () => {
     expect(castStun()).toBe(4);
   });
 
+  it('keeps opener and controlled stuns on independent DR chains (#1004)', () => {
+    // Classic-style stun DR is not one bucket: a from-stealth opener (Cheap Shot,
+    // Pounce) must not eat into a controlled stun's chain (Kidney Shot, Hammer of
+    // Justice). Simulate a fully diminished OPENER chain on the target, then prove a
+    // controlled stun still lands at full duration and diminishes only within its
+    // own controlled bucket.
+    const { sim, aPid, b } = startDuel('paladin', 'warrior', 20);
+
+    // Pretend the target already burned its opener-stun chain to immunity.
+    b.ccDr.set('openerStun', { stage: 3, resetAt: sim.time + 18 });
+
+    const castStun = () => {
+      let dur = 0;
+      for (let attempt = 0; attempt < 50 && dur === 0; attempt++) {
+        b.auras = b.auras.filter((aura) => aura.id !== 'hammer_of_justice_stun');
+        const pala = sim.entities.get(aPid)!;
+        pala.gcdRemaining = 0;
+        pala.resource = pala.maxResource;
+        pala.cooldowns.delete('hammer_of_justice');
+        sim.castAbility('hammer_of_justice', aPid);
+        finishCast(sim, aPid);
+        dur = b.auras.find((aura) => aura.id === 'hammer_of_justice_stun')?.duration ?? 0;
+      }
+      return dur;
+    };
+
+    // The controlled stun is unaffected by the spent opener chain: full duration,
+    // then diminishes only within its own controlled bucket.
+    expect(castStun()).toBe(4); // 100%, not diminished by the opener bucket
+    expect(castStun()).toBe(2); // 50%
+    expect(castStun()).toBe(1); // 25%
+  });
+
   it('does not diminish PvE stuns: a stun on a mob keeps full duration on repeat', () => {
     // DR is duel/PvP only (player source AND player target). A paladin stunning a
     // hostile mob must always land the full 4s, no matter how many times in a row.
-    const sim = new Sim({ seed: 7, playerClass: 'paladin' as any, playerName: 'Pala', autoEquip: true });
+    const sim = new Sim({
+      seed: 7,
+      playerClass: 'paladin' as any,
+      playerName: 'Pala',
+      autoEquip: true,
+    });
     const pid = sim.primaryId;
     sim.setPlayerLevel(20, pid);
     const p = sim.entities.get(pid)!;
