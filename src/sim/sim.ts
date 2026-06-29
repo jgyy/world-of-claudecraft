@@ -160,7 +160,6 @@ import { resetEvadingMob as resetEvadingMobFn, updateMob as updateMobFn } from '
 import { runMobSwingAffixes } from './mob/mob_swing';
 import { rallyFleeingAllies } from './mob/social_aggro';
 import {
-  isTrivialTo as isTrivialToFn,
   retargetMob as retargetMobFn,
   updateMobTarget as updateMobTargetFn,
 } from './mob/targeting';
@@ -3585,10 +3584,6 @@ export class Sim {
         }
       });
     }
-  }
-
-  private isTrivialTo(mob: Entity, player: Entity): boolean {
-    return isTrivialToFn(mob, player);
   }
 
   private updateMob(mob: Entity): void {

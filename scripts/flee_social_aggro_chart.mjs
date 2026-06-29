@@ -16,7 +16,6 @@ const SEED = 42;
 const FAMILY_TEMPLATE = 'gravecaller_cultist';
 // Allies down the +x escape lane, at increasing distance from the panic spot.
 const ALLY_DX = [4, 10, 16, 22, 28];
-const dist2d = (a, b) => Math.hypot(a.x - b.x, a.z - b.z);
 
 function wildMobs(sim) {
   return [...sim.entities.values()].filter(
