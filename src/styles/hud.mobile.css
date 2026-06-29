@@ -1551,6 +1551,11 @@
   }
 
   @media (orientation: landscape) {
+    body.mobile-touch .play-console {
+      width: 100%;
+      max-width: 460px;
+      gap: 12px;
+    }
     /* In-game mobile play is landscape, where vertical space is scarce. The
        generic mobile rule stacks the trade columns and actions, pushing Accept
        and Cancel below the fold of the height-capped window. Use the wide
@@ -1567,11 +1572,6 @@
     }
     body.mobile-touch #trade-window .trade-actions .btn {
       flex: 1;
-    }
-    body.mobile-touch .play-console {
-      width: 100%;
-      max-width: 460px;
-      gap: 12px;
     }
     body.mobile-touch .server-select-caption {
       margin-bottom: 5px;
