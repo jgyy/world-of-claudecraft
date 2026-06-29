@@ -38,10 +38,9 @@ await page.evaluate(() => {
 });
 await sleep(150);
 await page.click('#btn-start-offline');
-await page.waitForFunction(
-  () => window.__game && window.__game.sim && window.__game.sim.player,
-  { timeout: 45000 },
-);
+await page.waitForFunction(() => window.__game && window.__game.sim && window.__game.sim.player, {
+  timeout: 45000,
+});
 await sleep(1200);
 
 const series = await page.evaluate(() => {
