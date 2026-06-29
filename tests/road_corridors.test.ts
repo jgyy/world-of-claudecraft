@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { ROADS } from '../src/sim/data';
+import { describe, expect, it } from 'vitest';
 import { resolvePosition } from '../src/sim/colliders';
+import { ROADS } from '../src/sim/data';
 
 // Roads are the deterministic travel paths that mobs/quests route along and that
 // players naturally follow. A static prop collider (building, stall, tent, well,
@@ -20,7 +20,11 @@ const BODY_RADIUS = 0.5;
 const MAX_PUSH = 0.5; // yards; below a single body radius == still on the path
 const STEP = 0.3; // sample spacing along the centerline
 
-function maxCenterlinePush(road: { x: number; z: number }[]): { push: number; x: number; z: number } {
+function maxCenterlinePush(road: { x: number; z: number }[]): {
+  push: number;
+  x: number;
+  z: number;
+} {
   let worst = 0;
   let wx = road[0]?.x ?? 0;
   let wz = road[0]?.z ?? 0;
