@@ -13,6 +13,7 @@ describe('Sim.unequipItem', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
     const pid = sim.addPlayer('warrior', 'Aleph');
     const meta = sim.players.get(pid)!;
+    sim.setPlayerLevel(20, pid); // clear the per-quality equip level gate (uncommon helm)
     sim.tick();
     // give + equip a helmet (a slot a fresh warrior leaves empty)
     sim.addItem('cryptbone_helm', 1, pid);
