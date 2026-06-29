@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
@@ -269,5 +269,23 @@ describe('Guide model stills', () => {
         `missing still on disk: "${url}" (run \`npm run wiki:stills\`)`,
       ).toBe(true);
     }
+  });
+
+  it('has no orphan WebP (every committed still is referenced by a figure)', () => {
+    const basename = (url: string): string => url.split('/').pop() ?? '';
+    const referenced = new Set<string>();
+    for (const c of GUIDE_CLASSES) if (c.still) referenced.add(basename(c.still));
+    for (const p of GUIDE_WARLOCK_PETS) if (p.still) referenced.add(basename(p.still));
+    for (const f of GUIDE_FAMILIES)
+      for (const c of f.creatures) if (c.still) referenced.add(basename(c.still));
+    const onDisk = readdirSync(resolve(repoRoot, 'public', 'guide-stills')).filter((f) =>
+      f.endsWith('.webp'),
+    );
+    // A removed or retinted figure changes its still key and orphans the old file; the forward
+    // guards above never catch that, so this keeps stale art from accumulating in public/.
+    const orphans = onDisk.filter((f) => !referenced.has(f));
+    expect(orphans, `orphan stills with no figure (delete them): ${orphans.join(', ')}`).toEqual(
+      [],
+    );
   });
 });
