@@ -3500,6 +3500,10 @@ function inventoryVendor(): Scenario {
     drive(rec: Recorder) {
       const sim = rec.sim as AnySim;
       const buyer = sim.addPlayer('warrior', 'Buyer');
+      // Level 20 so the uncommon helmets below clear the per-quality equip level
+      // gate (item_level_req.ts). setPlayerLevel draws no rng, so the draw-order
+      // digest is unchanged; only the buyer's derived stat fields shift.
+      sim.setPlayerLevel(20, buyer);
       const meta = sim.players.get(buyer) as any;
       const p = sim.entities.get(buyer) as AnyEntity;
       const wilkes = [...sim.entities.values()].find(
