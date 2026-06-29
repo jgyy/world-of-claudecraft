@@ -723,7 +723,8 @@ const classAbilityNamesEn = {
       [
         'stealth',
         'Stealth',
-        'Conceals you in the shadows: enemies barely notice you, but you move 50% slower. Attacking or taking damage breaks Stealth. Cast again to step out.',      ],
+        'Conceals you in the shadows: enemies barely notice you, but you move 50% slower. Attacking or taking damage breaks Stealth. Cast again to step out.',
+      ],
       ['adrenaline_rush', 'Adrenaline Rush', 'Your blood runs hot, instantly restoring 60 energy.'],
       [
         'garrote',
@@ -758,7 +759,8 @@ const classAbilityNamesEn = {
       [
         'vanish',
         'Vanish',
-        'Vanish from sight, entering Stealth even in combat. You move 50% slower while hidden. Lasts up to 10 sec.',      ],
+        'Vanish from sight, entering Stealth even in combat. You move 50% slower while hidden. Lasts up to 10 sec.',
+      ],
       [
         'instant_poison',
         'Instant Poison',
@@ -909,7 +911,8 @@ const classAbilityNamesEn = {
       [
         'lightning_shield',
         'Lightning Shield',
-        'Surrounds you with crackling lightning: melee attackers take 13 Nature damage, up to 3 charges and at most once every 5 seconds.',      ],
+        'Surrounds you with crackling lightning: melee attackers take 13 Nature damage, up to 3 charges and at most once every 5 seconds.',
+      ],
       [
         'flame_shock',
         'Flame Shock',
