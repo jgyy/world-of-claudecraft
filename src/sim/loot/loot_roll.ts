@@ -39,6 +39,7 @@ import type {
   LootStrategies,
 } from '../types';
 import { dist2d, PARTY_XP_RANGE } from '../types';
+import { LOOT_FFA_DELAY } from './loot_ffa';
 
 // How long (seconds) a need-greed roll stays open before it auto-resolves. Sole
 // users are startNeedGreedRoll + pruneCorpseLoot, so the constant lives with them.
@@ -161,6 +162,8 @@ export function rollLoot(
   if (copper > 0 || items.length > 0) {
     mob.loot = { copper, items };
     mob.lootable = true;
+    // start the owner-lock countdown: after LOOT_FFA_DELAY the tap opens to all.
+    mob.lootFfaTimer = LOOT_FFA_DELAY;
   }
 }
 
