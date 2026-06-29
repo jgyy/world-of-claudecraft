@@ -2,8 +2,9 @@
 // debuffs to #debuff-bar (the row beneath). Boots the offline game, stamps a mix
 // of helpful and harmful auras onto the player (fresh chars can't cast them all),
 // and screenshots the two rows together. Needs `npm run dev` on :5173.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -11,7 +12,8 @@ fs.mkdirSync('tmp', { recursive: true });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const browser = await puppeteer.launch({
-  executablePath: EDGE, headless: 'new',
+  executablePath: EDGE,
+  headless: 'new',
   args: ['--window-size=1600,900', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
   defaultViewport: { width: 1600, height: 900 },
 });
@@ -37,7 +39,14 @@ await sleep(1500);
 await page.evaluate(() => {
   const p = window.__game.sim.player;
   const mk = (id, name, kind, value = 0, remaining = 30) => ({
-    id, name, kind, remaining, duration: remaining, value, sourceId: 0, school: 'physical',
+    id,
+    name,
+    kind,
+    remaining,
+    duration: remaining,
+    value,
+    sourceId: 0,
+    school: 'physical',
   });
   p.auras = [
     // buffs (top row)
@@ -67,7 +76,12 @@ const b = await page.evaluate(() => {
 const pad = 16;
 await page.screenshot({
   path: 'tmp/debuff_separation.png',
-  clip: { x: Math.max(0, b.x - pad), y: Math.max(0, b.y - pad), width: b.w + pad * 2, height: b.h + pad * 2 },
+  clip: {
+    x: Math.max(0, b.x - pad),
+    y: Math.max(0, b.y - pad),
+    width: b.w + pad * 2,
+    height: b.h + pad * 2,
+  },
 });
 console.log('captured tmp/debuff_separation.png');
 
