@@ -6574,4 +6574,4 @@ export const classAbilityNames = {
 classAbilityNames.es_ES = classAbilityNames.es;
 classAbilityNames.fr_CA = classAbilityNames.fr_FR;
 
-export { classAbilityNamesEn, abilityTranslations };
+export { abilityTranslations, classAbilityNamesEn };
