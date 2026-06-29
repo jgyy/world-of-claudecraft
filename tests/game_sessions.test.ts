@@ -10,6 +10,7 @@ const revokeAccountMechChroma = vi.fn(async (_accountId: number, _chromaId: stri
 vi.mock('../server/db', () => ({
   pool: { query: vi.fn(async () => ({ rows: [] })) },
   saveCharacterState: vi.fn(async () => {}),
+  saveCharacterAndMarketState: vi.fn(async () => {}),
   openPlaySession: (...args: unknown[]) => openPlaySession(...(args as [])),
   closePlaySession: (...args: unknown[]) => closePlaySession(...(args as [])),
   insertChatLogs: vi.fn(async () => {}),
@@ -19,7 +20,7 @@ vi.mock('../server/db', () => ({
 }));
 
 import { GameServer, type ClientSession } from '../server/game';
-import { saveCharacterState } from '../server/db';
+import { saveCharacterAndMarketState, saveCharacterState } from '../server/db';
 
 function fakeWs() {
   return {
@@ -155,11 +156,11 @@ describe('GameServer sessions', () => {
 
     let resolveSave!: () => void;
     const slowSave = new Promise<void>((resolve) => { resolveSave = resolve; });
-    vi.mocked(saveCharacterState).mockImplementationOnce(() => slowSave);
+    vi.mocked(saveCharacterAndMarketState).mockImplementationOnce(() => slowSave);
 
     const leaving = server.leave(first, 'test');
     await vi.waitFor(() => {
-      expect(saveCharacterState).toHaveBeenCalled();
+      expect(saveCharacterAndMarketState).toHaveBeenCalled();
     });
 
     expect((server as any).sessionByCharacterId(101)).toBe(first);
@@ -177,8 +178,8 @@ describe('GameServer sessions', () => {
 
   it('retries failed disconnect saves before releasing the character for rejoin', async () => {
     vi.useFakeTimers();
-    vi.mocked(saveCharacterState).mockReset();
-    vi.mocked(saveCharacterState)
+    vi.mocked(saveCharacterAndMarketState).mockReset();
+    vi.mocked(saveCharacterAndMarketState)
       .mockRejectedValueOnce(new Error('temporary database outage'))
       .mockRejectedValueOnce(new Error('temporary database outage'))
       .mockResolvedValueOnce(undefined);
@@ -189,7 +190,7 @@ describe('GameServer sessions', () => {
       const leaving = server.leave(session, 'test');
 
       await vi.waitFor(() => {
-        expect(saveCharacterState).toHaveBeenCalledTimes(1);
+        expect(saveCharacterAndMarketState).toHaveBeenCalledTimes(1);
       });
       expect(server.join(fakeWs(), 12, 101, 'Indexa', 'warrior', null)).toEqual({
         error: 'character already in world',
@@ -197,13 +198,13 @@ describe('GameServer sessions', () => {
 
       await vi.runOnlyPendingTimersAsync();
       await vi.waitFor(() => {
-        expect(saveCharacterState).toHaveBeenCalledTimes(2);
+        expect(saveCharacterAndMarketState).toHaveBeenCalledTimes(2);
       });
 
       await vi.runOnlyPendingTimersAsync();
       await leaving;
 
-      expect(saveCharacterState).toHaveBeenCalledTimes(3);
+      expect(saveCharacterAndMarketState).toHaveBeenCalledTimes(3);
       expect((server as any).sessionByCharacterId(101)).toBeNull();
     } finally {
       vi.useRealTimers();
