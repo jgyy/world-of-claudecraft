@@ -65,23 +65,29 @@ export function lootCorpse(ctx: SimContext, mobId: number, pid?: number): void {
     return;
   }
   if (hasSharedLootRights) distributeLootCopper(ctx, mob, meta);
+  // Dupe invariant: clear the source slot BEFORE crediting the looter's bags.
+  // addItem is infallible (no bag cap) and draws no rng, so zeroing first never
+  // loses an item, and a future reentrant/async addItem can never see the same
+  // slot still stocked and loot it twice. Keep clear-then-credit, never reorder.
   for (const s of [...mob.loot.items]) {
     if (!lootSlotVisibleTo(s, meta.entityId)) continue;
     if (s.openToAll) {
-      for (let i = 0; i < s.count; i++) ctx.addItem(s.itemId, 1, meta.entityId);
+      const n = s.count;
       s.count = 0;
+      for (let i = 0; i < n; i++) ctx.addItem(s.itemId, 1, meta.entityId);
       continue;
     }
     if (s.personalFor) {
-      ctx.addItem(s.itemId, 1, meta.entityId);
       s.personalFor = s.personalFor.filter((id) => id !== meta.entityId);
+      ctx.addItem(s.itemId, 1, meta.entityId);
       continue;
     }
     if (!hasSharedLootRights) continue;
-    for (let i = 0; i < s.count; i++) {
+    const n = s.count;
+    s.count = 0;
+    for (let i = 0; i < n; i++) {
       awardSharedLootItem(ctx, s.itemId, mob, meta);
     }
-    s.count = 0;
   }
   pruneCorpseLoot(ctx, mob);
   if (p.targetId === mobId) p.targetId = null;
@@ -123,9 +129,11 @@ export function pickUpObject(ctx: SimContext, objId: number, pid?: number): void
       return;
     }
   }
-  ctx.addItem(obj.objectItemId, 1, meta.entityId);
+  // Dupe invariant (see lootCorpse): close the source before crediting bags so a
+  // future reentrant addItem can never pick up the same object twice.
   obj.lootable = false;
   obj.respawnTimer = OBJECT_RESPAWN;
+  ctx.addItem(obj.objectItemId, 1, meta.entityId);
 }
 
 export function interact(ctx: SimContext, pid?: number): void {
