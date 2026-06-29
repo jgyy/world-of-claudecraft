@@ -4,10 +4,11 @@
 // the real target path (world.targetEntity) and opens the pet context menu from the
 // target portrait. Before the fix, targetEntity rejected the dead, unlootable pet so
 // targetId stayed null and the Revive/Abandon menu was unreachable.
-import puppeteer from 'puppeteer-core';
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 const TAG = process.env.SHOT_TAG ?? 'after';
 fs.mkdirSync('tmp', { recursive: true });
