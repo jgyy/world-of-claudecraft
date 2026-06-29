@@ -3526,7 +3526,7 @@ export const en_CA: EnTranslations = {
       },
       "stealth": {
         "name": "Stealth",
-        "description": "Conceals you in the shadows: enemies barely notice you, but you move 30% slower. Attacking or taking damage breaks Stealth. Cast again to step out."
+        "description": "Conceals you in the shadows: enemies barely notice you, but you move 50% slower. Attacking or taking damage breaks Stealth. Cast again to step out."
       },
       "adrenaline_rush": {
         "name": "Adrenaline Rush",
@@ -3558,7 +3558,7 @@ export const en_CA: EnTranslations = {
       },
       "vanish": {
         "name": "Vanish",
-        "description": "Vanish from sight, entering Stealth even in combat. You move 30% slower while hidden. Lasts up to 10 sec."
+        "description": "Vanish from sight, entering Stealth even in combat. You move 50% slower while hidden. Lasts up to 10 sec."
       },
       "instant_poison": {
         "name": "Instant Poison",
