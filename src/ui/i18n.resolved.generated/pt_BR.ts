@@ -222,6 +222,21 @@ export const pt_BR: EnTranslations = {
     "rest": {
       "resting": "Descansando"
     },
+    "unitFrame": {
+      "playerLabel": "Seu personagem",
+      "targetLabel": "Seu alvo",
+      "targetAnnounce": "Alvo: {name}",
+      "partyLabel": "Seu grupo",
+      "partyGroup": "Grupo {n}",
+      "durationUnitSeconds": "s"
+    },
+    "character": {
+      "modelPreview": "Prévia do modelo do personagem"
+    },
+    "skipLinks": {
+      "mainHud": "Pular para a interface principal",
+      "chat": "Pular para o chat"
+    },
     "mobile": {
       "autorun": "Corrida automática",
       "jump": "Pular",
@@ -243,6 +258,13 @@ export const pt_BR: EnTranslations = {
       "coordinates": "Coordenadas",
       "heading": "Direção",
       "minimapZoom": "Zoom do minimapa"
+    },
+    "castBar": {
+      "playerAria": "Sua barra de conjuração",
+      "targetAria": "Barra de conjuração do alvo"
+    },
+    "leaderboard": {
+      "close": "Fechar"
     },
     "raidLockout": {
       "title": "Bloqueios de raide",
@@ -583,6 +605,91 @@ export const pt_BR: EnTranslations = {
       "notRaid": "Seu grupo não é uma raide.",
       "leaderOnly": "Só o líder da raide pode converter em um grupo.",
       "tooLarge": "Uma raide com mais de cinco membros não pode ser convertida de volta em um grupo."
+    },
+    "itemArmorType": {
+      "cloth": "Cloth",
+      "leather": "Leather",
+      "mail": "Mail"
+    },
+    "auraEffect": {
+      "dot": "Causa {value} de dano de {school} a cada {interval} s",
+      "hot": "Restaura {value} de vida a cada {interval} s",
+      "absorb": "Absorve {value} de dano",
+      "healAbsorb": "Absorve {value} de cura recebida",
+      "thorns": "Causa {value} de dano de {school} aos atacantes",
+      "slow": "Reduce la velocidad de movimiento un {pct}%",
+      "speed": "Aumenta la velocidad de movimiento un {pct}%",
+      "attackSpeedSlow": "Reduce la velocidad de ataque un {pct}%",
+      "attackSpeedFast": "Aumenta la velocidad de ataque un {pct}%",
+      "haste": "Aumenta la velocidad de ataque y lanzamiento un {pct}%",
+      "tongues": "Aumenta el tiempo de lanzamiento un {pct}%",
+      "increase": {
+        "ap": "Aumenta el poder de ataque en {value}",
+        "armor": "Aumenta la armadura en {value}",
+        "int": "Aumenta el intelecto en {value}",
+        "agi": "Aumenta la agilidad en {value}",
+        "sta": "Aumenta el aguante en {value}",
+        "spi": "Aumenta el espíritu en {value}",
+        "allStats": "Aumenta todos los atributos en {value}"
+      },
+      "reduce": {
+        "ap": "Reduce el poder de ataque en {value}",
+        "armor": "Reduce la armadura en {value}",
+        "int": "Reduce el intelecto en {value}",
+        "agi": "Reduce la agilidad en {value}",
+        "sta": "Reduce el aguante en {value}",
+        "spi": "Reduce el espíritu en {value}",
+        "allStats": "Reduce todos los atributos en {value}"
+      },
+      "dodge": "Aumenta la probabilidad de esquivar un {pct}%",
+      "dodgeReduce": "Reduce la probabilidad de esquivar un {pct}%",
+      "armorFlat": "Reduce la armadura en {value}",
+      "armorFlatStacks": "Reduce la armadura en {value} ({stacks} acumulaciones)",
+      "mortalWound": "Reduce la sanación recibida un {pct}%",
+      "vulnerability": "Aumenta el daño recibido un {pct}%",
+      "physVuln": "Aumenta el daño físico recibido un {pct}%",
+      "spellVuln": "Aumenta el daño mágico recibido un {pct}%",
+      "critVuln": "Aumenta la probabilidad de recibir golpes críticos un {pct}%",
+      "costTax": "Aumenta los costes de habilidades un {pct}%",
+      "stun": "Aturdido: no puede actuar",
+      "root": "Enraizado: no puede moverse",
+      "incapacitate": "Incapacitado: no puede actuar",
+      "polymorph": "Polimorfado: no puede actuar",
+      "hex": "Reduce el daño y la sanación realizados un {pct}%",
+      "blind": "Cegado: no puede actuar",
+      "silence": "Silenciado: no puede lanzar hechizos",
+      "disarm": "Desarmado: no puede usar ataques con arma",
+      "lockout": "Escuela de hechizos bloqueada",
+      "imbue": "Arma imbuida con efectos adicionales",
+      "imbueRange": "Arma imbuida: {min} a {max} de daño adicional al juzgar",
+      "stealth": "Oculto; velocidad de movimiento reducida un {pct}%",
+      "formBear": "Forma de oso: salud y armadura aumentadas",
+      "formCat": "Forma felina: daño cuerpo a cuerpo y energía",
+      "formTravel": "Forma de viaje: velocidad de movimiento aumentada un {pct}%",
+      "defensiveStance": "Actitud defensiva: daño recibido reducido, más amenaza",
+      "righteousFury": "Furia recta: amenaza de daño Sagrado muy aumentada",
+      "scale": "Tamaño aumentado un {pct}%",
+      "jump": "Altura de salto aumentada un {pct}%",
+      "school": {
+        "physical": "Físico",
+        "fire": "Fogo",
+        "frost": "Gelo",
+        "arcane": "Arcano",
+        "shadow": "Sombra",
+        "holy": "Sagrado",
+        "nature": "Natureza"
+      }
+    },
+    "loot": {
+      "chestTitle": "Baú"
+    },
+    "spellbook": {
+      "addToBarAria": "Adicionar {name} à barra de ação",
+      "removeFromBarAria": "Remover {name} da barra de ação"
+    },
+    "nameplate": {
+      "mob": "[{level}] {name}",
+      "mobElite": "[{level}+] {name}"
     }
   },
   "guide": {
@@ -2409,7 +2516,9 @@ export const pt_BR: EnTranslations = {
       "mobileMap": "Mapa",
       "closeMap": "Fechar mapa",
       "zoomIn": "Aproximar",
-      "zoomOut": "Afastar"
+      "zoomOut": "Afastar",
+      "mapCanvasLabel": "Mapa",
+      "mapSummary": "Mapa de {zone}."
     },
     "options": {
       "gameMenu": "Menu do jogo",
@@ -2610,6 +2719,7 @@ export const pt_BR: EnTranslations = {
     "combat": {
       "floatingMiss": "Errou",
       "floatingDodge": "Esquivou",
+      "floatingResist": "Resist",
       "cannotMove": "Não pode se mover!",
       "attack": "ataque",
       "damageDone": "Seu {ability} acerta {target} causando {amount}.",
@@ -2618,6 +2728,7 @@ export const pt_BR: EnTranslations = {
       "damageTakenCrit": "{source} acerta você criticamente causando {amount}.",
       "miss": "Seu {ability} erra {target}.",
       "dodged": "{target} esquiva de seu {ability}.",
+      "resisted": "Your {ability} is resisted by {target}.",
       "healSelf": "Seu {ability} cura você em {amount}.",
       "healSelfCrit": "Seu {ability} cura você criticamente em {amount}.",
       "healOther": "Seu {ability} cura {target} em {amount}.",
