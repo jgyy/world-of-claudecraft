@@ -12,8 +12,8 @@ vi.mock('../server/db', () => ({
   grantAccountMechChroma: vi.fn(async () => ({ completedQuestIds: [], mechChromaIds: [] })),
 }));
 
-import { GameServer, ClientSession } from '../server/game';
 import { saveCharacterAndMarketState } from '../server/db';
+import { type ClientSession, GameServer } from '../server/game';
 import type { CharacterState } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
 
