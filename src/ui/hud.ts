@@ -94,6 +94,7 @@ import {
   OVERHEAD_EMOTES,
   type OverheadEmoteId,
 } from '../world_api';
+import { absorbBarView } from './absorb_bar';
 import { ActionBarPainter } from './action_bar_painter';
 import {
   ABILITY_ICON_PREFIX,
@@ -104,6 +105,7 @@ import {
   ITEM_ICON_PREFIX,
 } from './action_bar_view';
 import { ArenaWindow } from './arena_window';
+import { type AuraEffectInput, auraEffectDescriptor } from './aura_effect';
 import { AurasPainter, type AurasPainterDeps } from './auras_painter';
 import { type AurasDeps, createAurasView } from './auras_view';
 import { BagsWindow } from './bags_window';
@@ -698,6 +700,7 @@ export class Hud {
   private pfResourceEl = $('#pf-resource');
   private pfAbsorbEl = $('#pf-absorb');
   private buffBarEl = $('#buff-bar');
+  private debuffBarEl = $('#debuff-bar');
   private targetFrameEl = $('#target-frame');
   private targetEliteTagEl = $('#tf-elite-tag');
   private targetNameEl = $('#tf-name');
@@ -2448,14 +2451,18 @@ export class Hud {
       ABILITIES[a.id] ? abilityDisplayName(ABILITIES[a.id]) : auraDisplayNameFromSource(a.name),
     formatStacks: (n) => formatNumber(n, { maximumFractionDigits: 0 }),
     durationUnitSuffix: () => t('hudChrome.unitFrame.durationUnitSeconds'),
+    auraEffectHtml: (a) => this.auraEffectTooltipHtml(a),
   };
   private readonly aurasPainterDeps: AurasPainterDeps = {
     resolveIconUrl: (iconKey) => `url(${iconDataUrl('aura', iconKey)})`,
-    renderTooltip: (name, remaining) =>
-      `<div class="tt-title">${esc(name)}</div><div class="tt-sub">${esc(tPlural('hudChrome.plurals.secondsRemaining', Math.ceil(remaining)))}</div>`,
+    renderTooltip: (name, remaining, effectHtml) =>
+      `<div class="tt-title">${esc(name)}</div>${effectHtml}<div class="tt-sub">${esc(tPlural('hudChrome.plurals.secondsRemaining', Math.ceil(remaining)))}</div>`,
     attachTooltip: (el, html) => this.attachTooltip(el, html),
   };
-  private readonly buffBarView = createAurasView('all', this.aurasViewDeps);
+  // Player auras split across two rows (classic layout): buffs in #buff-bar, debuffs in
+  // #debuff-bar, so a fresh debuff is never buried under a wall of long-lived buffs.
+  private readonly buffBarView = createAurasView('buffs', this.aurasViewDeps);
+  private readonly debuffBarView = createAurasView('debuffs', this.aurasViewDeps);
   private readonly targetDebuffsView = createAurasView('debuffs', this.aurasViewDeps);
   private readonly buffBarPainter = new AurasPainter(
     this.writerFacet,
@@ -2464,6 +2471,13 @@ export class Hud {
     document,
     // Cap the visible aura count on the LOW static preset (never the
     // governor).
+    () => this.fxTier(),
+  );
+  private readonly debuffBarPainter = new AurasPainter(
+    this.writerFacet,
+    this.debuffBarEl,
+    this.aurasPainterDeps,
+    document,
     () => this.fxTier(),
   );
   private readonly targetDebuffsPainter = new AurasPainter(
@@ -2806,6 +2820,24 @@ export class Hud {
       ? t('wallet.balanceAria', { balance })
       : t('wallet.balancePreviewAria', { balance });
     return `<span class="woc-balance ${verified ? 'is-verified' : 'is-preview'}" title="${esc(title)}" aria-label="${esc(aria)}"><span class="woc-coin" aria-hidden="true"></span>${esc(balance)}</span>`;
+  }
+
+  // One-line aura effect summary HTML for the buff/debuff tooltip: the pure descriptor
+  // (aura_effect.ts) resolved to localized, esc'd text. Empty when the aura has no
+  // descriptor. Injected into the auras view so the i18n-free core never calls t().
+  private auraEffectTooltipHtml(a: AuraEffectInput): string {
+    const effect = auraEffectDescriptor(a);
+    if (!effect) return '';
+    const values: Record<string, string> = {};
+    if (effect.nums) {
+      for (const [k, n] of Object.entries(effect.nums)) {
+        values[k] = formatNumber(n, { maximumFractionDigits: 0 });
+      }
+    }
+    if (effect.school) {
+      values.school = t(`hudChrome.auraEffect.school.${effect.school}` as TranslationKey);
+    }
+    return `<div class="tt-effect">${esc(t(effect.key as TranslationKey, values))}</div>`;
   }
 
   attachTooltip(el: HTMLElement, html: () => string): void {
@@ -4159,14 +4191,17 @@ export class Hud {
     this.updateLowHealthVignette(p.hp, p.maxHp);
     this.updateLowResource(p);
 
-    // buff bar (player buffs + debuffs): the keyed-pool aura painter, driven by
-    // the auras_view core every frame (the elided writers make a no-op frame free). The
-    // graphics tier coarsens the refresh (tick) granularity: full tiers repaint every frame
-    // (interval 0, cadenceDue always true); low coarsens to ~4Hz. The visible-count cap
+    // buff bar / debuff bar: the keyed-pool aura painter, driven by the auras_view core
+    // every frame (the elided writers make a no-op frame free). Buffs and debuffs render to
+    // separate rows (classic layout) so a fresh debuff is never lost in a wall of long-lived
+    // buffs: two view+painter instances, mode 'buffs' (#buff-bar) and 'debuffs' (#debuff-bar).
+    // The graphics tier coarsens the refresh (tick) granularity: full tiers repaint every
+    // frame (interval 0, cadenceDue always true); low coarsens to ~4Hz. The visible-count cap
     // is applied inside the painter.
     if (cadenceDue(this.lastBuffBarPaintAt, now, auraRefreshIntervalMs(fxTier))) {
       this.lastBuffBarPaintAt = now;
       this.buffBarPainter.paint(this.buffBarView.tick(p));
+      this.debuffBarPainter.paint(this.debuffBarView.tick(p));
     }
 
     // target frame: the SECOND instance of the unit_frame family. The shared
