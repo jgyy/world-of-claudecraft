@@ -180,7 +180,6 @@ describe('AurasPainter: keyed pool over the elided writers', () => {
       renderTooltip: (name, remaining) => `${name}|${Math.ceil(remaining)}`,
       attachTooltip: tooltips.attachTooltip,
       attachCancel: () => {},
-      onCancel: () => {},
     };
     painter = new AurasPainter(facet.writers, container as unknown as HTMLElement, deps, fakeDoc);
   });
@@ -365,7 +364,6 @@ describe('AurasPainter: static-preset visible-count cap', () => {
       renderTooltip: (name, remaining) => `${name}|${Math.ceil(remaining)}`,
       attachTooltip: tooltips.attachTooltip,
       attachCancel: () => {},
-      onCancel: () => {},
     };
     return new AurasPainter(
       facet.writers,
@@ -481,7 +479,6 @@ describe('AurasPainter: a wire-faithful buff_* stat-sap survives the low cap (vi
       renderTooltip: (name, remaining) => `${name}|${Math.ceil(remaining)}`,
       attachTooltip: tips.attachTooltip,
       attachCancel: () => {},
-      onCancel: () => {},
     };
     const painter = new AurasPainter(
       facet.writers,

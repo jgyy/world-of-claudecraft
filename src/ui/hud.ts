@@ -2458,26 +2458,31 @@ export class Hud {
     renderTooltip: (name, remaining, effectHtml) =>
       `<div class="tt-title">${esc(name)}</div>${effectHtml}<div class="tt-sub">${esc(tPlural('hudChrome.plurals.secondsRemaining', Math.ceil(remaining)))}</div>`,
     attachTooltip: (el, html) => this.attachTooltip(el, html),
-    // Right-click a cancelable buff to drop it. Wired once per pooled node; the painter
-    // only fires the handler for the player's own buff bar (a target's debuffs are
-    // read-only), so sharing these deps across both aura painters is safe.
-    attachCancel: (el, handler) =>
-      el.addEventListener('contextmenu', (ev) => {
-        ev.preventDefault();
-        this.hideTooltip();
-        handler();
-      }),
-    onCancel: (auraId) => this.sim.cancelAura(auraId),
   };
   // Player auras split across two rows (classic layout): buffs in #buff-bar, debuffs in
   // #debuff-bar, so a fresh debuff is never buried under a wall of long-lived buffs.
   private readonly buffBarView = createAurasView('buffs', this.aurasViewDeps);
   private readonly debuffBarView = createAurasView('debuffs', this.aurasViewDeps);
   private readonly targetDebuffsView = createAurasView('debuffs', this.aurasViewDeps);
+  // The buff-bar painter alone gets attachCancel: right-clicking one of the local player's
+  // own helpful buffs cancels it (classic convention). The debuff / target painters reuse
+  // the shared deps (no cancel: a debuff or another entity's aura is never cancelable).
+  private readonly buffBarPainterDeps: AurasPainterDeps = {
+    ...this.aurasPainterDeps,
+    attachCancel: (el, cancelableAuraId) => {
+      el.addEventListener('contextmenu', (ev) => {
+        const auraId = cancelableAuraId();
+        if (auraId === null) return;
+        ev.preventDefault();
+        this.hideTooltip();
+        this.sim.cancelAura(auraId);
+      });
+    },
+  };
   private readonly buffBarPainter = new AurasPainter(
     this.writerFacet,
     this.buffBarEl,
-    this.aurasPainterDeps,
+    this.buffBarPainterDeps,
     document,
     // Cap the visible aura count on the LOW static preset (never the
     // governor).
