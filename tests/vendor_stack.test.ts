@@ -2,13 +2,14 @@ import { describe, expect, it } from 'vitest';
 import type { ItemDef } from '../src/sim/types';
 import { VENDOR_STACK_SIZE, vendorStackSize } from '../src/sim/vendor_stack';
 
-const item = (over: Partial<ItemDef>): ItemDef => ({
-  id: 'x',
-  name: 'X',
-  kind: 'junk',
-  sellValue: 1,
-  ...over,
-});
+const item = (over: Partial<ItemDef>): ItemDef =>
+  ({
+    id: 'x',
+    name: 'X',
+    kind: 'junk',
+    sellValue: 1,
+    ...over,
+  }) as ItemDef;
 
 describe('vendorStackSize', () => {
   it('sells food in a stack of VENDOR_STACK_SIZE', () => {
