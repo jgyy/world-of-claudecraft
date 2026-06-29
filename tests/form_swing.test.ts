@@ -71,7 +71,7 @@ describe('Wolf Form swing speed', () => {
     p.weapon = { ...p.weapon, min: 0, max: 0 };
     const dummy = [...sim.entities.values()].find((e) => e.kind === 'mob' && !e.dead)!;
     dummy.level = 1;
-    dummy.armor = 0;
+    dummy.stats.armor = 0;
     dummy.hostile = true;
     p.pos.x = dummy.pos.x + 1;
     p.pos.z = dummy.pos.z;
