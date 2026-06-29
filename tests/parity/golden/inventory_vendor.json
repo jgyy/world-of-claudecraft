@@ -119,8 +119,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "17b4d1a8",
-      "events": "21673dd2",
+      "state": "a4e9bb90",
+      "events": "d3c5193e",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -144,11 +144,11 @@
           },
           "inventory": [
             {
-              "count": 1,
+              "count": 5,
               "itemId": "baked_bread"
             },
             {
-              "count": 1,
+              "count": 5,
               "itemId": "spring_water"
             },
             {
@@ -217,7 +217,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "e895fd7e",
+      "state": "b6990ad6",
       "events": "9df425a0",
       "rng": {
         "draws": 0,
@@ -243,11 +243,11 @@
           },
           "inventory": [
             {
-              "count": 1,
+              "count": 5,
               "itemId": "baked_bread"
             },
             {
-              "count": 1,
+              "count": 5,
               "itemId": "spring_water"
             },
             {
@@ -320,7 +320,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "604de912",
+      "state": "9922bc32",
       "events": "dbe7ae9a",
       "rng": {
         "draws": 0,
@@ -346,11 +346,11 @@
           },
           "inventory": [
             {
-              "count": 1,
+              "count": 5,
               "itemId": "baked_bread"
             },
             {
-              "count": 1,
+              "count": 5,
               "itemId": "spring_water"
             },
             {
@@ -423,7 +423,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "4851495a",
+      "state": "110fae92",
       "events": "a0e9b547",
       "rng": {
         "draws": 0,
@@ -448,11 +448,11 @@
           },
           "inventory": [
             {
-              "count": 1,
+              "count": 5,
               "itemId": "baked_bread"
             },
             {
-              "count": 1,
+              "count": 5,
               "itemId": "spring_water"
             },
             {
@@ -529,7 +529,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "23ea3894",
+      "state": "8c14f907",
       "events": "db521cfd",
       "rng": {
         "draws": 0,
@@ -553,6 +553,14 @@
             "mainhand": "worn_sword"
           },
           "inventory": [
+            {
+              "count": 4,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 4,
+              "itemId": "spring_water"
+            },
             {
               "count": 1,
               "itemId": "minor_healing_potion"
@@ -640,7 +648,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "a9c9f608",
+      "state": "fe2c6697",
       "events": "579898e6",
       "rng": {
         "draws": 0,
@@ -664,6 +672,14 @@
             "mainhand": "worn_sword"
           },
           "inventory": [
+            {
+              "count": 4,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 4,
+              "itemId": "spring_water"
+            },
             {
               "count": 1,
               "itemId": "cryptbone_helm"
@@ -747,7 +763,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "1bf8b9b0",
+      "state": "6fa7753f",
       "events": "f087f305",
       "rng": {
         "draws": 0,
@@ -772,6 +788,14 @@
           },
           "inventory": [
             {
+              "count": 4,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 4,
+              "itemId": "spring_water"
+            },
+            {
               "count": 1,
               "itemId": "cryptbone_helm"
             },
@@ -866,7 +890,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "4bf67a1e",
+      "state": "c6a914bf",
       "events": "ef990a2a",
       "rng": {
         "draws": 0,
@@ -891,6 +915,14 @@
           },
           "inventory": [
             {
+              "count": 4,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 4,
+              "itemId": "spring_water"
+            },
+            {
               "count": 1,
               "itemId": "cryptbone_helm"
             },
@@ -989,7 +1021,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "ad0c7551",
+      "state": "69ac7c2a",
       "events": "b71a55c4",
       "rng": {
         "draws": 0,
@@ -1014,6 +1046,14 @@
           },
           "inventory": [
             {
+              "count": 4,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 4,
+              "itemId": "spring_water"
+            },
+            {
               "count": 1,
               "itemId": "cryptbone_helm"
             },
@@ -1118,7 +1158,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "bb04fb12",
+      "state": "86ae2251",
       "events": "7521a204",
       "rng": {
         "draws": 0,
@@ -1142,6 +1182,14 @@
             "mainhand": "worn_sword"
           },
           "inventory": [
+            {
+              "count": 4,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 4,
+              "itemId": "spring_water"
+            },
             {
               "count": 1,
               "itemId": "cryptbone_helm"
@@ -1247,7 +1295,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "18ff5664",
+      "state": "0a886d29",
       "events": "e277cc91",
       "rng": {
         "draws": 0,
@@ -1271,6 +1319,14 @@
             "mainhand": "worn_sword"
           },
           "inventory": [
+            {
+              "count": 4,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 4,
+              "itemId": "spring_water"
+            },
             {
               "count": 1,
               "itemId": "cryptbone_helm"
@@ -1380,7 +1436,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "18ff5664",
+      "state": "0a886d29",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1404,6 +1460,14 @@
             "mainhand": "worn_sword"
           },
           "inventory": [
+            {
+              "count": 4,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 4,
+              "itemId": "spring_water"
+            },
             {
               "count": 1,
               "itemId": "cryptbone_helm"

@@ -919,8 +919,8 @@ describe('food, drink, vendor', () => {
     teleportTo(sim, wilkes.pos.x + 2, wilkes.pos.z);
     sim.copper = 100;
     sim.buyItem(wilkes.id, 'baked_bread');
-    expect(sim.countItem('baked_bread')).toBe(1);
-    expect(sim.copper).toBe(75);
+    expect(sim.countItem('baked_bread')).toBe(5); // food is sold in a stack of 5
+    expect(sim.copper).toBe(75); // for the listed price (buyValue 25), unchanged
     sim.addItem('wolf_fang', 2);
     sim.sellItem('wolf_fang');
     expect(sim.copper).toBe(79);

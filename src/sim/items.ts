@@ -31,6 +31,7 @@ import {
   FISHING_CAST_ID,
   INTERACT_RANGE,
 } from './types';
+import { vendorStackSize } from './vendor_stack';
 
 const VENDOR_BUYBACK_LIMIT = 12;
 const POTION_COOLDOWN = 60; // seconds; shared cooldown across combat potions (#103)
@@ -233,7 +234,7 @@ export function buyItem(ctx: SimContext, npcId: number, itemId: string, pid?: nu
     return;
   }
   meta.copper -= def.buyValue;
-  ctx.addItem(itemId, 1, meta.entityId);
+  ctx.addItem(itemId, vendorStackSize(def), meta.entityId);
   ctx.emit({ type: 'vendor', action: 'buy', itemId, pid: meta.entityId });
 }
 
