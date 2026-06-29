@@ -222,6 +222,9 @@ export const id_ID: EnTranslations = {
     "rest": {
       "resting": "Beristirahat"
     },
+    "abilityScaling": {
+      "bonus": "(+{value})"
+    },
     "unitFrame": {
       "playerLabel": "Pahlawan Anda",
       "targetLabel": "Sasaran Anda",
@@ -317,7 +320,10 @@ export const id_ID: EnTranslations = {
       "showWalletOnCharacterScreen": "Tampilkan Dompet di Layar Karakter",
       "showWalletOnPlayerCard": "Tampilkan Dompet di Kartu Pemain",
       "uiScale": "Skala UI",
-      "highContrastBackground": "Latar Kontras Tinggi"
+      "highContrastBackground": "Latar Kontras Tinggi",
+      "showItemLevel": "Tampilkan Level Item",
+      "itemLevelLine": "Level Item {level}",
+      "itemScoreLine": "Skor {score}"
     },
     "controller": {
       "title": "Kontroler",
@@ -447,6 +453,10 @@ export const id_ID: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Tips: ketik /join world atau /join lfg untuk mengobrol dengan pemain di seluruh realm."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Misi ini tidak dapat dibagikan.",
@@ -583,6 +593,26 @@ export const id_ID: EnTranslations = {
       "exportBtn": "Unduh Dataku",
       "exportDone": "Datamu telah diunduh. Kami mengirimkan konfirmasi melalui email.",
       "exportFailed": "Tidak dapat mengekspor datamu. Coba lagi sebentar."
+    },
+    "masterLoot": {
+      "title": "Master loot",
+      "enableLabel": "Master loot",
+      "enableAria": "Aktifkan master loot",
+      "looterLabel": "Master looter",
+      "leaderOption": "Pemimpin grup",
+      "thresholdLabel": "Ambang",
+      "thresholdUncommon": "Uncommon ke atas",
+      "thresholdRare": "Rare ke atas",
+      "thresholdEpic": "Epic ke atas",
+      "assignPrompt": "Berikan {item}",
+      "assignAria": "Berikan {item} kepada {name}",
+      "rollButton": "Gulung",
+      "selectAll": "Pilih semua",
+      "methodMaster": "Metode loot diatur ke master loot. Master looter: {name}.",
+      "methodGroup": "Metode loot diatur ke loot grup.",
+      "assigned": "{looter} memberikan {item} kepada {target}.",
+      "unassigned": "{item} tidak diberikan dan bebas untuk semua.",
+      "leaderOnly": "Hanya pemimpin grup yang dapat mengubah metode loot."
     },
     "bags": {
       "filterGroupAria": "Saring tas menurut kategori",
@@ -3459,7 +3489,7 @@ export const id_ID: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Misil Arkana",
-        "description": "Melontarkan Misil Arkana ke arah musuh, menimbulkan 8 kerusakan Arkana setiap detik selama 3 detik."
+        "description": "Melontarkan Misil Arkana ke arah musuh, menimbulkan {damage} kerusakan Arkana setiap detik selama 3 detik."
       },
       "polymorph": {
         "name": "Ubah Wujud",
@@ -3523,7 +3553,7 @@ export const id_ID: EnTranslations = {
       },
       "stealth": {
         "name": "Siluman",
-        "description": "Menyembunyikanmu dalam bayangan: musuh nyaris tak menyadarimu, tetapi kau bergerak 30% lebih lambat. Menyerang atau menerima kerusakan mematahkan Siluman. Rapal lagi untuk keluar."
+        "description": "Menyembunyikanmu dalam bayangan: musuh nyaris tak menyadarimu, tetapi kau bergerak 50% lebih lambat. Menyerang atau menerima kerusakan mematahkan Siluman. Rapal lagi untuk keluar."
       },
       "adrenaline_rush": {
         "name": "Lonjakan Adrenalin",
@@ -3555,7 +3585,7 @@ export const id_ID: EnTranslations = {
       },
       "vanish": {
         "name": "Menghilang",
-        "description": "Menghilang dari pandangan, masuk ke Siluman bahkan dalam pertempuran. Kau bergerak 30% lebih lambat saat tersembunyi. Bertahan hingga 10 detik."
+        "description": "Menghilang dari pandangan, masuk ke Siluman bahkan dalam pertempuran. Kau bergerak 50% lebih lambat saat tersembunyi. Bertahan hingga 10 detik."
       },
       "instant_poison": {
         "name": "Racun Seketika",
@@ -3707,7 +3737,7 @@ export const id_ID: EnTranslations = {
       },
       "mind_flay": {
         "name": "Cambuk Pikiran",
-        "description": "Menyerang pikiran target dengan energi Bayangan, menimbulkan 12 kerusakan setiap detik selama 3 detik."
+        "description": "Menyerang pikiran target dengan energi Bayangan, menimbulkan {damage} kerusakan setiap detik selama 3 detik."
       },
       "flash_heal": {
         "name": "Sembuh Kilat",
@@ -3783,7 +3813,7 @@ export const id_ID: EnTranslations = {
       },
       "drain_life": {
         "name": "Sedot Nyawa",
-        "description": "Menyedot nyawa target, memindahkan 7 kesehatan kepadamu setiap detik selama 5 detik."
+        "description": "Menyedot nyawa target, memindahkan {damage} kesehatan kepadamu setiap detik selama 5 detik."
       },
       "fear": {
         "name": "Ketakutan",
@@ -3963,7 +3993,7 @@ export const id_ID: EnTranslations = {
       },
       "prowl": {
         "name": "Mengendap",
-        "description": "Masuk ke siluman saat dalam Wujud Serigala. Tidak dapat digunakan dalam pertempuran."
+        "description": "Masuk ke siluman saat dalam Wujud Serigala, bergerak 50% lebih lambat. Tidak dapat digunakan dalam pertempuran."
       },
       "rake": {
         "name": "Garukan",
@@ -6359,6 +6389,43 @@ export const id_ID: EnTranslations = {
         "name": "Reliquary yang Runtuh",
         "enterText": "Kau menuruni reliquary yang runtuh.",
         "leaveText": "Kau memanjat kembali menuju Bruder Halven di reruntuhan reliquary."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Perlengkapan tempur Tempa Mahkota",
+        "bonus2": "Meningkatkan daya serang sebesar 40.",
+        "bonus3": "Meningkatkan kekuatan sebesar 15 dan stamina sebesar 15."
+      },
+      "deathlord": {
+        "name": "Perlengkapan tempur Penguasa Maut",
+        "bonus2": "Meningkatkan daya serang sebesar 40.",
+        "bonus3": "Meningkatkan kekuatan sebesar 15 dan stamina sebesar 15."
+      },
+      "necromancers": {
+        "name": "Jubah ahli nujum",
+        "bonus2": "Mengurangi dorongan balik sihir akibat kerusakan sebesar 50%.",
+        "bonus3": "Kerusakan yang diterima tidak menunda perapalan sihir."
+      },
+      "nighttalon": {
+        "name": "Perlengkapan kulit Cakar Malam",
+        "bonus2": "Meningkatkan daya serang sebesar 40.",
+        "bonus3": "Meningkatkan kelincahan sebesar 15 dan peluang kritis sebesar 2%."
+      },
+      "soulflame": {
+        "name": "Jubah Api Jiwa",
+        "bonus2": "Mengurangi dorongan balik sihir akibat kerusakan sebesar 50%.",
+        "bonus3": "Kerusakan yang diterima tidak menunda perapalan sihir."
+      },
+      "stormcallers": {
+        "name": "Jubah Pemanggil Badai",
+        "bonus2": "Mengurangi dorongan balik sihir akibat kerusakan sebesar 50%.",
+        "bonus3": "Kerusakan yang diterima tidak menunda perapalan sihir."
+      },
+      "wyrmshadow": {
+        "name": "Perlengkapan Bayangan Wyrm",
+        "bonus2": "Meningkatkan daya serang sebesar 40.",
+        "bonus3": "Meningkatkan kelincahan sebesar 15 dan peluang kritis sebesar 2%."
       }
     }
   },

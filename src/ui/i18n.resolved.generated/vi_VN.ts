@@ -222,6 +222,9 @@ export const vi_VN: EnTranslations = {
     "rest": {
       "resting": "Đang Nghỉ Ngơi"
     },
+    "abilityScaling": {
+      "bonus": "(+{value})"
+    },
     "unitFrame": {
       "playerLabel": "Anh Hùng Của Bạn",
       "targetLabel": "Mục Tiêu Của Bạn",
@@ -317,7 +320,10 @@ export const vi_VN: EnTranslations = {
       "showWalletOnCharacterScreen": "Hiện Ví Tiền Ở Màn Hình Nhân Vật",
       "showWalletOnPlayerCard": "Hiện Ví Tiền Trên Thẻ Người Chơi",
       "uiScale": "Tỷ Lệ Giao Diện",
-      "highContrastBackground": "Nền Tương Phản Cao"
+      "highContrastBackground": "Nền Tương Phản Cao",
+      "showItemLevel": "Hiển Thị Cấp Vật Phẩm",
+      "itemLevelLine": "Cấp Vật Phẩm {level}",
+      "itemScoreLine": "Điểm {score}"
     },
     "controller": {
       "title": "Tay Cầm",
@@ -447,6 +453,10 @@ export const vi_VN: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Mẹo: gõ /join world hoặc /join lfg để trò chuyện với người chơi khắp realm."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Nhiệm vụ này không thể chia sẻ.",
@@ -583,6 +593,26 @@ export const vi_VN: EnTranslations = {
       "exportBtn": "Tải Dữ Liệu Của Tôi",
       "exportDone": "Dữ liệu của bạn đã được tải xuống. Chúng tôi đã gửi email xác nhận cho bạn.",
       "exportFailed": "Không thể xuất dữ liệu của bạn. Thử lại sau giây lát."
+    },
+    "masterLoot": {
+      "title": "Chia chien loi pham",
+      "enableLabel": "Chia chien loi pham",
+      "enableAria": "Bat chia chien loi pham",
+      "looterLabel": "Nguoi chia chien loi pham",
+      "leaderOption": "Truong nhom",
+      "thresholdLabel": "Nguong",
+      "thresholdUncommon": "Uncommon tro len",
+      "thresholdRare": "Rare tro len",
+      "thresholdEpic": "Epic tro len",
+      "assignPrompt": "Gan {item}",
+      "assignAria": "Gan {item} cho {name}",
+      "rollButton": "Do",
+      "selectAll": "Chon tat ca",
+      "methodMaster": "Phuong thuc chien loi pham da dat thanh chia chien loi pham. Nguoi chia: {name}.",
+      "methodGroup": "Phuong thuc chien loi pham da dat thanh loot nhom.",
+      "assigned": "{looter} da gan {item} cho {target}.",
+      "unassigned": "{item} chua duoc gan va moi nguoi deu co the nhat.",
+      "leaderOnly": "Chi truong nhom co the doi phuong thuc chien loi pham."
     },
     "bags": {
       "filterGroupAria": "Lọc túi đồ theo danh mục",
@@ -3459,7 +3489,7 @@ export const vi_VN: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Phi Đạn Bí Thuật",
-        "description": "Phóng các Phi Đạn Bí Thuật vào kẻ địch, gây 8 sát thương Bí Thuật mỗi giây trong 3 giây."
+        "description": "Phóng các Phi Đạn Bí Thuật vào kẻ địch, gây {damage} sát thương Bí Thuật mỗi giây trong 3 giây."
       },
       "polymorph": {
         "name": "Biến Hình",
@@ -3523,7 +3553,7 @@ export const vi_VN: EnTranslations = {
       },
       "stealth": {
         "name": "Ẩn Thân",
-        "description": "Che giấu bạn trong bóng tối: kẻ địch khó nhận ra bạn, nhưng bạn di chuyển chậm hơn 30%. Tấn công hoặc nhận sát thương sẽ phá vỡ Ẩn Thân. Niệm lại để bước ra."
+        "description": "Che giấu bạn trong bóng tối: kẻ địch khó nhận ra bạn, nhưng bạn di chuyển chậm hơn 50%. Tấn công hoặc nhận sát thương sẽ phá vỡ Ẩn Thân. Niệm lại để bước ra."
       },
       "adrenaline_rush": {
         "name": "Bộc Phát Adrenaline",
@@ -3555,7 +3585,7 @@ export const vi_VN: EnTranslations = {
       },
       "vanish": {
         "name": "Tàng Hình",
-        "description": "Biến mất khỏi tầm nhìn, đi vào Ẩn Thân ngay cả trong chiến đấu. Bạn di chuyển chậm hơn 30% khi ẩn nấp. Kéo dài tối đa 10 giây."
+        "description": "Biến mất khỏi tầm nhìn, đi vào Ẩn Thân ngay cả trong chiến đấu. Bạn di chuyển chậm hơn 50% khi ẩn nấp. Kéo dài tối đa 10 giây."
       },
       "instant_poison": {
         "name": "Độc Tức Thời",
@@ -3707,7 +3737,7 @@ export const vi_VN: EnTranslations = {
       },
       "mind_flay": {
         "name": "Cào Xé Tâm Trí",
-        "description": "Công kích tâm trí mục tiêu bằng năng lượng Bóng Tối, gây 12 sát thương mỗi giây trong 3 giây."
+        "description": "Công kích tâm trí mục tiêu bằng năng lượng Bóng Tối, gây {damage} sát thương mỗi giây trong 3 giây."
       },
       "flash_heal": {
         "name": "Trị Liệu Nhanh",
@@ -3783,7 +3813,7 @@ export const vi_VN: EnTranslations = {
       },
       "drain_life": {
         "name": "Hút Sinh Lực",
-        "description": "Hút sinh lực của mục tiêu, chuyển 7 máu sang cho bạn mỗi giây trong 5 giây."
+        "description": "Hút sinh lực của mục tiêu, chuyển {damage} máu sang cho bạn mỗi giây trong 5 giây."
       },
       "fear": {
         "name": "Gieo Sợ Hãi",
@@ -3963,7 +3993,7 @@ export const vi_VN: EnTranslations = {
       },
       "prowl": {
         "name": "Rình Mồi",
-        "description": "Vào trạng thái ẩn thân khi ở Hình Sói. Không thể dùng trong chiến đấu."
+        "description": "Vào trạng thái ẩn thân khi ở Hình Sói, di chuyển chậm hơn 50%. Không thể dùng trong chiến đấu."
       },
       "rake": {
         "name": "Cào Xé",
@@ -6359,6 +6389,43 @@ export const vi_VN: EnTranslations = {
         "name": "Thánh Tích Sụp Đổ",
         "enterText": "Bạn đi xuống thánh tích sụp đổ.",
         "leaveText": "Bạn trèo trở lại chỗ Tu Huynh Halven tại tàn tích thánh tích."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Bộ chiến Crownforged",
+        "bonus2": "Tăng sức mạnh tấn công thêm 40.",
+        "bonus3": "Tăng sức mạnh thêm 15 và thể lực thêm 15."
+      },
+      "deathlord": {
+        "name": "Bộ chiến Deathlord",
+        "bonus2": "Tăng sức mạnh tấn công thêm 40.",
+        "bonus3": "Tăng sức mạnh thêm 15 và thể lực thêm 15."
+      },
+      "necromancers": {
+        "name": "Áo choàng pháp sư gọi hồn",
+        "bonus2": "Giảm 50% độ lùi khi niệm phép do sát thương.",
+        "bonus3": "Sát thương nhận vào không làm chậm niệm phép."
+      },
+      "nighttalon": {
+        "name": "Bộ da Móng Đêm",
+        "bonus2": "Tăng sức mạnh tấn công thêm 40.",
+        "bonus3": "Tăng nhanh nhẹn thêm 15 và tỉ lệ chí mạng thêm 2%."
+      },
+      "soulflame": {
+        "name": "Áo choàng Lửa Linh Hồn",
+        "bonus2": "Giảm 50% độ lùi khi niệm phép do sát thương.",
+        "bonus3": "Sát thương nhận vào không làm chậm niệm phép."
+      },
+      "stormcallers": {
+        "name": "Áo choàng Gọi Bão",
+        "bonus2": "Giảm 50% độ lùi khi niệm phép do sát thương.",
+        "bonus3": "Sát thương nhận vào không làm chậm niệm phép."
+      },
+      "wyrmshadow": {
+        "name": "Bộ Bóng Wyrm",
+        "bonus2": "Tăng sức mạnh tấn công thêm 40.",
+        "bonus3": "Tăng nhanh nhẹn thêm 15 và tỉ lệ chí mạng thêm 2%."
       }
     }
   },

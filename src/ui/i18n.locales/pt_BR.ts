@@ -239,6 +239,9 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.playerCard.showWalletBadge': 'Mostrar selo da carteira',
   'hudChrome.options.uiScale': 'Escala da interface',
   'hudChrome.options.highContrastBackground': 'Fundo de alto contraste',
+  'hudChrome.options.showItemLevel': 'Mostrar nível do item',
+  'hudChrome.options.itemLevelLine': 'Nível do item {level}',
+  'hudChrome.options.itemScoreLine': 'Pontuação {score}',
   'hudChrome.landing.highContrast': 'Alto contraste',
   'hudChrome.landing.highContrastAria':
     'Alternar o fundo de alto contraste: desativa o trailer em movimento para que o texto da tela inicial permaneça legível',
@@ -1646,7 +1649,7 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
     'Explode contra o inimigo, causando {damage} de dano de Fogo. Instantâneo.',
   'entities.abilities.arcane_missiles.name': 'Mísseis Arcanos',
   'entities.abilities.arcane_missiles.description':
-    'Lança Mísseis Arcanos no inimigo, causando 8 de dano Arcano a cada segundo por 3 s.',
+    'Lança Mísseis Arcanos no inimigo, causando {damage} de dano Arcano a cada segundo por 3 s.',
   'entities.abilities.polymorph.name': 'Polimorfia',
   'entities.abilities.polymorph.description':
     'Transforma o inimigo em ovelha por até 15 s. A ovelha vagueia e se cura rapidamente. Qualquer dano quebra o efeito. Apenas feras e humanoides.',
@@ -1691,7 +1694,7 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
     'Embosca o alvo com 250% do dano de arma mais {damage}. Você precisa estar furtivo e atrás do alvo. Requer uma adaga. Concede 1 ponto de combo.',
   'entities.abilities.stealth.name': 'Furtividade',
   'entities.abilities.stealth.description':
-    'Esconde você nas sombras: inimigos mal percebem você, mas você se move 30% mais devagar. Atacar ou sofrer dano quebra Furtividade. Lance de novo para sair.',
+    'Esconde você nas sombras: inimigos mal percebem você, mas você se move 50% mais devagar. Atacar ou sofrer dano quebra Furtividade. Lance de novo para sair.',
   'entities.abilities.adrenaline_rush.name': 'Descarga de Adrenalina',
   'entities.abilities.adrenaline_rush.description':
     'Seu sangue ferve, restaurando 60 de energia instantaneamente.',
@@ -1715,7 +1718,7 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
     'Golpe final que fere o alvo, fazendo-o sangrar por {damage} ao longo de 16 s.',
   'entities.abilities.vanish.name': 'Desaparecer',
   'entities.abilities.vanish.description':
-    'Some de vista, entrando em modo furtivo mesmo em combate. Você se move 30% mais devagar enquanto escondido. Dura até 10 s.',
+    'Some de vista, entrando em modo furtivo mesmo em combate. Você se move 50% mais devagar enquanto escondido. Dura até 10 s.',
   'entities.abilities.instant_poison.name': 'Veneno Instantâneo',
   'entities.abilities.instant_poison.description':
     'Reveste sua arma por 30 min, fazendo cada um de seus golpes corpo a corpo causar 8 de dano adicional da Natureza.',
@@ -1820,7 +1823,7 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
     'Uma prece lenta, mas poderosa, que cura um alvo aliado em {damage}.',
   'entities.abilities.mind_flay.name': 'Açoite Mental',
   'entities.abilities.mind_flay.description':
-    'Assalta a mente do alvo com energia de Sombra, causando 12 de dano por segundo durante 3 s.',
+    'Assalta a mente do alvo com energia de Sombra, causando {damage} de dano por segundo durante 3 s.',
   'entities.abilities.flash_heal.name': 'Cura Rápida',
   'entities.abilities.flash_heal.description':
     'Uma prece rápida que cura um alvo aliado em {damage}.',
@@ -1875,7 +1878,7 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
     'Amaldiçoa o alvo com agonia: {damage} de dano de Sombra ao longo de 24 s.',
   'entities.abilities.drain_life.name': 'Drenar Vida',
   'entities.abilities.drain_life.description':
-    'Drena a vida do alvo, transferindo 7 de vida para você a cada segundo por 5 s.',
+    'Drena a vida do alvo, transferindo {damage} de vida para você a cada segundo por 5 s.',
   'entities.abilities.fear.name': 'Medo',
   'entities.abilities.fear.description':
     'Aterroriza o inimigo, deixando-o acuado por até 8 s. Qualquer dano quebra o efeito.',
@@ -2005,7 +2008,7 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
     'Desmoraliza os inimigos próximos, reduzindo seu poder de ataque em 20 por 20 s. Apenas Forma de Urso.',
   'entities.abilities.prowl.name': 'Espreitar',
   'entities.abilities.prowl.description':
-    'Entra em furtividade enquanto na Forma de Lobo. Não pode ser usado em combate.',
+    'Entra em furtividade enquanto na Forma de Lobo, movendo-se 50% mais devagar. Não pode ser usado em combate.',
   'entities.abilities.rake.name': 'Dilacerar',
   'entities.abilities.rake.description':
     'Um golpe de abertura furtivo que dilacera o inimigo causando dano de arma mais {damage} e provoca sangramento ao longo de 9 s. Concede 1 ponto de combo. Apenas Forma de Lobo.',
@@ -4752,4 +4755,46 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.auraEffect.school.shadow': 'Sombra',
   'hudChrome.auraEffect.school.holy': 'Sagrado',
   'hudChrome.auraEffect.school.nature': 'Natureza',
+  'hudChrome.masterLoot.title': 'Saque mestre',
+  'hudChrome.masterLoot.enableLabel': 'Saque mestre',
+  'hudChrome.masterLoot.enableAria': 'Ativar saque mestre',
+  'hudChrome.masterLoot.looterLabel': 'Mestre do saque',
+  'hudChrome.masterLoot.leaderOption': 'Lider do grupo',
+  'hudChrome.masterLoot.thresholdLabel': 'Limite',
+  'hudChrome.masterLoot.thresholdUncommon': 'Incomum ou superior',
+  'hudChrome.masterLoot.thresholdRare': 'Raro ou superior',
+  'hudChrome.masterLoot.thresholdEpic': 'Epico ou superior',
+  'hudChrome.masterLoot.assignPrompt': 'Atribuir {item}',
+  'hudChrome.masterLoot.assignAria': 'Atribuir {item} a {name}',
+  'hudChrome.masterLoot.rollButton': 'Rolar',
+  'hudChrome.masterLoot.selectAll': 'Selecionar tudo',
+  'hudChrome.masterLoot.methodMaster':
+    'Metodo de saque definido como saque mestre. Mestre do saque: {name}.',
+  'hudChrome.masterLoot.methodGroup': 'Metodo de saque definido como saque em grupo.',
+  'hudChrome.masterLoot.assigned': '{looter} atribuiu {item} a {target}.',
+  'hudChrome.masterLoot.unassigned': '{item} nao foi atribuido e esta livre para todos.',
+  'hudChrome.masterLoot.leaderOnly': 'Somente o lider do grupo pode alterar o metodo de saque.',
+  'entities.itemSets.crownforged.name': 'Traje de batalha Forjacoroa',
+  'entities.itemSets.crownforged.bonus2': 'Aumenta o poder de ataque em 40.',
+  'entities.itemSets.crownforged.bonus3': 'Aumenta a força em 15 e o vigor em 15.',
+  'entities.itemSets.deathlord.name': 'Traje de batalha do Senhor da Morte',
+  'entities.itemSets.deathlord.bonus2': 'Aumenta o poder de ataque em 40.',
+  'entities.itemSets.deathlord.bonus3': 'Aumenta a força em 15 e o vigor em 15.',
+  'entities.itemSets.necromancers.name': 'Vestes do necromante',
+  'entities.itemSets.necromancers.bonus2': 'Reduz em 50% o atraso de conjuração causado por dano.',
+  'entities.itemSets.necromancers.bonus3': 'Dano recebido não atrasa suas conjurações.',
+  'entities.itemSets.nighttalon.name': 'Traje de couro Garranoite',
+  'entities.itemSets.nighttalon.bonus2': 'Aumenta o poder de ataque em 40.',
+  'entities.itemSets.nighttalon.bonus3': 'Aumenta a agilidade em 15 e a chance de crítico em 2%.',
+  'entities.itemSets.soulflame.name': 'Vestes de Chama da Alma',
+  'entities.itemSets.soulflame.bonus2': 'Reduz em 50% o atraso de conjuração causado por dano.',
+  'entities.itemSets.soulflame.bonus3': 'Dano recebido não atrasa suas conjurações.',
+  'entities.itemSets.stormcallers.name': 'Vestes do Chamatormentas',
+  'entities.itemSets.stormcallers.bonus2': 'Reduz em 50% o atraso de conjuração causado por dano.',
+  'entities.itemSets.stormcallers.bonus3': 'Dano recebido não atrasa suas conjurações.',
+  'entities.itemSets.wyrmshadow.name': 'Traje Sombraverme',
+  'entities.itemSets.wyrmshadow.bonus2': 'Aumenta o poder de ataque em 40.',
+  'entities.itemSets.wyrmshadow.bonus3': 'Aumenta a agilidade em 15 e a chance de crítico em 2%.',
+  'hudChrome.itemSet.header': '{name} ({have}/{total})',
+  'hudChrome.itemSet.bonusLine': '({pieces}) {bonus}',
 };

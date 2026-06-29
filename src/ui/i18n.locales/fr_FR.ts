@@ -243,6 +243,9 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.playerCard.showWalletBadge': 'Afficher l’insigne de portefeuille',
   'hudChrome.options.uiScale': 'Échelle de l’interface',
   'hudChrome.options.highContrastBackground': 'Arrière-plan à contraste élevé',
+  'hudChrome.options.showItemLevel': "Afficher le niveau d'objet",
+  'hudChrome.options.itemLevelLine': "Niveau d'objet {level}",
+  'hudChrome.options.itemScoreLine': 'Score {score}',
   'hudChrome.landing.highContrast': 'Contraste élevé',
   'hudChrome.landing.highContrastAria':
     'Basculer l’arrière-plan à contraste élevé : désactive la bande-annonce animée pour que le texte de l’écran de démarrage reste lisible',
@@ -1667,7 +1670,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     "Frappe l'ennemi pour {damage} points de dégâts de Feu. Instantané.",
   'entities.abilities.arcane_missiles.name': 'Projectiles des Arcanes',
   'entities.abilities.arcane_missiles.description':
-    "Lance des Projectiles des Arcanes sur l'ennemi et inflige 8 points de dégâts des Arcanes chaque seconde pendant 3 s.",
+    "Lance des Projectiles des Arcanes sur l'ennemi et inflige {damage} points de dégâts des Arcanes chaque seconde pendant 3 s.",
   'entities.abilities.polymorph.name': 'Métamorphose',
   'entities.abilities.polymorph.description':
     "Transforme l'ennemi en mouton pendant un maximum de 15 s. Le mouton erre et récupère rapidement. Tout dégât interrompt l'effet. Bêtes et humanoïdes uniquement.",
@@ -1714,7 +1717,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     "Prend la cible en embuscade pour 250% des dégâts de l'arme plus {damage}. Vous devez être camouflé et derrière la cible. Requiert une dague. Confère 1 point de combo.",
   'entities.abilities.stealth.name': 'Camouflage',
   'entities.abilities.stealth.description':
-    'Vous dissimule dans les ombres: les ennemis vous remarquent à peine, mais vous vous déplacez 30% plus lentement. Attaquer ou subir des dégâts interrompt Camouflage. Relancez pour sortir.',
+    'Vous dissimule dans les ombres: les ennemis vous remarquent à peine, mais vous vous déplacez 50% plus lentement. Attaquer ou subir des dégâts interrompt Camouflage. Relancez pour sortir.',
   'entities.abilities.adrenaline_rush.name': "Poussée d'adrénaline",
   'entities.abilities.adrenaline_rush.description':
     "Votre sang s'embrase et restaure instantanément 60 énergie.",
@@ -1738,7 +1741,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     'Coup de grâce qui blesse la cible, la faisant saigner de {damage} pendant 16 s.',
   'entities.abilities.vanish.name': 'Disparition',
   'entities.abilities.vanish.description':
-    "Vous disparaissez et entrez en Camouflage, même en plein combat. Vous vous déplacez 30% plus lentement tant que vous êtes dissimulé. Dure jusqu'à 10 s.",
+    "Vous disparaissez et entrez en Camouflage, même en plein combat. Vous vous déplacez 50% plus lentement tant que vous êtes dissimulé. Dure jusqu'à 10 s.",
   'entities.abilities.instant_poison.name': 'Poison instantané',
   'entities.abilities.instant_poison.description':
     'Enduit votre arme pendant 30 min, chacune de vos attaques en mêlée infligeant 8 dégâts de Nature supplémentaires.',
@@ -1845,7 +1848,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     'Une prière lente mais puissante qui rend {damage} points de vie à une cible alliée.',
   'entities.abilities.mind_flay.name': 'Fouet mental',
   'entities.abilities.mind_flay.description':
-    "Assaille l'esprit de la cible avec de l'énergie d'Ombre et inflige 12 points de dégâts chaque seconde pendant 3 s.",
+    "Assaille l'esprit de la cible avec de l'énergie d'Ombre et inflige {damage} points de dégâts chaque seconde pendant 3 s.",
   'entities.abilities.flash_heal.name': 'Soins rapides',
   'entities.abilities.flash_heal.description':
     'Une prière rapide qui rend {damage} points de vie à une cible alliée.',
@@ -1900,7 +1903,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     "Maudit la cible d'agonie: {damage} points de dégâts d'Ombre en 24 s.",
   'entities.abilities.drain_life.name': 'Drain de vie',
   'entities.abilities.drain_life.description':
-    'Draine la vie de la cible et vous transfère 7 points de vie chaque seconde pendant 5 s.',
+    'Draine la vie de la cible et vous transfère {damage} points de vie chaque seconde pendant 5 s.',
   'entities.abilities.fear.name': 'Peur',
   'entities.abilities.fear.description':
     "Terrifie l'ennemi et le laisse tremblant pendant un maximum de 8 s. Tout dégât interrompt l'effet.",
@@ -2031,7 +2034,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
     "Démoralise les ennemis proches, réduisant leur puissance d'attaque de 20 pendant 20 sec. Forme d'ours uniquement.",
   'entities.abilities.prowl.name': 'Rôder',
   'entities.abilities.prowl.description':
-    'Passe en camouflage tant que vous êtes en forme de loup. Inutilisable en combat.',
+    'Passe en camouflage tant que vous êtes en forme de loup, avec une vitesse de déplacement réduite de 50%. Inutilisable en combat.',
   'entities.abilities.rake.name': 'Lacérer',
   'entities.abilities.rake.description':
     "Une attaque d'ouverture en camouflage qui lacère l'ennemi pour les dégâts de l'arme plus {damage} et inflige des dégâts de saignement sur 9 sec. Octroie 1 point de combo. Forme de loup uniquement.",
@@ -4807,4 +4810,51 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.auraEffect.school.shadow': 'Ombre',
   'hudChrome.auraEffect.school.holy': 'Sacré',
   'hudChrome.auraEffect.school.nature': 'Nature',
+  'hudChrome.masterLoot.title': 'Butin de maitre',
+  'hudChrome.masterLoot.enableLabel': 'Butin de maitre',
+  'hudChrome.masterLoot.enableAria': 'Activer le butin de maitre',
+  'hudChrome.masterLoot.looterLabel': 'Maitre du butin',
+  'hudChrome.masterLoot.leaderOption': 'Chef de groupe',
+  'hudChrome.masterLoot.thresholdLabel': 'Seuil',
+  'hudChrome.masterLoot.thresholdUncommon': 'Inhabituel et plus',
+  'hudChrome.masterLoot.thresholdRare': 'Rare et plus',
+  'hudChrome.masterLoot.thresholdEpic': 'Epique et plus',
+  'hudChrome.masterLoot.assignPrompt': 'Attribuer {item}',
+  'hudChrome.masterLoot.assignAria': 'Attribuer {item} a {name}',
+  'hudChrome.masterLoot.rollButton': 'Tirer au sort',
+  'hudChrome.masterLoot.selectAll': 'Tout selectionner',
+  'hudChrome.masterLoot.methodMaster':
+    'Mode de butin defini sur butin de maitre. Maitre du butin: {name}.',
+  'hudChrome.masterLoot.methodGroup': 'Mode de butin defini sur butin de groupe.',
+  'hudChrome.masterLoot.assigned': '{looter} a attribue {item} a {target}.',
+  'hudChrome.masterLoot.unassigned': '{item} n a pas ete attribue et devient libre pour tous.',
+  'hudChrome.masterLoot.leaderOnly': 'Seul le chef de groupe peut changer le mode de butin.',
+  'entities.itemSets.crownforged.name': 'Tenue de guerre Couronneforge',
+  'entities.itemSets.crownforged.bonus2': "Augmente la puissance d'attaque de 40.",
+  'entities.itemSets.crownforged.bonus3': "Augmente la force de 15 et l'endurance de 15.",
+  'entities.itemSets.deathlord.name': 'Tenue de guerre du seigneur de la mort',
+  'entities.itemSets.deathlord.bonus2': "Augmente la puissance d'attaque de 40.",
+  'entities.itemSets.deathlord.bonus3': "Augmente la force de 15 et l'endurance de 15.",
+  'entities.itemSets.necromancers.name': 'Robe du nécromancien',
+  'entities.itemSets.necromancers.bonus2':
+    'Réduit de 50% le recul des incantations causé par les dégâts.',
+  'entities.itemSets.necromancers.bonus3': "Les dégâts subis ne retardent pas l'incantation.",
+  'entities.itemSets.nighttalon.name': 'Tenue de cuir Serre-nuit',
+  'entities.itemSets.nighttalon.bonus2': "Augmente la puissance d'attaque de 40.",
+  'entities.itemSets.nighttalon.bonus3':
+    'Augmente l’agilité de 15 et les chances de critique de 2%.',
+  'entities.itemSets.soulflame.name': 'Robe de Flamme d’âme',
+  'entities.itemSets.soulflame.bonus2':
+    'Réduit de 50% le recul des incantations causé par les dégâts.',
+  'entities.itemSets.soulflame.bonus3': "Les dégâts subis ne retardent pas l'incantation.",
+  'entities.itemSets.stormcallers.name': 'Robe de l’Appel-tempête',
+  'entities.itemSets.stormcallers.bonus2':
+    'Réduit de 50% le recul des incantations causé par les dégâts.',
+  'entities.itemSets.stormcallers.bonus3': "Les dégâts subis ne retardent pas l'incantation.",
+  'entities.itemSets.wyrmshadow.name': 'Tenue d’Ombre-drake',
+  'entities.itemSets.wyrmshadow.bonus2': "Augmente la puissance d'attaque de 40.",
+  'entities.itemSets.wyrmshadow.bonus3':
+    'Augmente l’agilité de 15 et les chances de critique de 2%.',
+  'hudChrome.itemSet.header': '{name} ({have}/{total})',
+  'hudChrome.itemSet.bonusLine': '({pieces}) {bonus}',
 };

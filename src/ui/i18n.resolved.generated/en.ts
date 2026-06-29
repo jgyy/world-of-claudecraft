@@ -222,6 +222,9 @@ export const en: EnTranslations = {
     "rest": {
       "resting": "Resting"
     },
+    "abilityScaling": {
+      "bonus": "(+{value})"
+    },
     "unitFrame": {
       "playerLabel": "Your Hero",
       "targetLabel": "Your Mark",
@@ -317,7 +320,10 @@ export const en: EnTranslations = {
       "showWalletOnCharacterScreen": "Show Wallet on Character Screen",
       "showWalletOnPlayerCard": "Show Wallet on Player Card",
       "uiScale": "UI Scale",
-      "highContrastBackground": "High-Contrast Background"
+      "highContrastBackground": "High-Contrast Background",
+      "showItemLevel": "Show Item Level",
+      "itemLevelLine": "Item Level {level}",
+      "itemScoreLine": "Score {score}"
     },
     "controller": {
       "title": "Controller",
@@ -447,6 +453,10 @@ export const en: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Tip: type /join world or /join lfg to chat with players across the realm."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "This quest can't be shared.",
@@ -583,6 +593,26 @@ export const en: EnTranslations = {
       "exportBtn": "Download My Data",
       "exportDone": "Your data was downloaded. We emailed you a confirmation.",
       "exportFailed": "Could not export your data. Try again in a moment."
+    },
+    "masterLoot": {
+      "title": "Master Loot",
+      "enableLabel": "Master loot",
+      "enableAria": "Enable master loot",
+      "looterLabel": "Master looter",
+      "leaderOption": "Party leader",
+      "thresholdLabel": "Threshold",
+      "thresholdUncommon": "Uncommon and up",
+      "thresholdRare": "Rare and up",
+      "thresholdEpic": "Epic and up",
+      "assignPrompt": "Assign {item}",
+      "assignAria": "Assign {item} to {name}",
+      "rollButton": "Roll",
+      "selectAll": "Select all",
+      "methodMaster": "Loot method set to master loot. Master looter: {name}.",
+      "methodGroup": "Loot method set to group loot.",
+      "assigned": "{looter} assigned {item} to {target}.",
+      "unassigned": "{item} was not assigned and is free for all.",
+      "leaderOnly": "Only the party leader can change the loot method."
     },
     "bags": {
       "filterGroupAria": "Filter bags by category",
@@ -3459,7 +3489,7 @@ export const en: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Arcane Missiles",
-        "description": "Launches Arcane Missiles at the enemy, causing 8 Arcane damage each second for 3 sec."
+        "description": "Launches Arcane Missiles at the enemy, causing {damage} Arcane damage each second for 3 sec."
       },
       "polymorph": {
         "name": "Polymorph",
@@ -3523,7 +3553,7 @@ export const en: EnTranslations = {
       },
       "stealth": {
         "name": "Stealth",
-        "description": "Conceals you in the shadows: enemies barely notice you, but you move 30% slower. Attacking or taking damage breaks Stealth. Cast again to step out."
+        "description": "Conceals you in the shadows: enemies barely notice you, but you move 50% slower. Attacking or taking damage breaks Stealth. Cast again to step out."
       },
       "adrenaline_rush": {
         "name": "Adrenaline Rush",
@@ -3555,7 +3585,7 @@ export const en: EnTranslations = {
       },
       "vanish": {
         "name": "Vanish",
-        "description": "Vanish from sight, entering Stealth even in combat. You move 30% slower while hidden. Lasts up to 10 sec."
+        "description": "Vanish from sight, entering Stealth even in combat. You move 50% slower while hidden. Lasts up to 10 sec."
       },
       "instant_poison": {
         "name": "Instant Poison",
@@ -3707,7 +3737,7 @@ export const en: EnTranslations = {
       },
       "mind_flay": {
         "name": "Mind Flay",
-        "description": "Assaults the target's mind with Shadow energy, causing 12 damage each second for 3 sec."
+        "description": "Assaults the target's mind with Shadow energy, causing {damage} damage each second for 3 sec."
       },
       "flash_heal": {
         "name": "Flash Heal",
@@ -3731,7 +3761,7 @@ export const en: EnTranslations = {
       },
       "lightning_shield": {
         "name": "Lightning Shield",
-        "description": "Surrounds you with crackling lightning: melee attackers take 13 Nature damage."
+        "description": "Surrounds you with crackling lightning: melee attackers take 13 Nature damage, up to 3 charges and at most once every 5 seconds."
       },
       "flame_shock": {
         "name": "Flame Shock",
@@ -3783,7 +3813,7 @@ export const en: EnTranslations = {
       },
       "drain_life": {
         "name": "Drain Life",
-        "description": "Drains the target's life, transferring 7 health to you each second for 5 sec."
+        "description": "Drains the target's life, transferring {damage} health to you each second for 5 sec."
       },
       "fear": {
         "name": "Fear",
@@ -3963,7 +3993,7 @@ export const en: EnTranslations = {
       },
       "prowl": {
         "name": "Prowl",
-        "description": "Enter stealth while in Wolf Form. Cannot be used in combat."
+        "description": "Enter stealth while in Wolf Form, moving 50% slower. Cannot be used in combat."
       },
       "rake": {
         "name": "Rake",
@@ -6359,6 +6389,43 @@ export const en: EnTranslations = {
         "name": "The Collapsed Reliquary",
         "enterText": "You descend into the collapsed reliquary.",
         "leaveText": "You climb back to Brother Halven at the reliquary ruin."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Crownforged Regalia",
+        "bonus2": "Increases attack power by 40.",
+        "bonus3": "Increases Strength by 15 and Stamina by 15."
+      },
+      "deathlord": {
+        "name": "Deathlord Battlegear",
+        "bonus2": "Increases attack power by 40.",
+        "bonus3": "Increases Strength by 15 and Stamina by 15."
+      },
+      "necromancers": {
+        "name": "Necromancer's Raiment",
+        "bonus2": "Reduces cast pushback from damage by 50%.",
+        "bonus3": "You cannot be pushed back while casting (immune to cast pushback from damage)."
+      },
+      "nighttalon": {
+        "name": "Nighttalon Pelt",
+        "bonus2": "Increases attack power by 40.",
+        "bonus3": "Increases Agility by 15 and critical strike chance by 2%."
+      },
+      "soulflame": {
+        "name": "Soulflame Regalia",
+        "bonus2": "Reduces cast pushback from damage by 50%.",
+        "bonus3": "You cannot be pushed back while casting (immune to cast pushback from damage)."
+      },
+      "stormcallers": {
+        "name": "Stormcaller's Vestments",
+        "bonus2": "Reduces cast pushback from damage by 50%.",
+        "bonus3": "You cannot be pushed back while casting (immune to cast pushback from damage)."
+      },
+      "wyrmshadow": {
+        "name": "Wyrmshadow Vestments",
+        "bonus2": "Increases attack power by 40.",
+        "bonus3": "Increases Agility by 15 and critical strike chance by 2%."
       }
     }
   },

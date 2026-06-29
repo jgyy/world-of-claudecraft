@@ -222,6 +222,9 @@ export const it_IT: EnTranslations = {
     "rest": {
       "resting": "A riposo"
     },
+    "abilityScaling": {
+      "bonus": "(+{value})"
+    },
     "unitFrame": {
       "playerLabel": "Il tuo personaggio",
       "targetLabel": "Il tuo bersaglio",
@@ -317,7 +320,10 @@ export const it_IT: EnTranslations = {
       "showWalletOnCharacterScreen": "Mostra portafoglio nella schermata personaggi",
       "showWalletOnPlayerCard": "Mostra portafoglio nella scheda giocatore",
       "uiScale": "Scala dell'interfaccia",
-      "highContrastBackground": "Sfondo a contrasto elevato"
+      "highContrastBackground": "Sfondo a contrasto elevato",
+      "showItemLevel": "Mostra livello oggetto",
+      "itemLevelLine": "Livello oggetto {level}",
+      "itemScoreLine": "Punteggio {score}"
     },
     "controller": {
       "title": "Controller",
@@ -447,6 +453,10 @@ export const it_IT: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Suggerimento: digita /join world o /join lfg per chattare con i giocatori di tutto il reame."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Questa missione non può essere condivisa.",
@@ -583,6 +593,26 @@ export const it_IT: EnTranslations = {
       "exportBtn": "Scarica i miei dati",
       "exportDone": "I tuoi dati sono stati scaricati. Ti abbiamo inviato una conferma via email.",
       "exportFailed": "Impossibile esportare i tuoi dati. Riprova tra un momento."
+    },
+    "masterLoot": {
+      "title": "Bottino maestro",
+      "enableLabel": "Bottino maestro",
+      "enableAria": "Attiva bottino maestro",
+      "looterLabel": "Maestro del bottino",
+      "leaderOption": "Capogruppo",
+      "thresholdLabel": "Soglia",
+      "thresholdUncommon": "Non comune e superiore",
+      "thresholdRare": "Raro e superiore",
+      "thresholdEpic": "Epico e superiore",
+      "assignPrompt": "Assegna {item}",
+      "assignAria": "Assegna {item} a {name}",
+      "rollButton": "Tira",
+      "selectAll": "Seleziona tutto",
+      "methodMaster": "Metodo bottino impostato su bottino maestro. Maestro del bottino: {name}.",
+      "methodGroup": "Metodo bottino impostato su bottino di gruppo.",
+      "assigned": "{looter} ha assegnato {item} a {target}.",
+      "unassigned": "{item} non e stato assegnato ed e libero per tutti.",
+      "leaderOnly": "Solo il capogruppo puo cambiare il metodo bottino."
     },
     "bags": {
       "filterGroupAria": "Filtra le borse per categoria",
@@ -3459,7 +3489,7 @@ export const it_IT: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Dardi Arcani",
-        "description": "Lancia Dardi Arcani contro il nemico, infliggendo 8 danni Arcani ogni secondo per 3 s."
+        "description": "Lancia Dardi Arcani contro il nemico, infliggendo {damage} danni Arcani ogni secondo per 3 s."
       },
       "polymorph": {
         "name": "Metamorfosi",
@@ -3523,7 +3553,7 @@ export const it_IT: EnTranslations = {
       },
       "stealth": {
         "name": "Furtività",
-        "description": "Ti nasconde nelle ombre: i nemici ti notano appena, ma ti muovi il 30% più lentamente. Attaccare o subire danni interrompe Furtività. Lanciala di nuovo per uscire."
+        "description": "Ti nasconde nelle ombre: i nemici ti notano appena, ma ti muovi il 50% più lentamente. Attaccare o subire danni interrompe Furtività. Lanciala di nuovo per uscire."
       },
       "adrenaline_rush": {
         "name": "Scarica di Adrenalina",
@@ -3555,7 +3585,7 @@ export const it_IT: EnTranslations = {
       },
       "vanish": {
         "name": "Eclissarsi",
-        "description": "Scompari dalla vista, entrando in Furtività anche in combattimento. Ti muovi il 30% più lentamente mentre sei nascosto. Dura fino a 10 sec."
+        "description": "Scompari dalla vista, entrando in Furtività anche in combattimento. Ti muovi il 50% più lentamente mentre sei nascosto. Dura fino a 10 sec."
       },
       "instant_poison": {
         "name": "Veleno Istantaneo",
@@ -3707,7 +3737,7 @@ export const it_IT: EnTranslations = {
       },
       "mind_flay": {
         "name": "Flagello Mentale",
-        "description": "Assale la mente del bersaglio con energia d'Ombra, infliggendo 12 danni ogni secondo per 3 s."
+        "description": "Assale la mente del bersaglio con energia d'Ombra, infliggendo {damage} danni ogni secondo per 3 s."
       },
       "flash_heal": {
         "name": "Cura Rapida",
@@ -3783,7 +3813,7 @@ export const it_IT: EnTranslations = {
       },
       "drain_life": {
         "name": "Risucchio di Vita",
-        "description": "Risucchia la vita del bersaglio, trasferendoti 7 salute ogni secondo per 5 s."
+        "description": "Risucchia la vita del bersaglio, trasferendoti {damage} salute ogni secondo per 5 s."
       },
       "fear": {
         "name": "Paura",
@@ -3963,7 +3993,7 @@ export const it_IT: EnTranslations = {
       },
       "prowl": {
         "name": "Agguato",
-        "description": "Entra in furtività mentre sei in Forma del Lupo. Non utilizzabile in combattimento."
+        "description": "Entra in furtività mentre sei in Forma del Lupo, muovendoti il 50% più lentamente. Non utilizzabile in combattimento."
       },
       "rake": {
         "name": "Sventramento",
@@ -6359,6 +6389,43 @@ export const it_IT: EnTranslations = {
         "name": "Il Reliquiario Crollato",
         "enterText": "Scendi nel reliquiario crollato.",
         "leaveText": "Risali da Fratello Halven, alla rovina del reliquiario."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Tenuta da battaglia Forgiacorona",
+        "bonus2": "Aumenta la potenza d'attacco di 40.",
+        "bonus3": "Aumenta la forza di 15 e la vigoria di 15."
+      },
+      "deathlord": {
+        "name": "Tenuta da battaglia del Signore della Morte",
+        "bonus2": "Aumenta la potenza d'attacco di 40.",
+        "bonus3": "Aumenta la forza di 15 e la vigoria di 15."
+      },
+      "necromancers": {
+        "name": "Vesti del negromante",
+        "bonus2": "Riduce del 50% il ritardo al lancio causato dai danni.",
+        "bonus3": "I danni subiti non ritardano il lancio degli incantesimi."
+      },
+      "nighttalon": {
+        "name": "Tenuta di cuoio Artiglio Notturno",
+        "bonus2": "Aumenta la potenza d'attacco di 40.",
+        "bonus3": "Aumenta l’agilità di 15 e la probabilità di critico del 2%."
+      },
+      "soulflame": {
+        "name": "Vesti Fiamma dell’Anima",
+        "bonus2": "Riduce del 50% il ritardo al lancio causato dai danni.",
+        "bonus3": "I danni subiti non ritardano il lancio degli incantesimi."
+      },
+      "stormcallers": {
+        "name": "Vesti del Chiamatempeste",
+        "bonus2": "Riduce del 50% il ritardo al lancio causato dai danni.",
+        "bonus3": "I danni subiti non ritardano il lancio degli incantesimi."
+      },
+      "wyrmshadow": {
+        "name": "Tenuta Ombra del Dragone",
+        "bonus2": "Aumenta la potenza d'attacco di 40.",
+        "bonus3": "Aumenta l’agilità di 15 e la probabilità di critico del 2%."
       }
     }
   },

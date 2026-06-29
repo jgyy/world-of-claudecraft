@@ -222,6 +222,9 @@ export const pt_BR: EnTranslations = {
     "rest": {
       "resting": "Descansando"
     },
+    "abilityScaling": {
+      "bonus": "(+{value})"
+    },
     "unitFrame": {
       "playerLabel": "Seu personagem",
       "targetLabel": "Seu alvo",
@@ -317,7 +320,10 @@ export const pt_BR: EnTranslations = {
       "showWalletOnCharacterScreen": "Mostrar carteira na tela de personagens",
       "showWalletOnPlayerCard": "Mostrar carteira no cartão de jogador",
       "uiScale": "Escala da interface",
-      "highContrastBackground": "Fundo de alto contraste"
+      "highContrastBackground": "Fundo de alto contraste",
+      "showItemLevel": "Mostrar nível do item",
+      "itemLevelLine": "Nível do item {level}",
+      "itemScoreLine": "Pontuação {score}"
     },
     "controller": {
       "title": "Controle",
@@ -447,6 +453,10 @@ export const pt_BR: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Dica: digite /join world ou /join lfg para conversar com jogadores do reino inteiro."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Esta missão não pode ser compartilhada.",
@@ -583,6 +593,26 @@ export const pt_BR: EnTranslations = {
       "exportBtn": "Baixar meus dados",
       "exportDone": "Seus dados foram baixados. Enviamos uma confirmação por email.",
       "exportFailed": "Não foi possível exportar seus dados. Tente novamente em instantes."
+    },
+    "masterLoot": {
+      "title": "Saque mestre",
+      "enableLabel": "Saque mestre",
+      "enableAria": "Ativar saque mestre",
+      "looterLabel": "Mestre do saque",
+      "leaderOption": "Lider do grupo",
+      "thresholdLabel": "Limite",
+      "thresholdUncommon": "Incomum ou superior",
+      "thresholdRare": "Raro ou superior",
+      "thresholdEpic": "Epico ou superior",
+      "assignPrompt": "Atribuir {item}",
+      "assignAria": "Atribuir {item} a {name}",
+      "rollButton": "Rolar",
+      "selectAll": "Selecionar tudo",
+      "methodMaster": "Metodo de saque definido como saque mestre. Mestre do saque: {name}.",
+      "methodGroup": "Metodo de saque definido como saque em grupo.",
+      "assigned": "{looter} atribuiu {item} a {target}.",
+      "unassigned": "{item} nao foi atribuido e esta livre para todos.",
+      "leaderOnly": "Somente o lider do grupo pode alterar o metodo de saque."
     },
     "bags": {
       "filterGroupAria": "Filtrar bolsas por categoria",
@@ -3459,7 +3489,7 @@ export const pt_BR: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Mísseis Arcanos",
-        "description": "Lança Mísseis Arcanos no inimigo, causando 8 de dano Arcano a cada segundo por 3 s."
+        "description": "Lança Mísseis Arcanos no inimigo, causando {damage} de dano Arcano a cada segundo por 3 s."
       },
       "polymorph": {
         "name": "Polimorfia",
@@ -3523,7 +3553,7 @@ export const pt_BR: EnTranslations = {
       },
       "stealth": {
         "name": "Furtividade",
-        "description": "Esconde você nas sombras: inimigos mal percebem você, mas você se move 30% mais devagar. Atacar ou sofrer dano quebra Furtividade. Lance de novo para sair."
+        "description": "Esconde você nas sombras: inimigos mal percebem você, mas você se move 50% mais devagar. Atacar ou sofrer dano quebra Furtividade. Lance de novo para sair."
       },
       "adrenaline_rush": {
         "name": "Descarga de Adrenalina",
@@ -3555,7 +3585,7 @@ export const pt_BR: EnTranslations = {
       },
       "vanish": {
         "name": "Desaparecer",
-        "description": "Some de vista, entrando em modo furtivo mesmo em combate. Você se move 30% mais devagar enquanto escondido. Dura até 10 s."
+        "description": "Some de vista, entrando em modo furtivo mesmo em combate. Você se move 50% mais devagar enquanto escondido. Dura até 10 s."
       },
       "instant_poison": {
         "name": "Veneno Instantâneo",
@@ -3707,7 +3737,7 @@ export const pt_BR: EnTranslations = {
       },
       "mind_flay": {
         "name": "Açoite Mental",
-        "description": "Assalta a mente do alvo com energia de Sombra, causando 12 de dano por segundo durante 3 s."
+        "description": "Assalta a mente do alvo com energia de Sombra, causando {damage} de dano por segundo durante 3 s."
       },
       "flash_heal": {
         "name": "Cura Rápida",
@@ -3783,7 +3813,7 @@ export const pt_BR: EnTranslations = {
       },
       "drain_life": {
         "name": "Drenar Vida",
-        "description": "Drena a vida do alvo, transferindo 7 de vida para você a cada segundo por 5 s."
+        "description": "Drena a vida do alvo, transferindo {damage} de vida para você a cada segundo por 5 s."
       },
       "fear": {
         "name": "Medo",
@@ -3963,7 +3993,7 @@ export const pt_BR: EnTranslations = {
       },
       "prowl": {
         "name": "Espreitar",
-        "description": "Entra em furtividade enquanto na Forma de Lobo. Não pode ser usado em combate."
+        "description": "Entra em furtividade enquanto na Forma de Lobo, movendo-se 50% mais devagar. Não pode ser usado em combate."
       },
       "rake": {
         "name": "Dilacerar",
@@ -6359,6 +6389,43 @@ export const pt_BR: EnTranslations = {
         "name": "O Relicário Desmoronado",
         "enterText": "Você desce até o relicário desmoronado.",
         "leaveText": "Você sobe de volta até o Irmão Halven, na ruína do relicário."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Traje de batalha Forjacoroa",
+        "bonus2": "Aumenta o poder de ataque em 40.",
+        "bonus3": "Aumenta a força em 15 e o vigor em 15."
+      },
+      "deathlord": {
+        "name": "Traje de batalha do Senhor da Morte",
+        "bonus2": "Aumenta o poder de ataque em 40.",
+        "bonus3": "Aumenta a força em 15 e o vigor em 15."
+      },
+      "necromancers": {
+        "name": "Vestes do necromante",
+        "bonus2": "Reduz em 50% o atraso de conjuração causado por dano.",
+        "bonus3": "Dano recebido não atrasa suas conjurações."
+      },
+      "nighttalon": {
+        "name": "Traje de couro Garranoite",
+        "bonus2": "Aumenta o poder de ataque em 40.",
+        "bonus3": "Aumenta a agilidade em 15 e a chance de crítico em 2%."
+      },
+      "soulflame": {
+        "name": "Vestes de Chama da Alma",
+        "bonus2": "Reduz em 50% o atraso de conjuração causado por dano.",
+        "bonus3": "Dano recebido não atrasa suas conjurações."
+      },
+      "stormcallers": {
+        "name": "Vestes do Chamatormentas",
+        "bonus2": "Reduz em 50% o atraso de conjuração causado por dano.",
+        "bonus3": "Dano recebido não atrasa suas conjurações."
+      },
+      "wyrmshadow": {
+        "name": "Traje Sombraverme",
+        "bonus2": "Aumenta o poder de ataque em 40.",
+        "bonus3": "Aumenta a agilidade em 15 e a chance de crítico em 2%."
       }
     }
   },

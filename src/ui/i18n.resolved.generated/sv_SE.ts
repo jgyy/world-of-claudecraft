@@ -222,6 +222,9 @@ export const sv_SE: EnTranslations = {
     "rest": {
       "resting": "Vilar"
     },
+    "abilityScaling": {
+      "bonus": "(+{value})"
+    },
     "unitFrame": {
       "playerLabel": "Din hjälte",
       "targetLabel": "Ditt mål",
@@ -317,7 +320,10 @@ export const sv_SE: EnTranslations = {
       "showWalletOnCharacterScreen": "Visa plånbok på karaktärsskärmen",
       "showWalletOnPlayerCard": "Visa plånbok på spelarkortet",
       "uiScale": "Gränssnittsskala",
-      "highContrastBackground": "Bakgrund med hög kontrast"
+      "highContrastBackground": "Bakgrund med hög kontrast",
+      "showItemLevel": "Visa föremålsnivå",
+      "itemLevelLine": "Föremålsnivå {level}",
+      "itemScoreLine": "Poäng {score}"
     },
     "controller": {
       "title": "Handkontroll",
@@ -447,6 +453,10 @@ export const sv_SE: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Tips: skriv /join world eller /join lfg för att chatta med spelare över hela världen."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Det här uppdraget kan inte delas.",
@@ -583,6 +593,26 @@ export const sv_SE: EnTranslations = {
       "exportBtn": "Ladda ner mina data",
       "exportDone": "Dina data laddades ner. Vi har mejlat dig en bekräftelse.",
       "exportFailed": "Kunde inte exportera dina data. Försök igen om en stund."
+    },
+    "masterLoot": {
+      "title": "Master loot",
+      "enableLabel": "Master loot",
+      "enableAria": "Aktivera master loot",
+      "looterLabel": "Master looter",
+      "leaderOption": "Gruppledare",
+      "thresholdLabel": "Tröskel",
+      "thresholdUncommon": "Ovanlig och uppat",
+      "thresholdRare": "Sallsynt och uppat",
+      "thresholdEpic": "Episk och uppat",
+      "assignPrompt": "Tilldela {item}",
+      "assignAria": "Tilldela {item} till {name}",
+      "rollButton": "Slå",
+      "selectAll": "Markera alla",
+      "methodMaster": "Lootmetod satt till master loot. Master looter: {name}.",
+      "methodGroup": "Lootmetod satt till grupploot.",
+      "assigned": "{looter} tilldelade {item} till {target}.",
+      "unassigned": "{item} tilldelades inte och ar fritt for alla.",
+      "leaderOnly": "Endast gruppledaren kan andra lootmetoden."
     },
     "bags": {
       "filterGroupAria": "Filtrera väskor efter kategori",
@@ -3459,7 +3489,7 @@ export const sv_SE: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Arkana missiler",
-        "description": "Skickar arkana missiler mot fienden och vållar 8 arkanskada varje sekund i 3 sek."
+        "description": "Skickar arkana missiler mot fienden och vållar {damage} arkanskada varje sekund i 3 sek."
       },
       "polymorph": {
         "name": "Förvandling",
@@ -3523,7 +3553,7 @@ export const sv_SE: EnTranslations = {
       },
       "stealth": {
         "name": "Smyg",
-        "description": "Döljer dig i skuggorna: fiender lägger knappt märke till dig, men du rör dig 30 % långsammare. Att anfalla eller ta skada bryter Smyg. Kasta igen för att kliva fram."
+        "description": "Döljer dig i skuggorna: fiender lägger knappt märke till dig, men du rör dig 50 % långsammare. Att anfalla eller ta skada bryter Smyg. Kasta igen för att kliva fram."
       },
       "adrenaline_rush": {
         "name": "Adrenalinrus",
@@ -3555,7 +3585,7 @@ export const sv_SE: EnTranslations = {
       },
       "vanish": {
         "name": "Försvinn",
-        "description": "Försvinn ur sikte och gå in i Smyg även i strid. Du rör dig 30 % långsammare medan du är dold. Varar i upp till 10 sek."
+        "description": "Försvinn ur sikte och gå in i Smyg även i strid. Du rör dig 50 % långsammare medan du är dold. Varar i upp till 10 sek."
       },
       "instant_poison": {
         "name": "Snabbverkande gift",
@@ -3707,7 +3737,7 @@ export const sv_SE: EnTranslations = {
       },
       "mind_flay": {
         "name": "Sinnesgissel",
-        "description": "Angriper målets sinne med skuggenergi och vållar 12 skada varje sekund i 3 sek."
+        "description": "Angriper målets sinne med skuggenergi och vållar {damage} skada varje sekund i 3 sek."
       },
       "flash_heal": {
         "name": "Snabbläkning",
@@ -3783,7 +3813,7 @@ export const sv_SE: EnTranslations = {
       },
       "drain_life": {
         "name": "Dränera liv",
-        "description": "Dränerar målets liv och överför 7 hälsa till dig varje sekund i 5 sek."
+        "description": "Dränerar målets liv och överför {damage} hälsa till dig varje sekund i 5 sek."
       },
       "fear": {
         "name": "Skräck",
@@ -3963,7 +3993,7 @@ export const sv_SE: EnTranslations = {
       },
       "prowl": {
         "name": "Smyga",
-        "description": "Gå i smyg medan du är i vargform. Kan inte användas i strid."
+        "description": "Gå i smyg medan du är i vargform och rör dig 50 % långsammare. Kan inte användas i strid."
       },
       "rake": {
         "name": "Krafsa",
@@ -6359,6 +6389,43 @@ export const sv_SE: EnTranslations = {
         "name": "Det rasade relikvariet",
         "enterText": "Du stiger ner i det rasade relikvariet.",
         "leaveText": "Du klättrar tillbaka till broder Halven vid relikvarieruinen."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Kronsmidd stridsutrustning",
+        "bonus2": "Ökar attackkraft med 40.",
+        "bonus3": "Ökar styrka med 15 och uthållighet med 15."
+      },
+      "deathlord": {
+        "name": "Dödsherrens stridsutrustning",
+        "bonus2": "Ökar attackkraft med 40.",
+        "bonus3": "Ökar styrka med 15 och uthållighet med 15."
+      },
+      "necromancers": {
+        "name": "Nekromantikerns skrud",
+        "bonus2": "Minskar kastfördröjning från skada med 50%.",
+        "bonus3": "Skada du tar fördröjer inte dina besvärjelser."
+      },
+      "nighttalon": {
+        "name": "Nattklo läderutrustning",
+        "bonus2": "Ökar attackkraft med 40.",
+        "bonus3": "Ökar smidighet med 15 och kritisk chans med 2%."
+      },
+      "soulflame": {
+        "name": "Själsflammans skrud",
+        "bonus2": "Minskar kastfördröjning från skada med 50%.",
+        "bonus3": "Skada du tar fördröjer inte dina besvärjelser."
+      },
+      "stormcallers": {
+        "name": "Stormkallarens skrud",
+        "bonus2": "Minskar kastfördröjning från skada med 50%.",
+        "bonus3": "Skada du tar fördröjer inte dina besvärjelser."
+      },
+      "wyrmshadow": {
+        "name": "Wyrmskuggans utrustning",
+        "bonus2": "Ökar attackkraft med 40.",
+        "bonus3": "Ökar smidighet med 15 och kritisk chans med 2%."
       }
     }
   },
