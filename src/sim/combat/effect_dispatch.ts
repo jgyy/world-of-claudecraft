@@ -409,7 +409,7 @@ export function runEffects(
           school: ability.school,
           fx: 'nova',
         });
-        ctx.pulseGroundAoE(groundEffect, threatOpts);
+        ctx.pulseGroundAoE(groundEffect, threatOpts, true);
         ctx.groundAoEs.push(groundEffect);
         break;
       }

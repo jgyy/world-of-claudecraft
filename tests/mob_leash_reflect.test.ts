@@ -12,16 +12,44 @@ import { describe, expect, it } from 'vitest';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import { LEASH_DISTANCE } from '../src/sim/types';
+import type { Entity, Vec3 } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
 const makeSim = () => new Sim({ seed: 42, playerClass: 'shaman', autoEquip: true });
 
-function aggroedMob(sim: Sim): any {
-  const seed = (sim as any).cfg.seed;
+type SimHarness = Sim & {
+  cfg: { seed: number };
+  addEntity(entity: Entity): void;
+  dealDamage(
+    source: Entity | null,
+    target: Entity,
+    amount: number,
+    crit: boolean,
+    school: string,
+    ability: string | null,
+    kind: 'hit' | 'miss' | 'dodge',
+    noRage?: boolean,
+    threatOpts?: { flat?: number; mult?: number },
+    direct?: boolean,
+  ): void;
+  mobSwing(mob: Entity, target: Entity): void;
+};
+
+function harness(sim: Sim): SimHarness {
+  return sim as unknown as SimHarness;
+}
+
+function leashAnchor(mob: Entity): Vec3 {
+  if (!mob.leashAnchor) throw new Error(`missing leash anchor for ${mob.name}`);
+  return mob.leashAnchor;
+}
+
+function aggroedMob(sim: Sim): Entity {
+  const h = harness(sim);
+  const seed = h.cfg.seed;
   const pos = { x: 200, y: terrainHeight(200, 200, seed), z: 200 };
-  const mob = createMob(900100, MOBS.forest_wolf, 5, pos) as any;
-  (sim as any).addEntity(mob);
+  const mob = createMob(900100, MOBS.forest_wolf, 5, pos);
+  h.addEntity(mob);
   mob.aiState = 'chase';
   mob.aggroTargetId = sim.player.id;
   mob.inCombat = true;
@@ -34,18 +62,18 @@ describe('mob leash: only direct damage refreshes the anchor', () => {
     const sim = makeSim();
     const mob = aggroedMob(sim);
     mob.pos = { x: mob.pos.x + 5, y: mob.pos.y, z: mob.pos.z };
-    (sim as any).dealDamage(sim.player, mob, 10, false, 'physical', 'Lightning Bolt', 'hit');
-    expect(mob.leashAnchor.x).toBeCloseTo(mob.pos.x);
-    expect(mob.leashAnchor.z).toBeCloseTo(mob.pos.z);
+    harness(sim).dealDamage(sim.player, mob, 10, false, 'physical', 'Lightning Bolt', 'hit');
+    expect(leashAnchor(mob).x).toBeCloseTo(mob.pos.x);
+    expect(leashAnchor(mob).z).toBeCloseTo(mob.pos.z);
   });
 
   it('reflected (indirect) damage leaves the leash anchor where it was', () => {
     const sim = makeSim();
     const mob = aggroedMob(sim);
-    const anchorBefore = { ...mob.leashAnchor };
+    const anchorBefore = { ...leashAnchor(mob) };
     mob.pos = { x: mob.pos.x + 5, y: mob.pos.y, z: mob.pos.z };
     // Lightning Shield reflect: player-sourced, but not a direct attack.
-    (sim as any).dealDamage(
+    harness(sim).dealDamage(
       sim.player,
       mob,
       10,
@@ -57,8 +85,8 @@ describe('mob leash: only direct damage refreshes the anchor', () => {
       undefined,
       false, // direct = false
     );
-    expect(mob.leashAnchor.x).toBeCloseTo(anchorBefore.x);
-    expect(mob.leashAnchor.z).toBeCloseTo(anchorBefore.z);
+    expect(leashAnchor(mob).x).toBeCloseTo(anchorBefore.x);
+    expect(leashAnchor(mob).z).toBeCloseTo(anchorBefore.z);
   });
 
   it('a real mob swing into Lightning Shield does NOT walk the leash anchor', () => {
@@ -72,7 +100,7 @@ describe('mob leash: only direct damage refreshes the anchor', () => {
     sim.player.hp = sim.player.maxHp;
     // Move the mob away from its anchor so a (buggy) refresh would be detectable:
     // anchor stays at the spawn while the mob body is 60yd off (past LEASH_DISTANCE).
-    const anchorBefore = { ...mob.leashAnchor };
+    const anchorBefore = { ...leashAnchor(mob) };
     mob.pos = { x: mob.pos.x + 60, y: mob.pos.y, z: mob.pos.z };
     sim.player.pos = { x: mob.pos.x + 1, y: mob.pos.y, z: mob.pos.z };
     sim.player.auras.push({
@@ -87,13 +115,9 @@ describe('mob leash: only direct damage refreshes the anchor', () => {
     });
     const hpBefore = mob.hp;
     // Swing many times; misses/dodges are fine, we only need reflects to land.
-    for (let i = 0; i < 200; i++) (sim as any).mobSwing(mob, sim.player);
+    for (let i = 0; i < 200; i++) harness(sim).mobSwing(mob, sim.player);
     expect(mob.hp).toBeLessThan(hpBefore); // reflect actually connected
-    expect(mob.leashAnchor.x).toBeCloseTo(anchorBefore.x);
-    expect(mob.leashAnchor.z).toBeCloseTo(anchorBefore.z);
+    expect(leashAnchor(mob).x).toBeCloseTo(anchorBefore.x);
+    expect(leashAnchor(mob).z).toBeCloseTo(anchorBefore.z);
   });
 });
-
-function dist(a: { x: number; z: number }, b: { x: number; z: number }): number {
-  return Math.hypot(a.x - b.x, a.z - b.z);
-}

@@ -299,7 +299,11 @@ export interface SimContextCallbacks {
   delveRunForPlayer(pid: number): DelveRun | null;
   delveModuleEntry(run: DelveRun): Vec3;
   failDelveRun(run: DelveRun): void;
-  pulseGroundAoE(effect: GroundAoE, threatOpts?: { flat?: number; mult?: number }): void;
+  pulseGroundAoE(
+    effect: GroundAoE,
+    threatOpts?: { flat?: number; mult?: number },
+    direct?: boolean,
+  ): void;
 
   // C1 damage core: the post-mitigation damage/death/xp hub the extracted module
   // (src/sim/combat/damage.ts) owns plus the helpers it consumes (all still on Sim

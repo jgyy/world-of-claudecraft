@@ -2870,7 +2870,11 @@ export class Sim {
   // updateGroundAoEs (the drain) moved to entity_roster.ts (tickGroundAoEs); it pulses
   // through this.ctx.pulseGroundAoE. pulseGroundAoE STAYS here (shared entry point,
   // also called on-cast from the effect path).
-  private pulseGroundAoE(effect: GroundAoE, threatOpts?: { flat?: number; mult?: number }): void {
+  private pulseGroundAoE(
+    effect: GroundAoE,
+    threatOpts?: { flat?: number; mult?: number },
+    direct = false,
+  ): void {
     const source = this.entities.get(effect.sourceId);
     if (!source || source.dead) return;
     this.emit({
@@ -2893,10 +2897,7 @@ export class Sim {
         'hit',
         false,
         threatOpts,
-        // Recurring ground-AoE ticks (Consecration, Rain of Fire, ...) are
-        // periodic, not a direct attack: like a DoT they must not walk a mob's
-        // leash anchor. The initial cast hit (effect_dispatch) stays direct.
-        false,
+        direct,
       );
     }
   }
