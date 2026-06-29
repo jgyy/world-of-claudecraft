@@ -1,9 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  LONG_PRESS_SLOP_PX,
-  LongPressClickGuard,
-  movedBeyondSlop,
-} from '../src/ui/long_press';
+import { LONG_PRESS_SLOP_PX, LongPressClickGuard, movedBeyondSlop } from '../src/ui/long_press';
 
 describe('movedBeyondSlop', () => {
   const start = { x: 100, y: 100 };

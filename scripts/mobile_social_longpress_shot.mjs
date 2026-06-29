@@ -18,18 +18,29 @@ const browser = await puppeteer.launch({
   executablePath: BROWSER_PATH,
   headless: 'new',
   args: [
-    '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
-    '--no-sandbox', '--hide-scrollbars',
+    '--use-gl=angle',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+    '--no-sandbox',
+    '--hide-scrollbars',
   ],
 });
 
 try {
   const page = await browser.newPage();
   page.on('pageerror', (e) => console.log('PAGEERR', e.message));
-  await page.setViewport({ width: 844, height: 390, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+  await page.setViewport({
+    width: 844,
+    height: 390,
+    isMobile: true,
+    hasTouch: true,
+    deviceScaleFactor: 2,
+  });
   const client = await page.target().createCDPSession();
   // Satisfy PHONE_TOUCH_QUERY = '(pointer: coarse) and (max-width: 940px)'.
-  await client.send('Emulation.setEmulatedMedia', { features: [{ name: 'pointer', value: 'coarse' }] });
+  await client.send('Emulation.setEmulatedMedia', {
+    features: [{ name: 'pointer', value: 'coarse' }],
+  });
 
   await page.goto(URL, { waitUntil: 'domcontentloaded' });
   await page.waitForSelector('#btn-offline', { visible: true });
@@ -61,7 +72,12 @@ try {
   // so the screenshot shows the social context the menu belongs to.
   await page.evaluate(() => {
     window.__game.hud.chatLogFrom(
-      'Aelindra', 'Anyone up for the crypt?', '#ffffff', 'hud.chat.templates.say', 'say', 999,
+      'Aelindra',
+      'Anyone up for the crypt?',
+      '#ffffff',
+      'hud.chat.templates.say',
+      'say',
+      999,
     );
     document.body.classList.add('mobile-chatlog-peek');
   });
@@ -74,7 +90,8 @@ try {
     return { x: b.left + b.width / 2, y: b.top + b.height / 2 };
   });
   await client.send('Input.dispatchTouchEvent', {
-    type: 'touchStart', touchPoints: [{ x: pf.x, y: pf.y }],
+    type: 'touchStart',
+    touchPoints: [{ x: pf.x, y: pf.y }],
   });
   await sleep(800);
   const gesture = await page.evaluate(
