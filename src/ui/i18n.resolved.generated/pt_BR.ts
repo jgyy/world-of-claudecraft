@@ -175,25 +175,25 @@ export const pt_BR: EnTranslations = {
       "done": "Concluído"
     },
     "theme": {
-      "preset": "UI Theme",
-      "customColors": "Custom Colors",
-      "reset": "Reset",
+      "preset": "Tema da interface",
+      "customColors": "Cores personalizadas",
+      "reset": "Redefinir",
       "presets": {
-        "classic": "Classic Gold",
-        "midnight": "Midnight",
-        "parchment": "Parchment",
-        "highContrast": "High Contrast"
+        "classic": "Ouro clássico",
+        "midnight": "Meia-noite",
+        "parchment": "Pergaminho",
+        "highContrast": "Alto contraste"
       },
       "knob": {
-        "accent": "Accent",
-        "border": "Border",
-        "panel": "Frame",
-        "text": "Text",
-        "textMuted": "Muted Text",
-        "hp": "Health",
+        "accent": "Destaque",
+        "border": "Borda",
+        "panel": "Moldura",
+        "text": "Texto",
+        "textMuted": "Texto suave",
+        "hp": "Saúde",
         "mana": "Mana",
-        "rage": "Rage",
-        "energy": "Energy"
+        "rage": "Raiva",
+        "energy": "Energia"
       }
     },
     "questTracker": {
@@ -222,6 +222,21 @@ export const pt_BR: EnTranslations = {
     "rest": {
       "resting": "Descansando"
     },
+    "unitFrame": {
+      "playerLabel": "Seu personagem",
+      "targetLabel": "Seu alvo",
+      "targetAnnounce": "Alvo: {name}",
+      "partyLabel": "Seu grupo",
+      "partyGroup": "Grupo {n}",
+      "durationUnitSeconds": "s"
+    },
+    "character": {
+      "modelPreview": "Prévia do modelo do personagem"
+    },
+    "skipLinks": {
+      "mainHud": "Pular para a interface principal",
+      "chat": "Pular para o chat"
+    },
     "mobile": {
       "autorun": "Corrida automática",
       "jump": "Pular",
@@ -231,12 +246,34 @@ export const pt_BR: EnTranslations = {
       "hapticsOff": "Vibração desligada",
       "toggleHaptics": "Alternar vibração"
     },
+    "tutorial": {
+      "moveBodyTouch": "Use o analógico de movimento para se mover e arraste a tela para olhar ao redor. Dê alguns passos para começar.",
+      "talkBodyTouch": "Aproxime-se do marechal Redbrook e toque no botão Usar para falar, então aceite a tarefa dele.",
+      "returnBodyTouch": "Sua tarefa está concluída. Volte ao marechal Redbrook e toque no botão Usar para entregá-la.",
+      "doneBodyTouch": "Você já domina o básico, {name}. O Vale é seu para explorar. Toque em Mais e depois em Registro de missões para ver seu registro de missões a qualquer momento. Boa caçada!"
+    },
     "widgets": {
       "clockTitle": "Horário local - clique para alternar entre 12/24 horas",
       "worldCoordinates": "Coordenadas do mundo",
       "coordinates": "Coordenadas",
       "heading": "Direção",
       "minimapZoom": "Zoom do minimapa"
+    },
+    "castBar": {
+      "playerAria": "Sua barra de conjuração",
+      "targetAria": "Barra de conjuração do alvo"
+    },
+    "leaderboard": {
+      "close": "Fechar"
+    },
+    "raidLockout": {
+      "title": "Bloqueios de raide",
+      "allReady": "Todas as raides prontas",
+      "daysHours": "{d}d {h}h",
+      "hoursMinutes": "{h}h {m}min",
+      "minutes": "{m}min",
+      "lessThanMinute": "<1min",
+      "lockedToast": "Você está bloqueado em {raid}. Desbloqueia em {time}."
     },
     "compass": {
       "N": "N",
@@ -275,8 +312,8 @@ export const pt_BR: EnTranslations = {
       "interfaceModeNote": "Auto escolhe os controles Desktop ou Touch conforme o seu dispositivo. Escolha Desktop para forçar teclado e mouse (útil em um tablet com teclado), ou Touch para os controles na tela.",
       "footstepSounds": "Sons de passos",
       "clickFeedback": "Marcador de clique",
-      "lockCursorOnRotate": "Lock Cursor While Rotating",
-      "keybindHelpLockCursorOnRotate": "Keeps the mouse cursor inside the window while you drag to rotate the camera, so it cannot reach the screen edge or move to another monitor. Turn off if you prefer a free cursor.",
+      "lockCursorOnRotate": "Bloquear cursor ao girar",
+      "keybindHelpLockCursorOnRotate": "Mantém o cursor do mouse dentro da janela enquanto você arrasta para girar a câmera, para que ele não alcance a borda da tela nem passe para outro monitor. Desative se preferir um cursor livre.",
       "showWalletOnCharacterScreen": "Mostrar carteira na tela de personagens",
       "showWalletOnPlayerCard": "Mostrar carteira no cartão de jogador",
       "uiScale": "Escala da interface",
@@ -410,6 +447,18 @@ export const pt_BR: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Dica: digite /join world ou /join lfg para conversar com jogadores do reino inteiro."
+    },
+    "questShare": {
+      "notShareable": "Esta missão não pode ser compartilhada.",
+      "notInSharerParty": "Você precisa estar no grupo de {name} para aceitar essa missão.",
+      "accepted": "{name} aceitou sua missão compartilhada.",
+      "dialogTitle": "Missão compartilhada",
+      "viewOnlyHint": "Entre no grupo de quem compartilhou para aceitar esta missão.",
+      "alreadyOn": "Você já está nesta missão.",
+      "alreadyDone": "Você já concluiu esta missão.",
+      "ineligible": "Você não atende aos requisitos desta missão.",
+      "noQuestSelected": "Selecione uma missão no seu registro para compartilhar.",
+      "linkTitle": "Shift + clique para vincular esta missão no chat."
     },
     "plurals": {
       "guildMembers": {
@@ -550,6 +599,23 @@ export const pt_BR: EnTranslations = {
       "searchPlaceholder": "Pesquisar itens",
       "searchAria": "Pesquisar itens da bolsa por nome",
       "noMatch": "Nenhum item corresponde aos seus filtros."
+    },
+    "raidConvert": {
+      "toPartyDone": "Sua raide foi convertida de volta em um grupo.",
+      "notRaid": "Seu grupo não é uma raide.",
+      "leaderOnly": "Só o líder da raide pode converter em um grupo.",
+      "tooLarge": "Uma raide com mais de cinco membros não pode ser convertida de volta em um grupo."
+    },
+    "loot": {
+      "chestTitle": "Baú"
+    },
+    "spellbook": {
+      "addToBarAria": "Adicionar {name} à barra de ação",
+      "removeFromBarAria": "Remover {name} da barra de ação"
+    },
+    "nameplate": {
+      "mob": "[{level}] {name}",
+      "mobElite": "[{level}+] {name}"
     }
   },
   "guide": {
@@ -952,7 +1018,6 @@ export const pt_BR: EnTranslations = {
       "notedLabel": "Digno de nota",
       "flavor": {
         "old_greyjaw": "Um velho lobo marcado por cicatrizes que armadilha alguma jamais prendeu, culpado por três cães e o braço de um cavalariço. Ele caça sozinho nas matas profundas e fica mais selvagem quanto mais a luta se arrasta.",
-        "brightwood_stag": "Um orgulhoso cervo do bosque que baixa sua coroa de chifres e avança como um touro, ficando mais difícil de enfrentar quanto mais é pressionado.",
         "grubjaw": "Um troll do brejo tão ganancioso que os outros trolls não cavam ao seu lado, dizem que comeu as duas últimas mulas de carga de um mercador, arreios e tudo.",
         "shardlord_kazzix": "Um elemental de tempestade ganhando ombros, caminhando pelos despenhadeiros distantes acima de Stormcrag com um fragmento-coração que vale enfrentar os raios.",
         "mirejaw_frenzy": "Um murloc do pântano que se lança num frenesi furioso no meio da luta, a coisa mais barulhenta de um bando barulhento e territorial.",
@@ -1017,8 +1082,8 @@ export const pt_BR: EnTranslations = {
       "valePlaceNotes": "Eastbrook é sua primeira base de operações. A Corrida dos Lobos e o Prado dos Javalis são terreno de caça ameno; o Lago Espelho é água tranquila para pescar; a Mata das Teias e a Escavação de Cobre escondem aranhas e escavadores gananciosos por minério; um Acampamento de Bandidos e a Capela Decaída guardam trabalhos mais duros; a Clareira de Brightwood é um bosque calmo de vida selvagem no norte.",
       "marshPlaceNotes": "Fenbridge guarda a única estrada seca. Os Juncos do Espreitador e os Baixios de Deepfen fervilham de feras do pântano e murlocs; o Matagal da Viúva é tecido de teias; a Capela Afogada e os Montículos dos Trolls guardam perigos mais antigos; o Acampamento dos Chamadores de Sepulturas é o culto entrincheirado, e o Bastião Submerso é o coração instanciado do pântano.",
       "peaksPlaceNotes": "Highwatch defende a muralha. A Cumeeira do Espreitador e as Tocas de Deeprock pertencem a felinos da serra e kobolds; os Sopés dos Ogros e o Acampamento de Guerra de Drogmar a brutamontes de aluguel; Stormcrag crepita de elementais e o Glimmermere reluz abaixo dela; as Tendas do Culto do Verme e os Campos dos Revenantes cercam o terreno alto do culto, com o Santuário do Gravewyrm no seu topo.",
-      "gladeTitle": "Um canto tranquilo: a Clareira de Brightwood",
-      "gladeBody": "Nem toda história no Vale é sobre os mortos. No norte, um bosque ensolarado chamado Clareira de Brightwood mantém seu próprio ritmo mais brando, vigiado por uma patrulheira solitária que prefere zelar por ele a lutar. Seu trabalho é o equilíbrio: controlar o que se reproduz demais e, quando seu vazio fica perigoso demais para ser deixado em paz, dar ao velho cervo coroado do bosque um fim respeitoso. É um contraponto suave à trilha que você segue, e vale o desvio."
+      "gladeTitle": "Um canto tranquilo: Clareira de Brightwood",
+      "gladeBody": "Nem toda história no Vale fala dos mortos. Ao norte, uma clareira ensolarada chamada Brightwood mantém seu próprio ritmo mais gentil, com trilhas silenciosas, cervos pastando e feras cautelosas sob os galhos. É um contraponto suave à trilha que você segue, e vale ser vista quando a estrada lhe der espaço para vaguear."
     },
     "questsPage": {
       "heading": "Missões",
@@ -1066,9 +1131,7 @@ export const pt_BR: EnTranslations = {
       "aldricRole": "Sacerdote do Vale",
       "aldricBody": "Um humilde sacerdote de aldeia que primeiro dá nome ao culto sobre uma sepultura profanada em Eastbrook, e então segue sua trilha em pessoa pelo pântano e até a muralha em Highwatch. Ele é o coração firme de toda a campanha.",
       "marenRole": "A Batedora do Marechal",
-      "marenBody": "Uma rastreadora de fala baixa que você conhece nos juncos de Mirefen, toda pés silenciosos e uma lâmina curta. Ela também segue a trilha ao norte, e é o ouvido dela que capta as palavras que enviam você aos cumes.",
-      "elwynRole": "Guardiã da Clareira de Brightwood",
-      "elwynBody": "A única guardiã de um bosque ensolarado no norte do Vale. Seu trabalho é zelar, não massacrar: controlar o que se reproduz demais e conceder à fera mais antiga do bosque um fim mais bondoso do que os lobos dariam."
+      "marenBody": "Uma rastreadora de fala baixa que você conhece nos juncos de Mirefen, toda pés silenciosos e uma lâmina curta. Ela também segue a trilha ao norte, e é o ouvido dela que capta as palavras que enviam você aos cumes."
     },
     "dungeonsPage": {
       "heading": "Masmorras e Raides",
@@ -1691,6 +1754,263 @@ export const pt_BR: EnTranslations = {
     "friends": "Amigos e guilda",
     "chat": "Abrir chat"
   },
+  "sim": {
+    "delve": {
+      "cannotEnterNow": "Você não pode entrar em uma incursão agora.",
+      "leaveDungeonFirst": "Saia da masmorra primeiro.",
+      "leaveArenaFirst": "Saia da arena primeiro.",
+      "alreadyInDelve": "Você já está em uma incursão.",
+      "whileTrading": "Você não pode entrar em uma incursão enquanto negocia.",
+      "duringDuel": "Você não pode entrar em uma incursão durante um duelo.",
+      "duringArena": "Você não pode entrar em uma incursão durante uma partida de arena.",
+      "unknownTier": "Nível de incursão desconhecido.",
+      "levelRequired": "Você precisa ser nível {level} para entrar em {name}.",
+      "levelRequiredTier": "Você precisa ser nível {level} para entrar em {name} no {tier}.",
+      "instancesBusy": "Todas as instâncias de {name} estão ocupadas. Tente novamente em breve.",
+      "runFailed": "A incursão {name} falhou.",
+      "complete": "{name} concluída.",
+      "mechanismOpen": "Um mecanismo se destrava com um clique por perto. Uma passagem se abre ao norte: encontre o portal de saída adiante.",
+      "raiseDead": "{name} começa a Erguer os Mortos.",
+      "graveFalters": "O rito sepulcral vacila.",
+      "doorAlreadyOpen": "A porta já está aberta.",
+      "companionRankUp": "{name} alcança o grau {rank}.",
+      "bossChest": "O chefe tomba. Um baú de relicário encantado surge no estrado: arrombe a fechadura para reivindicar os seus espólios.",
+      "surfaceStairs": "Uma escadaria para a superfície se abre. Pressione F nas escadas para sair.",
+      "moduleEnter": "{name}: {objective}",
+      "objectiveClearRoom": "Limpe a sala.",
+      "objectiveDefeatBoss": "Derrote o chefe.",
+      "tombstoneHint": "Uma passagem de lápide se abre ao norte quando a sala é limpa.",
+      "tombstoneOpen": "Uma passagem de lápide selada range ao se abrir, ao norte. Caminhe até ela para prosseguir.",
+      "tombstoneInto": "Você atravessa a lápide e chega a {name}.",
+      "chestEmpty": "O baú está vazio.",
+      "notInDelve": "Você não está em uma incursão.",
+      "cannotInteract": "Você não pode interagir com isso.",
+      "tooFar": "Você está longe demais.",
+      "graveSilent": "O túmulo está silencioso por enquanto.",
+      "doorLocked": "A porta está trancada.",
+      "strikeWall": "Golpeie a parede para abrir caminho.",
+      "nothingHappens": "Nada acontece.",
+      "unknownCompanion": "Companheira desconhecida.",
+      "companionMaxRank": "Esta companheira já está totalmente aprimorada.",
+      "companionMarksRequired": "Você precisa de {marks} Selos de Incursão para melhorar {name}.",
+      "cannotAffordCompanionUpgrade": "Você não pode pagar por esta melhoria.",
+      "shopItemLocked": "Você ainda não desbloqueou esse item.",
+      "shopMarksRequired": "Você precisa de {marks} Selos de Incursão para comprar {name}.",
+      "shopSealPremiumOnly": "Este selo só cede à mão de um mestre: apenas a aposta Superior pode abri-lo.",
+      "passageSealed": "A passagem está selada.",
+      "moveCloserPassage": "Aproxime-se da passagem.",
+      "moveCloserChest": "Aproxime-se do baú.",
+      "nothingToTake": "Não resta nada para levar.",
+      "wayOutNotOpen": "A saída ainda não está aberta.",
+      "moveCloserStairs": "Aproxime-se das escadas."
+    },
+    "lockpick": {
+      "lockYields": "A fechadura cede! Espólios {tier}.",
+      "tierPremium": "Superiores",
+      "tierMedium": "Médios",
+      "tierLow": "Modestos",
+      "alreadyInProgress": "Alguém já está trabalhando na fechadura.",
+      "cannotPickThat": "Você não pode arrombar isso.",
+      "chooseAnte": "Escolha 1, 2 ou 3 gazuas.",
+      "noAttempt": "Nenhuma tentativa de arrombamento em andamento.",
+      "notYours": "Esta fechadura não é sua.",
+      "toolSlips": "Essa ferramenta escorrega desta fechadura.",
+      "lockJammed": "A fechadura está emperrada além de qualquer arrombamento: conclua a incursão novamente para outra tentativa.",
+      "lastPickSnaps": "A última gazua se parte. A fechadura emperra: o baú está perdido a menos que você conclua a incursão novamente."
+    }
+  },
+  "lockpickUi": {
+    "pickTitle": "Arrombe a Fechadura",
+    "cofferTitle": "Cofre Generoso",
+    "cache": "Reserva {tier}",
+    "pickBlurb": "Uma reserva mais rica fica selada por mais fechaduras. Fechaduras mais fáceis dão mais tentativas e mais tempo; uma tentativa falha reinicia a fechadura até as suas tentativas se esgotarem.",
+    "cofferBlurb": "Este selo só cede à mão de um mestre: apenas a aposta Superior pode abri-lo. Resolva as três fechaduras para o prêmio especial.",
+    "pagesAria": "{count} fechaduras",
+    "tries": "{count} tentativas",
+    "triesOne": "1 tentativa",
+    "perMove": "{seconds} s por movimento",
+    "seconds": "{seconds}s",
+    "boardTitle": "Caminho dos Pinos: reserva {tier}",
+    "closeAria": "Fechar",
+    "withdrawAria": "Recuar",
+    "timerAria": "Tempo restante",
+    "lockOf": "Fechadura {page}/{total}",
+    "lockOfAria": "Fechadura {page} de {total}",
+    "triesOf": "Tentativas {tries}/{total}",
+    "triesOfAria": "{tries} de {total} tentativas restantes",
+    "ward": "Guarda {col} / {total}",
+    "depthKeys": "As teclas de atalho definem a profundidade da gazua (Q/W/E/A/Z), não o número da guarda.",
+    "withdraw": "Recuar (Esc)",
+    "action": {
+      "hardSet": "Fixar Forte",
+      "set": "Fixar",
+      "steady": "Firmar",
+      "ease": "Aliviar",
+      "drop": "Soltar"
+    },
+    "feedback": {
+      "advanced": "O pino cede...",
+      "slip": "Uma guarda morde e a gazua escorrega!",
+      "bind": "O pino trava: profundidade errada!",
+      "trap": "Uma falsa guarda se fecha de golpe e a fechadura emperra!",
+      "retry": "A fechadura reinicia. Prepare uma nova tentativa.",
+      "pageCleared": "Uma fileira de pinos tomba. A próxima fechadura aparece.",
+      "success": "O ferrolho corre, a reserva é sua!",
+      "fail": "A fechadura emperra. Não vai ceder de novo."
+    },
+    "summary": {
+      "success": "Fechadura aberta, reserva {tier} reivindicada.",
+      "successGeneric": "Fechadura aberta, a reserva foi reivindicada.",
+      "fail": "A fechadura está arruinada. Conclua a incursão novamente para outra tentativa.",
+      "abandoned": "Você retira as gazuas com cuidado. A fechadura aguarda."
+    }
+  },
+  "delveUi": {
+    "board": {
+      "title": "Quadro de Incursões",
+      "enter": "Entrar na Incursão",
+      "enterAria": "Entrar em {delve} na dificuldade {tier}",
+      "openDelve": "Relicário Desmoronado",
+      "openDelveAria": "Abrir o Quadro de Incursões a partir de {name}",
+      "marks": "Selos de Incursão: {count}",
+      "minLevel": "Requer nível {level}",
+      "tier": {
+        "normal": "Normal",
+        "heroic": "Heroico"
+      },
+      "companion": {
+        "pick": "Escolha uma companheira",
+        "tessa": "Acólita Tessa",
+        "rank": "Grau {rank}",
+        "boon": "Cura o grupo entre os combates. O grau 3 reanima um aliado caído uma vez por incursão.",
+        "upgrade": "Melhorar para o grau {rank} ({marks} Selos)",
+        "upgradeAria": "Melhorar {name} para o grau {rank} por {marks} Selos de Incursão",
+        "maxRank": "Totalmente aprimorada"
+      },
+      "tabDelve": "Incursão",
+      "tabShop": "Loja"
+    },
+    "shop": {
+      "price": "{marks} Selos",
+      "buy": "Comprar",
+      "buyAria": "Comprar {item} por {marks} Selos de Incursão",
+      "reqHeroic": "Requer uma conclusão heroica",
+      "reqClears": "Requer {count} conclusões",
+      "empty": "Nada em estoque."
+    },
+    "tracker": {
+      "title": "Incursão",
+      "objective": "Objetivo",
+      "module": "Módulo {current} de {total}",
+      "affix": "Afixos",
+      "complete": "Concluído",
+      "marks": "Selos de Incursão: {count}",
+      "exitHintOpen": "Entre na passagem de lápide (ao norte)",
+      "exitHintLocked": "Elimine os lacaios para abrir a passagem ao norte"
+    },
+    "objective": {
+      "kill_boss": "Abata {boss}",
+      "recover_artifact": "Recupere o registro de sepultamentos",
+      "clear_room": "Limpe a sala"
+    },
+    "summary": {
+      "title": "Incursão Concluída",
+      "marks": "{count} Selos de Incursão ganhos",
+      "loreUnlock": "Lenda desbloqueada: {title}"
+    },
+    "death": {
+      "warning": "Mais uma morte encerrará esta incursão."
+    },
+    "run": {
+      "failed": "A incursão falhou. Você é devolvido ao Irmão Halven."
+    },
+    "npc": {
+      "halven": {
+        "greeting": "O relicário lá embaixo se moveu de novo. Ouvimos cânticos através do chão depois da meia-noite, e a Acólita Tessa jura que os registros de sepultamento estão mudando a própria tinta. Se tiver coragem suficiente, {playerName}, pegue uma vela e desça. Não confie em toda voz que ouvir lá embaixo. Algumas delas sabiam o seu nome antes mesmo de você nascer."
+      }
+    },
+    "intro": {
+      "normal": "A escadaria é fria e escura. Pedras-santas quebradas cobrem a descida, e uma suave nota de sino paira no ar úmido. A Acólita Tessa sussurra: \"O relicário não deveria estar aberto até aqui. Fique perto, {playerName}.\"",
+      "heroic": "As portas se fecham com um gemido às suas costas. Nomes raspam pela pedra como unhas. A vela de Tessa arde em azul. \"Eles não estão mais chamando os mortos, {playerName}. Estão respondendo a algo.\""
+    },
+    "module": {
+      "reliquary_sunken_ossuary": "A água escorre pelas prateleiras funerárias, carregando cinzas antigas em correntes prateadas e negras.",
+      "reliquary_bell_niche": "Dezenas de sinos de mão pendem em silêncio, cada um atado com pano fúnebre.",
+      "reliquary_saintless_hall": "Estátuas com os rostos cinzelados por um ódio meticuloso.",
+      "reliquary_finale": "O sino enterrado dobra uma vez sob as suas botas."
+    },
+    "moduleName": {
+      "reliquary_sunken_ossuary": "O Ossuário Afundado",
+      "reliquary_bell_niche": "O Nicho do Sino",
+      "reliquary_saintless_hall": "O Salão sem Santos",
+      "reliquary_finale": "A Câmara do Sino Enterrado"
+    },
+    "companion": {
+      "barkLine": "{name}: {line}",
+      "tessa": {
+        "combat_start": "Mantenha o equilíbrio, {playerName}. Os mortos estão inquietos aqui.",
+        "low_hp": "Respire. Ainda tenho preces guardadas para você.",
+        "trap_spotted": "Espere: algo no chão se lembra de passos.",
+        "boss_pull": "Aquele sino conhece o seu peso, {playerName}. Não se ajoelhe.",
+        "completion": "O registro pode descansar por mais uma noite. Bom trabalho.",
+        "rank": {
+          "1": "Noviça da Capela",
+          "2": "Portadora de Velas",
+          "3": "Acólita do Relicário",
+          "4": "Testemunha do Chamado Sepulcral",
+          "5": "Guardiã da Capela"
+        }
+      }
+    },
+    "boss": {
+      "varric": {
+        "bell": {
+          "emote": "O Diácono Varric agarra o sino enterrado com as duas mãos!",
+          "log": "O Diácono Varric começa a tocar o sino fúnebre.",
+          "warning": "Afaste-se do Diácono Varric!",
+          "impact": "O badalar do sino racha o chão da câmara!",
+          "lesson": "Badalada do Sino: um impacto no solo a cada doze segundos. Afaste-se antes que atinja."
+        },
+        "raise": {
+          "emote": "O Diácono Varric chama nomes dos túmulos quebrados!",
+          "log": "O Diácono Varric começa a Erguer os Mortos.",
+          "warning": "Detenha o rito sepulcral!",
+          "object": "O túmulo rachado estremece com um fôlego roubado.",
+          "interrupt_ok": "O rito sepulcral vacila.",
+          "interrupt_fail": "Os mortos atendem ao chamado do Diácono Varric!",
+          "lesson": "Interrompa o túmulo rachado em cinco segundos ou os mortos se erguerão ao chamado dele."
+        },
+        "pull": "Você pisa em pó sagrado com propósito impuro. Ajoelhe-se e seja contado.",
+        "intro": "Nenhuma alma se perde. Apenas se extravia.",
+        "mid60": "O Diácono Varric lê nomes do registro com um triunfo trêmulo.",
+        "mid30": "O sino fúnebre responde a cada nome que ele pronuncia.",
+        "defeat": "Não... eu tinha os nomes... eu tinha todos eles..."
+      }
+    },
+    "lore": {
+      "eastbrook_ledger": "Uma página manchada de água do registro de sepultamentos de Eastbrook. Nomes riscados e reescritos por uma mão que não é humana.",
+      "first_collapse": "Os arquivos da capela registram o primeiro afundamento: pedras-santas rachadas, prateleiras tombadas e uma nota de sino ouvida das profundezas.",
+      "gravecaller_mark": "Um sigilo arranhado na madeira do caixão: não o selo de Morthen, mas uma marca de chamador de túmulos mais antiga, anterior à Cripta Vazia.",
+      "bell_below": "Nota à margem de Tessa: \"Há um segundo sino sob o relicário. Ele dobra pelos extraviados, não pelos mortos.\"",
+      "tessa_note": "Pedaço dobrado na caligrafia de Tessa: \"Se os registros mudarem enquanto estivermos lá embaixo, confie na vela, não nas vozes.\""
+    },
+    "affix": {
+      "restless_graves": "Túmulos Inquietos",
+      "bad_air": "Ar Viciado",
+      "candleblind": "Cegueira de Vela",
+      "old_mechanisms": "Mecanismos Antigos",
+      "flooded_paths": "Caminhos Alagados",
+      "grave_tax": "Tributo Sepulcral",
+      "unstable_roof": "Teto Instável",
+      "cult_remnants": "Remanescentes do Culto"
+    },
+    "blessing": {
+      "chapel_candle": "Vela da Capela: incursão mais segura, um Selo a menos ao concluir."
+    },
+    "chest": {
+      "flavor": "Os mortos entregaram o que podiam dispensar."
+    }
+  },
   "fiesta": {
     "bracket": "Fiesta",
     "enterQueue": "Entre na Fiesta!",
@@ -1864,7 +2184,9 @@ export const pt_BR: EnTranslations = {
     "genre": "MMORPG",
     "playMode": "Multijogador",
     "applicationCategory": "Jogo",
-    "operatingSystem": "Navegador web"
+    "operatingSystem": "Navegador web",
+    "officialLabel": "Site oficial de World of ClaudeCraft",
+    "officialBody": "worldofclaudecraft.com é o MMO de navegador gratuito oficial do reino Claudemoon. Jogue online com um personagem persistente, explore solo offline, leia a wiki e siga os links verificados da comunidade a partir deste site."
   },
   "a11y": {
     "goHome": "Ir para a página inicial",
@@ -1933,11 +2255,11 @@ export const pt_BR: EnTranslations = {
     "high": "Alta",
     "medium": "Média",
     "low": "Baixa",
-    "popTipLow": "Low population: fewer than 15 players online right now. Plenty of room; great for a fresh start.",
-    "popTipMedium": "Medium population: 15 to 39 players online right now. A healthy, active realm.",
-    "popTipHigh": "High population: 40 to 79 players online right now. Busy, with lots of players around.",
-    "popTipFull": "Full population: 80 or more players online right now. Very busy; you may wait in a login queue.",
-    "popTipOffline": "Offline: this realm is unreachable right now and cannot be joined.",
+    "popTipLow": "População baixa: menos de 15 jogadores online agora. Há bastante espaço; ótimo para começar do zero.",
+    "popTipMedium": "População média: de 15 a 39 jogadores online agora. Um reino saudável e ativo.",
+    "popTipHigh": "População alta: de 40 a 79 jogadores online agora. Movimentado, com muitos jogadores por perto.",
+    "popTipFull": "População cheia: 80 ou mais jogadores online agora. Muito movimentado; talvez você espere em uma fila de login.",
+    "popTipOffline": "Offline: este reino está inacessível no momento e não pode ser acessado.",
     "characterCountOne": "{count} personagem",
     "characterCountOther": "{count} personagens",
     "selectedRealm": "Reino: {name}",
@@ -1961,7 +2283,14 @@ export const pt_BR: EnTranslations = {
     "portraitAlt": "Retrato de {name}",
     "viewProfile": "Ver perfil",
     "profile": "Perfil",
-    "closeProfile": "Fechar perfil"
+    "closeProfile": "Fechar perfil",
+    "sortBy": "Ordenar",
+    "sortByLabel": "Ordenar personagens",
+    "sortMenuLabel": "Opções de ordenação",
+    "sortLevel": "Nível",
+    "sortName": "Nome",
+    "sortRecent": "Jogados recentemente",
+    "sortPlaytime": "Tempo de jogo"
   },
   "deleteCharacter": {
     "title": "Excluir personagem",
@@ -2113,7 +2442,9 @@ export const pt_BR: EnTranslations = {
       "mobileMap": "Mapa",
       "closeMap": "Fechar mapa",
       "zoomIn": "Aproximar",
-      "zoomOut": "Afastar"
+      "zoomOut": "Afastar",
+      "mapCanvasLabel": "Mapa",
+      "mapSummary": "Mapa de {zone}."
     },
     "options": {
       "gameMenu": "Menu do jogo",
@@ -2272,6 +2603,7 @@ export const pt_BR: EnTranslations = {
         "report": "Denunciar jogador",
         "removeParty": "Remover do grupo",
         "convertToRaid": "Converter em raide",
+        "convertToParty": "Converter em grupo",
         "cancel": "Cancelar"
       }
     },
@@ -2438,6 +2770,8 @@ export const pt_BR: EnTranslations = {
       "lootReceiveMoney": "Você recebe {money}.",
       "lootMoney": "Você saqueia {money}.",
       "soldItem": "Você vendeu {item} por {money}.",
+      "soldJunkOne": "Você vendeu {count} item cinza por {money}.",
+      "soldJunkMany": "Você vendeu {count} itens cinza por {money}.",
       "friendOnline": "{name} ficou online.",
       "friendOffline": "{name} ficou offline."
     },
@@ -2841,7 +3175,10 @@ export const pt_BR: EnTranslations = {
       "sellQuantityTitle": "Vender {item}",
       "sellQuantityInput": "Quantidade para vender",
       "sellQuantityConfirm": "Vender",
-      "sellQuantityCancel": "Cancelar"
+      "sellQuantityCancel": "Cancelar",
+      "sellJunk": "Vender tralha",
+      "sellJunkAria": "Vender toda a tralha por {price}",
+      "sellJunkHint": "Vende todos os itens cinza nas suas bolsas, exceto itens de missão."
     },
     "market": {
       "title": "Mercado Mundial",
@@ -3853,8 +4190,8 @@ export const pt_BR: EnTranslations = {
       "ridge_stalker_pelt": {
         "name": "Pele de espreitador da crista"
       },
-      "pristine_ridge_stalker_pelt": {
-        "name": "Pele imaculada de espreitador da crista"
+      "old_cragmaws_pelt": {
+        "name": "Pele do Velho Cragmaw"
       },
       "glowing_wax": {
         "name": "Cera brilhante"
@@ -4075,9 +4412,6 @@ export const pt_BR: EnTranslations = {
       "milepost_boots": {
         "name": "Botas de Marco"
       },
-      "glade_pelt": {
-        "name": "Pele da clareira"
-      },
       "soft_down": {
         "name": "Tufo de penugem macia"
       },
@@ -4095,9 +4429,6 @@ export const pt_BR: EnTranslations = {
       },
       "monarch_crown_helm": {
         "name": "Coroa do Monarca"
-      },
-      "monarch_heart": {
-        "name": "O Coração do Monarca"
       },
       "bristleback_maul": {
         "name": "Malho Bristleback"
@@ -4435,6 +4766,33 @@ export const pt_BR: EnTranslations = {
       "wyrmshadow_talongrips": {
         "name": "Pegas Garra Sombra de Wyrm"
       },
+      "reliquary_plate_chest": {
+        "name": "Cota da Guarda do Relicário"
+      },
+      "reliquary_leather_chest": {
+        "name": "Gibão do Guardião da Poeira"
+      },
+      "reliquary_cloth_chest": {
+        "name": "Sudário do Relicário"
+      },
+      "reliquary_legs": {
+        "name": "Perneiras da Cripta"
+      },
+      "reliquary_helm": {
+        "name": "Elmo da Guarda do Ossário"
+      },
+      "reliquary_shoulder": {
+        "name": "Ombreiras esfareladas"
+      },
+      "reliquary_gloves_rog": {
+        "name": "Manoplas do Guardião dos Ossos"
+      },
+      "deacon_reliquary_helm": {
+        "name": "Elmo do Relicário do Diácono"
+      },
+      "varric_shadow_cowl": {
+        "name": "Capuz sombrio de Varric"
+      },
       "the_codfather": {
         "name": "O Bacalhau-Padrinho"
       },
@@ -4725,41 +5083,26 @@ export const pt_BR: EnTranslations = {
       "nythraxis_scourge_of_thornpeak": {
         "name": "Nythraxis, Flagelo de Thornpeak"
       },
-      "brightwood_hare": {
-        "name": "Lebre de Brightwood"
+      "reliquary_ledger_wraith": {
+        "name": "Espectro do Registro"
       },
-      "glade_fox": {
-        "name": "Raposa da Clareira"
+      "reliquary_funeral_ringer": {
+        "name": "Sineiro Fúnebre"
       },
-      "spotted_fawn": {
-        "name": "Cervato Malhado"
+      "reliquary_gravecall_acolyte": {
+        "name": "Acólito do Chamado Sepulcral"
       },
-      "meadow_crane": {
-        "name": "Garça do Prado"
+      "reliquary_bonewalker": {
+        "name": "Caminhante de Ossos Erguido"
       },
-      "thornpelt_badger": {
-        "name": "Texugo Pelo-de-espinho"
+      "reliquary_saintless_effigy": {
+        "name": "Efígie Sem Santo"
       },
-      "dawnmane_doe": {
-        "name": "Corça Crina-da-aurora"
+      "deacon_varric": {
+        "name": "Diácono Varric"
       },
-      "bramble_lynx": {
-        "name": "Lince das Sarças"
-      },
-      "brightwood_stag": {
-        "name": "Cervo de Brightwood"
-      },
-      "grovetusk_boar": {
-        "name": "Javali Presa-do-bosque"
-      },
-      "sunhide_bear": {
-        "name": "Urso Pelo-do-sol"
-      },
-      "brightwood_monarch": {
-        "name": "O Monarca de Brightwood"
-      },
-      "elder_bristleback": {
-        "name": "Bristleback ancião"
+      "acolyte_tessa": {
+        "name": "Acólita Tessa"
       },
       "ironvein_foreman": {
         "name": "Capataz Veio de Ferro"
@@ -4784,12 +5127,6 @@ export const pt_BR: EnTranslations = {
       },
       "nhalia_mourner": {
         "name": "Pranteadora de Nhalia"
-      },
-      "sableweb_hatchling": {
-        "name": "Filhote Sableweb"
-      },
-      "sableweb_matriarch": {
-        "name": "Matriarca Sableweb"
       },
       "sister_nhalia": {
         "name": "Irmã Nhalia"
@@ -4972,15 +5309,15 @@ export const pt_BR: EnTranslations = {
         "title": "Mestre do saber",
         "greeting": "Cuidado com a ardósia solta, {className}. A montanha anda inquieta, e quero saber por quê."
       },
-      "ranger_elwyn": {
-        "name": "Patrulheiro Elwyn",
-        "title": "Guardião da Clareira",
-        "greeting": "Silêncio, {className} - a clareira está calma hoje, e pretendo mantê-la assim."
-      },
       "brother_aldric_raid": {
         "name": "Irmão Aldric",
         "title": "Sacerdote do Vale",
         "greeting": "Do cemitério da capela ao teto do mundo... a trilha termina aqui. Sinto a montanha ouvindo."
+      },
+      "brother_halven": {
+        "name": "Irmão Halven",
+        "title": "Guardião do Relicário",
+        "greeting": "O relicário lá embaixo se moveu de novo."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -5731,145 +6068,6 @@ export const pt_BR: EnTranslations = {
           }
         }
       },
-      "q_brightwood_thinning": {
-        "title": "Reduzindo a Clareira",
-        "text": "A Clareira de Brightwood está infestada, {playerName}. Os linces das sarças se reproduzem mais rápido do que consigo abatê-los, e os rebanhos pisoteiam o pouco pasto que resta. Mate 8 Linces das Sarças e traga-me 6 Peles da clareira para que eu avalie a saúde do restante.",
-        "completion": "Bom. A alcateia foi reduzida e estas peles estão íntegras - a clareira aguentará mais uma estação.",
-        "objectives": {
-          "0": {
-            "label": "Lince das Sarças abatido"
-          },
-          "1": {
-            "label": "Pele da clareira"
-          }
-        }
-      },
-      "q_brightwood_monarch": {
-        "title": "O Monarca de Brightwood",
-        "text": "Há uma fera contra a qual não soltarei uma flecha sozinho: o Monarca de Brightwood, o grande cervo que reina sobre as profundezas da clareira. Ele envelheceu e se tornou selvagem, escornando todos que se aproximam de seu refúgio. É mais do que páreo para um só caçador - traga um amigo ou dois. Dê-lhe o descanso e traga-me seu coração, {playerName}.",
-        "completion": "Então o velho rei tombou. Coisa pesada, esta - mas um fim mais bondoso do que os lobos lhe dariam. Use esta coroa feita de suas galhadas com respeito, {playerName}.",
-        "objectives": {
-          "0": {
-            "label": "O Coração do Monarca"
-          }
-        }
-      },
-      "q_ledger_first_duty": {
-        "title": "O Primeiro Dever de um Guardião",
-        "text": "Quer merecer seu sustento em Eastbrook, {playerName}? Então comece onde cada guardião começa. Os texugos pelo-de-espinho cavaram suas tocas por toda a Clareira de Brightwood, lá no extremo norte, depois da Trilha dos lobos, e o chão do bosque está afundando nos buracos deles. Abata 8 Texugos Pelo-de-espinho e o livro-razão lembrará seu nome.",
-        "completion": "Oito tocas esvaziadas e o chão do bosque assentado. Bom. Cada nome neste livro-razão começou exatamente onde você está agora.",
-        "objectives": {
-          "0": {
-            "label": "Texugo Pelo-de-espinho abatido"
-          }
-        }
-      },
-      "q_ledger_teeth": {
-        "title": "Dentes na Escuridão",
-        "text": "As raposas do bosque ficaram ousadas como lobos - elas se esgueiram nos galinheiros ao anoitecer e somem antes que uma lanterna se acenda, e uma raposa faminta leva um cordeiro com a mesma facilidade que uma galinha. Reduza-as, {playerName}. Abata 10 Raposas do Bosque e que as demais voltem a temer a luz.",
-        "completion": "Dez raposas, e os galinheiros voltaram a ficar tranquilos ao anoitecer. O livro-razão fica mais brando com você.",
-        "objectives": {
-          "0": {
-            "label": "Raposa do Bosque abatida"
-          }
-        }
-      },
-      "q_ledger_reedwater": {
-        "title": "Patrulha das Águas dos Juncos",
-        "text": "Redbrook mandou você? Bom - estes ossos velhos não conseguem mais vadear os baixios. As garças do prado descobriram minhas redes e fisgam mais da minha pesca do que os Barbatana-de-lodo jamais fizeram. Reduza-as: 8 Garças do Prado, e cuidado com as águas fundas.",
-        "completion": "Isso manterá aquelas ladras pernaltas longe das minhas redes por uma estação. Diga ao Marechal que os baixios voltaram a ser meus.",
-        "objectives": {
-          "0": {
-            "label": "Garça do Prado expulsa"
-          }
-        }
-      },
-      "q_ledger_silk": {
-        "title": "Pasto e Espinheiro",
-        "text": "O livro-razão marca os bosques orientais como terra de guardião também - e meus canteiros de ervas medicinais fazem parte deles. Os cervos malhados devoraram minha folha-de-prata e meu sangue-de-cardo até a raiz, e sem esses simples metade de Eastbrook fica sem remédios. Não me alegra fazê-lo, mas abata 8 Cervos Malhados antes que as ervas do outono se percam por completo.",
-        "completion": "Os canteiros ainda podem se recuperar, graças a você. Uma misericórdia dura - mas uma criança ardendo em febre precisa mais dos simples do que o bosque precisa dos cervos. O livro-razão está acertado.",
-        "objectives": {
-          "0": {
-            "label": "Cervo Malhado abatido"
-          }
-        }
-      },
-      "q_ledger_brood": {
-        "title": "A Escuridão que Desova",
-        "text": "Matar os espreitadores só abriu espaço para a ninhada. Os filhotes Sableweb estão jorrando do ninho profundo, e cem pequenas presas matam um viajante tão certeiramente quanto uma grande. Esmague 8 Filhotes Sableweb antes que cresçam.",
-        "completion": "Trabalho sombrio, afogar um ninho. Mas a misericórdia agora são cem funerais poupados depois. O livro-razão está saldado.",
-        "objectives": {
-          "0": {
-            "label": "Filhote Sableweb esmagado"
-          }
-        }
-      },
-      "q_ledger_deepvermin": {
-        "title": "Vermes nas Profundezas",
-        "text": "O livro-razão do Marechal diz que você acaba com pragas. Pois bem, minha escavação tem as piores delas. Os ratos de túnel se reproduzem mais rápido do que minha turma consegue erguer uma picareta - derrube 12 Escavadores rato de túnel e talvez encontremos cobre antes do inverno.",
-        "completion": "Doze daqueles vermes cabeça-de-vela, mortos! Certo, rapazes - de volta ao poço. Você ganhou uma boa palavra junto ao Marechal, {playerName}.",
-        "objectives": {
-          "0": {
-            "label": "Escavador rato de túnel abatido"
-          }
-        }
-      },
-      "q_ledger_toll": {
-        "title": "A Estrada das Presas",
-        "text": "Os javalis presa-do-bosque desceram da Mata Clara para a estrada de comércio do sudeste - feras enormes e presadas que escornam os bois de carga e viram as carroças atrás do grão derramado. O livro-razão tem um preço pela cabeça de cada um. Reabra a estrada: abata 8 Javalis Presa-do-Bosque.",
-        "completion": "Oito feras a menos na estrada, e as carroças voltaram a rodar. Já corre a voz de que a estrada de comércio tem um novo guardião. O livro-razão sobe a seu favor.",
-        "objectives": {
-          "0": {
-            "label": "Javali Presa-do-Bosque abatido"
-          }
-        }
-      },
-      "q_ledger_vigil": {
-        "title": "Vigília na Capela",
-        "text": "O Marechal manda seus guardiões a mim quando o problema está além do alcance das espadas. Os mortos da capela não querem ficar quietos, e estou velho demais para velar a noite. Vele por mim, {playerName} - devolva 10 Ossos inquietos ao seu descanso.",
-        "completion": "Dez almas devolvidas à terra, e uma noite de paz comprada para a capela. A Luz se lembra de tais vigílias, mesmo quando o livro-razão esquece.",
-        "objectives": {
-          "0": {
-            "label": "Ossos inquietos postos em descanso"
-          }
-        }
-      },
-      "q_ledger_great_boar": {
-        "title": "O Grande Bristleback",
-        "text": "Há um velho javali-macho nos matagais ocidentais - o Bristleback ancião, couro feito casca e gênio à altura. Ele escornou dois dos meus coureiros. Derrube-o e elimine 6 dos Javalis selvagens menores que se abrigam atrás dele, e verei seu nome bem alto no livro-razão.",
-        "completion": "O Bristleback ancião, morto por suas mãos! Só aquele couro vale uma estação de comércio. Você orgulhou o livro-razão, {playerName}.",
-        "objectives": {
-          "0": {
-            "label": "Bristleback ancião abatido"
-          },
-          "1": {
-            "label": "Javali selvagem da vara abatido"
-          }
-        }
-      },
-      "q_ledger_outlaw_captain": {
-        "title": "O Capitão Foragido",
-        "text": "O último nome no livro-razão é o que há um ano desejo riscar: Capitão Verlan, que arrastou metade do Vale para o banditismo. Ele se esconde atrás de seus tenentes no acampamento a sudeste. Derrube 6 Bandidos do Vale para alcançá-lo e então acabe com o próprio Verlan. Não vá sozinho.",
-        "completion": "Capitão Verlan, morto, e seu casaco trazido à minha porta. O livro-razão está fechado, {playerName} - e o Vale contará aos guardiões vindouros o nome de quem o fechou.",
-        "objectives": {
-          "0": {
-            "label": "Bandido do Vale derrubado"
-          },
-          "1": {
-            "label": "Capitão Verlan abatido"
-          }
-        }
-      },
-      "q_mogger_tracks": {
-        "title": "A trilha de Mogger",
-        "text": "Antes de pegar a estrada ao norte, Eastbrook tem um último espinho: Mogger. A fera pisoteia o prado baixo e enlouquece os javalis. Limpe o prado ao redor da trilha para descobrirmos onde ele se esconde.",
-        "completion": "Essas pegadas são recentes e fundas o bastante para segurar chuva. Mogger não é história de acampamento, {playerName}, e está perto.",
-        "objectives": {
-          "0": {
-            "label": "Javali selvagem expulso da trilha"
-          }
-        }
-      },
       "q_mogger": {
         "title": "Mogger deve cair",
         "text": "Mogger partiu carroças, achatou cercas e matou gado suficiente para esvaziar metade do Vale. Não o enfrente só. Leve dois companheiros fortes ao prado leste e derrube a fera de vez.",
@@ -5975,6 +6173,9 @@ export const pt_BR: EnTranslations = {
           },
           "8": {
             "label": "Clareira de Brightwood"
+          },
+          "9": {
+            "label": "Clareira de Brightwood"
           }
         }
       },
@@ -6076,12 +6277,22 @@ export const pt_BR: EnTranslations = {
         "enterText": "Você atravessa o portão lunar — o ar se transforma em água fria e luz pálida, e o cântico se fecha sobre a sua cabeça.",
         "leaveText": "Você emerge através do portão lunar para a noite da montanha."
       }
+    },
+    "delves": {
+      "collapsed_reliquary": {
+        "name": "O Relicário Desmoronado",
+        "enterText": "Você desce até o relicário desmoronado.",
+        "leaveText": "Você sobe de volta até o Irmão Halven, na ruína do relicário."
+      }
     }
   },
   "worldContent": {
     "corpseName": "{name} (cadáver)",
     "dungeonExitName": "Saída de {name}",
     "dungeonPartyWarning": "{name} foi feito para um grupo completo de {count}. Avance com cuidado.",
-    "dungeonInstanceBusy": "Todas as instâncias de {name} estão ocupadas. Tente novamente em breve."
+    "dungeonInstanceBusy": "Todas as instâncias de {name} estão ocupadas. Tente novamente em breve.",
+    "delveLockedChestInteract": "Pressione F para arrombar a fechadura",
+    "delveRewardChestInteract": "Pressione F para reivindicar o saque",
+    "delveSurfaceExitInteract": "Pressione F para subir"
   }
 };
