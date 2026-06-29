@@ -454,10 +454,9 @@ export function updateMob(ctx: SimContext, mob: Entity): void {
         mob.swingTimer = Math.min(mob.swingTimer, 0.4);
         break;
       }
-      // Rally idle same-family allies the mob is now beside: a fleer threading
-      // through its camp drags its neighbours in as it passes them, not just the
-      // ones it stood next to when it first panicked. Draws no rng (parity-safe).
-      ctx.rallyFleeingAllies(mob, target);
+      // No per-tick rally here: the local same-family allies were called once at the
+      // panic spot (maybeFlee -> rallyFleeingAllies). A fleer must NOT chain in every
+      // mob it runs past, or one pull cascades across the whole camp.
       // Run directly away from the attacker. A root pins it in place (it just
       // cowers facing away); a stun is already handled by the early return above.
       const away = angleTo(target.pos, mob.pos);

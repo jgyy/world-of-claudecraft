@@ -1,9 +1,13 @@
-// Before/after top-down view of social aggro while fleeing. A cowardly mob panics at
-// low HP and runs directly away from the player down a lane lined with idle same-family
-// allies. BEFORE (one-shot call-for-help) only pulls the allies that happened to be
-// within the 8yd help radius at the panic SPOT; allies further down the lane are never
-// rallied. AFTER (per-tick rally in mob/social_aggro.ts) the fleer pulls each ally as it
-// RUNS PAST it. Same seed/world/geometry for both; the "after" panel reads the real sim.
+// Incorrect/correct top-down view of social aggro while fleeing. A cowardly mob panics
+// at low HP and runs directly away from the player down a lane lined with idle
+// same-family allies. INCORRECT (a per-tick rally as the fleer runs past) chains in
+// every ally down the lane, cascading one pull into a whole-camp wipe. CORRECT (a
+// one-shot, local rally at the panic SPOT, mob/social_aggro.ts) pulls only the allies
+// that were within the 5yd help radius when the mob broke; the rest of the pack stays
+// idle. Same seed/world/geometry for both; the "correct" panel reads the real sim.
+//
+// The shipped docs/screenshots/flee-social-aggro.png is a hand-drawn version of this
+// same comparison; this script is the runnable, source-of-truth derivation of it.
 
 import { FLEE_HELP_RADIUS } from '../src/sim/mob/social_aggro.ts';
 import { Sim } from '../src/sim/sim.ts';
@@ -57,48 +61,44 @@ function stage() {
   return { sim, fleer, allies };
 }
 
-// AFTER: drive the real sim through the whole flee and record where the fleer was when
-// each ally flipped out of idle, plus the fleer's path.
-function runAfter() {
+// CORRECT: drive the real sim through the whole flee. The local one-shot rally only
+// pulls allies inside the 5yd help radius at the panic spot; running past the rest
+// never chains them, so they stay idle.
+function runCorrect() {
   const { sim, fleer, allies } = stage();
   const panic = { ...fleer.pos };
   const path = [{ ...fleer.pos }];
-  const pulledAt = allies.map(() => null);
+  const pulled = allies.map(() => false);
   for (let i = 0; i < 20 * 8; i++) {
     sim.tick();
     path.push({ ...sim.entities.get(fleer.id).pos });
     allies.forEach((a, idx) => {
-      if (pulledAt[idx] === null && sim.entities.get(a.id).aiState !== 'idle') {
-        pulledAt[idx] = { ...sim.entities.get(fleer.id).pos };
-      }
+      if (sim.entities.get(a.id).aiState !== 'idle') pulled[idx] = true;
     });
-    if (pulledAt.every((p) => p !== null)) break;
   }
   return {
     panic,
     path,
     allies: allies.map((a, idx) => ({
       pos: { x: a.spawnPos.x, z: a.spawnPos.z },
-      pulled: pulledAt[idx] !== null,
+      pulled: pulled[idx],
     })),
   };
 }
 
-// BEFORE: the one-shot call-for-help only ever scanned the 8yd circle around the panic
-// spot, so an ally is pulled iff it started within FLEE_HELP_RADIUS of the panic spot.
-function deriveBefore(after) {
+// INCORRECT: the rejected per-tick rally dragged in every same-family ally the fleer
+// ran past, so the whole lane lights up. Synthesized (the behavior no longer exists in
+// the sim): every ally on the escape lane is pulled.
+function deriveIncorrect(correct) {
   return {
-    panic: after.panic,
-    path: after.path,
-    allies: after.allies.map((a) => ({
-      pos: a.pos,
-      pulled: dist2d(a.pos, after.panic) <= FLEE_HELP_RADIUS,
-    })),
+    panic: correct.panic,
+    path: correct.path,
+    allies: correct.allies.map((a) => ({ pos: a.pos, pulled: true })),
   };
 }
 
-const after = runAfter();
-const before = deriveBefore(after);
+const correct = runCorrect();
+const incorrect = deriveIncorrect(correct);
 
 // ---- render the two panels side by side ----
 const VX0 = -6,
@@ -119,7 +119,7 @@ function panel(ox, data, title, subtitle) {
   let s = `<rect x="${ox}" y="0" width="${PW}" height="${PH + 30}" fill="#11151c"/>`;
   s += `<text x="${ox + 16}" y="24" fill="#e8edf3" font-size="17" font-weight="bold">${title}</text>`;
   s += `<text x="${ox + 16}" y="44" fill="#9aa4b2" font-size="12">${subtitle}</text>`;
-  // 8yd help radius around the panic spot
+  // 5yd help radius around the panic spot
   s += `<circle cx="${sx(data.panic.x)}" cy="${sy(data.panic.z)}" r="${FLEE_HELP_RADIUS * S}" fill="none" stroke="#3a4452" stroke-width="1" stroke-dasharray="4 4"/>`;
   // flee path
   s += `<polyline fill="none" stroke="#5b6b80" stroke-width="2.5" stroke-linejoin="round" points="${data.path.map((q) => `${sx(q.x).toFixed(1)},${sy(q.z).toFixed(1)}`).join(' ')}"/>`;
@@ -137,13 +137,13 @@ function panel(ox, data, title, subtitle) {
   return s;
 }
 
-const nB = before.allies.filter((a) => a.pulled).length;
-const nA = after.allies.filter((a) => a.pulled).length;
+const nI = incorrect.allies.filter((a) => a.pulled).length;
+const nC = correct.allies.filter((a) => a.pulled).length;
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" font-family="sans-serif">
 <rect width="${W}" height="${H}" fill="#0c0f14"/>
-${panel(0, before, 'Before', `one-shot call-for-help: ${nB}/${ALLY_DX.length} allies pulled (only inside the 8yd panic ring)`)}
-${panel(PW + GAP, after, 'After', `per-tick rally: ${nA}/${ALLY_DX.length} allies pulled as the fleer runs past`)}
-<text x="16" y="${H - 9}" fill="#9aa4b2" font-size="12">green = rallied into the fight · grey = stayed idle · dashed = 8yd help radius · seed ${SEED}</text>
+${panel(0, incorrect, 'Incorrect', `per-tick rally: ${nI}/${ALLY_DX.length} allies chained as the fleer runs through the pack`)}
+${panel(PW + GAP, correct, 'Correct', `local one-shot rally: ${nC}/${ALLY_DX.length} allies pulled (only inside the 5yd panic ring)`)}
+<text x="16" y="${H - 9}" fill="#9aa4b2" font-size="12">green = rallied into the fight · grey = stayed idle · dashed = 5yd help radius · seed ${SEED}</text>
 </svg>`;
 
 import fs from 'node:fs';
@@ -151,4 +151,4 @@ import fs from 'node:fs';
 const out = process.argv[2] || 'docs/screenshots/flee-social-aggro.svg';
 fs.mkdirSync(out.replace(/\/[^/]+$/, ''), { recursive: true });
 fs.writeFileSync(out, svg);
-console.log(`wrote ${out}  (before ${nB}/${ALLY_DX.length}, after ${nA}/${ALLY_DX.length})`);
+console.log(`wrote ${out}  (incorrect ${nI}/${ALLY_DX.length}, correct ${nC}/${ALLY_DX.length})`);

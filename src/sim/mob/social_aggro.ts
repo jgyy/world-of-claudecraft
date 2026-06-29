@@ -1,25 +1,25 @@
-// Social aggro for fleeing mobs. A cowardly mob that panics at low HP and runs does
-// not just shout once at the spot it broke: as it sprints away it rallies idle
-// same-family allies it RUNS PAST into the fight. Camped wild mobs are clustered, so
-// a fleer threading through its camp drags its neighbours in, the same way an initial
-// pull seeds same-family social aggro in aggroMob.
+// Social aggro for fleeing mobs. A cowardly mob that panics at low HP calls only its
+// LOCAL same-family neighbours into the fight, once, at the moment it breaks: it does
+// NOT keep chaining allies across the camp as it sprints past them. Pulling every mob
+// the fleer runs beside cascaded a single pull into a whole-camp wipe; a tight, local,
+// one-shot rally keeps the panic to the immediate cluster (the same way an initial pull
+// seeds same-family social aggro in aggroMob), while the rest of the pack stays idle.
 //
 // Pure entity-state mutation: it sets aiState/aggroTargetId/leashAnchor and seeds the
-// hate table, and draws NO rng. That is what makes it safe to call every tick of the
-// flee state (and at the panic moment) without shifting the shared draw order, so the
+// hate table, and draws NO rng. That keeps the shared draw order unchanged, so the
 // parity goldens are unaffected.
 import { MOBS } from '../data';
 import type { SimContext } from '../sim_context';
 import { addThreat } from '../threat';
 import type { Entity } from '../types';
 
-// A fleeing mob rallies same-family allies within this radius as it passes them.
-export const FLEE_HELP_RADIUS = 8;
+// A fleeing mob rallies same-family allies within this (small, local) radius, once at
+// the panic spot. Kept tight so a fleer cannot chain in the whole camp.
+export const FLEE_HELP_RADIUS = 5;
 
 // Pull every idle, same-family ally currently within FLEE_HELP_RADIUS of the fleeing
-// mob onto its attacker. Idempotent: allies already engaged are skipped, so calling it
-// each tick of the flee just catches the ones the mob has newly run up beside. Returns
-// the number of allies newly pulled (handy for tests).
+// mob onto its attacker. Called once, at the panic moment. Returns the number of allies
+// newly pulled (handy for tests).
 export function rallyFleeingAllies(ctx: SimContext, mob: Entity, target: Entity): number {
   const family = MOBS[mob.templateId]?.family;
   if (!family) return 0;

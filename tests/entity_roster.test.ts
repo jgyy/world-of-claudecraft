@@ -208,7 +208,6 @@ function makeCtx() {
     updateProfiledMobCombat: vi.fn(),
     tryMobMeleeSwingInRange: vi.fn(() => false),
     maybeFlee: vi.fn(() => false),
-    rallyFleeingAllies: vi.fn(() => 0),
     aggroMob: vi.fn(),
     isStunned: vi.fn(() => false),
     isRooted: vi.fn(() => false),

@@ -2022,7 +2022,6 @@ export class Sim {
       updateProfiledMobCombat: sim.updateProfiledMobCombat.bind(sim),
       tryMobMeleeSwingInRange: sim.tryMobMeleeSwingInRange.bind(sim),
       maybeFlee: sim.maybeFlee.bind(sim),
-      rallyFleeingAllies: sim.rallyFleeingAllies.bind(sim),
       aggroMob: sim.aggroMob.bind(sim),
       // C3 moved the CC predicates to combat/cc.ts; ctx.isStunned/isRooted (consumed by
       // mob/locomotion.ts, M2) now point at those pure functions instead of Sim methods.
@@ -3630,15 +3629,10 @@ export class Sim {
       color: '#ffd966',
       entityId: mob.id,
     });
-    this.rallyFleeingAllies(mob, target);
+    // Call only the local same-family allies once, here at the panic spot. The fleer
+    // does NOT chain in mobs it runs past while sprinting (mob/social_aggro.ts).
+    rallyFleeingAllies(this.ctx, mob, target);
     return true;
-  }
-
-  // Thin delegate: mob/social_aggro.ts owns the per-pass rally. maybeFlee calls it at
-  // the panic moment; mob/locomotion.ts calls ctx.rallyFleeingAllies every tick of the
-  // flee so allies the mob runs PAST (not just those by the panic spot) get pulled in.
-  private rallyFleeingAllies(mob: Entity, target: Entity): number {
-    return rallyFleeingAllies(this.ctx, mob, target);
   }
 
   mobSwing(mob: Entity, target: Entity): void {

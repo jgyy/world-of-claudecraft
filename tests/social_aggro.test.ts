@@ -1,8 +1,9 @@
-// mob/social_aggro.ts: a fleeing mob rallies idle same-family allies it runs past.
-// Driven through a real Sim so the spatial grid, MOBS table, and threat seeding are
-// the live ones; the module is also exercised directly for its return count.
+// mob/social_aggro.ts: at the panic moment a fleeing mob rallies only its LOCAL idle
+// same-family allies (within FLEE_HELP_RADIUS), once. Driven through a real Sim so the
+// spatial grid, MOBS table, and threat seeding are the live ones; the module is also
+// exercised directly for its return count.
 import { describe, expect, it } from 'vitest';
-import { rallyFleeingAllies } from '../src/sim/mob/social_aggro';
+import { FLEE_HELP_RADIUS, rallyFleeingAllies } from '../src/sim/mob/social_aggro';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
@@ -48,7 +49,7 @@ describe('rallyFleeingAllies', () => {
     fleer.templateId = 'gravecaller_cultist';
     fleer.pos = { x: sim.player.pos.x + 3, z: sim.player.pos.z, y: sim.player.pos.y };
     const far = mobs[1];
-    placeAlly(far, fleer, 20); // outside 8yd
+    placeAlly(far, fleer, FLEE_HELP_RADIUS + 2); // just outside the local help radius
     const wrongFamily = mobs[2];
     placeAlly(wrongFamily, fleer, 2, 'mire_prowler'); // adjacent but beast family (no flee rally)
     const busy = mobs[3];
@@ -61,6 +62,29 @@ describe('rallyFleeingAllies', () => {
     expect(pulled).toBe(0);
     expect(far.aiState).toBe('idle');
     expect(wrongFamily.aiState).toBe('idle');
+  });
+
+  it('rallies a tight local cluster but leaves the rest of the pack idle (no chain)', () => {
+    const sim = makeSim();
+    const mobs = wildMobs(sim);
+    const fleer = mobs[0];
+    fleer.templateId = 'gravecaller_cultist';
+    fleer.pos = { x: sim.player.pos.x + 3, z: sim.player.pos.z, y: sim.player.pos.y };
+    const local = mobs[1];
+    placeAlly(local, fleer, FLEE_HELP_RADIUS - 1); // inside: joins
+    const downLane = mobs[2];
+    placeAlly(downLane, fleer, FLEE_HELP_RADIUS + 4); // beyond: stays idle, no chain
+
+    (sim as any).grid.refresh(sim.entities.values());
+    const pulled = rallyFleeingAllies((sim as any).ctx, fleer, sim.player);
+
+    expect(pulled).toBe(1);
+    expect(local.aiState).toBe('chase');
+    expect(downLane.aiState).toBe('idle');
+  });
+
+  it('uses a small, local help radius (5yd)', () => {
+    expect(FLEE_HELP_RADIUS).toBe(5);
   });
 
   it('is deterministic: same setup pulls the same allies', () => {
