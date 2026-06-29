@@ -69,5 +69,40 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.itemArmorType.cloth",
     "hudChrome.itemArmorType.leather",
     "hudChrome.itemArmorType.mail"
+  ],
+  "nl_NL": [
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail"
+  ],
+  "pl_PL": [
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail"
+  ],
+  "id_ID": [
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail"
+  ],
+  "tr_TR": [
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail"
+  ],
+  "sv_SE": [
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail"
+  ],
+  "vi_VN": [
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail"
+  ],
+  "da_DK": [
+    "hudChrome.itemArmorType.cloth",
+    "hudChrome.itemArmorType.leather",
+    "hudChrome.itemArmorType.mail"
   ]
 };
