@@ -4,8 +4,9 @@
 //
 // Prereq: `npm run dev` running on :5173.
 //   node scripts/mobile_social_longpress_shot.mjs
-import puppeteer from 'puppeteer-core';
+
 import { mkdirSync } from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';
 
 const URL = 'http://localhost:5173/';
