@@ -178,7 +178,10 @@ export function useItem(ctx: SimContext, itemId: string, pid?: number): ItemUseR
     p.potionCooldownUntil = ctx.time + POTION_COOLDOWN;
     p.potionCdRemaining = POTION_COOLDOWN; // materialized remaining for the action-bar swipe
     if (restoresHp) {
-      const heal = Math.min(Math.round(def.potionHp! * ctx.healingTakenMult(p)), p.maxHp - p.hp);
+      // A heal potion is incoming healing too: drain any heal-absorb shield first
+      // (same order as applyHeal) so it can't bypass Grave Blight.
+      const raw = ctx.consumeHealAbsorb(p, Math.round(def.potionHp! * ctx.healingTakenMult(p)));
+      const heal = Math.min(raw, p.maxHp - p.hp);
       p.hp += heal;
       ctx.emit({ type: 'heal', targetId: p.id, amount: heal });
     }
