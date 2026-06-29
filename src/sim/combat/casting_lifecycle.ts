@@ -31,6 +31,7 @@ import { ITEMS, MOBS } from '../data';
 import { scheduleProjectile } from '../projectile_travel';
 import type { PlayerMeta, ResolvedAbility } from '../sim';
 import type { SimContext } from '../sim_context';
+import { abilityScalingPower, channelTickBonus } from '../spell_scaling';
 import type { AbilityDef, Entity } from '../types';
 import {
   angleTo,
@@ -148,11 +149,17 @@ export function cancelCast(ctx: SimContext, p: Entity): void {
 }
 
 export function pushbackCast(p: Entity): void {
+  // Item-set caster bonus scales damage-driven pushback (1 = fully immune).
+  const factor = 1 - p.castPushbackReduction;
+  if (factor <= 0) return;
   if (p.channeling) {
-    p.castRemaining = Math.max(0, p.castRemaining - p.castTotal * CHANNEL_PUSHBACK_FRACTION);
+    p.castRemaining = Math.max(
+      0,
+      p.castRemaining - p.castTotal * CHANNEL_PUSHBACK_FRACTION * factor,
+    );
   } else {
-    p.castRemaining += CAST_PUSHBACK_SEC;
-    p.castTotal += CAST_PUSHBACK_SEC;
+    p.castRemaining += CAST_PUSHBACK_SEC * factor;
+    p.castTotal += CAST_PUSHBACK_SEC * factor;
   }
 }
 
@@ -454,14 +461,15 @@ function applyChannelTick(ctx: SimContext, p: Entity, res: ResolvedAbility): voi
   // Each channel bolt (e.g. Arcane Missiles) deals its damage on arrival, not on the
   // tick it is fired; a target that dies mid-flight fizzles it (the drain's guard).
   scheduleProjectile(ctx, p, target, (src, tgt) => {
+    const channelSp = channelTickBonus(abilityScalingPower(src, res.def), res.def);
     for (const eff of res.effects) {
       if (eff.type === 'directDamage') {
         const crit = ctx.rng.chance(ctx.spellCrit(src));
-        let dmg = ctx.rng.range(eff.min, eff.max);
+        let dmg = ctx.rng.range(eff.min, eff.max) + channelSp;
         if (crit) dmg *= 1.5;
         ctx.dealDamage(src, tgt, Math.round(dmg), crit, res.def.school, res.def.name, 'hit');
       } else if (eff.type === 'drainTick') {
-        const dmg = Math.round(ctx.rng.range(eff.min, eff.max));
+        const dmg = Math.round(ctx.rng.range(eff.min, eff.max) + channelSp);
         ctx.dealDamage(src, tgt, dmg, false, res.def.school, res.def.name, 'hit');
         if (!src.dead) {
           const healed = Math.min(Math.round(dmg * eff.healFrac), src.maxHp - src.hp);
