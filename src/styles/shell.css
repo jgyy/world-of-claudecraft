@@ -4669,7 +4669,7 @@
 
   /* Inspect-other-player profile window */
   #inspect-window {
-    width: 280px;
+    width: 420px;
   }
   .inspect-card {
     display: flex;
@@ -4747,6 +4747,14 @@
     width: auto;
     flex: 1 1 0;
     min-width: 0;
+  }
+  /* Read-only gear, so the item name WRAPS instead of ellipsizing: a viewer must be
+     able to read the whole name (the wider window gives it room). Overrides the
+     shared .equip-slot .slot-item nowrap/ellipsis used by the editable char sheet. */
+  .inspect-paperdoll .slot-item {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
   }
 
   @media (min-width: 900px) {
