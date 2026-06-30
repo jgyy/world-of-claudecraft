@@ -10,107 +10,51 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "es_ES": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "fr_FR": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "fr_CA": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "en_CA": [],
   "it_IT": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "de_DE": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "ru_RU": [],
   "nl_NL": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "pl_PL": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "id_ID": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "tr_TR": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "sv_SE": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "vi_VN": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "da_DK": [
-    "hud.combat.floatingResist",
-    "hud.combat.resisted",
-    "hudChrome.itemArmorType.cloth",
-    "hudChrome.itemArmorType.leather",
-    "hudChrome.itemArmorType.mail"
+    "hudChrome.options.showSecondaryActionBar"
   ]
 };

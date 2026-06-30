@@ -534,6 +534,10 @@
   body.mobile-touch #actionbar.many-spells {
     grid-template-columns: none;
   }
+  /* The second action bar is desktop-only; the mobile hotbar stays a single scroll row. */
+  body.mobile-touch #actionbar2 {
+    display: none;
+  }
   body.mobile-touch .action-btn {
     width: 42px;
     height: 42px;
@@ -877,13 +881,24 @@
     box-sizing: border-box;
     overflow-y: auto;
   }
-  body.mobile-touch #vendor-window,
-  body.mobile-touch #market-window {
+  body.mobile-touch #vendor-window {
     max-height: calc(58vh - 20px);
   }
+  /* The Market carries a tab strip plus the filter selects, which stack to a tall
+     single column on mobile; the vendor's 58vh cap would leave the flex:1 listing
+     body (#market-body) zero height, so it collapsed and could not be scrolled.
+     Give the window the full available height (like #trade-window) so the listing
+     body keeps a usable, touch-scrollable height under the header. */
   body.mobile-touch #market-window {
-    max-height: calc(58vh - 20px);
+    max-height: calc(100vh - 20px);
     overflow: hidden;
+  }
+  /* Floor the listing body so it keeps a usable, touch-scrollable height even when
+     the subtype filter adds a third stacked row on a short landscape screen. (On a
+     very short viewport the window's overflow:hidden can still clip below this floor,
+     but the body scrolls internally, so it never collapses to the old zero height.) */
+  body.mobile-touch #market-body {
+    min-height: 96px;
   }
   body.mobile-touch .mkt-filters,
   body.mobile-touch .mkt-filters.has-subtype {
@@ -911,6 +926,31 @@
     overflow-x: hidden;
     bottom: 10px;
     height: min(560px, calc(100vh - 20px));
+  }
+  /* Inspect (player profile) on mobile: a full-width, scrollable window with the
+     gear stacked into a single one-item-per-row list, so each item name reads in
+     full instead of being squeezed into two narrow columns. */
+  body.mobile-touch #inspect-window {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    width: auto;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    transform: none;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+  body.mobile-touch .inspect-paperdoll {
+    flex-direction: column;
+  }
+  body.mobile-touch .inspect-paperdoll .equip-col {
+    width: 100%;
+  }
+  /* Drop the right column's mirrored layout so every row reads left to right. */
+  body.mobile-touch .inspect-paperdoll .equip-col-right .equip-slot {
+    flex-direction: row;
+    text-align: left;
   }
   body.mobile-touch #trade-window {
     position: fixed;
@@ -1377,6 +1417,24 @@
     justify-content: center;
     min-height: calc(var(--app-vh) - 178px);
   }
+  body.native-app.mobile-touch[data-start-panel="realm-panel"] #homepage-views-container,
+  body.native-app.mobile-touch[data-start-panel="charselect-panel"] #homepage-views-container,
+  body.native-app.mobile-touch[data-start-panel="login-panel"] #homepage-views-container {
+    padding-top: max(8px, env(safe-area-inset-top));
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+  body.native-app.mobile-touch[data-start-panel="realm-panel"] #hero-view,
+  body.native-app.mobile-touch[data-start-panel="charselect-panel"] #hero-view,
+  body.native-app.mobile-touch[data-start-panel="login-panel"] #hero-view {
+    gap: 10px;
+    min-height: calc(var(--app-vh) - 108px);
+  }
+  body.native-app.mobile-touch[data-start-panel="realm-panel"] #title-logo,
+  body.native-app.mobile-touch[data-start-panel="charselect-panel"] #title-logo,
+  body.native-app.mobile-touch[data-start-panel="login-panel"] #title-logo {
+    width: min(220px, 30vw);
+    margin-bottom: 4px;
+  }
   body.mobile-touch .realm-row {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 8px;
@@ -1551,10 +1609,61 @@
   }
 
   @media (orientation: landscape) {
+    body.mobile-touch[data-start-panel="mode-select"] #homepage-views-container {
+      align-items: center;
+      padding-top: max(8px, env(safe-area-inset-top));
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+    }
+    body.mobile-touch[data-start-panel="charselect-panel"] #homepage-views-container,
+    body.mobile-touch[data-start-panel="charcreate-panel"] #homepage-views-container {
+      padding-top: max(8px, env(safe-area-inset-top));
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+    }
+    body.mobile-touch[data-start-panel="mode-select"] #hero-view {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      min-height: calc(var(--app-vh) - 96px);
+    }
+    body.mobile-touch[data-start-panel="charselect-panel"] #hero-view,
+    body.mobile-touch[data-start-panel="charcreate-panel"] #hero-view {
+      justify-content: flex-start;
+      min-height: calc(var(--app-vh) - 86px);
+    }
+    body.mobile-touch[data-start-panel="charselect-panel"] #title-logo,
+    body.mobile-touch[data-start-panel="charcreate-panel"] #title-logo {
+      display: none;
+    }
+    body.mobile-touch[data-start-panel="mode-select"] #title-logo {
+      width: min(176px, 24vw);
+      margin: 0;
+      flex: 0 0 auto;
+    }
+    body.mobile-touch[data-start-panel="mode-select"] #mode-select {
+      width: min(
+        620px,
+        calc(100vw - 232px - env(safe-area-inset-left) - env(safe-area-inset-right))
+      );
+      max-width: none;
+      padding: 14px;
+    }
+    body.mobile-touch[data-start-panel="mode-select"] #token-ca,
+    body.mobile-touch[data-start-panel="mode-select"] .play-tip,
+    body.mobile-touch[data-start-panel="mode-select"] .official-site-copy {
+      display: none;
+    }
+    body.mobile-touch[data-start-panel="charselect-panel"] .official-site-copy,
+    body.mobile-touch[data-start-panel="charcreate-panel"] .official-site-copy {
+      display: none;
+    }
     body.mobile-touch .play-console {
       width: 100%;
-      max-width: 460px;
-      gap: 12px;
+      max-width: none;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(140px, 0.46fr);
+      align-items: stretch;
+      gap: 10px;
     }
     /* In-game mobile play is landscape, where vertical space is scarce. The
        generic mobile rule stacks the trade columns and actions, pushing Accept
@@ -1576,8 +1685,24 @@
     body.mobile-touch .server-select-caption {
       margin-bottom: 5px;
     }
+    body.mobile-touch .server-select-trigger {
+      min-height: 56px;
+      height: 100%;
+      padding: 9px 12px;
+    }
+    body.mobile-touch .server-select-menu {
+      top: calc(100% + 6px);
+    }
+    body.mobile-touch .server-select-option {
+      padding: 9px 10px;
+    }
+    body.mobile-touch .server-opt-desc {
+      line-height: 1.25;
+    }
     body.mobile-touch .btn-play {
-      min-height: 54px;
+      width: 100%;
+      min-height: 56px;
+      padding: 10px 18px;
       font-size: 20px;
     }
     body.mobile-touch .mobile-joystick {

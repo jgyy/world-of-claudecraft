@@ -85,6 +85,11 @@ export interface AuraInput {
   tickInterval?: number;
   school?: AuraSchool;
   stacks?: number;
+  // Remaining charges on a charge-limited aura (e.g. Lightning Shield's 3 reflects). Present
+  // on the offline Sim aura and mirrored over the wire; undefined for ordinary auras. When
+  // present it drives the badge overlay INSTEAD of stacks (a charge count, not a stack count),
+  // and unlike stacks it shows even at 1 so the player sees the shield about to drop.
+  charges?: number;
 }
 
 /** The entity fields the core reads: just its aura list. */
@@ -138,6 +143,9 @@ export interface AuraSlotState {
   name: string;
   /** Raw seconds remaining, for the tooltip (read live by the pooled closure). */
   remaining: number;
+  /** Whether this aura is the player's own cancelable buff (mode 'buffs', not a debuff):
+   *  the buff bar offers right-click-cancel, a target's debuff strip is read-only. */
+  cancelable: boolean;
   /** The one-line effect-summary HTML for the tooltip (or '' when none), read live by the
    *  pooled closure. */
   effectHtml: string;
@@ -183,6 +191,7 @@ function makeSlotState(): AuraSlotState {
     stacksText: '',
     name: '',
     remaining: 0,
+    cancelable: false,
     effectHtml: '',
   };
 }
@@ -216,9 +225,20 @@ export function createAurasView(mode: AuraMode, deps: AurasDeps): AurasView {
         slot.isDebuff = debuff;
         slot.durationText =
           a.remaining < DURATION_HIDE_THRESHOLD ? `${Math.ceil(a.remaining)}${durSuffix}` : '';
-        slot.stacksText = a.stacks && a.stacks > 1 ? deps.formatStacks(a.stacks) : '';
+        // A charge-limited aura badges its remaining charges (shown even at 1); otherwise the
+        // badge shows a stack count, and only when it stacks past 1.
+        slot.stacksText =
+          a.charges !== undefined
+            ? deps.formatStacks(a.charges)
+            : a.stacks && a.stacks > 1
+              ? deps.formatStacks(a.stacks)
+              : '';
         slot.name = deps.auraName(a);
         slot.remaining = a.remaining;
+        // The buff bar (mode 'buffs', the player's own auras) offers right-click-cancel;
+        // a helpful buff is cancelable, a debuff never. The target debuff strip
+        // (mode 'debuffs') is read-only, so nothing there is cancelable.
+        slot.cancelable = mode === 'buffs' && !debuff;
         slot.effectHtml = deps.auraEffectHtml(a);
         count++;
       }

@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
@@ -71,6 +71,10 @@ const supportHtml = readFileSync(
   new URL('../public/support.html', import.meta.url),
   'utf8',
 ).replace(/\r\n/g, '\n');
+const whitepaperUrl = new URL(
+  '../public/World-of-ClaudeCraft-Whitepaper-v1.0.pdf',
+  import.meta.url,
+);
 const viteConfig = readFileSync(new URL('../vite.config.ts', import.meta.url), 'utf8').replace(
   /\r\n/g,
   '\n',
@@ -118,6 +122,10 @@ const spellbookWindowTs = readFileSync(
 ).replace(/\r\n/g, '\n');
 const mobileControlsTs = readFileSync(
   new URL('../src/game/mobile_controls.ts', import.meta.url),
+  'utf8',
+).replace(/\r\n/g, '\n');
+const characterPreviewTs = readFileSync(
+  new URL('../src/render/characters/preview.ts', import.meta.url),
   'utf8',
 ).replace(/\r\n/g, '\n');
 // Per-frame keyed-pool painters. The per-member party rows,
@@ -465,6 +473,29 @@ describe('client HTML shell', () => {
     expect(mainTs).toContain('} else {\n    enterLoggedOutChrome();\n  }');
   });
 
+  it('keeps the Discord unlink panel clickable over the pre-game shell', () => {
+    const startZ = Number(shellCss.match(/#start-screen \{[\s\S]*?z-index: (\d+);/)?.[1]);
+    const modalZ = Number(shellCss.match(/\.modal-backdrop \{[\s\S]*?z-index: (\d+);/)?.[1]);
+    const discordZ = Number(indexExtraCss.match(/#discord-window \{[\s\S]*?z-index: (\d+);/)?.[1]);
+    expect(discordZ).toBeGreaterThan(startZ);
+    expect(discordZ).toBeLessThan(modalZ);
+  });
+
+  it('keeps the Discord unlink modal at top level so it shows in-game', () => {
+    // #start-screen is display:none once the game starts (main.ts hides it) and is a
+    // lower z-index:100 stacking context, so a keep-modal nested inside it would be
+    // invisible in-game and trapped below the top-level #discord-window. It must be a
+    // top-level sibling declared above #start-screen, exactly like #discord-window.
+    const modalAt = html.indexOf('id="discord-keep-modal"');
+    const windowAt = html.indexOf('id="discord-window"');
+    const startAt = html.indexOf('id="start-screen"');
+    expect(modalAt).toBeGreaterThan(-1);
+    expect(windowAt).toBeGreaterThan(-1);
+    // Declared before #start-screen opens, hence a top-level sibling, never a descendant.
+    expect(modalAt).toBeLessThan(startAt);
+    expect(windowAt).toBeLessThan(startAt);
+  });
+
   it('shows a logged-in Logout nav item next to Account', () => {
     expect(html).toContain('id="nav-btn-account"');
     expect(html).toContain('id="nav-btn-logout"');
@@ -554,6 +585,14 @@ describe('client HTML shell', () => {
     expect(supportHtml).toContain('href="https://discord.gg/GjhnUsBtw"');
     expect(supportHtml).toContain('href="/data-deletion">Data Deletion page</a>');
     expect(supportHtml).toContain('"@type": "ContactPage"');
+    expect(html).toContain(
+      'href="/World-of-ClaudeCraft-Whitepaper-v1.0.pdf" class="footer-link" data-i18n="footer.whitepaper"',
+    );
+    expect(html.indexOf('data-i18n="footer.whitepaper"')).toBeLessThan(
+      html.indexOf('data-i18n="footer.terms"'),
+    );
+    expect(existsSync(whitepaperUrl)).toBe(true);
+    expect(statSync(whitepaperUrl).size).toBeGreaterThan(0);
     expect(html).toContain('href="/terms" class="footer-link" data-i18n="footer.terms"');
     expect(html).toContain('href="/privacy" class="footer-link" data-i18n="footer.privacy"');
     expect(viteConfig).toContain("['/privacy', '/privacy.html']");
@@ -610,6 +649,20 @@ describe('client HTML shell', () => {
     expect(indexExtraCss).toContain(
       '@media (orientation: portrait) {\n    body.native-app.mobile-touch.game-active #rotate-device {\n      display: flex;',
     );
+  });
+
+  it('releases the start-screen character preview before entering the world', () => {
+    expect(mainTs).toContain('function releaseStartScreenPreview(): void {');
+    expect(mainTs).toContain('characterPreview.destroy();\n  characterPreview = null;');
+    expect(mainTs).toContain(
+      "$('#start-screen').style.display = 'none';\n  releaseStartScreenPreview();",
+    );
+    expect(characterPreviewTs).toContain('destroy(): void {\n    if (this.destroyed) return;');
+    expect(characterPreviewTs).toContain(
+      'this.unregisterContext?.();\n    this.unregisterContext = null;',
+    );
+    expect(characterPreviewTs).toContain('this.renderer.forceContextLoss();');
+    expect(characterPreviewTs).toContain('this.renderer.dispose();');
   });
 
   it('offers the quest log in the mobile controls drawer', () => {
@@ -893,6 +946,50 @@ describe('client HTML shell', () => {
       'body.native-app.mobile-touch[data-start-panel="login-panel"] .portal-ring,',
     );
     expect(shellCss).toContain(
+      'body.native-app.mobile-touch[data-start-panel="login-panel"] #login-panel {\n    display: grid;\n    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);',
+    );
+    expect(shellCss).toContain(
+      '@media (orientation: landscape) {\n    body.mobile-touch[data-start-panel="charselect-panel"] #homepage-views-container,',
+    );
+    expect(hudMobileCss).toContain(
+      'body.mobile-touch[data-start-panel="charselect-panel"] #hero-view,\n    body.mobile-touch[data-start-panel="charcreate-panel"] #hero-view {\n      justify-content: flex-start;\n      min-height: calc(var(--app-vh) - 86px);',
+    );
+    expect(hudMobileCss).toContain(
+      'body.mobile-touch[data-start-panel="mode-select"] #title-logo {\n      width: min(176px, 24vw);\n      margin: 0;',
+    );
+    expect(hudMobileCss).toContain(
+      'body.mobile-touch[data-start-panel="charselect-panel"] #title-logo,\n    body.mobile-touch[data-start-panel="charcreate-panel"] #title-logo {\n      display: none;',
+    );
+    expect(shellCss).toContain('height: min(560px, calc(var(--app-vh) - 96px));');
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel .cs-detail-col {\n      display: grid;\n      grid-template-columns: minmax(120px, 0.54fr) minmax(0, 1.46fr);',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #char-list {\n      overflow-y: auto;\n      scrollbar-gutter: stable;\n      scrollbar-width: auto;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #char-list::-webkit-scrollbar {\n      width: 8px;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #charselect-class-details {\n      box-sizing: border-box;\n      min-height: 0;\n      overflow-y: auto;',
+    );
+    expect(shellCss).toContain('scrollbar-gutter: stable;\n      scrollbar-width: auto;');
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #charselect-class-details .class-details-grid {\n      display: flex;\n      flex-direction: column;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #charselect-class-details .details-spells-list {\n      display: grid;\n      grid-template-columns: minmax(0, 1fr);',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel .cs-list-col,\n    body.mobile-touch #charselect-panel .cs-detail-col,\n    body.mobile-touch #charcreate-panel .cs-create-col,\n    body.mobile-touch #charcreate-panel .cs-detail-col {\n      min-height: 0;\n      height: 100%;\n      overflow: hidden;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel .cs-list-actions {\n      position: absolute;\n      top: 28px;\n      right: 0;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel .cs-list-actions .btn {\n      flex: 0 0 auto;\n      min-width: 122px;\n      min-height: 38px;',
+    );
+    expect(shellCss).toContain(
       'touch-action: manipulation;\n    -webkit-tap-highlight-color: transparent;',
     );
     expect(mainTs).toContain(
@@ -1053,10 +1150,13 @@ describe('client HTML shell', () => {
     );
     // Landscape compacts the single play console instead of splitting two cards.
     expect(hudMobileCss).toContain(
-      '@media (orientation: landscape) {\n    body.mobile-touch .play-console {',
+      '@media (orientation: landscape) {\n    body.mobile-touch[data-start-panel="mode-select"] #homepage-views-container {',
     );
     expect(hudMobileCss).toContain(
-      '@media (orientation: landscape) {\n    body.mobile-touch .play-console {\n      width: 100%;\n      max-width: 460px;',
+      'body.mobile-touch[data-start-panel="mode-select"] #mode-select {\n      width: min(\n        620px,',
+    );
+    expect(hudMobileCss).toContain(
+      'body.mobile-touch .play-console {\n      width: 100%;\n      max-width: none;\n      display: grid;\n      grid-template-columns: minmax(0, 1fr) minmax(140px, 0.46fr);',
     );
   });
 
@@ -1110,7 +1210,7 @@ describe('client HTML shell', () => {
 
   it('keeps the World Market to one scroll container with browse filters below the tabs', () => {
     expect(componentsCss).toContain(
-      '#market-window {\n    width: 470px;\n    height: min(640px, calc(85vh - 24px));\n    display: none;\n    flex-direction: column;\n    overflow: hidden;',
+      '#market-window {\n    width: 560px;\n    height: min(640px, calc(85vh - 24px));\n    display: none;\n    flex-direction: column;\n    overflow: hidden;',
     );
     expect(componentsCss).toContain(
       '#market-body {\n    overflow-y: auto;\n    flex: 1;\n    min-height: 0;',
@@ -1118,9 +1218,14 @@ describe('client HTML shell', () => {
     expect(componentsCss).toContain(
       '.mkt-page {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;',
     );
+    // On mobile the Market takes the full available height (not the vendor's 58vh
+    // cap) so its tall stacked-filter header cannot squeeze the listing body flat,
+    // and #market-body keeps a min-height floor; the window itself stays
+    // overflow:hidden so #market-body remains the single scroll container.
     expect(hudMobileCss).toContain(
-      'body.mobile-touch #market-window {\n    max-height: calc(58vh - 20px);\n    overflow: hidden;',
+      'body.mobile-touch #market-window {\n    max-height: calc(100vh - 20px);\n    overflow: hidden;',
     );
+    expect(hudMobileCss).toContain('body.mobile-touch #market-body {\n    min-height: 96px;');
     expect(marketWindowTs).toContain('buildMarketView'); // pagination + filtering delegated to the core
     expect(marketWindowTs).toContain('this.browsePage');
     expect(marketWindowTs).toContain('data-market-page="prev"');

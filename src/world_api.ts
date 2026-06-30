@@ -66,7 +66,7 @@ import type { IWorldTelemetry } from './world_api/telemetry';
 import type { IWorldTrade } from './world_api/trade';
 
 // --- pass-through sim re-exports: downstream imports these FROM world_api ---
-export type { LeaderboardPage } from './sim/leaderboard_page';
+export type { GuildLeaderboardPage, LeaderboardPage } from './sim/leaderboard_page';
 export type { ArenaCombatant, ArenaFormat, ArenaStanding, OverheadEmoteId } from './sim/types';
 
 // --- facet aux-type + value re-exports (each travels with its facet file) ---
@@ -91,7 +91,7 @@ export type {
 export type { RaidLockout } from './world_api/dungeons';
 export type { MarketInfo, MarketListingView } from './world_api/market';
 export type { PartyInfo, PartyMemberInfo } from './world_api/party';
-export type { LeaderboardEntry } from './world_api/progression_xp';
+export type { GuildLeaderboardEntry, LeaderboardEntry } from './world_api/progression_xp';
 export type {
   CharacterSearchResult,
   FriendInfo,
@@ -149,6 +149,7 @@ export interface IWorld
 export const COMMAND_NAMES = [
   'castSlot',
   'cast',
+  'cancel_aura',
   'target',
   'tab',
   'targetNearest',
@@ -187,6 +188,8 @@ export const COMMAND_NAMES = [
   'praid',
   'punraid',
   'pmoveRaid',
+  'setLootMaster',
+  'masterAssign',
   'setMarker',
   'clearMarker',
   'pet_abandon',
@@ -318,6 +321,7 @@ export const COMMAND_FACETS = {
   // IWorldCombat: ability casts, auto-attack, spirit release.
   cast: 'IWorldCombat',
   castSlot: 'IWorldCombat',
+  cancel_aura: 'IWorldCombat',
   attack: 'IWorldCombat',
   stopattack: 'IWorldCombat',
   release: 'IWorldCombat',
@@ -367,6 +371,8 @@ export const COMMAND_FACETS = {
   praid: 'IWorldParty',
   punraid: 'IWorldParty',
   pmoveRaid: 'IWorldParty',
+  setLootMaster: 'IWorldParty',
+  masterAssign: 'IWorldParty',
   setMarker: 'IWorldParty',
   clearMarker: 'IWorldParty',
   // IWorldTrade: peer-to-peer trade-window commands (tradeInfo is a snapshot read,
