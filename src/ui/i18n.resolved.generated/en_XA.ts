@@ -334,7 +334,8 @@ export const en_XA: EnTranslations = {
       "highContrastBackground": "[Ĥíĝĥ-Çóñţŕášţ Ɓáçķĝŕóúñð]",
       "showItemLevel": "[Šĥóŵ Íţéɱ Ļéʋéļ]",
       "itemLevelLine": "[Íţéɱ Ļéʋéļ {level}]",
-      "itemScoreLine": "[Šçóŕé {score}]"
+      "itemScoreLine": "[Šçóŕé {score}]",
+      "showSecondaryActionBar": "[Šĥóŵ Šéçóñðáŕý Áçţíóñ Ɓáŕ]"
     },
     "controller": {
       "title": "[Çóñţŕóļļéŕ]",

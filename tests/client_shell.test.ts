@@ -946,6 +946,50 @@ describe('client HTML shell', () => {
       'body.native-app.mobile-touch[data-start-panel="login-panel"] .portal-ring,',
     );
     expect(shellCss).toContain(
+      'body.native-app.mobile-touch[data-start-panel="login-panel"] #login-panel {\n    display: grid;\n    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);',
+    );
+    expect(shellCss).toContain(
+      '@media (orientation: landscape) {\n    body.mobile-touch[data-start-panel="charselect-panel"] #homepage-views-container,',
+    );
+    expect(hudMobileCss).toContain(
+      'body.mobile-touch[data-start-panel="charselect-panel"] #hero-view,\n    body.mobile-touch[data-start-panel="charcreate-panel"] #hero-view {\n      justify-content: flex-start;\n      min-height: calc(var(--app-vh) - 86px);',
+    );
+    expect(hudMobileCss).toContain(
+      'body.mobile-touch[data-start-panel="mode-select"] #title-logo {\n      width: min(176px, 24vw);\n      margin: 0;',
+    );
+    expect(hudMobileCss).toContain(
+      'body.mobile-touch[data-start-panel="charselect-panel"] #title-logo,\n    body.mobile-touch[data-start-panel="charcreate-panel"] #title-logo {\n      display: none;',
+    );
+    expect(shellCss).toContain('height: min(560px, calc(var(--app-vh) - 96px));');
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel .cs-detail-col {\n      display: grid;\n      grid-template-columns: minmax(120px, 0.54fr) minmax(0, 1.46fr);',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #char-list {\n      overflow-y: auto;\n      scrollbar-gutter: stable;\n      scrollbar-width: auto;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #char-list::-webkit-scrollbar {\n      width: 8px;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #charselect-class-details {\n      box-sizing: border-box;\n      min-height: 0;\n      overflow-y: auto;',
+    );
+    expect(shellCss).toContain('scrollbar-gutter: stable;\n      scrollbar-width: auto;');
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #charselect-class-details .class-details-grid {\n      display: flex;\n      flex-direction: column;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel #charselect-class-details .details-spells-list {\n      display: grid;\n      grid-template-columns: minmax(0, 1fr);',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel .cs-list-col,\n    body.mobile-touch #charselect-panel .cs-detail-col,\n    body.mobile-touch #charcreate-panel .cs-create-col,\n    body.mobile-touch #charcreate-panel .cs-detail-col {\n      min-height: 0;\n      height: 100%;\n      overflow: hidden;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel .cs-list-actions {\n      position: absolute;\n      top: 28px;\n      right: 0;',
+    );
+    expect(shellCss).toContain(
+      'body.mobile-touch #charselect-panel .cs-list-actions .btn {\n      flex: 0 0 auto;\n      min-width: 122px;\n      min-height: 38px;',
+    );
+    expect(shellCss).toContain(
       'touch-action: manipulation;\n    -webkit-tap-highlight-color: transparent;',
     );
     expect(mainTs).toContain(
@@ -1106,10 +1150,13 @@ describe('client HTML shell', () => {
     );
     // Landscape compacts the single play console instead of splitting two cards.
     expect(hudMobileCss).toContain(
-      '@media (orientation: landscape) {\n    body.mobile-touch .play-console {',
+      '@media (orientation: landscape) {\n    body.mobile-touch[data-start-panel="mode-select"] #homepage-views-container {',
     );
     expect(hudMobileCss).toContain(
-      '@media (orientation: landscape) {\n    body.mobile-touch .play-console {\n      width: 100%;\n      max-width: 460px;',
+      'body.mobile-touch[data-start-panel="mode-select"] #mode-select {\n      width: min(\n        620px,',
+    );
+    expect(hudMobileCss).toContain(
+      'body.mobile-touch .play-console {\n      width: 100%;\n      max-width: none;\n      display: grid;\n      grid-template-columns: minmax(0, 1fr) minmax(140px, 0.46fr);',
     );
   });
 

@@ -10,51 +10,65 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "es_ES": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "fr_FR": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "fr_CA": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "en_CA": [],
   "it_IT": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "de_DE": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "ru_RU": [],
   "nl_NL": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "pl_PL": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "id_ID": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "tr_TR": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "sv_SE": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "vi_VN": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ],
   "da_DK": [
-    "hudChrome.itemTooltip.requiresLevel"
+    "hudChrome.itemTooltip.requiresLevel",
+    "hudChrome.options.showSecondaryActionBar"
   ]
 };

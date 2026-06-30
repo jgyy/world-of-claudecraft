@@ -334,7 +334,8 @@ export const sv_SE: EnTranslations = {
       "highContrastBackground": "Bakgrund med hög kontrast",
       "showItemLevel": "Visa föremålsnivå",
       "itemLevelLine": "Föremålsnivå {level}",
-      "itemScoreLine": "Poäng {score}"
+      "itemScoreLine": "Poäng {score}",
+      "showSecondaryActionBar": "Show Secondary Action Bar"
     },
     "controller": {
       "title": "Handkontroll",
