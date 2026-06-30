@@ -151,6 +151,9 @@ export const ru_RU: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "Наблюдение за {name}"
+    },
     "emotes": {
       "wave": "Помахать",
       "laugh": "Смех",
@@ -221,6 +224,9 @@ export const ru_RU: EnTranslations = {
     },
     "rest": {
       "resting": "Отдых"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "Ваш персонаж",
@@ -317,7 +323,10 @@ export const ru_RU: EnTranslations = {
       "showWalletOnCharacterScreen": "Показывать кошелек на экране персонажей",
       "showWalletOnPlayerCard": "Показывать кошелек на карточке игрока",
       "uiScale": "Масштаб интерфейса",
-      "highContrastBackground": "Фон высокой контрастности"
+      "highContrastBackground": "Фон высокой контрастности",
+      "showItemLevel": "Показывать уровень предмета",
+      "itemLevelLine": "Уровень предмета {level}",
+      "itemScoreLine": "Оценка {score}"
     },
     "controller": {
       "title": "Геймпад",
@@ -447,6 +456,10 @@ export const ru_RU: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Совет: введите /join world или /join lfg, чтобы общаться с игроками по всему миру."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Этим заданием нельзя поделиться.",
@@ -584,6 +597,26 @@ export const ru_RU: EnTranslations = {
       "exportDone": "Ваши данные были скачаны. Мы отправили вам подтверждение по email.",
       "exportFailed": "Не удалось экспортировать ваши данные. Попробуйте снова через мгновение."
     },
+    "masterLoot": {
+      "title": "Распределение добычи",
+      "enableLabel": "Мастер добычи",
+      "enableAria": "Включить мастера добычи",
+      "looterLabel": "Мастер добычи",
+      "leaderOption": "Лидер группы",
+      "thresholdLabel": "Порог качества",
+      "thresholdUncommon": "Необычное и выше",
+      "thresholdRare": "Редкое и выше",
+      "thresholdEpic": "Эпическое и выше",
+      "assignPrompt": "Назначить {item}",
+      "assignAria": "Назначить {item} игроку {name}",
+      "rollButton": "Бросок",
+      "selectAll": "Выбрать всех",
+      "methodMaster": "Способ добычи изменён на мастера добычи. Мастер добычи: {name}.",
+      "methodGroup": "Способ добычи изменён на групповой.",
+      "assigned": "{looter} передал предмет {item} игроку {target}.",
+      "unassigned": "Предмет {item} не был назначен и доступен всем.",
+      "leaderOnly": "Только лидер группы может менять способ добычи."
+    },
     "bags": {
       "filterGroupAria": "Фильтровать сумки по категории",
       "filterAll": "Все",
@@ -690,6 +723,128 @@ export const ru_RU: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "Закрыть",
+      "keybind": "Панель Discord",
+      "disabled": "Интеграция с Discord сейчас недоступна.",
+      "tiers": {
+        "none": "Без ранга",
+        "initiate": "Послушник",
+        "squire": "Оруженосец",
+        "footman": "Пехотинец",
+        "knight": "Рыцарь",
+        "champion": "Чемпион",
+        "warlord": "Полководец",
+        "legend": "Легенда",
+        "mythic": "Мифический"
+      },
+      "loginCta": "Продолжить через Discord",
+      "orEmail": "или войти по почте",
+      "cta": {
+        "title": "Привяжите Discord, чтобы получать очки и повышать ранг",
+        "stats": "{online} в сети · {total} участников на сервере",
+        "statsLoading": "Присоединяйтесь к сообществу и получайте награды",
+        "button": "Привязать в один клик",
+        "dismiss": "Скрыть"
+      },
+      "link": {
+        "cta": "Привязать Discord",
+        "relink": "Перепривязать Discord",
+        "connecting": "Открываем Discord...",
+        "benefits": "Привяжите Discord, чтобы получать очки за игру и активность в сообществе и подниматься по рангам статуса.",
+        "error": "Не удалось привязать Discord. Пожалуйста, попробуйте снова.",
+        "success": "Discord привязан."
+      },
+      "linkedAs": "Привязан как {name}",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "Открыть публичный профиль этого персонажа",
+      "unlink": "Отвязать",
+      "visit": "Перейти в Discord",
+      "unlinkConfirm": "Отвязать аккаунт Discord от этого игрового аккаунта?",
+      "statusLabel": "Статус",
+      "rank": "Rank",
+      "points": "Очки",
+      "lifetime": "За все время",
+      "toNext": "{points} до следующего ранга",
+      "maxRank": "Достигнут высший ранг",
+      "tiersTitle": "Ранги статуса",
+      "tierLocked": "Заблокировано",
+      "tierCurrent": "Текущий",
+      "earnTitle": "Как получать очки",
+      "earnBody": "Получайте очки за время в игре и за активность в Discord. Очки повышают ваш ранг статуса.",
+      "memberSince": "Участник с",
+      "memberSinceDays": "{days} дн. в Discord",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "Художник"
+      },
+      "guildMember": "Подтвержденный участник",
+      "notMember": "Еще не на сервере",
+      "joinCta": "Присоединиться к Discord",
+      "online": "{count} в сети",
+      "community": "Сообщество",
+      "rewards": "Награды",
+      "voice": {
+        "title": "Голос",
+        "channel": "In {channel}",
+        "empty": "Сейчас в голосовом канале никого нет.",
+        "speaking": "Говорит",
+        "muted": "Без звука",
+        "join": "Войти в голосовой канал",
+        "connect": "Подключиться к голосовому каналу"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "Получить",
+        "claimed": "Получено",
+        "locked": "Заблокировано",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "Достигните более высокого ранга, чтобы получить это.",
+        "needPoints": "Недостаточно очков.",
+        "claimError": "Не удалось получить эту награду. Пожалуйста, попробуйте снова.",
+        "claimedToast": "Получено: {name}",
+        "titleDiscordian": "Титул: Discordian",
+        "titleSquire": "Титул: Оруженосец Королевства",
+        "chromaBlurple": "Расцветка меха Blurple",
+        "titleChampion": "Титул: Чемпион Claudemoon",
+        "swagStickers": "Набор стикеров (с доставкой)",
+        "swagTee": "Футболка (с доставкой)"
+      },
+      "relay": {
+        "tooFast": "Вы отправляете сообщения слишком часто. Подождите немного и попробуйте снова.",
+        "lfg": {
+          "label": "Поиск группы",
+          "hint": "Найдите игроков для подземелья или задания"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "Объявите о продаже предмета или услуги"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "Запросите предмет, который хотите купить"
+        },
+        "recruit": {
+          "label": "Набор в гильдию",
+          "hint": "Набирайте игроков в свою гильдию"
+        },
+        "event": {
+          "label": "Событие / Рейд",
+          "hint": "Объявите о рейде, встрече или событии"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "Попросите сообщество о помощи"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const ru_RU: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "Проект с открытым исходным кодом",
+    "whitepaper": "Белая книга",
     "terms": "Условия использования",
     "privacy": "Политика конфиденциальности",
     "discordLabel": "Присоединиться к Discord"
@@ -3459,7 +3615,7 @@ export const ru_RU: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Чародейские стрелы",
-        "description": "Выпускает в противника Чародейские стрелы, наносящие 8 ед. урона от тайной магии каждую секунду в течение 3 сек."
+        "description": "Выпускает в противника Чародейские стрелы, наносящие {damage} ед. урона от тайной магии каждую секунду в течение 3 сек."
       },
       "polymorph": {
         "name": "Превращение",
@@ -3523,7 +3679,7 @@ export const ru_RU: EnTranslations = {
       },
       "stealth": {
         "name": "Незаметность",
-        "description": "Скрывает вас в тенях: враги почти не замечают вас, но вы двигаетесь на 30% медленнее. Атака или получение урона прерывает Незаметность. Примените снова, чтобы выйти."
+        "description": "Скрывает вас в тенях: враги почти не замечают вас, но вы двигаетесь на 50% медленнее. Атака или получение урона прерывает Незаметность. Примените снова, чтобы выйти."
       },
       "adrenaline_rush": {
         "name": "Выброс адреналина",
@@ -3555,7 +3711,7 @@ export const ru_RU: EnTranslations = {
       },
       "vanish": {
         "name": "Исчезновение",
-        "description": "Исчезает из виду, входя в незаметность даже в бою. Пока вы скрыты, вы двигаетесь на 30% медленнее. Длится до 10 сек."
+        "description": "Исчезает из виду, входя в незаметность даже в бою. Пока вы скрыты, вы двигаетесь на 50% медленнее. Длится до 10 сек."
       },
       "instant_poison": {
         "name": "Быстродействующий яд",
@@ -3707,7 +3863,7 @@ export const ru_RU: EnTranslations = {
       },
       "mind_flay": {
         "name": "Пытка разума",
-        "description": "Терзает разум цели темной энергией, нанося 12 ед. урона каждую секунду в течение 3 сек."
+        "description": "Терзает разум цели темной энергией, нанося {damage} ед. урона каждую секунду в течение 3 сек."
       },
       "flash_heal": {
         "name": "Быстрое исцеление",
@@ -3783,7 +3939,7 @@ export const ru_RU: EnTranslations = {
       },
       "drain_life": {
         "name": "Похищение жизни",
-        "description": "Похищает жизнь цели, передавая вам 7 здоровья каждую секунду в течение 5 сек."
+        "description": "Похищает жизнь цели, передавая вам {damage} здоровья каждую секунду в течение 5 сек."
       },
       "fear": {
         "name": "Страх",
@@ -3963,7 +4119,7 @@ export const ru_RU: EnTranslations = {
       },
       "prowl": {
         "name": "Крадущийся хищник",
-        "description": "Переход в скрытность в облике волка. Нельзя использовать в бою."
+        "description": "Переход в скрытность в облике волка: вы двигаетесь на 50% медленнее. Нельзя использовать в бою."
       },
       "rake": {
         "name": "Раздирание",
@@ -6359,6 +6515,43 @@ export const ru_RU: EnTranslations = {
         "name": "Обрушившийся Реликварий",
         "enterText": "Вы спускаетесь в обрушившийся реликварий.",
         "leaveText": "Вы поднимаетесь обратно к Брату Хальвену у руин реликвария."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Боевой доспех Кованой Короны",
+        "bonus2": "Сила атаки повышается на 40.",
+        "bonus3": "Сила повышается на 15, выносливость на 15."
+      },
+      "deathlord": {
+        "name": "Боевой доспех Владыки Смерти",
+        "bonus2": "Сила атаки повышается на 40.",
+        "bonus3": "Сила повышается на 15, выносливость на 15."
+      },
+      "necromancers": {
+        "name": "Одеяние некроманта",
+        "bonus2": "Задержка произнесения от полученного урона снижена на 50%.",
+        "bonus3": "Полученный урон не задерживает произнесение заклинаний."
+      },
+      "nighttalon": {
+        "name": "Кожаный доспех Ночного Когтя",
+        "bonus2": "Сила атаки повышается на 40.",
+        "bonus3": "Ловкость повышается на 15, вероятность критического удара на 2%."
+      },
+      "soulflame": {
+        "name": "Одеяние Пламени Души",
+        "bonus2": "Задержка произнесения от полученного урона снижена на 50%.",
+        "bonus3": "Полученный урон не задерживает произнесение заклинаний."
+      },
+      "stormcallers": {
+        "name": "Одеяние Зовущего Бурю",
+        "bonus2": "Задержка произнесения от полученного урона снижена на 50%.",
+        "bonus3": "Полученный урон не задерживает произнесение заклинаний."
+      },
+      "wyrmshadow": {
+        "name": "Облачение Тени Дракона",
+        "bonus2": "Сила атаки повышается на 40.",
+        "bonus3": "Ловкость повышается на 15, вероятность критического удара на 2%."
       }
     }
   },

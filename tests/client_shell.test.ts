@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
@@ -71,6 +71,10 @@ const supportHtml = readFileSync(
   new URL('../public/support.html', import.meta.url),
   'utf8',
 ).replace(/\r\n/g, '\n');
+const whitepaperUrl = new URL(
+  '../public/World-of-ClaudeCraft-Whitepaper-v1.0.pdf',
+  import.meta.url,
+);
 const viteConfig = readFileSync(new URL('../vite.config.ts', import.meta.url), 'utf8').replace(
   /\r\n/g,
   '\n',
@@ -118,6 +122,10 @@ const spellbookWindowTs = readFileSync(
 ).replace(/\r\n/g, '\n');
 const mobileControlsTs = readFileSync(
   new URL('../src/game/mobile_controls.ts', import.meta.url),
+  'utf8',
+).replace(/\r\n/g, '\n');
+const characterPreviewTs = readFileSync(
+  new URL('../src/render/characters/preview.ts', import.meta.url),
   'utf8',
 ).replace(/\r\n/g, '\n');
 // Per-frame keyed-pool painters. The per-member party rows,
@@ -554,6 +562,14 @@ describe('client HTML shell', () => {
     expect(supportHtml).toContain('href="https://discord.gg/GjhnUsBtw"');
     expect(supportHtml).toContain('href="/data-deletion">Data Deletion page</a>');
     expect(supportHtml).toContain('"@type": "ContactPage"');
+    expect(html).toContain(
+      'href="/World-of-ClaudeCraft-Whitepaper-v1.0.pdf" class="footer-link" data-i18n="footer.whitepaper"',
+    );
+    expect(html.indexOf('data-i18n="footer.whitepaper"')).toBeLessThan(
+      html.indexOf('data-i18n="footer.terms"'),
+    );
+    expect(existsSync(whitepaperUrl)).toBe(true);
+    expect(statSync(whitepaperUrl).size).toBeGreaterThan(0);
     expect(html).toContain('href="/terms" class="footer-link" data-i18n="footer.terms"');
     expect(html).toContain('href="/privacy" class="footer-link" data-i18n="footer.privacy"');
     expect(viteConfig).toContain("['/privacy', '/privacy.html']");
@@ -610,6 +626,20 @@ describe('client HTML shell', () => {
     expect(indexExtraCss).toContain(
       '@media (orientation: portrait) {\n    body.native-app.mobile-touch.game-active #rotate-device {\n      display: flex;',
     );
+  });
+
+  it('releases the start-screen character preview before entering the world', () => {
+    expect(mainTs).toContain('function releaseStartScreenPreview(): void {');
+    expect(mainTs).toContain('characterPreview.destroy();\n  characterPreview = null;');
+    expect(mainTs).toContain(
+      "$('#start-screen').style.display = 'none';\n  releaseStartScreenPreview();",
+    );
+    expect(characterPreviewTs).toContain('destroy(): void {\n    if (this.destroyed) return;');
+    expect(characterPreviewTs).toContain(
+      'this.unregisterContext?.();\n    this.unregisterContext = null;',
+    );
+    expect(characterPreviewTs).toContain('this.renderer.forceContextLoss();');
+    expect(characterPreviewTs).toContain('this.renderer.dispose();');
   });
 
   it('offers the quest log in the mobile controls drawer', () => {

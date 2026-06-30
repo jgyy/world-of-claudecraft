@@ -4,7 +4,7 @@
 
 import { MECH_CHROMAS, type MechChroma } from '../../sim/content/skins';
 import { MOBS } from '../../sim/data';
-import type { Entity } from '../../sim/types';
+import type { Entity, PlayerClass } from '../../sim/types';
 import { ITEM_WEAPON_VARIANTS } from '../../ui/weapon_variants';
 import type { OverheadEmoteId } from '../../world_api';
 
@@ -87,6 +87,11 @@ export interface VisualDef {
    *  applied as a local-space rotation (radians) after the bind transform. */
   weaponFix?: { node: string; rotX?: number; rotY?: number; rotZ?: number }[];
 }
+
+/** The slice of a VisualDef that decides how held weapons attach (which bones, and
+ *  which slots swap to the equipped item). Lets a cosmetic body adopt a different
+ *  class's hand layout without cloning the whole def. */
+export type WeaponLayoutOverride = Pick<VisualDef, 'attach' | 'weaponSlots'>;
 
 // ---------------------------------------------------------------------------
 // Clip sets per source rig family
@@ -447,6 +452,12 @@ export const VISUALS: Record<string, VisualDef> = {
     // baked in from knight.glb (scripts/bake_mech_anims.mjs) — these names now
     // resolve like any other class. Lazy-loaded; see preloadMechAssets().
     clips: kaykit(['1H_Melee_Attack_Chop']),
+    // Class-agnostic cosmetic body, but it still holds the wearer's equipped
+    // mainhand: the shared handslot.r bone carries the grip (the mech reuses the
+    // exact KayKit rig), so weaponSlots swaps attach[0] to the equipped weapon's
+    // model just like every other class. The sword is only the no-weapon default.
+    attach: [{ url: `${WEAPONS}/sword_1handed.glb`, bone: 'handslot.r' }],
+    weaponSlots: [0],
     lazyPreload: true,
   },
 
@@ -916,6 +927,18 @@ export function visualKeyFor(e: Entity): string {
   return NPC_KEYS[e.templateId] ?? 'npc_villager';
 }
 
+/** Held-weapon layout override for the class-agnostic Combat Mech body. The mech
+ *  keeps its own model and clips but adopts the WEARER class's hand layout, so a
+ *  dual-wield class (the rogue) shows the equipped weapon in BOTH hands on the mech
+ *  (it shares the KayKit handslot.r/.l bones). Non-dual classes return null and keep
+ *  the mech's own single-mainhand default. Host-agnostic: the wearer's class arrives
+ *  as a player entity's templateId, so this applies the same offline and online. */
+export function mechHeldWeaponOverride(cls: PlayerClass): WeaponLayoutOverride | null {
+  const classDef = VISUALS[`player_${cls}`];
+  if (!classDef || (classDef.weaponSlots?.length ?? 0) < 2) return null;
+  return { attach: classDef.attach, weaponSlots: classDef.weaponSlots };
+}
+
 /** Every glb the manifest can reference (for preloading). */
 export function manifestUrls(): string[] {
   const urls = new Set<string>();
@@ -939,6 +962,31 @@ export function manifestUrlsForGraphics(standardMaterials: boolean): string[] {
   return [
     ...new Set(manifestUrls().map((url) => visualAssetUrlForGraphics(url, standardMaterials))),
   ];
+}
+
+/**
+ * The character/weapon GLB URLs to PRELOAD, given the graphics tier guessed when
+ * assets.ts was first imported. This MUST be tier-INDEPENDENT (a superset of every
+ * tier's placement set).
+ *
+ * Character placement resolves asset URLs against the LIVE GFX tier through
+ * assetUrl()/visualAssetUrlForGraphics, and resolvedGltf() throws "character asset not
+ * preloaded" synchronously when the resolved URL was never loaded. The live tier is
+ * set by initGfxTier() inside the Renderer constructor, AFTER assets.ts froze its
+ * import-time GFX best-guess. On low gfx, LOW_URL_ALIAS swaps one body GLB
+ * (rogue_hooded.glb -> rogue.glb), so manifestUrlsForGraphics(false) is a STRICT
+ * subset of manifestUrlsForGraphics(true). If the import-time guess is low but the
+ * renderer resolves medium+, the very common mob_bandit body (rogue_hooded.glb, the
+ * humanoid-family default AND the global mob fallback) is placed yet was never
+ * preloaded, crashing world entry: the character-side twin of the v0.16.0 props P0.
+ * So preload the UNION across both tiers, exactly as foliage.ts is immune by sourcing
+ * one frozen list for both preload and placement.
+ *
+ * The arg is retained to document the invariant and to let the guard test assert it at
+ * the lowest (most dangerous) import tier; the result intentionally ignores it.
+ */
+export function characterPreloadUrls(_importTierStandardMaterials: boolean): string[] {
+  return [...new Set([...manifestUrlsForGraphics(true), ...manifestUrlsForGraphics(false)])];
 }
 
 export function visibleAttachmentsForGraphics(

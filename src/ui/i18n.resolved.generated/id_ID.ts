@@ -151,6 +151,9 @@ export const id_ID: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "Spectating {name}"
+    },
     "emotes": {
       "wave": "Melambai",
       "laugh": "LOL",
@@ -221,6 +224,9 @@ export const id_ID: EnTranslations = {
     },
     "rest": {
       "resting": "Beristirahat"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "Pahlawan Anda",
@@ -317,7 +323,10 @@ export const id_ID: EnTranslations = {
       "showWalletOnCharacterScreen": "Tampilkan Dompet di Layar Karakter",
       "showWalletOnPlayerCard": "Tampilkan Dompet di Kartu Pemain",
       "uiScale": "Skala UI",
-      "highContrastBackground": "Latar Kontras Tinggi"
+      "highContrastBackground": "Latar Kontras Tinggi",
+      "showItemLevel": "Tampilkan Level Item",
+      "itemLevelLine": "Level Item {level}",
+      "itemScoreLine": "Skor {score}"
     },
     "controller": {
       "title": "Kontroler",
@@ -447,6 +456,10 @@ export const id_ID: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Tips: ketik /join world atau /join lfg untuk mengobrol dengan pemain di seluruh realm."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Misi ini tidak dapat dibagikan.",
@@ -584,6 +597,26 @@ export const id_ID: EnTranslations = {
       "exportDone": "Datamu telah diunduh. Kami mengirimkan konfirmasi melalui email.",
       "exportFailed": "Tidak dapat mengekspor datamu. Coba lagi sebentar."
     },
+    "masterLoot": {
+      "title": "Master loot",
+      "enableLabel": "Master loot",
+      "enableAria": "Aktifkan master loot",
+      "looterLabel": "Master looter",
+      "leaderOption": "Pemimpin grup",
+      "thresholdLabel": "Ambang",
+      "thresholdUncommon": "Uncommon ke atas",
+      "thresholdRare": "Rare ke atas",
+      "thresholdEpic": "Epic ke atas",
+      "assignPrompt": "Berikan {item}",
+      "assignAria": "Berikan {item} kepada {name}",
+      "rollButton": "Gulung",
+      "selectAll": "Pilih semua",
+      "methodMaster": "Metode loot diatur ke master loot. Master looter: {name}.",
+      "methodGroup": "Metode loot diatur ke loot grup.",
+      "assigned": "{looter} memberikan {item} kepada {target}.",
+      "unassigned": "{item} tidak diberikan dan bebas untuk semua.",
+      "leaderOnly": "Hanya pemimpin grup yang dapat mengubah metode loot."
+    },
     "bags": {
       "filterGroupAria": "Saring tas menurut kategori",
       "filterAll": "Semua",
@@ -607,9 +640,9 @@ export const id_ID: EnTranslations = {
       "tooLarge": "Raid dengan lebih dari lima anggota tidak dapat diubah kembali menjadi rombongan."
     },
     "itemArmorType": {
-      "cloth": "Cloth",
-      "leather": "Leather",
-      "mail": "Mail"
+      "cloth": "Kain",
+      "leather": "Kulit",
+      "mail": "Zirah rantai"
     },
     "auraEffect": {
       "dot": "Memberikan {value} kerusakan {school} setiap {interval} dtk",
@@ -690,6 +723,128 @@ export const id_ID: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "Close",
+      "keybind": "Discord Panel",
+      "disabled": "Discord integration is not available right now.",
+      "tiers": {
+        "none": "Unranked",
+        "initiate": "Initiate",
+        "squire": "Squire",
+        "footman": "Footman",
+        "knight": "Knight",
+        "champion": "Champion",
+        "warlord": "Warlord",
+        "legend": "Legend",
+        "mythic": "Mythic"
+      },
+      "loginCta": "Continue with Discord",
+      "orEmail": "or use email",
+      "cta": {
+        "title": "Link your Discord to earn points and rank up",
+        "stats": "{online} online · {total} members in the server",
+        "statsLoading": "Join the community and earn rewards",
+        "button": "Link in one click",
+        "dismiss": "Dismiss"
+      },
+      "link": {
+        "cta": "Link Discord",
+        "relink": "Relink Discord",
+        "connecting": "Opening Discord...",
+        "benefits": "Link your Discord to earn points from play and community activity, and climb the status tiers.",
+        "error": "Could not link Discord. Please try again.",
+        "success": "Discord linked."
+      },
+      "linkedAs": "Linked as {name}",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "Open this character's public profile",
+      "unlink": "Unlink",
+      "visit": "Visit Discord",
+      "unlinkConfirm": "Unlink your Discord account from this game account?",
+      "statusLabel": "Status",
+      "rank": "Rank",
+      "points": "Points",
+      "lifetime": "Lifetime",
+      "toNext": "{points} to next rank",
+      "maxRank": "Top rank reached",
+      "tiersTitle": "Status Tiers",
+      "tierLocked": "Locked",
+      "tierCurrent": "Current",
+      "earnTitle": "How to earn points",
+      "earnBody": "Earn points from time played in game and from staying active in the Discord. Points raise your status tier.",
+      "memberSince": "Member since",
+      "memberSinceDays": "{days}d in the Discord",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "Artist"
+      },
+      "guildMember": "Verified member",
+      "notMember": "Not in the server yet",
+      "joinCta": "Join the Discord",
+      "online": "{count} online",
+      "community": "Community",
+      "rewards": "Rewards",
+      "voice": {
+        "title": "Voice",
+        "channel": "In {channel}",
+        "empty": "No one is in voice right now.",
+        "speaking": "Speaking",
+        "muted": "Muted",
+        "join": "Join voice",
+        "connect": "Connect to voice channel"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "Claim",
+        "claimed": "Claimed",
+        "locked": "Locked",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "Reach a higher rank to claim this.",
+        "needPoints": "Not enough points.",
+        "claimError": "Could not claim that reward. Please try again.",
+        "claimedToast": "Claimed: {name}",
+        "titleDiscordian": "Title: Discordian",
+        "titleSquire": "Title: Squire of the Realm",
+        "chromaBlurple": "Blurple Mech Chroma",
+        "titleChampion": "Title: Champion of Claudemoon",
+        "swagStickers": "Sticker Pack (shipped)",
+        "swagTee": "T-Shirt (shipped)"
+      },
+      "relay": {
+        "tooFast": "You are posting too fast. Wait a moment and try again.",
+        "lfg": {
+          "label": "Looking for Group",
+          "hint": "Find players for a dungeon or quest"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "Advertise an item or service for sale"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "Request an item you want to buy"
+        },
+        "recruit": {
+          "label": "Guild Recruiting",
+          "hint": "Recruit players for your guild"
+        },
+        "event": {
+          "label": "Event / Raid",
+          "hint": "Announce a raid, meetup or event"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "Ask the community for help"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const id_ID: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "Proyek Sumber Terbuka",
+    "whitepaper": "Whitepaper",
     "terms": "Ketentuan Layanan",
     "privacy": "Kebijakan Privasi",
     "discordLabel": "Gabung Discord"
@@ -2719,7 +2875,7 @@ export const id_ID: EnTranslations = {
     "combat": {
       "floatingMiss": "Meleset",
       "floatingDodge": "Elak",
-      "floatingResist": "Resist",
+      "floatingResist": "Ditahan",
       "cannotMove": "Tidak bisa bergerak!",
       "attack": "serang",
       "damageDone": "{ability}-mu mengenai {target} sebesar {amount}.",
@@ -2728,7 +2884,7 @@ export const id_ID: EnTranslations = {
       "damageTakenCrit": "{source} mengenaimu secara kritis sebesar {amount}.",
       "miss": "{ability}-mu meleset dari {target}.",
       "dodged": "{ability}-mu dielakkan oleh {target}.",
-      "resisted": "Your {ability} is resisted by {target}.",
+      "resisted": "{target} menahan {ability} milikmu.",
       "healSelf": "{ability}-mu menyembuhkanmu sebesar {amount}.",
       "healSelfCrit": "{ability}-mu menyembuhkanmu secara kritis sebesar {amount}.",
       "healOther": "{ability}-mu menyembuhkan {target} sebesar {amount}.",
@@ -3459,7 +3615,7 @@ export const id_ID: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Misil Arkana",
-        "description": "Melontarkan Misil Arkana ke arah musuh, menimbulkan 8 kerusakan Arkana setiap detik selama 3 detik."
+        "description": "Melontarkan Misil Arkana ke arah musuh, menimbulkan {damage} kerusakan Arkana setiap detik selama 3 detik."
       },
       "polymorph": {
         "name": "Ubah Wujud",
@@ -3523,7 +3679,7 @@ export const id_ID: EnTranslations = {
       },
       "stealth": {
         "name": "Siluman",
-        "description": "Menyembunyikanmu dalam bayangan: musuh nyaris tak menyadarimu, tetapi kau bergerak 30% lebih lambat. Menyerang atau menerima kerusakan mematahkan Siluman. Rapal lagi untuk keluar."
+        "description": "Menyembunyikanmu dalam bayangan: musuh nyaris tak menyadarimu, tetapi kau bergerak 50% lebih lambat. Menyerang atau menerima kerusakan mematahkan Siluman. Rapal lagi untuk keluar."
       },
       "adrenaline_rush": {
         "name": "Lonjakan Adrenalin",
@@ -3555,7 +3711,7 @@ export const id_ID: EnTranslations = {
       },
       "vanish": {
         "name": "Menghilang",
-        "description": "Menghilang dari pandangan, masuk ke Siluman bahkan dalam pertempuran. Kau bergerak 30% lebih lambat saat tersembunyi. Bertahan hingga 10 detik."
+        "description": "Menghilang dari pandangan, masuk ke Siluman bahkan dalam pertempuran. Kau bergerak 50% lebih lambat saat tersembunyi. Bertahan hingga 10 detik."
       },
       "instant_poison": {
         "name": "Racun Seketika",
@@ -3707,7 +3863,7 @@ export const id_ID: EnTranslations = {
       },
       "mind_flay": {
         "name": "Cambuk Pikiran",
-        "description": "Menyerang pikiran target dengan energi Bayangan, menimbulkan 12 kerusakan setiap detik selama 3 detik."
+        "description": "Menyerang pikiran target dengan energi Bayangan, menimbulkan {damage} kerusakan setiap detik selama 3 detik."
       },
       "flash_heal": {
         "name": "Sembuh Kilat",
@@ -3783,7 +3939,7 @@ export const id_ID: EnTranslations = {
       },
       "drain_life": {
         "name": "Sedot Nyawa",
-        "description": "Menyedot nyawa target, memindahkan 7 kesehatan kepadamu setiap detik selama 5 detik."
+        "description": "Menyedot nyawa target, memindahkan {damage} kesehatan kepadamu setiap detik selama 5 detik."
       },
       "fear": {
         "name": "Ketakutan",
@@ -3963,7 +4119,7 @@ export const id_ID: EnTranslations = {
       },
       "prowl": {
         "name": "Mengendap",
-        "description": "Masuk ke siluman saat dalam Wujud Serigala. Tidak dapat digunakan dalam pertempuran."
+        "description": "Masuk ke siluman saat dalam Wujud Serigala, bergerak 50% lebih lambat. Tidak dapat digunakan dalam pertempuran."
       },
       "rake": {
         "name": "Garukan",
@@ -6359,6 +6515,43 @@ export const id_ID: EnTranslations = {
         "name": "Reliquary yang Runtuh",
         "enterText": "Kau menuruni reliquary yang runtuh.",
         "leaveText": "Kau memanjat kembali menuju Bruder Halven di reruntuhan reliquary."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Perlengkapan tempur Tempa Mahkota",
+        "bonus2": "Meningkatkan daya serang sebesar 40.",
+        "bonus3": "Meningkatkan kekuatan sebesar 15 dan stamina sebesar 15."
+      },
+      "deathlord": {
+        "name": "Perlengkapan tempur Penguasa Maut",
+        "bonus2": "Meningkatkan daya serang sebesar 40.",
+        "bonus3": "Meningkatkan kekuatan sebesar 15 dan stamina sebesar 15."
+      },
+      "necromancers": {
+        "name": "Jubah ahli nujum",
+        "bonus2": "Mengurangi dorongan balik sihir akibat kerusakan sebesar 50%.",
+        "bonus3": "Kerusakan yang diterima tidak menunda perapalan sihir."
+      },
+      "nighttalon": {
+        "name": "Perlengkapan kulit Cakar Malam",
+        "bonus2": "Meningkatkan daya serang sebesar 40.",
+        "bonus3": "Meningkatkan kelincahan sebesar 15 dan peluang kritis sebesar 2%."
+      },
+      "soulflame": {
+        "name": "Jubah Api Jiwa",
+        "bonus2": "Mengurangi dorongan balik sihir akibat kerusakan sebesar 50%.",
+        "bonus3": "Kerusakan yang diterima tidak menunda perapalan sihir."
+      },
+      "stormcallers": {
+        "name": "Jubah Pemanggil Badai",
+        "bonus2": "Mengurangi dorongan balik sihir akibat kerusakan sebesar 50%.",
+        "bonus3": "Kerusakan yang diterima tidak menunda perapalan sihir."
+      },
+      "wyrmshadow": {
+        "name": "Perlengkapan Bayangan Wyrm",
+        "bonus2": "Meningkatkan daya serang sebesar 40.",
+        "bonus3": "Meningkatkan kelincahan sebesar 15 dan peluang kritis sebesar 2%."
       }
     }
   },

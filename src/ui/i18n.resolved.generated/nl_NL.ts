@@ -151,6 +151,9 @@ export const nl_NL: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "Spectating {name}"
+    },
     "emotes": {
       "wave": "Zwaaien",
       "laugh": "LOL",
@@ -221,6 +224,9 @@ export const nl_NL: EnTranslations = {
     },
     "rest": {
       "resting": "Aan het rusten"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "Je Held",
@@ -317,7 +323,10 @@ export const nl_NL: EnTranslations = {
       "showWalletOnCharacterScreen": "Portemonnee tonen op personagescherm",
       "showWalletOnPlayerCard": "Portemonnee tonen op spelerskaart",
       "uiScale": "UI-schaal",
-      "highContrastBackground": "Hoog-contrastachtergrond"
+      "highContrastBackground": "Hoog-contrastachtergrond",
+      "showItemLevel": "Itemniveau tonen",
+      "itemLevelLine": "Itemniveau {level}",
+      "itemScoreLine": "Score {score}"
     },
     "controller": {
       "title": "Controller",
@@ -447,6 +456,10 @@ export const nl_NL: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Tip: typ /join world of /join lfg om te chatten met spelers over het hele rijk."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Deze queeste kan niet gedeeld worden.",
@@ -584,6 +597,26 @@ export const nl_NL: EnTranslations = {
       "exportDone": "Je gegevens zijn gedownload. We hebben je een bevestiging gemaild.",
       "exportFailed": "Je gegevens konden niet worden geëxporteerd. Probeer het zo dadelijk opnieuw."
     },
+    "masterLoot": {
+      "title": "Meesterbuit",
+      "enableLabel": "Meesterbuit",
+      "enableAria": "Meesterbuit inschakelen",
+      "looterLabel": "Buitmeester",
+      "leaderOption": "Groepsleider",
+      "thresholdLabel": "Drempel",
+      "thresholdUncommon": "Ongewoon en hoger",
+      "thresholdRare": "Zeldzaam en hoger",
+      "thresholdEpic": "Episch en hoger",
+      "assignPrompt": "{item} toewijzen",
+      "assignAria": "{item} toewijzen aan {name}",
+      "rollButton": "Rollen",
+      "selectAll": "Alles selecteren",
+      "methodMaster": "Buitmethode ingesteld op meesterbuit. Buitmeester: {name}.",
+      "methodGroup": "Buitmethode ingesteld op groepsbuit.",
+      "assigned": "{looter} heeft {item} toegewezen aan {target}.",
+      "unassigned": "{item} is niet toegewezen en is vrij voor iedereen.",
+      "leaderOnly": "Alleen de groepsleider kan de buitmethode wijzigen."
+    },
     "bags": {
       "filterGroupAria": "Tassen filteren op categorie",
       "filterAll": "Alle",
@@ -607,9 +640,9 @@ export const nl_NL: EnTranslations = {
       "tooLarge": "Een raid met meer dan vijf leden kan niet terug omgezet worden naar een groep."
     },
     "itemArmorType": {
-      "cloth": "Cloth",
-      "leather": "Leather",
-      "mail": "Mail"
+      "cloth": "Stof",
+      "leather": "Leer",
+      "mail": "Maliën"
     },
     "auraEffect": {
       "dot": "Brengt elke {interval} s {value} {school}schade toe",
@@ -690,6 +723,128 @@ export const nl_NL: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "Close",
+      "keybind": "Discord Panel",
+      "disabled": "Discord integration is not available right now.",
+      "tiers": {
+        "none": "Unranked",
+        "initiate": "Initiate",
+        "squire": "Squire",
+        "footman": "Footman",
+        "knight": "Knight",
+        "champion": "Champion",
+        "warlord": "Warlord",
+        "legend": "Legend",
+        "mythic": "Mythic"
+      },
+      "loginCta": "Continue with Discord",
+      "orEmail": "or use email",
+      "cta": {
+        "title": "Link your Discord to earn points and rank up",
+        "stats": "{online} online · {total} members in the server",
+        "statsLoading": "Join the community and earn rewards",
+        "button": "Link in one click",
+        "dismiss": "Dismiss"
+      },
+      "link": {
+        "cta": "Link Discord",
+        "relink": "Relink Discord",
+        "connecting": "Opening Discord...",
+        "benefits": "Link your Discord to earn points from play and community activity, and climb the status tiers.",
+        "error": "Could not link Discord. Please try again.",
+        "success": "Discord linked."
+      },
+      "linkedAs": "Linked as {name}",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "Open this character's public profile",
+      "unlink": "Unlink",
+      "visit": "Visit Discord",
+      "unlinkConfirm": "Unlink your Discord account from this game account?",
+      "statusLabel": "Status",
+      "rank": "Rank",
+      "points": "Points",
+      "lifetime": "Lifetime",
+      "toNext": "{points} to next rank",
+      "maxRank": "Top rank reached",
+      "tiersTitle": "Status Tiers",
+      "tierLocked": "Locked",
+      "tierCurrent": "Current",
+      "earnTitle": "How to earn points",
+      "earnBody": "Earn points from time played in game and from staying active in the Discord. Points raise your status tier.",
+      "memberSince": "Member since",
+      "memberSinceDays": "{days}d in the Discord",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "Artist"
+      },
+      "guildMember": "Verified member",
+      "notMember": "Not in the server yet",
+      "joinCta": "Join the Discord",
+      "online": "{count} online",
+      "community": "Community",
+      "rewards": "Rewards",
+      "voice": {
+        "title": "Voice",
+        "channel": "In {channel}",
+        "empty": "No one is in voice right now.",
+        "speaking": "Speaking",
+        "muted": "Muted",
+        "join": "Join voice",
+        "connect": "Connect to voice channel"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "Claim",
+        "claimed": "Claimed",
+        "locked": "Locked",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "Reach a higher rank to claim this.",
+        "needPoints": "Not enough points.",
+        "claimError": "Could not claim that reward. Please try again.",
+        "claimedToast": "Claimed: {name}",
+        "titleDiscordian": "Title: Discordian",
+        "titleSquire": "Title: Squire of the Realm",
+        "chromaBlurple": "Blurple Mech Chroma",
+        "titleChampion": "Title: Champion of Claudemoon",
+        "swagStickers": "Sticker Pack (shipped)",
+        "swagTee": "T-Shirt (shipped)"
+      },
+      "relay": {
+        "tooFast": "You are posting too fast. Wait a moment and try again.",
+        "lfg": {
+          "label": "Looking for Group",
+          "hint": "Find players for a dungeon or quest"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "Advertise an item or service for sale"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "Request an item you want to buy"
+        },
+        "recruit": {
+          "label": "Guild Recruiting",
+          "hint": "Recruit players for your guild"
+        },
+        "event": {
+          "label": "Event / Raid",
+          "hint": "Announce a raid, meetup or event"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "Ask the community for help"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const nl_NL: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "Opensourceproject",
+    "whitepaper": "Whitepaper",
     "terms": "Servicevoorwaarden",
     "privacy": "Privacybeleid",
     "discordLabel": "Word lid van de Discord"
@@ -2719,7 +2875,7 @@ export const nl_NL: EnTranslations = {
     "combat": {
       "floatingMiss": "Mis",
       "floatingDodge": "Ontwijking",
-      "floatingResist": "Resist",
+      "floatingResist": "Weerstaan",
       "cannotMove": "Kan niet bewegen!",
       "attack": "aanval",
       "damageDone": "Je {ability} raakt {target} voor {amount}.",
@@ -2728,7 +2884,7 @@ export const nl_NL: EnTranslations = {
       "damageTakenCrit": "{source} raakt je kritiek voor {amount}.",
       "miss": "Je {ability} mist {target}.",
       "dodged": "Je {ability} wordt ontweken door {target}.",
-      "resisted": "Your {ability} is resisted by {target}.",
+      "resisted": "{target} weerstaat je {ability}.",
       "healSelf": "Je {ability} geneest je voor {amount}.",
       "healSelfCrit": "Je {ability} geneest je kritiek voor {amount}.",
       "healOther": "Je {ability} geneest {target} voor {amount}.",
@@ -3459,7 +3615,7 @@ export const nl_NL: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Arcane Projectielen",
-        "description": "Lanceert Arcane Projectielen op de vijand en veroorzaakt elke seconde 8 Arcane schade gedurende 3 sec."
+        "description": "Lanceert Arcane Projectielen op de vijand en veroorzaakt elke seconde {damage} Arcane schade gedurende 3 sec."
       },
       "polymorph": {
         "name": "Gedaanteverwisseling",
@@ -3523,7 +3679,7 @@ export const nl_NL: EnTranslations = {
       },
       "stealth": {
         "name": "Sluiptocht",
-        "description": "Verbergt je in de schaduwen: vijanden merken je nauwelijks op, maar je beweegt 30% trager. Aanvallen of schade oplopen verbreekt Sluiptocht. Bezweer opnieuw om eruit te stappen."
+        "description": "Verbergt je in de schaduwen: vijanden merken je nauwelijks op, maar je beweegt 50% trager. Aanvallen of schade oplopen verbreekt Sluiptocht. Bezweer opnieuw om eruit te stappen."
       },
       "adrenaline_rush": {
         "name": "Adrenalinestoot",
@@ -3555,7 +3711,7 @@ export const nl_NL: EnTranslations = {
       },
       "vanish": {
         "name": "Verdwijnen",
-        "description": "Verdwijn uit het zicht en betreed Sluiptocht zelfs in gevecht. Je beweegt 30% trager terwijl je verborgen bent. Duurt tot 10 sec."
+        "description": "Verdwijn uit het zicht en betreed Sluiptocht zelfs in gevecht. Je beweegt 50% trager terwijl je verborgen bent. Duurt tot 10 sec."
       },
       "instant_poison": {
         "name": "Direct Gif",
@@ -3707,7 +3863,7 @@ export const nl_NL: EnTranslations = {
       },
       "mind_flay": {
         "name": "Geestesmarteling",
-        "description": "Bestookt de geest van het doelwit met Schaduwenergie en brengt elke seconde 12 schade toe gedurende 3 sec."
+        "description": "Bestookt de geest van het doelwit met Schaduwenergie en brengt elke seconde {damage} schade toe gedurende 3 sec."
       },
       "flash_heal": {
         "name": "Snelle Genezing",
@@ -3783,7 +3939,7 @@ export const nl_NL: EnTranslations = {
       },
       "drain_life": {
         "name": "Leven Aftappen",
-        "description": "Tapt het leven van het doelwit af en draagt elke seconde 7 levenskracht naar je over gedurende 5 sec."
+        "description": "Tapt het leven van het doelwit af en draagt elke seconde {damage} levenskracht naar je over gedurende 5 sec."
       },
       "fear": {
         "name": "Angst",
@@ -3963,7 +4119,7 @@ export const nl_NL: EnTranslations = {
       },
       "prowl": {
         "name": "Sluipen",
-        "description": "Ga in sluiptocht terwijl je in Wolfsgedaante bent. Kan niet in gevecht worden gebruikt."
+        "description": "Ga in sluiptocht terwijl je in Wolfsgedaante bent en beweeg 50% trager. Kan niet in gevecht worden gebruikt."
       },
       "rake": {
         "name": "Harken",
@@ -6359,6 +6515,43 @@ export const nl_NL: EnTranslations = {
         "name": "Het Ingestorte Reliekschrijn",
         "enterText": "Je daalt af in het ingestorte reliekschrijn.",
         "leaveText": "Je klimt terug omhoog naar Broeder Halven bij de reliekschrijnruïne."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Kroongesmede gevechtsuitrusting",
+        "bonus2": "Verhoogt aanvalskracht met 40.",
+        "bonus3": "Verhoogt kracht met 15 en uithoudingsvermogen met 15."
+      },
+      "deathlord": {
+        "name": "Gevechtsuitrusting van de Dodenheer",
+        "bonus2": "Verhoogt aanvalskracht met 40.",
+        "bonus3": "Verhoogt kracht met 15 en uithoudingsvermogen met 15."
+      },
+      "necromancers": {
+        "name": "Gewaden van de necromant",
+        "bonus2": "Vermindert terugslag bij spreuken door schade met 50%.",
+        "bonus3": "Opgelopen schade vertraagt je spreuken niet."
+      },
+      "nighttalon": {
+        "name": "Nachtklauw leren uitrusting",
+        "bonus2": "Verhoogt aanvalskracht met 40.",
+        "bonus3": "Verhoogt behendigheid met 15 en kritieke kans met 2%."
+      },
+      "soulflame": {
+        "name": "Zielenvlamgewaden",
+        "bonus2": "Vermindert terugslag bij spreuken door schade met 50%.",
+        "bonus3": "Opgelopen schade vertraagt je spreuken niet."
+      },
+      "stormcallers": {
+        "name": "Gewaden van de Stormroeper",
+        "bonus2": "Vermindert terugslag bij spreuken door schade met 50%.",
+        "bonus3": "Opgelopen schade vertraagt je spreuken niet."
+      },
+      "wyrmshadow": {
+        "name": "Wurmschaduw-uitrusting",
+        "bonus2": "Verhoogt aanvalskracht met 40.",
+        "bonus3": "Verhoogt behendigheid met 15 en kritieke kans met 2%."
       }
     }
   },

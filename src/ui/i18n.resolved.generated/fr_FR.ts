@@ -151,6 +151,9 @@ export const fr_FR: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "Spectating {name}"
+    },
     "emotes": {
       "wave": "Saluer de la main",
       "laugh": "MDR",
@@ -221,6 +224,9 @@ export const fr_FR: EnTranslations = {
     },
     "rest": {
       "resting": "Au repos"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "Votre personnage",
@@ -317,7 +323,10 @@ export const fr_FR: EnTranslations = {
       "showWalletOnCharacterScreen": "Afficher le portefeuille sur l’écran des personnages",
       "showWalletOnPlayerCard": "Afficher le portefeuille sur la carte de joueur",
       "uiScale": "Échelle de l’interface",
-      "highContrastBackground": "Arrière-plan à contraste élevé"
+      "highContrastBackground": "Arrière-plan à contraste élevé",
+      "showItemLevel": "Afficher le niveau d'objet",
+      "itemLevelLine": "Niveau d'objet {level}",
+      "itemScoreLine": "Score {score}"
     },
     "controller": {
       "title": "Manette",
@@ -447,6 +456,10 @@ export const fr_FR: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Conseil : tapez /join world ou /join lfg pour discuter avec les joueurs de tout le royaume."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Cette quête ne peut pas être partagée.",
@@ -584,6 +597,26 @@ export const fr_FR: EnTranslations = {
       "exportDone": "Vos données ont été téléchargées. Nous vous avons envoyé une confirmation par e-mail.",
       "exportFailed": "Impossible d'exporter vos données. Réessayez dans un moment."
     },
+    "masterLoot": {
+      "title": "Butin de maitre",
+      "enableLabel": "Butin de maitre",
+      "enableAria": "Activer le butin de maitre",
+      "looterLabel": "Maitre du butin",
+      "leaderOption": "Chef de groupe",
+      "thresholdLabel": "Seuil",
+      "thresholdUncommon": "Inhabituel et plus",
+      "thresholdRare": "Rare et plus",
+      "thresholdEpic": "Epique et plus",
+      "assignPrompt": "Attribuer {item}",
+      "assignAria": "Attribuer {item} a {name}",
+      "rollButton": "Tirer au sort",
+      "selectAll": "Tout selectionner",
+      "methodMaster": "Mode de butin defini sur butin de maitre. Maitre du butin: {name}.",
+      "methodGroup": "Mode de butin defini sur butin de groupe.",
+      "assigned": "{looter} a attribue {item} a {target}.",
+      "unassigned": "{item} n a pas ete attribue et devient libre pour tous.",
+      "leaderOnly": "Seul le chef de groupe peut changer le mode de butin."
+    },
     "bags": {
       "filterGroupAria": "Filtrer les sacs par catégorie",
       "filterAll": "Tous",
@@ -607,9 +640,9 @@ export const fr_FR: EnTranslations = {
       "tooLarge": "Un raid de plus de cinq membres ne peut pas être reconverti en groupe."
     },
     "itemArmorType": {
-      "cloth": "Cloth",
-      "leather": "Leather",
-      "mail": "Mail"
+      "cloth": "Tissu",
+      "leather": "Cuir",
+      "mail": "Mailles"
     },
     "auraEffect": {
       "dot": "Inflige {value} points de dégâts de {school} toutes les {interval} s",
@@ -690,6 +723,128 @@ export const fr_FR: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "Close",
+      "keybind": "Discord Panel",
+      "disabled": "Discord integration is not available right now.",
+      "tiers": {
+        "none": "Unranked",
+        "initiate": "Initiate",
+        "squire": "Squire",
+        "footman": "Footman",
+        "knight": "Knight",
+        "champion": "Champion",
+        "warlord": "Warlord",
+        "legend": "Legend",
+        "mythic": "Mythic"
+      },
+      "loginCta": "Continue with Discord",
+      "orEmail": "or use email",
+      "cta": {
+        "title": "Link your Discord to earn points and rank up",
+        "stats": "{online} online · {total} members in the server",
+        "statsLoading": "Join the community and earn rewards",
+        "button": "Link in one click",
+        "dismiss": "Dismiss"
+      },
+      "link": {
+        "cta": "Link Discord",
+        "relink": "Relink Discord",
+        "connecting": "Opening Discord...",
+        "benefits": "Link your Discord to earn points from play and community activity, and climb the status tiers.",
+        "error": "Could not link Discord. Please try again.",
+        "success": "Discord linked."
+      },
+      "linkedAs": "Linked as {name}",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "Open this character's public profile",
+      "unlink": "Unlink",
+      "visit": "Visit Discord",
+      "unlinkConfirm": "Unlink your Discord account from this game account?",
+      "statusLabel": "Status",
+      "rank": "Rank",
+      "points": "Points",
+      "lifetime": "Lifetime",
+      "toNext": "{points} to next rank",
+      "maxRank": "Top rank reached",
+      "tiersTitle": "Status Tiers",
+      "tierLocked": "Locked",
+      "tierCurrent": "Current",
+      "earnTitle": "How to earn points",
+      "earnBody": "Earn points from time played in game and from staying active in the Discord. Points raise your status tier.",
+      "memberSince": "Member since",
+      "memberSinceDays": "{days}d in the Discord",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "Artist"
+      },
+      "guildMember": "Verified member",
+      "notMember": "Not in the server yet",
+      "joinCta": "Join the Discord",
+      "online": "{count} online",
+      "community": "Community",
+      "rewards": "Rewards",
+      "voice": {
+        "title": "Voice",
+        "channel": "In {channel}",
+        "empty": "No one is in voice right now.",
+        "speaking": "Speaking",
+        "muted": "Muted",
+        "join": "Join voice",
+        "connect": "Connect to voice channel"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "Claim",
+        "claimed": "Claimed",
+        "locked": "Locked",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "Reach a higher rank to claim this.",
+        "needPoints": "Not enough points.",
+        "claimError": "Could not claim that reward. Please try again.",
+        "claimedToast": "Claimed: {name}",
+        "titleDiscordian": "Title: Discordian",
+        "titleSquire": "Title: Squire of the Realm",
+        "chromaBlurple": "Blurple Mech Chroma",
+        "titleChampion": "Title: Champion of Claudemoon",
+        "swagStickers": "Sticker Pack (shipped)",
+        "swagTee": "T-Shirt (shipped)"
+      },
+      "relay": {
+        "tooFast": "You are posting too fast. Wait a moment and try again.",
+        "lfg": {
+          "label": "Looking for Group",
+          "hint": "Find players for a dungeon or quest"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "Advertise an item or service for sale"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "Request an item you want to buy"
+        },
+        "recruit": {
+          "label": "Guild Recruiting",
+          "hint": "Recruit players for your guild"
+        },
+        "event": {
+          "label": "Event / Raid",
+          "hint": "Announce a raid, meetup or event"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "Ask the community for help"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const fr_FR: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "Projet open source",
+    "whitepaper": "Livre blanc",
     "terms": "Conditions d'utilisation",
     "privacy": "Politique de confidentialité",
     "discordLabel": "Rejoindre le Discord"
@@ -2719,7 +2875,7 @@ export const fr_FR: EnTranslations = {
     "combat": {
       "floatingMiss": "Raté",
       "floatingDodge": "Esquive",
-      "floatingResist": "Resist",
+      "floatingResist": "Résisté",
       "cannotMove": "Immobilisé !",
       "attack": "attaque",
       "damageDone": "Votre {ability} touche {target} pour {amount}.",
@@ -2728,7 +2884,7 @@ export const fr_FR: EnTranslations = {
       "damageTakenCrit": "{source} vous inflige un coup critique pour {amount}.",
       "miss": "Votre {ability} rate {target}.",
       "dodged": "{target} esquive votre {ability}.",
-      "resisted": "Your {ability} is resisted by {target}.",
+      "resisted": "{target} résiste à votre {ability}.",
       "healSelf": "Votre {ability} vous rend {amount} points de vie.",
       "healSelfCrit": "Votre {ability} vous rend un soin critique de {amount}.",
       "healOther": "Votre {ability} soigne {target} pour {amount}.",
@@ -3459,7 +3615,7 @@ export const fr_FR: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Projectiles des Arcanes",
-        "description": "Lance des Projectiles des Arcanes sur l'ennemi et inflige 8 points de dégâts des Arcanes chaque seconde pendant 3 s."
+        "description": "Lance des Projectiles des Arcanes sur l'ennemi et inflige {damage} points de dégâts des Arcanes chaque seconde pendant 3 s."
       },
       "polymorph": {
         "name": "Métamorphose",
@@ -3523,7 +3679,7 @@ export const fr_FR: EnTranslations = {
       },
       "stealth": {
         "name": "Camouflage",
-        "description": "Vous dissimule dans les ombres: les ennemis vous remarquent à peine, mais vous vous déplacez 30% plus lentement. Attaquer ou subir des dégâts interrompt Camouflage. Relancez pour sortir."
+        "description": "Vous dissimule dans les ombres: les ennemis vous remarquent à peine, mais vous vous déplacez 50% plus lentement. Attaquer ou subir des dégâts interrompt Camouflage. Relancez pour sortir."
       },
       "adrenaline_rush": {
         "name": "Poussée d'adrénaline",
@@ -3555,7 +3711,7 @@ export const fr_FR: EnTranslations = {
       },
       "vanish": {
         "name": "Disparition",
-        "description": "Vous disparaissez et entrez en Camouflage, même en plein combat. Vous vous déplacez 30% plus lentement tant que vous êtes dissimulé. Dure jusqu'à 10 s."
+        "description": "Vous disparaissez et entrez en Camouflage, même en plein combat. Vous vous déplacez 50% plus lentement tant que vous êtes dissimulé. Dure jusqu'à 10 s."
       },
       "instant_poison": {
         "name": "Poison instantané",
@@ -3707,7 +3863,7 @@ export const fr_FR: EnTranslations = {
       },
       "mind_flay": {
         "name": "Fouet mental",
-        "description": "Assaille l'esprit de la cible avec de l'énergie d'Ombre et inflige 12 points de dégâts chaque seconde pendant 3 s."
+        "description": "Assaille l'esprit de la cible avec de l'énergie d'Ombre et inflige {damage} points de dégâts chaque seconde pendant 3 s."
       },
       "flash_heal": {
         "name": "Soins rapides",
@@ -3783,7 +3939,7 @@ export const fr_FR: EnTranslations = {
       },
       "drain_life": {
         "name": "Drain de vie",
-        "description": "Draine la vie de la cible et vous transfère 7 points de vie chaque seconde pendant 5 s."
+        "description": "Draine la vie de la cible et vous transfère {damage} points de vie chaque seconde pendant 5 s."
       },
       "fear": {
         "name": "Peur",
@@ -3963,7 +4119,7 @@ export const fr_FR: EnTranslations = {
       },
       "prowl": {
         "name": "Rôder",
-        "description": "Passe en camouflage tant que vous êtes en forme de loup. Inutilisable en combat."
+        "description": "Passe en camouflage tant que vous êtes en forme de loup, avec une vitesse de déplacement réduite de 50%. Inutilisable en combat."
       },
       "rake": {
         "name": "Lacérer",
@@ -6359,6 +6515,43 @@ export const fr_FR: EnTranslations = {
         "name": "Le Reliquaire effondré",
         "enterText": "Vous descendez dans le reliquaire effondré.",
         "leaveText": "Vous remontez auprès du frère Halven, à la ruine du reliquaire."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Tenue de guerre Couronneforge",
+        "bonus2": "Augmente la puissance d'attaque de 40.",
+        "bonus3": "Augmente la force de 15 et l'endurance de 15."
+      },
+      "deathlord": {
+        "name": "Tenue de guerre du seigneur de la mort",
+        "bonus2": "Augmente la puissance d'attaque de 40.",
+        "bonus3": "Augmente la force de 15 et l'endurance de 15."
+      },
+      "necromancers": {
+        "name": "Robe du nécromancien",
+        "bonus2": "Réduit de 50% le recul des incantations causé par les dégâts.",
+        "bonus3": "Les dégâts subis ne retardent pas l'incantation."
+      },
+      "nighttalon": {
+        "name": "Tenue de cuir Serre-nuit",
+        "bonus2": "Augmente la puissance d'attaque de 40.",
+        "bonus3": "Augmente l’agilité de 15 et les chances de critique de 2%."
+      },
+      "soulflame": {
+        "name": "Robe de Flamme d’âme",
+        "bonus2": "Réduit de 50% le recul des incantations causé par les dégâts.",
+        "bonus3": "Les dégâts subis ne retardent pas l'incantation."
+      },
+      "stormcallers": {
+        "name": "Robe de l’Appel-tempête",
+        "bonus2": "Réduit de 50% le recul des incantations causé par les dégâts.",
+        "bonus3": "Les dégâts subis ne retardent pas l'incantation."
+      },
+      "wyrmshadow": {
+        "name": "Tenue d’Ombre-drake",
+        "bonus2": "Augmente la puissance d'attaque de 40.",
+        "bonus3": "Augmente l’agilité de 15 et les chances de critique de 2%."
       }
     }
   },

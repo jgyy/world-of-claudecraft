@@ -151,6 +151,9 @@ export const en_CA: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "Spectating {name}"
+    },
     "emotes": {
       "wave": "Wave",
       "laugh": "LOL",
@@ -221,6 +224,9 @@ export const en_CA: EnTranslations = {
     },
     "rest": {
       "resting": "Resting"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "Your Hero",
@@ -317,7 +323,10 @@ export const en_CA: EnTranslations = {
       "showWalletOnCharacterScreen": "Show Wallet on Character Screen",
       "showWalletOnPlayerCard": "Show Wallet on Player Card",
       "uiScale": "UI Scale",
-      "highContrastBackground": "High-Contrast Background"
+      "highContrastBackground": "High-Contrast Background",
+      "showItemLevel": "Show Item Level",
+      "itemLevelLine": "Item Level {level}",
+      "itemScoreLine": "Score {score}"
     },
     "controller": {
       "title": "Controller",
@@ -447,6 +456,10 @@ export const en_CA: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Tip: type /join world or /join lfg to chat with players across the realm."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "This quest can't be shared.",
@@ -584,6 +597,26 @@ export const en_CA: EnTranslations = {
       "exportDone": "Your data was downloaded. We emailed you a confirmation.",
       "exportFailed": "Could not export your data. Try again in a moment."
     },
+    "masterLoot": {
+      "title": "Master Loot",
+      "enableLabel": "Master loot",
+      "enableAria": "Enable master loot",
+      "looterLabel": "Master looter",
+      "leaderOption": "Party leader",
+      "thresholdLabel": "Threshold",
+      "thresholdUncommon": "Uncommon and up",
+      "thresholdRare": "Rare and up",
+      "thresholdEpic": "Epic and up",
+      "assignPrompt": "Assign {item}",
+      "assignAria": "Assign {item} to {name}",
+      "rollButton": "Roll",
+      "selectAll": "Select all",
+      "methodMaster": "Loot method set to master loot. Master looter: {name}.",
+      "methodGroup": "Loot method set to group loot.",
+      "assigned": "{looter} assigned {item} to {target}.",
+      "unassigned": "{item} was not assigned and is free for all.",
+      "leaderOnly": "Only the party leader can change the loot method."
+    },
     "bags": {
       "filterGroupAria": "Filter bags by category",
       "filterAll": "All",
@@ -690,6 +723,128 @@ export const en_CA: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "Close",
+      "keybind": "Discord Panel",
+      "disabled": "Discord integration is not available right now.",
+      "tiers": {
+        "none": "Unranked",
+        "initiate": "Initiate",
+        "squire": "Squire",
+        "footman": "Footman",
+        "knight": "Knight",
+        "champion": "Champion",
+        "warlord": "Warlord",
+        "legend": "Legend",
+        "mythic": "Mythic"
+      },
+      "loginCta": "Continue with Discord",
+      "orEmail": "or use email",
+      "cta": {
+        "title": "Link your Discord to earn points and rank up",
+        "stats": "{online} online · {total} members in the server",
+        "statsLoading": "Join the community and earn rewards",
+        "button": "Link in one click",
+        "dismiss": "Dismiss"
+      },
+      "link": {
+        "cta": "Link Discord",
+        "relink": "Relink Discord",
+        "connecting": "Opening Discord...",
+        "benefits": "Link your Discord to earn points from play and community activity, and climb the status tiers.",
+        "error": "Could not link Discord. Please try again.",
+        "success": "Discord linked."
+      },
+      "linkedAs": "Linked as {name}",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "Open this character's public profile",
+      "unlink": "Unlink",
+      "visit": "Visit Discord",
+      "unlinkConfirm": "Unlink your Discord account from this game account?",
+      "statusLabel": "Status",
+      "rank": "Rank",
+      "points": "Points",
+      "lifetime": "Lifetime",
+      "toNext": "{points} to next rank",
+      "maxRank": "Top rank reached",
+      "tiersTitle": "Status Tiers",
+      "tierLocked": "Locked",
+      "tierCurrent": "Current",
+      "earnTitle": "How to earn points",
+      "earnBody": "Earn points from time played in game and from staying active in the Discord. Points raise your status tier.",
+      "memberSince": "Member since",
+      "memberSinceDays": "{days}d in the Discord",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "Artist"
+      },
+      "guildMember": "Verified member",
+      "notMember": "Not in the server yet",
+      "joinCta": "Join the Discord",
+      "online": "{count} online",
+      "community": "Community",
+      "rewards": "Rewards",
+      "voice": {
+        "title": "Voice",
+        "channel": "In {channel}",
+        "empty": "No one is in voice right now.",
+        "speaking": "Speaking",
+        "muted": "Muted",
+        "join": "Join voice",
+        "connect": "Connect to voice channel"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "Claim",
+        "claimed": "Claimed",
+        "locked": "Locked",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "Reach a higher rank to claim this.",
+        "needPoints": "Not enough points.",
+        "claimError": "Could not claim that reward. Please try again.",
+        "claimedToast": "Claimed: {name}",
+        "titleDiscordian": "Title: Discordian",
+        "titleSquire": "Title: Squire of the Realm",
+        "chromaBlurple": "Blurple Mech Chroma",
+        "titleChampion": "Title: Champion of Claudemoon",
+        "swagStickers": "Sticker Pack (shipped)",
+        "swagTee": "T-Shirt (shipped)"
+      },
+      "relay": {
+        "tooFast": "You are posting too fast. Wait a moment and try again.",
+        "lfg": {
+          "label": "Looking for Group",
+          "hint": "Find players for a dungeon or quest"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "Advertise an item or service for sale"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "Request an item you want to buy"
+        },
+        "recruit": {
+          "label": "Guild Recruiting",
+          "hint": "Recruit players for your guild"
+        },
+        "event": {
+          "label": "Event / Raid",
+          "hint": "Announce a raid, meetup or event"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "Ask the community for help"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const en_CA: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "Open Source Project",
+    "whitepaper": "Whitepaper",
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
     "discordLabel": "Join the Discord"
@@ -3459,7 +3615,7 @@ export const en_CA: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Arcane Missiles",
-        "description": "Launches Arcane Missiles at the enemy, causing 8 Arcane damage each second for 3 sec."
+        "description": "Launches Arcane Missiles at the enemy, causing {damage} Arcane damage each second for 3 sec."
       },
       "polymorph": {
         "name": "Polymorph",
@@ -3523,7 +3679,7 @@ export const en_CA: EnTranslations = {
       },
       "stealth": {
         "name": "Stealth",
-        "description": "Conceals you in the shadows: enemies barely notice you, but you move 30% slower. Attacking or taking damage breaks Stealth. Cast again to step out."
+        "description": "Conceals you in the shadows: enemies barely notice you, but you move 50% slower. Attacking or taking damage breaks Stealth. Cast again to step out."
       },
       "adrenaline_rush": {
         "name": "Adrenaline Rush",
@@ -3555,7 +3711,7 @@ export const en_CA: EnTranslations = {
       },
       "vanish": {
         "name": "Vanish",
-        "description": "Vanish from sight, entering Stealth even in combat. You move 30% slower while hidden. Lasts up to 10 sec."
+        "description": "Vanish from sight, entering Stealth even in combat. You move 50% slower while hidden. Lasts up to 10 sec."
       },
       "instant_poison": {
         "name": "Instant Poison",
@@ -3707,7 +3863,7 @@ export const en_CA: EnTranslations = {
       },
       "mind_flay": {
         "name": "Mind Flay",
-        "description": "Assaults the target's mind with Shadow energy, causing 12 damage each second for 3 sec."
+        "description": "Assaults the target's mind with Shadow energy, causing {damage} damage each second for 3 sec."
       },
       "flash_heal": {
         "name": "Flash Heal",
@@ -3731,7 +3887,7 @@ export const en_CA: EnTranslations = {
       },
       "lightning_shield": {
         "name": "Lightning Shield",
-        "description": "Surrounds you with crackling lightning: melee attackers take 13 Nature damage."
+        "description": "Surrounds you with crackling lightning: melee attackers take 13 Nature damage, up to 3 charges and at most once every 5 seconds."
       },
       "flame_shock": {
         "name": "Flame Shock",
@@ -3783,7 +3939,7 @@ export const en_CA: EnTranslations = {
       },
       "drain_life": {
         "name": "Drain Life",
-        "description": "Drains the target's life, transferring 7 health to you each second for 5 sec."
+        "description": "Drains the target's life, transferring {damage} health to you each second for 5 sec."
       },
       "fear": {
         "name": "Fear",
@@ -3963,7 +4119,7 @@ export const en_CA: EnTranslations = {
       },
       "prowl": {
         "name": "Prowl",
-        "description": "Enter stealth while in Wolf Form. Cannot be used in combat."
+        "description": "Enter stealth while in Wolf Form, moving 50% slower. Cannot be used in combat."
       },
       "rake": {
         "name": "Rake",
@@ -6359,6 +6515,43 @@ export const en_CA: EnTranslations = {
         "name": "The Collapsed Reliquary",
         "enterText": "You descend into the collapsed reliquary.",
         "leaveText": "You climb back to Brother Halven at the reliquary ruin."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Crownforged Regalia",
+        "bonus2": "Increases attack power by 40.",
+        "bonus3": "Increases Strength by 15 and Stamina by 15."
+      },
+      "deathlord": {
+        "name": "Deathlord Battlegear",
+        "bonus2": "Increases attack power by 40.",
+        "bonus3": "Increases Strength by 15 and Stamina by 15."
+      },
+      "necromancers": {
+        "name": "Necromancer's Raiment",
+        "bonus2": "Reduces cast pushback from damage by 50%.",
+        "bonus3": "You cannot be pushed back while casting (immune to cast pushback from damage)."
+      },
+      "nighttalon": {
+        "name": "Nighttalon Pelt",
+        "bonus2": "Increases attack power by 40.",
+        "bonus3": "Increases Agility by 15 and critical strike chance by 2%."
+      },
+      "soulflame": {
+        "name": "Soulflame Regalia",
+        "bonus2": "Reduces cast pushback from damage by 50%.",
+        "bonus3": "You cannot be pushed back while casting (immune to cast pushback from damage)."
+      },
+      "stormcallers": {
+        "name": "Stormcaller's Vestments",
+        "bonus2": "Reduces cast pushback from damage by 50%.",
+        "bonus3": "You cannot be pushed back while casting (immune to cast pushback from damage)."
+      },
+      "wyrmshadow": {
+        "name": "Wyrmshadow Vestments",
+        "bonus2": "Increases attack power by 40.",
+        "bonus3": "Increases Agility by 15 and critical strike chance by 2%."
       }
     }
   },

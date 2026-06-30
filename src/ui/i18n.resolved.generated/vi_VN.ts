@@ -151,6 +151,9 @@ export const vi_VN: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "Spectating {name}"
+    },
     "emotes": {
       "wave": "Vẫy Tay",
       "laugh": "Cười Lớn",
@@ -221,6 +224,9 @@ export const vi_VN: EnTranslations = {
     },
     "rest": {
       "resting": "Đang Nghỉ Ngơi"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "Anh Hùng Của Bạn",
@@ -317,7 +323,10 @@ export const vi_VN: EnTranslations = {
       "showWalletOnCharacterScreen": "Hiện Ví Tiền Ở Màn Hình Nhân Vật",
       "showWalletOnPlayerCard": "Hiện Ví Tiền Trên Thẻ Người Chơi",
       "uiScale": "Tỷ Lệ Giao Diện",
-      "highContrastBackground": "Nền Tương Phản Cao"
+      "highContrastBackground": "Nền Tương Phản Cao",
+      "showItemLevel": "Hiển Thị Cấp Vật Phẩm",
+      "itemLevelLine": "Cấp Vật Phẩm {level}",
+      "itemScoreLine": "Điểm {score}"
     },
     "controller": {
       "title": "Tay Cầm",
@@ -447,6 +456,10 @@ export const vi_VN: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Mẹo: gõ /join world hoặc /join lfg để trò chuyện với người chơi khắp realm."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Nhiệm vụ này không thể chia sẻ.",
@@ -584,6 +597,26 @@ export const vi_VN: EnTranslations = {
       "exportDone": "Dữ liệu của bạn đã được tải xuống. Chúng tôi đã gửi email xác nhận cho bạn.",
       "exportFailed": "Không thể xuất dữ liệu của bạn. Thử lại sau giây lát."
     },
+    "masterLoot": {
+      "title": "Chia chien loi pham",
+      "enableLabel": "Chia chien loi pham",
+      "enableAria": "Bat chia chien loi pham",
+      "looterLabel": "Nguoi chia chien loi pham",
+      "leaderOption": "Truong nhom",
+      "thresholdLabel": "Nguong",
+      "thresholdUncommon": "Uncommon tro len",
+      "thresholdRare": "Rare tro len",
+      "thresholdEpic": "Epic tro len",
+      "assignPrompt": "Gan {item}",
+      "assignAria": "Gan {item} cho {name}",
+      "rollButton": "Do",
+      "selectAll": "Chon tat ca",
+      "methodMaster": "Phuong thuc chien loi pham da dat thanh chia chien loi pham. Nguoi chia: {name}.",
+      "methodGroup": "Phuong thuc chien loi pham da dat thanh loot nhom.",
+      "assigned": "{looter} da gan {item} cho {target}.",
+      "unassigned": "{item} chua duoc gan va moi nguoi deu co the nhat.",
+      "leaderOnly": "Chi truong nhom co the doi phuong thuc chien loi pham."
+    },
     "bags": {
       "filterGroupAria": "Lọc túi đồ theo danh mục",
       "filterAll": "Tất cả",
@@ -607,9 +640,9 @@ export const vi_VN: EnTranslations = {
       "tooLarge": "Một raid có hơn năm thành viên không thể chuyển trở lại thành tổ đội."
     },
     "itemArmorType": {
-      "cloth": "Cloth",
-      "leather": "Leather",
-      "mail": "Mail"
+      "cloth": "Vải",
+      "leather": "Da",
+      "mail": "Giáp lưới"
     },
     "auraEffect": {
       "dot": "Gây {value} sát thương {school} mỗi {interval} giây",
@@ -690,6 +723,128 @@ export const vi_VN: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "Close",
+      "keybind": "Discord Panel",
+      "disabled": "Discord integration is not available right now.",
+      "tiers": {
+        "none": "Unranked",
+        "initiate": "Initiate",
+        "squire": "Squire",
+        "footman": "Footman",
+        "knight": "Knight",
+        "champion": "Champion",
+        "warlord": "Warlord",
+        "legend": "Legend",
+        "mythic": "Mythic"
+      },
+      "loginCta": "Continue with Discord",
+      "orEmail": "or use email",
+      "cta": {
+        "title": "Link your Discord to earn points and rank up",
+        "stats": "{online} online · {total} members in the server",
+        "statsLoading": "Join the community and earn rewards",
+        "button": "Link in one click",
+        "dismiss": "Dismiss"
+      },
+      "link": {
+        "cta": "Link Discord",
+        "relink": "Relink Discord",
+        "connecting": "Opening Discord...",
+        "benefits": "Link your Discord to earn points from play and community activity, and climb the status tiers.",
+        "error": "Could not link Discord. Please try again.",
+        "success": "Discord linked."
+      },
+      "linkedAs": "Linked as {name}",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "Open this character's public profile",
+      "unlink": "Unlink",
+      "visit": "Visit Discord",
+      "unlinkConfirm": "Unlink your Discord account from this game account?",
+      "statusLabel": "Status",
+      "rank": "Rank",
+      "points": "Points",
+      "lifetime": "Lifetime",
+      "toNext": "{points} to next rank",
+      "maxRank": "Top rank reached",
+      "tiersTitle": "Status Tiers",
+      "tierLocked": "Locked",
+      "tierCurrent": "Current",
+      "earnTitle": "How to earn points",
+      "earnBody": "Earn points from time played in game and from staying active in the Discord. Points raise your status tier.",
+      "memberSince": "Member since",
+      "memberSinceDays": "{days}d in the Discord",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "Artist"
+      },
+      "guildMember": "Verified member",
+      "notMember": "Not in the server yet",
+      "joinCta": "Join the Discord",
+      "online": "{count} online",
+      "community": "Community",
+      "rewards": "Rewards",
+      "voice": {
+        "title": "Voice",
+        "channel": "In {channel}",
+        "empty": "No one is in voice right now.",
+        "speaking": "Speaking",
+        "muted": "Muted",
+        "join": "Join voice",
+        "connect": "Connect to voice channel"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "Claim",
+        "claimed": "Claimed",
+        "locked": "Locked",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "Reach a higher rank to claim this.",
+        "needPoints": "Not enough points.",
+        "claimError": "Could not claim that reward. Please try again.",
+        "claimedToast": "Claimed: {name}",
+        "titleDiscordian": "Title: Discordian",
+        "titleSquire": "Title: Squire of the Realm",
+        "chromaBlurple": "Blurple Mech Chroma",
+        "titleChampion": "Title: Champion of Claudemoon",
+        "swagStickers": "Sticker Pack (shipped)",
+        "swagTee": "T-Shirt (shipped)"
+      },
+      "relay": {
+        "tooFast": "You are posting too fast. Wait a moment and try again.",
+        "lfg": {
+          "label": "Looking for Group",
+          "hint": "Find players for a dungeon or quest"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "Advertise an item or service for sale"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "Request an item you want to buy"
+        },
+        "recruit": {
+          "label": "Guild Recruiting",
+          "hint": "Recruit players for your guild"
+        },
+        "event": {
+          "label": "Event / Raid",
+          "hint": "Announce a raid, meetup or event"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "Ask the community for help"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const vi_VN: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "Dự Án Mã Nguồn Mở",
+    "whitepaper": "Sách trắng",
     "terms": "Điều Khoản Dịch Vụ",
     "privacy": "Chính Sách Bảo Mật",
     "discordLabel": "Tham Gia Discord"
@@ -2719,7 +2875,7 @@ export const vi_VN: EnTranslations = {
     "combat": {
       "floatingMiss": "Trượt",
       "floatingDodge": "Né",
-      "floatingResist": "Resist",
+      "floatingResist": "Kháng",
       "cannotMove": "Không thể di chuyển!",
       "attack": "tấn công",
       "damageDone": "{ability} của bạn đánh trúng {target} gây {amount}.",
@@ -2728,7 +2884,7 @@ export const vi_VN: EnTranslations = {
       "damageTakenCrit": "{source} chí mạng bạn gây {amount}.",
       "miss": "{ability} của bạn trượt {target}.",
       "dodged": "{ability} của bạn bị {target} né.",
-      "resisted": "Your {ability} is resisted by {target}.",
+      "resisted": "{target} kháng lại {ability} của bạn.",
       "healSelf": "{ability} của bạn hồi {amount} máu cho bạn.",
       "healSelfCrit": "{ability} của bạn chí mạng hồi {amount} máu cho bạn.",
       "healOther": "{ability} của bạn hồi {amount} máu cho {target}.",
@@ -3459,7 +3615,7 @@ export const vi_VN: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Phi Đạn Bí Thuật",
-        "description": "Phóng các Phi Đạn Bí Thuật vào kẻ địch, gây 8 sát thương Bí Thuật mỗi giây trong 3 giây."
+        "description": "Phóng các Phi Đạn Bí Thuật vào kẻ địch, gây {damage} sát thương Bí Thuật mỗi giây trong 3 giây."
       },
       "polymorph": {
         "name": "Biến Hình",
@@ -3523,7 +3679,7 @@ export const vi_VN: EnTranslations = {
       },
       "stealth": {
         "name": "Ẩn Thân",
-        "description": "Che giấu bạn trong bóng tối: kẻ địch khó nhận ra bạn, nhưng bạn di chuyển chậm hơn 30%. Tấn công hoặc nhận sát thương sẽ phá vỡ Ẩn Thân. Niệm lại để bước ra."
+        "description": "Che giấu bạn trong bóng tối: kẻ địch khó nhận ra bạn, nhưng bạn di chuyển chậm hơn 50%. Tấn công hoặc nhận sát thương sẽ phá vỡ Ẩn Thân. Niệm lại để bước ra."
       },
       "adrenaline_rush": {
         "name": "Bộc Phát Adrenaline",
@@ -3555,7 +3711,7 @@ export const vi_VN: EnTranslations = {
       },
       "vanish": {
         "name": "Tàng Hình",
-        "description": "Biến mất khỏi tầm nhìn, đi vào Ẩn Thân ngay cả trong chiến đấu. Bạn di chuyển chậm hơn 30% khi ẩn nấp. Kéo dài tối đa 10 giây."
+        "description": "Biến mất khỏi tầm nhìn, đi vào Ẩn Thân ngay cả trong chiến đấu. Bạn di chuyển chậm hơn 50% khi ẩn nấp. Kéo dài tối đa 10 giây."
       },
       "instant_poison": {
         "name": "Độc Tức Thời",
@@ -3707,7 +3863,7 @@ export const vi_VN: EnTranslations = {
       },
       "mind_flay": {
         "name": "Cào Xé Tâm Trí",
-        "description": "Công kích tâm trí mục tiêu bằng năng lượng Bóng Tối, gây 12 sát thương mỗi giây trong 3 giây."
+        "description": "Công kích tâm trí mục tiêu bằng năng lượng Bóng Tối, gây {damage} sát thương mỗi giây trong 3 giây."
       },
       "flash_heal": {
         "name": "Trị Liệu Nhanh",
@@ -3783,7 +3939,7 @@ export const vi_VN: EnTranslations = {
       },
       "drain_life": {
         "name": "Hút Sinh Lực",
-        "description": "Hút sinh lực của mục tiêu, chuyển 7 máu sang cho bạn mỗi giây trong 5 giây."
+        "description": "Hút sinh lực của mục tiêu, chuyển {damage} máu sang cho bạn mỗi giây trong 5 giây."
       },
       "fear": {
         "name": "Gieo Sợ Hãi",
@@ -3963,7 +4119,7 @@ export const vi_VN: EnTranslations = {
       },
       "prowl": {
         "name": "Rình Mồi",
-        "description": "Vào trạng thái ẩn thân khi ở Hình Sói. Không thể dùng trong chiến đấu."
+        "description": "Vào trạng thái ẩn thân khi ở Hình Sói, di chuyển chậm hơn 50%. Không thể dùng trong chiến đấu."
       },
       "rake": {
         "name": "Cào Xé",
@@ -6359,6 +6515,43 @@ export const vi_VN: EnTranslations = {
         "name": "Thánh Tích Sụp Đổ",
         "enterText": "Bạn đi xuống thánh tích sụp đổ.",
         "leaveText": "Bạn trèo trở lại chỗ Tu Huynh Halven tại tàn tích thánh tích."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Bộ chiến Crownforged",
+        "bonus2": "Tăng sức mạnh tấn công thêm 40.",
+        "bonus3": "Tăng sức mạnh thêm 15 và thể lực thêm 15."
+      },
+      "deathlord": {
+        "name": "Bộ chiến Deathlord",
+        "bonus2": "Tăng sức mạnh tấn công thêm 40.",
+        "bonus3": "Tăng sức mạnh thêm 15 và thể lực thêm 15."
+      },
+      "necromancers": {
+        "name": "Áo choàng pháp sư gọi hồn",
+        "bonus2": "Giảm 50% độ lùi khi niệm phép do sát thương.",
+        "bonus3": "Sát thương nhận vào không làm chậm niệm phép."
+      },
+      "nighttalon": {
+        "name": "Bộ da Móng Đêm",
+        "bonus2": "Tăng sức mạnh tấn công thêm 40.",
+        "bonus3": "Tăng nhanh nhẹn thêm 15 và tỉ lệ chí mạng thêm 2%."
+      },
+      "soulflame": {
+        "name": "Áo choàng Lửa Linh Hồn",
+        "bonus2": "Giảm 50% độ lùi khi niệm phép do sát thương.",
+        "bonus3": "Sát thương nhận vào không làm chậm niệm phép."
+      },
+      "stormcallers": {
+        "name": "Áo choàng Gọi Bão",
+        "bonus2": "Giảm 50% độ lùi khi niệm phép do sát thương.",
+        "bonus3": "Sát thương nhận vào không làm chậm niệm phép."
+      },
+      "wyrmshadow": {
+        "name": "Bộ Bóng Wyrm",
+        "bonus2": "Tăng sức mạnh tấn công thêm 40.",
+        "bonus3": "Tăng nhanh nhẹn thêm 15 và tỉ lệ chí mạng thêm 2%."
       }
     }
   },

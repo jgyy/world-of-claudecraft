@@ -151,6 +151,9 @@ export const tr_TR: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "Spectating {name}"
+    },
     "emotes": {
       "wave": "El Salla",
       "laugh": "LOL",
@@ -221,6 +224,9 @@ export const tr_TR: EnTranslations = {
     },
     "rest": {
       "resting": "Dinleniyor"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "Kahramanın",
@@ -317,7 +323,10 @@ export const tr_TR: EnTranslations = {
       "showWalletOnCharacterScreen": "Cüzdanı Karakter Ekranında Göster",
       "showWalletOnPlayerCard": "Cüzdanı Oyuncu Kartında Göster",
       "uiScale": "Arayüz Ölçeği",
-      "highContrastBackground": "Yüksek Kontrastlı Arka Plan"
+      "highContrastBackground": "Yüksek Kontrastlı Arka Plan",
+      "showItemLevel": "Eşya Seviyesini Göster",
+      "itemLevelLine": "Eşya Seviyesi {level}",
+      "itemScoreLine": "Puan {score}"
     },
     "controller": {
       "title": "Oyun Kolu",
@@ -447,6 +456,10 @@ export const tr_TR: EnTranslations = {
     },
     "tips": {
       "joinChannels": "İpucu: Sunucu genelindeki oyuncularla sohbet etmek için /join world ya da /join lfg yaz."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Bu görev paylaşılamaz.",
@@ -584,6 +597,26 @@ export const tr_TR: EnTranslations = {
       "exportDone": "Verileriniz indirildi. Size bir onay e-postası gönderdik.",
       "exportFailed": "Verileriniz dışa aktarılamadı. Birazdan tekrar deneyin."
     },
+    "masterLoot": {
+      "title": "Ganimet ustasi",
+      "enableLabel": "Ganimet ustasi",
+      "enableAria": "Ganimet ustasini etkinlestir",
+      "looterLabel": "Ganimet ustasi",
+      "leaderOption": "Grup lideri",
+      "thresholdLabel": "Esik",
+      "thresholdUncommon": "Sira disi ve ustu",
+      "thresholdRare": "Nadir ve ustu",
+      "thresholdEpic": "Epik ve ustu",
+      "assignPrompt": "{item} ata",
+      "assignAria": "{item} esyasini {name} oyuncusuna ata",
+      "rollButton": "Zar at",
+      "selectAll": "Tümünü sec",
+      "methodMaster": "Ganimet yontemi ganimet ustasi olarak ayarlandi. Ganimet ustasi: {name}.",
+      "methodGroup": "Ganimet yontemi grup ganimeti olarak ayarlandi.",
+      "assigned": "{looter}, {item} esyasini {target} oyuncusuna atadi.",
+      "unassigned": "{item} atanmadi ve herkes icin serbest.",
+      "leaderOnly": "Ganimet yontemini yalnizca grup lideri degistirebilir."
+    },
     "bags": {
       "filterGroupAria": "Çantaları kategoriye göre filtrele",
       "filterAll": "Tümü",
@@ -607,9 +640,9 @@ export const tr_TR: EnTranslations = {
       "tooLarge": "Beşten fazla üyesi olan bir akın yeniden gruba dönüştürülemez."
     },
     "itemArmorType": {
-      "cloth": "Cloth",
-      "leather": "Leather",
-      "mail": "Mail"
+      "cloth": "Kumaş",
+      "leather": "Deri",
+      "mail": "Zincir"
     },
     "auraEffect": {
       "dot": "Her {interval} sn {value} {school} hasarı verir",
@@ -690,6 +723,128 @@ export const tr_TR: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "Close",
+      "keybind": "Discord Panel",
+      "disabled": "Discord integration is not available right now.",
+      "tiers": {
+        "none": "Unranked",
+        "initiate": "Initiate",
+        "squire": "Squire",
+        "footman": "Footman",
+        "knight": "Knight",
+        "champion": "Champion",
+        "warlord": "Warlord",
+        "legend": "Legend",
+        "mythic": "Mythic"
+      },
+      "loginCta": "Continue with Discord",
+      "orEmail": "or use email",
+      "cta": {
+        "title": "Link your Discord to earn points and rank up",
+        "stats": "{online} online · {total} members in the server",
+        "statsLoading": "Join the community and earn rewards",
+        "button": "Link in one click",
+        "dismiss": "Dismiss"
+      },
+      "link": {
+        "cta": "Link Discord",
+        "relink": "Relink Discord",
+        "connecting": "Opening Discord...",
+        "benefits": "Link your Discord to earn points from play and community activity, and climb the status tiers.",
+        "error": "Could not link Discord. Please try again.",
+        "success": "Discord linked."
+      },
+      "linkedAs": "Linked as {name}",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "Open this character's public profile",
+      "unlink": "Unlink",
+      "visit": "Visit Discord",
+      "unlinkConfirm": "Unlink your Discord account from this game account?",
+      "statusLabel": "Status",
+      "rank": "Rank",
+      "points": "Points",
+      "lifetime": "Lifetime",
+      "toNext": "{points} to next rank",
+      "maxRank": "Top rank reached",
+      "tiersTitle": "Status Tiers",
+      "tierLocked": "Locked",
+      "tierCurrent": "Current",
+      "earnTitle": "How to earn points",
+      "earnBody": "Earn points from time played in game and from staying active in the Discord. Points raise your status tier.",
+      "memberSince": "Member since",
+      "memberSinceDays": "{days}d in the Discord",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "Artist"
+      },
+      "guildMember": "Verified member",
+      "notMember": "Not in the server yet",
+      "joinCta": "Join the Discord",
+      "online": "{count} online",
+      "community": "Community",
+      "rewards": "Rewards",
+      "voice": {
+        "title": "Voice",
+        "channel": "In {channel}",
+        "empty": "No one is in voice right now.",
+        "speaking": "Speaking",
+        "muted": "Muted",
+        "join": "Join voice",
+        "connect": "Connect to voice channel"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "Claim",
+        "claimed": "Claimed",
+        "locked": "Locked",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "Reach a higher rank to claim this.",
+        "needPoints": "Not enough points.",
+        "claimError": "Could not claim that reward. Please try again.",
+        "claimedToast": "Claimed: {name}",
+        "titleDiscordian": "Title: Discordian",
+        "titleSquire": "Title: Squire of the Realm",
+        "chromaBlurple": "Blurple Mech Chroma",
+        "titleChampion": "Title: Champion of Claudemoon",
+        "swagStickers": "Sticker Pack (shipped)",
+        "swagTee": "T-Shirt (shipped)"
+      },
+      "relay": {
+        "tooFast": "You are posting too fast. Wait a moment and try again.",
+        "lfg": {
+          "label": "Looking for Group",
+          "hint": "Find players for a dungeon or quest"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "Advertise an item or service for sale"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "Request an item you want to buy"
+        },
+        "recruit": {
+          "label": "Guild Recruiting",
+          "hint": "Recruit players for your guild"
+        },
+        "event": {
+          "label": "Event / Raid",
+          "hint": "Announce a raid, meetup or event"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "Ask the community for help"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const tr_TR: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "Açık Kaynak Proje",
+    "whitepaper": "Teknik Doküman",
     "terms": "Hizmet Koşulları",
     "privacy": "Gizlilik Politikası",
     "discordLabel": "Discord'a Katıl"
@@ -2719,7 +2875,7 @@ export const tr_TR: EnTranslations = {
     "combat": {
       "floatingMiss": "Iskaladı",
       "floatingDodge": "Savuşturma",
-      "floatingResist": "Resist",
+      "floatingResist": "Direnildi",
       "cannotMove": "Hareket edemezsin!",
       "attack": "saldırı",
       "damageDone": "{ability} yeteneğin {target} hedefine {amount} hasar vurdu.",
@@ -2728,7 +2884,7 @@ export const tr_TR: EnTranslations = {
       "damageTakenCrit": "{source} sana kritik {amount} hasar vurdu.",
       "miss": "{ability} yeteneğin {target} hedefini ıskaladı.",
       "dodged": "{ability} yeteneğin {target} tarafından savuşturuldu.",
-      "resisted": "Your {ability} is resisted by {target}.",
+      "resisted": "{target}, {ability} yeteneğine direndi.",
       "healSelf": "{ability} yeteneğin seni {amount} iyileştirdi.",
       "healSelfCrit": "{ability} yeteneğin seni kritik {amount} iyileştirdi.",
       "healOther": "{ability} yeteneğin {target} hedefini {amount} iyileştirdi.",
@@ -3459,7 +3615,7 @@ export const tr_TR: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Gizemli Füzeler",
-        "description": "Düşmana Gizemli Füzeler fırlatır, 3 saniye boyunca her saniye 8 Gizemli hasar verir."
+        "description": "Düşmana Gizemli Füzeler fırlatır, 3 saniye boyunca her saniye {damage} Gizemli hasar verir."
       },
       "polymorph": {
         "name": "Dönüştürme",
@@ -3707,7 +3863,7 @@ export const tr_TR: EnTranslations = {
       },
       "mind_flay": {
         "name": "Zihin Dağlama",
-        "description": "Hedefin zihnini Gölge enerjisiyle sarsar ve 3 saniye boyunca her saniye 12 hasar verir."
+        "description": "Hedefin zihnini Gölge enerjisiyle sarsar ve 3 saniye boyunca her saniye {damage} hasar verir."
       },
       "flash_heal": {
         "name": "Hızlı İyileştirme",
@@ -3783,7 +3939,7 @@ export const tr_TR: EnTranslations = {
       },
       "drain_life": {
         "name": "Can Emme",
-        "description": "Hedefin canını emer; 5 saniye boyunca her saniye sana 7 can aktarır."
+        "description": "Hedefin canını emer; 5 saniye boyunca her saniye sana {damage} can aktarır."
       },
       "fear": {
         "name": "Korku",
@@ -3963,7 +4119,7 @@ export const tr_TR: EnTranslations = {
       },
       "prowl": {
         "name": "Sinsi Yürüyüş",
-        "description": "Kurt Formundayken gizliliğe geçer. Dövüş sırasında kullanılamaz."
+        "description": "Kurt Formundayken gizliliğe geçer ve 50% daha yavaş hareket edersin. Dövüş sırasında kullanılamaz."
       },
       "rake": {
         "name": "Tırmalama",
@@ -6359,6 +6515,43 @@ export const tr_TR: EnTranslations = {
         "name": "Çökmüş Emanetlik",
         "enterText": "Çökmüş emanetliğe inersin.",
         "leaveText": "Emanetlik harabesinde Birader Halven'in yanına tırmanıp geri dönersin."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Taçdövme savaş takımı",
+        "bonus2": "Saldırı gücünü 40 artırır.",
+        "bonus3": "Gücü 15 ve dayanıklılığı 15 artırır."
+      },
+      "deathlord": {
+        "name": "Ölüm Lordu savaş takımı",
+        "bonus2": "Saldırı gücünü 40 artırır.",
+        "bonus3": "Gücü 15 ve dayanıklılığı 15 artırır."
+      },
+      "necromancers": {
+        "name": "Nekromansır giysileri",
+        "bonus2": "Hasarın neden olduğu büyü geri itmesini %50 azaltır.",
+        "bonus3": "Alınan hasar büyü yapmanı geciktirmez."
+      },
+      "nighttalon": {
+        "name": "Gece Pençesi deri takımı",
+        "bonus2": "Saldırı gücünü 40 artırır.",
+        "bonus3": "Çevikliği 15 ve kritik şansını %2 artırır."
+      },
+      "soulflame": {
+        "name": "Ruh Alevi giysileri",
+        "bonus2": "Hasarın neden olduğu büyü geri itmesini %50 azaltır.",
+        "bonus3": "Alınan hasar büyü yapmanı geciktirmez."
+      },
+      "stormcallers": {
+        "name": "Fırtına Çağıran giysileri",
+        "bonus2": "Hasarın neden olduğu büyü geri itmesini %50 azaltır.",
+        "bonus3": "Alınan hasar büyü yapmanı geciktirmez."
+      },
+      "wyrmshadow": {
+        "name": "Wyrm Gölgesi takımı",
+        "bonus2": "Saldırı gücünü 40 artırır.",
+        "bonus3": "Çevikliği 15 ve kritik şansını %2 artırır."
       }
     }
   },

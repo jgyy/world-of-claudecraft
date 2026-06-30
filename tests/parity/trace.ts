@@ -174,6 +174,7 @@ export const ENTITY_EXCLUDE: ReadonlySet<string> = new Set([
   'equippedItems', // render-only mirror for inspect; sim never reads it for gameplay
   'holderTier', // cosmetic wallet flair; sim never reads it
   'holderBalance',
+  'stealthed', // derived cache of auras.some(a => a.kind === 'stealth'); auras is sampled
 ]);
 
 // Session-only / presentation / derived PlayerMeta fields. Derived fields
@@ -198,6 +199,7 @@ export const META_EXCLUDE: ReadonlySet<string> = new Set([
   'talentMods', // derived from talents (recomputed)
   'fiestaMods', // derived from talentMods + augments
   'fiestaSpecial', // derived from augments
+  'wireRev', // runtime-only wire-dirty counter; never serialized/persisted
 ]);
 
 function sampleExcluding(source: Record<string, unknown>, exclude: ReadonlySet<string>): unknown {

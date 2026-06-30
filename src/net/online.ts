@@ -8,11 +8,13 @@ import {
   emptyAllocation,
   pointsSpent,
   type Role,
+  SAVED_LOADOUT_BAR_SLOTS,
   type SavedLoadout,
   type TalentAllocation,
   talentPointsAtLevel,
 } from '../sim/content/talents';
-import { abilitiesKnownAt, NPCS, resolveDelveShopOffers } from '../sim/data';
+import { abilitiesKnownAt, CLASSES, NPCS, resolveDelveShopOffers } from '../sim/data';
+import { deadTargetSelectable } from '../sim/dead_target';
 import { LEADERBOARD_PAGE_SIZE } from '../sim/leaderboard_page';
 import type { Ante, PickAction } from '../sim/lockpick';
 import { normalizeMoveFacing, sanitizeMoveInput } from '../sim/move_input';
@@ -24,6 +26,7 @@ import {
   type InvSlot,
   type LootRollChoice,
   type LootRollPrompt,
+  type MasterLootThreshold,
   type MoveInput,
   type PlayerClass,
   type QuestProgress,
@@ -511,6 +514,22 @@ export class Api {
     await this.delete('/api/wallet/link', {});
   }
 
+  // ── Discord link/login + status ────────────────────────────────────────────
+  // Returns the discord.com authorize URL the browser navigates to (login = new
+  // session, link = attach to the current account).
+  async discordStart(mode: 'login' | 'link'): Promise<{ url: string }> {
+    return this.post(`/api/auth/discord/start?mode=${mode}`, {});
+  }
+
+  // Current account's Discord link status + reward points + live guild presence.
+  async discordStatus(): Promise<Record<string, unknown>> {
+    return this.get('/api/discord');
+  }
+
+  async unlinkDiscord(): Promise<void> {
+    await this.delete('/api/discord', {});
+  }
+
   // ── Shareable player card + referrals ──────────────────────────────────────
   // Publish (or replace) this character's card PNG. The server may return a
   // realm-relative public page path; main.ts normalizes it to an absolute URL
@@ -611,6 +630,7 @@ function blankEntity(id: number): Entity {
     warcryTimer: 0,
     petPath: [],
     petPathCooldown: 0,
+    castPushbackReduction: 0,
     pos: { x: 0, y: 0, z: 0 },
     prevPos: { x: 0, y: 0, z: 0 },
     facing: 0,
@@ -633,6 +653,7 @@ function blankEntity(id: number): Entity {
     weapon: { min: 1, max: 2, speed: 2 },
     attackPower: 0,
     rangedPower: 0,
+    spellPower: 0,
     critChance: 0.05,
     dodgeChance: 0.05,
     moveSpeed: 7,
@@ -643,6 +664,7 @@ function blankEntity(id: number): Entity {
     inCombat: false,
     combatTimer: 99,
     auras: [],
+    stealthed: false,
     ccDr: new Map(),
     castingAbility: null,
     castRemaining: 0,
@@ -696,6 +718,7 @@ function blankEntity(id: number): Entity {
     aggroTargetId: null,
     respawnTimer: 0,
     corpseTimer: 0,
+    lootFfaTimer: Infinity,
     lootable: false,
     loot: null,
     xpValue: 0,
@@ -722,6 +745,9 @@ export class ClientWorld implements IWorld {
   cfg: { seed: number; playerClass: PlayerClass };
   entities = new Map<number, Entity>();
   playerId = -1;
+  private ownPlayerId = -1;
+  private readonly ownPlayerClass: PlayerClass;
+  spectating: string | null = null;
   moveInput: MoveInput = emptyMoveInput();
   known: ResolvedAbility[] = [];
   realm = '';
@@ -824,12 +850,15 @@ export class ClientWorld implements IWorld {
   private pendingInputSeqSentAt = new Map<number, number>();
   private ackedInputSeq = 0;
   private inputEchoSamples: number[] = [];
+  private spectateFacingPending = false;
+  private pendingSpectateFacing: number | null = null;
 
   constructor(token: string, characterId: number, cls: PlayerClass, base = '', clientSeed = '') {
     this.characterId = characterId;
     this.token = token;
     this.base = normalizeOrigin(base) || NATIVE_API_ORIGIN;
     this.clientSeed = clientSeed;
+    this.ownPlayerClass = cls;
     this.cfg = { seed: 20061, playerClass: cls };
     // when a realm was picked, connect to that realm's origin; otherwise the
     // page's own host
@@ -885,6 +914,12 @@ export class ClientWorld implements IWorld {
     return samples;
   }
 
+  consumeSpectateFacing(): number | null {
+    const facing = this.pendingSpectateFacing;
+    this.pendingSpectateFacing = null;
+    return facing;
+  }
+
   // -----------------------------------------------------------------------
   // Socket
   // -----------------------------------------------------------------------
@@ -906,7 +941,13 @@ export class ClientWorld implements IWorld {
   }
 
   private sendInput(now = performance.now(), changedOnly = false): boolean {
-    if (!this.connected || this.ws.readyState !== WebSocket.OPEN) return false;
+    if (
+      typeof this.spectating === 'string' ||
+      !this.connected ||
+      this.ws.readyState !== WebSocket.OPEN
+    ) {
+      return false;
+    }
     const sig = this.inputSignature();
     if (changedOnly) {
       if (sig === this.lastInputSig) return false;
@@ -955,6 +996,7 @@ export class ClientWorld implements IWorld {
   // guarantee rather than a runtime hope: a send of an unknown or dispatch-only
   // token fails `tsc`. The raw escape hatch (devCmd) stays untyped on purpose.
   private cmd(payload: { cmd: ClientCommand } & Record<string, unknown>): void {
+    if (typeof this.spectating === 'string' && payload.cmd !== 'chat') return;
     this.rawCmd(payload);
   }
 
@@ -972,6 +1014,7 @@ export class ClientWorld implements IWorld {
     }
     if (msg.t === 'hello') {
       this.playerId = msg.pid;
+      this.ownPlayerId = msg.pid;
       this.cfg.seed = msg.seed;
       if (typeof msg.realm === 'string') this.realm = msg.realm;
       if (Array.isArray(msg.softWords)) {
@@ -981,6 +1024,20 @@ export class ClientWorld implements IWorld {
         this.profanityDirty = true;
       }
       this.connected = true;
+      return;
+    }
+    if (msg.t === 'spectate') {
+      this.spectating = typeof msg.name === 'string' ? msg.name : null;
+      this.spectateFacingPending = true;
+      this.pendingSpectateFacing = null;
+      this.pendingInputSeqSentAt.clear();
+      this.inputEchoSamples = [];
+      if (typeof this.spectating !== 'string') {
+        this.playerId = this.ownPlayerId;
+        this.cfg.playerClass = this.ownPlayerClass;
+      }
+      Object.assign(this.moveInput, emptyMoveInput());
+      this.mouselookFacing = null;
       return;
     }
     if (msg.t === 'censor') {
@@ -1067,6 +1124,9 @@ export class ClientWorld implements IWorld {
 
   private applySnapshot(snap: any): void {
     const now = performance.now();
+    if (typeof this.spectating === 'string' && typeof snap.self?.id === 'number') {
+      this.playerId = snap.self.id;
+    }
     // the interpolation alpha the render loop reached on its last frame
     // (same formula and caps as main.ts); used below to re-anchor the new
     // interpolation segment at the pose currently on screen
@@ -1083,6 +1143,7 @@ export class ClientWorld implements IWorld {
     const seen = new Set<number>();
     const prevSelf = this.entities.get(this.playerId);
     const prevSelfFacing = prevSelf?.facing;
+    const prevSelfDead = prevSelf?.dead ?? false;
 
     const applyWire = (w: any): Entity | null => {
       let e = this.entities.get(w.id);
@@ -1110,6 +1171,11 @@ export class ClientWorld implements IWorld {
         e.skinCatalog = w.cat === 'mech' ? 'mech' : 'class';
         e.holderTier = w.ht ?? 0; // $WOC holder-tier flair (cosmetic, server-set)
         e.holderBalance = typeof w.hb === 'number' ? w.hb : undefined; // exact $WOC, for inspect
+        e.discordTier = w.dt ?? 0; // Discord status-tier flair (cosmetic, server-set)
+        e.discordAvatar = typeof w.dav === 'string' ? w.dav : undefined; // Discord PFP (linked)
+        e.discordName = typeof w.dnm === 'string' ? w.dnm : undefined; // Discord handle/nickname
+        e.discordJoined = typeof w.dj === 'number' ? w.dj : undefined; // Discord join epoch ms
+        e.discordRole = typeof w.dr === 'string' ? w.dr : undefined; // top staff/special role key
         e.scale = w.sc ?? 1;
         e.color = w.c ?? 0xffffff;
         e.dungeonId = w.dgn ?? null;
@@ -1175,6 +1241,7 @@ export class ClientWorld implements IWorld {
       e.facing = w.f;
       e.hp = w.hp;
       e.maxHp = w.mhp;
+      e.rangedPower = w.rp ?? 0;
       e.overheadEmoteId = isOverheadEmoteId(w.emo) ? w.emo : null;
       e.overheadEmoteUntil = e.overheadEmoteId ? Number.POSITIVE_INFINITY : 0;
       if (typeof w.emoSeq === 'number') e.overheadEmoteSeq = w.emoSeq;
@@ -1209,6 +1276,10 @@ export class ClientWorld implements IWorld {
         sourceId: 0,
         school: 'physical' as const,
         stacks: a.stacks,
+        // Mirror the charge count for a charge-limited aura (Lightning Shield); the wire sends it
+        // only when defined (server/game.ts), so an ordinary aura or an old server decodes to
+        // undefined and the badge falls back to the stacks path, exactly as before.
+        charges: a.charges,
       }));
       e.loot = w.lootList ?? null;
       return e;
@@ -1227,6 +1298,15 @@ export class ClientWorld implements IWorld {
     const s = snap.self;
     const e = s ? applyWire(s) : null;
     if (s && e) {
+      if (typeof this.spectating === 'string' && e.kind === 'player' && e.templateId in CLASSES) {
+        this.cfg.playerClass = e.templateId as PlayerClass;
+      }
+      if (this.spectateFacingPending) {
+        this.pendingSpectateFacing = e.facing;
+        this.spectateFacingPending = false;
+      } else if (typeof this.spectating === 'string' && prevSelf && prevSelfDead && !e.dead) {
+        this.pendingSpectateFacing = e.facing;
+      }
       seen.add(s.id);
       if (typeof s.ack === 'number' && s.ack > this.ackedInputSeq) {
         for (let seq = this.ackedInputSeq + 1; seq <= s.ack; seq++) {
@@ -1254,6 +1334,8 @@ export class ClientWorld implements IWorld {
       e.queuedOnSwing = s.queued ?? null;
       e.stats = s.stats ?? e.stats;
       e.attackPower = s.ap ?? 0;
+      e.rangedPower = s.rp ?? 0;
+      e.spellPower = s.sp ?? 0;
       e.critChance = s.crit ?? 0.05;
       e.dodgeChance = s.dodge ?? 0.05;
       e.weapon = s.weapon ?? e.weapon;
@@ -1355,6 +1437,14 @@ export class ClientWorld implements IWorld {
     const missingSince = this.missingSince;
     for (const [id, e] of this.entities) {
       if (id === this.playerId) continue;
+      // Keep the moderator's last own-self record while a different player is
+      // presented as self. The spectate-clear frame can then restore the original
+      // identity immediately instead of exposing a blank entity before the next
+      // server snapshot arrives.
+      if (typeof this.spectating === 'string' && id === this.ownPlayerId) {
+        missingSince.delete(id);
+        continue;
+      }
       if (seen.has(id)) {
         missingSince.delete(id);
         continue;
@@ -1433,6 +1523,11 @@ export class ClientWorld implements IWorld {
     }
     this.cmd({ cmd: 'castSlot', slot });
   }
+  cancelAura(auraId: string): void {
+    // Authoritative on the server; the dropped aura disappears on the next self
+    // snapshot. No optimistic local removal (stat recalc is server-owned).
+    this.cmd({ cmd: 'cancel_aura', aura: auraId });
+  }
   startAutoAttack(): void {
     this.cmd({ cmd: 'attack' });
   }
@@ -1451,7 +1546,7 @@ export class ClientWorld implements IWorld {
       if (id === null) p.targetId = null;
       else {
         const e = this.entities.get(id);
-        if (e && (!e.dead || e.lootable)) p.targetId = id;
+        if (e && (!e.dead || deadTargetSelectable(e, this.playerId))) p.targetId = id;
       }
     }
     this.cmd({ cmd: 'target', id });
@@ -1650,6 +1745,12 @@ export class ClientWorld implements IWorld {
   }
   moveRaidMember(targetPid: number, group: 1 | 2): void {
     this.cmd({ cmd: 'pmoveRaid', id: targetPid, group });
+  }
+  setPartyLootMaster(enabled: boolean, looter: number, threshold: MasterLootThreshold): void {
+    this.cmd({ cmd: 'setLootMaster', enabled, looter, threshold });
+  }
+  assignMasterLoot(rollId: number, targetPids: number[]): void {
+    this.cmd({ cmd: 'masterAssign', rollId, pids: targetPids });
   }
   // raid/target markers
   markerFor(entityId: number): number | null {
@@ -1912,7 +2013,7 @@ export class ClientWorld implements IWorld {
     if (alloc) {
       const clean = (name || 'Build').toString().slice(0, 24);
       const safeBar = Array.isArray(bar)
-        ? bar.slice(0, 16).map((b) => (typeof b === 'string' ? b : null))
+        ? bar.slice(0, SAVED_LOADOUT_BAR_SLOTS).map((b) => (typeof b === 'string' ? b : null))
         : [];
       const saved = { name: clean, alloc: cloneAllocation(alloc), bar: safeBar };
       this.talents = cloneAllocation(alloc);

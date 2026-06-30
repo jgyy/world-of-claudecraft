@@ -137,6 +137,7 @@ const UI_PURE_CORES = [
   'src/ui/talents_view.ts',
   'src/ui/social_view.ts',
   'src/ui/bags_view.ts',
+  'src/ui/item_set_tooltip_view.ts',
   'src/ui/options_view.ts',
   'src/ui/vendor_view.ts',
   'src/ui/market_view.ts',
@@ -156,6 +157,7 @@ const UI_PURE_CORES = [
   'src/ui/focus_order.ts',
   'src/ui/roving_index.ts',
   'src/ui/live_region_politeness.ts',
+  'src/ui/discord_widget_view.ts',
   'src/game/ui_effects_profile.ts',
   'src/game/ui_tier_knobs.ts',
 ].map((rel) => join(repoRoot, rel));

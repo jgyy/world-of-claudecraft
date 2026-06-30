@@ -1415,6 +1415,24 @@ export interface CharacterRow {
   playtime_seconds?: string | number | null;
 }
 
+// The account's "top" character on this realm (highest level, then lifetime XP),
+// for the Discord nameplate flair / level-on-nickname. Realm-scoped like the other
+// reads. Fully parameterized: the only inputs (accountId, REALM) are bound as $1/$2;
+// the ORDER BY uses a static JSONB expression literal (Postgres does not allow a
+// bound parameter for an ORDER BY expression), so the query string carries no
+// interpolation and there is no injection surface.
+export async function highestCharacterForAccount(accountId: number): Promise<CharacterRow | null> {
+  const res = await pool.query(
+    `SELECT id, account_id, name, class, level, state, is_gm, force_rename
+       FROM characters
+      WHERE account_id = $1 AND realm = $2
+      ORDER BY level DESC, ((state->>'lifetimeXp')::bigint) DESC NULLS LAST, id ASC
+      LIMIT 1`,
+    [accountId, REALM],
+  );
+  return res.rows[0] ?? null;
+}
+
 // Character reads/writes are scoped to this process's realm: an account may
 // hold characters on several realms (each served by its own process), but a
 // process only ever lists, loads, or creates characters on its own realm.
@@ -1683,6 +1701,41 @@ export async function saveCharacterState(
     'UPDATE characters SET level = $2, state = $3, updated_at = now() WHERE id = $1',
     [characterId, level, JSON.stringify(cleanState)],
   );
+}
+
+// Persist a character row AND the global World Market blob in ONE transaction.
+// The two live in different tables (characters / world_state), but a Market
+// listing is an escrow: the item leaves the seller's bags (character state) and
+// becomes a listing (market state) in the same Sim action. Saving them as two
+// independent writes lets an unclean crash persist one half and not the other,
+// vaporising the item or duplicating it across bags and market. The leave path
+// uses this so a logout flush of bags can never tear away from the market.
+export async function saveCharacterAndMarketState(
+  characterId: number,
+  level: number,
+  state: CharacterState,
+  market: MarketSave,
+): Promise<void> {
+  const cleanState = sanitizeRemovedZone1Content(state).state;
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    await client.query(
+      'UPDATE characters SET level = $2, state = $3, updated_at = now() WHERE id = $1',
+      [characterId, level, JSON.stringify(cleanState)],
+    );
+    await client.query(
+      `INSERT INTO world_state (key, data, updated_at) VALUES ($1, $2, now())
+       ON CONFLICT (key) DO UPDATE SET data = EXCLUDED.data, updated_at = now()`,
+      ['market', JSON.stringify(market)],
+    );
+    await client.query('COMMIT');
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {});
+    throw err;
+  } finally {
+    client.release();
+  }
 }
 
 export async function isAdminAccount(accountId: number): Promise<boolean> {

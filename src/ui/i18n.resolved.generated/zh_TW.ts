@@ -151,6 +151,9 @@ export const zh_TW: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "正在觀察 {name}"
+    },
     "emotes": {
       "wave": "揮手",
       "laugh": "大笑",
@@ -221,6 +224,9 @@ export const zh_TW: EnTranslations = {
     },
     "rest": {
       "resting": "休息中"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "你的角色",
@@ -317,7 +323,10 @@ export const zh_TW: EnTranslations = {
       "showWalletOnCharacterScreen": "在角色畫面顯示錢包",
       "showWalletOnPlayerCard": "在玩家卡片顯示錢包",
       "uiScale": "介面縮放",
-      "highContrastBackground": "高對比度背景"
+      "highContrastBackground": "高對比度背景",
+      "showItemLevel": "顯示物品等級",
+      "itemLevelLine": "物品等級 {level}",
+      "itemScoreLine": "評分 {score}"
     },
     "controller": {
       "title": "手把",
@@ -447,6 +456,10 @@ export const zh_TW: EnTranslations = {
     },
     "tips": {
       "joinChannels": "提示：輸入 /join world 或 /join lfg 可與全伺服器的玩家聊天。"
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "該任務無法分享。",
@@ -584,6 +597,26 @@ export const zh_TW: EnTranslations = {
       "exportDone": "你的資料已下載。我們已寄送確認信給你。",
       "exportFailed": "無法匯出你的資料。請稍候再試一次。"
     },
+    "masterLoot": {
+      "title": "隊長分配",
+      "enableLabel": "隊長分配",
+      "enableAria": "啟用隊長分配",
+      "looterLabel": "分配者",
+      "leaderOption": "隊長",
+      "thresholdLabel": "品質門檻",
+      "thresholdUncommon": "優秀及以上",
+      "thresholdRare": "稀有及以上",
+      "thresholdEpic": "史詩及以上",
+      "assignPrompt": "分配{item}",
+      "assignAria": "將{item}分配給{name}",
+      "rollButton": "擲骰",
+      "selectAll": "全選",
+      "methodMaster": "拾取方式已設為隊長分配。分配者：{name}。",
+      "methodGroup": "拾取方式已設為小隊拾取。",
+      "assigned": "{looter}將{item}分配給了{target}。",
+      "unassigned": "{item}未被分配，現可自由拾取。",
+      "leaderOnly": "只有隊長才能更改拾取方式。"
+    },
     "bags": {
       "filterGroupAria": "依類別篩選背包",
       "filterAll": "全部",
@@ -690,6 +723,128 @@ export const zh_TW: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "關閉",
+      "keybind": "Discord 面板",
+      "disabled": "Discord 整合目前無法使用。",
+      "tiers": {
+        "none": "未定級",
+        "initiate": "新兵",
+        "squire": "侍從",
+        "footman": "步兵",
+        "knight": "騎士",
+        "champion": "勇士",
+        "warlord": "統帥",
+        "legend": "傳奇",
+        "mythic": "神話"
+      },
+      "loginCta": "使用 Discord 繼續",
+      "orEmail": "或使用電子郵件",
+      "cta": {
+        "title": "連結你的 Discord 以賺取點數並提升階級",
+        "stats": "{online} 人在線 · 伺服器共 {total} 名成員",
+        "statsLoading": "加入社群並獲得獎勵",
+        "button": "一鍵連結",
+        "dismiss": "關閉"
+      },
+      "link": {
+        "cta": "連結 Discord",
+        "relink": "重新連結 Discord",
+        "connecting": "正在開啟 Discord...",
+        "benefits": "連結你的 Discord，從遊玩與社群活動中賺取點數，並攀升階級。",
+        "error": "無法連結 Discord。請再試一次。",
+        "success": "Discord 已連結。"
+      },
+      "linkedAs": "已連結為 {name}",
+      "linkedTitle": "Discord：{name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "開啟此角色的公開檔案",
+      "unlink": "解除連結",
+      "visit": "前往 Discord",
+      "unlinkConfirm": "要將你的 Discord 帳號從這個遊戲帳號解除連結嗎？",
+      "statusLabel": "階級",
+      "rank": "Rank",
+      "points": "點數",
+      "lifetime": "累計",
+      "toNext": "距離下一階級還差 {points} 點",
+      "maxRank": "已達最高階級",
+      "tiersTitle": "階級等級",
+      "tierLocked": "未解鎖",
+      "tierCurrent": "目前",
+      "earnTitle": "如何賺取點數",
+      "earnBody": "透過遊戲遊玩時間以及在 Discord 中保持活躍來賺取點數。點數可提升你的階級。",
+      "memberSince": "加入時間",
+      "memberSinceDays": "已加入 Discord {days} 天",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "美術"
+      },
+      "guildMember": "已驗證成員",
+      "notMember": "尚未加入伺服器",
+      "joinCta": "加入 Discord",
+      "online": "{count} 人在線",
+      "community": "社群",
+      "rewards": "獎勵",
+      "voice": {
+        "title": "語音",
+        "channel": "In {channel}",
+        "empty": "目前沒有人在語音中。",
+        "speaking": "發言中",
+        "muted": "已靜音",
+        "join": "加入語音",
+        "connect": "連接到語音頻道"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "領取",
+        "claimed": "已領取",
+        "locked": "未解鎖",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "達到更高階級才能領取此項目。",
+        "needPoints": "點數不足。",
+        "claimError": "無法領取該獎勵。請再試一次。",
+        "claimedToast": "已領取：{name}",
+        "titleDiscordian": "稱號：Discordian",
+        "titleSquire": "稱號：王國侍從",
+        "chromaBlurple": "Blurple 機甲塗裝",
+        "titleChampion": "稱號：Claudemoon 勇士",
+        "swagStickers": "貼紙包（實體寄送）",
+        "swagTee": "T恤（實體寄送）"
+      },
+      "relay": {
+        "tooFast": "你發送得太快了。請稍候再試。",
+        "lfg": {
+          "label": "尋找隊伍",
+          "hint": "尋找一同挑戰地城或任務的玩家"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "宣傳出售物品或服務"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "徵求你想購買的物品"
+        },
+        "recruit": {
+          "label": "公會招募",
+          "hint": "為你的公會招募玩家"
+        },
+        "event": {
+          "label": "活動 / 團隊副本",
+          "hint": "宣布團隊副本、聚會或活動"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "向社群尋求協助"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const zh_TW: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "開源專案",
+    "whitepaper": "白皮書",
     "terms": "服務條款",
     "privacy": "隱私權政策",
     "discordLabel": "加入Discord社區"
@@ -3459,7 +3615,7 @@ export const zh_TW: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "秘法飛彈",
-        "description": "向敵人發射秘法飛彈，持續 3 秒，每秒造成 8 點秘法傷害。"
+        "description": "向敵人發射秘法飛彈，持續 3 秒，每秒造成 {damage} 點秘法傷害。"
       },
       "polymorph": {
         "name": "變形術",
@@ -3523,7 +3679,7 @@ export const zh_TW: EnTranslations = {
       },
       "stealth": {
         "name": "潛行",
-        "description": "將你隱藏在陰影中：敵人幾乎無法察覺你，但你的移動速度降低 30%。攻擊或受到傷害會打破潛行。再次施放可現身。"
+        "description": "將你隱藏在陰影中：敵人幾乎無法察覺你，但你的移動速度降低 50%。攻擊或受到傷害會打破潛行。再次施放可現身。"
       },
       "adrenaline_rush": {
         "name": "衝動",
@@ -3555,7 +3711,7 @@ export const zh_TW: EnTranslations = {
       },
       "vanish": {
         "name": "消失",
-        "description": "從視野中消失，即使在戰鬥中也能進入潛行狀態。隱身時你的移動速度降低 30%。最多持續 10 秒。"
+        "description": "從視野中消失，即使在戰鬥中也能進入潛行狀態。隱身時你的移動速度降低 50%。最多持續 10 秒。"
       },
       "instant_poison": {
         "name": "速效毒藥",
@@ -3707,7 +3863,7 @@ export const zh_TW: EnTranslations = {
       },
       "mind_flay": {
         "name": "精神鞭笞",
-        "description": "用暗影能量攻擊目標的心靈，持續 3 秒，每秒造成 12 點傷害。"
+        "description": "用暗影能量攻擊目標的心靈，持續 3 秒，每秒造成 {damage} 點傷害。"
       },
       "flash_heal": {
         "name": "快速治療",
@@ -3783,7 +3939,7 @@ export const zh_TW: EnTranslations = {
       },
       "drain_life": {
         "name": "吸取生命",
-        "description": "吸取目標的生命，持續 5 秒，每秒向你轉移 7 點生命值。"
+        "description": "吸取目標的生命，持續 5 秒，每秒向你轉移 {damage} 點生命值。"
       },
       "fear": {
         "name": "恐懼",
@@ -3963,7 +4119,7 @@ export const zh_TW: EnTranslations = {
       },
       "prowl": {
         "name": "潛行",
-        "description": "在狼形態下進入隱匿狀態。無法於戰鬥中使用。"
+        "description": "在狼形態下進入隱匿狀態，移動速度降低 50%。無法於戰鬥中使用。"
       },
       "rake": {
         "name": "撕裂",
@@ -6359,6 +6515,43 @@ export const zh_TW: EnTranslations = {
         "name": "崩塌的聖物庫",
         "enterText": "你向下深入崩塌的聖物庫。",
         "leaveText": "你爬回聖物庫遺墟處的哈爾文修士身邊。"
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "鑄冠戰裝",
+        "bonus2": "攻擊強度提高 40 點。",
+        "bonus3": "力量提高 15 點，耐力提高 15 點。"
+      },
+      "deathlord": {
+        "name": "死王戰甲",
+        "bonus2": "攻擊強度提高 40 點。",
+        "bonus3": "力量提高 15 點，耐力提高 15 點。"
+      },
+      "necromancers": {
+        "name": "死靈法師法衣",
+        "bonus2": "受到傷害造成的施法延退降低 50%。",
+        "bonus3": "施法時不會因受到傷害而被延退。"
+      },
+      "nighttalon": {
+        "name": "夜爪皮甲",
+        "bonus2": "攻擊強度提高 40 點。",
+        "bonus3": "敏捷提高 15 點，致命一擊機率提高 2%。"
+      },
+      "soulflame": {
+        "name": "魂焰法衣",
+        "bonus2": "受到傷害造成的施法延退降低 50%。",
+        "bonus3": "施法時不會因受到傷害而被延退。"
+      },
+      "stormcallers": {
+        "name": "喚雷者法衣",
+        "bonus2": "受到傷害造成的施法延退降低 50%。",
+        "bonus3": "施法時不會因受到傷害而被延退。"
+      },
+      "wyrmshadow": {
+        "name": "龍影外衣",
+        "bonus2": "攻擊強度提高 40 點。",
+        "bonus3": "敏捷提高 15 點，致命一擊機率提高 2%。"
       }
     }
   },

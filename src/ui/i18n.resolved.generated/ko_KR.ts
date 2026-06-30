@@ -151,6 +151,9 @@ export const ko_KR: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "{name} 관전 중"
+    },
     "emotes": {
       "wave": "손인사",
       "laugh": "ㅋㅋ",
@@ -221,6 +224,9 @@ export const ko_KR: EnTranslations = {
     },
     "rest": {
       "resting": "휴식 중"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "내 캐릭터",
@@ -317,7 +323,10 @@ export const ko_KR: EnTranslations = {
       "showWalletOnCharacterScreen": "캐릭터 화면에 지갑 표시",
       "showWalletOnPlayerCard": "플레이어 카드에 지갑 표시",
       "uiScale": "UI 배율",
-      "highContrastBackground": "고대비 배경"
+      "highContrastBackground": "고대비 배경",
+      "showItemLevel": "아이템 레벨 표시",
+      "itemLevelLine": "아이템 레벨 {level}",
+      "itemScoreLine": "점수 {score}"
     },
     "controller": {
       "title": "컨트롤러",
@@ -447,6 +456,10 @@ export const ko_KR: EnTranslations = {
     },
     "tips": {
       "joinChannels": "팁: /join world 또는 /join lfg를 입력하면 서버 전역의 플레이어와 대화할 수 있습니다."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "이 퀘스트는 공유할 수 없습니다.",
@@ -584,6 +597,26 @@ export const ko_KR: EnTranslations = {
       "exportDone": "데이터가 다운로드되었습니다. 확인 메일을 보내드렸습니다.",
       "exportFailed": "데이터를 내보낼 수 없습니다. 잠시 후 다시 시도하세요."
     },
+    "masterLoot": {
+      "title": "분배 담당",
+      "enableLabel": "분배 담당",
+      "enableAria": "분배 담당 사용",
+      "looterLabel": "분배 담당자",
+      "leaderOption": "파티장",
+      "thresholdLabel": "품질 기준",
+      "thresholdUncommon": "고급 이상",
+      "thresholdRare": "희귀 이상",
+      "thresholdEpic": "영웅 이상",
+      "assignPrompt": "{item} 분배",
+      "assignAria": "{item}을(를) {name}에게 분배",
+      "rollButton": "주사위",
+      "selectAll": "전체 선택",
+      "methodMaster": "전리품 방식이 분배 담당으로 설정되었습니다. 분배 담당자: {name}.",
+      "methodGroup": "전리품 방식이 파티 분배로 설정되었습니다.",
+      "assigned": "{looter}님이 {item}을(를) {target}에게 분배했습니다.",
+      "unassigned": "{item}이(가) 분배되지 않아 모두가 획득할 수 있습니다.",
+      "leaderOnly": "파티장만 전리품 방식을 변경할 수 있습니다."
+    },
     "bags": {
       "filterGroupAria": "가방을 분류별로 필터링",
       "filterAll": "전체",
@@ -690,6 +723,128 @@ export const ko_KR: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "닫기",
+      "keybind": "Discord 패널",
+      "disabled": "현재 Discord 연동을 사용할 수 없습니다.",
+      "tiers": {
+        "none": "등급 없음",
+        "initiate": "입문자",
+        "squire": "종자",
+        "footman": "보병",
+        "knight": "기사",
+        "champion": "챔피언",
+        "warlord": "전쟁군주",
+        "legend": "전설",
+        "mythic": "신화"
+      },
+      "loginCta": "Discord로 계속하기",
+      "orEmail": "또는 이메일 사용",
+      "cta": {
+        "title": "Discord를 연결해 포인트를 얻고 등급을 올리세요",
+        "stats": "{online}명 접속 중 · 서버 멤버 {total}명",
+        "statsLoading": "커뮤니티에 참여하고 보상을 받으세요",
+        "button": "한 번의 클릭으로 연결",
+        "dismiss": "닫기"
+      },
+      "link": {
+        "cta": "Discord 연결",
+        "relink": "Discord 다시 연결",
+        "connecting": "Discord 여는 중...",
+        "benefits": "플레이와 커뮤니티 활동으로 포인트를 얻고 상태 등급을 올리려면 Discord를 연결하세요.",
+        "error": "Discord를 연결할 수 없습니다. 다시 시도해 주세요.",
+        "success": "Discord가 연결되었습니다."
+      },
+      "linkedAs": "{name}(으)로 연결됨",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "이 캐릭터의 공개 프로필 열기",
+      "unlink": "연결 해제",
+      "visit": "Discord 방문",
+      "unlinkConfirm": "이 게임 계정에서 Discord 계정 연결을 해제하시겠습니까?",
+      "statusLabel": "상태",
+      "rank": "Rank",
+      "points": "포인트",
+      "lifetime": "누적",
+      "toNext": "다음 등급까지 {points}",
+      "maxRank": "최고 등급 달성",
+      "tiersTitle": "상태 등급",
+      "tierLocked": "잠김",
+      "tierCurrent": "현재",
+      "earnTitle": "포인트 획득 방법",
+      "earnBody": "게임 플레이 시간과 Discord 활동으로 포인트를 얻으세요. 포인트는 상태 등급을 올려줍니다.",
+      "memberSince": "가입일",
+      "memberSinceDays": "Discord 가입 {days}일",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "아티스트"
+      },
+      "guildMember": "인증된 멤버",
+      "notMember": "아직 서버에 없음",
+      "joinCta": "Discord 참여하기",
+      "online": "{count}명 접속 중",
+      "community": "커뮤니티",
+      "rewards": "보상",
+      "voice": {
+        "title": "음성",
+        "channel": "In {channel}",
+        "empty": "현재 음성 채널에 아무도 없습니다.",
+        "speaking": "말하는 중",
+        "muted": "음소거됨",
+        "join": "음성 참여",
+        "connect": "음성 채널에 연결"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "받기",
+        "claimed": "받음",
+        "locked": "잠김",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "이 보상을 받으려면 더 높은 등급에 도달하세요.",
+        "needPoints": "포인트가 부족합니다.",
+        "claimError": "보상을 받을 수 없습니다. 다시 시도해 주세요.",
+        "claimedToast": "받음: {name}",
+        "titleDiscordian": "칭호: Discordian",
+        "titleSquire": "칭호: 렐름의 종자",
+        "chromaBlurple": "Blurple 메크 크로마",
+        "titleChampion": "칭호: Claudemoon의 챔피언",
+        "swagStickers": "스티커 팩 (배송)",
+        "swagTee": "티셔츠 (배송)"
+      },
+      "relay": {
+        "tooFast": "너무 빠르게 게시하고 있습니다. 잠시 후 다시 시도해 주세요.",
+        "lfg": {
+          "label": "파티 구함",
+          "hint": "던전이나 퀘스트를 함께할 플레이어 찾기"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "판매할 아이템이나 서비스 광고"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "구매하고 싶은 아이템 요청"
+        },
+        "recruit": {
+          "label": "길드 모집",
+          "hint": "길드에 플레이어 모집"
+        },
+        "event": {
+          "label": "이벤트 / 레이드",
+          "hint": "레이드, 모임 또는 이벤트 공지"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "커뮤니티에 도움 요청"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const ko_KR: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "오픈 소스 프로젝트",
+    "whitepaper": "백서",
     "terms": "서비스 이용약관",
     "privacy": "개인정보 처리방침",
     "discordLabel": "Discord 참여하기"
@@ -3459,7 +3615,7 @@ export const ko_KR: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "비전 화살",
-        "description": "적에게 비전 화살을 발사하여 3초 동안 매초 8의 비전 피해를 입힙니다."
+        "description": "적에게 비전 화살을 발사하여 3초 동안 매초 {damage}의 비전 피해를 입힙니다."
       },
       "polymorph": {
         "name": "변이",
@@ -3523,7 +3679,7 @@ export const ko_KR: EnTranslations = {
       },
       "stealth": {
         "name": "은신",
-        "description": "그림자 속에 몸을 숨깁니다. 적이 거의 알아차리지 못하지만 이동 속도가 30% 감소합니다. 공격하거나 피해를 받으면 은신이 해제됩니다. 다시 시전하면 모습을 드러냅니다."
+        "description": "그림자 속에 몸을 숨깁니다. 적이 거의 알아차리지 못하지만 이동 속도가 50% 감소합니다. 공격하거나 피해를 받으면 은신이 해제됩니다. 다시 시전하면 모습을 드러냅니다."
       },
       "adrenaline_rush": {
         "name": "아드레날린 촉진",
@@ -3555,7 +3711,7 @@ export const ko_KR: EnTranslations = {
       },
       "vanish": {
         "name": "소멸",
-        "description": "시야에서 사라져 전투 중에도 은신 상태가 됩니다. 숨어 있는 동안 이동 속도가 30% 감소합니다. 최대 10초 동안 지속됩니다."
+        "description": "시야에서 사라져 전투 중에도 은신 상태가 됩니다. 숨어 있는 동안 이동 속도가 50% 감소합니다. 최대 10초 동안 지속됩니다."
       },
       "instant_poison": {
         "name": "속효성 독",
@@ -3707,7 +3863,7 @@ export const ko_KR: EnTranslations = {
       },
       "mind_flay": {
         "name": "정신의 채찍",
-        "description": "암흑 에너지로 대상의 정신을 공격해 3초 동안 매초 12의 피해를 입힙니다."
+        "description": "암흑 에너지로 대상의 정신을 공격해 3초 동안 매초 {damage}의 피해를 입힙니다."
       },
       "flash_heal": {
         "name": "순간 치유",
@@ -3783,7 +3939,7 @@ export const ko_KR: EnTranslations = {
       },
       "drain_life": {
         "name": "생명력 흡수",
-        "description": "대상의 생명력을 흡수해 5초 동안 매초 7의 생명력을 자신에게 이전합니다."
+        "description": "대상의 생명력을 흡수해 5초 동안 매초 {damage}의 생명력을 자신에게 이전합니다."
       },
       "fear": {
         "name": "공포",
@@ -3963,7 +4119,7 @@ export const ko_KR: EnTranslations = {
       },
       "prowl": {
         "name": "은신 보행",
-        "description": "늑대 변신 상태에서 은신합니다. 전투 중에는 사용할 수 없습니다."
+        "description": "늑대 변신 상태에서 은신하고 이동 속도가 50% 감소합니다. 전투 중에는 사용할 수 없습니다."
       },
       "rake": {
         "name": "할퀴기",
@@ -6359,6 +6515,43 @@ export const ko_KR: EnTranslations = {
         "name": "무너진 성물실",
         "enterText": "무너진 성물실로 내려갑니다.",
         "leaveText": "성물실 폐허의 브라더 할벤에게로 다시 올라갑니다."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "왕관벼림 전투장비",
+        "bonus2": "전투력이 40만큼 증가합니다.",
+        "bonus3": "힘이 15, 체력이 15만큼 증가합니다."
+      },
+      "deathlord": {
+        "name": "죽음군주의 전투장비",
+        "bonus2": "전투력이 40만큼 증가합니다.",
+        "bonus3": "힘이 15, 체력이 15만큼 증가합니다."
+      },
+      "necromancers": {
+        "name": "강령술사의 의복",
+        "bonus2": "피해로 인한 시전 밀림이 50% 감소합니다.",
+        "bonus3": "시전 중 피해를 받아도 밀려나지 않습니다."
+      },
+      "nighttalon": {
+        "name": "밤발톱 가죽장비",
+        "bonus2": "전투력이 40만큼 증가합니다.",
+        "bonus3": "민첩이 15, 치명타 확률이 2% 증가합니다."
+      },
+      "soulflame": {
+        "name": "영혼불꽃 의복",
+        "bonus2": "피해로 인한 시전 밀림이 50% 감소합니다.",
+        "bonus3": "시전 중 피해를 받아도 밀려나지 않습니다."
+      },
+      "stormcallers": {
+        "name": "폭풍소환사의 의복",
+        "bonus2": "피해로 인한 시전 밀림이 50% 감소합니다.",
+        "bonus3": "시전 중 피해를 받아도 밀려나지 않습니다."
+      },
+      "wyrmshadow": {
+        "name": "고룡그림자 의복",
+        "bonus2": "전투력이 40만큼 증가합니다.",
+        "bonus3": "민첩이 15, 치명타 확률이 2% 증가합니다."
       }
     }
   },

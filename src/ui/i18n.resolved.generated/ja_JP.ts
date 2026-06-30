@@ -151,6 +151,9 @@ export const ja_JP: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "{name}を観戦中"
+    },
     "emotes": {
       "wave": "手を振る",
       "laugh": "大笑い",
@@ -221,6 +224,9 @@ export const ja_JP: EnTranslations = {
     },
     "rest": {
       "resting": "休息中"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "あなたのキャラクター",
@@ -317,7 +323,10 @@ export const ja_JP: EnTranslations = {
       "showWalletOnCharacterScreen": "キャラクター画面にウォレットを表示",
       "showWalletOnPlayerCard": "プレイヤーカードにウォレットを表示",
       "uiScale": "UIスケール",
-      "highContrastBackground": "高コントラスト背景"
+      "highContrastBackground": "高コントラスト背景",
+      "showItemLevel": "アイテムレベルを表示",
+      "itemLevelLine": "アイテムレベル {level}",
+      "itemScoreLine": "スコア {score}"
     },
     "controller": {
       "title": "コントローラー",
@@ -447,6 +456,10 @@ export const ja_JP: EnTranslations = {
     },
     "tips": {
       "joinChannels": "ヒント：/join world または /join lfg と入力すると、レルム全体のプレイヤーとチャットできます。"
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "このクエストは共有できません。",
@@ -584,6 +597,26 @@ export const ja_JP: EnTranslations = {
       "exportDone": "データをダウンロードしました。確認のメールをお送りしました。",
       "exportFailed": "データをエクスポートできませんでした。しばらくしてからやり直してください。"
     },
+    "masterLoot": {
+      "title": "マスタールート",
+      "enableLabel": "マスタールート",
+      "enableAria": "マスタールートを有効化",
+      "looterLabel": "分配担当",
+      "leaderOption": "パーティリーダー",
+      "thresholdLabel": "品質しきい値",
+      "thresholdUncommon": "アンコモン以上",
+      "thresholdRare": "レア以上",
+      "thresholdEpic": "エピック以上",
+      "assignPrompt": "{item}を分配",
+      "assignAria": "{item}を{name}に分配",
+      "rollButton": "ロール",
+      "selectAll": "全員選択",
+      "methodMaster": "分配方式をマスタールートに設定しました。分配担当：{name}。",
+      "methodGroup": "分配方式をグループルートに設定しました。",
+      "assigned": "{looter}が{item}を{target}に分配しました。",
+      "unassigned": "{item}は分配されず、誰でも入手できます。",
+      "leaderOnly": "分配方式を変更できるのはパーティリーダーだけです。"
+    },
     "bags": {
       "filterGroupAria": "バッグをカテゴリーで絞り込む",
       "filterAll": "すべて",
@@ -690,6 +723,128 @@ export const ja_JP: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "閉じる",
+      "keybind": "Discordパネル",
+      "disabled": "Discord連携は現在利用できません。",
+      "tiers": {
+        "none": "ランク外",
+        "initiate": "見習い",
+        "squire": "従者",
+        "footman": "歩兵",
+        "knight": "騎士",
+        "champion": "チャンピオン",
+        "warlord": "軍団長",
+        "legend": "伝説",
+        "mythic": "神話"
+      },
+      "loginCta": "Discordで続ける",
+      "orEmail": "またはメールを使用",
+      "cta": {
+        "title": "Discordを連携してポイントを獲得し、ランクを上げましょう",
+        "stats": "{online}人オンライン · サーバーメンバー{total}人",
+        "statsLoading": "コミュニティに参加して報酬を獲得しましょう",
+        "button": "ワンクリックで連携",
+        "dismiss": "非表示にする"
+      },
+      "link": {
+        "cta": "Discordを連携",
+        "relink": "Discordを再連携",
+        "connecting": "Discordを開いています...",
+        "benefits": "Discordを連携すると、プレイやコミュニティ活動からポイントを獲得し、ステータスランクを上げられます。",
+        "error": "Discordを連携できませんでした。もう一度お試しください。",
+        "success": "Discordを連携しました。"
+      },
+      "linkedAs": "{name}として連携済み",
+      "linkedTitle": "Discord：{name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "このキャラクターの公開プロフィールを開く",
+      "unlink": "連携解除",
+      "visit": "Discordを開く",
+      "unlinkConfirm": "このゲームアカウントからDiscordアカウントの連携を解除しますか？",
+      "statusLabel": "ステータス",
+      "rank": "Rank",
+      "points": "ポイント",
+      "lifetime": "累計",
+      "toNext": "次のランクまで{points}",
+      "maxRank": "最高ランク到達",
+      "tiersTitle": "ステータスランク",
+      "tierLocked": "ロック中",
+      "tierCurrent": "現在",
+      "earnTitle": "ポイントの獲得方法",
+      "earnBody": "ゲームのプレイ時間とDiscordでの活動からポイントを獲得できます。ポイントはステータスランクを上げます。",
+      "memberSince": "加入日",
+      "memberSinceDays": "Discord加入{days}日",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "アーティスト"
+      },
+      "guildMember": "認証済みメンバー",
+      "notMember": "まだサーバーに参加していません",
+      "joinCta": "Discordに参加",
+      "online": "{count}人オンライン",
+      "community": "コミュニティ",
+      "rewards": "報酬",
+      "voice": {
+        "title": "ボイス",
+        "channel": "In {channel}",
+        "empty": "現在ボイスに参加している人はいません。",
+        "speaking": "発言中",
+        "muted": "ミュート中",
+        "join": "ボイスに参加",
+        "connect": "ボイスチャンネルに接続"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "受け取る",
+        "claimed": "受取済み",
+        "locked": "ロック中",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "これを受け取るにはより高いランクが必要です。",
+        "needPoints": "ポイントが足りません。",
+        "claimError": "その報酬を受け取れませんでした。もう一度お試しください。",
+        "claimedToast": "受け取りました：{name}",
+        "titleDiscordian": "称号：Discordian",
+        "titleSquire": "称号：レルムの従者",
+        "chromaBlurple": "Blurpleメックカラー",
+        "titleChampion": "称号：Claudemoonのチャンピオン",
+        "swagStickers": "ステッカーパック（発送）",
+        "swagTee": "Tシャツ（発送）"
+      },
+      "relay": {
+        "tooFast": "投稿が速すぎます。少し待ってからもう一度お試しください。",
+        "lfg": {
+          "label": "パーティ募集",
+          "hint": "ダンジョンやクエストの仲間を探す"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "販売するアイテムやサービスを宣伝する"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "購入したいアイテムを募集する"
+        },
+        "recruit": {
+          "label": "ギルドメンバー募集",
+          "hint": "ギルドの仲間を募集する"
+        },
+        "event": {
+          "label": "イベント / レイド",
+          "hint": "レイドや集会、イベントを告知する"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "コミュニティに助けを求める"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const ja_JP: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "オープンソースプロジェクト",
+    "whitepaper": "ホワイトペーパー",
     "terms": "利用規約",
     "privacy": "プライバシーポリシー",
     "discordLabel": "Discordに参加する"
@@ -3459,7 +3615,7 @@ export const ja_JP: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "アーケインミサイル",
-        "description": "敵にアーケインミサイルを放ち、3秒間、毎秒8の秘術ダメージを与えます。"
+        "description": "敵にアーケインミサイルを放ち、3秒間、毎秒{damage}の秘術ダメージを与えます。"
       },
       "polymorph": {
         "name": "ポリモーフ",
@@ -3523,7 +3679,7 @@ export const ja_JP: EnTranslations = {
       },
       "stealth": {
         "name": "ステルス",
-        "description": "影に身を隠します。敵にほとんど気づかれませんが、移動速度が30%低下します。攻撃するかダメージを受けるとステルスが解除されます。再度使用すると姿を現します。"
+        "description": "影に身を隠します。敵にほとんど気づかれませんが、移動速度が50%低下します。攻撃するかダメージを受けるとステルスが解除されます。再度使用すると姿を現します。"
       },
       "adrenaline_rush": {
         "name": "アドレナリンラッシュ",
@@ -3555,7 +3711,7 @@ export const ja_JP: EnTranslations = {
       },
       "vanish": {
         "name": "ヴァニッシュ",
-        "description": "視界から消え、戦闘中でもステルス状態に入ります。隠れている間は移動速度が30%低下します。最大10秒間持続します。"
+        "description": "視界から消え、戦闘中でもステルス状態に入ります。隠れている間は移動速度が50%低下します。最大10秒間持続します。"
       },
       "instant_poison": {
         "name": "インスタント・ポイズン",
@@ -3707,7 +3863,7 @@ export const ja_JP: EnTranslations = {
       },
       "mind_flay": {
         "name": "マインドフレイ",
-        "description": "暗黒エネルギーで対象の精神を攻撃し、3秒間、毎秒12ダメージを与えます。"
+        "description": "暗黒エネルギーで対象の精神を攻撃し、3秒間、毎秒{damage}ダメージを与えます。"
       },
       "flash_heal": {
         "name": "フラッシュヒール",
@@ -3783,7 +3939,7 @@ export const ja_JP: EnTranslations = {
       },
       "drain_life": {
         "name": "ドレインライフ",
-        "description": "対象の生命力を吸収し、5秒間、毎秒7の体力を自分に移します。"
+        "description": "対象の生命力を吸収し、5秒間、毎秒{damage}の体力を自分に移します。"
       },
       "fear": {
         "name": "フィアー",
@@ -3963,7 +4119,7 @@ export const ja_JP: EnTranslations = {
       },
       "prowl": {
         "name": "忍び寄り",
-        "description": "ウルフフォーム中にステルス状態に入る。戦闘中は使用できない。"
+        "description": "ウルフフォーム中にステルス状態に入り、移動速度が50%低下する。戦闘中は使用できない。"
       },
       "rake": {
         "name": "切り裂き",
@@ -6359,6 +6515,43 @@ export const ja_JP: EnTranslations = {
         "name": "崩れた聖遺物庫",
         "enterText": "あなたは崩れた聖遺物庫へと降りていく。",
         "leaveText": "あなたは聖遺物庫の廃墟にいるハルヴェン修道士のもとへ登り戻る。"
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "冠鋳の戦装束",
+        "bonus2": "攻撃力が40上昇します。",
+        "bonus3": "筋力が15、スタミナが15上昇します。"
+      },
+      "deathlord": {
+        "name": "死王の戦装束",
+        "bonus2": "攻撃力が40上昇します。",
+        "bonus3": "筋力が15、スタミナが15上昇します。"
+      },
+      "necromancers": {
+        "name": "死霊術師の法衣",
+        "bonus2": "ダメージによる詠唱押し戻しを50%軽減します。",
+        "bonus3": "詠唱中にダメージを受けても押し戻されません。"
+      },
+      "nighttalon": {
+        "name": "夜爪の革装束",
+        "bonus2": "攻撃力が40上昇します。",
+        "bonus3": "敏捷性が15、クリティカル率が2%上昇します。"
+      },
+      "soulflame": {
+        "name": "魂炎の法衣",
+        "bonus2": "ダメージによる詠唱押し戻しを50%軽減します。",
+        "bonus3": "詠唱中にダメージを受けても押し戻されません。"
+      },
+      "stormcallers": {
+        "name": "嵐呼びの法衣",
+        "bonus2": "ダメージによる詠唱押し戻しを50%軽減します。",
+        "bonus3": "詠唱中にダメージを受けても押し戻されません。"
+      },
+      "wyrmshadow": {
+        "name": "竜影の装束",
+        "bonus2": "攻撃力が40上昇します。",
+        "bonus3": "敏捷性が15、クリティカル率が2%上昇します。"
       }
     }
   },

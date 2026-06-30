@@ -151,6 +151,9 @@ export const sv_SE: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "Spectating {name}"
+    },
     "emotes": {
       "wave": "Vinka",
       "laugh": "LOL",
@@ -221,6 +224,9 @@ export const sv_SE: EnTranslations = {
     },
     "rest": {
       "resting": "Vilar"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "Din hjälte",
@@ -317,7 +323,10 @@ export const sv_SE: EnTranslations = {
       "showWalletOnCharacterScreen": "Visa plånbok på karaktärsskärmen",
       "showWalletOnPlayerCard": "Visa plånbok på spelarkortet",
       "uiScale": "Gränssnittsskala",
-      "highContrastBackground": "Bakgrund med hög kontrast"
+      "highContrastBackground": "Bakgrund med hög kontrast",
+      "showItemLevel": "Visa föremålsnivå",
+      "itemLevelLine": "Föremålsnivå {level}",
+      "itemScoreLine": "Poäng {score}"
     },
     "controller": {
       "title": "Handkontroll",
@@ -447,6 +456,10 @@ export const sv_SE: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Tips: skriv /join world eller /join lfg för att chatta med spelare över hela världen."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Det här uppdraget kan inte delas.",
@@ -584,6 +597,26 @@ export const sv_SE: EnTranslations = {
       "exportDone": "Dina data laddades ner. Vi har mejlat dig en bekräftelse.",
       "exportFailed": "Kunde inte exportera dina data. Försök igen om en stund."
     },
+    "masterLoot": {
+      "title": "Master loot",
+      "enableLabel": "Master loot",
+      "enableAria": "Aktivera master loot",
+      "looterLabel": "Master looter",
+      "leaderOption": "Gruppledare",
+      "thresholdLabel": "Tröskel",
+      "thresholdUncommon": "Ovanlig och uppat",
+      "thresholdRare": "Sallsynt och uppat",
+      "thresholdEpic": "Episk och uppat",
+      "assignPrompt": "Tilldela {item}",
+      "assignAria": "Tilldela {item} till {name}",
+      "rollButton": "Slå",
+      "selectAll": "Markera alla",
+      "methodMaster": "Lootmetod satt till master loot. Master looter: {name}.",
+      "methodGroup": "Lootmetod satt till grupploot.",
+      "assigned": "{looter} tilldelade {item} till {target}.",
+      "unassigned": "{item} tilldelades inte och ar fritt for alla.",
+      "leaderOnly": "Endast gruppledaren kan andra lootmetoden."
+    },
     "bags": {
       "filterGroupAria": "Filtrera väskor efter kategori",
       "filterAll": "Alla",
@@ -607,9 +640,9 @@ export const sv_SE: EnTranslations = {
       "tooLarge": "En raid med fler än fem medlemmar kan inte omvandlas tillbaka till en grupp."
     },
     "itemArmorType": {
-      "cloth": "Cloth",
-      "leather": "Leather",
-      "mail": "Mail"
+      "cloth": "Tyg",
+      "leather": "Läder",
+      "mail": "Ringbrynja"
     },
     "auraEffect": {
       "dot": "Gör {value} {school}-skada var {interval}:e s",
@@ -690,6 +723,128 @@ export const sv_SE: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "Close",
+      "keybind": "Discord Panel",
+      "disabled": "Discord integration is not available right now.",
+      "tiers": {
+        "none": "Unranked",
+        "initiate": "Initiate",
+        "squire": "Squire",
+        "footman": "Footman",
+        "knight": "Knight",
+        "champion": "Champion",
+        "warlord": "Warlord",
+        "legend": "Legend",
+        "mythic": "Mythic"
+      },
+      "loginCta": "Continue with Discord",
+      "orEmail": "or use email",
+      "cta": {
+        "title": "Link your Discord to earn points and rank up",
+        "stats": "{online} online · {total} members in the server",
+        "statsLoading": "Join the community and earn rewards",
+        "button": "Link in one click",
+        "dismiss": "Dismiss"
+      },
+      "link": {
+        "cta": "Link Discord",
+        "relink": "Relink Discord",
+        "connecting": "Opening Discord...",
+        "benefits": "Link your Discord to earn points from play and community activity, and climb the status tiers.",
+        "error": "Could not link Discord. Please try again.",
+        "success": "Discord linked."
+      },
+      "linkedAs": "Linked as {name}",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "Open this character's public profile",
+      "unlink": "Unlink",
+      "visit": "Visit Discord",
+      "unlinkConfirm": "Unlink your Discord account from this game account?",
+      "statusLabel": "Status",
+      "rank": "Rank",
+      "points": "Points",
+      "lifetime": "Lifetime",
+      "toNext": "{points} to next rank",
+      "maxRank": "Top rank reached",
+      "tiersTitle": "Status Tiers",
+      "tierLocked": "Locked",
+      "tierCurrent": "Current",
+      "earnTitle": "How to earn points",
+      "earnBody": "Earn points from time played in game and from staying active in the Discord. Points raise your status tier.",
+      "memberSince": "Member since",
+      "memberSinceDays": "{days}d in the Discord",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "Artist"
+      },
+      "guildMember": "Verified member",
+      "notMember": "Not in the server yet",
+      "joinCta": "Join the Discord",
+      "online": "{count} online",
+      "community": "Community",
+      "rewards": "Rewards",
+      "voice": {
+        "title": "Voice",
+        "channel": "In {channel}",
+        "empty": "No one is in voice right now.",
+        "speaking": "Speaking",
+        "muted": "Muted",
+        "join": "Join voice",
+        "connect": "Connect to voice channel"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "Claim",
+        "claimed": "Claimed",
+        "locked": "Locked",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "Reach a higher rank to claim this.",
+        "needPoints": "Not enough points.",
+        "claimError": "Could not claim that reward. Please try again.",
+        "claimedToast": "Claimed: {name}",
+        "titleDiscordian": "Title: Discordian",
+        "titleSquire": "Title: Squire of the Realm",
+        "chromaBlurple": "Blurple Mech Chroma",
+        "titleChampion": "Title: Champion of Claudemoon",
+        "swagStickers": "Sticker Pack (shipped)",
+        "swagTee": "T-Shirt (shipped)"
+      },
+      "relay": {
+        "tooFast": "You are posting too fast. Wait a moment and try again.",
+        "lfg": {
+          "label": "Looking for Group",
+          "hint": "Find players for a dungeon or quest"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "Advertise an item or service for sale"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "Request an item you want to buy"
+        },
+        "recruit": {
+          "label": "Guild Recruiting",
+          "hint": "Recruit players for your guild"
+        },
+        "event": {
+          "label": "Event / Raid",
+          "hint": "Announce a raid, meetup or event"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "Ask the community for help"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const sv_SE: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "Projekt med öppen källkod",
+    "whitepaper": "Whitepaper",
     "terms": "Användarvillkor",
     "privacy": "Integritetspolicy",
     "discordLabel": "Gå med i Discord"
@@ -2719,7 +2875,7 @@ export const sv_SE: EnTranslations = {
     "combat": {
       "floatingMiss": "Bom",
       "floatingDodge": "Undvek",
-      "floatingResist": "Resist",
+      "floatingResist": "Motstod",
       "cannotMove": "Kan inte röra dig!",
       "attack": "anfall",
       "damageDone": "Din {ability} träffar {target} för {amount}.",
@@ -2728,7 +2884,7 @@ export const sv_SE: EnTranslations = {
       "damageTakenCrit": "{source} träffar dig kritiskt för {amount}.",
       "miss": "Din {ability} missar {target}.",
       "dodged": "Din {ability} undviks av {target}.",
-      "resisted": "Your {ability} is resisted by {target}.",
+      "resisted": "{target} motstår din {ability}.",
       "healSelf": "Din {ability} läker dig för {amount}.",
       "healSelfCrit": "Din {ability} läker dig kritiskt för {amount}.",
       "healOther": "Din {ability} läker {target} för {amount}.",
@@ -3459,7 +3615,7 @@ export const sv_SE: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Arkana missiler",
-        "description": "Skickar arkana missiler mot fienden och vållar 8 arkanskada varje sekund i 3 sek."
+        "description": "Skickar arkana missiler mot fienden och vållar {damage} arkanskada varje sekund i 3 sek."
       },
       "polymorph": {
         "name": "Förvandling",
@@ -3523,7 +3679,7 @@ export const sv_SE: EnTranslations = {
       },
       "stealth": {
         "name": "Smyg",
-        "description": "Döljer dig i skuggorna: fiender lägger knappt märke till dig, men du rör dig 30 % långsammare. Att anfalla eller ta skada bryter Smyg. Kasta igen för att kliva fram."
+        "description": "Döljer dig i skuggorna: fiender lägger knappt märke till dig, men du rör dig 50 % långsammare. Att anfalla eller ta skada bryter Smyg. Kasta igen för att kliva fram."
       },
       "adrenaline_rush": {
         "name": "Adrenalinrus",
@@ -3555,7 +3711,7 @@ export const sv_SE: EnTranslations = {
       },
       "vanish": {
         "name": "Försvinn",
-        "description": "Försvinn ur sikte och gå in i Smyg även i strid. Du rör dig 30 % långsammare medan du är dold. Varar i upp till 10 sek."
+        "description": "Försvinn ur sikte och gå in i Smyg även i strid. Du rör dig 50 % långsammare medan du är dold. Varar i upp till 10 sek."
       },
       "instant_poison": {
         "name": "Snabbverkande gift",
@@ -3707,7 +3863,7 @@ export const sv_SE: EnTranslations = {
       },
       "mind_flay": {
         "name": "Sinnesgissel",
-        "description": "Angriper målets sinne med skuggenergi och vållar 12 skada varje sekund i 3 sek."
+        "description": "Angriper målets sinne med skuggenergi och vållar {damage} skada varje sekund i 3 sek."
       },
       "flash_heal": {
         "name": "Snabbläkning",
@@ -3783,7 +3939,7 @@ export const sv_SE: EnTranslations = {
       },
       "drain_life": {
         "name": "Dränera liv",
-        "description": "Dränerar målets liv och överför 7 hälsa till dig varje sekund i 5 sek."
+        "description": "Dränerar målets liv och överför {damage} hälsa till dig varje sekund i 5 sek."
       },
       "fear": {
         "name": "Skräck",
@@ -3963,7 +4119,7 @@ export const sv_SE: EnTranslations = {
       },
       "prowl": {
         "name": "Smyga",
-        "description": "Gå i smyg medan du är i vargform. Kan inte användas i strid."
+        "description": "Gå i smyg medan du är i vargform och rör dig 50 % långsammare. Kan inte användas i strid."
       },
       "rake": {
         "name": "Krafsa",
@@ -6359,6 +6515,43 @@ export const sv_SE: EnTranslations = {
         "name": "Det rasade relikvariet",
         "enterText": "Du stiger ner i det rasade relikvariet.",
         "leaveText": "Du klättrar tillbaka till broder Halven vid relikvarieruinen."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Kronsmidd stridsutrustning",
+        "bonus2": "Ökar attackkraft med 40.",
+        "bonus3": "Ökar styrka med 15 och uthållighet med 15."
+      },
+      "deathlord": {
+        "name": "Dödsherrens stridsutrustning",
+        "bonus2": "Ökar attackkraft med 40.",
+        "bonus3": "Ökar styrka med 15 och uthållighet med 15."
+      },
+      "necromancers": {
+        "name": "Nekromantikerns skrud",
+        "bonus2": "Minskar kastfördröjning från skada med 50%.",
+        "bonus3": "Skada du tar fördröjer inte dina besvärjelser."
+      },
+      "nighttalon": {
+        "name": "Nattklo läderutrustning",
+        "bonus2": "Ökar attackkraft med 40.",
+        "bonus3": "Ökar smidighet med 15 och kritisk chans med 2%."
+      },
+      "soulflame": {
+        "name": "Själsflammans skrud",
+        "bonus2": "Minskar kastfördröjning från skada med 50%.",
+        "bonus3": "Skada du tar fördröjer inte dina besvärjelser."
+      },
+      "stormcallers": {
+        "name": "Stormkallarens skrud",
+        "bonus2": "Minskar kastfördröjning från skada med 50%.",
+        "bonus3": "Skada du tar fördröjer inte dina besvärjelser."
+      },
+      "wyrmshadow": {
+        "name": "Wyrmskuggans utrustning",
+        "bonus2": "Ökar attackkraft med 40.",
+        "bonus3": "Ökar smidighet med 15 och kritisk chans med 2%."
       }
     }
   },

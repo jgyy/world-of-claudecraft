@@ -151,6 +151,9 @@ export const de_DE: EnTranslations = {
     }
   },
   "hudChrome": {
+    "spectate": {
+      "banner": "Spectating {name}"
+    },
     "emotes": {
       "wave": "Winken",
       "laugh": "Lachen",
@@ -221,6 +224,9 @@ export const de_DE: EnTranslations = {
     },
     "rest": {
       "resting": "Erholung"
+    },
+    "abilityScaling": {
+      "bonus": "(+{value})"
     },
     "unitFrame": {
       "playerLabel": "Euer Charakter",
@@ -317,7 +323,10 @@ export const de_DE: EnTranslations = {
       "showWalletOnCharacterScreen": "Wallet auf dem Charakterbildschirm anzeigen",
       "showWalletOnPlayerCard": "Wallet auf der Spielerkarte anzeigen",
       "uiScale": "UI-Skalierung",
-      "highContrastBackground": "Hintergrund mit hohem Kontrast"
+      "highContrastBackground": "Hintergrund mit hohem Kontrast",
+      "showItemLevel": "Gegenstandsstufe anzeigen",
+      "itemLevelLine": "Gegenstandsstufe {level}",
+      "itemScoreLine": "Wertung {score}"
     },
     "controller": {
       "title": "Controller",
@@ -447,6 +456,10 @@ export const de_DE: EnTranslations = {
     },
     "tips": {
       "joinChannels": "Tipp: Gebt /join world oder /join lfg ein, um mit Spielern im ganzen Realm zu chatten."
+    },
+    "itemSet": {
+      "header": "{name} ({have}/{total})",
+      "bonusLine": "({pieces}) {bonus}"
     },
     "questShare": {
       "notShareable": "Diese Quest kann nicht geteilt werden.",
@@ -584,6 +597,26 @@ export const de_DE: EnTranslations = {
       "exportDone": "Eure Daten wurden heruntergeladen. Wir haben Euch eine Bestätigung per E-Mail gesendet.",
       "exportFailed": "Eure Daten konnten nicht exportiert werden. Versucht es gleich noch einmal."
     },
+    "masterLoot": {
+      "title": "Pluendermeister",
+      "enableLabel": "Pluendermeister",
+      "enableAria": "Pluendermeister aktivieren",
+      "looterLabel": "Pluendermeister",
+      "leaderOption": "Gruppenleiter",
+      "thresholdLabel": "Schwelle",
+      "thresholdUncommon": "Ungewoehnlich und hoeher",
+      "thresholdRare": "Selten und hoeher",
+      "thresholdEpic": "Episch und hoeher",
+      "assignPrompt": "{item} zuweisen",
+      "assignAria": "{item} an {name} zuweisen",
+      "rollButton": "Wuerfeln",
+      "selectAll": "Alle auswaehlen",
+      "methodMaster": "Beutemethode auf Pluendermeister gesetzt. Pluendermeister: {name}.",
+      "methodGroup": "Beutemethode auf Gruppenbeute gesetzt.",
+      "assigned": "{looter} hat {item} an {target} zugewiesen.",
+      "unassigned": "{item} wurde nicht zugewiesen und ist fuer alle frei.",
+      "leaderOnly": "Nur der Gruppenleiter kann die Beutemethode aendern."
+    },
     "bags": {
       "filterGroupAria": "Taschen nach Kategorie filtern",
       "filterAll": "Alle",
@@ -607,9 +640,9 @@ export const de_DE: EnTranslations = {
       "tooLarge": "Ein Schlachtzug mit mehr als fünf Mitgliedern kann nicht wieder in eine Gruppe umgewandelt werden."
     },
     "itemArmorType": {
-      "cloth": "Cloth",
-      "leather": "Leather",
-      "mail": "Mail"
+      "cloth": "Stoff",
+      "leather": "Leder",
+      "mail": "Kette"
     },
     "auraEffect": {
       "dot": "Verursacht alle {interval} s {value} {school}schaden",
@@ -690,6 +723,128 @@ export const de_DE: EnTranslations = {
     "nameplate": {
       "mob": "[{level}] {name}",
       "mobElite": "[{level}+] {name}"
+    },
+    "discord": {
+      "title": "Discord",
+      "panelTitle": "World of ClaudeCraft",
+      "open": "Discord",
+      "close": "Close",
+      "keybind": "Discord Panel",
+      "disabled": "Discord integration is not available right now.",
+      "tiers": {
+        "none": "Unranked",
+        "initiate": "Initiate",
+        "squire": "Squire",
+        "footman": "Footman",
+        "knight": "Knight",
+        "champion": "Champion",
+        "warlord": "Warlord",
+        "legend": "Legend",
+        "mythic": "Mythic"
+      },
+      "loginCta": "Continue with Discord",
+      "orEmail": "or use email",
+      "cta": {
+        "title": "Link your Discord to earn points and rank up",
+        "stats": "{online} online · {total} members in the server",
+        "statsLoading": "Join the community and earn rewards",
+        "button": "Link in one click",
+        "dismiss": "Dismiss"
+      },
+      "link": {
+        "cta": "Link Discord",
+        "relink": "Relink Discord",
+        "connecting": "Opening Discord...",
+        "benefits": "Link your Discord to earn points from play and community activity, and climb the status tiers.",
+        "error": "Could not link Discord. Please try again.",
+        "success": "Discord linked."
+      },
+      "linkedAs": "Linked as {name}",
+      "linkedTitle": "Discord: {name}",
+      "viewCharacter": "View {name}",
+      "viewProfile": "Open this character's public profile",
+      "unlink": "Unlink",
+      "visit": "Visit Discord",
+      "unlinkConfirm": "Unlink your Discord account from this game account?",
+      "statusLabel": "Status",
+      "rank": "Rank",
+      "points": "Points",
+      "lifetime": "Lifetime",
+      "toNext": "{points} to next rank",
+      "maxRank": "Top rank reached",
+      "tiersTitle": "Status Tiers",
+      "tierLocked": "Locked",
+      "tierCurrent": "Current",
+      "earnTitle": "How to earn points",
+      "earnBody": "Earn points from time played in game and from staying active in the Discord. Points raise your status tier.",
+      "memberSince": "Member since",
+      "memberSinceDays": "{days}d in the Discord",
+      "roleTag": {
+        "levyst": "Levy St",
+        "devs": "Dev",
+        "mods": "Mod",
+        "artists": "Artist"
+      },
+      "guildMember": "Verified member",
+      "notMember": "Not in the server yet",
+      "joinCta": "Join the Discord",
+      "online": "{count} online",
+      "community": "Community",
+      "rewards": "Rewards",
+      "voice": {
+        "title": "Voice",
+        "channel": "In {channel}",
+        "empty": "No one is in voice right now.",
+        "speaking": "Speaking",
+        "muted": "Muted",
+        "join": "Join voice",
+        "connect": "Connect to voice channel"
+      },
+      "swag": {
+        "title": "Swag",
+        "claim": "Claim",
+        "claimed": "Claimed",
+        "locked": "Locked",
+        "free": "Free",
+        "cost": "{points} pts",
+        "needTier": "Reach a higher rank to claim this.",
+        "needPoints": "Not enough points.",
+        "claimError": "Could not claim that reward. Please try again.",
+        "claimedToast": "Claimed: {name}",
+        "titleDiscordian": "Title: Discordian",
+        "titleSquire": "Title: Squire of the Realm",
+        "chromaBlurple": "Blurple Mech Chroma",
+        "titleChampion": "Title: Champion of Claudemoon",
+        "swagStickers": "Sticker Pack (shipped)",
+        "swagTee": "T-Shirt (shipped)"
+      },
+      "relay": {
+        "tooFast": "You are posting too fast. Wait a moment and try again.",
+        "lfg": {
+          "label": "Looking for Group",
+          "hint": "Find players for a dungeon or quest"
+        },
+        "wts": {
+          "label": "Want to Sell",
+          "hint": "Advertise an item or service for sale"
+        },
+        "wtb": {
+          "label": "Want to Buy",
+          "hint": "Request an item you want to buy"
+        },
+        "recruit": {
+          "label": "Guild Recruiting",
+          "hint": "Recruit players for your guild"
+        },
+        "event": {
+          "label": "Event / Raid",
+          "hint": "Announce a raid, meetup or event"
+        },
+        "help": {
+          "label": "Need Help",
+          "hint": "Ask the community for help"
+        }
+      }
     }
   },
   "guide": {
@@ -1513,6 +1668,7 @@ export const de_DE: EnTranslations = {
     "copyright": "2026 World of ClaudeCraft",
     "githubLink": "https://github.com/levy-street/world-of-claudecraft",
     "githubLabel": "Open-Source-Projekt",
+    "whitepaper": "Whitepaper",
     "terms": "Nutzungsbedingungen",
     "privacy": "Datenschutzerklärung",
     "discordLabel": "Tritt dem Discord bei"
@@ -2719,7 +2875,7 @@ export const de_DE: EnTranslations = {
     "combat": {
       "floatingMiss": "Verfehlt",
       "floatingDodge": "Ausgewichen",
-      "floatingResist": "Resist",
+      "floatingResist": "Widerstand",
       "cannotMove": "Bewegungsunfähig!",
       "attack": "Angriff",
       "damageDone": "Euer {ability} trifft {target} für {amount}.",
@@ -2728,7 +2884,7 @@ export const de_DE: EnTranslations = {
       "damageTakenCrit": "{source} trifft Euch kritisch für {amount}.",
       "miss": "Euer {ability} verfehlt {target}.",
       "dodged": "{target} weicht Eurem {ability} aus.",
-      "resisted": "Your {ability} is resisted by {target}.",
+      "resisted": "{target} widersteht Eurem {ability}.",
       "healSelf": "Euer {ability} heilt Euch um {amount}.",
       "healSelfCrit": "Euer {ability} heilt Euch kritisch um {amount}.",
       "healOther": "Euer {ability} heilt {target} um {amount}.",
@@ -3459,7 +3615,7 @@ export const de_DE: EnTranslations = {
       },
       "arcane_missiles": {
         "name": "Arkane Geschosse",
-        "description": "Schleudert Arkane Geschosse auf den Gegner und verursacht 3 Sek. lang jede Sekunde 8 Arkanschaden."
+        "description": "Schleudert Arkane Geschosse auf den Gegner und verursacht 3 Sek. lang jede Sekunde {damage} Arkanschaden."
       },
       "polymorph": {
         "name": "Verwandlung",
@@ -3523,7 +3679,7 @@ export const de_DE: EnTranslations = {
       },
       "stealth": {
         "name": "Verstohlenheit",
-        "description": "Verbirgt euch in den Schatten: Gegner bemerken euch kaum, aber ihr bewegt euch 30% langsamer. Angreifen oder Schaden erleiden bricht Verstohlenheit. Erneut wirken, um hervorzutreten."
+        "description": "Verbirgt euch in den Schatten: Gegner bemerken euch kaum, aber ihr bewegt euch 50% langsamer. Angreifen oder Schaden erleiden bricht Verstohlenheit. Erneut wirken, um hervorzutreten."
       },
       "adrenaline_rush": {
         "name": "Adrenalinrausch",
@@ -3555,7 +3711,7 @@ export const de_DE: EnTranslations = {
       },
       "vanish": {
         "name": "Verschwinden",
-        "description": "Verschwindet aus dem Blickfeld und tretet selbst im Kampf in Verstohlenheit. Ihr bewegt euch 30% langsamer, solange ihr verborgen seid. Hält bis zu 10 Sek. an."
+        "description": "Verschwindet aus dem Blickfeld und tretet selbst im Kampf in Verstohlenheit. Ihr bewegt euch 50% langsamer, solange ihr verborgen seid. Hält bis zu 10 Sek. an."
       },
       "instant_poison": {
         "name": "Sofortgift",
@@ -3707,7 +3863,7 @@ export const de_DE: EnTranslations = {
       },
       "mind_flay": {
         "name": "Gedankenschinden",
-        "description": "Greift den Geist des Ziels mit Schattenenergie an und verursacht 3 Sek. lang jede Sekunde 12 Schaden."
+        "description": "Greift den Geist des Ziels mit Schattenenergie an und verursacht 3 Sek. lang jede Sekunde {damage} Schaden."
       },
       "flash_heal": {
         "name": "Blitzheilung",
@@ -3783,7 +3939,7 @@ export const de_DE: EnTranslations = {
       },
       "drain_life": {
         "name": "Blutsauger",
-        "description": "Entzieht dem Ziel Leben und überträgt euch 5 Sek. lang jede Sekunde 7 Gesundheit."
+        "description": "Entzieht dem Ziel Leben und überträgt euch 5 Sek. lang jede Sekunde {damage} Gesundheit."
       },
       "fear": {
         "name": "Furcht",
@@ -3963,7 +4119,7 @@ export const de_DE: EnTranslations = {
       },
       "prowl": {
         "name": "Anschleichen",
-        "description": "Geht in Wolfsgestalt in den Schleichmodus über. Im Kampf nicht einsetzbar."
+        "description": "Geht in Wolfsgestalt in den Schleichmodus über und bewegt Euch 50% langsamer. Im Kampf nicht einsetzbar."
       },
       "rake": {
         "name": "Krallenhieb",
@@ -6359,6 +6515,43 @@ export const de_DE: EnTranslations = {
         "name": "Das Eingestürzte Reliquiar",
         "enterText": "Du steigst hinab in das eingestürzte Reliquiar.",
         "leaveText": "Du kletterst zurück zu Bruder Halven bei der Reliquiarruine."
+      }
+    },
+    "itemSets": {
+      "crownforged": {
+        "name": "Kronengeschmiedete Kriegstracht",
+        "bonus2": "Erhöht Angriffskraft um 40.",
+        "bonus3": "Erhöht Stärke um 15 und Ausdauer um 15."
+      },
+      "deathlord": {
+        "name": "Kriegstracht des Todesfürsten",
+        "bonus2": "Erhöht Angriffskraft um 40.",
+        "bonus3": "Erhöht Stärke um 15 und Ausdauer um 15."
+      },
+      "necromancers": {
+        "name": "Gewänder des Nekromanten",
+        "bonus2": "Verringert Zauberrückstoß durch Schaden um 50%.",
+        "bonus3": "Erlittener Schaden verzögert das Zauberwirken nicht."
+      },
+      "nighttalon": {
+        "name": "Nachtkrallen-Ledertracht",
+        "bonus2": "Erhöht Angriffskraft um 40.",
+        "bonus3": "Erhöht Beweglichkeit um 15 und kritische Trefferchance um 2%."
+      },
+      "soulflame": {
+        "name": "Seelenflammengewänder",
+        "bonus2": "Verringert Zauberrückstoß durch Schaden um 50%.",
+        "bonus3": "Erlittener Schaden verzögert das Zauberwirken nicht."
+      },
+      "stormcallers": {
+        "name": "Gewänder des Sturmrufers",
+        "bonus2": "Verringert Zauberrückstoß durch Schaden um 50%.",
+        "bonus3": "Erlittener Schaden verzögert das Zauberwirken nicht."
+      },
+      "wyrmshadow": {
+        "name": "Wyrmschattentracht",
+        "bonus2": "Erhöht Angriffskraft um 40.",
+        "bonus3": "Erhöht Beweglichkeit um 15 und kritische Trefferchance um 2%."
       }
     }
   },
