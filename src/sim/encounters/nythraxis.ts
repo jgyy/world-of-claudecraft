@@ -28,7 +28,6 @@
 import { isStunned } from '../combat/cc';
 import { ITEMS, MOBS, NPCS, QUESTS } from '../data';
 import { createMob, createNpc } from '../entity';
-import { nextRaidResetMs } from '../instances/raid_reset';
 import type { PlayerMeta } from '../sim';
 import type { SimContext } from '../sim_context';
 import { clearThreat, threatEntries } from '../threat';
@@ -471,9 +470,10 @@ export function nythraxisRoomMetas(ctx: SimContext, boss: Entity): PlayerMeta[] 
 }
 
 export function grantNythraxisLockout(ctx: SimContext, boss: Entity): void {
-  // Standardized daily reset: lock until the next us-east-1 (US Eastern) midnight
-  // instead of a rolling 24h-from-kill window, so raids share one reset boundary.
-  const until = nextRaidResetMs(ctx.lockoutNowMs());
+  // Daily raid reset: lock until the next reset boundary the host supplies through the
+  // lockout seam (the authoritative server uses its realm-local civil midnight, so a
+  // realm's raids share one boundary; offline/headless fall back to a flat 24h day).
+  const until = ctx.raidResetMs(ctx.lockoutNowMs());
   for (const meta of nythraxisRoomMetas(ctx, boss)) {
     meta.raidLockouts.set('nythraxis_boss_arena', until);
   }

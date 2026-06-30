@@ -329,6 +329,10 @@ const JUMP_VELOCITY = 6; // apex = v^2/2g ≈ 1.125 yd
 // Exported for social/chat_readouts.ts (the /falling readout shares the landing-damage
 // threshold with the in-sim fall-damage model below).
 export const FALL_SAFE_DISTANCE = 12; // yards of free fall before damage
+// Host-agnostic raid-lockout fallback: when no host injects a reset boundary (offline
+// browser, headless RL env, tests), a kill locks for a flat 24h day. The authoritative
+// server overrides this with realm-local civil midnight via SimConfig.raidResetMs.
+const DEFAULT_RAID_LOCKOUT_MS = 24 * 60 * 60 * 1000;
 // OBJECT_RESPAWN moved to types.ts (shared with the extracted Nythraxis crypt-relic
 // respawn). The NYTHRAXIS_* encounter consts (relic summons, Aldric id, wardstone /
 // gravebreaker / soul-rend / deathless / transition tuning, room radius, lockout ms,
@@ -903,6 +907,7 @@ export class Sim {
       playerName: cfg.playerName ?? 'Adventurer',
       devCommands: this.devCommands,
       lockoutNowMs: cfg.lockoutNowMs ?? (() => Math.floor(this.time * 1000)),
+      raidResetMs: cfg.raidResetMs ?? ((nowMs: number) => nowMs + DEFAULT_RAID_LOCKOUT_MS),
     };
     this.rng = new Rng(cfg.seed);
     // S0b seam: the shared SimContext every extracted slice routes through. Built
@@ -1050,6 +1055,12 @@ export class Sim {
 
   private lockoutNowMs(): number {
     return this.cfg.lockoutNowMs?.() ?? Math.floor(this.time * 1000);
+  }
+
+  // The next raid-reset instant for a given lockout "now". The host owns the boundary
+  // (server: realm-local civil midnight); offline/headless fall back to a flat 24h day.
+  private raidResetMs(nowMs: number): number {
+    return this.cfg.raidResetMs(nowMs);
   }
 
   // -------------------------------------------------------------------------
@@ -1964,8 +1975,10 @@ export class Sim {
       countItem: sim.countItem.bind(sim),
       // I1 dungeon instancing now lives in instances/dungeons.ts; these route through
       // the same-named Sim delegates (foreign callers use this.X). lockoutNowMs is the
-      // shared raid-lockout clock that stays on Sim (N1 also writes through it).
+      // shared raid-lockout clock that stays on Sim (N1 also writes through it);
+      // raidResetMs is the host-owned reset boundary the lockout grant reads through.
       lockoutNowMs: sim.lockoutNowMs.bind(sim),
+      raidResetMs: sim.raidResetMs.bind(sim),
       instanceKeyFor: sim.instanceKeyFor.bind(sim),
       instanceOriginOf: sim.instanceOriginOf.bind(sim),
       enterDungeon: sim.enterDungeon.bind(sim),

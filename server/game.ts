@@ -62,7 +62,8 @@ import {
   recordInGameAction,
 } from './moderation_db';
 import { type ModerationHost, ModerationService } from './moderation_service';
-import { REALM, REALM_PUBLIC_ORIGIN } from './realm';
+import { nextRaidResetMs } from './raid_reset';
+import { REALM, REALM_PUBLIC_ORIGIN, REALM_RESET_TIME_ZONE } from './realm';
 import { createSerialWriter } from './serial_writer';
 import type { Presence, PresenceStatus, SocialActor, SocialTransport } from './social';
 import { SocialService } from './social';
@@ -725,6 +726,9 @@ export class GameServer {
       noPlayer: true,
       devCommands: process.env.ALLOW_DEV_COMMANDS === '1',
       lockoutNowMs: () => Date.now(),
+      // Raid lockouts end at the next midnight in this realm's civil time zone, so the
+      // whole realm shares one predictable daily reset (configured via REALM_RESET_TZ).
+      raidResetMs: (nowMs) => nextRaidResetMs(nowMs, REALM_RESET_TIME_ZONE),
     });
     this.social = new SocialService(this.socialDb, this.socialTransport());
     this.moderation = new ModerationService(this.moderationHost(), {
