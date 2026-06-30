@@ -202,6 +202,16 @@ export const hudChromeStrings = {
   // lacked an accessible name for.
   leaderboard: {
     close: 'Close',
+    // High-score board tabs: the per-character board and the per-guild board.
+    tabsLabel: 'High-score boards',
+    tabPlayers: 'Players',
+    tabGuilds: 'Guilds',
+    // Guild-board column headers + the guild-tab empty state.
+    guildName: 'Guild',
+    members: 'Members',
+    topLevel: 'Top',
+    guildXp: 'Total XP',
+    guildEmpty: 'No ranked guilds yet.',
   },
   // Raid-lockout badge on the minimap rim + its hover/tap panel: the title, the
   // accessible label, the "all ready" line, and the unlock-countdown templates
@@ -818,6 +828,30 @@ export const hudChromeStrings = {
         'Link your Discord to earn points from play and community activity, and climb the status tiers.',
       error: 'Could not link Discord. Please try again.',
       success: 'Discord linked.',
+    },
+    // First-time Discord login chooser (create a new account vs link an existing one).
+    choice: {
+      title: 'Continue with Discord',
+      intro: 'Create a new account, or link your Discord to one you already have.',
+      greeting: 'Welcome, {name}!',
+      createCta: 'Create a new account',
+      haveAccount: 'Already have an account?',
+      linkCta: 'Link an existing account',
+      linkSubmit: 'Link account',
+      error: 'Could not continue. Please try again.',
+      expired: 'That Discord sign-in expired. Please sign in with Discord again.',
+    },
+    // Unlinking a Discord-provisioned account: set a password first so it stays
+    // reachable (the username is fixed and shown read-only).
+    keep: {
+      title: 'Set a password',
+      body: 'Your account signs in with Discord. Set a password so you can still log in with your username after unlinking.',
+      usernameLabel: 'Your username',
+      confirmLabel: 'Confirm password',
+      submit: 'Set password and unlink',
+      cancel: 'Cancel',
+      mismatch: 'Passwords do not match.',
+      tooShort: 'Password must be at least 6 characters.',
     },
     linkedAs: 'Linked as {name}',
     linkedTitle: 'Discord: {name}',
