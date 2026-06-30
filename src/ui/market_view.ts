@@ -21,12 +21,7 @@
 import { ITEMS } from '../sim/data';
 import type { ItemDef } from '../sim/types';
 import type { MarketInfo, MarketListingView } from '../world_api';
-import {
-  filterMarketListings,
-  MARKET_PAGE_SIZE,
-  type MarketFilters,
-  paginateMarketListings,
-} from './market_filters';
+import { MARKET_PAGE_SIZE, type MarketFilters } from './market_filters';
 
 export type MarketTab = 'browse' | 'sell' | 'collect';
 
@@ -113,40 +108,51 @@ export interface MarketViewInput {
   info: MarketInfo | null;
   tab: MarketTab;
   filters: MarketFilters;
-  browsePage: number;
   /** The bag item staged for listing on the Sell tab, or null. */
   sellItemId: string | null;
   /** How many of `sellItemId` the player holds (0 when nothing staged). */
   sellHave: number;
 }
 
-/** Build the Browse tab body from a snapshot, the active filters, and the page. */
-export function buildMarketBrowse(
-  info: MarketInfo,
-  filters: MarketFilters,
-  browsePage: number,
-): MarketBrowseBody {
-  if (info.listings.length === 0) {
-    return { state: 'empty', reason: info.filter.trim() ? 'search' : 'browse' };
-  }
-  const filtered = filterMarketListings(info.listings, filters);
-  if (filtered.length === 0) return { state: 'empty', reason: 'filtered' };
-  const page = paginateMarketListings(filtered, browsePage, MARKET_PAGE_SIZE);
+/** True when any of the type/subtype/rarity dropdowns is narrowing the browse. */
+function filtersActive(filters: MarketFilters): boolean {
+  return (
+    filters.itemType !== 'all' ||
+    (filters.subtype !== undefined && filters.subtype !== 'all') ||
+    filters.rarity !== 'all'
+  );
+}
+
+/**
+ * Build the Browse tab body. The server already filtered (search + type/subtype/
+ * rarity) and paginated, so `info.listings` IS the page to show: the viewer's own
+ * listings (always wired, for reclaim) plus one page of other sellers' listings.
+ * `info.page` / `info.pageCount` drive the pager; `info.totalCount` is the count of
+ * matching OTHER listings being paged. `filters` only chooses the empty-state copy.
+ */
+export function buildMarketBrowse(info: MarketInfo, filters: MarketFilters): MarketBrowseBody {
   const rows: MarketBrowseRow[] = [];
-  for (const listing of page.items) {
+  for (const listing of info.listings) {
     const item = ITEMS[listing.itemId];
     if (!item) continue; // a listing for an item we no longer know is dropped
     rows.push({ listing, item });
   }
+  if (rows.length === 0) {
+    const reason = info.filter.trim() ? 'search' : filtersActive(filters) ? 'filtered' : 'browse';
+    return { state: 'empty', reason };
+  }
+  // The range note describes the paged OTHERS; own rows ride on top of every page.
+  const othersOnPage = rows.reduce((n, r) => n + (r.listing.mine ? 0 : 1), 0);
+  const start = info.page * MARKET_PAGE_SIZE;
   return {
     state: 'list',
     page: {
       items: rows,
-      page: page.page,
-      pageCount: page.pageCount,
-      total: page.total,
-      start: page.start,
-      end: page.end,
+      page: info.page,
+      pageCount: info.pageCount,
+      total: info.totalCount,
+      start,
+      end: start + othersOnPage,
     },
   };
 }
@@ -189,8 +195,7 @@ export function buildMarketCollect(info: MarketInfo): MarketCollectBody {
 export function buildMarketView(input: MarketViewInput): MarketView {
   const { info, tab } = input;
   if (!info) return { kind: 'no-data' };
-  if (tab === 'browse')
-    return { kind: 'browse', body: buildMarketBrowse(info, input.filters, input.browsePage) };
+  if (tab === 'browse') return { kind: 'browse', body: buildMarketBrowse(info, input.filters) };
   if (tab === 'sell') {
     return {
       kind: 'sell',

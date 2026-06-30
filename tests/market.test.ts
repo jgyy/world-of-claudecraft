@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest';
+import type { MarketQuery } from '../src/sim/market_query';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+}
+
+// A full browse query with sensible defaults; tests vary only what they care about.
+function q(search = '', extra: Partial<MarketQuery> = {}): MarketQuery {
+  return { search, itemType: 'all', subtype: 'all', rarity: 'all', page: 0, ...extra };
 }
 
 function merchant(sim: Sim): Entity {
@@ -73,7 +79,7 @@ describe('the World Market — the Merchant', () => {
     expect(all.listings.some((l) => l.itemId === 'bone_fragments')).toBe(true);
 
     // A substring of the Wolf Fang name must hide every non-matching listing.
-    sim.marketSearch('wolf', seller);
+    sim.marketSearch(q('wolf'), seller);
     const filtered = sim.marketInfoFor(seller)!;
     expect(filtered.filter).toBe('wolf');
     expect(filtered.listings.length).toBeGreaterThan(0);
@@ -81,11 +87,11 @@ describe('the World Market — the Merchant', () => {
     expect(filtered.totalCount).toBe(filtered.listings.length);
 
     // A no-match query yields an empty list (the UI shows the "no matches" copy).
-    sim.marketSearch('zzzznomatch', seller);
+    sim.marketSearch(q('zzzznomatch'), seller);
     expect(sim.marketInfoFor(seller)!.listings.length).toBe(0);
 
     // Clearing the filter restores the full, unfiltered view.
-    sim.marketSearch('', seller);
+    sim.marketSearch(q(''), seller);
     expect(sim.marketInfoFor(seller)!.totalCount).toBe(all.totalCount);
   });
 
