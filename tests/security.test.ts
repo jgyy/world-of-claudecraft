@@ -3,8 +3,6 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { buildWebSocketAuthMessage, buildWebSocketUrl } from '../src/net/online';
-import { Sim } from '../src/sim/sim';
 import {
   normalizeCharName,
   offensiveName,
@@ -14,25 +12,27 @@ import {
   validUsernameShape,
 } from '../server/auth';
 import {
-  rateLimited,
-  requestIp,
-  authThrottled,
-  recordAuthFailure,
-  clearAuthFailures,
   authFailureCount,
-  resetAuthFailures,
-  trackedIpCount,
-  resetRateLimits,
-  cardUploadRateLimited,
+  authThrottled,
   CARD_UPLOAD_MAX_PER_MINUTE,
+  cardUploadRateLimited,
+  clearAuthFailures,
+  rateLimited,
+  recordAuthFailure,
+  requestIp,
+  resetAuthFailures,
   resetCardUploadRateLimits,
-  walletLinkRateLimited,
-  WALLET_LINK_MAX_PER_MINUTE,
+  resetRateLimits,
   resetWalletLinkRateLimits,
-  wocBalanceRateLimited,
-  WOC_BALANCE_MAX_PER_MINUTE,
   resetWocBalanceRateLimits,
+  trackedIpCount,
+  WALLET_LINK_MAX_PER_MINUTE,
+  WOC_BALANCE_MAX_PER_MINUTE,
+  walletLinkRateLimited,
+  wocBalanceRateLimited,
 } from '../server/ratelimit';
+import { buildWebSocketAuthMessage, buildWebSocketUrl } from '../src/net/online';
+import { Sim } from '../src/sim/sim';
 
 function fakeReq(headers: Record<string, string>, remoteAddress: string) {
   const req: any = new EventEmitter();
@@ -159,33 +159,61 @@ describe('rate-limit client IP selection', () => {
   it('rate-limits card uploads by account across client IPs', () => {
     const accountId = 77;
     for (let i = 0; i < CARD_UPLOAD_MAX_PER_MINUTE; i++) {
-      expect(cardUploadRateLimited(fakeReq({ 'x-forwarded-for': `203.0.113.${i + 1}` }, '172.18.0.1'), accountId)).toBe(false);
+      expect(
+        cardUploadRateLimited(
+          fakeReq({ 'x-forwarded-for': `203.0.113.${i + 1}` }, '172.18.0.1'),
+          accountId,
+        ),
+      ).toBe(false);
     }
-    expect(cardUploadRateLimited(fakeReq({ 'x-forwarded-for': '203.0.113.250' }, '172.18.0.1'), accountId)).toBe(true);
+    expect(
+      cardUploadRateLimited(
+        fakeReq({ 'x-forwarded-for': '203.0.113.250' }, '172.18.0.1'),
+        accountId,
+      ),
+    ).toBe(true);
   });
 
   it('rate-limits card uploads by client IP across accounts', () => {
     const ip = '203.0.113.220';
     for (let i = 0; i < CARD_UPLOAD_MAX_PER_MINUTE; i++) {
-      expect(cardUploadRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 1000 + i)).toBe(false);
+      expect(
+        cardUploadRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 1000 + i),
+      ).toBe(false);
     }
-    expect(cardUploadRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 2000)).toBe(true);
+    expect(cardUploadRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 2000)).toBe(
+      true,
+    );
   });
 
   it('rate-limits wallet link/challenge attempts by account across client IPs', () => {
     const accountId = 77;
     for (let i = 0; i < WALLET_LINK_MAX_PER_MINUTE; i++) {
-      expect(walletLinkRateLimited(fakeReq({ 'x-forwarded-for': `203.0.114.${i + 1}` }, '172.18.0.1'), accountId)).toBe(false);
+      expect(
+        walletLinkRateLimited(
+          fakeReq({ 'x-forwarded-for': `203.0.114.${i + 1}` }, '172.18.0.1'),
+          accountId,
+        ),
+      ).toBe(false);
     }
-    expect(walletLinkRateLimited(fakeReq({ 'x-forwarded-for': '203.0.114.250' }, '172.18.0.1'), accountId)).toBe(true);
+    expect(
+      walletLinkRateLimited(
+        fakeReq({ 'x-forwarded-for': '203.0.114.250' }, '172.18.0.1'),
+        accountId,
+      ),
+    ).toBe(true);
   });
 
   it('rate-limits wallet link/challenge attempts by client IP across accounts', () => {
     const ip = '203.0.114.220';
     for (let i = 0; i < WALLET_LINK_MAX_PER_MINUTE; i++) {
-      expect(walletLinkRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 1000 + i)).toBe(false);
+      expect(
+        walletLinkRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 1000 + i),
+      ).toBe(false);
     }
-    expect(walletLinkRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 2000)).toBe(true);
+    expect(walletLinkRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 2000)).toBe(
+      true,
+    );
   });
 
   it('rate-limits the $WOC balance proxy per IP on its OWN bucket (decoupled from login/register)', () => {
@@ -280,7 +308,9 @@ describe('rate-limit client IP selection', () => {
     }
 
     // The admin-limited victim must still be limited under the admin policy.
-    expect(rateLimited(fakeReq({ 'x-forwarded-for': victim }, '172.18.0.1'), adminLimit)).toBe(true);
+    expect(rateLimited(fakeReq({ 'x-forwarded-for': victim }, '172.18.0.1'), adminLimit)).toBe(
+      true,
+    );
   });
 
   it('keeps the IP map bounded under a flood of distinct in-window clients', () => {
@@ -449,7 +479,10 @@ describe('malformed websocket frames cannot crash the server', () => {
   });
 
   it('still accepts a well-formed object frame', () => {
-    expect(parseFrame(JSON.stringify({ t: 'input', mi: { f: 1 } }))).toEqual({ t: 'input', mi: { f: 1 } });
+    expect(parseFrame(JSON.stringify({ t: 'input', mi: { f: 1 } }))).toEqual({
+      t: 'input',
+      mi: { f: 1 },
+    });
   });
 });
 
@@ -540,7 +573,10 @@ describe('username censorship', () => {
   });
 
   it('can load banned username terms from a configured file', () => {
-    const file = join(tmpdir(), `woc-banlist-${Date.now()}-${Math.random().toString(16).slice(2)}.txt`);
+    const file = join(
+      tmpdir(),
+      `woc-banlist-${Date.now()}-${Math.random().toString(16).slice(2)}.txt`,
+    );
     writeFileSync(file, 'forbidden\n');
     try {
       withUsernameBanlist({ file }, () => {
