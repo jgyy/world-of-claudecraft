@@ -1169,6 +1169,12 @@ export const nl_NL: EnTranslations = {
     "social": {
       "lastSeen": "Laatst gezien: {when}",
       "lastSeenNever": "nooit"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

@@ -1169,6 +1169,12 @@ export const pt_BR: EnTranslations = {
     "social": {
       "lastSeen": "Visto por último: {when}",
       "lastSeenNever": "nunca"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

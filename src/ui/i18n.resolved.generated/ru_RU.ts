@@ -1169,6 +1169,12 @@ export const ru_RU: EnTranslations = {
     "social": {
       "lastSeen": "Последний вход: {when}",
       "lastSeenNever": "никогда"
+    },
+    "gathering": {
+      "title": "Собирательство",
+      "mining": "Горное дело",
+      "logging": "Лесозаготовка",
+      "herbalism": "Травничество"
     }
   },
   "guide": {

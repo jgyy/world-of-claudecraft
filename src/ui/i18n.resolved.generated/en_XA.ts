@@ -1169,6 +1169,12 @@ export const en_XA: EnTranslations = {
     "social": {
       "lastSeen": "[Ļášţ šééñ: {when}]",
       "lastSeenNever": "[ñéʋéŕ]"
+    },
+    "gathering": {
+      "title": "[Ĝáţĥéŕíñĝ]",
+      "mining": "[Ɱíñíñĝ]",
+      "logging": "[Ļóĝĝíñĝ]",
+      "herbalism": "[Ĥéŕƀáļíšɱ]"
     }
   },
   "guide": {

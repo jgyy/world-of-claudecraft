@@ -5802,4 +5802,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     'ハルヴェン修道士が海図に印を。崩落した聖遺物庫に挑む好日。',
   'hudChrome.calendar.events.moongateCommunion.title': '月門の集い',
   'hudChrome.calendar.events.moongateCommunion.note': '月半ばの月の下、巡礼者が神殿の月門に集う。',
+  'hudChrome.gathering.title': '採集',
+  'hudChrome.gathering.mining': '採掘',
+  'hudChrome.gathering.logging': '伐採',
+  'hudChrome.gathering.herbalism': '薬草学',
 };

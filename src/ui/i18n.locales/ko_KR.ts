@@ -5797,4 +5797,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.calendar.events.moongateCommunion.title': '달문 집회',
   'hudChrome.calendar.events.moongateCommunion.note':
     '보름의 달 아래 순례자들이 사원의 달문에 모입니다.',
+  'hudChrome.gathering.title': '채집',
+  'hudChrome.gathering.mining': '채광',
+  'hudChrome.gathering.logging': '벌목',
+  'hudChrome.gathering.herbalism': '약초학',
 };

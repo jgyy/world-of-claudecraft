@@ -5921,4 +5921,8 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.calendar.events.moongateCommunion.title': 'Единение у лунных врат',
   'hudChrome.calendar.events.moongateCommunion.note':
     'Паломники собираются у лунных врат храма под срединной луной.',
+  'hudChrome.gathering.title': 'Собирательство',
+  'hudChrome.gathering.mining': 'Горное дело',
+  'hudChrome.gathering.logging': 'Лесозаготовка',
+  'hudChrome.gathering.herbalism': 'Травничество',
 };

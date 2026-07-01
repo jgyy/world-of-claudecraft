@@ -1169,6 +1169,12 @@ export const zh_CN: EnTranslations = {
     "social": {
       "lastSeen": "最后在线: {when}",
       "lastSeenNever": "从未"
+    },
+    "gathering": {
+      "title": "采集",
+      "mining": "采矿",
+      "logging": "伐木",
+      "herbalism": "草药学"
     }
   },
   "guide": {

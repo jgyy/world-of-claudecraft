@@ -1169,6 +1169,12 @@ export const es_ES: EnTranslations = {
     "social": {
       "lastSeen": "Última conexión: {when}",
       "lastSeenNever": "nunca"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

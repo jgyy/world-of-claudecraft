@@ -1169,6 +1169,12 @@ export const da_DK: EnTranslations = {
     "social": {
       "lastSeen": "Sidst set: {when}",
       "lastSeenNever": "aldrig"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

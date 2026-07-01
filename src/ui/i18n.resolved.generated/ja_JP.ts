@@ -1169,6 +1169,12 @@ export const ja_JP: EnTranslations = {
     "social": {
       "lastSeen": "最終ログイン: {when}",
       "lastSeenNever": "なし"
+    },
+    "gathering": {
+      "title": "採集",
+      "mining": "採掘",
+      "logging": "伐採",
+      "herbalism": "薬草学"
     }
   },
   "guide": {

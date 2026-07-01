@@ -1169,6 +1169,12 @@ export const ko_KR: EnTranslations = {
     "social": {
       "lastSeen": "마지막 접속: {when}",
       "lastSeenNever": "없음"
+    },
+    "gathering": {
+      "title": "채집",
+      "mining": "채광",
+      "logging": "벌목",
+      "herbalism": "약초학"
     }
   },
   "guide": {

@@ -5490,4 +5490,8 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.calendar.events.delveDay.note': '哈爾文修士在圖上做了標記：宜探坍塌聖物窖。',
   'hudChrome.calendar.events.moongateCommunion.title': '月門共禱',
   'hudChrome.calendar.events.moongateCommunion.note': '朝聖者在月中之月下聚於神廟月門。',
+  'hudChrome.gathering.title': '採集',
+  'hudChrome.gathering.mining': '採礦',
+  'hudChrome.gathering.logging': '伐木',
+  'hudChrome.gathering.herbalism': '藥草學',
 };

@@ -1169,6 +1169,12 @@ export const id_ID: EnTranslations = {
     "social": {
       "lastSeen": "Terakhir terlihat: {when}",
       "lastSeenNever": "tidak pernah"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

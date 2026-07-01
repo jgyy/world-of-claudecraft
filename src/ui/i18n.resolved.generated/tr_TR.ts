@@ -1169,6 +1169,12 @@ export const tr_TR: EnTranslations = {
     "social": {
       "lastSeen": "Son görülme: {when}",
       "lastSeenNever": "hiç"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

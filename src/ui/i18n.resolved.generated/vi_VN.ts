@@ -1169,6 +1169,12 @@ export const vi_VN: EnTranslations = {
     "social": {
       "lastSeen": "Lần cuối trực tuyến: {when}",
       "lastSeenNever": "chưa bao giờ"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

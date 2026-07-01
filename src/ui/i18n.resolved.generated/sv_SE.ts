@@ -1169,6 +1169,12 @@ export const sv_SE: EnTranslations = {
     "social": {
       "lastSeen": "Senast sedd: {when}",
       "lastSeenNever": "aldrig"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {
