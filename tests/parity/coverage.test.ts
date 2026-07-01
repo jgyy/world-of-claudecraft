@@ -473,10 +473,16 @@ describe('coverage: each scenario fires its subsystem', () => {
     const ents = entities(rec);
     const tank = ents.find((e) => e.id === rec.notes.tankPid);
     // consumeHealAbsorb on the HoT path: the fresh shield was drained by the first HoT
-    // ticks, depleted, and filtered out -- proving a HoT no longer bypasses heal-absorb.
+    // ticks and depleted (zeroed) -- proving a HoT no longer bypasses heal-absorb. It is
+    // NOT spliced out here: consumeHealAbsorb is called from inside updateAuras's own
+    // reverse-index loop over this same aura list (the hot branch), so a same-tick splice
+    // would shift the HoT's index and double-process it. The zeroed shield is a no-op
+    // (the a.value <= 0 guard) and expires on its own remaining like any other aura.
     // (Heal-4's applyHeal absorb-drain -- small depletes, big survives -- is pinned in the
     // golden 'heals' snapshot; those shields are cleared before this HoT phase.)
-    expect(tank.auras?.some((a: Ev) => a.id === 'hot_absorb')).toBe(false);
+    const hotAbsorb = tank.auras?.find((a: Ev) => a.id === 'hot_absorb');
+    expect(hotAbsorb).toBeDefined();
+    expect((hotAbsorb as any).value).toBeLessThanOrEqual(0);
     // healingThreat split landed: each aware mob now lists healer ids in its hate table.
     const healerIds = rec.notes.healerIds as number[];
     const m1 = ents.find((e) => e.id === rec.notes.m1Id);

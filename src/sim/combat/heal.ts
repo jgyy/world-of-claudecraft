@@ -54,22 +54,27 @@ export function hexOutputMult(ctx: SimContext, source: Entity | null): number {
 
 // Consume the victim's Heal-Absorb shields (classic necrotic blight): each such
 // aura holds a remaining budget of healing it devours. Drains `healed` against
-// every active shield, decrementing their stored budget and dropping any that
-// run dry. Returns the healing that survives (>= 0). A no-op when none are set.
+// every active shield, decrementing their stored budget. Returns the healing that
+// survives (>= 0). A no-op when none are set.
+//
+// A depleted shield is zeroed, not spliced out of `target.auras` here: this is
+// called from inside `updateAuras`'s reverse-index loop over the same array (the
+// HoT branch), and mutating the array mid-loop shifts later indices, causing the
+// loop to re-process whatever slid into the removed slot. The `a.value <= 0`
+// guard above already makes a zeroed shield a no-op on the next drain, and it
+// still expires on its own `remaining` like any other aura, so no separate
+// removal is needed. `applyHeal` (which does not iterate `target.auras`) is
+// unaffected by a zeroed-but-not-yet-expired shield sitting in the list.
 export function consumeHealAbsorb(ctx: SimContext, target: Entity, healed: number): number {
   if (healed <= 0) return healed;
   let remaining = healed;
-  let depleted = false;
   for (const a of target.auras) {
     if (a.kind !== 'heal_absorb' || a.value <= 0) continue;
     const eaten = Math.min(remaining, a.value);
     a.value -= eaten;
     remaining -= eaten;
-    if (a.value <= 0) depleted = true;
     if (remaining <= 0) break;
   }
-  if (depleted)
-    target.auras = target.auras.filter((a) => !(a.kind === 'heal_absorb' && a.value <= 0));
   return remaining;
 }
 
