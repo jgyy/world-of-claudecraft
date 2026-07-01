@@ -9,14 +9,14 @@
     "applyTaunt pet auto-taunt arm (~8110)",
     "applyTaunt pet manual-taunt arm (petTaunt, ~4885)"
   ],
-  "draws": 1048,
-  "drawDigest": "cfb39eb3",
+  "draws": 1050,
+  "drawDigest": "a67794aa",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "d5e81c84",
+      "state": "5e0123c3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -60,6 +60,7 @@
           "id": 388,
           "kind": "player",
           "level": 1,
+          "lootFfaTimer": "Infinity",
           "maxHp": 57,
           "maxResource": 155,
           "moveSpeed": 7,
@@ -79,6 +80,7 @@
             "y": 1.5,
             "z": -2
           },
+          "spellPower": 11,
           "stats": {
             "agi": 12,
             "armor": 54,
@@ -100,7 +102,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 389,
-      "state": "e25b6608",
+      "state": "50b218fd",
       "events": "e2644273",
       "rng": {
         "draws": 0,
@@ -111,7 +113,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 389,
-      "state": "b9a5821a",
+      "state": "d0151713",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -122,7 +124,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 389,
-      "state": "6adab51d",
+      "state": "9e009df4",
       "events": "741638a5",
       "rng": {
         "draws": 100,
@@ -133,7 +135,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 389,
-      "state": "8197d1c0",
+      "state": "b479efc5",
       "events": "741638a5",
       "rng": {
         "draws": 186,
@@ -144,7 +146,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 390,
-      "state": "7f99b64c",
+      "state": "a846efe1",
       "events": "c85a9d08",
       "rng": {
         "draws": 271,
@@ -155,8 +157,8 @@
       "tick": 120,
       "time": 6,
       "nextId": 391,
-      "state": "e82a8876",
-      "events": "93a14dd8",
+      "state": "579cc318",
+      "events": "aa09ef79",
       "rng": {
         "draws": 366,
         "digest": "e513d33c"
@@ -166,66 +168,66 @@
       "tick": 140,
       "time": 7,
       "nextId": 391,
-      "state": "a974e036",
-      "events": "c0b843fe",
+      "state": "e96dcf4d",
+      "events": "480f5d27",
       "rng": {
-        "draws": 497,
-        "digest": "afb34c11"
+        "draws": 495,
+        "digest": "3b351463"
       }
     },
     {
       "tick": 160,
       "time": 8,
       "nextId": 391,
-      "state": "5e7a1f95",
-      "events": "b38f1be8",
+      "state": "b90e657b",
+      "events": "e9138877",
       "rng": {
-        "draws": 627,
-        "digest": "308f8bef"
+        "draws": 636,
+        "digest": "d50b74c3"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 391,
-      "state": "ea1834f7",
-      "events": "c0b843fe",
+      "state": "2afdf4a1",
+      "events": "59ed44d0",
       "rng": {
-        "draws": 770,
-        "digest": "ea5e2a06"
+        "draws": 774,
+        "digest": "89995251"
       }
     },
     {
       "tick": 200,
       "time": 10,
       "nextId": 391,
-      "state": "b188cf23",
-      "events": "fbe68081",
+      "state": "7bbf019c",
+      "events": "2b72be58",
       "rng": {
-        "draws": 930,
-        "digest": "01768b34"
+        "draws": 943,
+        "digest": "b9ebae32"
       }
     },
     {
       "tick": 220,
       "time": 11,
       "nextId": 391,
-      "state": "11f86971",
-      "events": "b0d88419",
+      "state": "8f3bff47",
+      "events": "59ed44d0",
       "rng": {
-        "draws": 1027,
-        "digest": "7ee3dca7"
+        "draws": 1021,
+        "digest": "c5358026"
       }
     },
     {
       "tick": 220,
       "time": 11,
       "nextId": 391,
-      "state": "37f23a6c",
+      "state": "52c3f7c8",
       "events": "741638a5",
       "rng": {
-        "draws": 1027,
-        "digest": "7ee3dca7"
+        "draws": 1021,
+        "digest": "c5358026"
       },
       "label": "pet-taunt",
       "players": [
@@ -238,7 +240,7 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 18
+            "damageDealt": 22
           },
           "delveClears": {},
           "delveDaily": {},
@@ -260,7 +262,7 @@
           "attackPower": 11,
           "autoAttack": true,
           "castTotal": 5,
-          "combatTimer": 0.6,
+          "combatTimer": 0.4,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
@@ -271,6 +273,7 @@
           "inCombat": true,
           "kind": "player",
           "level": 12,
+          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -290,6 +293,7 @@
             "y": 1.5,
             "z": -2
           },
+          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -316,11 +320,12 @@
           "facing": 1.892547,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 378,
+          "hp": 350,
           "id": 389,
           "inCombat": true,
           "kind": "mob",
           "level": 12,
+          "lootFfaTimer": "Infinity",
           "maxHp": 378,
           "moveSpeed": 5,
           "onGround": true,
@@ -346,8 +351,8 @@
           "swingTimer": 0.05,
           "templateId": "voidwalker",
           "weapon": {
-            "max": 22,
-            "min": 14,
+            "max": 15,
+            "min": 10,
             "speed": 2
           }
         },
@@ -363,7 +368,7 @@
           "forcedTargetId": 389,
           "forcedTargetTimer": 3,
           "hostile": true,
-          "hp": 49934,
+          "hp": 49954,
           "id": 390,
           "inCombat": true,
           "kind": "mob",
@@ -373,6 +378,7 @@
             "z": -2
           },
           "level": 8,
+          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -399,11 +405,11 @@
           "threat": [
             [
               388,
-              19
+              23
             ],
             [
               389,
-              54
+              26
             ]
           ],
           "weapon": {
@@ -418,11 +424,11 @@
       "tick": 224,
       "time": 11.2,
       "nextId": 391,
-      "state": "a0c27aa7",
-      "events": "3c2ff05a",
+      "state": "602653e9",
+      "events": "5f4ade4f",
       "rng": {
-        "draws": 1048,
-        "digest": "cfb39eb3"
+        "draws": 1050,
+        "digest": "a67794aa"
       },
       "label": "final",
       "players": [
@@ -435,7 +441,7 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 18
+            "damageDealt": 22
           },
           "delveClears": {},
           "delveDaily": {},
@@ -457,7 +463,7 @@
           "attackPower": 11,
           "autoAttack": true,
           "castTotal": 5,
-          "combatTimer": 0.8,
+          "combatTimer": 0.6,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
@@ -468,6 +474,7 @@
           "inCombat": true,
           "kind": "player",
           "level": 12,
+          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 925,
           "moveSpeed": 7,
@@ -487,6 +494,7 @@
             "y": 1.5,
             "z": -2
           },
+          "spellPower": 28,
           "stats": {
             "agi": 12,
             "armor": 98,
@@ -514,11 +522,12 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 378,
+          "hp": 341,
           "id": 389,
           "inCombat": true,
           "kind": "mob",
           "level": 12,
+          "lootFfaTimer": "Infinity",
           "maxHp": 378,
           "moveSpeed": 5,
           "onGround": true,
@@ -544,15 +553,15 @@
           "swingTimer": 1.85,
           "templateId": "voidwalker",
           "weapon": {
-            "max": 22,
-            "min": 14,
+            "max": 15,
+            "min": 10,
             "speed": 2
           }
         },
         {
           "aggroTargetId": 389,
           "aiState": "attack",
-          "combatTimer": 0.2,
+          "combatTimer": 0.15,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.05,
@@ -562,7 +571,7 @@
           "forcedTargetId": 389,
           "forcedTargetTimer": 2.8,
           "hostile": true,
-          "hp": 49921,
+          "hp": 49944,
           "id": 390,
           "inCombat": true,
           "kind": "mob",
@@ -572,6 +581,7 @@
             "z": -2
           },
           "level": 8,
+          "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "moveSpeed": 8,
           "onGround": true,
@@ -598,11 +608,11 @@
           "threat": [
             [
               388,
-              19
+              23
             ],
             [
               389,
-              67
+              36
             ]
           ],
           "weapon": {

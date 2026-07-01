@@ -3002,6 +3002,8 @@ export class Sim {
     if (auraAffectsStats(removed)) {
       recalcPlayerStats(e, meta.cls, meta.equipment, this.playerMods(meta));
     }
+  }
+
   // Apply a player's auto-face-on-cast preference. Mirrored from the client's
   // local setting (offline: called directly; online: via the 'setPref' command).
   setAutoFaceOnCast(enabled: boolean, pid?: number): void {
