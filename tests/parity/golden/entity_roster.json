@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "efa9ae4e",
+      "state": "7d6c40b1",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -26,6 +26,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -103,7 +104,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 391,
-      "state": "a1973a0a",
+      "state": "9f1c66db",
       "events": "2b429bb7",
       "rng": {
         "draws": 4,
@@ -114,7 +115,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 391,
-      "state": "0d011650",
+      "state": "c01f9215",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -125,7 +126,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 391,
-      "state": "4f76f61c",
+      "state": "2e2376f1",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -135,6 +136,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -213,7 +215,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 391,
-      "state": "da6318f0",
+      "state": "3ad8beb5",
       "events": "2b429bb7",
       "rng": {
         "draws": 4,
@@ -223,6 +225,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -301,7 +304,7 @@
       "tick": 6,
       "time": 0.3,
       "nextId": 391,
-      "state": "2cc7fc6b",
+      "state": "d626eb74",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -312,7 +315,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 391,
-      "state": "02a08964",
+      "state": "a4812809",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -322,6 +325,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,

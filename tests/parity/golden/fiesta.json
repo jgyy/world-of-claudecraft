@@ -30,7 +30,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 392,
-      "state": "0c077903",
+      "state": "43cf1447",
       "events": "9e676dff",
       "rng": {
         "draws": 0,
@@ -41,7 +41,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 392,
-      "state": "104c3be9",
+      "state": "8b7da7dd",
       "events": "e0d70531",
       "rng": {
         "draws": 36,
@@ -52,7 +52,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 392,
-      "state": "5c80991f",
+      "state": "14ed3393",
       "events": "33931ddd",
       "rng": {
         "draws": 120,
@@ -63,7 +63,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 392,
-      "state": "b25651a1",
+      "state": "c546d9b5",
       "events": "441cd0f5",
       "rng": {
         "draws": 230,
@@ -74,7 +74,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 392,
-      "state": "2a8d9e2d",
+      "state": "51cee0b9",
       "events": "93890e75",
       "rng": {
         "draws": 384,
@@ -85,7 +85,7 @@
       "tick": 150,
       "time": 7.5,
       "nextId": 392,
-      "state": "f869e011",
+      "state": "3b4a435d",
       "events": "741638a5",
       "rng": {
         "draws": 543,
@@ -96,7 +96,7 @@
       "tick": 163,
       "time": 8.15,
       "nextId": 392,
-      "state": "6ca856aa",
+      "state": "5a9c0752",
       "events": "626a472c",
       "rng": {
         "draws": 608,
@@ -106,6 +106,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -144,6 +145,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -180,6 +182,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "rogue",
@@ -221,6 +224,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "hunter",

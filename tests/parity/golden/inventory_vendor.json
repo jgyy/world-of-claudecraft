@@ -35,7 +35,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "8509596d",
+      "state": "961dee38",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -45,6 +45,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -122,7 +123,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "9180f317",
+      "state": "01cce64e",
       "events": "d3c5193e",
       "rng": {
         "draws": 0,
@@ -132,6 +133,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -223,7 +225,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "0278028f",
+      "state": "343a59a0",
       "events": "9df425a0",
       "rng": {
         "draws": 0,
@@ -233,6 +235,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -329,7 +332,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "85a271e3",
+      "state": "52fd96e4",
       "events": "dbe7ae9a",
       "rng": {
         "draws": 0,
@@ -339,6 +342,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -435,7 +439,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "dc621555",
+      "state": "5f793a38",
       "events": "a0e9b547",
       "rng": {
         "draws": 0,
@@ -445,6 +449,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -544,7 +549,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "02b8afb6",
+      "state": "218edfe5",
       "events": "db521cfd",
       "rng": {
         "draws": 0,
@@ -554,6 +559,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -666,7 +672,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "1f71d38f",
+      "state": "51e9e4a2",
       "events": "579898e6",
       "rng": {
         "draws": 0,
@@ -676,6 +682,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -784,7 +791,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "b7a08cd9",
+      "state": "c585b7a0",
       "events": "f087f305",
       "rng": {
         "draws": 0,
@@ -794,6 +801,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -914,7 +922,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "d526c607",
+      "state": "eebde284",
       "events": "ef990a2a",
       "rng": {
         "draws": 0,
@@ -924,6 +932,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -1048,7 +1057,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "25797e9a",
+      "state": "1f48103b",
       "events": "b71a55c4",
       "rng": {
         "draws": 0,
@@ -1058,6 +1067,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -1188,7 +1198,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "d2d42d7d",
+      "state": "6fc9e9da",
       "events": "7521a204",
       "rng": {
         "draws": 0,
@@ -1198,6 +1208,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -1328,7 +1339,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "de59e5ff",
+      "state": "11136d82",
       "events": "e277cc91",
       "rng": {
         "draws": 0,
@@ -1338,6 +1349,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -1472,7 +1484,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "de59e5ff",
+      "state": "11136d82",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1482,6 +1494,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",

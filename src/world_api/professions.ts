@@ -27,7 +27,7 @@ export interface CraftResultView {
   reason?: 'unknown_recipe' | 'insufficient_materials';
 }
 
-// The professions read-surface facet (#1164, extended by #1127). `professionsState`
+// The professions read-surface facet (#1164, extended by #1127, #1129). `professionsState`
 // stays a stub (always empty) pending #1140's full skill tracking.
 // `nodeHarvestableByMe` (#1121) is the first non-stub member: whether the
 // given gather node (see src/sim/content/gather_nodes.ts, #1120) is
@@ -37,6 +37,14 @@ export interface CraftResultView {
 // src/sim/professions/gathering.ts). `recipeList`/`craftItem`/`lastCraftResult`
 // (#1127) are the first crafting-action members: recipes exist as content, and
 // a player can craft a common-tier recipe if they have required materials.
+//
+// `activeArchetype`/`archetypeSwitchCount`/`archetypeAmendsProgress`/
+// `archetypeAmendsRequired` plus `acceptArchetypeQuest`/`advanceAmendsProgress`/
+// `switchArchetype` (#1129, superseded scope) are the active-archetype identity
+// surface: per the #107 decision, all ten craft skills (above) stay purely
+// additive, and archetype identity is a single active craft the player swaps via
+// quest, not a conserved-mass drain. See src/sim/professions/archetype.ts for the
+// full state machine and what is stubbed (quest content, not the gating logic).
 export interface IWorldProfessions {
   professionsState: PlayerProfessionsView;
   nodeHarvestableByMe(nodeId: string): boolean;
@@ -44,4 +52,20 @@ export interface IWorldProfessions {
   recipeList: readonly RecipeDef[];
   lastCraftResult: CraftResultView | null;
   craftItem(recipeId: string): void;
+  // Active archetype identity (#1129). null before the acceptance quest.
+  activeArchetype: string | null;
+  // Total successful switches this character has ever made.
+  archetypeSwitchCount: number;
+  // Progress accrued toward the CURRENT switch's amends requirement, and that
+  // requirement itself (scales with archetypeSwitchCount; see archetype.ts).
+  archetypeAmendsProgress: number;
+  archetypeAmendsRequired: number;
+  // Stub entry point for the zone-1 acceptance quest's completion: sets the
+  // chosen craft as the active archetype (first time only). See archetype.ts.
+  acceptArchetypeQuest(craftId: string): void;
+  // Stub entry point for one completion of the repeatable "make amends" quest.
+  advanceAmendsProgress(): void;
+  // Attempt to switch the active archetype; blocked unless enough amends
+  // progress has accrued for the current switchCount.
+  switchArchetype(craftId: string): void;
 }

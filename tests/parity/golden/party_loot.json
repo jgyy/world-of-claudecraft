@@ -28,7 +28,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 391,
-      "state": "623f4a13",
+      "state": "4d83ee45",
       "events": "c6ab1462",
       "rng": {
         "draws": 2,
@@ -38,6 +38,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -66,6 +67,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",

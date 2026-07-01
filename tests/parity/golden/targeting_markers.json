@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "235d0428",
+      "state": "f46e58b3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -40,6 +40,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -62,6 +63,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -84,6 +86,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -366,7 +369,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "adfff589",
+      "state": "3d9d0a14",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -376,6 +379,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -398,6 +402,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -420,6 +425,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -702,7 +708,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "6c8e69be",
+      "state": "9f5ed49d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -712,6 +718,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -734,6 +741,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -756,6 +764,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -1038,7 +1047,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "235d0428",
+      "state": "f46e58b3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1048,6 +1057,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -1070,6 +1080,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -1092,6 +1103,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -1374,7 +1386,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "93ac4c1b",
+      "state": "013dc572",
       "events": "d0bc382f",
       "rng": {
         "draws": 0,
@@ -1384,6 +1396,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -1406,6 +1419,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -1428,6 +1442,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -1710,7 +1725,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "7e845c51",
+      "state": "a4bb85cc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1720,6 +1735,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -1742,6 +1758,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -1764,6 +1781,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -2046,7 +2064,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "93ac4c1b",
+      "state": "013dc572",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2056,6 +2074,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -2078,6 +2097,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -2100,6 +2120,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -2382,7 +2403,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "93ac4c1b",
+      "state": "013dc572",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2392,6 +2413,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -2414,6 +2436,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -2436,6 +2459,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -2718,7 +2742,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "93ac4c1b",
+      "state": "013dc572",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2728,6 +2752,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -2750,6 +2775,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -2772,6 +2798,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -3054,7 +3081,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "93ac4c1b",
+      "state": "013dc572",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3064,6 +3091,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -3086,6 +3114,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -3108,6 +3137,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -3390,7 +3420,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "79f3159c",
+      "state": "ee1cafef",
       "events": "8806027c",
       "rng": {
         "draws": 4,
@@ -3400,6 +3430,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -3428,6 +3459,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -3454,6 +3486,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
@@ -3780,7 +3813,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "79f3159c",
+      "state": "ee1cafef",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -3790,6 +3823,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "warrior",
@@ -3818,6 +3852,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "priest",
@@ -3844,6 +3879,7 @@
         },
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "cls": "mage",
