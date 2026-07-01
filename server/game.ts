@@ -74,7 +74,7 @@ import { nextRaidResetMs } from './raid_reset';
 import { REALM, REALM_PUBLIC_ORIGIN, REALM_RESET_TIME_ZONE } from './realm';
 import { createSerialWriter } from './serial_writer';
 import type { Presence, PresenceStatus, SocialActor, SocialTransport } from './social';
-import { SocialService } from './social';
+import { GUILD_MESSAGE_MAX, SocialService } from './social';
 import { PgSocialDb } from './social_db';
 import { TickProfiler } from './tick_profiler';
 import { holderInfoForPubkey } from './woc_balance';
@@ -113,6 +113,10 @@ const LOCKPICK_ACTIONS = new Set<PickAction>(['hardSet', 'set', 'steady', 'ease'
 const LEAVE_SAVE_MAX_ATTEMPTS = 5;
 const LEAVE_SAVE_RETRY_BASE_MS = 250;
 const LEAVE_SAVE_RETRY_MAX_MS = 4000;
+// Guild/officer chat prefixes: shared between enforceChatPolicy (which must
+// scan the exact body guildChat/officerChat will deliver) and the chat router.
+const GUILD_CHAT_PREFIX = /^\/(?:g|gu|guild)\s+([\s\S]+)$/i;
+const OFFICER_CHAT_PREFIX = /^\/(?:o|officer)\s+([\s\S]+)$/i;
 const CHAT_RATE_BURST = 5;
 const CHAT_RATE_REFILL_PER_SECOND = 1 / 3; // sustained 20 messages/minute
 const CHAT_RATE_ERROR_COOLDOWN_SECONDS = 4;
@@ -2295,8 +2299,8 @@ export class GameServer {
         // guild and officer chat are persistent + cross-zone, so they live in
         // the server's SocialService rather than the sim (no guild concept).
         // MMO convention: /g is guild; /general remains world chat.
-        const gm = /^\/(?:g|gu|guild)\s+([\s\S]+)$/i.exec(text);
-        const om = gm ? null : /^\/(?:o|officer)\s+([\s\S]+)$/i.exec(text);
+        const gm = GUILD_CHAT_PREFIX.exec(text);
+        const om = gm ? null : OFFICER_CHAT_PREFIX.exec(text);
         if (gm || om) {
           const channel = gm ? 'guild' : 'officer';
           const match = gm ?? om;
@@ -3420,12 +3424,26 @@ export class GameServer {
       );
       return true;
     }
-    // Only the first MAX_CHAT_MESSAGE_LEN chars are ever routed or stored, but a
-    // WS frame can carry up to maxPayload (16 KiB). Cap the text before scanning
-    // so the filter never burns ~64-170x CPU on bytes nobody will see (bounded
-    // only by the chat token bucket), and never mutes for a slur that is sliced
-    // off before delivery.
-    const scanned = text.length > MAX_CHAT_MESSAGE_LEN ? text.slice(0, MAX_CHAT_MESSAGE_LEN) : text;
+    // Only a bounded prefix of the text is ever routed or stored, but a WS frame
+    // can carry up to maxPayload (16 KiB). Cap the text before scanning so the
+    // filter never burns ~64-170x CPU on bytes nobody will see (bounded only by
+    // the chat token bucket), and never mutes for a slur that is sliced off
+    // before delivery. The cap must match what will actually be routed: /g and
+    // /o strip a variable-length prefix and leading whitespace before slicing
+    // their body (guildChat/officerChat in social.ts), so a raw-position slice
+    // of the frame can miss a hard word placed past the cap by padding the
+    // prefix. Normalize the same way here before capping.
+    const gm = GUILD_CHAT_PREFIX.exec(text);
+    const om = gm ? null : OFFICER_CHAT_PREFIX.exec(text);
+    const routedBody = (gm ?? om)?.[1].trim();
+    const scanned =
+      routedBody !== undefined
+        ? routedBody.length > GUILD_MESSAGE_MAX
+          ? routedBody.slice(0, GUILD_MESSAGE_MAX)
+          : routedBody
+        : text.length > MAX_CHAT_MESSAGE_LEN
+          ? text.slice(0, MAX_CHAT_MESSAGE_LEN)
+          : text;
     const hit = this.chatFilter.findHardHit(scanned);
     if (!hit) return false;
 
