@@ -23,7 +23,7 @@
 // `src/sim`-pure: no DOM/Three/render-ui-game-net imports, no Math.random/Date.now
 // (enforced by tests/architecture.test.ts).
 
-import { ITEMS, QUESTS } from './data';
+import { ITEMS, MOBS, QUESTS } from './data';
 import {
   activateNythraxisRelic,
   interactObjectForQuests,
@@ -36,6 +36,7 @@ import {
   lootSlotVisibleTo,
   pruneCorpseLoot,
 } from './loot/loot_roll';
+import { harvestItemFor, isHarvestableCorpse, resolveCorpseHarvest } from './professions/gathering';
 import type { SimContext } from './sim_context';
 import { dist2d, type Entity, INTERACT_RANGE, OBJECT_RESPAWN } from './types';
 
@@ -85,6 +86,38 @@ export function lootCorpse(ctx: SimContext, mobId: number, pid?: number): void {
   }
   pruneCorpseLoot(ctx, mob);
   if (p.targetId === mobId) p.targetId = null;
+}
+
+/**
+ * Profession harvest: single-use, first-come salvage of a dead mob's corpse
+ * (skinning/salvage components), independent of the loot table above. Whoever's
+ * command reaches here first while the corpse is unclaimed wins; every later
+ * attempt against the same corpse (same tick or later) is denied. See
+ * professions/gathering.ts for the race-freedom argument.
+ */
+export function harvestCorpse(ctx: SimContext, mobId: number, pid?: number): void {
+  const r = ctx.resolve(pid);
+  if (!r) return;
+  const { meta, e: p } = r;
+  const mob = ctx.entities.get(mobId);
+  if (!mob || mob.kind !== 'mob' || !mob.dead) return;
+  const componentTags = MOBS[mob.templateId]?.componentTags;
+  if (!isHarvestableCorpse(componentTags)) {
+    ctx.error(meta.entityId, 'That corpse has nothing to harvest.');
+    return;
+  }
+  if (dist2d(p.pos, mob.pos) > INTERACT_RANGE) {
+    ctx.error(meta.entityId, 'Too far away.');
+    return;
+  }
+  const claim = resolveCorpseHarvest(mob.harvestClaimedBy, meta.entityId);
+  if (!claim.success) {
+    ctx.error(meta.entityId, 'This corpse has already been harvested.');
+    return;
+  }
+  mob.harvestClaimedBy = claim.claimedBy;
+  const itemId = harvestItemFor(componentTags);
+  if (itemId) ctx.addItem(itemId, 1, meta.entityId);
 }
 
 export function pickUpObject(ctx: SimContext, objId: number, pid?: number): void {
