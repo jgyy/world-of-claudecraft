@@ -1,6 +1,6 @@
 // W0c: the IWorld structural-parity gate.
 //
-// `IWorld` (src/world_api.ts:341-510, 147 members) is the ONE seam render/ui depend
+// `IWorld` (src/world_api.ts, 148 members) is the ONE seam render/ui depend
 // on. `tsc` already proves both the offline `Sim` and the online `ClientWorld` satisfy
 // it structurally, but the interface is erased at build: there is NO runtime member
 // list, so nothing catches a present-but-throws stub or a kind flip (method vs read).
@@ -9,7 +9,7 @@
 // IWORLD_MEMBERS below is the hand-maintained member list, the W0c analog of the
 // append-only CALLBACK_KEYS in tests/sim_context.test.ts. It is APPEND-ONLY WITH THE
 // INTERFACE: whenever a future slice adds (or removes/renames) a member on `IWorld`,
-// it lands the matching edit here in the SAME commit. The count pins (147 / 36 / 111)
+// it lands the matching edit here in the SAME commit. The count pins (148 / 37 / 111)
 // plus the sorted-name `toEqual` snapshots (modeled on the anti-loosening exclude-set
 // pin in tests/parity/harness.test.ts:131-162) are what force that: a dropped or
 // renamed member reddens deliberately, never silently.
@@ -49,6 +49,7 @@ import type { IWorldLoot } from '../src/world_api/loot';
 import type { IWorldMarket } from '../src/world_api/market';
 import type { IWorldParty } from '../src/world_api/party';
 import type { IWorldPet } from '../src/world_api/pet';
+import type { IWorldProfessions } from '../src/world_api/professions';
 import type { IWorldProgressionXp } from '../src/world_api/progression_xp';
 import type { IWorldQuests } from '../src/world_api/quests';
 import type { IWorldSocialGraph } from '../src/world_api/social_graph';
@@ -206,6 +207,7 @@ export const IWORLD_MEMBERS = [
   { name: 'delveMarks', kind: 'data' },
   { name: 'companionUpgrades', kind: 'data' },
   { name: 'delveDaily', kind: 'data' },
+  { name: 'professionsState', kind: 'data' },
   { name: 'raidLockouts', kind: 'method' }, // read-returning (5/6)
   { name: 'leaderboard', kind: 'method' }, // async
   { name: 'guildLeaderboard', kind: 'method' }, // async
@@ -324,8 +326,8 @@ beforeAll(() => {
 
 describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => {
   it('pins total / data / method counts', () => {
-    expect(IWORLD_MEMBERS.length).toBe(147);
-    expect(DATA_MEMBERS.length).toBe(36);
+    expect(IWORLD_MEMBERS.length).toBe(148);
+    expect(DATA_MEMBERS.length).toBe(37);
     expect(METHOD_MEMBERS.length).toBe(111);
   });
 
@@ -336,7 +338,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
 
   // Sorted-name `toEqual` snapshots: a dropped, renamed, or kind-flipped member reddens
   // these deliberately, forcing a reviewed edit. NOT length-only.
-  it('the full sorted member set is exactly the pinned 147', () => {
+  it('the full sorted member set is exactly the pinned 148', () => {
     expect(IWORLD_MEMBERS.map((m) => m.name).sort()).toEqual([
       'abandonPet',
       'abandonQuest',
@@ -440,6 +442,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'playerId',
       'prestige',
       'prestigeRank',
+      'professionsState',
       'questLog',
       'questState',
       'questsDone',
@@ -488,7 +491,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     ]);
   });
 
-  it('the sorted data-kind set is exactly the pinned 36', () => {
+  it('the sorted data-kind set is exactly the pinned 37', () => {
     expect(DATA_MEMBERS.map((m) => m.name).sort()).toEqual([
       'accountCosmetics',
       'activeLoadout',
@@ -514,6 +517,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'player',
       'playerId',
       'prestigeRank',
+      'professionsState',
       'questLog',
       'questsDone',
       'realm',
@@ -938,6 +942,13 @@ type _ExhaustTelemetry = AssertNever<
   Exclude<keyof IWorldTelemetry, (typeof FACET_TELEMETRY)[number]>
 >;
 
+const FACET_PROFESSIONS = [
+  'professionsState',
+] as const satisfies readonly (keyof IWorldProfessions)[];
+type _ExhaustProfessions = AssertNever<
+  Exclude<keyof IWorldProfessions, (typeof FACET_PROFESSIONS)[number]>
+>;
+
 // The 20-facet partition, keyed by facet for legible failure messages.
 const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   entityRoster: FACET_ENTITY_ROSTER,
@@ -960,11 +971,12 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   dungeons: FACET_DUNGEONS,
   delves: FACET_DELVES,
   telemetry: FACET_TELEMETRY,
+  professions: FACET_PROFESSIONS,
 };
 
-describe('W1: aggregate IWorld member set equals the disjoint union of the 20 facets', () => {
-  it('pins the facet count at 20', () => {
-    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(20);
+describe('W1: aggregate IWorld member set equals the disjoint union of the 21 facets', () => {
+  it('pins the facet count at 21', () => {
+    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(21);
   });
 
   it('each facet array is non-empty and internally duplicate-free', () => {
@@ -990,10 +1002,10 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the 20 fa
     expect(overlaps, `members filed in more than one facet:\n${overlaps.join('\n')}`).toEqual([]);
   });
 
-  it('the union of the 20 facets equals the pinned 147-member IWORLD_MEMBERS set', () => {
+  it('the union of the 21 facets equals the pinned 148-member IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(147);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(147);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(148);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(148);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);
