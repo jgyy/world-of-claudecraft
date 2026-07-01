@@ -52,37 +52,15 @@ await sleep(800);
 
 const staged = await page.evaluate(async (ANCHOR) => {
   const w = await import('/src/sim/world.ts');
-  const d = await import('/src/sim/data.ts');
   const g = window.__game;
   const sim = g.sim;
   const seed = sim.cfg.seed;
   const p = sim.player;
   const gh = (x, z) => w.groundHeight(x, z, seed);
 
-  // Replicate terrain.ts bandIndexAt + chunk grid so we can find a real LOD
-  // boundary (where two chunks of different vertex spacing meet) that lands on
-  // the steep zone-boundary ridge: that exact seam is where the crack shows.
-  const CHUNK = 60;
-  const bandsLow = [95, 185, Infinity]; // maxHubDist edges (low tier)
-  const hubs = d.ZONES.map((zn) => zn.hub);
-  const WMINZ = d.WORLD_MIN_Z, WMAXZ = d.WORLD_MAX_Z, WMAXX = d.WORLD_MAX_X;
-  const worldDepth = WMAXZ - WMINZ;
-  const chunksX = Math.ceil((WMAXX * 2) / CHUNK);
-  const chunksZ = Math.ceil(worldDepth / CHUNK);
-  const bandIdx = (cx, cz) => {
-    const ccx = -WMAXX + cx * CHUNK + CHUNK / 2;
-    const ccz = WMINZ + cz * CHUNK + CHUNK / 2;
-    let hd = Infinity;
-    for (const h of hubs) hd = Math.min(hd, Math.hypot(ccx - h.x, ccz - h.z));
-    const i = bandsLow.findIndex((e) => hd <= e);
-    return i === -1 ? bandsLow.length - 1 : i;
-  };
-  const grad = (x, z) => Math.hypot(gh(x + 1, z) - gh(x - 1, z), gh(x, z + 1) - gh(x, z - 1)) / 2;
-
   // Anchor at the reported location and look NW (as in the bug screenshot). Use
   // the anchor directly as the focus point; it sits on a LOD band boundary.
-  const best = { bx: ANCHOR.x, z: ANCHOR.z, jump: 0, gr: grad(ANCHOR.x, ANCHOR.z), score: 0 };
-  void chunksX; void chunksZ; void bandIdx; // (kept for reference)
+  const best = { bx: ANCHOR.x, z: ANCHOR.z, jump: 0, score: 0 };
 
   // god-mode so mobs don't kill the camera; pin the player and drive the camera
   // from g.__seamCam so the Node side can sweep angles without restaging.
