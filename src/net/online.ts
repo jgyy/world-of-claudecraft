@@ -866,6 +866,8 @@ export class ClientWorld implements IWorld {
   // delveShopOffers can resolve the shop lock badge client-side.
   delveClears: Record<string, number> = {};
   delveDaily: DelveDailyInfo = { date: '', firstClearXp: [], markClears: 0 };
+  // #1143: persistent town focus allocation, mirrored from the self-wire `tfocus`.
+  townFocus: Record<string, number> = {};
   // --- IWorldParty: raid-target marker mirror, from the self-wire `marks` (markerFor
   // reads it, no send). ---
   markers: Record<number, number> = {}; // entityId -> markerId, mirrored from the self-wire
@@ -1482,6 +1484,7 @@ export class ClientWorld implements IWorld {
       if (s.dcomp !== undefined) this.companionUpgrades = s.dcomp ?? {};
       if (s.dclears !== undefined) this.delveClears = s.dclears ?? {};
       if (s.delveDaily !== undefined) this.delveDaily = s.delveDaily;
+      if (s.tfocus !== undefined) this.townFocus = s.tfocus ?? {};
       // camera follows server-side facing changes when not mouselooking
       if (prevSelfFacing !== undefined && this.mouselookFacing === null) {
         let d = e.facing - prevSelfFacing;
@@ -1639,6 +1642,9 @@ export class ClientWorld implements IWorld {
   }
   harvestCorpse(id: number, components?: string[]): void {
     this.cmd({ cmd: 'harvestCorpse', id, components });
+  }
+  setTownFocus(allocation: Record<string, number>): void {
+    this.cmd({ cmd: 'set_town_focus', allocation });
   }
   // --- IWorldLoot: need-greed roll submit + HUD reconcile read ---
   submitLootRoll(rollId: number, choice: LootRollChoice): void {

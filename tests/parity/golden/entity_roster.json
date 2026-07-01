@@ -15,8 +15,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 390,
-      "state": "969c1dc9",
+      "nextId": 389,
+      "state": "f28e5135",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -34,7 +34,7 @@
           "counters": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 388,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
@@ -42,7 +42,8 @@
           "talents": {
             "choices": {},
             "ranks": {}
-          }
+          },
+          "townFocus": {}
         }
       ],
       "entities": [
@@ -56,7 +57,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 389,
+          "id": 388,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -99,9 +100,9 @@
     {
       "tick": 2,
       "time": 0.1,
-      "nextId": 392,
-      "state": "99fb614d",
-      "events": "61b9fbea",
+      "nextId": 391,
+      "state": "c1c80c81",
+      "events": "2b429bb7",
       "rng": {
         "draws": 4,
         "digest": "7ba9533d"
@@ -110,8 +111,8 @@
     {
       "tick": 4,
       "time": 0.2,
-      "nextId": 392,
-      "state": "1321ca07",
+      "nextId": 391,
+      "state": "e68027d3",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -121,8 +122,8 @@
     {
       "tick": 5,
       "time": 0.25,
-      "nextId": 392,
-      "state": "ad07dfc3",
+      "nextId": 391,
+      "state": "9f09778f",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -140,7 +141,7 @@
           "counters": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 388,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
@@ -149,7 +150,8 @@
           "talents": {
             "choices": {},
             "ranks": {}
-          }
+          },
+          "townFocus": {}
         }
       ],
       "entities": [
@@ -163,7 +165,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99.25,
           "hp": 50000,
-          "id": 389,
+          "id": 388,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",
@@ -206,9 +208,9 @@
     {
       "tick": 5,
       "time": 0.25,
-      "nextId": 392,
-      "state": "db444bdb",
-      "events": "61b9fbea",
+      "nextId": 391,
+      "state": "8a744c73",
+      "events": "2b429bb7",
       "rng": {
         "draws": 4,
         "digest": "7ba9533d"
@@ -225,7 +227,7 @@
           "counters": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 388,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
@@ -234,7 +236,8 @@
           "talents": {
             "choices": {},
             "ranks": {}
-          }
+          },
+          "townFocus": {}
         }
       ],
       "entities": [
@@ -248,7 +251,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99.25,
           "hp": 432,
-          "id": 389,
+          "id": 388,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",
@@ -291,8 +294,8 @@
     {
       "tick": 6,
       "time": 0.3,
-      "nextId": 392,
-      "state": "b4f1154a",
+      "nextId": 391,
+      "state": "a066efd4",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -302,8 +305,8 @@
     {
       "tick": 7,
       "time": 0.35,
-      "nextId": 392,
-      "state": "b03deb5f",
+      "nextId": 391,
+      "state": "200b3867",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -321,7 +324,7 @@
           "counters": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 388,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
@@ -330,7 +333,8 @@
           "talents": {
             "choices": {},
             "ranks": {}
-          }
+          },
+          "townFocus": {}
         }
       ],
       "entities": [
@@ -344,7 +348,7 @@
           "fallStartY": 1.500121,
           "fiveSecondRule": 99.35,
           "hp": 432,
-          "id": 389,
+          "id": 388,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",

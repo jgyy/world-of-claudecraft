@@ -36,6 +36,7 @@ import {
   lootSlotVisibleTo,
   pruneCorpseLoot,
 } from './loot/loot_roll';
+import { applyFocusTierBonus } from './professions/focus';
 import {
   HARVEST_COMPONENT_ITEMS,
   harvestTierQuantity,
@@ -136,7 +137,12 @@ export function harvestCorpse(
   const yields = resolveCorpseFocusHarvest(componentTags ?? [], components ?? [], ctx.rng);
   for (const y of yields) {
     const itemId = HARVEST_COMPONENT_ITEMS[y.component];
-    if (itemId) ctx.addItem(itemId, harvestTierQuantity(y.tier), meta.entityId);
+    if (!itemId) continue;
+    // #1143: the player's persistent town focus adds a bonus on top of the
+    // #1142 roll for a focused component; an unfocused component's tier is
+    // exactly the roll above, untouched.
+    const tier = applyFocusTierBonus(y.tier, y.component, meta.townFocus);
+    ctx.addItem(itemId, harvestTierQuantity(tier), meta.entityId);
   }
 }
 
