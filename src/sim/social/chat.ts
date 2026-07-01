@@ -14,8 +14,10 @@
 // at the emit site (the S3 i18n guard scans this file + chat_readouts.ts).
 
 import { type AssistCandidate, resolveAssist } from '../assist';
+import { GATHERING_PROFESSIONS } from '../content/professions';
 import { CLASSES, ITEMS, zoneAt } from '../data';
 import { graveyardReadout } from '../entity_roster';
+import { isGatheringProfessionId, queueGatheringGrant } from '../professions/gathering';
 import {
   type AwayStatus,
   JOINABLE_CHANNELS,
@@ -821,10 +823,25 @@ export function handleDevChat(
     ctx.completeCurrentQuestsForDev(pid);
     return null;
   }
+  const gatherM = /^\/(?:dev\s+gather|devgather)\s+(\S+)(?:\s+(\d+))?\s*$/i.exec(raw);
+  if (gatherM) {
+    const professionId = gatherM[1].toLowerCase();
+    const amount = Math.max(1, Math.min(100, Number(gatherM[2] ?? 1)));
+    if (!isGatheringProfessionId(professionId)) {
+      ctx.error(
+        pid,
+        `[dev] Unknown gathering profession '${professionId}'. Options: ${Object.keys(GATHERING_PROFESSIONS).join(', ')}.`,
+      );
+      return null;
+    }
+    const meta = ctx.players.get(pid);
+    if (meta) queueGatheringGrant(meta, professionId, amount);
+    return null;
+  }
   if (/^\/dev(?:\s|$)/i.test(raw)) {
     ctx.error(
       pid,
-      'Dev commands: /dev level N, /dev tp X Z, /dev give itemId [count], /dev quest questId, /dev quests',
+      'Dev commands: /dev level N, /dev tp X Z, /dev give itemId [count], /dev quest questId, /dev quests, /dev gather professionId [amount]',
     );
     return null;
   }
