@@ -483,6 +483,9 @@ export const fr_FR: EnTranslations = {
       "noQuestSelected": "Sélectionnez une quête dans votre journal à partager.",
       "linkTitle": "Maj + clic pour insérer le lien de cette quête dans le chat."
     },
+    "itemShare": {
+      "linkHint": "Shift-click to link this item in chat."
+    },
     "plurals": {
       "guildMembers": {
         "one": "vous êtes {rank}, {count} membre",

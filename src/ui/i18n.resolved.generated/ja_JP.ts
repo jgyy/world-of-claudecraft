@@ -483,6 +483,9 @@ export const ja_JP: EnTranslations = {
       "noQuestSelected": "共有するクエストをログから選択してください。",
       "linkTitle": "Shift + クリックでこのクエストをチャットにリンクします。"
     },
+    "itemShare": {
+      "linkHint": "Shift + クリックでこのアイテムをチャットにリンクします。"
+    },
     "plurals": {
       "guildMembers": {
         "one": "あなたは{rank}、{count}人のメンバー",

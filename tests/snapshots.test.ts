@@ -389,7 +389,19 @@ describe('delta snapshots', () => {
       expect(snap.self, `self.${key} resent although unchanged`).not.toHaveProperty(key);
     }
     // the always-on fields are still present every snapshot
-    for (const key of ['x', 'z', 'hp', 'mhp', 'res', 'gcd', 'swing', 'xp', 'copper', 'target']) {
+    for (const key of [
+      'x',
+      'z',
+      'hp',
+      'mhp',
+      'res',
+      'gcd',
+      'pcd',
+      'swing',
+      'xp',
+      'copper',
+      'target',
+    ]) {
       expect(snap.self).toHaveProperty(key);
     }
   });
@@ -403,6 +415,17 @@ describe('delta snapshots', () => {
     const client = bareClient(session.pid);
     (client as any).applySnapshot(snap);
     expect(client.player.swingTimer).toBeCloseTo(1.7, 1);
+  });
+
+  it('mirrors the shared potion cooldown to the online client for the action-bar swipe', () => {
+    const player = server.sim.entities.get(session.pid)!;
+    player.potionCdRemaining = 95.5;
+    broadcast(server);
+    const snap = lastSnap(fc.sent);
+    expect(snap.self.pcd).toBeCloseTo(95.5, 1);
+    const client = bareClient(session.pid);
+    (client as any).applySnapshot(snap);
+    expect(client.player.potionCdRemaining).toBeCloseTo(95.5, 1);
   });
 
   it('includes live aura and movement diagnostics in admin online rows', () => {
@@ -679,6 +702,30 @@ describe('delta snapshots', () => {
     const snap = lastSnap(fc.sent);
     expect(snap.self.qlog).toEqual([]);
     expect(snap.self.qdone).toEqual([]);
+  });
+
+  it('dev quest completion resyncs qlog and qdone', () => {
+    const previous = process.env.ALLOW_DEV_COMMANDS;
+    process.env.ALLOW_DEV_COMMANDS = '1';
+    try {
+      broadcast(server);
+      fc.sent.length = 0;
+
+      server.handleMessage(
+        session,
+        JSON.stringify({ t: 'cmd', cmd: 'dev_complete_quest', quest: 'q_wolves' }),
+      );
+      broadcast(server);
+
+      const snap = lastSnap(fc.sent);
+      expect(snap.self).toHaveProperty('qlog');
+      expect(snap.self).toHaveProperty('qdone');
+      expect(snap.self.qlog).toEqual([]);
+      expect(snap.self.qdone).toContain('q_wolves');
+    } finally {
+      if (previous === undefined) delete process.env.ALLOW_DEV_COMMANDS;
+      else process.env.ALLOW_DEV_COMMANDS = previous;
+    }
   });
 
   it('each client gets full state on its own first snapshot', () => {

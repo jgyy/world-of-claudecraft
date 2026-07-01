@@ -483,6 +483,9 @@ export const vi_VN: EnTranslations = {
       "noQuestSelected": "Chọn một nhiệm vụ trong nhật ký để chia sẻ.",
       "linkTitle": "Shift-click để dẫn nhiệm vụ này vào khung trò chuyện."
     },
+    "itemShare": {
+      "linkHint": "Shift-click to link this item in chat."
+    },
     "plurals": {
       "guildMembers": {
         "one": "bạn là {rank}, {count} thành viên",

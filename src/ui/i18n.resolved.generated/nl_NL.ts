@@ -483,6 +483,9 @@ export const nl_NL: EnTranslations = {
       "noQuestSelected": "Selecteer een queeste in je logboek om te delen.",
       "linkTitle": "Shift-klik om deze queeste in de chat te koppelen."
     },
+    "itemShare": {
+      "linkHint": "Shift-click to link this item in chat."
+    },
     "plurals": {
       "guildMembers": {
         "one": "je bent {rank}, {count} lid",

@@ -483,6 +483,9 @@ export const zh_CN: EnTranslations = {
       "noQuestSelected": "在任务日志中选择一个任务进行分享。",
       "linkTitle": "Shift + 点击可在聊天中链接该任务。"
     },
+    "itemShare": {
+      "linkHint": "Shift + 点击可在聊天中链接该物品。"
+    },
     "plurals": {
       "guildMembers": {
         "one": "你是{rank}，{count}名成员",

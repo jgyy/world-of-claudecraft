@@ -483,6 +483,9 @@ export const ko_KR: EnTranslations = {
       "noQuestSelected": "공유할 퀘스트를 기록에서 선택하세요.",
       "linkTitle": "Shift + 클릭하면 이 퀘스트를 채팅에 연결합니다."
     },
+    "itemShare": {
+      "linkHint": "Shift + 클릭하면 이 아이템을 채팅에 연결합니다."
+    },
     "plurals": {
       "guildMembers": {
         "one": "당신은 {rank}, {count}명 회원",
