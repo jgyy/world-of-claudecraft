@@ -4712,4 +4712,8 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.devBadge.link.error': '无法关联 GitHub，请重试。',
   'hudChrome.devBadge.linkedAs': '已关联为 {login}',
   'hudChrome.devBadge.unlink': '取消关联 GitHub',
+  'hudChrome.gathering.title': '采集',
+  'hudChrome.gathering.mining': '采矿',
+  'hudChrome.gathering.logging': '伐木',
+  'hudChrome.gathering.herbalism': '草药学',
 };

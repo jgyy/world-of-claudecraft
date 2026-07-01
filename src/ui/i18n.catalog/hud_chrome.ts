@@ -1039,4 +1039,12 @@ export const hudChromeStrings = {
     linkedAs: 'Linked as {login}',
     unlink: 'Unlink GitHub',
   },
+  // Gathering proficiency section on the character sheet (#1124). Profession
+  // display names mirror src/sim/content/professions.ts (GatheringProfessionId).
+  gathering: {
+    title: 'Gathering',
+    mining: 'Mining',
+    logging: 'Logging',
+    herbalism: 'Herbalism',
+  },
 };

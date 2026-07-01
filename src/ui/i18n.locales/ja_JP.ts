@@ -4957,4 +4957,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.devBadge.link.error': 'GitHub を連携できませんでした。もう一度お試しください。',
   'hudChrome.devBadge.linkedAs': '{login} として連携済み',
   'hudChrome.devBadge.unlink': 'GitHub の連携を解除',
+  'hudChrome.gathering.title': '採集',
+  'hudChrome.gathering.mining': '採掘',
+  'hudChrome.gathering.logging': '伐採',
+  'hudChrome.gathering.herbalism': '薬草学',
 };

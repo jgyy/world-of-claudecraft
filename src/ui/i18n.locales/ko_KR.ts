@@ -4966,4 +4966,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.devBadge.link.error': 'GitHub를 연결할 수 없습니다. 다시 시도해 주세요.',
   'hudChrome.devBadge.linkedAs': '{login}(으)로 연결됨',
   'hudChrome.devBadge.unlink': 'GitHub 연결 해제',
+  'hudChrome.gathering.title': '채집',
+  'hudChrome.gathering.mining': '채광',
+  'hudChrome.gathering.logging': '벌목',
+  'hudChrome.gathering.herbalism': '약초학',
 };

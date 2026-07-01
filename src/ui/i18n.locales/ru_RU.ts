@@ -5067,4 +5067,8 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.devBadge.link.error': 'Не удалось привязать GitHub. Пожалуйста, попробуйте снова.',
   'hudChrome.devBadge.linkedAs': 'Привязан как {login}',
   'hudChrome.devBadge.unlink': 'Отвязать GitHub',
+  'hudChrome.gathering.title': 'Собирательство',
+  'hudChrome.gathering.mining': 'Горное дело',
+  'hudChrome.gathering.logging': 'Лесозаготовка',
+  'hudChrome.gathering.herbalism': 'Травничество',
 };
