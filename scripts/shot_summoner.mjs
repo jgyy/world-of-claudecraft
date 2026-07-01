@@ -88,8 +88,9 @@ try {
     summoner.facing = Math.atan2(p.pos.x - summoner.pos.x, p.pos.z - summoner.pos.z);
   });
 
-  // Land the silence: pin the summoner template's silence chance to 1 and swing it
-  // at the player a handful of times. Track whether any fear aura ever appears.
+  // Swing the summoner at the player 40 times: its 30% Silencing Shriek lands with
+  // overwhelming probability (~1 - 0.7^40). Track whether any fear aura ever appears
+  // (it must not). A silence aura is guaranteed visible for the screenshot below.
   const result = await page.evaluate(() => {
     const sim = window.__game.sim;
     const p = sim.player;
