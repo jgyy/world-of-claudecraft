@@ -9,7 +9,7 @@
 
 One EC2 instance runs everything: the game server, Postgres, and Caddy
 (TLS reverse proxy). The player wiki is the curated in-app guide served by the
-game server at /wiki, so there is no separate wiki service. Sized for a small population — a `t4g.small`
+game server at /wiki, so there is no separate wiki service. Sized for a small population: a `t4g.small`
 (~$14/month all-in) is comfortable for a handful of concurrent players.
 
 ## 1. Confirm the repo is public
