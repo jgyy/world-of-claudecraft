@@ -1,0 +1,38 @@
+// Gathering profession content (data-as-code, exempt from module-first size
+// rules per root CLAUDE.md: this is a declarative table, not logic). Starter
+// set is Mining, Logging, Herbalism; the state and gain logic live in
+// ../professions/gathering.ts behind the SimContext seam. Icon glyphs follow
+// the same convention as talent nodes (content, rendered directly).
+export type GatheringProfessionId = 'mining' | 'logging' | 'herbalism';
+
+export interface GatheringProfessionDef {
+  id: GatheringProfessionId;
+  name: string;
+  icon: string;
+  description: string;
+}
+
+export const GATHERING_PROFESSIONS: Record<GatheringProfessionId, GatheringProfessionDef> = {
+  mining: {
+    id: 'mining',
+    name: 'Mining',
+    icon: '⛏',
+    description: 'Extracting ore and stone from nodes found in the wild.',
+  },
+  logging: {
+    id: 'logging',
+    name: 'Logging',
+    icon: '🪓',
+    description: 'Felling timber from trees found across the zones.',
+  },
+  herbalism: {
+    id: 'herbalism',
+    name: 'Herbalism',
+    icon: '🌿',
+    description: 'Collecting herbs and plants growing in the wild.',
+  },
+};
+
+// Stable iteration order, used for defaulting/normalizing a per-player
+// proficiency record. Keep in sync with GATHERING_PROFESSIONS above.
+export const GATHERING_PROFESSION_IDS: GatheringProfessionId[] = ['mining', 'logging', 'herbalism'];
