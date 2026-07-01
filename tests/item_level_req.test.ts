@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { ITEMS } from '../src/sim/data';
+import { itemSourceLevel } from '../src/sim/item_level';
 import { meetsLevelRequirement, requiredLevelFor } from '../src/sim/item_level_req';
 import type { ItemDef } from '../src/sim/types';
 import { MAX_LEVEL } from '../src/sim/types';
@@ -64,5 +66,26 @@ describe('meetsLevelRequirement', () => {
   it('is a pure function of its inputs (same inputs, same result)', () => {
     const item = gear('epic');
     expect(meetsLevelRequirement(18, item)).toEqual(meetsLevelRequirement(18, item));
+  });
+});
+
+describe('requiredLevelFor against real content', () => {
+  it('never gates a rare-and-above item above the level of the content it drops from', () => {
+    for (const item of Object.values(ITEMS)) {
+      if (item.requiredLevel !== undefined) continue; // explicit override, not derived
+      const quality = item.quality ?? 'common';
+      if (quality !== 'rare' && quality !== 'epic' && quality !== 'legendary') continue;
+      const source = itemSourceLevel(item.id);
+      if (source === undefined) continue; // no derivable source: falls back to the quality band
+      expect(requiredLevelFor(item)).toBeLessThanOrEqual(source);
+    }
+  });
+
+  it("gates a known dungeon-tier rare (mogger's shiv) to where it actually drops", () => {
+    const item = ITEMS.moggers_shiv;
+    expect(item).toBeDefined();
+    const source = itemSourceLevel(item.id);
+    expect(source).toBeDefined();
+    expect(requiredLevelFor(item)).toBe(source);
   });
 });
