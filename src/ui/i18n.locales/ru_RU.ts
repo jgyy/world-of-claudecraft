@@ -5017,5 +5017,6 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.crafting.craftedToast': 'Создано: {name}',
   'hudChrome.crafting.insufficientMaterials': 'У вас недостаточно материалов.',
   'hudChrome.crafting.unknownRecipe': 'Такого рецепта не существует.',
-  'hudChrome.crafting.comboRequirementUnmet': 'У вас нет обоих требуемых ремесел нужного уровня для этого рецепта.',
+  'hudChrome.crafting.comboRequirementUnmet':
+    'У вас нет обоих требуемых ремесел нужного уровня для этого рецепта.',
 };

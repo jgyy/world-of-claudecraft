@@ -4905,5 +4905,6 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.crafting.craftedToast': '製作しました:{name}',
   'hudChrome.crafting.insufficientMaterials': '材料が不足しています。',
   'hudChrome.crafting.unknownRecipe': 'そのレシピは存在しません。',
-  'hudChrome.crafting.comboRequirementUnmet': 'その組み合わせレシピに必要な両方の生産スキルの熟練度に達していません。',
+  'hudChrome.crafting.comboRequirementUnmet':
+    'その組み合わせレシピに必要な両方の生産スキルの熟練度に達していません。',
 };
