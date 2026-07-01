@@ -8,11 +8,7 @@ import { sanitizeMoveFacing, sanitizeMoveInput } from '../sim/move_input';
 import type { MoveInput } from '../sim/types';
 import { cursorForHover, type HoverCursorKind } from './cursors';
 import { comboCode, isModifierCode, type Keybinds, makeCombo } from './keybinds';
-import {
-  shouldEngagePointerLock,
-  shouldReleasePointerLock,
-  shouldRequestDragLock,
-} from './pointer_lock';
+import { shouldReleasePointerLock, shouldRequestDragLock } from './pointer_lock';
 import { clickPickFromMouseGesture, DEFAULT_CLICK_PICK_MAX_MS } from './pointer_pick';
 
 const BASE_LOOK_SENS = 0.0045;
