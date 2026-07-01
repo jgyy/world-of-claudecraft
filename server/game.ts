@@ -3,7 +3,15 @@ import { createBotDetector } from '#bot-detector';
 import { verifyChallenge } from '../src/sim/client_challenge';
 import { MECH_CHROMAS, mechChromaItemId, mechChromaSkinIndex } from '../src/sim/content/skins';
 import type { TalentAllocation } from '../src/sim/content/talents';
-import { DELVES, DUNGEONS, zoneAt } from '../src/sim/data';
+import {
+  DELVES,
+  DUNGEON_X_THRESHOLD,
+  DUNGEONS,
+  delveAt,
+  dungeonAt,
+  isDelvePos,
+  zoneAt,
+} from '../src/sim/data';
 import { parseRelayCommand } from '../src/sim/discord_relay';
 import type { PickAction } from '../src/sim/lockpick';
 import { parseMoveInputFrame } from '../src/sim/move_input';
@@ -851,17 +859,35 @@ export class GameServer {
     if (announce) this.sendSystemNotice(moderator, 'Stopped spectating.');
   }
 
-  // Live location + activity of an online character, for friend/guild rosters.
+  // The instance (dungeon OR delve) an entity is inside, named as its own zone,
+  // or null when the entity is in the overworld (or an arena, which is not a
+  // dungeon). Resolved in order: an explicit dungeonId portal field, then a
+  // delve position, then any other far-off instance-space x as a dungeon. A
+  // failed lookup returns null so callers fall back to the overworld zone
+  // rather than ever surfacing a raw id. `pos` defaults to the entity's live
+  // position but callers pass a spectator's saved position so a spectating
+  // moderator reports where they really are, not the limbo they were parked in.
+  private instanceZoneName(e: Entity, pos: { x: number; z: number } = e.pos): string | null {
+    if (e.dungeonId) return DUNGEONS[e.dungeonId]?.name ?? e.dungeonId;
+    if (isDelvePos(pos.x)) return delveAt(pos.x)?.name ?? null;
+    if (pos.x > DUNGEON_X_THRESHOLD) return dungeonAt(pos.x)?.name ?? null;
+    return null;
+  }
+
+  // Live location + activity of an online character, for friend/guild rosters
+  // and /who. A player inside any instance (dungeon or delve) reports the
+  // instance name and the 'dungeon' status, not the overworld zone the instance
+  // coordinates happen to fall under.
   private presenceOf(session: ClientSession): Presence {
     const e = this.sim.entities.get(session.pid);
     if (!e) return { zone: 'Unknown', status: 'online' };
     const pos = session.spectating?.savedPos ?? e.pos;
+    const instanceZone = this.instanceZoneName(e, pos);
     let status: PresenceStatus = 'online';
     if (e.dead) status = 'dead';
-    else if (e.dungeonId) status = 'dungeon';
+    else if (instanceZone != null) status = 'dungeon';
     else if (e.inCombat) status = 'combat';
-    const zone = e.dungeonId ? (DUNGEONS[e.dungeonId]?.name ?? e.dungeonId) : zoneAt(pos.z).name;
-    return { zone, status, x: pos.x, z: pos.z };
+    return { zone: instanceZone ?? zoneAt(pos.z).name, status, x: pos.x, z: pos.z };
   }
 
   private socialTransport(): SocialTransport {
@@ -2240,8 +2266,19 @@ export class GameServer {
         if (session.isAdmin && this.moderation.handleChatCommand(session, text)) break;
         if (this.isChatMuted(session)) break;
         if (!this.consumeChatToken(session)) break;
-        if (/^\/who(?:\s|$)/i.test(text)) {
-          this.sendWhoRoster(session);
+        const whoMatch = /^\/who(?:\s+([\s\S]+))?$/i.exec(text);
+        if (whoMatch) {
+          // Optional filter: "/who Mr" lists only players whose name OR zone
+          // contains "Mr" (case-insensitive). Zone names carry spaces
+          // ("Thornpeak Heights"), so keep spaces: strip only double-quotes
+          // and control chars, collapse internal whitespace, and cap the
+          // length, so the echoed query stays a clean, single-line token.
+          const filter = (whoMatch[1] ?? '')
+            .replace(/[\p{Cc}"]/gu, '')
+            .trim()
+            .replace(/\s+/g, ' ')
+            .slice(0, 32);
+          this.sendWhoRoster(session, filter || undefined);
           break;
         }
         // Hard-word + mute enforcement gate, applied to every channel before the
@@ -3474,7 +3511,7 @@ export class GameServer {
     return `You are muted from chat for ${minutes} more minute${minutes === 1 ? '' : 's'}.${reason}`;
   }
 
-  private sendWhoRoster(session: ClientSession): void {
+  private sendWhoRoster(session: ClientSession, filter?: string): void {
     if (!session.blockListLoaded) {
       this.send(session, {
         t: 'events',
@@ -3484,12 +3521,21 @@ export class GameServer {
       });
       return;
     }
-    const rows = this.whoRosterFor(session);
+    let rows = this.whoRosterFor(session);
+    if (filter) {
+      const q = filter.toLowerCase();
+      rows = rows.filter(
+        (row) => row.name.toLowerCase().includes(q) || row.zone.toLowerCase().includes(q),
+      );
+    }
     const total = rows.length;
+    const header = filter
+      ? `Who: ${total} ${total === 1 ? 'player' : 'players'} matching "${filter}" on ${REALM}.`
+      : `Who: ${total} ${total === 1 ? 'player' : 'players'} online on ${REALM}.`;
     const list: { type: 'log'; text: string; color: string }[] = [
       {
         type: 'log',
-        text: `Who: ${total} ${total === 1 ? 'player' : 'players'} online on ${REALM}.`,
+        text: header,
         color: '#7fd4ff',
       },
     ];

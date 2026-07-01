@@ -507,6 +507,12 @@ export const zh_TW: EnTranslations = {
         "few": "查詢：{realm} 上有 {count} 名玩家在線上。",
         "many": "查詢：{realm} 上有 {count} 名玩家在線上。",
         "other": "查詢：{realm} 上有 {count} 名玩家在線上。"
+      },
+      "playersMatching": {
+        "one": "查詢：{realm} 上有 {count} 名玩家符合「{query}」。",
+        "few": "查詢：{realm} 上有 {count} 名玩家符合「{query}」。",
+        "many": "查詢：{realm} 上有 {count} 名玩家符合「{query}」。",
+        "other": "查詢：{realm} 上有 {count} 名玩家符合「{query}」。"
       }
     },
     "bugReport": {

@@ -74,6 +74,16 @@ export function highestThreatTarget(ctx: SimContext, mob: Entity): Entity | null
   return best;
 }
 
+// Tick a forced-target (taunt/growl) window down by one sim step and expire the
+// forced target when it runs out, WITHOUT touching aggro. updateMobTarget does this
+// inline on the acting path; this is the slice the stunned-mob path needs, since a
+// stunned mob skips updateMobTarget entirely yet the taunt window is real-time and
+// must keep counting (a stun must not stretch the taunt). Draws no rng.
+export function tickForcedTarget(mob: Entity): void {
+  if (mob.forcedTargetTimer > 0) mob.forcedTargetTimer -= DT;
+  if (mob.forcedTargetTimer <= 0) mob.forcedTargetId = null;
+}
+
 // Classic pull-over rules, applied every AI tick while fighting: an attacker
 // takes aggro past 110% of the current target's threat in melee range of
 // the mob, or past 130% at range. A taunt forces the target outright.

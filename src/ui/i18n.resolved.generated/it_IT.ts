@@ -507,6 +507,12 @@ export const it_IT: EnTranslations = {
         "few": "Chi: {count} giocatori online su {realm}.",
         "many": "Chi: {count} giocatori online su {realm}.",
         "other": "Chi: {count} giocatori online su {realm}."
+      },
+      "playersMatching": {
+        "one": "Chi: {count} giocatore corrispondente a \"{query}\" su {realm}.",
+        "few": "Chi: {count} giocatori corrispondenti a \"{query}\" su {realm}.",
+        "many": "Chi: {count} giocatori corrispondenti a \"{query}\" su {realm}.",
+        "other": "Chi: {count} giocatori corrispondenti a \"{query}\" su {realm}."
       }
     },
     "bugReport": {

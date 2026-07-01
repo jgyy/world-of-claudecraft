@@ -507,6 +507,12 @@ export const ru_RU: EnTranslations = {
         "few": "Список игроков: на {realm} в сети {count} игрока.",
         "many": "Список игроков: на {realm} в сети {count} игроков.",
         "other": "Список игроков: на {realm} в сети {count} игрока."
+      },
+      "playersMatching": {
+        "one": "Список игроков: на {realm} по запросу «{query}» найден {count} игрок.",
+        "few": "Список игроков: на {realm} по запросу «{query}» найдено {count} игрока.",
+        "many": "Список игроков: на {realm} по запросу «{query}» найдено {count} игроков.",
+        "other": "Список игроков: на {realm} по запросу «{query}» найдено {count} игроков."
       }
     },
     "bugReport": {

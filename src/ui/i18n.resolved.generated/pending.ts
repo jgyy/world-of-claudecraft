@@ -53,36 +53,64 @@ export const pending: Record<string, readonly string[]> = {
   "nl_NL": [
     "hudChrome.itemTooltip.requiresLevel",
     "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.party.promoteLeader",
+    "hudChrome.plurals.playersMatching.few",
+    "hudChrome.plurals.playersMatching.many",
+    "hudChrome.plurals.playersMatching.one",
+    "hudChrome.plurals.playersMatching.other"
   ],
   "pl_PL": [
     "hudChrome.itemTooltip.requiresLevel",
     "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.party.promoteLeader",
+    "hudChrome.plurals.playersMatching.few",
+    "hudChrome.plurals.playersMatching.many",
+    "hudChrome.plurals.playersMatching.one",
+    "hudChrome.plurals.playersMatching.other"
   ],
   "id_ID": [
     "hudChrome.itemTooltip.requiresLevel",
     "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.party.promoteLeader",
+    "hudChrome.plurals.playersMatching.few",
+    "hudChrome.plurals.playersMatching.many",
+    "hudChrome.plurals.playersMatching.one",
+    "hudChrome.plurals.playersMatching.other"
   ],
   "tr_TR": [
     "hudChrome.itemTooltip.requiresLevel",
     "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.party.promoteLeader",
+    "hudChrome.plurals.playersMatching.few",
+    "hudChrome.plurals.playersMatching.many",
+    "hudChrome.plurals.playersMatching.one",
+    "hudChrome.plurals.playersMatching.other"
   ],
   "sv_SE": [
     "hudChrome.itemTooltip.requiresLevel",
     "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.party.promoteLeader",
+    "hudChrome.plurals.playersMatching.few",
+    "hudChrome.plurals.playersMatching.many",
+    "hudChrome.plurals.playersMatching.one",
+    "hudChrome.plurals.playersMatching.other"
   ],
   "vi_VN": [
     "hudChrome.itemTooltip.requiresLevel",
     "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.party.promoteLeader",
+    "hudChrome.plurals.playersMatching.few",
+    "hudChrome.plurals.playersMatching.many",
+    "hudChrome.plurals.playersMatching.one",
+    "hudChrome.plurals.playersMatching.other"
   ],
   "da_DK": [
     "hudChrome.itemTooltip.requiresLevel",
     "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.party.promoteLeader",
+    "hudChrome.plurals.playersMatching.few",
+    "hudChrome.plurals.playersMatching.many",
+    "hudChrome.plurals.playersMatching.one",
+    "hudChrome.plurals.playersMatching.other"
   ]
 };
