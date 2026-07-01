@@ -483,6 +483,9 @@ export const id_ID: EnTranslations = {
       "noQuestSelected": "Pilih misi di catatan Anda untuk dibagikan.",
       "linkTitle": "Shift-klik untuk menautkan misi ini di obrolan."
     },
+    "itemShare": {
+      "linkHint": "Shift-click to link this item in chat."
+    },
     "plurals": {
       "guildMembers": {
         "one": "Anda adalah {rank}, {count} anggota",

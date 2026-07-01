@@ -483,6 +483,9 @@ export const da_DK: EnTranslations = {
       "noQuestSelected": "Vælg en opgave i din log for at dele den.",
       "linkTitle": "Shift-klik for at linke denne opgave i chatten."
     },
+    "itemShare": {
+      "linkHint": "Shift-click to link this item in chat."
+    },
     "plurals": {
       "guildMembers": {
         "one": "du er {rank}, {count} medlem",

@@ -483,6 +483,9 @@ export const ru_RU: EnTranslations = {
       "noQuestSelected": "Выберите задание в журнале, чтобы поделиться им.",
       "linkTitle": "Shift + клик, чтобы вставить ссылку на это задание в чат."
     },
+    "itemShare": {
+      "linkHint": "Shift + клик, чтобы вставить ссылку на этот предмет в чат."
+    },
     "plurals": {
       "guildMembers": {
         "one": "вы {rank}, {count} участник",

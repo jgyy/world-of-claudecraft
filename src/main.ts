@@ -1015,7 +1015,7 @@ async function startGame(
     chatInput.style.height = '';
     chatInput.style.overflowY = '';
     chatInput.blur();
-    hud.clearPendingQuestLinks();
+    hud.clearPendingChatLinks();
     recoverFromMobileKeyboard();
   };
   function openChat(): void {

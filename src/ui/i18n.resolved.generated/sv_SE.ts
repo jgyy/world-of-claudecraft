@@ -483,6 +483,9 @@ export const sv_SE: EnTranslations = {
       "noQuestSelected": "Välj ett uppdrag i din loggbok att dela.",
       "linkTitle": "Skift-klicka för att länka det här uppdraget i chatten."
     },
+    "itemShare": {
+      "linkHint": "Shift-click to link this item in chat."
+    },
     "plurals": {
       "guildMembers": {
         "one": "du är {rank}, {count} medlem",

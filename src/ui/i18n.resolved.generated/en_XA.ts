@@ -483,6 +483,9 @@ export const en_XA: EnTranslations = {
       "noQuestSelected": "[Šéļéçţ á ɋúéšţ íñ ýóúŕ ļóĝ ţó šĥáŕé.]",
       "linkTitle": "[Šĥíƒţ-çļíçķ ţó ļíñķ ţĥíš ɋúéšţ íñ çĥáţ.]"
     },
+    "itemShare": {
+      "linkHint": "[Šĥíƒţ-çļíçķ ţó ļíñķ ţĥíš íţéɱ íñ çĥáţ.]"
+    },
     "plurals": {
       "guildMembers": {
         "one": "[ýóú áŕé {rank}, {count} ɱéɱƀéŕ]",

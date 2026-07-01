@@ -10,27 +10,33 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader"
   ],
   "es_ES": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader"
   ],
   "fr_FR": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader"
   ],
   "fr_CA": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader"
   ],
   "en_CA": [],
   "it_IT": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader"
   ],
   "de_DE": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader"
   ],
@@ -39,11 +45,13 @@ export const pending: Record<string, readonly string[]> = {
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader"
   ],
   "ru_RU": [],
   "nl_NL": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader",
     "hudChrome.plurals.playersMatching.few",
@@ -52,6 +60,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.plurals.playersMatching.other"
   ],
   "pl_PL": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader",
     "hudChrome.plurals.playersMatching.few",
@@ -60,6 +69,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.plurals.playersMatching.other"
   ],
   "id_ID": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader",
     "hudChrome.plurals.playersMatching.few",
@@ -68,6 +78,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.plurals.playersMatching.other"
   ],
   "tr_TR": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader",
     "hudChrome.plurals.playersMatching.few",
@@ -76,6 +87,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.plurals.playersMatching.other"
   ],
   "sv_SE": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader",
     "hudChrome.plurals.playersMatching.few",
@@ -84,6 +96,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.plurals.playersMatching.other"
   ],
   "vi_VN": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader",
     "hudChrome.plurals.playersMatching.few",
@@ -92,6 +105,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.plurals.playersMatching.other"
   ],
   "da_DK": [
+    "hudChrome.itemShare.linkHint",
     "hudChrome.options.startAttackOnAbility",
     "hudChrome.party.promoteLeader",
     "hudChrome.plurals.playersMatching.few",

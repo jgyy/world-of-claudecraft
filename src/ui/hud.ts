@@ -242,7 +242,7 @@ import {
 import { chatPlayerContextActions } from './player_context_menu';
 import { hydratePortraits, portraitChipHtml } from './portrait_chip';
 import { maskProfanity } from './profanity';
-import { encodeQuestLink, parseChatSegments } from './quest_link';
+import { encodeItemLink, encodeQuestLink, parseChatSegments } from './quest_link';
 import { type QuestTrackerView, questTrackerView, type TrackedQuest } from './quest_tracker';
 import { QuestLogWindow } from './questlog_window';
 import { lockoutParts, lockoutShape } from './raid_lockout';
@@ -858,7 +858,7 @@ export class Hud {
   });
   private openGossipNpcId: number | null = null;
   private openQuestDetailId: string | null = null;
-  private pendingChatLinks = new Map<string, string>(); // display "[Name]" -> questId
+  private pendingChatLinks = new Map<string, string>(); // display "[Name]" -> [[q:id]]/[[i:id]] token
   private questDialogTrap: FocusTrapHandle | null = null;
   private questDialogOpenedAtMs = 0;
   // swing timer: the period is captured from the reset edge (swingTimer jumping
@@ -2016,7 +2016,7 @@ export class Hud {
   // channel tab. main.ts calls this on Enter so a channel tab works without
   // retyping the slash command; an explicit "/..." the player typed still wins.
   composeChatSend(typed: string): string {
-    const withLinks = this.applyPendingQuestLinks(typed);
+    const withLinks = this.applyPendingChatLinks(typed);
     const ch = this.chatFilterChannel();
     return ch ? composeChatLine(ch, withLinks) : withLinks.trim();
   }
@@ -2024,9 +2024,22 @@ export class Hud {
   // Shift-click a quest-log entry: open the chat input and insert a readable
   // [Name] link. composeChatSend swaps it for the canonical [[q:id]] token on send.
   insertQuestChatLink(questId: string): void {
+    this.insertChatLink(`[${questTitle(questId)}]`, encodeQuestLink(questId));
+  }
+
+  // Shift-click a bag item: insert a readable [Item Name] link into chat. On send,
+  // composeChatSend swaps it for the canonical [[i:id]] token (name resolved at render).
+  insertItemChatLink(itemId: string): void {
+    const item = ITEMS[itemId];
+    if (!item) return;
+    this.insertChatLink(`[${itemDisplayName(item)}]`, encodeItemLink(itemId));
+  }
+
+  // Shared affordance: append a readable [Name] to the chat input and remember the
+  // token it stands for, so applyPendingChatLinks can swap it back in on send.
+  private insertChatLink(display: string, token: string): void {
     const input = $('#chat-input') as unknown as HTMLInputElement;
-    const display = `[${questTitle(questId)}]`;
-    this.pendingChatLinks.set(display, questId);
+    this.pendingChatLinks.set(display, token);
     input.placeholder = this.activeChatPlaceholder();
     input.style.display = 'block';
     input.value =
@@ -2038,16 +2051,15 @@ export class Hud {
 
   // Drop any shift-click-inserted links that were never sent (chat closed/cleared),
   // so a stale [Name] entry can't silently rewrite a later message.
-  clearPendingQuestLinks(): void {
+  clearPendingChatLinks(): void {
     this.pendingChatLinks.clear();
   }
 
-  // Replace any inserted readable [Name] with its [[q:id]] token, then forget them.
-  private applyPendingQuestLinks(typed: string): string {
+  // Replace any inserted readable [Name] with its [[q:id]]/[[i:id]] token, then forget them.
+  private applyPendingChatLinks(typed: string): string {
     if (this.pendingChatLinks.size === 0) return typed;
     let out = typed;
-    for (const [display, questId] of this.pendingChatLinks)
-      out = out.split(display).join(encodeQuestLink(questId));
+    for (const [display, token] of this.pendingChatLinks) out = out.split(display).join(token);
     this.pendingChatLinks.clear();
     return out;
   }
@@ -2607,6 +2619,7 @@ export class Hud {
     closeVendor: () => this.closeVendor(),
     addItemToTrade: (itemId) => this.addItemToTrade(itemId),
     stageMarketSell: (itemId) => this.marketWindow.stageSell(itemId),
+    insertItemChatLink: (itemId) => this.insertItemChatLink(itemId),
     showError: (text) => this.showError(text),
     setPendingPetFeed: (active) => {
       this.pendingPetFeed = active;
@@ -6249,7 +6262,7 @@ export class Hud {
             (ev.channel === 'say' || ev.channel === 'yell' || ev.channel === 'emote') &&
             ev.entityId !== undefined
           ) {
-            const masked = this.maskChat(this.questLinkPlainText(ev.text));
+            const masked = this.maskChat(this.chatLinkPlainText(ev.text));
             const bubble = ev.channel === 'emote' ? `${ev.from} ${masked}` : masked;
             this.renderer.showChatBubble(ev.entityId, bubble, ev.channel === 'yell');
           }
@@ -6723,6 +6736,10 @@ export class Hud {
         if (seg.value) parent.append(document.createTextNode(this.maskChat(seg.value)));
         continue;
       }
+      if (seg.kind === 'item') {
+        this.appendChatItemLink(parent, seg.itemId);
+        continue;
+      }
       const quest = QUESTS[seg.questId];
       if (!quest) {
         parent.append(document.createTextNode(this.maskChat('[?]')));
@@ -6744,13 +6761,36 @@ export class Hud {
     }
   }
 
-  // The plain-text form of a chat string with [[q:id]] tokens replaced by [Name]
-  // — used for 3D chat bubbles, which can't host interactive spans.
-  private questLinkPlainText(text: string): string {
+  // Render a [[i:id]] chat segment as a quality-colored, inspectable item link.
+  // Hover/focus shows the same item tooltip the bags window uses; an unknown id
+  // (e.g. content drift between players) degrades to a plain [?].
+  private appendChatItemLink(parent: HTMLElement, itemId: string): void {
+    const item = ITEMS[itemId];
+    if (!item) {
+      parent.append(document.createTextNode(this.maskChat('[?]')));
+      return;
+    }
+    const link = document.createElement('span');
+    link.className = 'chat-item-link';
+    link.style.color = QUALITY_COLOR[item.quality ?? 'common'] ?? '#fff';
+    link.textContent = `[${itemDisplayName(item)}]`;
+    link.tabIndex = 0;
+    this.attachTooltip(link, () => this.itemTooltip(item));
+    parent.append(link);
+  }
+
+  // The plain-text form of a chat string with [[q:id]]/[[i:id]] tokens replaced by
+  // [Name] — used for 3D chat bubbles, which can't host interactive spans.
+  private chatLinkPlainText(text: string): string {
     return parseChatSegments(text)
-      .map((s) =>
-        s.kind === 'text' ? s.value : `[${QUESTS[s.questId] ? questTitle(s.questId) : '?'}]`,
-      )
+      .map((s) => {
+        if (s.kind === 'text') return s.value;
+        if (s.kind === 'item') {
+          const item = ITEMS[s.itemId];
+          return `[${item ? itemDisplayName(item) : '?'}]`;
+        }
+        return `[${QUESTS[s.questId] ? questTitle(s.questId) : '?'}]`;
+      })
       .join('');
   }
 

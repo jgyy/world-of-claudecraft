@@ -484,6 +484,9 @@ export const hudChromeStrings = {
     noQuestSelected: 'Select a quest in your log to share.',
     linkTitle: 'Shift-click to link this quest in chat.',
   },
+  itemShare: {
+    linkHint: 'Shift-click to link this item in chat.',
+  },
   // CLDR-categorized count strings resolved through tPlural(base, count) in
   // src/ui/i18n.ts: it selects the active locale's cardinal category (one / few /
   // many / other) via Intl.PluralRules and looks up the matching leaf, so e.g.
