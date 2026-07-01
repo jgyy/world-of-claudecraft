@@ -114,6 +114,7 @@ import { abilityStartsAutoAttack, hasAutoAttackTarget } from './attack_on_abilit
 import { type AuraEffectInput, auraEffectDescriptor } from './aura_effect';
 import { AurasPainter, type AurasPainterDeps } from './auras_painter';
 import { type AurasDeps, createAurasView } from './auras_view';
+import { attachAvatarFallback } from './avatar_fallback';
 import { BagsWindow } from './bags_window';
 import { CastBarPainter } from './cast_bar_painter';
 import { buildPaperdollView, type PaperdollSlot } from './char_view';
@@ -721,6 +722,9 @@ export class Hud {
   private targetNameEl = $('#tf-name');
   private targetLevelEl = $('#tf-level');
   private targetDiscordEl = $('#tf-discord');
+  // Diff key for the target-frame Discord line, so its per-frame update only rebuilds
+  // innerHTML (and re-attaches the avatar fallback) when the Discord content changes.
+  private targetDiscordSig = '';
   private targetHpEl = $('#tf-hp');
   private targetHpTextEl = $('#tf-hp-text');
   private targetPortraitEl = $('#tf-portrait') as unknown as HTMLCanvasElement;
@@ -9949,10 +9953,19 @@ export class Hud {
     const el = this.targetDiscordEl;
     const tier = target.discordTier ?? 0;
     if (target.kind !== 'player' || (!tier && !target.discordName && !target.discordRole)) {
-      el.classList.remove('show');
-      el.replaceChildren();
+      if (this.targetDiscordSig !== '') {
+        this.targetDiscordSig = '';
+        el.classList.remove('show');
+        el.replaceChildren();
+      }
       return;
     }
+    // This runs every frame the target frame updates; only rebuild when the Discord
+    // content actually changes (else a fresh <img> per frame would re-fetch the
+    // avatar and, on a failing CDN load, flicker between the broken glyph and hidden).
+    const sig = `${tier}|${target.discordName ?? ''}|${target.discordRole ?? ''}|${target.discordAvatar ?? ''}`;
+    if (sig === this.targetDiscordSig) return;
+    this.targetDiscordSig = sig;
     const roleTagLabel = (key: string | undefined): string => {
       switch (key) {
         case 'levyst':
@@ -9984,6 +9997,10 @@ export class Hud {
       parts.push(`<span class="uf-dc-chip rank">${esc(discordStatusDisplayName(tier))}</span>`);
     }
     el.innerHTML = parts.join('');
+    // Hide the external Discord avatar if its CDN image fails to load, so the line
+    // never shows the browser's broken-image placeholder (the nickname stays).
+    const dcAvatar = el.querySelector<HTMLImageElement>('.uf-dc-name img');
+    if (dcAvatar) attachAvatarFallback(dcAvatar);
     el.classList.add('show');
   }
 
@@ -10071,6 +10088,16 @@ export class Hud {
       `<div class="equip-col equip-col-right" id="inspect-equip-right"></div>` +
       `</div></div>`;
     hydratePortraits(el);
+    // If the linked-Discord avatar fails to load from the CDN, degrade to exactly the
+    // no-avatar rendering (the plain status-tier badge, without the pfp's blue ring)
+    // instead of the browser's broken-image placeholder.
+    const inspectPfp = el.querySelector<HTMLImageElement>('.inspect-discord-pfp');
+    if (inspectPfp) {
+      attachAvatarFallback(inspectPfp, (img) => {
+        img.classList.remove('inspect-discord-pfp');
+        img.src = discordStatusBadgeDataUrl(discordTierIdx);
+      });
+    }
     const view = buildPaperdollView(e.equippedItems, ITEMS);
     const leftCol = el.querySelector('#inspect-equip-left');
     const rightCol = el.querySelector('#inspect-equip-right');
