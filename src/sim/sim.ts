@@ -3,6 +3,7 @@ import type {
   DelveCompanionInfo,
   DelveRunInfo,
   LockpickView,
+  PlayerProfessionsView,
 } from '../world_api';
 import { lineOfSightClear, resolveMovement, resolvePosition } from './colliders';
 import { auraAffectsStats, removeCancelableAura } from './combat/aura_cancel';
@@ -5735,6 +5736,12 @@ export class Sim {
 
   get delveDaily(): { date: string; firstClearXp: string[]; markClears: number } {
     return this.delveDailyWire(this.primaryId);
+  }
+
+  // Stub read surface for #1164: professions skill tracking + recipes land in
+  // later issues (#1119/#1120). Always empty until then.
+  get professionsState(): PlayerProfessionsView {
+    return { skills: [] };
   }
 }
 
