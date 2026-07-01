@@ -20,6 +20,7 @@
 // directly (already pure); only `entities` + the Nythraxis helpers route via the seam.
 
 import { MOBS } from '../data';
+import { combatProfileForMob } from '../mob_combat';
 import type { SimContext } from '../sim_context';
 import { addThreat, MELEE_SWITCH_MULT, RANGED_SWITCH_MULT } from '../threat';
 import type { Entity } from '../types';
@@ -95,6 +96,14 @@ export function updateMobTarget(ctx: SimContext, mob: Entity): void {
   const curThreat = mob.threat.get(cur.id) ?? 0;
   let best = cur;
   let bestT = curThreat;
+  // Melee vs ranged uses the mob's actual reach, floored at the classic 6yd
+  // (MELEE_RANGE * 1.2): normal mobs keep the 6yd boundary, while an oversized
+  // creature still counts a challenger standing at its feet as melee. The reach
+  // depends only on the mob, so compute it once outside the candidate loop.
+  const meleeReach = Math.max(
+    MELEE_RANGE * 1.2,
+    combatProfileForMob(mob.templateId, mob.scale).meleeRange,
+  );
   for (const [id, t] of mob.threat) {
     if (id === cur.id || t <= bestT) continue;
     const e = ctx.entities.get(id);
@@ -102,7 +111,7 @@ export function updateMobTarget(ctx: SimContext, mob: Entity): void {
       mob.threat.delete(id);
       continue;
     }
-    const inMelee = dist2d(mob.pos, e.pos) <= MELEE_RANGE * 1.2;
+    const inMelee = dist2d(mob.pos, e.pos) <= meleeReach;
     const needed = curThreat * (inMelee ? MELEE_SWITCH_MULT : RANGED_SWITCH_MULT);
     if (t > needed) {
       best = e;

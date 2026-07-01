@@ -4931,4 +4931,5 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.discord.relay.event.hint': 'Annoncér et raid, et møde eller et arrangement',
   'hudChrome.discord.relay.help.label': 'Brug for hjælp',
   'hudChrome.discord.relay.help.hint': 'Bed fællesskabet om hjælp',
+  'hudChrome.options.showSecondaryActionBar': 'Vis sekundær handlingslinje',
 };

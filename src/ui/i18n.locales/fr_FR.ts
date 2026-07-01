@@ -5070,4 +5070,5 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.discord.relay.event.hint': 'Annoncer un raid, une rencontre ou un événement',
   'hudChrome.discord.relay.help.label': "Besoin d'aide",
   'hudChrome.discord.relay.help.hint': "Demander de l'aide à la communauté",
+  'hudChrome.options.showSecondaryActionBar': "Afficher la barre d'action secondaire",
 };

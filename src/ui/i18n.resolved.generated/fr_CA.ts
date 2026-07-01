@@ -332,10 +332,11 @@ export const fr_CA: EnTranslations = {
       "showWalletOnPlayerCard": "Afficher le portefeuille sur la carte de joueur",
       "uiScale": "Échelle de l’interface",
       "highContrastBackground": "Arrière-plan à contraste élevé",
+      "startAttackOnAbility": "Auto-Attack on Ability Use",
       "showItemLevel": "Afficher le niveau d'objet",
       "itemLevelLine": "Niveau d'objet {level}",
       "itemScoreLine": "Score {score}",
-      "showSecondaryActionBar": "Show Secondary Action Bar"
+      "showSecondaryActionBar": "Afficher la barre d'action secondaire"
     },
     "controller": {
       "title": "Manette",
@@ -625,6 +626,9 @@ export const fr_CA: EnTranslations = {
       "assigned": "{looter} a attribue {item} a {target}.",
       "unassigned": "{item} n a pas ete attribue et devient libre pour tous.",
       "leaderOnly": "Seul le chef de groupe peut changer le mode de butin."
+    },
+    "party": {
+      "promoteLeader": "Promote to Leader"
     },
     "bags": {
       "filterGroupAria": "Filtrer les sacs par catégorie",

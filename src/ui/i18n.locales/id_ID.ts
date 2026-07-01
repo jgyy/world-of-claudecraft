@@ -5003,4 +5003,5 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.discord.relay.event.hint': 'Umumkan raid, pertemuan, atau acara',
   'hudChrome.discord.relay.help.label': 'Butuh Bantuan',
   'hudChrome.discord.relay.help.hint': 'Minta bantuan dari komunitas',
+  'hudChrome.options.showSecondaryActionBar': 'Tampilkan Bilah Aksi Sekunder',
 };

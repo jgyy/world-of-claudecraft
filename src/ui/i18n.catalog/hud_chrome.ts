@@ -295,6 +295,9 @@ export const hudChromeStrings = {
     // page's high-contrast backdrop toggle.
     uiScale: 'UI Scale',
     highContrastBackground: 'High-Contrast Background',
+    // Interface panel toggle: also engage auto-attack when using an offensive
+    // ability, so white swings start without a separate Attack press (on by default).
+    startAttackOnAbility: 'Auto-Attack on Ability Use',
     // Interface panel toggle + the item-tooltip lines it reveals (off by default).
     showItemLevel: 'Show Item Level',
     itemLevelLine: 'Item Level {level}',
@@ -657,6 +660,13 @@ export const hudChromeStrings = {
     assigned: '{looter} assigned {item} to {target}.',
     unassigned: '{item} was not assigned and is free for all.',
     leaderOnly: 'Only the party leader can change the loot method.',
+  },
+  // Party leadership: the right-click "Promote to Leader" handoff action shown on a
+  // party member's context menu to the current leader. Lives in the English-only
+  // hud_chrome domain so an English-only PR compiles; the new-leader announcement
+  // itself is a sim emit re-localized through localizeSystemText (hud.logs.partyLeader).
+  party: {
+    promoteLeader: 'Promote to Leader',
   },
   // Modular bag filtering controls: the category chips, sort dropdown, and live
   // search above the bag grid, plus the "no items match" empty state.

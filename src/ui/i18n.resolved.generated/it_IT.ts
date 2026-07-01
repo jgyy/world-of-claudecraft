@@ -332,10 +332,11 @@ export const it_IT: EnTranslations = {
       "showWalletOnPlayerCard": "Mostra portafoglio nella scheda giocatore",
       "uiScale": "Scala dell'interfaccia",
       "highContrastBackground": "Sfondo a contrasto elevato",
+      "startAttackOnAbility": "Auto-Attack on Ability Use",
       "showItemLevel": "Mostra livello oggetto",
       "itemLevelLine": "Livello oggetto {level}",
       "itemScoreLine": "Punteggio {score}",
-      "showSecondaryActionBar": "Show Secondary Action Bar"
+      "showSecondaryActionBar": "Mostra la barra delle azioni secondaria"
     },
     "controller": {
       "title": "Controller",
@@ -625,6 +626,9 @@ export const it_IT: EnTranslations = {
       "assigned": "{looter} ha assegnato {item} a {target}.",
       "unassigned": "{item} non e stato assegnato ed e libero per tutti.",
       "leaderOnly": "Solo il capogruppo puo cambiare il metodo bottino."
+    },
+    "party": {
+      "promoteLeader": "Promote to Leader"
     },
     "bags": {
       "filterGroupAria": "Filtra le borse per categoria",

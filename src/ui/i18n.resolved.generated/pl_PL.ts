@@ -332,10 +332,11 @@ export const pl_PL: EnTranslations = {
       "showWalletOnPlayerCard": "Pokaż sakiewkę na karcie gracza",
       "uiScale": "Skala interfejsu",
       "highContrastBackground": "Tło o wysokim kontraście",
+      "startAttackOnAbility": "Auto-Attack on Ability Use",
       "showItemLevel": "Pokaż poziom przedmiotu",
       "itemLevelLine": "Poziom przedmiotu {level}",
       "itemScoreLine": "Ocena {score}",
-      "showSecondaryActionBar": "Show Secondary Action Bar"
+      "showSecondaryActionBar": "Pokaż dodatkowy pasek akcji"
     },
     "controller": {
       "title": "Kontroler",
@@ -625,6 +626,9 @@ export const pl_PL: EnTranslations = {
       "assigned": "{looter} przydzielil {item} graczowi {target}.",
       "unassigned": "{item} nie zostal przydzielony i jest wolny dla wszystkich.",
       "leaderOnly": "Tylko przywodca grupy moze zmienic metode lupow."
+    },
+    "party": {
+      "promoteLeader": "Promote to Leader"
     },
     "bags": {
       "filterGroupAria": "Filtruj torby według kategorii",

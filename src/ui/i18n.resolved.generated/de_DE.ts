@@ -332,10 +332,11 @@ export const de_DE: EnTranslations = {
       "showWalletOnPlayerCard": "Wallet auf der Spielerkarte anzeigen",
       "uiScale": "UI-Skalierung",
       "highContrastBackground": "Hintergrund mit hohem Kontrast",
+      "startAttackOnAbility": "Auto-Attack on Ability Use",
       "showItemLevel": "Gegenstandsstufe anzeigen",
       "itemLevelLine": "Gegenstandsstufe {level}",
       "itemScoreLine": "Wertung {score}",
-      "showSecondaryActionBar": "Show Secondary Action Bar"
+      "showSecondaryActionBar": "Zweite Aktionsleiste anzeigen"
     },
     "controller": {
       "title": "Controller",
@@ -625,6 +626,9 @@ export const de_DE: EnTranslations = {
       "assigned": "{looter} hat {item} an {target} zugewiesen.",
       "unassigned": "{item} wurde nicht zugewiesen und ist fuer alle frei.",
       "leaderOnly": "Nur der Gruppenleiter kann die Beutemethode aendern."
+    },
+    "party": {
+      "promoteLeader": "Promote to Leader"
     },
     "bags": {
       "filterGroupAria": "Taschen nach Kategorie filtern",

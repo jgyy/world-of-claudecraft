@@ -75,6 +75,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.masterLoot.enableAria': '분배 담당 사용',
   'hudChrome.masterLoot.looterLabel': '분배 담당자',
   'hudChrome.masterLoot.leaderOption': '파티장',
+  'hudChrome.party.promoteLeader': '파티장으로 지정',
   'hudChrome.masterLoot.thresholdLabel': '품질 기준',
   'hudChrome.masterLoot.thresholdUncommon': '고급 이상',
   'hudChrome.masterLoot.thresholdRare': '희귀 이상',
@@ -237,6 +238,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '자동은 브라우저와 기기에 맞춰 무거운 CSS 효과(흐림, 글로우, 배경 모션)를 낮춥니다. 인터페이스가 느리게 느껴지면 수동으로 낮추세요.',
   'hudChrome.options.footstepSounds': '발소리',
   'hudChrome.options.clickFeedback': '클릭 표시',
+  'hudChrome.options.startAttackOnAbility': '스킬 사용 시 자동 공격',
   'hudChrome.options.lockCursorOnRotate': '회전 중 커서 고정',
   'hudChrome.options.keybindHelpLockCursorOnRotate':
     '드래그하여 카메라를 회전하는 동안 마우스 커서를 창 안에 유지하여 화면 가장자리에 닿거나 다른 모니터로 이동하지 않도록 합니다. 자유로운 커서를 원하면 끄세요.',

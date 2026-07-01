@@ -4996,4 +4996,5 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hudChrome.discord.relay.event.hint': 'Kondig een raid, meetup of evenement aan',
   'hudChrome.discord.relay.help.label': 'Hulp nodig',
   'hudChrome.discord.relay.help.hint': 'Vraag de gemeenschap om hulp',
+  'hudChrome.options.showSecondaryActionBar': 'Secundaire actiebalk tonen',
 };

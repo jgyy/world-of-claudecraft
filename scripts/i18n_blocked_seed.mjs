@@ -144,6 +144,53 @@ export const COPIED_ALLOW_IDS = [
   'server::nl_NL::who.statusOnline',
   'server::pl_PL::who.statusOnline',
   'server::sv_SE::who.statusOnline',
+  // Admin location panel (v0.17.0 "admin-friendly-location"). Two cognate classes
+  // that are legitimately byte-identical to English in these locales:
+  //  - Hub-town proper place-names (Eastbrook / Fenbridge / Highwatch). These stay
+  //    verbatim in the Western-European locales whose zone names also keep them
+  //    (e.g. es "Valle de Eastbrook", de "Eastbrook-Tal"); the locales that adapt
+  //    proper nouns (nl/pl/tr/sv/da/vi/ru and the CJK/KR transliterations) translate
+  //    them instead and need no row here.
+  //  - Borrowed UI terms (Dungeon / Slot / Zone / Type / Instance) that those
+  //    languages already use verbatim, mirroring the moderation/stats rows above.
+  'admin::es::poi.eastbrook_vale.0',
+  'admin::es::poi.mirefen_marsh.0',
+  'admin::es::poi.thornpeak_heights.0',
+  'admin::es_ES::poi.eastbrook_vale.0',
+  'admin::es_ES::poi.mirefen_marsh.0',
+  'admin::es_ES::poi.thornpeak_heights.0',
+  'admin::fr_FR::poi.eastbrook_vale.0',
+  'admin::fr_FR::poi.mirefen_marsh.0',
+  'admin::fr_FR::poi.thornpeak_heights.0',
+  'admin::fr_CA::poi.eastbrook_vale.0',
+  'admin::fr_CA::poi.mirefen_marsh.0',
+  'admin::fr_CA::poi.thornpeak_heights.0',
+  'admin::it_IT::location.kind.dungeon',
+  'admin::it_IT::location.slot',
+  'admin::it_IT::poi.eastbrook_vale.0',
+  'admin::it_IT::poi.mirefen_marsh.0',
+  'admin::it_IT::poi.thornpeak_heights.0',
+  'admin::de_DE::location.kind.dungeon',
+  'admin::de_DE::location.zone',
+  'admin::de_DE::location.slot',
+  'admin::de_DE::poi.eastbrook_vale.0',
+  'admin::de_DE::poi.mirefen_marsh.0',
+  'admin::de_DE::poi.thornpeak_heights.0',
+  'admin::pt_BR::location.slot',
+  'admin::pt_BR::poi.eastbrook_vale.0',
+  'admin::pt_BR::poi.mirefen_marsh.0',
+  'admin::pt_BR::poi.thornpeak_heights.0',
+  'admin::nl_NL::location.type',
+  'admin::nl_NL::location.slot',
+  'admin::pl_PL::location.slot',
+  'admin::id_ID::location.kind.dungeon',
+  'admin::id_ID::location.instance',
+  'admin::id_ID::location.slot',
+  'admin::id_ID::poi.eastbrook_vale.0',
+  'admin::id_ID::poi.mirefen_marsh.0',
+  'admin::id_ID::poi.thornpeak_heights.0',
+  'admin::da_DK::location.type',
+  'admin::da_DK::location.zone',
 ];
 
 export const V07_SLASH = [

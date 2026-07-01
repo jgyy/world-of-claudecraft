@@ -332,6 +332,7 @@ export const zh_CN: EnTranslations = {
       "showWalletOnPlayerCard": "在玩家卡片显示钱包",
       "uiScale": "界面缩放",
       "highContrastBackground": "高对比度背景",
+      "startAttackOnAbility": "使用技能时自动攻击",
       "showItemLevel": "显示物品等级",
       "itemLevelLine": "物品等级 {level}",
       "itemScoreLine": "评分 {score}",
@@ -625,6 +626,9 @@ export const zh_CN: EnTranslations = {
       "assigned": "{looter}将{item}分配给了{target}。",
       "unassigned": "{item}未被分配，现可自由拾取。",
       "leaderOnly": "只有队长才能更改拾取方式。"
+    },
+    "party": {
+      "promoteLeader": "提升为队长"
     },
     "bags": {
       "filterGroupAria": "按类别筛选背包",
