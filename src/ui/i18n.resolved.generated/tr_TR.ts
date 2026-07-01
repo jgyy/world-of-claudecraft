@@ -900,7 +900,8 @@ export const tr_TR: EnTranslations = {
       "resultAria": "Craft {name}",
       "craftedToast": "Crafted: {name}",
       "insufficientMaterials": "You do not have the materials for that.",
-      "unknownRecipe": "That recipe does not exist."
+      "unknownRecipe": "That recipe does not exist.",
+      "comboRequirementUnmet": "You do not have both required crafts at the required tier for that recipe."
     }
   },
   "guide": {

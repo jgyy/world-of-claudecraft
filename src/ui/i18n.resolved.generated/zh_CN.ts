@@ -900,7 +900,8 @@ export const zh_CN: EnTranslations = {
       "resultAria": "制作{name}",
       "craftedToast": "已制作:{name}",
       "insufficientMaterials": "你没有足够的材料。",
-      "unknownRecipe": "该配方不存在。"
+      "unknownRecipe": "该配方不存在。",
+      "comboRequirementUnmet": "你没有达到该配方所需组合的两项制造技能等级。"
     }
   },
   "guide": {

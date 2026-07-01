@@ -4663,4 +4663,5 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.crafting.craftedToast': '已制作:{name}',
   'hudChrome.crafting.insufficientMaterials': '你没有足够的材料。',
   'hudChrome.crafting.unknownRecipe': '该配方不存在。',
+  'hudChrome.crafting.comboRequirementUnmet': '你没有达到该配方所需组合的两项制造技能等级。',
 };

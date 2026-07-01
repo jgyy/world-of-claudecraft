@@ -12,6 +12,14 @@
 // Higher-tier gating, the wheel, and archetype-exclusive combos are later
 // issues; this module resolves exactly the common-tier path end to end.
 //
+// Combo-recipe requirement (issue #1132): a recipe may carry a
+// `comboRequirement` naming one specific adjacent craft pair and a minimum
+// tier both must meet. `hasComboRequirement` checks the player's tier
+// capability in BOTH named crafts (via wheel.ts tierCapability), independent
+// of the recipe's `professionId`. Only the two named crafts ever count: a
+// player's skill in any other craft, however high, never substitutes for
+// either half of the pair.
+//
 // This module is `src/sim`-pure (see src/sim/CLAUDE.md): no DOM/render/ui/
 // game/net imports, no Math.random/Date.now, host-agnostic so it runs
 // offline, on the server, and in the headless RL env unchanged.
@@ -20,7 +28,13 @@ import { recipeById } from '../content/recipes';
 import type { SimContext } from '../sim_context';
 import { type MaterialRarity, rollMaterialRarity } from './gathering';
 import type { ProfessionRecipeRecord } from './types';
-import { gainCraftSkill, tierCapability, tierForSkill, tierProgressMultiplier } from './wheel';
+import {
+  type CraftSkills,
+  gainCraftSkill,
+  tierCapability,
+  tierForSkill,
+  tierProgressMultiplier,
+} from './wheel';
 
 // One flat craft-skill point per successful common-tier craft (the free-floor
 // rule: common-tier crafting itself never costs anything, but skill still
@@ -36,7 +50,7 @@ export interface CraftResult {
   quality?: MaterialRarity;
   // Present only when !ok: a stable reason code, not player-facing prose (the
   // caller renders/localizes the denial).
-  reason?: 'unknown_recipe' | 'insufficient_materials';
+  reason?: 'unknown_recipe' | 'insufficient_materials' | 'combo_requirement_unmet';
 }
 
 /** Whether the given player currently holds every reagent a recipe requires,
@@ -49,29 +63,51 @@ export function hasRecipeMaterials(
   return recipe.reagents.every((r) => ctx.countItem(r.itemId, pid) >= r.count);
 }
 
+/** Whether the given player's craft skills satisfy a recipe's dual-craft
+ *  combo requirement (issue #1132): true if the recipe carries no
+ *  `comboRequirement` at all, otherwise true only when the player's tier
+ *  capability (wheel.ts tierCapability) in BOTH named crafts is at or above
+ *  `minTier`. Deliberately does not fall back to any other craft: a high
+ *  skill in a craft outside the required pair never satisfies this check. */
+export function meetsComboRequirement(
+  skills: CraftSkills,
+  recipe: ProfessionRecipeRecord,
+): boolean {
+  const combo = recipe.comboRequirement;
+  if (!combo) return true;
+  return (
+    tierCapability(skills, combo.craftA) >= combo.minTier &&
+    tierCapability(skills, combo.craftB) >= combo.minTier
+  );
+}
+
 /** Pure resolution of one craft attempt against an already-resolved recipe
- *  record and player entity id (issue #1128 tiered mastery gating): denies
- *  (no side effect at all) if any reagent is short, partial consumption never
- *  happens. On success, consumes every reagent, rolls the output's quality off
- *  the player's current skill in the recipe's craft, grants the output item,
- *  and grants craft skill scaled by tier mastery: full at or above the
- *  player's tier capability (including always-full for the common tier,
- *  regardless of capability), reduced one tier below, zero two or more tiers
- *  below. Exported separately from `resolveCraft` so tests can exercise the
- *  tier curve against a synthetic recipe without needing higher-tier content
- *  in `content/recipes.ts`. */
+ *  record and player entity id (issue #1128 tiered mastery gating; issue
+ *  #1132 combo-recipe gating): denies (no side effect at all) if any reagent
+ *  is short OR the recipe's `comboRequirement` (if any) is unmet, partial
+ *  consumption never happens. On success, consumes every reagent, rolls the
+ *  output's quality off the player's current skill in the recipe's craft,
+ *  grants the output item, and grants craft skill scaled by tier mastery:
+ *  full at or above the player's tier capability (including always-full for
+ *  the common tier, regardless of capability), reduced one tier below, zero
+ *  two or more tiers below. Exported separately from `resolveCraft` so tests
+ *  can exercise the tier curve against a synthetic recipe without needing
+ *  higher-tier content in `content/recipes.ts`. */
 export function resolveCraftForRecipe(
   ctx: SimContext,
   pid: number,
   recipe: ProfessionRecipeRecord,
 ): CraftResult {
+  const meta = ctx.players.get(pid);
+  if (recipe.comboRequirement && !meetsComboRequirement(meta ? meta.craftSkills : {}, recipe)) {
+    return { ok: false, recipeId: recipe.id, reason: 'combo_requirement_unmet' };
+  }
   if (!hasRecipeMaterials(ctx, recipe, pid)) {
     return { ok: false, recipeId: recipe.id, reason: 'insufficient_materials' };
   }
   for (const reagent of recipe.reagents) {
     ctx.removeItem(reagent.itemId, reagent.count, pid);
   }
-  const meta = ctx.players.get(pid);
   const skill = meta ? (meta.craftSkills[recipe.professionId] ?? 0) : 0;
   const quality = rollMaterialRarity(skill, ctx.rng);
   ctx.addItem(recipe.resultItemId, recipe.resultCount, pid);
@@ -113,7 +149,9 @@ export function craftItem(ctx: SimContext, recipeId: string, pid?: number): Craf
       r.meta.entityId,
       result.reason === 'unknown_recipe'
         ? 'That recipe does not exist.'
-        : 'You do not have the materials for that.',
+        : result.reason === 'combo_requirement_unmet'
+          ? 'You do not have both required crafts at the required tier for that recipe.'
+          : 'You do not have the materials for that.',
     );
   }
   return result;

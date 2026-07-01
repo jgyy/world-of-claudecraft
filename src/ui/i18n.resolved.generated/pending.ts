@@ -11,6 +11,7 @@
 export const pending: Record<string, readonly string[]> = {
   "es": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -27,6 +28,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "es_ES": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -43,6 +45,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "fr_FR": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -59,6 +62,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "fr_CA": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -76,6 +80,7 @@ export const pending: Record<string, readonly string[]> = {
   "en_CA": [],
   "it_IT": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -92,6 +97,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "de_DE": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -124,6 +130,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "pt_BR": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -144,6 +151,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "nl_NL": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -164,6 +172,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "pl_PL": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -184,6 +193,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "id_ID": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -204,6 +214,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "tr_TR": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -224,6 +235,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "sv_SE": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -244,6 +256,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "vi_VN": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
@@ -264,6 +277,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "da_DK": [
     "hudChrome.crafting.close",
+    "hudChrome.crafting.comboRequirementUnmet",
     "hudChrome.crafting.craft",
     "hudChrome.crafting.craftedToast",
     "hudChrome.crafting.empty",
