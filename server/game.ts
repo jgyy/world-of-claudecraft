@@ -2239,6 +2239,15 @@ export class GameServer {
           sim.harvestCorpse(msg.id, components, pid);
         }
         break;
+      case 'set_town_focus':
+        if (msg.allocation && typeof msg.allocation === 'object') {
+          const allocation: Record<string, number> = {};
+          for (const [k, v] of Object.entries(msg.allocation as Record<string, unknown>)) {
+            if (typeof v === 'number') allocation[k] = v;
+          }
+          sim.setTownFocus(allocation, pid);
+        }
+        break;
       case 'lootRoll':
         if (
           typeof msg.rollId === 'number' &&
@@ -3104,6 +3113,7 @@ export class GameServer {
     maybe('dcomp', this.sim.companionUpgradesFor(anchorSession.pid));
     maybe('dclears', this.sim.delveClearsFor(anchorSession.pid));
     maybe('delveDaily', this.sim.delveDailyWire(anchorSession.pid));
+    maybe('tfocus', this.sim.townFocusFor(anchorSession.pid));
     // stats + weapon stay per-tick: recalcPlayerStats re-derives them on every
     // stat-affecting aura gain/loss (Bear/Cat Form, shouts, debuffs, elixir
     // wear-off, a buff cast on you by someone else), none of which mark this
