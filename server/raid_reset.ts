@@ -2,9 +2,11 @@
 //
 // Classic-style realms expire raid lockouts at a fixed daily reset time, not on a
 // rolling "24h from kill" window, so a guild can plan its raid night around one
-// predictable boundary. The reset lands at midnight in the realm's own civil time
-// zone (an IANA name, e.g. America/New_York or Europe/Paris); each realm process
-// picks its zone via REALM_RESET_TZ (see server/realm.ts), defaulting to US Eastern.
+// predictable boundary. The reset lands at 03:00 (3 AM, the classic daily-reset hour)
+// in the realm's own civil time zone (an IANA name, e.g. America/New_York or
+// Europe/Paris); each realm process picks its zone via REALM_RESET_TZ (see
+// server/realm.ts), defaulting to US Eastern. 3 AM also keeps the boundary clear of the
+// DST spring-forward gap that skips local midnight in a few zones.
 //
 // This lives on the SERVER, not in src/sim/, on purpose: the reset zone is a host /
 // wall-clock concern (like the lockout clock itself), so the deterministic sim core
@@ -15,6 +17,12 @@
 // Intl.DateTimeFormat, new Date(ms), and Date.UTC.
 
 export const DEFAULT_RAID_RESET_TIME_ZONE = 'America/New_York';
+
+// The civil-time hour of the daily raid reset: 03:00, the classic 3 AM daily reset.
+// Deliberately off midnight so the boundary is never a wall-clock time a spring-forward
+// DST transition skips: the common zones jump 02:00 -> 03:00 (so 03:00 always exists),
+// whereas a handful of zones skip 00:00 entirely.
+const RAID_RESET_HOUR = 3;
 
 // Whether the host ICU database can resolve the given IANA zone. A Node built without
 // full ICU throws here even for a valid zone, so callers can validate config and fail
@@ -77,22 +85,38 @@ function zoneDate(instantMs: number, zone: string): { y: number; mo: number; d: 
   return { y: Number(p.year), mo: Number(p.month), d: Number(p.day) };
 }
 
-// The epoch ms of 00:00:00 reset-zone time for the given civil date. Day overflow
-// (e.g. d = 32) wraps the month/year via Date.UTC. The offset is resolved twice so a
-// midnight that straddles a DST transition still maps to the correct UTC instant.
-function zoneMidnightToUtc(y: number, mo: number, d: number, zone: string): number {
-  const naive = Date.UTC(y, mo - 1, d, 0, 0, 0);
-  const firstGuess = naive - zoneOffsetMs(naive, zone);
-  const offset = zoneOffsetMs(firstGuess, zone);
-  return naive - offset;
+// The zone-local clock hour (0-23) of an instant.
+function zoneHour(instantMs: number, zone: string): number {
+  const part = new Intl.DateTimeFormat('en-US', { timeZone: zone, hour12: false, hour: '2-digit' })
+    .formatToParts(new Date(instantMs))
+    .find((p) => p.type === 'hour');
+  return Number(part?.value ?? '0') % 24; // some runtimes render midnight as '24'
 }
 
-// The next daily raid reset strictly after nowMs (epoch ms): midnight of the next
-// civil day in the given reset zone (default US Eastern).
+// The epoch ms of RAID_RESET_HOUR:00:00 reset-zone time for the given civil date. Day
+// overflow (e.g. d = 32) wraps the month/year via Date.UTC. The offset is resolved twice
+// (a refinement pass) so a reset time near a DST transition still maps to the correct UTC
+// instant. If a spring-forward gap SKIPS the reset hour outright (a few zones jump
+// 03:00 -> 04:00), the resolved instant does not round-trip back to the reset hour; we
+// then snap to the later edge, so the reset lands the moment the clock resumes rather
+// than collapsing backward onto the prior hour (which would make a lockout zero-length).
+function zoneResetInstant(y: number, mo: number, d: number, zone: string): number {
+  const naive = Date.UTC(y, mo - 1, d, RAID_RESET_HOUR, 0, 0);
+  const firstGuess = naive - zoneOffsetMs(naive, zone);
+  const resolved = naive - zoneOffsetMs(firstGuess, zone);
+  if (zoneHour(resolved, zone) === RAID_RESET_HOUR) return resolved;
+  return Math.max(firstGuess, resolved);
+}
+
+// The next daily raid reset strictly after nowMs (epoch ms): RAID_RESET_HOUR:00 local
+// in the given reset zone (default US Eastern). A kill after midnight but before the
+// reset hour unlocks at this morning's reset; every other kill unlocks at the next
+// civil day's reset.
 export function nextRaidResetMs(
   nowMs: number,
   zone: string = DEFAULT_RAID_RESET_TIME_ZONE,
 ): number {
   const { y, mo, d } = zoneDate(nowMs, zone);
-  return zoneMidnightToUtc(y, mo, d + 1, zone);
+  const today = zoneResetInstant(y, mo, d, zone);
+  return today > nowMs ? today : zoneResetInstant(y, mo, d + 1, zone);
 }

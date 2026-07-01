@@ -471,7 +471,7 @@ export function nythraxisRoomMetas(ctx: SimContext, boss: Entity): PlayerMeta[] 
 
 export function grantNythraxisLockout(ctx: SimContext, boss: Entity): void {
   // Daily raid reset: lock until the next reset boundary the host supplies through the
-  // lockout seam (the authoritative server uses its realm-local civil midnight, so a
+  // lockout seam (the authoritative server uses its realm-local 3 AM daily reset, so a
   // realm's raids share one boundary; offline/headless fall back to a flat 24h day).
   const until = ctx.raidResetMs(ctx.lockoutNowMs());
   for (const meta of nythraxisRoomMetas(ctx, boss)) {

@@ -172,7 +172,7 @@ export interface SimContextCallbacks {
   // existing `this.enterDungeon` etc. call sites resolve unchanged.
   lockoutNowMs(): number;
   // The next raid-reset instant (epoch ms) for a given lockout "now". The host owns
-  // the boundary (the authoritative server uses its realm-local civil midnight), so
+  // the boundary (the authoritative server uses its realm-local 3 AM daily reset), so
   // the sim core never reads a time zone; offline/headless fall back to a flat 24h day.
   raidResetMs(nowMs: number): number;
   instanceKeyFor(pid: number): string;

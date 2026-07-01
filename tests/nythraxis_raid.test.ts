@@ -2381,10 +2381,10 @@ describe('Nythraxis raid encounter', () => {
     expect(tank.pos.x).toBeLessThan(3000); // back out to Thornpeak
   });
 
-  it('locks raid members out of the Nythraxis arena until the next realm-local midnight reset', () => {
+  it('locks raid members out of the Nythraxis arena until the next realm-local 3 AM reset', () => {
     // 2025-06-29 12:00 EDT (16:00 UTC). With the server's realm-local reset injected
-    // through the lockout seam, the lockout expires at the next US Eastern midnight
-    // (2025-06-30 00:00 EDT == 04:00 UTC), not 24h from the kill.
+    // through the lockout seam, the lockout expires at the next US Eastern 3 AM reset
+    // (2025-06-30 03:00 EDT == 07:00 UTC), not 24h from the kill.
     let now = Date.UTC(2025, 5, 29, 16, 0, 0);
     const reset = nextRaidResetMs(now);
     const sim = makeWorld(
@@ -2411,7 +2411,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('falls back to a flat 24h lockout when the host injects no reset boundary (offline/headless)', () => {
     // The offline browser and the headless RL env omit raidResetMs, so a kill locks for
-    // a plain 24h day rather than a realm-local civil midnight (the server's behavior).
+    // a plain 24h day rather than a realm-local 3 AM reset (the server's behavior).
     const now = 1_000_000;
     const sim = makeWorld(() => now);
     const tankPid = sim.addPlayer('warrior', 'Tank');

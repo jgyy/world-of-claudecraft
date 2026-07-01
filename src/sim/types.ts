@@ -1728,7 +1728,7 @@ export interface SimConfig {
   devCommands?: boolean; // local dev: /dev level|tp|give chat cheats
   lockoutNowMs?: () => number; // host wall-clock for persisted raid lockouts
   // Host-computed next raid-reset instant for a given lockout "now" (epoch ms). The
-  // authoritative server uses its realm-local civil midnight; offline/headless omit
+  // authoritative server uses its realm-local 3 AM daily reset; offline/headless omit
   // this and fall back to a flat 24h day. Keeps the time zone out of the sim core.
   raidResetMs?: (nowMs: number) => number;
 }

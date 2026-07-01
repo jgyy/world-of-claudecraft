@@ -726,8 +726,8 @@ export class GameServer {
       noPlayer: true,
       devCommands: process.env.ALLOW_DEV_COMMANDS === '1',
       lockoutNowMs: () => Date.now(),
-      // Raid lockouts end at the next midnight in this realm's civil time zone, so the
-      // whole realm shares one predictable daily reset (configured via REALM_RESET_TZ).
+      // Raid lockouts end at the next 3 AM (the classic daily reset) in this realm's civil
+      // time zone, so the whole realm shares one predictable reset (via REALM_RESET_TZ).
       raidResetMs: (nowMs) => nextRaidResetMs(nowMs, REALM_RESET_TIME_ZONE),
     });
     this.social = new SocialService(this.socialDb, this.socialTransport());

@@ -33,7 +33,7 @@ function resolveRealmType(raw: string | undefined): RealmType {
 // This process's own realm type (used for the single-realm default directory).
 export const REALM_TYPE: RealmType = resolveRealmType(process.env.REALM_TYPE);
 
-// The civil time zone whose midnight ends this realm's raid lockouts (a fixed daily
+// The civil time zone whose 3 AM daily reset ends this realm's raid lockouts (a fixed
 // reset, classic-style). Each realm process sets REALM_RESET_TZ to its own IANA zone
 // (e.g. "Europe/Paris" for an EU realm), so a realm resets on its local server time
 // rather than a single global boundary; defaults to US Eastern (the launch region).
