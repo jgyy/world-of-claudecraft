@@ -49,6 +49,7 @@ import { isSpellResisted } from './combat/spell_resist';
 // moved to social/fiesta.ts with that logic; sim.ts keeps only the type used by
 // the PlayerMeta interface + the power-up catalog the fiestaMatchInfo accessor reads.
 import { type AugmentSpecial, type AugmentTier, POWERUPS_BY_ID } from './content/augments';
+import type { GatheringProfessionId } from './content/professions';
 import {
   classHasSkin,
   EVENT_SKIN_TOKEN_ID,
@@ -174,6 +175,11 @@ import {
 } from './pathfind';
 import * as petAi from './pet/pet_ai';
 import * as petCommands from './pet/pet_commands';
+import {
+  drainGatheringGrants,
+  emptyGatheringProficiency,
+  normalizeGatheringProficiency,
+} from './professions/gathering';
 import {
   applyTalentAllocation,
   deleteTalentLoadout,
@@ -643,6 +649,13 @@ export interface PlayerMeta {
   // Classic Rested XP pool (copper-less XP units). Accrues while resting in an
   // inn, spent to double kill XP. Persisted in CharacterState.
   restedXp: number;
+  // Gathering profession proficiency (Mining/Logging/Herbalism). Independent,
+  // additive counters, one per profession: granting one never changes another.
+  // Persisted in CharacterState. See src/sim/professions/gathering.ts.
+  gatheringProficiency: Record<GatheringProfessionId, number>;
+  // Grants queued by the `/dev gather` cheat, drained once per player per tick
+  // (see drainGatheringGrants). Session-only, never persisted.
+  pendingGatherGrants: { professionId: GatheringProfessionId; amount: number }[];
   known: ResolvedAbility[];
   questLog: Map<string, QuestProgress>;
   questsDone: Set<string>;
@@ -730,6 +743,9 @@ export interface CharacterState {
   unlockedMilestones?: string[];
   // Rested XP pool. Optional so pre-rested-XP saves load cleanly (defaults to 0).
   restedXp?: number;
+  // Gathering profession proficiency (JSONB; optional so pre-professions saves
+  // load cleanly, defaulting every profession to 0).
+  gatheringProficiency?: Partial<Record<string, number>>;
   copper: number;
   hp: number;
   resource: number;
@@ -1168,6 +1184,8 @@ export class Sim {
       prestigeRank: 0,
       unlockedMilestones: new Set(),
       restedXp: 0,
+      gatheringProficiency: emptyGatheringProficiency(),
+      pendingGatherGrants: [],
       known: [],
       questLog: new Map(),
       questsDone: new Set(),
@@ -1215,6 +1233,7 @@ export class Sim {
       meta.lifetimeXp = s.lifetimeXp ?? xpToReachLevel(player.level) + Math.max(0, s.xp);
       meta.prestigeRank = s.prestigeRank ?? 0;
       meta.restedXp = Math.max(0, s.restedXp ?? 0);
+      meta.gatheringProficiency = normalizeGatheringProficiency(s.gatheringProficiency);
       if (s.unlockedMilestones)
         for (const id of s.unlockedMilestones) meta.unlockedMilestones.add(id);
       meta.copper = s.copper;
@@ -1386,6 +1405,7 @@ export class Sim {
       prestigeRank: meta.prestigeRank,
       unlockedMilestones: [...meta.unlockedMilestones],
       restedXp: meta.restedXp,
+      gatheringProficiency: { ...meta.gatheringProficiency },
       copper: meta.copper,
       hp: e.hp,
       // A druid saved while shifted runs on rage/energy with its mana parked in
@@ -2373,6 +2393,7 @@ export class Sim {
         this.updatePlayerAutoAttack(p, meta);
         updateRegen(this.ctx, p, meta);
         updateRested(p, meta);
+        drainGatheringGrants(meta);
       }
       updateTimers(p);
       updateAuras(this.ctx, p);
@@ -5695,6 +5716,17 @@ export class Sim {
 
   get companionUpgrades(): Record<string, number> {
     return this.companionUpgradesFor(this.primaryId);
+  }
+
+  // Read-only gathering-profession proficiency surface for IWorld. Stubbed
+  // directly on IWorld pending issue #1164 (a broader professions facet); see
+  // that issue for the eventual reconciliation.
+  gatheringProficiencyFor(pid: number): Record<string, number> {
+    return { ...(this.players.get(pid)?.gatheringProficiency ?? emptyGatheringProficiency()) };
+  }
+
+  get gatheringProficiency(): Record<string, number> {
+    return this.gatheringProficiencyFor(this.primaryId);
   }
 
   delveShopOffers(delveId: string): DelveShopOffer[] {
