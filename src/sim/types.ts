@@ -537,6 +537,10 @@ export interface MobTemplate {
   loot: LootEntry[];
   scale: number; // render hint
   color: number; // render hint
+  // Profession harvesting: the skinning/salvage component types this mob's corpse
+  // can yield (e.g. 'hide', 'horn', 'venomSac', 'gills', 'fang', 'claw', 'feather').
+  // Data-as-code only for now; consumed by later profession-harvest issues.
+  componentTags?: string[];
   boss?: boolean;
   rare?: boolean;
   // World boss: a server-wide elite that spawns on a fixed cadence (not from a
