@@ -35,7 +35,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "ac00aa26",
+      "state": "36f2a5db",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -59,6 +59,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -120,7 +121,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "5d6b0c36",
+      "state": "51b91b6b",
       "events": "d3c5193e",
       "rng": {
         "draws": 0,
@@ -158,6 +159,7 @@
               "itemId": "minor_healing_potion"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -219,7 +221,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "7c143d04",
+      "state": "b70f0849",
       "events": "9df425a0",
       "rng": {
         "draws": 0,
@@ -262,6 +264,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -323,7 +326,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "c4bd51e8",
+      "state": "42350e9d",
       "events": "dbe7ae9a",
       "rng": {
         "draws": 0,
@@ -366,6 +369,7 @@
               "itemId": "cryptbone_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -427,7 +431,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "10254664",
+      "state": "33e7bce9",
       "events": "a0e9b547",
       "rng": {
         "draws": 0,
@@ -473,6 +477,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -534,7 +539,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "e59d0059",
+      "state": "c4899984",
       "events": "db521cfd",
       "rng": {
         "draws": 0,
@@ -580,6 +585,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -654,7 +660,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "ff032a46",
+      "state": "eb2bd53b",
       "events": "579898e6",
       "rng": {
         "draws": 0,
@@ -696,6 +702,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -770,7 +777,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "e1218004",
+      "state": "d9106b49",
       "events": "f087f305",
       "rng": {
         "draws": 0,
@@ -812,6 +819,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -898,7 +906,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "82585a32",
+      "state": "8a4814d7",
       "events": "ef990a2a",
       "rng": {
         "draws": 0,
@@ -944,6 +952,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1030,7 +1039,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "023f4e9d",
+      "state": "c9df8d32",
       "events": "b71a55c4",
       "rng": {
         "draws": 0,
@@ -1076,6 +1085,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1168,7 +1178,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "fe82be24",
+      "state": "eedad96b",
       "events": "7521a204",
       "rng": {
         "draws": 0,
@@ -1210,6 +1220,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1306,7 +1317,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "5c8fe3fa",
+      "state": "4e9975b1",
       "events": "e277cc91",
       "rng": {
         "draws": 0,
@@ -1352,6 +1363,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1448,7 +1460,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "5c8fe3fa",
+      "state": "4e9975b1",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1494,6 +1506,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

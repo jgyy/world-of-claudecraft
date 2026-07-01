@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "0fac6014",
+      "state": "6baf0d59",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -39,6 +39,7 @@
             "mainhand": "rusty_dagger"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -102,7 +103,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 390,
-      "state": "cdeba2d3",
+      "state": "3c4fb3a6",
       "events": "71b126e6",
       "rng": {
         "draws": 9,
@@ -113,7 +114,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 390,
-      "state": "0656b5e0",
+      "state": "ff9bcd35",
       "events": "33a84e8d",
       "rng": {
         "draws": 15,
@@ -124,7 +125,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "9dd1b2fd",
+      "state": "6c7fc008",
       "events": "fd9e884b",
       "rng": {
         "draws": 90,
@@ -135,7 +136,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 390,
-      "state": "719bce57",
+      "state": "7a1f0bda",
       "events": "741638a5",
       "rng": {
         "draws": 143,
@@ -163,6 +164,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

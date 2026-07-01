@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "73f9587b",
+      "state": "628a594e",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -41,6 +41,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -102,7 +103,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "08ce39c7",
+      "state": "c41683ae",
       "events": "8f2c18b3",
       "rng": {
         "draws": 0,
@@ -127,6 +128,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 167200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -192,7 +194,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "4380c62c",
+      "state": "83560f2d",
       "events": "c43b7693",
       "rng": {
         "draws": 0,
@@ -217,6 +219,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 167200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {},
@@ -279,7 +282,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "17b4ca91",
+      "state": "ea5946d2",
       "events": "0ebb4ffd",
       "rng": {
         "draws": 0,
@@ -320,6 +323,7 @@
               "name": "Arms"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -384,7 +388,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "02c66568",
+      "state": "cb7ad599",
       "events": "345e01d7",
       "rng": {
         "draws": 0,
@@ -425,6 +429,7 @@
               "name": "Arms"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -489,7 +494,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "8439ad5c",
+      "state": "6d355f05",
       "events": "8f2c18b3",
       "rng": {
         "draws": 0,
@@ -530,6 +535,7 @@
               "name": "Arms"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {},
@@ -592,7 +598,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "8439ad5c",
+      "state": "6d355f05",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -633,6 +639,7 @@
               "name": "Arms"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {},

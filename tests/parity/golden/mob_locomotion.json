@@ -32,7 +32,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "66df34ca",
+      "state": "7fa8332f",
       "events": "adfdf3c5",
       "rng": {
         "draws": 4,
@@ -57,6 +57,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -163,7 +164,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 391,
-      "state": "4c2e9f6b",
+      "state": "b92b263e",
       "events": "6606fb62",
       "rng": {
         "draws": 8,
@@ -188,6 +189,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -348,7 +350,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 392,
-      "state": "b6a33c33",
+      "state": "1c6e61c6",
       "events": "e5e371bc",
       "rng": {
         "draws": 13,
@@ -373,6 +375,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -588,7 +591,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 393,
-      "state": "5bc27a2e",
+      "state": "1e979ea3",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -613,6 +616,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -875,7 +879,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 394,
-      "state": "dba56a4d",
+      "state": "2eb28bd8",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -900,6 +904,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1203,7 +1208,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 395,
-      "state": "aa057090",
+      "state": "9b1ada65",
       "events": "8b66918b",
       "rng": {
         "draws": 16,
@@ -1228,6 +1233,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1575,7 +1581,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 395,
-      "state": "d3a49f35",
+      "state": "7b43c9c0",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1600,6 +1606,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1948,7 +1955,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 395,
-      "state": "d3a49f35",
+      "state": "7b43c9c0",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1973,6 +1980,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "0fac6014",
+      "state": "6baf0d59",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -40,6 +40,7 @@
             "mainhand": "rusty_dagger"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -103,7 +104,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 400,
-      "state": "1339914c",
+      "state": "97ac1cbf",
       "events": "1edad6a3",
       "rng": {
         "draws": 3,
@@ -114,7 +115,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 400,
-      "state": "42b3433c",
+      "state": "856c15af",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -125,7 +126,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 400,
-      "state": "665fdbee",
+      "state": "531ae589",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -136,7 +137,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 400,
-      "state": "c4603620",
+      "state": "e9230a23",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -147,7 +148,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 400,
-      "state": "be9af856",
+      "state": "e20f9d31",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -158,7 +159,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 400,
-      "state": "bbc50b4c",
+      "state": "da8f56bf",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -169,7 +170,7 @@
       "tick": 69,
       "time": 3.45,
       "nextId": 401,
-      "state": "04a42d6e",
+      "state": "3c2b4709",
       "events": "865418c9",
       "rng": {
         "draws": 3,
@@ -198,6 +199,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 11398,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -298,7 +300,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 401,
-      "state": "4970572a",
+      "state": "43260155",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -309,7 +311,7 @@
       "tick": 71,
       "time": 3.55,
       "nextId": 401,
-      "state": "eca0c23e",
+      "state": "8a99b959",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -338,6 +340,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 11398,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

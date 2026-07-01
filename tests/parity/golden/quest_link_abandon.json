@@ -29,7 +29,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "ac483017",
+      "state": "40ecb73d",
       "events": "b36157a1",
       "rng": {
         "draws": 0,
@@ -52,6 +52,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -72,6 +73,7 @@
             "mainhand": "gnarled_staff"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -182,7 +184,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "ac483017",
+      "state": "40ecb73d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -205,6 +207,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -225,6 +228,7 @@
             "mainhand": "gnarled_staff"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -335,7 +339,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "ac483017",
+      "state": "40ecb73d",
       "events": "2873f427",
       "rng": {
         "draws": 0,
@@ -358,6 +362,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -378,6 +383,7 @@
             "mainhand": "gnarled_staff"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -488,7 +494,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "5592427b",
+      "state": "7dec7fc9",
       "events": "77206bf1",
       "rng": {
         "draws": 0,
@@ -511,6 +517,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -531,6 +538,7 @@
             "mainhand": "gnarled_staff"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_wolves",
@@ -653,7 +661,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "ac483017",
+      "state": "40ecb73d",
       "events": "72a2d48f",
       "rng": {
         "draws": 0,
@@ -676,6 +684,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -696,6 +705,7 @@
             "mainhand": "gnarled_staff"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -806,7 +816,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 390,
-      "state": "fdb09f67",
+      "state": "cf58708d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -829,6 +839,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -849,6 +860,7 @@
             "mainhand": "gnarled_staff"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

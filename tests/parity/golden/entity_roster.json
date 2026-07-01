@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "73f9587b",
+      "state": "628a594e",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -40,6 +40,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -101,7 +102,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 391,
-      "state": "6a630797",
+      "state": "6cb87f1a",
       "events": "2b429bb7",
       "rng": {
         "draws": 4,
@@ -112,7 +113,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 391,
-      "state": "92919d81",
+      "state": "27a9ab6c",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -123,7 +124,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 391,
-      "state": "f6932f15",
+      "state": "b229f7e0",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -148,6 +149,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -209,7 +211,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 391,
-      "state": "b894d821",
+      "state": "d645514c",
       "events": "2b429bb7",
       "rng": {
         "draws": 4,
@@ -234,6 +236,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -295,7 +298,7 @@
       "tick": 6,
       "time": 0.3,
       "nextId": 391,
-      "state": "1b6f1c6c",
+      "state": "2497fe71",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -306,7 +309,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 391,
-      "state": "c2a7da8d",
+      "state": "4bab5e18",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -331,6 +334,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "a4645b91",
+      "state": "3cadc641",
       "events": "7809c15c",
       "rng": {
         "draws": 0,
@@ -60,6 +60,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -87,6 +88,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -196,7 +198,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "9d1f95d9",
+      "state": "020074c7",
       "events": "aac17815",
       "rng": {
         "draws": 0,
@@ -230,6 +232,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -261,6 +264,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -370,7 +374,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "9d1f95d9",
+      "state": "020074c7",
       "events": "3ba696ae",
       "rng": {
         "draws": 0,
@@ -404,6 +408,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -435,6 +440,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -544,7 +550,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "9d1f95d9",
+      "state": "020074c7",
       "events": "c47dd59f",
       "rng": {
         "draws": 0,
@@ -578,6 +584,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -609,6 +616,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -718,7 +726,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 390,
-      "state": "9409d792",
+      "state": "d6f56abc",
       "events": "3bc625b4",
       "rng": {
         "draws": 0,
@@ -752,6 +760,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -783,6 +792,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -892,7 +902,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 390,
-      "state": "9409d792",
+      "state": "d6f56abc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -926,6 +936,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -957,6 +968,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

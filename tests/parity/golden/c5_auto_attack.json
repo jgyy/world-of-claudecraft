@@ -35,7 +35,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 398,
-      "state": "f1e9d5d3",
+      "state": "86f37c7e",
       "events": "d38a5ccd",
       "rng": {
         "draws": 16,
@@ -46,7 +46,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 398,
-      "state": "77a621a6",
+      "state": "c8843fdb",
       "events": "b8ca369d",
       "rng": {
         "draws": 19,
@@ -57,7 +57,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 398,
-      "state": "09685b57",
+      "state": "bbf672e2",
       "events": "21391abc",
       "rng": {
         "draws": 19,
@@ -68,7 +68,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 398,
-      "state": "0f724554",
+      "state": "ef6e555d",
       "events": "b32298be",
       "rng": {
         "draws": 22,
@@ -79,7 +79,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 398,
-      "state": "afc97216",
+      "state": "b52ee9d7",
       "events": "21391abc",
       "rng": {
         "draws": 22,
@@ -90,7 +90,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 398,
-      "state": "19d7d7e3",
+      "state": "940fac82",
       "events": "741638a5",
       "rng": {
         "draws": 22,
@@ -101,7 +101,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 398,
-      "state": "c5f7d35b",
+      "state": "e2472dda",
       "events": "21391abc",
       "rng": {
         "draws": 22,
@@ -112,7 +112,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 398,
-      "state": "0c2808cf",
+      "state": "932d3b1a",
       "events": "38879e8f",
       "rng": {
         "draws": 25,
@@ -123,7 +123,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 398,
-      "state": "2075ddf0",
+      "state": "a428c7cd",
       "events": "c2243470",
       "rng": {
         "draws": 66,
@@ -134,7 +134,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 398,
-      "state": "532c25f1",
+      "state": "422ff314",
       "events": "f0321c25",
       "rng": {
         "draws": 91,
@@ -145,7 +145,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 398,
-      "state": "282c0bba",
+      "state": "43889337",
       "events": "21391abc",
       "rng": {
         "draws": 103,
@@ -156,7 +156,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 398,
-      "state": "ae550c93",
+      "state": "583b0a66",
       "events": "7d3769c6",
       "rng": {
         "draws": 128,
@@ -167,7 +167,7 @@
       "tick": 65,
       "time": 3.25,
       "nextId": 398,
-      "state": "2133a841",
+      "state": "eab3f77c",
       "events": "21391abc",
       "rng": {
         "draws": 148,
@@ -178,7 +178,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 398,
-      "state": "f1345153",
+      "state": "d60d3926",
       "events": "741638a5",
       "rng": {
         "draws": 169,
@@ -189,7 +189,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 398,
-      "state": "c8944fb4",
+      "state": "418cd9ed",
       "events": "82678c01",
       "rng": {
         "draws": 193,
@@ -200,7 +200,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 398,
-      "state": "d40dd3b3",
+      "state": "4b592cfa",
       "events": "741638a5",
       "rng": {
         "draws": 216,
@@ -211,7 +211,7 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 398,
-      "state": "7f4eb4d2",
+      "state": "ef5fc837",
       "events": "386397fc",
       "rng": {
         "draws": 258,
@@ -222,7 +222,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 398,
-      "state": "47977993",
+      "state": "c2f56886",
       "events": "8d3b0320",
       "rng": {
         "draws": 289,
@@ -233,7 +233,7 @@
       "tick": 95,
       "time": 4.75,
       "nextId": 398,
-      "state": "7f999a79",
+      "state": "16201b0c",
       "events": "7f3343c9",
       "rng": {
         "draws": 315,
@@ -244,7 +244,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 398,
-      "state": "52a72d19",
+      "state": "8e82846c",
       "events": "741638a5",
       "rng": {
         "draws": 342,
@@ -255,7 +255,7 @@
       "tick": 105,
       "time": 5.25,
       "nextId": 398,
-      "state": "6134e6f1",
+      "state": "a4673024",
       "events": "21391abc",
       "rng": {
         "draws": 372,
@@ -266,7 +266,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 398,
-      "state": "17400b21",
+      "state": "f84df794",
       "events": "e74402e3",
       "rng": {
         "draws": 396,
@@ -277,7 +277,7 @@
       "tick": 115,
       "time": 5.75,
       "nextId": 398,
-      "state": "a8127361",
+      "state": "bfa774d4",
       "events": "21391abc",
       "rng": {
         "draws": 418,
@@ -288,7 +288,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 398,
-      "state": "26af93e7",
+      "state": "5839e9fa",
       "events": "a9c81340",
       "rng": {
         "draws": 473,
@@ -299,7 +299,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 398,
-      "state": "26af93e7",
+      "state": "5839e9fa",
       "events": "741638a5",
       "rng": {
         "draws": 473,
@@ -326,6 +326,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -350,6 +351,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -374,6 +376,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -397,6 +400,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -420,6 +424,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -982,7 +987,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 398,
-      "state": "40509165",
+      "state": "b6235f2e",
       "events": "ca191fda",
       "rng": {
         "draws": 518,
@@ -993,7 +998,7 @@
       "tick": 126,
       "time": 6.3,
       "nextId": 398,
-      "state": "d0bffd31",
+      "state": "a7a86a7a",
       "events": "741638a5",
       "rng": {
         "draws": 524,
@@ -1020,6 +1025,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1044,6 +1050,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1068,6 +1075,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1091,6 +1099,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1114,6 +1123,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1668,7 +1678,7 @@
       "tick": 126,
       "time": 6.3,
       "nextId": 398,
-      "state": "d0bffd31",
+      "state": "a7a86a7a",
       "events": "741638a5",
       "rng": {
         "draws": 524,
@@ -1695,6 +1705,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1719,6 +1730,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1743,6 +1755,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1766,6 +1779,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1789,6 +1803,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 78400,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

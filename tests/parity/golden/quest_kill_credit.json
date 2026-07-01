@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "73f9587b",
+      "state": "628a594e",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -40,6 +40,7 @@
             "mainhand": "worn_sword"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -101,7 +102,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 389,
-      "state": "e2cbce18",
+      "state": "f2a41477",
       "events": "8eb40339",
       "rng": {
         "draws": 0,
@@ -126,6 +127,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_wolves",
@@ -199,7 +201,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 397,
-      "state": "f78ba3a0",
+      "state": "98aa998d",
       "events": "c5ae556e",
       "rng": {
         "draws": 32,
@@ -228,6 +230,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_wolves",
@@ -302,7 +305,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 397,
-      "state": "7f560d63",
+      "state": "17c9e9cc",
       "events": "cbdf36a3",
       "rng": {
         "draws": 32,
@@ -334,6 +337,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 27850,
+          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_wolves"
           ],
@@ -400,7 +404,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 397,
-      "state": "fac22ff7",
+      "state": "780a9750",
       "events": "741638a5",
       "rng": {
         "draws": 32,
@@ -432,6 +436,7 @@
           },
           "gatheringProficiency": {},
           "lifetimeXp": 27850,
+          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_wolves"
           ],

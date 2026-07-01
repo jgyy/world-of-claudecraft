@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 392,
-      "state": "3d0e6c80",
+      "state": "a875d509",
       "events": "22557322",
       "rng": {
         "draws": 1,
@@ -62,6 +62,7 @@
               "itemId": "worn_sword"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -85,6 +86,7 @@
             "mainhand": "gnarled_staff"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -108,6 +110,7 @@
             "mainhand": "rusty_dagger"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -328,7 +331,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 392,
-      "state": "c22e00c8",
+      "state": "2ae64df1",
       "events": "6694308e",
       "rng": {
         "draws": 3,
@@ -364,6 +367,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -387,6 +391,7 @@
             "mainhand": "gnarled_staff"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -410,6 +415,7 @@
             "mainhand": "rusty_dagger"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -636,7 +642,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 392,
-      "state": "032b247e",
+      "state": "326fd6c1",
       "events": "904c6282",
       "rng": {
         "draws": 3,
@@ -672,6 +678,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -705,6 +712,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -728,6 +736,7 @@
             "mainhand": "rusty_dagger"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -937,7 +946,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 392,
-      "state": "8cf42952",
+      "state": "be94a8f5",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -973,6 +982,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1006,6 +1016,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1029,6 +1040,7 @@
             "mainhand": "rusty_dagger"
           },
           "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
