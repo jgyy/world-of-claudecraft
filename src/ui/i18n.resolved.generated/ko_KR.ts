@@ -901,6 +901,20 @@ export const ko_KR: EnTranslations = {
       "craftedToast": "제작 완료:{name}",
       "insufficientMaterials": "재료가 부족합니다.",
       "unknownRecipe": "해당 제작법이 존재하지 않습니다."
+    },
+    "archetypeTitle": {
+      "label": "칭호",
+      "none": "없음",
+      "armorcrafting": "방어구 장인",
+      "weaponcrafting": "무기 장인",
+      "jewelcrafting": "보석 세공사",
+      "alchemy": "연금술사",
+      "engineering": "기술자",
+      "cooking": "요리사",
+      "inscription": "필경사",
+      "enchanting": "마법부여사",
+      "tailoring": "재단사",
+      "leatherworking": "가죽공예사"
     }
   },
   "guide": {

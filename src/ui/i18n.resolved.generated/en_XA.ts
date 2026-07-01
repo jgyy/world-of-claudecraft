@@ -901,6 +901,20 @@ export const en_XA: EnTranslations = {
       "craftedToast": "[Çŕáƒţéð: {name}]",
       "insufficientMaterials": "[Ýóú ðó ñóţ ĥáʋé ţĥé ɱáţéŕíáļš ƒóŕ ţĥáţ.]",
       "unknownRecipe": "[Ţĥáţ ŕéçíþé ðóéš ñóţ éẋíšţ.]"
+    },
+    "archetypeTitle": {
+      "label": "[Ţíţļé]",
+      "none": "[Ñóñé]",
+      "armorcrafting": "[Áŕɱóŕéŕ]",
+      "weaponcrafting": "[Ŵéáþóñšɱíţĥ]",
+      "jewelcrafting": "[Ĵéŵéļéŕ]",
+      "alchemy": "[Áļçĥéɱíšţ]",
+      "engineering": "[Ţíñķéŕéŕ]",
+      "cooking": "[Çĥéƒ]",
+      "inscription": "[Šçŕíƀé]",
+      "enchanting": "[Éñçĥáñţéŕ]",
+      "tailoring": "[Ţáíļóŕ]",
+      "leatherworking": "[Ļéáţĥéŕçŕáƒţéŕ]"
     }
   },
   "guide": {

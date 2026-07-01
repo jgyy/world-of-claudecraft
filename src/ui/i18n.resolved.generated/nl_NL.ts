@@ -901,6 +901,20 @@ export const nl_NL: EnTranslations = {
       "craftedToast": "Crafted: {name}",
       "insufficientMaterials": "You do not have the materials for that.",
       "unknownRecipe": "That recipe does not exist."
+    },
+    "archetypeTitle": {
+      "label": "Title",
+      "none": "None",
+      "armorcrafting": "Armorer",
+      "weaponcrafting": "Weaponsmith",
+      "jewelcrafting": "Jeweler",
+      "alchemy": "Alchemist",
+      "engineering": "Tinkerer",
+      "cooking": "Chef",
+      "inscription": "Scribe",
+      "enchanting": "Enchanter",
+      "tailoring": "Tailor",
+      "leatherworking": "Leathercrafter"
     }
   },
   "guide": {

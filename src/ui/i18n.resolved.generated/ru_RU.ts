@@ -901,6 +901,20 @@ export const ru_RU: EnTranslations = {
       "craftedToast": "Создано: {name}",
       "insufficientMaterials": "У вас недостаточно материалов.",
       "unknownRecipe": "Такого рецепта не существует."
+    },
+    "archetypeTitle": {
+      "label": "Титул",
+      "none": "Нет",
+      "armorcrafting": "Бронник",
+      "weaponcrafting": "Оружейник",
+      "jewelcrafting": "Ювелир",
+      "alchemy": "Алхимик",
+      "engineering": "Механик",
+      "cooking": "Повар",
+      "inscription": "Писарь",
+      "enchanting": "Зачарователь",
+      "tailoring": "Портной",
+      "leatherworking": "Кожевник"
     }
   },
   "guide": {

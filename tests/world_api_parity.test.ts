@@ -219,6 +219,7 @@ export const IWORLD_MEMBERS = [
   { name: 'archetypeSwitchCount', kind: 'data' },
   { name: 'archetypeAmendsProgress', kind: 'data' },
   { name: 'archetypeAmendsRequired', kind: 'data' },
+  { name: 'archetypeTitle', kind: 'data' },
   { name: 'acceptArchetypeQuest', kind: 'method' },
   { name: 'advanceAmendsProgress', kind: 'method' },
   { name: 'switchArchetype', kind: 'method' },
@@ -340,8 +341,8 @@ beforeAll(() => {
 
 describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => {
   it('pins total / data / method counts', () => {
-    expect(IWORLD_MEMBERS.length).toBe(162);
-    expect(DATA_MEMBERS.length).toBe(45);
+    expect(IWORLD_MEMBERS.length).toBe(163);
+    expect(DATA_MEMBERS.length).toBe(46);
     expect(METHOD_MEMBERS.length).toBe(117);
   });
 
@@ -352,7 +353,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
 
   // Sorted-name `toEqual` snapshots: a dropped, renamed, or kind-flipped member reddens
   // these deliberately, forcing a reviewed edit. NOT length-only.
-  it('the full sorted member set is exactly the pinned 162', () => {
+  it('the full sorted member set is exactly the pinned 163', () => {
     expect(IWORLD_MEMBERS.map((m) => m.name).sort()).toEqual([
       'abandonPet',
       'abandonQuest',
@@ -368,6 +369,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'archetypeAmendsProgress',
       'archetypeAmendsRequired',
       'archetypeSwitchCount',
+      'archetypeTitle',
       'arenaAugmentPick',
       'arenaInfo',
       'arenaQueueJoin',
@@ -519,7 +521,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     ]);
   });
 
-  it('the sorted data-kind set is exactly the pinned 45', () => {
+  it('the sorted data-kind set is exactly the pinned 46', () => {
     expect(DATA_MEMBERS.map((m) => m.name).sort()).toEqual([
       'accountCosmetics',
       'activeArchetype',
@@ -527,6 +529,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'archetypeAmendsProgress',
       'archetypeAmendsRequired',
       'archetypeSwitchCount',
+      'archetypeTitle',
       'arenaInfo',
       'cfg',
       'companionState',
@@ -997,6 +1000,7 @@ const FACET_PROFESSIONS = [
   'archetypeSwitchCount',
   'archetypeAmendsProgress',
   'archetypeAmendsRequired',
+  'archetypeTitle',
   'acceptArchetypeQuest',
   'advanceAmendsProgress',
   'switchArchetype',
@@ -1058,10 +1062,10 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the 21 fa
     expect(overlaps, `members filed in more than one facet:\n${overlaps.join('\n')}`).toEqual([]);
   });
 
-  it('the union of the 21 facets equals the pinned 162-member IWORLD_MEMBERS set', () => {
+  it('the union of the 21 facets equals the pinned 163-member IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(162);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(162);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(163);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(163);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

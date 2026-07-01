@@ -901,6 +901,20 @@ export const ja_JP: EnTranslations = {
       "craftedToast": "製作しました:{name}",
       "insufficientMaterials": "材料が不足しています。",
       "unknownRecipe": "そのレシピは存在しません。"
+    },
+    "archetypeTitle": {
+      "label": "称号",
+      "none": "なし",
+      "armorcrafting": "防具鍛冶師",
+      "weaponcrafting": "武器鍛冶師",
+      "jewelcrafting": "宝石職人",
+      "alchemy": "錬金術師",
+      "engineering": "工作師",
+      "cooking": "料理人",
+      "inscription": "銘文師",
+      "enchanting": "エンチャンター",
+      "tailoring": "仕立て屋",
+      "leatherworking": "皮革職人"
     }
   },
   "guide": {

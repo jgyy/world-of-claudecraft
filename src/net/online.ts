@@ -24,6 +24,7 @@ import { deadTargetSelectable } from '../sim/dead_target';
 import { LEADERBOARD_PAGE_SIZE } from '../sim/leaderboard_page';
 import type { Ante, PickAction } from '../sim/lockpick';
 import { normalizeMoveFacing, sanitizeMoveInput } from '../sim/move_input';
+import { getArchetypeTitle } from '../sim/professions/archetype';
 import type { MaterialRarity } from '../sim/professions/gathering';
 import { computeQuestState, type ResolvedAbility } from '../sim/sim';
 import {
@@ -895,6 +896,13 @@ export class ClientWorld implements IWorld {
   acceptArchetypeQuest(_craftId: string): void {}
   advanceAmendsProgress(): void {}
   switchArchetype(_craftId: string): void {}
+  // Title granted by the active archetype (#1130): derived, not a stored mirror
+  // field, so it stays correct the moment a future wire-up starts pushing
+  // `activeArchetype` snapshot updates (until then it tracks the stub default
+  // above, i.e. always null). See src/sim/professions/archetype.ts.
+  get archetypeTitle(): string | null {
+    return getArchetypeTitle(this.activeArchetype);
+  }
   // Craft-result surface (#1127), mirrored from the server's `craftResult`
   // event (applyEvent below). Null until this session's first craft attempt.
   lastCraftResult: CraftResultView | null = null;
