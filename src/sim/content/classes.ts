@@ -3581,24 +3581,6 @@ function scaleEffect(
       return { ...eff, amount: Math.round(eff.amount * dmgMult + flat) };
     default:
       return eff;
-    case 'weaponDamage': return { ...eff, bonus: Math.round(eff.bonus * dmgMult + flat) };
-    case 'weaponStrike': return { ...eff, bonus: Math.round(eff.bonus * dmgMult + flat) };
-    case 'directDamage': return { ...eff, min: Math.round(eff.min * dmgMult + flat), max: Math.round(eff.max * dmgMult + flat) };
-    case 'dot': return { ...eff, total: Math.round(eff.total * dmgMult + flat) };
-    case 'aoeDamage': return { ...eff, min: Math.round(eff.min * dmgMult + flat), max: Math.round(eff.max * dmgMult + flat) };
-    case 'groundAoE': return { ...eff, min: Math.round(eff.min * dmgMult + flat), max: Math.round(eff.max * dmgMult + flat) };
-    case 'aoeRoot': return { ...eff, min: Math.round(eff.min * dmgMult), max: Math.round(eff.max * dmgMult) };
-    case 'drainTick': return { ...eff, min: Math.round(eff.min * dmgMult), max: Math.round(eff.max * dmgMult) };
-    case 'finisherDamage': return { ...eff, base: Math.round(eff.base * dmgMult + flat), perCombo: Math.round(eff.perCombo * dmgMult) };
-    case 'imbue': return { ...eff, bonus: Math.round(eff.bonus * dmgMult + flat), judgeMin: eff.judgeMin === undefined ? undefined : Math.round(eff.judgeMin * dmgMult + flat), judgeMax: eff.judgeMax === undefined ? undefined : Math.round(eff.judgeMax * dmgMult + flat) };
-    case 'heal': return { ...eff, min: Math.round(eff.min * healMult + flat), max: Math.round(eff.max * healMult + flat) };
-    case 'hot': return { ...eff, total: Math.round(eff.total * healMult + flat) };
-    case 'absorb': return { ...eff, amount: Math.round(eff.amount * healMult + flat) };
-    case 'buffTarget': return { ...eff, value: Math.round(eff.value * dmgMult + flat) };
-    case 'selfBuff': return { ...eff, value: Math.round(eff.value * dmgMult + flat) };
-    case 'lifeTap': return { ...eff, mana: Math.round(eff.mana * dmgMult + flat) };
-    case 'gainResource': return { ...eff, amount: Math.round(eff.amount * dmgMult + flat) };
-    default: return eff;
   }
 }
 
