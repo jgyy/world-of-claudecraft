@@ -155,50 +155,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.party.promoteLeader"
   ],
   "zh_CN": [
-    "entities.quests.q_archetype_acceptance.completion",
-    "entities.quests.q_archetype_acceptance.objectives.0.label",
-    "entities.quests.q_archetype_acceptance.text",
-    "entities.quests.q_archetype_acceptance.title",
-    "entities.quests.q_prof_make_amends.completion",
-    "entities.quests.q_prof_make_amends.objectives.0.label",
-    "entities.quests.q_prof_make_amends.text",
-    "entities.quests.q_prof_make_amends.title",
     "hudChrome.crafting.reagentLine",
     "hudChrome.keybinds.discord"
   ],
   "zh_TW": [
-    "entities.quests.q_archetype_acceptance.completion",
-    "entities.quests.q_archetype_acceptance.objectives.0.label",
-    "entities.quests.q_archetype_acceptance.text",
-    "entities.quests.q_archetype_acceptance.title",
-    "entities.quests.q_prof_make_amends.completion",
-    "entities.quests.q_prof_make_amends.objectives.0.label",
-    "entities.quests.q_prof_make_amends.text",
-    "entities.quests.q_prof_make_amends.title",
     "hudChrome.crafting.reagentLine",
     "hudChrome.keybinds.discord"
   ],
   "ko_KR": [
-    "entities.quests.q_archetype_acceptance.completion",
-    "entities.quests.q_archetype_acceptance.objectives.0.label",
-    "entities.quests.q_archetype_acceptance.text",
-    "entities.quests.q_archetype_acceptance.title",
-    "entities.quests.q_prof_make_amends.completion",
-    "entities.quests.q_prof_make_amends.objectives.0.label",
-    "entities.quests.q_prof_make_amends.text",
-    "entities.quests.q_prof_make_amends.title",
     "hudChrome.crafting.reagentLine",
     "hudChrome.keybinds.discord"
   ],
   "ja_JP": [
-    "entities.quests.q_archetype_acceptance.completion",
-    "entities.quests.q_archetype_acceptance.objectives.0.label",
-    "entities.quests.q_archetype_acceptance.text",
-    "entities.quests.q_archetype_acceptance.title",
-    "entities.quests.q_prof_make_amends.completion",
-    "entities.quests.q_prof_make_amends.objectives.0.label",
-    "entities.quests.q_prof_make_amends.text",
-    "entities.quests.q_prof_make_amends.title",
     "hudChrome.crafting.reagentLine",
     "hudChrome.keybinds.discord"
   ],
@@ -227,14 +195,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.party.promoteLeader"
   ],
   "ru_RU": [
-    "entities.quests.q_archetype_acceptance.completion",
-    "entities.quests.q_archetype_acceptance.objectives.0.label",
-    "entities.quests.q_archetype_acceptance.text",
-    "entities.quests.q_archetype_acceptance.title",
-    "entities.quests.q_prof_make_amends.completion",
-    "entities.quests.q_prof_make_amends.objectives.0.label",
-    "entities.quests.q_prof_make_amends.text",
-    "entities.quests.q_prof_make_amends.title",
     "hudChrome.crafting.reagentLine",
     "hudChrome.keybinds.discord"
   ],
