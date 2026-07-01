@@ -3030,8 +3030,8 @@ export class Hud {
     // Classic "Requires Level N" line for equippable gear gated above level 1.
     // Red when the viewer is below the requirement (cannot equip yet), otherwise
     // a normal sub line. Level math/data lives in the pure sim leaf.
-    if ((item.kind === 'weapon' || item.kind === 'armor') && requiredLevelFor(item) > 1) {
-      const req = requiredLevelFor(item);
+    const req = requiredLevelFor(item);
+    if ((item.kind === 'weapon' || item.kind === 'armor') && req > 1) {
       const meets = this.sim.player.level >= req;
       html += `<div class="${meets ? 'tt-sub' : 'tt-red'}">${esc(t('hudChrome.itemTooltip.requiresLevel', { level: itemNumber(req) }))}</div>`;
     }
