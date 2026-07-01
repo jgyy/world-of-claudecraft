@@ -34,7 +34,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 397,
-      "state": "fcc18b93",
+      "state": "60bf5b0e",
       "events": "07167c45",
       "rng": {
         "draws": 6,
@@ -352,6 +352,15 @@
           "auras": [
             {
               "duration": 60,
+              "id": "absorb_small",
+              "kind": "heal_absorb",
+              "name": "Necrotic",
+              "remaining": 60,
+              "school": "physical",
+              "sourceId": 394
+            },
+            {
+              "duration": 60,
               "id": "absorb_big",
               "kind": "heal_absorb",
               "name": "Necrotic",
@@ -629,7 +638,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 397,
-      "state": "a7b52d22",
+      "state": "fc29bacb",
       "events": "496ff2cc",
       "rng": {
         "draws": 6,
@@ -949,6 +958,15 @@
           "auras": [
             {
               "duration": 60,
+              "id": "absorb_small",
+              "kind": "heal_absorb",
+              "name": "Necrotic",
+              "remaining": 60,
+              "school": "physical",
+              "sourceId": 394
+            },
+            {
+              "duration": 60,
               "id": "absorb_big",
               "kind": "heal_absorb",
               "name": "Necrotic",
@@ -1244,8 +1262,8 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 397,
-      "state": "b0a24b28",
-      "events": "c678983d",
+      "state": "d46ecb01",
+      "events": "fb3be33a",
       "rng": {
         "draws": 10,
         "digest": "fce7a45d"
@@ -1255,7 +1273,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 397,
-      "state": "a4c61df7",
+      "state": "fb2a54c5",
       "events": "c678983d",
       "rng": {
         "draws": 10,
@@ -1576,13 +1594,12 @@
           "auras": [
             {
               "duration": 60,
-              "id": "absorb_big",
+              "id": "hot_absorb",
               "kind": "heal_absorb",
               "name": "Necrotic",
               "remaining": 59.6,
               "school": "physical",
-              "sourceId": 394,
-              "value": 3700
+              "sourceId": 394
             },
             {
               "duration": 3,
@@ -1603,7 +1620,7 @@
           "dodgeChance": 0.06,
           "fallStartY": -1.48336,
           "fiveSecondRule": 99.4,
-          "hp": 3200,
+          "hp": 2750,
           "id": 392,
           "kind": "player",
           "level": 1,
@@ -1749,7 +1766,7 @@
             ],
             [
               390,
-              393.5
+              318.5
             ],
             [
               392,
@@ -1809,7 +1826,7 @@
             ],
             [
               390,
-              287.5
+              212.5
             ],
             [
               392,
@@ -1875,7 +1892,7 @@
             ],
             [
               390,
-              287.5
+              212.5
             ],
             [
               393,

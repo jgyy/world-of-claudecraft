@@ -135,23 +135,28 @@ describe('heal: consumeHealAbsorb', () => {
     expect(e.auras.length).toBe(1); // not filtered
   });
 
-  it('a fully-drained shield depletes and is filtered out; surplus healing survives', () => {
+  it('a fully-drained shield is zeroed (not spliced out); surplus healing survives', () => {
     const sim = makeSim();
     const small = aura('heal_absorb', 200);
     const big = aura('heal_absorb', 5000);
     const e = { auras: [small, big] } as unknown as Entity;
     // 1000 healing: small eats 200 (depletes), big eats 800 (survives), 0 returns.
     expect(consumeHealAbsorb(sim.ctx, e, 1000)).toBe(0);
-    expect(e.auras.some((a: Aura) => a.id === small.id)).toBe(false); // depleted + filtered
+    // Depleted shields are zeroed in place, not spliced out mid-loop; they still
+    // expire naturally via their own `remaining`.
+    expect(e.auras.some((a: Aura) => a.id === small.id)).toBe(true);
+    expect(small.value).toBe(0);
     expect(e.auras.some((a: Aura) => a.id === big.id)).toBe(true);
     expect(big.value).toBe(4200);
   });
 
   it('returns the surviving healing when shields cannot fully soak it', () => {
     const sim = makeSim();
-    const e = { auras: [aura('heal_absorb', 30)] } as unknown as Entity;
+    const shield = aura('heal_absorb', 30);
+    const e = { auras: [shield] } as unknown as Entity;
     expect(consumeHealAbsorb(sim.ctx, e, 100)).toBe(70); // 30 soaked, 70 lands
-    expect(e.auras.length).toBe(0); // shield depleted + filtered
+    expect(e.auras.length).toBe(1); // shield zeroed, not spliced out
+    expect(shield.value).toBe(0);
   });
 });
 
@@ -257,7 +262,10 @@ describe('heal: applyHeal', () => {
     applyHeal(sim.ctx, src, tgt, 1000, 'Heal');
     // round(1000 * 1.5 * 0.5 * 0.5) = 375, minus 100 absorb = 275 lands.
     expect(tgt.hp).toBe(1000 + 275);
-    expect(tgt.auras.some((a: Aura) => a.kind === 'heal_absorb')).toBe(false); // 100 shield depleted
+    // 100 shield depleted: zeroed in place, not spliced out of the array.
+    const shield = tgt.auras.find((a: Aura) => a.kind === 'heal_absorb');
+    expect(shield).toBeDefined();
+    expect(shield?.value).toBe(0);
   });
 });
 
