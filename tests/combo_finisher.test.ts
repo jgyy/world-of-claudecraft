@@ -95,8 +95,10 @@ describe('combo finisher scaling (integration)', () => {
 
   it('spending all 5 points delivers the authored maximum, unchanged from before', () => {
     const rup = castFinisherWithCombo(3, 'rupture', 5, 'dot');
-    // Rupture authored as total 96 over 16s @ 2s interval -> 8 ticks of 12.
-    expect(rup!.value).toBe(12);
+    // Rupture authored as total 96 over 16s @ 2s interval -> 8 ticks of 12,
+    // plus the per-tick Attack Power rider (`dotTickBonus`) that physical-bleed
+    // AP scaling snapshots onto every dot tick.
+    expect(rup!.value).toBe(14);
   });
 
   it('is deterministic: same seed and combo spend give the same debuff value', () => {
