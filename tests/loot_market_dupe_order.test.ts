@@ -28,7 +28,7 @@ function standOn(sim: Sim, pid: number, target: Entity) {
   teleport(sim, sim.entities.get(pid)!, target.pos.x, target.pos.z);
 }
 
-describe('loot/market dupe invariant — clear the source before crediting bags', () => {
+describe('loot/market dupe invariant: clear the source before crediting bags', () => {
   it('lootCorpse zeroes the open loot slot before addItem credits it', () => {
     const sim = makeWorld();
     const pid = sim.addPlayer('warrior', 'Looter');
