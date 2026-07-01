@@ -445,7 +445,10 @@ describe('the World Market — the Merchant', () => {
     const out = sim.serializeMarket();
     expect(out.listings.find((l) => l.itemId === 'retired_relic')).toBeTruthy();
     expect(
-      out.collections.find((c) => c.key === '12')?.items.map((s) => s.itemId).sort(),
+      out.collections
+        .find((c) => c.key === '12')
+        ?.items.map((s) => s.itemId)
+        .sort(),
     ).toEqual(['removed_widget', 'wolf_fang']);
   });
 

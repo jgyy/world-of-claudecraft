@@ -507,7 +507,8 @@ export class Market {
       // as the character load path keeps unknown ids verbatim); a re-added or
       // corrected id rehydrates it. Display/buy paths already guard on ITEMS[id].
       if (!l || typeof l.itemId !== 'string') continue;
-      if (!ITEMS[l.itemId]) console.warn(`market: keeping listing with unknown item id ${l.itemId}`);
+      if (!ITEMS[l.itemId])
+        console.warn(`market: keeping listing with unknown item id ${l.itemId}`);
       this.marketListings.push({
         id: l.id,
         sellerKey: String(l.sellerKey ?? ''),
