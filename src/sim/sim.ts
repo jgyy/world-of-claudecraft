@@ -4396,6 +4396,10 @@ export class Sim {
     interaction.lootCorpse(this.ctx, mobId, pid);
   }
 
+  harvestCorpse(mobId: number, pid?: number): void {
+    interaction.harvestCorpse(this.ctx, mobId, pid);
+  }
+
   pickUpObject(objId: number, pid?: number): void {
     interaction.pickUpObject(this.ctx, objId, pid);
   }
