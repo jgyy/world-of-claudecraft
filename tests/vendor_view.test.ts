@@ -38,6 +38,8 @@ describe('buildVendorView goods', () => {
     );
     const view = buildVendorView(['bread', 'water', 'potion'], [], items);
     expect(view.goods.map((g) => g.quantity)).toEqual([5, 5, 1]);
+    // Price is the total for the purchase: per-unit buyValue times the stack quantity.
+    expect(view.goods.map((g) => g.price)).toEqual([25, 10, 9]);
   });
 
   it('skips items missing from the table', () => {

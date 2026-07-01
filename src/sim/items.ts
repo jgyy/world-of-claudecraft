@@ -229,12 +229,17 @@ export function buyItem(ctx: SimContext, npcId: number, itemId: string, pid?: nu
     ctx.error(meta.entityId, 'Too far away.');
     return;
   }
-  if (meta.copper < def.buyValue) {
+  // Food and drink are handed over in a stack (vendorStackSize); the player pays
+  // the per-unit buyValue for every unit, so the per-unit price stays classic and
+  // vendor buy price stays above the per-unit sell value (no buy-low/sell-high loop).
+  const qty = vendorStackSize(def);
+  const cost = def.buyValue * qty;
+  if (meta.copper < cost) {
     ctx.error(meta.entityId, 'Not enough money.');
     return;
   }
-  meta.copper -= def.buyValue;
-  ctx.addItem(itemId, vendorStackSize(def), meta.entityId);
+  meta.copper -= cost;
+  ctx.addItem(itemId, qty, meta.entityId);
   ctx.emit({ type: 'vendor', action: 'buy', itemId, pid: meta.entityId });
 }
 

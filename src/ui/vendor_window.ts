@@ -56,7 +56,10 @@ export function renderVendorWindow(
       quantity > 1
         ? ` ${t('itemUi.bags.stackCount', { count: formatNumber(quantity, { maximumFractionDigits: 0 }) })}`
         : '';
-    row.setAttribute('aria-label', t('itemUi.vendor.buyAria', { item: itemName, price }));
+    row.setAttribute(
+      'aria-label',
+      t('itemUi.vendor.buyAria', { item: `${itemName}${stack}`, price }),
+    );
     row.innerHTML = `${deps.itemIcon(item)}<span class="vi-name">${esc(itemName)}${esc(stack)}</span><span class="vi-price">${deps.moneyHtml(priceCopper)}</span>`;
     row.addEventListener('click', () => deps.onBuy(itemId));
     deps.attachTooltip(
