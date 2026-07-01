@@ -112,7 +112,10 @@ if (diff.length > MAX_DIFF_CHARS) {
 
 // Give the model the file list of the directories this diff touches, so it stops
 // hallucinating that existing imports/helpers are "missing" (its top false positive).
-// Best-effort: empty string when not in a git checkout.
+// Best-effort: empty string when not in a git checkout. On a comment-triggered run the
+// checkout is the base branch (no PR-head checkout, intentionally, see the module
+// comment), so a file the PR itself newly adds will not appear here; that is a known
+// false-positive risk specific to the /review and /suggest path.
 function listTouchedDirs(d) {
   const files = [...d.matchAll(/^\+\+\+ b\/(.+)$/gm)]
     .map((m) => m[1])

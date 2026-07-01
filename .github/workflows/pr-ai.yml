@@ -48,6 +48,10 @@ jobs:
   screenshots:
     name: Screenshots of changes
     runs-on: ubuntu-latest
+    # issue_comment fires this workflow on every comment on any issue or PR; without this
+    # guard the full checkout + npm ci + Vite boot + puppeteer run would fire on every
+    # comment too, even though nothing in this job reads the comment.
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
