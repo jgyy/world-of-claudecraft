@@ -332,6 +332,7 @@ export const ru_RU: EnTranslations = {
       "showWalletOnPlayerCard": "Показывать кошелек на карточке игрока",
       "uiScale": "Масштаб интерфейса",
       "highContrastBackground": "Фон высокой контрастности",
+      "startAttackOnAbility": "Автоатака при использовании способности",
       "showItemLevel": "Показывать уровень предмета",
       "itemLevelLine": "Уровень предмета {level}",
       "itemScoreLine": "Оценка {score}",
@@ -625,6 +626,9 @@ export const ru_RU: EnTranslations = {
       "assigned": "{looter} передал предмет {item} игроку {target}.",
       "unassigned": "Предмет {item} не был назначен и доступен всем.",
       "leaderOnly": "Только лидер группы может менять способ добычи."
+    },
+    "party": {
+      "promoteLeader": "Назначить лидером"
     },
     "bags": {
       "filterGroupAria": "Фильтровать сумки по категории",

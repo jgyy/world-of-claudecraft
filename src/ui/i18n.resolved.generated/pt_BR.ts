@@ -332,10 +332,11 @@ export const pt_BR: EnTranslations = {
       "showWalletOnPlayerCard": "Mostrar carteira no cartão de jogador",
       "uiScale": "Escala da interface",
       "highContrastBackground": "Fundo de alto contraste",
+      "startAttackOnAbility": "Auto-Attack on Ability Use",
       "showItemLevel": "Mostrar nível do item",
       "itemLevelLine": "Nível do item {level}",
       "itemScoreLine": "Pontuação {score}",
-      "showSecondaryActionBar": "Show Secondary Action Bar"
+      "showSecondaryActionBar": "Mostrar Barra de Ação Secundária"
     },
     "controller": {
       "title": "Controle",
@@ -625,6 +626,9 @@ export const pt_BR: EnTranslations = {
       "assigned": "{looter} atribuiu {item} a {target}.",
       "unassigned": "{item} nao foi atribuido e esta livre para todos.",
       "leaderOnly": "Somente o lider do grupo pode alterar o metodo de saque."
+    },
+    "party": {
+      "promoteLeader": "Promote to Leader"
     },
     "bags": {
       "filterGroupAria": "Filtrar bolsas por categoria",

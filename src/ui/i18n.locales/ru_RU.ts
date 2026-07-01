@@ -75,6 +75,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.masterLoot.enableAria': 'Включить мастера добычи',
   'hudChrome.masterLoot.looterLabel': 'Мастер добычи',
   'hudChrome.masterLoot.leaderOption': 'Лидер группы',
+  'hudChrome.party.promoteLeader': 'Назначить лидером',
   'hudChrome.masterLoot.thresholdLabel': 'Порог качества',
   'hudChrome.masterLoot.thresholdUncommon': 'Необычное и выше',
   'hudChrome.masterLoot.thresholdRare': 'Редкое и выше',
@@ -246,6 +247,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
     'Авто снижает тяжёлые CSS-эффекты (размытие, свечение, движение фона) в зависимости от браузера и устройства. Если интерфейс тормозит, понизьте вручную.',
   'hudChrome.options.footstepSounds': 'Звуки шагов',
   'hudChrome.options.clickFeedback': 'Метка клика',
+  'hudChrome.options.startAttackOnAbility': 'Автоатака при использовании способности',
   'hudChrome.options.lockCursorOnRotate': 'Блокировать курсор при вращении',
   'hudChrome.options.keybindHelpLockCursorOnRotate':
     'Удерживает курсор мыши внутри окна, пока вы вращаете камеру перетаскиванием, чтобы он не достигал края экрана и не переходил на другой монитор. Отключите, если предпочитаете свободный курсор.',

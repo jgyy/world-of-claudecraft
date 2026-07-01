@@ -332,10 +332,11 @@ export const tr_TR: EnTranslations = {
       "showWalletOnPlayerCard": "Cüzdanı Oyuncu Kartında Göster",
       "uiScale": "Arayüz Ölçeği",
       "highContrastBackground": "Yüksek Kontrastlı Arka Plan",
+      "startAttackOnAbility": "Auto-Attack on Ability Use",
       "showItemLevel": "Eşya Seviyesini Göster",
       "itemLevelLine": "Eşya Seviyesi {level}",
       "itemScoreLine": "Puan {score}",
-      "showSecondaryActionBar": "Show Secondary Action Bar"
+      "showSecondaryActionBar": "İkincil Eylem Çubuğunu Göster"
     },
     "controller": {
       "title": "Oyun Kolu",
@@ -625,6 +626,9 @@ export const tr_TR: EnTranslations = {
       "assigned": "{looter}, {item} esyasini {target} oyuncusuna atadi.",
       "unassigned": "{item} atanmadi ve herkes icin serbest.",
       "leaderOnly": "Ganimet yontemini yalnizca grup lideri degistirebilir."
+    },
+    "party": {
+      "promoteLeader": "Promote to Leader"
     },
     "bags": {
       "filterGroupAria": "Çantaları kategoriye göre filtrele",

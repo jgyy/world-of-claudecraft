@@ -332,10 +332,11 @@ export const nl_NL: EnTranslations = {
       "showWalletOnPlayerCard": "Portemonnee tonen op spelerskaart",
       "uiScale": "UI-schaal",
       "highContrastBackground": "Hoog-contrastachtergrond",
+      "startAttackOnAbility": "Auto-Attack on Ability Use",
       "showItemLevel": "Itemniveau tonen",
       "itemLevelLine": "Itemniveau {level}",
       "itemScoreLine": "Score {score}",
-      "showSecondaryActionBar": "Show Secondary Action Bar"
+      "showSecondaryActionBar": "Secundaire actiebalk tonen"
     },
     "controller": {
       "title": "Controller",
@@ -625,6 +626,9 @@ export const nl_NL: EnTranslations = {
       "assigned": "{looter} heeft {item} toegewezen aan {target}.",
       "unassigned": "{item} is niet toegewezen en is vrij voor iedereen.",
       "leaderOnly": "Alleen de groepsleider kan de buitmethode wijzigen."
+    },
+    "party": {
+      "promoteLeader": "Promote to Leader"
     },
     "bags": {
       "filterGroupAria": "Tassen filteren op categorie",

@@ -109,6 +109,7 @@ import {
   ITEM_ICON_PREFIX,
 } from './action_bar_view';
 import { ArenaWindow } from './arena_window';
+import { abilityStartsAutoAttack, hasAutoAttackTarget } from './attack_on_ability';
 import { type AuraEffectInput, auraEffectDescriptor } from './aura_effect';
 import { AurasPainter, type AurasPainterDeps } from './auras_painter';
 import { type AurasDeps, createAurasView } from './auras_view';
@@ -3515,8 +3516,27 @@ export class Hud {
     if (action?.type === 'ability') {
       // cast by ability id: the server validates against its own known list,
       // so the client-side slot remap never desyncs slot semantics
-      if (this.abilityForSlot(barSlot)) {
+      const resolved = this.abilityForSlot(barSlot);
+      if (resolved) {
         this.sim.castAbility(action.id);
+        // Optional QoL: also engage auto-attack when the ability is an offensive
+        // attack, so white swings start without a separate Attack press. Gated on
+        // the player setting; abilityStartsAutoAttack skips heals/buffs and any
+        // damage-breakable CC (gouge/sap/sheep) the swing would shatter. We MUST also
+        // gate on hasAutoAttackTarget: many damaging abilities are requiresTarget:false
+        // AOEs (Arcane Explosion, Frost Nova, Thunder Clap, ...) cast with no hostile
+        // target, where startAutoAttack does NOT no-op but errors "Invalid attack
+        // target." (sim/combat/auto_attack.ts). The explicit Attack button keeps that
+        // error feedback; this convenience path must not trip it.
+        const tid = this.sim.player.targetId;
+        const target = tid !== null ? (this.sim.entities.get(tid) ?? null) : null;
+        if (
+          this.optionsHooks?.settings.get('startAttackOnAbilityUse') &&
+          abilityStartsAutoAttack(resolved.effects) &&
+          hasAutoAttackTarget(target)
+        ) {
+          this.sim.startAutoAttack();
+        }
         this.flashActionSlot(barSlot);
       }
     } else if (action?.type === 'item' && this.isHotbarItemId(action.id)) {
@@ -7862,7 +7882,9 @@ export class Hud {
     this.activeMasterRolls.set(ev.rollId, {
       event: ev,
       receivedAt: performance.now(),
-      durationMs: 60_000,
+      // The master looter's curate window is 5 minutes (sim MASTER_LOOT_TIMEOUT),
+      // longer than a need/greed roll, so the countdown bar must span the full window.
+      durationMs: 300_000,
     });
     this.renderLootRolls();
   }
@@ -9845,8 +9867,10 @@ export class Hud {
     )}</div>`;
     if (this.reportHooks && pid !== this.sim.playerId)
       html += `<div class="ctx-item" data-act="report">${esc(t('hud.chat.context.report'))}</div>`;
-    if (isLeader && isMember && pid !== this.sim.playerId)
+    if (isLeader && isMember && pid !== this.sim.playerId) {
+      html += `<div class="ctx-item" data-act="promote">${esc(t('hudChrome.party.promoteLeader'))}</div>`;
       html += `<div class="ctx-item" data-act="kick">${esc(t('hud.chat.context.removeParty'))}</div>`;
+    }
     html += `<div class="ctx-item" data-act="close">${esc(t('hud.chat.context.cancel'))}</div>`;
     el.innerHTML = html;
     hydratePortraits(el);
@@ -9865,6 +9889,7 @@ export class Hud {
           ignored ? this.sim.blockRemove(name) : this.sim.blockAdd(name);
         } else this.toggleChatIgnore(name);
       } else if (act === 'report') this.openReportWindow({ pid, name });
+      else if (act === 'promote') this.sim.partyPromote(pid);
       else if (act === 'kick') this.sim.partyKick(pid);
     });
   }

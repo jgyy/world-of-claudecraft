@@ -332,6 +332,7 @@ export const ko_KR: EnTranslations = {
       "showWalletOnPlayerCard": "플레이어 카드에 지갑 표시",
       "uiScale": "UI 배율",
       "highContrastBackground": "고대비 배경",
+      "startAttackOnAbility": "스킬 사용 시 자동 공격",
       "showItemLevel": "아이템 레벨 표시",
       "itemLevelLine": "아이템 레벨 {level}",
       "itemScoreLine": "점수 {score}",
@@ -625,6 +626,9 @@ export const ko_KR: EnTranslations = {
       "assigned": "{looter}님이 {item}을(를) {target}에게 분배했습니다.",
       "unassigned": "{item}이(가) 분배되지 않아 모두가 획득할 수 있습니다.",
       "leaderOnly": "파티장만 전리품 방식을 변경할 수 있습니다."
+    },
+    "party": {
+      "promoteLeader": "파티장으로 지정"
     },
     "bags": {
       "filterGroupAria": "가방을 분류별로 필터링",

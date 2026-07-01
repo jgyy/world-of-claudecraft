@@ -10,51 +10,65 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "es_ES": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "fr_FR": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "fr_CA": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "en_CA": [],
   "it_IT": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "de_DE": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "ru_RU": [],
   "nl_NL": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "pl_PL": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "id_ID": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "tr_TR": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "sv_SE": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "vi_VN": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ],
   "da_DK": [
-    "hudChrome.options.showSecondaryActionBar"
+    "hudChrome.options.startAttackOnAbility",
+    "hudChrome.party.promoteLeader"
   ]
 };

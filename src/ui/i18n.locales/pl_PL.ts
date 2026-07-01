@@ -4972,4 +4972,5 @@ export const pl_PL: Partial<Record<TranslationKey, string>> = {
   'hudChrome.discord.relay.event.hint': 'Ogłoś rajd, spotkanie lub wydarzenie',
   'hudChrome.discord.relay.help.label': 'Potrzebuję pomocy',
   'hudChrome.discord.relay.help.hint': 'Poproś społeczność o pomoc',
+  'hudChrome.options.showSecondaryActionBar': 'Pokaż dodatkowy pasek akcji',
 };

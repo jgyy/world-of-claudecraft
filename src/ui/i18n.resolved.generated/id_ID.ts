@@ -332,10 +332,11 @@ export const id_ID: EnTranslations = {
       "showWalletOnPlayerCard": "Tampilkan Dompet di Kartu Pemain",
       "uiScale": "Skala UI",
       "highContrastBackground": "Latar Kontras Tinggi",
+      "startAttackOnAbility": "Auto-Attack on Ability Use",
       "showItemLevel": "Tampilkan Level Item",
       "itemLevelLine": "Level Item {level}",
       "itemScoreLine": "Skor {score}",
-      "showSecondaryActionBar": "Show Secondary Action Bar"
+      "showSecondaryActionBar": "Tampilkan Bilah Aksi Sekunder"
     },
     "controller": {
       "title": "Kontroler",
@@ -625,6 +626,9 @@ export const id_ID: EnTranslations = {
       "assigned": "{looter} memberikan {item} kepada {target}.",
       "unassigned": "{item} tidak diberikan dan bebas untuk semua.",
       "leaderOnly": "Hanya pemimpin grup yang dapat mengubah metode loot."
+    },
+    "party": {
+      "promoteLeader": "Promote to Leader"
     },
     "bags": {
       "filterGroupAria": "Saring tas menurut kategori",

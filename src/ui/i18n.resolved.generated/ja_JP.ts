@@ -332,6 +332,7 @@ export const ja_JP: EnTranslations = {
       "showWalletOnPlayerCard": "プレイヤーカードにウォレットを表示",
       "uiScale": "UIスケール",
       "highContrastBackground": "高コントラスト背景",
+      "startAttackOnAbility": "アビリティ使用時に自動攻撃",
       "showItemLevel": "アイテムレベルを表示",
       "itemLevelLine": "アイテムレベル {level}",
       "itemScoreLine": "スコア {score}",
@@ -625,6 +626,9 @@ export const ja_JP: EnTranslations = {
       "assigned": "{looter}が{item}を{target}に分配しました。",
       "unassigned": "{item}は分配されず、誰でも入手できます。",
       "leaderOnly": "分配方式を変更できるのはパーティリーダーだけです。"
+    },
+    "party": {
+      "promoteLeader": "パーティリーダーに指定"
     },
     "bags": {
       "filterGroupAria": "バッグをカテゴリーで絞り込む",
