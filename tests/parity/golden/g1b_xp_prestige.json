@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "969c1dc9",
+      "state": "962d07b8",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -40,6 +40,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -101,7 +103,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 390,
-      "state": "a983821d",
+      "state": "57a85e68",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -112,7 +114,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 390,
-      "state": "40a57831",
+      "state": "b7dbb1cc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -123,7 +125,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "9a530493",
+      "state": "f7f0ad70",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -134,7 +136,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "9a530493",
+      "state": "f7f0ad70",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -157,6 +159,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "restedXp": 0.125,
           "talents": {
             "choices": {},
@@ -219,7 +223,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "7f7272ec",
+      "state": "b365ac09",
       "events": "b3a99652",
       "rng": {
         "draws": 75,
@@ -244,7 +248,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 160,
+          "nodeHarvestReadyAt": {},
           "restedXp": 920,
           "talents": {
             "choices": {},
@@ -308,7 +314,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "a885a39d",
+      "state": "e22e3a08",
       "events": "d3db9c37",
       "rng": {
         "draws": 75,
@@ -334,7 +340,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 610,
+          "nodeHarvestReadyAt": {},
           "restedXp": 920,
           "talents": {
             "choices": {},
@@ -398,7 +406,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "f77c8a71",
+      "state": "b8026f0c",
       "events": "47bdc3b3",
       "rng": {
         "draws": 75,
@@ -424,7 +432,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 190400,
+          "nodeHarvestReadyAt": {},
           "restedXp": 920,
           "talents": {
             "choices": {},
@@ -488,7 +498,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "b7ae86da",
+      "state": "7961a1ef",
       "events": "5a6d2399",
       "rng": {
         "draws": 75,
@@ -514,7 +524,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 190400,
+          "nodeHarvestReadyAt": {},
           "prestigeRank": 1,
           "restedXp": 920,
           "talents": {
@@ -578,7 +590,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "b7ae86da",
+      "state": "7961a1ef",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -604,7 +616,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 190400,
+          "nodeHarvestReadyAt": {},
           "prestigeRank": 1,
           "restedXp": 920,
           "talents": {
@@ -668,7 +682,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "b7ae86da",
+      "state": "7961a1ef",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -694,7 +708,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 190400,
+          "nodeHarvestReadyAt": {},
           "prestigeRank": 1,
           "restedXp": 920,
           "talents": {
