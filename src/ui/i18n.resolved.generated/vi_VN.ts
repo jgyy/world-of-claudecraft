@@ -4833,6 +4833,51 @@ export const vi_VN: EnTranslations = {
       "monarch_crown_helm": {
         "name": "Vương Miện Quân Vương"
       },
+      "copper_mining_pick": {
+        "name": "Cuốc Khai Khoáng Đồng"
+      },
+      "iron_mining_pick": {
+        "name": "Cuốc Khai Khoáng Sắt"
+      },
+      "mithril_mining_pick": {
+        "name": "Cuốc Khai Khoáng Mithril"
+      },
+      "handaxe": {
+        "name": "Rìu Tay"
+      },
+      "felling_axe": {
+        "name": "Rìu Đốn Gỗ"
+      },
+      "ironbark_axe": {
+        "name": "Rìu Vỏ Sắt"
+      },
+      "gathering_sickle": {
+        "name": "Liềm Thu Hoạch"
+      },
+      "bronze_sickle": {
+        "name": "Liềm Đồng"
+      },
+      "silverleaf_sickle": {
+        "name": "Liềm Lá Bạc"
+      },
+      "thorium_mining_pick": {
+        "name": "Cuốc Khai Khoáng Thorium"
+      },
+      "arcanite_mining_pick": {
+        "name": "Cuốc Khai Khoáng Arcanite"
+      },
+      "ashwood_axe": {
+        "name": "Rìu Gỗ Tần Bì"
+      },
+      "elderwood_axe": {
+        "name": "Rìu Gỗ Cổ Thụ"
+      },
+      "goldleaf_sickle": {
+        "name": "Liềm Lá Vàng"
+      },
+      "sunpetal_sickle": {
+        "name": "Liềm Cánh Hoa Mặt Trời"
+      },
       "bristleback_maul": {
         "name": "Vồ Lưng Gai"
       },

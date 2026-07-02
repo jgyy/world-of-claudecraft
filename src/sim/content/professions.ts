@@ -1,0 +1,253 @@
+// Gathering profession content (data-as-code, exempt from module-first size
+// rules per root CLAUDE.md: this is a declarative table, not logic). Starter
+// set is Mining, Logging, Herbalism; the state and gain logic live in
+// ../professions/gathering.ts behind the SimContext seam. `icon` is a plain
+// identifier (no emoji glyph, per the repo copy rule); a future UI surface
+// resolves it to a procedural icon the same way ability/item icons do.
+export type GatheringProfessionId = 'mining' | 'logging' | 'herbalism';
+
+export interface GatheringProfessionDef {
+  id: GatheringProfessionId;
+  name: string;
+  icon: string;
+  description: string;
+}
+
+export const GATHERING_PROFESSIONS: Record<GatheringProfessionId, GatheringProfessionDef> = {
+  mining: {
+    id: 'mining',
+    name: 'Mining',
+    icon: 'mining',
+    description: 'Extracting ore and stone from nodes found in the wild.',
+  },
+  logging: {
+    id: 'logging',
+    name: 'Logging',
+    icon: 'logging',
+    description: 'Felling timber from trees found across the zones.',
+  },
+  herbalism: {
+    id: 'herbalism',
+    name: 'Herbalism',
+    icon: 'herbalism',
+    description: 'Collecting herbs and plants growing in the wild.',
+  },
+};
+
+// Stable iteration order, used for defaulting/normalizing a per-player
+// proficiency record. Keep in sync with GATHERING_PROFESSIONS above.
+export const GATHERING_PROFESSION_IDS: GatheringProfessionId[] = ['mining', 'logging', 'herbalism'];
+
+// Tool effect slotting (#1136): a slottable bonus layered on top of a base
+// gathering tool's tier (see ../professions/tools.ts). Each effect carries its
+// own starting durability, separate from the base tool's tier gating, and a
+// per-use depletion chance: durability only drops on a losing roll, not on
+// every use, so the effect's lifespan is itself probabilistic. `kind` selects
+// which harvest/craft outcome field the bonus adjusts.
+export type ToolEffectId = 'gatherers_cache' | 'artisans_eye' | 'quickening_charm';
+
+export interface ToolEffectDef {
+  id: ToolEffectId;
+  name: string;
+  description: string;
+  icon: string;
+  kind: 'quantity' | 'quality' | 'respawnSpeed';
+  /** Magnitude applied to the outcome field while durability remains. */
+  bonus: number;
+  /** Charges the effect starts with when freshly slotted onto a tool. */
+  startingDurability: number;
+  /** Chance per use that this effect's durability decrements by 1 (0 to 1). */
+  depletionChance: number;
+}
+
+export const TOOL_EFFECTS: Record<ToolEffectId, ToolEffectDef> = {
+  gatherers_cache: {
+    id: 'gatherers_cache',
+    name: "Gatherer's Cache",
+    icon: 'gatherers_cache',
+    description: 'Slotted onto a gathering tool: yields extra quantity per harvest.',
+    kind: 'quantity',
+    bonus: 1,
+    startingDurability: 20,
+    depletionChance: 0.5,
+  },
+  artisans_eye: {
+    id: 'artisans_eye',
+    name: "Artisan's Eye",
+    icon: 'artisans_eye',
+    description: 'Slotted onto a gathering tool: raises the quality of what it harvests.',
+    kind: 'quality',
+    bonus: 1,
+    startingDurability: 20,
+    depletionChance: 0.5,
+  },
+  quickening_charm: {
+    id: 'quickening_charm',
+    name: 'Quickening Charm',
+    icon: 'quickening_charm',
+    description: 'Slotted onto a gathering tool: shortens the node respawn timer it triggers.',
+    kind: 'respawnSpeed',
+    bonus: 1,
+    startingDurability: 20,
+    depletionChance: 0.5,
+  },
+};
+
+// Stable iteration order, used the same way GATHERING_PROFESSION_IDS is.
+export const TOOL_EFFECT_IDS: ToolEffectId[] = [
+  'gatherers_cache',
+  'artisans_eye',
+  'quickening_charm',
+];
+// Ten-craft ring content: pure data plus pure helper functions. No engine logic,
+// no mechanic wiring: this file only defines the ring geometry (order, pole tags)
+// and the adjacency/opposite lookups derived from it. See issue #1125.
+//
+// Design-doc note: the canonical ring order lives at
+// https://woc.nervemart.com/docs/professions-system, which returned 403 Forbidden
+// when this file was authored. The ring below is a reasonable placeholder pending
+// maintainer confirmation against the design doc: a 10-craft circle, opposite =
+// 5 positions away, adjacent = 1 position away either side, with the 4 poles grouped
+// as evenly as sensible (Material: crafts that shape raw matter into gear;
+// Experimental: crafts driven by trial-and-error formulae; Formal: crafts built on
+// exact patterns/measurements; Cross-cutting: crafts that touch every other craft's
+// output). Flag any correction needed once the doc is reachable.
+
+export type CraftPole = 'Material' | 'Experimental' | 'Formal' | 'Cross-cutting';
+
+export interface CraftDef {
+  id: string;
+  name: string;
+  pole: CraftPole;
+}
+
+// Fixed ring order (index is the ring position). Opposite crafts sit 5 positions
+// apart; adjacent crafts sit 1 position apart on either side.
+export const CRAFT_RING: CraftDef[] = [
+  { id: 'armorcrafting', name: 'Armorcrafting', pole: 'Material' },
+  { id: 'weaponcrafting', name: 'Weaponcrafting', pole: 'Material' },
+  { id: 'jewelcrafting', name: 'Jewelcrafting', pole: 'Material' },
+  { id: 'alchemy', name: 'Alchemy', pole: 'Experimental' },
+  { id: 'engineering', name: 'Engineering', pole: 'Experimental' },
+  { id: 'cooking', name: 'Cooking', pole: 'Cross-cutting' },
+  { id: 'inscription', name: 'Inscription', pole: 'Cross-cutting' },
+  { id: 'enchanting', name: 'Enchanting', pole: 'Cross-cutting' },
+  { id: 'tailoring', name: 'Tailoring', pole: 'Formal' },
+  { id: 'leatherworking', name: 'Leatherworking', pole: 'Formal' },
+];
+
+const RING_SIZE = CRAFT_RING.length;
+
+const CRAFT_INDEX: ReadonlyMap<string, number> = new Map(
+  CRAFT_RING.map((craft, index) => [craft.id, index]),
+);
+
+function indexOf(craftId: string): number {
+  const index = CRAFT_INDEX.get(craftId);
+  if (index === undefined) {
+    throw new Error(`unknown craft id: ${craftId}`);
+  }
+  return index;
+}
+
+/** The two crafts one ring position away from the given craft, on either side. */
+export function adjacentCrafts(craftId: string): [CraftDef, CraftDef] {
+  const index = indexOf(craftId);
+  const prev = CRAFT_RING[(index - 1 + RING_SIZE) % RING_SIZE];
+  const next = CRAFT_RING[(index + 1) % RING_SIZE];
+  return [prev, next];
+}
+
+/** The craft directly opposite the given craft (halfway around the ring). */
+export function oppositeCraft(craftId: string): CraftDef {
+  const index = indexOf(craftId);
+  return CRAFT_RING[(index + RING_SIZE / 2) % RING_SIZE];
+}
+
+/** Lookup a craft definition by id. */
+export function craftById(craftId: string): CraftDef {
+  return CRAFT_RING[indexOf(craftId)];
+}
+
+// P3 reconciliation stub (#1135): the crafted tier-4/5 base tools added for
+// this issue (see src/sim/content/items.ts: thorium_mining_pick,
+// arcanite_mining_pick, ashwood_axe, elderwood_axe, goldleaf_sickle,
+// sunpetal_sickle) are meant to be produced via a P3 recipe/crafting action
+// (#1127), NOT bought from a vendor. #1127 (the crafting action itself) has
+// not been implemented in any branch yet, so there is nowhere to register a
+// real, consumed recipe: adding one to a live recipe table would be dead data
+// nobody reads. Instead this is an INERT, documentation-only shape of what
+// each recipe SHOULD look like once #1127 lands. Nothing in the engine reads
+// `TOOL_RECIPE_STUBS` today: it is not merged into any content table by
+// data.ts, and no SimContext callback or effect references it.
+//
+// TODO(#1127): once the crafting action exists, move (not copy) this shape
+// into whatever the real recipe table turns out to be (ingredients + a craft
+// verb the player performs), wire `outputItemId` to the actual item grant,
+// and delete this stub in the same change.
+export interface ToolRecipeStub {
+  /** Item id this recipe would produce once #1127 can consume recipes. */
+  outputItemId: string;
+  /** Which craft on the CRAFT_RING would perform this (see #1125's ring). */
+  craftId: string;
+  /** Placeholder ingredient list: itemId plus quantity consumed per craft. */
+  ingredients: { itemId: string; qty: number }[];
+}
+
+// NOTE: several `ingredients[].itemId` values below (thorium_ore,
+// arcanite_bar, ashwood_log, elderwood_log, goldleaf_herb, sunpetal_herb) are
+// PLACEHOLDER ids: no matching ItemDef exists yet, because the monster
+// material / node-drop items they'd come from are their own future content
+// slice. That is fine ONLY because this table is inert and unread by the
+// engine; do not merge TOOL_RECIPE_STUBS into ITEMS or any live table until
+// those ingredient items are real and #1127 exists to consume the recipe.
+export const TOOL_RECIPE_STUBS: ToolRecipeStub[] = [
+  {
+    outputItemId: 'thorium_mining_pick',
+    craftId: 'engineering',
+    ingredients: [
+      { itemId: 'thorium_ore', qty: 4 },
+      { itemId: 'mithril_mining_pick', qty: 1 },
+    ],
+  },
+  {
+    outputItemId: 'arcanite_mining_pick',
+    craftId: 'engineering',
+    ingredients: [
+      { itemId: 'arcanite_bar', qty: 2 },
+      { itemId: 'thorium_mining_pick', qty: 1 },
+    ],
+  },
+  {
+    outputItemId: 'ashwood_axe',
+    craftId: 'engineering',
+    ingredients: [
+      { itemId: 'ashwood_log', qty: 4 },
+      { itemId: 'ironbark_axe', qty: 1 },
+    ],
+  },
+  {
+    outputItemId: 'elderwood_axe',
+    craftId: 'engineering',
+    ingredients: [
+      { itemId: 'elderwood_log', qty: 2 },
+      { itemId: 'ashwood_axe', qty: 1 },
+    ],
+  },
+  {
+    outputItemId: 'goldleaf_sickle',
+    craftId: 'engineering',
+    ingredients: [
+      { itemId: 'goldleaf_herb', qty: 4 },
+      { itemId: 'silverleaf_sickle', qty: 1 },
+    ],
+  },
+  {
+    outputItemId: 'sunpetal_sickle',
+    craftId: 'engineering',
+    ingredients: [
+      { itemId: 'sunpetal_herb', qty: 2 },
+      { itemId: 'goldleaf_sickle', qty: 1 },
+    ],
+  },
+];

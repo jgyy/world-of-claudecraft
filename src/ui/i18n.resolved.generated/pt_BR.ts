@@ -4833,6 +4833,51 @@ export const pt_BR: EnTranslations = {
       "monarch_crown_helm": {
         "name": "Coroa do Monarca"
       },
+      "copper_mining_pick": {
+        "name": "Picareta de Cobre"
+      },
+      "iron_mining_pick": {
+        "name": "Picareta de Ferro"
+      },
+      "mithril_mining_pick": {
+        "name": "Picareta de Mithril"
+      },
+      "handaxe": {
+        "name": "Machadinha"
+      },
+      "felling_axe": {
+        "name": "Machado de Corte"
+      },
+      "ironbark_axe": {
+        "name": "Machado de Casca de Ferro"
+      },
+      "gathering_sickle": {
+        "name": "Foice de Coleta"
+      },
+      "bronze_sickle": {
+        "name": "Foice de Bronze"
+      },
+      "silverleaf_sickle": {
+        "name": "Foice Folha de Prata"
+      },
+      "thorium_mining_pick": {
+        "name": "Picareta de Tório"
+      },
+      "arcanite_mining_pick": {
+        "name": "Picareta de Arcanita"
+      },
+      "ashwood_axe": {
+        "name": "Machado de Freixo"
+      },
+      "elderwood_axe": {
+        "name": "Machado de Madeira Antiga"
+      },
+      "goldleaf_sickle": {
+        "name": "Foice Folha Dourada"
+      },
+      "sunpetal_sickle": {
+        "name": "Foice Pétala Solar"
+      },
       "bristleback_maul": {
         "name": "Malho Bristleback"
       },

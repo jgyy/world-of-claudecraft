@@ -4833,6 +4833,51 @@ export const pl_PL: EnTranslations = {
       "monarch_crown_helm": {
         "name": "Korona monarchy"
       },
+      "copper_mining_pick": {
+        "name": "Miedziany Kilof Górniczy"
+      },
+      "iron_mining_pick": {
+        "name": "Żelazny Kilof Górniczy"
+      },
+      "mithril_mining_pick": {
+        "name": "Mithrilowy Kilof Górniczy"
+      },
+      "handaxe": {
+        "name": "Toporek"
+      },
+      "felling_axe": {
+        "name": "Siekiera Drwala"
+      },
+      "ironbark_axe": {
+        "name": "Toporek z Żelaznej Kory"
+      },
+      "gathering_sickle": {
+        "name": "Sierp do Zbioru"
+      },
+      "bronze_sickle": {
+        "name": "Brązowy Sierp"
+      },
+      "silverleaf_sickle": {
+        "name": "Sierp Srebrnolistny"
+      },
+      "thorium_mining_pick": {
+        "name": "Torowy Kilof Górniczy"
+      },
+      "arcanite_mining_pick": {
+        "name": "Arkanitowy Kilof Górniczy"
+      },
+      "ashwood_axe": {
+        "name": "Siekiera z Jesionu"
+      },
+      "elderwood_axe": {
+        "name": "Siekiera ze Starodrzewu"
+      },
+      "goldleaf_sickle": {
+        "name": "Sierp Złotolistny"
+      },
+      "sunpetal_sickle": {
+        "name": "Sierp Słonecznopłatkowy"
+      },
       "bristleback_maul": {
         "name": "Tłuk szczeciniastych"
       },

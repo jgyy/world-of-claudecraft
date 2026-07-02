@@ -4833,6 +4833,51 @@ export const zh_TW: EnTranslations = {
       "monarch_crown_helm": {
         "name": "君主之冠"
       },
+      "copper_mining_pick": {
+        "name": "銅製採礦鎬"
+      },
+      "iron_mining_pick": {
+        "name": "鐵製採礦鎬"
+      },
+      "mithril_mining_pick": {
+        "name": "秘銀採礦鎬"
+      },
+      "handaxe": {
+        "name": "手斧"
+      },
+      "felling_axe": {
+        "name": "伐木斧"
+      },
+      "ironbark_axe": {
+        "name": "鐵樹皮斧"
+      },
+      "gathering_sickle": {
+        "name": "採集鐮刀"
+      },
+      "bronze_sickle": {
+        "name": "青銅鐮刀"
+      },
+      "silverleaf_sickle": {
+        "name": "銀葉鐮刀"
+      },
+      "thorium_mining_pick": {
+        "name": "釷礦採礦鎬"
+      },
+      "arcanite_mining_pick": {
+        "name": "秘法採礦鎬"
+      },
+      "ashwood_axe": {
+        "name": "白蠟木斧"
+      },
+      "elderwood_axe": {
+        "name": "古木斧"
+      },
+      "goldleaf_sickle": {
+        "name": "金葉鐮刀"
+      },
+      "sunpetal_sickle": {
+        "name": "陽瓣鐮刀"
+      },
       "bristleback_maul": {
         "name": "硬鬃重槌"
       },

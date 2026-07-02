@@ -4833,6 +4833,51 @@ export const id_ID: EnTranslations = {
       "monarch_crown_helm": {
         "name": "Mahkota Sang Raja"
       },
+      "copper_mining_pick": {
+        "name": "Beliung Tambang Tembaga"
+      },
+      "iron_mining_pick": {
+        "name": "Beliung Tambang Besi"
+      },
+      "mithril_mining_pick": {
+        "name": "Beliung Tambang Mithril"
+      },
+      "handaxe": {
+        "name": "Kapak Tangan"
+      },
+      "felling_axe": {
+        "name": "Kapak Tebang"
+      },
+      "ironbark_axe": {
+        "name": "Kapak Kulit Besi"
+      },
+      "gathering_sickle": {
+        "name": "Sabit Panen"
+      },
+      "bronze_sickle": {
+        "name": "Sabit Perunggu"
+      },
+      "silverleaf_sickle": {
+        "name": "Sabit Daun Perak"
+      },
+      "thorium_mining_pick": {
+        "name": "Beliung Tambang Thorium"
+      },
+      "arcanite_mining_pick": {
+        "name": "Beliung Tambang Arcanite"
+      },
+      "ashwood_axe": {
+        "name": "Kapak Kayu Abu"
+      },
+      "elderwood_axe": {
+        "name": "Kapak Kayu Tua"
+      },
+      "goldleaf_sickle": {
+        "name": "Sabit Daun Emas"
+      },
+      "sunpetal_sickle": {
+        "name": "Sabit Kelopak Matahari"
+      },
       "bristleback_maul": {
         "name": "Cabikan Punggung Berbulu"
       },

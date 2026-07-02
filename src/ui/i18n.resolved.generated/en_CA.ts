@@ -4833,6 +4833,51 @@ export const en_CA: EnTranslations = {
       "monarch_crown_helm": {
         "name": "Monarch's Crown"
       },
+      "copper_mining_pick": {
+        "name": "Copper Mining Pick"
+      },
+      "iron_mining_pick": {
+        "name": "Iron Mining Pick"
+      },
+      "mithril_mining_pick": {
+        "name": "Mithril Mining Pick"
+      },
+      "handaxe": {
+        "name": "Handaxe"
+      },
+      "felling_axe": {
+        "name": "Felling Axe"
+      },
+      "ironbark_axe": {
+        "name": "Ironbark Axe"
+      },
+      "gathering_sickle": {
+        "name": "Gathering Sickle"
+      },
+      "bronze_sickle": {
+        "name": "Bronze Sickle"
+      },
+      "silverleaf_sickle": {
+        "name": "Silverleaf Sickle"
+      },
+      "thorium_mining_pick": {
+        "name": "Thorium Mining Pick"
+      },
+      "arcanite_mining_pick": {
+        "name": "Arcanite Mining Pick"
+      },
+      "ashwood_axe": {
+        "name": "Ashwood Axe"
+      },
+      "elderwood_axe": {
+        "name": "Elderwood Axe"
+      },
+      "goldleaf_sickle": {
+        "name": "Goldleaf Sickle"
+      },
+      "sunpetal_sickle": {
+        "name": "Sunpetal Sickle"
+      },
       "bristleback_maul": {
         "name": "Bristleback Maul"
       },

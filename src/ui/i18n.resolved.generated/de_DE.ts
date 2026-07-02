@@ -4833,6 +4833,51 @@ export const de_DE: EnTranslations = {
       "monarch_crown_helm": {
         "name": "Krone des Monarchen"
       },
+      "copper_mining_pick": {
+        "name": "Kupfer-Grabpickel"
+      },
+      "iron_mining_pick": {
+        "name": "Eisen-Grabpickel"
+      },
+      "mithril_mining_pick": {
+        "name": "Mithril-Grabpickel"
+      },
+      "handaxe": {
+        "name": "Handaxt"
+      },
+      "felling_axe": {
+        "name": "Fällaxt"
+      },
+      "ironbark_axe": {
+        "name": "Eisenrinden-Axt"
+      },
+      "gathering_sickle": {
+        "name": "Erntesichel"
+      },
+      "bronze_sickle": {
+        "name": "Bronzesichel"
+      },
+      "silverleaf_sickle": {
+        "name": "Silberblatt-Sichel"
+      },
+      "thorium_mining_pick": {
+        "name": "Thorium-Grabpickel"
+      },
+      "arcanite_mining_pick": {
+        "name": "Arkanit-Grabpickel"
+      },
+      "ashwood_axe": {
+        "name": "Eschenholzaxt"
+      },
+      "elderwood_axe": {
+        "name": "Altholzaxt"
+      },
+      "goldleaf_sickle": {
+        "name": "Goldblatt-Sichel"
+      },
+      "sunpetal_sickle": {
+        "name": "Sonnenblütensichel"
+      },
       "bristleback_maul": {
         "name": "Bristleback-Schlägel"
       },

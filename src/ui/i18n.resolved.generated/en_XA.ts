@@ -4833,6 +4833,51 @@ export const en_XA: EnTranslations = {
       "monarch_crown_helm": {
         "name": "[Ɱóñáŕçĥ'š Çŕóŵñ]"
       },
+      "copper_mining_pick": {
+        "name": "[Çóþþéŕ Ɱíñíñĝ Þíçķ]"
+      },
+      "iron_mining_pick": {
+        "name": "[Íŕóñ Ɱíñíñĝ Þíçķ]"
+      },
+      "mithril_mining_pick": {
+        "name": "[Ɱíţĥŕíļ Ɱíñíñĝ Þíçķ]"
+      },
+      "handaxe": {
+        "name": "[Ĥáñðáẋé]"
+      },
+      "felling_axe": {
+        "name": "[Ƒéļļíñĝ Áẋé]"
+      },
+      "ironbark_axe": {
+        "name": "[Íŕóñƀáŕķ Áẋé]"
+      },
+      "gathering_sickle": {
+        "name": "[Ĝáţĥéŕíñĝ Šíçķļé]"
+      },
+      "bronze_sickle": {
+        "name": "[Ɓŕóñžé Šíçķļé]"
+      },
+      "silverleaf_sickle": {
+        "name": "[Šíļʋéŕļéáƒ Šíçķļé]"
+      },
+      "thorium_mining_pick": {
+        "name": "[Ţĥóŕíúɱ Ɱíñíñĝ Þíçķ]"
+      },
+      "arcanite_mining_pick": {
+        "name": "[Áŕçáñíţé Ɱíñíñĝ Þíçķ]"
+      },
+      "ashwood_axe": {
+        "name": "[Ášĥŵóóð Áẋé]"
+      },
+      "elderwood_axe": {
+        "name": "[Éļðéŕŵóóð Áẋé]"
+      },
+      "goldleaf_sickle": {
+        "name": "[Ĝóļðļéáƒ Šíçķļé]"
+      },
+      "sunpetal_sickle": {
+        "name": "[Šúñþéţáļ Šíçķļé]"
+      },
       "bristleback_maul": {
         "name": "[Ɓŕíšţļéƀáçķ Ɱáúļ]"
       },

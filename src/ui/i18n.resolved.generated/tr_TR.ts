@@ -4833,6 +4833,51 @@ export const tr_TR: EnTranslations = {
       "monarch_crown_helm": {
         "name": "Hükümdar'ın Tacı"
       },
+      "copper_mining_pick": {
+        "name": "Bakır Maden Kazması"
+      },
+      "iron_mining_pick": {
+        "name": "Demir Maden Kazması"
+      },
+      "mithril_mining_pick": {
+        "name": "Mithril Maden Kazması"
+      },
+      "handaxe": {
+        "name": "El Baltası"
+      },
+      "felling_axe": {
+        "name": "Kesim Baltası"
+      },
+      "ironbark_axe": {
+        "name": "Demir Kabuklu Balta"
+      },
+      "gathering_sickle": {
+        "name": "Toplama Orağı"
+      },
+      "bronze_sickle": {
+        "name": "Bronz Orak"
+      },
+      "silverleaf_sickle": {
+        "name": "Gümüşyaprak Orağı"
+      },
+      "thorium_mining_pick": {
+        "name": "Toryum Maden Kazması"
+      },
+      "arcanite_mining_pick": {
+        "name": "Arkanit Maden Kazması"
+      },
+      "ashwood_axe": {
+        "name": "Dişbudak Baltası"
+      },
+      "elderwood_axe": {
+        "name": "Kadim Ağaç Baltası"
+      },
+      "goldleaf_sickle": {
+        "name": "Altınyaprak Orağı"
+      },
+      "sunpetal_sickle": {
+        "name": "Güneşyaprağı Orağı"
+      },
       "bristleback_maul": {
         "name": "Dikensırt Balyozu"
       },
