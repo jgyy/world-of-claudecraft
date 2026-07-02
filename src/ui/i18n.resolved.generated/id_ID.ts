@@ -955,6 +955,12 @@ export const id_ID: EnTranslations = {
       },
       "linkedAs": "Tertaut sebagai {login}",
       "unlink": "Putuskan Tautan GitHub"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

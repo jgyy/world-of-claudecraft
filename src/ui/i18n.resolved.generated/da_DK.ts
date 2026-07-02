@@ -955,6 +955,12 @@ export const da_DK: EnTranslations = {
       },
       "linkedAs": "Tilknyttet som {login}",
       "unlink": "Fjern GitHub-tilknytning"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

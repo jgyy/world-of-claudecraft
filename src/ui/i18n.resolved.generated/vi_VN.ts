@@ -955,6 +955,12 @@ export const vi_VN: EnTranslations = {
       },
       "linkedAs": "Đã liên kết với {login}",
       "unlink": "Hủy liên kết GitHub"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

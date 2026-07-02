@@ -955,6 +955,12 @@ export const en_XA: EnTranslations = {
       },
       "linkedAs": "[Ļíñķéð áš {login}]",
       "unlink": "[Úñļíñķ ĜíţĤúƀ]"
+    },
+    "gathering": {
+      "title": "[Ĝáţĥéŕíñĝ]",
+      "mining": "[Ɱíñíñĝ]",
+      "logging": "[Ļóĝĝíñĝ]",
+      "herbalism": "[Ĥéŕƀáļíšɱ]"
     }
   },
   "guide": {

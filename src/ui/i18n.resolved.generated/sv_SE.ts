@@ -955,6 +955,12 @@ export const sv_SE: EnTranslations = {
       },
       "linkedAs": "Länkad som {login}",
       "unlink": "Avlänka GitHub"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

@@ -955,6 +955,12 @@ export const tr_TR: EnTranslations = {
       },
       "linkedAs": "{login} olarak bağlandı",
       "unlink": "GitHub Bağlantısını Kaldır"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

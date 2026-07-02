@@ -955,6 +955,12 @@ export const fr_CA: EnTranslations = {
       },
       "linkedAs": "Lié en tant que {login}",
       "unlink": "Délier GitHub"
+    },
+    "gathering": {
+      "title": "Gathering",
+      "mining": "Mining",
+      "logging": "Logging",
+      "herbalism": "Herbalism"
     }
   },
   "guide": {

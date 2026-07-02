@@ -955,6 +955,12 @@ export const ru_RU: EnTranslations = {
       },
       "linkedAs": "Привязан как {login}",
       "unlink": "Отвязать GitHub"
+    },
+    "gathering": {
+      "title": "Собирательство",
+      "mining": "Горное дело",
+      "logging": "Лесозаготовка",
+      "herbalism": "Травничество"
     }
   },
   "guide": {

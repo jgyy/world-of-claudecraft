@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "969c1dc9",
+      "state": "962d07b8",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -39,6 +39,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -100,7 +102,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "fbb7708c",
+      "state": "e9b19c17",
       "events": "d8fe6d87",
       "rng": {
         "draws": 0,
@@ -123,7 +125,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_wolves",
@@ -197,7 +201,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 398,
-      "state": "2b85e8a4",
+      "state": "cf541c85",
       "events": "68debff8",
       "rng": {
         "draws": 32,
@@ -224,7 +228,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_wolves",
@@ -299,7 +305,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 398,
-      "state": "3430e915",
+      "state": "d4cf641a",
       "events": "d91c55b7",
       "rng": {
         "draws": 32,
@@ -329,7 +335,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 27850,
+          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_wolves"
           ],
@@ -396,7 +404,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 398,
-      "state": "d0facdc1",
+      "state": "d29347ce",
       "events": "741638a5",
       "rng": {
         "draws": 32,
@@ -426,7 +434,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 27850,
+          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_wolves"
           ],

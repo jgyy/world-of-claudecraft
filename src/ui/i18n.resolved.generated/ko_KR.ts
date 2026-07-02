@@ -955,6 +955,12 @@ export const ko_KR: EnTranslations = {
       },
       "linkedAs": "{login}(으)로 연결됨",
       "unlink": "GitHub 연결 해제"
+    },
+    "gathering": {
+      "title": "채집",
+      "mining": "채광",
+      "logging": "벌목",
+      "herbalism": "약초학"
     }
   },
   "guide": {

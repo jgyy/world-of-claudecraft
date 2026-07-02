@@ -955,6 +955,12 @@ export const ja_JP: EnTranslations = {
       },
       "linkedAs": "{login} として連携済み",
       "unlink": "GitHub の連携を解除"
+    },
+    "gathering": {
+      "title": "採集",
+      "mining": "採掘",
+      "logging": "伐採",
+      "herbalism": "薬草学"
     }
   },
   "guide": {

@@ -955,6 +955,12 @@ export const zh_TW: EnTranslations = {
       },
       "linkedAs": "已連結為 {login}",
       "unlink": "取消連結 GitHub"
+    },
+    "gathering": {
+      "title": "採集",
+      "mining": "採礦",
+      "logging": "伐木",
+      "herbalism": "藥草學"
     }
   },
   "guide": {
