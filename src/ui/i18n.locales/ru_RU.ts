@@ -731,6 +731,8 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'errors.api.usernameTaken': 'Это имя пользователя уже занято.',
   'errors.api.invalidCredentials': 'Неверное имя пользователя или пароль.',
   'errors.api.verificationFailed': 'Проверка не пройдена. Повторите попытку.',
+  'errors.api.desktopCodeInvalid':
+    'Код входа для настольного приложения недействителен или истёк. Повторите попытку.',
   'errors.api.invalidCharacterName': 'Недопустимое имя персонажа. Используйте 2-16 букв.',
   'errors.api.characterNameNotAllowed': 'Это имя персонажа запрещено.',
   'errors.api.invalidClass': 'Недопустимый класс.',
@@ -5071,4 +5073,15 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.gathering.mining': 'Горное дело',
   'hudChrome.gathering.logging': 'Лесозаготовка',
   'hudChrome.gathering.herbalism': 'Травничество',
+  'desktop.update.downloading': 'Загрузка обновления {version}...',
+  'desktop.update.ready':
+    'Обновление {version} готово. Оно установится при выходе из игры, либо перезапустите сейчас.',
+  'desktop.update.restart': 'Перезапустить сейчас',
+  'desktop.update.later': 'Позже',
+  'desktop.crash.title': 'World of ClaudeCraft',
+  'desktop.crash.body': 'Игровой экран перестал отвечать. Перезагрузить его?',
+  'desktop.crash.reload': 'Перезагрузить',
+  'desktop.crash.quit': 'Выйти',
+  'desktop.crash.fatalBody':
+    'World of ClaudeCraft столкнулась с непредвиденной ошибкой и будет закрыта.',
 };
