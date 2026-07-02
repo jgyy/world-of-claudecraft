@@ -15,7 +15,7 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 388,
+      "nextId": 389,
       "state": "5bc471b0",
       "events": "741638a5",
       "rng": {
@@ -29,9 +29,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 390,
-      "state": "b3112d07",
-      "events": "7809c15c",
+      "nextId": 391,
+      "state": "edd5b26f",
+      "events": "d8f7a12d",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -46,22 +46,19 @@
           "companionUpgrades": {},
           "copper": 100,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 3,
               "itemId": "wolf_fang"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -75,22 +72,19 @@
           "companionUpgrades": {},
           "copper": 50,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 2,
               "itemId": "baked_bread"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -108,7 +102,7 @@
           "fallStartY": -3.129532,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -155,7 +149,7 @@
           "fallStartY": -3.128605,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -199,9 +193,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 390,
-      "state": "fb7736fd",
-      "events": "aac17815",
+      "nextId": 391,
+      "state": "93da735d",
+      "events": "2e3c28cb",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -216,15 +210,13 @@
           "companionUpgrades": {},
           "copper": 80,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -235,7 +227,6 @@
               "itemId": "baked_bread"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -249,15 +240,13 @@
           "companionUpgrades": {},
           "copper": 70,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -268,7 +257,6 @@
               "itemId": "wolf_fang"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -286,7 +274,7 @@
           "fallStartY": -3.129532,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -333,7 +321,7 @@
           "fallStartY": -3.128605,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -377,9 +365,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 390,
-      "state": "fb7736fd",
-      "events": "3ba696ae",
+      "nextId": 391,
+      "state": "93da735d",
+      "events": "a1930032",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -394,15 +382,13 @@
           "companionUpgrades": {},
           "copper": 80,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -413,7 +399,6 @@
               "itemId": "baked_bread"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -427,15 +412,13 @@
           "companionUpgrades": {},
           "copper": 70,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -446,7 +429,6 @@
               "itemId": "wolf_fang"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -464,7 +446,7 @@
           "fallStartY": -3.129532,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -511,7 +493,7 @@
           "fallStartY": -3.128605,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -555,9 +537,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 390,
-      "state": "fb7736fd",
-      "events": "c47dd59f",
+      "nextId": 391,
+      "state": "93da735d",
+      "events": "bda3fb58",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -572,15 +554,13 @@
           "companionUpgrades": {},
           "copper": 80,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -591,7 +571,6 @@
               "itemId": "baked_bread"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -605,15 +584,13 @@
           "companionUpgrades": {},
           "copper": 70,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -624,7 +601,6 @@
               "itemId": "wolf_fang"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -642,7 +618,7 @@
           "fallStartY": -3.129532,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -689,7 +665,7 @@
           "fallStartY": -3.128605,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -733,9 +709,9 @@
     {
       "tick": 1,
       "time": 0.05,
-      "nextId": 390,
-      "state": "516ebcc6",
-      "events": "3bc625b4",
+      "nextId": 391,
+      "state": "a2febb48",
+      "events": "2b21e03b",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -750,15 +726,13 @@
           "companionUpgrades": {},
           "copper": 80,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -769,7 +743,6 @@
               "itemId": "baked_bread"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -783,15 +756,13 @@
           "companionUpgrades": {},
           "copper": 70,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -802,7 +773,6 @@
               "itemId": "wolf_fang"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -820,7 +790,7 @@
           "fallStartY": -3.129532,
           "fiveSecondRule": 99.05,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -867,7 +837,7 @@
           "fallStartY": 1.465152,
           "fiveSecondRule": 99.05,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -911,8 +881,8 @@
     {
       "tick": 1,
       "time": 0.05,
-      "nextId": 390,
-      "state": "516ebcc6",
+      "nextId": 391,
+      "state": "a2febb48",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -928,15 +898,13 @@
           "companionUpgrades": {},
           "copper": 80,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -947,7 +915,6 @@
               "itemId": "baked_bread"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -961,15 +928,13 @@
           "companionUpgrades": {},
           "copper": 70,
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -980,7 +945,6 @@
               "itemId": "wolf_fang"
             }
           ],
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -998,7 +962,7 @@
           "fallStartY": -3.129532,
           "fiveSecondRule": 99.05,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1045,7 +1009,7 @@
           "fallStartY": 1.465152,
           "fiveSecondRule": 99.05,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
