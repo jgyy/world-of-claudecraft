@@ -15,8 +15,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 389,
-      "state": "7d6c40b1",
+      "nextId": 390,
+      "state": "969c1dc9",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -26,23 +26,19 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -60,7 +56,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -103,9 +99,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 389,
-      "state": "07365e58",
-      "events": "8eb40339",
+      "nextId": 390,
+      "state": "fbb7708c",
+      "events": "d8fe6d87",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -114,24 +110,20 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "lifetimeXp": 27600,
-          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_wolves",
@@ -161,7 +153,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 50000,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",
@@ -204,9 +196,9 @@
     {
       "tick": 8,
       "time": 0.4,
-      "nextId": 397,
-      "state": "f4a51a16",
-      "events": "c5ae556e",
+      "nextId": 398,
+      "state": "2b85e8a4",
+      "events": "68debff8",
       "rng": {
         "draws": 32,
         "digest": "4d504aff"
@@ -215,7 +207,6 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -226,17 +217,14 @@
             "kills": 8,
             "questProgress": 8
           },
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "lifetimeXp": 27600,
-          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_wolves",
@@ -266,7 +254,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99.4,
           "hp": 50000,
-          "id": 388,
+          "id": 389,
           "inCombat": true,
           "kind": "player",
           "level": 10,
@@ -310,9 +298,9 @@
     {
       "tick": 8,
       "time": 0.4,
-      "nextId": 397,
-      "state": "5e378891",
-      "events": "cbdf36a3",
+      "nextId": 398,
+      "state": "3430e915",
+      "events": "d91c55b7",
       "rng": {
         "draws": 32,
         "digest": "4d504aff"
@@ -321,7 +309,6 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -335,17 +322,14 @@
             "questsCompleted": 1,
             "xpGained": 250
           },
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "lifetimeXp": 27850,
-          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_wolves"
           ],
@@ -367,7 +351,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99.4,
           "hp": 50000,
-          "id": 388,
+          "id": 389,
           "inCombat": true,
           "kind": "player",
           "level": 10,
@@ -411,8 +395,8 @@
     {
       "tick": 10,
       "time": 0.5,
-      "nextId": 397,
-      "state": "95646b9d",
+      "nextId": 398,
+      "state": "d0facdc1",
       "events": "741638a5",
       "rng": {
         "draws": 32,
@@ -422,7 +406,6 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -436,17 +419,14 @@
             "questsCompleted": 1,
             "xpGained": 250
           },
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
           "lifetimeXp": 27850,
-          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_wolves"
           ],
@@ -468,7 +448,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99.5,
           "hp": 50000,
-          "id": 388,
+          "id": 389,
           "inCombat": true,
           "kind": "player",
           "level": 10,

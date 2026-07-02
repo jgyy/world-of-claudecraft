@@ -14,7 +14,7 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 388,
+      "nextId": 389,
       "state": "5bc471b0",
       "events": "741638a5",
       "rng": {
@@ -28,9 +28,9 @@
     {
       "tick": 20,
       "time": 1,
-      "nextId": 390,
-      "state": "cfab9a1e",
-      "events": "79b92366",
+      "nextId": 391,
+      "state": "b58e13b2",
+      "events": "4190db19",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -39,9 +39,9 @@
     {
       "tick": 40,
       "time": 2,
-      "nextId": 390,
-      "state": "d252b9aa",
-      "events": "f3792524",
+      "nextId": 391,
+      "state": "c9094722",
+      "events": "fb9f1bfd",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -50,9 +50,9 @@
     {
       "tick": 60,
       "time": 3,
-      "nextId": 390,
-      "state": "ebdc642e",
-      "events": "71179e5e",
+      "nextId": 391,
+      "state": "46fbb90e",
+      "events": "6e4acb7f",
       "rng": {
         "draws": 71,
         "digest": "6619b0ad"
@@ -61,9 +61,9 @@
     {
       "tick": 61,
       "time": 3.05,
-      "nextId": 390,
-      "state": "ffbd9948",
-      "events": "31c6a959",
+      "nextId": 391,
+      "state": "d36092d8",
+      "events": "e4d70525",
       "rng": {
         "draws": 78,
         "digest": "d52f266d"
@@ -72,23 +72,19 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -96,23 +92,19 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -130,7 +122,7 @@
           "fallStartY": 2.242568,
           "fiveSecondRule": 102.05,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -177,7 +169,7 @@
           "fallStartY": 2.139867,
           "fiveSecondRule": 102.05,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -221,9 +213,9 @@
     {
       "tick": 61,
       "time": 3.05,
-      "nextId": 390,
-      "state": "e1546c92",
-      "events": "a689da22",
+      "nextId": 391,
+      "state": "8eedfd2c",
+      "events": "519c1e15",
       "rng": {
         "draws": 78,
         "digest": "d52f266d"
@@ -232,23 +224,19 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -256,23 +244,19 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -290,7 +274,7 @@
           "fallStartY": 2.242568,
           "fiveSecondRule": 102.05,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -337,7 +321,7 @@
           "fallStartY": 2.139867,
           "fiveSecondRule": 102.05,
           "hp": 1,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -381,8 +365,8 @@
     {
       "tick": 80,
       "time": 4,
-      "nextId": 390,
-      "state": "283d6b66",
+      "nextId": 391,
+      "state": "1c527180",
       "events": "741638a5",
       "rng": {
         "draws": 150,
@@ -392,8 +376,8 @@
     {
       "tick": 100,
       "time": 5,
-      "nextId": 390,
-      "state": "4580029a",
+      "nextId": 391,
+      "state": "13a86464",
       "events": "741638a5",
       "rng": {
         "draws": 262,
@@ -403,8 +387,8 @@
     {
       "tick": 101,
       "time": 5.05,
-      "nextId": 390,
-      "state": "1a9efdc4",
+      "nextId": 391,
+      "state": "453b4ce2",
       "events": "741638a5",
       "rng": {
         "draws": 263,
@@ -414,23 +398,19 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -438,23 +418,19 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -472,7 +448,7 @@
           "fallStartY": 2.242568,
           "fiveSecondRule": 104.05,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -519,7 +495,7 @@
           "fallStartY": 2.139867,
           "fiveSecondRule": 104.05,
           "hp": 7,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
