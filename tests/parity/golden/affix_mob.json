@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "969c1dc9",
+      "state": "8f2660ee",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -32,6 +32,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -39,6 +40,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -100,7 +103,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 392,
-      "state": "26a0eb03",
+      "state": "35231106",
       "events": "36e55fc9",
       "rng": {
         "draws": 14,
@@ -111,7 +114,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 392,
-      "state": "fbc901e3",
+      "state": "592414a6",
       "events": "8e795b72",
       "rng": {
         "draws": 28,
@@ -122,7 +125,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 392,
-      "state": "5cd4b5e9",
+      "state": "75335e10",
       "events": "93c017e2",
       "rng": {
         "draws": 57,
@@ -141,6 +144,7 @@
             "damageDealt": 200,
             "damageTaken": 194
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -148,7 +152,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 54100,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -345,7 +351,7 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 392,
-      "state": "7045abae",
+      "state": "c8b07dbd",
       "events": "741638a5",
       "rng": {
         "draws": 71,
@@ -364,6 +370,7 @@
             "damageDealt": 200,
             "damageTaken": 194
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -371,7 +378,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 54100,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

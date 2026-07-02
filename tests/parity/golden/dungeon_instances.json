@@ -31,7 +31,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 405,
-      "state": "c07ed4a9",
+      "state": "3ec1b8a5",
       "events": "3b2339dc",
       "rng": {
         "draws": 35,
@@ -46,6 +46,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -53,6 +54,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -65,6 +68,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -72,6 +76,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -789,7 +795,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 405,
-      "state": "d017bf0f",
+      "state": "f16102d3",
       "events": "1ebf3fdc",
       "rng": {
         "draws": 49,
@@ -807,6 +813,7 @@
             "damageTaken": 110624,
             "deaths": 1
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -814,6 +821,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -826,6 +835,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -833,6 +843,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1529,7 +1541,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 405,
-      "state": "b7d091f1",
+      "state": "b8df6af7",
       "events": "73ee09ee",
       "rng": {
         "draws": 49,
@@ -1540,7 +1552,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 405,
-      "state": "c84e8ad3",
+      "state": "aca677a9",
       "events": "741638a5",
       "rng": {
         "draws": 49,
@@ -1551,7 +1563,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 405,
-      "state": "f4a57241",
+      "state": "44d197c7",
       "events": "741638a5",
       "rng": {
         "draws": 49,
@@ -1562,7 +1574,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 405,
-      "state": "9c493d5c",
+      "state": "f4c3441e",
       "events": "741638a5",
       "rng": {
         "draws": 49,
@@ -1573,7 +1585,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 405,
-      "state": "50d2c03c",
+      "state": "e0b4a37e",
       "events": "741638a5",
       "rng": {
         "draws": 49,
@@ -1591,6 +1603,7 @@
             "damageTaken": 110624,
             "deaths": 1
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -1598,6 +1611,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1613,6 +1628,7 @@
             "damageTaken": 110624,
             "deaths": 1
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -1620,6 +1636,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1730,7 +1748,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 405,
-      "state": "50d2c03c",
+      "state": "e0b4a37e",
       "events": "741638a5",
       "rng": {
         "draws": 49,
@@ -1748,6 +1766,7 @@
             "damageTaken": 110624,
             "deaths": 1
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -1755,6 +1774,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1770,6 +1791,7 @@
             "damageTaken": 110624,
             "deaths": 1
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -1777,6 +1799,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

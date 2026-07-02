@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "c2464a3c",
+      "state": "7301c61b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -31,6 +31,7 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -38,6 +39,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -101,7 +104,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 391,
-      "state": "caa96f4b",
+      "state": "a44385e6",
       "events": "046941dc",
       "rng": {
         "draws": 9,
@@ -112,7 +115,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 391,
-      "state": "33c6d348",
+      "state": "a55406d3",
       "events": "731af17e",
       "rng": {
         "draws": 15,
@@ -123,7 +126,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 391,
-      "state": "ea2c90af",
+      "state": "8b1af27a",
       "events": "f2487ec0",
       "rng": {
         "draws": 90,
@@ -134,7 +137,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 391,
-      "state": "c50fcbfb",
+      "state": "775a6796",
       "events": "741638a5",
       "rng": {
         "draws": 143,
@@ -153,6 +156,7 @@
             "damageDealt": 79,
             "damageTaken": 9
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -160,7 +164,9 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

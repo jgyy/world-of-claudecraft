@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "969c1dc9",
+      "state": "8f2660ee",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -32,6 +32,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -39,6 +40,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -100,7 +103,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "fbb7708c",
+      "state": "3d84e88b",
       "events": "d8fe6d87",
       "rng": {
         "draws": 0,
@@ -116,6 +119,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -123,7 +127,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_wolves",
@@ -197,7 +203,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 398,
-      "state": "2b85e8a4",
+      "state": "3b1d261b",
       "events": "68debff8",
       "rng": {
         "draws": 32,
@@ -217,6 +223,7 @@
             "kills": 8,
             "questProgress": 8
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -224,7 +231,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 27600,
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_wolves",
@@ -299,7 +308,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 398,
-      "state": "3430e915",
+      "state": "0da7b49e",
       "events": "d91c55b7",
       "rng": {
         "draws": 32,
@@ -322,6 +331,7 @@
             "questsCompleted": 1,
             "xpGained": 250
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -329,7 +339,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 27850,
+          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_wolves"
           ],
@@ -396,7 +408,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 398,
-      "state": "d0facdc1",
+      "state": "fe9ec1ea",
       "events": "741638a5",
       "rng": {
         "draws": 32,
@@ -419,6 +431,7 @@
             "questsCompleted": 1,
             "xpGained": 250
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -426,7 +439,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 27850,
+          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_wolves"
           ],

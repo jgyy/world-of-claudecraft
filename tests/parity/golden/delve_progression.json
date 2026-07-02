@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "969c1dc9",
+      "state": "8f2660ee",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -32,6 +32,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -39,6 +40,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -100,7 +103,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 411,
-      "state": "33a79507",
+      "state": "ad6fe83a",
       "events": "212ee2d3",
       "rng": {
         "draws": 1,
@@ -111,7 +114,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 411,
-      "state": "fd4e3c85",
+      "state": "81744dbc",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -127,6 +130,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -134,7 +138,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 11200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -194,7 +200,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 411,
-      "state": "5380f2d5",
+      "state": "90ac7536",
       "events": "62f98853",
       "rng": {
         "draws": 3,
@@ -213,6 +219,7 @@
           },
           "copper": 100000,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {
             "date": "2099-06-25"
@@ -224,7 +231,9 @@
             "legs": "reliquary_legs",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 11200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -284,7 +293,7 @@
       "tick": 9,
       "time": 0.45,
       "nextId": 411,
-      "state": "1a5926bf",
+      "state": "7840ddfc",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -303,6 +312,7 @@
           },
           "copper": 100000,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {
             "date": "2099-06-25"
@@ -314,7 +324,9 @@
             "legs": "reliquary_legs",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 11200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

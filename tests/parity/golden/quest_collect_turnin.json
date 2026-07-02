@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "6c31f65c",
+      "state": "471dad01",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -31,6 +31,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -38,6 +39,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -99,7 +102,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "ef15922c",
+      "state": "985c628f",
       "events": "714d6ddf",
       "rng": {
         "draws": 0,
@@ -114,6 +117,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -121,6 +125,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_boars",
@@ -194,7 +200,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "8ae32411",
+      "state": "4823011c",
       "events": "f5ba3286",
       "rng": {
         "draws": 0,
@@ -211,6 +217,7 @@
           "counters": {
             "questProgress": 5
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -218,12 +225,14 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 5,
               "itemId": "boar_hide"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_boars",
@@ -297,7 +306,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "705011c0",
+      "state": "d7fba6e7",
       "events": "1858db2d",
       "rng": {
         "draws": 0,
@@ -314,6 +323,7 @@
           "counters": {
             "questProgress": 5
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -321,12 +331,14 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 4,
               "itemId": "boar_hide"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_boars",
@@ -400,7 +412,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "d214c31a",
+      "state": "a34afec9",
       "events": "3b371ba6",
       "rng": {
         "draws": 0,
@@ -417,6 +429,7 @@
           "counters": {
             "questProgress": 6
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -424,12 +437,14 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 5,
               "itemId": "boar_hide"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "questLog": [
             [
               "q_boars",
@@ -503,7 +518,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "b96620f1",
+      "state": "118811f8",
       "events": "5c5c3b4e",
       "rng": {
         "draws": 0,
@@ -523,6 +538,7 @@
             "questsCompleted": 1,
             "xpGained": 350
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -530,7 +546,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 350,
+          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_boars"
           ],
@@ -596,7 +614,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 390,
-      "state": "0dca38bb",
+      "state": "f3242dde",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -616,6 +634,7 @@
             "questsCompleted": 1,
             "xpGained": 350
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -623,7 +642,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 350,
+          "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_boars"
           ],

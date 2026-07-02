@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "969c1dc9",
+      "state": "8f2660ee",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -33,6 +33,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -40,6 +41,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -101,7 +104,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 396,
-      "state": "75608149",
+      "state": "01d03eaa",
       "events": "cbad9b0e",
       "rng": {
         "draws": 54,
@@ -112,7 +115,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 396,
-      "state": "236ed96e",
+      "state": "4e3e7f3f",
       "events": "0155f151",
       "rng": {
         "draws": 95,
@@ -123,7 +126,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 396,
-      "state": "2414066d",
+      "state": "e35bf4ee",
       "events": "cc11abbc",
       "rng": {
         "draws": 224,
@@ -134,7 +137,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 396,
-      "state": "68a6b5f3",
+      "state": "2ddd5ef8",
       "events": "741638a5",
       "rng": {
         "draws": 224,
@@ -152,6 +155,7 @@
           "counters": {
             "damageTaken": 1497
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -159,7 +163,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 92800,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -556,7 +562,7 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 396,
-      "state": "029fb848",
+      "state": "66daf1ad",
       "events": "741638a5",
       "rng": {
         "draws": 244,
@@ -574,6 +580,7 @@
           "counters": {
             "damageTaken": 1497
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -581,7 +588,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 92800,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
