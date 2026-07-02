@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "784d206d",
+      "state": "36c977d3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -26,12 +26,14 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -39,6 +41,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -101,7 +105,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 390,
-      "state": "5d3cfa77",
+      "state": "92f47497",
       "events": "6cfe2d3c",
       "rng": {
         "draws": 0,
@@ -112,7 +116,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 390,
-      "state": "b5eb5749",
+      "state": "06bb60f9",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -123,7 +127,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "7dd0e1b2",
+      "state": "0895acee",
       "events": "741638a5",
       "rng": {
         "draws": 100,
@@ -134,7 +138,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 390,
-      "state": "85b72daf",
+      "state": "45174c0f",
       "events": "741638a5",
       "rng": {
         "draws": 186,
@@ -145,7 +149,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 391,
-      "state": "e6539597",
+      "state": "6e587177",
       "events": "cdb555f8",
       "rng": {
         "draws": 271,
@@ -156,7 +160,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 392,
-      "state": "277eda5f",
+      "state": "b06ef66d",
       "events": "2c9cc785",
       "rng": {
         "draws": 366,
@@ -167,7 +171,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 392,
-      "state": "56fcb106",
+      "state": "34ad6f8c",
       "events": "ab979bb9",
       "rng": {
         "draws": 495,
@@ -178,7 +182,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 392,
-      "state": "1f298c34",
+      "state": "c388c928",
       "events": "14cbbc7b",
       "rng": {
         "draws": 636,
@@ -189,7 +193,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 392,
-      "state": "ce667783",
+      "state": "046f20c5",
       "events": "4960e740",
       "rng": {
         "draws": 774,
@@ -200,7 +204,7 @@
       "tick": 200,
       "time": 10,
       "nextId": 392,
-      "state": "6a131835",
+      "state": "1d4d61c7",
       "events": "461f49ea",
       "rng": {
         "draws": 943,
@@ -211,7 +215,7 @@
       "tick": 220,
       "time": 11,
       "nextId": 392,
-      "state": "a67cd1b6",
+      "state": "1b67f73c",
       "events": "4960e740",
       "rng": {
         "draws": 1021,
@@ -222,7 +226,7 @@
       "tick": 220,
       "time": 11,
       "nextId": 392,
-      "state": "17511229",
+      "state": "fafacb2f",
       "events": "741638a5",
       "rng": {
         "draws": 1021,
@@ -232,6 +236,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -240,6 +245,7 @@
           "counters": {
             "damageDealt": 22
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -247,7 +253,9 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 44000,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -422,7 +430,7 @@
       "tick": 224,
       "time": 11.2,
       "nextId": 392,
-      "state": "b68e742e",
+      "state": "82571ab4",
       "events": "0c74a289",
       "rng": {
         "draws": 1050,
@@ -432,6 +440,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -440,6 +449,7 @@
           "counters": {
             "damageDealt": 22
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -447,7 +457,9 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 44000,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

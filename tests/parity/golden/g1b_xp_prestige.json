@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "969c1dc9",
+      "state": "ba20cf23",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -27,12 +27,14 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -40,6 +42,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -101,7 +105,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 390,
-      "state": "a983821d",
+      "state": "c919671b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -112,7 +116,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 390,
-      "state": "40a57831",
+      "state": "37a59ac3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -123,7 +127,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "9a530493",
+      "state": "d5f39ffd",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -134,7 +138,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "9a530493",
+      "state": "d5f39ffd",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -144,12 +148,14 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -157,6 +163,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "restedXp": 0.125,
           "talents": {
             "choices": {},
@@ -219,7 +227,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "7f7272ec",
+      "state": "2472bf46",
       "events": "b3a99652",
       "rng": {
         "draws": 75,
@@ -229,6 +237,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -237,6 +246,7 @@
           "counters": {
             "xpGained": 160
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -244,7 +254,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 160,
+          "nodeHarvestReadyAt": {},
           "restedXp": 920,
           "talents": {
             "choices": {},
@@ -308,7 +320,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "a885a39d",
+      "state": "956a79bb",
       "events": "d3db9c37",
       "rng": {
         "draws": 75,
@@ -318,6 +330,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -327,6 +340,7 @@
             "levelUps": 1,
             "xpGained": 610
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -334,7 +348,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 610,
+          "nodeHarvestReadyAt": {},
           "restedXp": 920,
           "talents": {
             "choices": {},
@@ -398,7 +414,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "f77c8a71",
+      "state": "a7485717",
       "events": "47bdc3b3",
       "rng": {
         "draws": 75,
@@ -408,6 +424,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -417,6 +434,7 @@
             "levelUps": 1,
             "xpGained": 23810
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -424,7 +442,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 190400,
+          "nodeHarvestReadyAt": {},
           "restedXp": 920,
           "talents": {
             "choices": {},
@@ -488,7 +508,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "b7ae86da",
+      "state": "dc6bc00c",
       "events": "5a6d2399",
       "rng": {
         "draws": 75,
@@ -498,6 +518,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -507,6 +528,7 @@
             "levelUps": 1,
             "xpGained": 23810
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -514,7 +536,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 190400,
+          "nodeHarvestReadyAt": {},
           "prestigeRank": 1,
           "restedXp": 920,
           "talents": {
@@ -578,7 +602,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "b7ae86da",
+      "state": "dc6bc00c",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -588,6 +612,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -597,6 +622,7 @@
             "levelUps": 1,
             "xpGained": 23810
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -604,7 +630,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 190400,
+          "nodeHarvestReadyAt": {},
           "prestigeRank": 1,
           "restedXp": 920,
           "talents": {
@@ -668,7 +696,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 390,
-      "state": "b7ae86da",
+      "state": "dc6bc00c",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -678,6 +706,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -687,6 +716,7 @@
             "levelUps": 1,
             "xpGained": 23810
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -694,7 +724,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 190400,
+          "nodeHarvestReadyAt": {},
           "prestigeRank": 1,
           "restedXp": 920,
           "talents": {

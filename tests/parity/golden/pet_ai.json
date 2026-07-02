@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "f2893d06",
+      "state": "4f93e846",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -27,12 +27,14 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -40,6 +42,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -103,7 +107,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 394,
-      "state": "987cf043",
+      "state": "94a581ff",
       "events": "11a8de12",
       "rng": {
         "draws": 14,
@@ -114,7 +118,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 394,
-      "state": "5423739a",
+      "state": "363b158e",
       "events": "741638a5",
       "rng": {
         "draws": 14,
@@ -125,7 +129,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 394,
-      "state": "2415fc54",
+      "state": "ff750bb8",
       "events": "78032d7d",
       "rng": {
         "draws": 107,
@@ -136,7 +140,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 394,
-      "state": "549e1346",
+      "state": "d9e5a8ea",
       "events": "741638a5",
       "rng": {
         "draws": 186,
@@ -147,7 +151,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 394,
-      "state": "b6cf6270",
+      "state": "fae32da4",
       "events": "7ffe1025",
       "rng": {
         "draws": 307,
@@ -158,7 +162,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 394,
-      "state": "162be455",
+      "state": "5de07609",
       "events": "741638a5",
       "rng": {
         "draws": 418,
@@ -169,7 +173,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 394,
-      "state": "c0794cb1",
+      "state": "2981e195",
       "events": "741638a5",
       "rng": {
         "draws": 418,
@@ -179,6 +183,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -187,6 +192,7 @@
           "counters": {
             "damageDealt": 26
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -194,7 +200,9 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 44000,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -472,7 +480,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 394,
-      "state": "6fde9258",
+      "state": "df21e86c",
       "events": "741638a5",
       "rng": {
         "draws": 518,
@@ -483,7 +491,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 394,
-      "state": "1c414dfc",
+      "state": "a0568020",
       "events": "741638a5",
       "rng": {
         "draws": 637,
@@ -494,7 +502,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 394,
-      "state": "520e6cf6",
+      "state": "77c7dc1a",
       "events": "741638a5",
       "rng": {
         "draws": 777,
@@ -505,7 +513,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 394,
-      "state": "520e6cf6",
+      "state": "77c7dc1a",
       "events": "741638a5",
       "rng": {
         "draws": 777,
@@ -515,6 +523,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -523,6 +532,7 @@
           "counters": {
             "damageDealt": 26
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -530,7 +540,9 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 44000,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
