@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 393,
-      "state": "712d20e2",
+      "state": "1395486d",
       "events": "09ba0b28",
       "rng": {
         "draws": 1,
@@ -48,6 +48,7 @@
           "counters": {
             "lootCopper": 33
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -55,12 +56,14 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
               "itemId": "worn_sword"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -76,6 +79,7 @@
           "counters": {
             "lootCopper": 33
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -83,6 +87,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -98,6 +104,7 @@
           "counters": {
             "lootCopper": 34
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -105,6 +112,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -325,7 +334,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 393,
-      "state": "da132dd6",
+      "state": "f1c92161",
       "events": "b2f0df99",
       "rng": {
         "draws": 3,
@@ -343,6 +352,7 @@
           "counters": {
             "lootCopper": 33
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -350,6 +360,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -360,6 +371,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -375,6 +387,7 @@
           "counters": {
             "lootCopper": 33
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -382,6 +395,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -397,6 +412,7 @@
           "counters": {
             "lootCopper": 34
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -404,6 +420,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -630,7 +648,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 393,
-      "state": "0e706cda",
+      "state": "74583b63",
       "events": "0ba3c41a",
       "rng": {
         "draws": 3,
@@ -648,6 +666,7 @@
           "counters": {
             "lootCopper": 33
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -655,6 +674,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -665,6 +685,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -680,6 +701,7 @@
           "counters": {
             "lootCopper": 33
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -687,6 +709,7 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -697,6 +720,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -712,6 +736,7 @@
           "counters": {
             "lootCopper": 34
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -719,6 +744,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -928,7 +955,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 393,
-      "state": "e10c29af",
+      "state": "9e52c1a4",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -946,6 +973,7 @@
           "counters": {
             "lootCopper": 33
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -953,6 +981,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -963,6 +992,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -978,6 +1008,7 @@
           "counters": {
             "lootCopper": 33
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -985,6 +1016,7 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 1,
@@ -995,6 +1027,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1010,6 +1043,7 @@
           "counters": {
             "lootCopper": 34
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -1017,6 +1051,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

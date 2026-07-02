@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 393,
-      "state": "2ba3dbd6",
+      "state": "2c1886ab",
       "events": "ff25f1ce",
       "rng": {
         "draws": 3,
@@ -47,6 +47,7 @@
           "counters": {
             "damageDealt": 30
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -54,6 +55,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -68,6 +71,7 @@
           "counters": {
             "damageDealt": 30
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -75,6 +79,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -89,6 +95,7 @@
           "counters": {
             "damageDealt": 30
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -96,6 +103,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -329,7 +338,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 393,
-      "state": "d7cda435",
+      "state": "4da3b5d0",
       "events": "eb7940e0",
       "rng": {
         "draws": 6,
@@ -346,6 +355,7 @@
           "counters": {
             "damageDealt": 60
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -353,6 +363,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -367,6 +379,7 @@
           "counters": {
             "damageDealt": 60
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -374,6 +387,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -388,6 +403,7 @@
           "counters": {
             "damageDealt": 60
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -395,6 +411,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -628,7 +646,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 393,
-      "state": "f3c76b55",
+      "state": "20c24386",
       "events": "eb7940e0",
       "rng": {
         "draws": 9,
@@ -645,6 +663,7 @@
           "counters": {
             "damageDealt": 90
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -652,6 +671,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -666,6 +687,7 @@
           "counters": {
             "damageDealt": 90
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -673,6 +695,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -687,6 +711,7 @@
           "counters": {
             "damageDealt": 90
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -694,6 +719,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -927,7 +954,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 393,
-      "state": "347cf212",
+      "state": "fba3cb91",
       "events": "eb7940e0",
       "rng": {
         "draws": 12,
@@ -944,6 +971,7 @@
           "counters": {
             "damageDealt": 120
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -951,6 +979,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -965,6 +995,7 @@
           "counters": {
             "damageDealt": 120
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -972,6 +1003,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -986,6 +1019,7 @@
           "counters": {
             "damageDealt": 120
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -993,6 +1027,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1226,7 +1262,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 393,
-      "state": "2c29dba0",
+      "state": "eaca91ab",
       "events": "649582e6",
       "rng": {
         "draws": 15,
@@ -1237,7 +1273,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 393,
-      "state": "57511087",
+      "state": "1878275a",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -1248,7 +1284,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 393,
-      "state": "57511087",
+      "state": "1878275a",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -1266,6 +1302,7 @@
             "damageDealt": 120,
             "damageTaken": 13
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -1273,6 +1310,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1287,6 +1326,7 @@
           "counters": {
             "damageDealt": 120
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -1294,6 +1334,8 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1308,6 +1350,7 @@
           "counters": {
             "damageDealt": 120
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -1315,6 +1358,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

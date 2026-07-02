@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "969c1dc9",
+      "state": "8f2660ee",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -32,6 +32,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -39,6 +40,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -100,7 +103,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 399,
-      "state": "9673a157",
+      "state": "fb6b258a",
       "events": "6d1becaa",
       "rng": {
         "draws": 4,
@@ -111,7 +114,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 399,
-      "state": "5e98eafa",
+      "state": "9df7fafd",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -122,7 +125,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 399,
-      "state": "8ed34f8a",
+      "state": "9f0c550d",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -133,7 +136,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 399,
-      "state": "501e899b",
+      "state": "ce82921e",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -144,7 +147,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 399,
-      "state": "7773f774",
+      "state": "b7e12293",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -155,7 +158,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 399,
-      "state": "f7330c61",
+      "state": "7f078158",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -166,7 +169,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 399,
-      "state": "4f31ac2e",
+      "state": "c394fbf1",
       "events": "6a16bd54",
       "rng": {
         "draws": 6,
@@ -177,7 +180,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 399,
-      "state": "296419de",
+      "state": "59a704e1",
       "events": "741638a5",
       "rng": {
         "draws": 6,
@@ -188,7 +191,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 399,
-      "state": "296419de",
+      "state": "59a704e1",
       "events": "741638a5",
       "rng": {
         "draws": 6,
@@ -206,6 +209,7 @@
             "companion_tessa": 2
           },
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -213,7 +217,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 11200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -355,7 +361,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 399,
-      "state": "061c2057",
+      "state": "38525a8a",
       "events": "b98b9587",
       "rng": {
         "draws": 8,
@@ -373,6 +379,7 @@
             "companion_tessa": 2
           },
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -380,7 +387,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 11200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -536,7 +545,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 399,
-      "state": "b29968f3",
+      "state": "27261826",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -547,7 +556,7 @@
       "tick": 49,
       "time": 2.45,
       "nextId": 399,
-      "state": "16e766b8",
+      "state": "cb934427",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -565,6 +574,7 @@
             "companion_tessa": 2
           },
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -572,7 +582,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 11200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -673,7 +685,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 399,
-      "state": "08c140c7",
+      "state": "21817dfa",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -684,7 +696,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 399,
-      "state": "655eed96",
+      "state": "a84e8849",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -702,6 +714,7 @@
             "companion_tessa": 2
           },
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -709,7 +722,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 11200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -811,7 +826,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 399,
-      "state": "655eed96",
+      "state": "a84e8849",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -829,6 +844,7 @@
             "companion_tessa": 2
           },
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -836,7 +852,9 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 11200,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

@@ -31,7 +31,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 393,
-      "state": "07bfbf6d",
+      "state": "baaad159",
       "events": "0e7699f8",
       "rng": {
         "draws": 0,
@@ -42,7 +42,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 393,
-      "state": "1f5321cb",
+      "state": "629f3b67",
       "events": "536fe27e",
       "rng": {
         "draws": 28,
@@ -53,7 +53,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 393,
-      "state": "c4044171",
+      "state": "2cab9e2d",
       "events": "09b268e6",
       "rng": {
         "draws": 138,
@@ -64,7 +64,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 393,
-      "state": "ea07df6f",
+      "state": "53bcdffb",
       "events": "df43dd26",
       "rng": {
         "draws": 294,
@@ -75,7 +75,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 393,
-      "state": "99043f2c",
+      "state": "939923b8",
       "events": "7c1828ad",
       "rng": {
         "draws": 300,
@@ -92,6 +92,7 @@
           "counters": {
             "damageDealt": 50
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -106,6 +107,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -125,6 +128,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -139,6 +143,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -160,6 +166,7 @@
           "counters": {
             "damageTaken": 50
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -174,6 +181,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -193,6 +202,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 392,
@@ -207,6 +217,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -422,7 +434,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 393,
-      "state": "d2b7dcee",
+      "state": "6fa6e896",
       "events": "b5892330",
       "rng": {
         "draws": 300,
@@ -439,6 +451,7 @@
           "counters": {
             "damageDealt": 100
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -453,6 +466,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -472,6 +487,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -486,6 +502,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -507,6 +525,7 @@
           "counters": {
             "damageTaken": 100
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -521,6 +540,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -540,6 +561,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 392,
@@ -554,6 +576,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -767,7 +791,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 393,
-      "state": "92f6a75e",
+      "state": "a524dd42",
       "events": "291a7b31",
       "rng": {
         "draws": 300,
@@ -785,6 +809,7 @@
             "damageDealt": 100,
             "kills": 1
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -799,6 +824,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -818,6 +845,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -832,6 +860,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -854,6 +884,7 @@
             "damageTaken": 100,
             "deaths": 1
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -868,6 +899,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -887,6 +920,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 392,
@@ -901,6 +935,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -1114,7 +1150,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 393,
-      "state": "2f827670",
+      "state": "93dbce5c",
       "events": "741638a5",
       "rng": {
         "draws": 429,
@@ -1125,7 +1161,7 @@
       "tick": 142,
       "time": 7.1,
       "nextId": 393,
-      "state": "2f59c65c",
+      "state": "3f61b528",
       "events": "741638a5",
       "rng": {
         "draws": 524,
@@ -1143,6 +1179,7 @@
             "damageDealt": 100,
             "kills": 1
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -1157,6 +1194,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -1176,6 +1215,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 390,
@@ -1190,6 +1230,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -1212,6 +1254,7 @@
             "damageTaken": 100,
             "deaths": 1
           },
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 391,
@@ -1226,6 +1269,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {
@@ -1245,6 +1290,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 392,
@@ -1259,6 +1305,8 @@
               "ranks": {}
             }
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {

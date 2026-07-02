@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "f2893d06",
+      "state": "e0e99f13",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -31,6 +31,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -38,6 +39,8 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -101,7 +104,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 393,
-      "state": "ad95ed51",
+      "state": "c38bc7f4",
       "events": "a23edd09",
       "rng": {
         "draws": 6,
@@ -112,7 +115,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 393,
-      "state": "01e5851d",
+      "state": "416dc810",
       "events": "741638a5",
       "rng": {
         "draws": 6,
@@ -123,7 +126,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 393,
-      "state": "7ed7ad53",
+      "state": "1450939a",
       "events": "16b6719a",
       "rng": {
         "draws": 96,
@@ -134,7 +137,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 393,
-      "state": "5c8b59cf",
+      "state": "41a90be6",
       "events": "741638a5",
       "rng": {
         "draws": 195,
@@ -145,7 +148,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 393,
-      "state": "7fda187d",
+      "state": "39fd1230",
       "events": "7c92ca7b",
       "rng": {
         "draws": 294,
@@ -156,7 +159,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 393,
-      "state": "668f895d",
+      "state": "2898bc50",
       "events": "741638a5",
       "rng": {
         "draws": 398,
@@ -167,7 +170,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 393,
-      "state": "668f895d",
+      "state": "2898bc50",
       "events": "741638a5",
       "rng": {
         "draws": 398,
@@ -183,6 +186,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -190,7 +194,9 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
+          "gatheringProficiency": {},
           "lifetimeXp": 44000,
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}

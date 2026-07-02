@@ -35,7 +35,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "2b4c9d4a",
+      "state": "13ed061b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -51,6 +51,7 @@
           "companionUpgrades": {},
           "copper": 1000,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -58,6 +59,8 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -119,7 +122,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "25687814",
+      "state": "5374eddf",
       "events": "7bf95546",
       "rng": {
         "draws": 0,
@@ -135,6 +138,7 @@
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -142,6 +146,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 5,
@@ -156,6 +161,7 @@
               "itemId": "minor_healing_potion"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -217,7 +223,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "e27168f4",
+      "state": "e61e7fd9",
       "events": "f3f760b9",
       "rng": {
         "draws": 0,
@@ -233,6 +239,7 @@
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -241,6 +248,7 @@
             "helmet": "cryptbone_helm",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 5,
@@ -259,6 +267,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -320,7 +329,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "ad4e9bbc",
+      "state": "fbb82f61",
       "events": "458e51dd",
       "rng": {
         "draws": 0,
@@ -336,6 +345,7 @@
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -344,6 +354,7 @@
             "helmet": "roadwardens_helm",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 5,
@@ -362,6 +373,7 @@
               "itemId": "cryptbone_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -423,7 +435,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "e1b5c116",
+      "state": "5f58b10d",
       "events": "2490dbf8",
       "rng": {
         "draws": 0,
@@ -439,6 +451,7 @@
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -446,6 +459,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 5,
@@ -468,6 +482,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -529,7 +544,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "c2648e35",
+      "state": "627cec60",
       "events": "fed0e7d1",
       "rng": {
         "draws": 0,
@@ -545,6 +560,7 @@
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -552,6 +568,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 4,
@@ -574,6 +591,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -648,7 +666,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "8b4edb44",
+      "state": "f566a80b",
       "events": "70823a2c",
       "rng": {
         "draws": 0,
@@ -664,6 +682,7 @@
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -671,6 +690,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 4,
@@ -689,6 +709,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -763,7 +784,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "90fc65cd",
+      "state": "39504af8",
       "events": "41e1197e",
       "rng": {
         "draws": 0,
@@ -779,6 +800,7 @@
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -786,6 +808,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 4,
@@ -804,6 +827,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -890,7 +914,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "4e877751",
+      "state": "4d6d9b5c",
       "events": "059e38cc",
       "rng": {
         "draws": 0,
@@ -906,6 +930,7 @@
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -913,6 +938,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 4,
@@ -935,6 +961,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1021,7 +1048,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "6b853ea0",
+      "state": "1186b9a3",
       "events": "960bfa6c",
       "rng": {
         "draws": 0,
@@ -1037,6 +1064,7 @@
           "companionUpgrades": {},
           "copper": 714,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -1044,6 +1072,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 4,
@@ -1066,6 +1095,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1158,7 +1188,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "2d0515af",
+      "state": "c64e4f82",
       "events": "f32f2351",
       "rng": {
         "draws": 0,
@@ -1174,6 +1204,7 @@
           "companionUpgrades": {},
           "copper": 724,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -1181,6 +1212,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 4,
@@ -1199,6 +1231,7 @@
               "itemId": "roadwardens_helm"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1295,7 +1328,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "11f4bceb",
+      "state": "7f0d4612",
       "events": "a5f485e1",
       "rng": {
         "draws": 0,
@@ -1311,6 +1344,7 @@
           "companionUpgrades": {},
           "copper": 720,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -1318,6 +1352,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 4,
@@ -1340,6 +1375,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1436,7 +1472,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 390,
-      "state": "11f4bceb",
+      "state": "7f0d4612",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1452,6 +1488,7 @@
           "companionUpgrades": {},
           "copper": 720,
           "counters": {},
+          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
           "entityId": 389,
@@ -1459,6 +1496,7 @@
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
+          "gatheringProficiency": {},
           "inventory": [
             {
               "count": 4,
@@ -1481,6 +1519,7 @@
               "itemId": "wolf_fang"
             }
           ],
+          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
