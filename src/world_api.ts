@@ -9,7 +9,7 @@
 // keep resolving to THIS file, never the sibling directory.
 //
 // ---------------------------------------------------------------------------
-// FACET MAP: the 21 domain facets (each IWorld member assigned exactly once; 151
+// FACET MAP: the 21 domain facets (each IWorld member assigned exactly once; 156
 // total). One interface per file under ./world_api/; aux types travel with their
 // facet. The authoritative member-per-facet split is the W0c parity test.
 //
@@ -41,7 +41,7 @@
 //                                          ALL_DELTA_KEYS (25) + TERSE_TO_IWORLD mapping.
 //   tests/command_schema.test.ts   (W0b)  COMMAND_NAMES universe; ClientWorld send-set
 //                                          subset-of dispatch-set; DISPATCH_ONLY (7).
-//   tests/world_api_parity.test.ts (W0c)  IWORLD_MEMBERS (151) present + same-kind on
+//   tests/world_api_parity.test.ts (W0c)  IWORLD_MEMBERS (156) present + same-kind on
 //                                          Sim + ClientWorld; aggregate == disjoint
 //                                          union of the 21 facets.
 // ---------------------------------------------------------------------------
@@ -69,7 +69,11 @@ import type { IWorldTelemetry } from './world_api/telemetry';
 import type { IWorldTrade } from './world_api/trade';
 
 // --- pass-through sim re-exports: downstream imports these FROM world_api ---
-export type { GuildLeaderboardPage, LeaderboardPage } from './sim/leaderboard_page';
+export type {
+  DevLeaderboardPage,
+  GuildLeaderboardPage,
+  LeaderboardPage,
+} from './sim/leaderboard_page';
 export type { ArenaCombatant, ArenaFormat, ArenaStanding, OverheadEmoteId } from './sim/types';
 
 // --- facet aux-type + value re-exports (each travels with its facet file) ---
@@ -95,7 +99,11 @@ export type { RaidLockout } from './world_api/dungeons';
 export type { MarketInfo, MarketListingView } from './world_api/market';
 export type { PartyInfo, PartyMemberInfo } from './world_api/party';
 export type { CraftResultView, PlayerProfessionsView, RecipeDef } from './world_api/professions';
-export type { GuildLeaderboardEntry, LeaderboardEntry } from './world_api/progression_xp';
+export type {
+  DevLeaderboardEntry,
+  GuildLeaderboardEntry,
+  LeaderboardEntry,
+} from './world_api/progression_xp';
 export type {
   CharacterSearchResult,
   FriendInfo,
