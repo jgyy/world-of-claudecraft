@@ -22,7 +22,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "es_ES": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -37,7 +44,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "fr_FR": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -52,7 +66,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "fr_CA": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -67,7 +88,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "en_CA": [],
   "it_IT": [
@@ -83,7 +111,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "de_DE": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -98,7 +133,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "zh_CN": [],
   "zh_TW": [],
@@ -117,7 +159,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "ru_RU": [],
   "nl_NL": [
@@ -133,7 +182,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "pl_PL": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -148,7 +204,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "id_ID": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -163,7 +226,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "tr_TR": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -178,7 +248,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "sv_SE": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -193,7 +270,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "vi_VN": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -208,7 +292,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ],
   "da_DK": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -223,6 +314,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title"
+    "hudChrome.corpseHarvest.title",
+    "hudChrome.townFocus.budgetLabel",
+    "hudChrome.townFocus.decreaseAria",
+    "hudChrome.townFocus.hint",
+    "hudChrome.townFocus.increaseAria",
+    "hudChrome.townFocus.notInTownHint",
+    "hudChrome.townFocus.saveButton",
+    "hudChrome.townFocus.title"
   ]
 };
