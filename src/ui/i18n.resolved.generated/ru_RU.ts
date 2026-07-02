@@ -928,6 +928,18 @@ export const ru_RU: EnTranslations = {
         }
       }
     },
+    "crafting": {
+      "title": "Крафт",
+      "close": "Закрыть крафт",
+      "craft": "Создать",
+      "reagentsNeeded": "Требуется:",
+      "reagentLine": "{name} x{have}/{required}",
+      "empty": "Известных рецептов пока нет.",
+      "resultAria": "Создать {name}",
+      "craftedToast": "Создано: {name}",
+      "insufficientMaterials": "У вас недостаточно материалов.",
+      "unknownRecipe": "Такого рецепта не существует."
+    },
     "devBadge": {
       "title": "Разработчик",
       "tiers": {
@@ -6483,6 +6495,26 @@ export const ru_RU: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Моггер убит"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "Ремесло по душе",
+        "text": "Рано или поздно каждый ремесленник Иствуда выбирает одно ремесло своим призванием. Докажи себя одним делом, {playerName}, и объяви свой путь.",
+        "completion": "Твой путь избран; иди по нему с честью.",
+        "objectives": {
+          "0": {
+            "label": "Лесной волк убит"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "Искупление",
+        "text": "Чтобы оставить одно ремесло ради другого, ремесленник должен сперва искупить путь, которым не пошёл, {playerName}.",
+        "completion": "Искупление свершилось; перед тобой открыт новый путь.",
+        "objectives": {
+          "0": {
+            "label": "Лесной волк убит"
           }
         }
       },

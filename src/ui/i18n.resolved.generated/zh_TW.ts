@@ -928,6 +928,18 @@ export const zh_TW: EnTranslations = {
         }
       }
     },
+    "crafting": {
+      "title": "製作",
+      "close": "關閉製作",
+      "craft": "製作",
+      "reagentsNeeded": "需要:",
+      "reagentLine": "{name} x{have}/{required}",
+      "empty": "尚無已知配方。",
+      "resultAria": "製作{name}",
+      "craftedToast": "已製作:{name}",
+      "insufficientMaterials": "你沒有足夠的材料。",
+      "unknownRecipe": "該配方不存在。"
+    },
     "devBadge": {
       "title": "開發者",
       "tiers": {
@@ -6483,6 +6495,26 @@ export const zh_TW: EnTranslations = {
         "objectives": {
           "0": {
             "label": "擊敗莫格"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "屬於你自己的技藝",
+        "text": "東溪的每一位工匠最終都會選定一門屬於自己的技藝。用一件事證明自己吧，{playerName}，宣告你的道路。",
+        "completion": "你的道路已經選定；願你走得穩當。",
+        "objectives": {
+          "0": {
+            "label": "擊敗森林之狼"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "彌補",
+        "text": "若要放下一門技藝、轉投另一門，工匠必須先為放棄的道路做出彌補，{playerName}。",
+        "completion": "彌補已經完成；一條新的道路已向你敞開。",
+        "objectives": {
+          "0": {
+            "label": "擊敗森林之狼"
           }
         }
       },

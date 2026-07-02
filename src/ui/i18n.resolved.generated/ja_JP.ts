@@ -928,6 +928,18 @@ export const ja_JP: EnTranslations = {
         }
       }
     },
+    "crafting": {
+      "title": "製作",
+      "close": "製作を閉じる",
+      "craft": "製作",
+      "reagentsNeeded": "必要素材:",
+      "reagentLine": "{name} x{have}/{required}",
+      "empty": "既知のレシピはありません。",
+      "resultAria": "{name}を製作",
+      "craftedToast": "製作しました:{name}",
+      "insufficientMaterials": "材料が不足しています。",
+      "unknownRecipe": "そのレシピは存在しません。"
+    },
     "devBadge": {
       "title": "開発者",
       "tiers": {
@@ -6483,6 +6495,26 @@ export const ja_JP: EnTranslations = {
         "objectives": {
           "0": {
             "label": "モガーを討伐"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "己が選ぶべき技",
+        "text": "イーストブルックの職人は皆いずれ、己が選ぶべき一つの技に落ち着く。{playerName}よ、一つの行いで己を証明し、進むべき道を宣言せよ。",
+        "completion": "あなたの道は定まった。その道をしかと歩むがいい。",
+        "objectives": {
+          "0": {
+            "label": "フォレストウルフを討伐"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "償い",
+        "text": "一つの技を捨て、別の技へと移るには、職人はまず歩まなかった道への償いを果たさねばならぬ、{playerName}よ。",
+        "completion": "償いは果たされた。新たな道があなたに開かれている。",
+        "objectives": {
+          "0": {
+            "label": "フォレストウルフを討伐"
           }
         }
       },

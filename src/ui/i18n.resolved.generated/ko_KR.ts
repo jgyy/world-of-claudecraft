@@ -928,6 +928,18 @@ export const ko_KR: EnTranslations = {
         }
       }
     },
+    "crafting": {
+      "title": "제작",
+      "close": "제작 닫기",
+      "craft": "제작",
+      "reagentsNeeded": "필요 재료:",
+      "reagentLine": "{name} x{have}/{required}",
+      "empty": "알려진 제작법이 없습니다.",
+      "resultAria": "{name} 제작",
+      "craftedToast": "제작 완료:{name}",
+      "insufficientMaterials": "재료가 부족합니다.",
+      "unknownRecipe": "해당 제작법이 존재하지 않습니다."
+    },
     "devBadge": {
       "title": "개발자",
       "tiers": {
@@ -6483,6 +6495,26 @@ export const ko_KR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "모거 처치"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "스스로 택하는 기술",
+        "text": "이스트브룩의 모든 장인은 결국 자신만의 기술 하나를 택하게 된다. {playerName}, 하나의 행동으로 스스로를 증명하고 그대의 길을 선언하라.",
+        "completion": "그대의 길이 정해졌다. 그 길을 굳건히 걸어가라.",
+        "objectives": {
+          "0": {
+            "label": "숲늑대 처치"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "속죄",
+        "text": "한 기술을 버리고 다른 기술로 나아가려면, 장인은 먼저 걷지 않은 길에 대해 속죄해야 한다, {playerName}.",
+        "completion": "속죄가 이루어졌다. 그대에게 새로운 길이 열렸다.",
+        "objectives": {
+          "0": {
+            "label": "숲늑대 처치"
           }
         }
       },

@@ -928,6 +928,18 @@ export const en_XA: EnTranslations = {
         }
       }
     },
+    "crafting": {
+      "title": "[Çŕáƒţíñĝ]",
+      "close": "[Çļóšé çŕáƒţíñĝ]",
+      "craft": "[Çŕáƒţ]",
+      "reagentsNeeded": "[Ŕéɋúíŕéš:]",
+      "reagentLine": "[{name} ẋ{have}/{required}]",
+      "empty": "[Ñó ŕéçíþéš ķñóŵñ ýéţ.]",
+      "resultAria": "[Çŕáƒţ {name}]",
+      "craftedToast": "[Çŕáƒţéð: {name}]",
+      "insufficientMaterials": "[Ýóú ðó ñóţ ĥáʋé ţĥé ɱáţéŕíáļš ƒóŕ ţĥáţ.]",
+      "unknownRecipe": "[Ţĥáţ ŕéçíþé ðóéš ñóţ éẋíšţ.]"
+    },
     "devBadge": {
       "title": "[Ðéʋéļóþéŕ]",
       "tiers": {
@@ -6483,6 +6495,26 @@ export const en_XA: EnTranslations = {
         "objectives": {
           "0": {
             "label": "[Ɱóĝĝéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "[Á Çŕáƒţ ţó Çáļļ Ýóúŕ Óŵñ]",
+        "text": "[Éʋéŕý áŕţíšáñ óƒ Éášţƀŕóóķ éʋéñţúáļļý šéţţļéš óñ óñé çŕáƒţ ţó çáļļ ţĥéíŕ óŵñ. Þŕóʋé ýóúŕšéļƒ ŵíţĥ á šíñĝļé ðééð, {playerName}, áñð ðéçļáŕé ýóúŕ þáţĥ.]",
+        "completion": "[Ýóúŕ þáţĥ íš çĥóšéñ; ŵáļķ íţ ŵéļļ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ šļáíñ]"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "[Ɱáķíñĝ Áɱéñðš]",
+        "text": "[Ţó šéţ ášíðé óñé çŕáƒţ ƒóŕ áñóţĥéŕ, áñ áŕţíšáñ ɱúšţ ƒíŕšţ ɱáķé áɱéñðš ƒóŕ ţĥé þáţĥ ñóţ ŵáļķéð, {playerName}.]",
+        "completion": "[Áɱéñðš ɱáðé; á ñéŵ þáţĥ íš óþéñ ţó ýóú.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ šļáíñ]"
           }
         }
       },
