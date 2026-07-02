@@ -39,11 +39,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "es_ES": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -75,11 +71,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "fr_FR": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -111,11 +103,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "fr_CA": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -147,11 +135,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "en_CA": [],
   "it_IT": [
@@ -184,11 +168,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "de_DE": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -220,27 +200,19 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "zh_CN": [
-    "hudChrome.crafting.reagentLine",
-    "hudChrome.keybinds.discord"
+    "hudChrome.crafting.reagentLine"
   ],
   "zh_TW": [
-    "hudChrome.crafting.reagentLine",
-    "hudChrome.keybinds.discord"
+    "hudChrome.crafting.reagentLine"
   ],
   "ko_KR": [
-    "hudChrome.crafting.reagentLine",
-    "hudChrome.keybinds.discord"
+    "hudChrome.crafting.reagentLine"
   ],
   "ja_JP": [
-    "hudChrome.crafting.reagentLine",
-    "hudChrome.keybinds.discord"
+    "hudChrome.crafting.reagentLine"
   ],
   "pt_BR": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -272,15 +244,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "ru_RU": [
-    "hudChrome.crafting.reagentLine",
-    "hudChrome.keybinds.discord"
+    "hudChrome.crafting.reagentLine"
   ],
   "nl_NL": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -312,15 +279,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "pl_PL": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -352,15 +311,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "id_ID": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -392,15 +343,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "tr_TR": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -432,15 +375,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "sv_SE": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -472,15 +407,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "vi_VN": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -512,15 +439,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.crafting.unknownRecipe"
   ],
   "da_DK": [
     "entities.quests.q_archetype_acceptance.completion",
@@ -552,14 +471,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.crafting.reagentsNeeded",
     "hudChrome.crafting.resultAria",
     "hudChrome.crafting.title",
-    "hudChrome.crafting.unknownRecipe",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.keybinds.discord",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.crafting.unknownRecipe"
   ]
 };

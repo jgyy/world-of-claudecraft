@@ -80,6 +80,7 @@ const STAT_GRID: readonly StatId[] = [
   'critChance',
   'spi',
   'dodge',
+  'spellPower',
 ];
 
 /**
