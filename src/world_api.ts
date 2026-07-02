@@ -98,12 +98,12 @@ export type {
 export type { RaidLockout } from './world_api/dungeons';
 export type { MarketInfo, MarketListingView } from './world_api/market';
 export type { PartyInfo, PartyMemberInfo } from './world_api/party';
+export type { PlayerProfessionsView } from './world_api/professions';
 export type {
   DevLeaderboardEntry,
   GuildLeaderboardEntry,
   LeaderboardEntry,
 } from './world_api/progression_xp';
-export type { PlayerProfessionsView } from './world_api/professions';
 export type {
   CharacterSearchResult,
   FriendInfo,
