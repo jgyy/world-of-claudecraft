@@ -22,10 +22,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.corpseHarvest.title"
   ],
   "es_ES": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -40,10 +37,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.corpseHarvest.title"
   ],
   "fr_FR": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -58,10 +52,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.corpseHarvest.title"
   ],
   "fr_CA": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -76,10 +67,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.corpseHarvest.title"
   ],
   "en_CA": [],
   "it_IT": [
@@ -95,10 +83,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.corpseHarvest.title"
   ],
   "de_DE": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -113,10 +98,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.corpseHarvest.title"
   ],
   "zh_CN": [],
   "zh_TW": [],
@@ -135,10 +117,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader"
+    "hudChrome.corpseHarvest.title"
   ],
   "ru_RU": [],
   "nl_NL": [
@@ -154,14 +133,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.corpseHarvest.title"
   ],
   "pl_PL": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -176,14 +148,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.corpseHarvest.title"
   ],
   "id_ID": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -198,14 +163,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.corpseHarvest.title"
   ],
   "tr_TR": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -220,14 +178,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.corpseHarvest.title"
   ],
   "sv_SE": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -242,14 +193,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.corpseHarvest.title"
   ],
   "vi_VN": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -264,14 +208,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.corpseHarvest.title"
   ],
   "da_DK": [
     "hudChrome.corpseHarvest.alreadyHarvested",
@@ -286,13 +223,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.corpseHarvest.components.venomSac",
     "hudChrome.corpseHarvest.concentrateHint",
     "hudChrome.corpseHarvest.harvestButton",
-    "hudChrome.corpseHarvest.title",
-    "hudChrome.itemShare.linkHint",
-    "hudChrome.options.startAttackOnAbility",
-    "hudChrome.party.promoteLeader",
-    "hudChrome.plurals.playersMatching.few",
-    "hudChrome.plurals.playersMatching.many",
-    "hudChrome.plurals.playersMatching.one",
-    "hudChrome.plurals.playersMatching.other"
+    "hudChrome.corpseHarvest.title"
   ]
 };
