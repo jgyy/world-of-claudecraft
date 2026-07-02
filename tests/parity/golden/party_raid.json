@@ -15,7 +15,7 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 388,
+      "nextId": 389,
       "state": "5bc471b0",
       "events": "741638a5",
       "rng": {
@@ -29,9 +29,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 395,
-      "state": "7b8966f2",
-      "events": "6051a8d6",
+      "nextId": 396,
+      "state": "f09994bf",
+      "events": "32f90e0b",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -45,16 +45,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -67,16 +64,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -89,16 +83,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 390,
+          "entityId": 391,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -111,16 +102,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 391,
+          "entityId": 392,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -133,16 +121,13 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 392,
+          "entityId": 393,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -155,16 +140,13 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 393,
+          "entityId": 394,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "training_mace"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -177,16 +159,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 394,
+          "entityId": 395,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -204,7 +183,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -252,7 +231,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -301,7 +280,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 62,
-          "id": 390,
+          "id": 391,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -351,7 +330,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
-          "id": 391,
+          "id": 392,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -401,7 +380,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 57,
-          "id": 392,
+          "id": 393,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -450,7 +429,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 95,
-          "id": 393,
+          "id": 394,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -499,7 +478,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 394,
+          "id": 395,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -542,9 +521,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 395,
-      "state": "7b8966f2",
-      "events": "cf001093",
+      "nextId": 396,
+      "state": "f09994bf",
+      "events": "c36c718d",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -558,16 +537,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -580,16 +556,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -602,16 +575,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 390,
+          "entityId": 391,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -624,16 +594,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 391,
+          "entityId": 392,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -646,16 +613,13 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 392,
+          "entityId": 393,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -668,16 +632,13 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 393,
+          "entityId": 394,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "training_mace"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -690,16 +651,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 394,
+          "entityId": 395,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -717,7 +675,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -765,7 +723,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -814,7 +772,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 62,
-          "id": 390,
+          "id": 391,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -864,7 +822,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
-          "id": 391,
+          "id": 392,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -914,7 +872,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 57,
-          "id": 392,
+          "id": 393,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -963,7 +921,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 95,
-          "id": 393,
+          "id": 394,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1012,7 +970,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 394,
+          "id": 395,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1055,9 +1013,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 395,
-      "state": "7b8966f2",
-      "events": "e92e1eba",
+      "nextId": 396,
+      "state": "f09994bf",
+      "events": "c6e15de0",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -1071,16 +1029,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1093,16 +1048,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1115,16 +1067,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 390,
+          "entityId": 391,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1137,16 +1086,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 391,
+          "entityId": 392,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1159,16 +1105,13 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 392,
+          "entityId": 393,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1181,16 +1124,13 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 393,
+          "entityId": 394,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "training_mace"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1203,16 +1143,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 394,
+          "entityId": 395,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1230,7 +1167,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1278,7 +1215,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1327,7 +1264,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 62,
-          "id": 390,
+          "id": 391,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1377,7 +1314,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
-          "id": 391,
+          "id": 392,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1427,7 +1364,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 57,
-          "id": 392,
+          "id": 393,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1476,7 +1413,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 95,
-          "id": 393,
+          "id": 394,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1525,7 +1462,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 394,
+          "id": 395,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1568,9 +1505,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 395,
-      "state": "7b8966f2",
-      "events": "89789aa5",
+      "nextId": 396,
+      "state": "f09994bf",
+      "events": "014cb967",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -1584,16 +1521,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1606,16 +1540,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1628,16 +1559,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 390,
+          "entityId": 391,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1650,16 +1578,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 391,
+          "entityId": 392,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1672,16 +1597,13 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 392,
+          "entityId": 393,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1694,16 +1616,13 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 393,
+          "entityId": 394,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "training_mace"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1716,16 +1635,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 394,
+          "entityId": 395,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -1743,7 +1659,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1791,7 +1707,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1840,7 +1756,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 62,
-          "id": 390,
+          "id": 391,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1890,7 +1806,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
-          "id": 391,
+          "id": 392,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1940,7 +1856,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 57,
-          "id": 392,
+          "id": 393,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1989,7 +1905,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 95,
-          "id": 393,
+          "id": 394,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2038,7 +1954,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 394,
+          "id": 395,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2081,9 +1997,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 395,
-      "state": "7b8966f2",
-      "events": "e729504a",
+      "nextId": 396,
+      "state": "f09994bf",
+      "events": "1d349f1d",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -2097,16 +2013,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2119,16 +2032,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2141,16 +2051,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 390,
+          "entityId": 391,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2163,16 +2070,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 391,
+          "entityId": 392,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2185,16 +2089,13 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 392,
+          "entityId": 393,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2207,16 +2108,13 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 393,
+          "entityId": 394,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "training_mace"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2229,16 +2127,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 394,
+          "entityId": 395,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2256,7 +2151,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2304,7 +2199,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2353,7 +2248,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 62,
-          "id": 390,
+          "id": 391,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2403,7 +2298,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
-          "id": 391,
+          "id": 392,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2453,7 +2348,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 57,
-          "id": 392,
+          "id": 393,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2502,7 +2397,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 95,
-          "id": 393,
+          "id": 394,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2551,7 +2446,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 394,
+          "id": 395,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2594,9 +2489,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 395,
-      "state": "7b8966f2",
-      "events": "d9342dfa",
+      "nextId": 396,
+      "state": "f09994bf",
+      "events": "fc6a5a91",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -2610,16 +2505,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2632,16 +2524,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2654,16 +2543,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 390,
+          "entityId": 391,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2676,16 +2562,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 391,
+          "entityId": 392,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2698,16 +2581,13 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 392,
+          "entityId": 393,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2720,16 +2600,13 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 393,
+          "entityId": 394,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "training_mace"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2742,16 +2619,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 394,
+          "entityId": 395,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -2769,7 +2643,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2817,7 +2691,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2866,7 +2740,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 62,
-          "id": 390,
+          "id": 391,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2916,7 +2790,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
-          "id": 391,
+          "id": 392,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2966,7 +2840,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 57,
-          "id": 392,
+          "id": 393,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3015,7 +2889,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 95,
-          "id": 393,
+          "id": 394,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3064,7 +2938,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 394,
+          "id": 395,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3107,8 +2981,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 395,
-      "state": "7b8966f2",
+      "nextId": 396,
+      "state": "f09994bf",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3123,16 +2997,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 388,
+          "entityId": 389,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -3145,16 +3016,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 389,
+          "entityId": 390,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -3167,16 +3035,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 390,
+          "entityId": 391,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -3189,16 +3054,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 391,
+          "entityId": 392,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -3211,16 +3073,13 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 392,
+          "entityId": 393,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -3233,16 +3092,13 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 393,
+          "entityId": 394,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "training_mace"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -3255,16 +3111,13 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {},
-          "craftSkills": {},
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 394,
+          "entityId": 395,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword"
           },
-          "gatheringProficiency": {},
-          "nodeHarvestReadyAt": {},
           "talents": {
             "choices": {},
             "ranks": {}
@@ -3282,7 +3135,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 388,
+          "id": 389,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3330,7 +3183,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 54,
-          "id": 389,
+          "id": 390,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3379,7 +3232,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 62,
-          "id": 390,
+          "id": 391,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3429,7 +3282,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
-          "id": 391,
+          "id": 392,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3479,7 +3332,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 57,
-          "id": 392,
+          "id": 393,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3528,7 +3381,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 95,
-          "id": 393,
+          "id": 394,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3577,7 +3430,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
-          "id": 394,
+          "id": 395,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
