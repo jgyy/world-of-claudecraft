@@ -3549,6 +3549,31 @@
     letter-spacing: 1px;
     white-space: nowrap;
   }
+  /* ---------- first-spawn intro skip hint ---------- */
+  /* Shown only while the first-login camera cinematic plays (main.ts
+     setIntroUiHidden); #ui (and, on touch, #mobile-controls) are hidden for
+     the same span, so this hint lives as its own top-level layer, not inside
+     #ui, or it would vanish along with everything else it exists to explain. */
+  #intro-skip-hint {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    transform: translateX(-50%);
+    color: var(--color-text-overlay);
+    background: var(--panel-bg);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-sm);
+    padding: 6px 16px;
+    font-size: 14px;
+    text-shadow: 1px 1px 3px #000;
+    pointer-events: none;
+    z-index: 90;
+    white-space: nowrap;
+  }
+  #intro-skip-hint.visible {
+    display: block;
+  }
   /* The quest-progress flash (quest_progress_banner.ts): small yellow lines
      stacked at the top-center, above the zone banner's slot, the classic
      "Forest Wolf slain: 3/8" cue. Lines are appended by the banner module and

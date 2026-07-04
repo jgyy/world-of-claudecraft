@@ -319,6 +319,10 @@ export const es_ES: EnTranslations = {
       "returnBodyTouch": "Tu tarea está hecha. Vuelve con el mariscal Redbrook y toca el botón Usar para entregarla.",
       "doneBodyTouch": "Ya dominas lo básico, {name}. El Valle es tuyo para explorar: toca Más y luego Diario de misiones para revisar tu diario de misiones en cualquier momento. ¡Buena caza!"
     },
+    "intro": {
+      "skipHintTouch": "Tap 4 times to skip",
+      "skipHintDesktop": "Press Esc to skip"
+    },
     "widgets": {
       "clockTitle": "Hora local: haz clic para alternar 12/24 horas",
       "worldCoordinates": "Coordenadas del mundo",

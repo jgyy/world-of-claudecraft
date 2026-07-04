@@ -319,6 +319,10 @@ export const da_DK: EnTranslations = {
       "returnBodyTouch": "Din opgave er fuldført. Vend tilbage til Marskal Redbrook og tryk på Brug-knappen for at aflevere den.",
       "doneBodyTouch": "Du har styr på det grundlæggende, {name}. Dalen er din at udforske. Tryk på Mere, derefter Opgaver, for at gennemse din opgavelog når som helst. God jagt."
     },
+    "intro": {
+      "skipHintTouch": "Tap 4 times to skip",
+      "skipHintDesktop": "Press Esc to skip"
+    },
     "widgets": {
       "clockTitle": "Lokal tid - klik for at skifte mellem 12/24-timers",
       "worldCoordinates": "Verdenskoordinater",

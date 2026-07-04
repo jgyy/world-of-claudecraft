@@ -319,6 +319,10 @@ export const en: EnTranslations = {
       "returnBodyTouch": "Your task is done. Return to Marshal Redbrook and tap the Use button to turn it in.",
       "doneBodyTouch": "You have the basics, {name}. The Vale is yours to explore. Tap More, then Quests, to review your quest log anytime. Good hunting."
     },
+    "intro": {
+      "skipHintTouch": "Tap 4 times to skip",
+      "skipHintDesktop": "Press Esc to skip"
+    },
     "widgets": {
       "clockTitle": "Local time - click to toggle 12/24-hour",
       "worldCoordinates": "World coordinates",

@@ -319,6 +319,10 @@ export const sv_SE: EnTranslations = {
       "returnBodyTouch": "Din uppgift är klar. Återvänd till marskalk Redbrook och tryck på Använd-knappen för att lämna in den.",
       "doneBodyTouch": "Du behärskar grunderna, {name}. Dalen är din att utforska. Tryck på Mer och sedan Uppdrag för att granska din uppdragslogg när som helst. Lycka till på jakten."
     },
+    "intro": {
+      "skipHintTouch": "Tap 4 times to skip",
+      "skipHintDesktop": "Press Esc to skip"
+    },
     "widgets": {
       "clockTitle": "Lokal tid - klicka för att växla mellan 12/24-timmar",
       "worldCoordinates": "Världskoordinater",

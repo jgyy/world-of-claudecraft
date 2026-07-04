@@ -3315,6 +3315,8 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.perSecond': '{value}/秒',
   'hudChrome.meters.perSecondRow': '{total}（{rate}）',
   'hudChrome.meters.seconds': '{s}秒',
+  'hudChrome.intro.skipHintTouch': '連續點擊4次以跳過',
+  'hudChrome.intro.skipHintDesktop': '按 Esc 跳過',
   'hudChrome.mobile.autorun': '自動奔跑',
   'hudChrome.mobile.haptics': '觸覺回饋',
   'hudChrome.mobile.hapticsOff': '觸覺回饋已關閉',

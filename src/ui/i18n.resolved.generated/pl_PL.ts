@@ -319,6 +319,10 @@ export const pl_PL: EnTranslations = {
       "returnBodyTouch": "Twoje zadanie jest wykonane. Wróć do marszałka Redbrooka i dotknij przycisku Użyj, aby je oddać.",
       "doneBodyTouch": "Masz już podstawy, {name}. Dolina stoi przed tobą otworem. Dotknij Więcej, a potem Zadania, aby w każdej chwili przejrzeć swój dziennik. Dobrych łowów."
     },
+    "intro": {
+      "skipHintTouch": "Tap 4 times to skip",
+      "skipHintDesktop": "Press Esc to skip"
+    },
     "widgets": {
       "clockTitle": "Czas lokalny - kliknij, aby przełączyć format 12/24-godzinny",
       "worldCoordinates": "Współrzędne świata",

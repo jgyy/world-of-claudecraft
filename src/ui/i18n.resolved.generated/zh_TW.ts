@@ -319,6 +319,10 @@ export const zh_TW: EnTranslations = {
       "returnBodyTouch": "任務已完成。返回雷德布魯克元帥處並點按「使用」按鈕繳交任務。",
       "doneBodyTouch": "你已掌握基礎，{name}。東溪谷任你探索。點按「更多」再選「任務日誌」即可隨時查看任務。祝你狩獵順利。"
     },
+    "intro": {
+      "skipHintTouch": "連續點擊4次以跳過",
+      "skipHintDesktop": "按 Esc 跳過"
+    },
     "widgets": {
       "clockTitle": "本地時間 - 點擊切換 12／24 小時制",
       "worldCoordinates": "世界座標",

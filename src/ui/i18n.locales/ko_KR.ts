@@ -3454,6 +3454,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.perSecond': '{value}/초',
   'hudChrome.meters.perSecondRow': '{total} ({rate})',
   'hudChrome.meters.seconds': '{s}초',
+  'hudChrome.intro.skipHintTouch': '4번 탭하여 건너뛰기',
+  'hudChrome.intro.skipHintDesktop': 'Esc 키로 건너뛰기',
   'hudChrome.mobile.autorun': '자동 달리기',
   'hudChrome.mobile.haptics': '진동',
   'hudChrome.mobile.hapticsOff': '진동 꺼짐',

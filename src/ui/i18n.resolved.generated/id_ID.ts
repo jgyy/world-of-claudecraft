@@ -319,6 +319,10 @@ export const id_ID: EnTranslations = {
       "returnBodyTouch": "Tugas Anda selesai. Kembalilah ke Marshal Redbrook dan ketuk tombol Use untuk menyerahkannya.",
       "doneBodyTouch": "Anda sudah menguasai dasarnya, {name}. Lembah ini milik Anda untuk dijelajahi. Ketuk More, lalu Quests, untuk meninjau catatan misi Anda kapan saja. Selamat berburu."
     },
+    "intro": {
+      "skipHintTouch": "Tap 4 times to skip",
+      "skipHintDesktop": "Press Esc to skip"
+    },
     "widgets": {
       "clockTitle": "Waktu lokal - klik untuk beralih 12/24 jam",
       "worldCoordinates": "Koordinat dunia",

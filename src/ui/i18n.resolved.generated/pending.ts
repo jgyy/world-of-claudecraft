@@ -9,24 +9,66 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "es_ES": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "fr_FR": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "fr_CA": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
+  "it_IT": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "de_DE": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
-  "pt_BR": [],
+  "pt_BR": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
   "ru_RU": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "nl_NL": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "pl_PL": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "id_ID": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "tr_TR": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "sv_SE": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "vi_VN": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ],
+  "da_DK": [
+    "hudChrome.intro.skipHintDesktop",
+    "hudChrome.intro.skipHintTouch"
+  ]
 };

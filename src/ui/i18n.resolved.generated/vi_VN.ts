@@ -319,6 +319,10 @@ export const vi_VN: EnTranslations = {
       "returnBodyTouch": "Nhiệm vụ của bạn đã xong. Trở về chỗ Thống Soái Redbrook và chạm nút Dùng để nộp.",
       "doneBodyTouch": "Bạn đã nắm cơ bản rồi, {name}. Thung Lũng giờ là của bạn để khám phá. Chạm Thêm, rồi Nhiệm Vụ, để xem lại nhật ký nhiệm vụ bất cứ lúc nào. Săn lùng vui vẻ."
     },
+    "intro": {
+      "skipHintTouch": "Tap 4 times to skip",
+      "skipHintDesktop": "Press Esc to skip"
+    },
     "widgets": {
       "clockTitle": "Giờ địa phương - nhấp để chuyển 12/24 giờ",
       "worldCoordinates": "Tọa độ thế giới",

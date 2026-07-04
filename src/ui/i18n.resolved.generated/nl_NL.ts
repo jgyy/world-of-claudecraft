@@ -319,6 +319,10 @@ export const nl_NL: EnTranslations = {
       "returnBodyTouch": "Je taak is volbracht. Keer terug naar Marshal Redbrook en tik op de Gebruik-knop om hem in te leveren.",
       "doneBodyTouch": "Je kent de basis, {name}. Het Dal ligt voor je om te verkennen. Tik op Meer, dan op Queesten, om je queestelogboek op elk moment na te kijken. Goede jacht."
     },
+    "intro": {
+      "skipHintTouch": "Tap 4 times to skip",
+      "skipHintDesktop": "Press Esc to skip"
+    },
     "widgets": {
       "clockTitle": "Lokale tijd - klik om te wisselen tussen 12/24-uurs",
       "worldCoordinates": "Wereldcoördinaten",

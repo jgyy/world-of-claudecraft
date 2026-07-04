@@ -249,6 +249,14 @@ export const hudChromeStrings = {
     doneBodyTouch:
       'You have the basics, {name}. The Vale is yours to explore. Tap More, then Quests, to review your quest log anytime. Good hunting.',
   },
+  // First-spawn camera cinematic skip hint (main.ts setIntroUiHidden). Desktop
+  // players can guess Escape from convention; touch has no such convention and
+  // the skip gesture (a 4-tap burst, see spawn_cinematic.ts) is otherwise
+  // undiscoverable, so both platforms get an explicit on-screen hint.
+  intro: {
+    skipHintTouch: 'Tap 4 times to skip',
+    skipHintDesktop: 'Press Esc to skip',
+  },
   // Minimap / compass / clock / coordinate widget tooltips and accessible names.
   widgets: {
     clockTitle: 'Local time - click to toggle 12/24-hour',

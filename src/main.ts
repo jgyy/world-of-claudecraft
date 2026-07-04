@@ -2558,6 +2558,18 @@ async function startGame(
     const mobileControls = document.getElementById('mobile-controls');
     if (mobileControls) mobileControls.style.display = display;
     nameplates.style.display = display;
+    // Desktop's Escape-to-skip is a keyboard convention; touch has none (the
+    // 4-tap burst in spawn_cinematic.ts is otherwise undiscoverable), so both
+    // get an explicit on-screen hint for the span the rest of the HUD is dark.
+    const skipHint = document.getElementById('intro-skip-hint');
+    if (skipHint) {
+      if (hidden) {
+        skipHint.textContent = useTouchInterface()
+          ? t('hudChrome.intro.skipHintTouch')
+          : t('hudChrome.intro.skipHintDesktop');
+      }
+      skipHint.classList.toggle('visible', hidden);
+    }
   };
   const finishIntro = (skipToEnd: boolean): void => {
     if (!intro) return;
