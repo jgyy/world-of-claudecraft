@@ -37,7 +37,8 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.dailyRewards.showChestButton': '顯示寶箱',
   'hudChrome.dailyRewards.hideChestButton': '隱藏寶箱',
   'hudChrome.dailyRewards.hideChestConfirmTitle': '隱藏每日獎勵寶箱？',
-  'hudChrome.dailyRewards.hideChestConfirmBody': '這會從您的介面上移除寶箱捷徑。獎勵、資格和此面板仍然可用；您可以在選項中重新顯示該捷徑。',
+  'hudChrome.dailyRewards.hideChestConfirmBody':
+    '這會從您的介面上移除寶箱捷徑。獎勵、資格和此面板仍然可用；您可以在選項中重新顯示該捷徑。',
   'hudChrome.dailyRewards.hideChestConfirmOk': '隱藏寶箱',
   'hudChrome.dailyRewards.hideChestConfirmCancel': '取消',
   'hudChrome.dailyRewards.leaderboard': '每日排行榜',
