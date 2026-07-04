@@ -2897,6 +2897,8 @@ export class Hud {
     },
     showChestButton: () => this.showDailyRewardsChestButton(),
     setShowChestButton: (show) => this.setDailyRewardsChestButtonPreference(show),
+    confirmDialog: (title, body, okText, cancelText, onOk) =>
+      this.confirmDialog(title, body, okText, cancelText, onOk),
     ...this.windowFocus('#daily-rewards-window'),
     onVisibilityChange: () => this.syncAnyWindowOpenState(),
   });

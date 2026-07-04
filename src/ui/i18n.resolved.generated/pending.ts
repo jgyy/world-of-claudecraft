@@ -11,32 +11,56 @@
 export const pending: Record<string, readonly string[]> = {
   "es": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "es_ES": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "fr_FR": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "fr_CA": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "en_CA": [],
   "it_IT": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "de_DE": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
@@ -46,42 +70,74 @@ export const pending: Record<string, readonly string[]> = {
   "ja_JP": [],
   "pt_BR": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "ru_RU": [],
   "nl_NL": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "pl_PL": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "id_ID": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "tr_TR": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "sv_SE": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "vi_VN": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ],
   "da_DK": [
     "hudChrome.dailyRewards.hideChestButton",
+    "hudChrome.dailyRewards.hideChestConfirmBody",
+    "hudChrome.dailyRewards.hideChestConfirmCancel",
+    "hudChrome.dailyRewards.hideChestConfirmOk",
+    "hudChrome.dailyRewards.hideChestConfirmTitle",
     "hudChrome.dailyRewards.showChestButton",
     "hudChrome.options.showDailyRewardsChest"
   ]

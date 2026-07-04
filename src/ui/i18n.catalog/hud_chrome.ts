@@ -64,6 +64,11 @@ export const hudChromeStrings = {
     tasks: 'Tasks',
     showChestButton: 'Show Chest',
     hideChestButton: 'Hide Chest',
+    hideChestConfirmTitle: 'Hide Daily Rewards Chest?',
+    hideChestConfirmBody:
+      'This removes the chest shortcut from your HUD. Rewards, eligibility, and this panel stay available; you can bring the shortcut back from Options.',
+    hideChestConfirmOk: 'Hide Chest',
+    hideChestConfirmCancel: 'Cancel',
     leaderboard: 'Daily Leaderboard',
     history: 'Past Winners',
     noLeaders: 'No points yet.',
