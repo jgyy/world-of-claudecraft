@@ -72,12 +72,12 @@ function world(): WorldDerived {
 // Every crossing outside the road pass must be steeper than the movement
 // climb limit (rise/run 1.5, see sim.ts MAX_CLIMB_SLOPE) so the walls are
 // genuinely impassable, not scenery (tests/terrain_walls.test.ts guards this),
-// but the profile is a wide gaussian: a taller, wider rise reads as a real
-// mountainside (gradual toe and shoulder, steep only in the middle band)
-// instead of a sheer cliff face, while its steepest point still clears the
-// climb limit with margin.
-const RIDGE_HEIGHT = 46;
-const RIDGE_SIGMA = 14; // gaussian width of the wall
+// but the profile is a wide gaussian: a modest, wide rise reads as a natural
+// foothill-to-summit slope (gradual toe and shoulder, steep only in the
+// middle band) instead of a tall sheer cliff face, while its steepest point
+// still clears the climb limit with margin.
+const RIDGE_HEIGHT = 44;
+const RIDGE_SIGMA = 13; // gaussian width of the wall
 const PASS_HALF_WIDTH = 10; // flat opening around the road
 const PASS_SHOULDER = 34; // ...rising to full wall by this far from the pass
 
@@ -100,13 +100,16 @@ function smoothstep(edge0: number, edge1: number, x: number): number {
 // the world rim instead of a subtle wobble. WORLD_SIZE and the outermost zone
 // z-bounds were widened specifically to give this room: every camp/hub/poi
 // sits well inside the swing, so the ramp can move a long way in/out without
-// ever touching existing content. Combines a big slow swell (the bay/peninsula
-// shape) with a smaller fast ripple (coastline detail) via two fbm2 octaves at
-// different frequencies/amplitudes. Sampled along the wall's own tangential
-// axis, never its radial one, so the ramp WIDTH (and so its guaranteed
-// steepness) never changes, only where it begins.
-const RIM_WIGGLE_AMPLITUDE = 45;
-const RIM_WIGGLE_DETAIL_AMPLITUDE = 14;
+// ever touching existing content. Combines three fbm2 octaves at different
+// frequencies/amplitudes: a huge, very slow GRAND swell (the actual bay/
+// peninsula shape, roughly one full swing per zone), a smaller SWELL (medium
+// coastline curvature), and a small fast DETAIL ripple (coastline texture).
+// Sampled along the wall's own tangential axis, never its radial one, so the
+// ramp WIDTH (and so its guaranteed steepness) never changes, only where it
+// begins.
+const RIM_WIGGLE_GRAND_AMPLITUDE = 110;
+const RIM_WIGGLE_AMPLITUDE = 35;
+const RIM_WIGGLE_DETAIL_AMPLITUDE = 8;
 // Phase used for the x-rim wall (see rimEdgeDistance/baseHeight); the Mirefen
 // impact crater leans on that wall's base near its own z (tests/impact_site.test.ts),
 // so the wiggle is faded to zero close to it and only swings freely further away.
@@ -126,10 +129,12 @@ function xRimGuardAt(z: number): number {
 }
 
 function rimWiggle(tangential: number, seed: number, phase: number): number {
-  const swell = (fbm2(tangential * 0.0035, phase, seed + 61, 2) - 0.5) * 2 * RIM_WIGGLE_AMPLITUDE;
+  const grand =
+    (fbm2(tangential * 0.01, phase + 200, seed + 61, 2) - 0.5) * 2 * RIM_WIGGLE_GRAND_AMPLITUDE;
+  const swell = (fbm2(tangential * 0.008, phase, seed + 61, 2) - 0.5) * 2 * RIM_WIGGLE_AMPLITUDE;
   const detail =
-    (fbm2(tangential * 0.02, phase + 100, seed + 61, 2) - 0.5) * 2 * RIM_WIGGLE_DETAIL_AMPLITUDE;
-  const raw = swell + detail;
+    (fbm2(tangential * 0.04, phase + 100, seed + 61, 2) - 0.5) * 2 * RIM_WIGGLE_DETAIL_AMPLITUDE;
+  const raw = grand + swell + detail;
   if (phase === X_RIM_PHASE) return raw * xRimGuardAt(tangential);
   return raw;
 }
@@ -142,11 +147,11 @@ export function rimEdgeDistance(x: number, z: number, seed: number): number {
   const w = world();
   const xg = xRimGuardAt(z);
   const xEdge = lerp(LEGACY_WORLD_MAX_X, WORLD_MAX_X, xg);
-  const xEdgeStart = lerp(32, 52, xg);
+  const xEdgeStart = lerp(32, 42, xg);
   return Math.max(
     Math.abs(x) - (xEdge - xEdgeStart + rimWiggle(z, seed, X_RIM_PHASE)),
-    w.minZ + 52 + rimWiggle(x, seed, 23) - z,
-    z - (w.maxZ - 52 + rimWiggle(x, seed, 37)),
+    w.minZ + 42 + rimWiggle(x, seed, 23) - z,
+    z - (w.maxZ - 42 + rimWiggle(x, seed, 37)),
   );
 }
 
@@ -412,21 +417,22 @@ export function terrainHeight(x: number, z: number, seed: number): number {
 
   // Raise the world rim so the player naturally stays in bounds. Like the zone
   // ridges, the rise is steeper than the climb limit everywhere (guarded by
-  // tests/terrain_walls.test.ts) but wide (50yd inside to 6yd from the
-  // boundary, a real mountainside slope, not a sudden wall) and peaks before
-  // the boundary so the whole climb happens in-world. Each ramp's START is
-  // nudged a long way in/out by rimWiggle (sampled along the wall's OWN
-  // tangential axis, never its radial one) so the encircling mountains carve
-  // real bays and peninsulas instead of a perfect rectangle; the ramp WIDTH
-  // (and so its guaranteed steepness) never changes, only where it begins.
-  // The x-rim's anchor edge, start distance, and height all blend back to
-  // their original, pre-organic-coastline values near the Mirefen crater
-  // (xRimGuardAt is 0 right at its z) so the crater's wall-base math keeps
-  // seeing the exact legacy geometry there, while the rest of the x-rim gets
-  // the new wide ramp anchored to the widened WORLD_MAX_X.
+  // tests/terrain_walls.test.ts) but wide (40yd inside to 6yd from the
+  // boundary, a modest natural mountainside slope, not a tall sudden wall)
+  // and peaks before the boundary so the whole climb happens in-world. Each
+  // ramp's START is nudged a long way in/out by rimWiggle (sampled along the
+  // wall's OWN tangential axis, never its radial one) so the encircling
+  // mountains carve real bays and peninsulas instead of a perfect rectangle;
+  // the ramp WIDTH (and so its guaranteed steepness) never changes, only
+  // where it begins. The x-rim's anchor edge, start distance, and height all
+  // blend back to their original, pre-organic-coastline values near the
+  // Mirefen crater (xRimGuardAt is 0 right at its z) so the crater's
+  // wall-base math keeps seeing the exact legacy geometry there, while the
+  // rest of the x-rim gets the new wide, gentler ramp anchored to the
+  // widened WORLD_MAX_X.
   const xg = xRimGuardAt(z);
   const rimXEdge = lerp(LEGACY_WORLD_MAX_X, WORLD_MAX_X, xg);
-  const rimXStart = lerp(30, 50, xg);
+  const rimXStart = lerp(30, 40, xg);
   const rimXHeight = lerp(55, 65, xg);
   const rimX = smoothstep(
     rimXEdge - rimXStart + rimWiggle(z, seed, X_RIM_PHASE),
@@ -434,12 +440,12 @@ export function terrainHeight(x: number, z: number, seed: number): number {
     Math.abs(x),
   );
   const rimS = smoothstep(
-    w.minZ + 50 + rimWiggle(x, seed, 23),
+    w.minZ + 40 + rimWiggle(x, seed, 23),
     w.minZ + 6 + rimWiggle(x, seed, 23),
     z,
   );
   const rimN = smoothstep(
-    w.maxZ - 50 + rimWiggle(x, seed, 37),
+    w.maxZ - 40 + rimWiggle(x, seed, 37),
     w.maxZ - 6 + rimWiggle(x, seed, 37),
     z,
   );

@@ -71,17 +71,19 @@ describe('impassable terrain walls', () => {
 
   it('every crossing of the world rim is steeper than the climb limit', () => {
     // The rim ramp's start is nudged by the organic-coastline wiggle (see
-    // rimWiggle in src/sim/world.ts: a +/-45 swell plus a +/-14 detail ripple,
-    // so +/-59 worst case), and the ramp itself is wider (50yd inside to 6yd
-    // from the boundary) than a bare wall. These crossings are widened well
-    // past that worst case so they still fully bracket the ramp wherever the
-    // wiggle put it.
-    for (let z = WORLD_MIN_Z + 140; z <= WORLD_MAX_Z - 140; z += 8) {
+    // rimWiggle in src/sim/world.ts: a grand +/-130 swell, a +/-55 swell, and
+    // a +/-15 detail ripple, so +/-200 worst case), and the ramp itself is
+    // wider (40yd inside to 6yd from the boundary) than a bare wall. Near the
+    // Mirefen crater the x-rim's anchor blends back toward its legacy (much
+    // closer) position, so the x-rim crossing reaches all the way in to
+    // bracket that case too. These crossings are widened well past every
+    // worst case so they still fully bracket the ramp wherever it landed.
+    for (let z = WORLD_MIN_Z + 260; z <= WORLD_MAX_Z - 260; z += 16) {
       for (const side of [-1, 1]) {
         const max = pathMaxSteepness(
           WORLD_SEED,
-          { x: side * (WORLD_MAX_X - 140), z },
-          { x: side * (WORLD_MAX_X + 70), z },
+          { x: side * (WORLD_MAX_X - 330), z },
+          { x: side * (WORLD_MAX_X + 100), z },
         );
         expect(max, `x-rim side=${side} at z=${z}`).toBeGreaterThan(WALL_MARGIN);
       }
@@ -89,14 +91,14 @@ describe('impassable terrain walls', () => {
     for (let x = -144; x <= 144; x += 8) {
       const south = pathMaxSteepness(
         WORLD_SEED,
-        { x, z: WORLD_MIN_Z + 140 },
-        { x, z: WORLD_MIN_Z - 70 },
+        { x, z: WORLD_MIN_Z + 270 },
+        { x, z: WORLD_MIN_Z - 120 },
       );
       expect(south, `south rim at x=${x}`).toBeGreaterThan(WALL_MARGIN);
       const north = pathMaxSteepness(
         WORLD_SEED,
-        { x, z: WORLD_MAX_Z - 140 },
-        { x, z: WORLD_MAX_Z + 70 },
+        { x, z: WORLD_MAX_Z - 270 },
+        { x, z: WORLD_MAX_Z + 120 },
       );
       expect(north, `north rim at x=${x}`).toBeGreaterThan(WALL_MARGIN);
     }

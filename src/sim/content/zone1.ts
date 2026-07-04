@@ -21,7 +21,7 @@ export const LAKE = { x: -92, z: 88, radius: 30 };
 export const ZONE1_ZONE: ZoneDef = {
   id: 'eastbrook_vale',
   name: 'Eastbrook Vale',
-  zMin: -300, // pushed out from -180 for the organic coastline's outer buffer
+  zMin: -450, // pushed out from -180 for the organic coastline's outer buffer
   zMax: 180,
   levelRange: [1, 7],
   biome: 'vale',
