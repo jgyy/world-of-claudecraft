@@ -520,7 +520,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 405,
-      "state": "809fde7a",
+      "state": "d30fd97b",
       "events": "741638a5",
       "rng": {
         "draws": 777,
@@ -531,7 +531,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 405,
-      "state": "809fde7a",
+      "state": "d30fd97b",
       "events": "741638a5",
       "rng": {
         "draws": 777,
@@ -693,7 +693,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 164.88,
-            "y": 39.746386,
+            "y": 40.041014,
             "z": -2
           },
           "potionCooldownUntil": -1,
@@ -793,7 +793,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 165.047208,
-            "y": 40.034879,
+            "y": 39.254401,
             "z": 14.480686
           },
           "potionCooldownUntil": -1,

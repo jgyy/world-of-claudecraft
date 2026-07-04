@@ -92,6 +92,38 @@ function smoothstep(edge0: number, edge1: number, x: number): number {
   return t * t * (3 - 2 * t);
 }
 
+// Low-frequency wiggle applied to a world-rim ramp's start position (see
+// baseHeight and rimEdgeDistance below). Sampled along the wall's tangential
+// axis at a low enough frequency, and kept small enough (tests/terrain_walls.test.ts
+// gives the rim ramps only a few yards of margin against its fixed crossing
+// spans), that a shifted ramp is still fully inside every pinned crossing.
+const RIM_WIGGLE_AMPLITUDE = 4;
+// Phase used for the x-rim wall (see rimEdgeDistance/baseHeight); the Mirefen
+// impact crater leans on that wall's base near its own z (tests/impact_site.test.ts),
+// so the wiggle is faded to zero close to it and only swings freely further away.
+const X_RIM_PHASE = 11;
+function rimWiggle(tangential: number, seed: number, phase: number): number {
+  const raw = (fbm2(tangential * 0.008, phase, seed + 61, 3) - 0.5) * 2 * RIM_WIGGLE_AMPLITUDE;
+  if (phase === X_RIM_PHASE) {
+    const guard = smoothstep(20, 50, Math.abs(tangential - MIREFEN_IMPACT_CRATER.z));
+    return raw * guard;
+  }
+  return raw;
+}
+
+// Cosmetic-only: perpendicular distance past the (wiggled) world rim, for the
+// "hazy distant peaks" shading blend in render/terrain.ts. Tracks the exact
+// same organic boundary baseHeight's rim ramps use, via the same wiggle, so the
+// tint never disagrees with where the mountains actually rise.
+export function rimEdgeDistance(x: number, z: number, seed: number): number {
+  const w = world();
+  return Math.max(
+    Math.abs(x) - (WORLD_MAX_X - 32 + rimWiggle(z, seed, X_RIM_PHASE)),
+    w.minZ + 32 + rimWiggle(x, seed, 23) - z,
+    z - (w.maxZ - 32 + rimWiggle(x, seed, 37)),
+  );
+}
+
 function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
 }
@@ -356,10 +388,26 @@ export function terrainHeight(x: number, z: number, seed: number): number {
   // ridges, the rise is steeper than the climb limit everywhere (guarded by
   // tests/terrain_walls.test.ts); it starts where it always did (30yd inside,
   // the Mirefen impact site leans on that wall base) but peaks before the
-  // boundary so the whole climb happens in-world.
-  const rimX = smoothstep(WORLD_MAX_X - 30, WORLD_MAX_X - 6, Math.abs(x));
-  const rimS = smoothstep(w.minZ + 30, w.minZ + 6, z);
-  const rimN = smoothstep(w.maxZ - 30, w.maxZ - 6, z);
+  // boundary so the whole climb happens in-world. Each ramp's START is nudged a
+  // few yards in/out by a low-frequency wiggle (sampled along the wall's OWN
+  // tangential axis, never its radial one) so the encircling mountains read as
+  // an organic ring instead of a perfect rectangle; the ramp WIDTH (and so its
+  // guaranteed steepness) never changes, only where it begins.
+  const rimX = smoothstep(
+    WORLD_MAX_X - 30 + rimWiggle(z, seed, X_RIM_PHASE),
+    WORLD_MAX_X - 6 + rimWiggle(z, seed, X_RIM_PHASE),
+    Math.abs(x),
+  );
+  const rimS = smoothstep(
+    w.minZ + 30 + rimWiggle(x, seed, 23),
+    w.minZ + 6 + rimWiggle(x, seed, 23),
+    z,
+  );
+  const rimN = smoothstep(
+    w.maxZ - 30 + rimWiggle(x, seed, 37),
+    w.maxZ - 6 + rimWiggle(x, seed, 37),
+    z,
+  );
   const rim = Math.max(rimX, rimS, rimN);
   h += rim * 55;
   h += mirefenImpactCraterOffset(x, z);

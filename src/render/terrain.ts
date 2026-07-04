@@ -1,7 +1,14 @@
 import * as THREE from 'three';
 import { WORLD_MAX_X, WORLD_MAX_Z, WORLD_MIN_Z, ZONES } from '../sim/data';
 import type { BiomeId } from '../sim/types';
-import { biomeAt, roadDistance, terrainHeight, waterLevel, zoneBiomeAt } from '../sim/world';
+import {
+  biomeAt,
+  rimEdgeDistance,
+  roadDistance,
+  terrainHeight,
+  waterLevel,
+  zoneBiomeAt,
+} from '../sim/world';
 import { loadTexture } from './assets/loader';
 import { registerPreload } from './assets/preload';
 import { GFX } from './gfx';
@@ -371,12 +378,10 @@ function sampleVertex(x: number, z: number, seed: number): VertexSample {
     lerpSplat(w, 1, impact.dirt);
     lerpSplat(w, 2, impact.rock);
   }
-  // the rim wall reads as distant sunlit peaks, not a black cliff
-  const edge = Math.max(
-    Math.abs(x) - (WORLD_MAX_X - 32),
-    WORLD_MIN_Z + 32 - z,
-    z - (WORLD_MAX_Z - 32),
-  );
+  // the rim wall reads as distant sunlit peaks, not a black cliff. Shares the
+  // sim's wiggled rim boundary (rimEdgeDistance) so the tint never disagrees
+  // with where the mountains actually rise.
+  const edge = rimEdgeDistance(x, z, seed);
   const rim = clamp01(edge / 26);
   if (rim > 0) {
     cTmp.lerp(hazyPeakC, rim * 0.9);
