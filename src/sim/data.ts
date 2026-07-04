@@ -279,7 +279,11 @@ export const GROUP_XP_BONUS = [1, 1, 1.166, 1.3, 1.43];
 
 export const ZONES: ZoneDef[] = [ZONE1_ZONE, ZONE2_ZONE, ZONE3_ZONE];
 
-export const WORLD_SIZE = 360; // world width: x spans [-180, 180]
+// world width: x spans [-300, 300]. Widened from 360 (was [-180, 180]) to open
+// real room, past every existing camp/hub/poi, for the organic-coastline rim
+// wiggle in sim/world.ts to carve actual bays/peninsulas instead of a subtle
+// wobble against a boundary that content already pressed up against.
+export const WORLD_SIZE = 600;
 export const WORLD_MIN_X = -WORLD_SIZE / 2;
 export const WORLD_MAX_X = WORLD_SIZE / 2;
 export const WORLD_MIN_Z = ZONES[0].zMin;

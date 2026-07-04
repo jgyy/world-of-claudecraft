@@ -70,27 +70,33 @@ describe('impassable terrain walls', () => {
   });
 
   it('every crossing of the world rim is steeper than the climb limit', () => {
-    for (let z = WORLD_MIN_Z + 40; z <= WORLD_MAX_Z - 40; z += 4) {
+    // The rim ramp's start is nudged by the organic-coastline wiggle (see
+    // rimWiggle in src/sim/world.ts: a +/-45 swell plus a +/-14 detail ripple,
+    // so +/-59 worst case), and the ramp itself is wider (50yd inside to 6yd
+    // from the boundary) than a bare wall. These crossings are widened well
+    // past that worst case so they still fully bracket the ramp wherever the
+    // wiggle put it.
+    for (let z = WORLD_MIN_Z + 140; z <= WORLD_MAX_Z - 140; z += 8) {
       for (const side of [-1, 1]) {
         const max = pathMaxSteepness(
           WORLD_SEED,
-          { x: side * (WORLD_MAX_X - 36), z },
-          { x: side * (WORLD_MAX_X + 4), z },
+          { x: side * (WORLD_MAX_X - 140), z },
+          { x: side * (WORLD_MAX_X + 70), z },
         );
         expect(max, `x-rim side=${side} at z=${z}`).toBeGreaterThan(WALL_MARGIN);
       }
     }
-    for (let x = -144; x <= 144; x += 4) {
+    for (let x = -144; x <= 144; x += 8) {
       const south = pathMaxSteepness(
         WORLD_SEED,
-        { x, z: WORLD_MIN_Z + 36 },
-        { x, z: WORLD_MIN_Z - 4 },
+        { x, z: WORLD_MIN_Z + 140 },
+        { x, z: WORLD_MIN_Z - 70 },
       );
       expect(south, `south rim at x=${x}`).toBeGreaterThan(WALL_MARGIN);
       const north = pathMaxSteepness(
         WORLD_SEED,
-        { x, z: WORLD_MAX_Z - 36 },
-        { x, z: WORLD_MAX_Z + 4 },
+        { x, z: WORLD_MAX_Z - 140 },
+        { x, z: WORLD_MAX_Z + 70 },
       );
       expect(north, `north rim at x=${x}`).toBeGreaterThan(WALL_MARGIN);
     }

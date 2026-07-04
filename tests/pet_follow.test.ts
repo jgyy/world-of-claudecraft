@@ -83,9 +83,11 @@ describe('pet heel pathfinding', () => {
 
   it('does not teleport while following a distant owner over open ground', () => {
     // 50yd away with a clear line of sight: the pet should run, never snap.
-    const { sim, pet, owner } = setup({ x: 200, y: 0, z: 200 }, { x: 200, y: 0, z: 250 });
+    // (0, 100)/(0, 150) sits on ordinary rolling vale terrain, clear of the
+    // spawn building, the lake, and every rim/ridge wall.
+    const { sim, pet, owner } = setup({ x: 0, y: 0, z: 100 }, { x: 0, y: 0, z: 150 });
     let maxStep = 0;
-    for (let i = 0; i < 20 * 12; i++) {
+    for (let i = 0; i < 20 * 20; i++) {
       const before = { ...pet.pos };
       sim.tick();
       maxStep = Math.max(maxStep, dist(before, pet.pos));

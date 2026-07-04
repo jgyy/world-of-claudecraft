@@ -18,6 +18,7 @@ import {
   NPCS,
   PROPS,
   QUESTS,
+  WORLD_MAX_X,
   zoneAt,
   zoneWelcomeText,
 } from '../src/sim/data';
@@ -143,8 +144,12 @@ describe('collision & terrain', () => {
     teleportTo(sim, 150, 0);
     p.facing = Math.PI / 2; // +x, toward the world rim
     sim.moveInput.forward = true;
-    for (let i = 0; i < 400; i++) sim.tick();
-    expect(p.pos.x).toBeLessThan(170);
+    for (let i = 0; i < 800; i++) sim.tick();
+    // The organic-coastline rim wiggle (src/sim/world.ts) moves the wall's
+    // exact position; this just proves it's still a wall, never reaching the
+    // true world edge (the strict per-crossing slope pin lives in
+    // tests/terrain_walls.test.ts).
+    expect(p.pos.x).toBeLessThan(WORLD_MAX_X - 5);
   });
 
   it('NPCs spawn on dry land outside buildings', () => {

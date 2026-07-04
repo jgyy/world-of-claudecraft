@@ -18,7 +18,7 @@ export const ZONE3_ZONE: ZoneDef = {
   id: 'thornpeak_heights',
   name: 'Thornpeak Heights',
   zMin: 540,
-  zMax: 900,
+  zMax: 1020, // pushed out from 900 for the organic coastline's outer buffer
   levelRange: [13, 20],
   biome: 'peaks',
   hub: { x: 0, z: 660, radius: 20, name: 'Highwatch' },
