@@ -42,8 +42,6 @@ describe('mailbox_window: mail outcomes repaint the inventory cluster', () => {
 });
 
 describe('mailbox_window: house style', () => {
-  // Written as escapes (not literal em/en dash characters) so this test file
-  // itself never trips the repo's pre-push em/en dash scan.
   it('uses no em or en dashes (ASCII separators only)', () => {
     expect(painter.includes('\u2014'), 'em dash found').toBe(false);
     expect(painter.includes('\u2013'), 'en dash found').toBe(false);
