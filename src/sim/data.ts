@@ -314,18 +314,35 @@ export const PLAYER_START = { x: 2, z: -2 };
 // the Sim+renderer; the default game never touches it.
 // ---------------------------------------------------------------------------
 
-// Glimmervein Cavern's painted 'cave' patch, straddling the zone1/zone2 seam
-// (x 10..80, z 140..220). BIOME_BY_ID id 6 = 'cave'. Small, local grid so it
-// touches only the new cavern footprint; everywhere else stays unpainted
-// (id 255) and falls back to the zone-band biome, keeping the rest of the
-// built-in heightfield byte-identical.
+// Glimmervein Cavern: a sunken gorge CARVED into the natural zone1/zone2 seam
+// ridge (that ridge already rises to ~35yd at z=180 around x=100..150; ordinary
+// open-world terrain, not a stamp we invented). A continuous run of 'level'
+// HeightStamps drops a walkable channel through it at x=115, floor height ~2,
+// so the untouched ridge on both sides of the channel becomes the gorge's own
+// steep rock walls (no separate wall geometry needed). The 'cave' biome paint
+// over the same footprint tints the ground and (see terrain.ts/foliage.ts)
+// switches the local decoration mix; both are additive over the built-in
+// heightfield, so everywhere else stays byte-identical.
+// Exported so the renderer's rock-arch overhang module (src/render/cave_tunnel.ts)
+// can draw geometry along the exact same centerline/z-run without duplicating it.
+export const GLIMMERVEIN_GORGE_X = 115;
+export const GLIMMERVEIN_GORGE_FLOOR_HEIGHT = 2;
+export const GLIMMERVEIN_GORGE_ZS = [148, 160, 172, 184, 196, 208] as const;
+const GLIMMERVEIN_GORGE_STAMPS: WorldContent['terrainEdits'] = GLIMMERVEIN_GORGE_ZS.map((z) => ({
+  x: GLIMMERVEIN_GORGE_X,
+  z,
+  radius: 17,
+  delta: GLIMMERVEIN_GORGE_FLOOR_HEIGHT,
+  falloff: 'smooth',
+  mode: 'level',
+}));
 const GLIMMERVEIN_CAVE_PAINT_COLS = 7;
 const GLIMMERVEIN_CAVE_PAINT_ROWS = 8;
 const GLIMMERVEIN_CAVE_PAINT: WorldContent['biomePaint'] = {
   cell: 10,
   cols: GLIMMERVEIN_CAVE_PAINT_COLS,
   rows: GLIMMERVEIN_CAVE_PAINT_ROWS,
-  originX: 10,
+  originX: GLIMMERVEIN_GORGE_X - 30,
   originZ: 140,
   ids: new Array(GLIMMERVEIN_CAVE_PAINT_COLS * GLIMMERVEIN_CAVE_PAINT_ROWS).fill(6),
 };
@@ -338,7 +355,8 @@ export const BUILTIN_WORLD: WorldContent = {
   roads: ROADS,
   props: PROPS,
   playerStart: PLAYER_START,
-  // No terrainEdits: the built-in heightfield is the pure (x,z,seed) function.
+  // The one terrain edit the built-in world carries: the Glimmervein Cavern gorge.
+  terrainEdits: GLIMMERVEIN_GORGE_STAMPS,
   biomePaint: GLIMMERVEIN_CAVE_PAINT,
 };
 

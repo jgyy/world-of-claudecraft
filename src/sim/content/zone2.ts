@@ -36,7 +36,7 @@ export const ZONE2_ZONE: ZoneDef = {
     { x: -95, z: 440, label: 'Troll Mounds' },
     { x: 0, z: 485, label: 'Gravecaller Encampment' },
     { x: 45, z: 515, label: 'The Sunken Bastion' },
-    { x: 45, z: 202, label: 'Glimmervein Cavern' },
+    { x: 115, z: 200, label: 'Glimmervein Cavern' },
   ],
   welcome: 'Report to Warden Fenwick at the Fenbridge gate.',
 };
@@ -72,11 +72,12 @@ export const ZONE2_ROADS: { x: number; z: number }[][] = [
     { x: 45, z: 515 },
   ], // -> cult camp -> Bastion
   [
-    { x: 0, z: 200 },
-    { x: 0, z: 205 },
-    { x: 20, z: 205 },
-    { x: 45, z: 205 },
-  ], // spur off the causeway to Glimmervein Cavern's northern entrance
+    { x: 115, z: 210 },
+    { x: 100, z: 250 },
+    { x: 90, z: 290 },
+    { x: 60, z: 300 },
+  ], // Glimmervein Cavern's northern exit -> Widow Thicket (its own path,
+  // distinct from the x=0 causeway crossing)
 ];
 
 // ---------------------------------------------------------------------------
@@ -1211,12 +1212,12 @@ export const ZONE2_CAMPS: CampDef[] = [
   { mobId: 'bog_bloat', center: { x: 110, z: 440 }, radius: 11, count: 4 },
 ];
 
-// Glimmervein Cavern, northern half (z >= 180): the alternate causeway
-// route's entrance on the Fenbridge side. Kept as its own array and appended
-// AFTER ZONE2_CAMPS in the merged CAMPS array (see data.ts), so no existing
-// camp's spawn draw shifts.
+// Glimmervein Cavern, northern half (z >= 180): the sunken gorge's exit on the
+// Fenbridge side, carved through the ridge at x=115 (see data.ts). Kept as its
+// own array and appended AFTER ZONE2_CAMPS in the merged CAMPS array (see
+// data.ts), so no existing camp's spawn draw shifts.
 export const ZONE2_CAVERN_CAMPS: CampDef[] = [
-  { mobId: 'glimmervein_broodling', center: { x: 45, z: 205 }, radius: 18, count: 6 },
+  { mobId: 'glimmervein_broodling', center: { x: 115, z: 200 }, radius: 8, count: 6 },
 ];
 
 export const ZONE2_OBJECTS: GroundObjectDef[] = [

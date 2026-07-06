@@ -38,6 +38,7 @@ import { AOE_RING_LIFETIME, aoeRingAnim } from './aoe_ring';
 import type { SpatialAudioSink, Surface } from './audio_sink';
 import { type BirdsView, buildBirds } from './birds';
 import { type CameraOcclusionState, stepCameraOcclusion } from './camera_collision';
+import { buildCaveTunnel } from './cave_tunnel';
 import { characterSoulRendActive } from './character_effects';
 import { type AnimState, type CharacterVisual, createCharacterVisual } from './characters';
 import { mechAssetsReady, preloadMechAssets } from './characters/assets';
@@ -1230,6 +1231,10 @@ export class Renderer {
     this.impactSite = buildImpactSite(this.sim.cfg.seed);
     this.scene.add(this.impactSite.group);
     this.scene.add(this.impactSite.light);
+    const caveTunnel = buildCaveTunnel(this.sim.cfg.seed);
+    setRenderCategory(caveTunnel.group, 'props');
+    this.scene.add(caveTunnel.group);
+    freezeStaticMatrices(caveTunnel.group);
     const props = buildProps(this.sim.cfg.seed, (delveId) =>
       tEntity({ kind: 'delve', id: delveId, field: 'name' }),
     );
