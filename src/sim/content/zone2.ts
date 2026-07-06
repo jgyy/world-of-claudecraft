@@ -36,7 +36,7 @@ export const ZONE2_ZONE: ZoneDef = {
     { x: -95, z: 440, label: 'Troll Mounds' },
     { x: 0, z: 485, label: 'Gravecaller Encampment' },
     { x: 45, z: 515, label: 'The Sunken Bastion' },
-    { x: 110, z: 252, label: 'Glimmervein Cavern' },
+    { x: -115, z: 390, label: 'Glimmervein Cavern' },
   ],
   welcome: 'Report to Warden Fenwick at the Fenbridge gate.',
 };
@@ -72,11 +72,11 @@ export const ZONE2_ROADS: { x: number; z: number }[][] = [
     { x: 45, z: 515 },
   ], // -> cult camp -> Bastion
   [
-    { x: 110, z: 262 },
-    { x: 105, z: 285 },
-    { x: 60, z: 298 },
-    { x: 25, z: 300 },
-  ], // Glimmervein Cavern's northern mouth -> Fenbridge approach (east side
+    { x: -115, z: 390 },
+    { x: -95, z: 380 },
+    { x: -60, z: 350 },
+    { x: -20, z: 320 },
+  ], // Glimmervein Cavern's mouth -> Fenbridge approach (west side
   // of the zone, its own path, clear of Widow Thicket)
 ];
 
@@ -1212,14 +1212,12 @@ export const ZONE2_CAMPS: CampDef[] = [
   { mobId: 'bog_bloat', center: { x: 110, z: 440 }, radius: 11, count: 4 },
 ];
 
-// Glimmervein Cavern, northern half (z >= 180): the exit run on the
-// Fenbridge side of the underground tunnel bored at x=110 (GLIMMERVEIN_PASS_X
-// in data.ts). Kept as its own array and appended AFTER ZONE2_CAMPS in the
-// merged CAMPS array (see data.ts), so no existing camp's spawn draw shifts.
-// Camp radius stays within the tunnel's own ~24yd width
-// (GLIMMERVEIN_TUNNEL_HALF_WIDTH=12).
+// Glimmervein Cavern, northern half (z >= 180): Mirefen's own stretch of the
+// same winding trench (GLIMMERVEIN_WAYPOINTS in data.ts). Kept as its own
+// array and appended AFTER ZONE2_CAMPS in the merged CAMPS array (see
+// data.ts), so no existing camp's spawn draw shifts.
 export const ZONE2_CAVERN_CAMPS: CampDef[] = [
-  { mobId: 'glimmervein_broodling', center: { x: 110, z: 200 }, radius: 8, count: 6 },
+  { mobId: 'glimmervein_broodling', center: { x: -128, z: 255 }, radius: 10, count: 6 },
 ];
 
 export const ZONE2_OBJECTS: GroundObjectDef[] = [

@@ -39,7 +39,7 @@ export const ZONE1_ZONE: ZoneDef = {
     { x: 80, z: 80, label: 'Fallen Chapel' },
     { x: -5, z: -52, label: 'Reliquary Hill' },
     { x: 40, z: 140, label: 'Brightwood Glade' },
-    { x: 110, z: 108, label: 'Glimmervein Cavern' },
+    { x: -115, z: 0, label: 'Glimmervein Cavern' },
   ],
   welcome: 'Find Marshal Redbrook in town — he has work for you.',
   welcomeQuestId: 'q_wolves',
@@ -1122,17 +1122,16 @@ export const ZONE1_CHAPEL_CAMPS: CampDef[] = [
   { mobId: 'wraithbinder_maldrec', center: { x: 88, z: 92 }, radius: 3, count: 1 },
 ];
 
-// Glimmervein Cavern, southern half (z < 180): the entrance run on the
-// Eastbrook side of a real underground TUNNEL bored under the zone1/zone2
-// ridge at x=110 (GLIMMERVEIN_PASS_X in data.ts), on the east ("right") side
-// of the zone, well clear of every other camp/POI there. Appended after
-// ZONE1_CHAPEL_CAMPS in the merged CAMPS array (see data.ts) so no existing
-// camp's spawn draw shifts. Camp radius stays within the tunnel's own
-// ~24yd width (GLIMMERVEIN_TUNNEL_HALF_WIDTH=12) so mobs spawn inside the
-// bore, not against its walls.
+// Glimmervein Cavern, southern half (z < 180): Eastbrook's own stretch of
+// the winding sunken trench that enters at roughly the zone's own vertical
+// middle, its "9 o'clock" mouth (GLIMMERVEIN_WAYPOINTS in data.ts), on the
+// west side of the zone, well clear of every other camp/POI there. Appended
+// after ZONE1_CHAPEL_CAMPS in the merged CAMPS array (see data.ts) so no
+// existing camp's spawn draw shifts. Camps sit on two of the trench's own
+// curving waypoints.
 export const ZONE1_CAVERN_CAMPS: CampDef[] = [
-  { mobId: 'glimmervein_spider', center: { x: 110, z: 140 }, radius: 8, count: 6 },
-  { mobId: 'glimmervein_bat', center: { x: 110, z: 160 }, radius: 8, count: 5 },
+  { mobId: 'glimmervein_spider', center: { x: -108, z: 70 }, radius: 10, count: 6 },
+  { mobId: 'glimmervein_bat', center: { x: -112, z: 140 }, radius: 10, count: 5 },
 ];
 
 export const ZONE1_OBJECTS: GroundObjectDef[] = [
@@ -1211,12 +1210,12 @@ export const ZONE1_ROADS: { x: number; z: number }[][] = [
     { x: 78, z: 74 },
   ], // northeast to ruins
   [
-    { x: 70, z: 25 },
-    { x: 90, z: 55 },
-    { x: 105, z: 80 },
-    { x: 110, z: 100 },
-  ], // Boar Meadow approach -> Glimmervein Cavern's southern mouth (east side
-  // of the zone, its own path, clear of Fallen Chapel and Bandit Camp)
+    { x: -65, z: 15 },
+    { x: -85, z: 8 },
+    { x: -100, z: 2 },
+    { x: -115, z: 0 },
+  ], // Sableweb approach -> Glimmervein Cavern's mouth (west side of the
+  // zone, its own path, clear of Mirror Lake and Copper Dig)
 ];
 
 // ---------------------------------------------------------------------------

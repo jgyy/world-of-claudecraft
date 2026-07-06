@@ -314,103 +314,80 @@ export const PLAYER_START = { x: 2, z: -2 };
 // the Sim+renderer; the default game never touches it.
 // ---------------------------------------------------------------------------
 
-// Glimmervein Cavern: a real underground TUNNEL, not a carved-open valley or
-// a pass through a ridge wall. It sits on the EAST ("right") side of both
-// Eastbrook Vale and Mirefen Marsh (x=110, well clear of every existing camp
-// and POI on that side), running under ordinary ground the whole way,
-// including under the zone1/zone2 ridge itself.
-//
-// The terrain here is a single heightfield (there is no second, occluded
-// layer to tunnel through), so "underground" is built the same way the
-// engine already builds a sunken feature (MIREFEN_IMPACT_CRATER above): a
-// HeightStamp pulls the ground down to a fixed low floor. Two things make
-// this read as a bored tunnel and not a valley:
-//   1. The long BODY run uses 'flat' falloff: every point inside a body
-//      stamp's radius snaps straight to the fixed floor with zero blend, so
-//      the sides are a sheer, instant drop (real walls, not a graded slope)
-//      and the surface hillshade the world map draws shows a thin edge, not
-//      a wide shaded valley.
-//   2. The two entrance/exit RAMPS (which must be walkable, so they need a
-//      'smooth' blend) are short and, critically, roofed by the render
-//      tunnel module (src/render/cave_tunnel.ts) for their entire descent,
-//      not just the flat body: cave_tunnel.ts encloses every point whose
-//      (already-edited) height drops meaningfully below the surface, which
-//      covers the ramps too, so there is no open-air stretch anywhere along
-//      the run, only a small mouth right where the ramp rejoins the surface.
-export const GLIMMERVEIN_PASS_X = 110;
-export const GLIMMERVEIN_TUNNEL_HALF_WIDTH = 12; // a thick subway-tunnel width (24yd across)
-// -3.8, not a much deeper value: the world's water plane sits at
-// WATER_LEVEL=-4.5 (src/sim/world.ts) and covers the WHOLE zone footprint at
-// that height, not just the mapped lakes, so any floor at or below it would
-// flood the tunnel. This stays a safe margin above it while still reading as
-// genuinely sunken below the vale/marsh grade (roughly -1..+5 here).
-export const GLIMMERVEIN_FLOOR_Y = -3.8;
-// The two short entrance/exit ramps: 'smooth' falloff so they are walkable
-// (peak slope stays under the movement climb limit; see terrain_walls.test.ts),
-// but small enough, and fully roofed, that they don't read as an open valley.
-export const GLIMMERVEIN_RAMP_SOUTH_Z = 118;
-export const GLIMMERVEIN_RAMP_NORTH_Z = 242;
-// 20: with the shallow depth above, even this gives the smooth blend's peak
-// slope (steeper than the average, per smoothstep's derivative shape) a
-// real margin under the movement climb limit (1.5 rise/run).
-const GLIMMERVEIN_RAMP_RADIUS = 20;
-// The long flat body: dead-flat floor, sheer 'flat'-falloff walls, no slope.
-// Its outer stamps are deliberately close to the ramp CENTERS (only a few
-// yards past where each ramp's own smooth blend has already saturated to
-// within a fraction of a yard of the floor), not the ramps' outer radius: a
-// 'flat' stamp snaps unconditionally to its exact delta wherever it applies,
-// so if its own reach started further out, at a point where the ramp's
-// blend hasn't finished (still meaningfully above the floor), the flat
-// stamp would snap that point down to the floor in one step, an unwalkable
-// cliff in the middle of what should be a continuous ramp. Starting the
-// flat body right where the ramp is already saturated keeps that seam a
-// fraction of a yard, not a cliff (see tests/terrain_walls.test.ts).
-export const GLIMMERVEIN_BODY_ZS = [134, 146, 158, 170, 182, 194, 206, 218, 226] as const;
+// Glimmervein Cavern: a winding sunken trench on the WEST ("left") side of
+// both Eastbrook Vale and Mirefen Marsh, entering and leaving each zone at
+// roughly its own vertical middle (the "9 o'clock" position on each zone's
+// map), not a straight shot through the ridge at a single x. Built the same
+// way the engine already builds a sunken feature (MIREFEN_IMPACT_CRATER
+// above, or a lake basin): a chain of overlapping 'smooth'-falloff 'level'
+// HeightStamps pulls the ground down to a fixed floor, each centered on a
+// waypoint that snakes left and right as z increases, so the path curves
+// like a real subway line, never running straight for its whole length.
+// Depth is deliberately shallow (a few yards, not the "as deep as possible"
+// first tried): src/sim/pathfind.ts blocks a non-swimming player's
+// destination once ground drops below `waterLevel() - PLAYER_SWIM_DEPTH`
+// (currently -5.3), a hard engine floor on how deep any WALKABLE sunken
+// terrain can go without swim-mode support (tracked separately in issue
+// #1518, since water level here is one flat height for the whole zone, not
+// terrain-aware). No separate wall/ceiling/pillar geometry: the concave
+// bowl shape from each overlapping stamp IS the wall, the same way a lake
+// basin's shore doesn't need a fence.
+export const GLIMMERVEIN_FLOOR_Y = -4.8;
+export const GLIMMERVEIN_WAYPOINT_RADIUS = 20;
+export interface GlimmerveinWaypoint {
+  x: number;
+  z: number;
+  // Overrides GLIMMERVEIN_WAYPOINT_RADIUS. The waypoints straddling the
+  // zone1/zone2 ridge crest (z=180, where the natural ridge rises to ~36yd
+  // over a short span, RIDGE_SIGMA=10 in world.ts) need a wider radius so
+  // consecutive smooth stamps stay near full weight all the way through
+  // that steep natural rise; short of that, the ridge's own slope still
+  // shows through between stamps steeply enough to break the movement
+  // climb limit (see tests/terrain_walls.test.ts).
+  radius?: number;
+}
+// Zone1 (eastbrook_vale, z -180..180, "9 o'clock" ~ its own z midpoint 0) to
+// zone2 (mirefen_marsh, z 180..540, midpoint 360), snaking left/right on the
+// west side. The amplitude is deliberately NOT a constant x or a huge swing:
+// Mirror Lake (LAKE in zone1.ts, x=-92 z=88, reach ~48yd) and Deepfen
+// Shallows (DEEPFEN_SHALLOWS_LAKE in zone2.ts, x=-110 z=310, reach ~56yd)
+// both already occupy the far-west band at almost exactly this trench's
+// z-range, so the curve has to weave between x=-26 and x=-107 (never
+// touching either lake's basin, and never reaching the outer-rim wall band
+// past x=-144) rather than hug one straight far-west line.
+export const GLIMMERVEIN_WAYPOINTS: readonly GlimmerveinWaypoint[] = [
+  { x: -95, z: 0 }, // zone1 mouth ("9 o'clock" of Eastbrook Vale)
+  { x: -70, z: 25 },
+  { x: -44, z: 50 },
+  { x: -27, z: 75 },
+  { x: -28, z: 100 },
+  { x: -41, z: 120 },
+  { x: -56, z: 135, radius: 34 },
+  { x: -73, z: 150, radius: 34 },
+  { x: -84, z: 160, radius: 34 },
+  { x: -93, z: 170, radius: 34 },
+  { x: -100, z: 180, radius: 34 }, // under the zone1/zone2 ridge crest
+  { x: -105, z: 190, radius: 34 },
+  { x: -107, z: 200, radius: 34 },
+  { x: -106, z: 210, radius: 34 },
+  { x: -99, z: 225, radius: 34 },
+  { x: -76, z: 250 },
+  { x: -48, z: 275 },
+  { x: -29, z: 300 },
+  { x: -26, z: 325 },
+  { x: -41, z: 350 },
+  { x: -67, z: 375 },
+  { x: -84, z: 390 }, // zone2 mouth ("9 o'clock" of Mirefen Marsh)
+] as const;
 
-const GLIMMERVEIN_BODY_STAMPS: WorldContent['terrainEdits'] = GLIMMERVEIN_BODY_ZS.map((z) => ({
-  x: GLIMMERVEIN_PASS_X,
-  z,
-  radius: GLIMMERVEIN_TUNNEL_HALF_WIDTH + 2,
+const GLIMMERVEIN_TERRAIN_EDITS: WorldContent['terrainEdits'] = GLIMMERVEIN_WAYPOINTS.map((w) => ({
+  x: w.x,
+  z: w.z,
+  radius: w.radius ?? GLIMMERVEIN_WAYPOINT_RADIUS,
   delta: GLIMMERVEIN_FLOOR_Y,
-  falloff: 'flat',
+  falloff: 'smooth',
   mode: 'level',
 }));
-const GLIMMERVEIN_RAMP_STAMPS: WorldContent['terrainEdits'] = [
-  {
-    x: GLIMMERVEIN_PASS_X,
-    z: GLIMMERVEIN_RAMP_SOUTH_Z,
-    radius: GLIMMERVEIN_RAMP_RADIUS,
-    delta: GLIMMERVEIN_FLOOR_Y,
-    falloff: 'smooth',
-    mode: 'level',
-  },
-  {
-    x: GLIMMERVEIN_PASS_X,
-    z: GLIMMERVEIN_RAMP_NORTH_Z,
-    radius: GLIMMERVEIN_RAMP_RADIUS,
-    delta: GLIMMERVEIN_FLOOR_Y,
-    falloff: 'smooth',
-    mode: 'level',
-  },
-];
-const GLIMMERVEIN_TERRAIN_EDITS: WorldContent['terrainEdits'] = [
-  GLIMMERVEIN_RAMP_STAMPS[0],
-  ...GLIMMERVEIN_BODY_STAMPS,
-  GLIMMERVEIN_RAMP_STAMPS[1],
-];
-
-// Covers the tunnel's footprint (body + both ramps) so the 'cave'/rock ground
-// tint and decoration mix switch over the whole run, not just the body.
-const GLIMMERVEIN_CAVE_PAINT_COLS = 6;
-const GLIMMERVEIN_CAVE_PAINT_ROWS = 15;
-const GLIMMERVEIN_CAVE_PAINT: WorldContent['biomePaint'] = {
-  cell: 10,
-  cols: GLIMMERVEIN_CAVE_PAINT_COLS,
-  rows: GLIMMERVEIN_CAVE_PAINT_ROWS,
-  originX: GLIMMERVEIN_PASS_X - 30,
-  originZ: 95,
-  ids: new Array(GLIMMERVEIN_CAVE_PAINT_COLS * GLIMMERVEIN_CAVE_PAINT_ROWS).fill(6),
-};
 
 export const BUILTIN_WORLD: WorldContent = {
   zones: ZONES,
@@ -420,11 +397,9 @@ export const BUILTIN_WORLD: WorldContent = {
   roads: ROADS,
   props: PROPS,
   playerStart: PLAYER_START,
-  // Glimmervein Cavern's floor: a fixed underground depth for the whole run
-  // (see GLIMMERVEIN_TERRAIN_EDITS above); the walls come from the height
-  // difference between this floor and the untouched surface either side.
+  // Glimmervein Cavern's whole winding trench (see GLIMMERVEIN_TERRAIN_EDITS
+  // above): each waypoint's own concave slope is the wall, no separate edit.
   terrainEdits: GLIMMERVEIN_TERRAIN_EDITS,
-  biomePaint: GLIMMERVEIN_CAVE_PAINT,
 };
 
 let activeWorld: WorldContent = BUILTIN_WORLD;
