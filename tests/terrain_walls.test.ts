@@ -14,11 +14,11 @@ const CLIMB_LIMIT = 1.5;
 const WALL_MARGIN = 1.7; // walls must beat the limit with headroom, not by a hair
 const PASS_HALF_WIDTH = 10;
 // Glimmervein Cavern's own pass through the eastbrook_vale/mirefen_marsh
-// ridge (see GLIMMERVEIN_PASS_* in src/sim/world.ts): a second, much
-// narrower opening, well west of the x=0 causeway.
+// ridge (see GLIMMERVEIN_PASS_* in src/sim/world.ts): a second, much wider
+// opening (a whole underground chamber), well west of the x=0 causeway.
 const GLIMMERVEIN_RIDGE_Z = 180;
 const GLIMMERVEIN_PASS_X = -70;
-const GLIMMERVEIN_PASS_SHOULDER = 15;
+const GLIMMERVEIN_PASS_SHOULDER = 32;
 
 // Max steepness met along a straight crossing path.
 function pathMaxSteepness(
@@ -85,9 +85,9 @@ describe('impassable terrain walls', () => {
 
   it("Glimmervein Cavern's own pass shoulder is already a real wall", () => {
     // Mirrors the causeway's shoulder-wall test above, but for the second,
-    // much narrower pass: by GLIMMERVEIN_PASS_SHOULDER (15) either side of
+    // much wider pass: by GLIMMERVEIN_PASS_SHOULDER (32) either side of
     // GLIMMERVEIN_PASS_X, the ridge must already be a real wall, so the
-    // tunnel cannot be silently widened into an open mountain notch.
+    // chamber cannot be silently widened into an open mountain notch.
     for (let x = GLIMMERVEIN_PASS_SHOULDER; x <= GLIMMERVEIN_PASS_SHOULDER + 10; x += 2) {
       for (const side of [-1, 1]) {
         const crossX = GLIMMERVEIN_PASS_X + side * x;
@@ -101,20 +101,35 @@ describe('impassable terrain walls', () => {
     }
   });
 
-  it('Glimmervein Cavern pass itself is walkable (below the climb limit)', () => {
-    // The narrow pass must actually be open at its own centerline, distinct
-    // from the walls just outside it. Scoped to the tunnel's own span (the
+  it('Glimmervein Cavern chamber is walkable end to end (below the climb limit)', () => {
+    // The chamber must actually be open along its centerline, distinct from
+    // the walls just outside it. Scoped to the chamber's own span (the
     // GLIMMERVEIN_FLOOR_STAMPS z-run in src/sim/data.ts), not the full
     // ridge-margin sweep used by the wall tests above: ordinary ambient vale
-    // hill noise well outside the tunnel (e.g. z=140, before the ridge's own
+    // hill noise well outside the chamber (e.g. z=140, before the ridge's own
     // influence even begins) can locally exceed the climb limit exactly like
     // any other rolling terrain in the zone, which is not this test's concern.
     const max = pathMaxSteepness(
       WORLD_SEED,
-      { x: GLIMMERVEIN_PASS_X, z: 145 },
-      { x: GLIMMERVEIN_PASS_X, z: 213 },
+      { x: GLIMMERVEIN_PASS_X, z: 137 },
+      { x: GLIMMERVEIN_PASS_X, z: 215 },
     );
     expect(max).toBeLessThan(CLIMB_LIMIT);
+  });
+
+  it('Glimmervein Cavern chamber is walkable across its full width, not just the centerline', () => {
+    // This is a real underground ROOM (GLIMMERVEIN_PASS_HALF_WIDTH=16), not a
+    // narrow corridor: a crossing lengthwise through the room a good distance
+    // off-center must stay walkable too, distinct from the wall tests above
+    // which sample well past the shoulder on purpose.
+    for (const dx of [-12, -6, 0, 6, 12]) {
+      const max = pathMaxSteepness(
+        WORLD_SEED,
+        { x: GLIMMERVEIN_PASS_X + dx, z: 150 },
+        { x: GLIMMERVEIN_PASS_X + dx, z: 205 },
+      );
+      expect(max, `chamber walkable at dx=${dx}`).toBeLessThan(CLIMB_LIMIT);
+    }
   });
 
   it('every crossing of the world rim is steeper than the climb limit', () => {

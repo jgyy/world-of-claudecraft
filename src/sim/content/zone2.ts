@@ -1212,13 +1212,14 @@ export const ZONE2_CAMPS: CampDef[] = [
   { mobId: 'bog_bloat', center: { x: 110, z: 440 }, radius: 11, count: 4 },
 ];
 
-// Glimmervein Cavern, northern half (z >= 180): the tunnel's exit on the
-// Fenbridge side, a real pass through the ridge at x=-70 (GLIMMERVEIN_PASS_X
-// in data.ts/world.ts). Kept as its own array and appended AFTER ZONE2_CAMPS
-// in the merged CAMPS array (see data.ts), so no existing camp's spawn draw
-// shifts. Camp radius kept tight to the ~10yd-wide tunnel floor.
+// Glimmervein Cavern, northern half (z >= 180): the exit chamber on the
+// Fenbridge side, a real underground ROOM through the ridge at x=-70
+// (GLIMMERVEIN_PASS_X in data.ts/world.ts). Kept as its own array and
+// appended AFTER ZONE2_CAMPS in the merged CAMPS array (see data.ts), so no
+// existing camp's spawn draw shifts. Camp radius now uses most of the room's
+// ~32yd width (GLIMMERVEIN_PASS_HALF_WIDTH=16).
 export const ZONE2_CAVERN_CAMPS: CampDef[] = [
-  { mobId: 'glimmervein_broodling', center: { x: -70, z: 200 }, radius: 4, count: 6 },
+  { mobId: 'glimmervein_broodling', center: { x: -70, z: 202 }, radius: 12, count: 6 },
 ];
 
 export const ZONE2_OBJECTS: GroundObjectDef[] = [

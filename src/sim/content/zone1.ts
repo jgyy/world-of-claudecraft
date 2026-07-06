@@ -1122,16 +1122,17 @@ export const ZONE1_CHAPEL_CAMPS: CampDef[] = [
   { mobId: 'wraithbinder_maldrec', center: { x: 88, z: 92 }, radius: 3, count: 1 },
 ];
 
-// Glimmervein Cavern, southern half (z < 180): the tunnel's entrance on the
-// Eastbrook side, a real pass through the natural zone1/zone2 mountain ridge
-// at x=-70 (GLIMMERVEIN_PASS_X in data.ts/world.ts), well west of the x=0
-// causeway. Appended after ZONE1_CHAPEL_CAMPS in the merged CAMPS array (see
-// data.ts) so no existing camp's spawn draw shifts. Camp radius is kept tight
-// (the tunnel floor is only ~10yd wide) so mobs spawn inside the corridor,
-// not against its walls.
+// Glimmervein Cavern, southern half (z < 180): the entrance chamber on the
+// Eastbrook side, a real underground ROOM through the natural zone1/zone2
+// mountain ridge at x=-70 (GLIMMERVEIN_PASS_X in data.ts/world.ts), well west
+// of the x=0 causeway. Appended after ZONE1_CHAPEL_CAMPS in the merged CAMPS
+// array (see data.ts) so no existing camp's spawn draw shifts. Camp radius
+// and off-center spread now use most of the room's ~32yd width
+// (GLIMMERVEIN_PASS_HALF_WIDTH=16), so mobs spread through the chamber rather
+// than clustering on a single corridor line.
 export const ZONE1_CAVERN_CAMPS: CampDef[] = [
-  { mobId: 'glimmervein_spider', center: { x: -70, z: 152 }, radius: 4, count: 6 },
-  { mobId: 'glimmervein_bat', center: { x: -70, z: 165 }, radius: 4, count: 5 },
+  { mobId: 'glimmervein_spider', center: { x: -76, z: 150 }, radius: 11, count: 6 },
+  { mobId: 'glimmervein_bat', center: { x: -62, z: 166 }, radius: 11, count: 5 },
 ];
 
 export const ZONE1_OBJECTS: GroundObjectDef[] = [

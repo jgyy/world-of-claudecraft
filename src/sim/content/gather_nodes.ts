@@ -33,7 +33,7 @@ export const GATHER_NODES: GatherNodeDef[] = [
   { id: 'herb_mirefen_1', zoneId: 'mirefen_marsh', type: 'herb', pos: { x: 60, z: 385 } },
   { id: 'herb_mirefen_2', zoneId: 'mirefen_marsh', type: 'herb', pos: { x: -45, z: 452 } },
 
-  // Glimmervein Cavern ore vein, in the mountain tunnel at x=-70 (the
+  // Glimmervein Cavern ore vein, in the underground chamber at x=-70 (the
   // GLIMMERVEIN_PASS_X ridge pass in data.ts/world.ts). One vein on each side
   // so both zone files register a node for their own half.
   { id: 'ore_glimmervein_1', zoneId: 'eastbrook_vale', type: 'ore', pos: { x: -70, z: 160 } },
