@@ -339,28 +339,33 @@ export const PLAYER_START = { x: 2, z: -2 };
 //      the run, only a small mouth right where the ramp rejoins the surface.
 export const GLIMMERVEIN_PASS_X = 110;
 export const GLIMMERVEIN_TUNNEL_HALF_WIDTH = 12; // a thick subway-tunnel width (24yd across)
-export const GLIMMERVEIN_FLOOR_Y = -22; // fixed absolute depth: genuinely below the surface
+// -3.8, not a much deeper value: the world's water plane sits at
+// WATER_LEVEL=-4.5 (src/sim/world.ts) and covers the WHOLE zone footprint at
+// that height, not just the mapped lakes, so any floor at or below it would
+// flood the tunnel. This stays a safe margin above it while still reading as
+// genuinely sunken below the vale/marsh grade (roughly -1..+5 here).
+export const GLIMMERVEIN_FLOOR_Y = -3.8;
 // The two short entrance/exit ramps: 'smooth' falloff so they are walkable
 // (peak slope stays under the movement climb limit; see terrain_walls.test.ts),
 // but small enough, and fully roofed, that they don't read as an open valley.
-export const GLIMMERVEIN_RAMP_SOUTH_Z = 128;
-export const GLIMMERVEIN_RAMP_NORTH_Z = 232;
-// 30: gives the smooth blend's peak slope (steeper than the average, per
-// smoothstep's derivative shape) a real margin under the movement climb
-// limit (1.5 rise/run) rather than landing right at the edge of it.
-const GLIMMERVEIN_RAMP_RADIUS = 30;
+export const GLIMMERVEIN_RAMP_SOUTH_Z = 118;
+export const GLIMMERVEIN_RAMP_NORTH_Z = 242;
+// 20: with the shallow depth above, even this gives the smooth blend's peak
+// slope (steeper than the average, per smoothstep's derivative shape) a
+// real margin under the movement climb limit (1.5 rise/run).
+const GLIMMERVEIN_RAMP_RADIUS = 20;
 // The long flat body: dead-flat floor, sheer 'flat'-falloff walls, no slope.
-// Its outer stamps (144 / 216) are deliberately close to the ramp CENTERS
-// (128 / 232, only 2yd past where each ramp's own smooth blend has already
-// saturated to within a fraction of a yard of the floor), not the ramps'
-// outer radius: a 'flat' stamp snaps unconditionally to its exact delta
-// wherever it applies, so if its own reach started further out, at a point
-// where the ramp's blend hasn't finished (still meaningfully above the
-// floor), the flat stamp would snap that point down to the floor in one
-// step, an unwalkable cliff in the middle of what should be a continuous
-// ramp. Starting the flat body right where the ramp is already saturated
-// keeps that seam a fraction of a yard, not a cliff.
-export const GLIMMERVEIN_BODY_ZS = [144, 156, 168, 180, 192, 204, 216] as const;
+// Its outer stamps are deliberately close to the ramp CENTERS (only a few
+// yards past where each ramp's own smooth blend has already saturated to
+// within a fraction of a yard of the floor), not the ramps' outer radius: a
+// 'flat' stamp snaps unconditionally to its exact delta wherever it applies,
+// so if its own reach started further out, at a point where the ramp's
+// blend hasn't finished (still meaningfully above the floor), the flat
+// stamp would snap that point down to the floor in one step, an unwalkable
+// cliff in the middle of what should be a continuous ramp. Starting the
+// flat body right where the ramp is already saturated keeps that seam a
+// fraction of a yard, not a cliff (see tests/terrain_walls.test.ts).
+export const GLIMMERVEIN_BODY_ZS = [134, 146, 158, 170, 182, 194, 206, 218, 226] as const;
 
 const GLIMMERVEIN_BODY_STAMPS: WorldContent['terrainEdits'] = GLIMMERVEIN_BODY_ZS.map((z) => ({
   x: GLIMMERVEIN_PASS_X,

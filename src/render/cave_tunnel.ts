@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import {
-  GLIMMERVEIN_FLOOR_Y,
   GLIMMERVEIN_PASS_X,
   GLIMMERVEIN_RAMP_NORTH_Z,
   GLIMMERVEIN_RAMP_SOUTH_Z,
@@ -33,26 +32,28 @@ export interface CaveTunnelView {
 }
 
 // Tunnel cross-section: a thick subway-tunnel width, matching
-// GLIMMERVEIN_TUNNEL_HALF_WIDTH in data.ts, plus headroom for a real
-// walk-through interior.
+// GLIMMERVEIN_TUNNEL_HALF_WIDTH in data.ts. Kept modest in height (not the
+// 12+ a much deeper floor could afford): GLIMMERVEIN_FLOOR_Y sits only a few
+// yards below the surrounding vale/marsh grade (roughly -1..+5 here), so the
+// roof needs to stay below that grade to read as buried rock rather than a
+// slab poking up out of open ground.
 const HALF_WIDTH = GLIMMERVEIN_TUNNEL_HALF_WIDTH;
-const CEILING_HEIGHT = 12;
+const CEILING_HEIGHT = 6;
 
 // Dense sample grid over the tunnel's full run (both ramps plus the body),
 // x AND z, not just a centerline: every tile gets its own ceiling slab with
 // zero gap to its neighbors, so the roof reads as one continuous bore with
 // no sky visible anywhere along the walkable length.
 const SEGMENT_STEP = 6;
-const RUN_Z_MIN = GLIMMERVEIN_RAMP_SOUTH_Z - 30;
-const RUN_Z_MAX = GLIMMERVEIN_RAMP_NORTH_Z + 30;
+const RUN_Z_MIN = GLIMMERVEIN_RAMP_SOUTH_Z - 20;
+const RUN_Z_MAX = GLIMMERVEIN_RAMP_NORTH_Z + 20;
 // A sampled point is "inside the tunnel" once its (already-edited) height has
-// been pulled at least this far below the fixed floor's own surroundings;
-// GLIMMERVEIN_FLOOR_Y is deep (-22) and ordinary ground here is roughly
-// -3..+5 (well up to the ridge crest further out), so anything within this
-// margin of the floor is genuinely underground, not still-descending ramp
-// shoulder. Short of that (the two mouths, where the ramp's blend weight has
-// faded back toward the natural surface) we leave it open to daylight.
-const ENCLOSE_THRESHOLD = GLIMMERVEIN_FLOOR_Y + 10;
+// dropped meaningfully below ordinary ground here (roughly -1..+5, well up
+// to the ridge crest further out): enclose from about here on, roofing most
+// of each ramp's own descent. Short of that (the two mouths, where the
+// ramp's blend weight has faded back toward the natural surface) we leave
+// it open to daylight.
+const ENCLOSE_THRESHOLD = -1.5;
 
 export function buildCaveTunnel(seed: number): CaveTunnelView {
   const group = new THREE.Group();
