@@ -21,7 +21,15 @@
 // 180->275 (zone2), crossing the zone1/zone2 ridge (z=180), mouths just
 // outside each town hub.
 
-import type { CampDef, GatherNodeDef, HeightStamp, ItemDef, MobTemplate, NpcDef, QuestDef } from '../types';
+import type {
+  CampDef,
+  GatherNodeDef,
+  HeightStamp,
+  ItemDef,
+  MobTemplate,
+  NpcDef,
+  QuestDef,
+} from '../types';
 
 export const SUNKEN_ROAD_FLOOR_Y = -14;
 const STAMP_RADIUS = 28;
@@ -174,11 +182,17 @@ export const SUNKEN_ROAD_QUESTS: Record<string, QuestDef> = {
     name: 'Clearing the Sunken Road',
     giverNpcId: SUNKEN_ROAD_NPC_ID,
     turnInNpcId: SUNKEN_ROAD_NPC_ID,
-    text: "My crew dug that road clear to Fenbridge before the gravemites moved in. Thin them out, $N, and the stalkers deeper in, and honest folk can walk it again.",
-    completionText: 'Clear air and quiet stone. You have my thanks, and Fenbridge will hear of it too.',
+    text: 'My crew dug that road clear to Fenbridge before the gravemites moved in. Thin them out, $N, and the stalkers deeper in, and honest folk can walk it again.',
+    completionText:
+      'Clear air and quiet stone. You have my thanks, and Fenbridge will hear of it too.',
     objectives: [
       { type: 'kill', targetMobId: 'tunnel_gravemite', count: 8, label: 'Tunnel Gravemite slain' },
-      { type: 'kill', targetMobId: 'deep_road_stalker', count: 6, label: 'Deep Road Stalker slain' },
+      {
+        type: 'kill',
+        targetMobId: 'deep_road_stalker',
+        count: 6,
+        label: 'Deep Road Stalker slain',
+      },
     ],
     xpReward: 380,
     copperReward: 130,
