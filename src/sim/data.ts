@@ -332,7 +332,13 @@ export const PLAYER_START = { x: 2, z: -2 };
 // terrain-aware). No separate wall/ceiling/pillar geometry: the concave
 // bowl shape from each overlapping stamp IS the wall, the same way a lake
 // basin's shore doesn't need a fence.
-export const GLIMMERVEIN_FLOOR_Y = -4.8;
+//
+// -3.8, not -5.3: the render water plane sits at WATER_LEVEL=-4.5 (also in
+// world.ts) and covers the WHOLE zone footprint at that height, not just
+// the mapped lakes, so anything AT OR BELOW -4.5 renders as flooded even
+// though it is still walkable per the -5.3 floor above. -3.8 stays a safe
+// margin above the water plane too, so the trench reads as dry ground.
+export const GLIMMERVEIN_FLOOR_Y = -3.8;
 export const GLIMMERVEIN_WAYPOINT_RADIUS = 20;
 export interface GlimmerveinWaypoint {
   x: number;

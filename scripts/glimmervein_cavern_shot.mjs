@@ -1,21 +1,49 @@
 // Screenshots of Glimmervein Cavern (src/sim/content/zone1.ts + zone2.ts +
-// src/sim/data.ts GLIMMERVEIN_* + src/render/cave_tunnel.ts): a real
-// underground TUNNEL bored under the zone1/zone2 ridge on the east ("right")
-// side of both zones, x=110, walkable as ordinary open-world terrain (no
-// loading, no instance transition). Unlike an open-air pass or valley, the
-// surface above the tunnel stays ordinary ground except at its two small
-// mouths: this script deliberately includes an ambient wide shot and an
-// in-game top-down camera over the run to show that. Boots the offline
-// world with the tutorial and first-spawn cinematic pre-marked seen (clean
-// gameplay shots, no onboarding chrome), teleports the player through the
-// approach, both ramps, the flat body (camps, ore vein, support pillars),
-// both mouths, plus the full HUD world-map for each zone. Needs `npm run
-// dev` running. Browser via scripts/browser_path.mjs.
+// src/sim/data.ts GLIMMERVEIN_* + src/render/cave_tunnel.ts): a winding
+// sunken trench on the WEST side of both zones, entering/leaving each zone
+// at roughly its own vertical middle. No wall/ceiling/pillar props: the
+// concave HeightStamp bowl at each waypoint IS the wall, the same way a lake
+// basin's shore needs no fence. Walkable as ordinary open-world terrain (no
+// loading, no instance transition). Boots the offline world with the
+// tutorial and first-spawn cinematic pre-marked seen (clean gameplay shots,
+// no onboarding chrome), then walks the FULL winding centerline (a copy of
+// GLIMMERVEIN_WAYPOINTS in src/sim/data.ts; keep the two in sync if the
+// curve changes), one interior shot per segment looking toward the next
+// waypoint, plus the approach, both mouths, both camps, the ore veins, an
+// ambient wide shot, an in-game top-down camera, and the full HUD world-map
+// for each zone. Needs `npm run dev` running. Browser via
+// scripts/browser_path.mjs.
 
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
+// Mirrors GLIMMERVEIN_WAYPOINTS in src/sim/data.ts.
+const GLIMMERVEIN_WAYPOINTS = [
+  { x: -95, z: 0 },
+  { x: -70, z: 25 },
+  { x: -44, z: 50 },
+  { x: -27, z: 75 },
+  { x: -28, z: 100 },
+  { x: -41, z: 120 },
+  { x: -56, z: 135 },
+  { x: -73, z: 150 },
+  { x: -84, z: 160 },
+  { x: -93, z: 170 },
+  { x: -100, z: 180 },
+  { x: -105, z: 190 },
+  { x: -107, z: 200 },
+  { x: -106, z: 210 },
+  { x: -99, z: 225 },
+  { x: -76, z: 250 },
+  { x: -48, z: 275 },
+  { x: -29, z: 300 },
+  { x: -26, z: 325 },
+  { x: -41, z: 350 },
+  { x: -67, z: 375 },
+  { x: -84, z: 390 },
+];
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 const OUT = 'docs/screenshots';
@@ -101,43 +129,54 @@ async function shootMap(name, x, z) {
   await new Promise((r) => setTimeout(r, 200));
 }
 
-// Glimmervein Cavern is a real underground TUNNEL (not an open-air pass or
-// valley), bored at x=110 (GLIMMERVEIN_PASS_X in data.ts) under the
-// zone1/zone2 ridge, on the east ("right") side of both zones. Approach
-// along the new Zone1 road (Boar Meadow -> cavern), down the south ramp
-// (roofed the whole way, not an open trench), through the flat, ~24yd-wide
-// bored body (support pillars, crystal light, camps, ore vein), up the north
-// ramp into Mirefen Marsh.
-await shootAt('glimmervein_01_approach_zone1', 85, 55, 110, 100, -0.05);
-await shootAt('glimmervein_02_south_mouth', 110, 98, 110, 118, -0.1);
-await shootAt('glimmervein_03_ramp_descent', 110, 118, 110, 140, -0.15);
-await shootAt('glimmervein_04_spider_camp', 110, 138, 110, 150, -0.1);
-await shootAt('glimmervein_05_ore_vein', 107, 152, 110, 150, -0.1);
-await shootAt('glimmervein_06_bat_camp', 110, 158, 110, 168, -0.1);
-await shootAt('glimmervein_07_body_west_wall', 110, 180, 96, 180, -0.1);
-await shootAt('glimmervein_08_body_east_wall', 110, 180, 124, 180, -0.1);
-await shootAt('glimmervein_09_body_full_width', 100, 175, 120, 178, -0.1);
-await shootAt('glimmervein_10_center_pillars', 110, 172, 110, 190, -0.2);
-await shootAt('glimmervein_11_broodling_camp', 110, 198, 110, 208, -0.1);
-await shootAt('glimmervein_12_ramp_ascent', 110, 244, 110, 258, -0.1);
-await shootAt('glimmervein_13_north_mouth_daylight', 110, 275, 110, 250, -0.05);
+const wp = GLIMMERVEIN_WAYPOINTS;
+const first = wp[0];
+const last = wp[wp.length - 1];
+
+// Approach from outside Eastbrook Vale, looking at the mouth ahead.
+await shootAt('glimmervein_00_approach_zone1', first.x + 20, first.z - 45, first.x, first.z, -0.05);
+
+// One interior shot PER SEGMENT of the whole winding centerline, each
+// looking from the current waypoint toward the next one, so the entire
+// curve is covered end to end (not just a handful of hand-picked spots).
+for (let i = 0; i + 1 < wp.length; i++) {
+  const a = wp[i];
+  const b = wp[i + 1];
+  const label = String(i + 1).padStart(2, '0');
+  await shootAt(`glimmervein_${label}_interior`, a.x, a.z, b.x, b.z, -0.12);
+}
+
+// Exit into Mirefen Marsh, looking back at the mouth from outside.
+await shootAt('glimmervein_exit_zone2', last.x - 20, last.z + 45, last.x, last.z, -0.05);
+
 // A wide shot from a distance, well off to the side of the whole run:
-// confirms the surface above the tunnel reads as ORDINARY ground (no long
+// confirms the surface above the trench reads as ORDINARY ground (no long
 // valley/gouge), only the two small mouths breaking it.
-await shootAt('glimmervein_14_ambient_no_valley', 165, 180, 110, 180, -0.08, 22);
-// Steep, near-vertical in-game camera over the tunnel's own footprint
+const midZ = wp[Math.floor(wp.length / 2)];
+await shootAt('glimmervein_ambient_no_valley', midZ.x + 90, midZ.z, midZ.x, midZ.z, -0.08, 22);
+
+// Steep, near-vertical in-game camera over the ridge-crossing waypoint
 // (camPitch is clamped to [-0.4, 1.35] in game/input.ts; positive is looking
 // DOWN, so 1.3 is as close to a true top-down look as the follow camera
-// allows): confirms the same thing from directly overhead, distinct from the
-// flat HUD world-map shots below.
-await shootAt('glimmervein_15_overhead_topdown', 110, 180, 110, 181, 1.3, 22);
+// allows): confirms the same thing from directly overhead, distinct from
+// the flat HUD world-map shots below.
+const ridgeWp = wp.find((w) => w.z === 180) ?? wp[Math.floor(wp.length / 2)];
+await shootAt(
+  'glimmervein_overhead_topdown',
+  ridgeWp.x,
+  ridgeWp.z,
+  ridgeWp.x,
+  ridgeWp.z + 1,
+  1.3,
+  22,
+);
 
 // Full top-down HUD world-map view, zoomed to show the WHOLE zone (mapZoom
 // default = 1, "the whole committed zone" per map_window_view.ts), once from
-// each side of the cavern, so the new route is visible against each zone's
+// each side of the trench, so the new route is visible against each zone's
 // full layout, not just a close-up crop.
-await shootMap('glimmervein_16_map_zone1_eastbrook_vale', 110, 150);
-await shootMap('glimmervein_17_map_zone2_mirefen_marsh', 110, 210);
+await shootMap('glimmervein_map_zone1_eastbrook_vale', wp[3].x, wp[3].z);
+await shootMap('glimmervein_map_zone2_mirefen_marsh', wp[wp.length - 4].x, wp[wp.length - 4].z);
 
 await browser.close();
 console.log('wrote screenshots to', OUT);
