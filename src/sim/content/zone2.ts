@@ -36,7 +36,7 @@ export const ZONE2_ZONE: ZoneDef = {
     { x: -95, z: 440, label: 'Troll Mounds' },
     { x: 0, z: 485, label: 'Gravecaller Encampment' },
     { x: 45, z: 515, label: 'The Sunken Bastion' },
-    { x: -115, z: 390, label: 'Glimmervein Cavern' },
+    { x: -84, z: 390, label: 'Glimmervein Cavern' },
   ],
   welcome: 'Report to Warden Fenwick at the Fenbridge gate.',
 };
@@ -72,9 +72,9 @@ export const ZONE2_ROADS: { x: number; z: number }[][] = [
     { x: 45, z: 515 },
   ], // -> cult camp -> Bastion
   [
-    { x: -115, z: 390 },
-    { x: -95, z: 380 },
-    { x: -60, z: 350 },
+    { x: -84, z: 390 },
+    { x: -70, z: 375 },
+    { x: -50, z: 350 },
     { x: -20, z: 320 },
   ], // Glimmervein Cavern's mouth -> Fenbridge approach (west side
   // of the zone, its own path, clear of Widow Thicket)
@@ -1217,7 +1217,7 @@ export const ZONE2_CAMPS: CampDef[] = [
 // array and appended AFTER ZONE2_CAMPS in the merged CAMPS array (see
 // data.ts), so no existing camp's spawn draw shifts.
 export const ZONE2_CAVERN_CAMPS: CampDef[] = [
-  { mobId: 'glimmervein_broodling', center: { x: -128, z: 255 }, radius: 10, count: 6 },
+  { mobId: 'glimmervein_broodling', center: { x: -48, z: 275 }, radius: 10, count: 6 },
 ];
 
 export const ZONE2_OBJECTS: GroundObjectDef[] = [

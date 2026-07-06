@@ -36,6 +36,6 @@ export const GATHER_NODES: GatherNodeDef[] = [
   // Glimmervein Cavern ore vein, along the winding sunken trench
   // (GLIMMERVEIN_WAYPOINTS in data.ts). One vein on each side so both zone
   // files register a node for their own half.
-  { id: 'ore_glimmervein_1', zoneId: 'eastbrook_vale', type: 'ore', pos: { x: -130, z: 105 } },
-  { id: 'ore_glimmervein_2', zoneId: 'mirefen_marsh', type: 'ore', pos: { x: -108, z: 220 } },
+  { id: 'ore_glimmervein_1', zoneId: 'eastbrook_vale', type: 'ore', pos: { x: -28, z: 100 } },
+  { id: 'ore_glimmervein_2', zoneId: 'mirefen_marsh', type: 'ore', pos: { x: -106, z: 210 } },
 ];

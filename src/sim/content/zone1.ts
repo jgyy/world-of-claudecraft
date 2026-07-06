@@ -39,7 +39,7 @@ export const ZONE1_ZONE: ZoneDef = {
     { x: 80, z: 80, label: 'Fallen Chapel' },
     { x: -5, z: -52, label: 'Reliquary Hill' },
     { x: 40, z: 140, label: 'Brightwood Glade' },
-    { x: -115, z: 0, label: 'Glimmervein Cavern' },
+    { x: -95, z: 0, label: 'Glimmervein Cavern' },
   ],
   welcome: 'Find Marshal Redbrook in town — he has work for you.',
   welcomeQuestId: 'q_wolves',
@@ -1130,8 +1130,8 @@ export const ZONE1_CHAPEL_CAMPS: CampDef[] = [
 // existing camp's spawn draw shifts. Camps sit on two of the trench's own
 // curving waypoints.
 export const ZONE1_CAVERN_CAMPS: CampDef[] = [
-  { mobId: 'glimmervein_spider', center: { x: -108, z: 70 }, radius: 10, count: 6 },
-  { mobId: 'glimmervein_bat', center: { x: -112, z: 140 }, radius: 10, count: 5 },
+  { mobId: 'glimmervein_spider', center: { x: -44, z: 50 }, radius: 10, count: 6 },
+  { mobId: 'glimmervein_bat', center: { x: -73, z: 150 }, radius: 10, count: 5 },
 ];
 
 export const ZONE1_OBJECTS: GroundObjectDef[] = [
@@ -1211,9 +1211,9 @@ export const ZONE1_ROADS: { x: number; z: number }[][] = [
   ], // northeast to ruins
   [
     { x: -65, z: 15 },
-    { x: -85, z: 8 },
-    { x: -100, z: 2 },
-    { x: -115, z: 0 },
+    { x: -80, z: 8 },
+    { x: -90, z: 2 },
+    { x: -95, z: 0 },
   ], // Sableweb approach -> Glimmervein Cavern's mouth (west side of the
   // zone, its own path, clear of Mirror Lake and Copper Dig)
 ];
