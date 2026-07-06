@@ -14,8 +14,8 @@
     "cancelCast fishing arm via dealDamage (FISHING_CAST_ID, not pushback)",
     "multi-class casters: mage/priest/warlock"
   ],
-  "draws": 670,
-  "drawDigest": "adef6edf",
+  "draws": 661,
+  "drawDigest": "4c16785e",
   "frames": [
     {
       "tick": 0,
@@ -567,99 +567,99 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 424,
-      "state": "5c88f521",
-      "events": "25379854",
+      "state": "099aa145",
+      "events": "e7acc4ac",
       "rng": {
-        "draws": 202,
-        "digest": "70ef549e"
+        "draws": 199,
+        "digest": "d64aff1a"
       }
     },
     {
       "tick": 90,
       "time": 4.5,
       "nextId": 424,
-      "state": "d551cae8",
+      "state": "1002e498",
       "events": "741638a5",
       "rng": {
-        "draws": 227,
-        "digest": "3de4f561"
+        "draws": 224,
+        "digest": "49f4849e"
       }
     },
     {
       "tick": 95,
       "time": 4.75,
       "nextId": 424,
-      "state": "95de6d0a",
+      "state": "49b98a54",
       "events": "741638a5",
       "rng": {
-        "draws": 273,
-        "digest": "e562c13a"
+        "draws": 270,
+        "digest": "afee6daa"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 424,
-      "state": "09874f0a",
+      "state": "34f08b56",
       "events": "741638a5",
       "rng": {
-        "draws": 297,
-        "digest": "364214ec"
+        "draws": 294,
+        "digest": "9754ad62"
       }
     },
     {
       "tick": 105,
       "time": 5.25,
       "nextId": 424,
-      "state": "262037bd",
+      "state": "ddd183c5",
       "events": "741638a5",
       "rng": {
-        "draws": 312,
-        "digest": "01c12357"
+        "draws": 308,
+        "digest": "45703aac"
       }
     },
     {
       "tick": 110,
       "time": 5.5,
       "nextId": 424,
-      "state": "1ef83c58",
+      "state": "e6b0279c",
       "events": "741638a5",
       "rng": {
-        "draws": 331,
-        "digest": "0bfcc13b"
+        "draws": 329,
+        "digest": "20d19ed5"
       }
     },
     {
       "tick": 115,
       "time": 5.75,
       "nextId": 424,
-      "state": "85b49daa",
+      "state": "bdab0506",
       "events": "02787cfd",
       "rng": {
-        "draws": 361,
-        "digest": "66dd6047"
+        "draws": 365,
+        "digest": "149fb84e"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 424,
-      "state": "09921392",
+      "state": "f6183ef2",
       "events": "741638a5",
       "rng": {
-        "draws": 391,
-        "digest": "ea7e87a2"
+        "draws": 395,
+        "digest": "90abc565"
       }
     },
     {
       "tick": 123,
       "time": 6.15,
       "nextId": 424,
-      "state": "2d5db87d",
+      "state": "6a7dd671",
       "events": "b672efab",
       "rng": {
-        "draws": 420,
-        "digest": "acef6e5e"
+        "draws": 426,
+        "digest": "359814fd"
       },
       "label": "priest-silence-cancel",
       "players": [
@@ -678,7 +678,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 90,
-            "damageTaken": 68
+            "damageTaken": 54
           },
           "craftSkills": {},
           "delveClears": {},
@@ -803,7 +803,7 @@
           "facing": 0.54042,
           "fallStartY": -0.371544,
           "fiveSecondRule": 2.7,
-          "hp": 19932,
+          "hp": 19946,
           "id": 420,
           "inCombat": true,
           "kind": "player",
@@ -1039,66 +1039,66 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 424,
-      "state": "236e12af",
-      "events": "6829749c",
+      "state": "ddaa1fc7",
+      "events": "e7fb6730",
       "rng": {
-        "draws": 440,
-        "digest": "0573a00c"
+        "draws": 444,
+        "digest": "1c0a5e88"
       }
     },
     {
       "tick": 130,
       "time": 6.5,
       "nextId": 424,
-      "state": "919589de",
+      "state": "babd3f6a",
       "events": "741638a5",
       "rng": {
-        "draws": 472,
-        "digest": "3e512598"
+        "draws": 478,
+        "digest": "a8a12a04"
       }
     },
     {
       "tick": 135,
       "time": 6.75,
       "nextId": 424,
-      "state": "668345cf",
+      "state": "f9bcb9fb",
       "events": "741638a5",
       "rng": {
-        "draws": 518,
-        "digest": "a32cda23"
+        "draws": 520,
+        "digest": "690d5691"
       }
     },
     {
       "tick": 140,
       "time": 7,
       "nextId": 424,
-      "state": "d2122826",
+      "state": "e67dea82",
       "events": "741638a5",
       "rng": {
-        "draws": 552,
-        "digest": "f136dc3c"
+        "draws": 551,
+        "digest": "2f510ec7"
       }
     },
     {
       "tick": 145,
       "time": 7.25,
       "nextId": 424,
-      "state": "6f93e241",
+      "state": "d4ec1031",
       "events": "b1766ed3",
       "rng": {
-        "draws": 572,
-        "digest": "cf0e3e20"
+        "draws": 573,
+        "digest": "1b89c3c5"
       }
     },
     {
       "tick": 145,
       "time": 7.25,
       "nextId": 424,
-      "state": "8e57d26c",
+      "state": "1da1d768",
       "events": "6f91224b",
       "rng": {
-        "draws": 572,
-        "digest": "cf0e3e20"
+        "draws": 573,
+        "digest": "1b89c3c5"
       },
       "label": "warlock-channel-pushback",
       "players": [
@@ -1117,7 +1117,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 90,
-            "damageTaken": 82
+            "damageTaken": 64
           },
           "craftSkills": {},
           "delveClears": {},
@@ -1244,7 +1244,7 @@
           "facing": 0.54042,
           "fallStartY": -0.371544,
           "fiveSecondRule": 3.8,
-          "hp": 19918,
+          "hp": 19936,
           "id": 420,
           "inCombat": true,
           "kind": "player",
@@ -1489,22 +1489,22 @@
       "tick": 150,
       "time": 7.5,
       "nextId": 424,
-      "state": "bd4fccf8",
+      "state": "cbb6f838",
       "events": "5dc26de8",
       "rng": {
-        "draws": 614,
-        "digest": "54a5cb37"
+        "draws": 611,
+        "digest": "a64a80ff"
       }
     },
     {
       "tick": 153,
       "time": 7.65,
       "nextId": 424,
-      "state": "ae3db4b6",
+      "state": "dc7ccc46",
       "events": "e00d3402",
       "rng": {
-        "draws": 636,
-        "digest": "c4d5100f"
+        "draws": 634,
+        "digest": "8a679079"
       },
       "label": "warlock-fishing-cancel",
       "players": [
@@ -1523,7 +1523,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 92,
-            "damageTaken": 82
+            "damageTaken": 64
           },
           "craftSkills": {},
           "delveClears": {},
@@ -1650,7 +1650,7 @@
           "facing": 0.54042,
           "fallStartY": -0.371544,
           "fiveSecondRule": 4.2,
-          "hp": 19918,
+          "hp": 19936,
           "id": 420,
           "inCombat": true,
           "kind": "player",
@@ -1893,22 +1893,22 @@
       "tick": 155,
       "time": 7.75,
       "nextId": 424,
-      "state": "86c772d8",
+      "state": "a2b34cb4",
       "events": "741638a5",
       "rng": {
-        "draws": 657,
-        "digest": "1cdc2c6b"
+        "draws": 654,
+        "digest": "66198fef"
       }
     },
     {
       "tick": 158,
       "time": 7.9,
       "nextId": 424,
-      "state": "6adb92c0",
+      "state": "c5ef6acc",
       "events": "741638a5",
       "rng": {
-        "draws": 670,
-        "digest": "adef6edf"
+        "draws": 661,
+        "digest": "4c16785e"
       },
       "label": "final",
       "players": [
@@ -1927,7 +1927,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 92,
-            "damageTaken": 82
+            "damageTaken": 64
           },
           "craftSkills": {},
           "delveClears": {},
@@ -2055,7 +2055,7 @@
           "facing": 0.54042,
           "fallStartY": -0.371544,
           "fiveSecondRule": 4.45,
-          "hp": 19918,
+          "hp": 19936,
           "id": 420,
           "inCombat": true,
           "kind": "player",

@@ -8,8 +8,8 @@
     "meleeSwing weaponStrike (sinister_strike via castAbility ~3736)",
     "combo points"
   ],
-  "draws": 157,
-  "drawDigest": "3bc20eb0",
+  "draws": 156,
+  "drawDigest": "fb3ef5fb",
   "frames": [
     {
       "tick": 0,
@@ -155,8 +155,8 @@
       "state": "39269976",
       "events": "741638a5",
       "rng": {
-        "draws": 157,
-        "digest": "3bc20eb0"
+        "draws": 156,
+        "digest": "fb3ef5fb"
       },
       "label": "final",
       "players": [
