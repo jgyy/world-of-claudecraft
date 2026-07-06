@@ -5876,6 +5876,9 @@ export const fr_FR: EnTranslations = {
       "sunpetal_sickle": {
         "name": "Faucille Pétale de Soleil"
       },
+      "sunken_road_grit": {
+        "name": "Gravier de la Route Engloutie"
+      },
       "bristleback_maul": {
         "name": "Marteau Gallowglass"
       },
@@ -6676,6 +6679,15 @@ export const fr_FR: EnTranslations = {
       "thunzharr_stormling": {
         "name": "Élémentaire de tempête éveillé"
       },
+      "tunnel_gravemite": {
+        "name": "Tunnel Gravemite"
+      },
+      "deep_road_stalker": {
+        "name": "Deep Road Stalker"
+      },
+      "the_old_prospector": {
+        "name": "The Old Prospector"
+      },
       "ironvein_foreman": {
         "name": "Contremaître Veinefer"
       },
@@ -6905,6 +6917,11 @@ export const fr_FR: EnTranslations = {
         "name": "Le Veilleur pâle",
         "title": "Gardien des morts",
         "greeting": "Repose-toi maintenant, esprit. Je peux te rendre à ton corps, mais la traversée du retour te laisse affaibli."
+      },
+      "foreman_delke": {
+        "name": "Foreman Delke",
+        "title": "Last of the Sunken Road Crew",
+        "greeting": "The old mine road still runs clear to Fenbridge, if you dare the vermin in it, {className}."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -7695,6 +7712,19 @@ export const fr_FR: EnTranslations = {
           }
         }
       },
+      "q_sunken_road": {
+        "title": "Clearing the Sunken Road",
+        "text": "My crew dug that road clear to Fenbridge before the gravemites moved in. Thin them out, {playerName}, and the stalkers deeper in, and honest folk can walk it again.",
+        "completion": "Clear air and quiet stone. You have my thanks, and Fenbridge will hear of it too.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Gravemite slain"
+          },
+          "1": {
+            "label": "Deep Road Stalker slain"
+          }
+        }
+      },
       "q_drowned_choir": {
         "title": "Le Chœur noyé",
         "text": "Les pataugeurs n'agissent pas seuls. Parmi eux marchent les Dévots noyés — la secte qui a sombré avec le temple, encore vêtue de ses ornements putréfiés, chantant toujours la prière depuis les rochers du rivage. Réduis-en huit au silence et rapporte-moi six des offrandes qu'ils portent. Je veux savoir ce qu'ils comptent donner à leur déesse.",
@@ -7793,6 +7823,9 @@ export const fr_FR: EnTranslations = {
           },
           "9": {
             "label": "Clairière de Brightwood"
+          },
+          "10": {
+            "label": "The Sunken Road"
           }
         }
       },
@@ -7823,6 +7856,9 @@ export const fr_FR: EnTranslations = {
           },
           "7": {
             "label": "Le Bastion englouti"
+          },
+          "8": {
+            "label": "The Sunken Road"
           }
         }
       },

@@ -3091,6 +3091,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.zones.mirefen_marsh.pois.5.label': 'トロルの塚',
   'entities.zones.mirefen_marsh.pois.6.label': 'グレイブコーラーの野営地',
   'entities.zones.mirefen_marsh.pois.7.label': '沈んだ砦',
+  'entities.zones.mirefen_marsh.pois.8.label': '沈んだ道',
   'entities.zones.thornpeak_heights.name': 'ソーンピーク高地',
   'entities.zones.thornpeak_heights.welcome':
     'テサリー隊長がかろうじてハイウォッチの壁を保っています。',
@@ -3282,6 +3283,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.voskar_emberwing.name': '燃え翼のヴォスカル',
   'entities.mobs.wraithbinder_maldrec.name': '魂縛りマルドレク',
   'entities.items.soft_down.name': '柔らかな綿毛',
+  'entities.items.sunken_road_grit.name': '沈んだ道の砂利',
   'entities.items.amber_hide.name': '琥珀色の革',
   'entities.items.stag_antler.name': '枝分かれした角',
   'entities.items.brightwood_venison.name': 'ブライトウッドの鹿肉',
@@ -4791,6 +4793,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   // APM telemetry label from release/v0.14.0
   'hudChrome.perf.labels.apm': 'APM',
   'entities.zones.eastbrook_vale.pois.9.label': 'ブライトウッドの林間',
+  'entities.zones.eastbrook_vale.pois.10.label': '沈んだ道',
   'entities.items.reliquary_plate_chest.name': '聖遺物庫衛兵のホーバーク',
   'entities.items.reliquary_leather_chest.name': '塵守りのジャーキン',
   'entities.items.reliquary_cloth_chest.name': '聖遺物庫の屍衣',
@@ -5997,4 +6000,18 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.gathering.mining': '採掘',
   'hudChrome.gathering.logging': '伐採',
   'hudChrome.gathering.herbalism': '薬草学',
+  'entities.mobs.tunnel_gravemite.name': 'トンネルグレイブマイト',
+  'entities.mobs.deep_road_stalker.name': 'ディープロードストーカー',
+  'entities.mobs.the_old_prospector.name': '老いた採掘者',
+  'entities.npcs.foreman_delke.name': 'デルケ親方',
+  'entities.npcs.foreman_delke.title': '沈んだ道の最後の親方',
+  'entities.npcs.foreman_delke.greeting':
+    '古い坑道はまだフェンブリッジまで通じている、中の害虫に立ち向かう勇気があれば、{className}よ。',
+  'entities.quests.q_sunken_road.title': '沈んだ道の掃討',
+  'entities.quests.q_sunken_road.text':
+    '私のクルーはフェンブリッジまでこの道を掘った、グレイブマイトが住み着くまではな。{playerName}よ、奴らを、そして奥のストーカーも間引いてくれ、まっとうな者たちがまた歩けるように。',
+  'entities.quests.q_sunken_road.completion':
+    '澄んだ空気と静かな岩。感謝する、フェンブリッジにもこの話は届くだろう。',
+  'entities.quests.q_sunken_road.objectives.0.label': 'トンネルグレイブマイトを討伐',
+  'entities.quests.q_sunken_road.objectives.1.label': 'ディープロードストーカーを討伐',
 };

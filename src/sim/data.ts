@@ -46,6 +46,18 @@ import {
 import { GROUND_PICKUP_LINES } from './content/ground_pickup_lines';
 import { COMMON_RECIPES as COMMON_RECIPES_CONTENT } from './content/recipes';
 import {
+  SUNKEN_ROAD_CAMPS,
+  SUNKEN_ROAD_FLOOR_Y,
+  SUNKEN_ROAD_GATHER_NODES,
+  SUNKEN_ROAD_ITEMS,
+  SUNKEN_ROAD_MOBS,
+  SUNKEN_ROAD_NPCS,
+  SUNKEN_ROAD_QUEST_ID,
+  SUNKEN_ROAD_QUESTS,
+  SUNKEN_ROAD_TERRAIN_EDITS,
+  SUNKEN_ROAD_WAYPOINTS,
+} from './content/sunken_road';
+import {
   TEMPLE_CAMPS,
   TEMPLE_DUNGEON_DEFS,
   TEMPLE_DUNGEON_MOBS,
@@ -111,6 +123,10 @@ export {
   delveShopGateUnlocked,
   resolveDelveShopOffers,
 } from './content/delves';
+// Re-exported so render/cave_tunnel.ts (which may only reach into sim/data,
+// not sim/content, per src/CLAUDE.md's dependency direction) can place its
+// purely cosmetic crystal dressing at the same waypoints/depth as the carve.
+export { SUNKEN_ROAD_FLOOR_Y, SUNKEN_ROAD_WAYPOINTS };
 
 import { DELVE_ITEMS } from './content/delves/items';
 import { DELVE_MODULE_LAYOUTS, type DelveModuleId, delveModuleSpan } from './delve_layout';
@@ -153,6 +169,7 @@ export const ITEMS: Record<string, ItemDef> = mergeItems(
   ZONE3_ITEMS,
   TEMPLE_ITEMS,
   DELVE_ITEMS,
+  SUNKEN_ROAD_ITEMS,
 );
 
 export type { AggregatedSetEffect } from './content/item_sets';
@@ -167,6 +184,7 @@ export const MOBS: Record<string, MobTemplate> = {
   ...TEMPLE_MOBS,
   ...TEMPLE_DUNGEON_MOBS,
   ...DELVE_MOBS,
+  ...SUNKEN_ROAD_MOBS,
 };
 
 export const NPCS: Record<string, NpcDef> = {
@@ -174,6 +192,7 @@ export const NPCS: Record<string, NpcDef> = {
   ...ZONE2_NPCS,
   ...ZONE3_NPCS,
   ...TEMPLE_NPCS,
+  ...SUNKEN_ROAD_NPCS,
   brother_halven: BROTHER_HALVEN,
   brother_halven_marsh: BROTHER_HALVEN_MARSH,
   // The Spirit Healer template (dynamic: true, so the ctor's surface-placement
@@ -191,6 +210,7 @@ export const QUESTS: Record<string, QuestDef> = {
   ...ZONE2_QUESTS,
   ...ZONE3_QUESTS,
   ...TEMPLE_QUESTS,
+  ...SUNKEN_ROAD_QUESTS,
 };
 
 export const QUEST_ORDER: string[] = [
@@ -198,6 +218,7 @@ export const QUEST_ORDER: string[] = [
   ...ZONE2_QUEST_ORDER,
   ...ZONE3_QUEST_ORDER,
   ...TEMPLE_QUEST_ORDER,
+  SUNKEN_ROAD_QUEST_ID,
 ];
 
 // Camps spawn in array order, each drawing world-gen RNG, so an entry inserted
@@ -211,6 +232,7 @@ export const CAMPS: CampDef[] = [
   ...TEMPLE_CAMPS,
   ...ZONE1_CHAPEL_CAMPS,
   { mobId: 'grix_the_tunnelking', center: { x: -95, z: -78 }, radius: 4, count: 1 },
+  ...SUNKEN_ROAD_CAMPS,
 ];
 
 export const GROUND_OBJECTS: GroundObjectDef[] = [
@@ -220,7 +242,7 @@ export const GROUND_OBJECTS: GroundObjectDef[] = [
   ...TEMPLE_OBJECTS,
 ];
 
-export const GATHER_NODES: GatherNodeDef[] = [...GATHER_NODES_CONTENT];
+export const GATHER_NODES: GatherNodeDef[] = [...GATHER_NODES_CONTENT, ...SUNKEN_ROAD_GATHER_NODES];
 
 export const COMMON_RECIPES = [...COMMON_RECIPES_CONTENT];
 
@@ -318,7 +340,9 @@ export const BUILTIN_WORLD: WorldContent = {
   roads: ROADS,
   props: PROPS,
   playerStart: PLAYER_START,
-  // No terrainEdits: the built-in heightfield is the pure (x,z,seed) function.
+  // The Sunken Road tunnel: a chain of HeightStamp carves, the only
+  // terrainEdits the built-in world uses.
+  terrainEdits: SUNKEN_ROAD_TERRAIN_EDITS,
 };
 
 let activeWorld: WorldContent = BUILTIN_WORLD;

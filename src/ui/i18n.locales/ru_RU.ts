@@ -3125,6 +3125,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'entities.zones.mirefen_marsh.pois.5.label': 'Курганы троллей',
   'entities.zones.mirefen_marsh.pois.6.label': 'Лагерь Могильного Зова',
   'entities.zones.mirefen_marsh.pois.7.label': 'Затонувший бастион',
+  'entities.zones.mirefen_marsh.pois.8.label': 'Затонувшая дорога',
   'entities.zones.thornpeak_heights.name': 'Терновые высоты',
   'entities.zones.thornpeak_heights.welcome': 'Капитан Тессали едва удерживает стену Хайвотча.',
   'entities.zones.thornpeak_heights.pois.0.label': 'Хайвотч',
@@ -3319,6 +3320,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.voskar_emberwing.name': 'Воскар Жарокрыл',
   'entities.mobs.wraithbinder_maldrec.name': 'Малдрек Пленитель призраков',
   'entities.items.soft_down.name': 'Пучок мягкого пуха',
+  'entities.items.sunken_road_grit.name': 'Гравий Затонувшей дороги',
   'entities.items.amber_hide.name': 'Янтарная шкура',
   'entities.items.stag_antler.name': 'Ветвистый рог',
   'entities.items.brightwood_venison.name': 'Оленина Брайтвуда',
@@ -4887,6 +4889,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   // APM telemetry label from release/v0.14.0
   'hudChrome.perf.labels.apm': 'APM',
   'entities.zones.eastbrook_vale.pois.9.label': 'Поляна Брайтвуда',
+  'entities.zones.eastbrook_vale.pois.10.label': 'Затонувшая дорога',
   'entities.items.reliquary_plate_chest.name': 'Хауберк стражи реликвария',
   'entities.items.reliquary_leather_chest.name': 'Куртка стража пыли',
   'entities.items.reliquary_cloth_chest.name': 'Саван реликвария',
@@ -6114,4 +6117,18 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.gathering.mining': 'Горное дело',
   'hudChrome.gathering.logging': 'Лесозаготовка',
   'hudChrome.gathering.herbalism': 'Травничество',
+  'entities.mobs.tunnel_gravemite.name': 'Туннельный клещ-могильщик',
+  'entities.mobs.deep_road_stalker.name': 'Глубинный сталкер',
+  'entities.mobs.the_old_prospector.name': 'Старый старатель',
+  'entities.npcs.foreman_delke.name': 'Бригадир Делке',
+  'entities.npcs.foreman_delke.title': 'Последний из бригады Затонувшей дороги',
+  'entities.npcs.foreman_delke.greeting':
+    'Старая шахтная дорога все еще ведет в Фенбридж, если ты не боишься тамошней нечисти, {className}.',
+  'entities.quests.q_sunken_road.title': 'Расчистка Затонувшей дороги',
+  'entities.quests.q_sunken_road.text':
+    'Моя бригада прорыла эту дорогу до самого Фенбриджа, пока туда не забрались могильщики. Прорядите их, {playerName}, и сталкеров в глубине, чтобы честные люди снова могли ходить по ней.',
+  'entities.quests.q_sunken_road.completion':
+    'Чистый воздух и тихий камень. Спасибо тебе, в Фенбридже тоже об этом услышат.',
+  'entities.quests.q_sunken_road.objectives.0.label': 'Убийство туннельных клещей-могильщиков',
+  'entities.quests.q_sunken_road.objectives.1.label': 'Убийство глубинных сталкеров',
 };

@@ -5876,6 +5876,9 @@ export const it_IT: EnTranslations = {
       "sunpetal_sickle": {
         "name": "Falcetto Petalo di Sole"
       },
+      "sunken_road_grit": {
+        "name": "Ghiaia della Strada Sommersa"
+      },
       "bristleback_maul": {
         "name": "Martello Gallowglass"
       },
@@ -6676,6 +6679,15 @@ export const it_IT: EnTranslations = {
       "thunzharr_stormling": {
         "name": "Elementale di tempesta ridestato"
       },
+      "tunnel_gravemite": {
+        "name": "Tunnel Gravemite"
+      },
+      "deep_road_stalker": {
+        "name": "Deep Road Stalker"
+      },
+      "the_old_prospector": {
+        "name": "The Old Prospector"
+      },
       "ironvein_foreman": {
         "name": "Caposquadra Venaferrata"
       },
@@ -6905,6 +6917,11 @@ export const it_IT: EnTranslations = {
         "name": "Il Custode Pallido",
         "title": "Guardiano dei Morti",
         "greeting": "Riposa ora, spirito. Posso restituirti al tuo corpo, ma il ritorno dalla traversata ti lascia debole."
+      },
+      "foreman_delke": {
+        "name": "Foreman Delke",
+        "title": "Last of the Sunken Road Crew",
+        "greeting": "The old mine road still runs clear to Fenbridge, if you dare the vermin in it, {className}."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -7695,6 +7712,19 @@ export const it_IT: EnTranslations = {
           }
         }
       },
+      "q_sunken_road": {
+        "title": "Clearing the Sunken Road",
+        "text": "My crew dug that road clear to Fenbridge before the gravemites moved in. Thin them out, {playerName}, and the stalkers deeper in, and honest folk can walk it again.",
+        "completion": "Clear air and quiet stone. You have my thanks, and Fenbridge will hear of it too.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Gravemite slain"
+          },
+          "1": {
+            "label": "Deep Road Stalker slain"
+          }
+        }
+      },
       "q_drowned_choir": {
         "title": "Il Coro Annegato",
         "text": "I guadatori non agiscono da soli. Tra loro camminano i Devoti Annegati — la setta che affondò col tempio, ancora nelle loro vesti marcite, ancora intenti a cantare la preghiera dalle rocce della riva. Riducine otto al silenzio e portami sei delle offerte che recano. Voglio sapere cosa intendono donare alla loro dea.",
@@ -7793,6 +7823,9 @@ export const it_IT: EnTranslations = {
           },
           "9": {
             "label": "Radura di Brightwood"
+          },
+          "10": {
+            "label": "The Sunken Road"
           }
         }
       },
@@ -7823,6 +7856,9 @@ export const it_IT: EnTranslations = {
           },
           "7": {
             "label": "Il Bastione Sommerso"
+          },
+          "8": {
+            "label": "The Sunken Road"
           }
         }
       },

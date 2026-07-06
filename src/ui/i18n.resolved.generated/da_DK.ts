@@ -5876,6 +5876,9 @@ export const da_DK: EnTranslations = {
       "sunpetal_sickle": {
         "name": "Solkronbladssegl"
       },
+      "sunken_road_grit": {
+        "name": "Sunket Vej Grus"
+      },
       "bristleback_maul": {
         "name": "Gallowglass-Hammer"
       },
@@ -6676,6 +6679,15 @@ export const da_DK: EnTranslations = {
       "thunzharr_stormling": {
         "name": "Vækket Stormling"
       },
+      "tunnel_gravemite": {
+        "name": "Tunnel Gravemite"
+      },
+      "deep_road_stalker": {
+        "name": "Deep Road Stalker"
+      },
+      "the_old_prospector": {
+        "name": "The Old Prospector"
+      },
       "ironvein_foreman": {
         "name": "Jernåre-Formand"
       },
@@ -6905,6 +6917,11 @@ export const da_DK: EnTranslations = {
         "name": "Den Blege Vogter",
         "title": "De Dødes Vogter",
         "greeting": "Hvil nu, ånd. Jeg kan føre dig tilbage til din krop, men overfarten tilbage efterlader dig svækket."
+      },
+      "foreman_delke": {
+        "name": "Foreman Delke",
+        "title": "Last of the Sunken Road Crew",
+        "greeting": "The old mine road still runs clear to Fenbridge, if you dare the vermin in it, {className}."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -7695,6 +7712,19 @@ export const da_DK: EnTranslations = {
           }
         }
       },
+      "q_sunken_road": {
+        "title": "Clearing the Sunken Road",
+        "text": "My crew dug that road clear to Fenbridge before the gravemites moved in. Thin them out, {playerName}, and the stalkers deeper in, and honest folk can walk it again.",
+        "completion": "Clear air and quiet stone. You have my thanks, and Fenbridge will hear of it too.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Gravemite slain"
+          },
+          "1": {
+            "label": "Deep Road Stalker slain"
+          }
+        }
+      },
       "q_drowned_choir": {
         "title": "Det Druknede Kor",
         "text": "Vaderne handler ikke alene. Blandt dem vandrer de Druknede Tilbedere - kulten, der sank med templet, stadig i deres rådne ornater, stadig syngende bønnen fra strandklipperne. Bring otte af dem til tavshed, og bring mig seks af de offergaver, de bærer. Jeg vil vide, hvad de agter at give deres gudinde.",
@@ -7793,6 +7823,9 @@ export const da_DK: EnTranslations = {
           },
           "9": {
             "label": "Lysskovlysningen"
+          },
+          "10": {
+            "label": "The Sunken Road"
           }
         }
       },
@@ -7823,6 +7856,9 @@ export const da_DK: EnTranslations = {
           },
           "7": {
             "label": "Den Sunkne Bastion"
+          },
+          "8": {
+            "label": "The Sunken Road"
           }
         }
       },

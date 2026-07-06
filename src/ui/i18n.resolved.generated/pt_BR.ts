@@ -5876,6 +5876,9 @@ export const pt_BR: EnTranslations = {
       "sunpetal_sickle": {
         "name": "Foice Pétala Solar"
       },
+      "sunken_road_grit": {
+        "name": "Cascalho da Estrada Afundada"
+      },
       "bristleback_maul": {
         "name": "Martelo Gallowglass"
       },
@@ -6676,6 +6679,15 @@ export const pt_BR: EnTranslations = {
       "thunzharr_stormling": {
         "name": "Elemental de tormenta desperto"
       },
+      "tunnel_gravemite": {
+        "name": "Tunnel Gravemite"
+      },
+      "deep_road_stalker": {
+        "name": "Deep Road Stalker"
+      },
+      "the_old_prospector": {
+        "name": "The Old Prospector"
+      },
       "ironvein_foreman": {
         "name": "Capataz Veio de Ferro"
       },
@@ -6905,6 +6917,11 @@ export const pt_BR: EnTranslations = {
         "name": "O Guardião Pálido",
         "title": "Vigia dos Mortos",
         "greeting": "Descanse agora, espírito. Posso devolver você ao seu corpo, mas a travessia de volta deixa você fraco."
+      },
+      "foreman_delke": {
+        "name": "Foreman Delke",
+        "title": "Last of the Sunken Road Crew",
+        "greeting": "The old mine road still runs clear to Fenbridge, if you dare the vermin in it, {className}."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -7695,6 +7712,19 @@ export const pt_BR: EnTranslations = {
           }
         }
       },
+      "q_sunken_road": {
+        "title": "Clearing the Sunken Road",
+        "text": "My crew dug that road clear to Fenbridge before the gravemites moved in. Thin them out, {playerName}, and the stalkers deeper in, and honest folk can walk it again.",
+        "completion": "Clear air and quiet stone. You have my thanks, and Fenbridge will hear of it too.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Gravemite slain"
+          },
+          "1": {
+            "label": "Deep Road Stalker slain"
+          }
+        }
+      },
       "q_drowned_choir": {
         "title": "O Coro Afogado",
         "text": "Os vadeadores não agem sozinhos. Entre eles caminham os Devotos Afogados — o culto que afundou com o templo, ainda em suas vestes apodrecidas, ainda cantando a prece desde as rochas da costa. Silencie oito deles e traga-me seis das oferendas que carregam. Eu gostaria de saber o que pretendem dar à sua deusa.",
@@ -7793,6 +7823,9 @@ export const pt_BR: EnTranslations = {
           },
           "9": {
             "label": "Clareira de Brightwood"
+          },
+          "10": {
+            "label": "The Sunken Road"
           }
         }
       },
@@ -7823,6 +7856,9 @@ export const pt_BR: EnTranslations = {
           },
           "7": {
             "label": "O Bastião Submerso"
+          },
+          "8": {
+            "label": "The Sunken Road"
           }
         }
       },

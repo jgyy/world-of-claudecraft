@@ -3898,6 +3898,7 @@ export const it_IT: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.voskar_emberwing.name': 'Voskar Aladibrace',
   'entities.mobs.wraithbinder_maldrec.name': 'Maldrec il Legaspettri',
   'entities.items.soft_down.name': 'Ciuffo di piumino morbido',
+  'entities.items.sunken_road_grit.name': 'Ghiaia della Strada Sommersa',
   'entities.items.amber_hide.name': "Pelle d'ambra",
   'entities.items.stag_antler.name': 'Corno ramificato',
   'entities.items.brightwood_venison.name': 'Selvaggina di Brightwood',

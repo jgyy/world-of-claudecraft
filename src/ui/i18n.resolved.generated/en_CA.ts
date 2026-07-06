@@ -5876,6 +5876,9 @@ export const en_CA: EnTranslations = {
       "sunpetal_sickle": {
         "name": "Sunpetal Sickle"
       },
+      "sunken_road_grit": {
+        "name": "Sunken Road Grit"
+      },
       "bristleback_maul": {
         "name": "Gallowglass Hammer"
       },
@@ -6676,6 +6679,15 @@ export const en_CA: EnTranslations = {
       "thunzharr_stormling": {
         "name": "Roused Stormling"
       },
+      "tunnel_gravemite": {
+        "name": "Tunnel Gravemite"
+      },
+      "deep_road_stalker": {
+        "name": "Deep Road Stalker"
+      },
+      "the_old_prospector": {
+        "name": "The Old Prospector"
+      },
       "ironvein_foreman": {
         "name": "Ironvein Foreman"
       },
@@ -6905,6 +6917,11 @@ export const en_CA: EnTranslations = {
         "name": "The Pale Keeper",
         "title": "Warden of the Dead",
         "greeting": "Rest now, spirit. I can return you to your body, but the crossing back leaves you weak."
+      },
+      "foreman_delke": {
+        "name": "Foreman Delke",
+        "title": "Last of the Sunken Road Crew",
+        "greeting": "The old mine road still runs clear to Fenbridge, if you dare the vermin in it, {className}."
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -7695,6 +7712,19 @@ export const en_CA: EnTranslations = {
           }
         }
       },
+      "q_sunken_road": {
+        "title": "Clearing the Sunken Road",
+        "text": "My crew dug that road clear to Fenbridge before the gravemites moved in. Thin them out, {playerName}, and the stalkers deeper in, and honest folk can walk it again.",
+        "completion": "Clear air and quiet stone. You have my thanks, and Fenbridge will hear of it too.",
+        "objectives": {
+          "0": {
+            "label": "Tunnel Gravemite slain"
+          },
+          "1": {
+            "label": "Deep Road Stalker slain"
+          }
+        }
+      },
       "q_drowned_choir": {
         "title": "The Drowned Choir",
         "text": "The waders do not act alone. Among them walk the Drowned Votaries — the cult that sank with the temple, still in their rotted vestments, still singing the prayer from the shore-rocks. Silence eight of them, and bring me six of the offerings they carry. I would know what they mean to give their goddess.",
@@ -7793,6 +7823,9 @@ export const en_CA: EnTranslations = {
           },
           "9": {
             "label": "Brightwood Glade"
+          },
+          "10": {
+            "label": "The Sunken Road"
           }
         }
       },
@@ -7823,6 +7856,9 @@ export const en_CA: EnTranslations = {
           },
           "7": {
             "label": "The Sunken Bastion"
+          },
+          "8": {
+            "label": "The Sunken Road"
           }
         }
       },

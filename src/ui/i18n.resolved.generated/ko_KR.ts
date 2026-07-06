@@ -5876,6 +5876,9 @@ export const ko_KR: EnTranslations = {
       "sunpetal_sickle": {
         "name": "태양꽃잎 낫"
       },
+      "sunken_road_grit": {
+        "name": "가라앉은 길의 자갈"
+      },
       "bristleback_maul": {
         "name": "갤로글래스 망치"
       },
@@ -6676,6 +6679,15 @@ export const ko_KR: EnTranslations = {
       "thunzharr_stormling": {
         "name": "깨어난 폭풍 정령"
       },
+      "tunnel_gravemite": {
+        "name": "터널 그레이브마이트"
+      },
+      "deep_road_stalker": {
+        "name": "딥로드 스토커"
+      },
+      "the_old_prospector": {
+        "name": "늙은 채굴꾼"
+      },
       "ironvein_foreman": {
         "name": "철맥 감독관"
       },
@@ -6905,6 +6917,11 @@ export const ko_KR: EnTranslations = {
         "name": "영혼 치유사",
         "title": "죽은 자의 수호자",
         "greeting": "편히 쉬게, 영혼이여. 그대를 육신으로 돌려보낼 수 있으나, 돌아오는 길은 그대를 약하게 만들 것이네."
+      },
+      "foreman_delke": {
+        "name": "델케 십장",
+        "title": "가라앉은 길의 마지막 십장",
+        "greeting": "낡은 광산 길은 아직 펜브리지까지 뚫려 있다네, 안에 있는 해충들과 맞설 배짱이 있다면 말이야, {className}."
       },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
@@ -7695,6 +7712,19 @@ export const ko_KR: EnTranslations = {
           }
         }
       },
+      "q_sunken_road": {
+        "title": "가라앉은 길 청소하기",
+        "text": "우리 인부들이 그레이브마이트가 자리 잡기 전까지 펜브리지까지 이 길을 뚫었지. {playerName}, 그것들을, 그리고 더 깊은 곳의 스토커들을 솎아내 주게, 선량한 이들이 다시 그 길을 걸을 수 있도록.",
+        "completion": "맑은 공기와 고요한 돌. 고맙네, 펜브리지에서도 이 소식을 듣게 될 걸세.",
+        "objectives": {
+          "0": {
+            "label": "터널 그레이브마이트 처치"
+          },
+          "1": {
+            "label": "딥로드 스토커 처치"
+          }
+        }
+      },
       "q_drowned_choir": {
         "title": "익사한 성가대",
         "text": "물거리들은 홀로 움직이지 않는다네. 그들 사이를 익사한 신도들이 걷고 있지 — 신전과 함께 가라앉은 그 광신도들은, 썩어버린 제의를 여전히 걸친 채 물가 바위에서 부르던 기도를 아직도 노래하고 있네. 그들 중 여덟을 침묵시키고, 그들이 지닌 제물 여섯 개를 내게 가져오게. 그들이 그 여신에게 무엇을 바치려는지 알고 싶네.",
@@ -7793,6 +7823,9 @@ export const ko_KR: EnTranslations = {
           },
           "9": {
             "label": "브라이트우드 숲"
+          },
+          "10": {
+            "label": "가라앉은 길"
           }
         }
       },
@@ -7823,6 +7856,9 @@ export const ko_KR: EnTranslations = {
           },
           "7": {
             "label": "가라앉은 요새"
+          },
+          "8": {
+            "label": "가라앉은 길"
           }
         }
       },

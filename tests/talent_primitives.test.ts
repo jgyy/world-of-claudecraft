@@ -36,6 +36,9 @@ function spawnTarget(sim: TestSim, p: Entity, dz = 4): Entity {
   mob.hp = 50000;
   mob.hostile = true;
   mob.aiState = 'idle';
+  // A stationary punching bag: an idle mob still wanders (rng-driven), which
+  // can carry it out of line-of-sight of the caster over a multi-tick test.
+  mob.moveSpeed = 0;
   sim.addEntity(mob);
   p.facing = Math.atan2(mob.pos.x - p.pos.x, mob.pos.z - p.pos.z);
   sim.targetEntity(mob.id, p.id);

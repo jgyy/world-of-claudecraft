@@ -1241,7 +1241,8 @@ export const GUIDE_ZONES: GuideZoneInfo[] = [
       "Bandit Camp",
       "Fallen Chapel",
       "Reliquary Hill",
-      "Brightwood Glade"
+      "Brightwood Glade",
+      "The Sunken Road"
     ],
     "welcome": "Find Marshal Redbrook in town — he has work for you."
   },
@@ -1260,7 +1261,8 @@ export const GUIDE_ZONES: GuideZoneInfo[] = [
       "Drowned Chapel",
       "Troll Mounds",
       "Gravecaller Encampment",
-      "The Sunken Bastion"
+      "The Sunken Bastion",
+      "The Sunken Road"
     ],
     "welcome": "Report to Warden Fenwick at the Fenbridge gate."
   },

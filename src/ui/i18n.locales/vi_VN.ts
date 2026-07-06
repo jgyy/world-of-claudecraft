@@ -1905,6 +1905,7 @@ export const vi_VN: Partial<Record<TranslationKey, string>> = {
   'entities.items.sloomtooth_tidefang.name': 'Triều Nha của Sloomtooth',
   'entities.items.smoked_eel.name': 'Lươn Đầm Lầy Hun Khói',
   'entities.items.soft_down.name': 'Túm Lông Tơ Mềm',
+  'entities.items.sunken_road_grit.name': 'Sỏi Con Đường Chìm',
   'entities.items.soggy_boot.name': 'Giày Ướt Sũng',
   'entities.items.soggy_moccasin.name': 'Giày Da Ướt Sũng',
   'entities.items.soulflame_cowl.name': 'Mũ Trùm Wraithfire',

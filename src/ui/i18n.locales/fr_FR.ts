@@ -3935,6 +3935,7 @@ export const fr_FR: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.voskar_emberwing.name': 'Voskar Aile-de-braise',
   'entities.mobs.wraithbinder_maldrec.name': 'Maldrec le Lie-spectres',
   'entities.items.soft_down.name': 'Touffe de duvet doux',
+  'entities.items.sunken_road_grit.name': 'Gravier de la Route Engloutie',
   'entities.items.amber_hide.name': "Peau d'ambre",
   'entities.items.stag_antler.name': 'Andouiller ramifié',
   'entities.items.brightwood_venison.name': 'Venaison de Brightwood',

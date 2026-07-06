@@ -946,7 +946,8 @@ describe('delve reward chest + surface exit flow', () => {
 
   it('the Bountiful roll is deterministic for a given seed', () => {
     // Read the raw roll via enterReliquary (enterFinale pins it false). Same seed
-    // ⇒ same outcome; seed 42 is known to roll Bountiful (drives the fixtures above).
+    // ⇒ same outcome; seed 62 is known to roll Bountiful (the fixtures above pin
+    // `run.bountiful` explicitly, so they don't depend on this exact seed).
     const rollFor = (seed: number) => {
       const s = makeSim('warrior', seed);
       s.setPlayerLevel(DELVES.collapsed_reliquary.minLevel);
@@ -954,7 +955,7 @@ describe('delve reward chest + surface exit flow', () => {
       return s.delveRunForPlayer(s.playerId)?.bountiful;
     };
     expect(rollFor(1234)).toBe(rollFor(1234));
-    expect(rollFor(42)).toBe(true);
+    expect(rollFor(62)).toBe(true);
   });
 
   it('a Bountiful Coffer refuses the lower antes and only opens at Hard-tier + Premium ante', () => {
@@ -2377,6 +2378,12 @@ describe('The Drowned Litany (Phase 7 heroic affixes)', () => {
       const run = enterModule(sim, 'litany_baptistry');
       run.affixes = affixes;
       run.blackwaterTimer = 0;
+      // Isolate the environmental pulse: kill the module's trash so a mob's
+      // melee hit landing inside the 20-tick window doesn't dilute the ratio.
+      for (const id of [...run.mobIds]) {
+        const mob = sim.entities.get(id);
+        if (mob) mob.dead = true;
+      }
       const h = DELVE_MODULES.litany_baptistry.hazards![0];
       const zBase = delveModuleZOffset(run.modules, 0);
       const p = sim.player;

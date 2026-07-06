@@ -3085,6 +3085,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'entities.zones.mirefen_marsh.pois.5.label': '트롤 봉분',
   'entities.zones.mirefen_marsh.pois.6.label': '무덤부름 야영지',
   'entities.zones.mirefen_marsh.pois.7.label': '가라앉은 요새',
+  'entities.zones.mirefen_marsh.pois.8.label': '가라앉은 길',
   'entities.zones.thornpeak_heights.name': '쏜피크 고지',
   'entities.zones.thornpeak_heights.welcome':
     '테살리 대장이 간신히 하이워치 성벽을 지키고 있습니다.',
@@ -3277,6 +3278,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.voskar_emberwing.name': '잿불날개 보스카르',
   'entities.mobs.wraithbinder_maldrec.name': '영혼결속자 말드렉',
   'entities.items.soft_down.name': '부드러운 솜털 뭉치',
+  'entities.items.sunken_road_grit.name': '가라앉은 길의 자갈',
   'entities.items.amber_hide.name': '호박색 가죽',
   'entities.items.stag_antler.name': '가지진 사슴뿔',
   'entities.items.brightwood_venison.name': '브라이트우드 사슴고기',
@@ -4798,6 +4800,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   // APM telemetry label from release/v0.14.0
   'hudChrome.perf.labels.apm': 'APM',
   'entities.zones.eastbrook_vale.pois.9.label': '브라이트우드 숲',
+  'entities.zones.eastbrook_vale.pois.10.label': '가라앉은 길',
   'entities.items.reliquary_plate_chest.name': '성물실 수호 갑옷',
   'entities.items.reliquary_leather_chest.name': '먼지수호자의 웃옷',
   'entities.items.reliquary_cloth_chest.name': '성물실 수의',
@@ -5987,4 +5990,18 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.gathering.mining': '채광',
   'hudChrome.gathering.logging': '벌목',
   'hudChrome.gathering.herbalism': '약초학',
+  'entities.mobs.tunnel_gravemite.name': '터널 그레이브마이트',
+  'entities.mobs.deep_road_stalker.name': '딥로드 스토커',
+  'entities.mobs.the_old_prospector.name': '늙은 채굴꾼',
+  'entities.npcs.foreman_delke.name': '델케 십장',
+  'entities.npcs.foreman_delke.title': '가라앉은 길의 마지막 십장',
+  'entities.npcs.foreman_delke.greeting':
+    '낡은 광산 길은 아직 펜브리지까지 뚫려 있다네, 안에 있는 해충들과 맞설 배짱이 있다면 말이야, {className}.',
+  'entities.quests.q_sunken_road.title': '가라앉은 길 청소하기',
+  'entities.quests.q_sunken_road.text':
+    '우리 인부들이 그레이브마이트가 자리 잡기 전까지 펜브리지까지 이 길을 뚫었지. {playerName}, 그것들을, 그리고 더 깊은 곳의 스토커들을 솎아내 주게, 선량한 이들이 다시 그 길을 걸을 수 있도록.',
+  'entities.quests.q_sunken_road.completion':
+    '맑은 공기와 고요한 돌. 고맙네, 펜브리지에서도 이 소식을 듣게 될 걸세.',
+  'entities.quests.q_sunken_road.objectives.0.label': '터널 그레이브마이트 처치',
+  'entities.quests.q_sunken_road.objectives.1.label': '딥로드 스토커 처치',
 };

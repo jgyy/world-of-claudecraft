@@ -5876,6 +5876,9 @@ export const zh_CN: EnTranslations = {
       "sunpetal_sickle": {
         "name": "阳瓣镰刀"
       },
+      "sunken_road_grit": {
+        "name": "沉没之路的碎石"
+      },
       "bristleback_maul": {
         "name": "加洛格拉斯之锤"
       },
@@ -6676,6 +6679,15 @@ export const zh_CN: EnTranslations = {
       "thunzharr_stormling": {
         "name": "被惊醒的风暴元素"
       },
+      "tunnel_gravemite": {
+        "name": "隧道墓螨"
+      },
+      "deep_road_stalker": {
+        "name": "深径潜行者"
+      },
+      "the_old_prospector": {
+        "name": "老矿工"
+      },
       "ironvein_foreman": {
         "name": "铁脉工头"
       },
@@ -6905,6 +6917,11 @@ export const zh_CN: EnTranslations = {
         "name": "灵魂医者",
         "title": "亡者的守护者",
         "greeting": "安息吧，灵魂。我可以让你重返躯体，但归途会让你变得虚弱。"
+      },
+      "foreman_delke": {
+        "name": "德尔克工头",
+        "title": "沉没之路最后的工头",
+        "greeting": "这条旧矿道仍然直通芬桥，如果你敢闯过里面的害虫，{className}。"
       },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
@@ -7695,6 +7712,19 @@ export const zh_CN: EnTranslations = {
           }
         }
       },
+      "q_sunken_road": {
+        "title": "清剿沉没之路",
+        "text": "我的工队曾把这条路挖到芬桥，直到墓螨占据了它。清剿它们，{playerName}，还有更深处的潜行者，让老实人能重新走这条路。",
+        "completion": "空气清新，山石寂静。谢谢你，芬桥也会听闻此事。",
+        "objectives": {
+          "0": {
+            "label": "击杀隧道墓螨"
+          },
+          "1": {
+            "label": "击杀深径潜行者"
+          }
+        }
+      },
       "q_drowned_choir": {
         "title": "溺亡唱诗班",
         "text": "那些涉行者并非孤身行动。它们之中游走着溺亡信徒——随神殿一同沉没的邪教徒，至今仍披着腐烂的法衣，仍在岸边礁石上吟唱祷词。让其中八名永远噤声，再为我带回它们随身携带的六件祭品。我想知道它们打算献给女神什么。",
@@ -7793,6 +7823,9 @@ export const zh_CN: EnTranslations = {
           },
           "9": {
             "label": "明木林地"
+          },
+          "10": {
+            "label": "沉没之路"
           }
         }
       },
@@ -7823,6 +7856,9 @@ export const zh_CN: EnTranslations = {
           },
           "7": {
             "label": "沉没堡垒"
+          },
+          "8": {
+            "label": "沉没之路"
           }
         }
       },

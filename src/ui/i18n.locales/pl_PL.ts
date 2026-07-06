@@ -1884,6 +1884,7 @@ export const pl_PL: Partial<Record<TranslationKey, string>> = {
   'entities.items.sloomtooth_tidefang.name': 'Kieł przypływu Sloomtootha',
   'entities.items.smoked_eel.name': 'Wędzony węgorz z Mokrzawia',
   'entities.items.soft_down.name': 'Kępka miękkiego puchu',
+  'entities.items.sunken_road_grit.name': 'Żwir z Zatopionej Drogi',
   'entities.items.soggy_boot.name': 'Przemoczony but',
   'entities.items.soggy_moccasin.name': 'Przemoczony mokasyn',
   'entities.items.soulflame_cowl.name': 'Kaptur Wraithfire',

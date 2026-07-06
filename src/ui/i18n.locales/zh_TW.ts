@@ -2959,6 +2959,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'entities.zones.mirefen_marsh.pois.5.label': '巨魔墳丘',
   'entities.zones.mirefen_marsh.pois.6.label': '喚墓者營地',
   'entities.zones.mirefen_marsh.pois.7.label': '沉沒堡壘',
+  'entities.zones.mirefen_marsh.pois.8.label': '沉沒之路',
   'entities.zones.thornpeak_heights.name': '荊峰高地',
   'entities.zones.thornpeak_heights.welcome': '瑟薩莉隊長勉強守住高望城牆。',
   'entities.zones.thornpeak_heights.pois.0.label': '高望',
@@ -3145,6 +3146,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.voskar_emberwing.name': '熾翼沃斯卡',
   'entities.mobs.wraithbinder_maldrec.name': '縛魂者瑪爾德雷克',
   'entities.items.soft_down.name': '柔軟絨毛',
+  'entities.items.sunken_road_grit.name': '沉沒之路的碎石',
   'entities.items.amber_hide.name': '琥珀獸皮',
   'entities.items.stag_antler.name': '分岔鹿角',
   'entities.items.brightwood_venison.name': '明木鹿肉',
@@ -4549,6 +4551,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   // APM telemetry label from release/v0.14.0
   'hudChrome.perf.labels.apm': 'APM',
   'entities.zones.eastbrook_vale.pois.9.label': '明木林地',
+  'entities.zones.eastbrook_vale.pois.10.label': '沉沒之路',
   'entities.items.reliquary_plate_chest.name': '聖物庫守衛鎖甲',
   'entities.items.reliquary_leather_chest.name': '守塵者皮甲',
   'entities.items.reliquary_cloth_chest.name': '聖物庫殮衣',
@@ -5671,4 +5674,17 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.gathering.mining': '採礦',
   'hudChrome.gathering.logging': '伐木',
   'hudChrome.gathering.herbalism': '藥草學',
+  'entities.mobs.tunnel_gravemite.name': '隧道墓蟎',
+  'entities.mobs.deep_road_stalker.name': '深徑潛行者',
+  'entities.mobs.the_old_prospector.name': '老礦工',
+  'entities.npcs.foreman_delke.name': '德爾克工頭',
+  'entities.npcs.foreman_delke.title': '沉沒之路最後的工頭',
+  'entities.npcs.foreman_delke.greeting':
+    '這條舊礦道仍然直通芬橋，如果你敢闖過裡面的害蟲，{className}。',
+  'entities.quests.q_sunken_road.title': '清剿沉沒之路',
+  'entities.quests.q_sunken_road.text':
+    '我的工隊曾把這條路挖到芬橋，直到墓蟎佔據了它。清剿牠們，{playerName}，還有更深處的潛行者，讓老實人能重新走這條路。',
+  'entities.quests.q_sunken_road.completion': '空氣清新，山石寂靜。謝謝你，芬橋也會聽聞此事。',
+  'entities.quests.q_sunken_road.objectives.0.label': '擊殺隧道墓蟎',
+  'entities.quests.q_sunken_road.objectives.1.label': '擊殺深徑潛行者',
 };

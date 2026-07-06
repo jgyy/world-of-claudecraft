@@ -1879,6 +1879,7 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.items.sloomtooth_tidefang.name': 'Sloomtooths tidvattenstand',
   'entities.items.smoked_eel.name': 'Rökt dykärrsål',
   'entities.items.soft_down.name': 'Mjuk duntofs',
+  'entities.items.sunken_road_grit.name': 'Grus från Sjunkna Vägen',
   'entities.items.soggy_boot.name': 'Genomblöt stövel',
   'entities.items.soggy_moccasin.name': 'Genomblöt mockasin',
   'entities.items.soulflame_cowl.name': 'Wraithfire-huva',

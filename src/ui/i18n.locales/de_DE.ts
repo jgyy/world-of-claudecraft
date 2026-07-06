@@ -3923,6 +3923,7 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.voskar_emberwing.name': 'Voskar Glutschwinge',
   'entities.mobs.wraithbinder_maldrec.name': 'Maldrec der Geisterbinder',
   'entities.items.soft_down.name': 'Weicher Daunenbüschel',
+  'entities.items.sunken_road_grit.name': 'Versunkener-Weg-Splitt',
   'entities.items.amber_hide.name': 'Bernsteinhaut',
   'entities.items.stag_antler.name': 'Verzweigtes Geweih',
   'entities.items.brightwood_venison.name': 'Hellholz-Wildbret',

@@ -5876,6 +5876,9 @@ export const ja_JP: EnTranslations = {
       "sunpetal_sickle": {
         "name": "陽花弁の鎌"
       },
+      "sunken_road_grit": {
+        "name": "沈んだ道の砂利"
+      },
       "bristleback_maul": {
         "name": "ギャロウグラスの大槌"
       },
@@ -6676,6 +6679,15 @@ export const ja_JP: EnTranslations = {
       "thunzharr_stormling": {
         "name": "目覚めた嵐の精"
       },
+      "tunnel_gravemite": {
+        "name": "トンネルグレイブマイト"
+      },
+      "deep_road_stalker": {
+        "name": "ディープロードストーカー"
+      },
+      "the_old_prospector": {
+        "name": "老いた採掘者"
+      },
       "ironvein_foreman": {
         "name": "鉄脈の現場監督"
       },
@@ -6905,6 +6917,11 @@ export const ja_JP: EnTranslations = {
         "name": "霊魂の癒し手",
         "title": "死者の番人",
         "greeting": "安らかに、魂よ。亡骸に戻すことはできるが、戻る道のりで弱ってしまうだろう。"
+      },
+      "foreman_delke": {
+        "name": "デルケ親方",
+        "title": "沈んだ道の最後の親方",
+        "greeting": "古い坑道はまだフェンブリッジまで通じている、中の害虫に立ち向かう勇気があれば、{className}よ。"
       },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
@@ -7695,6 +7712,19 @@ export const ja_JP: EnTranslations = {
           }
         }
       },
+      "q_sunken_road": {
+        "title": "沈んだ道の掃討",
+        "text": "私のクルーはフェンブリッジまでこの道を掘った、グレイブマイトが住み着くまではな。{playerName}よ、奴らを、そして奥のストーカーも間引いてくれ、まっとうな者たちがまた歩けるように。",
+        "completion": "澄んだ空気と静かな岩。感謝する、フェンブリッジにもこの話は届くだろう。",
+        "objectives": {
+          "0": {
+            "label": "トンネルグレイブマイトを討伐"
+          },
+          "1": {
+            "label": "ディープロードストーカーを討伐"
+          }
+        }
+      },
       "q_drowned_choir": {
         "title": "溺れし聖歌隊",
         "text": "渡り手どもは独りで動いているのではない。その中に溺れし信徒たちが歩いている——神殿とともに沈んだ教団だ。腐った祭服をまとったまま、岸の岩場から祈りを歌い続けている。八体を沈黙させ、奴らが携える供物を六つ持ち帰れ。奴らが女神に何を捧げようとしているのか、私は知りたいのだ。",
@@ -7793,6 +7823,9 @@ export const ja_JP: EnTranslations = {
           },
           "9": {
             "label": "ブライトウッドの林間"
+          },
+          "10": {
+            "label": "沈んだ道"
           }
         }
       },
@@ -7823,6 +7856,9 @@ export const ja_JP: EnTranslations = {
           },
           "7": {
             "label": "沈んだ砦"
+          },
+          "8": {
+            "label": "沈んだ道"
           }
         }
       },

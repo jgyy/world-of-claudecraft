@@ -1895,6 +1895,7 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'entities.items.sloomtooth_tidefang.name': "Sloomtooth'un Gelgitdişi",
   'entities.items.smoked_eel.name': 'Tütsülenmiş Mirefen Yılanbalığı',
   'entities.items.soft_down.name': 'Yumuşak Tüy Yumağı',
+  'entities.items.sunken_road_grit.name': 'Batık Yol Çakılı',
   'entities.items.soggy_boot.name': 'Islak Çizme',
   'entities.items.soggy_moccasin.name': 'Islak Mokasen',
   'entities.items.soulflame_cowl.name': 'Wraithfire Başlığı',

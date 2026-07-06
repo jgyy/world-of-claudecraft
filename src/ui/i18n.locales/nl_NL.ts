@@ -1912,6 +1912,7 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'entities.items.sloomtooth_tidefang.name': 'Sloomtooths Getijdentand',
   'entities.items.smoked_eel.name': 'Gerookte Slijkveen-Aal',
   'entities.items.soft_down.name': 'Zachte Donsplukje',
+  'entities.items.sunken_road_grit.name': 'Gruis van de Verzonken Weg',
   'entities.items.soggy_boot.name': 'Doorweekte Laars',
   'entities.items.soggy_moccasin.name': 'Doorweekte Mocassin',
   'entities.items.soulflame_cowl.name': 'Wraithfire-Kap',

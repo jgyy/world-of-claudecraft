@@ -1870,6 +1870,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.items.sloomtooth_tidefang.name': 'Sloomtands Tidevandstand',
   'entities.items.smoked_eel.name': 'Røget Mosekær-Ål',
   'entities.items.soft_down.name': 'Blød Dunfjer',
+  'entities.items.sunken_road_grit.name': 'Sunket Vej Grus',
   'entities.items.soggy_boot.name': 'Gennemvåd Støvle',
   'entities.items.soggy_moccasin.name': 'Gennemvåd Mokkasin',
   'entities.items.soulflame_cowl.name': 'Wraithfire-Hætte',

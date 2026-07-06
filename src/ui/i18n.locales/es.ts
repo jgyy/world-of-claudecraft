@@ -3907,6 +3907,7 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.voskar_emberwing.name': 'Voskar Aladebrasa',
   'entities.mobs.wraithbinder_maldrec.name': 'Maldrec el Ataespectros',
   'entities.items.soft_down.name': 'Mechón de plumón suave',
+  'entities.items.sunken_road_grit.name': 'Grava del Camino Hundido',
   'entities.items.amber_hide.name': 'Piel ambarina',
   'entities.items.stag_antler.name': 'Asta ramificada',
   'entities.items.brightwood_venison.name': 'Venado de Brightwood',

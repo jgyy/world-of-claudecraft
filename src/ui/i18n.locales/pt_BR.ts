@@ -3886,6 +3886,7 @@ export const pt_BR: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.voskar_emberwing.name': 'Voskar Asa-de-brasa',
   'entities.mobs.wraithbinder_maldrec.name': 'Maldrec o Atador-de-espectros',
   'entities.items.soft_down.name': 'Tufo de penugem macia',
+  'entities.items.sunken_road_grit.name': 'Cascalho da Estrada Afundada',
   'entities.items.amber_hide.name': 'Couro âmbar',
   'entities.items.stag_antler.name': 'Galhada ramificada',
   'entities.items.brightwood_venison.name': 'Carne de veado de Brightwood',

@@ -36,6 +36,7 @@ export const ZONE2_ZONE: ZoneDef = {
     { x: -95, z: 440, label: 'Troll Mounds' },
     { x: 0, z: 485, label: 'Gravecaller Encampment' },
     { x: 45, z: 515, label: 'The Sunken Bastion' },
+    { x: 85, z: 230, label: 'The Sunken Road' },
   ],
   welcome: 'Report to Warden Fenwick at the Fenbridge gate.',
 };

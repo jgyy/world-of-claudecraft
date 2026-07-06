@@ -97,6 +97,10 @@ const MOB_IDS = [
   // Thornpeak Heights world boss + its summoned adds
   'thunzharr_waking_peak',
   'thunzharr_stormling',
+  // The Sunken Road: the tunnel connecting Eastbrook Vale to Mirefen Marsh
+  'tunnel_gravemite',
+  'deep_road_stalker',
+  'the_old_prospector',
 ] as const;
 
 const NPC_IDS = [
@@ -124,6 +128,7 @@ const NPC_IDS = [
   'brother_halven', // Collapsed Reliquary delve board NPC
   'brother_halven_marsh', // Drowned Litany delve board NPC (same character, marsh camp)
   'spirit_healer', // the graveyard angel (spawned at every graveyard + dungeon entry)
+  'foreman_delke', // Sunken Road tunnel quest giver (Eastbrook mouth)
 ] as const;
 
 const QUEST_IDS = [
@@ -201,6 +206,7 @@ const QUEST_IDS = [
   'q_nythraxis_bound_guardian',
   'q_nythraxis_scourges_end',
   'q_mogger',
+  'q_sunken_road',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { ABILITIES, abilitiesKnownAt, CLASSES } from '../src/sim/content/classes';
 import { Sim } from '../src/sim/sim';
 import { type AuraKind, dist2d } from '../src/sim/types';
-import { groundHeight, WATER_LEVEL } from '../src/sim/world';
+import { groundHeight, isInWaterBody, WATER_LEVEL } from '../src/sim/world';
 
 const NEW_DRUID = [
   'travel_form',
@@ -51,7 +51,10 @@ function horizontalTravel(sim: Sim, pid: number, ticks: number): number {
 function findDeepWater(seed: number): { x: number; z: number } {
   for (let z = -50; z <= 950; z += 5) {
     for (let x = -170; x <= 170; x += 5) {
-      if (groundHeight(x, z, seed) < WATER_LEVEL - 1.25) return { x, z };
+      // A real declared water body, not merely deep dry terrain (a sunken
+      // tunnel/crater outside every zone's `lakes` list stays dry per the
+      // terrain-aware water model, sim/world.ts isInWaterBody).
+      if (groundHeight(x, z, seed) < WATER_LEVEL - 1.25 && isInWaterBody(x, z)) return { x, z };
     }
   }
   throw new Error('test fixture needs a deep-water coordinate');

@@ -1929,6 +1929,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.items.sloomtooth_tidefang.name': 'Taring Pasang Sloomtooth',
   'entities.items.smoked_eel.name': 'Belut Asap Mirefen',
   'entities.items.soft_down.name': 'Jumbai Bulu Halus',
+  'entities.items.sunken_road_grit.name': 'Kerikil Jalan Tenggelam',
   'entities.items.soggy_boot.name': 'Sepatu Bot Basah Kuyup',
   'entities.items.soggy_moccasin.name': 'Sepatu Mokasin Basah Kuyup',
   'entities.items.soulflame_cowl.name': 'Tudung Wraithfire',
