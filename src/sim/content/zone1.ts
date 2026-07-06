@@ -39,7 +39,7 @@ export const ZONE1_ZONE: ZoneDef = {
     { x: 80, z: 80, label: 'Fallen Chapel' },
     { x: -5, z: -52, label: 'Reliquary Hill' },
     { x: 40, z: 140, label: 'Brightwood Glade' },
-    { x: 115, z: 158, label: 'Glimmervein Cavern' },
+    { x: -70, z: 158, label: 'Glimmervein Cavern' },
   ],
   welcome: 'Find Marshal Redbrook in town — he has work for you.',
   welcomeQuestId: 'q_wolves',
@@ -1122,15 +1122,16 @@ export const ZONE1_CHAPEL_CAMPS: CampDef[] = [
   { mobId: 'wraithbinder_maldrec', center: { x: 88, z: 92 }, radius: 3, count: 1 },
 ];
 
-// Glimmervein Cavern, southern half (z < 180): the sunken gorge's entrance on
-// the Eastbrook side, carved through the natural zone1/zone2 ridge at x=115
-// (see the GLIMMERVEIN_GORGE_* terrainEdits in data.ts). Appended after
-// ZONE1_CHAPEL_CAMPS in the merged CAMPS array (see data.ts) so no existing
-// camp's spawn draw shifts. Camp centers sit on the gorge floor centerline,
-// off the flat causeway crossing entirely.
+// Glimmervein Cavern, southern half (z < 180): the tunnel's entrance on the
+// Eastbrook side, a real pass through the natural zone1/zone2 mountain ridge
+// at x=-70 (GLIMMERVEIN_PASS_X in data.ts/world.ts), well west of the x=0
+// causeway. Appended after ZONE1_CHAPEL_CAMPS in the merged CAMPS array (see
+// data.ts) so no existing camp's spawn draw shifts. Camp radius is kept tight
+// (the tunnel floor is only ~10yd wide) so mobs spawn inside the corridor,
+// not against its walls.
 export const ZONE1_CAVERN_CAMPS: CampDef[] = [
-  { mobId: 'glimmervein_spider', center: { x: 115, z: 152 }, radius: 10, count: 6 },
-  { mobId: 'glimmervein_bat', center: { x: 115, z: 165 }, radius: 8, count: 5 },
+  { mobId: 'glimmervein_spider', center: { x: -70, z: 152 }, radius: 4, count: 6 },
+  { mobId: 'glimmervein_bat', center: { x: -70, z: 165 }, radius: 4, count: 5 },
 ];
 
 export const ZONE1_OBJECTS: GroundObjectDef[] = [
@@ -1209,12 +1210,12 @@ export const ZONE1_ROADS: { x: number; z: number }[][] = [
     { x: 78, z: 74 },
   ], // northeast to ruins
   [
-    { x: 60, z: 20 },
-    { x: 85, z: 60 },
-    { x: 100, z: 110 },
-    { x: 115, z: 148 },
-  ], // Boar Meadow -> Glimmervein Cavern's southern entrance (its own path, well
-  // east of the x=0 causeway the whole way)
+    { x: -30, z: 20 },
+    { x: -50, z: 70 },
+    { x: -65, z: 115 },
+    { x: -70, z: 148 },
+  ], // Sableweb approach -> Glimmervein Cavern's southern entrance (its own
+  // path, well west of the x=0 causeway the whole way, clear of Mirror Lake)
 ];
 
 // ---------------------------------------------------------------------------

@@ -314,25 +314,40 @@ export const PLAYER_START = { x: 2, z: -2 };
 // the Sim+renderer; the default game never touches it.
 // ---------------------------------------------------------------------------
 
-// Glimmervein Cavern: a sunken gorge CARVED into the natural zone1/zone2 seam
-// ridge (that ridge already rises to ~35yd at z=180 around x=100..150; ordinary
-// open-world terrain, not a stamp we invented). A continuous run of 'level'
-// HeightStamps drops a walkable channel through it at x=115, floor height ~2,
-// so the untouched ridge on both sides of the channel becomes the gorge's own
-// steep rock walls (no separate wall geometry needed). The 'cave' biome paint
-// over the same footprint tints the ground and (see terrain.ts/foliage.ts)
-// switches the local decoration mix; both are additive over the built-in
-// heightfield, so everywhere else stays byte-identical.
-// Exported so the renderer's rock-arch overhang module (src/render/cave_tunnel.ts)
-// can draw geometry along the exact same centerline/z-run without duplicating it.
-export const GLIMMERVEIN_GORGE_X = 115;
-export const GLIMMERVEIN_GORGE_FLOOR_HEIGHT = 2;
+// Glimmervein Cavern: a real tunnel through the natural mountain ridge that
+// separates Eastbrook Vale from Mirefen Marsh (src/sim/world.ts already builds
+// that ridge as a genuinely impassable, ~40yd wall between the zones, pierced
+// by exactly one pass, the x=0 causeway). This is a SECOND pass through that
+// same ridge, well west of the causeway, deliberately much narrower
+// (GLIMMERVEIN_PASS_HALF_WIDTH/SHOULDER below vs. the causeway's 10/34): the
+// ridge closes back to full height only a short distance from the walkable
+// centerline, so the ordinary heightfield itself forms a real, close,
+// steep-walled rock corridor (no separate carved-out "gorge" stamp needed;
+// the wall geometry is the same mountain every other crossing bounces off).
+// See src/sim/world.ts for the pass mechanics. The render tunnel module
+// (src/render/cave_tunnel.ts) draws the ceiling/props along this same
+// centerline/z-run; the 'cave' biome paint below tints the footprint and
+// switches the local decoration mix (terrain.ts/foliage.ts). Both are
+// additive over the built-in heightfield, so everywhere else stays
+// byte-identical.
+export const GLIMMERVEIN_PASS_X = -70;
+export const GLIMMERVEIN_PASS_HALF_WIDTH = 5;
+export const GLIMMERVEIN_PASS_SHOULDER = 15;
 export const GLIMMERVEIN_GORGE_ZS = [148, 160, 172, 184, 196, 208] as const;
-const GLIMMERVEIN_GORGE_STAMPS: WorldContent['terrainEdits'] = GLIMMERVEIN_GORGE_ZS.map((z) => ({
-  x: GLIMMERVEIN_GORGE_X,
+export const GLIMMERVEIN_FLOOR_HEIGHT = 1;
+// The pass leaves the ridge WALLS to the natural heightfield, but the ambient
+// hill/marsh noise underneath the walkable centerline is not itself
+// guaranteed flat (ordinary open-world terrain has small natural undulation
+// that can locally exceed the movement climb limit over a long stretch). A
+// light 'level' floor stamp along the same z-run guarantees the tunnel floor
+// is actually walkable end to end; it only smooths the floor, it creates no
+// wall (tests/terrain_walls.test.ts pins the walls; tests/progression.test.ts
+// or an equivalent floor-walkability check should pin this).
+const GLIMMERVEIN_FLOOR_STAMPS: WorldContent['terrainEdits'] = GLIMMERVEIN_GORGE_ZS.map((z) => ({
+  x: GLIMMERVEIN_PASS_X,
   z,
-  radius: 17,
-  delta: GLIMMERVEIN_GORGE_FLOOR_HEIGHT,
+  radius: 8,
+  delta: GLIMMERVEIN_FLOOR_HEIGHT,
   falloff: 'smooth',
   mode: 'level',
 }));
@@ -342,7 +357,7 @@ const GLIMMERVEIN_CAVE_PAINT: WorldContent['biomePaint'] = {
   cell: 10,
   cols: GLIMMERVEIN_CAVE_PAINT_COLS,
   rows: GLIMMERVEIN_CAVE_PAINT_ROWS,
-  originX: GLIMMERVEIN_GORGE_X - 30,
+  originX: GLIMMERVEIN_PASS_X - 35,
   originZ: 140,
   ids: new Array(GLIMMERVEIN_CAVE_PAINT_COLS * GLIMMERVEIN_CAVE_PAINT_ROWS).fill(6),
 };
@@ -355,8 +370,10 @@ export const BUILTIN_WORLD: WorldContent = {
   roads: ROADS,
   props: PROPS,
   playerStart: PLAYER_START,
-  // The one terrain edit the built-in world carries: the Glimmervein Cavern gorge.
-  terrainEdits: GLIMMERVEIN_GORGE_STAMPS,
+  // Glimmervein Cavern's walls come from a real pass through the existing
+  // zone1/zone2 ridge (src/sim/world.ts); this terrain edit only smooths its
+  // walkable floor (see GLIMMERVEIN_FLOOR_STAMPS above).
+  terrainEdits: GLIMMERVEIN_FLOOR_STAMPS,
   biomePaint: GLIMMERVEIN_CAVE_PAINT,
 };
 

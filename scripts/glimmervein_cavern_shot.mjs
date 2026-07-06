@@ -1,10 +1,10 @@
 // Screenshots of Glimmervein Cavern (src/sim/content/zone1.ts + zone2.ts +
-// src/sim/data.ts GLIMMERVEIN_GORGE_* + src/render/cave_tunnel.ts): a sunken
-// gorge carved into the natural zone1/zone2 ridge, walkable as ordinary
-// open-world terrain (no loading, no instance transition). Boots the offline
-// world, teleports the player along the gorge at several depths, and
-// captures a map view. Needs `npm run dev` running. Browser via
-// scripts/browser_path.mjs.
+// src/sim/data.ts GLIMMERVEIN_* + src/render/cave_tunnel.ts): a real tunnel
+// through the natural zone1/zone2 mountain ridge, west of the x=0 causeway,
+// walkable as ordinary open-world terrain (no loading, no instance
+// transition). Boots the offline world, teleports the player along the
+// tunnel at several depths, and captures a map view. Needs `npm run dev`
+// running. Browser via scripts/browser_path.mjs.
 
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
@@ -61,26 +61,27 @@ async function shootAt(name, x, z, lookX, lookZ, pitch = -0.1) {
   console.log('wrote', name);
 }
 
-// The gorge runs along x=115, z 148..208 (GLIMMERVEIN_GORGE_ZS in data.ts).
-// Approach along the new Zone1 road (Boar Meadow -> gorge, well east of the
-// x=0 causeway) descending into the gorge mouth, through the enclosed middle
-// under the rock arches, then ascending out into Mirefen Marsh.
-await shootAt('glimmervein_01_approach_zone1', 100, 110, 115, 148, -0.05);
-await shootAt('glimmervein_02_descent_mouth', 115, 143, 115, 165, -0.08);
-await shootAt('glimmervein_03_gorge_walls', 115, 152, 100, 152, -0.15);
-await shootAt('glimmervein_04_spider_camp', 115, 158, 115, 152, -0.1);
-await shootAt('glimmervein_05_ore_vein', 118, 162, 115, 160, -0.1);
-await shootAt('glimmervein_06_deep_enclosed', 115, 172, 115, 184, -0.25);
-await shootAt('glimmervein_07_ridge_crest_overhead', 115, 180, 100, 180, -0.35);
-await shootAt('glimmervein_08_bat_pack', 115, 188, 115, 196, -0.15);
-await shootAt('glimmervein_09_broodling_camp', 115, 200, 115, 205, -0.1);
-await shootAt('glimmervein_10_ascent_zone2_exit', 100, 250, 115, 210, -0.05);
-await shootAt('glimmervein_11_ambient_ridge', 140, 180, 115, 180, -0.15);
+// The tunnel runs along x=-70, z 148..208 (GLIMMERVEIN_GORGE_ZS in data.ts),
+// a real pass through the mountain ridge, well WEST of the x=0 causeway.
+// Approach along the new Zone1 road (Sableweb -> tunnel), descending into the
+// tunnel mouth, through the enclosed middle under the rock ceiling, then
+// ascending out into Mirefen Marsh.
+await shootAt('glimmervein_01_approach_zone1', -55, 110, -70, 148, -0.05);
+await shootAt('glimmervein_02_descent_mouth', -70, 143, -70, 165, -0.08);
+await shootAt('glimmervein_03_gorge_walls', -70, 152, -55, 152, -0.15);
+await shootAt('glimmervein_04_spider_camp', -70, 158, -70, 152, -0.1);
+await shootAt('glimmervein_05_ore_vein', -67, 162, -70, 160, -0.1);
+await shootAt('glimmervein_06_deep_enclosed', -70, 172, -70, 184, -0.25);
+await shootAt('glimmervein_07_ridge_crest_overhead', -70, 180, -55, 180, -0.35);
+await shootAt('glimmervein_08_bat_pack', -70, 188, -70, 196, -0.15);
+await shootAt('glimmervein_09_broodling_camp', -70, 200, -70, 205, -0.1);
+await shootAt('glimmervein_10_ascent_zone2_exit', -55, 250, -70, 210, -0.05);
+await shootAt('glimmervein_11_ambient_ridge', -30, 180, -70, 180, -0.15);
 
 // Map view marking the new entrance/exit distinctly from the causeway.
 await page.evaluate(() => {
   const p = window.__game.sim.player;
-  p.pos.x = 115;
+  p.pos.x = -70;
   p.pos.z = 178;
 });
 await new Promise((r) => setTimeout(r, 300));
