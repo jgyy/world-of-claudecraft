@@ -5450,6 +5450,9 @@ export const pt_BR: EnTranslations = {
       "linen_scrap": {
         "name": "Retalho de linho"
       },
+      "crystal_shard": {
+        "name": "Glimmering Crystal Shard"
+      },
       "fen_muster_order": {
         "name": "Ordem de convocação de Fenbridge"
       },
@@ -6460,6 +6463,12 @@ export const pt_BR: EnTranslations = {
       "webwood_spider": {
         "name": "Espreitador de Sableweb"
       },
+      "glimmervein_spider": {
+        "name": "Glimmervein Crystal Spider"
+      },
+      "glimmervein_bat": {
+        "name": "Glimmervein Cave Bat"
+      },
       "mudfin_murloc": {
         "name": "Espreitador Barbatana-de-lodo"
       },
@@ -6477,6 +6486,9 @@ export const pt_BR: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Espreitador do brejo"
+      },
+      "glimmervein_broodling": {
+        "name": "Glimmervein Broodling"
       },
       "deepfen_murloc": {
         "name": "Mordedor de Deepfen"
@@ -7813,6 +7825,9 @@ export const pt_BR: EnTranslations = {
           },
           "9": {
             "label": "Clareira de Brightwood"
+          },
+          "10": {
+            "label": "Glimmervein Cavern"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const pt_BR: EnTranslations = {
           },
           "7": {
             "label": "O Bastião Submerso"
+          },
+          "8": {
+            "label": "Glimmervein Cavern"
           }
         }
       },

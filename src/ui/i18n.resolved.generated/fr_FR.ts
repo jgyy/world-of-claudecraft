@@ -5450,6 +5450,9 @@ export const fr_FR: EnTranslations = {
       "linen_scrap": {
         "name": "Chute de lin"
       },
+      "crystal_shard": {
+        "name": "Glimmering Crystal Shard"
+      },
       "fen_muster_order": {
         "name": "Ordre de rassemblement de Fenbridge"
       },
@@ -6460,6 +6463,12 @@ export const fr_FR: EnTranslations = {
       "webwood_spider": {
         "name": "Rôdeur de Sableweb"
       },
+      "glimmervein_spider": {
+        "name": "Glimmervein Crystal Spider"
+      },
+      "glimmervein_bat": {
+        "name": "Glimmervein Cave Bat"
+      },
       "mudfin_murloc": {
         "name": "Rôdeur Aileron-de-boue"
       },
@@ -6477,6 +6486,9 @@ export const fr_FR: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Rôdeur du bourbier"
+      },
+      "glimmervein_broodling": {
+        "name": "Glimmervein Broodling"
       },
       "deepfen_murloc": {
         "name": "Happeur de Deepfen"
@@ -7813,6 +7825,9 @@ export const fr_FR: EnTranslations = {
           },
           "9": {
             "label": "Clairière de Brightwood"
+          },
+          "10": {
+            "label": "Glimmervein Cavern"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const fr_FR: EnTranslations = {
           },
           "7": {
             "label": "Le Bastion englouti"
+          },
+          "8": {
+            "label": "Glimmervein Cavern"
           }
         }
       },

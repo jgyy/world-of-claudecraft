@@ -5450,6 +5450,9 @@ export const vi_VN: EnTranslations = {
       "linen_scrap": {
         "name": "Mảnh Vải Lanh"
       },
+      "crystal_shard": {
+        "name": "Glimmering Crystal Shard"
+      },
       "fen_muster_order": {
         "name": "Lệnh Tập Hợp Fenbridge"
       },
@@ -6460,6 +6463,12 @@ export const vi_VN: EnTranslations = {
       "webwood_spider": {
         "name": "Kẻ Rình Sableweb"
       },
+      "glimmervein_spider": {
+        "name": "Glimmervein Crystal Spider"
+      },
+      "glimmervein_bat": {
+        "name": "Glimmervein Cave Bat"
+      },
       "mudfin_murloc": {
         "name": "Kẻ Lẩn Vây Bùn"
       },
@@ -6477,6 +6486,9 @@ export const vi_VN: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Kẻ Rình Đầm Lầy"
+      },
+      "glimmervein_broodling": {
+        "name": "Glimmervein Broodling"
       },
       "deepfen_murloc": {
         "name": "Quái Đớp Deepfen"
@@ -7813,6 +7825,9 @@ export const vi_VN: EnTranslations = {
           },
           "9": {
             "label": "Trảng Rừng Sáng"
+          },
+          "10": {
+            "label": "Glimmervein Cavern"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const vi_VN: EnTranslations = {
           },
           "7": {
             "label": "Pháo Đài Chìm"
+          },
+          "8": {
+            "label": "Glimmervein Cavern"
           }
         }
       },

@@ -1241,7 +1241,8 @@ export const GUIDE_ZONES: GuideZoneInfo[] = [
       "Bandit Camp",
       "Fallen Chapel",
       "Reliquary Hill",
-      "Brightwood Glade"
+      "Brightwood Glade",
+      "Glimmervein Cavern"
     ],
     "welcome": "Find Marshal Redbrook in town — he has work for you."
   },
@@ -1260,7 +1261,8 @@ export const GUIDE_ZONES: GuideZoneInfo[] = [
       "Drowned Chapel",
       "Troll Mounds",
       "Gravecaller Encampment",
-      "The Sunken Bastion"
+      "The Sunken Bastion",
+      "Glimmervein Cavern"
     ],
     "welcome": "Report to Warden Fenwick at the Fenbridge gate."
   },
@@ -1416,6 +1418,16 @@ export const GUIDE_FAMILIES: GuideFamily[] = [
         "still": "/guide-stills/mob_wolf__566061.webp"
       },
       {
+        "name": "Glimmervein Cave Bat",
+        "min": 5,
+        "max": 7,
+        "rare": false,
+        "templateId": "glimmervein_bat",
+        "model": "mob_wolf",
+        "tint": "#3a3a42",
+        "still": "/guide-stills/mob_wolf__3a3a42.webp"
+      },
+      {
         "name": "Mire Prowler",
         "min": 7,
         "max": 8,
@@ -1459,6 +1471,26 @@ export const GUIDE_FAMILIES: GuideFamily[] = [
         "model": "mob_spider",
         "tint": "#4a235a",
         "still": "/guide-stills/mob_spider__4a235a.webp"
+      },
+      {
+        "name": "Glimmervein Crystal Spider",
+        "min": 5,
+        "max": 6,
+        "rare": false,
+        "templateId": "glimmervein_spider",
+        "model": "mob_spider",
+        "tint": "#7fd8e8",
+        "still": "/guide-stills/mob_spider__7fd8e8.webp"
+      },
+      {
+        "name": "Glimmervein Broodling",
+        "min": 7,
+        "max": 8,
+        "rare": false,
+        "templateId": "glimmervein_broodling",
+        "model": "mob_spider",
+        "tint": "#7fd8e8",
+        "still": "/guide-stills/mob_spider__7fd8e8.webp"
       },
       {
         "name": "Mirefen Widow",

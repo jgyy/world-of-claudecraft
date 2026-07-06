@@ -5450,6 +5450,9 @@ export const nl_NL: EnTranslations = {
       "linen_scrap": {
         "name": "Linnen Lap"
       },
+      "crystal_shard": {
+        "name": "Glimmering Crystal Shard"
+      },
       "fen_muster_order": {
         "name": "Veenbrug-Mobilisatiebevel"
       },
@@ -6460,6 +6463,12 @@ export const nl_NL: EnTranslations = {
       "webwood_spider": {
         "name": "Sableweb-Sluiper"
       },
+      "glimmervein_spider": {
+        "name": "Glimmervein Crystal Spider"
+      },
+      "glimmervein_bat": {
+        "name": "Glimmervein Cave Bat"
+      },
       "mudfin_murloc": {
         "name": "Modvin-Sluiper"
       },
@@ -6477,6 +6486,9 @@ export const nl_NL: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Moerassluiper"
+      },
+      "glimmervein_broodling": {
+        "name": "Glimmervein Broodling"
       },
       "deepfen_murloc": {
         "name": "Diepveen-Bijter"
@@ -7813,6 +7825,9 @@ export const nl_NL: EnTranslations = {
           },
           "9": {
             "label": "Lichtwoudgaarde"
+          },
+          "10": {
+            "label": "Glimmervein Cavern"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const nl_NL: EnTranslations = {
           },
           "7": {
             "label": "Het Verzonken Bastion"
+          },
+          "8": {
+            "label": "Glimmervein Cavern"
           }
         }
       },

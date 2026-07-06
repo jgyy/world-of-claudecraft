@@ -63,6 +63,7 @@ import {
   LAKE,
   TOWN_RADIUS,
   ZONE1_CAMPS,
+  ZONE1_CAVERN_CAMPS,
   ZONE1_CHAPEL_CAMPS,
   ZONE1_MOBS,
   ZONE1_NPCS,
@@ -76,6 +77,7 @@ import {
 import {
   DEEPFEN_SHALLOWS_LAKE,
   ZONE2_CAMPS,
+  ZONE2_CAVERN_CAMPS,
   ZONE2_ITEMS,
   ZONE2_MOBS,
   ZONE2_NPCS,
@@ -211,6 +213,8 @@ export const CAMPS: CampDef[] = [
   ...TEMPLE_CAMPS,
   ...ZONE1_CHAPEL_CAMPS,
   { mobId: 'grix_the_tunnelking', center: { x: -95, z: -78 }, radius: 4, count: 1 },
+  ...ZONE1_CAVERN_CAMPS,
+  ...ZONE2_CAVERN_CAMPS,
 ];
 
 export const GROUND_OBJECTS: GroundObjectDef[] = [
@@ -310,6 +314,22 @@ export const PLAYER_START = { x: 2, z: -2 };
 // the Sim+renderer; the default game never touches it.
 // ---------------------------------------------------------------------------
 
+// Glimmervein Cavern's painted 'cave' patch, straddling the zone1/zone2 seam
+// (x 10..80, z 140..220). BIOME_BY_ID id 6 = 'cave'. Small, local grid so it
+// touches only the new cavern footprint; everywhere else stays unpainted
+// (id 255) and falls back to the zone-band biome, keeping the rest of the
+// built-in heightfield byte-identical.
+const GLIMMERVEIN_CAVE_PAINT_COLS = 7;
+const GLIMMERVEIN_CAVE_PAINT_ROWS = 8;
+const GLIMMERVEIN_CAVE_PAINT: WorldContent['biomePaint'] = {
+  cell: 10,
+  cols: GLIMMERVEIN_CAVE_PAINT_COLS,
+  rows: GLIMMERVEIN_CAVE_PAINT_ROWS,
+  originX: 10,
+  originZ: 140,
+  ids: new Array(GLIMMERVEIN_CAVE_PAINT_COLS * GLIMMERVEIN_CAVE_PAINT_ROWS).fill(6),
+};
+
 export const BUILTIN_WORLD: WorldContent = {
   zones: ZONES,
   camps: CAMPS,
@@ -319,6 +339,7 @@ export const BUILTIN_WORLD: WorldContent = {
   props: PROPS,
   playerStart: PLAYER_START,
   // No terrainEdits: the built-in heightfield is the pure (x,z,seed) function.
+  biomePaint: GLIMMERVEIN_CAVE_PAINT,
 };
 
 let activeWorld: WorldContent = BUILTIN_WORLD;

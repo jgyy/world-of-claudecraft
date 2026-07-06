@@ -1257,6 +1257,13 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     quality: 'poor',
     sellValue: 3,
   },
+  crystal_shard: {
+    id: 'crystal_shard',
+    name: 'Glimmering Crystal Shard',
+    kind: 'junk',
+    quality: 'common',
+    sellValue: 9,
+  },
 
   // --- Quartermaster's Consignment ---------------------------------------
   // A standing line of practical adventuring gear. The Merchant keeps eight

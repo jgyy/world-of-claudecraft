@@ -5450,6 +5450,9 @@ export const ja_JP: EnTranslations = {
       "linen_scrap": {
         "name": "リネンの切れ端"
       },
+      "crystal_shard": {
+        "name": "輝く水晶の欠片"
+      },
       "fen_muster_order": {
         "name": "フェンブリッジ召集令"
       },
@@ -6460,6 +6463,12 @@ export const ja_JP: EnTranslations = {
       "webwood_spider": {
         "name": "セイブルウェブの潜伏者"
       },
+      "glimmervein_spider": {
+        "name": "グリマーヴェインの水晶グモ"
+      },
+      "glimmervein_bat": {
+        "name": "グリマーヴェインの洞窟コウモリ"
+      },
       "mudfin_murloc": {
         "name": "泥ひれの潜伏者"
       },
@@ -6477,6 +6486,9 @@ export const ja_JP: EnTranslations = {
       },
       "mire_prowler": {
         "name": "沼の徘徊者"
+      },
+      "glimmervein_broodling": {
+        "name": "グリマーヴェインの幼体グモ"
       },
       "deepfen_murloc": {
         "name": "ディープフェンのスナッパー"
@@ -7813,6 +7825,9 @@ export const ja_JP: EnTranslations = {
           },
           "9": {
             "label": "ブライトウッドの林間"
+          },
+          "10": {
+            "label": "グリマーヴェイン洞窟"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const ja_JP: EnTranslations = {
           },
           "7": {
             "label": "沈んだ砦"
+          },
+          "8": {
+            "label": "グリマーヴェイン洞窟"
           }
         }
       },

@@ -5450,6 +5450,9 @@ export const da_DK: EnTranslations = {
       "linen_scrap": {
         "name": "Lærredslap"
       },
+      "crystal_shard": {
+        "name": "Glimmering Crystal Shard"
+      },
       "fen_muster_order": {
         "name": "Kærbro Mønstringsordre"
       },
@@ -6460,6 +6463,12 @@ export const da_DK: EnTranslations = {
       "webwood_spider": {
         "name": "Sableweb-Lusker"
       },
+      "glimmervein_spider": {
+        "name": "Glimmervein Crystal Spider"
+      },
+      "glimmervein_bat": {
+        "name": "Glimmervein Cave Bat"
+      },
       "mudfin_murloc": {
         "name": "Mudfinne-Sniger"
       },
@@ -6477,6 +6486,9 @@ export const da_DK: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Sumpsniger"
+      },
+      "glimmervein_broodling": {
+        "name": "Glimmervein Broodling"
       },
       "deepfen_murloc": {
         "name": "Dybmose-Snapper"
@@ -7813,6 +7825,9 @@ export const da_DK: EnTranslations = {
           },
           "9": {
             "label": "Lysskovlysningen"
+          },
+          "10": {
+            "label": "Glimmervein Cavern"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const da_DK: EnTranslations = {
           },
           "7": {
             "label": "Den Sunkne Bastion"
+          },
+          "8": {
+            "label": "Glimmervein Cavern"
           }
         }
       },

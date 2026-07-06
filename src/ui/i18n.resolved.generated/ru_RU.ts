@@ -5450,6 +5450,9 @@ export const ru_RU: EnTranslations = {
       "linen_scrap": {
         "name": "Лоскут льна"
       },
+      "crystal_shard": {
+        "name": "Мерцающий осколок кристалла"
+      },
       "fen_muster_order": {
         "name": "Приказ о сборе в Фенбридже"
       },
@@ -6460,6 +6463,12 @@ export const ru_RU: EnTranslations = {
       "webwood_spider": {
         "name": "Паук-скрытень Сейблвеба"
       },
+      "glimmervein_spider": {
+        "name": "Мерцающий кристальный паук"
+      },
+      "glimmervein_bat": {
+        "name": "Мерцающая пещерная летучая мышь"
+      },
       "mudfin_murloc": {
         "name": "Илогривый скрытень"
       },
@@ -6477,6 +6486,9 @@ export const ru_RU: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Болотный хищник"
+      },
+      "glimmervein_broodling": {
+        "name": "Мерцающий паучонок"
       },
       "deepfen_murloc": {
         "name": "Глубинный щелкун"
@@ -7813,6 +7825,9 @@ export const ru_RU: EnTranslations = {
           },
           "9": {
             "label": "Поляна Брайтвуда"
+          },
+          "10": {
+            "label": "Пещера Мерцающей Жилы"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const ru_RU: EnTranslations = {
           },
           "7": {
             "label": "Затонувший бастион"
+          },
+          "8": {
+            "label": "Пещера Мерцающей Жилы"
           }
         }
       },

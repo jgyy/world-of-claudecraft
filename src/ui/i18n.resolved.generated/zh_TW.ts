@@ -5450,6 +5450,9 @@ export const zh_TW: EnTranslations = {
       "linen_scrap": {
         "name": "亞麻碎布"
       },
+      "crystal_shard": {
+        "name": "閃光水晶碎片"
+      },
       "fen_muster_order": {
         "name": "芬橋集結令"
       },
@@ -6460,6 +6463,12 @@ export const zh_TW: EnTranslations = {
       "webwood_spider": {
         "name": "玄網潛伏者"
       },
+      "glimmervein_spider": {
+        "name": "微光水晶蜘蛛"
+      },
+      "glimmervein_bat": {
+        "name": "微光洞穴蝙蝠"
+      },
       "mudfin_murloc": {
         "name": "泥鰭潛伏者"
       },
@@ -6477,6 +6486,9 @@ export const zh_TW: EnTranslations = {
       },
       "mire_prowler": {
         "name": "泥沼潛伏獸"
+      },
+      "glimmervein_broodling": {
+        "name": "微光蜘蛛幼蟲"
       },
       "deepfen_murloc": {
         "name": "深沼鉗咬魚人"
@@ -7813,6 +7825,9 @@ export const zh_TW: EnTranslations = {
           },
           "9": {
             "label": "明木林地"
+          },
+          "10": {
+            "label": "微光礦脈洞穴"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const zh_TW: EnTranslations = {
           },
           "7": {
             "label": "沉沒堡壘"
+          },
+          "8": {
+            "label": "微光礦脈洞穴"
           }
         }
       },

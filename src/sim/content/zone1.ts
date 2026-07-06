@@ -39,6 +39,7 @@ export const ZONE1_ZONE: ZoneDef = {
     { x: 80, z: 80, label: 'Fallen Chapel' },
     { x: -5, z: -52, label: 'Reliquary Hill' },
     { x: 40, z: 140, label: 'Brightwood Glade' },
+    { x: 45, z: 158, label: 'Glimmervein Cavern' },
   ],
   welcome: 'Find Marshal Redbrook in town — he has work for you.',
   welcomeQuestId: 'q_wolves',
@@ -198,6 +199,60 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     scale: 0.9,
     color: 0x4a235a,
     componentTags: ['venomSac', 'silk'],
+  },
+  glimmervein_spider: {
+    id: 'glimmervein_spider',
+    name: 'Glimmervein Crystal Spider',
+    minLevel: 5,
+    maxLevel: 6,
+    family: 'spider',
+    hpBase: 52,
+    hpPerLevel: 18,
+    dmgBase: 6,
+    dmgPerLevel: 2.0,
+    attackSpeed: 1.9,
+    armorPerLevel: 16,
+    moveSpeed: 8,
+    aggroRadius: 11,
+    venom: {
+      chance: 0.3,
+      perTick: 3,
+      interval: 2,
+      duration: 8,
+      name: 'Crystal Venom',
+      school: 'nature',
+    },
+    ensnare: { chance: 0.25, duration: 3, name: 'Crystalweb', school: 'nature' },
+    loot: [
+      { copper: 20, chance: 1 },
+      { itemId: 'crystal_shard', chance: 0.6 },
+      { itemId: 'spider_leg', chance: 0.35 },
+    ],
+    scale: 1.0,
+    color: 0x7fd8e8,
+    componentTags: ['venomSac', 'crystal'],
+  },
+  glimmervein_bat: {
+    id: 'glimmervein_bat',
+    name: 'Glimmervein Cave Bat',
+    minLevel: 5,
+    maxLevel: 7,
+    family: 'beast',
+    hpBase: 38,
+    hpPerLevel: 16,
+    dmgBase: 5,
+    dmgPerLevel: 1.8,
+    attackSpeed: 1.6,
+    armorPerLevel: 10,
+    moveSpeed: 9.5,
+    aggroRadius: 12,
+    loot: [
+      { copper: 15, chance: 1 },
+      { itemId: 'crystal_shard', chance: 0.2 },
+    ],
+    scale: 0.8,
+    color: 0x3a3a42,
+    componentTags: ['wing'],
   },
   mogger: {
     id: 'mogger',
@@ -1067,6 +1122,14 @@ export const ZONE1_CHAPEL_CAMPS: CampDef[] = [
   { mobId: 'wraithbinder_maldrec', center: { x: 88, z: 92 }, radius: 3, count: 1 },
 ];
 
+// Glimmervein Cavern, southern half (z < 180): the alternate causeway route's
+// entrance on the Eastbrook side. Appended after ZONE1_CHAPEL_CAMPS in the
+// merged CAMPS array (see data.ts) so no existing camp's spawn draw shifts.
+export const ZONE1_CAVERN_CAMPS: CampDef[] = [
+  { mobId: 'glimmervein_spider', center: { x: 45, z: 155 }, radius: 18, count: 6 },
+  { mobId: 'glimmervein_bat', center: { x: 60, z: 152 }, radius: 16, count: 5 },
+];
+
 export const ZONE1_OBJECTS: GroundObjectDef[] = [
   {
     itemId: 'supply_crate',
@@ -1142,6 +1205,12 @@ export const ZONE1_ROADS: { x: number; z: number }[][] = [
     { x: 60, z: 60 },
     { x: 78, z: 74 },
   ], // northeast to ruins
+  [
+    { x: 0, z: 120 },
+    { x: 0, z: 155 },
+    { x: 20, z: 155 },
+    { x: 45, z: 155 },
+  ], // spur off the causeway to Glimmervein Cavern's southern entrance
 ];
 
 // ---------------------------------------------------------------------------

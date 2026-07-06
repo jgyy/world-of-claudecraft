@@ -5450,6 +5450,9 @@ export const id_ID: EnTranslations = {
       "linen_scrap": {
         "name": "Potongan Linen"
       },
+      "crystal_shard": {
+        "name": "Glimmering Crystal Shard"
+      },
       "fen_muster_order": {
         "name": "Perintah Mobilisasi Fenbridge"
       },
@@ -6460,6 +6463,12 @@ export const id_ID: EnTranslations = {
       "webwood_spider": {
         "name": "Penyergap Sableweb"
       },
+      "glimmervein_spider": {
+        "name": "Glimmervein Crystal Spider"
+      },
+      "glimmervein_bat": {
+        "name": "Glimmervein Cave Bat"
+      },
       "mudfin_murloc": {
         "name": "Penyelinap Mudfin"
       },
@@ -6477,6 +6486,9 @@ export const id_ID: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Penjelajah Rawa"
+      },
+      "glimmervein_broodling": {
+        "name": "Glimmervein Broodling"
       },
       "deepfen_murloc": {
         "name": "Penggigit Deepfen"
@@ -7813,6 +7825,9 @@ export const id_ID: EnTranslations = {
           },
           "9": {
             "label": "Tanah Lapang Brightwood"
+          },
+          "10": {
+            "label": "Glimmervein Cavern"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const id_ID: EnTranslations = {
           },
           "7": {
             "label": "Benteng Karam"
+          },
+          "8": {
+            "label": "Glimmervein Cavern"
           }
         }
       },

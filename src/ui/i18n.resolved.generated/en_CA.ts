@@ -5450,6 +5450,9 @@ export const en_CA: EnTranslations = {
       "linen_scrap": {
         "name": "Linen Scrap"
       },
+      "crystal_shard": {
+        "name": "Glimmering Crystal Shard"
+      },
       "fen_muster_order": {
         "name": "Fenbridge Muster Order"
       },
@@ -6460,6 +6463,12 @@ export const en_CA: EnTranslations = {
       "webwood_spider": {
         "name": "Sableweb Lurker"
       },
+      "glimmervein_spider": {
+        "name": "Glimmervein Crystal Spider"
+      },
+      "glimmervein_bat": {
+        "name": "Glimmervein Cave Bat"
+      },
       "mudfin_murloc": {
         "name": "Mudfin Skulker"
       },
@@ -6477,6 +6486,9 @@ export const en_CA: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Mire Prowler"
+      },
+      "glimmervein_broodling": {
+        "name": "Glimmervein Broodling"
       },
       "deepfen_murloc": {
         "name": "Deepfen Snapper"
@@ -7813,6 +7825,9 @@ export const en_CA: EnTranslations = {
           },
           "9": {
             "label": "Brightwood Glade"
+          },
+          "10": {
+            "label": "Glimmervein Cavern"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const en_CA: EnTranslations = {
           },
           "7": {
             "label": "The Sunken Bastion"
+          },
+          "8": {
+            "label": "Glimmervein Cavern"
           }
         }
       },

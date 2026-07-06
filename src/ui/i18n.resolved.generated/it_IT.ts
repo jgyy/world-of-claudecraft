@@ -5450,6 +5450,9 @@ export const it_IT: EnTranslations = {
       "linen_scrap": {
         "name": "Ritaglio di lino"
       },
+      "crystal_shard": {
+        "name": "Glimmering Crystal Shard"
+      },
       "fen_muster_order": {
         "name": "Ordine di raduno di Fenbridge"
       },
@@ -6460,6 +6463,12 @@ export const it_IT: EnTranslations = {
       "webwood_spider": {
         "name": "Predatore di Sableweb"
       },
+      "glimmervein_spider": {
+        "name": "Glimmervein Crystal Spider"
+      },
+      "glimmervein_bat": {
+        "name": "Glimmervein Cave Bat"
+      },
       "mudfin_murloc": {
         "name": "Predatore Pinnalimo"
       },
@@ -6477,6 +6486,9 @@ export const it_IT: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Predatore del pantano"
+      },
+      "glimmervein_broodling": {
+        "name": "Glimmervein Broodling"
       },
       "deepfen_murloc": {
         "name": "Azzannatore di Deepfen"
@@ -7813,6 +7825,9 @@ export const it_IT: EnTranslations = {
           },
           "9": {
             "label": "Radura di Brightwood"
+          },
+          "10": {
+            "label": "Glimmervein Cavern"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const it_IT: EnTranslations = {
           },
           "7": {
             "label": "Il Bastione Sommerso"
+          },
+          "8": {
+            "label": "Glimmervein Cavern"
           }
         }
       },

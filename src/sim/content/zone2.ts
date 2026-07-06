@@ -36,6 +36,7 @@ export const ZONE2_ZONE: ZoneDef = {
     { x: -95, z: 440, label: 'Troll Mounds' },
     { x: 0, z: 485, label: 'Gravecaller Encampment' },
     { x: 45, z: 515, label: 'The Sunken Bastion' },
+    { x: 45, z: 202, label: 'Glimmervein Cavern' },
   ],
   welcome: 'Report to Warden Fenwick at the Fenbridge gate.',
 };
@@ -70,6 +71,12 @@ export const ZONE2_ROADS: { x: number; z: number }[][] = [
     { x: 20, z: 470 },
     { x: 45, z: 515 },
   ], // -> cult camp -> Bastion
+  [
+    { x: 0, z: 200 },
+    { x: 0, z: 205 },
+    { x: 20, z: 205 },
+    { x: 45, z: 205 },
+  ], // spur off the causeway to Glimmervein Cavern's northern entrance
 ];
 
 // ---------------------------------------------------------------------------
@@ -103,6 +110,38 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     // the victim's swings (+30% swing interval) for 8s.
     slowStrike: { chance: 0.3, mult: 1.3, duration: 8, name: 'Miring Pounce', school: 'physical' },
     componentTags: ['hide', 'claw'],
+  },
+  glimmervein_broodling: {
+    id: 'glimmervein_broodling',
+    name: 'Glimmervein Broodling',
+    minLevel: 7,
+    maxLevel: 8,
+    family: 'spider',
+    hpBase: 58,
+    hpPerLevel: 20,
+    dmgBase: 7,
+    dmgPerLevel: 2.2,
+    attackSpeed: 1.85,
+    armorPerLevel: 18,
+    moveSpeed: 8.2,
+    aggroRadius: 11,
+    venom: {
+      chance: 0.32,
+      perTick: 3,
+      interval: 2,
+      duration: 8,
+      name: 'Crystal Venom',
+      school: 'nature',
+    },
+    ensnare: { chance: 0.25, duration: 3, name: 'Crystalweb', school: 'nature' },
+    loot: [
+      { copper: 24, chance: 1 },
+      { itemId: 'crystal_shard', chance: 0.6 },
+      { itemId: 'spider_leg', chance: 0.35 },
+    ],
+    scale: 1.05,
+    color: 0x7fd8e8,
+    componentTags: ['venomSac', 'crystal'],
   },
   deepfen_murloc: {
     id: 'deepfen_murloc',
@@ -1170,6 +1209,14 @@ export const ZONE2_CAMPS: CampDef[] = [
   // Listed last so their spawn draws never perturb the other camps' placement.
   { mobId: 'bog_bloat', center: { x: 72, z: 428 }, radius: 11, count: 5 },
   { mobId: 'bog_bloat', center: { x: 110, z: 440 }, radius: 11, count: 4 },
+];
+
+// Glimmervein Cavern, northern half (z >= 180): the alternate causeway
+// route's entrance on the Fenbridge side. Kept as its own array and appended
+// AFTER ZONE2_CAMPS in the merged CAMPS array (see data.ts), so no existing
+// camp's spawn draw shifts.
+export const ZONE2_CAVERN_CAMPS: CampDef[] = [
+  { mobId: 'glimmervein_broodling', center: { x: 45, z: 205 }, radius: 18, count: 6 },
 ];
 
 export const ZONE2_OBJECTS: GroundObjectDef[] = [

@@ -5450,6 +5450,9 @@ export const ko_KR: EnTranslations = {
       "linen_scrap": {
         "name": "아마포 조각"
       },
+      "crystal_shard": {
+        "name": "반짝이는 수정 조각"
+      },
       "fen_muster_order": {
         "name": "펜브리지 소집 명령서"
       },
@@ -6460,6 +6463,12 @@ export const ko_KR: EnTranslations = {
       "webwood_spider": {
         "name": "흑거미줄 잠복자"
       },
+      "glimmervein_spider": {
+        "name": "글리머베인 수정 거미"
+      },
+      "glimmervein_bat": {
+        "name": "글리머베인 동굴박쥐"
+      },
       "mudfin_murloc": {
         "name": "진흙지느러미 잠복자"
       },
@@ -6477,6 +6486,9 @@ export const ko_KR: EnTranslations = {
       },
       "mire_prowler": {
         "name": "수렁 배회자"
+      },
+      "glimmervein_broodling": {
+        "name": "글리머베인 새끼거미"
       },
       "deepfen_murloc": {
         "name": "딥펜 무는이"
@@ -7813,6 +7825,9 @@ export const ko_KR: EnTranslations = {
           },
           "9": {
             "label": "브라이트우드 숲"
+          },
+          "10": {
+            "label": "글리머베인 동굴"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const ko_KR: EnTranslations = {
           },
           "7": {
             "label": "가라앉은 요새"
+          },
+          "8": {
+            "label": "글리머베인 동굴"
           }
         }
       },

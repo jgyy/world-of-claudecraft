@@ -5450,6 +5450,9 @@ export const tr_TR: EnTranslations = {
       "linen_scrap": {
         "name": "Keten Parçası"
       },
+      "crystal_shard": {
+        "name": "Glimmering Crystal Shard"
+      },
       "fen_muster_order": {
         "name": "Fenbridge Seferberlik Emri"
       },
@@ -6460,6 +6463,12 @@ export const tr_TR: EnTranslations = {
       "webwood_spider": {
         "name": "Sableweb Pusucusu"
       },
+      "glimmervein_spider": {
+        "name": "Glimmervein Crystal Spider"
+      },
+      "glimmervein_bat": {
+        "name": "Glimmervein Cave Bat"
+      },
       "mudfin_murloc": {
         "name": "Çamuryüzgeç Sinsisi"
       },
@@ -6477,6 +6486,9 @@ export const tr_TR: EnTranslations = {
       },
       "mire_prowler": {
         "name": "Bataklık Sinsisi"
+      },
+      "glimmervein_broodling": {
+        "name": "Glimmervein Broodling"
       },
       "deepfen_murloc": {
         "name": "Deepfen Isirgani"
@@ -7813,6 +7825,9 @@ export const tr_TR: EnTranslations = {
           },
           "9": {
             "label": "Parlakorman Açıklığı"
+          },
+          "10": {
+            "label": "Glimmervein Cavern"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const tr_TR: EnTranslations = {
           },
           "7": {
             "label": "Batık Kale"
+          },
+          "8": {
+            "label": "Glimmervein Cavern"
           }
         }
       },

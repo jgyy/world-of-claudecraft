@@ -2383,9 +2383,19 @@ describe('The Drowned Litany (Phase 7 heroic affixes)', () => {
       p.pos.x = run.origin.x + h.x;
       p.pos.z = run.origin.z + zBase + h.z;
       p.prevPos = { ...p.pos };
-      const hp0 = p.hp;
-      for (let i = 0; i < 20; i++) sim.tick();
-      return hp0 - p.hp;
+      // Sum only the Blackwater hazard's own damage events, not raw hp delta:
+      // the room's other module mobs can also land a hit on the player inside
+      // this window (incidental to whatever tick their AI happens to engage
+      // on), which has nothing to do with the affix multiplier under test.
+      let blackwater = 0;
+      for (let i = 0; i < 20; i++) {
+        for (const ev of sim.tick()) {
+          if (ev.type === 'damage' && ev.targetId === p.id && ev.ability === 'Blackwater') {
+            blackwater += ev.amount;
+          }
+        }
+      }
+      return blackwater;
     };
     const base = pulse([]);
     const flooded = pulse(['high_water']);

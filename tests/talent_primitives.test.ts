@@ -365,7 +365,12 @@ describe('talent primitive P3: empower next', () => {
     // so the free charge must not be consumed at cast start or the player would
     // pay full price anyway. Regression for the start-consume bug.
     const { sim, p } = makeSim('mage');
-    spawnTarget(sim, p);
+    const target = spawnTarget(sim, p);
+    // Pin the target in place: this test is only about the free-cast billing
+    // timing, not mob AI, and a chasing wolf's exact rest position (and
+    // whether the LoS ray to it clips a prop) is incidental and shifts with
+    // unrelated world content (e.g. new camp spawn counts).
+    target.moveSpeed = 0;
     p.resource = 0;
     p.auras.push(aura('next_cast_free'));
 

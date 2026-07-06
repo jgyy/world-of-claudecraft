@@ -5450,6 +5450,9 @@ export const en_XA: EnTranslations = {
       "linen_scrap": {
         "name": "[Ļíñéñ Šçŕáþ]"
       },
+      "crystal_shard": {
+        "name": "[Ĝļíɱɱéŕíñĝ Çŕýšţáļ Šĥáŕð]"
+      },
       "fen_muster_order": {
         "name": "[Ƒéñƀŕíðĝé Ɱúšţéŕ Óŕðéŕ]"
       },
@@ -6460,6 +6463,12 @@ export const en_XA: EnTranslations = {
       "webwood_spider": {
         "name": "[Šáƀļéŵéƀ Ļúŕķéŕ]"
       },
+      "glimmervein_spider": {
+        "name": "[Ĝļíɱɱéŕʋéíñ Çŕýšţáļ Šþíðéŕ]"
+      },
+      "glimmervein_bat": {
+        "name": "[Ĝļíɱɱéŕʋéíñ Çáʋé Ɓáţ]"
+      },
       "mudfin_murloc": {
         "name": "[Ɱúðƒíñ Šķúļķéŕ]"
       },
@@ -6477,6 +6486,9 @@ export const en_XA: EnTranslations = {
       },
       "mire_prowler": {
         "name": "[Ɱíŕé Þŕóŵļéŕ]"
+      },
+      "glimmervein_broodling": {
+        "name": "[Ĝļíɱɱéŕʋéíñ Ɓŕóóðļíñĝ]"
       },
       "deepfen_murloc": {
         "name": "[Ðééþƒéñ Šñáþþéŕ]"
@@ -7813,6 +7825,9 @@ export const en_XA: EnTranslations = {
           },
           "9": {
             "label": "[Ɓŕíĝĥţŵóóð Ĝļáðé]"
+          },
+          "10": {
+            "label": "[Ĝļíɱɱéŕʋéíñ Çáʋéŕñ]"
           }
         }
       },
@@ -7843,6 +7858,9 @@ export const en_XA: EnTranslations = {
           },
           "7": {
             "label": "[Ţĥé Šúñķéñ Ɓášţíóñ]"
+          },
+          "8": {
+            "label": "[Ĝļíɱɱéŕʋéíñ Çáʋéŕñ]"
           }
         }
       },
