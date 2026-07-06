@@ -314,55 +314,96 @@ export const PLAYER_START = { x: 2, z: -2 };
 // the Sim+renderer; the default game never touches it.
 // ---------------------------------------------------------------------------
 
-// Glimmervein Cavern: a real underground CHAMBER through the natural mountain
-// ridge that separates Eastbrook Vale from Mirefen Marsh (src/sim/world.ts
-// already builds that ridge as a genuinely impassable, ~40yd wall between the
-// zones, pierced by exactly one pass, the x=0 causeway). This is a SECOND,
-// much wider pass through that same ridge, well west of the causeway
-// (GLIMMERVEIN_PASS_HALF_WIDTH/SHOULDER below are a whole open ROOM's worth,
-// not a narrow corridor slot): the ridge closes back to full height only past
-// the shoulder, so the ordinary heightfield itself forms a real, wide,
-// steep-walled underground room spanning most of the ridge's own thickness
-// (no separate carved-out "gorge" stamp needed; the wall geometry is the same
-// mountain every other crossing bounces off). See src/sim/world.ts for the
-// pass mechanics. The render tunnel module (src/render/cave_tunnel.ts) draws
-// a ceiling/props over this whole footprint, not just a centerline; the
-// 'cave' biome paint below tints the footprint and switches the local
-// decoration mix (terrain.ts/foliage.ts). Both are additive over the
-// built-in heightfield, so everywhere else stays byte-identical.
-export const GLIMMERVEIN_PASS_X = -70;
-export const GLIMMERVEIN_PASS_HALF_WIDTH = 16;
-export const GLIMMERVEIN_PASS_SHOULDER = 32;
-export const GLIMMERVEIN_GORGE_ZS = [140, 152, 164, 176, 188, 200, 212] as const;
-export const GLIMMERVEIN_FLOOR_HEIGHT = 1;
-// The pass leaves the ridge WALLS to the natural heightfield, but the ambient
-// hill/marsh noise underneath the chamber floor is not itself guaranteed flat
-// (ordinary open-world terrain has small natural undulation that can locally
-// exceed the movement climb limit over a long stretch). A light 'level' floor
-// stamp across the same footprint guarantees the whole chamber floor is
-// actually walkable end to end; it only smooths the floor, it creates no wall
-// (tests/terrain_walls.test.ts pins the walls; tests/progression.test.ts or an
-// equivalent floor-walkability check should pin this). Radius matches the
-// pass's own half-width so the smoothed floor covers the whole room, not just
-// a thin centerline strip.
-const GLIMMERVEIN_FLOOR_STAMPS: WorldContent['terrainEdits'] = GLIMMERVEIN_GORGE_ZS.map((z) => ({
+// Glimmervein Cavern: a real underground TUNNEL, not a carved-open valley or
+// a pass through a ridge wall. It sits on the EAST ("right") side of both
+// Eastbrook Vale and Mirefen Marsh (x=110, well clear of every existing camp
+// and POI on that side), running under ordinary ground the whole way,
+// including under the zone1/zone2 ridge itself.
+//
+// The terrain here is a single heightfield (there is no second, occluded
+// layer to tunnel through), so "underground" is built the same way the
+// engine already builds a sunken feature (MIREFEN_IMPACT_CRATER above): a
+// HeightStamp pulls the ground down to a fixed low floor. Two things make
+// this read as a bored tunnel and not a valley:
+//   1. The long BODY run uses 'flat' falloff: every point inside a body
+//      stamp's radius snaps straight to the fixed floor with zero blend, so
+//      the sides are a sheer, instant drop (real walls, not a graded slope)
+//      and the surface hillshade the world map draws shows a thin edge, not
+//      a wide shaded valley.
+//   2. The two entrance/exit RAMPS (which must be walkable, so they need a
+//      'smooth' blend) are short and, critically, roofed by the render
+//      tunnel module (src/render/cave_tunnel.ts) for their entire descent,
+//      not just the flat body: cave_tunnel.ts encloses every point whose
+//      (already-edited) height drops meaningfully below the surface, which
+//      covers the ramps too, so there is no open-air stretch anywhere along
+//      the run, only a small mouth right where the ramp rejoins the surface.
+export const GLIMMERVEIN_PASS_X = 110;
+export const GLIMMERVEIN_TUNNEL_HALF_WIDTH = 12; // a thick subway-tunnel width (24yd across)
+export const GLIMMERVEIN_FLOOR_Y = -22; // fixed absolute depth: genuinely below the surface
+// The two short entrance/exit ramps: 'smooth' falloff so they are walkable
+// (peak slope stays under the movement climb limit; see terrain_walls.test.ts),
+// but small enough, and fully roofed, that they don't read as an open valley.
+export const GLIMMERVEIN_RAMP_SOUTH_Z = 128;
+export const GLIMMERVEIN_RAMP_NORTH_Z = 232;
+// 30: gives the smooth blend's peak slope (steeper than the average, per
+// smoothstep's derivative shape) a real margin under the movement climb
+// limit (1.5 rise/run) rather than landing right at the edge of it.
+const GLIMMERVEIN_RAMP_RADIUS = 30;
+// The long flat body: dead-flat floor, sheer 'flat'-falloff walls, no slope.
+// Its outer stamps (144 / 216) are deliberately close to the ramp CENTERS
+// (128 / 232, only 2yd past where each ramp's own smooth blend has already
+// saturated to within a fraction of a yard of the floor), not the ramps'
+// outer radius: a 'flat' stamp snaps unconditionally to its exact delta
+// wherever it applies, so if its own reach started further out, at a point
+// where the ramp's blend hasn't finished (still meaningfully above the
+// floor), the flat stamp would snap that point down to the floor in one
+// step, an unwalkable cliff in the middle of what should be a continuous
+// ramp. Starting the flat body right where the ramp is already saturated
+// keeps that seam a fraction of a yard, not a cliff.
+export const GLIMMERVEIN_BODY_ZS = [144, 156, 168, 180, 192, 204, 216] as const;
+
+const GLIMMERVEIN_BODY_STAMPS: WorldContent['terrainEdits'] = GLIMMERVEIN_BODY_ZS.map((z) => ({
   x: GLIMMERVEIN_PASS_X,
   z,
-  radius: GLIMMERVEIN_PASS_HALF_WIDTH + 2,
-  delta: GLIMMERVEIN_FLOOR_HEIGHT,
-  falloff: 'smooth',
+  radius: GLIMMERVEIN_TUNNEL_HALF_WIDTH + 2,
+  delta: GLIMMERVEIN_FLOOR_Y,
+  falloff: 'flat',
   mode: 'level',
 }));
-// Widened to match the bigger chamber footprint (GLIMMERVEIN_PASS_HALF_WIDTH +
-// GLIMMERVEIN_PASS_SHOULDER reach, plus the GORGE_ZS run).
-const GLIMMERVEIN_CAVE_PAINT_COLS = 11;
-const GLIMMERVEIN_CAVE_PAINT_ROWS = 10;
+const GLIMMERVEIN_RAMP_STAMPS: WorldContent['terrainEdits'] = [
+  {
+    x: GLIMMERVEIN_PASS_X,
+    z: GLIMMERVEIN_RAMP_SOUTH_Z,
+    radius: GLIMMERVEIN_RAMP_RADIUS,
+    delta: GLIMMERVEIN_FLOOR_Y,
+    falloff: 'smooth',
+    mode: 'level',
+  },
+  {
+    x: GLIMMERVEIN_PASS_X,
+    z: GLIMMERVEIN_RAMP_NORTH_Z,
+    radius: GLIMMERVEIN_RAMP_RADIUS,
+    delta: GLIMMERVEIN_FLOOR_Y,
+    falloff: 'smooth',
+    mode: 'level',
+  },
+];
+const GLIMMERVEIN_TERRAIN_EDITS: WorldContent['terrainEdits'] = [
+  GLIMMERVEIN_RAMP_STAMPS[0],
+  ...GLIMMERVEIN_BODY_STAMPS,
+  GLIMMERVEIN_RAMP_STAMPS[1],
+];
+
+// Covers the tunnel's footprint (body + both ramps) so the 'cave'/rock ground
+// tint and decoration mix switch over the whole run, not just the body.
+const GLIMMERVEIN_CAVE_PAINT_COLS = 6;
+const GLIMMERVEIN_CAVE_PAINT_ROWS = 15;
 const GLIMMERVEIN_CAVE_PAINT: WorldContent['biomePaint'] = {
   cell: 10,
   cols: GLIMMERVEIN_CAVE_PAINT_COLS,
   rows: GLIMMERVEIN_CAVE_PAINT_ROWS,
-  originX: GLIMMERVEIN_PASS_X - 55,
-  originZ: 130,
+  originX: GLIMMERVEIN_PASS_X - 30,
+  originZ: 95,
   ids: new Array(GLIMMERVEIN_CAVE_PAINT_COLS * GLIMMERVEIN_CAVE_PAINT_ROWS).fill(6),
 };
 
@@ -374,10 +415,10 @@ export const BUILTIN_WORLD: WorldContent = {
   roads: ROADS,
   props: PROPS,
   playerStart: PLAYER_START,
-  // Glimmervein Cavern's walls come from a real pass through the existing
-  // zone1/zone2 ridge (src/sim/world.ts); this terrain edit only smooths its
-  // walkable floor (see GLIMMERVEIN_FLOOR_STAMPS above).
-  terrainEdits: GLIMMERVEIN_FLOOR_STAMPS,
+  // Glimmervein Cavern's floor: a fixed underground depth for the whole run
+  // (see GLIMMERVEIN_TERRAIN_EDITS above); the walls come from the height
+  // difference between this floor and the untouched surface either side.
+  terrainEdits: GLIMMERVEIN_TERRAIN_EDITS,
   biomePaint: GLIMMERVEIN_CAVE_PAINT,
 };
 

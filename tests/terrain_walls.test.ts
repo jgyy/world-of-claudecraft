@@ -13,12 +13,16 @@ const WORLD_SEED = 20061; // the fixed production seed (src/main.ts, server/game
 const CLIMB_LIMIT = 1.5;
 const WALL_MARGIN = 1.7; // walls must beat the limit with headroom, not by a hair
 const PASS_HALF_WIDTH = 10;
-// Glimmervein Cavern's own pass through the eastbrook_vale/mirefen_marsh
-// ridge (see GLIMMERVEIN_PASS_* in src/sim/world.ts): a second, much wider
-// opening (a whole underground chamber), well west of the x=0 causeway.
+// Glimmervein Cavern (see GLIMMERVEIN_* in src/sim/data.ts): a real
+// underground tunnel bored under the eastbrook_vale/mirefen_marsh ridge on
+// the east side of both zones, x=110, well clear of the x=0 causeway pass.
+// Unlike the causeway (a natural low pass in the ridge itself) this is a
+// terrain-edit trench: a dead-flat 'flat'-falloff floor for its body (sheer
+// walls at the radius edge) with a short 'smooth' ramp at each mouth.
 const GLIMMERVEIN_RIDGE_Z = 180;
-const GLIMMERVEIN_PASS_X = -70;
-const GLIMMERVEIN_PASS_SHOULDER = 32;
+const GLIMMERVEIN_PASS_X = 110;
+const GLIMMERVEIN_TUNNEL_HALF_WIDTH = 12;
+const GLIMMERVEIN_WALL_MARGIN_X = GLIMMERVEIN_TUNNEL_HALF_WIDTH + 4; // past the +2 stamp radius
 
 // Max steepness met along a straight crossing path.
 function pathMaxSteepness(
@@ -49,11 +53,11 @@ describe('impassable terrain walls', () => {
     for (const rz of RIDGE_ZS) {
       for (let x = -172; x <= 172; x += 4) {
         if (Math.abs(x) < PASS_HALF_WIDTH + 26) continue; // the road pass corridor
-        // Glimmervein Cavern's own pass only pierces the eastbrook_vale/
+        // Glimmervein Cavern's tunnel only pierces the eastbrook_vale/
         // mirefen_marsh ridge; every other ridge has no second opening.
         if (
           rz === GLIMMERVEIN_RIDGE_Z &&
-          Math.abs(x - GLIMMERVEIN_PASS_X) < GLIMMERVEIN_PASS_SHOULDER + 2
+          Math.abs(x - GLIMMERVEIN_PASS_X) < GLIMMERVEIN_WALL_MARGIN_X
         ) {
           continue;
         }
@@ -83,52 +87,51 @@ describe('impassable terrain walls', () => {
     }
   });
 
-  it("Glimmervein Cavern's own pass shoulder is already a real wall", () => {
-    // Mirrors the causeway's shoulder-wall test above, but for the second,
-    // much wider pass: by GLIMMERVEIN_PASS_SHOULDER (32) either side of
-    // GLIMMERVEIN_PASS_X, the ridge must already be a real wall, so the
-    // chamber cannot be silently widened into an open mountain notch.
-    for (let x = GLIMMERVEIN_PASS_SHOULDER; x <= GLIMMERVEIN_PASS_SHOULDER + 10; x += 2) {
-      for (const side of [-1, 1]) {
-        const crossX = GLIMMERVEIN_PASS_X + side * x;
-        const max = pathMaxSteepness(
-          WORLD_SEED,
-          { x: crossX, z: GLIMMERVEIN_RIDGE_Z - 50 },
-          { x: crossX, z: GLIMMERVEIN_RIDGE_Z + 50 },
-        );
-        expect(max, `Glimmervein shoulder at x=${crossX}`).toBeGreaterThan(WALL_MARGIN);
-      }
+  it("Glimmervein Cavern's tunnel walls are real just past its own radius", () => {
+    // The 'flat'-falloff body stamp (see GLIMMERVEIN_BODY_ZS in
+    // src/sim/data.ts) gives a sheer, instant wall at its own radius edge
+    // (GLIMMERVEIN_TUNNEL_HALF_WIDTH + 2 = 14): sampling just past that, at
+    // the ridge center (z=180, deep in the tunnel's flat body, away from
+    // either ramp), must already be a real wall on both sides.
+    for (const side of [-1, 1]) {
+      const crossX = GLIMMERVEIN_PASS_X + side * GLIMMERVEIN_WALL_MARGIN_X;
+      const max = pathMaxSteepness(
+        WORLD_SEED,
+        { x: crossX, z: GLIMMERVEIN_RIDGE_Z - 50 },
+        { x: crossX, z: GLIMMERVEIN_RIDGE_Z + 50 },
+      );
+      expect(max, `Glimmervein tunnel wall at x=${crossX}`).toBeGreaterThan(WALL_MARGIN);
     }
   });
 
-  it('Glimmervein Cavern chamber is walkable end to end (below the climb limit)', () => {
-    // The chamber must actually be open along its centerline, distinct from
-    // the walls just outside it. Scoped to the chamber's own span (the
-    // GLIMMERVEIN_FLOOR_STAMPS z-run in src/sim/data.ts), not the full
-    // ridge-margin sweep used by the wall tests above: ordinary ambient vale
-    // hill noise well outside the chamber (e.g. z=140, before the ridge's own
-    // influence even begins) can locally exceed the climb limit exactly like
-    // any other rolling terrain in the zone, which is not this test's concern.
+  it('Glimmervein Cavern tunnel is walkable end to end, including both ramps', () => {
+    // The tunnel must actually be open along its centerline the whole way,
+    // from south mouth to north mouth, distinct from the walls just outside
+    // it. Scoped to start just past z=100 (the ambient vale terrain right at
+    // the ramp's outer lip has ordinary, unrelated local noise like any other
+    // rolling terrain in the zone, not this test's concern) through the north
+    // ramp's own outer lip.
     const max = pathMaxSteepness(
       WORLD_SEED,
-      { x: GLIMMERVEIN_PASS_X, z: 137 },
-      { x: GLIMMERVEIN_PASS_X, z: 215 },
+      { x: GLIMMERVEIN_PASS_X, z: 100 },
+      { x: GLIMMERVEIN_PASS_X, z: 262 },
     );
     expect(max).toBeLessThan(CLIMB_LIMIT);
   });
 
-  it('Glimmervein Cavern chamber is walkable across its full width, not just the centerline', () => {
-    // This is a real underground ROOM (GLIMMERVEIN_PASS_HALF_WIDTH=16), not a
-    // narrow corridor: a crossing lengthwise through the room a good distance
-    // off-center must stay walkable too, distinct from the wall tests above
-    // which sample well past the shoulder on purpose.
-    for (const dx of [-12, -6, 0, 6, 12]) {
+  it('Glimmervein Cavern tunnel is walkable across its full width, not just the centerline', () => {
+    // This is a thick subway-tunnel width (GLIMMERVEIN_TUNNEL_HALF_WIDTH=12),
+    // not a narrow corridor: a crossing lengthwise through the flat body a
+    // good distance off-center must stay walkable (in fact dead flat) too,
+    // distinct from the wall test above which samples past the tunnel radius
+    // on purpose.
+    for (const dx of [-10, -5, 0, 5, 10]) {
       const max = pathMaxSteepness(
         WORLD_SEED,
         { x: GLIMMERVEIN_PASS_X + dx, z: 150 },
-        { x: GLIMMERVEIN_PASS_X + dx, z: 205 },
+        { x: GLIMMERVEIN_PASS_X + dx, z: 210 },
       );
-      expect(max, `chamber walkable at dx=${dx}`).toBeLessThan(CLIMB_LIMIT);
+      expect(max, `tunnel walkable at dx=${dx}`).toBeLessThan(CLIMB_LIMIT);
     }
   });
 
