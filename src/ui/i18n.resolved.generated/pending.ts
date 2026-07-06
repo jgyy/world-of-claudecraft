@@ -9,24 +9,122 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "es_ES": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "fr_FR": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "fr_CA": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
+  "it_IT": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "de_DE": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
-  "pt_BR": [],
+  "pt_BR": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
   "ru_RU": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "nl_NL": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "pl_PL": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "id_ID": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "tr_TR": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "sv_SE": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "vi_VN": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ],
+  "da_DK": [
+    "entities.items.crystal_shard.name",
+    "entities.mobs.glimmervein_bat.name",
+    "entities.mobs.glimmervein_broodling.name",
+    "entities.mobs.glimmervein_spider.name",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label"
+  ]
 };
