@@ -1,26 +1,31 @@
 // The Sunken Road: a deep, walkable mine tunnel connecting Eastbrook Vale
 // (Zone 1) directly to Mirefen Marsh (Zone 2).
 //
-// Carved as a chain of overlapping 'level'/'smooth' HeightStamps (see
-// sim/types.ts HeightStamp): each stamp pulls the ground to a fixed floor
-// (walkability + no-flood come from the terrain, exactly as before). A real
-// enclosed shell (a tube swept along this same waypoint centerline) is drawn
-// over it in src/render/cave_tunnel.ts so the sky is never visible while
-// walking it: this is a subway-style bore, not an open-air trench. Terrain-
-// aware water (waterLevelAt/isInWaterBody, sim/world.ts) means this can sit
-// far below the old flat WATER_LEVEL without flooding or blocking non-swim
-// movement, as long as it stays outside every zone's declared `lakes` list
-// (it does).
+// A real NARROW bore, not a wide open-air trench: a chain of closely spaced
+// 'level'/'flat' HeightStamps (see sim/types.ts HeightStamp) carves a corridor
+// only TUNNEL_FLOOR_RADIUS wide with sharp (not smoothed) walls, so the carved
+// footprint is deliberately narrower than the visual shell that wraps it
+// (src/render/cave_tunnel.ts: a THREE.TubeGeometry swept along this same
+// centerline). Standing anywhere on the walkable floor, the shell fully
+// encloses you in every direction, including straight up: this is the fix for
+// an earlier version that used one wide 'smooth' stamp per waypoint (spaced
+// far apart): that carved a broad, gently-sloped BOWL (a valley), and the
+// narrow floating tube inside it left most of the walkable floor open to sky.
+// A tunnel's floor must be no wider than its own ceiling. Terrain-aware water
+// (waterLevelAt/isInWaterBody, sim/world.ts) means this can sit far below the
+// old flat WATER_LEVEL without flooding or blocking non-swim movement, as
+// long as it stays outside every zone's declared `lakes` list (it does).
 //
 // Enters both zones on their west side ("9 o'clock" on the map, the same
 // convention Glimmervein Cavern used). Threads between Eastbrook Vale's
 // northwest (-8,6)->(-35,25)->(-58,48)->(-66,58) and southwest (-6,-6)->
 // (-30,-28)->(-55,-45)->(-70,-55) roads and the webwood_spider (-60,5) /
 // mudfin_murloc (-75,57) camps, ducks east of Mirror Lake's terrain-aware
-// footprint (-92,88, radius 30 -> 48) rather than trying to out-flank it
-// (the world's playable rectangle ends at |x|=180, too tight a margin past
-// there), then in Mirefen Marsh clears the mire_prowler camp (-40,230) and
-// stays well short of Deepfen Shallows' footprint (-110,310, radius 56).
+// footprint (-92,88, radius 30 -> 48), then in Mirefen Marsh clears the
+// mire_prowler camp (-40,230) and stays well short of Deepfen Shallows'
+// footprint (-110,310, radius 56). The route below is unchanged from before;
+// only the carve width/technique changed, so all of that clearance still
+// holds (a narrower carve only makes it hold with MORE margin).
 // Crosses the zone1/zone2 ridge at x=-110, z=180 (tests/terrain_walls.test.ts
 // excludes this corridor from the "every ridge crossing is a wall" check,
 // the same way it already excludes the native road pass at x=0).
@@ -40,15 +45,23 @@ import type {
 // terrain-aware water (isInWaterBody, sim/world.ts) means it stays dry and
 // walkable here since it is outside every zone's declared `lakes` list.
 export const SUNKEN_ROAD_FLOOR_Y = -24;
-const STAMP_RADIUS = 36;
+// The floor carve's own radius: a real corridor width (16yd wide), not a wide
+// bowl. 'flat' falloff (below) means no smoothing past this radius: the walls
+// are a sharp, effectively vertical drop, which is exactly right for a
+// tunnel's side walls (they are not meant to be walkable, only impassable).
+const TUNNEL_FLOOR_RADIUS = 8;
 // The x of the waypoint that carves through the zone1/zone2 ridge: exported so
 // tests/terrain_walls.test.ts can exclude this corridor from its "every ridge
 // crossing outside the road pass is a wall" sweep, the same way it already
 // excludes the native road pass at x=0.
 export const SUNKEN_ROAD_RIDGE_CROSSING_X = -110;
 
-// Waypoints from the Eastbrook mouth to the Fenbridge mouth. Consecutive
-// stamps overlap (spacing well under 2x radius) so the floor stays continuous.
+// Control waypoints from the Eastbrook mouth to the Fenbridge mouth: the
+// route the tunnel follows (used for camp/NPC placement and as the render
+// shell's spline control points). The actual terrain carve below is a much
+// DENSER set of points interpolated along these segments (see
+// densifyPolyline), since a narrow 'flat' stamp needs close spacing to stay
+// continuous, unlike the old wide 'smooth' stamps which could be sparse.
 export const SUNKEN_ROAD_WAYPOINTS: { x: number; z: number }[] = [
   { x: -95, z: -15 }, // Eastbrook mouth, west of town (9 o'clock)
   { x: -100, z: 20 },
@@ -63,12 +76,42 @@ export const SUNKEN_ROAD_WAYPOINTS: { x: number; z: number }[] = [
   { x: -140, z: 258 }, // Fenbridge mouth, west of town (9 o'clock)
 ];
 
-export const SUNKEN_ROAD_TERRAIN_EDITS: HeightStamp[] = SUNKEN_ROAD_WAYPOINTS.map((wp) => ({
+// Interpolates points every `spacing` units along a polyline's segments
+// (always including every original vertex), so a narrow, non-blending 'flat'
+// stamp chain stays continuous along the whole route instead of leaving gaps
+// between widely spaced control points.
+function densifyPolyline(
+  points: readonly { x: number; z: number }[],
+  spacing: number,
+): { x: number; z: number }[] {
+  const out: { x: number; z: number }[] = [points[0]];
+  for (let i = 0; i + 1 < points.length; i++) {
+    const a = points[i];
+    const b = points[i + 1];
+    const dist = Math.hypot(b.x - a.x, b.z - a.z);
+    const steps = Math.max(1, Math.round(dist / spacing));
+    for (let s = 1; s <= steps; s++) {
+      const t = s / steps;
+      out.push({ x: a.x + (b.x - a.x) * t, z: a.z + (b.z - a.z) * t });
+    }
+  }
+  return out;
+}
+
+// Exported so the render shell (cave_tunnel.ts) can sweep its tube along the
+// SAME dense path the terrain actually carves, rather than the sparse control
+// waypoints, so the shell hugs the corridor tightly through every turn.
+export const SUNKEN_ROAD_CENTERLINE = densifyPolyline(
+  SUNKEN_ROAD_WAYPOINTS,
+  TUNNEL_FLOOR_RADIUS * 0.75,
+);
+
+export const SUNKEN_ROAD_TERRAIN_EDITS: HeightStamp[] = SUNKEN_ROAD_CENTERLINE.map((wp) => ({
   x: wp.x,
   z: wp.z,
-  radius: STAMP_RADIUS,
+  radius: TUNNEL_FLOOR_RADIUS,
   delta: SUNKEN_ROAD_FLOOR_Y,
-  falloff: 'smooth',
+  falloff: 'flat',
   mode: 'level',
 }));
 
@@ -148,12 +191,15 @@ export const SUNKEN_ROAD_MOBS: Record<string, MobTemplate> = {
   },
 };
 
+// Camps sit exactly on the tunnel's own waypoints with a small radius (< the
+// floor's own 8yd carve radius), so every mob actually spawns on the narrow
+// walkable strip rather than out in the (now unwalkable) tunnel wall.
 export const SUNKEN_ROAD_CAMPS: CampDef[] = [
-  { mobId: 'tunnel_gravemite', center: { x: -100, z: 5 }, radius: 15, count: 5 },
-  { mobId: 'tunnel_gravemite', center: { x: -150, z: 60 }, radius: 10, count: 4 },
-  { mobId: 'the_old_prospector', center: { x: -110, z: 180 }, radius: 6, count: 1 },
-  { mobId: 'deep_road_stalker', center: { x: -110, z: 205 }, radius: 20, count: 5 },
-  { mobId: 'deep_road_stalker', center: { x: -110, z: 230 }, radius: 18, count: 4 },
+  { mobId: 'tunnel_gravemite', center: { x: -100, z: 20 }, radius: 6, count: 5 },
+  { mobId: 'tunnel_gravemite', center: { x: -140, z: 80 }, radius: 6, count: 4 },
+  { mobId: 'the_old_prospector', center: { x: -110, z: 180 }, radius: 5, count: 1 },
+  { mobId: 'deep_road_stalker', center: { x: -110, z: 205 }, radius: 6, count: 5 },
+  { mobId: 'deep_road_stalker', center: { x: -110, z: 230 }, radius: 6, count: 4 },
 ];
 
 export const SUNKEN_ROAD_GATHER_NODES: GatherNodeDef[] = [

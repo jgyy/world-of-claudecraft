@@ -1,7 +1,7 @@
-// Visual proof of the Sunken Road: a deep tunnel connecting Eastbrook Vale
-// (Zone 1) to Mirefen Marsh (Zone 2). Boots the offline game, teleports
-// through the tunnel at a few waypoints, and captures the world map for
-// both zones.
+// Visual proof of the Sunken Road: a deep, enclosed tunnel connecting
+// Eastbrook Vale (Zone 1) to Mirefen Marsh (Zone 2). Boots the offline game,
+// skips the first-spawn intro cinematic, teleports through the tunnel at
+// several waypoints, and captures the world map for both zones.
 //   node scripts/sunken_road_shot.mjs    (needs `npm run dev` on :5173)
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
@@ -35,7 +35,12 @@ await page.type('#char-name', 'Tunneler');
 await jsClick('#offline-select .mini-class[data-class="warrior"]');
 await jsClick('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 40000 });
-await new Promise((r) => setTimeout(r, 2000));
+await new Promise((r) => setTimeout(r, 500));
+
+// Skip the first-spawn intro cinematic (opens far out and glides in over
+// several seconds): Escape jumps straight to the end, same as a player would.
+await page.keyboard.press('Escape');
+await new Promise((r) => setTimeout(r, 300));
 
 // Dismiss the new-adventurer tutorial overlay, which otherwise intercepts input.
 await page.evaluate(() => {
@@ -50,7 +55,7 @@ await new Promise((r) => setTimeout(r, 400));
 await page.evaluate(() => window.__game.sim.chat('/dev level 10'));
 await new Promise((r) => setTimeout(r, 300));
 
-async function teleportAndShoot(x, z, name) {
+async function teleportAndShoot(x, z, name, faceDeg) {
   await page.evaluate(
     (px, pz) => {
       window.__game.sim.chat(`/dev tp ${px} ${pz}`);
@@ -58,24 +63,65 @@ async function teleportAndShoot(x, z, name) {
     x,
     z,
   );
+  if (faceDeg !== undefined) {
+    await page.evaluate((deg) => {
+      window.__game.sim.player.facing = (deg * Math.PI) / 180;
+    }, faceDeg);
+  }
   await new Promise((r) => setTimeout(r, 700));
   await page.screenshot({ path: `docs/screenshots/${name}.png` });
   console.log(`captured docs/screenshots/${name}.png at (${x},${z})`);
 }
 
-// Eastbrook mouth
-await teleportAndShoot(130, 15, 'sunken_road_approach_zone1');
-// Interior, mid-zone1
-await teleportAndShoot(125, 75, 'sunken_road_interior_1');
-// Ridge crossing
-await teleportAndShoot(115, 180, 'sunken_road_ridge_crossing');
-// Interior, zone2
-await teleportAndShoot(85, 230, 'sunken_road_interior_2');
-// Fenbridge mouth
-await teleportAndShoot(40, 275, 'sunken_road_exit_zone2');
+// Eastbrook mouth, looking into the tunnel.
+await teleportAndShoot(-95, -15, 'sunken_road_approach_zone1', 200);
+// Interior, zone1 stretch (west of Mirror Lake).
+await teleportAndShoot(-100, 20, 'sunken_road_interior_1', 180);
+await teleportAndShoot(-140, 50, 'sunken_road_interior_2', 180);
+await teleportAndShoot(-140, 80, 'sunken_road_interior_3', 180);
+await teleportAndShoot(-140, 110, 'sunken_road_interior_4', 200);
+// Ridge crossing.
+await teleportAndShoot(-110, 180, 'sunken_road_ridge_crossing', 180);
+// Interior, zone2 stretch.
+await teleportAndShoot(-110, 205, 'sunken_road_interior_5', 180);
+await teleportAndShoot(-110, 230, 'sunken_road_interior_6', 180);
+
+// Looking straight up from deep inside the tunnel (well clear of both
+// mouths): the enclosed shell should block the sky entirely.
+await page.evaluate(() => window.__game.sim.chat('/dev tp -140 80'));
+await new Promise((r) => setTimeout(r, 400));
+await page.evaluate(() => {
+  window.__game.input.camPitch = -1.4;
+  window.__game.input.camDist = 8;
+});
+await new Promise((r) => setTimeout(r, 400));
+await page.screenshot({ path: 'docs/screenshots/sunken_road_looking_up.png' });
+console.log('captured docs/screenshots/sunken_road_looking_up.png');
+await page.evaluate(() => {
+  window.__game.input.camPitch = -0.3;
+  window.__game.input.camDist = 12;
+});
+
+// A wide side-on shot, well back from the tunnel, to see the corridor's
+// actual cross-section (width vs the shell) from outside/beside it.
+await page.evaluate(() => window.__game.sim.chat('/dev tp -110 205'));
+await new Promise((r) => setTimeout(r, 300));
+await page.evaluate(() => {
+  window.__game.input.camDist = 22;
+  window.__game.input.camPitch = -0.5;
+});
+await new Promise((r) => setTimeout(r, 400));
+await page.screenshot({ path: 'docs/screenshots/sunken_road_cross_section.png' });
+console.log('captured docs/screenshots/sunken_road_cross_section.png');
+await page.evaluate(() => {
+  window.__game.input.camDist = 12;
+});
+
+// Fenbridge mouth.
+await teleportAndShoot(-140, 258, 'sunken_road_exit_zone2', 340);
 
 // World map: zone 1 (Eastbrook Vale), showing the Sunken Road as a POI on
-// the east side.
+// the west side.
 await page.evaluate(() => window.__game.sim.chat('/dev tp 0 0'));
 await new Promise((r) => setTimeout(r, 500));
 await jsClick('#mm-map');

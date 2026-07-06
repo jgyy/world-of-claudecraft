@@ -66,8 +66,8 @@
       "state": "deb3a111",
       "events": "a1cdc515",
       "rng": {
-        "draws": 249,
-        "digest": "a0993dd5"
+        "draws": 250,
+        "digest": "663fc13d"
       }
     },
     {
@@ -77,8 +77,8 @@
       "state": "d8e96377",
       "events": "26de3eba",
       "rng": {
-        "draws": 412,
-        "digest": "97a36632"
+        "draws": 405,
+        "digest": "8f9a588d"
       }
     },
     {
@@ -88,8 +88,8 @@
       "state": "e09ed603",
       "events": "741638a5",
       "rng": {
-        "draws": 572,
-        "digest": "de6c5a33"
+        "draws": 571,
+        "digest": "98b64403"
       }
     },
     {

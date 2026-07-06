@@ -47,6 +47,7 @@ import { GROUND_PICKUP_LINES } from './content/ground_pickup_lines';
 import { COMMON_RECIPES as COMMON_RECIPES_CONTENT } from './content/recipes';
 import {
   SUNKEN_ROAD_CAMPS,
+  SUNKEN_ROAD_CENTERLINE,
   SUNKEN_ROAD_FLOOR_Y,
   SUNKEN_ROAD_GATHER_NODES,
   SUNKEN_ROAD_ITEMS,
@@ -127,7 +128,12 @@ export {
 // Re-exported so render/cave_tunnel.ts (which may only reach into sim/data,
 // not sim/content, per src/CLAUDE.md's dependency direction) can place its
 // purely cosmetic crystal dressing at the same waypoints/depth as the carve.
-export { SUNKEN_ROAD_FLOOR_Y, SUNKEN_ROAD_RIDGE_CROSSING_X, SUNKEN_ROAD_WAYPOINTS };
+export {
+  SUNKEN_ROAD_CENTERLINE,
+  SUNKEN_ROAD_FLOOR_Y,
+  SUNKEN_ROAD_RIDGE_CROSSING_X,
+  SUNKEN_ROAD_WAYPOINTS,
+};
 
 import { DELVE_ITEMS } from './content/delves/items';
 import { DELVE_MODULE_LAYOUTS, type DelveModuleId, delveModuleSpan } from './delve_layout';

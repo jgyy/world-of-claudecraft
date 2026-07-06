@@ -8,14 +8,14 @@
     "updateGroundAoEs first-in-tick (~2256)",
     "pulseGroundAoE both callers (immediate ~4097 + deferred ~3052)"
   ],
-  "draws": 948,
-  "drawDigest": "ab4a7dc7",
+  "draws": 954,
+  "drawDigest": "58445695",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "40ddeec5",
+      "state": "e7b88a0c",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -25,7 +25,6 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -122,7 +121,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 422,
-      "state": "1141461d",
+      "state": "d68ce9cc",
       "events": "76a488dc",
       "rng": {
         "draws": 4,
@@ -133,7 +132,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "c09f0e9c",
+      "state": "60734a83",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -144,7 +143,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "07ffb3fd",
+      "state": "7255f902",
       "events": "24b62401",
       "rng": {
         "draws": 84,
@@ -155,51 +154,51 @@
       "tick": 80,
       "time": 4,
       "nextId": 422,
-      "state": "e2c022b6",
+      "state": "eb6f5bb3",
       "events": "741638a5",
       "rng": {
-        "draws": 178,
-        "digest": "1bd3f2b7"
+        "draws": 179,
+        "digest": "bc3223e5"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 422,
-      "state": "c474c53b",
-      "events": "27c79fa2",
+      "state": "e675149b",
+      "events": "70cbbc03",
       "rng": {
-        "draws": 286,
-        "digest": "e3faaa06"
+        "draws": 284,
+        "digest": "00f4fe98"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 422,
-      "state": "1c68e5c2",
+      "state": "01be0764",
       "events": "741638a5",
       "rng": {
-        "draws": 405,
-        "digest": "9f535a38"
+        "draws": 404,
+        "digest": "29877caf"
       }
     },
     {
       "tick": 140,
       "time": 7,
       "nextId": 422,
-      "state": "7554edcc",
+      "state": "6e78e970",
       "events": "2e4eb1bf",
       "rng": {
-        "draws": 526,
-        "digest": "0ca52bea"
+        "draws": 533,
+        "digest": "1191b4d7"
       }
     },
     {
       "tick": 160,
       "time": 8,
       "nextId": 422,
-      "state": "6343bc92",
+      "state": "a698fc5e",
       "events": "741638a5",
       "rng": {
         "draws": 664,
@@ -210,39 +209,38 @@
       "tick": 180,
       "time": 9,
       "nextId": 422,
-      "state": "9bc6b3bb",
-      "events": "5e206080",
+      "state": "c0c6bce5",
+      "events": "160246c7",
       "rng": {
-        "draws": 801,
-        "digest": "4e1db725"
+        "draws": 799,
+        "digest": "5442f521"
       }
     },
     {
       "tick": 200,
       "time": 10,
       "nextId": 422,
-      "state": "6cbbae42",
+      "state": "f2957e5c",
       "events": "741638a5",
       "rng": {
-        "draws": 946,
-        "digest": "24781af4"
+        "draws": 950,
+        "digest": "14ab2e96"
       }
     },
     {
       "tick": 201,
       "time": 10.05,
       "nextId": 422,
-      "state": "bae80842",
+      "state": "1a52ce6a",
       "events": "741638a5",
       "rng": {
-        "draws": 948,
-        "digest": "ab4a7dc7"
+        "draws": 954,
+        "digest": "58445695"
       },
       "label": "final",
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -255,8 +253,7 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 168,
-            "damageTaken": 13
+            "damageDealt": 167
           },
           "craftSkills": {},
           "delveClears": {},
@@ -290,14 +287,14 @@
         {
           "aiState": "idle",
           "attackPower": 120,
-          "combatTimer": 1.95,
+          "combatTimer": 2.05,
           "comboUntil": -1,
           "critChance": 0.068,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.068,
           "fallStartY": 1.5,
           "fiveSecondRule": 10,
-          "hp": 49987,
+          "hp": 50000,
           "id": 420,
           "inCombat": true,
           "kind": "player",
@@ -342,7 +339,7 @@
         {
           "aggroTargetId": 420,
           "aiState": "attack",
-          "combatTimer": 1.95,
+          "combatTimer": 2.05,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -351,7 +348,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 39832,
+          "hp": 39833,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -387,7 +384,7 @@
           "threat": [
             [
               420,
-              169
+              168
             ]
           ],
           "wanderTarget": {

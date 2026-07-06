@@ -14,8 +14,8 @@
     "summonDemon -> summonPet (warlock summon_imp) + selfBuff form switch (druid)",
     "weaponStrike awardCombo latch + finisher combo-spend reset"
   ],
-  "draws": 481,
-  "drawDigest": "2d8f9154",
+  "draws": 488,
+  "drawDigest": "2bb671ed",
   "frames": [
     {
       "tick": 0,
@@ -35,7 +35,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 427,
-      "state": "e6d33eb0",
+      "state": "8cbe0a7a",
       "events": "11e90564",
       "rng": {
         "draws": 2,
@@ -46,7 +46,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 427,
-      "state": "bfc02bdd",
+      "state": "c7cbf593",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -57,7 +57,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 427,
-      "state": "bbeebc45",
+      "state": "13f8f13b",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -68,7 +68,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 427,
-      "state": "9ede1cb8",
+      "state": "1423c802",
       "events": "b87ec408",
       "rng": {
         "draws": 2,
@@ -79,7 +79,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 427,
-      "state": "01df995e",
+      "state": "68dd6ca8",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -90,7 +90,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 427,
-      "state": "61ba6289",
+      "state": "ee2be64f",
       "events": "d2faf84a",
       "rng": {
         "draws": 2,
@@ -101,7 +101,7 @@
       "tick": 32,
       "time": 1.6,
       "nextId": 427,
-      "state": "787d0d9e",
+      "state": "f6084ae8",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -111,7 +111,6 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -148,7 +147,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -189,7 +187,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -226,7 +223,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -267,7 +263,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -308,7 +303,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -704,7 +698,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 427,
-      "state": "394de377",
+      "state": "30bddfc5",
       "events": "a1f9b1d4",
       "rng": {
         "draws": 4,
@@ -715,7 +709,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 427,
-      "state": "f8faee38",
+      "state": "5e5bcd82",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -726,7 +720,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 427,
-      "state": "de42eb2a",
+      "state": "64d95204",
       "events": "741638a5",
       "rng": {
         "draws": 36,
@@ -737,7 +731,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 427,
-      "state": "43e5c5e0",
+      "state": "d66684ea",
       "events": "741638a5",
       "rng": {
         "draws": 52,
@@ -748,7 +742,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 427,
-      "state": "c35baa62",
+      "state": "b7490e5c",
       "events": "741638a5",
       "rng": {
         "draws": 68,
@@ -759,7 +753,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 427,
-      "state": "ae10e476",
+      "state": "0629aa40",
       "events": "741638a5",
       "rng": {
         "draws": 83,
@@ -770,7 +764,7 @@
       "tick": 65,
       "time": 3.25,
       "nextId": 427,
-      "state": "3b8a6aa4",
+      "state": "cbed634e",
       "events": "741638a5",
       "rng": {
         "draws": 103,
@@ -781,7 +775,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 427,
-      "state": "2cccf4dd",
+      "state": "1dacf693",
       "events": "741638a5",
       "rng": {
         "draws": 129,
@@ -792,7 +786,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 427,
-      "state": "38b7dbe8",
+      "state": "8e9d2072",
       "events": "741638a5",
       "rng": {
         "draws": 157,
@@ -803,7 +797,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 427,
-      "state": "f88058dc",
+      "state": "e1e7fdc6",
       "events": "741638a5",
       "rng": {
         "draws": 176,
@@ -814,7 +808,7 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 427,
-      "state": "1bb9b007",
+      "state": "7631dd55",
       "events": "741638a5",
       "rng": {
         "draws": 205,
@@ -825,7 +819,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 427,
-      "state": "0fe56ab8",
+      "state": "2c2ba602",
       "events": "741638a5",
       "rng": {
         "draws": 230,
@@ -836,105 +830,104 @@
       "tick": 95,
       "time": 4.75,
       "nextId": 427,
-      "state": "2c07e9d2",
+      "state": "2669364c",
       "events": "741638a5",
       "rng": {
-        "draws": 254,
-        "digest": "47872370"
+        "draws": 255,
+        "digest": "827d5a03"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 427,
-      "state": "59979c57",
+      "state": "5e1fd325",
       "events": "741638a5",
       "rng": {
-        "draws": 281,
-        "digest": "d730b38f"
+        "draws": 283,
+        "digest": "0ffd9e79"
       }
     },
     {
       "tick": 105,
       "time": 5.25,
       "nextId": 427,
-      "state": "1e963481",
+      "state": "3bd9f1c7",
       "events": "741638a5",
       "rng": {
-        "draws": 310,
-        "digest": "fa76c854"
+        "draws": 312,
+        "digest": "ba2d6a55"
       }
     },
     {
       "tick": 110,
       "time": 5.5,
       "nextId": 427,
-      "state": "2144e6d0",
+      "state": "576e149a",
       "events": "741638a5",
       "rng": {
-        "draws": 334,
-        "digest": "4baaeafa"
+        "draws": 337,
+        "digest": "fef29f30"
       }
     },
     {
       "tick": 115,
       "time": 5.75,
       "nextId": 427,
-      "state": "f24b0330",
+      "state": "1204eafa",
       "events": "741638a5",
       "rng": {
-        "draws": 369,
-        "digest": "a34b306a"
+        "draws": 371,
+        "digest": "e2145b74"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 427,
-      "state": "ec2f6f6e",
+      "state": "5dcbae78",
       "events": "741638a5",
       "rng": {
-        "draws": 400,
-        "digest": "ee77e08c"
+        "draws": 401,
+        "digest": "dc0685c1"
       }
     },
     {
       "tick": 125,
       "time": 6.25,
       "nextId": 427,
-      "state": "3f6a5732",
+      "state": "3d804e2c",
       "events": "741638a5",
       "rng": {
-        "draws": 427,
-        "digest": "780200bc"
+        "draws": 432,
+        "digest": "b3a9a578"
       }
     },
     {
       "tick": 130,
       "time": 6.5,
       "nextId": 427,
-      "state": "f31eadf9",
+      "state": "5b4ade3f",
       "events": "741638a5",
       "rng": {
-        "draws": 465,
-        "digest": "db873298"
+        "draws": 467,
+        "digest": "bbe38471"
       }
     },
     {
       "tick": 133,
       "time": 6.65,
       "nextId": 428,
-      "state": "f8051831",
+      "state": "ab1be477",
       "events": "0b338eda",
       "rng": {
-        "draws": 472,
-        "digest": "836f11d3"
+        "draws": 479,
+        "digest": "5af55d65"
       },
       "label": "warlock-summon",
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -971,7 +964,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1012,7 +1004,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1049,7 +1040,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1090,7 +1080,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1131,7 +1120,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1554,17 +1542,16 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 429,
-      "state": "bf52ac89",
+      "state": "6822e04f",
       "events": "0e864713",
       "rng": {
-        "draws": 473,
-        "digest": "7f62b3a0"
+        "draws": 480,
+        "digest": "0d481ffd"
       },
       "label": "warrior-sunder",
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1601,7 +1588,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1642,7 +1628,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1679,7 +1664,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1720,7 +1704,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1761,7 +1744,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -2253,17 +2235,16 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 431,
-      "state": "f2778974",
-      "events": "22f04751",
+      "state": "b5ae4297",
+      "events": "b3bb8523",
       "rng": {
-        "draws": 475,
-        "digest": "d953eefb"
+        "draws": 482,
+        "digest": "1c770ebe"
       },
       "label": "mage-arcane-explosion",
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -2300,7 +2281,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -2312,7 +2292,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 70
+            "damageDealt": 68
           },
           "craftSkills": {},
           "delveClears": {},
@@ -2343,7 +2323,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -2380,7 +2359,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -2421,7 +2399,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -2462,7 +2439,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -2958,7 +2934,7 @@
           "fallStartY": -3.247367,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499965,
+          "hp": 499967,
           "id": 429,
           "inCombat": true,
           "kind": "mob",
@@ -2993,7 +2969,7 @@
           "threat": [
             [
               421,
-              36
+              34
             ]
           ],
           "weapon": {
@@ -3062,17 +3038,16 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 432,
-      "state": "67d742bb",
-      "events": "cb1edf69",
+      "state": "4fd743f0",
+      "events": "7b70ca50",
       "rng": {
-        "draws": 480,
-        "digest": "0d481ffd"
+        "draws": 487,
+        "digest": "81ac24cf"
       },
       "label": "rogue-combo-finishers",
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -3109,7 +3084,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -3121,7 +3095,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 70
+            "damageDealt": 68
           },
           "craftSkills": {},
           "delveClears": {},
@@ -3152,7 +3126,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -3164,7 +3137,7 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 109
+            "damageDealt": 195
           },
           "craftSkills": {},
           "delveClears": {},
@@ -3191,7 +3164,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -3232,7 +3204,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -3273,7 +3244,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -3777,7 +3747,7 @@
           "fallStartY": -3.247367,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499965,
+          "hp": 499967,
           "id": 429,
           "inCombat": true,
           "kind": "mob",
@@ -3812,7 +3782,7 @@
           "threat": [
             [
               421,
-              36
+              34
             ]
           ],
           "weapon": {
@@ -3896,7 +3866,7 @@
           "fallStartY": -3.065499,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499891,
+          "hp": 499805,
           "id": 431,
           "inCombat": true,
           "kind": "mob",
@@ -3931,7 +3901,7 @@
           "threat": [
             [
               422,
-              110
+              196
             ]
           ],
           "weapon": {
@@ -3946,17 +3916,16 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 433,
-      "state": "e73d773b",
-      "events": "740e67bd",
+      "state": "980ed6de",
+      "events": "6aeffb92",
       "rng": {
-        "draws": 481,
-        "digest": "2d8f9154"
+        "draws": 488,
+        "digest": "2bb671ed"
       },
       "label": "paladin-judge-consecrate",
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -3993,7 +3962,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -4005,7 +3973,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 70
+            "damageDealt": 68
           },
           "craftSkills": {},
           "delveClears": {},
@@ -4036,7 +4004,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -4048,7 +4015,7 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 109
+            "damageDealt": 195
           },
           "craftSkills": {},
           "delveClears": {},
@@ -4075,7 +4042,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -4087,7 +4053,7 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 31
+            "damageDealt": 30
           },
           "craftSkills": {},
           "delveClears": {},
@@ -4118,7 +4084,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -4159,7 +4124,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -4688,7 +4652,7 @@
           "fallStartY": -3.247367,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499965,
+          "hp": 499967,
           "id": 429,
           "inCombat": true,
           "kind": "mob",
@@ -4723,7 +4687,7 @@
           "threat": [
             [
               421,
-              36
+              34
             ]
           ],
           "weapon": {
@@ -4807,7 +4771,7 @@
           "fallStartY": -3.065499,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499891,
+          "hp": 499805,
           "id": 431,
           "inCombat": true,
           "kind": "mob",
@@ -4842,7 +4806,7 @@
           "threat": [
             [
               422,
-              110
+              196
             ]
           ],
           "weapon": {
@@ -4861,7 +4825,7 @@
           "fallStartY": -1.36912,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499969,
+          "hp": 499970,
           "id": 432,
           "inCombat": true,
           "kind": "mob",
@@ -4893,7 +4857,7 @@
           "threat": [
             [
               423,
-              32
+              31
             ]
           ],
           "weapon": {
@@ -4908,17 +4872,16 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 434,
-      "state": "442b0ba8",
+      "state": "2623a1bd",
       "events": "482d49fa",
       "rng": {
-        "draws": 481,
-        "digest": "2d8f9154"
+        "draws": 488,
+        "digest": "2bb671ed"
       },
       "label": "druid-moonfire-forms",
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -4955,7 +4918,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -4967,7 +4929,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 70
+            "damageDealt": 68
           },
           "craftSkills": {},
           "delveClears": {},
@@ -4998,7 +4960,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -5010,7 +4971,7 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 109
+            "damageDealt": 195
           },
           "craftSkills": {},
           "delveClears": {},
@@ -5037,7 +4998,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -5049,7 +5009,7 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 31
+            "damageDealt": 30
           },
           "craftSkills": {},
           "delveClears": {},
@@ -5080,7 +5040,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -5121,7 +5080,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -5663,7 +5621,7 @@
           "fallStartY": -3.247367,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499965,
+          "hp": 499967,
           "id": 429,
           "inCombat": true,
           "kind": "mob",
@@ -5698,7 +5656,7 @@
           "threat": [
             [
               421,
-              36
+              34
             ]
           ],
           "weapon": {
@@ -5782,7 +5740,7 @@
           "fallStartY": -3.065499,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499891,
+          "hp": 499805,
           "id": 431,
           "inCombat": true,
           "kind": "mob",
@@ -5817,7 +5775,7 @@
           "threat": [
             [
               422,
-              110
+              196
             ]
           ],
           "weapon": {
@@ -5836,7 +5794,7 @@
           "fallStartY": -1.36912,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499969,
+          "hp": 499970,
           "id": 432,
           "inCombat": true,
           "kind": "mob",
@@ -5868,7 +5826,7 @@
           "threat": [
             [
               423,
-              32
+              31
             ]
           ],
           "weapon": {
@@ -5924,17 +5882,16 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 434,
-      "state": "442b0ba8",
+      "state": "2623a1bd",
       "events": "741638a5",
       "rng": {
-        "draws": 481,
-        "digest": "2d8f9154"
+        "draws": 488,
+        "digest": "2bb671ed"
       },
       "label": "final",
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -5971,7 +5928,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -5983,7 +5939,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 70
+            "damageDealt": 68
           },
           "craftSkills": {},
           "delveClears": {},
@@ -6014,7 +5970,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -6026,7 +5981,7 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 109
+            "damageDealt": 195
           },
           "craftSkills": {},
           "delveClears": {},
@@ -6053,7 +6008,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -6065,7 +6019,7 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 31
+            "damageDealt": 30
           },
           "craftSkills": {},
           "delveClears": {},
@@ -6096,7 +6050,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -6137,7 +6090,6 @@
         },
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -6679,7 +6631,7 @@
           "fallStartY": -3.247367,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499965,
+          "hp": 499967,
           "id": 429,
           "inCombat": true,
           "kind": "mob",
@@ -6714,7 +6666,7 @@
           "threat": [
             [
               421,
-              36
+              34
             ]
           ],
           "weapon": {
@@ -6798,7 +6750,7 @@
           "fallStartY": -3.065499,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499891,
+          "hp": 499805,
           "id": 431,
           "inCombat": true,
           "kind": "mob",
@@ -6833,7 +6785,7 @@
           "threat": [
             [
               422,
-              110
+              196
             ]
           ],
           "weapon": {
@@ -6852,7 +6804,7 @@
           "fallStartY": -1.36912,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499969,
+          "hp": 499970,
           "id": 432,
           "inCombat": true,
           "kind": "mob",
@@ -6884,7 +6836,7 @@
           "threat": [
             [
               423,
-              32
+              31
             ]
           ],
           "weapon": {

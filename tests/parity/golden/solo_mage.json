@@ -8,14 +8,14 @@
     "casting lifecycle (C4a)",
     "effect dispatch + spell damage (C4b/C1)"
   ],
-  "draws": 451,
-  "drawDigest": "dbbc6310",
+  "draws": 450,
+  "drawDigest": "020bc505",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "a562a500",
+      "state": "cd948649",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -25,7 +25,6 @@
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -122,7 +121,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 422,
-      "state": "04a458bb",
+      "state": "31ef0fe6",
       "events": "1ba28da4",
       "rng": {
         "draws": 2,
@@ -133,7 +132,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "ca5f076d",
+      "state": "3d756354",
       "events": "05bd4c01",
       "rng": {
         "draws": 3,
@@ -144,7 +143,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "79d5e457",
+      "state": "fd908c6c",
       "events": "d0489327",
       "rng": {
         "draws": 77,
@@ -155,19 +154,19 @@
       "tick": 80,
       "time": 4,
       "nextId": 422,
-      "state": "e38b48c6",
+      "state": "0ab12d5f",
       "events": "741638a5",
       "rng": {
-        "draws": 175,
-        "digest": "5fb1bca0"
+        "draws": 176,
+        "digest": "e5a8d717"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 422,
-      "state": "89a69f6b",
-      "events": "5f2aa6c8",
+      "state": "84b2025b",
+      "events": "4d261a4f",
       "rng": {
         "draws": 288,
         "digest": "a36e84e6"
@@ -177,28 +176,27 @@
       "tick": 120,
       "time": 6,
       "nextId": 422,
-      "state": "edeb4712",
+      "state": "6eb0efce",
       "events": "741638a5",
       "rng": {
-        "draws": 402,
-        "digest": "311063db"
+        "draws": 400,
+        "digest": "fd776c55"
       }
     },
     {
       "tick": 128,
       "time": 6.4,
       "nextId": 422,
-      "state": "39bc5e53",
+      "state": "45eeec91",
       "events": "741638a5",
       "rng": {
-        "draws": 451,
-        "digest": "dbbc6310"
+        "draws": 450,
+        "digest": "020bc505"
       },
       "label": "final",
       "players": [
         {
           "activeLoadout": -1,
-          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "autoEquip": true,
@@ -211,7 +209,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 90
+            "damageDealt": 87
           },
           "craftSkills": {},
           "delveClears": {},
@@ -335,7 +333,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 8910,
+          "hp": 8913,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -371,7 +369,7 @@
           "threat": [
             [
               420,
-              91
+              88
             ]
           ],
           "wanderTimer": 3.650554,
