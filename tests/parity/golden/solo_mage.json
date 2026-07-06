@@ -8,8 +8,8 @@
     "casting lifecycle (C4a)",
     "effect dispatch + spell damage (C4b/C1)"
   ],
-  "draws": 448,
-  "drawDigest": "97b1aeec",
+  "draws": 451,
+  "drawDigest": "dbbc6310",
   "frames": [
     {
       "tick": 0,
@@ -157,16 +157,16 @@
       "state": "0ab12d5f",
       "events": "741638a5",
       "rng": {
-        "draws": 176,
-        "digest": "e5a8d717"
+        "draws": 175,
+        "digest": "5fb1bca0"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 422,
-      "state": "84b2025b",
-      "events": "4d261a4f",
+      "state": "e0d58eee",
+      "events": "5f2aa6c8",
       "rng": {
         "draws": 288,
         "digest": "a36e84e6"
@@ -176,22 +176,22 @@
       "tick": 120,
       "time": 6,
       "nextId": 422,
-      "state": "6eb0efce",
+      "state": "c0a2f8d1",
       "events": "741638a5",
       "rng": {
-        "draws": 399,
-        "digest": "6e3c9fcf"
+        "draws": 402,
+        "digest": "311063db"
       }
     },
     {
       "tick": 128,
       "time": 6.4,
       "nextId": 422,
-      "state": "45eeec91",
+      "state": "a3e9de06",
       "events": "741638a5",
       "rng": {
-        "draws": 448,
-        "digest": "97b1aeec"
+        "draws": 451,
+        "digest": "dbbc6310"
       },
       "label": "final",
       "players": [
@@ -209,7 +209,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 87
+            "damageDealt": 90
           },
           "craftSkills": {},
           "delveClears": {},
@@ -333,7 +333,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 8913,
+          "hp": 8910,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -369,7 +369,7 @@
           "threat": [
             [
               420,
-              88
+              91
             ]
           ],
           "wanderTimer": 3.650554,

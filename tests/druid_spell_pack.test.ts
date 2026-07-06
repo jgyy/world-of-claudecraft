@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ABILITIES, abilitiesKnownAt, CLASSES } from '../src/sim/content/classes';
+import { LAKE } from '../src/sim/content/zone1';
 import { Sim } from '../src/sim/sim';
 import { type AuraKind, dist2d } from '../src/sim/types';
 import { groundHeight, isInWaterBody, WATER_LEVEL } from '../src/sim/world';
@@ -49,6 +50,13 @@ function horizontalTravel(sim: Sim, pid: number, ticks: number): number {
 }
 
 function findDeepWater(seed: number): { x: number; z: number } {
+  // The built-in lake's own declared center: the most representative deep
+  // point of the basin (not an edge, so nothing terrain-adjacent, like a
+  // sunken feature's carve, can distort its local slope), and guaranteed a
+  // real declared water body per the terrain-aware water model.
+  if (isInWaterBody(LAKE.x, LAKE.z) && groundHeight(LAKE.x, LAKE.z, seed) < WATER_LEVEL - 1.25) {
+    return { x: LAKE.x, z: LAKE.z };
+  }
   for (let z = -50; z <= 950; z += 5) {
     for (let x = -170; x <= 170; x += 5) {
       // A real declared water body, not merely deep dry terrain (a sunken

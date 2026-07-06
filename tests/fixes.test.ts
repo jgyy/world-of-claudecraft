@@ -25,7 +25,7 @@ import { createMob } from '../src/sim/entity';
 import { ACTIONS, encodeObs } from '../src/sim/obs';
 import { Sim } from '../src/sim/sim';
 import { dist2d, type Entity, type SimEvent } from '../src/sim/types';
-import { generateDecorations, groundHeight, WATER_LEVEL } from '../src/sim/world';
+import { generateDecorations, groundHeight, isInWaterBody, WATER_LEVEL } from '../src/sim/world';
 
 const SEED = 20061;
 
@@ -151,9 +151,14 @@ describe('collision & terrain', () => {
     const sim = makeSim();
     for (const e of sim.entities.values()) {
       if (e.kind !== 'npc') continue;
-      expect(groundHeight(e.pos.x, e.pos.z, SEED), `${e.name} underwater`).toBeGreaterThan(
-        WATER_LEVEL + 0.5,
-      );
+      // The WATER_LEVEL floor only applies inside a declared water body: a
+      // deliberately deep, dry sunken feature (The Sunken Road) outside every
+      // zone's `lakes` list is exempt, per the terrain-aware water model.
+      if (isInWaterBody(e.pos.x, e.pos.z)) {
+        expect(groundHeight(e.pos.x, e.pos.z, SEED), `${e.name} underwater`).toBeGreaterThan(
+          WATER_LEVEL + 0.5,
+        );
+      }
       expect(isBlocked(SEED, e.pos.x, e.pos.z, 0.4), `${e.name} inside a prop`).toBe(false);
     }
   });
@@ -162,6 +167,7 @@ describe('collision & terrain', () => {
     const sim = makeSim();
     for (const e of sim.entities.values()) {
       if (e.kind !== 'mob') continue;
+      if (!isInWaterBody(e.pos.x, e.pos.z)) continue; // dry sunken features are exempt
       const h = groundHeight(e.pos.x, e.pos.z, SEED);
       const canWade = MOBS[e.templateId].family === 'mudfin' || MOBS[e.templateId].canSwim;
       const min = canWade ? WATER_LEVEL - 0.55 : WATER_LEVEL + 0.35;

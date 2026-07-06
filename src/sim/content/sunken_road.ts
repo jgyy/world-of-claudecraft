@@ -2,24 +2,28 @@
 // (Zone 1) directly to Mirefen Marsh (Zone 2).
 //
 // Carved as a chain of overlapping 'level'/'smooth' HeightStamps (see
-// sim/types.ts HeightStamp): each stamp pulls the ground to a fixed floor, and
-// its own concave falloff is the wall, so no separate wall/ceiling geometry is
-// needed. Terrain-aware water (waterLevelAt/isInWaterBody, sim/world.ts) means
-// this can sit far below the old flat WATER_LEVEL without flooding or
-// blocking non-swim movement, as long as it stays outside every zone's
-// declared `lakes` list (it does).
+// sim/types.ts HeightStamp): each stamp pulls the ground to a fixed floor
+// (walkability + no-flood come from the terrain, exactly as before). A real
+// enclosed shell (a tube swept along this same waypoint centerline) is drawn
+// over it in src/render/cave_tunnel.ts so the sky is never visible while
+// walking it: this is a subway-style bore, not an open-air trench. Terrain-
+// aware water (waterLevelAt/isInWaterBody, sim/world.ts) means this can sit
+// far below the old flat WATER_LEVEL without flooding or blocking non-swim
+// movement, as long as it stays outside every zone's declared `lakes` list
+// (it does).
 //
-// Runs well east of Eastbrook Vale's existing "northeast to ruins" road
-// (ZONE1_ROADS: (6,8)->(35,35)->(60,60)->(78,74)) and its Hollow Crypt camps
-// (restless_bones/captain_verlan/wraithbinder_maldrec, x~78-92 z~75-92), and
-// the forest_wolf camp at (20,70): the whole zone1 stretch stays x>=100.
-// Converges back toward x~40-90 in Mirefen Marsh, threading clear of the
-// mire_prowler camp at (35,225) and the mire_widow camps at (70,300)/(95,340),
-// and the causeway (ZONE2_ROADS[0], which hugs x~0..-8).
-//
-// Winds x=100..140 as z runs 15->180 (zone1), then x=40..90 as z runs
-// 180->275 (zone2), crossing the zone1/zone2 ridge (z=180), mouths just
-// outside each town hub.
+// Enters both zones on their west side ("9 o'clock" on the map, the same
+// convention Glimmervein Cavern used). Threads between Eastbrook Vale's
+// northwest (-8,6)->(-35,25)->(-58,48)->(-66,58) and southwest (-6,-6)->
+// (-30,-28)->(-55,-45)->(-70,-55) roads and the webwood_spider (-60,5) /
+// mudfin_murloc (-75,57) camps, ducks east of Mirror Lake's terrain-aware
+// footprint (-92,88, radius 30 -> 48) rather than trying to out-flank it
+// (the world's playable rectangle ends at |x|=180, too tight a margin past
+// there), then in Mirefen Marsh clears the mire_prowler camp (-40,230) and
+// stays well short of Deepfen Shallows' footprint (-110,310, radius 56).
+// Crosses the zone1/zone2 ridge at x=-110, z=180 (tests/terrain_walls.test.ts
+// excludes this corridor from the "every ridge crossing is a wall" check,
+// the same way it already excludes the native road pass at x=0).
 
 import type {
   CampDef,
@@ -31,24 +35,32 @@ import type {
   QuestDef,
 } from '../types';
 
-export const SUNKEN_ROAD_FLOOR_Y = -14;
-const STAMP_RADIUS = 28;
+// A genuinely deep subway-style bore, not a shallow trench: the old flat
+// WATER_LEVEL model would have flooded or blocked movement well above this;
+// terrain-aware water (isInWaterBody, sim/world.ts) means it stays dry and
+// walkable here since it is outside every zone's declared `lakes` list.
+export const SUNKEN_ROAD_FLOOR_Y = -24;
+const STAMP_RADIUS = 36;
+// The x of the waypoint that carves through the zone1/zone2 ridge: exported so
+// tests/terrain_walls.test.ts can exclude this corridor from its "every ridge
+// crossing outside the road pass is a wall" sweep, the same way it already
+// excludes the native road pass at x=0.
+export const SUNKEN_ROAD_RIDGE_CROSSING_X = -110;
 
 // Waypoints from the Eastbrook mouth to the Fenbridge mouth. Consecutive
 // stamps overlap (spacing well under 2x radius) so the floor stays continuous.
 export const SUNKEN_ROAD_WAYPOINTS: { x: number; z: number }[] = [
-  { x: 130, z: 15 }, // Eastbrook mouth, clear of the NE road, town hub (radius 26), and (100,0)
-  // (a fixed reference point tests/custom_map_parity.test.ts uses as its "no terrain edits" probe)
-  { x: 130, z: 45 },
-  { x: 125, z: 75 }, // clear of the Hollow Crypt camps
-  { x: 140, z: 100 },
-  { x: 110, z: 130 },
-  { x: 135, z: 155 },
-  { x: 115, z: 180 }, // ridge crossing
-  { x: 90, z: 205 },
-  { x: 85, z: 230 }, // clear of the mire_prowler camp at (35,225)
-  { x: 65, z: 255 },
-  { x: 40, z: 275 }, // Fenbridge mouth, clear of the mire_widow camp at (70,300)
+  { x: -95, z: -15 }, // Eastbrook mouth, west of town (9 o'clock)
+  { x: -100, z: 20 },
+  { x: -140, z: 50 }, // stays west of Mirror Lake's terrain-aware footprint
+  { x: -140, z: 80 },
+  { x: -140, z: 110 },
+  { x: -145, z: 122 }, // keeps the segment itself clear of the lake circle
+  { x: -100, z: 140 }, // past the lake's z-reach; swings back in
+  { x: -110, z: 180 }, // ridge crossing
+  { x: -110, z: 205 },
+  { x: -110, z: 230 },
+  { x: -140, z: 258 }, // Fenbridge mouth, west of town (9 o'clock)
 ];
 
 export const SUNKEN_ROAD_TERRAIN_EDITS: HeightStamp[] = SUNKEN_ROAD_WAYPOINTS.map((wp) => ({
@@ -137,16 +149,16 @@ export const SUNKEN_ROAD_MOBS: Record<string, MobTemplate> = {
 };
 
 export const SUNKEN_ROAD_CAMPS: CampDef[] = [
-  { mobId: 'tunnel_gravemite', center: { x: 130, z: 45 }, radius: 20, count: 5 },
-  { mobId: 'tunnel_gravemite', center: { x: 140, z: 100 }, radius: 18, count: 4 },
-  { mobId: 'the_old_prospector', center: { x: 115, z: 180 }, radius: 6, count: 1 },
-  { mobId: 'deep_road_stalker', center: { x: 85, z: 230 }, radius: 20, count: 5 },
-  { mobId: 'deep_road_stalker', center: { x: 55, z: 260 }, radius: 18, count: 4 },
+  { mobId: 'tunnel_gravemite', center: { x: -100, z: 5 }, radius: 15, count: 5 },
+  { mobId: 'tunnel_gravemite', center: { x: -150, z: 60 }, radius: 10, count: 4 },
+  { mobId: 'the_old_prospector', center: { x: -110, z: 180 }, radius: 6, count: 1 },
+  { mobId: 'deep_road_stalker', center: { x: -110, z: 205 }, radius: 20, count: 5 },
+  { mobId: 'deep_road_stalker', center: { x: -110, z: 230 }, radius: 18, count: 4 },
 ];
 
 export const SUNKEN_ROAD_GATHER_NODES: GatherNodeDef[] = [
-  { id: 'ore_sunken_road_1', zoneId: 'eastbrook_vale', type: 'ore', pos: { x: 132, z: 60 } },
-  { id: 'ore_sunken_road_2', zoneId: 'mirefen_marsh', type: 'ore', pos: { x: 60, z: 245 } },
+  { id: 'ore_sunken_road_1', zoneId: 'eastbrook_vale', type: 'ore', pos: { x: -140, z: 110 } },
+  { id: 'ore_sunken_road_2', zoneId: 'mirefen_marsh', type: 'ore', pos: { x: -110, z: 205 } },
 ];
 
 export const SUNKEN_ROAD_ITEMS: Record<string, ItemDef> = {
@@ -166,7 +178,7 @@ export const SUNKEN_ROAD_NPCS: Record<string, NpcDef> = {
     id: SUNKEN_ROAD_NPC_ID,
     name: 'Foreman Delke',
     title: 'Last of the Sunken Road Crew',
-    pos: { x: 125, z: 10 },
+    pos: { x: -90, z: -10 },
     facing: Math.PI,
     color: 0x8a6d3b,
     questIds: ['q_sunken_road'],

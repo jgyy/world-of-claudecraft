@@ -8,8 +8,8 @@
     "updateGroundAoEs first-in-tick (~2256)",
     "pulseGroundAoE both callers (immediate ~4097 + deferred ~3052)"
   ],
-  "draws": 961,
-  "drawDigest": "0b819a41",
+  "draws": 948,
+  "drawDigest": "ab4a7dc7",
   "frames": [
     {
       "tick": 0,
@@ -179,63 +179,63 @@
       "state": "852397eb",
       "events": "741638a5",
       "rng": {
-        "draws": 406,
-        "digest": "039ca3e9"
+        "draws": 405,
+        "digest": "9f535a38"
       }
     },
     {
       "tick": 140,
       "time": 7,
       "nextId": 422,
-      "state": "6345f9d7",
-      "events": "3e632bf4",
+      "state": "24614dbb",
+      "events": "2e4eb1bf",
       "rng": {
-        "draws": 530,
-        "digest": "b2cfa72d"
+        "draws": 526,
+        "digest": "0ca52bea"
       }
     },
     {
       "tick": 160,
       "time": 8,
       "nextId": 422,
-      "state": "8e00d5bd",
+      "state": "7f5046e5",
       "events": "741638a5",
       "rng": {
-        "draws": 666,
-        "digest": "135f15c3"
+        "draws": 664,
+        "digest": "df86661e"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 422,
-      "state": "60e09653",
-      "events": "0d2bc802",
+      "state": "49870928",
+      "events": "5e206080",
       "rng": {
-        "draws": 804,
-        "digest": "aa7c601c"
+        "draws": 801,
+        "digest": "4e1db725"
       }
     },
     {
       "tick": 200,
       "time": 10,
       "nextId": 422,
-      "state": "29bd01a4",
+      "state": "2ffe1b47",
       "events": "741638a5",
       "rng": {
-        "draws": 959,
-        "digest": "e8da911e"
+        "draws": 946,
+        "digest": "24781af4"
       }
     },
     {
       "tick": 201,
       "time": 10.05,
       "nextId": 422,
-      "state": "36463372",
+      "state": "ffe84947",
       "events": "741638a5",
       "rng": {
-        "draws": 961,
-        "digest": "0b819a41"
+        "draws": 948,
+        "digest": "ab4a7dc7"
       },
       "label": "final",
       "players": [
@@ -253,8 +253,8 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 165,
-            "damageTaken": 14
+            "damageDealt": 168,
+            "damageTaken": 13
           },
           "craftSkills": {},
           "delveClears": {},
@@ -288,14 +288,14 @@
         {
           "aiState": "idle",
           "attackPower": 120,
-          "combatTimer": 2.05,
+          "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.068,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.068,
           "fallStartY": 1.5,
           "fiveSecondRule": 10,
-          "hp": 49986,
+          "hp": 49987,
           "id": 420,
           "inCombat": true,
           "kind": "player",
@@ -340,7 +340,7 @@
         {
           "aggroTargetId": 420,
           "aiState": "attack",
-          "combatTimer": 2.05,
+          "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -349,7 +349,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 39835,
+          "hp": 39832,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -385,7 +385,7 @@
           "threat": [
             [
               420,
-              166
+              169
             ]
           ],
           "wanderTarget": {

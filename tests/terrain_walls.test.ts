@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { CAMPS, NPCS, ROADS, WORLD_MAX_X, WORLD_MAX_Z, WORLD_MIN_Z, ZONES } from '../src/sim/data';
+import {
+  CAMPS,
+  NPCS,
+  ROADS,
+  SUNKEN_ROAD_RIDGE_CROSSING_X,
+  WORLD_MAX_X,
+  WORLD_MAX_Z,
+  WORLD_MIN_Z,
+  ZONES,
+} from '../src/sim/data';
 import { PLAYER_MAX_CLIMB_SLOPE } from '../src/sim/pathfind';
 import { terrainSteepness } from '../src/sim/world';
 
@@ -43,6 +52,9 @@ describe('impassable terrain walls', () => {
     for (const rz of RIDGE_ZS) {
       for (let x = -172; x <= 172; x += 4) {
         if (Math.abs(x) < PASS_HALF_WIDTH + 26) continue; // the road pass corridor
+        // The Sunken Road's own ridge crossing (sim/content/sunken_road.ts):
+        // a second, deliberate carve through the wall, well clear of the pass.
+        if (Math.abs(x - SUNKEN_ROAD_RIDGE_CROSSING_X) < 40) continue;
         const max = pathMaxSteepness(WORLD_SEED, { x, z: rz - 50 }, { x, z: rz + 50 });
         expect(max, `ridge z=${rz} crossing at x=${x}`).toBeGreaterThan(WALL_MARGIN);
       }
