@@ -377,8 +377,6 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.showItemLevel': 'アイテムレベルを表示',
   'hudChrome.options.showSecondaryActionBar': 'セカンダリアクションバーを表示',
   'hudChrome.options.showDailyRewardsChest': 'デイリー報酬の宝箱を表示',
-  'hudChrome.options.mobileCameraJoystick': 'カメラスティック',
-  'hudChrome.options.mobileLeftHanded': '左利き用レイアウト',
   'hudChrome.options.itemLevelLine': 'アイテムレベル {level}',
   'hudChrome.options.itemScoreLine': 'スコア {score}',
   'hudChrome.landing.highContrast': '高コントラスト',
@@ -3032,6 +3030,18 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_mogger.completion':
     'モガーはついに死にました。イーストブルックの畑は安全になり、あなたは語る価値のある物語をもう一つ抱えて谷を去ります。',
   'entities.quests.q_mogger.objectives.0.label': 'モガーを討伐',
+  'entities.quests.q_archetype_acceptance.title': '己が選ぶべき技',
+  'entities.quests.q_archetype_acceptance.text':
+    'イーストブルックの職人は皆いずれ、己が選ぶべき一つの技に落ち着く。{playerName}よ、一つの行いで己を証明し、進むべき道を宣言せよ。',
+  'entities.quests.q_archetype_acceptance.completion':
+    'あなたの道は定まった。その道をしかと歩むがいい。',
+  'entities.quests.q_archetype_acceptance.objectives.0.label': 'フォレストウルフを討伐',
+  'entities.quests.q_prof_make_amends.title': '償い',
+  'entities.quests.q_prof_make_amends.text':
+    '一つの技を捨て、別の技へと移るには、職人はまず歩まなかった道への償いを果たさねばならぬ、{playerName}よ。',
+  'entities.quests.q_prof_make_amends.completion':
+    '償いは果たされた。新たな道があなたに開かれている。',
+  'entities.quests.q_prof_make_amends.objectives.0.label': 'フォレストウルフを討伐',
   'entities.quests.q_drowned_choir.title': '溺れし聖歌隊',
   'entities.quests.q_drowned_choir.text':
     '渡り手どもは独りで動いているのではない。その中に溺れし信徒たちが歩いている——神殿とともに沈んだ教団だ。腐った祭服をまとったまま、岸の岩場から祈りを歌い続けている。八体を沈黙させ、奴らが携える供物を六つ持ち帰れ。奴らが女神に何を捧げようとしているのか、私は知りたいのだ。',
@@ -3489,18 +3499,12 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.perSecond': '{value}/秒',
   'hudChrome.meters.perSecondRow': '{total}（{rate}）',
   'hudChrome.meters.seconds': '{s}秒',
-  'hudChrome.mobile.actionPageToggle': '行動ページ切替',
-  'hudChrome.mobile.actionRing': '戦闘アクション',
   'hudChrome.mobile.autorun': 'オートラン',
   'hudChrome.mobile.haptics': '振動',
   'hudChrome.mobile.hapticsOff': '振動オフ',
-  'hudChrome.mobile.hotbarPage': 'スキル',
-  'hudChrome.mobile.hotbarPageAria': '次のスキルセットを表示',
   'hudChrome.mobile.jump': 'ジャンプ',
   'hudChrome.mobile.leaderboard': 'ランキング',
   'hudChrome.mobile.nameplates': 'ネームプレート',
-  'hudChrome.mobile.targetCycle': 'ターゲット切替',
-  'hudChrome.mobile.targetCycleShort': '標的',
   'hudChrome.mobile.toggleHaptics': '振動を切り替え',
   'hudChrome.rest.resting': '休息中',
   'hudChrome.swing.ready': '攻撃',
@@ -6014,4 +6018,6 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '澄んだ空気と静かな岩。感謝する、フェンブリッジにもこの話は届くだろう。',
   'entities.quests.q_sunken_road.objectives.0.label': 'トンネルグレイブマイトを討伐',
   'entities.quests.q_sunken_road.objectives.1.label': 'ディープロードストーカーを討伐',
+  // Release v0.22.0 locale fill.
+  'hudChrome.crafting.reagentLine': '{name}: {have}/{required}',
 };

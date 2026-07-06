@@ -311,15 +311,7 @@ export const en_XA: EnTranslations = {
       "nameplates": "[Ñáɱéš]",
       "haptics": "[Ĥáþţíçš]",
       "hapticsOff": "[Ĥáþţíçš Óƒƒ]",
-      "toggleHaptics": "[Ţóĝĝļé ĥáþţíçš]",
-      "hotbarPage": "[Šķíļļš]",
-      "hotbarPageAria": "[Šĥóŵ ñéẋţ šéţ óƒ šķíļļš]",
-      "actionRing": "[Çóɱƀáţ áçţíóñš]",
-      "actionPageToggle": "[Šŵíţçĥ áçţíóñ þáĝé]",
-      "actionPageIndicator": "[{page}]",
-      "targetCycle": "[Šŵáþ ţáŕĝéţ]",
-      "targetCycleShort": "[Ţáŕĝéţ]",
-      "spellbookPageLabel": "[Þáĝé {page}]"
+      "toggleHaptics": "[Ţóĝĝļé ĥáþţíçš]"
     },
     "tutorial": {
       "moveBodyTouch": "[Úšé ţĥé ɱóʋéɱéñţ šţíçķ ţó ɱóʋé áñð ðŕáĝ ţĥé šçŕééñ ţó ļóóķ áŕóúñð. Ţáķé á ƒéŵ šţéþš ţó ƀéĝíñ.]",
@@ -426,9 +418,7 @@ export const en_XA: EnTranslations = {
       "itemLevelLine": "[Íţéɱ Ļéʋéļ {level}]",
       "itemScoreLine": "[Šçóŕé {score}]",
       "showSecondaryActionBar": "[Šĥóŵ Šéçóñðáŕý Áçţíóñ Ɓáŕ]",
-      "showDailyRewardsChest": "[Šĥóŵ Ðáíļý Ŕéŵáŕðš Çĥéšţ]",
-      "mobileCameraJoystick": "[Çáɱéŕá ĵóýšţíçķ]",
-      "mobileLeftHanded": "[Ļéƒţ-ĥáñðéð ļáýóúţ]"
+      "showDailyRewardsChest": "[Šĥóŵ Ðáíļý Ŕéŵáŕðš Çĥéšţ]"
     },
     "controller": {
       "title": "[Çóñţŕóļļéŕ]",
@@ -7722,6 +7712,26 @@ export const en_XA: EnTranslations = {
           },
           "1": {
             "label": "[Ðééþ Ŕóáð Šţáļķéŕ šļáíñ]"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "[Á Çŕáƒţ ţó Çáļļ Ýóúŕ Óŵñ]",
+        "text": "[Éʋéŕý áŕţíšáñ óƒ Éášţƀŕóóķ éʋéñţúáļļý šéţţļéš óñ óñé çŕáƒţ ţó çáļļ ţĥéíŕ óŵñ. Þŕóʋé ýóúŕšéļƒ ŵíţĥ á šíñĝļé ðééð, {playerName}, áñð ðéçļáŕé ýóúŕ þáţĥ.]",
+        "completion": "[Ýóúŕ þáţĥ íš çĥóšéñ; ŵáļķ íţ ŵéļļ.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ šļáíñ]"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "[Ɱáķíñĝ Áɱéñðš]",
+        "text": "[Ţó šéţ ášíðé óñé çŕáƒţ ƒóŕ áñóţĥéŕ, áñ áŕţíšáñ ɱúšţ ƒíŕšţ ɱáķé áɱéñðš ƒóŕ ţĥé þáţĥ ñóţ ŵáļķéð, {playerName}.]",
+        "completion": "[Áɱéñðš ɱáðé; á ñéŵ þáţĥ íš óþéñ ţó ýóú.]",
+        "objectives": {
+          "0": {
+            "label": "[Ƒóŕéšţ Ŵóļƒ šļáíñ]"
           }
         }
       },

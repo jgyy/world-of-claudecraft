@@ -311,15 +311,7 @@ export const ru_RU: EnTranslations = {
       "nameplates": "Имена",
       "haptics": "Вибрация",
       "hapticsOff": "Вибрация выкл.",
-      "toggleHaptics": "Вкл/выкл вибрацию",
-      "hotbarPage": "Навыки",
-      "hotbarPageAria": "Показать следующий набор навыков",
-      "actionRing": "Боевые действия",
-      "actionPageToggle": "Переключить страницу действий",
-      "actionPageIndicator": "{page}",
-      "targetCycle": "Сменить цель",
-      "targetCycleShort": "Цель",
-      "spellbookPageLabel": "Page {page}"
+      "toggleHaptics": "Вкл/выкл вибрацию"
     },
     "tutorial": {
       "moveBodyTouch": "Используйте джойстик передвижения, чтобы двигаться, и проведите по экрану, чтобы осмотреться. Сделайте несколько шагов, чтобы начать.",
@@ -426,9 +418,7 @@ export const ru_RU: EnTranslations = {
       "itemLevelLine": "Уровень предмета {level}",
       "itemScoreLine": "Оценка {score}",
       "showSecondaryActionBar": "Показывать вторичную панель действий",
-      "showDailyRewardsChest": "Показывать сундук ежедневных наград",
-      "mobileCameraJoystick": "Джойстик камеры",
-      "mobileLeftHanded": "Раскладка для левшей"
+      "showDailyRewardsChest": "Показывать сундук ежедневных наград"
     },
     "controller": {
       "title": "Геймпад",
@@ -1064,7 +1054,7 @@ export const ru_RU: EnTranslations = {
       "close": "Закрыть крафт",
       "craft": "Создать",
       "reagentsNeeded": "Требуется:",
-      "reagentLine": "{name} x{have}/{required}",
+      "reagentLine": "{name}: {have}/{required}",
       "empty": "Известных рецептов пока нет.",
       "resultAria": "Создать {name}",
       "craftedToast": "Создано: {name}",
@@ -7722,6 +7712,26 @@ export const ru_RU: EnTranslations = {
           },
           "1": {
             "label": "Убийство глубинных сталкеров"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "Ремесло по душе",
+        "text": "Рано или поздно каждый ремесленник Иствуда выбирает одно ремесло своим призванием. Докажи себя одним делом, {playerName}, и объяви свой путь.",
+        "completion": "Твой путь избран; иди по нему с честью.",
+        "objectives": {
+          "0": {
+            "label": "Лесной волк убит"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "Искупление",
+        "text": "Чтобы оставить одно ремесло ради другого, ремесленник должен сперва искупить путь, которым не пошёл, {playerName}.",
+        "completion": "Искупление свершилось; перед тобой открыт новый путь.",
+        "objectives": {
+          "0": {
+            "label": "Лесной волк убит"
           }
         }
       },

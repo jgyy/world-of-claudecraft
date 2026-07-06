@@ -311,15 +311,7 @@ export const ja_JP: EnTranslations = {
       "nameplates": "ネームプレート",
       "haptics": "振動",
       "hapticsOff": "振動オフ",
-      "toggleHaptics": "振動を切り替え",
-      "hotbarPage": "スキル",
-      "hotbarPageAria": "次のスキルセットを表示",
-      "actionRing": "戦闘アクション",
-      "actionPageToggle": "行動ページ切替",
-      "actionPageIndicator": "{page}",
-      "targetCycle": "ターゲット切替",
-      "targetCycleShort": "標的",
-      "spellbookPageLabel": "Page {page}"
+      "toggleHaptics": "振動を切り替え"
     },
     "tutorial": {
       "moveBodyTouch": "移動スティックで移動し、画面をドラッグして周囲を見回します。数歩進んで始めましょう。",
@@ -426,9 +418,7 @@ export const ja_JP: EnTranslations = {
       "itemLevelLine": "アイテムレベル {level}",
       "itemScoreLine": "スコア {score}",
       "showSecondaryActionBar": "セカンダリアクションバーを表示",
-      "showDailyRewardsChest": "デイリー報酬の宝箱を表示",
-      "mobileCameraJoystick": "カメラスティック",
-      "mobileLeftHanded": "左利き用レイアウト"
+      "showDailyRewardsChest": "デイリー報酬の宝箱を表示"
     },
     "controller": {
       "title": "コントローラー",
@@ -1064,7 +1054,7 @@ export const ja_JP: EnTranslations = {
       "close": "製作を閉じる",
       "craft": "製作",
       "reagentsNeeded": "必要素材:",
-      "reagentLine": "{name} x{have}/{required}",
+      "reagentLine": "{name}: {have}/{required}",
       "empty": "既知のレシピはありません。",
       "resultAria": "{name}を製作",
       "craftedToast": "製作しました:{name}",
@@ -7722,6 +7712,26 @@ export const ja_JP: EnTranslations = {
           },
           "1": {
             "label": "ディープロードストーカーを討伐"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "己が選ぶべき技",
+        "text": "イーストブルックの職人は皆いずれ、己が選ぶべき一つの技に落ち着く。{playerName}よ、一つの行いで己を証明し、進むべき道を宣言せよ。",
+        "completion": "あなたの道は定まった。その道をしかと歩むがいい。",
+        "objectives": {
+          "0": {
+            "label": "フォレストウルフを討伐"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "償い",
+        "text": "一つの技を捨て、別の技へと移るには、職人はまず歩まなかった道への償いを果たさねばならぬ、{playerName}よ。",
+        "completion": "償いは果たされた。新たな道があなたに開かれている。",
+        "objectives": {
+          "0": {
+            "label": "フォレストウルフを討伐"
           }
         }
       },

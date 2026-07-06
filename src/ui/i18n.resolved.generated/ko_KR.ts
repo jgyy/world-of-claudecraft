@@ -311,15 +311,7 @@ export const ko_KR: EnTranslations = {
       "nameplates": "이름표",
       "haptics": "진동",
       "hapticsOff": "진동 꺼짐",
-      "toggleHaptics": "진동 전환",
-      "hotbarPage": "스킬",
-      "hotbarPageAria": "다음 스킬 세트 표시",
-      "actionRing": "전투 행동",
-      "actionPageToggle": "행동 페이지 전환",
-      "actionPageIndicator": "{page}",
-      "targetCycle": "대상 전환",
-      "targetCycleShort": "대상",
-      "spellbookPageLabel": "Page {page}"
+      "toggleHaptics": "진동 전환"
     },
     "tutorial": {
       "moveBodyTouch": "이동 스틱으로 이동하고 화면을 끌어 주위를 둘러보세요. 몇 걸음 움직여 시작하세요.",
@@ -426,9 +418,7 @@ export const ko_KR: EnTranslations = {
       "itemLevelLine": "아이템 레벨 {level}",
       "itemScoreLine": "점수 {score}",
       "showSecondaryActionBar": "보조 액션 바 표시",
-      "showDailyRewardsChest": "일일 보상 보물상자 표시",
-      "mobileCameraJoystick": "카메라 조이스틱",
-      "mobileLeftHanded": "왼손잡이 레이아웃"
+      "showDailyRewardsChest": "일일 보상 보물상자 표시"
     },
     "controller": {
       "title": "컨트롤러",
@@ -1064,7 +1054,7 @@ export const ko_KR: EnTranslations = {
       "close": "제작 닫기",
       "craft": "제작",
       "reagentsNeeded": "필요 재료:",
-      "reagentLine": "{name} x{have}/{required}",
+      "reagentLine": "{name}: {have}/{required}",
       "empty": "알려진 제작법이 없습니다.",
       "resultAria": "{name} 제작",
       "craftedToast": "제작 완료:{name}",
@@ -7722,6 +7712,26 @@ export const ko_KR: EnTranslations = {
           },
           "1": {
             "label": "딥로드 스토커 처치"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "스스로 택하는 기술",
+        "text": "이스트브룩의 모든 장인은 결국 자신만의 기술 하나를 택하게 된다. {playerName}, 하나의 행동으로 스스로를 증명하고 그대의 길을 선언하라.",
+        "completion": "그대의 길이 정해졌다. 그 길을 굳건히 걸어가라.",
+        "objectives": {
+          "0": {
+            "label": "숲늑대 처치"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "속죄",
+        "text": "한 기술을 버리고 다른 기술로 나아가려면, 장인은 먼저 걷지 않은 길에 대해 속죄해야 한다, {playerName}.",
+        "completion": "속죄가 이루어졌다. 그대에게 새로운 길이 열렸다.",
+        "objectives": {
+          "0": {
+            "label": "숲늑대 처치"
           }
         }
       },

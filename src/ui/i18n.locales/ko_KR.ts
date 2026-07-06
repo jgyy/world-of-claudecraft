@@ -378,8 +378,6 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.showItemLevel': '아이템 레벨 표시',
   'hudChrome.options.showSecondaryActionBar': '보조 액션 바 표시',
   'hudChrome.options.showDailyRewardsChest': '일일 보상 보물상자 표시',
-  'hudChrome.options.mobileCameraJoystick': '카메라 조이스틱',
-  'hudChrome.options.mobileLeftHanded': '왼손잡이 레이아웃',
   'hudChrome.options.itemLevelLine': '아이템 레벨 {level}',
   'hudChrome.options.itemScoreLine': '점수 {score}',
   'hudChrome.landing.highContrast': '고대비',
@@ -3027,6 +3025,18 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_mogger.completion':
     '마침내 모거가 죽었습니다. 이스트브룩의 들판은 더 안전해졌고, 당신은 전할 만한 이야기를 하나 더 안고 계곡을 떠납니다.',
   'entities.quests.q_mogger.objectives.0.label': '모거 처치',
+  'entities.quests.q_archetype_acceptance.title': '스스로 택하는 기술',
+  'entities.quests.q_archetype_acceptance.text':
+    '이스트브룩의 모든 장인은 결국 자신만의 기술 하나를 택하게 된다. {playerName}, 하나의 행동으로 스스로를 증명하고 그대의 길을 선언하라.',
+  'entities.quests.q_archetype_acceptance.completion':
+    '그대의 길이 정해졌다. 그 길을 굳건히 걸어가라.',
+  'entities.quests.q_archetype_acceptance.objectives.0.label': '숲늑대 처치',
+  'entities.quests.q_prof_make_amends.title': '속죄',
+  'entities.quests.q_prof_make_amends.text':
+    '한 기술을 버리고 다른 기술로 나아가려면, 장인은 먼저 걷지 않은 길에 대해 속죄해야 한다, {playerName}.',
+  'entities.quests.q_prof_make_amends.completion':
+    '속죄가 이루어졌다. 그대에게 새로운 길이 열렸다.',
+  'entities.quests.q_prof_make_amends.objectives.0.label': '숲늑대 처치',
   'entities.quests.q_drowned_choir.title': '익사한 성가대',
   'entities.quests.q_drowned_choir.text':
     '물거리들은 홀로 움직이지 않는다네. 그들 사이를 익사한 신도들이 걷고 있지 — 신전과 함께 가라앉은 그 광신도들은, 썩어버린 제의를 여전히 걸친 채 물가 바위에서 부르던 기도를 아직도 노래하고 있네. 그들 중 여덟을 침묵시키고, 그들이 지닌 제물 여섯 개를 내게 가져오게. 그들이 그 여신에게 무엇을 바치려는지 알고 싶네.',
@@ -3486,18 +3496,12 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.perSecond': '{value}/초',
   'hudChrome.meters.perSecondRow': '{total} ({rate})',
   'hudChrome.meters.seconds': '{s}초',
-  'hudChrome.mobile.actionPageToggle': '행동 페이지 전환',
-  'hudChrome.mobile.actionRing': '전투 행동',
   'hudChrome.mobile.autorun': '자동 달리기',
   'hudChrome.mobile.haptics': '진동',
   'hudChrome.mobile.hapticsOff': '진동 꺼짐',
-  'hudChrome.mobile.hotbarPage': '스킬',
-  'hudChrome.mobile.hotbarPageAria': '다음 스킬 세트 표시',
   'hudChrome.mobile.jump': '점프',
   'hudChrome.mobile.leaderboard': '순위',
   'hudChrome.mobile.nameplates': '이름표',
-  'hudChrome.mobile.targetCycle': '대상 전환',
-  'hudChrome.mobile.targetCycleShort': '대상',
   'hudChrome.mobile.toggleHaptics': '진동 전환',
   'hudChrome.rest.resting': '휴식 중',
   'hudChrome.swing.ready': '공격',
@@ -6004,4 +6008,6 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '맑은 공기와 고요한 돌. 고맙네, 펜브리지에서도 이 소식을 듣게 될 걸세.',
   'entities.quests.q_sunken_road.objectives.0.label': '터널 그레이브마이트 처치',
   'entities.quests.q_sunken_road.objectives.1.label': '딥로드 스토커 처치',
+  // Release v0.22.0 locale fill.
+  'hudChrome.crafting.reagentLine': '{name}: {have}/{required}',
 };

@@ -311,15 +311,7 @@ export const zh_TW: EnTranslations = {
       "nameplates": "名條",
       "haptics": "觸覺回饋",
       "hapticsOff": "觸覺回饋已關閉",
-      "toggleHaptics": "切換觸覺回饋",
-      "hotbarPage": "技能",
-      "hotbarPageAria": "顯示下一組技能",
-      "actionRing": "戰鬥動作",
-      "actionPageToggle": "切換動作頁",
-      "actionPageIndicator": "{page}",
-      "targetCycle": "切換目標",
-      "targetCycleShort": "目標",
-      "spellbookPageLabel": "Page {page}"
+      "toggleHaptics": "切換觸覺回饋"
     },
     "tutorial": {
       "moveBodyTouch": "使用搖桿移動，拖曳螢幕環顧四周。先走幾步開始吧。",
@@ -426,9 +418,7 @@ export const zh_TW: EnTranslations = {
       "itemLevelLine": "物品等級 {level}",
       "itemScoreLine": "評分 {score}",
       "showSecondaryActionBar": "顯示副動作列",
-      "showDailyRewardsChest": "顯示每日獎勵寶箱",
-      "mobileCameraJoystick": "攝影機搖桿",
-      "mobileLeftHanded": "左手配置"
+      "showDailyRewardsChest": "顯示每日獎勵寶箱"
     },
     "controller": {
       "title": "手把",
@@ -1064,7 +1054,7 @@ export const zh_TW: EnTranslations = {
       "close": "關閉製作",
       "craft": "製作",
       "reagentsNeeded": "需要:",
-      "reagentLine": "{name} x{have}/{required}",
+      "reagentLine": "{name}: {have}/{required}",
       "empty": "尚無已知配方。",
       "resultAria": "製作{name}",
       "craftedToast": "已製作:{name}",
@@ -7722,6 +7712,26 @@ export const zh_TW: EnTranslations = {
           },
           "1": {
             "label": "擊殺深徑潛行者"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "屬於你自己的技藝",
+        "text": "東溪的每一位工匠最終都會選定一門屬於自己的技藝。用一件事證明自己吧，{playerName}，宣告你的道路。",
+        "completion": "你的道路已經選定；願你走得穩當。",
+        "objectives": {
+          "0": {
+            "label": "擊敗森林之狼"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "彌補",
+        "text": "若要放下一門技藝、轉投另一門，工匠必須先為放棄的道路做出彌補，{playerName}。",
+        "completion": "彌補已經完成；一條新的道路已向你敞開。",
+        "objectives": {
+          "0": {
+            "label": "擊敗森林之狼"
           }
         }
       },

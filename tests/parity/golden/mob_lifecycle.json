@@ -31,7 +31,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 425,
-      "state": "433ca14f",
+      "state": "a122a760",
       "events": "68f6fdb5",
       "rng": {
         "draws": 5,
@@ -41,6 +41,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -372,7 +373,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 426,
-      "state": "42b09196",
+      "state": "0f5cee3f",
       "events": "586790b2",
       "rng": {
         "draws": 8,
@@ -382,6 +383,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -772,7 +774,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 426,
-      "state": "4f0fcc95",
+      "state": "65041bc8",
       "events": "9c422371",
       "rng": {
         "draws": 9,
@@ -782,6 +784,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1174,7 +1177,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 428,
-      "state": "b0dd0283",
+      "state": "d504a1ea",
       "events": "cc6313c7",
       "rng": {
         "draws": 15,
@@ -1184,6 +1187,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -1619,7 +1623,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 429,
-      "state": "1ed63e06",
+      "state": "a4148311",
       "events": "cdb775f7",
       "rng": {
         "draws": 20,
@@ -1629,6 +1633,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [
@@ -2125,7 +2130,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 429,
-      "state": "1ed63e06",
+      "state": "a4148311",
       "events": "741638a5",
       "rng": {
         "draws": 20,
@@ -2135,6 +2140,7 @@
       "players": [
         {
           "activeLoadout": -1,
+          "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
           "bags": [

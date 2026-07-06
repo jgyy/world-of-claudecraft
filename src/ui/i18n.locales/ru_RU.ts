@@ -388,8 +388,6 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.showItemLevel': 'Показывать уровень предмета',
   'hudChrome.options.showSecondaryActionBar': 'Показывать вторичную панель действий',
   'hudChrome.options.showDailyRewardsChest': 'Показывать сундук ежедневных наград',
-  'hudChrome.options.mobileCameraJoystick': 'Джойстик камеры',
-  'hudChrome.options.mobileLeftHanded': 'Раскладка для левшей',
   'hudChrome.options.itemLevelLine': 'Уровень предмета {level}',
   'hudChrome.options.itemScoreLine': 'Оценка {score}',
   'hudChrome.landing.highContrast': 'Высокая контрастность',
@@ -3066,6 +3064,17 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_mogger.completion':
     'Моггер наконец мертв. Поля Истврука стали безопаснее, а вы покидаете долину с еще одной историей, достойной пересказа.',
   'entities.quests.q_mogger.objectives.0.label': 'Моггер убит',
+  'entities.quests.q_archetype_acceptance.title': 'Ремесло по душе',
+  'entities.quests.q_archetype_acceptance.text':
+    'Рано или поздно каждый ремесленник Иствуда выбирает одно ремесло своим призванием. Докажи себя одним делом, {playerName}, и объяви свой путь.',
+  'entities.quests.q_archetype_acceptance.completion': 'Твой путь избран; иди по нему с честью.',
+  'entities.quests.q_archetype_acceptance.objectives.0.label': 'Лесной волк убит',
+  'entities.quests.q_prof_make_amends.title': 'Искупление',
+  'entities.quests.q_prof_make_amends.text':
+    'Чтобы оставить одно ремесло ради другого, ремесленник должен сперва искупить путь, которым не пошёл, {playerName}.',
+  'entities.quests.q_prof_make_amends.completion':
+    'Искупление свершилось; перед тобой открыт новый путь.',
+  'entities.quests.q_prof_make_amends.objectives.0.label': 'Лесной волк убит',
   'entities.quests.q_drowned_choir.title': 'Утонувший хор',
   'entities.quests.q_drowned_choir.text':
     'Бродяги действуют не одни. Среди них ходят Утонувшие служители — культ, что затонул вместе с храмом, всё ещё в истлевших облачениях, всё ещё поющий молитву с прибрежных скал. Заставь умолкнуть восьмерых из них и принеси мне шесть подношений, что они несут. Хочу знать, что они задумали поднести своей богине.',
@@ -3535,18 +3544,12 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.perSecond': '{value}/с',
   'hudChrome.meters.perSecondRow': '{total} ({rate})',
   'hudChrome.meters.seconds': '{s} сек.',
-  'hudChrome.mobile.actionPageToggle': 'Переключить страницу действий',
-  'hudChrome.mobile.actionRing': 'Боевые действия',
   'hudChrome.mobile.autorun': 'Автобег',
   'hudChrome.mobile.haptics': 'Вибрация',
   'hudChrome.mobile.hapticsOff': 'Вибрация выкл.',
-  'hudChrome.mobile.hotbarPage': 'Навыки',
-  'hudChrome.mobile.hotbarPageAria': 'Показать следующий набор навыков',
   'hudChrome.mobile.jump': 'Прыжок',
   'hudChrome.mobile.leaderboard': 'Рейтинг',
   'hudChrome.mobile.nameplates': 'Имена',
-  'hudChrome.mobile.targetCycle': 'Сменить цель',
-  'hudChrome.mobile.targetCycleShort': 'Цель',
   'hudChrome.mobile.toggleHaptics': 'Вкл/выкл вибрацию',
   'hudChrome.rest.resting': 'Отдых',
   'hudChrome.swing.ready': 'Замах',
@@ -6131,4 +6134,6 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
     'Чистый воздух и тихий камень. Спасибо тебе, в Фенбридже тоже об этом услышат.',
   'entities.quests.q_sunken_road.objectives.0.label': 'Убийство туннельных клещей-могильщиков',
   'entities.quests.q_sunken_road.objectives.1.label': 'Убийство глубинных сталкеров',
+  // Release v0.22.0 locale fill.
+  'hudChrome.crafting.reagentLine': '{name}: {have}/{required}',
 };

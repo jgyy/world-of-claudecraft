@@ -311,15 +311,7 @@ export const zh_CN: EnTranslations = {
       "nameplates": "姓名板",
       "haptics": "震动反馈",
       "hapticsOff": "震动反馈：关",
-      "toggleHaptics": "切换震动反馈",
-      "hotbarPage": "技能",
-      "hotbarPageAria": "显示下一组技能",
-      "actionRing": "战斗动作",
-      "actionPageToggle": "切换动作页",
-      "actionPageIndicator": "{page}",
-      "targetCycle": "切换目标",
-      "targetCycleShort": "目标",
-      "spellbookPageLabel": "Page {page}"
+      "toggleHaptics": "切换震动反馈"
     },
     "tutorial": {
       "moveBodyTouch": "使用摇杆移动，拖动屏幕环顾四周。先走几步开始吧。",
@@ -426,9 +418,7 @@ export const zh_CN: EnTranslations = {
       "itemLevelLine": "物品等级 {level}",
       "itemScoreLine": "评分 {score}",
       "showSecondaryActionBar": "显示副动作条",
-      "showDailyRewardsChest": "显示每日奖励宝箱",
-      "mobileCameraJoystick": "摄像机摇杆",
-      "mobileLeftHanded": "左手布局"
+      "showDailyRewardsChest": "显示每日奖励宝箱"
     },
     "controller": {
       "title": "手柄",
@@ -1064,7 +1054,7 @@ export const zh_CN: EnTranslations = {
       "close": "关闭制作",
       "craft": "制作",
       "reagentsNeeded": "需要:",
-      "reagentLine": "{name} x{have}/{required}",
+      "reagentLine": "{name}: {have}/{required}",
       "empty": "尚无已知配方。",
       "resultAria": "制作{name}",
       "craftedToast": "已制作:{name}",
@@ -7722,6 +7712,26 @@ export const zh_CN: EnTranslations = {
           },
           "1": {
             "label": "击杀深径潜行者"
+          }
+        }
+      },
+      "q_archetype_acceptance": {
+        "title": "属于你自己的技艺",
+        "text": "东溪的每一位匠人最终都会选定一门属于自己的技艺。用一件事证明自己吧，{playerName}，宣告你的道路。",
+        "completion": "你的道路已经选定；愿你走得稳当。",
+        "objectives": {
+          "0": {
+            "label": "击败森林之狼"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "弥补",
+        "text": "若要放下一门技艺、转投另一门，匠人必须先为放弃的道路做出弥补，{playerName}。",
+        "completion": "弥补已经完成；一条新的道路已向你敞开。",
+        "objectives": {
+          "0": {
+            "label": "击败森林之狼"
           }
         }
       },

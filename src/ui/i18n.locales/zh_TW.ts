@@ -362,8 +362,6 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.showItemLevel': '顯示物品等級',
   'hudChrome.options.showSecondaryActionBar': '顯示副動作列',
   'hudChrome.options.showDailyRewardsChest': '顯示每日獎勵寶箱',
-  'hudChrome.options.mobileCameraJoystick': '攝影機搖桿',
-  'hudChrome.options.mobileLeftHanded': '左手配置',
   'hudChrome.options.itemLevelLine': '物品等級 {level}',
   'hudChrome.options.itemScoreLine': '評分 {score}',
   'hudChrome.landing.highContrast': '高對比度',
@@ -2902,6 +2900,16 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_mogger.completion':
     '莫格終於死了。東溪的田地更安全了，而你離開谷地時又多了一個值得傳頌的故事。',
   'entities.quests.q_mogger.objectives.0.label': '擊敗莫格',
+  'entities.quests.q_archetype_acceptance.title': '屬於你自己的技藝',
+  'entities.quests.q_archetype_acceptance.text':
+    '東溪的每一位工匠最終都會選定一門屬於自己的技藝。用一件事證明自己吧，{playerName}，宣告你的道路。',
+  'entities.quests.q_archetype_acceptance.completion': '你的道路已經選定；願你走得穩當。',
+  'entities.quests.q_archetype_acceptance.objectives.0.label': '擊敗森林之狼',
+  'entities.quests.q_prof_make_amends.title': '彌補',
+  'entities.quests.q_prof_make_amends.text':
+    '若要放下一門技藝、轉投另一門，工匠必須先為放棄的道路做出彌補，{playerName}。',
+  'entities.quests.q_prof_make_amends.completion': '彌補已經完成；一條新的道路已向你敞開。',
+  'entities.quests.q_prof_make_amends.objectives.0.label': '擊敗森林之狼',
   'entities.quests.q_drowned_choir.title': '溺亡唱詩班',
   'entities.quests.q_drowned_choir.text':
     '那些涉者並非單獨行動。在牠們之間行走的，是溺亡信徒——隨神殿一同沉沒的邪教徒，仍披著腐朽的法衣，仍從岸岩之間唱著那篇禱文。讓其中八人歸於沉寂，並為我帶回他們所攜的六件供品。我想知道他們要獻給女神的究竟是什麼。',
@@ -3346,18 +3354,12 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.perSecond': '{value}/秒',
   'hudChrome.meters.perSecondRow': '{total}（{rate}）',
   'hudChrome.meters.seconds': '{s}秒',
-  'hudChrome.mobile.actionPageToggle': '切換動作頁',
-  'hudChrome.mobile.actionRing': '戰鬥動作',
   'hudChrome.mobile.autorun': '自動奔跑',
   'hudChrome.mobile.haptics': '觸覺回饋',
   'hudChrome.mobile.hapticsOff': '觸覺回饋已關閉',
-  'hudChrome.mobile.hotbarPage': '技能',
-  'hudChrome.mobile.hotbarPageAria': '顯示下一組技能',
   'hudChrome.mobile.jump': '跳躍',
   'hudChrome.mobile.leaderboard': '排行榜',
   'hudChrome.mobile.nameplates': '名條',
-  'hudChrome.mobile.targetCycle': '切換目標',
-  'hudChrome.mobile.targetCycleShort': '目標',
   'hudChrome.mobile.toggleHaptics': '切換觸覺回饋',
   'hudChrome.rest.resting': '休息中',
   'hudChrome.swing.ready': '揮砍',
@@ -5687,4 +5689,6 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_sunken_road.completion': '空氣清新，山石寂靜。謝謝你，芬橋也會聽聞此事。',
   'entities.quests.q_sunken_road.objectives.0.label': '擊殺隧道墓蟎',
   'entities.quests.q_sunken_road.objectives.1.label': '擊殺深徑潛行者',
+  // Release v0.22.0 locale fill.
+  'hudChrome.crafting.reagentLine': '{name}: {have}/{required}',
 };

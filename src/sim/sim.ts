@@ -185,6 +185,16 @@ import {
 } from './pathfind';
 import * as petAi from './pet/pet_ai';
 import * as petCommands from './pet/pet_commands';
+import {
+  type ArchetypeState,
+  acceptArchetypeQuest as acceptArchetypeQuestImpl,
+  advanceAmendsProgress as advanceAmendsProgressImpl,
+  archetypeStateFor,
+  emptyArchetypeState,
+  normalizeArchetypeState,
+  requiredAmendsProgress,
+  switchArchetype as switchArchetypeImpl,
+} from './professions/archetype';
 import { type CraftResult, craftItem as craftItemImpl } from './professions/crafting';
 import {
   drainGatheringGrants,
@@ -801,6 +811,11 @@ export interface PlayerMeta {
   // so the player can page through and filter the WHOLE market a window at a time.
   // Never persisted, resets on login.
   marketQuery: MarketQuery;
+  // Session-only World Market browse filter. The market is capped at
+  // MARKET_WIRE_LIMIT listings per snapshot to bound wire cost, so this
+  // server-side substring filter (matched against item names) is how a player
+  // reaches goods past the cap. Never persisted, resets on login.
+  marketFilter: string;
   // Flat per-craft skill tracking (#1126): one independent, additive-only skill
   // value per craft on the ten-craft ring (see professions/wheel.ts). Persisted
   // in CharacterState.
@@ -808,6 +823,9 @@ export interface PlayerMeta {
   // One-time Ravenpost welcome letter sent (persisted in CharacterState, so
   // existing characters get the service announcement exactly once).
   mailWelcomed: boolean;
+  // Active-archetype state and quest-gated switching (#1129, superseded scope: see
+  // professions/archetype.ts). Never touches craftSkills. Persisted in CharacterState.
+  archetype: ArchetypeState;
   // Delve meta progression (persisted in CharacterState).
   delveMarks: number;
   delveClears: Record<string, number>;
@@ -847,11 +865,11 @@ export interface CharacterState {
   // Rested XP pool. Optional so pre-rested-XP saves load cleanly (defaults to 0).
   restedXp?: number;
   // Gathering profession proficiency (JSONB; optional so pre-professions saves
-  // load cleanly, defaulting every profession to 0). Key is `professions`
-  // (not `gatheringProficiency`), reserved by the settled professions
-  // contract (src/sim/professions/CLAUDE.md, #1164) parallel to the existing
-  // `delveDaily`/`companionUpgrades` persisted fields.
+  // load cleanly, defaulting every profession to 0). `professions` is the legacy
+  // pre-rename key, kept for back-compat with old saves; `gatheringProficiency`
+  // is the current key both read (preferred) and written going forward.
   professions?: Partial<Record<string, number>>;
+  gatheringProficiency?: Partial<Record<string, number>>;
   copper: number;
   hp: number;
   resource: number;
@@ -914,9 +932,20 @@ export interface CharacterState {
   // Ravenpost welcome letter already sent (optional so pre-mail saves load
   // cleanly and receive the announcement letter once on their next login).
   mailWelcomed?: boolean;
+  // World-boss loot lockouts now ride `raidLockouts` (keyed worldboss:<mobId>). The
+  // legacy per-day `worldBossDaily` field is intentionally dropped: pre-migration saves
+  // that still carry it just ignore it (a player locked at deploy may loot once more, a
+  // one-time, player-friendly transition), and their lockouts persist via raidLockouts
+  // from then on.
+  // World-boss daily loot record. Optional so saves from before world bosses load
+  // cleanly (addPlayer falls back to an empty record).
+  worldBossDaily?: { date: string; looted: string[] };
   // Flat per-craft skill tracking (#1126; JSONB, additive back-compat: absent or
   // partial on older saves loads the missing crafts as 0, see normalizeCraftSkills).
   craftSkills?: Record<string, number>;
+  // Active-archetype state (#1129, superseded scope; JSONB, back-compat: absent on
+  // older saves loads as emptyArchetypeState, see normalizeArchetypeState).
+  archetype?: Partial<ArchetypeState>;
 }
 
 export interface PetState {
@@ -1462,6 +1491,8 @@ export class Sim {
       marketQuery: defaultMarketQuery(),
       craftSkills: emptyCraftSkills(),
       mailWelcomed: false,
+      marketFilter: '',
+      archetype: emptyArchetypeState(),
       delveMarks: 0,
       delveClears: {},
       companionUpgrades: {},
@@ -1492,7 +1523,12 @@ export class Sim {
       meta.lifetimeXp = s.lifetimeXp ?? xpToReachLevel(player.level) + Math.max(0, s.xp);
       meta.prestigeRank = s.prestigeRank ?? 0;
       meta.restedXp = Math.max(0, s.restedXp ?? 0);
-      meta.gatheringProficiency = normalizeGatheringProficiency(s.professions);
+      // `s.professions` is the legacy pre-rename field (#1119); `s.gatheringProficiency`
+      // is the current one. Prefer the current field, fall back to the legacy one so
+      // saves from before the rename still load correctly.
+      meta.gatheringProficiency = normalizeGatheringProficiency(
+        s.gatheringProficiency ?? s.professions,
+      );
       if (s.unlockedMilestones)
         for (const id of s.unlockedMilestones) meta.unlockedMilestones.add(id);
       meta.copper = s.copper;
@@ -1555,6 +1591,7 @@ export class Sim {
       }
       meta.craftSkills = normalizeCraftSkills(s.craftSkills);
       meta.mailWelcomed = s.mailWelcomed === true;
+      meta.archetype = normalizeArchetypeState(s.archetype);
       meta.delveMarks = s.delveMarks ?? 0;
       meta.delveClears = { ...(s.delveClears ?? {}) };
       meta.companionUpgrades = { ...(s.companionUpgrades ?? {}) };
@@ -1749,6 +1786,7 @@ export class Sim {
       unlockedMilestones: [...meta.unlockedMilestones],
       restedXp: meta.restedXp,
       professions: { ...meta.gatheringProficiency },
+      gatheringProficiency: { ...meta.gatheringProficiency },
       copper: meta.copper,
       hp: e.hp,
       // A druid saved while shifted runs on rage/energy with its mana parked in
@@ -1806,6 +1844,7 @@ export class Sim {
       pendingSkinCatalog: meta.pendingSkinCatalog,
       pendingSkinItemId: meta.pendingSkinItemId,
       craftSkills: { ...meta.craftSkills },
+      archetype: { ...meta.archetype },
       delveMarks: meta.delveMarks,
       delveClears: { ...meta.delveClears },
       companionUpgrades: { ...meta.companionUpgrades },
@@ -3591,6 +3630,16 @@ export class Sim {
       this.isControlAura(aura.kind) &&
       aura.sourceId !== target.id &&
       !this.isNythraxisScriptedControl(target, aura)
+    )
+      return;
+    // Slow immunity is separate from ccImmune: snares (kind 'slow') are not control auras,
+    // so a slowImmune raid boss shrugs off Frostbolt/Hamstring-style movement snares while
+    // still taking a self-applied slow (e.g. a scripted mechanic) through sourceId === self.
+    if (
+      target.kind === 'mob' &&
+      MOBS[target.templateId]?.slowImmune &&
+      aura.kind === 'slow' &&
+      aura.sourceId !== target.id
     )
       return;
     const existing = target.auras.findIndex(
@@ -6601,6 +6650,70 @@ export class Sim {
 
   get craftSkills(): Record<string, number> {
     return this.craftSkillsFor(this.primaryId);
+  }
+
+  /** The active-archetype craft id, or null before the zone-1 acceptance quest has
+   *  ever been completed (see professions/archetype.ts). */
+  activeArchetypeFor(pid: number): string | null {
+    return archetypeStateFor(this.ctx, pid).activeArchetype;
+  }
+
+  get activeArchetype(): string | null {
+    return this.activeArchetypeFor(this.primaryId);
+  }
+
+  /** Total successful archetype switches this character has ever made. */
+  archetypeSwitchCountFor(pid: number): number {
+    return archetypeStateFor(this.ctx, pid).switchCount;
+  }
+
+  get archetypeSwitchCount(): number {
+    return this.archetypeSwitchCountFor(this.primaryId);
+  }
+
+  /** Amends progress accrued toward the CURRENT switch's threshold, and the
+   *  threshold itself (see requiredAmendsProgress: it scales with switchCount). */
+  archetypeAmendsProgressFor(pid: number): number {
+    return archetypeStateFor(this.ctx, pid).amendsProgress;
+  }
+
+  get archetypeAmendsProgress(): number {
+    return this.archetypeAmendsProgressFor(this.primaryId);
+  }
+
+  archetypeAmendsRequiredFor(pid: number): number {
+    return requiredAmendsProgress(archetypeStateFor(this.ctx, pid).switchCount);
+  }
+
+  get archetypeAmendsRequired(): number {
+    return this.archetypeAmendsRequiredFor(this.primaryId);
+  }
+
+  /** Stub entry point for the zone-1 acceptance quest's completion (see
+   *  professions/archetype.ts for what is stubbed and why). No-op (returns false)
+   *  if an archetype is already set. */
+  acceptArchetypeQuest(craftId: string, pid?: number): boolean {
+    const r = this.resolve(pid);
+    if (!r) return false;
+    return acceptArchetypeQuestImpl(this.ctx, r.meta.entityId, craftId);
+  }
+
+  /** Stub entry point for one completion of the repeatable "make amends" quest
+   *  (see professions/archetype.ts). No-op before an archetype has ever been
+   *  chosen. */
+  advanceAmendsProgress(pid?: number): void {
+    const r = this.resolve(pid);
+    if (!r) return;
+    advanceAmendsProgressImpl(this.ctx, r.meta.entityId);
+  }
+
+  /** Attempt to switch the active archetype to a different craft; blocked (a
+   *  complete no-op) unless enough amends progress has accrued. See
+   *  professions/archetype.ts switchArchetype for the full gating rule. */
+  switchArchetype(craftId: string, pid?: number): boolean {
+    const r = this.resolve(pid);
+    if (!r) return false;
+    return switchArchetypeImpl(this.ctx, r.meta.entityId, craftId);
   }
 
   // Read-only gathering-profession proficiency surface for IWorld. Stubbed
