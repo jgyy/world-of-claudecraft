@@ -1253,6 +1253,7 @@ export class Renderer {
     setRenderCategory(caveTunnel.group, 'props');
     this.scene.add(caveTunnel.group);
     freezeStaticMatrices(caveTunnel.group);
+    this.fireLights.push(...caveTunnel.lights);
 
     // selection ring — a classic target reticle: a base ring plus four
     // inward-pointing ticks. The base ring is draped over the terrain each

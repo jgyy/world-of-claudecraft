@@ -132,6 +132,7 @@ const UI_PURE_CORES = [
   'src/ui/coords.ts',
   'src/ui/quest_tracker.ts',
   'src/ui/delve_map.ts',
+  'src/ui/sunken_road_map_view.ts',
   'src/ui/raid_lockout_view.ts',
   'src/ui/stat_tooltip_view.ts',
   'src/ui/mob_tooltip_view.ts',

@@ -30,6 +30,7 @@ import type { Decoration } from '../sim/world';
 import type { FriendInfo, IWorld } from '../world_api';
 import { overworldDungeonPortals } from './map_dungeon_portals';
 import { questNumbersByLog } from './map_quest_list_view';
+import { isInSunkenRoad } from './sunken_road_map_view';
 
 // World-map zoom band: 1 = the whole committed zone, up to MAP_MAX_ZOOM.
 export const MAP_MAX_ZOOM = 6;
@@ -52,8 +53,9 @@ const CAMPFIRE_MIN_RADIUS = 1.4;
 const CAMPFIRE_RADIUS_PPU = 0.5;
 
 /** Which world-map surface a given world renders: the delve schematic (owned by
- *  delve_map_painter) or the overworld map (this core). */
-export type MapWindowMode = 'delve' | 'overworld';
+ *  delve_map_painter), the Sunken Road underground schematic (owned by
+ *  sunken_road_map_view.ts), or the overworld map (this core). */
+export type MapWindowMode = 'delve' | 'sunkenRoad' | 'overworld';
 
 /** A map region in world coords, used with two meanings for spanX/spanZ. The
  *  internal `full` rect carries the full committed-zone spans (the whole world in
@@ -260,9 +262,14 @@ export interface OverworldMapInput {
 }
 
 /** Which world-map surface this world renders. Delve when the player stands in a
- *  delve band and a run is active (matches the inline guard); overworld otherwise. */
+ *  delve band and a run is active (matches the inline guard); the Sunken Road
+ *  schematic when the player is inside that tunnel (checked before the plain
+ *  overworld fallback, since the corridor's x/z footprint sits on the open-world
+ *  map, not a separate instance band); overworld otherwise. */
 export function mapWindowMode(world: IWorld): MapWindowMode {
-  return isDelvePos(world.player.pos.x) && world.delveRun ? 'delve' : 'overworld';
+  if (isDelvePos(world.player.pos.x) && world.delveRun) return 'delve';
+  if (isInSunkenRoad(world.player.pos.x, world.player.pos.z)) return 'sunkenRoad';
+  return 'overworld';
 }
 
 /**

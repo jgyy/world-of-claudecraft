@@ -51,7 +51,7 @@ export const SUNKEN_ROAD_FLOOR_Y = -24;
 // bowl. 'flat' falloff (below) means no smoothing past this radius: the walls
 // are a sharp, effectively vertical drop, which is exactly right for a
 // tunnel's side walls (they are not meant to be walkable, only impassable).
-const TUNNEL_FLOOR_RADIUS = 8;
+export const TUNNEL_FLOOR_RADIUS = 8;
 // The x of the waypoint that carves through the zone1/zone2 ridge: exported so
 // tests/terrain_walls.test.ts can exclude this corridor from its "every ridge
 // crossing outside the road pass is a wall" sweep, the same way it already
@@ -111,14 +111,52 @@ export const SUNKEN_ROAD_CENTERLINE = densifyPolyline(
   TUNNEL_FLOOR_RADIUS * 0.75,
 );
 
-export const SUNKEN_ROAD_TERRAIN_EDITS: HeightStamp[] = SUNKEN_ROAD_CENTERLINE.map((wp) => ({
-  x: wp.x,
-  z: wp.z,
-  radius: TUNNEL_FLOOR_RADIUS,
-  delta: SUNKEN_ROAD_FLOOR_Y,
-  falloff: 'flat',
-  mode: 'level',
-}));
+// Both mouths otherwise open onto natural rolling terrain (roughly -3 to -4)
+// right next to the interior's sharp, 'flat'-falloff full-depth carve (-24):
+// with nothing between them, a player walking toward the mouth meets an
+// invisible-until-the-last-step 20-yard sheer cliff instead of a walkable
+// entrance, exactly the "I can't find where to walk in" failure mode. Both
+// mouths sit due west of their zone's hub (see the file header's "9 o'clock"
+// note), so the open field is always the +x side: taper each mouth outward
+// along +x with a short chain of wide, 'smooth'-falloff stamps shallowing
+// from the tunnel floor back up to natural grade, so the entrance reads (and
+// plays) as a graded ramp cut into the hillside, not a fall-in pit. These
+// stay terrain-only (not added to SUNKEN_ROAD_CENTERLINE): the render shell
+// only needs to enclose the actual full-depth corridor, not this open-air
+// approach cut.
+const MOUTH_RAMP_OFFSETS = [4, 9, 15, 21, 28]; // yd outward (+x) from the mouth
+const MOUTH_RAMP_RADIUS = 15; // wider than the tunnel floor so it blends into the hillside
+const MOUTH_RAMP_DEPTHS = [-20, -15, -11, -7, -4]; // shallows back out to natural grade
+
+function mouthRampEdits(mouth: { x: number; z: number }): HeightStamp[] {
+  return MOUTH_RAMP_OFFSETS.map((dx, i) => ({
+    x: mouth.x + dx,
+    z: mouth.z,
+    radius: MOUTH_RAMP_RADIUS,
+    delta: MOUTH_RAMP_DEPTHS[i],
+    falloff: 'smooth',
+    mode: 'level',
+  }));
+}
+
+// The ramps run FIRST and the full-depth 'flat' interior stamps LAST: a
+// 'flat' stamp forces height to its delta unconditionally (w=1) everywhere
+// inside its own radius, so applying it last guarantees every corridor point
+// (including both mouths themselves) still lands at the true floor depth,
+// regardless of a ramp stamp's radius reaching back that far. The ramps only
+// end up shaping ground the interior carve's own 8yd reach never touches.
+export const SUNKEN_ROAD_TERRAIN_EDITS: HeightStamp[] = [
+  ...mouthRampEdits(SUNKEN_ROAD_WAYPOINTS[0]),
+  ...mouthRampEdits(SUNKEN_ROAD_WAYPOINTS[SUNKEN_ROAD_WAYPOINTS.length - 1]),
+  ...SUNKEN_ROAD_CENTERLINE.map((wp) => ({
+    x: wp.x,
+    z: wp.z,
+    radius: TUNNEL_FLOOR_RADIUS,
+    delta: SUNKEN_ROAD_FLOOR_Y,
+    falloff: 'flat' as const,
+    mode: 'level' as const,
+  })),
+];
 
 // ---------------------------------------------------------------------------
 // Content: mobs bridging Zone 1's top (7) and Zone 2's entry band (6-8),

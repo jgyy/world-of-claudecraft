@@ -1,7 +1,8 @@
 // Visual proof of the Sunken Road: a deep, enclosed tunnel connecting
 // Eastbrook Vale (Zone 1) to Mirefen Marsh (Zone 2). Boots the offline game,
 // skips the first-spawn intro cinematic, teleports through the tunnel at
-// several waypoints, and captures the world map for both zones.
+// several waypoints, and captures the world map for both zones plus the
+// tunnel's own dedicated underground map schematic.
 //   node scripts/sunken_road_shot.mjs    (needs `npm run dev` on :5173)
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
@@ -55,7 +56,7 @@ await new Promise((r) => setTimeout(r, 400));
 await page.evaluate(() => window.__game.sim.chat('/dev level 10'));
 await new Promise((r) => setTimeout(r, 300));
 
-async function teleportAndShoot(x, z, name, faceDeg) {
+async function teleportAndShoot(x, z, name, faceDeg, opts = {}) {
   await page.evaluate(
     (px, pz) => {
       window.__game.sim.chat(`/dev tp ${px} ${pz}`);
@@ -68,13 +69,37 @@ async function teleportAndShoot(x, z, name, faceDeg) {
       window.__game.sim.player.facing = (deg * Math.PI) / 180;
     }, faceDeg);
   }
+  if (opts.camDist !== undefined || opts.camPitch !== undefined) {
+    await page.evaluate(
+      (dist, pitch) => {
+        if (dist !== undefined) window.__game.input.camDist = dist;
+        if (pitch !== undefined) window.__game.input.camPitch = pitch;
+      },
+      opts.camDist,
+      opts.camPitch,
+    );
+  }
   await new Promise((r) => setTimeout(r, 700));
   await page.screenshot({ path: `docs/screenshots/${name}.png` });
   console.log(`captured docs/screenshots/${name}.png at (${x},${z})`);
 }
 
-// Eastbrook mouth, looking into the tunnel.
-await teleportAndShoot(-95, -15, 'sunken_road_approach_zone1', 200);
+// --- Entrances: a wide shot from OUTSIDE each mouth, standing on natural
+// grade well clear of the graded ramp and facing straight down it (so the
+// walkable descent into the tunnel mouth is unambiguous), then the close
+// approach standing at the mouth itself. ---
+await teleportAndShoot(-60, -15, 'sunken_road_entrance_wide_zone1', -90, {
+  camDist: 18,
+  camPitch: -0.25,
+});
+await teleportAndShoot(-95, -15, 'sunken_road_approach_zone1', -90, {
+  camDist: 12,
+  camPitch: -0.3,
+});
+
+// Foreman Delke, the quest giver standing right at the Eastbrook mouth.
+await teleportAndShoot(-85, -12, 'sunken_road_npc_foreman_delke', 160);
+
 // Interior, zone1 stretch (west of Mirror Lake).
 await teleportAndShoot(-100, 20, 'sunken_road_interior_1', 180);
 await teleportAndShoot(-140, 50, 'sunken_road_interior_2', 180);
@@ -97,6 +122,16 @@ await page.evaluate(() => {
 await new Promise((r) => setTimeout(r, 400));
 await page.screenshot({ path: 'docs/screenshots/sunken_road_looking_up.png' });
 console.log('captured docs/screenshots/sunken_road_looking_up.png');
+
+// A close shot on one of the crystal glow lights, proving the tunnel is lit by
+// its own light sources (not just ambient/sun light dropped underground).
+await page.evaluate(() => {
+  window.__game.input.camPitch = -0.15;
+  window.__game.input.camDist = 5;
+});
+await new Promise((r) => setTimeout(r, 400));
+await page.screenshot({ path: 'docs/screenshots/sunken_road_crystal_light.png' });
+console.log('captured docs/screenshots/sunken_road_crystal_light.png');
 await page.evaluate(() => {
   window.__game.input.camPitch = -0.3;
   window.__game.input.camDist = 12;
@@ -117,11 +152,33 @@ await page.evaluate(() => {
   window.__game.input.camDist = 12;
 });
 
-// Fenbridge mouth.
-await teleportAndShoot(-140, 258, 'sunken_road_exit_zone2', 340);
+// The Old Prospector (named elite) at the ridge-crossing camp.
+await teleportAndShoot(-108, 178, 'sunken_road_old_prospector', 90, { camDist: 14 });
+
+// A gravemite/stalker camp along the route.
+await teleportAndShoot(-110, 230, 'sunken_road_camp', 180, { camDist: 16 });
+
+// Fenbridge mouth: close approach, then a wide outside shot facing down the ramp.
+await teleportAndShoot(-140, 258, 'sunken_road_exit_zone2', 340, { camDist: 12, camPitch: -0.3 });
+await teleportAndShoot(-105, 258, 'sunken_road_exit_wide_zone2', -90, {
+  camDist: 18,
+  camPitch: -0.25,
+});
+
+// The Sunken Road's OWN underground map: opening the map window while inside
+// the tunnel switches to a dedicated schematic instead of the surface map
+// (mapWindowMode 'sunkenRoad' branch, src/ui/map_window_view.ts).
+await page.evaluate(() => window.__game.sim.chat('/dev tp -140 80'));
+await new Promise((r) => setTimeout(r, 400));
+await jsClick('#mm-map');
+await new Promise((r) => setTimeout(r, 500));
+await page.screenshot({ path: 'docs/screenshots/sunken_road_underground_map.png' });
+console.log('captured docs/screenshots/sunken_road_underground_map.png');
+await jsClick('#mm-map');
+await new Promise((r) => setTimeout(r, 300));
 
 // World map: zone 1 (Eastbrook Vale), showing the Sunken Road as a POI on
-// the west side.
+// the west side, and Mirror Lake as a clean circular lake (no double-ring).
 await page.evaluate(() => window.__game.sim.chat('/dev tp 0 0'));
 await new Promise((r) => setTimeout(r, 500));
 await jsClick('#mm-map');
