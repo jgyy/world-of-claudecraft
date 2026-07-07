@@ -118,7 +118,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 431,
-      "state": "889c714e",
+      "state": "edfb4878",
       "events": "a76ddb10",
       "rng": {
         "draws": 7,
@@ -129,7 +129,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 431,
-      "state": "3fed6588",
+      "state": "7e95a847",
       "events": "741638a5",
       "rng": {
         "draws": 7,
@@ -140,7 +140,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 431,
-      "state": "666b0739",
+      "state": "d2bc7c33",
       "events": "741638a5",
       "rng": {
         "draws": 7,
@@ -151,7 +151,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 431,
-      "state": "e7bf4912",
+      "state": "25fa4495",
       "events": "590e0203",
       "rng": {
         "draws": 7,
@@ -162,7 +162,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 431,
-      "state": "6d162056",
+      "state": "5cdddac4",
       "events": "741638a5",
       "rng": {
         "draws": 7,
@@ -173,18 +173,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 431,
-      "state": "aad81793",
-      "events": "741638a5",
-      "rng": {
-        "draws": 7,
-        "digest": "a71fefb6"
-      }
-    },
-    {
-      "tick": 35,
-      "time": 1.75,
-      "nextId": 431,
-      "state": "8fbf0aa8",
+      "state": "6cad7a75",
       "events": "64fe1da8",
       "rng": {
         "draws": 8,
@@ -192,10 +181,10 @@
       }
     },
     {
-      "tick": 40,
-      "time": 2,
+      "tick": 35,
+      "time": 1.75,
       "nextId": 431,
-      "state": "eab5a523",
+      "state": "de9fb4f7",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -206,7 +195,18 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "eab5a523",
+      "state": "f6dd6257",
+      "events": "741638a5",
+      "rng": {
+        "draws": 8,
+        "digest": "603b7e7a"
+      }
+    },
+    {
+      "tick": 40,
+      "time": 2,
+      "nextId": 431,
+      "state": "f6dd6257",
       "events": "741638a5",
       "rng": {
         "draws": 8,
@@ -327,7 +327,7 @@
           "ownerId": 420,
           "petMode": "defensive",
           "pos": {
-            "x": 4805.8,
+            "x": 4806.85,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -338,7 +338,7 @@
           "stats": {
             "armor": 32
           },
-          "swingTimer": 1.9,
+          "swingTimer": 1.6,
           "templateId": "acolyte_tessa",
           "wanderTimer": 1,
           "weapon": {
@@ -374,7 +374,7 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 4801.4,
+            "x": 4802.45,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -385,8 +385,8 @@
           "stats": {
             "armor": 160
           },
-          "stompTimer": 10.35,
-          "swingTimer": 0.35,
+          "stompTimer": 10.2,
+          "swingTimer": 0.25,
           "tappedById": 420,
           "templateId": "deacon_varric",
           "threat": [
@@ -407,7 +407,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 431,
-      "state": "51d67bed",
+      "state": "7c28533e",
       "events": "ed5a99f2",
       "rng": {
         "draws": 10,
@@ -465,7 +465,7 @@
           "critChance": 0.063,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.063,
-          "fallStartY": 55.758838,
+          "fallStartY": 55.720563,
           "fiveSecondRule": 101.05,
           "hp": 29000,
           "id": 420,
@@ -479,8 +479,8 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 4808.8,
-            "y": 55.758838,
+            "x": 4809.85,
+            "y": 55.720563,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -529,7 +529,7 @@
           "ownerId": 420,
           "petMode": "defensive",
           "pos": {
-            "x": 4805.8,
+            "x": 4806.85,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -540,7 +540,7 @@
           "stats": {
             "armor": 32
           },
-          "swingTimer": 1.8,
+          "swingTimer": 1.5,
           "templateId": "acolyte_tessa",
           "wanderTimer": 3,
           "weapon": {
@@ -576,7 +576,7 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 4801.4,
+            "x": 4802.45,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -587,8 +587,8 @@
           "stats": {
             "armor": 160
           },
-          "stompTimer": 10.3,
-          "swingTimer": 0.3,
+          "stompTimer": 10.15,
+          "swingTimer": 0.2,
           "tappedById": 420,
           "templateId": "deacon_varric",
           "threat": [
@@ -609,7 +609,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 431,
-      "state": "978e49b3",
+      "state": "28627ba7",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -620,7 +620,7 @@
       "tick": 49,
       "time": 2.45,
       "nextId": 431,
-      "state": "5bfd7cf9",
+      "state": "ad5f49fc",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -678,7 +678,7 @@
           "critChance": 0.063,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.063,
-          "fallStartY": 55.179814,
+          "fallStartY": 55.2043,
           "fiveSecondRule": 101.45,
           "hp": 29000,
           "id": 420,
@@ -691,8 +691,8 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 4817.8,
-            "y": 54.059814,
+            "x": 4818.85,
+            "y": 54.0843,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -739,7 +739,7 @@
           "ownerId": 420,
           "petMode": "defensive",
           "pos": {
-            "x": 4808.6,
+            "x": 4809.65,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -750,7 +750,7 @@
           "stats": {
             "armor": 32
           },
-          "swingTimer": 1,
+          "swingTimer": 0.7,
           "templateId": "acolyte_tessa",
           "wanderTimer": 2.6,
           "weapon": {
@@ -765,7 +765,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 431,
-      "state": "102e8170",
+      "state": "8bcc6beb",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -776,7 +776,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 431,
-      "state": "77b42640",
+      "state": "a99112b3",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -834,7 +834,7 @@
           "critChance": 0.063,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.063,
-          "fallStartY": 60.149072,
+          "fallStartY": 60.199709,
           "fiveSecondRule": 101.55,
           "hp": 29000,
           "id": 420,
@@ -847,8 +847,8 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 4888.6,
-            "y": 60.109072,
+            "x": 4889.65,
+            "y": 60.159709,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -895,8 +895,8 @@
           "ownerId": 420,
           "petMode": "defensive",
           "pos": {
-            "x": 4888.6,
-            "y": 60.149072,
+            "x": 4889.65,
+            "y": 60.199709,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -907,7 +907,7 @@
           "stats": {
             "armor": 32
           },
-          "swingTimer": 0.8,
+          "swingTimer": 0.5,
           "templateId": "acolyte_tessa",
           "wanderTimer": 2.5,
           "weapon": {
@@ -922,7 +922,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 431,
-      "state": "77b42640",
+      "state": "a99112b3",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -980,7 +980,7 @@
           "critChance": 0.063,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.063,
-          "fallStartY": 60.149072,
+          "fallStartY": 60.199709,
           "fiveSecondRule": 101.55,
           "hp": 29000,
           "id": 420,
@@ -993,8 +993,8 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 4888.6,
-            "y": 60.109072,
+            "x": 4889.65,
+            "y": 60.159709,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -1041,8 +1041,8 @@
           "ownerId": 420,
           "petMode": "defensive",
           "pos": {
-            "x": 4888.6,
-            "y": 60.149072,
+            "x": 4889.65,
+            "y": 60.199709,
             "z": -1170
           },
           "potionCooldownUntil": -1,
@@ -1053,7 +1053,7 @@
           "stats": {
             "armor": 32
           },
-          "swingTimer": 0.8,
+          "swingTimer": 0.5,
           "templateId": "acolyte_tessa",
           "wanderTimer": 2.5,
           "weapon": {

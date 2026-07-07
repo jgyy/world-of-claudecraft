@@ -166,7 +166,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 422,
-      "state": "604ba88c",
+      "state": "31e78bca",
       "events": "4d261a4f",
       "rng": {
         "draws": 288,
@@ -177,7 +177,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 422,
-      "state": "04df85eb",
+      "state": "4c2b0b58",
       "events": "741638a5",
       "rng": {
         "draws": 400,
@@ -188,7 +188,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 422,
-      "state": "16a939a6",
+      "state": "85da408e",
       "events": "741638a5",
       "rng": {
         "draws": 450,
@@ -352,9 +352,9 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 2.105384,
+            "x": 2.084216,
             "y": 1.5,
-            "z": 2.777998
+            "z": 1.818232
           },
           "potionCooldownUntil": -1,
           "spawnPos": {
@@ -365,7 +365,7 @@
           "stats": {
             "armor": 40
           },
-          "swingTimer": 0.7,
+          "swingTimer": 0.45,
           "tappedById": 420,
           "templateId": "forest_wolf",
           "threat": [
