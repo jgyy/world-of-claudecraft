@@ -8,9 +8,16 @@ import { surfaceMat } from './gfx';
 // sharp, not a smoothed-out bowl); this module wraps that same dense
 // centerline in a rock shell comfortably wider than the carve, so the shell
 // fully encloses the walkable floor everywhere, including straight up.
-const ROCK_COLOR = 0x241f1a;
+//
+// Neutral bedrock grey (matches BIOME_PALETTE.cave in terrain.ts), not
+// near-black: the shell is lit only by its own crystal point lights (the
+// outdoor sun rig is dropped underground), so a dark-but-not-black base
+// color is what actually reads as stone instead of a void.
+const ROCK_COLOR = 0x4a4e54;
 const CRYSTAL_COLOR = 0x6fd1e6;
 const CRYSTAL_Y_OFFSET = 0.4;
+const CRYSTAL_LIGHT_INTENSITY = 34;
+const CRYSTAL_LIGHT_DISTANCE = 26;
 // Wider than the floor's own 8yd carve radius (with real margin), so the
 // shell's footprint always exceeds the walkable floor's: a player standing
 // anywhere on the floor, including right at its edge, is still well inside
@@ -20,6 +27,10 @@ const RADIAL_SEGMENTS = 16;
 
 export interface CaveTunnelView {
   group: THREE.Group;
+  // Crystal glow lights, budgeted by the renderer's shared fireLights pool
+  // (same nearest-N-within-range scheme as dungeon torches) so the tunnel
+  // isn't lit by ambient/sun light alone.
+  lights: THREE.PointLight[];
 }
 
 export function buildCaveTunnel(): CaveTunnelView {
@@ -55,12 +66,25 @@ export function buildCaveTunnel(): CaveTunnelView {
     emissive: CRYSTAL_COLOR,
     emissiveIntensity: 1.2,
   });
+  const lights: THREE.PointLight[] = [];
   for (const wp of SUNKEN_ROAD_WAYPOINTS) {
     const mesh = new THREE.Mesh(crystalGeo, crystalMat);
     mesh.position.set(wp.x, SUNKEN_ROAD_FLOOR_Y + CRYSTAL_Y_OFFSET, wp.z);
     mesh.castShadow = true;
     mesh.name = `sunkenRoadCrystal_${wp.x}_${wp.z}`;
     group.add(mesh);
+
+    const light = new THREE.PointLight(
+      CRYSTAL_COLOR,
+      CRYSTAL_LIGHT_INTENSITY,
+      CRYSTAL_LIGHT_DISTANCE,
+      2,
+    );
+    light.userData.baseIntensity = CRYSTAL_LIGHT_INTENSITY;
+    light.position.set(wp.x, SUNKEN_ROAD_FLOOR_Y + CRYSTAL_Y_OFFSET + 1, wp.z);
+    light.name = `sunkenRoadCrystalLight_${wp.x}_${wp.z}`;
+    group.add(light);
+    lights.push(light);
   }
-  return { group };
+  return { group, lights };
 }

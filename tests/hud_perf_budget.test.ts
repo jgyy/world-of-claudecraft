@@ -236,6 +236,7 @@ const CANVAS_PAINTERS: ReadonlyArray<string> = [
   'map_window_painter.ts',
   'minimap_painter.ts',
   'perf_graph_painter.ts',
+  'sunken_road_map_painter.ts',
   'unit_portrait_painter.ts',
 ];
 

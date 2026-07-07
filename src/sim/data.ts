@@ -58,6 +58,7 @@ import {
   SUNKEN_ROAD_RIDGE_CROSSING_X,
   SUNKEN_ROAD_TERRAIN_EDITS,
   SUNKEN_ROAD_WAYPOINTS,
+  TUNNEL_FLOOR_RADIUS,
 } from './content/sunken_road';
 import {
   TEMPLE_CAMPS,
@@ -133,6 +134,7 @@ export {
   SUNKEN_ROAD_FLOOR_Y,
   SUNKEN_ROAD_RIDGE_CROSSING_X,
   SUNKEN_ROAD_WAYPOINTS,
+  TUNNEL_FLOOR_RADIUS,
 };
 
 import { DELVE_ITEMS } from './content/delves/items';

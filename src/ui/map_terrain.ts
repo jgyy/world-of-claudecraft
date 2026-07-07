@@ -7,7 +7,7 @@
 // The colours sample the SAME `terrainHeight`/`roadDistance` the renderer and
 // sim use, so the map always matches the real world, do not diverge them.
 import { ZONES } from '../sim/data';
-import { roadDistance, terrainHeight, waterLevelAt, zoneBiomeAt } from '../sim/world';
+import { isInWaterBody, roadDistance, terrainHeight, zoneBiomeAt } from '../sim/world';
 
 export interface MapRegion {
   minX: number;
@@ -45,7 +45,14 @@ export function paintTerrainRows(
       const x = region.maxX - (ix / W) * spanX;
       const z = region.maxZ - (iy / H) * spanZ;
       const h = terrainHeight(x, z, seed);
-      const wl = waterLevelAt(x, z);
+      // A declared lake's on-map footprint is the same clean circle the
+      // renderer's flat water plane covers (waterBodies(), sim/world.ts), not
+      // a height threshold: the basin's smoothstep blend into the surrounding
+      // rolling terrain can dip below waterLevel() again near its own outer
+      // blend radius (invisible in 3D, hidden under the opaque water plane),
+      // which painted a second disconnected "moat" ring on the flat map when
+      // this used to gate on height instead of the declared footprint.
+      const isWater = isInWaterBody(x, z);
       const biome = zoneBiomeAt(z);
       let r = 58,
         g = 105,
@@ -59,7 +66,7 @@ export function paintTerrainRows(
         g = 100;
         b = 82;
       }
-      if (h < waterLevelAt(x, z)) {
+      if (isWater) {
         r = 38;
         g = 84;
         b = 138;
@@ -88,7 +95,7 @@ export function paintTerrainRows(
         r = 125;
         g = 100;
         b = 66;
-      } else if (h >= wl && roadDistance(x, z) < 2.4) {
+      } else if (!isWater && roadDistance(x, z) < 2.4) {
         r = 138;
         g = 111;
         b = 71;
@@ -97,7 +104,7 @@ export function paintTerrainRows(
       // left-neighbour height so it costs no extra terrainHeight() calls
       const left = ix === 0 ? h : prevH;
       prevH = h;
-      if (h >= wl) {
+      if (!isWater) {
         const shade = Math.max(0.74, Math.min(1.28, 1 + (h - left) * 0.16));
         r = Math.min(255, r * shade);
         g = Math.min(255, g * shade);

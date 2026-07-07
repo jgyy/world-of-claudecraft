@@ -97,6 +97,13 @@
     --color-delve-label: #ffe9a0;
     --color-delve-outline: #000;
 
+    /* Sunken Road underground map schematic (resolved by
+       sunken_road_map_painter.ts via getComputedStyle). Bedrock grey matching
+       BIOME_PALETTE.cave in terrain.ts / ROCK_COLOR in cave_tunnel.ts, so the
+       schematic reads as the same stone as the tunnel itself. */
+    --color-sunken-road-bg: #2a2d31;
+    --color-sunken-road-path: #6a7078;
+
     /* overworld world-map window (resolved by map_window_painter.ts via
        getComputedStyle: a 2D canvas context cannot read a CSS var directly).
        Exact pre-existing values from the inline updateMapWindow/drawMapDetail. */

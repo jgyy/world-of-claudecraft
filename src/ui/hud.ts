@@ -322,6 +322,7 @@ import {
 } from './stat_tooltip';
 import { type StatTooltipI18n, statCellHtml, statTooltipHtml } from './stat_tooltip_view';
 import { nearestSubzone } from './subzone';
+import { paintWorldMapSunkenRoad } from './sunken_road_map_painter';
 import { swingTimerState } from './swing_timer';
 import { SwingTimerPainter } from './swing_timer_painter';
 import { localizeTalentTitle, roleLabel, tTalent } from './talent_i18n';
@@ -6787,6 +6788,18 @@ export class Hud {
       const run = this.sim.delveRun;
       const area = run ? delveDisplayName(run.delveId) : '';
       this.setText(summaryEl, t('hud.core.mapSummary', { zone: area }));
+      return;
+    }
+
+    if (mapWindowMode(this.sim) === 'sunkenRoad') {
+      this.mapQuestAreas = [];
+      this.mapNpcMarkers = [];
+      this.hideMapQuestList();
+      paintWorldMapSunkenRoad(ctx, this.sim, S);
+      this.setText(
+        summaryEl,
+        t('hud.core.mapSummary', { zone: zonePoiLabel('eastbrook_vale', 10) }),
+      );
       return;
     }
 
