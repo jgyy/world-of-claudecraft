@@ -22,7 +22,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "es_ES": [
     "entities.mobs.deep_road_stalker.name",
@@ -37,7 +38,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "fr_FR": [
     "entities.mobs.deep_road_stalker.name",
@@ -52,7 +54,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "fr_CA": [
     "entities.mobs.deep_road_stalker.name",
@@ -67,7 +70,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "en_CA": [],
   "it_IT": [
@@ -83,7 +87,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "de_DE": [
     "entities.mobs.deep_road_stalker.name",
@@ -98,12 +103,21 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
+  "zh_CN": [
+    "hudChrome.discord.roleTag.coredevs"
+  ],
+  "zh_TW": [
+    "hudChrome.discord.roleTag.coredevs"
+  ],
+  "ko_KR": [
+    "hudChrome.discord.roleTag.coredevs"
+  ],
+  "ja_JP": [
+    "hudChrome.discord.roleTag.coredevs"
+  ],
   "pt_BR": [
     "entities.mobs.deep_road_stalker.name",
     "entities.mobs.the_old_prospector.name",
@@ -117,9 +131,29 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
-  "ru_RU": [],
+  "ru_RU": [
+    "hudChrome.discord.roleTag.coredevs"
+  ],
+  "cs_CZ": [
+    "entities.items.sunken_road_grit.name",
+    "entities.mobs.deep_road_stalker.name",
+    "entities.mobs.the_old_prospector.name",
+    "entities.mobs.tunnel_gravemite.name",
+    "entities.npcs.foreman_delke.greeting",
+    "entities.npcs.foreman_delke.name",
+    "entities.npcs.foreman_delke.title",
+    "entities.quests.q_sunken_road.completion",
+    "entities.quests.q_sunken_road.objectives.0.label",
+    "entities.quests.q_sunken_road.objectives.1.label",
+    "entities.quests.q_sunken_road.text",
+    "entities.quests.q_sunken_road.title",
+    "entities.zones.eastbrook_vale.pois.10.label",
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
+  ],
   "nl_NL": [
     "entities.mobs.deep_road_stalker.name",
     "entities.mobs.the_old_prospector.name",
@@ -133,7 +167,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "pl_PL": [
     "entities.mobs.deep_road_stalker.name",
@@ -148,7 +183,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "id_ID": [
     "entities.mobs.deep_road_stalker.name",
@@ -163,7 +199,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "tr_TR": [
     "entities.mobs.deep_road_stalker.name",
@@ -178,7 +215,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "sv_SE": [
     "entities.mobs.deep_road_stalker.name",
@@ -193,7 +231,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "vi_VN": [
     "entities.mobs.deep_road_stalker.name",
@@ -208,7 +247,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ],
   "da_DK": [
     "entities.mobs.deep_road_stalker.name",
@@ -223,6 +263,7 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_sunken_road.text",
     "entities.quests.q_sunken_road.title",
     "entities.zones.eastbrook_vale.pois.10.label",
-    "entities.zones.mirefen_marsh.pois.8.label"
+    "entities.zones.mirefen_marsh.pois.8.label",
+    "hudChrome.discord.roleTag.coredevs"
   ]
 };
