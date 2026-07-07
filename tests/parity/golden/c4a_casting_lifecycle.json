@@ -14,8 +14,8 @@
     "cancelCast fishing arm via dealDamage (FISHING_CAST_ID, not pushback)",
     "multi-class casters: mage/priest/warlock"
   ],
-  "draws": 669,
-  "drawDigest": "8d6abe82",
+  "draws": 667,
+  "drawDigest": "a81d1bbb",
   "frames": [
     {
       "tick": 0,
@@ -647,8 +647,8 @@
       "state": "09921392",
       "events": "741638a5",
       "rng": {
-        "draws": 390,
-        "digest": "16b7422d"
+        "draws": 391,
+        "digest": "ea7e87a2"
       }
     },
     {
@@ -1064,8 +1064,8 @@
       "state": "668345cf",
       "events": "741638a5",
       "rng": {
-        "draws": 516,
-        "digest": "f1b88339"
+        "draws": 517,
+        "digest": "837aca49"
       }
     },
     {
@@ -1075,8 +1075,8 @@
       "state": "d2122826",
       "events": "741638a5",
       "rng": {
-        "draws": 549,
-        "digest": "5167a8fe"
+        "draws": 550,
+        "digest": "51dea53d"
       }
     },
     {
@@ -1086,8 +1086,8 @@
       "state": "6f93e241",
       "events": "b1766ed3",
       "rng": {
-        "draws": 569,
-        "digest": "0e8831e3"
+        "draws": 571,
+        "digest": "ee315f48"
       }
     },
     {
@@ -1097,8 +1097,8 @@
       "state": "8e57d26c",
       "events": "6f91224b",
       "rng": {
-        "draws": 569,
-        "digest": "0e8831e3"
+        "draws": 571,
+        "digest": "ee315f48"
       },
       "label": "warlock-channel-pushback",
       "players": [
@@ -1492,8 +1492,8 @@
       "state": "bd4fccf8",
       "events": "5dc26de8",
       "rng": {
-        "draws": 610,
-        "digest": "b662fc43"
+        "draws": 615,
+        "digest": "fb7c2709"
       }
     },
     {
@@ -1503,8 +1503,8 @@
       "state": "ae3db4b6",
       "events": "e00d3402",
       "rng": {
-        "draws": 632,
-        "digest": "a887912b"
+        "draws": 637,
+        "digest": "c4ebdcb3"
       },
       "label": "warlock-fishing-cancel",
       "players": [
@@ -1896,8 +1896,8 @@
       "state": "86c772d8",
       "events": "741638a5",
       "rng": {
-        "draws": 655,
-        "digest": "5edbcd0b"
+        "draws": 656,
+        "digest": "e792b519"
       }
     },
     {
@@ -1907,8 +1907,8 @@
       "state": "6adb92c0",
       "events": "741638a5",
       "rng": {
-        "draws": 669,
-        "digest": "8d6abe82"
+        "draws": 667,
+        "digest": "a81d1bbb"
       },
       "label": "final",
       "players": [

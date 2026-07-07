@@ -21,7 +21,9 @@
 // northwest (-8,6)->(-35,25)->(-58,48)->(-66,58) and southwest (-6,-6)->
 // (-30,-28)->(-55,-45)->(-70,-55) roads and the webwood_spider (-60,5) /
 // mudfin_murloc (-75,57) camps, ducks east of Mirror Lake's terrain-aware
-// footprint (-92,88, radius 30 -> 48), then in Mirefen Marsh clears the
+// footprint (-92,88, radius 30 -> 48; the -172,80 waypoint bulges further out
+// than that footprint so the tunnel_gravemite camp anchored there can't aggro
+// across it), then in Mirefen Marsh clears the
 // mire_prowler camp (-40,230) and stays well short of Deepfen Shallows'
 // footprint (-110,310, radius 56). The route below is unchanged from before;
 // only the carve width/technique changed, so all of that clearance still
@@ -66,7 +68,10 @@ export const SUNKEN_ROAD_WAYPOINTS: { x: number; z: number }[] = [
   { x: -95, z: -15 }, // Eastbrook mouth, west of town (9 o'clock)
   { x: -100, z: 20 },
   { x: -140, z: 50 }, // stays west of Mirror Lake's terrain-aware footprint
-  { x: -140, z: 80 },
+  { x: -172, z: 80 }, // bulges further out here: this waypoint also anchors a
+  // mob camp, and the camp's aggroRadius needs to clear not just the lake's
+  // own footprint but the wider ring the Mirror Lake fishing spot search
+  // (tests/sim.test.ts) scans out to
   { x: -140, z: 110 },
   { x: -145, z: 122 }, // keeps the segment itself clear of the lake circle
   { x: -100, z: 140 }, // past the lake's z-reach; swings back in
@@ -196,7 +201,7 @@ export const SUNKEN_ROAD_MOBS: Record<string, MobTemplate> = {
 // walkable strip rather than out in the (now unwalkable) tunnel wall.
 export const SUNKEN_ROAD_CAMPS: CampDef[] = [
   { mobId: 'tunnel_gravemite', center: { x: -100, z: 20 }, radius: 6, count: 5 },
-  { mobId: 'tunnel_gravemite', center: { x: -140, z: 80 }, radius: 6, count: 4 },
+  { mobId: 'tunnel_gravemite', center: { x: -172, z: 80 }, radius: 6, count: 4 },
   { mobId: 'the_old_prospector', center: { x: -110, z: 180 }, radius: 5, count: 1 },
   { mobId: 'deep_road_stalker', center: { x: -110, z: 205 }, radius: 6, count: 5 },
   { mobId: 'deep_road_stalker', center: { x: -110, z: 230 }, radius: 6, count: 4 },
