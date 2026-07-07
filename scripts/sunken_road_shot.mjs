@@ -88,13 +88,13 @@ async function teleportAndShoot(x, z, name, faceDeg, opts = {}) {
 // grade well clear of the graded ramp and facing straight down it (so the
 // walkable descent into the tunnel mouth is unambiguous), then the close
 // approach standing at the mouth itself. ---
-await teleportAndShoot(-60, -15, 'sunken_road_entrance_wide_zone1', -90, {
-  camDist: 18,
-  camPitch: -0.25,
+await teleportAndShoot(-70, -15, 'sunken_road_entrance_wide_zone1', -90, {
+  camDist: 25,
+  camPitch: -0.7,
 });
-await teleportAndShoot(-95, -15, 'sunken_road_approach_zone1', -90, {
+await teleportAndShoot(-80, -15, 'sunken_road_approach_zone1', -90, {
   camDist: 12,
-  camPitch: -0.3,
+  camPitch: -0.9,
 });
 
 // Foreman Delke, the quest giver standing right at the Eastbrook mouth.
@@ -103,7 +103,7 @@ await teleportAndShoot(-85, -12, 'sunken_road_npc_foreman_delke', 160);
 // Interior, zone1 stretch (west of Mirror Lake).
 await teleportAndShoot(-100, 20, 'sunken_road_interior_1', 180);
 await teleportAndShoot(-140, 50, 'sunken_road_interior_2', 180);
-await teleportAndShoot(-140, 80, 'sunken_road_interior_3', 180);
+await teleportAndShoot(-172, 80, 'sunken_road_interior_3', 180);
 await teleportAndShoot(-140, 110, 'sunken_road_interior_4', 200);
 // Ridge crossing.
 await teleportAndShoot(-110, 180, 'sunken_road_ridge_crossing', 180);
@@ -113,7 +113,7 @@ await teleportAndShoot(-110, 230, 'sunken_road_interior_6', 180);
 
 // Looking straight up from deep inside the tunnel (well clear of both
 // mouths): the enclosed shell should block the sky entirely.
-await page.evaluate(() => window.__game.sim.chat('/dev tp -140 80'));
+await page.evaluate(() => window.__game.sim.chat('/dev tp -172 80'));
 await new Promise((r) => setTimeout(r, 400));
 await page.evaluate(() => {
   window.__game.input.camPitch = -1.4;
@@ -159,16 +159,16 @@ await teleportAndShoot(-108, 178, 'sunken_road_old_prospector', 90, { camDist: 1
 await teleportAndShoot(-110, 230, 'sunken_road_camp', 180, { camDist: 16 });
 
 // Fenbridge mouth: close approach, then a wide outside shot facing down the ramp.
-await teleportAndShoot(-140, 258, 'sunken_road_exit_zone2', 340, { camDist: 12, camPitch: -0.3 });
-await teleportAndShoot(-105, 258, 'sunken_road_exit_wide_zone2', -90, {
-  camDist: 18,
-  camPitch: -0.25,
+await teleportAndShoot(-125, 258, 'sunken_road_exit_zone2', -90, { camDist: 12, camPitch: -0.9 });
+await teleportAndShoot(-115, 258, 'sunken_road_exit_wide_zone2', -90, {
+  camDist: 25,
+  camPitch: -0.7,
 });
 
 // The Sunken Road's OWN underground map: opening the map window while inside
 // the tunnel switches to a dedicated schematic instead of the surface map
 // (mapWindowMode 'sunkenRoad' branch, src/ui/map_window_view.ts).
-await page.evaluate(() => window.__game.sim.chat('/dev tp -140 80'));
+await page.evaluate(() => window.__game.sim.chat('/dev tp -172 80'));
 await new Promise((r) => setTimeout(r, 400));
 await jsClick('#mm-map');
 await new Promise((r) => setTimeout(r, 500));

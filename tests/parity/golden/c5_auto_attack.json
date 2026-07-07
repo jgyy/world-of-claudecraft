@@ -14,8 +14,8 @@
     "rangedSwing Wand (mage, arcane, no armor, no dead zone)",
     "stopAutoAttack public entry"
   ],
-  "draws": 553,
-  "drawDigest": "99c49496",
+  "draws": 550,
+  "drawDigest": "0571f4e0",
   "frames": [
     {
       "tick": 0,
@@ -1096,22 +1096,22 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 430,
-      "state": "12117407",
-      "events": "7799be15",
+      "state": "8210a512",
+      "events": "3df8aecc",
       "rng": {
-        "draws": 545,
-        "digest": "71985103"
+        "draws": 542,
+        "digest": "55d9cc62"
       }
     },
     {
       "tick": 126,
       "time": 6.3,
       "nextId": 430,
-      "state": "8295893f",
+      "state": "fc405a38",
       "events": "741638a5",
       "rng": {
-        "draws": 553,
-        "digest": "99c49496"
+        "draws": 550,
+        "digest": "0571f4e0"
       },
       "label": "after-stop",
       "players": [
@@ -1210,7 +1210,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 71,
-            "damageTaken": 30
+            "damageTaken": 22
           },
           "craftSkills": {},
           "delveClears": {},
@@ -1439,14 +1439,14 @@
           "aiState": "idle",
           "attackPower": 95,
           "autoAttack": true,
-          "combatTimer": 0.25,
+          "combatTimer": 1.9,
           "comboUntil": -1,
           "critChance": 0.0835,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.0835,
           "fallStartY": -3.063027,
           "fiveSecondRule": 6.3,
-          "hp": 79970,
+          "hp": 79978,
           "id": 422,
           "inCombat": true,
           "kind": "player",
@@ -1715,7 +1715,7 @@
         {
           "aggroTargetId": 422,
           "aiState": "attack",
-          "combatTimer": 0.25,
+          "combatTimer": 1.9,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1896,11 +1896,11 @@
       "tick": 126,
       "time": 6.3,
       "nextId": 430,
-      "state": "8295893f",
+      "state": "fc405a38",
       "events": "741638a5",
       "rng": {
-        "draws": 553,
-        "digest": "99c49496"
+        "draws": 550,
+        "digest": "0571f4e0"
       },
       "label": "final",
       "players": [
@@ -1999,7 +1999,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 71,
-            "damageTaken": 30
+            "damageTaken": 22
           },
           "craftSkills": {},
           "delveClears": {},
@@ -2228,14 +2228,14 @@
           "aiState": "idle",
           "attackPower": 95,
           "autoAttack": true,
-          "combatTimer": 0.25,
+          "combatTimer": 1.9,
           "comboUntil": -1,
           "critChance": 0.0835,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.0835,
           "fallStartY": -3.063027,
           "fiveSecondRule": 6.3,
-          "hp": 79970,
+          "hp": 79978,
           "id": 422,
           "inCombat": true,
           "kind": "player",
@@ -2504,7 +2504,7 @@
         {
           "aggroTargetId": 422,
           "aiState": "attack",
-          "combatTimer": 0.25,
+          "combatTimer": 1.9,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",

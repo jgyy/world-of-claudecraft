@@ -118,15 +118,49 @@ export const SUNKEN_ROAD_CENTERLINE = densifyPolyline(
 // entrance, exactly the "I can't find where to walk in" failure mode. Both
 // mouths sit due west of their zone's hub (see the file header's "9 o'clock"
 // note), so the open field is always the +x side: taper each mouth outward
-// along +x with a short chain of wide, 'smooth'-falloff stamps shallowing
-// from the tunnel floor back up to natural grade, so the entrance reads (and
-// plays) as a graded ramp cut into the hillside, not a fall-in pit. These
-// stay terrain-only (not added to SUNKEN_ROAD_CENTERLINE): the render shell
-// only needs to enclose the actual full-depth corridor, not this open-air
-// approach cut.
-const MOUTH_RAMP_OFFSETS = [4, 9, 15, 21, 28]; // yd outward (+x) from the mouth
-const MOUTH_RAMP_RADIUS = 15; // wider than the tunnel floor so it blends into the hillside
-const MOUTH_RAMP_DEPTHS = [-20, -15, -11, -7, -4]; // shallows back out to natural grade
+// along +x with a short chain of 'smooth'-falloff stamps shallowing from the
+// tunnel floor back up to natural grade, so the entrance reads (and plays) as
+// a graded ramp cut into the hillside, not a fall-in pit. Kept only a little
+// wider than the tunnel's own 8yd carve radius (not a wide flared bowl), so
+// the visible surface opening at each mouth stays a small, tunnel-width hole
+// rather than a broad valley.
+const MOUTH_RAMP_OFFSETS = [3, 7, 12, 18, 25, 33]; // yd outward (+x) from the mouth
+const MOUTH_RAMP_RADIUS = 10; // only a little wider than TUNNEL_FLOOR_RADIUS (8)
+const MOUTH_RAMP_DEPTHS = [-21, -17, -13, -9.5, -6.5, -4]; // shallows back to natural grade
+
+// How many of the ramp's own points (closest to the mouth first) the render
+// shell extends its tube over, exported with each point's actual floor depth
+// so the shell can rise with the ramp instead of staying flat: without this
+// the tube stopped dead at the mouth waypoint while the terrain opening
+// (widened by the ramp) continued outward and rising, leaving a gap between
+// rock ceiling and ground that read as a hole straight through to bare sky
+// right at the entrance.
+const MOUTH_SHELL_RAMP_COUNT = 2;
+
+export interface MouthShellPoint {
+  x: number;
+  z: number;
+  floorY: number;
+}
+
+function mouthShellRampPoints(mouth: { x: number; z: number }): MouthShellPoint[] {
+  return MOUTH_RAMP_OFFSETS.slice(0, MOUTH_SHELL_RAMP_COUNT).map((dx, i) => ({
+    x: mouth.x + dx,
+    z: mouth.z,
+    floorY: MOUTH_RAMP_DEPTHS[i],
+  }));
+}
+
+export const SUNKEN_ROAD_EASTBROOK_SHELL_RAMP = mouthShellRampPoints(
+  SUNKEN_ROAD_WAYPOINTS[0],
+).reverse();
+export const SUNKEN_ROAD_FENBRIDGE_SHELL_RAMP = mouthShellRampPoints(
+  SUNKEN_ROAD_WAYPOINTS[SUNKEN_ROAD_WAYPOINTS.length - 1],
+);
+
+function mouthRampPoints(mouth: { x: number; z: number }): { x: number; z: number }[] {
+  return MOUTH_RAMP_OFFSETS.map((dx) => ({ x: mouth.x + dx, z: mouth.z }));
+}
 
 function mouthRampEdits(mouth: { x: number; z: number }): HeightStamp[] {
   return MOUTH_RAMP_OFFSETS.map((dx, i) => ({
@@ -139,6 +173,9 @@ function mouthRampEdits(mouth: { x: number; z: number }): HeightStamp[] {
   }));
 }
 
+const EASTBROOK_MOUTH = SUNKEN_ROAD_WAYPOINTS[0];
+const FENBRIDGE_MOUTH = SUNKEN_ROAD_WAYPOINTS[SUNKEN_ROAD_WAYPOINTS.length - 1];
+
 // The ramps run FIRST and the full-depth 'flat' interior stamps LAST: a
 // 'flat' stamp forces height to its delta unconditionally (w=1) everywhere
 // inside its own radius, so applying it last guarantees every corridor point
@@ -146,8 +183,8 @@ function mouthRampEdits(mouth: { x: number; z: number }): HeightStamp[] {
 // regardless of a ramp stamp's radius reaching back that far. The ramps only
 // end up shaping ground the interior carve's own 8yd reach never touches.
 export const SUNKEN_ROAD_TERRAIN_EDITS: HeightStamp[] = [
-  ...mouthRampEdits(SUNKEN_ROAD_WAYPOINTS[0]),
-  ...mouthRampEdits(SUNKEN_ROAD_WAYPOINTS[SUNKEN_ROAD_WAYPOINTS.length - 1]),
+  ...mouthRampEdits(EASTBROOK_MOUTH),
+  ...mouthRampEdits(FENBRIDGE_MOUTH),
   ...SUNKEN_ROAD_CENTERLINE.map((wp) => ({
     x: wp.x,
     z: wp.z,
@@ -157,6 +194,80 @@ export const SUNKEN_ROAD_TERRAIN_EDITS: HeightStamp[] = [
     mode: 'level' as const,
   })),
 ];
+
+// ---------------------------------------------------------------------------
+// Biome paint: the tunnel + its mouth ramps read as bare grey rock, not the
+// surrounding zone's green grass/marsh. `biomeAt` (sim/world.ts) checks this
+// painted grid before falling back to the zone's biome, and both the terrain
+// renderer's ground color AND the world-map painter read `biomeAt`, so one
+// paint layer fixes the walls in 3D and the tunnel's mark on the 2D map alike.
+// Coarse cell grid (editor format, sim/types.ts BiomePaint) built once at
+// module load, not a per-frame cost.
+// ---------------------------------------------------------------------------
+
+const PAINT_CELL = 4; // yards per cell
+const CAVE_BIOME_ID = 6; // BIOME_BY_ID index for 'cave' (sim/world.ts)
+// Paint reaches this far past each stamp's own carve/ramp radius, so the
+// visible rock lip just outside the walkable floor/ramp is also grey, not a
+// thin green fringe right at the carve's edge.
+const PAINT_MARGIN = 5;
+
+interface PaintDisc {
+  x: number;
+  z: number;
+  radius: number;
+}
+
+function buildSunkenRoadBiomePaint(): {
+  cell: number;
+  cols: number;
+  rows: number;
+  originX: number;
+  originZ: number;
+  ids: number[];
+} {
+  const discs: PaintDisc[] = [
+    ...SUNKEN_ROAD_CENTERLINE.map((p) => ({ ...p, radius: TUNNEL_FLOOR_RADIUS + PAINT_MARGIN })),
+    ...mouthRampPoints(EASTBROOK_MOUTH).map((p) => ({
+      ...p,
+      radius: MOUTH_RAMP_RADIUS + PAINT_MARGIN,
+    })),
+    ...mouthRampPoints(FENBRIDGE_MOUTH).map((p) => ({
+      ...p,
+      radius: MOUTH_RAMP_RADIUS + PAINT_MARGIN,
+    })),
+  ];
+  let minX = Infinity,
+    maxX = -Infinity,
+    minZ = Infinity,
+    maxZ = -Infinity;
+  for (const d of discs) {
+    minX = Math.min(minX, d.x - d.radius);
+    maxX = Math.max(maxX, d.x + d.radius);
+    minZ = Math.min(minZ, d.z - d.radius);
+    maxZ = Math.max(maxZ, d.z + d.radius);
+  }
+  const cols = Math.ceil((maxX - minX) / PAINT_CELL) + 1;
+  const rows = Math.ceil((maxZ - minZ) / PAINT_CELL) + 1;
+  const ids = new Array<number>(cols * rows).fill(255);
+  for (let r = 0; r < rows; r++) {
+    const cz = minZ + (r + 0.5) * PAINT_CELL;
+    for (let c = 0; c < cols; c++) {
+      const cx = minX + (c + 0.5) * PAINT_CELL;
+      for (const d of discs) {
+        const dx = cx - d.x;
+        const dz = cz - d.z;
+        if (dx * dx + dz * dz < d.radius * d.radius) {
+          ids[r * cols + c] = CAVE_BIOME_ID;
+          break;
+        }
+      }
+    }
+  }
+  return { cell: PAINT_CELL, cols, rows, originX: minX, originZ: minZ, ids };
+}
+
+export const SUNKEN_ROAD_BIOME_PAINT = buildSunkenRoadBiomePaint();
 
 // ---------------------------------------------------------------------------
 // Content: mobs bridging Zone 1's top (7) and Zone 2's entry band (6-8),

@@ -46,8 +46,11 @@ import {
 import { GROUND_PICKUP_LINES } from './content/ground_pickup_lines';
 import { COMMON_RECIPES as COMMON_RECIPES_CONTENT } from './content/recipes';
 import {
+  SUNKEN_ROAD_BIOME_PAINT,
   SUNKEN_ROAD_CAMPS,
   SUNKEN_ROAD_CENTERLINE,
+  SUNKEN_ROAD_EASTBROOK_SHELL_RAMP,
+  SUNKEN_ROAD_FENBRIDGE_SHELL_RAMP,
   SUNKEN_ROAD_FLOOR_Y,
   SUNKEN_ROAD_GATHER_NODES,
   SUNKEN_ROAD_ITEMS,
@@ -131,6 +134,8 @@ export {
 // purely cosmetic crystal dressing at the same waypoints/depth as the carve.
 export {
   SUNKEN_ROAD_CENTERLINE,
+  SUNKEN_ROAD_EASTBROOK_SHELL_RAMP,
+  SUNKEN_ROAD_FENBRIDGE_SHELL_RAMP,
   SUNKEN_ROAD_FLOOR_Y,
   SUNKEN_ROAD_RIDGE_CROSSING_X,
   SUNKEN_ROAD_WAYPOINTS,
@@ -352,6 +357,10 @@ export const BUILTIN_WORLD: WorldContent = {
   // The Sunken Road tunnel: a chain of HeightStamp carves, the only
   // terrainEdits the built-in world uses.
   terrainEdits: SUNKEN_ROAD_TERRAIN_EDITS,
+  // Paints the tunnel + its mouth ramps as bare grey rock ('cave' biome)
+  // instead of the surrounding zone's green grass/marsh; the only
+  // biomePaint the built-in world uses.
+  biomePaint: SUNKEN_ROAD_BIOME_PAINT,
 };
 
 let activeWorld: WorldContent = BUILTIN_WORLD;

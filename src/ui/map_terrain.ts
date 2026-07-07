@@ -7,7 +7,37 @@
 // The colours sample the SAME `terrainHeight`/`roadDistance` the renderer and
 // sim use, so the map always matches the real world, do not diverge them.
 import { ZONES } from '../sim/data';
-import { isInWaterBody, roadDistance, terrainHeight, zoneBiomeAt } from '../sim/world';
+import { noise2 } from '../sim/rng';
+import { biomeAt, roadDistance, terrainHeight, waterBodies } from '../sim/world';
+
+// A lake's on-map shoreline is jittered by a smooth per-angle noise (sampled
+// around a small circle in noise-space, so it wraps seamlessly at 0/2π)
+// instead of drawn as the sim's exact circular water-body test: a perfectly
+// round lake reads as an unnatural, geometric shape on the flat map, whereas
+// the real coastline gets to look organic here purely cosmetically (the
+// walkable/swimmable footprint in 3D is unchanged; this only affects which
+// pixels the map paints blue).
+const SHORE_NOISE_RADIUS = 3; // radius in noise-space the angle samples around
+const SHORE_JITTER_FRACTION = 0.22; // max +/- shoreline wobble, as a fraction of the lake's radius
+const SHORE_NOISE_SEED = 9001;
+
+function isWaterJittered(x: number, z: number): boolean {
+  for (const body of waterBodies()) {
+    const dx = x - body.x;
+    const dz = z - body.z;
+    const dist = Math.hypot(dx, dz);
+    if (dist > body.radius * (1 + SHORE_JITTER_FRACTION)) continue;
+    const angle = Math.atan2(dz, dx);
+    const n = noise2(
+      Math.cos(angle) * SHORE_NOISE_RADIUS + body.x * 0.01,
+      Math.sin(angle) * SHORE_NOISE_RADIUS + body.z * 0.01,
+      SHORE_NOISE_SEED,
+    );
+    const jitteredRadius = body.radius * (1 + (n - 0.5) * 2 * SHORE_JITTER_FRACTION);
+    if (dist < jitteredRadius) return true;
+  }
+  return false;
+}
 
 export interface MapRegion {
   minX: number;
@@ -45,15 +75,21 @@ export function paintTerrainRows(
       const x = region.maxX - (ix / W) * spanX;
       const z = region.maxZ - (iy / H) * spanZ;
       const h = terrainHeight(x, z, seed);
-      // A declared lake's on-map footprint is the same clean circle the
-      // renderer's flat water plane covers (waterBodies(), sim/world.ts), not
-      // a height threshold: the basin's smoothstep blend into the surrounding
-      // rolling terrain can dip below waterLevel() again near its own outer
-      // blend radius (invisible in 3D, hidden under the opaque water plane),
-      // which painted a second disconnected "moat" ring on the flat map when
-      // this used to gate on height instead of the declared footprint.
-      const isWater = isInWaterBody(x, z);
-      const biome = zoneBiomeAt(z);
+      // A declared lake's on-map footprint follows the same circular water
+      // body the renderer's flat water plane covers (waterBodies(),
+      // sim/world.ts), not a height threshold: the basin's smoothstep blend
+      // into the surrounding rolling terrain can dip below waterLevel() again
+      // near its own outer blend radius (invisible in 3D, hidden under the
+      // opaque water plane), which painted a second disconnected "moat" ring
+      // on the flat map when this used to gate on height instead of the
+      // declared footprint. The footprint itself is jittered per angle
+      // (isWaterJittered) so the shoreline reads as organic, not a perfect
+      // circle.
+      const isWater = isWaterJittered(x, z);
+      // biomeAt (not the 1D zoneBiomeAt) so a painted feature like the
+      // Sunken Road tunnel shows its own grey rock scar on the map instead of
+      // the surrounding zone's green.
+      const biome = biomeAt(x, z);
       let r = 58,
         g = 105,
         b = 48;
@@ -65,6 +101,10 @@ export function paintTerrainRows(
         r = 92;
         g = 100;
         b = 82;
+      } else if (biome === 'cave') {
+        r = 108;
+        g = 108;
+        b = 112;
       }
       if (isWater) {
         r = 38;
