@@ -147,7 +147,7 @@ import { formatMoney } from './format_money';
 import * as interaction from './interaction';
 import { meetsLevelRequirement } from './item_level_req';
 import * as items from './items';
-import { nextActiveFloor } from './keep_floor';
+import { nextKeepState } from './keep_floor';
 import {
   type DevLeaderboardPage,
   type GuildLeaderboardPage,
@@ -3208,7 +3208,7 @@ export class Sim {
         lap?.('p.move');
         this.updateDoorTriggers(p);
         lap?.('p.doors');
-        p.activeFloor = nextActiveFloor(p.activeFloor, p.pos.x, p.pos.z);
+        this.updateKeepFloor(p);
         this.updateCasting(p, meta);
         lap?.('p.casting');
         this.updatePlayerAutoAttack(p, meta);
@@ -3224,7 +3224,7 @@ export class Sim {
         // death model), or resurrect at its corpse / an overworld Spirit Healer.
         this.updatePlayerMovement(p, meta);
         this.updateDoorTriggers(p);
-        p.activeFloor = nextActiveFloor(p.activeFloor, p.pos.x, p.pos.z);
+        this.updateKeepFloor(p);
         lap?.('p.move');
       }
       updateTimers(p);
@@ -6465,6 +6465,19 @@ export class Sim {
 
   private updateDoorTriggers(p: Entity): void {
     updateDoorTriggersImpl(this.ctx, p);
+  }
+
+  // The Eastbrook Vale keep (content/keep.ts): per-player activeFloor local
+  // state, same proximity-check spirit as updateDoorTriggers above but
+  // flipping a floor flag instead of teleporting (see keep_floor.ts).
+  private updateKeepFloor(p: Entity): void {
+    const next = nextKeepState(
+      { floor: p.activeFloor, landingLock: p.keepLandingLock },
+      p.pos.x,
+      p.pos.z,
+    );
+    p.activeFloor = next.floor;
+    p.keepLandingLock = next.landingLock;
   }
 
   enterDungeon(dungeonId: string, pid?: number): void {

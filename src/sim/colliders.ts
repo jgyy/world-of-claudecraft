@@ -1,10 +1,4 @@
-import {
-  KEEP_DOOR_HALF_WIDTH,
-  KEEP_HALF,
-  KEEP_POS,
-  KEEP_STAIRS,
-  KEEP_WALL_THICK,
-} from './content/keep';
+import { KEEP_DOOR_HALF_WIDTH, KEEP_HALF, KEEP_POS, KEEP_WALL_THICK } from './content/keep';
 import {
   arenaOriginAt,
   DUNGEON_X_THRESHOLD,
@@ -133,17 +127,29 @@ function keepExteriorWallColliders(seed: number): Collider[] {
   ];
 }
 
-// One small furnishing collider per floor, positioned differently each floor:
-// the visible, testable proof that the collider LOOKUP for this footprint is
-// actually swapped per activeFloor, not just the render mesh.
+// One small furnishing collider per floor, positioned differently each floor
+// (a NE/NW/SE corner in turn): the visible, testable proof that the collider
+// LOOKUP for this footprint is actually swapped per activeFloor, not just the
+// render mesh. Deliberately kept well clear of every KEEP_STAIRS landing
+// (radius KEEP_STAIRS[].r) and the door gap, so it never blocks the very
+// staircases/door it is meant to sit beside.
+const FURNITURE_CORNERS: readonly [number, number][] = [
+  [KEEP_HALF - 1.2, KEEP_HALF - 1.2], // floor 1: northeast corner
+  [-(KEEP_HALF - 1.2), KEEP_HALF - 1.2], // floor 2: northwest corner
+  [KEEP_HALF - 1.2, -(KEEP_HALF - 1.2)], // floor 3: southeast corner
+];
+
 function keepFloorFurnitureCollider(seed: number, floor: number): Collider {
-  const landing = KEEP_STAIRS[Math.min(floor - 1, KEEP_STAIRS.length - 1)] ?? KEEP_STAIRS[0];
+  const [dx, dz] =
+    FURNITURE_CORNERS[(floor - 1 + FURNITURE_CORNERS.length) % FURNITURE_CORNERS.length];
+  const x = KEEP_POS.x + dx;
+  const z = KEEP_POS.z + dz;
   return {
     type: 'circle',
-    x: landing.x,
-    z: landing.z + 2.2,
+    x,
+    z,
     r: 0.5,
-    cameraTopY: topY(seed, landing.x, landing.z, 1.2),
+    cameraTopY: topY(seed, x, z, 1.2),
   };
 }
 

@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "a4dc4df1",
+      "state": "948dc468",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -82,6 +82,7 @@
           "fiveSecondRule": 99,
           "hp": 54,
           "id": 405,
+          "keepLandingLock": -1,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -126,7 +127,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 407,
-      "state": "26739cb0",
+      "state": "fcbe0bd4",
       "events": "6f4af3da",
       "rng": {
         "draws": 3,
@@ -137,7 +138,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 407,
-      "state": "a0f9d7c2",
+      "state": "97bc5650",
       "events": "32aafa0f",
       "rng": {
         "draws": 3,
@@ -148,7 +149,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 407,
-      "state": "70bbf102",
+      "state": "20e08ffe",
       "events": "c880e87c",
       "rng": {
         "draws": 73,
@@ -159,7 +160,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 407,
-      "state": "79efde0e",
+      "state": "38462580",
       "events": "c880e87c",
       "rng": {
         "draws": 162,
@@ -170,7 +171,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 407,
-      "state": "714b5da6",
+      "state": "471a9712",
       "events": "894957f3",
       "rng": {
         "draws": 254,
@@ -181,7 +182,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 407,
-      "state": "9a5fe4a5",
+      "state": "9250cc01",
       "events": "c880e87c",
       "rng": {
         "draws": 367,
@@ -192,7 +193,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 407,
-      "state": "a9ab1db5",
+      "state": "7d8b06b5",
       "events": "741638a5",
       "rng": {
         "draws": 411,
@@ -262,6 +263,7 @@
           "fiveSecondRule": 105.4,
           "hp": 50000,
           "id": 405,
+          "keepLandingLock": -1,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",
@@ -314,6 +316,7 @@
           "hostile": true,
           "hp": 9000,
           "id": 406,
+          "keepLandingLock": -1,
           "kind": "mob",
           "level": 5,
           "lootFfaTimer": "Infinity",

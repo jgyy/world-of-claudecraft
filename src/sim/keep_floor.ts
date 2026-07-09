@@ -7,7 +7,6 @@
 // fixed footprint, following the existing door-trigger precedent in
 // instances/dungeons.ts (proximity check during the per-player tick loop)
 // but flipping a floor flag instead of teleporting.
-
 import { KEEP_STAIRS } from './content/keep';
 import { isInsideKeepFootprint } from './voxel_building';
 
@@ -15,37 +14,58 @@ import { isInsideKeepFootprint } from './voxel_building';
  * currently standing on inside the keep. */
 export type ActiveFloor = 0 | 1 | 2 | 3;
 
-// Walking within a landing's radius while on its `fromFloor` steps you up to
-// `toFloor`; walking within it while on `toFloor` steps you back down. This
-// makes each landing a two-way staircase, matching "walk up, walk back down
-// the same door" (no separate exit-portal concept).
-function landingTransition(floor: ActiveFloor, x: number, z: number): ActiveFloor | null {
-  for (const s of KEEP_STAIRS) {
+/** activeFloor plus which landing (index into KEEP_STAIRS, or -1) the
+ * player is currently standing inside, so a landing transitions EXACTLY
+ * ONCE per approach (edge-triggered) instead of flipping every tick a
+ * stationary player spends on the trigger: without the lock, standing still
+ * on a landing would satisfy `floor === toFloor` every tick and immediately
+ * step back down, then back up, forever. The player must leave the landing's
+ * radius before it can fire again in either direction. */
+export interface KeepState {
+  floor: ActiveFloor;
+  landingLock: number;
+}
+
+export const KEEP_STATE_OUTSIDE: KeepState = { floor: 0, landingLock: -1 };
+
+function landingIndexAt(x: number, z: number): number {
+  for (let i = 0; i < KEEP_STAIRS.length; i++) {
+    const s = KEEP_STAIRS[i];
     const dx = x - s.x;
     const dz = z - s.z;
-    if (dx * dx + dz * dz > s.r * s.r) continue;
-    if (floor === s.fromFloor) return s.toFloor;
-    if (floor === s.toFloor) return s.fromFloor;
+    if (dx * dx + dz * dz <= s.r * s.r) return i;
   }
-  return null;
+  return -1;
 }
 
 /**
- * Pure state-transition function: given the player's previous activeFloor
- * and their current (x,z), returns the next activeFloor. Called once per
- * player per tick (see sim.ts's per-player loop), same spirit as the
- * dungeon-door proximity check.
+ * Pure state-transition function: given the player's previous keep state and
+ * their current (x,z), returns the next keep state. Called once per player
+ * per tick (see sim.ts's per-player loop), same spirit as the dungeon-door
+ * proximity check.
  *
- * - Outside the footprint: always 0 (walking away resets it, ready to walk
- *   back in the same door; there is no exit-portal concept).
+ * - Outside the footprint: always floor 0, unlocked (walking away resets it,
+ *   ready to walk back in the same door; there is no exit-portal concept).
  * - Just walked in (was 0, now inside): floor 1 (the ground floor the door
  *   opens onto).
- * - Already inside: stays on the current floor unless standing on a stair
- *   landing trigger, which steps one floor up or down.
+ * - Already inside, not on a landing: stays on the current floor, unlocked.
+ * - Already inside, on a landing NOT currently locked: steps one floor up or
+ *   down (whichever end of that landing the player isn't already on) and
+ *   locks to that landing.
+ * - Already inside, on the SAME landing that is already locked: no-op (the
+ *   player is still standing where they just transitioned; wait for them to
+ *   step off before it can fire again).
  */
-export function nextActiveFloor(prevFloor: ActiveFloor, x: number, z: number): ActiveFloor {
-  if (!isInsideKeepFootprint(x, z)) return 0;
-  if (prevFloor === 0) return 1;
-  const landed = landingTransition(prevFloor, x, z);
-  return landed ?? prevFloor;
+export function nextKeepState(prev: KeepState, x: number, z: number): KeepState {
+  if (!isInsideKeepFootprint(x, z)) return KEEP_STATE_OUTSIDE;
+  if (prev.floor === 0) return { floor: 1, landingLock: -1 };
+
+  const landingIdx = landingIndexAt(x, z);
+  if (landingIdx === -1) return { floor: prev.floor, landingLock: -1 };
+  if (landingIdx === prev.landingLock) return prev; // still on the landing that just fired
+
+  const s = KEEP_STAIRS[landingIdx];
+  if (prev.floor === s.fromFloor) return { floor: s.toFloor, landingLock: landingIdx };
+  if (prev.floor === s.toFloor) return { floor: s.fromFloor, landingLock: landingIdx };
+  return { floor: prev.floor, landingLock: landingIdx }; // on an unrelated landing, just lock it
 }

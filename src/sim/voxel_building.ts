@@ -5,10 +5,15 @@
 // pattern as voxel.ts's tunnel carving. Sibling of voxel.ts, not a change to
 // it: the keep is hand-authored building geometry, not a terrain carve.
 //
-// Convention matches voxel.ts: density negative = solid, positive = air.
-// Local building coordinates: lx/lz relative to KEEP_POS, ly relative to the
-// building's base Y (terrainHeight at KEEP_POS, so the keep sits flush with
-// the ground it was placed on).
+// Convention matches voxel.ts: density negative = solid, positive = air, a
+// CONTINUOUS signed-distance-like field (not a binary +-1 step): the mesher's
+// gradientNormal (voxel_mesh.ts) estimates the surface normal from a finite
+// difference of this function, which needs an actual gradient to work with,
+// not a flat step that is zero almost everywhere. Built from standard SDF
+// box primitives combined with min (union of solids) / max-with-negation
+// (subtraction, i.e. carving air out of a solid), the same combinators
+// voxel.ts's tunnel carving uses in spirit (there: max of the terrain
+// density and each capsule's carve amount).
 import {
   KEEP_DOOR_HALF_WIDTH,
   KEEP_DOOR_HEIGHT,
@@ -44,45 +49,68 @@ export function keepFloorY(seed: number, floor: number): number {
   return keepBaseY(seed) + Math.max(0, floor - 1) * KEEP_FLOOR_HEIGHT;
 }
 
-function stairOpeningAt(lx: number, lz: number, betweenFloor: number): boolean {
+// Axis-aligned box SDF, centered at (cx,cy,cz), half-extents (hx,hy,hz):
+// negative inside, positive outside, continuous everywhere (the standard
+// "exact" box distance field).
+function sdBox(
+  px: number,
+  py: number,
+  pz: number,
+  cx: number,
+  cy: number,
+  cz: number,
+  hx: number,
+  hy: number,
+  hz: number,
+): number {
+  const qx = Math.abs(px - cx) - hx;
+  const qy = Math.abs(py - cy) - hy;
+  const qz = Math.abs(pz - cz) - hz;
+  const ox = Math.max(qx, 0);
+  const oy = Math.max(qy, 0);
+  const oz = Math.max(qz, 0);
+  const outside = Math.hypot(ox, oy, oz);
+  const inside = Math.min(Math.max(qx, Math.max(qy, qz)), 0);
+  return outside + inside;
+}
+
+// A vertical cylinder SDF (infinite in y within [cy-hy,cy+hy]), used for the
+// stairwell cutouts.
+function sdCylinderY(
+  px: number,
+  py: number,
+  pz: number,
+  cx: number,
+  cy: number,
+  cz: number,
+  r: number,
+  hy: number,
+): number {
+  const dr = Math.hypot(px - cx, pz - cz) - r;
+  const dy = Math.abs(py - cy) - hy;
+  const ox = Math.max(dr, 0);
+  const oy = Math.max(dy, 0);
+  const outside = Math.hypot(ox, oy);
+  const inside = Math.min(Math.max(dr, dy), 0);
+  return outside + inside;
+}
+
+function union(a: number, b: number): number {
+  return Math.min(a, b);
+}
+
+function subtract(a: number, cut: number): number {
+  return Math.max(a, -cut);
+}
+
+function stairCutoutAt(lx: number, ly: number, lz: number, betweenFloor: number): number {
+  let best = Infinity;
   for (const s of KEEP_STAIRS) {
     if (s.fromFloor !== betweenFloor) continue;
-    const dx = lx - (s.x - KEEP_POS.x);
-    const dz = lz - (s.z - KEEP_POS.z);
-    if (dx * dx + dz * dz <= s.r * s.r) return true;
+    const d = sdCylinderY(lx, ly, lz, s.x - KEEP_POS.x, 0, s.z - KEEP_POS.z, s.r, 10);
+    if (d < best) best = d;
   }
-  return false;
-}
-
-function isDoorGap(lx: number, lz: number, ly: number): boolean {
-  return (
-    lz <= -KEEP_HALF + KEEP_WALL_THICK + 1e-6 &&
-    Math.abs(lx) < KEEP_DOOR_HALF_WIDTH &&
-    ly >= 0 &&
-    ly <= KEEP_DOOR_HEIGHT
-  );
-}
-
-function isWallSolid(lx: number, lz: number, ly: number): boolean {
-  if (ly < 0 || ly > KEEP_FLOORS * KEEP_FLOOR_HEIGHT) return false;
-  const onPerimeter =
-    Math.abs(lx) >= KEEP_HALF - KEEP_WALL_THICK || Math.abs(lz) >= KEEP_HALF - KEEP_WALL_THICK;
-  if (!onPerimeter) return false;
-  if (isDoorGap(lx, lz, ly)) return false;
-  return true;
-}
-
-function isSlabSolid(lx: number, lz: number, ly: number): boolean {
-  // Interior floor/ceiling slabs at each floor boundary (excluding ground,
-  // which rests on the terrain, and including the roof).
-  for (let level = 1; level <= KEEP_FLOORS; level++) {
-    const slabY = level * KEEP_FLOOR_HEIGHT;
-    const thick = level === KEEP_FLOORS ? KEEP_ROOF_THICK : KEEP_SLAB_THICK;
-    if (ly < slabY - thick / 2 || ly > slabY + thick / 2) continue;
-    if (level < KEEP_FLOORS && stairOpeningAt(lx, lz, level)) continue; // stairwell hole
-    return true;
-  }
-  return false;
+  return best;
 }
 
 /** Pure density for the keep's exterior shell: walls at every floor, the
@@ -95,10 +123,69 @@ export function keepVoxelDensity(x: number, y: number, z: number, seed: number):
   const baseY = keepBaseY(seed);
   const ly = y - baseY;
 
-  if (ly < -0.05) return -1; // foundation: solid below the ground floor
-  if (isWallSolid(lx, lz, ly)) return -1;
-  if (isSlabSolid(lx, lz, ly)) return -1;
-  return 1; // open interior / exterior air
+  const totalH = KEEP_FLOORS * KEEP_FLOOR_HEIGHT;
+  const half = KEEP_HALF;
+  const t = KEEP_WALL_THICK;
+
+  // Foundation: an infinitely deep solid slab below the ground floor, so the
+  // building never floats or shows a gap against the terrain it sits on.
+  const foundation = sdBox(x, y, z, KEEP_POS.x, baseY - 50, KEEP_POS.z, half, 50, half);
+
+  // Exterior walls: a solid box shell for the whole building height, hollowed
+  // out by a slightly-taller/narrower interior box.
+  const outerBox = sdBox(
+    x,
+    y,
+    z,
+    KEEP_POS.x,
+    baseY + totalH / 2,
+    KEEP_POS.z,
+    half,
+    totalH / 2 + 1,
+    half,
+  );
+  const innerBox = sdBox(
+    x,
+    y,
+    z,
+    KEEP_POS.x,
+    baseY + totalH / 2,
+    KEEP_POS.z,
+    half - t,
+    totalH / 2 + 2,
+    half - t,
+  );
+  let shell = subtract(outerBox, innerBox);
+
+  // Door gap: carve a box through the south wall at ground-floor height.
+  const doorCut = sdBox(
+    x,
+    y,
+    z,
+    KEEP_POS.x,
+    baseY + KEEP_DOOR_HEIGHT / 2,
+    KEEP_POS.z - half,
+    KEEP_DOOR_HALF_WIDTH,
+    KEEP_DOOR_HEIGHT / 2,
+    t + 0.5,
+  );
+  shell = subtract(shell, doorCut);
+
+  // Floor slabs (levels 1..KEEP_FLOORS-1 as interior floor/ceilings, plus the
+  // roof at KEEP_FLOORS), each with a stairwell hole where a landing starts.
+  let slabs = Infinity;
+  for (let level = 1; level <= KEEP_FLOORS; level++) {
+    const slabY = level * KEEP_FLOOR_HEIGHT;
+    const thick = level === KEEP_FLOORS ? KEEP_ROOF_THICK : KEEP_SLAB_THICK;
+    let slab = sdBox(x, y, z, KEEP_POS.x, baseY + slabY, KEEP_POS.z, half, thick / 2, half);
+    if (level < KEEP_FLOORS) {
+      const hole = stairCutoutAt(lx, ly, lz, level);
+      slab = subtract(slab, hole);
+    }
+    slabs = union(slabs, slab);
+  }
+
+  return union(foundation, union(shell, slabs));
 }
 
 export { KEEP_STAIRS };

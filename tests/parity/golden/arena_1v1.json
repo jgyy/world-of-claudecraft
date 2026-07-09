@@ -29,7 +29,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 407,
-      "state": "d52adc86",
+      "state": "77236fb8",
       "events": "10366efa",
       "rng": {
         "draws": 0,
@@ -40,7 +40,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 407,
-      "state": "76415d02",
+      "state": "813666f2",
       "events": "084c2ae4",
       "rng": {
         "draws": 34,
@@ -51,7 +51,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 407,
-      "state": "e0ddd67a",
+      "state": "546e06f0",
       "events": "0166c11c",
       "rng": {
         "draws": 134,
@@ -62,7 +62,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 407,
-      "state": "fb041156",
+      "state": "46b4b810",
       "events": "d8f42c8c",
       "rng": {
         "draws": 254,
@@ -73,7 +73,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 407,
-      "state": "c5b1eadd",
+      "state": "9d20c363",
       "events": "57e1d7bf",
       "rng": {
         "draws": 384,
@@ -84,7 +84,7 @@
       "tick": 142,
       "time": 7.1,
       "nextId": 407,
-      "state": "62e1f7bd",
+      "state": "dbbd4e51",
       "events": "741638a5",
       "rng": {
         "draws": 482,
@@ -193,6 +193,7 @@
           "fiveSecondRule": 106.1,
           "hp": 90,
           "id": 405,
+          "keepLandingLock": -1,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -241,6 +242,7 @@
           "facing": 3.141593,
           "fiveSecondRule": 106.1,
           "id": 406,
+          "keepLandingLock": -1,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",

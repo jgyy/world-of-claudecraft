@@ -60,24 +60,29 @@ export function buildKeepView(seed: number): KeepView {
     group.add(shell);
   }
 
-  // One small glow marker per floor at its landing, only one visible at a
-  // time (the local player's current floor). Cheap, instance-free: this
-  // building is a single fixed landmark, not a repeated prop.
+  // One small glow marker (+ matching point light, since the interior has no
+  // other light source) per floor at its landing, only the local player's
+  // CURRENT floor lit at a time. Cheap, instance-free: this building is a
+  // single fixed landmark, not a repeated prop.
   const markers: THREE.Mesh[] = [];
+  const lights: THREE.PointLight[] = [];
   for (let floor = 1; floor <= KEEP_FLOORS; floor++) {
     const y = keepFloorY(seed, floor) + 0.4;
+    const color = FLOOR_MARKER_COLORS[floor - 1] ?? 0xffffff;
     const geo = new THREE.SphereGeometry(0.35, 12, 8);
-    const mat = surfaceMat({
-      color: FLOOR_MARKER_COLORS[floor - 1] ?? 0xffffff,
-      emissive: FLOOR_MARKER_COLORS[floor - 1] ?? 0xffffff,
-      emissiveIntensity: 1.2,
-    });
+    const mat = surfaceMat({ color, emissive: color, emissiveIntensity: 1.2 });
     const marker = new THREE.Mesh(geo, mat);
     marker.position.set(KEEP_POS.x, y, KEEP_POS.z);
     marker.visible = false;
     marker.name = `keep-floor-marker-${floor}`;
     group.add(marker);
     markers.push(marker);
+
+    const light = new THREE.PointLight(0xfff2d0, 6, KEEP_HALF * 3, 2);
+    light.position.set(KEEP_POS.x, y, KEEP_POS.z);
+    light.visible = false;
+    group.add(light);
+    lights.push(light);
   }
 
   return {
@@ -85,7 +90,9 @@ export function buildKeepView(seed: number): KeepView {
     update(localPlayer) {
       const active = localPlayer?.activeFloor ?? 0;
       for (let i = 0; i < markers.length; i++) {
-        markers[i].visible = active === i + 1;
+        const visible = active === i + 1;
+        markers[i].visible = visible;
+        lights[i].visible = visible;
       }
     },
   };

@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "9da6ecfe",
+      "state": "f968a1e5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -80,6 +80,7 @@
           "fiveSecondRule": 99,
           "hp": 90,
           "id": 405,
+          "keepLandingLock": -1,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -123,7 +124,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 407,
-      "state": "f4cc3693",
+      "state": "e3bd569d",
       "events": "f6df06c1",
       "rng": {
         "draws": 6,
@@ -134,7 +135,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 407,
-      "state": "85d0861c",
+      "state": "7d5521a6",
       "events": "741638a5",
       "rng": {
         "draws": 6,
@@ -145,7 +146,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 407,
-      "state": "b3ba34cc",
+      "state": "28e813e0",
       "events": "2ff6ef10",
       "rng": {
         "draws": 98,
@@ -156,7 +157,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 407,
-      "state": "1bee733f",
+      "state": "6d36145d",
       "events": "2840086f",
       "rng": {
         "draws": 154,
@@ -225,6 +226,7 @@
           "hp": 49989,
           "id": 405,
           "inCombat": true,
+          "keepLandingLock": -1,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",
@@ -279,6 +281,7 @@
           "hostile": true,
           "id": 406,
           "inCombat": true,
+          "keepLandingLock": -1,
           "kind": "mob",
           "leashAnchor": {
             "x": 4,
@@ -330,7 +333,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 407,
-      "state": "18a611ef",
+      "state": "e3eb2205",
       "events": "741638a5",
       "rng": {
         "draws": 172,
@@ -400,6 +403,7 @@
           "hp": 49989,
           "id": 405,
           "inCombat": true,
+          "keepLandingLock": -1,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",
@@ -454,6 +458,7 @@
           "hostile": true,
           "id": 406,
           "inCombat": true,
+          "keepLandingLock": -1,
           "kind": "mob",
           "leashAnchor": {
             "x": 4,

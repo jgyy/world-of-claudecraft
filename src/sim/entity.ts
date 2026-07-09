@@ -78,6 +78,7 @@ function baseEntity(id: number, pos: Vec3): Entity {
     potionCooldownUntil: -1,
     potionCdRemaining: 0,
     activeFloor: 0,
+    keepLandingLock: -1,
     savedMana: 0,
     chargeTargetId: null,
     chargeTimeLeft: 0,

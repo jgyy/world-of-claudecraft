@@ -1791,6 +1791,11 @@ export interface Entity {
   // keep_floor.ts for the transition rule; colliders.ts/voxel_building.ts key
   // the collider/render lookup for that footprint off this per-player state.
   activeFloor: 0 | 1 | 2 | 3;
+  // Index into content/keep.ts's KEEP_STAIRS the player is currently locked
+  // to (-1 = none): see keep_floor.ts's nextKeepState for why the edge-lock
+  // exists (without it, standing still on a landing would flip activeFloor
+  // every tick forever).
+  keepLandingLock: number;
   // warrior charge: forced run toward the target along a pathfound route
   chargeTargetId: number | null;
   chargeTimeLeft: number; // seconds; failsafe so a blocked charge can't run forever

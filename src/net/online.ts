@@ -843,6 +843,7 @@ function blankEntity(id: number): Entity {
     potionCooldownUntil: -1,
     potionCdRemaining: 0,
     activeFloor: 0,
+    keepLandingLock: -1,
     savedMana: 0,
     chargeTargetId: null,
     chargeTimeLeft: 0,

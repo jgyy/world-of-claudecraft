@@ -7,12 +7,14 @@
 // no RNG: same spirit as content/tunnels.ts.
 //
 // Placement chosen clear of the hub (radius 26 around 0,0), clear of every
-// ZONE1_PROPS building/prop/camp footprint, AND clear of every fixed
-// coordinate the parity golden-trace scenarios teleport to (tests/parity/
-// scenarios.ts stays within +/-100 on both axes): a quiet corner of the
-// world (world bounds are [-180,180]) well past the farthest authored POI
-// (Brightwood Glade at (40,140)).
-export const KEEP_POS = { x: 150, z: -150 };
+// ZONE1_PROPS building/prop/camp footprint, clear of every fixed coordinate
+// the parity golden-trace scenarios teleport to (tests/parity/scenarios.ts
+// stays within +/-100 on both axes), AND on flat ground: terrainHeight only
+// varies ~1.5 yd across the whole footprint here (checked via
+// scripts/probe_terrain.mjs), unlike most of the world's rolling hills, so
+// the voxel shell sits flush with the ground on every side instead of
+// clipping into a slope.
+export const KEEP_POS = { x: -120, z: -30 };
 
 // Exterior footprint is a square KEEP_HALF*2 on a side, centered on KEEP_POS.
 export const KEEP_HALF = 7;

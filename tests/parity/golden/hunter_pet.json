@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "e31e290e",
+      "state": "762ef519",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -82,6 +82,7 @@
           "fiveSecondRule": 99,
           "hp": 69,
           "id": 405,
+          "keepLandingLock": -1,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -127,7 +128,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 409,
-      "state": "4e0cfa23",
+      "state": "fb016bf3",
       "events": "43ab1dd4",
       "rng": {
         "draws": 9,
@@ -138,7 +139,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 409,
-      "state": "2b8deeaa",
+      "state": "d64f9c5a",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -149,7 +150,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 409,
-      "state": "9af5856b",
+      "state": "b31f9a6f",
       "events": "d6d42245",
       "rng": {
         "draws": 100,
@@ -160,7 +161,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 409,
-      "state": "8b05ee12",
+      "state": "38ce9926",
       "events": "741638a5",
       "rng": {
         "draws": 195,
@@ -171,7 +172,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 409,
-      "state": "5a86faae",
+      "state": "22dc0a6e",
       "events": "1b963611",
       "rng": {
         "draws": 298,
@@ -182,7 +183,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 409,
-      "state": "c51d89a7",
+      "state": "ef785f4f",
       "events": "741638a5",
       "rng": {
         "draws": 405,
@@ -193,7 +194,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 409,
-      "state": "c51d89a7",
+      "state": "ef785f4f",
       "events": "741638a5",
       "rng": {
         "draws": 405,
@@ -265,6 +266,7 @@
           "hp": 50000,
           "id": 405,
           "inCombat": true,
+          "keepLandingLock": -1,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
@@ -320,6 +322,7 @@
           "hp": 75,
           "id": 406,
           "inCombat": true,
+          "keepLandingLock": -1,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
@@ -366,6 +369,7 @@
           "hp": 49903,
           "id": 407,
           "inCombat": true,
+          "keepLandingLock": -1,
           "kind": "mob",
           "leashAnchor": {
             "x": 5.8,
@@ -428,6 +432,7 @@
           "hp": 50000,
           "id": 408,
           "inCombat": true,
+          "keepLandingLock": -1,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
