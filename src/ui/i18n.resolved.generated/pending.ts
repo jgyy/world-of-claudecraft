@@ -9,25 +9,70 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "es_ES": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "fr_FR": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "fr_CA": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
+  "it_IT": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "de_DE": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
-  "pt_BR": [],
+  "pt_BR": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
   "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "cs_CZ": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "nl_NL": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "pl_PL": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "id_ID": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "tr_TR": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "sv_SE": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "vi_VN": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ],
+  "da_DK": [
+    "hudChrome.mailbox.parcelQtyDecreaseAria",
+    "hudChrome.mailbox.parcelQtyIncreaseAria"
+  ]
 };

@@ -6783,10 +6783,48 @@
     border-radius: 6px;
     color: var(--color-text);
     font-size: 12.5px;
+  }
+  .mail-parcel-qty {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .mail-parcel-qty-value {
+    min-width: 26px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .mail-parcel-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    line-height: 1;
+    background: #ffffff10;
+    border: 1px solid #ffffff26;
+    border-radius: 4px;
+    color: var(--color-text);
     cursor: var(--cursor-point);
   }
-  .mail-parcel-chip:hover {
-    border-color: #ff9c8a55;
+  .mail-parcel-step:hover:not(:disabled) {
+    border-color: var(--color-border-focus);
+  }
+  .mail-parcel-step:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  .mail-parcel-remove-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: var(--cursor-point);
+  }
+  .mail-parcel-remove-btn:hover .mail-parcel-remove {
+    color: #ff9c8a;
   }
   .mail-parcel-remove {
     width: 10px;
