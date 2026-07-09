@@ -96,7 +96,7 @@ export function tunnelColumnAt(x: number, z: number, seed: number): TunnelColumn
 // carves an interior there, else null (ordinary terrain applies). Used by
 // pathfind.ts, which reasons about (x,z) columns only and has no notion of
 // "the mover's current y" to disambiguate a buried tunnel from the surface
-// above it — so this always prefers the tunnel floor over the surface
+// above it, so this always prefers the tunnel floor over the surface
 // wherever one exists, treating the tunnel as a real lower alternate route.
 export function tunnelFloorAt(x: number, z: number, seed: number): number | null {
   return tunnelColumnAt(x, z, seed)?.floorY ?? null;
