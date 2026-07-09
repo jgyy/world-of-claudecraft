@@ -60,10 +60,20 @@ export function buildKeepView(seed: number): KeepView {
     group.add(shell);
   }
 
-  // One small glow marker (+ matching point light, since the interior has no
-  // other light source) per floor at its landing, only the local player's
-  // CURRENT floor lit at a time. Cheap, instance-free: this building is a
-  // single fixed landmark, not a repeated prop.
+  // One small glow marker + matching point light per floor at its landing,
+  // only the local player's CURRENT floor lit at a time. The keep is an
+  // open-world building (not a dungeon interior instance), so it gets no
+  // "drop sun + sky ambient" indoor override from renderer.ts; with walls
+  // and a roof blocking daylight, the point light is the ONLY practical
+  // light source up here, same convention dungeon.ts uses for its KayKit
+  // interiors (torch PointLights carry the whole scene, see
+  // DUNGEON_LIGHT_INTENSITY/DUNGEON_LIGHT_DISTANCE). Matched to that
+  // magnitude rather than the much dimmer decorative glow this used to be,
+  // and ranged to clear the KEEP_HALF*2 footprint corner-to-corner. Cheap,
+  // instance-free: this building is a single fixed landmark, not a repeated
+  // prop.
+  const KEEP_LIGHT_INTENSITY = 42;
+  const KEEP_LIGHT_DISTANCE = KEEP_HALF * 4;
   const markers: THREE.Mesh[] = [];
   const lights: THREE.PointLight[] = [];
   for (let floor = 1; floor <= KEEP_FLOORS; floor++) {
@@ -78,8 +88,8 @@ export function buildKeepView(seed: number): KeepView {
     group.add(marker);
     markers.push(marker);
 
-    const light = new THREE.PointLight(0xfff2d0, 6, KEEP_HALF * 3, 2);
-    light.position.set(KEEP_POS.x, y, KEEP_POS.z);
+    const light = new THREE.PointLight(0xfff2d0, KEEP_LIGHT_INTENSITY, KEEP_LIGHT_DISTANCE, 2);
+    light.position.set(KEEP_POS.x, y + 2.2, KEEP_POS.z);
     light.visible = false;
     group.add(light);
     lights.push(light);

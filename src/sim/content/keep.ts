@@ -21,8 +21,17 @@ export const KEEP_HALF = 7;
 export const KEEP_WALL_THICK = 0.5;
 export const KEEP_FLOOR_HEIGHT = 4;
 export const KEEP_FLOORS = 3;
-export const KEEP_SLAB_THICK = 0.4;
-export const KEEP_ROOF_THICK = 0.5;
+// Thick enough to stay several voxels deep at the keep's mesh resolution
+// (src/render/voxel_building.ts: 64 samples over a ~18yd chunk, so a voxel is
+// ~0.28yd wide): a slab thinner than about one voxel produces a near-zero-
+// thickness surface the marching-cubes mesher resolves as two almost
+// coincident faces, which z-fights under the camera on floors 2/3 where the
+// slab is suspended mid-air (floor 1's slab sits flush on the foundation, so
+// the artifact there is masked by the ground below it). Purely a mesh
+// thickness: floor Y (keepFloorY) and collision (colliders.ts) don't depend
+// on this constant.
+export const KEEP_SLAB_THICK = 0.9;
+export const KEEP_ROOF_THICK = 0.9;
 
 // The door opening is centered on the south wall (local z = -KEEP_HALF),
 // spans ground-floor height, and is the ONLY way in: normal open-world
