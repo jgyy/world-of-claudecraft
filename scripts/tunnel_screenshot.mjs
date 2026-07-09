@@ -43,23 +43,50 @@ const LAUNCH_ARGS = [
   '--no-sandbox',
 ];
 
-const TX = 110; // the tunnel's constant x, east side of both zones
+// The tunnel S-curves in x between the two mouths (both still at x=110, see
+// content/tunnels.ts); TX_AT gives the interpolated centerline x at a given
+// z, matching the waypoint polyline exactly, so exterior/interior shots stay
+// centered on the actual passage rather than a stale constant x=110.
+const TUNNEL_WAYPOINTS_XZ = [
+  { x: 110, z: 96 },
+  { x: 116, z: 112 },
+  { x: 112, z: 131 },
+  { x: 104, z: 152 },
+  { x: 110, z: 180 },
+  { x: 116, z: 208 },
+  { x: 112, z: 229 },
+  { x: 104, z: 248 },
+  { x: 110, z: 264 },
+];
+function TX_AT(z) {
+  const wps = TUNNEL_WAYPOINTS_XZ;
+  for (let i = 0; i + 1 < wps.length; i++) {
+    const a = wps[i];
+    const b = wps[i + 1];
+    if (z >= a.z && z <= b.z) return a.x + (b.x - a.x) * ((z - a.z) / (b.z - a.z));
+  }
+  return wps[z < wps[0].z ? 0 : wps.length - 1].x;
+}
+
 // Tunnel floor at each z (see tunnel_traversal.ts's tunnelColumnAt, world
-// seed 20061, after the max-30-degree-grade profile, the two entrance
-// mounds, and the upright-mouth rework). The player stands 0.15yd above it
-// (never clips into the mesh).
+// seed 20061, round 7: deeper crest (y=-37, was -22) and both mouths moved
+// out to z=96/264 (was z=128/232) to keep every segment's grade at or under
+// 30 degrees given the extra depth - see content/tunnels.ts). The player
+// stands 0.15yd above it (never clips into the mesh).
 const FLOOR = {
-  163: -19.04,
-  167: -21.22,
-  170: -22.85,
-  174: -25.53,
-  177: -26.71,
-  178.5: -26.96,
-  180: -27.04,
-  183: -26.71,
-  187: -24.79,
-  190: -22.85,
-  194: -20.68,
+  152: -28.14,
+  163: -34.06,
+  167: -36.21,
+  170: -37.81,
+  174: -40.44,
+  177: -41.69,
+  178.5: -41.96,
+  180: -42.04,
+  183: -41.69,
+  187: -39.68,
+  190: -38.32,
+  194: -36.5,
+  208: -30.1,
 };
 const standY = (z) => FLOOR[z] + 0.15;
 // Base eye height for interior shots: floor + standing height + a bit more,
@@ -67,20 +94,23 @@ const standY = (z) => FLOOR[z] + 0.15;
 const eyeY = (z) => FLOOR[z] + 2.2;
 
 // Exterior shots: ordinary chase camera, character renders normally. Mouths
-// now sit at z=128/232 (moved out from 146/214 to keep every segment's
-// grade at or under 30 degrees given the deeper crest - see
-// content/tunnels.ts), each cut into its own protruding entrance mound
-// (moundRadius 14yd) rather than just a dip in the ambient ridge slope. 8
-// shots.
+// now sit at z=96/264 (round 7: moved out from z=128/232 to keep every
+// segment's grade at or under 30 degrees given the deeper crest - see
+// content/tunnels.ts), each cut into its own irregular, foliage-framed
+// entrance mound (moundRadius 14yd) rather than just a dip in the ambient
+// ridge slope. Also includes two wide overhead-ish shots (00/00b) that show
+// the S-curve path from above. 10 shots.
 const EXTERIOR_SHOTS = [
-  { name: '01_wide_establishing_zone1', z: 70, camDist: 16, camPitch: -0.05, camYaw: 0 },
-  { name: '02_approaching_ridge', z: 100, camDist: 12, camPitch: -0.1, camYaw: 0 },
-  { name: '03_mouth_a_exterior_wide', z: 118, camDist: 9, camPitch: -0.15, camYaw: 0 },
-  { name: '04_mouth_a_closeup', z: 126, camDist: 6, camPitch: -0.05, camYaw: 0 },
-  { name: '05_mouth_a_closeup_side_angle', z: 126, camDist: 6, camPitch: -0.04, camYaw: 0.5 },
-  { name: '06_mouth_b_closeup', z: 234, camDist: 6, camPitch: -0.05, camYaw: Math.PI },
-  { name: '07_mouth_b_exterior_wide', z: 246, camDist: 9, camPitch: -0.15, camYaw: Math.PI },
-  { name: '08_wide_establishing_zone2', z: 270, camDist: 16, camPitch: -0.05, camYaw: Math.PI },
+  { name: '00_overhead_scurve_zone1', z: 130, camDist: 40, camPitch: -0.9, camYaw: 0.15 },
+  { name: '00b_overhead_scurve_full', z: 180, camDist: 60, camPitch: -0.95, camYaw: 0.15 },
+  { name: '01_wide_establishing_zone1', z: 40, camDist: 16, camPitch: -0.05, camYaw: 0 },
+  { name: '02_approaching_ridge', z: 68, camDist: 14, camPitch: -0.1, camYaw: 0 },
+  { name: '03_mouth_a_exterior_wide', z: 80, camDist: 15, camPitch: -0.12, camYaw: 0 },
+  { name: '04_mouth_a_closeup', z: 90, camDist: 11, camPitch: -0.03, camYaw: 0 },
+  { name: '05_mouth_a_closeup_side_angle', z: 90, camDist: 11, camPitch: -0.02, camYaw: 0.5 },
+  { name: '06_mouth_b_closeup', z: 270, camDist: 11, camPitch: -0.03, camYaw: Math.PI },
+  { name: '07_mouth_b_exterior_wide', z: 280, camDist: 15, camPitch: -0.12, camYaw: Math.PI },
+  { name: '08_wide_establishing_zone2', z: 300, camDist: 16, camPitch: -0.05, camYaw: Math.PI },
 ];
 
 // Interior shots: free editorCam, framed down the tunnel's own axis but
@@ -102,112 +132,130 @@ const EXTERIOR_SHOTS = [
 // against the live voxel field with isSolidVoxel, not eyeballed.
 const INTERIOR_SHOTS = [
   {
-    name: '09_descending_1',
+    name: '09_entering_scurve',
+    z: 152,
+    camDx: 1.4,
+    camDz: -2.6,
+    camDy: 1.37,
+    lookDz: 7,
+    lookDy: -3.78,
+  },
+  {
+    name: '10_descending_1',
     z: 163,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: 1.63,
+    camDy: 1.4,
     lookDz: 7,
-    lookDy: -3.41,
+    lookDy: -3.75,
   },
   {
-    name: '10_descending_2',
+    name: '11_descending_2',
     z: 167,
     camDx: -1.4,
     camDz: -2.6,
-    camDy: 1.62,
+    camDy: 1.39,
     lookDz: 7,
-    lookDy: -3.91,
+    lookDy: -4.24,
   },
   {
-    name: '11_descending_3',
+    name: '12_descending_3',
     z: 170,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: 1.61,
+    camDy: 1.39,
     lookDz: 7,
-    lookDy: -3.46,
+    lookDy: -3.88,
   },
   {
-    name: '12_approaching_crest_1',
+    name: '13_approaching_crest_1',
     z: 174,
     camDx: -1.4,
     camDz: -2.6,
-    camDy: 2.12,
+    camDy: 1.88,
     lookDz: 7,
-    lookDy: -1.08,
+    lookDy: -1.56,
   },
   {
-    name: '13_approaching_crest_2',
+    name: '14_approaching_crest_2',
     z: 177,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: 1.15,
+    camDy: 1.0,
     lookDz: 7,
-    lookDy: 0.68,
+    lookDy: 0.29,
   },
   {
-    name: '14_near_crest',
+    name: '15_near_crest',
     z: 178.5,
     camDx: -1.4,
     camDz: -2.6,
-    camDy: 0.76,
+    camDy: 0.59,
     lookDz: 7,
-    lookDy: 1.55,
+    lookDy: 1.21,
   },
   {
-    name: '15_crest_boundary_z180',
+    name: '16_crest_boundary_z180_deep',
     z: 180,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: 0.45,
+    camDy: 0.26,
     lookDz: 7,
-    lookDy: 2.65,
+    lookDy: 2.36,
   },
   {
-    name: '16_crest_boundary_z180_facing_back',
+    name: '17_crest_boundary_z180_facing_back',
     z: 180,
     camDx: -1.4,
     camDz: 2.6,
-    camDy: 0.45,
+    camDy: 0.26,
     lookDz: -7,
-    lookDy: 2.65,
+    lookDy: 2.36,
   },
   {
-    name: '17_past_crest',
+    name: '18_past_crest',
     z: 183,
     camDx: -1.4,
     camDz: -2.6,
-    camDy: -0.13,
+    camDy: -0.34,
     lookDz: 7,
-    lookDy: 4.26,
+    lookDy: 3.37,
   },
   {
-    name: '18_ascending_1',
+    name: '19_ascending_1',
     z: 187,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: -1.31,
+    camDy: -1.57,
     lookDz: 7,
-    lookDy: 4.51,
+    lookDy: 3.18,
   },
   {
-    name: '19_ascending_2',
+    name: '20_ascending_2',
     z: 190,
     camDx: -1.4,
     camDz: -2.6,
-    camDy: -1.34,
+    camDy: -1.18,
     lookDz: 7,
-    lookDy: 4.21,
+    lookDy: 3.19,
   },
   {
-    name: '20_ascending_3',
+    name: '21_ascending_3',
     z: 194,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: -1.21,
+    camDy: -1.18,
     lookDz: 7,
-    lookDy: 4.02,
+    lookDy: 3.19,
+  },
+  {
+    name: '22_leaving_scurve',
+    z: 208,
+    camDx: -1.4,
+    camDz: -2.6,
+    camDy: -1.19,
+    lookDz: 7,
+    lookDy: 3.16,
   },
 ];
 
@@ -256,7 +304,7 @@ for (const s of EXTERIOR_SHOTS) {
       g.input.camPitch = shot.camPitch;
       g.input.camDist = shot.camDist;
     },
-    { ...s, x: TX },
+    { ...s, x: TX_AT(s.z) },
   );
   await capture(s.name);
 }
@@ -283,7 +331,7 @@ for (const s of INTERIOR_SHOTS) {
         },
       };
     },
-    { ...s, x: TX, standY: standY(s.z), eyeY: eyeY(s.z) },
+    { ...s, x: TX_AT(s.z), standY: standY(s.z), eyeY: eyeY(s.z) },
   );
   await capture(s.name);
 }

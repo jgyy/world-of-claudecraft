@@ -1,7 +1,13 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { WORLD_MAX_X, WORLD_MAX_Z, WORLD_MIN_Z } from '../sim/data';
-import { chunkNearAnyTunnel, TUNNELS, tunnelBounds, voxelDensity } from '../sim/voxel';
+import {
+  chunkNearAnyTunnel,
+  TUNNELS,
+  tunnelBounds,
+  tunnelInteriorFactor,
+  voxelDensity,
+} from '../sim/voxel';
 import { meshVoxelChunk } from '../sim/voxel_mesh';
 import { terrainHeight } from '../sim/world';
 import { loadTexture } from './assets/loader';
@@ -102,6 +108,88 @@ function addBoulder(group: THREE.Group, x: number, y: number, z: number, scale: 
   group.add(boulder);
 }
 
+// Organic mouth dressing: a scatter of hanging branches with leaf clumps
+// framing the top of the archway, plus a short dirt/rock path patch leading
+// from the threshold outward, matching the reference photo (rounded rock
+// archway in a grassy hillside, foliage overhanging the opening, a visible
+// path leading in). All offsets are deterministic (a fixed function of the
+// waypoint's own position and a hand-picked `side`/`lobe` index), never
+// Math.random, so the same mouth always dresses identically.
+const LEAF_COLOR = 0x3d6b2e;
+const BRANCH_COLOR = 0x4a3826;
+const PATH_COLOR = 0x6b5a44;
+let leafGeo: THREE.IcosahedronGeometry | null = null;
+let branchGeo: THREE.CylinderGeometry | null = null;
+let pathGeo: THREE.CircleGeometry | null = null;
+
+function addHangingBranch(
+  group: THREE.Group,
+  x: number,
+  y: number,
+  z: number,
+  lean: number,
+  scale: number,
+): void {
+  branchGeo ??= new THREE.CylinderGeometry(0.06, 0.1, 1.6, 5);
+  const branch = new THREE.Mesh(
+    branchGeo,
+    new THREE.MeshStandardMaterial({ color: BRANCH_COLOR, roughness: 1 }),
+  );
+  branch.position.set(x, y, z);
+  branch.rotation.set(Math.PI * 0.5 + lean * 0.55, lean * 1.3, lean * 0.3);
+  branch.scale.setScalar(scale);
+  branch.castShadow = true;
+  group.add(branch);
+
+  leafGeo ??= new THREE.IcosahedronGeometry(1, 0);
+  for (let k = 0; k < 3; k++) {
+    const leaf = new THREE.Mesh(leafGeo, new THREE.MeshLambertMaterial({ color: LEAF_COLOR }));
+    const spread = 0.5 + k * 0.35;
+    leaf.position.set(
+      x + Math.sin(lean * 4 + k * 2.1) * spread * scale,
+      y - 0.5 * scale - k * 0.35 * scale,
+      z + Math.cos(lean * 3 + k * 1.7) * spread * scale,
+    );
+    leaf.scale.set(0.55 * scale, 0.4 * scale, 0.55 * scale);
+    leaf.rotation.set(k * 1.1, k * 2.3, k * 0.7);
+    leaf.castShadow = true;
+    leaf.receiveShadow = true;
+    group.add(leaf);
+  }
+}
+
+function addMouthFoliage(
+  group: THREE.Group,
+  w: { x: number; y: number; z: number; radius: number },
+): void {
+  // A handful of overhanging branches ringing the top of the archway, at a
+  // spread of deterministic angles/heights so the canopy reads as irregular
+  // rather than a symmetric fringe.
+  const lobes = [-1.1, -0.5, 0.15, 0.7, 1.2];
+  for (let i = 0; i < lobes.length; i++) {
+    const lean = lobes[i];
+    const archTop = w.y + w.radius * 1.9; // near the top of the archScale-domed opening
+    const lateral = w.x + Math.sin(lean * 1.7) * w.radius * 0.9;
+    const depth = w.z + Math.cos(lean * 1.3) * w.radius * 0.35;
+    addHangingBranch(group, lateral, archTop, depth, lean, 0.85 + 0.2 * ((i % 3) - 1));
+  }
+
+  // A short dirt/rock path patch on the ground just outside the threshold,
+  // leading away from the mouth, so the entrance reads as an approached
+  // doorway rather than an isolated hole in the hillside.
+  pathGeo ??= new THREE.CircleGeometry(1, 10);
+  const path = new THREE.Mesh(
+    pathGeo,
+    new THREE.MeshStandardMaterial({ color: PATH_COLOR, roughness: 1 }),
+  );
+  const outward = w.z < 180 ? -1 : 1; // lead away from the ridge crest, toward open ground
+  path.rotation.x = -Math.PI / 2;
+  path.position.set(w.x, w.y - w.radius * 0.55, w.z + outward * w.radius * 2.3);
+  path.scale.set(w.radius * 0.55, w.radius * 1.0, 1);
+  path.receiveShadow = true;
+  group.add(path);
+}
+
 function addDecorations(group: THREE.Group): void {
   for (const tunnel of TUNNELS) {
     const wps = tunnel.waypoints;
@@ -115,6 +203,9 @@ function addDecorations(group: THREE.Group): void {
         addBoulder(group, w.x + w.radius * 0.78, w.y - w.radius * 0.82, w.z, w.radius * 0.16);
         addBoulder(group, w.x - w.radius * 0.82, w.y - w.radius * 0.85, w.z + 1.2, w.radius * 0.12);
       }
+    }
+    for (const w of [wps[0], wps[wps.length - 1]]) {
+      if (w.mound) addMouthFoliage(group, w);
     }
   }
 }
@@ -195,6 +286,23 @@ function heightBand(region: PatchRegion, seed: number): { min: number; max: numb
   return { min: min - HEIGHT_MARGIN, max: max + HEIGHT_MARGIN };
 }
 
+// Computes and attaches the `aTunnelInterior` custom vertex attribute (see
+// the shader wiring above) from the pure sim helper tunnelInteriorFactor,
+// one sample per vertex of the given (already positioned/rotated/translated)
+// geometry. Applied to every geometry using the shared tunnel material,
+// including the backstop planes, so the shader's declared attribute is
+// always present (a geometry missing a declared attribute is undefined
+// behavior in WebGL).
+function addInteriorAttribute(geo: THREE.BufferGeometry, seed: number): THREE.BufferGeometry {
+  const pos = geo.getAttribute('position');
+  const arr = new Float32Array(pos.count);
+  for (let i = 0; i < pos.count; i++) {
+    arr[i] = tunnelInteriorFactor(pos.getX(i), pos.getY(i), pos.getZ(i), seed);
+  }
+  geo.setAttribute('aTunnelInterior', new THREE.BufferAttribute(arr, 1));
+  return geo;
+}
+
 export function buildTunnelOverlay(seed: number): TunnelOverlayView {
   const group = new THREE.Group();
   group.name = 'tunnel-overlay';
@@ -219,14 +327,17 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
     shader.vertexShader = shader.vertexShader.replace(
       '#include <common>',
       `#include <common>
+      attribute float aTunnelInterior;
       varying vec3 vWorldPos;
-      varying vec3 vWorldNormal;`,
+      varying vec3 vWorldNormal;
+      varying float vTunnelInterior;`,
     );
     shader.vertexShader = shader.vertexShader.replace(
       '#include <begin_vertex>',
       `#include <begin_vertex>
       vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
-      vWorldNormal = normalize(mat3(modelMatrix) * normal);`,
+      vWorldNormal = normalize(mat3(modelMatrix) * normal);
+      vTunnelInterior = aTunnelInterior;`,
     );
     shader.fragmentShader = shader.fragmentShader.replace(
       '#include <common>',
@@ -235,6 +346,7 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
       uniform sampler2D rockMap;
       varying vec3 vWorldPos;
       varying vec3 vWorldNormal;
+      varying float vTunnelInterior;
       vec3 triplanar(sampler2D tex, vec3 pos, vec3 blend, float scale) {
         vec3 xCol = texture2D(tex, pos.yz * scale).rgb;
         vec3 yCol = texture2D(tex, pos.xz * scale).rgb;
@@ -251,11 +363,21 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
         // Grass on up-facing, walkable ground; rock everywhere steeper -
         // the tunnel's own walls and ceiling are always steep-to-vertical
         // or facing downward, so they read as bare rock, same as the
-        // production terrain's own slope-based blend (terrain.ts).
+        // production terrain's own slope-based blend (terrain.ts). That
+        // slope-only test is WRONG for the tunnel's own flattened floor
+        // (floorScale makes it face upward like ordinary ground, even
+        // though it is buried underground): vTunnelInterior (computed per-
+        // vertex from the pure sim helper tunnelInteriorFactor, see
+        // voxel.ts) forces full rock whenever the point is genuinely
+        // underground and close to a carved tunnel passage, regardless of
+        // its local surface normal, while leaving the mound's own grassy
+        // exterior (which sits at/above ambient ground level) on the
+        // ordinary slope-based blend.
         float slopeT = clamp(1.0 - (n.y - 0.3) / 0.5, 0.0, 1.0);
+        float rockT = max(slopeT, vTunnelInterior);
         vec3 grassAlb = triplanar(grassMap, vWorldPos, blend, 0.05);
         vec3 rockAlb = triplanar(rockMap, vWorldPos, blend, 0.045);
-        diffuseColor.rgb *= mix(grassAlb, rockAlb, slopeT);
+        diffuseColor.rgb *= mix(grassAlb, rockAlb, rockT);
       }`,
     );
   };
@@ -314,6 +436,7 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
   if (geos.length > 0) {
     const merged = geos.length === 1 ? geos[0] : mergeGeometries(geos, false);
     if (merged) {
+      addInteriorAttribute(merged, seed);
       const patchMesh = new THREE.Mesh(merged, material);
       patchMesh.name = 'tunnel-overlay-patch';
       patchMesh.receiveShadow = true;
@@ -366,6 +489,7 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
     if (rotateX) geo.rotateX(rotateX);
     if (rotateY) geo.rotateY(rotateY);
     geo.translate(x, y, z);
+    addInteriorAttribute(geo, seed);
     const mesh = new THREE.Mesh(geo, material);
     mesh.name = name;
     mesh.matrixAutoUpdate = false;

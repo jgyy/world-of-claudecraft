@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { isSolidVoxel, TUNNELS, tunnelBounds, voxelDensity } from '../src/sim/voxel';
+import {
+  isSolidVoxel,
+  TUNNELS,
+  tunnelBounds,
+  tunnelInteriorFactor,
+  voxelDensity,
+} from '../src/sim/voxel';
 import { terrainHeight } from '../src/sim/world';
 
 describe('voxel density field', () => {
@@ -111,6 +117,22 @@ describe('vale_marsh_ridge_tunnel (zone1 <-> zone2 through-tunnel)', () => {
     }
   });
 
+  it('both mouths are cut into an irregular (non-perfectly-circular) entrance mound', () => {
+    const mouths = [tunnel.waypoints[0], tunnel.waypoints[tunnel.waypoints.length - 1]];
+    for (const m of mouths) {
+      const moundRadius = m.moundRadius ?? m.radius + 4;
+      const moundHeight = m.moundHeight ?? 8;
+      const surface = terrainHeight(m.x, m.z, seed);
+      const midY = surface + moundHeight * 0.5;
+      // Sampling solidity at the same radial distance but different angles
+      // around the mound center should not agree everywhere: an irregular
+      // silhouette pokes out further on some sides than others.
+      const density0 = voxelDensity(m.x + moundRadius, midY, m.z, seed);
+      const density90 = voxelDensity(m.x, midY, m.z + moundRadius, seed);
+      expect(density0).not.toBeCloseTo(density90, 3);
+    }
+  });
+
   it('both mouths are cut into a protruding entrance mound', () => {
     const mouths = [tunnel.waypoints[0], tunnel.waypoints[tunnel.waypoints.length - 1]];
     for (const m of mouths) {
@@ -127,5 +149,47 @@ describe('vale_marsh_ridge_tunnel (zone1 <-> zone2 through-tunnel)', () => {
       expect(isSolidVoxel(sideX, moundMidY, m.z, seed)).toBe(true);
       expect(voxelDensity(sideX, moundMidY, m.z, seed)).toBeLessThan(0);
     }
+  });
+});
+
+describe('tunnelInteriorFactor', () => {
+  const seed = 20061;
+  const tunnel = TUNNELS.find((t) => t.id === 'vale_marsh_ridge_tunnel')!;
+  const crest = tunnel.waypoints.find((w) => w.z === 180)!;
+
+  it('is a pure function: same inputs always give the same factor', () => {
+    const a = tunnelInteriorFactor(crest.x, crest.y, crest.z, seed);
+    const b = tunnelInteriorFactor(crest.x, crest.y, crest.z, seed);
+    expect(a).toBe(b);
+  });
+
+  it('is 1 deep inside the tunnel passage, well underground', () => {
+    expect(tunnelInteriorFactor(crest.x, crest.y, crest.z, seed)).toBeCloseTo(1, 5);
+  });
+
+  it('is 0 up on the open, above-ground world surface, far from any tunnel', () => {
+    const x = -400;
+    const z = -400;
+    const surface = terrainHeight(x, z, seed);
+    expect(tunnelInteriorFactor(x, surface + 2, z, seed)).toBe(0);
+  });
+
+  it('is 0 on a mound entrance exterior (at/above ambient ground level), even close to a mouth', () => {
+    const mouth = tunnel.waypoints[0];
+    const surface = terrainHeight(mouth.x, mouth.z, seed);
+    const moundRadius = mouth.moundRadius ?? mouth.radius + 4;
+    const moundHeight = mouth.moundHeight ?? 8;
+    // On the mound's own grassy exterior slope, above ambient ground level.
+    const sideX = mouth.x + moundRadius * 0.6;
+    const y = surface + moundHeight * 0.4;
+    expect(tunnelInteriorFactor(sideX, y, mouth.z, seed)).toBe(0);
+  });
+
+  it('is 0 underground far away from any tunnel passage', () => {
+    // Deep below ambient ground, but nowhere near a tunnel's carved capsule.
+    const x = -400;
+    const z = -400;
+    const surface = terrainHeight(x, z, seed);
+    expect(tunnelInteriorFactor(x, surface - 30, z, seed)).toBe(0);
   });
 });

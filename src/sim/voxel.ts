@@ -81,6 +81,23 @@ function segmentCarve(
 // sampled. Only ever adds material ABOVE that ground level (a real
 // protruding knoll the tunnel mouth is cut into), never below it, where the
 // ordinary terrain density already applies.
+// Deterministic, hand-authored angular "irregularity" applied to a mound's
+// lateral radius and height: a fixed sum of a few sine lobes around the
+// mound's own (x, z) center, NOT randomness (no Rng, no seed dependence) -
+// just a shaped, always-the-same silhouette so the entrance mound reads as
+// an organic, irregular knoll (per the cave-entrance reference photo)
+// instead of a perfect dome. The tunnel's own carved doorway (segmentCarve)
+// is untouched by this, so the opening itself always stays a clean walkable
+// passage; only the surrounding rock/grass knoll gets the lumpy silhouette.
+function moundIrregularity(angle: number): number {
+  return (
+    1 +
+    0.16 * Math.sin(angle * 3 + 0.6) +
+    0.09 * Math.cos(angle * 5 + 2.1) +
+    0.05 * Math.sin(angle * 7 + 4.4)
+  );
+}
+
 function moundSolidAmount(
   x: number,
   y: number,
@@ -93,11 +110,45 @@ function moundSolidAmount(
   const base = terrainHeight(w.x, w.z, seed);
   const dy = y - base;
   if (dy < 0) return -Infinity;
-  const qx = (x - w.x) / moundRadius;
-  const qy = dy / moundHeight;
-  const qz = (z - w.z) / moundRadius;
+  const angle = Math.atan2(z - w.z, x - w.x);
+  const irregular = moundIrregularity(angle);
+  const irregularRadius = moundRadius * irregular;
+  const irregularHeight = moundHeight * (0.94 + 0.06 * irregular);
+  const qx = (x - w.x) / irregularRadius;
+  const qy = dy / irregularHeight;
+  const qz = (z - w.z) / irregularRadius;
   const qlen = Math.sqrt(qx * qx + qy * qy + qz * qz);
-  return moundHeight * (1 - qlen);
+  return irregularHeight * (1 - qlen);
+}
+
+// Pure 0..1 "how deep inside a carved tunnel passage" factor at a world
+// point, used by the renderer (tunnel_overlay.ts) to force the interior
+// floor/walls/ceiling to always read as bare rock, never grass: the
+// existing shader's grass/rock blend keys purely on surface normal slope,
+// which is wrong for the tunnel's flattened, upward-facing floor
+// (floorScale makes it face up like ordinary ground even though it is
+// buried underground). Two conditions both have to hold: the point must sit
+// meaningfully BELOW the ambient outdoor terrain height (so a mound's own
+// grassy exterior, which sits AT or ABOVE ambient ground level, is never
+// affected), and it must be close to some tunnel segment's own carved
+// capsule (so open-air pockets far from any tunnel are not incorrectly
+// forced to rock). Ramps in over a few yards on each axis rather than a
+// hard cutoff, so the shader blend it feeds stays smooth.
+export function tunnelInteriorFactor(x: number, y: number, z: number, seed: number): number {
+  const ambient = terrainHeight(x, z, seed);
+  const depthBelowAmbient = ambient - y;
+  if (depthBelowAmbient <= 0) return 0;
+  const depthT = clamp01(depthBelowAmbient / 3);
+  let bestCarve = -Infinity;
+  for (const tunnel of TUNNELS) {
+    for (let i = 0; i + 1 < tunnel.waypoints.length; i++) {
+      const carve = segmentCarve(x, y, z, tunnel.waypoints[i], tunnel.waypoints[i + 1]);
+      if (carve > bestCarve) bestCarve = carve;
+    }
+  }
+  const PROXIMITY_MARGIN = 6; // yd of falloff beyond the carved radius still counted as "near the passage"
+  const proximityT = clamp01((bestCarve + PROXIMITY_MARGIN) / PROXIMITY_MARGIN);
+  return clamp01(Math.min(depthT, proximityT));
 }
 
 // True 3D voxel density at a world point: negative = solid, positive = air,
