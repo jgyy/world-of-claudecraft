@@ -2426,6 +2426,11 @@ async function startGame(
         },
       );
       introCameraTick(now);
+      // The keep (sim/content/keep.ts): tighten the zoom-out cap while the
+      // local player is inside so the chase cam can never pull back through
+      // the walls to see the exterior or another floor (graphics settings
+      // stay gameplay-neutral; this is a visual-integrity clamp, not a tier).
+      input.setMaxZoomDist(offlineSim.player.activeFloor ? 6 : 22);
       renderer.camYaw = input.camYaw;
       renderer.camPitch = input.camPitch;
       renderer.camDist = input.camDist;
@@ -2562,6 +2567,7 @@ async function startGame(
       lastSnapAge: net.lastSnapAt > 0 ? performance.now() - net.lastSnapAt : -1,
     });
     introCameraTick(now);
+    input.setMaxZoomDist(net.player.activeFloor ? 6 : 22);
     renderer.camYaw = input.camYaw;
     renderer.camPitch = input.camPitch;
     renderer.camDist = input.camDist;

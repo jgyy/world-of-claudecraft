@@ -1786,6 +1786,11 @@ export interface Entity {
   // gcdRemaining) so the action bar can paint a cooldown swipe without a client
   // clock. Derived from potionCooldownUntil; excluded from the parity trace.
   potionCdRemaining: number;
+  // The Eastbrook Vale keep (content/keep.ts): 0 outside, 1..3 the floor the
+  // player is currently standing on inside the keep's fixed footprint. See
+  // keep_floor.ts for the transition rule; colliders.ts/voxel_building.ts key
+  // the collider/render lookup for that footprint off this per-player state.
+  activeFloor: 0 | 1 | 2 | 3;
   // warrior charge: forced run toward the target along a pathfound route
   chargeTargetId: number | null;
   chargeTimeLeft: number; // seconds; failsafe so a blocked charge can't run forever

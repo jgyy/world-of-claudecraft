@@ -842,6 +842,7 @@ function blankEntity(id: number): Entity {
     overpowerUntil: -1,
     potionCooldownUntil: -1,
     potionCdRemaining: 0,
+    activeFloor: 0,
     savedMana: 0,
     chargeTargetId: null,
     chargeTimeLeft: 0,
@@ -1767,6 +1768,7 @@ export class ClientWorld implements IWorld {
       }
       e.gcdRemaining = s.gcd ?? 0;
       e.potionCdRemaining = s.pcd ?? 0;
+      e.activeFloor = (s.af ?? 0) as Entity['activeFloor'];
       e.comboPoints = s.combo ?? 0;
       e.targetId = s.target ?? null;
       e.autoAttack = !!s.auto;

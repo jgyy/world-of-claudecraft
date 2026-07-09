@@ -1,4 +1,11 @@
 import {
+  KEEP_DOOR_HALF_WIDTH,
+  KEEP_HALF,
+  KEEP_POS,
+  KEEP_STAIRS,
+  KEEP_WALL_THICK,
+} from './content/keep';
+import {
   arenaOriginAt,
   DUNGEON_X_THRESHOLD,
   defaultDelveModules,
@@ -71,6 +78,79 @@ export type Collider = CircleCollider | ObbCollider;
 
 function topY(seed: number, x: number, z: number, height: number): number {
   return groundHeight(x, z, seed) + height;
+}
+
+// ---------------------------------------------------------------------------
+// The Eastbrook Vale keep (content/keep.ts): a real open-world, multi-floor
+// building at ONE fixed (x,z). The exterior wall footprint (with its door
+// gap) is IDENTICAL on every floor, so it needs no per-player state and just
+// joins the normal static grid like any other prop. Only the small per-floor
+// furnishing collider below is picked per player (see `keepFloor` threaded
+// through resolvePosition/resolveMovement/isBlocked), the bespoke stand-in
+// for "swap the collider lookup based on activeFloor" that colliders.ts'
+// column-based model can otherwise never represent.
+// ---------------------------------------------------------------------------
+
+export function isInsideKeepPos(x: number, z: number): boolean {
+  return Math.abs(x - KEEP_POS.x) <= KEEP_HALF && Math.abs(z - KEEP_POS.z) <= KEEP_HALF;
+}
+
+function keepExteriorWallColliders(seed: number): Collider[] {
+  const topOfWalls = topY(seed, KEEP_POS.x, KEEP_POS.z, 12);
+  const wall = (x: number, z: number, hw: number, hd: number, rot: number): ObbCollider => ({
+    type: 'obb',
+    x,
+    z,
+    hw,
+    hd,
+    rot,
+    cameraTopY: topOfWalls,
+  });
+  const t = KEEP_WALL_THICK;
+  const half = KEEP_HALF;
+  const doorHalf = KEEP_DOOR_HALF_WIDTH;
+  return [
+    // north
+    wall(KEEP_POS.x, KEEP_POS.z + half - t / 2, half, t / 2, 0),
+    // east / west
+    wall(KEEP_POS.x + half - t / 2, KEEP_POS.z, t / 2, half, 0),
+    wall(KEEP_POS.x - half + t / 2, KEEP_POS.z, t / 2, half, 0),
+    // south, split around the door opening
+    wall(
+      KEEP_POS.x + (half + doorHalf) / 2,
+      KEEP_POS.z - half + t / 2,
+      (half - doorHalf) / 2,
+      t / 2,
+      0,
+    ),
+    wall(
+      KEEP_POS.x - (half + doorHalf) / 2,
+      KEEP_POS.z - half + t / 2,
+      (half - doorHalf) / 2,
+      t / 2,
+      0,
+    ),
+  ];
+}
+
+// One small furnishing collider per floor, positioned differently each floor:
+// the visible, testable proof that the collider LOOKUP for this footprint is
+// actually swapped per activeFloor, not just the render mesh.
+function keepFloorFurnitureCollider(seed: number, floor: number): Collider {
+  const landing = KEEP_STAIRS[Math.min(floor - 1, KEEP_STAIRS.length - 1)] ?? KEEP_STAIRS[0];
+  return {
+    type: 'circle',
+    x: landing.x,
+    z: landing.z + 2.2,
+    r: 0.5,
+    cameraTopY: topY(seed, landing.x, landing.z, 1.2),
+  };
+}
+
+/** Colliders active inside the keep footprint for a given player's activeFloor
+ * (1..3; defaults to 1 for any caller that doesn't know a floor yet). */
+export function keepColliders(seed: number, floor = 1): Collider[] {
+  return [...keepExteriorWallColliders(seed), keepFloorFurnitureCollider(seed, floor)];
 }
 
 // rotate a local offset by a three.js rotation.y angle
@@ -430,7 +510,11 @@ export function resolvePosition(
   r = 0.5,
   ignoreFences = false,
   delveModules?: readonly string[],
+  keepFloor?: number,
 ): { x: number; z: number } {
+  if (isInsideKeepPos(x, z)) {
+    return resolveAgainst(keepColliders(seed, keepFloor ?? 1), x, z, r, ignoreFences);
+  }
   if (isYumiMazePos(x)) {
     const o = yumiMazeOriginAt(z);
     const local = resolveAgainst(yumiMazeColliders(), x - o.x, z - o.z, r);
@@ -500,11 +584,12 @@ export function resolveMovement(
   r = 0.5,
   ignoreFences = false,
   delveModules?: readonly string[],
+  keepFloor?: number,
 ): { x: number; z: number } {
   const dx = toX - fromX;
   const dz = toZ - fromZ;
   const d = Math.hypot(dx, dz);
-  if (d < 1e-6) return resolvePosition(seed, toX, toZ, r, ignoreFences, delveModules);
+  if (d < 1e-6) return resolvePosition(seed, toX, toZ, r, ignoreFences, delveModules, keepFloor);
   const steps = Math.max(1, Math.ceil(d / 0.2));
   let x = fromX,
     z = fromZ;
@@ -513,7 +598,7 @@ export function resolveMovement(
     const nextX = fromX + dx * t;
     const nextZ = fromZ + dz * t;
     if (!ignoreFences && crossesFence(x, z, nextX, nextZ, r)) break;
-    const resolved = resolvePosition(seed, nextX, nextZ, r, ignoreFences, delveModules);
+    const resolved = resolvePosition(seed, nextX, nextZ, r, ignoreFences, delveModules, keepFloor);
     x = resolved.x;
     z = resolved.z;
     if (Math.hypot(x - nextX, z - nextZ) > r * 0.25) {
@@ -534,8 +619,9 @@ export function isBlocked(
   r = 0.5,
   ignoreFences = false,
   delveModules?: readonly string[],
+  keepFloor?: number,
 ): boolean {
-  const res = resolvePosition(seed, x, z, r, ignoreFences, delveModules);
+  const res = resolvePosition(seed, x, z, r, ignoreFences, delveModules, keepFloor);
   return Math.abs(res.x - x) > 1e-4 || Math.abs(res.z - z) > 1e-4;
 }
 
@@ -679,7 +765,11 @@ export function cameraOcclusion(
   bz: number,
   pad = 0.35,
   delveModules?: readonly string[],
+  keepFloor?: number,
 ): number {
+  if (isInsideKeepPos(ax, az) || isInsideKeepPos(bx, bz)) {
+    return sweepColliders(keepColliders(seed, keepFloor ?? 1), ax, ay, az, bx, by, bz, pad, false);
+  }
   if (isYumiMazePos(ax)) {
     const o = yumiMazeOriginAt(az);
     return sweepColliders(

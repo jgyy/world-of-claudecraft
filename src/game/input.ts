@@ -115,6 +115,11 @@ export class Input {
   camYaw = Math.PI;
   camPitch = 0.32;
   camDist = 12;
+  // Fairness/visual-integrity clamp: normally 22 (the standard chase-cam max).
+  // main.ts tightens this while the local player is inside the keep (see
+  // sim/keep_floor.ts's activeFloor) so the camera can never zoom out through
+  // the walls to see the exterior/other floors; it restores 22 on exit.
+  maxZoomDist = 22;
   autorun = false;
   suspendMovement = false;
   // click-to-move (#95): a world destination the player clicked; the frame loop
@@ -279,7 +284,15 @@ export class Input {
 
   /** Move the camera in/out, clamped to the zoom limits. Shared by wheel + touch pinch. */
   zoomBy(delta: number): void {
-    this.camDist = Math.min(22, Math.max(3, this.camDist + delta));
+    this.camDist = Math.min(this.maxZoomDist, Math.max(3, this.camDist + delta));
+  }
+
+  /** Tighten (or restore) the zoom-out cap; re-clamps the CURRENT distance too,
+   * so a player already zoomed out gets pulled in the instant the cap tightens
+   * (e.g. walking into the keep), not just on their next scroll. */
+  setMaxZoomDist(max: number): void {
+    this.maxZoomDist = max;
+    if (this.camDist > max) this.camDist = max;
   }
 
   /** True while a mouse button is held for camera drag. */

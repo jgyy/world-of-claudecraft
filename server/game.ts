@@ -3986,6 +3986,7 @@ export class GameServer {
       copper: meta.copper,
       gcd: round2(p.gcdRemaining),
       pcd: round2(p.potionCdRemaining),
+      af: p.activeFloor,
       swing: round2(p.swingTimer),
       combo: p.comboPoints,
       target: p.targetId,

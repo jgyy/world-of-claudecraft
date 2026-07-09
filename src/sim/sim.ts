@@ -147,6 +147,7 @@ import { formatMoney } from './format_money';
 import * as interaction from './interaction';
 import { meetsLevelRequirement } from './item_level_req';
 import * as items from './items';
+import { nextActiveFloor } from './keep_floor';
 import {
   type DevLeaderboardPage,
   type GuildLeaderboardPage,
@@ -3207,6 +3208,7 @@ export class Sim {
         lap?.('p.move');
         this.updateDoorTriggers(p);
         lap?.('p.doors');
+        p.activeFloor = nextActiveFloor(p.activeFloor, p.pos.x, p.pos.z);
         this.updateCasting(p, meta);
         lap?.('p.casting');
         this.updatePlayerAutoAttack(p, meta);
@@ -3222,6 +3224,7 @@ export class Sim {
         // death model), or resurrect at its corpse / an overworld Spirit Healer.
         this.updatePlayerMovement(p, meta);
         this.updateDoorTriggers(p);
+        p.activeFloor = nextActiveFloor(p.activeFloor, p.pos.x, p.pos.z);
         lap?.('p.move');
       }
       updateTimers(p);
@@ -6674,7 +6677,17 @@ export class Sim {
     ignoreFences = false,
   ): { x: number; z: number } {
     const run = isDelvePos(nx) || isDelvePos(e.pos.x) ? this.delveRunForEntity(e) : undefined;
-    const res = resolveMovement(this.cfg.seed, fromX, fromZ, nx, nz, r, ignoreFences, run?.modules);
+    const res = resolveMovement(
+      this.cfg.seed,
+      fromX,
+      fromZ,
+      nx,
+      nz,
+      r,
+      ignoreFences,
+      run?.modules,
+      e.activeFloor,
+    );
     if (!run) return res;
     const clamped = this.clampDelveModuleBounds(run, res.x, res.z, r);
     return this.clampDelveDoors(run, clamped.x, clamped.z, r);

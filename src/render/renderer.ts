@@ -119,6 +119,7 @@ import { ValeCupPracticeSky } from './vale_cup_practice_sky';
 import { buildValeCupStadium, type ValeCupStadiumView } from './vale_cup_stadium';
 import { buildValeCupTeamRings, type ValeCupTeamRingsView } from './vale_cup_team_ring';
 import { SCHOOL_COLORS, Vfx } from './vfx';
+import { buildKeepView, type KeepView } from './voxel_building';
 import { buildWater, type WaterView } from './water';
 import { Weather } from './weather';
 import { buildYumiMaze, type YumiMazeView } from './yumi_maze';
@@ -906,6 +907,7 @@ export class Renderer {
   private motes: MotesView;
   private birds: BirdsView;
   private impactSite: ImpactSiteView;
+  private keepView: KeepView;
   private fogScratch = new THREE.Color();
   private flames: THREE.Mesh[];
   private fireLights: THREE.PointLight[];
@@ -1298,6 +1300,9 @@ export class Renderer {
     this.impactSite = buildImpactSite(this.sim.cfg.seed);
     this.scene.add(this.impactSite.group);
     this.scene.add(this.impactSite.light);
+    this.keepView = buildKeepView(this.sim.cfg.seed);
+    setRenderCategory(this.keepView.group, 'props');
+    this.scene.add(this.keepView.group);
     const props = buildProps(this.sim.cfg.seed, (delveId) =>
       tEntity({ kind: 'delve', id: delveId, field: 'name' }),
     );
@@ -4169,6 +4174,7 @@ export class Renderer {
     }
     const now = performance.now();
     const selfPos = this.updateSelfRenderPosition(alpha, dt, selfAlphaLead, selfMotion);
+    this.keepView.update(p);
     markPhase('setup');
 
     // dynamic worlds: create nearby views lazily and drop views for leavers or
