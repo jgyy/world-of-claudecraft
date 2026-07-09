@@ -1,13 +1,19 @@
 // Screenshots of the Eastbrook Vale keep (src/sim/content/keep.ts,
-// src/render/voxel_building.ts): exterior, all 3 floor interiors, and a
-// zoomed-in shot proving the camera zoom clamp keeps the walls opaque.
+// src/render/voxel_building.ts, src/render/keep_interior_decor.ts): the
+// textured exterior from two angles, all 3 floor interiors (each from two
+// angles covering the room's furniture), a stairwell transition, a zoomed-in
+// shot proving the camera zoom clamp keeps the walls opaque, and a torch
+// lighting close-up. Forces `?gfx=ultra` (post pipeline, SSAO, MSAA x4, full
+// PBR materials, see src/render/gfx.ts) so the shots reflect the real max
+// visual quality, not whatever tier the browser would auto-detect.
 // Needs `npm run dev` running. Browser via scripts/browser_path.mjs.
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
-const URL = process.env.GAME_URL ?? 'http://localhost:5173';
+const BASE_URL = process.env.GAME_URL ?? 'http://localhost:5173';
+const URL = `${BASE_URL}${BASE_URL.includes('?') ? '&' : '?'}gfx=ultra`;
 const OUT = process.env.OUT_DIR ?? 'docs/screenshots';
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -122,9 +128,13 @@ const KZ = -30;
 const LANDING_1_2 = { x: KX + 4, z: KZ + 3 }; // floor 1 <-> 2
 const LANDING_2_3 = { x: KX - 4, z: KZ + 3 }; // floor 2 <-> 3
 
-// 1. Exterior: from the southeast at a distance, showing the walls + door
-// opening + roofline (KEEP_HALF=7, KEEP_TOTAL_HEIGHT=3*4+0.5=12.5).
-await shot('keep-01-exterior', { x: KX + 20, z: KZ - 22, h: 10 }, { x: KX, z: KZ - 3, h: 5 });
+// 1. Exterior, front: from the south, straight on to the textured door
+// frame + window insets (KEEP_HALF=7, KEEP_TOTAL_HEIGHT=3*4+0.5=12.5).
+await shot('keep-01-exterior-front', { x: KX, z: KZ - 22, h: 6 }, { x: KX, z: KZ - 3, h: 4 });
+
+// 2. Exterior, 3/4 angle: from the southeast, showing the pitched roof
+// silhouette and the stone/plaster band split on the walls.
+await shot('keep-02-exterior-angle', { x: KX + 20, z: KZ - 22, h: 12 }, { x: KX, z: KZ - 3, h: 6 });
 
 // Ground truth for the building's base Y: settle OUTSIDE the footprint (pure
 // outdoor terrain physics, unambiguous) rather than trusting p.pos.y right at
@@ -138,40 +148,61 @@ const baseY = await page.evaluate(() => window.__game.sim.player.pos.y);
 console.log('keep base Y (outdoor ground):', baseY);
 const floorY = (floor) => baseY + (floor - 1) * 4 + 1.6; // eye height above that floor's surface
 
-// 2. Walk in the door onto floor 1 via real gameplay (walk into the
+// 3. Walk in the door onto floor 1 via real gameplay (walk into the
 // footprint the same way a player would; the sim's own per-tick check,
-// keep_floor.ts's nextKeepState, flips activeFloor 0 -> 1), then shoot.
+// keep_floor.ts's nextKeepState, flips activeFloor 0 -> 1), then shoot the
+// great hall (long table + chairs) from a wide angle, then a close angle on
+// the furniture.
 await teleport(KX, KZ);
 await settle(500);
 const floor1 = await page.evaluate(() => window.__game.sim.player.activeFloor);
 console.log('activeFloor after walking in the door:', floor1);
 await shot(
-  'keep-02-floor1-interior',
+  'keep-03-floor1-hall-wide',
   { x: KX, z: KZ, y: floorY(1), h: 0 },
   { x: KX + 4, z: KZ + 3, y: floorY(1), h: 0 },
   1200,
 );
+await shot(
+  'keep-04-floor1-hall-close',
+  { x: KX + 2, z: KZ + 1.5, y: floorY(1), h: 0 },
+  { x: KX, z: KZ + 0.5, y: floorY(1), h: -0.4 },
+  1000,
+);
 
-// 3. Step onto the floor1<->2 landing to trigger the transition, then move
+// 4. Step onto the floor1<->2 landing to trigger the transition, then move
 // OFF the landing's trigger radius (KEEP_STAIRS r=1.6) before framing the
 // shot: shot() repositions the player to its own camera coordinates, and if
 // those were still the landing point, the landing's two-way trigger would
-// immediately flip the floor back down while the frame settles.
+// immediately flip the floor back down while the frame settles. Frame the
+// landing itself first as the stairwell transition shot.
 await teleport(LANDING_1_2.x, LANDING_1_2.z);
 await settle(500);
 const floor2 = await page.evaluate(() => window.__game.sim.player.activeFloor);
-await teleport(KX - 4, KZ); // step off the landing, staying on floor 2
-await settle(300);
 console.log('activeFloor after the first landing (1 -> 2):', floor2);
 await shot(
-  'keep-03-floor2-interior',
+  'keep-05-stairwell-transition',
+  { x: KX + 2, z: KZ, y: floorY(1) + 1, h: 0 },
+  { x: LANDING_1_2.x, z: LANDING_1_2.z, y: floorY(1), h: 0 },
+  1000,
+);
+await teleport(KX - 4, KZ); // step off the landing, staying on floor 2
+await settle(300);
+await shot(
+  'keep-06-floor2-storage-wide',
   { x: KX - 4, z: KZ, y: floorY(2), h: 0 },
   { x: KX + 4, z: KZ + 3, y: floorY(2), h: 0 },
   1200,
 );
+await shot(
+  'keep-07-floor2-storage-close',
+  { x: KX + 3, z: KZ + 2, y: floorY(2), h: 0 },
+  { x: KX + 5.5, z: KZ + 5.5, y: floorY(2), h: -0.3 },
+  1000,
+);
 
-// 4. Step onto the floor2<->3 landing to trigger the transition, then move
-// off it the same way before framing the floor 3 shot.
+// 5. Step onto the floor2<->3 landing to trigger the transition, then move
+// off it the same way before framing the floor 3 shots.
 await teleport(LANDING_2_3.x, LANDING_2_3.z);
 await settle(500);
 const floor3 = await page.evaluate(() => window.__game.sim.player.activeFloor);
@@ -179,13 +210,30 @@ await teleport(KX + 4, KZ); // step off the landing, staying on floor 3
 await settle(300);
 console.log('activeFloor after the second landing (2 -> 3):', floor3);
 await shot(
-  'keep-04-floor3-interior',
+  'keep-08-floor3-study-wide',
   { x: KX + 4, z: KZ, y: floorY(3), h: 0 },
   { x: KX - 4, z: KZ + 3, y: floorY(3), h: 0 },
   1200,
 );
+await shot(
+  'keep-09-floor3-study-close',
+  { x: KX - 2, z: KZ - 1, y: floorY(3), h: 0 },
+  { x: KX + 5, z: KZ + 5, y: floorY(3), h: -0.3 },
+  1000,
+);
 
-// 5. Zoomed-in shot proving the real chase-camera zoom clamp (main.ts calls
+// 6. Torch lighting close-up: frame the floor-1 west wall torch face-on so a
+// dim interior area lit only by its PointLight is clearly visible.
+await teleport(KX, KZ);
+await settle(400);
+await shot(
+  'keep-10-torch-lighting',
+  { x: KX - 2, z: KZ + 0.5, y: floorY(1), h: 0 },
+  { x: KX - 6.7, z: KZ, y: floorY(1), h: 0 },
+  1200,
+);
+
+// 7. Zoomed-in shot proving the real chase-camera zoom clamp (main.ts calls
 // input.setMaxZoomDist(activeFloor ? 6 : 22) every frame) keeps the player
 // from pulling the camera out through the walls while inside: drop
 // editorCam so the normal follow camera drives the frame, try to zoom the
@@ -212,8 +260,8 @@ if (clampInfo.afterFrames > 6.5) {
   console.log('WARNING: zoom clamp did not tighten as expected:', clampInfo);
 }
 await settle(1200);
-await page.screenshot({ path: `${OUT}/keep-05-zoom-clamp-inside.png` });
-console.log('wrote', `${OUT}/keep-05-zoom-clamp-inside.png`);
+await page.screenshot({ path: `${OUT}/keep-11-zoom-clamp-inside.png` });
+console.log('wrote', `${OUT}/keep-11-zoom-clamp-inside.png`);
 
 await browser.close();
 console.log('done ->', OUT);

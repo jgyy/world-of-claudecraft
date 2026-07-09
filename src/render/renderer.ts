@@ -1300,9 +1300,6 @@ export class Renderer {
     this.impactSite = buildImpactSite(this.sim.cfg.seed);
     this.scene.add(this.impactSite.group);
     this.scene.add(this.impactSite.light);
-    this.keepView = buildKeepView(this.sim.cfg.seed);
-    setRenderCategory(this.keepView.group, 'props');
-    this.scene.add(this.keepView.group);
     const props = buildProps(this.sim.cfg.seed, (delveId) =>
       tEntity({ kind: 'delve', id: delveId, field: 'name' }),
     );
@@ -1310,6 +1307,9 @@ export class Renderer {
     this.scene.add(props.group);
     this.flames = props.flames;
     this.fireLights = props.fireLights;
+    this.keepView = buildKeepView(this.sim.cfg.seed, this.fireLights);
+    setRenderCategory(this.keepView.group, 'props');
+    this.scene.add(this.keepView.group);
     // Props are baked into world space at build and their update() only toggles
     // visibility, so the whole tree is matrix-static, EXCEPT the campfire
     // flames, whose flicker rescales them every frame: re-enable those.
