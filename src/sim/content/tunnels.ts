@@ -20,6 +20,15 @@ export interface TunnelWaypoint {
   // flat on the ground.
   archScale?: number;
   floorScale?: number;
+  // Marks this waypoint as an entrance mound: voxel.ts additively solidifies
+  // a dome of rock above the ambient terrain here (see moundSolidAmount),
+  // so the tunnel carve cuts its doorway through a real protruding knoll
+  // instead of just dipping into the existing hillside slope. moundRadius/
+  // moundHeight both default (radius + 4 / 8) when mound is true and either
+  // is omitted.
+  mound?: boolean;
+  moundRadius?: number;
+  moundHeight?: number;
 }
 
 export interface TunnelVolume {
@@ -35,19 +44,12 @@ export interface TunnelVolume {
 //
 // A through-tunnel burrowing under the ridge that straddles the Eastbrook
 // Vale / Mirefen Marsh border (zone1/zone2 meet at z=180): both mouths sit
-// clearly ABOVE the local terrainHeight (not barely breaching it), reading
-// as a real, visible cave mouth cut into the rising hillside rather than a
-// hole level with the flat ground. Realistic on purpose, not just tall: each
-// mouth's (x, z) sits exactly where the ridge is already starting to climb
-// (z=146/214, where terrainHeight is rising a few yards per step toward the
-// z=180 crest), so tunnel_overlay.ts's single combined terrain+cave mesh
-// naturally slopes the grass UP to meet the raised opening, the same way a
-// real hillside cave mouth sits above the surrounding low ground, never a
-// floating arch with no slope leading to it. The path then dips well under
-// the ridge crest before resurfacing on the Marsh side. Held at a constant
-// x=110, on the EAST side of both zones (well clear of the Eastbrook<->
-// Fenbridge causeway at x=0, both zones' hubs, every lake, the Boar Meadow/
-// Bandit Camp/Fallen Chapel/Brightwood Glade/Widow Thicket POIs, and the
+// clearly ABOVE the local terrainHeight, cut into a real protruding mound
+// (see the `mound` field above and moundSolidAmount in voxel.ts) rather than
+// just a dip in the existing hillside slope. Held at a constant x=110, on
+// the EAST side of both zones (well clear of the Eastbrook<->Fenbridge
+// causeway at x=0, both zones' hubs, every lake, the Boar Meadow/Bandit
+// Camp/Fallen Chapel/Brightwood Glade/Widow Thicket POIs, and the
 // vale_kobold_warren tunnel to the west).
 //
 // Cross-section shape (archScale/floorScale, see TunnelWaypoint above): every
@@ -55,27 +57,24 @@ export interface TunnelVolume {
 // underfoot (floorScale < 1), so the tube reads as a real arched cave, not a
 // circular pipe bore. The two mouth waypoints push this further still
 // (archScale 2.2, floorScale 1.0): a tall, upright doorway cut into the
-// hillside face, the shape a player actually walks INTO, not a round hole
+// mound's face, the shape a player actually walks INTO, not a round hole
 // lying flat on the ground. The shape tapers smoothly from that upright
 // mouth into the ordinary arched-cave cross-section over the next couple of
 // waypoints in from each end.
 //
-// Profile (the y each waypoint sits at): each mouth's first stretch is now
-// kept close to level (a gentle few-degree dip over the first ~8yd) before
-// the passage curves into a real descent toward the crest. This is a
-// deliberate correction: an early version dropped steeply (~14yd of y over
-// just 9yd of z) starting immediately at the mouth, which reads from outside
-// as looking straight down a well/pit shaft rather than walking horizontally
-// through a doorway into a hillside. Holding the entry level first, then
-// curving down over the following waypoints, keeps the actual view into the
-// mouth reading as an upright cave entrance regardless of camera angle; the
-// steepest part of the descent is now entirely past the mouth, out of the
-// exterior sightline.
-//
-// Diameter (radius) is bumped up again (+15%) and the depth under the ridge
-// is deepened further still (crest now ~54yd below mouth level, was ~38yd):
-// a real, roomy walk-in cave, deeper under the ridge than before, with even
-// more solid rock overhead at the crest than the previous round.
+// Profile (the y each waypoint sits at): every single segment is held to a
+// MAXIMUM 30 degree slope (|dy/dz| <= tan(30) = 0.577), the crest still sits
+// well under the ridge (~19-25yd below mouth level, the deepest a 30 degree
+// grade can reach given the z run available between each mouth and the
+// z=180 boundary), and each mouth's first stretch stays close to level
+// (a shallow single-digit-degree dip over the first ~10yd) before the
+// passage curves into its real descent. Both of these are deliberate
+// corrections from an earlier pass: dropping steeply (~14yd of y over just
+// 9yd of z, a ~58 degree grade) starting right at the mouth reads from
+// outside as looking straight down a well/pit shaft, not walking
+// horizontally through a doorway into a hillside; holding the entry level
+// first, then curving down at a walkable grade, keeps the actual view into
+// the mouth reading as an upright cave entrance regardless of camera angle.
 export const TUNNELS: TunnelVolume[] = [
   {
     id: 'vale_kobold_warren',
@@ -89,17 +88,35 @@ export const TUNNELS: TunnelVolume[] = [
   {
     id: 'vale_marsh_ridge_tunnel',
     waypoints: [
-      { x: 110, y: 3.4, z: 146, radius: 7.8, archScale: 2.2, floorScale: 1.0 },
-      { x: 110, y: 1.8, z: 150, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
-      { x: 110, y: -1.0, z: 154, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
-      { x: 110, y: -12.0, z: 160, radius: 7.5, archScale: 1.4, floorScale: 0.72 },
-      { x: 110, y: -28.0, z: 168, radius: 7.9, archScale: 1.32, floorScale: 0.66 },
-      { x: 110, y: -51.0, z: 180, radius: 8.4, archScale: 1.3, floorScale: 0.6 },
-      { x: 110, y: -28.0, z: 192, radius: 7.9, archScale: 1.32, floorScale: 0.66 },
-      { x: 110, y: -12.0, z: 200, radius: 7.5, archScale: 1.4, floorScale: 0.72 },
-      { x: 110, y: -1.0, z: 206, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
-      { x: 110, y: 1.8, z: 210, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
-      { x: 110, y: 2.9, z: 214, radius: 7.8, archScale: 2.2, floorScale: 1.0 },
+      {
+        x: 110,
+        y: 3.4,
+        z: 128,
+        radius: 7.8,
+        archScale: 2.2,
+        floorScale: 1.0,
+        mound: true,
+        moundRadius: 14,
+        moundHeight: 10,
+      },
+      { x: 110, y: 1.0, z: 138, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
+      { x: 110, y: -5.0, z: 150, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
+      { x: 110, y: -12.4, z: 163, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
+      { x: 110, y: -22.0, z: 180, radius: 8.4, archScale: 1.3, floorScale: 0.6 },
+      { x: 110, y: -12.4, z: 197, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
+      { x: 110, y: -5.0, z: 210, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
+      { x: 110, y: 1.0, z: 222, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
+      {
+        x: 110,
+        y: 2.9,
+        z: 232,
+        radius: 7.8,
+        archScale: 2.2,
+        floorScale: 1.0,
+        mound: true,
+        moundRadius: 14,
+        moundHeight: 10,
+      },
     ],
   },
 ];

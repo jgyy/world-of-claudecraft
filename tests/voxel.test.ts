@@ -99,4 +99,33 @@ describe('vale_marsh_ridge_tunnel (zone1 <-> zone2 through-tunnel)', () => {
       expect(rise).toBeLessThan(6); // still close enough to read as this same hillside, not a floating arch
     }
   });
+
+  it('every segment holds to a walkable 30 degree max grade', () => {
+    const MAX_SLOPE = Math.tan((30 * Math.PI) / 180);
+    for (let i = 0; i + 1 < tunnel.waypoints.length; i++) {
+      const a = tunnel.waypoints[i];
+      const b = tunnel.waypoints[i + 1];
+      const dz = b.z - a.z;
+      const dy = Math.abs(b.y - a.y);
+      expect(dy / dz).toBeLessThanOrEqual(MAX_SLOPE);
+    }
+  });
+
+  it('both mouths are cut into a protruding entrance mound', () => {
+    const mouths = [tunnel.waypoints[0], tunnel.waypoints[tunnel.waypoints.length - 1]];
+    for (const m of mouths) {
+      expect(m.mound).toBe(true);
+      const moundRadius = m.moundRadius ?? m.radius + 4;
+      const moundHeight = m.moundHeight ?? 8;
+      const surface = terrainHeight(m.x, m.z, seed);
+      // Just off to the side of the tunnel's own carved opening, well clear
+      // of the doorway itself, but still under the mound's dome: the ground
+      // there should sit solid ABOVE the ambient surface, a real knoll the
+      // entrance is cut into, not a flat approach.
+      const sideX = m.x + moundRadius * 0.7;
+      const moundMidY = surface + moundHeight * 0.5;
+      expect(isSolidVoxel(sideX, moundMidY, m.z, seed)).toBe(true);
+      expect(voxelDensity(sideX, moundMidY, m.z, seed)).toBeLessThan(0);
+    }
+  });
 });

@@ -45,108 +45,116 @@ const LAUNCH_ARGS = [
 
 const TX = 110; // the tunnel's constant x, east side of both zones
 // Tunnel floor at each z (see tunnel_traversal.ts's tunnelColumnAt, world
-// seed 20061, after the further diameter increase, arch/flatter-floor
-// cross-section, and deepened crest). The player stands 0.15yd above it
+// seed 20061, after the max-30-degree-grade profile, the two entrance
+// mounds, and the upright-mouth rework). The player stands 0.15yd above it
 // (never clips into the mesh).
 const FLOOR = {
-  164: -35.52,
-  167: -41.37,
-  170: -47.2,
-  173: -53.79,
-  176: -55.43,
-  178: -55.9,
-  180: -56.04,
-  184: -55.43,
-  187: -53.79,
-  190: -47.2,
-  193: -41.37,
+  163: -19.04,
+  167: -21.22,
+  170: -22.85,
+  174: -25.53,
+  177: -26.71,
+  178.5: -26.96,
+  180: -27.04,
+  183: -26.71,
+  187: -24.79,
+  190: -22.85,
+  194: -20.68,
 };
 const standY = (z) => FLOOR[z] + 0.15;
 // Base eye height for interior shots: floor + standing height + a bit more,
 // roughly mid-chamber. camDy/lookDy below are small deltas off this base.
 const eyeY = (z) => FLOOR[z] + 2.2;
 
-// Exterior shots: ordinary chase camera, character renders normally. 8 shots.
+// Exterior shots: ordinary chase camera, character renders normally. Mouths
+// now sit at z=128/232 (moved out from 146/214 to keep every segment's
+// grade at or under 30 degrees given the deeper crest - see
+// content/tunnels.ts), each cut into its own protruding entrance mound
+// (moundRadius 14yd) rather than just a dip in the ambient ridge slope. 8
+// shots.
 const EXTERIOR_SHOTS = [
-  { name: '01_wide_establishing_zone1', z: 90, camDist: 16, camPitch: -0.05, camYaw: 0 },
-  { name: '02_approaching_ridge', z: 120, camDist: 12, camPitch: -0.1, camYaw: 0 },
-  { name: '03_mouth_a_exterior_wide', z: 138, camDist: 9, camPitch: -0.15, camYaw: 0 },
-  { name: '04_mouth_a_closeup', z: 148, camDist: 5, camPitch: -0.1, camYaw: 0 },
-  { name: '05_mouth_a_closeup_side_angle', z: 148, camDist: 5, camPitch: -0.08, camYaw: 0.5 },
-  { name: '06_mouth_b_closeup', z: 212, camDist: 5, camPitch: -0.1, camYaw: Math.PI },
-  { name: '07_mouth_b_exterior_wide', z: 222, camDist: 9, camPitch: -0.15, camYaw: Math.PI },
-  { name: '08_wide_establishing_zone2', z: 240, camDist: 16, camPitch: -0.05, camYaw: Math.PI },
+  { name: '01_wide_establishing_zone1', z: 70, camDist: 16, camPitch: -0.05, camYaw: 0 },
+  { name: '02_approaching_ridge', z: 100, camDist: 12, camPitch: -0.1, camYaw: 0 },
+  { name: '03_mouth_a_exterior_wide', z: 118, camDist: 9, camPitch: -0.15, camYaw: 0 },
+  { name: '04_mouth_a_closeup', z: 126, camDist: 6, camPitch: -0.05, camYaw: 0 },
+  { name: '05_mouth_a_closeup_side_angle', z: 126, camDist: 6, camPitch: -0.04, camYaw: 0.5 },
+  { name: '06_mouth_b_closeup', z: 234, camDist: 6, camPitch: -0.05, camYaw: Math.PI },
+  { name: '07_mouth_b_exterior_wide', z: 246, camDist: 9, camPitch: -0.15, camYaw: Math.PI },
+  { name: '08_wide_establishing_zone2', z: 270, camDist: 16, camPitch: -0.05, camYaw: Math.PI },
 ];
 
 // Interior shots: free editorCam, framed down the tunnel's own axis but
 // offset to the side (camDx) so the player's own body/helmet, right at the
-// axis center, never fills the frame the way it does dead-on from behind -
-// this is the exact camera pattern that reliably framed the full character
-// earlier (a small camDz offset from the player, target FAR ahead down the
-// corridor rather than fixed on the player's own head, which is what
-// actually keeps the player's model in frame at a natural scale). Held to
-// the core z=164..196 span (clear of both mouths' shallower transitional
-// stretches, the hardest case for the voxel mesher) for extra safety on top
-// of tunnel_overlay.ts's own backstop. 12 shots.
-// The tunnel's centerline is not flat, and (after the level-then-descend
-// mouth profile in content/tunnels.ts) its slope actually changes several
-// times along the route, not just once. A fixed eye height (floor+2.2)
-// isn't enough headroom on the steep stretches, and a lookDz-ahead target
-// computed at a fixed y clips into the rising floor or ceiling instead of
-// following the slope. Both camDy and lookDy below are computed per shot
-// from the tunnel's own local floor at the camera's/target's actual (offset)
-// z, not just the shot's nominal z - the player always walks +z start to
-// finish (146 -> 214; "ascending" means climbing y, not reversing z), so
-// every shot but 16 (the one deliberate look-back) frames forward. Every
-// position verified open (not solid) against the live voxel field with
-// isSolidVoxel, not eyeballed.
+// axis center, never fills the frame the way it does dead-on from behind.
+// Held to the core z=163..197 span (the fully-enclosed stretch with a real
+// rock ceiling both sides of the crest, clear of both mouths' shallower,
+// still-open-to-sky transitional stretches) for extra safety on top of
+// tunnel_overlay.ts's own backstop. 12 shots.
+// The tunnel's centerline is not flat, though every segment now holds to a
+// walkable max-30-degree grade (content/tunnels.ts). A fixed eye height
+// (floor+2.2) still isn't enough headroom to cover both the camera position
+// and its forward look-at target on the sloped stretches, so both camDy and
+// lookDy below are computed per shot from the tunnel's own local floor at
+// the camera's/target's actual (offset) z, not just the shot's nominal z -
+// the player always walks +z start to finish (128 -> 232; "ascending" means
+// climbing y, not reversing z), so every shot but 16 (the one deliberate
+// look-back) frames forward. Every position verified open (not solid)
+// against the live voxel field with isSolidVoxel, not eyeballed.
 const INTERIOR_SHOTS = [
   {
     name: '09_descending_1',
-    z: 164,
+    z: 163,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: 4.86,
+    camDy: 1.63,
     lookDz: 7,
-    lookDy: -13.22,
+    lookDy: -3.41,
   },
   {
     name: '10_descending_2',
     z: 167,
     camDx: -1.4,
     camDz: -2.6,
-    camDy: 5.27,
+    camDy: 1.62,
     lookDz: 7,
-    lookDy: -12.76,
+    lookDy: -3.91,
   },
   {
     name: '11_descending_3',
     z: 170,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: 5.26,
+    camDy: 1.61,
     lookDz: 7,
-    lookDy: -8.11,
+    lookDy: -3.46,
   },
   {
     name: '12_approaching_crest_1',
-    z: 173,
+    z: 174,
     camDx: -1.4,
     camDz: -2.6,
-    camDy: 6.01,
+    camDy: 2.12,
     lookDz: 7,
-    lookDy: -1.85,
+    lookDy: -1.08,
   },
   {
     name: '13_approaching_crest_2',
-    z: 176,
+    z: 177,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: 1.51,
+    camDy: 1.15,
     lookDz: 7,
-    lookDy: 0.12,
+    lookDy: 0.68,
   },
-  { name: '14_near_crest', z: 178, camDx: -1.4, camDz: -2.6, camDy: 0.88, lookDz: 7, lookDy: 1.25 },
+  {
+    name: '14_near_crest',
+    z: 178.5,
+    camDx: -1.4,
+    camDz: -2.6,
+    camDy: 0.76,
+    lookDz: 7,
+    lookDy: 1.55,
+  },
   {
     name: '15_crest_boundary_z180',
     z: 180,
@@ -167,12 +175,12 @@ const INTERIOR_SHOTS = [
   },
   {
     name: '17_past_crest',
-    z: 184,
+    z: 183,
     camDx: -1.4,
     camDz: -2.6,
-    camDy: -0.34,
+    camDy: -0.13,
     lookDz: 7,
-    lookDy: 10.57,
+    lookDy: 4.26,
   },
   {
     name: '18_ascending_1',
@@ -181,25 +189,25 @@ const INTERIOR_SHOTS = [
     camDz: -2.6,
     camDy: -1.31,
     lookDz: 7,
-    lookDy: 14.77,
+    lookDy: 4.51,
   },
   {
     name: '19_ascending_2',
     z: 190,
     camDx: -1.4,
     camDz: -2.6,
-    camDy: -5.98,
+    camDy: -1.34,
     lookDz: 7,
-    lookDy: 14.03,
+    lookDy: 4.21,
   },
   {
     name: '20_ascending_3',
-    z: 193,
+    z: 194,
     camDx: 1.4,
     camDz: -2.6,
-    camDy: -4.86,
+    camDy: -1.21,
     lookDz: 7,
-    lookDy: 14.09,
+    lookDy: 4.02,
   },
 ];
 

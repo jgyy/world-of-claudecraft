@@ -272,10 +272,10 @@ describe('vale_marsh_ridge_tunnel traversal', () => {
   it('falls from just above a tunnel mouth onto the tunnel floor, not the surface', () => {
     const sim = makeGameSim();
     const p = sim.player;
-    const col = tunnelColumnAt(110, 146, GAME_SEED)!;
+    const col = tunnelColumnAt(110, 128, GAME_SEED)!;
     p.pos.x = 110;
-    p.pos.z = 146;
-    p.pos.y = terrainHeight(110, 146, GAME_SEED) + 2; // a hair above the mouth, airborne
+    p.pos.z = 128;
+    p.pos.y = terrainHeight(110, 128, GAME_SEED) + 2; // a hair above the mouth, airborne
     p.prevPos = { ...p.pos };
     p.onGround = false;
     p.vx = 0;
@@ -291,7 +291,7 @@ describe('vale_marsh_ridge_tunnel traversal', () => {
 
     expect(p.onGround).toBe(true);
     expect(p.pos.y).toBeCloseTo(col.floorY, 0);
-    expect(p.pos.y).toBeLessThan(terrainHeight(110, 146, GAME_SEED) - 1);
+    expect(p.pos.y).toBeLessThan(terrainHeight(110, 128, GAME_SEED) - 1);
   });
 
   it('keeps riding the tunnel floor while walking through, never snapping up to the ridge surface', () => {

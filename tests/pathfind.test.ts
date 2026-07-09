@@ -240,8 +240,8 @@ describe('vale_marsh_ridge_tunnel pathfinding', () => {
   });
 
   it('finds a real route from one mouth to the other via the tunnel, not blocked by the ridge', () => {
-    const from = { x: 110, z: 144 };
-    const to = { x: 110, z: 216 };
+    const from = { x: 110, z: 124 };
+    const to = { x: 110, z: 236 };
     const path = findPlayerPath(seed, from, to, 128, false, false);
     // A route was actually found and terminates at the goal (not the trivial
     // straight-line bail-out you'd get if the search window were too small or
