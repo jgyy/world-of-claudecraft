@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
-import { TUNNELS, tunnelBounds, voxelDensity } from '../sim/voxel';
+import { TUNNELS, tunnelBounds, tunnelCarveDensity } from '../sim/voxel';
 import { meshVoxelChunk } from '../sim/voxel_mesh';
 
 // Renders the hand-authored TunnelVolume content (content/tunnels.ts) into
@@ -14,19 +14,30 @@ import { meshVoxelChunk } from '../sim/voxel_mesh';
 // visible, as an additive interior mesh layered under the existing
 // heightfield terrain (terrain.ts) at each tunnel's footprint.
 //
+// Meshes tunnelCarveDensity (the tunnel's own capsule geometry), NOT the
+// terrain-blended voxelDensity used for gameplay: meshing voxelDensity would
+// re-tessellate the ordinary ground surface itself wherever a tunnel's
+// padded chunk box brushes near it (every mouth, by construction), producing
+// a second, z-fighting copy of the terrain mesh layered right over the real
+// one. Meshing the tunnel's own carve alone always produces a clean, terrain-
+// independent tube: solid rock walls underground (which is exactly what
+// should be visible from inside), and at each mouth a rounded knoll where the
+// capsule's end cap pokes out near the surface, never a duplicate terrain
+// patch.
+//
 // Known cosmetic limitation: terrain.ts's heightfield can't be "cut a hole
 // in" at a tunnel mouth (it's a 2.5D height field, one height per x,z, same
-// reason colliders.ts/pathfind.ts needed tunnel_traversal.ts) so there is a
-// small visual overlap right at each mouth between the classic surface mesh
-// and this tunnel geometry. The tunnels are authored so both mouths sit
-// close to the local terrainHeight (see content/tunnels.ts), keeping that
-// overlap minor. Closing it fully means terrain.ts learning to mask a
-// footprint, a documented follow-up, not this pass.
+// reason colliders.ts/pathfind.ts needed tunnel_traversal.ts), so the mouth
+// reads as a rocky knoll with a dark hollow rather than a seamlessly carved
+// cliff face. The tunnels are authored so both mouths sit close to the local
+// terrainHeight (see content/tunnels.ts), keeping the seam minor. Fully
+// blending it means terrain.ts learning to mask a footprint, a documented
+// follow-up, not this pass.
 
 const CHUNK_SIZE = 16; // world units per chunk cube, matches voxel_terrain.ts
 const CHUNK_RESOLUTION = 24; // voxels per axis: finer than the whole-map build since this is tiny
 const OVERLAP_VOXELS = 1; // extra voxel cells of overlap padded onto every chunk side, avoids seams
-const BOUNDS_MARGIN = 4; // yd padding around each tunnel's own AABB
+const BOUNDS_MARGIN = 1; // yd padding around each tunnel's own AABB (just enough for mesher overlap)
 
 const ROCK_COLOR = 0x6b6459;
 
@@ -36,10 +47,10 @@ export interface TunnelOverlayView {
   triangleCount: number;
 }
 
-export function buildTunnelOverlay(seed: number): TunnelOverlayView {
+export function buildTunnelOverlay(): TunnelOverlayView {
   const group = new THREE.Group();
   group.name = 'tunnel-overlay';
-  const density = (x: number, y: number, z: number) => voxelDensity(x, y, z, seed);
+  const density = tunnelCarveDensity;
   const material = new THREE.MeshStandardMaterial({
     color: ROCK_COLOR,
     roughness: 0.95,

@@ -1280,7 +1280,7 @@ export class Renderer {
     // Authored TunnelVolume content (content/tunnels.ts), voxel-meshed only
     // across each tunnel's own small footprint (see tunnel_overlay.ts) and
     // layered under the terrain above: static like the terrain chunks.
-    const tunnelOverlay = buildTunnelOverlay(this.sim.cfg.seed);
+    const tunnelOverlay = buildTunnelOverlay();
     setRenderCategory(tunnelOverlay.group, 'terrain');
     this.scene.add(tunnelOverlay.group);
     freezeStaticMatrices(tunnelOverlay.group);

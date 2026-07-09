@@ -58,18 +58,31 @@ function segmentCarve(
   return radius - dist; // positive inside the capsule
 }
 
+// Every authored tunnel's own carve at a point, ignoring terrain entirely:
+// negative outside every capsule, positive inside at least one. Exposed
+// separately from voxelDensity (below) for tunnel_overlay.ts, which meshes
+// ONLY this surface: meshing voxelDensity's terrain-blended result would
+// re-tessellate the ordinary ground surface itself wherever a tunnel's
+// padded chunk box brushes near it (every mouth, by construction), producing
+// a second, z-fighting copy of the terrain mesh instead of just the tunnel.
+export function tunnelCarveDensity(x: number, y: number, z: number): number {
+  let carve = -Infinity;
+  for (const tunnel of TUNNELS) {
+    for (let i = 0; i + 1 < tunnel.waypoints.length; i++) {
+      const c = segmentCarve(x, y, z, tunnel.waypoints[i], tunnel.waypoints[i + 1]);
+      if (c > carve) carve = c;
+    }
+  }
+  return carve;
+}
+
 // True 3D voxel density at a world point: negative = solid, positive = air,
 // zero at the surface. Pure function of (x, y, z, seed) plus the fixed,
 // hand-authored TUNNELS content.
 export function voxelDensity(x: number, y: number, z: number, seed: number): number {
-  let density = y - terrainHeight(x, z, seed);
-  for (const tunnel of TUNNELS) {
-    for (let i = 0; i + 1 < tunnel.waypoints.length; i++) {
-      const carve = segmentCarve(x, y, z, tunnel.waypoints[i], tunnel.waypoints[i + 1]);
-      if (carve > density) density = carve;
-    }
-  }
-  return density;
+  const density = y - terrainHeight(x, z, seed);
+  const carve = tunnelCarveDensity(x, y, z);
+  return carve > density ? carve : density;
 }
 
 export function isSolidVoxel(x: number, y: number, z: number, seed: number): boolean {
