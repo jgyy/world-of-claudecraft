@@ -43,6 +43,7 @@ import { AOE_RING_LIFETIME, aoeRingAnim } from './aoe_ring';
 import type { SpatialAudioSink, Surface } from './audio_sink';
 import { type BirdsView, buildBirds } from './birds';
 import { type CameraOcclusionState, stepCameraOcclusion } from './camera_collision';
+import { clampCamDistForEnclosedSpace } from './camera_zoom_limit';
 import { characterSoulRendActive } from './character_effects';
 import { type AnimState, type CharacterVisual, createCharacterVisual } from './characters';
 import { mechAssetsReady, preloadMechAssets } from './characters/assets';
@@ -5353,9 +5354,13 @@ export class Renderer {
     const py = selfPos.y;
     const pz = selfPos.z;
     const eyeY = py + 2.0;
-    let cx = px - Math.sin(this.camYaw) * Math.cos(this.camPitch) * this.camDist;
-    let cy = eyeY + Math.sin(this.camPitch) * this.camDist;
-    let cz = pz - Math.cos(this.camYaw) * Math.cos(this.camPitch) * this.camDist;
+    // Cap the requested zoom-out distance while inside a small enclosed
+    // space (e.g. a tunnel interior) so the chase camera never even asks
+    // for a position that far past the walls; see camera_zoom_limit.ts.
+    const camDist = clampCamDistForEnclosedSpace(this.camDist, px, py, pz, seed);
+    let cx = px - Math.sin(this.camYaw) * Math.cos(this.camPitch) * camDist;
+    let cy = eyeY + Math.sin(this.camPitch) * camDist;
+    let cz = pz - Math.cos(this.camYaw) * Math.cos(this.camPitch) * camDist;
     if (isArenaPos(p.pos.x)) {
       // Arena walls hide from the camera like buildings, so the chase camera
       // stays at the player's requested zoom instead of clamping inside the pit.
