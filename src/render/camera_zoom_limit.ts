@@ -10,10 +10,11 @@
 // camera from ever asking for a position that far out in the first place.
 import { tunnelSpanAt } from '../sim/tunnel_traversal';
 
-// A tunnel's narrowest authored radius is 2.6yd (vale_kobold_warren); 8yd
+// A tunnel's narrowest authored radius is 2.6yd (vale_kobold_warren); 5yd
 // keeps the camera comfortably inside every tunnel's walls at any yaw/pitch
-// without feeling claustrophobic.
-export const ENCLOSED_MAX_CAM_DIST = 8;
+// without feeling claustrophobic, and reads as a tighter, better-managed
+// chase camera in these cramped spaces than the previous 8yd cap.
+export const ENCLOSED_MAX_CAM_DIST = 5;
 
 // The camDist to actually use this frame: the player's requested camDist,
 // clamped down to ENCLOSED_MAX_CAM_DIST while (px, py, pz) sits inside a

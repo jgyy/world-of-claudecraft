@@ -30,14 +30,24 @@ function lerp(a: number, b: number, t: number): number {
 
 // Signed "carve" contribution of one capsule segment at a point: positive
 // inside the capsule (this much open air), negative-ish falloff outside.
-// Radius is linearly interpolated along the segment between its two
-// waypoint radii, so a tunnel can taper.
+// Radius (and the optional archScale/floorScale cross-section shape, see
+// TunnelWaypoint in content/tunnels.ts) is linearly interpolated along the
+// segment between its two waypoints, so a tunnel can taper.
+//
+// The cross-section is an ellipsoid, not a sphere: the horizontal (x/z)
+// half-extent is always `radius`, but the vertical half-extent is
+// `radius * archScale` above the segment's local centerline and
+// `radius * floorScale` below it. Both default to 1, which collapses back
+// to the original sphere exactly (vale_kobold_warren keeps that shape).
+// archScale > 1 domes the ceiling taller than it is wide, reading as a real
+// arch; floorScale < 1 flattens the floor in close underfoot instead of
+// curving away into a hemisphere.
 function segmentCarve(
   px: number,
   py: number,
   pz: number,
-  a: { x: number; y: number; z: number; radius: number },
-  b: { x: number; y: number; z: number; radius: number },
+  a: { x: number; y: number; z: number; radius: number; archScale?: number; floorScale?: number },
+  b: { x: number; y: number; z: number; radius: number; archScale?: number; floorScale?: number },
 ): number {
   const abx = b.x - a.x;
   const aby = b.y - a.y;
@@ -53,9 +63,15 @@ function segmentCarve(
   const dx = px - cx;
   const dy = py - cy;
   const dz = pz - cz;
-  const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
   const radius = lerp(a.radius, b.radius, t);
-  return radius - dist; // positive inside the capsule
+  const archScale = lerp(a.archScale ?? 1, b.archScale ?? 1, t);
+  const floorScale = lerp(a.floorScale ?? 1, b.floorScale ?? 1, t);
+  const vScale = dy >= 0 ? archScale : floorScale;
+  const qx = dx / radius;
+  const qy = dy / (radius * vScale);
+  const qz = dz / radius;
+  const qlen = Math.sqrt(qx * qx + qy * qy + qz * qz);
+  return radius * (1 - qlen); // positive inside the ellipsoid
 }
 
 // True 3D voxel density at a world point: negative = solid, positive = air,
@@ -95,11 +111,13 @@ export function tunnelBounds(tunnel: (typeof TUNNELS)[number]): {
   let maxY = -Infinity;
   let maxZ = -Infinity;
   for (const w of tunnel.waypoints) {
+    const archScale = w.archScale ?? 1;
+    const floorScale = w.floorScale ?? 1;
     minX = Math.min(minX, w.x - w.radius);
-    minY = Math.min(minY, w.y - w.radius);
+    minY = Math.min(minY, w.y - w.radius * floorScale);
     minZ = Math.min(minZ, w.z - w.radius);
     maxX = Math.max(maxX, w.x + w.radius);
-    maxY = Math.max(maxY, w.y + w.radius);
+    maxY = Math.max(maxY, w.y + w.radius * archScale);
     maxZ = Math.max(maxZ, w.z + w.radius);
   }
   return { minX, minY, minZ, maxX, maxY, maxZ };

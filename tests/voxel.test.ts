@@ -38,14 +38,14 @@ describe('voxel density field', () => {
     expect(isSolidVoxel(far.x + far.radius + 20, far.y, far.z, seed)).toBe(true);
   });
 
-  it('reports a bounding box expanded by each waypoint radius, not just the center', () => {
+  it('reports a bounding box expanded by each waypoint radius (Y scaled by arch/floor), not just the center', () => {
     for (const tunnel of TUNNELS) {
       const b = tunnelBounds(tunnel);
       for (const w of tunnel.waypoints) {
         expect(b.minX).toBeLessThanOrEqual(w.x - w.radius);
         expect(b.maxX).toBeGreaterThanOrEqual(w.x + w.radius);
-        expect(b.minY).toBeLessThanOrEqual(w.y - w.radius);
-        expect(b.maxY).toBeGreaterThanOrEqual(w.y + w.radius);
+        expect(b.minY).toBeLessThanOrEqual(w.y - w.radius * (w.floorScale ?? 1));
+        expect(b.maxY).toBeGreaterThanOrEqual(w.y + w.radius * (w.archScale ?? 1));
         expect(b.minZ).toBeLessThanOrEqual(w.z - w.radius);
         expect(b.maxZ).toBeGreaterThanOrEqual(w.z + w.radius);
       }
@@ -72,9 +72,13 @@ describe('vale_marsh_ridge_tunnel (zone1 <-> zone2 through-tunnel)', () => {
   });
 
   it('stays solid well outside each buried waypoint radius', () => {
-    // Skip the two mouth waypoints: their y sits at the surface by design, so
-    // stepping sideways lands in ordinary open air above ground, not rock.
-    const buried = tunnel.waypoints.slice(1, -1);
+    // Skip the two mouth waypoints AND the near-mouth waypoints right after
+    // them (kept deliberately close to the surface too, so the entrance
+    // reads as a level walk-in doorway rather than an immediate steep dive,
+    // see content/tunnels.ts): all four sit at/near the surface by design,
+    // so stepping sideways from any of them lands in ordinary open air above
+    // ground, not rock.
+    const buried = tunnel.waypoints.slice(2, -2);
     for (const w of buried) {
       expect(isSolidVoxel(w.x + w.radius + 20, w.y, w.z, seed)).toBe(true);
     }
