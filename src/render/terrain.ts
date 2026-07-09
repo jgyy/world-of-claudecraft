@@ -42,8 +42,15 @@ const SLOPE_EPS = 1.5; // matches the legacy color pass so tints don't shift
 // generous enough that tunnel_overlay.ts's combined patch, which covers the
 // SAME excluded chunks, always has real tunnel geometry well inside its own
 // edges rather than right at the seam with the reinstated classic terrain.
-// Exported so tunnel_overlay.ts computes the identical excluded-chunk set.
-export const TUNNEL_CHUNK_MARGIN = 8;
+// Wide on purpose: the classic terrain renderer only ever builds a thin
+// heightfield SURFACE, never a solid volume below it, so a camera ray that
+// somehow exits the tunnel's own carved walls laterally would otherwise find
+// nothing solid at all until it climbs back up to that surface far above -
+// a reviewer-flagged "view outside the map". A wide excluded footprint means
+// there is always a thick shell of real, solid, voxel-meshed rock between
+// the tunnel's interior and that seam. Exported so tunnel_overlay.ts
+// computes the identical excluded-chunk set.
+export const TUNNEL_CHUNK_MARGIN = 35;
 
 // ---------------------------------------------------------------------------
 // Real PBR splat layers (ambientCG 1K, shipped under public/textures/terrain).

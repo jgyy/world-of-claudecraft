@@ -13,11 +13,16 @@
 // always decides the classic surface overhead is "in the way" and pulls the
 // camera back up to just under it, never into the tunnel's real interior.
 // So every interior shot instead uses renderer.editorCam (the same free-cam
-// seam the map editor's 3D mode uses): camera positioned a few yards BEHIND
-// the player (along -z, roughly head height) with the look target close to
-// the player's own head (not far ahead down the corridor) - that keeps the
-// player's model itself in frame, per the whole point of these shots being
-// "you can see your character actually standing in the tunnel."
+// seam the map editor's 3D mode uses): camera offset a couple yards to the
+// side and just behind the player, looking FAR down the corridor (not
+// fixed on the player's own head - that framing crops the character almost
+// entirely out at any distance close enough to also avoid wall clipping).
+// This is the seam that showed the raw scene background through a mesh
+// gap in an earlier pass; the real, permanent fix for that lives in
+// tunnel_overlay.ts (correct backstop wall orientation, double-sided
+// material, a wide terrain.ts exclusion margin) and applies to every
+// camera - the ordinary in-game chase camera included, not just this
+// script - not just this specific editorCam framing.
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
@@ -40,82 +45,103 @@ const LAUNCH_ARGS = [
 
 const TX = 110; // the tunnel's constant x, east side of both zones
 // Tunnel floor at each z (see tunnel_traversal.ts's tunnelColumnAt, world
-// seed 20061). The player stands 0.15yd above it (never clips into the mesh).
+// seed 20061, after doubling the tunnel's depth). The player stands 0.15yd
+// above it (never clips into the mesh).
 const FLOOR = {
-  148: -6.3,
-  152: -7.84,
-  155: -9.6,
-  158: -11.47,
-  162: -13.96,
-  166: -16.55,
-  170: -19.14,
-  174: -21.33,
-  178: -23.08,
-  180: -23.4,
-  182: -23.08,
-  186: -21.33,
-  190: -19.14,
-  194: -16.55,
-  198: -13.96,
-  202: -11.47,
-  206: -8.97,
-  210: -7.27,
-  212: -6.63,
+  164: -28.37,
+  167: -32.17,
+  170: -35.9,
+  173: -38.55,
+  176: -41.11,
+  178: -42.02,
+  180: -42.3,
+  184: -41.11,
+  187: -38.55,
+  190: -35.9,
+  193: -32.17,
 };
 const standY = (z) => FLOOR[z] + 0.15;
+// Base eye height for interior shots: floor + standing height + a bit more,
+// roughly mid-chamber. camDy/lookDy below are small deltas off this base.
+const eyeY = (z) => FLOOR[z] + 2.2;
 
-// Exterior shots: ordinary chase camera, character renders normally.
+// Exterior shots: ordinary chase camera, character renders normally. 8 shots.
 const EXTERIOR_SHOTS = [
   { name: '01_wide_establishing_zone1', z: 90, camDist: 16, camPitch: -0.05, camYaw: 0 },
   { name: '02_approaching_ridge', z: 120, camDist: 12, camPitch: -0.1, camYaw: 0 },
   { name: '03_mouth_a_exterior_wide', z: 138, camDist: 9, camPitch: -0.15, camYaw: 0 },
-  { name: '04_mouth_a_exterior_medium', z: 144, camDist: 7, camPitch: -0.12, camYaw: 0.15 },
-  { name: '05_mouth_a_closeup', z: 148, camDist: 5, camPitch: -0.1, camYaw: 0 },
-  { name: '06_mouth_a_closeup_side_angle', z: 148, camDist: 5, camPitch: -0.08, camYaw: 0.5 },
-  {
-    name: '20_mouth_b_exterior_medium',
-    z: 216,
-    camDist: 7,
-    camPitch: -0.12,
-    camYaw: Math.PI - 0.15,
-  },
-  { name: '21_mouth_b_closeup', z: 212, camDist: 5, camPitch: -0.1, camYaw: Math.PI },
-  {
-    name: '22_mouth_b_closeup_side_angle',
-    z: 212,
-    camDist: 5,
-    camPitch: -0.08,
-    camYaw: Math.PI + 0.5,
-  },
-  { name: '23_wide_establishing_zone2', z: 240, camDist: 16, camPitch: -0.05, camYaw: Math.PI },
+  { name: '04_mouth_a_closeup', z: 148, camDist: 5, camPitch: -0.1, camYaw: 0 },
+  { name: '05_mouth_a_closeup_side_angle', z: 148, camDist: 5, camPitch: -0.08, camYaw: 0.5 },
+  { name: '06_mouth_b_closeup', z: 212, camDist: 5, camPitch: -0.1, camYaw: Math.PI },
+  { name: '07_mouth_b_exterior_wide', z: 222, camDist: 9, camPitch: -0.15, camYaw: Math.PI },
+  { name: '08_wide_establishing_zone2', z: 240, camDist: 16, camPitch: -0.05, camYaw: Math.PI },
 ];
 
-// Interior shots: free editorCam, camera a few yards behind the player
-// (camDz < 0 relative to travel direction +z) looking near the player's own
-// head, so the player's model is always the visible subject with the
-// textured tunnel walls/floor/ceiling around them. camDx offsets the camera
-// a little to one side for a less perfectly-centered, more natural angle.
+// Interior shots: free editorCam, framed down the tunnel's own axis but
+// offset to the side (camDx) so the player's own body/helmet, right at the
+// axis center, never fills the frame the way it does dead-on from behind -
+// this is the exact camera pattern that reliably framed the full character
+// earlier (a small camDz offset from the player, target FAR ahead down the
+// corridor rather than fixed on the player's own head, which is what
+// actually keeps the player's model in frame at a natural scale). Held to
+// the core z=164..196 span (clear of both mouths' shallower transitional
+// stretches, the hardest case for the voxel mesher) for extra safety on top
+// of tunnel_overlay.ts's own backstop. 12 shots.
+// The tunnel's centerline is not flat: it dives roughly 1.2yd in y per 1yd
+// of z near each mouth and while climbing back out past the crest. A fixed
+// eye height (floor+2.2, fine on the near-flat crest-adjacent stretch)
+// isn't enough headroom on those sloped stretches, and a lookDz-ahead
+// target computed at a FIXED y clips into the rising floor or ceiling
+// instead of following the slope. Both camDy (near each mouth, shots
+// 09-11/19-20) and lookDy (past the crest, shots 15-20, where "ahead"
+// means climbing back toward daylight) are bumped up on the affected shots
+// so both the camera position and its look-at target sit in open space -
+// verified against the live voxel field with isSolidVoxel, not eyeballed.
 const INTERIOR_SHOTS = [
-  { name: '07_inside_mouth_a', z: 152, camDx: 1.2, camDz: -7, camDy: 1.8, lookDy: 1.3 },
-  { name: '08_inside_mouth_a_alt', z: 155, camDx: -1.4, camDz: -6, camDy: 2.0, lookDy: 1.4 },
-  { name: '09_descending_1', z: 158, camDx: 1.3, camDz: -7, camDy: 1.9, lookDy: 1.3 },
-  { name: '10_descending_2', z: 162, camDx: -1.3, camDz: -7, camDy: 2.1, lookDy: 1.4 },
-  { name: '11_descending_3', z: 166, camDx: 1.4, camDz: -7, camDy: 2.2, lookDy: 1.4 },
-  { name: '12_descending_4', z: 170, camDx: -1.4, camDz: -7, camDy: 2.3, lookDy: 1.5 },
-  { name: '13_approaching_crest', z: 174, camDx: 1.4, camDz: -7, camDy: 2.4, lookDy: 1.5 },
-  { name: '14_crest_boundary_z180', z: 180, camDx: 1.5, camDz: -7, camDy: 1.9, lookDy: 1.4 },
+  { name: '09_descending_1', z: 164, camDx: 1.6, camDz: -2.2, camDy: 2, lookDz: 9, lookDy: -0.3 },
+  { name: '10_descending_2', z: 167, camDx: -1.6, camDz: -2.2, camDy: 2, lookDz: 9, lookDy: -0.3 },
+  { name: '11_descending_3', z: 170, camDx: 1.6, camDz: -2.2, camDy: 2, lookDz: 9, lookDy: -0.5 },
   {
-    name: '15_crest_boundary_z180_facing_back',
-    z: 180,
-    camDx: -1.5,
-    camDz: 7,
-    camDy: 1.9,
-    lookDy: 1.4,
+    name: '12_approaching_crest_1',
+    z: 173,
+    camDx: -1.6,
+    camDz: -2.2,
+    camDy: 0.2,
+    lookDz: 9,
+    lookDy: -0.5,
   },
-  { name: '16_past_crest', z: 186, camDx: -1.4, camDz: 7, camDy: 2.4, lookDy: 1.5 },
-  { name: '17_ascending_1', z: 190, camDx: 1.4, camDz: 7, camDy: 2.3, lookDy: 1.5 },
-  { name: '18_ascending_2', z: 194, camDx: -1.3, camDz: 7, camDy: 2.1, lookDy: 1.4 },
-  { name: '19_inside_mouth_b', z: 198, camDx: 1.3, camDz: 7, camDy: 1.9, lookDy: 1.3 },
+  {
+    name: '13_approaching_crest_2',
+    z: 176,
+    camDx: 1.6,
+    camDz: -2.2,
+    camDy: 0.4,
+    lookDz: 9,
+    lookDy: -0.6,
+  },
+  { name: '14_near_crest', z: 178, camDx: -1.6, camDz: -2.2, camDy: 0.4, lookDz: 9, lookDy: -0.6 },
+  {
+    name: '15_crest_boundary_z180',
+    z: 180,
+    camDx: 1.6,
+    camDz: -2.2,
+    camDy: 0.6,
+    lookDz: 9,
+    lookDy: 3,
+  },
+  {
+    name: '16_crest_boundary_z180_facing_back',
+    z: 180,
+    camDx: -1.6,
+    camDz: 2.2,
+    camDy: 0.6,
+    lookDz: -9,
+    lookDy: 3,
+  },
+  { name: '17_past_crest', z: 184, camDx: -1.6, camDz: 2.2, camDy: 0.4, lookDz: 9, lookDy: 11 },
+  { name: '18_ascending_1', z: 187, camDx: 1.6, camDz: 2.2, camDy: 0.2, lookDz: 9, lookDy: 13 },
+  { name: '19_ascending_2', z: 190, camDx: -1.6, camDz: 2.2, camDy: 2, lookDz: 9, lookDy: 13 },
+  { name: '20_ascending_3', z: 193, camDx: 1.6, camDz: 2.2, camDy: 2, lookDz: 9, lookDy: 13 },
 ];
 
 const browser = await puppeteer.launch({
@@ -182,11 +208,15 @@ for (const s of INTERIOR_SHOTS) {
       player.onGround = true;
       player.facing = 0;
       g.renderer.editorCam = {
-        pos: { x: shot.x + shot.camDx, y: shot.standY + shot.camDy, z: shot.z + shot.camDz },
-        target: { x: shot.x, y: shot.standY + shot.lookDy, z: shot.z },
+        pos: { x: shot.x + shot.camDx, y: shot.eyeY + shot.camDy, z: shot.z + shot.camDz },
+        target: {
+          x: shot.x,
+          y: shot.eyeY + shot.lookDy,
+          z: shot.z + shot.camDz + shot.lookDz,
+        },
       };
     },
-    { ...s, x: TX, standY: standY(s.z) },
+    { ...s, x: TX, standY: standY(s.z), eyeY: eyeY(s.z) },
   );
   await capture(s.name);
 }

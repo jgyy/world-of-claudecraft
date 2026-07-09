@@ -86,11 +86,13 @@ describe('vale_marsh_ridge_tunnel (zone1 <-> zone2 through-tunnel)', () => {
     expect(surface - crest.y).toBeGreaterThan(25); // >25yd of solid rock overhead
   });
 
-  it('both mouths sit close to the local surface height (a real cave opening, not a floating hole)', () => {
+  it('both mouths sit visibly above the local surface, a real hillside cave opening rather than level with the flat ground', () => {
     const mouths = [tunnel.waypoints[0], tunnel.waypoints[tunnel.waypoints.length - 1]];
     for (const m of mouths) {
       const surface = terrainHeight(m.x, m.z, seed);
-      expect(Math.abs(m.y - surface)).toBeLessThan(2);
+      const rise = m.y - surface;
+      expect(rise).toBeGreaterThan(1); // clearly above ground, not flush with it
+      expect(rise).toBeLessThan(6); // still close enough to read as this same hillside, not a floating arch
     }
   });
 });
