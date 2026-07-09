@@ -1277,10 +1277,10 @@ export class Renderer {
     // Terrain chunks never move after build (the LOD update only toggles
     // visibility): stop their per-frame matrix recompose (static_matrix.ts).
     freezeStaticMatrices(this.terrainView.group);
-    // Authored TunnelVolume content (content/tunnels.ts), voxel-meshed only
-    // across each tunnel's own small footprint (see tunnel_overlay.ts) and
-    // layered under the terrain above: static like the terrain chunks.
-    const tunnelOverlay = buildTunnelOverlay();
+    // Authored TunnelVolume content (content/tunnels.ts): a combined
+    // terrain+cave voxel patch filling the hole terrain.ts leaves over each
+    // tunnel's footprint (see tunnel_overlay.ts). Static like the terrain.
+    const tunnelOverlay = buildTunnelOverlay(this.sim.cfg.seed);
     setRenderCategory(tunnelOverlay.group, 'terrain');
     this.scene.add(tunnelOverlay.group);
     freezeStaticMatrices(tunnelOverlay.group);

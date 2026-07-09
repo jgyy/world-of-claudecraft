@@ -58,31 +58,18 @@ function segmentCarve(
   return radius - dist; // positive inside the capsule
 }
 
-// Every authored tunnel's own carve at a point, ignoring terrain entirely:
-// negative outside every capsule, positive inside at least one. Exposed
-// separately from voxelDensity (below) for tunnel_overlay.ts, which meshes
-// ONLY this surface: meshing voxelDensity's terrain-blended result would
-// re-tessellate the ordinary ground surface itself wherever a tunnel's
-// padded chunk box brushes near it (every mouth, by construction), producing
-// a second, z-fighting copy of the terrain mesh instead of just the tunnel.
-export function tunnelCarveDensity(x: number, y: number, z: number): number {
-  let carve = -Infinity;
-  for (const tunnel of TUNNELS) {
-    for (let i = 0; i + 1 < tunnel.waypoints.length; i++) {
-      const c = segmentCarve(x, y, z, tunnel.waypoints[i], tunnel.waypoints[i + 1]);
-      if (c > carve) carve = c;
-    }
-  }
-  return carve;
-}
-
 // True 3D voxel density at a world point: negative = solid, positive = air,
 // zero at the surface. Pure function of (x, y, z, seed) plus the fixed,
 // hand-authored TUNNELS content.
 export function voxelDensity(x: number, y: number, z: number, seed: number): number {
-  const density = y - terrainHeight(x, z, seed);
-  const carve = tunnelCarveDensity(x, y, z);
-  return carve > density ? carve : density;
+  let density = y - terrainHeight(x, z, seed);
+  for (const tunnel of TUNNELS) {
+    for (let i = 0; i + 1 < tunnel.waypoints.length; i++) {
+      const carve = segmentCarve(x, y, z, tunnel.waypoints[i], tunnel.waypoints[i + 1]);
+      if (carve > density) density = carve;
+    }
+  }
+  return density;
 }
 
 export function isSolidVoxel(x: number, y: number, z: number, seed: number): boolean {
@@ -116,6 +103,28 @@ export function tunnelBounds(tunnel: (typeof TUNNELS)[number]): {
     maxZ = Math.max(maxZ, w.z + w.radius);
   }
   return { minX, minY, minZ, maxX, maxY, maxZ };
+}
+
+// True when an axis-aligned world-space box [x0, x0+sizeX) x [z0, z0+sizeZ)
+// (an XZ footprint only, e.g. one terrain chunk) comes within `margin` of any
+// authored tunnel's own bounding box. Used by terrain.ts to leave a hole
+// where a tunnel's combined terrain+cave patch (render/tunnel_overlay.ts)
+// replaces the classic heightfield outright, instead of layering a second
+// mesh over it (which used to z-fight the real terrain).
+export function chunkNearAnyTunnel(
+  x0: number,
+  z0: number,
+  sizeX: number,
+  sizeZ: number,
+  margin: number,
+): boolean {
+  for (const tunnel of TUNNELS) {
+    const b = tunnelBounds(tunnel);
+    if (x0 > b.maxX + margin || x0 + sizeX < b.minX - margin) continue;
+    if (z0 > b.maxZ + margin || z0 + sizeZ < b.minZ - margin) continue;
+    return true;
+  }
+  return false;
 }
 
 export type { TunnelVolume, TunnelWaypoint } from './content/tunnels';

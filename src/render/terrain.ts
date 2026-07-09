@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { WORLD_MAX_X, WORLD_MAX_Z, WORLD_MIN_Z, ZONES } from '../sim/data';
 import { fbm2 } from '../sim/rng';
 import type { BiomeId } from '../sim/types';
+import { chunkNearAnyTunnel } from '../sim/voxel';
 import { biomeAt, roadDistance, terrainHeight, waterLevelAt, zoneBiomeAt } from '../sim/world';
 import { loadTexture } from './assets/loader';
 import { registerPreload } from './assets/preload';
@@ -30,9 +31,19 @@ import { groundDetailTexture, groundSplatMaps, macroNoiseTexture } from './textu
 //   normal map baked from terrainHeight.
 // - Low tier: the legacy vertex-color Lambert look, still chunked for culling.
 
-const CHUNK_SIZE = 60;
+// Exported so tunnel_overlay.ts can tile its combined terrain+cave patch on
+// the exact same chunk grid this module excludes tunnel-footprint chunks
+// from (see the chunkNearAnyTunnel skip below): the two must align exactly
+// or a gap/overlap seam would show at the hand-off.
+export const CHUNK_SIZE = 60;
 const SKIRT_DROP = 0.3;
 const SLOPE_EPS = 1.5; // matches the legacy color pass so tints don't shift
+// Slack around a tunnel's own bounding box (yd) before a chunk is excluded:
+// generous enough that tunnel_overlay.ts's combined patch, which covers the
+// SAME excluded chunks, always has real tunnel geometry well inside its own
+// edges rather than right at the seam with the reinstated classic terrain.
+// Exported so tunnel_overlay.ts computes the identical excluded-chunk set.
+export const TUNNEL_CHUNK_MARGIN = 8;
 
 // ---------------------------------------------------------------------------
 // Real PBR splat layers (ambientCG 1K, shipped under public/textures/terrain).
@@ -1005,6 +1016,10 @@ export function buildTerrain(seed: number): TerrainView {
   const skirtSpan = bands[bands.length - 1].spacing;
 
   const addChunk = (x0: number, z0: number, size: number, spacing: number): void => {
+    // Leave a hole for tunnel_overlay.ts's combined terrain+cave patch, which
+    // covers exactly this same chunk grid, instead of building the ordinary
+    // heightfield here and layering the patch over it (that used to z-fight).
+    if (chunkNearAnyTunnel(x0, z0, size, size, TUNNEL_CHUNK_MARGIN)) return;
     const geo = buildChunkGeometry(x0, z0, size, spacing, seed, !lowGfx, skirtSpan);
     const mesh = new THREE.Mesh(geo, mat);
     mesh.receiveShadow = true;

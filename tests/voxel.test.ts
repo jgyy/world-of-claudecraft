@@ -1,11 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  isSolidVoxel,
-  TUNNELS,
-  tunnelBounds,
-  tunnelCarveDensity,
-  voxelDensity,
-} from '../src/sim/voxel';
+import { isSolidVoxel, TUNNELS, tunnelBounds, voxelDensity } from '../src/sim/voxel';
 import { terrainHeight } from '../src/sim/world';
 
 describe('voxel density field', () => {
@@ -98,29 +92,5 @@ describe('vale_marsh_ridge_tunnel (zone1 <-> zone2 through-tunnel)', () => {
       const surface = terrainHeight(m.x, m.z, seed);
       expect(Math.abs(m.y - surface)).toBeLessThan(2);
     }
-  });
-});
-
-describe('tunnelCarveDensity (terrain-independent, for the render overlay)', () => {
-  it('agrees with voxelDensity wherever the tunnel carve wins (deep underground, no terrain competition)', () => {
-    const seed = 20061;
-    const tunnel = TUNNELS.find((t) => t.id === 'vale_marsh_ridge_tunnel')!;
-    const crest = tunnel.waypoints.find((w) => w.z === 180)!;
-    expect(tunnelCarveDensity(crest.x, crest.y, crest.z)).toBeCloseTo(
-      voxelDensity(crest.x, crest.y, crest.z, seed),
-    );
-  });
-
-  it('unlike voxelDensity, ignores terrain entirely: solid deep underground far from any tunnel', () => {
-    // Far from every authored tunnel: ordinary terrain is open air well above
-    // the ground, but tunnelCarveDensity only knows about the tunnels, so it
-    // reports solid (no capsule reaches this point) regardless of terrain.
-    expect(tunnelCarveDensity(-400, 1000, -400)).toBeLessThan(0);
-  });
-
-  it('is a pure function: same inputs always give the same carve', () => {
-    const a = tunnelCarveDensity(-25, -8, 180);
-    const b = tunnelCarveDensity(-25, -8, 180);
-    expect(a).toBe(b);
   });
 });

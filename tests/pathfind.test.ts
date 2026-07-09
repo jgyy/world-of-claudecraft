@@ -230,9 +230,9 @@ describe('vale_marsh_ridge_tunnel pathfinding', () => {
   const seed = 20061;
 
   it('rides the tunnel floor, not the ridge surface, inside the carved footprint', () => {
-    const surface = groundHeight(-25, 180, seed);
-    const h = pathGroundHeight(-25, 180, seed);
-    expect(h).toBeLessThan(surface - 10); // deep underground, not the ~+22yd crest
+    const surface = groundHeight(110, 180, seed);
+    const h = pathGroundHeight(110, 180, seed);
+    expect(h).toBeLessThan(surface - 10); // deep underground, not the ~+36yd crest
   });
 
   it('falls back to the ordinary surface outside any tunnel footprint', () => {
@@ -240,8 +240,8 @@ describe('vale_marsh_ridge_tunnel pathfinding', () => {
   });
 
   it('finds a real route from one mouth to the other via the tunnel, not blocked by the ridge', () => {
-    const from = { x: -25, z: 148 };
-    const to = { x: -25, z: 211 };
+    const from = { x: 110, z: 144 };
+    const to = { x: 110, z: 216 };
     const path = findPlayerPath(seed, from, to, 128, false, false);
     // A route was actually found and terminates at the goal (not the trivial
     // straight-line bail-out you'd get if the search window were too small or
