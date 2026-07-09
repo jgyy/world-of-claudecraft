@@ -1,5 +1,14 @@
 import { isBlocked, pathCrossesFence, resolvePosition } from './colliders';
+import { tunnelFloorAt } from './tunnel_traversal';
 import { groundHeight, waterLevelAt } from './world';
+
+// A column's height for pathing purposes: an authored tunnel's local floor
+// when one carves this (x,z), else the ordinary surface. Lets findPath route
+// through a TunnelVolume as a real lower alternate path instead of only ever
+// seeing the surface far overhead (see tunnel_traversal.ts).
+export function pathGroundHeight(x: number, z: number, seed: number): number {
+  return tunnelFloorAt(x, z, seed) ?? groundHeight(x, z, seed);
+}
 
 // Local A* over a 1-yard grid, used for short forced moves (warrior Charge).
 // The search window is the start/goal bounding box plus a margin, so cost
@@ -61,12 +70,12 @@ function segmentWalkable(
   const steps = Math.max(1, Math.ceil(d / SMOOTH_SAMPLE_STEP));
   let prevX = from.x;
   let prevZ = from.z;
-  let prevRide = rideHeight(prevX, prevZ, groundHeight(prevX, prevZ, o.seed), o.swim);
+  let prevRide = rideHeight(prevX, prevZ, pathGroundHeight(prevX, prevZ, o.seed), o.swim);
   for (let i = 1; i <= steps; i++) {
     const t = i / steps;
     const x = from.x + dx * t;
     const z = from.z + dz * t;
-    const h = groundHeight(x, z, o.seed);
+    const h = pathGroundHeight(x, z, o.seed);
     const isEnd = i === steps;
     if (
       (!isEnd || !allowBlockedEnd) &&
@@ -135,7 +144,7 @@ export function findPath(
   const walk = new Int8Array(W * H); // 0 unknown, 1 walkable, -1 blocked
   const height = new Float64Array(W * H).fill(NaN);
   const groundAt = (i: number): number => {
-    if (Number.isNaN(height[i])) height[i] = groundHeight(cx(i % W), cz((i / W) | 0), o.seed);
+    if (Number.isNaN(height[i])) height[i] = pathGroundHeight(cx(i % W), cz((i / W) | 0), o.seed);
     return height[i];
   };
   const walkable = (i: number): boolean => {
@@ -275,7 +284,7 @@ function playerDestinationWalkable(
   if (isBlocked(seed, p.x, p.z, PLAYER_BODY_RADIUS)) return false;
   // Swimmers can stop on the water; walkers can't, so deep water inside a
   // declared lake is rejected and the caller snaps to the nearest shore.
-  return swim || groundHeight(p.x, p.z, seed) >= waterLevelAt(p.x, p.z) - PLAYER_SWIM_DEPTH;
+  return swim || pathGroundHeight(p.x, p.z, seed) >= waterLevelAt(p.x, p.z) - PLAYER_SWIM_DEPTH;
 }
 
 export function resolvePlayerDestination(

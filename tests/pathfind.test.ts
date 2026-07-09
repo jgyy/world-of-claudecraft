@@ -1,9 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { isBlocked, pathCrossesFence, resolveMovement, resolvePosition } from '../src/sim/colliders';
-import { Sim } from '../src/sim/sim';
-import { findPath, findPlayerPath, PLAYER_SWIM_DEPTH, resolvePlayerDestination } from '../src/sim/pathfind';
-import { groundHeight, WATER_LEVEL } from '../src/sim/world';
+import {
+  isBlocked,
+  pathCrossesFence,
+  resolveMovement,
+  resolvePosition,
+} from '../src/sim/colliders';
 import { PROPS } from '../src/sim/data';
+import {
+  findPath,
+  findPlayerPath,
+  PLAYER_SWIM_DEPTH,
+  pathGroundHeight,
+  resolvePlayerDestination,
+} from '../src/sim/pathfind';
+import { Sim } from '../src/sim/sim';
+import { groundHeight, WATER_LEVEL } from '../src/sim/world';
 
 describe('player pathfinding', () => {
   it('smooths open-grid A* stair steps into one direct movement leg', () => {
@@ -211,6 +222,39 @@ describe('player pathfinding', () => {
       const resolved = resolveMovement(seed, from.x, from.z, to.x, to.z, 0.5);
       const side = (resolved.x - mx) * nx + (resolved.z - mz) * nz;
       expect(side, `fence ${fence.x1},${fence.z1} -> ${fence.x2},${fence.z2}`).toBeLessThan(-0.5);
+    }
+  });
+});
+
+describe('vale_marsh_ridge_tunnel pathfinding', () => {
+  const seed = 20061;
+
+  it('rides the tunnel floor, not the ridge surface, inside the carved footprint', () => {
+    const surface = groundHeight(-25, 180, seed);
+    const h = pathGroundHeight(-25, 180, seed);
+    expect(h).toBeLessThan(surface - 10); // deep underground, not the ~+22yd crest
+  });
+
+  it('falls back to the ordinary surface outside any tunnel footprint', () => {
+    expect(pathGroundHeight(0, 180, seed)).toBe(groundHeight(0, 180, seed));
+  });
+
+  it('finds a real route from one mouth to the other via the tunnel, not blocked by the ridge', () => {
+    const from = { x: -25, z: 148 };
+    const to = { x: -25, z: 211 };
+    const path = findPlayerPath(seed, from, to, 128, false, false);
+    // A route was actually found and terminates at the goal (not the trivial
+    // straight-line bail-out you'd get if the search window were too small or
+    // the goal were unreachable and dropped outside the search radius).
+    expect(path[path.length - 1]).toEqual(to);
+    // Every waypoint the search actually placed rides the tunnel floor deep
+    // under the ridge, confirming the route runs through the tunnel and not
+    // over the crest (which pathGroundHeight would reject as too steep to
+    // reach in one A* neighbor step given PLAYER_MAX_CLIMB_SLOPE).
+    for (const wp of path) {
+      if (Math.abs(wp.z - 180) < 15) {
+        expect(pathGroundHeight(wp.x, wp.z, seed)).toBeLessThan(0);
+      }
     }
   });
 });

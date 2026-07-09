@@ -39,14 +39,58 @@ describe('voxel density field', () => {
   });
 
   it('reports a bounding box expanded by each waypoint radius, not just the center', () => {
-    const b = tunnelBounds(TUNNELS[0]);
-    for (const w of TUNNELS[0].waypoints) {
-      expect(b.minX).toBeLessThanOrEqual(w.x - w.radius);
-      expect(b.maxX).toBeGreaterThanOrEqual(w.x + w.radius);
-      expect(b.minY).toBeLessThanOrEqual(w.y - w.radius);
-      expect(b.maxY).toBeGreaterThanOrEqual(w.y + w.radius);
-      expect(b.minZ).toBeLessThanOrEqual(w.z - w.radius);
-      expect(b.maxZ).toBeGreaterThanOrEqual(w.z + w.radius);
+    for (const tunnel of TUNNELS) {
+      const b = tunnelBounds(tunnel);
+      for (const w of tunnel.waypoints) {
+        expect(b.minX).toBeLessThanOrEqual(w.x - w.radius);
+        expect(b.maxX).toBeGreaterThanOrEqual(w.x + w.radius);
+        expect(b.minY).toBeLessThanOrEqual(w.y - w.radius);
+        expect(b.maxY).toBeGreaterThanOrEqual(w.y + w.radius);
+        expect(b.minZ).toBeLessThanOrEqual(w.z - w.radius);
+        expect(b.maxZ).toBeGreaterThanOrEqual(w.z + w.radius);
+      }
+    }
+  });
+});
+
+describe('vale_marsh_ridge_tunnel (zone1 <-> zone2 through-tunnel)', () => {
+  const seed = 20061; // the game's fixed world seed
+  const tunnel = TUNNELS.find((t) => t.id === 'vale_marsh_ridge_tunnel')!;
+
+  it('exists and its waypoints straddle the zone1/zone2 boundary (z=180)', () => {
+    expect(tunnel).toBeDefined();
+    const zs = tunnel.waypoints.map((w) => w.z);
+    expect(Math.min(...zs)).toBeLessThan(180);
+    expect(Math.max(...zs)).toBeGreaterThan(180);
+  });
+
+  it('carves open air at every waypoint center', () => {
+    for (const w of tunnel.waypoints) {
+      expect(voxelDensity(w.x, w.y, w.z, seed)).toBeGreaterThan(0);
+      expect(isSolidVoxel(w.x, w.y, w.z, seed)).toBe(false);
+    }
+  });
+
+  it('stays solid well outside each buried waypoint radius', () => {
+    // Skip the two mouth waypoints: their y sits at the surface by design, so
+    // stepping sideways lands in ordinary open air above ground, not rock.
+    const buried = tunnel.waypoints.slice(1, -1);
+    for (const w of buried) {
+      expect(isSolidVoxel(w.x + w.radius + 20, w.y, w.z, seed)).toBe(true);
+    }
+  });
+
+  it('the deepest waypoint (at the zone boundary) sits well under the ridge crest', () => {
+    const crest = tunnel.waypoints.find((w) => w.z === 180)!;
+    const surface = terrainHeight(crest.x, crest.z, seed);
+    expect(surface - crest.y).toBeGreaterThan(25); // >25yd of solid rock overhead
+  });
+
+  it('both mouths sit close to the local surface height (a real cave opening, not a floating hole)', () => {
+    const mouths = [tunnel.waypoints[0], tunnel.waypoints[tunnel.waypoints.length - 1]];
+    for (const m of mouths) {
+      const surface = terrainHeight(m.x, m.z, seed);
+      expect(Math.abs(m.y - surface)).toBeLessThan(2);
     }
   });
 });

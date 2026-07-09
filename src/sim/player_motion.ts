@@ -20,6 +20,7 @@
 import { isRooted, isStunned } from './combat/cc';
 import { PLAYER_BODY_RADIUS, PLAYER_MAX_CLIMB_SLOPE, PLAYER_SWIM_DEPTH } from './pathfind';
 import { GHOST_RUN_MULT } from './spirit';
+import { tunnelSpanAt } from './tunnel_traversal';
 import { DT, type Entity, type MoveInput, normAngle, RUN_SPEED, TURN_SPEED } from './types';
 import {
   groundHeight,
@@ -137,9 +138,18 @@ export function stepPlayerMotion(deps: PlayerMotionDeps, p: Entity, inp: MoveInp
 
   const hasMoveInput = mx !== 0 || mz !== 0;
   const swimming = isSwimming(p, deps.seed);
+  // Underground and inside an authored tunnel's carved interior: the surface
+  // slope/wall rules below reason about terrainHeight far overhead, which is
+  // meaningless while burrowed under a ridge, so they're bypassed for the
+  // stretch of movement resolved while inTunnel (see tunnel_traversal.ts;
+  // lateral tunnel-wall collision is a documented follow-up, not this pass).
+  const inTunnel = tunnelSpanAt(p.pos.x, p.pos.y, p.pos.z, deps.seed) != null;
   // Standing on unwalkably steep ground: no control, no jump, slide downhill.
   const steepGround =
-    p.onGround && !swimming && terrainSteepnessAt(p.pos.x, p.pos.z, deps.seed) > MAX_CLIMB_SLOPE;
+    p.onGround &&
+    !swimming &&
+    !inTunnel &&
+    terrainSteepnessAt(p.pos.x, p.pos.z, deps.seed) > MAX_CLIMB_SLOPE;
   const moving = hasMoveInput && !isRooted(p) && !steepGround;
   let wishX = 0,
     wishZ = 0,
@@ -180,7 +190,7 @@ export function stepPlayerMotion(deps: PlayerMotionDeps, p: Entity, inp: MoveInp
     // an uphill step is blocked when the step itself is too steep OR when it
     // lands on ground whose true gradient is unwalkable (so approaching at an
     // angle cannot cheat the limit)
-    if (p.onGround && !swimming) {
+    if (p.onGround && !swimming && !inTunnel) {
       const h0 = groundHeight(p.pos.x, p.pos.z, deps.seed);
       const h1 = groundHeight(nx, nz, deps.seed);
       const run = Math.hypot(nx - p.pos.x, nz - p.pos.z);
@@ -193,7 +203,7 @@ export function stepPlayerMotion(deps: PlayerMotionDeps, p: Entity, inp: MoveInp
         nx = p.pos.x;
         nz = p.pos.z;
       }
-    } else if (!p.onGround) {
+    } else if (!p.onGround && !inTunnel) {
       // Airborne, the same wall rule applies: terrain rising above the body
       // that could not be walked up cannot be jumped into either. The player
       // drops at the base of the face instead of beaching partway up it.
@@ -228,8 +238,13 @@ export function stepPlayerMotion(deps: PlayerMotionDeps, p: Entity, inp: MoveInp
     }
   }
 
-  // Vertical: jumping, gravity, swimming, fall damage
-  const ground = groundHeight(p.pos.x, p.pos.z, deps.seed);
+  // Vertical: jumping, gravity, swimming, fall damage. Tunnel-aware: while
+  // the mover's post-step position is inside an authored tunnel's carved
+  // interior, ride its local floor instead of the surface terrain far
+  // overhead (see tunnel_traversal.ts).
+  const surfaceGround = groundHeight(p.pos.x, p.pos.z, deps.seed);
+  const tunnelSpan = tunnelSpanAt(p.pos.x, p.pos.y, p.pos.z, deps.seed);
+  const ground = tunnelSpan ? tunnelSpan.floorY : surfaceGround;
   const deepWater = ground < waterLevelAt(p.pos.x, p.pos.z) - SWIM_DEPTH;
   if (deepWater && p.pos.y <= swimSurfaceY(p.pos.x, p.pos.z) + 0.05) {
     // treading water at the surface
@@ -318,7 +333,7 @@ export function stepPlayerMotion(deps: PlayerMotionDeps, p: Entity, inp: MoveInp
   // a tick's clip beats being shoved onto a wall). Lives in the kernel so the
   // server Sim and the client self-predictor apply it identically; no-op on open
   // ground and on flat instanced floors.
-  if (p.onGround && !isSwimming(p, deps.seed)) {
+  if (p.onGround && !isSwimming(p, deps.seed) && !inTunnel) {
     const s = terrainWallStandoff(p.pos.x, p.pos.z, deps.seed, BODY_RADIUS, MAX_CLIMB_SLOPE);
     if (s.x !== p.pos.x || s.z !== p.pos.z) {
       const resolved = deps.resolveMove(p.pos.x, p.pos.z, s.x, s.z, BODY_RADIUS, p, false);

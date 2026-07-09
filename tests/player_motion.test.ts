@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { isBlocked, resolveMovement } from '../src/sim/colliders';
 import { moveSpeedMult, type PlayerMotionDeps, stepPlayerMotion } from '../src/sim/player_motion';
 import { Sim } from '../src/sim/sim';
+import { tunnelColumnAt } from '../src/sim/tunnel_traversal';
 import type { Entity, MoveInput } from '../src/sim/types';
 import { terrainHeight, terrainSteepness, terrainSteepnessAt, WATER_LEVEL } from '../src/sim/world';
 
@@ -253,5 +254,73 @@ describe('player motion kernel parity with the live Sim', () => {
       return JSON.stringify(out);
     };
     expect(trace()).toBe(trace());
+  });
+});
+
+describe('vale_marsh_ridge_tunnel traversal', () => {
+  // The real game world seed. The module-level SEED=42 fixture above is the
+  // kernel parity harness's own test seed and unrelated to authored content;
+  // the tunnel was authored against terrain generated at 20061.
+  const GAME_SEED = 20061;
+
+  function makeGameSim(): Sim {
+    const sim = new Sim({ seed: GAME_SEED, playerClass: 'warrior', autoEquip: true });
+    sim.setPlayerLevel(60);
+    return sim;
+  }
+
+  it('falls from just above a tunnel mouth onto the tunnel floor, not the surface', () => {
+    const sim = makeGameSim();
+    const p = sim.player;
+    const col = tunnelColumnAt(-25, 150, GAME_SEED)!;
+    p.pos.x = -25;
+    p.pos.z = 150;
+    p.pos.y = terrainHeight(-25, 150, GAME_SEED) + 2; // a hair above the mouth, airborne
+    p.prevPos = { ...p.pos };
+    p.onGround = false;
+    p.vx = 0;
+    p.vz = 0;
+    p.vy = 0;
+    p.fallStartY = p.pos.y;
+
+    const deps = clientDeps(GAME_SEED);
+    for (let i = 0; i < 400 && !p.onGround; i++) {
+      p.prevPos = { ...p.pos };
+      stepPlayerMotion(deps, p, mi());
+    }
+
+    expect(p.onGround).toBe(true);
+    expect(p.pos.y).toBeCloseTo(col.floorY, 0);
+    expect(p.pos.y).toBeLessThan(terrainHeight(-25, 150, GAME_SEED) - 1);
+  });
+
+  it('keeps riding the tunnel floor while walking through, never snapping up to the ridge surface', () => {
+    const sim = makeGameSim();
+    const p = sim.player;
+    const startCol = tunnelColumnAt(-25, 160, GAME_SEED)!;
+    p.pos.x = -25;
+    p.pos.z = 160;
+    p.pos.y = startCol.floorY;
+    p.prevPos = { ...p.pos };
+    p.facing = 0; // faces +z (see stepPlayerMotion's facing convention comment)
+    p.onGround = true;
+    p.vx = 0;
+    p.vz = 0;
+    p.vy = 0;
+    p.fallStartY = p.pos.y;
+
+    const deps = clientDeps(GAME_SEED);
+    for (let i = 0; i < 100; i++) {
+      p.prevPos = { ...p.pos };
+      stepPlayerMotion(deps, p, mi({ forward: true }));
+    }
+
+    // Walked well north along the tunnel (past the ridge crest at z=180),
+    // still riding the local tunnel floor rather than the +22yd ridge crest,
+    // and short of the far mouth (z=209) where it would naturally resurface.
+    expect(p.pos.z).toBeGreaterThan(180);
+    expect(p.pos.z).toBeLessThan(205);
+    const crestSurface = terrainHeight(-25, p.pos.z, GAME_SEED);
+    expect(p.pos.y).toBeLessThan(crestSurface - 5);
   });
 });
