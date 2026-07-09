@@ -34,7 +34,7 @@ import {
 } from './resurrection';
 import type { PlayerMeta } from './sim';
 import type { SimContext } from './sim_context';
-import { dist2d, emptyMoveInput, type Entity, type Vec3 } from './types';
+import { dist2d, type Entity, emptyMoveInput, type Vec3 } from './types';
 
 // --- tuning -----------------------------------------------------------------
 // A released spirit runs faster than the living, ignoring slows (a ghost cannot be
