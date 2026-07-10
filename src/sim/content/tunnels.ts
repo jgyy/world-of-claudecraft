@@ -46,37 +46,45 @@ export interface TunnelVolume {
 // Vale / Mirefen Marsh border (zone1/zone2 meet at z=180): both mouths sit
 // clearly ABOVE the local terrainHeight, cut into a real protruding mound
 // (see the `mound` field above and moundSolidAmount in voxel.ts) rather than
-// just a dip in the existing hillside slope. Both mouths sit at x=110, on
-// the EAST side of both zones (well clear of the Eastbrook<->Fenbridge
-// causeway at x=0, both zones' hubs, every lake, the Boar Meadow/Bandit
-// Camp/Fallen Chapel/Brightwood Glade/Widow Thicket POIs, and the
-// vale_kobold_warren tunnel to the west); the interior waypoints between the
-// mouths S-curve laterally (x: 110 -> 116 -> 112 -> 104 -> 110 at the crest
-// -> 116 -> 112 -> 104 -> 110), still comfortably inside the same east-side
-// corridor and clear of everything above (the widest lateral excursion, x=104,
-// is still ~6yd east of the mouths' own x=110 and nowhere near x=0 or any POI).
+// just a dip in the existing hillside slope. Both mouths sit at x=128, on
+// the EAST side of both zones (round 8: shifted east from x=110, since the
+// old x=110 mouth's 14yd mound radius + 6yd decoration clearance overlapped
+// the Fallen Chapel undead camp cluster around (88-92, 90) - a reviewer
+// wanted the entrance clear of any mob spawn area. x=128 keeps a comfortable
+// clearance margin from that camp and from every zone hub/lake/POI/road and
+// the unrelated vale_kobold_warren tunnel to the west); the interior
+// waypoints between the mouths S-curve laterally (x: 128 -> 134 -> 130 ->
+// 122 -> 128 at the crest -> 134 -> 130 -> 122 -> 128), still comfortably
+// clear of everything above.
 //
 // Cross-section shape (archScale/floorScale, see TunnelWaypoint above): every
 // waypoint domes taller overhead than it is wide (archScale > 1) and flattens
 // underfoot (floorScale < 1), so the tube reads as a real arched cave, not a
-// circular pipe bore. The two mouth waypoints push this further still
-// (archScale 2.2, floorScale 1.0): a tall, upright doorway cut into the
-// mound's face, the shape a player actually walks INTO, not a round hole
-// lying flat on the ground. The shape tapers smoothly from that upright
-// mouth into the ordinary arched-cave cross-section over the next couple of
-// waypoints in from each end.
+// circular pipe bore. Round 8: the two mouth waypoints push this MUCH
+// further than the tunnel body (radius 6.5, archScale 3.0, floorScale 0.45,
+// narrower and noticeably flatter-floored than before) - floorScale 0.85 in
+// the previous round still put the threshold floor well below the ambient
+// hillside, so a camera at the mouth read it as looking down into a round
+// pit/crater rather than through a doorway. Floor scale 0.45 combined with
+// each mouth's own y (set so `y - radius*floorScale` lands almost exactly at
+// that mouth's own ambient terrainHeight - see the mound/floor math in
+// voxel.ts) puts the threshold at natural ground level: a real, walk-through
+// doorway cut into the hillside face, not a dip you fall into. The shape
+// tapers smoothly from that tighter, flatter mouth back out to the ordinary,
+// wider arched-cave cross-section over the next couple of waypoints in from
+// each end.
 //
 // Profile (the y each waypoint sits at): every single segment is held to a
-// MAXIMUM 30 degree slope (|dy/dz| <= tan(30) = 0.577). The crest sits well
-// under the ridge (~37yd below mouth level, deeper than the earlier pass),
-// which needs a longer z run than before to stay under the 30 degree cap:
-// both mouths moved further out from the z=180 zone boundary (z=96 and
-// z=264, versus the previous z=128/z=232) to buy that extra run. Each
-// mouth's first stretch still stays close to level (a shallow single-digit-
-// degree dip over the first stretch) before the passage curves into its
-// real descent, for the same reason as before: dropping steeply right at
-// the mouth reads from outside as looking straight down a well/pit shaft,
-// not walking horizontally through a doorway into a hillside.
+// MAXIMUM 30 degree slope (|dy/dz| <= tan(30) = 0.577). Round 8: the crest
+// pushed noticeably deeper again, from y=-37 to y=-52.5 (the ridge surface
+// itself sits at y=+35.8 at the crest, so the tunnel is now ~88yd of solid
+// rock below it, versus ~73yd before). To stay under the 30 degree cap given
+// the extra depth, both mouths moved further out from the z=180 zone
+// boundary: z=66 and z=294 (was z=96/z=264). Each mouth's first stretch still
+// stays close to level before the passage curves into its real descent, for
+// the same reason as before: dropping steeply right at the mouth reads from
+// outside as looking straight down a well/pit shaft, not walking horizontally
+// through a doorway into a hillside.
 export const TUNNELS: TunnelVolume[] = [
   {
     id: 'vale_kobold_warren',
@@ -91,33 +99,33 @@ export const TUNNELS: TunnelVolume[] = [
     id: 'vale_marsh_ridge_tunnel',
     waypoints: [
       {
-        x: 110,
-        y: 7.5,
-        z: 96,
-        radius: 7.8,
-        archScale: 2.2,
-        floorScale: 1.0,
+        x: 128,
+        y: 8.0,
+        z: 66,
+        radius: 6.5,
+        archScale: 3.0,
+        floorScale: 0.45,
         mound: true,
         moundRadius: 14,
-        moundHeight: 10,
+        moundHeight: 12,
       },
-      { x: 116, y: -0.81, z: 112, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
-      { x: 112, y: -10.67, z: 131, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
-      { x: 104, y: -21.58, z: 152, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
-      { x: 110, y: -37.0, z: 180, radius: 8.4, archScale: 1.3, floorScale: 0.6 },
-      { x: 116, y: -23.83, z: 208, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
-      { x: 112, y: -13.95, z: 229, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
-      { x: 104, y: -5.01, z: 248, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
+      { x: 134, y: -3.7, z: 88, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
+      { x: 130, y: -17.0, z: 114, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
+      { x: 122, y: -31.7, z: 142, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
+      { x: 128, y: -52.5, z: 180, radius: 8.4, archScale: 1.3, floorScale: 0.6 },
+      { x: 134, y: -33.44, z: 218, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
+      { x: 130, y: -19.95, z: 246, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
+      { x: 122, y: -7.76, z: 272, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
       {
-        x: 110,
-        y: 2.5,
-        z: 264,
-        radius: 7.8,
-        archScale: 2.2,
-        floorScale: 1.0,
+        x: 128,
+        y: 2.2,
+        z: 294,
+        radius: 6.5,
+        archScale: 3.0,
+        floorScale: 0.45,
         mound: true,
         moundRadius: 14,
-        moundHeight: 10,
+        moundHeight: 12,
       },
     ],
   },

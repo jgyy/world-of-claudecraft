@@ -3,8 +3,8 @@ import { tunnelColumnAt, tunnelFloorAt, tunnelSpanAt } from '../src/sim/tunnel_t
 import { terrainHeight } from '../src/sim/world';
 
 const SEED = 20061; // the game's fixed world seed
-// vale_marsh_ridge_tunnel has both mouths at x=110 (east side), z from 96 to 264.
-const TX = 110;
+// vale_marsh_ridge_tunnel has both mouths at x=128 (east side), z from 66 to 294.
+const TX = 128;
 const CREST_Z = 180;
 
 describe('tunnelColumnAt / tunnelFloorAt', () => {
@@ -26,7 +26,7 @@ describe('tunnelColumnAt / tunnelFloorAt', () => {
   });
 
   it('floor matches at the mouths (ceiling opens to sky there)', () => {
-    const col = tunnelColumnAt(TX, 96, SEED);
+    const col = tunnelColumnAt(TX, 66, SEED);
     expect(col).not.toBeNull();
     expect(col!.ceilingY).toBe(Infinity);
   });

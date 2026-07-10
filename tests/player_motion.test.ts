@@ -272,10 +272,10 @@ describe('vale_marsh_ridge_tunnel traversal', () => {
   it('falls from just above a tunnel mouth onto the tunnel floor, not the surface', () => {
     const sim = makeGameSim();
     const p = sim.player;
-    const col = tunnelColumnAt(110, 96, GAME_SEED)!;
-    p.pos.x = 110;
-    p.pos.z = 96;
-    p.pos.y = terrainHeight(110, 96, GAME_SEED) + 2; // a hair above the mouth, airborne
+    const col = tunnelColumnAt(128, 66, GAME_SEED)!;
+    p.pos.x = 128;
+    p.pos.z = 66;
+    p.pos.y = terrainHeight(128, 66, GAME_SEED) + 2; // a hair above the mouth, airborne
     p.prevPos = { ...p.pos };
     p.onGround = false;
     p.vx = 0;
@@ -291,14 +291,19 @@ describe('vale_marsh_ridge_tunnel traversal', () => {
 
     expect(p.onGround).toBe(true);
     expect(p.pos.y).toBeCloseTo(col.floorY, 0);
-    expect(p.pos.y).toBeLessThan(terrainHeight(110, 96, GAME_SEED) - 1);
+    // Round 8: the mouth's floorScale (0.45) is tuned so the threshold floor
+    // lands almost exactly at the mouth's own ambient terrainHeight (a real
+    // walk-through doorway at ground level), not well below it (a pit the
+    // player falls into) - so this only pins "close to the surface", not
+    // "well below" like earlier rounds.
+    expect(Math.abs(p.pos.y - terrainHeight(128, 66, GAME_SEED))).toBeLessThan(2);
   });
 
   it('keeps riding the tunnel floor while walking through, never snapping up to the ridge surface', () => {
     const sim = makeGameSim();
     const p = sim.player;
-    const startCol = tunnelColumnAt(110, 160, GAME_SEED)!;
-    p.pos.x = 110;
+    const startCol = tunnelColumnAt(128, 160, GAME_SEED)!;
+    p.pos.x = 128;
     p.pos.z = 160;
     p.pos.y = startCol.floorY;
     p.prevPos = { ...p.pos };
@@ -316,11 +321,11 @@ describe('vale_marsh_ridge_tunnel traversal', () => {
     }
 
     // Walked well north along the tunnel (past the ridge crest at z=180),
-    // still riding the local tunnel floor rather than the +22yd ridge crest,
-    // and short of the far mouth (z=209) where it would naturally resurface.
+    // still riding the local tunnel floor rather than the ridge surface,
+    // and short of the far mouth (z=294) where it would naturally resurface.
     expect(p.pos.z).toBeGreaterThan(180);
-    expect(p.pos.z).toBeLessThan(205);
-    const crestSurface = terrainHeight(110, p.pos.z, GAME_SEED);
+    expect(p.pos.z).toBeLessThan(215);
+    const crestSurface = terrainHeight(128, p.pos.z, GAME_SEED);
     expect(p.pos.y).toBeLessThan(crestSurface - 5);
   });
 });

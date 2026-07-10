@@ -34,17 +34,6 @@ const OVERLAP_VOXELS = 2; // extra voxel cells of overlap padded onto every sub-
 // exactly the "view outside the map" a reviewer flagged. A deep, doubled-
 // depth tunnel needs real headroom here, not a tight sliver.
 const HEIGHT_MARGIN = 35;
-// Per-tunnel backstop padding: tight around that ONE tunnel's own carved
-// envelope (tunnelBounds), not the merged bounding box of every excluded
-// terrain chunk across every tunnel in the level. A merged box between two
-// tunnels far apart in x/z (as here: vale_kobold_warren at x~60-84 and
-// vale_marsh_ridge_tunnel at x~110) stretches an opaque rock ceiling/wall set
-// over the wide-open world between them - exactly the "rocky sky" and
-// "floating rock wall clashing with the hillside" bugs a reviewer flagged.
-// Scoping per-tunnel keeps the backstop hugging only that tunnel's own
-// underground volume and mound, invisible from anywhere in the open world.
-const BACKSTOP_LATERAL_MARGIN = 6; // yd of lateral padding around one tunnel's own bounds
-const BACKSTOP_HEIGHT_MARGIN = 4; // yd of vertical padding around one tunnel's own bounds
 
 // Real PBR albedo (ambientCG 1K, the same asset set voxel_terrain.ts already
 // ships under public/textures/terrain): grass for open ground, rock for
@@ -320,12 +309,12 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
   if (chunks.length === 0) return { group, chunkCount: 0, triangleCount: 0 };
 
   const density = (x: number, y: number, z: number) => voxelDensity(x, y, z, seed);
-  // Double-sided: the backstop planes below are flat quads whose correct
-  // inward-facing orientation is easy to get backwards (exactly what
-  // happened once already - a south/north wall pair with swapped rotations
-  // rendered invisible from inside, letting the camera see clean through to
-  // the raw scene background). Single-sided front-face culling buys nothing
-  // here worth risking that failure mode for again.
+  // Double-sided: the deep floor cap below is a flat quad whose correct
+  // inward-facing orientation is easy to get backwards (an earlier pass with
+  // a full enclosing box had exactly this happen to a wall pair, rendering
+  // invisible from inside and letting the camera see clean through to the
+  // raw scene background). Single-sided front-face culling buys nothing here
+  // worth risking that failure mode for again.
   const material = new THREE.MeshStandardMaterial({
     roughness: 0.92,
     metalness: 0,
@@ -456,49 +445,31 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
     }
   }
 
-  // Backstop: a fully enclosing box of opaque rock-textured planes (floor,
-  // ceiling, and all four walls) well outside the meshed voxel volume, built
-  // PER TUNNEL from that tunnel's own tunnelBounds (not a box unioning every
-  // excluded chunk across every tunnel in the level - see BACKSTOP_LATERAL_
-  // MARGIN above for why that used to leak an opaque ceiling/wall over the
-  // wide-open world between two unrelated tunnels). The voxel mesh itself
-  // should already be watertight, but Surface Nets sampled at a finite
-  // resolution can leave a hairline crack at a steep gradient (most likely
-  // right where a tunnel's carve barely edges out rolling terrain near a
-  // mouth) - exactly what let a prior pass see the raw scene background
-  // (sky/fog color) through such a gap, a reviewer-flagged "view outside the
-  // map". This backstop makes that impossible regardless, while staying
-  // tight enough around each tunnel's own volume to never surface above open
-  // ground or the surrounding scenery.
-  const addBackstop = (
-    name: string,
-    sizeA: number,
-    sizeB: number,
-    rotateX: number,
-    rotateY: number,
-    x: number,
-    y: number,
-    z: number,
-  ): void => {
-    const geo = new THREE.PlaneGeometry(sizeA, sizeB);
-    if (rotateX) geo.rotateX(rotateX);
-    if (rotateY) geo.rotateY(rotateY);
-    geo.translate(x, y, z);
-    addInteriorAttribute(geo, seed);
-    const mesh = new THREE.Mesh(geo, material);
-    mesh.name = name;
-    mesh.matrixAutoUpdate = false;
-    mesh.updateMatrix();
-    group.add(mesh);
-  };
-
+  // Backstop: round 8 replaced the fully enclosing box (floor, ceiling, and
+  // all four walls) with a single deep floor cap. The box version - even
+  // scoped per-tunnel to that tunnel's own tunnelBounds - still had to poke
+  // its wall/ceiling planes up out of the ground wherever the surrounding
+  // ambient terrain sat lower than the tunnel/mound's own height there (the
+  // marsh and vale hillsides roll well below the mound's crest), so it read
+  // as a giant flat rock slab floating above the grass - not "blending into
+  // the terrain" at all, the opposite of the goal. The terrain patch above
+  // (built from the identical voxelDensity field: ordinary heightfield,
+  // every mound, every tunnel carve, all combined into ONE isosurface) is
+  // already watertight and continuous with the ordinary terrain.ts chunks
+  // just outside this excluded footprint - there is no lateral "edge" for a
+  // wall to guard, and open sky above ground is correct, not a bug. The one
+  // real remaining risk (a hairline Surface Nets seam at a steep gradient,
+  // deep inside the carved passage) can only expose the raw scene background
+  // looking essentially straight down through the floor, which ordinary
+  // player collision (tunnelFloorAt) never allows a player to reach anyway.
+  // This floor cap is cheap insurance for that one case only: sized tight to
+  // the tunnel's own footprint, sunk well below the lowest carved point, and
+  // never poking above it - so it can never be seen from any legitimate
+  // camera position, on the surface or inside the tunnel.
+  const FLOOR_CAP_DEPTH_MARGIN = 15; // yd below the tunnel's own lowest point
+  const FLOOR_CAP_LATERAL_MARGIN = 4; // yd of lateral padding, tight to the carve
   for (const tunnel of TUNNELS) {
     const b = tunnelBounds(tunnel);
-    // Only for tunnels whose footprint is actually part of this overlay pass
-    // (excludedChunks() above already filtered to tunnels touching the
-    // world's chunk grid; every authored tunnel qualifies today, but this
-    // guard keeps a future non-overlay-rendered tunnel from getting a
-    // backstop with nothing behind it).
     const touchesChunks = chunks.some(
       (chunk) =>
         !(
@@ -510,25 +481,20 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
     );
     if (!touchesChunks) continue;
 
-    const capMinX = b.minX - BACKSTOP_LATERAL_MARGIN;
-    const capMaxX = b.maxX + BACKSTOP_LATERAL_MARGIN;
-    const capMinZ = b.minZ - BACKSTOP_LATERAL_MARGIN;
-    const capMaxZ = b.maxZ + BACKSTOP_LATERAL_MARGIN;
-    const loY = b.minY - BACKSTOP_HEIGHT_MARGIN;
-    const hiY = b.maxY + BACKSTOP_HEIGHT_MARGIN;
-    const w = capMaxX - capMinX;
-    const d = capMaxZ - capMinZ;
-    const h = hiY - loY;
-    const cx = (capMinX + capMaxX) / 2;
-    const cz = (capMinZ + capMaxZ) / 2;
-    const prefix = `tunnel-overlay-backstop-${tunnel.id}`;
-
-    addBackstop(`${prefix}-floor`, w, d, -Math.PI / 2, 0, cx, loY, cz);
-    addBackstop(`${prefix}-ceiling`, w, d, Math.PI / 2, 0, cx, hiY, cz);
-    addBackstop(`${prefix}-west`, d, h, 0, Math.PI / 2, capMinX, (loY + hiY) / 2, cz);
-    addBackstop(`${prefix}-east`, d, h, 0, -Math.PI / 2, capMaxX, (loY + hiY) / 2, cz);
-    addBackstop(`${prefix}-south`, w, h, 0, 0, cx, (loY + hiY) / 2, capMinZ);
-    addBackstop(`${prefix}-north`, w, h, 0, Math.PI, cx, (loY + hiY) / 2, capMaxZ);
+    const capMinX = b.minX - FLOOR_CAP_LATERAL_MARGIN;
+    const capMaxX = b.maxX + FLOOR_CAP_LATERAL_MARGIN;
+    const capMinZ = b.minZ - FLOOR_CAP_LATERAL_MARGIN;
+    const capMaxZ = b.maxZ + FLOOR_CAP_LATERAL_MARGIN;
+    const floorY = b.minY - FLOOR_CAP_DEPTH_MARGIN;
+    const geo = new THREE.PlaneGeometry(capMaxX - capMinX, capMaxZ - capMinZ);
+    geo.rotateX(-Math.PI / 2);
+    geo.translate((capMinX + capMaxX) / 2, floorY, (capMinZ + capMaxZ) / 2);
+    addInteriorAttribute(geo, seed);
+    const mesh = new THREE.Mesh(geo, material);
+    mesh.name = `tunnel-overlay-floorcap-${tunnel.id}`;
+    mesh.matrixAutoUpdate = false;
+    mesh.updateMatrix();
+    group.add(mesh);
   }
 
   addDecorations(group);
