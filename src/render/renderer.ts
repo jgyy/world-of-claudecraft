@@ -43,7 +43,7 @@ import { AOE_RING_LIFETIME, aoeRingAnim } from './aoe_ring';
 import type { SpatialAudioSink, Surface } from './audio_sink';
 import { type BirdsView, buildBirds } from './birds';
 import { type CameraOcclusionState, stepCameraOcclusion } from './camera_collision';
-import { clampCamDistForEnclosedSpace } from './camera_zoom_limit';
+import { cameraFloorAt, clampCamDistForEnclosedSpace } from './camera_zoom_limit';
 import { characterSoulRendActive } from './character_effects';
 import { type AnimState, type CharacterVisual, createCharacterVisual } from './characters';
 import { mechAssetsReady, preloadMechAssets } from './characters/assets';
@@ -5407,7 +5407,15 @@ export class Renderer {
     cx = px + (cx - px) * ct;
     cy = eyeY + (cy - eyeY) * ct;
     cz = pz + (cz - pz) * ct;
-    const groundY = groundHeight(cx, cz, seed) + 0.6;
+    // cameraFloorAt (not plain groundHeight): near a tunnel entrance mound
+    // the ambient ground is raised by the mound's own additive bump (see
+    // voxel.ts), and while the camera's own sample column sits over a
+    // tunnel's footprint the open-world surface sits far above the tunnel's
+    // real floor. Clamping to plain groundHeight let the camera sink into a
+    // mound's exterior slope near a mouth, or snap to the far-overhead
+    // surface (locking the view into a near-vertical look-down) while deep
+    // underground; see camera_zoom_limit.ts.
+    const groundY = cameraFloorAt(cx, cy, cz, seed);
     this.camera.position.set(cx, Math.max(cy, groundY), cz);
     if (Math.abs(this.camera.fov - this.camOcclusion.fov) > 0.01) {
       this.camera.fov = this.camOcclusion.fov;

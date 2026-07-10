@@ -91,9 +91,9 @@ function segmentCarve(
 function moundIrregularity(angle: number): number {
   return (
     1 +
-    0.16 * Math.sin(angle * 3 + 0.6) +
-    0.09 * Math.cos(angle * 5 + 2.1) +
-    0.05 * Math.sin(angle * 7 + 4.4)
+    0.1 * Math.sin(angle * 3 + 0.6) +
+    0.055 * Math.cos(angle * 5 + 2.1) +
+    0.03 * Math.sin(angle * 7 + 4.4)
   );
 }
 

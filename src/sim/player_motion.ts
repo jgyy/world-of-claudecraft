@@ -22,6 +22,7 @@ import { PLAYER_BODY_RADIUS, PLAYER_MAX_CLIMB_SLOPE, PLAYER_SWIM_DEPTH } from '.
 import { GHOST_RUN_MULT } from './spirit';
 import { tunnelSpanAt } from './tunnel_traversal';
 import { DT, type Entity, type MoveInput, normAngle, RUN_SPEED, TURN_SPEED } from './types';
+import { groundHeightWithMounds } from './voxel';
 import {
   groundHeight,
   terrainDownhill,
@@ -241,8 +242,12 @@ export function stepPlayerMotion(deps: PlayerMotionDeps, p: Entity, inp: MoveInp
   // Vertical: jumping, gravity, swimming, fall damage. Tunnel-aware: while
   // the mover's post-step position is inside an authored tunnel's carved
   // interior, ride its local floor instead of the surface terrain far
-  // overhead (see tunnel_traversal.ts).
-  const surfaceGround = groundHeight(p.pos.x, p.pos.z, deps.seed);
+  // overhead (see tunnel_traversal.ts). groundHeightWithMounds (not plain
+  // groundHeight): near a tunnel entrance mound the real standable ground is
+  // raised by the mound's own additive bump (voxel.ts); resolving against
+  // the unraised terrain here left a mover partially embedded in the
+  // mound's exterior slope instead of standing on top of it.
+  const surfaceGround = groundHeightWithMounds(p.pos.x, p.pos.z, deps.seed);
   const tunnelSpan = tunnelSpanAt(p.pos.x, p.pos.y, p.pos.z, deps.seed);
   const ground = tunnelSpan ? tunnelSpan.floorY : surfaceGround;
   const deepWater = ground < waterLevelAt(p.pos.x, p.pos.z) - SWIM_DEPTH;
@@ -371,7 +376,7 @@ export function stepPlayerMotion(deps: PlayerMotionDeps, p: Entity, inp: MoveInp
       if (terrainSteepnessAt(standX, standZ, deps.seed) <= MAX_CLIMB_SLOPE) {
         p.pos.x = standX;
         p.pos.z = standZ;
-        p.pos.y = groundHeight(standX, standZ, deps.seed);
+        p.pos.y = groundHeightWithMounds(standX, standZ, deps.seed);
       }
     }
   }

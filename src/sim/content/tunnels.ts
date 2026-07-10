@@ -53,9 +53,15 @@ export interface TunnelVolume {
 // wanted the entrance clear of any mob spawn area. x=128 keeps a comfortable
 // clearance margin from that camp and from every zone hub/lake/POI/road and
 // the unrelated vale_kobold_warren tunnel to the west); the interior
-// waypoints between the mouths S-curve laterally (x: 128 -> 134 -> 130 ->
-// 122 -> 128 at the crest -> 134 -> 130 -> 122 -> 128), still comfortably
-// clear of everything above.
+// waypoints between the mouths S-curve laterally (x: 128 -> 138 -> 132 ->
+// 116 -> 128 at the crest -> 138 -> 132 -> 116 -> 128). Round 9: the lateral
+// swing was roughly doubled from the original +-6yd to a noticeably more
+// pronounced +-10..12yd (the waypoint nearest each mouth is kept at +10
+// rather than +12 so its carved capsule still stays clear of the mound's
+// own grassy exterior slope right at the doorway; checked against
+// vale_kobold_warren, which stays entirely within x=60..84, and against
+// every zone1/zone2 camp/POI/road near x=116..140, z=66..294: still
+// comfortably clear of everything above.
 //
 // Cross-section shape (archScale/floorScale, see TunnelWaypoint above): every
 // waypoint domes taller overhead than it is wide (archScale > 1) and flattens
@@ -109,13 +115,13 @@ export const TUNNELS: TunnelVolume[] = [
         moundRadius: 14,
         moundHeight: 12,
       },
-      { x: 134, y: -3.7, z: 88, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
-      { x: 130, y: -17.0, z: 114, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
-      { x: 122, y: -31.7, z: 142, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
+      { x: 138, y: -3.7, z: 88, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
+      { x: 132, y: -17.0, z: 114, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
+      { x: 116, y: -31.7, z: 142, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
       { x: 128, y: -52.5, z: 180, radius: 8.4, archScale: 1.3, floorScale: 0.6 },
-      { x: 134, y: -33.44, z: 218, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
-      { x: 130, y: -19.95, z: 246, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
-      { x: 122, y: -7.76, z: 272, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
+      { x: 138, y: -33.44, z: 218, radius: 7.6, archScale: 1.4, floorScale: 0.72 },
+      { x: 132, y: -19.95, z: 246, radius: 7.4, archScale: 1.6, floorScale: 0.8 },
+      { x: 116, y: -7.76, z: 272, radius: 7.6, archScale: 1.9, floorScale: 0.9 },
       {
         x: 128,
         y: 2.2,

@@ -51,13 +51,13 @@ const LAUNCH_ARGS = [
 // centered on the actual passage.
 const TUNNEL_WAYPOINTS_XZ = [
   { x: 128, z: 66 },
-  { x: 134, z: 88 },
-  { x: 130, z: 114 },
-  { x: 122, z: 142 },
+  { x: 138, z: 88 },
+  { x: 132, z: 114 },
+  { x: 116, z: 142 },
   { x: 128, z: 180 },
-  { x: 134, z: 218 },
-  { x: 130, z: 246 },
-  { x: 122, z: 272 },
+  { x: 138, z: 218 },
+  { x: 132, z: 246 },
+  { x: 116, z: 272 },
   { x: 128, z: 294 },
 ];
 function TX_AT(z) {
@@ -120,17 +120,17 @@ const eyeY = (z) => FLOOR[z] + 2.2;
 // rocky sky) and the clear approach at both mouths.
 const EXTERIOR_SHOTS = [
   { name: '00_overhead_scurve_zone1', z: 112, camDist: 40, camPitch: -0.9, camYaw: 0.15 },
-  { name: '00b_overhead_scurve_full', z: 180, camDist: 70, camPitch: -0.96, camYaw: 0.15 },
+  { name: '00b_overhead_scurve_full', z: 180, camDist: 55, camPitch: -0.8, camYaw: 0.15 },
   { name: '01_wide_establishing_zone1', z: 10, camDist: 16, camPitch: -0.05, camYaw: 0 },
   { name: '02_approaching_ridge', z: 38, camDist: 14, camPitch: -0.1, camYaw: 0 },
   { name: '03_mouth_a_exterior_wide', z: 50, camDist: 15, camPitch: -0.12, camYaw: 0 },
-  { name: '04_mouth_a_closeup', z: 60, camDist: 11, camPitch: -0.03, camYaw: 0 },
+  { name: '04_mouth_a_closeup', z: 56, camDist: 11, camPitch: -0.03, camYaw: 0 },
   // Frontal, dead-on views of each mouth: the shape a reviewer wants to read
   // as a tall, upright doorway (archScale 2.6 / floorScale 0.85), never a
   // round hole lying flat on the ground to fall through.
   { name: '04b_mouth_a_door_frontal', z: 64, camDist: 8, camPitch: 0, camYaw: 0 },
-  { name: '05_mouth_a_closeup_side_angle', z: 60, camDist: 11, camPitch: -0.02, camYaw: 0.5 },
-  { name: '06_mouth_b_closeup', z: 300, camDist: 11, camPitch: -0.03, camYaw: Math.PI },
+  { name: '05_mouth_a_closeup_side_angle', z: 56, camDist: 11, camPitch: -0.02, camYaw: 0.5 },
+  { name: '06_mouth_b_closeup', z: 304, camDist: 11, camPitch: -0.03, camYaw: Math.PI },
   { name: '06b_mouth_b_door_frontal', z: 296, camDist: 8, camPitch: 0, camYaw: Math.PI },
   { name: '07_mouth_b_exterior_wide', z: 310, camDist: 15, camPitch: -0.12, camYaw: Math.PI },
   { name: '08_wide_establishing_zone2', z: 330, camDist: 16, camPitch: -0.05, camYaw: Math.PI },
