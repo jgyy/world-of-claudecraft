@@ -21,7 +21,13 @@
 // window insets, and per-floor flooring are layered on top as ordinary boxed
 // geometry (real UVs, no projection trick needed) using the same texture set.
 import * as THREE from 'three';
-import { KEEP_DOOR_HALF_WIDTH, KEEP_DOOR_HEIGHT, KEEP_FLOOR_HEIGHT } from '../sim/content/keep';
+import {
+  KEEP_DOOR_HALF_WIDTH,
+  KEEP_DOOR_HEIGHT,
+  KEEP_FLOOR_HEIGHT,
+  KEEP_WINDOW_HALF_WIDTH,
+  KEEP_WINDOW_HEIGHT,
+} from '../sim/content/keep';
 import type { Entity } from '../sim/types';
 import {
   KEEP_FLOORS,
@@ -31,10 +37,12 @@ import {
   keepBaseY,
   keepFloorY,
   keepVoxelDensity,
+  keepWindowSpecs,
 } from '../sim/voxel_building';
 import { meshVoxelChunk } from '../sim/voxel_mesh';
 import { surfaceMat } from './gfx';
 import { buildKeepInteriorDecor } from './keep_interior_decor';
+import { buildKeepStairs } from './keep_stairs';
 import { plankMaps, roofMaps, stoneMaps, wallMaps } from './textures';
 
 export interface KeepView {
@@ -44,7 +52,8 @@ export interface KeepView {
   update(localPlayer: Entity | undefined): void;
 }
 
-const FLOOR_MARKER_COLORS = [0x5fb0ff, 0x7fe07f, 0xffb35f]; // floor 1 / 2 / 3
+// floor 1 / 2 / 3 / 4 / attic
+const FLOOR_MARKER_COLORS = [0x5fb0ff, 0x7fe07f, 0xffb35f, 0xff7f9f, 0xc79fff];
 const TEX_SCALE = 3; // world units per texture tile, for the projected UVs
 
 // Assigns one UV set to a raw (non-indexed-friendly) triangle soup by
@@ -109,12 +118,22 @@ function buildShellMesh(seed: number): THREE.Mesh | null {
   const baseY = keepBaseY(seed);
   const density = (x: number, y: number, z: number) => keepVoxelDensity(x, y, z, seed);
   const pad = KEEP_HALF * 0.3;
+  // The keep is now taller than it is wide (four stories + attic knee), so the
+  // mesher's cubic chunk must be sized to the FULL height, not the footprint,
+  // and centred on the building so every wall stays inside the chunk. y0 sits a
+  // yard below the ground; the cube reaches a yard past the eave line.
+  const widthSpan = KEEP_HALF * 2 + 2 * pad;
+  const heightSpan = KEEP_TOTAL_HEIGHT + 2;
+  const size = Math.max(widthSpan, heightSpan);
   const mesh = meshVoxelChunk(density, {
-    x0: KEEP_POS.x - KEEP_HALF - pad,
+    x0: KEEP_POS.x - size / 2,
     y0: baseY - 1,
-    z0: KEEP_POS.z - KEEP_HALF - pad,
-    size: KEEP_HALF * 2 + 2 * pad,
-    resolution: 64,
+    z0: KEEP_POS.z - size / 2,
+    size,
+    // ~0.28yd voxels at this size: fine enough that the 0.5yd walls stay
+    // several voxels deep (no near-coincident faces that z-fight) and the
+    // carved window openings resolve cleanly.
+    resolution: 80,
   });
   if (mesh.positions.length === 0) return null;
 
@@ -327,25 +346,40 @@ function buildDoorAndWindows(seed: number): THREE.Group {
   lintel.castShadow = true;
   group.add(lintel);
 
-  // Window insets: two per upper floor on the east/west walls, a shuttered
-  // plank frame around a dark pane, flush with the wall's outer face.
-  const winW = 1.1;
-  const winH = 1.4;
-  for (let floor = 2; floor <= KEEP_FLOORS; floor++) {
-    const y = keepFloorY(seed, floor) + winH / 2 + 0.4;
-    for (const side of [-1, 1]) {
-      const wx = KEEP_POS.x + side * KEEP_HALF;
-      const pane = new THREE.Mesh(new THREE.PlaneGeometry(winW, winH), paneMat);
-      pane.rotation.y = side > 0 ? Math.PI / 2 : -Math.PI / 2;
-      pane.position.set(wx + side * 0.02, y, KEEP_POS.z);
-      group.add(pane);
+  // Window dressing: a plank frame + dark pane sitting in each REAL carved
+  // opening (the sim subtracts these from the shell, see
+  // sim/voxel_building.ts keepWindowSpecs), on every wall face and every floor
+  // including the ground floor. Driven by the SAME keepWindowSpecs the carve
+  // uses, so the dressing always lines up with the hole.
+  const winW = KEEP_WINDOW_HALF_WIDTH * 2;
+  const winH = KEEP_WINDOW_HEIGHT;
+  const baseYW = keepBaseY(seed);
+  for (const w of keepWindowSpecs()) {
+    const y = baseYW + w.ly;
+    const northSouth = w.wall === 'north' || w.wall === 'south';
+    // Outward face sign along the wall's normal axis.
+    const outSign = w.wall === 'north' || w.wall === 'east' ? 1 : -1;
+    const rotY = northSouth ? (w.wall === 'north' ? 0 : Math.PI) : outSign * (Math.PI / 2);
 
-      const frame = new THREE.Mesh(new THREE.BoxGeometry(0.12, winH + 0.2, winW + 0.2), frameMat);
-      frame.rotation.y = 0;
-      frame.position.set(wx + side * 0.08, y, KEEP_POS.z);
-      frame.castShadow = true;
-      group.add(frame);
-    }
+    const pane = new THREE.Mesh(new THREE.PlaneGeometry(winW, winH), paneMat);
+    pane.rotation.y = rotY;
+    pane.position.set(w.x, y, w.z);
+    if (northSouth) pane.position.z += outSign * 0.06;
+    else pane.position.x += outSign * 0.06;
+    group.add(pane);
+
+    // A thin frame box spanning the opening, its short axis through the wall.
+    const frameW = winW + 0.24;
+    const frameH = winH + 0.24;
+    const frameGeo = northSouth
+      ? new THREE.BoxGeometry(frameW, frameH, 0.14)
+      : new THREE.BoxGeometry(0.14, frameH, frameW);
+    const frame = new THREE.Mesh(frameGeo, frameMat);
+    frame.position.set(w.x, y, w.z);
+    if (northSouth) frame.position.z += outSign * 0.02;
+    else frame.position.x += outSign * 0.02;
+    frame.castShadow = true;
+    group.add(frame);
   }
   return group;
 }
@@ -371,7 +405,10 @@ function buildFloorCoverings(seed: number): THREE.Group {
     roughness: 0.75,
   });
 
-  for (let floor = 1; floor <= KEEP_FLOORS; floor++) {
+  // Floors 1..KEEP_FLOORS plus the attic (floor KEEP_FLOORS+1, sitting on the
+  // top floor slab). The covering hugs each floor's walkable surface so it
+  // reads as real flooring, not a bare voxel cap.
+  for (let floor = 1; floor <= KEEP_FLOORS + 1; floor++) {
     const y = keepFloorY(seed, floor) + 0.05;
     const geo = new THREE.PlaneGeometry(KEEP_HALF * 2 - 0.4, KEEP_HALF * 2 - 0.4);
     geo.rotateX(-Math.PI / 2);
@@ -393,6 +430,8 @@ export function buildKeepView(seed: number, fireLights: THREE.PointLight[] = [])
   group.add(buildPitchedRoof(seed));
   group.add(buildDoorAndWindows(seed));
   group.add(buildFloorCoverings(seed));
+  const stairs = buildKeepStairs(seed);
+  if (stairs) group.add(stairs);
   group.add(buildKeepInteriorDecor(seed, fireLights).group);
 
   // One small glow marker per floor at its landing, only the local player's
@@ -403,7 +442,7 @@ export function buildKeepView(seed: number, fireLights: THREE.PointLight[] = [])
   // interior; this marker is a cheap always-tiny cosmetic accent, not a
   // scene light.
   const markers: THREE.Mesh[] = [];
-  for (let floor = 1; floor <= KEEP_FLOORS; floor++) {
+  for (let floor = 1; floor <= KEEP_FLOORS + 1; floor++) {
     const y = keepFloorY(seed, floor) + 0.4;
     const color = FLOOR_MARKER_COLORS[floor - 1] ?? 0xffffff;
     const geo = new THREE.SphereGeometry(0.35, 12, 8);

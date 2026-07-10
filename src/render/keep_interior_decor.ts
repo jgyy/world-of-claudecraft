@@ -30,6 +30,11 @@ type FurnitureKind = (typeof FURNITURE_MODELS)[number];
 interface FurnitureAsset {
   geo: THREE.BufferGeometry;
   material: THREE.Material;
+  // Local-space minimum Y of the merged geometry. Some KayKit GLBs pivot at
+  // their center (or above their base), so placing them straight at the floor
+  // Y sinks or floats them. Subtracting this seats the piece's bounding-box
+  // base flush on the floor (see the placement below).
+  baseOffset: number;
 }
 
 const assets = new Map<FurnitureKind, FurnitureAsset>();
@@ -69,7 +74,9 @@ function loadFurniture(kind: FurnitureKind): Promise<void> {
     });
     if (!geos.length || !material) throw new Error(`keep furniture has no meshes: ${kind}`);
     const merged = geos.length === 1 ? geos[0] : (mergeGeometries(geos, false) ?? geos[0]);
-    assets.set(kind, { geo: merged, material });
+    merged.computeBoundingBox();
+    const baseOffset = merged.boundingBox?.min.y ?? 0;
+    assets.set(kind, { geo: merged, material, baseOffset });
     releaseGltf(url);
   });
 }
@@ -117,6 +124,22 @@ const FLOOR_LAYOUTS: Record<number, FurniturePlacement[]> = {
     { kind: 'chair', x: 1.6, z: -0.5, rotY: -Math.PI / 2 },
     { kind: 'chair', x: -1.6, z: -0.5, rotY: Math.PI / 2 },
   ],
+  // Floor 4 a solar / treasury (long table, a large chest, flanking barrels).
+  4: [
+    { kind: 'table_long', x: 0, z: 0.5, rotY: Math.PI / 2 },
+    { kind: 'chest_large', x: -KEEP_HALF + 1.3, z: KEEP_HALF - 1.4, rotY: Math.PI / 4 },
+    { kind: 'barrel_large', x: KEEP_HALF - 1.4, z: KEEP_HALF - 1.4, rotY: 0.5 },
+    { kind: 'chair', x: 1.6, z: 0.5, rotY: -Math.PI / 2 },
+  ],
+  // Floor 5 the attic loft under the roof: crates + a round table lit by the
+  // gable torch, deliberately clustered toward the center so nothing pokes the
+  // low eaves.
+  5: [
+    { kind: 'crates_stacked', x: -1.6, z: 1.4 },
+    { kind: 'crate_large', x: 1.6, z: 1.4, rotY: -0.4 },
+    { kind: 'table_round_medium', x: 0, z: -0.6 },
+    { kind: 'chest', x: -1.4, z: -1.4, rotY: Math.PI / 4 },
+  ],
 };
 
 // Wall-mounted torches per floor, local (x,z) plus the wall-facing rotation
@@ -142,6 +165,11 @@ const TORCH_LAYOUTS: Record<number, TorchPlacement[]> = {
     { x: KEEP_HALF - 0.3, z: 0, rotY: -Math.PI / 2 },
   ],
   3: [{ x: 0, z: -KEEP_HALF + 0.3, rotY: 0 }],
+  4: [
+    { x: -KEEP_HALF + 0.3, z: 0, rotY: Math.PI / 2 },
+    { x: KEEP_HALF - 0.3, z: 0, rotY: -Math.PI / 2 },
+  ],
+  5: [{ x: 0, z: -KEEP_HALF + 0.3, rotY: 0 }],
 };
 
 const KEEP_TORCH_LIGHT_COLOR = 0xfff0c8;
@@ -172,7 +200,10 @@ export function buildKeepInteriorDecor(
       const asset = assets.get(item.kind);
       if (!asset) continue;
       const mesh = new THREE.Mesh(asset.geo, asset.material);
-      mesh.position.set(KEEP_POS.x + item.x, y, KEEP_POS.z + item.z);
+      // Seat the piece's bounding-box base flush on the floor: subtract the
+      // asset's local min-Y so a center-pivoted GLB no longer sinks halfway
+      // into the slab.
+      mesh.position.set(KEEP_POS.x + item.x, y - asset.baseOffset, KEEP_POS.z + item.z);
       mesh.rotation.y = item.rotY ?? 0;
       if (item.scale) mesh.scale.setScalar(item.scale);
       mesh.castShadow = true;
