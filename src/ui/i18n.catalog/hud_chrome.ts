@@ -1740,4 +1740,12 @@ export const hudChromeStrings = {
     // #1299: the recipe exists but this player has not learned it yet.
     recipeNotLearned: 'You have not learned that recipe yet.',
   },
+  // World-map markers for a hand-authored cave/tunnel entrance mound (see
+  // src/sim/content/tunnels.ts TunnelWaypoint.mound and map_tunnel_portals.ts):
+  // a generic "natural sign" label at each mouth, mirroring the dungeon portal
+  // dot but with one shared name instead of a per-dungeon one, since a tunnel
+  // mouth has no separate content id to localize.
+  map: {
+    caveEntrance: 'Cave',
+  },
 };

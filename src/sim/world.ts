@@ -1,3 +1,4 @@
+import { TUNNELS } from './content/tunnels';
 import { DUNGEON_FLOOR_Y, DUNGEON_X_THRESHOLD, getActiveWorldContent, WORLD_MAX_X } from './data';
 import { fbm2, hash2 } from './rng';
 import type { BiomeId, HeightStamp, WorldContent } from './types';
@@ -705,6 +706,28 @@ function isExcludedDecoration(x: number, z: number): boolean {
   );
 }
 
+// Trees/rocks are anchored to the plain (x,z) heightfield (terrainHeight),
+// which knows nothing about a tunnel entrance mound (voxel.ts additively
+// solidifies rock ABOVE that heightfield at a mound waypoint, see
+// moundSolidAmount). Without this exclusion, ordinary scatter still spawns
+// through the mound's own footprint at the old, lower ground level - reading
+// as trees/rocks buried in or floating out of the entrance knoll, clashing
+// with the real carved doorway. Margin matches the mound's own worst-case
+// irregular radius (moundIrregularity can push visibly past the nominal
+// moundRadius) plus a little clearance so the approach path stays open.
+const TUNNEL_MOUND_CLEARANCE = 6;
+
+export function isNearTunnelMound(x: number, z: number): boolean {
+  for (const tunnel of TUNNELS) {
+    for (const w of tunnel.waypoints) {
+      if (!w.mound) continue;
+      const moundRadius = w.moundRadius ?? w.radius + 4;
+      if (Math.hypot(x - w.x, z - w.z) < moundRadius + TUNNEL_MOUND_CLEARANCE) return true;
+    }
+  }
+  return false;
+}
+
 export function zoneBiomeAt(z: number): BiomeId {
   const zones = world().content.zones;
   for (const zone of zones) {
@@ -767,6 +790,7 @@ export function generateDecorations(seed: number): Decoration[] {
       // The Sowfield stadium footprint grows no trees or rocks (hash-based
       // placement, so skipping here shifts no other decoration or rng draw).
       if (isInSowfieldShell(x, z)) continue;
+      if (isNearTunnelMound(x, z)) continue;
       let inHub = false;
       for (const zone of w.content.zones) {
         const dx = x - zone.hub.x,

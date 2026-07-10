@@ -1461,6 +1461,9 @@ export const nl_NL: EnTranslations = {
       "notAtHub": "Je moet bij de werkbank zijn, op het vereiste niveau, om dat te maken.",
       "throttled": "Je maakt te snel. Wacht even en probeer het opnieuw.",
       "recipeNotLearned": "Je hebt dat recept nog niet geleerd."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

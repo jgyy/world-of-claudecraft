@@ -1461,6 +1461,9 @@ export const tr_TR: EnTranslations = {
       "notAtHub": "Bunu üretmek için zanaat merkezinde ve gereken kademede olmalısın.",
       "throttled": "Çok hızlı üretiyorsun. Bir an bekle ve tekrar dene.",
       "recipeNotLearned": "Bu tarifi henüz öğrenmedin."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

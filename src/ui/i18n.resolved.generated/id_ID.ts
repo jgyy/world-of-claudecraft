@@ -1461,6 +1461,9 @@ export const id_ID: EnTranslations = {
       "notAtHub": "Kamu harus berada di pusat kerajinan, pada level yang disyaratkan, untuk membuat itu.",
       "throttled": "Kamu membuat terlalu cepat. Tunggu sejenak dan coba lagi.",
       "recipeNotLearned": "Kamu belum mempelajari resep itu."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

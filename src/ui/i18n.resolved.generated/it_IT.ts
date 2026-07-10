@@ -1461,6 +1461,9 @@ export const it_IT: EnTranslations = {
       "notAtHub": "Devi trovarti alla postazione artigiana, al livello richiesto, per fabbricarlo.",
       "throttled": "Stai fabbricando troppo in fretta. Aspetta un momento e riprova.",
       "recipeNotLearned": "Non hai ancora imparato quella ricetta."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

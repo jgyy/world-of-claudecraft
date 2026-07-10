@@ -5,6 +5,7 @@ import {
   lineOfSightClear,
   resolvePosition,
 } from '../src/sim/colliders';
+import { TUNNELS } from '../src/sim/content/tunnels';
 import {
   CLASSES,
   CRYPT_DOOR_POS,
@@ -250,6 +251,24 @@ describe('collision & terrain', () => {
       .filter((d) => terrainSteepness(d.x, d.z, SEED) > DECORATION_MAX_SLOPE)
       .map((d) => `${d.kind}@${d.x.toFixed(0)},${d.z.toFixed(0)}`);
     expect(onCliffs).toEqual([]);
+  });
+
+  it('does not scatter trees or rocks through a tunnel entrance mound', () => {
+    // Ordinary decoration placement is anchored to the plain (x,z) heightfield,
+    // which knows nothing about a tunnel's additive mound (voxel.ts). Without
+    // isNearTunnelMound, a tree/rock still spawns at the mound's old, lower
+    // ground level and reads as buried in (or floating out of) the entrance
+    // knoll, clashing with the real carved doorway (#1685).
+    for (const tunnel of TUNNELS) {
+      for (const w of tunnel.waypoints) {
+        if (!w.mound) continue;
+        const moundRadius = w.moundRadius ?? w.radius + 4;
+        const clashing = generateDecorations(SEED).filter(
+          (d) => Math.hypot(d.x - w.x, d.z - w.z) < moundRadius,
+        );
+        expect(clashing).toEqual([]);
+      }
+    }
   });
 });
 

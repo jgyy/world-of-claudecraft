@@ -1461,6 +1461,9 @@ export const pt_BR: EnTranslations = {
       "notAtHub": "Você precisa estar no posto de criação, no nível exigido, para criar isso.",
       "throttled": "Você está criando rápido demais. Espere um momento e tente de novo.",
       "recipeNotLearned": "Você ainda não aprendeu essa receita."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

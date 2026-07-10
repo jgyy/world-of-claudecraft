@@ -22,7 +22,7 @@ import type { ZoneDef } from '../sim/data';
 import { type Decoration, generateDecorations } from '../sim/world';
 import type { IWorld } from '../world_api';
 import { dungeonDisplayName, zoneDisplayName, zonePoiLabel } from './entity_i18n';
-import { formatNumber } from './i18n';
+import { formatNumber, t } from './i18n';
 import {
   buildOverworldMapModel,
   type MapDetail,
@@ -256,6 +256,27 @@ export class MapWindowPainter {
       const dungeonName = dungeonDisplayName(portal.dungeonId);
       ctx.strokeText(dungeonName, portal.mx, portal.my - PORTAL_NAME_OFFSET_Y);
       ctx.fillText(dungeonName, portal.mx, portal.my - PORTAL_NAME_OFFSET_Y);
+    }
+
+    // Cave/tunnel entrance mounds (#1685): a rock-colored dot plus one shared
+    // generic label above it - the natural in-terrain sign (the mound itself,
+    // the worn path, the framing foliage: see tunnel_overlay.ts) mirrored onto
+    // the map so a mouth is findable without walking the whole ridge.
+    ctx.fillStyle = colors.rock;
+    for (const mouth of model.caveMouths) {
+      ctx.beginPath();
+      ctx.arc(mouth.mx, mouth.my, PORTAL_DOT_RADIUS, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+    }
+    if (model.caveMouths.length > 0) {
+      ctx.fillStyle = colors.portalLabel;
+      ctx.font = PORTAL_NAME_FONT;
+      const caveLabel = t('hudChrome.map.caveEntrance');
+      for (const mouth of model.caveMouths) {
+        ctx.strokeText(caveLabel, mouth.mx, mouth.my - PORTAL_NAME_OFFSET_Y);
+        ctx.fillText(caveLabel, mouth.mx, mouth.my - PORTAL_NAME_OFFSET_Y);
+      }
     }
 
     // Quest-giver glyphs ('?' turn-in ready, '!' available). Color + font are

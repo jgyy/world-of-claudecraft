@@ -1461,6 +1461,9 @@ export const ko_KR: EnTranslations = {
       "notAtHub": "그것을 제작하려면 필요한 레벨로 제작 거점에 있어야 합니다.",
       "throttled": "너무 빨리 제작하고 있습니다. 잠시 후 다시 시도하세요.",
       "recipeNotLearned": "아직 그 제작법을 배우지 않았습니다."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

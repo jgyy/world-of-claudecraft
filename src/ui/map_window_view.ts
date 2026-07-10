@@ -15,6 +15,7 @@
 // Markers carry the identity (zoneId / poiIndex / dungeonId / cls)
 // the painter needs to resolve their localized text, never the resolved string.
 
+import { TUNNELS } from '../sim/content/tunnels';
 import {
   DUNGEON_LIST,
   isDelvePos,
@@ -30,6 +31,7 @@ import type { Decoration } from '../sim/world';
 import type { FriendInfo, IWorld } from '../world_api';
 import { overworldDungeonPortals } from './map_dungeon_portals';
 import { questNumbersByLog } from './map_quest_list_view';
+import { overworldTunnelMouths } from './map_tunnel_portals';
 
 // World-map zoom band: 1 = the whole committed zone, up to MAP_MAX_ZOOM.
 export const MAP_MAX_ZOOM = 6;
@@ -92,6 +94,14 @@ export interface MapPortalMarker {
   mx: number;
   my: number;
   dungeonId: string;
+}
+
+/** A hand-authored tunnel/cave entrance mound: canvas position only, no
+ *  per-content id to localize (see map_tunnel_portals.ts) - the painter draws
+ *  one shared generic label for every mouth. */
+export interface MapCaveMouthMarker {
+  mx: number;
+  my: number;
 }
 
 /** One quest carried by a map quest-giver glyph, for its hover tooltip. */
@@ -232,6 +242,7 @@ export interface OverworldMapModel {
   zoneId: string;
   pois: MapPoiMarker[];
   portals: MapPortalMarker[];
+  caveMouths: MapCaveMouthMarker[];
   npcs: MapNpcMarker[];
   questAreas: MapQuestAreaMarker[];
   player: MapPlayerMarker | null;
@@ -352,6 +363,13 @@ export function buildOverworldMapModel(input: OverworldMapInput): OverworldMapMo
     return { mx, my, dungeonId: portal.id };
   });
 
+  const caveMouths: MapCaveMouthMarker[] = overworldTunnelMouths(TUNNELS, zone.zMin, zone.zMax).map(
+    (mouth) => {
+      const { mx, my } = toMap(mouth.x, mouth.z);
+      return { mx, my };
+    },
+  );
+
   const npcs: MapNpcMarker[] = [];
   for (const e of world.entities.values()) {
     if (e.kind !== 'npc') continue;
@@ -416,6 +434,7 @@ export function buildOverworldMapModel(input: OverworldMapInput): OverworldMapMo
     zoneId: zone.id,
     pois,
     portals,
+    caveMouths,
     npcs,
     questAreas,
     player,

@@ -1461,6 +1461,9 @@ export const sv_SE: EnTranslations = {
       "notAtHub": "Du måste vara vid hantverksplatsen, på rätt nivå, för att tillverka det.",
       "throttled": "Du tillverkar för snabbt. Vänta ett ögonblick och försök igen.",
       "recipeNotLearned": "Du har inte lärt dig det receptet än."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

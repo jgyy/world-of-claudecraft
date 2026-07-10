@@ -15,6 +15,7 @@ import type { Decoration } from '../sim/world';
 import {
   biomeAt,
   generateDecorations,
+  isNearTunnelMound,
   roadDistance,
   terrainHeight,
   waterLevelAt,
@@ -1177,6 +1178,7 @@ function generateDressing(seed: number): DressingSpot[] {
       if (terrainHeight(x, z, seed) < waterLevelAt(x, z) + 1.2) continue;
       if (tooSteep(x, z, seed)) continue;
       if (isInSowfieldShell(x, z)) continue; // keep bushes/plants off the football ground
+      if (isNearTunnelMound(x, z)) continue; // keep bushes/plants off the entrance mound
       const kind = dressKindFor(biome, hashAt(gx, gz, 44));
       const [sMin, sRange] = DRESS_SCALE[kind];
       out.push({ x, z, kind, scale: (sMin + hashAt(gx, gz, 45) * sRange) * scaleBoost });

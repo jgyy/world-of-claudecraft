@@ -1461,6 +1461,9 @@ export const es: EnTranslations = {
       "notAtHub": "Debes estar en el centro de elaboración, con el nivel requerido, para elaborar eso.",
       "throttled": "Estás elaborando demasiado rápido. Espera un momento e inténtalo de nuevo.",
       "recipeNotLearned": "Aún no has aprendido esa receta."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

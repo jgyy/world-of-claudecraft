@@ -9,25 +9,65 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "es_ES": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "fr_FR": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "fr_CA": [
+    "hudChrome.map.caveEntrance"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
-  "pt_BR": [],
-  "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "it_IT": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "de_DE": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "zh_CN": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "zh_TW": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "ko_KR": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "ja_JP": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "pt_BR": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "ru_RU": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "cs_CZ": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "nl_NL": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "pl_PL": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "id_ID": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "tr_TR": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "sv_SE": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "vi_VN": [
+    "hudChrome.map.caveEntrance"
+  ],
+  "da_DK": [
+    "hudChrome.map.caveEntrance"
+  ]
 };

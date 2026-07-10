@@ -1461,6 +1461,9 @@ export const en: EnTranslations = {
       "notAtHub": "You must be at the crafting hub, at the required level, to craft that.",
       "throttled": "You are crafting too quickly. Wait a moment and try again.",
       "recipeNotLearned": "You have not learned that recipe yet."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

@@ -1461,6 +1461,9 @@ export const pl_PL: EnTranslations = {
       "notAtHub": "Musisz być w warsztacie rzemieślniczym i mieć wymagany poziom, aby to wytworzyć.",
       "throttled": "Wytwarzasz zbyt szybko. Zaczekaj chwilę i spróbuj ponownie.",
       "recipeNotLearned": "Nie nauczyłeś się jeszcze tego przepisu."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

@@ -1461,6 +1461,9 @@ export const zh_TW: EnTranslations = {
       "notAtHub": "必須達到所需等級並位於製作站，才能製作該物品。",
       "throttled": "你製作得太快了，請稍等片刻後再試。",
       "recipeNotLearned": "你還沒有學會這個配方。"
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

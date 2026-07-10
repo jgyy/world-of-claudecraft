@@ -1461,6 +1461,9 @@ export const da_DK: EnTranslations = {
       "notAtHub": "Du skal være ved håndværksstationen og på det krævede niveau for at lave det.",
       "throttled": "Du laver ting for hurtigt. Vent et øjeblik, og prøv igen.",
       "recipeNotLearned": "Du har ikke lært den opskrift endnu."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

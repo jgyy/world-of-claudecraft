@@ -1461,6 +1461,9 @@ export const de_DE: EnTranslations = {
       "notAtHub": "Ihr müsst Euch am Handwerksplatz und auf der erforderlichen Stufe befinden, um das herzustellen.",
       "throttled": "Ihr stellt zu schnell her. Wartet einen Moment und versucht es erneut.",
       "recipeNotLearned": "Ihr habt dieses Rezept noch nicht erlernt."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

@@ -1461,6 +1461,9 @@ export const cs_CZ: EnTranslations = {
       "notAtHub": "Abys to mohl vyrobit, musíš být v řemeslném centru a mít potřebnou úroveň.",
       "throttled": "Vyrábíš příliš rychle. Chvíli počkej a zkus to znovu.",
       "recipeNotLearned": "Tento recept ses ještě nenaučil."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

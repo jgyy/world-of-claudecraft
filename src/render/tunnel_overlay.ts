@@ -34,7 +34,17 @@ const OVERLAP_VOXELS = 2; // extra voxel cells of overlap padded onto every sub-
 // exactly the "view outside the map" a reviewer flagged. A deep, doubled-
 // depth tunnel needs real headroom here, not a tight sliver.
 const HEIGHT_MARGIN = 35;
-const CAP_MARGIN = 40; // yd of lateral padding on the backstop floor cap below
+// Per-tunnel backstop padding: tight around that ONE tunnel's own carved
+// envelope (tunnelBounds), not the merged bounding box of every excluded
+// terrain chunk across every tunnel in the level. A merged box between two
+// tunnels far apart in x/z (as here: vale_kobold_warren at x~60-84 and
+// vale_marsh_ridge_tunnel at x~110) stretches an opaque rock ceiling/wall set
+// over the wide-open world between them - exactly the "rocky sky" and
+// "floating rock wall clashing with the hillside" bugs a reviewer flagged.
+// Scoping per-tunnel keeps the backstop hugging only that tunnel's own
+// underground volume and mound, invisible from anywhere in the open world.
+const BACKSTOP_LATERAL_MARGIN = 6; // yd of lateral padding around one tunnel's own bounds
+const BACKSTOP_HEIGHT_MARGIN = 4; // yd of vertical padding around one tunnel's own bounds
 
 // Real PBR albedo (ambientCG 1K, the same asset set voxel_terrain.ts already
 // ships under public/textures/terrain): grass for open ground, rock for
@@ -447,34 +457,19 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
   }
 
   // Backstop: a fully enclosing box of opaque rock-textured planes (floor,
-  // ceiling, and all four walls) well outside the meshed voxel volume,
-  // spanning generously past every excluded chunk's footprint. The voxel
-  // mesh itself should already be watertight, but Surface Nets sampled at a
-  // finite resolution can leave a hairline crack at a steep gradient (most
-  // likely right where a tunnel's carve barely edges out rolling terrain
-  // near a mouth) - exactly what let a prior pass see the raw scene
-  // background (sky/fog color) through such a gap, a reviewer-flagged "view
-  // outside the map". This backstop makes that impossible regardless: any
-  // ray that somehow escapes the tunnel's own walls still lands on solid,
-  // textured rock before it could ever reach open space.
-  let capMinX = Infinity;
-  let capMaxX = -Infinity;
-  let capMinZ = Infinity;
-  let capMaxZ = -Infinity;
-  for (const chunk of chunks) {
-    capMinX = Math.min(capMinX, chunk.minX);
-    capMaxX = Math.max(capMaxX, chunk.maxX);
-    capMinZ = Math.min(capMinZ, chunk.minZ);
-    capMaxZ = Math.max(capMaxZ, chunk.maxZ);
-  }
-  const loY = bandMin - 2;
-  const hiY = bandMax + 2;
-  const w = capMaxX - capMinX + 2 * CAP_MARGIN;
-  const d = capMaxZ - capMinZ + 2 * CAP_MARGIN;
-  const h = hiY - loY;
-  const cx = (capMinX + capMaxX) / 2;
-  const cz = (capMinZ + capMaxZ) / 2;
-
+  // ceiling, and all four walls) well outside the meshed voxel volume, built
+  // PER TUNNEL from that tunnel's own tunnelBounds (not a box unioning every
+  // excluded chunk across every tunnel in the level - see BACKSTOP_LATERAL_
+  // MARGIN above for why that used to leak an opaque ceiling/wall over the
+  // wide-open world between two unrelated tunnels). The voxel mesh itself
+  // should already be watertight, but Surface Nets sampled at a finite
+  // resolution can leave a hairline crack at a steep gradient (most likely
+  // right where a tunnel's carve barely edges out rolling terrain near a
+  // mouth) - exactly what let a prior pass see the raw scene background
+  // (sky/fog color) through such a gap, a reviewer-flagged "view outside the
+  // map". This backstop makes that impossible regardless, while staying
+  // tight enough around each tunnel's own volume to never surface above open
+  // ground or the surrounding scenery.
   const addBackstop = (
     name: string,
     sizeA: number,
@@ -497,48 +492,44 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
     group.add(mesh);
   };
 
-  addBackstop('tunnel-overlay-backstop-floor', w, d, -Math.PI / 2, 0, cx, loY, cz);
-  addBackstop('tunnel-overlay-backstop-ceiling', w, d, Math.PI / 2, 0, cx, hiY, cz);
-  addBackstop(
-    'tunnel-overlay-backstop-west',
-    d,
-    h,
-    0,
-    Math.PI / 2,
-    capMinX - CAP_MARGIN,
-    (loY + hiY) / 2,
-    cz,
-  );
-  addBackstop(
-    'tunnel-overlay-backstop-east',
-    d,
-    h,
-    0,
-    -Math.PI / 2,
-    capMaxX + CAP_MARGIN,
-    (loY + hiY) / 2,
-    cz,
-  );
-  addBackstop(
-    'tunnel-overlay-backstop-south',
-    w,
-    h,
-    0,
-    0,
-    cx,
-    (loY + hiY) / 2,
-    capMinZ - CAP_MARGIN,
-  );
-  addBackstop(
-    'tunnel-overlay-backstop-north',
-    w,
-    h,
-    0,
-    Math.PI,
-    cx,
-    (loY + hiY) / 2,
-    capMaxZ + CAP_MARGIN,
-  );
+  for (const tunnel of TUNNELS) {
+    const b = tunnelBounds(tunnel);
+    // Only for tunnels whose footprint is actually part of this overlay pass
+    // (excludedChunks() above already filtered to tunnels touching the
+    // world's chunk grid; every authored tunnel qualifies today, but this
+    // guard keeps a future non-overlay-rendered tunnel from getting a
+    // backstop with nothing behind it).
+    const touchesChunks = chunks.some(
+      (chunk) =>
+        !(
+          chunk.minX > b.maxX + TUNNEL_CHUNK_MARGIN ||
+          chunk.maxX < b.minX - TUNNEL_CHUNK_MARGIN ||
+          chunk.minZ > b.maxZ + TUNNEL_CHUNK_MARGIN ||
+          chunk.maxZ < b.minZ - TUNNEL_CHUNK_MARGIN
+        ),
+    );
+    if (!touchesChunks) continue;
+
+    const capMinX = b.minX - BACKSTOP_LATERAL_MARGIN;
+    const capMaxX = b.maxX + BACKSTOP_LATERAL_MARGIN;
+    const capMinZ = b.minZ - BACKSTOP_LATERAL_MARGIN;
+    const capMaxZ = b.maxZ + BACKSTOP_LATERAL_MARGIN;
+    const loY = b.minY - BACKSTOP_HEIGHT_MARGIN;
+    const hiY = b.maxY + BACKSTOP_HEIGHT_MARGIN;
+    const w = capMaxX - capMinX;
+    const d = capMaxZ - capMinZ;
+    const h = hiY - loY;
+    const cx = (capMinX + capMaxX) / 2;
+    const cz = (capMinZ + capMaxZ) / 2;
+    const prefix = `tunnel-overlay-backstop-${tunnel.id}`;
+
+    addBackstop(`${prefix}-floor`, w, d, -Math.PI / 2, 0, cx, loY, cz);
+    addBackstop(`${prefix}-ceiling`, w, d, Math.PI / 2, 0, cx, hiY, cz);
+    addBackstop(`${prefix}-west`, d, h, 0, Math.PI / 2, capMinX, (loY + hiY) / 2, cz);
+    addBackstop(`${prefix}-east`, d, h, 0, -Math.PI / 2, capMaxX, (loY + hiY) / 2, cz);
+    addBackstop(`${prefix}-south`, w, h, 0, 0, cx, (loY + hiY) / 2, capMinZ);
+    addBackstop(`${prefix}-north`, w, h, 0, Math.PI, cx, (loY + hiY) / 2, capMaxZ);
+  }
 
   addDecorations(group);
 

@@ -1461,6 +1461,9 @@ export const fr_FR: EnTranslations = {
       "notAtHub": "Vous devez être à l'atelier d'artisanat, au niveau requis, pour fabriquer cela.",
       "throttled": "Vous fabriquez trop vite. Patientez un instant et réessayez.",
       "recipeNotLearned": "Vous n'avez pas encore appris cette recette."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

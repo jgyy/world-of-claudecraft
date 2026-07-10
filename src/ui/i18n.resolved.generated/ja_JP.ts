@@ -1461,6 +1461,9 @@ export const ja_JP: EnTranslations = {
       "notAtHub": "それを製作するには、必要なレベルで製作拠点にいる必要があります。",
       "throttled": "製作が速すぎます。少し待ってからもう一度お試しください。",
       "recipeNotLearned": "そのレシピはまだ習得していません。"
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

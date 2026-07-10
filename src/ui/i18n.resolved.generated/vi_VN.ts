@@ -1461,6 +1461,9 @@ export const vi_VN: EnTranslations = {
       "notAtHub": "Bạn phải ở trung tâm chế tác, đạt cấp yêu cầu, mới chế tạo được thứ đó.",
       "throttled": "Bạn đang chế tạo quá nhanh. Hãy chờ một lát rồi thử lại.",
       "recipeNotLearned": "Bạn chưa học công thức đó."
+    },
+    "map": {
+      "caveEntrance": "Cave"
     }
   },
   "apiError": {

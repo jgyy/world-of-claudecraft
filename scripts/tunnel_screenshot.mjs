@@ -111,6 +111,69 @@ const EXTERIOR_SHOTS = [
   { name: '06_mouth_b_closeup', z: 270, camDist: 11, camPitch: -0.03, camYaw: Math.PI },
   { name: '07_mouth_b_exterior_wide', z: 280, camDist: 15, camPitch: -0.12, camYaw: Math.PI },
   { name: '08_wide_establishing_zone2', z: 300, camDist: 16, camPitch: -0.05, camYaw: Math.PI },
+  // Round 6 review fixes (#1685): the backstop safety planes used to be one
+  // box unioning EVERY excluded terrain chunk across both tunnels in the
+  // level (x=60..124, z=96..268), so its opaque ceiling/wall planes floated
+  // over the wide-open world between them - "the sky is all rocky" and
+  // "floating rock walls clashing with the hillside". Scoping the backstop
+  // per-tunnel (tunnel_overlay.ts) fixes both; these shots verify it from the
+  // open field, well clear of either mound, looking straight up and across.
+  {
+    name: '23_sky_check_zone1_looking_up',
+    z: 130,
+    xOff: 24,
+    camDist: 6,
+    camPitch: -1.4,
+    camYaw: 0,
+  },
+  {
+    name: '24_sky_check_zone2_looking_up',
+    z: 240,
+    xOff: 24,
+    camDist: 6,
+    camPitch: -1.4,
+    camYaw: 0,
+  },
+  {
+    name: '25_open_field_between_mounds_wide',
+    z: 190,
+    xOff: 30,
+    camDist: 20,
+    camPitch: -0.1,
+    camYaw: Math.PI / 2,
+  },
+  // Overhead top-down of each mound: confirms no tree/rock decoration spawns
+  // inside or clashing with the entrance knoll (world.ts isNearTunnelMound).
+  {
+    name: '26_mouth_a_overhead_no_clutter',
+    z: 96,
+    camDist: 30,
+    camPitch: -1.5,
+    camYaw: 0.4,
+  },
+  {
+    name: '27_mouth_b_overhead_no_clutter',
+    z: 264,
+    camDist: 30,
+    camPitch: -1.5,
+    camYaw: 0.4,
+  },
+  // Ground-level approach: the cleared area right around the entrance mound,
+  // confirming the doorway itself reads as open and unobstructed.
+  {
+    name: '28_mouth_a_ground_level_clear_approach',
+    z: 84,
+    camDist: 9,
+    camPitch: -0.06,
+    camYaw: 0,
+  },
+  {
+    name: '29_mouth_b_ground_level_clear_approach',
+    z: 276,
+    camDist: 9,
+    camPitch: -0.06,
+    camYaw: Math.PI,
+  },
 ];
 
 // Interior shots: free editorCam, framed down the tunnel's own axis but
@@ -304,10 +367,31 @@ for (const s of EXTERIOR_SHOTS) {
       g.input.camPitch = shot.camPitch;
       g.input.camDist = shot.camDist;
     },
-    { ...s, x: TX_AT(s.z) },
+    { ...s, x: TX_AT(s.z) + (s.xOff ?? 0) },
   );
   await capture(s.name);
 }
+
+// Round 6 review fixes (#1685): the world map now marks each mound as a real
+// "Cave" landmark (map_tunnel_portals.ts / map_window_painter.ts), mirroring
+// the dungeon-portal dot+label - the "natural sign in the map" a reviewer
+// asked for, matching the mound + worn path + framing foliage already read
+// in the 3D world (tunnel_overlay.ts's addMouthFoliage).
+async function captureMap(name, z) {
+  await page.evaluate((zz) => {
+    const g = window.__game;
+    g.sim.player.pos.z = zz;
+  }, z);
+  await new Promise((r) => setTimeout(r, 200));
+  await page.keyboard.press('KeyM');
+  await new Promise((r) => setTimeout(r, 600)); // let the map window render + redraw
+  await page.screenshot({ path: `${OUT}/tunnel_${name}.png` });
+  console.log('captured', name);
+  await page.keyboard.press('KeyM');
+  await new Promise((r) => setTimeout(r, 200));
+}
+await captureMap('30_map_zone1_cave_marker', 40);
+await captureMap('31_map_zone2_cave_marker', 300);
 
 for (const s of INTERIOR_SHOTS) {
   await page.evaluate(
