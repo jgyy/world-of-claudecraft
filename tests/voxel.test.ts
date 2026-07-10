@@ -141,11 +141,14 @@ describe('vale_marsh_ridge_tunnel (zone1 <-> zone2 through-tunnel)', () => {
       const moundHeight = m.moundHeight ?? 8;
       const surface = terrainHeight(m.x, m.z, seed);
       // Just off to the side of the tunnel's own carved opening, well clear
-      // of the doorway itself, but still under the mound's dome: the ground
+      // of the doorway itself, but still under the mound's rise: the ground
       // there should sit solid ABOVE the ambient surface, a real knoll the
-      // entrance is cut into, not a flat approach.
-      const sideX = m.x + moundRadius * 0.7;
-      const moundMidY = surface + moundHeight * 0.5;
+      // entrance is cut into, not a flat approach. (Round 10: the mound is
+      // now a Gaussian height bump rather than a hard-edged dome, so this
+      // probe sits closer to the peak than the old hard-edge version needed,
+      // clear of local base-terrain noise at the wider radii.)
+      const sideX = m.x + moundRadius * 0.6;
+      const moundMidY = surface + moundHeight * 0.3;
       expect(isSolidVoxel(sideX, moundMidY, m.z, seed)).toBe(true);
       expect(voxelDensity(sideX, moundMidY, m.z, seed)).toBeLessThan(0);
     }
@@ -179,8 +182,10 @@ describe('tunnelInteriorFactor', () => {
     const surface = terrainHeight(mouth.x, mouth.z, seed);
     const moundRadius = mouth.moundRadius ?? mouth.radius + 4;
     const moundHeight = mouth.moundHeight ?? 8;
-    // On the mound's own grassy exterior slope, above ambient ground level.
-    const sideX = mouth.x + moundRadius * 0.6;
+    // On the mound's own grassy exterior slope, above ambient ground level,
+    // far enough out on the Gaussian bump's tail (round 10) that it reads as
+    // ordinary ground regardless of local base-terrain noise.
+    const sideX = mouth.x + moundRadius;
     const y = surface + moundHeight * 0.4;
     expect(tunnelInteriorFactor(sideX, y, mouth.z, seed)).toBe(0);
   });

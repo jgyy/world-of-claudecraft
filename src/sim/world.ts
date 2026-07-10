@@ -706,23 +706,31 @@ function isExcludedDecoration(x: number, z: number): boolean {
   );
 }
 
-// Trees/rocks are anchored to the plain (x,z) heightfield (terrainHeight),
-// which knows nothing about a tunnel entrance mound (voxel.ts additively
-// solidifies rock ABOVE that heightfield at a mound waypoint, see
-// moundSolidAmount). Without this exclusion, ordinary scatter still spawns
-// through the mound's own footprint at the old, lower ground level - reading
-// as trees/rocks buried in or floating out of the entrance knoll, clashing
-// with the real carved doorway. Margin matches the mound's own worst-case
-// irregular radius (moundIrregularity can push visibly past the nominal
-// moundRadius) plus a little clearance so the approach path stays open.
-const TUNNEL_MOUND_CLEARANCE = 6;
+// Trees/rocks/bushes/grass are all anchored to the plain (x,z) heightfield
+// (terrainHeight), which knows nothing about a tunnel entrance mound
+// (voxel.ts additively bumps the heightfield up at a mound waypoint - see
+// moundHeightBump/groundHeightWithMounds). Without this exclusion, ordinary
+// scatter still spawns at the old, unmounted ground level - reading as
+// clutter buried in or floating out of the entrance knoll, clashing with the
+// real carved doorway. The mound is a Gaussian bump (sigma = moundRadius *
+// 0.75, round 10), not a hard-edged dome, so its visible rise trails off
+// gradually rather than stopping at a fixed edge; `moundRadius * 2` alone
+// (tunnelBounds' own cutoff, where the bump has decayed to a few percent of
+// its peak - visually flat) still left forest right up against the mound,
+// close enough that an oak's far-LOD canopy (rendered trunk-less by design,
+// see farTrunkProxy in foliage.ts) was visible poking above the mound's own
+// silhouette from just inside the tunnel mouth, reading as a leafy clump
+// floating in the sky with nothing under it. `moundRadius * 3.5` clears a
+// real, walkable, forest-free approach in front of both mouths (verified
+// against the live decoration scatter, tests/fixes.test.ts).
+const TUNNEL_MOUND_CLEARANCE_FACTOR = 3.5;
 
 export function isNearTunnelMound(x: number, z: number): boolean {
   for (const tunnel of TUNNELS) {
     for (const w of tunnel.waypoints) {
       if (!w.mound) continue;
       const moundRadius = w.moundRadius ?? w.radius + 4;
-      if (Math.hypot(x - w.x, z - w.z) < moundRadius + TUNNEL_MOUND_CLEARANCE) return true;
+      if (Math.hypot(x - w.x, z - w.z) < moundRadius * TUNNEL_MOUND_CLEARANCE_FACTOR) return true;
     }
   }
   return false;

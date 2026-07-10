@@ -3,6 +3,7 @@ import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js
 import { WORLD_MAX_X, WORLD_MAX_Z, WORLD_MIN_Z } from '../sim/data';
 import {
   chunkNearAnyTunnel,
+  groundHeightWithMounds,
   TUNNELS,
   tunnelBounds,
   tunnelInteriorFactor,
@@ -107,89 +108,52 @@ function addBoulder(group: THREE.Group, x: number, y: number, z: number, scale: 
   group.add(boulder);
 }
 
-// Organic mouth dressing: a scatter of hanging branches with leaf clumps
-// framing the top of the archway, plus a short dirt/rock path patch leading
-// from the threshold outward, matching the reference photo (rounded rock
-// archway in a grassy hillside, foliage overhanging the opening, a visible
+// Organic mouth dressing: a short dirt/rock path patch leading from the
+// threshold outward (rounded rock archway in a grassy hillside, a visible
 // path leading in). All offsets are deterministic (a fixed function of the
-// waypoint's own position and a hand-picked `side`/`lobe` index), never
-// Math.random, so the same mouth always dresses identically.
-const LEAF_COLOR = 0x3d6b2e;
-const BRANCH_COLOR = 0x4a3826;
+// waypoint's own position), never Math.random, so the same mouth always
+// dresses identically.
+//
+// Round 10: this used to also scatter a ring of hanging-branch leaf clumps
+// over the archway. Their anchor was always an offset from the doorway's own
+// geometry (first the carved ellipsoid, later the mound's crest height),
+// never the actual local ground surface at each clump's own (offset)
+// position - close enough at typical view distance, but from partway down
+// the tunnel looking out through the (now narrower) mouth, they read as a
+// handful of leaf blobs floating in the sky with no visible attachment.
+// Removed entirely rather than re-anchored per-clump: the mound's own grass
+// texture and the path patch below already read as a dressed, approached
+// entrance without them.
 const PATH_COLOR = 0x6b5a44;
-let leafGeo: THREE.IcosahedronGeometry | null = null;
-let branchGeo: THREE.CylinderGeometry | null = null;
 let pathGeo: THREE.CircleGeometry | null = null;
-
-function addHangingBranch(
-  group: THREE.Group,
-  x: number,
-  y: number,
-  z: number,
-  lean: number,
-  scale: number,
-): void {
-  branchGeo ??= new THREE.CylinderGeometry(0.06, 0.1, 1.6, 5);
-  const branch = new THREE.Mesh(
-    branchGeo,
-    new THREE.MeshStandardMaterial({ color: BRANCH_COLOR, roughness: 1 }),
-  );
-  branch.position.set(x, y, z);
-  branch.rotation.set(Math.PI * 0.5 + lean * 0.55, lean * 1.3, lean * 0.3);
-  branch.scale.setScalar(scale);
-  branch.castShadow = true;
-  group.add(branch);
-
-  leafGeo ??= new THREE.IcosahedronGeometry(1, 0);
-  for (let k = 0; k < 3; k++) {
-    const leaf = new THREE.Mesh(leafGeo, new THREE.MeshLambertMaterial({ color: LEAF_COLOR }));
-    const spread = 0.5 + k * 0.35;
-    leaf.position.set(
-      x + Math.sin(lean * 4 + k * 2.1) * spread * scale,
-      y - 0.5 * scale - k * 0.35 * scale,
-      z + Math.cos(lean * 3 + k * 1.7) * spread * scale,
-    );
-    leaf.scale.set(0.55 * scale, 0.4 * scale, 0.55 * scale);
-    leaf.rotation.set(k * 1.1, k * 2.3, k * 0.7);
-    leaf.castShadow = true;
-    leaf.receiveShadow = true;
-    group.add(leaf);
-  }
-}
 
 function addMouthFoliage(
   group: THREE.Group,
   w: { x: number; y: number; z: number; radius: number },
+  seed: number,
 ): void {
-  // A handful of overhanging branches ringing the top of the archway, at a
-  // spread of deterministic angles/heights so the canopy reads as irregular
-  // rather than a symmetric fringe.
-  const lobes = [-1.1, -0.5, 0.15, 0.7, 1.2];
-  for (let i = 0; i < lobes.length; i++) {
-    const lean = lobes[i];
-    const archTop = w.y + w.radius * 1.9; // near the top of the archScale-domed opening
-    const lateral = w.x + Math.sin(lean * 1.7) * w.radius * 0.9;
-    const depth = w.z + Math.cos(lean * 1.3) * w.radius * 0.35;
-    addHangingBranch(group, lateral, archTop, depth, lean, 0.85 + 0.2 * ((i % 3) - 1));
-  }
-
   // A short dirt/rock path patch on the ground just outside the threshold,
   // leading away from the mouth, so the entrance reads as an approached
-  // doorway rather than an isolated hole in the hillside.
+  // doorway rather than an isolated hole in the hillside. Anchored to the
+  // real local ground surface (groundHeightWithMounds), not a fixed offset
+  // from the doorway's own centerline, so it never floats over or sinks
+  // into the mound's own slope.
   pathGeo ??= new THREE.CircleGeometry(1, 10);
   const path = new THREE.Mesh(
     pathGeo,
     new THREE.MeshStandardMaterial({ color: PATH_COLOR, roughness: 1 }),
   );
   const outward = w.z < 180 ? -1 : 1; // lead away from the ridge crest, toward open ground
+  const pathX = w.x;
+  const pathZ = w.z + outward * w.radius * 2.3;
   path.rotation.x = -Math.PI / 2;
-  path.position.set(w.x, w.y - w.radius * 0.55, w.z + outward * w.radius * 2.3);
+  path.position.set(pathX, groundHeightWithMounds(pathX, pathZ, seed) + 0.05, pathZ);
   path.scale.set(w.radius * 0.55, w.radius * 1.0, 1);
   path.receiveShadow = true;
   group.add(path);
 }
 
-function addDecorations(group: THREE.Group): void {
+function addDecorations(group: THREE.Group, seed: number): void {
   for (const tunnel of TUNNELS) {
     const wps = tunnel.waypoints;
     for (let i = 1; i < wps.length - 1; i++) {
@@ -204,7 +168,7 @@ function addDecorations(group: THREE.Group): void {
       }
     }
     for (const w of [wps[0], wps[wps.length - 1]]) {
-      if (w.mound) addMouthFoliage(group, w);
+      if (w.mound) addMouthFoliage(group, w, seed);
     }
   }
 }
@@ -497,7 +461,7 @@ export function buildTunnelOverlay(seed: number): TunnelOverlayView {
     group.add(mesh);
   }
 
-  addDecorations(group);
+  addDecorations(group, seed);
 
   // The dominant, reliable light source: unlike THREE.PointLight, neither
   // AmbientLight nor HemisphereLight is subject to renderer.ts's fire-light

@@ -1514,6 +1514,15 @@ function buildGrassRing(parent: THREE.Group, seed: number): GrassRing {
         if (nearHub) continue;
         if (roadDistance(x, z) < 3.2) continue;
         if (isInSowfieldShell(x, z)) continue; // the Sowfield is a mown pitch, not meadow
+        // Round 10: grass blades are anchored to the plain (x,z) heightfield
+        // (terrainHeight), which knows nothing about a tunnel entrance
+        // mound's additive height bump (voxel.ts) or the carved doorway cut
+        // through it - near a mouth, that stale anchor sits either buried
+        // inside the mound or floating in the open air of the carved
+        // passage. The mound's own grassy exterior already reads as grass
+        // via tunnel_overlay.ts's shader texture blend; it does not need
+        // separate blade billboards.
+        if (isNearTunnelMound(x, z)) continue;
         const s = (lush ? 0.55 : 0.45) + r * (lush ? 1.1 : 1);
         q.setFromAxisAngle(up, r * 12.4);
         m.compose(v.set(x, h, z), q, sv.set(s, s, s));
