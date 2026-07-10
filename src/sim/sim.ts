@@ -148,8 +148,8 @@ import { formatMoney } from './format_money';
 import * as interaction from './interaction';
 import { meetsLevelRequirement } from './item_level_req';
 import * as items from './items';
-import { nextKeepState } from './keep_floor';
 import type { JailState } from './jail';
+import { nextKeepState } from './keep_floor';
 import {
   type DevLeaderboardPage,
   type GuildLeaderboardPage,
