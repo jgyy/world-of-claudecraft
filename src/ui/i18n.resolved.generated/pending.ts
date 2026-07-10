@@ -10,22 +10,52 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "es_ES": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "fr_FR": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "fr_CA": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "en_CA": [],
   "it_IT": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "de_DE": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "zh_CN": [
@@ -41,33 +71,78 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.map.caveEntrance"
   ],
   "pt_BR": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "ru_RU": [
     "hudChrome.map.caveEntrance"
   ],
   "cs_CZ": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "nl_NL": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "pl_PL": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "id_ID": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "tr_TR": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "sv_SE": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "vi_VN": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ],
   "da_DK": [
+    "entities.items.chunk_of_ore.name",
+    "entities.quests.q_prof_intro.completion",
+    "entities.quests.q_prof_intro.objectives.0.label",
+    "entities.quests.q_prof_intro.text",
+    "entities.quests.q_prof_intro.title",
     "hudChrome.map.caveEntrance"
   ]
 };
