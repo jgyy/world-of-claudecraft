@@ -202,7 +202,10 @@ describe('keep terrain pad (world.ts terrainHeight)', () => {
 });
 
 describe('keep floor transitions (keep_floor.ts)', () => {
-  const at = (floor: 0 | 1 | 2 | 3, landingLock = -1): KeepState => ({ floor, landingLock });
+  const at = (floor: 0 | 1 | 2 | 3 | 4 | 5, landingLock = -1): KeepState => ({
+    floor,
+    landingLock,
+  });
 
   it('stays at floor 0 (outside) far from the keep', () => {
     expect(nextKeepState(KEEP_STATE_OUTSIDE, 0, 0)).toEqual(KEEP_STATE_OUTSIDE);
