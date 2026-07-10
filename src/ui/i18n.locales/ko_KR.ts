@@ -14,6 +14,11 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const ko_KR: Partial<Record<TranslationKey, string>> = {
+  'hudChrome.auth.appleLoginCta': 'Apple로 계속하기',
+  'hudChrome.auth.appleError': 'Apple로 로그인할 수 없습니다. 다시 시도해 주세요.',
+  'hudChrome.auth.appleChoiceIntro': '새 계정을 만들거나 Apple을 기존 계정에 연결하세요.',
+  'hudChrome.auth.appleChoiceExpired':
+    'Apple 로그인이 만료되었습니다. Apple로 다시 로그인해 주세요.',
   'hudChrome.vcup.guildBoardWl': '{wins}승 {losses}패',
   'hudChrome.vcup.shootPower': '파워',
   'hudChrome.discord.roleTag.coredevs': '핵심 개발자',
@@ -3602,7 +3607,6 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.seconds': '{s}초',
   'hudChrome.mobile.actionPageToggle': '행동 페이지 전환',
   'hudChrome.mobile.actionRing': '전투 행동',
-  'hudChrome.mobile.autorun': '자동 달리기',
   'hudChrome.mobile.haptics': '진동',
   'hudChrome.mobile.hapticsOff': '진동 꺼짐',
   'hudChrome.mobile.hotbarPage': '스킬',

@@ -14,6 +14,11 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const ru_RU: Partial<Record<TranslationKey, string>> = {
+  'hudChrome.auth.appleLoginCta': 'Продолжить с Apple',
+  'hudChrome.auth.appleError': 'Не удалось войти через Apple. Попробуйте ещё раз.',
+  'hudChrome.auth.appleChoiceIntro':
+    'Создайте новую учётную запись или привяжите Apple к существующей.',
+  'hudChrome.auth.appleChoiceExpired': 'Вход через Apple истёк. Войдите через Apple ещё раз.',
   'hudChrome.vcup.guildBoardWl': '{wins} побед, {losses} поражений',
   'hudChrome.vcup.shootPower': 'СИЛА',
   'hudChrome.discord.roleTag.coredevs': 'Ведущий разработчик',
@@ -3652,7 +3657,6 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.seconds': '{s} сек.',
   'hudChrome.mobile.actionPageToggle': 'Переключить страницу действий',
   'hudChrome.mobile.actionRing': 'Боевые действия',
-  'hudChrome.mobile.autorun': 'Автобег',
   'hudChrome.mobile.haptics': 'Вибрация',
   'hudChrome.mobile.hapticsOff': 'Вибрация выкл.',
   'hudChrome.mobile.hotbarPage': 'Навыки',

@@ -231,7 +231,6 @@ export const hudChromeStrings = {
   // On-screen / mobile control labels and their accessible names. char/bags/music
   // reuse existing keys (hud.keybinds.actions.*, hud.options.music) at the call site.
   mobile: {
-    autorun: 'Auto',
     jump: 'Jump',
     leaderboard: 'Ranks',
     dailyRewards: 'Rewards',
@@ -1285,6 +1284,10 @@ export const hudChromeStrings = {
   // main.ts userFacingApiError. The generic "sent" copy never reveals whether an
   // account exists.
   auth: {
+    appleLoginCta: 'Continue with Apple',
+    appleError: 'Could not sign in with Apple. Please try again.',
+    appleChoiceIntro: 'Create a new account, or link Apple to one you already have.',
+    appleChoiceExpired: 'That Apple sign-in expired. Please sign in with Apple again.',
     forgotPrompt: 'Forgot password?',
     forgotTitle: 'Reset your password',
     forgotHint: 'Enter your username and we will email a reset link to the address on file.',

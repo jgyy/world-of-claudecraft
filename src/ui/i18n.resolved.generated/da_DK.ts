@@ -306,7 +306,6 @@ export const da_DK: EnTranslations = {
       "chat": "Spring til chat"
     },
     "mobile": {
-      "autorun": "Autoløb",
       "jump": "Hop",
       "leaderboard": "Rangliste",
       "dailyRewards": "Belønninger",
@@ -1070,6 +1069,10 @@ export const da_DK: EnTranslations = {
       "spawn": "{name} rejser sig over Tornetop Højder!"
     },
     "auth": {
+      "appleLoginCta": "Continue with Apple",
+      "appleError": "Could not sign in with Apple. Please try again.",
+      "appleChoiceIntro": "Create a new account, or link Apple to one you already have.",
+      "appleChoiceExpired": "That Apple sign-in expired. Please sign in with Apple again.",
       "forgotPrompt": "Glemt adgangskode?",
       "forgotTitle": "Nulstil din adgangskode",
       "forgotHint": "Indtast dit brugernavn, så sender vi et nulstillingslink til den registrerede e-mailadresse.",

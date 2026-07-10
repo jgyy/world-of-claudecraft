@@ -306,7 +306,6 @@ export const zh_TW: EnTranslations = {
       "chat": "跳至聊天"
     },
     "mobile": {
-      "autorun": "自動奔跑",
       "jump": "跳躍",
       "leaderboard": "排行榜",
       "dailyRewards": "獎勵",
@@ -1070,6 +1069,10 @@ export const zh_TW: EnTranslations = {
       "spawn": "{name}在荊峰高地崛起！"
     },
     "auth": {
+      "appleLoginCta": "透過 Apple 繼續",
+      "appleError": "無法透過 Apple 登入。請再試一次。",
+      "appleChoiceIntro": "建立新帳戶，或將 Apple 連結到現有帳戶。",
+      "appleChoiceExpired": "Apple 登入已過期。請再次使用 Apple 登入。",
       "forgotPrompt": "忘記密碼？",
       "forgotTitle": "重設密碼",
       "forgotHint": "輸入您的使用者名稱，我們會將重設連結寄送到登記的電子郵件。",

@@ -306,7 +306,6 @@ export const nl_NL: EnTranslations = {
       "chat": "Ga naar chat"
     },
     "mobile": {
-      "autorun": "Autoloop",
       "jump": "Springen",
       "leaderboard": "Ranglijst",
       "dailyRewards": "Beloningen",
@@ -1070,6 +1069,10 @@ export const nl_NL: EnTranslations = {
       "spawn": "{name} verrijst boven Doorntop-Hoogten!"
     },
     "auth": {
+      "appleLoginCta": "Continue with Apple",
+      "appleError": "Could not sign in with Apple. Please try again.",
+      "appleChoiceIntro": "Create a new account, or link Apple to one you already have.",
+      "appleChoiceExpired": "That Apple sign-in expired. Please sign in with Apple again.",
       "forgotPrompt": "Wachtwoord vergeten?",
       "forgotTitle": "Wachtwoord opnieuw instellen",
       "forgotHint": "Voer je gebruikersnaam in en we sturen een herstellink naar het geregistreerde e-mailadres.",

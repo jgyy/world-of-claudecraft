@@ -306,7 +306,6 @@ export const tr_TR: EnTranslations = {
       "chat": "Sohbete Atla"
     },
     "mobile": {
-      "autorun": "Otomatik Koşu",
       "jump": "Zıpla",
       "leaderboard": "Sıralama",
       "dailyRewards": "Ödüller",
@@ -1070,6 +1069,10 @@ export const tr_TR: EnTranslations = {
       "spawn": "{name}, Dikenzirve Tepeleri'nin üzerinde yükseliyor!"
     },
     "auth": {
+      "appleLoginCta": "Continue with Apple",
+      "appleError": "Could not sign in with Apple. Please try again.",
+      "appleChoiceIntro": "Create a new account, or link Apple to one you already have.",
+      "appleChoiceExpired": "That Apple sign-in expired. Please sign in with Apple again.",
       "forgotPrompt": "Şifreni mi unuttun?",
       "forgotTitle": "Şifreni sıfırla",
       "forgotHint": "Kullanıcı adını gir, kayıtlı e-posta adresine bir sıfırlama bağlantısı gönderelim.",

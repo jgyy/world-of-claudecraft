@@ -14,6 +14,12 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const ja_JP: Partial<Record<TranslationKey, string>> = {
+  'hudChrome.auth.appleLoginCta': 'Appleで続ける',
+  'hudChrome.auth.appleError': 'Appleでサインインできませんでした。もう一度お試しください。',
+  'hudChrome.auth.appleChoiceIntro':
+    '新しいアカウントを作成するか、Appleを既存のアカウントに連携します。',
+  'hudChrome.auth.appleChoiceExpired':
+    'Appleでのサインインの有効期限が切れました。もう一度お試しください。',
   'hudChrome.vcup.guildBoardWl': '{wins} 勝 {losses} 敗',
   'hudChrome.vcup.shootPower': 'パワー',
   'hudChrome.discord.roleTag.coredevs': 'コア開発者',
@@ -3612,7 +3618,6 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.seconds': '{s}秒',
   'hudChrome.mobile.actionPageToggle': '行動ページ切替',
   'hudChrome.mobile.actionRing': '戦闘アクション',
-  'hudChrome.mobile.autorun': 'オートラン',
   'hudChrome.mobile.haptics': '振動',
   'hudChrome.mobile.hapticsOff': '振動オフ',
   'hudChrome.mobile.hotbarPage': 'スキル',

@@ -14,6 +14,10 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const zh_CN: Partial<Record<TranslationKey, string>> = {
+  'hudChrome.auth.appleLoginCta': '通过 Apple 继续',
+  'hudChrome.auth.appleError': '无法通过 Apple 登录。请重试。',
+  'hudChrome.auth.appleChoiceIntro': '创建新帐户，或将 Apple 关联到现有帐户。',
+  'hudChrome.auth.appleChoiceExpired': 'Apple 登录已过期。请再次使用 Apple 登录。',
   'hudChrome.vcup.guildBoardWl': '{wins} 胜，{losses} 负',
   'hudChrome.vcup.shootPower': '力度',
   'hudChrome.discord.roleTag.coredevs': '核心开发者',
@@ -3467,7 +3471,6 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.seconds': '{s}秒',
   'hudChrome.mobile.actionPageToggle': '切换动作页',
   'hudChrome.mobile.actionRing': '战斗动作',
-  'hudChrome.mobile.autorun': '自动奔跑',
   'hudChrome.mobile.haptics': '震动反馈',
   'hudChrome.mobile.hapticsOff': '震动反馈：关',
   'hudChrome.mobile.hotbarPage': '技能',
