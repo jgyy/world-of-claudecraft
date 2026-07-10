@@ -137,6 +137,8 @@ const FURNITURE_CORNERS: readonly [number, number][] = [
   [KEEP_HALF - 1.2, KEEP_HALF - 1.2], // floor 1: northeast corner
   [-(KEEP_HALF - 1.2), KEEP_HALF - 1.2], // floor 2: northwest corner
   [KEEP_HALF - 1.2, -(KEEP_HALF - 1.2)], // floor 3: southeast corner
+  [-(KEEP_HALF - 1.2), -(KEEP_HALF - 1.2)], // floor 4: southwest corner
+  [0, KEEP_HALF - 1.2], // floor 5 (attic): north-center
 ];
 
 function keepFloorFurnitureCollider(seed: number, floor: number): Collider {
@@ -154,7 +156,8 @@ function keepFloorFurnitureCollider(seed: number, floor: number): Collider {
 }
 
 /** Colliders active inside the keep footprint for a given player's activeFloor
- * (1..3; defaults to 1 for any caller that doesn't know a floor yet). */
+ * (1..5, 5 being the attic; defaults to 1 for any caller that doesn't know a
+ * floor yet). */
 export function keepColliders(seed: number, floor = 1): Collider[] {
   return [...keepExteriorWallColliders(seed), keepFloorFurnitureCollider(seed, floor)];
 }

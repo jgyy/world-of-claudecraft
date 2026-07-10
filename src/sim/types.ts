@@ -1798,7 +1798,7 @@ export interface Entity {
   // player is currently standing on inside the keep's fixed footprint. See
   // keep_floor.ts for the transition rule; colliders.ts/voxel_building.ts key
   // the collider/render lookup for that footprint off this per-player state.
-  activeFloor: 0 | 1 | 2 | 3;
+  activeFloor: 0 | 1 | 2 | 3 | 4 | 5;
   // Index into content/keep.ts's KEEP_STAIRS the player is currently locked
   // to (-1 = none): see keep_floor.ts's nextKeepState for why the edge-lock
   // exists (without it, standing still on a landing would flip activeFloor

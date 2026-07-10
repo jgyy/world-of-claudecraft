@@ -1,3 +1,4 @@
+import { KEEP_PAD_FALLOFF, KEEP_PAD_HALF, KEEP_POS } from './content/keep';
 import { DUNGEON_FLOOR_Y, DUNGEON_X_THRESHOLD, getActiveWorldContent, WORLD_MAX_X } from './data';
 import { fbm2, hash2 } from './rng';
 import type { BiomeId, HeightStamp, WorldContent } from './types';
@@ -537,6 +538,23 @@ export function terrainHeight(x: number, z: number, seed: number): number {
   const terraced = terraceStep(mountainAdd, TERRACE_STEP, TERRACE_TREAD, TERRACE_APRON);
   h += terraced * mountainDetail + mountainAdd * (1 - mountainDetail);
   h += mirefenImpactCraterOffset(x, z);
+
+  // The Eastbrook Vale keep pad (content/keep.ts): a dead-level plateau around
+  // KEEP_POS so the voxel keep shell (voxel_building.ts) sits flush with the
+  // ground on every side, never clipping a slope. Same LEVEL-pull idea as the
+  // camp/Sowfield flatten, applied LAST so it wins over any residual ridge/rim
+  // character, and pulling all the way to a single fixed height inside the flat
+  // half-extent (so it is exactly flat, not merely close). A square weight
+  // matches the square footprint; the falloff eases back to natural terrain so
+  // there is no hard step at the pad edge. Guarded so every sample outside the
+  // pad's influence stays bit-identical (the parity goldens never sample here).
+  const padD = Math.max(Math.abs(x - KEEP_POS.x), Math.abs(z - KEEP_POS.z));
+  const padW = 1 - smoothstep(KEEP_PAD_HALF, KEEP_PAD_HALF + KEEP_PAD_FALLOFF, padD);
+  if (padW > 0) {
+    const padH = baseHeight(KEEP_POS.x, KEEP_POS.z, seed);
+    h = lerp(h, padH, padW);
+  }
+
   h = applyEditLayer(x, z, h);
   return h;
 }

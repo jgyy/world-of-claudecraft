@@ -21,11 +21,14 @@ import {
   KEEP_FLOORS,
   KEEP_HALF,
   KEEP_POS,
-  KEEP_ROOF_THICK,
   KEEP_SLAB_THICK,
   KEEP_STAIRS,
   KEEP_TOTAL_HEIGHT,
   KEEP_WALL_THICK,
+  KEEP_WINDOW_HALF_WIDTH,
+  KEEP_WINDOW_HEIGHT,
+  KEEP_WINDOW_OFFSET,
+  KEEP_WINDOW_SILL,
 } from './content/keep';
 import { terrainHeight } from './world';
 
@@ -107,7 +110,11 @@ function stairCutoutAt(lx: number, ly: number, lz: number, betweenFloor: number)
   let best = Infinity;
   for (const s of KEEP_STAIRS) {
     if (s.fromFloor !== betweenFloor) continue;
-    const d = sdCylinderY(lx, ly, lz, s.x - KEEP_POS.x, 0, s.z - KEEP_POS.z, s.r, 10);
+    // hy tall enough to reach every floor slab (the building is now ~20yd of
+    // vertical wall). The cylinder is only ever subtracted from an individual
+    // thin slab, so an over-tall carve is harmless; it must simply reach the
+    // slab's height (local ly up to KEEP_BODY_HEIGHT).
+    const d = sdCylinderY(lx, ly, lz, s.x - KEEP_POS.x, 0, s.z - KEEP_POS.z, s.r, 30);
     if (d < best) best = d;
   }
   return best;
@@ -123,7 +130,9 @@ export function keepVoxelDensity(x: number, y: number, z: number, seed: number):
   const baseY = keepBaseY(seed);
   const ly = y - baseY;
 
-  const totalH = KEEP_FLOORS * KEEP_FLOOR_HEIGHT;
+  // Total vertical wall height: four full stories plus the attic knee wall,
+  // up to the eave line where the pitched roof (render geometry) takes over.
+  const totalH = KEEP_TOTAL_HEIGHT;
   const half = KEEP_HALF;
   const t = KEEP_WALL_THICK;
 
@@ -171,21 +180,92 @@ export function keepVoxelDensity(x: number, y: number, z: number, seed: number):
   );
   shell = subtract(shell, doorCut);
 
-  // Floor slabs (levels 1..KEEP_FLOORS-1 as interior floor/ceilings, plus the
-  // roof at KEEP_FLOORS), each with a stairwell hole where a landing starts.
+  // Real window openings: carve a symmetric pair through each wall face on
+  // every floor (ground included), the same sdBox-subtract technique as the
+  // door. The render side dresses each opening as a shuttered window.
+  const winHalfH = KEEP_WINDOW_HEIGHT / 2;
+  const winDepth = t + 0.5;
+  for (const cut of keepWindowCuts(baseY, winHalfH, winDepth, x, y, z)) {
+    shell = subtract(shell, cut);
+  }
+
+  // Floor slabs: levels 1..KEEP_FLOORS as interior floor/ceilings (the
+  // KEEP_FLOORS-th slab is the attic floor), each with a stairwell hole where a
+  // landing starts. stairCutoutAt returns Infinity when no landing begins on
+  // that level, and subtract(slab, Infinity) leaves the slab untouched, so the
+  // call is safe to make for every slab.
   let slabs = Infinity;
   for (let level = 1; level <= KEEP_FLOORS; level++) {
     const slabY = level * KEEP_FLOOR_HEIGHT;
-    const thick = level === KEEP_FLOORS ? KEEP_ROOF_THICK : KEEP_SLAB_THICK;
-    let slab = sdBox(x, y, z, KEEP_POS.x, baseY + slabY, KEEP_POS.z, half, thick / 2, half);
-    if (level < KEEP_FLOORS) {
-      const hole = stairCutoutAt(lx, ly, lz, level);
-      slab = subtract(slab, hole);
-    }
-    slabs = union(slabs, slab);
+    const slab = sdBox(
+      x,
+      y,
+      z,
+      KEEP_POS.x,
+      baseY + slabY,
+      KEEP_POS.z,
+      half,
+      KEEP_SLAB_THICK / 2,
+      half,
+    );
+    const hole = stairCutoutAt(lx, ly, lz, level);
+    slabs = union(slabs, subtract(slab, hole));
   }
 
   return union(foundation, union(shell, slabs));
+}
+
+// The local (x,z) center + wall axis of each window opening: a symmetric pair
+// on each of the four wall faces, on every floor. Shared by the sim carve and
+// the render frame/pane dressing so they always line up.
+export interface KeepWindowSpec {
+  /** World x of the window center. */
+  x: number;
+  /** World z of the window center. */
+  z: number;
+  /** Base-relative Y of the window center. */
+  ly: number;
+  /** Which wall this window sits in ('north'/'south' face +/-z, 'east'/'west' face +/-x). */
+  wall: 'north' | 'south' | 'east' | 'west';
+}
+
+/** Every window's world (x,z), base-relative center Y, and wall face. */
+export function keepWindowSpecs(): KeepWindowSpec[] {
+  const out: KeepWindowSpec[] = [];
+  const off = KEEP_WINDOW_OFFSET;
+  for (let floor = 1; floor <= KEEP_FLOORS; floor++) {
+    const ly = (floor - 1) * KEEP_FLOOR_HEIGHT + KEEP_WINDOW_SILL + KEEP_WINDOW_HEIGHT / 2;
+    for (const s of [-1, 1] as const) {
+      out.push({ x: KEEP_POS.x + s * off, z: KEEP_POS.z + KEEP_HALF, ly, wall: 'north' });
+      out.push({ x: KEEP_POS.x + s * off, z: KEEP_POS.z - KEEP_HALF, ly, wall: 'south' });
+      out.push({ x: KEEP_POS.x + KEEP_HALF, z: KEEP_POS.z + s * off, ly, wall: 'east' });
+      out.push({ x: KEEP_POS.x - KEEP_HALF, z: KEEP_POS.z + s * off, ly, wall: 'west' });
+    }
+  }
+  return out;
+}
+
+// The subtracted density of every window opening at (x,y,z). A north/south
+// window is thin in z (spans the wall in x); an east/west window is thin in x.
+function keepWindowCuts(
+  baseY: number,
+  winHalfH: number,
+  winDepth: number,
+  x: number,
+  y: number,
+  z: number,
+): number[] {
+  const cuts: number[] = [];
+  const hw = KEEP_WINDOW_HALF_WIDTH;
+  for (const w of keepWindowSpecs()) {
+    const cy = baseY + w.ly;
+    if (w.wall === 'north' || w.wall === 'south') {
+      cuts.push(sdBox(x, y, z, w.x, cy, w.z, hw, winHalfH, winDepth));
+    } else {
+      cuts.push(sdBox(x, y, z, w.x, cy, w.z, winDepth, winHalfH, hw));
+    }
+  }
+  return cuts;
 }
 
 export { KEEP_STAIRS };

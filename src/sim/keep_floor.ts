@@ -10,9 +10,9 @@
 import { KEEP_STAIRS } from './content/keep';
 import { isInsideKeepFootprint } from './voxel_building';
 
-/** 0 = outside the keep (or never entered); 1..3 = the floor the player is
- * currently standing on inside the keep. */
-export type ActiveFloor = 0 | 1 | 2 | 3;
+/** 0 = outside the keep (or never entered); 1..4 = the four full stories the
+ * player is currently standing on inside the keep; 5 = the attic. */
+export type ActiveFloor = 0 | 1 | 2 | 3 | 4 | 5;
 
 /** activeFloor plus which landing (index into KEEP_STAIRS, or -1) the
  * player is currently standing inside, so a landing transitions EXACTLY
@@ -65,7 +65,11 @@ export function nextKeepState(prev: KeepState, x: number, z: number): KeepState 
   if (landingIdx === prev.landingLock) return prev; // still on the landing that just fired
 
   const s = KEEP_STAIRS[landingIdx];
-  if (prev.floor === s.fromFloor) return { floor: s.toFloor, landingLock: landingIdx };
-  if (prev.floor === s.toFloor) return { floor: s.fromFloor, landingLock: landingIdx };
+  // fromFloor/toFloor are authored 1..5 in KEEP_STAIRS (content/keep.ts), so
+  // they are valid ActiveFloor values; the data type widens them to number.
+  if (prev.floor === s.fromFloor)
+    return { floor: s.toFloor as ActiveFloor, landingLock: landingIdx };
+  if (prev.floor === s.toFloor)
+    return { floor: s.fromFloor as ActiveFloor, landingLock: landingIdx };
   return { floor: prev.floor, landingLock: landingIdx }; // on an unrelated landing, just lock it
 }
