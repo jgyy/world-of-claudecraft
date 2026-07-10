@@ -548,11 +548,16 @@ export function terrainHeight(x: number, z: number, seed: number): number {
   // matches the square footprint; the falloff eases back to natural terrain so
   // there is no hard step at the pad edge. Guarded so every sample outside the
   // pad's influence stays bit-identical (the parity goldens never sample here).
+  // Early-out cheaply for the overwhelming majority of samples (anywhere off
+  // the pad): just two abs + a max + one compare, so the hot terrain path pays
+  // almost nothing and stays bit-identical.
   const padD = Math.max(Math.abs(x - KEEP_POS.x), Math.abs(z - KEEP_POS.z));
-  const padW = 1 - smoothstep(KEEP_PAD_HALF, KEEP_PAD_HALF + KEEP_PAD_FALLOFF, padD);
-  if (padW > 0) {
-    const padH = baseHeight(KEEP_POS.x, KEEP_POS.z, seed);
-    h = lerp(h, padH, padW);
+  if (padD < KEEP_PAD_HALF + KEEP_PAD_FALLOFF) {
+    const padW = 1 - smoothstep(KEEP_PAD_HALF, KEEP_PAD_HALF + KEEP_PAD_FALLOFF, padD);
+    if (padW > 0) {
+      const padH = baseHeight(KEEP_POS.x, KEEP_POS.z, seed);
+      h = lerp(h, padH, padW);
+    }
   }
 
   h = applyEditLayer(x, z, h);
