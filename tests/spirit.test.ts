@@ -371,6 +371,33 @@ describe('spirit: delve respawn (unchanged bounded rules)', () => {
     expect(p.dead).toBe(false);
     expect(sim.moveInput.strafeLeft).toBe(false);
   });
+
+  it('a second delve death (run-failing eject to the door) also clears a held movement key', () => {
+    const sim = makeSim('rogue', 99);
+    const reliquary = DELVES.collapsed_reliquary;
+    sim.setPlayerLevel(reliquary.minLevel);
+    const p = sim.player as AnyEntity;
+    p.pos = { x: reliquary.doorPos.x, y: 0, z: reliquary.doorPos.z };
+    p.prevPos = { ...p.pos };
+    sim.rebucket(p);
+    sim.enterDelve('collapsed_reliquary', 'normal');
+    const run = sim.delveRunForPlayer(sim.playerId) as any;
+    run.modules = ['reliquary_finale'];
+    run.moduleIndex = 0;
+    (sim as any).spawnDelveModule(run);
+
+    p.dead = true;
+    sim.releaseSpirit();
+    expect(p.dead).toBe(false);
+
+    const e2 = sim.entities.get(sim.playerId) as AnyEntity;
+    sim.moveInput.back = true;
+    e2.dead = true;
+    sim.releaseSpirit();
+    const events = sim.tick();
+    expect(events.some((ev: any) => ev.type === 'delveFailed')).toBe(true);
+    expect(sim.moveInput.back).toBe(false);
+  });
 });
 
 describe('spirit: ghost movement (tick loop)', () => {
