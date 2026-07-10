@@ -15,6 +15,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -25,6 +27,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -35,6 +39,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -45,6 +51,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -56,6 +64,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -66,20 +76,26 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
   ],
   "zh_CN": [
+    "hudChrome.itemHeroicTag",
     "hudChrome.map.caveEntrance"
   ],
   "zh_TW": [
+    "hudChrome.itemHeroicTag",
     "hudChrome.map.caveEntrance"
   ],
   "ko_KR": [
+    "hudChrome.itemHeroicTag",
     "hudChrome.map.caveEntrance"
   ],
   "ja_JP": [
+    "hudChrome.itemHeroicTag",
     "hudChrome.map.caveEntrance"
   ],
   "pt_BR": [
@@ -88,11 +104,14 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
   ],
   "ru_RU": [
+    "hudChrome.itemHeroicTag",
     "hudChrome.map.caveEntrance"
   ],
   "cs_CZ": [
@@ -101,6 +120,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -111,6 +132,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -121,6 +144,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -131,6 +156,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -141,6 +168,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -151,6 +180,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -161,6 +192,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
@@ -171,6 +204,8 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_prof_intro.objectives.0.label",
     "entities.quests.q_prof_intro.text",
     "entities.quests.q_prof_intro.title",
+    "hudChrome.itemHeroicTag",
+    "hudChrome.itemSoulbound",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
     "hudChrome.mailbox.parcelQtyIncreaseAria",
     "hudChrome.map.caveEntrance"
