@@ -1296,6 +1296,8 @@ export const sv_SE: EnTranslations = {
       "parcelsLabel": "Paket",
       "parcelsHint": "Klicka på ett föremål i dina väskor för att bifoga det.",
       "removeParcelAria": "Ta bort {item} från brevet",
+      "parcelQtyDecreaseAria": "Send one fewer {item}",
+      "parcelQtyIncreaseAria": "Send one more {item}",
       "sendButton": "Skicka brev",
       "postageNote": "Porto: {amount}. Korpen flyger i ungefär {seconds}s.",
       "arrivedBanner": "Korpen har landat: post från {name}.",
@@ -5818,6 +5820,9 @@ export const sv_SE: EnTranslations = {
       "greyjaw_fang": {
         "name": "Gamle Gråkäftens huggtand"
       },
+      "chunk_of_ore": {
+        "name": "Chunk of Ore"
+      },
       "weathered_ledger_page": {
         "name": "Väderbiten liggarsida"
       },
@@ -7489,6 +7494,16 @@ export const sv_SE: EnTranslations = {
       }
     },
     "quests": {
+      "q_prof_intro": {
+        "title": "A Trade for Every Hand",
+        "text": "Every soul in Eastbrook works a trade besides the sword, {playerName}. There's ore veins scattered round town, so go swing a pick and bring me 5 chunks. Mine them yourself, mind; I'll know the difference.",
+        "completion": "See? Ore in your pack and callus on your hands. Keep at the mining, logging, and herb-picking as you travel the roads, and when you're back in town, mind the Town Focus board by the market and the crafting bench nearby. There's a fair trade waiting in all of it, if you want it.",
+        "objectives": {
+          "0": {
+            "label": "Chunk of Ore"
+          }
+        }
+      },
       "q_wolves": {
         "title": "Vargar vid dörren",
         "text": "Skogsvargarna blir djärva och nafsar efter resenärer på norra vägen. Decimera dem, {playerName}. Dräp 8 skogsvargar så andas Östbäck lättare.",
