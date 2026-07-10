@@ -138,6 +138,10 @@ describe('clampParcelQty (#1444 attach-a-quantity stepper)', () => {
   it('clamps a stale staged count down if the bag total shrank underneath it', () => {
     expect(clampParcelQty(9, 0, 5)).toBe(5);
   });
+
+  it('floors at 1 even if the bag emptied to 0 underneath the staged parcel (the sim refuses the send regardless)', () => {
+    expect(clampParcelQty(3, -1, 0)).toBe(1);
+  });
 });
 
 describe('mailSendBlocked / mailSendCost', () => {

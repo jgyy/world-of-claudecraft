@@ -6796,6 +6796,14 @@
     color: var(--color-text);
     font-size: 12.5px;
   }
+  /* The icon+name pair inside a chip: the icon img is display: block
+     (.item-icon above), so this wrapper needs its own inline-flex or the
+     icon breaks onto its own line above the name. */
+  .mail-parcel-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
   .mail-parcel-qty {
     display: inline-flex;
     align-items: center;
@@ -6813,6 +6821,8 @@
     width: 18px;
     height: 18px;
     padding: 0;
+    font-family: var(--title-font);
+    font-size: 12px;
     line-height: 1;
     background: #ffffff10;
     border: 1px solid #ffffff26;
@@ -6827,6 +6837,11 @@
     opacity: 0.4;
     cursor: default;
   }
+  .mail-parcel-step:focus-visible,
+  .mail-parcel-remove-btn:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 1px;
+  }
   .mail-parcel-remove-btn {
     display: inline-flex;
     align-items: center;
@@ -6837,6 +6852,13 @@
   }
   .mail-parcel-remove-btn:hover .mail-parcel-remove {
     color: #ff9c8a;
+  }
+  @media (pointer: coarse) {
+    .mail-parcel-step,
+    .mail-parcel-remove-btn {
+      min-width: 40px;
+      min-height: 40px;
+    }
   }
   .mail-parcel-remove {
     width: 10px;
