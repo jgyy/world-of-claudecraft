@@ -13,7 +13,6 @@
 import {
   CHAPEL_DOOR_HALF_WIDTH,
   CHAPEL_DOOR_HEIGHT,
-  CHAPEL_FLOOR_HEIGHT,
   CHAPEL_FLOORS,
   CHAPEL_HALF,
   CHAPEL_POS,
@@ -25,10 +24,19 @@ import {
   CHAPEL_WINDOW_HEIGHT,
   CHAPEL_WINDOW_OFFSET,
   CHAPEL_WINDOW_SILL,
+  chapelFloorBaseOffset,
+  chapelSlabOffset,
 } from './content/drowned_chapel';
 import { terrainHeight } from './world';
 
-export { CHAPEL_FLOORS, CHAPEL_HALF, CHAPEL_POS, CHAPEL_TOTAL_HEIGHT };
+export {
+  CHAPEL_FLOORS,
+  CHAPEL_HALF,
+  CHAPEL_POS,
+  CHAPEL_TOTAL_HEIGHT,
+  chapelFloorBaseOffset,
+  chapelSlabOffset,
+};
 
 /** Is (x,z) within the chapel's exterior footprint (plus a small pad for the
  * mesher's chunk padding requirement)? */
@@ -48,7 +56,7 @@ export function chapelBaseY(seed: number): number {
 
 /** World-space Y of the walkable surface of a given floor (1..CHAPEL_FLOORS). */
 export function chapelFloorY(seed: number, floor: number): number {
-  return chapelBaseY(seed) + Math.max(0, floor - 1) * CHAPEL_FLOOR_HEIGHT;
+  return chapelBaseY(seed) + chapelFloorBaseOffset(floor);
 }
 
 // Axis-aligned box SDF, centered at (cx,cy,cz), half-extents (hx,hy,hz):
@@ -182,7 +190,7 @@ export function chapelVoxelDensity(x: number, y: number, z: number, seed: number
   // that level, so the call is safe for every slab.
   let slabs = Infinity;
   for (let level = 1; level <= CHAPEL_FLOORS; level++) {
-    const slabY = level * CHAPEL_FLOOR_HEIGHT;
+    const slabY = chapelSlabOffset(level);
     const slab = sdBox(
       x,
       y,
@@ -213,7 +221,7 @@ export function chapelWindowSpecs(): ChapelWindowSpec[] {
   const out: ChapelWindowSpec[] = [];
   const off = CHAPEL_WINDOW_OFFSET;
   for (let floor = 1; floor <= CHAPEL_FLOORS; floor++) {
-    const ly = (floor - 1) * CHAPEL_FLOOR_HEIGHT + CHAPEL_WINDOW_SILL + CHAPEL_WINDOW_HEIGHT / 2;
+    const ly = chapelFloorBaseOffset(floor) + CHAPEL_WINDOW_SILL + CHAPEL_WINDOW_HEIGHT / 2;
     for (const s of [-1, 1] as const) {
       out.push({ x: CHAPEL_POS.x + s * off, z: CHAPEL_POS.z + CHAPEL_HALF, ly, wall: 'north' });
       out.push({ x: CHAPEL_POS.x + s * off, z: CHAPEL_POS.z - CHAPEL_HALF, ly, wall: 'south' });
