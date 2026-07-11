@@ -53,6 +53,7 @@ import { buildCritters, type CritterField } from './critters';
 import { buildDelveModule } from './delve_interiors';
 import { buildDelveInteractable } from './delve_props';
 import { buildDoorBody } from './door_portal';
+import { buildChapelView, type ChapelView } from './drowned_chapel_building';
 import { DungeonInteriors, ensureDungeonAssets } from './dungeon';
 import { objectDisplayName } from './entity_labels';
 import { releaseSelfFacing, stepSelfFacing } from './facing_smooth';
@@ -907,6 +908,7 @@ export class Renderer {
   private motes: MotesView;
   private birds: BirdsView;
   private impactSite: ImpactSiteView;
+  private chapelView: ChapelView;
   private fogScratch = new THREE.Color();
   private flames: THREE.Mesh[];
   private fireLights: THREE.PointLight[];
@@ -1306,6 +1308,9 @@ export class Renderer {
     this.scene.add(props.group);
     this.flames = props.flames;
     this.fireLights = props.fireLights;
+    this.chapelView = buildChapelView(this.sim.cfg.seed);
+    setRenderCategory(this.chapelView.group, 'props');
+    this.scene.add(this.chapelView.group);
     // Props are baked into world space at build and their update() only toggles
     // visibility, so the whole tree is matrix-static, EXCEPT the campfire
     // flames, whose flicker rescales them every frame: re-enable those.
@@ -4174,6 +4179,7 @@ export class Renderer {
     }
     const now = performance.now();
     const selfPos = this.updateSelfRenderPosition(alpha, dt, selfAlphaLead, selfMotion);
+    this.chapelView.update(p);
     markPhase('setup');
 
     // dynamic worlds: create nearby views lazily and drop views for leavers or

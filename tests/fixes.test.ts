@@ -2000,18 +2000,23 @@ describe('spell visuals', () => {
   });
 
   it('the ruin-ring decoration set merges from zone content into PROPS.ruinDecor and does not block movement', () => {
-    // the walled temple compound repeats some kinds (25 floor tiles, corner
-    // obelisks, wall segments, braziers, grave markers, benches), so anchors
-    // can far outnumber the distinct RuinDecorKind set, but every one of the
-    // 16 kinds must still appear at least once and no anchor may block
-    // movement.
+    // the Drowned Chapel compound repeats some kinds (courtyard floor tiles,
+    // corner obelisks, grave markers, benches), so anchors can outnumber the
+    // distinct RuinDecorKind set, but every one of the 13 kinds must still
+    // appear at least once and no anchor may block movement. The old
+    // freestanding wall kinds (ruinWallCracked/ruinWallBroken/ruinWallCorner)
+    // are gone: superseded by the chapel's real voxel-mesh collision, which
+    // this decor loop never carries anyway.
     expect(PROPS.ruinDecor?.length).toBeGreaterThanOrEqual(16);
     const seed = 12345;
     for (const d of PROPS.ruinDecor!) {
       expect(isBlocked(seed, d.x, d.z, 0.5)).toBe(false);
     }
     const kinds = new Set(PROPS.ruinDecor!.map((d) => d.kind));
-    expect(kinds.size).toBe(16);
+    expect(kinds.size).toBe(13);
+    for (const wallKind of ['ruinWallCracked', 'ruinWallBroken', 'ruinWallCorner']) {
+      expect(kinds.has(wallKind as never)).toBe(false);
+    }
   });
 
   it('the ruin compound courtyard is a level clearing, not overgrown terrain', () => {

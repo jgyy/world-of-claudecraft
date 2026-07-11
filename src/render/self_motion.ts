@@ -142,8 +142,8 @@ export class SelfMotionPredictor {
     this.deps = {
       seed,
       moveSpeedMult: (e) => moveSpeedMult(e, 0),
-      resolveMove: (fromX, fromZ, nx, nz, r, _e, ignoreFences) =>
-        resolveMovement(seed, fromX, fromZ, nx, nz, r, ignoreFences),
+      resolveMove: (fromX, fromZ, nx, nz, r, e, ignoreFences) =>
+        resolveMovement(seed, fromX, fromZ, nx, nz, r, ignoreFences, undefined, e.chapelFloor),
       resolvedAbility: () => null,
       cancelCast: () => {},
       standUp: () => {},

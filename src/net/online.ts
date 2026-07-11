@@ -931,6 +931,8 @@ function blankEntity(id: number): Entity {
     potionCooldownUntil: -1,
     potionCdRemaining: 0,
     savedMana: 0,
+    chapelFloor: 0,
+    chapelLandingLock: -1,
     chargeTargetId: null,
     chargeTimeLeft: 0,
     chargePath: [],

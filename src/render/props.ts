@@ -124,21 +124,19 @@ const PROP_ASSET_DEFS: Record<string, PropAssetDef> = {
   ruinPedestal: { url: '/models/props/ruin_pedestal.glb', kit: 'nature' },
   ruinWallFragment: { url: '/models/props/ruin_wall_fragment.glb', kit: 'nature' },
   ruinUrn: { url: '/models/props/ruin_urn.glb', kit: 'nature' },
-  // Reused KayKit dungeon modular kit pieces (already shipped, not
-  // Tripo-generated) for the compound's stone floor and perimeter walls.
+  // Reused KayKit dungeon modular kit piece (already shipped, not
+  // Tripo-generated) for the compound's outdoor courtyard floor. The
+  // freestanding perimeter wall pieces this used to include are gone:
+  // superseded by the Drowned Chapel real voxel-mesh building
+  // (render/drowned_chapel_building.ts).
   ruinFloorTile: { url: '/models/dungeon/floor_tile_large.glb', kit: 'dungeon' },
-  ruinWallCracked: { url: '/models/dungeon/wall_cracked.glb', kit: 'dungeon' },
-  ruinWallBroken: { url: '/models/dungeon/wall_broken.glb', kit: 'dungeon' },
-  ruinWallCorner: { url: '/models/dungeon/wall_corner.glb', kit: 'dungeon' },
 };
 
 // Target visual height (world units) per ruinDecor kind, so each asset reads
 // at a sensible scale relative to the existing statue (3.2) and ring columns.
-// The dungeon wall pieces are natively 4 units tall (their real in-kit size),
-// so their "target" is just that height (scale ~1, matching their neighbors
-// on the same modular grid). ruinFloorTile is NOT height-scaled at all: see
-// FIXED_SCALE_RUIN_KINDS below (its native Y-extent is a thin ~0.15 slab, so
-// height-targeting it would blow the footprint scale up absurdly).
+// ruinFloorTile is NOT height-scaled at all: see FIXED_SCALE_RUIN_KINDS below
+// (its native Y-extent is a thin ~0.15 slab, so height-targeting it would
+// blow the footprint scale up absurdly).
 const RUIN_DECOR_HEIGHT: Record<RuinDecorKind, number> = {
   ruinArchway: 4.2,
   ruinAltar: 1.3,
@@ -153,9 +151,6 @@ const RUIN_DECOR_HEIGHT: Record<RuinDecorKind, number> = {
   ruinWallFragment: 2.6,
   ruinUrn: 0.9,
   ruinFloorTile: 1, // unused: see FIXED_SCALE_RUIN_KINDS
-  ruinWallCracked: 4,
-  ruinWallBroken: 4,
-  ruinWallCorner: 4,
 };
 
 // Kinds placed at a literal 1:1 scale (native GLB units = world units)
