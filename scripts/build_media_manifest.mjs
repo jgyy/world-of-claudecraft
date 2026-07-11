@@ -1,5 +1,13 @@
 import { createHash } from 'node:crypto';
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
@@ -20,13 +28,18 @@ function walk(dir) {
   return out;
 }
 
+// CLAUDE.md docs live alongside GLBs in models/ subdirectories (area-scoped
+// conventions per category); they are not runtime assets and must never ship
+// through the content-hashed media manifest.
+const NON_ASSET_EXTENSIONS = new Set(['.md']);
+
 function mediaFiles() {
   const files = [];
   for (const rootName of MEDIA_ROOTS) {
     const dir = path.join(publicDir, rootName);
     if (existsSync(dir)) files.push(...walk(dir));
   }
-  return files.sort();
+  return files.filter((f) => !NON_ASSET_EXTENSIONS.has(path.extname(f))).sort();
 }
 
 function manifestEntries() {
@@ -53,7 +66,9 @@ function generate() {
       '',
     ].join('\n'),
   );
-  console.log(`generated ${path.relative(root, generatedPath)} (${Object.keys(entries).length} media assets)`);
+  console.log(
+    `generated ${path.relative(root, generatedPath)} (${Object.keys(entries).length} media assets)`,
+  );
 }
 
 function emit() {
@@ -66,7 +81,9 @@ function emit() {
     mkdirSync(path.dirname(dest), { recursive: true });
     copyFileSync(src, dest);
   }
-  console.log(`emitted ${Object.keys(entries).length} hashed media assets to ${path.relative(root, mediaDir)}`);
+  console.log(
+    `emitted ${Object.keys(entries).length} hashed media assets to ${path.relative(root, mediaDir)}`,
+  );
 }
 
 const cmd = process.argv[2] ?? 'generate';
