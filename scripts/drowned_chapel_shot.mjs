@@ -31,29 +31,92 @@ const GROUND_H = 5.5; // CHAPEL_GROUND_FLOOR_HEIGHT
 
 const SHOTS = [
   // ---- Exterior wide / aerial (player OUTSIDE the footprint) ----
-  { name: 'chapel-exterior-wide-north', x: 100, z: 458, camYaw: Math.PI, camDist: 26, camPitch: 0.4 },
+  {
+    name: 'chapel-exterior-wide-north',
+    x: 100,
+    z: 458,
+    camYaw: Math.PI,
+    camDist: 26,
+    camPitch: 0.4,
+  },
   { name: 'chapel-exterior-wide-south', x: 100, z: 412, camYaw: 0, camDist: 26, camPitch: 0.4 },
-  { name: 'chapel-exterior-wide-east', x: 124, z: 435, camYaw: -Math.PI / 2, camDist: 26, camPitch: 0.4 },
-  { name: 'chapel-exterior-wide-west', x: 76, z: 435, camYaw: Math.PI / 2, camDist: 26, camPitch: 0.4 },
+  {
+    name: 'chapel-exterior-wide-east',
+    x: 124,
+    z: 435,
+    camYaw: -Math.PI / 2,
+    camDist: 26,
+    camPitch: 0.4,
+  },
+  {
+    name: 'chapel-exterior-wide-west',
+    x: 76,
+    z: 435,
+    camYaw: Math.PI / 2,
+    camDist: 26,
+    camPitch: 0.4,
+  },
   { name: 'chapel-aerial-overview', x: 100, z: 462, camYaw: Math.PI, camDist: 40, camPitch: 1.0 },
-  { name: 'chapel-flat-terrain-base', x: 100, z: 452, camYaw: Math.PI, camDist: 18, camPitch: 0.12 },
+  {
+    name: 'chapel-flat-terrain-base',
+    x: 100,
+    z: 452,
+    camYaw: Math.PI,
+    camDist: 18,
+    camPitch: 0.12,
+  },
 
   // ---- Entrance / door (outside, approaching north) ----
   { name: 'chapel-entrance-approach', x: 100, z: 451, camYaw: Math.PI, camDist: 16, camPitch: 0.2 },
   { name: 'chapel-door-close', x: 100, z: 447, camYaw: Math.PI, camDist: 7, camPitch: 0.1 },
 
   // ---- Open (unglazed) windows, outside and inside ----
-  { name: 'chapel-window-exterior', x: 116, z: 431, camYaw: -Math.PI / 2, camDist: 8, camPitch: 0.18 },
-  { name: 'chapel-window-exterior-upper', x: 100, z: 452, camYaw: Math.PI, camDist: 14, camPitch: 0.5 },
-  { name: 'chapel-window-interior', x: 104, z: 435, camYaw: Math.PI / 2, camDist: 4, camPitch: 0.1 },
+  {
+    name: 'chapel-window-exterior',
+    x: 116,
+    z: 431,
+    camYaw: -Math.PI / 2,
+    camDist: 8,
+    camPitch: 0.18,
+  },
+  {
+    name: 'chapel-window-exterior-upper',
+    x: 100,
+    z: 452,
+    camYaw: Math.PI,
+    camDist: 14,
+    camPitch: 0.5,
+  },
+  {
+    name: 'chapel-window-interior',
+    x: 104,
+    z: 435,
+    camYaw: Math.PI / 2,
+    camDist: 4,
+    camPitch: 0.1,
+  },
 
   // ---- Interior, ground floor (inside; clamp keeps it readable) ----
   { name: 'chapel-ground-floor-wide', x: 100, z: 437, camYaw: Math.PI, camDist: 9, camPitch: 0.12 },
   { name: 'chapel-interior-brighter', x: 100, z: 438, camYaw: Math.PI, camDist: 6, camPitch: 0.15 },
   // The old degenerate request (dist 30, hard pitch) now resolves, via the
   // indoor clamp, to a normal readable interior instead of a ceiling slit.
-  { name: 'chapel-interior-safe-was-badcam', x: 100, z: 437, camYaw: 3.0, camDist: 30, camPitch: 0.45 },
-  { name: 'chapel-interior-safe-lookdown', x: 100, z: 437, camYaw: 0.4, camDist: 28, camPitch: -0.4 },
+  {
+    name: 'chapel-interior-safe-was-badcam',
+    x: 100,
+    z: 437,
+    camYaw: 3.0,
+    camDist: 30,
+    camPitch: 0.45,
+  },
+  {
+    name: 'chapel-interior-safe-lookdown',
+    x: 100,
+    z: 437,
+    camYaw: 0.4,
+    camDist: 28,
+    camPitch: -0.4,
+  },
 
   // ---- The staircase with railings, multiple angles ----
   { name: 'chapel-staircase-ground', x: 99, z: 434, camYaw: -0.6, camDist: 6, camPitch: 0.18 },
@@ -61,17 +124,47 @@ const SHOTS = [
   { name: 'chapel-staircase-railing-close', x: 97, z: 433, camYaw: 0.9, camDist: 4, camPitch: 0.1 },
 
   // ---- Upper floor (camera raised to floor 2) ----
-  { name: 'chapel-upper-floor-wide', x: 100, z: 437, y: 'floor2', camYaw: Math.PI, camDist: 8, camPitch: 0.12 },
-  { name: 'chapel-upper-floor-landing', x: 97, z: 433, y: 'floor2', camYaw: 1.0, camDist: 6, camPitch: 0.1 },
+  {
+    name: 'chapel-upper-floor-wide',
+    x: 100,
+    z: 437,
+    y: 'floor2',
+    camYaw: Math.PI,
+    camDist: 8,
+    camPitch: 0.12,
+  },
+  {
+    name: 'chapel-upper-floor-landing',
+    x: 97,
+    z: 433,
+    y: 'floor2',
+    camYaw: 1.0,
+    camDist: 6,
+    camPitch: 0.1,
+  },
 
   // ---- Each relocated interior Tripo prop ----
-  { name: 'chapel-sanctum-altar-statue', x: 100, z: 435, camYaw: Math.PI, camDist: 7, camPitch: 0.12 },
+  {
+    name: 'chapel-sanctum-altar-statue',
+    x: 100,
+    z: 435,
+    camYaw: Math.PI,
+    camDist: 7,
+    camPitch: 0.12,
+  },
   { name: 'chapel-archway-entrance', x: 100, z: 439, camYaw: Math.PI, camDist: 5, camPitch: 0.12 },
   { name: 'chapel-obelisk-colonnade', x: 100, z: 435, camYaw: 2.2, camDist: 8, camPitch: 0.14 },
   { name: 'chapel-braziers-stairs', x: 100, z: 434, camYaw: 2.4, camDist: 6, camPitch: 0.12 },
   { name: 'chapel-pedestal-well-aisle', x: 98, z: 433, camYaw: 1.3, camDist: 6, camPitch: 0.12 },
   { name: 'chapel-urn-rubble-aisle', x: 102, z: 433, camYaw: -1.3, camDist: 6, camPitch: 0.12 },
-  { name: 'chapel-gravemarker-bench-aisle', x: 100, z: 436, camYaw: 0.7, camDist: 7, camPitch: 0.12 },
+  {
+    name: 'chapel-gravemarker-bench-aisle',
+    x: 100,
+    z: 436,
+    camYaw: 0.7,
+    camDist: 7,
+    camPitch: 0.12,
+  },
   { name: 'chapel-wallfragment-aisle', x: 103, z: 431, camYaw: -0.8, camDist: 5, camPitch: 0.12 },
 ];
 
