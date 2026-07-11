@@ -1687,8 +1687,8 @@
       "state": "00f12a8f",
       "events": "741638a5",
       "rng": {
-        "draws": 1023,
-        "digest": "59472c19"
+        "draws": 1024,
+        "digest": "fd01d5ea"
       }
     },
     {
@@ -1698,8 +1698,8 @@
       "state": "7278efda",
       "events": "bcece559",
       "rng": {
-        "draws": 1037,
-        "digest": "424650f4"
+        "draws": 1038,
+        "digest": "2cbdac88"
       },
       "label": "warlock-channel-pushback",
       "players": [
@@ -2122,8 +2122,8 @@
       "state": "abf19969",
       "events": "fff751bd",
       "rng": {
-        "draws": 1069,
-        "digest": "0bf340d7"
+        "draws": 1070,
+        "digest": "8a6a9b68"
       }
     },
     {
@@ -2133,8 +2133,8 @@
       "state": "73c1d093",
       "events": "03e7272b",
       "rng": {
-        "draws": 1074,
-        "digest": "df3913f0"
+        "draws": 1075,
+        "digest": "f9a7da00"
       },
       "label": "warlock-fishing-cancel",
       "players": [
