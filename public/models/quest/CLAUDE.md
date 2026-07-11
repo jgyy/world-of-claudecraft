@@ -13,7 +13,7 @@ a one-off tied to a specific quest, never instanced/repeated the way
 ## Size convention
 
 - **Budget: up to ~550 KB per file** (avg ~282 KB, max 548 KB for
-  `rusted_censer.glb`) — the second-highest per-file budget after `chars/`. A
+  `rusted_censer.glb`): the second-highest per-file budget after `chars/`. A
   quest object is a single instance the player interacts with directly and
   often examines up close, so a richer texture set is justified here in a way
   it isn't for a tiled/instanced category.

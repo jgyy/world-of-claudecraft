@@ -12,6 +12,6 @@ tiny `tools/`/`resources/` categories but still a static prop.
 ## Size convention
 
 - **Budget: under ~100 KB per file** (avg ~38 KB, max 96 KB for `staff_d.glb`).
-  Meshopt + WebP; 512-1024px textures — a weapon is often held close to camera,
+  Meshopt + WebP; 512-1024px textures: a weapon is often held close to camera,
   so don't go as low as `tools/`/`resources/`, but it never needs `chars/`-tier
   resolution either.

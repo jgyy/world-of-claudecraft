@@ -6,7 +6,7 @@
 
 132 static, tiny models: gathering-node resources (ore, gems, herbs), crafted
 bars, food/drink items, crates and containers. The largest file count in
-`models/` and the smallest average size — these are held/dropped/carried items
+`models/` and the smallest average size: these are held/dropped/carried items
 seen in bags, on the ground, and in vendor/market UI, never filling much of the
 screen.
 

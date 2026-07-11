@@ -10,5 +10,5 @@ and similar). Held/equipped items, viewed at the same small on-screen scale as
 
 ## Size convention
 
-- **Budget: under ~50 KB per file** (avg ~16 KB, max 48 KB) — the smallest
+- **Budget: under ~50 KB per file** (avg ~16 KB, max 48 KB): the smallest
   average in `models/`. Meshopt + WebP; 256-512px textures.

@@ -21,4 +21,4 @@ file size in `models/` because every file carries a full animation set.
   the background-prop convention (visible silhouette, animated, viewed up close).
 - A new playable class or enemy variant needs its full animation set baked into
   the one `.glb` (see `scripts/combine_fbx_to_glb.mjs`, `scripts/CLAUDE.md`), not
-  split across files — the loader expects one clip-bearing GLB per character.
+  split across files: the loader expects one clip-bearing GLB per character.

@@ -25,7 +25,7 @@ and the shared rules that apply to all of them.
 
 - **Format:** every `.glb` here is **meshopt-compressed** (`EXT_meshopt_compression`)
   with **WebP textures** (`EXT_texture_webp`). The runtime `GLTFLoader`
-  (`src/render/assets/loader.ts`) only wires a `MeshoptDecoder`, no `DRACOLoader` —
+  (`src/render/assets/loader.ts`) only wires a `MeshoptDecoder`, no `DRACOLoader`:
   a draco-compressed GLB fails to parse at runtime with no build-time warning. Always
   compress with `gltf-transform optimize ... --compress meshopt --texture-compress webp`
   (`scripts/assets/build_assets.mjs` does this for the source packs; a one-off
@@ -33,7 +33,7 @@ and the shared rules that apply to all of them.
 - **Texture size:** static/small decorative props don't need more than 512-1024px
   textures; only rigged hero-scale characters (`chars/`) or camera-close set pieces
   warrant 2048px. Tripo/Meshy/AI-generated raw exports default to near-lossless
-  2048px textures and minimal simplification — always re-run `optimize` with
+  2048px textures and minimal simplification: always re-run `optimize` with
   `--texture-size 512` (or 1024) and a looser `--simplify-error` (e.g. `0.003`
   vs the default `0.0001`) for anything that isn't a hero asset; this alone is
   typically a 10-15x size cut with no visible loss at normal camera distance.
@@ -41,12 +41,12 @@ and the shared rules that apply to all of them.
   raw/source files (FBX, FBX+Blender, or a Tripo/Meshy raw download) never land in
   the repo, keep them in `tmp/` (gitignored) during a one-off generation.
 - **Attribution:** any new pack or one-off model needs a row in `CREDITS.md`
-  (source pack name, author, URL, license) — CC0 for the existing packs;
+  (source pack name, author, URL, license): CC0 for the existing packs;
   AI-generated assets (Tripo, Meshy) note the tool and prompt/generation date
   instead of an author/license row.
 - **Registration:** a new `.glb` here is picked up automatically by
   `scripts/build_media_manifest.mjs` (walks `models/` into the content-hashed
-  manifest) on the next `npm run build` — don't hand-edit
+  manifest) on the next `npm run build`: don't hand-edit
   `src/render/assets/manifest.generated.ts`.
 - **Naming:** lowercase snake_case, descriptive (`ruin_wall_fragment.glb`, not
   `Prop_04.glb`), no spaces.

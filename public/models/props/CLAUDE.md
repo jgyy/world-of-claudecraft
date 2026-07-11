@@ -14,7 +14,7 @@ Tripo `text_to_model` API, see `scripts/gen_ruin_assets.mjs`).
 - **Budget: under ~250 KB per file.** The Quaternius/Kenney source-pack props run
   16-320 KB; the one outlier is `ruin_statue.glb` at 1.2 MB (the very first
   Tripo-generated prop in this dir, compressed before the 512px texture-size
-  convention below was established — don't use it as a size template for new
+  convention below was established: don't use it as a size template for new
   Tripo assets).
 - **Tripo-generated props (`ruin_*.glb`):** compress with
   `gltf-transform optimize --compress meshopt --texture-compress webp
