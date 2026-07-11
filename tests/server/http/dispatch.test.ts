@@ -172,6 +172,105 @@ describe('createApiDispatcher', () => {
     expect(res.writableEnded).toBe(false);
   });
 
+  it('records one legacy MetricEvent for a synchronous, non-promise unmatched-path delegate', () => {
+    // Before this, an unmatched /api path recorded NOTHING: http_requests_total only
+    // ever covered registry-matched routes, undercounting the true denominator a
+    // ratio-style panel (e.g. 5xx rate) divides by. `route` is fixed to the literal
+    // 'legacy' (never a concrete path) to stay within the bounded-cardinality
+    // contract every other route label already follows.
+    const events: MetricEvent[] = [];
+    const dispatcher = createApiDispatcher({
+      registry: registryReturning({ kind: 'notFound' }),
+      delegate: (_req, res) => {
+        res.statusCode = 404;
+      },
+      metricSink: { record: (e) => events.push(e) },
+    });
+    const res = new FakeRes();
+    dispatcher(
+      makeReq({ method: 'GET', url: '/api/legacy/thing' }),
+      res as unknown as http.ServerResponse,
+    );
+    expect(events).toEqual([
+      { route: 'legacy', method: 'GET', status: 404, durationMs: expect.any(Number) },
+    ]);
+  });
+
+  it('records one legacy MetricEvent for an async unmatched-path delegate, using the FINAL status after it settles', async () => {
+    const events: MetricEvent[] = [];
+    const dispatcher = createApiDispatcher({
+      registry: registryReturning({ kind: 'notFound' }),
+      delegate: async (_req, res) => {
+        await new Promise((r) => setTimeout(r, 0));
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end('{}');
+      },
+      metricSink: { record: (e) => events.push(e) },
+    });
+    const res = new FakeRes();
+    dispatcher(
+      makeReq({ method: 'POST', url: '/api/legacy/thing' }),
+      res as unknown as http.ServerResponse,
+    );
+    // The delegate is async: the metric is only recorded once its promise settles
+    // (handleApi is itself `async`, so by then the response has been written).
+    await new Promise((r) => setTimeout(r, 10));
+    expect(events).toEqual([
+      { route: 'legacy', method: 'POST', status: 200, durationMs: expect.any(Number) },
+    ]);
+  });
+
+  it('records one legacy MetricEvent for a HEAD-match delegate too', () => {
+    const events: MetricEvent[] = [];
+    const route = fakeRoute(async () => {});
+    const dispatcher = createApiDispatcher({
+      registry: registryReturning({ kind: 'matched', route, params: { id: '42' }, head: true }),
+      delegate: (_req, res) => {
+        res.statusCode = 200;
+      },
+      metricSink: { record: (e) => events.push(e) },
+    });
+    const res = new FakeRes();
+    dispatcher(
+      makeReq({ method: 'HEAD', url: '/api/things/42' }),
+      res as unknown as http.ServerResponse,
+    );
+    expect(events).toEqual([
+      { route: 'legacy', method: 'HEAD', status: 200, durationMs: expect.any(Number) },
+    ]);
+  });
+
+  it('drives the PRODUCTION composite sink shape for a legacy-delegated path too: the counter now covers un-migrated traffic', async () => {
+    // The companion test below ("drives the PRODUCTION composite sink shape...")
+    // pins the matched-route case; this pins the previously-uncovered legacy arm
+    // with the SAME real teeMetricSink(createAccessLogSink, httpMetrics.sink) wiring
+    // main.ts injects, so the prom counter genuinely gains a 'legacy' series.
+    const metrics = createHttpMetrics();
+    const lines: string[] = [];
+    const log = createLogger({ out: (line) => lines.push(line), err: (line) => lines.push(line) });
+    const dispatcher = createApiDispatcher({
+      registry: registryReturning({ kind: 'notFound' }),
+      delegate: (_req, res) => {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end('{}');
+      },
+      metricSink: teeMetricSink(createAccessLogSink(log), metrics.sink),
+    });
+    const res = new FakeRes();
+    dispatcher(
+      makeReq({ method: 'GET', url: '/api/legacy/thing' }),
+      res as unknown as http.ServerResponse,
+    );
+
+    expect(lines).toHaveLength(1);
+    const line = JSON.parse(lines[0]) as Record<string, unknown>;
+    expect(line.route).toBe('legacy');
+    expect(line.status).toBe(404);
+    const text = await metrics.metricsText();
+    expect(text).toContain('route="legacy"');
+    expect(text.match(/^http_requests_total\{[^}]*\} 1$/m)).toBeTruthy();
+  });
+
   it('maps a handler throw to exactly one problem+json response without leaking the error', async () => {
     // The dispatcher injects a logger-backed onUnexpected into withErrors; silence
     // it so the deliberate 500 does not write an ops line to the test output.

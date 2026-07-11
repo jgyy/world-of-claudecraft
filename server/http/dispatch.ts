@@ -53,6 +53,47 @@ function delegateWithReqId(
   runWithReqId(newReqId(), () => void delegate(req, res));
 }
 
+/**
+ * Invoke the legacy delegate under a fresh ambient reqId scope (as
+ * delegateWithReqId does) AND record one MetricEvent once the delegate settles,
+ * so http_requests_total/http_request_duration_seconds cover un-migrated /api
+ * traffic too, not just registry-matched routes. `route` is fixed to the literal
+ * 'legacy' (never a concrete path) to keep cardinality bounded, matching the
+ * :param-template convention withMetrics uses for matched routes; a caller
+ * cannot recover a bounded template for a path the registry does not own.
+ * handleApi is `async`, so by the time its returned promise settles res has
+ * already been written; a delegate that returns void (not a promise) is
+ * measured synchronously right after the call instead. Metric recording is
+ * observability-only: it never touches req/res, so the delegate's response
+ * bytes (and the parity harness) are unaffected.
+ */
+function delegateWithMetrics(
+  delegate: ApiDelegate,
+  metricSink: MetricSink,
+  now: () => number,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
+): void {
+  const started = now();
+  const method = req.method ?? '';
+  const record = (): void => {
+    metricSink.record({
+      route: 'legacy',
+      method,
+      status: res.statusCode,
+      durationMs: now() - started,
+    });
+  };
+  runWithReqId(newReqId(), () => {
+    const result = delegate(req, res);
+    if (result && typeof (result as Promise<void>).then === 'function') {
+      void (result as Promise<void>).then(record, record);
+    } else {
+      record();
+    }
+  });
+}
+
 /** Everything the dispatcher needs, injected so it stays pure and unit-testable. */
 export interface ApiDispatcherDeps {
   /** The assembled route registry (the migrated per-domain route tables). */
@@ -64,6 +105,8 @@ export interface ApiDispatcherDeps {
    * injects the real access-log + metrics sink at boot).
    */
   readonly metricSink?: MetricSink;
+  /** Injectable clock for deterministic duration assertions in tests; defaults to Date.now. */
+  readonly now?: () => number;
 }
 
 /**
@@ -73,6 +116,7 @@ export interface ApiDispatcherDeps {
  */
 export function createApiDispatcher(deps: ApiDispatcherDeps): ApiDispatcher {
   const metricSink = deps.metricSink ?? noopMetricSink;
+  const now = deps.now ?? Date.now;
   return (req, res) => {
     const method = req.method ?? '';
     const path = (req.url ?? '').split('?')[0];
@@ -80,8 +124,12 @@ export function createApiDispatcher(deps: ApiDispatcherDeps): ApiDispatcher {
     if (match.kind !== 'matched') {
       // A path the registry does not own: delegate to the legacy ladder
       // UNCHANGED. The delegate owns its own response; we never touch req/res
-      // (the reqId wrapper only binds ambient logging context).
-      delegateWithReqId(deps.delegate, req, res);
+      // (the reqId wrapper only binds ambient logging context). Recording one
+      // MetricEvent here (route: 'legacy') keeps http_requests_total covering
+      // ALL /api traffic, not just registry-matched routes: a ratio-style panel
+      // (e.g. 5xx rate) built on a total that silently excluded every
+      // un-migrated path would skew toward spurious spikes.
+      delegateWithMetrics(deps.delegate, metricSink, now, req, res);
       return;
     }
     if (match.head) {
@@ -92,7 +140,7 @@ export function createApiDispatcher(deps: ApiDispatcherDeps): ApiDispatcher {
       // migration byte-identical old-vs-new: both arms run the same code either
       // way. Serving HEAD as GET is a deliberate behavior change deferred to the
       // ladder deletion (next release).
-      delegateWithReqId(deps.delegate, req, res);
+      delegateWithMetrics(deps.delegate, metricSink, now, req, res);
       return;
     }
     // A registry-owned route: run the middleware onion. runOnion guarantees exactly
