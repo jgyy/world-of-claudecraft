@@ -1661,14 +1661,13 @@ export const RUIN_DECOR_KINDS = [
   'ruinUrn',
   // reuse the existing KayKit dungeon modular kit (already shipped in
   // public/models/dungeon/, no new asset generation) for the compound's
-  // stone floor and perimeter walls: these need a FIXED 1:1 scale to
-  // tessellate on the kit's 4-unit grid, unlike the Tripo props above,
-  // which scale to a per-kind target height (see FIXED_SCALE_RUIN_KINDS
-  // in props.ts).
+  // outdoor courtyard floor: this needs a FIXED 1:1 scale to tessellate on
+  // the kit's 4-unit grid, unlike the Tripo props above, which scale to a
+  // per-kind target height (see FIXED_SCALE_RUIN_KINDS in props.ts). The
+  // freestanding perimeter wall this used to include (ruinWallCracked/
+  // ruinWallBroken/ruinWallCorner) is gone: superseded by the Drowned
+  // Chapel's real voxel-mesh building (sim/drowned_chapel_building.ts).
   'ruinFloorTile',
-  'ruinWallCracked',
-  'ruinWallBroken',
-  'ruinWallCorner',
 ] as const;
 export type RuinDecorKind = (typeof RUIN_DECOR_KINDS)[number];
 
@@ -1856,6 +1855,16 @@ export interface Entity {
   // gcdRemaining) so the action bar can paint a cooldown swipe without a client
   // clock. Derived from potionCooldownUntil; excluded from the parity trace.
   potionCdRemaining: number;
+  // The Drowned Chapel (content/drowned_chapel.ts): 0 outside, 1 the ground
+  // sanctum, 2 the upper floor the player is currently standing on inside
+  // the chapel's fixed footprint. See drowned_chapel_floor.ts for the
+  // transition rule; colliders.ts/drowned_chapel_building.ts key the
+  // collider/render lookup for that footprint off this per-player state.
+  chapelFloor: 0 | 1 | 2;
+  // Index into content/drowned_chapel.ts's CHAPEL_STAIRS the player is
+  // currently locked to (-1 = none): see drowned_chapel_floor.ts's
+  // nextChapelState for why the edge-lock exists.
+  chapelLandingLock: number;
   // warrior charge: forced run toward the target along a pathfound route
   chargeTargetId: number | null;
   chargeTimeLeft: number; // seconds; failsafe so a blocked charge can't run forever

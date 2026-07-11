@@ -118,6 +118,7 @@ import {
 import * as companionMod from './delves/companion';
 import * as lockpickMod from './delves/lockpick_controller';
 import * as runsMod from './delves/runs';
+import { nextChapelState } from './drowned_chapel_floor';
 import { projectOutsideDungeonDoors } from './dungeon_door_clearance';
 import * as nythraxis from './encounters/nythraxis';
 // A3: ARENA_SPAWNS_A_2v2/B_2v2 (read only by the moved fiestaRevive) now live with
@@ -3308,6 +3309,7 @@ export class Sim {
         this.updatePlayerMovement(p, meta);
         lap?.('p.move');
         this.updateDoorTriggers(p);
+        this.updateChapelFloor(p);
         lap?.('p.doors');
         this.updateCasting(p, meta);
         lap?.('p.casting');
@@ -3324,6 +3326,7 @@ export class Sim {
         // death model), or resurrect at its corpse / an overworld Spirit Healer.
         this.updatePlayerMovement(p, meta);
         this.updateDoorTriggers(p);
+        this.updateChapelFloor(p);
         lap?.('p.move');
       }
       updateTimers(p);
@@ -6690,6 +6693,19 @@ export class Sim {
     updateDoorTriggersImpl(this.ctx, p);
   }
 
+  // The Drowned Chapel (content/drowned_chapel.ts): per-player chapelFloor
+  // local state, same proximity-check spirit as updateDoorTriggers above but
+  // flipping a floor flag instead of teleporting (see drowned_chapel_floor.ts).
+  private updateChapelFloor(p: Entity): void {
+    const next = nextChapelState(
+      { floor: p.chapelFloor, landingLock: p.chapelLandingLock },
+      p.pos.x,
+      p.pos.z,
+    );
+    p.chapelFloor = next.floor;
+    p.chapelLandingLock = next.landingLock;
+  }
+
   enterDungeon(dungeonId: string, pid?: number): void {
     enterDungeonImpl(this.ctx, dungeonId, pid);
   }
@@ -6900,7 +6916,17 @@ export class Sim {
     ignoreFences = false,
   ): { x: number; z: number } {
     const run = isDelvePos(nx) || isDelvePos(e.pos.x) ? this.delveRunForEntity(e) : undefined;
-    const res = resolveMovement(this.cfg.seed, fromX, fromZ, nx, nz, r, ignoreFences, run?.modules);
+    const res = resolveMovement(
+      this.cfg.seed,
+      fromX,
+      fromZ,
+      nx,
+      nz,
+      r,
+      ignoreFences,
+      run?.modules,
+      e.chapelFloor,
+    );
     if (!run) return res;
     const clamped = this.clampDelveModuleBounds(run, res.x, res.z, r);
     return this.clampDelveDoors(run, clamped.x, clamped.z, r);
@@ -6909,7 +6935,7 @@ export class Sim {
   // Point resolution for mob wander / blocked checks, with the same delve layering.
   private resolveMovePoint(nx: number, nz: number, r: number, e: Entity): { x: number; z: number } {
     const run = isDelvePos(nx) || isDelvePos(e.pos.x) ? this.delveRunForEntity(e) : undefined;
-    const res = resolvePosition(this.cfg.seed, nx, nz, r, false, run?.modules);
+    const res = resolvePosition(this.cfg.seed, nx, nz, r, false, run?.modules, e.chapelFloor);
     if (!run) return res;
     const clamped = this.clampDelveModuleBounds(run, res.x, res.z, r);
     return this.clampDelveDoors(run, clamped.x, clamped.z, r);

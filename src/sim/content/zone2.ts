@@ -15,6 +15,7 @@ import type {
   ZoneDef,
   ZonePropsDef,
 } from '../types';
+import { CHAPEL_HALF, CHAPEL_POS } from './drowned_chapel';
 
 export const DEEPFEN_SHALLOWS_LAKE = { x: -110, z: 310, radius: 35 };
 
@@ -2005,13 +2006,23 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
 // Static props (rendering + collision share this placement data)
 // ---------------------------------------------------------------------------
 
-// The ruin compound's stone floor: a 5x5 grid of the reused KayKit dungeon
-// floor_tile_large module (4-unit grid, ruinFloorTile in props.ts), covering
-// the same footprint as the perimeter wall below (center 100, 435,
-// half-extent 8 + 2-unit tile half-width = 10, matching the wall corners).
+// The ruin compound's outdoor courtyard floor: a 5x5 grid of the reused
+// KayKit dungeon floor_tile_large module (4-unit grid, ruinFloorTile in
+// props.ts), covering the flattened plateau around the Drowned Chapel
+// (center 100, 435). Tiles that fall INSIDE the chapel building's own
+// footprint are dropped: the building has its own real floor slabs
+// (sim/drowned_chapel_building.ts), so a courtyard flagstone tile there would
+// sit invisibly under the shell for no purpose.
 const RUIN_COMPOUND_FLOOR_TILES: { x: number; z: number; kind: RuinDecorKind }[] = [-8, -4, 0, 4, 8]
   .flatMap((dx) => [-8, -4, 0, 4, 8].map((dz) => ({ dx, dz })))
-  .map(({ dx, dz }) => ({ x: 100 + dx, z: 435 + dz, kind: 'ruinFloorTile' as const }));
+  .map(({ dx, dz }) => ({ x: 100 + dx, z: 435 + dz, kind: 'ruinFloorTile' as const }))
+  .filter((t) => {
+    const pad = -1.5;
+    return !(
+      Math.abs(t.x - CHAPEL_POS.x) <= CHAPEL_HALF + pad &&
+      Math.abs(t.z - CHAPEL_POS.z) <= CHAPEL_HALF + pad
+    );
+  });
 
 export const ZONE2_PROPS: ZonePropsDef = {
   buildings: [
@@ -2062,54 +2073,47 @@ export const ZONE2_PROPS: ZonePropsDef = {
     { x1: -18, z1: 313, x2: -22, z2: 300 },
   ],
   graveyards: [{ x: -18, z: 286 }],
-  // weathered idol at the back (south) end of the sanctum, facing the
-  // entrance so a visitor walking the processional axis meets its gaze
-  statues: [{ x: 100, z: 430, rot: Math.PI }],
-  // A built ruined temple compound (center 100, 435): a raised stone plinth
-  // (terrain flatten in ruin_compound_layout.ts) with a real flagstone floor
-  // and perimeter wall reusing the existing KayKit dungeon modular kit
-  // (floor_tile_large / wall_cracked / wall_broken / wall_corner, already
-  // shipped, not Tripo-generated), plus the Tripo-generated furnishing:
-  // an archway-to-stairway-to-altar-to-idol processional axis down the
-  // middle, mirrored flanking pairs either side (entrance pedestal/urn,
-  // sanctum braziers, a toppled-obelisk colonnade at the gate and the
-  // sanctum's back wall), and peripheral village-adjacent satellite
-  // features outside the wall (well, small graveyard, benches, rubble).
-  // The original 7-column ring is gone (superseded by the real wall); every
-  // anchor here is still purely cosmetic, no collision. Wall segments sit on
-  // a clean rectangle (half-extent 10) at right-angle rotations, not
-  // scattered arbitrary angles, so the footprint reads as an actual building.
+  // weathered idol at the back (south) end of the ground-floor sanctum,
+  // facing the entrance so a visitor walking the processional axis meets
+  // its gaze. Inside the Drowned Chapel building footprint (see below).
+  statues: [{ x: 100, z: 430.3, rot: Math.PI }],
+  // The Drowned Chapel: a real 2-story voxel building (sim/content/
+  // drowned_chapel.ts, sim/drowned_chapel_building.ts) at the ruin compound
+  // (center 100, 435), replacing the old freestanding perimeter wall + the
+  // 7-column ring before it. A real carved door (north wall, facing the
+  // archway/stairway approach), carved windows on every floor, one real
+  // staircase (floor-transition collision), and the outdoor courtyard
+  // flagstone floor around it (RUIN_COMPOUND_FLOOR_TILES, reused KayKit
+  // dungeon kit). The Tripo-generated furnishing decorates both the
+  // building and its surrounds: an archway-to-stairway-to-door approach,
+  // an altar-and-idol sanctum on the ground floor, braziers flanking the
+  // stairs inside, a toppled-obelisk colonnade flanking the outer approach
+  // and the sanctum's back wall, and peripheral village-adjacent satellite
+  // features outside (well, small graveyard, benches, rubble). Every anchor
+  // here is still purely cosmetic (no collision of its own; the building's
+  // real collision comes from sim/colliders.ts' chapelColliders).
   ruinDecor: [
     ...RUIN_COMPOUND_FLOOR_TILES,
-    // processional axis, entrance (north) to sanctum (south)
+    // processional axis, entrance (north) up to the chapel door
     { x: 100, z: 445, rot: Math.PI, kind: 'ruinArchway' },
     { x: 101, z: 443, rot: 0, kind: 'ruinStairway' },
-    { x: 100, z: 435, rot: 0, kind: 'ruinAltar' },
-    // entrance flanking pair, just inside the archway
-    { x: 95, z: 442, rot: 0.5, kind: 'ruinPedestal' },
-    { x: 105, z: 442, rot: -0.5, kind: 'ruinUrn' },
-    // sanctum flanking pair, eternal-flame braziers either side of the idol
-    { x: 94, z: 431, rot: 0.3, kind: 'ruinBrazier' },
-    { x: 106, z: 431, rot: -0.3, kind: 'ruinBrazier' },
+    // ground-floor sanctum, back (south) end of the building
+    { x: 100, z: 433, rot: 0, kind: 'ruinAltar' },
+    // interior landing decor, either side of the real staircase up to floor 2
+    { x: 96, z: 434.5, rot: 0.5, kind: 'ruinPedestal' },
+    { x: 98, z: 430.5, rot: -0.5, kind: 'ruinUrn' },
+    // braziers flanking the stairs just inside the entrance
+    { x: 96.5, z: 438.5, rot: 0.3, kind: 'ruinBrazier' },
+    { x: 103, z: 434.5, rot: -0.3, kind: 'ruinBrazier' },
     // toppled obelisk colonnade flanking the outer approach to the gate
     { x: 96, z: 450, rot: 1.57, kind: 'ruinObelisk' },
     { x: 104, z: 450, rot: 1.57, kind: 'ruinObelisk' },
     // matching pair marking the sanctum's fallen back colonnade
     { x: 96, z: 423, rot: 1.57, kind: 'ruinObelisk' },
     { x: 104, z: 423, rot: 1.57, kind: 'ruinObelisk' },
-    // real stone perimeter wall, a clean rectangle (half-extent 10) around
-    // the plinth, gapped at the north-center for the archway gate: corner
-    // pieces at the four corners, straight cracked/broken segments between
-    { x: 90, z: 445, rot: 0, kind: 'ruinWallCorner' },
-    { x: 110, z: 445, rot: 1.57, kind: 'ruinWallCorner' },
-    { x: 110, z: 425, rot: 3.14, kind: 'ruinWallCorner' },
-    { x: 90, z: 425, rot: 4.71, kind: 'ruinWallCorner' },
-    { x: 110, z: 435, rot: 1.57, kind: 'ruinWallCracked' },
-    { x: 100, z: 425, rot: 0, kind: 'ruinWallBroken' },
-    { x: 90, z: 435, rot: 1.57, kind: 'ruinWallCracked' },
-    // one fallen wall fragment among the satellite rubble outside the wall
+    // one fallen wall fragment among the satellite rubble outside the building
     { x: 79, z: 439, rot: 0.6, kind: 'ruinWallFragment' },
-    // peripheral, village-adjacent satellite features outside the wall
+    // peripheral, village-adjacent satellite features, unchanged
     { x: 82, z: 435, rot: 0.4, kind: 'ruinWell' },
     { x: 120, z: 435, rot: -0.6, kind: 'ruinRubble' },
     { x: 114, z: 422, rot: 0.2, kind: 'ruinGraveMarker' },

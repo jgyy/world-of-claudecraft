@@ -1,4 +1,10 @@
 import {
+  CHAPEL_DOOR_HALF_WIDTH,
+  CHAPEL_HALF,
+  CHAPEL_POS,
+  CHAPEL_WALL_THICK,
+} from './content/drowned_chapel';
+import {
   arenaOriginAt,
   DUNGEON_X_THRESHOLD,
   defaultDelveModules,
@@ -71,6 +77,92 @@ export type Collider = CircleCollider | ObbCollider;
 
 function topY(seed: number, x: number, z: number, height: number): number {
   return groundHeight(x, z, seed) + height;
+}
+
+// ---------------------------------------------------------------------------
+// The Drowned Chapel (content/drowned_chapel.ts): a real open-world, 2-story
+// building at ONE fixed (x,z), replacing the old freestanding perimeter wall.
+// The exterior wall footprint (with its door gap) is IDENTICAL on every
+// floor, so it needs no per-player state and joins the normal static grid
+// like any other prop. Only the small per-floor furnishing collider below is
+// picked per player (see `chapelFloor` threaded through resolvePosition/
+// resolveMovement/isBlocked), the bespoke stand-in for "swap the collider
+// lookup based on chapelFloor" that colliders.ts' column-based model can
+// otherwise never represent.
+// ---------------------------------------------------------------------------
+
+export function isInsideChapelPos(x: number, z: number): boolean {
+  return Math.abs(x - CHAPEL_POS.x) <= CHAPEL_HALF && Math.abs(z - CHAPEL_POS.z) <= CHAPEL_HALF;
+}
+
+function chapelExteriorWallColliders(seed: number): Collider[] {
+  const topOfWalls = topY(seed, CHAPEL_POS.x, CHAPEL_POS.z, 8);
+  const wall = (x: number, z: number, hw: number, hd: number, rot: number): ObbCollider => ({
+    type: 'obb',
+    x,
+    z,
+    hw,
+    hd,
+    rot,
+    cameraTopY: topOfWalls,
+  });
+  const t = CHAPEL_WALL_THICK;
+  const half = CHAPEL_HALF;
+  const doorHalf = CHAPEL_DOOR_HALF_WIDTH;
+  return [
+    // south
+    wall(CHAPEL_POS.x, CHAPEL_POS.z - half + t / 2, half, t / 2, 0),
+    // east / west
+    wall(CHAPEL_POS.x + half - t / 2, CHAPEL_POS.z, t / 2, half, 0),
+    wall(CHAPEL_POS.x - half + t / 2, CHAPEL_POS.z, t / 2, half, 0),
+    // north, split around the door opening
+    wall(
+      CHAPEL_POS.x + (half + doorHalf) / 2,
+      CHAPEL_POS.z + half - t / 2,
+      (half - doorHalf) / 2,
+      t / 2,
+      0,
+    ),
+    wall(
+      CHAPEL_POS.x - (half + doorHalf) / 2,
+      CHAPEL_POS.z + half - t / 2,
+      (half - doorHalf) / 2,
+      t / 2,
+      0,
+    ),
+  ];
+}
+
+// One small furnishing collider per floor, positioned differently each floor:
+// the visible, testable proof that the collider LOOKUP for this footprint is
+// actually swapped per chapelFloor, not just the render mesh. Kept clear of
+// the CHAPEL_STAIRS landing and the door gap.
+const CHAPEL_FURNITURE_CORNERS: readonly [number, number][] = [
+  [CHAPEL_HALF - 1.2, -(CHAPEL_HALF - 1.2)], // floor 1: southeast corner (altar sanctum)
+  [-(CHAPEL_HALF - 1.2), CHAPEL_HALF - 1.2], // floor 2: northwest corner
+];
+
+function chapelFloorFurnitureCollider(seed: number, floor: number): Collider {
+  const [dx, dz] =
+    CHAPEL_FURNITURE_CORNERS[
+      (floor - 1 + CHAPEL_FURNITURE_CORNERS.length) % CHAPEL_FURNITURE_CORNERS.length
+    ];
+  const x = CHAPEL_POS.x + dx;
+  const z = CHAPEL_POS.z + dz;
+  return {
+    type: 'circle',
+    x,
+    z,
+    r: 0.5,
+    cameraTopY: topY(seed, x, z, 1.2),
+  };
+}
+
+/** Colliders active inside the chapel footprint for a given player's
+ * chapelFloor (1..2; defaults to 1 for any caller that doesn't know a floor
+ * yet). */
+export function chapelColliders(seed: number, floor = 1): Collider[] {
+  return [...chapelExteriorWallColliders(seed), chapelFloorFurnitureCollider(seed, floor)];
 }
 
 // rotate a local offset by a three.js rotation.y angle
@@ -430,7 +522,11 @@ export function resolvePosition(
   r = 0.5,
   ignoreFences = false,
   delveModules?: readonly string[],
+  chapelFloor?: number,
 ): { x: number; z: number } {
+  if (isInsideChapelPos(x, z)) {
+    return resolveAgainst(chapelColliders(seed, chapelFloor ?? 1), x, z, r, ignoreFences);
+  }
   if (isYumiMazePos(x)) {
     const o = yumiMazeOriginAt(z);
     const local = resolveAgainst(yumiMazeColliders(), x - o.x, z - o.z, r);
@@ -500,11 +596,12 @@ export function resolveMovement(
   r = 0.5,
   ignoreFences = false,
   delveModules?: readonly string[],
+  chapelFloor?: number,
 ): { x: number; z: number } {
   const dx = toX - fromX;
   const dz = toZ - fromZ;
   const d = Math.hypot(dx, dz);
-  if (d < 1e-6) return resolvePosition(seed, toX, toZ, r, ignoreFences, delveModules);
+  if (d < 1e-6) return resolvePosition(seed, toX, toZ, r, ignoreFences, delveModules, chapelFloor);
   const steps = Math.max(1, Math.ceil(d / 0.2));
   let x = fromX,
     z = fromZ;
@@ -513,7 +610,15 @@ export function resolveMovement(
     const nextX = fromX + dx * t;
     const nextZ = fromZ + dz * t;
     if (!ignoreFences && crossesFence(x, z, nextX, nextZ, r)) break;
-    const resolved = resolvePosition(seed, nextX, nextZ, r, ignoreFences, delveModules);
+    const resolved = resolvePosition(
+      seed,
+      nextX,
+      nextZ,
+      r,
+      ignoreFences,
+      delveModules,
+      chapelFloor,
+    );
     x = resolved.x;
     z = resolved.z;
     if (Math.hypot(x - nextX, z - nextZ) > r * 0.25) {
@@ -534,8 +639,9 @@ export function isBlocked(
   r = 0.5,
   ignoreFences = false,
   delveModules?: readonly string[],
+  chapelFloor?: number,
 ): boolean {
-  const res = resolvePosition(seed, x, z, r, ignoreFences, delveModules);
+  const res = resolvePosition(seed, x, z, r, ignoreFences, delveModules, chapelFloor);
   return Math.abs(res.x - x) > 1e-4 || Math.abs(res.z - z) > 1e-4;
 }
 
@@ -679,7 +785,21 @@ export function cameraOcclusion(
   bz: number,
   pad = 0.35,
   delveModules?: readonly string[],
+  chapelFloor?: number,
 ): number {
+  if (isInsideChapelPos(ax, az) || isInsideChapelPos(bx, bz)) {
+    return sweepColliders(
+      chapelColliders(seed, chapelFloor ?? 1),
+      ax,
+      ay,
+      az,
+      bx,
+      by,
+      bz,
+      pad,
+      false,
+    );
+  }
   if (isYumiMazePos(ax)) {
     const o = yumiMazeOriginAt(az);
     return sweepColliders(
