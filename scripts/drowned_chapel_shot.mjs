@@ -118,10 +118,17 @@ const SHOTS = [
     camPitch: -0.4,
   },
 
-  // ---- The staircase with railings, multiple angles ----
-  { name: 'chapel-staircase-ground', x: 99, z: 434, camYaw: -0.6, camDist: 6, camPitch: 0.18 },
-  { name: 'chapel-staircase-side', x: 100, z: 432, camYaw: 1.4, camDist: 6, camPitch: 0.14 },
-  { name: 'chapel-staircase-railing-close', x: 97, z: 433, camYaw: 0.9, camDist: 4, camPitch: 0.1 },
+  // ---- The staircase with railings, multiple angles (shallower 30-35 degree pitch) ----
+  { name: 'chapel-staircase-ground', x: 96.5, z: 433, camYaw: -0.6, camDist: 7, camPitch: 0.16 },
+  { name: 'chapel-staircase-side', x: 101, z: 433, camYaw: 1.5, camDist: 8, camPitch: 0.12 },
+  {
+    name: 'chapel-staircase-railing-close',
+    x: 94.5,
+    z: 435,
+    camYaw: 0.9,
+    camDist: 4,
+    camPitch: 0.1,
+  },
 
   // ---- Upper floor (camera raised to floor 2) ----
   {
@@ -135,8 +142,8 @@ const SHOTS = [
   },
   {
     name: 'chapel-upper-floor-landing',
-    x: 97,
-    z: 433,
+    x: 96.5,
+    z: 437,
     y: 'floor2',
     camYaw: 1.0,
     camDist: 6,
@@ -193,9 +200,14 @@ await page.type('#char-name', 'Chapelwatch');
 await page.click('#offline-select .mini-class[data-class="warrior"]');
 await page.click('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.hud && window.__game?.renderer, {
-  timeout: 60000,
+  timeout: 120000,
 });
-await sleep(2500);
+// Extra headroom (beyond the base settle): the chapel's voxel building mesh
+// builds asynchronously, and an isolated single-shot run (SHOT_START/SHOT_END
+// slicing a single index, used to work around swiftshader crashing on a long
+// batch in this sandbox) has no prior shots to absorb that build time, so the
+// very first teleport can land before the building mesh exists.
+await sleep(4000);
 
 // skip the new-adventurer tutorial popup and clear the drowned-dead camp mobs
 // near the chapel, screenshot-only cleanup (this is a visual verification
@@ -217,7 +229,26 @@ await page.addStyleTag({
   content: '#chat-window, #quest-tracker, .fct-layer { display: none !important; }',
 });
 
-for (const shot of SHOTS) {
+// Warm-up teleport: the chapel's voxel building mesh builds asynchronously the
+// first time a player enters its footprint, so the very FIRST teleport of a
+// session (before that mesh exists yet) would otherwise render as open
+// exterior terrain instead of the building interior. Priming with one
+// discarded teleport+settle before the real shot loop fixes every shot,
+// including an isolated single-shot SHOT_START/SHOT_END run.
+await page.evaluate(() => {
+  const p = window.__game.sim.player;
+  p.pos.x = 100;
+  p.pos.z = 435;
+  window.__game.sim.tick();
+});
+await sleep(1500);
+
+// Optional SHOT_START/SHOT_END env slicing: swiftshader's software GL context
+// occasionally drops mid-run on a long batch in this sandbox; splitting into
+// smaller batches works around it without changing what gets captured.
+const shotStart = Number(process.env.SHOT_START ?? 0);
+const shotEnd = Number(process.env.SHOT_END ?? SHOTS.length);
+for (const shot of SHOTS.slice(shotStart, shotEnd)) {
   await page.evaluate(
     (s, groundH) => {
       const p = window.__game.sim.player;
@@ -232,6 +263,9 @@ for (const shot of SHOTS) {
       window.__game.input.camYaw = s.camYaw;
       window.__game.input.camDist = s.camDist;
       window.__game.input.camPitch = s.camPitch;
+      if (s.y !== 'floor2') {
+        for (let i = 0; i < 5; i++) window.__game.sim.tick();
+      }
     },
     shot,
     GROUND_H,

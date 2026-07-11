@@ -78,9 +78,31 @@ export const CHAPEL_STAIRS: ChapelStairLanding[] = [
     fromFloor: 1,
     toFloor: 2,
     x: CHAPEL_POS.x - 3.5,
-    z: CHAPEL_POS.z - 3.5,
+    z: CHAPEL_POS.z + 2.6,
     r: 1.4,
     axis: 'z',
     dir: 1,
   },
 ];
+
+// Shared stair-flight geometry: one place that both the sim (stairwell
+// cutout + the player's ground-height ramp) and the renderer (the visible
+// stepped mesh) read from, so they can never drift apart. A shallow real
+// staircase (30-35 degree pitch, classic building-code max) instead of the
+// old ~53 degree "ladder": the total horizontal run is derived from the
+// floor-to-floor rise and a target pitch near the middle of that range, not
+// hardcoded.
+export const CHAPEL_STAIR_STEPS_PER_FLIGHT = 12;
+export const CHAPEL_STAIR_WIDTH = 1.8;
+const CHAPEL_STAIR_TARGET_PITCH_DEG = 32.5;
+export const CHAPEL_STAIR_RISE_PER_STEP =
+  CHAPEL_GROUND_FLOOR_HEIGHT / CHAPEL_STAIR_STEPS_PER_FLIGHT;
+export const CHAPEL_STAIR_RUN_PER_STEP =
+  CHAPEL_STAIR_RISE_PER_STEP / Math.tan((CHAPEL_STAIR_TARGET_PITCH_DEG * Math.PI) / 180);
+export const CHAPEL_STAIR_PITCH_RAD = Math.atan(
+  CHAPEL_STAIR_RISE_PER_STEP / CHAPEL_STAIR_RUN_PER_STEP,
+);
+// Full flight footprint length (landing to the bottom-most step), used to
+// size the stairwell ceiling cutout so it matches the visible flight exactly.
+export const CHAPEL_STAIR_FLIGHT_RUN =
+  CHAPEL_STAIR_RUN_PER_STEP * (CHAPEL_STAIR_STEPS_PER_FLIGHT - 1);

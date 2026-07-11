@@ -6,14 +6,22 @@
 // climbing stairs instead of teleporting.
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { CHAPEL_STAIRS } from '../sim/content/drowned_chapel';
+import {
+  CHAPEL_STAIR_RUN_PER_STEP,
+  CHAPEL_STAIR_STEPS_PER_FLIGHT,
+  CHAPEL_STAIR_WIDTH,
+  CHAPEL_STAIRS,
+} from '../sim/content/drowned_chapel';
 import { chapelFloorY } from '../sim/drowned_chapel_building';
 import { surfaceMat } from './gfx';
 import { plankMaps, stoneMaps } from './textures';
 
-const STEPS_PER_FLIGHT = 12;
-const STAIR_WIDTH = 1.8;
-const RUN = 0.34;
+// Shared with the sim (stairwell cutout + the player's climb ramp) via
+// content/drowned_chapel.ts so the visible flight, the ceiling hole, and the
+// walkable ramp can never drift apart.
+const STEPS_PER_FLIGHT = CHAPEL_STAIR_STEPS_PER_FLIGHT;
+const STAIR_WIDTH = CHAPEL_STAIR_WIDTH;
+const RUN = CHAPEL_STAIR_RUN_PER_STEP;
 // Railing dimensions: a newel/baluster post every few steps and a continuous
 // sloped handrail cap on each side of the flight.
 const BALUSTER_EVERY = 2;

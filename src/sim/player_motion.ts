@@ -18,6 +18,7 @@
 // by the extraction.
 
 import { isRooted, isStunned } from './combat/cc';
+import { chapelStandHeight } from './drowned_chapel_floor';
 import { PLAYER_BODY_RADIUS, PLAYER_MAX_CLIMB_SLOPE, PLAYER_SWIM_DEPTH } from './pathfind';
 import { GHOST_RUN_MULT } from './spirit';
 import { DT, type Entity, type MoveInput, normAngle, RUN_SPEED, TURN_SPEED } from './types';
@@ -228,8 +229,13 @@ export function stepPlayerMotion(deps: PlayerMotionDeps, p: Entity, inp: MoveInp
     }
   }
 
-  // Vertical: jumping, gravity, swimming, fall damage
-  const ground = groundHeight(p.pos.x, p.pos.z, deps.seed);
+  // Vertical: jumping, gravity, swimming, fall damage. Inside the Drowned
+  // Chapel (content/drowned_chapel.ts), chapelStandHeight ramps continuously
+  // up/down the stair flight and settles at the flat per-floor height off it,
+  // keyed on the player's own chapelFloor (sim.ts's updateChapelFloor);
+  // outside the footprint it is exactly groundHeight, so normal-world
+  // movement is unaffected.
+  const ground = chapelStandHeight(p.pos.x, p.pos.z, deps.seed, p.chapelFloor);
   const deepWater = ground < waterLevelAt(p.pos.x, p.pos.z) - SWIM_DEPTH;
   if (deepWater && p.pos.y <= swimSurfaceY(p.pos.x, p.pos.z) + 0.05) {
     // treading water at the surface
@@ -356,7 +362,7 @@ export function stepPlayerMotion(deps: PlayerMotionDeps, p: Entity, inp: MoveInp
       if (terrainSteepnessAt(standX, standZ, deps.seed) <= MAX_CLIMB_SLOPE) {
         p.pos.x = standX;
         p.pos.z = standZ;
-        p.pos.y = groundHeight(standX, standZ, deps.seed);
+        p.pos.y = chapelStandHeight(standX, standZ, deps.seed, p.chapelFloor);
       }
     }
   }

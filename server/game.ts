@@ -4271,6 +4271,11 @@ export class GameServer {
       eat: p.eating ? { remaining: round2(p.eating.remaining) } : null,
       drk: p.drinking ? { remaining: round2(p.drinking.remaining) } : null,
       opUntil: p.overpowerUntil > this.sim.time ? 1 : 0,
+      // Drowned Chapel per-player local-area floor (0/1/2, drowned_chapel_floor.ts):
+      // needed client-side so the movement kernel (player_motion.ts's
+      // chapelStandHeight, run identically offline and online) resolves the
+      // same stair-climb/floor height the server does; render-only otherwise.
+      cf: p.chapelFloor,
       ack: session.spectating ? 0 : anchorSession.lastInputSeq,
       ddiff: this.sim.dungeonDifficulty(anchorSession.pid),
     });

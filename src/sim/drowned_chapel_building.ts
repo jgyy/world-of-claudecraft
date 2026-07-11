@@ -17,6 +17,8 @@ import {
   CHAPEL_HALF,
   CHAPEL_POS,
   CHAPEL_SLAB_THICK,
+  CHAPEL_STAIR_FLIGHT_RUN,
+  CHAPEL_STAIR_WIDTH,
   CHAPEL_STAIRS,
   CHAPEL_TOTAL_HEIGHT,
   CHAPEL_WALL_THICK,
@@ -83,26 +85,6 @@ function sdBox(
   return outside + inside;
 }
 
-// A vertical cylinder SDF, used for the stairwell cutout.
-function sdCylinderY(
-  px: number,
-  py: number,
-  pz: number,
-  cx: number,
-  cy: number,
-  cz: number,
-  r: number,
-  hy: number,
-): number {
-  const dr = Math.hypot(px - cx, pz - cz) - r;
-  const dy = Math.abs(py - cy) - hy;
-  const ox = Math.max(dr, 0);
-  const oy = Math.max(dy, 0);
-  const outside = Math.hypot(ox, oy);
-  const inside = Math.min(Math.max(dr, dy), 0);
-  return outside + inside;
-}
-
 function union(a: number, b: number): number {
   return Math.min(a, b);
 }
@@ -111,11 +93,28 @@ function subtract(a: number, cut: number): number {
   return Math.max(a, -cut);
 }
 
+// Ceiling cutout for one stair flight: an oriented box spanning the FULL
+// flight footprint (landing back to the bottom-most step), not just a small
+// disc at the landing. Sized to the same STAIR_WIDTH as the visible stepped
+// mesh (render/drowned_chapel_stairs.ts) plus a small margin so the opening
+// always fully clears the flight, whatever the flight's run length (which is
+// itself derived from the floor-to-floor rise, see content/drowned_chapel.ts).
 function stairCutoutAt(lx: number, ly: number, lz: number, betweenFloor: number): number {
   let best = Infinity;
   for (const s of CHAPEL_STAIRS) {
     if (s.fromFloor !== betweenFloor) continue;
-    const d = sdCylinderY(lx, ly, lz, s.x - CHAPEL_POS.x, 0, s.z - CHAPEL_POS.z, s.r, 20);
+    const sLx = s.x - CHAPEL_POS.x;
+    const sLz = s.z - CHAPEL_POS.z;
+    const halfAlong = CHAPEL_STAIR_FLIGHT_RUN / 2 + 0.4;
+    const halfAcross = CHAPEL_STAIR_WIDTH / 2 + 0.4;
+    // The flight runs from the landing back along -dir on `axis`; the
+    // cutout box is centered on the flight's midpoint.
+    const midAlong = -s.dir * (CHAPEL_STAIR_FLIGHT_RUN / 2);
+    const cx = s.axis === 'x' ? sLx + midAlong : sLx;
+    const cz = s.axis === 'z' ? sLz + midAlong : sLz;
+    const hx = s.axis === 'x' ? halfAlong : halfAcross;
+    const hz = s.axis === 'z' ? halfAlong : halfAcross;
+    const d = sdBox(lx, ly, lz, cx, 0, cz, hx, 20, hz);
     if (d < best) best = d;
   }
   return best;

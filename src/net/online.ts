@@ -1857,6 +1857,11 @@ export class ClientWorld implements IWorld {
         for (const k in s.cds) e.cooldowns.set(k, Number(s.cds[k]));
       }
       e.gcdRemaining = s.gcd ?? 0;
+      // Drowned Chapel local-area floor (server field `cf`, see server/game.ts's
+      // selfWireJson): drives the same chapelStandHeight ramp the offline Sim
+      // uses (src/sim/player_motion.ts), so the self-motion extrapolator's
+      // stair climb/floor height matches the server 1:1.
+      e.chapelFloor = (s.cf ?? 0) as 0 | 1 | 2;
       e.potionCdRemaining = s.pcd ?? 0;
       e.comboPoints = s.combo ?? 0;
       e.targetId = s.target ?? null;
