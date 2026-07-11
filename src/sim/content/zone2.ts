@@ -11,6 +11,7 @@ import type {
   NpcDef,
   PlayerClass,
   QuestDef,
+  RuinDecorKind,
   ZoneDef,
   ZonePropsDef,
 } from '../types';
@@ -2004,6 +2005,14 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
 // Static props (rendering + collision share this placement data)
 // ---------------------------------------------------------------------------
 
+// The ruin compound's stone floor: a 5x5 grid of the reused KayKit dungeon
+// floor_tile_large module (4-unit grid, ruinFloorTile in props.ts), covering
+// the same footprint as the perimeter wall below (center 100, 435,
+// half-extent 8 + 2-unit tile half-width = 10, matching the wall corners).
+const RUIN_COMPOUND_FLOOR_TILES: { x: number; z: number; kind: RuinDecorKind }[] = [-8, -4, 0, 4, 8]
+  .flatMap((dx) => [-8, -4, 0, 4, 8].map((dz) => ({ dx, dz })))
+  .map(({ dx, dz }) => ({ x: 100 + dx, z: 435 + dz, kind: 'ruinFloorTile' as const }));
+
 export const ZONE2_PROPS: ZonePropsDef = {
   buildings: [
     { kind: 'inn', x: 13, z: 306, w: 6, d: 7, rot: -1.0 },
@@ -2045,7 +2054,9 @@ export const ZONE2_PROPS: ZonePropsDef = {
     [-117, 346],
     [-123, 354],
   ],
-  ruinRings: [{ x: 100, z: 435, ringR: 7, columns: 7 }],
+  // the original 7-column ring at the ruin site is gone: superseded by the
+  // real dungeon-kit wall/floor compound in ruinDecor below
+  ruinRings: [],
   fences: [
     { x1: 16, z1: 311, x2: 21, z2: 299 },
     { x1: -18, z1: 313, x2: -22, z2: 300 },
@@ -2054,20 +2065,22 @@ export const ZONE2_PROPS: ZonePropsDef = {
   // weathered idol at the back (south) end of the sanctum, facing the
   // entrance so a visitor walking the processional axis meets its gaze
   statues: [{ x: 100, z: 430, rot: Math.PI }],
-  // Tripo-generated decoration pass, built as an actual ruined temple
-  // compound around the existing column ring (center 100, 435, radius 7),
-  // not loose scatter: a broken perimeter wall (mirrored wall-fragment
-  // segments alternating with corner obelisk pylons, gapped for one
-  // entrance), an archway-to-altar-to-idol processional axis down the
-  // middle, mirrored flanking pairs either side of the axis, and peripheral
-  // village-adjacent features (well, small graveyard, benches, rubble)
-  // outside the wall, the way a real ruin accretes satellite structures.
-  // Several kinds repeat (wall fragment x7, obelisk x4, brazier x2, grave
-  // marker x2, bench x2) to build the wall and its symmetry; every anchor is
-  // still purely cosmetic, no collision. Wall segments sit on a clean
-  // rectangle (half-extent 9-10) at right-angle rotations, not scattered
-  // arbitrary angles, so the footprint reads as an actual building.
+  // A built ruined temple compound (center 100, 435): a raised stone plinth
+  // (terrain flatten in ruin_compound_layout.ts) with a real flagstone floor
+  // and perimeter wall reusing the existing KayKit dungeon modular kit
+  // (floor_tile_large / wall_cracked / wall_broken / wall_corner, already
+  // shipped, not Tripo-generated), plus the Tripo-generated furnishing:
+  // an archway-to-stairway-to-altar-to-idol processional axis down the
+  // middle, mirrored flanking pairs either side (entrance pedestal/urn,
+  // sanctum braziers, a toppled-obelisk colonnade at the gate and the
+  // sanctum's back wall), and peripheral village-adjacent satellite
+  // features outside the wall (well, small graveyard, benches, rubble).
+  // The original 7-column ring is gone (superseded by the real wall); every
+  // anchor here is still purely cosmetic, no collision. Wall segments sit on
+  // a clean rectangle (half-extent 10) at right-angle rotations, not
+  // scattered arbitrary angles, so the footprint reads as an actual building.
   ruinDecor: [
+    ...RUIN_COMPOUND_FLOOR_TILES,
     // processional axis, entrance (north) to sanctum (south)
     { x: 100, z: 445, rot: Math.PI, kind: 'ruinArchway' },
     { x: 101, z: 443, rot: 0, kind: 'ruinStairway' },
@@ -2084,15 +2097,18 @@ export const ZONE2_PROPS: ZonePropsDef = {
     // matching pair marking the sanctum's fallen back colonnade
     { x: 96, z: 423, rot: 1.57, kind: 'ruinObelisk' },
     { x: 104, z: 423, rot: 1.57, kind: 'ruinObelisk' },
-    // broken perimeter wall, a clean rectangle around the column ring
-    // (half-extent 9-10), gapped at the north-center for the archway gate
-    { x: 91, z: 444, rot: 0, kind: 'ruinWallFragment' },
-    { x: 109, z: 444, rot: 1.57, kind: 'ruinWallFragment' },
-    { x: 110, z: 435, rot: 1.57, kind: 'ruinWallFragment' },
-    { x: 109, z: 426, rot: 3.14, kind: 'ruinWallFragment' },
-    { x: 100, z: 425, rot: 0, kind: 'ruinWallFragment' },
-    { x: 91, z: 426, rot: 4.71, kind: 'ruinWallFragment' },
-    { x: 90, z: 435, rot: 1.57, kind: 'ruinWallFragment' },
+    // real stone perimeter wall, a clean rectangle (half-extent 10) around
+    // the plinth, gapped at the north-center for the archway gate: corner
+    // pieces at the four corners, straight cracked/broken segments between
+    { x: 90, z: 445, rot: 0, kind: 'ruinWallCorner' },
+    { x: 110, z: 445, rot: 1.57, kind: 'ruinWallCorner' },
+    { x: 110, z: 425, rot: 3.14, kind: 'ruinWallCorner' },
+    { x: 90, z: 425, rot: 4.71, kind: 'ruinWallCorner' },
+    { x: 110, z: 435, rot: 1.57, kind: 'ruinWallCracked' },
+    { x: 100, z: 425, rot: 0, kind: 'ruinWallBroken' },
+    { x: 90, z: 435, rot: 1.57, kind: 'ruinWallCracked' },
+    // one fallen wall fragment among the satellite rubble outside the wall
+    { x: 79, z: 439, rot: 0.6, kind: 'ruinWallFragment' },
     // peripheral, village-adjacent satellite features outside the wall
     { x: 82, z: 435, rot: 0.4, kind: 'ruinWell' },
     { x: 120, z: 435, rot: -0.6, kind: 'ruinRubble' },

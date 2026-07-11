@@ -124,10 +124,21 @@ const PROP_ASSET_DEFS: Record<string, PropAssetDef> = {
   ruinPedestal: { url: '/models/props/ruin_pedestal.glb', kit: 'nature' },
   ruinWallFragment: { url: '/models/props/ruin_wall_fragment.glb', kit: 'nature' },
   ruinUrn: { url: '/models/props/ruin_urn.glb', kit: 'nature' },
+  // Reused KayKit dungeon modular kit pieces (already shipped, not
+  // Tripo-generated) for the compound's stone floor and perimeter walls.
+  ruinFloorTile: { url: '/models/dungeon/floor_tile_large.glb', kit: 'dungeon' },
+  ruinWallCracked: { url: '/models/dungeon/wall_cracked.glb', kit: 'dungeon' },
+  ruinWallBroken: { url: '/models/dungeon/wall_broken.glb', kit: 'dungeon' },
+  ruinWallCorner: { url: '/models/dungeon/wall_corner.glb', kit: 'dungeon' },
 };
 
 // Target visual height (world units) per ruinDecor kind, so each asset reads
 // at a sensible scale relative to the existing statue (3.2) and ring columns.
+// The dungeon wall pieces are natively 4 units tall (their real in-kit size),
+// so their "target" is just that height (scale ~1, matching their neighbors
+// on the same modular grid). ruinFloorTile is NOT height-scaled at all: see
+// FIXED_SCALE_RUIN_KINDS below (its native Y-extent is a thin ~0.15 slab, so
+// height-targeting it would blow the footprint scale up absurdly).
 const RUIN_DECOR_HEIGHT: Record<RuinDecorKind, number> = {
   ruinArchway: 4.2,
   ruinAltar: 1.3,
@@ -141,6 +152,18 @@ const RUIN_DECOR_HEIGHT: Record<RuinDecorKind, number> = {
   ruinPedestal: 1.5,
   ruinWallFragment: 2.6,
   ruinUrn: 0.9,
+  ruinFloorTile: 1, // unused: see FIXED_SCALE_RUIN_KINDS
+  ruinWallCracked: 4,
+  ruinWallBroken: 4,
+  ruinWallCorner: 4,
+};
+
+// Kinds placed at a literal 1:1 scale (native GLB units = world units)
+// instead of the height-target convention above: modular kit pieces that
+// must tessellate on their native grid (the dungeon kit's 4-unit module),
+// where scaling to a "target height" would distort the footprint.
+const FIXED_SCALE_RUIN_KINDS: Partial<Record<RuinDecorKind, number>> = {
+  ruinFloorTile: 1,
 };
 
 type PropKey = keyof typeof PROP_ASSET_DEFS;
@@ -1130,12 +1153,13 @@ export function buildProps(seed: number, delveLabel?: (delveId: string) => strin
     registerHideable(g, circleFootprint(st.x, st.z, 1.4, y + targetHeight));
   }
 
-  // ---- ruin decor: Tripo-generated ring decoration set, no collision -------
+  // ---- ruin decor: temple compound (Tripo props + reused dungeon-kit floor
+  // and wall pieces), no collision -------------------------------------------
   for (const d of getActiveWorldContent().props.ruinDecor ?? []) {
     const g = new THREE.Group();
     const asset = propAsset(d.kind);
     const targetHeight = RUIN_DECOR_HEIGHT[d.kind];
-    const s = targetHeight / asset.size.y;
+    const s = FIXED_SCALE_RUIN_KINDS[d.kind] ?? targetHeight / asset.size.y;
     addParts(g, d.kind, { scale: s, euler: new THREE.Euler(0, d.rot ?? 0, 0) });
     const y = ground(d.x, d.z);
     g.position.set(d.x, y, d.z);

@@ -1659,6 +1659,16 @@ export const RUIN_DECOR_KINDS = [
   'ruinPedestal',
   'ruinWallFragment',
   'ruinUrn',
+  // reuse the existing KayKit dungeon modular kit (already shipped in
+  // public/models/dungeon/, no new asset generation) for the compound's
+  // stone floor and perimeter walls: these need a FIXED 1:1 scale to
+  // tessellate on the kit's 4-unit grid, unlike the Tripo props above,
+  // which scale to a per-kind target height (see FIXED_SCALE_RUIN_KINDS
+  // in props.ts).
+  'ruinFloorTile',
+  'ruinWallCracked',
+  'ruinWallBroken',
+  'ruinWallCorner',
 ] as const;
 export type RuinDecorKind = (typeof RUIN_DECOR_KINDS)[number];
 
