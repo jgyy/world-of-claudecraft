@@ -2000,20 +2000,23 @@ describe('spell visuals', () => {
   });
 
   it('the ruin-ring decoration set merges from zone content into PROPS.ruinDecor and does not block movement', () => {
-    // the Drowned Chapel compound repeats some kinds (courtyard floor tiles,
-    // corner obelisks, grave markers, benches), so anchors can outnumber the
-    // distinct RuinDecorKind set, but every one of the 13 kinds must still
-    // appear at least once and no anchor may block movement. The old
-    // freestanding wall kinds (ruinWallCracked/ruinWallBroken/ruinWallCorner)
-    // are gone: superseded by the chapel's real voxel-mesh collision, which
-    // this decor loop never carries anyway.
-    expect(PROPS.ruinDecor?.length).toBeGreaterThanOrEqual(16);
+    // The Drowned Chapel compound repeats some kinds (corner obelisks, grave
+    // markers, benches), so anchors outnumber the distinct RuinDecorKind set.
+    // After the rework the 12 ruin decor kinds all sit INSIDE the building
+    // (the idol statue is the 13th Tripo kind, carried in PROPS.statues), the
+    // outdoor courtyard floor tiles are gone (the building has its own slabs),
+    // and no anchor blocks movement. The old freestanding wall kinds
+    // (ruinWallCracked/ruinWallBroken/ruinWallCorner) are gone: superseded by
+    // the chapel's real voxel-mesh collision, which this decor loop never
+    // carries anyway.
+    expect(PROPS.ruinDecor?.length).toBeGreaterThanOrEqual(12);
     const seed = 12345;
     for (const d of PROPS.ruinDecor!) {
-      expect(isBlocked(seed, d.x, d.z, 0.5)).toBe(false);
+      expect(isBlocked(seed, d.x, d.z, 0.5, false, undefined, 1)).toBe(false);
     }
     const kinds = new Set(PROPS.ruinDecor!.map((d) => d.kind));
-    expect(kinds.size).toBe(13);
+    expect(kinds.size).toBe(12);
+    expect(kinds.has('ruinFloorTile' as never)).toBe(false);
     for (const wallKind of ['ruinWallCracked', 'ruinWallBroken', 'ruinWallCorner']) {
       expect(kinds.has(wallKind as never)).toBe(false);
     }
@@ -2021,17 +2024,18 @@ describe('spell visuals', () => {
 
   it('the ruin compound courtyard is a level clearing, not overgrown terrain', () => {
     const seed = 12345;
-    // every wall/axis anchor sits inside the clearing radius
+    // every decor anchor sits inside the clearing radius
     for (const d of PROPS.ruinDecor!) {
       expect(isInRuinCompoundClearing(d.x, d.z)).toBe(true);
     }
-    // the flatten pulls the whole courtyard to (near) one height
+    // the flatten pulls the whole footprint plateau (radius = CHAPEL_HALF) to
+    // one dead-level height; sample points inside that inscribed disc
     const samples: [number, number][] = [
       [100, 435],
-      [95, 440],
-      [105, 430],
-      [92, 428],
-      [108, 442],
+      [95, 438],
+      [104, 432],
+      [97, 431],
+      [103, 438],
     ];
     for (const [x, z] of samples) {
       expect(Math.abs(terrainHeight(x, z, seed) - RUIN_COMPOUND_FLOOR_HEIGHT)).toBeLessThan(0.3);
