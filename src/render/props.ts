@@ -3,6 +3,7 @@ import type { GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { getActiveWorldContent, WORLD_MIN_Z } from '../sim/data';
 import { hash2 } from '../sim/rng';
+import type { RuinDecorKind } from '../sim/types';
 import { terrainHeight, waterLevel } from '../sim/world';
 import { loadGltf } from './assets/loader';
 import { registerPreload } from './assets/preload';
@@ -109,6 +110,37 @@ const PROP_ASSET_DEFS: Record<string, PropAssetDef> = {
   delveEntrance2: { url: '/models/dungeon/delve_entrance_2.glb', kit: 'dungeon' },
   // Tripo-generated weathered stone idol, standalone decorative statue.
   ruinStatue: { url: '/models/props/ruin_statue.glb', kit: 'nature' },
+  // Tripo-generated ruin-ring decoration set (Zone 2 Mirefen Marsh), placed
+  // via the generic ruinDecor loop in buildProps keyed by RuinDecorKind.
+  ruinArchway: { url: '/models/props/ruin_archway.glb', kit: 'nature' },
+  ruinAltar: { url: '/models/props/ruin_altar.glb', kit: 'nature' },
+  ruinObelisk: { url: '/models/props/ruin_obelisk.glb', kit: 'nature' },
+  ruinWell: { url: '/models/props/ruin_well.glb', kit: 'nature' },
+  ruinStairway: { url: '/models/props/ruin_stairway.glb', kit: 'nature' },
+  ruinBench: { url: '/models/props/ruin_bench.glb', kit: 'nature' },
+  ruinBrazier: { url: '/models/props/ruin_brazier.glb', kit: 'nature' },
+  ruinGraveMarker: { url: '/models/props/ruin_grave_marker.glb', kit: 'nature' },
+  ruinRubble: { url: '/models/props/ruin_rubble.glb', kit: 'nature' },
+  ruinPedestal: { url: '/models/props/ruin_pedestal.glb', kit: 'nature' },
+  ruinWallFragment: { url: '/models/props/ruin_wall_fragment.glb', kit: 'nature' },
+  ruinUrn: { url: '/models/props/ruin_urn.glb', kit: 'nature' },
+};
+
+// Target visual height (world units) per ruinDecor kind, so each asset reads
+// at a sensible scale relative to the existing statue (3.2) and ring columns.
+const RUIN_DECOR_HEIGHT: Record<RuinDecorKind, number> = {
+  ruinArchway: 4.2,
+  ruinAltar: 1.3,
+  ruinObelisk: 1.1,
+  ruinWell: 1.6,
+  ruinStairway: 2.4,
+  ruinBench: 0.9,
+  ruinBrazier: 1.2,
+  ruinGraveMarker: 1.4,
+  ruinRubble: 1.0,
+  ruinPedestal: 1.5,
+  ruinWallFragment: 2.6,
+  ruinUrn: 0.9,
 };
 
 type PropKey = keyof typeof PROP_ASSET_DEFS;
@@ -1096,6 +1128,19 @@ export function buildProps(seed: number, delveLabel?: (delveId: string) => strin
     g.position.set(st.x, y, st.z);
     group.add(shadowed(g));
     registerHideable(g, circleFootprint(st.x, st.z, 1.4, y + targetHeight));
+  }
+
+  // ---- ruin decor: Tripo-generated ring decoration set, no collision -------
+  for (const d of getActiveWorldContent().props.ruinDecor ?? []) {
+    const g = new THREE.Group();
+    const asset = propAsset(d.kind);
+    const targetHeight = RUIN_DECOR_HEIGHT[d.kind];
+    const s = targetHeight / asset.size.y;
+    addParts(g, d.kind, { scale: s, euler: new THREE.Euler(0, d.rot ?? 0, 0) });
+    const y = ground(d.x, d.z);
+    g.position.set(d.x, y, d.z);
+    group.add(shadowed(g));
+    registerHideable(g, circleFootprint(d.x, d.z, targetHeight * 0.5, y + targetHeight));
   }
 
   // ---- mine entrances: timber portal, rock mound, ore cart, lantern --------

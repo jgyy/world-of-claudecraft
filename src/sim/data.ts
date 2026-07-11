@@ -277,6 +277,7 @@ function mergeProps(sets: ZonePropsDef[]): ZonePropsDef {
     // marker (name slab + arch) never reached the renderer (props.ts)
     delveMarkers: sets.flatMap((s) => s.delveMarkers ?? []),
     statues: sets.flatMap((s) => s.statues ?? []),
+    ruinDecor: sets.flatMap((s) => s.ruinDecor ?? []),
   };
 }
 

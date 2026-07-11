@@ -1994,6 +1994,16 @@ describe('spell visuals', () => {
     expect(isBlocked(seed, st.x, st.z, 0.5)).toBe(false);
   });
 
+  it('the ruin-ring decoration set merges from zone content into PROPS.ruinDecor and does not block movement', () => {
+    expect(PROPS.ruinDecor?.length).toBeGreaterThanOrEqual(10);
+    const seed = 12345;
+    for (const d of PROPS.ruinDecor!) {
+      expect(isBlocked(seed, d.x, d.z, 0.5)).toBe(false);
+    }
+    const kinds = new Set(PROPS.ruinDecor!.map((d) => d.kind));
+    expect(kinds.size).toBe(PROPS.ruinDecor!.length);
+  });
+
   it('ranged auto shot does not fire through dungeon walls', () => {
     const sim = makeSim('hunter');
     const origin = instanceOrigin(2, 0);

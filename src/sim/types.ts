@@ -1640,7 +1640,27 @@ export interface ZonePropsDef {
   delveMarkers?: { x: number; z: number; delveId: string }[];
   // standalone decorative statue anchor (Tripo-generated GLB), no collision
   statues?: { x: number; z: number; rot?: number }[];
+  // additional Tripo-generated decorative ruin props (archway, altar, well,
+  // rubble, etc), keyed by RUIN_DECOR_KIND so one generic placement loop in
+  // props.ts handles all of them; no collision
+  ruinDecor?: { x: number; z: number; rot?: number; kind: RuinDecorKind }[];
 }
+
+export const RUIN_DECOR_KINDS = [
+  'ruinArchway',
+  'ruinAltar',
+  'ruinObelisk',
+  'ruinWell',
+  'ruinStairway',
+  'ruinBench',
+  'ruinBrazier',
+  'ruinGraveMarker',
+  'ruinRubble',
+  'ruinPedestal',
+  'ruinWallFragment',
+  'ruinUrn',
+] as const;
+export type RuinDecorKind = (typeof RUIN_DECOR_KINDS)[number];
 
 export function emptyZoneProps(): ZonePropsDef {
   return {
