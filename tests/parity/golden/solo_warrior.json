@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "6e73f95b",
+      "state": "1a306312",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -72,6 +72,7 @@
         {
           "aiState": "idle",
           "attackPower": 46,
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.06,
@@ -124,7 +125,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 407,
-      "state": "cb8b329a",
+      "state": "a987bd60",
       "events": "f6df06c1",
       "rng": {
         "draws": 6,
@@ -135,7 +136,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 407,
-      "state": "ac5ad9ff",
+      "state": "6ec4e81b",
       "events": "741638a5",
       "rng": {
         "draws": 6,
@@ -146,7 +147,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 407,
-      "state": "d3e6de6f",
+      "state": "529d15ef",
       "events": "2ff6ef10",
       "rng": {
         "draws": 98,
@@ -157,7 +158,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 407,
-      "state": "ca6a3dfe",
+      "state": "7039578c",
       "events": "2840086f",
       "rng": {
         "draws": 154,
@@ -217,6 +218,7 @@
         {
           "aiState": "idle",
           "attackPower": 82,
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "critChance": 0.0645,
           "detonateTimer": "Infinity",
@@ -269,6 +271,7 @@
         },
         {
           "aiState": "dead",
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "corpseTimer": 60,
           "critChance": 0.05,
@@ -332,7 +335,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 407,
-      "state": "53829c2e",
+      "state": "155dd1d6",
       "events": "741638a5",
       "rng": {
         "draws": 172,
@@ -392,6 +395,7 @@
         {
           "aiState": "idle",
           "attackPower": 82,
+          "chapelLandingLock": -1,
           "combatTimer": 0.2,
           "comboUntil": -1,
           "critChance": 0.0645,
@@ -445,6 +449,7 @@
         },
         {
           "aiState": "dead",
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "corpseTimer": 59.8,
           "critChance": 0.05,

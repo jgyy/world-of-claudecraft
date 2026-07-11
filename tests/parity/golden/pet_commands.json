@@ -23,7 +23,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "d5a08679",
+      "state": "2ceac7ec",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -82,6 +82,7 @@
         {
           "aiState": "idle",
           "attackPower": 39,
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.0625,
@@ -136,7 +137,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 408,
-      "state": "14dc47d0",
+      "state": "c4fd9c28",
       "events": "e042fd30",
       "rng": {
         "draws": 0,
@@ -196,6 +197,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -246,6 +248,7 @@
         },
         {
           "aiState": "idle",
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -291,7 +294,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 408,
-      "state": "ef04212f",
+      "state": "f9c745c9",
       "events": "97340448",
       "rng": {
         "draws": 0,
@@ -351,6 +354,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -415,6 +419,7 @@
               "value": 13
             }
           ],
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -460,7 +465,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 408,
-      "state": "9ace25bd",
+      "state": "ad56c2b5",
       "events": "d70fb9f2",
       "rng": {
         "draws": 0,
@@ -471,7 +476,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 408,
-      "state": "437717a7",
+      "state": "1016b7fd",
       "events": "1a2734ed",
       "rng": {
         "draws": 0,
@@ -482,7 +487,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 409,
-      "state": "f859ff56",
+      "state": "90bf5a05",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -542,6 +547,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -607,6 +613,7 @@
               "value": 13
             }
           ],
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -650,6 +657,7 @@
         {
           "aggroTargetId": 407,
           "aiState": "chase",
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -713,7 +721,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 409,
-      "state": "9bb4fb4c",
+      "state": "f4f58f14",
       "events": "5aadc799",
       "rng": {
         "draws": 0,
@@ -773,6 +781,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -824,6 +833,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "chase",
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -883,7 +893,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 411,
-      "state": "c77dad06",
+      "state": "c9cdaf37",
       "events": "1b51753b",
       "rng": {
         "draws": 0,
@@ -943,6 +953,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -994,6 +1005,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "chase",
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1049,6 +1061,7 @@
         },
         {
           "aiState": "idle",
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -1094,7 +1107,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 411,
-      "state": "c00dc452",
+      "state": "e061d77f",
       "events": "39bbf203",
       "rng": {
         "draws": 0,
@@ -1154,6 +1167,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -1205,6 +1219,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "chase",
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1260,6 +1275,7 @@
         },
         {
           "aiState": "idle",
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -1305,7 +1321,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 411,
-      "state": "9bb4fb4c",
+      "state": "f4f58f14",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1365,6 +1381,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -1416,6 +1433,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "chase",
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1475,7 +1493,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 412,
-      "state": "9bb4fb4c",
+      "state": "f4f58f14",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1535,6 +1553,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -1586,6 +1605,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "chase",
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1645,7 +1665,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 414,
-      "state": "273cbf24",
+      "state": "3e86cc32",
       "events": "d74bfbad",
       "rng": {
         "draws": 0,
@@ -1751,6 +1771,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -1802,6 +1823,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "chase",
+          "chapelLandingLock": -1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1864,6 +1886,7 @@
           "channelTickEvery": 1,
           "channelTickTimer": 1,
           "channeling": true,
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -1913,6 +1936,7 @@
         },
         {
           "aiState": "idle",
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -1958,7 +1982,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 414,
-      "state": "1abb14a3",
+      "state": "8c9e2ee7",
       "events": "9da7147b",
       "rng": {
         "draws": 82,
@@ -1969,7 +1993,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 414,
-      "state": "89319e53",
+      "state": "3ec52c4f",
       "events": "1005cba8",
       "rng": {
         "draws": 158,
@@ -1980,7 +2004,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 414,
-      "state": "89319e53",
+      "state": "3ec52c4f",
       "events": "741638a5",
       "rng": {
         "draws": 158,
@@ -2088,6 +2112,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -2140,6 +2165,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "attack",
+          "chapelLandingLock": -1,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -2210,6 +2236,7 @@
           "channelTickEvery": 1,
           "channelTickTimer": 1,
           "channeling": true,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -2259,6 +2286,7 @@
         },
         {
           "aiState": "idle",
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -2304,7 +2332,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 416,
-      "state": "d6b95091",
+      "state": "a3f5c4c5",
       "events": "d9be4bae",
       "rng": {
         "draws": 158,
@@ -2412,6 +2440,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -2464,6 +2493,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "attack",
+          "chapelLandingLock": -1,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -2534,6 +2564,7 @@
           "channelTickEvery": 1,
           "channelTickTimer": 1,
           "channeling": true,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -2583,6 +2614,7 @@
         },
         {
           "aiState": "idle",
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -2628,7 +2660,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 418,
-      "state": "2c5f4cbe",
+      "state": "9ed95b62",
       "events": "2cf8a2d5",
       "rng": {
         "draws": 158,
@@ -2736,6 +2768,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -2788,6 +2821,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "attack",
+          "chapelLandingLock": -1,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -2858,6 +2892,7 @@
           "channelTickEvery": 1,
           "channelTickTimer": 1,
           "channeling": true,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -2908,6 +2943,7 @@
         {
           "aggroTargetId": 412,
           "aiState": "chase",
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -2961,7 +2997,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 418,
-      "state": "2c5f4cbe",
+      "state": "9ed95b62",
       "events": "741638a5",
       "rng": {
         "draws": 158,
@@ -3069,6 +3105,7 @@
         {
           "aiState": "idle",
           "attackPower": 83,
+          "chapelLandingLock": -1,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.079,
@@ -3121,6 +3158,7 @@
         {
           "aggroTargetId": 405,
           "aiState": "attack",
+          "chapelLandingLock": -1,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -3191,6 +3229,7 @@
           "channelTickEvery": 1,
           "channelTickTimer": 1,
           "channeling": true,
+          "chapelLandingLock": -1,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -3241,6 +3280,7 @@
         {
           "aggroTargetId": 412,
           "aiState": "chase",
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.05,

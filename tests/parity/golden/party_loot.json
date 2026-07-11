@@ -28,7 +28,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 408,
-      "state": "39578b1b",
+      "state": "0d8db6a2",
       "events": "dc5c470f",
       "rng": {
         "draws": 2,
@@ -131,6 +131,7 @@
         {
           "aiState": "idle",
           "attackPower": 46,
+          "chapelLandingLock": -1,
           "combatTimer": 99.15,
           "comboUntil": -1,
           "critChance": 0.06,
@@ -180,6 +181,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "chapelLandingLock": -1,
           "combatTimer": 99.15,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -229,6 +231,7 @@
         },
         {
           "aiState": "idle",
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "corpseTimer": 61.85,

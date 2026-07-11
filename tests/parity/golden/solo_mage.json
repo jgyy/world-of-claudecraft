@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "96e7aa04",
+      "state": "ea3dbdeb",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -74,6 +74,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "chapelLandingLock": -1,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -127,7 +128,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 407,
-      "state": "84cc3bf9",
+      "state": "c0c785b5",
       "events": "6f4af3da",
       "rng": {
         "draws": 3,
@@ -138,7 +139,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 407,
-      "state": "5bf5388b",
+      "state": "eef9fb7b",
       "events": "32aafa0f",
       "rng": {
         "draws": 3,
@@ -149,7 +150,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 407,
-      "state": "6b1fc6cb",
+      "state": "2c141b3b",
       "events": "c880e87c",
       "rng": {
         "draws": 73,
@@ -160,7 +161,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 407,
-      "state": "63b35e5f",
+      "state": "c88f9e1f",
       "events": "c880e87c",
       "rng": {
         "draws": 163,
@@ -171,7 +172,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 407,
-      "state": "24aca4e7",
+      "state": "b5ee8eb7",
       "events": "894957f3",
       "rng": {
         "draws": 259,
@@ -182,7 +183,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 407,
-      "state": "71717b3e",
+      "state": "c56abdc2",
       "events": "c880e87c",
       "rng": {
         "draws": 380,
@@ -193,7 +194,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 407,
-      "state": "a4f0295b",
+      "state": "e4328077",
       "events": "741638a5",
       "rng": {
         "draws": 421,
@@ -254,6 +255,7 @@
           "aiState": "idle",
           "attackPower": 10,
           "castTotal": 2,
+          "chapelLandingLock": -1,
           "combatTimer": 105.4,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -305,6 +307,7 @@
         },
         {
           "aiState": "idle",
+          "chapelLandingLock": -1,
           "combatTimer": 105.4,
           "comboUntil": -1,
           "critChance": 0.05,
