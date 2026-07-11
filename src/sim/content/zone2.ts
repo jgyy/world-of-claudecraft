@@ -2051,24 +2051,31 @@ export const ZONE2_PROPS: ZonePropsDef = {
     { x1: -18, z1: 313, x2: -22, z2: 300 },
   ],
   graveyards: [{ x: -18, z: 286 }],
-  // solitary weathered idol watching over the ruin ring, still standing amid
-  // the toppled columns
-  statues: [{ x: 109, z: 429, rot: 2.4 }],
+  // weathered idol on the far (south) end of the ring's processional axis,
+  // facing back up the row toward the altar and archway
+  statues: [{ x: 100, z: 429, rot: Math.PI }],
   // Tripo-generated decoration pass over the ruin ring (center 100, 435,
-  // radius 7): a broken archway entrance, a central altar, and rubble/decor
-  // scattered among the toppled columns, purely cosmetic, no collision.
+  // radius 7), laid out as a deliberate N-S processional axis (archway,
+  // brazier, altar, statue, rubble) with mirrored flanking pairs either side
+  // (entrance urns/pedestal, altar grave marker/wall fragment, equator
+  // obelisk/stairway, outer corner well/bench), purely cosmetic, no collision.
   ruinDecor: [
+    // main axis, north (entrance) to south
     { x: 100, z: 444, rot: Math.PI, kind: 'ruinArchway' },
-    { x: 100, z: 435, rot: 0.4, kind: 'ruinAltar' },
-    { x: 93, z: 439, rot: 1.6, kind: 'ruinStairway' },
-    { x: 95, z: 430, rot: 0.9, kind: 'ruinObelisk' },
-    { x: 107, z: 440, rot: 2.2, kind: 'ruinWell' },
-    { x: 105, z: 427, rot: -0.5, kind: 'ruinBench' },
-    { x: 96, z: 441, rot: 1.1, kind: 'ruinBrazier' },
-    { x: 108, z: 431, rot: 2.8, kind: 'ruinGraveMarker' },
-    { x: 91, z: 432, rot: 0.3, kind: 'ruinRubble' },
-    { x: 103, z: 438, rot: -1.2, kind: 'ruinPedestal' },
-    { x: 94, z: 427, rot: 1.9, kind: 'ruinWallFragment' },
-    { x: 106, z: 436, rot: 0.7, kind: 'ruinUrn' },
+    { x: 100, z: 440, rot: 0, kind: 'ruinBrazier' },
+    { x: 100, z: 435, rot: 0, kind: 'ruinAltar' },
+    { x: 100, z: 424, rot: 0.2, kind: 'ruinRubble' },
+    // entrance flanking pair (mirrored)
+    { x: 94, z: 441, rot: 0.5, kind: 'ruinPedestal' },
+    { x: 106, z: 441, rot: -0.5, kind: 'ruinUrn' },
+    // altar flanking pair (mirrored)
+    { x: 92, z: 432, rot: 0.3, kind: 'ruinGraveMarker' },
+    { x: 108, z: 432, rot: -0.3, kind: 'ruinWallFragment' },
+    // equator side pieces (mirrored)
+    { x: 90, z: 435, rot: 1.0, kind: 'ruinObelisk' },
+    { x: 110, z: 435, rot: -1.0, kind: 'ruinStairway' },
+    // outer corners (mirrored)
+    { x: 92, z: 428, rot: 0.7, kind: 'ruinWell' },
+    { x: 108, z: 428, rot: -0.7, kind: 'ruinBench' },
   ],
 };

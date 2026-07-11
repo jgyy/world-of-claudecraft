@@ -131,11 +131,17 @@ for (const p of PROPS) {
         outPath,
         // meshopt, not draco: the runtime GLTFLoader (src/render/assets/loader.ts)
         // only wires a MeshoptDecoder, no DRACOLoader, so draco-compressed GLBs
-        // fail to parse in the client at runtime.
+        // fail to parse in the client at runtime. 512px textures and a looser
+        // simplify tolerance are plenty for a small background ruin prop and
+        // cut Tripo's default 2048px/near-lossless output by roughly 10-15x.
         '--compress',
         'meshopt',
         '--texture-compress',
         'webp',
+        '--texture-size',
+        '512',
+        '--simplify-error',
+        '0.003',
       ],
       { stdio: 'inherit' },
     );
