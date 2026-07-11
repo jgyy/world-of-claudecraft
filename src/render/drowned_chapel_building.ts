@@ -14,9 +14,8 @@ import * as THREE from 'three';
 import {
   CHAPEL_DOOR_HALF_WIDTH,
   CHAPEL_DOOR_HEIGHT,
-  CHAPEL_FLOOR_HEIGHT,
-  CHAPEL_WINDOW_HALF_WIDTH,
-  CHAPEL_WINDOW_HEIGHT,
+  CHAPEL_GROUND_FLOOR_HEIGHT,
+  CHAPEL_WALL_THICK,
 } from '../sim/content/drowned_chapel';
 import {
   CHAPEL_FLOORS,
@@ -26,7 +25,6 @@ import {
   chapelBaseY,
   chapelFloorY,
   chapelVoxelDensity,
-  chapelWindowSpecs,
 } from '../sim/drowned_chapel_building';
 import type { Entity } from '../sim/types';
 import { meshVoxelChunk } from '../sim/voxel_mesh';
@@ -57,7 +55,7 @@ function projectShellUVs(
   const uv = new Float32Array((positions.length / 3) * 2);
   const groundIndices: number[] = [];
   const upperIndices: number[] = [];
-  const groundBandTop = baseY + CHAPEL_FLOOR_HEIGHT * 0.9;
+  const groundBandTop = baseY + CHAPEL_GROUND_FLOOR_HEIGHT * 0.9;
 
   for (let t = 0; t < indices.length; t += 3) {
     const i0 = indices[t];
@@ -159,11 +157,15 @@ function buildShellMesh(seed: number): THREE.Mesh | null {
   return shell;
 }
 
-// Timber-and-stone door surround plus plank-framed window insets in each
-// real carved opening (the sim carves only the opening itself).
-function buildDoorAndWindows(seed: number): THREE.Group {
+// Timber-and-stone door surround only. The carved windows are left as bare
+// open rectangular holes (open air), exactly as the sim carves them: no pane,
+// no plank frame. A ruined temple stands open to the marsh air, and glazing/
+// framing the openings both read as "kept" and (from certain interior camera
+// angles) let a filled pane fill the frame. The door keeps its surround
+// because it is a real timbered entrance, not an open window.
+function buildDoorSurround(seed: number): THREE.Group {
   const group = new THREE.Group();
-  group.name = 'chapel-door-windows';
+  group.name = 'chapel-door-surround';
   const baseY = chapelBaseY(seed);
   const plank = plankMaps();
   const frameMat = surfaceMat({
@@ -172,7 +174,6 @@ function buildDoorAndWindows(seed: number): THREE.Group {
     normalMap: plank.normalMap,
     roughness: 0.95,
   });
-  const paneMat = surfaceMat({ color: 0x1c1712, roughness: 0.7 });
 
   const postW = 0.28;
   const postH = CHAPEL_DOOR_HEIGHT + 0.3;
@@ -194,34 +195,6 @@ function buildDoorAndWindows(seed: number): THREE.Group {
   lintel.position.set(CHAPEL_POS.x, baseY + CHAPEL_DOOR_HEIGHT + 0.18, CHAPEL_POS.z + CHAPEL_HALF);
   lintel.castShadow = true;
   group.add(lintel);
-
-  const winW = CHAPEL_WINDOW_HALF_WIDTH * 2;
-  const winH = CHAPEL_WINDOW_HEIGHT;
-  for (const w of chapelWindowSpecs()) {
-    const y = baseY + w.ly;
-    const northSouth = w.wall === 'north' || w.wall === 'south';
-    const outSign = w.wall === 'north' || w.wall === 'east' ? 1 : -1;
-    const rotY = northSouth ? (w.wall === 'north' ? 0 : Math.PI) : outSign * (Math.PI / 2);
-
-    const pane = new THREE.Mesh(new THREE.PlaneGeometry(winW, winH), paneMat);
-    pane.rotation.y = rotY;
-    pane.position.set(w.x, y, w.z);
-    if (northSouth) pane.position.z += outSign * 0.06;
-    else pane.position.x += outSign * 0.06;
-    group.add(pane);
-
-    const frameW = winW + 0.2;
-    const frameH = winH + 0.2;
-    const frameGeo = northSouth
-      ? new THREE.BoxGeometry(frameW, frameH, 0.13)
-      : new THREE.BoxGeometry(0.13, frameH, frameW);
-    const frame = new THREE.Mesh(frameGeo, frameMat);
-    frame.position.set(w.x, y, w.z);
-    if (northSouth) frame.position.z += outSign * 0.02;
-    else frame.position.x += outSign * 0.02;
-    frame.castShadow = true;
-    group.add(frame);
-  }
   return group;
 }
 
@@ -239,9 +212,13 @@ function buildFloorCoverings(seed: number): THREE.Group {
     roughness: 0.94,
   });
 
+  // Sized to the INTERIOR clear span (footprint minus both wall thicknesses,
+  // less a small inset), so the covering never pokes out past the exterior
+  // walls into the surrounding grass.
+  const interiorSpan = CHAPEL_HALF * 2 - 2 * CHAPEL_WALL_THICK - 0.3;
   for (let floor = 1; floor <= CHAPEL_FLOORS; floor++) {
     const y = chapelFloorY(seed, floor) + 0.05;
-    const geo = new THREE.PlaneGeometry(CHAPEL_HALF * 2 - 0.4, CHAPEL_HALF * 2 - 0.4);
+    const geo = new THREE.PlaneGeometry(interiorSpan, interiorSpan);
     geo.rotateX(-Math.PI / 2);
     const slab = new THREE.Mesh(geo, stoneMat);
     slab.position.set(CHAPEL_POS.x, y, CHAPEL_POS.z);
@@ -273,6 +250,25 @@ function buildRuinedRoof(seed: number): THREE.Mesh {
   return roof;
 }
 
+// Modest interior fill lighting. The ruined temple stands under a low roof, so
+// the sanctum and upper floor read as dim caverns without a little help; these
+// soft, warm, shadowless point lights lift the interior to a readable level
+// (a moderate lift, not a blinding one), matching the brazier dressing inside.
+function buildInteriorLights(seed: number): THREE.Group {
+  const group = new THREE.Group();
+  group.name = 'chapel-interior-lights';
+  for (let floor = 1; floor <= CHAPEL_FLOORS; floor++) {
+    // Sit each light high in its story, just under the slab above.
+    const y = chapelFloorY(seed, floor) + CHAPEL_GROUND_FLOOR_HEIGHT * 0.55;
+    const light = new THREE.PointLight(0xffe0b0, 0.9, CHAPEL_HALF * 2.4, 1.6);
+    light.position.set(CHAPEL_POS.x, y, CHAPEL_POS.z);
+    light.castShadow = false;
+    light.name = `chapel-interior-light-${floor}`;
+    group.add(light);
+  }
+  return group;
+}
+
 export function buildChapelView(seed: number): ChapelView {
   const group = new THREE.Group();
   group.name = 'drowned-chapel';
@@ -280,8 +276,9 @@ export function buildChapelView(seed: number): ChapelView {
   const shell = buildShellMesh(seed);
   if (shell) group.add(shell);
   group.add(buildRuinedRoof(seed));
-  group.add(buildDoorAndWindows(seed));
+  group.add(buildDoorSurround(seed));
   group.add(buildFloorCoverings(seed));
+  group.add(buildInteriorLights(seed));
   const stairs = buildChapelStairs(seed);
   if (stairs) group.add(stairs);
 
