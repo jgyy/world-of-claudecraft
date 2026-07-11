@@ -66,6 +66,16 @@ function delegateWithReqId(
  * measured synchronously right after the call instead. Metric recording is
  * observability-only: it never touches req/res, so the delegate's response
  * bytes (and the parity harness) are unaffected.
+ *
+ * TODO(ops, needs Grafana/infra access): this fixes the in-repo undercounted
+ * denominator (previously ALL un-migrated /api traffic was invisible to
+ * http_requests_total), but a live "HTTP 5xx error rate" panel reportedly
+ * still showed spurious values up to 10000% even before this fix. That extra
+ * symptom points at the PANEL/QUERY side (e.g. a PromQL `* 100` combined with
+ * Grafana's `percent` unit auto-multiplying by 100 again), which lives on an
+ * external Grafana instance with no dashboard-as-code in this repository.
+ * Whoever has dashboard access should audit the 5xx-rate panel's unit/query
+ * once this fix has had time to widen the denominator, and drop this note.
  */
 function delegateWithMetrics(
   delegate: ApiDelegate,
