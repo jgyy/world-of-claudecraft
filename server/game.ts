@@ -2570,14 +2570,17 @@ export class GameServer {
     return this.tickHz == null ? null : round2(this.tickHz);
   }
 
-  // Per-phase loop timing (p95 + max, in MILLISECONDS) for the /metrics exporter,
-  // keyed by phase name. The exporter converts to seconds and surfaces only its
-  // fixed WOC_TICK_PHASES subset, so the exported label set stays bounded.
-  tickPhaseMillis(): Record<string, { p95: number; max: number }> {
+  // Per-phase loop timing (p95 + p99 + max, in MILLISECONDS) for the /metrics
+  // exporter, keyed by phase name. The exporter converts to seconds and surfaces
+  // only its fixed WOC_TICK_PHASES subset, so the exported label set stays
+  // bounded. TickProfiler.profile() already computes p99 for every phase; this
+  // used to drop it before it ever reached the exporter, so no p99 series (or a
+  // tail-latency dashboard panel built on one) could ever have data.
+  tickPhaseMillis(): Record<string, { p95: number; p99: number; max: number }> {
     const { phases } = this.tickProfiler.profile();
-    const out: Record<string, { p95: number; max: number }> = {};
+    const out: Record<string, { p95: number; p99: number; max: number }> = {};
     for (const [name, stats] of Object.entries(phases)) {
-      out[name] = { p95: stats.p95, max: stats.max };
+      out[name] = { p95: stats.p95, p99: stats.p99, max: stats.max };
     }
     return out;
   }

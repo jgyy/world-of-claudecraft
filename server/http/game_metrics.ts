@@ -14,10 +14,10 @@
 // boot with the sink this function returns), exactly like the attack-signal counters.
 //
 // CARDINALITY IS BOUNDED BY DESIGN, same contract as server/http/metrics.ts: the
-// only label values are the fixed tick-phase names, the two per-phase stats
-// (p95, max), and the two ws directions (in, out). Nothing per-player (account id,
+// only label values are the fixed tick-phase names, the three per-phase stats
+// (p95, p99, max), and the two ws directions (in, out). Nothing per-player (account id,
 // character id, name, ip) is ever a label. The tick-phase series count is fixed at
-// WOC_TICK_PHASES.length * 2, independent of the profiler's internal phase set.
+// WOC_TICK_PHASES.length * 3, independent of the profiler's internal phase set.
 
 import { Counter, Gauge, type Registry } from 'prom-client';
 import type { GameMetricsCounters, WsMessageDirection } from './game_signals';
@@ -37,7 +37,7 @@ export const WOC_SIM_ENTITIES = 'woc_sim_entities';
 /** Achieved sim ticks per wall-clock second (target is 20 Hz). */
 export const WOC_SIM_TICK_HZ = 'woc_sim_tick_hz';
 
-/** Per-phase authoritative-loop timing in SECONDS, labeled by phase and stat (p95/max). */
+/** Per-phase authoritative-loop timing in SECONDS, labeled by phase and stat (p95/p99/max). */
 export const WOC_SIM_TICK_PHASE_SECONDS = 'woc_sim_tick_phase_seconds';
 
 /** Total ws frames handled, labeled by direction (in/out). */
@@ -69,15 +69,16 @@ export const WOC_TICK_PHASES = [
   'social',
 ] as const;
 
-/** The two per-phase stats exposed for each phase. */
-const TICK_PHASE_STATS = ['p95', 'max'] as const;
+/** The three per-phase stats exposed for each phase. */
+const TICK_PHASE_STATS = ['p95', 'p99', 'max'] as const;
 
 /** Milliseconds per second, for the profiler's millisecond stats -> seconds conversion. */
 const MS_PER_SECOND = 1000;
 
-/** One phase's p95 and max, in MILLISECONDS (the unit GameServer's TickProfiler keeps). */
+/** One phase's p95, p99, and max, in MILLISECONDS (the unit GameServer's TickProfiler keeps). */
 export interface TickPhaseMillis {
   p95: number;
+  p99: number;
   max: number;
 }
 
@@ -97,7 +98,7 @@ export interface GameStateSource {
   simEntities(): number;
   /** Achieved sim Hz, or null while the rate meter is still warming up. */
   simTickHz(): number | null;
-  /** Per-phase p95/max in MILLISECONDS, keyed by phase name; missing phases are skipped. */
+  /** Per-phase p95/p99/max in MILLISECONDS, keyed by phase name; missing phases are skipped. */
   tickPhaseMillis(): Record<string, TickPhaseMillis>;
 }
 
@@ -166,7 +167,7 @@ export function registerGameStateMetrics(
 
   new Gauge({
     name: WOC_SIM_TICK_PHASE_SECONDS,
-    help: 'Per-phase authoritative-loop timing in seconds, by phase and stat (p95/max).',
+    help: 'Per-phase authoritative-loop timing in seconds, by phase and stat (p95/p99/max).',
     labelNames: ['phase', 'stat'],
     registers: [registry],
     collect() {

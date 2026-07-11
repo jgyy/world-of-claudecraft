@@ -4,7 +4,7 @@
 // the returned sink. These pin the exposed metric NAMES as literals (a rename fails
 // the test, not just a constant swap), prove the gauges reflect the source at scrape
 // time, that the per-phase timing converts milliseconds to seconds and is bounded to
-// the fixed WOC_TICK_PHASES x {p95,max} label set (an unknown phase never becomes a
+// the fixed WOC_TICK_PHASES x {p95,p99,max} label set (an unknown phase never becomes a
 // series), that the ws direction label is bounded to in/out, and that NO per-player
 // label (account/session/character/player/ip) ever appears.
 
@@ -107,11 +107,11 @@ describe('registerGameStateMetrics: gauges read the source at scrape time', () =
 
 describe('registerGameStateMetrics: woc_sim_tick_phase_seconds', () => {
   const phases: Record<string, TickPhaseMillis> = {
-    total: { p95: 3, max: 8 },
-    tick: { p95: 1.5, max: 4 },
+    total: { p95: 3, p99: 6, max: 8 },
+    tick: { p95: 1.5, p99: 2.5, max: 4 },
     // An unknown / detailed sub-phase the profiler may report: must be skipped so
     // the exported label set can never grow past WOC_TICK_PHASES.
-    'sim.market': { p95: 99, max: 200 },
+    'sim.market': { p95: 99, p99: 150, max: 200 },
   };
 
   it('converts milliseconds to seconds and labels by phase and stat', async () => {
@@ -122,28 +122,37 @@ describe('registerGameStateMetrics: woc_sim_tick_phase_seconds', () => {
     expect(WOC_SIM_TICK_PHASE_SECONDS).toBe('woc_sim_tick_phase_seconds');
     expect(text).toContain(`# TYPE ${WOC_SIM_TICK_PHASE_SECONDS} gauge`);
 
-    // 3 ms p95 -> 0.003 s, 8 ms max -> 0.008 s for the `total` phase.
+    // 3 ms p95 -> 0.003 s, 6 ms p99 -> 0.006 s, 8 ms max -> 0.008 s for the `total` phase.
     expect(
       sampleValue(text, /^woc_sim_tick_phase_seconds\{phase="total",stat="p95"\} (\S+)$/m),
     ).toBe('0.003');
+    expect(
+      sampleValue(text, /^woc_sim_tick_phase_seconds\{phase="total",stat="p99"\} (\S+)$/m),
+    ).toBe('0.006');
     expect(
       sampleValue(text, /^woc_sim_tick_phase_seconds\{phase="total",stat="max"\} (\S+)$/m),
     ).toBe('0.008');
     expect(
       sampleValue(text, /^woc_sim_tick_phase_seconds\{phase="tick",stat="p95"\} (\S+)$/m),
     ).toBe('0.0015');
+    // The p99 series is the whole point of this fix: TickProfiler already computed
+    // it (server/tick_profiler.ts), but tickPhaseMillis() used to drop it before it
+    // ever reached the exporter, so a "tail latency" panel could never have data.
+    expect(
+      sampleValue(text, /^woc_sim_tick_phase_seconds\{phase="tick",stat="p99"\} (\S+)$/m),
+    ).toBe('0.0025');
   });
 
-  it('keeps the label set bounded: only WOC_TICK_PHASES x {p95,max}, unknown phases skipped', async () => {
+  it('keeps the label set bounded: only WOC_TICK_PHASES x {p95,p99,max}, unknown phases skipped', async () => {
     const registry = new Registry();
     registerGameStateMetrics(registry, stubSource({ tickPhaseMillis: () => phases }));
     const text = await registry.metrics();
 
-    // Two known phases reported (total, tick) x two stats = four series; the unknown
+    // Two known phases reported (total, tick) x three stats = six series; the unknown
     // sim.market phase is dropped.
-    expect(tickPhaseSeries(text)).toHaveLength(4);
+    expect(tickPhaseSeries(text)).toHaveLength(6);
     expect(labelValues(text, 'phase')).toEqual(new Set(['total', 'tick']));
-    expect(labelValues(text, 'stat')).toEqual(new Set(['p95', 'max']));
+    expect(labelValues(text, 'stat')).toEqual(new Set(['p95', 'p99', 'max']));
 
     // Every exposed phase label is a member of the fixed set (bounded by construction).
     for (const phase of labelValues(text, 'phase')) {
@@ -188,7 +197,7 @@ describe('registerGameStateMetrics: throughput counters via the returned sink', 
     const registry = new Registry();
     const counters = registerGameStateMetrics(
       registry,
-      stubSource({ tickPhaseMillis: () => ({ total: { p95: 1, max: 2 } }) }),
+      stubSource({ tickPhaseMillis: () => ({ total: { p95: 1, p99: 1.5, max: 2 } }) }),
     );
     counters.wsMessage('in');
     counters.wsMessage('out');
