@@ -11,11 +11,9 @@ import type {
   NpcDef,
   PlayerClass,
   QuestDef,
-  RuinDecorKind,
   ZoneDef,
   ZonePropsDef,
 } from '../types';
-import { CHAPEL_HALF, CHAPEL_POS } from './drowned_chapel';
 
 export const DEEPFEN_SHALLOWS_LAKE = { x: -110, z: 310, radius: 35 };
 
@@ -2006,24 +2004,6 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
 // Static props (rendering + collision share this placement data)
 // ---------------------------------------------------------------------------
 
-// The ruin compound's outdoor courtyard floor: a 5x5 grid of the reused
-// KayKit dungeon floor_tile_large module (4-unit grid, ruinFloorTile in
-// props.ts), covering the flattened plateau around the Drowned Chapel
-// (center 100, 435). Tiles that fall INSIDE the chapel building's own
-// footprint are dropped: the building has its own real floor slabs
-// (sim/drowned_chapel_building.ts), so a courtyard flagstone tile there would
-// sit invisibly under the shell for no purpose.
-const RUIN_COMPOUND_FLOOR_TILES: { x: number; z: number; kind: RuinDecorKind }[] = [-8, -4, 0, 4, 8]
-  .flatMap((dx) => [-8, -4, 0, 4, 8].map((dz) => ({ dx, dz })))
-  .map(({ dx, dz }) => ({ x: 100 + dx, z: 435 + dz, kind: 'ruinFloorTile' as const }))
-  .filter((t) => {
-    const pad = -1.5;
-    return !(
-      Math.abs(t.x - CHAPEL_POS.x) <= CHAPEL_HALF + pad &&
-      Math.abs(t.z - CHAPEL_POS.z) <= CHAPEL_HALF + pad
-    );
-  });
-
 export const ZONE2_PROPS: ZonePropsDef = {
   buildings: [
     { kind: 'inn', x: 13, z: 306, w: 6, d: 7, rot: -1.0 },
@@ -2074,51 +2054,49 @@ export const ZONE2_PROPS: ZonePropsDef = {
   ],
   graveyards: [{ x: -18, z: 286 }],
   // weathered idol at the back (south) end of the ground-floor sanctum,
-  // facing the entrance so a visitor walking the processional axis meets
-  // its gaze. Inside the Drowned Chapel building footprint (see below).
-  statues: [{ x: 100, z: 430.3, rot: Math.PI }],
+  // facing the entrance so a visitor walking the processional axis meets its
+  // gaze. Inside the Drowned Chapel building footprint (center 100, 435,
+  // half-extent CHAPEL_HALF = 8, so the interior spans x in [92,108],
+  // z in [427,443]).
+  statues: [{ x: 100, z: 429, rot: Math.PI }],
   // The Drowned Chapel: a real 2-story voxel building (sim/content/
   // drowned_chapel.ts, sim/drowned_chapel_building.ts) at the ruin compound
   // (center 100, 435), replacing the old freestanding perimeter wall + the
   // 7-column ring before it. A real carved door (north wall, facing the
-  // archway/stairway approach), carved windows on every floor, one real
-  // staircase (floor-transition collision), and the outdoor courtyard
-  // flagstone floor around it (RUIN_COMPOUND_FLOOR_TILES, reused KayKit
-  // dungeon kit). The Tripo-generated furnishing decorates both the
-  // building and its surrounds: an archway-to-stairway-to-door approach,
-  // an altar-and-idol sanctum on the ground floor, braziers flanking the
-  // stairs inside, a toppled-obelisk colonnade flanking the outer approach
-  // and the sanctum's back wall, and peripheral village-adjacent satellite
-  // features outside (well, small graveyard, benches, rubble). Every anchor
-  // here is still purely cosmetic (no collision of its own; the building's
-  // real collision comes from sim/colliders.ts' chapelColliders).
+  // processional axis), open carved windows on every floor, one real
+  // staircase with railings (floor-transition collision), and real interior
+  // floor slabs.
+  //
+  // ALL of the Tripo-generated furnishing now sits INSIDE the building: the
+  // archway stands just inside the north door as the entrance frame, a
+  // sanctum of altar + idol + flanking colonnade fills the nave, braziers and
+  // a decorative stair prop flank the real staircase, and the smaller pieces
+  // (pedestal, urn, well, rubble, wall fragment, grave markers, benches) dress
+  // the ground-floor side aisles. Every anchor is purely cosmetic (no
+  // collision of its own; the building's real collision comes from
+  // sim/colliders.ts' chapelColliders), and every one is kept clear of the
+  // exterior walls, the door gap, and the staircase landing.
   ruinDecor: [
-    ...RUIN_COMPOUND_FLOOR_TILES,
-    // processional axis, entrance (north) up to the chapel door
-    { x: 100, z: 445, rot: Math.PI, kind: 'ruinArchway' },
-    { x: 101, z: 443, rot: 0, kind: 'ruinStairway' },
-    // ground-floor sanctum, back (south) end of the building
-    { x: 100, z: 433, rot: 0, kind: 'ruinAltar' },
-    // interior landing decor, either side of the real staircase up to floor 2
-    { x: 96, z: 434.5, rot: 0.5, kind: 'ruinPedestal' },
-    { x: 98, z: 430.5, rot: -0.5, kind: 'ruinUrn' },
-    // braziers flanking the stairs just inside the entrance
-    { x: 96.5, z: 438.5, rot: 0.3, kind: 'ruinBrazier' },
-    { x: 103, z: 434.5, rot: -0.3, kind: 'ruinBrazier' },
-    // toppled obelisk colonnade flanking the outer approach to the gate
-    { x: 96, z: 450, rot: 1.57, kind: 'ruinObelisk' },
-    { x: 104, z: 450, rot: 1.57, kind: 'ruinObelisk' },
-    // matching pair marking the sanctum's fallen back colonnade
-    { x: 96, z: 423, rot: 1.57, kind: 'ruinObelisk' },
-    { x: 104, z: 423, rot: 1.57, kind: 'ruinObelisk' },
-    // one fallen wall fragment among the satellite rubble outside the building
-    { x: 79, z: 439, rot: 0.6, kind: 'ruinWallFragment' },
-    // peripheral, village-adjacent satellite features, unchanged
-    { x: 82, z: 435, rot: 0.4, kind: 'ruinWell' },
-    { x: 120, z: 435, rot: -0.6, kind: 'ruinRubble' },
-    { x: 114, z: 422, rot: 0.2, kind: 'ruinGraveMarker' },
-    { x: 119, z: 426, rot: -0.4, kind: 'ruinGraveMarker' },
-    { x: 88, z: 452, rot: 0.3, kind: 'ruinBench' },
-    { x: 112, z: 452, rot: -0.3, kind: 'ruinBench' },
+    // entrance: the archway stands just inside the north door as its frame
+    { x: 100, z: 441.5, rot: Math.PI, kind: 'ruinArchway' },
+    // sanctum: altar at the nave's south end, in front of the idol statue
+    { x: 100, z: 431, rot: 0, kind: 'ruinAltar' },
+    // a toppled-obelisk colonnade flanking the nave inside the walls
+    { x: 95, z: 439, rot: 1.57, kind: 'ruinObelisk' },
+    { x: 105, z: 439, rot: 1.57, kind: 'ruinObelisk' },
+    // a decorative stair prop and braziers flanking the real staircase up
+    { x: 97.5, z: 433, rot: 0, kind: 'ruinStairway' },
+    { x: 94.5, z: 433, rot: 0.3, kind: 'ruinBrazier' },
+    { x: 98.5, z: 430, rot: -0.3, kind: 'ruinBrazier' },
+    // side-aisle dressing, all inside the ground-floor footprint
+    { x: 95, z: 435, rot: 0.5, kind: 'ruinPedestal' },
+    { x: 105, z: 436, rot: -0.5, kind: 'ruinUrn' },
+    { x: 95, z: 430, rot: 0.4, kind: 'ruinWell' },
+    { x: 104.5, z: 432.5, rot: -0.6, kind: 'ruinRubble' },
+    { x: 105, z: 430, rot: 0.6, kind: 'ruinWallFragment' },
+    { x: 103, z: 439, rot: 0.2, kind: 'ruinGraveMarker' },
+    { x: 96.5, z: 429.5, rot: -0.4, kind: 'ruinGraveMarker' },
+    { x: 94.5, z: 437, rot: 0.3, kind: 'ruinBench' },
+    { x: 105.5, z: 434, rot: -0.3, kind: 'ruinBench' },
   ],
 };
