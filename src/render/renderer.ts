@@ -5371,7 +5371,22 @@ export class Renderer {
       // Thread the active run's module chain so camera collision matches the
       // delve's actual (possibly Heroic/varied) layout, not just the default.
       const delveMods = this.sim.delveRun?.modules;
-      let hardT = cameraOcclusion(seed, px, eyeY, pz, cx, cy, cz, CAMERA_COLLIDER_PAD, delveMods);
+      // Thread the player's chapel floor so camera collision uses the chapel's
+      // per-floor wall/furnishing colliders when the player is inside it,
+      // pulling the camera off the far wall instead of letting it clip through.
+      const chapelFloor = p.chapelFloor;
+      let hardT = cameraOcclusion(
+        seed,
+        px,
+        eyeY,
+        pz,
+        cx,
+        cy,
+        cz,
+        CAMERA_COLLIDER_PAD,
+        delveMods,
+        chapelFloor,
+      );
       let softT = cameraOcclusion(
         seed,
         px,
@@ -5382,6 +5397,7 @@ export class Renderer {
         cz,
         CAMERA_SOFT_COLLIDER_PAD,
         delveMods,
+        chapelFloor,
       );
       const segLen = Math.hypot(cx - px, cy - eyeY, cz - pz);
       if (segLen > 1e-3) {

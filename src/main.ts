@@ -30,6 +30,7 @@ import { initDesktopShellIntegration } from './game/desktop_shell_integration';
 import { takeEditorPlaytestRequest } from './game/editor_playtest';
 import { GamepadManager } from './game/gamepad';
 import { GamepadBindings } from './game/gamepad_bindings';
+import { clampIndoorCamera } from './game/indoor_camera_clamp';
 import { Input } from './game/input';
 import { InputActivityMeter, installInputActivityTracking } from './game/input_activity';
 import {
@@ -2059,6 +2060,17 @@ async function startGame(
 
   let lastClickMoveMarkerPulse = -1;
   let clickMoveMarkerHideAt = 0;
+  // Tighten the camera zoom/pitch while the local player is inside the Drowned
+  // Chapel so an extreme zoom-out + look up/down cannot clip the camera through
+  // a floor slab and fill the frame with one geometry plane. Pure math lives in
+  // game/indoor_camera_clamp.ts; outdoors this is a strict no-op.
+  function applyIndoorCameraClamp(w: { player?: { chapelFloor?: number } }): void {
+    const indoors = (w.player?.chapelFloor ?? 0) > 0;
+    const clamped = clampIndoorCamera({ pitch: input.camPitch, dist: input.camDist }, indoors);
+    input.camPitch = clamped.pitch;
+    input.camDist = clamped.dist;
+  }
+
   function updateClickMoveMarker(nowMs = performance.now()): void {
     const pulseChanged = lastClickMoveMarkerPulse !== input.clickMovePulse;
     if (pulseChanged) {
@@ -2453,6 +2465,7 @@ async function startGame(
         },
       );
       introCameraTick(now);
+      applyIndoorCameraClamp(offlineSim);
       renderer.camYaw = input.camYaw;
       renderer.camPitch = input.camPitch;
       renderer.camDist = input.camDist;
@@ -2589,6 +2602,7 @@ async function startGame(
       lastSnapAge: net.lastSnapAt > 0 ? performance.now() - net.lastSnapAt : -1,
     });
     introCameraTick(now);
+    applyIndoorCameraClamp(world);
     renderer.camYaw = input.camYaw;
     renderer.camPitch = input.camPitch;
     renderer.camDist = input.camDist;
