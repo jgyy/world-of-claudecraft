@@ -374,7 +374,7 @@ describe('Input pointer lock', () => {
     expect(canvas.requestPointerLock).not.toHaveBeenCalled();
   });
 
-  it('uses normal mouse dragging instead of pointer lock while browser fullscreen is active', () => {
+  it('requests pointer lock while browser fullscreen is active', () => {
     const { canvas, canvasListeners, windowListeners } = makeInput();
     (globalThis as any).document.fullscreenElement =
       (globalThis as any).document.documentElement ?? canvas;
@@ -383,7 +383,7 @@ describe('Input pointer lock', () => {
     windowListeners.get('mousemove')!({ movementX: 19, movementY: 0 });
     windowListeners.get('mousemove')!({ movementX: 1, movementY: 0 });
 
-    expect(canvas.requestPointerLock).not.toHaveBeenCalled();
+    expect(canvas.requestPointerLock).toHaveBeenCalledTimes(1);
   });
 
   it('does not rotate the camera before the drag threshold, so short sloppy clicks stay stable', () => {
@@ -853,9 +853,17 @@ describe('Input modifier combos', () => {
     windowListeners.get('keydown')!({ code: 'Digit1', repeat: false }); // slot0 = Attack
     expect(cb.onAbilityDown).toHaveBeenLastCalledWith(0);
     cb.onAbilityDown.mockClear();
-    // Shift+1 is a distinct, unbound chord — it must NOT fire bare slot 0.
-    windowListeners.get('keydown')!({ code: 'Digit1', repeat: false, shiftKey: true });
+    // Alt+1 is a distinct, UNBOUND chord: it must NOT fall through to bare slot 0.
+    // (Shift+1 is the Secondary Bar 1 default and Ctrl+1 became the petAttack
+    // default, so neither exercises the unbound-chord invariant any more: Ctrl+1
+    // "passed" by dispatching onPet instead, which vacated this test.)
+    windowListeners.get('keydown')!({ code: 'Digit1', repeat: false, altKey: true });
     expect(cb.onAbilityDown).not.toHaveBeenCalled();
+    expect(cb.onPet).not.toHaveBeenCalled();
+    // The bound Ctrl+1 chord dispatches the PET action, never the bare slot.
+    windowListeners.get('keydown')!({ code: 'Digit1', repeat: false, ctrlKey: true });
+    expect(cb.onAbilityDown).not.toHaveBeenCalled();
+    expect(cb.onPet).toHaveBeenLastCalledWith('attack');
   });
 
   it('dispatches a slot bound to Shift+1 only on the Shift chord', () => {
