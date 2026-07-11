@@ -9,7 +9,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { CHAPEL_STAIRS } from '../sim/content/drowned_chapel';
 import { chapelFloorY } from '../sim/drowned_chapel_building';
 import { surfaceMat } from './gfx';
-import { stoneMaps } from './textures';
+import { plankMaps, stoneMaps } from './textures';
 
 const STEPS_PER_FLIGHT = 12;
 const STAIR_WIDTH = 1.8;
@@ -22,10 +22,12 @@ const BALUSTER_H = 1.0;
 const HANDRAIL_H = 0.14;
 const RAIL_SIDE_INSET = 0.12;
 
-/** Builds one merged mesh of every chapel staircase flight, including side
- * railings with balusters and a sloped handrail cap. */
-export function buildChapelStairs(seed: number): THREE.Mesh | null {
+/** Builds the chapel staircase: a merged stone-step mesh plus a separate,
+ * contrasting timber railing mesh (balusters plus a sloped handrail cap on
+ * each side) so the railings read clearly against the mossy stone steps. */
+export function buildChapelStairs(seed: number): THREE.Object3D | null {
   const boxes: THREE.BufferGeometry[] = [];
+  const railBoxes: THREE.BufferGeometry[] = [];
   for (const s of CHAPEL_STAIRS) {
     const lowerY = chapelFloorY(seed, s.fromFloor);
     const upperY = chapelFloorY(seed, s.toFloor);
@@ -54,7 +56,7 @@ export function buildChapelStairs(seed: number): THREE.Mesh | null {
           const bx = s.axis === 'z' ? x + side * sideOffset : x;
           const bz = s.axis === 'z' ? z : z + side * sideOffset;
           postGeo.translate(bx, treadTopY + BALUSTER_H / 2, bz);
-          boxes.push(postGeo);
+          railBoxes.push(postGeo);
         }
       }
     }
@@ -81,21 +83,35 @@ export function buildChapelStairs(seed: number): THREE.Mesh | null {
       const cx = s.axis === 'z' ? midX + side * (STAIR_WIDTH / 2 - RAIL_SIDE_INSET) : midX;
       const cz = s.axis === 'z' ? midZ : midZ + side * (STAIR_WIDTH / 2 - RAIL_SIDE_INSET);
       capGeo.translate(cx, midY, cz);
-      boxes.push(capGeo);
+      railBoxes.push(capGeo);
     }
   }
   if (!boxes.length) return null;
-  const merged = mergeGeometries(boxes, false) ?? boxes[0];
+
+  const group = new THREE.Group();
+  group.name = 'chapel-stairs';
+
   const stone = stoneMaps();
-  const mat = surfaceMat({
-    color: 0x7c7869,
-    map: stone.map,
-    normalMap: stone.normalMap,
-    roughness: 0.95,
-  });
-  const mesh = new THREE.Mesh(merged, mat);
-  mesh.castShadow = true;
-  mesh.receiveShadow = true;
-  mesh.name = 'chapel-stairs';
-  return mesh;
+  const stepMesh = new THREE.Mesh(
+    mergeGeometries(boxes, false) ?? boxes[0],
+    surfaceMat({ color: 0x7c7869, map: stone.map, normalMap: stone.normalMap, roughness: 0.95 }),
+  );
+  stepMesh.castShadow = true;
+  stepMesh.receiveShadow = true;
+  stepMesh.name = 'chapel-stairs-steps';
+  group.add(stepMesh);
+
+  if (railBoxes.length) {
+    const plank = plankMaps();
+    const railMesh = new THREE.Mesh(
+      mergeGeometries(railBoxes, false) ?? railBoxes[0],
+      // Dark timber, matching the door surround: high contrast against the
+      // pale mossy stone steps so the railings are clearly legible.
+      surfaceMat({ color: 0x4c3a26, map: plank.map, normalMap: plank.normalMap, roughness: 0.9 }),
+    );
+    railMesh.castShadow = true;
+    railMesh.name = 'chapel-stairs-railings';
+    group.add(railMesh);
+  }
+  return group;
 }
