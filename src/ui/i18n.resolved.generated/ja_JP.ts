@@ -308,7 +308,9 @@ export const ja_JP: EnTranslations = {
       "durationUnitDays": "日"
     },
     "character": {
-      "modelPreview": "キャラクターモデルプレビュー"
+      "modelPreview": "キャラクターモデルプレビュー",
+      "tabEquipment": "装備",
+      "tabOverview": "概要"
     },
     "skipLinks": {
       "mainHud": "メインHUDへスキップ",

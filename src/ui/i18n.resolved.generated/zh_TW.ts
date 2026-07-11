@@ -308,7 +308,9 @@ export const zh_TW: EnTranslations = {
       "durationUnitDays": "天"
     },
     "character": {
-      "modelPreview": "角色模型預覽"
+      "modelPreview": "角色模型預覽",
+      "tabEquipment": "裝備",
+      "tabOverview": "總覽"
     },
     "skipLinks": {
       "mainHud": "跳至主介面",

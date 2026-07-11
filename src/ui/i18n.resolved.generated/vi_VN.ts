@@ -308,7 +308,9 @@ export const vi_VN: EnTranslations = {
       "durationUnitDays": "ng"
     },
     "character": {
-      "modelPreview": "Xem Trước Mô Hình Nhân Vật"
+      "modelPreview": "Xem Trước Mô Hình Nhân Vật",
+      "tabEquipment": "Equipment",
+      "tabOverview": "Overview"
     },
     "skipLinks": {
       "mainHud": "Chuyển tới HUD Chính",

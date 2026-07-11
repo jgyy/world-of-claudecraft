@@ -235,6 +235,8 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.itemShare.linkHint': 'Shift + 点击可在聊天中链接该物品。',
   'hudChrome.unitFrame.partyGroup': '小队 {n}',
   'hudChrome.character.modelPreview': '角色模型预览',
+  'hudChrome.character.tabEquipment': '装备',
+  'hudChrome.character.tabOverview': '总览',
   'character.sortBy': '排序',
   'character.sortByLabel': '排序角色',
   'character.sortMenuLabel': '排序选项',

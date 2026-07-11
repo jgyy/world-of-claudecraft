@@ -250,6 +250,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.itemShare.linkHint': 'Shift + クリックでこのアイテムをチャットにリンクします。',
   'hudChrome.unitFrame.partyGroup': 'グループ {n}',
   'hudChrome.character.modelPreview': 'キャラクターモデルプレビュー',
+  'hudChrome.character.tabEquipment': '装備',
+  'hudChrome.character.tabOverview': '概要',
   'character.sortBy': '並べ替え',
   'character.sortByLabel': 'キャラクターを並べ替え',
   'character.sortMenuLabel': '並べ替えオプション',

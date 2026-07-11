@@ -585,7 +585,13 @@ describe('client HTML shell', () => {
     const cmBody = hudTs.slice(cmStart, hudTs.indexOf('\n  private ', cmStart + 1));
     expect(cmStart).toBeGreaterThan(-1);
     expect(cmBody).toContain("case 'char-window':");
-    expect(cmBody).toContain('this.charWindow.close();');
+    // char-window routes through the dock-aware closeChar() wrapper (undocks the
+    // bags companion), which itself calls the painter's close() for focus-return.
+    expect(cmBody).toContain('this.closeChar();');
+    const closeCharStart = hudTs.indexOf('private closeChar(');
+    const closeCharBody = hudTs.slice(closeCharStart, hudTs.indexOf('\n  }', closeCharStart));
+    expect(closeCharStart).toBeGreaterThan(-1);
+    expect(closeCharBody).toContain('this.charWindow.close();');
     // The sibling cold windows route the same way; lock the family so a future case is not
     // left on an inline hide that drops focus.
     expect(cmBody).toContain('this.socialWindow.close();');

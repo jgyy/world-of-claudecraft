@@ -2199,8 +2199,9 @@ export class Hud {
         this.socialWindow.close();
         break;
       case 'char-window':
-        // Route through the painter so focus returns to the opener (WCAG 2.2 AA).
-        this.charWindow.close();
+        // Route through the dock-aware closer (undocks the bags companion) so
+        // focus still returns to the opener (WCAG 2.2 AA).
+        this.closeChar();
         break;
       case 'trade-window':
         this.sim.tradeCancel();
@@ -11630,6 +11631,9 @@ export class Hud {
     if (document.body.classList.contains('mobile-touch') && this.bankWindow.isOpen) {
       document.body.classList.remove('bank-open');
     }
+    if (document.body.classList.contains('mobile-touch') && this.charWindow.isOpen) {
+      document.body.classList.remove('char-open');
+    }
   }
 
   toggleCalendar(): void {
@@ -11725,8 +11729,42 @@ export class Hud {
   // Character window
   // -------------------------------------------------------------------------
 
+  // The character sheet docks its bags companion alongside (the bank-open
+  // pattern): a body class drives the side-by-side desktop layout, and the bags
+  // window is force-opened so gear swaps have a visible source/target. Exclusive
+  // with the bank + vendor cluster (every hub keeps at most one #bags pairing).
   toggleChar(): void {
+    if (this.charWindow.isOpen) {
+      this.closeChar();
+      return;
+    }
+    if (this.vendorOpen) this.closeVendor();
+    if (this.openHeroicVendorNpcId !== null) this.closeHeroicVendor();
+    if (this.bankWindow.isOpen) this.closeBank();
+    document.body.classList.add('char-open');
     this.charWindow.toggle();
+    this.renderBags();
+    $('#bags').style.display = 'flex';
+  }
+
+  private closeChar(): void {
+    this.charWindow.close();
+    const closeMobileBags =
+      document.body.classList.contains('mobile-touch') && $('#bags').style.display !== 'none';
+    document.body.classList.remove('char-open');
+    if (closeMobileBags) {
+      // Mirror onBankClosed's teardown backstop: a discard/sell prompt may hold
+      // #bags inert (installPromptDialog) and this mobile path hides the grid
+      // without running the prompt's dismiss(), so clear inert AND remove the
+      // prompt node too.
+      dismissBagPrompts();
+      const bags = $('#bags');
+      bags.style.display = 'none';
+      bags.inert = false;
+      this.cancelPetFeed();
+    } else if ($('#bags').style.display !== 'none') {
+      this.renderBags();
+    }
   }
 
   private renderCharPreview(): void {

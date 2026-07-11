@@ -308,7 +308,9 @@ export const de_DE: EnTranslations = {
       "durationUnitDays": "T"
     },
     "character": {
-      "modelPreview": "Charaktermodell-Vorschau"
+      "modelPreview": "Charaktermodell-Vorschau",
+      "tabEquipment": "Equipment",
+      "tabOverview": "Overview"
     },
     "skipLinks": {
       "mainHud": "Zum Haupt-HUD springen",

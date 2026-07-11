@@ -308,7 +308,9 @@ export const sv_SE: EnTranslations = {
       "durationUnitDays": "d"
     },
     "character": {
-      "modelPreview": "Förhandsvisning av karaktärsmodell"
+      "modelPreview": "Förhandsvisning av karaktärsmodell",
+      "tabEquipment": "Equipment",
+      "tabOverview": "Overview"
     },
     "skipLinks": {
       "mainHud": "Hoppa till huvud-HUD",

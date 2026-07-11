@@ -9,25 +9,70 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "es_ES": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "fr_FR": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "fr_CA": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
+  "it_IT": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "de_DE": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
-  "pt_BR": [],
+  "pt_BR": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
   "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "cs_CZ": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "nl_NL": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "pl_PL": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "id_ID": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "tr_TR": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "sv_SE": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "vi_VN": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ],
+  "da_DK": [
+    "hudChrome.character.tabEquipment",
+    "hudChrome.character.tabOverview"
+  ]
 };

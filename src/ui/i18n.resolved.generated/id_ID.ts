@@ -308,7 +308,9 @@ export const id_ID: EnTranslations = {
       "durationUnitDays": "h"
     },
     "character": {
-      "modelPreview": "Pratinjau Model Karakter"
+      "modelPreview": "Pratinjau Model Karakter",
+      "tabEquipment": "Equipment",
+      "tabOverview": "Overview"
     },
     "skipLinks": {
       "mainHud": "Lewati ke HUD Utama",

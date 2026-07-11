@@ -308,7 +308,9 @@ export const nl_NL: EnTranslations = {
       "durationUnitDays": "d"
     },
     "character": {
-      "modelPreview": "Voorbeeld van Personagemodel"
+      "modelPreview": "Voorbeeld van Personagemodel",
+      "tabEquipment": "Equipment",
+      "tabOverview": "Overview"
     },
     "skipLinks": {
       "mainHud": "Ga naar hoofd-HUD",

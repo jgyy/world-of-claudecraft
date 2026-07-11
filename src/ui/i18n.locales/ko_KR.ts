@@ -244,6 +244,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.itemShare.linkHint': 'Shift + 클릭하면 이 아이템을 채팅에 연결합니다.',
   'hudChrome.unitFrame.partyGroup': '{n}번 그룹',
   'hudChrome.character.modelPreview': '캐릭터 모델 미리보기',
+  'hudChrome.character.tabEquipment': '장비',
+  'hudChrome.character.tabOverview': '개요',
   'character.sortBy': '정렬',
   'character.sortByLabel': '캐릭터 정렬',
   'character.sortMenuLabel': '정렬 옵션',

@@ -31,8 +31,11 @@ import { iconDataUrl, QUALITY_COLOR } from './icons';
 import type { PainterHostPresentation } from './painter_host';
 import { hydratePortraits, portraitChipHtml } from './portrait_chip';
 import type { StatId } from './stat_tooltip';
-import { renderWindowFrame, type WindowFrameParts } from './window_frame';
+import { applyActiveWindowTab, renderWindowFrame, type WindowFrameParts } from './window_frame';
 import type { WindowFrameDescriptor } from './window_frame_view';
+
+/** Which of the two character-sheet tabs the body currently paints. */
+export type CharTab = 'equipment' | 'overview';
 
 // Quality / empty-slot colors as CSS custom properties: the shared
 // QUALITY_COLOR map carries the per-quality hex, and these tokens cover the
@@ -143,20 +146,26 @@ const GATHERING_PROFESSION_LABEL_KEY: Record<
 const SHARE_GLYPH =
   '<svg class="pc-share-ico" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M18 16.1a3 3 0 0 0-2.3 1.1l-6.7-3.9a3 3 0 0 0 0-2.6l6.7-3.9A3 3 0 1 0 15 4l-6.7 3.9a3 3 0 1 0 0 8.2L15 20a3 3 0 1 0 3-3.9z"/></svg>';
 
-// The character sheet is a closable, footer-less frame: the paperdoll + stats
-// two-pane, the class identity strip, and the share row all render as sections of
-// one scrollable body. The title reuses the existing "Character" action label and
-// the close reuses the returnToGame key (no new i18n keys). The frame IS the dialog
-// (role + aria-labelledby on the inner mount), so the module no longer marks the
-// shared #char-window root as a dialog.
+// The character sheet is a closable, footer-less, tabbed frame: EQUIPMENT (the
+// paperdoll + stats two-pane and the class identity strip) and OVERVIEW (talents,
+// progression, gathering, and the share row) each own the one scrollable body,
+// mirroring the Vendor window's Browse/Sell/Buyback split (window_frame.ts). The
+// title reuses the existing "Character" action label and the close reuses the
+// returnToGame key. The frame IS the dialog (role + aria-labelledby on the inner
+// mount), so the module no longer marks the shared #char-window root as a dialog.
 const CHAR_FRAME: WindowFrameDescriptor = {
   id: 'char-window',
   titleKey: 'hud.keybinds.actions.char',
   closeLabelKey: 'hud.options.returnToGame',
+  tabs: [
+    { id: 'equipment', labelKey: 'hudChrome.character.tabEquipment' },
+    { id: 'overview', labelKey: 'hudChrome.character.tabOverview' },
+  ],
 };
 
 export class CharWindow {
   private openerFocus: HTMLElement | null = null;
+  private activeTab: CharTab = 'equipment';
 
   constructor(private readonly deps: CharWindowDeps) {}
 
@@ -166,14 +175,34 @@ export class CharWindow {
    * root stays a pristine `.window.panel`: the id-scoped viewport clamp, the
    * resize grip (window_resize.ts targets the root), and the mobile inset rules
    * keep matching it. An intact mounted frame (its body present) is the reuse
-   * marker; only the body repaints per render.
+   * marker; only the body repaints per render. The tab buttons are re-resolved
+   * on every call (cheap, and correct across a cold rebuild) so a tab click always
+   * has a live list to roving-tabindex against.
    */
   private ensureFrame(el: HTMLElement): WindowFrameParts {
     const mounted = el.querySelector<HTMLElement>(':scope > .window-frame');
     const body = mounted?.querySelector<HTMLElement>('.window-body');
-    if (mounted && body) return { root: mounted, body, footer: null, tabButtons: [] };
+    if (mounted && body) {
+      return {
+        root: mounted,
+        body,
+        footer: null,
+        tabButtons: Array.from(mounted.querySelectorAll<HTMLButtonElement>('[data-window-tab]')),
+      };
+    }
     const mount = document.createElement('div');
-    const parts = renderWindowFrame(mount, CHAR_FRAME, { onClose: () => this.close() });
+    const parts = renderWindowFrame(
+      mount,
+      CHAR_FRAME,
+      {
+        onClose: () => this.close(),
+        onTabChange: (tab) => {
+          this.activeTab = tab as CharTab;
+          this.render();
+        },
+      },
+      this.activeTab,
+    );
     el.replaceChildren(mount);
     return parts;
   }
@@ -189,6 +218,7 @@ export class CharWindow {
     }
     this.openerFocus = this.deps.captureFocus();
     this.deps.closeOthers();
+    this.activeTab = 'equipment'; // a fresh open always starts on Equipment
     this.render();
     this.deps.root().style.display = 'block';
   }
@@ -209,13 +239,53 @@ export class CharWindow {
   render(): void {
     const el = this.deps.root();
     const world = this.deps.world();
+    // The shared frame carries the dialog role + aria-labelledby (its "Character"
+    // title) plus the Equipment/Overview tab rail; the body repaints below. The
+    // close routes to this.close() via the frame's onClose, wired once when the
+    // frame is stamped cold.
+    const { root, body } = this.ensureFrame(el);
+    applyActiveWindowTab(
+      Array.from(root.querySelectorAll<HTMLButtonElement>('[data-window-tab]')),
+      body,
+      this.activeTab,
+    );
+    this.paintMoneyRow(root, world.copper);
+    body.innerHTML =
+      this.activeTab === 'equipment' ? this.equipmentHtml(world) : this.overviewHtml(world);
+    hydratePortraits(body);
+    body
+      .querySelector('[data-act="prestige"]')
+      ?.addEventListener('click', () => this.deps.openPrestige());
+    body.querySelector('[data-act="share-card"]')?.addEventListener('click', () => {
+      audio.click();
+      this.deps.openPlayerCard();
+    });
+
+    if (this.activeTab === 'equipment') {
+      const view = buildPaperdollView(world.equipment, ITEMS);
+      const leftCol = body.querySelector('#equip-col-left');
+      const rightCol = body.querySelector('#equip-col-right');
+      for (const cell of view.left) leftCol?.appendChild(this.buildSlotRow(cell));
+      for (const cell of view.right) rightCol?.appendChild(this.buildSlotRow(cell));
+
+      for (const cell of body.querySelectorAll<HTMLElement>('.char-stats [data-stat]')) {
+        const stat = cell.dataset.stat as StatId;
+        // Resolve the tooltip lazily, on show, so the breakdown reflects the
+        // player's current stats at the moment they hover, not at render time.
+        this.deps.attachTooltip(cell, () => this.deps.statTooltipHtml(stat));
+      }
+
+      this.deps.renderPreview();
+      this.deps.renderSkinPicker();
+    }
+  }
+
+  // The Equipment tab: the class identity strip, the paperdoll (equip columns +
+  // the 3D preview/skin-picker mounts), and the stat grid.
+  private equipmentHtml(world: IWorld): string {
     const p = world.player;
     const className = classDisplayName(world.cfg.playerClass);
     const level = formatNumber(p.level, { maximumFractionDigits: 0 });
-    // The shared frame carries the dialog role + aria-labelledby (its "Character"
-    // title); the body repaints below. The close routes to this.close() via the
-    // frame's onClose, wired once when the frame is stamped cold.
-    const { body } = this.ensureFrame(el);
     const archetypeTitle = archetypeTitleText(world.archetypeTitle);
     const hobbyCraft = hobbyCraftText(world.hobbyCraft);
     const hobbyRow =
@@ -235,35 +305,33 @@ export class CharWindow {
       <div class="equip-col equip-col-right" id="equip-col-right"></div>
     </div>`;
     html += `<div class="char-stats">${STAT_GRID.map((stat) => this.deps.statCellHtml(stat)).join('')}</div>`;
-    html += this.deps.talentSummaryHtml();
-    html += this.deps.progressionHtml(p.level);
+    return html;
+  }
+
+  // The Overview tab: talents, progression, gathering, and the player-card share row.
+  private overviewHtml(world: IWorld): string {
+    let html = this.deps.talentSummaryHtml();
+    html += this.deps.progressionHtml(world.player.level);
     html += this.gatheringHtml(world);
     html += `<div class="pc-share-row"><button type="button" class="btn pc-share-btn" data-act="share-card">${SHARE_GLYPH}<span>${esc(t('playerCard.shareButton'))}</span></button></div>`;
-    body.innerHTML = html;
-    hydratePortraits(body);
-    body
-      .querySelector('[data-act="prestige"]')
-      ?.addEventListener('click', () => this.deps.openPrestige());
-    body.querySelector('[data-act="share-card"]')?.addEventListener('click', () => {
-      audio.click();
-      this.deps.openPlayerCard();
-    });
+    return html;
+  }
 
-    const view = buildPaperdollView(world.equipment, ITEMS);
-    const leftCol = body.querySelector('#equip-col-left');
-    const rightCol = body.querySelector('#equip-col-right');
-    for (const cell of view.left) leftCol?.appendChild(this.buildSlotRow(cell));
-    for (const cell of view.right) rightCol?.appendChild(this.buildSlotRow(cell));
-
-    for (const cell of body.querySelectorAll<HTMLElement>('.char-stats [data-stat]')) {
-      const stat = cell.dataset.stat as StatId;
-      // Resolve the tooltip lazily, on show, so the breakdown reflects the
-      // player's current stats at the moment they hover, not at render time.
-      this.deps.attachTooltip(cell, () => this.deps.statTooltipHtml(stat));
+  // The gold/silver/copper balance shown in the titlebar (screenshot: top-right,
+  // beside the close control). Painted onto the frame root (not the tab-swapped
+  // body) so it survives a tab change without a redundant repaint; idempotent, so
+  // a cold stamp and every subsequent render share the one code path.
+  private paintMoneyRow(root: HTMLElement, copper: number): void {
+    const titlebar = root.querySelector<HTMLElement>('.window-titlebar');
+    if (!titlebar) return;
+    let money = titlebar.querySelector<HTMLElement>('.char-money-row');
+    if (!money) {
+      money = document.createElement('span');
+      money.className = 'char-money-row';
+      const close = titlebar.querySelector('.window-close');
+      titlebar.insertBefore(money, close);
     }
-
-    this.deps.renderPreview();
-    this.deps.renderSkinPicker();
+    money.innerHTML = this.deps.moneyHtml(copper);
   }
 
   // The "Gathering" section (issue 1124): one row per gathering profession, showing

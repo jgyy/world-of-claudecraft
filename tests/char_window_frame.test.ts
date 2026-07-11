@@ -133,13 +133,64 @@ describe('CharWindow: frame adoption', () => {
     expect(el.querySelectorAll('.window-titlebar').length).toBe(1);
   });
 
-  it('frames a pinned titlebar then a scrollable body (footer-less flex column)', () => {
+  it('frames a pinned titlebar, the Equipment/Overview tab rail, then a scrollable body (footer-less flex column)', () => {
     const el = charEl();
     new CharWindow(fakeDeps(el, fakeWorld())).render();
     const frame = el.querySelector<HTMLElement>(':scope > .window-frame');
     const order = Array.from(frame?.children ?? []).map((c) => (c as HTMLElement).className);
-    expect(order).toEqual(['window-titlebar', 'window-body']);
+    expect(order).toEqual(['window-titlebar', 'tab-rail', 'window-body']);
     expect(frame?.querySelectorAll('.window-body').length).toBe(1);
+  });
+
+  it('opens on the Equipment tab: paperdoll/stats render, talents/progression do not', () => {
+    const el = charEl();
+    new CharWindow(fakeDeps(el, fakeWorld())).render();
+    expect(el.querySelector('.paperdoll')).not.toBeNull();
+    expect(el.querySelector('.char-stats [data-stat]')).not.toBeNull();
+    expect(el.querySelector('.tal-summary')).toBeNull();
+    expect(el.querySelector('.pc-share-btn')).toBeNull();
+    const equipTab = el.querySelector<HTMLButtonElement>('[data-window-tab="equipment"]');
+    expect(equipTab?.getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('switching to the Overview tab swaps in talents/progression/gathering/share and hides the paperdoll', () => {
+    const el = charEl();
+    const win = new CharWindow(fakeDeps(el, fakeWorld()));
+    win.render();
+    const overviewTab = el.querySelector<HTMLButtonElement>('[data-window-tab="overview"]');
+    overviewTab?.click();
+    expect(el.querySelector('.paperdoll')).toBeNull();
+    expect(el.querySelector('.tal-summary')).not.toBeNull();
+    expect(el.querySelector('.cp-prog')).not.toBeNull();
+    expect(el.querySelector('.pc-share-btn')).not.toBeNull();
+    expect(overviewTab?.getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('a fresh open resets to the Equipment tab even after Overview was left active', () => {
+    const el = charEl();
+    const win = new CharWindow(fakeDeps(el, fakeWorld()));
+    win.render();
+    el.querySelector<HTMLButtonElement>('[data-window-tab="overview"]')?.click();
+    win.toggle(); // close
+    win.toggle(); // reopen
+    expect(el.querySelector('.paperdoll')).not.toBeNull();
+    expect(el.querySelector('[data-window-tab="equipment"]')?.getAttribute('aria-selected')).toBe(
+      'true',
+    );
+  });
+
+  it('paints the copper balance into the titlebar, before the close control, on every tab', () => {
+    const el = charEl();
+    const win = new CharWindow(fakeDeps(el, fakeWorld({ copper: 4205 })));
+    win.render();
+    const titlebar = el.querySelector<HTMLElement>('.window-titlebar');
+    const money = titlebar?.querySelector('.char-money-row');
+    expect(money?.textContent).toContain('4205');
+    const children = Array.from(titlebar?.children ?? []).map((c) => (c as HTMLElement).className);
+    expect(children.indexOf('char-money-row')).toBeGreaterThan(-1);
+    expect(children.indexOf('char-money-row')).toBeLessThan(children.indexOf('window-close'));
+    el.querySelector<HTMLButtonElement>('[data-window-tab="overview"]')?.click();
+    expect(el.querySelector('.window-titlebar .char-money-row')?.textContent).toContain('4205');
   });
 });
 

@@ -308,7 +308,9 @@ export const en_XA: EnTranslations = {
       "durationUnitDays": "[ð]"
     },
     "character": {
-      "modelPreview": "[Çĥáŕáçţéŕ Ɱóðéļ Þŕéʋíéŵ]"
+      "modelPreview": "[Çĥáŕáçţéŕ Ɱóðéļ Þŕéʋíéŵ]",
+      "tabEquipment": "[Éɋúíþɱéñţ]",
+      "tabOverview": "[Óʋéŕʋíéŵ]"
     },
     "skipLinks": {
       "mainHud": "[Šķíþ ţó Ɱáíñ ĤÚÐ]",

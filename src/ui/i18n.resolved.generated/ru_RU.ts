@@ -308,7 +308,9 @@ export const ru_RU: EnTranslations = {
       "durationUnitDays": "д"
     },
     "character": {
-      "modelPreview": "Предпросмотр модели персонажа"
+      "modelPreview": "Предпросмотр модели персонажа",
+      "tabEquipment": "Снаряжение",
+      "tabOverview": "Обзор"
     },
     "skipLinks": {
       "mainHud": "Перейти к основному интерфейсу",

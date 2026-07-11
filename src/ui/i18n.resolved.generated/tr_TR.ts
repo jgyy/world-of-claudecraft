@@ -308,7 +308,9 @@ export const tr_TR: EnTranslations = {
       "durationUnitDays": "g"
     },
     "character": {
-      "modelPreview": "Karakter Modeli Önizlemesi"
+      "modelPreview": "Karakter Modeli Önizlemesi",
+      "tabEquipment": "Equipment",
+      "tabOverview": "Overview"
     },
     "skipLinks": {
       "mainHud": "Ana Arayüze Atla",

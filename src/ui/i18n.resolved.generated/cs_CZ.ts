@@ -308,7 +308,9 @@ export const cs_CZ: EnTranslations = {
       "durationUnitDays": "d"
     },
     "character": {
-      "modelPreview": "Náhled modelu postavy"
+      "modelPreview": "Náhled modelu postavy",
+      "tabEquipment": "Equipment",
+      "tabOverview": "Overview"
     },
     "skipLinks": {
       "mainHud": "Přeskočit na hlavní HUD",

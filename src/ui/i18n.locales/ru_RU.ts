@@ -249,6 +249,8 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.itemShare.linkHint': 'Shift + клик, чтобы вставить ссылку на этот предмет в чат.',
   'hudChrome.unitFrame.partyGroup': 'Группа {n}',
   'hudChrome.character.modelPreview': 'Предпросмотр модели персонажа',
+  'hudChrome.character.tabEquipment': 'Снаряжение',
+  'hudChrome.character.tabOverview': 'Обзор',
   'character.sortBy': 'Сортировка',
   'character.sortByLabel': 'Сортировать персонажей',
   'character.sortMenuLabel': 'Параметры сортировки',

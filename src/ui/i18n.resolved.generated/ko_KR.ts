@@ -308,7 +308,9 @@ export const ko_KR: EnTranslations = {
       "durationUnitDays": "일"
     },
     "character": {
-      "modelPreview": "캐릭터 모델 미리보기"
+      "modelPreview": "캐릭터 모델 미리보기",
+      "tabEquipment": "장비",
+      "tabOverview": "개요"
     },
     "skipLinks": {
       "mainHud": "메인 HUD로 건너뛰기",

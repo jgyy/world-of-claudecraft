@@ -229,6 +229,12 @@ export const hudChromeStrings = {
   // pending; Title Case does not make it non-wordy.
   character: {
     modelPreview: 'Character Model Preview',
+    // The two character-sheet tabs (Equipment: paperdoll + stats; Overview:
+    // talents/progression/gathering summary). Wordy by M16 (each word carries a
+    // 4+ consecutive-lowercase run), so the same five non-Latin overlays below
+    // carry real fills.
+    tabEquipment: 'Equipment',
+    tabOverview: 'Overview',
   },
   // Skip links: the first focusable elements on both game entries, a keyboard /
   // screen-reader shortcut to the main HUD and the chat log (mirrors the src/guide

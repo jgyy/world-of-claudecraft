@@ -2626,6 +2626,13 @@
     z-index: 6;
     background: var(--panel-l1-bg);
   }
+  /* Character: the gold/silver/copper balance shown beside the close control
+     (screenshot parity), painted by char_window.ts onto the titlebar itself so it
+     survives an Equipment/Overview tab switch without a redundant repaint. */
+  #char-window .window-titlebar .char-money-row {
+    flex: none;
+    white-space: nowrap;
+  }
   /* Character: the class identity strip (portrait + name + subtitles) was the
      sticky .panel-title header; now the first body row under the frame titlebar. */
   #char-window .window-body > .char-identity {
@@ -3999,6 +4006,31 @@
     width: 320px;
     max-height: calc(var(--app-vh, 100vh) * 0.72 / var(--window-scale) - 24px);
     transform: translateX(var(--bank-dock-gap));
+  }
+
+  /* Desktop side-by-side docking: the character sheet sits left of centre, the bags
+     companion right of centre, mirroring the bank+bags pairing above. Scoped under
+     body.char-open so nothing else moves. #char-window keeps its own block-scroll
+     root height rule (the AAA frame section above); only its horizontal position
+     changes here. */
+  body.char-open {
+    --char-dock-gap: 8px;
+  }
+  body.char-open #char-window {
+    left: 50%;
+    top: calc(var(--app-vh, 100vh) * 0.075);
+    right: auto;
+    bottom: auto;
+    transform: translateX(calc(-100% - var(--char-dock-gap)));
+  }
+  body.char-open #bags {
+    left: 50%;
+    top: calc(var(--app-vh, 100vh) * 0.075);
+    right: auto;
+    bottom: auto;
+    width: 320px;
+    max-height: calc(var(--app-vh, 100vh) * 0.85 / var(--window-scale) - 24px);
+    transform: translateX(var(--char-dock-gap));
   }
 
   /* ---------- AAA window-frame adoption: master-detail windows (batch 2) ---------- */
