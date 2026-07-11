@@ -10,8 +10,8 @@
     "updateDoorTriggers exit portal -> leaveDungeon (~14620)",
     "updateInstances empty-reset -> freeInstance despawn + partyKey null (~14841/14816)"
   ],
-  "draws": 47,
-  "drawDigest": "08510889",
+  "draws": 39,
+  "drawDigest": "40bc3d04",
   "frames": [
     {
       "tick": 0,
@@ -31,7 +31,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 421,
-      "state": "02b124c9",
+      "state": "381412ae",
       "events": "c93030c3",
       "rng": {
         "draws": 39,
@@ -135,6 +135,7 @@
           "critChance": 0.06,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.06,
+          "fallStartY": 57.720018,
           "fiveSecondRule": 99.1,
           "hp": 50000,
           "id": 405,
@@ -149,6 +150,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 900,
+            "y": 57.720018,
             "z": -1252
           },
           "potionCooldownUntil": -1,
@@ -182,7 +184,7 @@
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
-          "fallStartY": -1.613579,
+          "fallStartY": -1.613553,
           "fiveSecondRule": 99.1,
           "hp": 50000,
           "id": 406,
@@ -838,11 +840,11 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 421,
-      "state": "9bbd9e36",
-      "events": "c84afa4b",
+      "state": "b548cf99",
+      "events": "10b8ceda",
       "rng": {
-        "draws": 47,
-        "digest": "08510889"
+        "draws": 39,
+        "digest": "40bc3d04"
       },
       "label": "left",
       "players": [
@@ -860,10 +862,7 @@
           "bank": {},
           "cls": "warrior",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 163124,
-            "deaths": 1
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "delveClears": {},
@@ -943,12 +942,13 @@
           "combatTimer": 99.2,
           "comboUntil": -1,
           "critChance": 0.06,
-          "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.06,
-          "fallStartY": -1.484002,
+          "fallStartY": -1.483947,
           "fiveSecondRule": 99.2,
+          "hp": 50000,
           "id": 405,
+          "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -960,7 +960,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 80,
-            "y": -1.484002,
+            "y": -1.483947,
             "z": 86
           },
           "potionCooldownUntil": -1,
@@ -1004,6 +1004,7 @@
           "maxHp": 50000,
           "maxResource": 195,
           "moveSpeed": 7,
+          "onGround": true,
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
@@ -1650,55 +1651,55 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 421,
-      "state": "a0bc6c23",
-      "events": "a21b62ff",
+      "state": "4e68d064",
+      "events": "741638a5",
       "rng": {
-        "draws": 47,
-        "digest": "08510889"
+        "draws": 39,
+        "digest": "40bc3d04"
       }
     },
     {
       "tick": 10,
       "time": 0.5,
       "nextId": 421,
-      "state": "e2c88c29",
+      "state": "c256a88e",
       "events": "741638a5",
       "rng": {
-        "draws": 47,
-        "digest": "08510889"
+        "draws": 39,
+        "digest": "40bc3d04"
       }
     },
     {
       "tick": 15,
       "time": 0.75,
       "nextId": 421,
-      "state": "be5a6093",
+      "state": "9a106704",
       "events": "741638a5",
       "rng": {
-        "draws": 47,
-        "digest": "08510889"
+        "draws": 39,
+        "digest": "40bc3d04"
       }
     },
     {
       "tick": 20,
       "time": 1,
       "nextId": 421,
-      "state": "3cab9ced",
+      "state": "b6c19a18",
       "events": "64b4e648",
       "rng": {
-        "draws": 47,
-        "digest": "08510889"
+        "draws": 39,
+        "digest": "40bc3d04"
       }
     },
     {
       "tick": 24,
       "time": 1.2,
       "nextId": 421,
-      "state": "6e605ffd",
+      "state": "adcb9448",
       "events": "741638a5",
       "rng": {
-        "draws": 47,
-        "digest": "08510889"
+        "draws": 39,
+        "digest": "40bc3d04"
       },
       "label": "reset",
       "players": [
@@ -1716,10 +1717,7 @@
           "bank": {},
           "cls": "warrior",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 163124,
-            "deaths": 1
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "delveClears": {},
@@ -1760,10 +1758,7 @@
           "bank": {},
           "cls": "mage",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 163124,
-            "deaths": 1
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "delveClears": {},
@@ -1802,12 +1797,13 @@
           "combatTimer": 100.2,
           "comboUntil": -1,
           "critChance": 0.06,
-          "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.06,
-          "fallStartY": -1.484002,
+          "fallStartY": -1.483947,
           "fiveSecondRule": 100.2,
+          "hp": 50000,
           "id": 405,
+          "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1819,7 +1815,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 80,
-            "y": -1.484002,
+            "y": -1.483947,
             "z": 86
           },
           "potionCooldownUntil": -1,
@@ -1851,11 +1847,11 @@
           "combatTimer": 100.2,
           "comboUntil": -1,
           "critChance": 0.056,
-          "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
-          "fallStartY": -1.484002,
+          "fallStartY": -1.483947,
           "fiveSecondRule": 100.2,
+          "hp": 50000,
           "id": 406,
           "kind": "player",
           "level": 1,
@@ -1868,7 +1864,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 80,
-            "y": -1.484002,
+            "y": -1.483947,
             "z": 86
           },
           "potionCooldownUntil": -1,
@@ -1901,11 +1897,11 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 421,
-      "state": "6e605ffd",
+      "state": "adcb9448",
       "events": "741638a5",
       "rng": {
-        "draws": 47,
-        "digest": "08510889"
+        "draws": 39,
+        "digest": "40bc3d04"
       },
       "label": "final",
       "players": [
@@ -1923,10 +1919,7 @@
           "bank": {},
           "cls": "warrior",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 163124,
-            "deaths": 1
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "delveClears": {},
@@ -1967,10 +1960,7 @@
           "bank": {},
           "cls": "mage",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 163124,
-            "deaths": 1
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "delveClears": {},
@@ -2009,12 +1999,13 @@
           "combatTimer": 100.2,
           "comboUntil": -1,
           "critChance": 0.06,
-          "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.06,
-          "fallStartY": -1.484002,
+          "fallStartY": -1.483947,
           "fiveSecondRule": 100.2,
+          "hp": 50000,
           "id": 405,
+          "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2026,7 +2017,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 80,
-            "y": -1.484002,
+            "y": -1.483947,
             "z": 86
           },
           "potionCooldownUntil": -1,
@@ -2058,11 +2049,11 @@
           "combatTimer": 100.2,
           "comboUntil": -1,
           "critChance": 0.056,
-          "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
-          "fallStartY": -1.484002,
+          "fallStartY": -1.483947,
           "fiveSecondRule": 100.2,
+          "hp": 50000,
           "id": 406,
           "kind": "player",
           "level": 1,
@@ -2075,7 +2066,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 80,
-            "y": -1.484002,
+            "y": -1.483947,
             "z": 86
           },
           "potionCooldownUntil": -1,

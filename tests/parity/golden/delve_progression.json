@@ -123,7 +123,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 427,
-      "state": "209c7679",
+      "state": "d4e932d7",
       "events": "5d953739",
       "rng": {
         "draws": 1,
@@ -134,7 +134,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 427,
-      "state": "c70675e7",
+      "state": "18967376",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -195,6 +195,7 @@
           "critChance": 0.063,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.063,
+          "fallStartY": 51.801931,
           "fiveSecondRule": 99.35,
           "hp": 50000,
           "id": 405,
@@ -209,6 +210,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 4800,
+            "y": 51.801931,
             "z": -1127
           },
           "potionCooldownUntil": -1,
@@ -240,7 +242,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 427,
-      "state": "4106decb",
+      "state": "5cb305aa",
       "events": "330a0171",
       "rng": {
         "draws": 3,
@@ -308,6 +310,7 @@
           "critChance": 0.063,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.063,
+          "fallStartY": 51.801931,
           "fiveSecondRule": 99.35,
           "hp": 338,
           "id": 405,
@@ -322,6 +325,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 4800,
+            "y": 51.801931,
             "z": -1127
           },
           "potionCooldownUntil": -1,
@@ -353,7 +357,7 @@
       "tick": 9,
       "time": 0.45,
       "nextId": 427,
-      "state": "a68f39b9",
+      "state": "438b96a6",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -421,6 +425,7 @@
           "critChance": 0.063,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.063,
+          "fallStartY": 51.801931,
           "fiveSecondRule": 99.45,
           "hp": 338,
           "id": 405,
@@ -435,6 +440,7 @@
           "petMode": "defensive",
           "pos": {
             "x": 4800,
+            "y": 51.801931,
             "z": -1127
           },
           "potionCooldownUntil": -1,
