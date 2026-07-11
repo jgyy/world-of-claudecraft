@@ -2051,31 +2051,47 @@ export const ZONE2_PROPS: ZonePropsDef = {
     { x1: -18, z1: 313, x2: -22, z2: 300 },
   ],
   graveyards: [{ x: -18, z: 286 }],
-  // weathered idol on the far (south) end of the ring's processional axis,
-  // facing back up the row toward the altar and archway
-  statues: [{ x: 100, z: 429, rot: Math.PI }],
-  // Tripo-generated decoration pass over the ruin ring (center 100, 435,
-  // radius 7), laid out as a deliberate N-S processional axis (archway,
-  // brazier, altar, statue, rubble) with mirrored flanking pairs either side
-  // (entrance urns/pedestal, altar grave marker/wall fragment, equator
-  // obelisk/stairway, outer corner well/bench), purely cosmetic, no collision.
+  // weathered idol at the back (south) end of the sanctum, facing the
+  // entrance so a visitor walking the processional axis meets its gaze
+  statues: [{ x: 100, z: 430, rot: Math.PI }],
+  // Tripo-generated decoration pass, built as an actual ruined temple
+  // compound around the existing column ring (center 100, 435, radius 7),
+  // not loose scatter: a broken perimeter wall (mirrored wall-fragment
+  // segments alternating with corner obelisk pylons, gapped for one
+  // entrance), an archway-to-altar-to-idol processional axis down the
+  // middle, mirrored flanking pairs either side of the axis, and peripheral
+  // village-adjacent features (well, small graveyard, benches, rubble)
+  // outside the wall, the way a real ruin accretes satellite structures.
+  // Several kinds repeat (obelisk x4, wall fragment x3, brazier x2, grave
+  // marker x2, bench x2) to build the wall and its symmetry; every anchor is
+  // still purely cosmetic, no collision.
   ruinDecor: [
-    // main axis, north (entrance) to south
-    { x: 100, z: 444, rot: Math.PI, kind: 'ruinArchway' },
-    { x: 100, z: 440, rot: 0, kind: 'ruinBrazier' },
+    // processional axis, entrance (north) to sanctum (south)
+    { x: 100, z: 445, rot: Math.PI, kind: 'ruinArchway' },
+    { x: 101, z: 443, rot: 0, kind: 'ruinStairway' },
     { x: 100, z: 435, rot: 0, kind: 'ruinAltar' },
-    { x: 100, z: 424, rot: 0.2, kind: 'ruinRubble' },
-    // entrance flanking pair (mirrored)
-    { x: 94, z: 441, rot: 0.5, kind: 'ruinPedestal' },
-    { x: 106, z: 441, rot: -0.5, kind: 'ruinUrn' },
-    // altar flanking pair (mirrored)
-    { x: 92, z: 432, rot: 0.3, kind: 'ruinGraveMarker' },
-    { x: 108, z: 432, rot: -0.3, kind: 'ruinWallFragment' },
-    // equator side pieces (mirrored)
-    { x: 90, z: 435, rot: 1.0, kind: 'ruinObelisk' },
-    { x: 110, z: 435, rot: -1.0, kind: 'ruinStairway' },
-    // outer corners (mirrored)
-    { x: 92, z: 428, rot: 0.7, kind: 'ruinWell' },
-    { x: 108, z: 428, rot: -0.7, kind: 'ruinBench' },
+    // entrance flanking pair, just inside the archway
+    { x: 95, z: 442, rot: 0.5, kind: 'ruinPedestal' },
+    { x: 105, z: 442, rot: -0.5, kind: 'ruinUrn' },
+    // sanctum flanking pair, eternal-flame braziers either side of the idol
+    { x: 94, z: 431, rot: 0.3, kind: 'ruinBrazier' },
+    { x: 106, z: 431, rot: -0.3, kind: 'ruinBrazier' },
+    // broken perimeter wall around the column ring, gapped at the entrance
+    // (north): wall-fragment segments on the cardinal sides, obelisk pylons
+    // marking the four corners
+    { x: 110, z: 435, rot: 1.57, kind: 'ruinWallFragment' },
+    { x: 100, z: 425, rot: 0, kind: 'ruinWallFragment' },
+    { x: 90, z: 435, rot: 1.57, kind: 'ruinWallFragment' },
+    { x: 107, z: 442, rot: 0.8, kind: 'ruinObelisk' },
+    { x: 107, z: 428, rot: -0.8, kind: 'ruinObelisk' },
+    { x: 93, z: 428, rot: 0.8, kind: 'ruinObelisk' },
+    { x: 93, z: 442, rot: -0.8, kind: 'ruinObelisk' },
+    // peripheral, village-adjacent satellite features outside the wall
+    { x: 85, z: 435, rot: 0.4, kind: 'ruinWell' },
+    { x: 116, z: 435, rot: -0.6, kind: 'ruinRubble' },
+    { x: 112, z: 424, rot: 0.2, kind: 'ruinGraveMarker' },
+    { x: 117, z: 428, rot: -0.4, kind: 'ruinGraveMarker' },
+    { x: 91, z: 448, rot: 0.3, kind: 'ruinBench' },
+    { x: 109, z: 448, rot: -0.3, kind: 'ruinBench' },
   ],
 };

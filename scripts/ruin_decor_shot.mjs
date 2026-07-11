@@ -14,25 +14,29 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 // camera position = player - (sin(yaw), cos(yaw)) * dist * cos(pitch), and the
 // camera looks back at the player, so yaw=0 frames whatever is north (+z) of
 // the player position, yaw=PI frames south (-z), etc (src/render/renderer.ts).
+// Layout: a walled temple compound around the existing column ring (center
+// 100, 435): archway entrance (north) -> stairway -> altar -> idol statue
+// (south), a broken perimeter wall with 4 corner obelisks, and peripheral
+// satellite features (well, graveyard, benches, rubble) outside the wall.
 const SHOTS = [
-  { name: 'ruin-ring-wide-overview', x: 100, z: 435, camYaw: 0.3, camDist: 20, camPitch: 0.6 },
+  { name: 'ruin-compound-wide-overview', x: 100, z: 435, camYaw: 0.3, camDist: 34, camPitch: 0.5 },
   {
-    name: 'ruin-ring-wide-opposite',
+    name: 'ruin-compound-wide-opposite',
     x: 100,
     z: 435,
     camYaw: Math.PI + 0.3,
-    camDist: 20,
-    camPitch: 0.6,
+    camDist: 34,
+    camPitch: 0.5,
   },
-  { name: 'ruin-archway-entrance', x: 100, z: 448, camYaw: 0, camDist: 8, camPitch: 0.2 },
-  { name: 'ruin-altar-closeup', x: 100, z: 428, camYaw: 0.4, camDist: 6, camPitch: 0.15 },
-  { name: 'ruin-statue-idol', x: 109, z: 421, camYaw: 0, camDist: 7, camPitch: 0.12 },
-  { name: 'ruin-stairway-obelisk', x: 90, z: 434, camYaw: -0.7, camDist: 9, camPitch: 0.25 },
-  { name: 'ruin-well-gravemarker', x: 110, z: 435, camYaw: 2.6, camDist: 8, camPitch: 0.2 },
-  { name: 'ruin-bench-pedestal', x: 106, z: 424, camYaw: -2.0, camDist: 7, camPitch: 0.18 },
-  { name: 'ruin-brazier-rubble', x: 90, z: 436, camYaw: 1.2, camDist: 8, camPitch: 0.2 },
-  { name: 'ruin-wallfragment-urn', x: 98, z: 424, camYaw: -0.3, camDist: 7, camPitch: 0.18 },
-  { name: 'ruin-ring-aerial', x: 100, z: 435, camYaw: 0.8, camDist: 30, camPitch: 1.1 },
+  { name: 'ruin-compound-aerial', x: 100, z: 435, camYaw: 0.5, camDist: 46, camPitch: 1.15 },
+  { name: 'ruin-archway-entrance', x: 100, z: 445, camYaw: 0.15, camDist: 10, camPitch: 0.2 },
+  { name: 'ruin-processional-axis', x: 100, z: 447, camYaw: 0.1, camDist: 22, camPitch: 0.3 },
+  { name: 'ruin-altar-idol', x: 100, z: 433, camYaw: 3.0, camDist: 10, camPitch: 0.18 },
+  { name: 'ruin-perimeter-wall-east', x: 110, z: 435, camYaw: 1.6, camDist: 10, camPitch: 0.2 },
+  { name: 'ruin-corner-obelisks', x: 100, z: 435, camYaw: 0.9, camDist: 16, camPitch: 0.4 },
+  { name: 'ruin-well-satellite', x: 90, z: 435, camYaw: 1.57, camDist: 10, camPitch: 0.2 },
+  { name: 'ruin-graveyard-satellite', x: 110, z: 428, camYaw: -1.3, camDist: 10, camPitch: 0.2 },
+  { name: 'ruin-bench-approach', x: 100, z: 448, camYaw: -0.6, camDist: 10, camPitch: 0.2 },
 ];
 
 const browser = await puppeteer.launch({
@@ -69,7 +73,7 @@ await page.evaluate(() => {
   skip?.click();
   const sim = window.__game.sim;
   for (const [id, e] of sim.entities) {
-    if (e.kind === 'mob' && Math.hypot(e.pos.x - 100, e.pos.z - 435) < 60) {
+    if (e.kind === 'mob' && Math.hypot(e.pos.x - 100, e.pos.z - 435) < 75) {
       sim.entities.delete(id);
     }
   }
