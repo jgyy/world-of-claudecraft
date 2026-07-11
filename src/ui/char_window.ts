@@ -6,12 +6,18 @@
 // unequip / drag / tooltip affordances. It owns no Sim reference and reaches into
 // Hud only through its deps.
 //
-// Two regions stay HUD concerns and are triggered here through callbacks, never
+// Three regions stay HUD concerns and are triggered here through callbacks, never
 // built in this module: the shared 3D turntable preview (the single WebGL preview
 // is borrowed by the skin-event overlay and the player card, so its lifecycle
-// stays HUD-owned) and the cosmetic skin picker (its async mech-asset loading +
-// preview remounts live with the preview). The pure core stays paperdoll-only; no
-// 3D types or RNG cross into it.
+// stays HUD-owned), the cosmetic skin picker (its async mech-asset loading +
+// preview remounts live with the preview), and, on mobile only, the Bags companion
+// dock (#char-bags-dock): the character sheet already goes full-screen on
+// mobile-touch (issue 1577), so unlike the desktop side-by-side dock (CSS-only,
+// see components.css body.char-open) mobile reparents the LIVE #bags element
+// into this in-body container so it never stacks a second full-screen window on
+// top of the sheet. bags_window.ts owns no state tied to its DOM location, so the
+// reparent is a pure move; the HUD undoes it back to <body> when the sheet closes.
+// The pure core stays paperdoll-only; no 3D types or RNG cross into it.
 //
 // Colors live in the extracted stylesheet: item-quality tint comes
 // from the shared QUALITY_COLOR map and the empty-slot greys are CSS tokens, so no
@@ -129,6 +135,9 @@ export interface CharWindowDeps extends PainterHostPresentation {
   renderPreview(): void;
   /** Paint the cosmetic skin picker into the skin row (HUD-owned cosmetics). */
   renderSkinPicker(): void;
+  /** Mobile-only: reparent the live #bags element into #char-bags-dock and
+   *  repaint it (no-op on desktop, where bags dock beside the sheet via CSS). */
+  renderMobileBagsDock(): void;
   openPlayerCard(): void;
   openPrestige(): void;
 }
@@ -250,6 +259,17 @@ export class CharWindow {
       this.activeTab,
     );
     this.paintMoneyRow(root, world.copper);
+    // The mobile bags dock (see the top-of-file note) reparents the LIVE #bags
+    // element into #char-bags-dock, a descendant of this body; rescue it back to
+    // <body> BEFORE the innerHTML rebuild below, or the rebuild would destroy it
+    // (a switch to Overview, or any repaint while docked, must not eat the window).
+    const dockedBags = body.querySelector<HTMLElement>('#char-bags-dock > #bags');
+    if (dockedBags) {
+      document.body.appendChild(dockedBags);
+      // Hidden by default once rescued; renderMobileBagsDock() below re-shows it
+      // only when the Equipment tab is (still) the one being rendered.
+      dockedBags.style.display = 'none';
+    }
     body.innerHTML =
       this.activeTab === 'equipment' ? this.equipmentHtml(world) : this.overviewHtml(world);
     hydratePortraits(body);
@@ -277,6 +297,7 @@ export class CharWindow {
 
       this.deps.renderPreview();
       this.deps.renderSkinPicker();
+      this.deps.renderMobileBagsDock();
     }
   }
 
@@ -303,6 +324,7 @@ export class CharWindow {
         <div id="char-skin-row" class="skin-row char-skin-row" role="list" aria-label="${esc(t('auth.appearance'))}"></div>
       </div>
       <div class="equip-col equip-col-right" id="equip-col-right"></div>
+      <div class="char-bags-dock" id="char-bags-dock"></div>
     </div>`;
     html += `<div class="char-stats">${STAT_GRID.map((stat) => this.deps.statCellHtml(stat)).join('')}</div>`;
     return html;

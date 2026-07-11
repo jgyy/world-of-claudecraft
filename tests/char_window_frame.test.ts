@@ -79,6 +79,7 @@ function fakeDeps(
     endUnequipDrag: () => {},
     renderPreview: () => {},
     renderSkinPicker: () => {},
+    renderMobileBagsDock: () => {},
     openPlayerCard: () => {},
     openPrestige: () => {},
     ...overrides,

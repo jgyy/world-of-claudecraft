@@ -2761,6 +2761,47 @@
     min-width: 0;
     max-width: 100%;
     box-sizing: border-box;
+    /* The mobile Bags dock (below) can push this row past a narrow phone's
+       width; let it wrap to a second line rather than squeeze unreadably (the
+       stat grid already accepts vertical growth on touch, same principle). */
+    flex-wrap: wrap;
+  }
+  /* Character mobile-only Bags companion (char_window.ts renderMobileBagsDock):
+     the sheet is itself a full-screen mobile overlay (issue 1577), so instead
+     of the desktop CSS-only side-by-side dock (body.char-open, components.css)
+     the live #bags element is reparented into this in-body container so a
+     second full-screen window never stacks on top of the sheet. Hidden and
+     empty on desktop, where the container never receives #bags. */
+  .char-bags-dock {
+    display: none;
+  }
+  body.mobile-touch #char-window .char-bags-dock {
+    display: flex;
+    flex: 1 1 260px;
+    min-width: 240px;
+    min-height: 240px;
+    max-height: 60vh;
+  }
+  /* Neutralize #bags's own unconditional full-screen mobile rule above now that
+     it lives inside the sheet instead of floating at the body level: a plain
+     flex-column panel filling this dock cell. Two ids outweigh the generic
+     body.mobile-touch #bags rule's one id, so this wins regardless of source
+     order if the rules above are ever reordered. */
+  body.mobile-touch #char-window .char-bags-dock #bags {
+    position: static;
+    inset: auto;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    transform: none;
+    z-index: auto;
+    box-sizing: border-box;
+  }
+  body.mobile-touch #char-window .char-bags-dock #bags > .window-frame {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   body.mobile-touch #char-window .char-model-panel {
     min-width: 0;
@@ -2797,6 +2838,17 @@
   /* Narrow the flanking equip columns so both fit beside the model on a phone. */
   body.mobile-touch .equip-col {
     width: 108px;
+  }
+  /* Icon-rail equip slots on mobile: the name/item text a desktop-width column
+     affords does not fit a phone-width rail, so show icon-only squares (the
+     unequip x, drag, tooltip, and right-click-to-unequip affordances are all on
+     the row itself and stay exactly as they are). */
+  body.mobile-touch #char-window .equip-slot {
+    justify-content: center;
+  }
+  body.mobile-touch #char-window .equip-slot .slot-name,
+  body.mobile-touch #char-window .equip-slot .slot-item {
+    display: none;
   }
   body.mobile-touch .equip-slot .slot-name {
     font-size: 9px;

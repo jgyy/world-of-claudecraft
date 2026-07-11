@@ -3747,6 +3747,7 @@ export class Hud {
     },
     renderPreview: () => this.renderCharPreview(),
     renderSkinPicker: () => this.renderCharSkinPicker(),
+    renderMobileBagsDock: () => this.renderCharMobileBagsDock(),
     openPlayerCard: () => {
       void this.openPlayerCard();
     },
@@ -11730,12 +11731,21 @@ export class Hud {
   // -------------------------------------------------------------------------
 
   // The character sheet docks its bags companion alongside (the bank-open
-  // pattern): a body class drives the side-by-side desktop layout, and the bags
-  // window is force-opened so gear swaps have a visible source/target. Exclusive
-  // with the bank + vendor cluster (every hub keeps at most one #bags pairing).
+  // pattern) on DESKTOP ONLY: a body class drives the side-by-side layout, and
+  // the bags window is force-opened so gear swaps have a visible source/target.
+  // Exclusive with the bank + vendor cluster (every hub keeps at most one #bags
+  // pairing). On mobile-touch the character sheet is a deliberate full-screen
+  // overlay (issue 1577 round 2) with no room for a side-by-side companion, and
+  // #bags carries its own unconditional full-screen mobile rule (hud.mobile.css)
+  // that would otherwise stack on top of it, so mobile skips the dock entirely
+  // and behaves exactly as before this feature (bags stays independently toggled).
   toggleChar(): void {
     if (this.charWindow.isOpen) {
       this.closeChar();
+      return;
+    }
+    if (document.body.classList.contains('mobile-touch')) {
+      this.charWindow.toggle();
       return;
     }
     if (this.vendorOpen) this.closeVendor();
@@ -11749,6 +11759,17 @@ export class Hud {
 
   private closeChar(): void {
     this.charWindow.close();
+    // Mobile: the character sheet may hold the live #bags element nested inside
+    // its own DOM (renderMobileBagsDock, char_window.ts); rescue it back to
+    // <body> so it stays reachable and controllable by every other flow
+    // (vendor/bank docking, the toolbar toggle) once the now-hidden sheet stops
+    // being its ancestor. No-op on desktop, where #bags is never nested.
+    const dockedBags = document.querySelector<HTMLElement>('#char-bags-dock > #bags');
+    if (dockedBags) {
+      document.body.appendChild(dockedBags);
+      dockedBags.style.display = 'none';
+    }
+    if (!document.body.classList.contains('char-open')) return; // never docked (desktop-only)
     const closeMobileBags =
       document.body.classList.contains('mobile-touch') && $('#bags').style.display !== 'none';
     document.body.classList.remove('char-open');
@@ -11765,6 +11786,25 @@ export class Hud {
     } else if ($('#bags').style.display !== 'none') {
       this.renderBags();
     }
+  }
+
+  // Mobile-only companion for the character sheet's Equipment tab: the sheet is
+  // a deliberate full-screen overlay on mobile-touch (issue 1577), so instead of
+  // the desktop CSS-only side-by-side dock (body.char-open, components.css) this
+  // reparents the LIVE #bags element into the sheet's own #char-bags-dock
+  // container and repaints it, exactly like the desktop dock force-opens it.
+  // No-op on desktop: #char-bags-dock stays empty and hidden there (CSS).
+  private renderCharMobileBagsDock(): void {
+    if (!document.body.classList.contains('mobile-touch')) return;
+    const dock = $('#char-window').querySelector<HTMLElement>('#char-bags-dock');
+    const bags = $('#bags');
+    if (!dock || dock.contains(bags)) {
+      if (dock) bags.style.display = 'flex';
+    } else {
+      dock.appendChild(bags);
+      bags.style.display = 'flex';
+    }
+    this.renderBags();
   }
 
   private renderCharPreview(): void {
