@@ -154,6 +154,12 @@ export const nl_NL: EnTranslations = {
     "spectate": {
       "banner": "Toeschouwer bij {name}"
     },
+    "readyCheck": {
+      "prompt": "{name} has started a ready check. Are you ready?",
+      "ready": "Ready",
+      "notReady": "Not Ready",
+      "result": "Ready check: {ready} ready, {notReady} not ready, {noResponse} no response."
+    },
     "death": {
       "resurrectAtCorpse": "Herrijs bij je lijk",
       "resurrectAtHealer": "De Bleke Hoeder (Tol van de Hoeder)",
@@ -306,7 +312,6 @@ export const nl_NL: EnTranslations = {
       "chat": "Ga naar chat"
     },
     "mobile": {
-      "autorun": "Autoloop",
       "jump": "Springen",
       "leaderboard": "Ranglijst",
       "dailyRewards": "Beloningen",
@@ -397,7 +402,13 @@ export const nl_NL: EnTranslations = {
       "targetFriendly": "Dichtstbijzijnde Bondgenoot Aanwijzen",
       "targetFriendlyNext": "Door Bondgenoten Bladeren",
       "discord": "Discord",
-      "valecup": "Dalbeker"
+      "valecup": "Dalbeker",
+      "categoryPet": "Pet",
+      "petAttack": "Pet: Attack",
+      "petStop": "Pet: Stop",
+      "petTaunt": "Pet: Taunt",
+      "petDefensive": "Pet: Defensive",
+      "petAggressive": "Pet: Aggressive"
     },
     "vcup": {
       "title": "De Dalbeker",
@@ -1068,6 +1079,26 @@ export const nl_NL: EnTranslations = {
     },
     "worldBoss": {
       "spawn": "{name} verrijst boven Doorntop-Hoogten!"
+    },
+    "auth": {
+      "appleLoginCta": "Continue with Apple",
+      "appleError": "Could not sign in with Apple. Please try again.",
+      "appleChoiceIntro": "Create a new account, or link Apple to one you already have.",
+      "appleChoiceExpired": "That Apple sign-in expired. Please sign in with Apple again.",
+      "forgotPrompt": "Wachtwoord vergeten?",
+      "forgotTitle": "Wachtwoord opnieuw instellen",
+      "forgotHint": "Voer je gebruikersnaam in en we sturen een herstellink naar het geregistreerde e-mailadres.",
+      "forgotUsername": "Gebruikersnaam",
+      "forgotSubmit": "Herstellink versturen",
+      "forgotSent": "Als een account met die gebruikersnaam een e-mailadres heeft, hebben we een herstellink gestuurd. Controleer je inbox.",
+      "forgotBack": "Terug naar inloggen",
+      "resetTitle": "Kies een nieuw wachtwoord",
+      "resetNewPassword": "Nieuw wachtwoord",
+      "resetConfirm": "Bevestig nieuw wachtwoord",
+      "resetSubmit": "Wachtwoord bijwerken",
+      "resetDone": "Je wachtwoord is bijgewerkt. Je kunt nu inloggen.",
+      "resetMismatch": "De wachtwoorden komen niet overeen.",
+      "resetErrInvalid": "Deze herstellink is ongeldig of verlopen. Vraag een nieuwe aan."
     },
     "loot": {
       "chestTitle": "Kist"
@@ -5857,6 +5888,15 @@ export const nl_NL: EnTranslations = {
       },
       "linen_scrap": {
         "name": "Linnen Lap"
+      },
+      "arcane_dust": {
+        "name": "Arcaan stof"
+      },
+      "arcane_essence": {
+        "name": "Arcane essentie"
+      },
+      "arcane_shard": {
+        "name": "Arcane scherf"
       },
       "fen_muster_order": {
         "name": "Veenbrug-Mobilisatiebevel"

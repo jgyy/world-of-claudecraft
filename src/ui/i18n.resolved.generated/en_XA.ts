@@ -154,6 +154,12 @@ export const en_XA: EnTranslations = {
     "spectate": {
       "banner": "[Šþéçţáţíñĝ {name}]"
     },
+    "readyCheck": {
+      "prompt": "[{name} ĥáš šţáŕţéð á ŕéáðý çĥéçķ. Áŕé ýóú ŕéáðý?]",
+      "ready": "[Ŕéáðý]",
+      "notReady": "[Ñóţ Ŕéáðý]",
+      "result": "[Ŕéáðý çĥéçķ: {ready} ŕéáðý, {notReady} ñóţ ŕéáðý, {noResponse} ñó ŕéšþóñšé.]"
+    },
     "death": {
       "resurrectAtCorpse": "[Ŕéšúŕŕéçţ áţ Çóŕþšé]",
       "resurrectAtHealer": "[Ţĥé Þáļé Ķééþéŕ (Ķééþéŕ'š Ţóļļ)]",
@@ -306,7 +312,6 @@ export const en_XA: EnTranslations = {
       "chat": "[Šķíþ ţó Çĥáţ]"
     },
     "mobile": {
-      "autorun": "[Áúţó]",
       "jump": "[Ĵúɱþ]",
       "leaderboard": "[Ŕáñķš]",
       "dailyRewards": "[Ŕéŵáŕðš]",
@@ -397,7 +402,13 @@ export const en_XA: EnTranslations = {
       "targetFriendly": "[Ţáŕĝéţ Ñéáŕéšţ Ƒŕíéñðļý]",
       "targetFriendlyNext": "[Çýçļé Ƒŕíéñðļý Ţáŕĝéţ]",
       "discord": "[Ðíšçóŕð]",
-      "valecup": "[Ʋáļé Çúþ]"
+      "valecup": "[Ʋáļé Çúþ]",
+      "categoryPet": "[Þéţ]",
+      "petAttack": "[Þéţ: Áţţáçķ]",
+      "petStop": "[Þéţ: Šţóþ]",
+      "petTaunt": "[Þéţ: Ţáúñţ]",
+      "petDefensive": "[Þéţ: Ðéƒéñšíʋé]",
+      "petAggressive": "[Þéţ: Áĝĝŕéššíʋé]"
     },
     "vcup": {
       "title": "[Ţĥé Ʋáļé Çúþ]",
@@ -1068,6 +1079,26 @@ export const en_XA: EnTranslations = {
     },
     "worldBoss": {
       "spawn": "[{name} ŕíšéš óʋéŕ Ţĥóŕñþéáķ Ĥéíĝĥţš!]"
+    },
+    "auth": {
+      "appleLoginCta": "[Çóñţíñúé ŵíţĥ Áþþļé]",
+      "appleError": "[Çóúļð ñóţ šíĝñ íñ ŵíţĥ Áþþļé. Þļéášé ţŕý áĝáíñ.]",
+      "appleChoiceIntro": "[Çŕéáţé á ñéŵ áççóúñţ, óŕ ļíñķ Áþþļé ţó óñé ýóú áļŕéáðý ĥáʋé.]",
+      "appleChoiceExpired": "[Ţĥáţ Áþþļé šíĝñ-íñ éẋþíŕéð. Þļéášé šíĝñ íñ ŵíţĥ Áþþļé áĝáíñ.]",
+      "forgotPrompt": "[Ƒóŕĝóţ þáššŵóŕð?]",
+      "forgotTitle": "[Ŕéšéţ ýóúŕ þáššŵóŕð]",
+      "forgotHint": "[Éñţéŕ ýóúŕ úšéŕñáɱé áñð ŵé ŵíļļ éɱáíļ á ŕéšéţ ļíñķ ţó ţĥé áððŕéšš óñ ƒíļé.]",
+      "forgotUsername": "[Úšéŕñáɱé]",
+      "forgotSubmit": "[Šéñð ŕéšéţ ļíñķ]",
+      "forgotSent": "[Íƒ áñ áççóúñţ ŵíţĥ ţĥáţ úšéŕñáɱé ĥáš áñ éɱáíļ óñ ƒíļé, ŵé ĥáʋé šéñţ á ŕéšéţ ļíñķ. Çĥéçķ ýóúŕ íñƀóẋ.]",
+      "forgotBack": "[Ɓáçķ ţó ļóĝ íñ]",
+      "resetTitle": "[Çĥóóšé á ñéŵ þáššŵóŕð]",
+      "resetNewPassword": "[Ñéŵ þáššŵóŕð]",
+      "resetConfirm": "[Çóñƒíŕɱ ñéŵ þáššŵóŕð]",
+      "resetSubmit": "[Úþðáţé þáššŵóŕð]",
+      "resetDone": "[Ýóúŕ þáššŵóŕð ĥáš ƀééñ úþðáţéð. Ýóú çáñ ñóŵ ļóĝ íñ.]",
+      "resetMismatch": "[Ţĥé þáššŵóŕðš ðó ñóţ ɱáţçĥ.]",
+      "resetErrInvalid": "[Ţĥíš ŕéšéţ ļíñķ íš íñʋáļíð óŕ ĥáš éẋþíŕéð. Ŕéɋúéšţ á ñéŵ óñé.]"
     },
     "loot": {
       "chestTitle": "[Çĥéšţ]"
@@ -4081,7 +4112,7 @@ export const en_XA: EnTranslations = {
     "title": "[Þļáý íñ Ļáñðšçáþé Ƒúļļšçŕééñ]",
     "continue": "[Çóñţíñúé ţó Ĝáɱé]",
     "rotateTitle": "[Ŕóţáţé ţó Ļáñðšçáþé]",
-    "rotateSub": "[Þļáý íñ ļáñðšçáþé ƒúļļšçŕééñ ƒóŕ ţĥé ƀéšţ ɱóƀíļé éẋþéŕíéñçé.]",
+    "rotateSub": "[Þóŕţŕáíţ ɱóðé íš ñóţ šúþþóŕţéð. Ŕóţáţé ýóúŕ ðéʋíçé ţó ļáñðšçáþé ţó çóñţíñúé.]",
     "baseLandscape": "[Ŕóţáţé ýóúŕ ðéʋíçé ţó ļáñðšçáþé ƀéƒóŕé éñţéŕíñĝ ţĥé ŵóŕļð.]",
     "basePerformance": "[Ɱóƀíļé þéŕƒóŕɱáñçé ɱáý ƀé ðéĝŕáðéð. Çļóšé éẋţŕá ţáƀš áñð ļóŵéŕ Ŕéñðéŕ Ɋúáļíţý íƒ ţĥé ĝáɱé ƒééļš šļóŵ.]",
     "iosStandaloneDetail": "[Ýóú áŕé íñ ĥóɱé-šçŕééñ ƒúļļšçŕééñ ɱóðé. Ķééþ ţĥé ðéʋíçé íñ ļáñðšçáþé.]",
@@ -5857,6 +5888,15 @@ export const en_XA: EnTranslations = {
       },
       "linen_scrap": {
         "name": "[Ļíñéñ Šçŕáþ]"
+      },
+      "arcane_dust": {
+        "name": "[Áŕçáñé Ðúšţ]"
+      },
+      "arcane_essence": {
+        "name": "[Áŕçáñé Éššéñçé]"
+      },
+      "arcane_shard": {
+        "name": "[Áŕçáñé Šĥáŕð]"
       },
       "fen_muster_order": {
         "name": "[Ƒéñƀŕíðĝé Ɱúšţéŕ Óŕðéŕ]"

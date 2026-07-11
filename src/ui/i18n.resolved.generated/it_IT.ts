@@ -154,6 +154,12 @@ export const it_IT: EnTranslations = {
     "spectate": {
       "banner": "Stai osservando {name}"
     },
+    "readyCheck": {
+      "prompt": "{name} has started a ready check. Are you ready?",
+      "ready": "Ready",
+      "notReady": "Not Ready",
+      "result": "Ready check: {ready} ready, {notReady} not ready, {noResponse} no response."
+    },
     "death": {
       "resurrectAtCorpse": "Risorgi al cadavere",
       "resurrectAtHealer": "Il Custode Pallido (Mal di resurrezione)",
@@ -306,7 +312,6 @@ export const it_IT: EnTranslations = {
       "chat": "Vai alla chat"
     },
     "mobile": {
-      "autorun": "Corsa automatica",
       "jump": "Salta",
       "leaderboard": "Classifica",
       "dailyRewards": "Ricompense",
@@ -397,7 +402,13 @@ export const it_IT: EnTranslations = {
       "targetFriendly": "Bersaglia l'amico più vicino",
       "targetFriendlyNext": "Scorri i bersagli amici",
       "discord": "Discord",
-      "valecup": "Coppa della Valle"
+      "valecup": "Coppa della Valle",
+      "categoryPet": "Pet",
+      "petAttack": "Pet: Attack",
+      "petStop": "Pet: Stop",
+      "petTaunt": "Pet: Taunt",
+      "petDefensive": "Pet: Defensive",
+      "petAggressive": "Pet: Aggressive"
     },
     "vcup": {
       "title": "La Coppa della Valle",
@@ -1068,6 +1079,26 @@ export const it_IT: EnTranslations = {
     },
     "worldBoss": {
       "spawn": "{name} si erge sulle Alture di Thornpeak!"
+    },
+    "auth": {
+      "appleLoginCta": "Continue with Apple",
+      "appleError": "Could not sign in with Apple. Please try again.",
+      "appleChoiceIntro": "Create a new account, or link Apple to one you already have.",
+      "appleChoiceExpired": "That Apple sign-in expired. Please sign in with Apple again.",
+      "forgotPrompt": "Password dimenticata?",
+      "forgotTitle": "Reimposta la password",
+      "forgotHint": "Inserisci il tuo nome utente e invieremo un link di reimpostazione all’indirizzo e-mail registrato.",
+      "forgotUsername": "Nome utente",
+      "forgotSubmit": "Invia link di reimpostazione",
+      "forgotSent": "Se un account con quel nome utente ha un indirizzo e-mail registrato, abbiamo inviato un link di reimpostazione. Controlla la tua casella di posta.",
+      "forgotBack": "Torna all’accesso",
+      "resetTitle": "Scegli una nuova password",
+      "resetNewPassword": "Nuova password",
+      "resetConfirm": "Conferma la nuova password",
+      "resetSubmit": "Aggiorna password",
+      "resetDone": "La tua password è stata aggiornata. Ora puoi accedere.",
+      "resetMismatch": "Le password non coincidono.",
+      "resetErrInvalid": "Questo link di reimpostazione non è valido o è scaduto. Richiedine uno nuovo."
     },
     "loot": {
       "chestTitle": "Scrigno"
@@ -5857,6 +5888,15 @@ export const it_IT: EnTranslations = {
       },
       "linen_scrap": {
         "name": "Ritaglio di lino"
+      },
+      "arcane_dust": {
+        "name": "Arcane Dust"
+      },
+      "arcane_essence": {
+        "name": "Arcane Essence"
+      },
+      "arcane_shard": {
+        "name": "Arcane Shard"
       },
       "fen_muster_order": {
         "name": "Ordine di raduno di Fenbridge"

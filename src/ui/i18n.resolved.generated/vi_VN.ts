@@ -154,6 +154,12 @@ export const vi_VN: EnTranslations = {
     "spectate": {
       "banner": "Đang xem {name}"
     },
+    "readyCheck": {
+      "prompt": "{name} has started a ready check. Are you ready?",
+      "ready": "Ready",
+      "notReady": "Not Ready",
+      "result": "Ready check: {ready} ready, {notReady} not ready, {noResponse} no response."
+    },
     "death": {
       "resurrectAtCorpse": "Hồi Sinh Tại Xác Chết",
       "resurrectAtHealer": "Người Canh Giữ Nhợt Nhạt (Cái Giá của Người Canh Giữ)",
@@ -306,7 +312,6 @@ export const vi_VN: EnTranslations = {
       "chat": "Chuyển tới Trò Chuyện"
     },
     "mobile": {
-      "autorun": "Tự Chạy",
       "jump": "Nhảy",
       "leaderboard": "Xếp Hạng",
       "dailyRewards": "Thưởng",
@@ -397,7 +402,13 @@ export const vi_VN: EnTranslations = {
       "targetFriendly": "Chọn Đồng Minh Gần Nhất",
       "targetFriendlyNext": "Luân Phiên Mục Tiêu Đồng Minh",
       "discord": "Discord",
-      "valecup": "Cúp Thung Lũng"
+      "valecup": "Cúp Thung Lũng",
+      "categoryPet": "Pet",
+      "petAttack": "Pet: Attack",
+      "petStop": "Pet: Stop",
+      "petTaunt": "Pet: Taunt",
+      "petDefensive": "Pet: Defensive",
+      "petAggressive": "Pet: Aggressive"
     },
     "vcup": {
       "title": "Cúp Thung Lũng",
@@ -1068,6 +1079,26 @@ export const vi_VN: EnTranslations = {
     },
     "worldBoss": {
       "spawn": "{name} trỗi dậy trên Cao Nguyên Đỉnh Gai!"
+    },
+    "auth": {
+      "appleLoginCta": "Continue with Apple",
+      "appleError": "Could not sign in with Apple. Please try again.",
+      "appleChoiceIntro": "Create a new account, or link Apple to one you already have.",
+      "appleChoiceExpired": "That Apple sign-in expired. Please sign in with Apple again.",
+      "forgotPrompt": "Quên mật khẩu?",
+      "forgotTitle": "Đặt lại mật khẩu",
+      "forgotHint": "Nhập tên người dùng của bạn và chúng tôi sẽ gửi liên kết đặt lại tới địa chỉ email đã đăng ký.",
+      "forgotUsername": "Tên người dùng",
+      "forgotSubmit": "Gửi liên kết đặt lại",
+      "forgotSent": "Nếu tài khoản với tên người dùng đó có địa chỉ email đã đăng ký, chúng tôi đã gửi liên kết đặt lại. Hãy kiểm tra hộp thư của bạn.",
+      "forgotBack": "Quay lại đăng nhập",
+      "resetTitle": "Chọn mật khẩu mới",
+      "resetNewPassword": "Mật khẩu mới",
+      "resetConfirm": "Xác nhận mật khẩu mới",
+      "resetSubmit": "Cập nhật mật khẩu",
+      "resetDone": "Mật khẩu của bạn đã được cập nhật. Bây giờ bạn có thể đăng nhập.",
+      "resetMismatch": "Mật khẩu không khớp.",
+      "resetErrInvalid": "Liên kết đặt lại này không hợp lệ hoặc đã hết hạn. Hãy yêu cầu liên kết mới."
     },
     "loot": {
       "chestTitle": "Rương"
@@ -5857,6 +5888,15 @@ export const vi_VN: EnTranslations = {
       },
       "linen_scrap": {
         "name": "Mảnh Vải Lanh"
+      },
+      "arcane_dust": {
+        "name": "Bụi Bí Thuật"
+      },
+      "arcane_essence": {
+        "name": "Tinh Chất Bí Thuật"
+      },
+      "arcane_shard": {
+        "name": "Mảnh Bí Thuật"
       },
       "fen_muster_order": {
         "name": "Lệnh Tập Hợp Fenbridge"

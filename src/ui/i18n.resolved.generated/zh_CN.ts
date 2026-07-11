@@ -154,6 +154,12 @@ export const zh_CN: EnTranslations = {
     "spectate": {
       "banner": "正在观察 {name}"
     },
+    "readyCheck": {
+      "prompt": "{name} 发起了准备确认。你准备好了吗？",
+      "ready": "准备就绪",
+      "notReady": "未准备",
+      "result": "准备确认：{ready} 人就绪，{notReady} 人未准备，{noResponse} 人未响应。"
+    },
     "death": {
       "resurrectAtCorpse": "在尸体旁复活",
       "resurrectAtHealer": "灵魂医者（复活后遗症）",
@@ -306,7 +312,6 @@ export const zh_CN: EnTranslations = {
       "chat": "跳转到聊天"
     },
     "mobile": {
-      "autorun": "自动奔跑",
       "jump": "跳跃",
       "leaderboard": "排行榜",
       "dailyRewards": "奖励",
@@ -397,7 +402,13 @@ export const zh_CN: EnTranslations = {
       "targetFriendly": "选中最近友方",
       "targetFriendlyNext": "切换友方目标",
       "discord": "Discord",
-      "valecup": "溪谷杯"
+      "valecup": "溪谷杯",
+      "categoryPet": "宠物",
+      "petAttack": "宠物：攻击",
+      "petStop": "宠物：停止",
+      "petTaunt": "宠物：嘲讽",
+      "petDefensive": "宠物：防御",
+      "petAggressive": "宠物：攻击性"
     },
     "vcup": {
       "title": "溪谷杯",
@@ -1068,6 +1079,26 @@ export const zh_CN: EnTranslations = {
     },
     "worldBoss": {
       "spawn": "{name}在荆峰高地崛起！"
+    },
+    "auth": {
+      "appleLoginCta": "通过 Apple 继续",
+      "appleError": "无法通过 Apple 登录。请重试。",
+      "appleChoiceIntro": "创建新帐户，或将 Apple 关联到现有帐户。",
+      "appleChoiceExpired": "Apple 登录已过期。请再次使用 Apple 登录。",
+      "forgotPrompt": "忘记密码？",
+      "forgotTitle": "重置密码",
+      "forgotHint": "输入您的用户名，我们会将重置链接发送到登记的邮箱。",
+      "forgotUsername": "用户名",
+      "forgotSubmit": "发送重置链接",
+      "forgotSent": "如果该用户名对应的账户已登记邮箱，我们已发送重置链接。请查收您的收件箱。",
+      "forgotBack": "返回登录",
+      "resetTitle": "设置新密码",
+      "resetNewPassword": "新密码",
+      "resetConfirm": "确认新密码",
+      "resetSubmit": "更新密码",
+      "resetDone": "您的密码已更新。现在可以登录了。",
+      "resetMismatch": "两次输入的密码不一致。",
+      "resetErrInvalid": "此重置链接无效或已过期。请重新申请一个。"
     },
     "loot": {
       "chestTitle": "宝箱"
@@ -5857,6 +5888,15 @@ export const zh_CN: EnTranslations = {
       },
       "linen_scrap": {
         "name": "亚麻碎布"
+      },
+      "arcane_dust": {
+        "name": "奥术之尘"
+      },
+      "arcane_essence": {
+        "name": "奥术精华"
+      },
+      "arcane_shard": {
+        "name": "奥术碎片"
       },
       "fen_muster_order": {
         "name": "芬桥集结令"
