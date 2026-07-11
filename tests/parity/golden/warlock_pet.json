@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "57999674",
+      "state": "e0a84d47",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -49,6 +49,7 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "equipmentInstance": {},
           "gatheringProficiency": {},
           "heroicDaily": {},
           "inventory": [
@@ -128,7 +129,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 406,
-      "state": "9100ca4c",
+      "state": "eb1ccbf7",
       "events": "52e2641a",
       "rng": {
         "draws": 0,
@@ -139,7 +140,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 406,
-      "state": "1358960e",
+      "state": "4f2f08a1",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -150,7 +151,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 406,
-      "state": "3e5ff7e1",
+      "state": "0dcd4fe8",
       "events": "741638a5",
       "rng": {
         "draws": 100,
@@ -161,7 +162,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 406,
-      "state": "704989d4",
+      "state": "0c78d0af",
       "events": "741638a5",
       "rng": {
         "draws": 186,
@@ -172,7 +173,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 407,
-      "state": "c43f4b32",
+      "state": "e4750e5d",
       "events": "beca190f",
       "rng": {
         "draws": 271,
@@ -183,7 +184,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 408,
-      "state": "bb3b2193",
+      "state": "5ac2e73a",
       "events": "fc7e12c5",
       "rng": {
         "draws": 366,
@@ -194,7 +195,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 408,
-      "state": "b8bd7474",
+      "state": "c9d7218f",
       "events": "c6409e52",
       "rng": {
         "draws": 495,
@@ -205,7 +206,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 408,
-      "state": "012adcc0",
+      "state": "ecc6d4d3",
       "events": "a1589300",
       "rng": {
         "draws": 636,
@@ -216,7 +217,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 408,
-      "state": "cc2afc5e",
+      "state": "d9991131",
       "events": "11371c1e",
       "rng": {
         "draws": 774,
@@ -227,18 +228,18 @@
       "tick": 200,
       "time": 10,
       "nextId": 408,
-      "state": "7c953b17",
+      "state": "feb54a66",
       "events": "9508a0b6",
       "rng": {
-        "draws": 943,
-        "digest": "b9ebae32"
+        "draws": 944,
+        "digest": "1771d9a2"
       }
     },
     {
       "tick": 220,
       "time": 11,
       "nextId": 408,
-      "state": "bae89778",
+      "state": "6f01a43b",
       "events": "27530f47",
       "rng": {
         "draws": 1021,
@@ -249,7 +250,7 @@
       "tick": 220,
       "time": 11,
       "nextId": 408,
-      "state": "757d0f94",
+      "state": "afbc7d6f",
       "events": "741638a5",
       "rng": {
         "draws": 1021,
@@ -284,6 +285,7 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "equipmentInstance": {},
           "gatheringProficiency": {},
           "heroicDaily": {},
           "inventory": [
@@ -480,8 +482,8 @@
       "tick": 224,
       "time": 11.2,
       "nextId": 408,
-      "state": "f2bcb0e8",
-      "events": "c0de995d",
+      "state": "c0bcde9c",
+      "events": "e253d2ca",
       "rng": {
         "draws": 1050,
         "digest": "a67794aa"
@@ -515,6 +517,7 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "equipmentInstance": {},
           "gatheringProficiency": {},
           "heroicDaily": {},
           "inventory": [
@@ -605,7 +608,7 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 341,
+          "hp": 339,
           "id": 406,
           "inCombat": true,
           "keepLandingLock": -1,
@@ -656,7 +659,7 @@
           "forcedTargetId": 406,
           "forcedTargetTimer": 2.8,
           "hostile": true,
-          "hp": 49943,
+          "hp": 49927,
           "id": 407,
           "inCombat": true,
           "keepLandingLock": -1,
@@ -698,7 +701,7 @@
             ],
             [
               406,
-              36
+              52
             ]
           ],
           "weapon": {

@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "762ef519",
+      "state": "8bc7b5fc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -48,6 +48,7 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
+          "equipmentInstance": {},
           "gatheringProficiency": {},
           "heroicDaily": {},
           "inventory": [
@@ -128,7 +129,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 409,
-      "state": "fb016bf3",
+      "state": "1f2ef35a",
       "events": "43ab1dd4",
       "rng": {
         "draws": 9,
@@ -139,7 +140,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 409,
-      "state": "d64f9c5a",
+      "state": "78b7b8d5",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -150,7 +151,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 409,
-      "state": "b31f9a6f",
+      "state": "dbc05e0e",
       "events": "d6d42245",
       "rng": {
         "draws": 100,
@@ -161,7 +162,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 409,
-      "state": "38ce9926",
+      "state": "a7fec7c9",
       "events": "741638a5",
       "rng": {
         "draws": 195,
@@ -172,7 +173,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 409,
-      "state": "22dc0a6e",
+      "state": "63895dc1",
       "events": "1b963611",
       "rng": {
         "draws": 298,
@@ -183,7 +184,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 409,
-      "state": "ef785f4f",
+      "state": "0b355b2e",
       "events": "741638a5",
       "rng": {
         "draws": 405,
@@ -194,7 +195,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 409,
-      "state": "ef785f4f",
+      "state": "0b355b2e",
       "events": "741638a5",
       "rng": {
         "draws": 405,
@@ -229,6 +230,7 @@
             "chest": "footpad_jerkin",
             "mainhand": "rusty_hatchet"
           },
+          "equipmentInstance": {},
           "gatheringProficiency": {},
           "heroicDaily": {},
           "inventory": [

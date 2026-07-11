@@ -994,6 +994,7 @@ function blankEntity(id: number): Entity {
     skin: 0,
     mainhandItemId: null,
     equippedItems: {},
+    equippedInstances: {},
     guild: '',
   };
 }
@@ -2328,6 +2329,9 @@ export class ClientWorld implements IWorld {
   }
   partyAccept(): void {
     this.cmd({ cmd: 'paccept' });
+  }
+  readyCheckRespond(ready: boolean): void {
+    this.cmd({ cmd: 'readyrespond', ready });
   }
   partyDecline(): void {
     this.cmd({ cmd: 'pdecline' });

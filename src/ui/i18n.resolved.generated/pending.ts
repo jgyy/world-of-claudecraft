@@ -10,6 +10,9 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "entities.items.arcane_dust.name",
+    "entities.items.arcane_essence.name",
+    "entities.items.arcane_shard.name",
     "entities.items.chunk_of_ore.name",
     "entities.quests.q_prof_intro.completion",
     "entities.quests.q_prof_intro.objectives.0.label",
@@ -21,10 +24,23 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "es_ES": [
+    "entities.items.arcane_dust.name",
+    "entities.items.arcane_essence.name",
+    "entities.items.arcane_shard.name",
     "entities.items.chunk_of_ore.name",
     "entities.quests.q_prof_intro.completion",
     "entities.quests.q_prof_intro.objectives.0.label",
@@ -36,10 +52,23 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "fr_FR": [
+    "entities.items.arcane_dust.name",
+    "entities.items.arcane_essence.name",
+    "entities.items.arcane_shard.name",
     "entities.items.chunk_of_ore.name",
     "entities.quests.q_prof_intro.completion",
     "entities.quests.q_prof_intro.objectives.0.label",
@@ -51,10 +80,23 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "fr_CA": [
+    "entities.items.arcane_dust.name",
+    "entities.items.arcane_essence.name",
+    "entities.items.arcane_shard.name",
     "entities.items.chunk_of_ore.name",
     "entities.quests.q_prof_intro.completion",
     "entities.quests.q_prof_intro.objectives.0.label",
@@ -66,11 +108,24 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "en_CA": [],
   "it_IT": [
+    "entities.items.arcane_dust.name",
+    "entities.items.arcane_essence.name",
+    "entities.items.arcane_shard.name",
     "entities.items.chunk_of_ore.name",
     "entities.quests.q_prof_intro.completion",
     "entities.quests.q_prof_intro.objectives.0.label",
@@ -82,10 +137,23 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "de_DE": [
+    "entities.items.arcane_dust.name",
+    "entities.items.arcane_essence.name",
+    "entities.items.arcane_shard.name",
     "entities.items.chunk_of_ore.name",
     "entities.quests.q_prof_intro.completion",
     "entities.quests.q_prof_intro.objectives.0.label",
@@ -97,8 +165,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "zh_CN": [
     "hudChrome.itemHeroicTag"
@@ -113,6 +191,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.itemHeroicTag"
   ],
   "pt_BR": [
+    "entities.items.arcane_dust.name",
+    "entities.items.arcane_essence.name",
+    "entities.items.arcane_shard.name",
     "entities.items.chunk_of_ore.name",
     "entities.quests.q_prof_intro.completion",
     "entities.quests.q_prof_intro.objectives.0.label",
@@ -124,8 +205,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "ru_RU": [
     "hudChrome.itemHeroicTag"
@@ -142,8 +233,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "nl_NL": [
     "entities.items.chunk_of_ore.name",
@@ -157,8 +258,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "pl_PL": [
     "entities.items.chunk_of_ore.name",
@@ -172,8 +283,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "id_ID": [
     "entities.items.chunk_of_ore.name",
@@ -187,8 +308,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "tr_TR": [
     "entities.items.chunk_of_ore.name",
@@ -202,8 +333,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "sv_SE": [
     "entities.items.chunk_of_ore.name",
@@ -217,8 +358,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "vi_VN": [
     "entities.items.chunk_of_ore.name",
@@ -232,8 +383,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ],
   "da_DK": [
     "entities.items.chunk_of_ore.name",
@@ -247,7 +408,17 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auth.appleLoginCta",
     "hudChrome.itemHeroicTag",
     "hudChrome.itemSoulbound",
+    "hudChrome.keybinds.categoryPet",
+    "hudChrome.keybinds.petAggressive",
+    "hudChrome.keybinds.petAttack",
+    "hudChrome.keybinds.petDefensive",
+    "hudChrome.keybinds.petStop",
+    "hudChrome.keybinds.petTaunt",
     "hudChrome.mailbox.parcelQtyDecreaseAria",
-    "hudChrome.mailbox.parcelQtyIncreaseAria"
+    "hudChrome.mailbox.parcelQtyIncreaseAria",
+    "hudChrome.readyCheck.notReady",
+    "hudChrome.readyCheck.prompt",
+    "hudChrome.readyCheck.ready",
+    "hudChrome.readyCheck.result"
   ]
 };

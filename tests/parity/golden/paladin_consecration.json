@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "dbb3a809",
+      "state": "687abcec",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -48,6 +48,7 @@
             "chest": "recruit_tunic",
             "mainhand": "training_mace"
           },
+          "equipmentInstance": {},
           "gatheringProficiency": {},
           "heroicDaily": {},
           "inventory": [
@@ -127,7 +128,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 407,
-      "state": "78fb6968",
+      "state": "ae8f8ee5",
       "events": "78472286",
       "rng": {
         "draws": 4,
@@ -138,7 +139,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 407,
-      "state": "64557711",
+      "state": "5634949e",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -149,7 +150,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 407,
-      "state": "5df45c75",
+      "state": "4867cbba",
       "events": "93f4f111",
       "rng": {
         "draws": 80,
@@ -160,7 +161,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 407,
-      "state": "c02d116a",
+      "state": "3e5f823f",
       "events": "741638a5",
       "rng": {
         "draws": 170,
@@ -171,7 +172,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 407,
-      "state": "c96fd1b0",
+      "state": "2325d2fd",
       "events": "a511432c",
       "rng": {
         "draws": 270,
@@ -182,7 +183,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 407,
-      "state": "57583451",
+      "state": "4a386cde",
       "events": "741638a5",
       "rng": {
         "draws": 387,
@@ -193,7 +194,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 407,
-      "state": "e6a10155",
+      "state": "a669905a",
       "events": "993e6f90",
       "rng": {
         "draws": 501,
@@ -204,7 +205,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 407,
-      "state": "4a0eb053",
+      "state": "77b48e90",
       "events": "741638a5",
       "rng": {
         "draws": 627,
@@ -215,7 +216,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 407,
-      "state": "1b7b8b3d",
+      "state": "0c2bb932",
       "events": "f3585c8e",
       "rng": {
         "draws": 765,
@@ -226,7 +227,7 @@
       "tick": 200,
       "time": 10,
       "nextId": 407,
-      "state": "b1d0a34e",
+      "state": "96cadedb",
       "events": "741638a5",
       "rng": {
         "draws": 931,
@@ -237,7 +238,7 @@
       "tick": 201,
       "time": 10.05,
       "nextId": 407,
-      "state": "42f495ca",
+      "state": "59a755df",
       "events": "741638a5",
       "rng": {
         "draws": 932,
@@ -273,6 +274,7 @@
             "chest": "recruit_tunic",
             "mainhand": "training_mace"
           },
+          "equipmentInstance": {},
           "gatheringProficiency": {},
           "heroicDaily": {},
           "inventory": [

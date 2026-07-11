@@ -8,14 +8,14 @@
     "casting lifecycle (C4a)",
     "effect dispatch + spell damage (C4b/C1)"
   ],
-  "draws": 411,
-  "drawDigest": "de54da05",
+  "draws": 421,
+  "drawDigest": "cb4febb2",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 406,
-      "state": "948dc468",
+      "state": "025aad03",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -48,6 +48,7 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "equipmentInstance": {},
           "gatheringProficiency": {},
           "heroicDaily": {},
           "inventory": [
@@ -127,7 +128,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 407,
-      "state": "fcbe0bd4",
+      "state": "1e283c55",
       "events": "6f4af3da",
       "rng": {
         "draws": 3,
@@ -138,7 +139,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 407,
-      "state": "97bc5650",
+      "state": "bb006d59",
       "events": "32aafa0f",
       "rng": {
         "draws": 3,
@@ -149,7 +150,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 407,
-      "state": "20e08ffe",
+      "state": "ab9c408f",
       "events": "c880e87c",
       "rng": {
         "draws": 73,
@@ -160,44 +161,44 @@
       "tick": 80,
       "time": 4,
       "nextId": 407,
-      "state": "38462580",
+      "state": "4718e0c9",
       "events": "c880e87c",
       "rng": {
-        "draws": 162,
-        "digest": "a72d4df2"
+        "draws": 163,
+        "digest": "5caeab93"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 407,
-      "state": "471a9712",
+      "state": "9cb04c9b",
       "events": "894957f3",
       "rng": {
-        "draws": 254,
-        "digest": "8a8c6a7c"
+        "draws": 259,
+        "digest": "bf0b305f"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 407,
-      "state": "9250cc01",
+      "state": "0c549fee",
       "events": "c880e87c",
       "rng": {
-        "draws": 367,
-        "digest": "6d00992d"
+        "draws": 380,
+        "digest": "ed0c4a9f"
       }
     },
     {
       "tick": 128,
       "time": 6.4,
       "nextId": 407,
-      "state": "7d8b06b5",
+      "state": "7d3232cb",
       "events": "741638a5",
       "rng": {
-        "draws": 411,
-        "digest": "de54da05"
+        "draws": 421,
+        "digest": "cb4febb2"
       },
       "label": "final",
       "players": [
@@ -226,6 +227,7 @@
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
           },
+          "equipmentInstance": {},
           "gatheringProficiency": {},
           "heroicDaily": {},
           "inventory": [
@@ -258,7 +260,7 @@
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
-          "facing": 0.025301,
+          "facing": -0.113451,
           "fallStartY": 1.5,
           "fiveSecondRule": 105.4,
           "hp": 50000,
@@ -310,7 +312,7 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.05,
-          "facing": 2.467165,
+          "facing": -0.172454,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
@@ -326,9 +328,9 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 2.408616,
-            "y": 1.5,
-            "z": 14.146691
+            "x": -0.600457,
+            "y": 1.497999,
+            "z": 20.823045
           },
           "potionCooldownUntil": -1,
           "spawnPos": {
@@ -341,9 +343,9 @@
           },
           "templateId": "forest_wolf",
           "wanderTarget": {
-            "x": 3.767477,
-            "y": 1.5,
-            "z": 12.447024
+            "x": -1.188086,
+            "y": 1.250784,
+            "z": 24.196644
           },
           "wanderTimer": 28.7,
           "weapon": {
