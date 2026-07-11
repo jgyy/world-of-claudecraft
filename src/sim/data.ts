@@ -106,6 +106,7 @@ import {
 } from './content/zone3';
 import { DUNGEON_WALL_HW } from './dungeon_layout';
 import { JAIL_BLOCKERS, JAIL_TERRAIN_EDITS } from './jail';
+import { RUIN_COMPOUND_TERRAIN_EDIT } from './ruin_compound_layout';
 
 export type { DelveShopEntry, DelveShopGate, DelveShopOffer } from './content/delves';
 // Delve affix/companion catalogs are consumed by the Sim delve engine; re-export
@@ -347,7 +348,7 @@ export const BUILTIN_WORLD: WorldContent = {
   props: PROPS,
   playerStart: PLAYER_START,
   blockers: JAIL_BLOCKERS,
-  terrainEdits: JAIL_TERRAIN_EDITS,
+  terrainEdits: [...JAIL_TERRAIN_EDITS, RUIN_COMPOUND_TERRAIN_EDIT],
 };
 
 let activeWorld: WorldContent = BUILTIN_WORLD;

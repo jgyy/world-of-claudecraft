@@ -24,12 +24,17 @@ import {
 import { createMob } from '../src/sim/entity';
 import { ACTIONS, encodeObs } from '../src/sim/obs';
 import { PLAYER_BODY_RADIUS, PLAYER_MAX_CLIMB_SLOPE } from '../src/sim/pathfind';
+import {
+  isInRuinCompoundClearing,
+  RUIN_COMPOUND_FLOOR_HEIGHT,
+} from '../src/sim/ruin_compound_layout';
 import { Sim } from '../src/sim/sim';
 import { dist2d, type Entity, type SimEvent } from '../src/sim/types';
 import {
   DECORATION_MAX_SLOPE,
   generateDecorations,
   groundHeight,
+  terrainHeight,
   terrainSteepness,
   terrainSteepnessAt,
   terrainWallStandoff,
@@ -2006,6 +2011,29 @@ describe('spell visuals', () => {
     }
     const kinds = new Set(PROPS.ruinDecor!.map((d) => d.kind));
     expect(kinds.size).toBe(12);
+  });
+
+  it('the ruin compound courtyard is a level clearing, not overgrown terrain', () => {
+    const seed = 12345;
+    // every wall/axis anchor sits inside the clearing radius
+    for (const d of PROPS.ruinDecor!) {
+      expect(isInRuinCompoundClearing(d.x, d.z)).toBe(true);
+    }
+    // the flatten pulls the whole courtyard to (near) one height
+    const samples: [number, number][] = [
+      [100, 435],
+      [95, 440],
+      [105, 430],
+      [92, 428],
+      [108, 442],
+    ];
+    for (const [x, z] of samples) {
+      expect(Math.abs(terrainHeight(x, z, seed) - RUIN_COMPOUND_FLOOR_HEIGHT)).toBeLessThan(0.3);
+    }
+    // no scattered decoration (tree/rock) grows inside the walls
+    for (const dec of generateDecorations(seed)) {
+      expect(isInRuinCompoundClearing(dec.x, dec.z)).toBe(false);
+    }
   });
 
   it('ranged auto shot does not fire through dungeon walls', () => {

@@ -2062,9 +2062,11 @@ export const ZONE2_PROPS: ZonePropsDef = {
   // middle, mirrored flanking pairs either side of the axis, and peripheral
   // village-adjacent features (well, small graveyard, benches, rubble)
   // outside the wall, the way a real ruin accretes satellite structures.
-  // Several kinds repeat (obelisk x4, wall fragment x3, brazier x2, grave
+  // Several kinds repeat (wall fragment x7, obelisk x4, brazier x2, grave
   // marker x2, bench x2) to build the wall and its symmetry; every anchor is
-  // still purely cosmetic, no collision.
+  // still purely cosmetic, no collision. Wall segments sit on a clean
+  // rectangle (half-extent 9-10) at right-angle rotations, not scattered
+  // arbitrary angles, so the footprint reads as an actual building.
   ruinDecor: [
     // processional axis, entrance (north) to sanctum (south)
     { x: 100, z: 445, rot: Math.PI, kind: 'ruinArchway' },
@@ -2076,22 +2078,27 @@ export const ZONE2_PROPS: ZonePropsDef = {
     // sanctum flanking pair, eternal-flame braziers either side of the idol
     { x: 94, z: 431, rot: 0.3, kind: 'ruinBrazier' },
     { x: 106, z: 431, rot: -0.3, kind: 'ruinBrazier' },
-    // broken perimeter wall around the column ring, gapped at the entrance
-    // (north): wall-fragment segments on the cardinal sides, obelisk pylons
-    // marking the four corners
+    // toppled obelisk colonnade flanking the outer approach to the gate
+    { x: 96, z: 450, rot: 1.57, kind: 'ruinObelisk' },
+    { x: 104, z: 450, rot: 1.57, kind: 'ruinObelisk' },
+    // matching pair marking the sanctum's fallen back colonnade
+    { x: 96, z: 423, rot: 1.57, kind: 'ruinObelisk' },
+    { x: 104, z: 423, rot: 1.57, kind: 'ruinObelisk' },
+    // broken perimeter wall, a clean rectangle around the column ring
+    // (half-extent 9-10), gapped at the north-center for the archway gate
+    { x: 91, z: 444, rot: 0, kind: 'ruinWallFragment' },
+    { x: 109, z: 444, rot: 1.57, kind: 'ruinWallFragment' },
     { x: 110, z: 435, rot: 1.57, kind: 'ruinWallFragment' },
+    { x: 109, z: 426, rot: 3.14, kind: 'ruinWallFragment' },
     { x: 100, z: 425, rot: 0, kind: 'ruinWallFragment' },
+    { x: 91, z: 426, rot: 4.71, kind: 'ruinWallFragment' },
     { x: 90, z: 435, rot: 1.57, kind: 'ruinWallFragment' },
-    { x: 107, z: 442, rot: 0.8, kind: 'ruinObelisk' },
-    { x: 107, z: 428, rot: -0.8, kind: 'ruinObelisk' },
-    { x: 93, z: 428, rot: 0.8, kind: 'ruinObelisk' },
-    { x: 93, z: 442, rot: -0.8, kind: 'ruinObelisk' },
     // peripheral, village-adjacent satellite features outside the wall
-    { x: 85, z: 435, rot: 0.4, kind: 'ruinWell' },
-    { x: 116, z: 435, rot: -0.6, kind: 'ruinRubble' },
-    { x: 112, z: 424, rot: 0.2, kind: 'ruinGraveMarker' },
-    { x: 117, z: 428, rot: -0.4, kind: 'ruinGraveMarker' },
-    { x: 91, z: 448, rot: 0.3, kind: 'ruinBench' },
-    { x: 109, z: 448, rot: -0.3, kind: 'ruinBench' },
+    { x: 82, z: 435, rot: 0.4, kind: 'ruinWell' },
+    { x: 120, z: 435, rot: -0.6, kind: 'ruinRubble' },
+    { x: 114, z: 422, rot: 0.2, kind: 'ruinGraveMarker' },
+    { x: 119, z: 426, rot: -0.4, kind: 'ruinGraveMarker' },
+    { x: 88, z: 452, rot: 0.3, kind: 'ruinBench' },
+    { x: 112, z: 452, rot: -0.3, kind: 'ruinBench' },
   ],
 };

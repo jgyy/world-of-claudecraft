@@ -1,5 +1,6 @@
 import { DUNGEON_FLOOR_Y, DUNGEON_X_THRESHOLD, getActiveWorldContent, WORLD_MAX_X } from './data';
 import { fbm2, hash2 } from './rng';
+import { isInRuinCompoundClearing } from './ruin_compound_layout';
 import type { BiomeId, HeightStamp, WorldContent } from './types';
 import { isInSowfieldShell, SOWFIELD_FLAT, sowfieldStandLift } from './vale_cup_layout';
 
@@ -767,6 +768,9 @@ export function generateDecorations(seed: number): Decoration[] {
       // The Sowfield stadium footprint grows no trees or rocks (hash-based
       // placement, so skipping here shifts no other decoration or rng draw).
       if (isInSowfieldShell(x, z)) continue;
+      // The ruin temple compound's courtyard reads as a maintained clearing,
+      // not overgrowth, so no trees/rocks scatter inside its walls.
+      if (isInRuinCompoundClearing(x, z)) continue;
       let inHub = false;
       for (const zone of w.content.zones) {
         const dx = x - zone.hub.x,
