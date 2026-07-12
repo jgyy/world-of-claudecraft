@@ -911,6 +911,38 @@ describe('client HTML shell', () => {
     );
   });
 
+  it('offers a desktop micro-menu Discord entry in BOTH entries (not keybind-only)', () => {
+    // Before this, linking Discord was reachable only via the undocumented 'U'
+    // keybind: no menu item, button, or keybind-list mention told a desktop
+    // player the feature existed. #mm-discord in the micro-menu (alongside
+    // #mm-social, #mm-valecup, ...) gives it a visible, clickable affordance
+    // that mirrors the mobile tray's #mobile-discord button.
+    for (const [name, entry] of [
+      ['index.html', html],
+      ['play.html', playHtml],
+    ] as const) {
+      expect(entry, name).toContain('id="mm-discord"');
+      expect(entry, name).toMatch(/id="mm-discord"[^>]*data-icon="discord"/);
+      // Starts hidden; main.ts reveals it at boot on any build with Discord UI
+      // enabled, mirroring #mobile-discord's own gating.
+      expect(entry, name).toMatch(/id="mm-discord"\s+hidden/);
+      // Shows the 'U' default keybind as a discoverability hint, same as every
+      // other micro-menu button (#mm-social shows 'o', #mm-valecup shows 'y').
+      expect(entry, name).toMatch(/id="mm-discord"[^>]*>\s*<span class="keybind">u<\/span>/);
+    }
+    // main.ts wires the click through the Hud's discord hook (attachDiscordHook)
+    // to openDiscordEntry, the SAME entry point the mobile tray uses: it opens
+    // the panel when logged in and falls through to the community invite
+    // otherwise, so the desktop button is a live affordance offline too. The
+    // hook is attached unconditionally (not inside `if (online)`), else the
+    // button would render visible but no-op offline.
+    expect(mainTs).toMatch(
+      /hud\.attachDiscordHook\(\(\) => openDiscordEntry\(\)\);\s*\n\s*if \(online\) \{/,
+    );
+    expect(mainTs).toContain('function syncDiscordEntries(): void {');
+    expect(mainTs).toContain("const desktopBtn = document.getElementById('mm-discord');");
+  });
+
   it('ships the consumables quick bar in BOTH entries, collapsed by default', () => {
     for (const [name, entry] of [
       ['index.html', html],

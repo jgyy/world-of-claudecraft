@@ -912,6 +912,9 @@ export class Hud {
   private optionsHooks: OptionsHooks | null = null;
   private reportHooks: ReportHooks | null = null;
   private bugReportHooks: BugReportHooks | null = null;
+  // Only wired online (main.ts owns the Discord account/panel state); its presence
+  // gates whether #mm-discord does anything on a build with Discord disabled.
+  private discordHook: (() => void) | null = null;
   // Soft swear terms from the server (online only), masked in chat when the
   // player's "Filter Profanity" setting is on. Fed by main.ts from ClientWorld.
   private profanityWords: string[] = [];
@@ -1751,6 +1754,7 @@ export class Hud {
     $('#mm-arena').addEventListener('click', () => this.toggleArena());
     $('#mm-valecup').addEventListener('click', () => this.toggleValeCup());
     $('#mm-leaderboard').addEventListener('click', () => this.toggleLeaderboard());
+    $('#mm-discord')?.addEventListener('click', () => this.discordHook?.());
     const emoteBtn = $('#mm-emote');
     emoteBtn.addEventListener('click', (ev) => {
       ev.preventDefault();
@@ -6100,6 +6104,7 @@ export class Hud {
       ['#mm-leaderboard', 'leaderboard', 'game.leaderboard.title'],
       ['#mm-emote', 'emoteWheel', 'hudChrome.emoteWheel.label'],
       ['#mm-social', 'social', 'hud.social.friendsTab'],
+      ['#mm-discord', 'discord', 'hudChrome.discord.title'],
     ];
     for (const [selector, action, labelKey] of sideButtons) {
       const btn = document.querySelector<HTMLElement>(selector);
@@ -14217,6 +14222,12 @@ export class Hud {
   // option (the offline browser world has no server to receive reports).
   attachBugReporting(hooks: BugReportHooks): void {
     this.bugReportHooks = hooks;
+  }
+
+  // Wired by main.ts to toggleDiscordPanel, giving the desktop micro-menu
+  // (#mm-discord) a discoverable path to the same panel the 'U' keybind opens.
+  attachDiscordHook(toggle: () => void): void {
+    this.discordHook = toggle;
   }
 
   get optionsOpen(): boolean {
