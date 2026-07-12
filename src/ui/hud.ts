@@ -211,6 +211,7 @@ import { esc } from './esc';
 import { fctSpawnShape } from './fct_event';
 import { FctPainter } from './fct_painter';
 import { FocusManager, type FocusTrapHandle } from './focus_manager';
+import { gossipMenuIsEmpty } from './gossip_menu';
 import {
   type AimPoint,
   abilityAoeRadius,
@@ -8324,7 +8325,10 @@ export class Hud {
         } else if (ev.crit && tgt.kind === 'mob' && shouldPlayCritSfxForTarget(tgt)) {
           const fam = mobVoiceFamily(tgt.templateId);
           if (fam && shouldPlayMobVoiceSfxForEntity(tgt))
-            this.combat(mobSfxKey(fam, tgt.templateId, 'attack'), tp.x, tp.y, tp.z, 0.6, { rate: 1.25, cooldown: 0.1 });
+            this.combat(mobSfxKey(fam, tgt.templateId, 'attack'), tp.x, tp.y, tp.z, 0.6, {
+              rate: 1.25,
+              cooldown: 0.1,
+            });
         }
         return;
       }
@@ -8404,7 +8408,14 @@ export class Hud {
       if (this.ensureMobEngaged(src)) return; // just fired the aggro alert
       const fam = mobVoiceFamily(src.templateId);
       if (fam && shouldPlayMobVoiceSfxForEntity(src))
-        this.combat(mobSfxKey(fam, src.templateId, 'attack'), src.pos.x, src.pos.y, src.pos.z, 0.55, { cooldown: 0.25 });
+        this.combat(
+          mobSfxKey(fam, src.templateId, 'attack'),
+          src.pos.x,
+          src.pos.y,
+          src.pos.z,
+          0.55,
+          { cooldown: 0.25 },
+        );
     } else if (src.kind === 'player') {
       this.combat(weaponSwingKey(src.templateId), src.pos.x, src.pos.y, src.pos.z, 0.5, {
         cooldown: 0.08,
@@ -10553,10 +10564,13 @@ export class Hud {
     this.renderGossip(npc);
   }
 
-  private renderGossip(npc: Entity): void {
-    this.openGossipNpcId = npc.id;
-    this.openQuestDetailId = null;
-    const el = $('#quest-dialog');
+  // closeIfEmpty is set only when re-rendering after an accept/turn-in click:
+  // a fresh NPC visit (or navigating Back) always shows the greeting even with
+  // an empty menu, but once the player has just resolved the one thing the NPC
+  // had to offer (the common case for a tutorial giver with a single starter
+  // quest), an empty menu means there is nothing left to do here and the
+  // window should close itself instead of hanging open with just the greeting.
+  private renderGossip(npc: Entity, closeIfEmpty = false): void {
     const def = NPCS[npc.templateId];
     // accepted-but-unfinished quests are tracked in the quest log; the NPC
     // only offers new quests (at the giver) and turn-ins (at the turn-in NPC)
@@ -10578,6 +10592,29 @@ export class Hud {
         ),
       )
       .map((qp) => qp.questId);
+    const hasVendor = npc.vendorItems.length > 0;
+    const hasMarket = !!def?.market;
+    const hasHeroicVendor = !!def?.heroicVendor;
+    const hasDelveBoard = Object.values(DELVES).some((d) => d.boardNpcId === npc.templateId);
+    const hasVcup = npc.templateId === 'groundskeeper_bram';
+    if (
+      closeIfEmpty &&
+      gossipMenuIsEmpty({
+        questCount: interesting.length,
+        discussionCount: discussionQuests.length,
+        hasVendor,
+        hasMarket,
+        hasHeroicVendor,
+        hasDelveBoard,
+        hasVcup,
+      })
+    ) {
+      this.closeQuestDialog();
+      return;
+    }
+    this.openGossipNpcId = npc.id;
+    this.openQuestDetailId = null;
+    const el = $('#quest-dialog');
     markDialogRoot(el, { labelledBy: 'quest-dialog-title' });
     const npcName = def ? npcDisplayName(npc.templateId) : mobDisplayName(npc.templateId);
     const npcTitle = def ? npcDisplayTitle(def.id) : '';
@@ -10602,16 +10639,16 @@ export class Hud {
         html += `<button type="button" class="qd-list-item" data-discuss="${esc(qid)}" aria-label="${esc(t('questUi.dialog.discussQuestAria', { name: title }))}"><span class="gold">?</span> ${esc(t('questUi.dialog.discussQuest', { name: title }))}</button>`;
       }
     }
-    if (npc.vendorItems.length > 0) {
+    if (hasVendor) {
       html += `<button type="button" class="qd-list-item" data-vendor="1" aria-label="${esc(t('questUi.dialog.browseGoodsAria', { name: npcName }))}"><span class="quest-complete">$</span> ${esc(t('questUi.dialog.browseGoods'))}</button>`;
     }
-    if (def?.market) {
+    if (hasMarket) {
       html += `<button type="button" class="qd-list-item" data-market="1" aria-label="${esc(t('questUi.dialog.worldMarketAria'))}"><span class="gold">${svgIcon('market')}</span> ${esc(t('questUi.dialog.worldMarket'))}</button>`;
     }
-    if (def?.heroicVendor) {
+    if (hasHeroicVendor) {
       html += `<button type="button" class="qd-list-item" data-heroic-shop="1" aria-label="${esc(t('questUi.dialog.browseGoodsAria', { name: npcName }))}"><span class="quest-complete">$</span> ${esc(t('questUi.dialog.browseGoods'))}</button>`;
     }
-    if (Object.values(DELVES).some((d) => d.boardNpcId === npc.templateId)) {
+    if (hasDelveBoard) {
       const delveForNpc = Object.values(DELVES).find((d) => d.boardNpcId === npc.templateId);
       const openLabel = delveForNpc
         ? delveDisplayName(delveForNpc.id)
@@ -10620,7 +10657,7 @@ export class Hud {
     }
     // Groundskeeper Bram keeps the book of fixtures at the Sowfield gate: his
     // gossip menu opens the Vale Cup window (the delve-board button precedent).
-    if (npc.templateId === 'groundskeeper_bram') {
+    if (hasVcup) {
       html += `<button type="button" class="qd-list-item" data-vcup="1" aria-label="${esc(t('hudChrome.vcup.gossipOpenAria'))}"><span class="gold">${svgIcon('ball')}</span> ${esc(t('hudChrome.vcup.gossipOpen'))}</button>`;
     }
     el.innerHTML = html;
@@ -10711,7 +10748,7 @@ export class Hud {
         this.sim.reportTelemetry('quest_accept', {
           timeMs: performance.now() - this.questDialogOpenedAtMs,
         });
-        this.renderGossip(npc);
+        this.renderGossip(npc, true);
       });
       el.appendChild(btn);
     } else if (state === 'ready') {
@@ -10724,7 +10761,7 @@ export class Hud {
         this.sim.reportTelemetry('quest_turnin', {
           timeMs: performance.now() - this.questDialogOpenedAtMs,
         });
-        this.renderGossip(npc);
+        this.renderGossip(npc, true);
       });
       el.appendChild(btn);
     }
