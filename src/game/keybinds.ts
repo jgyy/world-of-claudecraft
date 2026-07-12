@@ -479,6 +479,39 @@ export class Keybinds {
         else claimed.add(c);
       }
     }
+    this.migrateV0240Poisoning();
+  }
+
+  // One-time repair for profiles saved during the roughly one day #1736 (the
+  // v0.24.0 interface overhaul) was live: save() persisted that build's
+  // defaults wholesale (explicit null strafe, KeyQ/KeyE on action slots 10/11,
+  // meters on KeyZ), and the v0.24.1 revert cannot tell those from a genuine
+  // custom layout on its own. Only a profile matching the FULL poisoned
+  // signature together is touched, and only the five actions #1736 actually
+  // changed are restored to current defaults; every other binding (including a
+  // deliberate partial match on just one of these actions) is left alone. This
+  // is naturally a one-time fix per profile: once repaired, strafeLeft/Right
+  // are bound again so the signature can never match the same profile twice.
+  private migrateV0240Poisoning(): void {
+    const strafeLeft = this.map.get('strafeLeft');
+    const strafeRight = this.map.get('strafeRight');
+    const slot10 = this.map.get('slot10');
+    const slot11 = this.map.get('slot11');
+    const meters = this.map.get('meters');
+    const poisoned =
+      strafeLeft?.[0] === null &&
+      strafeLeft?.[1] === null &&
+      strafeRight?.[0] === null &&
+      strafeRight?.[1] === null &&
+      slot10?.[0] === 'KeyQ' &&
+      slot11?.[0] === 'KeyE' &&
+      meters?.[0] === 'KeyZ';
+    if (!poisoned) return;
+    const defaults = this.defaults();
+    for (const id of ['strafeLeft', 'strafeRight', 'slot10', 'slot11', 'meters']) {
+      const d = defaults.get(id);
+      if (d) this.map.set(id, [...d]);
+    }
   }
 
   private save(): void {

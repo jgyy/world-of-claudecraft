@@ -286,6 +286,60 @@ describe('persistence', () => {
   });
 });
 
+describe('v0.24.0 poisoned-profile migration (#1792)', () => {
+  function v0240Blob(overrides: Record<string, (string | null)[]> = {}) {
+    return JSON.stringify({
+      strafeLeft: [null, null],
+      strafeRight: [null, null],
+      slot10: ['KeyQ', 'Minus'],
+      slot11: ['KeyE', 'Equal'],
+      meters: ['KeyZ', null],
+      ...overrides,
+    });
+  }
+
+  it('restores strafe, slots 10/11, and meters when the full #1736 signature matches', () => {
+    localStorage.setItem('woc_keybinds', v0240Blob());
+    const kb = new Keybinds();
+    expect(kb.codeAt('strafeLeft', 0)).toBe('KeyQ');
+    expect(kb.codeAt('strafeRight', 0)).toBe('KeyE');
+    expect(kb.codeAt('slot10', 0)).toBe('Minus');
+    expect(kb.codeAt('slot10', 1)).toBe(null);
+    expect(kb.codeAt('slot11', 0)).toBe('Equal');
+    expect(kb.codeAt('meters', 0)).toBe('KeyH');
+  });
+
+  it('leaves a genuine custom layout unchanged when only part of the signature matches', () => {
+    // Player deliberately unbound strafe but never touched slot10/11/meters.
+    localStorage.setItem(
+      'woc_keybinds',
+      v0240Blob({ slot10: ['Digit9', null], slot11: ['Digit8', null], meters: ['KeyM', null] }),
+    );
+    const kb = new Keybinds();
+    expect(kb.codeAt('strafeLeft', 0)).toBe(null);
+    expect(kb.codeAt('strafeRight', 0)).toBe(null);
+    expect(kb.codeAt('slot10', 0)).toBe('Digit9');
+    expect(kb.codeAt('slot11', 0)).toBe('Digit8');
+    expect(kb.codeAt('meters', 0)).toBe('KeyM');
+  });
+
+  it('leaves other custom bindings on the profile untouched', () => {
+    localStorage.setItem('woc_keybinds', v0240Blob({ slot0: ['KeyR', null] }));
+    const kb = new Keybinds();
+    expect(kb.codeAt('slot0', 0)).toBe('KeyR');
+    expect(kb.codeAt('strafeLeft', 0)).toBe('KeyQ');
+  });
+
+  it('runs at most once: re-saving the repaired profile never re-triggers it', () => {
+    localStorage.setItem('woc_keybinds', v0240Blob());
+    new Keybinds().bind('jump', 0, 'KeyJ'); // forces a save() after migration
+    const kb = new Keybinds();
+    expect(kb.codeAt('strafeLeft', 0)).toBe('KeyQ');
+    expect(kb.codeAt('strafeRight', 0)).toBe('KeyE');
+    expect(kb.codeAt('jump', 0)).toBe('KeyJ');
+  });
+});
+
 describe('per-character scope', () => {
   it('keeps two character scopes independent', () => {
     const alice = new Keybinds('char:alice');
