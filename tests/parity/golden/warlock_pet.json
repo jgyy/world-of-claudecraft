@@ -9,8 +9,8 @@
     "applyTaunt pet auto-taunt arm (~8110)",
     "applyTaunt pet manual-taunt arm (petTaunt, ~4885)"
   ],
-  "draws": 1046,
-  "drawDigest": "b4433506",
+  "draws": 1045,
+  "drawDigest": "db1d8892",
   "frames": [
     {
       "tick": 0,
@@ -239,22 +239,22 @@
       "tick": 220,
       "time": 11,
       "nextId": 408,
-      "state": "92729ab3",
-      "events": "27530f47",
+      "state": "ae1a9956",
+      "events": "11371c1e",
       "rng": {
-        "draws": 1020,
-        "digest": "b2df9af4"
+        "draws": 1019,
+        "digest": "13dec383"
       }
     },
     {
       "tick": 220,
       "time": 11,
       "nextId": 408,
-      "state": "8f1394d9",
+      "state": "da2d5e40",
       "events": "741638a5",
       "rng": {
-        "draws": 1020,
-        "digest": "b2df9af4"
+        "draws": 1019,
+        "digest": "13dec383"
       },
       "label": "pet-taunt",
       "players": [
@@ -274,7 +274,7 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 23
+            "damageDealt": 22
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -426,7 +426,7 @@
           "forcedTargetId": 406,
           "forcedTargetTimer": 3,
           "hostile": true,
-          "hp": 49953,
+          "hp": 49954,
           "id": 407,
           "inCombat": true,
           "kind": "mob",
@@ -463,7 +463,7 @@
           "threat": [
             [
               405,
-              24
+              23
             ],
             [
               406,
@@ -482,11 +482,11 @@
       "tick": 224,
       "time": 11.2,
       "nextId": 408,
-      "state": "6b8f6ce0",
-      "events": "20644373",
+      "state": "339b0a81",
+      "events": "2e481bb9",
       "rng": {
-        "draws": 1046,
-        "digest": "b4433506"
+        "draws": 1045,
+        "digest": "db1d8892"
       },
       "label": "final",
       "players": [
@@ -506,7 +506,7 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 23
+            "damageDealt": 22
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -609,7 +609,7 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 342,
+          "hp": 328,
           "id": 406,
           "inCombat": true,
           "kind": "mob",
@@ -660,7 +660,7 @@
           "forcedTargetId": 406,
           "forcedTargetTimer": 2.8,
           "hostile": true,
-          "hp": 49940,
+          "hp": 49942,
           "id": 407,
           "inCombat": true,
           "kind": "mob",
@@ -697,11 +697,11 @@
           "threat": [
             [
               405,
-              24
+              23
             ],
             [
               406,
-              39
+              38
             ]
           ],
           "weapon": {
