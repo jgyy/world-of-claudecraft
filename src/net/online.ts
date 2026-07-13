@@ -2246,6 +2246,23 @@ export class ClientWorld implements IWorld {
     // snapshot. No optimistic local removal (stat recalc is server-owned).
     this.cmd({ cmd: 'cancel_aura', aura: auraId });
   }
+  // Card Adept read surface. The hand snapshot is not yet mirrored over the wire
+  // (server follow-up), so the online client reports an empty hand; playCard is
+  // fully server-authoritative below.
+  cardHandIds(): string[] {
+    return [];
+  }
+  cardDeckCount(): number {
+    return 0;
+  }
+  cardDiscardCount(): number {
+    return 0;
+  }
+  playCard(index: number): void {
+    // Server resolves the Focus cost and effect; the hand updates on the next self
+    // snapshot once the mirror lands.
+    this.cmd({ cmd: 'play_card', index });
+  }
   startAutoAttack(): void {
     this.cmd({ cmd: 'attack' });
   }

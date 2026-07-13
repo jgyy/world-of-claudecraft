@@ -3405,6 +3405,9 @@ export class GameServer {
       case 'cancel_aura':
         if (typeof msg.aura === 'string') sim.cancelAura(msg.aura, pid);
         break;
+      case 'play_card':
+        if (typeof msg.index === 'number') sim.playCard(msg.index, pid);
+        break;
       case 'target':
         sim.targetEntity(typeof msg.id === 'number' ? msg.id : null, pid);
         break;

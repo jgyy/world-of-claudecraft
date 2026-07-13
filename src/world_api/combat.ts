@@ -20,4 +20,14 @@ export interface IWorldCombat {
   releaseSpirit(): void;
   resurrectAtCorpse(): void;
   resurrectAtSpiritHealer(): void;
+  // Card Adept read surface: the card ids currently in the local player's hand,
+  // and the draw/discard pile sizes. Empty / zero for every other class. The
+  // online mirror populates these once the server wires the hand snapshot; until
+  // then ClientWorld reports an empty hand (offline is the source of truth).
+  cardHandIds(): string[];
+  cardDeckCount(): number;
+  cardDiscardCount(): number;
+  // Play the hand card at `index`: spends Focus and triggers the referenced
+  // ability. No-op for a non-Card-Adept player or an invalid index.
+  playCard(index: number): void;
 }

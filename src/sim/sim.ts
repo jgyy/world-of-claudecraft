@@ -4181,6 +4181,20 @@ export class Sim {
   // pipeline, which enforces the Focus cost, cooldown, and effects. No-op if the
   // player is not a Card Adept, the index is invalid, or the Focus cost is unmet
   // (so an unaffordable card is not wasted).
+  // IWorld read surface for the Card Adept HUD (local player only).
+  cardHandIds(): string[] {
+    const state = this.players.get(this.player.id)?.cardHand;
+    return state ? [...state.hand] : [];
+  }
+
+  cardDeckCount(): number {
+    return this.players.get(this.player.id)?.cardHand?.deck.length ?? 0;
+  }
+
+  cardDiscardCount(): number {
+    return this.players.get(this.player.id)?.cardHand?.discard.length ?? 0;
+  }
+
   playCard(index: number, pid?: number, aim?: { x: number; z: number }): void {
     const p = pid !== undefined ? this.entities.get(pid) : this.player;
     if (!p) return;

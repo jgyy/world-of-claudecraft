@@ -110,6 +110,10 @@ export const IWORLD_MEMBERS = [
   { name: 'castAbilityAt', kind: 'method' },
   { name: 'castAbilityBySlot', kind: 'method' },
   { name: 'cancelAura', kind: 'method' },
+  { name: 'cardHandIds', kind: 'method' },
+  { name: 'cardDeckCount', kind: 'method' },
+  { name: 'cardDiscardCount', kind: 'method' },
+  { name: 'playCard', kind: 'method' },
   { name: 'targetEntity', kind: 'method' },
   { name: 'tabTarget', kind: 'method' },
   { name: 'targetNearestFriendly', kind: 'method' },
@@ -417,9 +421,9 @@ beforeAll(() => {
 
 describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => {
   it('pins total / data / method counts', () => {
-    expect(IWORLD_MEMBERS.length).toBe(218);
+    expect(IWORLD_MEMBERS.length).toBe(222);
     expect(DATA_MEMBERS.length).toBe(60);
-    expect(METHOD_MEMBERS.length).toBe(158);
+    expect(METHOD_MEMBERS.length).toBe(162);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -465,6 +469,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'buyHeroicVendorItem',
       'buyItem',
       'cancelAura',
+      'cardDeckCount',
+      'cardDiscardCount',
+      'cardHandIds',
       'castAbility',
       'castAbilityAt',
       'castAbilityBySlot',
@@ -579,6 +586,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'petAttack',
       'petTaunt',
       'pickUpObject',
+      'playCard',
       'playEmote',
       'player',
       'playerId',
@@ -741,6 +749,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'buyHeroicVendorItem',
       'buyItem',
       'cancelAura',
+      'cardDeckCount',
+      'cardDiscardCount',
+      'cardHandIds',
       'castAbility',
       'castAbilityAt',
       'castAbilityBySlot',
@@ -826,6 +837,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'petAttack',
       'petTaunt',
       'pickUpObject',
+      'playCard',
       'playEmote',
       'prestige',
       'questState',
@@ -956,6 +968,10 @@ const FACET_COMBAT = [
   'releaseSpirit',
   'resurrectAtCorpse',
   'resurrectAtSpiritHealer',
+  'cardHandIds',
+  'cardDeckCount',
+  'cardDiscardCount',
+  'playCard',
 ] as const satisfies readonly (keyof IWorldCombat)[];
 type _ExhaustCombat = AssertNever<Exclude<keyof IWorldCombat, (typeof FACET_COMBAT)[number]>>;
 
@@ -1332,8 +1348,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the 26 fa
 
   it('the union of the 26 facets equals the pinned 218-member IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(218);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(218);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(222);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(222);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);
