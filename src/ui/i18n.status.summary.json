@@ -34,8 +34,8 @@
   "counts": {
     "keys": 7220,
     "rows": 151620,
-    "translated": 147260,
-    "pending": 4144,
+    "translated": 147275,
+    "pending": 4129,
     "blocked": 216,
     "blockedSource": 101
   },
@@ -76,23 +76,23 @@
       "blocked": 23
     },
     "zh_CN": {
-      "translated": 7207,
-      "pending": 13,
+      "translated": 7210,
+      "pending": 10,
       "blocked": 0
     },
     "zh_TW": {
-      "translated": 7207,
-      "pending": 13,
+      "translated": 7210,
+      "pending": 10,
       "blocked": 0
     },
     "ko_KR": {
-      "translated": 7207,
-      "pending": 13,
+      "translated": 7210,
+      "pending": 10,
       "blocked": 0
     },
     "ja_JP": {
-      "translated": 7207,
-      "pending": 13,
+      "translated": 7210,
+      "pending": 10,
       "blocked": 0
     },
     "pt_BR": {
@@ -101,8 +101,8 @@
       "blocked": 16
     },
     "ru_RU": {
-      "translated": 7207,
-      "pending": 13,
+      "translated": 7210,
+      "pending": 10,
       "blocked": 0
     },
     "cs_CZ": {

@@ -663,11 +663,11 @@ export const ko_KR: EnTranslations = {
       "perSecondRow": "{total} ({rate})",
       "minutesSeconds": "{m}분 {s}초",
       "seconds": "{s}초",
-      "autoShowHint": "Rows appear automatically once your party deals damage or healing, and this segment closes a few seconds after combat ends."
+      "autoShowHint": "파티가 피해를 주거나 치유를 하면 행이 자동으로 나타나며, 전투가 끝난 후 몇 초 뒤에 이 구역이 닫힙니다."
     },
     "petFeed": {
-      "disabledFullHp": "Pet is at full health",
-      "disabledNoFood": "No food in your bags will heal your pet"
+      "disabledFullHp": "펫의 체력이 가득 찼습니다",
+      "disabledNoFood": "가방에 펫을 치유할 음식이 없습니다"
     },
     "keybinds": {
       "emoteWheel": "감정 표현 휠",

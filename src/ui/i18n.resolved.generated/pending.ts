@@ -1646,10 +1646,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.claudium.railWoc",
     "hudChrome.claudium.railWocDiscount",
     "hudChrome.claudium.solBalance",
-    "hudChrome.claudium.wocBalance",
-    "hudChrome.meters.autoShowHint",
-    "hudChrome.petFeed.disabledFullHp",
-    "hudChrome.petFeed.disabledNoFood"
+    "hudChrome.claudium.wocBalance"
   ],
   "zh_TW": [
     "hudChrome.claudium.buyButton",
@@ -1661,10 +1658,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.claudium.railWoc",
     "hudChrome.claudium.railWocDiscount",
     "hudChrome.claudium.solBalance",
-    "hudChrome.claudium.wocBalance",
-    "hudChrome.meters.autoShowHint",
-    "hudChrome.petFeed.disabledFullHp",
-    "hudChrome.petFeed.disabledNoFood"
+    "hudChrome.claudium.wocBalance"
   ],
   "ko_KR": [
     "hudChrome.claudium.buyButton",
@@ -1676,10 +1670,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.claudium.railWoc",
     "hudChrome.claudium.railWocDiscount",
     "hudChrome.claudium.solBalance",
-    "hudChrome.claudium.wocBalance",
-    "hudChrome.meters.autoShowHint",
-    "hudChrome.petFeed.disabledFullHp",
-    "hudChrome.petFeed.disabledNoFood"
+    "hudChrome.claudium.wocBalance"
   ],
   "ja_JP": [
     "hudChrome.claudium.buyButton",
@@ -1691,10 +1682,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.claudium.railWoc",
     "hudChrome.claudium.railWocDiscount",
     "hudChrome.claudium.solBalance",
-    "hudChrome.claudium.wocBalance",
-    "hudChrome.meters.autoShowHint",
-    "hudChrome.petFeed.disabledFullHp",
-    "hudChrome.petFeed.disabledNoFood"
+    "hudChrome.claudium.wocBalance"
   ],
   "pt_BR": [
     "entities.abilities.chain_heal.description",
@@ -1977,10 +1965,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.claudium.railWoc",
     "hudChrome.claudium.railWocDiscount",
     "hudChrome.claudium.solBalance",
-    "hudChrome.claudium.wocBalance",
-    "hudChrome.meters.autoShowHint",
-    "hudChrome.petFeed.disabledFullHp",
-    "hudChrome.petFeed.disabledNoFood"
+    "hudChrome.claudium.wocBalance"
   ],
   "cs_CZ": [
     "entities.abilities.arcane_power.description",

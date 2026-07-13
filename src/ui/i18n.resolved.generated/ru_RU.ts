@@ -663,11 +663,11 @@ export const ru_RU: EnTranslations = {
       "perSecondRow": "{total} ({rate})",
       "minutesSeconds": "{m} мин {s} сек.",
       "seconds": "{s} сек.",
-      "autoShowHint": "Rows appear automatically once your party deals damage or healing, and this segment closes a few seconds after combat ends."
+      "autoShowHint": "Строки появляются автоматически, как только ваша группа наносит урон или лечит, и этот раздел закрывается через несколько секунд после окончания боя."
     },
     "petFeed": {
-      "disabledFullHp": "Pet is at full health",
-      "disabledNoFood": "No food in your bags will heal your pet"
+      "disabledFullHp": "Питомец полностью здоров",
+      "disabledNoFood": "В ваших сумках нет еды, которая могла бы вылечить питомца"
     },
     "keybinds": {
       "emoteWheel": "Колесо эмоций",
