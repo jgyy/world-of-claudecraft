@@ -14,6 +14,14 @@ import * as bagsMod from './bags';
 import { addStacked, BAG_SOCKETS, bagCapacity, canAddItem, migrationBagsFor } from './bags';
 import * as bankMod from './bank';
 import { type BankState, clampBonusSlots, sanitizeBankState } from './bank';
+import {
+  type CardHandState,
+  createCardHand,
+  endCombat as endCardCombat,
+  playCardAt,
+  startCombat as startCardCombat,
+  tickRedraw as tickCardRedraw,
+} from './card_hand';
 import { lineOfSightClear, resolveMovement, resolvePosition } from './colliders';
 import { auraAffectsStats, removeCancelableAura } from './combat/aura_cancel';
 import { auraReplacementConflicts } from './combat/aura_stacking';
@@ -63,6 +71,7 @@ import { isSpellResisted } from './combat/spell_resist';
 // moved to social/fiesta.ts with that logic; sim.ts keeps only the type used by
 // the PlayerMeta interface + the power-up catalog the fiestaMatchInfo accessor reads.
 import { type AugmentSpecial, type AugmentTier, POWERUPS_BY_ID } from './content/augments';
+import { CARDS_BY_ID } from './content/cards';
 import { MAILBOXES } from './content/mailboxes';
 import type { GatheringProfessionId } from './content/professions';
 import { FURY_ENTITY_ID, FURY_NPC_ID } from './content/pvp_honor';
@@ -277,15 +286,6 @@ import { prestige as prestigeImpl, updateRested } from './progression/xp';
 import { advancePendingProjectiles, type PendingProjectile } from './projectile_travel';
 import * as honorMod from './pvp';
 import { sanitizeRemovedZone1Content } from './removed_zone1_content';
-import {
-  type CardHandState,
-  createCardHand,
-  endCombat as endCardCombat,
-  playCardAt,
-  startCombat as startCardCombat,
-  tickRedraw as tickCardRedraw,
-} from './card_hand';
-import { CARDS_BY_ID } from './content/cards';
 import { Rng } from './rng';
 import { persistedResource } from './serialize_resource';
 import { createSimContext, type SimContext, type SimContextHost } from './sim_context';
