@@ -277,6 +277,15 @@ import { prestige as prestigeImpl, updateRested } from './progression/xp';
 import { advancePendingProjectiles, type PendingProjectile } from './projectile_travel';
 import * as honorMod from './pvp';
 import { sanitizeRemovedZone1Content } from './removed_zone1_content';
+import {
+  type CardHandState,
+  createCardHand,
+  endCombat as endCardCombat,
+  playCardAt,
+  startCombat as startCardCombat,
+  tickRedraw as tickCardRedraw,
+} from './card_hand';
+import { CARDS_BY_ID } from './content/cards';
 import { Rng } from './rng';
 import { persistedResource } from './serialize_resource';
 import { createSimContext, type SimContext, type SimContextHost } from './sim_context';
@@ -1035,6 +1044,9 @@ export interface PlayerMeta {
   deedStats: DeedStats;
   activeTitle: string | null;
   renown: number;
+  // Card Adept deck/hand/discard machine (only present for the card_adept class).
+  // Runtime-only, never serialized: the deck reshuffles fresh each session.
+  cardHand?: CardHandState;
 }
 
 // Away-from-keyboard / do-not-disturb presence. `afk` still delivers whispers
@@ -1895,6 +1907,7 @@ export class Sim {
       deedStats: freshDeedStats(),
       activeTitle: null,
       renown: 0,
+      cardHand: cls === 'card_adept' ? createCardHand() : undefined,
     };
     // A fresh character sets out provisioned (class-defined starter rations);
     // a saved character loads its own bags from savedState below.
@@ -3590,6 +3603,10 @@ export class Sim {
           // Proficiency just became visible; the gathering predicates re-check.
           deedsMod.markDeedsDirty(this.ctx, p.id);
         }
+        if (meta.cardHand) {
+          this.updateCardHand(p, meta);
+          lap?.('p.cards');
+        }
         lap?.('p.regen');
       } else if (p.ghost) {
         // A released spirit only runs (boosted speed via moveSpeedMult); it does not
@@ -4142,6 +4159,40 @@ export class Sim {
   // the ability aimed at the world point (x, z).
   castAbilityAt(abilityId: string, aim: { x: number; z: number }): void {
     castAbilityImpl(this.ctx, abilityId, undefined, aim);
+  }
+
+  // Card Adept: advance the deck machine for one player. Deals the opening hand
+  // on the combat rising edge, redraws on the interval while fighting, and
+  // returns the hand to the deck when combat ends. Draws rng only for card_adept,
+  // so a world with no Card Adept is unaffected (parity-safe).
+  private updateCardHand(p: Entity, meta: PlayerMeta): void {
+    const state = meta.cardHand;
+    if (!state) return;
+    if (p.inCombat) {
+      if (!state.inCombat) startCardCombat(this.rng, state);
+      else tickCardRedraw(this.rng, state);
+    } else if (state.inCombat) {
+      endCardCombat(state);
+    }
+  }
+
+  // Card Adept: play the card at `index` in the hand. Spends the card (moves it to
+  // the discard) and triggers the referenced ability through the normal cast
+  // pipeline, which enforces the Focus cost, cooldown, and effects. No-op if the
+  // player is not a Card Adept, the index is invalid, or the Focus cost is unmet
+  // (so an unaffordable card is not wasted).
+  playCard(index: number, pid?: number, aim?: { x: number; z: number }): void {
+    const p = pid !== undefined ? this.entities.get(pid) : this.player;
+    if (!p) return;
+    const meta = this.players.get(p.id);
+    const state = meta?.cardHand;
+    if (!state) return;
+    const cardId = state.hand[index];
+    if (cardId === undefined) return;
+    const def = CARDS_BY_ID[cardId];
+    if (!def || p.resource < def.cost) return;
+    this.castAbility(def.effectAbilityId, pid, aim);
+    playCardAt(state, index);
   }
 
   // Voluntarily cancel one of a player's own helpful auras (the HUD right-click-a-buff
