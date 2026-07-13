@@ -145,9 +145,6 @@ import {
   ITEM_ICON_PREFIX,
 } from './action_bar_view';
 import { ArenaWindow } from './arena_window';
-import { CardDuelWindow } from './card_duel_window';
-import { buildCardHandView } from './card_hand_view';
-import { CardHandPainter } from './card_hand_painter';
 import {
   abilityStartsAutoAttack,
   deferAutoAttackUntilCastEnd,
@@ -161,6 +158,9 @@ import { bagsWindowShown } from './bags_view';
 import { BagsWindow, dismissBagPrompts } from './bags_window';
 import { BankWindow } from './bank_window';
 import { CalendarWindow } from './calendar_window';
+import { CardDuelWindow } from './card_duel_window';
+import { CardHandPainter } from './card_hand_painter';
+import { buildCardHandView } from './card_hand_view';
 import { CastBarPainter } from './cast_bar_painter';
 import { buildPaperdollView, type PaperdollSlot } from './char_view';
 import { CharWindow } from './char_window';
@@ -5864,9 +5864,7 @@ export class Hud {
   // affordability/validity.
   private buildCardHand(): void {
     const container = $('#card-hand');
-    const slotEls = Array.from(
-      container.querySelectorAll<HTMLElement>('.card-hand-slot'),
-    );
+    const slotEls = Array.from(container.querySelectorAll<HTMLElement>('.card-hand-slot'));
     this.cardHandPainter = new CardHandPainter(
       this.writerFacet,
       {

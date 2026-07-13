@@ -287,6 +287,18 @@
           <div id="xpbar"><div class="fill"></div><div class="rested"></div><div class="ticks"></div><div class="label"></div></div>
           <div id="actionbar2" class="panel"></div>
           <div id="actionbar" class="panel"></div>
+          <div id="card-hand" class="panel hidden" role="group" data-i18n-aria="hud.cardHand.label" aria-label="Card hand">
+            <button type="button" class="card-hand-slot empty" data-card-index="0"><span class="chs-cost"></span></button>
+            <button type="button" class="card-hand-slot empty" data-card-index="1"><span class="chs-cost"></span></button>
+            <button type="button" class="card-hand-slot empty" data-card-index="2"><span class="chs-cost"></span></button>
+            <button type="button" class="card-hand-slot empty" data-card-index="3"><span class="chs-cost"></span></button>
+            <button type="button" class="card-hand-slot empty" data-card-index="4"><span class="chs-cost"></span></button>
+            <button type="button" class="card-hand-slot empty" data-card-index="5"><span class="chs-cost"></span></button>
+            <div class="card-hand-piles">
+              <span class="chp-deck" data-i18n-title="hud.cardHand.deckTitle" title="Deck"><span id="card-hand-deck-count">0</span></span>
+              <span class="chp-discard" data-i18n-title="hud.cardHand.discardTitle" title="Discard"><span id="card-hand-discard-count">0</span></span>
+            </div>
+          </div>
         </div>
         <div id="meters-window" class="panel">
           <div class="panel-title">
@@ -352,6 +364,7 @@
       <span id="map-summary" class="visually-hidden" role="status" aria-live="polite"></span>
     </div>
     <div id="arena-window" class="window panel"></div>
+    <div id="card-duel-window" class="window panel"></div>
     <div id="valecup-window" class="window panel"></div>
     <div id="leaderboard-window" class="window panel"></div>
     <div id="daily-rewards-window" class="window panel"></div>
@@ -378,6 +391,7 @@
       <button class="micro-btn" id="mm-map" data-i18n-title="hud.keybinds.actions.map" data-i18n-aria="hud.keybinds.actions.map" title="World Map" aria-label="World Map" data-icon="map"><span class="keybind">m</span></button>
       <button class="micro-btn" id="mm-bag" data-i18n-title="itemUi.bags.title" data-i18n-aria="itemUi.bags.title" title="Bags" aria-label="Bags" data-icon="bags"><span class="keybind">b</span></button>
       <button class="micro-btn" id="mm-arena" data-i18n-title="hud.keybinds.actions.arena" data-i18n-aria="hud.keybinds.actions.arena" title="Arena (Ashen Coliseum)" aria-label="Arena (Ashen Coliseum)" data-icon="arena"><span class="keybind">g</span></button>
+      <button class="micro-btn" id="mm-card-duel" style="display:none" data-i18n-title="hud.cardDuel.title" data-i18n-aria="hud.cardDuel.title" title="Card Duel" aria-label="Card Duel" data-icon="arena"></button>
       <button class="micro-btn" id="mm-valecup" data-i18n-title="hudChrome.keybinds.valecup" data-i18n-aria="hudChrome.keybinds.valecup" title="Vale Cup" aria-label="Vale Cup" data-icon="ball"><span class="keybind">y</span></button>
       <button class="micro-btn" id="mm-leaderboard" data-i18n-title="game.leaderboard.title" data-i18n-aria="game.leaderboard.title" title="Leaderboard" aria-label="Leaderboard" data-icon="leaderboard"><span class="keybind">k</span></button>
       <button class="micro-btn" id="mm-emote" data-i18n-aria="hudChrome.emoteWheel.label" aria-label="Emotes" data-icon="emote"><span class="keybind">x</span></button>

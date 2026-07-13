@@ -7209,7 +7209,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'classes.card_adept': '카드 숙련자',
   'classes.card_adeptAria': '카드 숙련자 직업',
   'classDetails.roles.card_adept': '원거리 딜러',
-  'classDetails.lore.card_adept': '카드 숙련자는 충전된 카드 덱을 섞어 다루며, 집중력을 소모해 끊임없이 순환하는 손패에서 뽑은 피해, 치유, 보호 카드를 사용한다.',
+  'classDetails.lore.card_adept':
+    '카드 숙련자는 충전된 카드 덱을 섞어 다루며, 집중력을 소모해 끊임없이 순환하는 손패에서 뽑은 피해, 치유, 보호 카드를 사용한다.',
   'guide.abilityHook.ca_quickstrike': '값싼 충전 카드를 적에게 재빠르게 날려 비전 피해를 준다.',
   'guide.abilityHook.ca_arcane_bolt': '믿음직한 원거리 카드, 견고한 비전 힘의 화살.',
   'guide.abilityHook.ca_flame_fan': '불타는 카드를 부채꼴로 펼쳐 타격과 지속 화상을 남긴다.',
@@ -7219,18 +7220,24 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'guide.abilityHook.ca_empower_card': '덱에서 힘을 끌어내어 큰 한 방 전에 지능을 높인다.',
   'guide.abilityHook.ca_royal_flush': '마무리 기술, 로열 플러시로 강력한 화염 피해를 터뜨린다.',
   'entities.abilities.ca_quickstrike.name': '속공 카드',
-  'entities.abilities.ca_quickstrike.description': '충전 카드를 대상에게 날려 {damage}의 비전 피해를 준다.',
+  'entities.abilities.ca_quickstrike.description':
+    '충전 카드를 대상에게 날려 {damage}의 비전 피해를 준다.',
   'entities.abilities.ca_arcane_bolt.name': '비전 화살 카드',
   'entities.abilities.ca_arcane_bolt.description': '비전 힘의 화살을 쏘아 {damage}의 피해를 준다.',
   'entities.abilities.ca_flame_fan.name': '화염 부채 카드',
-  'entities.abilities.ca_flame_fan.description': '불타는 카드를 부채꼴로 펼쳐 {damage}의 화염 피해와 화상을 준다.',
+  'entities.abilities.ca_flame_fan.description':
+    '불타는 카드를 부채꼴로 펼쳐 {damage}의 화염 피해와 화상을 준다.',
   'entities.abilities.ca_mending_card.name': '치유 카드',
-  'entities.abilities.ca_mending_card.description': '회복 카드를 내어 아군 대상을 {damage}만큼 치유한다.',
+  'entities.abilities.ca_mending_card.description':
+    '회복 카드를 내어 아군 대상을 {damage}만큼 치유한다.',
   'entities.abilities.ca_warding_card.name': '수호 카드',
-  'entities.abilities.ca_warding_card.description': '수호 카드로 자신을 감싸 방어도를 {buff}만큼 30초간 높인다.',
+  'entities.abilities.ca_warding_card.description':
+    '수호 카드로 자신을 감싸 방어도를 {buff}만큼 30초간 높인다.',
   'entities.abilities.ca_hex_card.description': '저주 카드를 내어 대상을 6초간 둔화시킨다.',
   'entities.abilities.ca_empower_card.name': '강화 카드',
-  'entities.abilities.ca_empower_card.description': '덱에서 힘을 끌어내어 지능을 {buff}% 1분간 높인다.',
+  'entities.abilities.ca_empower_card.description':
+    '덱에서 힘을 끌어내어 지능을 {buff}% 1분간 높인다.',
   'entities.abilities.ca_royal_flush.name': '로열 플러시 카드',
-  'entities.abilities.ca_royal_flush.description': '로열 플러시를 터뜨려 {damage}의 화염 피해를 준다.',
+  'entities.abilities.ca_royal_flush.description':
+    '로열 플러시를 터뜨려 {damage}의 화염 피해를 준다.',
 };

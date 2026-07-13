@@ -6869,7 +6869,8 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'classes.card_adept': '卡牌賢者',
   'classes.card_adeptAria': '卡牌賢者職業',
   'classDetails.roles.card_adept': '遠程輸出',
-  'classDetails.lore.card_adept': '卡牌賢者操控一副洗好的充能卡牌，消耗專注打出從不斷循環的手牌中抽取的傷害、治療與護盾卡牌。',
+  'classDetails.lore.card_adept':
+    '卡牌賢者操控一副洗好的充能卡牌，消耗專注打出從不斷循環的手牌中抽取的傷害、治療與護盾卡牌。',
   'guide.abilityHook.ca_quickstrike': '一張廉價的充能卡牌，快速甩向敵人造成奧術傷害。',
   'guide.abilityHook.ca_arcane_bolt': '你可靠的遠程卡牌，一道扎實的奧術之力箭。',
   'guide.abilityHook.ca_flame_fan': '扇出一片燃燒的卡牌，造成一次打擊並附加持續灼燒。',
@@ -6879,18 +6880,23 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'guide.abilityHook.ca_empower_card': '從牌堆汲取力量，在大招之前提升你的智力。',
   'guide.abilityHook.ca_royal_flush': '你的終結技，一手同花大順釋放沉重的火焰傷害。',
   'entities.abilities.ca_quickstrike.name': '疾擊牌',
-  'entities.abilities.ca_quickstrike.description': '將一張充能卡牌甩向目標，造成 {damage} 點奧術傷害。',
+  'entities.abilities.ca_quickstrike.description':
+    '將一張充能卡牌甩向目標，造成 {damage} 點奧術傷害。',
   'entities.abilities.ca_arcane_bolt.name': '奧術箭牌',
   'entities.abilities.ca_arcane_bolt.description': '射出一道奧術之力箭，造成 {damage} 點傷害。',
   'entities.abilities.ca_flame_fan.name': '火焰扇牌',
-  'entities.abilities.ca_flame_fan.description': '扇出一片燃燒的卡牌，造成 {damage} 點火焰傷害並附加灼燒。',
+  'entities.abilities.ca_flame_fan.description':
+    '扇出一片燃燒的卡牌，造成 {damage} 點火焰傷害並附加灼燒。',
   'entities.abilities.ca_mending_card.name': '癒合牌',
-  'entities.abilities.ca_mending_card.description': '打出一張恢復卡牌，為友方目標治療 {damage} 點生命。',
+  'entities.abilities.ca_mending_card.description':
+    '打出一張恢復卡牌，為友方目標治療 {damage} 點生命。',
   'entities.abilities.ca_warding_card.name': '守護牌',
-  'entities.abilities.ca_warding_card.description': '以一張守護卡牌環繞自身，護甲提升 {buff}，持續 30 秒。',
+  'entities.abilities.ca_warding_card.description':
+    '以一張守護卡牌環繞自身，護甲提升 {buff}，持續 30 秒。',
   'entities.abilities.ca_hex_card.description': '打出一張妖術卡牌，使目標減速，持續 6 秒。',
   'entities.abilities.ca_empower_card.name': '強化牌',
-  'entities.abilities.ca_empower_card.description': '從牌堆汲取力量，智力提升 {buff}%，持續 1 分鐘。',
+  'entities.abilities.ca_empower_card.description':
+    '從牌堆汲取力量，智力提升 {buff}%，持續 1 分鐘。',
   'entities.abilities.ca_royal_flush.name': '同花順牌',
   'entities.abilities.ca_royal_flush.description': '釋放一手同花大順，造成 {damage} 點火焰傷害。',
 };

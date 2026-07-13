@@ -80,7 +80,7 @@ export const CLASS_DETAILS: Record<PlayerClass, ClassDetails> = {
     roleType: 'dps',
     armorKey: 'classDetails.armor.cloth',
     weaponsKey: 'classDetails.weapons.staves',
-  }
+  },
 };
 
 // Three curated "signature" abilities per class, shown on the select screen.
@@ -96,5 +96,5 @@ export const SIGNATURE_ABILITIES: Record<PlayerClass, string[]> = {
   mage: ['fireball', 'frostbolt', 'polymorph'],
   warlock: ['shadow_bolt', 'corruption', 'life_tap'],
   druid: ['wrath', 'bear_form', 'rejuvenation'],
-  card_adept: ['ca_arcane_bolt', 'ca_flame_fan', 'ca_royal_flush']
+  card_adept: ['ca_arcane_bolt', 'ca_flame_fan', 'ca_royal_flush'],
 };

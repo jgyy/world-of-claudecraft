@@ -798,9 +798,10 @@ describe('asset library registry parsers', () => {
     const map = library.parseSkinsMap(src);
     const knightA = map.get('textures/skins/knight/alt_a.png') ?? [];
     expect(knightA).toEqual(expect.arrayContaining([{ key: 'player_warrior', index: 1 }]));
-    // mage.glb atlases serve priest, mage, and warlock.
+    // mage.glb atlases serve card_adept, priest, mage, and warlock.
     const mageA = map.get('textures/skins/mage/alt_a.png') ?? [];
     expect(mageA.map((s: { key: string }) => s.key).sort()).toEqual([
+      'player_card_adept',
       'player_mage',
       'player_priest',
       'player_warlock',

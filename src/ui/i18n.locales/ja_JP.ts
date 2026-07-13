@@ -7223,7 +7223,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'classes.card_adept': 'カードアデプト',
   'classes.card_adeptAria': 'カードアデプトの職業',
   'classDetails.roles.card_adept': '遠隔DPS',
-  'classDetails.lore.card_adept': 'カードアデプトはシャッフルされた充填カードの束を操り、集中力を消費して、絶えず巡る手札から引いたダメージ・回復・防御のカードを使う。',
+  'classDetails.lore.card_adept':
+    'カードアデプトはシャッフルされた充填カードの束を操り、集中力を消費して、絶えず巡る手札から引いたダメージ・回復・防御のカードを使う。',
   'guide.abilityHook.ca_quickstrike': '安価な充填カードを敵に素早く放ち、秘術ダメージを与える。',
   'guide.abilityHook.ca_arcane_bolt': '頼れる遠隔カード。確かな秘術の力の矢。',
   'guide.abilityHook.ca_flame_fan': '燃える札を扇状に放ち、一撃と持続する燃焼を与える。',
@@ -7233,18 +7234,25 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'guide.abilityHook.ca_empower_card': '山札から力を引き出し、大技の前に知力を高める。',
   'guide.abilityHook.ca_royal_flush': '切り札のロイヤルフラッシュ。重い火炎ダメージを解き放つ。',
   'entities.abilities.ca_quickstrike.name': 'クイックストライクカード',
-  'entities.abilities.ca_quickstrike.description': '充填カードを対象に放ち、{damage} の秘術ダメージを与える。',
+  'entities.abilities.ca_quickstrike.description':
+    '充填カードを対象に放ち、{damage} の秘術ダメージを与える。',
   'entities.abilities.ca_arcane_bolt.name': 'アーケインボルトカード',
-  'entities.abilities.ca_arcane_bolt.description': '秘術の力の矢を放ち、{damage} のダメージを与える。',
+  'entities.abilities.ca_arcane_bolt.description':
+    '秘術の力の矢を放ち、{damage} のダメージを与える。',
   'entities.abilities.ca_flame_fan.name': 'フレイムファンカード',
-  'entities.abilities.ca_flame_fan.description': '燃える札を扇状に放ち、{damage} の火炎ダメージと燃焼を与える。',
+  'entities.abilities.ca_flame_fan.description':
+    '燃える札を扇状に放ち、{damage} の火炎ダメージと燃焼を与える。',
   'entities.abilities.ca_mending_card.name': 'メンディングカード',
-  'entities.abilities.ca_mending_card.description': '回復の札を出し、味方の対象を {damage} 回復する。',
+  'entities.abilities.ca_mending_card.description':
+    '回復の札を出し、味方の対象を {damage} 回復する。',
   'entities.abilities.ca_warding_card.name': 'ウォーディングカード',
-  'entities.abilities.ca_warding_card.description': '守護の札で身を包み、防御力を {buff} 高める（30秒）。',
+  'entities.abilities.ca_warding_card.description':
+    '守護の札で身を包み、防御力を {buff} 高める（30秒）。',
   'entities.abilities.ca_hex_card.description': '呪いの札を出し、対象を6秒間減速させる。',
   'entities.abilities.ca_empower_card.name': 'エンパワーカード',
-  'entities.abilities.ca_empower_card.description': '山札から力を引き出し、知力を {buff}% 高める（1分）。',
+  'entities.abilities.ca_empower_card.description':
+    '山札から力を引き出し、知力を {buff}% 高める（1分）。',
   'entities.abilities.ca_royal_flush.name': 'ロイヤルフラッシュカード',
-  'entities.abilities.ca_royal_flush.description': 'ロイヤルフラッシュを放ち、{damage} の火炎ダメージを与える。',
+  'entities.abilities.ca_royal_flush.description':
+    'ロイヤルフラッシュを放ち、{damage} の火炎ダメージを与える。',
 };

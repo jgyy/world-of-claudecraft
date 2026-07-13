@@ -315,8 +315,20 @@ describe('Nythraxis raid encounter', () => {
 
     expect(ITEMS.crownforged_dreadhelm.requiredClass).toEqual(['warrior', 'paladin']);
     expect(ITEMS.crownforged_warspaulders.requiredClass).toEqual(['warrior', 'paladin']);
-    expect(ITEMS.soulflame_cowl.requiredClass).toEqual(['mage', 'priest', 'warlock', 'druid', 'card_adept']);
-    expect(ITEMS.soulflame_mantle.requiredClass).toEqual(['mage', 'priest', 'warlock', 'druid', 'card_adept']);
+    expect(ITEMS.soulflame_cowl.requiredClass).toEqual([
+      'mage',
+      'priest',
+      'warlock',
+      'druid',
+      'card_adept',
+    ]);
+    expect(ITEMS.soulflame_mantle.requiredClass).toEqual([
+      'mage',
+      'priest',
+      'warlock',
+      'druid',
+      'card_adept',
+    ]);
     expect(ITEMS.stormcallers_crown.requiredClass).toEqual(['shaman']);
     expect(ITEMS.stormcallers_spaulders.requiredClass).toEqual(['shaman']);
   });

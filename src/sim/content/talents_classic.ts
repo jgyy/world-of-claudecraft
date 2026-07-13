@@ -4077,4 +4077,3 @@ export const DRUID_TALENTS: ClassTalents = {
   nodes: [...DRUID_CLASS, ...DRUID_SPEC_NODES],
   specs: DRUID_SPECS,
 };
-
