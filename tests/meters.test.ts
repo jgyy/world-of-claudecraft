@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { SimEvent } from '../src/sim/types';
-import { MeterData } from '../src/ui/meters';
+import { MeterData, metersEmptyStateHint } from '../src/ui/meters';
 import type { IWorld } from '../src/world_api';
 
 // minimal IWorld stand-in: entity map + player + party
@@ -138,5 +138,15 @@ describe('combat meters', () => {
     expect(m.current).not.toBeNull();
     expect(m.current!.tallies.get(3)!.name).toBe('Wolf Pet');
     expect(m.current!.tallies.get(3)!.dmg).toBe(18);
+  });
+});
+
+// The panel used to just say "No combat data" with no explanation of when it
+// fills in, so a first-time viewer had no way to tell the window was working
+// as designed rather than broken. metersEmptyStateHint returns the i18n key
+// for a small subtitle the empty state now also renders.
+describe('metersEmptyStateHint', () => {
+  it('returns the auto-show hint key', () => {
+    expect(metersEmptyStateHint()).toBe('hudChrome.meters.autoShowHint');
   });
 });

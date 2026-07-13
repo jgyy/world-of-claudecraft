@@ -9,14 +9,23 @@
 // threat — synced online as the top entries) and marks who the mob is
 // actually targeting (aggroTargetId). For finished encounters whose mob is
 // gone, it falls back to each member's damage on that mob.
-import type { IWorld } from '../world_api';
-import type { SimEvent } from '../sim/types';
+
 import { CLASSES } from '../sim/data';
-import { formatNumber, t, type TranslationKey } from './i18n';
+import type { SimEvent } from '../sim/types';
+import type { IWorld } from '../world_api';
 import { tEntity } from './entity_i18n';
+import { formatNumber, type TranslationKey, t } from './i18n';
 
 const ENCOUNTER_END_SECONDS = 5;
 const HISTORY_CAP = 8;
+
+// The panel's empty state ("No combat data") used to give no hint that rows
+// fill in automatically once party combat starts, so a first-time viewer had
+// no way to tell the window was working as designed instead of broken. Pure
+// (returns the i18n key, not the translated string) so it is Node-testable.
+export function metersEmptyStateHint(): TranslationKey {
+  return 'hudChrome.meters.autoShowHint';
+}
 
 export interface MemberTally {
   pid: number;
@@ -46,8 +55,14 @@ export interface Encounter {
 
 function newEncounter(now: number): Encounter {
   return {
-    label: 'Combat', startedAt: now, duration: 0, tallies: new Map(),
-    mainMobId: null, mainMobName: '', mainMobTemplateId: null, biggestMobHp: -1,
+    label: 'Combat',
+    startedAt: now,
+    duration: 0,
+    tallies: new Map(),
+    mainMobId: null,
+    mainMobName: '',
+    mainMobTemplateId: null,
+    biggestMobHp: -1,
   };
 }
 
@@ -88,7 +103,8 @@ export class MeterData {
         const src = world.entities.get(ev.sourceId);
         const member = world.partyInfo?.members.find((m) => m.pid === ev.sourceId);
         const name = member?.name ?? src?.name ?? `#${ev.sourceId}`;
-        const cls = member?.cls ?? (ev.sourceId === world.player.id ? world.player.templateId : null);
+        const cls =
+          member?.cls ?? (ev.sourceId === world.player.id ? world.player.templateId : null);
         for (const enc of [this.current, this.allTime]) {
           const t = this.tally(enc, ev.sourceId, name, cls);
           t.dmg += ev.amount;
@@ -123,7 +139,12 @@ export class MeterData {
     if ((now - this.lastActivity) / 1000 < ENCOUNTER_END_SECONDS) return;
     // quiet for a while — but a mob still chasing a member keeps it open
     for (const e of world.entities.values()) {
-      if (e.kind === 'mob' && !e.dead && e.aggroTargetId !== null && partyPids.has(e.aggroTargetId)) {
+      if (
+        e.kind === 'mob' &&
+        !e.dead &&
+        e.aggroTargetId !== null &&
+        partyPids.has(e.aggroTargetId)
+      ) {
         return;
       }
     }
@@ -249,19 +270,32 @@ export class Meters {
     }
     if (this.viewIdx === 0) {
       const enc = this.data.current ?? h[0] ?? null;
-      return { enc, viewName: this.data.current ? t('hud.meters.current') : enc ? t('hud.meters.lastFight') : t('hud.meters.current') };
+      return {
+        enc,
+        viewName: this.data.current
+          ? t('hud.meters.current')
+          : enc
+            ? t('hud.meters.lastFight')
+            : t('hud.meters.current'),
+      };
     }
-    return { enc: h[this.viewIdx - 1] ?? null, viewName: t('hud.meters.fightIndex', { index: this.viewIdx }) };
+    return {
+      enc: h[this.viewIdx - 1] ?? null,
+      viewName: t('hud.meters.fightIndex', { index: this.viewIdx }),
+    };
   }
 
   render(force = false): void {
     if (!this.isOpen && !force) return;
     this.lastRender = performance.now();
     const { enc, viewName } = this.viewedEncounter();
-    this.titleEl.textContent = t('hud.meters.title', { tab: t(TAB_LABEL_KEY[this.tab]), view: viewName });
+    this.titleEl.textContent = t('hud.meters.title', {
+      tab: t(TAB_LABEL_KEY[this.tab]),
+      view: viewName,
+    });
 
     if (!enc || enc.tallies.size === 0) {
-      this.subEl.textContent = t('hud.meters.noCombat');
+      this.subEl.textContent = `${t('hud.meters.noCombat')} ${t(metersEmptyStateHint())}`;
       this.rowsEl.innerHTML = '';
       return;
     }
@@ -269,20 +303,34 @@ export class Meters {
     const isThreat = this.tab === 'threat';
     const mob = isThreat && enc.mainMobId !== null ? this.world.entities.get(enc.mainMobId) : null;
     const aggroPid = mob && !mob.dead ? mob.aggroTargetId : null;
-    const mobName = enc.mainMobTemplateId ? tEntity({ kind: 'mob', id: enc.mainMobTemplateId, field: 'name' }) : enc.mainMobName;
-    const encounterLabel = enc.label === 'Combat' || enc.label === 'All (session)' ? viewName : mobName;
+    const mobName = enc.mainMobTemplateId
+      ? tEntity({ kind: 'mob', id: enc.mainMobTemplateId, field: 'name' })
+      : enc.mainMobName;
+    const encounterLabel =
+      enc.label === 'Combat' || enc.label === 'All (session)' ? viewName : mobName;
     this.subEl.textContent = isThreat
-      ? (enc.mainMobName ? t('hud.meters.target', { name: mobName }) : t('hud.meters.noTargetEngaged'))
-      : t('hud.meters.segmentSummary', { label: encounterLabel, duration: fmtDuration(enc.duration) });
+      ? enc.mainMobName
+        ? t('hud.meters.target', { name: mobName })
+        : t('hud.meters.noTargetEngaged')
+      : t('hud.meters.segmentSummary', {
+          label: encounterLabel,
+          duration: fmtDuration(enc.duration),
+        });
 
     const liveThreat = mob && !mob.dead && mob.threat.size > 0 ? mob.threat : null;
     const rows = [...enc.tallies.values()]
       .map((t) => ({
         t,
-        value: this.tab === 'dmg' ? t.dmg
-          : this.tab === 'heal' ? t.heal
-          : liveThreat ? liveThreat.get(t.pid) ?? 0
-          : (enc.mainMobId !== null ? t.dmgByMob.get(enc.mainMobId) ?? 0 : 0),
+        value:
+          this.tab === 'dmg'
+            ? t.dmg
+            : this.tab === 'heal'
+              ? t.heal
+              : liveThreat
+                ? (liveThreat.get(t.pid) ?? 0)
+                : enc.mainMobId !== null
+                  ? (t.dmgByMob.get(enc.mainMobId) ?? 0)
+                  : 0,
       }))
       .filter((r) => r.value > 0)
       .sort((a, b) => b.value - a.value);
@@ -303,9 +351,7 @@ export class Meters {
       label.textContent = t.name;
       const num = document.createElement('span');
       num.className = 'mt-num';
-      num.textContent = isThreat
-        ? fmtNum(value)
-        : fmtPerSecondRow(value, value / enc.duration);
+      num.textContent = isThreat ? fmtNum(value) : fmtPerSecondRow(value, value / enc.duration);
       if (hasAggro) row.classList.add('aggro');
       row.append(fill, label, num);
       this.rowsEl.appendChild(row);
@@ -318,8 +364,10 @@ export class Meters {
 // k/m suffixes + thresholds are preserved (useGrouping:false keeps the readout
 // byte-identical to the historical `toFixed(1)`/`Math.round` form in en).
 function fmtNum(v: number): string {
-  if (v >= 1_000_000) return `${formatNumber(v / 1_000_000, { minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false })}m`;
-  if (v >= 10_000) return `${formatNumber(v / 1000, { minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false })}k`;
+  if (v >= 1_000_000)
+    return `${formatNumber(v / 1_000_000, { minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false })}m`;
+  if (v >= 10_000)
+    return `${formatNumber(v / 1000, { minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false })}k`;
   return formatNumber(Math.round(v), { maximumFractionDigits: 0, useGrouping: false });
 }
 
