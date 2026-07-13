@@ -90,9 +90,9 @@ describe('registry', () => {
     expect(valecup?.category).toBe('Interface');
     expect(valecup?.kind).toBe('edge');
     expect(valecup?.defaults).toEqual(['KeyY']);
-    // The Book of Deeds is a rebindable Interface toggle. Damage Meters claimed
-    // the last free ergonomic letter (KeyZ), so deeds parks on the shifted
-    // layer of the same key, like the Shift+digit secondary bar.
+    // The Book of Deeds is a rebindable Interface toggle. Every bare letter is
+    // claimed by another default, so deeds parks on the shifted layer of KeyZ,
+    // like Damage Meters does on H and the Shift+digit secondary bar.
     const deeds = BIND_ACTIONS.find((a) => a.id === 'deeds');
     expect(deeds?.category).toBe('Interface');
     expect(deeds?.kind).toBe('edge');
@@ -411,6 +411,44 @@ describe('per-character scope', () => {
     // A corrupt scoped value behaves like an absent one: still seed from legacy,
     // do not drop to bare defaults.
     expect(new Keybinds('char:alice').actionForCode('KeyZ')).toBe('jump');
+  });
+
+  it('does not let a legacy strafe blob re-seed Q/E strafe from action-bar slot keys', () => {
+    // A player from before Q/E strafe existed has an account-wide blob whose
+    // strafeLeft/strafeRight reflect the OLD convention (the action-bar slot
+    // keys). A fresh character must keep the modern Q/E defaults, not
+    // silently inherit the collision, which also must not evict slot0/slot1
+    // from their own action-bar defaults.
+    localStorage.setItem(
+      'woc_keybinds',
+      JSON.stringify({
+        strafeLeft: ['Digit1', null],
+        strafeRight: ['Digit2', null],
+      }),
+    );
+    const fresh = new Keybinds('char:alice');
+    expect(fresh.codeAt('strafeLeft', 0)).toBe('KeyQ');
+    expect(fresh.codeAt('strafeRight', 0)).toBe('KeyE');
+    expect(fresh.actionForCode('Digit1')).toBe('slot0');
+    expect(fresh.actionForCode('Digit2')).toBe('slot1');
+  });
+
+  it('still imports a genuine legacy customization that does not collide with a current default', () => {
+    // A real remap (interact moved off F onto an otherwise-unused function
+    // key) must still come through on first seed.
+    localStorage.setItem('woc_keybinds', JSON.stringify({ interact: ['F1', null] }));
+    const fresh = new Keybinds('char:alice');
+    expect(fresh.codeAt('interact', 0)).toBe('F1');
+  });
+
+  it('gives targetFriendly and meters distinct default keys instead of colliding on KeyH', () => {
+    const kb = new Keybinds();
+    expect(kb.codeAt('targetFriendly', 0)).toBe('KeyH');
+    expect(kb.codeAt('meters', 0)).not.toBe('KeyH');
+    expect(kb.actionForCode('KeyH')).toBe('targetFriendly');
+    const meterCode = kb.codeAt('meters', 0);
+    expect(meterCode).not.toBeNull();
+    expect(kb.edgeActionForCombo(meterCode!)).toBe('meters');
   });
 
   it('seeds from the legacy blob when the scoped value is not a plain object', () => {

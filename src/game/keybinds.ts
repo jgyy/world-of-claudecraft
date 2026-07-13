@@ -165,7 +165,16 @@ export const BIND_ACTIONS: BindAction[] = [
     defaults: ['KeyV'],
   },
   { id: 'talents', label: 'Talents', category: 'Interface', kind: 'edge', defaults: ['KeyN'] },
-  { id: 'meters', label: 'Damage Meters', category: 'Interface', kind: 'edge', defaults: ['KeyH'] },
+  // Every bare letter is claimed by another default (see the KeyZ note on
+  // Book of Deeds below), so Damage Meters parks on the shifted layer of its
+  // thematically nearest key (H, "hate"/threat), like deeds does on Z.
+  {
+    id: 'meters',
+    label: 'Damage Meters',
+    category: 'Interface',
+    kind: 'edge',
+    defaults: ['Shift+KeyH'],
+  },
   {
     id: 'social',
     label: 'Friends & Guild',
@@ -208,11 +217,11 @@ export const BIND_ACTIONS: BindAction[] = [
     kind: 'edge',
     defaults: ['KeyU'],
   },
-  // The Book of Deeds parks on the shifted layer of KeyZ, like the
-  // Shift+digit secondary bar: the bare letter stays free (the persistence
-  // suite and player muscle memory both treat KeyZ as the rebindable spare),
-  // and the shipped default survives the interface-overhaul revert unchanged.
-  // Rebindable like any other action.
+  // The Book of Deeds parks on the shifted layer of KeyZ, like Damage Meters
+  // does on H and the Shift+digit secondary bar: the bare letter stays free
+  // (the persistence suite and player muscle memory both treat KeyZ as the
+  // rebindable spare), and the shipped default survives the
+  // interface-overhaul revert unchanged. Rebindable like any other action.
   {
     id: 'deeds',
     label: 'Book of Deeds',
@@ -289,6 +298,18 @@ export function actionKind(id: string): BindKind | null {
 // Actions exempt from the one-code-per-action uniqueness sweep (see BindAction).
 export function actionAllowsShared(id: string): boolean {
   return ACTION_BY_ID.get(id)?.allowShared === true;
+}
+
+// True when `code` is the current default (primary or secondary) of some
+// Action Bar slot other than `excludeId`. Used only by the legacy-blob seed
+// path in Keybinds.load() to refuse importing an old binding that would
+// silently steal a combat action-bar slot.
+function isDefaultOfOtherActionBarSlot(excludeId: string, code: string): boolean {
+  for (const other of BIND_ACTIONS) {
+    if (other.id === excludeId || other.category !== 'Action Bar') continue;
+    if (other.defaults.includes(code)) return true;
+  }
+  return false;
 }
 
 // --- modifier-aware bindings ---------------------------------------------
@@ -469,7 +490,11 @@ export class Keybinds {
     // still seeds rather than dropping to bare defaults; the legacy blob is only
     // ever read here, never overwritten.
     let obj = readBindingsBlob(this.storeKey);
-    if (!obj && this.storeKey !== KEY_PREFIX) obj = readBindingsBlob(KEY_PREFIX);
+    let isLegacySeed = false;
+    if (!obj && this.storeKey !== KEY_PREFIX) {
+      obj = readBindingsBlob(KEY_PREFIX);
+      isLegacySeed = obj !== null;
+    }
     if (!obj) return;
     // Apply stored codes over the defaults, but only for known actions and
     // never letting one code land on two actions (first writer keeps it).
@@ -484,12 +509,32 @@ export class Keybinds {
       const shared = actionAllowsShared(a.id);
       for (let i = 0; i < SLOTS_PER_ACTION; i++) {
         const v = entry[i];
+        if (typeof v !== 'string' || isReservedCode(v)) continue;
         // Shared actions keep their code even if another action already claimed
         // it, and never claim it themselves, so the overlap survives a round-trip.
-        if (typeof v === 'string' && !isReservedCode(v) && (shared || !claimed.has(v))) {
-          slots[i] = v;
-          if (!shared) claimed.add(v);
+        if (!shared && claimed.has(v)) continue;
+        // Legacy-seed only: an account-wide blob predating a layout change can
+        // hold an action's OLD convention that now collides with an Action Bar
+        // slot's current default (e.g. pre-Q/E-strafe strafeLeft/strafeRight
+        // sitting on Digit1/Digit2). Silently importing that would steal a
+        // combat action-bar slot out from under the player on first login, so
+        // refuse the import and keep this action's own current default
+        // instead. A genuine remap of some OTHER action (whose value does not
+        // collide with a current action-bar default) still comes through.
+        if (
+          isLegacySeed &&
+          v !== (a.defaults[i] ?? null) &&
+          isDefaultOfOtherActionBarSlot(a.id, v)
+        ) {
+          const own = a.defaults[i] ?? null;
+          if (own !== null && (shared || !claimed.has(own))) {
+            slots[i] = own;
+            if (!shared) claimed.add(own);
+          }
+          continue;
         }
+        slots[i] = v;
+        if (!shared) claimed.add(v);
       }
       this.map.set(a.id, slots);
     }
