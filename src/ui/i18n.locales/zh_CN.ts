@@ -3829,7 +3829,8 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.meters.perSecond': '{value}/秒',
   'hudChrome.meters.perSecondRow': '{total}（{rate}）',
   'hudChrome.meters.seconds': '{s}秒',
-  'hudChrome.meters.autoShowHint': '一旦你的小队造成伤害或治疗，行数就会自动出现，此区段会在战斗结束几秒后关闭。',
+  'hudChrome.meters.autoShowHint':
+    '一旦你的小队造成伤害或治疗，行数就会自动出现，此区段会在战斗结束几秒后关闭。',
   'hudChrome.mobile.actionPageToggle': '切换动作页',
   'hudChrome.mobile.actionRing': '战斗动作',
   'hudChrome.mobile.haptics': '震动反馈',
