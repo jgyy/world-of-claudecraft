@@ -122,6 +122,7 @@ const simFiles = walk(simRoot);
 const UI_PURE_CORES = [
   'src/ui/chat_ignore_core.ts',
   'src/ui/unit_portrait.ts',
+  'src/ui/card_hand_view.ts',
   'src/ui/xp_bar.ts',
   'src/ui/absorb_bar.ts',
   'src/ui/party_frames.ts',

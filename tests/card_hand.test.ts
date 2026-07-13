@@ -1,16 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import { buildStartingDeck, CARDS, CARDS_BY_ID } from '../src/sim/content/cards';
-import { ABILITIES } from '../src/sim/content/classes';
 import {
   createCardHand,
   drawOne,
   endCombat,
   playCardAt,
+  STARTING_HAND_SIZE,
   shuffle,
   startCombat,
-  STARTING_HAND_SIZE,
   tickRedraw,
 } from '../src/sim/card_hand';
+import { buildStartingDeck, CARDS, CARDS_BY_ID } from '../src/sim/content/cards';
+import { ABILITIES } from '../src/sim/content/classes';
 import { Rng } from '../src/sim/rng';
 
 describe('Card Adept deck data', () => {
