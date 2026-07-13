@@ -8,8 +8,21 @@ import { sanitizeMoveFacing, sanitizeMoveInput } from '../sim/move_input';
 import type { MoveInput } from '../sim/types';
 import { cursorForHover, type HoverCursorKind } from './cursors';
 import { comboCode, isModifierCode, type Keybinds, makeCombo } from './keybinds';
-import { shouldEngagePointerLock, shouldReleasePointerLock } from './pointer_lock';
+import {
+  pointerLockNeedsSyncGesture,
+  shouldEngagePointerLock,
+  shouldEngagePointerLockOnMouseDown,
+  shouldReleasePointerLock,
+} from './pointer_lock';
 import { clickPickFromMouseGesture, DEFAULT_CLICK_PICK_MAX_MS } from './pointer_pick';
+
+function detectPointerLockNeedsSyncGesture(): boolean {
+  try {
+    return pointerLockNeedsSyncGesture(navigator.userAgent);
+  } catch {
+    return false;
+  }
+}
 
 const BASE_LOOK_SENS = 0.0045;
 const TOUCH_LOOK_YAW_RATE = 3.2;
@@ -159,6 +172,9 @@ export class Input {
   private lookPitchSign = 1;
   private downButton = -1;
   private pointerLockRequestedForDrag = false;
+  // Firefox rejects requestPointerLock() when it is deferred to a later
+  // mousemove; computed once since the browser cannot change mid-session.
+  private readonly needsSyncPointerLockGesture = detectPointerLockNeedsSyncGesture();
   private downX = 0;
   private downY = 0;
   private downAt = 0;
@@ -888,6 +904,23 @@ export class Input {
     // onMouseMove) — NOT on every press, which spammed the browser "mouse
     // capture" banner on every right-click used to attack/look (#116).
     this.pointerLockRequestedForDrag = false;
+    // Firefox is the one exception: it denies requestPointerLock() from the
+    // later mousemove entirely (it requires the call inside the original
+    // gesture handler), so on Firefox request it here, synchronously, for the
+    // button that can start a camera drag in the active camera mode. A press
+    // that turns out to be a plain click still releases the lock on mouseup.
+    if (
+      shouldEngagePointerLockOnMouseDown({
+        button: e.button,
+        cameraLookButton: this.mouseCameraEnabled ? 0 : 2,
+        needsSyncGesture: this.needsSyncPointerLockGesture,
+        lockOnRotate: this.lockCursorOnRotate,
+        alreadyLocked: document.pointerLockElement === this.canvas,
+      })
+    ) {
+      this.pointerLockRequestedForDrag = true;
+      this.canvas.requestPointerLock?.();
+    }
     this.updateCursor();
   }
 

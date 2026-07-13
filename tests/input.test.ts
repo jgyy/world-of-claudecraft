@@ -16,7 +16,11 @@ function installStorage(): void {
   };
 }
 
-function makeInput() {
+function makeInput(userAgent?: string) {
+  Object.defineProperty(globalThis, 'navigator', {
+    value: { userAgent: userAgent ?? 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/126.0.0.0' },
+    configurable: true,
+  });
   const canvasListeners = new Map<string, (event: any) => void>();
   const windowListeners = new Map<string, (event: any) => void>();
   const documentListeners = new Map<string, (event: any) => void>();
@@ -384,6 +388,86 @@ describe('Input pointer lock', () => {
     windowListeners.get('mousemove')!({ movementX: 1, movementY: 0 });
 
     expect(canvas.requestPointerLock).toHaveBeenCalledTimes(1);
+  });
+
+  it('on Firefox, requests pointer lock synchronously from mousedown for the camera-look button (#1834)', () => {
+    // Firefox denies requestPointerLock() when it is deferred to a later
+    // mousemove once the drag threshold is crossed, so on Firefox the request
+    // must happen inside the mousedown handler itself, before any movement.
+    const { canvas, canvasListeners } = makeInput(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
+    );
+
+    canvasListeners.get('mousedown')!({
+      button: 2,
+      clientX: 100,
+      clientY: 100,
+      preventDefault: vi.fn(),
+    });
+
+    expect(canvas.requestPointerLock).toHaveBeenCalledTimes(1);
+  });
+
+  it('on Firefox, does not request pointer lock on mousedown for the click-to-move button', () => {
+    const { canvas, canvasListeners } = makeInput(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
+    );
+
+    canvasListeners.get('mousedown')!({
+      button: 0,
+      clientX: 100,
+      clientY: 100,
+      preventDefault: vi.fn(),
+    });
+
+    expect(canvas.requestPointerLock).not.toHaveBeenCalled();
+  });
+
+  it('on Firefox in Mouse Camera mode, requests pointer lock synchronously for button 0', () => {
+    const { canvas, input, canvasListeners } = makeInput(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
+    );
+    input.setMouseCameraEnabled(true);
+
+    canvasListeners.get('mousedown')!({
+      button: 0,
+      clientX: 100,
+      clientY: 100,
+      preventDefault: vi.fn(),
+    });
+
+    expect(canvas.requestPointerLock).toHaveBeenCalledTimes(1);
+  });
+
+  it('on Firefox, does not request pointer lock on mousedown when "Lock Cursor While Rotating" is off', () => {
+    const { canvas, input, canvasListeners } = makeInput(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
+    );
+    input.setLockCursorOnRotate(false);
+
+    canvasListeners.get('mousedown')!({
+      button: 2,
+      clientX: 100,
+      clientY: 100,
+      preventDefault: vi.fn(),
+    });
+
+    expect(canvas.requestPointerLock).not.toHaveBeenCalled();
+  });
+
+  it('on Chrome, does not request pointer lock synchronously on mousedown (deferred path keeps #116 fixed)', () => {
+    const { canvas, canvasListeners } = makeInput(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+    );
+
+    canvasListeners.get('mousedown')!({
+      button: 2,
+      clientX: 100,
+      clientY: 100,
+      preventDefault: vi.fn(),
+    });
+
+    expect(canvas.requestPointerLock).not.toHaveBeenCalled();
   });
 
   it('does not rotate the camera before the drag threshold, so short sloppy clicks stay stable', () => {
