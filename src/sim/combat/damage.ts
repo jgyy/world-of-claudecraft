@@ -376,13 +376,22 @@ export function dealDamage(
     addThreat(target, source.id, threat);
   }
 
-  // tap rights: the first player (or their pet) to damage a mob owns it
+  // Tap rights: the first player (or their pet) to damage a mob owns it. A rare
+  // mob is the one exception: its tap requires a HIT FROM THE PLAYER, never the
+  // pet alone. A rare has a single camp spawn shared by the whole zone, and an
+  // aggressive pet re-engages the instant it respawns (petPickTarget's anti-AFK
+  // window, pet/pet_ai.ts) well before any other player can react, letting one
+  // player camp-monopolize every respawn purely through the pet and lock
+  // everyone else out of ever tapping it. Requiring the owner to land their own
+  // hit keeps pet tapping for ordinary mobs (still classic) while making a rare
+  // kill require the same active engagement from every contender.
   if (
     source &&
     target.kind === 'mob' &&
     target.hostile &&
     target.tappedById === null &&
-    amount > 0
+    amount > 0 &&
+    (source.kind === 'player' || !MOBS[target.templateId]?.rare)
   ) {
     if (source.kind === 'player') target.tappedById = source.id;
     else if (source.ownerId !== null) target.tappedById = source.ownerId;
