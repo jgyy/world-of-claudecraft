@@ -51,6 +51,11 @@ function nearestMob(sim: Sim) {
 
 const effOf = (k: any, i = 0) => k.effects[i] as any;
 
+// Classes that ship a bespoke talent tree. The Card Adept is deliberately
+// excluded: its progression is its card deck (content/cards.ts + card_hand.ts),
+// not a talent tree, so talentsFor('card_adept') is null by design.
+const CLASSES_WITH_TALENTS = ALL_CLASSES.filter((c) => c !== 'card_adept');
+
 describe('talent tree validation (load-time)', () => {
   it('every registered tree is structurally valid', () => {
     for (const ct of Object.values(TALENTS)) {
@@ -59,8 +64,8 @@ describe('talent tree validation (load-time)', () => {
     }
   });
 
-  it('registers all playable classes with populated class and spec trees', () => {
-    for (const cls of ALL_CLASSES) {
+  it('registers all talented classes with populated class and spec trees', () => {
+    for (const cls of CLASSES_WITH_TALENTS) {
       const ct = talentsFor(cls);
       expect(ct, cls).toBeTruthy();
       expect(ct!.specs, cls).toHaveLength(3);
@@ -75,7 +80,7 @@ describe('talent tree validation (load-time)', () => {
   });
 
   it('references only abilities that exist', () => {
-    for (const cls of ALL_CLASSES) {
+    for (const cls of CLASSES_WITH_TALENTS) {
       const ct = talentsFor(cls)!;
       for (const s of ct.specs)
         expect(ABILITIES[s.signature], `${cls}:${s.id}:${s.signature}`).toBeTruthy();
@@ -292,7 +297,7 @@ describe('precomputed modifiers', () => {
   });
 
   it('makes every chosen spec signature available at the first talent level', () => {
-    for (const cls of ALL_CLASSES) {
+    for (const cls of CLASSES_WITH_TALENTS) {
       const ct = talentsFor(cls)!;
       for (const s of ct.specs) {
         const known = abilitiesKnownAt(

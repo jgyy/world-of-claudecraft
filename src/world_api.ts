@@ -132,6 +132,7 @@ export type {
 export type {
   ArenaInfo,
   ArenaLadderEntry,
+  CardDuelInfo,
   DuelInfo,
   FiestaAugmentOffer,
   FiestaMatchInfo,
@@ -309,6 +310,7 @@ export const COMMAND_NAMES = [
   'arena_queue',
   'arena_leave',
   'arena_augment',
+  'card_duel_queue',
   'prestige',
   'applyTalents',
   'respec',
@@ -520,6 +522,7 @@ export const COMMAND_FACETS = {
   arena_queue: 'IWorldDuelArena',
   arena_leave: 'IWorldDuelArena',
   arena_augment: 'IWorldDuelArena',
+  card_duel_queue: 'IWorldDuelArena',
   // IWorldSocialGraph: friends/blocks/guild commands (online only; resolved
   // server-side by character name, handled by the #4 SocialService). socialInfo
   // arrives via the social/socialpos frames (no command); searchCharacters is a REST

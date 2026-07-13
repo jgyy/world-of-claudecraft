@@ -1278,27 +1278,14 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
     "color": "#8a5cf0",
     "resource": "energy",
     "roles": [
-      "healer",
       "dps"
     ],
     "specs": [
       {
-        "id": "arcanist",
-        "name": "Arcanist",
+        "id": "card_adept_kit",
+        "name": "Card Adept",
         "role": "dps",
-        "signature": "ca_arcane_bolt"
-      },
-      {
-        "id": "pyromancer",
-        "name": "Pyromancer",
-        "role": "dps",
-        "signature": "ca_royal_flush"
-      },
-      {
-        "id": "mender",
-        "name": "Mender",
-        "role": "healer",
-        "signature": "ca_mending_card"
+        "signature": "ca_quickstrike"
       }
     ],
     "signatureAbilities": [

@@ -152,4 +152,14 @@ export interface IWorldDuelArena {
   arenaQueueLeave(): void;
   // 2v2 Fiesta: lock in one of the augments currently on offer
   arenaAugmentPick(augmentId: string): void;
+  // Card Duel: the Card-Adept-only 1v1 matchmaking queue. queueCardDuel(true)
+  // joins, queueCardDuel(false) leaves; cardDuelInfo reports the local player's
+  // queued state and the current queue size for the join/leave window.
+  queueCardDuel(join: boolean): void;
+  cardDuelInfo(): CardDuelInfo;
+}
+
+export interface CardDuelInfo {
+  queued: boolean;
+  queueSize: number;
 }

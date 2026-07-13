@@ -2572,6 +2572,14 @@ export class ClientWorld implements IWorld {
   arenaAugmentPick(augmentId: string): void {
     this.cmd({ cmd: 'arena_augment', augment: augmentId });
   }
+  queueCardDuel(join: boolean): void {
+    this.cmd({ cmd: 'card_duel_queue', join });
+  }
+  cardDuelInfo(): import('../world_api').CardDuelInfo {
+    // Server-authoritative; the online mirror is a follow-up, so the browser
+    // client reports an empty queue until the snapshot field lands.
+    return { queued: false, queueSize: 0 };
+  }
   // --- IWorldValeCup: boarball queue sends (cupInfo is a snapshot read; the
   // sport-kit swap rides the heavy `sport` self field decoded in applySnapshot). ---
   vcupQueueJoin(

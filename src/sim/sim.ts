@@ -348,6 +348,15 @@ export { computeQuestState } from './quests/quest_commands';
 
 import { completeCurrentQuestsForDev, completeQuestForDev } from './quests/dev_quest_commands';
 import * as arenaMod from './social/arena';
+import {
+  type CardDuelQueue,
+  cardDuelQueueSize,
+  createCardDuelQueue,
+  isQueuedForCardDuel,
+  joinCardDuelQueue,
+  leaveCardDuelQueue,
+  tryPairCardDuel,
+} from './social/card_duel_queue';
 import * as duelMod from './social/duel';
 // A4: Protect Yumi (formats yumi3/yumi5); match logic in social/yumi.ts, reached
 // via ctx callbacks + the two hostility arms in isHostileTo/isFriendlyTo.
@@ -1314,6 +1323,9 @@ export class Sim {
   tradeInvites = new Map<number, { fromPid: number; expires: number }>();
   duels = new Map<number, DuelState>(); // pid -> shared duel (both pids)
   duelInvites = new Map<number, { fromPid: number; expires: number }>();
+  // Card Duel: the 1v1 PvP matchmaking queue restricted to the Card Adept class.
+  // FIFO of waiting pids; pairing (updateCardDuelQueue) starts a duel per match.
+  cardDuelQueue: CardDuelQueue = createCardDuelQueue();
   // arena: format-specific queues, live bouts keyed by every participant pid,
   // and the set of busy instance slots
   arenaQueue1v1: number[] = [];
@@ -3671,6 +3683,7 @@ export class Sim {
     lap?.('engaged');
 
     this.updateDuels();
+    this.updateCardDuelQueue();
     lap?.('duels');
     this.updateArena();
     lap?.('arena');
@@ -6515,6 +6528,78 @@ export class Sim {
 
   private updateDuels(): void {
     duelMod.updateDuels(this.ctx);
+  }
+
+  // Card Duel queue command (IWorld): join or leave the Card Adept 1v1 queue.
+  // Only Card Adepts may join; a player already in a duel is rejected.
+  queueCardDuel(join: boolean, pid?: number): void {
+    const p = pid !== undefined ? this.entities.get(pid) : this.player;
+    if (!p) return;
+    const meta = this.players.get(p.id);
+    if (!meta) return;
+    if (!join) {
+      leaveCardDuelQueue(this.cardDuelQueue, p.id);
+      return;
+    }
+    // Rejections (not a Card Adept, already dueling, already queued) are silent:
+    // the UI gates the button to eligible players and reflects queue state via
+    // cardDuelInfo(), so no player-facing string is emitted here.
+    joinCardDuelQueue(this.cardDuelQueue, p.id, meta.cls === 'card_adept', this.duels.has(p.id));
+  }
+
+  cardDuelQueued(pid?: number): boolean {
+    const p = pid !== undefined ? this.entities.get(pid) : this.player;
+    return p ? isQueuedForCardDuel(this.cardDuelQueue, p.id) : false;
+  }
+
+  cardDuelQueueSize(): number {
+    return cardDuelQueueSize(this.cardDuelQueue);
+  }
+
+  cardDuelInfo(): import('../world_api').CardDuelInfo {
+    return { queued: this.cardDuelQueued(), queueSize: this.cardDuelQueueSize() };
+  }
+
+  // Pairing phase: match the two longest-waiting Card Adepts, teleport them into
+  // the arena facing each other, and start a duel. Draws no rng, and only touches
+  // the Card Duel queue, so a world with no queued Card Adepts is unaffected.
+  private updateCardDuelQueue(): void {
+    // Drop any stale entrant (logged out, or already dueling) before pairing.
+    for (const qpid of [...this.cardDuelQueue]) {
+      if (!this.entities.get(qpid) || this.duels.has(qpid)) {
+        leaveCardDuelQueue(this.cardDuelQueue, qpid);
+      }
+    }
+    for (;;) {
+      const pair = tryPairCardDuel(this.cardDuelQueue);
+      if (!pair) break;
+      this.startCardDuel(pair[0], pair[1]);
+    }
+  }
+
+  private startCardDuel(aPid: number, bPid: number): void {
+    const ea = this.entities.get(aPid);
+    const eb = this.entities.get(bPid);
+    if (!ea || !eb) return;
+    const origin = arenaOrigin(0);
+    const place = (e: Entity, dx: number): void => {
+      const x = origin.x + dx;
+      const z = origin.z;
+      e.pos.x = x;
+      e.pos.z = z;
+      e.pos.y = groundHeight(x, z, this.cfg.seed);
+      e.prevPos = { ...e.pos };
+    };
+    place(ea, -3);
+    place(eb, 3);
+    ea.facing = Math.atan2(eb.pos.x - ea.pos.x, eb.pos.z - ea.pos.z);
+    eb.facing = Math.atan2(ea.pos.x - eb.pos.x, ea.pos.z - eb.pos.z);
+    const duel: DuelState = { a: aPid, b: bPid, state: 'countdown', timer: 3 };
+    this.duels.set(aPid, duel);
+    this.duels.set(bPid, duel);
+    for (const dPid of [aPid, bPid]) {
+      this.emit({ type: 'duelCountdown', seconds: 3, pid: dPid });
+    }
   }
 
   private clearAurasFromSource(target: Entity, sourceId: number): void {

@@ -225,6 +225,8 @@ export const IWORLD_MEMBERS = [
   { name: 'arenaQueueJoin', kind: 'method' },
   { name: 'arenaQueueLeave', kind: 'method' },
   { name: 'arenaAugmentPick', kind: 'method' },
+  { name: 'queueCardDuel', kind: 'method' },
+  { name: 'cardDuelInfo', kind: 'method' },
   // --- the Vale Cup boarball minigame (IWorldValeCup) ---
   { name: 'vcupQueueJoin', kind: 'method' },
   { name: 'vcupQueueLeave', kind: 'method' },
@@ -421,9 +423,9 @@ beforeAll(() => {
 
 describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => {
   it('pins total / data / method counts', () => {
-    expect(IWORLD_MEMBERS.length).toBe(222);
+    expect(IWORLD_MEMBERS.length).toBe(224);
     expect(DATA_MEMBERS.length).toBe(60);
-    expect(METHOD_MEMBERS.length).toBe(162);
+    expect(METHOD_MEMBERS.length).toBe(164);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -471,6 +473,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'cancelAura',
       'cardDeckCount',
       'cardDiscardCount',
+      'cardDuelInfo',
       'cardHandIds',
       'castAbility',
       'castAbilityAt',
@@ -596,6 +599,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'questLog',
       'questState',
       'questsDone',
+      'queueCardDuel',
       'raidLockouts',
       'readyCheckRespond',
       'realm',
@@ -751,6 +755,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'cancelAura',
       'cardDeckCount',
       'cardDiscardCount',
+      'cardDuelInfo',
       'cardHandIds',
       'castAbility',
       'castAbilityAt',
@@ -841,6 +846,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'playEmote',
       'prestige',
       'questState',
+      'queueCardDuel',
       'raidLockouts',
       'readyCheckRespond',
       'releaseSpirit',
@@ -1138,6 +1144,8 @@ const FACET_DUEL_ARENA = [
   'arenaQueueJoin',
   'arenaQueueLeave',
   'arenaAugmentPick',
+  'queueCardDuel',
+  'cardDuelInfo',
 ] as const satisfies readonly (keyof IWorldDuelArena)[];
 type _ExhaustDuelArena = AssertNever<
   Exclude<keyof IWorldDuelArena, (typeof FACET_DUEL_ARENA)[number]>
@@ -1348,8 +1356,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the 26 fa
 
   it('the union of the 26 facets equals the pinned 218-member IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(222);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(222);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(224);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(224);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

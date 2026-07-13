@@ -13,7 +13,6 @@
 import type { AbilityEffect } from '../types';
 import { MAX_LEVEL, type PlayerClass } from '../types';
 import {
-  CARD_ADEPT_TALENTS,
   DRUID_TALENTS,
   HUNTER_TALENTS,
   MAGE_TALENTS,
@@ -206,7 +205,6 @@ export const TALENTS: Partial<Record<PlayerClass, ClassTalents>> = {
   mage: MAGE_TALENTS,
   warlock: WARLOCK_TALENTS,
   druid: DRUID_TALENTS,
-  card_adept: CARD_ADEPT_TALENTS,
 };
 
 export function talentsFor(cls: PlayerClass): ClassTalents | null {

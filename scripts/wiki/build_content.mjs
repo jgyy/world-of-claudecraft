@@ -136,6 +136,18 @@ const classes = ALL_CLASSES.map((id) => {
     role: s.role,
     signature: s.signature,
   }));
+  // A class without a bespoke talent tree (e.g. the Card Adept, whose kit is its
+  // deck of cards) still needs a spoiler-safe role + spec entry for the class
+  // chooser. Synthesize one dps spec from its opening signature ability.
+  if (specs.length === 0) {
+    const kitIds = def.abilities ?? [];
+    specs.push({
+      id: `${id}_kit`,
+      name: def.name,
+      role: 'dps',
+      signature: kitIds[0] ?? '',
+    });
+  }
   const roles = ROLE_ORDER.filter((r) => specs.some((s) => s.role === r));
   const kit = def.abilities ?? [];
   // The class preview uses the same model + white tint the in-game character creator does.

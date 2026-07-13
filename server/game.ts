@@ -3923,6 +3923,9 @@ export class GameServer {
           sim.arenaAugmentPick(msg.augment, pid);
         break;
       }
+      case 'card_duel_queue':
+        if (typeof msg.join === 'boolean') sim.queueCardDuel(msg.join, pid);
+        break;
 
       // The Vale Cup (boarball queue at the Sowfield, docs/prd/vale-cup.md).
       // Deliberately NOT in HEAVY_SELF_CMDS: queueing mutates no heavy self
