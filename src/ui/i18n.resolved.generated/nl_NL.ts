@@ -2227,7 +2227,15 @@ export const nl_NL: EnTranslations = {
       "mark_of_the_wild": "Een blijvende zegening die je op jezelf of een bondgenoot legt voor een gevecht.",
       "moonfire": "Raakt direct en laat het doelwit branden, goed terwijl je beweegt.",
       "rejuvenation": "Wordt direct uitgesproken en geneest een bondgenoot na verloop van tijd, zodat je kunt blijven handelen.",
-      "thorns": "Beschermt een bondgenoot zodat melee-aanvallers zichzelf bezeren bij het toeslaan."
+      "thorns": "Beschermt een bondgenoot zodat melee-aanvallers zichzelf bezeren bij het toeslaan.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Een demon op afstand die met vuurbouten vijanden bestookt vanaf een veilige afstand.",
@@ -3576,6 +3584,7 @@ export const nl_NL: EnTranslations = {
     "mage": "Magiër",
     "warlock": "Heksenmeester",
     "druid": "Druïde",
+    "card_adept": "Card Adept",
     "warriorAria": "Klasse Krijger",
     "paladinAria": "Klasse Paladijn",
     "hunterAria": "Klasse Jager",
@@ -3584,7 +3593,8 @@ export const nl_NL: EnTranslations = {
     "shamanAria": "Klasse Sjamaan",
     "mageAria": "Klasse Magiër",
     "warlockAria": "Klasse Heksenmeester",
-    "druidAria": "Klasse Druïde"
+    "druidAria": "Klasse Druïde",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Besturingsgids",
@@ -4352,7 +4362,8 @@ export const nl_NL: EnTranslations = {
       "shaman": "Genezer / Melee- of Ranged-DPS",
       "mage": "Ranged-DPS",
       "warlock": "Ranged-DPS",
-      "druid": "Tank / Genezer / Melee- of Ranged-DPS"
+      "druid": "Tank / Genezer / Melee- of Ranged-DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Maliënkolder, Leer, Stof",
@@ -4376,7 +4387,8 @@ export const nl_NL: EnTranslations = {
       "shaman": "Sjamanen gebieden de elementen, doordringen wapens met kracht, schokken vijanden met bliksem en herstellen bondgenoten.",
       "mage": "Magiërs buigen Vuur-, Vorst- en arcane kracht om vijanden te vernietigen, water op te roepen en dreigingen ter plaatse te bevriezen.",
       "warlock": "Heksenmeesters roepen demonen op, leggen vloeken en schade-over-tijd-magie op, en tappen leven af bij vijanden om vol te houden.",
-      "druid": "Druïden kanaliseren de natuur, genezen wonden, verstrikken vijanden en veranderen in diergedaanten voor verdediging of schade."
+      "druid": "Druïden kanaliseren de natuur, genezen wonden, verstrikken vijanden en veranderen in diergedaanten voor verdediging of schade.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Klassedetails voor {className}: rol {role}. Beginstatistieken: Kracht {str}, Behendigheid {agi}, Uithoudingsvermogen {sta}, Intellect {int}, Geest {spi}.",
     "statBarAria": "{stat}: {value} van 25"

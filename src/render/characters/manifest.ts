@@ -341,6 +341,14 @@ export const SKINS: Record<string, (string | null)[]> = {
     `${SKINS_DIR}/mage/alt_b.png`,
     `${SKINS_DIR}/mage/alt_c.png`,
   ],
+  // Card Adept reuses the mage cloth body (distinct violet tint in VISUALS) and
+  // shares the mage skin swatches; no dedicated model ships for this class.
+  player_card_adept: [
+    null,
+    `${SKINS_DIR}/mage/alt_a.png`,
+    `${SKINS_DIR}/mage/alt_b.png`,
+    `${SKINS_DIR}/mage/alt_c.png`,
+  ],
   player_warlock: [
     null,
     `${SKINS_DIR}/mage/alt_a.png`,
@@ -493,6 +501,16 @@ export const VISUALS: Record<string, VisualDef> = {
     // dedicated druid model (own texture, ships a Backpack mesh)
     attach: [{ url: `${WEAPONS}/staff.glb`, bone: 'handslot.r' }],
     weaponSlots: [0],
+  },
+  player_card_adept: {
+    url: `${PLAYERS}/mage.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['Spellcast_Shoot']),
+    show: ['Mage_Cape'],
+    attach: [{ url: `${WEAPONS}/staff.glb`, bone: 'handslot.r' }],
+    weaponSlots: [0],
+    tint: 0x8a5cf0,
+    tintStrength: 0.45,
   },
 
   // -- cosmetic body skin (class-agnostic; both the skin preview and a live

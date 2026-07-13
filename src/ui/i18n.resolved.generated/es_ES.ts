@@ -2227,7 +2227,15 @@ export const es_ES: EnTranslations = {
       "mark_of_the_wild": "Una bendición duradera que pones sobre ti o un aliado antes de un combate.",
       "moonfire": "Golpea al instante y deja al objetivo ardiendo, ideal mientras te mueves.",
       "rejuvenation": "Se lanza al instante y sana a un aliado con el tiempo, para que puedas seguir actuando.",
-      "thorns": "Protege a un aliado para que los atacantes cuerpo a cuerpo se hieran al golpearlo."
+      "thorns": "Protege a un aliado para que los atacantes cuerpo a cuerpo se hieran al golpearlo.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Un demonio de descargas de fuego a distancia que merma a los enemigos desde un lugar seguro.",
@@ -3576,6 +3584,7 @@ export const es_ES: EnTranslations = {
     "mage": "Mago",
     "warlock": "Brujo",
     "druid": "Druida",
+    "card_adept": "Card Adept",
     "warriorAria": "Clase Guerrero",
     "paladinAria": "Clase Paladín",
     "hunterAria": "Clase Cazador",
@@ -3584,7 +3593,8 @@ export const es_ES: EnTranslations = {
     "shamanAria": "Clase Chamán",
     "mageAria": "Clase Mago",
     "warlockAria": "Clase Brujo",
-    "druidAria": "Clase Druida"
+    "druidAria": "Clase Druida",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Guía de controles",
@@ -4352,7 +4362,8 @@ export const es_ES: EnTranslations = {
       "shaman": "Sanador / DPS cuerpo a cuerpo o a distancia",
       "mage": "DPS a distancia",
       "warlock": "DPS a distancia",
-      "druid": "Tanque / Sanador / DPS cuerpo a cuerpo o a distancia"
+      "druid": "Tanque / Sanador / DPS cuerpo a cuerpo o a distancia",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Malla, cuero, tela",
@@ -4376,7 +4387,8 @@ export const es_ES: EnTranslations = {
       "shaman": "Los chamanes dominan los elementos, imbuyen armas con poder, golpean con relámpagos y restauran a sus aliados.",
       "mage": "Los magos moldean Fuego, Escarcha y fuerza Arcana para destruir enemigos, invocar agua y congelar amenazas.",
       "warlock": "Los brujos invocan demonios, lanzan maldiciones y magia de daño continuo, y sorben la vida de sus enemigos para aguantar.",
-      "druid": "Los druidas canalizan la naturaleza, curan heridas, enredan enemigos y cambian a formas animales para defender o dañar."
+      "druid": "Los druidas canalizan la naturaleza, curan heridas, enredan enemigos y cambian a formas animales para defender o dañar.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Detalles de clase para {className}: rol {role}. Atributos iniciales: Fuerza {str}, Agilidad {agi}, Aguante {sta}, Intelecto {int}, Espíritu {spi}.",
     "statBarAria": "{stat}: {value} de 25"

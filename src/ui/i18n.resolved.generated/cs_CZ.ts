@@ -2227,7 +2227,15 @@ export const cs_CZ: EnTranslations = {
       "mark_of_the_wild": "Trvalé požehnání, které dáváš sobě nebo spojenci před bojem.",
       "moonfire": "Zasáhne okamžitě a nechá cíl hořet, dobré během pohybu.",
       "rejuvenation": "Sesílá se okamžitě a léčí spojence v čase, takže můžeš dál jednat.",
-      "thorns": "Ochrání spojence tak, že útočníci na blízko si sami ublíží za každý zásah."
+      "thorns": "Ochrání spojence tak, že útočníci na blízko si sami ublíží za každý zásah.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Démon s ohnivou střelou na dálku, který ukrajuje nepřátele z bezpečné vzdálenosti.",
@@ -3576,6 +3584,7 @@ export const cs_CZ: EnTranslations = {
     "mage": "Mág",
     "warlock": "Černokněžník",
     "druid": "Druid",
+    "card_adept": "Card Adept",
     "warriorAria": "Třída válečník",
     "paladinAria": "Třída paladin",
     "hunterAria": "Třída lovec",
@@ -3584,7 +3593,8 @@ export const cs_CZ: EnTranslations = {
     "shamanAria": "Třída šaman",
     "mageAria": "Třída mág",
     "warlockAria": "Třída černokněžník",
-    "druidAria": "Třída druid"
+    "druidAria": "Třída druid",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Průvodce ovládáním",
@@ -4352,7 +4362,8 @@ export const cs_CZ: EnTranslations = {
       "shaman": "Léčitel / DPS na blízko nebo na dálku",
       "mage": "DPS na dálku",
       "warlock": "DPS na dálku",
-      "druid": "Tank / léčitel / DPS na blízko nebo na dálku"
+      "druid": "Tank / léčitel / DPS na blízko nebo na dálku",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Kroužková zbroj, kůže, látka",
@@ -4376,7 +4387,8 @@ export const cs_CZ: EnTranslations = {
       "shaman": "Šamani ovládají živly, naplňují zbraně silou, zasahují nepřátele blesky a obnovují spojence.",
       "mage": "Mágové ohýbají oheň, mráz a arkánní sílu, aby ničili nepřátele, vyvolávali vodu a zmrazovali hrozby na místě.",
       "warlock": "Černokněžníci vyvolávají démony, sesílají kletby a průběžné poškození a vysávají život z nepřátel, aby vydrželi.",
-      "druid": "Druidové usměrňují síly přírody, léčí zranění, spoutávají nepřátele a mění se do zvířecích podob pro obranu nebo poškození."
+      "druid": "Druidové usměrňují síly přírody, léčí zranění, spoutávají nepřátele a mění se do zvířecích podob pro obranu nebo poškození.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Detaily třídy {className}: role {role}. Počáteční statistiky: Síla {str}, Obratnost {agi}, Výdrž {sta}, Intelekt {int}, Duch {spi}.",
     "statBarAria": "{stat}: {value} z 25"

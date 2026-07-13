@@ -2227,7 +2227,15 @@ export const ja_JP: EnTranslations = {
       "mark_of_the_wild": "戦闘の前に自分や味方に付与する、持続する祝福です。",
       "moonfire": "即座に当たり標的を燃焼させるため、移動中にも向いています。",
       "rejuvenation": "即座に唱えられ、味方を継続的に回復するので、行動を続けられます。",
-      "thorns": "味方を守り、近接で攻撃してきた相手に反射ダメージを与えます。"
+      "thorns": "味方を守り、近接で攻撃してきた相手に反射ダメージを与えます。",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "安全な距離から敵を削る、ファイアボルトを放つ遠距離のデーモンです。",
@@ -3576,6 +3584,7 @@ export const ja_JP: EnTranslations = {
     "mage": "メイジ",
     "warlock": "ウォーロック",
     "druid": "ドルイド",
+    "card_adept": "Card Adept",
     "warriorAria": "戦士クラス",
     "paladinAria": "パラディンクラス",
     "hunterAria": "ハンタークラス",
@@ -3584,7 +3593,8 @@ export const ja_JP: EnTranslations = {
     "shamanAria": "シャーマンクラス",
     "mageAria": "メイジクラス",
     "warlockAria": "ウォーロッククラス",
-    "druidAria": "ドルイドクラス"
+    "druidAria": "ドルイドクラス",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "操作ガイド",
@@ -4352,7 +4362,8 @@ export const ja_JP: EnTranslations = {
       "shaman": "ヒーラー / 近接または遠隔DPS",
       "mage": "遠隔DPS",
       "warlock": "遠隔DPS",
-      "druid": "タンク / ヒーラー / 近接または遠隔DPS"
+      "druid": "タンク / ヒーラー / 近接または遠隔DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "鎖、革、布",
@@ -4376,7 +4387,8 @@ export const ja_JP: EnTranslations = {
       "shaman": "シャーマンは元素を操り、武器に力を宿し、稲妻で敵を打ち、味方を回復します。",
       "mage": "メイジは火炎、氷霜、秘術の力で敵を破壊し、水を召喚し、脅威をその場で凍りつかせます。",
       "warlock": "ウォーロックは悪魔を召喚し、呪いと継続ダメージ魔法をかけ、敵から生命力を吸収して耐えます。",
-      "druid": "ドルイドは自然の力を導き、傷を癒やし、敵を絡め取り、動物形態に変身して守りまたは攻めます。"
+      "druid": "ドルイドは自然の力を導き、傷を癒やし、敵を絡め取り、動物形態に変身して守りまたは攻めます。",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "{className}のクラス詳細: 役割 {role}。開始ステータス: 筋力 {str}、敏捷性 {agi}、スタミナ {sta}、知力 {int}、精神力 {spi}。",
     "statBarAria": "{stat}: {value}/25"

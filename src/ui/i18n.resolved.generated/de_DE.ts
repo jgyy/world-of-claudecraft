@@ -2227,7 +2227,15 @@ export const de_DE: EnTranslations = {
       "mark_of_the_wild": "Ein anhaltender Segen, den du vor einem Kampf auf dich oder einen Verbündeten legst.",
       "moonfire": "Trifft sofort und lässt das Ziel brennen, gut in Bewegung.",
       "rejuvenation": "Wirkt sofort und heilt einen Verbündeten über Zeit, sodass du weiter handeln kannst.",
-      "thorns": "Schützt einen Verbündeten, sodass Nahkampfangreifer sich beim Zuschlagen selbst verletzen."
+      "thorns": "Schützt einen Verbündeten, sodass Nahkampfangreifer sich beim Zuschlagen selbst verletzen.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Ein Feuerblitz-Dämon für die Distanz, der Gegner aus sicherer Entfernung abträgt.",
@@ -3576,6 +3584,7 @@ export const de_DE: EnTranslations = {
     "mage": "Magier",
     "warlock": "Hexenmeister",
     "druid": "Druide",
+    "card_adept": "Card Adept",
     "warriorAria": "Krieger-Klasse",
     "paladinAria": "Paladin-Klasse",
     "hunterAria": "Jäger-Klasse",
@@ -3584,7 +3593,8 @@ export const de_DE: EnTranslations = {
     "shamanAria": "Schamane-Klasse",
     "mageAria": "Magier-Klasse",
     "warlockAria": "Hexenmeister-Klasse",
-    "druidAria": "Druide-Klasse"
+    "druidAria": "Druide-Klasse",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Steuerungsanleitung",
@@ -4352,7 +4362,8 @@ export const de_DE: EnTranslations = {
       "shaman": "Heiler / Nahkampf- oder Fernkampf-DPS",
       "mage": "Fernkampf-DPS",
       "warlock": "Fernkampf-DPS",
-      "druid": "Tank / Heiler / Nahkampf- oder Fernkampf-DPS"
+      "druid": "Tank / Heiler / Nahkampf- oder Fernkampf-DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Kette, Leder, Stoff",
@@ -4376,7 +4387,8 @@ export const de_DE: EnTranslations = {
       "shaman": "Schamanen gebieten über die Elemente, erfüllen Waffen mit Macht, treffen Gegner mit Blitzen und stellen Verbündete wieder her.",
       "mage": "Magier formen Feuer, Frost und arkane Kraft, um Gegner zu vernichten, Wasser zu beschwören und Bedrohungen einzufrieren.",
       "warlock": "Hexenmeister beschwören Dämonen, wirken Flüche und Schaden über Zeit und saugen Gegnern das Leben aus, um durchzuhalten.",
-      "druid": "Druiden kanalisieren die Natur, heilen Wunden, fesseln Gegner und wechseln in Tierformen für Verteidigung oder Schaden."
+      "druid": "Druiden kanalisieren die Natur, heilen Wunden, fesseln Gegner und wechseln in Tierformen für Verteidigung oder Schaden.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Klassendetails für {className}: Rolle {role}. Startwerte: Stärke {str}, Beweglichkeit {agi}, Ausdauer {sta}, Intelligenz {int}, Willenskraft {spi}.",
     "statBarAria": "{stat}: {value} von 25"

@@ -2227,7 +2227,15 @@ export const sv_SE: EnTranslations = {
       "mark_of_the_wild": "En varaktig välsignelse du lägger på dig själv eller en allierad före en strid.",
       "moonfire": "Slår omedelbart och lämnar målet brinnande, bra medan du rör dig.",
       "rejuvenation": "Kastas omedelbart och läker en allierad över tid, så du kan fortsätta agera.",
-      "thorns": "Skyddar en allierad så att närstridsangripare skadar sig själva när de slår."
+      "thorns": "Skyddar en allierad så att närstridsangripare skadar sig själva när de slår.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "En eldpilskastande demon på avstånd som naggar fiender från säkert håll.",
@@ -3576,6 +3584,7 @@ export const sv_SE: EnTranslations = {
     "mage": "Magiker",
     "warlock": "Häxmästare",
     "druid": "Druid",
+    "card_adept": "Card Adept",
     "warriorAria": "Krigarklass",
     "paladinAria": "Paladinklass",
     "hunterAria": "Jägarklass",
@@ -3584,7 +3593,8 @@ export const sv_SE: EnTranslations = {
     "shamanAria": "Schamanklass",
     "mageAria": "Magikerklass",
     "warlockAria": "Häxmästarklass",
-    "druidAria": "Druidklass"
+    "druidAria": "Druidklass",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Kontrollguide",
@@ -4352,7 +4362,8 @@ export const sv_SE: EnTranslations = {
       "shaman": "Helare / Närstrids- eller Distans-DPS",
       "mage": "Distans-DPS",
       "warlock": "Distans-DPS",
-      "druid": "Tank / Helare / Närstrids- eller Distans-DPS"
+      "druid": "Tank / Helare / Närstrids- eller Distans-DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Ringbrynja, Läder, Tyg",
@@ -4376,7 +4387,8 @@ export const sv_SE: EnTranslations = {
       "shaman": "Schamaner befaller elementen, fyller vapen med kraft, chockar fiender med blixtar och återställer allierade.",
       "mage": "Magiker böjer Eld, Frost och arkankraft för att förgöra fiender, frammana vatten och frysa hot på plats.",
       "warlock": "Häxmästare frammanar demoner, lägger förbannelser och skada-över-tid-magi, och suger liv från fiender för att överleva.",
-      "druid": "Druider kanaliserar naturen, läker sår, snärjer fiender och skiftar till djurformer för försvar eller skada."
+      "druid": "Druider kanaliserar naturen, läker sår, snärjer fiender och skiftar till djurformer för försvar eller skada.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Klassdetaljer för {className}: roll {role}. Startvärden: Styrka {str}, Smidighet {agi}, Uthållighet {sta}, Intellekt {int}, Ande {spi}.",
     "statBarAria": "{stat}: {value} av 25"

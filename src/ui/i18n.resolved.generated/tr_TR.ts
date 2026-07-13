@@ -2227,7 +2227,15 @@ export const tr_TR: EnTranslations = {
       "mark_of_the_wild": "Dövüşten önce kendine ya da bir dosta koyduğun kalıcı bir kutsama.",
       "moonfire": "Anında vurur ve hedefi yanar halde bırakır, hareket halindeyken iyidir.",
       "rejuvenation": "Anında okunur ve bir dostu zamanla iyileştirir, böylece harekete devam edebilirsin.",
-      "thorns": "Bir dostu korur, böylece yakın dövüş saldırganları vurdukları için kendilerine zarar verir."
+      "thorns": "Bir dostu korur, böylece yakın dövüş saldırganları vurdukları için kendilerine zarar verir.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Düşmanları güvenli bir mesafeden ateş oklarıyla hırpalayan menzilli bir iblis.",
@@ -3576,6 +3584,7 @@ export const tr_TR: EnTranslations = {
     "mage": "Büyücü",
     "warlock": "Karabüyücü",
     "druid": "Druid",
+    "card_adept": "Card Adept",
     "warriorAria": "Savaşçı sınıfı",
     "paladinAria": "Paladin sınıfı",
     "hunterAria": "Avcı sınıfı",
@@ -3584,7 +3593,8 @@ export const tr_TR: EnTranslations = {
     "shamanAria": "Şaman sınıfı",
     "mageAria": "Büyücü sınıfı",
     "warlockAria": "Karabüyücü sınıfı",
-    "druidAria": "Druid sınıfı"
+    "druidAria": "Druid sınıfı",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Kontrol Kılavuzu",
@@ -4352,7 +4362,8 @@ export const tr_TR: EnTranslations = {
       "shaman": "Şifacı / Yakın veya Menzilli DPS",
       "mage": "Menzilli DPS",
       "warlock": "Menzilli DPS",
-      "druid": "Tank / Şifacı / Yakın veya Menzilli DPS"
+      "druid": "Tank / Şifacı / Yakın veya Menzilli DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Zincir Zırh, Deri, Kumaş",
@@ -4376,7 +4387,8 @@ export const tr_TR: EnTranslations = {
       "shaman": "Şamanlar elementlere komuta eder; silahlara güç katar, düşmanları yıldırımla sarsar ve müttefikleri iyileştirir.",
       "mage": "Büyücüler Ateş, Buz ve gizem gücünü bükerek düşmanları yok eder, su çağırır ve tehditleri olduğu yerde dondurur.",
       "warlock": "Karabüyücüler şeytanlar çağırır, lanetler ve süregelen hasar büyüleri uygular ve dayanmak için düşmanlardan can emer.",
-      "druid": "Druidler doğayı yönlendirir; yaraları iyileştirir, düşmanları kıskaca alır ve savunma ya da hasar için hayvan formlarına bürünür."
+      "druid": "Druidler doğayı yönlendirir; yaraları iyileştirir, düşmanları kıskaca alır ve savunma ya da hasar için hayvan formlarına bürünür.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "{className} sınıf ayrıntıları: rol {role}. Başlangıç nitelikleri: Kuvvet {str}, Çeviklik {agi}, Dayanıklılık {sta}, Zeka {int}, Ruh {spi}.",
     "statBarAria": "{stat}: 25 üzerinden {value}"

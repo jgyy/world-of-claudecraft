@@ -2227,7 +2227,15 @@ export const id_ID: EnTranslations = {
       "mark_of_the_wild": "Berkah tahan lama yang kamu pasang pada dirimu atau sekutu sebelum pertarungan.",
       "moonfire": "Menghantam seketika dan meninggalkan sasaran terbakar, bagus sambil bergerak.",
       "rejuvenation": "Dirapalkan seketika dan menyembuhkan sekutu seiring waktu, sehingga kamu bisa terus bertindak.",
-      "thorns": "Melindungi sekutu sehingga penyerang jarak dekat melukai diri sendiri saat memukul."
+      "thorns": "Melindungi sekutu sehingga penyerang jarak dekat melukai diri sendiri saat memukul.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Iblis pelontar api jarak jauh yang menggerus musuh dari jarak aman.",
@@ -3576,6 +3584,7 @@ export const id_ID: EnTranslations = {
     "mage": "Penyihir",
     "warlock": "Penyihir Iblis",
     "druid": "Druid",
+    "card_adept": "Card Adept",
     "warriorAria": "Kelas Prajurit",
     "paladinAria": "Kelas Paladin",
     "hunterAria": "Kelas Pemburu",
@@ -3584,7 +3593,8 @@ export const id_ID: EnTranslations = {
     "shamanAria": "Kelas Dukun",
     "mageAria": "Kelas Penyihir",
     "warlockAria": "Kelas Penyihir Iblis",
-    "druidAria": "Kelas Druid"
+    "druidAria": "Kelas Druid",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Panduan Kontrol",
@@ -4352,7 +4362,8 @@ export const id_ID: EnTranslations = {
       "shaman": "Penyembuh / DPS Jarak Dekat atau Jauh",
       "mage": "DPS Jarak Jauh",
       "warlock": "DPS Jarak Jauh",
-      "druid": "Tank / Penyembuh / DPS Jarak Dekat atau Jauh"
+      "druid": "Tank / Penyembuh / DPS Jarak Dekat atau Jauh",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Zirah Rantai, Kulit, Kain",
@@ -4376,7 +4387,8 @@ export const id_ID: EnTranslations = {
       "shaman": "Dukun memerintah unsur-unsur alam, mengisi senjata dengan kekuatan, mengejutkan musuh dengan petir, dan memulihkan sekutu.",
       "mage": "Penyihir menundukkan kekuatan Api, Beku, dan Arkana untuk membinasakan musuh, memanggil air, dan membekukan ancaman di tempat.",
       "warlock": "Penyihir Iblis memanggil iblis, menebar kutukan dan sihir kerusakan berkelanjutan, serta menyedot nyawa musuh untuk bertahan.",
-      "druid": "Druid menyalurkan kekuatan alam, menyembuhkan luka, membelit musuh, dan berubah ke wujud hewan untuk bertahan atau menyerang."
+      "druid": "Druid menyalurkan kekuatan alam, menyembuhkan luka, membelit musuh, dan berubah ke wujud hewan untuk bertahan atau menyerang.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Detail kelas untuk {className}: peran {role}. Statistik awal: Kekuatan {str}, Kegesitan {agi}, Stamina {sta}, Kecerdasan {int}, Semangat {spi}.",
     "statBarAria": "{stat}: {value} dari 25"

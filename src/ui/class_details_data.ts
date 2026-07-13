@@ -74,6 +74,12 @@ export const CLASS_DETAILS: Record<PlayerClass, ClassDetails> = {
     roleType: 'hybrid',
     armorKey: 'classDetails.armor.leatherCloth',
     weaponsKey: 'classDetails.weapons.staves',
+  },
+  card_adept: {
+    roleKey: 'classDetails.roles.card_adept',
+    roleType: 'dps',
+    armorKey: 'classDetails.armor.cloth',
+    weaponsKey: 'classDetails.weapons.staves',
   }
 };
 
@@ -89,5 +95,6 @@ export const SIGNATURE_ABILITIES: Record<PlayerClass, string[]> = {
   shaman: ['lightning_bolt', 'rockbiter_weapon', 'ghost_wolf'],
   mage: ['fireball', 'frostbolt', 'polymorph'],
   warlock: ['shadow_bolt', 'corruption', 'life_tap'],
-  druid: ['wrath', 'bear_form', 'rejuvenation']
+  druid: ['wrath', 'bear_form', 'rejuvenation'],
+  card_adept: ['ca_arcane_bolt', 'ca_flame_fan', 'ca_royal_flush']
 };

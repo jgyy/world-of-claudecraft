@@ -1272,6 +1272,98 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
     ],
     "model": "player_druid",
     "still": "/guide-stills/player_druid.webp"
+  },
+  {
+    "id": "card_adept",
+    "color": "#8a5cf0",
+    "resource": "energy",
+    "roles": [
+      "healer",
+      "dps"
+    ],
+    "specs": [
+      {
+        "id": "arcanist",
+        "name": "Arcanist",
+        "role": "dps",
+        "signature": "ca_arcane_bolt"
+      },
+      {
+        "id": "pyromancer",
+        "name": "Pyromancer",
+        "role": "dps",
+        "signature": "ca_royal_flush"
+      },
+      {
+        "id": "mender",
+        "name": "Mender",
+        "role": "healer",
+        "signature": "ca_mending_card"
+      }
+    ],
+    "signatureAbilities": [
+      {
+        "id": "ca_quickstrike",
+        "name": "Quickstrike Card"
+      },
+      {
+        "id": "ca_arcane_bolt",
+        "name": "Arcane Bolt Card"
+      },
+      {
+        "id": "ca_flame_fan",
+        "name": "Flame Fan Card"
+      },
+      {
+        "id": "ca_mending_card",
+        "name": "Mending Card"
+      },
+      {
+        "id": "ca_warding_card",
+        "name": "Warding Card"
+      },
+      {
+        "id": "ca_hex_card",
+        "name": "Hex Card"
+      }
+    ],
+    "abilities": [
+      {
+        "id": "ca_quickstrike",
+        "name": "Quickstrike Card"
+      },
+      {
+        "id": "ca_arcane_bolt",
+        "name": "Arcane Bolt Card"
+      },
+      {
+        "id": "ca_flame_fan",
+        "name": "Flame Fan Card"
+      },
+      {
+        "id": "ca_mending_card",
+        "name": "Mending Card"
+      },
+      {
+        "id": "ca_warding_card",
+        "name": "Warding Card"
+      },
+      {
+        "id": "ca_hex_card",
+        "name": "Hex Card"
+      },
+      {
+        "id": "ca_empower_card",
+        "name": "Empower Card"
+      },
+      {
+        "id": "ca_royal_flush",
+        "name": "Royal Flush Card"
+      }
+    ],
+    "model": "player_card_adept",
+    "tint": "#8a5cf0",
+    "still": "/guide-stills/player_card_adept__8a5cf0.webp"
   }
 ];
 
@@ -3490,6 +3582,21 @@ export const GUIDE_MODELS: Record<string, GuideModelSpec> = {
         "bone": "handslot.r"
       }
     ]
+  },
+  "player_card_adept": {
+    "url": "models/chars/players/mage.glb",
+    "idle": "Idle",
+    "height": 2.6,
+    "show": [
+      "Mage_Cape"
+    ],
+    "attach": [
+      {
+        "url": "models/weapons/staff.glb",
+        "bone": "handslot.r"
+      }
+    ],
+    "tintStrength": 0.45
   },
   "form_bear": {
     "url": "models/creatures/yetialt.glb",

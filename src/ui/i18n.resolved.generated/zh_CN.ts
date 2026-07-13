@@ -2227,7 +2227,15 @@ export const zh_CN: EnTranslations = {
       "mark_of_the_wild": "开战前为自己或盟友施加的持续祝福。",
       "moonfire": "瞬间命中并让目标持续燃烧，移动时也很好用。",
       "rejuvenation": "瞬发施放，持续治疗盟友，让你可以继续行动。",
-      "thorns": "守护盟友，让近战攻击者在打击时反伤自己。"
+      "thorns": "守护盟友，让近战攻击者在打击时反伤自己。",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "一只远程火焰箭恶魔，从安全距离外消磨敌人。",
@@ -3576,6 +3584,7 @@ export const zh_CN: EnTranslations = {
     "mage": "法师",
     "warlock": "术士",
     "druid": "德鲁伊",
+    "card_adept": "Card Adept",
     "warriorAria": "战士职业",
     "paladinAria": "圣骑士职业",
     "hunterAria": "猎人职业",
@@ -3584,7 +3593,8 @@ export const zh_CN: EnTranslations = {
     "shamanAria": "萨满祭司职业",
     "mageAria": "法师职业",
     "warlockAria": "术士职业",
-    "druidAria": "德鲁伊职业"
+    "druidAria": "德鲁伊职业",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "操作指南",
@@ -4352,7 +4362,8 @@ export const zh_CN: EnTranslations = {
       "shaman": "治疗 / 近战或远程 DPS",
       "mage": "远程 DPS",
       "warlock": "远程 DPS",
-      "druid": "坦克 / 治疗 / 近战或远程 DPS"
+      "druid": "坦克 / 治疗 / 近战或远程 DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "锁甲、皮甲、布甲",
@@ -4376,7 +4387,8 @@ export const zh_CN: EnTranslations = {
       "shaman": "萨满掌控元素，强化武器，以闪电震击敌人，并恢复盟友。",
       "mage": "法师操纵火焰、冰霜与奥术之力来毁灭敌人，召唤清水，并冻结威胁。",
       "warlock": "术士召唤恶魔，施放诅咒和持续伤害魔法，并从敌人身上吸取生命来维持自身。",
-      "druid": "德鲁伊引导自然之力，治疗伤口，缠绕敌人，并变形成动物来防御或输出。"
+      "druid": "德鲁伊引导自然之力，治疗伤口，缠绕敌人，并变形成动物来防御或输出。",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "{className} 职业详情：职责 {role}。初始属性：力量 {str}，敏捷 {agi}，耐力 {sta}，智力 {int}，精神 {spi}。",
     "statBarAria": "{stat}：{value}/25"

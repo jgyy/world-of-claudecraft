@@ -2227,7 +2227,15 @@ export const pl_PL: EnTranslations = {
       "mark_of_the_wild": "Trwałe błogosławieństwo, które nakładasz na siebie lub sojusznika przed walką.",
       "moonfire": "Trafia natychmiast i pozostawia płonący cel, dobre w ruchu.",
       "rejuvenation": "Rzucane natychmiast, leczy sojusznika z czasem, byś mógł działać dalej.",
-      "thorns": "Chroni sojusznika tak, że atakujący wręcz ranią się przy uderzeniu."
+      "thorns": "Chroni sojusznika tak, że atakujący wręcz ranią się przy uderzeniu.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Demon ciskający ognistymi pociskami z bezpiecznej odległości, podgryzający wrogów na dystans.",
@@ -3576,6 +3584,7 @@ export const pl_PL: EnTranslations = {
     "mage": "Mag",
     "warlock": "Czarnoksiężnik",
     "druid": "Druid",
+    "card_adept": "Card Adept",
     "warriorAria": "Klasa Wojownik",
     "paladinAria": "Klasa Paladyn",
     "hunterAria": "Klasa Łowca",
@@ -3584,7 +3593,8 @@ export const pl_PL: EnTranslations = {
     "shamanAria": "Klasa Szaman",
     "mageAria": "Klasa Mag",
     "warlockAria": "Klasa Czarnoksiężnik",
-    "druidAria": "Klasa Druid"
+    "druidAria": "Klasa Druid",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Przewodnik sterowania",
@@ -4352,7 +4362,8 @@ export const pl_PL: EnTranslations = {
       "shaman": "Uzdrowiciel / Walka wręcz lub dystansowa DPS",
       "mage": "Dystansowy DPS",
       "warlock": "Dystansowy DPS",
-      "druid": "Tank / Uzdrowiciel / Walka wręcz lub dystansowa DPS"
+      "druid": "Tank / Uzdrowiciel / Walka wręcz lub dystansowa DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Kolczuga, Skóra, Tkanina",
@@ -4376,7 +4387,8 @@ export const pl_PL: EnTranslations = {
       "shaman": "Szamani rozkazują żywiołom, napełniając oręż mocą, rażąc wrogów błyskawicami i przywracając siły sojusznikom.",
       "mage": "Magowie naginają Ogień, Mróz i arkaniczną moc, by niszczyć wrogów, przyzywać wodę i zamrażać zagrożenia w miejscu.",
       "warlock": "Czarnoksiężnicy przyzywają demony, rzucają klątwy i magię obrażeń w czasie oraz wysysają życie z wrogów, by przetrwać.",
-      "druid": "Druidzi czerpią z natury, lecząc rany, pętając wrogów i przemieniając się w postacie zwierząt dla obrony lub zadawania obrażeń."
+      "druid": "Druidzi czerpią z natury, lecząc rany, pętając wrogów i przemieniając się w postacie zwierząt dla obrony lub zadawania obrażeń.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Szczegóły klasy {className}: rola {role}. Statystyki początkowe: Siła {str}, Zręczność {agi}, Wytrzymałość {sta}, Intelekt {int}, Duch {spi}.",
     "statBarAria": "{stat}: {value} z 25"

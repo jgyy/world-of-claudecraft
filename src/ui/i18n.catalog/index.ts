@@ -408,6 +408,7 @@ export const en = {
     mage: 'Mage',
     warlock: 'Warlock',
     druid: 'Druid',
+    card_adept: 'Card Adept',
     warriorAria: 'Warrior class',
     paladinAria: 'Paladin class',
     hunterAria: 'Hunter class',
@@ -417,6 +418,7 @@ export const en = {
     mageAria: 'Mage class',
     warlockAria: 'Warlock class',
     druidAria: 'Druid class',
+    card_adeptAria: 'Card Adept class',
   },
   controls: {
     title: 'Controls Guide',

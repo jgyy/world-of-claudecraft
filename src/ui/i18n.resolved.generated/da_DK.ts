@@ -2227,7 +2227,15 @@ export const da_DK: EnTranslations = {
       "mark_of_the_wild": "En vedvarende velsignelse du lægger på dig selv eller en allieret før en kamp.",
       "moonfire": "Rammer øjeblikkeligt og efterlader målet brændende, god mens du bevæger dig.",
       "rejuvenation": "Kastes øjeblikkeligt og helbreder en allieret over tid, så du kan blive ved med at handle.",
-      "thorns": "Beskytter en allieret så nærkampsangribere skader sig selv når de slår."
+      "thorns": "Beskytter en allieret så nærkampsangribere skader sig selv når de slår.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "En fjernkamps-ildboltdæmon der pikker på fjender fra sikker afstand.",
@@ -3576,6 +3584,7 @@ export const da_DK: EnTranslations = {
     "mage": "Magiker",
     "warlock": "Heksemester",
     "druid": "Druide",
+    "card_adept": "Card Adept",
     "warriorAria": "Kriger-klasse",
     "paladinAria": "Paladin-klasse",
     "hunterAria": "Jæger-klasse",
@@ -3584,7 +3593,8 @@ export const da_DK: EnTranslations = {
     "shamanAria": "Shaman-klasse",
     "mageAria": "Magiker-klasse",
     "warlockAria": "Heksemester-klasse",
-    "druidAria": "Druide-klasse"
+    "druidAria": "Druide-klasse",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Guide til Styring",
@@ -4352,7 +4362,8 @@ export const da_DK: EnTranslations = {
       "shaman": "Healer / Nærkamps- eller Afstands-DPS",
       "mage": "Afstands-DPS",
       "warlock": "Afstands-DPS",
-      "druid": "Tank / Healer / Nærkamps- eller Afstands-DPS"
+      "druid": "Tank / Healer / Nærkamps- eller Afstands-DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Ringbrynje, Læder, Stof",
@@ -4376,7 +4387,8 @@ export const da_DK: EnTranslations = {
       "shaman": "Shamaner befaler elementerne, gennemtrænger våben med kraft, chokerer fjender med lyn og genopretter allierede.",
       "mage": "Magikere bøjer Ild-, Frost- og arkankraft for at tilintetgøre fjender, frembringe vand og fryse trusler på stedet.",
       "warlock": "Heksemestre tilkalder dæmoner, kaster forbandelser og skade-over-tid-magi og suger liv fra fjender for at holde ud.",
-      "druid": "Druider kanaliserer naturen, helbreder sår, omslynger fjender og skifter til dyreformer til forsvar eller skade."
+      "druid": "Druider kanaliserer naturen, helbreder sår, omslynger fjender og skifter til dyreformer til forsvar eller skade.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Klassedetaljer for {className}: rolle {role}. Startværdier: Styrke {str}, Smidighed {agi}, Udholdenhed {sta}, Intellekt {int}, Ånd {spi}.",
     "statBarAria": "{stat}: {value} ud af 25"

@@ -2219,7 +2219,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'uncommon',
     stats: { armor: 60, int: 5, spi: 3 },
     sellValue: 800,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
   },
   nightwalk_jerkin: {
     id: 'nightwalk_jerkin',
@@ -2252,7 +2252,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 20, max: 33, speed: 3.0 },
     stats: { int: 6, spi: 2 },
     sellValue: 900,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid', 'card_adept'],
   },
   cultist_flayer: {
     id: 'cultist_flayer',
@@ -2296,7 +2296,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 19, max: 31, speed: 3.0 },
     stats: { int: 7, spi: 3 },
     sellValue: 950,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid', 'card_adept'],
   },
   marrowlord_boneboots: {
     id: 'marrowlord_boneboots',
@@ -2372,7 +2372,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 23, max: 36, speed: 3.0 },
     stats: { int: 8, spi: 4 },
     sellValue: 2000,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid', 'card_adept'],
   },
   skullsplitter_dirk: {
     id: 'skullsplitter_dirk',
@@ -2405,7 +2405,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 24, max: 38, speed: 3.0 },
     stats: { int: 9, spi: 4 },
     sellValue: 2000,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid', 'card_adept'],
   },
   gutripper_shiv: {
     id: 'gutripper_shiv',
@@ -2458,7 +2458,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 27, max: 43, speed: 3.0 },
     stats: { int: 9, spi: 4 },
     sellValue: 2500,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid', 'card_adept'],
   },
   shadowmeld_tunic: {
     id: 'shadowmeld_tunic',
@@ -2491,7 +2491,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 75, int: 9, spi: 4 },
     sellValue: 3000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
   },
   wyrmscale_jerkin: {
     id: 'wyrmscale_jerkin',
@@ -2535,7 +2535,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 68, int: 5, spi: 3 },
     sellValue: 3200,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
   },
   deathlord_warplate: {
     id: 'deathlord_warplate',
@@ -2559,7 +2559,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 92, int: 11, spi: 7 },
     sellValue: 9000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
   },
   wyrmshadow_harness: {
     id: 'wyrmshadow_harness',
@@ -2607,7 +2607,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 80, int: 8, spi: 4 },
     sellValue: 9000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
   },
   necromancers_legwraps: {
     id: 'necromancers_legwraps',
@@ -2619,7 +2619,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 86, int: 13, spi: 7 },
     sellValue: 9000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
   },
   wyrmshadow_treads: {
     id: 'wyrmshadow_treads',
@@ -2666,7 +2666,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 32, max: 52, speed: 3.0 },
     stats: { int: 12, spi: 6 },
     sellValue: 8000,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid', 'card_adept'],
   },
   fang_of_korzul: {
     id: 'fang_of_korzul',
@@ -2705,7 +2705,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 70, int: 9, spi: 5 },
     sellValue: 9000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
   },
   wyrmshadow_talongrips: {
     id: 'wyrmshadow_talongrips',
@@ -2755,7 +2755,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 60, int: 8, sta: 5 },
     sellValue: 3600,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
     set: 'soulflame', // 3rd Wraithfire piece, unlocks the set's 3-piece bonus
   },
   stormcallers_handguards: {
@@ -2805,7 +2805,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 50, int: 8, spi: 5 },
     sellValue: 3600,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
     set: 'soulflame',
   },
   stormcallers_waistguard: {
@@ -2834,7 +2834,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // mainhand budget.
     stats: { spi: 17, sta: 13, int: 14 },
     sellValue: 25000,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid', 'card_adept'],
     // Life and decay: a damaging spell may fester a nature DoT (Deathbloom); a heal
     // may bloom a nature heal-over-time on its target (Lifebloom).
     weaponProcs: [
@@ -2951,7 +2951,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 105, int: 11, sta: 6 },
     sellValue: 12000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
   },
   soulflame_mantle: {
     id: 'soulflame_mantle',
@@ -2963,7 +2963,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 92, int: 9, sta: 6 },
     sellValue: 12000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'priest', 'warlock', 'druid', 'card_adept'],
   },
   stormcallers_crown: {
     id: 'stormcallers_crown',

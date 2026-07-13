@@ -1256,7 +1256,7 @@ export const ZONE2_OBJECTS: GroundObjectDef[] = [
 // Archetype groups for class-locked rewards (REWARD_ARCHETYPE hands warrior
 // rewards to paladins/shamans etc., so the lock must admit the whole group).
 const WAR: PlayerClass[] = ['warrior', 'paladin', 'shaman'];
-const MAG: PlayerClass[] = ['mage', 'priest', 'warlock', 'druid'];
+const MAG: PlayerClass[] = ['mage', 'priest', 'warlock', 'druid', 'card_adept'];
 const ROG: PlayerClass[] = ['rogue', 'hunter'];
 
 export const ZONE2_ITEMS: Record<string, ItemDef> = {

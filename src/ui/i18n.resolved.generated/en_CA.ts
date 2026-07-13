@@ -2227,7 +2227,15 @@ export const en_CA: EnTranslations = {
       "mark_of_the_wild": "A lasting blessing you put on yourself or an ally before a fight.",
       "moonfire": "Hits instantly and leaves the target burning, good while moving.",
       "rejuvenation": "Casts instantly and heals an ally over time, so you can keep acting.",
-      "thorns": "Wards an ally so melee attackers hurt themselves for striking."
+      "thorns": "Wards an ally so melee attackers hurt themselves for striking.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "A ranged firebolt demon that chips at enemies from a safe distance.",
@@ -3576,6 +3584,7 @@ export const en_CA: EnTranslations = {
     "mage": "Mage",
     "warlock": "Warlock",
     "druid": "Druid",
+    "card_adept": "Card Adept",
     "warriorAria": "Warrior class",
     "paladinAria": "Paladin class",
     "hunterAria": "Hunter class",
@@ -3584,7 +3593,8 @@ export const en_CA: EnTranslations = {
     "shamanAria": "Shaman class",
     "mageAria": "Mage class",
     "warlockAria": "Warlock class",
-    "druidAria": "Druid class"
+    "druidAria": "Druid class",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Controls Guide",
@@ -4352,7 +4362,8 @@ export const en_CA: EnTranslations = {
       "shaman": "Healer / Melee or Ranged DPS",
       "mage": "Ranged DPS",
       "warlock": "Ranged DPS",
-      "druid": "Tank / Healer / Melee or Ranged DPS"
+      "druid": "Tank / Healer / Melee or Ranged DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Chainmail, Leather, Cloth",
@@ -4376,7 +4387,8 @@ export const en_CA: EnTranslations = {
       "shaman": "Shaman command the elements, imbuing weapons with power, shocking enemies with lightning, and restoring allies.",
       "mage": "Mages bend Fire, Frost, and arcane force to destroy enemies, summon water, and freeze threats in place.",
       "warlock": "Warlocks summon demons, apply curses and damage-over-time magic, and leech life from enemies to endure.",
-      "druid": "Druids channel nature, healing wounds, entangling foes, and shifting into animal forms for defence or damage."
+      "druid": "Druids channel nature, healing wounds, entangling foes, and shifting into animal forms for defence or damage.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Class details for {className}: role {role}. Starting stats: Strength {str}, Agility {agi}, Stamina {sta}, Intellect {int}, Spirit {spi}.",
     "statBarAria": "{stat}: {value} out of 25"

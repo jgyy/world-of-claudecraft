@@ -2227,7 +2227,15 @@ export const ru_RU: EnTranslations = {
       "mark_of_the_wild": "Длительное благословение, которое вы накладываете на себя или союзника перед боем.",
       "moonfire": "Бьет мгновенно и оставляет цель гореть, удобно использовать в движении.",
       "rejuvenation": "Накладывается мгновенно и лечит союзника со временем, так что вы можете продолжать действовать.",
-      "thorns": "Защищает союзника так, что атакующие в ближнем бою ранят себя при ударе."
+      "thorns": "Защищает союзника так, что атакующие в ближнем бою ранят себя при ударе.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Дальнобойный демон с огненными стрелами, который понемногу бьет врагов с безопасного расстояния.",
@@ -3576,6 +3584,7 @@ export const ru_RU: EnTranslations = {
     "mage": "Маг",
     "warlock": "Чернокнижник",
     "druid": "Друид",
+    "card_adept": "Card Adept",
     "warriorAria": "Класс Воин",
     "paladinAria": "Класс Паладин",
     "hunterAria": "Класс Охотник",
@@ -3584,7 +3593,8 @@ export const ru_RU: EnTranslations = {
     "shamanAria": "Класс Шаман",
     "mageAria": "Класс Маг",
     "warlockAria": "Класс Чернокнижник",
-    "druidAria": "Класс Друид"
+    "druidAria": "Класс Друид",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Руководство по управлению",
@@ -4352,7 +4362,8 @@ export const ru_RU: EnTranslations = {
       "shaman": "Лекарь / ближний или дальний DPS",
       "mage": "Дальний DPS",
       "warlock": "Дальний DPS",
-      "druid": "Танк / лекарь / ближний или дальний DPS"
+      "druid": "Танк / лекарь / ближний или дальний DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Кольчуга, кожа, ткань",
@@ -4376,7 +4387,8 @@ export const ru_RU: EnTranslations = {
       "shaman": "Шаманы повелевают стихиями, усиливают оружие, поражают врагов молниями и восстанавливают союзников.",
       "mage": "Маги управляют огнём, льдом и тайной силой, уничтожают врагов, призывают воду и замораживают угрозы.",
       "warlock": "Чернокнижники призывают демонов, накладывают проклятия и длительный урон, затем вытягивают жизнь врагов, чтобы выжить.",
-      "druid": "Друиды направляют силу природы, лечат раны, оплетают врагов и принимают звериные формы для защиты или урона."
+      "druid": "Друиды направляют силу природы, лечат раны, оплетают врагов и принимают звериные формы для защиты или урона.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Описание класса {className}: роль {role}. Начальные характеристики: Сила {str}, Ловкость {agi}, Выносливость {sta}, Интеллект {int}, Дух {spi}.",
     "statBarAria": "{stat}: {value} из 25"

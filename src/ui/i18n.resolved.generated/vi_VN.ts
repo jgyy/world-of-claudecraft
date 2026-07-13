@@ -2227,7 +2227,15 @@ export const vi_VN: EnTranslations = {
       "mark_of_the_wild": "Một phúc lành lâu dài bạn ban cho bản thân hoặc đồng đội trước trận đấu.",
       "moonfire": "Giáng đòn tức thời và khiến mục tiêu cháy âm ỉ, hữu dụng khi đang di chuyển.",
       "rejuvenation": "Niệm tức thời và hồi máu cho đồng đội theo thời gian, để bạn cứ tiếp tục hành động.",
-      "thorns": "Bảo hộ đồng đội để kẻ tấn công cận chiến tự làm mình bị thương khi ra đòn."
+      "thorns": "Bảo hộ đồng đội để kẻ tấn công cận chiến tự làm mình bị thương khi ra đòn.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Một con quỷ bắn cầu lửa từ xa, gặm dần kẻ địch từ khoảng cách an toàn.",
@@ -3576,6 +3584,7 @@ export const vi_VN: EnTranslations = {
     "mage": "Pháp Sư",
     "warlock": "Thuật Sĩ Hắc Ám",
     "druid": "Druid",
+    "card_adept": "Card Adept",
     "warriorAria": "Lớp nhân vật Chiến Binh",
     "paladinAria": "Lớp nhân vật Thánh Kỵ Sĩ",
     "hunterAria": "Lớp nhân vật Thợ Săn",
@@ -3584,7 +3593,8 @@ export const vi_VN: EnTranslations = {
     "shamanAria": "Lớp nhân vật Shaman",
     "mageAria": "Lớp nhân vật Pháp Sư",
     "warlockAria": "Lớp nhân vật Thuật Sĩ Hắc Ám",
-    "druidAria": "Lớp nhân vật Druid"
+    "druidAria": "Lớp nhân vật Druid",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Hướng Dẫn Điều Khiển",
@@ -4352,7 +4362,8 @@ export const vi_VN: EnTranslations = {
       "shaman": "Trị Liệu / DPS Cận Chiến hoặc Tầm Xa",
       "mage": "DPS Tầm Xa",
       "warlock": "DPS Tầm Xa",
-      "druid": "Đỡ Đòn / Trị Liệu / DPS Cận Chiến hoặc Tầm Xa"
+      "druid": "Đỡ Đòn / Trị Liệu / DPS Cận Chiến hoặc Tầm Xa",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Giáp Xích, Giáp Da, Giáp Vải",
@@ -4376,7 +4387,8 @@ export const vi_VN: EnTranslations = {
       "shaman": "Shaman điều khiển các nguyên tố, ban sức mạnh cho vũ khí, gây choáng kẻ thù bằng sấm sét, và hồi phục cho đồng minh.",
       "mage": "Pháp Sư điều khiển sức mạnh Hỏa, Băng và uy lực bí thuật để tiêu diệt kẻ thù, triệu hồi nước, và đóng băng các mối đe dọa tại chỗ.",
       "warlock": "Thuật Sĩ Hắc Ám triệu hồi quỷ dữ, gieo lời nguyền và ma thuật sát thương theo thời gian, và hút sinh lực từ kẻ thù để trường tồn.",
-      "druid": "Druid khơi dẫn sức mạnh thiên nhiên, chữa lành vết thương, trói buộc kẻ thù, và biến hình thành các dạng thú để phòng thủ hoặc gây sát thương."
+      "druid": "Druid khơi dẫn sức mạnh thiên nhiên, chữa lành vết thương, trói buộc kẻ thù, và biến hình thành các dạng thú để phòng thủ hoặc gây sát thương.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Chi tiết lớp {className}: vai trò {role}. Chỉ số khởi đầu: Sức Mạnh {str}, Nhanh Nhẹn {agi}, Sức Bền {sta}, Trí Tuệ {int}, Tinh Thần {spi}.",
     "statBarAria": "{stat}: {value} trên 25"

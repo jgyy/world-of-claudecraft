@@ -679,6 +679,14 @@ export const guideStrings = {
     moonfire: 'Hits instantly and leaves the target burning, good while moving.',
     rejuvenation: 'Casts instantly and heals an ally over time, so you can keep acting.',
     thorns: 'Wards an ally so melee attackers hurt themselves for striking.',
+    ca_quickstrike: 'A cheap charged card snapped at a foe for quick Arcane damage.',
+    ca_arcane_bolt: 'Your reliable ranged card, a solid bolt of arcane force.',
+    ca_flame_fan: 'Fans a spread of burning cards for a hit plus a lingering burn.',
+    ca_mending_card: 'Plays a restorative card to heal yourself or an ally.',
+    ca_warding_card: 'A quick self-ward that raises your armor for a short time.',
+    ca_hex_card: 'Throws a hex card that slows the target so it cannot chase.',
+    ca_empower_card: 'Draws on the deck to raise your Intellect before a big play.',
+    ca_royal_flush: 'Your finisher, a royal flush that unleashes heavy Fire damage.',
   },
 
   // Warlock demon roster flavor, keyed by pet id.

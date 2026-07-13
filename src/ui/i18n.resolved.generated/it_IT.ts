@@ -2227,7 +2227,15 @@ export const it_IT: EnTranslations = {
       "mark_of_the_wild": "Una benedizione duratura che metti su di te o un alleato prima di uno scontro.",
       "moonfire": "Colpisce all'istante e lascia il bersaglio in fiamme, ottimo mentre ti muovi.",
       "rejuvenation": "Si lancia all'istante e cura un alleato nel tempo, così puoi continuare ad agire.",
-      "thorns": "Protegge un alleato, così gli attaccanti in mischia si feriscono colpendolo."
+      "thorns": "Protegge un alleato, così gli attaccanti in mischia si feriscono colpendolo.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "Un demone che scaglia dardi di fuoco a distanza e fiacca i nemici da una distanza di sicurezza.",
@@ -3576,6 +3584,7 @@ export const it_IT: EnTranslations = {
     "mage": "Mago",
     "warlock": "Stregone",
     "druid": "Druido",
+    "card_adept": "Card Adept",
     "warriorAria": "Classe Guerriero",
     "paladinAria": "Classe Paladino",
     "hunterAria": "Classe Cacciatore",
@@ -3584,7 +3593,8 @@ export const it_IT: EnTranslations = {
     "shamanAria": "Classe Sciamano",
     "mageAria": "Classe Mago",
     "warlockAria": "Classe Stregone",
-    "druidAria": "Classe Druido"
+    "druidAria": "Classe Druido",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "Guida ai controlli",
@@ -4352,7 +4362,8 @@ export const it_IT: EnTranslations = {
       "shaman": "Guaritore / DPS da mischia o a distanza",
       "mage": "DPS a distanza",
       "warlock": "DPS a distanza",
-      "druid": "Tank / Guaritore / DPS da mischia o a distanza"
+      "druid": "Tank / Guaritore / DPS da mischia o a distanza",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Maglia, cuoio, stoffa",
@@ -4376,7 +4387,8 @@ export const it_IT: EnTranslations = {
       "shaman": "Gli sciamani comandano gli elementi, infondono potere nelle armi, colpiscono con fulmini e curano gli alleati.",
       "mage": "I maghi manipolano Fuoco, Gelo e forza arcana per distruggere i nemici, evocare acqua e congelare le minacce sul posto.",
       "warlock": "Gli stregoni evocano demoni, applicano maledizioni e magie di danno nel tempo, e sottraggono vita ai nemici per resistere.",
-      "druid": "I druidi canalizzano la natura, curano ferite, intralciano nemici e assumono forme animali per difendere o attaccare."
+      "druid": "I druidi canalizzano la natura, curano ferite, intralciano nemici e assumono forme animali per difendere o attaccare.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "Dettagli classe per {className}: ruolo {role}. Statistiche iniziali: Forza {str}, Agilità {agi}, Tempra {sta}, Intelletto {int}, Spirito {spi}.",
     "statBarAria": "{stat}: {value} su 25"

@@ -106,7 +106,7 @@ describe('nine classes', () => {
       expect(kit.some((k) => k.rank >= 3)).toBe(true);
       // resource type sane
       if (cls === 'warrior') expect(p.resourceType).toBe('rage');
-      else if (cls === 'rogue') expect(p.resourceType).toBe('energy');
+      else if (cls === 'rogue' || cls === 'card_adept') expect(p.resourceType).toBe('energy');
       else expect(p.resourceType).toBe('mana');
     }
   });

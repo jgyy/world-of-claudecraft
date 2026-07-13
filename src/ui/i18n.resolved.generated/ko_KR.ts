@@ -2227,7 +2227,15 @@ export const ko_KR: EnTranslations = {
       "mark_of_the_wild": "전투 전에 자신이나 아군에게 걸어 두는 지속형 축복입니다.",
       "moonfire": "즉시 타격하고 대상을 계속 불태우므로, 이동 중에 쓰기 좋습니다.",
       "rejuvenation": "즉시 시전되어 아군을 지속적으로 치유하므로, 계속 행동할 수 있습니다.",
-      "thorns": "아군을 보호해, 근접 공격자가 칠 때마다 스스로 피해를 입게 합니다."
+      "thorns": "아군을 보호해, 근접 공격자가 칠 때마다 스스로 피해를 입게 합니다.",
+      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
+      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
+      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
+      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
+      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
+      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
+      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
+      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
     },
     "petHook": {
       "emberkin": "안전한 거리에서 적을 조금씩 깎는 원거리 화염 화살 악마입니다.",
@@ -3576,6 +3584,7 @@ export const ko_KR: EnTranslations = {
     "mage": "마법사",
     "warlock": "흑마법사",
     "druid": "드루이드",
+    "card_adept": "Card Adept",
     "warriorAria": "전사 직업",
     "paladinAria": "성기사 직업",
     "hunterAria": "사냥꾼 직업",
@@ -3584,7 +3593,8 @@ export const ko_KR: EnTranslations = {
     "shamanAria": "주술사 직업",
     "mageAria": "마법사 직업",
     "warlockAria": "흑마법사 직업",
-    "druidAria": "드루이드 직업"
+    "druidAria": "드루이드 직업",
+    "card_adeptAria": "Card Adept class"
   },
   "controls": {
     "title": "조작 가이드",
@@ -4352,7 +4362,8 @@ export const ko_KR: EnTranslations = {
       "shaman": "치유 / 근접 또는 원거리 DPS",
       "mage": "원거리 DPS",
       "warlock": "원거리 DPS",
-      "druid": "탱커 / 치유 / 근접 또는 원거리 DPS"
+      "druid": "탱커 / 치유 / 근접 또는 원거리 DPS",
+      "card_adept": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "사슬, 가죽, 천",
@@ -4376,7 +4387,8 @@ export const ko_KR: EnTranslations = {
       "shaman": "주술사는 정령을 다루고 무기에 힘을 불어넣으며 번개로 적을 충격시키고 아군을 회복시킵니다.",
       "mage": "마법사는 화염, 냉기, 비전의 힘으로 적을 파괴하고 물을 만들어내며 위협을 얼립니다.",
       "warlock": "흑마법사는 악마를 소환하고 저주와 지속 피해 마법을 걸며 적에게서 생명력을 흡수해 버팁니다.",
-      "druid": "드루이드는 자연의 힘으로 치유하고 적을 묶으며 동물 형태로 변신해 방어하거나 피해를 줍니다."
+      "druid": "드루이드는 자연의 힘으로 치유하고 적을 묶으며 동물 형태로 변신해 방어하거나 피해를 줍니다.",
+      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
     },
     "aria": "{className} 직업 세부 정보: 역할 {role}. 시작 능력치: 힘 {str}, 민첩 {agi}, 체력 {sta}, 지능 {int}, 정신력 {spi}.",
     "statBarAria": "{stat}: {value}/25"

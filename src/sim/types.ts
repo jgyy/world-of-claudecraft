@@ -102,7 +102,8 @@ export type PlayerClass =
   | 'shaman'
   | 'mage'
   | 'warlock'
-  | 'druid';
+  | 'druid'
+  | 'card_adept';
 
 // Classes that command a persistent pet (hunter beast, warlock demon). Pure
 // predicate, here so the pet-command slice imports it without a sim.ts cycle.
@@ -157,6 +158,7 @@ export const ALL_CLASSES: PlayerClass[] = [
   'mage',
   'warlock',
   'druid',
+  'card_adept',
 ];
 export type ResourceType = 'rage' | 'mana' | 'energy';
 export const OVERHEAD_EMOTE_IDS = [

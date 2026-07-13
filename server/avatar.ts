@@ -35,6 +35,7 @@ const CLASS_COLOR: Record<PlayerClass, [number, number, number]> = {
   mage: [0x69, 0xcc, 0xf0],
   warlock: [0x94, 0x82, 0xc9],
   druid: [0xff, 0x7d, 0x0a],
+  card_adept: [0x8a, 0x5c, 0xf0],
 };
 
 export function isPlayerClass(s: string): s is PlayerClass {

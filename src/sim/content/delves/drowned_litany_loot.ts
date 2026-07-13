@@ -16,6 +16,7 @@ const LOOT_ARCHETYPE: Record<PlayerClass, 'WAR' | 'ROG' | 'MAG'> = {
   priest: 'MAG',
   warlock: 'MAG',
   druid: 'MAG',
+  card_adept: 'MAG',
 };
 
 // Per-archetype item pools. Indexed so draws are arch-stable (same draw count

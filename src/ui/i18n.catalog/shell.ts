@@ -208,6 +208,7 @@ export const shellStrings = {
         mage: 'Ranged DPS',
         warlock: 'Ranged DPS',
         druid: 'Tank / Healer / Melee or Ranged DPS',
+        card_adept: 'Ranged DPS',
       },
       armor: {
         chainLeatherCloth: 'Chainmail, Leather, Cloth',
@@ -240,6 +241,8 @@ export const shellStrings = {
           'Warlocks summon demons, apply curses and damage-over-time magic, and leech life from enemies to endure.',
         druid:
           'Druids channel nature, healing wounds, entangling foes, and shifting into animal forms for defense or damage.',
+        card_adept:
+          'Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand.',
       },
       aria: 'Class details for {className}: role {role}. Starting stats: Strength {str}, Agility {agi}, Stamina {sta}, Intellect {int}, Spirit {spi}.',
       statBarAria: '{stat}: {value} out of 25',
