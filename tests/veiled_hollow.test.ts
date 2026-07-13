@@ -16,7 +16,7 @@ import {
 import { zoneAt } from '../src/sim/data';
 import { PLAYER_MAX_CLIMB_SLOPE } from '../src/sim/pathfind';
 import { Sim } from '../src/sim/sim';
-import { hollowLandness, terrainHeight, WATER_LEVEL } from '../src/sim/world';
+import { hollowLandness, terrainHeight, terrainSteepnessAt, WATER_LEVEL } from '../src/sim/world';
 import { SEED, VEILED_HOLLOW_TEST_WORLD } from './veiled_hollow_shared';
 
 describe('the sealed border is a hard movement wall', () => {
@@ -119,6 +119,46 @@ describe('the Hollow coastline keeps every fixed feature on dry land', () => {
           assertOnLand('road', x, z);
         }
       }
+    }
+  });
+});
+
+describe('a player wedged in a coastline cliff pocket is never permanently stuck', () => {
+  // Regression for a bug report: a player got shoved into a concave notch in
+  // the coastline rock (rock meets open water near the map edge) and could
+  // not move again. terrainWallStandoff's ring-sample-and-nudge push is
+  // capped at one body radius and is not always enough to clear a concave
+  // pocket in a single tick; stepPlayerMotion used to only commit that push
+  // once it landed on fully walkable ground, so an imperfect nudge was
+  // silently discarded and the position never changed, tick after tick,
+  // forever. These four coordinates are real coastline points found by
+  // scanning the Hollow at seed 1337 for exactly that failure mode; (180,
+  // 1344) in particular used to sit frozen at its planted spot for the
+  // entire 400-tick probe under the old strict gate.
+  const STUCK_POCKETS = [
+    { x: 172, z: 978 },
+    { x: 172, z: 1076 },
+    { x: 172, z: 1212 },
+    { x: 180, z: 1344 },
+  ];
+
+  it('escapes a concave wall pocket within a bounded number of ticks, holding still', () => {
+    for (const c of STUCK_POCKETS) {
+      const sim = new Sim({ seed: SEED, playerClass: 'warrior', world: VEILED_HOLLOW_TEST_WORLD });
+      const p = sim.player;
+      p.pos.x = c.x;
+      p.pos.z = c.z;
+      p.pos.y = terrainHeight(c.x, c.z, SEED);
+      p.prevPos = { ...p.pos };
+      p.onGround = true;
+      // No held movement input: this is standoff/slope-gate recovery alone,
+      // not the player fighting their way out.
+      let escaped = false;
+      for (let t = 0; t < 60 && !escaped; t++) {
+        sim.tick();
+        if (terrainSteepnessAt(p.pos.x, p.pos.z, SEED) <= PLAYER_MAX_CLIMB_SLOPE) escaped = true;
+      }
+      expect(escaped, `pocket at (${c.x},${c.z}) never reached walkable ground`).toBe(true);
     }
   });
 });
