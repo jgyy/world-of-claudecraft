@@ -6108,6 +6108,38 @@ export const zh_TW: EnTranslations = {
         "name": "封口令",
         "description": "在施法中沉默目標，並在5秒內封鎖該法術學派。"
       },
+      "ca_quickstrike": {
+        "name": "Quickstrike Card",
+        "description": "Snaps a charged card at the target for {damage} Arcane damage."
+      },
+      "ca_arcane_bolt": {
+        "name": "Arcane Bolt Card",
+        "description": "Looses a bolt of arcane force for {damage} damage."
+      },
+      "ca_flame_fan": {
+        "name": "Flame Fan Card",
+        "description": "Fans a spread of burning cards for {damage} Fire damage plus a burn."
+      },
+      "ca_mending_card": {
+        "name": "Mending Card",
+        "description": "Plays a restorative card, healing a friendly target for {damage}."
+      },
+      "ca_warding_card": {
+        "name": "Warding Card",
+        "description": "Surrounds you with a warding card, increasing armor by {buff} for 30 sec."
+      },
+      "ca_hex_card": {
+        "name": "Hex Card",
+        "description": "Plays a hex card that slows the target for 6 sec."
+      },
+      "ca_empower_card": {
+        "name": "Empower Card",
+        "description": "Draws on the deck to empower your Intellect by {buff}% for 1 min."
+      },
+      "ca_royal_flush": {
+        "name": "Royal Flush Card",
+        "description": "Unleashes a royal flush for {damage} Fire damage."
+      },
       "bear_charge": {
         "name": "巨熊衝鋒",
         "description": "向敵人衝鋒，產生 9 點怒氣並將其昏迷 1 秒。射程 8-25 公尺。僅限巨熊形態。"

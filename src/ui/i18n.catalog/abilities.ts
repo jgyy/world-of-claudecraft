@@ -1373,6 +1373,34 @@ const classAbilityNamesEn = {
         'Gag Order',
         'Silences the target mid-cast and prevents casting from that school for 5 sec.',
       ],
+      [
+        'ca_quickstrike',
+        'Quickstrike Card',
+        'Snaps a charged card at the target for {damage} Arcane damage.',
+      ],
+      ['ca_arcane_bolt', 'Arcane Bolt Card', 'Looses a bolt of arcane force for {damage} damage.'],
+      [
+        'ca_flame_fan',
+        'Flame Fan Card',
+        'Fans a spread of burning cards for {damage} Fire damage plus a burn.',
+      ],
+      [
+        'ca_mending_card',
+        'Mending Card',
+        'Plays a restorative card, healing a friendly target for {damage}.',
+      ],
+      [
+        'ca_warding_card',
+        'Warding Card',
+        'Surrounds you with a warding card, increasing armor by {buff} for 30 sec.',
+      ],
+      ['ca_hex_card', 'Hex Card', 'Plays a hex card that slows the target for 6 sec.'],
+      [
+        'ca_empower_card',
+        'Empower Card',
+        'Draws on the deck to empower your Intellect by {buff}% for 1 min.',
+      ],
+      ['ca_royal_flush', 'Royal Flush Card', 'Unleashes a royal flush for {damage} Fire damage.'],
     ]),
   },
 };

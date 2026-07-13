@@ -2224,6 +2224,15 @@ function r(
 }
 
 const ABILITY_RECIPES: Record<string, IconRecipe> = {
+  // Card Adept: charged spell-cards. Each gets a distinct procedural recipe.
+  ca_quickstrike: r('arcane', 'arcanePink', ['dagger', { p: 'bolt', ...BR }], ['motion']),
+  ca_arcane_bolt: r('arcane', 'sky', ['bolt', { p: 'sigil_rune', ...BR }], ['glow']),
+  ca_flame_fan: r('fire', 'ember', ['flame', { p: 'sunburst', ...BR }], ['sparkle']),
+  ca_mending_card: r('holy', 'holyGold', ['cross', { p: 'sigil_rune', ...BR }], ['motion']),
+  ca_warding_card: r('arcane', 'steel', ['shield', { p: 'sigil_rune', ...BR }], ['glow']),
+  ca_hex_card: r('shadow', 'shadowPurple', ['skull', { p: 'eye', ...BR }], ['drips']),
+  ca_empower_card: r('arcane', 'gold', ['sigil_rune', { p: 'sunburst', ...BR }], ['sparkle']),
+  ca_royal_flush: r('fire', 'gold', ['sunburst', { p: 'flame', ...BR }], ['glow']),
   // Talents 2.0 ground-targeted spells (each aimed AoE gets a distinct recipe;
   // grouped here so the family reads together, order within the map is cosmetic).
   flamestrike: r('fire', 'ember', ['meteor', { p: 'sunburst', ...BIG }], ['glow']),

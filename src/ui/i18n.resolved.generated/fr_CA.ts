@@ -6108,6 +6108,38 @@ export const fr_CA: EnTranslations = {
         "name": "Gag Order",
         "description": "Silences the target mid-cast and prevents casting from that school for 5 sec."
       },
+      "ca_quickstrike": {
+        "name": "Quickstrike Card",
+        "description": "Snaps a charged card at the target for {damage} Arcane damage."
+      },
+      "ca_arcane_bolt": {
+        "name": "Arcane Bolt Card",
+        "description": "Looses a bolt of arcane force for {damage} damage."
+      },
+      "ca_flame_fan": {
+        "name": "Flame Fan Card",
+        "description": "Fans a spread of burning cards for {damage} Fire damage plus a burn."
+      },
+      "ca_mending_card": {
+        "name": "Mending Card",
+        "description": "Plays a restorative card, healing a friendly target for {damage}."
+      },
+      "ca_warding_card": {
+        "name": "Warding Card",
+        "description": "Surrounds you with a warding card, increasing armor by {buff} for 30 sec."
+      },
+      "ca_hex_card": {
+        "name": "Hex Card",
+        "description": "Plays a hex card that slows the target for 6 sec."
+      },
+      "ca_empower_card": {
+        "name": "Empower Card",
+        "description": "Draws on the deck to empower your Intellect by {buff}% for 1 min."
+      },
+      "ca_royal_flush": {
+        "name": "Royal Flush Card",
+        "description": "Unleashes a royal flush for {damage} Fire damage."
+      },
       "bear_charge": {
         "name": "Ruée de Bruin",
         "description": "Charge un ennemi, génère 9 points de rage et l'étourdit pendant 1 s. Portée de 8-25 m. Forme de Bruin uniquement."
