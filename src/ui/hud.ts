@@ -361,7 +361,7 @@ import type { PartyRowAuraDeps } from './party_frame_row';
 import { partyFrameSignature, selectPartyFrameMembers } from './party_frames';
 import { PartyFramesPainter } from './party_frames_painter';
 import type { PerfOverlayHooks } from './perf_overlay_settings';
-import { PET_ACTION_ICONS } from './pet_action_icons';
+import { PET_ACTION_ICONS, petFeedButtonState } from './pet_action_icons';
 import {
   CARD_POSES,
   cardCanvasToBlob,
@@ -6406,7 +6406,13 @@ export class Hud {
     const cd = Math.ceil(Math.max(0, pet.petTauntTimer));
     const autoTaunt = pet.petAutoTaunt === true;
     const ownerClass = this.sim.cfg.playerClass;
-    const sig = `${pet.id}:${ownerClass}:${mode}:${cd}:${autoTaunt ? 'auto' : 'manual'}:${this.pendingPetFeed ? 'feed' : ''}:${this.petModeMenuOpen ? 'modes' : ''}`;
+    // Feed-button reason (full HP / no food) folds in so the pet bar redraws
+    // when either flips, even while the pet stays otherwise unchanged.
+    const feedSig =
+      ownerClass === 'warlock'
+        ? ''
+        : (petFeedButtonState(pet.hp, pet.maxHp, this.hasPetFood()).reasonKey ?? 'ok');
+    const sig = `${pet.id}:${ownerClass}:${mode}:${cd}:${autoTaunt ? 'auto' : 'manual'}:${this.pendingPetFeed ? 'feed' : ''}:${this.petModeMenuOpen ? 'modes' : ''}:${feedSig}`;
     bar.style.display = 'flex';
     if (sig === this.lastPetBarSig) return;
     this.lastPetBarSig = sig;
@@ -6431,6 +6437,10 @@ export class Hud {
         cooldownText?: string;
         onContextMenu?: () => void;
         onTouchHold?: () => void;
+        // Kept visible (never hidden) but greyed and inert, with `title`
+        // carrying the reason instead of the normal action description, so
+        // the player sees WHY the button can't be used right now.
+        disabled?: boolean;
       } = {},
     ) => {
       const btn = document.createElement('button');
@@ -6438,8 +6448,10 @@ export class Hud {
       if (opts.active) btn.classList.add('active');
       if (opts.autocast) btn.classList.add('autocast');
       if (opts.cooldownText) btn.classList.add('cooldown');
+      if (opts.disabled) btn.classList.add('disabled');
       btn.title = title;
       btn.setAttribute('aria-label', title);
+      if (opts.disabled) btn.setAttribute('aria-disabled', 'true');
       if (opts.active || opts.autocast) btn.setAttribute('aria-pressed', 'true');
       const icon = document.createElement('span');
       icon.className = 'icon-label';
@@ -6463,7 +6475,7 @@ export class Hud {
         touchHoldTimer = undefined;
       };
       const runClickAction = () => {
-        if (opts.cooldownText) return;
+        if (opts.cooldownText || opts.disabled) return;
         audio.click();
         onClick();
       };
@@ -6595,20 +6607,23 @@ export class Hud {
         },
       );
     } else {
+      const feedState = petFeedButtonState(pet.hp, pet.maxHp, this.hasPetFood());
       addButton(
         commands,
         PET_ACTION_ICONS.feed,
-        t('hud.pet.healPet'),
-        petTooltip(t('hud.pet.healPet'), t('hud.pet.healPetDesc')),
+        feedState.reasonKey ? t(feedState.reasonKey) : t('hud.pet.healPet'),
+        feedState.reasonKey
+          ? petTooltip(t('hud.pet.healPet'), t(feedState.reasonKey))
+          : petTooltip(t('hud.pet.healPet'), t('hud.pet.healPetDesc')),
         () => {
           // Toggle: a second click cancels the pending feed instead of trapping
-          // the player in food-selection mode.
+          // the player in food-selection mode. Reaching this handler at all
+          // means feedState.disabled was false (the button no-ops while
+          // disabled), so the food check below is now just a defensive guard.
           if (this.pendingPetFeed) {
             this.cancelPetFeed();
             return;
           }
-          // With no edible food there is nothing to select, so entering feed mode
-          // would strand the player on the bag screen — surface an error instead.
           if (!this.hasPetFood()) {
             this.showError(t('hud.pet.noPetFood'));
             return;
@@ -6618,7 +6633,7 @@ export class Hud {
           $('#bags').style.display = 'flex';
           this.renderBags();
         },
-        { active: this.pendingPetFeed },
+        { active: this.pendingPetFeed, disabled: feedState.disabled },
       );
     }
     const modes: { mode: PetMode; labelKey: TranslationKey; descKey: TranslationKey }[] = [

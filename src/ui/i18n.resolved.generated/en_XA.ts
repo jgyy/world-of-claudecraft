@@ -662,7 +662,12 @@ export const en_XA: EnTranslations = {
       "perSecond": "[{value}/š]",
       "perSecondRow": "[{total} ({rate})]",
       "minutesSeconds": "[{m}ɱ {s}š]",
-      "seconds": "[{s}š]"
+      "seconds": "[{s}š]",
+      "autoShowHint": "[Ŕóŵš áþþéáŕ áúţóɱáţíçáļļý óñçé ýóúŕ þáŕţý ðéáļš ðáɱáĝé óŕ ĥéáļíñĝ, áñð ţĥíš šéĝɱéñţ çļóšéš á ƒéŵ šéçóñðš áƒţéŕ çóɱƀáţ éñðš.]"
+    },
+    "petFeed": {
+      "disabledFullHp": "[Þéţ íš áţ ƒúļļ ĥéáļţĥ]",
+      "disabledNoFood": "[Ñó ƒóóð íñ ýóúŕ ƀáĝš ŵíļļ ĥéáļ ýóúŕ þéţ]"
     },
     "keybinds": {
       "emoteWheel": "[Éɱóţé Ŵĥééļ]",
