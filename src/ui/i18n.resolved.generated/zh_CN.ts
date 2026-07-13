@@ -2228,14 +2228,14 @@ export const zh_CN: EnTranslations = {
       "moonfire": "瞬间命中并让目标持续燃烧，移动时也很好用。",
       "rejuvenation": "瞬发施放，持续治疗盟友，让你可以继续行动。",
       "thorns": "守护盟友，让近战攻击者在打击时反伤自己。",
-      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
-      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
-      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
-      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
-      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
-      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
-      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
-      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
+      "ca_quickstrike": "一张廉价的充能卡牌，快速甩向敌人造成奥术伤害。",
+      "ca_arcane_bolt": "你可靠的远程卡牌，一道扎实的奥术之力箭。",
+      "ca_flame_fan": "扇出一片燃烧的卡牌，造成一次打击并附加持续灼烧。",
+      "ca_mending_card": "打出一张恢复卡牌，治疗你自己或盟友。",
+      "ca_warding_card": "一张快速的自我护盾卡牌，短时间内提升护甲。",
+      "ca_hex_card": "掷出一张妖术卡牌，减速目标使其无法追击。",
+      "ca_empower_card": "从牌堆汲取力量，在大招之前提升你的智力。",
+      "ca_royal_flush": "你的终结技，一手同花大顺释放沉重的火焰伤害。"
     },
     "petHook": {
       "emberkin": "一只远程火焰箭恶魔，从安全距离外消磨敌人。",
@@ -3584,7 +3584,7 @@ export const zh_CN: EnTranslations = {
     "mage": "法师",
     "warlock": "术士",
     "druid": "德鲁伊",
-    "card_adept": "Card Adept",
+    "card_adept": "卡牌贤者",
     "warriorAria": "战士职业",
     "paladinAria": "圣骑士职业",
     "hunterAria": "猎人职业",
@@ -3594,7 +3594,7 @@ export const zh_CN: EnTranslations = {
     "mageAria": "法师职业",
     "warlockAria": "术士职业",
     "druidAria": "德鲁伊职业",
-    "card_adeptAria": "Card Adept class"
+    "card_adeptAria": "卡牌贤者职业"
   },
   "controls": {
     "title": "操作指南",
@@ -4363,7 +4363,7 @@ export const zh_CN: EnTranslations = {
       "mage": "远程 DPS",
       "warlock": "远程 DPS",
       "druid": "坦克 / 治疗 / 近战或远程 DPS",
-      "card_adept": "Ranged DPS"
+      "card_adept": "远程输出"
     },
     "armor": {
       "chainLeatherCloth": "锁甲、皮甲、布甲",
@@ -4388,7 +4388,7 @@ export const zh_CN: EnTranslations = {
       "mage": "法师操纵火焰、冰霜与奥术之力来毁灭敌人，召唤清水，并冻结威胁。",
       "warlock": "术士召唤恶魔，施放诅咒和持续伤害魔法，并从敌人身上吸取生命来维持自身。",
       "druid": "德鲁伊引导自然之力，治疗伤口，缠绕敌人，并变形成动物来防御或输出。",
-      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
+      "card_adept": "卡牌贤者操控一副洗好的充能卡牌，消耗专注打出从不断循环的手牌中抽取的伤害、治疗与护盾卡牌。"
     },
     "aria": "{className} 职业详情：职责 {role}。初始属性：力量 {str}，敏捷 {agi}，耐力 {sta}，智力 {int}，精神 {spi}。",
     "statBarAria": "{stat}：{value}/25"
@@ -6109,36 +6109,36 @@ export const zh_CN: EnTranslations = {
         "description": "在施法中沉默目标，并在5秒内封锁该法术学派。"
       },
       "ca_quickstrike": {
-        "name": "Quickstrike Card",
-        "description": "Snaps a charged card at the target for {damage} Arcane damage."
+        "name": "疾击牌",
+        "description": "将一张充能卡牌甩向目标，造成 {damage} 点奥术伤害。"
       },
       "ca_arcane_bolt": {
-        "name": "Arcane Bolt Card",
-        "description": "Looses a bolt of arcane force for {damage} damage."
+        "name": "奥术箭牌",
+        "description": "射出一道奥术之力箭，造成 {damage} 点伤害。"
       },
       "ca_flame_fan": {
-        "name": "Flame Fan Card",
-        "description": "Fans a spread of burning cards for {damage} Fire damage plus a burn."
+        "name": "火焰扇牌",
+        "description": "扇出一片燃烧的卡牌，造成 {damage} 点火焰伤害并附加灼烧。"
       },
       "ca_mending_card": {
-        "name": "Mending Card",
-        "description": "Plays a restorative card, healing a friendly target for {damage}."
+        "name": "愈合牌",
+        "description": "打出一张恢复卡牌，为友方目标治疗 {damage} 点生命。"
       },
       "ca_warding_card": {
-        "name": "Warding Card",
-        "description": "Surrounds you with a warding card, increasing armor by {buff} for 30 sec."
+        "name": "守护牌",
+        "description": "以一张守护卡牌环绕自身，护甲提升 {buff}，持续 30 秒。"
       },
       "ca_hex_card": {
         "name": "Hex Card",
-        "description": "Plays a hex card that slows the target for 6 sec."
+        "description": "打出一张妖术卡牌，使目标减速，持续 6 秒。"
       },
       "ca_empower_card": {
-        "name": "Empower Card",
-        "description": "Draws on the deck to empower your Intellect by {buff}% for 1 min."
+        "name": "强化牌",
+        "description": "从牌堆汲取力量，智力提升 {buff}%，持续 1 分钟。"
       },
       "ca_royal_flush": {
-        "name": "Royal Flush Card",
-        "description": "Unleashes a royal flush for {damage} Fire damage."
+        "name": "同花顺牌",
+        "description": "释放一手同花大顺，造成 {damage} 点火焰伤害。"
       },
       "bear_charge": {
         "name": "巨熊冲锋",

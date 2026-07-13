@@ -2228,14 +2228,14 @@ export const ja_JP: EnTranslations = {
       "moonfire": "即座に当たり標的を燃焼させるため、移動中にも向いています。",
       "rejuvenation": "即座に唱えられ、味方を継続的に回復するので、行動を続けられます。",
       "thorns": "味方を守り、近接で攻撃してきた相手に反射ダメージを与えます。",
-      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
-      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
-      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
-      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
-      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
-      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
-      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
-      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
+      "ca_quickstrike": "安価な充填カードを敵に素早く放ち、秘術ダメージを与える。",
+      "ca_arcane_bolt": "頼れる遠隔カード。確かな秘術の力の矢。",
+      "ca_flame_fan": "燃える札を扇状に放ち、一撃と持続する燃焼を与える。",
+      "ca_mending_card": "回復の札を出し、自分か味方を癒やす。",
+      "ca_warding_card": "素早い自己防御の札で、短時間だけ防御力を高める。",
+      "ca_hex_card": "呪いの札を投げ、対象を減速させて追撃を封じる。",
+      "ca_empower_card": "山札から力を引き出し、大技の前に知力を高める。",
+      "ca_royal_flush": "切り札のロイヤルフラッシュ。重い火炎ダメージを解き放つ。"
     },
     "petHook": {
       "emberkin": "安全な距離から敵を削る、ファイアボルトを放つ遠距離のデーモンです。",
@@ -3584,7 +3584,7 @@ export const ja_JP: EnTranslations = {
     "mage": "メイジ",
     "warlock": "ウォーロック",
     "druid": "ドルイド",
-    "card_adept": "Card Adept",
+    "card_adept": "カードアデプト",
     "warriorAria": "戦士クラス",
     "paladinAria": "パラディンクラス",
     "hunterAria": "ハンタークラス",
@@ -3594,7 +3594,7 @@ export const ja_JP: EnTranslations = {
     "mageAria": "メイジクラス",
     "warlockAria": "ウォーロッククラス",
     "druidAria": "ドルイドクラス",
-    "card_adeptAria": "Card Adept class"
+    "card_adeptAria": "カードアデプトの職業"
   },
   "controls": {
     "title": "操作ガイド",
@@ -4363,7 +4363,7 @@ export const ja_JP: EnTranslations = {
       "mage": "遠隔DPS",
       "warlock": "遠隔DPS",
       "druid": "タンク / ヒーラー / 近接または遠隔DPS",
-      "card_adept": "Ranged DPS"
+      "card_adept": "遠隔DPS"
     },
     "armor": {
       "chainLeatherCloth": "鎖、革、布",
@@ -4388,7 +4388,7 @@ export const ja_JP: EnTranslations = {
       "mage": "メイジは火炎、氷霜、秘術の力で敵を破壊し、水を召喚し、脅威をその場で凍りつかせます。",
       "warlock": "ウォーロックは悪魔を召喚し、呪いと継続ダメージ魔法をかけ、敵から生命力を吸収して耐えます。",
       "druid": "ドルイドは自然の力を導き、傷を癒やし、敵を絡め取り、動物形態に変身して守りまたは攻めます。",
-      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
+      "card_adept": "カードアデプトはシャッフルされた充填カードの束を操り、集中力を消費して、絶えず巡る手札から引いたダメージ・回復・防御のカードを使う。"
     },
     "aria": "{className}のクラス詳細: 役割 {role}。開始ステータス: 筋力 {str}、敏捷性 {agi}、スタミナ {sta}、知力 {int}、精神力 {spi}。",
     "statBarAria": "{stat}: {value}/25"
@@ -6109,36 +6109,36 @@ export const ja_JP: EnTranslations = {
         "description": "詠唱中の対象を沈黙させ、5秒間その系統の呪文を封じる。"
       },
       "ca_quickstrike": {
-        "name": "Quickstrike Card",
-        "description": "Snaps a charged card at the target for {damage} Arcane damage."
+        "name": "クイックストライクカード",
+        "description": "充填カードを対象に放ち、{damage} の秘術ダメージを与える。"
       },
       "ca_arcane_bolt": {
-        "name": "Arcane Bolt Card",
-        "description": "Looses a bolt of arcane force for {damage} damage."
+        "name": "アーケインボルトカード",
+        "description": "秘術の力の矢を放ち、{damage} のダメージを与える。"
       },
       "ca_flame_fan": {
-        "name": "Flame Fan Card",
-        "description": "Fans a spread of burning cards for {damage} Fire damage plus a burn."
+        "name": "フレイムファンカード",
+        "description": "燃える札を扇状に放ち、{damage} の火炎ダメージと燃焼を与える。"
       },
       "ca_mending_card": {
-        "name": "Mending Card",
-        "description": "Plays a restorative card, healing a friendly target for {damage}."
+        "name": "メンディングカード",
+        "description": "回復の札を出し、味方の対象を {damage} 回復する。"
       },
       "ca_warding_card": {
-        "name": "Warding Card",
-        "description": "Surrounds you with a warding card, increasing armor by {buff} for 30 sec."
+        "name": "ウォーディングカード",
+        "description": "守護の札で身を包み、防御力を {buff} 高める（30秒）。"
       },
       "ca_hex_card": {
         "name": "Hex Card",
-        "description": "Plays a hex card that slows the target for 6 sec."
+        "description": "呪いの札を出し、対象を6秒間減速させる。"
       },
       "ca_empower_card": {
-        "name": "Empower Card",
-        "description": "Draws on the deck to empower your Intellect by {buff}% for 1 min."
+        "name": "エンパワーカード",
+        "description": "山札から力を引き出し、知力を {buff}% 高める（1分）。"
       },
       "ca_royal_flush": {
-        "name": "Royal Flush Card",
-        "description": "Unleashes a royal flush for {damage} Fire damage."
+        "name": "ロイヤルフラッシュカード",
+        "description": "ロイヤルフラッシュを放ち、{damage} の火炎ダメージを与える。"
       },
       "bear_charge": {
         "name": "ブルーインラッシュ",

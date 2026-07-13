@@ -2228,14 +2228,14 @@ export const ru_RU: EnTranslations = {
       "moonfire": "Бьет мгновенно и оставляет цель гореть, удобно использовать в движении.",
       "rejuvenation": "Накладывается мгновенно и лечит союзника со временем, так что вы можете продолжать действовать.",
       "thorns": "Защищает союзника так, что атакующие в ближнем бою ранят себя при ударе.",
-      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
-      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
-      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
-      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
-      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
-      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
-      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
-      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
+      "ca_quickstrike": "Дешёвая заряженная карта, брошенная во врага для быстрого чародейского урона.",
+      "ca_arcane_bolt": "Надёжная дальнобойная карта, крепкий заряд чародейской силы.",
+      "ca_flame_fan": "Веер горящих карт наносит удар и оставляет тлеющий ожог.",
+      "ca_mending_card": "Восстанавливающая карта, исцеляющая вас или союзника.",
+      "ca_warding_card": "Быстрая карта защиты, ненадолго повышающая броню.",
+      "ca_hex_card": "Карта порчи замедляет цель, не давая ей преследовать.",
+      "ca_empower_card": "Черпает силу из колоды, повышая интеллект перед крупным ходом.",
+      "ca_royal_flush": "Ваш финишер: роял-флеш обрушивает тяжёлый огненный урон."
     },
     "petHook": {
       "emberkin": "Дальнобойный демон с огненными стрелами, который понемногу бьет врагов с безопасного расстояния.",
@@ -3584,7 +3584,7 @@ export const ru_RU: EnTranslations = {
     "mage": "Маг",
     "warlock": "Чернокнижник",
     "druid": "Друид",
-    "card_adept": "Card Adept",
+    "card_adept": "Мастер карт",
     "warriorAria": "Класс Воин",
     "paladinAria": "Класс Паладин",
     "hunterAria": "Класс Охотник",
@@ -3594,7 +3594,7 @@ export const ru_RU: EnTranslations = {
     "mageAria": "Класс Маг",
     "warlockAria": "Класс Чернокнижник",
     "druidAria": "Класс Друид",
-    "card_adeptAria": "Card Adept class"
+    "card_adeptAria": "Класс мастера карт"
   },
   "controls": {
     "title": "Руководство по управлению",
@@ -4363,7 +4363,7 @@ export const ru_RU: EnTranslations = {
       "mage": "Дальний DPS",
       "warlock": "Дальний DPS",
       "druid": "Танк / лекарь / ближний или дальний DPS",
-      "card_adept": "Ranged DPS"
+      "card_adept": "Дальний боец"
     },
     "armor": {
       "chainLeatherCloth": "Кольчуга, кожа, ткань",
@@ -4388,7 +4388,7 @@ export const ru_RU: EnTranslations = {
       "mage": "Маги управляют огнём, льдом и тайной силой, уничтожают врагов, призывают воду и замораживают угрозы.",
       "warlock": "Чернокнижники призывают демонов, накладывают проклятия и длительный урон, затем вытягивают жизнь врагов, чтобы выжить.",
       "druid": "Друиды направляют силу природы, лечат раны, оплетают врагов и принимают звериные формы для защиты или урона.",
-      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
+      "card_adept": "Мастера карт плетут перетасованную колоду заряженных карт, тратя Фокус на карты урона, лечения и защиты, вытянутые из вечно обновляющейся руки."
     },
     "aria": "Описание класса {className}: роль {role}. Начальные характеристики: Сила {str}, Ловкость {agi}, Выносливость {sta}, Интеллект {int}, Дух {spi}.",
     "statBarAria": "{stat}: {value} из 25"
@@ -6109,36 +6109,36 @@ export const ru_RU: EnTranslations = {
         "description": "Заставляет цель умолкнуть при чтении заклинания и запрещает заклинания этой школы на 5 сек."
       },
       "ca_quickstrike": {
-        "name": "Quickstrike Card",
-        "description": "Snaps a charged card at the target for {damage} Arcane damage."
+        "name": "Карта быстрого удара",
+        "description": "Бросает заряженную карту в цель, нанося {damage} чародейского урона."
       },
       "ca_arcane_bolt": {
-        "name": "Arcane Bolt Card",
-        "description": "Looses a bolt of arcane force for {damage} damage."
+        "name": "Карта чародейского заряда",
+        "description": "Выпускает заряд чародейской силы, нанося {damage} урона."
       },
       "ca_flame_fan": {
-        "name": "Flame Fan Card",
-        "description": "Fans a spread of burning cards for {damage} Fire damage plus a burn."
+        "name": "Карта веера пламени",
+        "description": "Веер горящих карт наносит {damage} огненного урона и поджигает."
       },
       "ca_mending_card": {
-        "name": "Mending Card",
-        "description": "Plays a restorative card, healing a friendly target for {damage}."
+        "name": "Карта исцеления",
+        "description": "Восстанавливающая карта исцеляет союзную цель на {damage}."
       },
       "ca_warding_card": {
-        "name": "Warding Card",
-        "description": "Surrounds you with a warding card, increasing armor by {buff} for 30 sec."
+        "name": "Карта оберега",
+        "description": "Окружает вас картой оберега, повышая броню на {buff} на 30 сек."
       },
       "ca_hex_card": {
         "name": "Hex Card",
-        "description": "Plays a hex card that slows the target for 6 sec."
+        "description": "Карта порчи замедляет цель на 6 сек."
       },
       "ca_empower_card": {
-        "name": "Empower Card",
-        "description": "Draws on the deck to empower your Intellect by {buff}% for 1 min."
+        "name": "Карта усиления",
+        "description": "Черпает силу из колоды, повышая интеллект на {buff}% на 1 мин."
       },
       "ca_royal_flush": {
-        "name": "Royal Flush Card",
-        "description": "Unleashes a royal flush for {damage} Fire damage."
+        "name": "Карта роял-флеш",
+        "description": "Разыгрывает роял-флеш, нанося {damage} огненного урона."
       },
       "bear_charge": {
         "name": "Натиск бурого",

@@ -2228,14 +2228,14 @@ export const ko_KR: EnTranslations = {
       "moonfire": "즉시 타격하고 대상을 계속 불태우므로, 이동 중에 쓰기 좋습니다.",
       "rejuvenation": "즉시 시전되어 아군을 지속적으로 치유하므로, 계속 행동할 수 있습니다.",
       "thorns": "아군을 보호해, 근접 공격자가 칠 때마다 스스로 피해를 입게 합니다.",
-      "ca_quickstrike": "A cheap charged card snapped at a foe for quick Arcane damage.",
-      "ca_arcane_bolt": "Your reliable ranged card, a solid bolt of arcane force.",
-      "ca_flame_fan": "Fans a spread of burning cards for a hit plus a lingering burn.",
-      "ca_mending_card": "Plays a restorative card to heal yourself or an ally.",
-      "ca_warding_card": "A quick self-ward that raises your armor for a short time.",
-      "ca_hex_card": "Throws a hex card that slows the target so it cannot chase.",
-      "ca_empower_card": "Draws on the deck to raise your Intellect before a big play.",
-      "ca_royal_flush": "Your finisher, a royal flush that unleashes heavy Fire damage."
+      "ca_quickstrike": "값싼 충전 카드를 적에게 재빠르게 날려 비전 피해를 준다.",
+      "ca_arcane_bolt": "믿음직한 원거리 카드, 견고한 비전 힘의 화살.",
+      "ca_flame_fan": "불타는 카드를 부채꼴로 펼쳐 타격과 지속 화상을 남긴다.",
+      "ca_mending_card": "회복 카드를 내어 자신이나 아군을 치유한다.",
+      "ca_warding_card": "빠른 자기 보호 카드로 잠시 방어도를 높인다.",
+      "ca_hex_card": "저주 카드를 던져 대상을 둔화시켜 추격하지 못하게 한다.",
+      "ca_empower_card": "덱에서 힘을 끌어내어 큰 한 방 전에 지능을 높인다.",
+      "ca_royal_flush": "마무리 기술, 로열 플러시로 강력한 화염 피해를 터뜨린다."
     },
     "petHook": {
       "emberkin": "안전한 거리에서 적을 조금씩 깎는 원거리 화염 화살 악마입니다.",
@@ -3584,7 +3584,7 @@ export const ko_KR: EnTranslations = {
     "mage": "마법사",
     "warlock": "흑마법사",
     "druid": "드루이드",
-    "card_adept": "Card Adept",
+    "card_adept": "카드 숙련자",
     "warriorAria": "전사 직업",
     "paladinAria": "성기사 직업",
     "hunterAria": "사냥꾼 직업",
@@ -3594,7 +3594,7 @@ export const ko_KR: EnTranslations = {
     "mageAria": "마법사 직업",
     "warlockAria": "흑마법사 직업",
     "druidAria": "드루이드 직업",
-    "card_adeptAria": "Card Adept class"
+    "card_adeptAria": "카드 숙련자 직업"
   },
   "controls": {
     "title": "조작 가이드",
@@ -4363,7 +4363,7 @@ export const ko_KR: EnTranslations = {
       "mage": "원거리 DPS",
       "warlock": "원거리 DPS",
       "druid": "탱커 / 치유 / 근접 또는 원거리 DPS",
-      "card_adept": "Ranged DPS"
+      "card_adept": "원거리 딜러"
     },
     "armor": {
       "chainLeatherCloth": "사슬, 가죽, 천",
@@ -4388,7 +4388,7 @@ export const ko_KR: EnTranslations = {
       "mage": "마법사는 화염, 냉기, 비전의 힘으로 적을 파괴하고 물을 만들어내며 위협을 얼립니다.",
       "warlock": "흑마법사는 악마를 소환하고 저주와 지속 피해 마법을 걸며 적에게서 생명력을 흡수해 버팁니다.",
       "druid": "드루이드는 자연의 힘으로 치유하고 적을 묶으며 동물 형태로 변신해 방어하거나 피해를 줍니다.",
-      "card_adept": "Card Adepts weave a shuffled deck of charged cards, spending Focus to play damage, healing, and warding cards drawn from an ever-cycling hand."
+      "card_adept": "카드 숙련자는 충전된 카드 덱을 섞어 다루며, 집중력을 소모해 끊임없이 순환하는 손패에서 뽑은 피해, 치유, 보호 카드를 사용한다."
     },
     "aria": "{className} 직업 세부 정보: 역할 {role}. 시작 능력치: 힘 {str}, 민첩 {agi}, 체력 {sta}, 지능 {int}, 정신력 {spi}.",
     "statBarAria": "{stat}: {value}/25"
@@ -6109,36 +6109,36 @@ export const ko_KR: EnTranslations = {
         "description": "시전 중인 대상을 침묵시키고 5초 동안 해당 계열의 주문을 봉쇄합니다."
       },
       "ca_quickstrike": {
-        "name": "Quickstrike Card",
-        "description": "Snaps a charged card at the target for {damage} Arcane damage."
+        "name": "속공 카드",
+        "description": "충전 카드를 대상에게 날려 {damage}의 비전 피해를 준다."
       },
       "ca_arcane_bolt": {
-        "name": "Arcane Bolt Card",
-        "description": "Looses a bolt of arcane force for {damage} damage."
+        "name": "비전 화살 카드",
+        "description": "비전 힘의 화살을 쏘아 {damage}의 피해를 준다."
       },
       "ca_flame_fan": {
-        "name": "Flame Fan Card",
-        "description": "Fans a spread of burning cards for {damage} Fire damage plus a burn."
+        "name": "화염 부채 카드",
+        "description": "불타는 카드를 부채꼴로 펼쳐 {damage}의 화염 피해와 화상을 준다."
       },
       "ca_mending_card": {
-        "name": "Mending Card",
-        "description": "Plays a restorative card, healing a friendly target for {damage}."
+        "name": "치유 카드",
+        "description": "회복 카드를 내어 아군 대상을 {damage}만큼 치유한다."
       },
       "ca_warding_card": {
-        "name": "Warding Card",
-        "description": "Surrounds you with a warding card, increasing armor by {buff} for 30 sec."
+        "name": "수호 카드",
+        "description": "수호 카드로 자신을 감싸 방어도를 {buff}만큼 30초간 높인다."
       },
       "ca_hex_card": {
         "name": "Hex Card",
-        "description": "Plays a hex card that slows the target for 6 sec."
+        "description": "저주 카드를 내어 대상을 6초간 둔화시킨다."
       },
       "ca_empower_card": {
-        "name": "Empower Card",
-        "description": "Draws on the deck to empower your Intellect by {buff}% for 1 min."
+        "name": "강화 카드",
+        "description": "덱에서 힘을 끌어내어 지능을 {buff}% 1분간 높인다."
       },
       "ca_royal_flush": {
-        "name": "Royal Flush Card",
-        "description": "Unleashes a royal flush for {damage} Fire damage."
+        "name": "로열 플러시 카드",
+        "description": "로열 플러시를 터뜨려 {damage}의 화염 피해를 준다."
       },
       "bear_charge": {
         "name": "큰곰 돌진",
