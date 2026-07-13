@@ -4589,6 +4589,20 @@ export const zh_TW: EnTranslations = {
         "actionBarSlot": "動作列 {slot}"
       }
     },
+    "cardHand": {
+      "label": "手牌",
+      "deckTitle": "Deck",
+      "discardTitle": "棄牌堆"
+    },
+    "cardDuel": {
+      "title": "Card Duel",
+      "close": "關閉卡牌決鬥",
+      "notEligible": "只有卡牌行家才能排隊進行卡牌決鬥。",
+      "enterQueue": "加入佇列",
+      "leaveQueue": "離開佇列",
+      "searching": "正在尋找對手...（佇列中 {count} 人）",
+      "queueNote": "一場 1v1 卡牌行家決鬥，你將與下一位排隊的對手配對。"
+    },
     "meters": {
       "damage": "傷害",
       "healing": "治療",

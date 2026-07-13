@@ -4589,6 +4589,20 @@ export const ko_KR: EnTranslations = {
         "actionBarSlot": "행동 단축바 {slot}"
       }
     },
+    "cardHand": {
+      "label": "카드 패",
+      "deckTitle": "Deck",
+      "discardTitle": "버린 카드 더미"
+    },
+    "cardDuel": {
+      "title": "Card Duel",
+      "close": "카드 결투 닫기",
+      "notEligible": "카드 어뎁트만 카드 결투 대기열에 참가할 수 있습니다.",
+      "enterQueue": "대기열 참가",
+      "leaveQueue": "대기열 나가기",
+      "searching": "상대를 찾는 중... (대기열 {count}명)",
+      "queueNote": "1대1 카드 어뎁트 결투입니다. 다음 대기 중인 상대와 매칭됩니다."
+    },
     "meters": {
       "damage": "피해",
       "healing": "치유",

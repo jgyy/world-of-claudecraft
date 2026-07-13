@@ -4589,6 +4589,20 @@ export const ru_RU: EnTranslations = {
         "actionBarSlot": "Панель действий {slot}"
       }
     },
+    "cardHand": {
+      "label": "Рука карт",
+      "deckTitle": "Deck",
+      "discardTitle": "Сброс"
+    },
+    "cardDuel": {
+      "title": "Card Duel",
+      "close": "Закрыть карточную дуэль",
+      "notEligible": "Только Мастера карт могут вставать в очередь на карточную дуэль.",
+      "enterQueue": "Встать в очередь",
+      "leaveQueue": "Покинуть очередь",
+      "searching": "Поиск соперника... (в очереди {count})",
+      "queueNote": "Дуэль 1 на 1 между Мастерами карт. Вас сведут со следующим игроком в очереди."
+    },
     "meters": {
       "damage": "Урон",
       "healing": "Исцеление",

@@ -1351,6 +1351,13 @@
   body.mobile-touch #actionbar {
     display: none;
   }
+  /* Card Adept hand bar: kept visible on touch (unlike the desktop action bars
+     above, it has no mobile-ring equivalent yet), sized to the 40x40 touch-target
+     floor (src/ui/CLAUDE.md UI/UX standards). */
+  body.mobile-touch .card-hand-slot {
+    width: 44px;
+    height: 44px;
+  }
   /* The community-links rail (Discord/GitHub/Donate) is hidden in-game on
      touch: its two-person toggle icon under the minimap read as a Friends
      button next to the real Social button in the top-left trio. The links
@@ -2235,6 +2242,7 @@
   body.mobile-touch #mailbox-window,
   body.mobile-touch #emote-editor,
   body.mobile-touch #arena-window,
+  body.mobile-touch #card-duel-window,
   body.mobile-touch #valecup-window,
   body.mobile-touch #delve-board,
   body.mobile-touch #leaderboard-window,

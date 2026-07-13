@@ -4589,6 +4589,20 @@ export const en_XA: EnTranslations = {
         "actionBarSlot": "[Áçţíóñ Ɓáŕ {slot}]"
       }
     },
+    "cardHand": {
+      "label": "[Çáŕð ĥáñð]",
+      "deckTitle": "[Ðéçķ]",
+      "discardTitle": "[Ðíšçáŕð]"
+    },
+    "cardDuel": {
+      "title": "[Çáŕð Ðúéļ]",
+      "close": "[Çļóšé Çáŕð Ðúéļ]",
+      "notEligible": "[Óñļý Çáŕð Áðéþţš ɱáý ɋúéúé ƒóŕ á Çáŕð Ðúéļ.]",
+      "enterQueue": "[Éñţéŕ ţĥé Ɋúéúé]",
+      "leaveQueue": "[Ļéáʋé Ɋúéúé]",
+      "searching": "[Šéáŕçĥíñĝ ƒóŕ áñ óþþóñéñţ... ({count} íñ ɋúéúé)]",
+      "queueNote": "[Á 1ʋ1 Çáŕð Áðéþţ ðúéļ. Ýóú áŕé ɱáţçĥéð áĝáíñšţ ţĥé ñéẋţ ɋúéúéð óþþóñéñţ.]"
+    },
     "meters": {
       "damage": "[Ðáɱáĝé]",
       "healing": "[Ĥéáļíñĝ]",

@@ -4589,6 +4589,20 @@ export const ja_JP: EnTranslations = {
         "actionBarSlot": "アクションバー {slot}"
       }
     },
+    "cardHand": {
+      "label": "手札",
+      "deckTitle": "Deck",
+      "discardTitle": "捨て札の山"
+    },
+    "cardDuel": {
+      "title": "Card Duel",
+      "close": "カードデュエルを閉じる",
+      "notEligible": "カードアデプトのみがカードデュエルに参加できます。",
+      "enterQueue": "キューに入る",
+      "leaveQueue": "キューを離れる",
+      "searching": "対戦相手を探しています...（キュー内 {count} 人）",
+      "queueNote": "1対1のカードアデプト決闘です。次の待機中の相手とマッチングされます。"
+    },
     "meters": {
       "damage": "ダメージ",
       "healing": "回復",

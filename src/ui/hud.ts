@@ -144,6 +144,9 @@ import {
   ITEM_ICON_PREFIX,
 } from './action_bar_view';
 import { ArenaWindow } from './arena_window';
+import { CardDuelWindow } from './card_duel_window';
+import { buildCardHandView } from './card_hand_view';
+import { CardHandPainter } from './card_hand_painter';
 import {
   abilityStartsAutoAttack,
   deferAutoAttackUntilCastEnd,
@@ -875,6 +878,11 @@ export class Hud {
   // second/third bar is another descriptor, not a code fork.
   private actionBarView!: ActionBarView;
   private actionBarPainter!: ActionBarPainter;
+  // Card Adept hand bar painter (card_hand_painter.ts, the ActionBarPainter
+  // pattern over MAX_HAND_SIZE fixed slots). Built once in buildActionBar();
+  // paint()'d per update() from the pure card_hand_view.ts model, a no-op / hidden
+  // for every other class.
+  private cardHandPainter!: CardHandPainter;
   // The mobile action ring: a SECOND createActionBarView instance over a 6-slot
   // descriptor (slot 0 attack, slots 1-5 resolve through
   // sourceSlotForMobileButton(mobileActionPage, i-1)). mobileActionPage is the
@@ -1815,6 +1823,7 @@ export class Hud {
     $('#mm-social').addEventListener('click', () => this.toggleSocial());
     $('#mm-options')?.addEventListener('click', () => this.toggleOptionsMenu());
     $('#mm-arena').addEventListener('click', () => this.toggleArena());
+    $('#mm-card-duel')?.addEventListener('click', () => this.toggleCardDuel());
     $('#mm-valecup').addEventListener('click', () => this.toggleValeCup());
     $('#mm-leaderboard').addEventListener('click', () => this.toggleLeaderboard());
     $('#mm-discord')?.addEventListener('click', () => this.discordHook?.());
@@ -2272,6 +2281,10 @@ export class Hud {
         // Route through the painter so focus returns to the opener (WCAG 2.2 AA),
         // consistent with the toggle / X close path.
         this.arenaWindow.close();
+        break;
+      case 'card-duel-window':
+        // Route through the painter so focus returns to the opener (WCAG 2.2 AA).
+        this.cardDuelWindow.close();
         break;
       case 'valecup-window':
         // Route through the painter so focus returns to the opener (WCAG 2.2 AA).
@@ -3797,6 +3810,15 @@ export class Hud {
     closeOthers: () => this.closeOtherWindows('#arena-window'),
     ...this.windowFocus('#arena-window'),
   });
+  // Card Duel matchmaking window painter (card_duel_window_view.ts model +
+  // card_duel_window.ts painter, the ArenaWindow shape at a much smaller scale).
+  // Hud forwards the minimap toggle and drives render() from the mediumHud band.
+  private readonly cardDuelWindow = new CardDuelWindow({
+    root: () => $('#card-duel-window'),
+    world: () => this.sim,
+    closeOthers: () => this.closeOtherWindows('#card-duel-window'),
+    ...this.windowFocus('#card-duel-window'),
+  });
   // Vale Cup window painter (vale_cup_window_view.ts model + vale_cup_window.ts
   // painter, the ArenaWindow shape). It owns the bracket / nation / role
   // selections, the render-skip signature, and focus-return; Hud forwards the
@@ -4721,6 +4743,7 @@ export class Hud {
     // JSON of ids/numbers), so a language switch alone never moves it; relocalize() forces
     // one rebuild with fresh t() (self-gated on isOpen).
     this.arenaWindow.relocalize();
+    this.cardDuelWindow.relocalize();
     // Same text-independent-sig contract for the Vale Cup surfaces: clear the
     // sigs so the next render/update rebuilds with fresh t().
     this.valeCupWindow.relocalize();
@@ -5713,6 +5736,32 @@ export class Hud {
 
     this.buildMobileActionRing();
     this.buildMobileConsumableBar();
+    this.buildCardHand();
+  }
+
+  // Card Adept hand bar: a fixed MAX_HAND_SIZE slot pool (card_hand.ts), the
+  // ActionBarPainter pattern. Click-to-play routes straight through
+  // IWorld.playCard(index); the server (or the offline Sim) is sole authority on
+  // affordability/validity.
+  private buildCardHand(): void {
+    const container = $('#card-hand');
+    const slotEls = Array.from(
+      container.querySelectorAll<HTMLElement>('.card-hand-slot'),
+    );
+    this.cardHandPainter = new CardHandPainter(
+      this.writerFacet,
+      {
+        container,
+        deckCountEl: $('#card-hand-deck-count'),
+        discardCountEl: $('#card-hand-discard-count'),
+        slots: slotEls.map((btn) => ({
+          btn,
+          costEl: btn.querySelector('.chs-cost') as HTMLElement,
+        })),
+      },
+      (abilityId) => `url(${iconDataUrl('ability', abilityId)})`,
+      (index) => this.sim.playCard(index),
+    );
   }
 
   // Build the mobile action ring: a SECOND createActionBarView instance over a
@@ -6716,6 +6765,27 @@ export class Hud {
       if (this.townFocusOpen) this.renderTownFocus();
     }
 
+    // Card Duel: the minimap toggle only ever shows for a Card Adept, gated to
+    // the slow tier like the Town Focus button above (the class never changes
+    // mid-session, but this keeps the check off the hot band).
+    if (slowHud) {
+      const isCardAdept = sim.cfg.playerClass === 'card_adept';
+      const cardDuelBtn = document.getElementById('mm-card-duel');
+      if (cardDuelBtn) cardDuelBtn.style.display = isCardAdept ? '' : 'none';
+    }
+    // Card Adept hand bar: the pure card_hand_view.ts model + the write-elided
+    // card_hand_painter.ts painter (the ActionBarPainter pattern). Hidden and a
+    // no-op for every other class.
+    this.cardHandPainter.paint(
+      buildCardHandView({
+        isCardAdept: sim.cfg.playerClass === 'card_adept',
+        handIds: sim.cardHandIds(),
+        deckCount: sim.cardDeckCount(),
+        discardCount: sim.cardDiscardCount(),
+        focus: sim.player.resource,
+      }),
+    );
+
     // player frame: the first instance of the unit_frame family. Build a
     // player-shaped descriptor and paint it. The absorb overlay + the resource-type
     // class fold into the painter's elided writers (no more raw updateAbsorb /
@@ -7179,6 +7249,7 @@ export class Hud {
       this.updateShootCharge();
       if ($('#map-window').style.display === 'block') this.updateMapWindow();
       if ($('#arena-window').style.display === 'block') this.arenaWindow.render();
+      if ($('#card-duel-window').style.display === 'block') this.cardDuelWindow.render();
       if ($('#valecup-window').style.display === 'block') this.valeCupWindow.render();
       if (this.openLootMobId !== null) {
         const mob = sim.entities.get(this.openLootMobId);
@@ -8248,6 +8319,17 @@ export class Hud {
   // band while open. The in-match auto-close + the pinned banner stay here.
   toggleArena(): void {
     this.arenaWindow.toggle();
+  }
+
+  // -------------------------------------------------------------------------
+  // Card Duel - the Card-Adept-only 1v1 matchmaking queue
+  // -------------------------------------------------------------------------
+
+  // Owned by card_duel_window.ts (the painter) + the pure card_duel_window_view.ts
+  // (the eligible/idle/queued model). Hud forwards the minimap toggle and drives
+  // the painter's redraw from the mediumHud band while open.
+  toggleCardDuel(): void {
+    this.cardDuelWindow.toggle();
   }
 
   toggleValeCup(): void {

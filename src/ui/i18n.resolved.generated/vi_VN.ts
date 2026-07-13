@@ -4589,6 +4589,20 @@ export const vi_VN: EnTranslations = {
         "actionBarSlot": "Thanh Kỹ Năng {slot}"
       }
     },
+    "cardHand": {
+      "label": "Card hand",
+      "deckTitle": "Deck",
+      "discardTitle": "Discard"
+    },
+    "cardDuel": {
+      "title": "Card Duel",
+      "close": "Close Card Duel",
+      "notEligible": "Only Card Adepts may queue for a Card Duel.",
+      "enterQueue": "Enter the Queue",
+      "leaveQueue": "Leave Queue",
+      "searching": "Searching for an opponent... ({count} in queue)",
+      "queueNote": "A 1v1 Card Adept duel. You are matched against the next queued opponent."
+    },
     "meters": {
       "damage": "Sát thương",
       "healing": "Trị liệu",
