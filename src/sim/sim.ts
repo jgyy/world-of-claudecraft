@@ -356,6 +356,8 @@ export { computeQuestState } from './quests/quest_commands';
 
 import { completeCurrentQuestsForDev, completeQuestForDev } from './quests/dev_quest_commands';
 import * as arenaMod from './social/arena';
+import type { CardDuelMatch } from './social/card_duel';
+import * as cardDuelMod from './social/card_duel';
 import * as duelMod from './social/duel';
 // A4: Protect Yumi (formats yumi3/yumi5); match logic in social/yumi.ts, reached
 // via ctx callbacks + the two hostility arms in isHostileTo/isFriendlyTo.
@@ -1373,6 +1375,10 @@ export class Sim {
   tradeInvites = new Map<number, { fromPid: number; expires: number }>();
   duels = new Map<number, DuelState>(); // pid -> shared duel (both pids)
   duelInvites = new Map<number, { fromPid: number; expires: number }>();
+  // Card Duel minigame (src/sim/social/card_duel.ts): its own FIFO queue and
+  // live-match map, independent of the HP-based duels above.
+  cardDuelQueue: number[] = [];
+  cardDuels = new Map<number, CardDuelMatch>(); // pid -> shared match (both pids)
   // arena: format-specific queues, live bouts keyed by every participant pid,
   // and the set of busy instance slots
   arenaQueue1v1: number[] = [];
@@ -3114,6 +3120,15 @@ export class Sim {
       get duels() {
         return sim.duels;
       },
+      get cardDuelQueue() {
+        return sim.cardDuelQueue;
+      },
+      set cardDuelQueue(v) {
+        sim.cardDuelQueue = v;
+      },
+      get cardDuels() {
+        return sim.cardDuels;
+      },
       get cfg() {
         return sim.cfg;
       },
@@ -3928,6 +3943,7 @@ export class Sim {
     lap?.('engaged');
 
     this.updateDuels();
+    this.updateCardDuelQueue();
     lap?.('duels');
     this.updateArena();
     lap?.('arena');
@@ -6933,6 +6949,69 @@ export class Sim {
 
   duelFor(pid: number): DuelState | null {
     return duelMod.duelFor(this.ctx, pid);
+  }
+
+  // -------------------------------------------------------------------------
+  // Card Duel minigame (src/sim/social/card_duel.ts): thin delegates for the
+  // IWorld card_minigame facet.
+  private updateCardDuelQueue(): void {
+    cardDuelMod.updateCardDuelQueue(this.ctx);
+  }
+
+  joinCardDuelQueue(pid?: number): void {
+    cardDuelMod.joinCardMinigameQueue(this.ctx, pid);
+  }
+
+  leaveCardDuelQueue(pid?: number): void {
+    cardDuelMod.leaveCardMinigameQueue(this.ctx, pid);
+  }
+
+  isQueuedForCardMinigame(pid: number): boolean {
+    return cardDuelMod.isQueuedForCardMinigame(this.ctx, pid);
+  }
+
+  cardDuelMatchFor(pid: number): CardDuelMatch | null {
+    return cardDuelMod.cardDuelMatchFor(this.ctx, pid);
+  }
+
+  playCardInDuel(cardValue: number, pid?: number): void {
+    cardDuelMod.playCardInDuel(this.ctx, cardValue, pid);
+  }
+
+  // IWorldCardMinigame read surface: the local player's queue/match snapshot.
+  get cardMinigameInfo(): cardDuelMod.CardMinigameInfo {
+    return this.cardMinigameInfoFor(this.primaryId);
+  }
+
+  // Server-side pid-parameterized reader (like arenaInfoFor), for wiring an
+  // arbitrary session's snapshot rather than only the local/primary player.
+  cardMinigameInfoFor(pid: number): cardDuelMod.CardMinigameInfo {
+    const match = this.cardDuelMatchFor(pid);
+    if (!match) {
+      return { queued: this.isQueuedForCardMinigame(pid), match: null };
+    }
+    const isA = pid === match.a;
+    const oppPid = isA ? match.b : match.a;
+    const oppMeta = this.players.get(oppPid);
+    const myHand = isA ? match.handA : match.handB;
+    const played = isA ? match.playedA : match.playedB;
+    return {
+      queued: false,
+      match: {
+        opponent: { pid: oppPid, name: oppMeta?.name ?? '' },
+        hand: myHand.hand.slice(),
+        deckCount: myHand.deck.length,
+        discardCount: myHand.discard.length,
+        myRounds: isA ? match.roundsA : match.roundsB,
+        opponentRounds: isA ? match.roundsB : match.roundsA,
+        waitingOnOpponent: played !== null,
+      },
+    };
+  }
+
+  // Called from the leave/disconnect path (mirrors duel forfeit-on-leave).
+  leaveCardMinigameEntirely(pid: number): void {
+    cardDuelMod.leaveCardMinigameEntirely(this.ctx, pid);
   }
 
   // -------------------------------------------------------------------------
