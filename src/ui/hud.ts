@@ -277,6 +277,7 @@ import {
   holderTierForBalance,
 } from './holder_tier';
 import {
+  applyLoadoutBar as applyLoadoutBarActions,
   buildDefaultFormBar,
   classHasFormBars,
   clearHotbarSlot,
@@ -13698,11 +13699,19 @@ export class Hud {
 
   // Restore a saved loadout's action bar into the per-class slot map (reuses the
   // existing hotbar persistence; only places ids that resolve to real abilities).
+  // A SavedLoadout's bar is ability ids only (currentBar strips item shortcuts
+  // before saving, see the talentsWindow deps below), so this must not replace
+  // the WHOLE bar wholesale: that would also silently clear any potion/food/drink
+  // shortcut the player had placed, since the loadout never recorded it either
+  // way (#1889). applyLoadoutBarActions keeps an existing item slot wherever the
+  // loadout leaves that slot blank.
   private applyLoadoutBar(bar: (string | null)[]): void {
-    this.hotbarActions = Array.from({ length: Hud.BAR_ABILITY_SLOTS }, (_, i) => {
-      const v = bar[i];
-      return typeof v === 'string' && ABILITIES[v] ? { type: 'ability' as const, id: v } : null;
-    });
+    this.hotbarActions = applyLoadoutBarActions(
+      this.hotbarActions,
+      bar,
+      Hud.BAR_ABILITY_SLOTS,
+      (id) => !!ABILITIES[id],
+    );
     this.saveSlotMap();
   }
 
