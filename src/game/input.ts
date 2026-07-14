@@ -225,7 +225,24 @@ export class Input {
     window.addEventListener('pointerup', (e) => this.onMouseUp(e));
     window.addEventListener('pointercancel', (e) => this.onMouseUp(e));
     document.addEventListener('pointerlockchange', () => {
-      if (!document.pointerLockElement) this.releaseCapture('pointerlock');
+      if (!document.pointerLockElement) {
+        this.releaseCapture('pointerlock');
+        return;
+      }
+      // A fast click can beat the async requestPointerLock() grant: the
+      // mousedown-synchronous request above (Firefox) or the drag-threshold
+      // request (Chromium) can resolve AFTER mouseup already ran, so nothing
+      // released it there. If the grant lands with no drag button currently
+      // held, drop it immediately rather than leaving the cursor stuck
+      // captured until the next press/release cycle.
+      if (
+        shouldReleasePointerLock({
+          anyButtonDown: this.leftDown || this.rightDown,
+          hasLock: document.pointerLockElement === this.canvas,
+        })
+      ) {
+        document.exitPointerLock();
+      }
     });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) this.releaseCapture('hidden');
@@ -902,24 +919,31 @@ export class Input {
     this.cameraDragActive = false;
     // Pointer lock is requested lazily once a drag actually begins (see
     // onMouseMove) — NOT on every press, which spammed the browser "mouse
-    // capture" banner on every right-click used to attack/look (#116).
+    // capture" banner on every right-click used to attack/look (#116). That
+    // deferred mousemove call is denied by Firefox outside fullscreen (see
+    // needsSyncPointerLockGesture), so on Firefox it is instead requested
+    // synchronously right here, for either drag-capable button (left or
+    // right), excluding the click-to-move button. That preserves #116 fully
+    // only on Chromium: on Firefox, an ordinary click on a non-click-to-move
+    // button (e.g. right-click to loot/target/interact) still takes and
+    // releases the lock on every press, a visible flicker, because we cannot
+    // tell a click from the start of a drag until it has already moved. A
+    // genuine drag started on the click-to-move button also stays unfixed on
+    // Firefox (its lock request only ever comes from the denied mousemove
+    // path). Both are accepted trade-offs of restoring working camera drag on
+    // Firefox; see shouldEngagePointerLockOnMouseDown for the full reasoning.
     this.pointerLockRequestedForDrag = false;
-    // Firefox is the one exception: it denies requestPointerLock() from the
-    // later mousemove entirely (it requires the call inside the original
-    // gesture handler), so on Firefox request it here, synchronously, for the
-    // button that can start a camera drag in the active camera mode. A press
-    // that turns out to be a plain click still releases the lock on mouseup.
     if (
       shouldEngagePointerLockOnMouseDown({
         button: e.button,
-        cameraLookButton: this.mouseCameraEnabled ? 0 : 2,
+        clickMoveButton: this.clickMoveMouseButton,
         needsSyncGesture: this.needsSyncPointerLockGesture,
         lockOnRotate: this.lockCursorOnRotate,
         alreadyLocked: document.pointerLockElement === this.canvas,
       })
     ) {
       this.pointerLockRequestedForDrag = true;
-      this.canvas.requestPointerLock?.();
+      void this.canvas.requestPointerLock?.()?.catch?.(() => {});
     }
     this.updateCursor();
   }

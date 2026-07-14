@@ -84,32 +84,46 @@ describe('pointerLockNeedsSyncGesture', () => {
 describe('shouldEngagePointerLockOnMouseDown', () => {
   const base = {
     button: 2,
-    cameraLookButton: 2,
+    clickMoveButton: null as 0 | 2 | null,
     needsSyncGesture: true,
     lockOnRotate: true,
     alreadyLocked: false,
   };
 
-  it('engages synchronously on mousedown for the camera-look button when the browser needs it', () => {
+  it('engages synchronously on mousedown for the right button when the browser needs it', () => {
     expect(shouldEngagePointerLockOnMouseDown(base)).toBe(true);
+  });
+
+  it('engages synchronously on mousedown for the left button too (blocking regression: both drag buttons must sync, not just the active camera mode look button)', () => {
+    // Camera drag can start on EITHER left or right in either camera mode
+    // (input.ts's onMouseMove gates on leftDown || rightDown, not one
+    // button), so classic left-drag orbit and Mouse Camera right-drag both
+    // need the synchronous Firefox request, not just the mode's nominal
+    // "look" button.
+    expect(shouldEngagePointerLockOnMouseDown({ ...base, button: 0 })).toBe(true);
   });
 
   it('does not engage when the browser does not need a synchronous gesture (Chromium keeps the deferred path)', () => {
     expect(shouldEngagePointerLockOnMouseDown({ ...base, needsSyncGesture: false })).toBe(false);
   });
 
-  it('does not engage for the click-to-move button, only the camera-look button', () => {
-    // Regression: syncing on every mousedown would fire the lock on every
-    // ordinary click-to-move click, not just camera drags.
-    expect(shouldEngagePointerLockOnMouseDown({ ...base, button: 0, cameraLookButton: 2 })).toBe(
+  it('does not engage for the click-to-move button', () => {
+    // Regression (#116 on Firefox): syncing on every mousedown of the
+    // click-to-move button would fire the lock on every ordinary click, not
+    // just camera drags.
+    expect(shouldEngagePointerLockOnMouseDown({ ...base, button: 0, clickMoveButton: 0 })).toBe(
       false,
     );
   });
 
-  it('follows the camera-look button in Mouse Camera mode (button 0 there)', () => {
-    expect(shouldEngagePointerLockOnMouseDown({ ...base, button: 0, cameraLookButton: 0 })).toBe(
+  it('still engages for the OTHER button when a click-to-move button is bound', () => {
+    expect(shouldEngagePointerLockOnMouseDown({ ...base, button: 2, clickMoveButton: 0 })).toBe(
       true,
     );
+  });
+
+  it('does not engage for a non-drag button (e.g. middle-click)', () => {
+    expect(shouldEngagePointerLockOnMouseDown({ ...base, button: 1 })).toBe(false);
   });
 
   it('does not engage when the setting is off', () => {
