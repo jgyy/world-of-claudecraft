@@ -11,7 +11,7 @@ import type { IWorld } from '../world_api';
 import { buildCardDuelView, type CardDuelViewModel } from './card_duel_view';
 import { markDialogRoot } from './dialog_root';
 import { esc } from './esc';
-import { t } from './i18n';
+import { formatNumber, t } from './i18n';
 import { svgIcon } from './ui_icons';
 
 export interface CardDuelWindowDeps {
@@ -81,7 +81,9 @@ export class CardDuelWindow {
 
   private html(view: CardDuelViewModel): string {
     let body = '';
-    if (view.state === 'idle') {
+    if (view.state === 'unavailable') {
+      body = `<div class="cd-status">${esc(t('cardDuel.unavailable'))}</div>`;
+    } else if (view.state === 'idle') {
       body = `<button type="button" class="cd-action-btn" data-join aria-label="${esc(t('cardDuel.joinAria'))}">${esc(t('cardDuel.join'))}</button>`;
     } else if (view.state === 'queued') {
       body =
@@ -90,8 +92,8 @@ export class CardDuelWindow {
     } else {
       const roundText = esc(
         t('cardDuel.round', {
-          mine: String(view.myRounds),
-          theirs: String(view.opponentRounds),
+          mine: formatNumber(view.myRounds, { maximumFractionDigits: 0 }),
+          theirs: formatNumber(view.opponentRounds, { maximumFractionDigits: 0 }),
         }),
       );
       const oppText = esc(t('cardDuel.vsOpponent', { name: view.opponentName }));
@@ -103,18 +105,23 @@ export class CardDuelWindow {
           (card) =>
             `<button type="button" class="cd-card" data-play="${card.value}" ${
               card.playable ? '' : 'disabled'
-            } aria-label="${esc(t('cardDuel.playCardAria', { value: String(card.value) }))}">${card.value}</button>`,
+            } aria-label="${esc(t('cardDuel.playCardAria', { value: formatNumber(card.value, { maximumFractionDigits: 0 }) }))}">${formatNumber(card.value, { maximumFractionDigits: 0 })}</button>`,
         )
         .join('');
       const counts = esc(
-        `${t('cardDuel.deckCount', { count: String(view.deckCount) })} · ${t('cardDuel.discardCount', { count: String(view.discardCount) })}`,
+        t('cardDuel.counts', {
+          deck: formatNumber(view.deckCount, { maximumFractionDigits: 0 }),
+          discard: formatNumber(view.discardCount, { maximumFractionDigits: 0 }),
+        }),
       );
+      const forfeitBtn = `<button type="button" class="cd-action-btn" data-forfeit aria-label="${esc(t('cardDuel.forfeitAria'))}">${esc(t('cardDuel.forfeit'))}</button>`;
       body =
         `<div class="cd-opponent">${oppText}</div>` +
         `<div class="cd-status">${roundText}</div>` +
         `<div class="cd-status cd-turn">${turnText}</div>` +
         `<div class="cd-hand">${hand}</div>` +
-        `<div class="cd-counts">${counts}</div>`;
+        `<div class="cd-counts">${counts}</div>` +
+        forfeitBtn;
     }
     return (
       `<div class="panel-title"><span id="card-duel-title">${esc(t('cardDuel.title'))}</span>` +
@@ -127,6 +134,7 @@ export class CardDuelWindow {
     el.querySelector('[data-close]')?.addEventListener('click', () => this.close());
     el.querySelector('[data-join]')?.addEventListener('click', () => world.joinCardDuelQueue());
     el.querySelector('[data-leave]')?.addEventListener('click', () => world.leaveCardDuelQueue());
+    el.querySelector('[data-forfeit]')?.addEventListener('click', () => world.forfeitCardDuel());
     el.querySelectorAll('[data-play]:not([disabled])').forEach((btn) => {
       btn.addEventListener('click', () => {
         const value = Number((btn as HTMLElement).dataset.play);

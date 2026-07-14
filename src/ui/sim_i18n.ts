@@ -321,10 +321,15 @@ const baseEnTable = {
   'log.cardDuelOpponentLeft': 'Your opponent left the Card Duel.',
   'log.cardDuelWin': 'You win the Card Duel against {name}!',
   'log.cardDuelLoss': 'You lose the Card Duel against {name}.',
+  'log.cardDuelForfeit': 'You forfeit the Card Duel.',
+  'log.cardDuelOpponentForfeited': 'Your opponent forfeited the Card Duel. You win!',
   'error.cardDuelNotAtMaster': 'You must be at the Card Master to queue for a Card Duel.',
   'error.cardDuelNotInMatch': 'You are not in a Card Duel.',
   'error.cardDuelAlreadyPlayed': 'You already played a card this round.',
   'error.cardDuelNotHeld': "You don't hold that card.",
+  'error.cardDuelAlreadyInDuel': 'You are already in a Card Duel.',
+  'error.cardDuelAlreadyQueued': 'You are already queued for a Card Duel.',
+  'error.cardDuelUnavailable': 'Card Duel requires another player online.',
 } as const;
 
 const petEnTable = {
@@ -6598,6 +6603,11 @@ const RULES: Rule[] = [
     re: /^You lose the Card Duel against (.+)\.$/,
     build: (m) => tSim('log.cardDuelLoss', { name: m[1] }),
   },
+  { re: /^You forfeit the Card Duel\.$/, build: () => tSim('log.cardDuelForfeit') },
+  {
+    re: /^Your opponent forfeited the Card Duel\. You win!$/,
+    build: () => tSim('log.cardDuelOpponentForfeited'),
+  },
   {
     re: /^You must be at the Card Master to queue for a Card Duel\.$/,
     build: () => tSim('error.cardDuelNotAtMaster'),
@@ -6608,6 +6618,18 @@ const RULES: Rule[] = [
     build: () => tSim('error.cardDuelAlreadyPlayed'),
   },
   { re: /^You don't hold that card\.$/, build: () => tSim('error.cardDuelNotHeld') },
+  {
+    re: /^You are already in a Card Duel\.$/,
+    build: () => tSim('error.cardDuelAlreadyInDuel'),
+  },
+  {
+    re: /^You are already queued for a Card Duel\.$/,
+    build: () => tSim('error.cardDuelAlreadyQueued'),
+  },
+  {
+    re: /^Card Duel requires another player online\.$/,
+    build: () => tSim('error.cardDuelUnavailable'),
+  },
 ];
 
 // Returns the localized form of a sim-emitted message, or null if not one of ours.

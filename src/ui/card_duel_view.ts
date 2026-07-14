@@ -13,7 +13,11 @@ export interface CardDuelHandCardView {
   playable: boolean;
 }
 
-export type CardDuelWindowState = 'idle' | 'queued' | 'inMatch';
+// 'unavailable': no other player is present to ever pair against (the
+// offline Sim's single-player case). The window hides/disables the Join
+// affordance and shows a clear message instead of letting the player queue
+// forever with no feedback.
+export type CardDuelWindowState = 'idle' | 'unavailable' | 'queued' | 'inMatch';
 
 export interface CardDuelViewModel {
   state: CardDuelWindowState;
@@ -30,7 +34,7 @@ export interface CardDuelViewModel {
 export function buildCardDuelView(info: CardMinigameInfo): CardDuelViewModel {
   if (!info.match) {
     return {
-      state: info.queued ? 'queued' : 'idle',
+      state: info.queued ? 'queued' : info.available ? 'idle' : 'unavailable',
       hand: [],
       deckCount: 0,
       discardCount: 0,

@@ -4,14 +4,26 @@ import type { CardMinigameInfo } from '../src/world_api';
 
 describe('card_duel_view', () => {
   it('idle state when not queued and not in a match', () => {
-    const info: CardMinigameInfo = { queued: false, match: null };
+    const info: CardMinigameInfo = { queued: false, available: true, match: null };
     const view = buildCardDuelView(info);
     expect(view.state).toBe('idle');
     expect(view.hand).toEqual([]);
   });
 
   it('queued state when waiting in the matchmaking queue', () => {
-    const info: CardMinigameInfo = { queued: true, match: null };
+    const info: CardMinigameInfo = { queued: true, available: true, match: null };
+    const view = buildCardDuelView(info);
+    expect(view.state).toBe('queued');
+  });
+
+  it('unavailable state when no other player exists to ever pair against (offline)', () => {
+    const info: CardMinigameInfo = { queued: false, available: false, match: null };
+    const view = buildCardDuelView(info);
+    expect(view.state).toBe('unavailable');
+  });
+
+  it('queued wins over unavailable if somehow both (queued takes priority)', () => {
+    const info: CardMinigameInfo = { queued: true, available: false, match: null };
     const view = buildCardDuelView(info);
     expect(view.state).toBe('queued');
   });
@@ -19,6 +31,7 @@ describe('card_duel_view', () => {
   it('inMatch state maps hand, scores, and opponent from a live match', () => {
     const info: CardMinigameInfo = {
       queued: false,
+      available: true,
       match: {
         opponent: { pid: 7, name: 'Aki' },
         hand: [3, 8, 1, 5],
@@ -47,6 +60,7 @@ describe('card_duel_view', () => {
   it('marks every hand card unplayable while waiting on the opponent', () => {
     const info: CardMinigameInfo = {
       queued: false,
+      available: true,
       match: {
         opponent: { pid: 7, name: 'Aki' },
         hand: [4, 9],
@@ -65,6 +79,7 @@ describe('card_duel_view', () => {
   it('same input produces the same output regardless of Sim vs ClientWorld origin (data is host-agnostic)', () => {
     const info: CardMinigameInfo = {
       queued: false,
+      available: true,
       match: {
         opponent: { pid: 2, name: 'Bo' },
         hand: [6],
