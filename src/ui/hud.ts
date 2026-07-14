@@ -6437,9 +6437,11 @@ export class Hud {
         cooldownText?: string;
         onContextMenu?: () => void;
         onTouchHold?: () => void;
-        // Kept visible (never hidden) but greyed and inert, with `title`
-        // carrying the reason instead of the normal action description, so
-        // the player sees WHY the button can't be used right now.
+        // Kept visible (never hidden) but greyed and inert while set. The
+        // accessible name (`title`, which also feeds aria-label) STAYS the
+        // action name; the WHY is carried by the rich hover tooltip
+        // (`tooltip`), so a screen reader still announces the action, not the
+        // disabled reason.
         disabled?: boolean;
       } = {},
     ) => {
@@ -6498,6 +6500,7 @@ export class Hud {
         btn.addEventListener('contextmenu', (event) => {
           event.preventDefault();
           if (document.body.classList.contains('mobile-touch')) return;
+          if (opts.disabled) return; // an inert button fires no secondary action
           audio.click();
           opts.onContextMenu?.();
         });
@@ -6507,6 +6510,7 @@ export class Hud {
           if (!document.body.classList.contains('mobile-touch') || event.pointerType !== 'touch') {
             return;
           }
+          if (opts.disabled) return; // an inert button fires no long-press action
           event.preventDefault();
           clearTouchHoldTimer();
           suppressNextClick = false;
@@ -6611,7 +6615,9 @@ export class Hud {
       addButton(
         commands,
         PET_ACTION_ICONS.feed,
-        feedState.reasonKey ? t(feedState.reasonKey) : t('hud.pet.healPet'),
+        // Accessible name stays "Heal Pet" even when disabled; the disabled
+        // reason lives in the rich tooltip below, never in the aria-label.
+        t('hud.pet.healPet'),
         feedState.reasonKey
           ? petTooltip(t('hud.pet.healPet'), t(feedState.reasonKey))
           : petTooltip(t('hud.pet.healPet'), t('hud.pet.healPetDesc')),
@@ -6633,7 +6639,10 @@ export class Hud {
           $('#bags').style.display = 'flex';
           this.renderBags();
         },
-        { active: this.pendingPetFeed, disabled: feedState.disabled },
+        // A pending feed stays clickable so the toggle can CANCEL it, even once
+        // the pet has regenerated back to full HP (which would otherwise flip
+        // feedState.disabled true and trap the player in food-selection mode).
+        { active: this.pendingPetFeed, disabled: feedState.disabled && !this.pendingPetFeed },
       );
     }
     const modes: { mode: PetMode; labelKey: TranslationKey; descKey: TranslationKey }[] = [
@@ -14239,7 +14248,7 @@ export class Hud {
       `<div class="panel-title"><span>${esc(t('character.profile'))}</span>` +
       `<button type="button" class="x-btn" data-close aria-label="${esc(t('character.closeProfile'))}">${svgIcon('close')}</button></div>` +
       `<div class="inspect-card">` +
-      portraitChipHtml({ cls, skin: e.skin ?? 0, name: e.name, variant: 'lg' }) +
+      portraitChipHtml({ cls, skin: e.skin ?? 0, name: e.name, variant: 'lg', framing: 'body' }) +
       `<div class="inspect-name">${esc(e.name)}</div>` +
       // The active Book of Deeds title (the entity `title` wire field, a deed
       // id): a subtitle line under the name, exactly the nameplate surface.

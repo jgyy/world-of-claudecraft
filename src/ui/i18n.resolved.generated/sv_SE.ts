@@ -1468,7 +1468,8 @@ export const sv_SE: EnTranslations = {
         "connecting": "Öppnar Discord...",
         "benefits": "Länka ditt Discord för att tjäna poäng från spel och gemenskapsaktivitet, och klättra på statusnivåerna.",
         "error": "Det gick inte att länka Discord. Försök igen.",
-        "success": "Discord länkat."
+        "success": "Discord länkat.",
+        "joinServer": "Just join the Discord server"
       },
       "choice": {
         "title": "Fortsätt med Discord",

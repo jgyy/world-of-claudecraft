@@ -52,4 +52,15 @@ describe('petFeedButtonState', () => {
   it('is enabled with no reason when the pet is hurt and food is available', () => {
     expect(petFeedButtonState(40, 100, true)).toEqual({ disabled: false, reasonKey: null });
   });
+
+  it('does not read a zero maxHp as full health (guards the petMaxHp > 0 clause)', () => {
+    // Before the pet's stats resolve, maxHp can momentarily be 0; petHp >= maxHp
+    // would then falsely report "full health". The guard skips the full-HP
+    // branch so it falls through to the food check instead.
+    expect(petFeedButtonState(0, 0, false)).toEqual({
+      disabled: true,
+      reasonKey: 'hudChrome.petFeed.disabledNoFood',
+    });
+    expect(petFeedButtonState(0, 0, true)).toEqual({ disabled: false, reasonKey: null });
+  });
 });

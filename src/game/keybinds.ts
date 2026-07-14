@@ -11,6 +11,8 @@
 // Escape is deliberately NOT a bindable action: it always opens/closes the
 // game menu, so it stays out of the registry and is refused by bind().
 
+import { repairStoredBindings } from './keybinds_repair';
+
 export type BindKind = 'held' | 'edge';
 
 export interface BindAction {
@@ -300,18 +302,6 @@ export function actionAllowsShared(id: string): boolean {
   return ACTION_BY_ID.get(id)?.allowShared === true;
 }
 
-// True when `code` is the current default (primary or secondary) of some
-// Action Bar slot other than `excludeId`. Used only by the legacy-blob seed
-// path in Keybinds.load() to refuse importing an old binding that would
-// silently steal a combat action-bar slot.
-function isDefaultOfOtherActionBarSlot(excludeId: string, code: string): boolean {
-  for (const other of BIND_ACTIONS) {
-    if (other.id === excludeId || other.category !== 'Action Bar') continue;
-    if (other.defaults.includes(code)) return true;
-  }
-  return false;
-}
-
 // --- modifier-aware bindings ---------------------------------------------
 // A binding is serialized as a single "combo" string: the bare KeyboardEvent
 // .code, optionally prefixed by held modifiers in a fixed canonical order
@@ -490,12 +480,16 @@ export class Keybinds {
     // still seeds rather than dropping to bare defaults; the legacy blob is only
     // ever read here, never overwritten.
     let obj = readBindingsBlob(this.storeKey);
-    let isLegacySeed = false;
     if (!obj && this.storeKey !== KEY_PREFIX) {
       obj = readBindingsBlob(KEY_PREFIX);
-      isLegacySeed = obj !== null;
     }
     if (!obj) return;
+    // One-time, signature-keyed repair of profiles corrupted by reverted layout
+    // changes (Q/E strafe overhaul; targetFriendly/meters KeyH collision). It
+    // deletes only the exact corrupted keys so they re-seed to current defaults
+    // below, and leaves every other stored value (including deliberate remaps)
+    // untouched. See keybinds_repair.ts.
+    repairStoredBindings(obj);
     // Apply stored codes over the defaults, but only for known actions and
     // never letting one code land on two actions (first writer keeps it).
     // Actions absent from the stored blob (e.g. ones added in a later release
@@ -513,26 +507,6 @@ export class Keybinds {
         // Shared actions keep their code even if another action already claimed
         // it, and never claim it themselves, so the overlap survives a round-trip.
         if (!shared && claimed.has(v)) continue;
-        // Legacy-seed only: an account-wide blob predating a layout change can
-        // hold an action's OLD convention that now collides with an Action Bar
-        // slot's current default (e.g. pre-Q/E-strafe strafeLeft/strafeRight
-        // sitting on Digit1/Digit2). Silently importing that would steal a
-        // combat action-bar slot out from under the player on first login, so
-        // refuse the import and keep this action's own current default
-        // instead. A genuine remap of some OTHER action (whose value does not
-        // collide with a current action-bar default) still comes through.
-        if (
-          isLegacySeed &&
-          v !== (a.defaults[i] ?? null) &&
-          isDefaultOfOtherActionBarSlot(a.id, v)
-        ) {
-          const own = a.defaults[i] ?? null;
-          if (own !== null && (shared || !claimed.has(own))) {
-            slots[i] = own;
-            if (!shared) claimed.add(own);
-          }
-          continue;
-        }
         slots[i] = v;
         if (!shared) claimed.add(v);
       }

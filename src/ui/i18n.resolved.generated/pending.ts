@@ -10,32 +10,38 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "es_ES": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "fr_FR": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "fr_CA": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "en_CA": [],
   "it_IT": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "de_DE": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
@@ -45,47 +51,56 @@ export const pending: Record<string, readonly string[]> = {
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "ru_RU": [],
   "cs_CZ": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "nl_NL": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "pl_PL": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "id_ID": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "tr_TR": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "sv_SE": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "vi_VN": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
   ],
   "da_DK": [
+    "hudChrome.discord.link.joinServer",
     "hudChrome.meters.autoShowHint",
     "hudChrome.petFeed.disabledFullHp",
     "hudChrome.petFeed.disabledNoFood"
