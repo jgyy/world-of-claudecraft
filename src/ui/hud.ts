@@ -120,6 +120,7 @@ import { bagsWindowShown } from './bags_view';
 import { BagsWindow, dismissBagPrompts } from './bags_window';
 import { BankWindow } from './bank_window';
 import { CalendarWindow } from './calendar_window';
+import { CardDuelWindow } from './card_duel_window';
 import { CastBarPainter } from './cast_bar_painter';
 import { charBagsPaired } from './char_bags_pairing_core';
 import { buildPaperdollView, type PaperdollSlot } from './char_view';
@@ -2438,6 +2439,10 @@ export class Hud {
         // Route through the painter so focus returns to the opener (WCAG 2.2 AA).
         this.valeCupWindow.close();
         break;
+      case 'card-duel-window':
+        // Route through the painter so focus returns to the opener (WCAG 2.2 AA).
+        this.cardDuelWindow.close();
+        break;
       case 'vendor-window':
         this.closeVendor();
         this.closeHeroicVendor();
@@ -3478,6 +3483,15 @@ export class Hud {
     world: () => this.sim,
     closeOthers: () => this.closeOtherWindows('#valecup-window'),
     ...this.windowFocus('#valecup-window'),
+  });
+  // Card Duel window painter (card_duel_view.ts model + card_duel_window.ts
+  // painter, the ValeCupWindow shape scaled down). The Card Master NPC's gossip
+  // menu toggles it; Hud drives render() from the mediumHud band while open.
+  private readonly cardDuelWindow = new CardDuelWindow({
+    root: () => $('#card-duel-window'),
+    world: () => this.sim,
+    closeOthers: () => this.closeOtherWindows('#card-duel-window'),
+    ...this.windowFocus('#card-duel-window'),
   });
   // Persistent Vale Cup indicator button (queued / live-at-the-Sowfield states;
   // hidden inside my own match). Never tier-shed: queue position and the live
@@ -6772,6 +6786,7 @@ export class Hud {
       if ($('#dungeon-finder-window').style.display === 'flex') this.dungeonFinderWindow.render();
       if (this.dungeonFinderProposalPopup.isOpen) this.dungeonFinderProposalPopup.render();
       if ($('#valecup-window').style.display === 'block') this.valeCupWindow.render();
+      if ($('#card-duel-window').style.display === 'block') this.cardDuelWindow.render();
       this.lootWindow.updateProximity();
       if (this.openVendorNpcId !== null) {
         const npc = sim.entities.get(this.openVendorNpcId);
@@ -7342,6 +7357,10 @@ export class Hud {
 
   toggleValeCup(): void {
     this.valeCupWindow.toggle();
+  }
+
+  toggleCardDuel(): void {
+    this.cardDuelWindow.toggle();
   }
 
   /** Offline builds enable the Vale Cup practice-vs-bots button (main.ts). */
@@ -9708,6 +9727,9 @@ export class Hud {
     this.questDialog.open(npcId);
   }
 
+  // Open the read-only quest detail for a chat-link click. Shows Accept only when the
+  // viewer is in the link author's party AND the quest is available; the server
+  // re-validates on accept. Non-party / ineligible viewers see view-only info.
   openLinkedQuestDialog(questId: string, fromPid?: number): void {
     this.questDialog.openLinked(questId, fromPid);
   }

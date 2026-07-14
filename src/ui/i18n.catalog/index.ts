@@ -740,6 +740,24 @@ export const en = {
     balance: 'Heroic Marks: {count}',
     buyAria: 'Buy {item} for {marks} Heroic Marks',
   },
+  // The Card Master window (Card Duel minigame): queue join/leave affordance
+  // plus the in-match hand strip + round-score panel.
+  cardDuel: {
+    title: 'Card Duel',
+    close: 'Close',
+    join: 'Join Queue',
+    joinAria: 'Join the Card Duel queue',
+    leave: 'Leave Queue',
+    leaveAria: 'Leave the Card Duel queue',
+    queued: 'Waiting for an opponent...',
+    vsOpponent: 'vs {name}',
+    round: 'Round score: {mine} - {theirs}',
+    deckCount: 'Deck: {count}',
+    discardCount: 'Discard: {count}',
+    playCardAria: 'Play the {value} card',
+    waitingOnOpponent: "Waiting on your opponent's card...",
+    yourTurn: 'Play a card',
+  },
   delveUi: {
     board: {
       title: 'Delve Board',
