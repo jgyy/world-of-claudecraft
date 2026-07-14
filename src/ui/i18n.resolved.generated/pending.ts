@@ -59,7 +59,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "es_ES": [
     "classDetails.lore.card_adept",
@@ -111,7 +114,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "fr_FR": [
     "classDetails.lore.card_adept",
@@ -163,7 +169,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "fr_CA": [
     "classDetails.lore.card_adept",
@@ -215,7 +224,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "en_CA": [],
   "it_IT": [
@@ -268,7 +280,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "de_DE": [
     "classDetails.lore.card_adept",
@@ -320,7 +335,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "zh_CN": [
     "entities.abilities.ca_hex_card.name",
@@ -392,7 +410,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "ru_RU": [
     "entities.abilities.ca_hex_card.name",
@@ -449,7 +470,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "nl_NL": [
     "classDetails.lore.card_adept",
@@ -501,7 +525,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "pl_PL": [
     "classDetails.lore.card_adept",
@@ -553,7 +580,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "id_ID": [
     "classDetails.lore.card_adept",
@@ -605,7 +635,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "tr_TR": [
     "classDetails.lore.card_adept",
@@ -657,7 +690,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "sv_SE": [
     "classDetails.lore.card_adept",
@@ -709,7 +745,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "vi_VN": [
     "classDetails.lore.card_adept",
@@ -761,7 +800,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ],
   "da_DK": [
     "classDetails.lore.card_adept",
@@ -813,6 +855,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.cameraPrompt.mouseDesc",
     "hudChrome.cameraPrompt.title",
     "hudChrome.cardHand.emptySlot",
-    "hudChrome.discord.link.joinServer"
+    "hudChrome.discord.link.joinServer",
+    "hudChrome.meters.autoShowHint",
+    "hudChrome.petFeed.disabledFullHp",
+    "hudChrome.petFeed.disabledNoFood"
   ]
 };
