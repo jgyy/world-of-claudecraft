@@ -659,6 +659,21 @@ function capstoneNodes(cls: PlayerClass): ReadonlySet<string> {
   return set;
 }
 
+// A class with no talent tree (talentsFor === null, the Card Adept by design) can
+// never satisfy the four talent-gated progression deeds. Per docs/design/deeds.md
+// every deed must be completable by every class, so those classes substitute a
+// class-appropriate progression ladder: their lifetime Card Duel wins (the class's
+// signature 1v1 mode). Cached so the tick-tail evaluators never walk the registry.
+const noTalentTreeCache = new Map<PlayerClass, boolean>();
+function hasNoTalentTree(cls: PlayerClass): boolean {
+  let v = noTalentTreeCache.get(cls);
+  if (v === undefined) {
+    v = talentsFor(cls) === null;
+    noTalentTreeCache.set(cls, v);
+  }
+  return v;
+}
+
 const METERS: Record<DeedMeterId, (meta: PlayerMeta) => number> = {
   prestigeRank: (m) => m.prestigeRank,
   talentPoints: (m) => pointsSpent(m.talents),
@@ -693,8 +708,18 @@ const MARK_CIRCUIT_DUNGEONS = [
 ];
 
 const FLAGS: Record<DeedFlagId, (meta: PlayerMeta, e: Entity) => boolean> = {
-  talentSpecChosen: (m) => m.talents.spec !== null,
+  // The four talent-progression flags are class-aware: a class with no talent tree
+  // (Card Adept) substitutes a Card Duel win ladder (1/3/5/11) so the deeds stay
+  // completable (docs/design/deeds.md). Such a class is a full-pass class for these,
+  // like every talent-using class, so the grant lands on the next full deed pass.
+  talentFirstPoint: (m) =>
+    hasNoTalentTree(m.cls) ? m.deedStats.counters.duelsWon >= 1 : pointsSpent(m.talents) >= 1,
+  talentSpecChosen: (m) =>
+    hasNoTalentTree(m.cls) ? m.deedStats.counters.duelsWon >= 3 : m.talents.spec !== null,
+  talentFullBuild: (m) =>
+    hasNoTalentTree(m.cls) ? m.deedStats.counters.duelsWon >= 11 : pointsSpent(m.talents) >= 11,
   talentCapstone: (m) => {
+    if (hasNoTalentTree(m.cls)) return m.deedStats.counters.duelsWon >= 5;
     const nodes = capstoneNodes(m.cls);
     // Allocation-free walk (tick-tail predicate: no Object.entries tuples).
     for (const nodeId in m.talents.ranks) {

@@ -3015,8 +3015,10 @@ export type DeedMeterId =
 // Boolean predicates over already-persisted state (see the flag table in
 // deeds.ts). Like meters, they retro-grant on load.
 export type DeedFlagId =
+  | 'talentFirstPoint'
   | 'talentSpecChosen'
   | 'talentCapstone'
+  | 'talentFullBuild'
   | 'hasRestedXp'
   | 'guildMember'
   | 'allEquipSlotsFilled'

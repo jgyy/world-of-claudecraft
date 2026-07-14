@@ -76,7 +76,7 @@ export const DEEDS: Record<string, DeedDef> = {
     desc: 'Spend your first talent point.',
     category: 'progression',
     renown: 5,
-    trigger: { kind: 'meter', meter: 'talentPoints', amount: 1 },
+    trigger: { kind: 'flag', flag: 'talentFirstPoint' },
   },
   prog_specialized: {
     id: 'prog_specialized',
@@ -100,7 +100,7 @@ export const DEEDS: Record<string, DeedDef> = {
     desc: 'Spend all eleven talent points on a single build.',
     category: 'progression',
     renown: 25,
-    trigger: { kind: 'meter', meter: 'talentPoints', amount: 11 },
+    trigger: { kind: 'flag', flag: 'talentFullBuild' },
   },
   prog_veteran: {
     id: 'prog_veteran',
