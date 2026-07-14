@@ -252,7 +252,7 @@ export function updateMob(ctx: SimContext, mob: Entity): void {
         let detected: Entity | null = null;
         let detectedD = Infinity;
         ctx.playerGrid.forEachInRadius(mob.pos.x, mob.pos.z, 25, (e, d2) => {
-          if (e.dead) return;
+          if (e.dead || ctx.time < e.rezGraceUntil) return;
           const radius = Math.max(
             4,
             Math.min(MAX_AGGRO_RADIUS, template.aggroRadius + (mob.level - e.level) * 1.5),
@@ -270,7 +270,10 @@ export function updateMob(ctx: SimContext, mob: Entity): void {
       let detected: Entity | null = null;
       let detectedD = Infinity;
       ctx.playerGrid.forEachInRadius(mob.pos.x, mob.pos.z, 25, (e, d2) => {
-        if (e.dead) return;
+        // A freshly-revived player is immune to fresh proximity aggro (REZ_GRACE_SECONDS,
+        // src/sim/spirit.ts): without this, resurrecting at a corpse inside the same pack
+        // that just killed them re-aggros instantly and chains repeat deaths.
+        if (e.dead || ctx.time < e.rezGraceUntil) return;
         if (isTrivialTo(mob, e)) return;
         let radius = Math.max(
           4,

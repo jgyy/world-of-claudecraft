@@ -7,9 +7,11 @@ import { describe, expect, it } from 'vitest';
 import {
   DELVES,
   DUNGEON_X_THRESHOLD,
+  MOBS,
   OVERWORLD_GRAVEYARDS,
   SPIRIT_HEALER_NPC_ID,
 } from '../src/sim/data';
+import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import {
   CORPSE_REZ_RANGE,
@@ -17,6 +19,7 @@ import {
   RES_HEALER_HP_FRACTION,
   RES_HP_FRACTION,
   RESURRECTION_SICKNESS_ID,
+  REZ_GRACE_SECONDS,
   SPIRIT_HEALER_RANGE,
 } from '../src/sim/spirit';
 import { dist2d, type Entity } from '../src/sim/types';
@@ -168,6 +171,44 @@ describe('spirit: resurrect at corpse', () => {
     sim.resurrectAtCorpse();
     expect(p.dead).toBe(true);
     expect(p.ghost).toBe(true);
+  });
+});
+
+describe('spirit: post-resurrect aggro grace', () => {
+  // An idle hostile mob standing right on top of a spot, so it detects on the very
+  // first tick if nothing suppresses it.
+  function spawnAdjacentWolf(sim: AnySim, pos: { x: number; y: number; z: number }): AnyEntity {
+    const mob = createMob(sim.nextId++, MOBS['forest_wolf'], 1, { ...pos }) as AnyEntity;
+    mob.hostile = true;
+    mob.aiState = 'idle';
+    sim.addEntity(mob);
+    return mob;
+  }
+
+  it('does not re-aggro a mob standing on the corpse right after a corpse-run resurrect', () => {
+    const sim = makeSim();
+    sim.setPlayerLevel(1);
+    const p = sim.player as AnyEntity;
+    p.dead = true;
+    sim.releaseSpirit();
+    const corpse = { ...(p.corpsePos as { x: number; y: number; z: number }) };
+    const wolf = spawnAdjacentWolf(sim, corpse);
+    p.pos = { ...corpse };
+    p.prevPos = { ...p.pos };
+    sim.rebucket(p);
+    sim.resurrectAtCorpse();
+    expect(p.dead).toBe(false);
+    expect(p.rezGraceUntil).toBeGreaterThan(sim.time);
+
+    for (let i = 0; i < 20; i++) sim.tick();
+    expect(wolf.aiState).toBe('idle');
+    expect(wolf.aggroTargetId).toBeNull();
+
+    // once the grace window elapses, the same mob aggros normally
+    const ticksToElapse = Math.ceil(REZ_GRACE_SECONDS / (1 / 20)) + 5;
+    for (let i = 0; i < ticksToElapse; i++) sim.tick();
+    expect(wolf.aiState).not.toBe('idle');
+    expect(wolf.aggroTargetId).toBe(p.id);
   });
 });
 

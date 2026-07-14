@@ -51,6 +51,10 @@ export const RES_HP_FRACTION = 0.5;
 // hp/mana AND inflicts Resurrection Sickness, so the penalty-free corpse run is the
 // reward for running your spirit all the way back.
 export const RES_HEALER_HP_FRACTION = 0.2;
+// How long (seconds) a freshly-revived player is immune to a mob newly noticing them
+// by proximity. Long enough to walk clear of (or fight off, at half hp) the pack that
+// likely just killed them, short enough that it is never a meaningful PvE shortcut.
+export const REZ_GRACE_SECONDS = 6;
 // Resurrection Sickness (display "The Keeper's Toll"), its level-scaled duration, and the
 // "survives death" predicate live in ./resurrection (a leaf module shared by every
 // death/respawn site). Re-export the id so it stays importable from here.
@@ -205,6 +209,7 @@ function reviveAt(
   p.ghost = false;
   p.corpsePos = null;
   p.corpseInstanceId = null;
+  p.rezGraceUntil = ctx.time + REZ_GRACE_SECONDS;
   p.pos = ctx.groundPos(pos.x, pos.z);
   p.prevPos = { ...p.pos };
   ctx.rebucket(p);

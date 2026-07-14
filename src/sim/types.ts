@@ -2087,6 +2087,13 @@ export interface Entity {
   // Null for world corpses and saved ghosts. Instance exits are recreated on
   // every claim, so stale corpse coordinates cannot match a recycled slot.
   corpseInstanceId: number | null;
+  // Sim time (ctx.time) until which a freshly-revived player is immune to a mob
+  // newly noticing them by proximity: without this, resurrecting at a corpse in a
+  // dense mob pack (the very pack that killed them) re-aggros instantly and chains
+  // repeat deaths. 0 for the living and for every non-player entity. Does not
+  // suppress threat already on a mob's hate table (death already clears that) or
+  // stop combat a player re-enters voluntarily. Owned by src/sim/spirit.ts.
+  rezGraceUntil: number;
   scale: number;
   color: number;
   skinCatalog: SkinCatalog; // player appearance catalog: class texture set or cosmetic body.
