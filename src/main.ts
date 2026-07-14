@@ -65,7 +65,6 @@ import {
   SETTING_RANGES,
   Settings,
 } from './game/settings';
-import { resolveSettingsBodyClasses } from './game/settings_body_classes';
 import { sfx } from './game/sfx';
 import {
   recordSkipTap,
@@ -907,14 +906,6 @@ async function startGame(
 
   const keybinds = new Keybinds(keybindScope);
   const settings = new Settings();
-  // Re-derive every persisted boolean-setting body class from storage on this
-  // fresh load (login, relog, or a plain reload), not just on a live Options
-  // toggle: a class like body.show-actionbar2 (the second hotbar row) otherwise
-  // stays at its CSS default of hidden until the player re-flips the checkbox
-  // in the new session, even though the stored setting says it should be on.
-  for (const { className, enabled } of resolveSettingsBodyClasses((key) => settings.get(key))) {
-    document.body.classList.toggle(className, enabled);
-  }
   // First-run graphics default: until a device default has been applied (the dedicated
   // graphicsDefaultApplied marker, NOT the graphicsPreset key, which save() def-fills the moment
   // any unrelated setting is stored), probe the device (GPU name, memory, cores, touch) and
