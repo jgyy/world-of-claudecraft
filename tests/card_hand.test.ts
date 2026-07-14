@@ -28,6 +28,25 @@ describe('Card Adept deck data', () => {
     }
   });
 
+  it('the pinned card cost matches the ability RANK-1 cost, and higher ranks cost more', () => {
+    // The pinned CardDef.cost is the rank-1 cost; the sim/HUD resolve the real cost
+    // through the ability's resolved rank (ranks[]), so a card in hand at a higher
+    // rank can cost more than its pinned value. Guard that at least one card's
+    // ability actually scales its cost across ranks, so the resolved-cost path is
+    // load-bearing (the pinned cost alone would understate affordability).
+    let sawRankCostIncrease = false;
+    for (const card of CARDS) {
+      const def = ABILITIES[card.effectAbilityId];
+      expect(card.cost, card.id).toBe(def.cost); // pinned == rank 1
+      for (const rank of def.ranks ?? []) {
+        if (rank.cost !== undefined && rank.cost > def.cost) sawRankCostIncrease = true;
+      }
+    }
+    expect(sawRankCostIncrease, 'at least one card ability raises its cost at a higher rank').toBe(
+      true,
+    );
+  });
+
   it('has around twenty cards and a multi-copy starting deck', () => {
     expect(CARDS.length).toBeGreaterThanOrEqual(20);
     expect(buildStartingDeck().length).toBeGreaterThan(CARDS.length);
@@ -67,18 +86,26 @@ describe('deterministic shuffle and draw', () => {
     expect(s1.hand.length).toBe(STARTING_HAND_SIZE);
   });
 
-  it('draw pulls from the deck and reshuffles the discard when empty', () => {
+  it('draw reshuffles the discard back into the deck once the deck runs dry', () => {
     const state = createCardHand();
     const total = state.deck.length;
     startCombat(new Rng(7), state);
-    // Play the whole hand into discard, then drain the deck, forcing a reshuffle.
-    let guard = 0;
-    while ((state.hand.length > 0 || state.deck.length > 0) && guard++ < 1000) {
-      if (state.hand.length > 0) playCardAt(state, 0);
-      else drawOne(new Rng(guard), state);
-    }
-    // Every card is conserved across deck + hand + discard.
-    const seen = state.deck.length + state.hand.length + state.discard.length;
+    // Play the opening hand into the discard so the discard is non-empty.
+    while (state.hand.length > 0) playCardAt(state, 0);
+    expect(state.discard.length).toBeGreaterThan(0);
+    // Drain the deck to zero with cards still sitting in the discard.
+    while (state.deck.length > 0) drawOne(new Rng(1), state);
+    expect(state.deck.length).toBe(0);
+    const discardBeforeReshuffle = state.discard.length;
+    expect(discardBeforeReshuffle).toBeGreaterThan(0);
+    // The next draw with an empty deck MUST reshuffle the discard back in (the
+    // branch the old test never reached), pulling one card out as the draw.
+    const drawn = drawOne(new Rng(1), state);
+    expect(drawn).not.toBeNull();
+    expect(state.discard.length).toBe(0); // discard emptied into the deck
+    expect(state.deck.length).toBe(discardBeforeReshuffle - 1); // minus the drawn card
+    // No card is ever lost or duplicated across the reshuffle.
+    const seen = state.deck.length + state.hand.length + state.discard.length + 1;
     expect(seen).toBe(total);
   });
 });
