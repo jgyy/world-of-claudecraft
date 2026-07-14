@@ -58,9 +58,9 @@
 // ---------------------------------------------------------------------------
 
 import type { IWorldBank } from './world_api/bank';
+import type { IWorldCardMinigame } from './world_api/card_minigame';
 import type { IWorldChat } from './world_api/chat';
 import type { IWorldCombat } from './world_api/combat';
-import type { IWorldCardMinigame } from './world_api/card_minigame';
 import type { IWorldCosmetics } from './world_api/cosmetics';
 import type { IWorldDailyRewards } from './world_api/daily_rewards';
 import type { IWorldDeeds } from './world_api/deeds';
@@ -107,6 +107,7 @@ export type {
 
 // --- facet aux-type + value re-exports (each travels with its facet file) ---
 export type { BankBonusSource, BankInfo } from './world_api/bank';
+export type { CardMinigameInfo } from './world_api/card_minigame';
 export { isOverheadEmoteId, OVERHEAD_EMOTES } from './world_api/chat';
 export type { AccountCosmetics } from './world_api/cosmetics';
 export type {

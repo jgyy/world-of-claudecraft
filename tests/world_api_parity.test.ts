@@ -39,6 +39,7 @@ import { OVERHEAD_EMOTE_IDS, type PlayerClass } from '../src/sim/types';
 // bank facet added in the bank-system feature and the Book of Deeds facet. Imported
 // type-only to pin each facet's runtime member array to its interface key-set below.
 import type { IWorldBank } from '../src/world_api/bank';
+import type { IWorldCardMinigame } from '../src/world_api/card_minigame';
 import type { IWorldChat } from '../src/world_api/chat';
 // The overhead-emote runtime surface the chat facet derives locally (see the
 // exhaustiveness guard at the bottom of this file): the seam imports sim/ for TYPES
@@ -50,7 +51,6 @@ import type { IWorldCosmetics } from '../src/world_api/cosmetics';
 import type { IWorldDailyRewards } from '../src/world_api/daily_rewards';
 import type { IWorldDeeds } from '../src/world_api/deeds';
 import type { IWorldDelves } from '../src/world_api/delves';
-import type { IWorldCardMinigame } from '../src/world_api/card_minigame';
 import type { IWorldDuelArena } from '../src/world_api/duel_arena';
 import type { IWorldDungeonFinder } from '../src/world_api/dungeon_finder';
 import type { IWorldDungeons } from '../src/world_api/dungeons';

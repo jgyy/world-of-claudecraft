@@ -10,13 +10,13 @@
 // Server-authoritative: rounds resolve here once both sides have played, never
 // client-side.
 
+import { cardMasterInRange } from '../instances/card_master';
 import {
   type CardHandState,
   createCardHand,
   drawOne,
   playCard as playCardFromHand,
 } from '../minigames/card_hand';
-import { cardMasterInRange } from '../instances/card_master';
 import type { SimContext } from '../sim_context';
 import {
   type CardDuelQueue,
@@ -75,7 +75,11 @@ export function joinCardMinigameQueue(ctx: SimContext, pid?: number): void {
     ctx.error(r.meta.entityId, 'You must be at the Card Master to queue for a Card Duel.');
     return;
   }
-  const result = joinCardDuelQueue(ctx.cardDuelQueue, r.meta.entityId, inCardDuel(ctx, r.meta.entityId));
+  const result = joinCardDuelQueue(
+    ctx.cardDuelQueue,
+    r.meta.entityId,
+    inCardDuel(ctx, r.meta.entityId),
+  );
   if (!result.ok) {
     ctx.error(
       r.meta.entityId,
@@ -85,14 +89,24 @@ export function joinCardMinigameQueue(ctx: SimContext, pid?: number): void {
     );
     return;
   }
-  ctx.emit({ type: 'log', text: 'You queue for a Card Duel.', color: '#fa6', pid: r.meta.entityId });
+  ctx.emit({
+    type: 'log',
+    text: 'You queue for a Card Duel.',
+    color: '#fa6',
+    pid: r.meta.entityId,
+  });
 }
 
 export function leaveCardMinigameQueue(ctx: SimContext, pid?: number): void {
   const r = ctx.resolve(pid);
   if (!r) return;
   if (leaveCardDuelQueue(ctx.cardDuelQueue, r.meta.entityId)) {
-    ctx.emit({ type: 'log', text: 'You leave the Card Duel queue.', color: '#fa6', pid: r.meta.entityId });
+    ctx.emit({
+      type: 'log',
+      text: 'You leave the Card Duel queue.',
+      color: '#fa6',
+      pid: r.meta.entityId,
+    });
   }
 }
 

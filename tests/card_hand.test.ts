@@ -3,8 +3,8 @@ import {
   createCardHand,
   drawOne,
   playCard,
-  shuffle,
   STARTING_HAND_SIZE,
+  shuffle,
 } from '../src/sim/minigames/card_hand';
 import { Rng } from '../src/sim/rng';
 
