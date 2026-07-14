@@ -10004,10 +10004,13 @@ export class Hud {
         case 'log': {
           const text = this.localizeSystemText(ev.text);
           // Route mob/boss combat-flavor chatter to the Combat Log tab instead of
-          // General/Chat (see log_event_route.ts), so new players standing near any
-          // nearby fight aren't drowned out by other players' mob text. A narrative
-          // line still gets its floating world chat bubble below.
-          if (isCombatFlavorLog(ev.entityId)) this.combatLog(text, ev.color ?? '#ccc');
+          // General/Chat (see log_event_route.ts): pid-scoped personal narrative and
+          // entityId-anchored actionable mechanic telegraphs both stay in General/Chat,
+          // so new players standing near a busy fight aren't drowned out by ambient
+          // mob barks while a mechanic's only cue is never buried. A narrative line
+          // still gets its floating world chat bubble below.
+          if (isCombatFlavorLog(ev.entityId, ev.pid, ev.telegraph))
+            this.combatLog(text, ev.color ?? '#ccc');
           else this.log(text, ev.color ?? '#ccc');
           const isNythraxisVisionLine = [
             'My king was a good man.',
