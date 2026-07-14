@@ -490,7 +490,7 @@ describe('delta snapshots', () => {
     const snap = lastSnap(fc.sent);
     expect(snap).not.toBeNull();
     // a fresh session has an empty lastSent, so EVERY maybe() delta key rides the
-    // first snapshot (even the null-valued ones like party/trade/bank); all 42 of them
+    // first snapshot (even the null-valued ones like party/trade/bank); all 43 of them
     for (const key of ALL_DELTA_KEYS) {
       expect(snap.self, `self.${key} missing from first snapshot`).toHaveProperty(key);
     }
@@ -2448,7 +2448,7 @@ describe('lockpick view rebuilds from events on the online client', () => {
 // while the prior decoded value is preserved.
 // ---------------------------------------------------------------------------
 
-// The pinned set of the 42 `maybe(...)` delta keys, sorted. Cross-checked below
+// The pinned set of the 43 `maybe(...)` delta keys, sorted. Cross-checked below
 // against the live `maybe(...)` calls scraped from server/game.ts source, so a
 // 41st unregistered delta key reddens this gate.
 const ALL_DELTA_KEYS = [
@@ -2457,6 +2457,7 @@ const ALL_DELTA_KEYS = [
   'bags',
   'bank',
   'buyback',
+  'card',
   'cds',
   'corpse',
   'cosmetics',
@@ -2571,7 +2572,7 @@ function dirtyEveryDeltaField(): {
 } {
   const server = new GameServer();
   const fc = fakeWs();
-  const leader = joinServer(server, fc, 1, 'Alld');
+  const leader = joinServer(server, fc, 1, 'Alld', 'card_adept');
   const fcMember = fakeWs();
   const member = joinServer(server, fcMember, 2, 'Memb', 'mage');
   const sim = server.sim;
@@ -2718,7 +2719,7 @@ describe('full self-state snapshot delta fixture', () => {
     expect(client.player.weapon).toMatchObject({ min: 999 }); // weapon (inline s.X ?? e.X)
     expect(client.player.resource).toBe(42); // res -> resource
     expect(client.player.maxResource).toBe(150); // mres -> maxResource
-    expect(client.player.resourceType).toBe('rage'); // rtype -> resourceType
+    expect(client.player.resourceType).toBe('energy'); // rtype -> resourceType
 
     // --- always-present scalar renames ---
     expect(client.lifetimeXp).toBe(555); // lxp -> lifetimeXp
@@ -2844,9 +2845,9 @@ describe('full self-state snapshot delta fixture', () => {
 });
 
 describe('delta-key contract pins (anti-drift)', () => {
-  it('ALL_DELTA_KEYS contains exactly 42 unique keys in sorted order', () => {
-    expect(ALL_DELTA_KEYS).toHaveLength(42);
-    expect(new Set(ALL_DELTA_KEYS).size).toBe(42);
+  it('ALL_DELTA_KEYS contains exactly 43 unique keys in sorted order', () => {
+    expect(ALL_DELTA_KEYS).toHaveLength(43);
+    expect(new Set(ALL_DELTA_KEYS).size).toBe(43);
     expect([...ALL_DELTA_KEYS]).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
@@ -2858,7 +2859,7 @@ describe('delta-key contract pins (anti-drift)', () => {
     const scraped = new Set<string>();
     for (let m = re.exec(src); m !== null; m = re.exec(src)) scraped.add(m[1]);
     expect(scraped.has('lockouts')).toBe(true); // the multi-line call IS captured
-    expect(scraped.size).toBe(42);
+    expect(scraped.size).toBe(43);
     expect([...scraped].sort()).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
