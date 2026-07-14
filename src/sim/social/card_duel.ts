@@ -39,11 +39,9 @@ export function queueCardDuel(ctx: SimContext, join: boolean, pid?: number): voi
   // to eligible players and reflects queue state via cardDuelInfo(). The remaining
   // gates emit, matching arenaQueueJoin, because they are states the UI cannot see.
   if (meta.cls !== 'card_adept') return;
-  if (isQueuedForCardDuel(ctx.cardDuelQueue, id) || ctx.duels.has(id)) return;
-  if (e.dead) {
-    ctx.error(id, 'You cannot queue for a Card Duel while dead.');
-    return;
-  }
+  // A dead player is refused silently (like the not-a-Card-Adept and already-queued
+  // cases): the UI disables the button for the dead, so no toast is emitted.
+  if (isQueuedForCardDuel(ctx.cardDuelQueue, id) || ctx.duels.has(id) || e.dead) return;
   if (ctx.arenaMatches.has(id)) {
     ctx.error(id, 'You are already in an arena match.');
     return;

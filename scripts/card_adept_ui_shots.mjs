@@ -218,7 +218,11 @@ async function loginAndEnterOnline(page, username, password, charName, fresh) {
     console.log(`[${charName}] DBG`, JSON.stringify(dbg));
     throw e;
   }
-  if (await page.evaluate(() => document.querySelector('#realm-panel')?.hasAttribute('hidden') === false)) {
+  if (
+    await page.evaluate(
+      () => document.querySelector('#realm-panel')?.hasAttribute('hidden') === false,
+    )
+  ) {
     await page.waitForFunction(() => !!document.querySelector('#realm-list .realm-row'), {
       timeout: 15000,
       polling: 200,
@@ -237,7 +241,9 @@ async function loginAndEnterOnline(page, username, password, charName, fresh) {
     { timeout: 20000, polling: 200 },
   );
   if (
-    await page.evaluate(() => document.querySelector('#charselect-panel')?.hasAttribute('hidden') === false)
+    await page.evaluate(
+      () => document.querySelector('#charselect-panel')?.hasAttribute('hidden') === false,
+    )
   ) {
     await page.evaluate(() => document.querySelector('#btn-new-character')?.click());
     await page.waitForFunction(
@@ -332,11 +338,14 @@ async function shot4_duelArena() {
   }
 }
 
-const allOfflineTasks = [shot1_handPlayable, shot2_handUnaffordable, shot3_duelQueue, shot5_handMobile];
+const allOfflineTasks = [
+  shot1_handPlayable,
+  shot2_handUnaffordable,
+  shot3_duelQueue,
+  shot5_handMobile,
+];
 const only = process.env.ONLY_SHOTS?.split(',');
-const offlineTasks = only
-  ? allOfflineTasks.filter((t) => only.includes(t.name))
-  : allOfflineTasks;
+const offlineTasks = only ? allOfflineTasks.filter((t) => only.includes(t.name)) : allOfflineTasks;
 
 for (const t of offlineTasks) {
   try {
