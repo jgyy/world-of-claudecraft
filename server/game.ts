@@ -418,6 +418,7 @@ const JAILED_BLOCKED_COMMANDS = new Set<string>([
   'enter_delve',
   'duel_req',
   'duel_accept',
+  'card_duel_queue',
 ]);
 const HEAVY_SELF_CMDS = new Set<string>([
   'equip',
@@ -3531,7 +3532,7 @@ export class GameServer {
         if (typeof msg.aura === 'string') sim.cancelAura(msg.aura, pid);
         break;
       case 'play_card':
-        if (typeof msg.index === 'number') sim.playCard(msg.index, pid);
+        if (typeof msg.index === 'number') sim.playCard(msg.index | 0, pid);
         break;
       case 'target':
         sim.targetEntity(typeof msg.id === 'number' ? msg.id : null, pid);
@@ -4754,6 +4755,9 @@ export class GameServer {
     maybe('marks', this.markersWire(anchorSession.pid));
     maybe('trade', this.tradeWire(anchorSession.pid));
     maybe('duel', this.duelWire(anchorSession.pid));
+    // Card Adept private hand + Card Duel queue status (null for other classes).
+    // Delta-guarded like duel; the hand only rides the wire when it changes.
+    maybe('card', this.cardWire(anchorSession.pid));
     // Small PvP-ledger scalars. Delta-guarded like delve marks: a fresh
     // session receives both, then they ride only on earn/spend changes.
     maybe('honor', meta.honor);
@@ -4940,6 +4944,20 @@ export class GameServer {
     if (!d) return null;
     const otherPid = d.a === pid ? d.b : d.a;
     return { otherPid, otherName: this.sim.meta(otherPid)?.name ?? '?', state: d.state };
+  }
+
+  // Card Adept self-only wire payload: the private hand card ids plus deck/discard
+  // counts and the Card Duel queue status. Null for every other class (the field
+  // then never rides the wire). PRIVATE by construction: selfWireJson is sent only
+  // to the owning session, so no nearby player ever sees another player's hand.
+  private cardWire(pid: number): unknown {
+    if (this.sim.meta(pid)?.cls !== 'card_adept') return null;
+    return {
+      hand: this.sim.cardHandIds(pid),
+      deck: this.sim.cardDeckCount(pid),
+      discard: this.sim.cardDiscardCount(pid),
+      qd: this.sim.cardDuelInfo(pid),
+    };
   }
 
   // Public profile URL for a character name, or null when no public origin is set.

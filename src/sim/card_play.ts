@@ -5,7 +5,6 @@
 // for a Card Adept (via the pure card_hand functions), so a world with no Card
 // Adept is unaffected (parity-safe).
 
-import { castAbility } from './combat/casting_lifecycle';
 import {
   type CardHandState,
   endCombat as endCardCombat,
@@ -13,9 +12,10 @@ import {
   startCombat as startCardCombat,
   tickRedraw as tickCardRedraw,
 } from './card_hand';
+import { castAbility } from './combat/casting_lifecycle';
 import { CARDS_BY_ID } from './content/cards';
-import type { Entity } from './types';
 import type { SimContext } from './sim_context';
+import type { Entity } from './types';
 
 // Advance one Card Adept's deck machine for one tick.
 export function updateCardHand(ctx: SimContext, p: Entity, state: CardHandState): void {

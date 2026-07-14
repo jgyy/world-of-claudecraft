@@ -1141,6 +1141,15 @@ export class ClientWorld implements IWorld {
   // self (`s.vcup`, delta-omitted: a missing key keeps the prior mirror, an
   // explicit null clears it, same as `s.arena`). ---
   cupInfo: CupInfo | null = null;
+  // --- IWorldCardAdept: the private hand + deck/discard counts + Card Duel queue
+  // status, mirrored from the self-only snapshot field `s.card` (delta-omitted: a
+  // missing key keeps the prior mirror, an explicit null means "not a Card Adept").
+  // The hand is server-authoritative and never leaks to other players (selfWireJson
+  // reaches only the owning session). ---
+  private cardHand: string[] = [];
+  private cardDeck = 0;
+  private cardDiscard = 0;
+  private cardDuelState: import('../world_api').CardDuelInfo = { queued: false, queueSize: 0 };
   // My live sport role, mirrored from the wireRev-gated heavy self field
   // `s.sport` ({ role } | null, delta-omitted). NON-IWorld mirror: while set,
   // the per-snapshot known rebuild resolves the role kit via the ONE shared
@@ -2119,6 +2128,18 @@ export class ClientWorld implements IWorld {
       if (s.honor !== undefined) this.honor = s.honor ?? 0;
       if (s.lhonor !== undefined) this.lifetimeHonor = s.lhonor ?? 0;
       if (s.vcup !== undefined) this.cupInfo = s.vcup;
+      if (s.card !== undefined) {
+        const c = s.card as {
+          hand?: string[];
+          deck?: number;
+          discard?: number;
+          qd?: import('../world_api').CardDuelInfo;
+        } | null;
+        this.cardHand = c?.hand ?? [];
+        this.cardDeck = c?.deck ?? 0;
+        this.cardDiscard = c?.discard ?? 0;
+        this.cardDuelState = c?.qd ?? { queued: false, queueSize: 0 };
+      }
       if (s.market !== undefined) this.marketInfo = s.market;
       if (s.mail !== undefined) this.mailInfo = s.mail;
       if (s.mailU !== undefined) this.mailUnread = s.mailU ?? 0;
@@ -2269,17 +2290,17 @@ export class ClientWorld implements IWorld {
     // snapshot. No optimistic local removal (stat recalc is server-owned).
     this.cmd({ cmd: 'cancel_aura', aura: auraId });
   }
-  // Card Adept read surface. The hand snapshot is not yet mirrored over the wire
-  // (server follow-up), so the online client reports an empty hand; playCard is
-  // fully server-authoritative below.
+  // Card Adept read surface, mirrored from the private `s.card` self field
+  // (decoded in applySnapshot). playCard is server-authoritative below; the hand
+  // updates on the next self snapshot.
   cardHandIds(): string[] {
-    return [];
+    return [...this.cardHand];
   }
   cardDeckCount(): number {
-    return 0;
+    return this.cardDeck;
   }
   cardDiscardCount(): number {
-    return 0;
+    return this.cardDiscard;
   }
   playCard(index: number): void {
     // Server resolves the Focus cost and effect; the hand updates on the next self
@@ -2623,9 +2644,8 @@ export class ClientWorld implements IWorld {
     this.cmd({ cmd: 'card_duel_queue', join });
   }
   cardDuelInfo(): import('../world_api').CardDuelInfo {
-    // Server-authoritative; the online mirror is a follow-up, so the browser
-    // client reports an empty queue until the snapshot field lands.
-    return { queued: false, queueSize: 0 };
+    // Mirrored from the private `s.card` self field (qd), decoded in applySnapshot.
+    return this.cardDuelState;
   }
   // --- IWorldValeCup: boarball queue sends (cupInfo is a snapshot read; the
   // sport-kit swap rides the heavy `sport` self field decoded in applySnapshot). ---

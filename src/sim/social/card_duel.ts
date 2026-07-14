@@ -8,16 +8,16 @@
 // The matchmaking FIFO itself is the pure leaf social/card_duel_queue.ts; this
 // module is the SimContext-facing driver the coordinator calls from the tick.
 
-import type { DuelState } from '../sim';
-import type { SimContext } from '../sim_context';
 import { arenaOrigin, DUNGEON_X_THRESHOLD } from '../data';
 import { ARENA_SPAWN_A, ARENA_SPAWN_B } from '../dungeon_layout';
+import type { DuelState } from '../sim';
+import type { SimContext } from '../sim_context';
 import { freeArenaSlot, placeInArena } from './arena';
 import {
-  cardDuelQueueSize as queueSize,
   isQueuedForCardDuel,
   joinCardDuelQueue,
   leaveCardDuelQueue,
+  cardDuelQueueSize as queueSize,
   tryPairCardDuel,
 } from './card_duel_queue';
 import { DUEL_COUNTDOWN } from './duel';
@@ -68,7 +68,10 @@ export function cardDuelQueueSize(ctx: SimContext): number {
   return queueSize(ctx.cardDuelQueue);
 }
 
-export function cardDuelInfo(ctx: SimContext, pid?: number): import('../../world_api').CardDuelInfo {
+export function cardDuelInfo(
+  ctx: SimContext,
+  pid?: number,
+): import('../../world_api').CardDuelInfo {
   return { queued: cardDuelQueued(ctx, pid), queueSize: cardDuelQueueSize(ctx) };
 }
 

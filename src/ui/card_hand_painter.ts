@@ -75,10 +75,13 @@ export class CardHandPainter {
 
       if (this.lastIcon[i] !== card.effectAbilityId) {
         this.lastIcon[i] = card.effectAbilityId;
+        // The resolver already returns a full `url(...)` value (mirrors the
+        // action_bar_painter family), so write it directly: wrapping it again
+        // yields `url(url(...))`, which browsers drop.
         this.writers.setStyleProp(
           el.btn,
           BACKGROUND_IMAGE_PROP,
-          `url(${this.resolveBackgroundImage(card.effectAbilityId)})`,
+          this.resolveBackgroundImage(card.effectAbilityId),
         );
       }
     }

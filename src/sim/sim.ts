@@ -348,7 +348,6 @@ export { computeQuestState } from './quests/quest_commands';
 
 import { completeCurrentQuestsForDev, completeQuestForDev } from './quests/dev_quest_commands';
 import * as arenaMod from './social/arena';
-import { type CardDuelQueue, createCardDuelQueue } from './social/card_duel_queue';
 import {
   cardDuelInfo as cardDuelInfoImpl,
   cardDuelQueued as cardDuelQueuedImpl,
@@ -356,6 +355,7 @@ import {
   queueCardDuel as queueCardDuelImpl,
   updateCardDuelQueue as updateCardDuelQueueImpl,
 } from './social/card_duel';
+import { type CardDuelQueue, createCardDuelQueue } from './social/card_duel_queue';
 import * as duelMod from './social/duel';
 // A4: Protect Yumi (formats yumi3/yumi5); match logic in social/yumi.ts, reached
 // via ctx callbacks + the two hostility arms in isHostileTo/isFriendlyTo.
@@ -4347,17 +4347,18 @@ export class Sim {
   // player is not a Card Adept, the index is invalid, or the Focus cost is unmet
   // (so an unaffordable card is not wasted).
   // IWorld read surface for the Card Adept HUD (local player only).
-  cardHandIds(): string[] {
-    const state = this.players.get(this.player.id)?.cardHand;
+  cardHandIds(pid?: number): string[] {
+    const id = pid ?? this.player.id;
+    const state = this.players.get(id)?.cardHand;
     return state ? [...state.hand] : [];
   }
 
-  cardDeckCount(): number {
-    return this.players.get(this.player.id)?.cardHand?.deck.length ?? 0;
+  cardDeckCount(pid?: number): number {
+    return this.players.get(pid ?? this.player.id)?.cardHand?.deck.length ?? 0;
   }
 
-  cardDiscardCount(): number {
-    return this.players.get(this.player.id)?.cardHand?.discard.length ?? 0;
+  cardDiscardCount(pid?: number): number {
+    return this.players.get(pid ?? this.player.id)?.cardHand?.discard.length ?? 0;
   }
 
   playCard(index: number, pid?: number, aim?: { x: number; z: number }): void {
@@ -6688,8 +6689,8 @@ export class Sim {
     return cardDuelQueueSizeImpl(this.ctx);
   }
 
-  cardDuelInfo(): import('../world_api').CardDuelInfo {
-    return cardDuelInfoImpl(this.ctx);
+  cardDuelInfo(pid?: number): import('../world_api').CardDuelInfo {
+    return cardDuelInfoImpl(this.ctx, pid);
   }
 
   private updateCardDuelQueue(): void {
