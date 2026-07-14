@@ -116,8 +116,8 @@ describe('describeFct: color token by kind + flags', () => {
   });
 });
 
-describe('describeFct: ttl is a pure function of kind (constant across kinds)', () => {
-  it('emits the named ttl constant for every kind, regardless of crit/jitter', () => {
+describe('describeFct: ttl is a pure function of kind (constant across kinds, excluding xp/rested-xp)', () => {
+  it('emits the named ttl constant for every kind except xp/rested-xp, regardless of crit/jitter', () => {
     for (const kind of [
       'miss',
       'dodge',
