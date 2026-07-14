@@ -34,6 +34,7 @@ import type {
   ResolvedAbility,
   TradeSession,
 } from './sim';
+import type { CardDuelQueue } from './social/card_duel_queue';
 import type { VcState } from './social/vale_cup';
 import type { SpatialGrid } from './spatial';
 import type {
@@ -113,6 +114,9 @@ export interface SimContextPrimitives {
   // Backing fields stay on Sim. `duels` is also read per-attack by isHostileTo/
   // dealDamage (PvP hostility), so it stays Sim-owned (A2).
   readonly duels: Map<number, DuelState>;
+  // The Card Adept 1v1 Card Duel queue (FIFO of waiting pids). Backing field stays
+  // on Sim; mutated in place by join/leave/pair, so this is a live read-only view.
+  readonly cardDuelQueue: CardDuelQueue;
   // `world` stays optional (custom play-test map, else undefined; perfLap is the
   // temporary host-owned tick profiler probe); the rest defaulted.
   readonly cfg: Required<Omit<SimConfig, 'noPlayer' | 'world' | 'perfLap'>> &
@@ -808,6 +812,9 @@ export function createSimContext(host: SimContextHost): SimContext {
     },
     get duels() {
       return host.duels;
+    },
+    get cardDuelQueue() {
+      return host.cardDuelQueue;
     },
     get cfg() {
       return host.cfg;

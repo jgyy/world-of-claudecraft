@@ -14,14 +14,8 @@ import * as bagsMod from './bags';
 import { addStacked, BAG_SOCKETS, bagCapacity, canAddItem, migrationBagsFor } from './bags';
 import * as bankMod from './bank';
 import { type BankState, clampBonusSlots, sanitizeBankState } from './bank';
-import {
-  type CardHandState,
-  createCardHand,
-  endCombat as endCardCombat,
-  playCardAt,
-  startCombat as startCardCombat,
-  tickRedraw as tickCardRedraw,
-} from './card_hand';
+import { type CardHandState, createCardHand } from './card_hand';
+import { playCard as playCardImpl, updateCardHand as updateCardHandImpl } from './card_play';
 import { lineOfSightClear, resolveMovement, resolvePosition } from './colliders';
 import { auraAffectsStats, removeCancelableAura } from './combat/aura_cancel';
 import { auraReplacementConflicts } from './combat/aura_stacking';
@@ -71,7 +65,6 @@ import { isSpellResisted } from './combat/spell_resist';
 // moved to social/fiesta.ts with that logic; sim.ts keeps only the type used by
 // the PlayerMeta interface + the power-up catalog the fiestaMatchInfo accessor reads.
 import { type AugmentSpecial, type AugmentTier, POWERUPS_BY_ID } from './content/augments';
-import { CARDS_BY_ID } from './content/cards';
 import { MAILBOXES } from './content/mailboxes';
 import type { GatheringProfessionId } from './content/professions';
 import { FURY_ENTITY_ID, FURY_NPC_ID } from './content/pvp_honor';
@@ -355,15 +348,14 @@ export { computeQuestState } from './quests/quest_commands';
 
 import { completeCurrentQuestsForDev, completeQuestForDev } from './quests/dev_quest_commands';
 import * as arenaMod from './social/arena';
+import { type CardDuelQueue, createCardDuelQueue } from './social/card_duel_queue';
 import {
-  type CardDuelQueue,
-  cardDuelQueueSize,
-  createCardDuelQueue,
-  isQueuedForCardDuel,
-  joinCardDuelQueue,
-  leaveCardDuelQueue,
-  tryPairCardDuel,
-} from './social/card_duel_queue';
+  cardDuelInfo as cardDuelInfoImpl,
+  cardDuelQueued as cardDuelQueuedImpl,
+  cardDuelQueueSize as cardDuelQueueSizeImpl,
+  queueCardDuel as queueCardDuelImpl,
+  updateCardDuelQueue as updateCardDuelQueueImpl,
+} from './social/card_duel';
 import * as duelMod from './social/duel';
 // A4: Protect Yumi (formats yumi3/yumi5); match logic in social/yumi.ts, reached
 // via ctx callbacks + the two hostility arms in isHostileTo/isFriendlyTo.
@@ -668,6 +660,14 @@ export interface DuelState {
   b: number;
   state: 'countdown' | 'active';
   timer: number; // countdown remaining / elapsed
+  // Card Duels are fought in a real arena slot, unlike normal in-place duels, so
+  // they carry the allocated slot and each fighter's pre-teleport position to
+  // release the slot and teleport both players home when the bout ends. Absent
+  // (undefined) for an ordinary duel.
+  cardArena?: {
+    slot: number;
+    returns: Map<number, { x: number; z: number; facing: number }>;
+  };
 }
 
 // GroundAoE type moved to entity_roster.ts (the ground-AoE drain's home); imported above.
@@ -3042,6 +3042,9 @@ export class Sim {
       get duels() {
         return sim.duels;
       },
+      get cardDuelQueue() {
+        return sim.cardDuelQueue;
+      },
       get cfg() {
         return sim.cfg;
       },
@@ -4335,14 +4338,7 @@ export class Sim {
   // returns the hand to the deck when combat ends. Draws rng only for card_adept,
   // so a world with no Card Adept is unaffected (parity-safe).
   private updateCardHand(p: Entity, meta: PlayerMeta): void {
-    const state = meta.cardHand;
-    if (!state) return;
-    if (p.inCombat) {
-      if (!state.inCombat) startCardCombat(this.rng, state);
-      else tickCardRedraw(this.rng, state);
-    } else if (state.inCombat) {
-      endCardCombat(state);
-    }
+    if (meta.cardHand) updateCardHandImpl(this.ctx, p, meta.cardHand);
   }
 
   // Card Adept: play the card at `index` in the hand. Spends the card (moves it to
@@ -4365,17 +4361,7 @@ export class Sim {
   }
 
   playCard(index: number, pid?: number, aim?: { x: number; z: number }): void {
-    const p = pid !== undefined ? this.entities.get(pid) : this.player;
-    if (!p) return;
-    const meta = this.players.get(p.id);
-    const state = meta?.cardHand;
-    if (!state) return;
-    const cardId = state.hand[index];
-    if (cardId === undefined) return;
-    const def = CARDS_BY_ID[cardId];
-    if (!def || p.resource < def.cost) return;
-    this.castAbility(def.effectAbilityId, pid, aim);
-    playCardAt(state, index);
+    playCardImpl(this.ctx, index, pid, aim);
   }
 
   // Voluntarily cancel one of a player's own helpful auras (the HUD right-click-a-buff
@@ -6689,75 +6675,25 @@ export class Sim {
   }
 
   // Card Duel queue command (IWorld): join or leave the Card Adept 1v1 queue.
-  // Only Card Adepts may join; a player already in a duel is rejected.
+  // Body + arena slot contract live in social/card_duel.ts.
   queueCardDuel(join: boolean, pid?: number): void {
-    const p = pid !== undefined ? this.entities.get(pid) : this.player;
-    if (!p) return;
-    const meta = this.players.get(p.id);
-    if (!meta) return;
-    if (!join) {
-      leaveCardDuelQueue(this.cardDuelQueue, p.id);
-      return;
-    }
-    // Rejections (not a Card Adept, already dueling, already queued) are silent:
-    // the UI gates the button to eligible players and reflects queue state via
-    // cardDuelInfo(), so no player-facing string is emitted here.
-    joinCardDuelQueue(this.cardDuelQueue, p.id, meta.cls === 'card_adept', this.duels.has(p.id));
+    queueCardDuelImpl(this.ctx, join, pid);
   }
 
   cardDuelQueued(pid?: number): boolean {
-    const p = pid !== undefined ? this.entities.get(pid) : this.player;
-    return p ? isQueuedForCardDuel(this.cardDuelQueue, p.id) : false;
+    return cardDuelQueuedImpl(this.ctx, pid);
   }
 
   cardDuelQueueSize(): number {
-    return cardDuelQueueSize(this.cardDuelQueue);
+    return cardDuelQueueSizeImpl(this.ctx);
   }
 
   cardDuelInfo(): import('../world_api').CardDuelInfo {
-    return { queued: this.cardDuelQueued(), queueSize: this.cardDuelQueueSize() };
+    return cardDuelInfoImpl(this.ctx);
   }
 
-  // Pairing phase: match the two longest-waiting Card Adepts, teleport them into
-  // the arena facing each other, and start a duel. Draws no rng, and only touches
-  // the Card Duel queue, so a world with no queued Card Adepts is unaffected.
   private updateCardDuelQueue(): void {
-    // Drop any stale entrant (logged out, or already dueling) before pairing.
-    for (const qpid of [...this.cardDuelQueue]) {
-      if (!this.entities.get(qpid) || this.duels.has(qpid)) {
-        leaveCardDuelQueue(this.cardDuelQueue, qpid);
-      }
-    }
-    for (;;) {
-      const pair = tryPairCardDuel(this.cardDuelQueue);
-      if (!pair) break;
-      this.startCardDuel(pair[0], pair[1]);
-    }
-  }
-
-  private startCardDuel(aPid: number, bPid: number): void {
-    const ea = this.entities.get(aPid);
-    const eb = this.entities.get(bPid);
-    if (!ea || !eb) return;
-    const origin = arenaOrigin(0);
-    const place = (e: Entity, dx: number): void => {
-      const x = origin.x + dx;
-      const z = origin.z;
-      e.pos.x = x;
-      e.pos.z = z;
-      e.pos.y = groundHeight(x, z, this.cfg.seed);
-      e.prevPos = { ...e.pos };
-    };
-    place(ea, -3);
-    place(eb, 3);
-    ea.facing = Math.atan2(eb.pos.x - ea.pos.x, eb.pos.z - ea.pos.z);
-    eb.facing = Math.atan2(ea.pos.x - eb.pos.x, ea.pos.z - eb.pos.z);
-    const duel: DuelState = { a: aPid, b: bPid, state: 'countdown', timer: 3 };
-    this.duels.set(aPid, duel);
-    this.duels.set(bPid, duel);
-    for (const dPid of [aPid, bPid]) {
-      this.emit({ type: 'duelCountdown', seconds: 3, pid: dPid });
-    }
+    updateCardDuelQueueImpl(this.ctx);
   }
 
   private clearAurasFromSource(target: Entity, sourceId: number): void {

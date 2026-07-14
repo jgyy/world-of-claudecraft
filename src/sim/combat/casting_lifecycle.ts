@@ -227,37 +227,43 @@ export function castAbilityBySlot(
   slot: number,
   pid?: number,
   aim?: { x: number; z: number },
-): void {
+): boolean {
   const r = ctx.resolve(pid);
-  if (!r) return;
+  if (!r) return false;
   const known = r.meta.known[slot];
-  if (known) castAbility(ctx, known.def.id, pid, aim);
+  return known ? castAbility(ctx, known.def.id, pid, aim) : false;
 }
 
+// Returns true only when the press actually committed (an instant resolved, a
+// cast-time or channel started, an on-next-swing queued, or a press queued to
+// fire on the current cast) and false for every refusal (GCD, cooldown, unlearned
+// or unaffordable ability, stun or silence, missing or out-of-range target).
+// Callers that spend a one-shot resource on the press (the Card Adept hand) MUST
+// gate on this return so a refused cast is not charged.
 export function castAbility(
   ctx: SimContext,
   abilityId: string,
   pid?: number,
   aim?: { x: number; z: number },
-): void {
+): boolean {
   const r = ctx.resolve(pid);
-  if (!r) return;
+  if (!r) return false;
   const { meta, e: p } = r;
   let res = ctx.resolvedAbility(abilityId, p.id);
-  if (!res || p.dead) return;
+  if (!res || p.dead) return false;
   meta.lastActiveTick = ctx.tickCount; // a cast attempt is a deliberate action
   const ability = res.def;
   if (isStunned(p)) {
     ctx.error(p.id, 'You are stunned!');
-    return;
+    return false;
   }
   if (ability.school !== 'physical' && isSilenced(p)) {
     ctx.error(p.id, 'You are silenced!');
-    return;
+    return false;
   }
   if (ability.school !== 'physical' && isLockedOut(p, ability.school)) {
     ctx.error(p.id, 'You are silenced!');
-    return;
+    return false;
   }
   if (p.castingAbility) {
     // classic-era spell queue: a press during the tail of the current cast
@@ -268,23 +274,23 @@ export function castAbility(
     if (p.castRemaining <= CAST_QUEUE_WINDOW_SEC && p.castingAbility !== FISHING_CAST_ID) {
       p.queuedCastAbility = abilityId;
       p.queuedCastAim = aim ?? null;
-      return;
+      return true;
     }
     ctx.error(p.id, 'You are busy.');
-    return;
+    return false;
   }
   // note: a queued press fires here, re-running the full castAbility gate set
   // (including this GCD check). fireQueuedCast holds the slot instead of calling
   // in when the GCD is still running, so this early return only fires for a
   // same-tick player press racing the GCD, not for a queued follow-up.
-  if (!ability.offGcd && p.gcdRemaining > 0) return; // silent, classic spams this
+  if (!ability.offGcd && p.gcdRemaining > 0) return false; // silent, classic spams this
   const togglingOff = isToggleBuff(ability) && p.auras.some((a) => a.id === ability.id);
   const sharedCooldown = isShamanShock(ability.id)
     ? SHAMAN_SHOCK_COOLDOWN_IDS.find((id) => p.cooldowns.has(id))
     : undefined;
   if ((p.cooldowns.has(ability.id) || sharedCooldown) && !togglingOff) {
     ctx.error(p.id, 'That ability is not ready yet.');
-    return;
+    return false;
   }
   // shifting out of a form is free; shifting across forms bills the parked
   // mana (the live bar is rage/energy in a form) — see spendAbilityCost
@@ -298,18 +304,18 @@ export function castAbility(
           ? 'Not enough energy!'
           : 'Not enough mana!',
     );
-    return;
+    return false;
   }
   // casting is deliberate action — drop any active follow so you don't drift
   ctx.stopFollow(p);
   if (ability.requiresDodgeProc && ctx.time > p.overpowerUntil) {
     ctx.error(p.id, 'Your target must dodge first.');
-    return;
+    return false;
   }
   // combo points are character-bound: any built points finish on the current target
   if (ability.spendsCombo && p.comboPoints <= 0) {
     ctx.error(p.id, 'That ability requires combo points.');
-    return;
+    return false;
   }
   // druid forms gate their kit both ways: form abilities need the form, and
   // everything else (the caster kit) is locked while shapeshifted
@@ -320,19 +326,19 @@ export function castAbility(
     const need = ability.requiresForm === 'bear' ? 'form_bear' : 'form_cat';
     if (!form || form.kind !== need) {
       ctx.error(p.id, `You must be in ${ability.requiresForm === 'bear' ? 'Bruin' : 'Wolf'} Form.`);
-      return;
+      return false;
     }
   } else if (form && !isFormToggle(ability) && !ability.usableInForm) {
     ctx.error(p.id, "You can't do that while shapeshifted.");
-    return;
+    return false;
   }
   if (ability.requiresStealth && !p.auras.some((a) => a.kind === 'stealth')) {
     ctx.error(p.id, 'You must be stealthed.');
-    return;
+    return false;
   }
   if (ability.requiresOutOfCombat && p.inCombat) {
     ctx.error(p.id, "You can't do that while in combat.");
-    return;
+    return false;
   }
 
   let target: Entity | null = null;
@@ -343,52 +349,52 @@ export function castAbility(
     const d = dist2d(p.pos, target.pos);
     if (d > Math.max(ability.range, 5)) {
       ctx.error(p.id, 'Out of range.');
-      return;
+      return false;
     }
     if (ctx.lineOfSightBlocked(p, target, ability)) {
       ctx.error(p.id, 'Line of sight.');
-      return;
+      return false;
     }
   } else if (ability.requiresTarget && ability.targetType === 'any') {
     target = p.targetId !== null ? (ctx.entities.get(p.targetId) ?? null) : null;
     if (!target || target.dead || (!ctx.isHostileTo(p, target) && !ctx.isFriendlyTo(p, target))) {
       ctx.error(p.id, 'You have no target.', target?.dead ? 'target_dead' : undefined);
-      return;
+      return false;
     }
     const d = dist2d(p.pos, target.pos);
     const maxRange = ability.range > 0 ? ability.range : MELEE_RANGE;
     if (d > maxRange) {
       ctx.error(p.id, 'Out of range.');
-      return;
+      return false;
     }
     if (ctx.lineOfSightBlocked(p, target, ability)) {
       ctx.error(p.id, 'Line of sight.');
-      return;
+      return false;
     }
   } else if (ability.requiresTarget) {
     target = p.targetId !== null ? (ctx.entities.get(p.targetId) ?? null) : null;
     if (!target || target.dead || !ctx.isHostileTo(p, target)) {
       ctx.error(p.id, 'You have no target.', target?.dead ? 'target_dead' : undefined);
-      return;
+      return false;
     }
     const d = dist2d(p.pos, target.pos);
     const maxRange = ability.range > 0 ? ability.range : MELEE_RANGE;
     if (d > maxRange) {
       ctx.error(p.id, 'Out of range.');
-      return;
+      return false;
     }
     if (ability.minRange && d < ability.minRange) {
       ctx.error(p.id, 'Too close!');
-      return;
+      return false;
     }
     if (ctx.lineOfSightBlocked(p, target, ability)) {
       ctx.error(p.id, 'Line of sight.');
-      return;
+      return false;
     }
     const facingDiff = Math.abs(normAngle(angleTo(p.pos, target.pos) - p.facing));
     if (facingDiff > MELEE_ARC) {
       ctx.error(p.id, 'You must be facing your target.');
-      return;
+      return false;
     }
     // execute-style gate: only usable while the target is nearly dead
     if (
@@ -399,13 +405,13 @@ export function castAbility(
         p.id,
         `That ability requires the target below ${Math.round(ability.requiresTargetHpBelow * 100)}% health.`,
       );
-      return;
+      return false;
     }
     for (const eff of res.effects) {
       if (eff.type === 'weaponStrike' && eff.requiresBehind) {
         if (!p.weapon.dagger) {
           ctx.error(p.id, 'You must wield a dagger.');
-          return;
+          return false;
         }
         // Inside FACING_HOLD_DIST the target's facing is held steady (see
         // steadyAngleTo) and "behind" is undefined anyway, so overlapping the
@@ -414,7 +420,7 @@ export function castAbility(
         const behindDiff = Math.abs(normAngle(angleTo(target.pos, p.pos) - target.facing));
         if (behindDiff < Math.PI / 2 || dist2d(target.pos, p.pos) < FACING_HOLD_DIST) {
           ctx.error(p.id, 'You must be behind your target.');
-          return;
+          return false;
         }
       }
       if (eff.type === 'polymorph') {
@@ -429,11 +435,11 @@ export function castAbility(
             target.ccImmune
           ) {
             ctx.error(p.id, 'This creature cannot be polymorphed.');
-            return;
+            return false;
           }
         } else if (target.kind !== 'player') {
           ctx.error(p.id, 'This creature cannot be polymorphed.');
-          return;
+          return false;
         }
       }
       if (
@@ -441,17 +447,17 @@ export function castAbility(
         !p.auras.some((a) => a.kind === 'imbue' && a.value2 !== undefined)
       ) {
         ctx.error(p.id, 'You have no active Seal.');
-        return;
+        return false;
       }
       if (eff.type === 'taunt' && target.kind !== 'mob') {
         ctx.error(p.id, 'You cannot taunt that.');
-        return;
+        return false;
       }
       if (eff.type === 'tamePet') {
         const err = ctx.tameError(p, target);
         if (err) {
           ctx.error(p.id, err);
-          return;
+          return false;
         }
       }
     }
@@ -497,7 +503,7 @@ export function castAbility(
       delete p.queuedOnSwingFree;
     }
     if (!p.autoAttack && target) ctx.startAutoAttack(p.id);
-    return;
+    return true;
   }
   p.castTargetId = target?.id ?? null;
 
@@ -541,7 +547,7 @@ export function castAbility(
     // Gated on setProcs inside applySetProcs, so proc-less players draw no rng.
     if (p.kind === 'player' && ability.school !== 'physical')
       ctx.applySetProcs(p, target ?? null, 'spellCast');
-    return;
+    return true;
   }
 
   if (castTime > 0 && !togglingOff) {
@@ -556,7 +562,7 @@ export function castAbility(
     p.castRemaining = stretchedCastTime;
     p.gcdRemaining = Math.max(p.gcdRemaining, gcd);
     ctx.emit({ type: 'castStart', entityId: p.id, ability: ability.id, time: stretchedCastTime });
-    return;
+    return true;
   }
 
   if (!ability.offGcd) p.gcdRemaining = Math.max(p.gcdRemaining, gcd);
@@ -564,6 +570,7 @@ export function castAbility(
   // instant ground-targeted cast: its effects have consumed the aim point.
   p.castAim = null;
   p.castTargetId = null;
+  return true;
 }
 
 export function spendResource(p: Entity, cost: number): void {

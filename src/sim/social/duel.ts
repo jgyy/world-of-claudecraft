@@ -14,7 +14,7 @@ import type { DuelState } from '../sim';
 import type { SimContext } from '../sim_context';
 import { DT, dist2d } from '../types';
 
-const DUEL_COUNTDOWN = 3;
+export const DUEL_COUNTDOWN = 3;
 const DUEL_FORFEIT_DISTANCE = 60;
 
 export function duelRequest(ctx: SimContext, targetPid: number, pid?: number): void {
@@ -152,6 +152,23 @@ export function updateDuels(ctx: SimContext): void {
 export function endDuel(ctx: SimContext, duel: DuelState, winnerPid: number | null): void {
   ctx.duels.delete(duel.a);
   ctx.duels.delete(duel.b);
+  // A Card Duel was fought in a real arena slot: teleport both fighters back to
+  // where they queued and release the slot, so neither is stranded at arena coords
+  // (which read as "inside an instance" everywhere). Ordinary duels are in-place
+  // and carry no cardArena, so this is a no-op for them.
+  if (duel.cardArena) {
+    ctx.arenaBusySlots.delete(duel.cardArena.slot);
+    for (const pid of [duel.a, duel.b]) {
+      const de = ctx.entities.get(pid);
+      const ret = duel.cardArena.returns.get(pid);
+      if (!de || !ret) continue;
+      de.pos = ctx.groundPos(ret.x, ret.z);
+      de.prevPos = { ...de.pos };
+      de.facing = ret.facing;
+      de.prevFacing = ret.facing;
+      ctx.rebucket(de);
+    }
+  }
   const aMeta = ctx.players.get(duel.a);
   const bMeta = ctx.players.get(duel.b);
   const ea = ctx.entities.get(duel.a);
