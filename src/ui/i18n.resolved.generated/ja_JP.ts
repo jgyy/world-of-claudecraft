@@ -4367,6 +4367,22 @@ export const ja_JP: EnTranslations = {
     "balance": "英雄の証: {count}",
     "buyAria": "英雄の証{marks}個で{item}を購入"
   },
+  "cardDuel": {
+    "title": "カードデュエル",
+    "close": "閉じる",
+    "join": "キューに参加",
+    "joinAria": "カードデュエルのキューに参加する",
+    "leave": "キューを離れる",
+    "leaveAria": "カードデュエルのキューを離れる",
+    "queued": "対戦相手を待っています……",
+    "vsOpponent": "対 {name}",
+    "round": "ラウンドスコア：{mine} - {theirs}",
+    "deckCount": "山札：{count}",
+    "discardCount": "捨て札：{count}",
+    "playCardAria": "{value}のカードを出す",
+    "waitingOnOpponent": "相手のカードを待っています……",
+    "yourTurn": "カードを出してください"
+  },
   "delveUi": {
     "board": {
       "title": "デルヴボード",
@@ -8688,9 +8704,9 @@ export const ja_JP: EnTranslations = {
         "greeting": "金張りの金庫へようこそ。あなたの品々は我々の錠の内で安全に保管されます。"
       },
       "card_master": {
-        "name": "Card Master",
-        "title": "Dealer of Chance",
-        "greeting": "Care for a Card Duel? Best of three, winner takes the bragging rights."
+        "name": "カードマスター",
+        "title": "運命の胴元",
+        "greeting": "カードデュエルはいかが？三本勝負、勝者には自慢の種が手に入る。"
       },
       "bursar_petra_vell": {
         "name": "出納官ペトラ・ヴェル",

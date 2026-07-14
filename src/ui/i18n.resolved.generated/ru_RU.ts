@@ -4367,6 +4367,22 @@ export const ru_RU: EnTranslations = {
     "balance": "Героические знаки: {count}",
     "buyAria": "Купить {item} за {marks} героических знаков"
   },
+  "cardDuel": {
+    "title": "Карточная дуэль",
+    "close": "Закрыть",
+    "join": "Встать в очередь",
+    "joinAria": "Встать в очередь на карточную дуэль",
+    "leave": "Покинуть очередь",
+    "leaveAria": "Покинуть очередь на карточную дуэль",
+    "queued": "Ожидание соперника...",
+    "vsOpponent": "против {name}",
+    "round": "Счёт раундов: {mine} - {theirs}",
+    "deckCount": "Колода: {count}",
+    "discardCount": "Сброс: {count}",
+    "playCardAria": "Разыграть карту {value}",
+    "waitingOnOpponent": "Ожидание карты соперника...",
+    "yourTurn": "Разыграйте карту"
+  },
   "delveUi": {
     "board": {
       "title": "Доска Вылазок",
@@ -8688,9 +8704,9 @@ export const ru_RU: EnTranslations = {
         "greeting": "Добро пожаловать в Золочёный сундук. Ваше добро надёжно хранится за нашими замками."
       },
       "card_master": {
-        "name": "Card Master",
-        "title": "Dealer of Chance",
-        "greeting": "Care for a Card Duel? Best of three, winner takes the bragging rights."
+        "name": "Карточный мастер",
+        "title": "Дилер удачи",
+        "greeting": "Не сыграть ли партию в карточную дуэль? До двух побед, победителю достанется слава."
       },
       "bursar_petra_vell": {
         "name": "Казначей Петра Велль",

@@ -4367,6 +4367,22 @@ export const tr_TR: EnTranslations = {
     "balance": "Kahramanca Nişanlar: {count}",
     "buyAria": "{item} ürününü {marks} Kahramanca Nişan karşılığında satın al"
   },
+  "cardDuel": {
+    "title": "Card Duel",
+    "close": "Close",
+    "join": "Join Queue",
+    "joinAria": "Join the Card Duel queue",
+    "leave": "Leave Queue",
+    "leaveAria": "Leave the Card Duel queue",
+    "queued": "Waiting for an opponent...",
+    "vsOpponent": "vs {name}",
+    "round": "Round score: {mine} - {theirs}",
+    "deckCount": "Deck: {count}",
+    "discardCount": "Discard: {count}",
+    "playCardAria": "Play the {value} card",
+    "waitingOnOpponent": "Waiting on your opponent's card...",
+    "yourTurn": "Play a card"
+  },
   "delveUi": {
     "board": {
       "title": "Mağara Panosu",

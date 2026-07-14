@@ -4367,6 +4367,22 @@ export const ko_KR: EnTranslations = {
     "balance": "영웅의 징표: {count}",
     "buyAria": "영웅의 징표 {marks}개로 {item} 구매"
   },
+  "cardDuel": {
+    "title": "카드 대결",
+    "close": "닫기",
+    "join": "대기열 참가",
+    "joinAria": "카드 대결 대기열에 참가",
+    "leave": "대기열 나가기",
+    "leaveAria": "카드 대결 대기열에서 나가기",
+    "queued": "상대를 기다리는 중...",
+    "vsOpponent": "{name}와(과) 대결",
+    "round": "라운드 점수: {mine} - {theirs}",
+    "deckCount": "덱: {count}",
+    "discardCount": "버린 카드: {count}",
+    "playCardAria": "{value} 카드 내기",
+    "waitingOnOpponent": "상대의 카드를 기다리는 중...",
+    "yourTurn": "카드를 내세요"
+  },
   "delveUi": {
     "board": {
       "title": "탐굴 게시판",
@@ -8688,9 +8704,9 @@ export const ko_KR: EnTranslations = {
         "greeting": "도금 금고에 오신 것을 환영합니다. 당신의 물건은 우리의 자물쇠 뒤에서 안전하게 보관됩니다."
       },
       "card_master": {
-        "name": "Card Master",
-        "title": "Dealer of Chance",
-        "greeting": "Care for a Card Duel? Best of three, winner takes the bragging rights."
+        "name": "카드 마스터",
+        "title": "운명의 딜러",
+        "greeting": "카드 대결 한 판 어떻소? 삼판양승, 승자에게는 자랑거리가 생기지."
       },
       "bursar_petra_vell": {
         "name": "출납관 페트라 벨",
