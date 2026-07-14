@@ -120,7 +120,9 @@ const simFiles = walk(simRoot);
 // import), so it is registered here even though it lives in src/game. Paths are
 // repo-relative for the failure messages.
 const UI_PURE_CORES = [
+  'src/ui/camera_prompt_core.ts',
   'src/ui/chat_ignore_core.ts',
+  'src/ui/log_event_route.ts',
   'src/ui/unit_portrait.ts',
   'src/ui/xp_bar.ts',
   'src/ui/absorb_bar.ts',
@@ -194,6 +196,7 @@ const UI_PURE_CORES = [
   'src/ui/desktop_update_view.ts',
   'src/ui/corpse_harvest_view.ts',
   'src/ui/town_focus_view.ts',
+  'src/ui/pet_action_icons.ts',
   'src/game/ui_effects_profile.ts',
   'src/game/ui_tier_knobs.ts',
 ].map((rel) => join(repoRoot, rel));
@@ -243,7 +246,9 @@ const BARE_NAMED = [
   'src/ui/focus_order.ts',
   'src/ui/roving_index.ts',
   'src/ui/live_region_politeness.ts',
+  'src/ui/log_event_route.ts',
   'src/ui/mobile_hud_layout.ts',
+  'src/ui/pet_action_icons.ts',
   'src/game/ui_effects_profile.ts',
   'src/game/ui_tier_knobs.ts',
   'src/render/cast_bar.ts',
