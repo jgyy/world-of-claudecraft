@@ -313,6 +313,18 @@ const baseEnTable = {
   'dfinder.proposalReady': 'A dungeon group is ready. Confirm your slot now.',
   'dfinder.groupChanged': 'Your group changed and left the Dungeon Finder queue.',
   'dfinder.listingFull': 'Your group listing is now full.',
+  // Card Duel minigame (Card Master NPC, src/sim/social/card_duel.ts).
+  'log.cardDuelQueued': 'You queue for a Card Duel.',
+  'log.cardDuelLeftQueue': 'You leave the Card Duel queue.',
+  'log.cardDuelBegins': 'Your Card Duel against {name} begins!',
+  'log.cardDuelRound': 'Card Duel round: you played {mine}, opponent played {theirs}.',
+  'log.cardDuelOpponentLeft': 'Your opponent left the Card Duel.',
+  'log.cardDuelWin': 'You win the Card Duel against {name}!',
+  'log.cardDuelLoss': 'You lose the Card Duel against {name}.',
+  'error.cardDuelNotAtMaster': 'You must be at the Card Master to queue for a Card Duel.',
+  'error.cardDuelNotInMatch': 'You are not in a Card Duel.',
+  'error.cardDuelAlreadyPlayed': 'You already played a card this round.',
+  'error.cardDuelNotHeld': "You don't hold that card.",
 } as const;
 
 const petEnTable = {
@@ -6566,6 +6578,36 @@ const RULES: Rule[] = [
     build: (m) =>
       tSim('log.bossUnleashes', { name: locMob(m[1]), mechanic: locBossMechanic(m[2]) }),
   },
+  // Card Duel minigame (Card Master NPC, src/sim/social/card_duel.ts).
+  { re: /^You queue for a Card Duel\.$/, build: () => tSim('log.cardDuelQueued') },
+  { re: /^You leave the Card Duel queue\.$/, build: () => tSim('log.cardDuelLeftQueue') },
+  {
+    re: /^Your Card Duel against (.+) begins!$/,
+    build: (m) => tSim('log.cardDuelBegins', { name: m[1] }),
+  },
+  {
+    re: /^Card Duel round: you played (.+), opponent played (.+)\.$/,
+    build: (m) => tSim('log.cardDuelRound', { mine: m[1], theirs: m[2] }),
+  },
+  { re: /^Your opponent left the Card Duel\.$/, build: () => tSim('log.cardDuelOpponentLeft') },
+  {
+    re: /^You win the Card Duel against (.+)!$/,
+    build: (m) => tSim('log.cardDuelWin', { name: m[1] }),
+  },
+  {
+    re: /^You lose the Card Duel against (.+)\.$/,
+    build: (m) => tSim('log.cardDuelLoss', { name: m[1] }),
+  },
+  {
+    re: /^You must be at the Card Master to queue for a Card Duel\.$/,
+    build: () => tSim('error.cardDuelNotAtMaster'),
+  },
+  { re: /^You are not in a Card Duel\.$/, build: () => tSim('error.cardDuelNotInMatch') },
+  {
+    re: /^You already played a card this round\.$/,
+    build: () => tSim('error.cardDuelAlreadyPlayed'),
+  },
+  { re: /^You don't hold that card\.$/, build: () => tSim('error.cardDuelNotHeld') },
 ];
 
 // Returns the localized form of a sim-emitted message, or null if not one of ours.

@@ -10,84 +10,104 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "es_ES": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "fr_FR": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "fr_CA": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "en_CA": [],
   "it_IT": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "de_DE": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
+  "zh_CN": [
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
+  ],
+  "zh_TW": [
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
+  ],
+  "ko_KR": [
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
+  ],
+  "ja_JP": [
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
+  ],
   "pt_BR": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
-  "ru_RU": [],
+  "ru_RU": [
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
+  ],
   "cs_CZ": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "nl_NL": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "pl_PL": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "id_ID": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "tr_TR": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "sv_SE": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "vi_VN": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ],
   "da_DK": [
-    "gpuNotice.bodyDesktop",
-    "gpuNotice.bodyWeb",
-    "gpuNotice.dismiss"
+    "entities.npcs.card_master.greeting",
+    "entities.npcs.card_master.name",
+    "entities.npcs.card_master.title"
   ]
 };

@@ -8687,6 +8687,11 @@ export const ru_RU: EnTranslations = {
         "title": "Золочёный сундук",
         "greeting": "Добро пожаловать в Золочёный сундук. Ваше добро надёжно хранится за нашими замками."
       },
+      "card_master": {
+        "name": "Card Master",
+        "title": "Dealer of Chance",
+        "greeting": "Care for a Card Duel? Best of three, winner takes the bragging rights."
+      },
       "bursar_petra_vell": {
         "name": "Казначей Петра Велль",
         "title": "Золочёный сундук",
