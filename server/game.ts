@@ -300,6 +300,7 @@ export const SIM_LAP_PHASES = [
   'ent.misc',
   'engaged',
   'duels',
+  'cardDuel',
   'arena',
   'trades',
   'lootRolls',
@@ -4340,7 +4341,11 @@ export class GameServer {
         sim.leaveCardDuelQueue(pid);
         break;
       case 'play_card':
-        if (typeof msg.value === 'number') sim.playCardInDuel(msg.value, pid);
+        if (typeof msg.value === 'number' && Number.isInteger(msg.value))
+          sim.playCardInDuel(msg.value, pid);
+        break;
+      case 'card_forfeit':
+        sim.forfeitCardDuel(pid);
         break;
 
       // The Vale Cup (boarball queue at the Sowfield, docs/prd/vale-cup.md).

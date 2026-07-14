@@ -2276,6 +2276,11 @@ export class Sim {
     // arena: leaving the queue is free; disconnecting mid-bout forfeits it
     this.arenaDequeue(pid);
     this.arenaResolveDesertion(pid);
+    // Card Duel: leaving the queue is free; a live match is forfeited to the
+    // opponent (mirrors the disconnect/jail paths in server/game.ts, and keeps
+    // the offline Sim / headless env from leaking cardDuels/cardDuelQueue
+    // entries for a departed pid).
+    this.leaveCardMinigameEntirely(pid);
     // Vale Cup: leaving the queue is free; deserting a counted match benches
     // the fighter (the team plays short), takes the loss, and arms the
     // Groundskeeper's lockout. Idempotent: the server already resolved it
@@ -3123,9 +3128,6 @@ export class Sim {
       get cardDuelQueue() {
         return sim.cardDuelQueue;
       },
-      set cardDuelQueue(v) {
-        sim.cardDuelQueue = v;
-      },
       get cardDuels() {
         return sim.cardDuels;
       },
@@ -3945,6 +3947,8 @@ export class Sim {
     this.updateDuels();
     this.updateCardDuelQueue();
     lap?.('duels');
+    this.updateCardDuelDeadlines();
+    lap?.('cardDuel');
     this.updateArena();
     lap?.('arena');
     this.updateTradesAndInvites();
@@ -6958,6 +6962,10 @@ export class Sim {
     cardDuelMod.updateCardDuelQueue(this.ctx);
   }
 
+  private updateCardDuelDeadlines(): void {
+    cardDuelMod.updateCardDuelDeadlines(this.ctx);
+  }
+
   joinCardDuelQueue(pid?: number): void {
     cardDuelMod.joinCardMinigameQueue(this.ctx, pid);
   }
@@ -6978,6 +6986,13 @@ export class Sim {
     cardDuelMod.playCardInDuel(this.ctx, cardValue, pid);
   }
 
+  // Player-issuable forfeit of a LIVE match (distinct from leaveCardDuelQueue,
+  // which only leaves the matchmaking queue): lets a player stuck against an
+  // idle opponent get out immediately instead of waiting for the AFK deadline.
+  forfeitCardDuel(pid?: number): void {
+    cardDuelMod.forfeitCardDuelMatch(this.ctx, pid);
+  }
+
   // IWorldCardMinigame read surface: the local player's queue/match snapshot.
   get cardMinigameInfo(): cardDuelMod.CardMinigameInfo {
     return this.cardMinigameInfoFor(this.primaryId);
@@ -6985,28 +7000,11 @@ export class Sim {
 
   // Server-side pid-parameterized reader (like arenaInfoFor), for wiring an
   // arbitrary session's snapshot rather than only the local/primary player.
+  // View assembly itself lives in card_duel.ts (buildCardMinigameInfo): it
+  // needs nothing from Sim's private state, matching the six thin delegates
+  // directly above.
   cardMinigameInfoFor(pid: number): cardDuelMod.CardMinigameInfo {
-    const match = this.cardDuelMatchFor(pid);
-    if (!match) {
-      return { queued: this.isQueuedForCardMinigame(pid), match: null };
-    }
-    const isA = pid === match.a;
-    const oppPid = isA ? match.b : match.a;
-    const oppMeta = this.players.get(oppPid);
-    const myHand = isA ? match.handA : match.handB;
-    const played = isA ? match.playedA : match.playedB;
-    return {
-      queued: false,
-      match: {
-        opponent: { pid: oppPid, name: oppMeta?.name ?? '' },
-        hand: myHand.hand.slice(),
-        deckCount: myHand.deck.length,
-        discardCount: myHand.discard.length,
-        myRounds: isA ? match.roundsA : match.roundsB,
-        opponentRounds: isA ? match.roundsB : match.roundsA,
-        waitingOnOpponent: played !== null,
-      },
-    };
+    return cardDuelMod.buildCardMinigameInfo(this.ctx, pid);
   }
 
   // Called from the leave/disconnect path (mirrors duel forfeit-on-leave).

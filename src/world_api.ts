@@ -329,6 +329,7 @@ export const COMMAND_NAMES = [
   'card_queue_join',
   'card_queue_leave',
   'play_card',
+  'card_forfeit',
   'prestige',
   'applyTalents',
   'respec',
@@ -558,6 +559,7 @@ export const COMMAND_FACETS = {
   card_queue_join: 'IWorldCardMinigame',
   card_queue_leave: 'IWorldCardMinigame',
   play_card: 'IWorldCardMinigame',
+  card_forfeit: 'IWorldCardMinigame',
   // IWorldSocialGraph: friends/blocks/guild commands (online only; resolved
   // server-side by character name, handled by the #4 SocialService). socialInfo
   // arrives via the social/socialpos frames (no command); searchCharacters is a REST

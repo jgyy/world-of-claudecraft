@@ -1170,7 +1170,7 @@ export class ClientWorld implements IWorld {
   lifetimeHonor = 0;
   // --- IWorldCardMinigame: Card Duel queue/match state, mirrored from the
   // snapshot self (`s.cardDuel`, delta-omitted). ---
-  cardMinigameInfo: CardMinigameInfo = { queued: false, match: null };
+  cardMinigameInfo: CardMinigameInfo = { queued: false, available: true, match: null };
   // --- IWorldValeCup: Vale Cup queue/match state, mirrored from the snapshot
   // self (`s.vcup`, delta-omitted: a missing key keeps the prior mirror, an
   // explicit null clears it, same as `s.arena`). ---
@@ -2747,6 +2747,9 @@ export class ClientWorld implements IWorld {
   }
   playCardInDuel(cardValue: number): void {
     this.cmd({ cmd: 'play_card', value: cardValue });
+  }
+  forfeitCardDuel(): void {
+    this.cmd({ cmd: 'card_forfeit' });
   }
   // --- IWorldValeCup: boarball queue sends (cupInfo is a snapshot read; the
   // sport-kit swap rides the heavy `sport` self field decoded in applySnapshot). ---

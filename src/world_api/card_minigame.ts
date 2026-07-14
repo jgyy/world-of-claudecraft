@@ -11,4 +11,8 @@ export interface IWorldCardMinigame {
   joinCardDuelQueue(): void;
   leaveCardDuelQueue(): void;
   playCardInDuel(cardValue: number): void;
+  // Forfeits a LIVE match (distinct from leaveCardDuelQueue, which only
+  // leaves the matchmaking queue): the player-issuable escape from a match
+  // whose opponent has gone idle.
+  forfeitCardDuel(): void;
 }

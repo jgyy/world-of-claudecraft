@@ -4,24 +4,31 @@ import { Rng } from '../src/sim/rng';
 import type { PlayerMeta } from '../src/sim/sim';
 import type { SimContext } from '../src/sim/sim_context';
 import {
+  CARD_DUEL_ROUND_DEADLINE_S,
   cardDuelMatchFor,
+  forfeitCardDuelMatch,
   joinCardMinigameQueue,
   leaveCardMinigameEntirely,
   leaveCardMinigameQueue,
   playCardInDuel,
+  updateCardDuelDeadlines,
   updateCardDuelQueue,
 } from '../src/sim/social/card_duel';
 import type { Entity } from '../src/sim/types';
 
-function makeCtx(overrides: Partial<{ dead: Set<number> }> = {}) {
+function makeCtx(
+  overrides: Partial<{ dead: Set<number>; extraPlayers: number[]; time: number }> = {},
+) {
   const dead = overrides.dead ?? new Set<number>();
   const players = new Map<number, PlayerMeta>();
   const entities = new Map<number, Entity>();
   const bumpDeedStat = vi.fn();
   const error = vi.fn();
   const emit = vi.fn();
+  const ctxState = { time: overrides.time ?? 0 };
 
-  for (const pid of [1, 2, 3]) {
+  const pids = overrides.extraPlayers ? [1, 2, 3, ...overrides.extraPlayers] : [1, 2, 3];
+  for (const pid of pids) {
     players.set(pid, { entityId: pid, name: `Player${pid}` } as unknown as PlayerMeta);
     entities.set(pid, { id: pid, pos: { x: 0, y: 0, z: 0 }, dead: dead.has(pid) } as Entity);
   }
@@ -42,6 +49,12 @@ function makeCtx(overrides: Partial<{ dead: Set<number> }> = {}) {
     bumpDeedStat,
     error,
     emit,
+    get time() {
+      return ctxState.time;
+    },
+    set time(v: number) {
+      ctxState.time = v;
+    },
     resolve: (pid?: number) => {
       if (pid === undefined) return null;
       const meta = players.get(pid);
@@ -49,7 +62,7 @@ function makeCtx(overrides: Partial<{ dead: Set<number> }> = {}) {
       if (!meta || !e) return null;
       return { meta, e };
     },
-  } as unknown as SimContext;
+  } as unknown as SimContext & { time: number };
   return { ctx, players, entities, bumpDeedStat, error, emit };
 }
 
@@ -68,6 +81,41 @@ describe('card_duel', () => {
     expect(ctx.cardDuelQueue).toEqual([]);
   });
 
+  it('refuses to queue when no other player is present (offline single-player case)', () => {
+    const players = new Map<number, PlayerMeta>();
+    const entities = new Map<number, Entity>();
+    const error = vi.fn();
+    players.set(1, { entityId: 1, name: 'Solo' } as unknown as PlayerMeta);
+    entities.set(1, { id: 1, pos: { x: 0, y: 0, z: 0 }, dead: false } as Entity);
+    entities.set(1000, {
+      id: 1000,
+      kind: 'npc',
+      templateId: CARD_MASTER_NPC_ID,
+      pos: { x: 0, y: 0, z: 0 },
+    } as unknown as Entity);
+    const ctx = {
+      rng: new Rng(7),
+      players,
+      entities,
+      cardDuelQueue: [] as number[],
+      cardDuels: new Map(),
+      bumpDeedStat: vi.fn(),
+      error,
+      emit: vi.fn(),
+      time: 0,
+      resolve: (pid?: number) => {
+        if (pid === undefined) return null;
+        const meta = players.get(pid);
+        const e = entities.get(pid);
+        if (!meta || !e) return null;
+        return { meta, e };
+      },
+    } as unknown as SimContext;
+    joinCardMinigameQueue(ctx, 1);
+    expect(error).toHaveBeenCalledWith(1, 'Card Duel requires another player online.');
+    expect(ctx.cardDuelQueue).toEqual([]);
+  });
+
   it('pairs two queued players into a live match on the next update', () => {
     const { ctx } = makeCtx();
     joinCardMinigameQueue(ctx, 1);
@@ -77,6 +125,19 @@ describe('card_duel', () => {
     const match = cardDuelMatchFor(ctx, 1);
     expect(match).not.toBeNull();
     expect(cardDuelMatchFor(ctx, 2)).toBe(match);
+  });
+
+  it('a stale (disconnected) pairing does not eject the surviving queued player', () => {
+    const { ctx, players } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    // pid 1 disconnects between queueing and the next pairing sweep.
+    players.delete(1);
+    updateCardDuelQueue(ctx);
+    // pid 1's stale entry is swept, but pid 2 is neither dropped nor
+    // silently ejected: it stays queued for the next pairing.
+    expect(ctx.cardDuelQueue).toEqual([2]);
+    expect(cardDuelMatchFor(ctx, 2)).toBeNull();
   });
 
   it('resolves a full match to a winner and bumps cardDuelsWon exactly once', () => {
@@ -105,6 +166,27 @@ describe('card_duel', () => {
     expect(bumpDeedStat.mock.calls[0][2]).toBe(1);
   });
 
+  it('a tie round (a push) scores neither side and does not end the match', () => {
+    const { ctx, bumpDeedStat } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    // Force both hands to hold a shared value (5) regardless of the actual
+    // deal, so the round resolves as a deterministic push (a === b) without
+    // depending on the fixed rng's exact draw.
+    if (!match.handA.hand.includes(5)) match.handA.hand[0] = 5;
+    if (!match.handB.hand.includes(5)) match.handB.hand[0] = 5;
+    playCardInDuel(ctx, 5, 1);
+    playCardInDuel(ctx, 5, 2);
+    const after = cardDuelMatchFor(ctx, 1);
+    expect(after).not.toBeNull();
+    expect(after?.roundsA).toBe(0);
+    expect(after?.roundsB).toBe(0);
+    expect(bumpDeedStat).not.toHaveBeenCalled();
+  });
+
   it('rejects playing a card not in hand', () => {
     const { ctx, error } = makeCtx();
     joinCardMinigameQueue(ctx, 1);
@@ -117,6 +199,27 @@ describe('card_duel', () => {
     expect(error).toHaveBeenCalledWith(1, "You don't hold that card.");
   });
 
+  it('rejects playing a second card in the same round before the opponent has played', () => {
+    const { ctx, error } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    const [first, second] = match.handA.hand;
+    playCardInDuel(ctx, first, 1);
+    playCardInDuel(ctx, second, 1);
+    expect(error).toHaveBeenCalledWith(1, 'You already played a card this round.');
+    // The second attempt did not consume the card: hand still holds it.
+    expect(cardDuelMatchFor(ctx, 1)?.handA.hand).toContain(second);
+  });
+
+  it('rejects playing a card when not in any match', () => {
+    const { ctx, error } = makeCtx();
+    playCardInDuel(ctx, 5, 3);
+    expect(error).toHaveBeenCalledWith(3, 'You are not in a Card Duel.');
+  });
+
   it('leaving the queue removes the pid without touching a live match', () => {
     const { ctx } = makeCtx();
     joinCardMinigameQueue(ctx, 3);
@@ -124,8 +227,8 @@ describe('card_duel', () => {
     expect(ctx.cardDuelQueue).toEqual([]);
   });
 
-  it('leaveCardMinigameEntirely forfeits a live match and notifies the opponent', () => {
-    const { ctx, emit } = makeCtx();
+  it('leaveCardMinigameEntirely forfeits a live match and credits the opponent a win', () => {
+    const { ctx, emit, bumpDeedStat, players } = makeCtx();
     joinCardMinigameQueue(ctx, 1);
     joinCardMinigameQueue(ctx, 2);
     updateCardDuelQueue(ctx);
@@ -134,7 +237,65 @@ describe('card_duel', () => {
     expect(cardDuelMatchFor(ctx, 1)).toBeNull();
     expect(cardDuelMatchFor(ctx, 2)).toBeNull();
     expect(emit).toHaveBeenCalledWith(
-      expect.objectContaining({ text: 'Your opponent left the Card Duel.', pid: 2 }),
+      expect.objectContaining({ text: 'Your opponent forfeited the Card Duel. You win!', pid: 2 }),
     );
+    expect(bumpDeedStat).toHaveBeenCalledTimes(1);
+    expect(bumpDeedStat.mock.calls[0][0]).toBe(players.get(2));
+    expect(bumpDeedStat.mock.calls[0][1]).toBe('cardDuelsWon');
+  });
+
+  it('forfeitCardDuelMatch lets a player in a live match forfeit on demand and re-queue afterward', () => {
+    const { ctx, error } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    expect(cardDuelMatchFor(ctx, 1)).not.toBeNull();
+    forfeitCardDuelMatch(ctx, 1);
+    expect(cardDuelMatchFor(ctx, 1)).toBeNull();
+    expect(cardDuelMatchFor(ctx, 2)).toBeNull();
+    // The player is now free to re-queue: before the fix this errored
+    // 'already_in_duel' forever, since nothing ever cleared ctx.cardDuels.
+    joinCardMinigameQueue(ctx, 1);
+    expect(error).not.toHaveBeenCalledWith(1, 'You are already in a Card Duel.');
+    expect(ctx.cardDuelQueue).toContain(1);
+  });
+
+  it('forfeitCardDuelMatch errors when not in a live match', () => {
+    const { ctx, error } = makeCtx();
+    forfeitCardDuelMatch(ctx, 3);
+    expect(error).toHaveBeenCalledWith(3, 'You are not in a Card Duel.');
+  });
+
+  it('an expired round deadline forfeits the side that never played the round', () => {
+    const { ctx, emit, bumpDeedStat } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    // Side A plays; side B goes idle (an unresponsive opponent).
+    playCardInDuel(ctx, match.handA.hand[0], 1);
+    (ctx as unknown as { time: number }).time = match.roundDeadline + 1;
+    updateCardDuelDeadlines(ctx);
+    expect(cardDuelMatchFor(ctx, 1)).toBeNull();
+    expect(cardDuelMatchFor(ctx, 2)).toBeNull();
+    expect(bumpDeedStat).toHaveBeenCalledTimes(1);
+    expect(bumpDeedStat.mock.calls[0][1]).toBe('cardDuelsWon');
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({ text: 'You forfeit the Card Duel.', pid: 2 }),
+    );
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({ text: 'Your opponent forfeited the Card Duel. You win!', pid: 1 }),
+    );
+  });
+
+  it('does not forfeit a match before its round deadline has passed', () => {
+    const { ctx } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    (ctx as unknown as { time: number }).time = CARD_DUEL_ROUND_DEADLINE_S - 1;
+    updateCardDuelDeadlines(ctx);
+    expect(cardDuelMatchFor(ctx, 1)).not.toBeNull();
   });
 });

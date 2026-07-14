@@ -120,9 +120,10 @@ export interface SimContextPrimitives {
   // dealDamage (PvP hostility), so it stays Sim-owned (A2).
   readonly duels: Map<number, DuelState>;
   // Card Duel minigame (src/sim/social/card_duel.ts): its own FIFO queue
-  // (read-write: reassigned by shift/push like the arena queues) and live-match
-  // map, independent of the HP-based duels above.
-  cardDuelQueue: number[];
+  // (mutated in place via shift/splice/push, like cardDuels below, so this is
+  // a readonly getter, not reassigned) and live-match map, independent of the
+  // HP-based duels above.
+  readonly cardDuelQueue: number[];
   readonly cardDuels: Map<number, CardDuelMatch>;
   // `world` stays optional (custom play-test map, else undefined; perfLap is the
   // temporary host-owned tick profiler probe); the rest defaulted.
@@ -855,9 +856,6 @@ export function createSimContext(host: SimContextHost): SimContext {
     },
     get cardDuelQueue() {
       return host.cardDuelQueue;
-    },
-    set cardDuelQueue(v) {
-      host.cardDuelQueue = v;
     },
     get cardDuels() {
       return host.cardDuels;

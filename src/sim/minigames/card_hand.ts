@@ -17,7 +17,7 @@ export interface CardHandState {
 
 function buildDeck(): number[] {
   const deck: number[] = [];
-  for (let v = 1; v <= 10; v++) {
+  for (let v = 1; v <= DECK_SIZE / 2; v++) {
     deck.push(v, v);
   }
   return deck;

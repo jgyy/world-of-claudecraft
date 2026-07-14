@@ -29,6 +29,13 @@ import {
 // Best-of-3 rounds; first to 2 round wins takes the match.
 export const CARD_DUEL_ROUNDS_TO_WIN = 2;
 
+// A player who never plays a card (opponent gone idle / linkdead-but-not-yet-
+// dropped) forfeits the current round, and the match, once this much sim time
+// has passed since the round started. Keeps a live match from deadlocking the
+// other side forever (see leaveCardMinigameEntirely / forfeitCardDuelMatch for
+// the player-issued escape).
+export const CARD_DUEL_ROUND_DEADLINE_S = 90;
+
 export interface CardDuelMatch {
   a: number;
   b: number;
@@ -38,6 +45,7 @@ export interface CardDuelMatch {
   playedB: number | null;
   roundsA: number;
   roundsB: number;
+  roundDeadline: number; // ctx.time this round's AFK deadline expires
 }
 
 // The IWorldCardMinigame read-surface shape (src/world_api/card_minigame.ts
@@ -45,6 +53,11 @@ export interface CardDuelMatch {
 // direction: world_api reads sim types, never the reverse).
 export interface CardMinigameInfo {
   queued: boolean;
+  // false when there is no other player in the world to ever pair against
+  // (the offline Sim's single-player case): the Join affordance should be
+  // hidden/disabled rather than let the player queue forever with no
+  // feedback (finding: offline queue never resolves).
+  available: boolean;
   match: {
     opponent: { pid: number; name: string };
     hand: number[];
@@ -64,6 +77,12 @@ export function cardDuelMatchFor(ctx: SimContext, pid: number): CardDuelMatch | 
   return ctx.cardDuels.get(pid) ?? null;
 }
 
+// At least one other player must be present to ever pair off the queue
+// (the offline Sim has exactly one human player, so the FIFO never resolves).
+export function cardMinigameAvailable(ctx: SimContext): boolean {
+  return ctx.players.size > 1;
+}
+
 export function joinCardMinigameQueue(ctx: SimContext, pid?: number): void {
   const r = ctx.resolve(pid);
   if (!r) return;
@@ -75,18 +94,24 @@ export function joinCardMinigameQueue(ctx: SimContext, pid?: number): void {
     ctx.error(r.meta.entityId, 'You must be at the Card Master to queue for a Card Duel.');
     return;
   }
+  if (!cardMinigameAvailable(ctx)) {
+    ctx.error(r.meta.entityId, 'Card Duel requires another player online.');
+    return;
+  }
   const result = joinCardDuelQueue(
     ctx.cardDuelQueue,
     r.meta.entityId,
     inCardDuel(ctx, r.meta.entityId),
   );
   if (!result.ok) {
-    ctx.error(
-      r.meta.entityId,
-      result.reason === 'already_in_duel'
-        ? 'You are already in a Card Duel.'
-        : 'You are already queued for a Card Duel.',
-    );
+    // Hoisted to two literal ctx.error calls (rather than one ternary-fed
+    // call) so the localization_fixes S3 guard's literal-argument scraper
+    // actually sees both strings.
+    if (result.reason === 'already_in_duel') {
+      ctx.error(r.meta.entityId, 'You are already in a Card Duel.');
+    } else {
+      ctx.error(r.meta.entityId, 'You are already queued for a Card Duel.');
+    }
     return;
   }
   ctx.emit({
@@ -124,6 +149,7 @@ function startCardDuelMatch(ctx: SimContext, a: number, b: number): void {
     playedB: null,
     roundsA: 0,
     roundsB: 0,
+    roundDeadline: ctx.time + CARD_DUEL_ROUND_DEADLINE_S,
   };
   ctx.cardDuels.set(a, match);
   ctx.cardDuels.set(b, match);
@@ -145,15 +171,43 @@ function startCardDuelMatch(ctx: SimContext, a: number, b: number): void {
 // Called every tick from Sim (like updateDuels/updateArena): pairs waiting
 // players off the queue and starts a match for each pair.
 export function updateCardDuelQueue(ctx: SimContext): void {
+  // Sweep stale entries (disconnected between queueing and pairing) BEFORE
+  // pairing, so tryPairCardDuel's shift() never pulls a dead pid and silently
+  // ejects the still-connected other side of a pair (finding: stale pairing
+  // ejects the survivor).
+  for (const pid of [...ctx.cardDuelQueue]) {
+    if (!ctx.players.has(pid)) leaveCardDuelQueue(ctx.cardDuelQueue, pid);
+  }
   let pair = tryPairCardDuel(ctx.cardDuelQueue);
   while (pair) {
     const [a, b] = pair;
-    // A player can leave/disconnect between queueing and pairing; drop pairs
-    // where either side no longer exists.
+    // Defense in depth: re-check liveness even though the presweep above
+    // should already guarantee it.
     if (ctx.players.has(a) && ctx.players.has(b)) {
       startCardDuelMatch(ctx, a, b);
     }
     pair = tryPairCardDuel(ctx.cardDuelQueue);
+  }
+}
+
+// Sweeps every live match for an expired per-round AFK deadline and forfeits
+// the side that never played (or, if neither played, side A deterministically),
+// so an idle opponent cannot deadlock the other side forever. Called every
+// tick from Sim, under its own profiler lap marker (distinct from the queue
+// pairing phase, since it walks every live match).
+export function updateCardDuelDeadlines(ctx: SimContext): void {
+  const seen = new Set<number>();
+  for (const match of ctx.cardDuels.values()) {
+    if (seen.has(match.a)) continue;
+    seen.add(match.a);
+    seen.add(match.b);
+    if (ctx.time < match.roundDeadline) continue;
+    const aPlayed = match.playedA !== null;
+    const bPlayed = match.playedB !== null;
+    // Whichever side has not played this round forfeits. If neither has
+    // played (both idle), forfeit side A deterministically.
+    const forfeiterPid = bPlayed && !aPlayed ? match.a : match.b;
+    forfeitMatch(ctx, match, forfeiterPid);
   }
 }
 
@@ -196,6 +250,7 @@ function resolveRound(ctx: SimContext, match: CardDuelMatch): void {
   match.playedB = null;
   drawOne(ctx.rng, match.handA);
   drawOne(ctx.rng, match.handB);
+  match.roundDeadline = ctx.time + CARD_DUEL_ROUND_DEADLINE_S;
   for (const pid of [match.a, match.b]) {
     const mine = pid === match.a ? a : b;
     const theirs = pid === match.a ? b : a;
@@ -233,24 +288,93 @@ function endCardDuelMatch(ctx: SimContext, match: CardDuelMatch, winnerPid: numb
   }
 }
 
+// Shared forfeit resolution for both the player-issued forfeit action and the
+// AFK-deadline sweep: the forfeiting side loses, the other side wins and is
+// credited the deed progress, matching how PvP disconnects/desertion are
+// treated elsewhere (arena/Vale Cup desertion). A forfeit used to credit
+// nobody, letting a player one round from losing deny the opponent the deed
+// by disconnecting; that is now fixed here.
+function forfeitMatch(ctx: SimContext, match: CardDuelMatch, forfeiterPid: number): void {
+  const winnerPid = forfeiterPid === match.a ? match.b : match.a;
+  ctx.cardDuels.delete(match.a);
+  ctx.cardDuels.delete(match.b);
+  const winnerMeta = ctx.players.get(winnerPid);
+  if (winnerMeta) ctx.bumpDeedStat(winnerMeta, 'cardDuelsWon', 1);
+  if (ctx.players.has(forfeiterPid)) {
+    ctx.emit({
+      type: 'log',
+      text: 'You forfeit the Card Duel.',
+      color: '#fa6',
+      pid: forfeiterPid,
+    });
+  }
+  if (winnerMeta) {
+    ctx.emit({
+      type: 'log',
+      text: 'Your opponent forfeited the Card Duel. You win!',
+      color: '#fa6',
+      pid: winnerPid,
+    });
+  }
+}
+
+// Player-issuable forfeit: lets someone stuck in a live match against an idle
+// opponent get out immediately, instead of waiting for the AFK deadline.
+// Wired to the window's Leave/Forfeit action while in a live match (the queue
+// leave path stays leaveCardMinigameQueue).
+export function forfeitCardDuelMatch(ctx: SimContext, pid?: number): void {
+  const r = ctx.resolve(pid);
+  if (!r) return;
+  const match = ctx.cardDuels.get(r.meta.entityId);
+  if (!match) {
+    ctx.error(r.meta.entityId, 'You are not in a Card Duel.');
+    return;
+  }
+  forfeitMatch(ctx, match, r.meta.entityId);
+}
+
 // Drops a player from the queue and/or forfeits their live match (leave-path /
-// disconnect handling, mirroring duelFor's forfeit-on-death shape).
+// disconnect handling, mirroring duelFor's forfeit-on-death shape). Also
+// called from Sim.removePlayer so the offline Sim and headless env never leak
+// cardDuels/cardDuelQueue entries for a departed pid.
 export function leaveCardMinigameEntirely(ctx: SimContext, pid: number): void {
   leaveCardDuelQueue(ctx.cardDuelQueue, pid);
   const match = ctx.cardDuels.get(pid);
   if (!match) return;
-  const otherPid = pid === match.a ? match.b : match.a;
-  ctx.cardDuels.delete(match.a);
-  ctx.cardDuels.delete(match.b);
-  const otherMeta = ctx.players.get(otherPid);
-  if (otherMeta) {
-    ctx.emit({
-      type: 'log',
-      text: 'Your opponent left the Card Duel.',
-      color: '#fa6',
-      pid: otherPid,
-    });
+  forfeitMatch(ctx, match, pid);
+}
+
+// IWorldCardMinigame read surface: the local/queried player's queue/match
+// snapshot. Lives here (not on the sim.ts coordinator) because it needs
+// nothing from Sim's private state, matching the six thin delegates directly
+// above cardMinigameInfoFor on sim.ts.
+export function buildCardMinigameInfo(ctx: SimContext, pid: number): CardMinigameInfo {
+  const match = cardDuelMatchFor(ctx, pid);
+  if (!match) {
+    return {
+      queued: isQueuedForCardMinigame(ctx, pid),
+      available: cardMinigameAvailable(ctx),
+      match: null,
+    };
   }
+  const isA = pid === match.a;
+  const oppPid = isA ? match.b : match.a;
+  const oppMeta = ctx.players.get(oppPid);
+  const myHand = isA ? match.handA : match.handB;
+  const played = isA ? match.playedA : match.playedB;
+  return {
+    queued: false,
+    available: true,
+    match: {
+      opponent: { pid: oppPid, name: oppMeta?.name ?? '' },
+      hand: myHand.hand.slice(),
+      deckCount: myHand.deck.length,
+      discardCount: myHand.discard.length,
+      myRounds: isA ? match.roundsA : match.roundsB,
+      opponentRounds: isA ? match.roundsB : match.roundsA,
+      waitingOnOpponent: played !== null,
+    },
+  };
 }
 
 export type { CardDuelQueue };
