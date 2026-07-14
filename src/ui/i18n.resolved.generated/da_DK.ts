@@ -620,6 +620,15 @@ export const da_DK: EnTranslations = {
       "notNow": "Ikke nu",
       "update": "Opdater"
     },
+    "cameraPrompt": {
+      "title": "Choose Your Camera",
+      "intro": "Pick how the camera follows your character.",
+      "mouseDesc": "Move the mouse to turn the camera without holding a button.",
+      "classicTitle": "Classic Camera",
+      "classicDesc": "Hold right-click and move the mouse to turn the camera.",
+      "changeLater": "You can change this later under Esc, Key Bindings.",
+      "confirm": "Confirm"
+    },
     "castBar": {
       "playerAria": "Din castbjælke",
       "targetAria": "Enhedens castbjælke"
@@ -2563,6 +2572,10 @@ export const da_DK: EnTranslations = {
       "dragonkin": {
         "name": "Drageæt",
         "desc": "Skældækkede, slangeagtige væsner fra de gamle dyb. Sjældne, stolte og langt stærkere, end de ser ud."
+      },
+      "reptile": {
+        "name": "Reptiles",
+        "desc": "Cold-blooded hunters with a hiss and a snap all their own, distinct from the warm-blooded beasts."
       }
     },
     "worldPage": {

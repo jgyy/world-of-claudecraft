@@ -620,6 +620,15 @@ export const zh_TW: EnTranslations = {
       "notNow": "暫不",
       "update": "更新"
     },
+    "cameraPrompt": {
+      "title": "選擇你的鏡頭",
+      "intro": "選擇鏡頭跟隨角色的方式。",
+      "mouseDesc": "無需按住滑鼠按鍵，移動滑鼠即可轉動鏡頭。",
+      "classicTitle": "經典鏡頭",
+      "classicDesc": "按住滑鼠右鍵並移動滑鼠來轉動鏡頭。",
+      "changeLater": "稍後可在 Esc 選單的「按鍵綁定」中變更。",
+      "confirm": "確認"
+    },
     "castBar": {
       "playerAria": "你的施法條",
       "targetAria": "目標施法條"
@@ -2563,6 +2572,10 @@ export const zh_TW: EnTranslations = {
       "dragonkin": {
         "name": "龍類",
         "desc": "來自遠古深淵、覆鱗如蛇的生物。稀少、高傲，且遠比外表看來更為強大。"
+      },
+      "reptile": {
+        "name": "爬行類",
+        "desc": "冷血的獵手，帶著獨有的嘶聲與撕咬，與溫血的野獸截然不同。"
       }
     },
     "worldPage": {

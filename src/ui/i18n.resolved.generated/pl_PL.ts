@@ -620,6 +620,15 @@ export const pl_PL: EnTranslations = {
       "notNow": "Nie teraz",
       "update": "Aktualizuj"
     },
+    "cameraPrompt": {
+      "title": "Choose Your Camera",
+      "intro": "Pick how the camera follows your character.",
+      "mouseDesc": "Move the mouse to turn the camera without holding a button.",
+      "classicTitle": "Classic Camera",
+      "classicDesc": "Hold right-click and move the mouse to turn the camera.",
+      "changeLater": "You can change this later under Esc, Key Bindings.",
+      "confirm": "Confirm"
+    },
     "castBar": {
       "playerAria": "Twój pasek rzucania",
       "targetAria": "Pasek rzucania jednostki"
@@ -2563,6 +2572,10 @@ export const pl_PL: EnTranslations = {
       "dragonkin": {
         "name": "Smoczy ród",
         "desc": "Łuskowate, wężowate istoty ze starych głębin. Rzadkie, dumne i znacznie silniejsze, niż na to wyglądają."
+      },
+      "reptile": {
+        "name": "Reptiles",
+        "desc": "Cold-blooded hunters with a hiss and a snap all their own, distinct from the warm-blooded beasts."
       }
     },
     "worldPage": {

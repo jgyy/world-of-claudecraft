@@ -620,6 +620,15 @@ export const ja_JP: EnTranslations = {
       "notNow": "後で",
       "update": "更新"
     },
+    "cameraPrompt": {
+      "title": "カメラを選択",
+      "intro": "カメラがキャラクターを追う方法を選びましょう。",
+      "mouseDesc": "ボタンを押さずにマウスを動かして視点を回します。",
+      "classicTitle": "クラシックカメラ",
+      "classicDesc": "右クリックを押しながらマウスを動かして視点を回します。",
+      "changeLater": "この設定は後で Esc の「キー割り当て」から変更できます。",
+      "confirm": "決定"
+    },
     "castBar": {
       "playerAria": "あなたの詠唱バー",
       "targetAria": "ターゲットの詠唱バー"
@@ -2563,6 +2572,10 @@ export const ja_JP: EnTranslations = {
       "dragonkin": {
         "name": "ドラゴンキン",
         "desc": "古き深淵に棲む、鱗に覆われた蛇のような存在。希少で誇り高く、見た目よりもはるかに強大です。"
+      },
+      "reptile": {
+        "name": "爬虫類",
+        "desc": "独特の威嚇音と鋭い一撃を持つ、冷血のハンターたち。温血の獣たちとは一線を画します。"
       }
     },
     "worldPage": {

@@ -3,7 +3,7 @@
 // when the manifest is regenerated. Uses real temp directories (existsSync is
 // the tested behaviour; mocking fs defeats the purpose).
 
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,12 +12,14 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import * as manifestModule from '../scripts/sfx/manifest.mjs';
 
 const {
+  buildSfxManifestData,
   catalogHashForEntries,
   isSfxMobExtensionKey,
   SFX_FIXED_CATALOG_KEYS,
   SFX_MOB_EXTENSION_FAMILIES,
   SFX_MOB_EXTENSION_KEY_PATTERN,
   serializeSfxManifest,
+  spatialForSfx,
 } = manifestModule;
 
 import {
@@ -49,6 +51,23 @@ describe('buildManifest', () => {
     expect(count).toBe(1);
     const manifest = readFileSync(manifestPath, 'utf8');
     expect(manifest).toContain('cast_lightning_bolt.wav');
+  });
+
+  it('includes a key whose only file is an AIFF lossless master', () => {
+    writeFileSync(path.join(sfxDir, 'cast_lightning_bolt.aiff'), '');
+    const { count } = buildManifest([{ key: 'cast_lightning_bolt' }], sfxDir, manifestPath);
+    expect(count).toBe(1);
+    expect(readFileSync(manifestPath, 'utf8')).toContain('cast_lightning_bolt.aiff');
+  });
+
+  it('never promotes a source master into the rich runtime manifest', () => {
+    const runtimeSfxDirectory = path.join(sfxDir, 'public/audio/sfx');
+    mkdirSync(runtimeSfxDirectory, { recursive: true });
+    writeFileSync(path.join(runtimeSfxDirectory, 'amb_water.m4a'), 'source master');
+
+    expect(() => buildSfxManifestData(sfxDir, { requireComplete: false })).toThrow(
+      /runtime sampled SFX must be MP3.*amb_water\.m4a/,
+    );
   });
 
   it('includes a key whose only file is a .mp3', () => {
@@ -143,14 +162,15 @@ describe('buildManifest', () => {
     expect(manifest).toContain('cast_lightning_bolt');
   });
 
-  it('keeps the release catalog and all 26 UI cues in one 138-key inventory', () => {
+  it('keeps the release catalog and all 26 UI cues in one 141-key inventory', () => {
     const keys = new Set(SFX.map((entry) => entry.key));
-    expect(keys.size).toBe(138);
+    expect(keys.size).toBe(141);
     expect([...keys].filter((key) => key.startsWith('ui_'))).toHaveLength(26);
     for (const key of [
       'cast_lightning_bolt',
       'mob_mudfin_attack',
       'mob_burrower_attack',
+      'mob_reptile_attack',
       'quest_ready',
       'lockpick_success',
     ]) {
@@ -158,7 +178,7 @@ describe('buildManifest', () => {
     }
     expect(keys.has('mob_murloc_attack')).toBe(false);
     expect(keys.has('mob_kobold_attack')).toBe(false);
-    expect(SFX_FIXED_CATALOG_KEYS).toHaveLength(138);
+    expect(SFX_FIXED_CATALOG_KEYS).toHaveLength(141);
   });
 });
 
@@ -229,6 +249,13 @@ describe('mob subfamily scanning', () => {
     expect(count).toBe(0); // bogus file produces no valid key
     expect(errors.length).toBe(1);
     expect(errors[0]).toContain('mob_beast_wolf_bogus_1.mp3');
+  });
+
+  it('rejects a syntactically valid extension for an unsupported mob family', () => {
+    writeFileSync(path.join(sfxDir, 'mob_unknown_wolf_attack_1.mp3'), '');
+    const discovered = discoverSfxTracks([], sfxDir);
+    expect(discovered.entries).toEqual({});
+    expect(discovered.errors).toEqual([expect.stringContaining('unsupported mob family')]);
   });
 
   it('skips family-level mob files (fewer than 5 parts), covered by catalog loop', () => {
@@ -319,5 +346,11 @@ describe('mob subfamily scanning', () => {
     expect(serialized).toContain('export const SFX_FIXED_CATALOG_KEYS =');
     expect(serialized).toContain('export const SFX_MOB_EXTENSION_FAMILIES =');
     expect(serialized).toContain('export const SFX_MOB_EXTENSION_KEY_SOURCE = "^mob_([a-z0-9]+)');
+  });
+
+  it('marks point ambience spatial but keeps the global water bed non-spatial', () => {
+    expect(spatialForSfx('amb_campfire')).toBe(true);
+    expect(spatialForSfx('amb_forge')).toBe(true);
+    expect(spatialForSfx('amb_water')).toBe(false);
   });
 });

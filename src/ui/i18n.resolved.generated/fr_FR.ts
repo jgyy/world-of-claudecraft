@@ -620,6 +620,15 @@ export const fr_FR: EnTranslations = {
       "notNow": "Pas maintenant",
       "update": "Mettre à jour"
     },
+    "cameraPrompt": {
+      "title": "Choose Your Camera",
+      "intro": "Pick how the camera follows your character.",
+      "mouseDesc": "Move the mouse to turn the camera without holding a button.",
+      "classicTitle": "Classic Camera",
+      "classicDesc": "Hold right-click and move the mouse to turn the camera.",
+      "changeLater": "You can change this later under Esc, Key Bindings.",
+      "confirm": "Confirm"
+    },
     "castBar": {
       "playerAria": "Votre barre d'incantation",
       "targetAria": "Barre d'incantation de la cible"
@@ -2563,6 +2572,10 @@ export const fr_FR: EnTranslations = {
       "dragonkin": {
         "name": "Draconiens",
         "desc": "Des créatures écailleuses et serpentines des anciennes profondeurs. Rares, fières et bien plus fortes qu'elles n'en ont l'air."
+      },
+      "reptile": {
+        "name": "Reptiles",
+        "desc": "Cold-blooded hunters with a hiss and a snap all their own, distinct from the warm-blooded beasts."
       }
     },
     "worldPage": {

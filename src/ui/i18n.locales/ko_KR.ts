@@ -4708,6 +4708,9 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'guide.family.dragonkin.name': '용족',
   'guide.family.elemental.desc':
     '원소가 강하게 흐르는 야생의 장소에 매여 있는, 살아 있는 폭풍과 돌.',
+  'guide.family.reptile.name': '파충류',
+  'guide.family.reptile.desc':
+    '쉭쉭거리는 소리와 날카로운 물어뜯기를 지닌 냉혈 사냥꾼들로, 온혈 야수들과는 뚜렷이 다릅니다.',
   'guide.worldPage.heading': '세계',
   'guide.worldPage.intro':
     'World of ClaudeCraft는 두 발로 가로지르는 하나로 이어진 대지이며, 남에서 북으로 펼쳐진 세 개의 지역으로 이루어져 있습니다. 빠른 이동이 없으니, 여정 자체가 모험의 일부입니다.',
@@ -5947,6 +5950,14 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     'World of ClaudeCraft 버전 {version}을(를) 사용할 수 있습니다. 지금 업데이트하여 최신 수정 사항과 개선 사항을 받으세요.',
   'hudChrome.nativeUpdate.notNow': '나중에',
   'hudChrome.nativeUpdate.update': '업데이트',
+  'hudChrome.cameraPrompt.title': '카메라 선택',
+  'hudChrome.cameraPrompt.intro': '카메라가 캐릭터를 따라가는 방식을 선택하세요.',
+  'hudChrome.cameraPrompt.mouseDesc': '버튼을 누르지 않고 마우스를 움직여 시점을 돌립니다.',
+  'hudChrome.cameraPrompt.classicTitle': '클래식 카메라',
+  'hudChrome.cameraPrompt.classicDesc': '우클릭을 누른 채 마우스를 움직여 시점을 돌립니다.',
+  'hudChrome.cameraPrompt.changeLater':
+    '이 설정은 나중에 Esc 메뉴의 키 설정에서 변경할 수 있습니다.',
+  'hudChrome.cameraPrompt.confirm': '확인',
   'desktop.update.downloading': '업데이트 {version} 다운로드 중...',
   'desktop.update.ready':
     '업데이트 {version} 준비 완료. 게임을 종료하면 자동으로 설치되며, 지금 다시 시작할 수도 있습니다.',

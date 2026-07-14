@@ -620,6 +620,15 @@ export const es: EnTranslations = {
       "notNow": "Ahora no",
       "update": "Actualizar"
     },
+    "cameraPrompt": {
+      "title": "Choose Your Camera",
+      "intro": "Pick how the camera follows your character.",
+      "mouseDesc": "Move the mouse to turn the camera without holding a button.",
+      "classicTitle": "Classic Camera",
+      "classicDesc": "Hold right-click and move the mouse to turn the camera.",
+      "changeLater": "You can change this later under Esc, Key Bindings.",
+      "confirm": "Confirm"
+    },
     "castBar": {
       "playerAria": "Tu barra de lanzamiento",
       "targetAria": "Barra de lanzamiento del objetivo"
@@ -2563,6 +2572,10 @@ export const es: EnTranslations = {
       "dragonkin": {
         "name": "Dracónidos",
         "desc": "Criaturas escamosas y serpentinas de las viejas profundidades. Raras, orgullosas y mucho más fuertes de lo que aparentan."
+      },
+      "reptile": {
+        "name": "Reptiles",
+        "desc": "Cold-blooded hunters with a hiss and a snap all their own, distinct from the warm-blooded beasts."
       }
     },
     "worldPage": {

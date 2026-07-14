@@ -620,6 +620,15 @@ export const it_IT: EnTranslations = {
       "notNow": "Non ora",
       "update": "Aggiorna"
     },
+    "cameraPrompt": {
+      "title": "Choose Your Camera",
+      "intro": "Pick how the camera follows your character.",
+      "mouseDesc": "Move the mouse to turn the camera without holding a button.",
+      "classicTitle": "Classic Camera",
+      "classicDesc": "Hold right-click and move the mouse to turn the camera.",
+      "changeLater": "You can change this later under Esc, Key Bindings.",
+      "confirm": "Confirm"
+    },
     "castBar": {
       "playerAria": "La tua barra di lancio",
       "targetAria": "Barra di lancio del bersaglio"
@@ -2563,6 +2572,10 @@ export const it_IT: EnTranslations = {
       "dragonkin": {
         "name": "Draconici",
         "desc": "Creature squamose e serpentine delle antiche profondità. Rare, fiere e ben più forti di quanto sembrino."
+      },
+      "reptile": {
+        "name": "Reptiles",
+        "desc": "Cold-blooded hunters with a hiss and a snap all their own, distinct from the warm-blooded beasts."
       }
     },
     "worldPage": {

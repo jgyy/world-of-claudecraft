@@ -4713,6 +4713,9 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '古き深淵に棲む、鱗に覆われた蛇のような存在。希少で誇り高く、見た目よりもはるかに強大です。',
   'guide.family.dragonkin.name': 'ドラゴンキン',
   'guide.family.elemental.desc': '嵐や岩が命を得た存在。元素の力が強く渦巻く荒野に縛られています。',
+  'guide.family.reptile.name': '爬虫類',
+  'guide.family.reptile.desc':
+    '独特の威嚇音と鋭い一撃を持つ、冷血のハンターたち。温血の獣たちとは一線を画します。',
   'guide.worldPage.heading': '世界',
   'guide.worldPage.intro':
     'World of ClaudeCraftは、自らの足で歩いて渡る一続きの大地です。南から北へと3つのゾーンが連なっています。ファストトラベルはなく、その旅路こそが冒険の一部です。',
@@ -5951,6 +5954,13 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     'World of ClaudeCraft のバージョン {version} が利用可能です。今すぐアップデートして最新の修正と改善を入手しましょう。',
   'hudChrome.nativeUpdate.notNow': '後で',
   'hudChrome.nativeUpdate.update': '更新',
+  'hudChrome.cameraPrompt.title': 'カメラを選択',
+  'hudChrome.cameraPrompt.intro': 'カメラがキャラクターを追う方法を選びましょう。',
+  'hudChrome.cameraPrompt.mouseDesc': 'ボタンを押さずにマウスを動かして視点を回します。',
+  'hudChrome.cameraPrompt.classicTitle': 'クラシックカメラ',
+  'hudChrome.cameraPrompt.classicDesc': '右クリックを押しながらマウスを動かして視点を回します。',
+  'hudChrome.cameraPrompt.changeLater': 'この設定は後で Esc の「キー割り当て」から変更できます。',
+  'hudChrome.cameraPrompt.confirm': '決定',
   'desktop.update.downloading': 'アップデート {version} をダウンロード中...',
   'desktop.update.ready':
     'アップデート {version} の準備ができました。ゲーム終了時に自動でインストールされます。今すぐ再起動もできます。',

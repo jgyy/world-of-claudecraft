@@ -620,6 +620,15 @@ export const vi_VN: EnTranslations = {
       "notNow": "Không phải bây giờ",
       "update": "Cập Nhật"
     },
+    "cameraPrompt": {
+      "title": "Choose Your Camera",
+      "intro": "Pick how the camera follows your character.",
+      "mouseDesc": "Move the mouse to turn the camera without holding a button.",
+      "classicTitle": "Classic Camera",
+      "classicDesc": "Hold right-click and move the mouse to turn the camera.",
+      "changeLater": "You can change this later under Esc, Key Bindings.",
+      "confirm": "Confirm"
+    },
     "castBar": {
       "playerAria": "Thanh Niệm Chú Của Bạn",
       "targetAria": "Thanh Niệm Chú Của Mục Tiêu"
@@ -2563,6 +2572,10 @@ export const vi_VN: EnTranslations = {
       "dragonkin": {
         "name": "Long Tộc",
         "desc": "Những sinh vật có vảy, thân rắn từ vực sâu cổ xưa. Hiếm gặp, kiêu hãnh, và mạnh hơn vẻ ngoài của chúng rất nhiều."
+      },
+      "reptile": {
+        "name": "Reptiles",
+        "desc": "Cold-blooded hunters with a hiss and a snap all their own, distinct from the warm-blooded beasts."
       }
     },
     "worldPage": {

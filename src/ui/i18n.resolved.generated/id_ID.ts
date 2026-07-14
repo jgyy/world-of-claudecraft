@@ -620,6 +620,15 @@ export const id_ID: EnTranslations = {
       "notNow": "Jangan sekarang",
       "update": "Perbarui"
     },
+    "cameraPrompt": {
+      "title": "Choose Your Camera",
+      "intro": "Pick how the camera follows your character.",
+      "mouseDesc": "Move the mouse to turn the camera without holding a button.",
+      "classicTitle": "Classic Camera",
+      "classicDesc": "Hold right-click and move the mouse to turn the camera.",
+      "changeLater": "You can change this later under Esc, Key Bindings.",
+      "confirm": "Confirm"
+    },
     "castBar": {
       "playerAria": "Bilah Rapal Anda",
       "targetAria": "Bilah Rapal Unit"
@@ -2563,6 +2572,10 @@ export const id_ID: EnTranslations = {
       "dragonkin": {
         "name": "Bangsa Naga",
         "desc": "Makhluk bersisik dan berlekuk ular dari kedalaman purba. Langka, angkuh, dan jauh lebih kuat dari penampakannya."
+      },
+      "reptile": {
+        "name": "Reptiles",
+        "desc": "Cold-blooded hunters with a hiss and a snap all their own, distinct from the warm-blooded beasts."
       }
     },
     "worldPage": {
