@@ -318,6 +318,7 @@ import { LeaderboardWindow } from './leaderboard_window';
 import { ReannounceMarker } from './live_region_reannounce';
 import { PICK_ACTION_HOTKEYS } from './lockpick_panel';
 import { LockpickWindow } from './lockpick_window';
+import { isCombatFlavorLog } from './log_event_route';
 import { reconcileLootRolls as computeLootRollReconcile } from './loot_roll_reconcile';
 import {
   computeLootRollStatusRows,
@@ -10002,7 +10003,12 @@ export class Hud {
         }
         case 'log': {
           const text = this.localizeSystemText(ev.text);
-          this.log(text, ev.color ?? '#ccc');
+          // Route mob/boss combat-flavor chatter to the Combat Log tab instead of
+          // General/Chat (see log_event_route.ts), so new players standing near any
+          // nearby fight aren't drowned out by other players' mob text. A narrative
+          // line still gets its floating world chat bubble below.
+          if (isCombatFlavorLog(ev.entityId)) this.combatLog(text, ev.color ?? '#ccc');
+          else this.log(text, ev.color ?? '#ccc');
           const isNythraxisVisionLine = [
             'My king was a good man.',
             'I swore my blade to him.',
