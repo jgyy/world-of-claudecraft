@@ -43,7 +43,7 @@
 
 import type * as http from 'node:http';
 import type { CharacterState } from '../src/sim/sim';
-import type { PlayerClass } from '../src/sim/types';
+import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 import { normalizeCharName, offensiveName } from './auth';
 import { characterSheet, SHEET_RECENT_DEEDS, type SheetRank } from './character_sheet';
 import {
@@ -121,18 +121,10 @@ const DELETE_CONFIRM = {
 const CHARACTER_RESOURCE = 'character';
 /** Per-account character cap (mirrors the legacy createCharacterCapped default). */
 const CHARACTER_LIMIT = 10;
-/** The nine playable classes accepted by create (mirrors the legacy inline list). */
-const VALID_CLASSES: readonly string[] = [
-  'warrior',
-  'paladin',
-  'hunter',
-  'rogue',
-  'priest',
-  'shaman',
-  'mage',
-  'warlock',
-  'druid',
-];
+/** The playable classes accepted by create: the single source of truth in src/sim/types.ts,
+ *  never a hand-duplicated list here (a new class must not need a server-side edit to be
+ *  createable). */
+const VALID_CLASSES: readonly string[] = ALL_CLASSES;
 /** Highest selectable skin index (mirrors the legacy Math.min(7, ...) clamp). */
 const MAX_SKIN = 7;
 const BEARER_PATTERN = /^Bearer ([a-f0-9]{64})$/;

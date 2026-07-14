@@ -489,6 +489,27 @@ describe('create handler', () => {
     });
   });
 
+  it('200s every ALL_CLASSES entry, including new classes (never a hand-duplicated list)', async () => {
+    const { ALL_CLASSES } = await import('../../src/sim/types');
+    for (const cls of ALL_CLASSES) {
+      const created = charRow({
+        id: 11,
+        name: 'Valid',
+        class: cls,
+        level: 1,
+        state: st({ skin: 0 }),
+        force_rename: false,
+      });
+      setCharactersDbForTests({ createCharacterCapped: async () => created });
+      const res = await callHandler('POST', '/api/characters', {
+        account: { accountId: 7, scope: 'full' },
+        body: { name: 'Valid', class: cls, skin: 0 },
+      });
+      expect(res.status, `class ${cls} should be creatable`).toBe(200);
+      expect((res.body as { class: string }).class).toBe(cls);
+    }
+  });
+
   it('increments the characters-created counter on the created path', async () => {
     let created = 0;
     const counters: GameMetricsCounters = {

@@ -47,7 +47,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "es_ES": [
     "classDetails.lore.card_adept",
@@ -87,7 +88,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "fr_FR": [
     "classDetails.lore.card_adept",
@@ -127,7 +129,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "fr_CA": [
     "classDetails.lore.card_adept",
@@ -167,7 +170,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "en_CA": [],
   "it_IT": [
@@ -208,7 +212,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "de_DE": [
     "classDetails.lore.card_adept",
@@ -248,7 +253,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "zh_CN": [
     "entities.abilities.ca_hex_card.name",
@@ -308,7 +314,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "ru_RU": [
     "entities.abilities.ca_hex_card.name",
@@ -353,7 +360,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "nl_NL": [
     "classDetails.lore.card_adept",
@@ -393,7 +401,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "pl_PL": [
     "classDetails.lore.card_adept",
@@ -433,7 +442,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "id_ID": [
     "classDetails.lore.card_adept",
@@ -473,7 +483,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "tr_TR": [
     "classDetails.lore.card_adept",
@@ -513,7 +524,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "sv_SE": [
     "classDetails.lore.card_adept",
@@ -553,7 +565,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "vi_VN": [
     "classDetails.lore.card_adept",
@@ -593,7 +606,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ],
   "da_DK": [
     "classDetails.lore.card_adept",
@@ -633,6 +647,7 @@ export const pending: Record<string, readonly string[]> = {
     "hud.cardDuel.title",
     "hud.cardHand.deckTitle",
     "hud.cardHand.discardTitle",
-    "hud.cardHand.label"
+    "hud.cardHand.label",
+    "hudChrome.discord.link.joinServer"
   ]
 };
