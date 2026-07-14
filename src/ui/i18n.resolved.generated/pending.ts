@@ -12,8 +12,6 @@ export const pending: Record<string, readonly string[]> = {
   "es": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -35,8 +33,6 @@ export const pending: Record<string, readonly string[]> = {
   "es_ES": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -58,8 +54,6 @@ export const pending: Record<string, readonly string[]> = {
   "fr_FR": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -81,8 +75,6 @@ export const pending: Record<string, readonly string[]> = {
   "fr_CA": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -105,8 +97,6 @@ export const pending: Record<string, readonly string[]> = {
   "it_IT": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -128,8 +118,6 @@ export const pending: Record<string, readonly string[]> = {
   "de_DE": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -155,8 +143,6 @@ export const pending: Record<string, readonly string[]> = {
   "pt_BR": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -179,8 +165,6 @@ export const pending: Record<string, readonly string[]> = {
   "cs_CZ": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -202,8 +186,6 @@ export const pending: Record<string, readonly string[]> = {
   "nl_NL": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -225,8 +207,6 @@ export const pending: Record<string, readonly string[]> = {
   "pl_PL": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -248,8 +228,6 @@ export const pending: Record<string, readonly string[]> = {
   "id_ID": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -271,8 +249,6 @@ export const pending: Record<string, readonly string[]> = {
   "tr_TR": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -294,8 +270,6 @@ export const pending: Record<string, readonly string[]> = {
   "sv_SE": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -317,8 +291,6 @@ export const pending: Record<string, readonly string[]> = {
   "vi_VN": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",
@@ -340,8 +312,6 @@ export const pending: Record<string, readonly string[]> = {
   "da_DK": [
     "cardDuel.close",
     "cardDuel.counts",
-    "cardDuel.deckCount",
-    "cardDuel.discardCount",
     "cardDuel.forfeit",
     "cardDuel.forfeitAria",
     "cardDuel.join",

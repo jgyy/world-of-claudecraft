@@ -77,10 +77,20 @@ export function cardDuelMatchFor(ctx: SimContext, pid: number): CardDuelMatch | 
   return ctx.cardDuels.get(pid) ?? null;
 }
 
-// At least one other player must be present to ever pair off the queue
-// (the offline Sim has exactly one human player, so the FIFO never resolves).
-export function cardMinigameAvailable(ctx: SimContext): boolean {
-  return ctx.players.size > 1;
+// At least one other QUEUEABLE HUMAN must be present to ever pair off the
+// queue. Fiesta and Vale Cup bots share the offline Sim's players map
+// (fiesta_bots.ts / vale_cup_bots.ts both reach Sim.addPlayer), but they
+// never call joinCardDuelQueue, so counting them here would let the gate
+// read "available" while a bot match is live offline, and the human queues
+// into a FIFO that can never pair (finding: bots defeat the offline gate).
+export function cardMinigameAvailable(ctx: SimContext, pid?: number): boolean {
+  for (const [otherPid, meta] of ctx.players) {
+    if (otherPid === pid) continue;
+    if (meta.isFiestaBot) continue;
+    if (ctx.vcup.botPids.includes(otherPid)) continue;
+    return true;
+  }
+  return false;
 }
 
 export function joinCardMinigameQueue(ctx: SimContext, pid?: number): void {
@@ -94,7 +104,7 @@ export function joinCardMinigameQueue(ctx: SimContext, pid?: number): void {
     ctx.error(r.meta.entityId, 'You must be at the Card Master to queue for a Card Duel.');
     return;
   }
-  if (!cardMinigameAvailable(ctx)) {
+  if (!cardMinigameAvailable(ctx, r.meta.entityId)) {
     ctx.error(r.meta.entityId, 'Card Duel requires another player online.');
     return;
   }
@@ -204,9 +214,16 @@ export function updateCardDuelDeadlines(ctx: SimContext): void {
     if (ctx.time < match.roundDeadline) continue;
     const aPlayed = match.playedA !== null;
     const bPlayed = match.playedB !== null;
-    // Whichever side has not played this round forfeits. If neither has
-    // played (both idle), forfeit side A deterministically.
-    const forfeiterPid = bPlayed && !aPlayed ? match.a : match.b;
+    if (!aPlayed && !bPlayed) {
+      // Both sides idle: nobody earned a win, so void the match rather than
+      // handing side A a free deed credit (finding: both-idle AFK sweep
+      // handed out a win and the deed for a match where zero cards were
+      // played; farmable by two accounts queueing and going AFK together).
+      voidMatch(ctx, match);
+      continue;
+    }
+    // Whichever side has not played this round forfeits.
+    const forfeiterPid = aPlayed ? match.b : match.a;
     forfeitMatch(ctx, match, forfeiterPid);
   }
 }
@@ -318,6 +335,22 @@ function forfeitMatch(ctx: SimContext, match: CardDuelMatch, forfeiterPid: numbe
   }
 }
 
+// Both sides let the round's AFK deadline expire without playing a card: no
+// side earned a win, so end the match with no winner and no deed credit
+// (never route this through forfeitMatch, which always credits one side).
+function voidMatch(ctx: SimContext, match: CardDuelMatch): void {
+  ctx.cardDuels.delete(match.a);
+  ctx.cardDuels.delete(match.b);
+  for (const pid of [match.a, match.b]) {
+    ctx.emit({
+      type: 'log',
+      text: 'Your Card Duel is void: neither side played in time.',
+      color: '#fa6',
+      pid,
+    });
+  }
+}
+
 // Player-issuable forfeit: lets someone stuck in a live match against an idle
 // opponent get out immediately, instead of waiting for the AFK deadline.
 // Wired to the window's Leave/Forfeit action while in a live match (the queue
@@ -353,7 +386,7 @@ export function buildCardMinigameInfo(ctx: SimContext, pid: number): CardMinigam
   if (!match) {
     return {
       queued: isQueuedForCardMinigame(ctx, pid),
-      available: cardMinigameAvailable(ctx),
+      available: cardMinigameAvailable(ctx, pid),
       match: null,
     };
   }

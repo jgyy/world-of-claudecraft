@@ -4380,8 +4380,6 @@ export const ja_JP: EnTranslations = {
     "unavailable": "カードデュエルには、オンラインの対戦相手がもう一人必要です。",
     "vsOpponent": "対 {name}",
     "round": "ラウンドスコア：{mine} - {theirs}",
-    "deckCount": "山札：{count}",
-    "discardCount": "捨て札：{count}",
     "counts": "山札：{deck} ・ 捨て札：{discard}",
     "playCardAria": "{value}のカードを出す",
     "waitingOnOpponent": "相手のカードを待っています……",

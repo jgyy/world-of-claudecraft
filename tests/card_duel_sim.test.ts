@@ -125,6 +125,21 @@ describe('Sim.removePlayer tears down Card Duel state', () => {
     expect(info.queued).toBe(true);
   });
 
+  it('the AFK deadline sweep runs from the real Sim.tick(), not just when called directly', () => {
+    // Regression guard: updateCardDuelDeadlines was only ever exercised by
+    // calling it directly in tests, so deleting its registration from
+    // sim.ts's tick loop (and the parity golden, which draws no rng here)
+    // would not have been caught. Drive it through the actual tick.
+    const sim = makeWorld();
+    const { a, b } = queueDuo(sim);
+    const match = sim.cardDuelMatchFor(a);
+    if (!match) throw new Error('expected a live match');
+    sim.time = match.roundDeadline + 1;
+    sim.tick();
+    expect(sim.cardDuelMatchFor(a)).toBeNull();
+    expect(sim.cardDuelMatchFor(b)).toBeNull();
+  });
+
   it('drops a queued (not yet matched) departed player from the queue', () => {
     const sim = makeWorld();
     const a = sim.addPlayer('warrior', 'Aleph');
@@ -135,10 +150,12 @@ describe('Sim.removePlayer tears down Card Duel state', () => {
 
     sim.removePlayer(a);
 
-    // Re-adding a fresh player at the same pid slot (Sim reuses freed ids)
-    // must not see a stale queue entry.
-    const again = sim.addPlayer('warrior', 'Aleph2');
-    expect(sim.cardMinigameInfoFor(again).queued).toBe(false);
+    // Assert the real queue state directly. `a`'s pid is never recycled
+    // (Sim.nextId is monotonic, sim.ts), so re-adding at a fresh pid reports
+    // queued:false trivially regardless of whether removePlayer ever touched
+    // cardDuelQueue: that made the previous version of this assertion pass
+    // even if Sim.removePlayer never called leaveCardMinigameEntirely.
+    expect(sim.cardDuelQueue).toEqual([]);
     expect(bystander).toBeGreaterThan(0);
   });
 });

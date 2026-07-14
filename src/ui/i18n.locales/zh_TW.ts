@@ -3024,8 +3024,6 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'cardDuel.queued': '正在等待對手……',
   'cardDuel.vsOpponent': '對戰 {name}',
   'cardDuel.round': '局分：{mine} - {theirs}',
-  'cardDuel.deckCount': '牌堆：{count}',
-  'cardDuel.discardCount': '棄牌堆：{count}',
   'cardDuel.forfeit': '認輸',
   'cardDuel.forfeitAria': '認輸退出紙牌對決',
   'cardDuel.unavailable': '紙牌對決需要另一名玩家在線。',

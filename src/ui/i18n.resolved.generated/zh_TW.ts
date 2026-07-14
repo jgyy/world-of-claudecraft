@@ -4380,8 +4380,6 @@ export const zh_TW: EnTranslations = {
     "unavailable": "紙牌對決需要另一名玩家在線。",
     "vsOpponent": "對戰 {name}",
     "round": "局分：{mine} - {theirs}",
-    "deckCount": "牌堆：{count}",
-    "discardCount": "棄牌堆：{count}",
     "counts": "牌堆：{deck} · 棄牌堆：{discard}",
     "playCardAria": "打出 {value} 號牌",
     "waitingOnOpponent": "正在等待對手出牌……",

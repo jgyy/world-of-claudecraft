@@ -4380,8 +4380,6 @@ export const en_XA: EnTranslations = {
     "unavailable": "[Çáŕð Ðúéļ ŕéɋúíŕéš áñóţĥéŕ þļáýéŕ óñļíñé.]",
     "vsOpponent": "[ʋš {name}]",
     "round": "[Ŕóúñð šçóŕé: {mine} - {theirs}]",
-    "deckCount": "[Ðéçķ: {count}]",
-    "discardCount": "[Ðíšçáŕð: {count}]",
     "counts": "[Ðéçķ: {deck} · Ðíšçáŕð: {discard}]",
     "playCardAria": "[Þļáý ţĥé {value} çáŕð]",
     "waitingOnOpponent": "[Ŵáíţíñĝ óñ ýóúŕ óþþóñéñţ'š çáŕð...]",

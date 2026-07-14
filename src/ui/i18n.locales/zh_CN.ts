@@ -3020,8 +3020,6 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'cardDuel.queued': '正在等待对手……',
   'cardDuel.vsOpponent': '对战 {name}',
   'cardDuel.round': '局分：{mine} - {theirs}',
-  'cardDuel.deckCount': '牌堆：{count}',
-  'cardDuel.discardCount': '弃牌堆：{count}',
   'cardDuel.forfeit': '认输',
   'cardDuel.forfeitAria': '认输退出纸牌对决',
   'cardDuel.unavailable': '纸牌对决需要另一名玩家在线。',

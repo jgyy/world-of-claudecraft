@@ -4380,8 +4380,6 @@ export const ru_RU: EnTranslations = {
     "unavailable": "Для карточной дуэли нужен ещё один игрок онлайн.",
     "vsOpponent": "против {name}",
     "round": "Счёт раундов: {mine} - {theirs}",
-    "deckCount": "Колода: {count}",
-    "discardCount": "Сброс: {count}",
     "counts": "Колода: {deck} · Сброс: {discard}",
     "playCardAria": "Разыграть карту {value}",
     "waitingOnOpponent": "Ожидание карты соперника...",

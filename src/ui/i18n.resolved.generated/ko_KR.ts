@@ -4380,8 +4380,6 @@ export const ko_KR: EnTranslations = {
     "unavailable": "카드 대결을 하려면 다른 플레이어가 온라인 상태여야 합니다.",
     "vsOpponent": "{name}와(과) 대결",
     "round": "라운드 점수: {mine} - {theirs}",
-    "deckCount": "덱: {count}",
-    "discardCount": "버린 카드: {count}",
     "counts": "덱: {deck} · 버린 카드: {discard}",
     "playCardAria": "{value} 카드 내기",
     "waitingOnOpponent": "상대의 카드를 기다리는 중...",

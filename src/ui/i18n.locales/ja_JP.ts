@@ -3150,8 +3150,6 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'cardDuel.queued': '対戦相手を待っています……',
   'cardDuel.vsOpponent': '対 {name}',
   'cardDuel.round': 'ラウンドスコア：{mine} - {theirs}',
-  'cardDuel.deckCount': '山札：{count}',
-  'cardDuel.discardCount': '捨て札：{count}',
   'cardDuel.forfeit': '棄権',
   'cardDuel.forfeitAria': 'カードデュエルを棄権する',
   'cardDuel.unavailable': 'カードデュエルには、オンラインの対戦相手がもう一人必要です。',

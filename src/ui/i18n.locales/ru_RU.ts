@@ -3178,8 +3178,6 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'cardDuel.queued': 'Ожидание соперника...',
   'cardDuel.vsOpponent': 'против {name}',
   'cardDuel.round': 'Счёт раундов: {mine} - {theirs}',
-  'cardDuel.deckCount': 'Колода: {count}',
-  'cardDuel.discardCount': 'Сброс: {count}',
   'cardDuel.forfeit': 'Сдаться',
   'cardDuel.forfeitAria': 'Сдаться в карточной дуэли',
   'cardDuel.unavailable': 'Для карточной дуэли нужен ещё один игрок онлайн.',

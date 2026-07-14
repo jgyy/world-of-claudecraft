@@ -5,6 +5,7 @@ import type { PlayerMeta } from '../src/sim/sim';
 import type { SimContext } from '../src/sim/sim_context';
 import {
   CARD_DUEL_ROUND_DEADLINE_S,
+  CARD_DUEL_ROUNDS_TO_WIN,
   cardDuelMatchFor,
   forfeitCardDuelMatch,
   joinCardMinigameQueue,
@@ -46,6 +47,7 @@ function makeCtx(
     entities,
     cardDuelQueue: [] as number[],
     cardDuels: new Map(),
+    vcup: { botPids: [] as number[] },
     bumpDeedStat,
     error,
     emit,
@@ -99,6 +101,7 @@ describe('card_duel', () => {
       entities,
       cardDuelQueue: [] as number[],
       cardDuels: new Map(),
+      vcup: { botPids: [] as number[] },
       bumpDeedStat: vi.fn(),
       error,
       emit: vi.fn(),
@@ -141,7 +144,7 @@ describe('card_duel', () => {
   });
 
   it('resolves a full match to a winner and bumps cardDuelsWon exactly once', () => {
-    const { ctx, bumpDeedStat } = makeCtx();
+    const { ctx, bumpDeedStat, players } = makeCtx();
     joinCardMinigameQueue(ctx, 1);
     joinCardMinigameQueue(ctx, 2);
     updateCardDuelQueue(ctx);
@@ -162,6 +165,11 @@ describe('card_duel', () => {
     expect(cardDuelMatchFor(ctx, 1)).toBeNull();
     expect(cardDuelMatchFor(ctx, 2)).toBeNull();
     expect(bumpDeedStat).toHaveBeenCalledTimes(1);
+    // Side A always plays its highest card, side B its lowest, so A wins
+    // every non-push round: assert the credited meta is actually A's, not
+    // just that some meta was credited (a loser-credited bug would pass
+    // without this).
+    expect(bumpDeedStat.mock.calls[0][0]).toBe(players.get(1));
     expect(bumpDeedStat.mock.calls[0][1]).toBe('cardDuelsWon');
     expect(bumpDeedStat.mock.calls[0][2]).toBe(1);
   });
@@ -287,6 +295,112 @@ describe('card_duel', () => {
     expect(emit).toHaveBeenCalledWith(
       expect.objectContaining({ text: 'Your opponent forfeited the Card Duel. You win!', pid: 1 }),
     );
+  });
+
+  it('an expired round deadline forfeits side A when A is the one who went idle (mirror arm)', () => {
+    const { ctx, emit, bumpDeedStat } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    // Side B plays; side A goes idle. Without this arm, a regression that
+    // always forfeits match.b (the constant that also satisfies the other
+    // test) would go undetected.
+    playCardInDuel(ctx, match.handB.hand[0], 2);
+    (ctx as unknown as { time: number }).time = match.roundDeadline + 1;
+    updateCardDuelDeadlines(ctx);
+    expect(cardDuelMatchFor(ctx, 1)).toBeNull();
+    expect(cardDuelMatchFor(ctx, 2)).toBeNull();
+    expect(bumpDeedStat).toHaveBeenCalledTimes(1);
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({ text: 'You forfeit the Card Duel.', pid: 1 }),
+    );
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({ text: 'Your opponent forfeited the Card Duel. You win!', pid: 2 }),
+    );
+  });
+
+  it('an expired round deadline with both sides idle voids the match without crediting anyone', () => {
+    const { ctx, emit, bumpDeedStat } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    // Neither side plays a card before the deadline expires.
+    (ctx as unknown as { time: number }).time = match.roundDeadline + 1;
+    updateCardDuelDeadlines(ctx);
+    expect(cardDuelMatchFor(ctx, 1)).toBeNull();
+    expect(cardDuelMatchFor(ctx, 2)).toBeNull();
+    expect(bumpDeedStat).not.toHaveBeenCalled();
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        text: 'Your Card Duel is void: neither side played in time.',
+        pid: 1,
+      }),
+    );
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        text: 'Your Card Duel is void: neither side played in time.',
+        pid: 2,
+      }),
+    );
+  });
+
+  it('a normally progressing match refreshes its deadline each round and never auto-forfeits', () => {
+    const { ctx } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    const startDeadline = match.roundDeadline;
+    // Advance sim time to just before the deadline started at, then resolve
+    // a round: without the per-round deadline refresh, the match would auto-
+    // forfeit 90s after it STARTED rather than after its last completed round.
+    (ctx as unknown as { time: number }).time = startDeadline - 1;
+    playCardInDuel(ctx, match.handA.hand[0], 1);
+    playCardInDuel(ctx, match.handB.hand[0], 2);
+    expect(match.roundDeadline).toBeGreaterThan(startDeadline - 1);
+    updateCardDuelDeadlines(ctx);
+    expect(cardDuelMatchFor(ctx, 1)).not.toBeNull();
+  });
+
+  it('best-of-CARD_DUEL_ROUNDS_TO_WIN: the match ends the instant a side reaches the pinned threshold, not sooner', () => {
+    const { ctx } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    // Side A wins CARD_DUEL_ROUNDS_TO_WIN - 1 rounds: the match must still
+    // be live (a threshold of 1, i.e. single-round, would have ended it).
+    for (let i = 0; i < CARD_DUEL_ROUNDS_TO_WIN - 1; i++) {
+      const m = cardDuelMatchFor(ctx, 1);
+      if (!m) throw new Error('match ended early');
+      playCardInDuel(ctx, Math.max(...m.handA.hand), 1);
+      playCardInDuel(ctx, Math.min(...m.handB.hand), 2);
+    }
+    expect(cardDuelMatchFor(ctx, 1)?.roundsA).toBe(CARD_DUEL_ROUNDS_TO_WIN - 1);
+    expect(cardDuelMatchFor(ctx, 1)).not.toBeNull();
+    // The next A win reaches the threshold and ends the match.
+    const m = cardDuelMatchFor(ctx, 1);
+    if (!m) throw new Error('expected a live match');
+    playCardInDuel(ctx, Math.max(...m.handA.hand), 1);
+    playCardInDuel(ctx, Math.min(...m.handB.hand), 2);
+    expect(cardDuelMatchFor(ctx, 1)).toBeNull();
+  });
+
+  it('cardMinigameAvailable ignores Fiesta/Vale Cup bots (offline bot matches must not fake availability)', () => {
+    const { ctx, error } = makeCtx();
+    (ctx.players.get(2) as unknown as { isFiestaBot?: boolean }).isFiestaBot = true;
+    ctx.vcup.botPids.push(3);
+    // Only pids 2 and 3 exist besides 1, and both are bots: no queueable
+    // human opponent exists, so joining must still be refused.
+    joinCardMinigameQueue(ctx, 1);
+    expect(error).toHaveBeenCalledWith(1, 'Card Duel requires another player online.');
+    expect(ctx.cardDuelQueue).toEqual([]);
   });
 
   it('does not forfeit a match before its round deadline has passed', () => {

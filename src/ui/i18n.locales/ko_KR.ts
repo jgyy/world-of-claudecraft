@@ -3131,8 +3131,6 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'cardDuel.queued': '상대를 기다리는 중...',
   'cardDuel.vsOpponent': '{name}와(과) 대결',
   'cardDuel.round': '라운드 점수: {mine} - {theirs}',
-  'cardDuel.deckCount': '덱: {count}',
-  'cardDuel.discardCount': '버린 카드: {count}',
   'cardDuel.forfeit': '기권',
   'cardDuel.forfeitAria': '카드 대결 기권하기',
   'cardDuel.unavailable': '카드 대결을 하려면 다른 플레이어가 온라인 상태여야 합니다.',

@@ -755,8 +755,6 @@ export const en = {
     unavailable: 'Card Duel requires another player online.',
     vsOpponent: 'vs {name}',
     round: 'Round score: {mine} - {theirs}',
-    deckCount: 'Deck: {count}',
-    discardCount: 'Discard: {count}',
     counts: 'Deck: {deck} · Discard: {discard}',
     playCardAria: 'Play the {value} card',
     waitingOnOpponent: "Waiting on your opponent's card...",

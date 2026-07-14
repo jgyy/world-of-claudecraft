@@ -318,11 +318,11 @@ const baseEnTable = {
   'log.cardDuelLeftQueue': 'You leave the Card Duel queue.',
   'log.cardDuelBegins': 'Your Card Duel against {name} begins!',
   'log.cardDuelRound': 'Card Duel round: you played {mine}, opponent played {theirs}.',
-  'log.cardDuelOpponentLeft': 'Your opponent left the Card Duel.',
   'log.cardDuelWin': 'You win the Card Duel against {name}!',
   'log.cardDuelLoss': 'You lose the Card Duel against {name}.',
   'log.cardDuelForfeit': 'You forfeit the Card Duel.',
   'log.cardDuelOpponentForfeited': 'Your opponent forfeited the Card Duel. You win!',
+  'log.cardDuelVoid': 'Your Card Duel is void: neither side played in time.',
   'error.cardDuelNotAtMaster': 'You must be at the Card Master to queue for a Card Duel.',
   'error.cardDuelNotInMatch': 'You are not in a Card Duel.',
   'error.cardDuelAlreadyPlayed': 'You already played a card this round.',
@@ -6594,7 +6594,6 @@ const RULES: Rule[] = [
     re: /^Card Duel round: you played (.+), opponent played (.+)\.$/,
     build: (m) => tSim('log.cardDuelRound', { mine: m[1], theirs: m[2] }),
   },
-  { re: /^Your opponent left the Card Duel\.$/, build: () => tSim('log.cardDuelOpponentLeft') },
   {
     re: /^You win the Card Duel against (.+)!$/,
     build: (m) => tSim('log.cardDuelWin', { name: m[1] }),
@@ -6607,6 +6606,10 @@ const RULES: Rule[] = [
   {
     re: /^Your opponent forfeited the Card Duel\. You win!$/,
     build: () => tSim('log.cardDuelOpponentForfeited'),
+  },
+  {
+    re: /^Your Card Duel is void: neither side played in time\.$/,
+    build: () => tSim('log.cardDuelVoid'),
   },
   {
     re: /^You must be at the Card Master to queue for a Card Duel\.$/,

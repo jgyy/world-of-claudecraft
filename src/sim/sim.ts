@@ -3945,8 +3945,8 @@ export class Sim {
     lap?.('engaged');
 
     this.updateDuels();
-    this.updateCardDuelQueue();
     lap?.('duels');
+    this.updateCardDuelQueue();
     this.updateCardDuelDeadlines();
     lap?.('cardDuel');
     this.updateArena();
