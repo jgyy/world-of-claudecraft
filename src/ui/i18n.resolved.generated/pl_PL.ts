@@ -1266,7 +1266,7 @@ export const pl_PL: EnTranslations = {
     },
     "bags": {
       "cannotDestroy": "Tego przedmiotu nie można zniszczyć.",
-      "rightClickDestroy": "Kliknij prawym, aby zniszczyć",
+      "rightClickDestroy": "Shift+right-click to destroy",
       "filterGroupAria": "Filtruj torby według kategorii",
       "filterAll": "Wszystko",
       "filterWeapon": "Bronie",
