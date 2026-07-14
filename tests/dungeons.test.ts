@@ -937,6 +937,50 @@ describe('dungeons: heroic daily lockouts', () => {
     expect(sim.players.get(member)!.raidLockouts.has('hollow_crypt:heroic')).toBe(true);
   });
 
+  it('a clean party kill still pays marks when the killing blow credits a disconnecting player (issue 1891)', () => {
+    // Regression for issue 1891: multiple heroic clears reported crediting 0 marks
+    // despite a clean, no-wipe kill. Root cause: kill-credit resolution (tap holder
+    // or killing-blow source) requires a LIVE, non-leaving player at the exact death
+    // tick. An authoritative leave teardown racing the last hit (the killer flips
+    // `meta.leaving` before the kill event is processed) zeroed credit entirely, so
+    // the whole party's heroic marks were dropped even though every member (buddy,
+    // here) genuinely fought the boss and stayed connected.
+    const sim = makeSim(5);
+    const leader = sim.addPlayer('warrior', 'Lead');
+    const buddy = sim.addPlayer('priest', 'Buddy');
+    sim.partyInvite(buddy, leader);
+    sim.partyAccept(buddy);
+    sim.setDungeonDifficulty('heroic', leader);
+    enterDungeon(sim.ctx, 'hollow_crypt', leader);
+    enterDungeon(sim.ctx, 'hollow_crypt', buddy);
+    const inst = claimedDungeon(sim, 'hollow_crypt', 'heroic');
+    const morthen = mobInInstance(sim, inst, 'morthen');
+    const le = sim.entities.get(leader) as AnyEntity;
+    const be = sim.entities.get(buddy) as AnyEntity;
+    teleport(sim, le, morthen.pos.x + 1, morthen.pos.z);
+    teleport(sim, be, morthen.pos.x - 1, morthen.pos.z);
+
+    // Leader opens on the boss first (owns tap), then buddy joins in, landing
+    // real threat-table damage of their own.
+    (sim as any).dealDamage(le, morthen, 10, false, 'physical', null, 'hit');
+    expect(morthen.tappedById).toBe(leader);
+    (sim as any).dealDamage(be, morthen, 10, false, 'physical', null, 'hit');
+    expect(morthen.dead).toBe(false);
+    expect(morthen.threat.has(buddy)).toBe(true);
+
+    // The leader's session begins tearing down (disconnect/reconnect) the instant
+    // before their killing blow lands: both the tap holder AND the killing-blow
+    // source are the same leaving player, so kill-credit resolution comes back
+    // null entirely. Buddy is still fully connected, in the raid, and on the
+    // hate table: the fix must still pay them.
+    sim.players.get(leader)!.leaving = true;
+    (sim as any).dealDamage(le, morthen, morthen.hp + 10, false, 'physical', null, 'hit');
+    expect(morthen.dead).toBe(true);
+
+    expect(sim.players.get(buddy)!.raidLockouts.has('hollow_crypt:heroic')).toBe(true);
+    expect(sim.countItem(HEROIC_MARK_ITEM_ID, buddy)).toBe(1);
+  });
+
   it('a locked party cannot ride an unlocked recruit into a fresh heroic claim', () => {
     const sim = makeSim(5);
     const leader = sim.addPlayer('warrior', 'Lead');

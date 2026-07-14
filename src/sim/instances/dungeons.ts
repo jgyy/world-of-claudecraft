@@ -501,7 +501,21 @@ function heroicRewardWindowToken(lockedUntil: number): string {
 // authoritative lockout boundary the only income gate and removes the former
 // UTC-day mismatch. Marks go straight into inventory, so corpse cleanup, a UI
 // failure, or logout cannot persist an entitlement without its reward.
-export function awardHeroicMarks(ctx: SimContext, mob: Entity, recipients: PlayerMeta[]): void {
+//
+// `recipients` is the kill-credit participation snapshot (tap/killer resolved to
+// a live, connected player); `damagerIds` is the boss's hate-table contributors
+// (pets resolved to owner), snapshotted before handleDeath clears it. Kill-credit
+// resolution can legitimately come up empty on a clean, fully-party-fought kill
+// (the tap holder or killing blow's source disconnects/reconnects at the exact
+// death tick), which must not zero the whole group's marks: a lockout recipient
+// who genuinely fought the boss (on the hate table) still earns their mark even
+// when `recipients` is empty or missing them.
+export function awardHeroicMarks(
+  ctx: SimContext,
+  mob: Entity,
+  recipients: PlayerMeta[],
+  damagerIds: ReadonlySet<number>,
+): void {
   const inst = ctx.instances.find((i) => i.partyKey !== null && i.mobIds.includes(mob.id));
   if (!inst || inst.difficulty !== 'heroic') return;
   const tuning = HEROIC_DUNGEON_TUNING[inst.dungeonId];
@@ -510,7 +524,10 @@ export function awardHeroicMarks(ctx: SimContext, mob: Entity, recipients: Playe
   const rewardWindow = heroicRewardWindowToken(lockedUntil);
   const rewardIds = new Set(recipients.map((meta) => meta.entityId));
   const lockoutRecipients = new Map<number, PlayerMeta>();
-  for (const meta of instanceLockoutMetas(ctx, inst)) lockoutRecipients.set(meta.entityId, meta);
+  for (const meta of instanceLockoutMetas(ctx, inst)) {
+    lockoutRecipients.set(meta.entityId, meta);
+    if (damagerIds.has(meta.entityId)) rewardIds.add(meta.entityId);
+  }
   // A tap holder who left both party and instance before the kill remains in
   // the death snapshot and must receive the same lockout as their reward.
   for (const meta of recipients) lockoutRecipients.set(meta.entityId, meta);

@@ -634,6 +634,22 @@ function reflectSpellWard(
   );
 }
 
+// Player ids (pets resolved to their owner) still on the mob's hate table at the
+// instant it dies, snapshotted BEFORE handleDeath clears the table. Mirrors
+// worldBossLootContributors's owner-resolution rule. Used as a fallback reward-
+// eligibility signal (see awardHeroicMarks call below): a party that actually
+// fought the boss must not lose its heroic marks just because the tap holder or
+// killing blow's credit failed to resolve to a live, connected player at the
+// exact death tick (a disconnect/reconnect racing the last hit).
+function threatContributorIds(ctx: SimContext, mob: Entity): Set<number> {
+  const out = new Set<number>();
+  for (const attackerId of mob.threat.keys()) {
+    const attacker = ctx.entities.get(attackerId);
+    out.add(attacker && attacker.ownerId !== null ? attacker.ownerId : attackerId);
+  }
+  return out;
+}
+
 export function handleDeath(ctx: SimContext, e: Entity, killer: Entity | null): void {
   e.dead = true;
   e.hp = 0;
@@ -754,6 +770,9 @@ export function handleDeath(ctx: SimContext, e: Entity, killer: Entity | null): 
       e.respawnTimer = Infinity;
       ctx.despawnSummonedAdds(e);
     }
+    // Snapshot combat contributors before the hate table is cleared below: the
+    // heroic-mark award needs this even when kill-credit resolution (below) fails.
+    const heroicDamagerIds = threatContributorIds(ctx, e);
     e.aggroTargetId = null;
     clearThreat(e);
     if (e.ownerId !== null) {
@@ -855,7 +874,7 @@ export function handleDeath(ctx: SimContext, e: Entity, killer: Entity | null): 
     // Settle the heroic reward and its realm-reset lockout together. This runs
     // even without player credit so the owning group cannot dodge the lockout;
     // only the participation snapshot above receives marks.
-    ctx.awardHeroicMarks(e, heroicRewardRecipients);
+    ctx.awardHeroicMarks(e, heroicRewardRecipients, heroicDamagerIds);
     // Nythraxis normal and heroic raid lockouts use a wider room sweep than
     // generic dungeon claims. Run it after heroic settlement so its lock stamp
     // cannot make first-clear participants look previously rewarded.

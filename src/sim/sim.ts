@@ -7308,8 +7308,8 @@ export class Sim {
 
   // Owned by instances/dungeons (heroic final-boss reward + lockout settlement);
   // the C1 death hub reaches it through the seam, this delegate keeps the facade.
-  awardHeroicMarks(mob: Entity, recipients: PlayerMeta[]): void {
-    awardHeroicMarksImpl(this.ctx, mob, recipients);
+  awardHeroicMarks(mob: Entity, recipients: PlayerMeta[], damagerIds: ReadonlySet<number>): void {
+    awardHeroicMarksImpl(this.ctx, mob, recipients, damagerIds);
   }
 
   // Heroic Quartermaster purchase (owned by instances/heroic_vendor.ts): the
