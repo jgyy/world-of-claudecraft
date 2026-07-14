@@ -28,6 +28,17 @@ describe('requiredClassesForTooltip', () => {
     expect(requiredClassesForTooltip(item)).toEqual(['warrior', 'paladin', 'shaman']);
   });
 
+  it('does not claim a restriction armor does not enforce (Shadowstitch Jerkin)', () => {
+    // canEquipItem short-circuits leather armor on weight: every leather AND mail
+    // class can wear it, so a druid (a leather class) can equip it even though
+    // requiredClass only names rogue/hunter. requiredClass here is loot-targeting
+    // metadata, not an enforced restriction, so the tooltip must stay silent.
+    const item = ITEMS.shadow_jerkin;
+    expect(item).toBeDefined();
+    expect(canEquipItem('druid', item)).toBe(true);
+    expect(requiredClassesForTooltip(item)).toBeNull();
+  });
+
   it('returns null when the item carries no class restriction', () => {
     expect(
       requiredClassesForTooltip({
