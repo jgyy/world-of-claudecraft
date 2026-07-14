@@ -476,6 +476,7 @@ export const da_DK: AdminTranslations = {
   "class.mage": "Magiker",
   "class.warlock": "Heksemester",
   "class.druid": "Druide",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "En moderationsårsag er påkrævet.",
   "error.moderationExpiryFuture": "Suspenderingens udløb skal ligge i fremtiden.",
   "error.characterNotFound": "Karakter ikke fundet.",

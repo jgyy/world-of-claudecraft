@@ -476,6 +476,7 @@ export const vi_VN: AdminTranslations = {
   "class.mage": "Pháp Sư",
   "class.warlock": "Thuật Sĩ Hắc Ám",
   "class.druid": "Druid",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "Cần có lý do điều hành.",
   "error.moderationExpiryFuture": "Thời điểm hết hạn đình chỉ phải ở tương lai.",
   "error.characterNotFound": "Không tìm thấy nhân vật.",

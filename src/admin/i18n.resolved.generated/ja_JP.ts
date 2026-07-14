@@ -476,6 +476,7 @@ export const ja_JP: AdminTranslations = {
   "class.mage": "メイジ",
   "class.warlock": "ウォーロック",
   "class.druid": "ドルイド",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "モデレーションの理由を入力してください",
   "error.moderationExpiryFuture": "停止の期限は未来の日時にする必要があります",
   "error.characterNotFound": "キャラクターが見つかりません",

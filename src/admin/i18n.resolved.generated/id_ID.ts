@@ -476,6 +476,7 @@ export const id_ID: AdminTranslations = {
   "class.mage": "Penyihir",
   "class.warlock": "Penyihir Iblis",
   "class.druid": "Druid",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "Alasan moderasi diperlukan.",
   "error.moderationExpiryFuture": "Masa berakhir penangguhan harus di masa depan.",
   "error.characterNotFound": "Karakter tidak ditemukan.",

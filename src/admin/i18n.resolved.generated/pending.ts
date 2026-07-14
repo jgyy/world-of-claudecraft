@@ -10,25 +10,65 @@
 // and `pretest`). Reproducibility is checked by tests/i18n_admin_catalog.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "class.card_adept"
+  ],
+  "es_ES": [
+    "class.card_adept"
+  ],
+  "fr_FR": [
+    "class.card_adept"
+  ],
+  "fr_CA": [
+    "class.card_adept"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
-  "pt_BR": [],
-  "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "it_IT": [
+    "class.card_adept"
+  ],
+  "de_DE": [
+    "class.card_adept"
+  ],
+  "zh_CN": [
+    "class.card_adept"
+  ],
+  "zh_TW": [
+    "class.card_adept"
+  ],
+  "ko_KR": [
+    "class.card_adept"
+  ],
+  "ja_JP": [
+    "class.card_adept"
+  ],
+  "pt_BR": [
+    "class.card_adept"
+  ],
+  "ru_RU": [
+    "class.card_adept"
+  ],
+  "cs_CZ": [
+    "class.card_adept"
+  ],
+  "nl_NL": [
+    "class.card_adept"
+  ],
+  "pl_PL": [
+    "class.card_adept"
+  ],
+  "id_ID": [
+    "class.card_adept"
+  ],
+  "tr_TR": [
+    "class.card_adept"
+  ],
+  "sv_SE": [
+    "class.card_adept"
+  ],
+  "vi_VN": [
+    "class.card_adept"
+  ],
+  "da_DK": [
+    "class.card_adept"
+  ]
 };

@@ -234,6 +234,7 @@ const CLASS_LABEL_IDS = new Set([
   'mage',
   'warlock',
   'druid',
+  'card_adept',
 ]);
 export function classLabel(classId: string): string {
   return CLASS_LABEL_IDS.has(classId) ? t(`class.${classId}`) : classId;

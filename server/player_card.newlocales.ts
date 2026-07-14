@@ -25,6 +25,7 @@ export const PLAYERCARD_NEW: Record<
       mage: 'Magiker',
       warlock: 'Heksemester',
       druid: 'Druide',
+      card_adept: 'Kortmester',
     },
   },
   id_ID: {
@@ -48,6 +49,7 @@ export const PLAYERCARD_NEW: Record<
       mage: 'Penyihir',
       warlock: 'Penyihir Iblis',
       druid: 'Druid',
+      card_adept: 'Ahli Kartu',
     },
   },
   nl_NL: {
@@ -70,6 +72,7 @@ export const PLAYERCARD_NEW: Record<
       mage: 'Magiër',
       warlock: 'Heksenmeester',
       druid: 'Druïde',
+      card_adept: 'Kaartmeester',
     },
   },
   pl_PL: {
@@ -92,6 +95,7 @@ export const PLAYERCARD_NEW: Record<
       mage: 'Mag',
       warlock: 'Czarnoksiężnik',
       druid: 'Druid',
+      card_adept: 'Mistrz Kart',
     },
   },
   sv_SE: {
@@ -114,6 +118,7 @@ export const PLAYERCARD_NEW: Record<
       mage: 'Magiker',
       warlock: 'Häxmästare',
       druid: 'Druid',
+      card_adept: 'Kortmästare',
     },
   },
   tr_TR: {
@@ -136,6 +141,7 @@ export const PLAYERCARD_NEW: Record<
       mage: 'Büyücü',
       warlock: 'Karabüyücü',
       druid: 'Druid',
+      card_adept: 'Kart Ustası',
     },
   },
   vi_VN: {
@@ -159,6 +165,7 @@ export const PLAYERCARD_NEW: Record<
       mage: 'Pháp Sư',
       warlock: 'Thuật Sĩ Hắc Ám',
       druid: 'Druid',
+      card_adept: 'Bậc Thầy Bài',
     },
   },
 };

@@ -476,6 +476,7 @@ export const sv_SE: AdminTranslations = {
   "class.mage": "Magiker",
   "class.warlock": "Häxmästare",
   "class.druid": "Druid",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "En modereringsorsak krävs.",
   "error.moderationExpiryFuture": "Avstängningens utgång måste ligga i framtiden.",
   "error.characterNotFound": "Karaktären hittades inte.",

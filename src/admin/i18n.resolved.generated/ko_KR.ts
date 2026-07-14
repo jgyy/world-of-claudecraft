@@ -476,6 +476,7 @@ export const ko_KR: AdminTranslations = {
   "class.mage": "마법사",
   "class.warlock": "흑마법사",
   "class.druid": "드루이드",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "관리 사유를 입력해야 합니다",
   "error.moderationExpiryFuture": "정지 종료 시점은 미래여야 합니다",
   "error.characterNotFound": "캐릭터를 찾을 수 없습니다",

@@ -476,6 +476,7 @@ export const de_DE: AdminTranslations = {
   "class.mage": "Magier",
   "class.warlock": "Hexenmeister",
   "class.druid": "Druide",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "ein Moderationsgrund ist erforderlich",
   "error.moderationExpiryFuture": "das Ablaufdatum der Aussetzung muss in der Zukunft liegen",
   "error.characterNotFound": "Charakter nicht gefunden",

@@ -483,6 +483,7 @@ export const en = {
   'class.mage': 'Mage',
   'class.warlock': 'Warlock',
   'class.druid': 'Druid',
+  'class.card_adept': 'Card Adept',
   'error.moderationReasonRequired': 'A moderation reason is required.',
   'error.moderationExpiryFuture': 'The suspension expiry must be in the future.',
   'error.characterNotFound': 'Character not found.',

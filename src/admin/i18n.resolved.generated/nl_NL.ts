@@ -476,6 +476,7 @@ export const nl_NL: AdminTranslations = {
   "class.mage": "Magiër",
   "class.warlock": "Heksenmeester",
   "class.druid": "Druïde",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "Een moderatiereden is vereist.",
   "error.moderationExpiryFuture": "De vervaldatum van de schorsing moet in de toekomst liggen.",
   "error.characterNotFound": "Personage niet gevonden.",

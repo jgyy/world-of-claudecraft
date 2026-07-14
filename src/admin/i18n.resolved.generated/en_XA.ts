@@ -476,6 +476,7 @@ export const en_XA: AdminTranslations = {
   "class.mage": "[Ɱáĝé]",
   "class.warlock": "[Ŵáŕļóçķ]",
   "class.druid": "[Ðŕúíð]",
+  "class.card_adept": "[Çáŕð Áðéþţ]",
   "error.moderationReasonRequired": "[Á ɱóðéŕáţíóñ ŕéášóñ íš ŕéɋúíŕéð.]",
   "error.moderationExpiryFuture": "[Ţĥé šúšþéñšíóñ éẋþíŕý ɱúšţ ƀé íñ ţĥé ƒúţúŕé.]",
   "error.characterNotFound": "[Çĥáŕáçţéŕ ñóţ ƒóúñð.]",

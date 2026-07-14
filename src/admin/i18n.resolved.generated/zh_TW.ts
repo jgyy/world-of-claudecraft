@@ -476,6 +476,7 @@ export const zh_TW: AdminTranslations = {
   "class.mage": "法師",
   "class.warlock": "術士",
   "class.druid": "德魯伊",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "必須填寫管理原因",
   "error.moderationExpiryFuture": "停權到期時間必須是未來時間",
   "error.characterNotFound": "找不到角色",

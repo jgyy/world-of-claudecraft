@@ -476,6 +476,7 @@ export const ru_RU: AdminTranslations = {
   "class.mage": "Маг",
   "class.warlock": "Чернокнижник",
   "class.druid": "Друид",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "необходимо указать причину модерации",
   "error.moderationExpiryFuture": "срок окончания блокировки должен быть в будущем",
   "error.characterNotFound": "персонаж не найден",

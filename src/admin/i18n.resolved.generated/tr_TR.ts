@@ -476,6 +476,7 @@ export const tr_TR: AdminTranslations = {
   "class.mage": "Büyücü",
   "class.warlock": "Karabüyücü",
   "class.druid": "Druid",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "Bir moderasyon gerekçesi gerekli.",
   "error.moderationExpiryFuture": "Askıya alma bitiş tarihi gelecekte olmalı.",
   "error.characterNotFound": "Karakter bulunamadı.",

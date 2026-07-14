@@ -85,7 +85,8 @@ type PlayerClassKey =
   | 'shaman'
   | 'mage'
   | 'warlock'
-  | 'druid';
+  | 'druid'
+  | 'card_adept';
 
 export interface PublicCardCopy {
   gameName: string;
@@ -110,6 +111,7 @@ const EN_CLASSES: Record<PlayerClassKey, string> = {
   mage: 'Mage',
   warlock: 'Warlock',
   druid: 'Druid',
+  card_adept: 'Card Adept',
 };
 
 export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
@@ -145,6 +147,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: 'Mago',
       warlock: 'Brujo',
       druid: 'Druida',
+      card_adept: 'Maestro de Cartas',
     },
   },
   es_ES: {
@@ -167,6 +170,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: 'Mago',
       warlock: 'Brujo',
       druid: 'Druida',
+      card_adept: 'Maestro de Cartas',
     },
   },
   fr_FR: {
@@ -189,6 +193,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: 'Mage',
       warlock: 'Démoniste',
       druid: 'Druide',
+      card_adept: 'Maître des Cartes',
     },
   },
   fr_CA: {
@@ -211,6 +216,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: 'Mage',
       warlock: 'Démoniste',
       druid: 'Druide',
+      card_adept: 'Maître des Cartes',
     },
   },
   en_CA: {
@@ -245,6 +251,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: 'Mago',
       warlock: 'Stregone',
       druid: 'Druido',
+      card_adept: 'Maestro delle Carte',
     },
   },
   de_DE: {
@@ -267,6 +274,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: 'Magier',
       warlock: 'Hexenmeister',
       druid: 'Druide',
+      card_adept: 'Kartenmeister',
     },
   },
   zh_CN: {
@@ -289,6 +297,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: '法师',
       warlock: '术士',
       druid: '德鲁伊',
+      card_adept: '纸牌师',
     },
   },
   zh_TW: {
@@ -311,6 +320,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: '法師',
       warlock: '術士',
       druid: '德魯伊',
+      card_adept: '紙牌師',
     },
   },
   ko_KR: {
@@ -334,6 +344,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: '마법사',
       warlock: '흑마법사',
       druid: '드루이드',
+      card_adept: '카드 마스터',
     },
   },
   ja_JP: {
@@ -356,6 +367,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: 'メイジ',
       warlock: 'ウォーロック',
       druid: 'ドルイド',
+      card_adept: 'カードマスター',
     },
   },
   pt_BR: {
@@ -378,6 +390,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: 'Mago',
       warlock: 'Bruxo',
       druid: 'Druida',
+      card_adept: 'Mestre das Cartas',
     },
   },
   ru_RU: {
@@ -400,6 +413,7 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       mage: 'Маг',
       warlock: 'Чернокнижник',
       druid: 'Друид',
+      card_adept: 'Мастер карт',
     },
   },
   ...PLAYERCARD_NEW,

@@ -476,6 +476,7 @@ export const cs_CZ: AdminTranslations = {
   "class.mage": "Mág",
   "class.warlock": "Černokněžník",
   "class.druid": "Druid",
+  "class.card_adept": "Card Adept",
   "error.moderationReasonRequired": "Je vyžadován důvod moderace.",
   "error.moderationExpiryFuture": "Vypršení pozastavení musí být v budoucnosti.",
   "error.characterNotFound": "Postava nenalezena.",

@@ -30,6 +30,7 @@ const VALID_CLASSES: ReadonlySet<string> = new Set([
   'warlock',
   'druid',
   'shaman',
+  'card_adept',
 ]);
 
 // Shape-check the content enough that the Sim ctor and terrain function won't trip
