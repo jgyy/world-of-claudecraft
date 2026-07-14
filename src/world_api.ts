@@ -60,6 +60,7 @@
 import type { IWorldBank } from './world_api/bank';
 import type { IWorldChat } from './world_api/chat';
 import type { IWorldCombat } from './world_api/combat';
+import type { IWorldCardMinigame } from './world_api/card_minigame';
 import type { IWorldCosmetics } from './world_api/cosmetics';
 import type { IWorldDailyRewards } from './world_api/daily_rewards';
 import type { IWorldDeeds } from './world_api/deeds';
@@ -149,6 +150,7 @@ export type {
   DungeonFinderProposalView,
   DungeonFinderQueueView,
 } from './world_api/dungeon_finder';
+export type { CardMinigameInfo } from './world_api/card_minigame';
 export type { RaidLockout } from './world_api/dungeons';
 export type { MailInfo, MailKindView, MailMessageView } from './world_api/mail';
 export type { MarketInfo, MarketListingView } from './world_api/market';
@@ -202,6 +204,7 @@ export interface IWorld
     IWorldTrade,
     IWorldChat,
     IWorldDuelArena,
+    IWorldCardMinigame,
     IWorldSocialGraph,
     IWorldMarket,
     IWorldMail,
@@ -322,6 +325,9 @@ export const COMMAND_NAMES = [
   'arena_queue',
   'arena_leave',
   'arena_augment',
+  'card_queue_join',
+  'card_queue_leave',
+  'play_card',
   'prestige',
   'applyTalents',
   'respec',
@@ -449,6 +455,7 @@ export type WorldFacet =
   | 'IWorldTrade'
   | 'IWorldChat'
   | 'IWorldDuelArena'
+  | 'IWorldCardMinigame'
   | 'IWorldSocialGraph'
   | 'IWorldMarket'
   | 'IWorldMail'
@@ -545,6 +552,11 @@ export const COMMAND_FACETS = {
   arena_queue: 'IWorldDuelArena',
   arena_leave: 'IWorldDuelArena',
   arena_augment: 'IWorldDuelArena',
+  // IWorldCardMinigame: the Card Duel minigame queue + in-match card plays.
+  // cardMinigameInfo is a snapshot read (no send).
+  card_queue_join: 'IWorldCardMinigame',
+  card_queue_leave: 'IWorldCardMinigame',
+  play_card: 'IWorldCardMinigame',
   // IWorldSocialGraph: friends/blocks/guild commands (online only; resolved
   // server-side by character name, handled by the #4 SocialService). socialInfo
   // arrives via the social/socialpos frames (no command); searchCharacters is a REST
