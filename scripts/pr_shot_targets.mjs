@@ -226,6 +226,34 @@ export const TARGETS = [
     },
   },
   {
+    key: 'card-duel',
+    label: 'Card Duel window (Card Master)',
+    when: [
+      'ui/card_duel',
+      'sim/social/card_duel',
+      'sim/content/card_master',
+      'sim/minigames/card_hand',
+    ],
+    // Teleport next to the Card Master (Eastbrook zone1, {13, 2}) so joinCardDuelQueue's
+    // range gate passes, then open the Card Duel window directly (idle state: this target
+    // only covers the bring-up the diff implies; queued/in-match/complete states are
+    // fixture-driven separately for the PR screenshot set, see docs/screenshots/card-duel).
+    async capture(page) {
+      await page.evaluate(() => {
+        const p = window.__game?.sim?.player;
+        if (p?.pos) {
+          p.pos.x = 13;
+          p.pos.z = 2;
+        }
+        const el = document.querySelector('#card-duel-window');
+        if (el) el.style.display = 'none';
+        window.__game?.hud?.toggleCardDuel?.();
+      });
+      const open = await pollForSize(page, '#card-duel-window');
+      return open ? { clip: '#card-duel-window' } : {};
+    },
+  },
+  {
     key: 'char-window',
     label: 'Character window',
     when: ['ui/char_window', 'ui/char_view'],
