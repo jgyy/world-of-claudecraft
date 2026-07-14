@@ -88,24 +88,29 @@ export function updateCardDuelQueue(ctx: SimContext): void {
   for (;;) {
     const pair = tryPairCardDuel(ctx.cardDuelQueue);
     if (!pair) break;
-    startCardDuel(ctx, pair[0], pair[1]);
+    // startCardDuel re-queues the pair at the front on failure (no free arena
+    // slot). Retrying immediately would just re-pop the same pair forever
+    // within this tick, so stop pairing this tick the first time a start
+    // fails; the requeued pair gets another shot next tick once a slot frees.
+    if (!startCardDuel(ctx, pair[0], pair[1])) break;
   }
 }
 
 // Start a Card Duel between two paired pids: allocate an arena slot, stash both
 // return positions, teleport both fighters into the pit facing each other, and
-// open the duel countdown. Skips (re-queuing neither) if no arena slot is free.
-export function startCardDuel(ctx: SimContext, aPid: number, bPid: number): void {
+// open the duel countdown. Re-queues the pair (never silently dropped) and
+// returns false if no arena slot is free or either fighter vanished.
+export function startCardDuel(ctx: SimContext, aPid: number, bPid: number): boolean {
   const ea = ctx.entities.get(aPid);
   const eb = ctx.entities.get(bPid);
-  if (!ea || !eb) return;
+  if (!ea || !eb) return false;
   const slot = freeArenaSlot(ctx);
   if (slot === null) {
     // No free slot: put the longest-waiting pair back at the front of the FIFO so
     // they pair again next tick a slot frees, never silently dropped.
     ctx.cardDuelQueue.unshift(bPid);
     ctx.cardDuelQueue.unshift(aPid);
-    return;
+    return false;
   }
   ctx.arenaBusySlots.add(slot);
   const returns = new Map<number, { x: number; z: number; facing: number }>();
@@ -126,4 +131,5 @@ export function startCardDuel(ctx: SimContext, aPid: number, bPid: number): void
   for (const dPid of [aPid, bPid]) {
     ctx.emit({ type: 'duelCountdown', seconds: DUEL_COUNTDOWN, pid: dPid });
   }
+  return true;
 }

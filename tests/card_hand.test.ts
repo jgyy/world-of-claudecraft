@@ -93,9 +93,16 @@ describe('deterministic shuffle and draw', () => {
     // Play the opening hand into the discard so the discard is non-empty.
     while (state.hand.length > 0) playCardAt(state, 0);
     expect(state.discard.length).toBeGreaterThan(0);
-    // Drain the deck to zero with cards still sitting in the discard.
-    while (state.deck.length > 0) drawOne(new Rng(1), state);
+    // Drain the deck to zero with cards still sitting in the discard. drawOne
+    // caps at MAX_HAND_SIZE, so play cards back out to discard as the hand
+    // fills, keeping the loop making forward progress on the deck.
+    while (state.deck.length > 0) {
+      if (drawOne(new Rng(1), state) === null) playCardAt(state, 0);
+    }
     expect(state.deck.length).toBe(0);
+    // Play the hand back out too, so the next drawOne is blocked only by the
+    // empty deck (reshuffle), not the MAX_HAND_SIZE cap.
+    while (state.hand.length > 0) playCardAt(state, 0);
     const discardBeforeReshuffle = state.discard.length;
     expect(discardBeforeReshuffle).toBeGreaterThan(0);
     // The next draw with an empty deck MUST reshuffle the discard back in (the
@@ -104,8 +111,9 @@ describe('deterministic shuffle and draw', () => {
     expect(drawn).not.toBeNull();
     expect(state.discard.length).toBe(0); // discard emptied into the deck
     expect(state.deck.length).toBe(discardBeforeReshuffle - 1); // minus the drawn card
-    // No card is ever lost or duplicated across the reshuffle.
-    const seen = state.deck.length + state.hand.length + state.discard.length + 1;
+    // No card is ever lost or duplicated across the reshuffle. hand.length
+    // already includes the just-drawn card (drawOne pushes onto state.hand).
+    const seen = state.deck.length + state.hand.length + state.discard.length;
     expect(seen).toBe(total);
   });
 });
