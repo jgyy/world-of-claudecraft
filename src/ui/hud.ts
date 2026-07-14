@@ -208,7 +208,10 @@ import {
   auraApplyCue,
   castCueForAbility,
   impactCueForDamage,
+  type MobVoiceAction,
+  mobVoiceActionForDamage,
   mobVoiceCue,
+  mobVoiceCueWithFallback,
   playerSwingCueForDamage,
   shouldPlayCombatImpactForTarget,
   shouldPlayCritSfxForTarget,
@@ -881,10 +884,7 @@ function appendChildSpan(parent: HTMLElement, className: string): HTMLElement {
   return span;
 }
 
-function availableMobVoiceCue(
-  templateId: string,
-  action: 'aggro' | 'attack' | 'death',
-): string | null {
+function availableMobVoiceCue(templateId: string, action: MobVoiceAction): string | null {
   return mobVoiceCue(templateId, action, (key) => sfx.hasVariants(key));
 }
 
@@ -8851,10 +8851,17 @@ export class Hud {
         // pain vocalization only on a crit — never on ordinary hits.
         if (ev.crit && ev.targetId === sim.playerId) {
           this.combat('player_hurt', tp.x, tp.y, tp.z, 0.55, { cooldown: 0.3 });
-        } else if (ev.crit && tgt.kind === 'mob' && shouldPlayCritSfxForTarget(tgt)) {
-          const voice = availableMobVoiceCue(tgt.templateId, 'attack');
-          if (voice && shouldPlayMobVoiceSfxForEntity(tgt))
-            this.combat(voice, tp.x, tp.y, tp.z, 0.6, { rate: 1.25, cooldown: 0.1 });
+        } else {
+          const mobAction = mobVoiceActionForDamage(ev, tgt);
+          if (mobAction && shouldPlayMobVoiceSfxForEntity(tgt)) {
+            const voice = mobVoiceCueWithFallback(
+              tgt.templateId,
+              mobAction,
+              (key) => sfx.hasVariants(key),
+              (key) => sfx.isBuffered(key),
+            );
+            if (voice) this.combat(voice, tp.x, tp.y, tp.z, 0.6, { cooldown: 0.1 });
+          }
         }
         return;
       }
@@ -8940,8 +8947,15 @@ export class Hud {
     if (src.kind === 'mob') {
       if (this.ensureMobEngaged(src)) return; // just fired the aggro alert
       const voice = availableMobVoiceCue(src.templateId, 'attack');
-      if (voice && shouldPlayMobVoiceSfxForEntity(src))
+      if (voice && shouldPlayMobVoiceSfxForEntity(src)) {
         this.combat(voice, src.pos.x, src.pos.y, src.pos.z, 0.55, { cooldown: 0.25 });
+        // Warm the crit-only hurt cue alongside the frequently-played attack
+        // bark, so it is resident well before a crit could ever need it. Gated
+        // the same as the play above (a muted Nythraxis mob never plays it)
+        // and short-circuited once warm so this doesn't re-scan every hit.
+        const hurtVoice = availableMobVoiceCue(src.templateId, 'hurt');
+        if (hurtVoice && !sfx.isBuffered(hurtVoice)) sfx.preload(hurtVoice);
+      }
     }
   }
 
