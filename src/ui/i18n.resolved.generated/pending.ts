@@ -34,25 +34,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.bags.rightClickDestroy",
     "hudChrome.discord.link.joinServer"
   ],
-  "zh_CN": [
-    "hudChrome.bags.rightClickDestroy"
-  ],
-  "zh_TW": [
-    "hudChrome.bags.rightClickDestroy"
-  ],
-  "ko_KR": [
-    "hudChrome.bags.rightClickDestroy"
-  ],
-  "ja_JP": [
-    "hudChrome.bags.rightClickDestroy"
-  ],
+  "zh_CN": [],
+  "zh_TW": [],
+  "ko_KR": [],
+  "ja_JP": [],
   "pt_BR": [
     "hudChrome.bags.rightClickDestroy",
     "hudChrome.discord.link.joinServer"
   ],
-  "ru_RU": [
-    "hudChrome.bags.rightClickDestroy"
-  ],
+  "ru_RU": [],
   "cs_CZ": [
     "hudChrome.bags.rightClickDestroy",
     "hudChrome.discord.link.joinServer"
