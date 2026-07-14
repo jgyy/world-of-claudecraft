@@ -154,6 +154,9 @@ export const ja_JP: EnTranslations = {
     "spectate": {
       "banner": "{name}を観戦中"
     },
+    "cardHand": {
+      "emptySlot": "空のカードスロット"
+    },
     "readyCheck": {
       "prompt": "{name} が準備確認を開始しました。準備はいいですか？",
       "ready": "準備完了",

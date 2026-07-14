@@ -367,6 +367,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.keybinds.discord': 'Discord',
   'hudChrome.spectate.banner': '{name}を観戦中',
   'hudChrome.readyCheck.prompt': '{name} が準備確認を開始しました。準備はいいですか？',
+  'hudChrome.cardHand.emptySlot': '空のカードスロット',
   'hudChrome.readyCheck.ready': '準備完了',
   'hudChrome.readyCheck.notReady': '準備未完了',
   'hudChrome.readyCheck.result':

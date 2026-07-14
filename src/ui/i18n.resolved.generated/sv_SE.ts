@@ -154,6 +154,9 @@ export const sv_SE: EnTranslations = {
     "spectate": {
       "banner": "Åskådar {name}"
     },
+    "cardHand": {
+      "emptySlot": "Empty card slot"
+    },
     "readyCheck": {
       "prompt": "{name} har startat en beredskapskontroll. Är du redo?",
       "ready": "Redo",

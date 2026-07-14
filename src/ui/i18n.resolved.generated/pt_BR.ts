@@ -154,6 +154,9 @@ export const pt_BR: EnTranslations = {
     "spectate": {
       "banner": "Assistindo {name}"
     },
+    "cardHand": {
+      "emptySlot": "Empty card slot"
+    },
     "readyCheck": {
       "prompt": "{name} iniciou uma verificação de prontidão. Você está pronto?",
       "ready": "Pronto",

@@ -154,6 +154,9 @@ export const en_XA: EnTranslations = {
     "spectate": {
       "banner": "[Šþéçţáţíñĝ {name}]"
     },
+    "cardHand": {
+      "emptySlot": "[Éɱþţý çáŕð šļóţ]"
+    },
     "readyCheck": {
       "prompt": "[{name} ĥáš šţáŕţéð á ŕéáðý çĥéçķ. Áŕé ýóú ŕéáðý?]",
       "ready": "[Ŕéáðý]",

@@ -154,6 +154,9 @@ export const tr_TR: EnTranslations = {
     "spectate": {
       "banner": "{name} izleniyor"
     },
+    "cardHand": {
+      "emptySlot": "Empty card slot"
+    },
     "readyCheck": {
       "prompt": "{name} bir hazır kontrolü başlattı. Hazır mısın?",
       "ready": "Hazır",

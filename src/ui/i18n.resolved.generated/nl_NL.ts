@@ -154,6 +154,9 @@ export const nl_NL: EnTranslations = {
     "spectate": {
       "banner": "Toeschouwer bij {name}"
     },
+    "cardHand": {
+      "emptySlot": "Empty card slot"
+    },
     "readyCheck": {
       "prompt": "{name} heeft een gereedheidscontrole gestart. Ben je gereed?",
       "ready": "Gereed",

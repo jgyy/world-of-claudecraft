@@ -923,6 +923,9 @@ export class Hud {
   // paint()'d per update() from the pure card_hand_view.ts model, a no-op / hidden
   // for every other class.
   private cardHandPainter!: CardHandPainter;
+  // Set once a non-Card-Adept has painted the hidden hand bar, so the paint-to-hide
+  // fires exactly once instead of every frame.
+  private cardHandHidden = false;
   // The mobile action ring: a SECOND createActionBarView instance over a 6-slot
   // descriptor (slot 0 attack, slots 1-5 resolve through
   // sourceSlotForMobileButton(mobileActionPage, i-1)). mobileActionPage is the
@@ -5877,9 +5880,26 @@ export class Hud {
         })),
       },
       (abilityId) => `url(${iconDataUrl('ability', abilityId)})`,
+      (abilityId) => (ABILITIES[abilityId] ? abilityDisplayName(ABILITIES[abilityId]) : abilityId),
+      t('hudChrome.cardHand.emptySlot'),
       (index) => this.sim.playCard(index),
     );
+    // The Card Duel minimap toggle only ever shows for a Card Adept, and the class
+    // never changes mid-session, so set its visibility ONCE here instead of every
+    // frame in update().
+    const cardDuelBtn = document.getElementById('mm-card-duel');
+    if (cardDuelBtn) {
+      cardDuelBtn.style.display = this.sim.cfg.playerClass === 'card_adept' ? '' : 'none';
+    }
   }
+
+  // Talent-and-rank resolved Focus cost of a card's ability, or null when the
+  // ability is not learned yet (the card cannot be cast). Bound once so the hot
+  // card-hand path allocates no per-frame closure.
+  private readonly cardCostResolver = (abilityId: string): number | null => {
+    const known = this.sim.known.find((k) => k.def.id === abilityId);
+    return known ? known.cost : null;
+  };
 
   // Build the mobile action ring: a SECOND createActionBarView instance over a
   // 6-slot descriptor (slot 0 the fixed attack toggle, slots 1-5 the paged action
@@ -6898,26 +6918,34 @@ export class Hud {
       if (this.townFocusOpen) this.renderTownFocus();
     }
 
-    // Card Duel: the minimap toggle only ever shows for a Card Adept, gated to
-    // the slow tier like the Town Focus button above (the class never changes
-    // mid-session, but this keeps the check off the hot band).
-    if (slowHud) {
-      const isCardAdept = sim.cfg.playerClass === 'card_adept';
-      const cardDuelBtn = document.getElementById('mm-card-duel');
-      if (cardDuelBtn) cardDuelBtn.style.display = isCardAdept ? '' : 'none';
-    }
     // Card Adept hand bar: the pure card_hand_view.ts model + the write-elided
-    // card_hand_painter.ts painter (the ActionBarPainter pattern). Hidden and a
-    // no-op for every other class.
-    this.cardHandPainter.paint(
-      buildCardHandView({
-        isCardAdept: sim.cfg.playerClass === 'card_adept',
-        handIds: sim.cardHandIds(),
-        deckCount: sim.cardDeckCount(),
-        discardCount: sim.cardDiscardCount(),
-        focus: sim.player.resource,
-      }),
-    );
+    // card_hand_painter.ts painter (the ActionBarPainter pattern). Only a Card Adept
+    // pays the per-frame reads + view build; every other class paints the hidden
+    // state exactly once (the painter elides the repeat), so the hot band stays free
+    // of the card reads and the input-literal allocation.
+    if (sim.cfg.playerClass === 'card_adept') {
+      this.cardHandPainter.paint(
+        buildCardHandView({
+          isCardAdept: true,
+          handIds: sim.cardHandIds(),
+          deckCount: sim.cardDeckCount(),
+          discardCount: sim.cardDiscardCount(),
+          focus: sim.player.resource,
+          resolveCost: this.cardCostResolver,
+        }),
+      );
+    } else if (!this.cardHandHidden) {
+      this.cardHandHidden = true;
+      this.cardHandPainter.paint(
+        buildCardHandView({
+          isCardAdept: false,
+          handIds: [],
+          deckCount: 0,
+          discardCount: 0,
+          focus: 0,
+        }),
+      );
+    }
 
     // player frame: the first instance of the unit_frame family. Build a
     // player-shaped descriptor and paint it. The absorb overlay + the resource-type

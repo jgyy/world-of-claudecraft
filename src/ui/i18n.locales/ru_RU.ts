@@ -364,6 +364,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.keybinds.discord': 'Discord',
   'hudChrome.spectate.banner': 'Наблюдение за {name}',
   'hudChrome.readyCheck.prompt': '{name} начал проверку готовности. Вы готовы?',
+  'hudChrome.cardHand.emptySlot': 'Пустая ячейка карты',
   'hudChrome.readyCheck.ready': 'Готов',
   'hudChrome.readyCheck.notReady': 'Не готов',
   'hudChrome.readyCheck.result':

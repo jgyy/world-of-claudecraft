@@ -362,6 +362,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.keybinds.discord': 'Discord',
   'hudChrome.spectate.banner': '{name} 관전 중',
   'hudChrome.readyCheck.prompt': '{name} 님이 준비 확인을 시작했습니다. 준비되셨습니까?',
+  'hudChrome.cardHand.emptySlot': '빈 카드 슬롯',
   'hudChrome.readyCheck.ready': '준비 완료',
   'hudChrome.readyCheck.notReady': '준비 안 됨',
   'hudChrome.readyCheck.result':

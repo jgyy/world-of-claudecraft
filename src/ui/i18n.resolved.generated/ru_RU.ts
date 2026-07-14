@@ -154,6 +154,9 @@ export const ru_RU: EnTranslations = {
     "spectate": {
       "banner": "Наблюдение за {name}"
     },
+    "cardHand": {
+      "emptySlot": "Пустая ячейка карты"
+    },
     "readyCheck": {
       "prompt": "{name} начал проверку готовности. Вы готовы?",
       "ready": "Готов",

@@ -13,6 +13,10 @@ export const hudChromeStrings = {
   spectate: {
     banner: 'Spectating {name}',
   },
+  // Card Adept hand bar (#card-hand): the accessible name for a slot with no card.
+  cardHand: {
+    emptySlot: 'Empty card slot',
+  },
   // Raid/party ready-check prompt (the leader ran /ready). The buttons answer the
   // yes/no prompt; the outcome is announced in chat by the sim.
   readyCheck: {

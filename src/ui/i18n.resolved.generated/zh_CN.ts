@@ -154,6 +154,9 @@ export const zh_CN: EnTranslations = {
     "spectate": {
       "banner": "正在观察 {name}"
     },
+    "cardHand": {
+      "emptySlot": "空的卡牌槽"
+    },
     "readyCheck": {
       "prompt": "{name} 发起了准备确认。你准备好了吗？",
       "ready": "准备就绪",

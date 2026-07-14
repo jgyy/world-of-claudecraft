@@ -1532,6 +1532,10 @@
     background: #0d0d13;
     cursor: default;
     box-shadow: inset 0 0 10px #000;
+    /* An empty slot is not an actionable control: no pointer events (it also
+       carries aria-disabled), so a click can never reach a card the client (an
+       online mirror) cannot see. */
+    pointer-events: none;
   }
   .card-hand-slot.unplayable {
     filter: grayscale(1) brightness(0.5);

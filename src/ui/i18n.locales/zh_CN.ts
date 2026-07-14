@@ -352,6 +352,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.keybinds.discord': 'Discord',
   'hudChrome.spectate.banner': '正在观察 {name}',
   'hudChrome.readyCheck.prompt': '{name} 发起了准备确认。你准备好了吗？',
+  'hudChrome.cardHand.emptySlot': '空的卡牌槽',
   'hudChrome.readyCheck.ready': '准备就绪',
   'hudChrome.readyCheck.notReady': '未准备',
   'hudChrome.readyCheck.result':

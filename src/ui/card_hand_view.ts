@@ -31,6 +31,11 @@ export interface CardHandInput {
   deckCount: number;
   discardCount: number;
   focus: number;
+  // Resolves a card's ability to its talent-and-rank resolved Focus cost, or null
+  // if the ability is not learned yet (a card in hand the player cannot cast). When
+  // omitted (Node tests), the pinned CardDef.cost is used and every card is treated
+  // as learned, preserving the original behavior.
+  resolveCost?: (effectAbilityId: string) => number | null;
 }
 
 const EMPTY: CardHandView = { visible: false, slots: [], deckCount: 0, discardCount: 0 };
@@ -41,12 +46,17 @@ export function buildCardHandView(input: CardHandInput): CardHandView {
   for (const id of input.handIds) {
     const def = CARDS_BY_ID[id];
     if (!def) continue;
+    const resolved = input.resolveCost ? input.resolveCost(def.effectAbilityId) : def.cost;
+    // resolved === null means the referenced ability is not learned yet: the card
+    // cannot be cast, so it is never playable and shows its pinned cost.
+    const cost = resolved ?? def.cost;
+    const playable = resolved === null ? false : input.focus >= cost;
     slots.push({
       id,
       effectAbilityId: def.effectAbilityId,
-      cost: def.cost,
+      cost,
       rarity: def.rarity,
-      playable: input.focus >= def.cost,
+      playable,
     });
   }
   return {

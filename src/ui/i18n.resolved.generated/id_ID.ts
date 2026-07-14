@@ -154,6 +154,9 @@ export const id_ID: EnTranslations = {
     "spectate": {
       "banner": "Menonton {name}"
     },
+    "cardHand": {
+      "emptySlot": "Empty card slot"
+    },
     "readyCheck": {
       "prompt": "{name} memulai pemeriksaan kesiapan. Apakah kamu siap?",
       "ready": "Siap",
