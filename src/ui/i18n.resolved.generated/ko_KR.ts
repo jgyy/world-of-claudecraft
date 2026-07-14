@@ -1263,7 +1263,7 @@ export const ko_KR: EnTranslations = {
     },
     "bags": {
       "cannotDestroy": "이 아이템은 파괴할 수 없습니다.",
-      "rightClickDestroy": "마우스 오른쪽 버튼으로 파괴",
+      "rightClickDestroy": "Shift + 마우스 오른쪽 버튼으로 파괴",
       "filterGroupAria": "가방을 분류별로 필터링",
       "filterAll": "전체",
       "filterWeapon": "무기",
@@ -1463,7 +1463,8 @@ export const ko_KR: EnTranslations = {
         "connecting": "Discord 여는 중...",
         "benefits": "플레이와 커뮤니티 활동으로 포인트를 얻고 상태 등급을 올리려면 Discord를 연결하세요.",
         "error": "Discord를 연결할 수 없습니다. 다시 시도해 주세요.",
-        "success": "Discord가 연결되었습니다."
+        "success": "Discord가 연결되었습니다.",
+        "joinServer": "연동 없이 서버 참여하기"
       },
       "choice": {
         "title": "Discord로 계속하기",

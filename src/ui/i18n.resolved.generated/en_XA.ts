@@ -1263,7 +1263,7 @@ export const en_XA: EnTranslations = {
     },
     "bags": {
       "cannotDestroy": "[Ţĥíš íţéɱ çáññóţ ƀé ðéšţŕóýéð.]",
-      "rightClickDestroy": "[Ŕíĝĥţ-çļíçķ ţó ðéšţŕóý]",
+      "rightClickDestroy": "[Šĥíƒţ+ŕíĝĥţ-çļíçķ ţó ðéšţŕóý]",
       "filterGroupAria": "[Ƒíļţéŕ ƀáĝš ƀý çáţéĝóŕý]",
       "filterAll": "[Áļļ]",
       "filterWeapon": "[Ŵéáþóñš]",
@@ -1463,7 +1463,8 @@ export const en_XA: EnTranslations = {
         "connecting": "[Óþéñíñĝ Ðíšçóŕð...]",
         "benefits": "[Ļíñķ ýóúŕ Ðíšçóŕð ţó éáŕñ þóíñţš ƒŕóɱ þļáý áñð çóɱɱúñíţý áçţíʋíţý, áñð çļíɱƀ ţĥé šţáţúš ţíéŕš.]",
         "error": "[Çóúļð ñóţ ļíñķ Ðíšçóŕð. Þļéášé ţŕý áĝáíñ.]",
-        "success": "[Ðíšçóŕð ļíñķéð.]"
+        "success": "[Ðíšçóŕð ļíñķéð.]",
+        "joinServer": "[Ĵúšţ ĵóíñ ţĥé Ðíšçóŕð šéŕʋéŕ]"
       },
       "choice": {
         "title": "[Çóñţíñúé ŵíţĥ Ðíšçóŕð]",

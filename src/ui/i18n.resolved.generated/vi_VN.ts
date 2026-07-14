@@ -1263,7 +1263,7 @@ export const vi_VN: EnTranslations = {
     },
     "bags": {
       "cannotDestroy": "Không thể phá hủy vật phẩm này.",
-      "rightClickDestroy": "Nhấp phải để phá hủy",
+      "rightClickDestroy": "Shift+right-click to destroy",
       "filterGroupAria": "Lọc túi đồ theo danh mục",
       "filterAll": "Tất cả",
       "filterWeapon": "Vũ khí",
@@ -1463,7 +1463,8 @@ export const vi_VN: EnTranslations = {
         "connecting": "Đang mở Discord...",
         "benefits": "Liên kết Discord để nhận điểm từ việc chơi và hoạt động cộng đồng, và leo lên các bậc trạng thái.",
         "error": "Không thể liên kết Discord. Vui lòng thử lại.",
-        "success": "Đã liên kết Discord."
+        "success": "Đã liên kết Discord.",
+        "joinServer": "Just join the Discord server"
       },
       "choice": {
         "title": "Tiếp tục với Discord",

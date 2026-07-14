@@ -1263,7 +1263,7 @@ export const da_DK: EnTranslations = {
     },
     "bags": {
       "cannotDestroy": "Denne genstand kan ikke ødelægges.",
-      "rightClickDestroy": "Højreklik for at ødelægge",
+      "rightClickDestroy": "Shift+right-click to destroy",
       "filterGroupAria": "Filtrér tasker efter kategori",
       "filterAll": "Alle",
       "filterWeapon": "Våben",
@@ -1463,7 +1463,8 @@ export const da_DK: EnTranslations = {
         "connecting": "Åbner Discord...",
         "benefits": "Forbind din Discord for at optjene point fra spil og fællesskabsaktivitet og stige i statusrangene.",
         "error": "Kunne ikke forbinde Discord. Prøv igen.",
-        "success": "Discord forbundet."
+        "success": "Discord forbundet.",
+        "joinServer": "Just join the Discord server"
       },
       "choice": {
         "title": "Fortsæt med Discord",

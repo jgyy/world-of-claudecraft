@@ -1341,9 +1341,10 @@ export const hudChromeStrings = {
     // Right-click destroy affordance: rejected when the item is flagged noDiscard
     // (soulbound quest keys, etc.), which the sim's discardItem also refuses.
     cannotDestroy: 'This item cannot be destroyed.',
-    // Tooltip sub-line advertising the right-click destroy affordance, shown only
-    // for a destroyable item so junk is removable without hunting for a menu.
-    rightClickDestroy: 'Right-click to destroy',
+    // Tooltip sub-line advertising the shift+right-click destroy affordance, shown
+    // only for a destroyable item so junk is removable without hunting for a menu. A
+    // plain right-click equips/uses the item instead (issue 1852).
+    rightClickDestroy: 'Shift+right-click to destroy',
     filterGroupAria: 'Filter bags by category',
     filterAll: 'All',
     filterWeapon: 'Weapons',
@@ -1609,6 +1610,12 @@ export const hudChromeStrings = {
         'Link your Discord to earn points from play and community activity, and climb the status tiers.',
       error: 'Could not link Discord. Please try again.',
       success: 'Discord linked.',
+      // Secondary action next to the link CTA: open the plain community invite
+      // without linking an account. This is the single Discord entry point in
+      // the game HUD (the corner community tray's separate invite link was
+      // removed as a duplicate), so an unlinked player still needs one click
+      // to just join the server.
+      joinServer: 'Just join the Discord server',
     },
     // First-time Discord login chooser (create a new account vs link an existing one).
     choice: {

@@ -1263,7 +1263,7 @@ export const pt_BR: EnTranslations = {
     },
     "bags": {
       "cannotDestroy": "Este item não pode ser destruído.",
-      "rightClickDestroy": "Clique com o botão direito para destruir",
+      "rightClickDestroy": "Shift+right-click to destroy",
       "filterGroupAria": "Filtrar bolsas por categoria",
       "filterAll": "Todos",
       "filterWeapon": "Armas",
@@ -1463,7 +1463,8 @@ export const pt_BR: EnTranslations = {
         "connecting": "Abrindo o Discord...",
         "benefits": "Vincule seu Discord para ganhar pontos jogando e participando da comunidade, e suba pelos níveis de status.",
         "error": "Não foi possível vincular o Discord. Tente novamente.",
-        "success": "Discord vinculado."
+        "success": "Discord vinculado.",
+        "joinServer": "Just join the Discord server"
       },
       "choice": {
         "title": "Continuar com o Discord",

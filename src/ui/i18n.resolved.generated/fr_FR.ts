@@ -1263,7 +1263,7 @@ export const fr_FR: EnTranslations = {
     },
     "bags": {
       "cannotDestroy": "Cet objet ne peut pas être détruit.",
-      "rightClickDestroy": "Clic droit pour détruire",
+      "rightClickDestroy": "Shift+right-click to destroy",
       "filterGroupAria": "Filtrer les sacs par catégorie",
       "filterAll": "Tous",
       "filterWeapon": "Armes",
@@ -1463,7 +1463,8 @@ export const fr_FR: EnTranslations = {
         "connecting": "Ouverture de Discord...",
         "benefits": "Liez votre Discord pour gagner des points en jouant et en participant à la communauté, et gravir les rangs de statut.",
         "error": "Impossible de lier Discord. Veuillez réessayer.",
-        "success": "Discord lié."
+        "success": "Discord lié.",
+        "joinServer": "Just join the Discord server"
       },
       "choice": {
         "title": "Continuer avec Discord",

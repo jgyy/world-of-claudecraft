@@ -1263,7 +1263,7 @@ export const ja_JP: EnTranslations = {
     },
     "bags": {
       "cannotDestroy": "このアイテムは破壊できません。",
-      "rightClickDestroy": "右クリックで破壊",
+      "rightClickDestroy": "Shift+右クリックで破壊",
       "filterGroupAria": "バッグをカテゴリーで絞り込む",
       "filterAll": "すべて",
       "filterWeapon": "武器",
@@ -1463,7 +1463,8 @@ export const ja_JP: EnTranslations = {
         "connecting": "Discordを開いています...",
         "benefits": "Discordを連携すると、プレイやコミュニティ活動からポイントを獲得し、ステータスランクを上げられます。",
         "error": "Discordを連携できませんでした。もう一度お試しください。",
-        "success": "Discordを連携しました。"
+        "success": "Discordを連携しました。",
+        "joinServer": "アカウント連携なしでサーバーに参加"
       },
       "choice": {
         "title": "Discordで続ける",
