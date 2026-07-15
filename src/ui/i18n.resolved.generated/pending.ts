@@ -9,25 +9,145 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "es_ES": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "fr_FR": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "fr_CA": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
-  "pt_BR": [],
-  "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "it_IT": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "de_DE": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "zh_CN": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "zh_TW": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "ko_KR": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "ja_JP": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "pt_BR": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "ru_RU": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "cs_CZ": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "nl_NL": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "pl_PL": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "id_ID": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "tr_TR": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "sv_SE": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "vi_VN": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ],
+  "da_DK": [
+    "hudChrome.options.voiceChatConsentNote",
+    "hudChrome.options.voiceChatEnabled",
+    "hudChrome.options.voiceChatMicDenied",
+    "hudChrome.options.voiceChatMuted",
+    "hudChrome.options.voiceChatVolume"
+  ]
 };
