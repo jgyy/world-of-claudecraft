@@ -152,6 +152,25 @@ describe('mailbox_window: parcel quantity stepper (#1444, PR #1695 review)', () 
   });
 });
 
+describe('mailbox_window: staging a parcel preserves the send form (#1443)', () => {
+  const stageParcel = painter.slice(
+    painter.indexOf('stageParcel(itemId: string): void {'),
+    painter.indexOf('private ownedCountFor('),
+  );
+
+  it('slices a real stageParcel body to guard against renames', () => {
+    expect(stageParcel.length).toBeGreaterThan(0);
+  });
+
+  it('repaints only the parcel tray, not the whole send form (which would wipe To/Subject/Message)', () => {
+    // A bare this.render() rebuilds #mailbox-body from scratch via renderSend,
+    // which innerHTML's fresh, empty To/Subject/Message/coin inputs. Only
+    // renderParcels() (scoped to #mail-parcels) may run here.
+    expect(stageParcel).toContain('this.renderParcels()');
+    expect(stageParcel).not.toMatch(/this\.render\(\)/);
+  });
+});
+
 describe('mailbox_window: house style', () => {
   it('uses no em or en dashes (ASCII separators only)', () => {
     expect(painter.includes('\u2014'), 'em dash found').toBe(false);

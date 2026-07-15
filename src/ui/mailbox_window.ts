@@ -135,7 +135,7 @@ export class MailboxWindow {
     if (count < 1) return;
     this.attachments.push({ itemId, count });
     audio.click();
-    this.render();
+    this.renderParcels();
   }
 
   /**
