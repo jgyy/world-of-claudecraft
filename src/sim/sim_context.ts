@@ -35,8 +35,8 @@ import type {
   ResolvedAbility,
   TradeSession,
 } from './sim';
-import type { FinderFormationUnit } from './social/party';
 import type { CardDuelMatch } from './social/card_duel';
+import type { FinderFormationUnit } from './social/party';
 import type { VcState } from './social/vale_cup';
 import type { SpatialGrid } from './spatial';
 import type {
