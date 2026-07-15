@@ -5629,7 +5629,7 @@ export class GameServer {
         }
         const mine: SimEvent[] = [];
         for (const ev of events) {
-          if (suppressedInvites !== null && suppressedInvites.has(ev)) continue;
+          if (suppressedInvites?.has(ev)) continue;
           // ignore list: drop chat originating from a character this player has
           // blocked, before it ever reaches their client
           if (
