@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it, vi } from 'vitest';
 import { CARD_MASTER_NPC_ID } from '../src/sim/content/card_master';
 import { Rng } from '../src/sim/rng';
@@ -143,6 +145,36 @@ describe('card_duel', () => {
     expect(cardDuelMatchFor(ctx, 2)).toBeNull();
   });
 
+  it('a queued player who dies before pairing is swept off the queue, not paired as a ghost', () => {
+    const { ctx, entities } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    // pid 1 dies between queueing and the next pairing sweep (mirrors the
+    // disconnect presweep above: joinCardMinigameQueue already blocks a dead
+    // pid at JOIN time, but nothing previously caught a death after joining).
+    (entities.get(1) as { dead: boolean }).dead = true;
+    updateCardDuelQueue(ctx);
+    expect(ctx.cardDuelQueue).toEqual([2]);
+    expect(cardDuelMatchFor(ctx, 1)).toBeNull();
+    expect(cardDuelMatchFor(ctx, 2)).toBeNull();
+  });
+
+  it('a player who dies mid-match cannot keep playing as a ghost', () => {
+    const { ctx, entities, error } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    (entities.get(1) as { dead: boolean }).dead = true;
+    const cardValue = match.handA.hand[0];
+    playCardInDuel(ctx, cardValue, 1);
+    expect(error).toHaveBeenCalledWith(1, "You can't do that while dead.");
+    // The blocked attempt did not consume the card or record a play.
+    expect(cardDuelMatchFor(ctx, 1)?.handA.hand).toContain(cardValue);
+    expect(cardDuelMatchFor(ctx, 1)?.playedA).toBeNull();
+  });
+
   it('resolves a full match to a winner and bumps cardDuelsWon exactly once', () => {
     const { ctx, bumpDeedStat, players } = makeCtx();
     joinCardMinigameQueue(ctx, 1);
@@ -240,7 +272,17 @@ describe('card_duel', () => {
     joinCardMinigameQueue(ctx, 1);
     joinCardMinigameQueue(ctx, 2);
     updateCardDuelQueue(ctx);
-    expect(cardDuelMatchFor(ctx, 1)).not.toBeNull();
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    // Play out one full round first so roundsA + roundsB > 0: a forfeit
+    // before either side has won a round voids instead of crediting a win
+    // (finding 3, the same anti-farm gate as the both-idle AFK case), so
+    // exercising the CREDIT path here needs a round already on the board.
+    match.handA.hand[0] = 9;
+    match.handB.hand[0] = 1;
+    playCardInDuel(ctx, 9, 1);
+    playCardInDuel(ctx, 1, 2);
+    expect(cardDuelMatchFor(ctx, 1)?.roundsA).toBe(1);
     leaveCardMinigameEntirely(ctx, 1);
     expect(cardDuelMatchFor(ctx, 1)).toBeNull();
     expect(cardDuelMatchFor(ctx, 2)).toBeNull();
@@ -250,6 +292,67 @@ describe('card_duel', () => {
     expect(bumpDeedStat).toHaveBeenCalledTimes(1);
     expect(bumpDeedStat.mock.calls[0][0]).toBe(players.get(2));
     expect(bumpDeedStat.mock.calls[0][1]).toBe('cardDuelsWon');
+  });
+
+  it('forfeitMatch voids a zero-round forfeit instead of crediting a win (anti-farm gate)', () => {
+    const { ctx, emit, bumpDeedStat } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    expect(cardDuelMatchFor(ctx, 1)).not.toBeNull();
+    // Instant forfeit the moment the match starts, before either side has
+    // played a single card or won a round: two colluding accounts sending
+    // card_forfeit immediately is strictly easier than the both-idle AFK farm
+    // voidMatch was already built to close, so this must close the same way.
+    forfeitCardDuelMatch(ctx, 1);
+    expect(cardDuelMatchFor(ctx, 1)).toBeNull();
+    expect(cardDuelMatchFor(ctx, 2)).toBeNull();
+    expect(bumpDeedStat).not.toHaveBeenCalled();
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        text: 'Your Card Duel is void: neither side played in time.',
+        pid: 1,
+      }),
+    );
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        text: 'Your Card Duel is void: neither side played in time.',
+        pid: 2,
+      }),
+    );
+    // Neither the forfeit-specific nor the win-credit messaging fires: this is
+    // routed through voidMatch, not the normal forfeit win/lose lines.
+    expect(emit).not.toHaveBeenCalledWith(
+      expect.objectContaining({ text: 'You forfeit the Card Duel.' }),
+    );
+    expect(emit).not.toHaveBeenCalledWith(
+      expect.objectContaining({ text: 'Your opponent forfeited the Card Duel. You win!' }),
+    );
+  });
+
+  it('forfeitMatch still credits normally once at least one round has been won', () => {
+    const { ctx, emit, bumpDeedStat, players } = makeCtx();
+    joinCardMinigameQueue(ctx, 1);
+    joinCardMinigameQueue(ctx, 2);
+    updateCardDuelQueue(ctx);
+    const match = cardDuelMatchFor(ctx, 1);
+    if (!match) throw new Error('expected a live match');
+    match.handA.hand[0] = 9;
+    match.handB.hand[0] = 1;
+    playCardInDuel(ctx, 9, 1);
+    playCardInDuel(ctx, 1, 2);
+    expect(cardDuelMatchFor(ctx, 1)?.roundsA).toBe(1);
+    forfeitCardDuelMatch(ctx, 2);
+    expect(cardDuelMatchFor(ctx, 1)).toBeNull();
+    expect(bumpDeedStat).toHaveBeenCalledTimes(1);
+    expect(bumpDeedStat.mock.calls[0][0]).toBe(players.get(1));
+    expect(bumpDeedStat.mock.calls[0][1]).toBe('cardDuelsWon');
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({ text: 'You forfeit the Card Duel.', pid: 2 }),
+    );
+    expect(emit).toHaveBeenCalledWith(
+      expect.objectContaining({ text: 'Your opponent forfeited the Card Duel. You win!', pid: 1 }),
+    );
   });
 
   it('forfeitCardDuelMatch lets a player in a live match forfeit on demand and re-queue afterward', () => {
@@ -281,9 +384,19 @@ describe('card_duel', () => {
     updateCardDuelQueue(ctx);
     const match = cardDuelMatchFor(ctx, 1);
     if (!match) throw new Error('expected a live match');
-    // Side A plays; side B goes idle (an unresponsive opponent).
-    playCardInDuel(ctx, match.handA.hand[0], 1);
-    (ctx as unknown as { time: number }).time = match.roundDeadline + 1;
+    // Play out one full round first so roundsA + roundsB > 0 (finding 3's
+    // anti-farm gate voids an AFK forfeit before any round has been won, same
+    // as the both-idle case), so this exercises the CREDIT path deliberately.
+    match.handA.hand[0] = 9;
+    match.handB.hand[0] = 1;
+    playCardInDuel(ctx, 9, 1);
+    playCardInDuel(ctx, 1, 2);
+    expect(cardDuelMatchFor(ctx, 1)?.roundsA).toBe(1);
+    // Side A plays round 2; side B goes idle (an unresponsive opponent).
+    const live = cardDuelMatchFor(ctx, 1);
+    if (!live) throw new Error('expected a live match');
+    playCardInDuel(ctx, live.handA.hand[0], 1);
+    (ctx as unknown as { time: number }).time = live.roundDeadline + 1;
     updateCardDuelDeadlines(ctx);
     expect(cardDuelMatchFor(ctx, 1)).toBeNull();
     expect(cardDuelMatchFor(ctx, 2)).toBeNull();
@@ -304,11 +417,20 @@ describe('card_duel', () => {
     updateCardDuelQueue(ctx);
     const match = cardDuelMatchFor(ctx, 1);
     if (!match) throw new Error('expected a live match');
-    // Side B plays; side A goes idle. Without this arm, a regression that
-    // always forfeits match.b (the constant that also satisfies the other
-    // test) would go undetected.
-    playCardInDuel(ctx, match.handB.hand[0], 2);
-    (ctx as unknown as { time: number }).time = match.roundDeadline + 1;
+    // Play out one full round first so roundsA + roundsB > 0 (see the sibling
+    // test above for why the zero-round anti-farm gate requires this here).
+    match.handA.hand[0] = 9;
+    match.handB.hand[0] = 1;
+    playCardInDuel(ctx, 9, 1);
+    playCardInDuel(ctx, 1, 2);
+    expect(cardDuelMatchFor(ctx, 1)?.roundsA).toBe(1);
+    // Side B plays round 2; side A goes idle. Without this arm, a regression
+    // that always forfeits match.b (the constant that also satisfies the
+    // other test) would go undetected.
+    const live = cardDuelMatchFor(ctx, 1);
+    if (!live) throw new Error('expected a live match');
+    playCardInDuel(ctx, live.handB.hand[0], 2);
+    (ctx as unknown as { time: number }).time = live.roundDeadline + 1;
     updateCardDuelDeadlines(ctx);
     expect(cardDuelMatchFor(ctx, 1)).toBeNull();
     expect(cardDuelMatchFor(ctx, 2)).toBeNull();
@@ -411,5 +533,25 @@ describe('card_duel', () => {
     (ctx as unknown as { time: number }).time = CARD_DUEL_ROUND_DEADLINE_S - 1;
     updateCardDuelDeadlines(ctx);
     expect(cardDuelMatchFor(ctx, 1)).not.toBeNull();
+  });
+});
+
+// Root CLAUDE.md bans "?? 'English'" fallbacks interpolated into player-visible
+// text, and the S3 i18n guard (tests/localization_fixes.test.ts) only scrapes
+// the outer literal at an emit site, so a fallback hidden inside a template
+// string's ${...} interpolation is invisible to it. This is a source scan, not
+// a runtime probe, precisely because that gap means a runtime test could pass
+// while the pattern still ships: it asserts the banned shape never reappears
+// in this file's emit paths, regardless of which emit call it hides in.
+describe('card_duel.ts source: no ?? English-literal fallback inside a template interpolation', () => {
+  const src = readFileSync(
+    fileURLToPath(new URL('../src/sim/social/card_duel.ts', import.meta.url)),
+    'utf8',
+  );
+
+  it('has no `${... ?? \'literal\'}` or `${... ?? "literal"}` pattern', () => {
+    const bannedInTemplate = /\$\{[^}]*\?\?\s*(['"])[^'"]*\1[^}]*\}/g;
+    const hits = [...src.matchAll(bannedInTemplate)].map((m) => m[0]);
+    expect(hits).toEqual([]);
   });
 });

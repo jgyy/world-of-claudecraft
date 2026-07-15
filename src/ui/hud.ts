@@ -1164,6 +1164,12 @@ export class Hud {
   private stagedTrade: { items: InvSlot[]; copper: number } = { items: [], copper: 0 };
   private tradeWasOpen = false;
   private lastTradeSig = '';
+  // Card Duel: latches the prior in-match state so a false->true transition
+  // (a queued match just started) auto-opens the window, mirroring
+  // updateTradeWindow's transition-based auto-open below. Without this a
+  // player who closed the window (or was never at the NPC) while queued has
+  // no way back into a live match away from the Card Master.
+  private cardDuelWasInMatch = false;
   private lastPartySig = '';
   // Loot Settings window (opened on demand from the right-click menu): whether it is
   // open, and a separate LOW-frequency signature (loot settings + leadership +
@@ -1985,6 +1991,7 @@ export class Hud {
     $('#mm-arena').addEventListener('click', () => this.toggleArena());
     $('#mm-dfinder').addEventListener('click', () => this.toggleDungeonFinder());
     $('#mm-valecup').addEventListener('click', () => this.toggleValeCup());
+    $('#mm-cardduel').addEventListener('click', () => this.toggleCardDuel());
     $('#mm-leaderboard').addEventListener('click', () => this.toggleLeaderboard());
     $('#mm-discord')?.addEventListener('click', () => this.discordHook?.());
     const emoteBtn = $('#mm-emote');
@@ -3486,7 +3493,11 @@ export class Hud {
   });
   // Card Duel window painter (card_duel_view.ts model + card_duel_window.ts
   // painter, the ValeCupWindow shape scaled down). The Card Master NPC's gossip
-  // menu toggles it; Hud drives render() from the mediumHud band while open.
+  // menu AND the persistent #mm-cardduel micromenu button (the sim allows
+  // playing a card once matched without proximity, so the window must stay
+  // reachable away from the NPC too, matching the #mm-valecup family) both
+  // toggle it; Hud drives render() from the mediumHud band while open, and
+  // auto-opens it the moment a match starts (see the mediumHud band below).
   private readonly cardDuelWindow = new CardDuelWindow({
     root: () => $('#card-duel-window'),
     world: () => this.sim,
@@ -6786,6 +6797,18 @@ export class Hud {
       if ($('#dungeon-finder-window').style.display === 'flex') this.dungeonFinderWindow.render();
       if (this.dungeonFinderProposalPopup.isOpen) this.dungeonFinderProposalPopup.render();
       if ($('#valecup-window').style.display === 'block') this.valeCupWindow.render();
+      // Auto-open the Card Duel window the instant a queued match starts (a
+      // false->true transition on match presence), mirroring updateTradeWindow's
+      // transition-based auto-open: the sim allows playing a card from anywhere
+      // once matched, but the only OTHER way to open this window is the Card
+      // Master's proximity-bound gossip menu, so a player who queued and walked
+      // away (or closed the window) would otherwise have no path back into a
+      // live match before the AFK forfeit deadline.
+      const cardDuelInMatch = this.sim.cardMinigameInfo.match !== null;
+      if (cardDuelInMatch && !this.cardDuelWasInMatch && !this.cardDuelWindow.isOpen) {
+        this.cardDuelWindow.toggle();
+      }
+      this.cardDuelWasInMatch = cardDuelInMatch;
       if ($('#card-duel-window').style.display === 'block') this.cardDuelWindow.render();
       this.lootWindow.updateProximity();
       if (this.openVendorNpcId !== null) {

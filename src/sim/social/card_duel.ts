@@ -169,9 +169,16 @@ function startCardDuelMatch(ctx: SimContext, a: number, b: number): void {
     [a, bMeta],
     [b, aMeta],
   ] as const) {
+    // A distinct, fully-literal message for the no-opponent-meta arm (rather
+    // than interpolating an "?? 'an opponent'" fallback string): root CLAUDE.md
+    // bans that pattern in player-visible text, and the S3 i18n guard only
+    // scrapes the outer literal so it is blind to a fallback hidden inside a
+    // template. The gap is narrow here (both sides were just confirmed live by
+    // updateCardDuelQueue's pairing check moments earlier) but not provably
+    // unreachable, so it stays handled rather than asserted away.
     ctx.emit({
       type: 'log',
-      text: `Your Card Duel against ${opponent?.name ?? 'an opponent'} begins!`,
+      text: opponent ? `Your Card Duel against ${opponent.name} begins!` : 'Your Card Duel begins!',
       color: '#fa6',
       pid,
     });
@@ -181,19 +188,25 @@ function startCardDuelMatch(ctx: SimContext, a: number, b: number): void {
 // Called every tick from Sim (like updateDuels/updateArena): pairs waiting
 // players off the queue and starts a match for each pair.
 export function updateCardDuelQueue(ctx: SimContext): void {
-  // Sweep stale entries (disconnected between queueing and pairing) BEFORE
-  // pairing, so tryPairCardDuel's shift() never pulls a dead pid and silently
-  // ejects the still-connected other side of a pair (finding: stale pairing
-  // ejects the survivor).
+  // Sweep stale entries BEFORE pairing, so tryPairCardDuel's shift() never
+  // pulls a disconnected or dead pid and silently ejects the still-connected
+  // other side of a pair (finding: stale pairing ejects the survivor). Mirrors
+  // joinCardMinigameQueue's join-time r.e.dead gate: a queued player who dies
+  // before pairing (not just one who disconnects) is dropped too, matching
+  // every sibling PvP system (duel.ts forfeits on death; arena.ts/vale_cup.ts
+  // resolve desertion) rather than pairing a ghost off the queue.
   for (const pid of [...ctx.cardDuelQueue]) {
-    if (!ctx.players.has(pid)) leaveCardDuelQueue(ctx.cardDuelQueue, pid);
+    const e = ctx.entities.get(pid);
+    if (!ctx.players.has(pid) || !e || e.dead) leaveCardDuelQueue(ctx.cardDuelQueue, pid);
   }
   let pair = tryPairCardDuel(ctx.cardDuelQueue);
   while (pair) {
     const [a, b] = pair;
-    // Defense in depth: re-check liveness even though the presweep above
-    // should already guarantee it.
-    if (ctx.players.has(a) && ctx.players.has(b)) {
+    // Defense in depth: re-check liveness AND death even though the presweep
+    // above should already guarantee both.
+    const ea = ctx.entities.get(a);
+    const eb = ctx.entities.get(b);
+    if (ctx.players.has(a) && ctx.players.has(b) && ea && !ea.dead && eb && !eb.dead) {
       startCardDuelMatch(ctx, a, b);
     }
     pair = tryPairCardDuel(ctx.cardDuelQueue);
@@ -238,6 +251,16 @@ export function playCardInDuel(ctx: SimContext, cardValue: number, pid?: number)
   const match = ctx.cardDuels.get(r.meta.entityId);
   if (!match) {
     ctx.error(r.meta.entityId, 'You are not in a Card Duel.');
+    return;
+  }
+  // Mirrors joinCardMinigameQueue's join-time gate: a player who dies mid-match
+  // (Card Duel needs no proximity to play, so death is the only way the sim can
+  // catch this) cannot keep playing as a ghost. The other side is not left
+  // hanging: the existing per-round AFK deadline forfeits the dead side exactly
+  // like any other unresponsive opponent, so no separate death-triggers-forfeit
+  // path is needed here.
+  if (r.e.dead) {
+    ctx.error(r.meta.entityId, "You can't do that while dead.");
     return;
   }
   const isA = r.meta.entityId === match.a;
@@ -292,16 +315,34 @@ function endCardDuelMatch(ctx: SimContext, match: CardDuelMatch, winnerPid: numb
   const winnerMeta = ctx.players.get(winnerPid);
   const loserMeta = ctx.players.get(loserPid);
   if (winnerMeta) ctx.bumpDeedStat(winnerMeta, 'cardDuelsWon', 1);
+  // Distinct fully-literal messages for the no-opponent-meta arm (the real
+  // edge case named by review: the opponent's meta is gone because they left
+  // mid-match, e.g. removePlayer ran between their last card and this round
+  // resolving) instead of an "?? 'your opponent'" fallback interpolated into
+  // the template: see the matching comment in startCardDuelMatch above. Each
+  // side gets its own emit call (rather than one shared ternary-of-ternaries)
+  // so every branch stays a single literal-or-simple-ternary `text:` the S3
+  // guard's emit scanner can actually see and verify.
   for (const pid of [match.a, match.b]) {
-    ctx.emit({
-      type: 'log',
-      text:
-        pid === winnerPid
-          ? `You win the Card Duel against ${loserMeta?.name ?? 'your opponent'}!`
-          : `You lose the Card Duel against ${winnerMeta?.name ?? 'your opponent'}.`,
-      color: '#fa6',
-      pid,
-    });
+    if (pid === winnerPid) {
+      ctx.emit({
+        type: 'log',
+        text: loserMeta
+          ? `You win the Card Duel against ${loserMeta.name}!`
+          : 'You win the Card Duel!',
+        color: '#fa6',
+        pid,
+      });
+    } else {
+      ctx.emit({
+        type: 'log',
+        text: winnerMeta
+          ? `You lose the Card Duel against ${winnerMeta.name}.`
+          : 'You lose the Card Duel.',
+        color: '#fa6',
+        pid,
+      });
+    }
   }
 }
 
@@ -311,7 +352,20 @@ function endCardDuelMatch(ctx: SimContext, match: CardDuelMatch, winnerPid: numb
 // treated elsewhere (arena/Vale Cup desertion). A forfeit used to credit
 // nobody, letting a player one round from losing deny the opponent the deed
 // by disconnecting; that is now fixed here.
+//
+// A forfeit before EITHER side has won a round credits nobody: this is the
+// same farm hole voidMatch's own comment names (two accounts queueing and
+// going AFK together for a free deed credit), just reached through the
+// player-issuable card_forfeit command instead of the 90s AFK deadline, and
+// strictly EASIER (no wait at all). Route that case through voidMatch instead
+// of the win/lose messaging below, making the manual-forfeit and AFK-timeout
+// paths consistent; a forfeit after at least one round has been won still
+// credits the non-forfeiting side normally.
 function forfeitMatch(ctx: SimContext, match: CardDuelMatch, forfeiterPid: number): void {
+  if (match.roundsA + match.roundsB === 0) {
+    voidMatch(ctx, match);
+    return;
+  }
   const winnerPid = forfeiterPid === match.a ? match.b : match.a;
   ctx.cardDuels.delete(match.a);
   ctx.cardDuels.delete(match.b);
@@ -335,9 +389,10 @@ function forfeitMatch(ctx: SimContext, match: CardDuelMatch, forfeiterPid: numbe
   }
 }
 
-// Both sides let the round's AFK deadline expire without playing a card: no
-// side earned a win, so end the match with no winner and no deed credit
-// (never route this through forfeitMatch, which always credits one side).
+// No side has earned a round win, so end the match with no winner and no deed
+// credit. Two callers: both sides let the round's AFK deadline expire without
+// playing a card, or forfeitMatch delegates here when the forfeit happens
+// before either side has won a round (see forfeitMatch's comment).
 function voidMatch(ctx: SimContext, match: CardDuelMatch): void {
   ctx.cardDuels.delete(match.a);
   ctx.cardDuels.delete(match.b);
