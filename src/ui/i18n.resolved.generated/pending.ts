@@ -52,34 +52,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.options.voiceChatMuted",
     "hudChrome.options.voiceChatVolume"
   ],
-  "zh_CN": [
-    "hudChrome.options.voiceChatConsentNote",
-    "hudChrome.options.voiceChatEnabled",
-    "hudChrome.options.voiceChatMicDenied",
-    "hudChrome.options.voiceChatMuted",
-    "hudChrome.options.voiceChatVolume"
-  ],
-  "zh_TW": [
-    "hudChrome.options.voiceChatConsentNote",
-    "hudChrome.options.voiceChatEnabled",
-    "hudChrome.options.voiceChatMicDenied",
-    "hudChrome.options.voiceChatMuted",
-    "hudChrome.options.voiceChatVolume"
-  ],
-  "ko_KR": [
-    "hudChrome.options.voiceChatConsentNote",
-    "hudChrome.options.voiceChatEnabled",
-    "hudChrome.options.voiceChatMicDenied",
-    "hudChrome.options.voiceChatMuted",
-    "hudChrome.options.voiceChatVolume"
-  ],
-  "ja_JP": [
-    "hudChrome.options.voiceChatConsentNote",
-    "hudChrome.options.voiceChatEnabled",
-    "hudChrome.options.voiceChatMicDenied",
-    "hudChrome.options.voiceChatMuted",
-    "hudChrome.options.voiceChatVolume"
-  ],
+  "zh_CN": [],
+  "zh_TW": [],
+  "ko_KR": [],
+  "ja_JP": [],
   "pt_BR": [
     "hudChrome.options.voiceChatConsentNote",
     "hudChrome.options.voiceChatEnabled",
@@ -87,13 +63,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.options.voiceChatMuted",
     "hudChrome.options.voiceChatVolume"
   ],
-  "ru_RU": [
-    "hudChrome.options.voiceChatConsentNote",
-    "hudChrome.options.voiceChatEnabled",
-    "hudChrome.options.voiceChatMicDenied",
-    "hudChrome.options.voiceChatMuted",
-    "hudChrome.options.voiceChatVolume"
-  ],
+  "ru_RU": [],
   "cs_CZ": [
     "hudChrome.options.voiceChatConsentNote",
     "hudChrome.options.voiceChatEnabled",

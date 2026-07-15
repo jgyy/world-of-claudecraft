@@ -713,6 +713,13 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.browserEffectsMinimal': '최소',
   'hudChrome.options.browserEffectsNote':
     '자동은 브라우저와 기기에 맞춰 무거운 CSS 효과(흐림, 글로우, 배경 모션)를 낮춥니다. 인터페이스가 느리게 느껴지면 수동으로 낮추세요.',
+  'hudChrome.options.voiceChatEnabled': '음성 채팅 (근접)',
+  'hudChrome.options.voiceChatConsentNote':
+    '이 기능을 켠 근처의 다른 플레이어와 자동으로 연결됩니다. 직접 연결(중계 서버 없음)이므로 연결된 플레이어가 회원님의 공인 IP 주소를 볼 수 있습니다. 언제든지 끌 수 있습니다.',
+  'hudChrome.options.voiceChatMuted': '마이크 음소거',
+  'hudChrome.options.voiceChatVolume': '음성 채팅 음량',
+  'hudChrome.options.voiceChatMicDenied':
+    '마이크 접근이 거부되었습니다. 음성 채팅에는 마이크가 필요합니다.',
   'hudChrome.options.footstepSounds': '발소리',
   'hudChrome.options.clickFeedback': '클릭 표시',
   'hudChrome.options.startAttackOnAbility': '스킬 사용 시 자동 공격',

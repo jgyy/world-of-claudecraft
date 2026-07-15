@@ -691,6 +691,12 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.browserEffectsMinimal': '最低',
   'hudChrome.options.browserEffectsNote':
     '自動模式會根據你的瀏覽器與裝置調低高負擔的 CSS 特效（模糊、光暈、背景動畫）。若介面感覺卡頓，可手動降低。',
+  'hudChrome.options.voiceChatEnabled': '語音聊天（附近）',
+  'hudChrome.options.voiceChatConsentNote':
+    '你將自動與附近同樣開啟此功能的玩家連線。由於連線是直連（沒有中繼伺服器），配對的玩家可以看到你的公用 IP 位址。你可以隨時關閉此功能。',
+  'hudChrome.options.voiceChatMuted': '將我的麥克風靜音',
+  'hudChrome.options.voiceChatVolume': '語音聊天音量',
+  'hudChrome.options.voiceChatMicDenied': '麥克風權限被拒絕。語音聊天需要它才能運作。',
   'hudChrome.options.footstepSounds': '腳步聲',
   'hudChrome.options.clickFeedback': '點擊標記',
   'hudChrome.options.startAttackOnAbility': '使用技能時自動攻擊',

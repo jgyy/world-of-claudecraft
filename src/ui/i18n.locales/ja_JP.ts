@@ -718,6 +718,13 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.browserEffectsMinimal': '最小',
   'hudChrome.options.browserEffectsNote':
     '自動はブラウザとデバイスに応じて、負荷の高い CSS エフェクト（ぼかし・グロー・背景アニメーション）を抑えます。動作が重い場合は手動で下げてください。',
+  'hudChrome.options.voiceChatEnabled': 'ボイスチャット（近接）',
+  'hudChrome.options.voiceChatConsentNote':
+    'この機能をオンにしている近くのプレイヤーと自動的に接続されます。直接接続（中継サーバーなし）のため、ペアになったプレイヤーにはあなたのグローバル IP アドレスが見える可能性があります。いつでもオフにできます。',
+  'hudChrome.options.voiceChatMuted': 'マイクをミュート',
+  'hudChrome.options.voiceChatVolume': 'ボイスチャット音量',
+  'hudChrome.options.voiceChatMicDenied':
+    'マイクへのアクセスが拒否されました。ボイスチャットにはマイクが必要です。',
   'hudChrome.options.footstepSounds': '足音',
   'hudChrome.options.clickFeedback': 'クリックマーカー',
   'hudChrome.options.startAttackOnAbility': 'アビリティ使用時に自動攻撃',
