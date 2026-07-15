@@ -333,6 +333,18 @@ export function buildAudioControls(s: OptionsSettingsSource): OptionsControl[] {
     slider(s, 'voiceVolume', 'hud.options.voiceVolume'),
     { control: 'musicToggle', labelKey: 'hud.options.music' },
     boolToggle(s, 'voiceEnabled', 'hud.options.npcVoices'),
+    // Proximity player voice chat (WebRTC mesh with the nearest opted-in
+    // players), distinct from voiceEnabled above (pre-rendered NPC dialogue
+    // clips). Off by default; enabling it prompts for microphone permission.
+    boolToggle(s, 'voiceChatEnabled', 'hudChrome.options.voiceChatEnabled'),
+    // Explicit in-client consent explanation, not just fine print in the privacy
+    // policy: pairing is automatic on proximity, and (being STUN-only) it shares
+    // your public IP with whoever you are paired with (PR #1826 review).
+    note('hudChrome.options.voiceChatConsentNote'),
+    // Self-mute (stop sending mic audio without leaving the mesh) and the
+    // output gain for peers' voice audio; both independent of the toggle above.
+    boolToggle(s, 'voiceChatMuted', 'hudChrome.options.voiceChatMuted'),
+    slider(s, 'voiceChatVolume', 'hudChrome.options.voiceChatVolume'),
     boolToggle(s, 'footstepSfx', 'hudChrome.options.footstepSounds'),
     boolToggle(s, 'clickFeedback', 'hudChrome.options.clickFeedback'),
   ];

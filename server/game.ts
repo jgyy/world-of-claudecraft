@@ -164,6 +164,7 @@ import { PgSocialDb } from './social_db';
 import { reconcileOnLogin } from './steam/mirror';
 import { TickProfiler } from './tick_profiler';
 import { hrtimeToMs, TickRateMeter } from './tick_rate_meter';
+import { nearestVoicePeers, VOICE_PEER_CAP, type VoiceCandidate } from './voice_signaling';
 import { holderInfoForPubkey } from './woc_balance';
 import { isBackpressureExceeded } from './ws_backpressure';
 
@@ -174,6 +175,15 @@ const ALDRIC_METEOR_QUEST_ID = 'q_aldrics_fallen_star';
 // little farther so the boundary doesn't churn create/destroy cycles.
 const INTEREST_RADIUS = 90;
 const INTEREST_DROP_RADIUS = 100;
+// Proximity voice chat must never pair players beyond this scope, even when
+// the opted-in pool is small enough that "nearest VOICE_PEER_CAP" would
+// otherwise reach across the whole map. Reuses the existing interest/
+// proximity radius other systems already use rather than inventing a new
+// number (PR #1826 review).
+const VOICE_MAX_RANGE_SQ = INTEREST_RADIUS * INTEREST_RADIUS;
+// Per-frame cap on a relayed voice signaling payload, well below the global
+// 16 KiB WS frame cap (PR #1826 review).
+const VOICE_SIGNAL_MAX_BYTES = 8192;
 // Stationary quest/vendor npcs anchor map markers, so they keep the legacy
 // radius; once known they cost a handful of bytes per snapshot anyway.
 const NPC_INTEREST_RADIUS = 120;
@@ -674,6 +684,14 @@ export interface ClientSession {
   // last social snapshot. Drives the cheap periodic position push (no DB) that
   // keeps allies live on the world map.
   socialTrackedIds?: number[];
+  // Proximity voice chat: true once this player opted in via Settings. Off by
+  // default (privacy). voicePeerIds is the authoritative "who this session's
+  // WebRTC mesh should include right now", recomputed each broadcastVoicePeers
+  // tick (nearestVoicePeers); voiceoffer/voiceanswer/voiceice frames are only
+  // relayed to a pid present in it, so signaling can't be aimed at an arbitrary
+  // player.
+  voiceOptIn: boolean;
+  voicePeerIds: Set<number>;
   // IP address at join time (from requestMetadata); used for per-IP session counting.
   ip: string;
   userAgent: string;
@@ -1135,6 +1153,10 @@ export class GameServer {
   private devTierPids = new Set<number>();
   private saveTimer = 0;
   private socialPosTimer = 0;
+  // Recomputed on the same 1s cadence as socialPosTimer: proximity voice is
+  // cosmetic (not gameplay), so it rides an off-tick timer rather than the 20Hz
+  // sim loop.
+  private voicePeerTimer = 0;
   private saveAllInFlight: Promise<void> | null = null;
   private readonly characterSaveQueues = new Map<number, Promise<void>>();
   // Weapon-skin loadouts are whole-record replacements in their dedicated paid
@@ -1697,6 +1719,92 @@ export class GameServer {
     }
   }
 
+  // Recompute each voice-opted-in player's nearest VOICE_PEER_CAP voice-opted-in
+  // neighbors and push the resulting list. The server is the single source of
+  // truth for pairing (both sides of a pair see it land in the same tick), which
+  // is what lets the client use a simple "lower pid offers" rule to avoid glare
+  // without a separate negotiation. voicePeerIds is also the signaling-relay
+  // allowlist: dropped here, offer/answer/ice to that pid stop relaying.
+  private broadcastVoicePeers(): void {
+    const candidates: VoiceCandidate[] = [];
+    const sessions: ClientSession[] = [];
+    for (const session of this.clients.values()) {
+      // A jailed or chat-muted session never enters the pool: this is what
+      // yanks an already-connected peer out of the mesh the tick after a mute
+      // or jail lands, since relayVoiceSignal only trusts voicePeerIds (PR #1826 review).
+      if (!session.voiceOptIn || session.linkdead || this.isMutedOrJailed(session)) continue;
+      const e = this.sim.entities.get(session.pid);
+      if (!e || e.dead) continue;
+      candidates.push({ pid: session.pid, name: session.name, x: e.pos.x, z: e.pos.z });
+      sessions.push(session);
+    }
+    const bySession = new Map(sessions.map((s) => [s.pid, s]));
+    // Exclude either-direction blocks from candidate selection, the same way
+    // chat/mail/trade/invites already honor session.blockedIds (PR #1826 review).
+    const blockedPair = (a: ClientSession, otherPid: number): boolean => {
+      // blockedIds is keyed by characterId (same as every other social surface,
+      // e.g. chat/invite gating below), never by the sim entity pid.
+      const other = bySession.get(otherPid);
+      if (!other) return false;
+      return a.blockedIds.has(other.characterId) || other.blockedIds.has(a.characterId);
+    };
+    const rawPeerLists = new Map<number, { pid: number; name: string }[]>();
+    for (const session of sessions) {
+      const self = candidates.find((c) => c.pid === session.pid);
+      if (!self) continue;
+      const pool = candidates.filter((c) => c.pid === session.pid || !blockedPair(session, c.pid));
+      rawPeerLists.set(
+        session.pid,
+        nearestVoicePeers(self, pool, VOICE_PEER_CAP, VOICE_MAX_RANGE_SQ),
+      );
+    }
+    // Nearest-k selection is not symmetric (a crowded player can be in a
+    // sparse player's top-k without the reverse holding), but the relay gate
+    // requires mutual voicePeerIds membership. Intersect down to mutual pairs
+    // here so a client never sits half-open on a peer the relay will silently
+    // drop signaling for (PR #1826 review).
+    for (const session of sessions) {
+      const raw = rawPeerLists.get(session.pid) ?? [];
+      const mutual = raw.filter((p) =>
+        (rawPeerLists.get(p.pid) ?? []).some((q) => q.pid === session.pid),
+      );
+      session.voicePeerIds = new Set(mutual.map((p) => p.pid));
+      this.send(session, { t: 'voicepeers', list: mutual });
+    }
+  }
+
+  // Relay a WebRTC signaling frame verbatim to its target: the server never
+  // parses SDP/ICE, only forwards. Gated on session.voicePeerIds so a client
+  // cannot aim signaling at a pid the server hasn't paired it with. Also
+  // bounds the serialized payload well below the global 16 KiB WS frame cap
+  // (real SDP offers/answers run 1-3 KB, ICE candidates much smaller), so a
+  // sender paired with a victim cannot use the shared voice channel to push
+  // large blobs at the sustained signaling frame rate (PR #1826 review).
+  private relayVoiceSignal(
+    session: ClientSession,
+    kind: 'voiceoffer' | 'voiceanswer' | 'voiceice',
+    toPid: unknown,
+    payload: unknown,
+  ): void {
+    // Jailed and chat-muted sessions are gated the same as chat itself (PR #1826 review).
+    if (this.isMutedOrJailed(session)) return;
+    if (typeof toPid !== 'number' || !session.voicePeerIds.has(toPid)) return;
+    const target = this.clients.get(toPid);
+    if (!target || !target.voiceOptIn || !target.voicePeerIds.has(session.pid)) return;
+    if (this.isMutedOrJailed(target)) return;
+    let serialized: string;
+    try {
+      serialized = JSON.stringify(payload);
+    } catch {
+      return;
+    }
+    // Measure actual UTF-8 bytes, not UTF-16 code units: Buffer.byteLength counts
+    // multi-byte characters correctly so the 8 KiB cap is a real guarantee, not
+    // just a guarantee on ASCII payloads (PR #1826 review).
+    if (Buffer.byteLength(serialized, 'utf8') > VOICE_SIGNAL_MAX_BYTES) return;
+    this.send(target, { t: kind, fromPid: session.pid, payload });
+  }
+
   start(): void {
     let last = process.hrtime.bigint();
     let acc = 0;
@@ -1772,6 +1880,11 @@ export class GameServer {
           if (this.socialPosTimer >= 1) {
             this.socialPosTimer = 0;
             this.broadcastSocialPositions();
+          }
+          this.voicePeerTimer += dt;
+          if (this.voicePeerTimer >= 1) {
+            this.voicePeerTimer = 0;
+            this.broadcastVoicePeers();
           }
           lap('social');
           const tickMs = Number(process.hrtime.bigint() - now) / 1e6;
@@ -2553,6 +2666,8 @@ export class GameServer {
       selfHeavyDirty: true,
       lastWireRev: -1,
       sentEnts: new Map(),
+      voiceOptIn: false,
+      voicePeerIds: new Set(),
       ip: sessionIp,
       userAgent: meta.userAgent ?? '',
       fbp: meta.fbp ?? '',
@@ -3694,6 +3809,24 @@ export class GameServer {
         e.facing = frame.facing;
       }
       this.botDetector.observeInput(session.botTrackingContext, frame, receivedAtMs);
+      return;
+    }
+    // Proximity voice chat: opt-in toggle + WebRTC signaling relay. See
+    // voice_signaling.ts for the peer-selection this gates against.
+    if (msg.t === 'voiceoptin') {
+      // Gated the same as chat: a jailed or chat-muted session cannot open a
+      // higher-bandwidth voice channel it was just silenced on (PR #1826 review).
+      if (this.isMutedOrJailed(session)) {
+        session.voiceOptIn = false;
+        session.voicePeerIds = new Set();
+        return;
+      }
+      session.voiceOptIn = !!msg.on;
+      if (!session.voiceOptIn) session.voicePeerIds = new Set();
+      return;
+    }
+    if (msg.t === 'voiceoffer' || msg.t === 'voiceanswer' || msg.t === 'voiceice') {
+      this.relayVoiceSignal(session, msg.t, msg.toPid, msg.payload);
       return;
     }
     if (msg.t !== 'cmd') {
@@ -6012,6 +6145,15 @@ export class GameServer {
       });
     }
     return false;
+  }
+
+  // Side-effect-free mute check for gates that fire silently or every tick
+  // (voice broadcast/relay): unlike isChatMuted below, this never sends a
+  // "you are muted" notice, so it is safe to call on a target session and
+  // safe to call repeatedly from the 50 ms broadcastVoicePeers loop.
+  private isMutedOrJailed(session: ClientSession): boolean {
+    if (session.jailed) return true;
+    return session.chatMutedUntil !== null && session.chatMutedUntil > Date.now();
   }
 
   private isChatMuted(session: ClientSession): boolean {

@@ -100,6 +100,7 @@ import {
 import { computeBackoffDelay } from './backoff';
 import { optimisticQuestState } from './quest_state_optimistic';
 import { isTransientReconnectRejection, isTransientTimeoutRejection } from './reconnect_policy';
+import { VoiceChatClient, type VoiceSignalKind } from './voice_chat';
 
 // ---------------------------------------------------------------------------
 // REST
@@ -1168,6 +1169,18 @@ export class ClientWorld implements IWorld {
   // --- IWorldSocialGraph: persistent friends/blocks/guild, set ONLY by the
   // `social`/`socialpos` frames (there is no `s.social` snapshot field). ---
   socialInfo: SocialInfo | null = null;
+  // NON-IWorld mirror (like sportRole above): proximity voice chat is not
+  // gameplay state the offline Sim/RL env models, so it never reaches IWorld.
+  // main.ts (the one module that knows the concrete ClientWorld) wires this
+  // to the Settings toggle and reads it directly, never through IWorld.
+  readonly voice = new VoiceChatClient(
+    () => this.ownPlayerId,
+    (kind, toPid, payload) => this.sendVoiceSignal(kind, toPid, payload),
+    (on) => this.sendVoiceOptIn(on),
+  );
+  // Last known name per pid from `voicepeers` frames, so an offer/answer never
+  // has to fall back to an always-empty name (PR #1826 review).
+  private readonly voicePeerNames = new Map<number, string>();
   // Operator-set account flair (cosmetic), keyed by LOWERCASED character name and
   // read back by `accountFlair`. Fed from BOTH wire sources: the entity identity
   // record (players inside the ~120yd interest scope) and the `flair` on a chat
@@ -1460,6 +1473,7 @@ export class ClientWorld implements IWorld {
 
   close(): void {
     this.endSession();
+    this.voice.dispose();
     this.ws.onclose = null;
     this.ws.close();
   }
@@ -1580,6 +1594,20 @@ export class ClientWorld implements IWorld {
     this.ws.send(JSON.stringify({ t: 'cmd', ...payload }));
   }
 
+  // Voice signaling rides its own `t` values (not `cmd`), mirroring
+  // socialpos/censor: it's session-level, not an IWorld action. See
+  // server/game.ts dispatchMessage's 'voiceoptin'/'voiceoffer'/'voiceanswer'/
+  // 'voiceice' branches.
+  private sendVoiceOptIn(on: boolean): void {
+    if (!this.canSendCommand()) return;
+    this.ws.send(JSON.stringify({ t: 'voiceoptin', on }));
+  }
+
+  private sendVoiceSignal(kind: VoiceSignalKind, toPid: number, payload: unknown): void {
+    if (!this.canSendCommand()) return;
+    this.ws.send(JSON.stringify({ t: kind, toPid, payload }));
+  }
+
   // Typed IWorld command send (W0b): `cmd` must be a ClientCommand, i.e. a token
   // from the shared COMMAND_NAMES table that is NOT dispatch-only. This is what
   // makes "every ClientWorld send is in the server's dispatch-set" a compile-time
@@ -1634,7 +1662,17 @@ export class ClientWorld implements IWorld {
         this.cfg.playerClass = this.ownPlayerClass;
         this.spectateFacingPending = false;
         this.pendingSpectateFacing = null;
+        this.connected = true;
+        // A fresh-join reconnect (past the 5 minute linkdead grace, or any server
+        // restart) rebuilds the server session with voiceOptIn: false, but this
+        // client's VoiceChatClient.enabled stays true, so it would otherwise never
+        // re-send voiceoptin and voice would silently stop for the rest of the
+        // session. Idempotent: a no-op if the server session was actually resumed
+        // (still opted in) or if voice was never enabled. Sent AFTER connected is
+        // set, since sendVoiceOptIn requires canSendCommand() (PR #1826 review).
+        if (this.voice.isEnabled()) this.sendVoiceOptIn(true);
         this.onReconnected?.();
+        return;
       }
       this.connected = true;
       return;
@@ -1697,6 +1735,33 @@ export class ClientWorld implements IWorld {
         this.applyChatFlairEvent(ev as SimEvent);
         this.eventQueue.push(ev as SimEvent);
       }
+      return;
+    }
+    if (msg.t === 'voicepeers') {
+      if (Array.isArray(msg.list)) {
+        for (const p of msg.list) {
+          if (typeof p?.pid === 'number' && typeof p?.name === 'string') {
+            this.voicePeerNames.set(p.pid, p.name);
+          }
+        }
+        this.voice.onPeerList(msg.list);
+      }
+      return;
+    }
+    if (msg.t === 'voiceoffer') {
+      // A malformed/unexpected SDP offer must not become an unhandled
+      // rejection (PR #1826 review); the peer connection just stays torn down.
+      this.voice
+        .onOffer(msg.fromPid, this.voicePeerNames.get(msg.fromPid) ?? '', msg.payload)
+        .catch(() => {});
+      return;
+    }
+    if (msg.t === 'voiceanswer') {
+      this.voice.onAnswer(msg.fromPid, msg.payload).catch(() => {});
+      return;
+    }
+    if (msg.t === 'voiceice') {
+      void this.voice.onIce(msg.fromPid, msg.payload);
       return;
     }
     if (msg.t === 'social') {

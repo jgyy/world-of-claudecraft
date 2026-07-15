@@ -226,11 +226,19 @@ describe('options_view: audio dispatch matrix (cluster 4)', () => {
       'voiceVolume',
       'musicToggle',
       'voiceEnabled',
+      'voiceChatEnabled',
+      'note:hudChrome.options.voiceChatConsentNote',
+      'voiceChatMuted',
+      'voiceChatVolume',
       'footstepSfx',
       'clickFeedback',
     ]);
     expect(find(controls, 'sfxVolume')).toMatchObject({ control: 'slider' });
     expect(find(controls, 'voiceEnabled')).toMatchObject({ control: 'boolToggle' });
+    expect(find(controls, 'voiceChatEnabled')).toMatchObject({ control: 'boolToggle' });
+    // self-mute and the peer-audio output slider, both independent of the toggle above
+    expect(find(controls, 'voiceChatMuted')).toMatchObject({ control: 'boolToggle' });
+    expect(find(controls, 'voiceChatVolume')).toMatchObject({ control: 'slider' });
   });
 });
 

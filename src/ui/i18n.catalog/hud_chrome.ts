@@ -777,6 +777,23 @@ export const hudChromeStrings = {
     interfaceModeTouch: 'Touch',
     interfaceModeNote:
       'Auto picks desktop or touch controls from your device. Choose Desktop to force keyboard and mouse (useful on a tablet with a keyboard), or Touch for the on-screen controls.',
+    // Audio panel toggle: proximity voice chat with the nearest ~8 other
+    // opted-in players (WebRTC, off by default). Enabling it prompts for
+    // microphone permission; distinct from the npcVoices toggle above.
+    voiceChatEnabled: 'Voice Chat (Proximity)',
+    // Explicit consent explanation shown under the toggle above (not just fine
+    // print in the privacy policy): pairing is automatic on proximity, and
+    // since this is a direct STUN-only connection (no relay server), the
+    // players you are paired with can see your public IP address.
+    voiceChatConsentNote:
+      'You will be automatically connected to nearby players who also have this on. Because the connection is direct (no relay server), paired players can see your public IP address. Turn this off at any time.',
+    // Toast shown when the browser denies the microphone permission prompt
+    // after enabling Voice Chat.
+    voiceChatMicDenied: 'Microphone access was denied. Voice chat needs it to work.',
+    // Self-mute: stop sending mic audio without leaving the voice mesh.
+    voiceChatMuted: 'Mute My Microphone',
+    // Output volume for other players' proximity voice chat audio.
+    voiceChatVolume: 'Voice Chat Volume',
     // Audio panel toggle for the per-footfall step clips (off by default).
     footstepSounds: 'Footstep Sounds',
     // Toggle for the OSRS-style click-feedback marker: entity targets and

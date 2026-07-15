@@ -12,6 +12,10 @@ export const SETTING_RANGES = {
   // Pre-rendered NPC voice-line clips (public/audio/voice). Slightly louder than
   // SFX by default so dialogue reads over ambient combat noise.
   voiceVolume: { min: 0, max: 1, def: 0.9 },
+  // Output gain for OTHER PLAYERS' proximity voice chat audio (src/net/voice_chat.ts),
+  // distinct from voiceVolume above (which is NPC dialogue). No positional falloff yet
+  // (documented follow-up); this is a flat master gain, same pattern as sfx/music.
+  voiceChatVolume: { min: 0, max: 1, def: 1 },
   brightness: { min: 0.6, max: 1.5, def: 1 },
   // 1 low, 2 medium, 3 high, 4 ultra, 5 advanced. The renderer reads this from
   // localStorage during startup because tier choice controls preload. def is MEDIUM (a safe
@@ -257,6 +261,14 @@ export const BOOL_SETTINGS = {
   // on by default: keep the Daily Rewards chest launcher visible on the HUD. Hiding
   // it only removes the shortcut; rewards, eligibility, and the panel remain available.
   showDailyRewardsChest: { def: true },
+  // off by default (privacy/opt-in): proximity voice chat with the ~8 nearest
+  // other opted-in players. main.ts requests the mic (getUserMedia) only when
+  // this flips on, never at boot. See src/net/voice_chat.ts + server/voice_signaling.ts.
+  voiceChatEnabled: { def: false },
+  // Self-mute: stops sending mic audio to already-connected peers without
+  // opting out of pairing entirely (unlike voiceChatEnabled: false, which
+  // tears the whole mesh down). Off by default, independent of the toggle above.
+  voiceChatMuted: { def: false },
   // internal, never shown in the options UI: set true once main.ts has persisted a
   // device-appropriate graphicsPreset on a player's first run (a CONCLUSIVE detection).
   // It gates firstRunGraphicsPreset so a recognized device is classified at most once and
