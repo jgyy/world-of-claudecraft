@@ -1,6 +1,6 @@
-import { computeTalentModifiers, type TalentAllocation } from '../sim/content/talents';
-import { abilitiesKnownAt } from '../sim/data';
-import type { PlayerClass } from '../sim/types';
+import { computeTalentModifiers, type TalentAllocation } from '../../../sim/content/talents';
+import { abilitiesKnownAt } from '../../../sim/data';
+import type { PlayerClass } from '../../../sim/types';
 
 export type HotbarAction = { type: 'ability'; id: string } | { type: 'item'; id: string } | null;
 

@@ -530,6 +530,20 @@ describe('loadoutKnownAbilityIds', () => {
     const known = loadoutKnownAbilityIds('shaman', { ...emptyAllocation(), spec: 'elemental' }, 20);
     expect(known.has('lightning_bolt')).toBe(true);
   });
+
+  // Pins the actual applyLoadoutBar call site wiring, not just the predicate in
+  // isolation: reverting the predicate to `(id) => !!ABILITIES[id]` would let
+  // stormstrike survive a switch to a Restoration loadout without failing this.
+  it("rejects a foreign-spec ability when used as applyLoadoutBar's predicate", () => {
+    const restoration = { ...emptyAllocation(), spec: 'restoration' };
+    const restorationKnown = loadoutKnownAbilityIds('shaman', restoration, 20);
+
+    const current = [{ type: 'ability' as const, id: 'stormstrike' }];
+
+    expect(applyLoadoutBar(current, ['stormstrike'], 1, (id) => restorationKnown.has(id))).toEqual([
+      null,
+    ]);
+  });
 });
 
 describe('mobile touch drag drop resolution', () => {
