@@ -14,17 +14,42 @@ import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
-const URL = process.env.GAME_URL ?? 'http://localhost:5173';
+const URL = process.env.GAME_URL ?? 'http://localhost:5175';
+const VIEWPORT = process.env.SHOT_VIEWPORT ?? 'desktop';
+const OUT_PREFIX = process.env.SHOT_OUT_PREFIX ?? 'tmp/loadout_bar';
+const isMobile = VIEWPORT === 'mobile';
+// Mobile HUD is landscape-only on the web client.
+const metrics = isMobile
+  ? { width: 844, height: 390, deviceScaleFactor: 2, mobile: true }
+  : { width: 1600, height: 900, deviceScaleFactor: 1, mobile: false };
 fs.mkdirSync('tmp', { recursive: true });
 
 const browser = await puppeteer.launch({
   executablePath: EDGE,
   headless: 'new',
-  args: ['--window-size=1600,900', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
-  defaultViewport: { width: 1600, height: 900 },
+  args: [
+    `--window-size=${metrics.width},${metrics.height}`,
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+  ],
+  defaultViewport: { width: metrics.width, height: metrics.height },
 });
 const page = await browser.newPage();
+const cdp = await page.createCDPSession();
+await cdp.send('Emulation.setDeviceMetricsOverride', {
+  width: metrics.width,
+  height: metrics.height,
+  deviceScaleFactor: metrics.deviceScaleFactor,
+  mobile: metrics.mobile,
+});
 page.on('pageerror', (e) => console.log(`PAGEERROR: ${e.message}`));
+
+// Suppress the one-time "Choose Your Camera" prompt and the new-adventurer tutorial
+// overlay so captures show clean gameplay/UI, not onboarding chrome.
+await page.evaluateOnNewDocument(() => {
+  window.localStorage.setItem('woc.cameraModePrompt.shown', '1');
+  window.localStorage.setItem('woc.tutorial.v1', 'done');
+});
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
@@ -99,27 +124,48 @@ console.log(
     : 'AFTER-FIX BEHAVIOR: slot 1 was rejected for the active Restoration build',
 );
 
-await new Promise((r) => setTimeout(r, 500));
-await page.screenshot({ path: 'tmp/loadout_bar_scene.png' });
+// Capture immediately: syncSlotMap self-heals a rejected/foreign ability id on
+// the very next 20Hz tick (~50ms), so any longer pause here would erase the
+// visual difference this repro is trying to show.
+await page.screenshot({ path: `${OUT_PREFIX}-scene.png` });
 
-const box = await page.evaluate(() => {
-  const bar = document.querySelector('#actionbar') ?? document.querySelector('#hotbar');
-  if (!bar) return null;
-  const r = bar.getBoundingClientRect();
-  return { x: r.left, y: r.top, w: r.width, h: r.height };
-});
+const clipOf = async (sel) =>
+  page.evaluate((s) => {
+    const bar = document.querySelector(s);
+    if (!bar) return null;
+    const r = bar.getBoundingClientRect();
+    return { x: r.left, y: r.top, w: r.width, h: r.height };
+  }, sel);
+
+const box = await clipOf('#actionbar, #hotbar');
 if (box && box.w > 0) {
   const pad = 18;
   await page.screenshot({
-    path: 'tmp/loadout_bar_actionbar.png',
+    path: `${OUT_PREFIX}-actionbar.png`,
     clip: {
       x: Math.max(0, box.x - pad),
       y: Math.max(0, box.y - pad),
-      width: box.w + pad * 2,
-      height: box.h + pad * 2,
+      width: Math.min(metrics.width - Math.max(0, box.x - pad), box.w + pad * 2),
+      height: Math.min(metrics.height - Math.max(0, box.y - pad), box.h + pad * 2),
     },
   });
 }
-console.log('saved tmp/loadout_bar_scene.png, tmp/loadout_bar_actionbar.png');
+
+const winBox = await clipOf('#talents-window');
+if (winBox && winBox.w > 0) {
+  const pad = 8;
+  await page.screenshot({
+    path: `${OUT_PREFIX}-talents.png`,
+    clip: {
+      x: Math.max(0, winBox.x - pad),
+      y: Math.max(0, winBox.y - pad),
+      width: Math.min(metrics.width - Math.max(0, winBox.x - pad), winBox.w + pad * 2),
+      height: Math.min(metrics.height - Math.max(0, winBox.y - pad), winBox.h + pad * 2),
+    },
+  });
+}
+console.log(
+  `saved ${OUT_PREFIX}-scene.png, ${OUT_PREFIX}-actionbar.png, ${OUT_PREFIX}-talents.png`,
+);
 await browser.close();
 process.exit(0);
