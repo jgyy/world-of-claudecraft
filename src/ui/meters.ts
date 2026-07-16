@@ -70,10 +70,19 @@ export class MeterData {
 
   private tally(enc: Encounter, pid: number, name: string, cls: string | null): MemberTally {
     let t = enc.tallies.get(pid);
-    if (!t) {
-      t = { pid, name, cls, dmg: 0, heal: 0, dmgByMob: new Map() };
-      enc.tallies.set(pid, t);
+    if (t) return t;
+    // a reconnect issues the same character a new entity id mid-encounter; find
+    // its previous row by name and re-key it instead of starting a duplicate.
+    for (const [oldPid, existing] of enc.tallies) {
+      if (existing.name === name && oldPid !== pid) {
+        enc.tallies.delete(oldPid);
+        existing.pid = pid;
+        enc.tallies.set(pid, existing);
+        return existing;
+      }
     }
+    t = { pid, name, cls, dmg: 0, heal: 0, dmgByMob: new Map() };
+    enc.tallies.set(pid, t);
     return t;
   }
 
