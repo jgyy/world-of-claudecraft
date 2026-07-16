@@ -19,8 +19,8 @@ export interface SfxEntry {
   hash: string;
   variants: readonly SfxVariant[];
 }
-export const SFX_CATALOG_HASH = '4b8d9131fcad9b42c207d58905914bfa3938fea088f4e5fceb5907076b92c1a2';
-export const SFX_FIXED_CATALOG_KEYS = ["amb_birds","amb_campfire","amb_dungeon","amb_forge","amb_rain","amb_snow","amb_water","amb_wind_marsh","amb_wind_peaks","amb_wind_vale","buff_apply","cast_arcane","cast_chain_heal","cast_fire","cast_frost","cast_holy","cast_lightning_bolt","cast_nature","cast_shadow","combat_block","combat_crit","combat_dodge","combat_parry","debuff_apply","foot_dirt","foot_grass","foot_snow","foot_stone","foot_water","foot_wood","heal_impact","impact_arcane","impact_bone","impact_fire","impact_flesh","impact_frost","impact_holy","impact_leather","impact_metal","impact_nature","impact_shadow","lockpick_advanced_1","lockpick_advanced_2","lockpick_advanced_3","lockpick_advanced_4","lockpick_begin","lockpick_bind","lockpick_bonus","lockpick_end","lockpick_fail","lockpick_page_cleared","lockpick_retry","lockpick_slip","lockpick_success","lockpick_trap","melee_bow","melee_swing_blade","melee_swing_heavy","melee_swing_light","melee_unarmed","mob_beast_aggro","mob_beast_attack","mob_beast_death","mob_beast_hurt","mob_boar_aggro","mob_boar_attack","mob_boar_death","mob_boar_hurt","mob_burrower_aggro","mob_burrower_attack","mob_burrower_death","mob_burrower_hurt","mob_demon_aggro","mob_demon_attack","mob_demon_death","mob_demon_hurt","mob_dragonkin_aggro","mob_dragonkin_attack","mob_dragonkin_death","mob_dragonkin_hurt","mob_elemental_aggro","mob_elemental_attack","mob_elemental_death","mob_elemental_hurt","mob_humanoid_aggro","mob_humanoid_attack","mob_humanoid_death","mob_humanoid_hurt","mob_mudfin_aggro","mob_mudfin_attack","mob_mudfin_death","mob_mudfin_hurt","mob_ogre_aggro","mob_ogre_attack","mob_ogre_death","mob_ogre_hurt","mob_reptile_aggro","mob_reptile_attack","mob_reptile_death","mob_reptile_hurt","mob_reptile_idle","mob_spider_aggro","mob_spider_attack","mob_spider_death","mob_spider_hurt","mob_troll_aggro","mob_troll_attack","mob_troll_death","mob_troll_hurt","mob_undead_aggro","mob_undead_attack","mob_undead_death","mob_undead_hurt","move_jump","move_land","move_splash","move_swim","player_death","player_hurt","proj_arcane","proj_fire","proj_frost","proj_holy","proj_nature","proj_shadow","quest_accept","quest_complete","quest_ready","spell_nova","ui_achievement","ui_bag_close","ui_bag_open","ui_click","ui_coin","ui_death","ui_duel_challenge","ui_duel_countdown","ui_duel_end","ui_duel_start","ui_error","ui_fiesta_augment","ui_fiesta_down","ui_fiesta_revive","ui_fiesta_score_mine","ui_fiesta_score_other","ui_fiesta_wave","ui_fiesta_word_0","ui_fiesta_word_1","ui_fiesta_word_2","ui_fiesta_word_3","ui_level_up","ui_loot_item","ui_quest_accept","ui_quest_done","ui_sheep","ui_whisper"] as const;
+export const SFX_CATALOG_HASH = '5868b2591d61f6a71a3eb56807d09269a0b83da0f9ca899663b2768af16da3b2';
+export const SFX_FIXED_CATALOG_KEYS = ["amb_birds","amb_campfire","amb_dungeon","amb_forge","amb_rain","amb_snow","amb_water","amb_wind_marsh","amb_wind_peaks","amb_wind_vale","buff_apply","cast_arcane","cast_chain_heal","cast_fire","cast_frost","cast_holy","cast_lightning_bolt","cast_nature","cast_shadow","combat_block","combat_crit","combat_dodge","combat_parry","debuff_apply","foot_dirt","foot_grass","foot_snow","foot_stone","foot_water","foot_wood","heal_impact","impact_arcane","impact_bone","impact_fire","impact_flesh","impact_frost","impact_holy","impact_leather","impact_metal","impact_nature","impact_shadow","lockpick_advanced_1","lockpick_advanced_2","lockpick_advanced_3","lockpick_advanced_4","lockpick_begin","lockpick_bind","lockpick_bonus","lockpick_end","lockpick_fail","lockpick_page_cleared","lockpick_retry","lockpick_slip","lockpick_success","lockpick_trap","melee_bow","melee_swing_blade","melee_swing_heavy","melee_swing_light","melee_unarmed","mob_beast_aggro","mob_beast_attack","mob_beast_death","mob_beast_hurt","mob_boar_aggro","mob_boar_attack","mob_boar_death","mob_boar_hurt","mob_burrower_aggro","mob_burrower_attack","mob_burrower_death","mob_burrower_hurt","mob_demon_aggro","mob_demon_attack","mob_demon_death","mob_demon_hurt","mob_dragonkin_aggro","mob_dragonkin_attack","mob_dragonkin_death","mob_dragonkin_hurt","mob_elemental_aggro","mob_elemental_attack","mob_elemental_death","mob_elemental_hurt","mob_humanoid_aggro","mob_humanoid_attack","mob_humanoid_death","mob_humanoid_hurt","mob_mudfin_aggro","mob_mudfin_attack","mob_mudfin_death","mob_mudfin_hurt","mob_ogre_aggro","mob_ogre_attack","mob_ogre_death","mob_ogre_hurt","mob_reptile_aggro","mob_reptile_attack","mob_reptile_death","mob_reptile_hurt","mob_reptile_idle","mob_spider_aggro","mob_spider_attack","mob_spider_death","mob_spider_hurt","mob_troll_aggro","mob_troll_attack","mob_troll_death","mob_troll_hurt","mob_undead_aggro","mob_undead_attack","mob_undead_death","mob_undead_hurt","move_jump","move_land","move_splash","move_swim","player_death","player_hurt","proj_arcane","proj_fire","proj_frost","proj_holy","proj_nature","proj_shadow","quest_accept","quest_complete","quest_ready","spell_nova","ui_achievement","ui_bag_close","ui_bag_open","ui_click","ui_coin","ui_death","ui_duel_challenge","ui_duel_countdown","ui_duel_end","ui_duel_start","ui_error","ui_fiesta_augment","ui_fiesta_down","ui_fiesta_revive","ui_fiesta_score_mine","ui_fiesta_score_other","ui_fiesta_wave","ui_fiesta_word_0","ui_fiesta_word_1","ui_fiesta_word_2","ui_fiesta_word_3","ui_level_up","ui_loot_item","ui_quest_accept","ui_quest_done","ui_sheep","ui_whisper","wand_arcane","wand_holy","wand_shadow"] as const;
 export const SFX_MOB_EXTENSION_FAMILIES = ["beast","boar","burrower","demon","dragonkin","elemental","humanoid","mudfin","ogre","reptile","spider","troll","undead"] as const;
 export const SFX_MOB_EXTENSION_KEY_SOURCE = "^mob_([a-z0-9]+)_([a-z0-9]+(?:_[a-z0-9]+)*)_(aggro|attack|death|hurt|idle)$";
 export const SFX_RUNTIME_PACK_URL = '/audio/sfx/runtime-pack.json';
@@ -3033,6 +3033,99 @@ export const SFX_CLIPS =
         "url": "/audio/sfx/ui_whisper.mp3?v=e2387affefec",
         "bytes": 13835,
         "sha256": "e2387affefec944ba197e0a069d5b146d2aef5681869ab1e099f40ff269f7cf8"
+      }
+    ]
+  },
+  "wand_arcane": {
+    "url": "/audio/sfx/wand_arcane_1.mp3?v=c5a35cc4fe1d",
+    "loop": false,
+    "category": "other",
+    "preload": "lazy",
+    "spatial": true,
+    "gain": 1,
+    "playbackRate": 1,
+    "bytes": 18224,
+    "hash": "c5a35cc4fe1d",
+    "variants": [
+      {
+        "id": "1",
+        "url": "/audio/sfx/wand_arcane_1.mp3?v=c5a35cc4fe1d",
+        "bytes": 18224,
+        "sha256": "c5a35cc4fe1d6ae8bfb4ee15304f69392bb0132d3d0deb6eef7b620abdea3715"
+      },
+      {
+        "id": "2",
+        "url": "/audio/sfx/wand_arcane_2.mp3?v=454df573220c",
+        "bytes": 18224,
+        "sha256": "454df573220cb4512e283dd2e214fa0884c66d11af5147996525493b55d0fb76"
+      },
+      {
+        "id": "3",
+        "url": "/audio/sfx/wand_arcane_3.mp3?v=ae96e32f7ffe",
+        "bytes": 19478,
+        "sha256": "ae96e32f7ffe4507cd0423ea4c0b2dfc71d6e43bc685ed376a286be513fb34aa"
+      }
+    ]
+  },
+  "wand_holy": {
+    "url": "/audio/sfx/wand_holy_1.mp3?v=aae790137b4c",
+    "loop": false,
+    "category": "other",
+    "preload": "lazy",
+    "spatial": true,
+    "gain": 1,
+    "playbackRate": 1,
+    "bytes": 15716,
+    "hash": "aae790137b4c",
+    "variants": [
+      {
+        "id": "1",
+        "url": "/audio/sfx/wand_holy_1.mp3?v=aae790137b4c",
+        "bytes": 15716,
+        "sha256": "aae790137b4c264101d8546ac196add88930a3aa41a45d3543299fac6a831dfa"
+      },
+      {
+        "id": "2",
+        "url": "/audio/sfx/wand_holy_2.mp3?v=b8e78047a120",
+        "bytes": 15089,
+        "sha256": "b8e78047a120ac45a7cda700c94dc58f0469bfbb8b90ba766f7f715b69871311"
+      },
+      {
+        "id": "3",
+        "url": "/audio/sfx/wand_holy_3.mp3?v=d0d172053c81",
+        "bytes": 16343,
+        "sha256": "d0d172053c8191930efef609ddf60831fa3e64ed92c59f17b54837618796fd1e"
+      }
+    ]
+  },
+  "wand_shadow": {
+    "url": "/audio/sfx/wand_shadow_1.mp3?v=ed008c4f6b1d",
+    "loop": false,
+    "category": "other",
+    "preload": "lazy",
+    "spatial": true,
+    "gain": 1,
+    "playbackRate": 1,
+    "bytes": 18224,
+    "hash": "ed008c4f6b1d",
+    "variants": [
+      {
+        "id": "1",
+        "url": "/audio/sfx/wand_shadow_1.mp3?v=ed008c4f6b1d",
+        "bytes": 18224,
+        "sha256": "ed008c4f6b1d40a01920211fac210bd85c591a19d4fbe5a8a783f8c9f15ab274"
+      },
+      {
+        "id": "2",
+        "url": "/audio/sfx/wand_shadow_2.mp3?v=157dbd16b1b9",
+        "bytes": 15716,
+        "sha256": "157dbd16b1b9bfc389d4943a62bae4a3a537060ce46867418213438ff23c9c19"
+      },
+      {
+        "id": "3",
+        "url": "/audio/sfx/wand_shadow_3.mp3?v=72fb61abd53b",
+        "bytes": 16970,
+        "sha256": "72fb61abd53b4ab93640e15ceda8f28fcf4b4760e02d434e2ff5d29d0ab93310"
       }
     ]
   }
