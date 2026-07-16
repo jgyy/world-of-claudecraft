@@ -616,6 +616,7 @@ export const nl_NL: EnTranslations = {
       "balanceLabel": "Saldo",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL: {amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC: {amount}",
       "unavailable": "De Claudium-winkel is momenteel niet beschikbaar. Je saldo en aankopen zijn niet aangetast. Probeer het binnenkort opnieuw.",
       "disclosure": "Claudium is een virtuele valuta die maar één kant op gaat: koop het met geld en besteed het aan cosmetica. Het kan niet worden ingewisseld, overgedragen of uitbetaald.",
@@ -623,6 +624,7 @@ export const nl_NL: EnTranslations = {
       "railLabel": "Betaalmethode",
       "railStripe": "Kaart",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "20% korting",
       "railWocUnavailable": "WOC-prijzen zijn momenteel niet beschikbaar.",
@@ -6817,6 +6819,24 @@ export const nl_NL: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "Oostbeek-Wollen Broek"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "Eastbrook Ritual Vestments"
+      },
+      "eastbrook_druids_hide": {
+        "name": "Eastbrook Druid's Hide"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "Eastbrook Warded Leggings"
+      },
+      "wardweave_cowl": {
+        "name": "Wardweave Cowl"
+      },
+      "duskhide_wraps": {
+        "name": "Duskhide Wraps"
+      },
+      "sootscale_mantle": {
+        "name": "Sootscale Mantle"
       },
       "gravecaller_blade": {
         "name": "Grafroepers Breedkling"

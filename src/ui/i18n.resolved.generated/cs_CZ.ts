@@ -616,6 +616,7 @@ export const cs_CZ: EnTranslations = {
       "balanceLabel": "Zůstatek",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL: {amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC: {amount}",
       "unavailable": "Obchod Claudium nyní není dostupný. Tvůj zůstatek ani nákupy to neovlivní, zkus to za chvíli znovu.",
       "disclosure": "Claudium je jednosměrná herní měna: kupuje se za peníze a utrácí za kosmetické předměty. Nelze ji směnit zpět, převést ani vyplatit v hotovosti.",
@@ -623,6 +624,7 @@ export const cs_CZ: EnTranslations = {
       "railLabel": "Způsob platby",
       "railStripe": "Karta",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "Sleva 20 %",
       "railWocUnavailable": "Cena ve WOC nyní není dostupná.",
@@ -6817,6 +6819,24 @@ export const cs_CZ: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "Eastbrookské vlněné kalhoty"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "Eastbrook Ritual Vestments"
+      },
+      "eastbrook_druids_hide": {
+        "name": "Eastbrook Druid's Hide"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "Eastbrook Warded Leggings"
+      },
+      "wardweave_cowl": {
+        "name": "Wardweave Cowl"
+      },
+      "duskhide_wraps": {
+        "name": "Duskhide Wraps"
+      },
+      "sootscale_mantle": {
+        "name": "Sootscale Mantle"
       },
       "gravecaller_blade": {
         "name": "Široká čepel Hrobovolajícího"

@@ -616,6 +616,7 @@ export const de_DE: EnTranslations = {
       "balanceLabel": "Guthaben",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL: {amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC: {amount}",
       "unavailable": "Der Claudium-Shop ist derzeit nicht verfügbar. Dein Guthaben und deine Käufe bleiben davon unberührt. Bitte versuche es gleich noch einmal.",
       "disclosure": "Claudium ist eine nicht rücktauschbare Spielwährung: Du kaufst es mit echtem Geld und gibst es für kosmetische Inhalte aus. Es kann weder eingelöst noch übertragen oder ausgezahlt werden.",
@@ -623,6 +624,7 @@ export const de_DE: EnTranslations = {
       "railLabel": "Zahlungsart",
       "railStripe": "Karte",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "20% Rabatt",
       "railWocUnavailable": "WOC-Preise sind derzeit nicht verfügbar.",
@@ -6817,6 +6819,24 @@ export const de_DE: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "Eastbrook-Wollhose"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "Eastbrook Ritual Vestments"
+      },
+      "eastbrook_druids_hide": {
+        "name": "Eastbrook Druid's Hide"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "Eastbrook Warded Leggings"
+      },
+      "wardweave_cowl": {
+        "name": "Wardweave Cowl"
+      },
+      "duskhide_wraps": {
+        "name": "Duskhide Wraps"
+      },
+      "sootscale_mantle": {
+        "name": "Sootscale Mantle"
       },
       "gravecaller_blade": {
         "name": "Gravecallers Breitschwert"

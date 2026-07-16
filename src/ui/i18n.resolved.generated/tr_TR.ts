@@ -616,6 +616,7 @@ export const tr_TR: EnTranslations = {
       "balanceLabel": "Bakiye",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL: {amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC: {amount}",
       "unavailable": "Claudium mağazası şu anda kullanılamıyor. Bakiyeniz ve satın alımlarınız etkilenmez; lütfen kısa süre sonra tekrar kontrol edin.",
       "disclosure": "Claudium tek yönlü yumuşak bir para birimidir: Parayla satın alın ve kozmetik ürünlerine harcayın. Kullanılamaz, devredilemez veya nakde çevrilemez.",
@@ -623,6 +624,7 @@ export const tr_TR: EnTranslations = {
       "railLabel": "Ödeme yöntemi",
       "railStripe": "Kart",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "%20 indirim",
       "railWocUnavailable": "WOC fiyatlandırması şu anda mevcut değil.",
@@ -6817,6 +6819,24 @@ export const tr_TR: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "Doğudere Yün Pantolonu"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "Eastbrook Ritual Vestments"
+      },
+      "eastbrook_druids_hide": {
+        "name": "Eastbrook Druid's Hide"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "Eastbrook Warded Leggings"
+      },
+      "wardweave_cowl": {
+        "name": "Wardweave Cowl"
+      },
+      "duskhide_wraps": {
+        "name": "Duskhide Wraps"
+      },
+      "sootscale_mantle": {
+        "name": "Sootscale Mantle"
       },
       "gravecaller_blade": {
         "name": "Mezarçağıran'ın Geniş Kılıcı"

@@ -616,6 +616,7 @@ export const sv_SE: EnTranslations = {
       "balanceLabel": "Saldo",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL: {amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC: {amount}",
       "unavailable": "Claudium-butiken är inte tillgänglig just nu. Ditt saldo och dina köp påverkas inte. Försök igen om en stund.",
       "disclosure": "Claudium är en virtuell valuta som bara går åt ett håll: köp den för pengar och använd den till kosmetika. Den kan inte växlas in, överföras eller betalas ut.",
@@ -623,6 +624,7 @@ export const sv_SE: EnTranslations = {
       "railLabel": "Betalningsmetod",
       "railStripe": "Kort",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "20% rabatt",
       "railWocUnavailable": "WOC-priser är inte tillgängliga just nu.",
@@ -6817,6 +6819,24 @@ export const sv_SE: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "Östbäcks ullbyxor"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "Eastbrook Ritual Vestments"
+      },
+      "eastbrook_druids_hide": {
+        "name": "Eastbrook Druid's Hide"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "Eastbrook Warded Leggings"
+      },
+      "wardweave_cowl": {
+        "name": "Wardweave Cowl"
+      },
+      "duskhide_wraps": {
+        "name": "Duskhide Wraps"
+      },
+      "sootscale_mantle": {
+        "name": "Sootscale Mantle"
       },
       "gravecaller_blade": {
         "name": "Gravkallarens bredklinga"

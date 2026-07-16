@@ -616,6 +616,7 @@ export const ko_KR: EnTranslations = {
       "balanceLabel": "잔액",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL: {amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC: {amount}",
       "unavailable": "현재 Claudium 상점을 이용할 수 없습니다. 잔액과 구매 내역에는 영향이 없으니 잠시 후 다시 확인해 주세요.",
       "disclosure": "Claudium은 단방향 게임 화폐입니다. 현금으로 구매해 꾸미기 상품에 사용할 수 있으며 환전, 양도 또는 현금화할 수 없습니다.",
@@ -623,6 +624,7 @@ export const ko_KR: EnTranslations = {
       "railLabel": "결제 수단",
       "railStripe": "카드",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "20% 할인",
       "railWocUnavailable": "현재 WOC 가격을 이용할 수 없습니다.",
@@ -6817,6 +6819,24 @@ export const ko_KR: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "이스트브룩 양모 바지"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "이스트브룩 의식 예복"
+      },
+      "eastbrook_druids_hide": {
+        "name": "이스트브룩 드루이드 가죽"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "이스트브룩 방호 각반"
+      },
+      "wardweave_cowl": {
+        "name": "워드위브 두건"
+      },
+      "duskhide_wraps": {
+        "name": "더스크하이드 손목보호대"
+      },
+      "sootscale_mantle": {
+        "name": "수트스케일 망토"
       },
       "gravecaller_blade": {
         "name": "무덤부름 넓은날검"

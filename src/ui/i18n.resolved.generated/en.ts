@@ -616,6 +616,7 @@ export const en: EnTranslations = {
       "balanceLabel": "Balance",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL: {amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC: {amount}",
       "unavailable": "The Claudium store is unavailable right now. Your balance and purchases are unaffected; please check back shortly.",
       "disclosure": "Claudium is a one-way soft currency: buy it with money and spend it on cosmetics. It cannot be redeemed, transferred, or cashed out.",
@@ -623,10 +624,11 @@ export const en: EnTranslations = {
       "railLabel": "Payment method",
       "railStripe": "Card",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "20% off",
       "railWocUnavailable": "WOC pricing is unavailable right now.",
-      "railNativeUnavailable": "SOL/WOC off.",
+      "railNativeUnavailable": "Crypto off.",
       "amountLabel": "Amount",
       "showAmounts": "Show all Claudium amounts",
       "hideAmounts": "Hide extra Claudium amounts",
@@ -6817,6 +6819,24 @@ export const en: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "Eastbrook Wool Trousers"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "Eastbrook Ritual Vestments"
+      },
+      "eastbrook_druids_hide": {
+        "name": "Eastbrook Druid's Hide"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "Eastbrook Warded Leggings"
+      },
+      "wardweave_cowl": {
+        "name": "Wardweave Cowl"
+      },
+      "duskhide_wraps": {
+        "name": "Duskhide Wraps"
+      },
+      "sootscale_mantle": {
+        "name": "Sootscale Mantle"
       },
       "gravecaller_blade": {
         "name": "Gravecaller's Broadblade"

@@ -616,6 +616,7 @@ export const id_ID: EnTranslations = {
       "balanceLabel": "Saldo",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL: {amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC: {amount}",
       "unavailable": "Toko Claudium tidak tersedia saat ini. Saldo dan pembelian Anda tidak terpengaruh; harap segera periksa kembali.",
       "disclosure": "Claudium adalah mata uang lunak satu arah: beli dengan uang dan belanjakan untuk kosmetik. Itu tidak dapat ditebus, ditransfer, atau diuangkan.",
@@ -623,6 +624,7 @@ export const id_ID: EnTranslations = {
       "railLabel": "Metode pembayaran",
       "railStripe": "Kartu",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "Diskon 20%.",
       "railWocUnavailable": "Harga WOC tidak tersedia saat ini.",
@@ -6817,6 +6819,24 @@ export const id_ID: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "Celana Wol Eastbrook"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "Eastbrook Ritual Vestments"
+      },
+      "eastbrook_druids_hide": {
+        "name": "Eastbrook Druid's Hide"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "Eastbrook Warded Leggings"
+      },
+      "wardweave_cowl": {
+        "name": "Wardweave Cowl"
+      },
+      "duskhide_wraps": {
+        "name": "Duskhide Wraps"
+      },
+      "sootscale_mantle": {
+        "name": "Sootscale Mantle"
       },
       "gravecaller_blade": {
         "name": "Bilah Lebar Gravecaller"

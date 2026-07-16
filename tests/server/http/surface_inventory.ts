@@ -974,6 +974,17 @@ export const SURFACE_INVENTORY: readonly SurfaceRoute[] = [
   {
     dispatcher: DISPATCH.mainApi,
     method: 'GET',
+    path: '/api/claudium/native/balance/usdc/:owner',
+    handler: 'handleClaudiumApi arm: /api/claudium/native/balance/usdc/:owner',
+    contentType: PROBLEM_JSON,
+    authScope: AUTH_SCOPE.full,
+    limiter: null,
+    requireOwnedExpected: null,
+    match: /^\/api\/claudium\/native\/balance\/usdc\/(\w+)$/,
+  },
+  {
+    dispatcher: DISPATCH.mainApi,
+    method: 'GET',
     path: '/api/claudium/store',
     handler: 'handleClaudiumApi arm: /api/claudium/store',
     contentType: PROBLEM_JSON,

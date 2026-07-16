@@ -616,6 +616,7 @@ export const es: EnTranslations = {
       "balanceLabel": "Saldo",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL: {amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC: {amount}",
       "unavailable": "La tienda de Claudium no está disponible en este momento. Tu saldo y tus compras no se verán afectados; vuelve a intentarlo dentro de poco.",
       "disclosure": "Claudium es una moneda virtual unidireccional: se compra con dinero y se gasta en cosméticos. No se puede canjear, transferir ni convertir en dinero.",
@@ -623,6 +624,7 @@ export const es: EnTranslations = {
       "railLabel": "Forma de pago",
       "railStripe": "Tarjeta",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "20 % de descuento",
       "railWocUnavailable": "Los precios en WOC no están disponibles en este momento.",
@@ -6817,6 +6819,24 @@ export const es: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "Pantalones de lana de Eastbrook"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "Eastbrook Ritual Vestments"
+      },
+      "eastbrook_druids_hide": {
+        "name": "Eastbrook Druid's Hide"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "Eastbrook Warded Leggings"
+      },
+      "wardweave_cowl": {
+        "name": "Wardweave Cowl"
+      },
+      "duskhide_wraps": {
+        "name": "Duskhide Wraps"
+      },
+      "sootscale_mantle": {
+        "name": "Sootscale Mantle"
       },
       "gravecaller_blade": {
         "name": "Mandoble de Gravecaller"

@@ -616,6 +616,7 @@ export const zh_TW: EnTranslations = {
       "balanceLabel": "餘額",
       "balanceUnit": "{amount} Claudium",
       "solBalance": "SOL：{amount}",
+      "usdcBalance": "USDC: {amount}",
       "wocBalance": "WOC：{amount}",
       "unavailable": "Claudium 商店目前無法使用。您的餘額與購買不受影響，請稍後再試。",
       "disclosure": "Claudium 是單向軟貨幣：可用金錢購買並用於兌換外觀物品，不能贖回、轉讓或兌現。",
@@ -623,6 +624,7 @@ export const zh_TW: EnTranslations = {
       "railLabel": "付款方式",
       "railStripe": "信用卡",
       "railSol": "SOL",
+      "railUsdc": "USDC",
       "railWoc": "WOC",
       "railWocDiscount": "優惠 20%",
       "railWocUnavailable": "WOC 定價目前無法使用。",
@@ -6817,6 +6819,24 @@ export const zh_TW: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "東溪羊毛長褲"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "東溪儀典法衣"
+      },
+      "eastbrook_druids_hide": {
+        "name": "東溪德魯伊獸皮"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "東溪護法護腿"
+      },
+      "wardweave_cowl": {
+        "name": "織衛兜帽"
+      },
+      "duskhide_wraps": {
+        "name": "暮影裹手"
+      },
+      "sootscale_mantle": {
+        "name": "灰鱗披肩"
       },
       "gravecaller_blade": {
         "name": "喚墓者寬刃劍"

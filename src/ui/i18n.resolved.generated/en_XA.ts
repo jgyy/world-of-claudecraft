@@ -616,6 +616,7 @@ export const en_XA: EnTranslations = {
       "balanceLabel": "[Ɓáļáñçé]",
       "balanceUnit": "[{amount} Çļáúðíúɱ]",
       "solBalance": "[ŠÓĻ: {amount}]",
+      "usdcBalance": "[ÚŠÐÇ: {amount}]",
       "wocBalance": "[ŴÓÇ: {amount}]",
       "unavailable": "[Ţĥé Çļáúðíúɱ šţóŕé íš úñáʋáíļáƀļé ŕíĝĥţ ñóŵ. Ýóúŕ ƀáļáñçé áñð þúŕçĥášéš áŕé úñáƒƒéçţéð; þļéášé çĥéçķ ƀáçķ šĥóŕţļý.]",
       "disclosure": "[Çļáúðíúɱ íš á óñé-ŵáý šóƒţ çúŕŕéñçý: ƀúý íţ ŵíţĥ ɱóñéý áñð šþéñð íţ óñ çóšɱéţíçš. Íţ çáññóţ ƀé ŕéðééɱéð, ţŕáñšƒéŕŕéð, óŕ çášĥéð óúţ.]",
@@ -623,10 +624,11 @@ export const en_XA: EnTranslations = {
       "railLabel": "[Þáýɱéñţ ɱéţĥóð]",
       "railStripe": "[Çáŕð]",
       "railSol": "[ŠÓĻ]",
+      "railUsdc": "[ÚŠÐÇ]",
       "railWoc": "[ŴÓÇ]",
       "railWocDiscount": "[20% óƒƒ]",
       "railWocUnavailable": "[ŴÓÇ þŕíçíñĝ íš úñáʋáíļáƀļé ŕíĝĥţ ñóŵ.]",
-      "railNativeUnavailable": "[ŠÓĻ/ŴÓÇ óƒƒ.]",
+      "railNativeUnavailable": "[Çŕýþţó óƒƒ.]",
       "amountLabel": "[Áɱóúñţ]",
       "showAmounts": "[Šĥóŵ áļļ Çļáúðíúɱ áɱóúñţš]",
       "hideAmounts": "[Ĥíðé éẋţŕá Çļáúðíúɱ áɱóúñţš]",
@@ -6817,6 +6819,24 @@ export const en_XA: EnTranslations = {
       },
       "eastbrook_wool_trousers": {
         "name": "[Éášţƀŕóóķ Ŵóóļ Ţŕóúšéŕš]"
+      },
+      "eastbrook_ritual_vestments": {
+        "name": "[Éášţƀŕóóķ Ŕíţúáļ Ʋéšţɱéñţš]"
+      },
+      "eastbrook_druids_hide": {
+        "name": "[Éášţƀŕóóķ Ðŕúíð'š Ĥíðé]"
+      },
+      "eastbrook_warded_leggings": {
+        "name": "[Éášţƀŕóóķ Ŵáŕðéð Ļéĝĝíñĝš]"
+      },
+      "wardweave_cowl": {
+        "name": "[Ŵáŕðŵéáʋé Çóŵļ]"
+      },
+      "duskhide_wraps": {
+        "name": "[Ðúšķĥíðé Ŵŕáþš]"
+      },
+      "sootscale_mantle": {
+        "name": "[Šóóţšçáļé Ɱáñţļé]"
       },
       "gravecaller_blade": {
         "name": "[Ĝŕáʋéçáļļéŕ'š Ɓŕóáðƀļáðé]"
