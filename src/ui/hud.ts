@@ -10045,6 +10045,7 @@ export class Hud {
         amendsRequired: this.sim.archetypeAmendsRequired,
       }),
       {
+        ...this.presentationBag,
         onClose: () => this.closeProfessionsWheel(),
       },
     );
