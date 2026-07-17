@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { coerceFxTier, nameplateIntervalSec } from '../game/ui_tier_knobs';
 import { cameraOcclusion } from '../sim/colliders';
+import { isStunned } from '../sim/combat/cc';
 import {
   ABILITIES,
   ARENA_SLOT_COUNT,
@@ -876,6 +877,7 @@ export class Renderer {
     casting: false,
     swimming: false,
     sitting: false,
+    stunned: false,
   };
   private selfRenderPosition = new THREE.Vector3();
   private selfRenderPositionReady = false;
@@ -4673,6 +4675,7 @@ export class Renderer {
       st.casting = e.castingAbility !== null && !visuallyDead;
       st.swimming = swimming;
       st.sitting = e.kind === 'player' && (e.sitting || e.eating !== null || e.drinking !== null);
+      st.stunned = isStunned(e) && !visuallyDead;
       // --- spatial movement audio (self + others) --------------------------
       // All gated by audibility (squared distance) so far entities cost nothing.
       const sink = this.audioSink;

@@ -18,6 +18,7 @@ const BASE_ANIM_STATE: AnimState = {
   casting: false,
   swimming: false,
   sitting: false,
+  stunned: false,
 };
 
 // steady forward walk: ~2.2 u/s gives ~0.0367u of travel per 60fps frame

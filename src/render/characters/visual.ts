@@ -1045,13 +1045,15 @@ export class CharacterVisual {
         return this.action(c.sitDown) ?? this.action(c.sitIdle) ?? this.action(c.idle);
       case 'jump':
         return this.action(c.jump) ?? this.action(c.idle);
+      case 'stunned':
+        return this.action(c.stunned) ?? this.action(c.hit?.[0]) ?? this.action(c.idle);
       default:
         return this.action(c.idle);
     }
   }
 
   private shouldInterruptEmote(s: AnimState): boolean {
-    return s.moving || s.airborne || s.swimming || s.casting || s.sitting || s.dead;
+    return s.moving || s.airborne || s.swimming || s.casting || s.sitting || s.dead || s.stunned;
   }
 
   private fadeTo(next: THREE.AnimationAction | null, fade: number, oneShot: boolean): void {

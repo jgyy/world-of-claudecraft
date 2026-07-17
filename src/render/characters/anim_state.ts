@@ -15,16 +15,35 @@ export interface AnimState {
   casting: boolean;
   swimming: boolean;
   sitting: boolean;
+  /** a hard-CC lockout (stun/incapacitate/polymorph) is active: freezes casts,
+   *  movement, and melee, so the pose must read as dazed rather than idle
+   *  (see sim/combat/cc.ts isStunned) */
+  stunned: boolean;
 }
 
-export type BaseState = 'idle' | 'walk' | 'walkBack' | 'run' | 'cast' | 'swim' | 'sit' | 'jump';
+export type BaseState =
+  | 'idle'
+  | 'walk'
+  | 'walkBack'
+  | 'run'
+  | 'cast'
+  | 'swim'
+  | 'sit'
+  | 'jump'
+  | 'stunned';
 
 const DEFAULT_WALK_REF = 2.2;
 const DEFAULT_RUN_REF = 7;
 
 export function desiredBaseState(s: AnimState, hasWalkBackClip: boolean): BaseState {
-  if (s.swimming) return 'swim';
+  // Airborne is physics (falling/knockback) and outranks stun: you fall either
+  // way. Stun then preempts swim/cast/sit/move, all voluntary actions a hard
+  // CC lockout freezes (the server already breaks a channel the instant
+  // isStunned flips true), so the pose must not keep reading as a normal
+  // cast/swim/sit loop while the player can't act.
   if (s.airborne) return 'jump';
+  if (s.stunned) return 'stunned';
+  if (s.swimming) return 'swim';
   if (s.casting) return 'cast';
   if (s.sitting) return 'sit';
   if (s.moving) {

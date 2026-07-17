@@ -32,6 +32,9 @@ export interface ClipMap {
   swim?: string;
   /** airborne base pose while jumping/falling */
   jump?: string;
+  /** dazed loop while hard-CC'd (stun/incapacitate/polymorph); absent falls
+   *  back to the first hit-react clip, then idle (visual.ts baseAction) */
+  stunned?: string;
   walkBack?: string;
   /** one-shot played on respawn (skeleton awaken / boss taunt) */
   flourish?: string;

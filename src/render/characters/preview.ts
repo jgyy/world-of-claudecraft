@@ -23,6 +23,7 @@ const PREVIEW_ANIM_STATE = {
   casting: false,
   swimming: false,
   sitting: false,
+  stunned: false,
 };
 
 const LIVE_PREVIEW_X = 0;
