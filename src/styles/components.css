@@ -4432,9 +4432,13 @@
   }
 
   /* ---------- professions wheel (#1302) ---------- */
-  /* A simple responsive grid, not an angle-positioned ring: ten cards read
-     more clearly at panel width than ten crowded points on a circle, and a
-     grid reflows for mobile/narrow layouts for free. */
+  /* An actual wheel: a fixed-size circular container (--wheel-d, clamped to the
+     viewport for mobile), a center hub showing identity at a glance, and ten
+     spokes placed on the circle with the classic rotate/translate/counter-
+     rotate trick (rotate the 0-size spoke anchor to its angle, push it out by
+     the radius, then rotate the card itself back upright so its text stays
+     horizontal). Every length below is a fraction of --wheel-d, so the whole
+     wheel scales as one unit instead of needing per-breakpoint overrides. */
   .wheel-amends {
     padding: 5px 2px 8px;
     font-size: 11px;
@@ -4443,49 +4447,106 @@
     margin-bottom: 8px;
   }
   .wheel-ring {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    padding: 2px;
+    --wheel-d: min(480px, 86vw);
+    position: relative;
+    width: var(--wheel-d);
+    height: var(--wheel-d);
+    margin: 8px auto 4px;
   }
-  .wheel-craft {
+  .wheel-hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(var(--wheel-d) * 0.3);
+    height: calc(var(--wheel-d) * 0.3);
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    padding: 8px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1px;
+    padding: 4px;
+  }
+  .wheel-hub-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    color: #887c5c;
+  }
+  .wheel-hub-value {
+    font-family: var(--title-font);
+    font-size: 12px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .wheel-spoke {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+  }
+  /* Ten cards at 36deg apart are wide enough, relative to that arc, to collide
+     near the top and bottom of a single-radius ring; alternating every other
+     card onto a slightly larger radius (a rosette layout) gives each one
+     clearance on both sides without shrinking the cards further. */
+  .wheel-spoke-near {
+    transform: rotate(var(--wheel-angle)) translate(calc(var(--wheel-d) * 0.33))
+      rotate(calc(-1 * var(--wheel-angle)));
+  }
+  .wheel-spoke-far {
+    transform: rotate(var(--wheel-angle)) translate(calc(var(--wheel-d) * 0.47))
+      rotate(calc(-1 * var(--wheel-angle)));
+  }
+  .wheel-craft {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    width: calc(var(--wheel-d) * 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px;
     border-radius: 4px;
     border: 1px solid #463a1c;
-    background: rgba(0, 0, 0, 0.18);
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
   }
   .wheel-craft-archetype {
     border-color: var(--gold);
-    background: rgba(212, 175, 55, 0.12);
+    background: rgba(212, 175, 55, 0.22);
   }
   .wheel-craft-hobby {
     border-color: #6c8ebf;
   }
   .wheel-craft-name {
     font-family: var(--title-font);
-    font-size: 12px;
+    font-size: 11px;
     color: var(--gold);
   }
   .wheel-craft-state {
-    font-size: 10px;
+    font-size: 9px;
     color: #887c5c;
     text-transform: uppercase;
   }
   .wheel-craft-tier {
-    font-size: 11px;
+    font-size: 10px;
     color: #c8b888;
   }
   .wheel-pips {
     display: flex;
+    justify-content: center;
     gap: 3px;
     margin-top: 2px;
   }
   .wheel-pip {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     border: 1px solid #6b5c33;
     background: transparent;

@@ -50,6 +50,10 @@ export interface WheelCraftVM {
   pipsFilled: number;
   pipsTotal: number;
   state: WheelCraftState;
+  /** Ring position in degrees, 0 at CRAFT_RING[0], clockwise. The painter lays
+   *  each craft out on an actual circle at this angle (same formula
+   *  CRAFTING_HUB_STATIONS uses), so the two stay visually consistent. */
+  angleDeg: number;
 }
 
 export interface ProfessionsWheelView {
@@ -85,7 +89,7 @@ function wheelCraftState(
  * mutates any of its inputs.
  */
 export function buildProfessionsWheelView(input: ProfessionsWheelInput): ProfessionsWheelView {
-  const crafts: WheelCraftVM[] = CRAFT_RING.map((craft) => {
+  const crafts: WheelCraftVM[] = CRAFT_RING.map((craft, index) => {
     const skill = input.craftSkills[craft.id] ?? 0;
     const tier = tierForSkill(skill);
     const withinTier = skill - tier * TIER_SKILL_STEP;
@@ -101,6 +105,7 @@ export function buildProfessionsWheelView(input: ProfessionsWheelInput): Profess
       pipsFilled,
       pipsTotal: WHEEL_PIPS_PER_TIER,
       state: wheelCraftState(craft.id, input.archetypeCraft, input.hobbyCraft),
+      angleDeg: (index / CRAFT_RING.length) * 360,
     };
   });
 

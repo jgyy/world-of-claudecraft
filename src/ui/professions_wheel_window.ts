@@ -81,14 +81,38 @@ export function renderProfessionsWheelWindow(
 
   const ring = document.createElement('div');
   ring.className = 'wheel-ring';
-  for (const craft of view.crafts) {
+
+  // The center hub: a plain circle showing identity at a glance (title/hobby),
+  // the one thing that doesn't belong to any single spoke.
+  const hub = document.createElement('div');
+  hub.className = 'wheel-hub';
+  const archetypeName =
+    view.archetypeCraft !== null
+      ? t(WHEEL_CRAFT_NAME_KEYS[view.archetypeCraft] ?? 'hudChrome.wheel.title')
+      : t('hudChrome.archetypeTitle.none');
+  const hobbyName =
+    view.hobbyCraft !== null
+      ? t(WHEEL_CRAFT_NAME_KEYS[view.hobbyCraft] ?? 'hudChrome.wheel.title')
+      : t('hudChrome.archetypeTitle.none');
+  hub.innerHTML = `<span class="wheel-hub-label">${esc(t('hudChrome.wheel.archetypeLabel'))}</span><span class="wheel-hub-value">${esc(archetypeName)}</span><span class="wheel-hub-label">${esc(t('hudChrome.wheel.hobbyLabel'))}</span><span class="wheel-hub-value">${esc(hobbyName)}</span>`;
+  ring.appendChild(hub);
+
+  view.crafts.forEach((craft, index) => {
+    const spoke = document.createElement('div');
+    // Alternating near/far radius (the classic many-spoke rosette layout):
+    // ten cards spaced 36deg apart are wide enough, relative to that arc,
+    // that neighbors collide near the top and bottom of a single-radius ring.
+    // Staggering every other card outward gives each one room on both sides.
+    spoke.className = `wheel-spoke ${index % 2 === 0 ? 'wheel-spoke-near' : 'wheel-spoke-far'}`;
+    spoke.style.setProperty('--wheel-angle', `${craft.angleDeg}deg`);
     const cell = document.createElement('div');
     cell.className = `wheel-craft ${craftStateClass(craft)}`;
     const name = t(WHEEL_CRAFT_NAME_KEYS[craft.craftId] ?? 'hudChrome.wheel.title');
     const tierName = t(WHEEL_TIER_NAME_KEYS[craft.tierRarity]);
     cell.innerHTML = `<span class="wheel-craft-name">${esc(name)}</span><span class="wheel-craft-state">${esc(craftStateLabel(craft))}</span><span class="wheel-craft-tier">${esc(t('hudChrome.wheel.craftTier', { craft: name, tier: tierName }))}</span><span class="wheel-pips">${renderPips(craft)}</span>`;
-    ring.appendChild(cell);
-  }
+    spoke.appendChild(cell);
+    ring.appendChild(spoke);
+  });
   el.appendChild(ring);
 
   el.querySelector('[data-close]')?.addEventListener('click', () => deps.onClose());

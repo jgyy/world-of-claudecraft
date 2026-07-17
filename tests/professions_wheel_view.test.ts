@@ -71,6 +71,15 @@ describe('buildProfessionsWheelView', () => {
     expect(byId.get('alchemy')).toBe('dormant');
   });
 
+  it('lays crafts out at evenly spaced angles around the ring, starting at 0deg', () => {
+    const view = buildProfessionsWheelView(makeInput());
+    const step = 360 / CRAFT_RING.length;
+    view.crafts.forEach((craft, index) => {
+      expect(craft.angleDeg).toBeCloseTo(index * step);
+    });
+    expect(view.crafts[0].angleDeg).toBe(0);
+  });
+
   it('passes archetype/hobby identity and amends progress through unchanged', () => {
     const view = buildProfessionsWheelView(
       makeInput({
