@@ -1409,6 +1409,7 @@ export class Hud {
       openMarket: () => this.openMarket(),
       openDelveBoard: (npcId) => this.openDelveBoard(npcId),
       openValeCup: () => this.toggleValeCup(),
+      openCardDuel: () => this.toggleCardDuel(),
       voice: {
         play: (key) => voice.play(key),
         isPlaying: () => voice.isPlaying(),

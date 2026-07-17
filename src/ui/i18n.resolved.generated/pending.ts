@@ -28,7 +28,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "es_ES": [
     "cardDuel.close",
@@ -49,7 +52,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "fr_FR": [
     "cardDuel.close",
@@ -70,7 +76,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "fr_CA": [
     "cardDuel.close",
@@ -91,7 +100,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "en_CA": [],
   "it_IT": [
@@ -113,7 +125,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "de_DE": [
     "cardDuel.close",
@@ -134,7 +149,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "zh_CN": [],
   "zh_TW": [],
@@ -159,7 +177,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "ru_RU": [],
   "cs_CZ": [
@@ -181,7 +202,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "nl_NL": [
     "cardDuel.close",
@@ -202,7 +226,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "pl_PL": [
     "cardDuel.close",
@@ -223,7 +250,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "id_ID": [
     "cardDuel.close",
@@ -244,7 +274,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "tr_TR": [
     "cardDuel.close",
@@ -265,7 +298,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "sv_SE": [
     "cardDuel.close",
@@ -286,7 +322,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "vi_VN": [
     "cardDuel.close",
@@ -307,7 +346,10 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ],
   "da_DK": [
     "cardDuel.close",
@@ -328,6 +370,9 @@ export const pending: Record<string, readonly string[]> = {
     "cardDuel.yourTurn",
     "entities.npcs.card_master.greeting",
     "entities.npcs.card_master.name",
-    "entities.npcs.card_master.title"
+    "entities.npcs.card_master.title",
+    "gpuNotice.bodyDesktop",
+    "gpuNotice.bodyWeb",
+    "gpuNotice.dismiss"
   ]
 };
