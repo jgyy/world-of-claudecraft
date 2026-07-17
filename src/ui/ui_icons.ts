@@ -64,6 +64,7 @@ export type UiIconName =
   | 'book'
   | 'cards'
   | 'trash'
+  | 'wheel'
   | 'crafting';
 
 // Inner SVG markup per icon (one or more <path>). Default fill rule is nonzero
@@ -177,6 +178,10 @@ const ICONS: Record<UiIconName, string> = {
   // with a hollowed diamond pip so the glyph reads as "a card" at
   // micro-button size (evenodd punches the pip through the body)
   cards: '<path fill-rule="evenodd" d="M176 72h160v336H176zM256 110l40 40-40 40-40-40z"/>',
+  // hand-authored ring (the Professions Wheel window): a plain annulus, one
+  // solid silhouette so it reads at micro-button size.
+  wheel:
+    '<path fill-rule="evenodd" d="M476,256A220,220 0 1,0 36,256A220,220 0 1,0 476,256Z M396,256A140,140 0 1,0 116,256A140,140 0 1,0 396,256Z"/>',
   // hand-authored anvil (the Crafting window): a horned top slab over a waisted
   // body and flared base, one solid silhouette so it reads at micro-button size
   crafting: '<path d="M60 102l90-11h300v85h-100l-30 92v97h68v54H124v-54h68v-97l-30-92h-12z"/>',

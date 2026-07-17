@@ -2026,6 +2026,25 @@ export const en_XA: EnTranslations = {
       "tailoring": "[Ţáíļóŕ]",
       "leatherworking": "[Ļéáţĥéŕçŕáƒţéŕ]"
     },
+    "wheel": {
+      "title": "[Þŕóƒéššíóñš Ŵĥééļ]",
+      "close": "[Çļóšé þŕóƒéššíóñš ŵĥééļ]",
+      "archetypeLabel": "[Áŕçĥéţýþé]",
+      "hobbyLabel": "[Ĥóƀƀý]",
+      "dormantLabel": "[Ðóŕɱáñţ]",
+      "amends": "[Áɱéñðš þŕóĝŕéšš: {progress}/{required}]",
+      "craftTier": "[{craft}: {tier}]",
+      "armorcrafting": "[Áŕɱóŕçŕáƒţíñĝ]",
+      "weaponcrafting": "[Ŵéáþóñçŕáƒţíñĝ]",
+      "jewelcrafting": "[Ĵéŵéļçŕáƒţíñĝ]",
+      "alchemy": "[Áļçĥéɱý]",
+      "engineering": "[Éñĝíñééŕíñĝ]",
+      "cooking": "[Çóóķíñĝ]",
+      "inscription": "[Íñšçŕíþţíóñ]",
+      "enchanting": "[Éñçĥáñţíñĝ]",
+      "tailoring": "[Ţáíļóŕíñĝ]",
+      "leatherworking": "[Ļéáţĥéŕŵóŕķíñĝ]"
+    },
     "crafting": {
       "title": "[Çŕáƒţíñĝ]",
       "close": "[Çļóšé çŕáƒţíñĝ]",

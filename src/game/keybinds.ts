@@ -159,6 +159,16 @@ export const BIND_ACTIONS: BindAction[] = [
   { id: 'map', label: 'World Map', category: 'Interface', kind: 'edge', defaults: ['KeyM'] },
   { id: 'bags', label: 'Bags', category: 'Interface', kind: 'edge', defaults: ['KeyB'] },
   { id: 'crafting', label: 'Crafting', category: 'Interface', kind: 'edge', defaults: ['KeyT'] },
+  // Every bare letter is already claimed (see the Damage Meters note below), so
+  // the wheel parks on the shifted layer of its own key, like Book of Deeds
+  // does on Z and the finder does on I.
+  {
+    id: 'professionsWheel',
+    label: 'Professions Wheel',
+    category: 'Interface',
+    kind: 'edge',
+    defaults: ['Shift+KeyW'],
+  },
   {
     id: 'nameplates',
     label: 'Toggle Nameplates',

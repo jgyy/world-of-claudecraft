@@ -1248,6 +1248,9 @@ async function startGame(
           case 'crafting':
             hud.toggleCrafting();
             break;
+          case 'professionsWheel':
+            hud.toggleProfessionsWheel();
+            break;
           case 'char':
             hud.toggleChar();
             break;

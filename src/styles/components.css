@@ -4431,6 +4431,70 @@
     padding-top: 6px;
   }
 
+  /* ---------- professions wheel (#1302) ---------- */
+  /* A simple responsive grid, not an angle-positioned ring: ten cards read
+     more clearly at panel width than ten crowded points on a circle, and a
+     grid reflows for mobile/narrow layouts for free. */
+  .wheel-amends {
+    padding: 5px 2px 8px;
+    font-size: 11px;
+    color: #c8b888;
+    border-bottom: 1px solid #463a1c;
+    margin-bottom: 8px;
+  }
+  .wheel-ring {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 2px;
+  }
+  .wheel-craft {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #463a1c;
+    background: rgba(0, 0, 0, 0.18);
+  }
+  .wheel-craft-archetype {
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.12);
+  }
+  .wheel-craft-hobby {
+    border-color: #6c8ebf;
+  }
+  .wheel-craft-name {
+    font-family: var(--title-font);
+    font-size: 12px;
+    color: var(--gold);
+  }
+  .wheel-craft-state {
+    font-size: 10px;
+    color: #887c5c;
+    text-transform: uppercase;
+  }
+  .wheel-craft-tier {
+    font-size: 11px;
+    color: #c8b888;
+  }
+  .wheel-pips {
+    display: flex;
+    gap: 3px;
+    margin-top: 2px;
+  }
+  .wheel-pip {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid #6b5c33;
+    background: transparent;
+  }
+  .wheel-pip-filled {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
   /* ---------- bags ---------- */
   /* bags, centred in the bottom gap between the action cluster and micro-menu */
   #bags {

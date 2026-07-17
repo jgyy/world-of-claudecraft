@@ -226,6 +226,25 @@ export const TARGETS = [
     },
   },
   {
+    key: 'professions-wheel',
+    label: 'Professions Wheel window',
+    when: ['ui/professions_wheel_view', 'ui/professions_wheel_window'],
+    async capture(page) {
+      await page.evaluate(() => {
+        const sim = window.__game?.sim;
+        try {
+          sim?.gainCraftSkill?.(sim.primaryId, 'weaponcrafting', 40);
+          sim?.gainCraftSkill?.(sim.primaryId, 'tailoring', 15);
+        } catch {}
+        const el = document.querySelector('#professions-wheel-window');
+        if (el) el.style.display = 'none';
+        window.__game?.hud?.toggleProfessionsWheel?.();
+      });
+      const open = await pollForSize(page, '#professions-wheel-window');
+      return open ? { clip: '#professions-wheel-window' } : {};
+    },
+  },
+  {
     key: 'card-duel',
     label: 'Card Duel window (Card Master)',
     when: [

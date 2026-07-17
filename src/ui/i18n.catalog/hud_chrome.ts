@@ -2099,6 +2099,31 @@ export const hudChromeStrings = {
     tailoring: 'Tailor',
     leatherworking: 'Leathercrafter',
   },
+  // Professions Wheel window (#1302): all ten crafts on the ring at once, with
+  // per-craft skill tier pips and the current archetype/hobby highlight. The
+  // ten craft NAMES here (distinct from the practitioner titles above) are
+  // keyed by the same craft id as CRAFT_RING (src/sim/content/professions.ts);
+  // keep both tables in sync. Tier names reuse the existing itemUi.quality.*
+  // keys rather than duplicating the common/uncommon/rare/epic/legendary scale.
+  wheel: {
+    title: 'Professions Wheel',
+    close: 'Close professions wheel',
+    archetypeLabel: 'Archetype',
+    hobbyLabel: 'Hobby',
+    dormantLabel: 'Dormant',
+    amends: 'Amends progress: {progress}/{required}',
+    craftTier: '{craft}: {tier}',
+    armorcrafting: 'Armorcrafting',
+    weaponcrafting: 'Weaponcrafting',
+    jewelcrafting: 'Jewelcrafting',
+    alchemy: 'Alchemy',
+    engineering: 'Engineering',
+    cooking: 'Cooking',
+    inscription: 'Inscription',
+    enchanting: 'Enchanting',
+    tailoring: 'Tailoring',
+    leatherworking: 'Leatherworking',
+  },
   // Crafting window (#1127): the minimal common-tier crafting action, one row
   // per known recipe, a Craft button enabled only when every reagent is held.
   crafting: {

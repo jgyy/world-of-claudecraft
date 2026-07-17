@@ -88,6 +88,7 @@ export interface InputCallbacks {
       | 'discord'
       | 'deeds'
       | 'crafting'
+      | 'professionsWheel'
       | 'sheathe',
   ): void;
   onEmoteWheel(open: boolean): void;
@@ -869,6 +870,9 @@ export class Input {
         return;
       case 'crafting':
         this.cb.onUiKey('crafting');
+        return;
+      case 'professionsWheel':
+        this.cb.onUiKey('professionsWheel');
         return;
       case 'char':
         this.cb.onUiKey('char');

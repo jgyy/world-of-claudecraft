@@ -2026,6 +2026,25 @@ export const zh_CN: EnTranslations = {
       "tailoring": "裁缝",
       "leatherworking": "制皮师"
     },
+    "wheel": {
+      "title": "Professions Wheel",
+      "close": "Close professions wheel",
+      "archetypeLabel": "Archetype",
+      "hobbyLabel": "Hobby",
+      "dormantLabel": "Dormant",
+      "amends": "Amends progress: {progress}/{required}",
+      "craftTier": "{craft}: {tier}",
+      "armorcrafting": "Armorcrafting",
+      "weaponcrafting": "Weaponcrafting",
+      "jewelcrafting": "Jewelcrafting",
+      "alchemy": "Alchemy",
+      "engineering": "Engineering",
+      "cooking": "Cooking",
+      "inscription": "Inscription",
+      "enchanting": "Enchanting",
+      "tailoring": "Tailoring",
+      "leatherworking": "Leatherworking"
+    },
     "crafting": {
       "title": "制作",
       "close": "关闭制作",

@@ -2026,6 +2026,25 @@ export const ko_KR: EnTranslations = {
       "tailoring": "재단사",
       "leatherworking": "가죽공예사"
     },
+    "wheel": {
+      "title": "Professions Wheel",
+      "close": "Close professions wheel",
+      "archetypeLabel": "Archetype",
+      "hobbyLabel": "Hobby",
+      "dormantLabel": "Dormant",
+      "amends": "Amends progress: {progress}/{required}",
+      "craftTier": "{craft}: {tier}",
+      "armorcrafting": "Armorcrafting",
+      "weaponcrafting": "Weaponcrafting",
+      "jewelcrafting": "Jewelcrafting",
+      "alchemy": "Alchemy",
+      "engineering": "Engineering",
+      "cooking": "Cooking",
+      "inscription": "Inscription",
+      "enchanting": "Enchanting",
+      "tailoring": "Tailoring",
+      "leatherworking": "Leatherworking"
+    },
     "crafting": {
       "title": "제작",
       "close": "제작 닫기",

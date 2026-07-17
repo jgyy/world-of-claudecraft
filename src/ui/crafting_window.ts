@@ -17,6 +17,12 @@ export interface CraftingWindowDeps extends PainterHostPresentation {
   hideTooltip(): void;
   onCraft(recipeId: string): void;
   onClose(): void;
+  // Launches the Professions Wheel window (#1302): the crafting title bar is
+  // the one place every player already visits to craft, so it hosts the
+  // wheel's entry point rather than a new side-rail icon (the rail is at its
+  // 1366x768 height budget; see tests/crafting_launcher.test.ts). Shift+W
+  // opens the wheel directly too.
+  onOpenWheel(): void;
 }
 
 /** Paint the crafting panel from a prepared view. */
@@ -27,7 +33,7 @@ export function renderCraftingWindow(
 ): void {
   deps.hideTooltip();
   const scrollTop = el.scrollTop;
-  el.innerHTML = `<div class="panel-title"><span>${esc(t('hudChrome.crafting.title'))}</span><button type="button" class="x-btn" data-close aria-label="${esc(t('hudChrome.crafting.close'))}">${svgIcon('close')}</button></div>`;
+  el.innerHTML = `<div class="panel-title"><span>${esc(t('hudChrome.crafting.title'))}</span><div class="panel-title-actions"><button type="button" class="x-btn" data-wheel aria-label="${esc(t('hudChrome.wheel.title'))}">${svgIcon('wheel')}</button><button type="button" class="x-btn" data-close aria-label="${esc(t('hudChrome.crafting.close'))}">${svgIcon('close')}</button></div></div>`;
 
   if (view.recipes.length === 0) {
     const empty = document.createElement('div');
@@ -108,6 +114,7 @@ export function renderCraftingWindow(
     }
   }
 
+  el.querySelector('[data-wheel]')?.addEventListener('click', () => deps.onOpenWheel());
   el.querySelector('[data-close]')?.addEventListener('click', () => deps.onClose());
   el.style.display = 'block';
   el.scrollTop = scrollTop;

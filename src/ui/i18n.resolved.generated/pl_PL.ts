@@ -2026,6 +2026,25 @@ export const pl_PL: EnTranslations = {
       "tailoring": "Krawiec",
       "leatherworking": "Garbarz"
     },
+    "wheel": {
+      "title": "Professions Wheel",
+      "close": "Close professions wheel",
+      "archetypeLabel": "Archetype",
+      "hobbyLabel": "Hobby",
+      "dormantLabel": "Dormant",
+      "amends": "Amends progress: {progress}/{required}",
+      "craftTier": "{craft}: {tier}",
+      "armorcrafting": "Armorcrafting",
+      "weaponcrafting": "Weaponcrafting",
+      "jewelcrafting": "Jewelcrafting",
+      "alchemy": "Alchemy",
+      "engineering": "Engineering",
+      "cooking": "Cooking",
+      "inscription": "Inscription",
+      "enchanting": "Enchanting",
+      "tailoring": "Tailoring",
+      "leatherworking": "Leatherworking"
+    },
     "crafting": {
       "title": "Rzemiosło",
       "close": "Zamknij rzemiosło",

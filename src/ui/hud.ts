@@ -357,6 +357,8 @@ import {
 } from './player_context_menu';
 import { hydratePortraits, portraitChipHtml } from './portrait_chip';
 import { maskProfanity } from './profanity';
+import { buildProfessionsWheelView } from './professions_wheel_view';
+import { renderProfessionsWheelWindow } from './professions_wheel_window';
 import { lockoutParts, lockoutShape } from './raid_lockout';
 import { type RaidLockoutI18n, raidLockoutPanelHtml } from './raid_lockout_view';
 import { restView } from './rest_indicator';
@@ -2460,6 +2462,9 @@ export class Hud {
         break;
       case 'crafting-window':
         this.closeCrafting();
+        break;
+      case 'professions-wheel-window':
+        this.closeProfessionsWheel();
         break;
       case 'loot-window':
         this.closeLoot();
@@ -8102,6 +8107,9 @@ export class Hud {
             );
           }
           if ($('#crafting-window').style.display === 'block') this.renderCrafting();
+          if ($('#professions-wheel-window').style.display === 'block') {
+            this.renderProfessionsWheel();
+          }
           break;
         }
         case 'lootRoll': {
@@ -9998,12 +10006,52 @@ export class Hud {
           if ($('#bags').style.display !== 'none') this.renderBags();
         },
         onClose: () => this.closeCrafting(),
+        onOpenWheel: () => this.openProfessionsWheel(),
       },
     );
   }
 
   closeCrafting(): void {
     $('#crafting-window').style.display = 'none';
+    this.hideTooltip();
+  }
+  // -------------------------------------------------------------------------
+  // The Professions Wheel (#1302): all ten crafts at once, with tier pips and
+  // the current archetype/hobby highlight. Anywhere, anytime, same as Crafting.
+  // -------------------------------------------------------------------------
+
+  toggleProfessionsWheel(): void {
+    if ($('#professions-wheel-window').style.display === 'block') {
+      this.closeProfessionsWheel();
+      return;
+    }
+    this.openProfessionsWheel();
+  }
+
+  openProfessionsWheel(): void {
+    this.closeOtherWindows('#professions-wheel-window');
+    this.renderProfessionsWheel();
+  }
+
+  private renderProfessionsWheel(): void {
+    renderProfessionsWheelWindow(
+      $('#professions-wheel-window'),
+      buildProfessionsWheelView({
+        craftSkills: this.sim.craftSkills,
+        archetypeCraft: this.sim.activeArchetype,
+        hobbyCraft: this.sim.hobbyCraft,
+        archetypeSwitchCount: this.sim.archetypeSwitchCount,
+        amendsProgress: this.sim.archetypeAmendsProgress,
+        amendsRequired: this.sim.archetypeAmendsRequired,
+      }),
+      {
+        onClose: () => this.closeProfessionsWheel(),
+      },
+    );
+  }
+
+  closeProfessionsWheel(): void {
+    $('#professions-wheel-window').style.display = 'none';
     this.hideTooltip();
   }
   // -------------------------------------------------------------------------
