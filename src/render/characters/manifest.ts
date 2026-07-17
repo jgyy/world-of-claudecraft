@@ -1046,6 +1046,24 @@ export const VISUALS: Record<string, VisualDef> = {
       death: 'Idle',
     },
   },
+  // Highwatch training dummy: generated creature asset (scripts/asset_pipeline,
+  // Tripo AI 3D, auto-rig + preset retargets), the standard creature-lane clip set.
+  mob_training_dummy: {
+    url: `${CREATURES}/training_dummy.glb`,
+    height: 2.2,
+    clips: {
+      idle: 'Idle',
+      walk: 'Walk',
+      run: 'Run',
+      attack: ['Attack'],
+      hit: ['Hit'],
+      death: 'Death',
+      cast: 'Cast',
+      jump: 'Jump',
+    },
+    tint: 'entity',
+    tintStrength: 0.35,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -1073,6 +1091,7 @@ const MOB_KEYS: Record<string, string> = {
   // instead of the family fallback (beast -> wolf, undead -> skeleton minion).
   mirefen_widowling: 'mob_spider',
   spider_egg_sac: 'mob_spider_egg_sac',
+  training_dummy: 'mob_training_dummy',
   sump_troll_devourer: 'mob_troll',
   grave_silt_bulwark: 'mob_ogre',
   drowned_cantor: 'delve_mob_acolyte',
