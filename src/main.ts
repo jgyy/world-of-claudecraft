@@ -86,6 +86,7 @@ import {
   normalizeCharSortMode,
   sortCharacters,
 } from './net/char_sort';
+import { switchCharacter } from './net/character_switch';
 import { charselectPrimaryAction } from './net/charselect_action';
 import { performDesktopWalletHandoff } from './net/desktop_wallet_handoff';
 import {
@@ -845,8 +846,11 @@ function nextPaint(): Promise<void> {
 }
 
 // The loading screen blocks pointer input but a covered button keeps keyboard
-// focus, so Enter/Space could re-fire it mid-entry. One entry per page load;
-// every failure path recovers via fatalOverlay's reload.
+// focus, so Enter/Space could re-fire it mid-entry. One entry per in-flight
+// session; every failure path recovers via fatalOverlay's reload. Not
+// strictly one-shot for the whole page load: a Welcome Screen character
+// switch tears the current session down and calls resetWorldEntry() before
+// re-entering on the new character, so the latch can be armed more than once.
 let hasBegunWorldEntry = false;
 
 // The one live Welcome Screen instance, if the DOM has it (absent on /play).
@@ -858,6 +862,15 @@ function beginWorldEntry(): boolean {
   if (hasBegunWorldEntry) return false;
   hasBegunWorldEntry = true;
   return true;
+}
+
+// Re-arms the world-entry latch for a character switch off the Welcome
+// Screen: the in-flight session has already been torn down (poll/providers/
+// world/welcome screen), so the next enterWorld() call must be allowed to
+// run prepareWorldEntry() and construct a fresh ClientWorld instead of
+// bailing out on the stale one-shot latch from the first entry.
+function resetWorldEntry(): void {
+  hasBegunWorldEntry = false;
 }
 
 function enterLoadingState(statusText: string): void {
@@ -4844,26 +4857,31 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
     if (started || characterId === c.id) return;
     const target = latestRoster.find((x) => x.id === characterId);
     if (!target) return;
-    void (async () => {
-      if (target.online && !window.confirm(t('character.takeOverConfirm'))) return;
-      started = true;
-      clearInterval(poll);
-      world.close();
-      clearCardProviders();
-      welcomeScreen?.destroy();
-      welcomeScreen = null;
-      if (target.online) {
-        try {
-          await api.takeoverCharacter(target.id);
-        } catch (err) {
-          fatalOverlay(userFacingApiError(err));
-          return;
-        }
-        await enterWorld({ ...target, online: false });
-      } else {
-        await enterWorld(target);
-      }
-    })();
+    void switchCharacter(target, {
+      confirmTakeOver: () => window.confirm(t('character.takeOverConfirm')),
+      teardown: () => {
+        started = true;
+        clearInterval(poll);
+        // A deliberate switch away is not a drop: tell the server to leave
+        // this character immediately (skips the 5-minute linkdead grace), or
+        // switching back to it within that window would show it as still
+        // online and demand a take-over confirm on the player's own session.
+        world.sendLogout();
+        world.close();
+        clearCardProviders();
+        welcomeScreen?.destroy();
+        welcomeScreen = null;
+        // The session just torn down already ran prepareWorldEntry() once;
+        // re-arm the latch so enterWorld() for the new character does not
+        // bail out on the stale one-shot guard.
+        resetWorldEntry();
+      },
+      takeover: async (id) => {
+        await api.takeoverCharacter(id);
+      },
+      enter: (character) => enterWorld(character),
+      onTakeoverError: (err) => fatalOverlay(userFacingApiError(err)),
+    });
   };
   if (welcomeRoot) {
     welcomeScreen = mountWelcomeScreen(welcomeRoot, {
@@ -4893,7 +4911,10 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
           ready: s.eligibility.eligible === true && s.spin.claimed === false,
           unknown: false,
         })),
-      fetchRoster: () => api.characters().then((list) => (latestRoster = list)),
+      // Same order the pre-login character-select screen uses (the user's
+      // persisted charSortMode), so the two lists never disagree.
+      fetchRoster: () =>
+        api.characters().then((list) => (latestRoster = sortCharacters(list, charSortMode))),
       currentCharacterId: c.id,
       onSelectCharacter: switchWelcomeCharacter,
       header: () => ({
