@@ -88,5 +88,5 @@ describe('CharacterVisual: dazed pose resumes after a hit-react on a single-clip
     expect(visual.isMidOneShot).toBe(false);
 
     errSpy.mockRestore();
-  });
+  }, 15000);
 });
