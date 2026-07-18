@@ -4560,9 +4560,20 @@
   }
 
   /* ---------- vendor ---------- */
-  /* vendor */
+  /* vendor: landscape layout. The goods/buyback lists used to be one
+     full-width row per item in a narrow 400px column, so a modest stock
+     forced a tall, mostly-empty-looking scroll. Widen the window and lay
+     the rows out as tiles in a multi-column grid (.vendor-goods-grid) so it
+     reads like a real shop counter instead of a portrait list (issue:
+     vendor relayout to landscape grid). The sell-junk button, buyback
+     section title, empty state and hint stay full-width outside the grid. */
   #vendor-window {
-    width: 400px;
+    width: min(640px, 92vw);
+  }
+  .vendor-goods-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
   }
   .vendor-item {
     display: flex;
@@ -4578,12 +4589,25 @@
     font-family: var(--ui-font);
     text-align: left;
   }
+  /* Inside the grid, a tile stacks icon over name over price rather than a
+     left-to-right row, so several fit per line at the window's new width. */
+  .vendor-goods-grid .vendor-item {
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    gap: 4px;
+    padding: 8px 6px;
+  }
   .vendor-item:hover {
     background: #ffffff10;
   }
   .vendor-item .vi-name {
     font-size: 12px;
     flex: 1;
+  }
+  .vendor-goods-grid .vendor-item .vi-name {
+    flex: none;
+    width: 100%;
   }
   .vendor-item .vi-price {
     font-size: 11px;

@@ -2828,6 +2828,12 @@
     border-top: 0;
     padding-top: 0;
   }
+  /* The desktop landscape grid packs 3 tiles per row; a touch viewport is
+     narrower and the tap-target floor below needs the room, so collapse to
+     2 columns (still several per row, never a single portrait list again). */
+  body.mobile-touch .vendor-goods-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   body.mobile-touch .vendor-item,
   body.mobile-touch .bag-item,
   body.mobile-touch .mkt-tab,
