@@ -1047,7 +1047,7 @@
   .paperdoll {
     display: flex;
     gap: 10px;
-    align-items: flex-start;
+    align-items: stretch;
   }
   /* Groups .char-stats plus every .char-progression block (talent summary,
      progression, gathering) into a two-column layout so a wide window reads
@@ -1094,10 +1094,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  /* flex-basis 0 with a generous flex-grow gives the 3D preview the dominant
+     share of the paperdoll row's width on a wide window (the equip columns
+     stay fixed-width either side), and align-items: stretch above lets it
+     take the full row height instead of the old 172px minimum. */
   .char-model-panel {
-    flex: 1;
+    flex: 3 1 0;
     min-width: 0;
-    min-height: 172px;
+    min-height: 340px;
     border: 1px solid #463a1c;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.28);
