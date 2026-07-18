@@ -2269,12 +2269,27 @@
     pointer-events: none;
   }
   /* ---------- quest tracker ---------- */
+  /* Carved-wood card (fantasy HUD redesign phase 2, DESIGN.md section 4.4's
+     objective-tracker target: --panel-bg at the soft ~0.72 multiplier). The
+     tracker was previously bare overlay text with no card behind it; this is
+     the first time it gets one, so it stays click-through everywhere except
+     the header button and objective links (unchanged, both already carry
+     their own pointer-events: auto). */
   #quest-tracker {
     width: 100%;
+    box-sizing: border-box;
     font-size: 12px;
     color: var(--color-text-overlay);
     text-shadow: 1px 1px 2px #000;
     pointer-events: none;
+    background: color-mix(in srgb, var(--panel-base, #1c130b) 72%, transparent);
+    border: 2px solid var(--border);
+    outline: 1px solid #000;
+    border-radius: 8px;
+    padding: 8px 10px;
+    box-shadow:
+      0 2px 10px #000a,
+      inset 0 1px 0 #ffe5a355;
   }
   /* The header is a <button>: it re-enables pointer events over the otherwise
      click-through overlay and toggles the tracker's collapsed state. Native button
