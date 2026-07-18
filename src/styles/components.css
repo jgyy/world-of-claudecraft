@@ -5018,19 +5018,30 @@
     gap: 6px;
     margin: 4px 0 6px;
   }
+  /* Single row (review feedback: 6 chips wrapping to 2 rows read as messy).
+     nowrap plus flex: none on each chip keeps every label intact instead of
+     compressing; overflow-x: auto is a safety net at narrow window widths
+     (the existing themed 8px scrollbar, base.css) rather than silently
+     clipping a category. */
   .bag-chips {
     display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
+    flex-wrap: nowrap;
+    gap: 3px;
+    overflow-x: auto;
   }
   /* Carved-wood embossed chip (fantasy HUD redesign phase 1): --control-*
-     tokens are the PR #2108 mechanism, re-based onto the warm palette. */
+     tokens are the PR #2108 mechanism, re-based onto the warm palette.
+     Tight padding/font so the 6 default categories (All, Weapons, Armor,
+     Consumables, Materials, Quest) fit one row at the bag window's default
+     width without scrolling in English; overflow-x: auto above still covers
+     longer-translated locale labels. */
   .bag-chip {
+    flex: none;
     font-family: var(--ui-font);
-    font-size: 11px;
+    font-size: 10px;
     line-height: 1;
-    padding: 5px 9px;
-    min-height: 26px;
+    padding: 4px 5px;
+    min-height: 24px;
     border-radius: 11px;
     border: 1px solid var(--control-border, #5a4a2e);
     background: var(--control-bg, #1c1812);
@@ -8595,11 +8606,15 @@
     width: 420px;
     z-index: 40;
   }
+  /* 2-column game menu (review feedback: the single-column stack of 8 rows
+     ran too tall). #options-menu is 420px, comfortably fits two ~200px
+     columns; a trailing odd button (an even count today, but the list is
+     data-driven, see options_view.ts's buildOptionsMenu) naturally lands
+     alone in the last row under auto-flow. */
   .opt-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    align-items: stretch;
     padding: 4px 0;
   }
   .opt-btn {

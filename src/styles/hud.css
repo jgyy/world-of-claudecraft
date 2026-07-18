@@ -1723,16 +1723,18 @@
      Discord/GitHub buttons (both right-aligned to the same edge). */
   /* Two-column icon rail (review feedback: the single vertical column of 17+
      launcher buttons ran too tall). Daily Rewards stays a full-width card
-     above the grid; grid-template-columns sizes each column to the fixed
-     34px .micro-btn width, unaffected by the wider card since it spans
-     both columns. justify-content: end keeps the whole rail right-anchored,
-     matching the prior flex align-items: flex-end behavior. */
+     above the grid. Columns are PINNED to the .micro-btn width (34px), not
+     "auto": an auto track lets the wide spanning Daily Rewards card inflate
+     each column (a spanning item's size is distributed across its tracks),
+     which pushed the two icon columns apart. justify-content: end keeps the
+     whole rail right-anchored, matching the prior flex align-items: flex-end
+     behavior. */
   #side-buttons {
     position: absolute;
     right: 16px;
     bottom: 74px;
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 34px);
     justify-content: end;
     gap: 4px;
     z-index: 19;
