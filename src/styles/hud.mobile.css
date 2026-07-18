@@ -2773,6 +2773,20 @@
        here, so this scoped override must beat that inline value while leaving
        desktop Need/Greed above its compact Bags window. */
     z-index: 95 !important;
+    /* The desktop landscape rail layout (flex-direction: row, fixed-width
+       filter-bar/money rails) is a wide-viewport layout; the mobile full-screen
+       sheet stays the original portrait stack so touch scrolling and the
+       existing tap targets are unaffected. */
+    flex-direction: column;
+  }
+  body.mobile-touch #bags .panel-title,
+  body.mobile-touch #bags .bag-rail,
+  body.mobile-touch #bags .money {
+    flex: none;
+  }
+  body.mobile-touch #bags .money {
+    flex-direction: row;
+    align-items: center;
   }
   body.mobile-touch #bags .bag-grid {
     min-height: 150px;

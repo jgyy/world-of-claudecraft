@@ -4754,11 +4754,16 @@
   }
 
   /* ---------- bags ---------- */
-  /* bags, centred in the bottom gap between the action cluster and micro-menu */
+  /* bags, centred in the bottom gap between the action cluster and micro-menu.
+     Landscape layout: the window is wider than tall so the slot grid lays
+     out in several columns per row instead of one narrow portrait column;
+     the filter bar and money line sit in a fixed-width left rail beside the
+     grid rather than stacked above it (issue: bags relayout to landscape). */
   #bags {
     --bags-bar-half: 306px;
     --bags-gap: 12px;
     --bags-micro-r: calc(16px + 34px + var(--bags-gap));
+    --bags-rail-w: 190px;
     --bags-slot-w: max(
       180px,
       calc(100vw - 50% - var(--bags-bar-half) - var(--bags-gap) - var(--bags-micro-r))
@@ -4767,17 +4772,33 @@
     right: auto;
     bottom: 6px;
     top: auto;
-    width: min(310px, var(--bags-slot-w));
+    width: min(640px, var(--bags-slot-w));
     transform: translateX(-50%);
-    max-height: calc(100vh - 18px);
+    max-height: min(360px, calc(100vh - 18px));
     overflow: hidden;
-    flex-direction: column;
+    /* The two-column body (rail + grid) needs its own line, so the header
+       wraps onto its own full-width row above them. */
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    column-gap: 12px;
   }
   #bags .panel-title {
-    flex: none;
+    flex: 1 0 100%;
   }
-  #bags .bag-filter-bar {
-    flex: none;
+  /* The rail: bag-bar (backpack + equip sockets), the filter/search tools,
+     and the money line, stacked in one fixed-width column beside the grid. */
+  #bags .bag-rail {
+    flex: 0 0 var(--bags-rail-w);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  #bags .bag-rail .bag-bar {
+    margin: 0;
+    flex-wrap: wrap;
   }
   #bags .bag-grid {
     flex: 1 1 auto;
@@ -4787,11 +4808,22 @@
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
   }
+  /* The grid is the flex item beside the rail, so it needs an explicit shrink
+     floor (a flex item's min-width is auto by default); a tighter column
+     floor than the base .bag-grid rule also fits more columns in the same
+     landscape width. */
+  #bags .bag-grid {
+    min-width: 0;
+    grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+    align-content: start;
+  }
   #bags .money {
     flex: none;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-top: auto;
   }
   /* coins stay right-aligned whether or not the $WOC chip is present */
   #bags .money .money-inline {
