@@ -173,16 +173,75 @@
     margin: 0;
   }
 
-  /* Checkboxes, gold accent + themed focus ring instead of OS blue. */
+  /* Checkboxes/radios: a carved-into-stone square/rune with a gilt checkmark or
+     inset gem, instead of the OS-native tick. appearance:none opts out of the
+     platform widget so the engraved bevel renders; accent-color stays as the
+     forced-colors fallback (that mode restores the native control below). */
   input[type="checkbox"],
   input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
     accent-color: var(--gold);
+    width: 17px;
+    height: 17px;
+    flex: none;
+    border: 1px solid var(--control-border);
+    border-radius: 3px;
+    background: var(--control-bg);
+    box-shadow: var(--control-shadow-inset);
     cursor: var(--cursor-point);
+    display: inline-grid;
+    place-content: center;
+    vertical-align: middle;
+  }
+  input[type="radio"] {
+    border-radius: 50%;
+  }
+  input[type="checkbox"]::before,
+  input[type="radio"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: transform 120ms var(--transition-ease);
+    box-shadow: inset 1em 1em var(--gold);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+  input[type="radio"]::before {
+    border-radius: 50%;
+    clip-path: none;
+  }
+  input[type="checkbox"]:checked::before,
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+  input[type="checkbox"]:hover,
+  input[type="radio"]:hover {
+    border-color: var(--control-border-hover);
   }
   input[type="checkbox"]:focus-visible,
   input[type="radio"]:focus-visible {
     outline: 2px solid var(--color-border-focus);
     outline-offset: 2px;
+  }
+  input[type="checkbox"]:disabled,
+  input[type="radio"]:disabled {
+    filter: grayscale(1) brightness(0.7);
+    cursor: default;
+  }
+  @media (forced-colors: active) {
+    input[type="checkbox"],
+    input[type="radio"] {
+      appearance: auto;
+      -webkit-appearance: auto;
+      background: none;
+      box-shadow: none;
+      border: 1px solid ButtonBorder;
+    }
+    input[type="checkbox"]::before,
+    input[type="radio"]::before {
+      content: none;
+    }
   }
 
   /* Textareas, keep vertical resize but swap the native diagonal grip for a

@@ -4023,6 +4023,7 @@
     color: var(--color-text-light);
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-sm);
+    box-shadow: var(--control-shadow-inset);
     font-family: var(--ui-font);
     font-size: 12px;
     cursor: var(--cursor-point);
@@ -4086,6 +4087,24 @@
     align-items: center;
     justify-content: space-between;
     gap: 6px;
+    background: var(--control-bg);
+    border: 1px solid var(--control-border);
+    box-shadow: var(--control-shadow-inset);
+    color: var(--color-text-light);
+    border-radius: var(--radius-sm);
+    padding: 6px 8px;
+    font-family: var(--ui-font);
+    font-size: 12px;
+    cursor: var(--cursor-point);
+  }
+  .ui-dd-btn:hover {
+    border-color: var(--control-border-hover);
+  }
+  .ui-dd-btn[aria-expanded="true"],
+  .ui-dd-btn:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: -2px;
+    border-color: var(--control-border-hover);
   }
   .ui-dd-label {
     overflow: hidden;
@@ -4808,16 +4827,26 @@
   button.woc-balance {
     min-height: 28px;
     padding: 3px 7px;
-    border: 1px solid #6f592d;
+    border: 1px solid var(--control-border);
     border-radius: 4px;
-    background: rgb(200 163 74 / 10%);
+    background: var(--control-bg);
+    box-shadow: var(--control-shadow-raised);
     font: inherit;
     cursor: var(--cursor-pointer);
+    transition:
+      filter var(--transition-speed),
+      box-shadow var(--transition-speed),
+      border-color var(--transition-speed);
   }
   button.woc-balance:hover,
   button.woc-balance:focus-visible {
-    border-color: #c8a34a;
+    background: var(--control-bg-hover);
+    border-color: var(--control-border-hover);
     color: #f3dfaa;
+  }
+  button.woc-balance:active {
+    box-shadow: var(--control-shadow-raised-active);
+    transform: translateY(1px);
   }
   .woc-balance.is-preview {
     color: #b8a66f;
@@ -5014,21 +5043,33 @@
     padding: 5px 9px;
     min-height: 26px;
     border-radius: 11px;
-    border: 1px solid #5a4a2e;
-    background: #1c1812;
+    border: 1px solid var(--control-border);
+    background: var(--control-bg);
+    box-shadow: var(--control-shadow-raised);
     color: var(--color-text-muted);
     cursor: var(--cursor-point);
     white-space: nowrap;
+    transition:
+      filter var(--transition-speed),
+      box-shadow var(--transition-speed),
+      border-color var(--transition-speed);
   }
   .bag-chip:hover {
-    background: #ffffff12;
+    background: var(--control-bg-hover);
+    border-color: var(--control-border-hover);
     color: inherit;
   }
   .bag-chip.active {
-    background: var(--gold-dim, #8a6f3a);
+    background: linear-gradient(180deg, #ffe98a 0%, var(--gold-dim, #8a6f3a) 55%, #7a5f2e 100%);
     border-color: var(--gold-dim, #8a6f3a);
     color: #15110a;
     font-weight: 600;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: var(--control-shadow-raised-active);
+  }
+  .bag-chip:active {
+    box-shadow: var(--control-shadow-raised-active);
+    transform: translateY(1px);
   }
   .bag-chip:focus-visible {
     outline: 2px solid var(--color-border-focus);
@@ -5056,24 +5097,58 @@
     font-size: 16px;
     padding: 4px 7px;
     border-radius: 4px;
-    border: 1px solid #5a4a2e;
-    background: #14110b;
+    border: 1px solid var(--control-border);
+    background: var(--control-bg);
+    box-shadow: var(--control-shadow-inset);
     color: inherit;
+  }
+  .bag-search:hover {
+    border-color: var(--control-border-hover);
   }
   .bag-search:focus-visible {
     outline: 2px solid var(--color-border-focus);
     outline-offset: 1px;
+    border-color: var(--control-border-hover);
   }
   .bag-sort {
     flex: none;
+    appearance: none;
+    -webkit-appearance: none;
     font-family: var(--ui-font);
     font-size: 16px;
-    padding: 4px 6px;
+    padding: 4px 22px 4px 8px;
     border-radius: 4px;
-    border: 1px solid #5a4a2e;
-    background: #14110b;
+    border: 1px solid var(--control-border);
+    background-color: var(--control-bg);
+    box-shadow: var(--control-shadow-inset);
     color: inherit;
     cursor: var(--cursor-point);
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+      linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+    background-position:
+      right 11px center,
+      right 6px center;
+    background-size:
+      5px 5px,
+      5px 5px;
+    background-repeat: no-repeat, no-repeat;
+  }
+  .bag-sort:hover {
+    border-color: var(--control-border-hover);
+  }
+  .bag-sort:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 1px;
+    border-color: var(--control-border-hover);
+  }
+  @media (forced-colors: active) {
+    .bag-sort {
+      appearance: auto;
+      -webkit-appearance: auto;
+      background-image: none;
+      border: 1px solid ButtonBorder;
+    }
   }
   .money {
     margin-top: 8px;
