@@ -2,18 +2,25 @@
 // graphics). Boots the game, teleports the player to Smith Haldren's stall in
 // Eastbrook Vale, and captures the surrounding cluster of ten new decorative
 // crafting/gathering props.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 import { enterOfflineGame } from './enter_offline_game.mjs';
+
 const URL = (process.env.GAME_URL ?? 'http://localhost:5173') + '/?gfx=ultra';
 fs.mkdirSync('docs/screenshots/artisan-row', { recursive: true });
 
 const browser = await puppeteer.launch({
   executablePath: EDGE,
   headless: 'new',
-  args: ['--window-size=1600,900', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--no-sandbox'],
+  args: [
+    '--window-size=1600,900',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+    '--no-sandbox',
+  ],
   defaultViewport: { width: 1600, height: 900 },
 });
 const page = await browser.newPage();
