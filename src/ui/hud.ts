@@ -1749,7 +1749,8 @@ export class Hud {
       this.dailyRewardsButtonEl = dailyRewardsButton;
       this.mobileDailyRewardsButtonEl = mobileDailyRewardsButton;
       dailyRewardsButton.innerHTML =
-        '<img class="daily-rewards-icon" src="/ui/daily-rewards/treasure_chest.webp" alt="" draggable="false" decoding="async">';
+        '<img class="daily-rewards-icon" src="/ui/daily-rewards/treasure_chest.webp" alt="" draggable="false" decoding="async">' +
+        '<span class="daily-rewards-label"></span>';
       this.syncDailyRewardsSurfaceLabels();
       dailyRewardsButton.classList.remove('spin-ready');
       this.applyDailyRewardsChestButtonVisibility();
@@ -6630,6 +6631,15 @@ export class Hud {
     if (label) {
       label.setAttribute('data-i18n', labelKey);
       label.textContent = t(labelKey);
+    }
+    // Desktop card label (fantasy HUD redesign phase 2, DESIGN.md's approved
+    // right-rail reference): reuses the same existing dailyRewards/wocStore
+    // catalog keys the title/mobile label already draw from, no new string.
+    const desktopLabel =
+      this.dailyRewardsButtonEl?.querySelector<HTMLElement>('.daily-rewards-label');
+    if (desktopLabel) {
+      desktopLabel.setAttribute('data-i18n', labelKey);
+      desktopLabel.textContent = t(labelKey);
     }
   }
 

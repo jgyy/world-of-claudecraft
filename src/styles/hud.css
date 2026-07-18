@@ -1581,14 +1581,21 @@
       inset 0 -2px 3px #00000055,
       0 2px 4px #0009;
   }
+  /* Circular gilt-bronze ring on the icon art (fantasy HUD redesign phase 2,
+     reference screenshots' ability-icon treatment). The outer .action-btn
+     slot stays a square carved frame (the keybind/item-count/cdtext overlays
+     are absolutely positioned against ITS corners, unaffected by this). */
   .action-btn .icon-label {
     position: absolute;
-    inset: 1px;
-    border-radius: 4px;
+    inset: 3px;
+    border-radius: 50%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     pointer-events: none;
+    box-shadow:
+      0 0 0 2px var(--gold-dim, #c8a838),
+      inset 0 0 0 1px #00000080;
   }
   .action-btn:hover {
     border-color: var(--gold);
@@ -1766,8 +1773,8 @@
     letter-spacing: 0.3px;
     line-height: 1;
     color: var(--color-text-muted);
-    background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    border: 2px solid #4a3d1d;
+    background: radial-gradient(circle at 35% 30%, #2c2418, var(--control-bg, #15100a));
+    border: 2px solid var(--control-border, #4a3d1d);
     border-right: none;
     border-radius: 5px 0 0 5px;
     box-shadow:
@@ -2843,30 +2850,50 @@
       0 0 8px #c9a86a66,
       0 1px 3px #000a;
   }
+  /* Carved-wood labeled card (fantasy HUD redesign phase 2, DESIGN.md's
+     approved right-rail reference: "minimap, then the Daily Rewards card").
+     #side-buttons right-aligns its column (align-items: flex-end), so a
+     wider card grows leftward without disturbing the .micro-btn rail below
+     it. The label reuses the existing dailyRewards/wocStore title strings
+     (hud.ts's syncDailyRewardsSurfaceLabels), no new i18n key. */
   #daily-rewards-button {
     position: relative;
-    width: 50px;
-    height: 46px;
+    height: 44px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 0 12px 0 6px;
     cursor: var(--cursor-point);
     pointer-events: auto;
     touch-action: manipulation;
     border-radius: 8px;
     margin-bottom: 14px;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
+    background: var(--panel-bg);
+    border: 2px solid var(--border);
+    outline: 1px solid #000;
+    box-shadow:
+      0 2px 10px #000a,
+      inset 0 1px 0 #ffe5a355;
     color: #f6c15b;
     overflow: visible;
     transition:
       transform 0.16s,
       filter 0.16s;
   }
+  #daily-rewards-button .daily-rewards-label {
+    font-family: var(--title-font);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--color-text-light);
+    text-shadow: 1px 1px 2px #000;
+    white-space: nowrap;
+  }
   #daily-rewards-button.spin-ready {
-    box-shadow: none;
+    box-shadow:
+      0 2px 10px #000a,
+      inset 0 1px 0 #ffe5a355;
     color: #fff;
   }
   #daily-rewards-button.spin-ready .daily-rewards-icon {
@@ -2874,13 +2901,16 @@
     animation-duration: calc(1.6s * var(--motion-scale, 1));
     animation-play-state: var(--fx-ambient-anim, running);
   }
+  /* Glow anchors over the chest icon (fixed 24px from the card's left edge,
+     matching the icon's own centered position) rather than the card
+     midpoint, now that the card is a wider icon+label row. */
   #daily-rewards-button::before {
     content: "";
     position: absolute;
-    left: 50%;
+    left: 24px;
     top: 50%;
-    width: 54px;
-    height: 54px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: radial-gradient(circle, #ffe08a99 0%, #ffd10066 34%, #ffd10000 72%);
     opacity: 0;
@@ -2899,8 +2929,9 @@
   #daily-rewards-button .daily-rewards-icon {
     position: relative;
     z-index: 1;
-    width: 64px;
-    height: 64px;
+    width: 40px;
+    height: 40px;
+    flex: none;
     display: block;
     object-fit: contain;
     pointer-events: none;
@@ -4398,6 +4429,26 @@
     transition:
       opacity 0.2s ease,
       box-shadow 0.2s ease;
+  }
+  /* Scalloped top-edge crest (fantasy HUD redesign phase 2, reference
+     screenshots' party-frame silhouette): a decorative bump centered on the
+     frame's top border, outside the padding box so it never overlaps the
+     name/HP text. Suppressed under the compact raid presentation below,
+     which keeps its own flush WoW-style row look. */
+  .party-frame::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    width: 22px;
+    height: 10px;
+    transform: translateX(-50%);
+    background: var(--panel-bg);
+    border: 2px solid var(--border);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    pointer-events: none;
+    z-index: 1;
   }
   /* Compact WoW-style raid presentation. The existing pooled row and painter remain
      unchanged: this profile only rearranges their stable DOM, so mouseover casts,
