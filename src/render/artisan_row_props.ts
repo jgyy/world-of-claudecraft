@@ -8,10 +8,16 @@
 // showing an empty patch of ground, mirroring gather_nodes.ts.
 
 import * as THREE from 'three';
+import { BUILTIN_WORLD, getActiveWorldContent } from '../sim/data';
 import { terrainHeight } from '../sim/world';
 import { loadGltf } from './assets/loader';
 import { registerPreload } from './assets/preload';
 import { surfaceMat } from './gfx';
+
+// Half-step (yd) used to finite-difference the local ground slope under each
+// prop, so furniture-scale props tilt to match sloped terrain instead of
+// floating/sinking a corner. Small relative to placement spacing.
+const PITCH_SAMPLE_STEP = 0.4;
 
 type ArtisanPropKind =
   | 'engineering_workbench'
@@ -129,15 +135,39 @@ export interface ArtisanRowView {
   group: THREE.Group;
 }
 
+// Local ground normal at (x, z), from a finite-difference sample of terrainHeight.
+function groundNormal(x: number, z: number, seed: number): THREE.Vector3 {
+  const s = PITCH_SAMPLE_STEP;
+  const hPX = terrainHeight(x + s, z, seed);
+  const hNX = terrainHeight(x - s, z, seed);
+  const hPZ = terrainHeight(x, z + s, seed);
+  const hNZ = terrainHeight(x, z - s, seed);
+  return new THREE.Vector3(-(hPX - hNX) / (2 * s), 1, -(hPZ - hNZ) / (2 * s)).normalize();
+}
+
+const WORLD_UP = new THREE.Vector3(0, 1, 0);
+
+// This is a hand-authored landmark for the built-in Eastbrook Vale zone1 stall,
+// not procedural world dressing: it hardcodes zone1 coordinates, so it must
+// only place props against the built-in world. The editor's play-test swaps in
+// a different WorldContent via setActiveWorldContent; without this guard these
+// ten fixed spots would still appear on a custom map, possibly inside a
+// building or below water.
 export function buildArtisanRowProps(seed: number): ArtisanRowView {
   const group = new THREE.Group();
   group.name = 'artisanRowProps';
+  if (getActiveWorldContent() !== BUILTIN_WORLD) return { group };
   for (const p of ARTISAN_ROW_PLACEMENTS) {
     const obj = buildArtisanMesh(p.kind);
     obj.position.x = p.x;
     obj.position.z = p.z;
     obj.position.y += terrainHeight(p.x, p.z, seed);
-    obj.rotation.y = p.rot;
+    const yawQuat = new THREE.Quaternion().setFromAxisAngle(WORLD_UP, p.rot);
+    const tiltQuat = new THREE.Quaternion().setFromUnitVectors(
+      WORLD_UP,
+      groundNormal(p.x, p.z, seed),
+    );
+    obj.quaternion.copy(tiltQuat.multiply(yawQuat));
     group.add(obj);
   }
   return { group };

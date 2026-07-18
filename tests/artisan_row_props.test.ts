@@ -1,8 +1,15 @@
-import { describe, expect, it } from 'vitest';
-import { artisanRowPreloadInternalsForTest } from '../src/render/artisan_row_props';
+import * as THREE from 'three';
+import { afterEach, describe, expect, it } from 'vitest';
+import {
+  artisanRowPreloadInternalsForTest,
+  buildArtisanRowProps,
+} from '../src/render/artisan_row_props';
 import { CRAFT_RING } from '../src/sim/content/professions';
+import { BUILTIN_WORLD, setActiveWorldContent } from '../src/sim/data';
 
 const { assetUrl, targetHeight, placements } = artisanRowPreloadInternalsForTest;
+
+const SEED = 20061;
 
 describe('artisan row props', () => {
   it('every placement kind has a matching asset URL and target height', () => {
@@ -39,5 +46,36 @@ describe('artisan row props', () => {
       expect(Math.hypot(p.x - 9.5, p.z - 17.5)).toBeGreaterThan(1.7);
       expect(Math.hypot(p.x - 10, p.z - 12)).toBeGreaterThan(3.5);
     }
+  });
+
+  afterEach(() => {
+    setActiveWorldContent(null);
+  });
+
+  it('places all ten props on the builtin world', () => {
+    setActiveWorldContent(BUILTIN_WORLD);
+    const { group } = buildArtisanRowProps(SEED);
+    expect(group.children.length).toBe(placements.length);
+  });
+
+  it('places no props on a custom world (editor play-test), so a hand-authored zone1 landmark never leaks onto a custom map', () => {
+    setActiveWorldContent({ ...BUILTIN_WORLD, zones: BUILTIN_WORLD.zones });
+    const { group } = buildArtisanRowProps(SEED);
+    expect(group.children.length).toBe(0);
+  });
+
+  it('tilts each prop to match the local ground slope instead of standing perfectly upright', () => {
+    setActiveWorldContent(BUILTIN_WORLD);
+    const { group } = buildArtisanRowProps(SEED);
+    // A prop with zero pitch leaves world-up unchanged when rotated by its
+    // quaternion (the yaw component alone never touches the y axis); the
+    // reviewer's four steep placements (leatherworking_rack, tailoring_loom,
+    // inscription_lectern, cooking_spit) must tilt off that axis.
+    let sawTilt = false;
+    for (const obj of group.children) {
+      const localUp = new THREE.Vector3(0, 1, 0).applyQuaternion(obj.quaternion);
+      if (Math.abs(localUp.x) > 1e-4 || Math.abs(localUp.z) > 1e-4) sawTilt = true;
+    }
+    expect(sawTilt).toBe(true);
   });
 });
