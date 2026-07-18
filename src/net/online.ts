@@ -1584,6 +1584,11 @@ export class ClientWorld implements IWorld {
   close(): void {
     this.endSession();
     this.ws.onclose = null;
+    // A frame already queued when close() is called (e.g. a late 'error')
+    // could still dispatch through onMessage afterward; null it too so a
+    // stale handler cannot fire onDisconnect over whatever session replaces
+    // this one (the caller is expected to also clear onDisconnect itself).
+    this.ws.onmessage = null;
     this.ws.close();
   }
 

@@ -4874,7 +4874,15 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
         // online and demand a take-over confirm on the player's own session.
         world.sendLogout();
         world.close();
+        // close() already nulls the socket's own onclose/onmessage handlers;
+        // also null this world's onDisconnect so a frame that was already
+        // in flight cannot fire a stale fatalOverlay over the next session.
+        world.onDisconnect = null;
         clearCardProviders();
+        // Match proceedToGame: hide before destroy so the previous roster
+        // does not stay frozen on an opaque overlay during the take-over
+        // round trip (the api.takeoverCharacter await below).
+        welcomeScreen?.hide();
         welcomeScreen?.destroy();
         welcomeScreen = null;
         // The session just torn down already ran prepareWorldEntry() once;
