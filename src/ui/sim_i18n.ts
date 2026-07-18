@@ -6474,7 +6474,7 @@ const RULES: Rule[] = [
   },
   { re: /^Your class has no talent tree yet\.$/, build: () => t('game.talents.readout.noTree') },
   {
-    re: /^You have not unlocked talents yet — they begin at level (.+)\.$/,
+    re: /^You have not unlocked talents yet: they begin at level (.+)\.$/,
     build: (m) => t('game.talents.readout.locked', { level: m[1] }),
   },
   {

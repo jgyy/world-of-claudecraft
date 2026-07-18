@@ -292,7 +292,7 @@ export const en: EnTranslations = {
       "comingSoonBody": "This class does not have talent trees yet. You can keep playing normally; full trees will arrive in a future update.",
       "readout": {
         "noTree": "Your class has no talent tree yet.",
-        "locked": "You have not unlocked talents yet — they begin at level {level}.",
+        "locked": "You have not unlocked talents yet: they begin at level {level}.",
         "noSpec": "no specialization",
         "rowsSummary": "Talents: {head}, {picked}/{unlocked} choice rows picked.",
         "summary": "Talents: {head} — {spent}/{total} points spent ({breakdown}).",

@@ -30,7 +30,7 @@ No warrior slot kept the old flip option as the recommended winner. The only old
 the existing IP-safe ability shell for Colossus and Steel Cyclone, updated or reused to carry Blaine's
 mechanics.
 
-## Blind panel re-evaluation (2026-07-10) — the real best-of-both
+## Blind panel re-evaluation (2026-07-10): the real best-of-both
 
 The first pass above defaulted to Blaine's content ("because his tuning was
 playtested"). That biased the result to 6-0. A blind re-run corrected it: both

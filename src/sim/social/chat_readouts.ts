@@ -619,7 +619,7 @@ export function talentsReadout(meta: PlayerMeta, e: Entity): string {
   if (!ct) return 'Your class has no talent tree yet.';
   const total = talentPointsAtLevel(e.level);
   if (total <= 0)
-    return `You have not unlocked talents yet — they begin at level ${FIRST_TALENT_LEVEL}.`;
+    return `You have not unlocked talents yet: they begin at level ${FIRST_TALENT_LEVEL}.`;
   const spent = pointsSpent(meta.talents);
   const specName = meta.talents.spec
     ? (ct.specs.find((s) => s.id === meta.talents.spec)?.name ?? meta.talents.spec)
