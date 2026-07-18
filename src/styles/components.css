@@ -1037,14 +1037,32 @@
   }
 
   /* ---------- character window ---------- */
-  /* character window */
+  /* character window: widened to a landscape shape so the stat/progression/
+     gathering blocks below the paperdoll can sit in two columns instead of
+     stacking full-width (see .char-info-grid). */
   #char-window {
-    width: 600px;
+    width: 920px;
+    max-width: calc(100vw - 40px);
   }
   .paperdoll {
     display: flex;
     gap: 10px;
     align-items: flex-start;
+  }
+  /* Groups .char-stats plus every .char-progression block (talent summary,
+     progression, gathering) into a two-column layout so a wide window reads
+     as two short columns instead of one long stacked scroll. Each block keeps
+     its own internal layout untouched; column-span: all lets a block that
+     needs the full width (none currently do, but a future single-item block
+     would) opt out. */
+  .char-info-grid {
+    columns: 320px 2;
+    column-gap: 16px;
+  }
+  .char-info-grid > .char-stats,
+  .char-info-grid > .char-progression {
+    break-inside: avoid;
+    margin-bottom: 10px;
   }
   .equip-col {
     display: flex;

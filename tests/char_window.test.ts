@@ -34,6 +34,32 @@ describe('char_window: no magic values', () => {
   });
 });
 
+describe('char_window: landscape info-grid layout', () => {
+  const css = readFileSync(new URL('../src/styles/components.css', import.meta.url), 'utf8');
+
+  it('wraps the stat/progression/gathering blocks in the char-info-grid container', () => {
+    expect(painter).toContain('<div class="char-info-grid">');
+    const statsIdx = painter.indexOf('class="char-stats"');
+    const gridOpenIdx = painter.indexOf('char-info-grid');
+    const gridCloseIdx = painter.indexOf("html += '</div>';");
+    expect(gridOpenIdx).toBeGreaterThan(0);
+    expect(statsIdx).toBeGreaterThan(gridOpenIdx);
+    expect(gridCloseIdx).toBeGreaterThan(statsIdx);
+  });
+
+  it('widens #char-window to a landscape footprint and grids char-info-grid two columns', () => {
+    const winStart = css.indexOf('#char-window {');
+    expect(winStart).toBeGreaterThan(0);
+    const winBlock = css.slice(winStart, css.indexOf('}', winStart));
+    expect(winBlock).toContain('width: 920px;');
+
+    const gridStart = css.indexOf('.char-info-grid {');
+    expect(gridStart).toBeGreaterThan(0);
+    const gridBlock = css.slice(gridStart, css.indexOf('}', gridStart));
+    expect(gridBlock).toContain('columns: 320px 2;');
+  });
+});
+
 describe('char_window: WCAG 2.2 AA', () => {
   it('returns focus to the opener on close', () => {
     expect(painter).toContain('captureFocus');

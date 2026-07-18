@@ -239,10 +239,16 @@ export class CharWindow {
       </div>
       <div class="equip-col equip-col-right" id="equip-col-right"></div>
     </div>`;
+    // The info-grid wrapper is purely a layout container (landscape relayout):
+    // it groups the stat/progression/gathering blocks so they lay out side by
+    // side on a wide window instead of stacking full-width one under another.
+    // No section's own content or logic changes.
+    html += '<div class="char-info-grid">';
     html += `<div class="char-stats">${STAT_GRID.map((stat) => this.deps.statCellHtml(stat)).join('')}</div>`;
     html += this.deps.talentSummaryHtml();
     html += this.deps.progressionHtml(p.level);
     html += this.gatheringHtml(world);
+    html += '</div>';
     html += `<div class="pc-share-row"><button type="button" class="btn pc-share-btn" data-act="share-card">${SHARE_GLYPH}<span>${esc(t('playerCard.shareButton'))}</span></button></div>`;
     el.innerHTML = html;
     hydratePortraits(el);

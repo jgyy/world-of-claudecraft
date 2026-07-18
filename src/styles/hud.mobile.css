@@ -2971,7 +2971,20 @@
     max-width: 100%;
     box-sizing: border-box;
   }
-  body.mobile-touch #char-window > .char-stats {
+  /* .char-info-grid is the desktop-landscape two-column wrapper (see
+     components.css); on touch it collapses back to the same single vertical
+     flow this whole block already enforces for #char-window's direct
+     children. */
+  body.mobile-touch #char-window .char-info-grid {
+    columns: auto;
+    column-gap: normal;
+  }
+  body.mobile-touch #char-window .char-info-grid > * {
+    break-inside: avoid;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  body.mobile-touch #char-window .char-stats {
     margin-top: 6px;
   }
   body.mobile-touch #char-window .paperdoll {

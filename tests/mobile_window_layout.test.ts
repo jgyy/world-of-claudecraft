@@ -38,6 +38,12 @@ describe('mobile window layout CSS', () => {
     );
   });
 
+  it('collapses the char window landscape info-grid back to one column on mobile', () => {
+    expect(mobileCss).toMatch(
+      /body\.mobile-touch #char-window \.char-info-grid \{[^}]*columns: auto;/,
+    );
+  });
+
   it('sizes the mobile map from the app viewport so zoom controls do not dominate it', () => {
     const start = mobileCss.indexOf('body.mobile-touch #map-window {');
     expect(start).toBeGreaterThan(0);
