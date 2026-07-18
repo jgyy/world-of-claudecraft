@@ -4755,10 +4755,12 @@
 
   /* ---------- bags ---------- */
   /* bags, centred in the bottom gap between the action cluster and micro-menu.
-     Landscape layout: the window is wider than tall so the slot grid lays
-     out in several columns per row instead of one narrow portrait column;
-     the filter bar and money line sit in a fixed-width left rail beside the
-     grid rather than stacked above it (issue: bags relayout to landscape). */
+     Portrait is the DEFAULT everywhere (desktop under the landscape breakpoint,
+     mobile, and the bank-docked layout below): the bag-bar, filter bar, grid
+     and money stack in one narrow column exactly as before the landscape
+     relayout. `.bag-rail` is a semantic wrapper only, `display: contents` below
+     the breakpoint so its children (bag-bar/filter-bar/money) flow straight
+     into the #bags column and keep their original visual order via `order`. */
   #bags {
     --bags-bar-half: 306px;
     --bags-gap: 12px;
@@ -4772,33 +4774,24 @@
     right: auto;
     bottom: 6px;
     top: auto;
-    width: min(640px, var(--bags-slot-w));
+    width: min(310px, var(--bags-slot-w));
     transform: translateX(-50%);
-    max-height: min(360px, calc(100vh - 18px));
+    max-height: calc(100vh - 18px);
     overflow: hidden;
-    /* The two-column body (rail + grid) needs its own line, so the header
-       wraps onto its own full-width row above them. */
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    column-gap: 12px;
+    flex-direction: column;
   }
   #bags .panel-title {
-    flex: 1 0 100%;
+    flex: none;
   }
-  /* The rail: bag-bar (backpack + equip sockets), the filter/search tools,
-     and the money line, stacked in one fixed-width column beside the grid. */
   #bags .bag-rail {
-    flex: 0 0 var(--bags-rail-w);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-height: 0;
-    overflow-y: auto;
+    display: contents;
   }
   #bags .bag-rail .bag-bar {
-    margin: 0;
-    flex-wrap: wrap;
+    order: 0;
+  }
+  #bags .bag-filter-bar {
+    flex: none;
+    order: 1;
   }
   #bags .bag-grid {
     flex: 1 1 auto;
@@ -4807,27 +4800,77 @@
     touch-action: pan-y;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
+    order: 2;
   }
-  /* The grid is the flex item beside the rail, so it needs an explicit shrink
-     floor (a flex item's min-width is auto by default); a tighter column
-     floor than the base .bag-grid rule also fits more columns in the same
-     landscape width. */
-  #bags .bag-grid {
-    min-width: 0;
-    grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
-    align-content: start;
-  }
-  #bags .money {
+  #bags .bag-rail .money {
     flex: none;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    margin-top: auto;
+    align-items: center;
+    gap: 10px;
+    order: 3;
   }
   /* coins stay right-aligned whether or not the $WOC chip is present */
   #bags .money .money-inline {
     margin-left: auto;
+  }
+  /* Landscape layout: gated to viewports wide enough that the window
+     (min(640px, --bags-slot-w)) comfortably fits the fixed-width rail plus a
+     usable multi-column grid; --bags-slot-w works out to roughly 50vw - 380px,
+     so 1800px keeps a good margin above rail (190px) + gap + several 38px
+     columns even before rounding. Below this width, or in the bank-docked /
+     mobile-sheet states below, #bags stays the portrait column above. */
+  @media (min-width: 1800px) {
+    #bags {
+      width: min(640px, var(--bags-slot-w));
+      max-height: min(360px, calc(100vh - 18px));
+      /* The two-column body (rail + grid) needs its own line, so the header
+         wraps onto its own full-width row above them. */
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      column-gap: 12px;
+    }
+    #bags .panel-title {
+      flex: 1 0 100%;
+    }
+    /* The rail: bag-bar (backpack + equip sockets), the filter/search tools,
+       and the money line, stacked in one column beside the grid. Shrinkable
+       (flex-shrink 1, min-width 0) rather than a hard 0 0 basis, so it still
+       degrades instead of clipping if the window narrows within this range. */
+    #bags .bag-rail {
+      display: flex;
+      flex-direction: column;
+      flex: 0 1 var(--bags-rail-w);
+      min-width: 0;
+      gap: 6px;
+      min-height: 0;
+      overflow-y: auto;
+    }
+    #bags .bag-rail .bag-bar {
+      margin: 0;
+      flex-wrap: wrap;
+      order: initial;
+    }
+    #bags .bag-filter-bar {
+      order: initial;
+    }
+    /* The grid is the flex item beside the rail, so it needs an explicit shrink
+       floor (a flex item's min-width is auto by default); a tighter column
+       floor than the base .bag-grid rule also fits more columns in the same
+       landscape width. */
+    #bags .bag-grid {
+      min-width: 0;
+      grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+      align-content: start;
+      order: initial;
+    }
+    #bags .bag-rail .money {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      margin-top: auto;
+      order: initial;
+    }
   }
   .woc-balance {
     display: inline-flex;
@@ -5403,6 +5446,14 @@
     width: 320px;
     max-height: calc(var(--app-vh, 100vh) * 0.72 / var(--window-scale) - 24px);
     transform: translateX(var(--bank-dock-gap));
+    /* Opt out of the landscape rail layout regardless of viewport width: the
+       bank-docked window is pinned to 320px, too narrow for the fixed-width
+       rail plus a usable grid (review finding: bank-docked Bags squeezed to
+       2 columns). Stay the portrait column, same as below the breakpoint. */
+    flex-direction: column;
+  }
+  body.bank-open #bags .bag-rail {
+    display: contents;
   }
 
   /* ---------- deeds ---------- */

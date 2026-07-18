@@ -62,6 +62,22 @@ describe('bags_window: load-bearing behaviors preserved', () => {
     // (not tag-exempt like inputs) would dismiss the prompt AND close the bags.
     expect(painter).toMatch(/ke\.preventDefault\(\);\s*ke\.stopPropagation\(\);/);
   });
+
+  it('renders the bag-bar, filter bar and money row inside one .bag-rail container', () => {
+    // The landscape layout (components.css, gated behind a min-width media query)
+    // depends on the bag-bar/filter-bar/money living inside a single .bag-rail
+    // element; the portrait/mobile/bank-docked layouts fall back to `display:
+    // contents` on that same element, so both CSS contracts need this DOM shape
+    // to exist (review finding: nothing pinned the new container).
+    const railStart = painter.indexOf("rail.className = 'bag-rail'");
+    expect(railStart).toBeGreaterThan(-1);
+    const buildBagBarCall = painter.indexOf('rail.appendChild(this.buildBagBar())');
+    const filterBarCall = painter.indexOf('rail.appendChild(this.buildFilterBar())');
+    const moneyRowCall = painter.indexOf('rail.appendChild(moneyRow)');
+    expect(buildBagBarCall).toBeGreaterThan(railStart);
+    expect(filterBarCall).toBeGreaterThan(buildBagBarCall);
+    expect(moneyRowCall).toBeGreaterThan(filterBarCall);
+  });
 });
 
 describe('bags_window: bank-deposit mode wiring', () => {

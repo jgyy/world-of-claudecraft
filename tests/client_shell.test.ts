@@ -1457,7 +1457,7 @@ describe('client HTML shell', () => {
     expect(hudMobileCss).not.toContain('body.mobile-touch #ui { touch-action: none; }');
     // Scrollable lists get iOS momentum + scroll isolation (moved to components.css).
     expect(componentsCss).toContain(
-      '#bags .bag-grid {\n    flex: 1 1 auto;\n    min-height: 0;\n    overflow-y: auto;\n    touch-action: pan-y;\n    -webkit-overflow-scrolling: touch;\n    overscroll-behavior: contain;\n  }',
+      '#bags .bag-grid {\n    flex: 1 1 auto;\n    min-height: 0;\n    overflow-y: auto;\n    touch-action: pan-y;\n    -webkit-overflow-scrolling: touch;\n    overscroll-behavior: contain;\n    order: 2;\n  }',
     );
     expect(componentsCss).toContain(
       '#market-body {\n    overflow-y: auto;\n    flex: 1;\n    min-height: 0;\n    padding-right: 2px;\n    touch-action: pan-y;\n    -webkit-overflow-scrolling: touch;\n    overscroll-behavior: contain;\n  }',
