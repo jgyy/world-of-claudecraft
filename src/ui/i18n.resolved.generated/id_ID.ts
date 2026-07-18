@@ -5272,6 +5272,9 @@ export const id_ID: EnTranslations = {
     "news": {
       "new": "Baru",
       "viewAll": "Lihat semua pembaruan di GitHub"
+    },
+    "roster": {
+      "title": "Characters"
     }
   },
   "hud": {

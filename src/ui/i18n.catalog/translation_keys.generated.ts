@@ -6825,6 +6825,7 @@ export type TranslationKeyFlat =
   | 'welcome.level'
   | 'welcome.news.new'
   | 'welcome.news.viewAll'
+  | 'welcome.roster.title'
   | 'wiki.cta'
   | 'wiki.desc'
   | 'wiki.title'

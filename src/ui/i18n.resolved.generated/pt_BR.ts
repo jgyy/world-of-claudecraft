@@ -5272,6 +5272,9 @@ export const pt_BR: EnTranslations = {
     "news": {
       "new": "Novo",
       "viewAll": "Ver todas as atualizações no GitHub"
+    },
+    "roster": {
+      "title": "Characters"
     }
   },
   "hud": {

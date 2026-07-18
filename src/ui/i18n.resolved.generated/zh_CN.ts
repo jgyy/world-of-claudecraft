@@ -5272,6 +5272,9 @@ export const zh_CN: EnTranslations = {
     "news": {
       "new": "新",
       "viewAll": "在 GitHub 上查看全部更新"
+    },
+    "roster": {
+      "title": "角色"
     }
   },
   "hud": {

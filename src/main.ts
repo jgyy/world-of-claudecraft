@@ -4834,6 +4834,37 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
     welcomeScreen = null;
     void startGame(world, null, world, `char:${c.id}`, true);
   };
+  // Character-switch rail: the roster is fetched once per screen (cached here
+  // so the click handler below can resolve a row's full CharacterSummary
+  // without a second round trip), and picking a DIFFERENT character tears
+  // down this in-flight connection and re-enters on the new one via the same
+  // enterWorld/takeOverAndEnter paths the pre-login char-select screen uses.
+  let latestRoster: CharacterSummary[] = [];
+  const switchWelcomeCharacter = (characterId: number) => {
+    if (started || characterId === c.id) return;
+    const target = latestRoster.find((x) => x.id === characterId);
+    if (!target) return;
+    void (async () => {
+      if (target.online && !window.confirm(t('character.takeOverConfirm'))) return;
+      started = true;
+      clearInterval(poll);
+      world.close();
+      clearCardProviders();
+      welcomeScreen?.destroy();
+      welcomeScreen = null;
+      if (target.online) {
+        try {
+          await api.takeoverCharacter(target.id);
+        } catch (err) {
+          fatalOverlay(userFacingApiError(err));
+          return;
+        }
+        await enterWorld({ ...target, online: false });
+      } else {
+        await enterWorld(target);
+      }
+    })();
+  };
   if (welcomeRoot) {
     welcomeScreen = mountWelcomeScreen(welcomeRoot, {
       mountStage: (el) =>
@@ -4862,6 +4893,9 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
           ready: s.eligibility.eligible === true && s.spin.claimed === false,
           unknown: false,
         })),
+      fetchRoster: () => api.characters().then((list) => (latestRoster = list)),
+      currentCharacterId: c.id,
+      onSelectCharacter: switchWelcomeCharacter,
       header: () => ({
         characterName: c.name,
         level: c.level,

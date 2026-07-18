@@ -5272,6 +5272,9 @@ export const ko_KR: EnTranslations = {
     "news": {
       "new": "신규",
       "viewAll": "GitHub에서 모든 업데이트 보기"
+    },
+    "roster": {
+      "title": "캐릭터"
     }
   },
   "hud": {

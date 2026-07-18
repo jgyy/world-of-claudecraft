@@ -8085,6 +8085,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'welcome.armory.cta': '무기고 둘러보기',
   'welcome.news.new': '신규',
   'welcome.news.viewAll': 'GitHub에서 모든 업데이트 보기',
+  'welcome.roster.title': '캐릭터',
   'hudChrome.auraEffect.battleStance': '전투 태세: 분노 생성 10% 증가',
   'hudChrome.auraEffect.berserkerStance': '광전사 태세: 치명타 확률 3% 증가, 피해 3% 증가',
   'hudChrome.auraEffect.crit': '치명타 확률이 {pct}% 증가합니다',

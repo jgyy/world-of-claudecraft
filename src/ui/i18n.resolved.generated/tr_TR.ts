@@ -5272,6 +5272,9 @@ export const tr_TR: EnTranslations = {
     "news": {
       "new": "Yeni",
       "viewAll": "GitHub'daki tüm güncellemeleri görüntüle"
+    },
+    "roster": {
+      "title": "Characters"
     }
   },
   "hud": {

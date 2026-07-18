@@ -7,6 +7,7 @@
 // The thin consumer (welcome_screen_window.ts) maps stable keys to t() and paints.
 // Unit-tested in tests/welcome_screen_view.test.ts. Mirrors src/ui/discord_widget_view.ts.
 import { type StorePromoVisibilityInput, shouldShowStorePromo } from './store_promo_card';
+import { showWelcomeRoster, type WelcomeRosterCandidate } from './welcome_roster_view';
 
 export interface WelcomeReleaseSummary {
   id: number;
@@ -57,6 +58,8 @@ export interface WelcomeScreenView {
   showArmoryCard: boolean;
   showChestTile: boolean;
   showDiscordStrip: boolean;
+  /** The character-switch rail: only earns its place with more than one character. */
+  showRoster: boolean;
   continueState: ContinueButtonState;
 }
 
@@ -133,6 +136,7 @@ export function buildWelcomeScreenView(
   connection: WelcomeConnectionInput,
   armoryPromoEnabledOnServer: boolean,
   lastSeenReleaseId: number | null,
+  roster: readonly WelcomeRosterCandidate[] = [],
 ): WelcomeScreenView {
   return {
     newsState: news.state,
@@ -140,6 +144,7 @@ export function buildWelcomeScreenView(
     showArmoryCard: armoryCardVisible(platform, armoryPromoEnabledOnServer),
     showChestTile: chestTileVisible(platform, chest),
     showDiscordStrip: discordStripVisible(discord, platform.offline),
+    showRoster: showWelcomeRoster(roster),
     continueState: continueButtonState(connection),
   };
 }

@@ -5272,6 +5272,9 @@ export const sv_SE: EnTranslations = {
     "news": {
       "new": "Ny",
       "viewAll": "Se alla uppdateringar på GitHub"
+    },
+    "roster": {
+      "title": "Characters"
     }
   },
   "hud": {

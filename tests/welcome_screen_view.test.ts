@@ -198,5 +198,36 @@ describe('welcome_screen_view: feed-failure fallback', () => {
     expect(view.showArmoryCard).toBe(true);
     expect(view.showDiscordStrip).toBe(true);
     expect(view.showChestTile).toBe(false);
+    expect(view.showRoster).toBe(false);
+  });
+});
+
+describe('welcome_screen_view: roster rail visibility', () => {
+  it('shows the roster only once there is more than one character', () => {
+    const one = buildWelcomeScreenView(
+      DESKTOP_WEB,
+      { state: 'loaded', releases: [] },
+      { enabled: true, linked: false, guildMember: false, fetchFailed: false },
+      { ready: false, unknown: true },
+      { ready: true, offline: false },
+      true,
+      null,
+      [{ id: 1, name: 'Solo', class: 'warrior', level: 1, online: false, forceRename: false }],
+    );
+    expect(one.showRoster).toBe(false);
+    const two = buildWelcomeScreenView(
+      DESKTOP_WEB,
+      { state: 'loaded', releases: [] },
+      { enabled: true, linked: false, guildMember: false, fetchFailed: false },
+      { ready: false, unknown: true },
+      { ready: true, offline: false },
+      true,
+      null,
+      [
+        { id: 1, name: 'Solo', class: 'warrior', level: 1, online: false, forceRename: false },
+        { id: 2, name: 'Duo', class: 'mage', level: 5, online: false, forceRename: false },
+      ],
+    );
+    expect(two.showRoster).toBe(true);
   });
 });

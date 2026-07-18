@@ -5272,6 +5272,9 @@ export const en_XA: EnTranslations = {
     "news": {
       "new": "[Ñéŵ]",
       "viewAll": "[Ʋíéŵ áļļ úþðáţéš óñ ĜíţĤúƀ]"
+    },
+    "roster": {
+      "title": "[Çĥáŕáçţéŕš]"
     }
   },
   "hud": {

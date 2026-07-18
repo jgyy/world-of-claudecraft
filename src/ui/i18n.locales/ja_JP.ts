@@ -8103,6 +8103,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'welcome.armory.cta': '武器庫を見に行く',
   'welcome.news.new': '新着',
   'welcome.news.viewAll': 'GitHubですべての更新を見る',
+  'welcome.roster.title': 'キャラクター',
   'hudChrome.auraEffect.battleStance': 'バトルスタンス: 怒りの生成量が10%増加',
   'hudChrome.auraEffect.berserkerStance':
     'バーサーカースタンス: クリティカル率が3%上昇し、与えるダメージが3%増加',

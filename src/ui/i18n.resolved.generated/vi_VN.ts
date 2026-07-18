@@ -5272,6 +5272,9 @@ export const vi_VN: EnTranslations = {
     "news": {
       "new": "Mới",
       "viewAll": "Xem tất cả cập nhật trên GitHub"
+    },
+    "roster": {
+      "title": "Characters"
     }
   },
   "hud": {

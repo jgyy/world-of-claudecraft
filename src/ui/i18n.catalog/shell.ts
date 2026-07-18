@@ -311,6 +311,9 @@ export const shellStrings = {
         new: 'New',
         viewAll: 'View all updates on GitHub',
       },
+      roster: {
+        title: 'Characters',
+      },
     },
   },
   es: {

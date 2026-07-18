@@ -5272,6 +5272,9 @@ export const ja_JP: EnTranslations = {
     "news": {
       "new": "新着",
       "viewAll": "GitHubですべての更新を見る"
+    },
+    "roster": {
+      "title": "キャラクター"
     }
   },
   "hud": {

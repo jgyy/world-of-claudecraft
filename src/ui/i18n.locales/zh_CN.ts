@@ -7717,6 +7717,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'welcome.armory.cta': '进入并浏览军械库',
   'welcome.news.new': '新',
   'welcome.news.viewAll': '在 GitHub 上查看全部更新',
+  'welcome.roster.title': '角色',
   'hudChrome.auraEffect.battleStance': '战斗姿态：怒气产生提高 10%',
   'hudChrome.auraEffect.berserkerStance': '狂暴姿态：暴击几率提高 3%，暴击伤害提高 3%',
   'hudChrome.auraEffect.crit': '暴击几率提高 {pct}%',

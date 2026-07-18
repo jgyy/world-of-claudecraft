@@ -8249,6 +8249,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'welcome.armory.cta': 'Открыть и просмотреть Арсенал',
   'welcome.news.new': 'Новое',
   'welcome.news.viewAll': 'Смотреть все обновления на GitHub',
+  'welcome.roster.title': 'Персонажи',
   'hudChrome.auraEffect.battleStance': 'Боевая стойка: на 10% больше создания ярости',
   'hudChrome.auraEffect.berserkerStance': 'Стойка берсерка: крит. удары на 3% чаще и на 3% сильнее',
   'hudChrome.auraEffect.crit': 'Повышает шанс критического удара на {pct}%',

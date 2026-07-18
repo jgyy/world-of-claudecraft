@@ -4,9 +4,11 @@
 // cold-path convention (raw DOM writes, not the per-frame PainterHost elider).
 // Pure gating/badge/intent logic lives in ./welcome_screen_view; this module
 // only resolves DOM refs, paints from that view, and wires callbacks.
+import type { CharacterSummary } from '../net/online';
 import { appVersionInfo } from './app_version';
 import { markDialogRoot } from './dialog_root';
 import { discordInviteUrl } from './discord_status';
+import { classDisplayName } from './entity_i18n';
 import { FocusManager, type FocusTrapHandle } from './focus_manager';
 import { formatDateTime, t } from './i18n';
 import {
@@ -17,6 +19,11 @@ import {
   renderWelcomeNews,
 } from './news_feed';
 import { mountStorePromoCard, type StorePromoCardController } from './store_promo_card';
+import {
+  buildWelcomeRoster,
+  type WelcomeRosterCandidate,
+  type WelcomeRosterRow,
+} from './welcome_roster_view';
 import {
   buildWelcomeScreenView,
   consumeArmoryOpenIntent,
@@ -58,6 +65,19 @@ export interface WelcomeScreenDeps {
   mountStage?(container: HTMLElement): { release(): void } | null;
   /** Read/write the one-shot Armory-open intent; defaults to window.sessionStorage. */
   storage?: Storage;
+  /** The account's full character roster, for the character-switch rail. Absent
+   *  or single-character rosters hide the rail (offline entry has neither). */
+  fetchRoster?(): Promise<CharacterSummary[]>;
+  /** The character this Welcome Screen was opened for; drives the roster's
+   *  selected-row highlight. Required whenever fetchRoster is provided. */
+  currentCharacterId?: number;
+  /** Fired with the character id when the player picks a DIFFERENT roster row
+   *  (not the one this screen was opened for). The caller owns tearing down
+   *  the current connection and re-entering on the new character; the row's
+   *  disabled state (rename-required) is already screened out before this
+   *  fires, and the caller already holds the full CharacterSummary from the
+   *  same fetchRoster() call. */
+  onSelectCharacter?(characterId: number): void;
 }
 
 export interface WelcomeScreenController {
@@ -99,6 +119,7 @@ export function mountWelcomeScreen(
   const continueHintEl = root.querySelector<HTMLElement>('#ws-continue-hint');
   const versionEl = root.querySelector<HTMLElement>('#ws-version');
   const stageEl = root.querySelector<HTMLElement>('#ws-stage');
+  const rosterEl = root.querySelector<HTMLElement>('#ws-roster');
 
   markDialogRoot(root, { label: t('welcome.continue'), modal: true });
 
@@ -197,6 +218,49 @@ export function mountWelcomeScreen(
     });
   }
 
+  function paintRoster(rows: WelcomeRosterRow[]): void {
+    if (!rosterEl) return;
+    if (rows.length === 0) {
+      rosterEl.hidden = true;
+      rosterEl.textContent = '';
+      return;
+    }
+    rosterEl.hidden = false;
+    rosterEl.textContent = '';
+    const title = document.createElement('div');
+    title.className = 'ws-roster-title';
+    title.textContent = t('welcome.roster.title');
+    rosterEl.append(title);
+    for (const row of rows) {
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'ws-roster-row';
+      if (row.selected) item.classList.add('sel');
+      item.disabled = row.disabled;
+      if (row.titleKey) item.title = t(row.titleKey);
+      const name = document.createElement('span');
+      name.className = 'ws-roster-name';
+      name.textContent = row.name;
+      const meta = document.createElement('span');
+      meta.className = 'ws-roster-meta';
+      meta.textContent = [t('welcome.level', { level: row.level }), classDisplayName(row.class)]
+        .filter(Boolean)
+        .join(' · ');
+      item.append(name, meta);
+      if (!row.selected) {
+        const action = document.createElement('span');
+        action.className = 'ws-roster-action';
+        action.textContent = t(row.labelKey);
+        item.append(action);
+      }
+      item.addEventListener('click', () => {
+        if (row.disabled || row.selected) return;
+        deps.onSelectCharacter?.(row.id);
+      });
+      rosterEl.append(item);
+    }
+  }
+
   function paintVersion(): void {
     if (!versionEl) return;
     // Same format as the homepage footer's syncBuildInfo (src/main.ts): plain
@@ -279,7 +343,7 @@ export function mountWelcomeScreen(
     const newsState: WelcomeNewsInput = { state: 'loading', releases: [] };
     void loadWelcomeNews(newsState);
 
-    const [armoryEnabled, discord, chest] = await Promise.all([
+    const [armoryEnabled, discord, chest, roster] = await Promise.all([
       deps.platform.offline
         ? Promise.resolve(false)
         : deps.fetchArmoryPromoEnabled().catch(() => false),
@@ -301,7 +365,18 @@ export function mountWelcomeScreen(
       deps.platform.offline
         ? Promise.resolve<WelcomeChestInput>({ ready: false, unknown: true })
         : deps.fetchChest().catch((): WelcomeChestInput => ({ ready: false, unknown: true })),
+      deps.fetchRoster
+        ? deps.fetchRoster().catch((): CharacterSummary[] => [])
+        : Promise.resolve([]),
     ]);
+    const candidates: WelcomeRosterCandidate[] = roster.map((c) => ({
+      id: c.id,
+      name: c.name,
+      level: c.level,
+      class: c.class,
+      online: c.online,
+      forceRename: c.forceRename,
+    }));
 
     const view = buildWelcomeScreenView(
       deps.platform,
@@ -311,10 +386,14 @@ export function mountWelcomeScreen(
       { ready: connectionReady, offline: deps.platform.offline },
       armoryEnabled,
       readLastSeenReleaseId(),
+      candidates,
     );
     paintDiscordStrip(view.showDiscordStrip);
     paintChestTile(view.showChestTile);
     paintArmoryCard(view.showArmoryCard);
+    paintRoster(
+      view.showRoster ? buildWelcomeRoster(candidates, deps.currentCharacterId ?? -1) : [],
+    );
   }
 
   function hide(): void {
