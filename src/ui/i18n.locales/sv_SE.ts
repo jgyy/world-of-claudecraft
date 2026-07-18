@@ -7011,7 +7011,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'download.linuxCta': 'Ladda ner för Linux',
   'download.windowsCta': 'Ladda ner för Windows',
   'download.linuxHint': 'AppImage: gör den körbar och kör den sedan. Ingen installation behövs.',
-  'loading.reconnecting': 'Anslutning förlorad. Återansluter...',
   'guide.nav.settings': 'Inställningar och prestanda',
   'guide.settingsPage.advancedBody':
     'Avancerat börjar från nivån High och låser upp fyra extra väljare, så att du kan spendera dina ramar där du faktiskt lägger märke till dem: Terrängdetalj, Lövdensitet, Effekter & Ljus och Skuggkvalitet. Liksom Graphics Quality tillämpas de efter en omladdning.',

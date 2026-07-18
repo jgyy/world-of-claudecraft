@@ -86,7 +86,8 @@ past the grace a successful auth is simply a fresh join from the last save, so
 retrying stays correct at any point. `onConnectionLost` fires per drop with
 `(attempt, maxAttempts, nextRetryAtMs)` so the reconnect overlay (`src/ui/reconnect_overlay.ts`)
 can show live attempt/countdown feedback instead of a static string (countdown math lives in
-the pure `reconnect_status.ts`); `onReconnected` fires on the post-reconnect `hello` (which
+the pure `src/ui/reconnect_status_core.ts`, owned by `ui/` since it is consumed solely by the
+overlay); `onReconnected` fires on the post-reconnect `hello` (which
 resets input acking and rebuilds
 the mirror from an empty interest set); `onDisconnect` fires only when the session is
 over for good (retries exhausted, or a fatal server `error` frame).

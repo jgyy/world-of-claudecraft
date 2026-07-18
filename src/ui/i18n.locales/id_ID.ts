@@ -7141,7 +7141,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'download.windowsCta': 'Unduh untuk Windows',
   'download.linuxHint':
     'AppImage: membuatnya dapat dieksekusi, lalu jalankan. Tidak perlu instalasi.',
-  'loading.reconnecting': 'Koneksi terputus. Menyambungkan kembali...',
   'guide.nav.settings': 'Pengaturan & Kinerja',
   'guide.settingsPage.advancedBody':
     'Lanjutan dimulai dari tingkat High dan membuka empat pemetik tambahan, sehingga Anda dapat menggunakan bingkai di tempat yang benar-benar Anda sadari: Detail Medan, Kepadatan Dedaunan, Efek & Pencahayaan, dan Kualitas Bayangan. Seperti Kualitas Grafis, ini berlaku setelah memuat ulang.',

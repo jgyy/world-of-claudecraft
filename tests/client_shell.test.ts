@@ -223,6 +223,25 @@ describe('client HTML shell', () => {
     }
   });
 
+  it('carries the loading-screen element set, including #ls-slow-hint, in BOTH entries', () => {
+    // main.ts is shared by index.html and play.html (src/CLAUDE.md: "index.html
+    // AND play.html both load src/main.ts"). setSlowConnectionHintVisible is
+    // hit on every 1s tick of the slow-connection watch during the whole
+    // loading screen, so a missing element on either entry throws (or, with
+    // the null-guard, silently never shows) on that entry. #2106's review
+    // caught play.html shipping the reconnect countdown work without this
+    // element; pin both entries so it cannot regress unnoticed.
+    for (const entry of [html, playHtml]) {
+      expect(entry).toContain('id="loading-screen"');
+      expect(entry).toContain('id="ls-fill"');
+      expect(entry).toContain('id="ls-status"');
+      expect(entry).toContain('id="ls-tip"');
+      expect(entry).toContain(
+        '<div id="ls-slow-hint" data-i18n="loading.slowConnection" role="status" aria-live="polite">',
+      );
+    }
+  });
+
   it('places skip links as the first focusable elements in BOTH entries', () => {
     for (const entry of [html, playHtml]) {
       const skipMain = entry.indexOf('class="hud-skip" href="#ui"');

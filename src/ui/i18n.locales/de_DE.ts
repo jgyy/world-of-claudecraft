@@ -7197,7 +7197,6 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'download.windowsCta': 'Für Windows herunterladen',
   'download.linuxHint':
     'AppImage: Machen Sie es ausführbar und führen Sie es dann aus. Keine Installation erforderlich.',
-  'loading.reconnecting': 'Verbindung verloren. Verbindung wird wieder hergestellt...',
   'guide.nav.settings': 'Einstellungen und Leistung',
   'guide.settingsPage.advancedBody':
     '„Advanced“ beginnt mit der High-Stufe und schaltet vier zusätzliche Auswahlmöglichkeiten frei, sodass Sie Ihre Frames dort platzieren können, wo Sie sie tatsächlich bemerken: Geländedetails, Laubdichte, Effekte und Beleuchtung sowie Schattenqualität. Sie gelten ebenso wie die Grafikqualität nach einem Neuladen.',

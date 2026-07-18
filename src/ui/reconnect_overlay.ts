@@ -9,8 +9,8 @@
 // can run up to RECONNECT_MAX_DELAY_MS (src/net/online.ts), and a frozen
 // message with no feedback is indistinguishable from a hung client.
 
-import { secondsUntilRetry } from '../net/reconnect_status';
 import { t } from './i18n';
+import { secondsUntilRetry } from './reconnect_status_core';
 
 const OVERLAY_ID = 'reconnect-overlay';
 const TICK_MS = 1000;
@@ -36,11 +36,16 @@ export function showReconnectOverlay(
   }
 
   const render = () => {
-    messageEl.textContent = t('loading.reconnectingAttempt', {
-      attempt,
-      maxAttempts,
-      seconds: secondsUntilRetry(nextRetryAtMs, Date.now()),
-    });
+    const seconds = secondsUntilRetry(nextRetryAtMs, Date.now());
+    // Once the countdown hits 0 the real retry is imminent (it fires from a
+    // setTimeout scheduled at the same delay this counts down), but the
+    // interval keeps repainting "0s" with a stale attempt number until the
+    // next drop calls showReconnectOverlay again. Swap to a distinct
+    // "retrying now" message so a slow final second does not look hung.
+    messageEl.textContent =
+      seconds > 0
+        ? t('loading.reconnectingAttempt', { attempt, maxAttempts, seconds })
+        : t('loading.reconnectingNow', { attempt, maxAttempts });
   };
   render();
 

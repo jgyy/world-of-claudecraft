@@ -1162,7 +1162,6 @@ export const cs_CZ: Partial<Record<TranslationKey, string>> = {
   'loading.connectionRejected': 'Server ukončil připojení.',
   'loading.enterTimeout': 'Nepodařilo se vstoupit do světa. Připojení vypršelo. Běží herní server?',
   'loading.enteringWorld': 'Vstupuje se do světa...',
-  'loading.reconnecting': 'Připojení ztraceno. Znovu se připojuje...',
   'loading.rendererFailed': 'Renderer se nepodařilo spustit: zkus stránku obnovit. {error}',
   'loading.world': 'Načítá se svět...',
   'loading.worldProgress': 'Načítá se svět... {done}/{total}',

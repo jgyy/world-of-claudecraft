@@ -1464,9 +1464,10 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'loading.enterTimeout':
     'Не удалось войти в мир. Время подключения истекло. Запущен ли игровой сервер?',
   'loading.connectionLost': 'Соединение с сервером потеряно.',
-  'loading.reconnecting': 'Соединение потеряно. Повторное подключение...',
   'loading.reconnectingAttempt':
     'Соединение потеряно. Повторное подключение... (попытка {attempt}/{maxAttempts}, повтор через {seconds} с)',
+  'loading.reconnectingNow':
+    'Соединение потеряно. Повторное подключение сейчас... (попытка {attempt}/{maxAttempts})',
   'loading.slowConnection':
     'Загрузка занимает больше времени, чем обычно. Проверьте подключение к интернету.',
   'loading.connectionRejected': 'Сервер закрыл соединение.',

@@ -7158,7 +7158,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'download.linuxCta': 'Descargar para Linux',
   'download.windowsCta': 'Descargar para Windows',
   'download.linuxHint': 'AppImage: hazlo ejecutable y luego ejecútalo. No se necesita instalación.',
-  'loading.reconnecting': 'Conexión perdida. Reconectando...',
   'guide.nav.settings': 'Configuración y rendimiento',
   'guide.settingsPage.advancedBody':
     'Avanzado comienza desde el nivel High y desbloquea cuatro selectores adicionales, para que puedas pasar tus fotogramas donde realmente los notes: Detalle del terreno, Densidad del follaje, Efectos e iluminación y Calidad de las sombras. Al igual que la calidad de los gráficos, se aplican después de una recarga.',

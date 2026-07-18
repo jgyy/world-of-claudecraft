@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { shouldShowSlowConnectionHint } from '../src/ui/loading_slow_hint';
+import { shouldShowSlowConnectionHint } from '../src/ui/loading_slow_hint_core';
 
 describe('shouldShowSlowConnectionHint', () => {
   it('stays false while progress is still moving at a normal pace', () => {

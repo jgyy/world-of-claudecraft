@@ -1388,9 +1388,9 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'loading.rendererFailed': '無法啟動渲染器：請嘗試重新整理。{error}',
   'loading.enterTimeout': '無法進入世界。連線已逾時。遊戲伺服器是否正在執行？',
   'loading.connectionLost': '與伺服器的連線已中斷。',
-  'loading.reconnecting': '連線已中斷。正在重新連線...',
   'loading.reconnectingAttempt':
     '連線已中斷。正在重新連線...（第 {attempt}/{maxAttempts} 次嘗試，{seconds} 秒後重試）',
+  'loading.reconnectingNow': '連線已中斷，正在重新連線...（第 {attempt}/{maxAttempts} 次嘗試）',
   'loading.slowConnection': '載入時間比平常長。請檢查您的網路連線。',
   'loading.connectionRejected': '伺服器已關閉連線。',
   'loading.realmFull': '這個世界目前已滿，請於幾分鐘後再試。',

@@ -1503,10 +1503,15 @@ export class ClientWorld implements IWorld {
       // visibilitychange while it is pending takes the clearTimeout branch
       // below: never two live timers, never a double openSocket.
       clearTimeout(this.reconnectTimer);
+      const delayMs = Math.random() * 1000;
       this.reconnectTimer = window.setTimeout(() => {
         this.reconnectTimer = undefined;
         this.openSocket();
-      }, Math.random() * 1000);
+      }, delayMs);
+      // Keep the overlay's countdown honest: without this it keeps counting down
+      // toward the ORIGINAL backoff delay (which can be tens of seconds at a high
+      // attempt count) while the real retry now fires in under a second.
+      this.onConnectionLost?.(this.reconnectAttempts, RECONNECT_MAX_ATTEMPTS, Date.now() + delayMs);
       return;
     }
     // No reconnect scheduled yet but the socket is not open: onclose was
@@ -1564,7 +1569,6 @@ export class ClientWorld implements IWorld {
       RECONNECT_MAX_DELAY_MS,
       Math.random,
     );
-    this.onConnectionLost?.(this.reconnectAttempts, RECONNECT_MAX_ATTEMPTS, Date.now() + delayMs);
     // Clear our own handle when the timer fires: a stale handle left in
     // reconnectTimer would make a later visibility event (while the socket is
     // still CONNECTING) take the pending-timer branch and open a second socket.
@@ -1572,6 +1576,12 @@ export class ClientWorld implements IWorld {
       this.reconnectTimer = undefined;
       this.openSocket();
     }, delayMs);
+    // Fired AFTER reconnectTimer is armed: onConnectionLost creates/mutates DOM,
+    // starts an interval, and resolves a t() key, any of which could throw. If it
+    // threw before the timer was set, reconnectAttempts would already be
+    // incremented with no retry scheduled, no onDisconnect, and no fatal overlay,
+    // permanently dead auto-reconnect for the rest of the session.
+    this.onConnectionLost?.(this.reconnectAttempts, RECONNECT_MAX_ATTEMPTS, Date.now() + delayMs);
   }
 
   private endSession(): void {

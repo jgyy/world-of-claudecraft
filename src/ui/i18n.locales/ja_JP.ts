@@ -1449,9 +1449,10 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'loading.enterTimeout':
     '世界に入れませんでした。接続がタイムアウトしました。ゲームサーバーは動作していますか？',
   'loading.connectionLost': 'サーバーとの接続が切断されました。',
-  'loading.reconnecting': 'サーバーとの接続が切断されました。再接続しています...',
   'loading.reconnectingAttempt':
     'サーバーとの接続が切断されました。再接続しています...（試行 {attempt}/{maxAttempts}、{seconds}秒後に再試行）',
+  'loading.reconnectingNow':
+    'サーバーとの接続が切断されました。今すぐ再接続しています...（試行 {attempt}/{maxAttempts}）',
   'loading.slowConnection':
     '読み込みに時間がかかっています。インターネット接続を確認してください。',
   'loading.connectionRejected': 'サーバーが接続を閉じました。',

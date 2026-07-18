@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { secondsUntilRetry } from '../src/net/reconnect_status';
+import { secondsUntilRetry } from '../src/ui/reconnect_status_core';
 
 describe('secondsUntilRetry', () => {
   it('rounds up a partial second so the overlay never shows 0s before the retry fires', () => {

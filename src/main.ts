@@ -232,7 +232,7 @@ import {
 } from './ui/i18n';
 import { defaultIconPrewarmEntries, prewarmIconCache } from './ui/icon_prewarm';
 import { iconDataUrl } from './ui/icons';
-import { shouldShowSlowConnectionHint } from './ui/loading_slow_hint';
+import { shouldShowSlowConnectionHint } from './ui/loading_slow_hint_core';
 import { createLoadingTipRotation, type LoadingTipRotation } from './ui/loading_tips';
 import { showMobileWalletLauncher } from './ui/mobile_wallet_launcher';
 import { applyNativeDeviceLanguage } from './ui/native_language';
@@ -807,7 +807,15 @@ function setLoadingProgress(done: number, total: number): void {
 
 // Warns once progress has gone quiet for a while (typical on a throttled or
 // lossy connection) so the loading screen does not look frozen while the
-// cosmetic tip keeps rotating underneath it; see loading_slow_hint.ts.
+// cosmetic tip keeps rotating underneath it; see loading_slow_hint_core.ts.
+//
+// Only watches the network-bound phase: setLoadingProgress (fed solely by
+// assetsReady, see enterWorld below) is the only writer of
+// lastLoadingProgressAt, so the watch is stopped as soon as assets finish
+// (stopSlowConnectionWatch there) rather than left armed through the
+// CPU-bound scene-build stretch that follows (mountGameUi, prewarmInitialScene,
+// two rAFs to first frame), which can exceed the threshold on a slow device
+// with a perfectly fine connection and would misattribute the stall.
 function startSlowConnectionWatch(): void {
   lastLoadingProgressAt = Date.now();
   if (slowHintTimer !== null) return;
@@ -824,8 +832,11 @@ function stopSlowConnectionWatch(): void {
   setSlowConnectionHintVisible(false);
 }
 
+// index.html AND play.html both load this module, but the element only
+// exists as inline markup on both entries; still null-guarded to survive any
+// future entry drift without throwing on this frequently-hit interval path.
 function setSlowConnectionHintVisible(visible: boolean): void {
-  $('#ls-slow-hint').classList.toggle('visible', visible);
+  document.querySelector('#ls-slow-hint')?.classList.toggle('visible', visible);
 }
 
 // Rotating "did you know" copy under the progress bar, purely cosmetic (no
@@ -975,6 +986,10 @@ async function startGame(
     fatalOverlay(t('loading.assetsFailed', { error: technicalErrorMessage(err) }));
     return;
   }
+  // Assets are the only network-bound phase the slow-connection hint can
+  // speak to; everything after this is synchronous CPU-bound scene build, so
+  // stop watching here rather than leaving it armed through hideLoadingScreen.
+  stopSlowConnectionWatch();
   const spectateBadge = createSpectateBadge();
   setLoadingStatus(t('loading.enteringWorld'));
   // Let the final status + full progress bar paint before the synchronous
