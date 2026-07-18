@@ -57,30 +57,27 @@ if (MODE === 'mobile') {
 // this change targets, rather than the already-full-height vendor-open split.
 const HEROIC = process.env.HEROIC === '1';
 
-await page.evaluate(
-  (heroic) => {
-    const g = window.__game;
-    if (heroic) {
-      const npc = [...g.sim.entities.values()].find((e) => e.templateId === 'heroic_quartermaster');
-      if (!npc) throw new Error('heroic_quartermaster not spawned');
-      g.sim.player.pos = { x: npc.pos.x + 1.5, y: npc.pos.y, z: npc.pos.z + 1.5 };
-      g.sim.player.prevPos = { ...g.sim.player.pos };
-      g.sim.addItem('heroic_mark', 14, g.sim.player.id);
-      g.sim.tick();
-      g.hud.openHeroicVendor(npc.id);
-      return;
-    }
-    const wilkes = [...g.sim.entities.values()].find((e) => e.templateId === 'trader_wilkes');
-    if (!wilkes) throw new Error('trader_wilkes not spawned');
-    g.sim.player.pos.x = wilkes.pos.x + 2;
-    g.sim.player.pos.z = wilkes.pos.z;
+await page.evaluate((heroic) => {
+  const g = window.__game;
+  if (heroic) {
+    const npc = [...g.sim.entities.values()].find((e) => e.templateId === 'heroic_quartermaster');
+    if (!npc) throw new Error('heroic_quartermaster not spawned');
+    g.sim.player.pos = { x: npc.pos.x + 1.5, y: npc.pos.y, z: npc.pos.z + 1.5 };
     g.sim.player.prevPos = { ...g.sim.player.pos };
-    g.sim.copper = 500;
+    g.sim.addItem('heroic_mark', 14, g.sim.player.id);
     g.sim.tick();
-    g.hud.openVendor(wilkes.id);
-  },
-  HEROIC,
-);
+    g.hud.openHeroicVendor(npc.id);
+    return;
+  }
+  const wilkes = [...g.sim.entities.values()].find((e) => e.templateId === 'trader_wilkes');
+  if (!wilkes) throw new Error('trader_wilkes not spawned');
+  g.sim.player.pos.x = wilkes.pos.x + 2;
+  g.sim.player.pos.z = wilkes.pos.z;
+  g.sim.player.prevPos = { ...g.sim.player.pos };
+  g.sim.copper = 500;
+  g.sim.tick();
+  g.hud.openVendor(wilkes.id);
+}, HEROIC);
 await new Promise((r) => setTimeout(r, 700));
 await page.screenshot({ path: OUT });
 console.log('shot:', OUT);
