@@ -4854,7 +4854,13 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
   // enterWorld/takeOverAndEnter paths the pre-login char-select screen uses.
   let latestRoster: CharacterSummary[] = [];
   const switchWelcomeCharacter = (characterId: number) => {
-    if (started || characterId === c.id) return;
+    // The roster rail paints (and is clickable) as soon as its fetch resolves,
+    // which can race the 'hello' handshake: the server only attaches its
+    // message listener once join() resolves, so a logout sent before
+    // world.connected goes true is silently dropped and the outgoing
+    // character is stuck linkdead for the full 5-minute grace. Gate on the
+    // same readiness condition the Continue button already uses.
+    if (started || characterId === c.id || !world.connected) return;
     const target = latestRoster.find((x) => x.id === characterId);
     if (!target) return;
     void switchCharacter(target, {

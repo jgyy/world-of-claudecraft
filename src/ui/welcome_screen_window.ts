@@ -136,6 +136,12 @@ export function mountWelcomeScreen(
   let connectionReady = deps.platform.offline;
   let focusHandle: FocusTrapHandle | null = null;
   let stageHandle: { release(): void } | null = null;
+  // The Discord-join and Continue buttons are static elements in index.html,
+  // not created per mount; the character-switch rail re-mounts this window on
+  // the same root, so a plain addEventListener below would stack a duplicate
+  // handler on every switch. Scope both to this mount's controller via one
+  // AbortController, aborted in destroy().
+  const mountAbort = new AbortController();
 
   function paintHeader(): void {
     const h = deps.header();
@@ -227,6 +233,7 @@ export function mountWelcomeScreen(
     }
     rosterEl.hidden = false;
     rosterEl.textContent = '';
+    rosterEl.setAttribute('role', 'listbox');
     const title = document.createElement('div');
     title.className = 'ws-roster-title';
     title.textContent = t('welcome.roster.title');
@@ -235,6 +242,8 @@ export function mountWelcomeScreen(
       const item = document.createElement('button');
       item.type = 'button';
       item.className = 'ws-roster-row';
+      item.setAttribute('role', 'option');
+      item.setAttribute('aria-selected', String(row.selected));
       if (row.selected) item.classList.add('sel');
       item.disabled = row.disabled;
       if (row.titleKey) item.title = t(row.titleKey);
@@ -243,9 +252,10 @@ export function mountWelcomeScreen(
       name.textContent = row.name;
       const meta = document.createElement('span');
       meta.className = 'ws-roster-meta';
-      meta.textContent = [t('welcome.level', { level: row.level }), classDisplayName(row.class)]
-        .filter(Boolean)
-        .join(' · ');
+      meta.textContent = t('character.levelClass', {
+        level: row.level,
+        className: classDisplayName(row.class),
+      });
       item.append(name, meta);
       if (!row.selected) {
         const action = document.createElement('span');
@@ -303,15 +313,23 @@ export function mountWelcomeScreen(
     newsEl.innerHTML = renderWelcomeNews(markNewReleases(releases, lastSeen), GITHUB_RELEASES_URL);
   }
 
-  discordJoinBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.open(discordInviteUrl(), '_blank', 'noopener,noreferrer');
-  });
+  discordJoinBtn?.addEventListener(
+    'click',
+    (e) => {
+      e.preventDefault();
+      window.open(discordInviteUrl(), '_blank', 'noopener,noreferrer');
+    },
+    { signal: mountAbort.signal },
+  );
 
-  continueBtn?.addEventListener('click', () => {
-    if (continueBtn.disabled) return;
-    deps.onContinue();
-  });
+  continueBtn?.addEventListener(
+    'click',
+    () => {
+      if (continueBtn.disabled) return;
+      deps.onContinue();
+    },
+    { signal: mountAbort.signal },
+  );
 
   function onKeydown(e: KeyboardEvent): void {
     if (root.hidden) return;
@@ -404,6 +422,7 @@ export function mountWelcomeScreen(
 
   function destroy(): void {
     root.removeEventListener('keydown', onKeydown);
+    mountAbort.abort();
     focusHandle?.release();
     focusHandle = null;
     armoryCard?.dismiss();

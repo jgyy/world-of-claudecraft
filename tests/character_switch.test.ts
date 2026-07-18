@@ -78,4 +78,21 @@ describe('switchCharacter', () => {
     await switchCharacter(char({ id: 6, online: false }), collaborators);
     expect(confirmed).toBe(false);
   });
+
+  // Regression: hasBegunWorldEntry in src/main.ts used to be a page-load
+  // one-shot latch that nothing ever reset, so the SECOND enterWorld() call
+  // in a row (A -> B, then B -> C) bailed out of prepareWorldEntry() and
+  // silently dead-ended with no world, no welcome screen, and no error
+  // overlay. Each switch here uses its own teardown/enter collaborators (the
+  // way main.ts's switchWelcomeCharacter closure does per call), so this
+  // pins that BOTH switches actually reach enter, not just the first.
+  it('tears down and enters correctly across two switches in a row', async () => {
+    const first = collabHarness();
+    await switchCharacter(char({ id: 10, online: false }), first.collaborators);
+    expect(first.calls).toEqual(['teardown', 'enter:10']);
+
+    const second = collabHarness();
+    await switchCharacter(char({ id: 11, online: false }), second.collaborators);
+    expect(second.calls).toEqual(['teardown', 'enter:11']);
+  });
 });
