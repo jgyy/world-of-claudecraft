@@ -391,8 +391,11 @@ tables, i18n key namespaces, files created)
   a ClientWorld-shaped mirror). hcb is deliberately NOT in ALL_DELTA_KEYS or
   TERSE_TO_IWORLD: those pin selfWireJson maybe() self keys only (the scrape
   test asserts set-equality), and a per-entity dynamicFields key is pinned by
-  the round-trip + bandwidth tests instead; the phase file's pin instruction
-  was written for self keys (deviation reviewed, cross-platform-sync PASS).
+  its round-trip suites instead (the snapshots sparse-absence assertion is
+  the no-bloat tooth; bandwidth.test.ts stays green but carries no
+  hcb-specific scenario); the phase file's pin instruction was written for
+  self keys (deviation reviewed, cross-platform-sync PASS; as-landed note
+  swept into the phase file + QA twin by Phase 3 QA).
   Trade payload carriage pre-landed via PR 2045; Phase 3 added the
   bidirectional full-payload pin (tests/trade.test.ts) and the combo-gating
   liveness pin (tests/crafting_view_combo_liveness.test.ts: Sim and
@@ -405,15 +408,36 @@ tables, i18n key namespaces, files created)
     OPEN gate: a harvest-only corpse (tags, no regular loot) still never
     opens online, a pre-existing limitation, not a Phase 3 regression. Flip
     the three sites to trust the mirror, with an open-gate test, when
-    Phase 4 makes gathering trust corpse claims.
+    Phase 4 makes gathering trust corpse claims. Phase 4 heads-up (QA): the
+    client's despawn-grace window (online.ts anti-flicker retention) freezes
+    a boundary-lingering corpse's mirrored claim until the prune or a
+    re-entry record; harmless today because the picker acts at
+    INTERACT_RANGE, far inside the interest radius, but confirm the flipped
+    open gate still cannot act on a grace-window corpse.
   - Drift notes: instance-level boundTo copies are tradeable (tradeSetOffer
     gates only def-level soulbound; carried verbatim per #1298, possible
     design follow-up); vendor sellItem buyback still re-grants a plain copy
-    losing the payload (pre-existing, documented in trade.ts's header, out
-    of scope); the bareClient test fixture now has three hand-rolled copies
-    (snapshots, corpse_harvest_sim, combo liveness suites): rule-of-three
-    tripped, a shared tests/helpers/ extraction is a Phase 3 QA or Phase 15
-    cleanup candidate.
+    losing the payload (pre-existing, documented in the removeOffer comment
+    in trade.ts, out of scope); the bareClient fixture is hand-rolled in 21
+    test files repo-wide (tests/CLAUDE.md blesses the idiom; the three
+    professions suites are byte-near-identical copies): Phase 3 QA judged
+    the extraction a standalone chore, not QA churn (a shared
+    tests/helpers/bare_client.ts adopted first by the three identical
+    copies; the 18 divergent variants need per-file verification; filed
+    as issue 2088).
+  - Phase 3 QA: PASS 2026-07-17, zero blocking. Found and fixed
+    test-first the tradeConfirm sequencing defect in the pre-landed
+    PR 2045 code (same-itemId bidirectional trades cross-contaminated:
+    grant-before-remove let the second removal consume just-granted
+    stock; now two-phase, removeOffer both sides then grantOffer both
+    sides, matching the fitsAfterSwap model; no dupe or loss existed,
+    conservation always held). Coverage closed: live GameServer
+    broadcast suite for hcb (lite delta record + scope
+    eviction/re-entry, claims and clears made out of view),
+    partial-stack sparing pin, no-escrow cancel pin, claimed-corpse
+    arms of corpseLootAvailability. Reviewer fan-out (architecture,
+    cross-platform-sync, test-coverage-auditor with revert
+    experiments, qa-checklist): all PASS. Details in progress.md.
 - Phase 4: (planned) node material tables; per-node-type rare events
   (pristine vein / ancient heartwood / moonlit bloom) + deed-mark hooks.
 - Phase 5: (planned) professions window (.window id professions-window) +

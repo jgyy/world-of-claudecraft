@@ -12,7 +12,7 @@ Update this file at the end of every implementation and QA session. Statuses:
 | 2 | Masterwork model | complete | 2026-07-17 | 2026-07-17 |
 | 2 QA | Verify masterwork model | complete | 2026-07-17 | 2026-07-17 |
 | 3 | Host-parity bug fixes | complete | 2026-07-17 | 2026-07-17 |
-| 3 QA | Verify host-parity bug fixes | not started | | |
+| 3 QA | Verify host-parity bug fixes | complete | 2026-07-17 | 2026-07-17 |
 | 4 | Node materials and pristine veins | not started | | |
 | 4 QA | Verify node materials and pristine veins | not started | | |
 | 5 | The professions wheel window | not started | | |
@@ -103,7 +103,39 @@ Mixed-fleet safety verified: the previous release's HUD event if-chain
 ignores unknown SimEvent types, so a new server's masterwork event is
 harmless to an old client.
 
-### Phase 3: Host-parity bug fixes
+Phase 3 QA (2026-07-17): PASS, zero blocking findings across the
+packet's three audit roles plus the matched dispatch-matrix rows
+(architecture, cross-platform sync, pin quality, qa-checklist;
+privacy/security, migration safety, frontend seam, and database
+performance were NO-MATCH for the QA diff). One real correctness
+defect found and fixed test-first, in the pre-landed PR 2045 trade
+code rather than the phase diff: tradeConfirm ran the a-to-b transfer
+to completion before removing b's give, so same-itemId bidirectional
+trades cross-contaminated (a swapped instance bounced straight back
+to its owner; a plain-for-instance offer spared the instance and
+mis-routed a plain copy). The swap is now two-phase (removeOffer both
+sides, then grantOffer both sides), matching the model fitsAfterSwap
+already validated; conservation held in all variants, so no dupe or
+loss ever occurred. QA landed: the two sequencing repro pins (revert
+experiment confirms both red on the old code and only they guard the
+reorder), a partial-stack sparing pin (removePreferFungible must
+choose), a no-escrow cancel contract pin, the live GameServer
+broadcast suite for hcb (claim-after-first-sight arrives as a lite
+dyn-only record, pinned by hcb-present plus no-nm; interest-scope
+eviction and re-entry deliver claims AND clears made out of view, and
+a delta-guarded mirror mutation reds the clear arm), and the
+claimed-corpse arms of corpseLootAvailability (self-claimed viewer,
+claimed-by-another, claimed-with-personal-loot stays openable). Docs:
+the hcb as-landed deviation swept into the phase file and QA twin
+(the amend-the-twin trap), the phantom bandwidth hcb pin claim
+corrected (the snapshots sparse-absence assertion is the no-bloat
+tooth), the bareClient drift note rescoped to the real 21-copy
+repo-wide idiom (extraction filed as #2088, a standalone chore), and
+the Phase 4 despawn-grace heads-up recorded. Deferred with reasons: a
+bandwidth claimed-corpse scenario (docs now truthful instead; the
+sparse-absence pin covers the regression that matters) and a
+distinct-itemId slot-order byte-equivalence pin (the push-to-end plus
+splice-compaction reasoning is airtight per the architecture review).
 - [x] Trade carries `ItemInstancePayload` end to end (regression test)
 - [x] `harvestClaimedBy` mirrored online; corpse picker stops offering claimed corpses
 - [x] Crafting view consumes the shared combo-eligibility rule in both hosts
@@ -117,7 +149,9 @@ emit, unconditional ClientWorld reset in src/net/online.ts), pinned by
 the round-trip suite in tests/snapshots.test.ts and the online-picker
 parity suite in tests/corpse_harvest_sim.test.ts; hcb is deliberately
 NOT in ALL_DELTA_KEYS / TERSE_TO_IWORLD (those pin selfWireJson maybe()
-self keys; the per-entity round-trip + bandwidth pins are the teeth).
+self keys; the per-entity round-trip pins are the teeth, with the
+snapshots sparse-absence assertion as the no-bloat pin; bandwidth stays
+green but has no hcb-specific scenario).
 Combo-gating liveness pinned in
 tests/crafting_view_combo_liveness.test.ts (Sim and ClientWorld arms
 fed by a real cprof broadcast; decisiveness mutation-tested). Review

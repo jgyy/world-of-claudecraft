@@ -403,8 +403,6 @@ export const TARGETS = [
         if (!game) return;
         const fakePage = {
           leaders: [
-            // deedCount rides the wire for stale clients (issue #2044); the
-            // pre-change painter renders it, the current one never reads it.
             {
               rank: 1,
               name: 'Aldwin',
@@ -412,7 +410,6 @@ export const TARGETS = [
               cls: 'warrior',
               level: 20,
               renown: 1620,
-              deedCount: 129,
               title: 'prog_veteran',
             },
             {
@@ -422,7 +419,6 @@ export const TARGETS = [
               cls: 'mage',
               level: 20,
               renown: 1490,
-              deedCount: 117,
               title: null,
             },
             {
@@ -432,7 +428,6 @@ export const TARGETS = [
               cls: 'priest',
               level: 19,
               renown: 1390,
-              deedCount: 112,
               title: null,
             },
             {
@@ -442,7 +437,6 @@ export const TARGETS = [
               cls: 'rogue',
               level: 20,
               renown: 1350,
-              deedCount: 108,
               title: 'prog_veteran',
             },
             {
@@ -452,7 +446,6 @@ export const TARGETS = [
               cls: 'druid',
               level: 18,
               renown: 1245,
-              deedCount: 97,
               title: null,
             },
           ],
