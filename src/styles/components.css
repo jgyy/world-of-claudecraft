@@ -5851,12 +5851,15 @@
   /* ---------- social ---------- */
   /* social: friends / guild / ignore */
   #social-window {
-    /* Wider than the other windows: the tab rail carries FIVE tabs (Friends,
-       Guild, Ignored, Blocked, Raid) whose labels are locale-sized, and the guild
+    /* Landscape shape: wide enough that the friend/guild/ignore/block lists lay
+       out as a two-column masonry (`.soc-body`'s `columns` below) instead of one
+       long stacked scroll, and the raid tab's two groups sit side by side
+       (`.raid-groups`). The tab rail still carries FIVE tabs (Friends, Guild,
+       Ignored, Blocked, Raid) whose labels are locale-sized, and the guild
        roster rows carry a name + rank + zone + last-seen line. */
-    width: 520px;
+    width: 760px;
     max-width: calc(100vw - 24px);
-    height: 560px;
+    height: 480px;
     max-height: calc(100vh - 24px);
     flex-direction: column;
     overflow-x: hidden;
@@ -5917,11 +5920,22 @@
     border-color: #6f5a2a;
     background: linear-gradient(#2a2436, #161220);
   }
+  /* Multi-column landscape layout: `columns: <min-width> <max-count>` lets the
+     browser lay the friends/guild/ignore/block rows out in up to two columns
+     while the window is wide, and collapse back to one column on its own once
+     the available width drops below two 260px columns (no separate media query
+     needed; the mobile-touch override below still forces one column explicitly
+     since the window is pinned to `width: auto` there). Each row opts out of
+     being split mid-row with `break-inside`; the guild header and the empty/
+     notice states span the full width with `column-span: all` so they read as
+     one banner across both columns instead of only the first. */
   .soc-body {
     overflow-y: auto;
     overflow-x: hidden;
     flex: 1;
     min-height: 80px;
+    columns: 260px 2;
+    column-gap: var(--spacing-md);
   }
   .soc-row {
     display: flex;
@@ -5931,6 +5945,7 @@
     font-size: 13px;
     padding: 6px 6px;
     border-radius: 4px;
+    break-inside: avoid;
   }
   .soc-row > span:not(.soc-dot):not(.soc-meta):not(.soc-actions) {
     min-width: 0;
@@ -6146,32 +6161,53 @@
     font-size: 12px;
     padding: 10px 6px;
     text-align: center;
+    column-span: all;
   }
   .soc-empty-action {
     margin-top: 12px;
+    column-span: all;
   }
   .soc-guild-head {
     font-family: var(--title-font);
     color: var(--gold);
     font-size: 15px;
     padding: 2px 4px 6px;
+    column-span: all;
   }
   .soc-guild-head .gm {
     color: var(--color-text-muted);
     font-size: 11px;
   }
+  /* Raid tab: the two groups sit side by side in the landscape window (falling
+     back to stacked below the two-column width). It escapes the multi-column
+     flow above (`column-span: all`) so it keeps its own explicit grid instead
+     of being split across the `.soc-body` columns. */
   .raid-groups {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+    column-span: all;
   }
+  @media (max-width: 640px) {
+    .raid-groups {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* No divider between the two side-by-side groups (a vertical rule would need
+     its own column-gap border trick); the stacked mobile fallback below 640px
+     restores the horizontal divider between them. */
   .raid-group {
-    border-top: 1px solid #3d3218;
-    padding-top: 6px;
-  }
-  .raid-group:first-child {
-    border-top: 0;
     padding-top: 0;
+  }
+  @media (max-width: 640px) {
+    .raid-group {
+      border-top: 1px solid #3d3218;
+      padding-top: 6px;
+    }
+    .raid-group:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
   }
   .raid-row .soc-actions {
     margin-left: 0;

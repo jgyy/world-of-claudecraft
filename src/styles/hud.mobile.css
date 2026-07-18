@@ -2803,6 +2803,15 @@
     padding-inline: 10px;
     white-space: nowrap;
   }
+  /* The desktop landscape layout lays friend/guild/ignore/block rows out in up
+     to two columns (`.soc-body`'s `columns: 260px 2`); on a touch-narrow window
+     that always collapses on its own, but pin it explicitly so a stacked single
+     column is guaranteed regardless of the computed width, matching every other
+     mobile list in this window (raid groups collapse the same way below 640px
+     in components.css). */
+  body.mobile-touch #social-window .soc-body {
+    columns: 1;
+  }
   body.mobile-touch .vendor-item,
   body.mobile-touch .bag-item,
   body.mobile-touch .mkt-tab,

@@ -265,6 +265,21 @@ export const TARGETS = [
     },
   },
   {
+    key: 'social-window',
+    label: 'Social window (Friends tab, landscape layout)',
+    when: ['ui/social_window'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    async capture(page) {
+      await page.evaluate(() => {
+        const el = document.querySelector('#social-window');
+        if (el) el.classList.remove('open');
+        window.__game?.hud?.toggleSocial?.();
+      });
+      const open = await pollForSize(page, '#social-window');
+      return open ? { clip: '#social-window' } : {};
+    },
+  },
+  {
     key: 'chat-general-tab',
     label: 'Chat window: General/Chat tab',
     when: ['log_event_route'],
