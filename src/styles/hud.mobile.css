@@ -2652,9 +2652,6 @@
       margin-top: 0;
     }
   }
-  body.mobile-touch #vendor-window {
-    max-height: calc(58vh - 20px);
-  }
   /* The Market carries a tab strip plus the filter selects, which stack to a tall
      single column on mobile; the vendor's 58vh cap would leave the flex:1 listing
      body (#market-body) zero height, so it collapsed and could not be scrolled.
@@ -3106,7 +3103,20 @@
   body.mobile-touch #quest-dialog {
     width: clamp(320px, 76vw, 680px);
     max-width: calc(100vw - 20px);
+  }
+  body.mobile-touch #quest-log-window,
+  body.mobile-touch #quest-dialog {
     max-height: calc(var(--app-vh) / var(--ui-scale, 1) - 92px);
+  }
+  /* The vendor goods grid used to stop well short of the bottom of the screen
+     (a shorter clamp shared with quest-log/quest-dialog), leaving the character
+     and player HUD elements visible underneath. The vendor window is already a
+     modal that blocks world input while open (same reasoning as #char-window
+     above), so it is fine to run all the way top to bottom instead: only the
+     12px top offset from the centered-sheet base and a matching bottom margin
+     are reserved. */
+  body.mobile-touch #vendor-window {
+    max-height: calc(100dvh - 12px - max(10px, env(safe-area-inset-bottom)));
   }
   /* Narrower size group: spellbook rows and the options form controls read fine
      at a tighter width, so these stay a compact centered card rather than

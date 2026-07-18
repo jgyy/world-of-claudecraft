@@ -4568,11 +4568,11 @@
      vendor relayout to landscape grid). The sell-junk button, buyback
      section title, empty state and hint stay full-width outside the grid. */
   #vendor-window {
-    width: min(640px, 92vw);
+    width: min(860px, 92vw);
   }
   .vendor-goods-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 6px;
   }
   .vendor-item {
