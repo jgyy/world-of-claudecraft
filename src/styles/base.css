@@ -484,15 +484,21 @@
     pointer-events: none;
   }
 
+  /* Carved-wood frame (fantasy HUD redesign phase 1, DESIGN.md section 3): a
+     heavier bronze-gold border, a warm inner bevel highlight, and a rounder
+     radius so the panel reads as a carved wood-and-parchment artifact rather
+     than a thin-edged flat card. Single primitive, retuned values only: same
+     border + outline + inset-highlight + inset-vignette mechanism as before. */
   .panel {
     background: var(--panel-bg);
-    border: 2px solid var(--border);
+    border: 3px solid var(--border);
     outline: 1px solid #000;
-    border-radius: 6px;
+    border-radius: 10px;
     box-shadow:
-      0 2px 16px #000c,
-      inset 0 0 24px #0006,
-      inset 0 1px 0 #ffffff14;
+      0 3px 18px #000c,
+      inset 0 0 26px #0007,
+      inset 0 2px 0 var(--color-accent-glint, #ffe5a3aa),
+      inset 0 0 0 1px color-mix(in srgb, var(--gold-dim) 55%, transparent);
     color: var(--color-text-light);
   }
   .panel-title {

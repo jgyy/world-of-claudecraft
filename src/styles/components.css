@@ -655,12 +655,18 @@
     outline: 3px solid var(--color-border-focus);
     outline-offset: 2px;
   }
+  /* Carved-wood embossed button (fantasy HUD redesign phase 1, DESIGN.md
+     section 10.1): the warm ember-red action fill is kept (it is the shared
+     "confirm/leave/disband" action colour across every window that reuses
+     .btn), retuned onto a bronze --control-border carve with a rounder
+     radius and a raised-bevel shadow so it reads as forged chrome rather
+     than a flat web button. */
   .btn {
     background: linear-gradient(#8a3326, #5a1d12 55%, #471409);
     color: #ffd9a0;
-    border: 1px solid #a86;
+    border: 1px solid var(--control-border, #a86);
     outline: 1px solid #000;
-    border-radius: 4px;
+    border-radius: 6px;
     padding: 6px 16px;
     font-size: 12.5px;
     cursor: var(--cursor-point);
@@ -671,6 +677,7 @@
     text-shadow: 1px 1px 1px #000;
     box-shadow:
       inset 0 1px 0 #ffffff2a,
+      inset 0 -2px 3px #00000055,
       0 2px 4px #0008;
     transition:
       filter var(--transition-speed),
@@ -681,6 +688,7 @@
     filter: brightness(1.25);
     box-shadow:
       inset 0 1px 0 #ffffff2a,
+      inset 0 -2px 3px #00000055,
       0 2px 4px #0008,
       0 0 8px var(--color-primary-glow);
   }
@@ -4023,6 +4031,8 @@
     color: var(--color-text-light);
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-sm);
+    /* Carved-wood engraved inset, fantasy HUD redesign phase 1. */
+    box-shadow: inset 0 1px 3px #00000080;
     font-family: var(--ui-font);
     font-size: 12px;
     cursor: var(--cursor-point);
@@ -4805,18 +4815,24 @@
     font-weight: 600;
     white-space: nowrap;
   }
+  /* Carved-wood embossed chip (fantasy HUD redesign phase 1): the --control-*
+     tokens are the same PR #2108 mechanism, re-based onto the warm wood/
+     parchment palette (src/ui/theme.ts, themeCssVars). */
   button.woc-balance {
     min-height: 28px;
     padding: 3px 7px;
-    border: 1px solid #6f592d;
-    border-radius: 4px;
-    background: rgb(200 163 74 / 10%);
+    border: 1px solid var(--control-border, #6f592d);
+    border-radius: 5px;
+    background: var(--control-bg, rgb(200 163 74 / 10%));
+    box-shadow:
+      inset 0 1px 0 #ffffff1a,
+      inset 0 -1px 2px #00000055;
     font: inherit;
     cursor: var(--cursor-pointer);
   }
   button.woc-balance:hover,
   button.woc-balance:focus-visible {
-    border-color: #c8a34a;
+    border-color: var(--color-border-focus, #c8a34a);
     color: #f3dfaa;
   }
   .woc-balance.is-preview {
@@ -5007,6 +5023,8 @@
     flex-wrap: wrap;
     gap: 4px;
   }
+  /* Carved-wood embossed chip (fantasy HUD redesign phase 1): --control-*
+     tokens are the PR #2108 mechanism, re-based onto the warm palette. */
   .bag-chip {
     font-family: var(--ui-font);
     font-size: 11px;
@@ -5014,8 +5032,9 @@
     padding: 5px 9px;
     min-height: 26px;
     border-radius: 11px;
-    border: 1px solid #5a4a2e;
-    background: #1c1812;
+    border: 1px solid var(--control-border, #5a4a2e);
+    background: var(--control-bg, #1c1812);
+    box-shadow: inset 0 1px 0 #ffffff1a;
     color: var(--color-text-muted);
     cursor: var(--cursor-point);
     white-space: nowrap;
@@ -5029,6 +5048,7 @@
     border-color: var(--gold-dim, #8a6f3a);
     color: #15110a;
     font-weight: 600;
+    box-shadow: inset 0 -1px 2px #00000055;
   }
   .bag-chip:focus-visible {
     outline: 2px solid var(--color-border-focus);
@@ -5049,6 +5069,7 @@
     gap: 6px;
     align-items: center;
   }
+  /* Carved-wood engraved inset (fantasy HUD redesign phase 1). */
   .bag-search {
     flex: 1 1 auto;
     min-width: 0;
@@ -5056,8 +5077,9 @@
     font-size: 16px;
     padding: 4px 7px;
     border-radius: 4px;
-    border: 1px solid #5a4a2e;
-    background: #14110b;
+    border: 1px solid var(--control-border, #5a4a2e);
+    background: var(--control-bg, #14110b);
+    box-shadow: inset 0 1px 3px #00000080;
     color: inherit;
   }
   .bag-search:focus-visible {
@@ -5070,8 +5092,9 @@
     font-size: 16px;
     padding: 4px 6px;
     border-radius: 4px;
-    border: 1px solid #5a4a2e;
-    background: #14110b;
+    border: 1px solid var(--control-border, #5a4a2e);
+    background: var(--control-bg, #14110b);
+    box-shadow: inset 0 1px 3px #00000080;
     color: inherit;
     cursor: var(--cursor-point);
   }

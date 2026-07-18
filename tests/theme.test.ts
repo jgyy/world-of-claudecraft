@@ -44,7 +44,7 @@ describe('theme pure core', () => {
   it('classic preset reproduces the shipped gold palette', () => {
     const vars = themeCssVars(THEME_PRESETS.classic);
     expect(vars['--gold']).toBe('#ffd100');
-    expect(vars['--border']).toBe('#6f5a2a');
+    expect(vars['--border']).toBe('#8a5c28');
     expect(vars['--color-text-light']).toBe('#f0ebd8');
     expect(vars['--color-hp']).toBe('#1eb838');
   });
@@ -56,9 +56,17 @@ describe('theme pure core', () => {
     expect(vars['--color-primary-glow']).toBe(rgba('#ffd100', 0.2));
     // panel-bg is a gradient built from the panel knob
     expect(vars['--panel-bg']).toContain('linear-gradient');
-    expect(vars['--panel-base']).toBe('#15151f');
+    expect(vars['--panel-base']).toBe('#1c130b');
     // scrollbar derives from border
-    expect(vars['--scrollbar-thumb-hover']).toBe('#6f5a2a');
+    expect(vars['--scrollbar-thumb-hover']).toBe('#8a5c28');
+  });
+
+  it('derives the carved-wood control tokens from bg-dark/border for every preset', () => {
+    for (const id of PRESET_ORDER) {
+      const vars = themeCssVars(resolveTheme({ preset: id, custom: {} }));
+      expect(isValidHex(vars['--control-bg']), `${id} --control-bg`).toBe(true);
+      expect(isValidHex(vars['--control-border']), `${id} --control-border`).toBe(true);
+    }
   });
 
   it('custom overrides win over the preset; absent knobs fall through', () => {

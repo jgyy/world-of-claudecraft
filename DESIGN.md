@@ -67,20 +67,25 @@ and CSS-discipline contracts from 13.2 to 13.4 gate the change.
 
 ## 2. Reference images and precedence
 
-Two approved design references are committed alongside this document:
+Five approved design references are committed alongside this document:
 
-1. `docs/design/design-language/desktop-style-reference.png`: the primary reference for
-   color, typography, translucency, gold edges, icon treatment, unit frames, chat, minimap,
-   and overall finish quality.
-2. `docs/design/design-language/desktop-approved-layout-reference.png`: the primary
+1. `docs/design/design-language/hud-style-reference-01.png` through `-03.png`: the
+   primary references for the phase-1-and-later carved wood-and-parchment-scroll
+   signature (section 3): panel materiality, corner ornamentation, warm palette,
+   the party frame, chat, minimap, tracker, and action bar composition.
+2. `docs/design/design-language/desktop-style-reference.png`: a secondary reference,
+   superseded by the images above for materiality and finish, still informative for
+   icon treatment and overall layout density.
+3. `docs/design/design-language/desktop-approved-layout-reference.png`: the primary
    reference for the approved right rail: minimap, then the Daily Rewards card, then the
-   objective tracker, then the 3 x 2 utility launcher.
+   objective tracker, then the 3 x 2 utility launcher (composition only; this phase does
+   not change the right-rail layout).
 
 Precedence when details conflict:
 
 1. This document.
-2. The style reference image.
-3. The approved layout reference image.
+2. The `hud-style-reference-*` images.
+3. The two legacy reference images.
 4. Standard MMORPG usability conventions.
 
 The images communicate direction: composition, materiality, and finish. Text, values,
@@ -105,18 +110,21 @@ All measurements in this document are authored CSS pixels at `--ui-scale` 1 on a
 
 Every major UI surface carries all four traits:
 
-1. **Blue-black translucent fill.** A cool midnight surface: never pure black, never bright
-   navy, and the world stays faintly visible through standard panels.
-2. **Fine gold edge.** A one-pixel antique-gold border between a dark outer keyline and a
-   faint warm inner highlight. Never a thick solid yellow border.
+1. **Warm carved-wood fill.** A dark umber-brown surface (never blue-tinted, never pure
+   black): the panel reads as stained wood and parchment, not midnight metal.
+2. **Heavier bronze-and-gold edge.** A carved bronze-gold border (`--border`, phase-1
+   value `#8a5c28`) between a dark outer keyline and a warm inner bevel highlight: still a
+   frame, not a thick solid yellow border, but noticeably heavier than a hairline.
 3. **Warm parchment text.** Primary text is cream parchment, not pure white. Pure white is
    reserved for tiny highlights and high-value numerics.
-4. **Layered depth.** A restrained drop shadow, a subtle inner top highlight, and a soft
-   inner vignette. Dimensional, never glossy.
+4. **Layered depth.** A restrained drop shadow, a warm inner bevel highlight, and a soft
+   inner vignette. Dimensional and carved, never glossy, never flat.
 
 The current `.panel` chrome in `src/styles/base.css` already has this structure (border plus
-black outline plus inset highlight plus inset vignette); this program retunes its values, it
-does not invent a new mechanism.
+black outline plus inset highlight plus inset vignette); phase 1 of this program retunes its
+values (heavier border, warmer palette, rounder radius) and does not invent a new mechanism.
+Corner ornamentation, the scalloped party-frame edge, and per-window body chrome are later
+phases (see the open follow-up work tracked alongside PR #2108's supersession).
 
 ## 4. Color
 
@@ -171,8 +179,8 @@ are retuned only as far as the contrast tests require.
 | Knob | Value | Note |
 |---|---|---|
 | `accent` | `#d8a645` | Antique gold: structural gold is dark and desaturated by design. |
-| `border` | `#926321` | Bronze-gold frame borders. |
-| `panel` | `#12232c` | Midnight blue-black; `themeCssVars` derives the panel gradient and `--panel-edge` from it. |
+| `border` | `#8a5c28` | Bronze-gold frame borders (phase 1 warm-wood retune). |
+| `panel` | `#1c130b` | Warm carved-wood umber; `themeCssVars` derives the panel gradient and `--panel-edge` from it. |
 | `text` | `#fff4d9` | Parchment primary text. |
 | `textMuted` | `#c4b590` | Warm muted parchment. |
 | `hp` | `#25c84a` | Warm health green. |
@@ -264,8 +272,8 @@ Untouchable color families (classic fidelity anchors, do not restyle):
 ### 4.4 Surfaces
 
 Panel fill is the themed gradient `--panel-bg`, derived by `themeCssVars` from the `panel`
-knob. With the new knob it lands near: `linear-gradient(170deg, #12232c 0%, #0a151c 60%,
-#0a151c 100%)` at around 0.90 alpha. Retune the derivation constants in `src/ui/theme.ts`,
+knob. With the phase-1 knob it lands near: `linear-gradient(170deg, #1c130b 0%, #0f0a06 60%,
+#0f0a06 100%)` at around 0.95 alpha. Retune the derivation constants in `src/ui/theme.ts`,
 not per-component CSS. Opacity targets:
 
 | Surface | Fill | Alpha target |
@@ -902,6 +910,14 @@ input floor stays. Scrollbars: 8px wide, transparent track; the thumb and border
 are theme-derived, so their retune (rest near `--color-gold-800`, hover near
 `--color-gold-500` on the classic preset) lands in the `themeCssVars` derivation constants
 in `src/ui/theme.ts`.
+
+**Carved-wood bevels (phase 1).** Chips, closed dropdowns, search/sort inputs, and small
+buttons (`.bag-chip`, `.bag-search`, `.bag-sort`, `.hud-select`, `.woc-balance`) consume
+the `--control-bg` / `--control-border` pair `themeCssVars` derives from the resolved
+`bg-dark`/`border` per preset: an engraved inset shadow on text inputs and closed
+dropdowns, an embossed raised shadow on buttons/chips, so every accent preset (including
+the light Parchment preset) keeps a readable, theme-consistent carve instead of a
+hardcoded dark literal.
 
 ## 11. Motion
 

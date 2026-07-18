@@ -16,11 +16,11 @@
   :root {
     --gold: #ffd100;
     --gold-dim: #c8a838;
-    --border: #6f5a2a;
+    --border: #8a5c28;
     /* --panel-base is the single themeable frame colour; --panel-bg derives the
        shipped gradient from it (overwritten wholesale by the theme system). */
-    --panel-base: #15151f;
-    --panel-bg: linear-gradient(170deg, #15151ff2 0%, #0b0b12f2 60%, #08080df2 100%);
+    --panel-base: #1c130b;
+    --panel-bg: linear-gradient(170deg, #1c130bf2 0%, #0f0a06f2 60%, #0f0a06f2 100%);
     /* Typography, Cinzel (heraldic display/headings), Alegreya Sans (UI + body),
        Alegreya (serif flavour prose). Legacy token names alias the canonical set
        so every existing usage resolves to the new system. */
@@ -61,9 +61,9 @@
     --color-debuff-nature: #35a835;
     --color-debuff-holy: #d8b56b;
 
-    --color-bg-dark: #08080d;
-    --color-bg-input: #0a0a0f;
-    --color-border-default: #4e3d1d;
+    --color-bg-dark: #0f0a06;
+    --color-bg-input: #0d0906;
+    --color-border-default: #68451e;
     --color-border-focus: #c8a838;
     --color-border-invalid: #ff8f85;
     --color-border-valid: #48e060;
@@ -78,7 +78,7 @@
     --color-accent: var(--gold);
     --color-text-overlay: #f4eede;
     --text-outline-color: #000000;
-    --panel-edge: #08080d;
+    --panel-edge: #0f0a06;
     --color-text-error: #ff8f85;
     --color-text-success: #7fdc4f;
     /* Item-name color for an item with no quality (bags_window.ts uses this token
@@ -174,10 +174,15 @@
     --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Custom scrollbar tokens */
-    --scrollbar-thumb: #5c4722;
-    --scrollbar-track: rgba(10, 10, 15, 0.7);
-    --scrollbar-thumb-hover: #7c6233;
-    --scrollbar-border: #7c6233;
+    --scrollbar-thumb: #754e22;
+    --scrollbar-track: rgba(15, 10, 6, 0.7);
+    --scrollbar-thumb-hover: #8a5c28;
+    --scrollbar-border: #8a5c28;
+    /* Carved-wood form-control bevels (mirrors the runtime themeCssVars
+       derivation in src/ui/theme.ts): the pre-boot classic-preset fallback so
+       controls don't flash unstyled before JS applies the theme. */
+    --control-bg: #0e0905;
+    --control-border: #754e22;
     --app-vw: 100vw;
     --app-vh: 100vh;
     /* effects tier (wired by src/ui/ui_effects_applier.ts from the pure

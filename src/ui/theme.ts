@@ -65,8 +65,8 @@ export const PRESET_ORDER: PresetId[] = ['classic', 'midnight', 'parchment', 'hi
 export const THEME_PRESETS: Record<PresetId, ThemeKnobs> = {
   classic: {
     accent: '#ffd100',
-    border: '#6f5a2a',
-    panel: '#15151f',
+    border: '#8a5c28',
+    panel: '#1c130b',
     text: '#f0ebd8',
     textMuted: '#998d6a',
     hp: '#1eb838',
@@ -248,6 +248,13 @@ export function themeCssVars(knobs: ThemeKnobs): Record<string, string> {
   // the glyph instead of separating it. The halo needs to sit on the opposite
   // side of the panel's lightness from the text, so flip it light there.
   const textOutline = lightPanel ? '#ffffff' : '#000000';
+  // Carved-wood form-control bevels (PR #2108's --control-* mechanism): an
+  // engraved inset shadow for text inputs/closed dropdowns and an embossed
+  // raised shadow for buttons/chips, both color-mix()'d from the resolved
+  // bg-dark/border pair so every preset (including light Parchment) keeps a
+  // readable, theme-consistent carve instead of a hardcoded dark literal.
+  const controlBg = mixHex(panelEdge, '#000000', 0.1);
+  const controlBorder = mixHex(border, '#000000', 0.15);
   return {
     '--gold': accent,
     '--gold-dim': accentDim,
@@ -273,6 +280,8 @@ export function themeCssVars(knobs: ThemeKnobs): Record<string, string> {
     '--color-mana': mana,
     '--color-rage': rage,
     '--color-energy': energy,
+    '--control-bg': controlBg,
+    '--control-border': controlBorder,
   };
 }
 
