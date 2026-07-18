@@ -1581,21 +1581,16 @@
       inset 0 -2px 3px #00000055,
       0 2px 4px #0009;
   }
-  /* Circular gilt-bronze ring on the icon art (fantasy HUD redesign phase 2,
-     reference screenshots' ability-icon treatment). The outer .action-btn
-     slot stays a square carved frame (the keybind/item-count/cdtext overlays
-     are absolutely positioned against ITS corners, unaffected by this). */
+  /* A phase 2 attempt gave this icon art a circular gilt-bronze ring; reverted
+     per review feedback (unwanted). Back to a plain square icon inset. */
   .action-btn .icon-label {
     position: absolute;
-    inset: 3px;
-    border-radius: 50%;
+    inset: 1px;
+    border-radius: 4px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     pointer-events: none;
-    box-shadow:
-      0 0 0 2px var(--gold-dim, #c8a838),
-      inset 0 0 0 1px #00000080;
   }
   .action-btn:hover {
     border-color: var(--gold);
@@ -1726,15 +1721,25 @@
   }
   /* micro-menu: bottom-right, stacked upward, sitting just above the
      Discord/GitHub buttons (both right-aligned to the same edge). */
+  /* Two-column icon rail (review feedback: the single vertical column of 17+
+     launcher buttons ran too tall). Daily Rewards stays a full-width card
+     above the grid; grid-template-columns sizes each column to the fixed
+     34px .micro-btn width, unaffected by the wider card since it spans
+     both columns. justify-content: end keeps the whole rail right-anchored,
+     matching the prior flex align-items: flex-end behavior. */
   #side-buttons {
     position: absolute;
     right: 16px;
     bottom: 74px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: end;
     gap: 4px;
     z-index: 19;
+  }
+  #side-buttons #daily-rewards-button {
+    grid-column: 1 / -1;
+    justify-self: end;
   }
   .micro-btn {
     width: 34px;
@@ -2276,27 +2281,17 @@
     pointer-events: none;
   }
   /* ---------- quest tracker ---------- */
-  /* Carved-wood card (fantasy HUD redesign phase 2, DESIGN.md section 4.4's
-     objective-tracker target: --panel-bg at the soft ~0.72 multiplier). The
-     tracker was previously bare overlay text with no card behind it; this is
-     the first time it gets one, so it stays click-through everywhere except
-     the header button and objective links (unchanged, both already carry
-     their own pointer-events: auto). */
+  /* A phase 2 attempt gave this a carved-wood card background, but with zero
+     active quests it rendered as a bare, purposeless rectangle over the
+     world (reported in review). Reverted to bare overlay text: no card
+     background until the tracker has a real empty-state rule that hides it
+     entirely rather than showing an empty box. */
   #quest-tracker {
     width: 100%;
-    box-sizing: border-box;
     font-size: 12px;
     color: var(--color-text-overlay);
     text-shadow: 1px 1px 2px #000;
     pointer-events: none;
-    background: color-mix(in srgb, var(--panel-base, #1c130b) 72%, transparent);
-    border: 2px solid var(--border);
-    outline: 1px solid #000;
-    border-radius: 8px;
-    padding: 8px 10px;
-    box-shadow:
-      0 2px 10px #000a,
-      inset 0 1px 0 #ffe5a355;
   }
   /* The header is a <button>: it re-enables pointer events over the otherwise
      click-through overlay and toggles the tracker's collapsed state. Native button
@@ -4430,26 +4425,9 @@
       opacity 0.2s ease,
       box-shadow 0.2s ease;
   }
-  /* Scalloped top-edge crest (fantasy HUD redesign phase 2, reference
-     screenshots' party-frame silhouette): a decorative bump centered on the
-     frame's top border, outside the padding box so it never overlaps the
-     name/HP text. Suppressed under the compact raid presentation below,
-     which keeps its own flush WoW-style row look. */
-  .party-frame::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: -7px;
-    width: 22px;
-    height: 10px;
-    transform: translateX(-50%);
-    background: var(--panel-bg);
-    border: 2px solid var(--border);
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
-    pointer-events: none;
-    z-index: 1;
-  }
+  /* A phase 2 attempt gave this frame a decorative scalloped top-edge crest;
+     reverted per review feedback (unwanted, read as a meaningless circle
+     over the name). Back to a plain rectangular .panel-derived frame. */
   /* Compact WoW-style raid presentation. The existing pooled row and painter remain
      unchanged: this profile only rearranges their stable DOM, so mouseover casts,
      absorbs, incoming healing, threat, Rewind, and auras share one implementation. */
