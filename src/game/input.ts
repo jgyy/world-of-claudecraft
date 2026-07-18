@@ -10,6 +10,7 @@ import { detectBrowserEngine } from './browser_env';
 import { cursorForHover, type HoverCursorKind } from './cursors';
 import { comboCode, isModifierCode, type Keybinds, makeCombo } from './keybinds';
 import {
+  inForcedPointerLockCooldown,
   pointerLockNeedsSyncGesture,
   shouldEngagePointerLock,
   shouldEngagePointerLockOnMouseDown,
@@ -176,6 +177,9 @@ export class Input {
   private lookPitchSign = 1;
   private downButton = -1;
   private pointerLockRequestedForDrag = false;
+  // Set when the browser itself force-unlocks the pointer (Escape, focus
+  // loss) while a drag button was still held; see inForcedPointerLockCooldown.
+  private forcedUnlockAt: number | null = null;
   // Firefox rejects requestPointerLock() when it is deferred to a later
   // mousemove; computed once since the browser cannot change mid-session.
   private readonly needsSyncPointerLockGesture = detectPointerLockNeedsSyncGesture();
@@ -242,6 +246,13 @@ export class Input {
     window.addEventListener('pointercancel', (e) => this.onMouseUp(e));
     document.addEventListener('pointerlockchange', () => {
       if (!document.pointerLockElement) {
+        // A forced unlock (Escape, or losing focus while locked) fires with a
+        // drag button still physically down, unlike our own end-of-drag
+        // exitPointerLock() call, which only ever runs after mouseup has
+        // already cleared leftDown/rightDown. Remember it so the next
+        // requestPointerLock() attempt can skip Firefox's post-forced-unlock
+        // cooldown instead of failing silently mid-drag (#1834 recurrence).
+        if (this.leftDown || this.rightDown) this.forcedUnlockAt = performance.now();
         this.releaseCapture('pointerlock');
         return;
       }
@@ -259,6 +270,13 @@ export class Input {
       ) {
         document.exitPointerLock();
       }
+    });
+    // A denied request (e.g. the forced-unlock cooldown above, or any other
+    // rejection) otherwise leaves pointerLockRequestedForDrag wrongly set to
+    // true with no lock actually granted; without this the drag never
+    // reconsiders requesting the lock again for the rest of that press.
+    document.addEventListener('pointerlockerror', () => {
+      this.pointerLockRequestedForDrag = false;
     });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) this.releaseCapture('hidden');
@@ -691,6 +709,10 @@ export class Input {
     return this.controllerFacing;
   }
 
+  private msSinceForcedUnlock(): number | null {
+    return this.forcedUnlockAt === null ? null : performance.now() - this.forcedUnlockAt;
+  }
+
   private releaseCapture(reason: string): void {
     const hadInput = this.keys.size > 0 || this.leftDown || this.rightDown;
     // Always drop the mouse-drag state so a button can't stick "held".
@@ -976,6 +998,10 @@ export class Input {
         needsSyncGesture: this.needsSyncPointerLockGesture,
         lockOnRotate: this.lockCursorOnRotate,
         alreadyLocked: document.pointerLockElement === this.canvas,
+      }) &&
+      !inForcedPointerLockCooldown({
+        needsSyncGesture: this.needsSyncPointerLockGesture,
+        msSinceForcedUnlock: this.msSinceForcedUnlock(),
       })
     ) {
       this.pointerLockRequestedForDrag = true;
@@ -1055,6 +1081,10 @@ export class Input {
           lockOnRotate: this.lockCursorOnRotate,
           isFullscreen: this.isBrowserFullscreen(),
           alreadyLocked: document.pointerLockElement === this.canvas,
+        }) &&
+        !inForcedPointerLockCooldown({
+          needsSyncGesture: this.needsSyncPointerLockGesture,
+          msSinceForcedUnlock: this.msSinceForcedUnlock(),
         })
       ) {
         this.pointerLockRequestedForDrag = true;
