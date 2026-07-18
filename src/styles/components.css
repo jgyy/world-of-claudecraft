@@ -1234,16 +1234,20 @@
   }
 
   /* ---------- quest log ---------- */
-  /* quest log */
+  /* quest log: widened to a landscape shape so the detail pane gets real
+     reading width instead of wrapping narrow, and the detail's own max-height
+     cap is dropped so it flows with the window's single outer scroll instead
+     of a second, nested 380px scroll region. */
   #quest-log-window {
-    width: 520px;
+    width: 880px;
+    max-width: calc(100vw - 40px);
   }
   #quest-log-window .ql-cols {
     display: flex;
     gap: 12px;
   }
   .ql-list {
-    width: 180px;
+    width: 220px;
     border-right: 1px solid #463a1c;
     padding-right: 8px;
   }
@@ -1269,7 +1273,7 @@
   .ql-detail {
     flex: 1;
     font-size: 12px;
-    max-height: 380px;
+    max-height: none;
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -5800,11 +5804,14 @@
      notice, and add-row footer flow inside the scrolling .window-body, matching the
      pre-frame whole-panel scroll. */
 
-  /* Quest log: the two panes (list + measure-capped detail) fill the scrolling
-     body. The frame body owns the outer scroll; the list scrolls with it and the
-     detail caps its own reading measure. */
+  /* Quest log: the two panes (list + detail) fill the scrolling body. The
+     frame body owns the outer scroll; the list scrolls with it. Widened to
+     the same 880px landscape footprint as the live #quest-log-window rule
+     above, and the detail pane's reading-measure cap widened to use the
+     extra width instead of leaving it narrow inside a much wider window. */
   #quest-log-window {
-    width: 520px;
+    width: 880px;
+    max-width: calc(100vw - 40px);
   }
   #quest-log-window .window-body .ql-cols {
     display: flex;
@@ -5814,7 +5821,7 @@
   }
   #quest-log-window .window-body .ql-detail {
     max-height: none;
-    max-width: 46ch;
+    max-width: 70ch;
   }
   #quest-log-window .window-footer .btn {
     min-width: 0;
