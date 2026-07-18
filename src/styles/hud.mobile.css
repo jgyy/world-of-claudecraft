@@ -3710,15 +3710,25 @@
     min-height: 40px;
     font-size: 16px;
   }
+  /* Fill the full available viewport height instead of a small fixed-size centered
+     box (issue: mobile Social window left most of the screen empty). Anchored from
+     the top safe area down to the bottom safe area, same full-height sheet pattern
+     as #bags: Social is a modal overlay (world input blocked while open), so it is
+     fine to extend behind the mobile bottom controls the same way #bags does. */
   body.mobile-touch #social-window {
     left: 50%;
     right: auto;
-    top: 44%;
+    top: max(10px, env(safe-area-inset-top));
     bottom: auto;
     width: min(430px, calc(var(--app-vw) / var(--ui-scale, 1) - 20px));
-    height: min(380px, calc(var(--app-vh) / var(--ui-scale, 1) - 116px));
-    max-height: calc(var(--app-vh) / var(--ui-scale, 1) - 116px);
-    transform: translate(-50%, -50%);
+    height: auto;
+    max-height: calc(
+      100dvh -
+      max(10px, env(safe-area-inset-top)) -
+      max(10px, env(safe-area-inset-bottom))
+    );
+    transform: translateX(-50%);
+    box-sizing: border-box;
     z-index: 45;
   }
   body.mobile-touch #map-window {
