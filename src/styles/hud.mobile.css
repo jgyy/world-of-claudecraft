@@ -2804,13 +2804,26 @@
     white-space: nowrap;
   }
   /* The desktop landscape layout lays friend/guild/ignore/block rows out in up
-     to two columns (`.soc-body`'s `columns: 260px 2`); on a touch-narrow window
-     that always collapses on its own, but pin it explicitly so a stacked single
-     column is guaranteed regardless of the computed width, matching every other
-     mobile list in this window (raid groups collapse the same way below 640px
-     in components.css). */
+     to two columns (`.soc-body`'s `grid-template-columns: repeat(auto-fill,
+     minmax(260px, 1fr))`); on a touch-narrow window that always collapses on
+     its own, but pin it explicitly so a stacked single column is guaranteed
+     regardless of the computed width, matching every other mobile list in
+     this window (raid groups collapse the same way below, on this same
+     `body.mobile-touch` selector rather than a viewport media query, since
+     it is the WINDOW's width, not the viewport's, that decides). */
   body.mobile-touch #social-window .soc-body {
-    columns: 1;
+    grid-template-columns: 1fr;
+  }
+  body.mobile-touch .raid-groups {
+    grid-template-columns: 1fr;
+  }
+  body.mobile-touch .raid-group {
+    border-top: 1px solid #3d3218;
+    padding-top: 6px;
+  }
+  body.mobile-touch .raid-group:first-child {
+    border-top: 0;
+    padding-top: 0;
   }
   body.mobile-touch .vendor-item,
   body.mobile-touch .bag-item,
@@ -3714,18 +3727,26 @@
      box (issue: mobile Social window left most of the screen empty). Anchored from
      the top safe area down to the bottom safe area, same full-height sheet pattern
      as #bags: Social is a modal overlay (world input blocked while open), so it is
-     fine to extend behind the mobile bottom controls the same way #bags does. */
+     fine to extend behind the mobile bottom controls the same way #bags does.
+     #social-window lives inside #ui, which applies `zoom: var(--ui-scale)`, so a
+     raw `100dvh` renders scaled by that zoom (e.g. 960px at uiScale 1.2 on an
+     800px-tall viewport) rather than the real screen height. `--app-vh` is the
+     unscaled viewport-height box every other window's max-height divides by
+     `--ui-scale`; the safe-area offsets that make up the rest of this calc need
+     the same division so they land at their real screen size once zoom re-scales
+     them back up. */
   body.mobile-touch #social-window {
     left: 50%;
     right: auto;
-    top: max(10px, env(safe-area-inset-top));
+    top: calc(max(10px, env(safe-area-inset-top)) / var(--ui-scale, 1));
     bottom: auto;
     width: min(430px, calc(var(--app-vw) / var(--ui-scale, 1) - 20px));
     height: auto;
     max-height: calc(
-      100dvh -
-      max(10px, env(safe-area-inset-top)) -
-      max(10px, env(safe-area-inset-bottom))
+      var(--app-vh) /
+      var(--ui-scale, 1) -
+      (max(10px, env(safe-area-inset-top)) / var(--ui-scale, 1)) -
+      (max(10px, env(safe-area-inset-bottom)) / var(--ui-scale, 1))
     );
     transform: translateX(-50%);
     box-sizing: border-box;
