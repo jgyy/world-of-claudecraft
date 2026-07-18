@@ -43,3 +43,13 @@ describe('desiredBaseState: stunned precedence', () => {
     expect(desiredBaseState({ ...BASE, stunned: true, airborne: true }, false)).toBe('jump');
   });
 });
+
+describe('desiredBaseState: swim keeps its pre-existing precedence over spin', () => {
+  it('reads as swim, not spin, for a self-centered channel (Bladestorm) while swimming', () => {
+    expect(desiredBaseState({ ...BASE, swimming: true, spinning: true }, false)).toBe('swim');
+  });
+
+  it('spin still wins over cast/sit/move on dry land, unaffected by the stunned insertion', () => {
+    expect(desiredBaseState({ ...BASE, spinning: true, casting: true }, false)).toBe('spin');
+  });
+});

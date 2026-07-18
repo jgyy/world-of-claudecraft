@@ -1213,7 +1213,14 @@ export class CharacterVisual {
 
   private fadeTo(next: THREE.AnimationAction | null, fade: number, oneShot: boolean): void {
     if (!next) return;
-    if (next === this.current && !oneShot) return;
+    // A base pose can resolve to the SAME AnimationAction a one-shot just
+    // finished on (e.g. the stunned pose falling back to a single-clip rig's
+    // hit-react, which playHit() also uses as its one-shot). That one-shot
+    // left the action LoopOnce + clamped on its last frame; skipping the
+    // re-fade here (the plain next===current check) leaves the rig frozen on
+    // that final frame instead of resuming the loop. Only skip when the
+    // action is ALREADY looping: that is the real no-op case.
+    if (next === this.current && !oneShot && next.loop === THREE.LoopRepeat) return;
     const prev = this.current;
     next.reset();
     next.setLoop(oneShot || this.isOnce(next) ? THREE.LoopOnce : THREE.LoopRepeat, Infinity);

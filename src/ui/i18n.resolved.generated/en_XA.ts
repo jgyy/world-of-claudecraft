@@ -295,7 +295,7 @@ export const en_XA: EnTranslations = {
         "locked": "[Ýóú ĥáʋé ñóţ úñļóçķéð ţáļéñţš ýéţ: ţĥéý ƀéĝíñ áţ ļéʋéļ {level}.]",
         "noSpec": "[ñó šþéçíáļížáţíóñ]",
         "rowsSummary": "[Ţáļéñţš: {head}, {picked}/{unlocked} çĥóíçé ŕóŵš þíçķéð.]",
-        "summary": "[Ţáļéñţš: {head} — {spent}/{total} þóíñţš šþéñţ ({breakdown}).]",
+        "summary": "[Ţáļéñţš: {head}, {spent}/{total} þóíñţš šþéñţ ({breakdown}).]",
         "breakdownClass": "[Çļášš {classPts}]",
         "breakdownSpec": "[Çļášš {classPts}, {spec} {specPts}]",
         "unspent": "[ {count} úñšþéñţ.]"

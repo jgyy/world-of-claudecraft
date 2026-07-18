@@ -44,11 +44,14 @@ export function desiredBaseState(s: AnimState, hasWalkBackClip: boolean): BaseSt
   // way. Stun then preempts spin/swim/cast/sit/move, all voluntary actions a
   // hard CC lockout freezes (the server already breaks a channel the instant
   // isStunned flips true), so the pose must not keep reading as a normal
-  // spin/cast/swim/sit loop while the player can't act.
+  // spin/cast/swim/sit loop while the player can't act. swim keeps its
+  // pre-existing precedence over spin (a self-centered channel like
+  // Bladestorm while swimming still reads as swim): only stunned is newly
+  // inserted, ahead of both.
   if (s.airborne) return 'jump';
   if (s.stunned) return 'stunned';
-  if (s.spinning) return 'spin';
   if (s.swimming) return 'swim';
+  if (s.spinning) return 'spin';
   if (s.casting) return 'cast';
   if (s.sitting) return 'sit';
   if (s.moving) {
