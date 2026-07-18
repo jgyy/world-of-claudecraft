@@ -13,6 +13,9 @@ export interface AnimState {
   reverseBackpedal?: boolean;
   dead: boolean;
   casting: boolean;
+  /** Channeling a self-centered whirl such as Bladestorm. This wins over the
+   *  generic cast and locomotion poses. */
+  spinning?: boolean;
   swimming: boolean;
   sitting: boolean;
   /** a hard-CC lockout (stun/incapacitate/polymorph) is active: freezes casts,
@@ -27,6 +30,7 @@ export type BaseState =
   | 'walkBack'
   | 'run'
   | 'cast'
+  | 'spin'
   | 'swim'
   | 'sit'
   | 'jump'
@@ -37,12 +41,13 @@ const DEFAULT_RUN_REF = 7;
 
 export function desiredBaseState(s: AnimState, hasWalkBackClip: boolean): BaseState {
   // Airborne is physics (falling/knockback) and outranks stun: you fall either
-  // way. Stun then preempts swim/cast/sit/move, all voluntary actions a hard
-  // CC lockout freezes (the server already breaks a channel the instant
+  // way. Stun then preempts spin/swim/cast/sit/move, all voluntary actions a
+  // hard CC lockout freezes (the server already breaks a channel the instant
   // isStunned flips true), so the pose must not keep reading as a normal
-  // cast/swim/sit loop while the player can't act.
+  // spin/cast/swim/sit loop while the player can't act.
   if (s.airborne) return 'jump';
   if (s.stunned) return 'stunned';
+  if (s.spinning) return 'spin';
   if (s.swimming) return 'swim';
   if (s.casting) return 'cast';
   if (s.sitting) return 'sit';

@@ -1,8 +1,8 @@
 {
   "format": "woc-sfx-runtime-pack",
   "version": 1,
-  "bundleId": "3c5d49b0d49614a0f02e5e4b4720f74e83881093ca60320ee49a292025c35b83",
-  "catalogHash": "7f3f7eec3e3a6cdc4323deab090e3da3a9fb2c4f64e4170c76a71aa00398832c",
+  "bundleId": "877d2838ccf199d8a975d05aa364b9474ee56ac4503eee00d5f0c66bf8155f7b",
+  "catalogHash": "8d11bd58d5c1b4182a61faaf69e4d83cdab5715188000e6a72d3392267539ff9",
   "clips": {
     "amb_birds": {
       "variants": [
@@ -2858,6 +2858,18 @@
         }
       ],
       "gain": 1.678804,
+      "playbackRate": 1
+    },
+    "temporal_clock": {
+      "variants": [
+        {
+          "id": "main",
+          "url": "/audio/sfx/temporal_clock.mp3?v=01240b109c87",
+          "bytes": 49571,
+          "sha256": "01240b109c87a07bca05e2bf7eae23ea597bef270b4110bcf3d9338d56824100"
+        }
+      ],
+      "gain": 1,
       "playbackRate": 1
     },
     "ui_achievement": {
