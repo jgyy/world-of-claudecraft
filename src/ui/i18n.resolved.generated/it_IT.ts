@@ -233,6 +233,9 @@ export const it_IT: EnTranslations = {
       "title": "Talenti",
       "classTab": "Classe",
       "specTab": "Specializzazione",
+      "choicesTab": "Scelte",
+      "rowUnlockToast": "Nuova scelta di talento disponibile!",
+      "rowUnlocks": "Si sblocca al livello {level}",
       "available": "Disponibili",
       "spent": "Spesi",
       "pointSource": "Ottieni 1 punto talento a ogni livello dal {first} al {cap}. Sali di livello per ottenerne altri.",
@@ -291,6 +294,7 @@ export const it_IT: EnTranslations = {
         "noTree": "La tua classe non ha ancora un albero dei talenti.",
         "locked": "Non hai ancora sbloccato i talenti; iniziano al livello {level}.",
         "noSpec": "nessuna specializzazione",
+        "rowsSummary": "Talenti: {head}, selezionate {picked}/{unlocked} righe di scelta.",
         "summary": "Talenti: {head} — {spent}/{total} punti spesi ({breakdown}).",
         "breakdownClass": "Classe {classPts}",
         "breakdownSpec": "Classe {classPts}, {spec} {specPts}",
@@ -314,6 +318,10 @@ export const it_IT: EnTranslations = {
       "resurrectAtCorpse": "Risorgi al cadavere",
       "resurrectAtHealer": "Il Custode Pallido (Mal di resurrezione)",
       "spiritHealerAlive": "Il Custode Pallido veglia sui morti. Tu sei ancora tra i vivi."
+    },
+    "fct": {
+      "absorbed": "Assorbito {amount}",
+      "cheap": "Costo ridotto!"
     },
     "emotes": {
       "wave": "Saluta",
@@ -416,6 +424,18 @@ export const it_IT: EnTranslations = {
       "armoryEyebrow": "Stagione 1",
       "armoryTitle": "L'Armeria",
       "armoryBody": "Aspetti per armi in edizione limitata dall'Armeria della Stagione 1. Disponibili per tutto l'account, puramente cosmetici e visibili a chiunque ti circondi.",
+      "wallet": {
+        "title": "Solana wallet",
+        "unlinked": "Connect a wallet app, then sign once to link its public address to your WoC account. We never receive your recovery phrase or private key.",
+        "connectedUnlinked": "The wallet app is connected to this browser, but its public address is not linked to your WoC account yet.",
+        "linkedDisconnected": "Your public address is linked. Reconnect that wallet app when you want to pay with SOL or WOC.",
+        "linkedConnected": "Your linked wallet app is connected and ready for SOL or WOC purchases.",
+        "mismatched": "A different wallet is connected. Verify it to replace the linked address, or reconnect the linked wallet.",
+        "connect": "Connect wallet",
+        "verify": "Verify and link",
+        "reconnect": "Reconnect wallet",
+        "manage": "Manage wallet"
+      },
       "collectionLine": "Collezione {collection}",
       "collections": {
         "guildmark": "Marchio della gilda",
@@ -709,6 +729,7 @@ export const it_IT: EnTranslations = {
       "playerLabel": "Il tuo personaggio",
       "targetLabel": "Il tuo bersaglio",
       "targetAnnounce": "Bersaglio: {name}",
+      "targetOfTargetLabel": "Il bersaglio del bersaglio",
       "partyLabel": "Il tuo gruppo",
       "partyChip": "Gruppo",
       "partyGroup": "Gruppo {n}",
@@ -1011,16 +1032,39 @@ export const it_IT: EnTranslations = {
       "aurasOnPlayerFrame": "Buff sul riquadro del giocatore",
       "highContrastBackground": "Sfondo a contrasto elevato",
       "startAttackOnAbility": "Attacco automatico all'uso dell'abilita",
-      "showAttackButton": "Mostra Pulsante Attacco",
       "walkByAutoloot": "Raccolta automatica al passaggio",
       "groundReticle": "Reticolo di puntamento a terra",
+      "mouseoverCast": "Lancio al passaggio del mouse sui riquadri del gruppo",
       "showItemLevel": "Mostra livello oggetto",
       "itemLevelLine": "Livello oggetto {level}",
       "itemScoreLine": "Punteggio {score}",
       "showSecondaryActionBar": "Mostra la barra delle azioni secondaria",
+      "showTargetOfTarget": "Mostra il bersaglio del bersaglio",
+      "showAttackButton": "Mostra Pulsante Attacco",
       "showDailyRewardsChest": "Mostra forziere delle ricompense giornaliere",
       "mobileCameraJoystick": "Joystick della fotocamera",
       "mobileLeftHanded": "Disposizione per mancini"
+    },
+    "talentRows": {
+      "tab": "Scelte",
+      "defaultLoadout": "Configurazione predefinita",
+      "comingSoon": "Prossimamente",
+      "readoutSummary": "Talenti: {head}, {spent}/{total} righe selezionate."
+    },
+    "abilityError": {
+      "shieldRequired": "Devi avere uno scudo equipaggiato."
+    },
+    "specPanel": {
+      "primaryAttr": "Attributo principale",
+      "complexity": "Complessità",
+      "complexityLow": "Bassa",
+      "complexityMedium": "Media",
+      "complexityHigh": "Alta",
+      "exampleAbilities": "Abilità di esempio",
+      "viewTalents": "Visualizza talenti",
+      "selectSpec": "Seleziona specializzazione",
+      "specUnlockBanner": "Specialization Unlocked!",
+      "specUnlockHint": "Press N to choose your specialization."
     },
     "controller": {
       "title": "Controller",
@@ -1133,6 +1177,7 @@ export const it_IT: EnTranslations = {
         "spellPower": "Potere Magico",
         "critRating": "Indice di critico",
         "hasteRating": "Indice di celerità",
+        "parry": "Parata",
         "hitRating": "Valutazione Colpo",
         "warfare": "Guerra"
       },
@@ -1151,6 +1196,7 @@ export const it_IT: EnTranslations = {
         "dodge": "La tua probabilità di evitare completamente un attacco in mischia in arrivo, senza subire danni.",
         "critRating": "Indice di critico dal tuo equipaggiamento e dai bonus di set, che aumenta la tua probabilità di colpo critico. Circa 10 punti conferiscono l'1% di critico.",
         "hasteRating": "Indice di celerità dal tuo equipaggiamento e dai bonus di set, che accelera i tuoi attacchi e i tuoi lanci. Circa 10 punti conferiscono l'1% di celerità.",
+        "parry": "La tua probabilità di parare completamente un attacco in mischia frontale, senza subire danni. Un colpo alle spalle non può essere parato.",
         "hitRating": "Valutazione colpo dall'equipaggiamento e dai bonus di set, che riduce la frequenza con cui i tuoi attacchi mancano e i tuoi incantesimi vengono resistiti, specialmente contro nemici di livello superiore. Circa 10 punti di valutazione concedono l'1% di colpo.",
         "warfare": "Aumenta il danno inflitto ai giocatori del {increase}% e riduce il danno subito dai giocatori del {reduction}%."
       },
@@ -1501,9 +1547,35 @@ export const it_IT: EnTranslations = {
       "attackSpeedSlow": "Rallenta la velocità di attacco del {pct}%",
       "attackSpeedFast": "Aumenta la velocità di attacco del {pct}%",
       "haste": "Aumenta la velocità di attacco e lancio del {pct}%",
+      "dmgDone": "Increases damage dealt by {pct}%",
+      "dmgDoneReduce": "Reduces damage dealt by {pct}%",
+      "heatingUp": "Your next consecutive Fire builder critical strike grants Hot Streak; a non-critical builder removes Heating Up",
+      "elementalConvergencePrimed": "Your next spell from the other elemental school grants Elemental Convergence",
+      "battleStance": "Posizione di Battaglia: 10% di generazione di rabbia in più",
+      "berserkerStance": "Posizione del Berserker: colpi critici il 3% più frequenti e il 3% più potenti",
+      "crit": "Aumenta la probabilità di colpo critico del {pct}%",
+      "rageGen": "Aumenta la generazione di rabbia del {pct}%",
+      "reckless": "Aumenta la probabilità di colpo critico del {pct}% e la generazione di rabbia del {ragePct}%",
+      "avatar": "Colosso: danni inflitti aumentati del {pct}%",
+      "bloodbath": "Aumenta la probabilità di colpo critico e i danni inflitti del {pct}%",
+      "dieBySword": "Riduce i danni subiti del {pct}%",
+      "sanguine": "Increases attack speed by {hastePct}% and damage dealt by {dmgPct}%",
+      "battleTrance": "Il tuo prossimo Colpo del Predone o Colpo Mutilante non costa rabbia",
+      "revengeFree": "La tua prossima Vendetta non costa rabbia",
+      "victoryRush": "Impeto della Vittoria è pronto",
+      "maxHpPct": "Aumenta la salute massima del {pct}%",
+      "temporalHourglass": "Immune and unable to act; restores health and accelerates cooldown recovery. Right-click to cancel.",
       "tongues": "Aumenta il tempo di lancio del {pct}%",
+      "combustionCrit": "Your Fire spells always critically strike",
+      "overloadNext": "Your next spell is amplified by {pct}% but costs 50% more mana",
+      "powerEchoNext": "Your next direct spell repeats at {pct}% power on the same target",
+      "iceFloesCasts": "Your next {n} spells with a cast time can be cast while moving",
+      "freeCast": "Your next cast costs nothing",
+      "instantCast": "Your next spell with a cast time is instant",
+      "cheapCast": "Your next spell costs {pct}% less",
       "increase": {
         "ap": "Aumenta la potenza di attacco di {value}",
+        "sp": "Increases spell power by {value}",
         "armor": "Aumenta l'armatura di {value}",
         "int": "Aumenta l'intelletto di {value}",
         "agi": "Aumenta l'agilità di {value}",
@@ -1557,6 +1629,7 @@ export const it_IT: EnTranslations = {
       "formBear": "Forma di Bruin: salute e armatura aumentate",
       "formCat": "Forma felina: danni in mischia ed energia",
       "formTravel": "Forma di Fleet: velocità di movimento aumentata del {pct}%",
+      "formFireball": "Ember Form: movement speed increased by {pct}%; attacks and spells are disabled",
       "defensiveStance": "Posizione Guardinga: danni subiti ridotti, più minaccia",
       "righteousFury": "Giuramento Ardente: minaccia da danni Sacri molto aumentata",
       "scale": "Taglia aumentata del {pct}%",
@@ -1603,8 +1676,8 @@ export const it_IT: EnTranslations = {
       "removeFromBarAria": "Rimuovi {name} dalla barra azioni"
     },
     "nameplate": {
-      "mob": "[{level}] {name}",
-      "mobElite": "[{level}+] {name}"
+      "mobLevel": "{level}",
+      "mobEliteLevel": "{level}+"
     },
     "mobTooltip": {
       "levelFamily": "{family} di livello {level}",
@@ -2014,17 +2087,31 @@ export const it_IT: EnTranslations = {
     "archetypeTitle": {
       "label": "Titolo",
       "none": "Nessuno",
-      "hobbyLabel": "Passatempo",
-      "armorcrafting": "Armaiolo",
-      "weaponcrafting": "Fabbro d'armi",
-      "jewelcrafting": "Gioielliere",
-      "alchemy": "Alchimista",
-      "engineering": "Ingegnere",
-      "cooking": "Cuoco",
-      "inscription": "Scriba",
-      "enchanting": "Incantatore",
-      "tailoring": "Sarto",
-      "leatherworking": "Conciatore"
+      "hobbyLabel": "Passatempo"
+    },
+    "archetypePair": {
+      "engineering+alchemy": "Bombardier",
+      "alchemy+cooking": "Apothecary",
+      "cooking+leatherworking": "Trapper",
+      "leatherworking+tailoring": "Outfitter",
+      "tailoring+inscription": "Mageweaver",
+      "inscription+enchanting": "Arcanist",
+      "enchanting+jewelcrafting": "Gembinder",
+      "jewelcrafting+weaponcrafting": "Bladewright",
+      "weaponcrafting+armorcrafting": "Smith",
+      "armorcrafting+engineering": "Cogsmith"
+    },
+    "craftName": {
+      "armorcrafting": "Armorcrafting",
+      "weaponcrafting": "Weaponcrafting",
+      "jewelcrafting": "Jewelcrafting",
+      "alchemy": "Alchemy",
+      "engineering": "Engineering",
+      "cooking": "Cooking",
+      "inscription": "Inscription",
+      "enchanting": "Enchanting",
+      "tailoring": "Tailoring",
+      "leatherworking": "Leatherworking"
     },
     "wheel": {
       "title": "Professions Wheel",
@@ -2057,6 +2144,42 @@ export const it_IT: EnTranslations = {
       "insufficientMaterials": "Non hai i materiali per quello.",
       "unknownRecipe": "Quella ricetta non esiste.",
       "comboRequirementUnmet": "Non possiedi entrambe le professioni richieste al livello necessario per quella ricetta.",
+      "comboRequires": "Attunement: {craftA} + {craftB}, tier {tier}.",
+      "comboMet": "Ready.",
+      "comboSyncing": "Checking realm attunement.",
+      "comboNotAttuned": "Choose an archetype pair first.",
+      "comboWrongPair": "Activate this exact pair to craft it.",
+      "comboTierUnmet": "Raise both major crafts to the required tier.",
+      "professionChoice": "Profession choice",
+      "noProfessionChoice": "No valid profession choice is currently available.",
+      "pairOptionLabel": "{pair} ({craftA} + {craftB})",
+      "attunementPreview": "Result: {title} title; {majorA} and {majorB} become uncapped majors; {hobby} becomes the rare-capped hobby; all other skill knowledge is retained but capped at common while dormant.",
+      "hobbyPreview": "Result: {hobby} becomes the rare-capped hobby. Both majors and all retained skill values stay unchanged.",
+      "identity": {
+        "title": "Crafting Identity",
+        "syncing": "Waiting for your crafting identity from the realm.",
+        "unattuned": "No archetype pair is active. Your knowledge is retained, but combo recipes require an attuned pair.",
+        "titleLabel": "Title",
+        "majorsLabel": "Majors",
+        "hobbyLabel": "Hobby",
+        "historyLabel": "History",
+        "history": "{pairs} pairs discovered, {returns} returns completed",
+        "roleMajor": "Major",
+        "roleHobby": "Hobby",
+        "roleDormant": "Dormant knowledge",
+        "roleUnattuned": "Unattuned",
+        "ceilingUnlimited": "No empowerment cap",
+        "ceilingRare": "Rare cap",
+        "ceilingCommon": "Common cap",
+        "skillAria": "{craft}, skill {skill}, tier {tier}, {role}, {ceiling}",
+        "colCraft": "Craft",
+        "colSkill": "Skill",
+        "colRole": "Role",
+        "colCap": "Cap",
+        "tutorial": "First tier: reach skill {skill} in a craft. Successful recipes raise that craft without erasing knowledge elsewhere.",
+        "nearTier": "{craft} is {points} skill from its next tier.",
+        "dormantKnowledge": "{craft} knowledge is retained but dormant until its pair or hobby is active."
+      },
       "notAtHub": "Devi trovarti alla postazione artigiana, al livello richiesto, per fabbricarlo.",
       "throttled": "Stai fabbricando troppo in fretta. Aspetta un momento e riprova.",
       "recipeNotLearned": "Non hai ancora imparato quella ricetta."
@@ -2326,6 +2449,9 @@ export const it_IT: EnTranslations = {
       "already_linked": "Il tuo account ha già un account Steam collegato.",
       "account_taken": "Quell'account Steam è già collegato a un altro account.",
       "upstream": "Steam non ha risposto. Riprova tra un istante."
+    },
+    "wallet": {
+      "handoff_invalid": "That wallet authorization expired or could not be verified. Try again."
     },
     "welcome": {
       "invalid_input": "Dati non validi."
@@ -2786,10 +2912,10 @@ export const it_IT: EnTranslations = {
     },
     "abilityHook": {
       "heroic_strike": "Mette in coda un fendente più pesante che spende ira al tuo prossimo colpo.",
+      "revenge": "Colpisce i nemici davanti a te e può diventare gratuita dopo una schivata o una parata.",
+      "hamstring": "Ostacola il movimento di un nemico per impedirgli di fuggire.",
       "battle_shout": "Un grido di incitamento che aumenta la potenza d'attacco del gruppo.",
-      "commanding_shout": "Rafforza la vigoria, così tutti hanno più resistenza in combattimento.",
       "charge": "Si scaglia su un nemico distante per aprire lo scontro con un breve stordimento.",
-      "rend": "Apre un'emorragia che logora il bersaglio nel tempo.",
       "thunder_clap": "Colpisce tutto ciò che ti circonda e rallenta i loro attacchi.",
       "seal_of_righteousness": "Imbeve i tuoi colpi di danno Sacro, poi spendilo con Verdict.",
       "holy_light": "Una cura costante e di buona entità per rimettere in piedi un alleato o te stesso.",
@@ -2822,9 +2948,18 @@ export const it_IT: EnTranslations = {
       "lightning_shield": "Ti carica così gli attaccanti subiscono danni da Natura quando ti colpiscono.",
       "flame_shock": "Un'ustione istantanea che colpisce subito e continua a bruciare nel tempo.",
       "fireball": "Il tuo principale colpo di fuoco, infligge un danno e lascia il bersaglio in fiamme.",
+      "fireball_form": "Become a living ember to cross open ground at high speed.",
       "frost_armor": "Un potenziamento personale duraturo che indurisce la tua corazza prima di uno scontro.",
       "arcane_intellect": "Aumenta l'Intelletto per ampliare la riserva di mana di un alleato, lancialo prima del pull.",
       "frostbolt": "Colpisce dalla distanza e rallenta il bersaglio, così non riesce ad avvicinarsi.",
+      "ice_lance": "An instant shard for spending frost procs, it hits far harder on a frozen target.",
+      "flurry": "Three quick bolts that chill the target so your next frost hits land as if it were frozen.",
+      "fingers_of_frost": "Your frost bolts sometimes empower an Ice Lance to strike as if the target were frozen.",
+      "brain_freeze": "Your frost bolts sometimes make the next Flurry instant and harder-hitting.",
+      "shatter": "Your spells crit far more often against frozen targets.",
+      "frozen_orb": "Rolls a slow orb through the pack that chills everything and feeds your frost procs.",
+      "blizzard": "Blankets an area in ice to wear down and slow a whole pack.",
+      "blink": "Teleports you a short distance forward, breaking roots on the way out.",
       "conjure_water": "Evoca bevande che ripristinano il mana, così puoi rifornirti tra un pull e l'altro.",
       "conjure_food": "Evoca del cibo che ripristina la salute quando ti siedi a mangiare.",
       "shadow_bolt": "Un dardo d'ombra che lanci su un bersaglio, il tuo colpo di riferimento.",
@@ -4046,6 +4181,9 @@ export const it_IT: EnTranslations = {
     "balancePreviewTitle": "Anteprima del saldo $WOC del portafoglio connesso",
     "balancePreviewAria": "Anteprima del saldo del portafoglio connesso: {balance}. Collega il portafoglio per verificare il distintivo da titolare.",
     "balanceAmount": "{amount} $WOC",
+    "bagConnect": "Link wallet",
+    "bagLink": "Verify wallet",
+    "bagReconnect": "Reconnect wallet",
     "connected": "Connesso: {address}",
     "connectedWithBalance": "Connesso: {balance} - {address}",
     "connectedLinked": "Verificato: {address}",
@@ -4060,12 +4198,37 @@ export const it_IT: EnTranslations = {
     "helpLinkedDisconnected": "I vantaggi da titolare sono attivi. Connetti l'app quando devi firmare o spendere.",
     "helpLinkedDisconnectedWithBalance": "I vantaggi da titolare sono attivi. Connetti l'app quando devi firmare o spendere.",
     "extensionHelp": "Per vedere un portafoglio qui, tieni attiva un'estensione portafoglio del browser come Solflare Wallet.",
+    "mobileAppHelp": "Choose Phantom or Solflare. Your wallet app will ask for approval. Keep this game open and return to it when finished.",
+    "standaloneAppHelp": "Wallet connections are not available in the Home Screen app yet. Open World of ClaudeCraft in Safari or Chrome to use Phantom or Solflare.",
+    "openAppTitle": "Continue in {wallet}",
+    "openAppHelp": "Open {wallet} to review this request. Keep this game tab open while the wallet app is active.",
+    "openAppButton": "Open {wallet}",
+    "manualReturnBrowserHelp": "After approval, return to this game tab. If iOS opens another browser, close it and return to the original browser manually.",
+    "manualReturnStandaloneHelp": "After approval, return to World of ClaudeCraft from your Home Screen. If iOS opens a browser, close it and reopen the Home Screen app manually.",
+    "preparingAppButton": "Preparing {wallet}...",
+    "walletAppUnavailable": "{wallet} could not be prepared. Close this window and try again.",
     "flowConnect": "Scegli un portafoglio. La verifica continua automaticamente.",
     "flowSign": "Firma il messaggio di verifica nell'app del portafoglio. Non servono transazioni né SOL.",
     "flowVerify": "Verifica della proprietà del portafoglio...",
     "linkFailed": "Verifica del portafoglio non riuscita.",
     "verifyFailed": "Verifica del portafoglio non riuscita.",
     "unlinkFailed": "Impossibile scollegare il portafoglio.",
+    "browser": {
+      "eyebrow": "Desktop wallet authorization",
+      "title": "Connect a Solana Wallet",
+      "linkBody": "Choose a wallet extension in this browser. You will sign a verification message, then return to the desktop app.",
+      "paymentBody": "Choose the wallet linked to your account and approve the transaction in this browser.",
+      "extensionHelp": "No compatible wallet extension was found. Install or unlock Phantom, Solflare, or another Solana browser wallet, then retry.",
+      "safety": "World of ClaudeCraft never asks for your recovery phrase or private key.",
+      "continueWith": "Continue with {wallet}",
+      "reviewTitle": "Review in your wallet",
+      "reviewBody": "Follow the prompt from {wallet}. Keep this browser page open.",
+      "completeTitle": "Wallet authorization complete",
+      "completeBody": "You can return to the World of ClaudeCraft desktop app.",
+      "returnButton": "Return to desktop app",
+      "failed": "Wallet authorization failed or expired. Return to the desktop app and try again.",
+      "retry": "Retry"
+    },
     "holder": "Titolare $WOC",
     "holderTierTitle": "Titolare $WOC di rango {tier}",
     "holderTiers": {
@@ -5330,11 +5493,14 @@ export const it_IT: EnTranslations = {
       "openTrade": "Apri scambio",
       "duelRequest": "{name} ti ha sfidato a duello!",
       "acceptDuel": "Accetta duello",
+      "resurrectionOffer": "{name} wants to return you to life. Do you accept?",
+      "acceptResurrection": "Accept Resurrection",
       "decline": "Rifiuta"
     },
     "combat": {
       "floatingMiss": "Mancato",
       "floatingDodge": "Schivata",
+      "floatingParry": "Parry",
       "floatingResist": "Resistito",
       "cannotMove": "Non puoi muoverti!",
       "attack": "attacco",
@@ -5344,6 +5510,7 @@ export const it_IT: EnTranslations = {
       "damageTakenCrit": "{source} ti colpisce criticamente per {amount}.",
       "miss": "Il tuo {ability} manca {target}.",
       "dodged": "{target} schiva il tuo {ability}.",
+      "parried": "Your {ability} is parried by {target}.",
       "resisted": "{target} resiste al tuo {ability}.",
       "healSelf": "Il tuo {ability} ti cura di {amount}.",
       "healSelfCrit": "Il tuo {ability} ti cura criticamente di {amount}.",
@@ -5504,6 +5671,7 @@ export const it_IT: EnTranslations = {
     },
     "pet": {
       "attack": "Attacca",
+      "waterJet": "Water Jet",
       "taunt": "Provoca",
       "healDemon": "Cura demone",
       "healPet": "Cura mascotte",
@@ -5512,6 +5680,8 @@ export const it_IT: EnTranslations = {
       "aggressive": "Aggressiva",
       "petAttackTitle": "Attacco mascotte",
       "petAttackDesc": "Ordina alla tua mascotte di attaccare il tuo attuale bersaglio ostile.",
+      "waterJetTitle": "Water Jet",
+      "waterJetDesc": "Command your Water Elemental to channel a slowing stream for 3 seconds. 8 second cooldown. Right-click to auto-cast it whenever it is off cooldown.",
       "petTauntTitle": "Provocazione mascotte",
       "petTauntDesc": "Ordina alla tua mascotte di ingaggiare e usare Ringhio quando è a portata. Recupero di 10 secondi.",
       "healDemonDesc": "Spendi mana per canalizzare cure nel tuo demone per 5 secondi.",
@@ -5522,7 +5692,7 @@ export const it_IT: EnTranslations = {
       "defensiveDesc": "Attacca i nemici che feriscono te o la tua mascotte.",
       "aggressiveDesc": "Attacca i nemici ostili vicini.",
       "rename": "Rinomina mascotte",
-      "revive": "Rianima mascotte",
+      "revive": "Rattoppare",
       "abandon": "Abbandona mascotte",
       "cancel": "Annulla",
       "renameLabel": "Scegli un nuovo nome per la mascotte.",
@@ -5778,6 +5948,8 @@ export const it_IT: EnTranslations = {
     },
     "slots": {
       "mainhand": "Mano principale",
+      "twoHand": "Due mani",
+      "offhand": "Mano secondaria",
       "helmet": "Testa",
       "neck": "Collo",
       "shoulder": "Spalle",
@@ -5818,7 +5990,8 @@ export const it_IT: EnTranslations = {
       "attackPower": "Potenza d'attacco",
       "dps": "Danni/sec",
       "critChance": "Prob. critico",
-      "dodge": "Schivata"
+      "dodge": "Schivata",
+      "parry": "Parry"
     },
     "tooltip": {
       "qualityKind": "{kind} {quality}",
@@ -6057,23 +6230,15 @@ export const it_IT: EnTranslations = {
       },
       "battle_shout": {
         "name": "Urlo di Ferro",
-        "description": "Aumenta la tua potenza d'attacco di {buff} per 2 min."
-      },
-      "commanding_shout": {
-        "name": "Grido Rincuorante",
-        "description": "Aumenta la tua Tempra di {buff} per 2 min."
+        "description": "Un urlo che aumenta del {buff}% la potenza d'attacco di tutti i membri del gruppo per 30 min."
       },
       "demoralizing_shout": {
         "name": "Ululato Sinistro",
-        "description": "Emette un urlo terrificante, riducendo la potenza d'attacco di tutti i nemici vicini di {buff} per 30 sec."
+        "description": "Emette un urlo terrificante, riducendo del {buff}% i danni inflitti da tutti i nemici vicini per 20 sec."
       },
       "charge": {
         "name": "Irruzione",
         "description": "Carica un nemico, genera 9 rabbia e lo stordisce per 1 s. Portata 8-25 m."
-      },
-      "rend": {
-        "name": "Squarcio Profondo",
-        "description": "Ferisce il bersaglio e lo fa sanguinare per {damage} danni in {duration} sec."
       },
       "thunder_clap": {
         "name": "Colpo Sismico",
@@ -6119,6 +6284,10 @@ export const it_IT: EnTranslations = {
         "name": "Dardo di Braci",
         "description": "Scaglia una palla infuocata che infligge {damage} danni da Fuoco più danni aggiuntivi nel tempo."
       },
+      "fireball_form": {
+        "name": "Ember Form",
+        "description": "Transform into a blazing ember, increasing movement speed by {buff}%. You cannot attack or cast spells while transformed. Recast to return to your normal form."
+      },
       "frost_armor": {
         "name": "Manto di Brina",
         "description": "Ti avvolge nel gelo, aumentando l'armatura di {buff} per 30 min."
@@ -6130,6 +6299,94 @@ export const it_IT: EnTranslations = {
       "frostbolt": {
         "name": "Lancia di Brina",
         "description": "Lancia un dardo di gelo, infliggendo {damage} danni da Gelo e rallentando il movimento del 40%."
+      },
+      "blazing_barrier": {
+        "name": "Barriera ardente",
+        "description": "Ti avvolge nelle fiamme, assorbendo 130 danni per 60 s. (Fuoco)"
+      },
+      "cold_snap": {
+        "name": "Richiamo dell'inverno",
+        "description": "Termina il tempo di recupero di Passo fulmineo, Velo di Gelo e Invisibilità superiore. (Talento del mago)"
+      },
+      "greater_invisibility": {
+        "name": "Invisibilità superiore",
+        "description": "Svanisci per 20 s: rimuove 2 effetti di danno periodico e riduce i danni subiti del 90% mentre sei invisibile e per breve tempo dopo. (Talento del mago)"
+      },
+      "hot_streak": {
+        "name": "Vampata",
+        "description": "Passivo: due colpi critici consecutivi con le tue magie di Fuoco (Palla di Fuoco, Esplosione di Fuoco, Bruciatura, Pirosfera o Colonna di Fuoco) rendono la tua prossima Pirosfera o Colonna di Fuoco istantanea e gratuita. Le magie che consumano l'effetto contano per la serie SUCCESSIVA, inclusi i lanci gratuiti; Colonna di Fuoco conta una sola volta, indipendentemente dal numero di nemici colpiti, e può contare solo l'impatto iniziale. (Fuoco)"
+      },
+      "ice_floes": {
+        "name": "Banchi di ghiaccio",
+        "description": "Le tue prossime due magie con tempo di lancio possono essere lanciate in movimento. Dura 15 s. (Talento del mago)"
+      },
+      "ignition": {
+        "name": "Ignizione",
+        "description": "Passivo: i colpi critici delle tue magie incendiano il bersaglio, infliggendo il 40% dei danni causati nell'arco di 6 s; si accumula. (Maestria del Fuoco)"
+      },
+      "mass_barrier": {
+        "name": "Barriera di massa",
+        "description": "Protegge te e fino a 4 alleati vicini entro 30 m; ogni scudo assorbe 130 danni per 60 s. (Talento del mago)"
+      },
+      "overload": {
+        "name": "Sovraccarico",
+        "description": "La tua prossima magia viene amplificata del 40%, ma costa il 50% di mana in più. Dura 10 s. (Talento del mago)"
+      },
+      "power_echo": {
+        "name": "Eco di potere",
+        "description": "La tua prossima magia diretta si ripete con il 50% della potenza sullo stesso bersaglio. Dura 10 s. (Talento del mago)"
+      },
+      "rings_of_frost": {
+        "name": "Anello di gelo",
+        "description": "Evoca un anello per 10 s. I nemici che ne attraversano il perimetro restano congelati per 4 s. (Talento del mago)"
+      },
+      "rune_of_power": {
+        "name": "Runa del potere",
+        "description": "Incide una runa del potere ai tuoi piedi per 15 s: gli alleati entro 8 m infliggono il 10% di danni in più. (Talento del mago)"
+      },
+      "summon_water_elemental": {
+        "name": "Evoca Elementale dell'Acqua",
+        "description": "Evoca un Elementale dell'Acqua che combatte al tuo fianco, scaglia Dardi d'Acqua sul tuo bersaglio e canalizza Getto d'Acqua. (Gelo)"
+      },
+      "ice_lance": {
+        "name": "Ice Lance",
+        "description": "Hurl a shard of ice, dealing {damage} Frost damage, tripled against a frozen target. Spends Fingers of Frost, or a charge of Winter's Chill, to treat the target as frozen. (Frost)"
+      },
+      "flurry": {
+        "name": "Winterlash",
+        "description": "Loose three icy bolts for {damage} Frost damage each and plant Winter's Chill on the target: its next 2 incoming compatible spells treat it as frozen. Brain Freeze makes Winterlash instant, 30% harder, and skips its cooldown. (Frost)"
+      },
+      "frozen_orb": {
+        "name": "Frozen Orb",
+        "description": "Release an orb of swirling frost that drifts forward for 8 sec, dealing {damage} Frost damage each second to nearby enemies and slowing them by 30%. Its strikes generate Fingers of Frost. (Frost)"
+      },
+      "blizzard": {
+        "name": "Blizzard",
+        "description": "Calls an ice storm onto the target area for 6 sec, dealing {damage} Frost damage each second and slowing enemies by 40%. Each enemy struck shaves 0.5 sec off Frozen Orb, up to 3 sec per cast. (Frost)"
+      },
+      "glacial_spike": {
+        "name": "Glacial Spike",
+        "description": "Conjure a massive spike of ice, consuming 5 Icicles to deal {damage} Frost damage and freeze the target in place for 4 sec. (Frost)"
+      },
+      "glacial_front": {
+        "name": "Glacial Front",
+        "description": "Hold to gather a widening front of frost, then release it in a cone. Longer charges reach farther and deal more damage. All enemies hit are slowed by 50% for 4 sec; maximum charge also roots them for 1 sec. (Frost)"
+      },
+      "dragons_breath": {
+        "name": "Dragon's Breath",
+        "description": "Hold to gather a widening breath of flame, then release it in a cone. Longer charges reach farther and deal more damage. Enemies hit are disoriented and damage breaks the effect; maximum charge always critically strikes and counts once toward Hot Streak. (Fire)"
+      },
+      "fingers_of_frost": {
+        "name": "Fingers of Frost",
+        "description": "Rimelance has a 15% chance to grant Fingers of Frost, up to 2 charges: your next Ice Lance treats its target as frozen. (Frost)"
+      },
+      "brain_freeze": {
+        "name": "Brain Freeze",
+        "description": "Rimelance has a 20% chance to make your next Winterlash instant, 30% harder, and free of its cooldown. (Frost)"
+      },
+      "shatter": {
+        "name": "Brittle Ruin",
+        "description": "Your spells gain 50% critical strike chance against frozen targets, and those critical strikes deal 20% more damage. Fingers of Frost and Winter's Chill count as frozen. (Frost)"
       },
       "conjure_water": {
         "name": "Vincolo dell'Acqua",
@@ -6551,10 +6808,6 @@ export const it_IT: EnTranslations = {
         "name": "Scorza di Quercia",
         "description": "La tua pelle si indurisce come corteccia, aumentando l'armatura di 150 per 15 s."
       },
-      "ironhold": {
-        "name": "Fortezza di Ferro",
-        "description": "Ti ripari dietro la guardia, riducendo tutti i danni subiti del 40% per 8 sec."
-      },
       "sacred_bulwark": {
         "name": "Bastione Sacro",
         "description": "Per {duration} sec, il prossimo colpo nemico che ti ucciderebbe viene negato, ripristinandoti invece al 35% della salute."
@@ -6643,6 +6896,10 @@ export const it_IT: EnTranslations = {
         "name": "Shock Sacro",
         "description": "Colpisce un bersaglio alleato con energia Sacra, curandolo di {damage}. (firma Sacro)"
       },
+      "aura_surge": {
+        "name": "Rimbalzo dell'Alba",
+        "description": "Scaglia uno scudo forgiato all'alba che infligge {damage} danni Sacri, silenzia il bersaglio principale per 2 sec. e rimbalza su un massimo di 2 nemici aggiuntivi entro 10 metri, infliggendo il 75% dei danni per rimbalzo. (talento del Paladino)"
+      },
       "holy_shield": {
         "name": "Scudo Sacro",
         "description": "Ti protegge con potere Sacro per 10 s, aumentando l’armatura di 90 e colpendo gli assalitori in mischia per 12 danni Sacri. (firma Protezione)"
@@ -6664,7 +6921,7 @@ export const it_IT: EnTranslations = {
         "description": "Aumenta i danni magici del 20% e la celerità magica del 10% per 10 s. (firma Arcano)"
       },
       "combustion": {
-        "name": "Combustione",
+        "name": "Trance della fenice",
         "description": "Aumenta la probabilità di critico magico del 50% per 15 s. (firma Fuoco)"
       },
       "icy_veins": {
@@ -6747,6 +7004,246 @@ export const it_IT: EnTranslations = {
         "name": "Evoca Wraithborn",
         "description": "Vincola un Wraithborn al tuo volere: un demone d'élite che scaglia da lontano ingenti danni d'Ombra. Un lungo tempo di recupero ne limita la potenza devastante. Evocare un nuovo demone congeda quello attuale. Puoi avere un solo demone alla volta."
       },
+      "battle_stance": {
+        "name": "Posizione di Battaglia",
+        "description": "Posizione di combattimento aggressiva: generi il 10% di rabbia in più. La posizione predefinita per Armi e Protezione."
+      },
+      "berserker_stance": {
+        "name": "Posizione del Berserker",
+        "description": "Posizione di combattimento temeraria: i tuoi colpi critici vanno a segno il 3% più spesso e colpiscono il 3% più forte. Il guerriero Furia combatte sempre in questa posizione."
+      },
+      "sweeping_strikes": {
+        "name": "Arco Crescente",
+        "description": "Per 12 sec i tuoi attacchi a bersaglio singolo colpiscono anche 1 nemico vicino per il danno completo. (Armi)"
+      },
+      "deep_wounds": {
+        "name": "Ferite Aperte",
+        "description": "Passiva: il tuo Colpo Mutilante lascia il bersaglio sanguinante, infliggendo danni fisici in 6 sec. (Armi)"
+      },
+      "enrage_passive": {
+        "name": "Carneficina",
+        "description": "Passiva: mentre sei Infuriato infliggi il 7% di danni in più, attacchi il 25% più velocemente e ti muovi il 10% più velocemente per 4 sec. Salasso ha il 30% di probabilità di renderti Infuriato; Mietitura Rossa lo fa sempre. (Furia)"
+      },
+      "raging_gale": {
+        "name": "Colpo Gemello",
+        "description": "Colpisci istantaneamente due volte con la tua arma: ogni colpo infligge il 40% dei danni dell'arma più {damage}, e generi 8 rabbia. Accumula fino a 2 cariche. (Furia)"
+      },
+      "red_harvest": {
+        "name": "Mietitura Rossa",
+        "description": "Spendi tutto: colpisci tre volte in una frenesia per il 65% dei danni dell'arma più {damage} ciascuno, e diventi sempre Infuriato. (Furia)"
+      },
+      "furious_mending": {
+        "name": "Rammendo Furioso",
+        "description": "Per 10 sec subisci il 20% di danni in meno e, finché dura, il tuo Salasso ti cura del 20% della tua salute massima. (Furia)"
+      },
+      "emboldening_roar": {
+        "name": "Ruggito Ardimentoso",
+        "description": "Liberi un ruggito ardimentoso: tu e i giocatori alleati entro 40 metri diventate Ardimentosi, e le vostre 3 abilità successive sono colpi critici garantiti. (Furia)"
+      },
+      "raised_guard": {
+        "name": "Guardia Alzata",
+        "description": "Ti pianti dietro il tuo scudo: subisci il 50% di danni fisici in meno per 6 sec. Accumula fino a 2 cariche. (Protezione)"
+      },
+      "iron_resolve": {
+        "name": "Fermezza di Ferro",
+        "description": "Stringi i denti e ignora il dolore: consuma fino a 40 rabbia (minimo 20) per assorbire 4 danni per ogni punto di rabbia speso, per un massimo di 10 s. (Protezione)"
+      },
+      "faultline": {
+        "name": "Faglia",
+        "description": "Scagli un'onda d'urto attraverso il terreno: i nemici davanti a te entro 8 metri subiscono {damage} danni e sono storditi per 3 sec. (Protezione)"
+      },
+      "defiant_bellow": {
+        "name": "Urlo di Sfida",
+        "description": "Un urlo di sfida: ogni nemico entro 10 metri viene provocato e costretto ad attaccarti per 3 sec. (Protezione)"
+      },
+      "breachmaker": {
+        "name": "Apribreccia",
+        "description": "Martella il bersaglio per danni dell'arma più {damage} e ne incrina la guardia: i tuoi attacchi contro di esso infliggono il 20% di danni in più per 8 sec. (Armi)"
+      },
+      "measured_fury": {
+        "name": "Furia Misurata",
+        "description": "La tua furia misurata affina la tua economia: le tue abilità costano il 10% di rabbia in meno. (Armi)"
+      },
+      "seasoned_soldier": {
+        "name": "Soldato Veterano",
+        "description": "I tuoi attacchi automatici critici generano il 10% di rabbia in più. (Armi)"
+      },
+      "diabolical_twinstrike": {
+        "name": "Colpo Gemello Diabolico",
+        "description": "Mentre sei Infuriato, il tuo Colpo Gemello infligge il 15% di danni in più. (Furia)"
+      },
+      "cleaving_blows": {
+        "name": "Colpi Fendenti",
+        "description": "Mietitura Rossa rimborsa sempre una carica di Colpo Gemello. (Furia)"
+      },
+      "sudden_death": {
+        "name": "Morte Improvvisa",
+        "description": "I tuoi attacchi automatici hanno una probabilità di permetterti di lanciare Tomba Prematura su un bersaglio a qualsiasi livello di salute, senza costo di rabbia. (Armi)"
+      },
+      "storm_bolt": {
+        "name": "Dardo della Tempesta",
+        "description": "Scagli la tua arma contro il bersaglio, infliggendo {damage} danni e stordendolo per 3 sec."
+      },
+      "piercing_howl": {
+        "name": "Ululato Penetrante",
+        "description": "Un urlo penetrante che rallenta del 50% tutti i nemici entro 15 metri per 8 sec."
+      },
+      "die_by_sword": {
+        "name": "Morte per la Spada",
+        "description": "Tempo di recupero difensivo: per 8 sec subisci il 30% di danni in meno e schivi molti più attacchi."
+      },
+      "recklessness": {
+        "name": "Temerarietà",
+        "description": "Ti infuri: la tua generazione di rabbia aumenta del 50% e la tua probabilità di colpo critico del 20% per 12 sec."
+      },
+      "sanguine_aura": {
+        "name": "Aura Sanguigna",
+        "description": "Intridi la tua arma del sangue dei tuoi nemici: tu e i tuoi alleati in mischia ottenete il 10% di velocità d'attacco e il 10% di danni per 20 sec."
+      },
+      "victory_rush": {
+        "name": "Impeto della Vittoria",
+        "description": "Colpisci per danni dell'arma più {damage} e recuperi il 20% della tua salute massima. Utilizzabile solo entro 20 sec dall'uccisione di un nemico."
+      },
+      "intimidating_shout": {
+        "name": "Urlo Intimidatorio",
+        "description": "Un urlo terrificante che fa fuggire in preda alla paura fino a 5 nemici entro 8 metri per 8 sec. I danni possono interrompere l'effetto."
+      },
+      "revenge": {
+        "name": "Vendetta",
+        "description": "Attacchi con un arco ampio, infliggendo danni fisici a tutti i nemici davanti a te. Oltre i 5 bersagli i danni si riducono. Quando schivi o pari, la tua prossima Vendetta può non costare rabbia. (Protection)"
+      },
+      "heroic_leap": {
+        "name": "Balzo di Guerra",
+        "description": "Balza nell’area bersaglio, infliggendo {damage} danni ai nemici vicini all’atterraggio."
+      },
+      "rallying_cry": {
+        "name": "Ruggito del Valore",
+        "description": "Emetti un ruggito valoroso che conferisce a te e ai membri del gruppo entro 40 m il 20% di salute massima aggiuntiva per 10 s. Protezione: subiscono anche il 5% di danni in meno per la durata."
+      },
+      "aspect_of_the_wild": {
+        "name": "Aspetto Zannaferina",
+        "description": "Infondi forza selvaggia negli alleati entro 30 m, aumentando la loro potenza d’attacco di 45 e la velocità d’attacco del 5% per 5 min. (talento del Cacciatore)"
+      },
+      "avatar": {
+        "name": "Avatar",
+        "description": "Ti trasformi in un colosso per 20 s, liberandoti da tutti gli effetti di controllo e aumentando del 20% i danni inflitti."
+      },
+      "avenging_wrath": {
+        "name": "Alavendetta",
+        "description": "Invoca un potere vendicativo, aumentando la tua potenza d’attacco di 60 e la potenza magica di 30 per 20 sec. (talento del Paladino)"
+      },
+      "berserk": {
+        "name": "Bruma Rossa",
+        "description": "Aumenta la tua potenza d’attacco di 70 per 15 sec. (talento del Druido)"
+      },
+      "bladestorm": {
+        "name": "Tempesta di Lame",
+        "description": "Diventi una tempesta d’acciaio vorticante che colpisce tutti i nemici entro 6 m, infliggendo {damage} danni ogni secondo per 4 s."
+      },
+      "blink": {
+        "name": "Passo Baleno",
+        "description": "Ti teletrasporta di 15 m in avanti e spezza gli effetti di immobilizzazione. (talento del Mago)"
+      },
+      "bloodlust": {
+        "name": "Tamburi di Guerra",
+        "description": "Spinge gli alleati entro 30 m alla frenesia, aumentando la loro velocità d’attacco del 30% per 15 sec. (talento dello Sciamano)"
+      },
+      "chain_lightning": {
+        "name": "Fulmine Biforcuto",
+        "description": "Scaglia un fulmine nell’area bersaglio, infliggendo {damage} danni ai nemici vicini. (talento dello Sciamano)"
+      },
+      "chaos_bolt": {
+        "name": "Dardo della Rovina",
+        "description": "Scaglia un dardo di fuoco caotico che infligge {damage} danni da Fuoco. (talento dello Stregone)"
+      },
+      "cleansing_verdict": {
+        "name": "Verdetto Purificante",
+        "description": "Dissipa un effetto magico dannoso da un bersaglio alleato e lo cura di {damage} con magia Sacra."
+      },
+      "cloak_of_shadows": {
+        "name": "Manto d’Ombra",
+        "description": "Ti avvolge nelle ombre, assorbendo 420 danni per 5 sec. (talento del Ladro)"
+      },
+      "cone_of_cold": {
+        "name": "Spazzata Gelida",
+        "description": "Golpea a vicini nemici con escarcha e inflige {damage} de daño de Gelo. (talento da mago)"
+      },
+      "counterspell": {
+        "name": "Spezzaincantesimi",
+        "description": "Interrompe il lancio dell'incantesimo del bersaglio e impedisce di lanciare incantesimi di quella scuola per 6 s."
+      },
+      "curse_of_exhaustion": {
+        "name": "Maleficio Plum beo",
+        "description": "Maledice il bersaglio, riducendone la velocità di movimento del 30% per 12 sec. (talento dello Stregone)"
+      },
+      "death_coil": {
+        "name": "Spira Sepolcrale",
+        "description": "Colpisce il nemico infliggendo {damage} danni da Ombra, poi lo terrorizza per 3 sec. (talento dello Stregone)"
+      },
+      "deep_freeze": {
+        "name": "Gelo Morto",
+        "description": "Congela profundamente a bersaglio, inflige {damage} de daño de Gelo y lo aturde durante 4 s. (talento da mago)"
+      },
+      "desperate_prayer": {
+        "name": "Ultima Preghiera",
+        "description": "Ti cura istantaneamente di {damage}. (talento del Sacerdote)"
+      },
+      "deterrence": {
+        "name": "Guardia Ispida",
+        "description": "Aumenta la tua probabilità di schivata di 50 punti percentuali per 10 sec. (talento del Cacciatore)"
+      },
+      "divine_shield": {
+        "name": "Custodia di Luce",
+        "description": "Ti protegge con il potere sacro, assorbendo 900 danni per 8 sec. (talento del Paladino)"
+      },
+      "earthbind": {
+        "name": "Terra Avvinghiante",
+        "description": "Lega alla terra i nemici vicini, immobilizzandoli per 2 sec. (talento dello Sciamano)"
+      },
+      "evocation": {
+        "name": "Pozzo d’Etere",
+        "description": "Restaura mana rápidamente. (talento da mago)"
+      },
+      "frenzied_regeneration": {
+        "name": "Rammendo Selvaggio",
+        "description": "Ripristina 180 salute in 10 sec. Utilizzabile solo in Forma d’Orso. (talento del Druido)"
+      },
+      "frost_trap": {
+        "name": "Trappola di Brina",
+        "description": "Congela i nemici nell’area bersaglio per 3 sec., impedendo loro di muoversi e agire. (talento del Cacciatore)"
+      },
+      "ghostly_strike": {
+        "name": "Colpo Spettrale",
+        "description": "Colpisce il nemico infliggendo i danni dell’arma più {damage}, aumenta brevemente la schivata e assegna 1 punto combo. (talento del Ladro)"
+      },
+      "hammer_of_wrath": {
+        "name": "Martello Rintoccante",
+        "description": "Scaglia un martello sacro contro un nemico ferito, infliggendo {damage} danni sacri. Utilizzabile solo sotto il 20% di salute. (talento del Paladino)"
+      },
+      "healing_stream": {
+        "name": "Fonte Viva",
+        "description": "Ripristina 120 salute a un bersaglio alleato in 12 sec. (talento dello Sciamano)"
+      },
+      "holy_wrath": {
+        "name": "Ira del Santo",
+        "description": "Scatena il potere sacro, infliggendo {damage} danni ai nemici vicini. (talento del Paladino)"
+      },
+      "howl_of_terror": {
+        "name": "Ululato del Terrore",
+        "description": "Terrorizza i nemici vicini per un massimo di 3 sec. I danni possono interrompere l’effetto. (talento dello Stregone)"
+      },
+      "ice_block": {
+        "name": "Bara Fredda",
+        "description": "Te encierra en hielo y absorbe una enorme cantidad de daño durante 8 s. (talento da mago)"
+      },
+      "inner_focus": {
+        "name": "Mente Quietata",
+        "description": "Rende gratuita la tua prossima magia. Dura 60 sec. (talento del Sacerdote)"
+      },
+      "innervate": {
+        "name": "Linfa Vitale",
+        "description": "La linfa vivente scorre in te per 10 sec. e ripristina a ondate 20 della tua risorsa attuale: mana, rabbia o energia. Cambiare forma non la interrompe. Sonno, stordimento o stasi arrestano la linfa. (talento del Druido)"
+      },
       "pummel": {
         "name": "Spaccamascella",
         "description": "Interrompe il lancio dell'incantesimo del bersaglio e impedisce di lanciare incantesimi di quella scuola per 4 s."
@@ -6755,9 +7252,81 @@ export const it_IT: EnTranslations = {
         "name": "Calcio",
         "description": "Interrompe il lancio dell'incantesimo del bersaglio e impedisce di lanciare incantesimi di quella scuola per 4 s."
       },
-      "counterspell": {
-        "name": "Spezzaincantesimi",
-        "description": "Interrompe il lancio dell'incantesimo del bersaglio e impedisce di lanciare incantesimi di quella scuola per 6 s."
+      "mend_pet": {
+        "name": "Rattoppo",
+        "description": "Sana a bersaglio alleato por {damage} durante 15 s. (talento da cacciatore)"
+      },
+      "meteor": {
+        "name": "Pietra Celeste",
+        "description": "Richiama una meteora sull’area bersaglio, infliggendo {damage} danni da Fuoco, poi brucia i nemici nell’area per 12-18 danni da Fuoco ogni 2 sec. per 6 sec. (talento del Mago)"
+      },
+      "temporal_mend": {
+        "name": "Temporal Mend",
+        "description": "Draws an ally a moment forward in time, mending {damage} health as the body settles into its healthier future self. (Chronomancy signature)"
+      },
+      "temporal_barrier": {
+        "name": "Temporal Barrier",
+        "description": "Shifts the target a heartbeat out of the present, a temporal shell absorbing {damage} damage for 10 sec before the timeline snaps back."
+      },
+      "temporal_echo": {
+        "name": "Temporal Echo",
+        "description": "Marks an ally with an echo of a healthier moment, mending {damage} health at once. For {duration} sec, part of the Arcane damage you deal is drawn back through the echo to heal them."
+      },
+      "temporal_cascade": {
+        "name": "Temporal Cascade",
+        "description": "Sends an echo cascading through your group: the target and up to four of their nearest allies are mended at once and each marked for {duration} sec, drawing part of the Arcane damage you deal back through their echoes to heal them. (Chronomancy)"
+      },
+      "temporal_reversal": {
+        "name": "Temporal Reversal",
+        "description": "Rewinds a fallen ally's timeline, returning them to life at their body with a portion of their health and mana, even in the thick of combat. (Chronomancy)"
+      },
+      "collective_reversal": {
+        "name": "Inversione collettiva",
+        "description": "Riavvolge la linea temporale di ogni membro morto del gruppo o dell'incursione, riportandolo in vita accanto al corpo con il 30% di salute e mana. Non può essere lanciata in combattimento. (Cronomanzia)"
+      },
+      "temporal_rewind": {
+        "name": "Rewind",
+        "description": "Sends an arcane wave through your group or raid, rewinding time to restore 30% of the damage each ally within 40 yards took over the last 5 seconds (up to 35% of their maximum health). Cannot be a critical effect. (Chronomancy)"
+      },
+      "temporal_hourglass": {
+        "name": "Hourglass of Suspension",
+        "description": "Place a temporal hourglass at the selected location. Beneath an enemy, it suspends them for {hostilePveDuration} sec in PvE or {hostilePvpDuration} sec in PvP and prevents all actions; damage breaks the effect. At your feet or beneath a group ally, it grants stasis for {duration} sec, prevents damage and actions, restores {healing}% of maximum health, and makes cooldowns recover {selfCooldownRecovery}% faster for you or {allyCooldownRecovery}% faster for an ally. On empty ground, the hourglass waits for {groundDuration} sec and affects the first valid unit to step on it. The beneficial aura can be removed manually."
+      },
+      "temporal_acceleration": {
+        "name": "Temporal Acceleration",
+        "description": "Accelerates the flow of time for your group or raid, increasing attack, casting, and channeling speed by 30% for 15 sec. Allies recently affected by Temporal Acceleration or Storm Chorus are too exhausted to benefit. (Chronomancy)"
+      },
+      "perfect_moment": {
+        "name": "Perfect Moment",
+        "description": "Seize your perfect moment: instantly gain 4 Arcane Charges, and for 10 sec Aether Darts does not consume them. (Chronomancy)"
+      },
+      "arcane_surge": {
+        "name": "Aether Surge",
+        "description": "Draws a surge of raw aether through the enemy for {damage} damage. Each cast leaves an Arcane Charge that raises your next Aether Surge's damage and cast speed (5% faster each) but sharply raises its mana cost, stacking up to 4; Aether Darts spends the charges. Each cast can also arm Aether Rush, making your next Aether Surge free and twice as fast to cast."
+      },
+      "mind_sear": {
+        "name": "Bruciamente",
+        "description": "Incanala energia d’Ombra nell’area bersaglio, infliggendo {damage} danni ogni secondo ai nemici vicini. (talento del Sacerdote)"
+      },
+      "multi_shot": {
+        "name": "Tiro Sdoppiato",
+        "description": "Scaglia una raffica sull’area bersaglio, infliggendo {damage} danni fisici ai nemici entro un raggio di 8 m. (talento del Cacciatore)"
+      },
+      "prayer_of_healing": {
+        "name": "Cura del Coro",
+        "description": "Cura gli alleati vicini di {damage}. (talento del Sacerdote)"
+      },
+      "preparation": {
+        "name": "Contingenza",
+        "description": "Azzera il tempo di recupero di Scatto, Evasione e Sparizione. (talento del Ladro)"
+      },
+      "presence_of_mind": {
+        "name": "Mente Rapida",
+        "description": "Hace instantáneo tu siguiente hechizo con tiempo de lanzamiento. Dura 60 s. (talento da mago)"
+      },
+      "psychic_scream": {
+        "name": "Urlo Psichico",
+        "description": "Terrorizza i nemici vicini per un massimo di 4 sec. I danni possono interrompere l’effetto. (talento del Sacerdote)"
       },
       "counter_shot": {
         "name": "Tiro Silenziante",
@@ -6767,6 +7336,26 @@ export const it_IT: EnTranslations = {
         "name": "Rimprovero",
         "description": "Interrompe il lancio dell'incantesimo del bersaglio e impedisce di lanciare incantesimi di quella scuola per 4 s."
       },
+      "shadowstep": {
+        "name": "Scivolo d’Ombra",
+        "description": "Avanzi attraverso le ombre verso il tuo bersaglio. (talento del Ladro)"
+      },
+      "silence": {
+        "name": "Silenzio",
+        "description": "Silenzia il bersaglio per 4 sec. (talento del Sacerdote)"
+      },
+      "smoke_screen": {
+        "name": "Cortina Fumogena",
+        "description": "Scompari in una nube di fumo, aumentando del 30% la probabilità di schivare per 8 s."
+      },
+      "spellsteal": {
+        "name": "Rubamagie",
+        "description": "Ruba un effetto magico benefico da un nemico e lo trasferisce su di te."
+      },
+      "startle_shot": {
+        "name": "Tiro Sconcertante",
+        "description": "Un tiro selvaggio che disorienta il bersaglio per {duration} s. Qualsiasi danno interrompe l’effetto."
+      },
       "skull_bash": {
         "name": "Testata",
         "description": "Una testata in affondo che interrompe il lancio dell'incantesimo del bersaglio e blocca quella scuola per 4 s."
@@ -6774,6 +7363,18 @@ export const it_IT: EnTranslations = {
       "spell_lock": {
         "name": "Ordine del Silenzio",
         "description": "Silenzia il bersaglio durante il lancio e impedisce di lanciare incantesimi di quella scuola per 5 s."
+      },
+      "tranquility": {
+        "name": "Canto della Radura",
+        "description": "Incanala energia rigenerante per 4 sec., curando ogni secondo gli alleati entro 30 m di 42-52. (talento del Druido)"
+      },
+      "typhoon": {
+        "name": "Tifone",
+        "description": "Una raffica di vento respinge tutti i nemici entro 8 m e li frastorna, riducendone del 50% la velocità di movimento per 4 s."
+      },
+      "voidfeast": {
+        "name": "Banchetto del Vuoto",
+        "description": "Divora un effetto magico (uno benefico da un nemico o uno dannoso da un alleato) e ti cura del 6% della salute massima."
       },
       "bear_charge": {
         "name": "Carica di Bruin",
@@ -6792,8 +7393,8 @@ export const it_IT: EnTranslations = {
         "description": "Un'apertura furtiva che dilania il nemico infliggendo danno dell'arma più {damage} e provoca danno da sanguinamento per 9 sec. Conferisce 1 punto combo. Solo in Forma del Lupo."
       },
       "revive_pet": {
-        "name": "Rianima Famiglio",
-        "description": "Rianima il tuo famiglio morto e lo richiama al tuo fianco."
+        "name": "Rattoppare",
+        "description": "Rattoppa il tuo famiglio, ripristinando {overTime} salute in 12 sec con impulsi ogni 3 sec se è vivo. Se è morto, lo rianima con il 35% della salute."
       }
     },
     "items": {
@@ -7556,6 +8157,12 @@ export const it_IT: EnTranslations = {
       "emberglass_warstaff": {
         "name": "Bastone da Guerra Vetrobrace"
       },
+      "conjured_water4": {
+        "name": "Acqua sorgiva evocata"
+      },
+      "conjured_bread4": {
+        "name": "Pane da banchetto evocato"
+      },
       "bristleback_maul": {
         "name": "Martello Gallowglass"
       },
@@ -8024,6 +8631,18 @@ export const it_IT: EnTranslations = {
       "heroic_mark": {
         "name": "Marchio Eroico"
       },
+      "eastbrook_buckler": {
+        "name": "Brocchiero di Eastbrook"
+      },
+      "eastbrook_greatsword": {
+        "name": "Spadone di Eastbrook"
+      },
+      "highwatch_greatsword": {
+        "name": "Spadone di Highwatch"
+      },
+      "highwatch_wallshield": {
+        "name": "Scudo da muro di Highwatch"
+      },
       "morthens_cryptforged_hauberk": {
         "name": "Usbergo forgiacripta di Morthen"
       },
@@ -8176,6 +8795,18 @@ export const it_IT: EnTranslations = {
       },
       "stormcallers_spaulders": {
         "name": "Spallacci Galecall"
+      },
+      "bonewrought_greatsword": {
+        "name": "Spadone Bonewrought"
+      },
+      "direfang_greatblade": {
+        "name": "Gran lama Direfang"
+      },
+      "bonewrought_bulwark": {
+        "name": "Baluardo Bonewrought"
+      },
+      "wraithfire_orb": {
+        "name": "Sfera Wraithfire"
       },
       "unknown_alien_weaponry": {
         "name": "Armamento alieno sconosciuto"
@@ -8425,9 +9056,6 @@ export const it_IT: EnTranslations = {
       "nythraxis_skeleton_warrior": {
         "name": "Guardia reale risorta"
       },
-      "nythraxis_scourge_of_thornpeak": {
-        "name": "Nythraxis, Flagello di Thornpeak"
-      },
       "nythraxis_heroic_warrior_add": {
         "name": "Aldren, Guardiaguerra senza morte"
       },
@@ -8436,6 +9064,9 @@ export const it_IT: EnTranslations = {
       },
       "nythraxis_heroic_rogue_add": {
         "name": "Voss, Lama senza morte"
+      },
+      "nythraxis_scourge_of_thornpeak": {
+        "name": "Nythraxis, Flagello di Thornpeak"
       },
       "reliquary_ledger_wraith": {
         "name": "Spettro del Registro"
@@ -8607,6 +9238,9 @@ export const it_IT: EnTranslations = {
       },
       "ysolei": {
         "name": "Ysolei, Avatar della Luna Annegata"
+      },
+      "water_elemental": {
+        "name": "Elementale dell'Acqua"
       }
     },
     "npcs": {
@@ -8789,11 +9423,11 @@ export const it_IT: EnTranslations = {
     "quests": {
       "q_prof_intro": {
         "title": "Un mestiere per ogni mano",
-        "text": "A Eastbrook ogni anima pratica un mestiere oltre all’arte della spada, {playerName}. Ci sono vene di minerale sparse intorno alla città, quindi impugna un piccone e portami 5 pezzi. Estraili tu, bada bene, saprò riconoscere la differenza.",
-        "completion": "Vedi? Minerale nello zaino e calli sulle mani. Continua a estrarre minerali, tagliare legna e raccogliere erbe mentre percorri le strade. Quando torni in città, tieni d’occhio il tabellone delle Priorità della città vicino al mercato e il banco da lavoro lì accanto. C’è un mestiere onesto in tutto questo, se ti interessa.",
+        "text": "Every soul in Eastbrook works a trade besides the sword, {playerName}. There are ore veins in the rocks around the Copper Dig, southwest of town. Go swing a pick and work 5 of them yourself, mind; I'll know the difference.",
+        "completion": "See? Ore gathered and callus on your hands. Keep at the mining, logging, and herb-picking as you travel the roads, and when you're back in town, mind the Town Focus board by the market and the crafting bench nearby. There's a fair trade waiting in all of it, if you want it.",
         "objectives": {
           "0": {
-            "label": "Pezzo di Minerale"
+            "label": "Ore vein harvested"
           }
         }
       },
@@ -9581,21 +10215,31 @@ export const it_IT: EnTranslations = {
       },
       "q_archetype_acceptance": {
         "title": "Un mestiere da chiamare tuo",
-        "text": "Ogni artigiano di Eastbrook alla fine sceglie un mestiere da considerare proprio. Mettiti alla prova con una sola azione, {playerName}, e dichiara il tuo percorso.",
-        "completion": "Il tuo percorso è scelto; cammina bene.",
+        "text": "Skill is knowledge, {playerName}, but attunement is a promise. Choose two neighboring crafts whose methods you will carry as your majors, then bring me ore worked from the Vale with your own hands.",
+        "completion": "The promise holds. These two crafts are now your majors, and the knowledge opposite them becomes your hobby.",
+        "objectives": {
+          "0": {
+            "label": "Ore vein harvested"
+          }
+        }
+      },
+      "q_prof_make_amends": {
+        "title": "Fare ammenda",
+        "text": "You have carried that pair before, {playerName}. Returning is no fresh vow. Help keep the Vale road clear, and the work will remind your hands what they once knew.",
+        "completion": "The old rhythm returns. Your former pair is active once more.",
         "objectives": {
           "0": {
             "label": "Lupo della Foresta ucciso"
           }
         }
       },
-      "q_prof_make_amends": {
-        "title": "Fare ammenda",
-        "text": "Per mettere da parte un mestiere per un altro, un artigiano deve prima fare ammenda per il percorso non percorso, {playerName}.",
-        "completion": "Modifiche apportate; una nuova strada è aperta per te.",
+      "q_prof_hobby_switch": {
+        "title": "A Different Pastime",
+        "text": "Majors demand a vow. A hobby only asks where your curiosity wanders, {playerName}. Gather a few herbs and decide which craft opposite your majors you want to pursue.",
+        "completion": "A lighter choice, but a useful one. Follow that curiosity as far as rare work will take it.",
         "objectives": {
           "0": {
-            "label": "Lupo della Foresta ucciso"
+            "label": "Herb patch harvested"
           }
         }
       },
@@ -9864,7 +10508,7 @@ export const it_IT: EnTranslations = {
       },
       "necromancers": {
         "name": "Vesti Mournweave",
-        "bonus2": "Non puoi essere respinto (100% di resistenza alla respinta).",
+        "bonus2": "Aumenta il potere degli incantesimi di 20. I danni subiti non ritardano più i tuoi incantesimi (100% di resistenza al ritardo di lancio).",
         "bonus3": "Aumenta l'intelletto di 10 e la tempra di 10.",
         "bonus4": "I tuoi incantesimi hanno una probabilità del 10% di conferire Lancio Limpido, rendendo gratuito il tuo prossimo incantesimo."
       },
@@ -9876,13 +10520,13 @@ export const it_IT: EnTranslations = {
       },
       "soulflame": {
         "name": "Paramenti Wraithfire",
-        "bonus2": "Non puoi essere respinto (100% di resistenza alla respinta).",
+        "bonus2": "Aumenta il potere degli incantesimi di 20. I danni subiti non ritardano più i tuoi incantesimi (100% di resistenza al ritardo di lancio).",
         "bonus3": "Aumenta l'intelletto di 15, lo spirito di 15 e la velocità d'attacco e di lancio del 15%.",
         "bonus4": "I tuoi incantesimi hanno una probabilità del 10% di conferire Vampanima, aumentando la potenza magica di 40 per 10 sec."
       },
       "stormcallers": {
         "name": "Vesti Galecall",
-        "bonus2": "Non puoi essere respinto (100% di resistenza alla respinta).",
+        "bonus2": "Aumenta il potere degli incantesimi di 20. I danni subiti non ritardano più i tuoi incantesimi (100% di resistenza al ritardo di lancio).",
         "bonus3": "Aumenta l'intelletto di 15, lo spirito di 15 e la velocità d'attacco e di lancio del 15%.",
         "bonus4": "I tuoi incantesimi hanno una probabilità del 10% di conferire Vampanima, aumentando la potenza magica di 40 per 10 sec."
       },

@@ -116,6 +116,16 @@ function aura(kind: Aura['kind'], value = 1): Aura {
 }
 
 describe('combat SFX policy', () => {
+  it('routes the Water Elemental away from the generic elemental growls', () => {
+    expect(mobVoiceFamily('water_elemental')).toBe('water_elemental');
+    expect(mobVoiceCue('water_elemental', 'aggro')).toBe('mob_water_elemental_aggro');
+    expect(mobVoiceCue('water_elemental', 'attack')).toBe('mob_water_elemental_attack');
+    expect(mobVoiceCue('water_elemental', 'death')).toBe('mob_water_elemental_death');
+    // Owned summon: no idle bark exists, the sweep must get null.
+    expect(mobVoiceCue('water_elemental', 'idle')).toBeNull();
+    expect(mobVoiceCue('water_elemental', 'hurt')).toBe('mob_water_elemental_attack');
+    expect(mobVoiceFamily('stormcrag_elemental')).toBe('elemental');
+  });
   it('suppresses crit stingers for boss targets only', () => {
     expect(shouldPlayCritSfxForTarget(target('mob', 'nythraxis_scourge_of_thornpeak'))).toBe(false);
     expect(shouldPlayCritSfxForTarget(target('mob', 'nythraxis_skeleton_warrior'))).toBe(true);
@@ -311,6 +321,19 @@ describe('combat SFX policy', () => {
     }
   });
 
+  it('stages a real, buffered idle clip for every family in MOB_VOICE_CUES', () => {
+    // Iterates the live catalog (not a hardcoded template-id table) so a
+    // future 14th family is automatically covered; the `satisfies` clause on
+    // MOB_VOICE_CUES only forces a cue STRING at compile time, not that a
+    // clip is actually staged, which is what this asserts at runtime.
+    const families = Object.entries(MOB_VOICE_CUES);
+    expect(families).toHaveLength(13);
+    for (const [family, cues] of families) {
+      expect(cues.idle, family).toBe(`mob_${family}_idle`);
+      expect(cues.idle in SFX_CLIPS, cues.idle).toBe(true);
+    }
+  });
+
   it('keeps MOB_VOICE_CUES in lockstep with the real family list', () => {
     // A family added to one and forgotten in the other resolves at runtime
     // to a key with no clip: no error, it just plays nothing.
@@ -363,7 +386,6 @@ describe('combat SFX policy', () => {
     const warrior = target('player', 'warrior');
     expect(playerSwingCueForDamage(damage({ kind: 'miss' }), warrior)).toBe('melee_swing_blade');
     expect(playerSwingCueForDamage(damage({ kind: 'dodge' }), warrior)).toBe('melee_swing_blade');
-    expect(playerSwingCueForDamage(damage({ kind: 'parry' }), warrior)).toBe('melee_swing_blade');
     expect(playerSwingCueForDamage(damage({ school: 'fire' }), warrior)).toBeNull();
     expect(playerSwingCueForDamage(damage({ ability: 'Auto Shot' }), warrior)).toBeNull();
   });

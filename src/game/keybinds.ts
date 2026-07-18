@@ -160,14 +160,16 @@ export const BIND_ACTIONS: BindAction[] = [
   { id: 'bags', label: 'Bags', category: 'Interface', kind: 'edge', defaults: ['KeyB'] },
   { id: 'crafting', label: 'Crafting', category: 'Interface', kind: 'edge', defaults: ['KeyT'] },
   // Every bare letter is already claimed (see the Damage Meters note below), so
-  // the wheel parks on the shifted layer of its own key, like Book of Deeds
-  // does on Z and the finder does on I.
+  // the wheel parks on the shifted layer of a key, like Book of Deeds does on Z
+  // and the finder does on I. Shift+W was ruled out: held (movement) actions
+  // ignore modifiers (so e.g. Shift+W still walks, see dispatchEdge below), so
+  // Shift+W would still step the player forward while opening the wheel.
   {
     id: 'professionsWheel',
     label: 'Professions Wheel',
     category: 'Interface',
     kind: 'edge',
-    defaults: ['Shift+KeyW'],
+    defaults: ['Shift+KeyU'],
   },
   {
     id: 'nameplates',
