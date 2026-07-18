@@ -1410,8 +1410,11 @@ export class ClientWorld implements IWorld {
   connected = false;
   onDisconnect: ((reason: string) => void) | null = null;
   // fired on each unexpected socket drop while auto-reconnect is pending, and
-  // once the world is live again; main.ts shows/hides the reconnect overlay
-  onConnectionLost: (() => void) | null = null;
+  // once the world is live again; main.ts shows/hides the reconnect overlay.
+  // attempt/maxAttempts/nextRetryAtMs let the overlay show live progress
+  // (attempt count + retry countdown) instead of a static "reconnecting" string.
+  onConnectionLost: ((attempt: number, maxAttempts: number, nextRetryAtMs: number) => void) | null =
+    null;
   onReconnected: (() => void) | null = null;
   private reconnectAttempts = 0;
   // consecutive 'character already in world' rejections during a reconnect;
@@ -1555,13 +1558,13 @@ export class ClientWorld implements IWorld {
       return;
     }
     this.reconnectAttempts++;
-    this.onConnectionLost?.();
     const delayMs = computeBackoffDelay(
       this.reconnectAttempts,
       RECONNECT_BASE_DELAY_MS,
       RECONNECT_MAX_DELAY_MS,
       Math.random,
     );
+    this.onConnectionLost?.(this.reconnectAttempts, RECONNECT_MAX_ATTEMPTS, Date.now() + delayMs);
     // Clear our own handle when the timer fires: a stale handle left in
     // reconnectTimer would make a later visibility event (while the socket is
     // still CONNECTING) take the pending-timer branch and open a second socket.

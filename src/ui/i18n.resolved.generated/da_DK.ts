@@ -5038,6 +5038,8 @@ export const da_DK: EnTranslations = {
     "enterTimeout": "Kunne ikke komme ind i verdenen. Forbindelsen fik timeout. Kører spilserveren?",
     "connectionLost": "Forbindelsen til serveren gik tabt.",
     "reconnecting": "Forbindelse mistet. Genopretter forbindelse...",
+    "reconnectingAttempt": "Connection lost. Reconnecting... (attempt {attempt}/{maxAttempts}, retrying in {seconds}s)",
+    "slowConnection": "This is taking longer than usual. Check your internet connection.",
     "connectionRejected": "Serveren lukkede forbindelsen.",
     "realmFull": "Denne verden er fuld i øjeblikket. Prøv igen om et par minutter.",
     "tooManyConnections": "Der kommer for mange forbindelser til denne verden fra dit netværk. Luk ekstra spilvinduer, eller prøv igen om et par minutter.",

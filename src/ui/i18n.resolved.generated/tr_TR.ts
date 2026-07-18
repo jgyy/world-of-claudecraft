@@ -5038,6 +5038,8 @@ export const tr_TR: EnTranslations = {
     "enterTimeout": "Dünyaya girilemedi. Bağlantı zaman aşımına uğradı. Oyun sunucusu çalışıyor mu?",
     "connectionLost": "Sunucuyla bağlantı koptu.",
     "reconnecting": "Bağlantı kesildi. Yeniden bağlanılıyor...",
+    "reconnectingAttempt": "Connection lost. Reconnecting... (attempt {attempt}/{maxAttempts}, retrying in {seconds}s)",
+    "slowConnection": "This is taking longer than usual. Check your internet connection.",
     "connectionRejected": "Sunucu bağlantıyı kapattı.",
     "realmFull": "Bu dünya şu an dolu. Lütfen birkaç dakika sonra tekrar dene.",
     "tooManyConnections": "Ağından bu dünyaya çok fazla bağlantı geliyor. Lütfen fazladan oyun pencerelerini kapat ya da birkaç dakika sonra tekrar dene.",

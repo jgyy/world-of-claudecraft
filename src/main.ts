@@ -232,6 +232,7 @@ import {
 } from './ui/i18n';
 import { defaultIconPrewarmEntries, prewarmIconCache } from './ui/icon_prewarm';
 import { iconDataUrl } from './ui/icons';
+import { shouldShowSlowConnectionHint } from './ui/loading_slow_hint';
 import { createLoadingTipRotation, type LoadingTipRotation } from './ui/loading_tips';
 import { showMobileWalletLauncher } from './ui/mobile_wallet_launcher';
 import { applyNativeDeviceLanguage } from './ui/native_language';
@@ -772,10 +773,13 @@ function requestPreferredFullscreen(): void {
 
 const LOADING_FADE_MS = 350; // keep in sync with the #loading-screen CSS transition
 const LOADING_TIP_ROTATE_MS = 5000;
+const SLOW_HINT_CHECK_MS = 1000;
 
 let loadingHideTimer: number | null = null;
 let loadingTipRotation: LoadingTipRotation | null = null;
 let loadingTipTimer: number | null = null;
+let slowHintTimer: number | null = null;
+let lastLoadingProgressAt = 0;
 
 function showLoadingScreen(statusText: string): void {
   const el = $('#loading-screen');
@@ -787,6 +791,7 @@ function showLoadingScreen(statusText: string): void {
   el.classList.add('visible');
   setLoadingStatus(statusText);
   startLoadingTips();
+  startSlowConnectionWatch();
 }
 
 function setLoadingStatus(text: string): void {
@@ -796,6 +801,31 @@ function setLoadingStatus(text: string): void {
 function setLoadingProgress(done: number, total: number): void {
   $('#ls-fill').style.width = total > 0 ? `${Math.round((done / total) * 100)}%` : '0%';
   setLoadingStatus(t('loading.worldProgress', { done, total }));
+  lastLoadingProgressAt = Date.now();
+  setSlowConnectionHintVisible(false);
+}
+
+// Warns once progress has gone quiet for a while (typical on a throttled or
+// lossy connection) so the loading screen does not look frozen while the
+// cosmetic tip keeps rotating underneath it; see loading_slow_hint.ts.
+function startSlowConnectionWatch(): void {
+  lastLoadingProgressAt = Date.now();
+  if (slowHintTimer !== null) return;
+  slowHintTimer = window.setInterval(() => {
+    setSlowConnectionHintVisible(shouldShowSlowConnectionHint(Date.now() - lastLoadingProgressAt));
+  }, SLOW_HINT_CHECK_MS);
+}
+
+function stopSlowConnectionWatch(): void {
+  if (slowHintTimer !== null) {
+    window.clearInterval(slowHintTimer);
+    slowHintTimer = null;
+  }
+  setSlowConnectionHintVisible(false);
+}
+
+function setSlowConnectionHintVisible(visible: boolean): void {
+  $('#ls-slow-hint').classList.toggle('visible', visible);
 }
 
 // Rotating "did you know" copy under the progress bar, purely cosmetic (no
@@ -826,6 +856,7 @@ function hideLoadingScreen(): void {
   if (!el.classList.contains('visible')) return;
   el.classList.add('fade');
   stopLoadingTips();
+  stopSlowConnectionWatch();
   loadingHideTimer = window.setTimeout(() => {
     el.classList.remove('visible', 'fade');
     loadingHideTimer = null;
@@ -4930,7 +4961,8 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
   // an unexpected drop is not fatal: the server holds the character in-world
   // (linkdead) while ClientWorld auto-reconnects, so just veil the game until
   // the world resumes; onDisconnect above fires if the retries run out
-  world.onConnectionLost = () => showReconnectOverlay();
+  world.onConnectionLost = (attempt, maxAttempts, nextRetryAtMs) =>
+    showReconnectOverlay(attempt, maxAttempts, nextRetryAtMs);
   world.onReconnected = () => hideReconnectOverlay();
 }
 

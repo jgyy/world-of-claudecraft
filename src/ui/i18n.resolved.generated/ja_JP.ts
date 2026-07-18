@@ -5038,6 +5038,8 @@ export const ja_JP: EnTranslations = {
     "enterTimeout": "世界に入れませんでした。接続がタイムアウトしました。ゲームサーバーは動作していますか？",
     "connectionLost": "サーバーとの接続が切断されました。",
     "reconnecting": "サーバーとの接続が切断されました。再接続しています...",
+    "reconnectingAttempt": "サーバーとの接続が切断されました。再接続しています...（試行 {attempt}/{maxAttempts}、{seconds}秒後に再試行）",
+    "slowConnection": "読み込みに時間がかかっています。インターネット接続を確認してください。",
     "connectionRejected": "サーバーが接続を閉じました。",
     "realmFull": "このワールドは現在満員です。数分後にもう一度お試しください。",
     "tooManyConnections": "お使いのネットワークからこのワールドへの接続が多すぎます。余分なゲームウィンドウを閉じるか、数分後にもう一度お試しください。",

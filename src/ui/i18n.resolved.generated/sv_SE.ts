@@ -5038,6 +5038,8 @@ export const sv_SE: EnTranslations = {
     "enterTimeout": "Kunde inte gå in i världen. Anslutningen tog för lång tid. Körs spelservern?",
     "connectionLost": "Anslutningen till servern bröts.",
     "reconnecting": "Anslutning förlorad. Återansluter...",
+    "reconnectingAttempt": "Connection lost. Reconnecting... (attempt {attempt}/{maxAttempts}, retrying in {seconds}s)",
+    "slowConnection": "This is taking longer than usual. Check your internet connection.",
     "connectionRejected": "Servern stängde anslutningen.",
     "realmFull": "Denna värld är full just nu. Försök igen om några minuter.",
     "tooManyConnections": "För många anslutningar till denna värld kommer från ditt nätverk. Stäng extra spelfönster eller försök igen om några minuter.",

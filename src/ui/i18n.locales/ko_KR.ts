@@ -1442,6 +1442,9 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '세계에 입장할 수 없습니다. 연결 시간이 초과되었습니다. 게임 서버가 실행 중인가요?',
   'loading.connectionLost': '서버와의 연결이 끊어졌습니다.',
   'loading.reconnecting': '연결이 끊어졌습니다. 다시 연결하는 중...',
+  'loading.reconnectingAttempt':
+    '연결이 끊어졌습니다. 다시 연결하는 중...(시도 {attempt}/{maxAttempts}, {seconds}초 후 재시도)',
+  'loading.slowConnection': '로딩이 평소보다 오래 걸리고 있습니다. 인터넷 연결을 확인하세요.',
   'loading.connectionRejected': '서버가 연결을 종료했습니다.',
   'loading.realmFull': '이 월드는 현재 포화 상태입니다. 몇 분 후에 다시 시도해 주세요.',
   'loading.tooManyConnections':

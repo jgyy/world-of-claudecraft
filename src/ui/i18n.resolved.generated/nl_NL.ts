@@ -5038,6 +5038,8 @@ export const nl_NL: EnTranslations = {
     "enterTimeout": "Kon de wereld niet betreden. De verbinding is verlopen. Draait de gameserver?",
     "connectionLost": "De verbinding met de server is verbroken.",
     "reconnecting": "Verbinding verbroken. Opnieuw verbinding maken...",
+    "reconnectingAttempt": "Connection lost. Reconnecting... (attempt {attempt}/{maxAttempts}, retrying in {seconds}s)",
+    "slowConnection": "This is taking longer than usual. Check your internet connection.",
     "connectionRejected": "De server heeft de verbinding gesloten.",
     "realmFull": "Deze wereld is op dit moment vol. Probeer het over een paar minuten opnieuw.",
     "tooManyConnections": "Er komen te veel verbindingen naar deze wereld vanuit jouw netwerk. Sluit extra spelvensters of probeer het over een paar minuten opnieuw.",

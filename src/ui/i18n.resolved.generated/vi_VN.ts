@@ -5038,6 +5038,8 @@ export const vi_VN: EnTranslations = {
     "enterTimeout": "Không thể vào thế giới. Kết nối đã quá thời gian. Máy chủ trò chơi có đang chạy không?",
     "connectionLost": "Đã mất kết nối tới máy chủ.",
     "reconnecting": "Mất kết nối. Đang kết nối lại...",
+    "reconnectingAttempt": "Connection lost. Reconnecting... (attempt {attempt}/{maxAttempts}, retrying in {seconds}s)",
+    "slowConnection": "This is taking longer than usual. Check your internet connection.",
     "connectionRejected": "Máy chủ đã đóng kết nối.",
     "realmFull": "Thế giới này đang đầy người chơi. Vui lòng thử lại sau vài phút.",
     "tooManyConnections": "Có quá nhiều kết nối đến thế giới này từ mạng của bạn. Vui lòng đóng bớt cửa sổ trò chơi hoặc thử lại sau vài phút.",

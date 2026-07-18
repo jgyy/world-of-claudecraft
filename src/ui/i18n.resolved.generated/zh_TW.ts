@@ -5038,6 +5038,8 @@ export const zh_TW: EnTranslations = {
     "enterTimeout": "無法進入世界。連線已逾時。遊戲伺服器是否正在執行？",
     "connectionLost": "與伺服器的連線已中斷。",
     "reconnecting": "連線已中斷。正在重新連線...",
+    "reconnectingAttempt": "連線已中斷。正在重新連線...（第 {attempt}/{maxAttempts} 次嘗試，{seconds} 秒後重試）",
+    "slowConnection": "載入時間比平常長。請檢查您的網路連線。",
     "connectionRejected": "伺服器已關閉連線。",
     "realmFull": "這個世界目前已滿，請於幾分鐘後再試。",
     "tooManyConnections": "您的網路對這個世界建立的連線過多。請關閉多餘的遊戲視窗，或於幾分鐘後再試。",

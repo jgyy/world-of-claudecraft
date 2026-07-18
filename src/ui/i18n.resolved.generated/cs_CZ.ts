@@ -5038,6 +5038,8 @@ export const cs_CZ: EnTranslations = {
     "enterTimeout": "Nepodařilo se vstoupit do světa. Připojení vypršelo. Běží herní server?",
     "connectionLost": "Připojení k serveru bylo ztraceno.",
     "reconnecting": "Připojení ztraceno. Znovu se připojuje...",
+    "reconnectingAttempt": "Connection lost. Reconnecting... (attempt {attempt}/{maxAttempts}, retrying in {seconds}s)",
+    "slowConnection": "This is taking longer than usual. Check your internet connection.",
     "connectionRejected": "Server ukončil připojení.",
     "realmFull": "Tento svět je momentálně plný. Zkus to prosím znovu za několik minut.",
     "tooManyConnections": "Z tvé sítě se k tomuto světu připojuje příliš mnoho spojení. Zavři nadbytečná herní okna nebo to zkus znovu za několik minut.",

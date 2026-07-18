@@ -5038,6 +5038,8 @@ export const pl_PL: EnTranslations = {
     "enterTimeout": "Nie udało się wejść do świata. Upłynął limit czasu połączenia. Czy serwer gry jest uruchomiony?",
     "connectionLost": "Połączenie z serwerem zostało utracone.",
     "reconnecting": "Połączenie utracone. Ponowne łączenie...",
+    "reconnectingAttempt": "Connection lost. Reconnecting... (attempt {attempt}/{maxAttempts}, retrying in {seconds}s)",
+    "slowConnection": "This is taking longer than usual. Check your internet connection.",
     "connectionRejected": "Serwer zamknął połączenie.",
     "realmFull": "Ten świat jest teraz pełny. Spróbuj ponownie za kilka minut.",
     "tooManyConnections": "Z twojej sieci pochodzi zbyt wiele połączeń do tego świata. Zamknij dodatkowe okna gry lub spróbuj ponownie za kilka minut.",

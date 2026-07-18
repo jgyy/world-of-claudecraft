@@ -5038,6 +5038,8 @@ export const id_ID: EnTranslations = {
     "enterTimeout": "Tidak bisa masuk dunia. Koneksi kehabisan waktu. Apakah server gim berjalan?",
     "connectionLost": "Koneksi ke server terputus.",
     "reconnecting": "Koneksi terputus. Menyambungkan kembali...",
+    "reconnectingAttempt": "Connection lost. Reconnecting... (attempt {attempt}/{maxAttempts}, retrying in {seconds}s)",
+    "slowConnection": "This is taking longer than usual. Check your internet connection.",
     "connectionRejected": "Server menutup koneksi.",
     "realmFull": "Dunia ini sedang penuh. Coba lagi dalam beberapa menit.",
     "tooManyConnections": "Terlalu banyak koneksi ke dunia ini dari jaringanmu. Tutup jendela permainan ekstra atau coba lagi dalam beberapa menit.",

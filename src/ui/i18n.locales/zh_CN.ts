@@ -1388,6 +1388,9 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'loading.enterTimeout': '无法进入世界。连接已超时。游戏服务器是否正在运行？',
   'loading.connectionLost': '与服务器的连接已断开。',
   'loading.reconnecting': '连接已断开。正在重新连接...',
+  'loading.reconnectingAttempt':
+    '连接已断开。正在重新连接...（第 {attempt}/{maxAttempts} 次尝试，{seconds} 秒后重试）',
+  'loading.slowConnection': '加载时间比平时长。请检查您的网络连接。',
   'loading.connectionRejected': '服务器关闭了连接。',
   'loading.realmFull': '当前服务器已满，请稍后几分钟再试。',
   'loading.tooManyConnections':

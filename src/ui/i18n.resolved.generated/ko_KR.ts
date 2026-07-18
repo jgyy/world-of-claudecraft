@@ -5038,6 +5038,8 @@ export const ko_KR: EnTranslations = {
     "enterTimeout": "세계에 입장할 수 없습니다. 연결 시간이 초과되었습니다. 게임 서버가 실행 중인가요?",
     "connectionLost": "서버와의 연결이 끊어졌습니다.",
     "reconnecting": "연결이 끊어졌습니다. 다시 연결하는 중...",
+    "reconnectingAttempt": "연결이 끊어졌습니다. 다시 연결하는 중...(시도 {attempt}/{maxAttempts}, {seconds}초 후 재시도)",
+    "slowConnection": "로딩이 평소보다 오래 걸리고 있습니다. 인터넷 연결을 확인하세요.",
     "connectionRejected": "서버가 연결을 종료했습니다.",
     "realmFull": "이 월드는 현재 포화 상태입니다. 몇 분 후에 다시 시도해 주세요.",
     "tooManyConnections": "사용 중인 네트워크에서 이 월드로 연결이 너무 많습니다. 추가 게임 창을 닫거나 몇 분 후에 다시 시도해 주세요.",
