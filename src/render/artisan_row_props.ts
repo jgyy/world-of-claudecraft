@@ -73,8 +73,11 @@ const ARTISAN_ROW_PLACEMENTS: ReadonlyArray<{
   { kind: 'alchemy_cauldron', x: 5, z: 23, rot: -0.6 },
   { kind: 'cooking_spit', x: 9, z: 25, rot: 0 },
   { kind: 'leatherworking_rack', x: 13, z: 24, rot: 0.9 },
-  { kind: 'tailoring_loom', x: 16.5, z: 21, rot: 1.6 },
-  { kind: 'inscription_lectern', x: 17.5, z: 17, rot: 2.4 },
+  // Nudged off the northeast ruins road (roadDistance was 2.36 and 1.25 at the
+  // original spots, well inside the 3.2 grass/foliage clearance and standing
+  // on bare road surface with no collider): both now sit past 4.0.
+  { kind: 'tailoring_loom', x: 13.5, z: 20.5, rot: 1.6 },
+  { kind: 'inscription_lectern', x: 19.5, z: 14.5, rot: 2.4 },
   { kind: 'enchanting_altar', x: 16, z: 13, rot: -2.6 },
   { kind: 'jewelcrafting_bench', x: 15, z: 9, rot: -1.8 },
   { kind: 'mining_ore_cart', x: 3, z: 12, rot: -0.9 },

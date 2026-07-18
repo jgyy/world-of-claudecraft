@@ -6,6 +6,7 @@ import {
 } from '../src/render/artisan_row_props';
 import { CRAFT_RING } from '../src/sim/content/professions';
 import { BUILTIN_WORLD, setActiveWorldContent } from '../src/sim/data';
+import { roadDistance } from '../src/sim/world';
 
 const { assetUrl, targetHeight, placements } = artisanRowPreloadInternalsForTest;
 
@@ -48,6 +49,20 @@ describe('artisan row props', () => {
     }
   });
 
+  it('keeps every prop clear of the painted road surface (no walk-through furniture standing on a road)', () => {
+    // The map paints a road out to 2.4 (map_terrain.ts); a prop with no
+    // collider sitting inside that band would stand on bare road with
+    // traffic passing through it. tailoring_loom and inscription_lectern
+    // were previously at 2.36 and 1.25 and got nudged off-axis for exactly
+    // this reason.
+    for (const p of placements) {
+      expect(
+        roadDistance(p.x, p.z),
+        `${p.kind} at (${p.x}, ${p.z}) is too close to a road`,
+      ).toBeGreaterThan(2.4);
+    }
+  });
+
   afterEach(() => {
     setActiveWorldContent(null);
   });
@@ -59,23 +74,39 @@ describe('artisan row props', () => {
   });
 
   it('places no props on a custom world (editor play-test), so a hand-authored zone1 landmark never leaks onto a custom map', () => {
-    setActiveWorldContent({ ...BUILTIN_WORLD, zones: BUILTIN_WORLD.zones });
+    // A genuinely different WorldContent (not just a different object
+    // identity referencing the same nested `zones`), so this exercises the
+    // guard the way an editor play-test map actually would.
+    setActiveWorldContent({ ...BUILTIN_WORLD, zones: [] });
     const { group } = buildArtisanRowProps(SEED);
     expect(group.children.length).toBe(0);
   });
 
-  it('tilts each prop to match the local ground slope instead of standing perfectly upright', () => {
+  it('tilts each of the four steep-slope props to match the local ground instead of standing perfectly upright', () => {
     setActiveWorldContent(BUILTIN_WORLD);
     const { group } = buildArtisanRowProps(SEED);
     // A prop with zero pitch leaves world-up unchanged when rotated by its
-    // quaternion (the yaw component alone never touches the y axis); the
-    // reviewer's four steep placements (leatherworking_rack, tailoring_loom,
-    // inscription_lectern, cooking_spit) must tilt off that axis.
-    let sawTilt = false;
-    for (const obj of group.children) {
+    // quaternion (the yaw component alone never touches the y axis). Pin the
+    // specific placements the reviewer measured on 17-22 degree ground
+    // (leatherworking_rack, tailoring_loom, inscription_lectern, cooking_spit)
+    // rather than an "any prop tilted" check, so a regression that silently
+    // drops the tilt for one of them cannot hide behind the others.
+    const steepKinds = new Set([
+      'leatherworking_rack',
+      'tailoring_loom',
+      'inscription_lectern',
+      'cooking_spit',
+    ]);
+    const tiltOf = (obj: THREE.Object3D) => {
       const localUp = new THREE.Vector3(0, 1, 0).applyQuaternion(obj.quaternion);
-      if (Math.abs(localUp.x) > 1e-4 || Math.abs(localUp.z) > 1e-4) sawTilt = true;
+      return Math.hypot(localUp.x, localUp.z);
+    };
+    for (let i = 0; i < placements.length; i++) {
+      const p = placements[i];
+      if (!steepKinds.has(p.kind)) continue;
+      expect(tiltOf(group.children[i]), `${p.kind} did not tilt to the slope`).toBeGreaterThan(
+        1e-3,
+      );
     }
-    expect(sawTilt).toBe(true);
   });
 });
