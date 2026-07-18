@@ -54,6 +54,7 @@ import {
   createCharacterVisual,
   setWeaponVfxViewportHeight,
 } from './characters';
+import { dazedPoseActive } from './characters/anim_state';
 import { logAssetMissOnce } from './characters/asset_miss_log';
 import {
   mechAssetsReady,
@@ -5098,7 +5099,7 @@ export class Renderer {
         ABILITIES[e.castingAbility]?.selfCentered === true;
       st.swimming = swimming;
       st.sitting = e.kind === 'player' && (e.sitting || e.eating !== null || e.drinking !== null);
-      st.stunned = isStunned(e) && !visuallyDead;
+      st.stunned = dazedPoseActive(isStunned(e), polyed, visuallyDead);
       // --- spatial movement audio (self + others) --------------------------
       // All gated by audibility (squared distance) so far entities cost nothing.
       const sink = this.audioSink;

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isVisuallyDead } from '../src/render/anim_state';
 import type { AnimState } from '../src/render/characters/anim_state';
-import { desiredBaseState } from '../src/render/characters/anim_state';
+import { dazedPoseActive, desiredBaseState } from '../src/render/characters/anim_state';
 
 describe('render animation state', () => {
   it('treats zero-hp entities as visually dead before the server dead flag arrives', () => {
@@ -51,5 +51,30 @@ describe('desiredBaseState: swim keeps its pre-existing precedence over spin', (
 
   it('spin still wins over cast/sit/move on dry land, unaffected by the stunned insertion', () => {
     expect(desiredBaseState({ ...BASE, spinning: true, casting: true }, false)).toBe('spin');
+  });
+});
+
+describe('dazedPoseActive: polymorph excluded from the dazed pose', () => {
+  // Review feedback on PR #2064: isStunned() returns true for the polymorph
+  // aura, but the sheep rig (animal(['Attack_Headbutt'])) has no bespoke
+  // `stunned` clip, so it fell back to Idle_HitReact_* and looped a flinch
+  // for the whole polymorph. Polymorph already reads as fully incapacitated
+  // via the form swap, so the dazed pose must not apply while polymorphed.
+  it('suppresses the dazed pose while a polymorph form swap is active', () => {
+    expect(dazedPoseActive(true, true, false)).toBe(false);
+  });
+
+  it('still applies for every other hard CC (stun/stasis/incapacitate)', () => {
+    expect(dazedPoseActive(true, false, false)).toBe(true);
+  });
+
+  it('never applies once visually dead, polymorphed or not', () => {
+    expect(dazedPoseActive(true, false, true)).toBe(false);
+    expect(dazedPoseActive(true, true, true)).toBe(false);
+  });
+
+  it('stays false without a hard CC lockout', () => {
+    expect(dazedPoseActive(false, false, false)).toBe(false);
+    expect(dazedPoseActive(false, true, false)).toBe(false);
   });
 });

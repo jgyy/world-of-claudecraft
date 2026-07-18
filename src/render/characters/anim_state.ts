@@ -18,9 +18,12 @@ export interface AnimState {
   spinning?: boolean;
   swimming: boolean;
   sitting: boolean;
-  /** a hard-CC lockout (stun/incapacitate/polymorph) is active: freezes casts,
-   *  movement, and melee, so the pose must read as dazed rather than idle
-   *  (see sim/combat/cc.ts isStunned) */
+  /** a hard-CC lockout (stun/incapacitate, see sim/combat/cc.ts isStunned) is
+   *  active: freezes casts, movement, and melee, so the pose must read as
+   *  dazed rather than idle. Excludes polymorph: the form swap to the sheep
+   *  model already reads as fully incapacitated, and that rig has no
+   *  bespoke `stunned` clip, so this pose would fall back to looping a
+   *  hit-react flinch for the whole polymorph instead. */
   stunned: boolean;
 }
 
@@ -38,6 +41,20 @@ export type BaseState =
 
 const DEFAULT_WALK_REF = 2.2;
 const DEFAULT_RUN_REF = 7;
+
+/**
+ * Whether the dazed (`AnimState.stunned`) pose should apply, given a raw
+ * hard-CC lockout (`isStunned(e)` from sim/combat/cc.ts) and whether a form
+ * swap (polymorph sheep, druid forms) is currently the active visual.
+ *
+ * Excludes polymorph: the sheep swap already reads as fully incapacitated,
+ * and its rig has no bespoke `stunned` clip, so it would fall back to
+ * looping a hit-react flinch for the whole polymorph instead of a dazed
+ * idle. Every other hard CC (stun/stasis/incapacitate) still gets the pose.
+ */
+export function dazedPoseActive(hardCC: boolean, polymorphed: boolean, dead: boolean): boolean {
+  return hardCC && !polymorphed && !dead;
+}
 
 export function desiredBaseState(s: AnimState, hasWalkBackClip: boolean): BaseState {
   // Airborne is physics (falling/knockback) and outranks stun: you fall either
