@@ -38,6 +38,12 @@ describe('mobile window layout CSS', () => {
     );
   });
 
+  it('hides the mobile bottom action bar while any game window is open', () => {
+    expect(mobileCss).toMatch(
+      /body\.mobile-touch\.mobile-window-open #bottom-bar \{[^}]*display: none;/,
+    );
+  });
+
   it('sizes the mobile map from the app viewport so zoom controls do not dominate it', () => {
     const start = mobileCss.indexOf('body.mobile-touch #map-window {');
     expect(start).toBeGreaterThan(0);

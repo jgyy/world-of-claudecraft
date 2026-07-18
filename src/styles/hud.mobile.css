@@ -1195,6 +1195,13 @@
     width: 100%;
     min-width: 0;
   }
+  /* Any open game window takes over the full sheet (see the near-fullscreen
+     block below), so the bottom action bar has nothing left to sit above:
+     hide it while body.mobile-window-open, matching the gacha-style
+     window-takes-the-screen behavior the other mobile sheets already imply. */
+  body.mobile-touch.mobile-window-open #bottom-bar {
+    display: none;
+  }
   body.mobile-touch #xpbar {
     display: none;
   }
