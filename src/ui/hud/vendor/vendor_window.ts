@@ -106,7 +106,7 @@ export function renderVendorWindow(
     );
     goodsGrid.appendChild(row);
   }
-  el.appendChild(goodsGrid);
+  if (view.goods.length > 0) el.appendChild(goodsGrid);
 
   const sellJunk = document.createElement('button');
   sellJunk.type = 'button';
@@ -157,7 +157,7 @@ export function renderVendorWindow(
     );
     buybackGrid.appendChild(row);
   }
-  el.appendChild(buybackGrid);
+  if (view.buyback.length > 0) el.appendChild(buybackGrid);
 
   const hint = document.createElement('div');
   hint.className = 'vendor-hint';
