@@ -6083,6 +6083,7 @@ export const en_XA: EnTranslations = {
       "rarityUncommon": "[Úñçóɱɱóñ]",
       "rarityRare": "[Ŕáŕé]",
       "rarityEpic": "[Éþíç]",
+      "rarityLegendary": "[Ļéĝéñðáŕý]",
       "merchantStock": "[Ɱéŕçĥáñţ šţóçķ]",
       "stackCount": "[ẋ{count}]",
       "each": "[{money} éáçĥ]",

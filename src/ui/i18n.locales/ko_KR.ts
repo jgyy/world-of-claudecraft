@@ -2329,6 +2329,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.rarityUncommon': '고급',
   'itemUi.market.rarityRare': '희귀',
   'itemUi.market.rarityEpic': '영웅',
+  'itemUi.market.rarityLegendary': '전설',
   'itemUi.market.merchantStock': '상인 재고',
   'itemUi.market.stackCount': 'x{count}',
   'itemUi.market.each': '개당 {money}',

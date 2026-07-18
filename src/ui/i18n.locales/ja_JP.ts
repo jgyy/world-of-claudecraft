@@ -2347,6 +2347,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.rarityUncommon': '高品質',
   'itemUi.market.rarityRare': 'レア',
   'itemUi.market.rarityEpic': 'エピック',
+  'itemUi.market.rarityLegendary': '伝説',
   'itemUi.market.merchantStock': '商人の在庫',
   'itemUi.market.stackCount': 'x{count}',
   'itemUi.market.each': '各 {money}',

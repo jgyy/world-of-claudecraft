@@ -2370,6 +2370,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.rarityUncommon': 'Необычное',
   'itemUi.market.rarityRare': 'Редкое',
   'itemUi.market.rarityEpic': 'Эпическое',
+  'itemUi.market.rarityLegendary': 'Легендарное',
   'itemUi.market.merchantStock': 'Запасы Торговца',
   'itemUi.market.stackCount': 'x{count}',
   'itemUi.market.each': '{money} за штуку',

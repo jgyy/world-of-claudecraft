@@ -6083,6 +6083,7 @@ export const ru_RU: EnTranslations = {
       "rarityUncommon": "Необычное",
       "rarityRare": "Редкое",
       "rarityEpic": "Эпическое",
+      "rarityLegendary": "Легендарное",
       "merchantStock": "Запасы Торговца",
       "stackCount": "x{count}",
       "each": "{money} за штуку",

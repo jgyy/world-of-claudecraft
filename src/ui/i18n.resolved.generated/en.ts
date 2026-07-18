@@ -6083,6 +6083,7 @@ export const en: EnTranslations = {
       "rarityUncommon": "Uncommon",
       "rarityRare": "Rare",
       "rarityEpic": "Epic",
+      "rarityLegendary": "Legendary",
       "merchantStock": "Merchant stock",
       "stackCount": "x{count}",
       "each": "{money} each",

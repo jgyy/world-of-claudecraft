@@ -6083,6 +6083,7 @@ export const ja_JP: EnTranslations = {
       "rarityUncommon": "高品質",
       "rarityRare": "レア",
       "rarityEpic": "エピック",
+      "rarityLegendary": "伝説",
       "merchantStock": "商人の在庫",
       "stackCount": "x{count}",
       "each": "各 {money}",

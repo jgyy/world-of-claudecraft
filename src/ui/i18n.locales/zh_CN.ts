@@ -2250,6 +2250,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.rarityUncommon': '优秀',
   'itemUi.market.rarityRare': '稀有',
   'itemUi.market.rarityEpic': '史诗',
+  'itemUi.market.rarityLegendary': '传奇',
   'itemUi.market.merchantStock': '商人库存',
   'itemUi.market.stackCount': 'x{count}',
   'itemUi.market.each': '每个 {money}',

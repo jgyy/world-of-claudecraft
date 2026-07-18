@@ -6172,6 +6172,7 @@ export type TranslationKeyFlat =
   | 'itemUi.market.quantityOf'
   | 'itemUi.market.rarityCommon'
   | 'itemUi.market.rarityEpic'
+  | 'itemUi.market.rarityLegendary'
   | 'itemUi.market.rarityPoor'
   | 'itemUi.market.rarityRare'
   | 'itemUi.market.rarityUncommon'
