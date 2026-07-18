@@ -39,6 +39,7 @@ import { tEntity } from '../ui/entity_i18n';
 import type { IWorld } from '../world_api';
 import { isVisuallyDead } from './anim_state';
 import { AOE_RING_LIFETIME, aoeRingAnim } from './aoe_ring';
+import { buildArtisanRowProps } from './artisan_row_props';
 import type { AmbientPointSource, SpatialAudioSink, Surface } from './audio_sink';
 import { type BirdsView, buildBirds } from './birds';
 import { type CameraOcclusionState, stepCameraOcclusion } from './camera_collision';
@@ -1452,6 +1453,11 @@ export class Renderer {
     // Baked into world space at build with no per-frame update(), same as props.
     freezeStaticMatrices(gatherNodes.group);
     this.gatherNodeMeshes = gatherNodes.group.children;
+
+    const artisanRow = buildArtisanRowProps(this.sim.cfg.seed);
+    setRenderCategory(artisanRow.group, 'props');
+    this.scene.add(artisanRow.group);
+    freezeStaticMatrices(artisanRow.group);
 
     // selection ring — a classic target reticle: a base ring plus four
     // inward-pointing ticks. The base ring is draped over the terrain each
