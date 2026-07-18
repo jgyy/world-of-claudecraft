@@ -2668,10 +2668,6 @@
   body.mobile-touch #market-body {
     min-height: 96px;
   }
-  body.mobile-touch .mkt-filters,
-  body.mobile-touch .mkt-filters.has-subtype {
-    grid-template-columns: 1fr;
-  }
   body.mobile-touch .mkt-select-btn {
     min-height: 40px;
     font-size: 16px;

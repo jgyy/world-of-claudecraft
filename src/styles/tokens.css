@@ -80,32 +80,40 @@
        a hardcoded dark-only gradient. */
     --control-bg: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--color-bg-dark) 82%, white 18%) 0%,
-      var(--color-bg-dark) 55%,
-      color-mix(in srgb, var(--color-bg-dark) 88%, black 12%) 100%
+      color-mix(in srgb, var(--color-bg-dark) 55%, white 45%) 0%,
+      var(--color-bg-dark) 45%,
+      color-mix(in srgb, var(--color-bg-dark) 72%, black 28%) 100%
     );
     --control-bg-hover: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--color-bg-dark) 68%, white 32%) 0%,
-      color-mix(in srgb, var(--color-bg-dark) 92%, white 8%) 55%,
+      color-mix(in srgb, var(--color-bg-dark) 38%, white 62%) 0%,
+      color-mix(in srgb, var(--color-bg-dark) 75%, white 25%) 45%,
       var(--color-bg-dark) 100%
     );
     --control-bg-active: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--color-bg-dark) 88%, black 12%) 0%,
-      color-mix(in srgb, var(--color-bg-dark) 94%, black 6%) 55%,
+      color-mix(in srgb, var(--color-bg-dark) 72%, black 28%) 0%,
+      color-mix(in srgb, var(--color-bg-dark) 85%, black 15%) 45%,
       var(--color-bg-dark) 100%
     );
-    --control-border: var(--color-border-default);
+    /* --border is the bright theme-recomputed bronze/gold edge (theme.ts); using
+       it (not the near-black --color-border-default) is what actually reads as
+       a carved metal rim against a dark panel instead of vanishing into it. */
+    --control-border: var(--border);
     --control-border-hover: var(--color-border-focus);
     --control-shadow-inset:
-      inset 0 2px 3px rgba(0, 0, 0, 0.75), inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+      inset 0 3px 5px rgba(0, 0, 0, 0.85), inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+      0 1px 0 rgba(255, 255, 255, 0.06);
     --control-shadow-raised:
-      inset 0 1px 0 rgba(255, 217, 128, 0.18), inset 0 -2px 3px rgba(0, 0, 0, 0.55),
-      0 1px 2px rgba(0, 0, 0, 0.6);
+      inset 0 1px 0 rgba(255, 226, 150, 0.4), inset 0 -3px 4px rgba(0, 0, 0, 0.65),
+      0 2px 4px rgba(0, 0, 0, 0.7);
     --control-shadow-raised-active:
-      inset 0 2px 3px rgba(0, 0, 0, 0.65), inset 0 -1px 0 rgba(255, 217, 128, 0.08);
+      inset 0 3px 5px rgba(0, 0, 0, 0.75), inset 0 -1px 0 rgba(255, 226, 150, 0.15);
     --control-text-embossed: 0 1px 0 rgba(0, 0, 0, 0.85);
+    /* Shared width ceiling: a text input / dropdown reads as a game widget, not
+       a stretched HTML form field, when it does not chase the full panel width.
+       Individual components may still cap tighter. */
+    --control-max-width: 340px;
 
     --color-text-light: #f0ebd8;
     --color-text-muted: #998d6a;

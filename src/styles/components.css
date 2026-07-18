@@ -4017,6 +4017,7 @@
     appearance: none;
     -webkit-appearance: none;
     width: 100%;
+    max-width: var(--control-max-width);
     box-sizing: border-box;
     padding: 6px 26px 6px 8px;
     background-color: var(--color-bg-dark);
@@ -4083,6 +4084,7 @@
   .ui-dd-btn {
     min-width: 112px;
     width: 100%;
+    max-width: var(--control-max-width);
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -8268,6 +8270,7 @@
   }
   .mkt-search {
     width: 100%;
+    max-width: var(--control-max-width);
     box-sizing: border-box;
     margin: 2px 0 8px;
     padding: 7px 10px;
@@ -8287,16 +8290,18 @@
     outline-offset: 1px;
     border-color: var(--color-border-focus);
   }
+  /* auto-fit + minmax: each filter claims its natural column while there is
+     room (Type/Rarity/subtype sit on one row), and only wraps to additional
+     rows once the window is genuinely too narrow to fit them side by side,
+     rather than a fixed column count that leaves a filter stretched full-width
+     on a window that has room for two. */
   .mkt-filters {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 8px;
     margin: 0 0 8px;
     position: relative;
     z-index: 3;
-  }
-  .mkt-filters.has-subtype {
-    grid-template-columns: 1fr 1fr 1fr;
   }
   .mkt-filter {
     display: flex;
