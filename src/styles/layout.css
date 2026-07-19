@@ -129,4 +129,34 @@
      button is a direct window child over the map canvas), so the sticky-header
      and always-reachable-close guarantees above deliberately do not apply to it.
      Keep it headerless on purpose; give it a real header before relying on them. */
+
+  /* The carved corner/edge ornament (base.css .panel::before / ::after) is a
+     descendant whose containing block is .window's own padding box; on any
+     window whose content overflows (character, bags, deeds, quest log,
+     spellbook, ...) that box's origin moves with the internal scroll offset,
+     so the whole gilded frame scrolls up and out with the content the moment
+     the window's own overflow-y: auto kicks in -- the same class of bug the
+     .window-resizable grip comment above already documents for a scrolling
+     descendant. Escape it with `position: fixed`, sized/positioned from the
+     `--win-frame-*` custom properties window_ornament_frame.ts keeps in sync
+     with the window's actual rect (open, drag-commit, resize-commit, and
+     viewport resize; never per-scroll). `position: fixed` only escapes
+     .window's own scroll region if .window is not itself a containing block
+     for fixed descendants, which a `transform` would create; that same sync
+     also pins the window to explicit left/top (transform: none), so this
+     genuinely resolves against the viewport instead of being re-trapped by
+     the window's own centering transform. Higher specificity than the
+     generic `.panel::before` / `::after` (two classes vs one), so it wins
+     regardless of source order; every other `.panel` (buttons, bars, unit
+     frames, ...) is not a scroll container and keeps the simple
+     absolute/inset:0 form. */
+  .window.panel::before,
+  .window.panel::after {
+    position: fixed;
+    inset: auto;
+    left: var(--win-frame-l, 0px);
+    top: var(--win-frame-t, 0px);
+    width: var(--win-frame-w, 0px);
+    height: var(--win-frame-h, 0px);
+  }
 }

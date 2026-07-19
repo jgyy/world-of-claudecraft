@@ -471,6 +471,7 @@ import {
   type WindowDragController,
 } from './window_drag';
 import { makeWindowFocus } from './window_focus';
+import { syncWindowOrnamentFrame } from './window_ornament_frame';
 import { installWindowResize, markResizableWindow } from './window_resize';
 import { stackedWindowsVisible } from './window_stack_state_core';
 import { installWorldDropTarget } from './world_drop_target';
@@ -2230,17 +2231,24 @@ export class Hud {
       bringToFront: (el) => this.bringWindowToFront(el),
       hideTooltip: () => this.hideTooltip(),
       pinWindow: (el, rect) => this.setWindowPixelPosition(el, rect.left, rect.top, rect),
-      commitWindow: (el, left, top, rect) => this.setWindowPixelPosition(el, left, top, rect),
+      commitWindow: (el, left, top, rect) => {
+        this.setWindowPixelPosition(el, left, top, rect);
+        this.syncWindowOrnamentFrame(el);
+      },
     });
     installWindowResize({
       getScale: () => getUiScale(),
-      pinWindow: (el, rect) => this.setWindowPixelPosition(el, rect.left, rect.top, rect),
+      pinWindow: (el, rect) => {
+        this.setWindowPixelPosition(el, rect.left, rect.top, rect);
+        this.syncWindowOrnamentFrame(el);
+      },
     });
     window.addEventListener('resize', () => {
       document.querySelectorAll<HTMLElement>('.window.panel').forEach((el) => {
         if (!this.isWindowVisible(el) || el.dataset.windowMoved !== '1') return;
         const rect = el.getBoundingClientRect();
         this.setWindowPixelPosition(el, rect.left, rect.top, rect);
+        this.syncWindowOrnamentFrame(el);
       });
     });
   }
@@ -2274,8 +2282,24 @@ export class Hud {
         this.setWindowPixelPosition(el, rect.left, rect.top, rect);
       }
       this.bringWindowToFront(el);
+      this.syncWindowOrnamentFrame(el);
     }
     this.syncAnyWindowOpenState();
+  }
+
+  /**
+   * Pins the window (transform: none, explicit left/top) and refreshes the
+   * `--win-frame-*` custom properties the fixed-position corner/edge
+   * ornament reads, so it stays put across the window's own internal
+   * scroll (see window_ornament_frame.ts). Marks the window as "moved" so
+   * the viewport-resize re-clamp below keeps it on-screen afterward.
+   */
+  private syncWindowOrnamentFrame(el: HTMLElement): void {
+    syncWindowOrnamentFrame(el, {
+      pinWindow: (w, rect) => this.setWindowPixelPosition(w, rect.left, rect.top, rect),
+      getScale: () => getUiScale(),
+    });
+    el.dataset.windowMoved = '1';
   }
 
   private syncAnyWindowOpenState(): void {
