@@ -735,6 +735,93 @@ describe('automatic queue', () => {
     expect(proposal?.role).toBe('tank');
     expect(sim.dungeonFinderInfoFor(healer)?.proposal?.role).toBe('healer');
   });
+
+  it('goes idle after proving a role-imbalanced backlog unmatchable, instead of re-running a full matching pass every tick forever', () => {
+    // Companion to the "matchable group behind a large unmatchable prefix"
+    // case above: a backlog that can NEVER form a group (no tank or healer
+    // ever queues) must not keep runMatching()'s full pass re-arming
+    // matchDirty on every single tick indefinitely. Without the idle guard
+    // (matchProvenIdleSeq in src/sim/social/dungeon_finder.ts), the shared
+    // node budget still bounds one pass, but a truncated pass always re-arms
+    // matchDirty, so an unformable queue burns a full (bounded but nonzero)
+    // matching pass on every tick of an idle realm forever: measured ~6.9ms
+    // per tick sustained, about 14% of the 50ms tick budget.
+    const sim = makeSim();
+    const dpsOnly = addPlayers(
+      sim,
+      Array.from({ length: 24 }, (_, i) => ({
+        cls: 'mage' as PlayerClass,
+        roles: ['dps'] as Role[],
+        level: 8,
+        name: `D${i}`,
+      })),
+    );
+    for (const pid of dpsOnly) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
+
+    const finder = (sim as unknown as { dungeonFinder: { matchDirty: boolean } }).dungeonFinder;
+
+    // Enough ticks to walk every anchor at least once (one anchor per
+    // truncated pass, see the shared-budget livelock test), proving the
+    // backlog unmatchable, PLUS headroom past that point.
+    const SETTLE_TICKS = dpsOnly.length + 10;
+    for (let i = 0; i < SETTLE_TICKS; i++) sim.tick();
+
+    // Once proven idle, matching must not re-arm itself tick after tick with
+    // no queue mutation: sample a further stretch and confirm matchDirty is
+    // NOT re-set on (nearly) every tick.
+    const SAMPLE_TICKS = 60;
+    let dirtyTicks = 0;
+    for (let i = 0; i < SAMPLE_TICKS; i++) {
+      sim.tick();
+      if (finder.matchDirty) dirtyTicks++;
+    }
+    expect(dirtyTicks).toBeLessThan(SAMPLE_TICKS / 2);
+
+    // The backlog is genuinely still unmatchable and still fully queued: the
+    // idle guard did not silently drop anyone.
+    expect(sim.dungeonFinderInfoFor(dpsOnly[0])?.queue).not.toBeNull();
+  });
+
+  it('re-arms matching immediately once a new unit joins an idle, proven-unmatchable backlog', () => {
+    const sim = makeSim();
+    // Healer queues FIRST (matches the shared-budget-livelock test's queue
+    // shape): the FIFO candidate window (FINDER_MATCH_UNIT_WINDOW) is built
+    // in strict join order, so the healer must be within the window's oldest
+    // slots for the tank (joining LAST, below) to ever find a completable
+    // composition once it becomes an anchor.
+    const healer = addPlayers(sim, [
+      { cls: 'priest', roles: ['healer'], level: 8, name: 'Heal' },
+    ])[0];
+    sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], healer);
+    const dpsOnly = addPlayers(
+      sim,
+      Array.from({ length: 24 }, (_, i) => ({
+        cls: 'mage' as PlayerClass,
+        roles: ['dps'] as Role[],
+        level: 8,
+        name: `D${i}`,
+      })),
+    );
+    for (const pid of dpsOnly) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
+    for (let i = 0; i < dpsOnly.length + 10; i++) sim.tick();
+
+    const finder = (sim as unknown as { dungeonFinder: { matchDirty: boolean } }).dungeonFinder;
+    expect(finder.matchDirty).toBe(false);
+
+    const tank = addPlayers(sim, [{ cls: 'warrior', roles: ['tank'], level: 8, name: 'Tank' }])[0];
+    sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], tank);
+    // The join itself re-arms matching synchronously (armMatching), before
+    // the next tick even runs.
+    expect(finder.matchDirty).toBe(true);
+
+    let proposal: DungeonFinderProposalView | null = null;
+    for (let i = 0; i < dpsOnly.length + 10 && !proposal; i++) {
+      tickAll(sim, 1);
+      proposal = sim.dungeonFinderInfoFor(tank)?.proposal ?? null;
+    }
+    expect(proposal).not.toBeNull();
+    expect(proposal?.role).toBe('tank');
+  });
 });
 
 // ---------------------------------------------------------------------------

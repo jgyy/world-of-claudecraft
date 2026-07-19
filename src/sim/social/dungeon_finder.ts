@@ -220,6 +220,27 @@ export class DungeonFinderMachine {
   // instead of re-spending the whole budget on the same oldest anchors every
   // tick (see runMatching).
   private matchCursorUnitId: number | null = null;
+  // Livelock guard: bumped by every queue-affecting mutation (join, leave,
+  // role change, proposal fail/complete, sweep dropping/re-scoping a unit).
+  // runMatching() uses it to tell "the cursor is still working through the
+  // SAME backlog" apart from "the backlog actually changed", so a proven-
+  // unmatchable backlog stops re-arming matchDirty every tick forever
+  // instead of re-running the (bounded but non-zero) full pass on an idle
+  // realm indefinitely.
+  private matchMutationSeq = 0;
+  // matchMutationSeq value the CURRENT cursor lap started walking against;
+  // reset (with matchLapAnchorsVisited) whenever a mutation invalidates the
+  // in-progress lap.
+  private matchLapSeq = -1;
+  // Anchors fully attempted (cursor advanced past them) since matchLapSeq
+  // was last reset. Once this reaches the queue length with no proposal
+  // formed, every anchor has had a turn against the CURRENT backlog: proven
+  // unmatchable until the next mutation.
+  private matchLapAnchorsVisited = 0;
+  // matchMutationSeq value as of the last time a full lap proved the queue
+  // unmatchable; matching goes idle (stops re-arming on truncation) while
+  // this equals matchMutationSeq.
+  private matchProvenIdleSeq = -1;
   // Board projection cache (viewer-independent): rebuilt when the revision
   // bumps or on the once-a-second sweep (party rosters mutate outside finder
   // commands), then delta-elided on the wire by the encoder.
@@ -229,6 +250,16 @@ export class DungeonFinderMachine {
   private boardCacheTick = -1;
 
   constructor(private readonly ctx: SimContext) {}
+
+  // Arm matching AND record that the backlog actually changed, so a proven-
+  // idle (unmatchable) state gets invalidated. Every queue-content mutation
+  // site below calls this instead of setting matchDirty directly; the ONE
+  // exception is runMatching()'s own truncation re-arm, which resumes the
+  // SAME search rather than reacting to a new mutation.
+  private armMatching(): void {
+    this.matchMutationSeq++;
+    this.matchDirty = true;
+  }
 
   // ---- shared validation ----------------------------------------------------
 
@@ -317,7 +348,7 @@ export class DungeonFinderMachine {
       id,
       cleaned.filter((role) => eligible.includes(role)),
     );
-    this.matchDirty = true;
+    this.armMatching();
     // Listing projections derive member roles from this selection.
     this.bumpBoard();
   }
@@ -386,7 +417,7 @@ export class DungeonFinderMachine {
       activities,
     };
     this.queue.push(unit);
-    this.matchDirty = true;
+    this.armMatching();
     for (const memberPid of members)
       this.ctx.notice(memberPid, 'You join the Dungeon Finder queue.');
   }
@@ -438,7 +469,7 @@ export class DungeonFinderMachine {
 
   private dropUnit(unit: FinderQueueUnit): void {
     this.queue = this.queue.filter((u) => u.id !== unit.id);
-    this.matchDirty = true;
+    this.armMatching();
   }
 
   // ---- proposals ------------------------------------------------------------
@@ -494,7 +525,7 @@ export class DungeonFinderMachine {
       for (const memberPid of unit.members)
         this.ctx.notice(memberPid, 'The group did not assemble. You keep your place in the queue.');
     }
-    this.matchDirty = true;
+    this.armMatching();
   }
 
   private completeProposal(proposal: FinderProposal): void {
@@ -549,7 +580,7 @@ export class DungeonFinderMachine {
         'Your Dungeon Finder group has assembled. Travel to the entrance together.',
       );
     }
-    this.matchDirty = true;
+    this.armMatching();
   }
 
   // ---- premade board ---------------------------------------------------------
@@ -843,7 +874,7 @@ export class DungeonFinderMachine {
           this.ctx.notice(memberPid, 'Your group changed and left the Dungeon Finder queue.');
       } else if (still.length !== unit.activities.length) {
         unit.activities = still;
-        this.matchDirty = true;
+        this.armMatching();
       }
     }
     for (const listing of [...this.listings]) {
@@ -899,6 +930,14 @@ export class DungeonFinderMachine {
     const budgetBox = { remaining: FINDER_MATCH_NODE_BUDGET };
     let changed = true;
     let truncated = false;
+    // A mutation invalidates any lap already in progress: restart the
+    // anchors-visited count against the CURRENT backlog (see
+    // matchLapAnchorsVisited).
+    if (this.matchLapSeq !== this.matchMutationSeq) {
+      this.matchLapSeq = this.matchMutationSeq;
+      this.matchLapAnchorsVisited = 0;
+    }
+    let lastQueueLen = 0;
     while (changed && budgetBox.remaining > 0) {
       changed = false;
       // Stable FIFO order: original join time, then unit id, ROTATED to start
@@ -910,6 +949,7 @@ export class DungeonFinderMachine {
       // form a group: rotating guarantees each anchor eventually gets a turn
       // at bounded per-tick cost, still in FIFO order once traversal wraps.
       const sorted = [...this.queue].sort((a, b) => a.joinedAt - b.joinedAt || a.id - b.id);
+      lastQueueLen = sorted.length;
       const cursorIndex =
         this.matchCursorUnitId === null
           ? -1
@@ -939,15 +979,31 @@ export class DungeonFinderMachine {
         // Fully attempted this anchor within budget: resume after it next
         // pass so a later pass advances past it instead of retrying it first.
         this.matchCursorUnitId = anchor.id;
+        this.matchLapAnchorsVisited++;
       }
       if (truncated) break;
     }
     if (truncated) {
-      // Budget ran out mid-pass: re-arm so the next tick's update() resumes
-      // matching from where we stopped instead of silently going idle.
-      this.matchDirty = true;
+      // Every anchor has now had a full turn against the CURRENT backlog
+      // (no mutation since the lap started) without forming a proposal:
+      // proven unmatchable, so stop re-arming matchDirty every tick until
+      // the next queue mutation (see armMatching). This is what keeps an
+      // unformable backlog from re-running a full matching pass forever.
+      if (this.matchLapAnchorsVisited >= lastQueueLen) {
+        this.matchProvenIdleSeq = this.matchMutationSeq;
+      }
+      if (this.matchProvenIdleSeq !== this.matchMutationSeq) {
+        // Budget ran out mid-lap: re-arm so the next tick's update() resumes
+        // matching from where we stopped instead of silently going idle.
+        this.matchDirty = true;
+      }
     } else {
+      // A full uninterrupted pass completed with nothing left to form:
+      // proven idle for the current backlog too.
       this.matchCursorUnitId = null;
+      this.matchLapAnchorsVisited = 0;
+      this.matchLapSeq = this.matchMutationSeq;
+      this.matchProvenIdleSeq = this.matchMutationSeq;
     }
   }
 
@@ -1023,6 +1079,10 @@ export class DungeonFinderMachine {
   ): void {
     const ids = new Set(units.map((u) => u.id));
     this.queue = this.queue.filter((u) => !ids.has(u.id));
+    // The remaining backlog just changed shape: invalidate any proven-idle
+    // state (see matchProvenIdleSeq) without forcing an extra matchDirty
+    // re-arm here (runMatching()'s own end-of-pass logic decides that).
+    this.matchMutationSeq++;
     const proposal: FinderProposal = {
       id: this.nextProposalId++,
       activityId: activity.id,

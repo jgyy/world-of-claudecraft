@@ -132,4 +132,45 @@ describe('dungeon finder automatic role-queue matching high-load regression budg
     expect(finder.queue.length).toBe(BACKLOG);
     for (const unit of finder.queue) expect(unit.members.length).toBe(1);
   });
+
+  it('goes idle instead of re-running a full matching pass on every tick forever', () => {
+    // The two tests above intentionally force-arm matchDirty every sampled
+    // tick to measure worst-case single-pass cost; that setup cannot observe
+    // whether the machine ever stops re-arming on its own. This test ticks
+    // normally (no reflection poke) against the same unmatchable backlog
+    // shape and counts how many ticks actually ran a matching pass: once the
+    // anchor cursor has walked the whole backlog once with no proposal
+    // formed and no queue mutation, matching must go idle (see
+    // matchProvenIdleSeq in src/sim/social/dungeon_finder.ts) rather than
+    // re-arming matchDirty every single tick forever (measured ~6.9ms/tick
+    // sustained pre-fix, about 14% of the 50ms tick budget).
+    const BACKLOG = 40;
+    const sim = new Sim({ seed: WORLD_SEED + 3, playerClass: 'warrior', noPlayer: true });
+    buildDpsBacklog(sim, BACKLOG);
+    const finder = (sim as unknown as { dungeonFinder: { matchDirty: boolean } }).dungeonFinder;
+
+    // One anchor gets a full turn per truncated pass at this shared-budget
+    // node count (see the shared-budget livelock coverage in
+    // tests/dungeon_finder.test.ts), so BACKLOG ticks walks the whole
+    // backlog at least once; give it headroom on top of that.
+    const SETTLE_TICKS = BACKLOG + 10;
+    for (let i = 0; i < SETTLE_TICKS; i++) sim.tick();
+
+    const SAMPLE_TICKS = 80;
+    let dirtyTicks = 0;
+    for (let i = 0; i < SAMPLE_TICKS; i++) {
+      sim.tick();
+      if (finder.matchDirty) dirtyTicks++;
+    }
+
+    console.log(
+      `[dungeon finder perf] idle check: ${dirtyTicks}/${SAMPLE_TICKS} matching ticks ` +
+        `after settling on an unmatchable ${BACKLOG}-unit backlog`,
+    );
+
+    // Forever-rearm would show up as dirtyTicks === SAMPLE_TICKS (every
+    // tick). A generous ceiling well under "every tick" still catches that
+    // regression without depending on exact tick-boundary timing.
+    expect(dirtyTicks).toBeLessThan(SAMPLE_TICKS / 2);
+  }, 30_000);
 });
