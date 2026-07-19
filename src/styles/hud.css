@@ -647,9 +647,14 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    border: 1px solid #4a3d1d;
+    /* Transparent, not absent: hover/active recolor this same border into a
+       solid gold ring; the resting-state edge comes from the gilded
+       border-box gradient layer plus the ::after micro-ring overlay. */
+    border: 1px solid transparent;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    background:
+      radial-gradient(circle at 35% 30%, #2c2c3a, #15151f) padding-box,
+      var(--ornament-gilt) border-box;
     color: var(--color-text-muted);
     cursor: var(--cursor-point);
     opacity: 0.6;
@@ -661,6 +666,22 @@
       opacity 0.12s ease,
       border-color 0.12s ease,
       color 0.12s ease;
+  }
+  .unitframe .tf-move-btn::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    pointer-events: none;
+    z-index: -1;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-ring-micro);
+    mask-image: var(--ornament-ring-micro);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 30px 30px;
+    mask-size: 30px 30px;
   }
   .unitframe .tf-move-btn::before {
     content: "";
@@ -740,7 +761,7 @@
     inset: -2px;
     z-index: 1;
     pointer-events: none;
-    background: var(--border);
+    background: var(--ornament-gilt);
     -webkit-mask-image: var(--ornament-ring-portrait);
     mask-image: var(--ornament-ring-portrait);
     -webkit-mask-repeat: no-repeat;
@@ -754,9 +775,16 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 3px solid var(--border);
+    /* Gilded ring, not a flat color: `border-box` paints --ornament-gilt's
+       repeating-conic-gradient in the border ring only, since the padding-box
+       layer covers the content area on top of it (the standard
+       transparent-border + two-background-layers gradient-border trick,
+       the circle-safe alternative to border-image). */
+    border: 3px solid transparent;
     outline: 1px solid #000;
-    background: radial-gradient(circle at 35% 30%, #3a3a4e, #14141c);
+    background:
+      radial-gradient(circle at 35% 30%, #3a3a4e, #14141c) padding-box,
+      var(--ornament-gilt) border-box;
     box-shadow:
       0 2px 8px #000c,
       inset 0 0 12px #0009;
@@ -778,9 +806,14 @@
     left: -3px;
     width: 24px;
     height: 24px;
-    background: radial-gradient(circle at 40% 35%, #4a3a14, #241c08);
-    border: 2px solid var(--gold-dim);
+    /* Gilded ring via the two-layer gradient-border trick (see .portrait
+       above): border-box paints --ornament-gilt in the 2px ring, padding-box
+       covers the badge face on top of it. */
+    border: 2px solid transparent;
     border-radius: 50%;
+    background:
+      radial-gradient(circle at 40% 35%, #4a3a14, #241c08) padding-box,
+      var(--ornament-gilt) border-box;
     color: var(--gold);
     font-size: 12px;
     font-weight: bold;
@@ -789,6 +822,22 @@
     justify-content: center;
     text-shadow: 1px 1px 1px #000;
     z-index: 3;
+  }
+  .level-chip::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    pointer-events: none;
+    z-index: -1;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-ring-micro);
+    mask-image: var(--ornament-ring-micro);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 30px 30px;
+    mask-size: 30px 30px;
   }
   /* crossed-swords combat indicator on the player portrait (classic style) */
   .combat-flash {
@@ -826,14 +875,68 @@
       inset 0 0 12px #0009;
   }
   .uf-bars {
+    position: relative;
     width: 190px;
     margin-left: -8px;
     padding: 5px 8px 5px 14px;
-    background: var(--panel-bg);
-    border: 2px solid var(--border);
-    outline: 1px solid #000;
+    background:
+      var(--ornament-grain) repeat,
+      var(--panel-bg);
+    background-blend-mode: overlay, normal;
     border-radius: 0 6px 6px 0;
     box-shadow: 0 2px 10px #000a;
+  }
+  .uf-bars::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 6;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      36px 4px,
+      36px 4px,
+      4px 26px,
+      4px 26px;
+    mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      36px 4px,
+      36px 4px,
+      4px 26px,
+      4px 26px;
   }
   #target-frame .portrait-wrap {
     order: 2;
@@ -920,11 +1023,47 @@
   .bar {
     position: relative;
     height: 15px;
-    background: #1a1a1a;
-    border: 1px solid #000;
+    background:
+      var(--ornament-grain) repeat,
+      #1a1a1a;
+    background-blend-mode: overlay, normal;
     margin-top: 3px;
     border-radius: 2px;
     overflow: hidden;
+  }
+  .bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      24px 2px,
+      24px 2px,
+      2px 15px,
+      2px 15px;
+    mask-size:
+      24px 2px,
+      24px 2px,
+      2px 15px,
+      2px 15px;
   }
   .bar-fill {
     position: absolute;
@@ -1229,43 +1368,68 @@
     width: 300px;
     height: 24px;
     display: none;
-    border: 2px solid var(--border);
-    outline: 1px solid #000;
     border-radius: 4px;
-    background: #100c08;
+    background:
+      var(--ornament-grain) repeat,
+      #100c08;
+    background-blend-mode: overlay, normal;
     overflow: hidden;
   }
+  /* Corner motif AND the gilded edge in ONE pseudo-element (8 mask layers:
+     4 corner, 4 edge) instead of a plain straight border, since a cast bar
+     only has ::before free (::after is not used here, but keeping both
+     ornament kinds on the SAME pseudo avoids needing it). */
   #castbar::before,
   #tf-castbar::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: var(--border);
-    -webkit-mask-image: var(--ornament-corner);
-    mask-image: var(--ornament-corner);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
       bottom left,
-      bottom right;
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
     mask-position:
       top left,
       top right,
       bottom left,
-      bottom right;
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
     -webkit-mask-size:
       12px 12px,
       12px 12px,
       12px 12px,
-      12px 12px;
+      12px 12px,
+      36px 4px,
+      36px 4px,
+      4px 24px,
+      4px 24px;
     mask-size:
       12px 12px,
       12px 12px,
       12px 12px,
-      12px 12px;
+      12px 12px,
+      36px 4px,
+      36px 4px,
+      4px 24px,
+      4px 24px;
   }
   #castbar .fill {
     height: 100%;
@@ -1304,10 +1468,11 @@
     height: 22px;
     margin-top: 4px;
     display: none;
-    border: 2px solid var(--border);
-    outline: 1px solid #000;
     border-radius: 4px;
-    background: #100606;
+    background:
+      var(--ornament-grain) repeat,
+      #100606;
+    background-blend-mode: overlay, normal;
     overflow: hidden;
   }
   #tf-castbar .fill {
@@ -1348,11 +1513,45 @@
     width: 220px;
     height: 12px;
     display: none;
-    border: 1px solid var(--border);
-    outline: 1px solid #000;
     border-radius: 3px;
-    background: #0c0a07;
+    background:
+      var(--ornament-grain) repeat,
+      #0c0a07;
+    background-blend-mode: overlay, normal;
     overflow: hidden;
+  }
+  #swingbar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      24px 2px,
+      24px 2px,
+      2px 12px,
+      2px 12px;
+    mask-size:
+      24px 2px,
+      24px 2px,
+      2px 12px,
+      2px 12px;
   }
   #swingbar .fill {
     height: 100%;
@@ -1387,13 +1586,49 @@
   #xpbar {
     width: 612px;
     height: 10px;
-    background: #14101e;
-    border: 1px solid #000;
-    outline: 1px solid #3a3148;
+    background:
+      var(--ornament-grain) repeat,
+      #14101e;
+    background-blend-mode: overlay, normal;
     margin: 0 auto 4px;
     position: relative;
     border-radius: 2px;
     overflow: hidden;
+  }
+  /* Too thin for the corner motif to read at all; the gilded edge alone
+     (no corners) replaces the old 1px straight border/outline pair. */
+  #xpbar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      24px 2px,
+      24px 2px,
+      2px 10px,
+      2px 10px;
+    mask-size:
+      24px 2px,
+      24px 2px,
+      2px 10px,
+      2px 10px;
   }
   #xpbar .fill {
     height: 100%;
@@ -1481,22 +1716,81 @@
     content: none;
   }
   .petbar-group {
+    position: relative;
     display: flex;
     gap: 4px;
     padding: 4px;
-    border: 2px solid #000;
-    outline: 1px solid #5b4618;
     border-radius: 6px;
-    background: linear-gradient(170deg, #15131fdd, #09080edd);
+    background:
+      var(--ornament-grain) repeat,
+      linear-gradient(170deg, #15131fdd, #09080edd);
+    background-blend-mode: overlay, normal;
     box-shadow: 0 2px 8px #000c;
+  }
+  .petbar-group::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      24px 3px,
+      24px 3px,
+      3px 24px,
+      3px 24px;
+    mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      24px 3px,
+      24px 3px,
+      3px 24px,
+      3px 24px;
   }
   .pet-btn {
     width: 40px;
     height: 40px;
     padding: 0;
-    border: 2px solid #4a3d1d;
+    /* Transparent, not absent: state rules below recolor this same border;
+       the resting-state edge comes from ::after. */
+    border: 2px solid transparent;
     border-radius: 6px;
-    background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    background:
+      var(--ornament-grain) repeat,
+      radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    background-blend-mode: overlay, normal;
     color: #f3df9a;
     cursor: var(--cursor-point);
     position: relative;
@@ -1506,6 +1800,57 @@
     box-shadow:
       inset 0 1px 0 #ffffff18,
       0 2px 4px #0009;
+  }
+  .pet-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      16px 2px,
+      16px 2px,
+      2px 16px,
+      2px 16px;
+    mask-size:
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      16px 2px,
+      16px 2px,
+      2px 16px,
+      2px 16px;
   }
   .pet-btn .icon-label {
     position: absolute;
@@ -1543,7 +1888,7 @@
   .pet-btn.disabled,
   .pet-btn.disabled:hover,
   .pet-btn.disabled.active {
-    border-color: #4a3d1d;
+    border-color: transparent;
     box-shadow:
       inset 0 1px 0 #ffffff18,
       0 2px 4px #0009;
@@ -1579,9 +1924,12 @@
     height: 40px;
     padding: 0;
     position: relative;
-    border: 2px solid #4a3d1d;
+    border: 2px solid transparent;
     border-radius: 6px;
-    background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    background:
+      var(--ornament-grain) repeat,
+      radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    background-blend-mode: overlay, normal;
     color: #f3df9a;
     cursor: var(--cursor-point);
     touch-action: manipulation;
@@ -1590,6 +1938,57 @@
     box-shadow:
       inset 0 1px 0 #ffffff18,
       0 2px 4px #0009;
+  }
+  .stance-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      16px 2px,
+      16px 2px,
+      2px 16px,
+      2px 16px;
+    mask-size:
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      16px 2px,
+      16px 2px,
+      2px 16px,
+      2px 16px;
   }
   .stance-btn .icon-label {
     position: absolute;
@@ -1637,9 +2036,15 @@
     width: 46px;
     height: 46px;
     position: relative;
-    border: 2px solid #4a3d1d;
+    /* Transparent, not absent: keeps the box model stable so the
+       hover/used state rings below have a real border to recolor. The
+       visible edge in the resting state comes entirely from ::after. */
+    border: 2px solid transparent;
     border-radius: 6px;
-    background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    background:
+      var(--ornament-grain) repeat,
+      radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    background-blend-mode: overlay, normal;
     color: #fff;
     cursor: var(--cursor-point);
     font-family: var(--title-font);
@@ -1648,44 +2053,64 @@
       inset 0 1px 0 #ffffff18,
       0 2px 4px #0009;
   }
-  /* Small carved-corner accents on every action slot: the same corner
-     primitive as .panel (ornament_svg.ts, --ornament-corner), mask-sized
-     down to fit the 46px slot. Sits on ::after so it never competes with
-     .icon-label's ::before-free art layer. The top-right/bottom-right
-     corners land under the keybind cap and stack-count badge, so those two
-     labels get an explicit higher z-index below: actionable text always
-     wins over decoration. */
+  /* Hand-gilded corner + edge ribbon on every action slot: the same
+     primitives as .panel (ornament_svg.ts, --ornament-corner/-edge-h/-v),
+     mask-sized down to fit the 46px slot. Sits on ::after so it never
+     competes with .icon-label's ::before-free art layer. The top-right/
+     bottom-right corners land under the keybind cap and stack-count badge,
+     so those two labels get an explicit higher z-index below: actionable
+     text always wins over decoration. */
   .action-btn::after {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: var(--border);
-    -webkit-mask-image: var(--ornament-corner);
-    mask-image: var(--ornament-corner);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
       bottom left,
-      bottom right;
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
     mask-position:
       top left,
       top right,
       bottom left,
-      bottom right;
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
     -webkit-mask-size:
       14px 14px,
       14px 14px,
       14px 14px,
-      14px 14px;
+      14px 14px,
+      16px 2px,
+      16px 2px,
+      2px 16px,
+      2px 16px;
     mask-size:
       14px 14px,
       14px 14px,
       14px 14px,
-      14px 14px;
+      14px 14px,
+      16px 2px,
+      16px 2px,
+      2px 16px,
+      2px 16px;
   }
   .action-btn .icon-label {
     position: absolute;
@@ -1710,7 +2135,10 @@
       inset 0 1px 0 #ffffff28;
   }
   .action-btn.empty {
-    background: #0d0d13;
+    background:
+      var(--ornament-grain) repeat,
+      #0d0d13;
+    background-blend-mode: overlay, normal;
     cursor: default;
     box-shadow: inset 0 0 10px #000;
   }
@@ -1840,9 +2268,14 @@
   .micro-btn {
     width: 34px;
     height: 30px;
-    border: 2px solid #4a3d1d;
+    /* Transparent, not absent: the hover/has-points state rings below
+       recolor this same border; the resting-state edge comes from ::after. */
+    border: 2px solid transparent;
     border-radius: 5px;
-    background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    background:
+      var(--ornament-grain) repeat,
+      radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    background-blend-mode: overlay, normal;
     color: var(--color-text-muted);
     cursor: var(--cursor-point);
     font-size: 12px;
@@ -1905,31 +2338,51 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: var(--border);
-    -webkit-mask-image: var(--ornament-corner);
-    mask-image: var(--ornament-corner);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
       bottom left,
-      bottom right;
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
     mask-position:
       top left,
       top right,
       bottom left,
-      bottom right;
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
     -webkit-mask-size:
       10px 10px,
       10px 10px,
       10px 10px,
-      10px 10px;
+      10px 10px,
+      14px 2px,
+      14px 2px,
+      2px 10px,
+      2px 10px;
     mask-size:
       10px 10px,
       10px 10px,
       10px 10px,
-      10px 10px;
+      10px 10px,
+      14px 2px,
+      14px 2px,
+      2px 10px,
+      2px 10px;
   }
   /* talent button glows while unspent talent points are available */
   .micro-btn.has-points,
@@ -2033,22 +2486,59 @@
   .chat-tab {
     /* keep each tab its natural width and let the strip scroll, never squish */
     flex: 0 0 auto;
+    position: relative;
     height: 22px;
     padding: 0 12px;
-    border: 1px solid #3a321d;
+    /* Transparent, not absent: .active recolors this same border; the
+       resting-state edge (top + sides, no bottom, it opens into the panel
+       below) comes from ::after. */
+    border: 1px solid transparent;
     border-bottom: none;
     border-radius: 6px 6px 0 0;
-    background: linear-gradient(#1c1824, #0d0b13);
+    background:
+      var(--ornament-grain) repeat,
+      linear-gradient(#1c1824, #0d0b13);
+    background-blend-mode: overlay, normal;
     color: #95886a;
     cursor: var(--cursor-point);
     font-family: var(--title-font);
     font-size: 12px;
     text-shadow: 1px 1px 1px #000;
   }
+  .chat-tab::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image: var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      14px 2px,
+      2px 11px,
+      2px 11px;
+    mask-size:
+      14px 2px,
+      2px 11px,
+      2px 11px;
+  }
   .chat-tab.active {
     color: var(--gold);
     border-color: #6f5a2a;
-    background: linear-gradient(#2a2436, #161220);
+    background:
+      var(--ornament-grain) repeat,
+      linear-gradient(#2a2436, #161220);
+    background-blend-mode: overlay, normal;
   }
   /* "add channel" (+) tab: square, icon-only, slightly de-emphasised. Sticks to
      the right edge so it stays inline and reachable even when the tabs scroll. */
@@ -2669,18 +3159,58 @@
     margin-bottom: 4px;
   }
   .mt-tab {
-    background: #1a1410;
-    border: 1px solid #463a1c;
+    position: relative;
+    background:
+      var(--ornament-grain) repeat,
+      #1a1410;
+    background-blend-mode: overlay, normal;
+    border: 1px solid transparent;
     border-radius: 3px;
     color: var(--color-text-muted);
     font-size: 11px;
     padding: 1px 7px;
     cursor: var(--cursor-point);
   }
+  .mt-tab::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      10px 2px,
+      10px 2px,
+      2px 12px,
+      2px 12px;
+    mask-size:
+      10px 2px,
+      10px 2px,
+      2px 12px,
+      2px 12px;
+  }
   .mt-tab.on {
     color: var(--gold);
     border-color: var(--gold-dim);
-    background: #2a2010;
+    background:
+      var(--ornament-grain) repeat,
+      #2a2010;
+    background-blend-mode: overlay, normal;
   }
   .mt-view {
     font-size: 12px;
@@ -2706,10 +3236,47 @@
     position: relative;
     height: 17px;
     margin-bottom: 3px;
-    background: #14100c;
-    border: 1px solid #000;
+    background:
+      var(--ornament-grain) repeat,
+      #14100c;
+    background-blend-mode: overlay, normal;
+    border: 1px solid transparent;
     border-radius: 2px;
     overflow: hidden;
+  }
+  .mt-row::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      24px 2px,
+      24px 2px,
+      2px 17px,
+      2px 17px;
+    mask-size:
+      24px 2px,
+      24px 2px,
+      2px 17px,
+      2px 17px;
   }
   .mt-row.aggro {
     border-color: #c0392b;
@@ -2769,7 +3336,11 @@
   }
   #minimap {
     border-radius: 50%;
-    border: 4px solid var(--border);
+    /* Gilded ring, not a flat color: the canvas's own opaque terrain bitmap
+       already fills the content box, so the border-box gradient layer alone
+       is enough (no padding-box cover layer needed, unlike .portrait). */
+    border: 4px solid transparent;
+    background: var(--ornament-gilt) border-box;
     outline: 1px solid #000;
     box-shadow:
       0 0 14px #000c,
@@ -2826,12 +3397,47 @@
     position: relative;
     height: 18px;
     overflow: hidden;
-    border: 2px solid var(--border);
     border-radius: 5px;
-    background: linear-gradient(#1c1a14, #100f0b);
+    background:
+      var(--ornament-grain) repeat,
+      linear-gradient(#1c1a14, #100f0b);
+    background-blend-mode: overlay, normal;
     box-shadow: inset 0 0 8px #000a;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  }
+  #compass-strip::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      24px 2px,
+      24px 2px,
+      2px 18px,
+      2px 18px;
+    mask-size:
+      24px 2px,
+      24px 2px,
+      2px 18px,
+      2px 18px;
   }
   #compass-track {
     position: absolute;
@@ -2939,7 +3545,7 @@
     inset: -5px;
     z-index: 1;
     pointer-events: none;
-    background: var(--border);
+    background: var(--ornament-gilt);
     -webkit-mask-image: var(--ornament-ring-minimap);
     mask-image: var(--ornament-ring-minimap);
     -webkit-mask-repeat: no-repeat;
@@ -3051,7 +3657,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: var(--gold-dim);
+    background: var(--ornament-gilt);
     -webkit-mask-image: var(--ornament-corner);
     mask-image: var(--ornament-corner);
     -webkit-mask-repeat: no-repeat;
@@ -4607,15 +5213,15 @@
      texture rather than a couple of oversized waves on a small row. */
   .party-frame::after {
     -webkit-mask-size:
-      24px 4px,
-      24px 4px,
-      4px 24px,
-      4px 24px;
+      48px 5px,
+      48px 5px,
+      5px 48px,
+      5px 48px;
     mask-size:
-      24px 4px,
-      24px 4px,
-      4px 24px,
-      4px 24px;
+      48px 5px,
+      48px 5px,
+      5px 48px,
+      5px 48px;
   }
   /* Compact WoW-style raid presentation. The existing pooled row and painter remain
      unchanged: this profile only rearranges their stable DOM, so mouseover casts,
@@ -4664,7 +5270,10 @@
     margin: 0;
     border: 0;
     border-radius: 1px 1px 0 0;
-    background: #171717;
+    background:
+      var(--ornament-grain) repeat,
+      #171717;
+    background-blend-mode: overlay, normal;
   }
   #party-frames.party-style-raid .party-frame .bar.hp .bar-fill {
     background-color: var(--cls);
@@ -4811,6 +5420,11 @@
   .party-frame .bar {
     height: 9px;
     margin-top: 2px;
+  }
+  /* Too thin (9px) for a legible edge ribbon (it would read as a solid gold
+     bar, not a border): keep the grain background, drop the ::after edge. */
+  .party-frame .bar::after {
+    content: none;
   }
   .party-frame .bar.hp {
     position: relative;

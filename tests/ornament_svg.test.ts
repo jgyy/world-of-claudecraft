@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
   cornerOrnamentMaskImage,
+  giltGradientBackground,
+  grainTextureBackgroundImage,
+  MICRO_RING_OUTER_R,
   MINIMAP_RING_OUTER_R,
   noisyEdgeMaskImage,
   PORTRAIT_RING_OUTER_R,
@@ -62,6 +65,15 @@ describe('ornament_svg', () => {
     expect(portrait).not.toBe(minimap);
   });
 
+  it('the micro ring (small circular badges) is distinct from both larger rings', () => {
+    expect(MICRO_RING_OUTER_R).not.toBe(PORTRAIT_RING_OUTER_R);
+    expect(MICRO_RING_OUTER_R).not.toBe(MINIMAP_RING_OUTER_R);
+    const micro = ringOrnamentMaskImage(MICRO_RING_OUTER_R);
+    expect(micro).not.toBe(ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R));
+    const svg = decodeSvg(micro);
+    expect(svg).toContain(`viewBox='0 0 ${MICRO_RING_OUTER_R * 2} ${MICRO_RING_OUTER_R * 2}'`);
+  });
+
   it('taper accent mask image encodes a valid small SVG', () => {
     const svg = decodeSvg(taperAccentMaskImage());
     expect(svg).toContain('<svg');
@@ -98,8 +110,9 @@ describe('ornament_svg', () => {
     // The whole point of picking INTEGER-frequency noise harmonics is that the
     // wobble at t=0 and t=1 (one full period) is identical, so CSS mask-repeat
     // never shows a visible jump where one tile ends and the next begins. The
-    // path is `M <29 top points> L <29 bottom points, reversed> Z`; the first
-    // and the 29th point are both top-edge samples, at t=0 and t=1.
+    // path is `M <top points> L <bottom points, reversed> Z`; the first and
+    // the LAST top-edge sample are at t=0 and t=1 respectively, so they split
+    // the point list exactly in half.
     const svg = decodeSvg(noisyEdgeMaskImage(9, false));
     const d = svg.match(/d="([^"]+)"/)?.[1] ?? '';
     const pairs = d
@@ -107,8 +120,9 @@ describe('ornament_svg', () => {
       .replace(/\s*Z\s*$/, '')
       .split(/\s*L\s*/)
       .map((pair) => pair.trim().split(/\s+/).map(Number));
+    const topCount = pairs.length / 2;
     const firstTopY = pairs[0][1];
-    const lastTopY = pairs[28][1];
+    const lastTopY = pairs[topCount - 1][1];
     expect(lastTopY).toBeCloseTo(firstTopY, 1);
   });
 
@@ -151,8 +165,40 @@ describe('ornament_svg', () => {
     }
   });
 
+  it('the gilt gradient is a seamless repeating-conic-gradient over theme tokens only', () => {
+    const value = giltGradientBackground();
+    expect(value).toMatch(/^repeating-conic-gradient\(/);
+    expect(value).toContain('var(--border)');
+    expect(value).toContain('var(--gold)');
+    expect(value).toContain('color-mix(');
+    // No raw hex literal anywhere: every color term must be a token
+    // reference or a color-mix() of tokens, so the gradient stays
+    // theme-reactive instead of freezing to one preset's colors.
+    expect(value.match(/#[0-9a-fA-F]{3,6}/g)).toBeNull();
+  });
+
+  it('the gilt gradient period divides 360 evenly (no seam where it wraps)', () => {
+    const value = giltGradientBackground();
+    const degs = (value.match(/(-?\d+(\.\d+)?)deg/g) ?? []).map((s) => Number.parseFloat(s));
+    const period = Math.max(...degs);
+    expect(360 % period).toBeCloseTo(0, 5);
+  });
+
+  it('the grain texture is a colorless (black/white only) tileable speckle field', () => {
+    const svg = decodeSvg(grainTextureBackgroundImage());
+    expect(svg).toContain('<svg');
+    expect(svg.match(/<circle/g)?.length).toBeGreaterThan(20);
+    const fills = svg.match(/fill="([^"]+)"/g) ?? [];
+    expect(fills.length).toBeGreaterThan(0);
+    for (const fill of fills) {
+      expect(fill).toMatch(/^fill="rgba\((255,255,255|0,0,0),[\d.]+\)"$/);
+    }
+  });
+
   it('is deterministic: same inputs produce byte-identical output', () => {
     expect(cornerOrnamentMaskImage()).toBe(cornerOrnamentMaskImage());
+    expect(giltGradientBackground()).toBe(giltGradientBackground());
+    expect(grainTextureBackgroundImage()).toBe(grainTextureBackgroundImage());
     expect(ringOrnamentMaskImage(50)).toBe(ringOrnamentMaskImage(50));
     expect(taperAccentMaskImage()).toBe(taperAccentMaskImage());
     expect(noisyEdgeMaskImage(3, false)).toBe(noisyEdgeMaskImage(3, false));

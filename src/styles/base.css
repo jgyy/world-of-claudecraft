@@ -486,9 +486,16 @@
 
   .panel {
     position: relative;
-    background: var(--panel-bg);
-    border: 2px solid var(--border);
-    outline: 1px solid #000;
+    /* var(--ornament-grain) is a colorless black/white speckle field;
+       background-blend-mode: overlay lightens/darkens the panel gradient
+       per-speck instead of replacing its color, so the same grain layer
+       reads correctly regardless of the preset's panel color. No structural
+       border/outline here any more: the gilded edge on ::after (below) is
+       the panel's only edge treatment, never a plain straight line. */
+    background:
+      var(--ornament-grain) repeat,
+      var(--panel-bg);
+    background-blend-mode: overlay, normal;
     border-radius: 6px;
     box-shadow:
       0 2px 16px #000c,
@@ -497,17 +504,20 @@
     color: var(--color-text-light);
   }
   /* Carved corner ornament: four bracket-and-gem motifs (ornament_svg.ts,
-     wired once at boot as --ornament-corner) masking the panel's own
-     --border color, so every window and HUD panel that composes .panel
-     (bags, character, chat, the action bar backing, ...) gets the same
-     carved-fantasy corners for free and recolors automatically on every
-     theme preset, since only the mask SHAPE is static here. */
+     wired once at boot as --ornament-corner) masking a repeating-conic
+     gradient over the theme's border/gold tokens (--ornament-gilt), so
+     every window and HUD panel (bags, character, chat, the action bar
+     backing, ...) gets the same carved-fantasy corners for free, with a
+     visibly uneven gold tone rather than one flat color, and recolors
+     automatically on every theme preset since only the mask SHAPE is
+     static here. */
   .panel::before {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 8;
     pointer-events: none;
-    background: var(--border);
+    background: var(--ornament-gilt);
     -webkit-mask-image: var(--ornament-corner);
     mask-image: var(--ornament-corner);
     -webkit-mask-repeat: no-repeat;
@@ -534,22 +544,28 @@
       30px 30px;
   }
   /* Hand-gilded edge texture: a seamlessly tileable, noise-wavered ribbon
-     (ornament_svg.ts, --ornament-edge-h / -v) repeated along all four edges,
-     so the gold border reads as unevenly applied leaf rather than a perfect
-     vector line, at any panel size. Masks --border, same live-recolor
-     mechanism as the corner motif above; sits on ::after so it composes
-     with the corner motif's ::before independently. The 48px/8px sizes
-     below must equal EDGE_TILE_LENGTH/EDGE_TILE_THICKNESS in
-     ornament_svg.ts (a mismatch stretches the tile instead of tiling it at
-     its authored proportions); a component with a shorter dimension than
-     the 8px thickness or that needs finer texture overrides mask-size at
+     (ornament_svg.ts, --ornament-edge-h / -v) repeated along all four edges
+     and colored by the same --ornament-gilt gradient as the corners, so the
+     gold border reads as unevenly applied leaf in BOTH shape and tone,
+     never a perfect flat-color vector line, at any panel size. Sits on
+     ::after so it composes with the corner motif's ::before independently.
+     z-index 9 (one above the corner motif, and above the sticky window
+     title's z-index 6 in layout.css) so the edge stays visible crossing
+     UNDER a title bar or tab strip instead of being painted over by their
+     opaque backgrounds; it is still pointer-events:none and only a few px
+     wide, so it never actually intercepts a click meant for that content.
+     The 96px/10px sizes below must equal EDGE_TILE_LENGTH/EDGE_TILE_THICKNESS
+     in ornament_svg.ts (a mismatch stretches the tile instead of tiling it
+     at its authored proportions); a component with a shorter dimension than
+     the 10px thickness or that needs finer texture overrides mask-size at
      the SAME aspect ratio, see .party-frame::after below. */
   .panel::after {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 9;
     pointer-events: none;
-    background: var(--border);
+    background: var(--ornament-gilt);
     -webkit-mask-image:
       var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
     mask-image:
@@ -567,15 +583,15 @@
       top left,
       top right;
     -webkit-mask-size:
-      48px 8px,
-      48px 8px,
-      8px 48px,
-      8px 48px;
+      96px 10px,
+      96px 10px,
+      10px 96px,
+      10px 96px;
     mask-size:
-      48px 8px,
-      48px 8px,
-      8px 48px,
-      8px 48px;
+      96px 10px,
+      96px 10px,
+      10px 96px,
+      10px 96px;
   }
   .panel-title {
     font-family: var(--title-font);
@@ -603,14 +619,51 @@
     will-change: transform;
   }
   .x-btn {
+    position: relative;
     color: #c9b27a;
     cursor: var(--cursor-point);
     font-size: 14px;
     padding: 0 4px;
-    border: 1px solid #463a1c;
     border-radius: 3px;
-    background: #1a1410;
+    background:
+      var(--ornament-grain) repeat,
+      #1a1410;
+    background-blend-mode: overlay, normal;
     font-family: var(--ui-font);
+  }
+  /* Every window's close button, so it gets the same gilded-corner finish
+     as the panel it sits on, colored by the same --ornament-gilt gradient;
+     no separate straight border any more. */
+  .x-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-corner);
+    mask-image: var(--ornament-corner);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    -webkit-mask-size:
+      9px 9px,
+      9px 9px,
+      9px 9px,
+      9px 9px;
+    mask-size:
+      9px 9px,
+      9px 9px,
+      9px 9px,
+      9px 9px;
   }
   .x-btn:hover {
     color: #fff;

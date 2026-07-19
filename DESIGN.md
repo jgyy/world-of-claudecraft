@@ -924,9 +924,9 @@ One shape, one role, reused everywhere it applies (section 10's opening rule):
 
 | Shape | Role | Consumers |
 |---|---|---|
-| Corner motif (a layered bracket, gem, two flaring ticks; four mirrored orientations from one path) | Marks a rectangle's four corners as deliberately carved, not machine-cut | `.panel` (cascades to every window), `.action-btn`/`.micro-btn`/`.party-frame`/`#daily-rewards-button`/`#castbar`/`#tf-castbar` at a smaller `mask-size` |
-| Noisy gilded edge (a seamlessly tileable ribbon whose centerline and thickness both wobble via a seeded periodic noise function) | The hand-gilded-gold-leaf finish along a straight edge, at any element length | `.panel` (cascades to every window), reused via `mask-repeat` so one small tile covers any size |
-| Twin ring (two thin concentric strokes, the outer one carrying the same noise wobble as the gilded edge; a diamond gem at each cardinal point, a dot at each diagonal) | A jeweled ring just outside an existing structural circle | The unit-frame portrait disc (`.portrait-wrap`), the minimap disc (`#minimap-disc`) |
+| Corner motif (a layered bracket, gem, two flaring ticks; four mirrored orientations from one path) | Marks a rectangle's four corners as deliberately carved, not machine-cut | `.panel` (cascades to every window), `.uf-bars`, `.petbar-group`, `.action-btn`/`.pet-btn`/`.stance-btn`/`.micro-btn`/`.party-frame`/`#daily-rewards-button`/`#castbar`/`#tf-castbar` at a smaller `mask-size`, combined with the gilded edge below wherever a component has visible flat sides to cover |
+| Noisy gilded edge (a seamlessly tileable ribbon whose centerline and thickness both wobble via a seeded periodic noise function) | The hand-gilded-gold-leaf finish along a straight edge, at any element length, on all four sides | `.panel` (cascades to every window), `.bar` (health/resource/`.mt-row` meter rows), `.uf-bars`, `#xpbar`/`#swingbar`/`#castbar`/`#tf-castbar`/`#compass-strip`, `.action-btn`/`.pet-btn`/`.stance-btn`/`.micro-btn`/`.mt-tab`/`.chat-tab`, reused via `mask-repeat` so one small tile covers any size; a component too thin for a legible ribbon (a 9px party-frame bar) keeps the grain background below but suppresses the ribbon layer with `content: none` rather than rendering an unreadably thick line |
+| Twin ring (two thin concentric strokes, the outer one carrying the same noise wobble as the gilded edge; a diamond gem at each cardinal point, a dot at each diagonal), at three named radii (`PORTRAIT_RING_OUTER_R`, `MINIMAP_RING_OUTER_R`, `MICRO_RING_OUTER_R`) | A jeweled ring just outside (or, for gilded circular borders below, drawn directly into) an existing structural circle | The unit-frame portrait disc (`.portrait-wrap`), the minimap disc (`#minimap-disc`), small circular badges (`.level-chip`, `.tf-move-btn`) at the micro radius |
 | Taper accent (a small gem plus ring) | Marks a chamfered window-top corner cut where the literal-corner bracket motif would otherwise be clipped away | `.window`'s tapered top (7.2, "window top taper" below) |
 
 **Noise contract.** The gilded edge and the ring's outer stroke both use the SAME
@@ -938,6 +938,56 @@ presentation code, not `src/sim/`, so `Math.random`/`Date.now` are not banned he
 they are in the sim; the seeded PRNG is used anyway so a shape's byte output stays
 deterministic and testable (`tests/ornament_svg.test.ts`'s determinism cases), not for
 gameplay fairness.
+
+**Gilt color (`giltGradientBackground`).** A shape mask only ever carries a SILHOUETTE; the
+color half of "hand-gilded, not flat gold" is a separate `repeating-conic-gradient` over
+theme tokens (`var(--border)` / `var(--gold)` / `var(--gold-dim)`, blended with
+`color-mix(in srgb, ...)` for the in-between stops, never a literal hex), centered on the
+element. A conic gradient's angle-from-center is exactly the parameter a ring already uses
+(its own angle) and, at a rectangle's corner-to-corner diagonal sweep, reads as a
+believable perimeter trace too, so ONE gradient value colors both shapes with no separate
+rectangle/circle variant. The period (`GILT_PERIOD_DEG = 40`) is an integer divisor of 360
+(9 repeats, closing with no seam) chosen deliberately NOT to also divide 90, so a panel's
+four corners each land on a different point in the color cycle instead of repeating the
+identical tone at every corner. Every gilded pseudo-element uses `background:
+var(--ornament-gilt)` in place of the flat `var(--border)` earlier rounds used.
+
+**Grain texture (`grainTextureBackgroundImage`).** A small tileable field of soft black/
+white specks at partial alpha (never a themed color), applied as a background layer with
+`background-blend-mode: overlay` ahead of whatever color already sits under it (a panel,
+a resource-bar fill trough, a button face). Overlay lightens or darkens the base color
+per-speck rather than replacing it, so the identical texture reads correctly against ANY
+underlying hue, satisfying "every HUD component's background gets this regardless of what
+color it is" without a per-color variant. The two-layer pattern
+(`background: var(--ornament-grain) repeat, <existing background>; background-blend-mode:
+overlay, normal;`) is the standard way every ornamented component now paints its own
+surface.
+
+**Gilded circular borders (not just outer rings).** A ring drawn on a pseudo-element sits
+OUTSIDE an existing circle; some circles (`.portrait`, `.level-chip`, `.tf-move-btn`,
+`#minimap`) also carry their OWN flat `border-radius: 50%` border, which stayed a flat
+color even after the outer ring landed. `border-color` cannot take a gradient directly, so
+these use the standard two-layer transparent-border trick instead: `border: Npx solid
+transparent;` plus TWO background layers, `<existing fill> padding-box, var(--ornament-gilt)
+border-box`. The padding-box layer covers the content area; the border-box layer (the
+gradient) only shows through in the border ring itself, since `border-radius` clips a
+`background` the same way regardless of which box it is clipped to. Where a canvas element
+(`#minimap`) already paints an opaque bitmap over its own content box, the padding-box
+cover layer is unnecessary and the border-box gradient is the only background layer
+needed. A functional state color (hover, active, a "used" glow) still recolors the same
+`border-color` on top of the transparent default, exactly as the corner-and-edge
+components below do; this preserves the actionable feedback those states carry (principle
+6, "never at the cost of ... an actionable state a player reacts to").
+
+**Resting-state transparency for stateful buttons.** Several buttons (`.action-btn`,
+`.pet-btn`, `.stance-btn`, `.micro-btn`) use `border-color` changes as functional feedback
+(hover, active/used, disabled). Making the gilded edge the ONLY visible border in the
+resting state, while keeping that feedback working, needed the border itself to become
+`border: Npx solid transparent` (never `border: 0`, which would reflow the box) so the
+existing state rules still have a real border to recolor; the ornament renders separately
+on `::after`, sitting below those repainted borders in the box model. This is the same
+transparent-border technique as the circular-gradient case above, generalized to a flat
+edge instead of a `border-box` gradient fill.
 
 **Window top taper.** Every `.window` chamfers its top-left and top-right corners at an
 angle (`clip-path: polygon(...)` in `layout.css`, driven by a named `--window-taper`

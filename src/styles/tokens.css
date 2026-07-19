@@ -214,9 +214,19 @@
     --ornament-corner: linear-gradient(transparent, transparent);
     --ornament-ring-portrait: linear-gradient(transparent, transparent);
     --ornament-ring-minimap: linear-gradient(transparent, transparent);
+    --ornament-ring-micro: linear-gradient(transparent, transparent);
     --ornament-window-top: linear-gradient(transparent, transparent);
     --ornament-edge-h: linear-gradient(transparent, transparent);
     --ornament-edge-v: linear-gradient(transparent, transparent);
+    /* --ornament-gilt is consumed as a whole `background` value (not a mask),
+       so its pre-boot fallback is the flat token color the gilded pseudo-
+       elements painted before this round: a plain border-colored fill until
+       applyOrnamentVars() replaces it with the real repeating-conic-gradient.
+       --ornament-grain sits inside a comma-separated multi-layer `background`
+       list, so it needs a valid (not empty) image value pre-boot: a fully
+       transparent gradient is a no-op under `background-blend-mode: overlay`. */
+    --ornament-gilt: var(--border);
+    --ornament-grain: linear-gradient(transparent, transparent);
   }
 
   /* Glass is dropped WHOLE-RULE at the low effect tier: a universal removal
