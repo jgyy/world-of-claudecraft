@@ -172,6 +172,7 @@ jobs:
       # console errors, its built-in fctBurst checks) are a different, noisier signal
       # than the frame budget below, which is the one this job actually gates on.
       - name: Run the perf tour (desktop + mobile)
+        id: perf_tour
         continue-on-error: true
         env:
           GAME_URL: http://127.0.0.1:5173
@@ -181,6 +182,22 @@ jobs:
       - name: Stop the dev client
         if: always()
         run: kill "$(cat .devpid)" 2>/dev/null || true
+
+      # The tour step above is continue-on-error (its own hard-error heuristics are a
+      # noisier signal than the frame budget this job gates on), but that also means a
+      # tour crash (missing Chrome, a boot timeout, a changed offline-mode selector)
+      # would otherwise surface only as an opaque "cannot read tmp/perf-tour.json"
+      # stack trace out of vitest's loadArtifact. Fail here, visibly, with the tour's
+      # own outcome before that happens, so a real tour breakage is never mistaken for
+      # a frame-budget regression.
+      - name: Verify the perf tour produced an artifact
+        if: always()
+        run: |
+          if [ ! -s tmp/perf-tour.json ]; then
+            echo "::error::perf:tour did not produce tmp/perf-tour.json (tour step outcome: ${{ steps.perf_tour.outcome }}). See the 'Run the perf tour' step log above for the real failure (Chrome resolution, dev-client boot, or offline-world boot)."
+            exit 1
+          fi
+          echo "tmp/perf-tour.json present ($(wc -c < tmp/perf-tour.json) bytes)."
 
       - name: Check the desktop frame budget
         env:
