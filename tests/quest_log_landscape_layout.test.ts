@@ -21,13 +21,17 @@ describe('quest log: landscape window + single-scroll detail pane', () => {
     expect(block).not.toMatch(/max-width\s*:/);
   });
 
-  it('drops the detail pane max-height cap so it no longer nests a second scrollbar, and gives it a reading-measure cap', () => {
+  it('drops the detail pane max-height cap so it no longer nests a second scrollbar, and gives it a reading-measure cap that uses the available width', () => {
     const start = css.indexOf('.ql-detail {');
     expect(start).toBeGreaterThan(0);
     const block = css.slice(start, css.indexOf('}', start));
     expect(block).toContain('max-height: none;');
     expect(block).not.toContain('max-height: 380px;');
-    expect(block).toContain('max-width: 70ch;');
+    // 70ch left 150px-plus of dead space beside the 220px list inside the 880px
+    // window (roughly 616px available vs. ~420-460px at 70ch); 100ch uses most
+    // of that width while still capping line length on wide viewports.
+    expect(block).toContain('max-width: 100ch;');
+    expect(block).not.toContain('max-width: 70ch;');
   });
 
   it('widens the quest list column to match the wider window', () => {
@@ -54,6 +58,17 @@ describe('quest log: landscape window + single-scroll detail pane', () => {
     const start = css.indexOf('#quest-log-window .window-body .ql-detail {');
     expect(start).toBeGreaterThan(0);
     const block = css.slice(start, css.indexOf('}', start));
-    expect(block).toContain('max-width: 70ch;');
+    expect(block).toContain('max-width: 100ch;');
+  });
+});
+
+describe('quest log: mobile does not inherit the desktop reading-measure cap', () => {
+  const mobileCss = readFileSync(new URL('../src/styles/hud.mobile.css', import.meta.url), 'utf8');
+
+  it('overrides max-width to none on the mobile-touch .ql-detail rule so a tablet-width touch sheet is not left with dead space', () => {
+    const start = mobileCss.indexOf('body.mobile-touch #quest-log-window .ql-detail {');
+    expect(start).toBeGreaterThan(0);
+    const block = mobileCss.slice(start, mobileCss.indexOf('}', start));
+    expect(block).toContain('max-width: none;');
   });
 });

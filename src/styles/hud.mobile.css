@@ -3610,6 +3610,12 @@
   }
   body.mobile-touch #quest-log-window .ql-detail {
     min-width: 0;
+    /* The components-layer 70ch/100ch reading-measure cap doesn't bind at
+       phone widths (screen is already narrower than the cap), but it does
+       bind on a tablet-width touch sheet, leaving dead space next to the
+       list. Mobile layout stays unchanged either way: this just makes that
+       literal by letting the pane use the full width the sheet gives it. */
+    max-width: none;
   }
   body.mobile-touch #quest-log-window .ql-detail-body {
     min-width: 0;

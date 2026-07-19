@@ -1277,7 +1277,12 @@
     flex: 1;
     font-size: 12px;
     max-height: none;
-    max-width: 70ch;
+    /* Reading-measure cap: the pane sits beside the 220px list inside the 880px
+       window, leaving roughly 616px of content width. 70ch undershot that badly
+       (~420-460px at this pane's 12px font), leaving 150px-plus of dead space
+       next to the list. 100ch uses most of the available width while still
+       capping line length on wider viewports. */
+    max-width: 100ch;
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -5814,7 +5819,13 @@
      above, and the detail pane's reading-measure cap widened to use the
      extra width instead of leaving it narrow inside a much wider window.
      No max-width override: the shared `.window` clamp already bounds width
-     against the JS-synced app viewport (see the live rule above for why). */
+     against the JS-synced app viewport (see the live rule above for why).
+     NOTE: this `.window-body` ancestor is never actually mounted (the
+     `window_frame.ts` "AAA window-frame adoption" painter that would have
+     mounted it was reverted); only the ungated `width` rule above is live.
+     Kept in sync with the live rule anyway so a future frame-phase revival
+     does not silently regress this window; do not delete it as dead code
+     without checking that history first. */
   #quest-log-window {
     width: 880px;
   }
@@ -5826,7 +5837,7 @@
   }
   #quest-log-window .window-body .ql-detail {
     max-height: none;
-    max-width: 70ch;
+    max-width: 100ch;
   }
   #quest-log-window .window-footer .btn {
     min-width: 0;
