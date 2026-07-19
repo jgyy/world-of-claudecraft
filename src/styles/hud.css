@@ -1471,6 +1471,15 @@
     outline: 0;
     box-shadow: none;
   }
+  /* #petbar strips .panel's own background/border away (it is just a bare
+     flex row holding the individually-framed pet action slots), so the
+     inherited corner and edge ornament would float disconnected with no
+     panel surface to read as attached to; suppress both, the same
+     narrow-override pattern the boss target-frame ring uses. */
+  #petbar::before,
+  #petbar::after {
+    content: none;
+  }
   .petbar-group {
     display: flex;
     gap: 4px;
@@ -4590,6 +4599,23 @@
       12px 12px,
       12px 12px,
       12px 12px;
+  }
+  /* .panel::after's default 48px-long / 8px-thick edge tile is taller than
+     this row (42px), which would cut the vertical (left/right) tile off
+     mid-wave; scale the whole tile down (same aspect ratio, so the wobble
+     stays proportional, not distorted) to fit comfortably and read as fine
+     texture rather than a couple of oversized waves on a small row. */
+  .party-frame::after {
+    -webkit-mask-size:
+      24px 4px,
+      24px 4px,
+      4px 24px,
+      4px 24px;
+    mask-size:
+      24px 4px,
+      24px 4px,
+      4px 24px,
+      4px 24px;
   }
   /* Compact WoW-style raid presentation. The existing pooled row and painter remain
      unchanged: this profile only rearranges their stable DOM, so mouseover casts,

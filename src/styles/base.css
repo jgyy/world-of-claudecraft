@@ -533,9 +533,51 @@
       30px 30px,
       30px 30px;
   }
+  /* Hand-gilded edge texture: a seamlessly tileable, noise-wavered ribbon
+     (ornament_svg.ts, --ornament-edge-h / -v) repeated along all four edges,
+     so the gold border reads as unevenly applied leaf rather than a perfect
+     vector line, at any panel size. Masks --border, same live-recolor
+     mechanism as the corner motif above; sits on ::after so it composes
+     with the corner motif's ::before independently. The 48px/8px sizes
+     below must equal EDGE_TILE_LENGTH/EDGE_TILE_THICKNESS in
+     ornament_svg.ts (a mismatch stretches the tile instead of tiling it at
+     its authored proportions); a component with a shorter dimension than
+     the 8px thickness or that needs finer texture overrides mask-size at
+     the SAME aspect ratio, see .party-frame::after below. */
+  .panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--border);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      48px 8px,
+      48px 8px,
+      8px 48px,
+      8px 48px;
+    mask-size:
+      48px 8px,
+      48px 8px,
+      8px 48px,
+      8px 48px;
+  }
   .panel-title {
-    position: relative;
-    z-index: 0;
     font-family: var(--title-font);
     color: var(--gold);
     font-size: 15px;
@@ -547,26 +589,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  /* Banner-scroll underlay behind every panel/window title (ornament_svg.ts,
-     --ornament-banner): a low-opacity carved ribbon so the title reads as a
-     nameplate on a scroll rather than plain flexbox text. Stretches to each
-     title bar's actual width, so the ribbon's point angle varies a little
-     per window; that reads as hand-carved rather than templated. */
-  .panel-title::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.5;
-    background: var(--border);
-    -webkit-mask-image: var(--ornament-banner);
-    mask-image: var(--ornament-banner);
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
   }
   .window .panel-title {
     cursor: move;

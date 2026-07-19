@@ -1,13 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
-  bannerOrnamentMaskImage,
-  bannerScrollPath,
   cornerOrnamentMaskImage,
   MINIMAP_RING_OUTER_R,
+  noisyEdgeMaskImage,
   PORTRAIT_RING_OUTER_R,
   ringOrnamentMaskImage,
-  TITLE_BANNER_HEIGHT,
-  TITLE_BANNER_WIDTH,
   taperAccentMaskImage,
   twinRingInner,
 } from '../src/ui/ornament_svg';
@@ -43,9 +40,10 @@ describe('ornament_svg', () => {
     expect(unique.size).toBe(4);
   });
 
-  it('twin ring draws two concentric circles, four gems, and four dots', () => {
+  it('twin ring draws the noisy outer band, an inner circle, four gems, and four dots', () => {
     const svg = twinRingInner(40);
-    expect(svg.match(/<circle/g)?.length).toBe(6); // 2 ring strokes + 4 corner dots
+    expect(svg).toContain('fill-rule="evenodd"');
+    expect(svg.match(/<circle/g)?.length).toBe(5); // 1 inner ring stroke + 4 corner dots
     expect(svg).toContain('<path');
   });
 
@@ -64,22 +62,6 @@ describe('ornament_svg', () => {
     expect(portrait).not.toBe(minimap);
   });
 
-  it('banner scroll path stays within its declared width and height bounds', () => {
-    const d = bannerScrollPath(TITLE_BANNER_WIDTH, TITLE_BANNER_HEIGHT);
-    const numbers = (d.match(/-?\d+(\.\d+)?/g) ?? []).map(Number);
-    for (const val of numbers) {
-      expect(val).toBeGreaterThanOrEqual(-0.01);
-    }
-    const xs = numbers.filter((_, i) => i % 2 === 0);
-    expect(Math.max(...xs)).toBeLessThanOrEqual(TITLE_BANNER_WIDTH + 0.01);
-  });
-
-  it('banner mask image encodes a valid SVG at the declared size', () => {
-    const value = bannerOrnamentMaskImage(TITLE_BANNER_WIDTH, TITLE_BANNER_HEIGHT);
-    const svg = decodeSvg(value);
-    expect(svg).toContain(`viewBox='0 0 ${TITLE_BANNER_WIDTH} ${TITLE_BANNER_HEIGHT}'`);
-  });
-
   it('taper accent mask image encodes a valid small SVG', () => {
     const svg = decodeSvg(taperAccentMaskImage());
     expect(svg).toContain('<svg');
@@ -87,13 +69,74 @@ describe('ornament_svg', () => {
     expect(svg).toContain('<path');
   });
 
+  it('noisy edge tile is a single closed ribbon path', () => {
+    const svg = decodeSvg(noisyEdgeMaskImage(1, false));
+    expect(svg).toContain('<path');
+    expect(svg).toMatch(/\bZ\b/);
+  });
+
+  it('the vertical edge tile transposes its viewBox from the horizontal one', () => {
+    const h = decodeSvg(noisyEdgeMaskImage(5, false));
+    const v = decodeSvg(noisyEdgeMaskImage(5, true));
+    const hBox = h
+      .match(/viewBox='([^']+)'/)?.[1]
+      .split(' ')
+      .map(Number);
+    const vBox = v
+      .match(/viewBox='([^']+)'/)?.[1]
+      .split(' ')
+      .map(Number);
+    expect(hBox?.[2]).toBe(vBox?.[3]);
+    expect(hBox?.[3]).toBe(vBox?.[2]);
+  });
+
+  it('different seeds produce different edge textures', () => {
+    expect(noisyEdgeMaskImage(1, false)).not.toBe(noisyEdgeMaskImage(2, false));
+  });
+
+  it('the edge tile is seam-free: its start and end cross-section match exactly', () => {
+    // The whole point of picking INTEGER-frequency noise harmonics is that the
+    // wobble at t=0 and t=1 (one full period) is identical, so CSS mask-repeat
+    // never shows a visible jump where one tile ends and the next begins. The
+    // path is `M <29 top points> L <29 bottom points, reversed> Z`; the first
+    // and the 29th point are both top-edge samples, at t=0 and t=1.
+    const svg = decodeSvg(noisyEdgeMaskImage(9, false));
+    const d = svg.match(/d="([^"]+)"/)?.[1] ?? '';
+    const pairs = d
+      .replace(/^M\s*/, '')
+      .replace(/\s*Z\s*$/, '')
+      .split(/\s*L\s*/)
+      .map((pair) => pair.trim().split(/\s+/).map(Number));
+    const firstTopY = pairs[0][1];
+    const lastTopY = pairs[28][1];
+    expect(lastTopY).toBeCloseTo(firstTopY, 1);
+  });
+
+  it('the ring wobble is seam-free: the outer stroke closes at 0/360 degrees with no jump', () => {
+    // Same seam-free contract as the edge tile, but around a circle instead
+    // of a straight tile: RING_WOBBLE_SEED's harmonics use integer angular
+    // frequencies, so the noised radius at angle 0 equals the radius at 360.
+    const svg = twinRingInner(60);
+    const outerPath = svg.match(/<path d="([^"]+)" fill-rule="evenodd"\/>/)?.[1] ?? '';
+    const subpaths = outerPath.split(/\s*M\s*/).filter(Boolean);
+    const topPoints = subpaths[0]
+      .replace(/\s*Z\s*$/, '')
+      .split(/\s*L\s*/)
+      .map((pair) => pair.trim().split(/\s+/).map(Number));
+    const first = topPoints[0];
+    const last = topPoints[topPoints.length - 1];
+    expect(last[0]).toBeCloseTo(first[0], 1);
+    expect(last[1]).toBeCloseTo(first[1], 1);
+  });
+
   it('no ornament data URI embeds a themed hex color (colorless shapes only)', () => {
     const uris = [
       ...cornerOrnamentMaskImage().split(', '),
       ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R),
       ringOrnamentMaskImage(MINIMAP_RING_OUTER_R),
-      bannerOrnamentMaskImage(TITLE_BANNER_WIDTH, TITLE_BANNER_HEIGHT),
       taperAccentMaskImage(),
+      noisyEdgeMaskImage(1, false),
+      noisyEdgeMaskImage(2, true),
     ];
     for (const uri of uris) {
       const svg = decodeSvg(uri);
@@ -111,7 +154,7 @@ describe('ornament_svg', () => {
   it('is deterministic: same inputs produce byte-identical output', () => {
     expect(cornerOrnamentMaskImage()).toBe(cornerOrnamentMaskImage());
     expect(ringOrnamentMaskImage(50)).toBe(ringOrnamentMaskImage(50));
-    expect(bannerOrnamentMaskImage(200, 20)).toBe(bannerOrnamentMaskImage(200, 20));
     expect(taperAccentMaskImage()).toBe(taperAccentMaskImage());
+    expect(noisyEdgeMaskImage(3, false)).toBe(noisyEdgeMaskImage(3, false));
   });
 });

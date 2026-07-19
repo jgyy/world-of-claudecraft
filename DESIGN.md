@@ -924,9 +924,32 @@ One shape, one role, reused everywhere it applies (section 10's opening rule):
 
 | Shape | Role | Consumers |
 |---|---|---|
-| Corner motif (bracket, gem, two flaring ticks; four mirrored orientations from one path) | Marks a rectangle's four corners as deliberately carved, not machine-cut | `.panel` (cascades to every window), `.action-btn` at a smaller `mask-size` |
-| Rope-twist ring (a braided annulus, sinusoidal outer/inner edges) | A second, purely ornamental ring just outside an existing structural circle | The unit-frame portrait disc (`.portrait-wrap`), the minimap disc (`#minimap-disc`) |
-| Banner scroll (a pointed-end ribbon, stretches to its box) | An underlay behind panel/window title text | `.panel-title` |
+| Corner motif (a layered bracket, gem, two flaring ticks; four mirrored orientations from one path) | Marks a rectangle's four corners as deliberately carved, not machine-cut | `.panel` (cascades to every window), `.action-btn`/`.micro-btn`/`.party-frame`/`#daily-rewards-button`/`#castbar`/`#tf-castbar` at a smaller `mask-size` |
+| Noisy gilded edge (a seamlessly tileable ribbon whose centerline and thickness both wobble via a seeded periodic noise function) | The hand-gilded-gold-leaf finish along a straight edge, at any element length | `.panel` (cascades to every window), reused via `mask-repeat` so one small tile covers any size |
+| Twin ring (two thin concentric strokes, the outer one carrying the same noise wobble as the gilded edge; a diamond gem at each cardinal point, a dot at each diagonal) | A jeweled ring just outside an existing structural circle | The unit-frame portrait disc (`.portrait-wrap`), the minimap disc (`#minimap-disc`) |
+| Taper accent (a small gem plus ring) | Marks a chamfered window-top corner cut where the literal-corner bracket motif would otherwise be clipped away | `.window`'s tapered top (7.2, "window top taper" below) |
+
+**Noise contract.** The gilded edge and the ring's outer stroke both use the SAME
+mechanism (`ornament_svg.ts`, `seededHarmonics` / `periodicNoise`): a small deterministic
+PRNG (`mulberry32`) picks amplitude and phase for a handful of INTEGER-frequency sine
+harmonics, so the resulting wave is exactly periodic over its domain (the edge tile's
+length, or 360 degrees for the ring) with no visible seam where it tiles or wraps. This is
+presentation code, not `src/sim/`, so `Math.random`/`Date.now` are not banned here the way
+they are in the sim; the seeded PRNG is used anyway so a shape's byte output stays
+deterministic and testable (`tests/ornament_svg.test.ts`'s determinism cases), not for
+gameplay fairness.
+
+**Window top taper.** Every `.window` chamfers its top-left and top-right corners at an
+angle (`clip-path: polygon(...)` in `layout.css`, driven by a named `--window-taper`
+custom property so the depth is stated once, not duplicated); the bottom stays square,
+where the SE resize grip lives. The literal-corner bracket motif would sit inside the
+now-clipped-away triangle and vanish, so `.window::before` overrides the corner mask with
+bracket motifs at the two (unclipped) bottom corners plus a taper-accent gem at each
+chamfer apex, positioned via the SAME `--window-taper` value the clip-path uses. Known
+tradeoff: `clip-path` clips the window's outer `box-shadow` (confirmed: `filter:
+drop-shadow` does too, so there is no same-element fix); restoring it needs a non-clipped
+wrapper element around a clipped inner one, which touches how every window is built and is
+tracked as a follow-up, not solved here.
 
 Wiring: `applyOrnamentVars()` sets the `--ornament-*` custom properties once at game boot
 (`main.ts`, next to the existing one-time `hydrateIcons()` call); shapes are static and
@@ -939,10 +962,20 @@ parallel un-ornamented variant of the primitive; the boss target-frame portrait 
 the existing precedent (its dragon-emblem art is already the ornamental treatment, so
 the generic ring stands down there).
 
-Adding a new consumer of an existing shape (another circular element wanting the rope
-ring, another rectangle wanting corner motifs) is a CSS-only change: no new shape, no
-`ornament_svg.ts` edit. Adding a genuinely new shape earns its own named export and
-`tests/ornament_svg.test.ts` case, following the existing shapes' contract: colorless
+**No title-underlay shape.** An earlier iteration tried a banner-scroll underlay behind
+panel/window titles, stretched to the title bar's own box. `.panel-title` is a flex row
+spanning the FULL window width (short title text on the left, the close button on the
+right), so the stretched banner rendered as a pointed shape floating in the empty middle
+gap, disconnected from the text it was meant to sit behind. Removed outright rather than
+patched: title text stays plain, and the win from ornamenting title bars specifically was
+never worth reintroducing the same box-fitting problem a second way.
+
+Adding a new consumer of an existing shape (another circular element wanting the ring,
+another rectangle wanting the corner motif or the gilded edge) is a CSS-only change: no
+new shape, no `ornament_svg.ts` edit (the gilded edge in particular needs nothing beyond
+`mask-repeat`, since it is a small tile, not a stretched shape, so it fits any element
+length without a size override). Adding a genuinely new shape earns its own named export
+and `tests/ornament_svg.test.ts` case, following the existing shapes' contract: colorless
 (only the SVG spec's own default black fill/stroke, never a real hex), deterministic
 (same inputs produce byte-identical output), and self-contained in its own viewBox.
 
@@ -1112,11 +1145,12 @@ matters; later phases assume earlier vocabulary.
 
 The structural ornament system (10.8) is the one deliberate exception to strict phase
 order: because it is additive, colorless-until-masked, and orthogonal to any specific
-token retune, its first slice (the corner motif on `.panel` and `.action-btn`, the
-rope-twist ring on the unit-frame portrait and minimap discs, the title banner underlay)
-shipped ahead of the phases below, landing only the ornament pieces of phases 2 to 4 and
-none of their token, layout, or primitive-retune work. Each phase's own bullet notes what
-ornament already covers so it is not re-scoped by accident.
+token retune, its first slice (the corner motif and the noisy gilded edge on `.panel`
+and its smaller-scale consumers, the twin ring on the unit-frame portrait and minimap
+discs, the tapered window top) shipped ahead of the phases below, landing only the
+ornament pieces of phases 2 to 4 and none of their token, layout, or primitive-retune
+work. Each phase's own bullet notes what ornament already covers so it is not re-scoped
+by accident.
 
 1. **Foundation: tokens, theme, type.** New ramp tokens and themed derivations; retuned
    `classic` preset knobs and `themeCssVars` derivation constants (including scrollbars
@@ -1129,27 +1163,30 @@ ornament already covers so it is not re-scoped by accident.
 2. **Chrome: surfaces and primitives.** `.panel` / `.window` edge recipe, buttons, tabs,
    keycaps, badges, bars, tooltip, scrollbar derivation, form controls, dividers; retire
    the literal brown-hex borders in `hud.css` / `components.css` onto tokens. (Ornament
-   already covers the `.panel` corner motif, cascading to every window, and the
-   `.action-btn` corner accents and the `.panel-title` banner underlay; the edge-recipe
-   retune, buttons/tabs/keycaps/badges/bars/tooltip/scrollbar/form-control retuning, and
-   the literal-hex retirement are still owed.)
+   already covers the `.panel` corner motif and noisy gilded edge, cascading to every
+   window, and matching smaller-scale corner accents on `.action-btn`, `.micro-btn`,
+   `.party-frame`, `#daily-rewards-button`, and the cast bars; the edge-recipe retune,
+   buttons/tabs/keycaps/badges/bars/tooltip/scrollbar/form-control retuning, and the
+   literal-hex retirement are still owed.)
 3. **Right rail.** Minimap ring growth with the aura-bar re-pin, Daily Rewards card (and
    retirement of the web promo banner), tracker restyle with the display cap, the 3 x 2
    launcher plus More hub, retirement of the micro-button rail and `#community-hud`, the
    new system-button corner with the sound-mute setting. No `LAYOUT_RESET_EPOCH` bump is
    expected here (the rail owns no player-persisted positions); that is a decision, not an
-   omission. (Ornament already covers the rope-twist ring on `#minimap-disc`; the ring
+   omission. (Ornament already covers the twin ring on `#minimap-disc`; the ring
    still sits on the current, un-grown disc size, so the disc-growth pass to the target
    220px, its aura-bar re-pin, and everything else in this phase are still owed.)
 4. **Center stage.** Unit frame restyle and the target frame's move to bottom-center
    (with the `LAYOUT_RESET_EPOCH` bump and the retirement of the party `below-target`
    shift), party header and row states, action bar and XP polish, the interact-resolver
    extraction plus the new interaction prompt, chat restyle with the idle/focus state,
-   FCT and banner typography. (Ornament already covers the rope-twist ring on the player
-   and target portrait discs; the target frame's move to bottom-center, the party frame
-   restyle, and the rest of this phase are still owed. Party rows use a class-crest chip,
-   not the portrait family, so they do not inherit the ring; giving party rows their own
-   ornament is a natural follow-up, not done here.)
+   FCT and banner typography. (Ornament already covers the twin ring on the player and
+   target portrait discs, plus the corner motif and gilded edge on party rows (they carry
+   `.panel` directly, so they inherit both at a rescaled corner size; not yet screenshotted
+   live, since the offline single-player capture flow has no populated party). Party rows
+   use a class-crest chip, not the portrait family, so they do not get the ring itself; the
+   target frame's move to bottom-center, the party frame restyle, and the rest of this
+   phase are still owed.)
 5. **Windows.** The window grammar applied window-by-window, starting with the highest
    traffic (bags, character, quest log, map, options), then the long tail through the
    store surfaces and the remaining overlays.

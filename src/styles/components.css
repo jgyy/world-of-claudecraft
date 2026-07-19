@@ -4265,27 +4265,10 @@
     }
   }
   .camera-prompt-title {
-    position: relative;
-    z-index: 0;
     font-family: var(--title-font);
     font-size: 19px;
     color: var(--gold);
     margin-bottom: 6px;
-  }
-  .camera-prompt-title::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.5;
-    background: var(--border);
-    -webkit-mask-image: var(--ornament-banner);
-    mask-image: var(--ornament-banner);
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
   }
   .camera-prompt-desc {
     color: var(--color-text-muted);

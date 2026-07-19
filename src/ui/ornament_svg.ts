@@ -1,7 +1,7 @@
 // Structural ornament shapes for HUD chrome: hand-authored / procedurally
 // generated SVG masks for the "carved fantasy artifact" finish (window
-// corners and tapered tops, unit-frame and minimap rings, panel/window
-// title banners).
+// corners and tapered tops, a noisy hand-gilded edge texture, unit-frame
+// and minimap rings).
 //
 // These are never inserted into the DOM (contrast with the `svgIcon` glyphs
 // in ui_icons.ts, which ARE inline <svg> elements). An ornament shape is pure
@@ -40,6 +40,50 @@ function diamondPath(cx: number, cy: number, r: number): string {
 function svgDataUri(inner: string, viewBoxSize: number): string {
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${viewBoxSize} ${viewBoxSize}'>${inner}</svg>`;
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
+
+// ---------- deterministic noise: seeded, periodic (so a tiled/wrapped edge or
+// ring never shows a seam where the pattern repeats) ----------
+
+/** mulberry32: a small, fast, deterministic PRNG. Presentation-only (this file
+ * never runs in src/sim/, so the sim's Math.random ban does not apply); used
+ * to PICK noise-harmonic parameters once at generation time, not per-frame. */
+function mulberry32(seed: number): () => number {
+  let a = seed | 0;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+interface Harmonic {
+  k: number;
+  amp: number;
+  phase: number;
+}
+
+/** Integer harmonics (k = 1, 2, 3, ...) so the resulting wave is exactly
+ * periodic over t in [0, 1): a tile built from it wraps seamlessly. Amplitude
+ * falls off with 1/k (classic organic-noise weighting: low frequencies read as
+ * gentle waver, high frequencies add fine texture without dominating). */
+function seededHarmonics(seed: number, count: number, maxAmp: number): Harmonic[] {
+  const rand = mulberry32(seed);
+  const harmonics: Harmonic[] = [];
+  for (let i = 0; i < count; i++) {
+    const k = i + 1;
+    const amp = (maxAmp * (0.4 + 0.6 * rand())) / k;
+    const phase = rand() * Math.PI * 2;
+    harmonics.push({ k, amp, phase });
+  }
+  return harmonics;
+}
+
+function periodicNoise(harmonics: Harmonic[], t: number): number {
+  let v = 0;
+  for (const h of harmonics) v += h.amp * Math.sin(h.k * t * Math.PI * 2 + h.phase);
+  return v;
 }
 
 // ---------- corner motif: a thin bracket + diamond, anchored top-left ----------
@@ -115,18 +159,81 @@ export function windowTopOrnamentMaskImage(): string {
   ].join(', ');
 }
 
-// ---------- twin ring: two thin concentric circles + 4 cardinal gems + 4 corner dots ----------
+// ---------- noisy gilt edge: a seamlessly tileable wavy, varying-thickness
+// ribbon, the hand-gilded-gold-leaf texture (uneven width and a wavering
+// centerline) reused along every straight edge, at any element size, via
+// CSS mask-repeat ----------
+
+// base.css's .panel::after mask-size (48px 8px / transposed) must equal
+// these; a per-component override (e.g. .party-frame::after) may render the
+// SAME tile smaller via mask-size as long as it keeps this 48:8 aspect
+// ratio, or the wobble distorts instead of just rescaling.
+const EDGE_TILE_LENGTH = 48;
+const EDGE_TILE_THICKNESS = 8;
+const EDGE_BASE_WIDTH = 2.6;
+
+/** `vertical` swaps the sampled axis so the SAME noise profile tiles along a
+ * vertical (left/right) edge instead of a horizontal (top/bottom) one,
+ * without needing a second, independently-seeded generator. */
+function noisyEdgeInner(seed: number, vertical: boolean): string {
+  const samples = 28;
+  const centerHarmonics = seededHarmonics(seed, 3, 1.3);
+  const widthHarmonics = seededHarmonics(seed + 1000, 3, 1.6);
+  const cross = EDGE_TILE_THICKNESS / 2;
+  const topPts: string[] = [];
+  const botPts: string[] = [];
+  for (let i = 0; i <= samples; i++) {
+    const t = i / samples;
+    const along = t * EDGE_TILE_LENGTH;
+    const center = cross + periodicNoise(centerHarmonics, t);
+    const halfW = Math.max(0.5, (EDGE_BASE_WIDTH + periodicNoise(widthHarmonics, t)) / 2);
+    const a = center - halfW;
+    const b = center + halfW;
+    if (vertical) {
+      topPts.push(`${n(a)} ${n(along)}`);
+      botPts.push(`${n(b)} ${n(along)}`);
+    } else {
+      topPts.push(`${n(along)} ${n(a)}`);
+      botPts.push(`${n(along)} ${n(b)}`);
+    }
+  }
+  const d = `M ${topPts.join(' L ')} L ${botPts.reverse().join(' L ')} Z`;
+  return `<path d="${d}"/>`;
+}
+
+/**
+ * A horizontal (or, transposed, vertical) tile of the noisy gilt edge. `seed`
+ * varies per consumer so different components don't all wobble in lockstep
+ * (their tile lengths differ anyway, so alignment would be coincidental, but
+ * a distinct seed also means two ornamented components never look like
+ * carbon copies of each other up close).
+ */
+export function noisyEdgeMaskImage(seed: number, vertical: boolean): string {
+  const viewBox = vertical
+    ? `0 0 ${EDGE_TILE_THICKNESS} ${EDGE_TILE_LENGTH}`
+    : `0 0 ${EDGE_TILE_LENGTH} ${EDGE_TILE_THICKNESS}`;
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='${viewBox}'>${noisyEdgeInner(seed, vertical)}</svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
+
+// ---------- twin ring: two thin concentric circles (the outer one gilt-noisy)
+// + 4 cardinal gems + 4 corner dots ----------
 
 const RING_STROKE = 1.6;
 const RING_GAP = 3.4;
+/** Integer angular harmonics keep the wobble exactly periodic over 360 degrees,
+ * so the ring closes on itself with no seam, the circular analog of the
+ * edge tile's seamless horizontal repeat. */
+const RING_WOBBLE_SEED = 7;
 
 /**
- * A detailed ring ornament: two thin concentric strokes with a small gap, a
- * diamond gem bridging the gap at each of the 4 cardinal points, and a small
- * dot at each of the 4 diagonal points, reading as a "detailed" jeweled ring
- * rather than a thick solid or wavy band. `outerR` is also used as the SVG's
- * center, so the shape is self-contained in a `2*outerR` square viewBox
- * regardless of where it is later mask-positioned.
+ * A detailed ring ornament: two thin concentric strokes with a small gap
+ * (the outer one gilt-noisy: a wavering radius and stroke width, echoing the
+ * same hand-gilded texture the straight edges use), a diamond gem bridging
+ * the gap at each of the 4 cardinal points, and a small dot at each of the 4
+ * diagonal points. `outerR` is also used as the SVG's center, so the shape
+ * is self-contained in a `2*outerR` square viewBox regardless of where it is
+ * later mask-positioned.
  */
 export function twinRingInner(outerR: number): string {
   const cx = outerR;
@@ -137,7 +244,20 @@ export function twinRingInner(outerR: number): string {
   const gemR = RING_STROKE + RING_GAP / 2 + 0.6;
   const dotR = 1.1;
 
-  const outerCircle = `<circle cx="${n(cx)}" cy="${n(cy)}" r="${n(outerRingR)}" fill="none" stroke="#000" stroke-width="${RING_STROKE}"/>`;
+  const radiusHarmonics = seededHarmonics(RING_WOBBLE_SEED, 4, outerR * 0.02);
+  const widthHarmonics = seededHarmonics(RING_WOBBLE_SEED + 1000, 3, RING_STROKE * 0.7);
+  const samples = 96;
+  const outerTopPts: string[] = [];
+  const outerBotPts: string[] = [];
+  for (let i = 0; i <= samples; i++) {
+    const t = i / samples;
+    const deg = t * 360;
+    const r = outerRingR + periodicNoise(radiusHarmonics, t);
+    const halfW = Math.max(0.4, (RING_STROKE + periodicNoise(widthHarmonics, t)) / 2);
+    outerTopPts.push(`${n(polarX(cx, r - halfW, deg))} ${n(polarY(cy, r - halfW, deg))}`);
+    outerBotPts.push(`${n(polarX(cx, r + halfW, deg))} ${n(polarY(cy, r + halfW, deg))}`);
+  }
+  const outerRing = `<path d="M ${outerTopPts.join(' L ')} Z M ${outerBotPts.reverse().join(' L ')} Z" fill-rule="evenodd"/>`;
   const innerCircle = `<circle cx="${n(cx)}" cy="${n(cy)}" r="${n(innerRingR)}" fill="none" stroke="#000" stroke-width="${RING_STROKE}"/>`;
 
   const gems = [0, 90, 180, 270]
@@ -153,29 +273,11 @@ export function twinRingInner(outerR: number): string {
     })
     .join('');
 
-  return outerCircle + innerCircle + gemPath + dots;
+  return outerRing + innerCircle + gemPath + dots;
 }
 
 export function ringOrnamentMaskImage(outerR: number): string {
   return svgDataUri(twinRingInner(outerR), outerR * 2);
-}
-
-// ---------- title banner: a pointed-end ribbon scroll for panel/window titles ----------
-
-export function bannerScrollPath(width: number, height: number): string {
-  const tailW = height * 0.55;
-  const furlR = height * 0.14;
-  const body = `M 0 ${n(height / 2)} L ${n(tailW)} 0 L ${n(width - tailW)} 0 L ${n(width)} ${n(height / 2)} L ${n(width - tailW)} ${n(height)} L ${n(tailW)} ${n(height)} Z`;
-  const leftFurl = `M ${n(furlR)} ${n(height / 2 - furlR)} A ${n(furlR)} ${n(furlR)} 0 1 0 ${n(furlR)} ${n(height / 2 + furlR)} A ${n(furlR)} ${n(furlR)} 0 1 0 ${n(furlR)} ${n(height / 2 - furlR)} Z`;
-  const rightFurl = `M ${n(width - furlR)} ${n(height / 2 - furlR)} A ${n(furlR)} ${n(furlR)} 0 1 0 ${n(width - furlR)} ${n(height / 2 + furlR)} A ${n(furlR)} ${n(furlR)} 0 1 0 ${n(width - furlR)} ${n(height / 2 - furlR)} Z`;
-  return `${body} ${leftFurl} ${rightFurl}`;
-}
-
-export function bannerOrnamentMaskImage(width: number, height: number): string {
-  const d = bannerScrollPath(width, height);
-  const inner = `<path d="${d}"/>`;
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${width} ${height}'>${inner}</svg>`;
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
 // ---------- taper accent: a small gem marking a chamfered window-top corner cut ----------
@@ -197,8 +299,6 @@ export function taperAccentMaskImage(): string {
 /** Reference sizes for the ring ornament at its two call sites (unit-frame portrait, minimap disc). */
 export const PORTRAIT_RING_OUTER_R = 34;
 export const MINIMAP_RING_OUTER_R = 90;
-export const TITLE_BANNER_WIDTH = 220;
-export const TITLE_BANNER_HEIGHT = 22;
 
 /**
  * Sets the `--ornament-*` custom properties every ornamented chrome rule
@@ -209,9 +309,7 @@ export function applyOrnamentVars(root: HTMLElement = document.documentElement):
   root.style.setProperty('--ornament-corner', cornerOrnamentMaskImage());
   root.style.setProperty('--ornament-ring-portrait', ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R));
   root.style.setProperty('--ornament-ring-minimap', ringOrnamentMaskImage(MINIMAP_RING_OUTER_R));
-  root.style.setProperty(
-    '--ornament-banner',
-    bannerOrnamentMaskImage(TITLE_BANNER_WIDTH, TITLE_BANNER_HEIGHT),
-  );
   root.style.setProperty('--ornament-window-top', windowTopOrnamentMaskImage());
+  root.style.setProperty('--ornament-edge-h', noisyEdgeMaskImage(1, false));
+  root.style.setProperty('--ornament-edge-v', noisyEdgeMaskImage(2, true));
 }
