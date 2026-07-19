@@ -172,7 +172,16 @@ jobs:
       # suites need the generated artifacts no matter which shard they hash
       # into), so this job needs no explicit i18n:gen step; the freshness diff
       # lives in pr-checks.
+      # PERF_GATE_WALLCLOCK=1 turns on tests/server/perf_gate.test.ts's ARM C: a
+      # real process.hrtime.bigint() comparison of the API-pipeline onion vs the
+      # bare legacy path, plus a real Sim tick-loop p95 check. It is Node-only (no
+      # browser), skipped by default because it is hardware-relative, but its
+      # ceilings carry generous headroom (observed added-p99 ~0.003ms vs a 1ms
+      # budget; observed tick p95 ~0.7ms vs a 40ms ceiling) so it stays safe to run
+      # on every PR shard instead of only via a human remembering the env var.
       - name: Run tests (PR tier, shard ${{ matrix.shard }} of 4)
+        env:
+          PERF_GATE_WALLCLOCK: '1'
         run: npm test -- --shard=${{ matrix.shard }}/4
 
   # Runs in parallel with pr-gate: same if-condition, no needs edge in either
@@ -241,8 +250,10 @@ jobs:
     runs-on: ubuntu-latest
 
     # The release tier; this single flag turns on every release-only check.
+    # PERF_GATE_WALLCLOCK: see the matching comment on pr-gate's test step above.
     env:
       I18N_RELEASE_TIER: '1'
+      PERF_GATE_WALLCLOCK: '1'
 
     # The same 4-shard matrix as pr-gate: the test step partitions across the
     # four runners, while every serialized check and build below carries a

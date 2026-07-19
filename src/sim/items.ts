@@ -506,10 +506,16 @@ export function buyItem(ctx: SimContext, npcId: number, itemId: string, pid?: nu
 }
 
 function vendorInRange(ctx: SimContext, p: Entity): boolean {
-  return [...ctx.entities.values()].some(
-    (e) =>
-      e.kind === 'npc' && e.vendorItems.length > 0 && dist2d(p.pos, e.pos) <= INTERACT_RANGE + 2,
-  );
+  // Bounded by the spatial grid instead of scanning every live entity: a vendor
+  // transaction fires far more often than the world roster is small, and a dense
+  // world (hundreds of mobs/npcs/objects) turned this into a per-transaction
+  // O(entities) scan. forEachInRadius only visits the handful of entities in the
+  // cells overlapping the query radius (see src/sim/spatial.ts).
+  let found = false;
+  ctx.grid.forEachInRadius(p.pos.x, p.pos.z, INTERACT_RANGE + 2, (e) => {
+    if (!found && e.kind === 'npc' && e.vendorItems.length > 0) found = true;
+  });
+  return found;
 }
 
 function recordVendorBuyback(meta: PlayerMeta, itemId: string, count: number): void {

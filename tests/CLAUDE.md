@@ -77,7 +77,10 @@ use the `tests/server/helpers/` fakes (see Map), not a bespoke GameServer rig.
 - `css_corpus.test.ts` guards the CSS union corpus + brace balance (a dropped closing
   brace silently discards all later CSS); re-run after touching `src/styles/` or entry inline styles.
 - Perf budgets: `hud_perf_budget` (baseline in `hud_perf_budget.baseline.md`), `render_budget`,
-  `tests/server/perf_gate` + `tick_perf_capture`, `alloc_probe` (probe in `tests/util/`).
+  `tests/server/perf_gate` + `tick_perf_capture`, `alloc_probe` (probe in `tests/util/`),
+  `mob_update_perf` (the `mob.update` phase), `aura_tick_perf` (the `p.auras`/`mob.auras`
+  phase: a fixed-population budget plus a doubling-depth scaling check, so a linear-scan
+  regression that goes quadratic is caught even when it stays under the flat ms ceiling).
 - SFX gates: the `sfx_*` suites (`sfx_conform`, `sfx_studio_server_security`,
   `tests/server/static_sfx_serving`, ...) mirror `npm run sfx:check`.
 - `malware_scan.test.ts` is the release-gate backstop (signatures from `scripts/malware_scan.mjs`,

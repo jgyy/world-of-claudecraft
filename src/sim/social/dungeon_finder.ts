@@ -44,7 +44,12 @@ export const FINDER_DECLINE_COOLDOWN_SECONDS = 60;
 // while keeping strict join-order fairness inside the window.
 export const FINDER_MATCH_UNIT_WINDOW = 24;
 // Backstop on the combination search so a pathological queue can never stall
-// a tick (the single-role pruning makes real queues far cheaper).
+// a tick (the single-role pruning makes real queues far cheaper). This is the
+// TOTAL node budget for one runMatching() pass, shared across every anchor and
+// activity attempted in that pass (see the shared budgetBox in runMatching):
+// a per-attempt budget would let a role-imbalanced backlog re-spend the full
+// budget on every anchor, scaling total per-tick cost with the anchor count
+// instead of bounding it.
 export const FINDER_MATCH_NODE_BUDGET = 4000;
 // Board projection cap: the wire payload stays bounded however many listings
 // a realm accumulates (oldest listings first, stable order).
@@ -879,17 +884,26 @@ export class DungeonFinderMachine {
   // ---- deterministic matching ---------------------------------------------------
 
   private runMatching(): void {
+    // One shared node budget for the WHOLE matching pass (every anchor and
+    // activity attempted below), not reset per attempt: a role-imbalanced
+    // backlog (e.g. an all-dps queue that can never seat a tank/healer
+    // composition) would otherwise let every anchor independently exhaust its
+    // own fresh budget, scaling total per-tick cost with the anchor count
+    // instead of bounding it (see FINDER_MATCH_NODE_BUDGET).
+    const budgetBox = { remaining: FINDER_MATCH_NODE_BUDGET };
     // Stable FIFO order: original join time, then unit id.
     let changed = true;
-    while (changed) {
+    while (changed && budgetBox.remaining > 0) {
       changed = false;
       const sorted = [...this.queue].sort((a, b) => a.joinedAt - b.joinedAt || a.id - b.id);
       for (const anchor of sorted) {
+        if (budgetBox.remaining <= 0) break;
         const anchorActivities = this.eligibleActivitiesFor(anchor);
         for (const activityId of anchorActivities) {
+          if (budgetBox.remaining <= 0) break;
           const activity = finderActivity(activityId);
           if (!activity || activity.composition === null) continue;
-          const match = this.tryAssemble(sorted, anchor, activity);
+          const match = this.tryAssemble(sorted, anchor, activity, budgetBox);
           if (!match) continue;
           this.createProposal(activity, match.units, match.roles);
           changed = true;
@@ -911,9 +925,11 @@ export class DungeonFinderMachine {
     sorted: FinderQueueUnit[],
     anchor: FinderQueueUnit,
     activity: FinderActivity,
+    budgetBox: { remaining: number },
   ): { units: FinderQueueUnit[]; roles: Map<number, Role> } | null {
     const comp = activity.composition;
     if (comp === null) return null;
+    if (budgetBox.remaining <= 0) return null;
     const target = activity.size;
     // Anchor first (mandatory), then every other compatible unit in FIFO
     // order. An older unit may appear here even though it failed as its own
@@ -929,12 +945,11 @@ export class DungeonFinderMachine {
     const roleMembers = new Map<number, FinderRoleMember[]>();
     for (const u of candidates) roleMembers.set(u.id, this.unitRoleMembers(u));
 
-    let budget = FINDER_MATCH_NODE_BUDGET;
     const chosen: FinderQueueUnit[] = [];
     let solution: { units: FinderQueueUnit[]; roles: Map<number, Role> } | null = null;
 
     const dfs = (idx: number, size: number): boolean => {
-      if (budget-- <= 0) return true; // out of budget: stop the whole search
+      if (budgetBox.remaining-- <= 0) return true; // out of budget: stop the whole search
       if (size === target) {
         const members = chosen.flatMap((u) => roleMembers.get(u.id) ?? []);
         const roles = assignFinderRoles(members, comp);

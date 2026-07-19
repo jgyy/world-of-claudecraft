@@ -45,7 +45,16 @@ if (missingAudioTools.length > 0) {
 const branch =
   spawnSync('git', ['branch', '--show-current'], { encoding: 'utf8', shell }).stdout?.trim() ?? '';
 const releaseTier = branch.startsWith('release/');
-const env = releaseTier ? { ...process.env, I18N_RELEASE_TIER: '1' } : process.env;
+// PERF_GATE_WALLCLOCK=1 turns on tests/server/perf_gate.test.ts's ARM C: a real
+// process.hrtime.bigint() comparison plus a real Sim tick-loop p95 check. It is
+// Node-only (no browser) and carries generous headroom over its ceilings (see
+// the matching comment in .github/workflows/ci.yml), so it runs in every local
+// gate instead of only via a human remembering the env var.
+const env = {
+  ...process.env,
+  PERF_GATE_WALLCLOCK: '1',
+  ...(releaseTier ? { I18N_RELEASE_TIER: '1' } : {}),
+};
 
 const I18N_ARTIFACTS = [
   'src/ui/i18n.resolved.generated',

@@ -118,6 +118,84 @@ jobs:
           SHOTS_DIR: pr-shots
         run: node scripts/pr_comment_shots.mjs
 
+  # Real-browser frame-budget signal for every PR. hud_perf_budget.test.ts's ARM 3
+  # (HUD_PERF_BUDGET_TOUR=1) reads a perf_tour.mjs artifact and gates on frameP95 +
+  # the elision-bypass write count against the committed baseline
+  # (hud_perf_budget.baseline.md); it is skipped by default in `npm test`/the
+  # deterministic ci.yml gate because real browser frame timing is hardware-relative
+  # and can be noisy on a shared runner (see the file's own header comment). This job
+  # runs it anyway, informationally: like `screenshots` above it never blocks a merge
+  # (not a required check, this whole workflow is "informational, non-blocking"), but
+  # now a real frameP95/write-count regression gets surfaced on every PR instead of
+  # relying on someone remembering to run the tour by hand.
+  perf-budget-report:
+    name: Real-browser frame budget (informational)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate i18n artifacts
+        run: npm run i18n:gen
+
+      - name: Resolve a Chrome binary
+        run: |
+          CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium-browser || command -v chromium || true)"
+          if [ -z "$CHROME" ]; then
+            echo "No system Chrome on PATH; installing a Chrome for Testing build."
+            CHROME="$(npx --yes puppeteer browsers install chrome | awk '{print $NF}')"
+          fi
+          echo "BROWSER_PATH=$CHROME" >> "$GITHUB_ENV"
+          echo "Using browser: $CHROME"
+
+      - name: Start the dev client
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 5173 --strictPort &
+          echo $! > .devpid
+          for i in $(seq 1 60); do
+            curl -sf http://127.0.0.1:5173 >/dev/null && { echo "dev client up"; break; }
+            sleep 2
+          done
+
+      # Both viewports land in one artifact (perf_tour.mjs's default PERF_VIEWPORT=both);
+      # continue-on-error because the tour script's OWN hard-error heuristics (stray
+      # console errors, its built-in fctBurst checks) are a different, noisier signal
+      # than the frame budget below, which is the one this job actually gates on.
+      - name: Run the perf tour (desktop + mobile)
+        continue-on-error: true
+        env:
+          GAME_URL: http://127.0.0.1:5173
+          PERF_OUT: tmp/perf-tour.json
+        run: npm run perf:tour
+
+      - name: Stop the dev client
+        if: always()
+        run: kill "$(cat .devpid)" 2>/dev/null || true
+
+      - name: Check the desktop frame budget
+        env:
+          HUD_PERF_BUDGET_TOUR: '1'
+          HUD_PERF_BUDGET_TOUR_VIEWPORT: desktop
+          HUD_PERF_BUDGET_TOUR_RESULT: tmp/perf-tour.json
+        run: npx vitest run tests/hud_perf_budget.test.ts
+
+      - name: Check the mobile frame budget
+        env:
+          HUD_PERF_BUDGET_TOUR: '1'
+          HUD_PERF_BUDGET_TOUR_VIEWPORT: mobile
+          HUD_PERF_BUDGET_TOUR_RESULT: tmp/perf-tour.json
+        run: npx vitest run tests/hud_perf_budget.test.ts
+
   codex-review:
     name: AI review (Codex)
     runs-on: ubuntu-latest
