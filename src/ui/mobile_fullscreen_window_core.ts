@@ -12,10 +12,22 @@
 // while combat continues, which the CLAUDE.md graphics-fairness invariant
 // forbids. Hud owns the DOM class toggle; this core keeps the decision
 // independently testable.
+//
+// bags is NOT actually fullscreen in the three "paired cluster" layouts
+// (body.vendor-open, body.bank-open, body.char-bags-paired): those blocks in
+// hud.mobile.css deliberately reserve the bottom 72px so the player frame
+// stays visible underneath the docked pair. Hiding the bottom bar there
+// would hide HP/resource while the world keeps running (talking to a vendor
+// or opening the bank/character sheet does not pause combat) and leave an
+// empty 72px band where the frame used to be. Neither half of a paired
+// cluster is fullscreen, so the caller passes pairedCluster = vendor-open ||
+// bank-open || char-bags-paired and this returns false whenever it is set.
 
 export function isMobileFullscreenWindowOpen(
   bagsVisible: boolean,
   charWindowVisible: boolean,
+  pairedCluster: boolean,
 ): boolean {
+  if (pairedCluster) return false; // neither half of a paired cluster is fullscreen
   return bagsVisible || charWindowVisible;
 }
