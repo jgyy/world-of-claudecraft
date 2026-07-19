@@ -561,7 +561,13 @@ export class MarketWindow {
         used: formatNumber(meta.myListingCount, { maximumFractionDigits: 0 }),
         max: formatNumber(meta.maxListings, { maximumFractionDigits: 0 }),
       }),
-    )}</div>`;
+    )}</div>${
+      meta.feePoolCopper > 0
+        ? `<div class="mkt-note">${esc(
+            t('itemUi.market.jackpotNote', { pool: formatLocalizedMoney(meta.feePoolCopper) }),
+          )}</div>`
+        : ''
+    }`;
     if (view.state === 'pick-empty') {
       const pick = document.createElement('div');
       pick.className = 'mkt-sell-pick empty';

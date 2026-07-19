@@ -6154,6 +6154,7 @@ export const vi_VN: EnTranslations = {
       "buyAria": "Mua {item} với giá {price}",
       "reclaimAria": "Thu hồi {item}",
       "sellNote": "Rao bán hàng hóa từ túi của bạn. Thương Nhân thu {cut}% phí khi vật phẩm được bán. Bạn đang dùng {used}/{max} ô rao bán.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
       "sellPickEmpty": "Nhấp vào một vật phẩm trong túi để chọn món muốn bán.",
       "quantity": "Số lượng",
       "quantityOf": "trong {count}",

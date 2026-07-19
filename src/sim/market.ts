@@ -7,7 +7,8 @@
 // IWorld surface, and the /listings readout call sites resolve unchanged.
 //
 // `src/sim`-pure: no DOM/Three/render-ui-game-net imports, no Math.random/Date.now
-// (enforced by tests/architecture.test.ts). The market draws NO rng.
+// (enforced by tests/architecture.test.ts). Only the fee-pool giveaway draw
+// (updateFeePool/pickFeePoolReward) draws rng; everything else in this module does not.
 
 import { ITEMS } from './data';
 import { formatMoney } from './format_money';
@@ -19,7 +20,7 @@ import {
 } from './market_query';
 import type { PlayerMeta } from './sim';
 import type { SimContext } from './sim_context';
-import { dist2d, type Entity, INTERACT_RANGE, type InvSlot } from './types';
+import { dist2d, type Entity, INTERACT_RANGE, type InvSlot, type ItemDef } from './types';
 
 const MARKET_RANGE = INTERACT_RANGE + 2; // you must stand at the Merchant to deal
 // the /listings readout (still on Sim) reports the seller's count against this cap,
@@ -27,9 +28,15 @@ const MARKET_RANGE = INTERACT_RANGE + 2; // you must stand at the Merchant to de
 export const MARKET_MAX_LISTINGS = 12; // active player listings per seller
 const MARKET_MIN_PRICE = 1; // copper
 const MARKET_MAX_PRICE = 5_000_000; // 500g ceiling — guards against overflow / fat-finger
-const MARKET_CUT = 0.05; // the Merchant's cut on a completed sale (a gold sink)
+const MARKET_CUT = 0.05; // the Merchant's cut on a completed sale
 const MARKET_LISTING_DURATION = 48 * 3600; // sim-seconds an unsold listing lingers before returning
 const MARKET_WIRE_LIMIT = 120; // most listings shipped to one client at a time
+// RS-style Grand Exchange tax sink: rather than simply destroying the Merchant's cut,
+// it accumulates into a shared pool that periodically funds a giveaway (see
+// updateFeePool). Roughly a daily cadence in sim time; a quiet trade week just carries
+// the pool into the next draw instead of forcing an empty one.
+const MARKET_FEE_POOL_DRAW_INTERVAL = 24 * 3600; // sim-seconds between giveaway draws
+const MARKET_FEE_POOL_REWARD_KINDS = new Set(['weapon', 'armor']);
 
 export interface MarketListing {
   id: number;
@@ -64,6 +71,11 @@ export interface MarketSave {
   }[];
   collections: { key: string; copper: number; items: InvSlot[] }[];
   nextListingId: number;
+  // The fee-pool giveaway (see MARKET_FEE_POOL_DRAW_INTERVAL). Optional so an old
+  // save (predating this feature) loads with an empty pool and a fresh countdown,
+  // exactly like an absent listing/collection field.
+  feePoolCopper?: number;
+  feePoolDrawSecondsLeft?: number;
 }
 
 export class Market {
@@ -79,6 +91,14 @@ export class Market {
   // any of these merchants is a valid place to stand and deal, so a player can use the
   // auction house at whichever auctioneer is closest.
   merchantIds: number[] = [];
+  // Fee-pool giveaway state (see MARKET_FEE_POOL_DRAW_INTERVAL). `feePoolParticipants`
+  // is every seller/buyer key that traded since the last draw, so the winner is drawn
+  // from people who actually used the market, not the whole player roster.
+  feePoolCopper = 0;
+  private feePoolParticipants = new Set<string>();
+  // Public like MarketListing.expiresAt: tests force a draw the same way they force a
+  // listing expiry, by moving the deadline into the past then ticking.
+  feePoolNextDrawAt = 0;
 
   constructor(private readonly ctx: SimContext) {}
 
@@ -86,12 +106,14 @@ export class Market {
   // `merchantId`, replacing the inline `this.seedHouseListings()`.
   seed(): void {
     this.seedHouseListings();
+    this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
   }
 
   // Public tick entry: the Sim tick calls this in the end-of-tick market phase,
   // replacing the inline `this.updateMarket()` (same phase, same call position).
   update(): void {
     this.updateMarket();
+    this.updateFeePool();
   }
 
   private nearMerchant(e: Entity): boolean {
@@ -331,7 +353,13 @@ export class Market {
     this.ctx.addItem(listing.itemId, listing.count, meta.entityId);
     if (!listing.house) {
       const proceeds = Math.max(0, Math.floor(listing.price * (1 - MARKET_CUT)));
+      const cut = listing.price - proceeds;
       this.collectionFor(listing.sellerKey).copper += proceeds;
+      if (cut > 0) {
+        this.feePoolCopper += cut;
+        this.feePoolParticipants.add(listing.sellerKey);
+        this.feePoolParticipants.add(this.marketSellerKey(meta));
+      }
       this.marketListings.splice(idx, 1);
       const sellerMeta = this.metaByMarketSellerKey(listing.sellerKey);
       if (sellerMeta) {
@@ -446,6 +474,55 @@ export class Market {
     }
   }
 
+  // Roughly once a day: if the pool holds any fees and at least one participant
+  // traded since the last draw, pick a random participant and hand them a random
+  // epic/legendary drop, funded entirely by the pool (which always drains and
+  // reschedules, win or not, so an empty week never lets fees pile up unbounded).
+  private updateFeePool(): void {
+    if (this.ctx.tickCount % 20 !== 0) return;
+    if (this.ctx.time < this.feePoolNextDrawAt) return;
+    this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
+    const spent = this.feePoolCopper;
+    const participants = [...this.feePoolParticipants];
+    this.feePoolCopper = 0;
+    this.feePoolParticipants.clear();
+    if (spent <= 0 || participants.length === 0) return;
+    const winnerKey = this.ctx.rng.pick(participants);
+    const winnerMeta = this.metaByMarketSellerKey(winnerKey);
+    const rewardId = this.pickFeePoolReward(winnerMeta?.cls);
+    if (!rewardId) return;
+    this.collectionFor(winnerKey).items.push({ itemId: rewardId, count: 1 });
+    const def = ITEMS[rewardId];
+    const winnerName = winnerMeta?.name ?? winnerKey;
+    for (const m of this.ctx.players.values()) {
+      this.ctx.emit({
+        type: 'log',
+        text: `${winnerName} won ${def.name} from the World Market's fee giveaway, funded by ${formatMoney(spent)} in trading fees!`,
+        color: '#ffd35c',
+        pid: m.entityId,
+      });
+    }
+  }
+
+  // Reward pool: epic/legendary gear, preferring pieces the winner can actually
+  // equip (no requiredClass, or one that lists their class) so the giveaway is
+  // never wasted on an off-class drop; falls back to any classless epic/legendary
+  // piece if the winner's class has none (still exciting, just not equippable
+  // by them specifically - tradeable on the World Market like any other item).
+  private pickFeePoolReward(cls: PlayerMeta['cls'] | undefined): string | null {
+    const isReward = (d: ItemDef): boolean =>
+      (d.quality === 'epic' || d.quality === 'legendary') &&
+      MARKET_FEE_POOL_REWARD_KINDS.has(d.kind) &&
+      !d.heroicOf &&
+      !d.soulbound;
+    const forClass = Object.values(ITEMS).filter(
+      (d) => isReward(d) && (!d.requiredClass || (cls && d.requiredClass.includes(cls))),
+    );
+    if (forClass.length > 0) return this.ctx.rng.pick(forClass).id;
+    const classless = Object.values(ITEMS).filter((d) => isReward(d) && !d.requiredClass);
+    return classless.length > 0 ? this.ctx.rng.pick(classless).id : null;
+  }
+
   marketInfoFor(pid: number): import('../world_api').MarketInfo | null {
     const meta = this.ctx.players.get(pid);
     const e = this.ctx.entities.get(pid);
@@ -505,6 +582,7 @@ export class Market {
       cutPct: Math.round(MARKET_CUT * 100),
       maxListings: MARKET_MAX_LISTINGS,
       myListingCount,
+      feePoolCopper: this.feePoolCopper,
     };
   }
 
@@ -531,11 +609,22 @@ export class Market {
         items: c.items.map((s) => ({ ...s })),
       })),
       nextListingId: this.nextListingId,
+      feePoolCopper: this.feePoolCopper,
+      feePoolDrawSecondsLeft: Math.max(0, Math.round(this.feePoolNextDrawAt - this.ctx.time)),
     };
   }
 
   loadMarket(save: MarketSave | null | undefined): void {
     if (!save) return;
+    this.feePoolCopper = Math.max(0, Math.floor(save.feePoolCopper ?? 0) || 0);
+    // Participants never persist (a session-only eligibility list): a fee earned
+    // before a restart still counts toward the pool, but who gets to win it is
+    // decided only by trades since the server has been back up.
+    this.feePoolNextDrawAt =
+      this.ctx.time +
+      (Number.isFinite(save.feePoolDrawSecondsLeft)
+        ? Math.max(0, save.feePoolDrawSecondsLeft as number)
+        : MARKET_FEE_POOL_DRAW_INTERVAL);
     for (const l of save.listings ?? []) {
       // Keep a listing whose item id is no longer in ITEMS (a content rename,
       // retirement, or typo). Dropping it would silently destroy every escrowed

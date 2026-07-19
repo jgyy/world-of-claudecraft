@@ -6154,6 +6154,7 @@ export const sv_SE: EnTranslations = {
       "buyAria": "Köp {item} för {price}",
       "reclaimAria": "Återkalla {item}",
       "sellNote": "Lägg upp varor från dina väskor. Köpmannen tar {cut}% i provision när ett föremål säljs. Du använder {used}/{max} listningsplatser.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
       "sellPickEmpty": "Klicka på ett föremål i dina väskor för att välja vad du vill sälja.",
       "quantity": "Antal",
       "quantityOf": "av {count}",

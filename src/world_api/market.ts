@@ -31,6 +31,9 @@ export interface MarketInfo {
   cutPct: number; // the Merchant's cut on a sale, as a percentage
   maxListings: number; // per-seller active-listing cap
   myListingCount: number; // how many active listings the viewer already has
+  // The accumulated fee-pool jackpot (copper), funded by the Merchant's cut, that a
+  // periodic giveaway drawing hands to a random recent trader. See src/sim/market.ts.
+  feePoolCopper: number;
 }
 
 export interface IWorldMarket {

@@ -6154,6 +6154,7 @@ export const cs_CZ: EnTranslations = {
       "buyAria": "Koupit {item} za {price}",
       "reclaimAria": "Získat zpět {item}",
       "sellNote": "Nabídni zboží ze svých batohů. Obchodník si při prodeji vezme provizi {cut} %. Používáš {used}/{max} slotů pro nabídky.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
       "sellPickEmpty": "Klikni na předmět v batozích a vyber, co chceš prodat.",
       "quantity": "Množství",
       "quantityOf": "z {count}",

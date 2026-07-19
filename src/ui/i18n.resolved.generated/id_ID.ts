@@ -6154,6 +6154,7 @@ export const id_ID: EnTranslations = {
       "buyAria": "Beli {item} seharga {price}",
       "reclaimAria": "Tarik kembali {item}",
       "sellNote": "Pajang barang dari tasmu. Pedagang mengambil potongan {cut}% saat barang terjual. Kamu memakai {used}/{max} slot daftar jual.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
       "sellPickEmpty": "Klik barang di tasmu untuk memilih yang akan dijual.",
       "quantity": "Jumlah",
       "quantityOf": "dari {count}",

@@ -67,6 +67,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "es_ES": [
@@ -127,6 +128,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "fr_FR": [
@@ -187,6 +189,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "fr_CA": [
@@ -247,6 +250,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "en_CA": [],
@@ -308,6 +312,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "de_DE": [
@@ -368,6 +373,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "zh_CN": [
@@ -440,6 +446,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "ru_RU": [
@@ -503,6 +510,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "nl_NL": [
@@ -563,6 +571,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "pl_PL": [
@@ -623,6 +632,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "id_ID": [
@@ -683,6 +693,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "tr_TR": [
@@ -743,6 +754,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "sv_SE": [
@@ -803,6 +815,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "vi_VN": [
@@ -863,6 +876,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ],
   "da_DK": [
@@ -923,6 +937,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
+    "itemUi.market.jackpotNote",
     "itemUi.market.rarityLegendary"
   ]
 };

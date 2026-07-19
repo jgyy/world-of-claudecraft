@@ -6154,6 +6154,7 @@ export const de_DE: EnTranslations = {
       "buyAria": "{item} für {price} kaufen",
       "reclaimAria": "{item} zurückholen",
       "sellNote": "Stellt Waren aus Euren Taschen ein. Der Händler nimmt {cut}% beim Verkauf. Ihr nutzt {used}/{max} Verkaufsplätze.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
       "sellPickEmpty": "Klickt auf einen Gegenstand in Euren Taschen, um ihn zu verkaufen.",
       "quantity": "Menge",
       "quantityOf": "von {count}",

@@ -6154,6 +6154,7 @@ export const tr_TR: EnTranslations = {
       "buyAria": "{item} eşyasını {price} karşılığında satın al",
       "reclaimAria": "{item} eşyasını geri al",
       "sellNote": "Çantalarınızdaki malları satışa koyun. Bir eşya satıldığında Tüccar %{cut} pay alır. {max} ilan yuvasından {used} tanesini kullanıyorsunuz.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
       "sellPickEmpty": "Satılacak eşyayı seçmek için çantalarınızdaki bir eşyaya tıklayın.",
       "quantity": "Miktar",
       "quantityOf": "/ {count}",

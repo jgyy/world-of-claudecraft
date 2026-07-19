@@ -585,6 +585,7 @@ function marketInfo(shape: WorldShape): MarketInfo {
     cutPct: 5,
     maxListings: 10,
     myListingCount: 0,
+    feePoolCopper: 0,
   };
   // The sim shape may carry extra server-only fields the view ignores; the client mirror
   // carries only the decoded fields (the offline-only-shape trap catches).

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { ITEMS } from '../src/sim/data';
 import type { MarketQuery } from '../src/sim/market_query';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
@@ -598,5 +599,132 @@ describe('World Market: a now-soulbound listing is returned to the seller', () =
     ).marketCollections;
     const coll = collections.get(sellerKey);
     expect(coll?.items.some((s) => s.itemId === 'heroic_mark' && s.count === 3)).toBe(true);
+  });
+});
+
+describe('the World Market: the fee-pool giveaway', () => {
+  it("a sale's cut accumulates in the pool instead of only paying the seller", () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.addItem('wolf_fang', 1, seller);
+    sim.players.get(buyer)!.copper = 1000;
+    sim.marketList('wolf_fang', 1, 200, seller);
+    const listing = sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!;
+
+    expect(sim.market.feePoolCopper).toBe(0);
+    sim.marketBuy(listing.id, buyer);
+
+    // 5% of 200 = 10 copper into the pool; the seller's 95% proceeds are unaffected.
+    expect(sim.market.feePoolCopper).toBe(10);
+    expect(sim.marketInfoFor(seller)!.feePoolCopper).toBe(10);
+  });
+
+  it('a house-stock purchase pays no cut into the pool', () => {
+    const sim = makeWorld();
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, buyer);
+    sim.players.get(buyer)!.copper = 10_000;
+    const house = sim.marketListings.find((l) => l.house)!;
+
+    sim.marketBuy(house.id, buyer);
+
+    expect(sim.market.feePoolCopper).toBe(0);
+  });
+
+  it('draws a winner from recent traders and grants them an epic/legendary reward once the pool matures', () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.addItem('wolf_fang', 1, seller);
+    sim.players.get(buyer)!.copper = 1000;
+    sim.marketList('wolf_fang', 1, 200, seller);
+    sim.marketBuy(
+      sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
+      buyer,
+    );
+    expect(sim.market.feePoolCopper).toBeGreaterThan(0);
+    sim.market.feePoolNextDrawAt = sim.time - 1; // force the draw due
+
+    // tick() drains its own events into its return value each call, so collect
+    // across the loop rather than reading sim.events afterward.
+    const allEvents = [];
+    for (let i = 0; i < 20; i++) allEvents.push(...sim.tick()); // updateFeePool runs once a second
+
+    // The pool always drains and reschedules on a due draw, win or not.
+    expect(sim.market.feePoolCopper).toBe(0);
+    expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
+
+    // One of the two traders won a reward, delivered to their Merchant collection.
+    const sellerItems = sim.marketInfoFor(seller)!.collectionItems;
+    const buyerItems = sim.marketInfoFor(buyer)!.collectionItems;
+    const won = [...sellerItems, ...buyerItems];
+    expect(won.length).toBe(1);
+    const def = ITEMS[won[0].itemId]!;
+    expect(['epic', 'legendary']).toContain(def.quality);
+    expect(['weapon', 'armor']).toContain(def.kind);
+
+    // The whole server heard about it.
+    const logs = allEvents.filter((e) => e.type === 'log').map((e) => (e as { text: string }).text);
+    expect(logs.some((t) => t.includes('fee giveaway'))).toBe(true);
+  });
+
+  it('an empty pool at the draw deadline just reschedules, with no winner and no error', () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    standAtMerchant(sim, seller);
+    sim.market.feePoolNextDrawAt = sim.time - 1;
+
+    for (let i = 0; i < 20; i++) sim.tick();
+
+    expect(sim.market.feePoolCopper).toBe(0);
+    expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
+    expect(sim.marketInfoFor(seller)!.collectionItems).toEqual([]);
+  });
+
+  it('persists the pool and the draw countdown across a save/load round trip', () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.addItem('wolf_fang', 1, seller);
+    sim.players.get(buyer)!.copper = 1000;
+    sim.marketList('wolf_fang', 1, 200, seller);
+    sim.marketBuy(
+      sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
+      buyer,
+    );
+    expect(sim.market.feePoolCopper).toBe(10);
+
+    const save = sim.serializeMarket();
+    expect(save.feePoolCopper).toBe(10);
+    expect(save.feePoolDrawSecondsLeft).toBeGreaterThan(0);
+
+    const sim2 = makeWorld();
+    sim2.loadMarket(save);
+
+    expect(sim2.market.feePoolCopper).toBe(10);
+    // A restart resets sim.time to 0, so the countdown rehydrates relative to it
+    // (mirrors listing expiresAt/secondsLeft), not to a stale absolute deadline.
+    expect(sim2.market.feePoolNextDrawAt).toBe(sim2.time + save.feePoolDrawSecondsLeft!);
+  });
+
+  it('loads a pre-feature save with no feePool fields as an empty pool on a fresh countdown', () => {
+    const sim = makeWorld();
+    const save = {
+      listings: [],
+      collections: [],
+      nextListingId: 1,
+    };
+
+    sim.loadMarket(save as never);
+
+    expect(sim.market.feePoolCopper).toBe(0);
+    expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
   });
 });

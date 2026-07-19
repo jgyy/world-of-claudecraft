@@ -2384,6 +2384,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.reclaimAria': 'Вернуть {item}',
   'itemUi.market.sellNote':
     'Выставляйте товары из сумок. Торговец берет {cut}% при продаже. Использовано мест: {used}/{max}.',
+  'itemUi.market.jackpotNote': 'Торговец копит {pool} комиссии к следующему розыгрышу.',
   'itemUi.market.sellPickEmpty': 'Нажмите на предмет в сумках, чтобы выбрать товар для продажи.',
   'itemUi.market.quantity': 'Количество',
   'itemUi.market.quantityOf': 'из {count}',

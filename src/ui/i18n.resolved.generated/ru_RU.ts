@@ -6154,6 +6154,7 @@ export const ru_RU: EnTranslations = {
       "buyAria": "Купить {item} за {price}",
       "reclaimAria": "Вернуть {item}",
       "sellNote": "Выставляйте товары из сумок. Торговец берет {cut}% при продаже. Использовано мест: {used}/{max}.",
+      "jackpotNote": "Торговец копит {pool} комиссии к следующему розыгрышу.",
       "sellPickEmpty": "Нажмите на предмет в сумках, чтобы выбрать товар для продажи.",
       "quantity": "Количество",
       "quantityOf": "из {count}",

@@ -6217,6 +6217,7 @@ export type TranslationKeyFlat =
   | 'itemUi.market.filterWeaponAll'
   | 'itemUi.market.filterWeaponType'
   | 'itemUi.market.filters'
+  | 'itemUi.market.jackpotNote'
   | 'itemUi.market.listButton'
   | 'itemUi.market.merchantStock'
   | 'itemUi.market.minPriceError'

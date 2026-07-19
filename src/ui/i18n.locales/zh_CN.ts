@@ -2264,6 +2264,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.reclaimAria': '取回 {item}',
   'itemUi.market.sellNote':
     '从背包上架货物。物品售出时商人抽取 {cut}%。你正在使用 {used}/{max} 个上架位。',
+  'itemUi.market.jackpotNote': '商人持有 {pool} 的手续费，将用于下一次抽奖。',
   'itemUi.market.sellPickEmpty': '点击背包中的物品来选择要出售的货物。',
   'itemUi.market.quantity': '数量',
   'itemUi.market.quantityOf': '共 {count}',

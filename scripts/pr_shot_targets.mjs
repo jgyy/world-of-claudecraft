@@ -630,6 +630,44 @@ export const TARGETS = [
       return { clip: '#professions-window' };
     },
   },
+  {
+    key: 'market-fee-pool-jackpot',
+    label: 'World Market: Sell tab fee-pool jackpot note',
+    when: ['sim/market.ts', 'ui/market_view', 'ui/market_window'],
+    async capture(page) {
+      // The one-time "Choose Your Camera" prompt (enter_offline_game.mjs dismisses it
+      // once, but it can resurface right at this settle point on a slow run); clear it
+      // again here so it never occludes the window this target actually shoots.
+      await page.evaluate(() => {
+        document.querySelector('.camera-prompt-confirm')?.click();
+      });
+      await wait(200);
+      await page.evaluate(() => {
+        const game = window.__game;
+        const merchant = [...game.sim.entities.values()].find(
+          (e) => e.templateId === 'the_merchant',
+        );
+        const p = game.sim.player;
+        if (merchant && p?.pos) {
+          p.pos.x = merchant.pos.x;
+          p.pos.z = merchant.pos.z;
+        }
+        game.sim.market.feePoolCopper = 48230; // a nonzero jackpot to show the note
+        const el = document.querySelector('#market-window');
+        if (el) el.style.display = 'none';
+        game.hud.openMarket();
+      });
+      const open = await pollForSize(page, '#market-window');
+      if (!open) throw new Error('market window did not open');
+      await page.evaluate(() => {
+        document
+          .querySelector('#market-window .mkt-tab[data-tab="sell"]')
+          ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      });
+      await wait(300);
+      return { clip: '#market-window' };
+    },
+  },
 ];
 
 // Map a list of changed file paths to the targets they imply (deduped, registry order).

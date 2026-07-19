@@ -6154,6 +6154,7 @@ export const nl_NL: EnTranslations = {
       "buyAria": "{item} kopen voor {price}",
       "reclaimAria": "{item} terugnemen",
       "sellNote": "Bied goederen uit je tassen aan. De handelaar neemt een aandeel van {cut}% wanneer een voorwerp verkocht wordt. Je gebruikt {used}/{max} aanbiedingsplekken.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
       "sellPickEmpty": "Klik op een voorwerp in je tassen om te kiezen wat je verkoopt.",
       "quantity": "Aantal",
       "quantityOf": "van {count}",

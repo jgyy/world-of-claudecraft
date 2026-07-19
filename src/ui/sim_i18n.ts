@@ -178,6 +178,8 @@ const baseEnTable = {
   'loot.rollGreed': 'Greed Roll - {roll} for {item} by {name}',
   'loot.marketSellerBought':
     '{buyer} bought your {item} for {price} - collect {proceeds} from the Merchant.',
+  'loot.marketFeePoolWin':
+    "{winner} won {item} from the World Market's fee giveaway, funded by {pool} in trading fees!",
   'log.learnedAbility': 'You have learned a new ability: {name}.',
   'log.abilityRankUp': 'Your {name} has improved to Rank {rank}.',
   'log.stopFollowing': 'You stop following.',
@@ -3075,6 +3077,8 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'loot.rollNeed': '{name}对{item}的需求掷骰：{roll}',
     'loot.rollGreed': '{name}对{item}的贪婪掷骰：{roll}',
     'loot.marketSellerBought': '{buyer}以{price}购买了你的{item}；向商人领取{proceeds}。',
+    'loot.marketFeePoolWin':
+      '{winner}赢得了世界市场手续费抽奖的{item}，奖池由{pool}的交易手续费提供！',
     'aura.tamed': '已驯服',
     'aura.causticSpores': '腐蚀孢子',
     'aura.elixirBear': '巨熊之力',
@@ -3433,6 +3437,8 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'loot.rollNeed': '{name}對{item}的需求擲骰：{roll}',
     'loot.rollGreed': '{name}對{item}的貪婪擲骰：{roll}',
     'loot.marketSellerBought': '{buyer}以{price}購買了你的{item}；向商人領取{proceeds}。',
+    'loot.marketFeePoolWin':
+      '{winner}贏得了世界市場手續費抽獎的{item}，獎池由{pool}的交易手續費提供！',
     'aura.tamed': '馴服',
     'aura.causticSpores': '腐蝕孢子',
     'aura.elixirBear': '巨熊之力',
@@ -3798,6 +3804,8 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'loot.rollGreed': '{name}님의 {item} 탐욕 주사위: {roll}',
     'loot.marketSellerBought':
       '{buyer}님이 당신의 {item}을(를) {price}에 샀습니다. 상인에게서 {proceeds}을(를) 수령하세요.',
+    'loot.marketFeePoolWin':
+      '{winner}님이 세계 시장 수수료 추첨에서 {item}을(를) 획득했습니다. 거래 수수료 {pool}이(가) 이 추첨의 재원이 되었습니다!',
     'aura.tamed': '길들여짐',
     'aura.causticSpores': '부식성 포자',
     'aura.elixirBear': '곰의 힘',
@@ -4174,6 +4182,8 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'loot.rollGreed': '{name}の{item}への強欲ロール：{roll}',
     'loot.marketSellerBought':
       '{buyer}があなたの{item}を{price}で購入しました。商人から{proceeds}を受け取ってください。',
+    'loot.marketFeePoolWin':
+      '{winner}がワールドマーケットの手数料抽選で{item}を獲得しました。取引手数料{pool}がこの抽選の原資です！',
     'aura.tamed': 'テイム',
     'aura.causticSpores': '腐食胞子',
     'aura.elixirBear': '熊の力',
@@ -4863,6 +4873,8 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'loot.rollGreed': 'Бросок «Жадность» - {roll} за {item} от {name}',
     'loot.marketSellerBought':
       '{buyer} купил ваш предмет {item} за {price}; заберите {proceeds} у торговца.',
+    'loot.marketFeePoolWin':
+      '{winner} выиграл(а) {item} в розыгрыше комиссии Мирового рынка, оплаченном за счёт {pool} торговых комиссий!',
     'aura.tamed': 'Приручён',
     'aura.causticSpores': 'Едкие споры',
     'aura.elixirBear': 'Мощь Медведя',
@@ -7187,6 +7199,10 @@ const RULES: Rule[] = [
         price: m[3],
         proceeds: m[4],
       }),
+  },
+  {
+    re: /^(.+) won (.+) from the World Market's fee giveaway, funded by (.+) in trading fees!$/,
+    build: (m) => tSim('loot.marketFeePoolWin', { winner: m[1], item: locItem(m[2]), pool: m[3] }),
   },
   // Ability learned / rank-up. {name} is an ability name (localized via the entity dict).
   {

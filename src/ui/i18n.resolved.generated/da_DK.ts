@@ -6154,6 +6154,7 @@ export const da_DK: EnTranslations = {
       "buyAria": "Køb {item} for {price}",
       "reclaimAria": "Tag {item} tilbage",
       "sellNote": "Sæt varer fra dine tasker til salg. Købmanden tager {cut}% i afgift, når en genstand sælges. Du bruger {used}/{max} salgspladser.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
       "sellPickEmpty": "Klik på en genstand i dine tasker for at vælge, hvad du vil sælge.",
       "quantity": "Antal",
       "quantityOf": "af {count}",

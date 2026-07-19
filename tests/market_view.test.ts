@@ -38,6 +38,7 @@ function info(over: Partial<MarketInfo> = {}): MarketInfo {
     cutPct: 5,
     maxListings: 10,
     myListingCount: 0,
+    feePoolCopper: 0,
     ...over,
   };
 }
@@ -96,7 +97,12 @@ describe('market_view: top-level state union', () => {
     });
     expect(sell.kind).toBe('sell');
     if (sell.kind === 'sell')
-      expect(sell.meta).toEqual({ cutPct: 5, myListingCount: 0, maxListings: 10 });
+      expect(sell.meta).toEqual({
+        cutPct: 5,
+        myListingCount: 0,
+        maxListings: 10,
+        feePoolCopper: 0,
+      });
     expect(
       buildMarketView({
         info: i,

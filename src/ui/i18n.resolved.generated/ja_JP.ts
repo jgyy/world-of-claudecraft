@@ -6154,6 +6154,7 @@ export const ja_JP: EnTranslations = {
       "buyAria": "{item}を{price}で購入",
       "reclaimAria": "{item}を回収",
       "sellNote": "バッグから品物を出品します。売れると商人が{cut}%を受け取ります。出品枠 {used}/{max} を使用中です。",
+      "jackpotNote": "商人は次の抽選に向けて{pool}の手数料を貯めています。",
       "sellPickEmpty": "売るものを選ぶにはバッグ内のアイテムをクリックしてください。",
       "quantity": "数量",
       "quantityOf": "/ {count}",

@@ -80,6 +80,8 @@ export interface MarketSellMeta {
   cutPct: number;
   myListingCount: number;
   maxListings: number;
+  // The fee-pool jackpot (copper) building toward the next giveaway draw.
+  feePoolCopper: number;
 }
 
 /** One Collect row: a returned/expired stack waiting to be reclaimed. */
@@ -211,6 +213,7 @@ export function buildMarketView(input: MarketViewInput): MarketView {
         cutPct: info.cutPct,
         myListingCount: info.myListingCount,
         maxListings: info.maxListings,
+        feePoolCopper: info.feePoolCopper,
       },
     };
   }

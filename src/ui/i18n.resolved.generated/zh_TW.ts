@@ -6154,6 +6154,7 @@ export const zh_TW: EnTranslations = {
       "buyAria": "以 {price} 購買 {item}",
       "reclaimAria": "取回 {item}",
       "sellNote": "從背包上架貨物。物品售出時商人抽取 {cut}%。你正在使用 {used}/{max} 個上架位。",
+      "jackpotNote": "商人持有 {pool} 的手續費，將用於下一次抽獎。",
       "sellPickEmpty": "點擊背包中的物品來選擇要出售的貨物。",
       "quantity": "數量",
       "quantityOf": "共 {count}",

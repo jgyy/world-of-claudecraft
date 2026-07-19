@@ -2343,6 +2343,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.reclaimAria': '{item} 회수',
   'itemUi.market.sellNote':
     '가방의 상품을 올립니다. 아이템이 팔리면 상인이 {cut}%를 가져갑니다. 등록 칸 {used}/{max}개 사용 중입니다.',
+  'itemUi.market.jackpotNote': '상인이 다음 추첨을 위해 수수료 {pool}을(를) 모으고 있습니다.',
   'itemUi.market.sellPickEmpty': '판매할 아이템을 선택하려면 가방에서 클릭하세요.',
   'itemUi.market.quantity': '수량',
   'itemUi.market.quantityOf': '/ {count}',

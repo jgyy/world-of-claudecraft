@@ -6154,6 +6154,7 @@ export const en_XA: EnTranslations = {
       "buyAria": "[Ɓúý {item} ƒóŕ {price}]",
       "reclaimAria": "[Ŕéçļáíɱ {item}]",
       "sellNote": "[Ļíšţ ĝóóðš ƒŕóɱ ýóúŕ ƀáĝš. Ţĥé Ɱéŕçĥáñţ ţáķéš á {cut}% çúţ ŵĥéñ áñ íţéɱ šéļļš. Ýóú áŕé úšíñĝ {used}/{max} ļíšţíñĝ šļóţš.]",
+      "jackpotNote": "[Ţĥé Ɱéŕçĥáñţ íš ĥóļðíñĝ {pool} íñ ƒééš ţóŵáŕð ţĥé ñéẋţ ĝíʋéáŵáý ðŕáŵíñĝ.]",
       "sellPickEmpty": "[Çļíçķ áñ íţéɱ íñ ýóúŕ ƀáĝš ţó çĥóóšé ŵĥáţ ţó šéļļ.]",
       "quantity": "[Ɋúáñţíţý]",
       "quantityOf": "[óƒ {count}]",

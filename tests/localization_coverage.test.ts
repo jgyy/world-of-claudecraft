@@ -391,6 +391,7 @@ describe('i18n Localization Key Coverage', () => {
     needed: 400,
     perCombo: 7,
     percent: 30,
+    pool: '4g 82s 30c',
     position: 3,
     price: '1g 20s',
     proceeds: '95s',
