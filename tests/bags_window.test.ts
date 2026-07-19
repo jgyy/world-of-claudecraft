@@ -112,6 +112,26 @@ describe('bags_window: landscape rail stays unreachable in the opted-out states'
     expect(components).not.toContain('body.bank-open #bags .bag-rail {');
     expect(hudMobileCss).not.toContain('body.mobile-touch #bags .bag-rail {');
   });
+
+  it('gives the landscape #bags row a definite height, not just a max-height', () => {
+    // Review finding (PR #2103, round 4): a jsdom assertion cannot exercise real
+    // scroll/clip behavior, so this pins the CSS-source shape that causes it.
+    // `#bags` only ever carried `max-height`; wrapped in `flex-direction: row` +
+    // `flex-wrap`, a flex line's cross size is derived from CONTENT, so the row grew
+    // to fit every slot instead of being bounded, and `.bag-grid`'s own
+    // `overflow-y: auto` never got a constrained box to engage: the ancestor
+    // `overflow: hidden` on `#bags` clipped extra slots with no scrollbar. The fix
+    // is `display: grid` with an explicit `height` (grid tracks need a definite
+    // size), which this test pins so the row can never silently regress back to
+    // sizing off content.
+    const bagsRule = landscapeBlock.slice(
+      landscapeBlock.indexOf('body:not(.bank-open):not(.mobile-touch) #bags {'),
+      landscapeBlock.indexOf('body:not(.bank-open):not(.mobile-touch) #bags .panel-title'),
+    );
+    expect(bagsRule).toContain('display: grid');
+    expect(bagsRule).toMatch(/(?<!max-)height:\s*min\(/);
+    expect(bagsRule).toContain('grid-template-rows: auto minmax(0, 1fr)');
+  });
 });
 
 describe('bags_window: bank-deposit mode wiring', () => {

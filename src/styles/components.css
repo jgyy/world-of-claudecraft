@@ -4826,58 +4826,62 @@
      bank-docked and mobile-sheet states, because `display: contents` on the rail
      does not stop descendant selectors from matching its children. Scoping the
      selectors here means the portrait rules above apply untouched in both
-     excluded states and there is nothing left to keep in sync. */
+     excluded states and there is nothing left to keep in sync.
+
+     Grid, not flex-wrap, for the top-level #bags row (review finding, PR #2103
+     round 4): #bags only ever carries `max-height`, never a definite `height`, so
+     a `flex-wrap` row's line would size to its content instead of being bounded,
+     and `.bag-grid`'s own `overflow-y: auto` (declared above) never gets a
+     constrained box to scroll inside, silently clipping slots against the
+     ancestor `overflow: hidden` with no scrollbar. `display: grid` with explicit
+     `grid-template-rows` gives the body row a definite (`minmax(0, 1fr)`) track
+     instead, so the rail and grid children can each establish their own scroll
+     box. This also replaces the `order`-based row bookkeeping above: grid
+     placement is by template, not source order, so `order: initial` is no longer
+     needed on the rail/grid children (kept only where a child still needs its
+     OWN internal flex layout, e.g. `.bag-bar`'s `flex-wrap`). */
   @media (min-width: 1800px) {
     body:not(.bank-open):not(.mobile-touch) #bags {
+      display: grid;
       width: min(640px, var(--bags-slot-w));
+      height: min(360px, calc(100vh - 18px));
       max-height: min(360px, calc(100vh - 18px));
-      /* The two-column body (rail + grid) needs its own line, so the header
-         wraps onto its own full-width row above them. */
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-content: flex-start;
+      grid-template-columns: var(--bags-rail-w) minmax(0, 1fr);
+      grid-template-rows: auto minmax(0, 1fr);
       column-gap: 12px;
     }
     body:not(.bank-open):not(.mobile-touch) #bags .panel-title {
-      flex: 1 0 100%;
+      grid-column: 1 / -1;
     }
     /* The rail: bag-bar (backpack + equip sockets), the filter/search tools,
-       and the money line, stacked in one column beside the grid. Shrinkable
-       (flex-shrink 1, min-width 0) rather than a hard 0 0 basis, so it still
-       degrades instead of clipping if the window narrows within this range. */
+       and the money line, stacked in one column beside the grid. Its own track
+       (`--bags-rail-w`) is a fixed size, so it scrolls internally rather than
+       forcing the row taller than the grid's bounded track. */
     body:not(.bank-open):not(.mobile-touch) #bags .bag-rail {
       display: flex;
       flex-direction: column;
-      flex: 0 1 var(--bags-rail-w);
       min-width: 0;
-      gap: 6px;
       min-height: 0;
+      gap: 6px;
       overflow-y: auto;
     }
     body:not(.bank-open):not(.mobile-touch) #bags .bag-rail .bag-bar {
       margin: 0;
       flex-wrap: wrap;
-      order: initial;
     }
-    body:not(.bank-open):not(.mobile-touch) #bags .bag-filter-bar {
-      order: initial;
-    }
-    /* The grid is the flex item beside the rail, so it needs an explicit shrink
-       floor (a flex item's min-width is auto by default); a tighter column
-       floor than the base .bag-grid rule also fits more columns in the same
-       landscape width. */
+    /* The grid track is a definite size (grid-template-rows: minmax(0, 1fr)), so
+       .bag-grid's own min-height: 0 + overflow-y: auto (declared above) finally
+       has a bounded box to scroll inside instead of growing to content height. */
     body:not(.bank-open):not(.mobile-touch) #bags .bag-grid {
       min-width: 0;
       grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
       align-content: start;
-      order: initial;
     }
     body:not(.bank-open):not(.mobile-touch) #bags .bag-rail .money {
       flex-direction: column;
       align-items: flex-start;
       gap: 4px;
       margin-top: auto;
-      order: initial;
     }
     /* The $WOC chip's coin block uses margin-left: auto to stay right-aligned in
        the portrait row layout; the rail's money row is a column flex here
