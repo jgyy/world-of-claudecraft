@@ -56,14 +56,13 @@ describe('spatial grid', () => {
   });
 
   it('reclaims an emptied cell instead of leaking it forever', () => {
-    // Root cause of a production tick-time/GC sawtooth that grew with server
-    // uptime rather than player/entity count: remove() left a stale empty
-    // array behind in `cells` whenever the last occupant of a cell moved out,
-    // so a long-lived process accumulated one dead Map entry per distinct
-    // cell any entity ever vacated, forever. Simulate an entity wandering
-    // through many distinct cells (as happens over hours of real movement)
-    // and assert the tracked cell count stays at the true occupied count (1)
-    // instead of growing with the number of moves.
+    // remove() used to leave a stale empty array behind in `cells` whenever
+    // the last occupant of a cell moved out, so a long-lived process
+    // accumulated one dead Map entry per distinct cell any entity ever
+    // vacated. Simulate an entity wandering through many distinct cells (as
+    // happens over hours of real movement) and assert the tracked cell count
+    // stays at the true occupied count (1) instead of growing with the
+    // number of moves.
     const grid = new SpatialGrid();
     const e = { id: 1, pos: { x: 0, y: 0, z: 0 } } as Entity;
     grid.insert(e);

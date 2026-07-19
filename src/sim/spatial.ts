@@ -41,12 +41,12 @@ export class SpatialGrid {
       list[i] = list[list.length - 1];
       list.pop();
     }
-    // An emptied cell is dropped entirely: entities constantly cross cell
-    // boundaries (movement, respawns, despawns) over a long-lived server
-    // process, so leaving a stale empty array behind here means `cells` grows
-    // without bound over uptime even though the live entity/player count stays
-    // flat. That unbounded Map growth is pure GC pressure with no gameplay
-    // benefit (a re-`insert` recreates the array on demand), so reclaim it now.
+    // An emptied cell is dropped entirely rather than left as dead weight.
+    // `insert()` reuses an existing array, so `cells.size` was already bounded
+    // by the number of distinct cells ever occupied (not by movement/spawn
+    // churn), so this is not unbounded growth. Still, a stale empty array
+    // serves no purpose (a re-`insert` recreates it on demand), so reclaim it
+    // now to keep `cells.size` tracking the true occupied-cell count.
     if (list.length === 0) this.cells.delete(key);
   }
 
