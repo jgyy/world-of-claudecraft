@@ -215,6 +215,7 @@
     --ornament-ring-portrait: linear-gradient(transparent, transparent);
     --ornament-ring-minimap: linear-gradient(transparent, transparent);
     --ornament-banner: linear-gradient(transparent, transparent);
+    --ornament-window-top: linear-gradient(transparent, transparent);
   }
 
   /* Glass is dropped WHOLE-RULE at the low effect tier: a universal removal

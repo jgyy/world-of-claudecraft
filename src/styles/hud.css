@@ -719,15 +719,25 @@
     width: 64px;
     height: 64px;
     z-index: 2;
+    /* Center the 60px .portrait circle in this 64px box. Without this, a plain
+       block child sits flush at the wrap's top-left, leaving all 4px of slack
+       on the right/bottom only, which throws the ring ornament below off by a
+       couple of pixels from the actual portrait circle it is meant to trace. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  /* Carved bronze rope-twist ring around the portrait disc (ornament_svg.ts,
-     PORTRAIT_RING_OUTER_R), sitting just outside the existing 3px border
-     ring so it reads as a second, ornamental layer rather than replacing the
-     structural border. Masks --border, so it recolors with the theme. */
+  /* Jeweled twin-ring around the portrait disc (ornament_svg.ts,
+     PORTRAIT_RING_OUTER_R): two thin concentric strokes, a diamond gem at
+     each cardinal point, a dot at each diagonal, sitting just outside the
+     existing 3px border ring as a second, ornamental layer. Masks --border,
+     so it recolors with the theme. .portrait-wrap centers its 60px .portrait
+     child (see above), so this ring is concentric with the actual portrait
+     circle, not just with the 64px wrap box. */
   .portrait-wrap::after {
     content: "";
     position: absolute;
-    inset: -4px;
+    inset: -2px;
     z-index: 1;
     pointer-events: none;
     background: var(--border);
@@ -737,8 +747,8 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-size: 72px 72px;
-    mask-size: 72px 72px;
+    -webkit-mask-size: 68px 68px;
+    mask-size: 68px 68px;
   }
   .portrait {
     width: 60px;
@@ -1224,6 +1234,38 @@
     border-radius: 4px;
     background: #100c08;
     overflow: hidden;
+  }
+  #castbar::before,
+  #tf-castbar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--border);
+    -webkit-mask-image: var(--ornament-corner);
+    mask-image: var(--ornament-corner);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    -webkit-mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px;
+    mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px;
   }
   #castbar .fill {
     height: 100%;
@@ -1849,6 +1891,37 @@
     border-color: var(--gold);
     color: #fff;
   }
+  .micro-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--border);
+    -webkit-mask-image: var(--ornament-corner);
+    mask-image: var(--ornament-corner);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    -webkit-mask-size:
+      10px 10px,
+      10px 10px,
+      10px 10px,
+      10px 10px;
+    mask-size:
+      10px 10px,
+      10px 10px,
+      10px 10px,
+      10px 10px;
+  }
   /* talent button glows while unspent talent points are available */
   .micro-btn.has-points,
   .mobile-btn.has-points {
@@ -1885,10 +1958,18 @@
     position: absolute;
     left: 50%;
     top: 50%;
+    right: auto;
+    bottom: auto;
     width: 17px;
     height: 2px;
     border-radius: 2px;
     background: #f0e8d2;
+    /* .micro-btn::after also drives a corner-ornament mask; reset it here so
+       the mute slash (a thin 2px bar) renders as its own solid shape instead
+       of being masked down to the ~10px corner-motif alpha, which would
+       leave it nearly invisible. */
+    -webkit-mask-image: none;
+    mask-image: none;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7);
     transform: translate(-50%, -50%) rotate(-45deg);
     pointer-events: none;
@@ -2839,14 +2920,14 @@
     display: inline-block;
     line-height: 0;
   }
-  /* Carved bronze rope-twist ring around the minimap, the same primitive and
-     mechanism as the unit-frame portrait ring (ornament_svg.ts,
-     MINIMAP_RING_OUTER_R), sized for the minimap's larger disc and sitting
-     just outside its existing 4px border. */
+  /* Jeweled twin-ring around the minimap, the same primitive and mechanism
+     as the unit-frame portrait ring (ornament_svg.ts, MINIMAP_RING_OUTER_R):
+     two thin concentric strokes, cardinal gems, diagonal dots, sized for the
+     minimap's larger disc and sitting just outside its existing 4px border. */
   #minimap-disc::after {
     content: "";
     position: absolute;
-    inset: -7px;
+    inset: -5px;
     z-index: 1;
     pointer-events: none;
     background: var(--border);
@@ -2856,8 +2937,8 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    -webkit-mask-size: 184px 184px;
-    mask-size: 184px 184px;
+    -webkit-mask-size: 180px 180px;
+    mask-size: 180px 180px;
   }
   /* raid-lockout badge: a small satellite button hugging the bottom-left rim of
      the round minimap (classic tracking-button placement). Dim when every
@@ -2950,8 +3031,42 @@
     pointer-events: none;
     z-index: 0;
   }
+  /* Carved corner accents (ornament_svg.ts, --ornament-corner), mask-sized
+     down to fit the button. This was previously `content: none` (a defensive
+     reset); folded the real ornament into this single ::after rule instead
+     of adding a second ::after declaration earlier in the file, which would
+     have lost the cascade tie to this later, identical-specificity rule and
+     silently rendered nothing. */
   #daily-rewards-button::after {
-    content: none;
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--gold-dim);
+    -webkit-mask-image: var(--ornament-corner);
+    mask-image: var(--ornament-corner);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    -webkit-mask-size:
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      14px 14px;
+    mask-size:
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      14px 14px;
   }
   #daily-rewards-button.spin-ready::before {
     animation: daily-rewards-glow-pulse 1.6s ease-in-out infinite;
@@ -4460,6 +4575,21 @@
     transition:
       opacity 0.2s ease,
       box-shadow 0.2s ease;
+  }
+  /* .party-frame inherits the .panel corner ornament, but at its 170x42
+     row size the 30px mask meant for a window corner would dominate the
+     whole row; scale it down to the action-slot size instead. */
+  .party-frame::before {
+    -webkit-mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px;
+    mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px;
   }
   /* Compact WoW-style raid presentation. The existing pooled row and painter remain
      unchanged: this profile only rearranges their stable DOM, so mouseover casts,

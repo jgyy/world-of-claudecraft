@@ -3,14 +3,13 @@ import {
   bannerOrnamentMaskImage,
   bannerScrollPath,
   cornerOrnamentMaskImage,
-  MINIMAP_RING_BAND,
   MINIMAP_RING_OUTER_R,
-  PORTRAIT_RING_BAND,
   PORTRAIT_RING_OUTER_R,
   ringOrnamentMaskImage,
-  ropeRingPath,
   TITLE_BANNER_HEIGHT,
   TITLE_BANNER_WIDTH,
+  taperAccentMaskImage,
+  twinRingInner,
 } from '../src/ui/ornament_svg';
 
 // A mask-image data URI never bakes in color: the referencing CSS rule
@@ -44,29 +43,24 @@ describe('ornament_svg', () => {
     expect(unique.size).toBe(4);
   });
 
-  it('rope ring path closes both the outer and inner contours', () => {
-    const d = ropeRingPath(40, 5);
-    const subpaths = d.split(' Z').filter((s) => s.trim().length > 0);
-    expect(subpaths).toHaveLength(2);
-    for (const sub of subpaths) {
-      expect(sub.trim().startsWith('M')).toBe(true);
-    }
+  it('twin ring draws two concentric circles, four gems, and four dots', () => {
+    const svg = twinRingInner(40);
+    expect(svg.match(/<circle/g)?.length).toBe(6); // 2 ring strokes + 4 corner dots
+    expect(svg).toContain('<path');
   });
 
   it('ring mask image encodes a valid, self-contained SVG', () => {
-    const value = ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R, PORTRAIT_RING_BAND);
+    const value = ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R);
     const svg = decodeSvg(value);
     expect(svg).toContain(
       `viewBox='0 0 ${PORTRAIT_RING_OUTER_R * 2} ${PORTRAIT_RING_OUTER_R * 2}'`,
     );
-    expect(svg).toContain('fill-rule="evenodd"');
   });
 
   it('minimap ring uses a distinct radius from the portrait ring', () => {
     expect(MINIMAP_RING_OUTER_R).not.toBe(PORTRAIT_RING_OUTER_R);
-    expect(MINIMAP_RING_BAND).toBeGreaterThan(0);
-    const portrait = ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R, PORTRAIT_RING_BAND);
-    const minimap = ringOrnamentMaskImage(MINIMAP_RING_OUTER_R, MINIMAP_RING_BAND);
+    const portrait = ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R);
+    const minimap = ringOrnamentMaskImage(MINIMAP_RING_OUTER_R);
     expect(portrait).not.toBe(minimap);
   });
 
@@ -86,12 +80,20 @@ describe('ornament_svg', () => {
     expect(svg).toContain(`viewBox='0 0 ${TITLE_BANNER_WIDTH} ${TITLE_BANNER_HEIGHT}'`);
   });
 
+  it('taper accent mask image encodes a valid small SVG', () => {
+    const svg = decodeSvg(taperAccentMaskImage());
+    expect(svg).toContain('<svg');
+    expect(svg).toContain('<circle');
+    expect(svg).toContain('<path');
+  });
+
   it('no ornament data URI embeds a themed hex color (colorless shapes only)', () => {
     const uris = [
       ...cornerOrnamentMaskImage().split(', '),
-      ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R, PORTRAIT_RING_BAND),
-      ringOrnamentMaskImage(MINIMAP_RING_OUTER_R, MINIMAP_RING_BAND),
+      ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R),
+      ringOrnamentMaskImage(MINIMAP_RING_OUTER_R),
       bannerOrnamentMaskImage(TITLE_BANNER_WIDTH, TITLE_BANNER_HEIGHT),
+      taperAccentMaskImage(),
     ];
     for (const uri of uris) {
       const svg = decodeSvg(uri);
@@ -108,7 +110,8 @@ describe('ornament_svg', () => {
 
   it('is deterministic: same inputs produce byte-identical output', () => {
     expect(cornerOrnamentMaskImage()).toBe(cornerOrnamentMaskImage());
-    expect(ringOrnamentMaskImage(50, 6)).toBe(ringOrnamentMaskImage(50, 6));
+    expect(ringOrnamentMaskImage(50)).toBe(ringOrnamentMaskImage(50));
     expect(bannerOrnamentMaskImage(200, 20)).toBe(bannerOrnamentMaskImage(200, 20));
+    expect(taperAccentMaskImage()).toBe(taperAccentMaskImage());
   });
 });
