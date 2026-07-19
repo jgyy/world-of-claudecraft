@@ -1726,7 +1726,7 @@ describe('client HTML shell', () => {
       '#market-body {\n    overflow-y: auto;\n    flex: 1;\n    min-height: 0;',
     );
     expect(componentsCss).toContain(
-      '.mkt-page {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;',
+      '.mkt-page {\n    position: relative;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;',
     );
     // On mobile the Market takes the full available height (not the vendor's 58vh
     // cap) so its tall stacked-filter header cannot squeeze the listing body flat,

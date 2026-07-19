@@ -1,15 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import {
   cornerOrnamentMaskImage,
+  giltDustBackground,
   giltGradientBackground,
   grainTextureBackgroundImage,
   MICRO_RING_OUTER_R,
   MINIMAP_RING_OUTER_R,
   noisyEdgeMaskImage,
   PORTRAIT_RING_OUTER_R,
+  ringInner,
   ringOrnamentMaskImage,
   taperAccentMaskImage,
-  twinRingInner,
 } from '../src/ui/ornament_svg';
 
 // A mask-image data URI never bakes in color: the referencing CSS rule
@@ -43,11 +44,14 @@ describe('ornament_svg', () => {
     expect(unique.size).toBe(4);
   });
 
-  it('twin ring draws the noisy outer band, an inner circle, four gems, and four dots', () => {
-    const svg = twinRingInner(40);
+  it('the ring is a single noisy band: no second inner circle, no gem/dot accents', () => {
+    // Round 5: "1 line is sufficient" for a circular component -- a second
+    // concentric stroke plus cardinal/diagonal accents read as too many
+    // border layers on a small badge, so the ring is exactly one shape.
+    const svg = ringInner(40);
     expect(svg).toContain('fill-rule="evenodd"');
-    expect(svg.match(/<circle/g)?.length).toBe(5); // 1 inner ring stroke + 4 corner dots
-    expect(svg).toContain('<path');
+    expect(svg.match(/<circle/g)).toBeNull();
+    expect((svg.match(/<path/g) ?? []).length).toBe(1);
   });
 
   it('ring mask image encodes a valid, self-contained SVG', () => {
@@ -130,7 +134,7 @@ describe('ornament_svg', () => {
     // Same seam-free contract as the edge tile, but around a circle instead
     // of a straight tile: RING_WOBBLE_SEED's harmonics use integer angular
     // frequencies, so the noised radius at angle 0 equals the radius at 360.
-    const svg = twinRingInner(60);
+    const svg = ringInner(60);
     const outerPath = svg.match(/<path d="([^"]+)" fill-rule="evenodd"\/>/)?.[1] ?? '';
     const subpaths = outerPath.split(/\s*M\s*/).filter(Boolean);
     const topPoints = subpaths[0]
@@ -184,6 +188,18 @@ describe('ornament_svg', () => {
     expect(360 % period).toBeCloseTo(0, 5);
   });
 
+  it('the gilt dust is a set of gold-toned radial-gradients over theme tokens only', () => {
+    const value = giltDustBackground();
+    const layerCount = (value.match(/radial-gradient\(/g) ?? []).length;
+    expect(layerCount).toBeGreaterThan(1);
+    expect(value).toContain('color-mix(in srgb, var(--gold)');
+    expect(value).toContain('transparent');
+    // No raw hex literal: every color term is a token/color-mix, staying
+    // theme-reactive (unlike the neutral grain, this layer carries real
+    // gold color, so it must never freeze to one preset's literal hex).
+    expect(value.match(/#[0-9a-fA-F]{3,6}/g)).toBeNull();
+  });
+
   it('the grain texture is a colorless (black/white only) tileable speckle field', () => {
     const svg = decodeSvg(grainTextureBackgroundImage());
     expect(svg).toContain('<svg');
@@ -198,6 +214,7 @@ describe('ornament_svg', () => {
   it('is deterministic: same inputs produce byte-identical output', () => {
     expect(cornerOrnamentMaskImage()).toBe(cornerOrnamentMaskImage());
     expect(giltGradientBackground()).toBe(giltGradientBackground());
+    expect(giltDustBackground()).toBe(giltDustBackground());
     expect(grainTextureBackgroundImage()).toBe(grainTextureBackgroundImage());
     expect(ringOrnamentMaskImage(50)).toBe(ringOrnamentMaskImage(50));
     expect(taperAccentMaskImage()).toBe(taperAccentMaskImage());

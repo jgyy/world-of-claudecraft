@@ -925,19 +925,43 @@ One shape, one role, reused everywhere it applies (section 10's opening rule):
 | Shape | Role | Consumers |
 |---|---|---|
 | Corner motif (a layered bracket, gem, two flaring ticks; four mirrored orientations from one path) | Marks a rectangle's four corners as deliberately carved, not machine-cut | `.panel` (cascades to every window), `.uf-bars`, `.petbar-group`, `.action-btn`/`.pet-btn`/`.stance-btn`/`.micro-btn`/`.party-frame`/`#daily-rewards-button`/`#castbar`/`#tf-castbar` at a smaller `mask-size`, combined with the gilded edge below wherever a component has visible flat sides to cover |
-| Noisy gilded edge (a seamlessly tileable ribbon whose centerline and thickness both wobble via a seeded periodic noise function) | The hand-gilded-gold-leaf finish along a straight edge, at any element length, on all four sides | `.panel` (cascades to every window), `.bar` (health/resource/`.mt-row` meter rows), `.uf-bars`, `#xpbar`/`#swingbar`/`#castbar`/`#tf-castbar`/`#compass-strip`, `.action-btn`/`.pet-btn`/`.stance-btn`/`.micro-btn`/`.mt-tab`/`.chat-tab`, reused via `mask-repeat` so one small tile covers any size; a component too thin for a legible ribbon (a 9px party-frame bar) keeps the grain background below but suppresses the ribbon layer with `content: none` rather than rendering an unreadably thick line |
-| Twin ring (two thin concentric strokes, the outer one carrying the same noise wobble as the gilded edge; a diamond gem at each cardinal point, a dot at each diagonal), at three named radii (`PORTRAIT_RING_OUTER_R`, `MINIMAP_RING_OUTER_R`, `MICRO_RING_OUTER_R`) | A jeweled ring just outside (or, for gilded circular borders below, drawn directly into) an existing structural circle | The unit-frame portrait disc (`.portrait-wrap`), the minimap disc (`#minimap-disc`), small circular badges (`.level-chip`, `.tf-move-btn`) at the micro radius |
+| Noisy gilded edge (a seamlessly tileable THIN ribbon: the centerline stays essentially straight, only the stroke width wavers ever so slightly) | The hand-gilded-gold-leaf finish along a straight edge, at any element length, on all four sides; also the thin section-divider hairline (round 5) | `.panel` (cascades to every window), `.bar` (health/resource/`.mt-row` meter rows), `.uf-bars`, `#xpbar`/`#swingbar`/`#castbar`/`#tf-castbar`/`#compass-strip`, `.action-btn`/`.pet-btn`/`.stance-btn`/`.micro-btn`/`.mt-tab`/`.chat-tab`/`.btn`, section dividers (`.tut-next-tips-title`, `#delve-tracker .dt-header`, `#tooltip .tt-bd-head`/`.tt-cmp`, `#ctx-menu .ctx-title`, and a broad sweep of `components.css` window-body dividers), reused via `mask-repeat` so one small tile covers any size; a component too thin for a legible ribbon (a 9px party-frame bar) keeps the grain background below but suppresses the ribbon layer with `content: none` rather than rendering an unreadably thick line |
+| Ring (ONE thin noisy stroke; no second inner circle, no gem/dot accents, round 5) at three named radii (`PORTRAIT_RING_OUTER_R`, `MINIMAP_RING_OUTER_R`, `MICRO_RING_OUTER_R`) | A jeweled ring just outside (or, for gilded circular borders below, drawn directly into) an existing structural circle | The unit-frame portrait disc (`.portrait-wrap`), the minimap disc (`#minimap-disc`), small circular badges (`.level-chip`, `.tf-move-btn`, `#party-frames > .tf-move-btn`) at the micro radius |
 | Taper accent (a small gem plus ring) | Marks a chamfered window-top corner cut where the literal-corner bracket motif would otherwise be clipped away | `.window`'s tapered top (7.2, "window top taper" below) |
 
-**Noise contract.** The gilded edge and the ring's outer stroke both use the SAME
-mechanism (`ornament_svg.ts`, `seededHarmonics` / `periodicNoise`): a small deterministic
-PRNG (`mulberry32`) picks amplitude and phase for a handful of INTEGER-frequency sine
-harmonics, so the resulting wave is exactly periodic over its domain (the edge tile's
-length, or 360 degrees for the ring) with no visible seam where it tiles or wraps. This is
-presentation code, not `src/sim/`, so `Math.random`/`Date.now` are not banned here the way
-they are in the sim; the seeded PRNG is used anyway so a shape's byte output stays
-deterministic and testable (`tests/ornament_svg.test.ts`'s determinism cases), not for
-gameplay fairness.
+**Noise contract, and the round-5 thin/straight rework.** The gilded edge and the ring's
+stroke both use the SAME mechanism (`ornament_svg.ts`, `seededHarmonics` /
+`periodicNoise`): a small deterministic PRNG (`mulberry32`) picks amplitude and phase for a
+handful of INTEGER-frequency sine harmonics, so the resulting wave is exactly periodic over
+its domain (the edge tile's length, or 360 degrees for the ring) with no visible seam where
+it tiles or wraps. Round 1-4 used a LARGE noise amplitude on both the centerline position
+and the stroke width, which read as thick and wavy rather than hand-gilded; round 5
+shrank the centerline wobble to near-zero (`EDGE_BASE_WIDTH` 3.2 to 1.5, centerline
+harmonics max amplitude 3.2 to 0.22) so the line reads as essentially straight ("no curves
+at all"), while width wobble stays real but small (max amplitude 3.6 to 0.85, "changes ever
+slightly"). This is presentation code, not `src/sim/`, so `Math.random`/`Date.now` are not
+banned here the way they are in the sim; the seeded PRNG is used anyway so a shape's byte
+output stays deterministic and testable (`tests/ornament_svg.test.ts`'s determinism cases),
+not for gameplay fairness.
+
+**Ring simplification (round 5).** The ring shape used to be a TWIN band: an outer
+noisy stroke, a small gap, a second plain inner circle, plus a diamond gem at each
+cardinal point and a dot at each diagonal. On a small circular badge (portrait, minimap,
+level-chip) this read as "too many border layers" -- exactly the same failure class as an
+outer frame ornament stacking against an inner one (see the nameplate note below), just on
+a circle instead of a rectangle. `twinRingInner` was replaced outright by `ringInner`: one
+noisy stroke, nothing else. A ring should carry exactly the same "one gilded line" budget a
+rectangle's edge does; a second concentric structure is decoration on decoration.
+
+**A component ornamented at two levels (an outer frame AND its own inner children) reads
+as "too many border layers."** `.uf-bars` (the name + health + resource cluster) used to
+carry its OWN corner+edge frame ornament on `::before`, stacked directly against each
+individual `.bar::after` ribbon a few pixels away -- two or three near-parallel gold lines
+where the reference shows exactly one (the per-bar border only, no separate outer frame).
+Fixed by deleting the outer `.uf-bars::before` frame entirely, not by resizing it. When
+adding ornament to a container whose children are ALSO independently ornamented, check
+whether the container-level layer is redundant before adding it; a shared visual edge
+should carry ornament from exactly one level, not both.
 
 **Gilt color (`giltGradientBackground`).** A shape mask only ever carries a SILHOUETTE; the
 color half of "hand-gilded, not flat gold" is a separate `repeating-conic-gradient` over
@@ -978,6 +1002,33 @@ needed. A functional state color (hover, active, a "used" glow) still recolors t
 `border-color` on top of the transparent default, exactly as the corner-and-edge
 components below do; this preserves the actionable feedback those states carry (principle
 6, "never at the cost of ... an actionable state a player reacts to").
+
+**Gilt dust (`giltDustBackground`, round 5): the COLORED half of background texture.**
+`grainTextureBackgroundImage` (below) is deliberately colorless (black/white specks only,
+enforced by its own test) so it reads correctly on any hue. That leaves the "make the
+background itself feel hand-gilded" ask unaddressed for anything that is not already gold.
+`giltDustBackground` is a genuinely gold-toned layer: a set of CSS `radial-gradient()`
+stops, each mixing the theme `--gold` token with `transparent` via `color-mix()`,
+positioned by PERCENTAGE coordinates rather than an SVG mask tile, so it scales naturally
+with the element instead of needing per-component `mask-size` tuning. Layered as the
+TOPMOST `background-image` (first-listed paints on top), ahead of the existing grain and
+base fill, with `background-blend-mode: normal` (it already carries its own alpha via the
+`color-mix` transparency, so a plain normal blend is correct, not `overlay`). Wired onto
+the SAME ~21+ consumers `--ornament-grain` already reached (a single `perl -0pi` bulk
+insert, since the target strings were byte-identical everywhere) plus every new component
+round 5 added.
+
+**Replaced elements (`<input>`, `<select>`, `<textarea>`, `<img>`) cannot carry
+`::before`/`::after`.** Per the CSS generated-content spec, pseudo-elements are undefined
+on replaced elements; the noisy-edge mask trick would need one to composite the ribbon
+shape, and masking the ELEMENT ITSELF (the only alternative) would also mask away the
+typed value or the rendered image, not just the border. These use the two-layer
+gradient-border technique from the circular-borders paragraph below instead: `border: Npx
+solid transparent;` plus `background: <fill> padding-box, var(--ornament-gilt)
+border-box;`. This delivers the gilt COLOR noise via a plain background layer, just without
+the geometric ribbon-thickness wobble; an accepted, necessary tradeoff for this whole
+element category (form inputs across `#report-window`, `.trade-money input`, `.bug-desc`,
+`.bug-shot-img`, and more), not a one-off compromise for a single component.
 
 **Resting-state transparency for stateful buttons.** Several buttons (`.action-btn`,
 `.pet-btn`, `.stance-btn`, `.micro-btn`) use `border-color` changes as functional feedback

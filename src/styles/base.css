@@ -493,9 +493,10 @@
        border/outline here any more: the gilded edge on ::after (below) is
        the panel's only edge treatment, never a plain straight line. */
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       var(--panel-bg);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     border-radius: 6px;
     box-shadow:
       0 2px 16px #000c,
@@ -629,9 +630,10 @@
     border: 1px solid transparent;
     border-radius: 3px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #1a1410;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     font-family: var(--ui-font);
   }
   /* Every window's close button, so it gets the same gilded-corner finish

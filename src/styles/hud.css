@@ -449,9 +449,9 @@
     color: #b8ad8e;
   }
   .tut-next-tips-title {
+    position: relative;
     margin-top: 10px;
     padding-top: 8px;
-    border-top: 1px solid #ffffff14;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.3px;
@@ -459,20 +459,77 @@
     color: var(--gold-dim);
     margin-bottom: 3px;
   }
+  .tut-next-tips-title::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-edge-h);
+    mask-image: var(--ornament-edge-h);
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-position: top left;
+    mask-position: top left;
+    -webkit-mask-size: 24px 2px;
+    mask-size: 24px 2px;
+    opacity: 0.6;
+  }
   .tut-skip {
+    position: relative;
     margin-top: 11px;
     min-height: 40px;
     padding: 0 16px;
     width: 100%;
-    background: #1c1b14;
+    background:
+      var(--ornament-dust),
+      var(--ornament-grain) repeat,
+      #1c1b14;
+    background-blend-mode: normal, overlay, normal;
     color: #cfc6ab;
-    border: 1px solid var(--border);
+    border: 1px solid transparent;
     border-radius: 8px;
     font-size: 14px;
     cursor: pointer;
     transition:
       background 120ms,
       color 120ms;
+  }
+  .tut-skip::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      24px 2px,
+      24px 2px,
+      2px 12px,
+      2px 12px;
+    mask-size:
+      24px 2px,
+      24px 2px,
+      2px 12px,
+      2px 12px;
   }
   .tut-skip:hover {
     background: #2a2718;
@@ -880,65 +937,18 @@
     margin-left: -8px;
     padding: 5px 8px 5px 14px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       var(--panel-bg);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     border-radius: 0 6px 6px 0;
     box-shadow: 0 2px 10px #000a;
   }
-  .uf-bars::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 6;
-    background: var(--ornament-gilt);
-    -webkit-mask-image:
-      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
-      var(--ornament-edge-v), var(--ornament-edge-v);
-    mask-image:
-      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
-      var(--ornament-edge-v), var(--ornament-edge-v);
-    -webkit-mask-repeat:
-      no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
-    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
-    -webkit-mask-position:
-      top left,
-      top right,
-      bottom left,
-      bottom right,
-      top left,
-      bottom left,
-      top left,
-      top right;
-    mask-position:
-      top left,
-      top right,
-      bottom left,
-      bottom right,
-      top left,
-      bottom left,
-      top left,
-      top right;
-    -webkit-mask-size:
-      12px 12px,
-      12px 12px,
-      12px 12px,
-      12px 12px,
-      36px 4px,
-      36px 4px,
-      4px 26px,
-      4px 26px;
-    mask-size:
-      12px 12px,
-      12px 12px,
-      12px 12px,
-      12px 12px,
-      36px 4px,
-      36px 4px,
-      4px 26px,
-      4px 26px;
-  }
+  /* No outer .uf-bars::before frame ornament: the individual .bar::after
+     ribbon on the health/resource bars inside already carries the gilded
+     border. A second, outer frame layer here plus the per-bar ones reads as
+     stacked "too many border layers" on a compact nameplate; one gilded
+     line per element, matching the reference, is the correct amount. */
   #target-frame .portrait-wrap {
     order: 2;
   }
@@ -1025,9 +1035,10 @@
     position: relative;
     height: 15px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #1a1a1a;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     margin-top: 3px;
     border-radius: 2px;
     overflow: hidden;
@@ -1371,9 +1382,10 @@
     display: none;
     border-radius: 4px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #100c08;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     overflow: hidden;
   }
   /* Corner motif AND the gilded edge in ONE pseudo-element (8 mask layers:
@@ -1472,9 +1484,10 @@
     display: none;
     border-radius: 4px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #100606;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     overflow: hidden;
   }
   #tf-castbar .fill {
@@ -1517,9 +1530,10 @@
     display: none;
     border-radius: 3px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #0c0a07;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     overflow: hidden;
   }
   #swingbar::before {
@@ -1589,9 +1603,10 @@
     width: 612px;
     height: 10px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #14101e;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     margin: 0 auto 4px;
     position: relative;
     border-radius: 2px;
@@ -1724,9 +1739,10 @@
     padding: 4px;
     border-radius: 6px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       linear-gradient(170deg, #15131fdd, #09080edd);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     box-shadow: 0 2px 8px #000c;
   }
   .petbar-group::before {
@@ -1791,9 +1807,10 @@
     border: 2px solid transparent;
     border-radius: 6px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     color: #f3df9a;
     cursor: var(--cursor-point);
     position: relative;
@@ -1931,9 +1948,10 @@
     border: 2px solid transparent;
     border-radius: 6px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     color: #f3df9a;
     cursor: var(--cursor-point);
     touch-action: manipulation;
@@ -2047,9 +2065,10 @@
     border: 2px solid transparent;
     border-radius: 6px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     color: #fff;
     cursor: var(--cursor-point);
     font-family: var(--title-font);
@@ -2142,9 +2161,10 @@
   }
   .action-btn.empty {
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #0d0d13;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     cursor: default;
     box-shadow: inset 0 0 10px #000;
   }
@@ -2279,9 +2299,10 @@
     border: 2px solid transparent;
     border-radius: 5px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     color: var(--color-text-muted);
     cursor: var(--cursor-point);
     font-size: 12px;
@@ -2503,9 +2524,10 @@
     border-bottom: none;
     border-radius: 6px 6px 0 0;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       linear-gradient(#1c1824, #0d0b13);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     color: #95886a;
     cursor: var(--cursor-point);
     font-family: var(--title-font);
@@ -2543,9 +2565,10 @@
     color: var(--gold);
     border-color: #6f5a2a;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       linear-gradient(#2a2436, #161220);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
   }
   /* "add channel" (+) tab: square, icon-only, slightly de-emphasised. Sticks to
      the right edge so it stays inline and reachable even when the tabs scroll. */
@@ -2821,8 +2844,14 @@
   #report-window select,
   #report-window textarea {
     width: 100%;
-    background: #101018;
-    border: 1px solid #4a3d1d;
+    /* select/textarea are replaced-ish elements with no reliable
+       ::before/::after support: the gradient-border trick (see .portrait)
+       delivers the gilt color noise via a plain background layer instead
+       of a mask, no pseudo-element needed. */
+    background:
+      #101018 padding-box,
+      var(--ornament-gilt) border-box;
+    border: 1px solid transparent;
     border-radius: 4px;
     color: var(--color-text-light);
     padding: 6px;
@@ -2846,14 +2875,52 @@
 
   /* ---------- bug report (options sub-view) ---------- */
   .bug-info {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 2px;
     margin-bottom: 8px;
-    background: #101018;
-    border: 1px solid #4a3d1d;
+    background:
+      var(--ornament-dust),
+      var(--ornament-grain) repeat,
+      #101018;
+    background-blend-mode: normal, overlay, normal;
+    border: 1px solid transparent;
     border-radius: 4px;
     padding: 8px;
+  }
+  .bug-info::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      24px 2px,
+      24px 2px,
+      2px 24px,
+      2px 24px;
+    mask-size:
+      24px 2px,
+      24px 2px,
+      2px 24px,
+      2px 24px;
   }
   .bug-info-row {
     display: flex;
@@ -2879,8 +2946,10 @@
     width: 100%;
     height: 90px;
     resize: none;
-    background: #101018;
-    border: 1px solid #4a3d1d;
+    background:
+      #101018 padding-box,
+      var(--ornament-gilt) border-box;
+    border: 1px solid transparent;
     border-radius: 4px;
     color: var(--color-text-light);
     padding: 6px;
@@ -2894,7 +2963,10 @@
     width: 100%;
     max-width: 100%;
     margin-top: 6px;
-    border: 1px solid #4a3d1d;
+    /* <img> is a replaced element (no ::before/::after): the gradient-border
+       trick, not a mask ribbon. */
+    background: var(--ornament-gilt) border-box;
+    border: 1px solid transparent;
     border-radius: 4px;
   }
 
@@ -3107,11 +3179,29 @@
     display: none;
   }
   #delve-tracker .dt-header {
+    position: relative;
     font-family: var(--title-font);
     font-size: 14px;
-    border-bottom: 1px solid #ffd10044;
     margin-bottom: 4px;
     padding-bottom: 2px;
+  }
+  #delve-tracker .dt-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-edge-h);
+    mask-image: var(--ornament-edge-h);
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-position: bottom left;
+    mask-position: bottom left;
+    -webkit-mask-size: 20px 2px;
+    mask-size: 20px 2px;
   }
   #delve-tracker .dt-title {
     font-weight: bold;
@@ -3168,9 +3258,10 @@
   .mt-tab {
     position: relative;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #1a1410;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     border: 1px solid transparent;
     border-radius: 3px;
     color: var(--color-text-muted);
@@ -3215,9 +3306,10 @@
     color: var(--gold);
     border-color: var(--gold-dim);
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #2a2010;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
   }
   .mt-view {
     font-size: 12px;
@@ -3244,9 +3336,10 @@
     height: 17px;
     margin-bottom: 3px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #14100c;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     border: 1px solid transparent;
     border-radius: 2px;
     overflow: hidden;
@@ -3406,9 +3499,10 @@
     overflow: hidden;
     border-radius: 5px;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       linear-gradient(#1c1a14, #100f0b);
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
     box-shadow: inset 0 0 8px #000a;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
@@ -3499,10 +3593,47 @@
     gap: 4px;
     padding: 1px 4px;
     z-index: 2;
-    background: radial-gradient(circle at 50% 30%, #2c2c3a, #15151f);
-    border: 1px solid #4a3d1d;
+    background:
+      var(--ornament-dust),
+      var(--ornament-grain) repeat,
+      radial-gradient(circle at 50% 30%, #2c2c3a, #15151f);
+    background-blend-mode: normal, overlay, normal;
+    border: 1px solid transparent;
     border-radius: 9px;
     box-shadow: 0 1px 3px #000a;
+  }
+  #minimap-zoom::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      14px 2px,
+      14px 2px,
+      2px 12px,
+      2px 12px;
+    mask-size:
+      14px 2px,
+      14px 2px,
+      2px 12px,
+      2px 12px;
   }
   .minimap-zoom-btn {
     width: 17px;
@@ -3578,14 +3709,34 @@
     padding: 0;
     cursor: pointer;
     border-radius: 50%;
-    background: radial-gradient(circle at 50% 30%, #2c2c3a, #15151f);
-    border: 1px solid #4a3d1d;
+    background:
+      var(--ornament-dust),
+      var(--ornament-grain) repeat,
+      radial-gradient(circle at 50% 30%, #2c2c3a, #15151f);
+    background-blend-mode: normal, overlay, normal;
+    border: 1px solid transparent;
     box-shadow: 0 1px 3px #000a;
     color: #8c8472;
     transition:
       color 0.2s,
       border-color 0.2s,
       box-shadow 0.2s;
+  }
+  #raid-lockout::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    pointer-events: none;
+    z-index: -1;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-ring-micro);
+    mask-image: var(--ornament-ring-micro);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 32px 32px;
+    mask-size: 32px 32px;
   }
   #raid-lockout svg {
     width: 15px;
@@ -3986,19 +4137,39 @@
     margin-top: 3px;
   }
   #tooltip .tt-bd-head {
+    position: relative;
     color: #c2a86a;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-top: 6px;
     padding-top: 5px;
-    border-top: 1px solid #3a3526;
   }
   /* item comparison block (hover an equippable item to see the worn one + deltas) */
   #tooltip .tt-cmp {
+    position: relative;
     margin-top: 6px;
     padding-top: 5px;
-    border-top: 1px solid #3a3526;
+  }
+  #tooltip .tt-bd-head::before,
+  #tooltip .tt-cmp::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-edge-h);
+    mask-image: var(--ornament-edge-h);
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-position: top left;
+    mask-position: top left;
+    -webkit-mask-size: 20px 2px;
+    mask-size: 20px 2px;
+    opacity: 0.7;
   }
   #tooltip .tt-cmp-head {
     color: #8a7f5e;
@@ -5278,9 +5449,10 @@
     border: 0;
     border-radius: 1px 1px 0 0;
     background:
+      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #171717;
-    background-blend-mode: overlay, normal;
+    background-blend-mode: normal, overlay, normal;
   }
   #party-frames.party-style-raid .party-frame .bar.hp .bar-fill {
     background-color: var(--cls);
@@ -5488,10 +5660,14 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    border: 1px solid var(--gold-dim);
+    /* Transparent, not absent: .active recolors this same border; the
+       resting-state ring is the gilded gradient-border layer below. */
+    border: 1px solid transparent;
     border-radius: 50%;
     display: none;
-    background: var(--panel-bg);
+    background:
+      var(--panel-bg) padding-box,
+      var(--ornament-gilt) border-box;
     color: var(--color-text-muted);
     cursor: var(--cursor-point);
     z-index: 8;
@@ -5501,6 +5677,22 @@
   }
   #party-frames > .tf-move-btn::before {
     content: "\2194";
+  }
+  #party-frames > .tf-move-btn::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    pointer-events: none;
+    z-index: -1;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-ring-micro);
+    mask-image: var(--ornament-ring-micro);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 30px 30px;
+    mask-size: 30px 30px;
   }
   #party-frames > .tf-move-btn.active {
     color: var(--gold);
@@ -5574,12 +5766,30 @@
     display: none;
   }
   #ctx-menu .ctx-title {
+    position: relative;
     font-family: var(--title-font);
     color: var(--gold);
     font-size: 13px;
     padding: 3px 8px;
-    border-bottom: 1px solid #463a1c;
     margin-bottom: 4px;
+  }
+  #ctx-menu .ctx-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-edge-h);
+    mask-image: var(--ornament-edge-h);
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-position: bottom left;
+    mask-position: bottom left;
+    -webkit-mask-size: 20px 2px;
+    mask-size: 20px 2px;
   }
   #ctx-menu .ctx-item {
     padding: 5px 10px;
@@ -5726,16 +5936,54 @@
     font-family: Georgia, serif;
   }
   .prompt .prompt-number {
+    position: relative;
     width: 82px;
     margin: 8px 8px 6px 0;
     padding: 5px 7px;
-    border: 1px solid #5d4a25;
+    border: 1px solid transparent;
     border-radius: 3px;
-    background: #08080d;
+    background:
+      var(--ornament-dust),
+      var(--ornament-grain) repeat,
+      #08080d;
+    background-blend-mode: normal, overlay, normal;
     color: #f4e6bd;
     font: 12px var(--ui-font);
     text-align: center;
     box-shadow: inset 0 1px 3px #000;
+  }
+  .prompt .prompt-number::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      20px 2px,
+      20px 2px,
+      2px 20px,
+      2px 20px;
+    mask-size:
+      20px 2px,
+      20px 2px,
+      2px 20px,
+      2px 20px;
   }
   .prompt .prompt-number:focus {
     outline: 1px solid var(--gold-dim);
@@ -5765,11 +6013,68 @@
     color: #1eff00;
   }
   .trade-items {
+    position: relative;
     min-height: 120px;
-    border: 1px solid #463a1c;
+    border: 1px solid transparent;
     border-radius: 4px;
     padding: 4px;
-    background: #0c0c12;
+    background:
+      var(--ornament-dust),
+      var(--ornament-grain) repeat,
+      #0c0c12;
+    background-blend-mode: normal, overlay, normal;
+  }
+  .trade-items::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
+      var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat:
+      no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right,
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      28px 3px,
+      28px 3px,
+      3px 24px,
+      3px 24px;
+    mask-size:
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      12px 12px,
+      28px 3px,
+      28px 3px,
+      3px 24px,
+      3px 24px;
   }
   .trade-item {
     display: flex;
@@ -5821,9 +6126,17 @@
   }
   .trade-money input {
     width: 80px;
-    background: #0d0d14;
+    /* <input> is a replaced element: ::before/::after generated content is
+       not supported, so the noisy edge-ribbon mask trick used elsewhere
+       cannot apply here without also masking away the typed value. The
+       two-layer gradient-border technique (see .portrait in hud.css) still
+       delivers the gilt color noise via a plain background, just without
+       the geometric thickness wobble. */
+    background:
+      #0d0d14 padding-box,
+      var(--ornament-gilt) border-box;
     color: #ffd100;
-    border: 1px solid var(--border);
+    border: 1px solid transparent;
     border-radius: 3px;
     padding: 3px 6px;
     user-select: text;
@@ -5951,14 +6264,51 @@
     align-items: center;
     gap: 3px;
     padding: 3px 7px;
-    background: #12100acc;
-    border: 1px solid #cc9a3c88;
+    background:
+      var(--ornament-dust),
+      var(--ornament-grain) repeat,
+      #12100acc;
+    background-blend-mode: normal, overlay, normal;
+    border: 1px solid transparent;
     border-radius: 12px;
     color: var(--gold);
     appearance: none;
     cursor: pointer;
     font: inherit;
     pointer-events: auto;
+  }
+  #mail-indicator::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    mask-image:
+      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
+    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    mask-position:
+      top left,
+      bottom left,
+      top left,
+      top right;
+    -webkit-mask-size:
+      14px 2px,
+      14px 2px,
+      2px 14px,
+      2px 14px;
+    mask-size:
+      14px 2px,
+      14px 2px,
+      2px 14px,
+      2px 14px;
   }
   #mail-indicator[hidden] {
     display: none;

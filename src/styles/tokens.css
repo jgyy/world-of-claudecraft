@@ -227,6 +227,10 @@
        transparent gradient is a no-op under `background-blend-mode: overlay`. */
     --ornament-gilt: var(--border);
     --ornament-grain: linear-gradient(transparent, transparent);
+    /* --ornament-dust sits inside the same multi-layer `background` list as
+       --ornament-grain (see above): a valid, non-empty, fully transparent
+       image pre-boot, replaced by the real gold-fleck radial-gradients. */
+    --ornament-dust: linear-gradient(transparent, transparent);
   }
 
   /* Glass is dropped WHOLE-RULE at the low effect tier: a universal removal

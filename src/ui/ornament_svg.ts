@@ -102,18 +102,46 @@ function periodicNoise(harmonics: Harmonic[], t: number): number {
 // panel's 4 corners then lands on a different point in the color cycle,
 // rather than all 4 corners always showing the identical tone.
 const GILT_PERIOD_DEG = 40;
+// A generous interior stop count, at RANDOM (not evenly spaced) positions,
+// is what makes the banding read as hand-applied gold leaf rather than a
+// smooth machine ramp: a human eye recognizes even spacing as "designed"
+// almost immediately, while irregular band widths do not.
+const GILT_STOP_COUNT = 12;
+const GILT_SEED = 77;
+
+/** Every candidate color is a token reference or a color-mix() of tokens
+ * (never a literal hex), so the gradient stays theme-reactive; `black`/
+ * `white` are shading keywords (darken/lighten a token), not themed colors. */
+function giltColorPalette(): string[] {
+  return [
+    'var(--border)',
+    'var(--gold)',
+    'var(--gold-dim)',
+    'color-mix(in srgb, var(--gold) 75%, var(--border) 25%)',
+    'color-mix(in srgb, var(--gold) 45%, var(--border) 55%)',
+    'color-mix(in srgb, var(--gold-dim) 65%, var(--border) 35%)',
+    'color-mix(in srgb, var(--border) 60%, black 40%)',
+    'color-mix(in srgb, var(--border) 35%, black 65%)',
+    'color-mix(in srgb, var(--gold) 80%, white 20%)',
+    'color-mix(in srgb, var(--gold-dim) 40%, black 60%)',
+  ];
+}
 
 function giltGradientStops(): string {
   const p = GILT_PERIOD_DEG;
-  return [
-    `var(--border) 0deg`,
-    `color-mix(in srgb, var(--gold) 60%, var(--border) 40%) ${n(p * 0.18)}deg`,
-    `var(--gold-dim) ${n(p * 0.34)}deg`,
-    `color-mix(in srgb, var(--border) 55%, black 45%) ${n(p * 0.52)}deg`,
-    `var(--border) ${n(p * 0.68)}deg`,
-    `color-mix(in srgb, var(--gold) 40%, var(--border) 60%) ${n(p * 0.86)}deg`,
-    `var(--border) ${n(p)}deg`,
-  ].join(', ');
+  const rand = mulberry32(GILT_SEED);
+  const palette = giltColorPalette();
+  // Both period boundaries share the SAME color so the repeat closes with
+  // no visible seam, exactly like the noise harmonics' seamlessness contract.
+  const anchor = palette[0];
+  const positions = Array.from({ length: GILT_STOP_COUNT }, () => rand() * p).sort((a, b) => a - b);
+  const stops = [`${anchor} 0deg`];
+  for (const pos of positions) {
+    const color = palette[1 + Math.floor(rand() * (palette.length - 1))];
+    stops.push(`${color} ${n(pos)}deg`);
+  }
+  stops.push(`${anchor} ${n(p)}deg`);
+  return stops.join(', ');
 }
 
 /**
@@ -131,7 +159,7 @@ export function giltGradientBackground(): string {
 // ---------- corner motif: a thin bracket + diamond, anchored top-left ----------
 
 const CORNER_SIZE = 32;
-const CORNER_STROKE = 1.3;
+const CORNER_STROKE = 0.9;
 
 function cornerMotifPath(): string {
   const inset = 3;
@@ -145,7 +173,7 @@ function cornerMotifPath(): string {
 
   const gemCx = inset + 5.5;
   const gemCy = inset + 5.5;
-  const gemR = 2.4;
+  const gemR = 1.9;
   const gem = diamondPath(gemCx, gemCy, gemR);
 
   const tickLen = 4.5;
@@ -201,10 +229,13 @@ export function windowTopOrnamentMaskImage(): string {
   ].join(', ');
 }
 
-// ---------- noisy gilt edge: a seamlessly tileable wavy, varying-thickness
-// ribbon, the hand-gilded-gold-leaf texture (uneven width and a wavering
-// centerline) reused along every straight edge, at any element size, via
-// CSS mask-repeat ----------
+// ---------- noisy gilt edge: a seamlessly tileable THIN ribbon, hand-gilded
+// gold-leaf texture. The centerline stays essentially straight (near-zero
+// wobble: a hand-gilded line follows the edge, it does not wander off it)
+// and only the STROKE WIDTH wavers, ever so slightly, the way a leaf of gold
+// laid by hand thins and thickens a hair as it is pressed on; the actual
+// "hand-applied, not machine-drawn" read comes from the gilt gradient's
+// color noise (giltGradientStops above), not from geometric waviness ----------
 
 // base.css's .panel::after mask-size (96px 10px / transposed) must equal
 // these; a per-component override (e.g. .party-frame::after) may render the
@@ -212,8 +243,8 @@ export function windowTopOrnamentMaskImage(): string {
 // ratio, or the wobble distorts instead of just rescaling.
 const EDGE_TILE_LENGTH = 96;
 const EDGE_TILE_THICKNESS = 10;
-const EDGE_BASE_WIDTH = 3.2;
-const EDGE_MIN_HALF_WIDTH = 0.55;
+const EDGE_BASE_WIDTH = 1.5;
+const EDGE_MIN_HALF_WIDTH = 0.3;
 
 /** `vertical` swaps the sampled axis so the SAME noise profile tiles along a
  * vertical (left/right) edge instead of a horizontal (top/bottom) one,
@@ -223,8 +254,11 @@ function noisyEdgeInner(seed: number, vertical: boolean): string {
   // 6 harmonics (vs. a smaller count) is what keeps consecutive tiles from
   // reading as an obviously-stamped repeat: each cycle has enough independent
   // wave components that the eye does not immediately recognize the period.
-  const centerHarmonics = seededHarmonics(seed, 6, 3.2);
-  const widthHarmonics = seededHarmonics(seed + 1000, 5, 3.6);
+  // Centerline amplitude is tiny (a near-straight line, "no curves at all");
+  // width amplitude is deliberately larger THAN the centerline's but still
+  // small in absolute terms ("changes ever slightly only").
+  const centerHarmonics = seededHarmonics(seed, 6, 0.22);
+  const widthHarmonics = seededHarmonics(seed + 1000, 5, 0.85);
   const cross = EDGE_TILE_THICKNESS / 2;
   const topPts: string[] = [];
   const botPts: string[] = [];
@@ -265,68 +299,49 @@ export function noisyEdgeMaskImage(seed: number, vertical: boolean): string {
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
-// ---------- twin ring: two thin concentric circles (the outer one gilt-noisy)
-// + 4 cardinal gems + 4 corner dots ----------
+// ---------- ring: ONE thin noisy circle, not a twin band. A second inner
+// line plus cardinal gems/diagonal dots read as "too many border layers" on
+// a small circular badge; one clean hand-gilded ring is the correct amount
+// of ornament for a circle, matching how a rectangle gets exactly one
+// gilded edge per side ----------
 
-const RING_STROKE = 1.7;
-const RING_GAP = 3.4;
+const RING_STROKE = 1.1;
 /** Integer angular harmonics keep the wobble exactly periodic over 360 degrees,
  * so the ring closes on itself with no seam, the circular analog of the
- * edge tile's seamless horizontal repeat. */
+ * edge tile's seamless horizontal repeat. Radius wobble is tiny (a circle,
+ * not a scalloped shape); stroke-width wobble is the visible "hand-gilded"
+ * cue, same proportions as the straight edge tile. */
 const RING_WOBBLE_SEED = 7;
 
 /**
- * A detailed ring ornament: two thin concentric strokes with a small gap
- * (the outer one gilt-noisy: a wavering radius and stroke width, echoing the
- * same hand-gilded texture the straight edges use), a diamond gem bridging
- * the gap at each of the 4 cardinal points, and a small dot at each of the 4
- * diagonal points. `outerR` is also used as the SVG's center, so the shape
- * is self-contained in a `2*outerR` square viewBox regardless of where it is
- * later mask-positioned.
+ * A single thin ring: a hand-gilded stroke whose width wavers ever so
+ * slightly (the radius itself stays essentially circular). `outerR` is also
+ * used as the SVG's center, so the shape is self-contained in a `2*outerR`
+ * square viewBox regardless of where it is later mask-positioned.
  */
-export function twinRingInner(outerR: number): string {
+export function ringInner(outerR: number): string {
   const cx = outerR;
   const cy = outerR;
-  const outerRingR = outerR - RING_STROKE / 2;
-  const innerRingR = outerRingR - RING_STROKE - RING_GAP;
-  const gemCenterR = outerRingR - RING_STROKE / 2 - RING_GAP / 2;
-  const gemR = RING_STROKE + RING_GAP / 2 + 0.6;
-  const dotR = 1.1;
+  const ringR = outerR - RING_STROKE / 2 - 0.5;
 
-  const radiusHarmonics = seededHarmonics(RING_WOBBLE_SEED, 6, outerR * 0.045);
-  const widthHarmonics = seededHarmonics(RING_WOBBLE_SEED + 1000, 5, RING_STROKE * 1.1);
+  const radiusHarmonics = seededHarmonics(RING_WOBBLE_SEED, 6, outerR * 0.006);
+  const widthHarmonics = seededHarmonics(RING_WOBBLE_SEED + 1000, 5, RING_STROKE * 0.35);
   const samples = 120;
-  const outerTopPts: string[] = [];
-  const outerBotPts: string[] = [];
+  const topPts: string[] = [];
+  const botPts: string[] = [];
   for (let i = 0; i <= samples; i++) {
     const t = i / samples;
     const deg = t * 360;
-    const r = outerRingR + periodicNoise(radiusHarmonics, t);
-    const halfW = Math.max(0.4, (RING_STROKE + periodicNoise(widthHarmonics, t)) / 2);
-    outerTopPts.push(`${n(polarX(cx, r - halfW, deg))} ${n(polarY(cy, r - halfW, deg))}`);
-    outerBotPts.push(`${n(polarX(cx, r + halfW, deg))} ${n(polarY(cy, r + halfW, deg))}`);
+    const r = ringR + periodicNoise(radiusHarmonics, t);
+    const halfW = Math.max(0.3, (RING_STROKE + periodicNoise(widthHarmonics, t)) / 2);
+    topPts.push(`${n(polarX(cx, r - halfW, deg))} ${n(polarY(cy, r - halfW, deg))}`);
+    botPts.push(`${n(polarX(cx, r + halfW, deg))} ${n(polarY(cy, r + halfW, deg))}`);
   }
-  const outerRing = `<path d="M ${outerTopPts.join(' L ')} Z M ${outerBotPts.reverse().join(' L ')} Z" fill-rule="evenodd"/>`;
-  const innerCircle = `<circle cx="${n(cx)}" cy="${n(cy)}" r="${n(innerRingR)}" fill="none" stroke="#000" stroke-width="${RING_STROKE}"/>`;
-
-  const gems = [0, 90, 180, 270]
-    .map((deg) => diamondPath(polarX(cx, gemCenterR, deg), polarY(cy, gemCenterR, deg), gemR))
-    .join(' ');
-  const gemPath = `<path d="${gems}"/>`;
-
-  const dots = [45, 135, 225, 315]
-    .map((deg) => {
-      const dx = polarX(cx, gemCenterR, deg);
-      const dy = polarY(cy, gemCenterR, deg);
-      return `<circle cx="${n(dx)}" cy="${n(dy)}" r="${n(dotR)}"/>`;
-    })
-    .join('');
-
-  return outerRing + innerCircle + gemPath + dots;
+  return `<path d="M ${topPts.join(' L ')} Z M ${botPts.reverse().join(' L ')} Z" fill-rule="evenodd"/>`;
 }
 
 export function ringOrnamentMaskImage(outerR: number): string {
-  return svgDataUri(twinRingInner(outerR), outerR * 2);
+  return svgDataUri(ringInner(outerR), outerR * 2);
 }
 
 // ---------- taper accent: a small gem marking a chamfered window-top corner cut ----------
@@ -349,7 +364,7 @@ export function taperAccentMaskImage(): string {
 
 const GRAIN_TILE_SIZE = 96;
 const GRAIN_SEED = 42;
-const GRAIN_SPECK_COUNT = 70;
+const GRAIN_SPECK_COUNT = 90;
 
 /**
  * A small field of soft, irregular light/dark specks (never a themed color:
@@ -387,6 +402,34 @@ export function grainTextureBackgroundImage(): string {
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
+// ---------- gilt dust: warm gold-toned fleck field, the COLORED half of the
+// background texture (the grain above is deliberately colorless so it reads
+// on any hue; this layer is deliberately gold so a black window panel or a
+// colored resource-bar trough alike gets an actual "hand-gilded" tint, not
+// just neutral light/dark noise) ----------
+
+// A CSS `background-image` value (radial-gradient stops), not an SVG mask:
+// each stop mixes the THEME token with transparent via `color-mix()`, so
+// this stays theme-reactive (a preset switch re-tints the dust live) even
+// though, unlike every mask above, it carries real color of its own.
+const DUST_SEED = 91;
+const DUST_COUNT = 18;
+
+export function giltDustBackground(): string {
+  const rand = mulberry32(DUST_SEED);
+  const stops: string[] = [];
+  for (let i = 0; i < DUST_COUNT; i++) {
+    const x = (rand() * 100).toFixed(1);
+    const y = (rand() * 100).toFixed(1);
+    const size = (8 + rand() * 20).toFixed(1);
+    const strength = Math.round(28 + rand() * 38);
+    stops.push(
+      `radial-gradient(circle ${size}px at ${x}% ${y}%, color-mix(in srgb, var(--gold) ${strength}%, transparent) 0%, transparent 75%)`,
+    );
+  }
+  return stops.join(', ');
+}
+
 // ---------- boot wiring ----------
 
 /** Reference sizes for the ring ornament at its call sites (unit-frame portrait,
@@ -410,4 +453,5 @@ export function applyOrnamentVars(root: HTMLElement = document.documentElement):
   root.style.setProperty('--ornament-edge-v', noisyEdgeMaskImage(2, true));
   root.style.setProperty('--ornament-gilt', giltGradientBackground());
   root.style.setProperty('--ornament-grain', grainTextureBackgroundImage());
+  root.style.setProperty('--ornament-dust', giltDustBackground());
 }
