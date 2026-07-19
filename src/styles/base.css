@@ -624,6 +624,9 @@
     cursor: var(--cursor-point);
     font-size: 14px;
     padding: 0 4px;
+    /* Transparent, not absent: :hover below recolors this same border; the
+       resting-state corner accent comes from ::after. */
+    border: 1px solid transparent;
     border-radius: 3px;
     background:
       var(--ornament-grain) repeat,

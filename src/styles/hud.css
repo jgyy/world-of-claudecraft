@@ -899,8 +899,9 @@
     mask-image:
       var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
       var(--ornament-edge-v), var(--ornament-edge-v);
-    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
-    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-repeat:
+      no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
@@ -1392,8 +1393,9 @@
     mask-image:
       var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
       var(--ornament-edge-v), var(--ornament-edge-v);
-    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
-    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-repeat:
+      no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
@@ -1740,8 +1742,9 @@
     mask-image:
       var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
       var(--ornament-edge-v), var(--ornament-edge-v);
-    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
-    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-repeat:
+      no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
@@ -1813,8 +1816,9 @@
     mask-image:
       var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
       var(--ornament-edge-v), var(--ornament-edge-v);
-    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
-    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-repeat:
+      no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
@@ -1951,8 +1955,9 @@
     mask-image:
       var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
       var(--ornament-edge-v), var(--ornament-edge-v);
-    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
-    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-repeat:
+      no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
@@ -2073,8 +2078,9 @@
     mask-image:
       var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
       var(--ornament-edge-v), var(--ornament-edge-v);
-    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
-    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-repeat:
+      no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
@@ -2345,8 +2351,9 @@
     mask-image:
       var(--ornament-corner), var(--ornament-edge-h), var(--ornament-edge-h),
       var(--ornament-edge-v), var(--ornament-edge-v);
-    -webkit-mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
-    mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-repeat:
+      no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
     -webkit-mask-position:
       top left,
       top right,
