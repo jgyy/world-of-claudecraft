@@ -1600,11 +1600,15 @@
   /* Small carved-corner accents on every action slot: the same corner
      primitive as .panel (ornament_svg.ts, --ornament-corner), mask-sized
      down to fit the 46px slot. Sits on ::after so it never competes with
-     .icon-label's ::before-free art layer. */
+     .icon-label's ::before-free art layer. The top-right/bottom-right
+     corners land under the keybind cap and stack-count badge, so those two
+     labels get an explicit higher z-index below: actionable text always
+     wins over decoration. */
   .action-btn::after {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 0;
     pointer-events: none;
     background: var(--border);
     -webkit-mask-image: var(--ornament-corner);
@@ -1663,6 +1667,7 @@
     position: absolute;
     top: 1px;
     right: 3px;
+    z-index: 1;
     font-size: 10px;
     color: #ddd;
     font-family: var(--ui-font);
@@ -1671,6 +1676,7 @@
     position: absolute;
     right: 3px;
     bottom: 1px;
+    z-index: 1;
     min-width: 10px;
     text-align: right;
     font-size: 10px;

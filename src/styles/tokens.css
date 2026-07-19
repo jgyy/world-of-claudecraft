@@ -203,6 +203,18 @@
     --cursor-hand: var(--cursor-arrow);
     --cursor-sword: var(--cursor-point);
     --cursor-shield: var(--cursor-point);
+
+    /* Structural ornament shape defaults (src/ui/ornament_svg.ts writes the real
+       carved-chrome masks here once at game boot via applyOrnamentVars). A fully
+       transparent gradient, never `none`: `mask-image: none` disables masking
+       entirely, which would paint the ornament pseudo-elements' `background:
+       var(--border)` as a solid rectangle over panel content on the pre-boot
+       homepage or in any host that never calls applyOrnamentVars (the editor,
+       the guide). A transparent mask paints nothing, the correct pre-boot look. */
+    --ornament-corner: linear-gradient(transparent, transparent);
+    --ornament-ring-portrait: linear-gradient(transparent, transparent);
+    --ornament-ring-minimap: linear-gradient(transparent, transparent);
+    --ornament-banner: linear-gradient(transparent, transparent);
   }
 
   /* Glass is dropped WHOLE-RULE at the low effect tier: a universal removal
