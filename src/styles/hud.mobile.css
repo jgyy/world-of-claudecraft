@@ -1195,11 +1195,18 @@
     width: 100%;
     min-width: 0;
   }
-  /* Any open game window takes over the full sheet (see the near-fullscreen
-     block below), so the bottom action bar has nothing left to sit above:
-     hide it while body.mobile-window-open, matching the gacha-style
-     window-takes-the-screen behavior the other mobile sheets already imply. */
-  body.mobile-touch.mobile-window-open #bottom-bar {
+  /* #bottom-bar is not the hotbar (that is already hidden on touch above);
+     it docks the player frame / petbar / meters-window / stancebar stack. Only
+     bags and the character sheet are CSS-verified to cover the ENTIRE mobile
+     viewport (10px/0 inset on every edge, see the near-fullscreen block
+     below), matching the existing "covering the frame is fine here" tradeoff
+     already accepted for those two windows specifically. Every other game
+     window (loot, lockpick, delve-rite, loot-settings, map, quest-log,
+     vendor, ...) only pins its edges/top on touch and leaves real screen
+     visible below, so hiding the frame there would hide HP/resource while
+     combat continues. body.mobile-fullscreen-window-open is computed in
+     Hud.syncAnyWindowOpenState via isMobileFullscreenWindowOpen. */
+  body.mobile-touch.mobile-fullscreen-window-open #bottom-bar {
     display: none;
   }
   body.mobile-touch #xpbar {

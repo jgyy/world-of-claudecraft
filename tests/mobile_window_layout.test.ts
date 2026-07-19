@@ -38,8 +38,15 @@ describe('mobile window layout CSS', () => {
     );
   });
 
-  it('hides the mobile bottom action bar while any game window is open', () => {
+  it('hides the mobile bottom action bar only while a truly fullscreen window (bags/char) is open', () => {
     expect(mobileCss).toMatch(
+      /body\.mobile-touch\.mobile-fullscreen-window-open #bottom-bar \{[^}]*display: none;/,
+    );
+    // Regression guard: this must NOT be gated on the broad "any window open"
+    // class, or partial windows (loot, lockpick, delve-rite, map, ...) would
+    // hide the player's own HP/resource frame while they still leave real
+    // screen visible underneath.
+    expect(mobileCss).not.toMatch(
       /body\.mobile-touch\.mobile-window-open #bottom-bar \{[^}]*display: none;/,
     );
   });
