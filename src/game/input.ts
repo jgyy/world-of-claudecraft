@@ -247,11 +247,19 @@ export class Input {
     document.addEventListener('pointerlockchange', () => {
       if (!document.pointerLockElement) {
         // A forced unlock (Escape, or losing focus while locked) fires with a
-        // drag button still physically down, unlike our own end-of-drag
-        // exitPointerLock() call, which only ever runs after mouseup has
-        // already cleared leftDown/rightDown. Remember it so the next
-        // requestPointerLock() attempt can skip Firefox's post-forced-unlock
-        // cooldown instead of failing silently mid-drag (#1834 recurrence).
+        // drag button still physically down: the ordinary end-of-drag
+        // exitPointerLock() call only ever runs after mouseup has already
+        // cleared leftDown/rightDown. This is not a hard guarantee though:
+        // setLockCursorOnRotate()/setMouseCameraEnabled() call
+        // exitPointerLock() directly and can fire mid-drag with a button
+        // still held, which reads here as a forced unlock too. The fallout is
+        // small (toggling one of those settings mid-drag suppresses the lock
+        // for the next ~1.3s on Firefox) and self-corrects once the drag
+        // ends, so it is an accepted trade-off rather than something worth
+        // threading extra state through to distinguish. Remember the forced
+        // unlock so the next requestPointerLock() attempt can skip Firefox's
+        // post-forced-unlock cooldown instead of failing silently mid-drag
+        // (#1834 recurrence).
         if (this.leftDown || this.rightDown) this.forcedUnlockAt = performance.now();
         this.releaseCapture('pointerlock');
         return;
@@ -277,6 +285,16 @@ export class Input {
     // reconsiders requesting the lock again for the rest of that press.
     document.addEventListener('pointerlockerror', () => {
       this.pointerLockRequestedForDrag = false;
+      // A denial is itself the strongest available evidence that we are
+      // inside Firefox's forced-unlock cooldown, whatever caused it: the
+      // pointerlockchange handler above only records forcedUnlockAt when a
+      // drag button happens to still be held at unlock time, which misses
+      // orderings where focus loss clears leftDown/rightDown before the
+      // unlock event fires (blur landing ahead of pointerlockchange, the
+      // likely ordering for a focus-loss forced unlock). Recording it here
+      // too makes the mechanism self-healing: the next drag attempt within
+      // the window skips the doomed request regardless of event ordering.
+      this.forcedUnlockAt = performance.now();
     });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) this.releaseCapture('hidden');
