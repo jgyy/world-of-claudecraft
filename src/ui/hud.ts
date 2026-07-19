@@ -9888,12 +9888,8 @@ export class Hud {
     sender.setAttribute('role', 'button');
     sender.setAttribute('aria-label', t('hudChrome.playerMenu.openFor', { name }));
     sender.tabIndex = 0;
-    // Classic-MMO class-colored chat names: only for a live player entity in
-    // interest scope (chat reaches you from players far outside it, per
-    // sim/account_flair.ts, so a sender with no resolvable entity keeps the
-    // channel's default line color instead of guessing a class).
-    const senderEntity = fromPid !== undefined ? this.sim.entities.get(fromPid) : undefined;
-    if (senderEntity?.kind === 'player') sender.style.color = classCss(senderEntity.templateId);
+    const ent = fromPid !== undefined ? this.sim.entities.get(fromPid) : undefined;
+    if (ent?.kind === 'player') sender.style.color = classCss(ent.templateId);
     // Anchor the menu under the name itself for a click/tap/keyboard open, and at
     // the cursor for a right-click.
     const openUnderName = () => {

@@ -409,7 +409,13 @@ export const TARGETS = [
     key: 'chat-flair-class-color',
     label: 'Chat: class-colored name + verified-streamer badge',
     when: ['ui/hud/chat/chat_line'],
-    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    // Mage: a bright, unmistakably-not-default-white class color, so the
+    // before/after class-color diff is obvious at a glance (the default
+    // 'warrior' tan reads close to the plain sender-name white already).
+    variants: [
+      { key: 'desktop', charClass: 'mage', charName: 'Lyravel' },
+      { key: 'mobile', charClass: 'mage', charName: 'Lyravel', mobile: true },
+    ],
     // Synthesizes one party-channel 'chat' SimEvent, anchored on the real player
     // entity (so its class resolves and the sender name colors accordingly) with
     // a fabricated streamer flair, through the real dispatch (hud.handleEvents).
@@ -418,7 +424,12 @@ export const TARGETS = [
       // On mobile the chat log is collapsed behind the overlay toggle (body
       // .mobile-chat-open); a real tap on the chat-open control sets this same
       // class (src/game/mobile_controls.ts), so this reproduces that state
-      // directly rather than re-deriving the touch gesture.
+      // directly rather than re-deriving the touch gesture. Also drop the
+      // headless-swiftshader GPU notice: it is a capture-environment artifact
+      // (no real GPU in CI/headless), not part of what this target shows.
+      await page.evaluate(() => {
+        document.querySelector('#gpu-notice')?.remove();
+      });
       if (variant?.mobile) {
         await page.evaluate(() => document.body.classList.add('mobile-chat-open'));
       }
@@ -433,9 +444,14 @@ export const TARGETS = [
             channel: 'party',
             from: sim.player?.name ?? 'Zyx',
             fromPid: sim.playerId,
-            text: 'flair check: class color + streamer badge',
+            text: 'checking flair: class-colored name and verified-streamer badge render correctly',
             flair: { links: { twitch: 'https://twitch.tv/zyx' } },
           },
+          // A trailing filler line, so the flair line above is not the very
+          // bottom row: the mobile chat log fades its bottom-most row under a
+          // "more content below" peek gradient (see hud.mobile.css), which
+          // would otherwise wash out the exact line this target exists to show.
+          { type: 'log', text: 'ready.', color: '#8a8a8a' },
         ]);
       });
       await wait(300);
