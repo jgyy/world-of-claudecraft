@@ -1237,10 +1237,13 @@
   /* quest log: widened to a landscape shape so the detail pane gets real
      reading width instead of wrapping narrow, and the detail's own max-height
      cap is dropped so it flows with the window's single outer scroll instead
-     of a second, nested 380px scroll region. */
+     of a second, nested 380px scroll region. No max-width override here: the
+     shared `.window` clamp (layout.css) already bounds width against the
+     JS-synced app viewport, divided by --window-scale; a per-window override
+     using raw 100vw would disagree with that clamp and can overflow at higher
+     ui-scale. */
   #quest-log-window {
     width: 880px;
-    max-width: calc(100vw - 40px);
   }
   #quest-log-window .ql-cols {
     display: flex;
@@ -1274,6 +1277,7 @@
     flex: 1;
     font-size: 12px;
     max-height: none;
+    max-width: 70ch;
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -5808,10 +5812,11 @@
      frame body owns the outer scroll; the list scrolls with it. Widened to
      the same 880px landscape footprint as the live #quest-log-window rule
      above, and the detail pane's reading-measure cap widened to use the
-     extra width instead of leaving it narrow inside a much wider window. */
+     extra width instead of leaving it narrow inside a much wider window.
+     No max-width override: the shared `.window` clamp already bounds width
+     against the JS-synced app viewport (see the live rule above for why). */
   #quest-log-window {
     width: 880px;
-    max-width: calc(100vw - 40px);
   }
   #quest-log-window .window-body .ql-cols {
     display: flex;
