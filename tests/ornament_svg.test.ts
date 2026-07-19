@@ -10,7 +10,6 @@ import {
   PORTRAIT_RING_OUTER_R,
   ringInner,
   ringOrnamentMaskImage,
-  taperAccentMaskImage,
 } from '../src/ui/ornament_svg';
 
 // A mask-image data URI never bakes in color: the referencing CSS rule
@@ -76,13 +75,6 @@ describe('ornament_svg', () => {
     expect(micro).not.toBe(ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R));
     const svg = decodeSvg(micro);
     expect(svg).toContain(`viewBox='0 0 ${MICRO_RING_OUTER_R * 2} ${MICRO_RING_OUTER_R * 2}'`);
-  });
-
-  it('taper accent mask image encodes a valid small SVG', () => {
-    const svg = decodeSvg(taperAccentMaskImage());
-    expect(svg).toContain('<svg');
-    expect(svg).toContain('<circle');
-    expect(svg).toContain('<path');
   });
 
   it('noisy edge tile is a single closed ribbon path', () => {
@@ -152,7 +144,6 @@ describe('ornament_svg', () => {
       ...cornerOrnamentMaskImage().split(', '),
       ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R),
       ringOrnamentMaskImage(MINIMAP_RING_OUTER_R),
-      taperAccentMaskImage(),
       noisyEdgeMaskImage(1, false),
       noisyEdgeMaskImage(2, true),
     ];
@@ -217,7 +208,6 @@ describe('ornament_svg', () => {
     expect(giltDustBackground()).toBe(giltDustBackground());
     expect(grainTextureBackgroundImage()).toBe(grainTextureBackgroundImage());
     expect(ringOrnamentMaskImage(50)).toBe(ringOrnamentMaskImage(50));
-    expect(taperAccentMaskImage()).toBe(taperAccentMaskImage());
     expect(noisyEdgeMaskImage(3, false)).toBe(noisyEdgeMaskImage(3, false));
   });
 });

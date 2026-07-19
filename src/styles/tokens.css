@@ -215,7 +215,6 @@
     --ornament-ring-portrait: linear-gradient(transparent, transparent);
     --ornament-ring-minimap: linear-gradient(transparent, transparent);
     --ornament-ring-micro: linear-gradient(transparent, transparent);
-    --ornament-window-top: linear-gradient(transparent, transparent);
     --ornament-edge-h: linear-gradient(transparent, transparent);
     --ornament-edge-v: linear-gradient(transparent, transparent);
     /* --ornament-gilt is consumed as a whole `background` value (not a mask),

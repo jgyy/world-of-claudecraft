@@ -630,10 +630,9 @@
     border: 1px solid transparent;
     border-radius: 3px;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #1a1410;
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     font-family: var(--ui-font);
   }
   /* Every window's close button, so it gets the same gilded-corner finish

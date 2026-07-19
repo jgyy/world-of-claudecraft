@@ -658,10 +658,9 @@
   .btn {
     position: relative;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       linear-gradient(#8a3326, #5a1d12 55%, #471409);
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     color: #ffd9a0;
     border: 1px solid transparent;
     outline: 1px solid #000;
@@ -2923,9 +2922,14 @@
       animation-delay: 1ms;
     }
   }
+  /* Two-column task grid (round 6): the daily task checklist is short (a
+     handful of entries), so pairing them side by side reads better than one
+     long single-file list; each entry keeps its own internal 3-column
+     layout (name/progress/reward) from .dr-tasks li below. */
   .dr-tasks {
     display: grid;
-    gap: 5px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px 10px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -5044,6 +5048,26 @@
     color: var(--color-text-muted);
     font-size: 10px;
     line-height: 1.35;
+  }
+  /* Two-column recipe grid (round 6): #crafting-window has no bespoke width
+     of its own (it inherits the generic .window sizing), so widen it and
+     lay its direct children out as a 2-column grid. Section headers, the
+     empty-state note, and the profession identity card all span BOTH
+     columns (grid-column: 1/-1); only the recipe rows themselves (and their
+     combo-requirement note, which stays paired under its own recipe via
+     flex-wrap inside the .crafting-recipe-item cell) sit one-per-column. */
+  #crafting-window {
+    width: min(760px, calc(100vw - 40px));
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 12px;
+    align-content: start;
+  }
+  #crafting-window .panel-title,
+  #crafting-window .vendor-section-title,
+  #crafting-window .vendor-empty,
+  #crafting-window .profession-identity-card {
+    grid-column: 1 / -1;
   }
   .crafting-recipe-item {
     flex-wrap: wrap;
@@ -7769,15 +7793,19 @@
     height: 17px;
   }
   .vcup-roles {
-    display: flex;
-    flex-direction: column;
+    /* Round 6: two columns like the other picker grids (nations above, nations
+       is 4-wide already) instead of one role per row, so the four role
+       choices read as a compact block rather than a tall single-file list. */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 4px;
     margin: 4px 0;
   }
   .vcup-role {
     display: flex;
-    align-items: baseline;
-    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
     text-align: left;
     padding: 5px 8px;
     background: linear-gradient(#241c10, #171008);
@@ -7797,8 +7825,6 @@
     font-family: var(--title-font);
     font-size: 12px;
     color: #ffb24a;
-    flex: none;
-    min-width: 84px;
   }
   .vcup-role-desc {
     font-size: 11px;
@@ -7819,7 +7845,7 @@
       justify-content: center;
     }
     .vcup-role {
-      align-items: center;
+      justify-content: center;
     }
   }
   .vcup-guild-toggle {
@@ -9227,9 +9253,15 @@
     width: 420px;
     z-index: 40;
   }
+  /* Two-column quick-menu grid (round 6): the 6-8 entries (Keybindings,
+     Graphics, Audio, Log Out, ...) read as a long single-file list at 420px
+     wide; a 2-column grid halves the scroll depth and matches the
+     multi-column treatment applied to Daily Rewards/Crafting/Vale Cup the
+     same round. An odd entry count leaves the last cell empty, which is
+     fine (no visual gap-filling needed at this row height). */
   .opt-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     align-items: stretch;
     padding: 4px 0;

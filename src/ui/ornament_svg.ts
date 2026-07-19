@@ -1,8 +1,7 @@
 // Structural ornament shapes for HUD chrome: hand-authored / procedurally
 // generated SVG masks for the "carved fantasy artifact" finish (window
-// corners and tapered tops, a noisy hand-gilded edge texture with a
-// wavering multi-tone gradient, unit-frame and minimap rings, a background
-// grain texture).
+// corners, a noisy hand-gilded edge texture with a wavering multi-tone
+// gradient, unit-frame and minimap rings, a background grain texture).
 //
 // These are never inserted into the DOM (contrast with the `svgIcon` glyphs
 // in ui_icons.ts, which ARE inline <svg> elements). A SHAPE mask carries no
@@ -102,28 +101,29 @@ function periodicNoise(harmonics: Harmonic[], t: number): number {
 // panel's 4 corners then lands on a different point in the color cycle,
 // rather than all 4 corners always showing the identical tone.
 const GILT_PERIOD_DEG = 40;
-// A generous interior stop count, at RANDOM (not evenly spaced) positions,
-// is what makes the banding read as hand-applied gold leaf rather than a
-// smooth machine ramp: a human eye recognizes even spacing as "designed"
-// almost immediately, while irregular band widths do not.
-const GILT_STOP_COUNT = 12;
+// An interior stop count, at RANDOM (not evenly spaced) positions, is what
+// makes the banding read as hand-applied gold leaf rather than a smooth
+// machine ramp: a human eye recognizes even spacing as "designed" almost
+// immediately, while irregular band widths do not. Kept modest (round 6,
+// down from 12): enough irregularity to read as hand-applied, not so much
+// that the tone swings become the dominant visual note.
+const GILT_STOP_COUNT = 8;
 const GILT_SEED = 77;
 
 /** Every candidate color is a token reference or a color-mix() of tokens
- * (never a literal hex), so the gradient stays theme-reactive; `black`/
- * `white` are shading keywords (darken/lighten a token), not themed colors. */
+ * (never a literal hex), so the gradient stays theme-reactive; `black` is a
+ * shading keyword (darken a token), not a themed color. Trimmed to a
+ * narrower tonal range than earlier rounds (round 6): the near-white and
+ * heaviest-black mixes read as too harsh a swing, calmer without them. */
 function giltColorPalette(): string[] {
   return [
     'var(--border)',
     'var(--gold)',
     'var(--gold-dim)',
-    'color-mix(in srgb, var(--gold) 75%, var(--border) 25%)',
+    'color-mix(in srgb, var(--gold) 70%, var(--border) 30%)',
     'color-mix(in srgb, var(--gold) 45%, var(--border) 55%)',
     'color-mix(in srgb, var(--gold-dim) 65%, var(--border) 35%)',
-    'color-mix(in srgb, var(--border) 60%, black 40%)',
-    'color-mix(in srgb, var(--border) 35%, black 65%)',
-    'color-mix(in srgb, var(--gold) 80%, white 20%)',
-    'color-mix(in srgb, var(--gold-dim) 40%, black 60%)',
+    'color-mix(in srgb, var(--border) 65%, black 35%)',
   ];
 }
 
@@ -210,25 +210,6 @@ export function cornerOrnamentMaskImage(): string {
   ].join(', ');
 }
 
-/**
- * The `.window` corner treatment: bracket motifs at the two BOTTOM corners
- * (unaffected by the tapered top's clip-path) plus a gem accent twice, for
- * the two chamfer apex points the tapered top's clip-path leaves as the
- * window's new top "corners" (bracket motifs anchored at the literal box
- * corner would sit inside the clipped-away triangle and vanish).
- * Four layers, in order: bottom-left, bottom-right, top-left chamfer,
- * top-right chamfer (the caller positions the last two via `calc()` against
- * the same `--window-taper` the clip-path uses).
- */
-export function windowTopOrnamentMaskImage(): string {
-  return [
-    cornerMotifDataUri(false, true),
-    cornerMotifDataUri(true, true),
-    taperAccentMaskImage(),
-    taperAccentMaskImage(),
-  ].join(', ');
-}
-
 // ---------- noisy gilt edge: a seamlessly tileable THIN ribbon, hand-gilded
 // gold-leaf texture. The centerline stays essentially straight (near-zero
 // wobble: a hand-gilded line follows the edge, it does not wander off it)
@@ -305,7 +286,7 @@ export function noisyEdgeMaskImage(seed: number, vertical: boolean): string {
 // of ornament for a circle, matching how a rectangle gets exactly one
 // gilded edge per side ----------
 
-const RING_STROKE = 1.1;
+const RING_STROKE = 0.75;
 /** Integer angular harmonics keep the wobble exactly periodic over 360 degrees,
  * so the ring closes on itself with no seam, the circular analog of the
  * edge tile's seamless horizontal repeat. Radius wobble is tiny (a circle,
@@ -342,20 +323,6 @@ export function ringInner(outerR: number): string {
 
 export function ringOrnamentMaskImage(outerR: number): string {
   return svgDataUri(ringInner(outerR), outerR * 2);
-}
-
-// ---------- taper accent: a small gem marking a chamfered window-top corner cut ----------
-
-// `.window::before` (layout.css) mask-positions this at `calc(var(--window-taper) -
-// TAPER_ACCENT_SIZE/2) 0` to center it on the taper's chamfer apex; its mask-size
-// must equal TAPER_ACCENT_SIZE too. Change this value, change both spots there.
-const TAPER_ACCENT_SIZE = 14;
-
-export function taperAccentMaskImage(): string {
-  const c = TAPER_ACCENT_SIZE / 2;
-  const gem = diamondPath(c, c, c - 1.5);
-  const ring = `<circle cx="${n(c)}" cy="${n(c)}" r="${n(c - 0.6)}" fill="none" stroke="#000" stroke-width="1"/>`;
-  return svgDataUri(`<path d="${gem}"/>${ring}`, TAPER_ACCENT_SIZE);
 }
 
 // ---------- background grain: a small tileable speckle field, blended over
@@ -413,7 +380,7 @@ export function grainTextureBackgroundImage(): string {
 // this stays theme-reactive (a preset switch re-tints the dust live) even
 // though, unlike every mask above, it carries real color of its own.
 const DUST_SEED = 91;
-const DUST_COUNT = 18;
+const DUST_COUNT = 14;
 
 export function giltDustBackground(): string {
   const rand = mulberry32(DUST_SEED);
@@ -422,7 +389,9 @@ export function giltDustBackground(): string {
     const x = (rand() * 100).toFixed(1);
     const y = (rand() * 100).toFixed(1);
     const size = (8 + rand() * 20).toFixed(1);
-    const strength = Math.round(28 + rand() * 38);
+    // Round 6: toned down (was 28-66%) after feedback that the dust read as
+    // too strong on saturated backgrounds (nameplate bars especially).
+    const strength = Math.round(16 + rand() * 26);
     stops.push(
       `radial-gradient(circle ${size}px at ${x}% ${y}%, color-mix(in srgb, var(--gold) ${strength}%, transparent) 0%, transparent 75%)`,
     );
@@ -448,7 +417,6 @@ export function applyOrnamentVars(root: HTMLElement = document.documentElement):
   root.style.setProperty('--ornament-ring-portrait', ringOrnamentMaskImage(PORTRAIT_RING_OUTER_R));
   root.style.setProperty('--ornament-ring-minimap', ringOrnamentMaskImage(MINIMAP_RING_OUTER_R));
   root.style.setProperty('--ornament-ring-micro', ringOrnamentMaskImage(MICRO_RING_OUTER_R));
-  root.style.setProperty('--ornament-window-top', windowTopOrnamentMaskImage());
   root.style.setProperty('--ornament-edge-h', noisyEdgeMaskImage(1, false));
   root.style.setProperty('--ornament-edge-v', noisyEdgeMaskImage(2, true));
   root.style.setProperty('--ornament-gilt', giltGradientBackground());

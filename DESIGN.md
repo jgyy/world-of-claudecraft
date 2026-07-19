@@ -927,7 +927,6 @@ One shape, one role, reused everywhere it applies (section 10's opening rule):
 | Corner motif (a layered bracket, gem, two flaring ticks; four mirrored orientations from one path) | Marks a rectangle's four corners as deliberately carved, not machine-cut | `.panel` (cascades to every window), `.uf-bars`, `.petbar-group`, `.action-btn`/`.pet-btn`/`.stance-btn`/`.micro-btn`/`.party-frame`/`#daily-rewards-button`/`#castbar`/`#tf-castbar` at a smaller `mask-size`, combined with the gilded edge below wherever a component has visible flat sides to cover |
 | Noisy gilded edge (a seamlessly tileable THIN ribbon: the centerline stays essentially straight, only the stroke width wavers ever so slightly) | The hand-gilded-gold-leaf finish along a straight edge, at any element length, on all four sides; also the thin section-divider hairline (round 5) | `.panel` (cascades to every window), `.bar` (health/resource/`.mt-row` meter rows), `.uf-bars`, `#xpbar`/`#swingbar`/`#castbar`/`#tf-castbar`/`#compass-strip`, `.action-btn`/`.pet-btn`/`.stance-btn`/`.micro-btn`/`.mt-tab`/`.chat-tab`/`.btn`, section dividers (`.tut-next-tips-title`, `#delve-tracker .dt-header`, `#tooltip .tt-bd-head`/`.tt-cmp`, `#ctx-menu .ctx-title`, and a broad sweep of `components.css` window-body dividers), reused via `mask-repeat` so one small tile covers any size; a component too thin for a legible ribbon (a 9px party-frame bar) keeps the grain background below but suppresses the ribbon layer with `content: none` rather than rendering an unreadably thick line |
 | Ring (ONE thin noisy stroke; no second inner circle, no gem/dot accents, round 5) at three named radii (`PORTRAIT_RING_OUTER_R`, `MINIMAP_RING_OUTER_R`, `MICRO_RING_OUTER_R`) | A jeweled ring just outside (or, for gilded circular borders below, drawn directly into) an existing structural circle | The unit-frame portrait disc (`.portrait-wrap`), the minimap disc (`#minimap-disc`), small circular badges (`.level-chip`, `.tf-move-btn`, `#party-frames > .tf-move-btn`) at the micro radius |
-| Taper accent (a small gem plus ring) | Marks a chamfered window-top corner cut where the literal-corner bracket motif would otherwise be clipped away | `.window`'s tapered top (7.2, "window top taper" below) |
 
 **Noise contract, and the round-5 thin/straight rework.** The gilded edge and the ring's
 stroke both use the SAME mechanism (`ornament_svg.ts`, `seededHarmonics` /
@@ -1040,17 +1039,18 @@ on `::after`, sitting below those repainted borders in the box model. This is th
 transparent-border technique as the circular-gradient case above, generalized to a flat
 edge instead of a `border-box` gradient fill.
 
-**Window top taper.** Every `.window` chamfers its top-left and top-right corners at an
-angle (`clip-path: polygon(...)` in `layout.css`, driven by a named `--window-taper`
-custom property so the depth is stated once, not duplicated); the bottom stays square,
-where the SE resize grip lives. The literal-corner bracket motif would sit inside the
-now-clipped-away triangle and vanish, so `.window::before` overrides the corner mask with
-bracket motifs at the two (unclipped) bottom corners plus a taper-accent gem at each
-chamfer apex, positioned via the SAME `--window-taper` value the clip-path uses. Known
-tradeoff: `clip-path` clips the window's outer `box-shadow` (confirmed: `filter:
-drop-shadow` does too, so there is no same-element fix); restoring it needs a non-clipped
-wrapper element around a clipped inner one, which touches how every window is built and is
-tracked as a follow-up, not solved here.
+**No window top taper (round 6).** Rounds 2-5 chamfered `.window`'s top-left/top-right
+corners at an angle via `clip-path: polygon(...)` in `layout.css`, with `.window::before`
+overriding the corner mask to compensate (bracket motifs moved to the two un-clipped
+bottom corners, a taper-accent gem marking each chamfer apex). Removed outright per direct
+feedback: windows are plain rectangles again, using the standard 4-corner `.panel::before`
+treatment with no override needed. This also retires the `clip-path`-clips-`box-shadow`
+tradeoff every earlier round documented as a known, accepted limitation (confirmed
+empirically: `filter: drop-shadow` was clipped too, no same-element fix existed) -- with
+no `clip-path` on `.window` at all, there is nothing left to clip the shadow. The taper's
+supporting code (`windowTopOrnamentMaskImage`, `taperAccentMaskImage`, the
+`--ornament-window-top` custom property and its `tokens.css` fallback) is removed as dead
+code, not just unwired: nothing else consumed it.
 
 Wiring: `applyOrnamentVars()` sets the `--ornament-*` custom properties once at game boot
 (`main.ts`, next to the existing one-time `hydrateIcons()` call); shapes are static and
@@ -1247,11 +1247,10 @@ matters; later phases assume earlier vocabulary.
 The structural ornament system (10.8) is the one deliberate exception to strict phase
 order: because it is additive, colorless-until-masked, and orthogonal to any specific
 token retune, its first slice (the corner motif and the noisy gilded edge on `.panel`
-and its smaller-scale consumers, the twin ring on the unit-frame portrait and minimap
-discs, the tapered window top) shipped ahead of the phases below, landing only the
-ornament pieces of phases 2 to 4 and none of their token, layout, or primitive-retune
-work. Each phase's own bullet notes what ornament already covers so it is not re-scoped
-by accident.
+and its smaller-scale consumers, the gilded ring on the unit-frame portrait and minimap
+discs) shipped ahead of the phases below, landing only the ornament pieces of phases 2 to
+4 and none of their token, layout, or primitive-retune work. Each phase's own bullet notes
+what ornament already covers so it is not re-scoped by accident.
 
 1. **Foundation: tokens, theme, type.** New ramp tokens and themed derivations; retuned
    `classic` preset knobs and `themeCssVars` derivation constants (including scrollbars

@@ -43,58 +43,14 @@
     max-height: calc(var(--app-vh, 100vh) * 0.85 / var(--window-scale) - 24px);
     overflow-y: auto;
     overscroll-behavior: contain;
-    /* Tapered top: chamfer the top-left/top-right corners at an angle so the
-       frame reads as a carved fantasy artifact, not a plain rectangle. Only
-       the top corners taper; the bottom stays square (the SE resize grip
-       lives there). --window-taper is a var, not a literal, so a window that
-       needs a shallower/deeper cut (a very short compact popup) can override
-       it without duplicating the whole polygon. */
-    --window-taper: 20px;
-    clip-path: polygon(
-      var(--window-taper) 0,
-      calc(100% - var(--window-taper)) 0,
-      100% var(--window-taper),
-      100% 100%,
-      0 100%,
-      0 var(--window-taper)
-    );
   }
-  /* The tapered top swallows .panel::before's default top-left/top-right
-     bracket layers (they anchor at the literal box corner, which the
-     clip-path above now clips away), so windows override with a corner
-     treatment matched to their own shape: bracket motifs stay at the two
-     (un-clipped) bottom corners, and a gem accent marks each chamfer apex
-     instead. content/position/background/etc. still come from .panel::before
-     (base layer); only the mask itself needs overriding here. */
-  /* The 14px sizes and the "- 7px" recentering offset below must match
-     TAPER_ACCENT_SIZE (14) and half of it in ornament_svg.ts: the accent
-     mask's own SVG viewBox is 14x14, and mask-position places an image's
-     TOP-LEFT at the given point, so centering its 14px box ON the taper
-     apex needs an offset of half its own size. Change one, change both. */
-  .window::before {
-    -webkit-mask-image: var(--ornament-window-top);
-    mask-image: var(--ornament-window-top);
-    -webkit-mask-position:
-      bottom left,
-      bottom right,
-      calc(var(--window-taper) - 7px) 0,
-      calc(100% - var(--window-taper) - 7px) 0;
-    mask-position:
-      bottom left,
-      bottom right,
-      calc(var(--window-taper) - 7px) 0,
-      calc(100% - var(--window-taper) - 7px) 0;
-    -webkit-mask-size:
-      30px 30px,
-      30px 30px,
-      14px 14px,
-      14px 14px;
-    mask-size:
-      30px 30px,
-      30px 30px,
-      14px 14px,
-      14px 14px;
-  }
+  /* Round 6: the tapered/chamfered top (clip-path on the top-left/top-right
+     corners) is REMOVED per direct feedback; windows are plain rectangles
+     again. This also retires the known clip-path-clips-box-shadow tradeoff
+     documented in earlier rounds (no clip-path, nothing to clip). .window
+     no longer needs its own ::before override: the standard 4-corner
+     .panel::before treatment (all four literal box corners) applies as-is,
+     since there is no chamfer to swallow the top two corners anymore. */
   /* Windows appended to <body>, OUTSIDE the zoomed #ui (the mobile More drawer
      and the dynamically created confirm/input dialog): their author lengths are
      never multiplied by the #ui zoom, so the clamps must not divide by it. */

@@ -194,6 +194,29 @@
     border-radius: 50%;
     border: 1px solid #ffffff18;
   }
+  /* Round 6: a decorative hand-gilded ring OUTSIDE the wheel's own functional
+     border (ornament_svg.ts, --ornament-ring-portrait via --ornament-gilt;
+     the same technique as .portrait-wrap::after in hud.css). Sits on ::after
+     so it never collides with the ::before highlight ring above; mask-size
+     100% 100% (not a hardcoded px pair) so it tracks the wheel's own inset
+     box at every breakpoint/joystick-scale automatically, instead of a
+     separate override per size tier. Purely a ring around the wheel, never a
+     replacement for its border-color, which still signals engaged/idle. */
+  body.mobile-touch .mobile-joystick::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-ring-portrait);
+    mask-image: var(--ornament-ring-portrait);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
   /* Floating move joystick: a lower-left capture zone lets the thumb land
      anywhere; the joystick rests dimmed at home until touched, then springs to
      the touch point with a gold "engaged" glow. */
@@ -348,6 +371,23 @@
       0 2px 10px #0009,
       inset 0 1px 0 #ffffff1c;
     transition: transform 0.06s linear;
+  }
+  /* Round 6: same decorative outer ring as the wheel above, on the draggable
+     centre knob. */
+  body.mobile-touch .mobile-stick::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    pointer-events: none;
+    background: var(--ornament-gilt);
+    -webkit-mask-image: var(--ornament-ring-portrait);
+    mask-image: var(--ornament-ring-portrait);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
   }
   body.mobile-touch .mobile-joy-label {
     position: absolute;

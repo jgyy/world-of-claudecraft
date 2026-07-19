@@ -485,10 +485,9 @@
     padding: 0 16px;
     width: 100%;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #1c1b14;
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     color: #cfc6ab;
     border: 1px solid transparent;
     border-radius: 8px;
@@ -1807,10 +1806,9 @@
     border: 2px solid transparent;
     border-radius: 6px;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     color: #f3df9a;
     cursor: var(--cursor-point);
     position: relative;
@@ -1948,10 +1946,9 @@
     border: 2px solid transparent;
     border-radius: 6px;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     color: #f3df9a;
     cursor: var(--cursor-point);
     touch-action: manipulation;
@@ -2065,10 +2062,9 @@
     border: 2px solid transparent;
     border-radius: 6px;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     color: #fff;
     cursor: var(--cursor-point);
     font-family: var(--title-font);
@@ -2119,23 +2115,23 @@
       top left,
       top right;
     -webkit-mask-size:
-      14px 14px,
-      14px 14px,
-      14px 14px,
-      14px 14px,
-      16px 2px,
-      16px 2px,
-      2px 16px,
-      2px 16px;
+      11px 11px,
+      11px 11px,
+      11px 11px,
+      11px 11px,
+      14px 1.5px,
+      14px 1.5px,
+      1.5px 14px,
+      1.5px 14px;
     mask-size:
-      14px 14px,
-      14px 14px,
-      14px 14px,
-      14px 14px,
-      16px 2px,
-      16px 2px,
-      2px 16px,
-      2px 16px;
+      11px 11px,
+      11px 11px,
+      11px 11px,
+      11px 11px,
+      14px 1.5px,
+      14px 1.5px,
+      1.5px 14px,
+      1.5px 14px;
   }
   .action-btn .icon-label {
     position: absolute;
@@ -2161,10 +2157,9 @@
   }
   .action-btn.empty {
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #0d0d13;
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     cursor: default;
     box-shadow: inset 0 0 10px #000;
   }
@@ -2299,10 +2294,9 @@
     border: 2px solid transparent;
     border-radius: 5px;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     color: var(--color-text-muted);
     cursor: var(--cursor-point);
     font-size: 12px;
@@ -2524,10 +2518,9 @@
     border-bottom: none;
     border-radius: 6px 6px 0 0;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       linear-gradient(#1c1824, #0d0b13);
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     color: #95886a;
     cursor: var(--cursor-point);
     font-family: var(--title-font);
@@ -2565,10 +2558,9 @@
     color: var(--gold);
     border-color: #6f5a2a;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       linear-gradient(#2a2436, #161220);
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
   }
   /* "add channel" (+) tab: square, icon-only, slightly de-emphasised. Sticks to
      the right edge so it stays inline and reachable even when the tabs scroll. */
@@ -3258,10 +3250,9 @@
   .mt-tab {
     position: relative;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #1a1410;
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     border: 1px solid transparent;
     border-radius: 3px;
     color: var(--color-text-muted);
@@ -3306,10 +3297,9 @@
     color: var(--gold);
     border-color: var(--gold-dim);
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #2a2010;
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
   }
   .mt-view {
     font-size: 12px;
@@ -3594,10 +3584,9 @@
     padding: 1px 4px;
     z-index: 2;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 50% 30%, #2c2c3a, #15151f);
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     border: 1px solid transparent;
     border-radius: 9px;
     box-shadow: 0 1px 3px #000a;
@@ -3711,10 +3700,9 @@
     cursor: pointer;
     border-radius: 50%;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       radial-gradient(circle at 50% 30%, #2c2c3a, #15151f);
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     border: 1px solid transparent;
     box-shadow: 0 1px 3px #000a;
     color: #8c8472;
@@ -6240,10 +6228,9 @@
     gap: 3px;
     padding: 3px 7px;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #12100acc;
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     border: 1px solid transparent;
     border-radius: 12px;
     color: var(--gold);
