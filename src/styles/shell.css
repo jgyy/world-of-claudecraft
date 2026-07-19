@@ -1986,10 +1986,11 @@
     font-size: 12px;
     text-align: center;
     text-shadow: 1px 1px 2px #000;
-    display: none;
+    min-height: 2.4em;
+    visibility: hidden;
   }
   #ls-slow-hint.visible {
-    display: block;
+    visibility: visible;
   }
 
   /* ---------- play console (realm selector + Play CTA) ---------- */

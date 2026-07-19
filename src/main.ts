@@ -232,7 +232,11 @@ import {
 } from './ui/i18n';
 import { defaultIconPrewarmEntries, prewarmIconCache } from './ui/icon_prewarm';
 import { iconDataUrl } from './ui/icons';
-import { shouldShowSlowConnectionHint } from './ui/loading_slow_hint_core';
+import {
+  noteLoadingProgress,
+  startSlowConnectionWatch,
+  stopSlowConnectionWatch,
+} from './ui/loading_slow_hint';
 import { createLoadingTipRotation, type LoadingTipRotation } from './ui/loading_tips';
 import { showMobileWalletLauncher } from './ui/mobile_wallet_launcher';
 import { applyNativeDeviceLanguage } from './ui/native_language';
@@ -773,13 +777,10 @@ function requestPreferredFullscreen(): void {
 
 const LOADING_FADE_MS = 350; // keep in sync with the #loading-screen CSS transition
 const LOADING_TIP_ROTATE_MS = 5000;
-const SLOW_HINT_CHECK_MS = 1000;
 
 let loadingHideTimer: number | null = null;
 let loadingTipRotation: LoadingTipRotation | null = null;
 let loadingTipTimer: number | null = null;
-let slowHintTimer: number | null = null;
-let lastLoadingProgressAt = 0;
 
 function showLoadingScreen(statusText: string): void {
   const el = $('#loading-screen');
@@ -801,42 +802,7 @@ function setLoadingStatus(text: string): void {
 function setLoadingProgress(done: number, total: number): void {
   $('#ls-fill').style.width = total > 0 ? `${Math.round((done / total) * 100)}%` : '0%';
   setLoadingStatus(t('loading.worldProgress', { done, total }));
-  lastLoadingProgressAt = Date.now();
-  setSlowConnectionHintVisible(false);
-}
-
-// Warns once progress has gone quiet for a while (typical on a throttled or
-// lossy connection) so the loading screen does not look frozen while the
-// cosmetic tip keeps rotating underneath it; see loading_slow_hint_core.ts.
-//
-// Only watches the network-bound phase: setLoadingProgress (fed solely by
-// assetsReady, see enterWorld below) is the only writer of
-// lastLoadingProgressAt, so the watch is stopped as soon as assets finish
-// (stopSlowConnectionWatch there) rather than left armed through the
-// CPU-bound scene-build stretch that follows (mountGameUi, prewarmInitialScene,
-// two rAFs to first frame), which can exceed the threshold on a slow device
-// with a perfectly fine connection and would misattribute the stall.
-function startSlowConnectionWatch(): void {
-  lastLoadingProgressAt = Date.now();
-  if (slowHintTimer !== null) return;
-  slowHintTimer = window.setInterval(() => {
-    setSlowConnectionHintVisible(shouldShowSlowConnectionHint(Date.now() - lastLoadingProgressAt));
-  }, SLOW_HINT_CHECK_MS);
-}
-
-function stopSlowConnectionWatch(): void {
-  if (slowHintTimer !== null) {
-    window.clearInterval(slowHintTimer);
-    slowHintTimer = null;
-  }
-  setSlowConnectionHintVisible(false);
-}
-
-// index.html AND play.html both load this module, but the element only
-// exists as inline markup on both entries; still null-guarded to survive any
-// future entry drift without throwing on this frequently-hit interval path.
-function setSlowConnectionHintVisible(visible: boolean): void {
-  document.querySelector('#ls-slow-hint')?.classList.toggle('visible', visible);
+  noteLoadingProgress();
 }
 
 // Rotating "did you know" copy under the progress bar, purely cosmetic (no
