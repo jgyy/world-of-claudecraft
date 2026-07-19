@@ -2774,16 +2774,14 @@
        desktop Need/Greed above its compact Bags window. */
     z-index: 95 !important;
     /* The desktop landscape rail layout (flex-direction: row, fixed-width rail
-       beside the grid, gated behind a min-width media query in components.css)
-       is a wide-viewport layout. Force the portrait stack on the mobile
-       full-screen sheet regardless of viewport width, the same opt-out the
-       bank-docked window uses: a touch device can report a very wide CSS
-       viewport (a large tablet or touch laptop in landscape) and still be too
-       narrow, in practice, for a fixed 190px rail plus a usable grid. */
-    flex-direction: column;
-  }
-  body.mobile-touch #bags .bag-rail {
-    display: contents;
+       beside the grid) lives behind a `@media (min-width: 1800px)` block in
+       components.css whose selectors are all scoped with
+       `body:not(.bank-open):not(.mobile-touch)`, so it never matches on the
+       mobile full-screen sheet regardless of viewport width: a touch device
+       can report a very wide CSS viewport (a large tablet or touch laptop in
+       landscape) and still be too narrow, in practice, for a fixed 190px rail
+       plus a usable grid. #bags keeps the base portrait column here (this
+       block still sets its own position/size, just not flex-direction). */
   }
   body.mobile-touch #bags .bag-grid {
     min-height: 150px;

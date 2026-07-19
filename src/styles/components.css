@@ -4817,10 +4817,18 @@
      (min(640px, --bags-slot-w)) comfortably fits the fixed-width rail plus a
      usable multi-column grid; --bags-slot-w works out to roughly 50vw - 380px,
      so 1800px keeps a good margin above rail (190px) + gap + several 38px
-     columns even before rounding. Below this width, or in the bank-docked /
-     mobile-sheet states below, #bags stays the portrait column above. */
+     columns even before rounding. Below this width, #bags stays the portrait
+     column above. Every selector is scoped with `body:not(.bank-open):not(.mobile-touch)`
+     rather than patched afterwards with an opt-out: a review finding (PR #2103)
+     showed that resetting only two properties (flex-direction, .bag-rail display)
+     after the fact left every OTHER declaration in this block (order, the grid's
+     column floor, the money row's column layout) still matching in the
+     bank-docked and mobile-sheet states, because `display: contents` on the rail
+     does not stop descendant selectors from matching its children. Scoping the
+     selectors here means the portrait rules above apply untouched in both
+     excluded states and there is nothing left to keep in sync. */
   @media (min-width: 1800px) {
-    #bags {
+    body:not(.bank-open):not(.mobile-touch) #bags {
       width: min(640px, var(--bags-slot-w));
       max-height: min(360px, calc(100vh - 18px));
       /* The two-column body (rail + grid) needs its own line, so the header
@@ -4830,14 +4838,14 @@
       align-content: flex-start;
       column-gap: 12px;
     }
-    #bags .panel-title {
+    body:not(.bank-open):not(.mobile-touch) #bags .panel-title {
       flex: 1 0 100%;
     }
     /* The rail: bag-bar (backpack + equip sockets), the filter/search tools,
        and the money line, stacked in one column beside the grid. Shrinkable
        (flex-shrink 1, min-width 0) rather than a hard 0 0 basis, so it still
        degrades instead of clipping if the window narrows within this range. */
-    #bags .bag-rail {
+    body:not(.bank-open):not(.mobile-touch) #bags .bag-rail {
       display: flex;
       flex-direction: column;
       flex: 0 1 var(--bags-rail-w);
@@ -4846,30 +4854,39 @@
       min-height: 0;
       overflow-y: auto;
     }
-    #bags .bag-rail .bag-bar {
+    body:not(.bank-open):not(.mobile-touch) #bags .bag-rail .bag-bar {
       margin: 0;
       flex-wrap: wrap;
       order: initial;
     }
-    #bags .bag-filter-bar {
+    body:not(.bank-open):not(.mobile-touch) #bags .bag-filter-bar {
       order: initial;
     }
     /* The grid is the flex item beside the rail, so it needs an explicit shrink
        floor (a flex item's min-width is auto by default); a tighter column
        floor than the base .bag-grid rule also fits more columns in the same
        landscape width. */
-    #bags .bag-grid {
+    body:not(.bank-open):not(.mobile-touch) #bags .bag-grid {
       min-width: 0;
       grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
       align-content: start;
       order: initial;
     }
-    #bags .bag-rail .money {
+    body:not(.bank-open):not(.mobile-touch) #bags .bag-rail .money {
       flex-direction: column;
       align-items: flex-start;
       gap: 4px;
       margin-top: auto;
       order: initial;
+    }
+    /* The $WOC chip's coin block uses margin-left: auto to stay right-aligned in
+       the portrait row layout; the rail's money row is a column flex here
+       (align-items: flex-start), so that auto margin would act on the cross
+       axis instead and push the coin block to the rail's right edge, out of
+       line with the chip above it (review finding, PR #2103). Clear it so the
+       coin block stays left-aligned under the chip in this layout only. */
+    body:not(.bank-open):not(.mobile-touch) #bags .money .money-inline {
+      margin-left: 0;
     }
   }
   .woc-balance {
@@ -5446,14 +5463,12 @@
     width: 320px;
     max-height: calc(var(--app-vh, 100vh) * 0.72 / var(--window-scale) - 24px);
     transform: translateX(var(--bank-dock-gap));
-    /* Opt out of the landscape rail layout regardless of viewport width: the
-       bank-docked window is pinned to 320px, too narrow for the fixed-width
-       rail plus a usable grid (review finding: bank-docked Bags squeezed to
-       2 columns). Stay the portrait column, same as below the breakpoint. */
-    flex-direction: column;
-  }
-  body.bank-open #bags .bag-rail {
-    display: contents;
+    /* The landscape rail layout (the `@media (min-width: 1800px)` block above)
+       scopes every one of its selectors with `body:not(.bank-open)`, so it never
+       matches here regardless of viewport width: #bags keeps the base portrait
+       column (flex-direction: column, .bag-rail as display: contents) even on a
+       wide desktop with the bank docked, where the pinned 320px width is too
+       narrow for the fixed-width rail plus a usable grid. */
   }
 
   /* ---------- deeds ---------- */

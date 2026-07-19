@@ -10,6 +10,7 @@ const painter = readFileSync(new URL('../src/ui/bags_window.ts', import.meta.url
 const tokens = readFileSync(new URL('../src/styles/tokens.css', import.meta.url), 'utf8');
 const hud = readFileSync(new URL('../src/ui/hud.ts', import.meta.url), 'utf8');
 const components = readFileSync(new URL('../src/styles/components.css', import.meta.url), 'utf8');
+const hudMobileCss = readFileSync(new URL('../src/styles/hud.mobile.css', import.meta.url), 'utf8');
 
 describe('bags_window: no magic values', () => {
   it('carries no literal hex color in TS (quality color comes from QUALITY_COLOR + a token)', () => {
@@ -77,6 +78,39 @@ describe('bags_window: load-bearing behaviors preserved', () => {
     expect(buildBagBarCall).toBeGreaterThan(railStart);
     expect(filterBarCall).toBeGreaterThan(buildBagBarCall);
     expect(moneyRowCall).toBeGreaterThan(filterBarCall);
+  });
+});
+
+describe('bags_window: landscape rail stays unreachable in the opted-out states', () => {
+  // Review finding (PR #2103): the landscape rail's `@media (min-width: 1800px)` block
+  // must be UNREACHABLE while body.bank-open or body.mobile-touch is set, not merely
+  // reset afterward. `.bag-rail { display: contents }` does not stop descendant
+  // selectors from matching the rail's children, so a media query that only resets
+  // flex-direction and .bag-rail's display leaves every OTHER declaration (order,
+  // the grid's column floor, the money row's column layout) still applying in those
+  // states. Scoping every selector in the block with
+  // `body:not(.bank-open):not(.mobile-touch)` closes that leak; pin the scoping so it
+  // cannot silently regress back to an unscoped block plus a patch-up opt-out.
+  const landscapeBlock = components.slice(
+    components.indexOf('@media (min-width: 1800px) {'),
+    components.indexOf('.woc-balance {'),
+  );
+
+  it('scopes every #bags selector inside the landscape media query', () => {
+    expect(landscapeBlock).toContain('@media (min-width: 1800px) {');
+    const bagsSelectors = landscapeBlock.match(/^\s*[^\s{][^{]*#bags[^{]*\{/gm) ?? [];
+    expect(bagsSelectors.length).toBeGreaterThan(0);
+    for (const selector of bagsSelectors) {
+      expect(selector).toContain('body:not(.bank-open):not(.mobile-touch) #bags');
+    }
+  });
+
+  it('does not lean on an order/display opt-out patch for bank-open or mobile-touch', () => {
+    // The scoped media query removes the need to reset order/display afterward; a
+    // reintroduced `body.bank-open #bags .bag-rail { display: contents }` (or the
+    // mobile-touch twin) is the exact patch-up shape the review flagged as leaky.
+    expect(components).not.toContain('body.bank-open #bags .bag-rail {');
+    expect(hudMobileCss).not.toContain('body.mobile-touch #bags .bag-rail {');
   });
 });
 
