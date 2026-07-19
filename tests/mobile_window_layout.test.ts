@@ -44,6 +44,27 @@ describe('mobile window layout CSS', () => {
     );
   });
 
+  it('keeps the char model panel at its pre-widening 172px floor on portrait mobile, not the desktop landscape 340px', () => {
+    // Desktop's #char-window .char-model-panel min-height: 340px (components.css) is sized
+    // for the wide two-equip-column paperdoll row; without this portrait override it would
+    // roughly double the panel's height on a phone held upright and push the stats/
+    // progression blocks a full extra screen down.
+    const baseStart = mobileCss.indexOf('body.mobile-touch #char-window .char-model-panel {');
+    expect(baseStart).toBeGreaterThan(0);
+    const baseBlock = mobileCss.slice(baseStart, mobileCss.indexOf('}', baseStart));
+    expect(baseBlock).toContain('min-height: 172px;');
+
+    // The landscape media query re-declares the same selector afterward with its own
+    // tighter sizing, which must still win in landscape via source order.
+    const landscapeStart = mobileCss.indexOf(
+      'body.mobile-touch #char-window .char-model-panel {',
+      baseStart + 1,
+    );
+    expect(landscapeStart).toBeGreaterThan(baseStart);
+    const landscapeBlock = mobileCss.slice(landscapeStart, mobileCss.indexOf('}', landscapeStart));
+    expect(landscapeBlock).toContain('min-height: 132px;');
+  });
+
   it('sizes the mobile map from the app viewport so zoom controls do not dominate it', () => {
     const start = mobileCss.indexOf('body.mobile-touch #map-window {');
     expect(start).toBeGreaterThan(0);

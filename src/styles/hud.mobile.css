@@ -2992,8 +2992,15 @@
     max-width: 100%;
     box-sizing: border-box;
   }
+  /* Portrait keeps the pre-widening 172px floor: the desktop landscape window's
+     340px min-height (components.css) is sized for the wide two-equip-column
+     paperdoll row and would otherwise roughly double the model panel's height
+     on a phone held upright, pushing the stats/progression blocks a full
+     extra screen down. The landscape media query below overrides this again
+     with its own tighter 132px sizing for the horizontal mobile layout. */
   body.mobile-touch #char-window .char-model-panel {
     min-width: 0;
+    min-height: 172px;
   }
   @media (orientation: landscape) {
     body.mobile-touch #char-window {

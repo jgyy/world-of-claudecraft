@@ -41,10 +41,16 @@ describe('char_window: landscape info-grid layout', () => {
     expect(painter).toContain('<div class="char-info-grid">');
     const statsIdx = painter.indexOf('class="char-stats"');
     const gridOpenIdx = painter.indexOf('char-info-grid');
-    const gridCloseIdx = painter.indexOf("html += '</div>';");
+    // Pin the grid's own close, not the first `</div>` literal in the file (which
+    // would keep passing even if the wrapper closed somewhere unrelated): the
+    // grid is the last thing appended before gatheringHtml, so its close is the
+    // `</div>` immediately following that call.
+    const gatheringCallIdx = painter.indexOf('this.gatheringHtml(world);');
+    expect(gatheringCallIdx).toBeGreaterThan(0);
+    const gridCloseIdx = painter.indexOf("html += '</div>';", gatheringCallIdx);
     expect(gridOpenIdx).toBeGreaterThan(0);
     expect(statsIdx).toBeGreaterThan(gridOpenIdx);
-    expect(gridCloseIdx).toBeGreaterThan(statsIdx);
+    expect(gridCloseIdx).toBeGreaterThan(gatheringCallIdx);
   });
 
   it('widens #char-window to a landscape footprint and grids char-info-grid two columns', () => {
