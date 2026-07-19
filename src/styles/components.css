@@ -4566,13 +4566,26 @@
      the rows out as tiles in a multi-column grid (.vendor-goods-grid) so it
      reads like a real shop counter instead of a portrait list (issue:
      vendor relayout to landscape grid). The sell-junk button, buyback
-     section title, empty state and hint stay full-width outside the grid. */
+     section title, empty state and hint stay full-width outside the grid.
+     #vendor-window is centred (left: 50%; translateX(-50%), layout.css) while
+     the always-open #bags companion stays anchored to its own bottom-right
+     reservation (--bags-bar-half / --bags-gap, tokens.css), so a flat 92vw
+     cap let the widened window slide UNDER bags below about 1850px wide
+     (maintainer review on PR #2101). Cap the half-width against that same
+     reservation plus its own gap so the vendor window's right edge always
+     clears the bags column instead of a magic viewport fraction. */
   #vendor-window {
-    width: min(860px, 92vw);
+    width: min(
+      860px,
+      calc(var(--app-vw, 100vw) - 2 * (var(--bags-bar-half) + var(--bags-gap) + 24px))
+    );
   }
   .vendor-goods-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* auto-fill instead of a fixed repeat(4, ...): once the width cap above
+       shrinks the window on a narrower viewport, the grid drops to 3 or 2
+       columns on its own rather than squeezing 4 undersized tiles. */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 6px;
   }
   .vendor-item {
@@ -4810,8 +4823,8 @@
   /* ---------- bags ---------- */
   /* bags, centred in the bottom gap between the action cluster and micro-menu */
   #bags {
-    --bags-bar-half: 306px;
-    --bags-gap: 12px;
+    /* --bags-bar-half / --bags-gap now live on :root (tokens.css) so the vendor
+       Goods window's width cap reads the SAME reservation instead of a copy. */
     --bags-micro-r: calc(16px + 34px + var(--bags-gap));
     --bags-slot-w: max(
       180px,

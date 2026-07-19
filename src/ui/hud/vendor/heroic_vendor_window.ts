@@ -62,7 +62,9 @@ export function renderHeroicVendorWindow(
     );
     goodsGrid.appendChild(row);
   }
-  el.appendChild(goodsGrid);
+  // Guard mirrors vendor_window.ts's goods/buyback grids: skip appending an
+  // empty grid container rather than leaving a dead node in the DOM.
+  if (view.rows.length > 0) el.appendChild(goodsGrid);
 
   el.querySelector('[data-close]')?.addEventListener('click', () => deps.onClose());
   el.style.display = 'block';

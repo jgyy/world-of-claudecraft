@@ -2653,7 +2653,8 @@
     }
   }
   /* The Market carries a tab strip plus the filter selects, which stack to a tall
-     single column on mobile; the vendor's 58vh cap would leave the flex:1 listing
+     single column on mobile; a shorter clamp (like the vendor window's own,
+     see the comment on #vendor-window below) would leave the flex:1 listing
      body (#market-body) zero height, so it collapsed and could not be scrolled.
      Give the window the full available height (like #trade-window) so the listing
      body keeps a usable, touch-scrollable height under the header. */
@@ -2825,9 +2826,11 @@
     border-top: 0;
     padding-top: 0;
   }
-  /* The desktop landscape grid packs 4 tiles per row; a touch viewport is
-     narrower and the tap-target floor below needs the room, so collapse to
-     2 columns (still several per row, never a single portrait list again). */
+  /* The desktop landscape grid auto-fills up to 4 tiles per row (fewer once the
+     window's own width cap shrinks it to avoid the bags column, see the
+     #vendor-window comment in components.css); a touch viewport is narrower
+     and the tap-target floor below needs the room, so collapse to 2 columns
+     (still several per row, never a single portrait list again). */
   body.mobile-touch .vendor-goods-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
