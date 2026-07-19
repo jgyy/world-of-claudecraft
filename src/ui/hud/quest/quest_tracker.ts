@@ -24,6 +24,8 @@ export interface TrackedQuest {
   title: string;
   /** True when the quest is ready to turn in (the "(Complete)" state). */
   complete: boolean;
+  /** True for a daily quest (renders a small "Daily" marker). */
+  daily: boolean;
   objectives: readonly TrackedObjective[];
 }
 
@@ -36,6 +38,7 @@ export interface QuestTrackerQuestRow {
   number: number;
   title: string;
   complete: boolean;
+  daily: boolean;
   objectives: QuestTrackerObjectiveRow[];
 }
 
@@ -64,6 +67,7 @@ export function questTrackerView(
     number: q.number,
     title: q.title,
     complete: q.complete,
+    daily: q.daily,
     objectives: q.objectives.map((o) => ({ ...o, done: o.current >= o.total })),
   }));
   return { visible: true, collapsed: false, count, quests: questRows };

@@ -293,6 +293,7 @@ export const hudChromeStrings = {
     count: '({count})',
     collapseHint: 'Collapse quest tracker',
     expandHint: 'Expand quest tracker',
+    dailyBadge: 'Daily',
   },
   interfaceTabs: {
     general: 'General',

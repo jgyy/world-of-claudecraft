@@ -44,6 +44,7 @@ const DELTA_KEYS = [
   'equip',
   'qlog',
   'qdone',
+  'daily',
   'lockouts',
   'cds',
   'stats',
@@ -2898,6 +2899,7 @@ const ALL_DELTA_KEYS = [
   'corpse',
   'cosmetics',
   'cprof',
+  'daily',
   'dclears',
   'dcomp',
   'dcompanion',
@@ -2960,6 +2962,7 @@ const TERSE_TO_IWORLD: Record<string, string> = {
   cds: 'cooldowns',
   cosmetics: 'accountCosmetics',
   cprof: 'craftingIdentity',
+  daily: 'dailyQuests',
   dclears: 'delveClears',
   dcomp: 'companionUpgrades',
   dcompanion: 'companionState',
@@ -3067,6 +3070,7 @@ function dirtyEveryDeltaField(): {
   meta.equipment = { ...meta.equipment, mainhand: 'zealotsbane_blade' };
   meta.questLog.set('q_widows', { questId: 'q_widows', counts: [10, 0], state: 'active' });
   meta.questsDone.add('q_wolves');
+  meta.dailyQuests = { day: 20999, questIds: ['q_daily_wolves', 'q_daily_fangs'] };
   meta.raidLockouts.set('nythraxis_boss_arena', FAR_FUTURE_MS);
   meta.unlockedMilestones.add('milestone_test');
   meta.lifetimeXp = 555;
@@ -3523,9 +3527,9 @@ describe('gather node cooldown wire round trip (ncd)', () => {
 });
 
 describe('delta-key contract pins (anti-drift)', () => {
-  it('ALL_DELTA_KEYS contains exactly 51 unique keys in sorted order', () => {
-    expect(ALL_DELTA_KEYS).toHaveLength(51);
-    expect(new Set(ALL_DELTA_KEYS).size).toBe(51);
+  it('ALL_DELTA_KEYS contains exactly 52 unique keys in sorted order', () => {
+    expect(ALL_DELTA_KEYS).toHaveLength(52);
+    expect(new Set(ALL_DELTA_KEYS).size).toBe(52);
     expect([...ALL_DELTA_KEYS]).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
@@ -3544,7 +3548,7 @@ describe('delta-key contract pins (anti-drift)', () => {
     expect(scraped.has('lockouts')).toBe(true); // the multi-line call IS captured
     expect(scraped.has('vcupb')).toBe(true); // the maybeRaw calls ARE captured by the widened regex
     expect(scraped.has('dfb')).toBe(true); // incl. the multi-line maybeRaw('dfb', ...) form
-    expect(scraped.size).toBe(51);
+    expect(scraped.size).toBe(52);
     expect([...scraped].sort()).toEqual([...ALL_DELTA_KEYS].sort());
   });
 

@@ -3436,6 +3436,49 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '森の狼が北の道で旅人に牙をむけています、{playerName}。8頭を討ち、イーストブルックに息をつかせてください。',
   'entities.quests.q_wolves.completion': '見事です。道はもう少し安全になりました。',
   'entities.quests.q_wolves.objectives.0.label': '森の狼を討伐',
+  'entities.quests.q_daily_wolves.title': 'デイリー：群れの間引き',
+  'entities.quests.q_daily_wolves.text':
+    '狼どもは北の街道を狙うのをやめない、{playerName}。今日もまた数を減らしてくれ。森の狼を6匹倒せば、報酬を払おう。',
+  'entities.quests.q_daily_wolves.completion':
+    'よくやった。狼が減る日は、イーストブルックが勝つ日だ。',
+  'entities.quests.q_daily_wolves.objectives.0.label': '森の狼を討伐',
+  'entities.quests.q_daily_boars.title': 'デイリー：イノシシの厄介事',
+  'entities.quests.q_daily_boars.text':
+    '西の草原のイノシシは、農夫が直すより早く畑を掘り返す。イノシシを6頭仕留めてくれ、{playerName}。',
+  'entities.quests.q_daily_boars.completion':
+    '農夫たちは感謝するだろう。イノシシはしないだろうがな。',
+  'entities.quests.q_daily_boars.objectives.0.label': '野生のイノシシを討伐',
+  'entities.quests.q_daily_spiders.title': 'デイリー：巣の一掃',
+  'entities.quests.q_daily_spiders.text':
+    '東の森の潜む者は、我々が巣を焼くより早く増える。今日はセイブルウェブの潜む者を5匹駆除してくれ、{playerName}。',
+  'entities.quests.q_daily_spiders.completion': '心配の種がひとつ減った。感謝する。',
+  'entities.quests.q_daily_spiders.objectives.0.label': 'セイブルウェブの潜む者を討伐',
+  'entities.quests.q_daily_murlocs.title': 'デイリー：マッドフィンの撃退',
+  'entities.quests.q_daily_murlocs.text':
+    'マッドフィンは夜ごとに湖から這い上がってくる。5匹を浅瀬へ追い返してくれ、{playerName}。',
+  'entities.quests.q_daily_murlocs.completion': '湖畔が少しは安全になった。よくやった。',
+  'entities.quests.q_daily_murlocs.objectives.0.label': 'マッドフィンの潜伏者を討伐',
+  'entities.quests.q_daily_bandits.title': 'デイリー：街道の正義',
+  'entities.quests.q_daily_bandits.text':
+    '街道の山賊がまた大胆になってきた。4人を裁きにかけてくれ、{playerName}。そうすれば隊商も楽に通れる。',
+  'entities.quests.q_daily_bandits.completion': '街道の刃が四本減った。隊商は君に借りができたな。',
+  'entities.quests.q_daily_bandits.objectives.0.label': 'ヴェイルの山賊を討伐',
+  'entities.quests.q_daily_rats.title': 'デイリー：害獣駆除',
+  'entities.quests.q_daily_rats.text':
+    '坑夫たちは掘り進む害獣を坑道から締め出せずにいる。今日は深岩の掘り屋を6匹倒せば、彼らも安心して働ける。',
+  'entities.quests.q_daily_rats.completion':
+    'はは！坑夫たちはつるはしに戻れる。感謝する、{playerName}。',
+  'entities.quests.q_daily_rats.objectives.0.label': '深岩の掘り屋を討伐',
+  'entities.quests.q_daily_fangs.title': 'デイリー：牙の戦利品',
+  'entities.quests.q_daily_fangs.text':
+    '今季の賞金は牙の数で払われる。森の狼から狼の牙を5本持ってきてくれ、{playerName}。',
+  'entities.quests.q_daily_fangs.completion': 'きれいな牙が5本。賞金は君のものだ。',
+  'entities.quests.q_daily_fangs.objectives.0.label': '狼の牙',
+  'entities.quests.q_daily_legs.title': 'デイリー：蜘蛛の部位',
+  'entities.quests.q_daily_legs.text':
+    '薬師が蜘蛛の脚を欲しがっていて、一本ごとに賞金を出す。東の森で蜘蛛の脚を5本集めてくれ、{playerName}。',
+  'entities.quests.q_daily_legs.completion': '彼女は喜ぶだろう。これは君の分だ。',
+  'entities.quests.q_daily_legs.objectives.0.label': '蜘蛛の脚',
   'entities.quests.q_greyjaw.title': '老いた狼',
   'entities.quests.q_greyjaw.text':
     '老グレイジョーだけは罠にかかったことがありません。狼道の北の奥森をうろついています。牙を持ち帰ってください。',
@@ -4593,6 +4636,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.questTracker.count': '（{count}）',
   'hudChrome.questTracker.collapseHint': 'クエストトラッカーを折りたたむ',
   'hudChrome.questTracker.expandHint': 'クエストトラッカーを展開する',
+  'hudChrome.questTracker.dailyBadge': 'デイリー',
   'hudChrome.bags.cannotDestroy': 'このアイテムは破壊できません。',
   'hudChrome.bags.rightClickDestroy': '右クリックで破壊',
   'hudChrome.bags.dragEquipHint': 'キャラクターにドラッグして装備',

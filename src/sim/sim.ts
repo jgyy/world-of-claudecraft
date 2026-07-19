@@ -406,6 +406,7 @@ import {
 // (online.ts) stays byte-identical.
 export { computeQuestState } from './quests/quest_commands';
 
+import { dailyResetDayIndex, rollDailyQuestIds } from './quests/daily_quest_pool';
 import { completeCurrentQuestsForDev, completeQuestForDev } from './quests/dev_quest_commands';
 import * as arenaMod from './social/arena';
 import { clearAfkOnMove } from './social/away';
@@ -1030,6 +1031,12 @@ export interface PlayerMeta {
   known: ResolvedAbility[];
   questLog: Map<string, QuestProgress>;
   questsDone: Set<string>;
+  // The 3 daily quests rolled for this character's current server day, plus the
+  // day index they were rolled for. Re-rolled (deterministically, per
+  // characterId + day) on the next talkToNpc once the day boundary passes.
+  // Runtime/session state derived from characterId + day; not persisted (it
+  // re-derives identically on reconnect via daily_quest_pool.rollDailyQuestIds).
+  dailyQuests?: { day: number; questIds: string[] };
   counters: RewardCounters;
   autoEquip: boolean;
   // sim.time when this character entered the world; powers /played. Session-only
@@ -3359,6 +3366,9 @@ export class Sim {
   }
   get questsDone(): Set<string> {
     return this.primary.questsDone;
+  }
+  get dailyQuests(): { day: number; questIds: string[] } | undefined {
+    return this.primary.dailyQuests;
   }
   // --- IWorldDeeds: the Book of Deeds read surface + title selection. The
   // reads expose the live per-player state (the questLog precedent above);
@@ -7039,6 +7049,9 @@ export class Sim {
     // Book of Deeds: chronicler talks feed their visited mark; talking to any
     // other NPC resets the Saul consecutive-talk counter.
     deedsMod.onNpcTalkedForDeeds(this.ctx, meta, npc.templateId);
+    // Roll (or refresh) this player's daily quests before we build the offer list
+    // for any NPC that gives dailies, so only today's rolled set shows as available.
+    this.ensureDailyQuests(npc, p, meta);
     if (this.interactNpcForQuests(npc, meta)) return;
     for (const qid of npc.questIds) {
       const quest = QUESTS[qid];
@@ -7061,6 +7074,21 @@ export class Sim {
         return;
       }
     }
+  }
+
+  // Roll the player's daily quest set for the current server day if this NPC
+  // offers any daily quests and the player has no roll yet or a stale one (a new
+  // day boundary has passed). Mutates PlayerMeta.dailyQuests in place; bumps
+  // wireRev so the server re-sends the mirrored field on the next snapshot. The
+  // day boundary is the same one raid lockouts use (ctx.raidResetMs), and the
+  // roll is deterministic per (characterId, day).
+  private ensureDailyQuests(npc: Entity, p: Entity, meta: PlayerMeta): void {
+    if (!npc.questIds.some((qid) => QUESTS[qid]?.isDaily)) return;
+    const day = dailyResetDayIndex(this.lockoutNowMs(), this.raidResetMs.bind(this));
+    if (meta.dailyQuests && meta.dailyQuests.day === day) return;
+    const characterId = String(meta.characterId ?? meta.entityId);
+    meta.dailyQuests = { day, questIds: rollDailyQuestIds(characterId, day, p.level) };
+    meta.wireRev++;
   }
 
   private interactNpcForQuests(npc: Entity, meta: PlayerMeta): boolean {

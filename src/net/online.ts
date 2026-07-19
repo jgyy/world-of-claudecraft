@@ -1289,6 +1289,9 @@ export class ClientWorld implements IWorld {
   activeLoadout = -1;
   questLog = new Map<string, QuestProgress>();
   questsDone = new Set<string>();
+  // IWorldQuests daily mirror: the server's rolled daily-quest set for the
+  // current server day (self field `daily`), or undefined before the first roll.
+  dailyQuests: { day: number; questIds: string[] } | undefined = undefined;
   // --- IWorldParty: party/raid roster, mirrored from the snapshot self (`party`).
   // The raid-target markers ride the `markers` map below; IWorldPet keeps no mirror
   // field (pet state lives on the owned-mob entity wire). ---
@@ -2646,6 +2649,8 @@ export class ClientWorld implements IWorld {
       if (s.qlog !== undefined)
         this.questLog = new Map((s.qlog as QuestProgress[]).map((q) => [q.questId, q]));
       if (s.qdone !== undefined) this.questsDone = new Set(s.qdone);
+      if (s.daily !== undefined)
+        this.dailyQuests = s.daily as { day: number; questIds: string[] } | undefined;
       if (s.lockouts !== undefined) this.selfLockouts = s.lockouts as Record<string, number>;
       if (s.ddiff === 'normal' || s.ddiff === 'heroic') this.selectedDungeonDifficulty = s.ddiff;
       if (s.qlog !== undefined || s.qdone !== undefined) this.pendingQuestCommands?.clear();
@@ -2856,6 +2861,7 @@ export class ClientWorld implements IWorld {
             amendsProgress: identity.amendsProgress,
           }
         : undefined,
+      this.dailyQuests?.questIds,
     );
   }
 

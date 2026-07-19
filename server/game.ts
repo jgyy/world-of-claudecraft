@@ -5743,6 +5743,10 @@ export class GameServer {
       maybe('cosmetics', anchorSession.accountCosmetics);
       maybe('qlog', [...meta.questLog.values()]);
       maybe('qdone', [...meta.questsDone]);
+      // Rolled daily quests for the current server day (Marshal Redbrook's
+      // rotating dailies). Heavy-gated like qlog/qdone; the roll bumps wireRev so
+      // a fresh roll forces heavyDue on the next snapshot.
+      maybe('daily', meta.dailyQuests);
       maybe('milestones', [...meta.unlockedMilestones]);
       // Book of Deeds: the earned map (deed id -> utcDay) and the COMPLETE
       // lifetime stat block. Maps and Sets do not survive JSON.stringify, so
@@ -6746,6 +6750,7 @@ export class GameServer {
   private resyncQuests(session: ClientSession): void {
     delete session.lastSent.qlog;
     delete session.lastSent.qdone;
+    delete session.lastSent.daily;
     session.selfHeavyDirty = true; // ensure the gated heavy block re-runs next snapshot
   }
 

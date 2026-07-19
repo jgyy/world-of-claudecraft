@@ -703,7 +703,8 @@ export const ko_KR: EnTranslations = {
     "questTracker": {
       "count": "({count})",
       "collapseHint": "퀘스트 추적기 접기",
-      "expandHint": "퀘스트 추적기 펼치기"
+      "expandHint": "퀘스트 추적기 펼치기",
+      "dailyBadge": "일일"
     },
     "interfaceTabs": {
       "general": "일반",
@@ -10615,6 +10616,86 @@ export const ko_KR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "약초 군락 채집"
+          }
+        }
+      },
+      "q_daily_wolves": {
+        "title": "일일: 무리 솎아내기",
+        "text": "늑대들이 북쪽 길을 노리는 것을 멈추지 않는군, {playerName}. 오늘도 그 수를 줄여주게. 숲늑대 6마리를 처치하면 보수를 주겠네.",
+        "completion": "잘했네. 늑대가 줄어드는 날은 이스트브룩이 이기는 날이지.",
+        "objectives": {
+          "0": {
+            "label": "숲늑대 처치"
+          }
+        }
+      },
+      "q_daily_boars": {
+        "title": "일일: 멧돼지 골칫거리",
+        "text": "서쪽 초원의 멧돼지들이 농부들이 고치는 것보다 빠르게 밭을 파헤치네. 나를 위해 멧돼지 6마리를 잡아주게, {playerName}.",
+        "completion": "농부들은 자네에게 고마워할 걸세. 멧돼지는 아니겠지만.",
+        "objectives": {
+          "0": {
+            "label": "야생 멧돼지 처치"
+          }
+        }
+      },
+      "q_daily_spiders": {
+        "title": "일일: 거미줄 청소",
+        "text": "동쪽 숲의 잠복자들이 우리가 거미줄을 태우는 것보다 빠르게 번식하네. 오늘 세이블웹 잠복자 5마리를 처치해주게, {playerName}.",
+        "completion": "걱정거리 하나가 줄었군. 고맙네.",
+        "objectives": {
+          "0": {
+            "label": "세이블웹 잠복자 처치"
+          }
+        }
+      },
+      "q_daily_murlocs": {
+        "title": "일일: 머드핀 격퇴",
+        "text": "머드핀이 밤마다 호수에서 더 멀리 기어 올라오네. 그중 5마리를 얕은 물로 몰아내주게, {playerName}.",
+        "completion": "호숫가가 조금은 안전해졌군. 잘했네.",
+        "objectives": {
+          "0": {
+            "label": "머드핀 잠행자 처치"
+          }
+        }
+      },
+      "q_daily_bandits": {
+        "title": "일일: 대로의 정의",
+        "text": "길의 산적들이 다시 대담해졌네. 그중 4명을 법의 심판대에 세워주게, {playerName}. 그러면 마차 행렬도 편히 다닐 걸세.",
+        "completion": "길에 칼이 넷 줄었군. 마차 행렬이 자네에게 빚졌네.",
+        "objectives": {
+          "0": {
+            "label": "골짜기 산적 처치"
+          }
+        }
+      },
+      "q_daily_rats": {
+        "title": "일일: 해로운 짐승 퇴치",
+        "text": "광부들이 굴을 파는 해로운 짐승들을 갱도에서 막지 못하고 있네. 오늘 심층암 굴착꾼 6마리를 잡으면 그들도 편히 일할 수 있을 걸세.",
+        "completion": "하! 광부들이 곡괭이로 돌아갈 수 있겠군. 고맙네, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "심층암 굴착꾼 처치"
+          }
+        }
+      },
+      "q_daily_fangs": {
+        "title": "일일: 송곳니 전리품",
+        "text": "이번 철에는 현상금을 송곳니로 쳐주네. 숲늑대에게서 늑대 송곳니 5개를 가져다주게, {playerName}.",
+        "completion": "깨끗한 송곳니 다섯 개로군. 현상금은 자네 것일세.",
+        "objectives": {
+          "0": {
+            "label": "늑대 송곳니"
+          }
+        }
+      },
+      "q_daily_legs": {
+        "title": "일일: 거미 부위",
+        "text": "약제사가 팅크제에 쓸 거미 다리를 원하고, 하나당 값을 쳐주네. 동쪽 숲에서 거미 다리 5개를 모아주게, {playerName}.",
+        "completion": "그녀가 기뻐할 걸세. 이건 자네 몫이네.",
+        "objectives": {
+          "0": {
+            "label": "거미 다리"
           }
         }
       },

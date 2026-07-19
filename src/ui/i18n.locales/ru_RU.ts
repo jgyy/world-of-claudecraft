@@ -3461,6 +3461,50 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
     'Лесные волки осмелели и бросаются на путников у северной дороги, {playerName}. Убейте 8, чтобы Истврук вздохнул свободнее.',
   'entities.quests.q_wolves.completion': 'Хорошая работа. Дорога уже кажется безопаснее.',
   'entities.quests.q_wolves.objectives.0.label': 'Лесной волк: убито',
+  'entities.quests.q_daily_wolves.title': 'Ежедневно: Прореживание стаи',
+  'entities.quests.q_daily_wolves.text':
+    'Волки не перестают пробовать северную дорогу на прочность, {playerName}. Проредите их снова сегодня. Убейте 6 лесных волков, и я вам заплачу.',
+  'entities.quests.q_daily_wolves.completion':
+    'Отличная работа. День, когда волки несут потери, — это день победы Истбрука.',
+  'entities.quests.q_daily_wolves.objectives.0.label': 'Лесной волк: убито',
+  'entities.quests.q_daily_boars.title': 'Ежедневно: Кабанья напасть',
+  'entities.quests.q_daily_boars.text':
+    'Кабаны на западных лугах роют поля быстрее, чем крестьяне успевают их чинить. Уложите для меня 6 диких кабанов, {playerName}.',
+  'entities.quests.q_daily_boars.completion':
+    'Крестьяне будут вам благодарны, пусть даже кабаны — нет.',
+  'entities.quests.q_daily_boars.objectives.0.label': 'Дикий кабан: убито',
+  'entities.quests.q_daily_spiders.title': 'Ежедневно: Расчистка паутины',
+  'entities.quests.q_daily_spiders.text':
+    'Затаившиеся в восточном лесу плодятся быстрее, чем мы жжём их паутину. Истребите сегодня 5 соболиных затаившихся, {playerName}.',
+  'entities.quests.q_daily_spiders.completion': 'Одним гнездом для беспокойства меньше. Благодарю.',
+  'entities.quests.q_daily_spiders.objectives.0.label': 'Соболиный затаившийся: убито',
+  'entities.quests.q_daily_murlocs.title': 'Ежедневно: Оттеснить мутноплавов',
+  'entities.quests.q_daily_murlocs.text':
+    'Мутноплавы каждую ночь подбираются всё выше от озера. Загоните 5 из них обратно на мелководье, {playerName}.',
+  'entities.quests.q_daily_murlocs.completion': 'Берег озера стал чуть безопаснее. Хорошо сделано.',
+  'entities.quests.q_daily_murlocs.objectives.0.label': 'Мутноплав-пролаза: убито',
+  'entities.quests.q_daily_bandits.title': 'Ежедневно: Правосудие на дороге',
+  'entities.quests.q_daily_bandits.text':
+    'Дорожные разбойники снова обнаглели. Предайте 4 из них правосудию, {playerName}, и караваны пойдут спокойнее.',
+  'entities.quests.q_daily_bandits.completion':
+    'На четыре ножа на дороге меньше. Караваны у вас в долгу.',
+  'entities.quests.q_daily_bandits.objectives.0.label': 'Долинный разбойник: убито',
+  'entities.quests.q_daily_rats.title': 'Ежедневно: Борьба с вредителями',
+  'entities.quests.q_daily_rats.text':
+    'Шахтёры не могут удержать роющих вредителей подальше от копей. Уложите сегодня 6 глубинных землекопов, и они смогут работать спокойно.',
+  'entities.quests.q_daily_rats.completion':
+    'Ха! Шахтёры вернутся к кирке и лопате. Благодарю, {playerName}.',
+  'entities.quests.q_daily_rats.objectives.0.label': 'Глубинный землекоп: убито',
+  'entities.quests.q_daily_fangs.title': 'Ежедневно: Трофей из клыков',
+  'entities.quests.q_daily_fangs.text':
+    'В этом сезоне награду платят за клыки. Принесите мне 5 волчьих клыков от лесных волков, {playerName}.',
+  'entities.quests.q_daily_fangs.completion': 'Пять чистых клыков. Награда ваша.',
+  'entities.quests.q_daily_fangs.objectives.0.label': 'Волчий клык',
+  'entities.quests.q_daily_legs.title': 'Ежедневно: Паучьи части',
+  'entities.quests.q_daily_legs.text':
+    'Аптекарше нужны паучьи лапы для её настоек, и она платит за каждую. Соберите 5 паучьих лап в восточном лесу, {playerName}.',
+  'entities.quests.q_daily_legs.completion': 'Она будет довольна. Вот ваша доля.',
+  'entities.quests.q_daily_legs.objectives.0.label': 'Паучья лапа',
   'entities.quests.q_greyjaw.title': 'Старый волк',
   'entities.quests.q_greyjaw.text':
     'Есть волк, которого не удержала ни одна ловушка: старый Серочелюст. Он рыщет к северу от волчьих троп. Принесите его клык.',
@@ -4641,6 +4685,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.questTracker.count': '({count})',
   'hudChrome.questTracker.collapseHint': 'Свернуть трекер заданий',
   'hudChrome.questTracker.expandHint': 'Развернуть трекер заданий',
+  'hudChrome.questTracker.dailyBadge': 'Ежедневно',
   'hudChrome.bags.cannotDestroy': 'Этот предмет нельзя уничтожить.',
   'hudChrome.bags.rightClickDestroy': 'Правый клик, чтобы уничтожить',
   'hudChrome.bags.dragEquipHint': 'Перетащите на персонажа, чтобы надеть',

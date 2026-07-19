@@ -234,6 +234,14 @@ const QUEST_IDS = [
   'q_archetype_acceptance',
   'q_prof_make_amends',
   'q_prof_hobby_switch',
+  'q_daily_wolves',
+  'q_daily_boars',
+  'q_daily_spiders',
+  'q_daily_murlocs',
+  'q_daily_bandits',
+  'q_daily_rats',
+  'q_daily_fangs',
+  'q_daily_legs',
 ] as const;
 
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;

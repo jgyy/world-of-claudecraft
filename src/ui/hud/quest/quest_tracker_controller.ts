@@ -35,6 +35,7 @@ export class QuestTrackerController {
         number: quests.length + 1,
         title: this.deps.questTitle(progress.questId),
         complete: progress.state === 'ready',
+        daily: quest.isDaily === true,
         objectives: quest.objectives.map((_objective, objectiveIndex) => ({
           label: this.deps.objectiveLabel(progress.questId, objectiveIndex),
           current: progress.counts[objectiveIndex],
@@ -79,7 +80,10 @@ export class QuestTrackerController {
       `<span class="qt-h-label">${esc(t('questUi.tracker.title'))}</span>${count}</button>`;
     let rows = '';
     for (const quest of view.quests) {
-      rows += `<div class="qt-title" role="button" tabindex="0" data-quest="${esc(quest.id)}"><span class="qt-num">${esc(this.number(quest.number))}</span>${esc(quest.title)}${quest.complete ? ` <span class="quest-complete">(${esc(t('questUi.tracker.complete'))})</span>` : ''}</div>`;
+      const dailyBadge = quest.daily
+        ? ` <span class="qt-daily">${esc(t('hudChrome.questTracker.dailyBadge'))}</span>`
+        : '';
+      rows += `<div class="qt-title" role="button" tabindex="0" data-quest="${esc(quest.id)}"><span class="qt-num">${esc(this.number(quest.number))}</span>${esc(quest.title)}${dailyBadge}${quest.complete ? ` <span class="quest-complete">(${esc(t('questUi.tracker.complete'))})</span>` : ''}</div>`;
       for (const objective of quest.objectives) {
         rows += `<div class="qt-obj${objective.done ? ' done' : ''}">- ${esc(this.progressText(objective.label, objective.current, objective.total))}</div>`;
       }

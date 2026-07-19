@@ -56,6 +56,7 @@ export function computeQuestState(
   questsDone: Set<string>,
   playerLevel: number,
   professionState?: ArchetypeState,
+  dailyQuestIds?: string[],
 ): QuestState {
   const qp = questLog.get(questId);
   if (qp) return qp.state === 'ready' ? 'ready' : 'active';
@@ -65,6 +66,11 @@ export function computeQuestState(
   if (quest.requiresQuest && !questsDone.has(quest.requiresQuest)) return 'unavailable';
   if (quest.minLevel && playerLevel < quest.minLevel) return 'unavailable';
   if (quest.retired) return 'unavailable';
+  // A daily quest is only available if it is one of the character's currently
+  // rolled dailies for the day (rolled in talkToNpc, mirrored to the client).
+  if (quest.isDaily && (!dailyQuestIds || !dailyQuestIds.includes(questId))) {
+    return 'unavailable';
+  }
   if (
     quest.completionEffect &&
     professionState &&
@@ -84,6 +90,7 @@ export function questState(ctx: SimContext, questId: string, pid?: number): Ques
     r.meta.questsDone,
     r.e.level,
     r.meta.archetype,
+    r.meta.dailyQuests?.questIds,
   );
 }
 
@@ -294,6 +301,17 @@ export function turnInQuestCore(
   }
   qp.state = 'done';
   meta.questLog.delete(questId);
+  // Daily quests are once per server day: consume the turned-in daily from the
+  // rolled set so computeQuestState reports it unavailable until the next day's
+  // roll repopulates it (even though it is `repeatable`). wireRev bumps so the
+  // mirrored `dailyQuests` field re-sends on the next snapshot.
+  if (quest.isDaily && meta.dailyQuests) {
+    meta.dailyQuests = {
+      day: meta.dailyQuests.day,
+      questIds: meta.dailyQuests.questIds.filter((id) => id !== questId),
+    };
+    meta.wireRev++;
+  }
   const firstCompletion = !meta.questsDone.has(questId);
   meta.questsDone.add(questId);
   if (firstCompletion) meta.counters.questsCompleted++;

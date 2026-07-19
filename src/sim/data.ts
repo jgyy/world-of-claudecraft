@@ -25,6 +25,7 @@ import type {
 
 export type { FishingEntry } from './content/items';
 
+import { DAILY_QUEST_ORDER, DAILY_QUESTS } from './content/daily_quests';
 import {
   BROTHER_HALVEN,
   BROTHER_HALVEN_MARSH,
@@ -220,6 +221,7 @@ export const QUESTS: Record<string, QuestDef> = {
   ...ZONE2_QUESTS,
   ...ZONE3_QUESTS,
   ...TEMPLE_QUESTS,
+  ...DAILY_QUESTS,
 };
 
 export const QUEST_ORDER: string[] = [
@@ -227,6 +229,7 @@ export const QUEST_ORDER: string[] = [
   ...ZONE2_QUEST_ORDER,
   ...ZONE3_QUEST_ORDER,
   ...TEMPLE_QUEST_ORDER,
+  ...DAILY_QUEST_ORDER,
 ];
 
 // The Book of Deeds catalog (content/deeds.ts) is deliberately NOT re-exported

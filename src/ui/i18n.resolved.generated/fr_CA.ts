@@ -703,7 +703,8 @@ export const fr_CA: EnTranslations = {
     "questTracker": {
       "count": "({count})",
       "collapseHint": "Réduire le suivi des quêtes",
-      "expandHint": "Développer le suivi des quêtes"
+      "expandHint": "Développer le suivi des quêtes",
+      "dailyBadge": "Daily"
     },
     "interfaceTabs": {
       "general": "General",
@@ -10615,6 +10616,86 @@ export const fr_CA: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Parcelle de plantes récoltée"
+          }
+        }
+      },
+      "q_daily_wolves": {
+        "title": "Daily: Culling the Pack",
+        "text": "The wolves never stop testing the north road, {playerName}. Thin them again today. Slay 6 Forest Wolves and I will see you paid.",
+        "completion": "Good. A day the wolves lose is a day Eastbrook wins.",
+        "objectives": {
+          "0": {
+            "label": "Forest Wolf slain"
+          }
+        }
+      },
+      "q_daily_boars": {
+        "title": "Daily: Boar Trouble",
+        "text": "The boars in the western meadows root up the fields faster than the farmers can mend them. Put down 6 Wild Boars for me, {playerName}.",
+        "completion": "The farmers will thank you, even if the boars will not.",
+        "objectives": {
+          "0": {
+            "label": "Wild Boar slain"
+          }
+        }
+      },
+      "q_daily_spiders": {
+        "title": "Daily: Clearing the Webs",
+        "text": "The lurkers in the eastern woods breed faster than we can burn their webs. Cull 5 Sableweb Lurkers today, {playerName}.",
+        "completion": "One less nest to worry about. My thanks.",
+        "objectives": {
+          "0": {
+            "label": "Sableweb Lurker slain"
+          }
+        }
+      },
+      "q_daily_murlocs": {
+        "title": "Daily: Driving Back the Mudfin",
+        "text": "The mudfin creep further up from the lake each night. Drive 5 of them back into the shallows, {playerName}.",
+        "completion": "The lakeshore is a little safer for it. Well done.",
+        "objectives": {
+          "0": {
+            "label": "Mudfin Skulker slain"
+          }
+        }
+      },
+      "q_daily_bandits": {
+        "title": "Daily: Highway Justice",
+        "text": "The road bandits grow bold again. Bring 4 of them to justice, {playerName}, and the caravans will roll easier.",
+        "completion": "Four fewer knives on the road. The caravans owe you.",
+        "objectives": {
+          "0": {
+            "label": "Vale Bandit slain"
+          }
+        }
+      },
+      "q_daily_rats": {
+        "title": "Daily: Vermin Control",
+        "text": "The miners cannot keep the burrowing vermin out of the dig. Put down 6 Deeprock Diggers today and they can work in peace.",
+        "completion": "Back to the pick and shovel for the miners. My thanks, {playerName}.",
+        "objectives": {
+          "0": {
+            "label": "Deeprock Digger slain"
+          }
+        }
+      },
+      "q_daily_fangs": {
+        "title": "Daily: A Trophy of Fangs",
+        "text": "The bounty board pays by the fang this season. Bring me 5 Wolf Fangs from the forest wolves, {playerName}.",
+        "completion": "Five clean fangs. The bounty is yours.",
+        "objectives": {
+          "0": {
+            "label": "Wolf Fang"
+          }
+        }
+      },
+      "q_daily_legs": {
+        "title": "Daily: Spider Parts",
+        "text": "The apothecary wants spider legs for her tinctures and pays a bounty on each. Gather 5 Spider Legs from the eastern woods, {playerName}.",
+        "completion": "She will be pleased. Here is your share.",
+        "objectives": {
+          "0": {
+            "label": "Spider Leg"
           }
         }
       },

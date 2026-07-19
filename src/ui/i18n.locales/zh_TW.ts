@@ -3301,6 +3301,46 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
     '森林狼已敢撲咬北路旅人，{playerName}。擊敗8隻森林狼，讓東溪能鬆一口氣。',
   'entities.quests.q_wolves.completion': '做得好。道路已經安全多了。',
   'entities.quests.q_wolves.objectives.0.label': '擊敗森林狼',
+  'entities.quests.q_daily_wolves.title': '每日：削減狼群',
+  'entities.quests.q_daily_wolves.text':
+    '狼群從不停止試探北邊的道路，{playerName}。今天再削減牠們一次吧。擊殺6隻森林狼，我會付你酬勞。',
+  'entities.quests.q_daily_wolves.completion': '很好。狼群損失的一天，就是東溪鎮獲勝的一天。',
+  'entities.quests.q_daily_wolves.objectives.0.label': '擊敗森林狼',
+  'entities.quests.q_daily_boars.title': '每日：野豬之患',
+  'entities.quests.q_daily_boars.text':
+    '西邊草甸的野豬把田地拱得比農夫修補的還快。替我放倒6頭野豬，{playerName}。',
+  'entities.quests.q_daily_boars.completion': '農夫們會感激你的，儘管野豬不會。',
+  'entities.quests.q_daily_boars.objectives.0.label': '擊敗野豬',
+  'entities.quests.q_daily_spiders.title': '每日：清除蛛網',
+  'entities.quests.q_daily_spiders.text':
+    '東邊林中的潛伏者繁殖得比我們焚燒蛛網還快。今天清剿5隻黑紋潛伏者，{playerName}。',
+  'entities.quests.q_daily_spiders.completion': '少了一處需要擔心的巢穴。多謝。',
+  'entities.quests.q_daily_spiders.objectives.0.label': '擊敗黑紋潛伏者',
+  'entities.quests.q_daily_murlocs.title': '每日：擊退泥鰭',
+  'entities.quests.q_daily_murlocs.text':
+    '泥鰭魚人每晚都從湖裡往上爬得更遠。把牠們中的5隻趕回淺灘去，{playerName}。',
+  'entities.quests.q_daily_murlocs.completion': '湖岸因此安全了些。幹得好。',
+  'entities.quests.q_daily_murlocs.objectives.0.label': '擊敗泥鰭潛行者',
+  'entities.quests.q_daily_bandits.title': '每日：公路正義',
+  'entities.quests.q_daily_bandits.text':
+    '路上的強盜又猖狂起來了。將牠們中的4個繩之以法，{playerName}，商隊就能走得更順暢。',
+  'entities.quests.q_daily_bandits.completion': '路上少了四把刀。商隊欠你一個人情。',
+  'entities.quests.q_daily_bandits.objectives.0.label': '擊敗河谷強盜',
+  'entities.quests.q_daily_rats.title': '每日：滅害',
+  'entities.quests.q_daily_rats.text':
+    '礦工們擋不住鑽洞的害蟲湧入礦井。今天放倒6隻深岩挖掘者，他們就能安心幹活了。',
+  'entities.quests.q_daily_rats.completion': '哈！礦工們可以回去掄鎬了。多謝，{playerName}。',
+  'entities.quests.q_daily_rats.objectives.0.label': '擊敗深岩挖掘者',
+  'entities.quests.q_daily_fangs.title': '每日：狼牙戰利品',
+  'entities.quests.q_daily_fangs.text':
+    '這個季節賞金按狼牙計算。從森林狼身上給我帶來5枚狼牙，{playerName}。',
+  'entities.quests.q_daily_fangs.completion': '五枚乾淨的狼牙。賞金歸你了。',
+  'entities.quests.q_daily_fangs.objectives.0.label': '狼牙',
+  'entities.quests.q_daily_legs.title': '每日：蜘蛛部件',
+  'entities.quests.q_daily_legs.text':
+    '藥劑師需要蜘蛛腿做她的酊劑，並為每條付賞金。從東邊林中採集5條蜘蛛腿，{playerName}。',
+  'entities.quests.q_daily_legs.completion': '她會滿意的。這是你的那份。',
+  'entities.quests.q_daily_legs.objectives.0.label': '蜘蛛腿',
   'entities.quests.q_greyjaw.title': '老狼',
   'entities.quests.q_greyjaw.text':
     '老灰顎從未被陷阱困住。牠在狼徑北面的深林遊蕩，把牠的尖牙帶回來。',
@@ -4411,6 +4451,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.questTracker.count': '（{count}）',
   'hudChrome.questTracker.collapseHint': '收合任務追蹤器',
   'hudChrome.questTracker.expandHint': '展開任務追蹤器',
+  'hudChrome.questTracker.dailyBadge': '每日',
   'hudChrome.bags.cannotDestroy': '此物品無法銷毀。',
   'hudChrome.bags.rightClickDestroy': '右鍵單擊以銷毀',
   'hudChrome.bags.dragEquipHint': '拖曳到角色身上以裝備',

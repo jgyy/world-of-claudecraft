@@ -703,7 +703,8 @@ export const zh_TW: EnTranslations = {
     "questTracker": {
       "count": "（{count}）",
       "collapseHint": "收合任務追蹤器",
-      "expandHint": "展開任務追蹤器"
+      "expandHint": "展開任務追蹤器",
+      "dailyBadge": "每日"
     },
     "interfaceTabs": {
       "general": "一般",
@@ -10615,6 +10616,86 @@ export const zh_TW: EnTranslations = {
         "objectives": {
           "0": {
             "label": "採集草藥叢"
+          }
+        }
+      },
+      "q_daily_wolves": {
+        "title": "每日：削減狼群",
+        "text": "狼群從不停止試探北邊的道路，{playerName}。今天再削減牠們一次吧。擊殺6隻森林狼，我會付你酬勞。",
+        "completion": "很好。狼群損失的一天，就是東溪鎮獲勝的一天。",
+        "objectives": {
+          "0": {
+            "label": "擊敗森林狼"
+          }
+        }
+      },
+      "q_daily_boars": {
+        "title": "每日：野豬之患",
+        "text": "西邊草甸的野豬把田地拱得比農夫修補的還快。替我放倒6頭野豬，{playerName}。",
+        "completion": "農夫們會感激你的，儘管野豬不會。",
+        "objectives": {
+          "0": {
+            "label": "擊敗野豬"
+          }
+        }
+      },
+      "q_daily_spiders": {
+        "title": "每日：清除蛛網",
+        "text": "東邊林中的潛伏者繁殖得比我們焚燒蛛網還快。今天清剿5隻黑紋潛伏者，{playerName}。",
+        "completion": "少了一處需要擔心的巢穴。多謝。",
+        "objectives": {
+          "0": {
+            "label": "擊敗黑紋潛伏者"
+          }
+        }
+      },
+      "q_daily_murlocs": {
+        "title": "每日：擊退泥鰭",
+        "text": "泥鰭魚人每晚都從湖裡往上爬得更遠。把牠們中的5隻趕回淺灘去，{playerName}。",
+        "completion": "湖岸因此安全了些。幹得好。",
+        "objectives": {
+          "0": {
+            "label": "擊敗泥鰭潛行者"
+          }
+        }
+      },
+      "q_daily_bandits": {
+        "title": "每日：公路正義",
+        "text": "路上的強盜又猖狂起來了。將牠們中的4個繩之以法，{playerName}，商隊就能走得更順暢。",
+        "completion": "路上少了四把刀。商隊欠你一個人情。",
+        "objectives": {
+          "0": {
+            "label": "擊敗河谷強盜"
+          }
+        }
+      },
+      "q_daily_rats": {
+        "title": "每日：滅害",
+        "text": "礦工們擋不住鑽洞的害蟲湧入礦井。今天放倒6隻深岩挖掘者，他們就能安心幹活了。",
+        "completion": "哈！礦工們可以回去掄鎬了。多謝，{playerName}。",
+        "objectives": {
+          "0": {
+            "label": "擊敗深岩挖掘者"
+          }
+        }
+      },
+      "q_daily_fangs": {
+        "title": "每日：狼牙戰利品",
+        "text": "這個季節賞金按狼牙計算。從森林狼身上給我帶來5枚狼牙，{playerName}。",
+        "completion": "五枚乾淨的狼牙。賞金歸你了。",
+        "objectives": {
+          "0": {
+            "label": "狼牙"
+          }
+        }
+      },
+      "q_daily_legs": {
+        "title": "每日：蜘蛛部件",
+        "text": "藥劑師需要蜘蛛腿做她的酊劑，並為每條付賞金。從東邊林中採集5條蜘蛛腿，{playerName}。",
+        "completion": "她會滿意的。這是你的那份。",
+        "objectives": {
+          "0": {
+            "label": "蜘蛛腿"
           }
         }
       },

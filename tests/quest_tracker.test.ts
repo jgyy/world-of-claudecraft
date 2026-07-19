@@ -8,6 +8,7 @@ const QUESTS: TrackedQuest[] = [
     number: 1,
     title: 'Wolves at the Door',
     complete: false,
+    daily: false,
     objectives: [{ label: 'Forest Wolf slain', current: 0, total: 8 }],
   },
   {
@@ -15,6 +16,7 @@ const QUESTS: TrackedQuest[] = [
     number: 2,
     title: 'Webwood Menace',
     complete: true,
+    daily: true,
     objectives: [
       { label: 'Webwood Lurker slain', current: 6, total: 6 },
       { label: 'Sableweb Silk Gland', current: 4, total: 4 },
@@ -45,6 +47,8 @@ describe('questTrackerView', () => {
     expect(v.quests[0].objectives[0].done).toBe(false); // 0/8
     expect(v.quests[1].complete).toBe(true);
     expect(v.quests[1].objectives.map((o) => o.done)).toEqual([true, true]); // 6/6, 4/4
+    // the daily flag rides through to the row (drives the "Daily" marker)
+    expect(v.quests.map((q) => q.daily)).toEqual([false, true]);
   });
 
   it('collapsed: header only, but keeps the quest count', () => {
@@ -63,6 +67,7 @@ describe('questTrackerView', () => {
           number: 1,
           title: 'X',
           complete: false,
+          daily: false,
           objectives: [{ label: 'o', current: 9, total: 8 }],
         },
       ],
@@ -79,6 +84,7 @@ describe('questTrackerView', () => {
           number: 1,
           title: 'X',
           complete: false,
+          daily: false,
           objectives: [{ label: 'o', current: 0, total: 0 }],
         },
       ],
@@ -94,6 +100,7 @@ describe('questTrackerView', () => {
         number: 1,
         title: 'A',
         complete: false,
+        daily: false,
         objectives: [{ label: 'o', current: 1, total: 2 }],
       },
     ];

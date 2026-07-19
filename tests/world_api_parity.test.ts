@@ -109,6 +109,7 @@ export const IWORLD_MEMBERS = [
   { name: 'activeTemporalHourglasses', kind: 'data' },
   { name: 'questLog', kind: 'data' },
   { name: 'questsDone', kind: 'data' },
+  { name: 'dailyQuests', kind: 'data' },
   // --- commands + read-returning methods ---
   { name: 'questState', kind: 'method' }, // read-returning (1/6)
   { name: 'castAbility', kind: 'method' },
@@ -460,10 +461,10 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // The merged Talent V2 + mage-line surface (selectTalentRow supersedes
     // pickRowTalent; rowPicks stays off the seam, rows live on the allocation)
     // plus the release's Card Duel facet, the Professions 2.0 identity
-    // surface, and Phase 8's mobile-station pair (placeMobileStation +
-    // activeMobileStationCraft).
-    expect(IWORLD_MEMBERS.length).toBe(253);
-    expect(DATA_MEMBERS.length).toBe(68);
+    // surface, Phase 8's mobile-station pair (placeMobileStation +
+    // activeMobileStationCraft), and this branch's dailyQuests member.
+    expect(IWORLD_MEMBERS.length).toBe(254);
+    expect(DATA_MEMBERS.length).toBe(69);
     expect(METHOD_MEMBERS.length).toBe(185);
   });
   it('has no duplicate member names', () => {
@@ -536,6 +537,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'craftSkills',
       'craftingIdentity',
       'cupInfo',
+      'dailyQuests',
       'dailyRewardHistory',
       'dailyRewardLeaderboard',
       'dailyRewards',
@@ -756,6 +758,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'craftSkills',
       'craftingIdentity',
       'cupInfo',
+      'dailyQuests',
       'deedStats',
       'deedsEarned',
       'delveDaily',
@@ -1149,6 +1152,7 @@ type _ExhaustCosmetics = AssertNever<
 const FACET_QUESTS = [
   'questLog',
   'questsDone',
+  'dailyQuests',
   'questState',
   'acceptQuest',
   'turnInQuest',
@@ -1502,10 +1506,10 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the 28 fa
     expect(overlaps, `members filed in more than one facet:\n${overlaps.join('\n')}`).toEqual([]);
   });
 
-  it('the union of the 28 facets equals the pinned 251-member IWORLD_MEMBERS set', () => {
+  it('the union of the 28 facets equals the pinned 254-member IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(253);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(253);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(254);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(254);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

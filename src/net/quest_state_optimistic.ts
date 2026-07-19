@@ -31,6 +31,7 @@ export function optimisticQuestState(
   pendingQuestCommands: Map<string, 'accept' | 'turnin'>,
   playerLevel: number,
   professionState?: ArchetypeState,
+  dailyQuestIds?: string[],
 ): QuestState {
   let effectiveDone = questsDone;
   if (pendingQuestCommands.size > 0) {
@@ -41,7 +42,14 @@ export function optimisticQuestState(
       }
     }
   }
-  const state = computeQuestState(questId, questLog, effectiveDone, playerLevel, professionState);
+  const state = computeQuestState(
+    questId,
+    questLog,
+    effectiveDone,
+    playerLevel,
+    professionState,
+    dailyQuestIds,
+  );
   const pending = pendingQuestCommands.get(questId);
   if (
     (pending === 'accept' && state === 'available') ||

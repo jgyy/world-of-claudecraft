@@ -703,7 +703,8 @@ export const ja_JP: EnTranslations = {
     "questTracker": {
       "count": "（{count}）",
       "collapseHint": "クエストトラッカーを折りたたむ",
-      "expandHint": "クエストトラッカーを展開する"
+      "expandHint": "クエストトラッカーを展開する",
+      "dailyBadge": "デイリー"
     },
     "interfaceTabs": {
       "general": "全般",
@@ -10615,6 +10616,86 @@ export const ja_JP: EnTranslations = {
         "objectives": {
           "0": {
             "label": "薬草の群生地を採集"
+          }
+        }
+      },
+      "q_daily_wolves": {
+        "title": "デイリー：群れの間引き",
+        "text": "狼どもは北の街道を狙うのをやめない、{playerName}。今日もまた数を減らしてくれ。森の狼を6匹倒せば、報酬を払おう。",
+        "completion": "よくやった。狼が減る日は、イーストブルックが勝つ日だ。",
+        "objectives": {
+          "0": {
+            "label": "森の狼を討伐"
+          }
+        }
+      },
+      "q_daily_boars": {
+        "title": "デイリー：イノシシの厄介事",
+        "text": "西の草原のイノシシは、農夫が直すより早く畑を掘り返す。イノシシを6頭仕留めてくれ、{playerName}。",
+        "completion": "農夫たちは感謝するだろう。イノシシはしないだろうがな。",
+        "objectives": {
+          "0": {
+            "label": "野生のイノシシを討伐"
+          }
+        }
+      },
+      "q_daily_spiders": {
+        "title": "デイリー：巣の一掃",
+        "text": "東の森の潜む者は、我々が巣を焼くより早く増える。今日はセイブルウェブの潜む者を5匹駆除してくれ、{playerName}。",
+        "completion": "心配の種がひとつ減った。感謝する。",
+        "objectives": {
+          "0": {
+            "label": "セイブルウェブの潜む者を討伐"
+          }
+        }
+      },
+      "q_daily_murlocs": {
+        "title": "デイリー：マッドフィンの撃退",
+        "text": "マッドフィンは夜ごとに湖から這い上がってくる。5匹を浅瀬へ追い返してくれ、{playerName}。",
+        "completion": "湖畔が少しは安全になった。よくやった。",
+        "objectives": {
+          "0": {
+            "label": "マッドフィンの潜伏者を討伐"
+          }
+        }
+      },
+      "q_daily_bandits": {
+        "title": "デイリー：街道の正義",
+        "text": "街道の山賊がまた大胆になってきた。4人を裁きにかけてくれ、{playerName}。そうすれば隊商も楽に通れる。",
+        "completion": "街道の刃が四本減った。隊商は君に借りができたな。",
+        "objectives": {
+          "0": {
+            "label": "ヴェイルの山賊を討伐"
+          }
+        }
+      },
+      "q_daily_rats": {
+        "title": "デイリー：害獣駆除",
+        "text": "坑夫たちは掘り進む害獣を坑道から締め出せずにいる。今日は深岩の掘り屋を6匹倒せば、彼らも安心して働ける。",
+        "completion": "はは！坑夫たちはつるはしに戻れる。感謝する、{playerName}。",
+        "objectives": {
+          "0": {
+            "label": "深岩の掘り屋を討伐"
+          }
+        }
+      },
+      "q_daily_fangs": {
+        "title": "デイリー：牙の戦利品",
+        "text": "今季の賞金は牙の数で払われる。森の狼から狼の牙を5本持ってきてくれ、{playerName}。",
+        "completion": "きれいな牙が5本。賞金は君のものだ。",
+        "objectives": {
+          "0": {
+            "label": "狼の牙"
+          }
+        }
+      },
+      "q_daily_legs": {
+        "title": "デイリー：蜘蛛の部位",
+        "text": "薬師が蜘蛛の脚を欲しがっていて、一本ごとに賞金を出す。東の森で蜘蛛の脚を5本集めてくれ、{playerName}。",
+        "completion": "彼女は喜ぶだろう。これは君の分だ。",
+        "objectives": {
+          "0": {
+            "label": "蜘蛛の脚"
           }
         }
       },

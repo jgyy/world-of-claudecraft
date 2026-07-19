@@ -2488,6 +2488,11 @@ export interface QuestDef {
   // Repeatable quests remain in questsDone as history but become available
   // again when they are not active.
   repeatable?: boolean;
+  // Daily quests are a repeatable quest that Marshal Redbrook offers from a
+  // rotating pool: only the 3 rolled for the character's current server day are
+  // available (the roll lives in src/sim/quests/daily_quest_pool.ts, gated in
+  // computeQuestState). Always set alongside repeatable: true.
+  isDaily?: boolean;
   // Typed, server-authoritative profession transition applied only by the
   // validated turn-in path. The selected target is persisted on QuestProgress.
   completionEffect?: { type: 'attunePair'; mode: 'new' | 'return' } | { type: 'switchHobby' };
