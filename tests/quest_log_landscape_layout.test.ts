@@ -39,6 +39,9 @@ describe('quest log: landscape window + single-scroll detail pane', () => {
 
   it('widens the later window-frame-phase #quest-log-window rule too (it cascades last and would otherwise win), without overriding the shared width clamp', () => {
     const occurrences = [...css.matchAll(/#quest-log-window \{/g)];
+    // Pinning the exact count on purpose: both rules must move together. If a
+    // legitimate third `#quest-log-window { ... }` block is ever added, widen it
+    // to match the other two and bump this count rather than deleting the check.
     expect(occurrences.length).toBe(2);
     const start = occurrences[1].index ?? -1;
     expect(start).toBeGreaterThan(0);
