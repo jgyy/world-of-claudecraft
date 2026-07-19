@@ -406,6 +406,49 @@ export const TARGETS = [
     },
   },
   {
+    key: 'chat-flair-class-color',
+    label: 'Chat: class-colored name + verified-streamer badge',
+    when: ['ui/hud/chat/chat_line'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    // Synthesizes one party-channel 'chat' SimEvent, anchored on the real player
+    // entity (so its class resolves and the sender name colors accordingly) with
+    // a fabricated streamer flair, through the real dispatch (hud.handleEvents).
+    // Mirrors the log_event_route targets above: no live second player needed.
+    async capture(page, variant) {
+      // On mobile the chat log is collapsed behind the overlay toggle (body
+      // .mobile-chat-open); a real tap on the chat-open control sets this same
+      // class (src/game/mobile_controls.ts), so this reproduces that state
+      // directly rather than re-deriving the touch gesture.
+      if (variant?.mobile) {
+        await page.evaluate(() => document.body.classList.add('mobile-chat-open'));
+      }
+      await pollForSize(page, '#chatlog-wrap', 60, 500);
+      await page.evaluate(() => {
+        const hud = window.__game?.hud;
+        const sim = window.__game?.sim;
+        if (!hud || !sim) return;
+        hud.handleEvents([
+          {
+            type: 'chat',
+            channel: 'party',
+            from: sim.player?.name ?? 'Zyx',
+            fromPid: sim.playerId,
+            text: 'flair check: class color + streamer badge',
+            flair: { links: { twitch: 'https://twitch.tv/zyx' } },
+          },
+        ]);
+      });
+      await wait(300);
+      await page.evaluate(() => {
+        document
+          .querySelector('#chatlog-tabs button[data-tab="all"]')
+          ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      });
+      await wait(200);
+      return { clip: '#chatlog-wrap' };
+    },
+  },
+  {
     key: 'gpu-notice',
     label: 'Software rendering notice',
     when: ['ui/gpu_notice', 'render/software_renderer', 'game/software_render_notice'],
