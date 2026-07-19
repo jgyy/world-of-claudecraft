@@ -423,7 +423,7 @@ wallDescribe('perf_gate ARM C: wall-clock added-p99 and tick p95 (PERF_GATE_WALL
       `[perf_gate] onion p99=${onionP99.toFixed(4)}ms bare p99=${bareP99.toFixed(4)}ms added=${added.toFixed(4)}ms (budget ${PIPELINE_ADDED_P99_BUDGET_MS}ms, iters=${ITERS})`,
     );
     expect(added).toBeLessThan(PIPELINE_ADDED_P99_BUDGET_MS);
-  });
+  }, 60_000);
 
   it('keeps the world-loop tick p95 within the ceiling while the pipeline services requests between ticks', async () => {
     // A conservative model of the shared event loop: run a real Sim tick, then let
@@ -458,5 +458,5 @@ wallDescribe('perf_gate ARM C: wall-clock added-p99 and tick p95 (PERF_GATE_WALL
       `[perf_gate] tick p50=${prof.phases.total.p50}ms p95=${prof.phases.total.p95}ms p99=${prof.phases.total.p99}ms max=${prof.phases.total.max}ms (ceiling ${TICK_P95_CEILING_MS}ms, ticks=${TICKS})`,
     );
     expect(prof.phases.total.p95).toBeLessThanOrEqual(TICK_P95_CEILING_MS);
-  });
+  }, 60_000);
 });

@@ -147,9 +147,12 @@ describe('hit-table roll (warrior defense / spell resist / ranged profile) high-
     // correctly branches both the wand path (keeps the class ranged profile) and
     // the weapon path (adopts the carried weapon's range), so the budgets above
     // are not passing vacuously against an empty or single-branch scenario.
-    expect(parryCapable).toBe(warriors.length);
-    expect(wandProfiles).toBe(warriors.length);
-    expect(hunterProfiles).toBe(warriors.length);
+    // Pinned to the literal PAIRS (not warriors.length) so a build that
+    // collapses the roster to zero cannot pass these vacuously as 0 === 0.
+    expect(warriors.length).toBe(PAIRS);
+    expect(parryCapable).toBe(PAIRS);
+    expect(wandProfiles).toBe(PAIRS);
+    expect(hunterProfiles).toBe(PAIRS);
     expect(resists).toBeGreaterThanOrEqual(0);
   }, 60_000);
 });

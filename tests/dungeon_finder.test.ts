@@ -20,6 +20,7 @@ import {
   normalizeFinderSelection,
 } from '../src/sim/social/dungeon_finder';
 import type { PlayerClass, SimEvent } from '../src/sim/types';
+import type { DungeonFinderProposalView } from '../src/world_api/dungeon_finder';
 
 const FIVE = { tank: 1, healer: 1, dps: 3 };
 const TEN = { tank: 2, healer: 2, dps: 6 };
@@ -696,6 +697,43 @@ describe('automatic queue', () => {
       return { roles, leader: party?.leader, members: [...(party?.members ?? [])] };
     };
     expect(run()).toEqual(run());
+  });
+
+  it('still forms a matchable group behind a large unmatchable prefix that exhausts the shared node budget', () => {
+    // Reproduces the shared-budget livelock: a healer queues first, then a
+    // long dps-only prefix (no tank among them, so the oldest anchor's DFS
+    // alone can burn the whole shared node budget proving no match exists
+    // among its FIFO window), then a tank joins last. Without resuming from
+    // a persisted anchor cursor on a truncated pass, the tank (and the
+    // matchable {tank, healer, 3 dps} group hiding behind the prefix) would
+    // never get a turn as its own anchor and the group would never form.
+    const sim = makeSim();
+    const healer = addPlayers(sim, [{ cls: 'priest', roles: ['healer'], level: 8 }])[0];
+    sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], healer);
+    const dpsBacklog = addPlayers(
+      sim,
+      Array.from({ length: 23 }, (_, i) => ({
+        cls: 'mage' as PlayerClass,
+        roles: ['dps'] as Role[],
+        level: 8,
+        name: `D${i}`,
+      })),
+    );
+    for (const pid of dpsBacklog) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
+    const tank = addPlayers(sim, [{ cls: 'warrior', roles: ['tank'], level: 8 }])[0];
+    sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], tank);
+
+    // Bounded number of ticks: each truncated pass advances the anchor
+    // cursor by at least one anchor, so the tank (queued last, 25th anchor)
+    // must get a turn well within this budget of ticks.
+    let proposal: DungeonFinderProposalView | null = null;
+    for (let i = 0; i < 40 && !proposal; i++) {
+      tickAll(sim, 1);
+      proposal = sim.dungeonFinderInfoFor(tank)?.proposal ?? null;
+    }
+    expect(proposal).not.toBeNull();
+    expect(proposal?.role).toBe('tank');
+    expect(sim.dungeonFinderInfoFor(healer)?.proposal?.role).toBe('healer');
   });
 });
 

@@ -214,6 +214,12 @@ export class DungeonFinderMachine {
   private nextApplicationSeq = 1;
   // Set by any queue mutation; matching runs once per tick at most.
   private matchDirty = false;
+  // Anchor to resume from on the next runMatching() pass: when the shared
+  // node budget is exhausted before every anchor was tried, we re-arm
+  // matchDirty and remember where we stopped so the NEXT pass starts there
+  // instead of re-spending the whole budget on the same oldest anchors every
+  // tick (see runMatching).
+  private matchCursorUnitId: number | null = null;
   // Board projection cache (viewer-independent): rebuilt when the revision
   // bumps or on the once-a-second sweep (party rosters mutate outside finder
   // commands), then delta-elided on the wire by the encoder.
@@ -891,16 +897,36 @@ export class DungeonFinderMachine {
     // own fresh budget, scaling total per-tick cost with the anchor count
     // instead of bounding it (see FINDER_MATCH_NODE_BUDGET).
     const budgetBox = { remaining: FINDER_MATCH_NODE_BUDGET };
-    // Stable FIFO order: original join time, then unit id.
     let changed = true;
+    let truncated = false;
     while (changed && budgetBox.remaining > 0) {
       changed = false;
+      // Stable FIFO order: original join time, then unit id, ROTATED to start
+      // just after the anchor the previous truncated pass stopped at (see
+      // matchCursorUnitId). A budget-imbalanced backlog (e.g. a long
+      // all-dps prefix in front of a formable comp) would otherwise let the
+      // oldest anchors alone exhaust the shared budget on every single tick,
+      // starving every later anchor including the one that could actually
+      // form a group: rotating guarantees each anchor eventually gets a turn
+      // at bounded per-tick cost, still in FIFO order once traversal wraps.
       const sorted = [...this.queue].sort((a, b) => a.joinedAt - b.joinedAt || a.id - b.id);
-      for (const anchor of sorted) {
-        if (budgetBox.remaining <= 0) break;
+      const cursorIndex =
+        this.matchCursorUnitId === null
+          ? -1
+          : sorted.findIndex((u) => u.id === this.matchCursorUnitId);
+      const startIndex = cursorIndex < 0 ? 0 : (cursorIndex + 1) % sorted.length;
+      const rotated = sorted.slice(startIndex).concat(sorted.slice(0, startIndex));
+      for (const anchor of rotated) {
+        if (budgetBox.remaining <= 0) {
+          truncated = true;
+          break;
+        }
         const anchorActivities = this.eligibleActivitiesFor(anchor);
         for (const activityId of anchorActivities) {
-          if (budgetBox.remaining <= 0) break;
+          if (budgetBox.remaining <= 0) {
+            truncated = true;
+            break;
+          }
           const activity = finderActivity(activityId);
           if (!activity || activity.composition === null) continue;
           const match = this.tryAssemble(sorted, anchor, activity, budgetBox);
@@ -909,8 +935,19 @@ export class DungeonFinderMachine {
           changed = true;
           break;
         }
-        if (changed) break;
+        if (changed || truncated) break;
+        // Fully attempted this anchor within budget: resume after it next
+        // pass so a later pass advances past it instead of retrying it first.
+        this.matchCursorUnitId = anchor.id;
       }
+      if (truncated) break;
+    }
+    if (truncated) {
+      // Budget ran out mid-pass: re-arm so the next tick's update() resumes
+      // matching from where we stopped instead of silently going idle.
+      this.matchDirty = true;
+    } else {
+      this.matchCursorUnitId = null;
     }
   }
 

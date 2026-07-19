@@ -128,8 +128,11 @@ describe('dealDamage/handleDeath high-load regression budget', () => {
     );
 
     // Shape sanity: every mob in the cluster actually died this wave, so the
-    // budget below is not passing vacuously against an empty scenario.
-    expect(dead).toBe(mobs.length);
+    // budget below is not passing vacuously against an empty scenario. Pinned
+    // to the literal PAIRS (not mobs.length) so a build that collapses the
+    // roster to zero cannot pass 0 === 0.
+    expect(mobs.length).toBe(PAIRS);
+    expect(dead).toBe(PAIRS);
 
     // Generous absolute budget for one simultaneous kill-everything wave.
     expect(elapsed).toBeLessThan(150);
