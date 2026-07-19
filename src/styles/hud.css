@@ -805,13 +805,13 @@
     align-items: center;
     justify-content: center;
   }
-  /* Jeweled twin-ring around the portrait disc (ornament_svg.ts,
-     PORTRAIT_RING_OUTER_R): two thin concentric strokes, a diamond gem at
-     each cardinal point, a dot at each diagonal, sitting just outside the
-     existing 3px border ring as a second, ornamental layer. Masks --border,
-     so it recolors with the theme. .portrait-wrap centers its 60px .portrait
-     child (see above), so this ring is concentric with the actual portrait
-     circle, not just with the 64px wrap box. */
+  /* Single hand-gilded ring around the portrait disc (ornament_svg.ts,
+     PORTRAIT_RING_OUTER_R, ringInner): one thin noisy stroke, sitting just
+     outside the existing 3px gilded border ring as a second, ornamental
+     layer. Masks --ornament-gilt, so it recolors with the theme.
+     .portrait-wrap centers its 60px .portrait child (see above), so this
+     ring is concentric with the actual portrait circle, not just with the
+     64px wrap box. */
   .portrait-wrap::after {
     content: "";
     position: absolute;
@@ -3673,10 +3673,11 @@
     display: inline-block;
     line-height: 0;
   }
-  /* Jeweled twin-ring around the minimap, the same primitive and mechanism
-     as the unit-frame portrait ring (ornament_svg.ts, MINIMAP_RING_OUTER_R):
-     two thin concentric strokes, cardinal gems, diagonal dots, sized for the
-     minimap's larger disc and sitting just outside its existing 4px border. */
+  /* Single hand-gilded ring around the minimap, the same primitive and
+     mechanism as the unit-frame portrait ring (ornament_svg.ts,
+     MINIMAP_RING_OUTER_R, ringInner): one thin noisy stroke, sized for the
+     minimap's larger disc and sitting just outside its existing gilded
+     border. */
   #minimap-disc::after {
     content: "";
     position: absolute;
@@ -5935,55 +5936,24 @@
     margin-bottom: 4px;
     font-family: Georgia, serif;
   }
+  /* .prompt-number is a native <input> (bank_window.ts / bags_window.ts):
+     replaced elements cannot carry ::before/::after (the mask-ribbon trick
+     used elsewhere silently renders nothing here), so this uses the
+     two-layer gradient-border technique instead, same as .trade-money
+     input / #report-window select,textarea / .bug-desc. */
   .prompt .prompt-number {
-    position: relative;
     width: 82px;
     margin: 8px 8px 6px 0;
     padding: 5px 7px;
     border: 1px solid transparent;
     border-radius: 3px;
     background:
-      var(--ornament-dust),
-      var(--ornament-grain) repeat,
-      #08080d;
-    background-blend-mode: normal, overlay, normal;
+      #08080d padding-box,
+      var(--ornament-gilt) border-box;
     color: #f4e6bd;
     font: 12px var(--ui-font);
     text-align: center;
     box-shadow: inset 0 1px 3px #000;
-  }
-  .prompt .prompt-number::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: var(--ornament-gilt);
-    -webkit-mask-image:
-      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
-    mask-image:
-      var(--ornament-edge-h), var(--ornament-edge-h), var(--ornament-edge-v), var(--ornament-edge-v);
-    -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-    mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-    -webkit-mask-position:
-      top left,
-      bottom left,
-      top left,
-      top right;
-    mask-position:
-      top left,
-      bottom left,
-      top left,
-      top right;
-    -webkit-mask-size:
-      20px 2px,
-      20px 2px,
-      2px 20px,
-      2px 20px;
-    mask-size:
-      20px 2px,
-      20px 2px,
-      2px 20px,
-      2px 20px;
   }
   .prompt .prompt-number:focus {
     outline: 1px solid var(--gold-dim);

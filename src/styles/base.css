@@ -801,10 +801,32 @@
       outline-offset: 2px;
     }
     /* Panels / windows / skip links keep a real border (forced-colors drops box-shadow
-       and most backgrounds, so a shadow-only or fill-only edge would vanish). */
+       and most backgrounds, so a shadow-only or fill-only edge would vanish). The
+       gilded-ornament interactive controls (fantasy HUD redesign, rounds 4-5) all
+       switched their resting border to `transparent` so a mask/gradient-border layer
+       could carry the gilded finish instead; forced-colors strips mask-image and most
+       background layers, which would leave these controls with NO visible boundary at
+       all in high-contrast mode. Same fix, same rule: a real system-color border. */
     .panel,
     .window,
-    .hud-skip {
+    .hud-skip,
+    .btn,
+    .x-btn,
+    .action-btn,
+    .pet-btn,
+    .stance-btn,
+    .micro-btn,
+    .chat-tab,
+    .mt-tab,
+    .tut-skip,
+    .level-chip,
+    .portrait,
+    .unitframe .tf-move-btn,
+    #party-frames > .tf-move-btn,
+    #minimap,
+    #minimap-zoom,
+    #raid-lockout,
+    #mail-indicator {
       border: 1px solid CanvasText;
     }
     /* The skip link must still read as actionable in high contrast. */
