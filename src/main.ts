@@ -28,6 +28,13 @@ import { shouldClearAutorunOnDeath } from './game/death_input_reset';
 import { initDesktopDownload } from './game/desktop_download';
 import { initDesktopShellIntegration } from './game/desktop_shell_integration';
 import { takeEditorPlaytestRequest } from './game/editor_playtest';
+import {
+  clearEntryProbe,
+  ENTRY_PROBE_STABLE_MS,
+  planEntryCrashRecovery,
+  readEntryProbeRaw,
+  stampEntryProbe,
+} from './game/entry_crash_guard';
 import { GamepadManager } from './game/gamepad';
 import { GamepadBindings } from './game/gamepad_bindings';
 import { handleGatherNodeInteract } from './game/gather_node_interact';
@@ -77,6 +84,7 @@ import {
   spawnCinematicFor,
   spawnCinematicPose,
 } from './game/spawn_cinematic';
+import { safeStartupGraphicsPreset } from './game/startup_graphics_safety';
 import { resolveUiEffectsProfile } from './game/ui_effects_profile';
 import { currentUtcDay } from './game/utc_day';
 import { voice } from './game/voice';
@@ -206,6 +214,7 @@ import {
 } from './ui/discord_status';
 import { renderDiscordWidget } from './ui/discord_widget';
 import { classDisplayName, tEntity } from './ui/entity_i18n';
+import { showEntryGuardBanner } from './ui/entry_guard_banner';
 import { FocusManager, type FocusTrapHandle } from './ui/focus_manager';
 import { type ClaudiumHooks, Hud } from './ui/hud';
 import { chatInputSize } from './ui/hud/chat/chat_input_autosize';
@@ -973,12 +982,21 @@ async function startGame(
     settings.set('graphicsPreset', autoPreset);
     settings.set('graphicsDefaultApplied', true);
   }
-  // Native iOS WebKit can terminate the WebContent process during Ultra world
-  // startup on recent phones, which reloads back to the start screen before the
-  // in-game options menu is reachable. Persist the safe startup tier so a saved
-  // Ultra/Advanced choice cannot trap the native app in that reload loop.
-  if (isNativeRuntime() && settings.get('graphicsPreset') >= GRAPHICS_PRESET_ULTRA) {
-    settings.set('graphicsPreset', GRAPHICS_PRESET_HIGH);
+  // iOS WebKit can terminate the tab's WebContent process during Ultra world
+  // startup on recent phones (native app shell AND iOS Safari alike, same
+  // engine/process limits), reloading back to the start screen before the
+  // in-game options menu is reachable. See startup_graphics_safety.ts.
+  const startupBrowserEnv = readBrowserEnv();
+  const safePreset = safeStartupGraphicsPreset(
+    isNativeRuntime(),
+    startupBrowserEnv.engine,
+    startupBrowserEnv.mobile,
+    settings.get('graphicsPreset'),
+    GRAPHICS_PRESET_ULTRA,
+    GRAPHICS_PRESET_HIGH,
+  );
+  if (safePreset !== settings.get('graphicsPreset')) {
+    settings.set('graphicsPreset', safePreset);
   }
   // UI theming: apply the persisted theme's CSS variables to :root, then keep a
   // hook so the Options panel can switch preset / override colours live.
@@ -1011,6 +1029,19 @@ async function startGame(
   let hud!: Hud;
   const autoLoot = new AutoLoot();
   const perf = createPerfMonitor(null);
+  // World-entry crash guard: persist a probe RIGHT BEFORE the synchronous scene build.
+  // If phone WebKit kills the WebContent process during the build (no event, no error,
+  // just a reload), the next boot finds the probe still armed and steps the graphics
+  // preset down one tier (see the recovery block in wireStartScreens). Cleared once the
+  // entry demonstrably survives, on the handled failure path below, and whenever the
+  // page is hidden (a backgrounded eviction is NOT an entry crash).
+  stampEntryProbe(settings.get('graphicsPreset'), Date.now());
+  // Dev-channel diagnostic (English on purpose): grep "[entry-guard]" in the WebView
+  // inspector / device console to isolate crash-at-entry causes on real hardware.
+  console.info(
+    `[entry-guard] world entry: preset=${settings.get('graphicsPreset')} ` +
+      `(${graphicsPresetLabel(settings.get('graphicsPreset'))}) native=${isNativeRuntime()}`,
+  );
   try {
     renderer = new Renderer(world, canvas, nameplates);
     renderer.setAudioSink(sfx);
@@ -1022,6 +1053,12 @@ async function startGame(
       renderer.enableTargetConeDebug(tabConeHalfAt, TAB_NEAR_RADIUS, TAB_QUERY_RADIUS);
     }
     perf.setRenderer(renderer);
+    // Dev-channel diagnostic: the ctor ran initGfxTier, so this is the tier the scene
+    // was ACTUALLY built at (vs the preset logged above), plus the memory-profile knobs.
+    console.info(
+      `[entry-guard] scene built: tier=${GFX.tier} constrainedMemory=${GFX.constrainedMemory} ` +
+        `shadowMap=${GFX.shadowMap} msaa=${GFX.msaaSamples} dprCap=${GFX.pixelRatioCap}`,
+    );
     // One-time software-rendering notice (WARP/SwiftShader): the Renderer
     // constructor ran initGfxTier, so the adapter verdict is resolved by now.
     initSoftwareRenderNotice(DESKTOP_APP);
@@ -1034,10 +1071,19 @@ async function startGame(
     applyOrnamentVars(); // wire the --ornament-* mask shapes the carved-chrome CSS consumes
   } catch (err) {
     // e.g. WebGL context creation failure: surface it instead of leaving the
-    // loading screen up forever
+    // loading screen up forever. A HANDLED failure is not a process kill, so the
+    // crash probe must not survive to cost the player a graphics tier next boot.
+    clearEntryProbe();
+    console.warn('[entry-guard] scene build failed with a handled error; probe cleared', err);
     fatalOverlay(t('loading.rendererFailed', { error: technicalErrorMessage(err) }));
     return;
   }
+  // The build survived; give the post-build tail (first-frame texture uploads and
+  // shader compiles) time to settle before declaring the entry stable.
+  window.setTimeout(() => {
+    clearEntryProbe();
+    console.info('[entry-guard] world entry stable; probe cleared');
+  }, ENTRY_PROBE_STABLE_MS);
 
   // Offline only: expose the dev "2v2 Fiesta vs Bots" practice toggle to the HUD.
   if (offlineSim) hud.setFiestaPracticeHook(() => offlineSim.startFiestaPractice());
@@ -1310,6 +1356,9 @@ async function startGame(
           case 'deeds':
             hud.toggleDeeds();
             break;
+          case 'professions':
+            hud.toggleProfessions();
+            break;
           case 'sheathe': {
             // Cosmetic sheathe toggle (Z). The world owns the rule (dead-gate,
             // combat auto-unsheathe); play the cue only when the state moved.
@@ -1377,6 +1426,7 @@ async function startGame(
     onLeaderboard: () => hud.toggleLeaderboard(),
     onDailyRewards: () => hud.toggleDailyRewards(),
     onDeeds: () => hud.toggleDeeds(),
+    onProfessions: () => hud.toggleProfessions(),
     onNameplates: () => (renderer.showNameplates = !renderer.showNameplates),
     onMusic: () => {
       music.setEnabled(!music.enabled);
@@ -1491,6 +1541,9 @@ async function startGame(
       case 'deeds':
         hud.toggleDeeds();
         break;
+      case 'professions':
+        hud.toggleProfessions();
+        break;
       case 'chat':
         openChat();
         break;
@@ -1566,7 +1619,20 @@ async function startGame(
     const body = document.body.classList;
     body.remove(...BROWSER_BODY_CLASSES);
     body.add(...browserBodyClasses(browserEnv, tier));
+    // Dev-channel diagnostic: which CSS-effects tier is live in-world (fx-minimal
+    // is what strips backdrop-filter compositing on phone WebKit).
+    console.info(`[entry-guard] browser effects stamped: fx=${tier} engine=${browserEnv.engine}`);
   }
+  // The landing stamp ran with a conservative 'high' render tier (no renderer
+  // existed yet, see wireStartScreens); this is the in-world re-stamp with the
+  // REAL GFX.tier that the landing comment promises but which had been lost
+  // (its only caller was the Esc-menu setting handler). Without it the fx tier
+  // in-world is whatever the landing guessed: correct for phones (minimal
+  // either way), too generous for e.g. desktop Safari on a medium GPU. Stamping
+  // here makes the in-game state deterministic, which matters on iOS where the
+  // fx-minimal cut is what keeps backdrop-filter (the More tray's glass blur
+  // snapshots the live WebGL canvas) out of an already memory-tight scene.
+  applyBrowserEffects(settings.get('browserEffects'));
 
   function applySetting(key: keyof GameSettings, value: number | boolean): void {
     if (key === 'mouseCamera') {
@@ -8627,6 +8693,43 @@ function wireStartScreens(): void {
     DISCORD_BUILD_ENABLED && document.getElementById('discord-choice-panel')
       ? readDiscordChoice()
       : null;
+  // World-entry crash recovery: a probe still armed from the previous boot means the last
+  // entry attempt died mid scene-build (phone WebKit kills the WebContent process with no
+  // event when the tab crosses its per-process memory ceiling, then the shell reloads).
+  // Step the persisted preset down ONE tier and pin it (graphicsDefaultApplied) so the
+  // auto default can never re-select a tier this device has proven it cannot enter the
+  // world at, drop the active-play resume marker so this boot lands HERE (a screen with a
+  // reachable graphics control) instead of auto-reentering the world through the welcome
+  // screen in a crash loop, and tell the player what happened. Scoped to iOS/native
+  // runtimes, the environments where the OS reload makes the crash otherwise invisible;
+  // elsewhere the probe is only logged (and cleared: it is a one-shot signal).
+  const entryRecovery = planEntryCrashRecovery(readEntryProbeRaw(), Date.now());
+  clearEntryProbe();
+  if (entryRecovery) {
+    if (isNativeRuntime() || mobilePlatform() === 'ios') {
+      const recoverySettings = new Settings();
+      if (entryRecovery.to < entryRecovery.from) {
+        recoverySettings.set('graphicsPreset', entryRecovery.to);
+      }
+      recoverySettings.set('graphicsDefaultApplied', true);
+      clearPlayMarker();
+      console.warn(
+        `[entry-guard] previous world entry crashed ${Math.round(entryRecovery.ageMs / 1000)}s ` +
+          `ago at preset=${entryRecovery.from}; graphics now preset=${entryRecovery.to}, ` +
+          'resume marker cleared',
+      );
+      // Wait for the boot locale so the banner body never paints in the wrong language.
+      void ensureLocaleLoaded(getLanguage()).then(
+        () => showEntryGuardBanner(entryRecovery.to),
+        () => showEntryGuardBanner(entryRecovery.to),
+      );
+    } else {
+      console.warn(
+        '[entry-guard] previous world entry did not complete (probe was still armed); ' +
+          'automatic downgrade is scoped to iOS/native runtimes',
+      );
+    }
+  }
   // Restore a persisted session: show the Account tab immediately, then confirm
   // the stored token is still valid against the server (clearing it if not).
   if (RESET_TOKEN && document.getElementById('reset-panel')) {
@@ -8693,10 +8796,19 @@ function wireStartScreens(): void {
   // resumes into the world on the reload that follows an OS WebView eviction. A
   // no-op when no session is in play, so it is safe to register unconditionally.
   const restampResumeMarker = () => {
-    if (document.visibilityState === 'hidden') refreshPlayMarker(Date.now());
+    if (document.visibilityState === 'hidden') {
+      refreshPlayMarker(Date.now());
+      // A page that leaves the foreground mid-entry was not killed by a foreground
+      // memory spike: a later eviction while backgrounded (or a deliberate reload,
+      // which also fires pagehide) must not read as an entry crash next boot.
+      clearEntryProbe();
+    }
   };
   document.addEventListener('visibilitychange', restampResumeMarker);
-  window.addEventListener('pagehide', () => refreshPlayMarker(Date.now()));
+  window.addEventListener('pagehide', () => {
+    refreshPlayMarker(Date.now());
+    clearEntryProbe();
+  });
 
   // Header Logo click listener to return to homepage
   const headerLogoBtn = $('#header-logo-btn');

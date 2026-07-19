@@ -397,6 +397,7 @@ export const hudChromeStrings = {
     leaderboard: 'Ranks',
     dailyRewards: 'Store',
     deeds: 'Deeds',
+    professions: 'Professions',
     nameplates: 'Names',
     haptics: 'Haptics',
     hapticsOff: 'Haptics Off',
@@ -2229,6 +2230,47 @@ export const hudChromeStrings = {
     tailoring: 'Tailoring',
     leatherworking: 'Leatherworking',
   },
+  // Professions window (Professions 2.0 Phase 5): the read-only craft-wheel
+  // window. Craft and pair NAMES resolve through craftName / archetypePair
+  // above; these keys are the window's own chrome. Wording follows the
+  // crafting identity card family (crafting.identity.*).
+  professions: {
+    title: 'Professions',
+    close: 'Close professions',
+    ringAria: 'Craft wheel',
+    skillsHeader: 'Craft skills',
+    gatheringHeader: 'Gathering',
+    perksHeader: 'Perks',
+    identityHeader: 'Identity',
+    roleMajor: 'Major',
+    roleHobby: 'Hobby',
+    roleDormant: 'Dormant',
+    roleUnattuned: 'Unattuned',
+    ceilingUnlimited: 'No empowerment cap',
+    ceilingRare: 'Rare cap',
+    ceilingCommon: 'Common cap',
+    skillValue: '{skill} / {max}',
+    tierPipAria: 'Tier {tier}',
+    nextUnlockTier: '{points} points to the next tier: masterwork odds improve',
+    nextUnlockSpecialized: '{points} points to Specialized: material costs drop',
+    nextUnlockMax: 'At maximum skill',
+    perkSpecializedLine: '{craft}: Specialized, material costs -{pct}%',
+    perkSpecializedAt: 'Specializes at {threshold} skill',
+    switchCost: 'Next archetype switch costs {cost} amends',
+    syncing: 'Waiting for your profession data from the realm.',
+    tutorialLine: 'Reach {target} skill in any craft to unlock your first tier.',
+    ctaHeader: 'Next step',
+    ctaRaise: 'Keep raising {craft}: {points} more points to the next tier.',
+    ctaStart: 'Craft or gather with any profession to begin.',
+    unattunedIdentity:
+      'You are not yet attuned to an archetype. Raise your crafts and complete an attunement to choose your pair.',
+    nudgeNearTier: '{craft}: {points} points from the next tier',
+    nudgeDormant: 'Your {craft} knowledge lies dormant',
+    hobbyLabel: 'Hobby: {craft}',
+    majorsLabel: 'Majors: {a} and {b}',
+    pairsHeld: 'Pairs held: {count}',
+    returnsLabel: 'Returns: {count}',
+  },
   // Crafting window (#1127): the minimal common-tier crafting action, one row
   // per known recipe, a Craft button enabled only when every reagent is held.
   crafting: {
@@ -2250,6 +2292,11 @@ export const hudChromeStrings = {
     comboNotAttuned: 'Choose an archetype pair first.',
     comboWrongPair: 'Activate this exact pair to craft it.',
     comboTierUnmet: 'Raise both major crafts to the required tier.',
+    // Named tier_unmet guidance (Phase 6 QA): {crafts} is the localized
+    // craft-name list of ONLY the under-tier crafts, so the player can tell
+    // which one to raise from the row alone. comboTierUnmet above stays the
+    // defensive fallback when the eligibility result names no craft.
+    comboTierUnmetNamed: 'Raise {crafts} to tier {tier}.',
     professionChoice: 'Profession choice',
     noProfessionChoice: 'No valid profession choice is currently available.',
     // One selectable pair in the attunement quest dropdown: the pair archetype
@@ -2297,6 +2344,24 @@ export const hudChromeStrings = {
     throttled: 'You are crafting too quickly. Wait a moment and try again.',
     // #1299: the recipe exists but this player has not learned it yet.
     recipeNotLearned: 'You have not learned that recipe yet.',
+    // Professions 2.0 Phase 6: crafting window legibility (skill requirement
+    // line, skill-gain difficulty labels, hub-station badge) plus the
+    // masterwork and tier-up celebration copy. Masterwork is a proc with
+    // baked bonus stats; the copy never claims a quality-rank upgrade.
+    skillReqLine: 'Requires {craft} {skill}',
+    difficultyFull: 'Full skill gain',
+    difficultyReduced: 'Reduced skill gain',
+    difficultyNone: 'No skill gain',
+    stationBadge: 'Station',
+    stationOutOfRange: 'Move to the crafting hub station to craft this.',
+    masterworkToast: 'Masterwork! {name}',
+    masterworkZoneLine: '{crafter} crafted a masterwork {name}!',
+    tierUpToast: '{craft} advanced to tier {tier}!',
+    makersMark: 'Crafted by {name}',
+    masterworkSeal: 'Masterwork',
+    // Generic enchanted marker: EnchantDef.name has no localized display
+    // surface yet, so the tooltip marks the state without naming the enchant.
+    enchantedLine: 'Enchanted',
   },
   // Dungeon Finder window (docs/prd/dungeon-finder.md). Dungeon, creature,
   // item, quest, and zone NAMES resolve through tEntity/world_entity_i18n,

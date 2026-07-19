@@ -15,9 +15,9 @@ Update this file at the end of every implementation and QA session. Statuses:
 | 3 QA | Verify host-parity bug fixes | complete | 2026-07-17 | 2026-07-17 |
 | 4 | Node materials and pristine veins | complete | 2026-07-18 | 2026-07-18 |
 | 4 QA | Verify node materials and pristine veins | complete | 2026-07-18 | 2026-07-18 |
-| 5 | The professions wheel window | not started | | |
-| 5 QA | Verify the professions wheel window | not started | | |
-| 6 | Crafting window upgrades and celebrations | not started | | |
+| 5 | The professions wheel window | complete | 2026-07-18 | 2026-07-18 |
+| 5 QA | Verify the professions wheel window | complete | 2026-07-18 | 2026-07-18 |
+| 6 | Crafting window upgrades and celebrations | complete | 2026-07-18 | 2026-07-19 |
 | 6 QA | Verify crafting window upgrades | not started | | |
 | 7 | The Guild letter and quest objectives | not started | | |
 | 7 QA | Verify the Guild letter and quest objectives | not started | | |
@@ -233,19 +233,108 @@ is overlay churn without user value), and the pre-existing unused
 instanceOrigin import in tests/parity/scenarios.ts.
 
 ### Phase 5: The professions wheel window
-- [ ] New window at deeds quality per DESIGN.md: view core (UI_PURE_CORES), painter, styles, i18n
-- [ ] Ring visualization, per-craft skill bars, tier pips, title/majors/hobby, live perks
-- [ ] Identity-view semantics preserved (role, ceiling, nudges, tutorial); next-unlock and switch-cost lines
-- [ ] Progressive disclosure: simplified unattuned / pre-first-tier state
-- [ ] Desktop + mobile responsive; screenshots captured for the PR
-- [ ] Launchers (minimap or window row + keybind) consistent with existing windows
+- [x] New window at deeds quality per DESIGN.md: view core (UI_PURE_CORES), painter, styles, i18n
+- [x] Ring visualization, per-craft skill bars, tier pips, title/majors/hobby, live perks
+- [x] Identity-view semantics preserved (role, ceiling, nudges, tutorial); next-unlock and switch-cost lines
+- [x] Progressive disclosure: simplified unattuned / pre-first-tier state
+- [x] Desktop + mobile responsive; screenshots captured for the PR
+- [x] Launchers (minimap or window row + keybind) consistent with existing windows
+
+Completed 2026-07-18 (phase-start HEAD c1b6c68f2, the release/v0.28.0 tip
+with Phase 4 QA aboard). Pure UI on post-2039 reads: no wire data, no sim
+behavior, no IWorld member. `src/ui/professions_view.ts` (UI_PURE_CORES)
+COMPOSES `profession_identity_view` rather than absorbing it (recorded
+decision: the crafting window and quest dialog keep consuming the card,
+and Phase 6 owns the crafting window), so role, ceiling, both nudges, and
+the tutorial state survive by construction; it adds the ring layout math
+(wrap-safe pair arc, hobby chord), bars and pips with core-derived fill,
+the perks readout from `PERK_THRESHOLDS`, the next-unlock union, the
+switch-cost line via `requiredAmendsProgress`, progressive disclosure,
+and the refresh signature. `src/ui/professions_window.ts` is a
+deeds-pattern cold painter; the ring renders as DOM nodes over one inline
+SVG styled entirely from `components.css` tokens (recorded decision over
+canvas: theme and language switches restyle with no token caching).
+Launchers: minimap micro-button, More-tray entry, and Shift+KeyP (bare
+KeyP is the spellbook). Icons: fourteen procedural recipes plus
+`professionIconUrl` over an empty committed WebP override set, the
+`assets:professions` converter scaffold, and a bijection test green on
+the empty set. i18n: the `hudChrome.professions` English block with five
+non-Latin M16 fills per wordy row. Validation: `tsc` clean and the
+13-file matrix green (architecture, the mobile guard trio, client_shell,
+S3, completeness, css corpus and validity, the three new suites,
+mobile_controls). frontend-seam-reviewer returned zero blocking; both
+should-fixes landed in-phase (the perk line now interpolates the craft
+name in one key instead of concatenating localized fragments, and the
+bar fill moved into the view core with pins). Screenshots under
+`docs/screenshots/professions-wheel-window/`. Notes: `CRAFT_MAX_SKILL`
+(300) lives in the view core as a presentational cap because content
+defines no craft-side maximum and sim craft skill is uncapped;
+`data-icon="target"` is the accepted launcher glyph until designer crest
+art arrives; the `gather_fishing` icon ships ahead of its Phase 11 read,
+and the painter's gathering name map gains the fishing row plus its
+catalog key in Phase 11. The minimap launcher is the rail's eighteenth
+micro-button, which broke the 1366x768 side-rail height budget; the
+short-viewport compaction gap tightened from 2px to 1px (652px of the
+660px budget) with the `crafting_launcher` guard re-pinned deliberately;
+the next button added must revisit the rail (DESIGN.md phase 3 replaces
+it with the launcher hub).
+
+Phase 5 QA (2026-07-18): PASS with fixes. QA-start HEAD aee72d830 (the
+PR 2145 merge; the phase diff is that merge's FIRST-PARENT diff, the
+branch having absorbed the #2133 SFX sweep mid-phase). Three packet
+audits plus the two matched dispatch-matrix rows (frontend seam,
+qa-checklist; no sim/server/wire/database row matched the pure-UI
+diff), all five reports complete first try under hard tool-call
+budgets. Zero blocking findings. Landed from the audit: the simplified
+raise-vs-start CTA decision moved from the painter into the view core
+as a SimplifiedCta union on SimplifiedCallToAction (model logic the
+both-worlds core tests could not reach), both arms pinned; the three
+unconsumed Hud wrappers (openProfessions, closeProfessions,
+professionsWindowOpen) dropped, toggleProfessions staying the one
+consumed entry point (closeDeeds and deedsWindowOpen carry the same
+dead-member debt pre-existing, left alone); sixteen new test pins
+across the three suites: the painter's simplified/syncing surface (the
+whole pre-cprof online render path had no DOM test), unknown gathering
+id renders no row plus all-unknown omits the section, above-display-cap
+saturation (pips, fraction, and max above 300, not only at it),
+missing-craft-key-equals-zero signature equivalence (a materializing
+zero can never trigger a spurious rebuild), gathering maxSkill as its
+own signature dimension, unknown-major null arc, the raise CTA and
+specialized perk-line interpolation arms, ring node/arc/chord emission
+gating, opener-focus restore-once, the PERK_THRESHOLDS uniformity
+premise behind the single perk explainer, and an icons manifest
+lockstep guard that reads asset-manifest.json itself (the deed crests
+are deed_prof_*, a separate namespace; two audit reports misread them
+as prof_* and dissolved on verification). Live verification:
+mobile_tray_overflow OK (19 buttons, none clipped) and an 18-assertion
+probe over the real dev client, all green (desktop Shift+KeyP, Esc,
+minimap button, stubbed attuned full mode with arc, chord, ten rows,
+perks, and switch cost 8, mobile More-tray open and close, no NaN in
+any state). Copy verified against sim constants: per-tier masterwork
+odds (MASTERWORK_PER_TIER_ABOVE_CHANCE) and the specialization
+material discount are real mechanics. Deferred with reasons: the
+switch-cost line rendering for never-attuned full-mode players (the
+amendment scopes the line without an attunement condition; maintainer
+copy call); richer CTA copy for the practically unreachable
+specialized-boundary corner (points stay arithmetically correct since
+the 75 threshold coincides with a tier boundary, documented in the
+core; a new key would need M16 fills); RingArc endpoint symmetry with
+RingChord (painter-side SVG assembly, math unit-pinned); the
+pr_shot_targets stateIsFn dual-shape guard (harmless script
+robustness); painter open-while-open and toggle branch pins (low
+value); a real-ClientWorld pre-sync empty-craftSkills pin (belongs to
+a Phase 3 net suite; the missing-key signature equivalence covers the
+risk). Also corrected: the state.md screenshot-convention drift note
+claimed a docs/pr-screenshots/ convention that never existed in the
+tree; the packet's shots live under docs/screenshots/ per root
+CLAUDE.md.
 
 ### Phase 6: Crafting window upgrades and celebrations
-- [ ] Recipe rows show profession + required skill + skill-gain difficulty tint (#2037)
-- [ ] Combo rows name their requirement; station-bound rows show a badge and disable reason
-- [ ] Masterwork toast + zone-visible broadcast (Phase 4 soft-zone mechanism); tier-up toasts; maker's mark and masterwork in item tooltips
-- [ ] Online inspect carries instance payloads (identity wire extended, parity pinned)
-- [ ] Craft button never lies: same eligibility rule as the sim in both hosts
+- [x] Recipe rows show profession + required skill + skill-gain difficulty tint (#2037)
+- [x] Combo rows name their requirement; station-bound rows show a badge and disable reason
+- [x] Masterwork toast + zone-visible broadcast (Phase 4 soft-zone mechanism); tier-up toasts; maker's mark and masterwork in item tooltips
+- [x] Online inspect carries instance payloads (identity wire extended, parity pinned)
+- [x] Craft button never lies: same eligibility rule as the sim in both hosts (shared craftSkillGainMultiplier and combo_eligibility)
 
 ### Phase 7: The Guild letter and quest objectives
 - [ ] Craft/gather quest objective types (minimal set for the letter quest)
@@ -330,3 +419,95 @@ bodies. Deferred and surfaced items live in the Phase 2 drift notes in
 state.md: the rollback enchantability caveat for the release notes, the
 two battlefield trickle questions, the guide prose deferral to Phases 6
 and 15, and the standing instance-payload wire invariant.
+
+2026-07-19 Phase 6 (crafting window upgrades and celebrations) landed on
+feature/professions-2-phase-06-crafting-window off release/v0.28.0
+(phase-start 0a4fd8078, the Phase 5 QA merge). All five checklist rows
+check; #2037's scope closes with the PR (close by hand at merge,
+release-branch merges never auto-close). Both sanctioned seam touches
+landed as specified: announceMasterworkZone (a new structured
+masterworkZone SimEvent riding the exported Phase 4 emitToZonePlayers,
+rng-free, instance space excluded) and the eqi identity-wire inspect
+extension (server-trimmed to signer/enchant/rolled, mirrored into
+ClientWorld equippedInstances, no new IWorld member). As-landed
+deviations, all recorded in the state.md Phase 6 surfaces entry: NO
+sim_i18n matcher row exists (the broadcast is text-free ids+values on
+the gatherRareEvent precedent; the S3 guard passes by construction);
+the celebration gate is the deeds pure-plan style (no fireworks module
+exists; reduced motion trims only the banner fade, information and the
+ARIA announcer never gated); the parity golden professions_craft
+eventDigest was re-pinned deliberately (the crafter's own zone copy,
+rng fingerprints byte-identical); armory_inspect.ts is the cosmetic
+skin panel, the real gear-inspect surface is hud openInspect (threaded
+there). Five-reviewer fan-out (architecture, cross-platform-sync,
+frontend-seam, privacy-security, qa-checklist): zero blocking; all four
+should-fixes landed in-phase (shared craftSkillGainMultiplier consumed
+by sim and view, eqi payload data minimization with a negative pin,
+the tier-up diff bounded to a post-craftResult drain window, a real
+plan.motion consumer). Deferred: the enchanted marker names the STATE
+only (EnchantDef.name has no localized display surface; a named enchant
+line needs an i18n surface first, Phase 13/15 candidate); bags/bank
+grid painters still pass the def only where no instance exists on the
+row (correct today); the online two-banner corner (masterwork and
+tier-up can land in separate drains online, each keeps its own banner,
+cosmetic only).
+
+Phase 6 QA (2026-07-19): PASS with fixes. QA diff 0a4fd8078..206b0ffe7
+(the PR 2150 merge, linear, eight commits). The whole validation matrix
+ran green at the untouched tip first (tsc, the seventeen matched
+suites, the mobile guard trio, i18n:gen plus completeness), so every
+audit agent got already-verified ground instead of re-running suites.
+Eight-agent fan-out (three packet audits plus the five matched dispatch
+rows: frontend-seam, cross-platform-sync, architecture,
+privacy-security, qa-checklist), all eight complete first try under
+hard tool-call budgets with schema-forced structured output. Zero
+blocking findings. Landed from the audit: tier_unmet now names the
+unmet craft(s) (the acceptance criterion the painter missed: the view
+threaded unmetCrafts but the status line rendered the generic
+both-crafts sentence; the new comboTierUnmetNamed key renders only the
+under-tier craft names with the required tier, the param-less key stays
+the defensive fallback so no existing locale fill goes stale or loses a
+placeholder, M16 fills in the five non-Latin overlays, jsdom pins for
+the single, multi, and fallback arms); the tier-up armed drain window
+moved from hud.ts into observeCraftSkillsForTierUps beside the plan
+builder (four reviewers converged on the untested state machine; the
+Phase 5 painter-to-core precedent; hud is now a three-line consumer
+with identical behavior and the armed-window edges are unit-pinned,
+including the delayed-toast contract for a crossing that outlives the
+window); a live GameServer masterworkZone routing suite (three
+sessions, the real sim.tick into routeEvents pump, each in-zone session
+receives exactly its own recipient-pid copy, the other-zone session
+receives nothing; the hcb broadcast-suite precedent, standing in for
+the two-browser online probe since no local Postgres exists); threading
+pins for the bags forwarding call site, the char_window self-mirror
+closure, the openInspect slot rows, and the hud.itemTooltip composition
+order; plan.motion consumer pins (banner-no-motion and the never-gated
+ARIA announcer); DOM pins for the none band, the in-range station
+badge, and the hover-tooltip sentence; dead imports dropped
+(tierProgressMultiplier in crafting.ts, Stats in hud.ts) and the
+emitToZonePlayers export comment corrected. Live verification: an
+18-check puppeteer probe over the real dev client, all green (21 recipe
+rows with skill line, difficulty text, and aria fold-in; 9 station
+badges, every out-of-range row with its inline reason note; the three
+difficulty bands driven live including the free floor and the unattuned
+ceiling arm; a real tier-up crossing through the armed-window path at
+the 25 and 50 boundaries with banner and chat line; reduced motion
+keeping the text while setting banner-no-motion; masterwork and
+legacy-signed tooltips over the real bags surface). Deferred with
+reasons: the station out-of-range copy omits the level arm of the
+predicate (Phase 8 retires CRAFTING_HUB_MIN_LEVEL, revisit with the
+masters rework); the bounded 100-drain window can delay a toast past
+severe mirror lag until the next armed window (deliberate, no per-frame
+poll); the pre-cprof difficulty label transient (documented,
+presentation-neutral); two procs in one drain coalesce to one
+masterworkToast log line (zone and loot lines still per proc); the
+crafter's third-person zone line beside their own toast (deliberate,
+parity-pinned); eqi cosmetic payloads reach every interest-scoped
+client like eq (identity-record semantics); the server eqi build shares
+a live rolled reference (JSON-snapshotted per broadcast, server-owned,
+no leak); the #ffd100 seal literal (matches the soulbound idiom,
+tokenization is DESIGN.md territory) and the rule-less
+tt-instance-bonus hook class; the guide.ts reword leaving Latin overlay
+fills stale until the release-tier refill (standard workflow);
+archetypeCeilingFor computed twice per resolveCraftForRecipe
+(behavior-neutral).

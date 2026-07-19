@@ -22,6 +22,7 @@
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
 import { enterOfflineGame } from './enter_offline_game.mjs';
+import { suppressGpuNotice } from './lib/gpu_notice_suppress.mjs';
 import { classifyDiff, diffChangedPaths } from './pr_shot_targets.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -133,6 +134,7 @@ async function shootSpecific(targets) {
         if (standalone) {
           page = await browser.newPage();
           watch(page, `${t.key}-${variant.key}`);
+          await suppressGpuNotice(page);
           if (variant.mobile) {
             await page.emulate({
               viewport: {
@@ -158,6 +160,7 @@ async function shootSpecific(targets) {
           page = await browser.newPage();
           sharedPage = page;
           watch(page, 'desktop');
+          await suppressGpuNotice(page);
           await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
           await enterOfflineGame(page, {
             charClass: 'warrior',
@@ -189,6 +192,7 @@ async function shootGenericHud(frames) {
   if (frames.includes('hud-desktop')) {
     const page = await browser.newPage();
     watch(page, 'desktop');
+    await suppressGpuNotice(page);
     await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
     await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thorgar', settleMs: 3000 });
     await shoot(page, `${next()}-hud-desktop`);
@@ -199,8 +203,11 @@ async function shootGenericHud(frames) {
     try {
       const mobile = await browser.newPage();
       watch(mobile, 'mobile');
+      await suppressGpuNotice(mobile);
       await mobile.emulate({
-        viewport: { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 },
+        // Landscape metrics: in-game mobile is landscape-only on the web client,
+        // so portrait would capture the rotate interstitial instead of the HUD.
+        viewport: { width: 844, height: 390, isMobile: true, hasTouch: true, deviceScaleFactor: 2 },
         userAgent:
           'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
       });

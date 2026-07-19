@@ -1455,6 +1455,10 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'a11y.githubProject': 'Открыть проект World of ClaudeCraft на GitHub',
   'a11y.discordCommunity': 'Присоединиться к Discord-сообществу World of ClaudeCraft',
   'a11y.donateProject': 'Пожертвовать на поддержку World of ClaudeCraft',
+  'entryGuard.body':
+    'Игра неожиданно закрылась при входе в мир, поэтому графика теперь установлена на {preset}. Вы можете изменить это в переключателе графики ниже или в настройках игры.',
+  'entryGuard.dismiss': 'Закрыть',
+  'entryGuard.title': 'Графика снижена',
   'loading.world': 'Загрузка мира...',
   'loading.worldProgress': 'Загрузка мира... {done}/{total}',
   'loading.enteringWorld': 'Вход в мир...',
@@ -6398,6 +6402,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.crafting.comboNotAttuned': 'Сначала выберите пару архетипа.',
   'hudChrome.crafting.comboWrongPair': 'Для создания предмета активируйте именно эту пару.',
   'hudChrome.crafting.comboTierUnmet': 'Повысьте оба главных ремесла до нужного ранга.',
+  'hudChrome.crafting.comboTierUnmetNamed': 'Повысьте {crafts} до ранга {tier}.',
   'hudChrome.crafting.professionChoice': 'Выбор профессии',
   'hudChrome.crafting.noProfessionChoice': 'Сейчас нет доступного выбора профессии.',
   'hudChrome.crafting.attunementPreview':
@@ -7038,7 +7043,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
     'Каждый рецепт требует конкретных реагентов, которые вы собираете или покупаете. Самые простые рецепты просят лишь обычные материалы и доступны с самого начала, так что вы можете взяться за ремесло сразу же, как только его освоите. Списки рецептов ещё пополняются: несколько ремёсел ждут своих первых рецептов, а новые появляются по мере роста ремёсел.',
   'guide.professions.craftMasteryTitle': 'Навык и мастерство',
   'guide.professions.craftMasteryBody':
-    'Успешное изготовление повышает навык в этом ремесле, и навык никогда не запирает рецепты: если вы знаете рецепт и держите его материалы, вы можете попытаться его создать. Взамен навык даёт вам качество, набитая рука выдаёт работу тоньше. Единственное исключение, это комбинированные рецепты, которые требуют проявить себя в обоих их ремёслах, прежде чем откроются.',
+    'Успешное изготовление повышает навык в этом ремесле, и навык никогда не запирает рецепты: если вы знаете рецепт и держите его материалы, вы можете попытаться его создать. Каждый рецепт выдаёт ровно ту вещь, что обещает, а набитая рука порой создаёт шедевр: ту же вещь, но тоньше отделанную и с толикой дополнительной силы. Единственное исключение, это комбинированные рецепты: они открываются лишь мастеру, настроенному на архетип, который соединяет их два ремесла, с проверенным навыком в обоих.',
   'guide.professions.craftComboTitle': 'Комбинированные рецепты',
   'guide.professions.craftComboBody':
     'Помимо собственного списка рецептов одного ремесла, колесо также поддерживает комбинированные рецепты, требующие сразу двух соседних ремёсел, вознаграждая персонажа, вложившегося в соседние ремёсла на кольце, а не в одно изолированное. Ремесленник должен владеть обоими ремёслами сам; навык напарника не заменит ни одну из половин.',
@@ -7047,7 +7052,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
     'Каждое из десяти ремесел также олицетворяет призвание — более широкую идентичность, которую можно принять помимо простого занятия этим ремеслом. Ваше текущее призвание — это единственный выбор в один момент времени, а не список: вы носите одно, и при желании можете позже сменить его на другое.',
   'guide.professions.archetypeChooseTitle': 'Выбор призвания',
   'guide.professions.archetypeChooseBody':
-    'Заявление призвания станет сюжетным моментом: заданием, которое официально принимает вас в эту идентичность. Эта дорога ещё строится, так что пока каждый персонаж ходит по миру с этим выбором впереди, а каждое ремесло тем временем развивается до редкой ступени качества.',
+    'Заявление призвания, это сюжетный момент: задание, которое официально принимает вас в эту идентичность. Пока вы не заявили о себе, навык каждого ремесла растёт вплоть до редкой ступени. Когда вы принимаете пару, оба её ремесла открываются полностью; одно ремесло с дальней стороны колеса остаётся с вами как увлечение и по-прежнему работает до редкой ступени, а все остальные ремёсла держатся на обычной ступени, пока вы несёте эту идентичность.',
   'guide.professions.archetypeSwitchTitle': 'Перемена решения',
   'guide.professions.archetypeSwitchBody':
     'Не станет заявление и пожизненным приговором. Задумано повторяемое искупление перед прежним ремеслом, прежде чем взяться за новое, и с каждой сменой искупление становится всё тяжелее, так что выбор остаётся значимым, а не бесплатным. Как и само заявление, всё это ещё в пути.',
@@ -7306,6 +7311,19 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.crafting.throttled':
     'Вы создаете предметы слишком быстро. Подождите немного и попробуйте снова.',
   'hudChrome.crafting.recipeNotLearned': 'Вы еще не изучили этот рецепт.',
+  'hudChrome.crafting.skillReqLine': 'Требуется {craft} {skill}',
+  'hudChrome.crafting.difficultyFull': 'Полный рост навыка',
+  'hudChrome.crafting.difficultyReduced': 'Сниженный рост навыка',
+  'hudChrome.crafting.difficultyNone': 'Без роста навыка',
+  'hudChrome.crafting.stationBadge': 'Станция',
+  'hudChrome.crafting.stationOutOfRange':
+    'Чтобы создать это, подойдите к станции ремесленного центра.',
+  'hudChrome.crafting.masterworkToast': 'Шедевр! {name}',
+  'hudChrome.crafting.masterworkZoneLine': 'Шедевр от {crafter}: {name}!',
+  'hudChrome.crafting.tierUpToast': '{craft}: достигнут ранг {tier}!',
+  'hudChrome.crafting.makersMark': 'Создатель: {name}',
+  'hudChrome.crafting.masterworkSeal': 'Шедевр',
+  'hudChrome.crafting.enchantedLine': 'Зачаровано',
   'hudChrome.mobile.actionPageIndicator': 'Стр. {page}',
   'hudChrome.mobile.spellbookPageLabel': 'Страница {page}',
   'hudChrome.mobile.hideKeyboard': 'Скрыть клавиатуру',
@@ -8256,4 +8274,44 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.mouseoverCast': 'Применение по наведению на рамки группы',
   'hudChrome.options.showTargetOfTarget': 'Показывать цель цели',
   'hudChrome.unitFrame.targetOfTargetLabel': 'Цель цели',
+  'hudChrome.mobile.professions': 'Профессии',
+  'hudChrome.professions.title': 'Профессии',
+  'hudChrome.professions.close': 'Закрыть профессии',
+  'hudChrome.professions.ringAria': 'Колесо ремёсел',
+  'hudChrome.professions.skillsHeader': 'Ремесленные навыки',
+  'hudChrome.professions.gatheringHeader': 'Сбор',
+  'hudChrome.professions.perksHeader': 'Бонусы',
+  'hudChrome.professions.identityHeader': 'Специализация',
+  'hudChrome.professions.roleMajor': 'Главное ремесло',
+  'hudChrome.professions.roleHobby': 'Увлечение',
+  'hudChrome.professions.roleDormant': 'Неактивно',
+  'hudChrome.professions.roleUnattuned': 'Без настройки',
+  'hudChrome.professions.ceilingUnlimited': 'Без потолка усиления',
+  'hudChrome.professions.ceilingRare': 'Потолок редкого',
+  'hudChrome.professions.ceilingCommon': 'Потолок обычного качества',
+  'hudChrome.professions.tierPipAria': 'Ранг {tier}',
+  'hudChrome.professions.nextUnlockTier':
+    'До следующего ранга {points} навыка: шанс шедевра повысится',
+  'hudChrome.professions.nextUnlockSpecialized':
+    'До специализации {points} навыка: расход материалов снизится',
+  'hudChrome.professions.nextUnlockMax': 'Навык на максимуме',
+  'hudChrome.professions.perkSpecializedLine': '{craft}: Специалист, расход материалов -{pct}%',
+  'hudChrome.professions.perkSpecializedAt': 'Специализация при навыке {threshold}',
+  'hudChrome.professions.switchCost': 'Следующая смена архетипа потребует искупления: {cost}',
+  'hudChrome.professions.syncing': 'Ожидаем данные о профессиях от сервера.',
+  'hudChrome.professions.tutorialLine':
+    'Достигните навыка {target} в любом ремесле, чтобы открыть первый ранг.',
+  'hudChrome.professions.ctaHeader': 'Следующий шаг',
+  'hudChrome.professions.ctaRaise':
+    'Продолжайте развивать {craft}: до следующего ранга {points} навыка.',
+  'hudChrome.professions.ctaStart':
+    'Чтобы начать, создайте предмет или соберите ресурсы любой профессией.',
+  'hudChrome.professions.unattunedIdentity':
+    'Вы ещё не настроены на архетип. Развивайте ремёсла и завершите настройку, чтобы выбрать пару.',
+  'hudChrome.professions.nudgeNearTier': '{craft}: до следующего ранга {points} навыка',
+  'hudChrome.professions.nudgeDormant': 'Знания ремесла {craft} неактивны',
+  'hudChrome.professions.hobbyLabel': 'Увлечение: {craft}',
+  'hudChrome.professions.majorsLabel': 'Главные ремёсла: {a} и {b}',
+  'hudChrome.professions.pairsHeld': 'Открыто пар: {count}',
+  'hudChrome.professions.returnsLabel': 'Возвращений: {count}',
 };

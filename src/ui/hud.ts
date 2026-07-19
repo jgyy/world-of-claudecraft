@@ -59,6 +59,7 @@ import { canEquipItem, weaponHand } from '../sim/equipment_rules';
 import { isItemLevelEligible, itemLevel, itemScore } from '../sim/item_level';
 import { requiredLevelFor } from '../sim/item_level_req';
 import type { Ante, PickAction } from '../sim/lockpick';
+import { canUseCraftingHubStation } from '../sim/professions/crafting_hub';
 import { FOCUS_POINT_BUDGET, isInTownZone } from '../sim/professions/focus';
 import { type QuestObjectiveRef, questObjectivesForMob } from '../sim/quest_targets';
 import type { ResolvedAbility } from '../sim/sim';
@@ -68,12 +69,12 @@ import type {
   EquipSlot,
   HonorReason,
   InvSlot,
+  ItemInstancePayload,
   ItemSlot,
   MailResultCode,
   PetMode,
   PlayerClass,
   ResourceType,
-  Stats,
 } from '../sim/types';
 import {
   type AbilityEffect,
@@ -130,7 +131,7 @@ import { CastBarPainter } from './cast_bar_painter';
 import { charBagsPaired } from './char_bags_pairing_core';
 import { type CharSkinPainterHost, paintCharSkinPicker } from './char_skin_window';
 import { buildPaperdollView, type PaperdollSlot } from './char_view';
-import { CharWindow } from './char_window';
+import { CharWindow, craftNameText } from './char_window';
 import { activeCharacterAppearancePreview } from './character_appearance';
 import {
   ignoreKey,
@@ -159,6 +160,12 @@ import {
 } from './combat_sfx';
 import { type CardinalId, compassView } from './compass';
 import { formatMinimapCoords } from './coords';
+import {
+  buildCraftCelebrationPlan,
+  CRAFT_TIER_UP_DRAIN_WINDOW,
+  type CraftTierUp,
+  observeCraftSkillsForTierUps,
+} from './craft_celebration_view';
 import { buildCraftingView } from './crafting_view';
 import { renderCraftingWindow } from './crafting_window';
 import { DailyRewardsWindow } from './daily_rewards_window';
@@ -309,6 +316,13 @@ import { itemArmorTypeLabelKey } from './item_armor_type';
 import { requiredClassesForTooltip } from './item_class_restriction';
 import { itemStatDeltas } from './item_compare';
 import { ItemDragState } from './item_drag_state';
+import {
+  instanceBadgeLines,
+  instanceBonusStatLines,
+  instanceMakersMarkLine,
+  itemNumber,
+  itemStatName,
+} from './item_instance_tooltip';
 import { itemSetMemberCounts, itemSetTooltipModel } from './item_set_tooltip_view';
 import { LeaderboardWindow } from './leaderboard_window';
 import { ReannounceMarker } from './live_region_reannounce';
@@ -379,6 +393,7 @@ import {
 } from './proc_overlay_view';
 import { maskProfanity } from './profanity';
 import { buildProfessionIdentityView } from './profession_identity_view';
+import { ProfessionsWindow } from './professions_window';
 import { questProgressEventText } from './quest_progress_text';
 import { lockoutParts, lockoutShape } from './raid_lockout';
 import { type RaidLockoutI18n, raidLockoutPanelHtml } from './raid_lockout_view';
@@ -763,15 +778,6 @@ const ITEM_KIND_LABEL_KEYS: Record<ItemDef['kind'], TranslationKey> = {
   elixir: 'itemUi.kind.elixir',
   bag: 'itemUi.kind.bag',
 };
-const ITEM_STAT_LABEL_KEYS: Partial<Record<keyof Stats, TranslationKey>> = {
-  armor: 'itemUi.stats.armor',
-  str: 'itemUi.stats.str',
-  agi: 'itemUi.stats.agi',
-  sta: 'itemUi.stats.sta',
-  int: 'itemUi.stats.int',
-  spi: 'itemUi.stats.spi',
-};
-
 // Classic class colors (CLASSES[cls].color is a 0xRRGGBB number) as a CSS
 // string, used to color-code party members on the minimap and in the frames.
 const classCss = (cls: string): string =>
@@ -1209,6 +1215,18 @@ export class Hud {
   private readonly lootRolls: LootRollController;
   private openVendorNpcId: number | null = null;
   private openHeroicVendorNpcId: number | null = null;
+  // Craft tier-up snapshot (Professions 2.0 Phase 6): the last SYNCED
+  // craftSkills observation handleEvents diffs for tier crossings. null until
+  // the first synced observation, which initializes silently (no toasts for
+  // history on login/join).
+  private prevCraftSkills: Record<string, number> | null = null;
+  // Drains left in the post-craftResult window during which the tier-up diff
+  // runs (0 = disarmed; see the handleEvents tail).
+  private craftTierUpDrains = 0;
+  // The stationInRange value the open crafting window was last painted with;
+  // the slowHud band repaints the cold window only when the live predicate
+  // flips (walking into/out of the hub), since the server re-validates anyway.
+  private lastCraftingStationInRange = true;
   private readonly delveBoard: DelveBoardController;
   private readonly delveTracker: DelveTrackerController;
   private readonly lockpickController: LockpickController;
@@ -1393,7 +1411,7 @@ export class Hud {
       hideTooltip: () => this.hideTooltip(),
       attachTooltip: (element, html) => this.attachTooltip(element, html),
       itemIcon: (item) => this.itemIcon(item),
-      itemTooltip: (item) => this.itemTooltip(item),
+      itemTooltip: (item, instance?: ItemInstancePayload) => this.itemTooltip(item, true, instance),
       delveName: delveDisplayName,
       preloadInterior: (event) => this.renderer.handleEvent(event),
     });
@@ -1472,7 +1490,7 @@ export class Hud {
       closeTransient: () => this.closeOtherWindows('#quest-dialog'),
       hideTooltip: () => this.hideTooltip(),
       itemIcon: (item) => this.itemIcon(item),
-      itemTooltip: (item) => this.itemTooltip(item),
+      itemTooltip: (item, instance?: ItemInstancePayload) => this.itemTooltip(item, true, instance),
       attachTooltip: (element, html) => this.attachTooltip(element, html),
       openChronicles: () => this.openDeeds('chronicle'),
       openVendor: (npcId) => this.openVendor(npcId),
@@ -1499,7 +1517,7 @@ export class Hud {
       money: (copper) => this.moneyHtml(copper),
       coinIconUrl: () => iconDataUrl('item', 'coin_gold'),
       itemIcon: (item) => this.itemIcon(item),
-      itemTooltip: (item) => this.itemTooltip(item),
+      itemTooltip: (item, instance?: ItemInstancePayload) => this.itemTooltip(item, true, instance),
       attachTooltip: (element, html) => this.attachTooltip(element, html),
       centerPopup: (element) => this.centerPopupInViewport(element),
       placePopup: (element, x, y, reserveRight, reserveBottom, minLeft, minTop) =>
@@ -1511,7 +1529,7 @@ export class Hud {
       now: () => performance.now(),
       isMobileLayout: () => this.isMobileLayout(),
       itemIcon: (item) => this.itemIcon(item),
-      itemTooltip: (item) => this.itemTooltip(item),
+      itemTooltip: (item, instance?: ItemInstancePayload) => this.itemTooltip(item, true, instance),
       attachTooltip: (element, html) => this.attachTooltip(element, html),
       writers: this.writerFacet,
     });
@@ -1821,6 +1839,7 @@ export class Hud {
     $('#mm-town-focus')?.addEventListener('click', () => this.toggleTownFocus());
     $('#mm-quest').addEventListener('click', () => this.toggleQuestLog());
     $('#mm-deeds').addEventListener('click', () => this.toggleDeeds());
+    $('#mm-professions').addEventListener('click', () => this.toggleProfessions());
     // Collapse/expand the on-screen quest tracker by clicking its header. The
     // overlay is click-through (pointer-events:none) except the header button, so
     // delegate on the stable container (the header is rebuilt on each render).
@@ -1897,6 +1916,7 @@ export class Hud {
       '#bank-window',
       '#bags',
       '#deeds-window',
+      '#professions-window',
     ]) {
       $(panelId).addEventListener('keydown', (e) => {
         if ((e.target as HTMLElement).tagName !== 'BUTTON') return;
@@ -2505,6 +2525,10 @@ export class Hud {
       case 'deeds-window':
         // Route through the painter so focus returns to the opener (WCAG 2.2 AA).
         this.deedsWindow.close();
+        break;
+      case 'professions-window':
+        // Route through the painter so focus returns to the opener (WCAG 2.2 AA).
+        this.professionsWindow.close();
         break;
       case 'arena-window':
         // Route through the painter so focus returns to the opener (WCAG 2.2 AA),
@@ -3365,7 +3389,7 @@ export class Hud {
   private readonly presentationBag: PainterHostPresentation = {
     itemIcon: (item) => this.itemIcon(item),
     moneyHtml: (copper) => this.moneyHtml(copper),
-    itemTooltip: (item) => this.itemTooltip(item),
+    itemTooltip: (item, instance?: ItemInstancePayload) => this.itemTooltip(item, true, instance),
     attachTooltip: (el, html) => this.attachTooltip(el, html),
   };
   // The interactive talents window. All allocation reads and mutations cross the
@@ -3552,6 +3576,19 @@ export class Hud {
     consumePeek: () => this.peekGuard.consume(),
     ...this.windowFocus('#deeds-window'),
     onWatchChanged: () => this.updateDeedTracker(),
+  });
+  // Professions window painter (professions_view.ts core + the composed
+  // profession_identity_view model + professions_window.ts painter): the
+  // read-only craft-wheel identity browser over IWorldProfessions. A
+  // standalone trapping window (windowFocus), the deeds shape exactly.
+  private readonly professionsWindow = new ProfessionsWindow({
+    ...this.presentationBag,
+    root: () => $('#professions-window'),
+    world: () => this.sim,
+    closeOthers: () => this.closeOtherWindows('#professions-window'),
+    hideTooltip: () => this.hideTooltip(),
+    consumePeek: () => this.peekGuard.consume(),
+    ...this.windowFocus('#professions-window'),
   });
   // Watchlist HUD tracker (#deed-tracker): slow-band painter over the one
   // reused tracker-view container (allocation-light by contract).
@@ -4360,7 +4397,11 @@ export class Hud {
     this.hideTooltip();
   }
 
-  private itemTooltip(item: ItemDef, compare = true): string {
+  // `instance` is the optional per-copy payload (#1165): a masterwork seal, a
+  // maker's mark, or baked bonus stats specific to THIS copy. Absent for
+  // fungible stacks and def-only surfaces (the crafting window's result rows),
+  // so those render exactly as before.
+  private itemTooltip(item: ItemDef, compare = true, instance?: ItemInstancePayload): string {
     const qColor = QUALITY_COLOR[item.quality ?? 'common'] ?? '#fff';
     let html = `<div class="tt-title" style="color:${qColor}">${esc(itemDisplayName(item))}</div>`;
     // Quality/kind line, e.g. "Epic Armor". Heroic items (dungeon upgraded variants
@@ -4415,6 +4456,10 @@ export class Hud {
     if (item.soulbound) {
       html += `<div class="tt-sub" style="color:#ffd100">${esc(t('hudChrome.itemSoulbound'))}</div>`;
     }
+    // Per-copy instance badges (Professions 2.0 Phase 2/6): the masterwork
+    // seal and the enchanted marker (item_instance_tooltip.ts owns the copy
+    // rules, incl. never claiming a quality-rank upgrade).
+    html += instanceBadgeLines(instance);
     if (item.weapon) {
       const dps = (item.weapon.min + item.weapon.max) / 2 / item.weapon.speed;
       html += `<div class="tt-stat">${esc(
@@ -4443,6 +4488,7 @@ export class Hud {
         }
       }
     }
+    html += instanceBonusStatLines(instance);
     const warfareRating = Math.min(item.pvpOffenseRating ?? 0, item.pvpDefenseRating ?? 0);
     if (warfareRating > 0) {
       html += `<div class="tt-green">${esc(
@@ -4493,6 +4539,7 @@ export class Hud {
     }
     html += this.itemProcBlock(item);
     html += this.itemSetBlock(item);
+    html += instanceMakersMarkLine(instance);
     if (item.sellValue > 0)
       html += `<div class="tt-sub">${esc(t('itemUi.tooltip.sellPrice', { money: formatLocalizedMoney(item.sellValue) }))}</div>`;
     if (compare) html += this.itemCompareBlock(item);
@@ -4727,6 +4774,7 @@ export class Hud {
     if (this.marketWindow.isOpen) this.marketWindow.render();
     if (this.bankWindow.isOpen) this.bankWindow.render();
     if (this.deedsWindow.isOpen) this.deedsWindow.render();
+    if (this.professionsWindow.isOpen) this.professionsWindow.render();
     // The deed tracker's texts re-localize on its next elided paint; run one
     // now so the strip never shows a stale language for up to a slow tick.
     this.updateDeedTracker();
@@ -6140,6 +6188,7 @@ export class Hud {
       ['#mm-talents', 'talents', 'game.talents.title'],
       ['#mm-quest', 'questlog', 'questUi.log.title'],
       ['#mm-deeds', 'deeds', 'hudChrome.deeds.title'],
+      ['#mm-professions', 'professions', 'hudChrome.professions.title'],
       ['#mm-map', 'map', 'hud.core.mobileMap'],
       ['#mm-bag', 'bags', 'itemUi.bags.title'],
       ['#mm-crafting', 'crafting', 'hudChrome.crafting.title'],
@@ -6750,6 +6799,16 @@ export class Hud {
       const townFocusBtn = document.getElementById('mm-town-focus');
       if (townFocusBtn) townFocusBtn.style.display = inTown ? '' : 'none';
       if (this.townFocusOpen) this.renderTownFocus();
+      // Crafting window staleness (Phase 6): the window is a cold painter, so
+      // an open window repaints only when the hub-station predicate flips
+      // (walking in/out of range). Cheap distance check on the slow band; the
+      // server re-validates the gate on every craft regardless.
+      if (
+        $('#crafting-window').style.display === 'block' &&
+        canUseCraftingHubStation(sim.player.pos, sim.player.level) !==
+          this.lastCraftingStationInRange
+      )
+        this.renderCrafting();
     }
 
     // player frame: the first instance of the unit_frame family. Build a
@@ -7325,6 +7384,7 @@ export class Hud {
     // The bank closes itself when the bank mirror goes null (left the banker).
     if (slowHud && this.bankWindow.isOpen) this.bankWindow.refreshIfChanged();
     if (slowHud && this.deedsWindow.isOpen) this.deedsWindow.refreshIfChanged();
+    if (slowHud && this.professionsWindow.isOpen) this.professionsWindow.refreshIfChanged();
     // The deed tracker is always-on chrome (not gated on a window): watched
     // progress climbs from normal play, and earned deeds drop off.
     if (slowHud) this.updateDeedTracker();
@@ -8311,6 +8371,9 @@ export class Hud {
     // banners coalesce to the last unlock, retro back-credits collapse into
     // one summary line, and the celebration sound plays once.
     const deedUnlocks: { deedId: string; retro?: boolean }[] = [];
+    // Personal masterwork procs batch the same way (handleCraftCelebrations):
+    // coalesced to the drain's last proc, planned purely alongside tier-ups.
+    let masterworkItemId: string | null = null;
     // One spawn clock for the whole batch: FCT floaters spawned from this event burst
     // share a bornAt, and the pooled painter's step() evicts each once now - bornAt >= ttl.
     const now = performance.now();
@@ -8628,6 +8691,11 @@ export class Hud {
           break;
         }
         case 'craftResult': {
+          // Arm the tier-up state check below: skills only ever change on a
+          // craft, and online the cprof mirror can land a few snapshots after
+          // this event, so the diff stays armed for a bounded drain window
+          // instead of polling every frame.
+          this.craftTierUpDrains = CRAFT_TIER_UP_DRAIN_WINDOW;
           if (ev.ok && ev.itemId) {
             const item = ITEMS[ev.itemId];
             const name = item ? itemDisplayName(item) : ev.itemId;
@@ -8652,6 +8720,30 @@ export class Hud {
             );
           }
           if ($('#crafting-window').style.display === 'block') this.renderCrafting();
+          break;
+        }
+        case 'masterwork': {
+          // Personal masterwork proc (Professions 2.0 Phase 6). The grant hub
+          // already printed the loot line + cue and the craftResult arm above
+          // already logged craftedToast + lootItem, so this arm re-logs no
+          // grant and re-cues no lootItem: it only feeds the drain-end
+          // celebration plan (banner + toast + ONE audio.achievement).
+          masterworkItemId = ev.itemId;
+          break;
+        }
+        case 'masterworkZone': {
+          // Soft zone broadcast: every recipient in the crafter's zone,
+          // INCLUDING the crafter, logs the localized line; NO audio cue for
+          // anyone (the crafter's own celebration sound rides the personal
+          // 'masterwork' plan above). The gatherRareEvent render pattern.
+          const item = ITEMS[ev.itemId];
+          this.log(
+            t('hudChrome.crafting.masterworkZoneLine', {
+              crafter: ev.crafterName,
+              name: item ? itemDisplayName(item) : ev.itemId,
+            }),
+            QUALITY_COLOR.epic,
+          );
           break;
         }
         case 'gatherResult': {
@@ -9624,6 +9716,64 @@ export class Hud {
       }
     }
     if (deedUnlocks.length > 0) this.handleDeedUnlocks(deedUnlocks);
+    // Craft tier crossings are STATE-driven, not event-driven: online the
+    // cprof mirror can land a snapshot after (or without) this drain's
+    // events, so the observation reads the live craftSkills rather than an
+    // event payload. The armed-window rules (bounded post-craftResult drains,
+    // the synced guard, the silent first init, disarm-on-change) live in the
+    // pure step observeCraftSkillsForTierUps (craft_celebration_view.ts).
+    const obs = observeCraftSkillsForTierUps(
+      sim.craftingIdentity.synced,
+      this.prevCraftSkills,
+      sim.craftSkills,
+      this.craftTierUpDrains,
+    );
+    this.prevCraftSkills = obs.prev;
+    this.craftTierUpDrains = obs.drains;
+    if (masterworkItemId !== null || obs.tierUps.length > 0)
+      this.handleCraftCelebrations(masterworkItemId, obs.tierUps);
+  }
+
+  // The crafted earned moment, planned purely (craft_celebration_view) so the
+  // batching rules stay unit-pinned: the durable log copy for the masterwork
+  // proc and each tier crossing, the single banner slot coalesced (masterwork
+  // outranks tier-up), and at most ONE celebration sound per drain. The
+  // reduced-motion probe (the skin controller precedent) trims motion only,
+  // never information.
+  private handleCraftCelebrations(masterworkItemId: string | null, tierUps: CraftTierUp[]): void {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const plan = buildCraftCelebrationPlan({
+      masterwork: masterworkItemId !== null ? { itemId: masterworkItemId } : null,
+      tierUps,
+      reducedMotion,
+    });
+    const masterworkText = (itemId: string) => {
+      const item = ITEMS[itemId];
+      return t('hudChrome.crafting.masterworkToast', {
+        name: item ? itemDisplayName(item) : itemId,
+      });
+    };
+    const tierUpText = (up: CraftTierUp) =>
+      t('hudChrome.crafting.tierUpToast', {
+        craft: craftNameText(up.craftId),
+        tier: formatNumber(up.toTier, { maximumFractionDigits: 0 }),
+      });
+    if (plan.masterworkLogItemId !== null)
+      this.log(masterworkText(plan.masterworkLogItemId), '#ffd100');
+    for (const up of plan.tierUpLogs) this.log(tierUpText(up), '#ffd100');
+    if (plan.banner !== null) {
+      const text =
+        plan.banner.kind === 'masterwork'
+          ? masterworkText(plan.banner.itemId)
+          : tierUpText(plan.banner);
+      // plan.motion trims the banner fade only; the announcer push below is
+      // the polite #combat-live ARIA region (accessibility, never gated).
+      this.showBanner(text, plan.motion);
+      // The banner div carries no live semantics (the handleDeedUnlocks
+      // precedent), so the polite #combat-live region carries the copy.
+      this.combatAnnouncer.push(text, performance.now());
+    }
+    if (plan.playSound) audio.achievement();
   }
 
   // The earned moment, planned purely (deeds_view buildDeedUnlockPlan) so the
@@ -10329,8 +10479,12 @@ export class Hud {
     }
   }
 
-  showBanner(text: string): void {
+  showBanner(text: string, motion = true): void {
     this.bannerEl.textContent = text;
+    // Reduced-motion celebrations (craft plan.motion) show and hide the
+    // banner without the fade transition: identical text and duration, no
+    // animation. Motion-trimming only; information always survives.
+    this.bannerEl.classList.toggle('banner-no-motion', !motion);
     this.bannerEl.style.opacity = '1';
     clearTimeout(this.bannerTimer);
     this.bannerTimer = window.setTimeout(() => {
@@ -10621,6 +10775,11 @@ export class Hud {
   }
 
   private renderCrafting(): void {
+    // Hub-station range for #1297 station-bound rows: the same pure predicate
+    // the sim's not_at_hub deny composes (position AND level), so the row
+    // disable mirrors the deny exactly. The server re-validates on craft.
+    const stationInRange = canUseCraftingHubStation(this.sim.player.pos, this.sim.player.level);
+    this.lastCraftingStationInRange = stationInRange;
     renderCraftingWindow(
       $('#crafting-window'),
       buildCraftingView(
@@ -10629,6 +10788,7 @@ export class Hud {
         ITEMS,
         this.sim.craftSkills,
         this.sim.craftingIdentity,
+        stationInRange,
       ),
       {
         ...this.presentationBag,
@@ -10756,6 +10916,13 @@ export class Hud {
 
   get deedsWindowOpen(): boolean {
     return this.deedsWindow.isOpen;
+  }
+
+  // The Professions window entry point (keybind, minimap, and More-tray all
+  // toggle; Esc closes via the managed-window case directly). Open/close/isOpen
+  // wrappers land only when a consumer lands with them.
+  toggleProfessions(): void {
+    this.professionsWindow.toggle();
   }
 
   // Repaint the deed tracker from the live facet: the slow band, a watch
@@ -12064,8 +12231,13 @@ export class Hud {
     const view = buildPaperdollView(e.equippedItems, ITEMS);
     const leftCol = el.querySelector('#inspect-equip-left');
     const rightCol = el.querySelector('#inspect-equip-right');
-    for (const cell of view.left) leftCol?.appendChild(this.buildInspectSlotRow(cell));
-    for (const cell of view.right) rightCol?.appendChild(this.buildInspectSlotRow(cell));
+    // Per-copy payloads ride the `eqi` identity mirror (EntityView
+    // .equippedInstances) so an inspected player's masterwork seal / maker's
+    // mark shows in the row tooltip; sparse, so most slots pass undefined.
+    for (const cell of view.left)
+      leftCol?.appendChild(this.buildInspectSlotRow(cell, e.equippedInstances[cell.slot]));
+    for (const cell of view.right)
+      rightCol?.appendChild(this.buildInspectSlotRow(cell, e.equippedInstances[cell.slot]));
     el.querySelector('[data-close]')?.addEventListener('click', () => {
       el.style.display = 'none';
     });
@@ -12148,7 +12320,7 @@ export class Hud {
   // equipped item (quality-tinted) with its tooltip. Unlike the character window's
   // own paperdoll row, there are no unequip / drag affordances (another player's
   // gear is view-only); the quality color comes from the shared QUALITY_COLOR map.
-  private buildInspectSlotRow(cell: PaperdollSlot): HTMLElement {
+  private buildInspectSlotRow(cell: PaperdollSlot, instance?: ItemInstancePayload): HTMLElement {
     const { slot, item } = cell;
     const row = document.createElement('div');
     row.className = 'equip-slot';
@@ -12157,7 +12329,7 @@ export class Hud {
       ? this.itemIcon(item)
       : `<img class="item-icon" src="${iconDataUrl('item', 'slot_empty')}" alt="" draggable="false">`;
     row.innerHTML = `${icon}<div><div class="slot-name">${esc(itemSlotName(slot))}</div><div class="slot-item"${item ? ` style="color:${qColor}"` : ''}>${item ? esc(itemDisplayName(item)) : esc(t('itemUi.equipment.empty'))}</div></div>`;
-    if (item) this.attachTooltip(row, () => this.itemTooltip(item));
+    if (item) this.attachTooltip(row, () => this.itemTooltip(item, true, instance));
     return row;
   }
 
@@ -12996,18 +13168,6 @@ function itemKindLabel(kind: ItemDef['kind']): string {
   return t(ITEM_KIND_LABEL_KEYS[kind]);
 }
 
-function itemStatName(stat: string): string {
-  const key = ITEM_STAT_LABEL_KEYS[stat as keyof Stats];
-  return key ? t(key) : cap(stat);
-}
-
-function itemNumber(value: number, fractionDigits = 0): string {
-  return formatNumber(value, {
-    minimumFractionDigits: fractionDigits,
-    maximumFractionDigits: fractionDigits,
-  });
-}
-
 function parseSimMoney(text: string): number | null {
   let copper = 0;
   let matched = false;
@@ -13183,10 +13343,6 @@ function abilityAmountRange(min: number, max: number): string {
     min: formatAbilityNumber(min),
     max: formatAbilityNumber(max),
   });
-}
-
-function cap(s: string): string {
-  return s ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
 // A 2D canvas context is non-null for any attached canvas in this app; centralize
