@@ -750,6 +750,7 @@ export const cs_CZ: EnTranslations = {
       "leaderboard": "Žebříčky",
       "dailyRewards": "Obchod",
       "deeds": "Skutky",
+      "professions": "Professions",
       "nameplates": "Jména",
       "haptics": "Haptika",
       "hapticsOff": "Haptika vypnuta",
@@ -2082,7 +2083,9 @@ export const cs_CZ: EnTranslations = {
       "mining": "Těžba",
       "logging": "Dřevorubectví",
       "herbalism": "Bylinkářství",
-      "notReady": "Tento zdroj pro tebe ještě neobnovil zásoby."
+      "notReady": "Tento zdroj pro tebe ještě neobnovil zásoby.",
+      "gatherLine": "You gather: {name}.",
+      "gatherLineQty": "You gather: {name} x{qty}."
     },
     "archetypeTitle": {
       "label": "Titul",
@@ -2113,6 +2116,42 @@ export const cs_CZ: EnTranslations = {
       "tailoring": "Krejčovství",
       "leatherworking": "Kožedělnictví"
     },
+    "professions": {
+      "title": "Professions",
+      "close": "Close professions",
+      "ringAria": "Craft wheel",
+      "skillsHeader": "Craft skills",
+      "gatheringHeader": "Gathering",
+      "perksHeader": "Perks",
+      "identityHeader": "Identity",
+      "roleMajor": "Major",
+      "roleHobby": "Hobby",
+      "roleDormant": "Dormant",
+      "roleUnattuned": "Unattuned",
+      "ceilingUnlimited": "No empowerment cap",
+      "ceilingRare": "Rare cap",
+      "ceilingCommon": "Common cap",
+      "skillValue": "{skill} / {max}",
+      "tierPipAria": "Tier {tier}",
+      "nextUnlockTier": "{points} points to the next tier: masterwork odds improve",
+      "nextUnlockSpecialized": "{points} points to Specialized: material costs drop",
+      "nextUnlockMax": "At maximum skill",
+      "perkSpecializedLine": "{craft}: Specialized, material costs -{pct}%",
+      "perkSpecializedAt": "Specializes at {threshold} skill",
+      "switchCost": "Next archetype switch costs {cost} amends",
+      "syncing": "Waiting for your profession data from the realm.",
+      "tutorialLine": "Reach {target} skill in any craft to unlock your first tier.",
+      "ctaHeader": "Next step",
+      "ctaRaise": "Keep raising {craft}: {points} more points to the next tier.",
+      "ctaStart": "Craft or gather with any profession to begin.",
+      "unattunedIdentity": "You are not yet attuned to an archetype. Raise your crafts and complete an attunement to choose your pair.",
+      "nudgeNearTier": "{craft}: {points} points from the next tier",
+      "nudgeDormant": "Your {craft} knowledge lies dormant",
+      "hobbyLabel": "Hobby: {craft}",
+      "majorsLabel": "Majors: {a} and {b}",
+      "pairsHeld": "Pairs held: {count}",
+      "returnsLabel": "Returns: {count}"
+    },
     "crafting": {
       "title": "Výroba",
       "close": "Zavřít výrobu",
@@ -2131,6 +2170,7 @@ export const cs_CZ: EnTranslations = {
       "comboNotAttuned": "Nejprve zvol pár archetypů.",
       "comboWrongPair": "Pro výrobu aktivuj přesně tento pár.",
       "comboTierUnmet": "Dostaň oba hlavní obory na požadovanou úroveň.",
+      "comboTierUnmetNamed": "Raise {crafts} to tier {tier}.",
       "professionChoice": "Volba profese",
       "noProfessionChoice": "V tuto chvíli není dostupná žádná platná volba profese.",
       "pairOptionLabel": "{pair} ({craftA} + {craftB})",
@@ -2163,7 +2203,19 @@ export const cs_CZ: EnTranslations = {
       },
       "notAtHub": "Abys to mohl vyrobit, musíš být v řemeslném centru a mít potřebnou úroveň.",
       "throttled": "Vyrábíš příliš rychle. Chvíli počkej a zkus to znovu.",
-      "recipeNotLearned": "Tento recept ses ještě nenaučil."
+      "recipeNotLearned": "Tento recept ses ještě nenaučil.",
+      "skillReqLine": "Requires {craft} {skill}",
+      "difficultyFull": "Full skill gain",
+      "difficultyReduced": "Reduced skill gain",
+      "difficultyNone": "No skill gain",
+      "stationBadge": "Station",
+      "stationOutOfRange": "Move to the crafting hub station to craft this.",
+      "masterworkToast": "Masterwork! {name}",
+      "masterworkZoneLine": "{crafter} crafted a masterwork {name}!",
+      "tierUpToast": "{craft} advanced to tier {tier}!",
+      "makersMark": "Crafted by {name}",
+      "masterworkSeal": "Masterwork",
+      "enchantedLine": "Enchanted"
     },
     "finder": {
       "title": "Hledač dungeonů",
@@ -2331,6 +2383,11 @@ export const cs_CZ: EnTranslations = {
       "broadcastsLabel": "Sdílet vykonané skutky s cechem a přáteli",
       "titledName": "{name} [{title}]"
     }
+  },
+  "gatherEvent": {
+    "pristineVein": "{finder} struck a pristine vein!",
+    "ancientHeartwood": "{finder} felled an ancient heartwood!",
+    "moonlitBloom": "{finder} discovered a moonlit bloom!"
   },
   "apiError": {
     "validation": {
@@ -6083,6 +6140,7 @@ export const cs_CZ: EnTranslations = {
       "rarityUncommon": "Neobvyklé",
       "rarityRare": "Vzácné",
       "rarityEpic": "Epické",
+      "rarityLegendary": "Legendary",
       "merchantStock": "Zásoby Obchodníka",
       "stackCount": "x{count}",
       "each": "{money} za kus",
@@ -7007,7 +7065,7 @@ export const cs_CZ: EnTranslations = {
       },
       "raging_gale": {
         "name": "Dvojúder",
-        "description": "Okamžitě dvakrát udeříš zbraní, každý zásah způsobí 40 % poškození zbraně plus {damage}, a vygeneruješ 8 vzteku. Ukládá až 2 nabití. (Fury)"
+        "description": "Okamžitě dvakrát udeříš zbraní, každý zásah způsobí 40 % poškození zbraně plus {damage}, a vygeneruješ 4 vzteku. Ukládá až 2 nabití. (Fury)"
       },
       "red_harvest": {
         "name": "Rudá žeň",
@@ -8137,6 +8195,18 @@ export const cs_CZ: EnTranslations = {
       },
       "emberglass_warstaff": {
         "name": "Bojová hůl z uhlíkového skla"
+      },
+      "copper_ore": {
+        "name": "Copper Ore"
+      },
+      "iron_ore": {
+        "name": "Iron Ore"
+      },
+      "ironbark_log": {
+        "name": "Ironbark Log"
+      },
+      "silverleaf_herb": {
+        "name": "Silverleaf Herb"
       },
       "conjured_water4": {
         "name": "Vyčarovaná pramenitá voda"

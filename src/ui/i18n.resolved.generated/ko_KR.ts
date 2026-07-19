@@ -750,6 +750,7 @@ export const ko_KR: EnTranslations = {
       "leaderboard": "순위",
       "dailyRewards": "상점",
       "deeds": "업적",
+      "professions": "전문 기술",
       "nameplates": "이름표",
       "haptics": "진동",
       "hapticsOff": "진동 꺼짐",
@@ -2082,7 +2083,9 @@ export const ko_KR: EnTranslations = {
       "mining": "채광",
       "logging": "벌목",
       "herbalism": "약초학",
-      "notReady": "이 자원 채집지는 아직 당신을 위해 재생성되지 않았습니다."
+      "notReady": "이 자원 채집지는 아직 당신을 위해 재생성되지 않았습니다.",
+      "gatherLine": "{name}을(를) 채집했습니다.",
+      "gatherLineQty": "{name}을(를) {qty}개 채집했습니다."
     },
     "archetypeTitle": {
       "label": "칭호",
@@ -2113,6 +2116,42 @@ export const ko_KR: EnTranslations = {
       "tailoring": "재봉",
       "leatherworking": "가죽세공"
     },
+    "professions": {
+      "title": "전문 기술",
+      "close": "전문 기술 닫기",
+      "ringAria": "기술의 수레바퀴",
+      "skillsHeader": "제작 기술",
+      "gatheringHeader": "채집",
+      "perksHeader": "특전",
+      "identityHeader": "정체성",
+      "roleMajor": "주 전공",
+      "roleHobby": "취미",
+      "roleDormant": "비활성",
+      "roleUnattuned": "미조율",
+      "ceilingUnlimited": "강화 상한 없음",
+      "ceilingRare": "희귀 상한",
+      "ceilingCommon": "일반 상한",
+      "skillValue": "{skill} / {max}",
+      "tierPipAria": "티어 {tier}",
+      "nextUnlockTier": "다음 티어까지 숙련도 {points} 남음: 걸작 확률이 높아집니다",
+      "nextUnlockSpecialized": "전문화까지 숙련도 {points} 남음: 재료 소모가 줄어듭니다",
+      "nextUnlockMax": "최대 숙련도입니다",
+      "perkSpecializedLine": "{craft}: 전문화, 재료 소모 -{pct}%",
+      "perkSpecializedAt": "숙련도 {threshold}에서 전문화됩니다",
+      "switchCost": "다음 원형 전환에는 속죄 {cost}이 필요합니다",
+      "syncing": "서버에서 전문 기술 정보를 불러오고 있습니다.",
+      "tutorialLine": "아무 기술이나 숙련도 {target}까지 올리면 첫 티어가 열립니다.",
+      "ctaHeader": "다음 단계",
+      "ctaRaise": "{craft}를 계속 올리세요. 다음 티어까지 숙련도 {points} 남았습니다.",
+      "ctaStart": "아무 전문 기술로 제작하거나 채집하면 시작됩니다.",
+      "unattunedIdentity": "아직 원형에 조율되지 않았습니다. 기술을 올리고 조율을 완료하여 조합을 선택하세요.",
+      "nudgeNearTier": "{craft}: 다음 티어까지 숙련도 {points}",
+      "nudgeDormant": "{craft} 지식이 비활성 상태입니다",
+      "hobbyLabel": "취미: {craft}",
+      "majorsLabel": "주 전공: {a}, {b}",
+      "pairsHeld": "보유한 조합: {count}",
+      "returnsLabel": "복귀: {count}"
+    },
     "crafting": {
       "title": "제작",
       "close": "제작 닫기",
@@ -2131,6 +2170,7 @@ export const ko_KR: EnTranslations = {
       "comboNotAttuned": "먼저 원형 기술 조합을 선택하세요.",
       "comboWrongPair": "제작하려면 이 정확한 조합을 활성화하세요.",
       "comboTierUnmet": "두 주 전공을 모두 필요한 티어까지 올리세요.",
+      "comboTierUnmetNamed": "{crafts}을(를) 티어 {tier}까지 올리세요.",
       "professionChoice": "전문 기술 선택",
       "noProfessionChoice": "현재 선택할 수 있는 전문 기술이 없습니다.",
       "pairOptionLabel": "{pair} ({craftA} + {craftB})",
@@ -2163,7 +2203,19 @@ export const ko_KR: EnTranslations = {
       },
       "notAtHub": "그것을 제작하려면 필요한 레벨로 제작 거점에 있어야 합니다.",
       "throttled": "너무 빨리 제작하고 있습니다. 잠시 후 다시 시도하세요.",
-      "recipeNotLearned": "아직 그 제작법을 배우지 않았습니다."
+      "recipeNotLearned": "아직 그 제작법을 배우지 않았습니다.",
+      "skillReqLine": "{craft} {skill} 필요",
+      "difficultyFull": "숙련도 전량 상승",
+      "difficultyReduced": "숙련도 상승 감소",
+      "difficultyNone": "숙련도 상승 없음",
+      "stationBadge": "제작 거점",
+      "stationOutOfRange": "제작하려면 제작 거점으로 이동하세요.",
+      "masterworkToast": "걸작! {name}",
+      "masterworkZoneLine": "{crafter}님이 걸작 {name}을(를) 제작했습니다!",
+      "tierUpToast": "{craft} 티어 {tier} 달성!",
+      "makersMark": "제작자: {name}",
+      "masterworkSeal": "걸작",
+      "enchantedLine": "마법부여됨"
     },
     "finder": {
       "title": "던전 찾기",
@@ -2331,6 +2383,11 @@ export const ko_KR: EnTranslations = {
       "broadcastsLabel": "업적 달성을 길드와 친구에게 공유",
       "titledName": "{name} [{title}]"
     }
+  },
+  "gatherEvent": {
+    "pristineVein": "{finder}님이 순수한 광맥을 발견했습니다!",
+    "ancientHeartwood": "{finder}님이 고대 심목을 베어냈습니다!",
+    "moonlitBloom": "{finder}님이 달빛 꽃을 발견했습니다!"
   },
   "apiError": {
     "validation": {
@@ -3383,13 +3440,13 @@ export const ko_KR: EnTranslations = {
       "craftHowTitle": "제작 창",
       "craftHowBody": "제작 창(기본 키 T)을 열면 여러분이 아는 모든 제작법과 각각에 필요한 재료, 그리고 지금 지닌 재료를 볼 수 있다. 재료가 갖춰져 있으면 클릭 한 번으로 제작된다. 일반적인 제작법은 세계 어디에서나 만들 수 있다. 다만 상위 도구와 희귀한 시전자 방어구를 비롯한 몇몇 고급 제작법은 하이워치의 제작 거점에 서 있어야 한다.",
       "craftMasteryTitle": "숙련도와 통달",
-      "craftMasteryBody": "제작에 성공하면 해당 전문직의 숙련도가 오르며, 숙련도가 제작법을 잠가 두는 일은 결코 없다. 제작법을 알고 그 재료를 지녔다면 언제든 시도할 수 있다. 숙련도가 대신 안겨 주는 것은 품질이니, 손에 익은 솜씨일수록 더 뛰어난 결과물을 내놓는다. 유일한 예외는 조합 제작법으로, 열리기 전에 두 전문직 모두에서 실력을 입증하기를 요구한다.",
+      "craftMasteryBody": "제작에 성공하면 해당 전문직의 숙련도가 오르며, 숙련도가 제작법을 잠가 두는 일은 결코 없다. 제작법을 알고 그 재료를 지녔다면 언제든 시도할 수 있다. 모든 제작법은 약속한 그대로의 결과물을 내놓지만, 손에 익은 솜씨는 이따금 걸작을 만들어 낸다. 같은 물건이되 마무리가 더 정교하고, 약간의 추가 힘이 깃들어 있다. 유일한 예외는 조합 제작법으로, 두 전문직을 잇는 원형에 조율하고 두 전문직 모두에서 검증된 실력을 갖춘 제작자에게만 열린다.",
       "craftComboTitle": "조합 제작법",
       "craftComboBody": "단일 전문직 자체의 제작법 목록을 넘어, 이 원환은 인접한 두 전문직을 동시에 필요로 하는 조합 제작법도 지원하여, 고립된 하나의 전문직이 아니라 원환 위에서 인접한 전문직들에 투자한 캐릭터에게 보상을 준다. 제작자는 두 전문직을 모두 스스로 지녀야 하며, 파트너의 숙련도가 어느 한쪽을 대신할 수는 없다.",
       "archetypeTitle": "열 가지 원형",
       "archetypeIntro": "열 가지 전문직은 각각 원형도 상징하며, 단순히 그 전문직에 종사하는 것을 넘어서는 더 넓은 정체성을 받아들일 수 있다. 당신의 현재 원형은 한 번에 하나뿐이며 목록이 아니다: 당신은 하나를 지니며, 원한다면 나중에 다른 것으로 바꿀 수 있다.",
       "archetypeChooseTitle": "원형 선택하기",
-      "archetypeChooseBody": "원형을 선언하는 것은 하나의 이야기 장면이 될 것이다: 그 정체성으로 당신을 공식적으로 받아들이는 퀘스트다. 그 길은 아직 만들어지는 중이므로, 지금은 모든 캐릭터가 그 선택을 앞에 둔 채 세계를 걷고 있으며, 그동안 모든 제작은 희귀 품질 등급까지 나아간다.",
+      "archetypeChooseBody": "원형을 선언하는 것은 하나의 이야기 장면이다: 그 정체성으로 당신을 공식적으로 받아들이는 퀘스트다. 선언하기 전에는 모든 전문직의 숙련도가 희귀 티어까지 오를 수 있다. 한 쌍을 받아들이면 그 두 전문직은 끝까지 열리고, 수레바퀴 반대편의 한 전문직은 취미로 곁에 남아 여전히 희귀 티어까지 쓸 수 있으며, 그 정체성을 지니는 동안 나머지 모든 전문직은 일반 티어에 머문다.",
       "archetypeSwitchTitle": "마음을 바꾸기",
       "archetypeSwitchBody": "선언이 종신형이 되는 일도 없을 것이다. 계획은 새 원형을 받아들이기 전에 옛 전문직에 속죄하는 반복 가능한 절차이며, 바꿀 때마다 그 속죄는 조금씩 더 무거워져, 선택이 대가 없는 것이 아니라 늘 의미 있는 것으로 남는다. 선언 그 자체와 마찬가지로, 이 역시 아직 오는 중이다.",
       "archetypeIdentityTitle": "당신의 원형이 의미하는 것",
@@ -6083,6 +6140,7 @@ export const ko_KR: EnTranslations = {
       "rarityUncommon": "고급",
       "rarityRare": "희귀",
       "rarityEpic": "영웅",
+      "rarityLegendary": "전설",
       "merchantStock": "상인 재고",
       "stackCount": "x{count}",
       "each": "개당 {money}",
@@ -7007,7 +7065,7 @@ export const ko_KR: EnTranslations = {
       },
       "raging_gale": {
         "name": "쌍격",
-        "description": "무기로 즉시 두 번 공격하여 각 타격마다 무기 피해의 40%에 {damage}를 더한 피해를 입히고 분노 8를 생성합니다. 최대 2회까지 충전됩니다. (분노 특성)"
+        "description": "무기로 즉시 두 번 공격하여 각 타격마다 무기 피해의 40%에 {damage}를 더한 피해를 입히고 분노 4를 생성합니다. 최대 2회까지 충전됩니다. (분노 특성)"
       },
       "red_harvest": {
         "name": "붉은 수확",
@@ -8137,6 +8195,18 @@ export const ko_KR: EnTranslations = {
       },
       "emberglass_warstaff": {
         "name": "불씨유리 전투지팡이"
+      },
+      "copper_ore": {
+        "name": "구리 광석"
+      },
+      "iron_ore": {
+        "name": "철 광석"
+      },
+      "ironbark_log": {
+        "name": "무쇠껍질나무 통나무"
+      },
+      "silverleaf_herb": {
+        "name": "은빛잎 약초"
       },
       "conjured_water4": {
         "name": "창조된 샘물"

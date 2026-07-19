@@ -750,6 +750,7 @@ export const pl_PL: EnTranslations = {
       "leaderboard": "Rankingi",
       "dailyRewards": "Sklep",
       "deeds": "Czyny",
+      "professions": "Professions",
       "nameplates": "Nazwy",
       "haptics": "Wibracje",
       "hapticsOff": "Wibracje wył.",
@@ -2082,7 +2083,9 @@ export const pl_PL: EnTranslations = {
       "mining": "Górnictwo",
       "logging": "Wyrąb",
       "herbalism": "Zielarstwo",
-      "notReady": "Ten węzeł zasobu jeszcze nie odrósł dla ciebie."
+      "notReady": "Ten węzeł zasobu jeszcze nie odrósł dla ciebie.",
+      "gatherLine": "You gather: {name}.",
+      "gatherLineQty": "You gather: {name} x{qty}."
     },
     "archetypeTitle": {
       "label": "Tytuł",
@@ -2113,6 +2116,42 @@ export const pl_PL: EnTranslations = {
       "tailoring": "Krawiectwo",
       "leatherworking": "Garbarstwo"
     },
+    "professions": {
+      "title": "Professions",
+      "close": "Close professions",
+      "ringAria": "Craft wheel",
+      "skillsHeader": "Craft skills",
+      "gatheringHeader": "Gathering",
+      "perksHeader": "Perks",
+      "identityHeader": "Identity",
+      "roleMajor": "Major",
+      "roleHobby": "Hobby",
+      "roleDormant": "Dormant",
+      "roleUnattuned": "Unattuned",
+      "ceilingUnlimited": "No empowerment cap",
+      "ceilingRare": "Rare cap",
+      "ceilingCommon": "Common cap",
+      "skillValue": "{skill} / {max}",
+      "tierPipAria": "Tier {tier}",
+      "nextUnlockTier": "{points} points to the next tier: masterwork odds improve",
+      "nextUnlockSpecialized": "{points} points to Specialized: material costs drop",
+      "nextUnlockMax": "At maximum skill",
+      "perkSpecializedLine": "{craft}: Specialized, material costs -{pct}%",
+      "perkSpecializedAt": "Specializes at {threshold} skill",
+      "switchCost": "Next archetype switch costs {cost} amends",
+      "syncing": "Waiting for your profession data from the realm.",
+      "tutorialLine": "Reach {target} skill in any craft to unlock your first tier.",
+      "ctaHeader": "Next step",
+      "ctaRaise": "Keep raising {craft}: {points} more points to the next tier.",
+      "ctaStart": "Craft or gather with any profession to begin.",
+      "unattunedIdentity": "You are not yet attuned to an archetype. Raise your crafts and complete an attunement to choose your pair.",
+      "nudgeNearTier": "{craft}: {points} points from the next tier",
+      "nudgeDormant": "Your {craft} knowledge lies dormant",
+      "hobbyLabel": "Hobby: {craft}",
+      "majorsLabel": "Majors: {a} and {b}",
+      "pairsHeld": "Pairs held: {count}",
+      "returnsLabel": "Returns: {count}"
+    },
     "crafting": {
       "title": "Rzemiosło",
       "close": "Zamknij rzemiosło",
@@ -2131,6 +2170,7 @@ export const pl_PL: EnTranslations = {
       "comboNotAttuned": "Najpierw wybierz parę archetypów.",
       "comboWrongPair": "Aktywuj dokładnie tę parę, aby to wykonać.",
       "comboTierUnmet": "Podnieś obie główne specjalizacje do wymaganego poziomu.",
+      "comboTierUnmetNamed": "Raise {crafts} to tier {tier}.",
       "professionChoice": "Wybór profesji",
       "noProfessionChoice": "Aktualnie nie ma dostępnego wyboru profesji.",
       "pairOptionLabel": "{pair} ({craftA} + {craftB})",
@@ -2163,7 +2203,19 @@ export const pl_PL: EnTranslations = {
       },
       "notAtHub": "Musisz być w warsztacie rzemieślniczym i mieć wymagany poziom, aby to wytworzyć.",
       "throttled": "Wytwarzasz zbyt szybko. Zaczekaj chwilę i spróbuj ponownie.",
-      "recipeNotLearned": "Nie nauczyłeś się jeszcze tego przepisu."
+      "recipeNotLearned": "Nie nauczyłeś się jeszcze tego przepisu.",
+      "skillReqLine": "Requires {craft} {skill}",
+      "difficultyFull": "Full skill gain",
+      "difficultyReduced": "Reduced skill gain",
+      "difficultyNone": "No skill gain",
+      "stationBadge": "Station",
+      "stationOutOfRange": "Move to the crafting hub station to craft this.",
+      "masterworkToast": "Masterwork! {name}",
+      "masterworkZoneLine": "{crafter} crafted a masterwork {name}!",
+      "tierUpToast": "{craft} advanced to tier {tier}!",
+      "makersMark": "Crafted by {name}",
+      "masterworkSeal": "Masterwork",
+      "enchantedLine": "Enchanted"
     },
     "finder": {
       "title": "Znajdywacz Lochów",
@@ -2331,6 +2383,11 @@ export const pl_PL: EnTranslations = {
       "broadcastsLabel": "Ogłaszaj zdobyte czyny gildii i znajomym",
       "titledName": "{name} [{title}]"
     }
+  },
+  "gatherEvent": {
+    "pristineVein": "{finder} struck a pristine vein!",
+    "ancientHeartwood": "{finder} felled an ancient heartwood!",
+    "moonlitBloom": "{finder} discovered a moonlit bloom!"
   },
   "apiError": {
     "validation": {
@@ -6083,6 +6140,7 @@ export const pl_PL: EnTranslations = {
       "rarityUncommon": "Niezwykły",
       "rarityRare": "Rzadki",
       "rarityEpic": "Epicki",
+      "rarityLegendary": "Legendary",
       "merchantStock": "Zapasy kupca",
       "stackCount": "x{count}",
       "each": "{money} za sztukę",
@@ -7007,7 +7065,7 @@ export const pl_PL: EnTranslations = {
       },
       "raging_gale": {
         "name": "Bliźniaczy cios",
-        "description": "Natychmiast uderzasz bronią dwukrotnie, każde trafienie zadaje 40% obrażeń broni plus {damage}, a ty generujesz 8 wściekłości. Gromadzi maksymalnie 2 ładunki. (specjalizacja Furia)"
+        "description": "Natychmiast uderzasz bronią dwukrotnie, każde trafienie zadaje 40% obrażeń broni plus {damage}, a ty generujesz 4 wściekłości. Gromadzi maksymalnie 2 ładunki. (specjalizacja Furia)"
       },
       "red_harvest": {
         "name": "Krwawe żniwo",
@@ -8137,6 +8195,18 @@ export const pl_PL: EnTranslations = {
       },
       "emberglass_warstaff": {
         "name": "Warstaff z Żarowego Szkła"
+      },
+      "copper_ore": {
+        "name": "Copper Ore"
+      },
+      "iron_ore": {
+        "name": "Iron Ore"
+      },
+      "ironbark_log": {
+        "name": "Ironbark Log"
+      },
+      "silverleaf_herb": {
+        "name": "Silverleaf Herb"
       },
       "conjured_water4": {
         "name": "Wyczarowana woda źródlana"

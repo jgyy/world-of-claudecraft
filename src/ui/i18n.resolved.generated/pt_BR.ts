@@ -750,6 +750,7 @@ export const pt_BR: EnTranslations = {
       "leaderboard": "Classificação",
       "dailyRewards": "Loja",
       "deeds": "Feitos",
+      "professions": "Professions",
       "nameplates": "Nomes",
       "haptics": "Vibração",
       "hapticsOff": "Vibração desligada",
@@ -2082,7 +2083,9 @@ export const pt_BR: EnTranslations = {
       "mining": "Mineração",
       "logging": "Lenharia",
       "herbalism": "Herborismo",
-      "notReady": "Este nó de recursos ainda não se regenerou para você."
+      "notReady": "Este nó de recursos ainda não se regenerou para você.",
+      "gatherLine": "You gather: {name}.",
+      "gatherLineQty": "You gather: {name} x{qty}."
     },
     "archetypeTitle": {
       "label": "Título",
@@ -2113,6 +2116,42 @@ export const pt_BR: EnTranslations = {
       "tailoring": "Alfaiataria",
       "leatherworking": "Couraria"
     },
+    "professions": {
+      "title": "Professions",
+      "close": "Close professions",
+      "ringAria": "Craft wheel",
+      "skillsHeader": "Craft skills",
+      "gatheringHeader": "Gathering",
+      "perksHeader": "Perks",
+      "identityHeader": "Identity",
+      "roleMajor": "Major",
+      "roleHobby": "Hobby",
+      "roleDormant": "Dormant",
+      "roleUnattuned": "Unattuned",
+      "ceilingUnlimited": "No empowerment cap",
+      "ceilingRare": "Rare cap",
+      "ceilingCommon": "Common cap",
+      "skillValue": "{skill} / {max}",
+      "tierPipAria": "Tier {tier}",
+      "nextUnlockTier": "{points} points to the next tier: masterwork odds improve",
+      "nextUnlockSpecialized": "{points} points to Specialized: material costs drop",
+      "nextUnlockMax": "At maximum skill",
+      "perkSpecializedLine": "{craft}: Specialized, material costs -{pct}%",
+      "perkSpecializedAt": "Specializes at {threshold} skill",
+      "switchCost": "Next archetype switch costs {cost} amends",
+      "syncing": "Waiting for your profession data from the realm.",
+      "tutorialLine": "Reach {target} skill in any craft to unlock your first tier.",
+      "ctaHeader": "Next step",
+      "ctaRaise": "Keep raising {craft}: {points} more points to the next tier.",
+      "ctaStart": "Craft or gather with any profession to begin.",
+      "unattunedIdentity": "You are not yet attuned to an archetype. Raise your crafts and complete an attunement to choose your pair.",
+      "nudgeNearTier": "{craft}: {points} points from the next tier",
+      "nudgeDormant": "Your {craft} knowledge lies dormant",
+      "hobbyLabel": "Hobby: {craft}",
+      "majorsLabel": "Majors: {a} and {b}",
+      "pairsHeld": "Pairs held: {count}",
+      "returnsLabel": "Returns: {count}"
+    },
     "crafting": {
       "title": "Artesanato",
       "close": "Fechar elaboração",
@@ -2131,6 +2170,7 @@ export const pt_BR: EnTranslations = {
       "comboNotAttuned": "Escolha um par de arquétipo primeiro.",
       "comboWrongPair": "Ative exatamente este par para criar.",
       "comboTierUnmet": "Eleve ambos os ofícios principais ao nível exigido.",
+      "comboTierUnmetNamed": "Raise {crafts} to tier {tier}.",
       "professionChoice": "Escolha de profissão",
       "noProfessionChoice": "Nenhuma escolha de profissão válida está disponível no momento.",
       "pairOptionLabel": "{pair} ({craftA} + {craftB})",
@@ -2163,7 +2203,19 @@ export const pt_BR: EnTranslations = {
       },
       "notAtHub": "Você precisa estar no posto de criação, no nível exigido, para criar isso.",
       "throttled": "Você está criando rápido demais. Espere um momento e tente de novo.",
-      "recipeNotLearned": "Você ainda não aprendeu essa receita."
+      "recipeNotLearned": "Você ainda não aprendeu essa receita.",
+      "skillReqLine": "Requires {craft} {skill}",
+      "difficultyFull": "Full skill gain",
+      "difficultyReduced": "Reduced skill gain",
+      "difficultyNone": "No skill gain",
+      "stationBadge": "Station",
+      "stationOutOfRange": "Move to the crafting hub station to craft this.",
+      "masterworkToast": "Masterwork! {name}",
+      "masterworkZoneLine": "{crafter} crafted a masterwork {name}!",
+      "tierUpToast": "{craft} advanced to tier {tier}!",
+      "makersMark": "Crafted by {name}",
+      "masterworkSeal": "Masterwork",
+      "enchantedLine": "Enchanted"
     },
     "finder": {
       "title": "Localizador de Masmorras",
@@ -2331,6 +2383,11 @@ export const pt_BR: EnTranslations = {
       "broadcastsLabel": "Compartilhar feitos desbloqueados com a guilda e os amigos",
       "titledName": "{name} [{title}]"
     }
+  },
+  "gatherEvent": {
+    "pristineVein": "{finder} struck a pristine vein!",
+    "ancientHeartwood": "{finder} felled an ancient heartwood!",
+    "moonlitBloom": "{finder} discovered a moonlit bloom!"
   },
   "apiError": {
     "validation": {
@@ -6083,6 +6140,7 @@ export const pt_BR: EnTranslations = {
       "rarityUncommon": "Incomum",
       "rarityRare": "Raro",
       "rarityEpic": "Épico",
+      "rarityLegendary": "Legendary",
       "merchantStock": "Estoque do Mercador",
       "stackCount": "x{count}",
       "each": "{money} cada",
@@ -7007,7 +7065,7 @@ export const pt_BR: EnTranslations = {
       },
       "raging_gale": {
         "name": "Golpe Gêmeo",
-        "description": "Golpeia instantaneamente com sua arma duas vezes, cada acerto causando 40% do dano da arma mais {damage}, e gera 8 de raiva. Acumula até 2 cargas. (Fúria)"
+        "description": "Golpeia instantaneamente com sua arma duas vezes, cada acerto causando 40% do dano da arma mais {damage}, e gera 4 de raiva. Acumula até 2 cargas. (Fúria)"
       },
       "red_harvest": {
         "name": "Colheita Vermelha",
@@ -8137,6 +8195,18 @@ export const pt_BR: EnTranslations = {
       },
       "emberglass_warstaff": {
         "name": "Cajado de Guerra de Vidro de Brasa"
+      },
+      "copper_ore": {
+        "name": "Copper Ore"
+      },
+      "iron_ore": {
+        "name": "Iron Ore"
+      },
+      "ironbark_log": {
+        "name": "Ironbark Log"
+      },
+      "silverleaf_herb": {
+        "name": "Silverleaf Herb"
       },
       "conjured_water4": {
         "name": "Água de Nascente Conjurada"

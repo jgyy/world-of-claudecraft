@@ -750,6 +750,7 @@ export const de_DE: EnTranslations = {
       "leaderboard": "Rangliste",
       "dailyRewards": "Shop",
       "deeds": "Taten",
+      "professions": "Professions",
       "nameplates": "Namen",
       "haptics": "Haptik",
       "hapticsOff": "Haptik aus",
@@ -2082,7 +2083,9 @@ export const de_DE: EnTranslations = {
       "mining": "Bergbau",
       "logging": "Holzfällen",
       "herbalism": "Kräuterkunde",
-      "notReady": "Dieser Ressourcenknoten ist fur dich noch nicht nachgewachsen."
+      "notReady": "Dieser Ressourcenknoten ist fur dich noch nicht nachgewachsen.",
+      "gatherLine": "You gather: {name}.",
+      "gatherLineQty": "You gather: {name} x{qty}."
     },
     "archetypeTitle": {
       "label": "Titel",
@@ -2113,6 +2116,42 @@ export const de_DE: EnTranslations = {
       "tailoring": "Schneiderei",
       "leatherworking": "Lederverarbeitung"
     },
+    "professions": {
+      "title": "Professions",
+      "close": "Close professions",
+      "ringAria": "Craft wheel",
+      "skillsHeader": "Craft skills",
+      "gatheringHeader": "Gathering",
+      "perksHeader": "Perks",
+      "identityHeader": "Identity",
+      "roleMajor": "Major",
+      "roleHobby": "Hobby",
+      "roleDormant": "Dormant",
+      "roleUnattuned": "Unattuned",
+      "ceilingUnlimited": "No empowerment cap",
+      "ceilingRare": "Rare cap",
+      "ceilingCommon": "Common cap",
+      "skillValue": "{skill} / {max}",
+      "tierPipAria": "Tier {tier}",
+      "nextUnlockTier": "{points} points to the next tier: masterwork odds improve",
+      "nextUnlockSpecialized": "{points} points to Specialized: material costs drop",
+      "nextUnlockMax": "At maximum skill",
+      "perkSpecializedLine": "{craft}: Specialized, material costs -{pct}%",
+      "perkSpecializedAt": "Specializes at {threshold} skill",
+      "switchCost": "Next archetype switch costs {cost} amends",
+      "syncing": "Waiting for your profession data from the realm.",
+      "tutorialLine": "Reach {target} skill in any craft to unlock your first tier.",
+      "ctaHeader": "Next step",
+      "ctaRaise": "Keep raising {craft}: {points} more points to the next tier.",
+      "ctaStart": "Craft or gather with any profession to begin.",
+      "unattunedIdentity": "You are not yet attuned to an archetype. Raise your crafts and complete an attunement to choose your pair.",
+      "nudgeNearTier": "{craft}: {points} points from the next tier",
+      "nudgeDormant": "Your {craft} knowledge lies dormant",
+      "hobbyLabel": "Hobby: {craft}",
+      "majorsLabel": "Majors: {a} and {b}",
+      "pairsHeld": "Pairs held: {count}",
+      "returnsLabel": "Returns: {count}"
+    },
     "crafting": {
       "title": "Basteln",
       "close": "Enges Basteln",
@@ -2131,6 +2170,7 @@ export const de_DE: EnTranslations = {
       "comboNotAttuned": "Wähle zuerst ein Archetyp-Paar.",
       "comboWrongPair": "Aktiviere genau dieses Paar, um es herzustellen.",
       "comboTierUnmet": "Bringe beide Hauptberufe auf die erforderliche Stufe.",
+      "comboTierUnmetNamed": "Raise {crafts} to tier {tier}.",
       "professionChoice": "Berufswahl",
       "noProfessionChoice": "Derzeit ist keine gültige Berufswahl verfügbar.",
       "pairOptionLabel": "{pair} ({craftA} + {craftB})",
@@ -2163,7 +2203,19 @@ export const de_DE: EnTranslations = {
       },
       "notAtHub": "Ihr müsst Euch am Handwerksplatz und auf der erforderlichen Stufe befinden, um das herzustellen.",
       "throttled": "Ihr stellt zu schnell her. Wartet einen Moment und versucht es erneut.",
-      "recipeNotLearned": "Ihr habt dieses Rezept noch nicht erlernt."
+      "recipeNotLearned": "Ihr habt dieses Rezept noch nicht erlernt.",
+      "skillReqLine": "Requires {craft} {skill}",
+      "difficultyFull": "Full skill gain",
+      "difficultyReduced": "Reduced skill gain",
+      "difficultyNone": "No skill gain",
+      "stationBadge": "Station",
+      "stationOutOfRange": "Move to the crafting hub station to craft this.",
+      "masterworkToast": "Masterwork! {name}",
+      "masterworkZoneLine": "{crafter} crafted a masterwork {name}!",
+      "tierUpToast": "{craft} advanced to tier {tier}!",
+      "makersMark": "Crafted by {name}",
+      "masterworkSeal": "Masterwork",
+      "enchantedLine": "Enchanted"
     },
     "finder": {
       "title": "Instanzfinder",
@@ -2331,6 +2383,11 @@ export const de_DE: EnTranslations = {
       "broadcastsLabel": "Errungene Taten mit Gilde und Freunden teilen",
       "titledName": "{name} [{title}]"
     }
+  },
+  "gatherEvent": {
+    "pristineVein": "{finder} struck a pristine vein!",
+    "ancientHeartwood": "{finder} felled an ancient heartwood!",
+    "moonlitBloom": "{finder} discovered a moonlit bloom!"
   },
   "apiError": {
     "validation": {
@@ -6083,6 +6140,7 @@ export const de_DE: EnTranslations = {
       "rarityUncommon": "Ungewöhnlich",
       "rarityRare": "Selten",
       "rarityEpic": "Episch",
+      "rarityLegendary": "Legendary",
       "merchantStock": "Händlerbestand",
       "stackCount": "x{count}",
       "each": "{money} pro Stück",
@@ -7007,7 +7065,7 @@ export const de_DE: EnTranslations = {
       },
       "raging_gale": {
         "name": "Zwillingsschlag",
-        "description": "Schlagt sofort zweimal mit Eurer Waffe zu, jeder Treffer verursacht 40% Waffenschaden plus {damage}, und erzeugt 8 Wut. Speichert bis zu 2 Aufladungen. (Furor)"
+        "description": "Schlagt sofort zweimal mit Eurer Waffe zu, jeder Treffer verursacht 40% Waffenschaden plus {damage}, und erzeugt 4 Wut. Speichert bis zu 2 Aufladungen. (Furor)"
       },
       "red_harvest": {
         "name": "Rote Ernte",
@@ -8137,6 +8195,18 @@ export const de_DE: EnTranslations = {
       },
       "emberglass_warstaff": {
         "name": "Glutglas-Kriegsstab"
+      },
+      "copper_ore": {
+        "name": "Copper Ore"
+      },
+      "iron_ore": {
+        "name": "Iron Ore"
+      },
+      "ironbark_log": {
+        "name": "Ironbark Log"
+      },
+      "silverleaf_herb": {
+        "name": "Silverleaf Herb"
       },
       "conjured_water4": {
         "name": "Herbeigezaubertes Quellwasser"

@@ -1840,7 +1840,7 @@
      rail-height budget test in tests/crafting_launcher.test.ts. */
   @media (max-height: 720px) {
     #side-buttons {
-      gap: 2px;
+      gap: 1px;
     }
     #side-buttons .micro-btn {
       height: 24px;
@@ -4154,6 +4154,11 @@
     font-family: var(--title-font);
     letter-spacing: 1px;
     white-space: nowrap;
+  }
+  /* Reduced-motion celebrations (hud.ts showBanner motion=false): the banner
+     appears and clears instantly, same text and duration, no fade. */
+  #banner.banner-no-motion {
+    transition: none;
   }
   /* The quest-progress flash (quest_progress_banner.ts): small yellow lines
      stacked at the top-center, above the zone banner's slot, the classic

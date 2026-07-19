@@ -750,6 +750,7 @@ export const tr_TR: EnTranslations = {
       "leaderboard": "Sıralama",
       "dailyRewards": "Mağaza",
       "deeds": "Yiğitlikler",
+      "professions": "Professions",
       "nameplates": "İsimler",
       "haptics": "Dokunsal Geri Bildirim",
       "hapticsOff": "Dokunsal Kapalı",
@@ -2082,7 +2083,9 @@ export const tr_TR: EnTranslations = {
       "mining": "Madencilik",
       "logging": "Ağaç kesme",
       "herbalism": "Bitkicilik",
-      "notReady": "Bu kaynak noktası senin için henüz yeniden oluşmadı."
+      "notReady": "Bu kaynak noktası senin için henüz yeniden oluşmadı.",
+      "gatherLine": "You gather: {name}.",
+      "gatherLineQty": "You gather: {name} x{qty}."
     },
     "archetypeTitle": {
       "label": "Unvan",
@@ -2113,6 +2116,42 @@ export const tr_TR: EnTranslations = {
       "tailoring": "Terzilik",
       "leatherworking": "Deri İşleme"
     },
+    "professions": {
+      "title": "Professions",
+      "close": "Close professions",
+      "ringAria": "Craft wheel",
+      "skillsHeader": "Craft skills",
+      "gatheringHeader": "Gathering",
+      "perksHeader": "Perks",
+      "identityHeader": "Identity",
+      "roleMajor": "Major",
+      "roleHobby": "Hobby",
+      "roleDormant": "Dormant",
+      "roleUnattuned": "Unattuned",
+      "ceilingUnlimited": "No empowerment cap",
+      "ceilingRare": "Rare cap",
+      "ceilingCommon": "Common cap",
+      "skillValue": "{skill} / {max}",
+      "tierPipAria": "Tier {tier}",
+      "nextUnlockTier": "{points} points to the next tier: masterwork odds improve",
+      "nextUnlockSpecialized": "{points} points to Specialized: material costs drop",
+      "nextUnlockMax": "At maximum skill",
+      "perkSpecializedLine": "{craft}: Specialized, material costs -{pct}%",
+      "perkSpecializedAt": "Specializes at {threshold} skill",
+      "switchCost": "Next archetype switch costs {cost} amends",
+      "syncing": "Waiting for your profession data from the realm.",
+      "tutorialLine": "Reach {target} skill in any craft to unlock your first tier.",
+      "ctaHeader": "Next step",
+      "ctaRaise": "Keep raising {craft}: {points} more points to the next tier.",
+      "ctaStart": "Craft or gather with any profession to begin.",
+      "unattunedIdentity": "You are not yet attuned to an archetype. Raise your crafts and complete an attunement to choose your pair.",
+      "nudgeNearTier": "{craft}: {points} points from the next tier",
+      "nudgeDormant": "Your {craft} knowledge lies dormant",
+      "hobbyLabel": "Hobby: {craft}",
+      "majorsLabel": "Majors: {a} and {b}",
+      "pairsHeld": "Pairs held: {count}",
+      "returnsLabel": "Returns: {count}"
+    },
     "crafting": {
       "title": "işçiliği",
       "close": "İşçiliği kapat",
@@ -2131,6 +2170,7 @@ export const tr_TR: EnTranslations = {
       "comboNotAttuned": "Önce bir arketip çifti seç.",
       "comboWrongPair": "Onu yapmak için bu tam çifti etkinleştir.",
       "comboTierUnmet": "Her iki ana zanaatı da gerekli kademeye yükselt.",
+      "comboTierUnmetNamed": "Raise {crafts} to tier {tier}.",
       "professionChoice": "Meslek seçimi",
       "noProfessionChoice": "Şu anda geçerli bir meslek seçimi mevcut değil.",
       "pairOptionLabel": "{pair} ({craftA} + {craftB})",
@@ -2163,7 +2203,19 @@ export const tr_TR: EnTranslations = {
       },
       "notAtHub": "Bunu üretmek için zanaat merkezinde ve gereken kademede olmalısın.",
       "throttled": "Çok hızlı üretiyorsun. Bir an bekle ve tekrar dene.",
-      "recipeNotLearned": "Bu tarifi henüz öğrenmedin."
+      "recipeNotLearned": "Bu tarifi henüz öğrenmedin.",
+      "skillReqLine": "Requires {craft} {skill}",
+      "difficultyFull": "Full skill gain",
+      "difficultyReduced": "Reduced skill gain",
+      "difficultyNone": "No skill gain",
+      "stationBadge": "Station",
+      "stationOutOfRange": "Move to the crafting hub station to craft this.",
+      "masterworkToast": "Masterwork! {name}",
+      "masterworkZoneLine": "{crafter} crafted a masterwork {name}!",
+      "tierUpToast": "{craft} advanced to tier {tier}!",
+      "makersMark": "Crafted by {name}",
+      "masterworkSeal": "Masterwork",
+      "enchantedLine": "Enchanted"
     },
     "finder": {
       "title": "Zindan Bulucu",
@@ -2331,6 +2383,11 @@ export const tr_TR: EnTranslations = {
       "broadcastsLabel": "Kazanılan yiğitlikleri lonca ve arkadaşlarınla paylaş",
       "titledName": "{name} [{title}]"
     }
+  },
+  "gatherEvent": {
+    "pristineVein": "{finder} struck a pristine vein!",
+    "ancientHeartwood": "{finder} felled an ancient heartwood!",
+    "moonlitBloom": "{finder} discovered a moonlit bloom!"
   },
   "apiError": {
     "validation": {
@@ -6083,6 +6140,7 @@ export const tr_TR: EnTranslations = {
       "rarityUncommon": "Az Bulunur",
       "rarityRare": "Nadir",
       "rarityEpic": "Destansı",
+      "rarityLegendary": "Legendary",
       "merchantStock": "Tüccar stoğu",
       "stackCount": "x{count}",
       "each": "tanesi {money}",
@@ -7007,7 +7065,7 @@ export const tr_TR: EnTranslations = {
       },
       "raging_gale": {
         "name": "Çifte Darbe",
-        "description": "Silahınla anında iki kez vurursun; her vuruş %40 silah hasarı artı {damage} verir ve 8 öfke üretirsin. En fazla 2 kullanım birikir. (Hiddet)"
+        "description": "Silahınla anında iki kez vurursun; her vuruş %40 silah hasarı artı {damage} verir ve 4 öfke üretirsin. En fazla 2 kullanım birikir. (Hiddet)"
       },
       "red_harvest": {
         "name": "Kızıl Hasat",
@@ -8137,6 +8195,18 @@ export const tr_TR: EnTranslations = {
       },
       "emberglass_warstaff": {
         "name": "Korgözlü Savaş Asası"
+      },
+      "copper_ore": {
+        "name": "Copper Ore"
+      },
+      "iron_ore": {
+        "name": "Iron Ore"
+      },
+      "ironbark_log": {
+        "name": "Ironbark Log"
+      },
+      "silverleaf_herb": {
+        "name": "Silverleaf Herb"
       },
       "conjured_water4": {
         "name": "Sihirle Yaratılmış Kaynak Suyu"

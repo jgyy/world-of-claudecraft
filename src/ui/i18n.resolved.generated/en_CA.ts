@@ -750,6 +750,7 @@ export const en_CA: EnTranslations = {
       "leaderboard": "Ranks",
       "dailyRewards": "Store",
       "deeds": "Deeds",
+      "professions": "Professions",
       "nameplates": "Names",
       "haptics": "Haptics",
       "hapticsOff": "Haptics Off",
@@ -2082,7 +2083,9 @@ export const en_CA: EnTranslations = {
       "mining": "Mining",
       "logging": "Logging",
       "herbalism": "Herbalism",
-      "notReady": "This resource node has not respawned for you yet."
+      "notReady": "This resource node has not respawned for you yet.",
+      "gatherLine": "You gather: {name}.",
+      "gatherLineQty": "You gather: {name} x{qty}."
     },
     "archetypeTitle": {
       "label": "Title",
@@ -2113,6 +2116,42 @@ export const en_CA: EnTranslations = {
       "tailoring": "Tailoring",
       "leatherworking": "Leatherworking"
     },
+    "professions": {
+      "title": "Professions",
+      "close": "Close professions",
+      "ringAria": "Craft wheel",
+      "skillsHeader": "Craft skills",
+      "gatheringHeader": "Gathering",
+      "perksHeader": "Perks",
+      "identityHeader": "Identity",
+      "roleMajor": "Major",
+      "roleHobby": "Hobby",
+      "roleDormant": "Dormant",
+      "roleUnattuned": "Unattuned",
+      "ceilingUnlimited": "No empowerment cap",
+      "ceilingRare": "Rare cap",
+      "ceilingCommon": "Common cap",
+      "skillValue": "{skill} / {max}",
+      "tierPipAria": "Tier {tier}",
+      "nextUnlockTier": "{points} points to the next tier: masterwork odds improve",
+      "nextUnlockSpecialized": "{points} points to Specialized: material costs drop",
+      "nextUnlockMax": "At maximum skill",
+      "perkSpecializedLine": "{craft}: Specialized, material costs -{pct}%",
+      "perkSpecializedAt": "Specializes at {threshold} skill",
+      "switchCost": "Next archetype switch costs {cost} amends",
+      "syncing": "Waiting for your profession data from the realm.",
+      "tutorialLine": "Reach {target} skill in any craft to unlock your first tier.",
+      "ctaHeader": "Next step",
+      "ctaRaise": "Keep raising {craft}: {points} more points to the next tier.",
+      "ctaStart": "Craft or gather with any profession to begin.",
+      "unattunedIdentity": "You are not yet attuned to an archetype. Raise your crafts and complete an attunement to choose your pair.",
+      "nudgeNearTier": "{craft}: {points} points from the next tier",
+      "nudgeDormant": "Your {craft} knowledge lies dormant",
+      "hobbyLabel": "Hobby: {craft}",
+      "majorsLabel": "Majors: {a} and {b}",
+      "pairsHeld": "Pairs held: {count}",
+      "returnsLabel": "Returns: {count}"
+    },
     "crafting": {
       "title": "Crafting",
       "close": "Close crafting",
@@ -2131,6 +2170,7 @@ export const en_CA: EnTranslations = {
       "comboNotAttuned": "Choose an archetype pair first.",
       "comboWrongPair": "Activate this exact pair to craft it.",
       "comboTierUnmet": "Raise both major crafts to the required tier.",
+      "comboTierUnmetNamed": "Raise {crafts} to tier {tier}.",
       "professionChoice": "Profession choice",
       "noProfessionChoice": "No valid profession choice is currently available.",
       "pairOptionLabel": "{pair} ({craftA} + {craftB})",
@@ -2163,7 +2203,19 @@ export const en_CA: EnTranslations = {
       },
       "notAtHub": "You must be at the crafting hub, at the required level, to craft that.",
       "throttled": "You are crafting too quickly. Wait a moment and try again.",
-      "recipeNotLearned": "You have not learned that recipe yet."
+      "recipeNotLearned": "You have not learned that recipe yet.",
+      "skillReqLine": "Requires {craft} {skill}",
+      "difficultyFull": "Full skill gain",
+      "difficultyReduced": "Reduced skill gain",
+      "difficultyNone": "No skill gain",
+      "stationBadge": "Station",
+      "stationOutOfRange": "Move to the crafting hub station to craft this.",
+      "masterworkToast": "Masterwork! {name}",
+      "masterworkZoneLine": "{crafter} crafted a masterwork {name}!",
+      "tierUpToast": "{craft} advanced to tier {tier}!",
+      "makersMark": "Crafted by {name}",
+      "masterworkSeal": "Masterwork",
+      "enchantedLine": "Enchanted"
     },
     "finder": {
       "title": "Dungeon Finder",
@@ -2331,6 +2383,11 @@ export const en_CA: EnTranslations = {
       "broadcastsLabel": "Share deed unlocks with guild and friends",
       "titledName": "{name} [{title}]"
     }
+  },
+  "gatherEvent": {
+    "pristineVein": "{finder} struck a pristine vein!",
+    "ancientHeartwood": "{finder} felled an ancient heartwood!",
+    "moonlitBloom": "{finder} discovered a moonlit bloom!"
   },
   "apiError": {
     "validation": {
@@ -3383,13 +3440,13 @@ export const en_CA: EnTranslations = {
       "craftHowTitle": "The crafting window",
       "craftHowBody": "Open the Crafting window (default key T) to see every recipe you know, what each one needs, and what you have on hand; when the materials are there, one click does the work. Common recipes can be crafted anywhere in the world. A handful of advanced recipes, higher-tier tools and rare caster armor among them, instead ask you to stand at the crafting hub in Highwatch.",
       "craftMasteryTitle": "Skill and mastery",
-      "craftMasteryBody": "Crafting successfully builds skill in that trade, and skill never locks a craft's recipes away: if you know a recipe and hold its materials, you can attempt it. What skill buys you instead is quality, a practiced hand turns out finer work. The one exception is combination recipes, which open only to a crafter attuned to the archetype that joins their two crafts, with proven skill in both.",
+      "craftMasteryBody": "Crafting successfully builds skill in that trade, and skill never locks a craft's recipes away: if you know a recipe and hold its materials, you can attempt it. Every recipe turns out exactly the piece it promises, and a practiced hand sometimes produces a masterwork: the same piece finished finer, with a little extra power worked in. The one exception is combination recipes, which open only to a crafter attuned to the archetype that joins their two crafts, with proven skill in both.",
       "craftComboTitle": "Combination recipes",
       "craftComboBody": "Beyond a single craft's own recipe list, the wheel also supports combination recipes that call on two neighboring crafts at once, rewarding a character who has invested in adjacent trades on the ring rather than one in isolation. The crafter must hold both trades themselves and carry the attunement that joins them; a partner's skill cannot stand in for either half.",
       "archetypeTitle": "The ten archetypes",
       "archetypeIntro": "Every two neighboring crafts on the wheel together form an archetype, a broader identity you can adopt beyond just working a trade, and each of the ten pairs carries a name of its own. Your active archetype is a single choice at a time, not a checklist: you carry one, and can change which one later if you choose to.",
       "archetypeChooseTitle": "Choosing your archetype",
-      "archetypeChooseBody": "Declaring an archetype is a story moment: a quest that formally accepts you into that identity. Until you declare, every craft advances to the rare quality tier. Once you take up a pair, its two trades open all the way, a craft from the far side of the wheel stays with you as a hobby that still works to the rare tier, and every other trade rests at the common tier while you carry that identity.",
+      "archetypeChooseBody": "Declaring an archetype is a story moment: a quest that formally accepts you into that identity. Until you declare, every craft's skill advances as far as the rare tier. Once you take up a pair, its two trades open all the way, a craft from the far side of the wheel stays with you as a hobby that still works to the rare tier, and every other trade rests at the common tier while you carry that identity.",
       "archetypeSwitchTitle": "Changing your mind",
       "archetypeSwitchBody": "Nor is a declaration a life sentence. Taking up a pair you have never carried is simply a fresh declaration, while returning to an identity you once held asks a repeatable act of making amends first, growing steeper with each switch you have made, so the choice stays meaningful rather than costless.",
       "archetypeIdentityTitle": "What your archetype means",
@@ -6083,6 +6140,7 @@ export const en_CA: EnTranslations = {
       "rarityUncommon": "Uncommon",
       "rarityRare": "Rare",
       "rarityEpic": "Epic",
+      "rarityLegendary": "Legendary",
       "merchantStock": "Merchant stock",
       "stackCount": "x{count}",
       "each": "{money} each",
@@ -7007,7 +7065,7 @@ export const en_CA: EnTranslations = {
       },
       "raging_gale": {
         "name": "Twinstrike",
-        "description": "Instantly strike with your weapon twice, each hit dealing 40% weapon damage plus {damage}, and generate 8 rage. Stores up to 2 charges. (Fury)"
+        "description": "Instantly strike with your weapon twice, each hit dealing 40% weapon damage plus {damage}, and generate 4 rage. Stores up to 2 charges. (Fury)"
       },
       "red_harvest": {
         "name": "Red Harvest",
@@ -8137,6 +8195,18 @@ export const en_CA: EnTranslations = {
       },
       "emberglass_warstaff": {
         "name": "Emberglass Warstaff"
+      },
+      "copper_ore": {
+        "name": "Copper Ore"
+      },
+      "iron_ore": {
+        "name": "Iron Ore"
+      },
+      "ironbark_log": {
+        "name": "Ironbark Log"
+      },
+      "silverleaf_herb": {
+        "name": "Silverleaf Herb"
       },
       "conjured_water4": {
         "name": "Conjured Springwater"

@@ -2264,6 +2264,11 @@ export interface GroundObjectDef {
 // issue is content plus visibility only, no harvest logic (see G3).
 export type GatherNodeType = 'ore' | 'wood' | 'herb';
 
+// Rare gather event flavors (Professions 2.0 Phase 4), one per node family:
+// ore rolls pristine_vein, wood rolls ancient_heartwood, herb rolls
+// moonlit_bloom (professions/gather_events.ts gatherRareEventFlavor).
+export type GatherRareEventFlavor = 'pristine_vein' | 'ancient_heartwood' | 'moonlit_bloom';
+
 export interface GatherNodeDef {
   id: string;
   zoneId: string;
@@ -2342,7 +2347,14 @@ export interface ZonePropsDef {
   buildings: BuildingDef[];
   wells: { x: number; z: number; r: number }[];
   stalls: { x: number; z: number; rot: number; r: number; smithy?: true }[];
-  mines: { x: number; z: number; rot: number }[];
+  // moundOffset/moundRadius override the collider's default backward offset
+  // and radius (colliders.ts) for the rock mound behind the timber portal,
+  // for a mine entry whose (x, z) doubles as a real interactable's trigger
+  // point (the Abandoned Crypt door): the defaults let the mound's collision
+  // circle bleed into the approach side and swallow the point itself. Keep
+  // both close to the entry's actual rendered mound extent (src/render/props.ts)
+  // so the collider does not drift onto open, visually clear ground.
+  mines: { x: number; z: number; rot: number; moundOffset?: number; moundRadius?: number }[];
   docks: {
     x: number;
     z: number;
@@ -2644,6 +2656,10 @@ export interface Entity {
   swingTimer: number;
   offhandSwingTimer: number;
   dualWielding: boolean;
+  /** Dual-wielding with a two-hander in either hand (Titan's Grip). Derived at
+   *  equip time (entity.recalcPlayerStats); pays the flat physical-damage
+   *  penalty in combat/damage.ts (TITANS_GRIP_DMG_PENALTY). */
+  titansGrip: boolean;
   /** petSpell windup in flight: sim tick the committed release fires on
    *  (transient combat state like swingTimer; never persisted or wired). */
   rangedWindupReleaseTick?: number | null;
@@ -2864,8 +2880,11 @@ export interface Entity {
   // ItemInstancePayload of whichever equipped piece carries one (an enchanted
   // item's `rolled.stats`), keyed the same as equippedItems. Sparse: a slot with
   // a plain (unenchanted) piece, or nothing equipped, has no entry. Recomputed in
-  // recalcPlayerStats alongside equippedItems; the sim reads the SOURCE
-  // (PlayerMeta.equipmentInstance) for the actual stat bonus, never this mirror.
+  // recalcPlayerStats alongside equippedItems and synced in identity fields
+  // (terse `eqi`, players only, only when non-empty, like `eq`) so the inspect
+  // window shows another player's masterwork/enchant payloads (Phase 6); the sim
+  // reads the SOURCE (PlayerMeta.equipmentInstance) for the actual stat bonus,
+  // never this mirror.
   equippedInstances: Partial<Record<EquipSlot, ItemInstancePayload>>;
   // $WOC holder-tier flair (cosmetic): 0/undefined = none, 1-10 = Ember…Sovereign.
   // Set server-side from the player's connected-wallet balance and synced in
@@ -3474,6 +3493,26 @@ export type SimEvent = { pid?: number } & (
   // `crafter` repeats as payload). Ids only, text-free on purpose (like
   // craftResult above): the client renders its own localized copy.
   | { type: 'masterwork'; recipeId: string; itemId: string; crafter: number }
+  // Masterwork zone broadcast (Professions 2.0 Phase 6): the soft zone-wide
+  // copy of a masterwork proc, one per overworld player currently in the
+  // crafter's zone INCLUDING the crafter, `pid` being the RECIPIENT (the
+  // gatherRareEvent/chat fanout idiom); crafterPid/crafterName identify the
+  // crafter. Deliberately a SEPARATE type from the personal `masterwork`
+  // event above: the online client rebuilds lastMasterwork from ANY
+  // 'masterwork' event, so a bystander copy under that type would corrupt
+  // their own-proc mirror. Skipped entirely for instanced crafters (the
+  // personal event alone fires there). Ids plus values only, text-free on
+  // purpose: the client renders its own localized line
+  // (hudChrome.crafting.masterworkZoneLine).
+  | {
+      type: 'masterworkZone';
+      pid: number;
+      crafterPid: number;
+      crafterName: string;
+      itemId: string;
+      recipeId: string;
+      zoneId: string;
+    }
   // Gather-node harvest outcome (#1729): a successful resource harvest emits
   // this so the client can play a gathering audio cue for the acting player.
   // Personal (carries pid), delivered only to the harvester. Emitted only on a
@@ -3489,6 +3528,30 @@ export type SimEvent = { pid?: number } & (
       professionId: GatheringProfessionId;
       itemId: string;
       rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+      // Units actually granted (Professions 2.0 Phase 4): the qtyByRarity
+      // yield, multiplied by GATHER_RARE_EVENT_YIELD_MULT on a rare event.
+      qty: number;
+      // The rare event this harvest rolled (resolveHarvest draw #2), or null.
+      rareEvent: GatherRareEventFlavor | null;
+    }
+  // Rare gather event (Professions 2.0 Phase 4): a harvest struck a pristine
+  // vein / ancient heartwood / moonlit bloom. Soft zone broadcast: one copy is
+  // emitted per player currently in the node's zone, `pid` being the RECIPIENT
+  // (the chat fanout idiom); finderPid/finderName identify the harvester. Ids
+  // plus values only, text-free on purpose: the client renders its own
+  // localized line off `flavor` (the gatherEvent.* keys). The HUD reads only
+  // flavor/finderName/finderPid today; zoneId/nodeType/itemId are forward
+  // payload for the Phase 15 per-family deeds/tuning consumers (asserted by
+  // the Phase 4 tests so the shape is already load-bearing on the wire).
+  | {
+      type: 'gatherRareEvent';
+      pid: number;
+      flavor: GatherRareEventFlavor;
+      finderName: string;
+      finderPid: number;
+      zoneId: string;
+      nodeType: GatherNodeType;
+      itemId: string;
     }
 );
 
@@ -4045,6 +4108,12 @@ export function rageFromTaking(damage: number, attackerLevel: number): number {
 export const STANCE_RAGE_GEN = 0.1;
 // Recklessness' rage-generation half (its aura value carries the crit half).
 export const RECKLESSNESS_RAGE_GEN = 0.5;
+// Titan's Grip (dual-wielding with a two-hander involved) reduces ALL physical
+// damage done by this fraction: the WoW 3.1.0 model, chosen over a miss-chance
+// penalty (Blizzard shipped the miss version at 15%, cut it to 5% within weeks
+// under player revolt, then replaced it with the flat 10% in 3.1). The stat side
+// of the tradeoff is item_budget.ts TWOHAND_STAT_MULT; applied in combat/damage.ts.
+export const TITANS_GRIP_DMG_PENALTY = 0.12;
 export const BERSERKER_CRIT_CHANCE = 0.03;
 export const BERSERKER_CRIT_DAMAGE = 0.03;
 export const SHIELD_BLOCK_BASE = 0.05;

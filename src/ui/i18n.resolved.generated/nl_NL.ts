@@ -750,6 +750,7 @@ export const nl_NL: EnTranslations = {
       "leaderboard": "Ranglijst",
       "dailyRewards": "Winkel",
       "deeds": "Daden",
+      "professions": "Professions",
       "nameplates": "Namen",
       "haptics": "Haptiek",
       "hapticsOff": "Haptiek uit",
@@ -2082,7 +2083,9 @@ export const nl_NL: EnTranslations = {
       "mining": "Mijnbouw",
       "logging": "Houtkap",
       "herbalism": "Kruidenkunde",
-      "notReady": "Dit grondstoffenpunt is voor jou nog niet teruggekeerd."
+      "notReady": "Dit grondstoffenpunt is voor jou nog niet teruggekeerd.",
+      "gatherLine": "You gather: {name}.",
+      "gatherLineQty": "You gather: {name} x{qty}."
     },
     "archetypeTitle": {
       "label": "Titel",
@@ -2113,6 +2116,42 @@ export const nl_NL: EnTranslations = {
       "tailoring": "Kleermaken",
       "leatherworking": "Leerbewerken"
     },
+    "professions": {
+      "title": "Professions",
+      "close": "Close professions",
+      "ringAria": "Craft wheel",
+      "skillsHeader": "Craft skills",
+      "gatheringHeader": "Gathering",
+      "perksHeader": "Perks",
+      "identityHeader": "Identity",
+      "roleMajor": "Major",
+      "roleHobby": "Hobby",
+      "roleDormant": "Dormant",
+      "roleUnattuned": "Unattuned",
+      "ceilingUnlimited": "No empowerment cap",
+      "ceilingRare": "Rare cap",
+      "ceilingCommon": "Common cap",
+      "skillValue": "{skill} / {max}",
+      "tierPipAria": "Tier {tier}",
+      "nextUnlockTier": "{points} points to the next tier: masterwork odds improve",
+      "nextUnlockSpecialized": "{points} points to Specialized: material costs drop",
+      "nextUnlockMax": "At maximum skill",
+      "perkSpecializedLine": "{craft}: Specialized, material costs -{pct}%",
+      "perkSpecializedAt": "Specializes at {threshold} skill",
+      "switchCost": "Next archetype switch costs {cost} amends",
+      "syncing": "Waiting for your profession data from the realm.",
+      "tutorialLine": "Reach {target} skill in any craft to unlock your first tier.",
+      "ctaHeader": "Next step",
+      "ctaRaise": "Keep raising {craft}: {points} more points to the next tier.",
+      "ctaStart": "Craft or gather with any profession to begin.",
+      "unattunedIdentity": "You are not yet attuned to an archetype. Raise your crafts and complete an attunement to choose your pair.",
+      "nudgeNearTier": "{craft}: {points} points from the next tier",
+      "nudgeDormant": "Your {craft} knowledge lies dormant",
+      "hobbyLabel": "Hobby: {craft}",
+      "majorsLabel": "Majors: {a} and {b}",
+      "pairsHeld": "Pairs held: {count}",
+      "returnsLabel": "Returns: {count}"
+    },
     "crafting": {
       "title": "Knutselen",
       "close": "Sluit het maken",
@@ -2131,6 +2170,7 @@ export const nl_NL: EnTranslations = {
       "comboNotAttuned": "Kies eerst een archetype-paar.",
       "comboWrongPair": "Activeer precies dit paar om het te maken.",
       "comboTierUnmet": "Breng beide hoofdambachten naar de vereiste rang.",
+      "comboTierUnmetNamed": "Raise {crafts} to tier {tier}.",
       "professionChoice": "Beroepskeuze",
       "noProfessionChoice": "Er is momenteel geen geldige beroepskeuze beschikbaar.",
       "pairOptionLabel": "{pair} ({craftA} + {craftB})",
@@ -2163,7 +2203,19 @@ export const nl_NL: EnTranslations = {
       },
       "notAtHub": "Je moet bij de werkbank zijn, op het vereiste niveau, om dat te maken.",
       "throttled": "Je maakt te snel. Wacht even en probeer het opnieuw.",
-      "recipeNotLearned": "Je hebt dat recept nog niet geleerd."
+      "recipeNotLearned": "Je hebt dat recept nog niet geleerd.",
+      "skillReqLine": "Requires {craft} {skill}",
+      "difficultyFull": "Full skill gain",
+      "difficultyReduced": "Reduced skill gain",
+      "difficultyNone": "No skill gain",
+      "stationBadge": "Station",
+      "stationOutOfRange": "Move to the crafting hub station to craft this.",
+      "masterworkToast": "Masterwork! {name}",
+      "masterworkZoneLine": "{crafter} crafted a masterwork {name}!",
+      "tierUpToast": "{craft} advanced to tier {tier}!",
+      "makersMark": "Crafted by {name}",
+      "masterworkSeal": "Masterwork",
+      "enchantedLine": "Enchanted"
     },
     "finder": {
       "title": "Kerkerzoekmachine",
@@ -2331,6 +2383,11 @@ export const nl_NL: EnTranslations = {
       "broadcastsLabel": "Deel behaalde daden met je gilde en vrienden",
       "titledName": "{name} [{title}]"
     }
+  },
+  "gatherEvent": {
+    "pristineVein": "{finder} struck a pristine vein!",
+    "ancientHeartwood": "{finder} felled an ancient heartwood!",
+    "moonlitBloom": "{finder} discovered a moonlit bloom!"
   },
   "apiError": {
     "validation": {
@@ -6083,6 +6140,7 @@ export const nl_NL: EnTranslations = {
       "rarityUncommon": "Ongewoon",
       "rarityRare": "Zeldzaam",
       "rarityEpic": "Episch",
+      "rarityLegendary": "Legendary",
       "merchantStock": "Voorraad van de handelaar",
       "stackCount": "x{count}",
       "each": "{money} per stuk",
@@ -7007,7 +7065,7 @@ export const nl_NL: EnTranslations = {
       },
       "raging_gale": {
         "name": "Dubbelslag",
-        "description": "Sla onmiddellijk tweemaal toe met je wapen, waarbij elke treffer 40% wapenschade plus {damage} toebrengt, en genereer 8 woede. Slaat maximaal 2 ladingen op. (Razernij)"
+        "description": "Sla onmiddellijk tweemaal toe met je wapen, waarbij elke treffer 40% wapenschade plus {damage} toebrengt, en genereer 4 woede. Slaat maximaal 2 ladingen op. (Razernij)"
       },
       "red_harvest": {
         "name": "Rode Oogst",
@@ -8137,6 +8195,18 @@ export const nl_NL: EnTranslations = {
       },
       "emberglass_warstaff": {
         "name": "Sintelglazen Oorlogsstaf"
+      },
+      "copper_ore": {
+        "name": "Copper Ore"
+      },
+      "iron_ore": {
+        "name": "Iron Ore"
+      },
+      "ironbark_log": {
+        "name": "Ironbark Log"
+      },
+      "silverleaf_herb": {
+        "name": "Silverleaf Herb"
       },
       "conjured_water4": {
         "name": "Getoverd bronwater"
