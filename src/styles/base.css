@@ -485,6 +485,7 @@
   }
 
   .panel {
+    position: relative;
     background: var(--panel-bg);
     border: 2px solid var(--border);
     outline: 1px solid #000;
@@ -495,7 +496,46 @@
       inset 0 1px 0 #ffffff14;
     color: var(--color-text-light);
   }
+  /* Carved corner ornament: four bracket-and-gem motifs (ornament_svg.ts,
+     wired once at boot as --ornament-corner) masking the panel's own
+     --border color, so every window and HUD panel that composes .panel
+     (bags, character, chat, the action bar backing, ...) gets the same
+     carved-fantasy corners for free and recolors automatically on every
+     theme preset, since only the mask SHAPE is static here. */
+  .panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--border);
+    -webkit-mask-image: var(--ornament-corner);
+    mask-image: var(--ornament-corner);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    -webkit-mask-size:
+      30px 30px,
+      30px 30px,
+      30px 30px,
+      30px 30px;
+    mask-size:
+      30px 30px,
+      30px 30px,
+      30px 30px,
+      30px 30px;
+  }
   .panel-title {
+    position: relative;
+    z-index: 0;
     font-family: var(--title-font);
     color: var(--gold);
     font-size: 15px;
@@ -507,6 +547,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  /* Banner-scroll underlay behind every panel/window title (ornament_svg.ts,
+     --ornament-banner): a low-opacity carved ribbon so the title reads as a
+     nameplate on a scroll rather than plain flexbox text. Stretches to each
+     title bar's actual width, so the ribbon's point angle varies a little
+     per window; that reads as hand-carved rather than templated. */
+  .panel-title::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.5;
+    background: var(--border);
+    -webkit-mask-image: var(--ornament-banner);
+    mask-image: var(--ornament-banner);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
   }
   .window .panel-title {
     cursor: move;

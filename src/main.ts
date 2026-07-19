@@ -237,6 +237,7 @@ import { showMobileWalletLauncher } from './ui/mobile_wallet_launcher';
 import { applyNativeDeviceLanguage } from './ui/native_language';
 import { scheduleNativeUpdateCheck } from './ui/native_update_prompt';
 import { loadNewsInto } from './ui/news_feed';
+import { applyOrnamentVars } from './ui/ornament_svg';
 import { createMetricsSampler } from './ui/perf_metrics_sampler';
 import { PerfOverlay } from './ui/perf_overlay';
 import { type PerfOverlayConfig, PerfOverlayConfigStore } from './ui/perf_overlay_config';
@@ -1030,6 +1031,7 @@ async function startGame(
     });
     perf.setHud(hud);
     hydrateIcons(); // swap [data-icon] placeholders (micro-menu, mobile bar, meters) for inline SVG
+    applyOrnamentVars(); // wire the --ornament-* mask shapes the carved-chrome CSS consumes
   } catch (err) {
     // e.g. WebGL context creation failure: surface it instead of leaving the
     // loading screen up forever

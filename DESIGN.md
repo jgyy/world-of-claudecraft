@@ -7,7 +7,7 @@ mobile is the same client consuming the same `src/styles/tokens.css` and `src/ui
 the token, theme, and typography phases restyle mobile on day one and owe mobile
 screenshots; only mobile-specific LAYOUT work is deferred to its own program. Every change
 still owes the mobile-coverage decisions in section 13.5.
-**Updated:** 2026-07-15.
+**Updated:** 2026-07-19.
 
 This document is the source of truth for how World of ClaudeCraft's interface should look,
 move, and feel. It pairs the approved design references (section 2) with the systems this
@@ -54,9 +54,14 @@ and CSS-discipline contracts from 13.2 to 13.4 gate the change.
 5. **One system on every screen.** HUD panels, windows, tooltips, dialogs, the store, the
    Book of Deeds, and the options menu all share the same surfaces, edges, type, spacing,
    and interaction states. No one-off panel styles.
-6. **Clarity beats ornament.** When more decoration and more readability conflict,
-   readability wins. The interface feels premium through disciplined color, proportion,
-   typography, and feedback, not through decoration density.
+6. **Clarity first, ornament in service of immersion.** Decoration is welcome everywhere
+   it does not compete with reading the game: actionable information, controls, and text
+   keep full contrast and an unambiguous shape. Short of an actual clarity conflict,
+   ornament is not rationed, decoration density is a legitimate way to make a surface feel
+   hand-carved, and the structural ornament system of section 10.8 is how it is built
+   consistently rather than as one-off per-window flourishes. When a real conflict
+   surfaces (an ornament dims a state color, crowds a hit target, or slows first paint),
+   readability wins outright: thin the ornament, never the information.
 7. **Fair by construction.** Nothing in this design may hide or delay actionable gameplay
    information behind a graphics tier, a theme, or a cosmetic state (section 13.1).
 8. **Performance is part of beauty.** The interface must look incredible AND hold a steady
@@ -903,6 +908,44 @@ are theme-derived, so their retune (rest near `--color-gold-800`, hover near
 `--color-gold-500` on the classic preset) lands in the `themeCssVars` derivation constants
 in `src/ui/theme.ts`.
 
+### 10.8 Structural ornament
+
+The carved-fantasy finish principle 6 calls for is a small set of hand-authored SVG
+SHAPES, never a color: `src/ui/ornament_svg.ts` generates them (procedurally, via plain
+trigonometry helpers, in the same "no binary assets" spirit as `icons.ts`'s procedural
+recipes) and consumes them exclusively as CSS `mask-image` values, so the referencing
+element's own `background` (always an existing themed token, `var(--border)` or
+`var(--gold)`) supplies the visible color. An ornament shape carries no fill/color of its
+own; this is what lets it repaint for free on every theme preset, exactly like the
+pre-existing `.tf-move-btn::before` mask icon in `hud.css`, and is why the "no hard-coded
+colors" rule of section 4.1 and 13.4 applies to ornament exactly as it applies to painters.
+
+One shape, one role, reused everywhere it applies (section 10's opening rule):
+
+| Shape | Role | Consumers |
+|---|---|---|
+| Corner motif (bracket, gem, two flaring ticks; four mirrored orientations from one path) | Marks a rectangle's four corners as deliberately carved, not machine-cut | `.panel` (cascades to every window), `.action-btn` at a smaller `mask-size` |
+| Rope-twist ring (a braided annulus, sinusoidal outer/inner edges) | A second, purely ornamental ring just outside an existing structural circle | The unit-frame portrait disc (`.portrait-wrap`), the minimap disc (`#minimap-disc`) |
+| Banner scroll (a pointed-end ribbon, stretches to its box) | An underlay behind panel/window title text | `.panel-title` |
+
+Wiring: `applyOrnamentVars()` sets the `--ornament-*` custom properties once at game boot
+(`main.ts`, next to the existing one-time `hydrateIcons()` call); shapes are static and
+never theme-dependent, so this never reruns on a preset switch, and component CSS
+consumes them purely declaratively (`mask-image: var(--ornament-corner)` plus
+`background: var(--border)`), which keeps ornament on the cold path with zero per-frame
+cost (section 13.2). A component opts out of an inherited ornament with a narrow,
+selector-specific override (`content: none` on the pseudo-element) rather than a
+parallel un-ornamented variant of the primitive; the boss target-frame portrait ring is
+the existing precedent (its dragon-emblem art is already the ornamental treatment, so
+the generic ring stands down there).
+
+Adding a new consumer of an existing shape (another circular element wanting the rope
+ring, another rectangle wanting corner motifs) is a CSS-only change: no new shape, no
+`ornament_svg.ts` edit. Adding a genuinely new shape earns its own named export and
+`tests/ornament_svg.test.ts` case, following the existing shapes' contract: colorless
+(only the SVG spec's own default black fill/stroke, never a real hex), deterministic
+(same inputs produce byte-identical output), and self-contained in its own viewBox.
+
 ## 11. Motion
 
 ### 11.1 Durations and easing
@@ -1067,6 +1110,14 @@ claims are verified against the running game, not the stylesheet.
 Each phase is independently shippable, gate-green, and screenshot-documented. Order
 matters; later phases assume earlier vocabulary.
 
+The structural ornament system (10.8) is the one deliberate exception to strict phase
+order: because it is additive, colorless-until-masked, and orthogonal to any specific
+token retune, its first slice (the corner motif on `.panel` and `.action-btn`, the
+rope-twist ring on the unit-frame portrait and minimap discs, the title banner underlay)
+shipped ahead of the phases below, landing only the ornament pieces of phases 2 to 4 and
+none of their token, layout, or primitive-retune work. Each phase's own bullet notes what
+ornament already covers so it is not re-scoped by accident.
+
 1. **Foundation: tokens, theme, type.** New ramp tokens and themed derivations; retuned
    `classic` preset knobs and `themeCssVars` derivation constants (including scrollbars
    and `--panel-fill-strong`); re-pin the shipped-palette cases in `tests/theme.test.ts`;
@@ -1077,18 +1128,28 @@ matters; later phases assume earlier vocabulary.
    document when it lands.
 2. **Chrome: surfaces and primitives.** `.panel` / `.window` edge recipe, buttons, tabs,
    keycaps, badges, bars, tooltip, scrollbar derivation, form controls, dividers; retire
-   the literal brown-hex borders in `hud.css` / `components.css` onto tokens.
+   the literal brown-hex borders in `hud.css` / `components.css` onto tokens. (Ornament
+   already covers the `.panel` corner motif, cascading to every window, and the
+   `.action-btn` corner accents and the `.panel-title` banner underlay; the edge-recipe
+   retune, buttons/tabs/keycaps/badges/bars/tooltip/scrollbar/form-control retuning, and
+   the literal-hex retirement are still owed.)
 3. **Right rail.** Minimap ring growth with the aura-bar re-pin, Daily Rewards card (and
    retirement of the web promo banner), tracker restyle with the display cap, the 3 x 2
    launcher plus More hub, retirement of the micro-button rail and `#community-hud`, the
    new system-button corner with the sound-mute setting. No `LAYOUT_RESET_EPOCH` bump is
    expected here (the rail owns no player-persisted positions); that is a decision, not an
-   omission.
+   omission. (Ornament already covers the rope-twist ring on `#minimap-disc`; the ring
+   still sits on the current, un-grown disc size, so the disc-growth pass to the target
+   220px, its aura-bar re-pin, and everything else in this phase are still owed.)
 4. **Center stage.** Unit frame restyle and the target frame's move to bottom-center
    (with the `LAYOUT_RESET_EPOCH` bump and the retirement of the party `below-target`
    shift), party header and row states, action bar and XP polish, the interact-resolver
    extraction plus the new interaction prompt, chat restyle with the idle/focus state,
-   FCT and banner typography.
+   FCT and banner typography. (Ornament already covers the rope-twist ring on the player
+   and target portrait discs; the target frame's move to bottom-center, the party frame
+   restyle, and the rest of this phase are still owed. Party rows use a class-crest chip,
+   not the portrait family, so they do not inherit the ring; giving party rows their own
+   ornament is a natural follow-up, not done here.)
 5. **Windows.** The window grammar applied window-by-window, starting with the highest
    traffic (bags, character, quest log, map, options), then the long tail through the
    store surfaces and the remaining overlays.

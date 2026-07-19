@@ -720,6 +720,26 @@
     height: 64px;
     z-index: 2;
   }
+  /* Carved bronze rope-twist ring around the portrait disc (ornament_svg.ts,
+     PORTRAIT_RING_OUTER_R), sitting just outside the existing 3px border
+     ring so it reads as a second, ornamental layer rather than replacing the
+     structural border. Masks --border, so it recolors with the theme. */
+  .portrait-wrap::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    z-index: 1;
+    pointer-events: none;
+    background: var(--border);
+    -webkit-mask-image: var(--ornament-ring-portrait);
+    mask-image: var(--ornament-ring-portrait);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 72px 72px;
+    mask-size: 72px 72px;
+  }
   .portrait {
     width: 60px;
     height: 60px;
@@ -1576,6 +1596,41 @@
     box-shadow:
       inset 0 1px 0 #ffffff18,
       0 2px 4px #0009;
+  }
+  /* Small carved-corner accents on every action slot: the same corner
+     primitive as .panel (ornament_svg.ts, --ornament-corner), mask-sized
+     down to fit the 46px slot. Sits on ::after so it never competes with
+     .icon-label's ::before-free art layer. */
+  .action-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--border);
+    -webkit-mask-image: var(--ornament-corner);
+    mask-image: var(--ornament-corner);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    mask-position:
+      top left,
+      top right,
+      bottom left,
+      bottom right;
+    -webkit-mask-size:
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      14px 14px;
+    mask-size:
+      14px 14px,
+      14px 14px,
+      14px 14px,
+      14px 14px;
   }
   .action-btn .icon-label {
     position: absolute;
@@ -2777,6 +2832,26 @@
     position: relative;
     display: inline-block;
     line-height: 0;
+  }
+  /* Carved bronze rope-twist ring around the minimap, the same primitive and
+     mechanism as the unit-frame portrait ring (ornament_svg.ts,
+     MINIMAP_RING_OUTER_R), sized for the minimap's larger disc and sitting
+     just outside its existing 4px border. */
+  #minimap-disc::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    z-index: 1;
+    pointer-events: none;
+    background: var(--border);
+    -webkit-mask-image: var(--ornament-ring-minimap);
+    mask-image: var(--ornament-ring-minimap);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: 184px 184px;
+    mask-size: 184px 184px;
   }
   /* raid-lockout badge: a small satellite button hugging the bottom-left rim of
      the round minimap (classic tracking-button placement). Dim when every
@@ -5007,6 +5082,11 @@
     z-index: 2;
     background: url("/ui/ranks/elite-dragon-frame.webp") center / contain no-repeat;
     pointer-events: none;
+  }
+  /* The dragon-emblem frame above already IS the ornamental treatment for a
+     boss portrait; suppress the generic rope ring so the two don't compete. */
+  #target-frame.boss .portrait-wrap::after {
+    content: none;
   }
   #target-frame.boss .tf-move-btn {
     top: -18px;
