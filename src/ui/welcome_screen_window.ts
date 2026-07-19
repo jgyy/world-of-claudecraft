@@ -136,6 +136,12 @@ export function mountWelcomeScreen(
   let connectionReady = deps.platform.offline;
   let focusHandle: FocusTrapHandle | null = null;
   let stageHandle: { release(): void } | null = null;
+  // Repainted by setConnectionReady so a roster row rides the same readiness
+  // gate as the Continue button: painted once at show() time, the rows would
+  // otherwise look clickable during the pre-'hello' window where a click is
+  // silently swallowed (switchWelcomeCharacter in main.ts bails on
+  // !world.connected with no user feedback).
+  let lastRosterRows: WelcomeRosterRow[] = [];
   // The Discord-join and Continue buttons are static elements in index.html,
   // not created per mount; the character-switch rail re-mounts this window on
   // the same root, so a plain addEventListener below would stack a duplicate
@@ -189,6 +195,7 @@ export function mountWelcomeScreen(
     connectionReady = ready || deps.platform.offline;
     paintStatus();
     refreshContinue();
+    if (lastRosterRows.length > 0) paintRoster(lastRosterRows);
   }
 
   function paintDiscordStrip(show: boolean): void {
@@ -226,26 +233,42 @@ export function mountWelcomeScreen(
 
   function paintRoster(rows: WelcomeRosterRow[]): void {
     if (!rosterEl) return;
+    lastRosterRows = rows;
     if (rows.length === 0) {
       rosterEl.hidden = true;
       rosterEl.textContent = '';
+      rosterEl.removeAttribute('role');
       return;
     }
     rosterEl.hidden = false;
     rosterEl.textContent = '';
-    rosterEl.setAttribute('role', 'listbox');
+    // A plain list of action buttons, not a single-select widget: role=list
+    // plus aria-current on the current character (matches the actual
+    // interaction, unlike the listbox/option pairing this replaced, which had
+    // no accessible name, no roving tabindex, and a non-option title child).
+    rosterEl.setAttribute('role', 'list');
     const title = document.createElement('div');
     title.className = 'ws-roster-title';
     title.textContent = t('welcome.roster.title');
     rosterEl.append(title);
     for (const row of rows) {
+      const wrap = document.createElement('div');
+      wrap.setAttribute('role', 'listitem');
       const item = document.createElement('button');
       item.type = 'button';
       item.className = 'ws-roster-row';
-      item.setAttribute('role', 'option');
-      item.setAttribute('aria-selected', String(row.selected));
-      if (row.selected) item.classList.add('sel');
-      item.disabled = row.disabled;
+      if (row.selected) {
+        item.classList.add('sel');
+        item.setAttribute('aria-current', 'true');
+      }
+      // Row clicks ride the same connection-readiness gate as Continue: the
+      // rail paints and is clickable as soon as the roster fetch resolves,
+      // which can race the 'hello' handshake. Without this a click in that
+      // window is silently swallowed by switchWelcomeCharacter's own
+      // world.connected guard, with no feedback to the player.
+      const blocked = row.disabled || !connectionReady;
+      item.disabled = blocked;
+      if (blocked) item.setAttribute('aria-disabled', 'true');
       if (row.titleKey) item.title = t(row.titleKey);
       const name = document.createElement('span');
       name.className = 'ws-roster-name';
@@ -257,17 +280,32 @@ export function mountWelcomeScreen(
         className: classDisplayName(row.class),
       });
       item.append(name, meta);
+      if (row.titleKey) {
+        // The disabled reason (e.g. rename required) as visible text: a
+        // disabled button is not focusable and title never surfaces on
+        // touch, so neither keyboard, screen-reader, nor mobile users could
+        // otherwise learn why the row is blocked.
+        const reason = document.createElement('span');
+        reason.className = 'ws-roster-meta';
+        reason.textContent = t(row.titleKey);
+        item.append(reason);
+      }
       if (!row.selected) {
         const action = document.createElement('span');
         action.className = 'ws-roster-action';
         action.textContent = t(row.labelKey);
         item.append(action);
       }
-      item.addEventListener('click', () => {
-        if (row.disabled || row.selected) return;
-        deps.onSelectCharacter?.(row.id);
-      });
-      rosterEl.append(item);
+      item.addEventListener(
+        'click',
+        () => {
+          if (row.disabled || row.selected || !connectionReady) return;
+          deps.onSelectCharacter?.(row.id);
+        },
+        { signal: mountAbort.signal },
+      );
+      wrap.append(item);
+      rosterEl.append(wrap);
     }
   }
 
@@ -429,6 +467,18 @@ export function mountWelcomeScreen(
     armoryCard = null;
     stageHandle?.release();
     stageHandle = null;
+    // Row click listeners already ride mountAbort.signal (aborted above), but
+    // the nodes themselves stay in the static #ws-roster unless cleared: on a
+    // switch, the next mount's show() un-hides the root immediately and only
+    // repaints the roster after its awaited Promise.all, so without this the
+    // outgoing character's roster would stay visible with the wrong row
+    // highlighted for the duration of the re-entry fetches.
+    if (rosterEl) {
+      rosterEl.hidden = true;
+      rosterEl.textContent = '';
+      rosterEl.removeAttribute('role');
+    }
+    lastRosterRows = [];
   }
 
   paintVersion();

@@ -89,7 +89,7 @@ describe('mountWelcomeScreen', () => {
     expect(openSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('marks roster rows with role=option and aria-selected for the current character', async () => {
+  it('marks the roster as a list with aria-current on the current character', async () => {
     const roster = [char({ id: 1, name: 'Alice' }), char({ id: 2, name: 'Bob' })];
     const controller = mountWelcomeScreen(root, {
       ...baseDeps(roster, 1),
@@ -101,10 +101,49 @@ describe('mountWelcomeScreen', () => {
     expect(rows).toHaveLength(2);
     const selected = rows.find((r) => r.classList.contains('sel'));
     const other = rows.find((r) => !r.classList.contains('sel'));
-    expect(selected?.getAttribute('role')).toBe('option');
-    expect(selected?.getAttribute('aria-selected')).toBe('true');
-    expect(other?.getAttribute('role')).toBe('option');
-    expect(other?.getAttribute('aria-selected')).toBe('false');
-    expect(root.querySelector('#ws-roster')?.getAttribute('role')).toBe('listbox');
+    expect(selected?.getAttribute('aria-current')).toBe('true');
+    expect(other?.hasAttribute('aria-current')).toBe(false);
+    expect(selected?.closest('[role="listitem"]')).toBeTruthy();
+    expect(other?.closest('[role="listitem"]')).toBeTruthy();
+    expect(root.querySelector('#ws-roster')?.getAttribute('role')).toBe('list');
+  });
+
+  it('disables roster rows until the connection is ready, then re-enables them', async () => {
+    const roster = [char({ id: 1, name: 'Alice' }), char({ id: 2, name: 'Bob' })];
+    const controller = mountWelcomeScreen(root, {
+      ...baseDeps(roster, 1),
+      platform: { nativeApp: false, desktopApp: false, mobileTouch: false, offline: false },
+      onSelectCharacter: () => {},
+    });
+    await controller.show();
+
+    const otherRowBefore = Array.from(
+      root.querySelectorAll<HTMLButtonElement>('.ws-roster-row'),
+    ).find((r) => !r.classList.contains('sel'));
+    expect(otherRowBefore?.disabled).toBe(true);
+    expect(otherRowBefore?.getAttribute('aria-disabled')).toBe('true');
+
+    controller.setConnectionReady(true);
+
+    const otherRowAfter = Array.from(
+      root.querySelectorAll<HTMLButtonElement>('.ws-roster-row'),
+    ).find((r) => !r.classList.contains('sel'));
+    expect(otherRowAfter?.disabled).toBe(false);
+    expect(otherRowAfter?.hasAttribute('aria-disabled')).toBe(false);
+  });
+
+  it('clears the roster on destroy so a stale row cannot survive a remount', async () => {
+    const roster = [char({ id: 1, name: 'Alice' }), char({ id: 2, name: 'Bob' })];
+    const first = mountWelcomeScreen(root, {
+      ...baseDeps(roster, 1),
+      onSelectCharacter: () => {},
+    });
+    await first.show();
+    expect(root.querySelectorAll('.ws-roster-row')).toHaveLength(2);
+
+    first.destroy();
+
+    expect(root.querySelectorAll('.ws-roster-row')).toHaveLength(0);
+    expect(root.querySelector('#ws-roster')?.hasAttribute('role')).toBe(false);
   });
 });

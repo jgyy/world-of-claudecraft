@@ -67,7 +67,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "es_ES": [
     "entities.items.copper_ore.name",
@@ -127,7 +128,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "fr_FR": [
     "entities.items.copper_ore.name",
@@ -187,7 +189,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "fr_CA": [
     "entities.items.copper_ore.name",
@@ -247,7 +250,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "en_CA": [],
   "it_IT": [
@@ -308,7 +312,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "de_DE": [
     "entities.items.copper_ore.name",
@@ -368,7 +373,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "zh_CN": [
     "hudChrome.professions.skillValue"
@@ -440,7 +446,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "ru_RU": [
     "hudChrome.professions.skillValue"
@@ -503,7 +510,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "nl_NL": [
     "entities.items.copper_ore.name",
@@ -563,7 +571,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "pl_PL": [
     "entities.items.copper_ore.name",
@@ -623,7 +632,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "id_ID": [
     "entities.items.copper_ore.name",
@@ -683,7 +693,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "tr_TR": [
     "entities.items.copper_ore.name",
@@ -743,7 +754,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "sv_SE": [
     "entities.items.copper_ore.name",
@@ -803,7 +815,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "vi_VN": [
     "entities.items.copper_ore.name",
@@ -863,7 +876,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ],
   "da_DK": [
     "entities.items.copper_ore.name",
@@ -923,6 +937,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.professions.title",
     "hudChrome.professions.tutorialLine",
     "hudChrome.professions.unattunedIdentity",
-    "itemUi.market.rarityLegendary"
+    "itemUi.market.rarityLegendary",
+    "welcome.roster.title"
   ]
 };
