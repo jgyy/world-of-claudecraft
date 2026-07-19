@@ -2984,7 +2984,7 @@
     max-width: 100%;
     box-sizing: border-box;
   }
-  body.mobile-touch #char-window .char-stats {
+  body.mobile-touch #char-window > .char-info-grid > .char-stats {
     margin-top: 6px;
   }
   body.mobile-touch #char-window .paperdoll {
@@ -3019,13 +3019,13 @@
       padding: 4px 0 5px;
     }
   }
-  body.mobile-touch #char-window .char-stats {
+  body.mobile-touch #char-window > .char-info-grid > .char-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
   }
-  body.mobile-touch #char-window .char-stats .stat-cell {
+  body.mobile-touch #char-window > .char-info-grid > .char-stats .stat-cell {
     min-width: 0;
     max-width: 100%;
     margin-inline: 0;

@@ -1042,7 +1042,6 @@
      stacking full-width (see .char-info-grid). */
   #char-window {
     width: 920px;
-    max-width: calc(100vw - 40px);
   }
   .paperdoll {
     display: flex;
@@ -1052,9 +1051,7 @@
   /* Groups .char-stats plus every .char-progression block (talent summary,
      progression, gathering) into a two-column layout so a wide window reads
      as two short columns instead of one long stacked scroll. Each block keeps
-     its own internal layout untouched; column-span: all lets a block that
-     needs the full width (none currently do, but a future single-item block
-     would) opt out. */
+     its own internal layout untouched. */
   .char-info-grid {
     columns: 320px 2;
     column-gap: 16px;
