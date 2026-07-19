@@ -38,6 +38,35 @@ const MARKET_WIRE_LIMIT = 120; // most listings shipped to one client at a time
 const MARKET_FEE_POOL_DRAW_INTERVAL = 24 * 3600; // sim-seconds between giveaway draws
 const MARKET_FEE_POOL_REWARD_KINDS = new Set(['weapon', 'armor']);
 
+// Eligibility for a fee-pool reward: epic/legendary weapon or armor, never a heroic
+// remix (those are dungeon-locked) or soulbound gear (those can't be handed out as a
+// tradeable prize). Shared by the minimum-draw-threshold calc and the reward roll
+// itself so the two can never drift.
+function isFeePoolRewardItem(d: ItemDef): boolean {
+  return (
+    (d.quality === 'epic' || d.quality === 'legendary') &&
+    MARKET_FEE_POOL_REWARD_KINDS.has(d.kind) &&
+    !d.heroicOf &&
+    !d.soulbound
+  );
+}
+
+// A participant's identity captured at TRADE time (not resolved later from the
+// live roster at draw time). This is the fix for a real bug: the pool accumulates
+// over a full MARKET_FEE_POOL_DRAW_INTERVAL (24 sim-hours), so a winner who has
+// since logged out is the common case, not an edge case. Resolving `name`/`cls`
+// from `ctx.players` at draw time meant an offline winner's raw character/entity
+// id leaked into the server-wide announcement, and their class-eligible reward
+// pool silently shrank to only classless items. Capturing the display name (always
+// known, straight off the listing/meta) and class (best effort - only knowable if
+// the trader happened to still be online at their OWN trade) at participation time
+// removes both failure modes.
+interface FeePoolParticipant {
+  key: string;
+  name: string;
+  cls: PlayerMeta['cls'] | undefined;
+}
+
 export interface MarketListing {
   id: number;
   sellerKey: string; // stable seller identity (character id string); '' for house stock
@@ -95,12 +124,28 @@ export class Market {
   // is every seller/buyer key that traded since the last draw, so the winner is drawn
   // from people who actually used the market, not the whole player roster.
   feePoolCopper = 0;
-  private feePoolParticipants = new Set<string>();
+  // Keyed by seller/buyer key so a repeat trader within one draw cycle only gets one
+  // entry (dedupes), but the VALUE is captured at participation time - see
+  // FeePoolParticipant above.
+  private feePoolParticipants = new Map<string, FeePoolParticipant>();
   // Public like MarketListing.expiresAt: tests force a draw the same way they force a
   // listing expiry, by moving the deadline into the past then ticking.
   feePoolNextDrawAt = 0;
+  // The pool must be able to afford at least the cheapest eligible reward before a
+  // draw fires at all (finding: a single one-copper-fee trade used to mint raid-tier
+  // gear on the next daily tick, regardless of pool size). Derived from the actual
+  // item table, not an invented number, and cached once since content is static.
+  private readonly feePoolMinDrawCopper = Market.computeMinDrawCopper();
 
   constructor(private readonly ctx: SimContext) {}
+
+  private static computeMinDrawCopper(): number {
+    let min = Infinity;
+    for (const d of Object.values(ITEMS)) {
+      if (isFeePoolRewardItem(d)) min = Math.min(min, d.sellValue);
+    }
+    return Number.isFinite(min) ? min : 0;
+  }
 
   // Public ctor-seed entry: the Sim ctor calls this right after the NPC loop sets
   // `merchantId`, replacing the inline `this.seedHouseListings()`.
@@ -139,6 +184,15 @@ export class Market {
       if (this.marketSellerKey(m) === key || m.name === key) return m;
     }
     return null;
+  }
+
+  private addFeePoolParticipant(
+    key: string,
+    name: string,
+    cls: PlayerMeta['cls'] | undefined,
+  ): void {
+    if (!key) return;
+    this.feePoolParticipants.set(key, { key, name, cls });
   }
 
   private collectionFor(key: string): MarketCollection {
@@ -357,8 +411,17 @@ export class Market {
       this.collectionFor(listing.sellerKey).copper += proceeds;
       if (cut > 0) {
         this.feePoolCopper += cut;
-        this.feePoolParticipants.add(listing.sellerKey);
-        this.feePoolParticipants.add(this.marketSellerKey(meta));
+        // The buyer is resolved right here (they're the one acting), so their class
+        // is always known. The seller's listing already carries their display name
+        // (sellerName), so that never degrades to a raw key even when the seller is
+        // offline at sale time; their class is best-effort (only known if they're
+        // still online right now).
+        this.addFeePoolParticipant(
+          listing.sellerKey,
+          listing.sellerName,
+          this.metaByMarketSellerKey(listing.sellerKey)?.cls,
+        );
+        this.addFeePoolParticipant(this.marketSellerKey(meta), meta.name, meta.cls);
       }
       this.marketListings.splice(idx, 1);
       const sellerMeta = this.metaByMarketSellerKey(listing.sellerKey);
@@ -474,53 +537,69 @@ export class Market {
     }
   }
 
-  // Roughly once a day: if the pool holds any fees and at least one participant
-  // traded since the last draw, pick a random participant and hand them a random
-  // epic/legendary drop, funded entirely by the pool (which always drains and
-  // reschedules, win or not, so an empty week never lets fees pile up unbounded).
+  // Roughly once a day: if the pool has matured past feePoolMinDrawCopper and at
+  // least one participant traded since the last draw, pick a random participant and
+  // hand them a reward the pool can actually afford (see pickFeePoolReward), funded
+  // entirely by the pool. A pool that hasn't matured yet is left untouched to carry
+  // into the next check (same "quiet week just carries the pool forward" idea as
+  // before, just gated on value now instead of firing regardless of size); once a
+  // draw actually pays out, the pool always drains and reschedules, win or not, so
+  // fees can never pile up unbounded once they're large enough to matter.
   private updateFeePool(): void {
     if (this.ctx.tickCount % 20 !== 0) return;
     if (this.ctx.time < this.feePoolNextDrawAt) return;
+    if (this.feePoolCopper < this.feePoolMinDrawCopper || this.feePoolParticipants.size === 0) {
+      this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
+      return;
+    }
     this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
     const spent = this.feePoolCopper;
-    const participants = [...this.feePoolParticipants];
+    const participants = [...this.feePoolParticipants.values()];
     this.feePoolCopper = 0;
     this.feePoolParticipants.clear();
-    if (spent <= 0 || participants.length === 0) return;
-    const winnerKey = this.ctx.rng.pick(participants);
-    const winnerMeta = this.metaByMarketSellerKey(winnerKey);
-    const rewardId = this.pickFeePoolReward(winnerMeta?.cls);
+    const winner = this.ctx.rng.pick(participants);
+    const rewardId = this.pickFeePoolReward(winner.cls, spent);
     if (!rewardId) return;
-    this.collectionFor(winnerKey).items.push({ itemId: rewardId, count: 1 });
+    this.collectionFor(winner.key).items.push({ itemId: rewardId, count: 1 });
     const def = ITEMS[rewardId];
-    const winnerName = winnerMeta?.name ?? winnerKey;
     for (const m of this.ctx.players.values()) {
       this.ctx.emit({
         type: 'log',
-        text: `${winnerName} won ${def.name} from the World Market's fee giveaway, funded by ${formatMoney(spent)} in trading fees!`,
+        text: `${winner.name} won ${def.name} from the World Market's fee giveaway, funded by ${formatMoney(spent)} in trading fees!`,
         color: '#ffd35c',
         pid: m.entityId,
       });
     }
   }
 
-  // Reward pool: epic/legendary gear, preferring pieces the winner can actually
-  // equip (no requiredClass, or one that lists their class) so the giveaway is
-  // never wasted on an off-class drop; falls back to any classless epic/legendary
-  // piece if the winner's class has none (still exciting, just not equippable
-  // by them specifically - tradeable on the World Market like any other item).
-  private pickFeePoolReward(cls: PlayerMeta['cls'] | undefined): string | null {
-    const isReward = (d: ItemDef): boolean =>
-      (d.quality === 'epic' || d.quality === 'legendary') &&
-      MARKET_FEE_POOL_REWARD_KINDS.has(d.kind) &&
-      !d.heroicOf &&
-      !d.soulbound;
+  // Reward pool: epic/legendary gear the pool can actually afford (sellValue <= the
+  // banked fees), preferring pieces the winner can equip (no requiredClass, or one
+  // that lists their class) so the giveaway is never wasted on an off-class drop;
+  // falls back to any classless affordable piece if the winner's class has none
+  // (still exciting, just not equippable by them specifically - tradeable on the
+  // World Market like any other item). Among what's affordable, the roll is weighted
+  // toward the pricier half so a well-fed pool tends to buy something worth the wait
+  // instead of always defaulting to the cheapest eligible item.
+  private pickFeePoolReward(cls: PlayerMeta['cls'] | undefined, poolCopper: number): string | null {
+    const affordable = (pool: ItemDef[]): ItemDef[] =>
+      pool.filter((d) => d.sellValue <= poolCopper);
+    const weightedPick = (pool: ItemDef[]): ItemDef | null => {
+      const items = affordable(pool);
+      if (items.length === 0) return null;
+      const maxValue = Math.max(...items.map((d) => d.sellValue));
+      const topTier = items.filter((d) => d.sellValue >= maxValue / 2);
+      return this.ctx.rng.pick(topTier.length > 0 ? topTier : items);
+    };
     const forClass = Object.values(ITEMS).filter(
-      (d) => isReward(d) && (!d.requiredClass || (cls && d.requiredClass.includes(cls))),
+      (d) => isFeePoolRewardItem(d) && (!d.requiredClass || (cls && d.requiredClass.includes(cls))),
     );
-    if (forClass.length > 0) return this.ctx.rng.pick(forClass).id;
-    const classless = Object.values(ITEMS).filter((d) => isReward(d) && !d.requiredClass);
-    return classless.length > 0 ? this.ctx.rng.pick(classless).id : null;
+    const classPick = weightedPick(forClass);
+    if (classPick) return classPick.id;
+    const classless = Object.values(ITEMS).filter(
+      (d) => isFeePoolRewardItem(d) && !d.requiredClass,
+    );
+    const classlessPick = weightedPick(classless);
+    return classlessPick ? classlessPick.id : null;
   }
 
   marketInfoFor(pid: number): import('../world_api').MarketInfo | null {

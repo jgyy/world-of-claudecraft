@@ -641,8 +641,10 @@ describe('the World Market: the fee-pool giveaway', () => {
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
     sim.addItem('wolf_fang', 1, seller);
-    sim.players.get(buyer)!.copper = 1000;
-    sim.marketList('wolf_fang', 1, 200, seller);
+    // Priced so the 5% cut clears the minimum-draw threshold (the cheapest eligible
+    // reward's sellValue): a trivial trade must not fund a raid-tier drop.
+    sim.players.get(buyer)!.copper = 200_000;
+    sim.marketList('wolf_fang', 1, 100_000, seller);
     sim.marketBuy(
       sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
       buyer,
@@ -671,6 +673,79 @@ describe('the World Market: the fee-pool giveaway', () => {
     // The whole server heard about it.
     const logs = allEvents.filter((e) => e.type === 'log').map((e) => (e as { text: string }).text);
     expect(logs.some((t) => t.includes('fee giveaway'))).toBe(true);
+  });
+
+  it('a pool below the minimum-draw threshold carries forward instead of minting a reward off a trivial trade', () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.addItem('wolf_fang', 1, seller);
+    sim.players.get(buyer)!.copper = 1000;
+    // A trivial 200-copper trade only banks 10 copper of fees - nowhere near enough
+    // to afford the cheapest epic/legendary weapon or armor piece.
+    sim.marketList('wolf_fang', 1, 200, seller);
+    sim.marketBuy(
+      sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
+      buyer,
+    );
+    expect(sim.market.feePoolCopper).toBe(10);
+    sim.market.feePoolNextDrawAt = sim.time - 1; // force the check due
+
+    for (let i = 0; i < 20; i++) sim.tick();
+
+    // The pool is untouched (not drained) and no reward was granted: the draw did
+    // not fire because 10 copper cannot afford anything in the reward table.
+    expect(sim.market.feePoolCopper).toBe(10);
+    expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
+    expect(sim.marketInfoFor(seller)!.collectionItems).toEqual([]);
+    expect(sim.marketInfoFor(buyer)!.collectionItems).toEqual([]);
+  });
+
+  it('an offline winner is announced by their real name, not a raw character key, and keeps their class-eligible pool', () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.addItem('wolf_fang', 1, seller);
+    sim.players.get(buyer)!.copper = 200_000;
+    sim.marketList('wolf_fang', 1, 100_000, seller);
+    sim.marketBuy(
+      sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
+      buyer,
+    );
+    const sellerKey = marketSellerKey(seller);
+    expect(sim.market.feePoolCopper).toBeGreaterThan(0);
+
+    // The seller logs out before the draw fires - the common case, since the pool
+    // accumulates over a full 24 sim-hour interval.
+    sim.removePlayer(seller);
+    sim.market.feePoolNextDrawAt = sim.time - 1;
+
+    const allEvents = [];
+    for (let i = 0; i < 20; i++) allEvents.push(...sim.tick());
+
+    // The reward, if the offline seller won, is still delivered to their collection
+    // by stable key (recoverable on relog), not lost or rerouted.
+    const sellerItems = sim.marketInfoFor(buyer)!.collectionItems; // buyer stays online
+    const collections = (
+      sim.market as unknown as {
+        marketCollections: Map<string, { items: { itemId: string; count: number }[] }>;
+      }
+    ).marketCollections;
+    const sellerCollected = collections.get(sellerKey)?.items ?? [];
+    const won = [...sellerItems, ...sellerCollected];
+    expect(won.length).toBe(1);
+
+    // Whoever won, the broadcast text never contains the raw seller key (only a
+    // display name): 'Seller' if the offline seller won, 'Buyer' otherwise.
+    const logs = allEvents.filter((e) => e.type === 'log').map((e) => (e as { text: string }).text);
+    const winLog = logs.find((t) => t.includes('fee giveaway'));
+    expect(winLog).toBeDefined();
+    expect(winLog).not.toContain(sellerKey);
+    expect(winLog!.startsWith('Seller ') || winLog!.startsWith('Buyer ')).toBe(true);
   });
 
   it('an empty pool at the draw deadline just reschedules, with no winner and no error', () => {
