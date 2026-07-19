@@ -2315,6 +2315,15 @@
     break-inside: avoid;
     margin-bottom: 10px;
   }
+  /* Round 6: .dr-tasks' desktop 2-column grid (components.css) would nest
+     inside the .dr-body multicol column ABOVE (already half the window), so
+     each task's own 3-track row (name/progress/58px-reward) would squeeze
+     into a quarter-window-wide cell. Reset it to a single column here; the
+     multicol layout above is already the mobile 2-up treatment for this
+     window. */
+  body.mobile-touch .dr-tasks {
+    grid-template-columns: 1fr;
+  }
   body.mobile-touch #daily-rewards-window {
     max-height: calc(var(--app-vh) / var(--ui-scale, 1) - 20px);
     overflow: hidden;
