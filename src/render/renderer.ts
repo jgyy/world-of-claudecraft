@@ -5099,7 +5099,12 @@ export class Renderer {
         ABILITIES[e.castingAbility]?.selfCentered === true;
       st.swimming = swimming;
       st.sitting = e.kind === 'player' && (e.sitting || e.eating !== null || e.drinking !== null);
-      st.stunned = dazedPoseActive(isStunned(e), polyed, visuallyDead);
+      // Every form swap (sheep/bear/cat/travel) already reads as fully
+      // incapacitated via the model change itself, and none of those rigs has
+      // a bespoke `stunned` clip, so the pose would fall back to looping a
+      // hit-react flinch for the whole form duration (see dazedPoseActive).
+      const formSwapActive = polyed || bear || cat || travel;
+      st.stunned = dazedPoseActive(isStunned(e), formSwapActive, visuallyDead);
       // --- spatial movement audio (self + others) --------------------------
       // All gated by audibility (squared distance) so far entities cost nothing.
       const sink = this.audioSink;

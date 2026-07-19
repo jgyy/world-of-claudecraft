@@ -1219,8 +1219,16 @@ export class CharacterVisual {
     // left the action LoopOnce + clamped on its last frame; skipping the
     // re-fade here (the plain next===current check) leaves the rig frozen on
     // that final frame instead of resuming the loop. Only skip when the
-    // action is ALREADY looping: that is the real no-op case.
-    if (next === this.current && !oneShot && next.loop === THREE.LoopRepeat) return;
+    // action is ALREADY looping (the real no-op case), OR when `isOnce(next)`
+    // says this action is SUPPOSED to stay a one-shot for the current
+    // baseState (the sit-down hand-off: if a rig's manifest names a
+    // `sitIdle` clip its GLB does not actually ship, `action()` resolves
+    // null and onFinished's sit branch falls back to the same sitDown
+    // action already current; without this second arm the guard would fall
+    // through, reset() + re-clamp that LoopOnce action, and immediately
+    // re-fire 'finished', replaying the sit-down forever).
+    if (next === this.current && !oneShot && (next.loop === THREE.LoopRepeat || this.isOnce(next)))
+      return;
     const prev = this.current;
     next.reset();
     next.setLoop(oneShot || this.isOnce(next) ? THREE.LoopOnce : THREE.LoopRepeat, Infinity);

@@ -81,11 +81,18 @@ describe('CharacterVisual: dazed pose resumes after a hit-react on a single-clip
     // hands control back to baseAction().
     for (let i = 0; i < 30; i++) visual.update(0.05, STUNNED_STATE, true);
 
-    // Regression: previously the action stayed clamped as a one-shot forever
-    // (isMidOneShot true, no further onFinished handling) because fadeTo()
-    // saw next === this.current and returned without ever setting the loop
-    // back to LoopRepeat.
-    expect(visual.isMidOneShot).toBe(false);
+    // Review feedback on PR #2064 (finding 4): `isMidOneShot` alone does not
+    // reproduce the bug. `onFinished()` clears `currentIsOneShot` to false
+    // BEFORE calling `fadeTo()`, and nothing on fadeTo's early-return path
+    // can set it back, so `isMidOneShot` reads false whether or not the
+    // fade actually happened. The real, decisive observable is the
+    // underlying THREE.AnimationAction: pre-fix it stays clamped at
+    // `loop: LoopOnce, paused: true` on the hit-react's last frame forever;
+    // post-fix it resumes looping (`loop: LoopRepeat, paused: false`).
+    const current = (visual as unknown as { current: THREE.AnimationAction | null }).current;
+    expect(current).not.toBeNull();
+    expect(current?.loop).toBe(THREE.LoopRepeat);
+    expect(current?.paused).toBe(false);
 
     errSpy.mockRestore();
   }, 15000);

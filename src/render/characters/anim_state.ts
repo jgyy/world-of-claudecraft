@@ -20,10 +20,11 @@ export interface AnimState {
   sitting: boolean;
   /** a hard-CC lockout (stun/incapacitate, see sim/combat/cc.ts isStunned) is
    *  active: freezes casts, movement, and melee, so the pose must read as
-   *  dazed rather than idle. Excludes polymorph: the form swap to the sheep
-   *  model already reads as fully incapacitated, and that rig has no
-   *  bespoke `stunned` clip, so this pose would fall back to looping a
-   *  hit-react flinch for the whole polymorph instead. */
+   *  dazed rather than idle. Excludes every active form swap (polymorph
+   *  sheep, druid bear/cat/travel): the model change already reads as fully
+   *  incapacitated (or, for travel form, as a mount), and none of those rigs
+   *  has a bespoke `stunned` clip, so this pose would fall back to looping a
+   *  hit-react flinch for the whole form duration instead. */
   stunned: boolean;
 }
 
@@ -44,16 +45,20 @@ const DEFAULT_RUN_REF = 7;
 
 /**
  * Whether the dazed (`AnimState.stunned`) pose should apply, given a raw
- * hard-CC lockout (`isStunned(e)` from sim/combat/cc.ts) and whether a form
- * swap (polymorph sheep, druid forms) is currently the active visual.
+ * hard-CC lockout (`isStunned(e)` from sim/combat/cc.ts) and whether ANY form
+ * swap (polymorph sheep, druid bear/cat/travel) is currently the active
+ * visual.
  *
- * Excludes polymorph: the sheep swap already reads as fully incapacitated,
- * and its rig has no bespoke `stunned` clip, so it would fall back to
- * looping a hit-react flinch for the whole polymorph instead of a dazed
- * idle. Every other hard CC (stun/stasis/incapacitate) still gets the pose.
+ * Excludes every form swap, not just polymorph: the sheep, bear, and cat
+ * (druid Cat/Wolf Form, shaman Shadewolf/ghost wolf) rigs all fall back to
+ * the same single hit-react clip as their `stunned` pose (none of them has
+ * a bespoke `stunned` clip authored), so looping it for the whole form
+ * duration would read as a broken flinch loop rather than the model swap
+ * that already communicates "incapacitated" on its own. Every other hard CC
+ * (stun/stasis/incapacitate) while NOT shape-shifted still gets the pose.
  */
-export function dazedPoseActive(hardCC: boolean, polymorphed: boolean, dead: boolean): boolean {
-  return hardCC && !polymorphed && !dead;
+export function dazedPoseActive(hardCC: boolean, formSwapActive: boolean, dead: boolean): boolean {
+  return hardCC && !formSwapActive && !dead;
 }
 
 export function desiredBaseState(s: AnimState, hasWalkBackClip: boolean): BaseState {
@@ -63,8 +68,12 @@ export function desiredBaseState(s: AnimState, hasWalkBackClip: boolean): BaseSt
   // isStunned flips true), so the pose must not keep reading as a normal
   // spin/cast/swim/sit loop while the player can't act. swim keeps its
   // pre-existing precedence over spin (a self-centered channel like
-  // Bladestorm while swimming still reads as swim): only stunned is newly
-  // inserted, ahead of both.
+  // Bladestorm while swimming still reads as swim): stunned is the only
+  // state newly inserted ahead of both. Airborne now also runs ahead of swim
+  // (it did not before this change), but that reorder is inert: the renderer
+  // only ever sets `airborne` with a `!swimming` guard (renderer.ts), so the
+  // two conditions are never simultaneously true and their relative order
+  // cannot be observed.
   if (s.airborne) return 'jump';
   if (s.stunned) return 'stunned';
   if (s.swimming) return 'swim';
