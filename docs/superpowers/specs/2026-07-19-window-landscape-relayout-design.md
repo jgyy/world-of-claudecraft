@@ -32,6 +32,28 @@ Order favors: highest player-facing traffic first (char, quest-log, talents, tra
 mailbox), then remaining list/grid windows, then bespoke-content windows (map, meters,
 options) last since they need custom column groupings rather than the row-reflow recipe.
 
+```mermaid
+flowchart TD
+    A[Shared infra PR: hide bottom bar on mobile-window-open] --> B[High-traffic windows]
+    B --> B1[char]
+    B --> B2[quest-log]
+    B --> B3[talents]
+    B --> B4[trade]
+    B --> B5[mailbox]
+    B5 --> C[Remaining list / grid windows]
+    C --> C1[bank, crafting, deeds, calendar]
+    C1 --> C2[dungeon-finder, leaderboard, arena, valecup]
+    C2 --> C3[card-duel, town-focus, inspect, loot-settings]
+    C3 --> C4[claudium, char-skin, daily-rewards]
+    C4 --> D[Bespoke-content windows last]
+    D --> D1[map]
+    D --> D2[meters]
+    D --> D3[options]
+
+    classDef skip fill:#888,color:#fff;
+    E[Already open, skip: social #2099, vendor/goods #2101,\nspellbook #2102, bags #2103, market #2107]:::skip
+```
+
 ## Shared infra PR (goes first, unblocks nothing but should land early)
 
 Add to `src/styles/hud.mobile.css`: `body.mobile-touch.mobile-window-open #bottom-bar {
