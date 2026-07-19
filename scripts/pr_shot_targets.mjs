@@ -187,6 +187,43 @@ export const TARGETS = [
     },
   },
   {
+    key: 'daily-quests',
+    label: 'Daily quests (quest log)',
+    when: ['sim/content/daily_quests', 'sim/quests/daily_quest_pool', 'ui/hud/quest'],
+    // Accept a daily quest offline (level up first so a minLevel-gated daily is
+    // reachable), open the quest log, and clip to it so the Daily badge is visible.
+    async capture(page) {
+      const setup = await page.evaluate(() => {
+        const game = window.__game;
+        const sim = game?.sim;
+        const player = sim?.player;
+        if (!sim || !player) return { ok: false };
+        sim.setPlayerLevel?.(6, player.id);
+        const marshal = Array.from(sim.entities.values()).find(
+          (e) => e.templateId === 'marshal_redbrook',
+        );
+        if (marshal && player.pos) {
+          player.pos.x = marshal.pos.x;
+          player.pos.z = marshal.pos.z;
+        }
+        if (marshal) sim.talkToNpc?.(marshal.id, player.id);
+        const dailyId = sim.dailyQuests?.questIds?.[0];
+        if (dailyId) sim.acceptQuest(dailyId, player.id);
+        const el = document.querySelector('#quest-log-window');
+        if (el) el.style.display = 'none';
+        game.hud?.toggleQuestLog?.();
+        return { ok: !!dailyId, dailyId };
+      });
+      if (!setup.ok) throw new Error('no daily quest was rolled to accept');
+      await wait(500);
+      await page.evaluate((dailyId) => {
+        window.__game?.hud?.questlogWindow?.openWithQuest?.(dailyId);
+      }, setup.dailyId);
+      await wait(300);
+      return { clip: '#quest-log-window' };
+    },
+  },
+  {
     key: 'inventory',
     label: 'Inventory / bags',
     when: ['ui/bags', 'ui/inventory', 'ui/item', 'ui/vendor', 'ui/loot', 'sim/content/items'],
