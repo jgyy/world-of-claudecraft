@@ -5516,6 +5516,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.options.showOwnNameplate'
   | 'hudChrome.options.showSecondaryActionBar'
   | 'hudChrome.options.showTargetOfTarget'
+  | 'hudChrome.options.showThirdActionBar'
   | 'hudChrome.options.showWalletOnCharacterScreen'
   | 'hudChrome.options.showWalletOnPlayerCard'
   | 'hudChrome.options.startAttackOnAbility'

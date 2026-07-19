@@ -245,7 +245,7 @@ export interface SavedLoadout {
 }
 
 export const MAX_LOADOUTS = 10;
-export const SAVED_LOADOUT_BAR_SLOTS = 22;
+export const SAVED_LOADOUT_BAR_SLOTS = 33;
 
 export interface ResolvedAbilityMod {
   dmgPct: number;
