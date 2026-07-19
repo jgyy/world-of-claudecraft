@@ -1470,7 +1470,8 @@ export const zh_CN: EnTranslations = {
       "watchTwitch": "在 Twitch 观看",
       "watchX": "在 X 查看",
       "watchKick": "在 Kick 观看",
-      "watchYouTube": "在 YouTube 观看"
+      "watchYouTube": "在 YouTube 观看",
+      "streamerBadgeTitle": "认证主播"
     },
     "lootSettings": {
       "title": "拾取设置",

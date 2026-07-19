@@ -1470,7 +1470,8 @@ export const sv_SE: EnTranslations = {
       "watchTwitch": "Titta på Twitch",
       "watchX": "Visa på X",
       "watchKick": "Titta på Kick",
-      "watchYouTube": "Titta på YouTube"
+      "watchYouTube": "Titta på YouTube",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Byteinställningar",

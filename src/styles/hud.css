@@ -4861,6 +4861,22 @@
     width: 14px;
     height: 14px;
   }
+  /* Verified-streamer chat flair: a small brand-mark badge beside the sender
+     name (see chatStreamerBadgeEl). Tinted with the accent token rather than a
+     platform brand hex, so it reads as "this account is flagged", not as an
+     ad for one platform; opening the actual channel link stays in the player
+     menu the badge opens (identical target to the name itself). */
+  .streamer-badge {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 3px;
+    color: var(--color-accent);
+  }
+  .streamer-badge .ui-icon {
+    width: 12px;
+    height: 12px;
+  }
 
   /* ---------- prompts (invite/trade/duel) ---------- */
   #prompt-stack {

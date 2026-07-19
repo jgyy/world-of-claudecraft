@@ -1470,7 +1470,8 @@ export const nl_NL: EnTranslations = {
       "watchTwitch": "Bekijken op Twitch",
       "watchX": "Bekijken op X",
       "watchKick": "Bekijken op Kick",
-      "watchYouTube": "Bekijken op YouTube"
+      "watchYouTube": "Bekijken op YouTube",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Buitinstellingen",

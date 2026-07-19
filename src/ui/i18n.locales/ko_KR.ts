@@ -680,6 +680,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.playerMenu.profileUnavailable': '{name} 님의 프로필을 찾을 수 없습니다.',
   'hudChrome.playerMenu.aiTag': '[AI]',
   'hudChrome.playerMenu.aiTagTitle': 'AI 운영 계정',
+  'hudChrome.playerMenu.streamerBadgeTitle': '인증된 스트리머',
   'hudChrome.playerMenu.watchTwitch': 'Twitch에서 시청',
   'hudChrome.playerMenu.watchX': 'X에서 보기',
   'hudChrome.playerMenu.watchKick': 'Kick에서 시청',

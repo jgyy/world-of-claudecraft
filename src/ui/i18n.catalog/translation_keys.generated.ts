@@ -5624,6 +5624,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.playerMenu.info'
   | 'hudChrome.playerMenu.openFor'
   | 'hudChrome.playerMenu.profileUnavailable'
+  | 'hudChrome.playerMenu.streamerBadgeTitle'
   | 'hudChrome.playerMenu.unblock'
   | 'hudChrome.playerMenu.watchKick'
   | 'hudChrome.playerMenu.watchTwitch'

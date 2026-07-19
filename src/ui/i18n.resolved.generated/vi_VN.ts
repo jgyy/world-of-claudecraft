@@ -1470,7 +1470,8 @@ export const vi_VN: EnTranslations = {
       "watchTwitch": "Xem trên Twitch",
       "watchX": "Xem trên X",
       "watchKick": "Xem trên Kick",
-      "watchYouTube": "Xem trên YouTube"
+      "watchYouTube": "Xem trên YouTube",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Cài Đặt Chiến Lợi Phẩm",

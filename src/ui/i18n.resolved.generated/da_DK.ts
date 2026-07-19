@@ -1470,7 +1470,8 @@ export const da_DK: EnTranslations = {
       "watchTwitch": "Se på Twitch",
       "watchX": "Vis på X",
       "watchKick": "Se på Kick",
-      "watchYouTube": "Se på YouTube"
+      "watchYouTube": "Se på YouTube",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Bytteindstillinger",

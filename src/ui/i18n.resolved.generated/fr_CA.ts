@@ -1470,7 +1470,8 @@ export const fr_CA: EnTranslations = {
       "watchTwitch": "Regarder sur Twitch",
       "watchX": "Voir sur X",
       "watchKick": "Regarder sur Kick",
-      "watchYouTube": "Regarder sur YouTube"
+      "watchYouTube": "Regarder sur YouTube",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Réglages de butin",

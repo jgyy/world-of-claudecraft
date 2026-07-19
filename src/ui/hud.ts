@@ -278,6 +278,7 @@ import {
   CHAT_MESSAGE_TOKEN,
   CHAT_NAME_TOKEN,
   chatAiTagEl,
+  chatStreamerBadgeEl,
 } from './hud/chat/chat_line';
 import { type ChatClock, clampChatClock, formatChatTimestamp } from './hud/chat/chat_timestamp';
 import { ChatWindowController } from './hud/chat/chat_window_controller';
@@ -9887,6 +9888,12 @@ export class Hud {
     sender.setAttribute('role', 'button');
     sender.setAttribute('aria-label', t('hudChrome.playerMenu.openFor', { name }));
     sender.tabIndex = 0;
+    // Classic-MMO class-colored chat names: only for a live player entity in
+    // interest scope (chat reaches you from players far outside it, per
+    // sim/account_flair.ts, so a sender with no resolvable entity keeps the
+    // channel's default line color instead of guessing a class).
+    const senderEntity = fromPid !== undefined ? this.sim.entities.get(fromPid) : undefined;
+    if (senderEntity?.kind === 'player') sender.style.color = classCss(senderEntity.templateId);
     // Anchor the menu under the name itself for a click/tap/keyboard open, and at
     // the cursor for a right-click.
     const openUnderName = () => {
@@ -9909,12 +9916,18 @@ export class Hud {
       ev.preventDefault();
       openUnderName();
     });
-    // The [AI] tag rides the {name} slot, not the head of the line: the localized
-    // templates read '[General] {name}: {message}', so it must sit beside the name
-    // and not look like part of the channel prefix (see ./chat_line).
+    // The [AI] tag and streamer badge ride the {name} slot, not the head of the
+    // line: the localized templates read '[General] {name}: {message}', so they
+    // must sit beside the name and not look like part of the channel prefix
+    // (see ./chat_line). The badge opens the SAME player menu the name opens
+    // (which already lists the streamer's channel links up top) rather than
+    // window.open-ing a link itself, so no href handling is duplicated here.
+    const streamerBadge = chatStreamerBadgeEl(document, flair?.links);
+    if (streamerBadge instanceof HTMLElement) bindTouchTap(streamerBadge, openUnderName);
     const rendered = t(templateKey, { name: CHAT_NAME_TOKEN, message: CHAT_MESSAGE_TOKEN });
     appendChatLineParts(div, rendered, {
       aiTag: flair?.ai ? chatAiTagEl(document) : null,
+      streamerBadge,
       sender,
       appendBody: (parent) => this.appendChatMessageBody(parent, text, fromPid),
     });

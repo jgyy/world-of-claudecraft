@@ -1470,7 +1470,8 @@ export const id_ID: EnTranslations = {
       "watchTwitch": "Tonton di Twitch",
       "watchX": "Lihat di X",
       "watchKick": "Tonton di Kick",
-      "watchYouTube": "Tonton di YouTube"
+      "watchYouTube": "Tonton di YouTube",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Pengaturan Jarahan",

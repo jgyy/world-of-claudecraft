@@ -1470,7 +1470,8 @@ export const tr_TR: EnTranslations = {
       "watchTwitch": "Twitch'te izle",
       "watchX": "X'te görüntüle",
       "watchKick": "Kick'te izle",
-      "watchYouTube": "YouTube'da izle"
+      "watchYouTube": "YouTube'da izle",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Ganimet Ayarları",

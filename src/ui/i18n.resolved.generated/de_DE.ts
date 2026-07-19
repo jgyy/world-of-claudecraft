@@ -1470,7 +1470,8 @@ export const de_DE: EnTranslations = {
       "watchTwitch": "Auf Twitch ansehen",
       "watchX": "Auf X ansehen",
       "watchKick": "Auf Kick ansehen",
-      "watchYouTube": "Auf YouTube ansehen"
+      "watchYouTube": "Auf YouTube ansehen",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Beute-Einstellungen",

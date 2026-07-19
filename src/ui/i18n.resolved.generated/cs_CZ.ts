@@ -1470,7 +1470,8 @@ export const cs_CZ: EnTranslations = {
       "watchTwitch": "Sledovat na Twitchi",
       "watchX": "Zobrazit na X",
       "watchKick": "Sledovat na Kicku",
-      "watchYouTube": "Sledovat na YouTube"
+      "watchYouTube": "Sledovat na YouTube",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Nastavení kořisti",

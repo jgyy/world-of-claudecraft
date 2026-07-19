@@ -1470,7 +1470,8 @@ export const ja_JP: EnTranslations = {
       "watchTwitch": "Twitch で視聴",
       "watchX": "X で見る",
       "watchKick": "Kick で視聴",
-      "watchYouTube": "YouTube で視聴"
+      "watchYouTube": "YouTube で視聴",
+      "streamerBadgeTitle": "認証済み配信者"
     },
     "lootSettings": {
       "title": "分配設定",

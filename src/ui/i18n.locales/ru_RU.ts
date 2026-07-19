@@ -680,6 +680,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.playerMenu.profileUnavailable': 'Профиль игрока {name} не найден.',
   'hudChrome.playerMenu.aiTag': '[AI]',
   'hudChrome.playerMenu.aiTagTitle': 'Аккаунт под управлением ИИ',
+  'hudChrome.playerMenu.streamerBadgeTitle': 'Проверенный стример',
   'hudChrome.playerMenu.watchTwitch': 'Смотреть на Twitch',
   'hudChrome.playerMenu.watchX': 'Открыть в X',
   'hudChrome.playerMenu.watchKick': 'Смотреть на Kick',

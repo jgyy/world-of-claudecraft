@@ -1470,7 +1470,8 @@ export const ru_RU: EnTranslations = {
       "watchTwitch": "Смотреть на Twitch",
       "watchX": "Открыть в X",
       "watchKick": "Смотреть на Kick",
-      "watchYouTube": "Смотреть на YouTube"
+      "watchYouTube": "Смотреть на YouTube",
+      "streamerBadgeTitle": "Проверенный стример"
     },
     "lootSettings": {
       "title": "Настройки добычи",

@@ -1470,7 +1470,8 @@ export const pt_BR: EnTranslations = {
       "watchTwitch": "Assistir na Twitch",
       "watchX": "Ver no X",
       "watchKick": "Assistir na Kick",
-      "watchYouTube": "Assistir no YouTube"
+      "watchYouTube": "Assistir no YouTube",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Configurações de Saque",

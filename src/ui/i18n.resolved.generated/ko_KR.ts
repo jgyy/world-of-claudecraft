@@ -1470,7 +1470,8 @@ export const ko_KR: EnTranslations = {
       "watchTwitch": "Twitch에서 시청",
       "watchX": "X에서 보기",
       "watchKick": "Kick에서 시청",
-      "watchYouTube": "YouTube에서 시청"
+      "watchYouTube": "YouTube에서 시청",
+      "streamerBadgeTitle": "인증된 스트리머"
     },
     "lootSettings": {
       "title": "전리품 설정",

@@ -1470,7 +1470,8 @@ export const en_XA: EnTranslations = {
       "watchTwitch": "[Ŵáţçĥ óñ Ţŵíţçĥ]",
       "watchX": "[Ʋíéŵ óñ Ẋ]",
       "watchKick": "[Ŵáţçĥ óñ Ķíçķ]",
-      "watchYouTube": "[Ŵáţçĥ óñ ÝóúŢúƀé]"
+      "watchYouTube": "[Ŵáţçĥ óñ ÝóúŢúƀé]",
+      "streamerBadgeTitle": "[Ʋéŕíƒíéð šţŕéáɱéŕ]"
     },
     "lootSettings": {
       "title": "[Ļóóţ Šéţţíñĝš]",

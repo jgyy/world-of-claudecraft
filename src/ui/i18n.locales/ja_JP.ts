@@ -683,6 +683,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.playerMenu.profileUnavailable': '{name} のプロフィールが見つかりません。',
   'hudChrome.playerMenu.aiTag': '[AI]',
   'hudChrome.playerMenu.aiTagTitle': 'AI操作アカウント',
+  'hudChrome.playerMenu.streamerBadgeTitle': '認証済み配信者',
   'hudChrome.playerMenu.watchTwitch': 'Twitch で視聴',
   'hudChrome.playerMenu.watchX': 'X で見る',
   'hudChrome.playerMenu.watchKick': 'Kick で視聴',

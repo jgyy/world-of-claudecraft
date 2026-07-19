@@ -1436,6 +1436,9 @@ export const hudChromeStrings = {
     watchX: 'View on X',
     watchKick: 'Watch on Kick',
     watchYouTube: 'Watch on YouTube',
+    // The chat-line badge marking a verified streamer's name; opens the same
+    // player menu the name itself opens, with the channel link(s) up top.
+    streamerBadgeTitle: 'Verified streamer',
   },
   lootSettings: {
     title: 'Loot Settings',
