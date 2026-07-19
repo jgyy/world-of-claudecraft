@@ -9889,7 +9889,10 @@ export class Hud {
     sender.setAttribute('aria-label', t('hudChrome.playerMenu.openFor', { name }));
     sender.tabIndex = 0;
     const ent = fromPid !== undefined ? this.sim.entities.get(fromPid) : undefined;
-    if (ent?.kind === 'player') sender.style.color = classCss(ent.templateId);
+    // Stamp the custom property and let CSS (.chat-player-name) own the paint,
+    // rather than an inline color: that leaves the door open for a forced-colors
+    // override or a future "disable class colors" toggle to win the cascade back.
+    if (ent?.kind === 'player') sender.style.setProperty('--class-color', classCss(ent.templateId));
     // Anchor the menu under the name itself for a click/tap/keyboard open, and at
     // the cursor for a right-click.
     const openUnderName = () => {
@@ -9915,11 +9918,12 @@ export class Hud {
     // The [AI] tag and streamer badge ride the {name} slot, not the head of the
     // line: the localized templates read '[General] {name}: {message}', so they
     // must sit beside the name and not look like part of the channel prefix
-    // (see ./chat_line). The badge opens the SAME player menu the name opens
-    // (which already lists the streamer's channel links up top) rather than
-    // window.open-ing a link itself, so no href handling is duplicated here.
+    // (see ./chat_line). The badge is purely decorative (role="img", no tap/click
+    // binding of its own): the sender name sitting right beside it already opens
+    // the player menu (which lists the streamer's channel links up top), and a
+    // second tiny (12x12) tap target here would have no keyboard path, unlike the
+    // name's Enter/Space handler above.
     const streamerBadge = chatStreamerBadgeEl(document, flair?.links);
-    if (streamerBadge instanceof HTMLElement) bindTouchTap(streamerBadge, openUnderName);
     const rendered = t(templateKey, { name: CHAT_NAME_TOKEN, message: CHAT_MESSAGE_TOKEN });
     appendChatLineParts(div, rendered, {
       aiTag: flair?.ai ? chatAiTagEl(document) : null,
