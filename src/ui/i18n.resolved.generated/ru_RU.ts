@@ -1530,7 +1530,13 @@ export const ru_RU: EnTranslations = {
       "backpack": "Рюкзак",
       "bagSocketAria": "{name}: {slots}",
       "socketEmpty": "Пустая ячейка для сумки",
-      "unequipHint": "Нажмите, чтобы снять эту сумку"
+      "unequipHint": "Нажмите, чтобы снять эту сумку",
+      "disenchantButton": "Disenchant",
+      "disenchantWarningEnchanted": "This item carries an enchantment, masterwork bonus, or maker’s mark that will be lost.",
+      "disenchantResult": "You disenchant the item into {count}x {material}.",
+      "disenchantTypedResult": "You disenchant the item into {count}x {material}, a reagent for on-demand crafting.",
+      "disenchantNotEligible": "That item cannot be disenchanted.",
+      "disenchantFailed": "You no longer have that item to disenchant."
     },
     "raidConvert": {
       "toPartyDone": "Ваш рейд снова преобразован в группу.",

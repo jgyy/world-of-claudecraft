@@ -1527,6 +1527,20 @@ export const hudChromeStrings = {
     bagSocketAria: '{name}: {slots}',
     socketEmpty: 'Empty bag slot',
     unequipHint: 'Click to remove this bag',
+    // Disenchant epic-reagent economy: the destroy-prompt's alternate button
+    // (offered alongside Discard for any item professions/enchanting.ts
+    // isDisenchantable accepts) and the resulting chat-log lines. disenchantTypedResult
+    // is the epic+/armor-or-weapon-typed reagent grant (the new economy);
+    // disenchantResult is the pre-existing untyped rarity-only dust/essence/shard
+    // grant, now reachable through the same button.
+    disenchantButton: 'Disenchant',
+    disenchantWarningEnchanted:
+      'This item carries an enchantment, masterwork bonus, or maker’s mark that will be lost.',
+    disenchantResult: 'You disenchant the item into {count}x {material}.',
+    disenchantTypedResult:
+      'You disenchant the item into {count}x {material}, a reagent for on-demand crafting.',
+    disenchantNotEligible: 'That item cannot be disenchanted.',
+    disenchantFailed: 'You no longer have that item to disenchant.',
   },
   // Raid -> party demotion (Social panel raid tab). The sim emits these in English;
   // src/ui/sim_i18n.ts re-localizes them through these keys. Mirrors the existing

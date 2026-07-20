@@ -8854,6 +8854,38 @@ export class Hud {
           );
           break;
         }
+        case 'disenchantResult': {
+          // Disenchant outcome (the epic-reagent economy, completing the
+          // Phase 13 disenchant slice): text-free event, one chat line
+          // either way. A `typed` result names the item that was consumed
+          // alongside the reagent so the "you traded an epic for this" cost
+          // stays visible in the log, not just the material grant.
+          if (ev.ok && ev.materialItemId && ev.count) {
+            const material = ITEMS[ev.materialItemId];
+            this.log(
+              t(
+                ev.typed
+                  ? 'hudChrome.bags.disenchantTypedResult'
+                  : 'hudChrome.bags.disenchantResult',
+                {
+                  material: material ? itemDisplayName(material) : ev.materialItemId,
+                  count: formatNumber(ev.count, { maximumFractionDigits: 0 }),
+                },
+              ),
+              ev.typed ? QUALITY_COLOR.epic : '#7fdc4f',
+            );
+          } else if (!ev.ok) {
+            this.log(
+              t(
+                ev.reason === 'not_disenchantable'
+                  ? 'hudChrome.bags.disenchantNotEligible'
+                  : 'hudChrome.bags.disenchantFailed',
+              ),
+              '#ff6b6b',
+            );
+          }
+          break;
+        }
         case 'gatherResult': {
           // Harvest feedback line (Professions 2.0 Phase 4), colored by rolled
           // material rarity. Identical on every graphics tier (player feedback

@@ -4916,6 +4916,12 @@
     margin-bottom: 4px;
     font-family: Georgia, serif;
   }
+  /* Stronger warning line on the destroy/disenchant prompt (masterwork, signed, or
+     enchanted instances): same size and font as prompt-text, colored via the
+     existing error/danger token rather than a new literal hex. */
+  .prompt .prompt-warning {
+    color: var(--color-text-error);
+  }
   .prompt .prompt-number {
     width: 82px;
     margin: 8px 8px 6px 0;

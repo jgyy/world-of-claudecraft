@@ -89,7 +89,7 @@ export function tradeAccept(ctx: SimContext, pid?: number): void {
 // counts. An instanced unit counts UNLESS the player holds ANY already-locked
 // copy (tradesRemaining === 0) of this same item id, in which case every
 // instanced unit of it is excluded from the offerable count for this id (never
-// just the locked one) — a deliberately conservative rule so the confirm-time
+// just the locked one): a deliberately conservative rule so the confirm-time
 // removal (removePreferFungible -> ctx.removeItem, which has no way to target
 // a SPECIFIC instance) can never pick the wrong copy: either none of the
 // player's instanced copies of this id are locked (so any of them is safe to
@@ -126,7 +126,7 @@ export function tradeSetOffer(
   // the offered total per item is checked, not each slot in isolation
   const merged = new Map<string, number>();
   for (const slot of items.slice(0, 6)) {
-    // slots come straight off the wire — reject anything malformed
+    // slots come straight off the wire: reject anything malformed
     if (!slot || typeof slot.itemId !== 'string' || !Number.isFinite(slot.count)) continue;
     const count = Math.max(1, Math.floor(slot.count));
     const def = ITEMS[slot.itemId];
@@ -305,7 +305,7 @@ export function tradeCancel(ctx: SimContext, pid?: number): void {
 }
 
 // true when the player's bags cover the offered totals per item, summing
-// duplicate slots — a per-slot check would let duplicates each pass alone
+// duplicate slots: a per-slot check would let duplicates each pass alone
 function offerCovered(ctx: SimContext, items: InvSlot[], pid: number): boolean {
   if (!ctx.players.get(pid)) return false;
   const totals = new Map<string, number>();

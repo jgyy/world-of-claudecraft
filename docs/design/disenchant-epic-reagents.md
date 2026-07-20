@@ -5,7 +5,7 @@
 Give Enchanting (and the crafts that consume its output) a real economic reason to
 exist: disenchanting an **epic-or-better** weapon or armor piece yields a **typed**
 crafting reagent (keyed by the item's armor type or weapon subtype), which is the
-*only* way to craft a small set of new "on-demand" epic items — items that are
+*only* way to craft a small set of new "on-demand" epic items: items that are
 stronger than anything else craftable, and that can be handed to exactly one other
 player (a trade, in person or via the Trade window) before locking to whoever holds
 them. This creates targeted demand ("I need a mail disenchanter", "I need a
@@ -24,7 +24,7 @@ staff-reagent holder") instead of dumping fungible stacks on the World Market.
 - Binding already has two mechanisms: `ItemDef.soulbound` (static, per-definition) and
   `ItemInstancePayload.boundTo` (per-copy). Enforced in `social/trade.ts`
   (`def.soulbound` only today) and `market.ts` (`def.soulbound`, plus instanced items
-  are already inert/unlistable on the World Market — no change needed there).
+  are already inert/unlistable on the World Market, no change needed there).
 - `ItemInstancePayload` already carries `signer`/`charges`/`rolled`/`enchant`/`boundTo`
   and rides bags/bank/equip/save-load/trade correctly (Phase 3).
 
@@ -49,7 +49,7 @@ Mail and the World Market: instanced items are already inert there (per the
 professions-2 state.md drift note), so no separate gate is needed; documented as a
 deliberate no-op, matching the existing instanced-item posture.
 
-This is a small, generic, reusable primitive — not special-cased per item — so any
+This is a small, generic, reusable primitive (not special-cased per item), so any
 future "BoE-once" item can opt in by minting an instance with `tradesRemaining: 1`.
 
 ## Reagent taxonomy
@@ -62,7 +62,7 @@ instead of only rarity (existing `common..rare` behavior via
   `arcane_bound_hide`, `mail` -> `arcane_bound_chain`.
 - Weapon (`WeaponSkinType`): `sword`/`axe`/`mace`/`dagger` -> melee reagents
   (`arcane_bound_edge`, shared across the four one-handed/melee subtypes to keep the
-  recipe/test surface sane — see Open scope note), `staff`/`wand` -> `arcane_bound_focus`,
+  recipe/test surface sane, see Open scope note), `staff`/`wand` -> `arcane_bound_focus`,
   `bow`/`crossbow` -> `arcane_bound_quiver`.
 
   (Revisit: the brainstorm asked for full weapon-subtype granularity; collapsing
@@ -74,14 +74,14 @@ instead of only rarity (existing `common..rare` behavior via
 
 Net: **6 new reagent item ids**, each `soulbound: false`, minted as an
 `ItemInstancePayload` with `tradesRemaining: 1` (a *specific copy* is bound-after-one-
-trade, not the item definition itself — mirrors how enchant/masterwork output already
+trade, not the item definition itself, mirroring how enchant/masterwork output already
 works as an instanced copy).
 
 Yield: reuse `disenchantYield` unchanged (rarity + tier + rng bonus) for the count.
 
 ## New recipes ("on-demand" epics)
 
-One recipe per reagent type (6 total — the earlier "2 per type" framing from
+One recipe per reagent type (6 total: the earlier "2 per type" framing from
 brainstorming is trimmed to 1 per type in this pass; see Open scope note) craftable
 under Enchanting's `CRAFT_RING` neighbor crafts (armorcrafting for the three armor
 reagents, weaponcrafting for the three weapon reagents), each:
@@ -92,7 +92,7 @@ reagents, weaponcrafting for the three weapon reagents), each:
   ceiling.
 - `stationType`: the matching craft's existing station (forge/loom/tannery/toolworks).
 - `acquisition: ['trainer']`, taught only at `tier 75+` (a new rung above the existing
-  0/25/50 ladder — `training.ts`'s `teachTierMet` predicate already generalizes to any
+  0/25/50 ladder: `training.ts`'s `teachTierMet` predicate already generalizes to any
   tier via `tierForSkill`, so this needs no sim change, only content + the
   `TRAINING_FEE_BY_TIER` array gaining a 4th (75+) entry).
 - Output: a brand-new `epic` quality item id (stat budget above the existing
@@ -102,7 +102,7 @@ reagents, weaponcrafting for the three weapon reagents), each:
 
 Item stats follow existing `item_budget.ts` conventions for an item at this level
 band; exact numbers are a maintainer/balance follow-up if review flags them, per the
-"don't invent balance numbers" rule — this PR uses the same budget function every
+"don't invent balance numbers" rule; this PR uses the same budget function every
 other epic-tier item already uses, not new made-up numbers.
 
 ## Wiring (completes the Phase 13 disenchant slice, disenchant-only)
@@ -125,7 +125,7 @@ other epic-tier item already uses, not new made-up numbers.
 ## Out of scope (explicitly deferred)
 
 - `applyEnchant` and `salvageItem` reachability (Phase 13's other two actions): a
-  separate, independent PR — this feature only needs `disenchantItem` reachable.
+  separate, independent PR, since this feature only needs `disenchantItem` reachable.
 - World Market / mail carriage of instanced items generally (pre-existing "wave 2"
   gap; this feature does not widen or narrow it).
 - Batch/disenchant-all UI.

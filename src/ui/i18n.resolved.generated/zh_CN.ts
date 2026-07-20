@@ -1530,7 +1530,13 @@ export const zh_CN: EnTranslations = {
       "backpack": "背包",
       "bagSocketAria": "{name}：{slots}",
       "socketEmpty": "空背包栏位",
-      "unequipHint": "点击移除此背包"
+      "unequipHint": "点击移除此背包",
+      "disenchantButton": "Disenchant",
+      "disenchantWarningEnchanted": "This item carries an enchantment, masterwork bonus, or maker’s mark that will be lost.",
+      "disenchantResult": "You disenchant the item into {count}x {material}.",
+      "disenchantTypedResult": "You disenchant the item into {count}x {material}, a reagent for on-demand crafting.",
+      "disenchantNotEligible": "That item cannot be disenchanted.",
+      "disenchantFailed": "You no longer have that item to disenchant."
     },
     "raidConvert": {
       "toPartyDone": "你的团队已转换回队伍。",

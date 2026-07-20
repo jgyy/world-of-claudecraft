@@ -20,6 +20,7 @@
 import { audio } from '../game/audio';
 import { BACKPACK_SLOTS, bagSlotsOf } from '../sim/bags';
 import { ITEMS } from '../sim/data';
+import { isDisenchantable, isEnchantedInstance } from '../sim/professions/enchanting';
 import type { EquipSlot, InvSlot } from '../sim/types';
 import type { IWorld } from '../world_api';
 import {
@@ -985,7 +986,22 @@ export class BagsWindow {
     const prompt = document.createElement('div');
     prompt.className = 'prompt panel discard-item-prompt';
     const itemName = item ? itemDisplayName(item) : itemId;
-    prompt.innerHTML = `<div class="prompt-text">${esc(t('itemUi.bags.destroyTitle', { item: itemName }))}</div>`;
+    // The disenchant alternative (epic-reagent economy): offered alongside Discard
+    // for any item professions/enchanting.ts isDisenchantable accepts. Looks up a
+    // held instanced copy (if any) by itemId only, matching how bagStackIndex/
+    // tooltip lookups elsewhere in this file resolve a stack from an id rather than
+    // threading an instance reference through the drop-to-destroy call chain
+    // (dropOnWorld -> promptDestroy only ever carries itemId + count).
+    const heldInstance = this.deps
+      .world()
+      .inventory.find((s) => s.itemId === itemId && s.instance)?.instance;
+    const disenchantEligible = !!item && isDisenchantable(item);
+    const strongerWarning = !!heldInstance && isEnchantedInstance(heldInstance);
+    const warning =
+      disenchantEligible && strongerWarning
+        ? `<div class="prompt-text prompt-warning">${esc(t('hudChrome.bags.disenchantWarningEnchanted'))}</div>`
+        : '';
+    prompt.innerHTML = `<div class="prompt-text">${esc(t('itemUi.bags.destroyTitle', { item: itemName }))}</div>${warning}`;
     let input: HTMLInputElement | null = null;
     if (maxCount > 1) {
       input = document.createElement('input');
@@ -1000,12 +1016,26 @@ export class BagsWindow {
     const confirm = document.createElement('button');
     confirm.className = 'btn';
     confirm.textContent = t('itemUi.bags.destroyConfirm');
+    const disenchant = disenchantEligible ? document.createElement('button') : null;
+    if (disenchant) {
+      disenchant.className = 'btn';
+      disenchant.textContent = t('hudChrome.bags.disenchantButton');
+    }
     const cancel = document.createElement('button');
     cancel.className = 'btn';
     cancel.textContent = t('itemUi.bags.destroyCancel');
     const close = () => prompt.remove();
-    prompt.append(confirm, cancel);
+    prompt.append(confirm, ...(disenchant ? [disenchant] : []), cancel);
     const { dismiss, dismissAndReturn } = this.installPromptDialog(prompt, opener, close);
+    if (disenchant) {
+      disenchant.addEventListener('click', () => {
+        this.deps.world().disenchantItem(itemId);
+        dismiss();
+        this.deps.hideTooltip();
+        this.render();
+        (this.deps.root().querySelector('[data-close]') as HTMLElement | null)?.focus();
+      });
+    }
     const submit = () => {
       const count = input
         ? Math.max(1, Math.min(maxCount, Math.floor(Number(input.value) || 0)))

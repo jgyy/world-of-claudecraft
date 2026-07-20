@@ -1530,7 +1530,13 @@ export const ko_KR: EnTranslations = {
       "backpack": "배낭",
       "bagSocketAria": "{name}: {slots}",
       "socketEmpty": "빈 가방 칸",
-      "unequipHint": "클릭하여 이 가방을 해제"
+      "unequipHint": "클릭하여 이 가방을 해제",
+      "disenchantButton": "Disenchant",
+      "disenchantWarningEnchanted": "This item carries an enchantment, masterwork bonus, or maker’s mark that will be lost.",
+      "disenchantResult": "You disenchant the item into {count}x {material}.",
+      "disenchantTypedResult": "You disenchant the item into {count}x {material}, a reagent for on-demand crafting.",
+      "disenchantNotEligible": "That item cannot be disenchanted.",
+      "disenchantFailed": "You no longer have that item to disenchant."
     },
     "raidConvert": {
       "toPartyDone": "공격대가 파티로 다시 전환되었습니다.",

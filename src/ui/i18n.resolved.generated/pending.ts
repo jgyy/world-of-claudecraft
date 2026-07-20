@@ -9,25 +9,165 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "es_ES": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "fr_FR": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "fr_CA": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
-  "pt_BR": [],
-  "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "it_IT": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "de_DE": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "zh_CN": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "zh_TW": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "ko_KR": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "ja_JP": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "pt_BR": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "ru_RU": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "cs_CZ": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "nl_NL": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "pl_PL": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "id_ID": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "tr_TR": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "sv_SE": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "vi_VN": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ],
+  "da_DK": [
+    "hudChrome.bags.disenchantButton",
+    "hudChrome.bags.disenchantFailed",
+    "hudChrome.bags.disenchantNotEligible",
+    "hudChrome.bags.disenchantResult",
+    "hudChrome.bags.disenchantTypedResult",
+    "hudChrome.bags.disenchantWarningEnchanted"
+  ]
 };

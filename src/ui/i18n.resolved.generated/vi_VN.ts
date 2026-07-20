@@ -1530,7 +1530,13 @@ export const vi_VN: EnTranslations = {
       "backpack": "Ba Lô",
       "bagSocketAria": "{name}: {slots}",
       "socketEmpty": "Ô túi trống",
-      "unequipHint": "Nhấp để tháo chiếc túi này"
+      "unequipHint": "Nhấp để tháo chiếc túi này",
+      "disenchantButton": "Disenchant",
+      "disenchantWarningEnchanted": "This item carries an enchantment, masterwork bonus, or maker’s mark that will be lost.",
+      "disenchantResult": "You disenchant the item into {count}x {material}.",
+      "disenchantTypedResult": "You disenchant the item into {count}x {material}, a reagent for on-demand crafting.",
+      "disenchantNotEligible": "That item cannot be disenchanted.",
+      "disenchantFailed": "You no longer have that item to disenchant."
     },
     "raidConvert": {
       "toPartyDone": "Raid của bạn đã chuyển trở lại thành tổ đội.",

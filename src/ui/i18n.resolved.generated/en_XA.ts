@@ -1530,7 +1530,13 @@ export const en_XA: EnTranslations = {
       "backpack": "[Ɓáçķþáçķ]",
       "bagSocketAria": "[{name}: {slots}]",
       "socketEmpty": "[Éɱþţý ƀáĝ šļóţ]",
-      "unequipHint": "[Çļíçķ ţó ŕéɱóʋé ţĥíš ƀáĝ]"
+      "unequipHint": "[Çļíçķ ţó ŕéɱóʋé ţĥíš ƀáĝ]",
+      "disenchantButton": "[Ðíšéñçĥáñţ]",
+      "disenchantWarningEnchanted": "[Ţĥíš íţéɱ çáŕŕíéš áñ éñçĥáñţɱéñţ, ɱášţéŕŵóŕķ ƀóñúš, óŕ ɱáķéŕ’š ɱáŕķ ţĥáţ ŵíļļ ƀé ļóšţ.]",
+      "disenchantResult": "[Ýóú ðíšéñçĥáñţ ţĥé íţéɱ íñţó {count}ẋ {material}.]",
+      "disenchantTypedResult": "[Ýóú ðíšéñçĥáñţ ţĥé íţéɱ íñţó {count}ẋ {material}, á ŕéáĝéñţ ƒóŕ óñ-ðéɱáñð çŕáƒţíñĝ.]",
+      "disenchantNotEligible": "[Ţĥáţ íţéɱ çáññóţ ƀé ðíšéñçĥáñţéð.]",
+      "disenchantFailed": "[Ýóú ñó ļóñĝéŕ ĥáʋé ţĥáţ íţéɱ ţó ðíšéñçĥáñţ.]"
     },
     "raidConvert": {
       "toPartyDone": "[Ýóúŕ ŕáíð ĥáš çóñʋéŕţéð ƀáçķ ţó á þáŕţý.]",

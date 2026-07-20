@@ -1530,7 +1530,13 @@ export const en_CA: EnTranslations = {
       "backpack": "Backpack",
       "bagSocketAria": "{name}: {slots}",
       "socketEmpty": "Empty bag slot",
-      "unequipHint": "Click to remove this bag"
+      "unequipHint": "Click to remove this bag",
+      "disenchantButton": "Disenchant",
+      "disenchantWarningEnchanted": "This item carries an enchantment, masterwork bonus, or maker’s mark that will be lost.",
+      "disenchantResult": "You disenchant the item into {count}x {material}.",
+      "disenchantTypedResult": "You disenchant the item into {count}x {material}, a reagent for on-demand crafting.",
+      "disenchantNotEligible": "That item cannot be disenchanted.",
+      "disenchantFailed": "You no longer have that item to disenchant."
     },
     "raidConvert": {
       "toPartyDone": "Your raid has converted back to a party.",
