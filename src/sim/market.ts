@@ -542,24 +542,32 @@ export class Market {
   // hand them a reward the pool can actually afford (see pickFeePoolReward), funded
   // entirely by the pool. A pool that hasn't matured yet is left untouched to carry
   // into the next check (same "quiet week just carries the pool forward" idea as
-  // before, just gated on value now instead of firing regardless of size); once a
-  // draw actually pays out, the pool always drains and reschedules, win or not, so
-  // fees can never pile up unbounded once they're large enough to matter.
+  // before, just gated on value now instead of firing regardless of size), and its
+  // participants are cleared too so eligibility always tracks "since the last draw",
+  // never accumulating traders from long-past quiet stretches. The reward is resolved
+  // BEFORE the pool is touched: if no affordable reward exists for the drawn winner
+  // (e.g. an offline seller whose class couldn't be resolved, and the pool falls
+  // between the classless min-draw threshold and the true classless-eligible min
+  // price), the pool and its participants are left intact to carry into the next
+  // draw, exactly like the below-threshold path, instead of destroying the fees with
+  // nobody announced as a winner. Only once a draw actually resolves a reward does
+  // the pool drain and reschedule.
   private updateFeePool(): void {
     if (this.ctx.tickCount % 20 !== 0) return;
     if (this.ctx.time < this.feePoolNextDrawAt) return;
     if (this.feePoolCopper < this.feePoolMinDrawCopper || this.feePoolParticipants.size === 0) {
       this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
+      this.feePoolParticipants.clear();
       return;
     }
-    this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
     const spent = this.feePoolCopper;
     const participants = [...this.feePoolParticipants.values()];
-    this.feePoolCopper = 0;
-    this.feePoolParticipants.clear();
     const winner = this.ctx.rng.pick(participants);
     const rewardId = this.pickFeePoolReward(winner.cls, spent);
+    this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
     if (!rewardId) return;
+    this.feePoolCopper = 0;
+    this.feePoolParticipants.clear();
     this.collectionFor(winner.key).items.push({ itemId: rewardId, count: 1 });
     const def = ITEMS[rewardId];
     for (const m of this.ctx.players.values()) {
@@ -579,7 +587,13 @@ export class Market {
   // (still exciting, just not equippable by them specifically - tradeable on the
   // World Market like any other item). Among what's affordable, the roll is weighted
   // toward the pricier half so a well-fed pool tends to buy something worth the wait
-  // instead of always defaulting to the cheapest eligible item.
+  // instead of always defaulting to the cheapest eligible item. The classless
+  // fallback only ever fires when the classless subset itself was unaffordable for
+  // the pool (a strict subset of forClass), since updateFeePool now resolves the
+  // reward before draining the pool: with a real winner and a matured pool, both
+  // branches usually find something, but the fallback still guards the case where
+  // forClass had eligible items priced above what the pool can afford while a
+  // cheaper classless item exists.
   private pickFeePoolReward(cls: PlayerMeta['cls'] | undefined, poolCopper: number): string | null {
     const affordable = (pool: ItemDef[]): ItemDef[] =>
       pool.filter((d) => d.sellValue <= poolCopper);

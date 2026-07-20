@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { ITEMS } from '../src/sim/data';
 import type { MarketQuery } from '../src/sim/market_query';
 import { Sim } from '../src/sim/sim';
@@ -701,6 +701,14 @@ describe('the World Market: the fee-pool giveaway', () => {
     expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
     expect(sim.marketInfoFor(seller)!.collectionItems).toEqual([]);
     expect(sim.marketInfoFor(buyer)!.collectionItems).toEqual([]);
+    // Participants are cleared on the below-threshold reschedule too, so eligibility
+    // tracks "since the last draw" (matching the giveaway comment) instead of
+    // accumulating traders from a long-past quiet stretch until the pool eventually
+    // matures.
+    expect(
+      (sim.market as unknown as { feePoolParticipants: Map<string, unknown> }).feePoolParticipants
+        .size,
+    ).toBe(0);
   });
 
   it('an offline winner is announced by their real name, not a raw character key, and keeps their class-eligible pool', () => {
@@ -746,6 +754,51 @@ describe('the World Market: the fee-pool giveaway', () => {
     expect(winLog).toBeDefined();
     expect(winLog).not.toContain(sellerKey);
     expect(winLog!.startsWith('Seller ') || winLog!.startsWith('Buyer ')).toBe(true);
+  });
+
+  it('an unknown-class winner with no affordable reward leaves the pool intact instead of destroying the fees', () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.addItem('wolf_fang', 1, seller);
+    sim.players.get(buyer)!.copper = 200_000;
+    sim.marketList('wolf_fang', 1, 100_000, seller);
+    sim.marketBuy(
+      sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
+      buyer,
+    );
+    expect(sim.market.feePoolCopper).toBeGreaterThan(0);
+    const pooled = sim.market.feePoolCopper;
+    sim.market.feePoolNextDrawAt = sim.time - 1; // force the draw due
+
+    // Simulate the real-world gap this regression guards: an offline seller whose
+    // class couldn't be resolved (see FeePoolParticipant), drawn as the winner, with
+    // the pool landing between the classless min-draw threshold and the true
+    // classless-eligible min price, so no reward can be found for either arm of
+    // pickFeePoolReward. Spying on the private method keeps the test independent of
+    // the live item table's exact price gaps.
+    const pickSpy = vi
+      .spyOn(
+        sim.market as unknown as { pickFeePoolReward: () => string | null },
+        'pickFeePoolReward',
+      )
+      .mockReturnValue(null);
+
+    const allEvents = [];
+    for (let i = 0; i < 20; i++) allEvents.push(...sim.tick());
+
+    // The fees are NOT destroyed: the pool and its participants carry into the next
+    // draw, exactly like the below-threshold path, and nobody is announced a winner.
+    expect(sim.market.feePoolCopper).toBe(pooled);
+    expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
+    expect(sim.marketInfoFor(seller)!.collectionItems).toEqual([]);
+    expect(sim.marketInfoFor(buyer)!.collectionItems).toEqual([]);
+    const logs = allEvents.filter((e) => e.type === 'log').map((e) => (e as { text: string }).text);
+    expect(logs.some((t) => t.includes('fee giveaway'))).toBe(false);
+
+    pickSpy.mockRestore();
   });
 
   it('an empty pool at the draw deadline just reschedules, with no winner and no error', () => {
