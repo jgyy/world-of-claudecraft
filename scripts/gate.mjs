@@ -52,7 +52,9 @@ const releaseTier = branch.startsWith('release/');
 // gate instead of only via a human remembering the env var.
 const env = {
   ...process.env,
-  PERF_GATE_WALLCLOCK: '1',
+  // ?? rather than a flat override: an operator who explicitly exports
+  // PERF_GATE_WALLCLOCK=0 to skip the slow real-hrtime arm keeps that opt-out.
+  PERF_GATE_WALLCLOCK: process.env.PERF_GATE_WALLCLOCK ?? '1',
   ...(releaseTier ? { I18N_RELEASE_TIER: '1' } : {}),
 };
 

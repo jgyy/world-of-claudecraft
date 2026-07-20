@@ -179,10 +179,14 @@ jobs:
       # ceilings carry generous headroom (observed added-p99 ~0.003ms vs a 1ms
       # budget; observed tick p95 ~0.7ms vs a 40ms ceiling) so it stays safe to run
       # on every PR shard instead of only via a human remembering the env var.
+      # --maxWorkers=2 bounds vitest's own parallelism (root CLAUDE.md: an
+      # unbounded run flakes heavy suites under core contention), matching
+      # scripts/gate.mjs, so ARM C's hrtime measurements above and the *_perf.test.ts
+      # wall-clock budgets are not sharing runner cores with sibling worker threads.
       - name: Run tests (PR tier, shard ${{ matrix.shard }} of 4)
         env:
           PERF_GATE_WALLCLOCK: '1'
-        run: npm test -- --shard=${{ matrix.shard }}/4
+        run: npm test -- --shard=${{ matrix.shard }}/4 --maxWorkers=2
 
   # Runs in parallel with pr-gate: same if-condition, no needs edge in either
   # direction. The default pull_request merge-ref checkout MUST be preserved
@@ -310,7 +314,7 @@ jobs:
       # artifacts in EVERY shard so the artifact-dependent suites pass no
       # matter which shard they hash into.
       - name: Run tests (release tier - 21-locale + empty-pending, shard ${{ matrix.shard }} of 4)
-        run: npm test -- --shard=${{ matrix.shard }}/4
+        run: npm test -- --shard=${{ matrix.shard }}/4 --maxWorkers=2
 
       - name: Typecheck
         if: matrix.shard == 1
