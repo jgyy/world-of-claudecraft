@@ -8,6 +8,7 @@
 // .vendor-goods-grid, and that no empty grid node is appended when a section
 // has no rows.
 import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { ItemDef } from '../src/sim/types';
 import type { HeroicShopRow, HeroicShopView } from '../src/ui/hud/vendor/heroic_vendor_view';
@@ -140,7 +141,9 @@ describe('renderHeroicVendorWindow: goods grid wrapping', () => {
 });
 
 describe('#vendor-window desktop width cap: divides by --window-scale and floors at 400px', () => {
-  const components = readFileSync(new URL('../src/styles/components.css', import.meta.url), 'utf8');
+  // jsdom gives import.meta.url an http URL, which readFileSync(new URL(...)) rejects
+  // (see deeds_window.test.ts): resolve from __dirname instead.
+  const components = readFileSync(join(__dirname, '../src/styles/components.css'), 'utf8');
   const start = components.indexOf('#vendor-window {\n    width:');
   const block = components.slice(start, components.indexOf('}', start));
 
