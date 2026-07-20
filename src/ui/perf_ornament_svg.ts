@@ -14,13 +14,14 @@
 // sin(k*1*2*pi+phase) for integer k, the resulting wave is exactly periodic
 // over its sample domain, so a tiled edge ribbon has no visible seam.
 //
-// Unlike PR #2152's later (round 6-7) minimal corner motif, this pilot's corner
-// is deliberately RICHER: a curling acanthus-vine ribbon plus leaf accents, to
-// match the ornate reference image the pilot was scoped against, not the
-// restrained "thin near-straight line" direction that PR reached for an
-// all-HUD rollout. Geometry noise and color noise are still two SEPARATE
-// knobs: the vine/leaf shapes are fixed (not per-frame random), while the gilt
-// gradient below supplies the "hand-applied, unevenly toned" read.
+// The corner motif went through a full redesign against a second reference
+// image (a small in-game window with a rounded-rectangle gilded frame): one
+// compact, thick, ROUNDED curl per corner (round stroke caps/joins, never a
+// sharp point), not the earlier round's vine-plus-leaf composition, which
+// read as "leaves pointing inward" rather than a hand-carved scroll bracket.
+// Geometry noise and color noise are still two SEPARATE knobs: the curl's
+// own shape carries only a small radius wobble, while the gilt gradient
+// below supplies the "hand-applied, unevenly toned" color read.
 
 function polarX(cx: number, r: number, deg: number): number {
   return cx + r * Math.cos((deg * Math.PI) / 180);
@@ -94,17 +95,23 @@ const GILT_STOP_COUNT = 6;
 const GILT_SEED = 2152;
 
 /** Every candidate color is a --color-gold-* token or a color-mix() of them
- * (never a literal hex), so the gradient repaints on a future token retune. */
+ * (never a literal hex), so the gradient repaints on a future token retune.
+ * Weighted toward the REALISTIC-gold mid-tones (500/400/600, repeated) with
+ * the near-black and near-white extremes kept as rare accents rather than
+ * equally-likely picks: an earlier, uniformly-weighted version swung too far
+ * toward those extremes and read as muddy/harsh rather than "gold". */
 function giltColorPalette(): string[] {
   return [
-    'var(--color-gold-700)',
-    'var(--color-gold-900)',
+    'var(--color-gold-600)',
     'var(--color-gold-500)',
-    'var(--color-gold-300)',
     'var(--color-gold-400)',
-    'var(--color-gold-800)',
-    'color-mix(in srgb, var(--color-gold-300) 70%, white 30%)',
-    'color-mix(in srgb, var(--color-gold-900) 70%, black 30%)',
+    'var(--color-gold-500)',
+    'var(--color-gold-600)',
+    'var(--color-gold-400)',
+    'var(--color-gold-700)',
+    'color-mix(in srgb, var(--color-gold-500) 60%, var(--color-gold-300) 40%)',
+    'color-mix(in srgb, var(--color-gold-600) 65%, var(--color-gold-800) 35%)',
+    'var(--color-gold-300)',
   ];
 }
 
@@ -135,13 +142,18 @@ export function perfGiltGradientBackground(): string {
   return `repeating-conic-gradient(from 0deg, ${giltGradientStops()})`;
 }
 
-// ---------- corner motif: a nested bracket, a curling acanthus vine with leaf
-// accents, and a center gem. Larger and more ornate than a restrained
-// hairline corner: this pilot is scoped against a reference image with a
-// visibly hand-carved, rococo-style corner flourish ----------
+// ---------- corner motif: ONE compact, thick, rounded gilded curl per
+// corner, matching a reference image of small hand-carved scroll flourishes
+// (never a leaf/vine/gem composition, and never a sharp point anywhere):
+// round stroke caps/joins do the "rounded" work, and 3 overlapping strokes
+// of decreasing length and width along the SAME curve fake a tapered,
+// hand-painted brush stroke without manual variable-width polygon math ----
 
-const CORNER_SIZE = 72;
-const CORNER_STROKE = 1.8;
+const CORNER_SIZE = 30;
+const CORNER_CX = 10;
+const CORNER_CY = 10;
+const CORNER_START_DEG = 8;
+const CORNER_END_DEG = 100;
 
 /**
  * The 4 corner variants are mirrored by baking the flip into every emitted
@@ -168,162 +180,61 @@ function n2(x: number, y: number, m: Mirror): string {
   return `${n(mx)} ${n(my)}`;
 }
 
+// The radius PEAKS partway through the sweep, then pulls back in toward the
+// tip (t=1): a plain monotonic arc read as a bare swoosh, not a scroll. This
+// small bulge-then-tuck is what gives the tip its "curling inward" hook
+// character, matching the reference's small spiral rather than one bare arc.
+const CORNER_PEAK_T = 0.55;
+const CORNER_R_START = 6.5;
+const CORNER_R_PEAK = 12.5;
+const CORNER_R_END = 7;
+
 /**
- * A tapered ribbon that curls like a carved acanthus scroll: it swings out
- * from the pivot to a peak radius (`rPeak` at `peakT`), then curls back in
- * toward `rEnd` while STILL rotating in the same direction, the way a
- * fiddlehead/volute coils at its tip. `startDeg`/`endDeg` are chosen by the
- * caller to stay within a single quadrant relative to `cx,cy` (0 to 90deg
- * for a top-left corner, so every sample keeps x >= cx and y >= cy: safely
- * on-canvas for any r up to the panel edge, never wrapping into a negative
- * coordinate off the mask's viewBox). Built with the same sampled-polyline-
- * offset technique as the edge ribbon / ring below (never a plain constant-
- * width `stroke-width` line, which would read as a wire, not a carved vine).
+ * One point along the curl's centerline: a smooth arc around `(CORNER_CX,
+ * CORNER_CY)` with a small hand-drawn wobble on the RADIUS only (never the
+ * angle, which would read as a jerky/uneven sweep rather than a smooth
+ * carved curl). `t` in [0, 1] runs base-to-tip.
  */
-function vineRibbonPath(
-  cx: number,
-  cy: number,
-  startDeg: number,
-  endDeg: number,
-  rStart: number,
-  rPeak: number,
-  rEnd: number,
-  peakT: number,
-  startHalfW: number,
-  endHalfW: number,
-  seed: number,
-  m: Mirror,
-): string {
-  const samples = 36;
-  const wobble = seededHarmonics(seed, 4, 0.3);
-  const innerPts: string[] = [];
-  const outerPts: string[] = [];
+function curlPoint(t: number, wobble: Harmonic[]): { x: number; y: number } {
+  const deg = CORNER_START_DEG + (CORNER_END_DEG - CORNER_START_DEG) * t;
+  const rBase =
+    t <= CORNER_PEAK_T
+      ? CORNER_R_START + (CORNER_R_PEAK - CORNER_R_START) * (t / CORNER_PEAK_T)
+      : CORNER_R_PEAK +
+        (CORNER_R_END - CORNER_R_PEAK) * ((t - CORNER_PEAK_T) / (1 - CORNER_PEAK_T));
+  const r = rBase + periodicNoise(wobble, t) * 0.5;
+  return { x: polarX(CORNER_CX, r, deg), y: polarY(CORNER_CY, r, deg) };
+}
+
+/** The curl's centerline from its base (t=0) out to `tMax` (<=1), sampled
+ * densely enough to read as a smooth arc once stroked with round joins. */
+function curlCenterlinePath(tMax: number, wobble: Harmonic[], m: Mirror): string {
+  const samples = 22;
+  const pts: string[] = [];
   for (let i = 0; i <= samples; i++) {
-    const t = i / samples;
-    const deg = startDeg + (endDeg - startDeg) * t;
-    const r =
-      (t <= peakT
-        ? rStart + (rPeak - rStart) * (t / peakT)
-        : rPeak + (rEnd - rPeak) * ((t - peakT) / (1 - peakT))) +
-      periodicNoise(wobble, t) * (1 - 0.6 * t);
-    const halfW = Math.max(0.3, startHalfW + (endHalfW - startHalfW) * t);
-    // perpendicular offset (radial direction IS the local normal for a curve
-    // parameterized by angle around a fixed pivot, so no extra tangent math
-    // is needed: offsetting r by +-halfW is already perpendicular to travel).
-    innerPts.push(n2(polarX(cx, r - halfW, deg), polarY(cy, r - halfW, deg), m));
-    outerPts.push(n2(polarX(cx, r + halfW, deg), polarY(cy, r + halfW, deg), m));
+    const t = (i / samples) * tMax;
+    const { x, y } = curlPoint(t, wobble);
+    pts.push(n2(x, y, m));
   }
-  return `M ${innerPts.join(' L ')} L ${outerPts.reverse().join(' L ')} Z`;
+  return `M ${pts.join(' L ')}`;
 }
 
-/** A small almond-shaped leaf, its long axis tangent to the vine at `atDeg`
- * (the spiral's local direction of travel), so it reads as sprouting FROM the
- * curl rather than pasted at a random angle. */
-function leafPath(
-  cx: number,
-  cy: number,
-  len: number,
-  width: number,
-  rotateDeg: number,
-  m: Mirror,
-): string {
-  const rad = (rotateDeg * Math.PI) / 180;
-  const cos = Math.cos(rad);
-  const sin = Math.sin(rad);
-  const rot = (x: number, y: number): string => {
-    const rx = x * cos - y * sin;
-    const ry = x * sin + y * cos;
-    return n2(cx + rx, cy + ry, m);
-  };
-  // Two quadratic curves from base to tip and back, bulging on each side:
-  // a classic pointed-leaf/almond silhouette.
-  return (
-    `M ${rot(0, 0)} ` +
-    `Q ${rot(len * 0.35, -width)} ${rot(len, 0)} ` +
-    `Q ${rot(len * 0.35, width)} ${rot(0, 0)} Z`
-  );
-}
-
-function diamondPathMirrored(
-  cx: number,
-  cy: number,
-  rx: number,
-  ry: number,
-  rotateDeg: number,
-  m: Mirror,
-): string {
-  const rad = (rotateDeg * Math.PI) / 180;
-  const cos = Math.cos(rad);
-  const sin = Math.sin(rad);
-  const pts = [
-    [0, -ry],
-    [rx, 0],
-    [0, ry],
-    [-rx, 0],
-  ].map(([x, y]) => {
-    const rx2 = x * cos - y * sin;
-    const ry2 = x * sin + y * cos;
-    return n2(cx + rx2, cy + ry2, m);
-  });
-  return `M ${pts[0]} L ${pts[1]} L ${pts[2]} L ${pts[3]} Z`;
-}
-
+/**
+ * ONE compact, thick, rounded gilded curl: a single stroked arc, not a
+ * filled ribbon/vine/leaf composition. `stroke-linecap="round"` and
+ * `stroke-linejoin="round"` do all the "rounded, hand-gilded, never a sharp
+ * point" work; 3 overlapping strokes of decreasing length AND width along
+ * the exact same centerline fake a tapered brush stroke (thick at the base,
+ * finer toward the tip) without hand-building a variable-width polygon.
+ */
 function cornerMotifPath(m: Mirror): string {
-  const inset = 5;
-  const armLen = 30;
-  const bracket = `M ${n2(inset, inset + armLen, m)} L ${n2(inset, inset, m)} L ${n2(inset + armLen, inset, m)}`;
-  // A short second, inset arm: the layered-bracket look a carved corner frame
-  // uses (two nested strokes), not a single line.
-  const innerArmLen = 17;
-  const innerInset = inset + 5.5;
-  const innerBracket = `M ${n2(innerInset, innerInset + innerArmLen, m)} L ${n2(innerInset, innerInset, m)} L ${n2(innerInset + innerArmLen, innerInset, m)}`;
-
-  const gemCx = inset + 9;
-  const gemCy = inset + 9;
-  const gem = diamondPathMirrored(gemCx, gemCy, 3.4, 3.4, 0, m);
-
-  const tickLen = 8;
-  const ticks = [24, 66].map((deg) => {
-    const x1 = polarX(gemCx, 4.6, deg);
-    const y1 = polarY(gemCy, 4.6, deg);
-    const x2 = polarX(gemCx, 4.6 + tickLen, deg);
-    const y2 = polarY(gemCy, 4.6 + tickLen, deg);
-    return `M ${n2(x1, y1, m)} L ${n2(x2, y2, m)}`;
-  });
-
-  // The curling vines: pivoted at the gem, sweeping from near the top edge
-  // (5deg) around past the diagonal bisector toward the left edge (85deg) --
-  // strictly within [0, 90] so every sample keeps x >= gemCx and y >= gemCy,
-  // safely on-canvas no matter how far the radius reaches (see
-  // vineRibbonPath's contract). Each curls out to a peak radius then coils
-  // back toward the pivot, the volute/fiddlehead read; a shorter second vine
-  // nested just past the first gives a fuller layered-scrollwork look,
-  // matching the reference's double curl rather than one bare comma.
-  const vineA = vineRibbonPath(gemCx, gemCy, 5, 100, 6, 40, 22, 0.62, 4.8, 0.9, 301, m);
-  const vineB = vineRibbonPath(gemCx, gemCy, 20, 95, 5, 26, 15, 0.68, 3.6, 0.7, 302, m);
-
-  // Leaves sprout from points along vine A's outward (pre-peak) run, tangent
-  // to its local travel direction (deg + 90 so the leaf's long axis points
-  // outward from the curl, not along the ribbon itself).
-  const leafSpecs = [
-    { t: 0.3, len: 15, width: 6 },
-    { t: 0.55, len: 11, width: 4.6 },
-  ];
-  const leaves = leafSpecs
-    .map(({ t, len, width }) => {
-      const deg = 5 + 95 * t;
-      const r = 5 + (40 - 5) * (t / 0.62);
-      const x = polarX(gemCx, r, deg);
-      const y = polarY(gemCy, r, deg);
-      return leafPath(x, y, len, width, deg - 90, m);
-    })
-    .join(' ');
-
-  const strokes = `<path d="${bracket} ${innerBracket} ${ticks.join(' ')}" fill="none" stroke="#000" stroke-width="${CORNER_STROKE}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  const vines = `<path d="${vineA} ${vineB}"/>`;
-  const leafFill = `<path d="${leaves}"/>`;
-  const gemFill = `<path d="${gem}"/>`;
-  return strokes + vines + leafFill + gemFill;
+  const wobble = seededHarmonics(303, 3, 0.4);
+  const base = curlCenterlinePath(1, wobble, m);
+  const mid = curlCenterlinePath(0.66, wobble, m);
+  const tip = curlCenterlinePath(0.34, wobble, m);
+  const stroke = (d: string, width: number): string =>
+    `<path d="${d}" fill="none" stroke="#000" stroke-width="${width}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  return stroke(base, 3.6) + stroke(mid, 2.6) + stroke(tip, 1.6);
 }
 
 /** One `mask-image` layer per corner (top-left orientation, then the same
@@ -355,7 +266,7 @@ export const PERF_CORNER_SIZE = CORNER_SIZE;
 
 const EDGE_TILE_LENGTH = 96;
 const EDGE_TILE_THICKNESS = 12;
-const EDGE_BASE_WIDTH = 4;
+const EDGE_BASE_WIDTH = 2.6;
 const EDGE_MIN_HALF_WIDTH = 0.6;
 
 /** `vertical` swaps the sampled axis so the SAME noise profile tiles along a

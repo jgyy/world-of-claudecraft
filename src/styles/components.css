@@ -9389,13 +9389,19 @@
     /* The base .panel border stays fully transparent (not `border: 0`, which
        would reflow the box): the gilded ::before below is the only visible
        frame color, so there is no flat border peeking through the noisy
-       ribbon's thin spots. */
+       ribbon's thin spots. A more generous radius than the shared .panel's
+       6px, scoped to just this window, matches the reference's visibly
+       rounded frame; --perf-ornament-* below inherits it automatically. */
     border-color: transparent;
+    border-radius: 14px;
   }
   #options-menu.perf-wide::before {
     content: "";
     position: absolute;
-    inset: 0;
+    /* Negative inset: the gilded frame sits just OUTSIDE the dark panel's own
+       edge (a hand-gilded frame wraps a picture, it does not sit inset a few
+       pixels inside it), not flush with `inset: 0`. */
+    inset: -5px;
     /* Above .window > .panel-title's position:sticky (z-index: 6, layout.css):
        otherwise the sticky header paints over the top edge/corners the moment
        the window opens, hiding the ornament on exactly that one side. */
@@ -9433,19 +9439,19 @@
       left,
       right;
     -webkit-mask-size:
-      72px 72px,
-      72px 72px,
-      72px 72px,
-      72px 72px,
+      30px 30px,
+      30px 30px,
+      30px 30px,
+      30px 30px,
       96px 12px,
       96px 12px,
       12px 96px,
       12px 96px;
     mask-size:
-      72px 72px,
-      72px 72px,
-      72px 72px,
-      72px 72px,
+      30px 30px,
+      30px 30px,
+      30px 30px,
+      30px 30px,
       96px 12px,
       96px 12px,
       12px 96px,
@@ -9456,10 +9462,16 @@
   }
   /* Title text and its underline read as gilt too, warmer than the shared
      .panel-title gold so the pilot window's header visibly matches its own
-     frame rather than the generic chrome gold. */
+     frame rather than the generic chrome gold. Deliberately does NOT touch
+     position/z-index: the base `.window > .panel-title` rule (layout.css)
+     already sets `position: sticky; z-index: 6`, below the ornament's
+     z-index: 7 (below), so the corner ornament paints correctly over the
+     title's own opaque background at the top corners. An earlier version of
+     this rule raised the title to z-index: 8, which put its solid
+     background ABOVE the ornament and silently hid the top-left/top-right
+     corner flourish entirely; verified live via a getBoundingClientRect +
+     forced-z-index probe before landing this fix. */
   #options-menu.perf-wide .panel-title {
-    position: relative;
-    z-index: 8;
     color: var(--color-gold-400);
     border-bottom-color: var(--color-gold-700);
   }

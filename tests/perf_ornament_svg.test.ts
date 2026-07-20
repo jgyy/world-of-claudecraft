@@ -38,10 +38,17 @@ describe('perf_ornament_svg', () => {
     expect(new Set(layers).size).toBe(4);
   });
 
-  it('the corner motif includes the vine/leaf flourish, not just the bracket+gem', () => {
+  it('the corner motif is 3 overlapping strokes along one curl (base/mid/tip), never a leaf/vine/gem composition', () => {
     const svg = decodeSvg(perfCornerOrnamentMaskImage().split(', ')[0]);
-    // strokes path (bracket+ticks) + vine ribbon path + leaf path + gem path
-    expect((svg.match(/<path/g) ?? []).length).toBe(4);
+    const paths = svg.match(/<path[^>]*>/g) ?? [];
+    expect(paths).toHaveLength(3);
+    // every layer is a round-capped, round-joined STROKE (never a filled
+    // shape): this is what makes the corner read as "rounded", not sharp.
+    for (const p of paths) {
+      expect(p).toContain('fill="none"');
+      expect(p).toContain('stroke-linecap="round"');
+      expect(p).toContain('stroke-linejoin="round"');
+    }
   });
 
   it('noisy edge tile is a single closed ribbon path', () => {
@@ -105,7 +112,7 @@ describe('perf_ornament_svg', () => {
   it('the gilt gradient is a seamless repeating-conic-gradient over --color-gold-* tokens only', () => {
     const value = perfGiltGradientBackground();
     expect(value).toMatch(/^repeating-conic-gradient\(/);
-    expect(value).toContain('var(--color-gold-700)');
+    expect(value).toContain('var(--color-gold-600)');
     expect(value).toContain('color-mix(');
     // No raw hex literal anywhere: every color term must be a token
     // reference or a color-mix() of tokens, never a literal (components.css
@@ -139,8 +146,8 @@ describe('perf_ornament_svg', () => {
   it('the corner mirrors are TRUE geometric mirrors (coordinates flip, not just differ)', () => {
     const layers = perfCornerOrnamentMaskImage().split(', ');
     const bracketPoints = (svg: string): number[][] => {
-      // The bracket+ticks <path> is the first one, built from plain M/L
-      // commands (no curves), so a simple space/L split is exact here.
+      // The base (full-length) curl stroke is the first <path>, built from
+      // plain M/L commands (no curves), so a simple space/L split is exact.
       const d = svg.match(/<path d="([^"]+)" fill="none"/)?.[1] ?? '';
       return d
         .replace(/^M\s*/, '')
