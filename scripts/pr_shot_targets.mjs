@@ -1043,6 +1043,41 @@ export const TARGETS = [
       return {};
     },
   },
+  {
+    key: 'perf-overlay-ornament',
+    label: 'Performance Overlay window: gilded ornament pilot',
+    when: ['ui/perf_ornament_svg'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    async capture(page) {
+      // The first-spawn "Choose Your Camera" prompt can still be up (or
+      // reappear) at this point even after enterOfflineGame's own dismissal
+      // pass; confirm it before touching the options menu, or it sits on top
+      // of (and dims) the window this target is trying to shoot.
+      await page.evaluate(() => document.querySelector('.camera-prompt-confirm')?.click());
+      await wait(300);
+      // The whole point of this target is the gilded ornament, which sheds
+      // itself at the low effect tier by design (see tokens.css); this
+      // sandbox auto-detects low under software rendering, so force the
+      // attribute the drop rule actually reads rather than skip the shot.
+      await page.evaluate(() => document.documentElement.setAttribute('data-fx-level', 'ultra'));
+      await page.evaluate(() => {
+        const el = document.querySelector('#options-menu');
+        if (el) el.style.display = 'none';
+        window.__game?.hud?.toggleOptionsMenu?.();
+      });
+      const open = await pollForSize(page, '#options-menu');
+      if (!open) return {};
+      await page.evaluate(() => {
+        const btns = [
+          ...document.querySelectorAll('#options-menu button, #options-menu .opt-tile'),
+        ];
+        const perfBtn = btns.find((b) => /performance overlay/i.test(b.textContent || ''));
+        perfBtn?.click();
+      });
+      const wide = await pollForSize(page, '#options-menu.perf-wide');
+      return wide ? { clip: '#options-menu' } : {};
+    },
+  },
 ];
 
 // Map a list of changed file paths to the targets they imply (deduped, registry order).
