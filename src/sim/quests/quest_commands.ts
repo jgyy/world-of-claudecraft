@@ -321,9 +321,15 @@ export function turnInQuestCore(
       day,
       consumedIds: prevConsumed.includes(questId) ? prevConsumed : [...prevConsumed, questId],
       // dailyQuestsMeta is always set alongside dailyQuests by ensureDailyQuests
-      // before a daily becomes turn-in-able, so prevMeta is set in practice; 1 is
-      // a harmless fallback that only ever widens eligibility on the next roll.
-      rolledAtLevel: prevMeta ? prevMeta.rolledAtLevel : 1,
+      // before a daily becomes turn-in-able, so prevMeta is set in practice.
+      // Number.MAX_SAFE_INTEGER is the safe fallback if it were ever missing:
+      // a low fallback (e.g. 1) makes ensureDailyQuests' eligibleGrew check
+      // compare against the empty level-1 eligible set, which is always
+      // "grew" (every daily has minLevel >= 2) and forces a re-roll, and a
+      // wireRev bump, on every subsequent talk that day. Assuming max level
+      // instead means eligibleGrew stays false until the real rolledAtLevel
+      // is restored on the next roll.
+      rolledAtLevel: prevMeta ? prevMeta.rolledAtLevel : Number.MAX_SAFE_INTEGER,
     };
     meta.wireRev++;
   }

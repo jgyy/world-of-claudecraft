@@ -407,6 +407,7 @@ import {
 export { computeQuestState } from './quests/quest_commands';
 
 import {
+  DAILY_QUEST_COUNT,
   dailyResetDayIndex,
   eligibleDailyQuestIds,
   rollDailyQuestIds,
@@ -7145,7 +7146,14 @@ export class Sim {
     const characterId = String(meta.characterId ?? meta.entityId);
     const consumedIds = storedMeta ? storedMeta.consumedIds : [];
     const rolled = rollDailyQuestIds(characterId, day, p.level);
-    meta.dailyQuests = { day, questIds: rolled.filter((id) => !consumedIds.includes(id)) };
+    // Cap the OFFERED set at DAILY_QUEST_COUNT minus what's already been turned
+    // in today, not just DAILY_QUEST_COUNT: a mid-day level-up re-roll draws
+    // from a wider eligible pool and, if the already-consumed id doesn't land
+    // in the fresh roll, this keeps the per-day total at 3 instead of granting
+    // credit for the old one plus a fresh 3.
+    const offered = rolled.filter((id) => !consumedIds.includes(id));
+    const remainingSlots = Math.max(0, DAILY_QUEST_COUNT - consumedIds.length);
+    meta.dailyQuests = { day, questIds: offered.slice(0, remainingSlots) };
     meta.dailyQuestsMeta = { day, consumedIds, rolledAtLevel: p.level };
     meta.wireRev++;
   }

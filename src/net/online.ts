@@ -2649,8 +2649,14 @@ export class ClientWorld implements IWorld {
       if (s.qlog !== undefined)
         this.questLog = new Map((s.qlog as QuestProgress[]).map((q) => [q.questId, q]));
       if (s.qdone !== undefined) this.questsDone = new Set(s.qdone);
+      // maybe() serializes an absent value as `?? null`, so an unrolled
+      // character's wire frame carries `daily: null`, not `daily: undefined`.
+      // Normalize it back to undefined here so ClientWorld.dailyQuests matches
+      // the offline Sim's shape exactly (both `| undefined`, never `| null`).
       if (s.daily !== undefined)
-        this.dailyQuests = s.daily as { day: number; questIds: string[] } | undefined;
+        this.dailyQuests = (s.daily === null ? undefined : s.daily) as
+          | { day: number; questIds: string[] }
+          | undefined;
       if (s.lockouts !== undefined) this.selfLockouts = s.lockouts as Record<string, number>;
       if (s.ddiff === 'normal' || s.ddiff === 'heroic') this.selectedDungeonDifficulty = s.ddiff;
       if (s.qlog !== undefined || s.qdone !== undefined) this.pendingQuestCommands?.clear();

@@ -26,6 +26,16 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 // for the offline/headless fallback (a flat now+24h boundary), so the dailies do
 // not re-roll on every talk. The index changes exactly when the boundary rolls
 // over.
+//
+// Known split: the offline browser Sim and the headless RL env have no real
+// wall clock, so their default raidResetMs is `now + 24h` measured against
+// sim.time, which restarts at 0 every session. dailyResetDayIndex is then a
+// constant `1` for the whole session (0 to <24h of sim time) and the daily set
+// never rotates within an offline/headless run. This is intentional, not a
+// bug to hide: those hosts have no calendar-day boundary to key off, so
+// "daily" degenerates to "rolled once per session" there. Only the
+// authoritative server's real 3 AM realm-local boundary gives dailies an
+// actual daily rotation.
 export function dailyResetDayIndex(nowMs: number, raidResetMs: (nowMs: number) => number): number {
   return Math.floor(raidResetMs(nowMs) / DAY_MS);
 }
