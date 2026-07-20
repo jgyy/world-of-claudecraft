@@ -1136,6 +1136,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     checkQuestReady: host.checkQuestReady,
     countItem: host.countItem,
     countFungibleItem: host.countFungibleItem,
+    hasLockedTradeInstance: host.hasLockedTradeInstance,
     completeQuestForDev: host.completeQuestForDev,
     completeCurrentQuestsForDev: host.completeCurrentQuestsForDev,
     addEntity: host.addEntity,
