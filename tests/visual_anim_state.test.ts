@@ -106,12 +106,16 @@ describe('dazedPoseActive: any active form swap excluded from the dazed pose', (
 });
 
 describe('isLoopableHitReact: which hit[0] clips are safe to loop for the stunned pose', () => {
-  // Review feedback on PR #2064, a later round: no rig authors a bespoke
-  // `stunned` clip, so baseAction()'s stunned case always falls through to
-  // hit[0], looped for the whole stun. Only the Quaternius animal() rig's
-  // Idle_HitReact_Left/Right clips are authored as an idle-style pose meant
-  // to hold; every other rig's hit[0] is a short one-shot flinch or block
-  // pose, so looping it reads as a broken flinch cut every loop boundary.
+  // Review feedback on PR #2064: the KayKit family (every player class and
+  // every skeleton mob) now authors a bespoke `stunned: 'Block'` clip
+  // (manifest.ts kaykit()), so baseAction() resolves those rigs' stunned
+  // case straight to Block and never reaches this fallback. Every OTHER rig
+  // family still has no bespoke `stunned` clip, so baseAction()'s stunned
+  // case falls through to hit[0], looped for the whole stun. Only the
+  // Quaternius animal() rig's Idle_HitReact_Left/Right clips are authored as
+  // an idle-style pose meant to hold; every remaining rig's hit[0] is a short
+  // one-shot flinch or block pose, so looping it reads as a broken flinch cut
+  // every loop boundary.
   it('allows the Idle_HitReact_* family (animal() rig: wolf/fox/deer/stag/...)', () => {
     expect(isLoopableHitReact('Idle_HitReact_Left')).toBe(true);
     expect(isLoopableHitReact('Idle_HitReact_Right')).toBe(true);

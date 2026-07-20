@@ -36,8 +36,10 @@ export interface ClipMap {
   swim?: string;
   /** airborne base pose while jumping/falling */
   jump?: string;
-  /** dazed loop while hard-CC'd (stun/incapacitate/polymorph); absent falls
-   *  back to the first hit-react clip, then idle (visual.ts baseAction) */
+  /** dazed loop while hard-CC'd (stun/incapacitate), never while shape-shifted
+   *  (see dazedPoseActive in anim_state.ts); absent falls back to the first
+   *  hit-react clip IF it is a loopable pose (isLoopableHitReact), else idle
+   *  (visual.ts baseAction) */
   stunned?: string;
   walkBack?: string;
   /** one-shot played on respawn (skeleton awaken / boss taunt) */
@@ -152,6 +154,13 @@ const kaykit = (attack: string[], idle = 'Idle'): ClipMap => ({
   // (the clip's first ~40%, cut at the swap point by visual.ts) reaches over the
   // shoulder toward the back, which reads as grabbing/planting the hilt.
   stow: '1H_Melee_Attack_Chop',
+  // Every KayKit-family GLB (all player classes and every skeleton mob) ships
+  // a Block clip: a held, loopable defensive stance, distinct from both Idle
+  // and the Hit_A one-shot flinch. Authoring it as the dazed pose means a
+  // stunned player or skeleton actually reads as dazed for the whole CC
+  // duration, instead of falling back to Hit_A, which isLoopableHitReact
+  // correctly rejects as an unloopable flinch (see anim_state.ts).
+  stunned: 'Block',
   emote: KAYKIT_EMOTES,
 });
 

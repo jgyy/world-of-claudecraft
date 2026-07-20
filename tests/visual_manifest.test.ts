@@ -191,6 +191,24 @@ describe('character visual manifest', () => {
     }
   });
 
+  it('authors a real Block clip as the stunned pose for every KayKit-family rig (players + skeleton mobs)', async () => {
+    // PR #2064 review finding 1: isLoopableHitReact correctly rejects Hit_A
+    // as an unloopable flinch, which left every player class and skeleton
+    // mob resolving to plain Idle while hard-CC'd, no different from before
+    // the PR. Every KayKit-family GLB ships a Block clip (a held, loopable
+    // defensive stance), so the dazed pose is authored on it directly rather
+    // than depending on the hit-react fallback.
+    const byUrl = new Map<string, Set<string>>();
+    for (const key of ['player_warrior', 'player_mage', 'skel_necromancer'] as const) {
+      const visual = VISUALS[key];
+      expect(visual.clips.stunned).toBe('Block');
+      const animationNames =
+        byUrl.get(visual.url) ?? (await glbAnimationNames(`public/${visual.url}`));
+      byUrl.set(visual.url, animationNames);
+      expect(animationNames.has('Block')).toBe(true);
+    }
+  });
+
   it('keeps held weapons and props available on low graphics', () => {
     const allWeaponUrls = manifestUrls().filter((url) => url.startsWith('models/weapons/'));
     expect(allWeaponUrls.length).toBeGreaterThan(0);
