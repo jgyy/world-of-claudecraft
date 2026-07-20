@@ -4422,9 +4422,11 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bags.socketEmpty': '空背包栏位',
   'hudChrome.bags.unequipHint': '点击移除此背包',
   'hudChrome.bags.disenchantButton': '分解',
-  'hudChrome.bags.disenchantWarningEnchanted': '此物品带有附魔、杰作加成或制作者印记，分解后将会丢失。',
+  'hudChrome.bags.disenchantWarningEnchanted':
+    '此物品带有附魔、杰作加成或制作者印记，分解后将会丢失。',
   'hudChrome.bags.disenchantResult': '你分解了物品，获得{count}个{material}。',
-  'hudChrome.bags.disenchantTypedResult': '你分解了物品，获得{count}个{material}，这是定制制作所需的材料。',
+  'hudChrome.bags.disenchantTypedResult':
+    '你分解了物品，获得{count}个{material}，这是定制制作所需的材料。',
   'hudChrome.bags.disenchantNotEligible': '该物品无法分解。',
   'hudChrome.bags.disenchantFailed': '你已不再持有该物品，无法分解。',
   'guide.brand': 'World of ClaudeCraft',

@@ -4607,9 +4607,11 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bags.socketEmpty': '空のバッグスロット',
   'hudChrome.bags.unequipHint': 'クリックしてこのバッグを外す',
   'hudChrome.bags.disenchantButton': '分解',
-  'hudChrome.bags.disenchantWarningEnchanted': 'このアイテムにはエンチャント、傑作ボーナス、または刻印が付いており、失われます。',
+  'hudChrome.bags.disenchantWarningEnchanted':
+    'このアイテムにはエンチャント、傑作ボーナス、または刻印が付いており、失われます。',
   'hudChrome.bags.disenchantResult': 'アイテムを分解して{material}を{count}個手に入れた。',
-  'hudChrome.bags.disenchantTypedResult': 'アイテムを分解して{material}を{count}個手に入れた。オンデマンド制作用の素材だ。',
+  'hudChrome.bags.disenchantTypedResult':
+    'アイテムを分解して{material}を{count}個手に入れた。オンデマンド制作用の素材だ。',
   'hudChrome.bags.disenchantNotEligible': 'そのアイテムは分解できません。',
   'hudChrome.bags.disenchantFailed': '分解しようとしたアイテムはもう持っていません。',
   'guide.brand': 'World of ClaudeCraft',

@@ -4655,9 +4655,11 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bags.socketEmpty': 'Пустая ячейка для сумки',
   'hudChrome.bags.unequipHint': 'Нажмите, чтобы снять эту сумку',
   'hudChrome.bags.disenchantButton': 'Распылить',
-  'hudChrome.bags.disenchantWarningEnchanted': 'На этом предмете чары, бонус шедевра или клеймо мастера, которые будут утеряны.',
+  'hudChrome.bags.disenchantWarningEnchanted':
+    'На этом предмете чары, бонус шедевра или клеймо мастера, которые будут утеряны.',
   'hudChrome.bags.disenchantResult': 'Вы распылили предмет и получили {material} x{count}.',
-  'hudChrome.bags.disenchantTypedResult': 'Вы распылили предмет и получили {material} x{count} — реагент для крафта на заказ.',
+  'hudChrome.bags.disenchantTypedResult':
+    'Вы распылили предмет и получили {material} x{count} — реагент для крафта на заказ.',
   'hudChrome.bags.disenchantNotEligible': 'Этот предмет нельзя распылить.',
   'hudChrome.bags.disenchantFailed': 'У вас больше нет этого предмета для распыления.',
   'guide.brand': 'World of ClaudeCraft',
