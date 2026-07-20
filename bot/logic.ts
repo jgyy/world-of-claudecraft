@@ -346,16 +346,33 @@ export function levelNickSuffix(level: number, className: string): string {
   return ` ${emoji}${level}`;
 }
 
+// Matches one or more trailing " {classEmoji}{digits}" suffixes, so a name that
+// already carries one or several (from a prior compounding bug, or from being fed
+// a live Discord nick instead of the stable base) is fully cleaned before the
+// fresh suffix is appended.
+const CLASS_EMOJI_ALT = Object.values(CLASS_EMOJI)
+  .map((e) => e.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  .join('|');
+const LEVEL_SUFFIX_RE = new RegExp(`(?: (?:${CLASS_EMOJI_ALT})\\d+)+$`, 'u');
+
+/** Strip every trailing class-icon+level suffix, leaving the bare base name. */
+export function stripLevelSuffix(name: string): string {
+  const stripped = name.replace(LEVEL_SUFFIX_RE, '').trimEnd();
+  return stripped || name;
+}
+
 /**
  * Build a Discord server nickname that appends a class icon + level to the base
- * name, capped at Discord's 32-char limit. Built from the STABLE base (the Discord
- * handle), never the current nick, so re-syncs are idempotent (no compounding).
- * Code-point aware so an emoji is never split.
+ * name, capped at Discord's 32-char limit. Any existing level suffix (one or
+ * several, e.g. from a prior compounding bug) is stripped first, so the result
+ * always carries exactly one class icon + level regardless of what base name is
+ * passed in; re-syncs are idempotent (no compounding). Code-point aware so an
+ * emoji is never split.
  */
 export function buildLevelNick(baseName: string, level: number, className: string): string {
   const suffix = levelNickSuffix(level, className);
   const suffixLen = [...suffix].length;
-  const base = [...baseName]
+  const base = [...stripLevelSuffix(baseName)]
     .slice(0, Math.max(1, NICK_MAX - suffixLen))
     .join('')
     .trimEnd();
@@ -657,6 +674,78 @@ function percent(value: number): string {
   return `${(value * 100).toLocaleString('en-US', {
     maximumFractionDigits: 1,
   })}%`;
+}
+
+// ── invite auto-rotation ─────────────────────────────────────────────────────
+// Discord invites created with a finite max_age expire (the official server's
+// invite has been going stale after Discord's 30-day default). Rather than one
+// hand-made link, the bot periodically mints a fresh never-expiring invite
+// (max_age 0) and keeps a single channel message current with it, so the link
+// is always live without anyone remembering to regenerate it by hand.
+export const INVITE_REFRESH_INTERVAL_MS = 25 * 24 * 60 * 60_000; // 25 days
+
+// True once `lastCreatedMs` is missing (never created) or older than the
+// refresh interval. Pure so the poll-loop cadence is unit-tested without a
+// fake clock touching the gateway/REST shells.
+export function inviteRefreshDue(lastCreatedMs: number | null, nowMs: number): boolean {
+  return lastCreatedMs === null || nowMs - lastCreatedMs >= INVITE_REFRESH_INTERVAL_MS;
+}
+
+const INVITE_EMBED_TITLE = 'Join the World of ClaudeCraft Discord';
+
+// The single message the bot keeps edited in place with the current invite.
+export function buildInviteMessage(inviteUrl: string): Record<string, unknown> {
+  return {
+    embeds: [
+      {
+        color: 0x5865f2,
+        title: INVITE_EMBED_TITLE,
+        description: `${inviteUrl}\n\nThis link is kept fresh automatically and never expires.`,
+        footer: { text: 'World of ClaudeCraft' },
+      },
+    ],
+    allowed_mentions: { parse: [] },
+  };
+}
+
+export interface DiscordMessageSummary {
+  id: string;
+  author: { id: string };
+  embeds?: { title?: string }[];
+  timestamp: string;
+  edited_timestamp?: string | null;
+}
+
+// Finds the bot's own previously-posted invite message (newest first) so a
+// process restart edits the existing message in place instead of piling up a
+// fresh one every time. Discord has no "my messages by content" query, so
+// this matches by author id plus the invite embed's stable title. The
+// returned `lastSetMs` (last edit, or the original post if never edited)
+// seeds `inviteCreatedAtMs` so the refresh cadence survives the restart too.
+export function findManagedInviteMessage(
+  messages: DiscordMessageSummary[],
+  botUserId: string,
+): { id: string; lastSetMs: number } | null {
+  const found = messages.find(
+    (m) => m.author.id === botUserId && m.embeds?.[0]?.title === INVITE_EMBED_TITLE,
+  );
+  if (!found) return null;
+  const lastSetMs = Date.parse(found.edited_timestamp ?? found.timestamp);
+  return { id: found.id, lastSetMs: Number.isNaN(lastSetMs) ? 0 : lastSetMs };
+}
+
+// Discord's "Unknown Message" API error code: returned when editing a
+// message that no longer exists (deleted by a moderator, channel purge,
+// etc). On this, the caller should drop the stale id and post a replacement
+// rather than retrying the same edit forever.
+export const DISCORD_UNKNOWN_MESSAGE_CODE = 10008;
+
+export function isUnknownMessageError(err: unknown): boolean {
+  return (
+    typeof err === 'object' &&
+    err !== null &&
+    (err as { code?: unknown }).code === DISCORD_UNKNOWN_MESSAGE_CODE
+  );
 }
 
 export function buildDailyRewardWinnersMessage(
