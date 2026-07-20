@@ -788,7 +788,8 @@ export const TARGETS = [
       return { clip: '#market-window' };
     },
   },
-  {    key: 'train-window',
+  {
+    key: 'train-window',
     label: 'Train view: station-master recipe training ladder',
     when: ['ui/hud/vendor/train_view', 'ui/hud/vendor/train_window'],
     // Desktop and mobile: the three-state teaching ladder is actionable info (a
