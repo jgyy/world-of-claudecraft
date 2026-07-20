@@ -6468,9 +6468,7 @@ export class Sim {
   hasLockedTradeInstance(itemId: string, pid: number): boolean {
     const r = this.resolve(pid);
     if (!r) return false;
-    return r.meta.inventory.some(
-      (s) => s.itemId === itemId && s.instance?.tradesRemaining === 0,
-    );
+    return r.meta.inventory.some((s) => s.itemId === itemId && s.instance?.tradesRemaining === 0);
   }
 
   // Grants are stack-aware (bags.ts addStacked, which never merges into an
