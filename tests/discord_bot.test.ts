@@ -4,6 +4,7 @@ import {
   allTierRoleNames,
   buildActivityMessage,
   buildDailyRewardWinnersMessage,
+  buildInviteMessage,
   buildLevelNick,
   buildLinkContent,
   buildRelayMessage,
@@ -17,8 +18,10 @@ import {
   GATEWAY_OP,
   GUILD_LARGE_THRESHOLD,
   heartbeatIntervalMs,
+  INVITE_REFRESH_INTERVAL_MS,
   identifyPayload,
   indexSpecialRoleIds,
+  inviteRefreshDue,
   isSlashCommand,
   levelNickSuffix,
   MEMBERS_META_BATCH,
@@ -577,6 +580,31 @@ describe('significant-activity cards', () => {
     }) as { allowed_mentions: { users: string[] }; embeds: Array<Record<string, any>> };
     expect(msg.embeds[0].description).toContain('Ghost'); // plain, no mention
     expect(msg.allowed_mentions.users).toEqual(['111']);
+  });
+});
+
+describe('invite auto-rotation', () => {
+  it('is due when never created', () => {
+    expect(inviteRefreshDue(null, 1_000)).toBe(true);
+  });
+
+  it('is not due before the refresh interval elapses', () => {
+    const now = 1_000_000_000;
+    expect(inviteRefreshDue(now - INVITE_REFRESH_INTERVAL_MS + 1, now)).toBe(false);
+  });
+
+  it('is due once the refresh interval has fully elapsed', () => {
+    const now = 1_000_000_000;
+    expect(inviteRefreshDue(now - INVITE_REFRESH_INTERVAL_MS, now)).toBe(true);
+  });
+
+  it('builds an invite message embedding the url without pinging anyone', () => {
+    const msg = buildInviteMessage('https://discord.gg/abc123') as {
+      allowed_mentions: unknown;
+      embeds: Array<{ description: string }>;
+    };
+    expect(msg.allowed_mentions).toEqual({ parse: [] });
+    expect(msg.embeds[0].description).toContain('https://discord.gg/abc123');
   });
 });
 

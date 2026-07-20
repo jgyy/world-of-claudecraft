@@ -676,6 +676,36 @@ function percent(value: number): string {
   })}%`;
 }
 
+// ── invite auto-rotation ─────────────────────────────────────────────────────
+// Discord invites created with a finite max_age expire (the official server's
+// invite has been going stale after Discord's 30-day default). Rather than one
+// hand-made link, the bot periodically mints a fresh never-expiring invite
+// (max_age 0) and keeps a single channel message current with it, so the link
+// is always live without anyone remembering to regenerate it by hand.
+export const INVITE_REFRESH_INTERVAL_MS = 25 * 24 * 60 * 60_000; // 25 days
+
+// True once `lastCreatedMs` is missing (never created) or older than the
+// refresh interval. Pure so the poll-loop cadence is unit-tested without a
+// fake clock touching the gateway/REST shells.
+export function inviteRefreshDue(lastCreatedMs: number | null, nowMs: number): boolean {
+  return lastCreatedMs === null || nowMs - lastCreatedMs >= INVITE_REFRESH_INTERVAL_MS;
+}
+
+// The single message the bot keeps edited in place with the current invite.
+export function buildInviteMessage(inviteUrl: string): Record<string, unknown> {
+  return {
+    embeds: [
+      {
+        color: 0x5865f2,
+        title: 'Join the World of ClaudeCraft Discord',
+        description: `${inviteUrl}\n\nThis link is kept fresh automatically and never expires.`,
+        footer: { text: 'World of ClaudeCraft' },
+      },
+    ],
+    allowed_mentions: { parse: [] },
+  };
+}
+
 export function buildDailyRewardWinnersMessage(
   day: DailyRewardWinnersDay,
 ): Record<string, unknown> {

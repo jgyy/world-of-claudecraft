@@ -121,7 +121,35 @@ export class DiscordApi {
     await this.request('PATCH', `/guilds/${guildId}/members/${userId}`, { nick });
   }
 
-  async createMessage(channelId: string, payload: Record<string, unknown>): Promise<void> {
-    await this.request('POST', `/channels/${channelId}/messages`, payload);
+  async createMessage(
+    channelId: string,
+    payload: Record<string, unknown>,
+  ): Promise<{ id: string }> {
+    return (await this.request('POST', `/channels/${channelId}/messages`, payload)) as {
+      id: string;
+    };
+  }
+
+  // Edit a message the bot previously posted (used to keep the invite message
+  // current in place instead of reposting).
+  async editMessage(
+    channelId: string,
+    messageId: string,
+    payload: Record<string, unknown>,
+  ): Promise<void> {
+    await this.request('PATCH', `/channels/${channelId}/messages/${messageId}`, payload);
+  }
+
+  // Create an invite for a channel (needs CREATE_INSTANT_INVITE). `maxAgeSeconds:
+  // 0` means the invite never expires; `maxUses: 0` means unlimited uses.
+  async createInvite(
+    channelId: string,
+    opts: { maxAgeSeconds: number; maxUses: number; unique?: boolean },
+  ): Promise<{ code: string }> {
+    return (await this.request('POST', `/channels/${channelId}/invites`, {
+      max_age: opts.maxAgeSeconds,
+      max_uses: opts.maxUses,
+      unique: opts.unique ?? false,
+    })) as { code: string };
   }
 }

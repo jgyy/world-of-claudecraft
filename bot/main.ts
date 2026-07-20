@@ -19,6 +19,7 @@ import {
   allTierRoleNames,
   buildActivityMessage,
   buildDailyRewardWinnersMessage,
+  buildInviteMessage,
   buildLevelNick,
   buildLinkContent,
   buildRelayMessage,
@@ -29,6 +30,7 @@ import {
   computeRoleSync,
   GUILD_LARGE_THRESHOLD,
   indexSpecialRoleIds,
+  inviteRefreshDue,
   isSlashCommand,
   MEMBERS_META_BATCH,
   memberRolesFromPayload,
@@ -515,6 +517,32 @@ async function main(): Promise<void> {
     }
   };
 
+  // Keep the server invite fresh: a bare Discord invite created with a finite
+  // max_age expires (the prior hand-made invite went stale after Discord's
+  // 30-day default), so periodically mint a never-expiring invite and edit a
+  // single channel message in place with it. The message id lives only in
+  // memory: a restart before the next refresh is due simply posts a fresh
+  // message rather than re-editing an old one, which is harmless (the old
+  // message still shows a working, non-expired link).
+  let inviteMessageId: string | null = null;
+  let inviteCreatedAtMs: number | null = null;
+  const refreshInviteIfDue = async (): Promise<void> => {
+    if (!cfg.inviteChannelId) return;
+    if (!inviteRefreshDue(inviteCreatedAtMs, Date.now())) return;
+    const invite = await discord.createInvite(cfg.inviteChannelId, {
+      maxAgeSeconds: 0,
+      maxUses: 0,
+    });
+    const payload = buildInviteMessage(`https://discord.gg/${invite.code}`);
+    if (inviteMessageId) {
+      await discord.editMessage(cfg.inviteChannelId, inviteMessageId, payload);
+    } else {
+      const message = await discord.createMessage(cfg.inviteChannelId, payload);
+      inviteMessageId = message.id;
+    }
+    inviteCreatedAtMs = Date.now();
+  };
+
   gateway.connect(false);
   setInterval(
     () => void syncAllOnlineRoles().catch((e) => console.error(e)),
@@ -535,6 +563,11 @@ async function main(): Promise<void> {
       .then(() => pushAllMemberMeta())
       .catch((e) => console.error(e));
   }, ROLE_SYNC_INTERVAL_MS).unref();
+  void refreshInviteIfDue().catch((e) => console.error('[bot] invite refresh failed', e));
+  setInterval(
+    () => void refreshInviteIfDue().catch((e) => console.error('[bot] invite refresh failed', e)),
+    ROLE_SYNC_INTERVAL_MS,
+  ).unref();
   console.log('[bot] World of ClaudeCraft Discord bot started');
 }
 
