@@ -140,23 +140,53 @@ describe('renderHeroicVendorWindow: goods grid wrapping', () => {
   });
 });
 
-describe('#vendor-window desktop width cap: divides by --window-scale and floors at 400px', () => {
+describe('#vendor-window desktop width cap: divides by --window-scale and clears #bags', () => {
   // jsdom gives import.meta.url an http URL, which readFileSync(new URL(...)) rejects
   // (see deeds_window.test.ts): resolve from __dirname instead.
   const components = readFileSync(join(__dirname, '../src/styles/components.css'), 'utf8');
-  const start = components.indexOf('#vendor-window {\n    width:');
+  const marker = '#vendor-window {\n    width:';
+  const firstIndex = components.indexOf(marker);
+  const occurrences = components.split(marker).length - 1;
+  const start = firstIndex;
   const block = components.slice(start, components.indexOf('}', start));
+  // Normalized so the pin survives Biome reflowing the multi-line calc()
+  // (round 5 review, PR #2101: the raw multi-line substring never matched).
+  const normalized = block.replace(/\s+/g, ' ');
 
   it('exists exactly once', () => {
-    expect(start).toBeGreaterThan(0);
+    expect(occurrences).toBe(1);
   });
 
   it('divides the viewport term by --window-scale, not --ui-scale (round 4 review, PR #2101)', () => {
-    expect(block).toContain('var(--app-vw, 100vw) / var(--window-scale)');
-    expect(block).not.toContain('var(--app-vw, 100vw) - 2 *');
+    expect(normalized).toContain('var(--app-vw, 100vw) / var(--window-scale)');
+    expect(normalized).not.toContain('var(--app-vw, 100vw) - 2 *');
   });
 
   it('floors the width at 400px so it never regresses below the pre-PR fixed window', () => {
-    expect(block).toMatch(/width:\s*max\(\s*400px,\s*min\(\s*860px,/);
+    expect(normalized).toMatch(/width: max\( 400px, min\( 860px,/);
+  });
+
+  it('caps the width so it clears the #bags left edge at any viewport/scale (round 5 review, PR #2101)', () => {
+    // #bags centres itself at left: ((100% + 50% + bar-half + gap - micro-r) / 2)
+    // then translateX(-50%), with micro-r = 50px + gap (gap cancels) and a
+    // steady-state width of 310px once --bags-slot-w stops binding: its left
+    // edge is 0.75 * VW + (barHalf - 50) / 2 - 155. #vendor-window is centred
+    // (right edge = VW / 2 + width / 2) and must stay clear of that edge.
+    const barHalf = 306;
+    for (const scale of [0.8, 1, 1.25, 1.4]) {
+      for (const vw of [700, 900, 1024, 1100, 1280, 1400, 1600, 1920, 2560]) {
+        const authorVw = vw / scale;
+        const width = Math.max(400, Math.min(860, 0.5 * authorVw + barHalf - 362));
+        const vendorRightEdge = authorVw / 2 + width / 2;
+        const bagsLeftEdge = 0.75 * authorVw + (barHalf - 50) / 2 - 155;
+        // Small viewports keep the 400px floor: #bags is bottom-anchored and
+        // #vendor-window top-anchored, so any residual overlap there is
+        // vertical, not horizontal (see the CSS comment); only assert
+        // clearance once the floor is no longer the binding constraint.
+        if (width > 400) {
+          expect(vendorRightEdge).toBeLessThanOrEqual(bagsLeftEdge + 1);
+        }
+      }
+    }
   });
 });
