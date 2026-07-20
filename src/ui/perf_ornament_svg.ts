@@ -14,14 +14,14 @@
 // sin(k*1*2*pi+phase) for integer k, the resulting wave is exactly periodic
 // over its sample domain, so a tiled edge ribbon has no visible seam.
 //
-// The corner motif went through a full redesign against a second reference
-// image (a small in-game window with a rounded-rectangle gilded frame): one
-// compact, thick, ROUNDED curl per corner (round stroke caps/joins, never a
-// sharp point), not the earlier round's vine-plus-leaf composition, which
-// read as "leaves pointing inward" rather than a hand-carved scroll bracket.
-// Geometry noise and color noise are still two SEPARATE knobs: the curl's
-// own shape carries only a small radius wobble, while the gilt gradient
-// below supplies the "hand-applied, unevenly toned" color read.
+// The corner motif went through a second full redesign against a Baroque
+// acanthus-scroll reference vector (a nautilus-style volute with leaves
+// wrapping its own outer curve, plus two leafy tendrils running outward
+// along the edges): a single thick rounded curl (the prior round's design)
+// read as too plain next to that reference's dense scrollwork. Geometry
+// noise and color noise are still two SEPARATE knobs: each stroke carries
+// only a small radius wobble, while the gilt gradient below supplies the
+// "hand-applied, unevenly toned" color read.
 
 function polarX(cx: number, r: number, deg: number): number {
   return cx + r * Math.cos((deg * Math.PI) / 180);
@@ -142,18 +142,21 @@ export function perfGiltGradientBackground(): string {
   return `repeating-conic-gradient(from 0deg, ${giltGradientStops()})`;
 }
 
-// ---------- corner motif: ONE compact, thick, rounded gilded curl per
-// corner, matching a reference image of small hand-carved scroll flourishes
-// (never a leaf/vine/gem composition, and never a sharp point anywhere):
-// round stroke caps/joins do the "rounded" work, and 3 overlapping strokes
-// of decreasing length and width along the SAME curve fake a tapered,
-// hand-painted brush stroke without manual variable-width polygon math ----
+// ---------- corner motif: a Baroque acanthus scroll, matching a reference
+// vector illustration of an ornate hand-carved corner flourish. THREE parts,
+// all FACING OUTWARD from the corner vertex (never curling back toward the
+// window's center): a tightening volute (the "spiral scroll") anchored at
+// the corner with leaves wrapping its own outer curve (not just at the
+// tendril tips, matching the reference's leaf-wrapped scroll rather than a
+// bare wire spiral), a short leafy tendril running out along the top edge,
+// and a longer leafy tendril running out along the side edge with its own
+// small secondary curl partway along, matching the reference's asymmetric
+// L-shaped composition (one short arm, one long arm, both rooted in one
+// spiral) ----
 
-const CORNER_SIZE = 30;
-const CORNER_CX = 10;
-const CORNER_CY = 10;
-const CORNER_START_DEG = 8;
-const CORNER_END_DEG = 100;
+const CORNER_SIZE = 70;
+const CORNER_PIVOT_X = 20;
+const CORNER_PIVOT_Y = 20;
 
 /**
  * The 4 corner variants are mirrored by baking the flip into every emitted
@@ -180,61 +183,197 @@ function n2(x: number, y: number, m: Mirror): string {
   return `${n(mx)} ${n(my)}`;
 }
 
-// The radius PEAKS partway through the sweep, then pulls back in toward the
-// tip (t=1): a plain monotonic arc read as a bare swoosh, not a scroll. This
-// small bulge-then-tuck is what gives the tip its "curling inward" hook
-// character, matching the reference's small spiral rather than one bare arc.
-const CORNER_PEAK_T = 0.55;
-const CORNER_R_START = 6.5;
-const CORNER_R_PEAK = 12.5;
-const CORNER_R_END = 7;
-
 /**
- * One point along the curl's centerline: a smooth arc around `(CORNER_CX,
- * CORNER_CY)` with a small hand-drawn wobble on the RADIUS only (never the
- * angle, which would read as a jerky/uneven sweep rather than a smooth
- * carved curl). `t` in [0, 1] runs base-to-tip.
+ * A tightening volute: `t=0` is the OUTER end (large radius, where a tendril
+ * arm departs from), `t=1` is the tight inner curl. `turns` > 1 (typically
+ * 1.2-1.4) is what makes it read as a scroll rather than a plain arc; the
+ * radius shrinks smoothly across the whole sweep, never bulging back out.
  */
-function curlPoint(t: number, wobble: Harmonic[]): { x: number; y: number } {
-  const deg = CORNER_START_DEG + (CORNER_END_DEG - CORNER_START_DEG) * t;
-  const rBase =
-    t <= CORNER_PEAK_T
-      ? CORNER_R_START + (CORNER_R_PEAK - CORNER_R_START) * (t / CORNER_PEAK_T)
-      : CORNER_R_PEAK +
-        (CORNER_R_END - CORNER_R_PEAK) * ((t - CORNER_PEAK_T) / (1 - CORNER_PEAK_T));
-  const r = rBase + periodicNoise(wobble, t) * 0.5;
-  return { x: polarX(CORNER_CX, r, deg), y: polarY(CORNER_CY, r, deg) };
+function spiralPoint(
+  t: number,
+  cx: number,
+  cy: number,
+  startDeg: number,
+  turns: number,
+  rOuter: number,
+  rInner: number,
+  wobble: Harmonic[],
+): { x: number; y: number } {
+  const deg = startDeg + turns * 360 * t;
+  const r = rOuter + (rInner - rOuter) * t + periodicNoise(wobble, t) * 0.35;
+  return { x: polarX(cx, r, deg), y: polarY(cy, r, deg) };
 }
 
-/** The curl's centerline from its base (t=0) out to `tMax` (<=1), sampled
- * densely enough to read as a smooth arc once stroked with round joins. */
-function curlCenterlinePath(tMax: number, wobble: Harmonic[], m: Mirror): string {
-  const samples = 22;
+function spiralStroke(
+  cx: number,
+  cy: number,
+  startDeg: number,
+  turns: number,
+  rOuter: number,
+  rInner: number,
+  width: number,
+  seed: number,
+  tMax: number,
+  m: Mirror,
+): string {
+  const samples = 40;
+  const wobble = seededHarmonics(seed, 3, 0.3);
   const pts: string[] = [];
   for (let i = 0; i <= samples; i++) {
     const t = (i / samples) * tMax;
-    const { x, y } = curlPoint(t, wobble);
+    const { x, y } = spiralPoint(t, cx, cy, startDeg, turns, rOuter, rInner, wobble);
     pts.push(n2(x, y, m));
   }
-  return `M ${pts.join(' L ')}`;
+  return `<path d="M ${pts.join(' L ')}" fill="none" stroke="#000" stroke-width="${width}" stroke-linecap="round" stroke-linejoin="round"/>`;
 }
 
 /**
- * ONE compact, thick, rounded gilded curl: a single stroked arc, not a
- * filled ribbon/vine/leaf composition. `stroke-linecap="round"` and
- * `stroke-linejoin="round"` do all the "rounded, hand-gilded, never a sharp
- * point" work; 3 overlapping strokes of decreasing length AND width along
- * the exact same centerline fake a tapered brush stroke (thick at the base,
- * finer toward the tip) without hand-building a variable-width polygon.
+ * A pointed acanthus leaflet: a smooth main lobe curving to a point (2
+ * quadratic curves, like a classic pointed leaf silhouette), with ONE small
+ * secondary lobe budding off the outer edge partway along. The secondary
+ * lobe is its OWN small closed curve merged into the same path (not a
+ * polygon notch cut into the main outline), which is what keeps the main
+ * leaf's edge smooth while still reading as multi-lobed foliage, closer to
+ * the reference than a single jagged polygon (an earlier attempt at "one
+ * outline with a zigzag notch" read as a chevron/arrow, not a leaf).
+ * `baseX,baseY` is where it sprouts from a tendril; `angleDeg` points from
+ * base toward the tip (0 = along +x).
  */
+function leafletPath(
+  baseX: number,
+  baseY: number,
+  len: number,
+  width: number,
+  angleDeg: number,
+  m: Mirror,
+): string {
+  const rad = (angleDeg * Math.PI) / 180;
+  const cos = Math.cos(rad);
+  const sin = Math.sin(rad);
+  const pt = (x: number, y: number): string => {
+    const rx = x * cos - y * sin;
+    const ry = x * sin + y * cos;
+    return n2(baseX + rx, baseY + ry, m);
+  };
+  const main =
+    `M ${pt(0, 0)} ` +
+    `Q ${pt(len * 0.4, -width)} ${pt(len, 0)} ` +
+    `Q ${pt(len * 0.55, width * 0.7)} ${pt(0, 0)} Z`;
+  // Secondary lobe: a smaller leaf budding off the main one's outer edge at
+  // ~45% of the way along, angled back slightly toward the base.
+  const budBaseX = len * 0.42;
+  const budBaseY = -width * 0.55;
+  const budLen = len * 0.42;
+  const budWidth = width * 0.55;
+  const budAngle = -32;
+  const budRad = (budAngle * Math.PI) / 180;
+  const budCos = Math.cos(budRad);
+  const budSin = Math.sin(budRad);
+  const budPt = (x: number, y: number): string => {
+    const rx = x * budCos - y * budSin;
+    const ry = x * budSin + y * budCos;
+    return pt(budBaseX + rx, budBaseY + ry);
+  };
+  const bud =
+    `M ${budPt(0, 0)} ` +
+    `Q ${budPt(budLen * 0.4, -budWidth)} ${budPt(budLen, 0)} ` +
+    `Q ${budPt(budLen * 0.5, budWidth * 0.6)} ${budPt(0, 0)} Z`;
+  return `${main} ${bud}`;
+}
+
 function cornerMotifPath(m: Mirror): string {
-  const wobble = seededHarmonics(303, 3, 0.4);
-  const base = curlCenterlinePath(1, wobble, m);
-  const mid = curlCenterlinePath(0.66, wobble, m);
-  const tip = curlCenterlinePath(0.34, wobble, m);
-  const stroke = (d: string, width: number): string =>
-    `<path d="${d}" fill="none" stroke="#000" stroke-width="${width}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  return stroke(base, 3.6) + stroke(mid, 2.6) + stroke(tip, 1.6);
+  const px = CORNER_PIVOT_X;
+  const py = CORNER_PIVOT_Y;
+
+  // The volute: outer end at deg=-20 (pointing up-and-right, where the top
+  // tendril picks up), winding 1.3 turns down to a tight inner curl. A
+  // second, shorter inner stroke over just the outer ~55% of the same sweep
+  // (not the full spiral) suggests the rolled leaf-surface detail line
+  // visible inside the reference's volute, without literally doubling it.
+  const outerBody = spiralStroke(px, py, -20, 1.3, 12.5, 2, 2.6, 401, 1, m);
+  const innerDetail = spiralStroke(px, py, -20, 1.3, 9, 4.5, 1.2, 402, 0.55, m);
+  // The reference's leaves do not wait for the tendrils to branch off: a
+  // couple of blades wrap the spiral's own outer curve first, splaying
+  // radially outward from the pivot (same angle the spiral point sits at),
+  // so the volute itself reads as leaf-wrapped rather than bare wire.
+  const outerBodyWobble = seededHarmonics(401, 3, 0.3);
+  const spiralLeafA = spiralPoint(0.12, px, py, -20, 1.3, 12.5, 2, outerBodyWobble);
+  const spiralLeafB = spiralPoint(0.3, px, py, -20, 1.3, 12.5, 2, outerBodyWobble);
+  const spiralLeaves = [
+    leafletPath(spiralLeafA.x, spiralLeafA.y, 9, 3.4, -20 + 1.3 * 360 * 0.12, m),
+    leafletPath(spiralLeafB.x, spiralLeafB.y, 7.5, 3, -20 + 1.3 * 360 * 0.3, m),
+  ].join(' ');
+
+  // Top tendril: departs the volute's outer end, runs out along the top
+  // edge (increasing x, gently rising), OUTWARD the whole way (radius from
+  // the pivot only grows). The angle swing stays shallow (-20deg to -27deg)
+  // so the reach (up to r=24) stays safely on-canvas (deg more negative than
+  // roughly -35deg at this radius would push y negative, off the viewBox).
+  const topTendril = spiralStroke(px, py, -20, -0.02, 12.5, 24, 2.2, 403, 1, m);
+  const topLeaves = [
+    leafletPath(px + 15, py - 4, 11, 3.6, -16, m),
+    leafletPath(px + 22, py - 6, 8, 2.7, -8, m),
+  ].join(' ');
+
+  // Side tendril: departs the SAME pivot heading downward (deg near 100),
+  // OUTWARD along the side edge, with its own smaller secondary curl about
+  // 60% of the way down (the reference's rhythm of a second, smaller volute
+  // partway along the long running arm), then continues to a leaf tip.
+  const sideRun = spiralStroke(px, py, 100, -0.05, 12, 24, 2.3, 404, 0.62, m);
+  const sideCurlPivot = spiralPoint(0.62, px, py, 100, -0.05, 12, 24, seededHarmonics(404, 3, 0.3));
+  const sideCurl = spiralStroke(sideCurlPivot.x, sideCurlPivot.y, 60, 0.85, 6, 1.5, 1.5, 405, 1, m);
+  const sideTailStart = -0.06;
+  const sideTailWobble = seededHarmonics(406, 3, 0.3);
+  const sideTail = spiralStroke(
+    sideCurlPivot.x,
+    sideCurlPivot.y,
+    150,
+    sideTailStart,
+    6,
+    30,
+    1.6,
+    406,
+    1,
+    m,
+  );
+  // Foliage runs the WHOLE length of both tendrils (the reference's leaves
+  // stack continuously along the vine, not just near the scroll): one
+  // leaflet near the base of each run, one mid-way, one at the curl/tip.
+  // Positions come from the SAME spiral parameterization the stroke itself
+  // uses (never hand-guessed coordinates), so a leaf always sits ON its
+  // tendril regardless of future radius/angle tuning.
+  const sideRunWobble = seededHarmonics(404, 3, 0.3);
+  const sideRunMid = spiralPoint(0.32, px, py, 100, -0.05, 12, 24, sideRunWobble);
+  const sideTailMid = spiralPoint(
+    0.45,
+    sideCurlPivot.x,
+    sideCurlPivot.y,
+    150,
+    sideTailStart,
+    6,
+    30,
+    sideTailWobble,
+  );
+  const sideTailTip = spiralPoint(
+    0.92,
+    sideCurlPivot.x,
+    sideCurlPivot.y,
+    150,
+    sideTailStart,
+    6,
+    30,
+    sideTailWobble,
+  );
+  const sideLeaves = [
+    leafletPath(px + 3, py + 14, 8, 3.2, 82, m),
+    leafletPath(sideRunMid.x - 1, sideRunMid.y + 1, 7, 2.8, 88, m),
+    leafletPath(sideCurlPivot.x - 2, sideCurlPivot.y + 10, 7, 2.7, 95, m),
+    leafletPath(sideTailMid.x - 1, sideTailMid.y + 1, 7.5, 2.9, 110, m),
+    leafletPath(sideTailTip.x, sideTailTip.y, 6, 2.4, 128, m),
+  ].join(' ');
+
+  const fills = `<path d="${[spiralLeaves, topLeaves, sideLeaves].join(' ')}"/>`;
+  return outerBody + innerDetail + topTendril + sideRun + sideCurl + sideTail + fills;
 }
 
 /** One `mask-image` layer per corner (top-left orientation, then the same

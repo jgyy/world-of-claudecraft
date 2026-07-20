@@ -38,14 +38,18 @@ describe('perf_ornament_svg', () => {
     expect(new Set(layers).size).toBe(4);
   });
 
-  it('the corner motif is 3 overlapping strokes along one curl (base/mid/tip), never a leaf/vine/gem composition', () => {
+  it('the corner motif is a volute (outer body + inner detail) plus two outward leafy tendrils, never a single bare curl', () => {
     const svg = decodeSvg(perfCornerOrnamentMaskImage().split(', ')[0]);
     const paths = svg.match(/<path[^>]*>/g) ?? [];
-    expect(paths).toHaveLength(3);
-    // every layer is a round-capped, round-joined STROKE (never a filled
-    // shape): this is what makes the corner read as "rounded", not sharp.
-    for (const p of paths) {
-      expect(p).toContain('fill="none"');
+    // 6 round-capped strokes (volute outer/inner, top tendril, side run,
+    // side curl, side tail) plus exactly one filled composite path holding
+    // every acanthus leaflet (spiral-wrapping, top-tendril, and side-tendril
+    // foliage together).
+    const strokes = paths.filter((p) => p.includes('fill="none"'));
+    const fills = paths.filter((p) => !p.includes('fill="none"'));
+    expect(strokes).toHaveLength(6);
+    expect(fills).toHaveLength(1);
+    for (const p of strokes) {
       expect(p).toContain('stroke-linecap="round"');
       expect(p).toContain('stroke-linejoin="round"');
     }

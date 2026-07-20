@@ -9391,9 +9391,21 @@
        frame color, so there is no flat border peeking through the noisy
        ribbon's thin spots. A more generous radius than the shared .panel's
        6px, scoped to just this window, matches the reference's visibly
-       rounded frame; --perf-ornament-* below inherits it automatically. */
+       rounded frame; --perf-ornament-* below inherits it automatically.
+       The base .panel also hardcodes a literal `outline: 1px solid #000`
+       and a non-inset `0 2px 16px #000c` drop shadow: outlines ignore
+       border-color, so that thin black ring stayed visible right outside
+       the gilded frame no matter what the border said. The corner motif's
+       filigree linework (unlike a solid block) leaves real gaps, so both
+       read as a stray black border showing through/around the gold. Drop
+       the outline and the outer shadow layer here; the two inset layers
+       stay so the panel keeps its inward depth. */
     border-color: transparent;
-    border-radius: 14px;
+    border-radius: 22px;
+    outline: none;
+    box-shadow:
+      inset 0 0 24px #0006,
+      inset 0 1px 0 #ffffff14;
   }
   #options-menu.perf-wide::before {
     content: "";
@@ -9439,19 +9451,19 @@
       left,
       right;
     -webkit-mask-size:
-      30px 30px,
-      30px 30px,
-      30px 30px,
-      30px 30px,
+      70px 70px,
+      70px 70px,
+      70px 70px,
+      70px 70px,
       96px 12px,
       96px 12px,
       12px 96px,
       12px 96px;
     mask-size:
-      30px 30px,
-      30px 30px,
-      30px 30px,
-      30px 30px,
+      70px 70px,
+      70px 70px,
+      70px 70px,
+      70px 70px,
       96px 12px,
       96px 12px,
       12px 96px,
