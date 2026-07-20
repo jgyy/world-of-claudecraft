@@ -229,14 +229,21 @@ export class DungeonFinderMachine {
   // realm indefinitely.
   private matchMutationSeq = 0;
   // matchMutationSeq value the CURRENT cursor lap started walking against;
-  // reset (with matchLapAnchorsVisited) whenever a mutation invalidates the
-  // in-progress lap.
+  // reset (with matchLapVisitedAnchorIds) whenever a mutation invalidates the
+  // in-progress lap. A proposal forming MID-PASS also bumps matchMutationSeq
+  // (see createProposal), so runMatching() resyncs this the instant a match
+  // forms, not only at pass entry: otherwise the anchors-visited accounting
+  // below would be checked against a lap that started walking a backlog the
+  // pass itself has since mutated, and could wrongly declare it unmatchable.
   private matchLapSeq = -1;
-  // Anchors fully attempted (cursor advanced past them) since matchLapSeq
-  // was last reset. Once this reaches the queue length with no proposal
-  // formed, every anchor has had a turn against the CURRENT backlog: proven
-  // unmatchable until the next mutation.
-  private matchLapAnchorsVisited = 0;
+  // Anchor ids fully attempted (cursor advanced past them) since matchLapSeq
+  // was last reset, tracked as a Set rather than a counter: the `while
+  // (changed)` loop re-sorts the backlog whenever a match forms, and a unit
+  // can otherwise be attempted again after the resort, which would double
+  // count it against a plain increment. Once this reaches the queue length
+  // with no proposal formed, every anchor has had a turn against the CURRENT
+  // backlog: proven unmatchable until the next mutation.
+  private matchLapVisitedAnchorIds = new Set<number>();
   // matchMutationSeq value as of the last time a full lap proved the queue
   // unmatchable; matching goes idle (stops re-arming on truncation) while
   // this equals matchMutationSeq.
@@ -932,10 +939,10 @@ export class DungeonFinderMachine {
     let truncated = false;
     // A mutation invalidates any lap already in progress: restart the
     // anchors-visited count against the CURRENT backlog (see
-    // matchLapAnchorsVisited).
+    // matchLapVisitedAnchorIds).
     if (this.matchLapSeq !== this.matchMutationSeq) {
       this.matchLapSeq = this.matchMutationSeq;
-      this.matchLapAnchorsVisited = 0;
+      this.matchLapVisitedAnchorIds.clear();
     }
     let lastQueueLen = 0;
     while (changed && budgetBox.remaining > 0) {
@@ -946,8 +953,13 @@ export class DungeonFinderMachine {
       // all-dps prefix in front of a formable comp) would otherwise let the
       // oldest anchors alone exhaust the shared budget on every single tick,
       // starving every later anchor including the one that could actually
-      // form a group: rotating guarantees each anchor eventually gets a turn
-      // at bounded per-tick cost, still in FIFO order once traversal wraps.
+      // form a group: rotating guarantees each anchor eventually gets a TURN
+      // AS ANCHOR at bounded per-tick cost, still in FIFO order once
+      // traversal wraps. This only fixes which unit gets to anchor a search;
+      // tryAssemble() still builds its candidate pool from the UNROTATED
+      // FIFO `sorted` order before applying FINDER_MATCH_UNIT_WINDOW, so a
+      // late anchor can still only ever pair with the oldest compatible
+      // units in the window, not ones nearer its own join time.
       const sorted = [...this.queue].sort((a, b) => a.joinedAt - b.joinedAt || a.id - b.id);
       lastQueueLen = sorted.length;
       const cursorIndex =
@@ -973,14 +985,29 @@ export class DungeonFinderMachine {
           if (!match) continue;
           this.createProposal(activity, match.units, match.roles);
           changed = true;
+          // createProposal() just bumped matchMutationSeq: the lap we were
+          // walking started against a backlog this pass itself has now
+          // mutated. Resync immediately so the anchors-visited accounting
+          // below reflects the CURRENT (post-proposal) backlog rather than
+          // the stale one, whether or not this same iteration also runs the
+          // budget out (see matchLapSeq).
+          this.matchLapSeq = this.matchMutationSeq;
+          this.matchLapVisitedAnchorIds.clear();
           break;
         }
         if (changed || truncated) break;
         // Fully attempted this anchor within budget: resume after it next
         // pass so a later pass advances past it instead of retrying it first.
         this.matchCursorUnitId = anchor.id;
-        this.matchLapAnchorsVisited++;
+        this.matchLapVisitedAnchorIds.add(anchor.id);
       }
+      // A proposal forming on the very node that exhausted the shared budget
+      // must still count as truncation: the `for` loop exits via `changed`
+      // (not the budget checks above `truncated`), and the `while` guard
+      // (`budgetBox.remaining > 0`) would otherwise let this fall through to
+      // the "full uninterrupted pass" branch below even though the backlog
+      // was never actually walked to completion.
+      if (budgetBox.remaining <= 0) truncated = true;
       if (truncated) break;
     }
     if (truncated) {
@@ -989,7 +1016,7 @@ export class DungeonFinderMachine {
       // proven unmatchable, so stop re-arming matchDirty every tick until
       // the next queue mutation (see armMatching). This is what keeps an
       // unformable backlog from re-running a full matching pass forever.
-      if (this.matchLapAnchorsVisited >= lastQueueLen) {
+      if (this.matchLapVisitedAnchorIds.size >= lastQueueLen) {
         this.matchProvenIdleSeq = this.matchMutationSeq;
       }
       if (this.matchProvenIdleSeq !== this.matchMutationSeq) {
@@ -1001,7 +1028,7 @@ export class DungeonFinderMachine {
       // A full uninterrupted pass completed with nothing left to form:
       // proven idle for the current backlog too.
       this.matchCursorUnitId = null;
-      this.matchLapAnchorsVisited = 0;
+      this.matchLapVisitedAnchorIds.clear();
       this.matchLapSeq = this.matchMutationSeq;
       this.matchProvenIdleSeq = this.matchMutationSeq;
     }

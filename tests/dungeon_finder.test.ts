@@ -822,6 +822,82 @@ describe('automatic queue', () => {
     expect(proposal).not.toBeNull();
     expect(proposal?.role).toBe('tank');
   });
+
+  it('forms every matchable comp behind a large unmatchable prefix, not just the first', () => {
+    // Regression for a lap-accounting desync: createProposal() bumps
+    // matchMutationSeq MID-PASS (it mutates the backlog a truncated pass is
+    // still walking), and the lap-completeness accounting must resync to
+    // that at the moment it happens, not only at the next runMatching()
+    // entry. Before that resync, a lap that spans multiple proposals within
+    // one matching pass could accumulate anchors-visited credit against a
+    // backlog shape earlier proposals had already invalidated, and
+    // prematurely mark the (still partly formable) queue "proven idle": the
+    // finder would stop re-arming matchDirty and the remaining formable
+    // comps would starve until an unrelated queue mutation woke it again.
+    // Three tanks and three healers, separated from each other by enough
+    // dps that any dps/healer anchor's search window fills entirely with
+    // incompatible units (forcing the same budget-exhausting DFS the
+    // single-group case above exercises), must all eventually get seated,
+    // not just the first.
+    const sim = makeSim();
+    const healers = addPlayers(
+      sim,
+      Array.from({ length: 6 }, (_, i) => ({
+        cls: 'priest' as PlayerClass,
+        roles: ['healer'] as Role[],
+        level: 8,
+        name: `H${i}`,
+      })),
+    );
+    for (const pid of healers) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
+    const dpsBacklog = addPlayers(
+      sim,
+      Array.from({ length: 120 }, (_, i) => ({
+        cls: 'mage' as PlayerClass,
+        roles: ['dps'] as Role[],
+        level: 8,
+        name: `D${i}`,
+      })),
+    );
+    for (const pid of dpsBacklog) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
+    const tanks = addPlayers(
+      sim,
+      Array.from({ length: 6 }, (_, i) => ({
+        cls: 'warrior' as PlayerClass,
+        roles: ['tank'] as Role[],
+        level: 8,
+        name: `T${i}`,
+      })),
+    );
+    for (const pid of tanks) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
+
+    const finder = (sim as unknown as { dungeonFinder: { matchDirty: boolean } }).dungeonFinder;
+    const seated = new Set<number>();
+    let idleWithFormableContentTicks = 0;
+    for (let i = 0; i < 600 && seated.size < tanks.length; i++) {
+      tickAll(sim, 1);
+      for (const pid of tanks) {
+        if (sim.dungeonFinderInfoFor(pid)?.proposal) seated.add(pid);
+      }
+      // The queue still holds an unseated tank AND healer (a formable comp)
+      // whenever matching goes idle without every tank proposed yet: that is
+      // exactly the wrongly-proven-unmatchable state the resync fixes.
+      const unseatedTank = tanks.some(
+        (pid) => !seated.has(pid) && sim.dungeonFinderInfoFor(pid)?.queue,
+      );
+      const queuedHealer = healers.some((pid) => sim.dungeonFinderInfoFor(pid)?.queue);
+      if (!finder.matchDirty && unseatedTank && queuedHealer) idleWithFormableContentTicks++;
+    }
+    expect(seated.size).toBe(tanks.length);
+    for (const pid of tanks) {
+      expect(sim.dungeonFinderInfoFor(pid)?.proposal?.role).toBe('tank');
+    }
+    // A handful of idle ticks while runMatching() is bounded-resuming toward
+    // the next anchor is fine; a large run of them means matching went
+    // idle and starved a still-formable backlog until this test's bound
+    // happened to keep ticking anyway.
+    expect(idleWithFormableContentTicks).toBeLessThan(30);
+  });
 });
 
 // ---------------------------------------------------------------------------
