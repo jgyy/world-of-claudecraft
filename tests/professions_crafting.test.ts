@@ -138,7 +138,8 @@ describe('caster-stat (int/spi) crafting recipes', () => {
   it('crafts the common-tier tailoring caster piece from its reagents', () => {
     const sim = makeSim();
     const pid = sim.playerId;
-    const recipe = recipeById('recipe_eastbrook_ritual_vestments')!;
+    const recipe = recipeById('recipe_eastbrook_ritual_vestments');
+    if (!recipe) throw new Error('missing recipe_eastbrook_ritual_vestments');
     grantItem(sim, 'linen_scrap', 3, pid);
     grantItem(sim, 'spider_leg', 1, pid);
 
