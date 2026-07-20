@@ -888,6 +888,19 @@ async function cmdSkin() {
   printReport(job, { ok: true, texture: out, actions });
 }
 
+/** Tripo's texture task repaints the WHOLE model from the prompt with no
+ *  concept of "this quad is skin, that one is cloth": a theme like "teal
+ *  alchemist robe" bleeds the teal across the face/hands/hair too unless the
+ *  prompt says otherwise. Append a fixed constraint so every npc-reskin keeps
+ *  a natural KayKit skin/hair tone and only re-paints clothing/accessories. */
+function npcReskinPrompt(theme) {
+  return (
+    `${theme}, keep the character's face, skin, and hair in a natural human tone ` +
+    'exactly as on the base model, do not recolor or tint the skin or hair, only ' +
+    'repaint the clothing, armor, and accessories'
+  );
+}
+
 /** NPC RESKIN: give a distinct NPC its own unique look without a new rig.
  *  Reuses the SAME Tripo texture-task + UV-composite as `skin --tripo` (the
  *  model stays the shipped KayKit player body, so animation/silhouette are
@@ -925,10 +938,11 @@ async function cmdNpcReskin() {
         /* expired: re-texture below */
       }
     }
-    job.log(`tripo texture (${opt('prompt').slice(0, 80)})...`);
+    const prompt = npcReskinPrompt(opt('prompt'));
+    job.log(`tripo texture (${prompt.slice(0, 80)})...`);
     const { taskId, task } = await tripo.textureModel({
       input: classGlb,
-      prompt: opt('prompt'),
+      prompt,
       textureQuality: opt('quality') ?? 'detailed',
       onProgress: (p, s) => job.log(`  tripo texture ${s} ${p}%`),
       onTaskCreated: (id) => job.noteTask('texture', id),
