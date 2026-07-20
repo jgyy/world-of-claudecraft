@@ -61,10 +61,17 @@ function isFeePoolRewardItem(d: ItemDef): boolean {
 // known, straight off the listing/meta) and class (best effort - only knowable if
 // the trader happened to still be online at their OWN trade) at participation time
 // removes both failure modes.
+// `contributed` is the sum of the Merchant's cut across every trade this participant
+// was a party to since the last draw (buyer and seller both get the full cut of their
+// own trade credited, not half). It weights the winner draw so the lottery tracks what
+// you put in, not just how many distinct trades you touched: two alts splitting a
+// single 20-copper listing (1 copper of fees) no longer buy the same odds as a trader
+// who fed the pool 500 copper across a real session.
 interface FeePoolParticipant {
   key: string;
   name: string;
   cls: PlayerMeta['cls'] | undefined;
+  contributed: number;
 }
 
 export interface MarketListing {
@@ -190,9 +197,16 @@ export class Market {
     key: string,
     name: string,
     cls: PlayerMeta['cls'] | undefined,
+    cut: number,
   ): void {
     if (!key) return;
-    this.feePoolParticipants.set(key, { key, name, cls });
+    const existing = this.feePoolParticipants.get(key);
+    this.feePoolParticipants.set(key, {
+      key,
+      name,
+      cls: cls ?? existing?.cls,
+      contributed: (existing?.contributed ?? 0) + cut,
+    });
   }
 
   private collectionFor(key: string): MarketCollection {
@@ -420,8 +434,9 @@ export class Market {
           listing.sellerKey,
           listing.sellerName,
           this.metaByMarketSellerKey(listing.sellerKey)?.cls,
+          cut,
         );
-        this.addFeePoolParticipant(this.marketSellerKey(meta), meta.name, meta.cls);
+        this.addFeePoolParticipant(this.marketSellerKey(meta), meta.name, meta.cls, cut);
       }
       this.marketListings.splice(idx, 1);
       const sellerMeta = this.metaByMarketSellerKey(listing.sellerKey);
@@ -562,7 +577,7 @@ export class Market {
     }
     const spent = this.feePoolCopper;
     const participants = [...this.feePoolParticipants.values()];
-    const winner = this.ctx.rng.pick(participants);
+    const winner = this.pickFeePoolWinner(participants);
     const rewardId = this.pickFeePoolReward(winner.cls, spent);
     this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
     if (!rewardId) return;
@@ -580,40 +595,48 @@ export class Market {
     }
   }
 
+  // Weighted by what each participant actually fed the pool (see FeePoolParticipant),
+  // not a flat one-entry-per-trader draw: a single rng.next() picks a point in
+  // [0, totalContributed) and walks the list until it lands, same one draw per
+  // updateFeePool call as the old rng.pick(participants), so parity draw-order is
+  // unaffected. Every entry has contributed > 0 (only trades with cut > 0 ever call
+  // addFeePoolParticipant), so the loop always lands before falling through to the
+  // final element (a floating-point-rounding safety net, not a real fallback path).
+  private pickFeePoolWinner(participants: FeePoolParticipant[]): FeePoolParticipant {
+    const total = participants.reduce((sum, p) => sum + p.contributed, 0);
+    let roll = this.ctx.rng.next() * total;
+    for (const p of participants) {
+      if (roll < p.contributed) return p;
+      roll -= p.contributed;
+    }
+    return participants[participants.length - 1];
+  }
+
   // Reward pool: epic/legendary gear the pool can actually afford (sellValue <= the
   // banked fees), preferring pieces the winner can equip (no requiredClass, or one
-  // that lists their class) so the giveaway is never wasted on an off-class drop;
-  // falls back to any classless affordable piece if the winner's class has none
-  // (still exciting, just not equippable by them specifically - tradeable on the
-  // World Market like any other item). Among what's affordable, the roll is weighted
-  // toward the pricier half so a well-fed pool tends to buy something worth the wait
-  // instead of always defaulting to the cheapest eligible item. The classless
-  // fallback only ever fires when the classless subset itself was unaffordable for
-  // the pool (a strict subset of forClass), since updateFeePool now resolves the
-  // reward before draining the pool: with a real winner and a matured pool, both
-  // branches usually find something, but the fallback still guards the case where
-  // forClass had eligible items priced above what the pool can afford while a
-  // cheaper classless item exists.
+  // that lists their class) so the giveaway is never wasted on an off-class drop.
+  // `forClass` already contains the FULL classless subset (no requiredClass at all),
+  // so there is no separate classless fallback here: a second lookup over that same
+  // subset can never find anything `weightedPick(forClass)` did not already see (a
+  // prior revision carried one and it was provably dead code, see PR review). Among
+  // what's affordable, the roll is weighted toward the pricier half so a well-fed
+  // pool tends to buy something worth the wait instead of always defaulting to the
+  // cheapest eligible item. Returns null (pool carries into the next draw, see
+  // updateFeePool) when nothing in ITEMS eligible for this winner's class is
+  // affordable yet, e.g. an offline seller whose class couldn't be resolved and the
+  // pool sits above the global min-draw threshold but below the classless-eligible
+  // minimum price.
   private pickFeePoolReward(cls: PlayerMeta['cls'] | undefined, poolCopper: number): string | null {
-    const affordable = (pool: ItemDef[]): ItemDef[] =>
-      pool.filter((d) => d.sellValue <= poolCopper);
-    const weightedPick = (pool: ItemDef[]): ItemDef | null => {
-      const items = affordable(pool);
-      if (items.length === 0) return null;
-      const maxValue = Math.max(...items.map((d) => d.sellValue));
-      const topTier = items.filter((d) => d.sellValue >= maxValue / 2);
-      return this.ctx.rng.pick(topTier.length > 0 ? topTier : items);
-    };
     const forClass = Object.values(ITEMS).filter(
-      (d) => isFeePoolRewardItem(d) && (!d.requiredClass || (cls && d.requiredClass.includes(cls))),
+      (d) =>
+        isFeePoolRewardItem(d) &&
+        (!d.requiredClass || (cls && d.requiredClass.includes(cls))) &&
+        d.sellValue <= poolCopper,
     );
-    const classPick = weightedPick(forClass);
-    if (classPick) return classPick.id;
-    const classless = Object.values(ITEMS).filter(
-      (d) => isFeePoolRewardItem(d) && !d.requiredClass,
-    );
-    const classlessPick = weightedPick(classless);
-    return classlessPick ? classlessPick.id : null;
+    if (forClass.length === 0) return null;
+    const maxValue = Math.max(...forClass.map((d) => d.sellValue));
+    const topTier = forClass.filter((d) => d.sellValue >= maxValue / 2);
+    return this.ctx.rng.pick(topTier.length > 0 ? topTier : forClass).id;
   }
 
   marketInfoFor(pid: number): import('../world_api').MarketInfo | null {

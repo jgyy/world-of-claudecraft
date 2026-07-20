@@ -842,6 +842,54 @@ describe('the World Market: the fee-pool giveaway', () => {
     expect(sim2.market.feePoolNextDrawAt).toBe(sim2.time + save.feePoolDrawSecondsLeft!);
   });
 
+  it('weights the winner draw by copper contributed, not by a flat one-entry-per-trader count', () => {
+    // A whale who fed the pool 9900 of its 10000 copper must win far more often than
+    // a trader who fed it 100, even though both are single entries in the
+    // participant map (the exact bug the review flagged: two alts splitting a tiny
+    // listing used to buy the same odds as a real trader).
+    const sim = makeWorld();
+    const pickWinner = (
+      sim.market as unknown as {
+        pickFeePoolWinner: (
+          p: { key: string; name: string; cls: undefined; contributed: number }[],
+        ) => { key: string };
+      }
+    ).pickFeePoolWinner.bind(sim.market);
+    const whale = { key: 'whale', name: 'Whale', cls: undefined, contributed: 9900 };
+    const minnow = { key: 'minnow', name: 'Minnow', cls: undefined, contributed: 100 };
+    let whaleWins = 0;
+    for (let i = 0; i < 200; i++) {
+      if (pickWinner([whale, minnow]).key === 'whale') whaleWins++;
+    }
+    expect(whaleWins).toBeGreaterThan(150); // expected ~99%, well clear of a 50/50 flat draw
+  });
+
+  it('credits the FULL cut of each trade to both parties, accumulating across repeat trades', () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.players.get(buyer)!.copper = 10_000;
+    for (let i = 0; i < 3; i++) {
+      sim.addItem('wolf_fang', 1, seller);
+      sim.marketList('wolf_fang', 1, 200, seller);
+      sim.marketBuy(
+        sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
+        buyer,
+      );
+    }
+    // 3 trades x 10 copper cut each = 30 copper contributed by EACH party (not split).
+    const participants = (
+      sim.market as unknown as {
+        feePoolParticipants: Map<string, { contributed: number }>;
+      }
+    ).feePoolParticipants;
+    expect(participants.get(marketSellerKey(seller))?.contributed).toBe(30);
+    expect(participants.get(marketSellerKey(buyer))?.contributed).toBe(30);
+    expect(sim.market.feePoolCopper).toBe(30);
+  });
+
   it('loads a pre-feature save with no feePool fields as an empty pool on a fresh countdown', () => {
     const sim = makeWorld();
     const save = {
