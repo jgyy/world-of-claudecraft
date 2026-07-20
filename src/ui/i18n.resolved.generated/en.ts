@@ -317,7 +317,11 @@ export const en: EnTranslations = {
     "death": {
       "resurrectAtCorpse": "Resurrect at Corpse",
       "resurrectAtHealer": "The Pale Keeper (Keeper's Toll)",
-      "spiritHealerAlive": "The Pale Keeper watches over the dead. You are still among the living."
+      "spiritHealerAlive": "The Pale Keeper watches over the dead. You are still among the living.",
+      "healerConfirmTitle": "Accept the Keeper's Toll?",
+      "healerConfirmBody": "The Pale Keeper will revive you here, but the Keeper's Toll reduces all of your attributes by 75%, for up to 10 minutes at higher levels. Walking your spirit back to your corpse revives you with no penalty.",
+      "healerConfirmAccept": "Revive Me",
+      "healerConfirmCancel": "Cancel"
     },
     "fct": {
       "absorbed": "Absorbed {amount}",
@@ -1040,6 +1044,7 @@ export const en: EnTranslations = {
       "itemLevelLine": "Item Level {level}",
       "itemScoreLine": "Score {score}",
       "showSecondaryActionBar": "Show Secondary Action Bar",
+      "showThirdActionBar": "Show Third Action Bar",
       "showTargetOfTarget": "Show Target of Target",
       "showAttackButton": "Show Attack Button",
       "showDailyRewardsChest": "Show Daily Rewards Chest",
@@ -1469,7 +1474,8 @@ export const en: EnTranslations = {
       "watchTwitch": "Watch on Twitch",
       "watchX": "View on X",
       "watchKick": "Watch on Kick",
-      "watchYouTube": "Watch on YouTube"
+      "watchYouTube": "Watch on YouTube",
+      "streamerBadgeTitle": "Verified streamer"
     },
     "lootSettings": {
       "title": "Loot Settings",
@@ -2201,7 +2207,15 @@ export const en: EnTranslations = {
         "nearTier": "{craft} is {points} skill from its next tier.",
         "dormantKnowledge": "{craft} knowledge is retained but dormant until its pair or hobby is active."
       },
-      "notAtHub": "You must be at the crafting hub, at the required level, to craft that.",
+      "stationRequired": "You must be at the {station} to craft that.",
+      "stationName": {
+        "forge": "Forge",
+        "kitchens": "Kitchens",
+        "apothecary": "Apothecary",
+        "tannery": "Tannery",
+        "loom": "Loom",
+        "toolworks": "Toolworks"
+      },
       "throttled": "You are crafting too quickly. Wait a moment and try again.",
       "recipeNotLearned": "You have not learned that recipe yet.",
       "skillReqLine": "Requires {craft} {skill}",
@@ -2209,13 +2223,32 @@ export const en: EnTranslations = {
       "difficultyReduced": "Reduced skill gain",
       "difficultyNone": "No skill gain",
       "stationBadge": "Station",
-      "stationOutOfRange": "Move to the crafting hub station to craft this.",
+      "stationOutOfRangeNamed": "Move to the {station} to craft this.",
       "masterworkToast": "Masterwork! {name}",
       "masterworkZoneLine": "{crafter} crafted a masterwork {name}!",
       "tierUpToast": "{craft} advanced to tier {tier}!",
       "makersMark": "Crafted by {name}",
       "masterworkSeal": "Masterwork",
       "enchantedLine": "Enchanted"
+    },
+    "training": {
+      "title": "Training: {name}",
+      "close": "Close training",
+      "empty": "This master has nothing to teach.",
+      "free": "Free",
+      "stateKnown": "Known",
+      "stateTeachable": "Available",
+      "stateLocked": "Locked",
+      "requirement": "Taught at {craft} {skill}",
+      "trainAria": "Learn {name} for {fee}",
+      "dialogOption": "Training",
+      "dialogOptionAria": "Browse training from {name}",
+      "learned": "Recipe learned: {recipe}",
+      "tierUnmet": "You need {craft} {skill} to learn that recipe.",
+      "cannotAfford": "You cannot afford that training.",
+      "notTaughtHere": "That recipe is not taught here.",
+      "alreadyKnown": "You already know that recipe.",
+      "outOfRange": "You must be at the station to train."
     },
     "finder": {
       "title": "Dungeon Finder",
@@ -2993,9 +3026,9 @@ export const en: EnTranslations = {
       "ice_lance": "An instant shard for spending frost procs, it hits far harder on a frozen target.",
       "flurry": "Three quick bolts that chill the target so your next frost hits land as if it were frozen.",
       "fingers_of_frost": "Your frost bolts sometimes empower an Ice Lance to strike as if the target were frozen.",
-      "brain_freeze": "Your frost bolts sometimes make the next Flurry instant and harder-hitting.",
+      "brain_freeze": "Your frost bolts sometimes make the next Flurry instant and skip its cooldown.",
       "shatter": "Your spells crit far more often against frozen targets.",
-      "frozen_orb": "Rolls a slow orb through the pack that chills everything and feeds your frost procs.",
+      "frozen_orb": "Rolls a slow orb through the pack that chills enemies and banks Icicles.",
       "blizzard": "Blankets an area in ice to wear down and slow a whole pack.",
       "blink": "Teleports you a short distance forward, breaking roots on the way out.",
       "conjure_water": "Conjures drinks that restore mana, so you can refill between pulls.",
@@ -4586,7 +4619,11 @@ export const en: EnTranslations = {
   },
   "heroicShop": {
     "balance": "Heroic Marks: {count}",
-    "buyAria": "Buy {item} for {marks} Heroic Marks"
+    "buyAria": "Buy {item} for {marks} Heroic Marks",
+    "buyConfirmTitle": "Confirm Purchase",
+    "buyConfirmBody": "Buy {item} for {marks} Heroic Marks? Marks purchases cannot be refunded.",
+    "buyConfirmAccept": "Buy",
+    "buyConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Card Duel",
@@ -4639,7 +4676,11 @@ export const en: EnTranslations = {
       "buyAria": "Buy {item} for {marks} Delve Marks",
       "reqHeroic": "Requires a Heroic clear",
       "reqClears": "Requires {count} clears",
-      "empty": "Nothing in stock."
+      "empty": "Nothing in stock.",
+      "buyConfirmTitle": "Confirm Purchase",
+      "buyConfirmBody": "Buy {item} for {marks} Delve Marks? Marks purchases cannot be refunded.",
+      "buyConfirmAccept": "Buy",
+      "buyConfirmCancel": "Cancel"
     },
     "tracker": {
       "title": "Delve",
@@ -5028,6 +5069,11 @@ export const en: EnTranslations = {
     "discordCommunity": "Join the World of ClaudeCraft Discord community",
     "donateProject": "Donate to support World of ClaudeCraft"
   },
+  "entryGuard": {
+    "title": "Graphics lowered",
+    "body": "The game closed unexpectedly while entering the world, so graphics are now set to {preset}. You can change this in the graphics selector below or in the in-game Options.",
+    "dismiss": "Dismiss"
+  },
   "loading": {
     "world": "Loading world...",
     "worldProgress": "Loading world... {done}/{total}",
@@ -5037,7 +5083,9 @@ export const en: EnTranslations = {
     "rendererFailed": "Could not start the renderer: try reloading. {error}",
     "enterTimeout": "Could not enter world. The connection timed out. Is the game server running?",
     "connectionLost": "Connection to the server was lost.",
-    "reconnecting": "Connection lost. Reconnecting...",
+    "reconnectingAttempt": "Connection lost. Reconnecting... (attempt {attempt}/{maxAttempts}, retrying in {seconds}s)",
+    "reconnectingNow": "Connection lost. Reconnecting now... (attempt {attempt}/{maxAttempts})",
+    "slowConnection": "This is taking longer than usual. Check your internet connection.",
     "connectionRejected": "The server closed the connection.",
     "realmFull": "This world is full right now. Please try again in a few minutes.",
     "tooManyConnections": "Too many connections to this world are coming from your network. Please close extra game windows or try again in a few minutes.",
@@ -6341,7 +6389,7 @@ export const en: EnTranslations = {
       },
       "blazing_barrier": {
         "name": "Blazing Barrier",
-        "description": "Wreathe yourself in flame, absorbing 130 damage for 60 sec. (Fire)"
+        "description": "Wreathe yourself in flame, absorbing {damage} damage for 60 sec. (Fire)"
       },
       "cold_snap": {
         "name": "Winter's Recall",
@@ -6393,11 +6441,11 @@ export const en: EnTranslations = {
       },
       "flurry": {
         "name": "Winterlash",
-        "description": "Loose three icy bolts for {damage} Frost damage each and plant Winter's Chill on the target: its next 2 incoming compatible spells treat it as frozen. Brain Freeze makes Winterlash instant, 30% harder, and skips its cooldown. (Frost)"
+        "description": "Loose three icy bolts for {damage} Frost damage each and plant Winter's Chill on the target: its next 2 incoming compatible spells treat it as frozen. Brain Freeze makes Winterlash instant and skips its cooldown. (Frost)"
       },
       "frozen_orb": {
         "name": "Frozen Orb",
-        "description": "Release an orb of swirling frost that drifts forward for 8 sec, dealing {damage} Frost damage each second to nearby enemies and slowing them by 30%. Its strikes generate Fingers of Frost. (Frost)"
+        "description": "Release an orb of swirling frost that drifts forward for 8 sec, dealing {damage} Frost damage each second to nearby enemies and slowing them by 30%. Each striking pulse generates one Icicle. (Frost)"
       },
       "blizzard": {
         "name": "Blizzard",
@@ -6421,11 +6469,11 @@ export const en: EnTranslations = {
       },
       "brain_freeze": {
         "name": "Brain Freeze",
-        "description": "Rimelance has a 20% chance to make your next Winterlash instant, 30% harder, and free of its cooldown. (Frost)"
+        "description": "Rimelance has a 20% chance to make your next Winterlash instant and free of its cooldown. (Frost)"
       },
       "shatter": {
         "name": "Brittle Ruin",
-        "description": "Your spells gain 50% critical strike chance against frozen targets, and those critical strikes deal 20% more damage. Fingers of Frost and Winter's Chill count as frozen. (Frost)"
+        "description": "Your spells gain 50% critical strike chance against frozen targets. Fingers of Frost and Winter's Chill count as frozen. (Frost)"
       },
       "conjure_water": {
         "name": "Waterbind",
@@ -6449,7 +6497,7 @@ export const en: EnTranslations = {
       },
       "frost_nova": {
         "name": "Icebind",
-        "description": "Freezes all nearby enemies in place for up to 8 sec, dealing {damage} Frost damage."
+        "description": "Freezes all nearby enemies in place for up to 8 sec, dealing {damage} Frost damage. The root breaks after cumulative damage equal to 15% of the target's maximum health, with a minimum of 20 and a maximum of 60 damage."
       },
       "arcane_explosion": {
         "name": "Aetherburst",
@@ -8208,6 +8256,210 @@ export const en: EnTranslations = {
       "silverleaf_herb": {
         "name": "Silverleaf Herb"
       },
+      "rough_hide": {
+        "name": "Rough Hide"
+      },
+      "spider_silk": {
+        "name": "Spider Silk"
+      },
+      "venom_gland": {
+        "name": "Venom Gland"
+      },
+      "game_meat": {
+        "name": "Game Meat"
+      },
+      "homespun_cloth": {
+        "name": "Homespun Cloth"
+      },
+      "pristine_hide": {
+        "name": "Pristine Hide"
+      },
+      "pristine_silk": {
+        "name": "Pristine Silk"
+      },
+      "pristine_venom_gland": {
+        "name": "Pristine Venom Gland"
+      },
+      "prime_cut": {
+        "name": "Prime Cut"
+      },
+      "smithing_flux": {
+        "name": "Smithing Flux"
+      },
+      "spool_of_thread": {
+        "name": "Spool of Thread"
+      },
+      "tanning_agent": {
+        "name": "Tanning Agent"
+      },
+      "cooking_salt": {
+        "name": "Cooking Salt"
+      },
+      "glass_vial": {
+        "name": "Glass Vial"
+      },
+      "copper_bearded_axe": {
+        "name": "Copper Bearded Axe"
+      },
+      "copper_flanged_mace": {
+        "name": "Copper Flanged Mace"
+      },
+      "ironbark_boar_spear": {
+        "name": "Ironbark Boar Spear"
+      },
+      "ironedge_longsword": {
+        "name": "Ironedge Longsword"
+      },
+      "ironshod_maul": {
+        "name": "Ironshod Maul"
+      },
+      "whetted_iron_dirk": {
+        "name": "Whetted Iron Dirk"
+      },
+      "thorium_warblade": {
+        "name": "Thorium Warblade"
+      },
+      "arcanite_war_axe": {
+        "name": "Arcanite War Axe"
+      },
+      "elderwood_battle_staff": {
+        "name": "Elderwood Battle Staff"
+      },
+      "riveted_copper_girdle": {
+        "name": "Riveted Copper Girdle"
+      },
+      "coppermail_sabatons": {
+        "name": "Coppermail Sabatons"
+      },
+      "coppermail_gauntlets": {
+        "name": "Coppermail Gauntlets"
+      },
+      "ironlink_hauberk": {
+        "name": "Ironlink Hauberk"
+      },
+      "ironlink_legguards": {
+        "name": "Ironlink Legguards"
+      },
+      "ironlink_spaulders": {
+        "name": "Ironlink Spaulders"
+      },
+      "thoriumscale_greathelm": {
+        "name": "Thoriumscale Greathelm"
+      },
+      "thoriumscale_cuirass": {
+        "name": "Thoriumscale Cuirass"
+      },
+      "thoriumscale_leggings": {
+        "name": "Thoriumscale Leggings"
+      },
+      "homespun_hood": {
+        "name": "Homespun Hood"
+      },
+      "homespun_mitts": {
+        "name": "Homespun Mitts"
+      },
+      "silverthread_slippers": {
+        "name": "Silverthread Slippers"
+      },
+      "goldweave_robe": {
+        "name": "Goldweave Robe"
+      },
+      "goldweave_leggings": {
+        "name": "Goldweave Leggings"
+      },
+      "silkspun_satchel": {
+        "name": "Silkspun Satchel"
+      },
+      "silkbinders_raiment": {
+        "name": "Silkbinder's Raiment"
+      },
+      "sunweave_mantle": {
+        "name": "Sunweave Mantle"
+      },
+      "sunweave_treads": {
+        "name": "Sunweave Treads"
+      },
+      "fenbridge_hide_leggings": {
+        "name": "Fenbridge Hide Leggings"
+      },
+      "fenbridge_hide_boots": {
+        "name": "Fenbridge Hide Boots"
+      },
+      "fenbridge_hide_belt": {
+        "name": "Fenbridge Hide Belt"
+      },
+      "marshstalker_jerkin": {
+        "name": "Marshstalker Jerkin"
+      },
+      "marshstalker_hood": {
+        "name": "Marshstalker Hood"
+      },
+      "marshstalker_spaulders": {
+        "name": "Marshstalker Spaulders"
+      },
+      "mirewarden_jerkin": {
+        "name": "Mirewarden Jerkin"
+      },
+      "mirewarden_leggings": {
+        "name": "Mirewarden Leggings"
+      },
+      "mirewarden_treads": {
+        "name": "Mirewarden Treads"
+      },
+      "pan_seared_perch": {
+        "name": "Pan-Seared River Perch"
+      },
+      "hunters_game_skewer": {
+        "name": "Hunter's Game Skewer"
+      },
+      "herbed_marsh_pike": {
+        "name": "Herbed Marsh Pike"
+      },
+      "ashwood_smoked_eel": {
+        "name": "Ashwood Smoked Eel"
+      },
+      "goldleaf_game_stew": {
+        "name": "Goldleaf Game Stew"
+      },
+      "frostgill_chowder": {
+        "name": "Frostgill Chowder"
+      },
+      "silvered_carp_supper": {
+        "name": "Silvered Carp Supper"
+      },
+      "anglers_feast_platter": {
+        "name": "Angler's Feast Platter"
+      },
+      "marlows_grand_roast": {
+        "name": "Marlow's Grand Roast"
+      },
+      "silverleaf_healing_draught": {
+        "name": "Silverleaf Healing Draught"
+      },
+      "silverleaf_mana_draught": {
+        "name": "Silverleaf Mana Draught"
+      },
+      "elixir_of_the_boar": {
+        "name": "Elixir of the Boar"
+      },
+      "goldleaf_healing_draught": {
+        "name": "Goldleaf Healing Draught"
+      },
+      "goldleaf_mana_draught": {
+        "name": "Goldleaf Mana Draught"
+      },
+      "venomfire_elixir": {
+        "name": "Venomfire Elixir"
+      },
+      "sunpetal_healing_draught": {
+        "name": "Sunpetal Healing Draught"
+      },
+      "sunpetal_mana_draught": {
+        "name": "Sunpetal Mana Draught"
+      },
+      "elixir_of_the_serpent": {
+        "name": "Elixir of the Serpent"
+      },
       "conjured_water4": {
         "name": "Conjured Springwater"
       },
@@ -9465,6 +9717,36 @@ export const en: EnTranslations = {
         "title": "The Peaks Chronicle",
         "greeting": "The mountain forgets nothing, {playerName}, and neither do I. Let us see what you have done."
       },
+      "forgemistress_darva": {
+        "name": "Forgemistress Darva",
+        "title": "Master of the Forge",
+        "greeting": "The forge answers to me, {className}. Bring good ore and it will answer to you too."
+      },
+      "cook_marlow": {
+        "name": "Cook Marlow",
+        "title": "Master of the Kitchens",
+        "greeting": "Nothing leaves my kitchens half-cooked, {className}. Sit, eat, then get back out there."
+      },
+      "weaver_ottilie": {
+        "name": "Weaver Ottilie",
+        "title": "Master of the Loom",
+        "greeting": "Mind the threads, {className}. A steady hand at the loom beats a strong one."
+      },
+      "tinker_gizzel": {
+        "name": "Tinker Gizzel",
+        "title": "Master of the Toolworks",
+        "greeting": "Springs, sprockets, and sharp edges, {className}: the toolworks has whatever your hands lack."
+      },
+      "tanner_hesk": {
+        "name": "Tanner Hesk",
+        "title": "Master of the Tannery",
+        "greeting": "A hide is only as good as its tanning, {className}. The vats are ready when you are."
+      },
+      "alchemist_verane": {
+        "name": "Alchemist Verane",
+        "title": "Master of the Apothecary",
+        "greeting": "Measure twice and pour once, {className}. The apothecary has no patience for spilled reagents."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Tidewatcher",
@@ -10534,6 +10816,56 @@ export const en: EnTranslations = {
         "sender": "The Heroic Quartermaster",
         "subject": "Your Heroic Marks",
         "body": "Your warband cleared the heroic trial while you fought from the back, or from the dirt. Your lockout was struck all the same, so your share of Heroic Marks flies to you here rather than being lost. Spend them well.\n\n- The Heroic Quartermaster"
+      },
+      "guild_trend_engineering_alchemy": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Engineering and Alchemy",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Engineering and Alchemy: charges measured and reagents weighed, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Those who bind this pair earn the name of Bombardier in time. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
+      },
+      "guild_trend_alchemy_cooking": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Alchemy and Cooking",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Alchemy and Cooking: draughts simmered and dishes seasoned, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Those who bind this pair earn the name of Apothecary in time. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
+      },
+      "guild_trend_cooking_leatherworking": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Cooking and Leatherworking",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Cooking and Leatherworking: meals plated and hides cured, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
+      },
+      "guild_trend_leatherworking_tailoring": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Leatherworking and Tailoring",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Leatherworking and Tailoring: leather cut and cloth hemmed, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Those who bind this pair earn the name of Outfitter in time. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
+      },
+      "guild_trend_tailoring_inscription": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Tailoring and Inscription",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Tailoring and Inscription: seams stitched and glyphs inked, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
+      },
+      "guild_trend_inscription_enchanting": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Inscription and Enchanting",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Inscription and Enchanting: scrolls lettered and charms woven, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
+      },
+      "guild_trend_enchanting_jewelcrafting": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Enchanting and Jewelcrafting",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Enchanting and Jewelcrafting: charms bound and stones polished, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
+      },
+      "guild_trend_jewelcrafting_weaponcrafting": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Jewelcrafting and Weaponcrafting",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Jewelcrafting and Weaponcrafting: gems seated and edges ground, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
+      },
+      "guild_trend_weaponcrafting_armorcrafting": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Weaponcrafting and Armorcrafting",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Weaponcrafting and Armorcrafting: blades tempered and plates fitted, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Those who bind this pair earn the name of Smith in time. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
+      },
+      "guild_trend_armorcrafting_engineering": {
+        "sender": "The Crafting Guild",
+        "subject": "Your work in Armorcrafting and Engineering",
+        "body": "Artisan,\n\nWord reaches the Guild of your work in Armorcrafting and Engineering: plates riveted and gears trued, the two crafts feeding one another. Neighboring crafts worked together mark a hand ready for attunement. Seek out Smith Haldren, the armorer of Eastbrook: he speaks for the masters for now. Prove your craft to him with work of your own hands, and he will see your two majors attuned.\n\nIn good standing,\nThe Crafting Guild"
       }
     },
     "itemSets": {
