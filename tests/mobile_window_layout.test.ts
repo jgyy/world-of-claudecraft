@@ -65,6 +65,19 @@ describe('mobile window layout CSS', () => {
     expect(landscapeBlock).toContain('min-height: 132px;');
   });
 
+  it('defeats the desktop stretch on portrait mobile so the 172px floor actually controls the panel height', () => {
+    // components.css sets #char-window .paperdoll { align-items: stretch } so the desktop
+    // landscape window's 3D preview panel can take the full paperdoll row height. On a
+    // portrait phone that stretch would size the panel to match the taller equip-slot
+    // column instead of the 172px floor above, silently reintroducing the regression the
+    // previous test only pins the (inert, under stretch) min-height for. flex-start here
+    // defeats stretch so min-height is what actually sizes the row on portrait.
+    const paperdollStart = mobileCss.indexOf('body.mobile-touch #char-window .paperdoll {');
+    expect(paperdollStart).toBeGreaterThan(0);
+    const paperdollBlock = mobileCss.slice(paperdollStart, mobileCss.indexOf('}', paperdollStart));
+    expect(paperdollBlock).toContain('align-items: flex-start;');
+  });
+
   it('keeps the mobile char-stats overflow guard reaching nested .cp-stats blocks (talent summary, progression, gathering), not just the top-level info-grid child', () => {
     // Regression guard: an earlier narrowing pass changed this rule's selector to
     // `#char-window > .char-info-grid > .char-stats`, which only matches the top-level

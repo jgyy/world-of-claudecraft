@@ -1046,6 +1046,12 @@
   .paperdoll {
     display: flex;
     gap: 10px;
+  }
+  /* Stretch only inside the character window's own paperdoll: the equip
+     columns have no background there so this is invisible until the 3D
+     preview panel wants the full row height. Scoped to #char-window so the
+     shared .paperdoll base class stays untouched for the Inspect window. */
+  #char-window .paperdoll {
     align-items: stretch;
   }
   /* Groups .char-stats plus every .char-progression block (talent summary,
