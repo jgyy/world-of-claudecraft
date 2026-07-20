@@ -220,8 +220,13 @@ export function cornerOrnamentMaskImage(): string {
 
 // base.css's .panel::after mask-size (96px 10px / transposed) must equal
 // these; a per-component override (e.g. .party-frame::after) may render the
-// SAME tile smaller via mask-size as long as it keeps this 96:10 aspect
-// ratio, or the wobble distorts instead of just rescaling.
+// SAME tile at a different footprint via mask-size. `mask-size` scales each
+// axis independently, so a non-96:10 override does not distort the artwork,
+// it simply stretches or compresses the wobble period along that axis (a
+// shorter length reads as a tighter, quicker ripple, a thinner thickness as
+// a finer line); a component with a short edge deliberately picks a smaller
+// footprint for exactly that reason. There is no aspect-ratio requirement to
+// preserve here.
 const EDGE_TILE_LENGTH = 96;
 const EDGE_TILE_THICKNESS = 10;
 const EDGE_BASE_WIDTH = 1.5;

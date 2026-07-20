@@ -32,6 +32,25 @@ describe('tokens.css - :root seeds (full-Ultra defaults) + glass low drop', () =
     expect(webkitIdx).toBeGreaterThan(-1);
     expect(stdIdx).toBeGreaterThan(webkitIdx);
   });
+
+  it('resets every --ornament-* custom property to its no-op pre-boot value at the low tier', () => {
+    const lowIdx = tokensCss.indexOf(':root[data-fx-level="low"] {');
+    expect(lowIdx).toBeGreaterThan(-1);
+    const lowBlock = tokensCss.slice(lowIdx);
+    for (const [name, value] of [
+      ['--ornament-corner', 'linear-gradient(transparent, transparent);'],
+      ['--ornament-ring-portrait', 'linear-gradient(transparent, transparent);'],
+      ['--ornament-ring-minimap', 'linear-gradient(transparent, transparent);'],
+      ['--ornament-ring-micro', 'linear-gradient(transparent, transparent);'],
+      ['--ornament-edge-h', 'linear-gradient(transparent, transparent);'],
+      ['--ornament-edge-v', 'linear-gradient(transparent, transparent);'],
+      ['--ornament-gilt', 'var(--border);'],
+      ['--ornament-grain', 'linear-gradient(transparent, transparent);'],
+      ['--ornament-dust', 'linear-gradient(transparent, transparent);'],
+    ]) {
+      expect(lowBlock).toContain(`${name}: ${value}`);
+    }
+  });
 });
 
 describe('hud.css - glow scales with --fx-shadow (0 at low), structural shadows literal', () => {

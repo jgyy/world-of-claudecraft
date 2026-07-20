@@ -556,10 +556,11 @@
      opaque backgrounds; it is still pointer-events:none and only a few px
      wide, so it never actually intercepts a click meant for that content.
      The 96px/10px sizes below must equal EDGE_TILE_LENGTH/EDGE_TILE_THICKNESS
-     in ornament_svg.ts (a mismatch stretches the tile instead of tiling it
-     at its authored proportions); a component with a shorter dimension than
-     the 10px thickness or that needs finer texture overrides mask-size at
-     the SAME aspect ratio, see .party-frame::after below. */
+     in ornament_svg.ts at this footprint (a mismatch here stretches the tile
+     instead of tiling it at its authored proportions); a component with a
+     shorter edge or that needs finer texture overrides mask-size at its own
+     footprint (each axis scales independently, so the override need not
+     keep this same 96:10 ratio, see .party-frame::after below). */
   .panel::after {
     content: "";
     position: absolute;

@@ -246,4 +246,26 @@
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
   }
+
+  /* Structural ornament is purely cosmetic (a mask-image finish, never
+     actionable information a player reacts to), so the low effect tier
+     drops it the same way it drops glass above: resetting every
+     --ornament-* custom property back to its pre-boot no-op value (see the
+     defaults a few lines up) composites nothing extra at every one of the
+     ornament's consumer sites at once, with no per-component override
+     needed. --ornament-gilt keeps its flat-color fallback (it is consumed
+     as a whole `background`, not a mask, so an empty gradient would paint
+     nothing instead of the plain border-colored fill the pre-ornament look
+     used). */
+  :root[data-fx-level="low"] {
+    --ornament-corner: linear-gradient(transparent, transparent);
+    --ornament-ring-portrait: linear-gradient(transparent, transparent);
+    --ornament-ring-minimap: linear-gradient(transparent, transparent);
+    --ornament-ring-micro: linear-gradient(transparent, transparent);
+    --ornament-edge-h: linear-gradient(transparent, transparent);
+    --ornament-edge-v: linear-gradient(transparent, transparent);
+    --ornament-gilt: var(--border);
+    --ornament-grain: linear-gradient(transparent, transparent);
+    --ornament-dust: linear-gradient(transparent, transparent);
+  }
 }
