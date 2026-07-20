@@ -93,14 +93,18 @@ async function shoot(page, name, clip) {
     }
     if (region && region.width > 0 && region.height > 0) {
       const m = 12;
+      // Clamp to the viewport: an element whose margin-padded box runs past the
+      // edge (routine on a short mobile viewport) must not silently truncate the
+      // screenshot's far side, so the clip rect is intersected with the viewport
+      // bounds rather than passed straight through.
+      const vp = page.viewport() ?? { width: 1600, height: 900 };
+      const x0 = Math.max(0, region.x - m);
+      const y0 = Math.max(0, region.y - m);
+      const x1 = Math.min(vp.width, region.x + region.width + m);
+      const y1 = Math.min(vp.height, region.y + region.height + m);
       await page.screenshot({
         path: file,
-        clip: {
-          x: Math.max(0, region.x - m),
-          y: Math.max(0, region.y - m),
-          width: region.width + m * 2,
-          height: region.height + m * 2,
-        },
+        clip: { x: x0, y: y0, width: Math.max(1, x1 - x0), height: Math.max(1, y1 - y0) },
       });
     } else {
       if (clip) errors.push(`SHOT ${name}: clip '${clip}' not found, captured full frame`);
