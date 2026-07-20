@@ -678,4 +678,115 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     elixir: { aura: 'Might of the Serpent', kind: 'buff_sta', value: 12, duration: 900 },
     sellValue: 20,
   },
+
+  // --- Disenchant epic-reagent economy: typed reagents ---------------------
+  // Minted only via professions/enchanting.ts resolveDisenchant's typed
+  // branch (typedDisenchantReagent), one bound-after-one-trade instance per
+  // disenchant of an epic+ armor/weapon piece with a natural type. Never
+  // vendor-stocked, never fungible-stackable in bulk (each grant is its own
+  // ctx.addItemInstance call): the ONLY input to ON_DEMAND_RECIPES below.
+  arcane_bound_cloth: {
+    id: 'arcane_bound_cloth',
+    name: 'Arcane-Bound Cloth',
+    kind: 'junk',
+    quality: 'epic',
+    sellValue: 4000,
+    noVendorSell: true,
+  },
+  arcane_bound_hide: {
+    id: 'arcane_bound_hide',
+    name: 'Arcane-Bound Hide',
+    kind: 'junk',
+    quality: 'epic',
+    sellValue: 4000,
+    noVendorSell: true,
+  },
+  arcane_bound_chain: {
+    id: 'arcane_bound_chain',
+    name: 'Arcane-Bound Chain',
+    kind: 'junk',
+    quality: 'epic',
+    sellValue: 4000,
+    noVendorSell: true,
+  },
+  arcane_bound_edge: {
+    id: 'arcane_bound_edge',
+    name: 'Arcane-Bound Edge',
+    kind: 'junk',
+    quality: 'epic',
+    sellValue: 4000,
+    noVendorSell: true,
+  },
+  arcane_bound_focus: {
+    id: 'arcane_bound_focus',
+    name: 'Arcane-Bound Focus',
+    kind: 'junk',
+    quality: 'epic',
+    sellValue: 4000,
+    noVendorSell: true,
+  },
+  // --- Disenchant epic-reagent economy: on-demand epics ---------------------
+  // ON_DEMAND_RECIPES (content/recipes.ts) outputs: item level 30 (above the
+  // ilvl-20 skillReq-50 ladder ceiling, strictly below the zone3 raid-set
+  // epic band of armor 170-240 / sellValue 9000, per the locked masterwork
+  // power-bounds rule; stat totals via src/sim/item_budget.ts
+  // primaryStatBudget(30, 'epic', slot) = 21 points, redistributed with
+  // normalizePrimaryStats). Every grant carries tradesRemaining: 1 at craft
+  // time (professions/crafting.ts craftItem's ON_DEMAND branch), so a crafted
+  // copy can change hands exactly once before locking to its new owner.
+  arcanists_mantle: {
+    id: 'arcanists_mantle',
+    name: "Arcanist's Mantle",
+    kind: 'armor',
+    armorType: 'cloth',
+    slot: 'chest',
+    quality: 'epic',
+    stats: { armor: 100, int: 13, spi: 8 },
+    sellValue: 4200,
+    noMarketList: true,
+  },
+  wyrmstalkers_hide: {
+    id: 'wyrmstalkers_hide',
+    name: "Wyrmstalker's Hide",
+    kind: 'armor',
+    armorType: 'leather',
+    slot: 'chest',
+    quality: 'epic',
+    stats: { armor: 130, agi: 15, sta: 6 },
+    sellValue: 4200,
+    noMarketList: true,
+  },
+  ironbound_hauberk: {
+    id: 'ironbound_hauberk',
+    name: 'Ironbound Hauberk',
+    kind: 'armor',
+    armorType: 'mail',
+    slot: 'chest',
+    quality: 'epic',
+    stats: { armor: 150, str: 12, sta: 9 },
+    sellValue: 4200,
+    noMarketList: true,
+  },
+  edgebound_greatblade: {
+    id: 'edgebound_greatblade',
+    name: 'Edgebound Greatblade',
+    kind: 'weapon',
+    slot: 'mainhand',
+    quality: 'epic',
+    weapon: { min: 33, max: 48, speed: 2.6 },
+    stats: { str: 13, agi: 8 },
+    sellValue: 4200,
+    noMarketList: true,
+  },
+  focusbound_channeler: {
+    id: 'focusbound_channeler',
+    name: 'Focus-Bound Channeler',
+    kind: 'weapon',
+    slot: 'mainhand',
+    quality: 'epic',
+    weapon: { min: 39, max: 56, speed: 3.0 },
+    stats: { int: 13, spi: 8 },
+    sellValue: 4200,
+    noMarketList: true,
+  },
 };

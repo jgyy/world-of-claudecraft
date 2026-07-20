@@ -6951,6 +6951,16 @@ export class Sim {
     const result = disenchantItemImpl(this.ctx, itemId, pid);
     const meta = this.players.get(pid ?? this.primaryId);
     if (meta) meta.lastDisenchantResult = result;
+    this.emit({
+      type: 'disenchantResult',
+      ok: result.ok,
+      itemId: result.itemId,
+      materialItemId: result.materialItemId,
+      count: result.count,
+      typed: result.typed,
+      reason: result.reason,
+      pid: meta?.entityId,
+    });
   }
 
   get lastDisenchantResult(): DisenchantResult | null {

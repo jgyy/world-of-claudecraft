@@ -896,6 +896,13 @@ export interface ItemInstancePayload {
   enchant?: string;
   /** Player id (Entity id) this specific copy is bound to. */
   boundTo?: number;
+  /** Trade-once instances (disenchant epic-reagent economy): starts at 1 on
+   *  mint. A successful trade transfer decrements it; at 0 the transferring
+   *  trade also stamps `boundTo` on the recipient, and the offer-builder in
+   *  social/trade.ts refuses to offer it again (same site as the def.soulbound
+   *  check). Absent entirely for every other item: fully backward compatible,
+   *  no behavior change for instances that never set this field. */
+  tradesRemaining?: number;
 }
 
 export interface InvSlot {
@@ -3544,6 +3551,21 @@ export type SimEvent = { pid?: number } & (
         | 'recipe_not_learned'
         | 'throttled'
         | 'station_required';
+    }
+  // Disenchant outcome (the epic-reagent economy, completing the Phase 13
+  // disenchant slice): mirrors professions/enchanting.ts DisenchantResult so
+  // the online client can reflect the local result of a disenchant_item
+  // command without deciding it itself. Text-free on purpose (see
+  // craftResult above): the client renders its own localized copy off the
+  // structured fields.
+  | {
+      type: 'disenchantResult';
+      ok: boolean;
+      itemId: string;
+      materialItemId?: string;
+      count?: number;
+      typed?: boolean;
+      reason?: 'unknown_item' | 'not_disenchantable' | 'not_held';
     }
   // Recipe-training outcome (Professions 2.0 Phase 9): mirrors
   // professions/training.ts TrainResult so the online client can reflect the

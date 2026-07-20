@@ -38,6 +38,7 @@
 // offline, on the server, and in the headless RL env unchanged.
 
 import { ENCHANTS } from '../content/enchants';
+import { WEAPON_TYPE_BY_ITEM } from '../content/weapon_skin_rules';
 import { ITEMS } from '../data';
 import { requiredLevelFor } from '../item_level_req';
 import type { Rng } from '../rng';
@@ -76,6 +77,46 @@ const DISENCHANT_MATERIAL_BY_QUALITY: Readonly<Record<string, string>> = {
   epic: 'arcane_shard',
   legendary: 'arcane_shard',
 };
+
+// Disenchanting `epic`/`legendary` gear also takes a TYPED branch (the
+// on-demand epics economy): the yield is keyed by the piece's armor type or
+// weapon subtype instead of only its rarity, so a specific typed reagent
+// feeds the matching craft's new top-rung recipe (see
+// content/recipes.ts ON_DEMAND_RECIPES). Armor types map 1:1; the four
+// one-handed melee weapon subtypes (sword/axe/mace/dagger) share one reagent
+// (a dedicated reagent per subtype would be gameplay-identical content, not a
+// meaningful distinction), and staff/wand share the caster-focus reagent.
+// There is deliberately no bow/crossbow entry: this game has no itemized bow
+// (weapon_skin_rules.ts WEAPON_TYPE_BY_ITEM carries zero bow/crossbow rows;
+// hunters use an abstract "class ranged weapon" with no equippable mainhand
+// item of that type), so there is nothing of that type to ever disenchant.
+// Jewelry (kind 'armor' with no armorType) and any weapon subtype absent from
+// this map (e.g. 'polearm', which no current polearm item is epic+) have no
+// natural type to key on and keep the untyped DISENCHANT_MATERIAL_BY_QUALITY
+// path below, unaffected by this branch.
+const ARMOR_TYPE_REAGENT: Readonly<Record<string, string>> = {
+  cloth: 'arcane_bound_cloth',
+  leather: 'arcane_bound_hide',
+  mail: 'arcane_bound_chain',
+};
+const WEAPON_TYPE_REAGENT: Readonly<Record<string, string>> = {
+  sword: 'arcane_bound_edge',
+  axe: 'arcane_bound_edge',
+  mace: 'arcane_bound_edge',
+  dagger: 'arcane_bound_edge',
+  staff: 'arcane_bound_focus',
+  wand: 'arcane_bound_focus',
+};
+
+/** The typed epic+ reagent item id for `def`, or undefined when `def` has no
+ *  natural type to key on (untyped armor/weapon, or below epic quality). Pure
+ *  lookup, no side effect. */
+export function typedDisenchantReagent(def: ItemDef): string | undefined {
+  if (def.quality !== 'epic' && def.quality !== 'legendary') return undefined;
+  if (def.kind === 'armor' && def.armorType) return ARMOR_TYPE_REAGENT[def.armorType];
+  if (def.kind === 'weapon') return WEAPON_TYPE_REAGENT[WEAPON_TYPE_BY_ITEM[def.id] ?? ''];
+  return undefined;
+}
 
 /** The authoritative already-enchanted read for one instance payload: the
  *  explicit `enchant` marker (written by resolveApplyEnchant below), or, for
@@ -121,6 +162,10 @@ export interface DisenchantResult {
   itemId: string;
   materialItemId?: string;
   count?: number;
+  /** True when materialItemId is the new typed epic+ reagent (minted as a
+   *  tradesRemaining:1 instance) rather than the untyped fungible dust/
+   *  essence/shard stack. */
+  typed?: boolean;
   reason?: 'unknown_item' | 'not_disenchantable' | 'not_held';
 }
 
@@ -130,25 +175,37 @@ export interface DisenchantResult {
  *  e.g. crafting.ts's single-copy rare+ craft grant, which instances every
  *  rare-or-better craft for its signer/rolled-quality payload without
  *  applying an enchant; see countEnchantableItem). Consumes exactly one such
- *  copy on success (never an already-enchanted copy, via removeEnchantableItem)
- *  and grants the rolled arcane material yield. */
+ *  copy on success (never an already-enchanted copy, via removeEnchantableItem).
+ *  Grants EITHER the typed epic+ reagent (typedDisenchantReagent above, fixed
+ *  at one bound-after-one-trade instance: the reagent is meant to be a
+ *  precious, individually tracked good, not a stacking yield) OR, when `def`
+ *  has no natural type, the untyped rolled arcane material yield exactly as
+ *  before (DISENCHANT_MATERIAL_BY_QUALITY, unaffected by this feature). */
 export function resolveDisenchant(ctx: SimContext, pid: number, itemId: string): DisenchantResult {
   const def = ITEMS[itemId];
   if (!def) return { ok: false, itemId, reason: 'unknown_item' };
   if (!isDisenchantable(def)) return { ok: false, itemId, reason: 'not_disenchantable' };
   if (ctx.countEnchantableItem(itemId, pid) < 1) return { ok: false, itemId, reason: 'not_held' };
   ctx.removeEnchantableItem(itemId, 1, pid);
-  const materialItemId = DISENCHANT_MATERIAL_BY_QUALITY[def.quality ?? 'common'] ?? 'arcane_dust';
-  const count = disenchantYield(def, ctx.rng);
-  ctx.addItem(materialItemId, count, pid);
   const meta = ctx.players.get(pid);
+  const typedReagent = typedDisenchantReagent(def);
+  let result: DisenchantResult;
+  if (typedReagent) {
+    ctx.addItemInstance(typedReagent, { tradesRemaining: 1 }, pid);
+    result = { ok: true, itemId, materialItemId: typedReagent, count: 1, typed: true };
+  } else {
+    const materialItemId = DISENCHANT_MATERIAL_BY_QUALITY[def.quality ?? 'common'] ?? 'arcane_dust';
+    const count = disenchantYield(def, ctx.rng);
+    ctx.addItem(materialItemId, count, pid);
+    result = { ok: true, itemId, materialItemId, count };
+  }
   if (meta) {
     gainCraftSkill(meta.craftSkills, 'enchanting', ENCHANTING_SKILL_GAIN);
     // The skill gain feeds the craftSkill deed triggers, so the site marks
     // the player dirty itself (the crafting.ts craftItem contract).
     ctx.markDeedsDirty(meta.entityId);
   }
-  return { ok: true, itemId, materialItemId, count };
+  return result;
 }
 
 /** Command entry point, mirroring professions/salvage.ts's salvageItem shape

@@ -4073,6 +4073,17 @@ export class GameServer {
       case 'craft_item':
         if (typeof msg.recipe === 'string') sim.craftItem(msg.recipe, pid);
         break;
+      case 'disenchant_item':
+        // Disenchant epic-reagent economy: proximity is irrelevant (this acts
+        // on the caller's own inventory only, like craft_item); ownership and
+        // eligibility are re-checked inside resolveDisenchant
+        // (countEnchantableItem against the CALLER's pid, never trusted from
+        // the client). Replay-safe by construction: a duplicated command
+        // re-reads the player's current inventory each time, so a second call
+        // after the source item is already consumed denies with not_held
+        // rather than double-granting the reagent.
+        if (typeof msg.item === 'string') sim.disenchantItem(msg.item, pid);
+        break;
       case 'place_mobile_station':
         if (typeof msg.craft === 'string') sim.placeMobileStation(msg.craft, pid);
         break;

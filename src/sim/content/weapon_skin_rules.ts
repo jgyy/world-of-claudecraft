@@ -17,6 +17,7 @@ export type ItemWeaponType = WeaponSkinType | 'polearm';
 
 export const WEAPON_TYPE_BY_ITEM: Record<string, ItemWeaponType> = {
   // Swords
+  edgebound_greatblade: 'sword',
   worn_sword: 'sword',
   ironedge_longsword: 'sword',
   thorium_warblade: 'sword',
@@ -112,6 +113,7 @@ export const WEAPON_TYPE_BY_ITEM: Record<string, ItemWeaponType> = {
   craghorn_staff: 'staff',
   lunar_tide_greatstaff: 'staff',
   emberglass_warstaff: 'staff',
+  focusbound_channeler: 'staff',
   // Wands
   drowned_tide_scepter: 'wand',
   palecoil_rod: 'wand',

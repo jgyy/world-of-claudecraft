@@ -1256,6 +1256,107 @@ export const LADDER_RECIPES: ProfessionRecipeRecord[] = [
   },
 ];
 
+// On-demand epics (the disenchant epic-reagent economy): a new top rung above
+// LADDER_RECIPES' skillReq-50 ceiling, gated on skillReq 75 (tier 3,
+// training.ts teachTierMet/TRAINING_FEE_BY_TIER extended one entry) and the
+// matching typed reagent from professions/enchanting.ts's epic+ disenchant
+// branch (arcane_bound_*: the ONLY source, never vendor-stocked). Every
+// output is a fresh item id, item level 30, quality epic (see the authoring
+// comment on the items themselves in content/profession_items.ts); the
+// crafting.ts ON_DEMAND grant path stamps tradesRemaining: 1 on every copy.
+export const ON_DEMAND_RECIPES: ProfessionRecipeRecord[] = [
+  {
+    id: 'recipe_arcanists_mantle',
+    professionId: 'tailoring',
+    resultItemId: 'arcanists_mantle',
+    resultCount: 1,
+    reagents: [
+      { itemId: 'arcane_bound_cloth', count: 1 },
+      { itemId: 'sunpetal_herb', count: 3 },
+      { itemId: 'spider_silk', count: 6 },
+      { itemId: 'spool_of_thread', count: 3 },
+    ],
+    skillReq: 75,
+    itemLevelBudget: 30,
+    level: 20,
+    acquisition: ['trainer'],
+    stationType: 'loom',
+    tradesRemaining: 1,
+  },
+  {
+    id: 'recipe_wyrmstalkers_hide',
+    professionId: 'leatherworking',
+    resultItemId: 'wyrmstalkers_hide',
+    resultCount: 1,
+    reagents: [
+      { itemId: 'arcane_bound_hide', count: 1 },
+      { itemId: 'rough_hide', count: 6 },
+      { itemId: 'elderwood_log', count: 2 },
+      { itemId: 'tanning_agent', count: 3 },
+    ],
+    skillReq: 75,
+    itemLevelBudget: 30,
+    level: 20,
+    acquisition: ['trainer'],
+    stationType: 'tannery',
+    tradesRemaining: 1,
+  },
+  {
+    id: 'recipe_ironbound_hauberk',
+    professionId: 'armorcrafting',
+    resultItemId: 'ironbound_hauberk',
+    resultCount: 1,
+    reagents: [
+      { itemId: 'arcane_bound_chain', count: 1 },
+      { itemId: 'thorium_ore', count: 5 },
+      { itemId: 'arcanite_bar', count: 2 },
+      { itemId: 'smithing_flux', count: 3 },
+    ],
+    skillReq: 75,
+    itemLevelBudget: 30,
+    level: 20,
+    acquisition: ['trainer'],
+    stationType: 'forge',
+    tradesRemaining: 1,
+  },
+  {
+    id: 'recipe_edgebound_greatblade',
+    professionId: 'weaponcrafting',
+    resultItemId: 'edgebound_greatblade',
+    resultCount: 1,
+    reagents: [
+      { itemId: 'arcane_bound_edge', count: 1 },
+      { itemId: 'thorium_ore', count: 4 },
+      { itemId: 'arcanite_bar', count: 2 },
+      { itemId: 'smithing_flux', count: 2 },
+    ],
+    skillReq: 75,
+    itemLevelBudget: 30,
+    level: 20,
+    acquisition: ['trainer'],
+    stationType: 'forge',
+    tradesRemaining: 1,
+  },
+  {
+    id: 'recipe_focusbound_channeler',
+    professionId: 'weaponcrafting',
+    resultItemId: 'focusbound_channeler',
+    resultCount: 1,
+    reagents: [
+      { itemId: 'arcane_bound_focus', count: 1 },
+      { itemId: 'elderwood_log', count: 2 },
+      { itemId: 'thorium_ore', count: 3 },
+      { itemId: 'rough_hide', count: 3 },
+    ],
+    skillReq: 75,
+    itemLevelBudget: 30,
+    level: 20,
+    acquisition: ['trainer'],
+    stationType: 'forge',
+    tradesRemaining: 1,
+  },
+];
+
 // Exported (not just used internally by recipeById below) so the IWorld
 // recipeList read surface (Sim.recipeList / ClientWorld.recipeList) can list
 // every recipe, common, tool, and combo alike: see PR #1209 review, a combo
@@ -1267,6 +1368,7 @@ export const ALL_RECIPES: ProfessionRecipeRecord[] = [
   ...CASTER_HUB_RECIPES,
   ...COMBO_RECIPES,
   ...LADDER_RECIPES,
+  ...ON_DEMAND_RECIPES,
 ];
 
 export function recipeById(recipeId: string): ProfessionRecipeRecord | undefined {

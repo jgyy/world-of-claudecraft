@@ -84,6 +84,36 @@ export function tradeAccept(ctx: SimContext, pid?: number): void {
   }
 }
 
+// Trade-once-aware offerable stock for one item id (the tradesRemaining
+// primitive, types.ts ItemInstancePayload): a plain fungible unit always
+// counts. An instanced unit counts UNLESS the player holds ANY already-locked
+// copy (tradesRemaining === 0) of this same item id, in which case every
+// instanced unit of it is excluded from the offerable count for this id (never
+// just the locked one) — a deliberately conservative rule so the confirm-time
+// removal (removePreferFungible -> ctx.removeItem, which has no way to target
+// a SPECIFIC instance) can never pick the wrong copy: either none of the
+// player's instanced copies of this id are locked (so any of them is safe to
+// send) or at least one is (so none of them are offered, and only the
+// fungible stack, if any, can cover the trade). Mixing a locked and an
+// unlocked instanced copy of the identical item id at once is a rare edge
+// case; this trades a little offerable stock in that case for a correctness
+// guarantee that a locked instance can never leave its owner via trade.
+function offerableCount(meta: PlayerMeta, itemId: string): number {
+  let fungible = 0;
+  let instanced = 0;
+  let anyLocked = false;
+  for (const s of meta.inventory) {
+    if (s.itemId !== itemId) continue;
+    if (!s.instance) {
+      fungible += s.count;
+    } else {
+      instanced += s.count;
+      if (s.instance.tradesRemaining === 0) anyLocked = true;
+    }
+  }
+  return fungible + (anyLocked ? 0 : instanced);
+}
+
 export function tradeSetOffer(
   ctx: SimContext,
   items: InvSlot[],
@@ -107,7 +137,7 @@ export function tradeSetOffer(
   }
   const cleaned: InvSlot[] = [];
   for (const [itemId, count] of merged) {
-    if (ctx.countItem(itemId, r.meta.entityId) < count) continue;
+    if (offerableCount(r.meta, itemId) < count) continue; // excludes locked (tradesRemaining:0) copies
     cleaned.push({ itemId, count });
   }
   const offer = {
@@ -147,10 +177,24 @@ function removeOffer(ctx: SimContext, items: InvSlot[], fromPid: number): Pendin
   return grants;
 }
 
+// Applies one trade transfer to a tradesRemaining-bearing instance: decrement,
+// and once it reaches 0 also stamp boundTo on the recipient (the "soulbound
+// after its Nth trade" transition). Instances without the field pass through
+// untouched, so every existing trade path (enchant/masterwork/signed copies)
+// is unaffected.
+function applyTradeOnce(instance: ItemInstancePayload, toPid: number): ItemInstancePayload {
+  if (instance.tradesRemaining === undefined) return instance;
+  const remaining = instance.tradesRemaining - 1;
+  if (remaining <= 0) return { ...instance, tradesRemaining: 0, boundTo: toPid };
+  return { ...instance, tradesRemaining: remaining };
+}
+
 function grantOffer(ctx: SimContext, grants: PendingGrant[], toPid: number): void {
   for (const g of grants) {
     if (g.plainCount > 0) ctx.addItem(g.itemId, g.plainCount, toPid);
-    for (const instance of g.instances) ctx.addItemInstance(g.itemId, instance, toPid);
+    for (const instance of g.instances) {
+      ctx.addItemInstance(g.itemId, applyTradeOnce(instance, toPid), toPid);
+    }
   }
 }
 
@@ -265,10 +309,12 @@ export function tradeCancel(ctx: SimContext, pid?: number): void {
 // true when the player's bags cover the offered totals per item, summing
 // duplicate slots — a per-slot check would let duplicates each pass alone
 function offerCovered(ctx: SimContext, items: InvSlot[], pid: number): boolean {
+  const meta = ctx.players.get(pid);
+  if (!meta) return false;
   const totals = new Map<string, number>();
   for (const s of items) totals.set(s.itemId, (totals.get(s.itemId) ?? 0) + s.count);
   for (const [itemId, count] of totals) {
-    if (ctx.countItem(itemId, pid) < count) return false;
+    if (offerableCount(meta, itemId) < count) return false; // excludes locked (tradesRemaining:0) copies
   }
   return true;
 }

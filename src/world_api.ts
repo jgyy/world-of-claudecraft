@@ -287,6 +287,7 @@ export const COMMAND_NAMES = [
   'sell_all_junk',
   'harvest_node',
   'craft_item',
+  'disenchant_item',
   'place_mobile_station',
   'change_skin',
   'unequip_mech_chroma',

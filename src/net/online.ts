@@ -106,7 +106,7 @@ import {
   type SocialInfo,
   type TradeInfo,
 } from '../world_api';
-import type { MasterworkView } from '../world_api/professions';
+import type { DisenchantResultView, MasterworkView } from '../world_api/professions';
 import { computeBackoffDelay } from './backoff';
 import { optimisticQuestState } from './quest_state_optimistic';
 import { isTransientReconnectRejection, isTransientTimeoutRejection } from './reconnect_policy';
@@ -1402,6 +1402,11 @@ export class ClientWorld implements IWorld {
   // server's `masterwork` event (applyMasterworkEvent below), exactly like
   // lastCraftResult above. Null until this session's first masterwork proc.
   lastMasterwork: MasterworkView | null = null;
+  // Disenchant result surface (the epic-reagent economy), mirrored LIVE from
+  // the server's `disenchantResult` event (applyDisenchantResultEvent
+  // below), exactly like lastCraftResult above. Null until this session's
+  // first disenchant attempt.
+  lastDisenchantResult: DisenchantResultView | null = null;
   // The viewer's own active mobile crafting station (Professions 2.0 Phase 8),
   // mirrored from the server's `mst` self-delta (applySnapshot below). The
   // server computes the active/expired state against its own tickCount, so
@@ -1935,6 +1940,7 @@ export class ClientWorld implements IWorld {
         this.applyLockpickEvent(ev as SimEvent);
         this.applyCraftResultEvent(ev as SimEvent);
         this.applyMasterworkEvent(ev as SimEvent);
+        this.applyDisenchantResultEvent(ev as SimEvent);
         this.applyChatFlairEvent(ev as SimEvent);
         this.eventQueue.push(ev as SimEvent);
       }
@@ -2991,6 +2997,9 @@ export class ClientWorld implements IWorld {
   craftItem(recipeId: string): void {
     this.cmd({ cmd: 'craft_item', recipe: recipeId });
   }
+  disenchantItem(itemId: string): void {
+    this.cmd({ cmd: 'disenchant_item', item: itemId });
+  }
   placeMobileStation(craftId: string): void {
     this.cmd({ cmd: 'place_mobile_station', craft: craftId });
   }
@@ -3614,6 +3623,20 @@ export class ClientWorld implements IWorld {
       count: ev.count,
       quality: ev.quality as MaterialRarity | undefined,
       masterwork: ev.masterwork,
+      reason: ev.reason,
+    };
+  }
+  // Mirror the authoritative disenchantResult event into lastDisenchantResult
+  // (the epic-reagent economy), modeled exactly on applyCraftResultEvent
+  // above. The event still flows to the HUD (drainEvents) for a toast/log line.
+  private applyDisenchantResultEvent(ev: SimEvent): void {
+    if (ev.type !== 'disenchantResult') return;
+    this.lastDisenchantResult = {
+      ok: ev.ok,
+      itemId: ev.itemId,
+      materialItemId: ev.materialItemId,
+      count: ev.count,
+      typed: ev.typed,
       reason: ev.reason,
     };
   }

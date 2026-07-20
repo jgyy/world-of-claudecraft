@@ -449,17 +449,34 @@ export function resolveCraftForRecipe(
   // a resultCount > 1 recipe grants the remainder plain, exactly as the
   // plain arm would. NEW crafts never write rolled.quality (retired for new
   // writes; legacy payloads keep loading).
+  // The disenchant epic-reagent economy (ON_DEMAND_RECIPES): a recipe that
+  // declares `tradesRemaining` stamps it onto whichever instance this craft
+  // grants below, so the crafted copy can change hands that many times before
+  // social/trade.ts locks it to its new owner. Every ON_DEMAND recipe today
+  // has resultCount 1 and an epic output quality, so it always lands on one
+  // of the two instanced arms below, never the plain ctx.addItem arm.
+  const tradesRemaining = recipe.tradesRemaining;
   if (meta && masterwork && bonusStats) {
     ctx.addItemInstance(
       recipe.resultItemId,
-      { signer: meta.name, rolled: { masterwork: true, stats: bonusStats } },
+      { signer: meta.name, rolled: { masterwork: true, stats: bonusStats }, tradesRemaining },
       pid,
     );
     if (recipe.resultCount > 1) {
       ctx.addItem(recipe.resultItemId, recipe.resultCount - 1, pid);
     }
   } else if (meta && recipe.resultCount === 1 && isSignableMaterialRarity(outputQuality)) {
-    ctx.addItemInstance(recipe.resultItemId, { signer: meta.name }, pid);
+    ctx.addItemInstance(recipe.resultItemId, { signer: meta.name, tradesRemaining }, pid);
+  } else if (meta && tradesRemaining !== undefined) {
+    // A tradesRemaining recipe that would otherwise fall to the plain arm
+    // (resultCount > 1, or an output quality below the signable floor) still
+    // needs an instance to carry the field; ON_DEMAND_RECIPES never actually
+    // hits this arm today (see the comment above), but a future recipe that
+    // does must not silently lose the trade-once contract.
+    ctx.addItemInstance(recipe.resultItemId, { tradesRemaining }, pid);
+    if (recipe.resultCount > 1) {
+      ctx.addItem(recipe.resultItemId, recipe.resultCount - 1, pid);
+    }
   } else {
     ctx.addItem(recipe.resultItemId, recipe.resultCount, pid);
   }

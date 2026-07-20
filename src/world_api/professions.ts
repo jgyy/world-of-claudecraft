@@ -69,6 +69,22 @@ export interface CraftResultView {
   masterwork?: boolean;
 }
 
+// Disenchant outcome (the epic-reagent economy, completing the Phase 13
+// disenchant slice): the outcome of one disenchantItem command, mirrored
+// from the server's `disenchantResult` event exactly like CraftResultView
+// mirrors `craftResult`. `null` until the first disenchant attempt of the
+// session. `typed` is true when `materialItemId` is one of the new epic+
+// armor/weapon-typed reagents (professions/enchanting.ts
+// typedDisenchantReagent) rather than the untyped dust/essence/shard yield.
+export interface DisenchantResultView {
+  ok: boolean;
+  itemId: string;
+  materialItemId?: string;
+  count?: number;
+  typed?: boolean;
+  reason?: 'unknown_item' | 'not_disenchantable' | 'not_held';
+}
+
 // Masterwork proc surface (Professions 2.0 Phase 2): the local viewer's most
 // recent masterwork proc, mirrored from the server's `masterwork` event the
 // same way CraftResultView mirrors `craftResult`. Ids only, string-free per
@@ -105,6 +121,15 @@ export interface IWorldProfessions {
   lastCraftResult: CraftResultView | null;
   lastMasterwork: MasterworkView | null;
   craftItem(recipeId: string): void;
+  // Disenchant epic-reagent economy (completing the Phase 13 disenchant
+  // slice): disenchant an eligible weapon/armor piece (professions/
+  // enchanting.ts isDisenchantable) the player holds. Server-validated
+  // (proximity is irrelevant, this acts on the caller's own inventory only;
+  // ownership and eligibility are re-checked server-side) and replay-safe.
+  // Enchant application and salvage stay out of scope for this member; they
+  // are independent actions with their own future wiring.
+  disenchantItem(itemId: string): void;
+  lastDisenchantResult: DisenchantResultView | null;
   craftingIdentity: CraftingIdentityView;
   // Active archetype identity (#1129). null before the acceptance quest.
   activeArchetype: string | null;

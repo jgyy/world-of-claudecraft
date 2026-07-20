@@ -1397,6 +1397,8 @@ const FACET_PROFESSIONS = [
   'lastCraftResult',
   'lastMasterwork',
   'craftItem',
+  'disenchantItem',
+  'lastDisenchantResult',
   'activeArchetype',
   'archetypeSwitchCount',
   'archetypeAmendsProgress',

@@ -98,6 +98,14 @@ export interface ProfessionRecipeRecord {
   // never costs anything beyond materials" rule. There is NO level arm: the
   // old hub's level-20 gate retired with it (2026-07-17 maintainer ruling).
   stationType?: StationType;
+  // The disenchant epic-reagent economy's on-demand epics: when present, the
+  // crafted grant is minted (or has its existing signed/masterwork instance
+  // merged) with types.ts ItemInstancePayload.tradesRemaining set to this
+  // value, so the specific crafted copy can change hands this many times
+  // before locking to its new owner (professions/crafting.ts's grant site;
+  // social/trade.ts's tradesRemaining enforcement). Absent for every other
+  // recipe: unlimited-trade output, unchanged from today.
+  tradesRemaining?: number;
 }
 
 // One performed craft (a runtime instance of a RecipeRecord being worked),
