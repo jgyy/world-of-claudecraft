@@ -196,7 +196,28 @@ export function mountWelcomeScreen(
     connectionReady = ready || deps.platform.offline;
     paintStatus();
     refreshContinue();
-    if (lastRosterRows.length > 0) paintRoster(lastRosterRows);
+    if (lastRosterRows.length > 0) updateRosterReadiness();
+  }
+
+  // Flips each existing roster row's disabled state in place instead of
+  // rebuilding the list (paintRoster's full rebuild). setConnectionReady fires
+  // on the normal online path AFTER the rail has already painted (readiness
+  // flips false to true once 'hello' + the first snapshot land), and a full
+  // rebuild there destroys whatever row a keyboard user is resting on: focus
+  // falls to <body> inside this dialog's own focus trap. The row set and
+  // order are unchanged (only readiness changed), so an in-place toggle is
+  // exactly equivalent and keeps focus on the same element.
+  function updateRosterReadiness(): void {
+    if (!rosterEl) return;
+    const items = rosterEl.querySelectorAll<HTMLButtonElement>('.ws-roster-row');
+    items.forEach((item, i) => {
+      const row = lastRosterRows[i];
+      if (!row) return;
+      const blocked = row.disabled || !connectionReady;
+      item.disabled = blocked;
+      if (blocked) item.setAttribute('aria-disabled', 'true');
+      else item.removeAttribute('aria-disabled');
+    });
   }
 
   function paintDiscordStrip(show: boolean): void {

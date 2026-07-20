@@ -18,6 +18,7 @@ function collabHarness() {
   const entered: CharacterSummary[] = [];
   const collaborators = {
     confirmTakeOver: () => true,
+    isSwitchable: () => true,
     teardown: () => calls.push('teardown'),
     takeover: async (id: number) => {
       calls.push(`takeover:${id}`);
@@ -87,6 +88,21 @@ describe('switchCharacter', () => {
     const target = char({ id: 9, online: false });
     await switchCharacter(target, collaborators);
     expect(calls).toEqual(['teardown', 'enter:reject', 'enterError']);
+  });
+
+  // Regression: teardown ran unconditionally after the takeover await, so a
+  // disconnect, or the in-flight session proceeding to the game, DURING that
+  // round trip left teardown tearing down a session something else already
+  // handled (double-mounting the Welcome Screen, or building a new session
+  // behind a terminal disconnect overlay). isSwitchable is now re-checked
+  // right after takeover resolves; when it reports false, the session was
+  // already claimed by something else mid-takeover, so teardown must never run.
+  it('never tears down or enters when the session is no longer switchable after takeover resolves', async () => {
+    const { calls, collaborators } = collabHarness();
+    collaborators.isSwitchable = () => false;
+    const target = char({ id: 7, online: true });
+    await switchCharacter(target, collaborators);
+    expect(calls).toEqual(['takeover:7']);
   });
 
   it('never confirms for an already-offline target', async () => {

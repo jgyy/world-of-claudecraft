@@ -143,6 +143,38 @@ describe('mountWelcomeScreen', () => {
     expect(otherRowAfter?.hasAttribute('aria-disabled')).toBe(false);
   });
 
+  // Regression: setConnectionReady used to fully rebuild the roster
+  // (paintRoster: rosterEl.textContent = '' then recreate every button)
+  // unconditionally, destroying whatever row a keyboard user was resting on
+  // and dropping focus to <body> inside this dialog's own focus trap. It now
+  // flips disabled state on the existing nodes in place instead, so the same
+  // row element (and focus on it) survives the call. Rows start enabled here
+  // (offline platform) so the row is focusable to begin with; the readiness
+  // repaint below exercises the exact code path setConnectionReady(true) runs
+  // on the real online entry flow, whether or not readiness actually changed.
+  it('keeps focus on a roster row across setConnectionReady, instead of destroying it', async () => {
+    const roster = [char({ id: 1, name: 'Alice' }), char({ id: 2, name: 'Bob' })];
+    const controller = mountWelcomeScreen(root, {
+      ...baseDeps(roster, 1),
+      onSelectCharacter: () => {},
+    });
+    await controller.show();
+
+    const otherRow = Array.from(root.querySelectorAll<HTMLButtonElement>('.ws-roster-row')).find(
+      (r) => !r.classList.contains('sel'),
+    );
+    expect(otherRow).toBeTruthy();
+    expect(otherRow?.disabled).toBe(false);
+    otherRow?.focus();
+    expect(document.activeElement).toBe(otherRow);
+
+    controller.setConnectionReady(true);
+
+    expect(document.activeElement).toBe(otherRow);
+    expect(otherRow?.isConnected).toBe(true);
+    expect(otherRow?.disabled).toBe(false);
+  });
+
   it('clears the roster on destroy so a stale row cannot survive a remount', async () => {
     const roster = [char({ id: 1, name: 'Alice' }), char({ id: 2, name: 'Bob' })];
     const first = mountWelcomeScreen(root, {

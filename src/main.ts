@@ -4893,6 +4893,14 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
       button.textContent = t('auth.enterWorld');
     }
   }
+  // The Welcome Screen's desktop stage re-parents the SAME live characterPreview
+  // the char-select screen built (welcome_screen_stage.ts), rather than
+  // building its own; a character switch enters here for a character that was
+  // never the char-select selection, so the preview must be re-pointed at IT
+  // or the re-mounted screen shows "Welcome back, <c.name>" next to the
+  // PREVIOUS character's model. A no-op on the ordinary post-login entry
+  // (already matches the char-select selection there).
+  characterPreview?.setAppearance(charselectAppearance(c));
   const world = new ClientWorld(api.token!, c.id, c.class, api.base, getClientSeed());
   // Wire shareable player cards for this online session: publishing uploads the
   // composited PNG to this realm and returns an absolute public page URL, and
@@ -4920,8 +4928,21 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
   // screen if the welcome-screen DOM is absent (the /play entry lacks it).
   const welcomeRoot = $('#welcome-screen');
   let started = false;
+  // Set true the instant a character switch begins and cleared only if the
+  // takeover itself fails (recoverable, stays on this session): guards
+  // proceedToGame (Continue/Escape/Enter) and a second roster click the same
+  // way `started` already guards proceedToGame against itself, so neither can
+  // race the takeover round trip below. Flipped independently of `started`
+  // because teardown (which sets `started`) does not run until AFTER that
+  // round trip resolves.
+  let switching = false;
+  // Flipped by world.onDisconnect if the in-flight session ends (for any
+  // reason) while a switch is awaiting the takeover round trip: the window
+  // neither `started` nor `switching` already covers, since onDisconnect can
+  // fire independently of both.
+  let switchAborted = false;
   const proceedToGame = () => {
-    if (started) return;
+    if (started || switching) return;
     started = true;
     clearInterval(poll);
     welcomeScreen?.hide();
@@ -4942,11 +4963,19 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
     // world.connected goes true is silently dropped and the outgoing
     // character is stuck linkdead for the full 5-minute grace. Gate on the
     // same readiness condition the Continue button already uses.
-    if (started || characterId === c.id || !world.connected) return;
+    if (started || switching || characterId === c.id || !world.connected) return;
     const target = latestRoster.find((x) => x.id === characterId);
     if (!target) return;
+    // Latch BEFORE the async switchCharacter call below (not inside its
+    // teardown collaborator, which only runs after the takeover round trip):
+    // otherwise nothing disables Continue/Escape/Enter or a second roster row
+    // during that await, and either one racing it could proceedToGame or
+    // start a second overlapping switch on the same live session.
+    switching = true;
+    switchAborted = false;
     void switchCharacter(target, {
       confirmTakeOver: () => window.confirm(t('character.takeOverConfirm')),
+      isSwitchable: () => !switchAborted,
       teardown: () => {
         started = true;
         clearInterval(poll);
@@ -4961,9 +4990,21 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
         // in flight cannot fire a stale fatalOverlay over the next session.
         world.onDisconnect = null;
         clearCardProviders();
-        // Match proceedToGame: hide before destroy so the previous roster
-        // does not stay frozen on an opaque overlay during the take-over
-        // round trip (the api.takeoverCharacter await below).
+        // The resume marker still names the character being left; a WebView
+        // eviction and reload between here and the new session's first
+        // populated snapshot (up to the 10s poll window) would otherwise
+        // resume straight back into the character we just sendLogout()ed.
+        clearPlayMarker();
+        // A drop mid-round-trip (onConnectionLost) can have raised the
+        // reconnect overlay on this session; the switch is proceeding to a
+        // brand new one, so clear it now instead of leaving it up behind the
+        // new world (only that world's own onReconnected would ever clear it,
+        // and it never fires on a fresh, already-connected entry).
+        hideReconnectOverlay();
+        // Match proceedToGame: hide before destroy. By the time teardown
+        // runs the api.takeoverCharacter await has already resolved (the
+        // `switching` latch above is what kept the roster/Continue/Escape
+        // from racing that round trip, not a hide/disable during it).
         welcomeScreen?.hide();
         welcomeScreen?.destroy();
         welcomeScreen = null;
@@ -4976,7 +5017,16 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
         await api.takeoverCharacter(id);
       },
       enter: (character) => enterWorld(character),
-      onTakeoverError: (err) => fatalOverlay(userFacingApiError(err)),
+      onTakeoverError: (err) => {
+        // Recoverable: the in-flight session and Welcome Screen are still up
+        // (teardown never ran), so this must not be the terminal
+        // fatalOverlay (that would kill a perfectly healthy live session over
+        // a transient network blip or 5xx and drop its resume marker). Same
+        // shape as the pre-login takeOverAndEnter's own catch: surface the
+        // error and let the player retry or pick something else.
+        switching = false;
+        window.alert(userFacingApiError(err));
+      },
       // teardown has already run by the time enter() can reject (prepareWorldEntry,
       // the ClientWorld/WebSocket construction), so there is no world or Welcome
       // Screen left to fall back into; fatalOverlay is the same recovery path
@@ -5073,6 +5123,10 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
     welcomeScreen?.destroy();
     welcomeScreen = null;
     hideReconnectOverlay();
+    // A switch (if one is in flight) must not proceed behind this: the
+    // session it would tear down just ended on its own, and the terminal
+    // fatalOverlay below already owns recovery from here.
+    switchAborted = true;
     // The session ended for good (retries exhausted, kick, takeover, auth fail):
     // fatalOverlay clears the resume marker so a reload does not loop back into
     // a dead session. Exception: a duplicate-session conflict means the

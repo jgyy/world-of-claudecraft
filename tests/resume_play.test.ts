@@ -231,11 +231,14 @@ describe('main.ts resume wiring', () => {
   it('clears the marker beside every clearSession-style logout site', () => {
     // Exact count: in-game logout, account logout, session expiry, deactivate,
     // recovery-email hatch, boot auth failure, roster mismatch, fatalOverlay,
-    // the boot dead-marker clear, and the world-entry crash recovery (a crashed
-    // entry must not auto-resume back into the crash loop; entry_crash_guard.ts).
+    // the boot dead-marker clear, the world-entry crash recovery (a crashed
+    // entry must not auto-resume back into the crash loop; entry_crash_guard.ts),
+    // and the Welcome Screen character-switch teardown (the marker still
+    // names the character being LEFT until the new session's first populated
+    // snapshot; a reload in that window must not resume into it).
     // A new terminal site must bump this; a silently deleted one fails it.
     const clears = mainTs.match(/clearPlayMarker\(\);/g) ?? [];
-    expect(clears.length).toBe(10);
+    expect(clears.length).toBe(11);
     expect(mainTs).toContain('api.clearSession();\n    clearPlayMarker();');
   });
 

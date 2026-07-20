@@ -9,6 +9,15 @@ import type { CharacterSummary } from './online';
 export interface CharacterSwitchCollaborators {
   /** window.confirm (or equivalent) for the take-over prompt. */
   confirmTakeOver: () => boolean;
+  /** True while the in-flight session this switch started from is still the
+   *  one worth tearing down. The only await before this is checked is the
+   *  `takeover` round trip, during which the caller's own state can change
+   *  out from under the switch already in progress: the session can proceed
+   *  to the game, disconnect, or get torn down for some other reason. When
+   *  this reports false, teardown and enter are skipped: there is nothing
+   *  left to switch away from, and whatever handler reacted to that other
+   *  event has already run its own recovery. */
+  isSwitchable: () => boolean;
   /** Tears down the in-flight connection/UI for the character being left. */
   teardown: () => void;
   /** Requests the server take the target character over. */
@@ -42,6 +51,12 @@ export async function switchCharacter(
       return;
     }
   }
+  // The takeover await above is the only place the in-flight session can end
+  // out from under this switch (Continue/Escape/Enter proceeding to the game,
+  // a disconnect, a duplicate-session kick): re-check before touching
+  // anything, or teardown/enter would run behind whatever terminal handler
+  // already fired for that.
+  if (!collaborators.isSwitchable()) return;
   collaborators.teardown();
   try {
     await collaborators.enter(target.online ? { ...target, online: false } : target);
