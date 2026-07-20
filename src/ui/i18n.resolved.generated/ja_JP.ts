@@ -317,7 +317,11 @@ export const ja_JP: EnTranslations = {
     "death": {
       "resurrectAtCorpse": "亡骸で復活",
       "resurrectAtHealer": "霊魂の癒し手（復活の後遺症）",
-      "spiritHealerAlive": "霊魂の癒し手は死者を見守っている。あなたはまだ生者だ。"
+      "spiritHealerAlive": "霊魂の癒し手は死者を見守っている。あなたはまだ生者だ。",
+      "healerConfirmTitle": "復活の後遺症を受けますか？",
+      "healerConfirmBody": "霊魂の癒し手はこの場で復活させてくれますが、復活の後遺症により全属性が75%低下します。高レベルでは最長10分間続きます。魂を遺体まで戻せばペナルティなしで復活できます。",
+      "healerConfirmAccept": "復活する",
+      "healerConfirmCancel": "キャンセル"
     },
     "fct": {
       "absorbed": "{amount} 吸収",
@@ -1040,6 +1044,7 @@ export const ja_JP: EnTranslations = {
       "itemLevelLine": "アイテムレベル {level}",
       "itemScoreLine": "スコア {score}",
       "showSecondaryActionBar": "セカンダリアクションバーを表示",
+      "showThirdActionBar": "3本目のアクションバーを表示",
       "showTargetOfTarget": "ターゲットのターゲットを表示",
       "showAttackButton": "攻撃ボタンを表示",
       "showDailyRewardsChest": "デイリー報酬の宝箱を表示",
@@ -1469,7 +1474,8 @@ export const ja_JP: EnTranslations = {
       "watchTwitch": "Twitch で視聴",
       "watchX": "X で見る",
       "watchKick": "Kick で視聴",
-      "watchYouTube": "YouTube で視聴"
+      "watchYouTube": "YouTube で視聴",
+      "streamerBadgeTitle": "認証済み配信者"
     },
     "lootSettings": {
       "title": "分配設定",
@@ -2201,7 +2207,15 @@ export const ja_JP: EnTranslations = {
         "nearTier": "{craft}は次のティアまであと技能 {points} です。",
         "dormantKnowledge": "{craft}の知識は保持されていますが、その組み合わせか趣味が有効になるまで休眠します。"
       },
-      "notAtHub": "それを製作するには、必要なレベルで製作拠点にいる必要があります。",
+      "stationRequired": "それを製作するには{station}にいる必要があります。",
+      "stationName": {
+        "forge": "鍛冶場",
+        "kitchens": "厨房",
+        "apothecary": "薬房",
+        "tannery": "皮なめし場",
+        "loom": "織機",
+        "toolworks": "工作場"
+      },
       "throttled": "製作が速すぎます。少し待ってからもう一度お試しください。",
       "recipeNotLearned": "そのレシピはまだ習得していません。",
       "skillReqLine": "{craft} {skill} が必要",
@@ -2209,13 +2223,32 @@ export const ja_JP: EnTranslations = {
       "difficultyReduced": "技能上昇（減少）",
       "difficultyNone": "技能上昇なし",
       "stationBadge": "製作拠点",
-      "stationOutOfRange": "製作するには製作拠点に移動してください。",
+      "stationOutOfRangeNamed": "{station}に移動して製作してください。",
       "masterworkToast": "傑作！{name}",
       "masterworkZoneLine": "{crafter}が傑作{name}を作り上げました！",
       "tierUpToast": "{craft}がティア {tier} に到達しました！",
       "makersMark": "製作者：{name}",
       "masterworkSeal": "傑作",
       "enchantedLine": "エンチャント済み"
+    },
+    "training": {
+      "title": "訓練：{name}",
+      "close": "訓練を閉じる",
+      "empty": "この師匠には教えられるレシピがありません。",
+      "free": "無料",
+      "stateKnown": "習得済み",
+      "stateTeachable": "習得可能",
+      "stateLocked": "未開放",
+      "requirement": "{craft} {skill} で伝授",
+      "trainAria": "{fee}で{name}を習得",
+      "dialogOption": "訓練",
+      "dialogOptionAria": "{name}から訓練を受ける",
+      "learned": "レシピを習得しました：{recipe}",
+      "tierUnmet": "そのレシピを習得するには{craft}が {skill} 必要です。",
+      "cannotAfford": "その訓練の費用を支払えません。",
+      "notTaughtHere": "そのレシピはここでは教えていません。",
+      "alreadyKnown": "そのレシピはすでに習得しています。",
+      "outOfRange": "訓練するには作業台のそばにいる必要があります。"
     },
     "finder": {
       "title": "ダンジョンファインダー",
@@ -2993,9 +3026,9 @@ export const ja_JP: EnTranslations = {
       "ice_lance": "氷の効果を消費する即時発動の氷片。凍結した対象には大幅に高いダメージを与えます。",
       "flurry": "3発の氷弾を素早く放ち、次の氷系攻撃が対象を凍結状態として扱うようにします。",
       "fingers_of_frost": "氷の矢が、ときどき次のアイスランスに対象を凍結状態として扱う力を与えます。",
-      "brain_freeze": "氷の矢が、ときどき次のウィンターラッシュを即時発動にして威力を高めます。",
+      "brain_freeze": "氷の矢が、ときどき次のウィンターラッシュを即時発動にしてクールダウンを無視します。",
       "shatter": "凍結した対象に対する呪文のクリティカル率が大幅に上昇します。",
-      "frozen_orb": "ゆっくり進む氷球を敵の群れへ放ち、周囲を冷やして氷の効果を発生させます。",
+      "frozen_orb": "ゆっくり進む氷球を敵の群れへ放ち、敵を冷やして氷柱を蓄えます。",
       "blizzard": "一帯を氷で覆い、敵の群れにダメージを与えながら移動速度を低下させます。",
       "blink": "短い距離を前方へ瞬間移動し、移動不能効果を解除します。",
       "conjure_water": "マナを回復する飲み物を作り出し、プルの合間に補充できます。",
@@ -4586,7 +4619,11 @@ export const ja_JP: EnTranslations = {
   },
   "heroicShop": {
     "balance": "英雄の証: {count}",
-    "buyAria": "英雄の証{marks}個で{item}を購入"
+    "buyAria": "英雄の証{marks}個で{item}を購入",
+    "buyConfirmTitle": "購入の確認",
+    "buyConfirmBody": "英雄の証{marks}個で{item}を購入しますか？証での購入は返金できません。",
+    "buyConfirmAccept": "購入",
+    "buyConfirmCancel": "キャンセル"
   },
   "cardDuel": {
     "title": "カードデュエル",
@@ -4639,7 +4676,11 @@ export const ja_JP: EnTranslations = {
       "buyAria": "デルヴの刻印{marks}個で{item}を購入",
       "reqHeroic": "ヒロイッククリアが必要",
       "reqClears": "{count}回のクリアが必要",
-      "empty": "在庫がありません。"
+      "empty": "在庫がありません。",
+      "buyConfirmTitle": "購入の確認",
+      "buyConfirmBody": "デルヴの刻印{marks}個で{item}を購入しますか？刻印での購入は返金できません。",
+      "buyConfirmAccept": "購入",
+      "buyConfirmCancel": "キャンセル"
     },
     "tracker": {
       "title": "デルヴ",
@@ -5042,7 +5083,9 @@ export const ja_JP: EnTranslations = {
     "rendererFailed": "レンダラーを開始できません。再読み込みしてください。{error}",
     "enterTimeout": "世界に入れませんでした。接続がタイムアウトしました。ゲームサーバーは動作していますか？",
     "connectionLost": "サーバーとの接続が切断されました。",
-    "reconnecting": "サーバーとの接続が切断されました。再接続しています...",
+    "reconnectingAttempt": "サーバーとの接続が切断されました。再接続しています...（試行 {attempt}/{maxAttempts}、{seconds}秒後に再試行）",
+    "reconnectingNow": "サーバーとの接続が切断されました。今すぐ再接続しています...（試行 {attempt}/{maxAttempts}）",
+    "slowConnection": "読み込みに時間がかかっています。インターネット接続を確認してください。",
     "connectionRejected": "サーバーが接続を閉じました。",
     "realmFull": "このワールドは現在満員です。数分後にもう一度お試しください。",
     "tooManyConnections": "お使いのネットワークからこのワールドへの接続が多すぎます。余分なゲームウィンドウを閉じるか、数分後にもう一度お試しください。",
@@ -6347,7 +6390,7 @@ export const ja_JP: EnTranslations = {
       },
       "blazing_barrier": {
         "name": "ブレイジングバリア",
-        "description": "自身を炎で包み、130ダメージを吸収します。60秒間持続します。（火）"
+        "description": "自身を炎で包み、{damage}ダメージを吸収します。60秒間持続します。（火）"
       },
       "cold_snap": {
         "name": "冬の呼び戻し",
@@ -6399,11 +6442,11 @@ export const ja_JP: EnTranslations = {
       },
       "flurry": {
         "name": "ウィンターラッシュ",
-        "description": "3発の氷弾を放ち、それぞれ{damage}の氷ダメージを与え、対象にウィンターズ・チルを付与します。次に命中する対応呪文2回は対象を凍結状態として扱います。ブレインフリーズ発動時は即時発動となり、威力が30%上昇してクールダウンを無視します。（氷）"
+        "description": "3発の氷弾を放ち、それぞれ{damage}の氷ダメージを与え、対象にウィンターズ・チルを付与します。次に命中する対応呪文2回は対象を凍結状態として扱います。ブレインフリーズ発動時は即時発動となり、クールダウンを無視します。（氷）"
       },
       "frozen_orb": {
         "name": "フローズンオーブ",
-        "description": "渦巻く氷球を放ち、8秒間前方へ漂わせます。周囲の敵に毎秒{damage}の氷ダメージを与え、移動速度を30%低下させます。命中するとフィンガーズ・オブ・フロストを生成します。（氷）"
+        "description": "渦巻く氷球を放ち、8秒間前方へ漂わせます。周囲の敵に毎秒{damage}の氷ダメージを与え、移動速度を30%低下させます。敵に命中したパルスごとに氷柱を1つ生成します。（氷）"
       },
       "blizzard": {
         "name": "ブリザード",
@@ -6427,11 +6470,11 @@ export const ja_JP: EnTranslations = {
       },
       "brain_freeze": {
         "name": "ブレインフリーズ",
-        "description": "ライムランスが20%の確率で、次のウィンターラッシュを即時発動にし、威力を30%上昇させ、クールダウンを無視させます。（氷）"
+        "description": "ライムランスが20%の確率で、次のウィンターラッシュを即時発動にし、クールダウンを無視させます。（氷）"
       },
       "shatter": {
         "name": "脆き破滅",
-        "description": "凍結した対象に対する呪文のクリティカル率が50%上昇し、そのクリティカルダメージが20%上昇します。フィンガーズ・オブ・フロストとウィンターズ・チルも対象を凍結状態として扱います。（氷）"
+        "description": "凍結した対象に対する呪文のクリティカル率が50%上昇します。フィンガーズ・オブ・フロストとウィンターズ・チルも対象を凍結状態として扱います。（氷）"
       },
       "conjure_water": {
         "name": "水の召喚",
@@ -6455,7 +6498,7 @@ export const ja_JP: EnTranslations = {
       },
       "frost_nova": {
         "name": "氷縛",
-        "description": "周囲の敵すべてを最大8秒間その場に凍結させ、{damage} の冷気ダメージを与えます。"
+        "description": "周囲の敵すべてを最大8秒間その場に凍結させ、{damage} の冷気ダメージを与えます。移動不能効果は、対象の最大体力の15%に相当する累積ダメージを受けると解除されます。解除に必要なダメージは最低20、最大60です。"
       },
       "arcane_explosion": {
         "name": "エーテルバースト",
@@ -8214,6 +8257,210 @@ export const ja_JP: EnTranslations = {
       "silverleaf_herb": {
         "name": "シルバーリーフ草"
       },
+      "rough_hide": {
+        "name": "粗い獣皮"
+      },
+      "spider_silk": {
+        "name": "蜘蛛の糸"
+      },
+      "venom_gland": {
+        "name": "毒腺"
+      },
+      "game_meat": {
+        "name": "野獣の肉"
+      },
+      "homespun_cloth": {
+        "name": "手織りの布"
+      },
+      "pristine_hide": {
+        "name": "極上の獣皮"
+      },
+      "pristine_silk": {
+        "name": "極上の蜘蛛の糸"
+      },
+      "pristine_venom_gland": {
+        "name": "極上の毒腺"
+      },
+      "prime_cut": {
+        "name": "極上の肉"
+      },
+      "smithing_flux": {
+        "name": "鍛冶の融剤"
+      },
+      "spool_of_thread": {
+        "name": "糸巻き"
+      },
+      "tanning_agent": {
+        "name": "なめし剤"
+      },
+      "cooking_salt": {
+        "name": "調理用の塩"
+      },
+      "glass_vial": {
+        "name": "ガラスの小瓶"
+      },
+      "copper_bearded_axe": {
+        "name": "銅のひげ斧"
+      },
+      "copper_flanged_mace": {
+        "name": "銅のフランジメイス"
+      },
+      "ironbark_boar_spear": {
+        "name": "アイアンバークの猪槍"
+      },
+      "ironedge_longsword": {
+        "name": "鉄刃のロングソード"
+      },
+      "ironshod_maul": {
+        "name": "鉄装のモール"
+      },
+      "whetted_iron_dirk": {
+        "name": "研ぎ澄まされた鉄の短剣"
+      },
+      "thorium_warblade": {
+        "name": "トリウムのウォーブレード"
+      },
+      "arcanite_war_axe": {
+        "name": "アーケナイトの戦斧"
+      },
+      "elderwood_battle_staff": {
+        "name": "エルダーウッドのバトルスタッフ"
+      },
+      "riveted_copper_girdle": {
+        "name": "銅のリベットベルト"
+      },
+      "coppermail_sabatons": {
+        "name": "銅鎖のサバトン"
+      },
+      "coppermail_gauntlets": {
+        "name": "銅鎖のガントレット"
+      },
+      "ironlink_hauberk": {
+        "name": "鉄鎖のホーバーク"
+      },
+      "ironlink_legguards": {
+        "name": "鉄鎖のレッグガード"
+      },
+      "ironlink_spaulders": {
+        "name": "鉄鎖のショルダーガード"
+      },
+      "thoriumscale_greathelm": {
+        "name": "トリウム鱗のグレートヘルム"
+      },
+      "thoriumscale_cuirass": {
+        "name": "トリウム鱗のキュイラス"
+      },
+      "thoriumscale_leggings": {
+        "name": "トリウム鱗のレギンス"
+      },
+      "homespun_hood": {
+        "name": "手織りのフード"
+      },
+      "homespun_mitts": {
+        "name": "手織りのミトン"
+      },
+      "silverthread_slippers": {
+        "name": "銀糸のスリッパ"
+      },
+      "goldweave_robe": {
+        "name": "金織りのローブ"
+      },
+      "goldweave_leggings": {
+        "name": "金織りのレギンス"
+      },
+      "silkspun_satchel": {
+        "name": "絹紡ぎのサッチェル"
+      },
+      "silkbinders_raiment": {
+        "name": "絹縛りの法衣"
+      },
+      "sunweave_mantle": {
+        "name": "陽織りのマント"
+      },
+      "sunweave_treads": {
+        "name": "陽織りの足具"
+      },
+      "fenbridge_hide_leggings": {
+        "name": "フェンブリッジ革のレギンス"
+      },
+      "fenbridge_hide_boots": {
+        "name": "フェンブリッジ革のブーツ"
+      },
+      "fenbridge_hide_belt": {
+        "name": "フェンブリッジ革のベルト"
+      },
+      "marshstalker_jerkin": {
+        "name": "沼追跡者のジャーキン"
+      },
+      "marshstalker_hood": {
+        "name": "沼追跡者のフード"
+      },
+      "marshstalker_spaulders": {
+        "name": "沼追跡者の肩当て"
+      },
+      "mirewarden_jerkin": {
+        "name": "泥沼の番人のジャーキン"
+      },
+      "mirewarden_leggings": {
+        "name": "泥沼の番人のレギンス"
+      },
+      "mirewarden_treads": {
+        "name": "泥沼の番人の足具"
+      },
+      "pan_seared_perch": {
+        "name": "川スズキのソテー"
+      },
+      "hunters_game_skewer": {
+        "name": "狩人の野獣串"
+      },
+      "herbed_marsh_pike": {
+        "name": "沼カワカマスのハーブ焼き"
+      },
+      "ashwood_smoked_eel": {
+        "name": "アッシュウッドの燻製ウナギ"
+      },
+      "goldleaf_game_stew": {
+        "name": "ゴールドリーフの野獣シチュー"
+      },
+      "frostgill_chowder": {
+        "name": "霜エラマスのチャウダー"
+      },
+      "silvered_carp_supper": {
+        "name": "銀鯉の晩餐"
+      },
+      "anglers_feast_platter": {
+        "name": "釣り人の饗宴プレート"
+      },
+      "marlows_grand_roast": {
+        "name": "マーロウの豪華ロースト"
+      },
+      "silverleaf_healing_draught": {
+        "name": "シルバーリーフの治癒薬"
+      },
+      "silverleaf_mana_draught": {
+        "name": "シルバーリーフのマナ薬"
+      },
+      "elixir_of_the_boar": {
+        "name": "猪のエリクサー"
+      },
+      "goldleaf_healing_draught": {
+        "name": "ゴールドリーフの治癒薬"
+      },
+      "goldleaf_mana_draught": {
+        "name": "ゴールドリーフのマナ薬"
+      },
+      "venomfire_elixir": {
+        "name": "毒炎のエリクサー"
+      },
+      "sunpetal_healing_draught": {
+        "name": "サンペタルの治癒薬"
+      },
+      "sunpetal_mana_draught": {
+        "name": "サンペタルのマナ薬"
+      },
+      "elixir_of_the_serpent": {
+        "name": "蛇のエリクサー"
+      },
       "conjured_water4": {
         "name": "魔法の湧き水"
       },
@@ -9471,6 +9718,36 @@ export const ja_JP: EnTranslations = {
         "title": "ソーンピーク高地の年代記",
         "greeting": "山は何ひとつ忘れない、{playerName}よ。私もだ。あなたの成したことを見せてもらおう。"
       },
+      "forgemistress_darva": {
+        "name": "鍛冶長ダルヴァ",
+        "title": "鍛冶場の主",
+        "greeting": "炉は私に従う、{className}。良い鉱石を持って来れば、おまえにも従うようになる。"
+      },
+      "cook_marlow": {
+        "name": "料理人マーロウ",
+        "title": "厨房の主",
+        "greeting": "私の厨房から生煮えのまま出ていくものはない、{className}。座って食べて、それからまた行きな。"
+      },
+      "weaver_ottilie": {
+        "name": "織り手オッティリー",
+        "title": "機織り場の主",
+        "greeting": "糸に気をつけて、{className}。機を扱うなら、強い手より確かな手だよ。"
+      },
+      "tinker_gizzel": {
+        "name": "からくり師ギッゼル",
+        "title": "工房の主",
+        "greeting": "バネに歯車に切れ味のいい刃、{className}。あんたの手に足りないものは、この工房が何でも揃えるよ。"
+      },
+      "tanner_hesk": {
+        "name": "皮なめし職人ヘスク",
+        "title": "なめし場の主",
+        "greeting": "革の良し悪しはなめしで決まる、{className}。桶の用意はできている、あとはあんた次第だ。"
+      },
+      "alchemist_verane": {
+        "name": "錬金術師ヴェレーン",
+        "title": "薬房の主",
+        "greeting": "二度量って一度で注ぐ、{className}。薬房ではこぼした試薬に容赦はしない。"
+      },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
         "title": "潮見の番人",
@@ -10540,6 +10817,56 @@ export const ja_JP: EnTranslations = {
         "sender": "英雄級補給官",
         "subject": "あなたの英雄の印",
         "body": "あなたが後方で、あるいは倒れて戦っている間に、あなたの部隊が英雄級の試練を突破しました。ロックアウトは同じように科されたので、あなたの分の英雄の印は失われることなく、ここへ飛んできました。大切に使ってください。\n\n- 英雄級補給官"
+      },
+      "guild_trend_engineering_alchemy": {
+        "sender": "製作ギルド",
+        "subject": "工作と錬金術の腕前について",
+        "body": "職人へ\n\n工作と錬金術に励むあなたの評判がギルドに届いています。火薬を量り、試薬を計り、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。この組を結んだ者は、やがて爆破師の名を得ます。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
+      },
+      "guild_trend_alchemy_cooking": {
+        "sender": "製作ギルド",
+        "subject": "錬金術と料理の腕前について",
+        "body": "職人へ\n\n錬金術と料理に励むあなたの評判がギルドに届いています。秘薬を煎じ、皿の味を調え、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。この組を結んだ者は、やがて薬師の名を得ます。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
+      },
+      "guild_trend_cooking_leatherworking": {
+        "sender": "製作ギルド",
+        "subject": "料理と皮革加工の腕前について",
+        "body": "職人へ\n\n料理と皮革加工に励むあなたの評判がギルドに届いています。料理を仕上げ、革をなめし、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
+      },
+      "guild_trend_leatherworking_tailoring": {
+        "sender": "製作ギルド",
+        "subject": "皮革加工と裁縫の腕前について",
+        "body": "職人へ\n\n皮革加工と裁縫に励むあなたの評判がギルドに届いています。革を裁ち、布を縫い、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。この組を結んだ者は、やがて装具師の名を得ます。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
+      },
+      "guild_trend_tailoring_inscription": {
+        "sender": "製作ギルド",
+        "subject": "裁縫と銘文の腕前について",
+        "body": "職人へ\n\n裁縫と銘文に励むあなたの評判がギルドに届いています。縫い目を整え、銘を書き入れ、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
+      },
+      "guild_trend_inscription_enchanting": {
+        "sender": "製作ギルド",
+        "subject": "銘文とエンチャントの腕前について",
+        "body": "職人へ\n\n銘文とエンチャントに励むあなたの評判がギルドに届いています。巻物に銘を記し、魔力を編み、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
+      },
+      "guild_trend_enchanting_jewelcrafting": {
+        "sender": "製作ギルド",
+        "subject": "エンチャントと宝石細工の腕前について",
+        "body": "職人へ\n\nエンチャントと宝石細工に励むあなたの評判がギルドに届いています。魔力を吹き込み、石を磨き、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
+      },
+      "guild_trend_jewelcrafting_weaponcrafting": {
+        "sender": "製作ギルド",
+        "subject": "宝石細工と武器鍛冶の腕前について",
+        "body": "職人へ\n\n宝石細工と武器鍛冶に励むあなたの評判がギルドに届いています。宝石を据え、刃を研ぎ、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
+      },
+      "guild_trend_weaponcrafting_armorcrafting": {
+        "sender": "製作ギルド",
+        "subject": "武器鍛冶と防具鍛冶の腕前について",
+        "body": "職人へ\n\n武器鍛冶と防具鍛冶に励むあなたの評判がギルドに届いています。刃を鍛え、板金を合わせ、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。この組を結んだ者は、やがて鍛冶師の名を得ます。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
+      },
+      "guild_trend_armorcrafting_engineering": {
+        "sender": "製作ギルド",
+        "subject": "防具鍛冶と工作の腕前について",
+        "body": "職人へ\n\n防具鍛冶と工作に励むあなたの評判がギルドに届いています。板金を鋲で留め、歯車を調え、二つの技が互いを高め合っていると。隣り合う技を共に磨く手は、調律の備えができた証です。イーストブルックの鍛冶師ハルドレンを訪ねてください。今は彼が親方たちの代弁を務めています。自らの手がけた仕事で腕前を示せば、彼がその二つの技をあなたの主専攻として調律してくれるでしょう。\n\n敬意を込めて、\n製作ギルド"
       }
     },
     "itemSets": {

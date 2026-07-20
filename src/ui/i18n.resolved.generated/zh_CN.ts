@@ -317,7 +317,11 @@ export const zh_CN: EnTranslations = {
     "death": {
       "resurrectAtCorpse": "在尸体旁复活",
       "resurrectAtHealer": "灵魂医者（复活后遗症）",
-      "spiritHealerAlive": "灵魂医者只看护逝者。你仍是生者。"
+      "spiritHealerAlive": "灵魂医者只看护逝者。你仍是生者。",
+      "healerConfirmTitle": "接受复活后遗症？",
+      "healerConfirmBody": "灵魂医者可以就地复活你，但复活后遗症会使你的全部属性降低75%，高等级时最长持续10分钟。让灵魂返回尸体复活则没有任何惩罚。",
+      "healerConfirmAccept": "复活",
+      "healerConfirmCancel": "取消"
     },
     "fct": {
       "absorbed": "吸收 {amount}",
@@ -1040,6 +1044,7 @@ export const zh_CN: EnTranslations = {
       "itemLevelLine": "物品等级 {level}",
       "itemScoreLine": "评分 {score}",
       "showSecondaryActionBar": "显示副动作条",
+      "showThirdActionBar": "显示第三动作条",
       "showTargetOfTarget": "显示目标的目标",
       "showAttackButton": "显示攻击按钮",
       "showDailyRewardsChest": "显示每日奖励宝箱",
@@ -1469,7 +1474,8 @@ export const zh_CN: EnTranslations = {
       "watchTwitch": "在 Twitch 观看",
       "watchX": "在 X 查看",
       "watchKick": "在 Kick 观看",
-      "watchYouTube": "在 YouTube 观看"
+      "watchYouTube": "在 YouTube 观看",
+      "streamerBadgeTitle": "认证主播"
     },
     "lootSettings": {
       "title": "拾取设置",
@@ -2201,7 +2207,15 @@ export const zh_CN: EnTranslations = {
         "nearTier": "{craft}距离下一阶级还差 {points} 点技能。",
         "dormantKnowledge": "{craft}知识已保留，但在其组合或爱好未启用时处于休眠状态。"
       },
-      "notAtHub": "必须达到所需等级并位于制作站，才能制作该物品。",
+      "stationRequired": "必须位于{station}才能制作该物品。",
+      "stationName": {
+        "forge": "锻造坊",
+        "kitchens": "厨房",
+        "apothecary": "药坊",
+        "tannery": "制革坊",
+        "loom": "织机",
+        "toolworks": "工坊"
+      },
       "throttled": "你制作得太快了，请稍等片刻后再试。",
       "recipeNotLearned": "你还没有学会这个配方。",
       "skillReqLine": "需要{craft} {skill}",
@@ -2209,13 +2223,32 @@ export const zh_CN: EnTranslations = {
       "difficultyReduced": "技能成长减少",
       "difficultyNone": "无技能成长",
       "stationBadge": "制作站",
-      "stationOutOfRange": "前往制作站才能制作该物品。",
+      "stationOutOfRangeNamed": "前往{station}即可制作该物品。",
       "masterworkToast": "杰作！{name}",
       "masterworkZoneLine": "{crafter}制作出了杰作{name}！",
       "tierUpToast": "{craft}提升至阶级 {tier}！",
       "makersMark": "制作者：{name}",
       "masterworkSeal": "杰作",
       "enchantedLine": "已附魔"
+    },
+    "training": {
+      "title": "训练：{name}",
+      "close": "关闭训练",
+      "empty": "这位大师没有可传授的配方。",
+      "free": "免费",
+      "stateKnown": "已学会",
+      "stateTeachable": "可学习",
+      "stateLocked": "未解锁",
+      "requirement": "需要{craft}达到 {skill} 后传授",
+      "trainAria": "花费{fee}学习{name}",
+      "dialogOption": "训练",
+      "dialogOptionAria": "向{name}学习配方",
+      "learned": "已学会配方：{recipe}",
+      "tierUnmet": "你需要{craft}达到 {skill} 才能学习该配方。",
+      "cannotAfford": "你付不起这次训练的费用。",
+      "notTaughtHere": "这里不传授该配方。",
+      "alreadyKnown": "你已经学会了该配方。",
+      "outOfRange": "你必须站在对应的工作台旁才能训练。"
     },
     "finder": {
       "title": "地下城查找器",
@@ -2993,9 +3026,9 @@ export const zh_CN: EnTranslations = {
       "ice_lance": "用来消耗冰霜触发效果的瞬发冰刺，对冻结目标造成的伤害大幅提高。",
       "flurry": "快速射出三枚冰弹，使目标寒冷，让你接下来的冰霜法术视其为已冻结。",
       "fingers_of_frost": "你的冰霜箭有时会强化一次冰枪术，使其命中时视目标为已冻结。",
-      "brain_freeze": "你的冰霜箭有时会使下一次凛冬之鞭瞬发且造成更高伤害。",
+      "brain_freeze": "你的冰霜箭有时会使下一次凛冬之鞭瞬发并跳过冷却时间。",
       "shatter": "你的法术对冻结目标的暴击几率大幅提高。",
-      "frozen_orb": "让一颗缓慢的冰球穿过敌群，冻结沿途一切并触发你的冰霜效果。",
+      "frozen_orb": "让一颗缓慢的冰球穿过敌群，使敌人减速并积蓄冰刺。",
       "blizzard": "以冰雪覆盖一片区域，持续伤害并减速整群敌人。",
       "blink": "向前瞬移一小段距离，并在离开时解除定身。",
       "conjure_water": "制造饮品以恢复法力，让你在两次开怪之间补给。",
@@ -4586,7 +4619,11 @@ export const zh_CN: EnTranslations = {
   },
   "heroicShop": {
     "balance": "英雄徽记: {count}",
-    "buyAria": "用{marks}枚英雄徽记购买{item}"
+    "buyAria": "用{marks}枚英雄徽记购买{item}",
+    "buyConfirmTitle": "确认购买",
+    "buyConfirmBody": "用{marks}枚英雄徽记购买{item}？徽记购买后无法退款。",
+    "buyConfirmAccept": "购买",
+    "buyConfirmCancel": "取消"
   },
   "cardDuel": {
     "title": "纸牌对决",
@@ -4639,7 +4676,11 @@ export const zh_CN: EnTranslations = {
       "buyAria": "用 {marks} 枚探秘印记购买 {item}",
       "reqHeroic": "需要英雄难度通关",
       "reqClears": "需要通关 {count} 次",
-      "empty": "暂无存货。"
+      "empty": "暂无存货。",
+      "buyConfirmTitle": "确认购买",
+      "buyConfirmBody": "用 {marks} 枚探秘印记购买 {item}？印记购买后无法退款。",
+      "buyConfirmAccept": "购买",
+      "buyConfirmCancel": "取消"
     },
     "tracker": {
       "title": "探秘",
@@ -5042,7 +5083,9 @@ export const zh_CN: EnTranslations = {
     "rendererFailed": "无法启动渲染器：请尝试刷新。{error}",
     "enterTimeout": "无法进入世界。连接已超时。游戏服务器是否正在运行？",
     "connectionLost": "与服务器的连接已断开。",
-    "reconnecting": "连接已断开。正在重新连接...",
+    "reconnectingAttempt": "连接已断开。正在重新连接...（第 {attempt}/{maxAttempts} 次尝试，{seconds} 秒后重试）",
+    "reconnectingNow": "连接已断开，正在立即重新连接...（第 {attempt}/{maxAttempts} 次尝试）",
+    "slowConnection": "加载时间比平时长。请检查您的网络连接。",
     "connectionRejected": "服务器关闭了连接。",
     "realmFull": "当前服务器已满，请稍后几分钟再试。",
     "tooManyConnections": "您的网络向该服务器发起的连接过多。请关闭多余的游戏窗口，或稍后几分钟再试。",
@@ -6347,7 +6390,7 @@ export const zh_CN: EnTranslations = {
       },
       "blazing_barrier": {
         "name": "炽热屏障",
-        "description": "以烈焰环绕自身，吸收 130 点伤害，持续 60 秒。（火焰）"
+        "description": "以烈焰环绕自身，吸收 {damage} 点伤害，持续 60 秒。（火焰）"
       },
       "cold_snap": {
         "name": "冬之召还",
@@ -6399,11 +6442,11 @@ export const zh_CN: EnTranslations = {
       },
       "flurry": {
         "name": "凛冬之鞭",
-        "description": "连续射出三枚冰弹，每枚造成 {damage} 点冰霜伤害，并对目标施加凛冬之寒：接下来 2 个兼容法术会将其视为已冻结。思维冻结会使凛冬之鞭瞬发、伤害提高 30%，并无视冷却时间。（冰霜）"
+        "description": "连续射出三枚冰弹，每枚造成 {damage} 点冰霜伤害，并对目标施加凛冬之寒：接下来 2 个兼容法术会将其视为已冻结。思维冻结会使凛冬之鞭瞬发并无视冷却时间。（冰霜）"
       },
       "frozen_orb": {
         "name": "寒冰宝珠",
-        "description": "释放一颗旋转的寒冰宝珠，向前漂移 8 秒，每秒对附近敌人造成 {damage} 点冰霜伤害并使其减速 30%。宝珠命中时会产生寒冰指。（冰霜）"
+        "description": "释放一颗旋转的寒冰宝珠，向前漂移 8 秒，每秒对附近敌人造成 {damage} 点冰霜伤害并使其减速 30%。每次命中的脉冲都会生成一枚冰刺。（冰霜）"
       },
       "blizzard": {
         "name": "暴风雪",
@@ -6427,11 +6470,11 @@ export const zh_CN: EnTranslations = {
       },
       "brain_freeze": {
         "name": "思维冻结",
-        "description": "霜缘之矛有 20% 几率使你的下一次凛冬之鞭变为瞬发、伤害提高 30%，并且不受冷却时间限制。（冰霜）"
+        "description": "霜缘之矛有 20% 几率使你的下一次凛冬之鞭变为瞬发，并且不受冷却时间限制。（冰霜）"
       },
       "shatter": {
         "name": "脆碎之殇",
-        "description": "你的法术对冻结目标的暴击几率提高 50%，这些暴击造成的伤害提高 20%。寒冰指和凛冬之寒会将目标视为已冻结。（冰霜）"
+        "description": "你的法术对冻结目标的暴击几率提高 50%。寒冰指和凛冬之寒会将目标视为已冻结。（冰霜）"
       },
       "conjure_water": {
         "name": "束水术",
@@ -6455,7 +6498,7 @@ export const zh_CN: EnTranslations = {
       },
       "frost_nova": {
         "name": "冰缚",
-        "description": "将附近所有敌人冻结在原地，最多持续 8 秒，并造成 {damage} 点冰霜伤害。"
+        "description": "将附近所有敌人冻结在原地，最多持续 8 秒，并造成 {damage} 点冰霜伤害。定身效果会在累计受到相当于目标最大生命值15%的伤害后解除，伤害阈值最低为20点，最高为60点。"
       },
       "arcane_explosion": {
         "name": "以太爆发",
@@ -8214,6 +8257,210 @@ export const zh_CN: EnTranslations = {
       "silverleaf_herb": {
         "name": "银叶草"
       },
+      "rough_hide": {
+        "name": "粗糙的兽皮"
+      },
+      "spider_silk": {
+        "name": "蜘蛛丝"
+      },
+      "venom_gland": {
+        "name": "毒液腺"
+      },
+      "game_meat": {
+        "name": "野味肉"
+      },
+      "homespun_cloth": {
+        "name": "手织布"
+      },
+      "pristine_hide": {
+        "name": "完美的兽皮"
+      },
+      "pristine_silk": {
+        "name": "完美的蜘蛛丝"
+      },
+      "pristine_venom_gland": {
+        "name": "完美的毒液腺"
+      },
+      "prime_cut": {
+        "name": "上等肉块"
+      },
+      "smithing_flux": {
+        "name": "锻造助熔剂"
+      },
+      "spool_of_thread": {
+        "name": "线轴"
+      },
+      "tanning_agent": {
+        "name": "鞣革剂"
+      },
+      "cooking_salt": {
+        "name": "烹饪用盐"
+      },
+      "glass_vial": {
+        "name": "玻璃瓶"
+      },
+      "copper_bearded_axe": {
+        "name": "铜须斧"
+      },
+      "copper_flanged_mace": {
+        "name": "铜翼锤"
+      },
+      "ironbark_boar_spear": {
+        "name": "铁皮木野猪矛"
+      },
+      "ironedge_longsword": {
+        "name": "铁刃长剑"
+      },
+      "ironshod_maul": {
+        "name": "铁包巨槌"
+      },
+      "whetted_iron_dirk": {
+        "name": "磨利铁匕首"
+      },
+      "thorium_warblade": {
+        "name": "瑟银战刃"
+      },
+      "arcanite_war_axe": {
+        "name": "秘银战斧"
+      },
+      "elderwood_battle_staff": {
+        "name": "古老接骨木战棍"
+      },
+      "riveted_copper_girdle": {
+        "name": "铆钉铜腰带"
+      },
+      "coppermail_sabatons": {
+        "name": "铜链战靴"
+      },
+      "coppermail_gauntlets": {
+        "name": "铜链护手"
+      },
+      "ironlink_hauberk": {
+        "name": "铁链锁甲"
+      },
+      "ironlink_legguards": {
+        "name": "铁链护腿"
+      },
+      "ironlink_spaulders": {
+        "name": "铁链肩甲"
+      },
+      "thoriumscale_greathelm": {
+        "name": "瑟银鳞巨盔"
+      },
+      "thoriumscale_cuirass": {
+        "name": "瑟银鳞胸甲"
+      },
+      "thoriumscale_leggings": {
+        "name": "瑟银鳞腿甲"
+      },
+      "homespun_hood": {
+        "name": "手织兜帽"
+      },
+      "homespun_mitts": {
+        "name": "手织连指手套"
+      },
+      "silverthread_slippers": {
+        "name": "银线便鞋"
+      },
+      "goldweave_robe": {
+        "name": "金织长袍"
+      },
+      "goldweave_leggings": {
+        "name": "金织护腿"
+      },
+      "silkspun_satchel": {
+        "name": "丝纺挎包"
+      },
+      "silkbinders_raiment": {
+        "name": "缚丝法衣"
+      },
+      "sunweave_mantle": {
+        "name": "阳织披肩"
+      },
+      "sunweave_treads": {
+        "name": "阳织足垫"
+      },
+      "fenbridge_hide_leggings": {
+        "name": "芬桥皮护腿"
+      },
+      "fenbridge_hide_boots": {
+        "name": "芬桥皮靴"
+      },
+      "fenbridge_hide_belt": {
+        "name": "芬桥皮腰带"
+      },
+      "marshstalker_jerkin": {
+        "name": "沼泽潜猎者皮甲"
+      },
+      "marshstalker_hood": {
+        "name": "沼泽潜猎者兜帽"
+      },
+      "marshstalker_spaulders": {
+        "name": "沼泽潜猎者肩甲"
+      },
+      "mirewarden_jerkin": {
+        "name": "泥沼守卫皮甲"
+      },
+      "mirewarden_leggings": {
+        "name": "泥沼守卫护腿"
+      },
+      "mirewarden_treads": {
+        "name": "泥沼守卫足垫"
+      },
+      "pan_seared_perch": {
+        "name": "香煎河鲈鱼"
+      },
+      "hunters_game_skewer": {
+        "name": "猎人野味串"
+      },
+      "herbed_marsh_pike": {
+        "name": "香草沼泽狗鱼"
+      },
+      "ashwood_smoked_eel": {
+        "name": "灰木熏鳗鱼"
+      },
+      "goldleaf_game_stew": {
+        "name": "金叶野味炖肉"
+      },
+      "frostgill_chowder": {
+        "name": "霜鳃浓汤"
+      },
+      "silvered_carp_supper": {
+        "name": "银鲤晚宴"
+      },
+      "anglers_feast_platter": {
+        "name": "渔夫盛宴拼盘"
+      },
+      "marlows_grand_roast": {
+        "name": "马洛的盛大烤肉"
+      },
+      "silverleaf_healing_draught": {
+        "name": "银叶治疗药水"
+      },
+      "silverleaf_mana_draught": {
+        "name": "银叶法力药水"
+      },
+      "elixir_of_the_boar": {
+        "name": "野猪药剂"
+      },
+      "goldleaf_healing_draught": {
+        "name": "金叶治疗药水"
+      },
+      "goldleaf_mana_draught": {
+        "name": "金叶法力药水"
+      },
+      "venomfire_elixir": {
+        "name": "毒火药剂"
+      },
+      "sunpetal_healing_draught": {
+        "name": "阳瓣治疗药水"
+      },
+      "sunpetal_mana_draught": {
+        "name": "阳瓣法力药水"
+      },
+      "elixir_of_the_serpent": {
+        "name": "巨蛇药剂"
+      },
       "conjured_water4": {
         "name": "魔法泉水"
       },
@@ -9471,6 +9718,36 @@ export const zh_CN: EnTranslations = {
         "title": "荆峰高地编年史",
         "greeting": "高山什么都不会忘记，{playerName}，我也一样。让我看看你都做过什么吧。"
       },
+      "forgemistress_darva": {
+        "name": "达尔瓦锻造师",
+        "title": "熔炉大师",
+        "greeting": "熔炉听我的话，{className}。带来好矿石，它也会听你的。"
+      },
+      "cook_marlow": {
+        "name": "马洛厨师",
+        "title": "厨房大师",
+        "greeting": "没有半生不熟的东西能离开我的厨房，{className}。坐下吃完，再回去闯荡。"
+      },
+      "weaver_ottilie": {
+        "name": "奥蒂莉织工",
+        "title": "织机大师",
+        "greeting": "当心丝线，{className}。在织机前，稳的手胜过有力的手。"
+      },
+      "tinker_gizzel": {
+        "name": "吉泽尔修补匠",
+        "title": "工坊大师",
+        "greeting": "弹簧、齿轮、锋利的刃口，{className}：你手上缺什么，工坊里就有什么。"
+      },
+      "tanner_hesk": {
+        "name": "赫斯克制革匠",
+        "title": "制革坊大师",
+        "greeting": "皮子的好坏全看鞣制，{className}。鞣槽已经备好，就等你了。"
+      },
+      "alchemist_verane": {
+        "name": "韦兰炼金术士",
+        "title": "药坊大师",
+        "greeting": "量两次，倒一次，{className}。药坊里容不得洒掉的药剂。"
+      },
       "tidewatcher_ondrel": {
         "name": "翁德雷尔·凡恩",
         "title": "守潮者",
@@ -10540,6 +10817,56 @@ export const zh_CN: EnTranslations = {
         "sender": "英勇军需官",
         "subject": "你的英勇印记",
         "body": "你的部队清剿了英勇试炼，而你在后排作战，或已倒在尘土之中。你的锁定同样已经生效，因此你那一份英勇印记飞到了这里，而非就此遗失。好好使用它们。\n\n- 英勇军需官"
+      },
+      "guild_trend_engineering_alchemy": {
+        "sender": "工匠公会",
+        "subject": "关于你的工程学与炼金术",
+        "body": "工匠：\n\n你钻研工程学与炼金术的名声已传到公会：称好装药，量好试剂，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。缔结这一对技艺的人，终会赢得爆破师之名。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
+      },
+      "guild_trend_alchemy_cooking": {
+        "sender": "工匠公会",
+        "subject": "关于你的炼金术与烹饪",
+        "body": "工匠：\n\n你钻研炼金术与烹饪的名声已传到公会：熬好药剂，调好菜肴，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。缔结这一对技艺的人，终会赢得药剂师之名。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
+      },
+      "guild_trend_cooking_leatherworking": {
+        "sender": "工匠公会",
+        "subject": "关于你的烹饪与制皮",
+        "body": "工匠：\n\n你钻研烹饪与制皮的名声已传到公会：端出菜肴，鞣好皮革，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
+      },
+      "guild_trend_leatherworking_tailoring": {
+        "sender": "工匠公会",
+        "subject": "关于你的制皮与裁缝",
+        "body": "工匠：\n\n你钻研制皮与裁缝的名声已传到公会：裁好皮革，缝好衣料，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。缔结这一对技艺的人，终会赢得制装师之名。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
+      },
+      "guild_trend_tailoring_inscription": {
+        "sender": "工匠公会",
+        "subject": "关于你的裁缝与铭文",
+        "body": "工匠：\n\n你钻研裁缝与铭文的名声已传到公会：缝好衣线，写好铭文，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
+      },
+      "guild_trend_inscription_enchanting": {
+        "sender": "工匠公会",
+        "subject": "关于你的铭文与附魔",
+        "body": "工匠：\n\n你钻研铭文与附魔的名声已传到公会：写满卷轴，织入魔力，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
+      },
+      "guild_trend_enchanting_jewelcrafting": {
+        "sender": "工匠公会",
+        "subject": "关于你的附魔与珠宝加工",
+        "body": "工匠：\n\n你钻研附魔与珠宝加工的名声已传到公会：注入魔力，磨亮宝石，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
+      },
+      "guild_trend_jewelcrafting_weaponcrafting": {
+        "sender": "工匠公会",
+        "subject": "关于你的珠宝加工与武器锻造",
+        "body": "工匠：\n\n你钻研珠宝加工与武器锻造的名声已传到公会：镶好宝石，磨利刀锋，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
+      },
+      "guild_trend_weaponcrafting_armorcrafting": {
+        "sender": "工匠公会",
+        "subject": "关于你的武器锻造与护甲锻造",
+        "body": "工匠：\n\n你钻研武器锻造与护甲锻造的名声已传到公会：淬好刀刃，敲合甲片，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。缔结这一对技艺的人，终会赢得铁匠之名。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
+      },
+      "guild_trend_armorcrafting_engineering": {
+        "sender": "工匠公会",
+        "subject": "关于你的护甲锻造与工程学",
+        "body": "工匠：\n\n你钻研护甲锻造与工程学的名声已传到公会：铆好甲片，校准齿轮，两门技艺相辅相成。能同时打磨相邻两门技艺的手，正是准备好调谐的手。请到东溪镇拜访哈德伦铁匠：眼下由他代诸位大师发言。用亲手做出的成果向他证明你的技艺，他便会把这两门技艺调谐为你的主修。\n\n谨此，\n工匠公会"
       }
     },
     "itemSets": {

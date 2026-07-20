@@ -143,6 +143,7 @@ const UI_PURE_CORES = [
   'src/ui/target_portrait_view.ts',
   'src/ui/target_rank_view.ts',
   'src/ui/mob_tooltip_view.ts',
+  'src/ui/player_tooltip_view.ts',
   'src/ui/talents_view.ts',
   'src/ui/social_view.ts',
   'src/ui/tab_strip_view.ts',
@@ -153,6 +154,7 @@ const UI_PURE_CORES = [
   'src/ui/options_view.ts',
   'src/ui/hud/vendor/vendor_view.ts',
   'src/ui/hud/vendor/heroic_vendor_view.ts',
+  'src/ui/hud/vendor/train_view.ts',
   'src/ui/card_duel_view.ts',
   'src/ui/claudium_view.ts',
   'src/ui/woc_store_view.ts',
@@ -192,6 +194,8 @@ const UI_PURE_CORES = [
   'src/ui/unit_frame.ts',
   'src/ui/stance_bar_view.ts',
   'src/ui/hud/action_bar/action_bar_view.ts',
+  'src/ui/hud/action_bar/action_bar_layout_core.ts',
+  'src/ui/hud/action_bar/action_bar_visibility_core.ts',
   'src/ui/hud/action_bar/mobile_action_page_view.ts',
   'src/ui/hud/action_bar/consumable_bar_view.ts',
   'src/ui/mobile_hud_layout.ts',
@@ -213,6 +217,8 @@ const UI_PURE_CORES = [
   'src/ui/town_focus_view.ts',
   'src/ui/pet_action_icons.ts',
   'src/ui/welcome_screen_view.ts',
+  'src/ui/loading_slow_hint_core.ts',
+  'src/ui/reconnect_status_core.ts',
   'src/game/ui_effects_profile.ts',
   'src/game/ui_tier_knobs.ts',
 ].map((rel) => join(repoRoot, rel));
@@ -227,6 +233,7 @@ const UI_PURE_CORES = [
 // the same contract for the map editor's realtime terrain/water edits.
 const RENDER_PURE_CORES = [
   'src/render/cast_bar.ts',
+  'src/render/stations_core.ts',
   'src/render/delve_interactable_visibility_core.ts',
   'src/render/nameplate_view.ts',
   'src/render/net_interp_core.ts',

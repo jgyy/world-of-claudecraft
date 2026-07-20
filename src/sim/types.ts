@@ -293,7 +293,7 @@ export type AuraKind =
   // `fingers_of_frost`: self buff, up to 2 stacks; an Ice Lance spends one to
   // treat its target as frozen (Shatter + its 3x frozen damage).
   // `brain_freeze`: self buff, single; the next Flurry goes instant, skips its
-  // cooldown and hits 30% harder (consumed in castAbility's override).
+  // cooldown, and keeps its base damage (consumed in castAbility's override).
   // `winters_chill`: TARGET debuff with 2 charges; each compatible spell
   // impact spends one to count the target as frozen.
   // `icicles`: self buff, up to 5 stacks, built by Rimelance impacts and Frozen
@@ -446,6 +446,9 @@ export interface Aura {
   tickTimer?: number;
   sourceId: number;
   school: 'physical' | 'fire' | 'frost' | 'arcane' | 'shadow' | 'holy' | 'nature';
+  // Encounter-authored control that must land through immunity and cannot be
+  // removed by player counters. Natural expiry and encounter cleanup still own it.
+  unbreakableControl?: true;
   breaksOnDamage?: boolean;
   // Lingering Dread lets a break-on-damage fear absorb this much damage before
   // breaking. Undefined retains the normal break-on-any-damage behavior.
@@ -481,6 +484,12 @@ export interface Aura {
   // ticks. These fields are simulation-only and need not ride the wire.
   temporalHealRemaining?: number;
   temporalHealTicksRemaining?: number;
+}
+
+export interface DamageBreakBudget {
+  maxHpPct: number;
+  min: number;
+  max: number;
 }
 
 export type CrowdControlDrCategory =
@@ -1683,6 +1692,44 @@ export interface MobTemplate {
   purgeOnHit?: { chance: number; name: string };
 }
 
+interface AoeRootBase {
+  type: 'aoeRoot';
+  duration: number;
+  radius: number;
+  min: number;
+  max: number;
+}
+
+type AoeRootEffect =
+  | (AoeRootBase & {
+      breakOnDamage?: DamageBreakBudget;
+      stun?: false;
+      ring?: never;
+      trap?: never;
+    })
+  | (AoeRootBase & {
+      breakOnDamage?: never;
+      stun: true;
+      ring?: never;
+      trap?: never;
+    })
+  | (AoeRootBase & {
+      breakOnDamage?: never;
+      stun?: boolean;
+      // Persistent annular root. `duration` remains the root duration; the
+      // nested duration is how long the ring can catch new enemies.
+      ring: { duration: number; innerRadius: number };
+      trap?: never;
+    })
+  | (AoeRootBase & {
+      breakOnDamage?: never;
+      ring?: never;
+      stun?: boolean;
+      // Armed trap at the caster's feet. It freezes the first enemy contact
+      // after armTime and expires after lifetime.
+      trap: { armTime: number; lifetime: number };
+    });
+
 export type AbilityEffect =
   | { type: 'weaponDamage'; bonus: number } // on-next-swing bonus (heroic strike)
   | {
@@ -1726,9 +1773,10 @@ export type AbilityEffect =
   // feared; absent = fear every hostile in radius (the warlock-style AoE fear).
   | { type: 'aoeFear'; duration: number; radius: number; maxTargets?: number }
   | { type: 'clearCooldowns'; abilities: string[] }
+  | { type: 'breakRoots' }
   | { type: 'breakControl' }
-  // Ice Block: strip EVERY debuff (control, DoTs, stat saps, ...) off the caster.
-  // Broader than breakControl (which covers control auras only). See effect_dispatch.
+  // Ice Block: strip every player-removable debuff (control, DoTs, stat saps, ...)
+  // Broader than breakRoots and breakControl. See effect_dispatch.
   | { type: 'cleanseSelf' }
   | {
       type: 'repositionToAim';
@@ -1806,7 +1854,7 @@ export type AbilityEffect =
       radius: number;
     }
   | { type: 'hot'; total: number; duration: number; interval: number } // renew, rejuvenation
-  | { type: 'absorb'; amount: number; duration: number } // power word: shield
+  | { type: 'absorb'; amount: number; duration: number; spellPowerCoeff?: number } // power word: shield
   | { type: 'imbue'; bonus: number; duration: number; judgeMin?: number; judgeMax?: number } // seals / rockbiter: extra damage per swing
   | { type: 'judgement'; dmgMult?: number; flat?: number } // consume your imbue, deal its judgement damage to the target
   | { type: 'lifeTap'; hp: number; mana: number }
@@ -1923,21 +1971,7 @@ export type AbilityEffect =
   | { type: 'aoeAllyDamage'; pct: number; duration: number; radius: number }
   | { type: 'aoeAllySureCrit'; charges: number; duration: number; radius: number }
   | { type: 'aoeSlow'; mult: number; duration: number; radius: number }
-  | {
-      type: 'aoeRoot';
-      duration: number;
-      radius: number;
-      min: number;
-      max: number;
-      stun?: boolean;
-      // Optional persistent annular trap. `duration` remains the root duration;
-      // the nested duration is how long the ring can catch new enemies.
-      ring?: { duration: number; innerRadius: number };
-      // Optional armed trap at the caster's feet (combat/hunter_trap.ts):
-      // arms after armTime, freezes the first enemy contact for `duration`,
-      // expires after lifetime. One per owner.
-      trap?: { armTime: number; lifetime: number };
-    }
+  | AoeRootEffect
   | {
       type: 'empoweredCone';
       angle: number;
@@ -1957,7 +1991,7 @@ export type AbilityEffect =
     }
   // Frozen Orb (combat/frozen_orb.ts): releases a slow-drifting orb from the
   // caster that pulses frost damage + a snare every `interval` for `duration`
-  // seconds and feeds Fingers of Frost (frost mage spec kit).
+  // seconds and banks Icicles (frost mage spec kit).
   | {
       type: 'frozenOrb';
       min: number;
@@ -3149,6 +3183,14 @@ export type SimEvent = { pid?: number } & (
       // from players far outside your ~120yd interest scope, where no entity
       // record exists locally.
       flair?: ChatSenderFlair;
+      // The SENDER's class, for the same reason and by the same rule as `flair`
+      // above: it rides the event rather than being read off the sender's
+      // entity because general/world/lfg/guild chat reaches you from players
+      // far outside your ~120yd interest scope, where `IWorld.entities` (world-
+      // complete offline, interest-scoped online) has no record for them. Set
+      // for every player-sourced chat line (mob/boss yells omit it, same as
+      // fromTitle).
+      classId?: PlayerClass;
     }
   | { type: 'partyInvite'; fromPid: number; fromName: string }
   // The party/raid leader started a ready check: the recipient's client plays a
@@ -3287,6 +3329,22 @@ export type SimEvent = { pid?: number } & (
     }
   // personal outcome line for each fighter (rides beside the anchored vcupEnd)
   | { type: 'vcupResult'; won: boolean; draw: boolean }
+  // Card Duel minigame (src/sim/social/card_duel.ts). Personal (pid), text-free
+  // on purpose (the client picks its own audio/copy off the structured
+  // fields, same as gatherResult/craftResult above).
+  | { type: 'cardDuelMatchStart'; pid?: number }
+  | { type: 'cardPlayed'; pid?: number }
+  | {
+      type: 'cardRoundResolved';
+      mine: number;
+      theirs: number;
+      outcome: 'win' | 'lose' | 'push';
+      // True when this side's post-round draw emptied the deck and had to
+      // reshuffle the discard pile back in (see card_hand.ts drawOne).
+      reshuffled: boolean;
+      pid?: number;
+    }
+  | { type: 'cardDuelMatchEnd'; won: boolean; pid?: number }
   | {
       type: 'heal2';
       sourceId: number;
@@ -3485,7 +3543,26 @@ export type SimEvent = { pid?: number } & (
         | 'combo_requirement_unmet'
         | 'recipe_not_learned'
         | 'throttled'
-        | 'not_at_hub';
+        | 'station_required';
+    }
+  // Recipe-training outcome (Professions 2.0 Phase 9): mirrors
+  // professions/training.ts TrainResult so the online client can reflect the
+  // local result of a train_recipe command without deciding it itself.
+  // Personal (emitted with pid = the trainee's entity id). Text-free on
+  // purpose (like craftResult above): the client derives the recipe name,
+  // craft, and tier threshold from recipeId plus static content, so the
+  // event carries NO display text. `reason` is absent on success AND on a
+  // malformed/unknown recipe id (the silent-deny arm).
+  | {
+      type: 'trainResult';
+      ok: boolean;
+      recipeId: string;
+      reason?:
+        | 'train_already_known'
+        | 'train_not_taught_here'
+        | 'train_out_of_range'
+        | 'train_tier_unmet'
+        | 'train_cannot_afford';
     }
   // Masterwork proc (Professions 2.0 Phase 2): a successful craft's single
   // output-side rng draw procced, minting a masterwork instance with baked
