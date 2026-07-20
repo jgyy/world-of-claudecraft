@@ -691,19 +691,61 @@ export function inviteRefreshDue(lastCreatedMs: number | null, nowMs: number): b
   return lastCreatedMs === null || nowMs - lastCreatedMs >= INVITE_REFRESH_INTERVAL_MS;
 }
 
+const INVITE_EMBED_TITLE = 'Join the World of ClaudeCraft Discord';
+
 // The single message the bot keeps edited in place with the current invite.
 export function buildInviteMessage(inviteUrl: string): Record<string, unknown> {
   return {
     embeds: [
       {
         color: 0x5865f2,
-        title: 'Join the World of ClaudeCraft Discord',
+        title: INVITE_EMBED_TITLE,
         description: `${inviteUrl}\n\nThis link is kept fresh automatically and never expires.`,
         footer: { text: 'World of ClaudeCraft' },
       },
     ],
     allowed_mentions: { parse: [] },
   };
+}
+
+export interface DiscordMessageSummary {
+  id: string;
+  author: { id: string };
+  embeds?: { title?: string }[];
+  timestamp: string;
+  edited_timestamp?: string | null;
+}
+
+// Finds the bot's own previously-posted invite message (newest first) so a
+// process restart edits the existing message in place instead of piling up a
+// fresh one every time. Discord has no "my messages by content" query, so
+// this matches by author id plus the invite embed's stable title. The
+// returned `lastSetMs` (last edit, or the original post if never edited)
+// seeds `inviteCreatedAtMs` so the refresh cadence survives the restart too.
+export function findManagedInviteMessage(
+  messages: DiscordMessageSummary[],
+  botUserId: string,
+): { id: string; lastSetMs: number } | null {
+  const found = messages.find(
+    (m) => m.author.id === botUserId && m.embeds?.[0]?.title === INVITE_EMBED_TITLE,
+  );
+  if (!found) return null;
+  const lastSetMs = Date.parse(found.edited_timestamp ?? found.timestamp);
+  return { id: found.id, lastSetMs: Number.isNaN(lastSetMs) ? 0 : lastSetMs };
+}
+
+// Discord's "Unknown Message" API error code: returned when editing a
+// message that no longer exists (deleted by a moderator, channel purge,
+// etc). On this, the caller should drop the stale id and post a replacement
+// rather than retrying the same edit forever.
+export const DISCORD_UNKNOWN_MESSAGE_CODE = 10008;
+
+export function isUnknownMessageError(err: unknown): boolean {
+  return (
+    typeof err === 'object' &&
+    err !== null &&
+    (err as { code?: unknown }).code === DISCORD_UNKNOWN_MESSAGE_CODE
+  );
 }
 
 export function buildDailyRewardWinnersMessage(

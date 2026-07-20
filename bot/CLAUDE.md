@@ -67,8 +67,12 @@ Zero new dependencies: Gateway over the existing `ws`, REST via built-in `fetch`
   channel message kept edited in place once `INVITE_REFRESH_INTERVAL_MS` (25 days,
   `logic.ts`) has elapsed since the last one, so the link never goes stale the way
   a hand-made invite (Discord's 30-day default) does. The message id lives only in
-  memory: a bot restart before the next refresh posts a new message rather than
-  re-editing the old one (the old message's link is still valid, just orphaned).
+  memory, so on boot it is rediscovered by listing the channel's recent messages
+  and matching the bot's own author id plus the invite embed's stable title
+  (`findManagedInviteMessage`); a fresh message is posted only when none is found.
+  If the managed message is deleted out from under the bot, the next refresh's
+  edit fails with Discord's Unknown Message error (10008), which clears the
+  stale id and posts a replacement instead of retrying forever.
 
 ## Roles
 - **Status tiers** (`WoC Initiate` up to `WoC Mythic`; ladder in
