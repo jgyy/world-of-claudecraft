@@ -287,7 +287,10 @@ non-dummy, unmuted mob within `MOB_IDLE_SCAN_RADIUS` of the player and rolls
 each one independently
 against `MOB_IDLE_BASE_CHANCE`, damped by how many same-family mobs are
 clustered nearby (`idleDensityFactor`, `src/ui/mob_idle_sfx.ts`) so a dense
-pack does not all bark in the same sweep. A per-entity cooldown
+pack does not all bark in the same sweep. If several rolls succeed, exactly
+one is selected uniformly for an attempt. That fixed invariant bounds cold
+audio fetch/decode fan-out to one attempt per sweep on every client. A
+per-entity cooldown
 (`MOB_IDLE_PER_ENTITY_COOLDOWN_MS`) additionally rate-limits one mob's own
 repeats, stamped only when `sfx.playAt` reports the sound actually played
 (not merely attempted), so losing the shared per-key playback cooldown
@@ -340,6 +343,9 @@ Fiesta) and every world/spatial sound ignore the toggle.
 | `ui_fiesta_word_0` through `ui_fiesta_word_3` | escalating Fiesta takedown tiers |
 | `ui_fiesta_score_mine`, `ui_fiesta_score_other` | team score feedback |
 | `ui_fiesta_wave`, `ui_fiesta_augment`, `ui_fiesta_down`, `ui_fiesta_revive` | Fiesta round and player-state feedback |
+| `ui_card_play`, `ui_card_reveal` | Card Duel minigame (`src/sim/social/card_duel.ts`): a card played, and every round's simultaneous reveal. High-frequency (once per round each), multi-take. |
+| `ui_card_round_push` | Card Duel: layers on top of the reveal cue when a round ties (nobody scores), never a replacement for it |
+| `ui_card_shuffle` | Card Duel: the initial deal at match start AND a mid-match reshuffle (discard pile shuffled back into the deck once it empties), same cue for both moments |
 
 ---
 

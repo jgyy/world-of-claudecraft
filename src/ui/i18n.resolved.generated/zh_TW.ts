@@ -317,7 +317,11 @@ export const zh_TW: EnTranslations = {
     "death": {
       "resurrectAtCorpse": "在屍體旁復活",
       "resurrectAtHealer": "靈魂醫者（復活虛弱）",
-      "spiritHealerAlive": "靈魂醫者只看護逝者。你仍是生者。"
+      "spiritHealerAlive": "靈魂醫者只看護逝者。你仍是生者。",
+      "healerConfirmTitle": "接受復活虛弱？",
+      "healerConfirmBody": "靈魂醫者可以就地復活你，但復活虛弱會使你的全部屬性降低75%，高等級時最長持續10分鐘。讓靈魂返回屍體復活則沒有任何懲罰。",
+      "healerConfirmAccept": "復活",
+      "healerConfirmCancel": "取消"
     },
     "fct": {
       "absorbed": "吸收 {amount}",
@@ -1040,6 +1044,7 @@ export const zh_TW: EnTranslations = {
       "itemLevelLine": "物品等級 {level}",
       "itemScoreLine": "評分 {score}",
       "showSecondaryActionBar": "顯示副動作列",
+      "showThirdActionBar": "顯示第三動作列",
       "showTargetOfTarget": "顯示目標的目標",
       "showAttackButton": "顯示攻擊按鈕",
       "showDailyRewardsChest": "顯示每日獎勵寶箱",
@@ -1469,7 +1474,8 @@ export const zh_TW: EnTranslations = {
       "watchTwitch": "在 Twitch 觀看",
       "watchX": "在 X 檢視",
       "watchKick": "在 Kick 觀看",
-      "watchYouTube": "在 YouTube 觀看"
+      "watchYouTube": "在 YouTube 觀看",
+      "streamerBadgeTitle": "認證主播"
     },
     "lootSettings": {
       "title": "拾取設定",
@@ -2201,7 +2207,15 @@ export const zh_TW: EnTranslations = {
         "nearTier": "{craft}距離下一階級還差 {points} 點技能。",
         "dormantKnowledge": "{craft}知識已保留，但在其組合或嗜好未啟用時處於休眠狀態。"
       },
-      "notAtHub": "必須達到所需等級並位於製作站，才能製作該物品。",
+      "stationRequired": "必須位於{station}才能製作該物品。",
+      "stationName": {
+        "forge": "鍛造坊",
+        "kitchens": "廚房",
+        "apothecary": "藥坊",
+        "tannery": "製革坊",
+        "loom": "織布機",
+        "toolworks": "工坊"
+      },
       "throttled": "你製作得太快了，請稍等片刻後再試。",
       "recipeNotLearned": "你還沒有學會這個配方。",
       "skillReqLine": "需要{craft} {skill}",
@@ -2209,13 +2223,32 @@ export const zh_TW: EnTranslations = {
       "difficultyReduced": "技能成長減少",
       "difficultyNone": "無技能成長",
       "stationBadge": "製作站",
-      "stationOutOfRange": "前往製作站才能製作該物品。",
+      "stationOutOfRangeNamed": "前往{station}即可製作該物品。",
       "masterworkToast": "傑作！{name}",
       "masterworkZoneLine": "{crafter}製作出了傑作{name}！",
       "tierUpToast": "{craft}提升至階級 {tier}！",
       "makersMark": "製作者：{name}",
       "masterworkSeal": "傑作",
       "enchantedLine": "已附魔"
+    },
+    "training": {
+      "title": "訓練：{name}",
+      "close": "關閉訓練",
+      "empty": "這位大師沒有可傳授的配方。",
+      "free": "免費",
+      "stateKnown": "已學會",
+      "stateTeachable": "可學習",
+      "stateLocked": "未解鎖",
+      "requirement": "需要{craft}達到 {skill} 後傳授",
+      "trainAria": "花費{fee}學習{name}",
+      "dialogOption": "訓練",
+      "dialogOptionAria": "向{name}學習配方",
+      "learned": "已學會配方：{recipe}",
+      "tierUnmet": "你需要{craft}達到 {skill} 才能學習該配方。",
+      "cannotAfford": "你付不起這次訓練的費用。",
+      "notTaughtHere": "這裡不傳授該配方。",
+      "alreadyKnown": "你已經學會了該配方。",
+      "outOfRange": "你必須站在對應的工作臺旁才能訓練。"
     },
     "finder": {
       "title": "地城搜尋器",
@@ -2993,9 +3026,9 @@ export const zh_TW: EnTranslations = {
       "ice_lance": "用來消耗冰霜觸發效果的瞬發冰刺，對凍結目標造成的傷害大幅提高。",
       "flurry": "快速射出三枚冰彈，使目標寒冷，讓你接下來的冰霜法術視其為已凍結。",
       "fingers_of_frost": "你的冰霜箭有時會強化一次冰槍術，使其命中時將目標視為已凍結。",
-      "brain_freeze": "你的冰霜箭有時會使下一次凜冬之鞭瞬發且造成更高傷害。",
+      "brain_freeze": "你的冰霜箭有時會使下一次凜冬之鞭瞬發並跳過冷卻時間。",
       "shatter": "你的法術對凍結目標的致命一擊機率大幅提高。",
-      "frozen_orb": "讓一顆緩慢的冰球穿過敵群，冰凍沿途的一切並觸發你的冰霜效果。",
+      "frozen_orb": "讓一顆緩慢的冰球穿過敵群，使敵人緩速並積蓄冰柱。",
       "blizzard": "以冰雪覆蓋一片區域，持續傷害並緩速整群敵人。",
       "blink": "向前瞬移一小段距離，並在離開時解除定身。",
       "conjure_water": "製造飲品以恢復法力，讓你能在每次開怪之間補滿。",
@@ -4586,7 +4619,11 @@ export const zh_TW: EnTranslations = {
   },
   "heroicShop": {
     "balance": "英雄徽記: {count}",
-    "buyAria": "用{marks}枚英雄徽記購買{item}"
+    "buyAria": "用{marks}枚英雄徽記購買{item}",
+    "buyConfirmTitle": "確認購買",
+    "buyConfirmBody": "用{marks}枚英雄徽記購買{item}？徽記購買後無法退款。",
+    "buyConfirmAccept": "購買",
+    "buyConfirmCancel": "取消"
   },
   "cardDuel": {
     "title": "紙牌對決",
@@ -4639,7 +4676,11 @@ export const zh_TW: EnTranslations = {
       "buyAria": "用 {marks} 枚秘探印記購買 {item}",
       "reqHeroic": "需要英雄難度通關",
       "reqClears": "需要通關 {count} 次",
-      "empty": "暫無存貨。"
+      "empty": "暫無存貨。",
+      "buyConfirmTitle": "確認購買",
+      "buyConfirmBody": "用 {marks} 枚秘探印記購買 {item}？印記購買後無法退款。",
+      "buyConfirmAccept": "購買",
+      "buyConfirmCancel": "取消"
     },
     "tracker": {
       "title": "秘探",
@@ -5028,6 +5069,11 @@ export const zh_TW: EnTranslations = {
     "discordCommunity": "加入 World of ClaudeCraft 的 Discord 社群",
     "donateProject": "捐贈支持 World of ClaudeCraft"
   },
+  "entryGuard": {
+    "title": "已降低圖形設定",
+    "body": "進入世界時遊戲意外關閉，圖形設定現已設為{preset}。你可以在下方的圖形選擇器或遊戲內選項中變更。",
+    "dismiss": "關閉"
+  },
   "loading": {
     "world": "正在載入世界...",
     "worldProgress": "正在載入世界... {done}/{total}",
@@ -5037,7 +5083,9 @@ export const zh_TW: EnTranslations = {
     "rendererFailed": "無法啟動渲染器：請嘗試重新整理。{error}",
     "enterTimeout": "無法進入世界。連線已逾時。遊戲伺服器是否正在執行？",
     "connectionLost": "與伺服器的連線已中斷。",
-    "reconnecting": "連線已中斷。正在重新連線...",
+    "reconnectingAttempt": "連線已中斷。正在重新連線...（第 {attempt}/{maxAttempts} 次嘗試，{seconds} 秒後重試）",
+    "reconnectingNow": "連線已中斷，正在重新連線...（第 {attempt}/{maxAttempts} 次嘗試）",
+    "slowConnection": "載入時間比平常長。請檢查您的網路連線。",
     "connectionRejected": "伺服器已關閉連線。",
     "realmFull": "這個世界目前已滿，請於幾分鐘後再試。",
     "tooManyConnections": "您的網路對這個世界建立的連線過多。請關閉多餘的遊戲視窗，或於幾分鐘後再試。",
@@ -6344,7 +6392,7 @@ export const zh_TW: EnTranslations = {
       },
       "blazing_barrier": {
         "name": "烈焰屏障",
-        "description": "以烈焰環繞自身，吸收 130 點傷害，持續 60 秒。（火焰）"
+        "description": "以烈焰環繞自身，吸收 {damage} 點傷害，持續 60 秒。（火焰）"
       },
       "cold_snap": {
         "name": "冬之召還",
@@ -6396,11 +6444,11 @@ export const zh_TW: EnTranslations = {
       },
       "flurry": {
         "name": "凜冬之鞭",
-        "description": "連續射出三枚冰彈，每枚造成 {damage} 點冰霜傷害，並對目標施加凜冬之寒：接下來 2 個相容法術會將其視為已凍結。思維凍結會使凜冬之鞭瞬發、傷害提高 30%，並跳過冷卻時間。（冰霜）"
+        "description": "連續射出三枚冰彈，每枚造成 {damage} 點冰霜傷害，並對目標施加凜冬之寒：接下來 2 個相容法術會將其視為已凍結。思維凍結會使凜冬之鞭瞬發並跳過冷卻時間。（冰霜）"
       },
       "frozen_orb": {
         "name": "寒冰寶珠",
-        "description": "釋放一顆旋轉的寒冰寶珠，向前飄移 8 秒，每秒對附近敵人造成 {damage} 點冰霜傷害並使其緩速 30%。寶珠命中時會產生寒冰指。（冰霜）"
+        "description": "釋放一顆旋轉的寒冰寶珠，向前飄移 8 秒，每秒對附近敵人造成 {damage} 點冰霜傷害並使其緩速 30%。每次命中的脈衝都會生成一枚冰柱。（冰霜）"
       },
       "blizzard": {
         "name": "暴風雪",
@@ -6424,11 +6472,11 @@ export const zh_TW: EnTranslations = {
       },
       "brain_freeze": {
         "name": "思維凍結",
-        "description": "霜緣之矛有 20% 機率使你的下一次凜冬之鞭變為瞬發、傷害提高 30%，並且不受冷卻時間限制。（冰霜）"
+        "description": "霜緣之矛有 20% 機率使你的下一次凜冬之鞭變為瞬發，並且不受冷卻時間限制。（冰霜）"
       },
       "shatter": {
         "name": "脆碎之殤",
-        "description": "你的法術對凍結目標的致命一擊機率提高 50%，這些致命一擊造成的傷害提高 20%。寒冰指和凜冬之寒會將目標視為已凍結。（冰霜）"
+        "description": "你的法術對凍結目標的致命一擊機率提高 50%。寒冰指和凜冬之寒會將目標視為已凍結。（冰霜）"
       },
       "conjure_water": {
         "name": "縛水術",
@@ -6452,7 +6500,7 @@ export const zh_TW: EnTranslations = {
       },
       "frost_nova": {
         "name": "縛冰術",
-        "description": "將附近所有敵人凍結在原地，最多持續 8 秒，並造成 {damage} 點冰霜傷害。"
+        "description": "將附近所有敵人凍結在原地，最多持續 8 秒，並造成 {damage} 點冰霜傷害。定身效果會在累計受到相當於目標最大生命值15%的傷害後解除，傷害門檻最低為20點，最高為60點。"
       },
       "arcane_explosion": {
         "name": "乙太爆發",
@@ -8211,6 +8259,210 @@ export const zh_TW: EnTranslations = {
       "silverleaf_herb": {
         "name": "銀葉草"
       },
+      "rough_hide": {
+        "name": "粗糙的獸皮"
+      },
+      "spider_silk": {
+        "name": "蜘蛛絲"
+      },
+      "venom_gland": {
+        "name": "毒液腺"
+      },
+      "game_meat": {
+        "name": "野味肉"
+      },
+      "homespun_cloth": {
+        "name": "手織布"
+      },
+      "pristine_hide": {
+        "name": "完美的獸皮"
+      },
+      "pristine_silk": {
+        "name": "完美的蜘蛛絲"
+      },
+      "pristine_venom_gland": {
+        "name": "完美的毒液腺"
+      },
+      "prime_cut": {
+        "name": "上等肉塊"
+      },
+      "smithing_flux": {
+        "name": "鍛造助熔劑"
+      },
+      "spool_of_thread": {
+        "name": "線軸"
+      },
+      "tanning_agent": {
+        "name": "鞣革劑"
+      },
+      "cooking_salt": {
+        "name": "烹飪用鹽"
+      },
+      "glass_vial": {
+        "name": "玻璃瓶"
+      },
+      "copper_bearded_axe": {
+        "name": "銅鬚斧"
+      },
+      "copper_flanged_mace": {
+        "name": "銅翼錘"
+      },
+      "ironbark_boar_spear": {
+        "name": "鐵皮木野豬矛"
+      },
+      "ironedge_longsword": {
+        "name": "鐵刃長劍"
+      },
+      "ironshod_maul": {
+        "name": "鐵包巨槌"
+      },
+      "whetted_iron_dirk": {
+        "name": "磨利鐵匕首"
+      },
+      "thorium_warblade": {
+        "name": "瑟銀戰刃"
+      },
+      "arcanite_war_axe": {
+        "name": "秘銀戰斧"
+      },
+      "elderwood_battle_staff": {
+        "name": "古老接骨木戰棍"
+      },
+      "riveted_copper_girdle": {
+        "name": "鉚釘銅腰帶"
+      },
+      "coppermail_sabatons": {
+        "name": "銅鏈戰靴"
+      },
+      "coppermail_gauntlets": {
+        "name": "銅鏈護手"
+      },
+      "ironlink_hauberk": {
+        "name": "鐵鏈鎖甲"
+      },
+      "ironlink_legguards": {
+        "name": "鐵鏈護腿"
+      },
+      "ironlink_spaulders": {
+        "name": "鐵鏈肩甲"
+      },
+      "thoriumscale_greathelm": {
+        "name": "瑟銀鱗巨盔"
+      },
+      "thoriumscale_cuirass": {
+        "name": "瑟銀鱗胸甲"
+      },
+      "thoriumscale_leggings": {
+        "name": "瑟銀鱗腿甲"
+      },
+      "homespun_hood": {
+        "name": "手織兜帽"
+      },
+      "homespun_mitts": {
+        "name": "手織連指手套"
+      },
+      "silverthread_slippers": {
+        "name": "銀線便鞋"
+      },
+      "goldweave_robe": {
+        "name": "金織長袍"
+      },
+      "goldweave_leggings": {
+        "name": "金織護腿"
+      },
+      "silkspun_satchel": {
+        "name": "絲紡挎包"
+      },
+      "silkbinders_raiment": {
+        "name": "縛絲法衣"
+      },
+      "sunweave_mantle": {
+        "name": "陽織披肩"
+      },
+      "sunweave_treads": {
+        "name": "陽織足墊"
+      },
+      "fenbridge_hide_leggings": {
+        "name": "芬橋皮護腿"
+      },
+      "fenbridge_hide_boots": {
+        "name": "芬橋皮靴"
+      },
+      "fenbridge_hide_belt": {
+        "name": "芬橋皮腰帶"
+      },
+      "marshstalker_jerkin": {
+        "name": "沼澤潛獵者皮甲"
+      },
+      "marshstalker_hood": {
+        "name": "沼澤潛獵者兜帽"
+      },
+      "marshstalker_spaulders": {
+        "name": "沼澤潛獵者肩甲"
+      },
+      "mirewarden_jerkin": {
+        "name": "泥沼守衛皮甲"
+      },
+      "mirewarden_leggings": {
+        "name": "泥沼守衛護腿"
+      },
+      "mirewarden_treads": {
+        "name": "泥沼守衛足墊"
+      },
+      "pan_seared_perch": {
+        "name": "香煎河鱸魚"
+      },
+      "hunters_game_skewer": {
+        "name": "獵人野味串"
+      },
+      "herbed_marsh_pike": {
+        "name": "香草沼澤狗魚"
+      },
+      "ashwood_smoked_eel": {
+        "name": "灰木燻鰻魚"
+      },
+      "goldleaf_game_stew": {
+        "name": "金葉野味燉肉"
+      },
+      "frostgill_chowder": {
+        "name": "霜鰓濃湯"
+      },
+      "silvered_carp_supper": {
+        "name": "銀鯉晚宴"
+      },
+      "anglers_feast_platter": {
+        "name": "漁夫盛宴拼盤"
+      },
+      "marlows_grand_roast": {
+        "name": "馬洛的盛大烤肉"
+      },
+      "silverleaf_healing_draught": {
+        "name": "銀葉治療藥水"
+      },
+      "silverleaf_mana_draught": {
+        "name": "銀葉法力藥水"
+      },
+      "elixir_of_the_boar": {
+        "name": "野豬藥劑"
+      },
+      "goldleaf_healing_draught": {
+        "name": "金葉治療藥水"
+      },
+      "goldleaf_mana_draught": {
+        "name": "金葉法力藥水"
+      },
+      "venomfire_elixir": {
+        "name": "毒火藥劑"
+      },
+      "sunpetal_healing_draught": {
+        "name": "陽瓣治療藥水"
+      },
+      "sunpetal_mana_draught": {
+        "name": "陽瓣法力藥水"
+      },
+      "elixir_of_the_serpent": {
+        "name": "巨蛇藥劑"
+      },
       "conjured_water4": {
         "name": "魔法泉水"
       },
@@ -9468,6 +9720,36 @@ export const zh_TW: EnTranslations = {
         "title": "荊峰高地編年史",
         "greeting": "高山什麼都不會忘記，{playerName}，我也一樣。讓我看看你都做過什麼吧。"
       },
+      "forgemistress_darva": {
+        "name": "達爾瓦鍛造師",
+        "title": "熔爐大師",
+        "greeting": "熔爐聽我的話，{className}。帶來好礦石，它也會聽你的。"
+      },
+      "cook_marlow": {
+        "name": "馬洛廚師",
+        "title": "廚房大師",
+        "greeting": "沒有半生不熟的東西能離開我的廚房，{className}。坐下吃完，再回去闖蕩。"
+      },
+      "weaver_ottilie": {
+        "name": "奧蒂莉織工",
+        "title": "織機大師",
+        "greeting": "當心絲線，{className}。在織機前，穩的手勝過有力的手。"
+      },
+      "tinker_gizzel": {
+        "name": "吉澤爾修補匠",
+        "title": "工坊大師",
+        "greeting": "彈簧、齒輪、鋒利的刃口，{className}：你手上缺什麼，工坊裡就有什麼。"
+      },
+      "tanner_hesk": {
+        "name": "赫斯克製革匠",
+        "title": "製革坊大師",
+        "greeting": "皮子的好壞全看鞣製，{className}。鞣槽已經備好，就等你了。"
+      },
+      "alchemist_verane": {
+        "name": "韋蘭煉金術士",
+        "title": "藥坊大師",
+        "greeting": "量兩次，倒一次，{className}。藥坊裡容不得灑掉的藥劑。"
+      },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
         "title": "守潮者",
@@ -10537,6 +10819,56 @@ export const zh_TW: EnTranslations = {
         "sender": "英勇軍需官",
         "subject": "你的英勇印記",
         "body": "你的部隊清剿了英勇試煉，而你在後排作戰，或已倒在塵土之中。你的鎖定同樣已經生效，因此你那一份英勇印記飛到了這裡，而非就此遺失。好好使用它們。\n\n- 英勇軍需官"
+      },
+      "guild_trend_engineering_alchemy": {
+        "sender": "工匠公會",
+        "subject": "關於你的工程學與鍊金術",
+        "body": "工匠：\n\n你鑽研工程學與鍊金術的名聲已傳到公會：稱好裝藥，量好試劑，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。締結這一對技藝的人，終會贏得爆破師之名。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
+      },
+      "guild_trend_alchemy_cooking": {
+        "sender": "工匠公會",
+        "subject": "關於你的鍊金術與烹飪",
+        "body": "工匠：\n\n你鑽研鍊金術與烹飪的名聲已傳到公會：熬好藥劑，調好菜餚，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。締結這一對技藝的人，終會贏得藥劑師之名。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
+      },
+      "guild_trend_cooking_leatherworking": {
+        "sender": "工匠公會",
+        "subject": "關於你的烹飪與製皮",
+        "body": "工匠：\n\n你鑽研烹飪與製皮的名聲已傳到公會：端出菜餚，鞣好皮革，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
+      },
+      "guild_trend_leatherworking_tailoring": {
+        "sender": "工匠公會",
+        "subject": "關於你的製皮與裁縫",
+        "body": "工匠：\n\n你鑽研製皮與裁縫的名聲已傳到公會：裁好皮革，縫好衣料，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。締結這一對技藝的人，終會贏得製裝師之名。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
+      },
+      "guild_trend_tailoring_inscription": {
+        "sender": "工匠公會",
+        "subject": "關於你的裁縫與銘文學",
+        "body": "工匠：\n\n你鑽研裁縫與銘文學的名聲已傳到公會：縫好衣線，寫好銘文，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
+      },
+      "guild_trend_inscription_enchanting": {
+        "sender": "工匠公會",
+        "subject": "關於你的銘文學與附魔",
+        "body": "工匠：\n\n你鑽研銘文學與附魔的名聲已傳到公會：寫滿卷軸，織入魔力，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
+      },
+      "guild_trend_enchanting_jewelcrafting": {
+        "sender": "工匠公會",
+        "subject": "關於你的附魔與珠寶設計",
+        "body": "工匠：\n\n你鑽研附魔與珠寶設計的名聲已傳到公會：注入魔力，磨亮寶石，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
+      },
+      "guild_trend_jewelcrafting_weaponcrafting": {
+        "sender": "工匠公會",
+        "subject": "關於你的珠寶設計與武器鍛造",
+        "body": "工匠：\n\n你鑽研珠寶設計與武器鍛造的名聲已傳到公會：鑲好寶石，磨利刀鋒，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
+      },
+      "guild_trend_weaponcrafting_armorcrafting": {
+        "sender": "工匠公會",
+        "subject": "關於你的武器鍛造與護甲鍛造",
+        "body": "工匠：\n\n你鑽研武器鍛造與護甲鍛造的名聲已傳到公會：淬好刀刃，敲合甲片，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。締結這一對技藝的人，終會贏得鐵匠之名。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
+      },
+      "guild_trend_armorcrafting_engineering": {
+        "sender": "工匠公會",
+        "subject": "關於你的護甲鍛造與工程學",
+        "body": "工匠：\n\n你鑽研護甲鍛造與工程學的名聲已傳到公會：鉚好甲片，校準齒輪，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會"
       }
     },
     "itemSets": {
