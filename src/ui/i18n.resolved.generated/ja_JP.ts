@@ -8466,6 +8466,36 @@ export const ja_JP: EnTranslations = {
       "elixir_of_the_serpent": {
         "name": "蛇のエリクサー"
       },
+      "arcane_bound_cloth": {
+        "name": "秘術縛りの布"
+      },
+      "arcane_bound_hide": {
+        "name": "秘術縛りの毛皮"
+      },
+      "arcane_bound_chain": {
+        "name": "秘術縛りの鎖帷子"
+      },
+      "arcane_bound_edge": {
+        "name": "秘術縛りの刃"
+      },
+      "arcane_bound_focus": {
+        "name": "秘術縛りの秘具"
+      },
+      "arcanists_mantle": {
+        "name": "秘術師のマント"
+      },
+      "wyrmstalkers_hide": {
+        "name": "竜潜みの毛皮"
+      },
+      "ironbound_hauberk": {
+        "name": "鉄縛りのホーバーク"
+      },
+      "edgebound_greatblade": {
+        "name": "刃縛りの大剣"
+      },
+      "focusbound_channeler": {
+        "name": "秘具縛りのチャネラー"
+      },
       "conjured_water4": {
         "name": "魔法の湧き水"
       },

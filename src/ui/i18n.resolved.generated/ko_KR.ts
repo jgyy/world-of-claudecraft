@@ -8466,6 +8466,36 @@ export const ko_KR: EnTranslations = {
       "elixir_of_the_serpent": {
         "name": "뱀의 비약"
       },
+      "arcane_bound_cloth": {
+        "name": "비전 결속의 천"
+      },
+      "arcane_bound_hide": {
+        "name": "비전 결속의 가죽"
+      },
+      "arcane_bound_chain": {
+        "name": "비전 결속의 사슬"
+      },
+      "arcane_bound_edge": {
+        "name": "비전 결속의 칼날"
+      },
+      "arcane_bound_focus": {
+        "name": "비전 결속의 매개체"
+      },
+      "arcanists_mantle": {
+        "name": "비전술사의 망토"
+      },
+      "wyrmstalkers_hide": {
+        "name": "웜스토커의 가죽"
+      },
+      "ironbound_hauberk": {
+        "name": "강철결속 하버크"
+      },
+      "edgebound_greatblade": {
+        "name": "칼날결속 대검"
+      },
+      "focusbound_channeler": {
+        "name": "매개결속 채널러"
+      },
       "conjured_water4": {
         "name": "창조된 샘물"
       },

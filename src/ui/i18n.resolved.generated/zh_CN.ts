@@ -8466,6 +8466,36 @@ export const zh_CN: EnTranslations = {
       "elixir_of_the_serpent": {
         "name": "巨蛇药剂"
       },
+      "arcane_bound_cloth": {
+        "name": "秘法束缚布"
+      },
+      "arcane_bound_hide": {
+        "name": "秘法束缚兽皮"
+      },
+      "arcane_bound_chain": {
+        "name": "秘法束缚锁链"
+      },
+      "arcane_bound_edge": {
+        "name": "秘法束缚锋刃"
+      },
+      "arcane_bound_focus": {
+        "name": "秘法束缚法器"
+      },
+      "arcanists_mantle": {
+        "name": "秘法者斗篷"
+      },
+      "wyrmstalkers_hide": {
+        "name": "潜龙者兽皮"
+      },
+      "ironbound_hauberk": {
+        "name": "铁束胸甲"
+      },
+      "edgebound_greatblade": {
+        "name": "锋束巨剑"
+      },
+      "focusbound_channeler": {
+        "name": "法束引导者"
+      },
       "conjured_water4": {
         "name": "魔法泉水"
       },

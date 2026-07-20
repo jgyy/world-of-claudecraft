@@ -8466,6 +8466,36 @@ export const it_IT: EnTranslations = {
       "elixir_of_the_serpent": {
         "name": "Elisir del Serpente"
       },
+      "arcane_bound_cloth": {
+        "name": "Arcane-Bound Cloth"
+      },
+      "arcane_bound_hide": {
+        "name": "Arcane-Bound Hide"
+      },
+      "arcane_bound_chain": {
+        "name": "Arcane-Bound Chainmail"
+      },
+      "arcane_bound_edge": {
+        "name": "Arcane-Bound Edge"
+      },
+      "arcane_bound_focus": {
+        "name": "Arcane-Bound Focus"
+      },
+      "arcanists_mantle": {
+        "name": "Arcanist's Mantle"
+      },
+      "wyrmstalkers_hide": {
+        "name": "Wyrmstalker's Hide"
+      },
+      "ironbound_hauberk": {
+        "name": "Ironbound Hauberk"
+      },
+      "edgebound_greatblade": {
+        "name": "Edgebound Greatblade"
+      },
+      "focusbound_channeler": {
+        "name": "Focusbound Channeler"
+      },
       "conjured_water4": {
         "name": "Acqua sorgiva evocata"
       },

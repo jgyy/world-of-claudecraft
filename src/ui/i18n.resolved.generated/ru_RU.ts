@@ -8466,6 +8466,36 @@ export const ru_RU: EnTranslations = {
       "elixir_of_the_serpent": {
         "name": "Эликсир змея"
       },
+      "arcane_bound_cloth": {
+        "name": "Дугосвязанная ткань"
+      },
+      "arcane_bound_hide": {
+        "name": "Дугосвязанная шкура"
+      },
+      "arcane_bound_chain": {
+        "name": "Дугосвязанная кольчуга"
+      },
+      "arcane_bound_edge": {
+        "name": "Дугосвязанное лезвие"
+      },
+      "arcane_bound_focus": {
+        "name": "Дугосвязанный фокус"
+      },
+      "arcanists_mantle": {
+        "name": "Мантия чароплёта"
+      },
+      "wyrmstalkers_hide": {
+        "name": "Шкура змеелова"
+      },
+      "ironbound_hauberk": {
+        "name": "Железосвязанный хауберк"
+      },
+      "edgebound_greatblade": {
+        "name": "Тяжёлый меч, связанный лезвием"
+      },
+      "focusbound_channeler": {
+        "name": "Проводник, связанный фокусом"
+      },
       "conjured_water4": {
         "name": "Сотворённая родниковая вода"
       },

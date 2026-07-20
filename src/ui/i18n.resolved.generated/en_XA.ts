@@ -8466,6 +8466,36 @@ export const en_XA: EnTranslations = {
       "elixir_of_the_serpent": {
         "name": "[Éļíẋíŕ óƒ ţĥé Šéŕþéñţ]"
       },
+      "arcane_bound_cloth": {
+        "name": "[Áŕçáñé-Ɓóúñð Çļóţĥ]"
+      },
+      "arcane_bound_hide": {
+        "name": "[Áŕçáñé-Ɓóúñð Ĥíðé]"
+      },
+      "arcane_bound_chain": {
+        "name": "[Áŕçáñé-Ɓóúñð Çĥáíñɱáíļ]"
+      },
+      "arcane_bound_edge": {
+        "name": "[Áŕçáñé-Ɓóúñð Éðĝé]"
+      },
+      "arcane_bound_focus": {
+        "name": "[Áŕçáñé-Ɓóúñð Ƒóçúš]"
+      },
+      "arcanists_mantle": {
+        "name": "[Áŕçáñíšţ'š Ɱáñţļé]"
+      },
+      "wyrmstalkers_hide": {
+        "name": "[Ŵýŕɱšţáļķéŕ'š Ĥíðé]"
+      },
+      "ironbound_hauberk": {
+        "name": "[Íŕóñƀóúñð Ĥáúƀéŕķ]"
+      },
+      "edgebound_greatblade": {
+        "name": "[Éðĝéƀóúñð Ĝŕéáţƀļáðé]"
+      },
+      "focusbound_channeler": {
+        "name": "[Ƒóçúšƀóúñð Çĥáññéļéŕ]"
+      },
       "conjured_water4": {
         "name": "[Çóñĵúŕéð Šþŕíñĝŵáţéŕ]"
       },
