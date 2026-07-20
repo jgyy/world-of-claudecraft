@@ -15,8 +15,13 @@ export interface CharacterSwitchCollaborators {
   takeover: (characterId: number) => Promise<void>;
   /** Enters the world on the given character. */
   enter: (character: CharacterSummary) => Promise<void>;
-  /** Called with the takeover error if it rejects; enter is skipped. */
+  /** Called with the takeover error if it rejects; teardown and enter are
+   *  skipped, so the in-flight session and Welcome Screen are still up. */
   onTakeoverError: (err: unknown) => void;
+  /** Called with the enter error if it rejects. teardown has already run by
+   *  this point (entering requires the prior session torn down first), so
+   *  there is no world or Welcome Screen left for this handler to preserve. */
+  onEnterError: (err: unknown) => void;
 }
 
 export async function switchCharacter(
@@ -24,7 +29,11 @@ export async function switchCharacter(
   collaborators: CharacterSwitchCollaborators,
 ): Promise<void> {
   if (target.online && !collaborators.confirmTakeOver()) return;
-  collaborators.teardown();
+  // Take over BEFORE tearing down the in-flight session: a transient takeover
+  // failure (network blip, 5xx) then leaves the current world and Welcome
+  // Screen intact and recoverable, mirroring the pre-login takeOverAndEnter
+  // flow instead of discovering the failure after teardown already ran and
+  // there is nothing left to recover to.
   if (target.online) {
     try {
       await collaborators.takeover(target.id);
@@ -32,8 +41,11 @@ export async function switchCharacter(
       collaborators.onTakeoverError(err);
       return;
     }
-    await collaborators.enter({ ...target, online: false });
-  } else {
-    await collaborators.enter(target);
+  }
+  collaborators.teardown();
+  try {
+    await collaborators.enter(target.online ? { ...target, online: false } : target);
+  } catch (err) {
+    collaborators.onEnterError(err);
   }
 }

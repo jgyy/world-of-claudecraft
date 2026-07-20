@@ -4895,6 +4895,11 @@ async function enterWorld(c: CharacterSummary, button?: HTMLButtonElement): Prom
       },
       enter: (character) => enterWorld(character),
       onTakeoverError: (err) => fatalOverlay(userFacingApiError(err)),
+      // teardown has already run by the time enter() can reject (prepareWorldEntry,
+      // the ClientWorld/WebSocket construction), so there is no world or Welcome
+      // Screen left to fall back into; fatalOverlay is the same recovery path
+      // enterWorld's own callers use for the rest of the entry sequence.
+      onEnterError: (err) => fatalOverlay(userFacingApiError(err)),
     });
   };
   if (welcomeRoot) {

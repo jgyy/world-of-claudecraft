@@ -11138,6 +11138,14 @@
     padding: 2px 4px 6px;
   }
   .ws-roster-row {
+    /* Custom-styled button (its own background/border, not the generic
+       .btn), so it needs its own tokenized focus ring: the enumerated
+       button:focus-visible fallback in base.css does not cover this class.
+       Same warm-white ring value .ws-continue defines for the same dark
+       panel; declared locally (custom properties do not cross sibling
+       selectors) so the outline stays token-driven for the
+       focus_visible_guard scan. */
+    --ws-continue-ring: #fff6d8;
     display: flex;
     align-items: baseline;
     gap: 8px;
@@ -11154,6 +11162,10 @@
   .ws-roster-row:disabled {
     cursor: not-allowed;
     opacity: 0.55;
+  }
+  .ws-roster-row:focus-visible {
+    outline: 2px solid var(--ws-continue-ring);
+    outline-offset: 2px;
   }
   .ws-roster-row.sel {
     border-color: var(--gold);

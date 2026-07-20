@@ -120,6 +120,7 @@ export function mountWelcomeScreen(
   const versionEl = root.querySelector<HTMLElement>('#ws-version');
   const stageEl = root.querySelector<HTMLElement>('#ws-stage');
   const rosterEl = root.querySelector<HTMLElement>('#ws-roster');
+  const rosterTitleEl = root.querySelector<HTMLElement>('#ws-roster-title');
 
   markDialogRoot(root, { label: t('welcome.continue'), modal: true });
 
@@ -238,6 +239,8 @@ export function mountWelcomeScreen(
       rosterEl.hidden = true;
       rosterEl.textContent = '';
       rosterEl.removeAttribute('role');
+      rosterEl.removeAttribute('aria-labelledby');
+      if (rosterTitleEl) rosterTitleEl.hidden = true;
       return;
     }
     rosterEl.hidden = false;
@@ -245,12 +248,17 @@ export function mountWelcomeScreen(
     // A plain list of action buttons, not a single-select widget: role=list
     // plus aria-current on the current character (matches the actual
     // interaction, unlike the listbox/option pairing this replaced, which had
-    // no accessible name, no roving tabindex, and a non-option title child).
+    // no accessible name, no roving tabindex, and a non-option title child). The
+    // title lives OUTSIDE the list element (a static sibling, #ws-roster-title):
+    // role=list must own only role=listitem children, so a title div appended
+    // as a direct child dropped or mis-reported the list to assistive tech.
+    // aria-labelledby gives the list the accessible name it would otherwise lack.
     rosterEl.setAttribute('role', 'list');
-    const title = document.createElement('div');
-    title.className = 'ws-roster-title';
-    title.textContent = t('welcome.roster.title');
-    rosterEl.append(title);
+    if (rosterTitleEl) {
+      rosterTitleEl.hidden = false;
+      rosterTitleEl.textContent = t('welcome.roster.title');
+      rosterEl.setAttribute('aria-labelledby', 'ws-roster-title');
+    }
     for (const row of rows) {
       const wrap = document.createElement('div');
       wrap.setAttribute('role', 'listitem');
@@ -477,7 +485,9 @@ export function mountWelcomeScreen(
       rosterEl.hidden = true;
       rosterEl.textContent = '';
       rosterEl.removeAttribute('role');
+      rosterEl.removeAttribute('aria-labelledby');
     }
+    if (rosterTitleEl) rosterTitleEl.hidden = true;
     lastRosterRows = [];
   }
 

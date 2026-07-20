@@ -18,6 +18,7 @@ function makeRoot(): HTMLElement {
     <div id="ws-continue-hint"></div>
     <div id="ws-version"></div>
     <div id="ws-stage"></div>
+    <div id="ws-roster-title" hidden></div>
     <div id="ws-roster"></div>
   `;
   document.body.appendChild(root);
@@ -105,7 +106,17 @@ describe('mountWelcomeScreen', () => {
     expect(other?.hasAttribute('aria-current')).toBe(false);
     expect(selected?.closest('[role="listitem"]')).toBeTruthy();
     expect(other?.closest('[role="listitem"]')).toBeTruthy();
-    expect(root.querySelector('#ws-roster')?.getAttribute('role')).toBe('list');
+    const rosterEl = root.querySelector('#ws-roster');
+    expect(rosterEl?.getAttribute('role')).toBe('list');
+    // The list's accessible name comes from a title OUTSIDE the list (a
+    // sibling element via aria-labelledby), never a non-listitem child: a
+    // role=list should own only role=listitem children, or assistive tech
+    // drops or mis-reports it.
+    expect(rosterEl?.getAttribute('aria-labelledby')).toBe('ws-roster-title');
+    expect(root.querySelector<HTMLElement>('#ws-roster-title')?.hidden).toBe(false);
+    for (const child of Array.from(rosterEl?.children ?? [])) {
+      expect(child.getAttribute('role')).toBe('listitem');
+    }
   });
 
   it('disables roster rows until the connection is ready, then re-enables them', async () => {
@@ -145,5 +156,7 @@ describe('mountWelcomeScreen', () => {
 
     expect(root.querySelectorAll('.ws-roster-row')).toHaveLength(0);
     expect(root.querySelector('#ws-roster')?.hasAttribute('role')).toBe(false);
+    expect(root.querySelector('#ws-roster')?.hasAttribute('aria-labelledby')).toBe(false);
+    expect(root.querySelector<HTMLElement>('#ws-roster-title')?.hidden).toBe(true);
   });
 });
