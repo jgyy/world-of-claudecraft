@@ -1531,12 +1531,12 @@ export const ja_JP: EnTranslations = {
       "bagSocketAria": "{name}: {slots}",
       "socketEmpty": "空のバッグスロット",
       "unequipHint": "クリックしてこのバッグを外す",
-      "disenchantButton": "Disenchant",
-      "disenchantWarningEnchanted": "This item carries an enchantment, masterwork bonus, or maker’s mark that will be lost.",
-      "disenchantResult": "You disenchant the item into {count}x {material}.",
-      "disenchantTypedResult": "You disenchant the item into {count}x {material}, a reagent for on-demand crafting.",
-      "disenchantNotEligible": "That item cannot be disenchanted.",
-      "disenchantFailed": "You no longer have that item to disenchant."
+      "disenchantButton": "分解",
+      "disenchantWarningEnchanted": "このアイテムにはエンチャント、傑作ボーナス、または刻印が付いており、失われます。",
+      "disenchantResult": "アイテムを分解して{material}を{count}個手に入れた。",
+      "disenchantTypedResult": "アイテムを分解して{material}を{count}個手に入れた。オンデマンド制作用の素材だ。",
+      "disenchantNotEligible": "そのアイテムは分解できません。",
+      "disenchantFailed": "分解しようとしたアイテムはもう持っていません。"
     },
     "raidConvert": {
       "toPartyDone": "レイドがパーティに戻りました。",

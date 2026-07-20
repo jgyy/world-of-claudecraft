@@ -58,38 +58,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.bags.disenchantTypedResult",
     "hudChrome.bags.disenchantWarningEnchanted"
   ],
-  "zh_CN": [
-    "hudChrome.bags.disenchantButton",
-    "hudChrome.bags.disenchantFailed",
-    "hudChrome.bags.disenchantNotEligible",
-    "hudChrome.bags.disenchantResult",
-    "hudChrome.bags.disenchantTypedResult",
-    "hudChrome.bags.disenchantWarningEnchanted"
-  ],
-  "zh_TW": [
-    "hudChrome.bags.disenchantButton",
-    "hudChrome.bags.disenchantFailed",
-    "hudChrome.bags.disenchantNotEligible",
-    "hudChrome.bags.disenchantResult",
-    "hudChrome.bags.disenchantTypedResult",
-    "hudChrome.bags.disenchantWarningEnchanted"
-  ],
-  "ko_KR": [
-    "hudChrome.bags.disenchantButton",
-    "hudChrome.bags.disenchantFailed",
-    "hudChrome.bags.disenchantNotEligible",
-    "hudChrome.bags.disenchantResult",
-    "hudChrome.bags.disenchantTypedResult",
-    "hudChrome.bags.disenchantWarningEnchanted"
-  ],
-  "ja_JP": [
-    "hudChrome.bags.disenchantButton",
-    "hudChrome.bags.disenchantFailed",
-    "hudChrome.bags.disenchantNotEligible",
-    "hudChrome.bags.disenchantResult",
-    "hudChrome.bags.disenchantTypedResult",
-    "hudChrome.bags.disenchantWarningEnchanted"
-  ],
+  "zh_CN": [],
+  "zh_TW": [],
+  "ko_KR": [],
+  "ja_JP": [],
   "pt_BR": [
     "hudChrome.bags.disenchantButton",
     "hudChrome.bags.disenchantFailed",
@@ -98,14 +70,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.bags.disenchantTypedResult",
     "hudChrome.bags.disenchantWarningEnchanted"
   ],
-  "ru_RU": [
-    "hudChrome.bags.disenchantButton",
-    "hudChrome.bags.disenchantFailed",
-    "hudChrome.bags.disenchantNotEligible",
-    "hudChrome.bags.disenchantResult",
-    "hudChrome.bags.disenchantTypedResult",
-    "hudChrome.bags.disenchantWarningEnchanted"
-  ],
+  "ru_RU": [],
   "cs_CZ": [
     "hudChrome.bags.disenchantButton",
     "hudChrome.bags.disenchantFailed",

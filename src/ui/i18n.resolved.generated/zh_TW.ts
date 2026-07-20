@@ -1531,12 +1531,12 @@ export const zh_TW: EnTranslations = {
       "bagSocketAria": "{name}：{slots}",
       "socketEmpty": "空背包欄位",
       "unequipHint": "點擊移除此背包",
-      "disenchantButton": "Disenchant",
-      "disenchantWarningEnchanted": "This item carries an enchantment, masterwork bonus, or maker’s mark that will be lost.",
-      "disenchantResult": "You disenchant the item into {count}x {material}.",
-      "disenchantTypedResult": "You disenchant the item into {count}x {material}, a reagent for on-demand crafting.",
-      "disenchantNotEligible": "That item cannot be disenchanted.",
-      "disenchantFailed": "You no longer have that item to disenchant."
+      "disenchantButton": "分解",
+      "disenchantWarningEnchanted": "此物品帶有附魔、傑作加成或製作者印記，分解後將會遺失。",
+      "disenchantResult": "你分解了物品，獲得{count}個{material}。",
+      "disenchantTypedResult": "你分解了物品，獲得{count}個{material}，這是訂製打造所需的材料。",
+      "disenchantNotEligible": "該物品無法分解。",
+      "disenchantFailed": "你已不再持有該物品，無法分解。"
     },
     "raidConvert": {
       "toPartyDone": "你的團隊已轉換回隊伍。",
