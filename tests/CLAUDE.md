@@ -81,6 +81,16 @@ use the `tests/server/helpers/` fakes (see Map), not a bespoke GameServer rig.
   `mob_update_perf` (the `mob.update` phase), `aura_tick_perf` (the `p.auras`/`mob.auras`
   phase: a fixed-population budget plus a doubling-depth scaling check, so a linear-scan
   regression that goes quadratic is caught even when it stays under the flat ms ceiling).
+  The broader `*_perf.test.ts` family (one file per hot leaf function or tick phase not
+  already covered above, e.g. `damage_resolution_perf`, `mob_lifecycle_perf`,
+  `market_query_perf`, `party_ops_perf`, `spatial_grid_perf`, `vendor_transaction_perf`,
+  `threat_table_perf`, `character_effects_perf`, ...; enumerate with `ls tests/*_perf.test.ts`)
+  shares the same recipe: warm up the JIT, take a median over many samples at a fixed
+  population, assert a generous flat ms ceiling, then re-measure at roughly double the
+  population and assert the ratio stays near linear rather than blowing out quadratically.
+  Ceilings favor CI stability over tight coverage (order-of-magnitude and quadratic
+  regressions, not 2 to 5x constant-factor creep); widen a ceiling only after a genuine
+  contended-hardware failure with no real regression, not preemptively.
 - SFX gates: the `sfx_*` suites (`sfx_conform`, `sfx_studio_server_security`,
   `tests/server/static_sfx_serving`, ...) mirror `npm run sfx:check`.
 - `malware_scan.test.ts` is the release-gate backstop (signatures from `scripts/malware_scan.mjs`,
