@@ -3120,12 +3120,17 @@
      are reserved. #vendor-window lives inside #ui, which carries
      `zoom: var(--ui-scale)` (ui_scale.ts): a raw dvh value resolves against the
      real viewport and is then multiplied by that zoom, overshooting the bottom
-     edge above scale 1 and falling short below it. Divide by --ui-scale like the
-     sibling rules in this file (and .party-rows) do instead of using dvh raw. */
+     edge above scale 1 and falling short below it. Divide by --window-scale,
+     not --ui-scale (the base .window clamp in layout.css and the generic
+     mobile clamp at hud.mobile.css:2228-2232 both divide by --window-scale,
+     never --ui-scale, for exactly this reason: --window-scale is the one that
+     pins to 1 for the fixed-shell mobile app groups, see the shell note in
+     layout.css). Equal in value here since #vendor-window is not one of those
+     groups, but consistent with the stated contract. */
   body.mobile-touch #vendor-window {
     max-height: calc(
       var(--app-vh) /
-      var(--ui-scale, 1) -
+      var(--window-scale, 1) -
       12px -
       max(10px, env(safe-area-inset-bottom))
     );

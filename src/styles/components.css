@@ -4573,11 +4573,30 @@
      cap let the widened window slide UNDER bags below about 1850px wide
      (maintainer review on PR #2101). Cap the half-width against that same
      reservation plus its own gap so the vendor window's right edge always
-     clears the bags column instead of a magic viewport fraction. */
+     clears the bags column instead of a magic viewport fraction. #vendor-window
+     lives inside #ui, which carries `zoom: var(--ui-scale)`, so --app-vw (the
+     real, unscaled viewport) must be divided by --window-scale before it is
+     compared against --bags-bar-half/--bags-gap, which are author lengths
+     already living in the zoomed space: without the division the two sides of
+     the subtraction are in different units and the cap silently stops
+     clearing bags at any --ui-scale other than 1 (maintainer review round 4).
+     The floor keeps the window no narrower than the pre-PR fixed 400px: the
+     vendor window is top-anchored (top: 12px, layout.css), so at widths this
+     small the failure mode is never horizontal overlap with the bottom-right
+     bags column, only the window itself; the min() cap above still wins on
+     any viewport where clearing bags needs more than 400px. */
   #vendor-window {
-    width: min(
-      860px,
-      calc(var(--app-vw, 100vw) - 2 * (var(--bags-bar-half) + var(--bags-gap) + 24px))
+    width: max(
+      400px,
+      min(
+        860px,
+        calc(
+          var(--app-vw, 100vw) /
+          var(--window-scale) -
+          2 *
+          (var(--bags-bar-half) + var(--bags-gap) + 24px)
+        )
+      )
     );
   }
   .vendor-goods-grid {
