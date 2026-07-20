@@ -55,16 +55,25 @@ function mulberry32(seed: number): () => number {
 }
 
 /**
+ * The full set of daily quest ids a character at the given level qualifies for,
+ * in pool order (before the per-day shuffle/cap). Exported so callers can detect
+ * a level-up widening the eligible pool without re-deriving the roll itself.
+ */
+export function eligibleDailyQuestIds(playerLevel: number): string[] {
+  return DAILY_QUEST_POOL.filter((id) => {
+    const minLevel = DAILY_QUESTS[id]?.minLevel ?? 1;
+    return playerLevel >= minLevel;
+  });
+}
+
+/**
  * Deterministically pick up to DAILY_QUEST_COUNT daily quest ids for a character
  * on a given day, filtered to quests the character's level qualifies for. The
  * same (characterId, day) always yields the same set; different days may differ.
  * If fewer than DAILY_QUEST_COUNT quests are eligible, returns all eligible ones.
  */
 export function rollDailyQuestIds(characterId: string, day: number, playerLevel: number): string[] {
-  const eligible = DAILY_QUEST_POOL.filter((id) => {
-    const minLevel = DAILY_QUESTS[id]?.minLevel ?? 1;
-    return playerLevel >= minLevel;
-  });
+  const eligible = eligibleDailyQuestIds(playerLevel);
   if (eligible.length <= DAILY_QUEST_COUNT) return eligible;
   const rand = mulberry32(fnv1a(`${characterId}:${day}`));
   // Fisher-Yates shuffle of a copy, then take the first N. Draws come only from

@@ -129,4 +129,68 @@ describe('daily quests (Marshal Redbrook rotation)', () => {
     expect(sim.dailyQuests!.questIds).toHaveLength(3);
     expect(sim.dailyQuests!.day).not.toBe(dayBefore);
   });
+
+  it('persists a turned-in daily across serializeCharacter/addPlayer so a relog cannot re-offer it', () => {
+    const sim = makeSim();
+    const npc = standAtMarshal(sim);
+    sim.talkToNpc(npc.id, sim.playerId);
+    const dailyId = sim.dailyQuests!.questIds[0];
+    const quest = QUESTS[dailyId];
+
+    sim.acceptQuest(dailyId, sim.playerId);
+    const qp = sim.questLog.get(dailyId);
+    qp!.counts = quest.objectives.map((o) => o.count ?? 1);
+    qp!.state = 'ready';
+    sim.turnInQuest(dailyId, sim.playerId);
+    expect(sim.questState(dailyId)).toBe('unavailable');
+
+    // Simulate a relog: serialize the character, then rejoin a fresh Sim from
+    // that saved state (same day, same clock).
+    const saved = sim.serializeCharacter(sim.playerId);
+    expect(saved).not.toBeNull();
+    expect(saved!.dailyQuests?.questIds).not.toContain(dailyId);
+    expect(saved!.dailyQuestsMeta?.consumedIds).toContain(dailyId);
+
+    const sim2 = new Sim({
+      seed: 4242,
+      playerClass: 'warrior',
+      playerName: 'Bram',
+      autoEquip: false,
+      lockoutNowMs: () => now,
+      raidResetMs,
+      noPlayer: true,
+    });
+    sim2.addPlayer('warrior', 'Bram', { state: saved! });
+    const npc2 = standAtMarshal(sim2);
+    sim2.talkToNpc(npc2.id, sim2.playerId);
+
+    // The relog must not re-offer the already-turned-in daily, and must not
+    // re-roll a fresh set for the same day.
+    expect(sim2.questState(dailyId)).toBe('unavailable');
+    expect(sim2.dailyQuests!.questIds).not.toContain(dailyId);
+    expect(sim2.dailyQuests!.day).toBe(saved!.dailyQuests!.day);
+  });
+
+  it('re-rolls (without losing turned-in credit) once a level-up widens the eligible pool', () => {
+    const sim = new Sim({
+      seed: 4242,
+      playerClass: 'warrior',
+      playerName: 'Bram',
+      autoEquip: false,
+      lockoutNowMs: () => now,
+      raidResetMs,
+    });
+    sim.player.level = 1; // below every daily's minLevel: first roll is empty
+    const npc = standAtMarshal(sim);
+    sim.talkToNpc(npc.id, sim.playerId);
+    expect(sim.dailyQuests!.questIds).toEqual([]);
+    const day1 = sim.dailyQuests!.day;
+
+    // Level up mid-day past the daily gate, then talk again (same day).
+    sim.player.level = 5;
+    now += 60_000;
+    sim.talkToNpc(npc.id, sim.playerId);
+    expect(sim.dailyQuests!.day).toBe(day1);
+    expect(sim.dailyQuests!.questIds).toHaveLength(3);
+  });
 });

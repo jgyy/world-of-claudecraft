@@ -304,11 +304,26 @@ export function turnInQuestCore(
   // Daily quests are once per server day: consume the turned-in daily from the
   // rolled set so computeQuestState reports it unavailable until the next day's
   // roll repopulates it (even though it is `repeatable`). wireRev bumps so the
-  // mirrored `dailyQuests` field re-sends on the next snapshot.
+  // mirrored `dailyQuests` field re-sends on the next snapshot. Also record the
+  // id in dailyQuestsMeta.consumedIds: that is what makes the consumption
+  // survive a relog (it is persisted; see CharacterState.dailyQuestsMeta) and
+  // what stops a re-roll from re-offering an already-completed daily.
   if (quest.isDaily && meta.dailyQuests) {
+    const day = meta.dailyQuests.day;
     meta.dailyQuests = {
-      day: meta.dailyQuests.day,
+      day,
       questIds: meta.dailyQuests.questIds.filter((id) => id !== questId),
+    };
+    const prevMeta =
+      meta.dailyQuestsMeta && meta.dailyQuestsMeta.day === day ? meta.dailyQuestsMeta : undefined;
+    const prevConsumed = prevMeta ? prevMeta.consumedIds : [];
+    meta.dailyQuestsMeta = {
+      day,
+      consumedIds: prevConsumed.includes(questId) ? prevConsumed : [...prevConsumed, questId],
+      // dailyQuestsMeta is always set alongside dailyQuests by ensureDailyQuests
+      // before a daily becomes turn-in-able, so prevMeta is set in practice; 1 is
+      // a harmless fallback that only ever widens eligibility on the next roll.
+      rolledAtLevel: prevMeta ? prevMeta.rolledAtLevel : 1,
     };
     meta.wireRev++;
   }

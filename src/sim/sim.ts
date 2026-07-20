@@ -406,7 +406,11 @@ import {
 // (online.ts) stays byte-identical.
 export { computeQuestState } from './quests/quest_commands';
 
-import { dailyResetDayIndex, rollDailyQuestIds } from './quests/daily_quest_pool';
+import {
+  dailyResetDayIndex,
+  eligibleDailyQuestIds,
+  rollDailyQuestIds,
+} from './quests/daily_quest_pool';
 import { completeCurrentQuestsForDev, completeQuestForDev } from './quests/dev_quest_commands';
 import * as arenaMod from './social/arena';
 import { clearAfkOnMove } from './social/away';
@@ -1031,12 +1035,21 @@ export interface PlayerMeta {
   known: ResolvedAbility[];
   questLog: Map<string, QuestProgress>;
   questsDone: Set<string>;
-  // The 3 daily quests rolled for this character's current server day, plus the
-  // day index they were rolled for. Re-rolled (deterministically, per
-  // characterId + day) on the next talkToNpc once the day boundary passes.
-  // Runtime/session state derived from characterId + day; not persisted (it
-  // re-derives identically on reconnect via daily_quest_pool.rollDailyQuestIds).
+  // The 3 daily quests rolled for this character's current server day (minus any
+  // already turned in today), plus the day index they were rolled for. This is
+  // the IWorld-mirrored surface (server/game.ts sends it as `daily`); it is also
+  // persisted (see CharacterState.dailyQuests) because the ROLL alone re-derives
+  // identically on reconnect but the turn-in filtering does not: without
+  // persistence a relog would re-offer a daily already completed today.
   dailyQuests?: { day: number; questIds: string[] };
+  // Server-only bookkeeping alongside dailyQuests: which daily ids were already
+  // turned in today (so a relog cannot re-offer them, closing the exploit above)
+  // and the level the roll was made at (so a level-up mid-day that widens the
+  // eligible pool triggers a re-roll instead of being stuck with the day's first,
+  // narrower roll for the rest of the day). Not on the IWorld surface: the
+  // mirrored `dailyQuests.questIds` above already reflects consumption for the
+  // client. Persisted (see CharacterState.dailyQuestsMeta).
+  dailyQuestsMeta?: { day: number; consumedIds: string[]; rolledAtLevel: number };
   counters: RewardCounters;
   autoEquip: boolean;
   // sim.time when this character entered the world; powers /played. Session-only
@@ -1267,6 +1280,14 @@ export interface CharacterState {
   vendorBuyback?: InvSlot[];
   questLog: QuestProgress[];
   questsDone: string[];
+  // Persisted mirror of PlayerMeta.dailyQuests / dailyQuestsMeta (optional so
+  // pre-daily-quests saves load cleanly, and undefined whenever the character
+  // has not yet talked to a daily-quest NPC this server day). Restored in
+  // addPlayer alongside questsDone. Without this, a relog dropped the turned-in
+  // set and the roll re-derived identically, re-offering an already-completed
+  // daily quest.
+  dailyQuests?: { day: number; questIds: string[] };
+  dailyQuestsMeta?: { day: number; consumedIds: string[]; rolledAtLevel: number };
   // Legacy arenaRating/Wins/Losses are treated as 1v1 data. The explicit
   // 1v1 fields are written by new saves, while old saves fall back cleanly.
   arenaRating?: number;
@@ -2248,6 +2269,19 @@ export class Sim {
           });
       }
       for (const q of s.questsDone) meta.questsDone.add(q);
+      // Restore the daily-quest roll and its turned-in bookkeeping so a relog
+      // cannot re-offer a daily already completed today (see PlayerMeta.dailyQuests
+      // / dailyQuestsMeta comments).
+      if (s.dailyQuests) {
+        meta.dailyQuests = { day: s.dailyQuests.day, questIds: [...s.dailyQuests.questIds] };
+      }
+      if (s.dailyQuestsMeta) {
+        meta.dailyQuestsMeta = {
+          day: s.dailyQuestsMeta.day,
+          consumedIds: [...s.dailyQuestsMeta.consumedIds],
+          rolledAtLevel: s.dailyQuestsMeta.rolledAtLevel,
+        };
+      }
       if (s.talents)
         // Revalidate the persisted build against the current rules + level budget
         // before it is baked into the flat mods below. A stored allocation replays
@@ -2885,6 +2919,16 @@ export class Sim {
         ...(q.resolvedCounts === undefined ? {} : { resolvedCounts: [...q.resolvedCounts] }),
       })),
       questsDone: [...meta.questsDone],
+      dailyQuests: meta.dailyQuests
+        ? { day: meta.dailyQuests.day, questIds: [...meta.dailyQuests.questIds] }
+        : undefined,
+      dailyQuestsMeta: meta.dailyQuestsMeta
+        ? {
+            day: meta.dailyQuestsMeta.day,
+            consumedIds: [...meta.dailyQuestsMeta.consumedIds],
+            rolledAtLevel: meta.dailyQuestsMeta.rolledAtLevel,
+          }
+        : undefined,
       arenaRating: meta.arenaRating,
       arenaWins: meta.arenaWins,
       arenaLosses: meta.arenaLosses,
@@ -7077,17 +7121,32 @@ export class Sim {
   }
 
   // Roll the player's daily quest set for the current server day if this NPC
-  // offers any daily quests and the player has no roll yet or a stale one (a new
-  // day boundary has passed). Mutates PlayerMeta.dailyQuests in place; bumps
-  // wireRev so the server re-sends the mirrored field on the next snapshot. The
-  // day boundary is the same one raid lockouts use (ctx.raidResetMs), and the
-  // roll is deterministic per (characterId, day).
+  // offers any daily quests and the player has no roll yet, a stale one (a new
+  // day boundary has passed), or a roll whose eligible pool has since widened
+  // (the character levelled up mid-day past a daily's minLevel, so the first,
+  // narrower roll should not stay sticky for the rest of the day). Mutates
+  // PlayerMeta.dailyQuests/dailyQuestsMeta in place; bumps wireRev so the server
+  // re-sends the mirrored field on the next snapshot. A re-roll preserves credit
+  // for anything already turned in today (dailyQuestsMeta.consumedIds) rather
+  // than re-offering it. The day boundary is the same one raid lockouts use
+  // (ctx.raidResetMs), and the roll is deterministic per (characterId, day).
   private ensureDailyQuests(npc: Entity, p: Entity, meta: PlayerMeta): void {
     if (!npc.questIds.some((qid) => QUESTS[qid]?.isDaily)) return;
     const day = dailyResetDayIndex(this.lockoutNowMs(), this.raidResetMs.bind(this));
-    if (meta.dailyQuests && meta.dailyQuests.day === day) return;
+    const storedMeta =
+      meta.dailyQuestsMeta && meta.dailyQuestsMeta.day === day ? meta.dailyQuestsMeta : undefined;
+    if (meta.dailyQuests && meta.dailyQuests.day === day) {
+      const eligibleGrew = storedMeta
+        ? eligibleDailyQuestIds(p.level).length >
+          eligibleDailyQuestIds(storedMeta.rolledAtLevel).length
+        : false;
+      if (!eligibleGrew) return;
+    }
     const characterId = String(meta.characterId ?? meta.entityId);
-    meta.dailyQuests = { day, questIds: rollDailyQuestIds(characterId, day, p.level) };
+    const consumedIds = storedMeta ? storedMeta.consumedIds : [];
+    const rolled = rollDailyQuestIds(characterId, day, p.level);
+    meta.dailyQuests = { day, questIds: rolled.filter((id) => !consumedIds.includes(id)) };
+    meta.dailyQuestsMeta = { day, consumedIds, rolledAtLevel: p.level };
     meta.wireRev++;
   }
 
