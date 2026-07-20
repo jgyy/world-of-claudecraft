@@ -64,9 +64,9 @@ describe('bags_window: load-bearing behaviors preserved', () => {
     expect(painter).toMatch(/ke\.preventDefault\(\);\s*ke\.stopPropagation\(\);/);
   });
 
-  it('renders the bag-bar, filter bar and money row inside one .bag-rail container', () => {
+  it('renders the bag-bar and filter bar inside one .bag-rail container', () => {
     // The landscape layout (components.css, gated behind a min-width media query)
-    // depends on the bag-bar/filter-bar/money living inside a single .bag-rail
+    // depends on the bag-bar/filter-bar living inside a single .bag-rail
     // element; the portrait/mobile/bank-docked layouts fall back to `display:
     // contents` on that same element, so both CSS contracts need this DOM shape
     // to exist (review finding: nothing pinned the new container).
@@ -74,10 +74,30 @@ describe('bags_window: load-bearing behaviors preserved', () => {
     expect(railStart).toBeGreaterThan(-1);
     const buildBagBarCall = painter.indexOf('rail.appendChild(this.buildBagBar())');
     const filterBarCall = painter.indexOf('rail.appendChild(this.buildFilterBar())');
-    const moneyRowCall = painter.indexOf('rail.appendChild(moneyRow)');
     expect(buildBagBarCall).toBeGreaterThan(railStart);
     expect(filterBarCall).toBeGreaterThan(buildBagBarCall);
-    expect(moneyRowCall).toBeGreaterThan(filterBarCall);
+  });
+
+  it('appends the money row directly to #bags AFTER the grid, never inside .bag-rail', () => {
+    // Review finding (PR #2103 round 5): the money row previously lived inside
+    // .bag-rail (before the grid in DOM), and was painted after the grid only via
+    // CSS `order`, which reorders paint but never focus navigation. A tab-key user
+    // reached the wallet/Claudium buttons (real focusable controls the money row
+    // can render) BEFORE the item grid, while they rendered visually below it.
+    // Keeping the money row a direct #bags child, appended after the grid, makes
+    // DOM order the focus order in every state (portrait, landscape, mobile,
+    // bank-docked), matching what the CSS then paints via grid/flow placement,
+    // never `order`.
+    const railAppendCall = painter.indexOf('el.appendChild(rail)');
+    const gridAppendCall = painter.indexOf('el.appendChild(grid)');
+    const moneyRowCreate = painter.indexOf("moneyRow.className = 'money'");
+    const moneyAppendCall = painter.indexOf('el.appendChild(moneyRow)');
+    expect(railAppendCall).toBeGreaterThan(-1);
+    expect(gridAppendCall).toBeGreaterThan(railAppendCall);
+    expect(moneyRowCreate).toBeGreaterThan(gridAppendCall);
+    expect(moneyAppendCall).toBeGreaterThan(moneyRowCreate);
+    // And never re-introduce the old rail.appendChild(moneyRow) wiring.
+    expect(painter).not.toContain('rail.appendChild(moneyRow)');
   });
 });
 
@@ -130,7 +150,22 @@ describe('bags_window: landscape rail stays unreachable in the opted-out states'
     );
     expect(bagsRule).toContain('display: grid');
     expect(bagsRule).toMatch(/(?<!max-)height:\s*min\(/);
-    expect(bagsRule).toContain('grid-template-rows: auto minmax(0, 1fr)');
+    expect(bagsRule).toContain('grid-template-rows: auto minmax(0, 1fr) auto');
+  });
+
+  it('places the money row by explicit grid position, never `order`', () => {
+    // Review finding (PR #2103 round 5): `order` reorders paint only, never focus
+    // navigation, so the money row (a direct #bags child appended after the grid
+    // in the DOM) gets an explicit grid-column/grid-row in the landscape layout
+    // instead of `order`, keeping DOM order the focus order in every state.
+    const moneyRule = landscapeBlock.slice(
+      landscapeBlock.indexOf('body:not(.bank-open):not(.mobile-touch) #bags .money {'),
+      landscapeBlock.indexOf('body:not(.bank-open):not(.mobile-touch) #bags .money .money-inline'),
+    );
+    expect(moneyRule).toContain('grid-column: 1');
+    expect(moneyRule).toContain('grid-row: 3');
+    expect(landscapeBlock).not.toMatch(/order:\s*\d/);
+    expect(landscapeBlock).not.toContain('order: initial');
   });
 });
 

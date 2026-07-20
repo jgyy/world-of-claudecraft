@@ -242,25 +242,33 @@ export class BagsWindow {
     // otherwise using an item (e.g. a potion) snaps the list back to the top.
     const prevScrollTop = el.querySelector('.bag-grid')?.scrollTop ?? 0;
     el.innerHTML = `<div class="panel-title"><span>${esc(t('itemUi.bags.title'))}</span><button type="button" class="x-btn" data-close aria-label="${esc(t('itemUi.bags.close'))}">${svgIcon('close')}</button></div>`;
-    // Landscape layout: the bag-bar, filter bar and money line all live in one
-    // fixed-width left rail beside the slot grid, instead of stacking one long
-    // portrait column (see #bags in components.css).
+    // Landscape layout: the bag-bar and filter bar live in one fixed-width left
+    // rail beside the slot grid, instead of stacking one long portrait column
+    // (see #bags in components.css). The money row stays a DIRECT child of
+    // #bags, appended AFTER the grid (never inside the rail): DOM order must
+    // match focus order (bag-bar -> filter bar -> grid -> money), and the
+    // wallet/Claudium buttons it can render are real focusable controls, so
+    // they must never sit ahead of the grid in tab order just because the
+    // landscape layout paints them elsewhere (review finding: focus order
+    // regression). Both layouts place the money row where it visually belongs
+    // purely through the CSS grid/flow template, never through `order`, which
+    // reorders paint but never focus navigation.
     const rail = document.createElement('div');
     rail.className = 'bag-rail';
     rail.appendChild(this.buildBagBar());
     // Skip the chip/search row entirely when the bag is empty: a full filter bar
     // above a grid of empty squares is just noise.
     if (world.inventory.length > 0) rail.appendChild(this.buildFilterBar());
-    const moneyRow = document.createElement('div');
-    moneyRow.className = 'money';
-    moneyRow.innerHTML = `${this.deps.wocBalanceHtml()}${this.deps.claudiumLauncherHtml()}${this.deps.moneyHtml(world.copper)}`;
-    rail.appendChild(moneyRow);
     el.appendChild(rail);
     const grid = document.createElement('div');
     grid.className = 'bag-grid';
     this.fillGrid(grid);
     el.appendChild(grid);
     grid.scrollTop = prevScrollTop;
+    const moneyRow = document.createElement('div');
+    moneyRow.className = 'money';
+    moneyRow.innerHTML = `${this.deps.wocBalanceHtml()}${this.deps.claudiumLauncherHtml()}${this.deps.moneyHtml(world.copper)}`;
+    el.appendChild(moneyRow);
     moneyRow.querySelector('[data-claudium-launcher]')?.addEventListener('click', () => {
       this.deps.openClaudium();
     });
