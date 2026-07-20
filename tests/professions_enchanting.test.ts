@@ -15,6 +15,7 @@ import {
   isEnchantedInstance,
   resolveApplyEnchant,
   resolveDisenchant,
+  typedDisenchantReagent,
 } from '../src/sim/professions/enchanting';
 import { Sim } from '../src/sim/sim';
 import { xpForLevel } from '../src/sim/types';
@@ -88,6 +89,109 @@ describe('disenchant', () => {
     sim.disenchantItem('eastbrook_arming_sword');
     expect(sim.lastDisenchantResult?.ok).toBe(true);
     expect(disenchantItem(sim.ctx, 'nonexistent_item_id').ok).toBe(false);
+  });
+});
+
+describe('disenchant: the epic+ typed reagent branch (on-demand economy)', () => {
+  it('typedDisenchantReagent returns undefined below epic quality, for jewelry, and for a weapon subtype with no natural type', () => {
+    expect(
+      typedDisenchantReagent({
+        id: 'x',
+        name: 'x',
+        sellValue: 0,
+        quality: 'rare',
+        kind: 'armor',
+        armorType: 'cloth',
+      } as never),
+    ).toBeUndefined();
+    expect(
+      typedDisenchantReagent({
+        id: 'y',
+        name: 'y',
+        sellValue: 0,
+        quality: 'epic',
+        kind: 'armor',
+      } as never), // no armorType (jewelry)
+    ).toBeUndefined();
+    expect(
+      typedDisenchantReagent({
+        id: 'not_registered_weapon_id',
+        name: 'z',
+        sellValue: 0,
+        quality: 'epic',
+        kind: 'weapon',
+      } as never), // absent from weapon_skin_rules.ts WEAPON_TYPE_BY_ITEM
+    ).toBeUndefined();
+  });
+
+  it('maps every epic+ armor type to its dedicated reagent (cloth/leather/mail all distinct)', () => {
+    const cloth = typedDisenchantReagent({
+      id: 'c',
+      name: 'c',
+      sellValue: 0,
+      quality: 'epic',
+      kind: 'armor',
+      armorType: 'cloth',
+    } as never);
+    const leather = typedDisenchantReagent({
+      id: 'l',
+      name: 'l',
+      sellValue: 0,
+      quality: 'epic',
+      kind: 'armor',
+      armorType: 'leather',
+    } as never);
+    const mail = typedDisenchantReagent({
+      id: 'm',
+      name: 'm',
+      sellValue: 0,
+      quality: 'legendary',
+      kind: 'armor',
+      armorType: 'mail',
+    } as never);
+    expect(new Set([cloth, leather, mail]).size).toBe(3);
+    expect(cloth).toBe('arcane_bound_cloth');
+    expect(leather).toBe('arcane_bound_hide');
+    expect(mail).toBe('arcane_bound_chain');
+  });
+
+  it('maps a real registered epic weapon subtype (sword) to the melee reagent', () => {
+    // eastbrook_greatsword is registered 'sword' in weapon_skin_rules.ts;
+    // this test only needs its id, not its real (non-epic) content quality,
+    // since typedDisenchantReagent takes an explicit def.
+    const swordDef = { ...ITEMS.eastbrook_greatsword, quality: 'epic' } as never;
+    expect(typedDisenchantReagent(swordDef)).toBe('arcane_bound_edge');
+  });
+
+  it('disenchanting a natural-typed epic+ item grants a tradesRemaining:1 typed reagent instance, not the untyped fungible yield', () => {
+    const sim = makeSim();
+    const pid = sim.playerId;
+    sim.addItemInstance(
+      'eastbrook_greatsword',
+      {},
+      pid,
+    ); /* the specific copy carries no relevant payload for this test */
+    // Swap the content quality just for this call's duration (typedDisenchantReagent
+    // and resolveDisenchant both read ITEMS[itemId] internally), restored after.
+    // eastbrook_greatsword is 'common' in content, but is registered 'sword' in
+    // weapon_skin_rules.ts, so bumping only its quality here exercises the typed
+    // epic+ branch against a real, already-registered weapon subtype.
+    const originalQuality = ITEMS.eastbrook_greatsword.quality;
+    (ITEMS.eastbrook_greatsword as { quality?: string }).quality = 'epic';
+    try {
+      const result = resolveDisenchant(sim.ctx, pid, 'eastbrook_greatsword');
+      expect(result.ok).toBe(true);
+      expect(result.typed).toBe(true);
+      expect(result.materialItemId).toBe('arcane_bound_edge');
+      expect(result.count).toBe(1);
+      const slot = sim.ctx.players
+        .get(pid)
+        ?.inventory.find((s) => s.itemId === 'arcane_bound_edge');
+      expect(slot?.instance?.tradesRemaining).toBe(1);
+      expect(slot?.instance?.boundTo).toBeUndefined();
+    } finally {
+      (ITEMS.eastbrook_greatsword as { quality?: string }).quality = originalQuality;
+    }
   });
 
   // Regression for review #1712 point 2: crafting.ts grants every rare-or-better
