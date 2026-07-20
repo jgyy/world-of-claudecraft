@@ -2458,6 +2458,7 @@
   body.mobile-touch #quest-log-window,
   body.mobile-touch #spellbook,
   body.mobile-touch #vendor-window,
+  body.mobile-touch #train-window,
   body.mobile-touch #market-window,
   body.mobile-touch #quest-dialog,
   body.mobile-touch #calendar-window,
@@ -3087,6 +3088,7 @@
      applies to left-pinned windows, not these centered ones, but translateX(-50%)
      is declared explicitly here regardless so neither group inherits a stale
      value). */
+  body.mobile-touch #train-window,
   body.mobile-touch #quest-log-window,
   body.mobile-touch #vendor-window,
   body.mobile-touch #quest-dialog,
@@ -3099,8 +3101,11 @@
     top: 12px;
     transform: translateX(-50%);
   }
-  /* Wider size group: quest-log/vendor/quest-dialog carry longer scrollable lists
-     (quest text, vendor stock) so they claim more of the viewport width. */
+  /* Wider size group: quest-log/vendor/train/quest-dialog carry longer scrollable
+     lists (quest text, vendor stock, the training ladder) so they claim more of
+     the viewport width. The train window also scrolls internally here: it is a
+     standalone centered card (never the vendor's split-screen bags pairing). */
+  body.mobile-touch #train-window,
   body.mobile-touch #quest-log-window,
   body.mobile-touch #vendor-window,
   body.mobile-touch #quest-dialog {
@@ -3134,6 +3139,9 @@
       12px -
       max(10px, env(safe-area-inset-bottom))
     );
+  }
+  body.mobile-touch #train-window {
+    overflow-y: auto;
   }
   /* Narrower size group: spellbook rows and the options form controls read fine
      at a tighter width, so these stay a compact centered card rather than
