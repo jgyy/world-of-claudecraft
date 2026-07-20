@@ -394,6 +394,40 @@ export function registerClassSkin({ cls, model, texturePath, suffix }) {
   return actions;
 }
 
+/** Register a standalone NPC reskin atlas: copies the texture and adds a NEW
+ *  top-level `SKINS['<visualKey>']` entry (index 0 = the real generated
+ *  texture, the npc_fernando precedent: NPCs always resolve skin 0, so there
+ *  is no embedded-default null slot to keep). Distinct from
+ *  registerClassSkin, which appends an ALT to an existing player class array;
+ *  this creates the array itself for a new NPC-only visual key. */
+export function registerNpcSkin({ visualKey, model, texturePath, suffix }) {
+  if (!/^[a-z0-9_]+$/.test(visualKey)) throw new Error(`bad visual key: ${visualKey}`);
+  if (!/^[a-z0-9_]+$/.test(suffix))
+    throw new Error(`npc-reskin suffix must be snake_case: ${suffix}`);
+  const actions = [];
+  const rel = `textures/skins/${model}/${suffix}.png`;
+  const dest = resolve(REPO_ROOT, `public/${rel}`);
+  mkdirSync(dirname(dest), { recursive: true });
+  copyFileSync(texturePath, dest);
+  actions.push(`copied atlas -> public/${rel}`);
+
+  let manifest = read(FILES.manifest);
+  const anchor = 'export const SKINS: Record<string, (string | null)[]> = {';
+  if (!manifest.includes(anchor)) throw new Error('SKINS declaration not found');
+  if (manifest.includes(`${visualKey}: [`)) {
+    actions.push(`SKINS already has an entry for ${visualKey} (skipped)`);
+    return actions;
+  }
+  manifest = insertIntoBlock(
+    manifest,
+    anchor,
+    `  ${visualKey}: [\`\${SKINS_DIR}/${model}/${suffix}.png\`],\n`,
+  );
+  write(FILES.manifest, manifest);
+  actions.push(`added SKINS.${visualKey}`);
+  return actions;
+}
+
 // ---------------------------------------------------------------------------
 // CREDITS.md
 // ---------------------------------------------------------------------------

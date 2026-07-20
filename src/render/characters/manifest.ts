@@ -445,6 +445,18 @@ export const SKINS: Record<string, (string | null)[]> = {
   // the real Fernando's likeness. Index 0 is the real texture (mech precedent):
   // NPCs always resolve skin 0, so the embedded default is deliberately unused.
   npc_fernando: [`${SKINS_DIR}/rogue/fernando.png`],
+  npc_villager_fisherman: [`${SKINS_DIR}/rogue/fisherman.png`],
+  npc_villager_provisioner: [`${SKINS_DIR}/rogue/provisioner.png`],
+  npc_villager_quartermaster: [`${SKINS_DIR}/rogue/quartermaster.png`],
+  npc_villager_cook: [`${SKINS_DIR}/rogue/cook.png`],
+  npc_villager_tanner: [`${SKINS_DIR}/rogue/tanner.png`],
+  npc_villager_robed_apothecary: [`${SKINS_DIR}/mage/apothecary.png`],
+  npc_villager_robed_herbalist: [`${SKINS_DIR}/mage/herbalist.png`],
+  npc_villager_robed_weaver: [`${SKINS_DIR}/mage/weaver.png`],
+  npc_villager_robed_alchemist: [`${SKINS_DIR}/mage/alchemist.png`],
+  npc_smith_armorer: [`${SKINS_DIR}/barbarian/armorer.png`],
+  npc_smith_foreman: [`${SKINS_DIR}/barbarian/foreman.png`],
+  npc_smith_forgemistress: [`${SKINS_DIR}/barbarian/forgemistress.png`],
 };
 
 // Emissive (glow) maps keyed exactly like SKINS, applied to .emissiveMap when a
@@ -1097,6 +1109,87 @@ export const VISUALS: Record<string, VisualDef> = {
     tint: 'entity',
     tintStrength: 0.35,
   },
+  // Unique townsfolk reskins (scripts/asset_pipeline npc-reskin lane): a real
+  // Tripo-painted atlas on the SAME rig/clips as their shared family above, no
+  // entity tint (the fernando precedent: a baked likeness would be washed out
+  // by the NpcDef color tint). One SKINS[key][0] entry per key carries the art
+  // (src/render/characters/CLAUDE.md "no procedural rig path" still holds:
+  // the geometry/skeleton is unchanged, only the baseColor atlas differs).
+  npc_villager_fisherman: {
+    url: `${PLAYERS}/rogue.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['1H_Melee_Attack_Chop']),
+    show: [],
+  },
+  npc_villager_provisioner: {
+    url: `${PLAYERS}/rogue.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['1H_Melee_Attack_Chop']),
+    show: [],
+  },
+  npc_villager_quartermaster: {
+    url: `${PLAYERS}/rogue.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['1H_Melee_Attack_Chop']),
+    show: [],
+  },
+  npc_villager_cook: {
+    url: `${PLAYERS}/rogue.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['1H_Melee_Attack_Chop']),
+    show: [],
+  },
+  npc_villager_tanner: {
+    url: `${PLAYERS}/rogue.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['1H_Melee_Attack_Chop']),
+    show: [],
+  },
+  npc_villager_robed_apothecary: {
+    url: `${PLAYERS}/mage.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['2H_Melee_Attack_Chop']),
+    show: [],
+  },
+  npc_villager_robed_herbalist: {
+    url: `${PLAYERS}/mage.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['2H_Melee_Attack_Chop']),
+    show: [],
+  },
+  npc_villager_robed_weaver: {
+    url: `${PLAYERS}/mage.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['2H_Melee_Attack_Chop']),
+    show: [],
+  },
+  npc_villager_robed_alchemist: {
+    url: `${PLAYERS}/mage.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['2H_Melee_Attack_Chop']),
+    show: [],
+  },
+  npc_smith_armorer: {
+    url: `${PLAYERS}/barbarian.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['1H_Melee_Attack_Chop']),
+    show: [],
+    attach: [{ url: `${WEAPONS}/axe_1handed.glb`, bone: 'handslot.r' }],
+  },
+  npc_smith_foreman: {
+    url: `${PLAYERS}/barbarian.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['1H_Melee_Attack_Chop']),
+    show: [],
+    attach: [{ url: `${WEAPONS}/axe_1handed.glb`, bone: 'handslot.r' }],
+  },
+  npc_smith_forgemistress: {
+    url: `${PLAYERS}/barbarian.glb`,
+    height: HUMANOID_H,
+    clips: kaykit(['1H_Melee_Attack_Chop']),
+    show: [],
+    attach: [{ url: `${WEAPONS}/axe_1handed.glb`, bone: 'handslot.r' }],
+  },
   // Bursar Fernando: the villager body with the likeness atlas (SKINS above)
   // carrying black shoulder-length hair and light brown skin. No entity tint:
   // the gold NpcDef color would wash the repaint back toward the villager look.
@@ -1289,16 +1382,16 @@ const NPC_KEYS: Record<string, string> = {
   captain_thessaly: 'npc_knight',
   loremaster_caddis: 'npc_mage',
   smith_haldren: 'npc_smith',
-  armorer_hode: 'npc_smith',
-  foreman_odell: 'npc_smith',
+  armorer_hode: 'npc_smith_armorer',
+  foreman_odell: 'npc_smith_foreman',
   scout_maren: 'npc_scout',
   scout_maren_highwatch: 'npc_scout',
-  apothecary_lin: 'npc_villager_robed',
-  herbalist_yara: 'npc_villager_robed',
+  apothecary_lin: 'npc_villager_robed_apothecary',
+  herbalist_yara: 'npc_villager_robed_herbalist',
   trader_wilkes: 'npc_villager',
-  fisherman_brandt: 'npc_villager',
-  provisioner_hale: 'npc_villager',
-  quartermaster_bree: 'npc_villager',
+  fisherman_brandt: 'npc_villager_fisherman',
+  provisioner_hale: 'npc_villager_provisioner',
+  quartermaster_bree: 'npc_villager_quartermaster',
   brother_halven: 'npc_reliquary_keeper',
   brother_halven_marsh: 'npc_reliquary_keeper',
   chronicler_saul: 'npc_chronicler',
@@ -1307,16 +1400,15 @@ const NPC_KEYS: Record<string, string> = {
   // The graveyard angel: a robed figure, rendered translucent (ethereal) with a
   // holy shimmer by the renderer (see the spirit_healer branches there).
   spirit_healer: 'npc_villager_robed',
-  // Professions 2.0 station masters: existing looks only (no new GLBs). The
-  // forge and toolworks masters wear the smith's work apron; the weaver and
-  // alchemist match the robed apothecary/herbalist look; the cook and tanner
-  // read as working townsfolk.
-  forgemistress_darva: 'npc_smith',
+  // Professions 2.0 station masters: forgemistress got her own unique reskin
+  // below; the toolworks master still wears the plain smith look (no new
+  // GLBs needed there).
+  forgemistress_darva: 'npc_smith_forgemistress',
   tinker_gizzel: 'npc_smith',
-  weaver_ottilie: 'npc_villager_robed',
-  alchemist_verane: 'npc_villager_robed',
-  cook_marlow: 'npc_villager',
-  tanner_hesk: 'npc_villager',
+  weaver_ottilie: 'npc_villager_robed_weaver',
+  alchemist_verane: 'npc_villager_robed_alchemist',
+  cook_marlow: 'npc_villager_cook',
+  tanner_hesk: 'npc_villager_tanner',
 };
 
 export function visualKeyFor(e: Entity): string {

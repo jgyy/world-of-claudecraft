@@ -117,6 +117,18 @@ in official releases and the Claudium store.
 | Generated prop model (jewelcrafting_bench) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset |
 | Generated prop model (mining_ore_cart) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset |
 | Generated prop model (herbalism_drying_rack) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset |
+| Generated NPC reskin atlas (rogue/fisherman.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (rogue/provisioner.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (rogue/quartermaster.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (rogue/cook.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (rogue/tanner.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (mage/apothecary.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (mage/herbalist.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (mage/weaver.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (mage/alchemist.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (barbarian/armorer.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (barbarian/foreman.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
+| Generated NPC reskin atlas (barbarian/forgemistress.png) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite) | Project asset |
 
 Assets were optimized for shipping (animation clip pruning, meshopt compression,
 texture resizing) via `scripts/assets/build_assets.mjs`; raw packs are not

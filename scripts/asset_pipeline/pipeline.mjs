@@ -18,6 +18,8 @@
 //   node scripts/asset_pipeline/pipeline.mjs skin --class warrior --suffix lava \
 //     --tripo --prompt "molten obsidian armor, glowing lava cracks" [--apply]  (real gen)
 //     (or --recolor hue=..[,sat=..][,light=..] fallback, or --prompt with OPENAI_API_KEY)
+//   node scripts/asset_pipeline/pipeline.mjs npc-reskin --model rogue --suffix fisherman \
+//     --visual-key npc_villager_fisherman --prompt "..." [--apply]  (unique NPC look, no new rig)
 //   node scripts/asset_pipeline/pipeline.mjs skinset --set prismatic|chrome [--tripo] [--apply]
 //   node scripts/asset_pipeline/pipeline.mjs skinmodel --class hunter --theme "pool party" \
 //     --name pool_party_hunter [--face-limit 8000] [--grip-rot deg] [--apply]  (League-style skin)
@@ -886,6 +888,85 @@ async function cmdSkin() {
   printReport(job, { ok: true, texture: out, actions });
 }
 
+/** NPC RESKIN: give a distinct NPC its own unique look without a new rig.
+ *  Reuses the SAME Tripo texture-task + UV-composite as `skin --tripo` (the
+ *  model stays the shipped KayKit player body, so animation/silhouette are
+ *  guaranteed compatible and the file cost is one small atlas, not a new
+ *  GLB), but registers the result as a brand-new `SKINS['<visualKey>']`
+ *  entry instead of an alt in an existing player class array. The agent
+ *  still hand-places the VisualDef + NPC_KEYS wiring (gameplay judgment). */
+async function cmdNpcReskin() {
+  const model = opt('model'); // rogue | mage | barbarian | ... (public/models/chars/players/<model>.glb)
+  const suffix = opt('suffix'); // snake_case identity slug, e.g. fisherman
+  const visualKey = opt('visual-key'); // e.g. npc_villager_fisherman
+  if (!model || !suffix || !visualKey) {
+    throw new Error(
+      'npc-reskin needs --model <players-glb-name> --suffix <slug> --visual-key <key>',
+    );
+  }
+  if (!opt('prompt')) throw new Error('npc-reskin needs --prompt "theme description"');
+  const base = resolve(REPO_ROOT, `public/textures/skins/${model}/base.png`);
+  if (!existsSync(base)) throw new Error(`missing base atlas ${base}`);
+  const classGlb = resolve(REPO_ROOT, `public/models/chars/players/${model}.glb`);
+
+  const job = Job.open({ job: opt('job'), kind: 'npc-reskin', name: `${model}_${suffix}` });
+  applyRedo(job, 'npc-reskin');
+  job.set('kind', 'npc-reskin');
+  const out = job.path(`${suffix}.png`);
+
+  const textured = await job.step('texture', async () => {
+    const dest = job.path('textured.glb');
+    const prior = await reconnectTask(job, 'texture');
+    if (prior?.output?.model_url) {
+      try {
+        await tripo.download(prior.output.model_url, dest);
+        return { dest };
+      } catch {
+        /* expired: re-texture below */
+      }
+    }
+    job.log(`tripo texture (${opt('prompt').slice(0, 80)})...`);
+    const { taskId, task } = await tripo.textureModel({
+      input: classGlb,
+      prompt: opt('prompt'),
+      textureQuality: opt('quality') ?? 'detailed',
+      onProgress: (p, s) => job.log(`  tripo texture ${s} ${p}%`),
+      onTaskCreated: (id) => job.noteTask('texture', id),
+    });
+    await tripo.download(task.output.model_url, dest);
+    return { dest, taskId };
+  });
+  await job.step('composite', async () => {
+    const { compositeAtlasFromTextured } = await import('./lib/tripo_skin.mjs');
+    const r = await compositeAtlasFromTextured(textured.dest, base, out);
+    job.log(`composited ${r.parts} part textures -> ${r.width}x${r.height} atlas`);
+    return r;
+  });
+  await job.step('render', async () => {
+    const { renderSkinThumb } = await import('./lib/preview.mjs');
+    const render = job.path(`${suffix}.render.png`);
+    await renderSkinThumb(classGlb, out, render, { size: 420 });
+    return { render };
+  });
+
+  let actions = [];
+  if (flag('apply')) {
+    const { registerNpcSkin } = await import('./lib/integrate.mjs');
+    actions = registerNpcSkin({ visualKey, model, texturePath: out, suffix });
+    actions.push(
+      ...appendCreditsRow({
+        assets: `Generated NPC reskin atlas (${model}/${suffix}.png)`,
+        source: 'Project-generated via scripts/asset_pipeline (Tripo AI re-texture + UV composite)',
+      }),
+    );
+    job.log(
+      `place by hand: a VisualDef for "${visualKey}" (clone the base family def, same url ${model}.glb, ` +
+        `no entity tint) + NPC_KEYS reassignment(s) to "${visualKey}" in src/render/characters/manifest.ts`,
+    );
+  }
+  printReport(job, { ok: true, texture: out, actions });
+}
+
 /** League-style SKIN MODEL: a brand-new character body derived from a base
  *  class model (gpt-image-2 redesigns the character around a theme using
  *  renders of the real model, Tripo builds/rigs it, the FULL KayKit clip
@@ -1436,6 +1517,7 @@ const COMMANDS = {
   prop: cmdProp,
   creature: cmdCreature,
   skin: cmdSkin,
+  'npc-reskin': cmdNpcReskin,
   skinset: cmdSkinset,
   skinmodel: cmdSkinmodel,
   'rig-manual': cmdRigManual,
