@@ -116,6 +116,25 @@ describe('hud.css - FCT crit sheds the pop at low (keeps the number)', () => {
   });
 });
 
+describe('hud.css - the HP/mana/rage/energy bar trough never paints gilt dust', () => {
+  // .bar-fill only covers the FILLED portion (inset:0, width scaled by JS), so
+  // --ornament-dust on the trough would land specifically on the EMPTY part of
+  // an HP bar; target-HP granularity is actionable information a player reacts
+  // to, so both bar troughs (the base .bar and the raid party-frame HP bar,
+  // which shares the same fill-covers-only-the-filled-portion shape) stay flat.
+  it('the base .bar rule has no --ornament-dust layer', () => {
+    const rule = hudCss.match(/(?<!\.hp\s)\.bar \{[^}]*\}/);
+    expect(rule).not.toBeNull();
+    expect(rule?.[0]).not.toContain('--ornament-dust');
+  });
+
+  it('the raid-style party-frame HP bar rule has no --ornament-dust layer', () => {
+    const rule = hudCss.match(/#party-frames\.party-style-raid \.party-frame \.bar\.hp \{[^}]*\}/);
+    expect(rule).not.toBeNull();
+    expect(rule?.[0]).not.toContain('--ornament-dust');
+  });
+});
+
 describe('applier - the diff-guarded, debounced, matchMedia-driven DOM host', () => {
   it('owns the OS prefers-reduced-motion channel with a change listener', () => {
     expect(applier).toContain("window.matchMedia('(prefers-reduced-motion: reduce)')");

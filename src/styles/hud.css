@@ -1030,14 +1030,20 @@
     color: var(--gold-dim);
     font-weight: normal;
   }
+  /* No --ornament-dust here (unlike the other panel/chrome backgrounds in this
+     file): .bar-fill only covers the FILLED portion (inset:0, width scaled by
+     JS), so gilt dust on the trough would land specifically on the EMPTY part
+     of an HP/mana/rage/energy bar. Not a fairness break on its own (no tier
+     gate, nothing hidden or delayed), but target-HP granularity is actionable
+     information a player reacts to, so this trough stays flat rather than
+     softening the filled/empty boundary with cosmetic noise. */
   .bar {
     position: relative;
     height: 15px;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #1a1a1a;
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
     margin-top: 3px;
     border-radius: 2px;
     overflow: hidden;
@@ -5452,6 +5458,8 @@
   #party-frames.party-style-raid .party-frame .pfm-crest {
     display: none;
   }
+  /* No --ornament-dust: same reasoning as the base .bar rule above (this raid
+     HP trough has the identical fill-covers-only-the-filled-portion shape). */
   #party-frames.party-style-raid .party-frame .bar.hp {
     position: absolute;
     inset: 0 0 3px;
@@ -5460,10 +5468,9 @@
     border: 0;
     border-radius: 1px 1px 0 0;
     background:
-      var(--ornament-dust),
       var(--ornament-grain) repeat,
       #171717;
-    background-blend-mode: normal, overlay, normal;
+    background-blend-mode: overlay, normal;
   }
   #party-frames.party-style-raid .party-frame .bar.hp .bar-fill {
     background-color: var(--cls);
