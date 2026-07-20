@@ -98,20 +98,18 @@ export function tradeAccept(ctx: SimContext, pid?: number): void {
 // unlocked instanced copy of the identical item id at once is a rare edge
 // case; this trades a little offerable stock in that case for a correctness
 // guarantee that a locked instance can never leave its owner via trade.
-function offerableCount(meta: PlayerMeta, itemId: string): number {
-  let fungible = 0;
-  let instanced = 0;
-  let anyLocked = false;
-  for (const s of meta.inventory) {
-    if (s.itemId !== itemId) continue;
-    if (!s.instance) {
-      fungible += s.count;
-    } else {
-      instanced += s.count;
-      if (s.instance.tradesRemaining === 0) anyLocked = true;
-    }
+// Reads only the ctx-level primitives the module already used (countItem/
+// countFungibleItem/hasLockedTradeInstance), never meta.inventory directly:
+// social/trade.ts is exercised against a minimal fake SimContext in
+// tests/trade.test.ts that has no instance concept at all, and
+// hasLockedTradeInstance is OPTIONAL for exactly that reason (see its doc on
+// SimContext).
+function offerableCount(ctx: SimContext, pid: number, itemId: string): number {
+  const total = ctx.countItem(itemId, pid);
+  if (ctx.hasLockedTradeInstance?.(itemId, pid)) {
+    return ctx.countFungibleItem(itemId, pid);
   }
-  return fungible + (anyLocked ? 0 : instanced);
+  return total;
 }
 
 export function tradeSetOffer(
@@ -137,7 +135,7 @@ export function tradeSetOffer(
   }
   const cleaned: InvSlot[] = [];
   for (const [itemId, count] of merged) {
-    if (offerableCount(r.meta, itemId) < count) continue; // excludes locked (tradesRemaining:0) copies
+    if (offerableCount(ctx, r.meta.entityId, itemId) < count) continue; // excludes locked (tradesRemaining:0) copies
     cleaned.push({ itemId, count });
   }
   const offer = {
@@ -309,12 +307,11 @@ export function tradeCancel(ctx: SimContext, pid?: number): void {
 // true when the player's bags cover the offered totals per item, summing
 // duplicate slots — a per-slot check would let duplicates each pass alone
 function offerCovered(ctx: SimContext, items: InvSlot[], pid: number): boolean {
-  const meta = ctx.players.get(pid);
-  if (!meta) return false;
+  if (!ctx.players.get(pid)) return false;
   const totals = new Map<string, number>();
   for (const s of items) totals.set(s.itemId, (totals.get(s.itemId) ?? 0) + s.count);
   for (const [itemId, count] of totals) {
-    if (offerableCount(meta, itemId) < count) return false; // excludes locked (tradesRemaining:0) copies
+    if (offerableCount(ctx, pid, itemId) < count) return false; // excludes locked (tradesRemaining:0) copies
   }
   return true;
 }

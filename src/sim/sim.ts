@@ -6463,6 +6463,16 @@ export class Sim {
     return n;
   }
 
+  // Trade-once check (the disenchant epic-reagent economy): see the doc on
+  // SimContext.hasLockedTradeInstance.
+  hasLockedTradeInstance(itemId: string, pid: number): boolean {
+    const r = this.resolve(pid);
+    if (!r) return false;
+    return r.meta.inventory.some(
+      (s) => s.itemId === itemId && s.instance?.tradesRemaining === 0,
+    );
+  }
+
   // Grants are stack-aware (bags.ts addStacked, which never merges into an
   // instanced slot, #1165) but NEVER capacity-capped here: a grant that reaches
   // this hub always lands, so an async award (loot roll, master loot, delve

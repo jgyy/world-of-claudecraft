@@ -5,6 +5,7 @@ import {
   COMBO_RECIPES,
   COMMON_RECIPES,
   LADDER_RECIPES,
+  ON_DEMAND_RECIPES,
   recipeById,
   TOOL_RECIPES,
 } from '../src/sim/content/recipes';
@@ -394,6 +395,7 @@ describe('craftItem command (#1127)', () => {
       ...CASTER_HUB_RECIPES,
       ...COMBO_RECIPES,
       ...LADDER_RECIPES,
+      ...ON_DEMAND_RECIPES,
     ]
       .map((r) => r.id)
       .sort();
@@ -402,7 +404,8 @@ describe('craftItem command (#1127)', () => {
         TOOL_RECIPES.length +
         CASTER_HUB_RECIPES.length +
         COMBO_RECIPES.length +
-        LADDER_RECIPES.length,
+        LADDER_RECIPES.length +
+        ON_DEMAND_RECIPES.length,
     );
     expect(sim.recipeList.map((r) => r.id).sort()).toEqual(allIds);
   });

@@ -459,6 +459,15 @@ export interface SimContextCallbacks {
   // Fungible-only count (excludes per-instance slots, #1165); market.ts uses this
   // instead of countItem so an instanced copy is never listed as a plain stack member.
   countFungibleItem(itemId: string, pid?: number): number;
+  // Trade-once check (the disenchant epic-reagent economy): true when `pid`
+  // holds at least one instanced copy of `itemId` whose
+  // ItemInstancePayload.tradesRemaining is exactly 0 (already locked to its
+  // owner). OPTIONAL and pid-scoped so every existing SimContext test double
+  // (which has no instance concept at all) simply omits it; social/trade.ts's
+  // offerableCount treats an absent implementation as "no locked instances",
+  // preserving its exact pre-existing behavior for any caller that never
+  // mints a tradesRemaining instance.
+  hasLockedTradeInstance?(itemId: string, pid: number): boolean;
   // Enchanting-eligible count/removal (#1712 review): counts/removes a plain
   // fungible stack OR an instanced copy that is not already enchanted per
   // isEnchantedInstance (the explicit `enchant` marker, or legacy bare

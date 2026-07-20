@@ -8,7 +8,13 @@
 // new content).
 import { describe, expect, it } from 'vitest';
 import { STATION_TYPE_BY_CRAFT } from '../src/sim/content/professions';
-import { ALL_RECIPES, COMBO_RECIPES, LADDER_RECIPES, recipeById } from '../src/sim/content/recipes';
+import {
+  ALL_RECIPES,
+  COMBO_RECIPES,
+  LADDER_RECIPES,
+  ON_DEMAND_RECIPES,
+  recipeById,
+} from '../src/sim/content/recipes';
 import { ITEMS, NPCS } from '../src/sim/data';
 import { NODE_MATERIAL_TABLE } from '../src/sim/professions/gathering';
 import { stationsOfType, stationTypeForCraft } from '../src/sim/professions/stations';
@@ -167,8 +173,12 @@ describe('REFERENTIAL INTEGRITY', () => {
         ).toBeDefined();
       }
     }
-    // The 54 ladder recipes plus the 3 grandfathered combos all carry 'trainer'.
-    expect(trainerRecipes).toBe(LADDER_RECIPES.length + COMBO_RECIPES.length);
+    // The 54 ladder recipes, the 3 grandfathered combos, and the 5 new
+    // ON_DEMAND_RECIPES (the disenchant epic-reagent economy) all carry
+    // 'trainer'.
+    expect(trainerRecipes).toBe(
+      LADDER_RECIPES.length + COMBO_RECIPES.length + ON_DEMAND_RECIPES.length,
+    );
   });
 
   it('the three station-free combo recipes resolve a home via professionId, not stationType', () => {
