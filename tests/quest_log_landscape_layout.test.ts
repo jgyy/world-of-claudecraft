@@ -1,8 +1,7 @@
-// Pins the quest-log landscape relayout (game-window landscape relayout program,
-// docs/superpowers/specs/2026-07-19-window-landscape-relayout-design.md): the window
-// widened to give the detail pane real reading width, and the detail pane's own
-// max-height cap was dropped so it flows with the window's single outer scroll instead
-// of a second, nested scroll region.
+// Pins the quest-log landscape relayout (game-window landscape relayout program):
+// the window widened to give the detail pane real reading width, and the detail
+// pane's own max-height cap was dropped so it flows with the window's single outer
+// scroll instead of a second, nested scroll region.
 
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
@@ -70,5 +69,16 @@ describe('quest log: mobile does not inherit the desktop reading-measure cap', (
     expect(start).toBeGreaterThan(0);
     const block = mobileCss.slice(start, mobileCss.indexOf('}', start));
     expect(block).toContain('max-width: none;');
+  });
+
+  it('does not re-add a bounded max-height on mobile .ql-detail or .ql-detail-body, so a long quest scrolls with the single outer sheet like desktop, not a nested region', () => {
+    const detailStart = mobileCss.indexOf('body.mobile-touch #quest-log-window .ql-detail {');
+    const detailBlock = mobileCss.slice(detailStart, mobileCss.indexOf('}', detailStart));
+    expect(detailBlock).not.toMatch(/max-height\s*:/);
+
+    const bodyStart = mobileCss.indexOf('body.mobile-touch #quest-log-window .ql-detail-body {');
+    expect(bodyStart).toBeGreaterThan(0);
+    const bodyBlock = mobileCss.slice(bodyStart, mobileCss.indexOf('}', bodyStart));
+    expect(bodyBlock).not.toMatch(/max-height\s*:/);
   });
 });
