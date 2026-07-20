@@ -20,14 +20,18 @@
 // would hide HP/resource while the world keeps running (talking to a vendor
 // or opening the bank/character sheet does not pause combat) and leave an
 // empty 72px band where the frame used to be. Neither half of a paired
-// cluster is fullscreen, so the caller passes pairedCluster = vendor-open ||
-// bank-open || char-bags-paired and this returns false whenever it is set.
+// cluster is fullscreen, so this returns false whenever any of the three
+// disqualifying body classes is set. The three flags are taken separately
+// (rather than pre-reduced by the caller) so the disqualifying-class list
+// itself is part of what a test can pin down.
 
 export function isMobileFullscreenWindowOpen(
   bagsVisible: boolean,
   charWindowVisible: boolean,
-  pairedCluster: boolean,
+  vendorOpen: boolean,
+  bankOpen: boolean,
+  charBagsPaired: boolean,
 ): boolean {
-  if (pairedCluster) return false; // neither half of a paired cluster is fullscreen
+  if (vendorOpen || bankOpen || charBagsPaired) return false; // no half of a paired cluster is fullscreen
   return bagsVisible || charWindowVisible;
 }

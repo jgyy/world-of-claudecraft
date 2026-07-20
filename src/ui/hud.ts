@@ -2266,16 +2266,14 @@ export class Hud {
     document.body.classList.toggle('mobile-window-open', anyOpen);
     const bagsWindow = document.getElementById('bags');
     const charWindow = document.getElementById('char-window');
-    const pairedCluster =
-      document.body.classList.contains('vendor-open') ||
-      document.body.classList.contains('bank-open') ||
-      document.body.classList.contains('char-bags-paired');
     document.body.classList.toggle(
       'mobile-fullscreen-window-open',
       isMobileFullscreenWindowOpen(
         !!bagsWindow && this.isWindowVisible(bagsWindow),
         !!charWindow && this.isWindowVisible(charWindow),
-        pairedCluster,
+        document.body.classList.contains('vendor-open'),
+        document.body.classList.contains('bank-open'),
+        document.body.classList.contains('char-bags-paired'),
       ),
     );
     const storeWindow = document.getElementById('daily-rewards-window') as HTMLElement | null;
