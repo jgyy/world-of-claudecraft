@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { isVisuallyDead } from '../src/render/anim_state';
 import type { AnimState } from '../src/render/characters/anim_state';
-import { dazedPoseActive, desiredBaseState } from '../src/render/characters/anim_state';
+import {
+  dazedPoseActive,
+  desiredBaseState,
+  isLoopableHitReact,
+} from '../src/render/characters/anim_state';
 
 describe('render animation state', () => {
   it('treats zero-hp entities as visually dead before the server dead flag arrives', () => {
@@ -98,5 +102,35 @@ describe('dazedPoseActive: any active form swap excluded from the dazed pose', (
   it('stays false without a hard CC lockout', () => {
     expect(dazedPoseActive(false, false, false)).toBe(false);
     expect(dazedPoseActive(false, true, false)).toBe(false);
+  });
+});
+
+describe('isLoopableHitReact: which hit[0] clips are safe to loop for the stunned pose', () => {
+  // Review feedback on PR #2064, a later round: no rig authors a bespoke
+  // `stunned` clip, so baseAction()'s stunned case always falls through to
+  // hit[0], looped for the whole stun. Only the Quaternius animal() rig's
+  // Idle_HitReact_Left/Right clips are authored as an idle-style pose meant
+  // to hold; every other rig's hit[0] is a short one-shot flinch or block
+  // pose, so looping it reads as a broken flinch cut every loop boundary.
+  it('allows the Idle_HitReact_* family (animal() rig: wolf/fox/deer/stag/...)', () => {
+    expect(isLoopableHitReact('Idle_HitReact_Left')).toBe(true);
+    expect(isLoopableHitReact('Idle_HitReact_Right')).toBe(true);
+  });
+
+  it('excludes the one-shot flinch and block clips named in review (finding 1)', () => {
+    expect(isLoopableHitReact('HitReact')).toBe(false); // BIPED14 (orc/frog/demonalt/yetialt)
+    expect(isLoopableHitReact('HitRecieve')).toBe(false); // ENEMY7 (goblin/giant)
+    expect(isLoopableHitReact('Hurt')).toBe(false); // WILD_BOAR
+    expect(isLoopableHitReact('Armature|Block5|baselayer')).toBe(false); // mob_yumi_cat
+  });
+
+  it('excludes every other rig family hit clip, including the KayKit/plain "Hit" shapes', () => {
+    expect(isLoopableHitReact('Hit_A')).toBe(false); // kaykit() players + humanoid mobs
+    expect(isLoopableHitReact('Hit')).toBe(false); // mob_training_dummy, RAID_CASTER, WATER_ELEMENTAL
+  });
+
+  it('handles an absent hit[0] (no hit clip authored at all)', () => {
+    expect(isLoopableHitReact(undefined)).toBe(false);
+    expect(isLoopableHitReact(null)).toBe(false);
   });
 });

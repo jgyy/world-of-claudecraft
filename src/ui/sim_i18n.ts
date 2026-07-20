@@ -6996,7 +6996,7 @@ const RULES: Rule[] = [
       }) + (m[4] ? locTalentTail(m[4]) : ''),
   },
   {
-    re: /^Talents: (.+) — (.+)\/(.+) points spent \((.+)\)\.(.*)$/,
+    re: /^Talents: (.+), (.+)\/(.+) points spent \((.+)\)\.(.*)$/,
     build: (m) =>
       t('game.talents.readout.summary', {
         head: m[1] === 'no specialization' ? t('game.talents.readout.noSpec') : m[1],

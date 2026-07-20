@@ -13,6 +13,7 @@ import {
   type AnimState,
   type BaseState,
   desiredBaseState,
+  isLoopableHitReact,
   locomotionTimeScale,
   pickProxyHeight,
 } from './anim_state';
@@ -1192,7 +1193,11 @@ export class CharacterVisual {
       case 'jump':
         return this.action(c.jump) ?? this.action(c.idle);
       case 'stunned':
-        return this.action(c.stunned) ?? this.action(c.hit?.[0]) ?? this.action(c.idle);
+        return (
+          this.action(c.stunned) ??
+          (isLoopableHitReact(c.hit?.[0]) ? this.action(c.hit?.[0]) : null) ??
+          this.action(c.idle)
+        );
       default:
         return this.action(c.idle);
     }
@@ -1234,8 +1239,19 @@ export class CharacterVisual {
     next.setLoop(oneShot || this.isOnce(next) ? THREE.LoopOnce : THREE.LoopRepeat, Infinity);
     next.clampWhenFinished = true;
     next.timeScale = 1;
-    if (prev && prev !== next) prev.fadeOut(fade);
-    next.fadeIn(fade).play();
+    if (prev === next) {
+      // Same action re-fading into itself (the frozen-clamp hand-off above):
+      // there is no second action to cross-fade against, so fadeIn() would
+      // ramp this action's weight from 0 to 1 over `fade` seconds with
+      // nothing else contributing, blending the rig toward bind pose for the
+      // whole hand-off (a visible T-pose pop). Snap straight to full weight
+      // instead, mirroring the clampWhenFinished reasoning in playOneShot.
+      next.setEffectiveWeight(1);
+      next.play();
+    } else {
+      if (prev) prev.fadeOut(fade);
+      next.fadeIn(fade).play();
+    }
     this.current = next;
     this.currentIsOneShot = oneShot;
     this.currentOneShotIsEmote = false;

@@ -61,6 +61,25 @@ export function dazedPoseActive(hardCC: boolean, formSwapActive: boolean, dead: 
   return hardCC && !formSwapActive && !dead;
 }
 
+/**
+ * Whether a rig's `hit[0]` clip is safe to loop for the whole stun duration
+ * when the rig has no bespoke `stunned` clip authored (`ClipMap.stunned` is
+ * declared, but no manifest entry currently populates it, so `baseAction()`'s
+ * `stunned` case always falls through to this clip).
+ *
+ * Only the Quaternius animal rig's `Idle_HitReact_Left`/`Idle_HitReact_Right`
+ * clips are authored as an idle-style pose meant to hold. Every other rig's
+ * hit clip is a short one-shot flinch or block pose (the KayKit rigs' `Hit_A`,
+ * the 14-clip biped's `HitReact`, the 2023 enemy rig's `HitRecieve`, the wild
+ * boar's `Hurt`, Yumi's `Armature|Block5|baselayer`): looping one of those for
+ * several seconds replays a short clip with a hard cut at every loop
+ * boundary, reading as a broken flinch loop rather than a dazed pose, the
+ * same defect `dazedPoseActive`'s form-swap exclusion exists to avoid.
+ */
+export function isLoopableHitReact(clipName: string | null | undefined): boolean {
+  return !!clipName && clipName.startsWith('Idle_HitReact');
+}
+
 export function desiredBaseState(s: AnimState, hasWalkBackClip: boolean): BaseState {
   // Airborne is physics (falling/knockback) and outranks stun: you fall either
   // way. Stun then preempts spin/swim/cast/sit/move, all voluntary actions a

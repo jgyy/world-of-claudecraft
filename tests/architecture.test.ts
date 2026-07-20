@@ -234,6 +234,7 @@ const RENDER_PURE_CORES = [
   'src/render/water_core.ts',
   'src/render/warrior_cast_fx_core.ts',
   'src/render/characters/weapon_attack_style_core.ts',
+  'src/render/characters/anim_state.ts',
 ].map((rel) => join(repoRoot, rel));
 
 // Bare-named pure cores: registered cores (from UI_PURE_CORES + RENDER_PURE_CORES)
@@ -272,6 +273,7 @@ const BARE_NAMED = [
   'src/game/ui_effects_profile.ts',
   'src/game/ui_tier_knobs.ts',
   'src/render/cast_bar.ts',
+  'src/render/characters/anim_state.ts',
 ].map((rel) => join(repoRoot, rel));
 
 function importSpecs(src: string): string[] {
