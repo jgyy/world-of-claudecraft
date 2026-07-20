@@ -471,6 +471,9 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
 // Abilities — classic-era rank values and learn levels (levels 1-10)
 // ---------------------------------------------------------------------------
 
+const MAGE_PERSONAL_BARRIER_SPELL_POWER_COEFF = 0.5;
+const MAGE_TEMPORAL_BARRIER_SPELL_POWER_COEFF = 0.25;
+
 export const ABILITIES: Record<string, AbilityDef> = {
   // ====================== WARRIOR ======================
   heroic_strike: {
@@ -732,10 +735,13 @@ export const ABILITIES: Record<string, AbilityDef> = {
       // free, rage-generating, 2-charge spell); retuned to 0.45 weapon + 16.
       { type: 'weaponStrike', bonus: 14, weaponMult: 0.4 },
       { type: 'weaponStrike', bonus: 14, weaponMult: 0.4 },
-      { type: 'gainResource', amount: 8 },
+      // v0.27.1 rage fix: halved from 8. Bloodletting is Fury's generating
+      // builder; Twinstrike keeps a taste of rage but no longer co-funds a
+      // Red Harvest every ~6 seconds.
+      { type: 'gainResource', amount: 4 },
     ],
     description:
-      'Instantly strike with your weapon twice, each hit dealing 40% weapon damage plus $d, and generate 8 rage. Stores up to 2 charges. (Fury)',
+      'Instantly strike with your weapon twice, each hit dealing 40% weapon damage plus $d, and generate 4 rage. Stores up to 2 charges. (Fury)',
   },
   execute: {
     id: 'execute',
@@ -1481,7 +1487,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   // Winterlash: the Winter's Chill planter. Its three bolts resolve on one
   // projectile arrival; the debuff rider lands in frostMageAfterCast so the
   // bolts themselves can never eat the charges they just applied. Brain
-  // Freeze's instant/harder/no-cooldown override is applyBrainFreezeOverride.
+  // Freeze's instant/no-cooldown override is applyBrainFreezeOverride.
   flurry: {
     id: 'flurry',
     name: 'Winterlash',
@@ -1512,21 +1518,21 @@ export const ABILITIES: Record<string, AbilityDef> = {
       },
     ],
     description:
-      "Loose three icy bolts for $d Frost damage each and plant Winter's Chill on the target: its next 2 incoming compatible spells treat it as frozen. Brain Freeze makes Winterlash instant, 30% harder, and skips its cooldown. (Frost)",
+      "Loose three icy bolts for $d Frost damage each and plant Winter's Chill on the target: its next 2 incoming compatible spells treat it as frozen. Brain Freeze makes Winterlash instant and skips its cooldown. (Frost)",
   },
-  // Frozen Orb: the roaming proc generator (combat/frozen_orb.ts). Instant,
-  // 30s cooldown; the orb drifts forward pulsing frost damage + a 30% snare
-  // once per second for 8s. First strike guarantees a Fingers of Frost stack,
-  // then 20% per striking pulse. Blizzard shortens its cooldown (below).
+  // Frozen Orb: the roaming Icicle generator (combat/frozen_orb.ts). Instant,
+  // 45s cooldown; the orb drifts forward pulsing frost damage + a 30% snare
+  // once per second for 8s. Each striking pulse banks one Icicle. Blizzard
+  // shortens its cooldown (below).
   frozen_orb: {
     id: 'frozen_orb',
     name: 'Frozen Orb',
     class: 'mage',
-    learnLevel: 12,
+    learnLevel: 15,
     specs: ['frost'],
     cost: 50,
     castTime: 0,
-    cooldown: 30,
+    cooldown: 45,
     range: 0,
     school: 'frost',
     requiresTarget: false,
@@ -1540,7 +1546,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       },
     ],
     description:
-      'Release an orb of swirling frost that drifts forward for 8 sec, dealing $d Frost damage each second to nearby enemies and slowing them by 30%. Its strikes generate Fingers of Frost. (Frost)',
+      'Release an orb of swirling frost that drifts forward for 8 sec, dealing $d Frost damage each second to nearby enemies and slowing them by 30%. Each striking pulse generates one Icicle. (Frost)',
   },
   // Glacial Spike: the frost spec's slow, heavy spender. Gated on a FULL Icicles
   // stack (requiresAuraStacks 5), which the cast consumes; it lands a big frost
@@ -1725,7 +1731,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: false,
     effects: [],
     description:
-      'Rimelance has a 20% chance to make your next Winterlash instant, 30% harder, and free of its cooldown. (Frost)',
+      'Rimelance has a 20% chance to make your next Winterlash instant and free of its cooldown. (Frost)',
   },
   shatter: {
     id: 'shatter',
@@ -1742,7 +1748,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: false,
     effects: [],
     description:
-      "Your spells gain 50% critical strike chance against frozen targets, and those critical strikes deal 20% more damage. Fingers of Frost and Winter's Chill count as frozen. (Frost)",
+      "Your spells gain 50% critical strike chance against frozen targets. Fingers of Frost and Winter's Chill count as frozen. (Frost)",
   },
   conjure_water: {
     id: 'conjure_water',
@@ -1853,6 +1859,11 @@ export const ABILITIES: Record<string, AbilityDef> = {
     description:
       'Transforms the enemy into a toad for up to $t sec. The toad wanders and heals rapidly. Any damage breaks the effect. Beasts and humanoids only.',
   },
+  // One meaningful follow-up breaks Icebind, while tiny incidental ticks do not.
+  // The cap prevents high-health targets from gaining a stronger root.
+  // Frost Nova deals its own damage before applying the root, so that packet is excluded.
+  // Keep this data on every rank because resolved ranks replace the full effects array.
+  // Values are cumulative post-mitigation damage.
   frost_nova: {
     id: 'frost_nova',
     name: 'Icebind',
@@ -1864,16 +1875,35 @@ export const ABILITIES: Record<string, AbilityDef> = {
     range: 0,
     school: 'frost',
     requiresTarget: false,
-    effects: [{ type: 'aoeRoot', duration: 8, radius: 10, min: 6, max: 7 }],
+    effects: [
+      {
+        type: 'aoeRoot',
+        duration: 8,
+        radius: 10,
+        min: 6,
+        max: 7,
+        breakOnDamage: { maxHpPct: 0.15, min: 20, max: 60 },
+      },
+    ],
     ranks: [
       {
         rank: 2,
         level: 16,
         cost: 50,
-        effects: [{ type: 'aoeRoot', duration: 8, radius: 10, min: 12, max: 14 }],
+        effects: [
+          {
+            type: 'aoeRoot',
+            duration: 8,
+            radius: 10,
+            min: 12,
+            max: 14,
+            breakOnDamage: { maxHpPct: 0.15, min: 20, max: 60 },
+          },
+        ],
       },
     ],
-    description: 'Freezes all nearby enemies in place for up to 8 sec, dealing $d Frost damage.',
+    description:
+      "Freezes all nearby enemies in place for up to 8 sec, dealing $d Frost damage. The root breaks after cumulative damage equal to 15% of the target's maximum health, with a minimum of 20 and a maximum of 60 damage.",
   },
   arcane_explosion: {
     id: 'arcane_explosion',
@@ -2077,10 +2107,41 @@ export const ABILITIES: Record<string, AbilityDef> = {
     school: 'arcane',
     requiresTarget: true,
     targetType: 'friendly',
-    effects: [{ type: 'absorb', amount: 55, duration: 10 }],
+    effects: [
+      {
+        type: 'absorb',
+        amount: 55,
+        duration: 10,
+        spellPowerCoeff: MAGE_TEMPORAL_BARRIER_SPELL_POWER_COEFF,
+      },
+    ],
     ranks: [
-      { rank: 2, level: 12, cost: 75, effects: [{ type: 'absorb', amount: 100, duration: 10 }] },
-      { rank: 3, level: 18, cost: 105, effects: [{ type: 'absorb', amount: 160, duration: 10 }] },
+      {
+        rank: 2,
+        level: 12,
+        cost: 75,
+        effects: [
+          {
+            type: 'absorb',
+            amount: 100,
+            duration: 10,
+            spellPowerCoeff: MAGE_TEMPORAL_BARRIER_SPELL_POWER_COEFF,
+          },
+        ],
+      },
+      {
+        rank: 3,
+        level: 18,
+        cost: 105,
+        effects: [
+          {
+            type: 'absorb',
+            amount: 160,
+            duration: 10,
+            spellPowerCoeff: MAGE_TEMPORAL_BARRIER_SPELL_POWER_COEFF,
+          },
+        ],
+      },
     ],
     description:
       'Shifts the target a heartbeat out of the present, a temporal shell absorbing $d damage for 10 sec before the timeline snaps back.',
@@ -2395,13 +2456,50 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Frostveil',
     class: 'mage',
     learnLevel: 5,
-    cost: 90,
+    cost: 45,
     castTime: 0,
     cooldown: 30,
     range: 0,
     school: 'frost',
     requiresTarget: false,
-    effects: [{ type: 'absorb', amount: 130, duration: 60 }],
+    // The original level-20 shield moved down to the spec pick at level 5.
+    // Rank it through the leveling curve instead of granting its cap value early.
+    effects: [
+      {
+        type: 'absorb',
+        amount: 50,
+        duration: 60,
+        spellPowerCoeff: MAGE_PERSONAL_BARRIER_SPELL_POWER_COEFF,
+      },
+    ],
+    ranks: [
+      {
+        rank: 2,
+        level: 12,
+        cost: 65,
+        effects: [
+          {
+            type: 'absorb',
+            amount: 90,
+            duration: 60,
+            spellPowerCoeff: MAGE_PERSONAL_BARRIER_SPELL_POWER_COEFF,
+          },
+        ],
+      },
+      {
+        rank: 3,
+        level: 18,
+        cost: 90,
+        effects: [
+          {
+            type: 'absorb',
+            amount: 130,
+            duration: 60,
+            spellPowerCoeff: MAGE_PERSONAL_BARRIER_SPELL_POWER_COEFF,
+          },
+        ],
+      },
+    ],
     description: 'Shields you in ice, absorbing $d damage for 60 sec.',
   },
 
@@ -4904,9 +5002,10 @@ export const ABILITIES: Record<string, AbilityDef> = {
     // Bladed Gyre back as its spec AoE tool. Arms/Prot keep their own AoE
     // (Reaping Arc / Quaking Blow); no-spec never learns it.
     specs: ['fury'],
-    // Bladed Gyre GENERATES rage instead of costing it (operator, Batch
-    // 2026-07-08): cost 0, and the aoeDamage's rageOnHit grants 5 rage plus 1
-    // per enemy struck (capped at +5), so 5 to 10 rage per spin.
+    // Bladed Gyre is free but mints nothing (v0.27.1 rage fix): with Twinstrike,
+    // Bloodletting, AND the spin all generating, Fury's whole rotation was
+    // rage-positive and Red Harvest fired every ~6s. Bloodletting is now the one
+    // generating builder; the spin keeps its zero cost and echo utility.
     cost: 0,
     castTime: 0,
     cooldown: 10,
@@ -4919,7 +5018,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
         min: 30,
         max: 42,
         radius: 8,
-        rageOnHit: { base: 5, perTarget: 1, capTargets: 5 },
       },
       // Bladed Echo: arms the caster for 2 echoing casts (combat/area_echo.ts).
       // Its own aoeDamage disqualifies whirlwind from consuming the charge.
@@ -4934,7 +5032,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       },
     ],
     description:
-      'Spin in a deadly arc, striking all nearby enemies for $d and generating rage for each foe struck instead of costing any. Your next 2 single-target abilities also strike enemies near their target. (Fury talent)',
+      'Spin in a deadly arc, striking all nearby enemies for $d at no rage cost. Your next 2 single-target abilities also strike enemies near their target. (Fury talent)',
   },
   berserker_rage: {
     id: 'berserker_rage',
@@ -5925,7 +6023,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     class: 'mage',
     learnLevel: 5,
     specs: ['fire'],
-    cost: 90,
+    cost: 45,
     castTime: 0,
     cooldown: 30,
     range: 0,
@@ -5933,8 +6031,43 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: false,
     // The fire spec's PERSONAL BARRIER slot (Frost carries Frostveil): the
     // shared row talents hook either id via PERSONAL_BARRIER_IDS.
-    effects: [{ type: 'absorb', amount: 130, duration: 60 }],
-    description: 'Wreathe yourself in flame, absorbing 130 damage for 60 sec. (Fire)',
+    effects: [
+      {
+        type: 'absorb',
+        amount: 50,
+        duration: 60,
+        spellPowerCoeff: MAGE_PERSONAL_BARRIER_SPELL_POWER_COEFF,
+      },
+    ],
+    ranks: [
+      {
+        rank: 2,
+        level: 12,
+        cost: 65,
+        effects: [
+          {
+            type: 'absorb',
+            amount: 90,
+            duration: 60,
+            spellPowerCoeff: MAGE_PERSONAL_BARRIER_SPELL_POWER_COEFF,
+          },
+        ],
+      },
+      {
+        rank: 3,
+        level: 18,
+        cost: 90,
+        effects: [
+          {
+            type: 'absorb',
+            amount: 130,
+            duration: 60,
+            spellPowerCoeff: MAGE_PERSONAL_BARRIER_SPELL_POWER_COEFF,
+          },
+        ],
+      },
+    ],
+    description: 'Wreathe yourself in flame, absorbing $d damage for 60 sec. (Fire)',
   },
   ignition: {
     id: 'ignition',

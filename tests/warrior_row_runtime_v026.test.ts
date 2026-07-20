@@ -90,7 +90,7 @@ describe('v0.26 winning Warrior authored row and mastery runtime', () => {
     expect(hit('fire')).toBe(100);
   });
 
-  it('Anger Management scales auto rage by 25 percent without drawing RNG', () => {
+  it('Anger Management scales auto rage by 10 percent without drawing RNG', () => {
     const rageFromHit = (selected: boolean) => {
       const sim = warriorAtCap(2621);
       if (selected) expect(sim.selectTalentRow(14, 'war_row_anger_management')).toBe(true);
@@ -105,12 +105,13 @@ describe('v0.26 winning Warrior authored row and mastery runtime', () => {
 
     const baseline = rageFromHit(false);
     const talented = rageFromHit(true);
-    expect(talented.rage).toBeCloseTo(baseline.rage * 1.25);
+    // v0.27.1 rage fix: trimmed from 25 percent.
+    expect(talented.rage).toBeCloseTo(baseline.rage * 1.1);
     expect(baseline.draws).toBe(0);
     expect(talented.draws).toBe(0);
   });
 
-  it('Anger Management scales gainResource, Charge, and rageOnHit by 15 percent without extra RNG', () => {
+  it('Anger Management scales gainResource, Charge, and rageOnHit by 5 percent without extra RNG', () => {
     const sim = warriorAtCap(2622);
     expect(sim.selectTalentRow(14, 'war_row_anger_management')).toBe(true);
     const player = sim.player;
@@ -127,12 +128,12 @@ describe('v0.26 winning Warrior authored row and mastery runtime', () => {
       null,
       effectOnly(sim, 'battle_shout', [{ type: 'gainResource', amount: 10 }]),
     );
-    expect(player.resource).toBeCloseTo(10 * 1.15 * 1.1);
+    expect(player.resource).toBeCloseTo(10 * 1.05 * 1.1);
     expect(draws).toBe(0);
 
     player.resource = 0;
     runEffects(sim.ctx, player, meta, target, effectOnly(sim, 'charge', [{ type: 'charge' }]));
-    expect(player.resource).toBeCloseTo(9 * 1.15 * 1.1);
+    expect(player.resource).toBeCloseTo(9 * 1.05 * 1.1);
     expect(draws).toBe(0);
 
     const aoeTarget = spawnTarget(sim, player, 0);
@@ -152,7 +153,7 @@ describe('v0.26 winning Warrior authored row and mastery runtime', () => {
         },
       ]),
     );
-    expect(player.resource).toBeCloseTo(6 * 1.15 * 1.1);
+    expect(player.resource).toBeCloseTo(6 * 1.05 * 1.1);
     expect(draws).toBe(1);
     sim.ctx.rng.setObserver(null);
   });
@@ -190,7 +191,7 @@ describe('v0.26 winning Warrior authored row and mastery runtime', () => {
     expect(player.hp).toBe(highHp);
   });
 
-  it('Battle Rhythm empowers exactly every third ability for damage and generated rage', () => {
+  it('Battle Rhythm empowers exactly every third ability for generated rage only', () => {
     const sim = warriorAtCap(2625);
     expect(sim.selectTalentRow(14, 'war_row_battle_rhythm')).toBe(true);
     const player = sim.player;
@@ -214,10 +215,10 @@ describe('v0.26 winning Warrior authored row and mastery runtime', () => {
     const empoweredDraws = draws;
     expect(player.auras).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ id: 'battle_rhythm', kind: 'buff_dmg_done', value: 0.05 }),
         expect.objectContaining({ id: 'battle_rhythm_rage', kind: 'buff_rage_gen', value: 0.2 }),
       ]),
     );
+    expect(player.auras.some((aura) => aura.id === 'battle_rhythm')).toBe(false);
     const hpBefore = target.hp;
     sim.dealDamage(player, target, 100, false, 'fire', 'Test Battle Rhythm Strike', 'hit', true);
     const empoweredDamage = hpBefore - target.hp;
@@ -232,7 +233,7 @@ describe('v0.26 winning Warrior authored row and mastery runtime', () => {
     sim.ctx.rng.setObserver(null);
     sim.dealDamage(player, target, 100, false, 'fire', 'Test Battle Rhythm Strike', 'hit', true);
     const normalDamage = fourthHpBefore - target.hp;
-    expect(empoweredDamage).toBe(Math.round(normalDamage * 1.05));
+    expect(empoweredDamage).toBe(normalDamage);
     expect(empoweredRage).toBeCloseTo(10 * 1.3);
     expect(player.resource).toBeCloseTo(10 * 1.1);
     expect(empoweredDraws).toBe(normalDraws);

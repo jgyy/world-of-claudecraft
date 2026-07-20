@@ -55,7 +55,15 @@ import {
   normAngle,
 } from '../types';
 import { drawWeapon } from '../weapon_stow';
-import { isInStasis, isLockedOut, isSilenced, isStunned, tonguesMult } from './cc';
+import {
+  hasUnbreakableMovementLock,
+  isInStasis,
+  isLockedOut,
+  isSilenced,
+  isStunned,
+  isUnbreakableControlAura,
+  tonguesMult,
+} from './cc';
 import {
   ARCANE_SURGE_ID,
   aetherDartsBoltBonus,
@@ -127,12 +135,23 @@ function isStasisToggle(ability: AbilityDef): boolean {
 }
 
 function cancelStasisToggle(ctx: SimContext, entity: Entity, ability: AbilityDef): boolean {
-  if (!isStasisToggle(ability) || !entity.auras.some((aura) => aura.id === ability.id)) {
+  if (
+    !isStasisToggle(ability) ||
+    !entity.auras.some(
+      (aura) =>
+        aura.id === ability.id && aura.sourceId === entity.id && !isUnbreakableControlAura(aura),
+    )
+  ) {
     return false;
   }
   for (let index = entity.auras.length - 1; index >= 0; index--) {
     const aura = entity.auras[index];
-    if (aura.id !== ability.id && aura.id !== `${ability.id}_absorb`) continue;
+    if (
+      (aura.id !== ability.id && aura.id !== `${ability.id}_absorb`) ||
+      aura.sourceId !== entity.id ||
+      isUnbreakableControlAura(aura)
+    )
+      continue;
     entity.auras.splice(index, 1);
     ctx.emit({ type: 'aura', targetId: entity.id, name: aura.name, gained: false });
   }
@@ -448,10 +467,9 @@ export function castAbility(
   meta.lastActiveTick = ctx.tickCount; // a cast attempt is a deliberate action
   const ability = res.def;
   if (cancelStasisToggle(ctx, p, ability)) return;
-  // Ice Block (usableWhileControlled) ignores control: it may be pressed while
-  // stunned, polymorphed, incapacitated, silenced, or locked out, so it always frees
-  // the caster (its cleanseSelf effect then strips the debuffs). Its own stasis is the
-  // one control it still respects, but the recast toggle above already handles that.
+  // Ice Block (usableWhileControlled) may be pressed through ordinary control;
+  // cleanseSelf removes the player-breakable debuffs while encounter-authored
+  // unbreakable control remains. Its own stasis is handled by the recast toggle above.
   if (!ability.usableWhileControlled) {
     if (isInStasis(p)) return;
     if (isStunned(p)) {
@@ -466,6 +484,18 @@ export function castAbility(
       ctx.error(p.id, 'You are silenced!');
       return;
     }
+  }
+  if (
+    hasUnbreakableMovementLock(p) &&
+    res.effects.some(
+      (effect) =>
+        effect.type === 'blinkForward' ||
+        effect.type === 'repositionToAim' ||
+        effect.type === 'charge',
+    )
+  ) {
+    ctx.error(p.id, 'You are stunned!');
+    return;
   }
   // Blink While Casting (mage choice row): Flickerstep slips through the busy
   // guard AND the GCD, an escape button that never touches the cast in
@@ -940,6 +970,15 @@ function formShiftKind(p: Entity, ability: AbilityDef): 'off' | 'cross' | null {
   return null;
 }
 
+// Colossal Might's rolling CDR cap (v0.27.1). Uncapped, sustained Red Harvest
+// spam banked ~78s of CDR per minute and collapsed the 180s offensive cooldowns
+// to an effective ~78s. Same numbers and aura mechanism as the mage Overflowing
+// Power cap below (which copied this feature and got the cap the original
+// lacked); the accumulator rides an 'internal_cd' aura the player can watch
+// tick down, so no new entity field enters the parity state hash.
+export const COLOSSAL_MIGHT_CAP_SECONDS = 10;
+export const COLOSSAL_MIGHT_CAP_WINDOW = 30;
+
 export function applyRageSpendCooldownRefund(
   ctx: SimContext,
   p: Entity,
@@ -948,7 +987,24 @@ export function applyRageSpendCooldownRefund(
 ): void {
   const rate = ctx.playerMods(meta).global.cdrPerRage;
   if (spentRage <= 0 || rate <= 0) return;
-  const refund = spentRage * rate;
+  const capAura = p.auras.find((a) => a.id === 'colossal_might_cap');
+  const used = capAura?.value ?? 0;
+  const refund = Math.min(spentRage * rate, COLOSSAL_MIGHT_CAP_SECONDS - used);
+  if (refund <= 0) return;
+  if (capAura) {
+    capAura.value += refund;
+  } else {
+    ctx.applyAura(p, {
+      id: 'colossal_might_cap',
+      name: 'Colossal Might',
+      kind: 'internal_cd',
+      value: refund,
+      remaining: COLOSSAL_MIGHT_CAP_WINDOW,
+      duration: COLOSSAL_MIGHT_CAP_WINDOW,
+      sourceId: p.id,
+      school: 'physical',
+    });
+  }
   for (const id of COLOSSAL_MIGHT_COOLDOWNS) {
     const current = p.cooldowns.get(id);
     if (current === undefined) continue;
