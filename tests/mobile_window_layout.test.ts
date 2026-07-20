@@ -65,6 +65,26 @@ describe('mobile window layout CSS', () => {
     expect(landscapeBlock).toContain('min-height: 132px;');
   });
 
+  it('keeps the mobile char-stats overflow guard reaching nested .cp-stats blocks (talent summary, progression, gathering), not just the top-level info-grid child', () => {
+    // Regression guard: an earlier narrowing pass changed this rule's selector to
+    // `#char-window > .char-info-grid > .char-stats`, which only matches the top-level
+    // stats block and stops matching `.char-stats.cp-stats` nested inside the talent
+    // summary (src/ui/hud.ts), progression (src/ui/hud.ts), and gathering
+    // (src/ui/char_window.ts) panels. Those panels rely on this rule's grid columns,
+    // max-width/box-sizing/overflow-x guard, and the stat-cell min-width/overflow-wrap
+    // guard to avoid clipped text on long profession/spec/mastery names on mobile.
+    expect(mobileCss).toMatch(
+      /body\.mobile-touch #char-window \.char-stats \{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[^}]*max-width: 100%;[^}]*box-sizing: border-box;[^}]*overflow-x: hidden;/,
+    );
+    expect(mobileCss).toMatch(
+      /body\.mobile-touch #char-window \.char-stats \.stat-cell \{[^}]*min-width: 0;[^}]*max-width: 100%;[^}]*margin-inline: 0;[^}]*overflow-wrap: anywhere;/,
+    );
+    // The margin-top rule stays scoped to the top-level block only.
+    expect(mobileCss).toMatch(
+      /body\.mobile-touch #char-window > \.char-info-grid > \.char-stats \{[^}]*margin-top: 6px;/,
+    );
+  });
+
   it('sizes the mobile map from the app viewport so zoom controls do not dominate it', () => {
     const start = mobileCss.indexOf('body.mobile-touch #map-window {');
     expect(start).toBeGreaterThan(0);

@@ -3019,13 +3019,18 @@
       padding: 4px 0 5px;
     }
   }
-  body.mobile-touch #char-window > .char-info-grid > .char-stats {
+  /* Descendant form (not scoped to a direct .char-info-grid child): this
+     overflow guard must also reach the .char-stats.cp-stats blocks nested
+     inside talent summary, progression, and gathering panels (src/ui/hud.ts,
+     src/ui/char_window.ts), which rely on it for long profession/spec/mastery
+     names on touch. See tests/mobile_window_layout.test.ts. */
+  body.mobile-touch #char-window .char-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
   }
-  body.mobile-touch #char-window > .char-info-grid > .char-stats .stat-cell {
+  body.mobile-touch #char-window .char-stats .stat-cell {
     min-width: 0;
     max-width: 100%;
     margin-inline: 0;
