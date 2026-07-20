@@ -406,12 +406,7 @@ import {
 // (online.ts) stays byte-identical.
 export { computeQuestState } from './quests/quest_commands';
 
-import {
-  DAILY_QUEST_COUNT,
-  dailyResetDayIndex,
-  eligibleDailyQuestIds,
-  rollDailyQuestIds,
-} from './quests/daily_quest_pool';
+import { ensureDailyQuests as ensureDailyQuestsCore } from './quests/daily_quest_pool';
 import { completeCurrentQuestsForDev, completeQuestForDev } from './quests/dev_quest_commands';
 import * as arenaMod from './social/arena';
 import { clearAfkOnMove } from './social/away';
@@ -7121,41 +7116,20 @@ export class Sim {
     }
   }
 
-  // Roll the player's daily quest set for the current server day if this NPC
-  // offers any daily quests and the player has no roll yet, a stale one (a new
-  // day boundary has passed), or a roll whose eligible pool has since widened
-  // (the character levelled up mid-day past a daily's minLevel, so the first,
-  // narrower roll should not stay sticky for the rest of the day). Mutates
-  // PlayerMeta.dailyQuests/dailyQuestsMeta in place; bumps wireRev so the server
-  // re-sends the mirrored field on the next snapshot. A re-roll preserves credit
-  // for anything already turned in today (dailyQuestsMeta.consumedIds) rather
-  // than re-offering it. The day boundary is the same one raid lockouts use
-  // (ctx.raidResetMs), and the roll is deterministic per (characterId, day).
+  // Roll (or refresh) the player's daily quest set for the current server day if
+  // this NPC offers any daily quests. The rotation math and the once-per-day cap
+  // live in quests/daily_quest_pool.ts (ensureDailyQuestsCore, a pure function of
+  // PlayerMeta + level + the day boundary): this delegate only resolves whether
+  // the NPC offers any daily and forwards the two SimContext callbacks the core
+  // needs (lockoutNowMs, raidResetMs).
   private ensureDailyQuests(npc: Entity, p: Entity, meta: PlayerMeta): void {
-    if (!npc.questIds.some((qid) => QUESTS[qid]?.isDaily)) return;
-    const day = dailyResetDayIndex(this.lockoutNowMs(), this.raidResetMs.bind(this));
-    const storedMeta =
-      meta.dailyQuestsMeta && meta.dailyQuestsMeta.day === day ? meta.dailyQuestsMeta : undefined;
-    if (meta.dailyQuests && meta.dailyQuests.day === day) {
-      const eligibleGrew = storedMeta
-        ? eligibleDailyQuestIds(p.level).length >
-          eligibleDailyQuestIds(storedMeta.rolledAtLevel).length
-        : false;
-      if (!eligibleGrew) return;
-    }
-    const characterId = String(meta.characterId ?? meta.entityId);
-    const consumedIds = storedMeta ? storedMeta.consumedIds : [];
-    const rolled = rollDailyQuestIds(characterId, day, p.level);
-    // Cap the OFFERED set at DAILY_QUEST_COUNT minus what's already been turned
-    // in today, not just DAILY_QUEST_COUNT: a mid-day level-up re-roll draws
-    // from a wider eligible pool and, if the already-consumed id doesn't land
-    // in the fresh roll, this keeps the per-day total at 3 instead of granting
-    // credit for the old one plus a fresh 3.
-    const offered = rolled.filter((id) => !consumedIds.includes(id));
-    const remainingSlots = Math.max(0, DAILY_QUEST_COUNT - consumedIds.length);
-    meta.dailyQuests = { day, questIds: offered.slice(0, remainingSlots) };
-    meta.dailyQuestsMeta = { day, consumedIds, rolledAtLevel: p.level };
-    meta.wireRev++;
+    ensureDailyQuestsCore(
+      meta,
+      p.level,
+      npc.questIds.some((qid) => QUESTS[qid]?.isDaily),
+      this.lockoutNowMs.bind(this),
+      this.raidResetMs.bind(this),
+    );
   }
 
   private interactNpcForQuests(npc: Entity, meta: PlayerMeta): boolean {

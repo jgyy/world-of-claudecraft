@@ -97,3 +97,60 @@ export function rollDailyQuestIds(characterId: string, day: number, playerLevel:
   }
   return pool.slice(0, DAILY_QUEST_COUNT);
 }
+
+/** The subset of PlayerMeta this module reads/writes; kept narrow so this stays
+ * a leaf with no dependency on sim.ts's PlayerMeta shape beyond these fields. */
+export interface DailyQuestMeta {
+  characterId?: string | number;
+  entityId: number;
+  dailyQuests?: { day: number; questIds: string[] };
+  dailyQuestsMeta?: { day: number; consumedIds: string[]; rolledAtLevel: number };
+  wireRev: number;
+}
+
+/**
+ * Roll (or refresh) a player's daily quest set for the current server day, if the
+ * NPC they are talking to offers any daily quests and the player has no roll yet,
+ * a stale one (a new day boundary has passed), or a roll whose eligible pool has
+ * since widened (the character levelled up mid-day past a daily's minLevel, so the
+ * first, narrower roll should not stay sticky for the rest of the day). Mutates
+ * meta.dailyQuests/dailyQuestsMeta in place and bumps wireRev on a change so the
+ * server re-sends the mirrored field on the next snapshot.
+ *
+ * A re-roll preserves credit for anything already turned in today
+ * (dailyQuestsMeta.consumedIds) rather than re-offering it, and caps the OFFERED
+ * set at DAILY_QUEST_COUNT minus the already-consumed count (not just
+ * DAILY_QUEST_COUNT) so a mid-day level-up re-roll cannot hand out more than
+ * DAILY_QUEST_COUNT dailies total for the day.
+ *
+ * lockoutNowMs/raidResetMs are the same day boundary raid lockouts use
+ * (SimContext.lockoutNowMs/SimContext.raidResetMs), taken as plain functions here
+ * rather than the whole SimContext so this module stays a leaf.
+ */
+export function ensureDailyQuests(
+  meta: DailyQuestMeta,
+  playerLevel: number,
+  npcOffersDaily: boolean,
+  lockoutNowMs: () => number,
+  raidResetMs: (nowMs: number) => number,
+): void {
+  if (!npcOffersDaily) return;
+  const day = dailyResetDayIndex(lockoutNowMs(), raidResetMs);
+  const storedMeta =
+    meta.dailyQuestsMeta && meta.dailyQuestsMeta.day === day ? meta.dailyQuestsMeta : undefined;
+  if (meta.dailyQuests && meta.dailyQuests.day === day) {
+    const eligibleGrew = storedMeta
+      ? eligibleDailyQuestIds(playerLevel).length >
+        eligibleDailyQuestIds(storedMeta.rolledAtLevel).length
+      : false;
+    if (!eligibleGrew) return;
+  }
+  const characterId = String(meta.characterId ?? meta.entityId);
+  const consumedIds = storedMeta ? storedMeta.consumedIds : [];
+  const rolled = rollDailyQuestIds(characterId, day, playerLevel);
+  const offered = rolled.filter((id) => !consumedIds.includes(id));
+  const remainingSlots = Math.max(0, DAILY_QUEST_COUNT - consumedIds.length);
+  meta.dailyQuests = { day, questIds: offered.slice(0, remainingSlots) };
+  meta.dailyQuestsMeta = { day, consumedIds, rolledAtLevel: playerLevel };
+  meta.wireRev++;
+}
