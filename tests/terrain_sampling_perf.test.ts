@@ -66,11 +66,15 @@ describe('terrain/voxel sampling (terrainHeight/groundHeight/voxelDensity) high-
       `[terrain.sampling perf] grid=${SIZE}x${SIZE} points=${points} median=${median.toFixed(2)}ms`,
     );
 
-    // Generous by design (see mob_update_perf.test.ts): observed healthy median for a
-    // 4096-point, 5-call-per-point sampling pass is a low single-digit ms figure; 60ms
-    // leaves ample headroom for slow/contended CI hardware while still catching a
-    // sustained order-of-magnitude regression.
-    expect(median).toBeLessThan(60);
+    // Generous by design (see mob_update_perf.test.ts), calibrated against MEASURED
+    // reality rather than an assumed figure: a full 64x64 grid (4096 points, 5 field
+    // calls each = 20480 total samples) genuinely runs a low-tens-of-ms median on an
+    // idle host (~30-40ms observed across multiple hosts), not the single-digit-ms this
+    // bound originally assumed. 120ms leaves real headroom (roughly 3x the observed
+    // median, with margin over spikes as high as ~79ms seen under CI-like contention
+    // from co-running Vitest workers) while still catching a sustained
+    // order-of-magnitude regression.
+    expect(median).toBeLessThan(120);
   }, 60_000);
 
   it('doubling the sample-point count does not more than roughly double the sampling cost', () => {

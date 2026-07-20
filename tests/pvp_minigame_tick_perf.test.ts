@@ -106,15 +106,26 @@ function medianOf(samples: number[]): number {
 
 // Sample MEASURE_TICKS ticks, summing the named lap phase(s) per tick, and
 // return the median (mirrors mob_update_perf.test.ts / aura_tick_perf.test.ts).
-function measurePhaseMedians(sim: Sim, measureTicks: number): { arena: number; valecup: number } {
+function measurePhaseMedians(
+  sim: Sim,
+  measureTicks: number,
+): { arena: number; valecup: number; arenaTotal: number; valecupTotal: number } {
   let mark = 0;
   let arenaThisTick = 0;
   let valecupThisTick = 0;
+  let arenaTotal = 0;
+  let valecupTotal = 0;
   const lap = (phase: string, _entity?: Entity): void => {
     const t = performance.now();
     const dt = t - mark;
-    if (phase === 'arena') arenaThisTick += dt;
-    if (phase === 'valecup') valecupThisTick += dt;
+    if (phase === 'arena') {
+      arenaThisTick += dt;
+      arenaTotal += dt;
+    }
+    if (phase === 'valecup') {
+      valecupThisTick += dt;
+      valecupTotal += dt;
+    }
     mark = t;
   };
   (sim as unknown as { cfg: { perfLap: typeof lap } }).cfg.perfLap = lap;
@@ -129,7 +140,12 @@ function measurePhaseMedians(sim: Sim, measureTicks: number): { arena: number; v
     arenaSamples.push(arenaThisTick);
     valecupSamples.push(valecupThisTick);
   }
-  return { arena: medianOf(arenaSamples), valecup: medianOf(valecupSamples) };
+  return {
+    arena: medianOf(arenaSamples),
+    valecup: medianOf(valecupSamples),
+    arenaTotal,
+    valecupTotal,
+  };
 }
 
 function buildLiveWorld(): {
@@ -146,12 +162,19 @@ describe('PvP minigame per-tick drivers high-load regression budget', () => {
   it('bounds one full tick of fiesta+yumi ("arena") and vale cup ("valecup") driver cost at full lobbies', () => {
     const { sim } = buildLiveWorld();
     const MEASURE_TICKS = 100;
-    const { arena, valecup } = measurePhaseMedians(sim, MEASURE_TICKS);
+    const { arena, valecup, arenaTotal, valecupTotal } = measurePhaseMedians(sim, MEASURE_TICKS);
 
     console.log(
       `[pvp minigame tick perf] arenaMedian(fiesta+yumi)=${arena.toFixed(3)}ms ` +
         `valecupMedian=${valecup.toFixed(3)}ms`,
     );
+
+    // Instrumentation contract: the phase-matching lap hook is installed through an
+    // `as unknown as` cast, so a phase-string rename in sim.ts (e.g. 'arena' or
+    // 'valecup' renamed) keeps this file compiling while the accumulator silently
+    // stays 0 and the budget assertions below would pass vacuously. Guard explicitly.
+    expect(arenaTotal).toBeGreaterThan(0);
+    expect(valecupTotal).toBeGreaterThan(0);
 
     // Generous by design (see mob_update_perf.test.ts): a single full 2v2
     // Fiesta + one 5v5 Yumi match is a fixed, small (<=14) fighter population,
@@ -169,7 +192,12 @@ describe('PvP minigame per-tick drivers high-load regression budget', () => {
     // their own match set each tick (ctx.arenaMatches for fiesta/yumi, vc.match
     // + vc.practices for Vale Cup), so healthy cost should scale close to
     // linearly with the number of CONCURRENT full lobbies, never superlinearly.
-    function measureWithLobbySets(count: number): { arena: number; valecup: number } {
+    function measureWithLobbySets(count: number): {
+      arena: number;
+      valecup: number;
+      arenaTotal: number;
+      valecupTotal: number;
+    } {
       const sim = new Sim({ seed: WORLD_SEED + 1, playerClass: 'warrior', noPlayer: true });
       const idSets: { fiestaHosts: number[]; vcHost: number; yumiHosts: number[] }[] = [];
       for (let i = 0; i < count; i++) idSets.push(buildFullLobbiesReal(sim, i));
@@ -194,6 +222,11 @@ describe('PvP minigame per-tick drivers high-load regression budget', () => {
         `arenaRatio=${(large.arena / Math.max(small.arena, 0.001)).toFixed(2)}x ` +
         `valecupRatio=${(large.valecup / Math.max(small.valecup, 0.001)).toFixed(2)}x`,
     );
+
+    expect(small.arenaTotal).toBeGreaterThan(0);
+    expect(small.valecupTotal).toBeGreaterThan(0);
+    expect(large.arenaTotal).toBeGreaterThan(0);
+    expect(large.valecupTotal).toBeGreaterThan(0);
 
     // A doubled concurrent-lobby count doing genuinely linear per-match work
     // should land near 2x; the bound is set generously above that (3.5x,

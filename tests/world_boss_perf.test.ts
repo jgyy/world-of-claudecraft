@@ -42,7 +42,11 @@ function buildZerg(sim: Sim, count: number): { boss: Entity; players: number } {
   return { boss, players: placed };
 }
 
-function measureWorldBossPhaseMedian(count: number): { median: number; participants: number } {
+function measureWorldBossPhaseMedian(count: number): {
+  median: number;
+  participants: number;
+  lapTotal: number;
+} {
   const sim = new Sim({
     seed: WORLD_SEED,
     playerClass: 'warrior',
@@ -56,10 +60,14 @@ function measureWorldBossPhaseMedian(count: number): { median: number; participa
 
   let mark = 0;
   let phaseThisTick = 0;
+  let lapTotal = 0;
   const lap = (phase: string): void => {
     const t = performance.now();
     const dt = t - mark;
-    if (phase === 'worldBosses') phaseThisTick += dt;
+    if (phase === 'worldBosses') {
+      phaseThisTick += dt;
+      lapTotal += dt;
+    }
     mark = t;
   };
   (sim as unknown as { cfg: { perfLap: typeof lap } }).cfg.perfLap = lap;
@@ -77,17 +85,23 @@ function measureWorldBossPhaseMedian(count: number): { median: number; participa
   samples.sort((a, b) => a - b);
   const median = samples[Math.floor(samples.length / 2)];
 
-  return { median, participants: boss.threat.size };
+  return { median, participants: boss.threat.size, lapTotal };
 }
 
 describe('world boss (worldBosses) high-load regression budget', () => {
   it('bounds the per-tick scheduler cost at a fixed full-server-zerg population', () => {
     const COUNT = 200;
-    const { median, participants } = measureWorldBossPhaseMedian(COUNT);
+    const { median, participants, lapTotal } = measureWorldBossPhaseMedian(COUNT);
 
     console.log(
       `[worldBoss perf] zerg=${COUNT} threatParticipants=${participants} median=${median.toFixed(2)}ms`,
     );
+
+    // Instrumentation contract: the phase-matching lap hook is installed through an
+    // `as unknown as` cast, so a phase-string rename in sim.ts (e.g. 'worldBosses'
+    // renamed) keeps this file compiling while the accumulator silently stays 0 and the
+    // budget assertion below would pass vacuously. Guard it explicitly.
+    expect(lapTotal).toBeGreaterThan(0);
 
     // Generous by design (see mob_update_perf.test.ts): observed healthy median at this
     // population is a low single-digit ms figure; 20ms leaves ample headroom for
@@ -113,6 +127,8 @@ describe('world boss (worldBosses) high-load regression budget', () => {
         `ratio=${(large.median / Math.max(small.median, 0.001)).toFixed(2)}x`,
     );
 
+    expect(small.lapTotal).toBeGreaterThan(0);
+    expect(large.lapTotal).toBeGreaterThan(0);
     expect(large.median).toBeLessThan(Math.max(small.median * 3.5, 5));
   }, 60_000);
 

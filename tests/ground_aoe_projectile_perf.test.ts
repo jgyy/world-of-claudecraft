@@ -108,16 +108,20 @@ function measurePhaseMedian(
   phase: 'groundAoEs' | 'projectiles',
   zones: number,
   bolts: number,
-): { median: number; count: number } {
+): { median: number; count: number; lapTotal: number } {
   const sim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior', noPlayer: true });
   buildAoeAndProjectilePileup(sim, zones, bolts);
 
   let mark = 0;
   let phaseThisTick = 0;
+  let lapTotal = 0;
   const lap = (p: string): void => {
     const t = performance.now();
     const dt = t - mark;
-    if (p === phase) phaseThisTick += dt;
+    if (p === phase) {
+      phaseThisTick += dt;
+      lapTotal += dt;
+    }
     mark = t;
   };
   (sim as unknown as { cfg: { perfLap: typeof lap } }).cfg.perfLap = lap;
@@ -137,15 +141,21 @@ function measurePhaseMedian(
 
   const ctx = ctxOf(sim);
   const count = phase === 'groundAoEs' ? ctx.groundAoEs.length : ctx.pendingProjectiles.length;
-  return { median, count };
+  return { median, count, lapTotal };
 }
 
 describe('ground AoE (groundAoEs) high-load regression budget', () => {
   it('bounds the per-tick ground-hazard scan cost at a fixed large zone count', () => {
     const ZONES = 300;
-    const { median, count } = measurePhaseMedian('groundAoEs', ZONES, 0);
+    const { median, count, lapTotal } = measurePhaseMedian('groundAoEs', ZONES, 0);
 
     console.log(`[groundAoEs perf] zones=${count} median=${median.toFixed(2)}ms`);
+
+    // Instrumentation contract: the phase-matching lap hook is installed through an
+    // `as unknown as` cast, so a phase-string rename in sim.ts (e.g. 'groundAoEs'
+    // renamed) keeps this file compiling while the accumulator silently stays 0 and the
+    // budget assertion below would pass vacuously. Guard it explicitly.
+    expect(lapTotal).toBeGreaterThan(0);
 
     // Generous by design (see mob_update_perf.test.ts): observed healthy median at this
     // population is a low single-digit ms figure; 20ms leaves ample headroom for
@@ -171,6 +181,8 @@ describe('ground AoE (groundAoEs) high-load regression budget', () => {
         `ratio=${(large.median / Math.max(small.median, 0.001)).toFixed(2)}x`,
     );
 
+    expect(small.lapTotal).toBeGreaterThan(0);
+    expect(large.lapTotal).toBeGreaterThan(0);
     expect(large.median).toBeLessThan(Math.max(small.median * 3.5, 5));
   }, 60_000);
 
@@ -184,10 +196,13 @@ describe('ground AoE (groundAoEs) high-load regression budget', () => {
 describe('in-flight projectiles (projectiles) high-load regression budget', () => {
   it('bounds the per-tick homing-advance cost at a fixed large in-flight count', () => {
     const BOLTS = 300;
-    const { median, count } = measurePhaseMedian('projectiles', 0, BOLTS);
+    const { median, count, lapTotal } = measurePhaseMedian('projectiles', 0, BOLTS);
 
     console.log(`[projectiles perf] bolts=${count} median=${median.toFixed(2)}ms`);
 
+    // Instrumentation contract: see the groundAoEs describe block above (same
+    // `as unknown as` phase-matching lap hook, same vacuous-on-rename risk).
+    expect(lapTotal).toBeGreaterThan(0);
     expect(median).toBeLessThan(20);
   }, 60_000);
 
@@ -208,6 +223,8 @@ describe('in-flight projectiles (projectiles) high-load regression budget', () =
         `ratio=${(large.median / Math.max(small.median, 0.001)).toFixed(2)}x`,
     );
 
+    expect(small.lapTotal).toBeGreaterThan(0);
+    expect(large.lapTotal).toBeGreaterThan(0);
     expect(large.median).toBeLessThan(Math.max(small.median * 3.5, 5));
   }, 60_000);
 

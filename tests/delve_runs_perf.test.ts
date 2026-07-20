@@ -39,16 +39,24 @@ function buildDelvePileup(sim: Sim, count: number): number[] {
   return pids;
 }
 
-function measureDelvePhaseMedian(count: number): { median: number; liveRuns: number } {
+function measureDelvePhaseMedian(count: number): {
+  median: number;
+  liveRuns: number;
+  lapTotal: number;
+} {
   const sim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior', noPlayer: true });
   buildDelvePileup(sim, count);
 
   let mark = 0;
   let delvePhaseThisTick = 0;
+  let lapTotal = 0;
   const lap = (phase: string): void => {
     const t = performance.now();
     const dt = t - mark;
-    if (phase === 'delves') delvePhaseThisTick += dt;
+    if (phase === 'delves') {
+      delvePhaseThisTick += dt;
+      lapTotal += dt;
+    }
     mark = t;
   };
   (sim as unknown as { cfg: { perfLap: typeof lap } }).cfg.perfLap = lap;
@@ -70,17 +78,23 @@ function measureDelvePhaseMedian(count: number): { median: number; liveRuns: num
     sim as unknown as { delveRuns: { partyKey: string | null }[] }
   ).delveRuns.filter((r) => r.partyKey !== null).length;
 
-  return { median, liveRuns };
+  return { median, liveRuns, lapTotal };
 }
 
 describe('delve runs (delves) high-load regression budget', () => {
   it('bounds the per-tick delve-run bookkeeping cost at the full 24-slot population', () => {
     const COUNT = 24;
-    const { median, liveRuns } = measureDelvePhaseMedian(COUNT);
+    const { median, liveRuns, lapTotal } = measureDelvePhaseMedian(COUNT);
 
     console.log(
       `[delve.runs perf] players=${COUNT} liveRuns=${liveRuns} median=${median.toFixed(2)}ms`,
     );
+
+    // Instrumentation contract: the phase-matching lap hook is installed through an
+    // `as unknown as` cast, so a phase-string rename in sim.ts (e.g. 'delves' renamed)
+    // keeps this file compiling while the accumulator silently stays 0 and the budget
+    // assertion below would pass vacuously. Guard it explicitly.
+    expect(lapTotal).toBeGreaterThan(0);
 
     // Generous by design (see mob_update_perf.test.ts): observed healthy median at this
     // population is a low single-digit ms figure; 20ms leaves ample headroom for
@@ -106,6 +120,8 @@ describe('delve runs (delves) high-load regression budget', () => {
         `ratio=${(large.median / Math.max(small.median, 0.001)).toFixed(2)}x`,
     );
 
+    expect(small.lapTotal).toBeGreaterThan(0);
+    expect(large.lapTotal).toBeGreaterThan(0);
     expect(large.median).toBeLessThan(Math.max(small.median * 3.5, 5));
   }, 60_000);
 

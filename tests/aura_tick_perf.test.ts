@@ -82,16 +82,23 @@ function buildAuraSoup(sim: Sim, count: number, aurasPerEntity: number): Entity[
 // Runs the fixed measurement recipe (mirrors mob_update_perf.test.ts): warm up, sample
 // MEASURE_TICKS ticks of the named phase(s), return the median across samples (the
 // median rejects one-off GC/scheduling spikes from co-running Vitest workers).
-function measureAuraPhaseMedian(count: number, aurasPerEntity: number): number {
+function measureAuraPhaseMedian(
+  count: number,
+  aurasPerEntity: number,
+): { median: number; total: number } {
   const sim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior', noPlayer: true });
   buildAuraSoup(sim, count, aurasPerEntity);
 
   let mark = 0;
   let auraPhaseThisTick = 0;
+  let lapTotal = 0;
   const lap = (phase: string): void => {
     const t = performance.now();
     const dt = t - mark;
-    if (phase === 'p.auras' || phase === 'mob.auras') auraPhaseThisTick += dt;
+    if (phase === 'p.auras' || phase === 'mob.auras') {
+      auraPhaseThisTick += dt;
+      lapTotal += dt;
+    }
     mark = t;
   };
   (sim as unknown as { cfg: { perfLap: typeof lap } }).cfg.perfLap = lap;
@@ -107,18 +114,24 @@ function measureAuraPhaseMedian(count: number, aurasPerEntity: number): number {
     samples.push(auraPhaseThisTick);
   }
   samples.sort((a, b) => a - b);
-  return samples[Math.floor(samples.length / 2)];
+  return { median: samples[Math.floor(samples.length / 2)], total: lapTotal };
 }
 
 describe('aura-tick (p.auras / mob.auras) high-load regression budget', () => {
   it('bounds the deep-aura-stack per-tick cost at a fixed population', () => {
     const COUNT = 80;
     const AURAS_PER_ENTITY = 60;
-    const median = measureAuraPhaseMedian(COUNT, AURAS_PER_ENTITY);
+    const { median, total } = measureAuraPhaseMedian(COUNT, AURAS_PER_ENTITY);
 
     console.log(
       `[aura.tick perf] players=${COUNT} aurasPerEntity=${AURAS_PER_ENTITY} median=${median.toFixed(2)}ms`,
     );
+
+    // Instrumentation contract: the phase-matching lap hook is installed through an
+    // `as unknown as` cast, so a phase-string rename in sim.ts (e.g. 'p.auras' ->
+    // something else) keeps this file compiling while the accumulator silently stays 0
+    // and the budget assertion below would pass vacuously. Guard it explicitly.
+    expect(total).toBeGreaterThan(0);
 
     // Generous by design (see mob_update_perf.test.ts): observed healthy median at this
     // population is a low single-digit ms figure; 25ms leaves headroom for slow/contended
@@ -137,13 +150,17 @@ describe('aura-tick (p.auras / mob.auras) high-load regression budget', () => {
     const SMALL = 40;
     const LARGE = SMALL * 2;
 
-    const smallMedian = measureAuraPhaseMedian(COUNT, SMALL);
-    const largeMedian = measureAuraPhaseMedian(COUNT, LARGE);
+    const { median: smallMedian, total: smallTotal } = measureAuraPhaseMedian(COUNT, SMALL);
+    const { median: largeMedian, total: largeTotal } = measureAuraPhaseMedian(COUNT, LARGE);
 
     console.log(
       `[aura.tick perf] scaling players=${COUNT} small=${SMALL}auras(${smallMedian.toFixed(2)}ms) ` +
         `large=${LARGE}auras(${largeMedian.toFixed(2)}ms) ratio=${(largeMedian / Math.max(smallMedian, 0.001)).toFixed(2)}x`,
     );
+
+    // Instrumentation contract (see above): guard against a silently-zeroed accumulator.
+    expect(smallTotal).toBeGreaterThan(0);
+    expect(largeTotal).toBeGreaterThan(0);
 
     // A doubled aura depth doing genuinely linear work should land near 2x; the bound is
     // set generously above that (3.5x) to absorb noise at these small absolute ms

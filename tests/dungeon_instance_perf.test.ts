@@ -42,16 +42,24 @@ function buildDungeonPileup(sim: Sim, count: number): number[] {
 // files). updateInstances only does real work once every 20 ticks, so a short sample
 // window would mostly see zero-cost ticks; MEASURE_TICKS is large enough (200) to catch
 // several of those once-a-second scans, and the median still reflects steady state.
-function measureInstancePhaseMedian(count: number): { median: number; claimed: number } {
+function measureInstancePhaseMedian(count: number): {
+  median: number;
+  claimed: number;
+  lapTotal: number;
+} {
   const sim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior', noPlayer: true });
   const pids = buildDungeonPileup(sim, count);
 
   let mark = 0;
   let instancePhaseThisTick = 0;
+  let lapTotal = 0;
   const lap = (phase: string): void => {
     const t = performance.now();
     const dt = t - mark;
-    if (phase === 'p.doors' || phase === 'instances') instancePhaseThisTick += dt;
+    if (phase === 'p.doors' || phase === 'instances') {
+      instancePhaseThisTick += dt;
+      lapTotal += dt;
+    }
     mark = t;
   };
   (sim as unknown as { cfg: { perfLap: typeof lap } }).cfg.perfLap = lap;
@@ -75,17 +83,23 @@ function measureInstancePhaseMedian(count: number): { median: number; claimed: n
 
   // Shape sanity uses the count of players who actually made it into the dungeon.
   void pids;
-  return { median, claimed };
+  return { median, claimed, lapTotal };
 }
 
 describe('dungeon instancing (p.doors / instances) high-load regression budget', () => {
   it('bounds the door-trigger + instance-bookkeeping per-tick cost at a fixed population', () => {
     const COUNT = 24;
-    const { median, claimed } = measureInstancePhaseMedian(COUNT);
+    const { median, claimed, lapTotal } = measureInstancePhaseMedian(COUNT);
 
     console.log(
       `[dungeon.instances perf] players=${COUNT} claimedInstances=${claimed} median=${median.toFixed(2)}ms`,
     );
+
+    // Instrumentation contract: the phase-matching lap hook is installed through an
+    // `as unknown as` cast, so a phase-string rename in sim.ts (e.g. 'p.doors' or
+    // 'instances' renamed) keeps this file compiling while the accumulator silently
+    // stays 0 and the budget assertion below would pass vacuously. Guard it explicitly.
+    expect(lapTotal).toBeGreaterThan(0);
 
     // Generous by design (see mob_update_perf.test.ts): observed healthy median at this
     // population is well under a millisecond; 20ms leaves ample headroom for slow/contended
@@ -111,6 +125,8 @@ describe('dungeon instancing (p.doors / instances) high-load regression budget',
         `ratio=${(large.median / Math.max(small.median, 0.001)).toFixed(2)}x`,
     );
 
+    expect(small.lapTotal).toBeGreaterThan(0);
+    expect(large.lapTotal).toBeGreaterThan(0);
     expect(large.median).toBeLessThan(Math.max(small.median * 3.5, 5));
   }, 60_000);
 
