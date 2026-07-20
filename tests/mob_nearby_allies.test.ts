@@ -31,6 +31,20 @@ describe('findNearbyAllies', () => {
 
     const found = findNearbyAllies(grid, caster, 40);
     expect(found.map((e) => e.id)).toEqual([1, 2]);
+
+    const all = [caster, near, far, enemy, player, pet, corpse];
+    const bruteForce = all
+      .filter(
+        (e) =>
+          e.kind === 'mob' &&
+          !e.dead &&
+          e.hostile === caster.hostile &&
+          e.ownerId == null &&
+          Math.hypot(e.pos.x - caster.pos.x, e.pos.z - caster.pos.z) <= 40,
+      )
+      .map((e) => e.id)
+      .sort((x, y) => x - y);
+    expect(found.map((e) => e.id)).toEqual(bruteForce);
   });
 
   it('returns matches in ascending entity-id order regardless of grid insertion or bucket order, so per-ally rng draws and max-hp tie-breaks stay stable', () => {
@@ -72,14 +86,15 @@ describe('findNearbyAllies', () => {
     expect(protectee?.id).toBe(2);
   });
 
-  it('excludes allies outside the radius', () => {
+  it('excludes allies outside the radius, and includes one exactly on the boundary', () => {
     const grid = new SpatialGrid();
     const caster = mob(1, 0, 0);
     const justInside = mob(2, 39, 0);
+    const onBoundary = mob(4, 40, 0);
     const justOutside = mob(3, 41, 0);
-    for (const e of [caster, justInside, justOutside]) grid.insert(e);
+    for (const e of [caster, justInside, onBoundary, justOutside]) grid.insert(e);
 
     const found = findNearbyAllies(grid, caster, 40);
-    expect(found.map((e) => e.id)).toEqual([1, 2]);
+    expect(found.map((e) => e.id)).toEqual([1, 2, 4]);
   });
 });
