@@ -227,6 +227,7 @@ import {
   setReferralProvider,
   setStandingProvider,
 } from './ui/hud/player_card/player_card_share';
+import { applyHudGildedOrnamentVars } from './ui/hud_gilded_ornament';
 import {
   ensureLocaleLoaded,
   formatDateTime,
@@ -1083,6 +1084,7 @@ async function startGame(
     perf.setHud(hud);
     hydrateIcons(); // swap [data-icon] placeholders (micro-menu, mobile bar, meters) for inline SVG
     applyPerfOrnamentVars(); // Performance Overlay window's gilded corner/edge masks
+    applyHudGildedOrnamentVars(); // shared HUD gilt ring/corner masks (minimap, portrait, action bar, panels)
   } catch (err) {
     // e.g. WebGL context creation failure: surface it instead of leaving the
     // loading screen up forever. A HANDLED failure is not a process kill, so the
