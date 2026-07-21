@@ -2089,9 +2089,31 @@ export const cs_CZ: EnTranslations = {
       "mining": "Těžba",
       "logging": "Dřevorubectví",
       "herbalism": "Bylinkářství",
+      "fishing": "Fishing",
       "notReady": "Tento zdroj pro tebe ještě neobnovil zásoby.",
       "gatherLine": "Shromažďujete: {name}.",
-      "gatherLineQty": "Shromažďujete: {name} x{qty}."
+      "gatherLineQty": "Shromažďujete: {name} x{qty}.",
+      "catchLine": "You reel in: {name}",
+      "biteLine": "Something takes the bait!",
+      "gotAwayLine": "It got away.",
+      "nodeName": {
+        "ore": "Ore Vein",
+        "wood": "Timber Stand",
+        "herb": "Herb Patch"
+      },
+      "tierRequired": {
+        "mining": "Requires a tier {tier} mining pick",
+        "logging": "Requires a tier {tier} logging axe",
+        "herbalism": "Requires a tier {tier} herbalism sickle"
+      },
+      "toolTierUnmet": {
+        "mining": "You need a tier {tier} mining pick to harvest this vein.",
+        "logging": "You need a tier {tier} logging axe to fell this stand.",
+        "herbalism": "You need a tier {tier} herbalism sickle to gather this patch."
+      },
+      "toolTierUnmetCorpse": "You need a tier {tier} gathering tool to recover the finest materials.",
+      "stateReady": "Ready",
+      "stateCooldown": "Respawning"
     },
     "archetypeTitle": {
       "label": "Titul",
@@ -5950,6 +5972,7 @@ export const cs_CZ: EnTranslations = {
     },
     "cast": {
       "fishing": "Rybaření",
+      "gathering": "Gathering",
       "demonHeal": "Léčení démona",
       "thunzharrStormcall": "Volání bouře"
     }
@@ -8708,6 +8731,12 @@ export const cs_CZ: EnTranslations = {
       },
       "verlans_oathblade": {
         "name": "Verlanova čepel přísahy"
+      },
+      "ironreel_fishing_rod": {
+        "name": "Prut se železným navijákem"
+      },
+      "silverstream_fishing_rod": {
+        "name": "Prut stříbrného potoka"
       },
       "briny_idol": {
         "name": "Slaný idol"

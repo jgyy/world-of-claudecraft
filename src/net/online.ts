@@ -105,7 +105,14 @@ import {
   type RecipeDef,
   type SocialInfo,
   type TradeInfo,
+  type VcSharedCupInfo,
+  type VcViewerReadout,
 } from '../world_api';
+import {
+  type ActionBarLayout,
+  type ActionBarLayoutRestore,
+  sanitizeActionBarLayout,
+} from '../world_api/action_bar';
 import type { MasterworkView } from '../world_api/professions';
 import { computeBackoffDelay } from './backoff';
 import { optimisticQuestState } from './quest_state_optimistic';
@@ -1030,6 +1037,10 @@ const TELEPORT_SNAP_DIST_SQ = 40 * 40;
 // genuine leaver (logout, corpse cleanup) lingers only momentarily.
 const DESPAWN_GRACE_MS = 600;
 
+// Debounce for the action-bar layout upload: coalesce a burst of drag/drop edits
+// into one wire save rather than a send per slot change (server persists it).
+const ACTION_BAR_SAVE_DEBOUNCE_MS = 1500;
+
 // Auto-reconnect backoff for an unexpectedly dropped game socket. The server
 // holds the character in-world (linkdead) for five minutes; the retry window
 // is deliberately longer, since past the grace a successful auth simply
@@ -1138,6 +1149,9 @@ function blankEntity(id: number): Entity {
     castTotal: 0,
     castTargetId: null,
     castAim: null,
+    gatherCastNodeId: '',
+    fishBiteAtTick: 0,
+    fishReelDeadlineTick: 0,
     channeling: false,
     channelTickTimer: 0,
     channelTickEvery: 0,
@@ -1297,9 +1311,14 @@ export class ClientWorld implements IWorld {
   // --- IWorldCardMinigame: Card Duel queue/match state, mirrored from the
   // snapshot self (`s.cardDuel`, delta-omitted). ---
   cardMinigameInfo: CardMinigameInfo = { queued: false, available: true, match: null };
-  // --- IWorldValeCup: Vale Cup queue/match state, mirrored from the snapshot
-  // self (`s.vcup`, delta-omitted: a missing key keeps the prior mirror, an
-  // explicit null clears it, same as `s.arena`). ---
+  // --- IWorldValeCup: Vale Cup queue/match state, recomposed from two
+  // delta-omitted self keys: `s.vcup` (the per-viewer remainder plus a wire-only
+  // liveHidden flag) and `s.vcupb` (the realm-wide fragment, serialized once
+  // server-side and shared across viewers). We keep the last of each mirror and
+  // rebuild cupInfo whenever either changes; a missing key keeps its prior mirror
+  // (never default to empty, that would wipe the other fragment). ---
+  private lastVcupRemainder: VcViewerReadout | null = null;
+  private lastVcupShared: VcSharedCupInfo | null = null;
   cupInfo: CupInfo | null = null;
   // My live sport role, mirrored from the wireRev-gated heavy self field
   // `s.sport` ({ role } | null, delta-omitted). NON-IWorld mirror: while set,
@@ -1499,6 +1518,15 @@ export class ClientWorld implements IWorld {
   // HUD redraws on — the frame loop polls this so open panels re-render
   private invChanged = false;
   private cosmeticsChanged = false;
+  // IWorldActionBar: the login-time reconciliation, resolved once from the first
+  // self-payload (undefined until then, and again once consumed); the debounced
+  // upload state coalesces rapid layout edits into one wire save and skips a
+  // send whose serialized layout matches the last one sent.
+  private actionBarRestore: ActionBarLayoutRestore | undefined = undefined;
+  private actionBarRestoreResolved = false;
+  private actionBarSaveTimer: ReturnType<typeof setTimeout> | null = null;
+  private actionBarSaveLastJson: string | null = null;
+  private actionBarSavePending: ActionBarLayout | null = null;
   // Soft (cosmetic) profanity terms the server sends in `hello` and pushes via
   // `censor` frames when an admin edits the list. The HUD drains these to mask
   // chat locally when the player's filter is on. Hard words never arrive here.
@@ -1548,6 +1576,16 @@ export class ClientWorld implements IWorld {
   // resume, force a real state check and retry immediately instead of
   // waiting for a close event or the rest of the backoff delay.
   private readonly handleVisibilityChange = (): void => {
+    if (document.visibilityState === 'hidden') {
+      // Backgrounding (tab switch, tab close, phone lock) is the last reliable
+      // beat to get an in-flight debounced layout edit to the server while the
+      // socket is still open, so a "rearrange then close the tab" never strands
+      // the final edit for a second device. Bounded: a no-op unless a save is
+      // pending. A raw tab close routes through pagehide, not sendLogout, so this
+      // is what covers it.
+      this.flushActionBarLayoutSave();
+      return;
+    }
     if (document.visibilityState !== 'visible') return;
     if (this.sessionEnded) return;
     if (this.ws.readyState === WebSocket.OPEN) return;
@@ -1641,6 +1679,11 @@ export class ClientWorld implements IWorld {
   }
 
   private endSession(): void {
+    // Flush a pending layout save BEFORE teardown, while the socket is still open
+    // and `connected` is still true: close() calls this before ws.close() and
+    // sendLogout() calls it before the logout frame, so the final edit is not
+    // lost to a deliberate logout within the debounce window.
+    this.flushActionBarLayoutSave();
     this.sessionEnded = true;
     this.failPendingCommandOutcomes();
     clearInterval(this.sendTimer);
@@ -2659,7 +2702,9 @@ export class ClientWorld implements IWorld {
       if (s.cardDuel !== undefined) this.cardMinigameInfo = s.cardDuel;
       if (s.honor !== undefined) this.honor = s.honor ?? 0;
       if (s.lhonor !== undefined) this.lifetimeHonor = s.lhonor ?? 0;
-      if (s.vcup !== undefined) this.cupInfo = s.vcup;
+      if (s.vcup !== undefined) this.lastVcupRemainder = s.vcup as VcViewerReadout | null;
+      if (s.vcupb !== undefined) this.lastVcupShared = s.vcupb as VcSharedCupInfo | null;
+      if (s.vcup !== undefined || s.vcupb !== undefined) this.recomputeCupInfo();
       if (s.market !== undefined) this.marketInfo = s.market;
       if (s.mail !== undefined) this.mailInfo = s.mail;
       if (s.mailU !== undefined) this.mailUnread = s.mailU ?? 0;
@@ -2730,6 +2775,22 @@ export class ClientWorld implements IWorld {
         while (d > Math.PI) d -= 2 * Math.PI;
         while (d < -Math.PI) d += 2 * Math.PI;
         this.pendingFacingDelta += d;
+      }
+      // IWorldActionBar: resolve the login-time layout reconciliation exactly
+      // once, on the first self-payload this ClientWorld processes. A fresh join
+      // always carries the heavy self block, so `hbl` is present: the stored
+      // server layout (server WINS) or an explicit null (the server has no copy,
+      // so seed from local). `hbl` absent on the first payload (a resumed
+      // session's re-sync, where it was already sent once) leaves the local
+      // mirror authoritative ('noop').
+      if (!this.actionBarRestoreResolved) {
+        this.actionBarRestoreResolved = true;
+        if (s.hbl !== undefined) {
+          const clean = s.hbl === null ? null : sanitizeActionBarLayout(s.hbl);
+          this.actionBarRestore = clean ? { source: 'server', layout: clean } : { source: 'seed' };
+        } else {
+          this.actionBarRestore = { source: 'noop' };
+        }
       }
     }
 
@@ -2811,6 +2872,31 @@ export class ClientWorld implements IWorld {
     const v = this.cosmeticsChanged;
     this.cosmeticsChanged = false;
     return v;
+  }
+
+  // Rebuild the public cupInfo from the two mirrored wire fragments. A null
+  // remainder (the viewer has no readout, or an explicit vcup:null) clears it; a
+  // remainder with no shared fragment yet (should not happen, they ship together
+  // on every gate-open pass and every resync) keeps the prior value rather than
+  // emitting a half-built readout. liveHidden reapplies the per-viewer practice
+  // suppression the server derived and is never surfaced on CupInfo.
+  private recomputeCupInfo(): void {
+    const rem = this.lastVcupRemainder;
+    const shared = this.lastVcupShared;
+    if (rem === null) {
+      this.cupInfo = null;
+      return;
+    }
+    if (shared === null) return;
+    const { liveHidden, ...viewer } = rem;
+    this.cupInfo = {
+      ...viewer,
+      queueSizes: shared.queueSizes,
+      live: liveHidden ? null : shared.live,
+      board: shared.board,
+      guildBoard: shared.guildBoard,
+      practicing: shared.practicing,
+    };
   }
 
   // Refuse a hostile-target cast at an already-dead target: near-monotonic +
@@ -3088,6 +3174,46 @@ export class ClientWorld implements IWorld {
       this.cosmeticsChanged = true;
     }
     this.cmd({ cmd: 'change_weapon_skin', skin: skinId, wtype: type ?? null });
+  }
+  saveActionBarLayout(layout: ActionBarLayout): void {
+    // Debounced, deduped upload of the whole layout. The controller has already
+    // written the localStorage mirror; this pushes the server copy so it
+    // restores on other devices. Rapid drags coalesce to the last layout, and an
+    // upload whose serialized form matches the last send is skipped, so a
+    // re-save during login (or an unchanged bar) never amplifies wire/db writes.
+    const clean = sanitizeActionBarLayout(layout);
+    if (!clean) return;
+    const json = JSON.stringify(clean);
+    if (json === this.actionBarSaveLastJson) return;
+    this.actionBarSaveLastJson = json;
+    this.actionBarSavePending = clean;
+    if (this.actionBarSaveTimer !== null) clearTimeout(this.actionBarSaveTimer);
+    this.actionBarSaveTimer = setTimeout(
+      () => this.flushActionBarLayoutSave(),
+      ACTION_BAR_SAVE_DEBOUNCE_MS,
+    );
+  }
+
+  // Send any debounced-but-not-yet-sent layout NOW. Called on the debounce timer
+  // and, critically, when the session ends or the page backgrounds (endSession +
+  // the visibilitychange 'hidden' branch), so the final sub-debounce edit reaches
+  // the server before the socket goes away instead of being stranded (the local
+  // mirror would still be right on the same device, but a second device would
+  // miss it). No-op unless a save is pending.
+  private flushActionBarLayoutSave(): void {
+    if (this.actionBarSaveTimer !== null) {
+      clearTimeout(this.actionBarSaveTimer);
+      this.actionBarSaveTimer = null;
+    }
+    const pending = this.actionBarSavePending;
+    if (pending === null) return;
+    this.actionBarSavePending = null;
+    this.cmd({ cmd: 'save_hotbar_layout', layout: pending });
+  }
+  takeActionBarLayoutRestore(): ActionBarLayoutRestore | undefined {
+    const restore = this.actionBarRestore;
+    this.actionBarRestore = undefined; // one-shot: consumed by the HUD at world entry
+    return restore;
   }
   chat(text: string): void {
     this.cmd({ cmd: 'chat', text });

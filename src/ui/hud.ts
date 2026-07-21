@@ -87,6 +87,7 @@ import {
   type Entity,
   FAERIE_FIRE_ARMOR_PCT,
   FISHING_CAST_ID,
+  GATHER_CAST_ID,
   type ItemDef,
   MAX_LEVEL,
   MELEE_RANGE,
@@ -170,6 +171,7 @@ import {
 } from './craft_celebration_view';
 import { buildCraftingView } from './crafting_view';
 import { renderCraftingWindow, stationNameText } from './crafting_window';
+import { shouldRefreshDailyRewardsLauncher } from './daily_rewards_launcher_core';
 import { DailyRewardsWindow } from './daily_rewards_window';
 import {
   deedBroadcastLine,
@@ -214,6 +216,7 @@ import {
   resetFramePositionsOnce,
   TARGET_FRAME_POS_KEY,
 } from './frame_pos_reset';
+import { gatherDeniedLineKey } from './gathering_view';
 import { holderTierBadgeDataUrl, holderTierByIndex, holderTierDisplayName } from './holder_tier';
 import { isSelfOnlyAbility } from './hud/action_bar/ability_self_only';
 import { ActionBarController } from './hud/action_bar/action_bar_controller';
@@ -222,6 +225,11 @@ import {
   ACTION_BAR_ABILITY_SLOTS_PER_ROW,
   actionBarRowForSlot,
 } from './hud/action_bar/action_bar_layout_core';
+import {
+  applyActionBarLayout,
+  captureActionBarLayout,
+  planActionBarRestore,
+} from './hud/action_bar/action_bar_layout_sync';
 import { ActionBarPainter, type ActionBarSlotElements } from './hud/action_bar/action_bar_painter';
 import {
   ABILITY_ICON_PREFIX,
@@ -686,6 +694,7 @@ const PLAYER_TOOLTIP_VIEW_DEPS: PlayerTooltipI18n = {
 };
 const castDisplayName = (id: string): string => {
   if (id === FISHING_CAST_ID) return t('abilityUi.cast.fishing');
+  if (id === GATHER_CAST_ID) return t('abilityUi.cast.gathering');
   if (id === 'demon_heal') return t('abilityUi.cast.demonHeal');
   if (id === 'thunzharr_stormcall') return t('abilityUi.cast.thunzharrStormcall');
   const ability = ABILITIES[id];
@@ -946,6 +955,8 @@ export class Hud {
   // stop autorun without making Hud own Input or MobileControls.
   onResurrectAtSpiritHealer: (() => void) | null = null;
   private readonly actionBarController: ActionBarController;
+  // One-shot latch for the login-time action-bar layout reconciliation.
+  private actionBarLayoutRestored = false;
   private get hotbarActions(): HotbarAction[] {
     return this.actionBarController.actions;
   }
@@ -1413,6 +1424,10 @@ export class Hud {
         return !!match && match.team !== null;
       },
       showAttackButton: () => this.optionsHooks?.settings.get('showAttackButton') ?? true,
+      // Persistence seam: online, the ClientWorld debounces a per-character wire
+      // save; offline, Sim.saveActionBarLayout is a no-op (localStorage is the
+      // store). The controller always writes the localStorage mirror itself.
+      persistLayout: (layout) => this.sim.saveActionBarLayout(layout),
     });
     this.delveTracker = new DelveTrackerController({
       element: $('#delve-tracker'),
@@ -2348,6 +2363,15 @@ export class Hud {
     if (
       document.body.classList.contains('bank-open') &&
       (el.id === 'bank-window' || el.id === 'bags')
+    )
+      return;
+    // The market docks its bags companion the same way (body.market-open, see
+    // components.css): skip the cascade for that cluster too, or the inline
+    // position the cascade bakes onto #bags beats the docking CSS the moment a
+    // second window is already open (PR #2107 review round 5).
+    if (
+      document.body.classList.contains('market-open') &&
+      (el.id === 'market-window' || el.id === 'bags')
     )
       return;
     const openCount = [...document.querySelectorAll<HTMLElement>('.window.panel')].filter(
@@ -3839,7 +3863,16 @@ export class Hud {
     root: () => $('#daily-rewards-window'),
     world: () => this.sim,
     closeOthers: () => this.closeOtherWindows('#daily-rewards-window'),
-    onStatus: (status) => this.applyDailyRewardsLauncherStatus(status),
+    // A status delivered by the window's render or spin is as fresh as a launcher
+    // fetch: invalidate any in-flight launcher fetch (seq bump) so a slower older
+    // response cannot overwrite it, and stamp the throttle so the next slowHud
+    // tick does not redundantly re-fetch.
+    onStatus: (status) => {
+      this.dailyRewardsLauncherSeq++;
+      this.lastDailyRewardsLauncherRefreshAt = performance.now();
+      this.applyDailyRewardsLauncherStatus(status);
+    },
+    onClose: () => this.refreshDailyRewardsLauncher(true),
     onWalletConnect: () => {
       window.dispatchEvent(new CustomEvent('woc:wallet-verify'));
     },
@@ -4940,6 +4973,30 @@ export class Hud {
 
   private saveSlotMap(): void {
     this.actionBarController.saveActions();
+  }
+
+  // Runs once at world entry (polled each frame until the world resolves the
+  // decision): reconcile the device's local action-bar layout with the server
+  // copy. Offline resolves immediately to 'noop'. Online waits for the login
+  // self-payload, then either the server copy WINS (overwrite the local mirror
+  // and re-seed the controller) or the local layout seeds the first server copy.
+  private maybeRestoreActionBarLayout(): void {
+    if (this.actionBarLayoutRestored) return;
+    const restore = this.sim.takeActionBarLayoutRestore();
+    if (restore === undefined) return; // still pending (online, pre-login-payload)
+    this.actionBarLayoutRestored = true;
+    const playerClass = this.sim.cfg.playerClass;
+    const playerName = this.sim.player.name;
+    const plan = planActionBarRestore(restore, () =>
+      captureActionBarLayout(localStorage, playerClass, playerName),
+    );
+    if (plan.action === 'apply-server') {
+      applyActionBarLayout(localStorage, playerClass, playerName, plan.layout);
+      this.actionBarController.reload();
+      this.spellbookWindow.refreshHotbarControls();
+    } else if (plan.action === 'seed-local') {
+      this.sim.saveActionBarLayout(plan.layout);
+    }
   }
 
   private addAbilityToHotbar(abilityId: string): boolean {
@@ -6780,7 +6837,10 @@ export class Hud {
     this.applyDailyRewardsChestButtonVisibility();
     if (!this.showDailyRewardsChestButton()) return;
     const now = performance.now();
-    if (!force && now - this.lastDailyRewardsLauncherRefreshAt < 60_000) return;
+    // Slow closed-window poll; the why and the arithmetic live in the core.
+    if (!shouldRefreshDailyRewardsLauncher(force, now, this.lastDailyRewardsLauncherRefreshAt)) {
+      return;
+    }
     this.lastDailyRewardsLauncherRefreshAt = now;
     const seq = ++this.dailyRewardsLauncherSeq;
     void this.sim
@@ -6828,6 +6888,7 @@ export class Hud {
     this.lootRolls.update(now);
     if (slowHud) this.updateRaidLockoutBadge();
     if (slowHud) this.refreshDailyRewardsLauncher();
+    this.maybeRestoreActionBarLayout();
     this.syncActiveHotbarForm();
     this.syncSlotMap(); // picks up newly learned abilities mid-session
 
@@ -8859,7 +8920,10 @@ export class Hud {
           // material rarity. Identical on every graphics tier (player feedback
           // is never profile-gated). The grant hub's own 'loot' event already
           // prints the "You receive:" line and plays the loot cue, so this
-          // line uses distinct gather wording and adds no second cue.
+          // line uses distinct gather wording; the strike cue (Phase 12b) is
+          // the physical pick/axe/sickle impact of the completed gather cast,
+          // not a second loot notification, with a rare variant for a rare+
+          // material or a rare-event roll.
           const item = ITEMS[ev.itemId];
           const name = item ? itemDisplayName(item) : ev.itemId;
           this.log(
@@ -8871,6 +8935,61 @@ export class Hud {
               : t('hudChrome.gathering.gatherLine', { name }),
             QUALITY_COLOR[ev.rarity],
           );
+          if (
+            ev.rareEvent !== null ||
+            ev.rarity === 'rare' ||
+            ev.rarity === 'epic' ||
+            ev.rarity === 'legendary'
+          )
+            audio.gatherRare();
+          else audio.gatherStrike();
+          break;
+        }
+        case 'gatherDenied': {
+          // Tool-tier denial (Professions 2.0 Phase 12): an error toast ONLY.
+          // No loot line, no cue, no other state (the grant-hub double-log
+          // trap); the sim event is text-free, so the pure core resolves the
+          // key off surface + professionId and requiredTier interpolates.
+          this.showError(
+            t(gatherDeniedLineKey(ev.surface, ev.professionId) as TranslationKey, {
+              tier: formatNumber(ev.requiredTier, { maximumFractionDigits: 0 }),
+            }),
+          );
+          break;
+        }
+        case 'fishingResult': {
+          // Reel-in feedback line (Professions 2.0 Phase 11), colored by the
+          // caught item's quality. Identical on every graphics tier (player
+          // feedback is never profile-gated). The grant hub's own 'loot' event
+          // already prints the "You receive:" line and plays the loot cue, so
+          // this line uses distinct reel-in wording; the reel cue (Phase 12b)
+          // is the splash-and-crank of the landed reel itself, not a second
+          // loot notification.
+          const item = ITEMS[ev.itemId];
+          this.log(
+            t('hudChrome.gathering.catchLine', { name: item ? itemDisplayName(item) : ev.itemId }),
+            QUALITY_COLOR[ev.quality],
+          );
+          audio.fishReel();
+          break;
+        }
+        case 'fishingBite': {
+          // The hidden seeded bite fired (Professions 2.0 Phase 12b). The cue
+          // rides the ALWAYS-AUDIBLE play() arm (timing/affordance: the reel
+          // window is running, so it must never be silenced by the feedback
+          // toggle), the bobber flips into its bite state via the renderer's
+          // own handleEvent arm, and this localized line keeps the moment
+          // visible in the log so it is never sound-only (accessibility).
+          this.log(t('hudChrome.gathering.biteLine'), '#9adcff');
+          audio.fishBite();
+          break;
+        }
+        case 'fishingGotAway': {
+          // The reel window closed unanswered (Professions 2.0 Phase 12b): a
+          // localized line only, NO cue (a miss costs nothing and a cue every
+          // missed bite would spam an AFK-adjacent moment); the bobber sinks
+          // out on its own as the cast ends.
+          this.log(t('hudChrome.gathering.gotAwayLine'), '#a8a8a8');
           break;
         }
         case 'gatherRareEvent': {
@@ -9802,7 +9921,14 @@ export class Hud {
           this.log(t('hud.system.respawn'), '#7fdc4f');
           break;
         case 'castStart':
-          break; // cast-loop SFX is spatial now (see playEventSfx)
+          // cast-loop SFX is spatial now (see playEventSfx); the profession
+          // casts (Professions 2.0 Phase 12b) add a personal placeholder cue
+          // at cast start, feedback-gated like other notification cues.
+          if (ev.entityId === sim.playerId) {
+            if (ev.ability === GATHER_CAST_ID) audio.gatherCast();
+            else if (ev.ability === FISHING_CAST_ID) audio.fishCast();
+          }
+          break;
         case 'castStop':
           // Deferred "Auto-Attack on Ability Use" (timed casts): engage only when
           // the player's own cast COMPLETES, so the aggro happens as the damage
@@ -11787,7 +11913,10 @@ export class Hud {
   toggleDailyRewards(): void {
     if (!this.dailyRewardsEnabled()) return;
     this.dailyRewardsWindow.toggle();
-    this.refreshDailyRewardsLauncher(true);
+    // Close refreshes via onClose; force only the open direction here. The open
+    // force stays as the fallback for tabs that render without a status fetch
+    // (the store tab), where no onStatus push would arrive.
+    if (this.dailyRewardsWindow.isOpen) this.refreshDailyRewardsLauncher(true);
   }
 
   openWocStore(): void {

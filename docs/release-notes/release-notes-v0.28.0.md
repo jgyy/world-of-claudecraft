@@ -85,10 +85,6 @@ combat, interface, reliability, performance, and social improvements.
 ## Discord integration
 
 - The Discord bot repairs compounded level suffixes in synchronized nicknames (#2111).
-- Expiring Discord invite links can be rotated automatically through the configured invite
-  channel (#2185).
-- Operators using invite rotation must set `DISCORD_INVITE_CHANNEL_ID` and grant the bot the
-  required invite-management permissions.
 
 ## Compatibility and upgrade notes
 

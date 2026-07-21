@@ -16,7 +16,7 @@ import { ZONE1_ZONE } from './zone1';
 import { ZONE2_ZONE } from './zone2';
 import { ZONE3_ZONE } from './zone3';
 
-export type GatheringProfessionId = 'mining' | 'logging' | 'herbalism';
+export type GatheringProfessionId = 'mining' | 'logging' | 'herbalism' | 'fishing';
 
 export interface GatheringProfessionDef extends ProfessionRecord {
   id: GatheringProfessionId;
@@ -50,11 +50,26 @@ export const GATHERING_PROFESSIONS: Record<GatheringProfessionId, GatheringProfe
     icon: 'herbalism',
     description: 'Collecting herbs and plants growing in the wild.',
   },
+  fishing: {
+    id: 'fishing',
+    category: 'gathering',
+    maxSkill: 300,
+    name: 'Fishing',
+    icon: 'fishing',
+    description: 'Reeling catches from the rivers and lakes across the zones.',
+  },
 };
 
 // Stable iteration order, used for defaulting/normalizing a per-player
-// proficiency record. Keep in sync with GATHERING_PROFESSIONS above.
-export const GATHERING_PROFESSION_IDS: GatheringProfessionId[] = ['mining', 'logging', 'herbalism'];
+// proficiency record. Keep in sync with GATHERING_PROFESSIONS above. Fishing is
+// appended LAST (Professions 2.0 Phase 11) so the pre-existing iteration order
+// of the starter three is preserved for every consumer that walks this list.
+export const GATHERING_PROFESSION_IDS: GatheringProfessionId[] = [
+  'mining',
+  'logging',
+  'herbalism',
+  'fishing',
+];
 
 // Tool effect slotting (#1136): a slottable bonus layered on top of a base
 // gathering tool's tier (see ../professions/tools.ts). Each effect carries its
@@ -85,6 +100,29 @@ export const HARVEST_COMPONENT_ITEMS: Readonly<Record<string, string>> = {
   meat: 'game_meat',
   cloth: 'homespun_cloth',
 };
+
+// Monster material access tiers (Professions 2.0 Phase 12): which tool tier
+// the corpse-harvest premium (signed/specimen) arm requires per component
+// family, checked against the player's best owned gathering tool of ANY
+// profession (professions/tools.ts bestOwnedAnyGatherToolTier). EVERY
+// HARVEST_COMPONENT_ITEMS key is listed explicitly, ALL at 1 in wave one
+// (the Phase 12 prime directive: all pre-phase content stays bare-hands
+// harvestable); future corpse families may ship higher.
+export const MONSTER_MATERIAL_TIERS: Readonly<Record<string, number>> = {
+  hide: 1,
+  fang: 1,
+  silk: 1,
+  venomSac: 1,
+  meat: 1,
+  cloth: 1,
+};
+
+// The access tier for one component family. An unlisted component (a future
+// tag added before its tier row lands) defaults to 1: never gated, matching
+// the bare-hands floor.
+export function monsterMaterialTierFor(component: string): number {
+  return MONSTER_MATERIAL_TIERS[component] ?? 1;
+}
 
 // Perfect specimens (Phase 10): the signed jackpot family. When a corpse
 // harvest's rarity roll clears the signable floor (rare-or-better,

@@ -2089,9 +2089,31 @@ export const fr_CA: EnTranslations = {
       "mining": "Minage",
       "logging": "Bûcheronnage",
       "herbalism": "Herboristerie",
+      "fishing": "Fishing",
       "notReady": "Ce nœud de ressource n'a pas encore réapparu pour vous.",
       "gatherLine": "Vous rassemblez : {name}.",
-      "gatherLineQty": "Vous rassemblez : {name} x{qty}."
+      "gatherLineQty": "Vous rassemblez : {name} x{qty}.",
+      "catchLine": "You reel in: {name}",
+      "biteLine": "Something takes the bait!",
+      "gotAwayLine": "It got away.",
+      "nodeName": {
+        "ore": "Ore Vein",
+        "wood": "Timber Stand",
+        "herb": "Herb Patch"
+      },
+      "tierRequired": {
+        "mining": "Requires a tier {tier} mining pick",
+        "logging": "Requires a tier {tier} logging axe",
+        "herbalism": "Requires a tier {tier} herbalism sickle"
+      },
+      "toolTierUnmet": {
+        "mining": "You need a tier {tier} mining pick to harvest this vein.",
+        "logging": "You need a tier {tier} logging axe to fell this stand.",
+        "herbalism": "You need a tier {tier} herbalism sickle to gather this patch."
+      },
+      "toolTierUnmetCorpse": "You need a tier {tier} gathering tool to recover the finest materials.",
+      "stateReady": "Ready",
+      "stateCooldown": "Respawning"
     },
     "archetypeTitle": {
       "label": "Titre",
@@ -5950,6 +5972,7 @@ export const fr_CA: EnTranslations = {
     },
     "cast": {
       "fishing": "Pêche",
+      "gathering": "Gathering",
       "demonHeal": "Soin démoniaque",
       "thunzharrStormcall": "Appel de la tempête"
     }
@@ -8708,6 +8731,12 @@ export const fr_CA: EnTranslations = {
       },
       "verlans_oathblade": {
         "name": "Lame du serment de Verlan"
+      },
+      "ironreel_fishing_rod": {
+        "name": "Canne à moulinet de fer"
+      },
+      "silverstream_fishing_rod": {
+        "name": "Canne du ruisseau d'argent"
       },
       "briny_idol": {
         "name": "Idole saumâtre"
