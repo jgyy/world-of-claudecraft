@@ -30,10 +30,11 @@ describe('/play is online-only', () => {
     }
     // The online compat trigger stays: E2E tours drive the online flow through it.
     expect(playHtml).toContain('id="btn-online"');
-    // The solo console keeps the single Play CTA plus the live players line.
+    // The solo console keeps the single Play CTA plus a static online status line
+    // (no live player count: see docs/screenshots/misleading-online-players).
     expect(playHtml).toContain('class="play-console play-console-solo"');
     expect(playHtml).toContain('id="btn-play"');
-    expect(playHtml).toContain('js-stat-players-online');
+    expect(playHtml).toContain('class="play-online-status"');
   });
 
   it('index.html (the landing page) keeps the realm dropdown and offline flow', () => {

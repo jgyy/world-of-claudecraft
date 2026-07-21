@@ -5319,9 +5319,6 @@ function renderClassDetails(
   }
 }
 
-const STATS_CACHE_KEY = 'woc_cached_stats';
-const STATS_CACHE_TTL_MS = 30000; // 30 seconds
-
 function readTranslationKey(value: string | null): TranslationKey | null {
   return value ? (value as TranslationKey) : null;
 }
@@ -5506,68 +5503,6 @@ async function changeLanguage(
   refreshLocalizedDynamicShell();
   document.dispatchEvent(new CustomEvent('woc:languagechange', { detail: { language: selected } }));
   return true;
-}
-
-async function loadProjectStats(): Promise<void> {
-  // Realm status now lives in the realm dropdown, both in the trigger sub-line
-  // and inside the Online option, so update every instance by class. This shows
-  // players_online (a live headcount), never accounts_created (a lifetime total
-  // that reads as a live player count next to the green "Online" dot but isn't one).
-  const accountEls = document.querySelectorAll<HTMLElement>('.js-stat-players-online');
-  if (!accountEls.length) return;
-  const setAll = (els: NodeListOf<HTMLElement>, text: string): void => {
-    els.forEach((el) => {
-      el.textContent = text;
-    });
-  };
-
-  // 1. Try to read from localStorage first
-  let cached: {
-    realm: string;
-    accounts_created: number;
-    players_online: number;
-    timestamp: number;
-  } | null = null;
-  if (typeof localStorage !== 'undefined') {
-    const raw = localStorage.getItem(STATS_CACHE_KEY);
-    if (raw) {
-      try {
-        cached = JSON.parse(raw);
-      } catch {}
-    }
-  }
-
-  // If cache exists and is fresh (within TTL), use it and skip API request
-  if (cached && Date.now() - cached.timestamp < STATS_CACHE_TTL_MS) {
-    setAll(accountEls, String(cached.players_online));
-    return;
-  }
-
-  // 2. Fetch fresh stats
-  try {
-    const data = await api.projectStats();
-
-    setAll(accountEls, String(data.players_online));
-
-    // Save to cache with timestamp
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(
-        STATS_CACHE_KEY,
-        JSON.stringify({
-          ...data,
-          timestamp: Date.now(),
-        }),
-      );
-    }
-  } catch (err) {
-    console.error('Failed to fetch project stats:', err);
-    // If API fails, fall back to cached data (even if expired)
-    if (cached) {
-      setAll(accountEls, String(cached.accounts_created));
-    } else {
-      setAll(accountEls, '–');
-    }
-  }
 }
 
 // Home-page global (cross-realm) lifetime-XP leaderboard. Server computes the
@@ -7448,7 +7383,6 @@ function wireStartScreens(): void {
   // startGame await re-runs the load (in-flight cleared on reject) and owns the fallback.
   void ensureDeedLocalesLoaded(bootLang).catch(() => {});
   hydrateIcons();
-  void loadProjectStats();
   wireContractAddressCopy();
   wireHomepageMusicToggle();
   void wireWallet();

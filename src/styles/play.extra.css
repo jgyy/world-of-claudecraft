@@ -20,9 +20,9 @@
     }
   }
 
-  /* /play is online-only: the play console is just the Play button over a live
-     players line (no realm selector). Undo the two-column landscape grid the
-     shared hud.mobile.css applies to the selector + button pair. */
+  /* /play is online-only: the play console is just the Play button over a static
+     online status line (no realm selector, no live count). Undo the two-column
+     landscape grid the shared hud.mobile.css applies to the selector + button pair. */
   .play-console-solo,
   body.mobile-touch .play-console-solo {
     display: flex;
@@ -43,8 +43,5 @@
     font-size: 13px;
     color: var(--color-text-muted);
     text-shadow: 1px 1px 2px #000;
-  }
-  .play-online-status .stats-value {
-    color: var(--color-text-light);
   }
 }
