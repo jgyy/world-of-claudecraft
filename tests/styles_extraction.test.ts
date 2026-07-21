@@ -87,7 +87,7 @@ describe('CSS extraction: barrel + seam wiring', () => {
     // SUBLAYERS, not top-level layers. hud-mobile is ordered AFTER shell so the
     // in-game mobile overrides of pre-game shell elements win as they did when inline.
     expect(barrel).toContain(
-      '@layer tokens, base, layout, components, hud, shell, hud-mobile, index-extra, play-extra;',
+      '@layer fonts, tokens, base, layout, components, hud, shell, hud-mobile, index-extra, play-extra;',
     );
   });
 
@@ -96,6 +96,7 @@ describe('CSS extraction: barrel + seam wiring', () => {
     // reads the modules off disk directly, so deleting an @import line here leaves the whole
     // suite green while that layer never loads at runtime. Pin the seam itself.
     for (const m of [
+      'fonts.css',
       'tokens.css',
       'base.css',
       'layout.css',
@@ -118,6 +119,7 @@ describe('CSS extraction: barrel + seam wiring', () => {
     // of pre-game shell elements win.
     const at = (m: string) => barrel.indexOf(`@import "./${m}";`);
     const order = [
+      'fonts.css',
       'tokens.css',
       'base.css',
       'layout.css',

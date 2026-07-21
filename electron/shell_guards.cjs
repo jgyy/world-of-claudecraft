@@ -112,9 +112,9 @@ const CSP_ORIGINS = {
   ],
   // Cloudflare Turnstile: api.js (script) plus the challenge iframe (frame).
   turnstile: 'https://challenges.cloudflare.com',
-  // Google Fonts: the stylesheet origin (style-src) and the font-file origin (font-src).
-  fontsStyle: 'https://fonts.googleapis.com',
-  fontsFile: 'https://fonts.gstatic.com',
+  // Game-client fonts are self-hosted (DESIGN.md 5.2, src/styles/fonts.css) so
+  // font-src needs no external origin for them; reownFonts is the wallet-widget's
+  // own font-file origin and stays.
   reownFonts: 'https://fonts.reown.com',
   walletFrames: [
     'https://secure.walletconnect.com',
@@ -194,8 +194,8 @@ function buildContentSecurityPolicy({ apiOrigin, scriptHashes = [] } = {}) {
     scriptSrc,
     connectSrc,
     imgSrc,
-    `style-src 'self' 'unsafe-inline' ${CSP_ORIGINS.fontsStyle}`,
-    `font-src 'self' ${CSP_ORIGINS.fontsFile} ${CSP_ORIGINS.reownFonts}`,
+    "style-src 'self' 'unsafe-inline'",
+    `font-src 'self' ${CSP_ORIGINS.reownFonts}`,
     "worker-src 'self' blob:",
     `frame-src ${CSP_ORIGINS.turnstile} ${CSP_ORIGINS.walletFrames.join(' ')}`,
     "object-src 'none'",
