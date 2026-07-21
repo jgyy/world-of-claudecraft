@@ -2089,9 +2089,31 @@ export const de_DE: EnTranslations = {
       "mining": "Bergbau",
       "logging": "Holzfällen",
       "herbalism": "Kräuterkunde",
+      "fishing": "Fishing",
       "notReady": "Dieser Ressourcenknoten ist fur dich noch nicht nachgewachsen.",
       "gatherLine": "Sie sammeln: {name}.",
-      "gatherLineQty": "Sie sammeln: {name} x{qty}."
+      "gatherLineQty": "Sie sammeln: {name} x{qty}.",
+      "catchLine": "You reel in: {name}",
+      "biteLine": "Something takes the bait!",
+      "gotAwayLine": "It got away.",
+      "nodeName": {
+        "ore": "Ore Vein",
+        "wood": "Timber Stand",
+        "herb": "Herb Patch"
+      },
+      "tierRequired": {
+        "mining": "Requires a tier {tier} mining pick",
+        "logging": "Requires a tier {tier} logging axe",
+        "herbalism": "Requires a tier {tier} herbalism sickle"
+      },
+      "toolTierUnmet": {
+        "mining": "You need a tier {tier} mining pick to harvest this vein.",
+        "logging": "You need a tier {tier} logging axe to fell this stand.",
+        "herbalism": "You need a tier {tier} herbalism sickle to gather this patch."
+      },
+      "toolTierUnmetCorpse": "You need a tier {tier} gathering tool to recover the finest materials.",
+      "stateReady": "Ready",
+      "stateCooldown": "Respawning"
     },
     "archetypeTitle": {
       "label": "Titel",
@@ -5947,6 +5969,7 @@ export const de_DE: EnTranslations = {
     },
     "cast": {
       "fishing": "Angeln",
+      "gathering": "Gathering",
       "demonHeal": "Dämonenheilung",
       "thunzharrStormcall": "Sturmruf"
     }
@@ -8706,6 +8729,12 @@ export const de_DE: EnTranslations = {
       },
       "verlans_oathblade": {
         "name": "Verlans Eidklinge"
+      },
+      "ironreel_fishing_rod": {
+        "name": "Eisenrollen-Angelrute"
+      },
+      "silverstream_fishing_rod": {
+        "name": "Silberbach-Angelrute"
       },
       "briny_idol": {
         "name": "Salzlaken-Götze"

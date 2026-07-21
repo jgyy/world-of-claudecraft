@@ -2089,9 +2089,31 @@ export const it_IT: EnTranslations = {
       "mining": "Estrazione mineraria",
       "logging": "Taglio del legname",
       "herbalism": "Erbalismo",
+      "fishing": "Fishing",
       "notReady": "Questo nodo di risorse non e ancora rispawnato per te.",
       "gatherLine": "Raccogli: {name}.",
-      "gatherLineQty": "Raccogli: {name} x {qty}."
+      "gatherLineQty": "Raccogli: {name} x {qty}.",
+      "catchLine": "You reel in: {name}",
+      "biteLine": "Something takes the bait!",
+      "gotAwayLine": "It got away.",
+      "nodeName": {
+        "ore": "Ore Vein",
+        "wood": "Timber Stand",
+        "herb": "Herb Patch"
+      },
+      "tierRequired": {
+        "mining": "Requires a tier {tier} mining pick",
+        "logging": "Requires a tier {tier} logging axe",
+        "herbalism": "Requires a tier {tier} herbalism sickle"
+      },
+      "toolTierUnmet": {
+        "mining": "You need a tier {tier} mining pick to harvest this vein.",
+        "logging": "You need a tier {tier} logging axe to fell this stand.",
+        "herbalism": "You need a tier {tier} herbalism sickle to gather this patch."
+      },
+      "toolTierUnmetCorpse": "You need a tier {tier} gathering tool to recover the finest materials.",
+      "stateReady": "Ready",
+      "stateCooldown": "Respawning"
     },
     "archetypeTitle": {
       "label": "Titolo",
@@ -5947,6 +5969,7 @@ export const it_IT: EnTranslations = {
     },
     "cast": {
       "fishing": "Pesca",
+      "gathering": "Gathering",
       "demonHeal": "Cura demoniaca",
       "thunzharrStormcall": "Richiamo della tempesta"
     }
@@ -8706,6 +8729,12 @@ export const it_IT: EnTranslations = {
       },
       "verlans_oathblade": {
         "name": "Lama del giuramento di Verlan"
+      },
+      "ironreel_fishing_rod": {
+        "name": "Canna con mulinello di ferro"
+      },
+      "silverstream_fishing_rod": {
+        "name": "Canna del ruscello d'argento"
       },
       "briny_idol": {
         "name": "Idolo Salmastro"

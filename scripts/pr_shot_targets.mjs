@@ -347,6 +347,39 @@ export const TARGETS = [
     },
   },
   {
+    key: 'market-window',
+    label: 'World Market window (landscape multi-column listings)',
+    when: ['ui/market_window', 'ui/market_view', 'ui/market_filters', 'sim/market'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    // Teleport onto the Merchant's stall (zone1, {0, 11.5}) so marketOpen's proximity
+    // gate passes, then open the Browse tab directly. The Merchant always keeps some of
+    // its own standing stock (market.ts), so the listing grid is never empty offline.
+    async capture(page) {
+      await page.evaluate(() => {
+        const p = window.__game?.sim?.player;
+        if (p?.pos) {
+          p.pos.x = 0;
+          p.pos.z = 11.5;
+        }
+        const el = document.querySelector('#market-window');
+        if (el) el.style.display = 'none';
+        const hud = window.__game?.hud;
+        hud?.openMarket?.();
+        // Market docks its Bags companion alongside (like vendor/bank; unlike
+        // those, Market has no docking CSS pairing them side by side), and on
+        // mobile both share the same edge-pinned sheet position, so Bags stacks
+        // fully over Market. Hide the companion for this shot: the point of the
+        // capture is the Market window's own multi-column relayout, not the
+        // Bags pairing (a separate, pre-existing behavior this change does not
+        // touch).
+        const bags = document.querySelector('#bags');
+        if (bags) bags.style.display = 'none';
+      });
+      const open = await pollForSize(page, '#market-window');
+      return open ? { clip: '#market-window' } : {};
+    },
+  },
+  {
     key: 'card-duel',
     label: 'Card Duel window (Card Master)',
     when: [
@@ -378,7 +411,17 @@ export const TARGETS = [
     key: 'char-window',
     label: 'Character window',
     when: ['ui/char_window', 'ui/char_view'],
-    async capture(page) {
+    // Desktop and mobile, each in two framings: the default top framing, plus
+    // the gathering panel scrolled into view (it sits below the fold and is
+    // per-player progression info a player reads on both form factors; Phase
+    // 11 added its fishing row).
+    variants: [
+      { key: 'desktop' },
+      { key: 'mobile', mobile: true },
+      { key: 'desktop-gathering', scrollSel: '.char-progression' },
+      { key: 'mobile-gathering', mobile: true, scrollSel: '.char-progression' },
+    ],
+    async capture(page, variant) {
       await page.evaluate(() => {
         const el = document.querySelector('#char-window');
         if (el) el.style.display = 'none';
@@ -389,6 +432,25 @@ export const TARGETS = [
         const w = document.querySelector('#char-window');
         return !!w && getComputedStyle(w).display !== 'none';
       });
+      if (open && variant?.scrollSel) {
+        // The window repaints on world changes and a repaint resets the scroll
+        // position, so a one-shot scrollIntoView can be undone before the
+        // screenshot lands. Pin the scrollable ancestor to the bottom on an
+        // interval that outlives this evaluate (cleared after 5s).
+        await page.evaluate((sel) => {
+          const pin = () => {
+            const target = document.querySelector(sel);
+            if (!target) return;
+            let sc = target.parentElement;
+            while (sc && sc.scrollHeight <= sc.clientHeight + 1) sc = sc.parentElement;
+            if (sc) sc.scrollTop = sc.scrollHeight;
+          };
+          pin();
+          const iv = setInterval(pin, 50);
+          setTimeout(() => clearInterval(iv), 5000);
+        }, variant.scrollSel);
+        await wait(400);
+      }
       return open ? { clip: '#char-window' } : {};
     },
   },
@@ -552,23 +614,97 @@ export const TARGETS = [
   },
   {
     key: 'gather-node',
-    label: 'Gather node (click/tap-to-harvest, #1866)',
-    when: ['gather_node', 'gather_nodes'],
-    // Walks the player up to the first gather node the renderer actually built
-    // (`renderer.gatherNodeMeshes`, the same list `pickGatherNode` raycasts),
-    // so the frame shows the node the way a player would approach and click it.
-    async capture(page) {
+    label: 'Gather node (click/tap-to-harvest #1866; tool tier gating, Professions 2.0 Phase 12)',
+    when: ['gather_node', 'gather_nodes', 'gathering_view', 'professions/tools'],
+    // The Phase 12 variants stand at the mirefen tier-2 ore vein (falling back
+    // to the nearest pre-phase mirefen vein when the id does not exist, so the
+    // SAME recipe shoots the before side on the base tree): bare hands for the
+    // locked tooltip + minimap lock tint, an iron pick for the unlocked
+    // contrast, and a mobile tap-harvest whose outcome line is the denial
+    // toast on the gated tree and a plain gather line before it.
+    variants: [
+      { key: 'desktop-approach' },
+      { key: 'desktop-locked-hover' },
+      { key: 'desktop-unlocked-hover', pickup: 'iron_mining_pick' },
+      { key: 'desktop-minimap-locked', clipMinimap: true, standOff: true },
+      { key: 'mobile-harvest-outcome', mobile: true, harvest: true },
+    ],
+    async capture(page, variant) {
       await page.evaluate(() => {
-        const game = window.__game;
-        const mesh = game?.renderer?.gatherNodeMeshes?.[0];
-        const p = game?.world?.player;
-        if (!mesh || !p) return;
-        p.pos.x = mesh.position.x + 2.5;
-        p.pos.y = mesh.position.y;
-        p.pos.z = mesh.position.z + 2.5;
-        p.facing = Math.atan2(mesh.position.x - p.pos.x, mesh.position.z - p.pos.z);
+        document.querySelector('.camera-prompt-confirm')?.click();
+        document.querySelector('.tut-skip')?.click();
+        document.querySelector('.gpu-notice-dismiss')?.click();
       });
+      await page.evaluate(
+        (opts) => {
+          const game = window.__game;
+          const meshes = game?.renderer?.gatherNodeMeshes ?? [];
+          const byId = (id) => meshes.find((m) => m.userData?.gatherNodeId === id);
+          // ore_mirefen_t2 exists only on the Phase 12 tree; ore_mirefen_1 is the
+          // pre-phase vein 12 yd away, the honest before-side stand-in.
+          const mesh = byId('ore_mirefen_t2') ?? byId('ore_mirefen_1') ?? meshes[0];
+          const p = game?.world?.player;
+          if (!mesh || !p) return;
+          if (opts.pickup) game.world.addItem(opts.pickup, 1);
+          // The minimap variant stands off the vein so the lock-tinted marker
+          // is not hidden under the player arrow at the map centre.
+          const off = opts.standOff ? 14 : 2.5;
+          p.pos.x = mesh.position.x + off;
+          p.pos.y = mesh.position.y;
+          p.pos.z = mesh.position.z + off;
+          p.facing = Math.atan2(mesh.position.x - p.pos.x, mesh.position.z - p.pos.z);
+          window.__p12ShotNodeId = mesh.userData?.gatherNodeId ?? null;
+        },
+        { pickup: variant?.pickup ?? null, standOff: Boolean(variant?.standOff) },
+      );
       await wait(1200);
+      if (variant?.harvest) {
+        // Tap-harvest through the real IWorld command: denied on the gated
+        // tree (error toast), a plain gather line before it.
+        await page.evaluate(() => {
+          const game = window.__game;
+          if (window.__p12ShotNodeId) game.world.harvestNode(window.__p12ShotNodeId);
+        });
+        await wait(600);
+        return {};
+      }
+      if (variant?.key?.includes('hover')) {
+        // Project the node mesh to client coords and dispatch real pointermove
+        // events on the canvas (two, spaced past the tooltip's 120 ms pick
+        // throttle). On the base tree no hover listener exists and the frame
+        // simply shows no tooltip, which IS the before shot.
+        for (let i = 0; i < 4; i++) {
+          // Recompute the projection immediately before every dispatch (the
+          // camera settles over several frames) and aim at the rock's upper
+          // half so neither the ground nor the player steals the pick. The
+          // listener lives on #game-canvas specifically (main.ts wiring).
+          await page.evaluate(() => {
+            const game = window.__game;
+            const mesh = (game?.renderer?.gatherNodeMeshes ?? []).find(
+              (m) => m.userData?.gatherNodeId === window.__p12ShotNodeId,
+            );
+            const canvas = document.querySelector('#game-canvas');
+            const cam = game?.renderer?.camera;
+            if (!mesh || !canvas || !cam) return;
+            const v = mesh.position.clone();
+            v.y += 0.4;
+            v.project(cam);
+            const rect = canvas.getBoundingClientRect();
+            canvas.dispatchEvent(
+              new PointerEvent('pointermove', {
+                pointerType: 'mouse',
+                clientX: rect.left + ((v.x + 1) / 2) * rect.width,
+                clientY: rect.top + ((1 - v.y) / 2) * rect.height,
+                bubbles: true,
+              }),
+            );
+          });
+          await wait(200);
+        }
+        await wait(300);
+        return {};
+      }
+      if (variant?.clipMinimap) return { clip: '#minimap' };
       return {};
     },
   },
@@ -683,6 +819,14 @@ export const TARGETS = [
       { key: 'desktop-full', charClass: 'warrior', charName: 'Forgeheart' },
       { key: 'desktop-simplified', charClass: 'mage', charName: 'Newhand', simplified: true },
       { key: 'mobile', charClass: 'warrior', charName: 'Anvilmar', mobile: true },
+      // The gathering section sits below the craft-skill fold; a fourth
+      // framing scrolls it into view (Phase 11 added its fishing row).
+      {
+        key: 'desktop-gathering',
+        charClass: 'warrior',
+        charName: 'Forgeheart',
+        scrollSel: '.prof-gathering',
+      },
     ],
     // The offline sandbox starts unattuned with zero craft skill, which IS the
     // simplified variant. The full variants stub the two IWorld reads with a
@@ -733,6 +877,7 @@ export const TARGETS = [
               { professionId: 'mining', skill: 112, maxSkill: 300 },
               { professionId: 'logging', skill: 45, maxSkill: 300 },
               { professionId: 'herbalism', skill: 203, maxSkill: 300 },
+              { professionId: 'fishing', skill: 68, maxSkill: 300 },
             ],
           };
           const stateIsFn = typeof game.world.professionsState === 'function';
@@ -747,6 +892,23 @@ export const TARGETS = [
       }, variant);
       const open = await pollForSize(page, '#professions-window');
       if (!open) throw new Error('professions window did not open');
+      if (variant?.scrollSel) {
+        // Same repaint-vs-scroll race as the char-window target: pin the
+        // scrollable ancestor to the bottom until the screenshot lands.
+        await page.evaluate((sel) => {
+          const pin = () => {
+            const target = document.querySelector(sel);
+            if (!target) return;
+            let sc = target.parentElement;
+            while (sc && sc.scrollHeight <= sc.clientHeight + 1) sc = sc.parentElement;
+            if (sc) sc.scrollTop = sc.scrollHeight;
+          };
+          pin();
+          const iv = setInterval(pin, 50);
+          setTimeout(() => clearInterval(iv), 5000);
+        }, variant.scrollSel);
+        await wait(400);
+      }
       return { clip: '#professions-window' };
     },
   },
@@ -1077,6 +1239,130 @@ export const TARGETS = [
       if (variant.items[1] && equipped.offhand !== variant.items[1]) {
         throw new Error(`offhand equip failed: ${JSON.stringify(equipped)}`);
       }
+      return {};
+    },
+  },
+  {
+    key: 'gathering-rhythm',
+    label:
+      'Gathering rhythm: gather cast bar + fishing bobber and bite (Professions 2.0 Phase 12b)',
+    when: [
+      'professions/fishing',
+      'professions/gathering',
+      'combat/casting_lifecycle',
+      'render/fishing_bobber',
+      'render/cast_bar',
+    ],
+    // Phase 12b turns the instant harvest into a short visible cast and the
+    // fixed 5 s fishing cast into a bite minigame. The gather variants shoot
+    // mid-cast at the eastbrook ore vein (the base tree grants instantly, so
+    // the SAME recipe degrades honestly to the post-harvest frame). The
+    // fishing variants stand at the hunted Mirror Lake shore spot: the wait
+    // shot shows the constant waiting bar plus the new bobber (base: the old
+    // filling bar, no bobber); the bite shot polls the chat log for the bite
+    // line and shoots inside the reaction window (base: the poll times out
+    // after the old cast lands, degrading to the post-catch frame). Both
+    // bring-ups still the local mobs first: mob damage cancels a cast and a
+    // boar camp sits near the vale vein.
+    variants: [
+      { key: 'desktop-gather-cast' },
+      { key: 'mobile-gather-cast', mobile: true },
+      { key: 'desktop-fishing-wait', fishing: true },
+      { key: 'desktop-fishing-bite', fishing: true, bite: true },
+    ],
+    async capture(page, variant) {
+      await page.evaluate(() => {
+        document.querySelector('.camera-prompt-confirm')?.click();
+        document.querySelector('.tut-skip')?.click();
+        document.querySelector('.gpu-notice-dismiss')?.click();
+        for (const e of window.__game?.world?.entities?.values?.() ?? []) {
+          if (e.kind !== 'mob') continue;
+          e.dead = true;
+          e.hp = 0;
+          e.aiState = 'dead';
+          e.respawnTimer = 9999;
+          e.corpseTimer = 9999;
+          e.inCombat = false;
+        }
+      });
+      if (variant?.fishing) {
+        await page.evaluate(async () => {
+          const game = window.__game;
+          const p = game?.world?.player;
+          if (!p) return;
+          const { groundHeight, waterLevelAt } = await import('/src/sim/world.ts');
+          const { PLAYER_SWIM_DEPTH } = await import('/src/sim/pathfind.ts');
+          const { LAKE } = await import('/src/sim/content/zone1.ts');
+          const seed = game.world.cfg.seed;
+          const dists = [4, 8, 12, 16, 20, 24];
+          const fishable = (x, z, facing) => {
+            const sin = Math.sin(facing);
+            const cos = Math.cos(facing);
+            return dists.some(
+              (d) =>
+                groundHeight(x + sin * d, z + cos * d, seed) <
+                waterLevelAt(x + sin * d, z + cos * d) - PLAYER_SWIM_DEPTH,
+            );
+          };
+          let spot = null;
+          for (let r = LAKE.radius * 0.7; r <= LAKE.radius * 1.8 && !spot; r += 1) {
+            for (let i = 0; i < 72 && !spot; i++) {
+              const a = (i / 72) * Math.PI * 2;
+              const x = LAKE.x + Math.cos(a) * r;
+              const z = LAKE.z + Math.sin(a) * r;
+              if (groundHeight(x, z, seed) < waterLevelAt(x, z)) continue;
+              const facing = Math.atan2(LAKE.x - x, LAKE.z - z);
+              if (fishable(x, z, facing)) spot = { x, z, facing };
+            }
+          }
+          if (!spot) return;
+          p.pos.x = spot.x;
+          p.pos.y = groundHeight(spot.x, spot.z, seed);
+          p.pos.z = spot.z;
+          p.facing = spot.facing;
+          game.world.addItem('simple_fishing_pole', 1);
+        });
+        await wait(1200);
+        await page.evaluate(() => {
+          window.__game.world.useItem('simple_fishing_pole');
+        });
+        if (variant?.bite) {
+          // The hidden delay tops out at 8 s bare-handed; the reaction window
+          // (3 s) is generous enough for the settle frame plus the shot.
+          for (let i = 0; i < 45; i++) {
+            const bit = await page.evaluate(() =>
+              (document.querySelector('#chatlog')?.textContent ?? '').includes('takes the bait'),
+            );
+            if (bit) break;
+            await wait(250);
+          }
+          await wait(250);
+          return {};
+        }
+        await wait(1500);
+        return {};
+      }
+      await page.evaluate(() => {
+        const game = window.__game;
+        const meshes = game?.renderer?.gatherNodeMeshes ?? [];
+        const mesh =
+          meshes.find((m) => m.userData?.gatherNodeId === 'ore_eastbrook_1') ?? meshes[0];
+        const p = game?.world?.player;
+        if (!mesh || !p) return;
+        p.pos.x = mesh.position.x + 2.5;
+        p.pos.y = mesh.position.y;
+        p.pos.z = mesh.position.z + 2.5;
+        p.facing = Math.atan2(mesh.position.x - p.pos.x, mesh.position.z - p.pos.z);
+        window.__p12bShotNodeId = mesh.userData?.gatherNodeId ?? null;
+      });
+      await wait(1200);
+      await page.evaluate(() => {
+        const game = window.__game;
+        if (window.__p12bShotNodeId) game.world.harvestNode(window.__p12bShotNodeId);
+      });
+      // Mid-cast at the 2.5 s base duration; on the base tree the grant has
+      // already landed and the frame shows the harvest outcome instead.
+      await wait(900);
       return {};
     },
   },

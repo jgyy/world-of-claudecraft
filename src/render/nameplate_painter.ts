@@ -19,7 +19,7 @@
 import * as THREE from 'three';
 import { ABILITIES, MOBS, QUESTS } from '../sim/data';
 import { specialRoleColor } from '../sim/discord_roles';
-import { type Entity, isQuestTurnInNpc } from '../sim/types';
+import { type Entity, GATHER_CAST_ID, isQuestTurnInNpc } from '../sim/types';
 import { deedTitleText } from '../ui/deed_i18n';
 import {
   devTierBadgeDataUrl,
@@ -585,8 +585,10 @@ export class NameplatePainter {
     // cast_bar.ts keeps st.label as a stable id (DOM/i18n-free); localize here.
     v.castLabel.textContent = st.fishing
       ? t('abilityUi.cast.fishing')
-      : ABILITIES[st.label]
-        ? tEntity({ kind: 'ability', id: st.label, field: 'name' })
-        : st.label;
+      : st.label === GATHER_CAST_ID
+        ? t('abilityUi.cast.gathering')
+        : ABILITIES[st.label]
+          ? tEntity({ kind: 'ability', id: st.label, field: 'name' })
+          : st.label;
   }
 }

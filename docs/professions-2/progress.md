@@ -26,15 +26,23 @@ Update this file at the end of every implementation and QA session. Statuses:
 | 9 | Station presence and recipe training | complete | 2026-07-19 | 2026-07-19 |
 | 9 QA | Verify station presence and training | complete | 2026-07-19 | 2026-07-19 |
 | 10 | Recipe ladders and materials content | complete | 2026-07-19 | 2026-07-19 |
-| 10 QA | Verify recipe ladders and materials | not started | | |
-| 11 | Fishing joins the framework | not started | | |
-| 11 QA | Verify fishing framework | not started | | |
-| 12 | Base tool tier gating | not started | | |
-| 12 QA | Verify tool tier gating | not started | | |
+| 10 QA | Verify recipe ladders and materials | complete | 2026-07-19 | 2026-07-19 |
+| 11 | Fishing joins the framework | complete (PR #2197 merged into release/v0.29.0) | 2026-07-20 | 2026-07-20 |
+| 11 QA | Verify fishing framework | complete (PR #2199 merged) | 2026-07-20 | 2026-07-20 |
+| 12 | Base tool tier gating | complete (PR #2217 merged into release/v0.29.0) | 2026-07-20 | 2026-07-20 |
+| 12 QA | Verify tool tier gating | complete (PR #2223 merged) | 2026-07-20 | 2026-07-20 |
+| 12b | Gathering rhythm | complete (PR #2226 merged into release/v0.29.0) | 2026-07-20 | 2026-07-20 |
+| 12b QA | Verify gathering rhythm | complete (PASS, zero blocking) | 2026-07-20 | 2026-07-20 |
+| 12c | The Mastery Curve | not started | | |
+| 12c QA | Verify The Mastery Curve | not started | | |
+| 12d | Provenance and the harvest loop | not started | | |
+| 12d QA | Verify provenance and the harvest loop | not started | | |
 | 13 | Enchanting reachable | not started | | |
 | 13 QA | Verify enchanting reachable | not started | | |
 | 14 | Attunement quests and nudges | not started | | |
 | 14 QA | Verify attunement quests and nudges | not started | | |
+| 14b | Commissions and the Maker's Bond | not started | | |
+| 14b QA | Verify commissions and the Maker's Bond | not started | | |
 | 15 | Deeds, tuning, and polish | not started | | |
 | 15 QA | Final integration QA and packet teardown | not started | | |
 
@@ -364,17 +372,190 @@ CLAUDE.md.
 - [x] Wiki content regenerated; recipe data feeds the guide (regenerates clean with zero diff; the generator does not yet enumerate recipe records, so the guide skeleton is unchanged, and the professions guide rewrite stays the Phase 15 deliverable)
 
 ### Phase 11: Fishing joins the framework
-- [ ] Fishing proficiency (additive, framework-integrated) while the minigame stays as-is
-- [ ] Catch rarity ladder feeds cooking tiers; rare catch integrates (deed intact)
+- [x] Fishing proficiency (additive, framework-integrated) while the minigame stays as-is (the
+  fishing row joins `GATHERING_PROFESSIONS` appended last; one point per landed catch, junk
+  included, through the shared `queueGatheringGrant` queue; no-bite, bags-full, and the
+  codfather quest branch never accrue; the minigame's guards, fixed 5 s cast, emitted strings,
+  and single table draw are untouched; the fishing block extracted move-not-rewrite into
+  `src/sim/professions/fishing.ts` behind SimContext, sim.ts shed 111 lines, parity goldens
+  byte-identical)
+- [x] Catch rarity ladder feeds cooking tiers; rare catch integrates (deed intact)
+  (`FISHING_TABLES_BY_BAND`, bands at proficiency 0/100/200 via `fishingBandFor`, pure state
+  ahead of the unchanged single rng draw; higher bands shift weight out of junk and empty-hook
+  rows into the six cooking fish; glimmerfin weight deliberately flat in every band and
+  `col_glimmerfin` plus the per-zone fish marks untouched; band 0 is the shipped table object
+  byte for byte, pinned by literal seed sequences in `tests/professions_fishing.test.ts`)
+
+Phase 11 notes (2026-07-20): phase start 09e943669 (the release/v0.28.0 "prepare v0.28.0"
+tip; QA diffs 09e943669..the PR head, first-parent across the 83b929398 release sync). Built
+as DRAFT PR #2197 while v0.28.0 shipped; after the cut, release/v0.29.0 (623b10aee) was
+merged in (sync commit 83b929398, release-merge-audit clean: three incoming commits, the
+Discord invite-rotation revert only, zero overlap with the phase diff) and the PR retargeted
+to release/v0.29.0. Phase 11 QA runs after the maintainer merges it. Decisions: catch feedback landed as the text-free personal
+`fishingResult` SimEvent (gatherResult family) rendered as `hudChrome.gathering.catchLine`
+colored by ItemDef quality with no second cue; the packet OPEN item resolved as fold-in (no
+separate skill id, gprof unchanged, ALL_DELTA_KEYS stays 49). Deferrals: the
+guide.professions gather prose still says "Three gathering trades" (the Phase 15 guide
+rewrite owns the reword; touching reviewed prose trips the full-gate i18n
+semantic-regression pins); a live chat catch-line screenshot was skipped (the two window
+surfaces are covered before/after). QA probe-first: the extraction commit 62ee26ec8
+move-not-rewrite, band-1 liveness at proficiency 150, and the live GameServer gprof round
+trip suite.
+
+Phase 11 QA (2026-07-20): PASS with fixes, zero blocking. Verified off the merge
+15c9794db9 into release/v0.29.0 (QA diff = the PR #2197 commits first-parent across the
+83b929398 sync, whose only cargo was the Discord invite-rotation revert). Method:
+validation matrix green at the untouched tip first (the matrix suites plus tests/parity,
+925 tests, tsc clean), one Explore context load, then an adversarial-verify Workflow (3
+packet audits + the 5 dispatch-matrix reviewers; every nontrivial finding retried by two
+independent skeptics under distinct lenses; all audits delivered structured output first
+try) plus a correctness probe suite run and deleted in-tree (band boundaries live at
+99/100/199/200, startFishing deny arms, codfather full-bags, col_glimmerfin off a real
+fished koi, nonzero persistence round trips). The extraction stopping rule never
+triggered: move-not-rewrite confirmed at line level, draw order and observable behavior
+unchanged, the two sanctioned additions (fishingResult emit, grant queue) draw-free after
+the single roll. The one guard regression found and fixed: the S3 drift guard's scan list
+was not extended to src/sim/professions/fishing.ts, so the three relocated literals whose
+only emitters now live there (no-bite, rare catch, face-fishable-water) had silently lost
+reword-drift protection (matchers unchanged, zero runtime impact; the guard now reds on a
+reword, mutation-verified). Coverage closed test-first, each pin mutation-verified: the
+band-2 top-band liveness literal (B2_SEQ_4242, diverging from the band-1 walk exactly
+where band 2 lands the koi and band 1 an empty hook), the codfather over-capacity
+force-add (the quest soft-lock defense), col_glimmerfin on the fished path, the
+startFishing deny arms plus the fixed 5 s zero-draw cast start, negative band input, the
+NONZERO fishing persistence round trip (every prior fixture carried fishing 0), and the
+ACCEPTED rollback caveat pin (a stripped-key reload re-zeroes fishing only, the other
+three professions survive). Cleanup: the data.ts FISHING_RARE_ID / FISHING_TABLES
+re-export arm, left consumer-less by the extraction, dropped. Deferred with reasons: a
+char_window DOM-level gathering test (the undefined-key skip arm is unreachable by
+construction: rows come from the fixed client-side GATHERING_PROFESSION_IDS list, and the
+label-map tripwire plus the wheel-window DOM pins cover the reachable arm), a
+vale-fallback cast test (unreachable via zoneAt: ZONES is exactly the three tabled zones,
+clamped at the strip ends), the SWIM_DEPTH deep-water alias now at four copies
+(extraction chore candidate, drift note in state.md), gathering accrual past maxSkill
+(pre-existing semantics shared with node harvests across all four professions; the wheel
+UI clamps via the Phase 5 above-cap saturation pin), and the catchLine unknown-item
+fallback arm (defensive, unreachable today).
 
 ### Phase 12: Base tool tier gating
-- [ ] Nodes carry tiers; tool tier + skill gate node and corpse-material access
-- [ ] The 15 existing tools change outcomes; stale no-op test pin replaced
-- [ ] Tool effects remain parked (explicitly out of scope)
+- [x] Nodes carry tiers; tool tier + skill gate node and corpse-material access
+- [x] The 15 existing tools change outcomes; stale no-op test pin replaced
+- [x] Tool effects remain parked (explicitly out of scope)
+
+Built 2026-07-20. As-landed decisions (the phase file's "As landed" block is the authority):
+text-free `gatherDenied` SimEvent + `hudChrome.gathering.*` keys instead of sim_i18n matcher
+rows; the tiered fishing rods (ironreel tier 2, silverstream tier 3, trader_wilkes) were
+authored HERE because no rod tier vocabulary existed; corpse gating reads the all-tier-1
+MONSTER_MATERIAL_TIERS table so the deny arm never fires in shipped content (deny = premium
+downgrade, yield preserved); the fishing band cap is silent (12b owns rod-synergy UX); no new
+IWorld member; parity goldens byte-identical. Deferred: rod-synergy and cap visibility UX
+(Phase 12b), higher-tier corpse families (future content composes with the live gate), the
+node hover tooltip is desktop-pointer-only (mobile reads the minimap lock tint + denial
+toast).
+
+Phase 12 QA (2026-07-20): PASS with fixes, zero blocking. Verified off the merge a57e43b78
+into release/v0.29.0 (QA diff = the PR #2217 commits c139db6d5..4fa130aedf first-parent
+across the 59f9c42d2 sync, whose only cargo was the market landscape PR #2107, clean
+release-merge-audit on record). Method: validation matrix green at the untouched tip first
+(tsc plus the seventeen phase-touched suites), one Explore context load, then an
+adversarial-verify Workflow (three packet audits plus the four dispatch-matrix reviewers;
+every BLOCKING or SHOULD-FIX finding retried by two independent skeptics under
+code-verification and impact lenses; all seven audits delivered structured output first
+try), with a correctness probe suite driven through the real Sim and deleted in-tree
+(bare-hands tier-1 success, rng-free t2/t3 denies with exact event shapes, pick unlocks,
+per-profession owned-best, the herbalism arm, corpse deny and restore via withTier with
+identical claims and draws, silent band caps with and without rods, useItem rod casts,
+both-host denial liveness). Two SHOULD-FIX decisiveness holes fixed test-first with
+mutation verification: the fishing band min() proficiency arm was one-arm-only (a tier-3
+rod at band-0 proficiency now pins band 0; the pre-fix suite passed with the min collapsed
+to the rod arm), and requiredTier was never pinned at any value other than 2 (an
+owned-but-short iron pick at a tier-3 vein now pins requiredTier 3). Also landed: the
+herbalism deny/unlock arm through the real harvestNode, the corpse
+granted-with-tool-at-raised-tier arm, the FIRST-failing-family pin on the corpse deny
+event (asymmetric raised tiers both ways at the pre-hunted seed 11), a draw-count liveness
+pin on the determinism drive's fishing arm, withTier absent-component restore hygiene, and
+the gate-order comment correction in gather_node_interact.ts (the client pre-gate
+deliberately reports the lock before readiness while the sim checks respawn first; both
+orders were already pinned, the comment claimed they matched). Verified clean: the PR body
+references all five screenshot pairs, wiki:content regenerates no diff, no scope-creep
+timing mechanic, the parked tool-effect half has zero callers, rods stocked at the literal
+trader_wilkes. Deferred with reasons: the main.ts gate-wiring source pin (rename-fragile
+idiom; the sim/server deny is the authoritative backstop, so a dropped wire only costs the
+pre-gate line), the items.ts isGatherToolUse consistency swap (zero behavior change), the
+toolTierUnmet key composition duplication (two copies, below the rule of three), the
+hover-tooltip listener-logic test and the *_tooltip.ts painter-scan naming, and the
+minimap per-build tool-tier memo allocation. Drift notes in state.md.
+
+Phase 12b QA (2026-07-20): PASS, zero blocking; QA diff 26f7f40b9..8e7bc1121 audited off the
+merge 43bfcb927. Fan-out: 21-agent Workflow (3 packet audits + 6 dispatch-matrix reviewers,
+all 9 delivered schema-forced first try; every BLOCKING/SHOULD-FIX finding verified by two
+skeptics, refute + impact lenses). The Pin-cost appendix executed with ZERO violations: every
+touched test file classifies as an appendix row, a pre-cleared additive class, or pure
+additive registration; the band literals carry a discriminating draw (second discriminator at
+index 23). The anti-cheat stopping rule is NEGATIVE by live probe (every broadcast field
+walked for a mid-cast angler; no hidden key, castTot constant, castRem decay bite-independent
+across seeds). Played beats: the offline rhythm loop end to end 13/13 via CDP (gather cast
+2.5 s with real key-input move-cancel, constant fishing bar, bite line, reel-in with the
+Mirror Lake deed firing through the bite moment, got-away miss, immediate recast); the live
+GameServer bite-and-reel arm rode the correctness probe. Six skeptic-confirmed SHOULD-FIX
+regression-protection gaps (no live defects) fixed in the QA PR, all mutation-verified:
+deadline-tick no-miss arm, cancelCast/arena/fiesta/session-cap hidden-field clear pins, the
+useItem gather busy arm, the six cue routing pins (fishBite always-audible), plus literal
+re-pins (constant-self-comparison removals, rod-synergy same-draw literals 127/107/87, cast
+bar fill pins, exact reel-cue set) and the harvestNode duplicate bag-scan hoist. Docs: the
+predicate-consumer wording corrected in state.md + the phase file (7 boolean consumers, 4
+id-discriminating sites), appendix re-inventoried with the QA pins. Deferred with reasons:
+observer-bobber bite flip (owner-only by design), nameplate per-frame localize (pre-existing),
+raw hex log colors (repo idiom), placeholder cues pending #2208 (release-notes caveat), guide
+bite-minigame prose (Phase 15 rewrite), mobile fishing E2E (desktop probe + committed mobile
+shots stand; Phase 15 sweep).
+
+Phase 12b (2026-07-20): built off release/v0.29.0, phase start 26f7f40b9 (the Phase 12 QA
+merge). Seven build commits (predicate extraction, gather cast, bite minigame, ui, appendix
+re-pins, professions_gather regen in its own commit, new contracts) per the phase file's
+commit cadence. The Pin-cost appendix executed row by row; the professions_gather seed
+re-hunted to 1 under the cast-reshaped drive (mobs silenced up front because mob damage
+cancels a gather cast, per-iteration band-0 proficiency reset plus a newest-8 signed
+retention filter keep the 100-cast window solvent, sampleEvery 500; the labelled frames pin
+cumulative draws 2/4/204). The two fishing-cancel goldens verified byte-identical, not
+regenerated. Live boundary semantics: reel valid while tickCount <= deadline, miss at
+deadline + 1; reel-window tick literals 60/75/90 per rod tier; delay bounds [60, 160] bare
+and [60, 100] at tier 3. Deviations and the two pre-briefed outside-appendix additive
+extensions are recorded in the phase file's as-landed block and state.md (surfaces + drift
+notes + tuning finals). The full validation matrix, parity, net/wire, i18n, and audio rows
+were re-run green first-hand at the head before review dispatch.
+
+### Phase 12b: Gathering rhythm
+- [x] Gather cast (tool-tier and band scaled, floored); completion re-validates; move cancels free
+- [x] The shared non-spell-cast predicate consolidates the eleven cast-id exemption sites
+- [x] Fishing bite minigame: hidden seeded delay, private bite SimEvent, server-authoritative reaction window, reel via pole re-press, miss costs nothing
+- [x] Rod synergy: shorter average delay, wider window (composes with Phase 12 bands)
+- [x] Placeholder cues routed and PLACEHOLDER-marked (sfx:check green, listed on #2208)
+- [x] Every Pin-cost appendix row executed as briefed; no unlisted pin weakened (two pre-briefed additive extensions outside the appendix, recorded in the as-landed block: the game_audio cue census 14 to 20 and the gather_event_i18n fishingResult cue pin)
+
+### Phase 12c: The Mastery Curve
+- [ ] The four-state curve replaces the free floor (1 / 0.5 / 0.25 / 0; every recipe tier included; zero new Rng draws)
+- [ ] Enforced per-profession caps as content data (crafts + enchanting 125, mining/logging/herbalism 100, fishing 200) at all four clamp arms
+- [ ] Gathering gains node-tier-relative; fishing gains band-relative and fractional; constants named, exported, pinned
+- [ ] The one-time reset (two maps + one flag, nothing else): keep ledger pinned, re-crossing audit green, blob-diff rehearsal evidence recorded, notice letter delivered once
+- [ ] The shared action throttle covers crafting, disenchant, enchant-apply, salvage
+- [ ] Enchanting gains quality-tiered with the soft ceiling; q_prof_hobby_switch xpReward 0
+- [ ] Four-state difficulty colors and the cap-aware mastered state in the UI
+- [ ] Pin-cost appendix executed as briefed; goldens byte-identical outside the appendix pair
+
+### Phase 12d: Provenance and the harvest loop
+- [ ] Identical-payload material stacking in bags AND through the bank move path; counted instanced stacks ride trade, wire, and removal correctly
+- [ ] Gathered by copy, the bag-grid instanced marker, and the full-bag signed-downgrade notice
+- [ ] One interact press loots AND harvests; denial of either half never blocks the other; corpse lifecycle decoupled; town focus verified and fixed or made legible
+- [ ] Mail attachment expiry (30 days, one return cycle, system mail exempt)
+- [ ] Companion fixes landed and pinned: #2139 and the force-rename signer sweep
 
 ### Phase 13: Enchanting reachable
 - [ ] Disenchant + enchant-apply + salvage on IWorld, wire commands, bags context UI, both hosts
 - [ ] Enchanting skill visible in the wheel window
+- [ ] Typed disenchant reagents (hybrid): rare+ adds the type-keyed secondary; every typed material has a same-phase consumer (the wolf_fang rule); staves/wands in the WEAPON bucket per the resolved decision
+- [ ] Bind-on-trade primitive live against the typed rare+ reagents (generic enforcement arm for Phase 14b)
+- [ ] Inherited 12c pacing verified: the shared throttle and quality-tiered gains govern the newly reachable actions
 
 ### Phase 14: Attunement quests and nudges
 - [ ] Acceptance lore quests at the masters for all four wave-one archetypes
@@ -382,16 +563,60 @@ CLAUDE.md.
 - [ ] Trend nudges (chat first, Guild letter voice); attunement summary explains everything before commit
 - [ ] Work-order quests per master (cadence-capped) and one-shot-per-tier master mail
 - [ ] Title celebration on attunement
+- [ ] The crafting-window "learnable at a master" hint (shown exactly when unlearned trainer recipes exist, via the shared viewer predicates)
+
+### Phase 14b: Commissions and the Maker's Bond
+- [ ] Commission opt-in at craft; the marker rides the instance in both hosts
+- [ ] First trade stamps boundTo; onward trades refused beside the def-level soulbound gate, localized deny id
+- [ ] Master unbind service: resolved fee, replay-safe, signer and masterwork markers survive
+- [ ] The three flagged maintainer decisions implemented exactly as resolved in state.md
+- [ ] Mail/market face-to-face construction pinned against the new marker
 
 ### Phase 15: Deeds, tuning, and polish
-- [ ] Universal profession deeds incl. titles + marquee renown on first attunement and first masterwork, the Specialist deed, and the rare-find deeds (plus the rare fish, verified)
-- [ ] Economy tuning targets applied (#1301 fee/throttle, training fees, teach tiers, work orders, masterwork bounds); faucet-vs-sink review recorded
-- [ ] Guide/wiki professions page rewritten; asset manifest final
+- [ ] Universal profession deeds incl. titles + marquee renown on first attunement and first masterwork, the Specialist deed, and the rare-find deeds (plus the rare fish, verified to celebrate through the Phase 12b bite moment)
+- [ ] Mastery deed additions: fishing's first deed, prog_master_gatherer counts fishing, per-craft mastery deeds at the resolved caps with the approved titles; no 300 reference anywhere; reset re-crossings double-grant nothing
+- [ ] Economy tuning targets applied (#1301 fee/throttle live rows; the FINAL-marked rows verified byte-unchanged); faucet-vs-sink review recorded incl. the market fee, disenchant margin, and gland-to-pristine ratio rows
+- [ ] Legacy junk-recipe burn-down dispositioned, cross-checked against the typed-reagent consumers first
+- [ ] Profession SFX completion sweep over #2208: placeholders replaced or explicitly re-filed, station ambiences, per-craft success variants
+- [ ] The wiki at the RuneScape bar: per-skill pages, tables generated from sim content, exact numbers per the transparency policy, English-only keys with the guide-scoped M16 exemption; asset manifest final
 - [ ] Whole-feature qa-checklist.md matrix green; packet teardown offered
 
 ## Notes
 
 (append per-phase notes, deferrals, and surprises here as sessions complete)
+
+2026-07-20 timing and economy amendments: a second maintainer-approved
+amendment pass (community feedback on gathering feel and the crafted-goods
+economy) restructured the remaining packet to 12, 12b, 13, 14, 14b, 15.
+
+2026-07-20 mastery and provenance amendments (the SECOND same-day block;
+state.md carries the authority rulings): the close-out brainstorm with the
+maintainer settled pacing (the four-state curve, enforced caps 125/100/200,
+the one-time skill reset with the keep ledger), provenance and stacking
+(identical-payload merge, Gathered by, the unified loot-and-harvest
+interact, mail expiry), the market ruling (gold buys materials, never
+skill), the offline-taster ruling, and resolved EVERY standing flagged
+decision except the letter-to-Haldren dead-end (which still rides Phase
+14): the three 14b decisions, the staves/wands bucket, the work-order
+formula, q_prof_hobby_switch (0 XP), masterwork discovery credit (keep
+def), master voices, the titles scheme, the rare-event shared knob, the
+specialization finals, and the training-fee extension. Phases 12c (#2235)
+and 12d (#2236) were inserted after the 12b QA; community draft PR #2134
+is out of consideration by maintainer ruling. Community inputs recorded:
+the signed Ironbark Log confusion thread, the common-recipes-to-300
+question, and the loot-versus-harvest report (its gland-to-pristine ratio
+feeds the Phase 15 faucet review).
+state.md records the rulings under "2026-07-20 timing and economy
+amendments" (the authority block); the new phase files
+(phase-12b-gathering-rhythm.md, phase-14b-commissions-binding.md, both
+with QA twins) and the amended Phase 12/13/14/15 files (each swept with
+its QA twin in the same pass) carry the deliverable wording. Epic #1866
+gained sub-issues #2206 (12b), #2207 (14b, linking #1298), and #2208 (the
+profession SFX help-wanted list); #2051 and #2053 closed against their
+landing PRs in the same sweep. The Phase 12b file introduces the Pin-cost
+appendix pattern: the phase pre-briefs its complete deliberate re-pin and
+golden-regen list, inventoried against the release/v0.29.0 tree, so QA
+audits appendix fidelity instead of discovering the blast radius.
 
 2026-07-17 design-review amendments: a maintainer design review (the
 response to the external Codex review) amended the packet between Phases 2

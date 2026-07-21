@@ -121,6 +121,7 @@ const UI_PURE_CORES = [
   'src/ui/proc_overlay_view.ts',
   'src/ui/camera_prompt_core.ts',
   'src/ui/chat_ignore_core.ts',
+  'src/ui/daily_rewards_launcher_core.ts',
   'src/ui/char_bags_pairing_core.ts',
   'src/ui/equip_drop_core.ts',
   'src/ui/log_event_route.ts',
@@ -233,6 +234,7 @@ const UI_PURE_CORES = [
 // the same contract for the map editor's realtime terrain/water edits.
 const RENDER_PURE_CORES = [
   'src/render/cast_bar.ts',
+  'src/render/fishing_bobber_core.ts',
   'src/render/stations_core.ts',
   'src/render/delve_interactable_visibility_core.ts',
   'src/render/nameplate_view.ts',
