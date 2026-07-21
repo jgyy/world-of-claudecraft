@@ -9,7 +9,7 @@ import { describe, expect, it, vi } from 'vitest';
 // only waits on character-boot assets and retries whatever is still missing,
 // since loadGltf/loadTexture evict a failed URL from their cache on
 // rejection, making a fresh call a real re-fetch attempt.
-function mockGltfLoad(failFirstNCalls: number): void {
+function mockGltfLoad(failFirstNCalls: number): { calls: Map<string, number> } {
   const calls = new Map<string, number>();
   vi.doMock('../src/render/assets/loader', () => ({
     loadGltf: vi.fn((url: string) => {
@@ -22,15 +22,24 @@ function mockGltfLoad(failFirstNCalls: number): void {
     loadTexture: vi.fn(() => Promise.resolve({})),
     releaseGltf: vi.fn(),
   }));
+  return { calls };
 }
 
 describe('character preview boot (first-visit transient asset failure)', () => {
   it('retries a failed character GLB and eventually resolves', async () => {
     vi.resetModules();
-    mockGltfLoad(1); // every URL fails once, then succeeds
+    const { calls } = mockGltfLoad(1); // every URL fails once, then succeeds
     const { charactersReady } = await import('../src/render/characters/assets');
 
     await expect(charactersReady(3)).resolves.toBeUndefined();
+    // Decisive on the actual readiness check (gltfByUrl.has(assetUrl(u))): every
+    // URL must have been retried exactly twice (the initial failure plus the one
+    // retry that succeeds), never zero (which would mean the loop fell out
+    // without actually resolving anything) and never three (which would mean
+    // the early-return on an empty missing set regressed and kept re-fetching
+    // URLs that were already cached).
+    expect(calls.size).toBeGreaterThan(0);
+    for (const count of calls.values()) expect(count).toBe(2);
   });
 
   it('rejects once every attempt is exhausted, instead of hanging forever', async () => {
