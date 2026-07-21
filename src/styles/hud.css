@@ -175,7 +175,7 @@
     width: var(--nameplate-width, 80px);
     height: 8px;
     background: #1a1205;
-    border: 1px solid #000;
+    border: 1px solid var(--color-ink-1000);
     margin: 1px auto 0;
     border-radius: 2px;
     overflow: hidden;
@@ -320,7 +320,7 @@
     height: 7px;
     border-radius: 50%;
     background: #3a1010;
-    border: 1px solid #000;
+    border: 1px solid var(--color-ink-1000);
     box-sizing: border-box;
   }
   .np-combo-pip.lit {
@@ -667,7 +667,7 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    border: 1px solid #4a3d1d;
+    border: 1px solid var(--color-border-default);
     border-radius: 50%;
     background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
     color: var(--color-text-muted);
@@ -745,7 +745,7 @@
     height: 60px;
     border-radius: 50%;
     border: 3px solid var(--border);
-    outline: 1px solid #000;
+    outline: 1px solid var(--color-ink-1000);
     background: radial-gradient(circle at 35% 30%, #3a3a4e, #14141c);
     box-shadow:
       0 2px 8px #000c,
@@ -821,7 +821,7 @@
     padding: 5px 8px 5px 14px;
     background: var(--panel-bg);
     border: 2px solid var(--border);
-    outline: 1px solid #000;
+    outline: 1px solid var(--color-ink-1000);
     border-radius: 0 6px 6px 0;
     box-shadow: 0 2px 10px #000a;
   }
@@ -911,7 +911,7 @@
     position: relative;
     height: 15px;
     background: #1a1a1a;
-    border: 1px solid #000;
+    border: 1px solid var(--color-ink-1000);
     margin-top: 3px;
     border-radius: 2px;
     overflow: hidden;
@@ -921,11 +921,7 @@
     inset: 0;
     width: 100%;
     transform-origin: left;
-    background-image: linear-gradient(
-      rgba(255, 255, 255, 0.25),
-      rgba(255, 255, 255, 0.02) 45%,
-      rgba(0, 0, 0, 0.15)
-    );
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
   }
   .bar-text {
     position: absolute;
@@ -936,6 +932,7 @@
     color: #fff;
     text-shadow: 1px 1px 1px #000;
     font-weight: bold;
+    font-variant-numeric: tabular-nums;
   }
   .hp .bar-fill {
     background-color: var(--color-hp);
@@ -1220,7 +1217,7 @@
     height: 24px;
     display: none;
     border: 2px solid var(--border);
-    outline: 1px solid #000;
+    outline: 1px solid var(--color-ink-1000);
     border-radius: 4px;
     background: #100c08;
     overflow: hidden;
@@ -1228,11 +1225,11 @@
   #castbar .fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(#ffe48a, #c9941a 60%, #9a6f12);
-    box-shadow: inset 0 1px 0 #fff5;
+    background-color: var(--color-gold);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
   }
   #castbar.channel .fill {
-    background: linear-gradient(#8ad4ff, #1a74c9 60%, #125a9a);
+    background-color: var(--color-mana);
   }
   #castbar .label {
     position: absolute;
@@ -1263,7 +1260,7 @@
     margin-top: 4px;
     display: none;
     border: 2px solid var(--border);
-    outline: 1px solid #000;
+    outline: 1px solid var(--color-ink-1000);
     border-radius: 4px;
     background: #100606;
     overflow: hidden;
@@ -1271,11 +1268,14 @@
   #tf-castbar .fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(#ff9a8f, #c93024 60%, #73110d);
-    box-shadow: inset 0 1px 0 #fff5;
+    background-color: var(--color-hostile);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
   }
   #tf-castbar.channel .fill {
-    background: linear-gradient(#ff9a8f, #c93024 60%, #73110d);
+    /* Byte-identical to the base .fill above, preserving current behavior: the
+       target cast bar has no distinct channel-vs-cast visual today (DESIGN.md's
+       phase-4 disposition table scopes this to a chrome restyle only). */
+    background-color: var(--color-hostile);
   }
   #tf-castbar .label {
     position: absolute;
@@ -1307,7 +1307,7 @@
     height: 12px;
     display: none;
     border: 1px solid var(--border);
-    outline: 1px solid #000;
+    outline: 1px solid var(--color-ink-1000);
     border-radius: 3px;
     background: #0c0a07;
     overflow: hidden;
@@ -1316,7 +1316,7 @@
     height: 100%;
     width: 0%;
     background: linear-gradient(#ffcf7a, #d97b1e 60%, #8a4a10);
-    box-shadow: inset 0 1px 0 #fff4;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
     transition: width 60ms linear;
   }
   #swingbar.ready .fill {
@@ -1346,7 +1346,7 @@
     width: 612px;
     height: 10px;
     background: #14101e;
-    border: 1px solid #000;
+    border: 1px solid var(--color-ink-1000);
     outline: 1px solid #3a3148;
     margin: 0 auto 4px;
     position: relative;
@@ -1356,8 +1356,9 @@
   #xpbar .fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(#b85eff, #6a1bb0);
-    transition: background 0.3s;
+    background-color: var(--color-xp);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transition: background-color 0.3s;
   }
   /* Rested XP overlay (classic inn-rested bonus): a blue segment ahead of the fill. */
   #xpbar .rested {
@@ -1366,7 +1367,7 @@
     height: 100%;
     left: 0;
     width: 0%;
-    background: linear-gradient(#5fb0ff, #2b6fd0);
+    background-color: var(--color-xp-rested);
     opacity: 0.5;
   }
   #xpbar.rested {
@@ -1398,11 +1399,11 @@
   }
   /* Post-cap overflow bar (Max-Level XP Overflow): gold/prestige tint. */
   #xpbar.overflow {
-    outline-color: #b8902a;
+    outline-color: var(--color-gold-600);
     box-shadow: 0 0 6px #f5c84355;
   }
   #xpbar.overflow .fill {
-    background: linear-gradient(#ffe27a, #d99a1c);
+    background-color: var(--color-gold);
   }
   #actionbar-row {
     display: flex;
@@ -1433,8 +1434,8 @@
     display: flex;
     gap: 4px;
     padding: 4px;
-    border: 2px solid #000;
-    outline: 1px solid #5b4618;
+    border: 2px solid var(--color-ink-1000);
+    outline: 1px solid var(--color-gold-800);
     border-radius: 6px;
     background: linear-gradient(170deg, #15131fdd, #09080edd);
     box-shadow: 0 2px 8px #000c;
@@ -1443,7 +1444,7 @@
     width: 40px;
     height: 40px;
     padding: 0;
-    border: 2px solid #4a3d1d;
+    border: 2px solid var(--color-border-default);
     border-radius: 6px;
     background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
     color: #f3df9a;
@@ -1492,7 +1493,7 @@
   .pet-btn.disabled,
   .pet-btn.disabled:hover,
   .pet-btn.disabled.active {
-    border-color: #4a3d1d;
+    border-color: var(--color-border-default);
     box-shadow:
       inset 0 1px 0 #ffffff18,
       0 2px 4px #0009;
@@ -1528,7 +1529,7 @@
     height: 40px;
     padding: 0;
     position: relative;
-    border: 2px solid #4a3d1d;
+    border: 2px solid var(--color-border-default);
     border-radius: 6px;
     background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
     color: #f3df9a;
@@ -1598,7 +1599,7 @@
     width: 46px;
     height: 46px;
     position: relative;
-    border: 2px solid #4a3d1d;
+    border: 2px solid var(--color-border-default);
     border-radius: 6px;
     background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
     color: #fff;
@@ -1640,9 +1641,21 @@
     position: absolute;
     top: 1px;
     right: 3px;
+    min-width: 20px;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2px;
     font-size: 10px;
-    color: #ddd;
     font-family: var(--ui-font);
+    color: var(--color-text-light);
+    background: var(--color-ink-900);
+    border: 1px solid var(--color-gold-600);
+    border-radius: var(--radius-sm);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.6);
   }
   .action-btn .item-count {
     position: absolute;
@@ -1774,19 +1787,27 @@
     gap: 4px;
   }
   .micro-btn {
-    width: 34px;
-    height: 30px;
-    border: 2px solid #4a3d1d;
-    border-radius: 5px;
-    background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    outline: 1px solid var(--color-ink-1000);
+    border-radius: var(--radius-button);
+    background: linear-gradient(180deg, var(--color-ink-800) 0%, var(--color-ink-950) 100%);
     color: var(--color-text-muted);
     cursor: var(--cursor-point);
     font-size: 12px;
     font-weight: bold;
     box-shadow:
-      inset 0 1px 0 #ffffff18,
-      0 2px 4px #0009;
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent-glint) 14%, transparent),
+      0 2px 4px var(--color-ink-1000);
     position: relative;
+  }
+  .micro-btn.compact {
+    width: 34px;
+    height: 34px;
   }
   /* hover flyout: the button's background grows leftward to reveal its label.
      The panel tucks 6px under the button (z-index:-1) so it reads as one surface. */
@@ -1810,13 +1831,13 @@
     letter-spacing: 0.3px;
     line-height: 1;
     color: var(--color-text-muted);
-    background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
-    border: 2px solid #4a3d1d;
+    background: linear-gradient(180deg, var(--color-ink-800) 0%, var(--color-ink-950) 100%);
+    border: 1px solid var(--border);
     border-right: none;
-    border-radius: 5px 0 0 5px;
+    border-radius: var(--radius-button) 0 0 var(--radius-button);
     box-shadow:
-      inset 0 1px 0 #ffffff18,
-      0 2px 4px #0009;
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent-glint) 14%, transparent),
+      0 2px 4px var(--color-ink-1000);
     pointer-events: none;
     z-index: -1;
     transition:
@@ -1831,10 +1852,34 @@
     opacity: 1;
     padding: 0 18px 0 12px;
   }
-  .micro-btn:hover,
-  .micro-btn:hover::before {
-    border-color: var(--gold);
-    color: #fff;
+  .micro-btn:hover:not(:disabled),
+  .micro-btn:hover:not(:disabled)::before {
+    border-color: var(--color-accent-hover);
+    color: var(--color-text-light);
+  }
+  .micro-btn:hover:not(:disabled) {
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent-glint) 14%, transparent),
+      0 2px 4px var(--color-ink-1000),
+      0 0 8px var(--color-primary-glow);
+    transform: translateY(-1px);
+  }
+  .micro-btn:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 0 var(--color-gold-900);
+  }
+  .micro-btn.is-selected {
+    background: linear-gradient(180deg, var(--color-gold-800) 0%, var(--color-gold-900) 100%);
+    border-color: var(--color-accent);
+    color: var(--color-text-light);
+    box-shadow:
+      inset 0 2px 0 var(--color-accent-glint),
+      0 2px 4px var(--color-ink-1000);
+  }
+  .micro-btn:disabled {
+    filter: grayscale(1) brightness(0.7);
+    color: var(--color-text-faint);
+    cursor: default;
   }
   /* talent button glows while unspent talent points are available */
   .micro-btn.has-points,
@@ -1935,22 +1980,26 @@
   .chat-tab {
     /* keep each tab its natural width and let the strip scroll, never squish */
     flex: 0 0 auto;
-    height: 22px;
+    display: flex;
+    align-items: center;
+    height: 32px;
     padding: 0 12px;
-    border: 1px solid #3a321d;
-    border-bottom: none;
-    border-radius: 6px 6px 0 0;
-    background: linear-gradient(#1c1824, #0d0b13);
-    color: #95886a;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-radius: 0;
+    background: var(--color-bg-dark);
+    color: var(--color-text-muted);
     cursor: var(--cursor-point);
     font-family: var(--title-font);
     font-size: 12px;
-    text-shadow: 1px 1px 1px #000;
+    text-shadow: 1px 1px 1px var(--text-outline-color);
+  }
+  .chat-tab:hover {
+    color: var(--color-text-light);
   }
   .chat-tab.active {
-    color: var(--gold);
-    border-color: #6f5a2a;
-    background: linear-gradient(#2a2436, #161220);
+    color: var(--color-accent-hover);
+    border-bottom-color: var(--color-accent-hover);
   }
   /* "add channel" (+) tab: square, icon-only, slightly de-emphasised. Sticks to
      the right edge so it stays inline and reachable even when the tabs scroll. */
@@ -2025,7 +2074,7 @@
     bottom: calc(100% + 10px);
     width: 100%;
     aspect-ratio: 1000 / 590;
-    border: 2px solid #4a3d1d;
+    border: 2px solid var(--color-border-default);
     border-radius: 5px;
     background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
     box-shadow:
@@ -2232,7 +2281,7 @@
   #report-window textarea {
     width: 100%;
     background: #101018;
-    border: 1px solid #4a3d1d;
+    border: 1px solid var(--color-border-default);
     border-radius: 4px;
     color: var(--color-text-light);
     padding: 6px;
@@ -2261,7 +2310,7 @@
     gap: 2px;
     margin-bottom: 8px;
     background: #101018;
-    border: 1px solid #4a3d1d;
+    border: 1px solid var(--color-border-default);
     border-radius: 4px;
     padding: 8px;
   }
@@ -2290,7 +2339,7 @@
     height: 90px;
     resize: none;
     background: #101018;
-    border: 1px solid #4a3d1d;
+    border: 1px solid var(--color-border-default);
     border-radius: 4px;
     color: var(--color-text-light);
     padding: 6px;
@@ -2304,7 +2353,7 @@
     width: 100%;
     max-width: 100%;
     margin-top: 6px;
-    border: 1px solid #4a3d1d;
+    border: 1px solid var(--color-border-default);
     border-radius: 4px;
   }
 
@@ -2424,7 +2473,7 @@
     border-radius: 50%;
     background: var(--color-map-quest-badge-fill);
     color: var(--color-map-quest-badge-text);
-    border: 1px solid #000;
+    border: 1px solid var(--color-ink-1000);
     font-size: 11px;
     font-family: var(--ui-font);
     vertical-align: text-bottom;
@@ -2516,7 +2565,7 @@
   #deed-tracker .dt-bar {
     flex: 0 0 56px;
     height: 6px;
-    border: 1px solid #3a3325;
+    border: 1px solid var(--color-border-default);
     border-radius: 3px;
     background: #14110b;
     overflow: hidden;
@@ -2606,7 +2655,7 @@
   }
   .mt-tab {
     background: #1a1410;
-    border: 1px solid #463a1c;
+    border: 1px solid var(--color-border-default);
     border-radius: 3px;
     color: var(--color-text-muted);
     font-size: 11px;
@@ -2643,7 +2692,7 @@
     height: 17px;
     margin-bottom: 3px;
     background: #14100c;
-    border: 1px solid #000;
+    border: 1px solid var(--color-ink-1000);
     border-radius: 2px;
     overflow: hidden;
   }
@@ -2706,7 +2755,7 @@
   #minimap {
     border-radius: 50%;
     border: 4px solid var(--border);
-    outline: 1px solid #000;
+    outline: 1px solid var(--color-ink-1000);
     box-shadow:
       0 0 14px #000c,
       inset 0 0 20px #0008;
@@ -2736,7 +2785,7 @@
   }
   #minimap-clock:hover {
     color: #fff;
-    border-color: #c9a86a;
+    border-color: var(--color-border-focus);
   }
   #minimap-coords {
     margin-top: 4px;
@@ -2823,7 +2872,7 @@
     padding: 1px 4px;
     z-index: 2;
     background: radial-gradient(circle at 50% 30%, #2c2c3a, #15151f);
-    border: 1px solid #4a3d1d;
+    border: 1px solid var(--color-border-default);
     border-radius: 9px;
     box-shadow: 0 1px 3px #000a;
   }
@@ -2873,43 +2922,55 @@
     left: 10px;
     bottom: 10px;
     z-index: 3;
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     cursor: pointer;
     border-radius: 50%;
-    background: radial-gradient(circle at 50% 30%, #2c2c3a, #15151f);
-    border: 1px solid #4a3d1d;
-    box-shadow: 0 1px 3px #000a;
-    color: #8c8472;
+    border: 1px solid var(--border);
+    outline: 1px solid var(--color-ink-1000);
+    background: radial-gradient(circle at 50% 30%, var(--color-ink-800), var(--color-ink-950));
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent-glint) 14%, transparent),
+      0 1px 3px color-mix(in srgb, var(--color-ink-1000) 65%, transparent);
+    color: var(--color-text-muted);
     transition:
-      color 0.2s,
-      border-color 0.2s,
-      box-shadow 0.2s;
+      color var(--dur-fast),
+      border-color var(--dur-fast),
+      box-shadow var(--dur-fast);
   }
   #raid-lockout svg {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     display: block;
   }
-  #raid-lockout:hover,
-  #raid-lockout:focus-visible {
-    color: #d8c89a;
-    border-color: #c9a86a;
-    outline: none;
+  #raid-lockout:hover:not(:disabled) {
+    color: var(--color-text-light);
+    border-color: var(--color-accent-hover);
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent-glint) 14%, transparent),
+      0 1px 3px color-mix(in srgb, var(--color-ink-1000) 65%, transparent),
+      0 0 8px var(--color-primary-glow);
+    transform: translateY(-1px);
+  }
+  #raid-lockout:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 0 var(--color-gold-900);
   }
   #raid-lockout:focus-visible {
-    box-shadow: 0 0 0 2px var(--gold);
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
   }
   #raid-lockout.locked {
-    color: var(--gold);
-    border-color: #c9a86a;
+    color: var(--color-accent);
+    border-color: var(--color-accent-hover);
     box-shadow:
-      0 0 8px #c9a86a66,
-      0 1px 3px #000a;
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent-glint) 14%, transparent),
+      0 0 8px color-mix(in srgb, var(--color-accent-hover) 40%, transparent),
+      0 1px 3px color-mix(in srgb, var(--color-ink-1000) 65%, transparent);
   }
   #daily-rewards-button {
     position: relative;
@@ -3065,7 +3126,7 @@
     justify-content: center;
     color: var(--color-text-muted);
     text-decoration: none;
-    border: 2px solid #4a3d1d;
+    border: 2px solid var(--color-border-default);
     border-radius: 5px;
     background: radial-gradient(circle at 35% 30%, #2c2c3a, #15151f);
     box-shadow:
@@ -3134,18 +3195,19 @@
     display: none;
     z-index: 100;
     pointer-events: none;
-    max-width: 280px;
-    padding: 8px 10px;
+    background: var(--panel-fill-strong);
+    max-width: 320px;
+    padding: 10px;
     font-size: 12px;
     line-height: 1.5;
   }
   #tooltip .tt-title {
     font-family: var(--title-font);
     font-size: 13.5px;
-    color: #fff;
+    color: var(--color-accent-hover);
   }
   #tooltip .tt-sub {
-    color: var(--color-text-muted);
+    color: var(--color-text-faint);
     font-size: 11px;
   }
   /* World mob-hover tooltip (mob_tooltip_view.ts): a bit roomier than the default
@@ -3232,7 +3294,7 @@
     background-repeat: no-repeat;
   }
   #tooltip .tt-desc {
-    color: var(--color-accent);
+    color: var(--color-text-secondary);
     margin-top: 4px;
     font-size: 11.5px;
   }
@@ -3250,24 +3312,42 @@
   }
   /* stat-tooltip prose (what a stat does) + the "From your N {stat}:" breakdown head */
   #tooltip .tt-body {
-    color: var(--color-text-muted);
+    color: var(--color-text-secondary);
     font-size: 11.5px;
     margin-top: 3px;
   }
   #tooltip .tt-bd-head {
-    color: #c2a86a;
+    color: var(--color-text-faint);
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-top: 6px;
     padding-top: 5px;
-    border-top: 1px solid #3a3526;
+    border-top: none;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--color-accent-glint) 38%,
+      transparent
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    background-position: top;
   }
   /* item comparison block (hover an equippable item to see the worn one + deltas) */
   #tooltip .tt-cmp {
     margin-top: 6px;
     padding-top: 5px;
-    border-top: 1px solid #3a3526;
+    border-top: none;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--color-accent-glint) 38%,
+      transparent
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    background-position: top;
   }
   #tooltip .tt-cmp-head {
     color: #8a7f5e;
@@ -4413,7 +4493,7 @@
     background: #0d0d14ee;
     color: #e8e8e8;
     border: 2px solid var(--border);
-    outline: 1px solid #000;
+    outline: 1px solid var(--color-ink-1000);
     border-radius: 4px;
     padding: 7px 10px;
     font-size: 13px;
@@ -4480,7 +4560,7 @@
     min-height: var(--party-frame-height, 42px);
     padding: 0;
     overflow: hidden;
-    border: 1px solid #050505;
+    border: 1px solid var(--color-ink-1000);
     border-radius: 2px;
     background: #101010;
     box-shadow: inset 0 0 0 1px #ffffff14;
@@ -4812,7 +4892,7 @@
     color: var(--gold);
     font-size: 13px;
     padding: 3px 8px;
-    border-bottom: 1px solid #463a1c;
+    border-bottom: 1px solid var(--color-border-default);
     margin-bottom: 4px;
   }
   #ctx-menu .ctx-item {
@@ -4990,7 +5070,7 @@
     width: 82px;
     margin: 8px 8px 6px 0;
     padding: 5px 7px;
-    border: 1px solid #5d4a25;
+    border: 1px solid var(--color-border-default);
     border-radius: 3px;
     background: #08080d;
     color: #f4e6bd;
@@ -5027,7 +5107,7 @@
   }
   .trade-items {
     min-height: 120px;
-    border: 1px solid #463a1c;
+    border: 1px solid var(--color-border-default);
     border-radius: 4px;
     padding: 4px;
     background: #0c0c12;
@@ -5207,8 +5287,8 @@
     align-items: center;
     gap: 3px;
     padding: 3px 7px;
-    background: #12100acc;
-    border: 1px solid #cc9a3c88;
+    background: color-mix(in srgb, var(--color-ink-1000) 80%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-gold-600) 53%, transparent);
     border-radius: 12px;
     color: var(--gold);
     appearance: none;

@@ -30,6 +30,7 @@
     position: absolute;
     display: none;
     padding: var(--window-pad);
+    border-radius: var(--radius-window);
     z-index: 20;
     left: 50%;
     top: 10vh;
@@ -66,9 +67,10 @@
     top: calc(-1 * var(--window-pad));
     z-index: 6;
     margin: calc(-1 * var(--window-pad)) calc(-1 * var(--window-pad)) 8px;
-    padding: 11px 34px 7px var(--window-pad);
+    padding: 0 34px 0 var(--window-pad);
+    min-height: 44px;
     background: var(--panel-base);
-    border-radius: 4px 4px 0 0;
+    border-radius: calc(var(--radius-window) - 1px) calc(var(--radius-window) - 1px) 0 0;
     display: flex;
     align-items: center;
     justify-content: flex-start;

@@ -81,7 +81,7 @@
      controls are covered for free. Native <select> menus can't be themed
      cross-browser, so those are migrated to the .ui-dd custom dropdown. */
 
-  /* Range sliders, inset groove with gold fill + a raised gem thumb. */
+  /* Range sliders, inset groove with gold fill + an 18px ringed thumb. */
   input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
@@ -91,59 +91,65 @@
     cursor: var(--cursor-point);
   }
   input[type="range"]::-webkit-slider-runnable-track {
-    height: 6px;
-    border-radius: 3px;
+    height: 4px;
+    border-radius: 2px;
     border: 1px solid var(--scrollbar-border);
     /* gold fill up to --range-fill (set per-slider in JS), dark groove beneath */
     background:
-      linear-gradient(180deg, #ffef9e 0%, var(--gold) 100%) no-repeat,
-      linear-gradient(180deg, #15110a 0%, #0b0b10 100%);
+      linear-gradient(180deg, var(--color-accent-glint) 0%, var(--gold) 100%) no-repeat,
+      var(--panel-fill-strong);
     background-size:
       var(--range-fill, 0%) 100%,
       100% 100%;
-    box-shadow: inset 0 1px 2px #000a;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.67);
   }
   input[type="range"]::-moz-range-track {
-    height: 6px;
-    border-radius: 3px;
+    height: 4px;
+    border-radius: 2px;
     border: 1px solid var(--scrollbar-border);
-    background: linear-gradient(180deg, #15110a 0%, #0b0b10 100%);
-    box-shadow: inset 0 1px 2px #000a;
+    background: var(--panel-fill-strong);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.67);
   }
   input[type="range"]::-moz-range-progress {
-    height: 6px;
-    border-radius: 3px;
-    /* gold to match the webkit fill (was the brown scrollbar palette) */
-    background: linear-gradient(180deg, #ffef9e 0%, var(--gold) 100%);
+    height: 4px;
+    border-radius: 2px;
+    /* gold to match the webkit fill */
+    background: linear-gradient(180deg, var(--color-accent-glint) 0%, var(--gold) 100%);
   }
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 16px;
-    height: 16px;
-    margin-top: -6px; /* center the 16px thumb on the 6px track */
+    width: 18px;
+    height: 18px;
+    margin-top: -7px; /* center the 18px thumb on the 4px track */
     border-radius: 50%;
-    border: 1px solid #2a2008;
-    background: radial-gradient(circle at 35% 30%, #ffef9e 0%, var(--gold) 45%, #b8860b 100%);
+    border: 2px solid var(--gold);
+    background: var(--panel-fill-strong);
     box-shadow:
-      0 1px 3px #000b,
+      0 1px 3px rgba(0, 0, 0, 0.73),
       0 0 5px var(--color-primary-glow);
   }
   input[type="range"]::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    border: 1px solid #2a2008;
-    background: radial-gradient(circle at 35% 30%, #ffef9e 0%, var(--gold) 45%, #b8860b 100%);
+    border: 2px solid var(--gold);
+    background: var(--panel-fill-strong);
     box-shadow:
-      0 1px 3px #000b,
+      0 1px 3px rgba(0, 0, 0, 0.73),
       0 0 5px var(--color-primary-glow);
   }
   input[type="range"]:hover::-webkit-slider-thumb {
-    background: radial-gradient(circle at 35% 30%, #fff7c8 0%, #ffe14d 45%, #c79410 100%);
+    border-color: var(--color-accent-hover);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.73),
+      0 0 7px var(--color-primary-glow-heavy);
   }
   input[type="range"]:hover::-moz-range-thumb {
-    background: radial-gradient(circle at 35% 30%, #fff7c8 0%, #ffe14d 45%, #c79410 100%);
+    border-color: var(--color-accent-hover);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.73),
+      0 0 7px var(--color-primary-glow-heavy);
   }
   input[type="range"]:focus-visible {
     outline: none;
@@ -151,12 +157,12 @@
   input[type="range"]:focus-visible::-webkit-slider-thumb {
     box-shadow:
       0 0 0 3px var(--color-border-focus),
-      0 1px 3px #000b;
+      0 1px 3px rgba(0, 0, 0, 0.73);
   }
   input[type="range"]:focus-visible::-moz-range-thumb {
     box-shadow:
       0 0 0 3px var(--color-border-focus),
-      0 1px 3px #000b;
+      0 1px 3px rgba(0, 0, 0, 0.73);
   }
 
   /* Number inputs, drop the cramped native spinner arrows (all such inputs
@@ -173,16 +179,79 @@
     margin: 0;
   }
 
-  /* Checkboxes, gold accent + themed focus ring instead of OS blue. */
-  input[type="checkbox"],
-  input[type="radio"] {
-    accent-color: var(--gold);
+  /* Text-entry inputs, 38px on the strong panel fill with a bronze border and
+     themed focus ring. Component-local rules (.mail-field input[type="text"],
+     .cal-form input[type="text"], etc.) override this baseline where a tighter
+     fit is needed; native <select> stays out of scope here (migrated to the
+     .ui-dd custom dropdown per the comment above, cross-browser select theming
+     is not possible). */
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="search"],
+  input[type="number"],
+  input:not([type]) {
+    height: 38px;
+    padding: 0 10px;
+    background: var(--panel-fill-strong);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--color-text-light);
+    font-family: var(--ui-font);
+    cursor: text;
+  }
+  input[type="text"]:focus-visible,
+  input[type="password"]:focus-visible,
+  input[type="email"]:focus-visible,
+  input[type="search"]:focus-visible,
+  input[type="number"]:focus-visible,
+  input:not([type]):focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 1px;
+  }
+
+  /* Checkboxes, 18px custom box on the strong fill with a gold check mark. */
+  input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    display: inline-grid;
+    place-content: center;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--panel-fill-strong);
     cursor: var(--cursor-point);
+  }
+  input[type="checkbox"]::before {
+    content: "";
+    width: 10px;
+    height: 6px;
+    border-left: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    transform: rotate(-45deg) translate(1px, -1px) scale(0);
+    transition: transform var(--dur-fast) ease-out;
+  }
+  input[type="checkbox"]:checked {
+    border-color: var(--gold);
+  }
+  input[type="checkbox"]:checked::before {
+    transform: rotate(-45deg) translate(1px, -1px) scale(1);
+  }
+  input[type="checkbox"]:hover {
+    border-color: var(--color-accent-hover);
   }
   input[type="checkbox"]:focus-visible,
   input[type="radio"]:focus-visible {
     outline: 2px solid var(--color-border-focus);
     outline-offset: 2px;
+  }
+
+  /* Radio buttons keep the native shape; gold accent + themed focus ring. */
+  input[type="radio"] {
+    accent-color: var(--gold);
+    cursor: var(--cursor-point);
   }
 
   /* Textareas, keep vertical resize but swap the native diagonal grip for a
@@ -486,13 +555,13 @@
 
   .panel {
     background: var(--panel-bg);
-    border: 2px solid var(--border);
-    outline: 1px solid #000;
+    border: 1px solid var(--border);
+    outline: 1px solid var(--color-ink-1000);
     border-radius: 6px;
     box-shadow:
-      0 2px 16px #000c,
-      inset 0 0 24px #0006,
-      inset 0 1px 0 #ffffff14;
+      0 10px 28px rgba(0, 0, 0, 0.45),
+      inset 0 0 24px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 color-mix(in srgb, var(--color-accent-glint) 14%, transparent);
     color: var(--color-text-light);
   }
   .panel-title {
@@ -501,7 +570,16 @@
     font-size: 15px;
     letter-spacing: 0.5px;
     text-shadow: 1px 1px 2px #000;
-    border-bottom: 1px solid #463a1c;
+    border-bottom: none;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--color-accent-glint) 38%,
+      transparent
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    background-position: bottom;
     padding-bottom: 6px;
     margin-bottom: 8px;
     display: flex;
@@ -583,8 +661,8 @@
     vertical-align: middle;
   }
   .micro-btn .ui-icon {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     vertical-align: middle;
   }
   .pfm-crest {
