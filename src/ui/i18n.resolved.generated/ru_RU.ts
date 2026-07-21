@@ -2089,9 +2089,31 @@ export const ru_RU: EnTranslations = {
       "mining": "Горное дело",
       "logging": "Лесозаготовка",
       "herbalism": "Травничество",
+      "fishing": "Рыбная ловля",
       "notReady": "Этот ресурсный узел еще не восстановился для вас.",
       "gatherLine": "Вы добываете: {name}.",
-      "gatherLineQty": "Вы добываете: {name} x{qty}."
+      "gatherLineQty": "Вы добываете: {name} x{qty}.",
+      "catchLine": "Вы выуживаете: {name}",
+      "biteLine": "Что-то клюнуло!",
+      "gotAwayLine": "Добыча сорвалась.",
+      "nodeName": {
+        "ore": "Рудная жила",
+        "wood": "Древостой",
+        "herb": "Заросли трав"
+      },
+      "tierRequired": {
+        "mining": "Требуется шахтерская кирка {tier} уровня",
+        "logging": "Требуется лесорубный топор {tier} уровня",
+        "herbalism": "Требуется серп травника {tier} уровня"
+      },
+      "toolTierUnmet": {
+        "mining": "Чтобы разработать эту жилу, нужна шахтерская кирка {tier} уровня.",
+        "logging": "Чтобы срубить этот древостой, нужен лесорубный топор {tier} уровня.",
+        "herbalism": "Чтобы собрать эти заросли, нужен серп травника {tier} уровня."
+      },
+      "toolTierUnmetCorpse": "Чтобы добыть лучшие материалы, нужен инструмент сбора {tier} уровня.",
+      "stateReady": "Готово",
+      "stateCooldown": "Восстанавливается"
     },
     "archetypeTitle": {
       "label": "Титул",
@@ -5947,6 +5969,7 @@ export const ru_RU: EnTranslations = {
     },
     "cast": {
       "fishing": "Рыбная ловля",
+      "gathering": "Сбор ресурсов",
       "demonHeal": "Исцеление демона",
       "thunzharrStormcall": "Зов бури"
     }
@@ -8705,6 +8728,12 @@ export const ru_RU: EnTranslations = {
       },
       "verlans_oathblade": {
         "name": "Клинок клятвы Верлана"
+      },
+      "ironreel_fishing_rod": {
+        "name": "Удочка с железной катушкой"
+      },
+      "silverstream_fishing_rod": {
+        "name": "Удочка серебряного ручья"
       },
       "briny_idol": {
         "name": "Просоленный идол"

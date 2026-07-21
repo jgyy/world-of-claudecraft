@@ -2089,9 +2089,31 @@ export const nl_NL: EnTranslations = {
       "mining": "Mijnbouw",
       "logging": "Houtkap",
       "herbalism": "Kruidenkunde",
+      "fishing": "Fishing",
       "notReady": "Dit grondstoffenpunt is voor jou nog niet teruggekeerd.",
       "gatherLine": "Jij verzamelt: {name}.",
-      "gatherLineQty": "Je verzamelt: {name} x{qty}."
+      "gatherLineQty": "Je verzamelt: {name} x{qty}.",
+      "catchLine": "You reel in: {name}",
+      "biteLine": "Something takes the bait!",
+      "gotAwayLine": "It got away.",
+      "nodeName": {
+        "ore": "Ore Vein",
+        "wood": "Timber Stand",
+        "herb": "Herb Patch"
+      },
+      "tierRequired": {
+        "mining": "Requires a tier {tier} mining pick",
+        "logging": "Requires a tier {tier} logging axe",
+        "herbalism": "Requires a tier {tier} herbalism sickle"
+      },
+      "toolTierUnmet": {
+        "mining": "You need a tier {tier} mining pick to harvest this vein.",
+        "logging": "You need a tier {tier} logging axe to fell this stand.",
+        "herbalism": "You need a tier {tier} herbalism sickle to gather this patch."
+      },
+      "toolTierUnmetCorpse": "You need a tier {tier} gathering tool to recover the finest materials.",
+      "stateReady": "Ready",
+      "stateCooldown": "Respawning"
     },
     "archetypeTitle": {
       "label": "Titel",
@@ -5947,6 +5969,7 @@ export const nl_NL: EnTranslations = {
     },
     "cast": {
       "fishing": "Vissen",
+      "gathering": "Gathering",
       "demonHeal": "Demonengenezing",
       "thunzharrStormcall": "Stormroep"
     }
@@ -8705,6 +8728,12 @@ export const nl_NL: EnTranslations = {
       },
       "verlans_oathblade": {
         "name": "Verlans Eedkling"
+      },
+      "ironreel_fishing_rod": {
+        "name": "Hengel met ijzeren molen"
+      },
+      "silverstream_fishing_rod": {
+        "name": "Zilverbeek-hengel"
       },
       "briny_idol": {
         "name": "Zilt Afgodsbeeld"

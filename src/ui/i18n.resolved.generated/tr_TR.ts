@@ -2089,9 +2089,31 @@ export const tr_TR: EnTranslations = {
       "mining": "Madencilik",
       "logging": "Ağaç kesme",
       "herbalism": "Bitkicilik",
+      "fishing": "Fishing",
       "notReady": "Bu kaynak noktası senin için henüz yeniden oluşmadı.",
       "gatherLine": "Topladığınız şey: {name}.",
-      "gatherLineQty": "Şunu toplarsınız: {name} x{qty}."
+      "gatherLineQty": "Şunu toplarsınız: {name} x{qty}.",
+      "catchLine": "You reel in: {name}",
+      "biteLine": "Something takes the bait!",
+      "gotAwayLine": "It got away.",
+      "nodeName": {
+        "ore": "Ore Vein",
+        "wood": "Timber Stand",
+        "herb": "Herb Patch"
+      },
+      "tierRequired": {
+        "mining": "Requires a tier {tier} mining pick",
+        "logging": "Requires a tier {tier} logging axe",
+        "herbalism": "Requires a tier {tier} herbalism sickle"
+      },
+      "toolTierUnmet": {
+        "mining": "You need a tier {tier} mining pick to harvest this vein.",
+        "logging": "You need a tier {tier} logging axe to fell this stand.",
+        "herbalism": "You need a tier {tier} herbalism sickle to gather this patch."
+      },
+      "toolTierUnmetCorpse": "You need a tier {tier} gathering tool to recover the finest materials.",
+      "stateReady": "Ready",
+      "stateCooldown": "Respawning"
     },
     "archetypeTitle": {
       "label": "Unvan",
@@ -5947,6 +5969,7 @@ export const tr_TR: EnTranslations = {
     },
     "cast": {
       "fishing": "Balık Tutma",
+      "gathering": "Gathering",
       "demonHeal": "Şeytan İyileştirmesi",
       "thunzharrStormcall": "Fırtına Çağrısı"
     }
@@ -8705,6 +8728,12 @@ export const tr_TR: EnTranslations = {
       },
       "verlans_oathblade": {
         "name": "Verlan'ın Yemin Kılıcı"
+      },
+      "ironreel_fishing_rod": {
+        "name": "Demir makaralı olta"
+      },
+      "silverstream_fishing_rod": {
+        "name": "Gümüş dere oltası"
       },
       "briny_idol": {
         "name": "Tuzlu Put"
