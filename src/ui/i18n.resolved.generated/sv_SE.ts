@@ -705,6 +705,12 @@ export const sv_SE: EnTranslations = {
       "collapseHint": "Fäll ihop uppdragsspåraren",
       "expandHint": "Fäll ut uppdragsspåraren"
     },
+    "interfaceTabs": {
+      "general": "General",
+      "frames": "Frames",
+      "chat": "Chat",
+      "combat": "Combat"
+    },
     "chatTimestamps": {
       "show": "Visa chattidsstämplar",
       "format": "Tidsstämpelformat",
@@ -1684,7 +1690,8 @@ export const sv_SE: EnTranslations = {
     },
     "nameplate": {
       "mobLevel": "{level}",
-      "mobEliteLevel": "{level}+"
+      "mobEliteLevel": "{level}+",
+      "afkTag": "AFK"
     },
     "mobTooltip": {
       "levelFamily": "Nivå {level} {family}",
@@ -2082,7 +2089,11 @@ export const sv_SE: EnTranslations = {
       "blockSearchPlaceholder": "Spelarnamn",
       "blockAction": "Blockera",
       "nowBlocking": "{name} blockerad.",
-      "stopBlockingTitle": "Avblockera {name}"
+      "stopBlockingTitle": "Avblockera {name}",
+      "onlineHeader": "Online ({n})",
+      "offlineHeader": "Offline ({n})",
+      "hideOffline": "Hide offline",
+      "hideOfflineTitle": "Hide offline guild members"
     },
     "gathering": {
       "title": "Insamling",
@@ -5862,7 +5873,8 @@ export const sv_SE: EnTranslations = {
         "offline": "Frånkopplad",
         "combat": "I strid",
         "dungeon": "I fängelsehåla",
-        "dead": "Död"
+        "dead": "Död",
+        "afk": "Away"
       },
       "statusWithZone": "{status} - {zone}",
       "ranks": {

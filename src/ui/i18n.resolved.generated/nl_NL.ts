@@ -705,6 +705,12 @@ export const nl_NL: EnTranslations = {
       "collapseHint": "Queestevolger inklappen",
       "expandHint": "Queestevolger uitklappen"
     },
+    "interfaceTabs": {
+      "general": "General",
+      "frames": "Frames",
+      "chat": "Chat",
+      "combat": "Combat"
+    },
     "chatTimestamps": {
       "show": "Chat-tijdstempels tonen",
       "format": "Tijdstempelnotatie",
@@ -1684,7 +1690,8 @@ export const nl_NL: EnTranslations = {
     },
     "nameplate": {
       "mobLevel": "{level}",
-      "mobEliteLevel": "{level}+"
+      "mobEliteLevel": "{level}+",
+      "afkTag": "AFK"
     },
     "mobTooltip": {
       "levelFamily": "Niveau {level} {family}",
@@ -2082,7 +2089,11 @@ export const nl_NL: EnTranslations = {
       "blockSearchPlaceholder": "Spelersnaam",
       "blockAction": "Blokkeren",
       "nowBlocking": "{name} geblokkeerd.",
-      "stopBlockingTitle": "{name} deblokkeren"
+      "stopBlockingTitle": "{name} deblokkeren",
+      "onlineHeader": "Online ({n})",
+      "offlineHeader": "Offline ({n})",
+      "hideOffline": "Hide offline",
+      "hideOfflineTitle": "Hide offline guild members"
     },
     "gathering": {
       "title": "Verzamelen",
@@ -5862,7 +5873,8 @@ export const nl_NL: EnTranslations = {
         "offline": "Offline",
         "combat": "In gevecht",
         "dungeon": "In kerker",
-        "dead": "Dood"
+        "dead": "Dood",
+        "afk": "Away"
       },
       "statusWithZone": "{status} - {zone}",
       "ranks": {

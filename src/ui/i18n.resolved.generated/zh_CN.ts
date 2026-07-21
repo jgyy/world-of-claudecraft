@@ -705,6 +705,12 @@ export const zh_CN: EnTranslations = {
       "collapseHint": "收起任务追踪器",
       "expandHint": "展开任务追踪器"
     },
+    "interfaceTabs": {
+      "general": "通用",
+      "frames": "头像框",
+      "chat": "聊天",
+      "combat": "战斗"
+    },
     "chatTimestamps": {
       "show": "显示聊天时间戳",
       "format": "时间戳格式",
@@ -1684,7 +1690,8 @@ export const zh_CN: EnTranslations = {
     },
     "nameplate": {
       "mobLevel": "{level}",
-      "mobEliteLevel": "{level}+"
+      "mobEliteLevel": "{level}+",
+      "afkTag": "AFK"
     },
     "mobTooltip": {
       "levelFamily": "等级 {level} {family}",
@@ -2082,7 +2089,11 @@ export const zh_CN: EnTranslations = {
       "blockSearchPlaceholder": "玩家名称",
       "blockAction": "屏蔽",
       "nowBlocking": "已屏蔽 {name}。",
-      "stopBlockingTitle": "取消对 {name} 的屏蔽"
+      "stopBlockingTitle": "取消对 {name} 的屏蔽",
+      "onlineHeader": "在线 ({n})",
+      "offlineHeader": "离线 ({n})",
+      "hideOffline": "隐藏离线",
+      "hideOfflineTitle": "隐藏离线公会成员"
     },
     "gathering": {
       "title": "采集",
@@ -5862,7 +5873,8 @@ export const zh_CN: EnTranslations = {
         "offline": "离线",
         "combat": "战斗中",
         "dungeon": "地下城中",
-        "dead": "死亡"
+        "dead": "死亡",
+        "afk": "Away"
       },
       "statusWithZone": "{status} - {zone}",
       "ranks": {

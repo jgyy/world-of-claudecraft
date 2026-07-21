@@ -705,6 +705,12 @@ export const cs_CZ: EnTranslations = {
       "collapseHint": "Sbalit tracker úkolů",
       "expandHint": "Rozbalit tracker úkolů"
     },
+    "interfaceTabs": {
+      "general": "General",
+      "frames": "Frames",
+      "chat": "Chat",
+      "combat": "Combat"
+    },
     "chatTimestamps": {
       "show": "Zobrazit časové značky chatu",
       "format": "Formát časových značek",
@@ -1684,7 +1690,8 @@ export const cs_CZ: EnTranslations = {
     },
     "nameplate": {
       "mobLevel": "{level}",
-      "mobEliteLevel": "{level}+"
+      "mobEliteLevel": "{level}+",
+      "afkTag": "AFK"
     },
     "mobTooltip": {
       "levelFamily": "Úroveň {level} {family}",
@@ -2082,7 +2089,11 @@ export const cs_CZ: EnTranslations = {
       "blockSearchPlaceholder": "Jméno hráče",
       "blockAction": "Zablokovat",
       "nowBlocking": "{name} zablokován.",
-      "stopBlockingTitle": "Odblokovat hráče {name}"
+      "stopBlockingTitle": "Odblokovat hráče {name}",
+      "onlineHeader": "Online ({n})",
+      "offlineHeader": "Offline ({n})",
+      "hideOffline": "Hide offline",
+      "hideOfflineTitle": "Hide offline guild members"
     },
     "gathering": {
       "title": "Sběr",
@@ -5862,7 +5873,8 @@ export const cs_CZ: EnTranslations = {
         "offline": "Offline",
         "combat": "V boji",
         "dungeon": "V dungeonu",
-        "dead": "Mrtvý"
+        "dead": "Mrtvý",
+        "afk": "Away"
       },
       "statusWithZone": "{status} - {zone}",
       "ranks": {

@@ -490,6 +490,151 @@ export const TARGETS = [
     },
   },
   {
+    key: 'interface-options-tabs',
+    label: 'Interface options panel (four-tab split)',
+    when: ['ui/options_window', 'ui/options_view'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    async capture(page) {
+      await page.evaluate(() => {
+        const hud = window.__game?.hud;
+        if (!hud) return;
+        // Land on a fresh main menu, then route to the Interface sub-panel. The
+        // main menu lists Key Bindings, Controller, Graphics, Interface, Audio,
+        // Performance, [Report a Bug (online only)], Log Out, Return; offline has
+        // no bug-report row, so Interface is the fourth button.
+        const win = document.querySelector('#options-menu');
+        if (win && getComputedStyle(win).display !== 'none') hud.toggleOptionsMenu();
+        hud.toggleOptionsMenu();
+        const buttons = Array.from(document.querySelectorAll('#options-menu .opt-btn'));
+        buttons[3]?.click();
+      });
+      const open = await pollForSize(page, '#options-menu .set-rows');
+      return open ? { clip: '#options-menu' } : {};
+    },
+  },
+  {
+    key: 'guild-roster',
+    label: 'Social window: Guild tab roster grouped by online status',
+    // Match the SOURCE files (the `.ts` suffix keeps `ui/social_view` from also
+    // matching `src/ui/social_view.test.ts`, which classifyDiff treats as non-visual).
+    when: ['ui/social_window.ts', 'ui/social_view.ts', 'ui/guild_hide_offline.ts'],
+    // Social is an online-only feature, so the offline Sim reports socialInfo=null.
+    // Inject a guild fixture through the debug hook (the sanctioned offline-staging
+    // fallback), open the social window, and switch to the Guild tab. The
+    // `desktop-hidden` variant also engages the hide-offline toggle.
+    variants: [
+      { key: 'desktop', charName: 'Rueweaver', charClass: 'paladin' },
+      { key: 'desktop-hidden', charName: 'Rueweaver', charClass: 'paladin', hide: true },
+      { key: 'mobile', charName: 'Rueweaver', charClass: 'paladin', mobile: true },
+    ],
+    async capture(page, variant) {
+      const staged = await page.evaluate(() => {
+        const sim = window.__game?.sim;
+        if (!sim || !sim.player) return { ok: false, reason: 'offline world is unavailable' };
+        const me = sim.player.name;
+        const m = (over) => ({
+          id: over.id,
+          name: over.name,
+          cls: over.cls,
+          level: over.level,
+          realm: 'Aurora',
+          online: over.online,
+          status: over.status,
+          zone: over.zone,
+          rank: over.rank ?? 'member',
+          lastLogin: over.lastLogin ?? null,
+          activeTitle: over.activeTitle ?? null,
+        });
+        // A leaf assignment: socialInfo is typed `null` on the offline Sim, but at
+        // runtime it is a plain field the HUD reads through IWorld.
+        sim.socialInfo = {
+          friends: [],
+          blocks: [],
+          ignores: [],
+          guild: {
+            id: 1,
+            name: 'Emberwatch Vanguard',
+            rank: 'leader',
+            members: [
+              m({
+                id: 1,
+                name: me,
+                cls: 'paladin',
+                level: 60,
+                online: true,
+                status: 'online',
+                zone: 'zone:stormwind',
+                rank: 'leader',
+              }),
+              m({
+                id: 2,
+                name: 'Seraphine',
+                cls: 'priest',
+                level: 58,
+                online: true,
+                status: 'dungeon',
+                zone: 'zone:deadmines',
+                rank: 'officer',
+              }),
+              m({
+                id: 3,
+                name: 'Gorehowl',
+                cls: 'warrior',
+                level: 55,
+                online: true,
+                status: 'combat',
+                zone: 'zone:elwynn',
+                rank: 'member',
+              }),
+              m({
+                id: 4,
+                name: 'Lyria',
+                cls: 'mage',
+                level: 44,
+                online: false,
+                rank: 'member',
+                lastLogin: '2026-07-18T20:15:00.000Z',
+              }),
+              m({
+                id: 5,
+                name: 'Thornbeard',
+                cls: 'hunter',
+                level: 39,
+                online: false,
+                rank: 'member',
+                lastLogin: '2026-07-10T11:00:00.000Z',
+              }),
+              m({
+                id: 6,
+                name: 'Wisp',
+                cls: 'druid',
+                level: 22,
+                online: false,
+                rank: 'member',
+                lastLogin: null,
+              }),
+            ],
+          },
+        };
+        const el = document.querySelector('#social-window');
+        if (el) el.classList.remove('open');
+        window.__game?.hud?.toggleSocial?.();
+        return { ok: true };
+      });
+      if (!staged.ok) throw new Error(staged.reason);
+      const open = await pollForSize(page, '#social-window');
+      if (!open) return {};
+      // Switch to the Guild tab (the strip fires on data-tab), then optionally engage
+      // the hide-offline toggle for the hidden variant.
+      await page.evaluate((hide) => {
+        document.querySelector('.soc-tab[data-tab="guild"]')?.click();
+        if (hide) document.querySelector('[data-act="toggle-hide-offline"]')?.click();
+      }, variant?.hide === true);
+      await wait(400);
+      return { clip: '#social-window' };
+    },
+  },
+  {
     key: 'chat-general-tab',
     label: 'Chat window: General/Chat tab',
     when: ['log_event_route'],
@@ -869,7 +1014,10 @@ export const TARGETS = [
             version: 1,
             synced: true,
             craftSkills: {
-              weaponcrafting: 132,
+              // Post-12c-legal staging (Phase 12c QA): 125 is the enforced
+              // craft cap, staging the mastered state honestly; a live
+              // character can never exceed it, so the stub must not either.
+              weaponcrafting: 125,
               armorcrafting: 87,
               tailoring: 23,
               leatherworking: 0,
@@ -893,11 +1041,14 @@ export const TARGETS = [
             configurable: true,
           });
           const gathering = {
+            // Post-12c-legal staging (Phase 12c QA): the enforced caps are
+            // 100/100/100/200 (content/professions.ts maxSkill) and skills
+            // can never exceed them; herbalism stages a mastered row at cap.
             skills: [
-              { professionId: 'mining', skill: 112, maxSkill: 300 },
-              { professionId: 'logging', skill: 45, maxSkill: 300 },
-              { professionId: 'herbalism', skill: 203, maxSkill: 300 },
-              { professionId: 'fishing', skill: 68, maxSkill: 300 },
+              { professionId: 'mining', skill: 88, maxSkill: 100 },
+              { professionId: 'logging', skill: 45, maxSkill: 100 },
+              { professionId: 'herbalism', skill: 100, maxSkill: 100 },
+              { professionId: 'fishing', skill: 68, maxSkill: 200 },
             ],
           };
           const stateIsFn = typeof game.world.professionsState === 'function';
@@ -1261,6 +1412,41 @@ export const TARGETS = [
         throw new Error(`offhand equip failed: ${JSON.stringify(equipped)}`);
       }
       return {};
+    },
+  },
+  {
+    key: 'perf-overlay-ornament',
+    label: 'Performance Overlay window: gilded ornament pilot',
+    when: ['ui/perf_ornament_svg'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    async capture(page) {
+      // The first-spawn "Choose Your Camera" prompt can still be up (or
+      // reappear) at this point even after enterOfflineGame's own dismissal
+      // pass; confirm it before touching the options menu, or it sits on top
+      // of (and dims) the window this target is trying to shoot.
+      await page.evaluate(() => document.querySelector('.camera-prompt-confirm')?.click());
+      await wait(300);
+      // The whole point of this target is the gilded ornament, which sheds
+      // itself at the low effect tier by design (see tokens.css); this
+      // sandbox auto-detects low under software rendering, so force the
+      // attribute the drop rule actually reads rather than skip the shot.
+      await page.evaluate(() => document.documentElement.setAttribute('data-fx-level', 'ultra'));
+      await page.evaluate(() => {
+        const el = document.querySelector('#options-menu');
+        if (el) el.style.display = 'none';
+        window.__game?.hud?.toggleOptionsMenu?.();
+      });
+      const open = await pollForSize(page, '#options-menu');
+      if (!open) return {};
+      await page.evaluate(() => {
+        const btns = [
+          ...document.querySelectorAll('#options-menu button, #options-menu .opt-tile'),
+        ];
+        const perfBtn = btns.find((b) => /performance overlay/i.test(b.textContent || ''));
+        perfBtn?.click();
+      });
+      const wide = await pollForSize(page, '#options-menu.perf-wide');
+      return wide ? { clip: '#options-menu' } : {};
     },
   },
   {

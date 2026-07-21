@@ -705,6 +705,12 @@ export const es_ES: EnTranslations = {
       "collapseHint": "Contraer el seguimiento de misiones",
       "expandHint": "Expandir el seguimiento de misiones"
     },
+    "interfaceTabs": {
+      "general": "General",
+      "frames": "Frames",
+      "chat": "Chat",
+      "combat": "Combat"
+    },
     "chatTimestamps": {
       "show": "Mostrar hora en el chat",
       "format": "Formato de hora",
@@ -1684,7 +1690,8 @@ export const es_ES: EnTranslations = {
     },
     "nameplate": {
       "mobLevel": "{level}",
-      "mobEliteLevel": "{level}+"
+      "mobEliteLevel": "{level}+",
+      "afkTag": "AFK"
     },
     "mobTooltip": {
       "levelFamily": "Nivel {level} {family}",
@@ -2082,7 +2089,11 @@ export const es_ES: EnTranslations = {
       "blockSearchPlaceholder": "Nombre del jugador",
       "blockAction": "Bloquear",
       "nowBlocking": "{name} bloqueado.",
-      "stopBlockingTitle": "Dejar de bloquear a {name}"
+      "stopBlockingTitle": "Dejar de bloquear a {name}",
+      "onlineHeader": "Online ({n})",
+      "offlineHeader": "Offline ({n})",
+      "hideOffline": "Hide offline",
+      "hideOfflineTitle": "Hide offline guild members"
     },
     "gathering": {
       "title": "Recolección",
@@ -5862,7 +5873,8 @@ export const es_ES: EnTranslations = {
         "offline": "Desconectado",
         "combat": "En combate",
         "dungeon": "En mazmorra",
-        "dead": "Muerto"
+        "dead": "Muerto",
+        "afk": "Away"
       },
       "statusWithZone": "{status} - {zone}",
       "ranks": {

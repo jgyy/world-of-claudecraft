@@ -705,6 +705,12 @@ export const ko_KR: EnTranslations = {
       "collapseHint": "퀘스트 추적기 접기",
       "expandHint": "퀘스트 추적기 펼치기"
     },
+    "interfaceTabs": {
+      "general": "일반",
+      "frames": "프레임",
+      "chat": "채팅",
+      "combat": "전투"
+    },
     "chatTimestamps": {
       "show": "채팅 시각 표시",
       "format": "시각 표시 형식",
@@ -1684,7 +1690,8 @@ export const ko_KR: EnTranslations = {
     },
     "nameplate": {
       "mobLevel": "{level}",
-      "mobEliteLevel": "{level}+"
+      "mobEliteLevel": "{level}+",
+      "afkTag": "AFK"
     },
     "mobTooltip": {
       "levelFamily": "{level}레벨 {family}",
@@ -2082,7 +2089,11 @@ export const ko_KR: EnTranslations = {
       "blockSearchPlaceholder": "플레이어 이름",
       "blockAction": "차단",
       "nowBlocking": "{name} 님을 차단했습니다.",
-      "stopBlockingTitle": "{name} 님 차단 해제"
+      "stopBlockingTitle": "{name} 님 차단 해제",
+      "onlineHeader": "온라인 ({n})",
+      "offlineHeader": "오프라인 ({n})",
+      "hideOffline": "오프라인 숨기기",
+      "hideOfflineTitle": "오프라인 길드원 숨기기"
     },
     "gathering": {
       "title": "채집",
@@ -5862,7 +5873,8 @@ export const ko_KR: EnTranslations = {
         "offline": "오프라인",
         "combat": "전투 중",
         "dungeon": "던전 안",
-        "dead": "죽음"
+        "dead": "죽음",
+        "afk": "Away"
       },
       "statusWithZone": "{status} - {zone}",
       "ranks": {

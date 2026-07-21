@@ -705,6 +705,12 @@ export const id_ID: EnTranslations = {
       "collapseHint": "Ciutkan pelacak misi",
       "expandHint": "Bentangkan pelacak misi"
     },
+    "interfaceTabs": {
+      "general": "General",
+      "frames": "Frames",
+      "chat": "Chat",
+      "combat": "Combat"
+    },
     "chatTimestamps": {
       "show": "Tampilkan Cap Waktu Obrolan",
       "format": "Format Cap Waktu",
@@ -1684,7 +1690,8 @@ export const id_ID: EnTranslations = {
     },
     "nameplate": {
       "mobLevel": "{level}",
-      "mobEliteLevel": "{level}+"
+      "mobEliteLevel": "{level}+",
+      "afkTag": "AFK"
     },
     "mobTooltip": {
       "levelFamily": "{family} Level {level}",
@@ -2082,7 +2089,11 @@ export const id_ID: EnTranslations = {
       "blockSearchPlaceholder": "Nama pemain",
       "blockAction": "Blokir",
       "nowBlocking": "{name} diblokir.",
-      "stopBlockingTitle": "Buka blokir {name}"
+      "stopBlockingTitle": "Buka blokir {name}",
+      "onlineHeader": "Online ({n})",
+      "offlineHeader": "Offline ({n})",
+      "hideOffline": "Hide offline",
+      "hideOfflineTitle": "Hide offline guild members"
     },
     "gathering": {
       "title": "Pengumpulan",
@@ -5862,7 +5873,8 @@ export const id_ID: EnTranslations = {
         "offline": "Luring",
         "combat": "Dalam Pertempuran",
         "dungeon": "Dalam Dungeon",
-        "dead": "Tewas"
+        "dead": "Tewas",
+        "afk": "Away"
       },
       "statusWithZone": "{status} - {zone}",
       "ranks": {

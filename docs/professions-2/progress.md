@@ -33,8 +33,8 @@ Update this file at the end of every implementation and QA session. Statuses:
 | 12 QA | Verify tool tier gating | complete (PR #2223 merged) | 2026-07-20 | 2026-07-20 |
 | 12b | Gathering rhythm | complete (PR #2226 merged into release/v0.29.0) | 2026-07-20 | 2026-07-20 |
 | 12b QA | Verify gathering rhythm | complete (PASS, zero blocking) | 2026-07-20 | 2026-07-20 |
-| 12c | The Mastery Curve | built (PR #2242 open) | 2026-07-20 | 2026-07-20 |
-| 12c QA | Verify The Mastery Curve | not started | | |
+| 12c | The Mastery Curve | complete (PR #2242 merged into release/v0.29.0) | 2026-07-20 | 2026-07-20 |
+| 12c QA | Verify The Mastery Curve | complete (PASS, zero blocking) | 2026-07-20 | 2026-07-20 |
 | 12d | Provenance and the harvest loop | not started | | |
 | 12d QA | Verify provenance and the harvest loop | not started | | |
 | 13 | Enchanting reachable | not started | | |
@@ -1103,9 +1103,16 @@ READY, zero blocking).
   seeds plus a stabilization round trip so deed retro grants never pollute
   the diff): 7 passed, per-blob assertion that the ONLY deltas are the two
   zeroed maps (plus the legacy professions dual-write mirror), the flag
-  true, and the documented cap clamps on over-cap rows. The PRODUCTION-COPY
-  run is the maintainer's pre-deploy step: export characters as JSON rows
-  [{id, state, playerClass?}] and run RESET_REHEARSAL_INPUT=<path>
+  true, and the documented cap clamps on over-cap rows. The 12c QA added the
+  completeness arm: a flag-absent row must also show every craft and
+  gathering leaf (legacy professions mirror included) at exactly 0 in the
+  output, so a PARTIAL reset fails loudly instead of tallying as applied,
+  in the synthetic corpus and the production-copy run alike. The
+  PRODUCTION-COPY run is the maintainer's pre-deploy step: export characters
+  as JSON rows [{id, state, playerClass}] (include playerClass so each row
+  rehearses under its true class; omitting it defaults the row to warrior,
+  which the diff discipline tolerates but does not prefer) and run
+  RESET_REHEARSAL_INPUT=<path>
   npx vitest run tests/mastery_reset_rehearsal.test.ts. The deploy does not
   ship without that run.
 - BATTLEFIELD TRICKLE SHARE (for the Phase 15 review): BATTLEFIELD_XP_TRICKLE
@@ -1135,3 +1142,61 @@ READY, zero blocking).
   (Phase 15 balance review). Phase 13 heads-up: the shared throttle gates
   disenchant/salvage BEFORE their rng draw (unwired today; the wiring QA
   should remember the budget couples them to crafting's window).
+
+Phase 12c QA (2026-07-20): PASS, zero blocking. QA phase-start 61959116c (the
+PR #2242 merge, the release/v0.29.0 tip); QA diff 67ae62629..75e261deb
+first-parent audited off that merge. Validation matrix green at the untouched
+tip (tsc + 1755 tests); eleven mutations all decisive (free-floor restore,
+each of the four cap clamp arms, partial reset, serialize-flag strip, letter
+flip-before-send, salvage recordAction removal, fishing junk-cutoff removal,
+enchanting soft-ceiling-to-hard-zero). Fan-out: 12-agent Workflow (3 packet
+audits + 5 dispatch-matrix reviewers + refute-and-impact skeptics +
+qa-checklist last); four agents died on mid-run API connection errors and
+were re-dispatched via the Agent tool, 4 of 4 delivered (the standing
+big-diff recovery recipe); skeptics dissolved 2 of 3 SHOULD-FIX findings
+(sanctioned appendix addendum rows), the third survived at nit impact.
+- REAL FINDING, fixed test-first: the blob-diff rehearsal verified only the
+  allowlist direction, so a PARTIAL reset (one map left unzeroed) passed the
+  synthetic corpus AND would have passed the env-gated production-copy run
+  while tallying the row as applied. The completeness arm now requires every
+  craft/gathering leaf (legacy mirror included) at exactly 0 on flag-absent
+  rows; mutation-proven (a partial reset reds three corpus rows).
+- Coverage closures: tests/mastery_reset_online.test.ts (NEW, live
+  GameServer): join-time reset on the authoritative host, the notice booked
+  exactly once through the server tick, the persisted blob carrying the flag
+  and a zeroed legacy mirror, restart-plus-relog never re-firing. Re-crossing
+  positive control (a never-earned prog_mining_100 granted FRESH on the
+  climb, proving the deed sweep runs in the no-duplicate pins' exact idiom).
+  GOLD_ACCENT_COLOR lockstep pin (tokens.css --gold, the TS twin, and the
+  literal #ffd100 agree).
+- Shot-stub sweep: scripts/pr_shot_targets.mjs staged post-curve-impossible
+  values (weaponcrafting 132 over the 125 cap, gathering rows at maxSkill 300
+  with herbalism 203); the LIVE IWorld path was verified correct
+  (gatheringSkillsView reads the content caps), so this was a committed-
+  screenshot fidelity defect only; the stubs now stage post-12c-legal values
+  (125 mastered, 88/45/100/68 over 100/100/100/200) and the six after-shots
+  were recaptured.
+- Played beats (real Sim + the CDP capture): pre-curve blob reset with the
+  letter exactly once; a real curve climb 0 to 75 through all four states at
+  the exact boundaries (25 full + 50 reduced + 100 minimal crafts, then
+  gray); the honest throttle window (10 fill, the 11th throttled, cross-kind
+  deny, a 1201-tick restore); a real reduced-arm 0.5 gain crossing to exactly
+  125 at the Eastbrook forge and a masterwork proc at cap (with the
+  dormant-never-procs ceiling gate confirmed empirically along the way); the
+  enchanting quality ladder at skill 75 (common gray, uncommon 0.25, epic 0.5
+  under the soft ceiling); the four-state window and the mastered state
+  verified in the live client.
+- New recorded caveat (display-only): raw-blob readers (character sheet,
+  armory, character select) show STALE pre-reset skills for a pre-curve
+  character until that character's next login; no live entity is built from
+  those reads, and the display self-heals at login (the authored-letter
+  non-atomic class's display sibling).
+- Load-bearing ordering note: normalizeArchetypeState is the single
+  load-time reader of PRE-reset skill values (identity derivation only, by
+  design); any future archetype-POWER change must key off the live
+  post-reset skill number, never the derived attunement alone.
+- Declined with reasons: a same-tick multi-grant band-straddle pin (reachable
+  only via repeated /dev gather on one profession; queue semantics and the
+  drain clamp are already pinned); a 49.99 fishing boundary pin (the 49/50
+  pair already pins strict-less semantics). Comment-only free-floor drift
+  fixed in place (crafting.ts CRAFT_SKILL_GAIN, wheel.ts tier-0 wording).

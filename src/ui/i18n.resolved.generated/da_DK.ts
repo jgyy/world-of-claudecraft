@@ -705,6 +705,12 @@ export const da_DK: EnTranslations = {
       "collapseHint": "Fold opgavesporing sammen",
       "expandHint": "Fold opgavesporing ud"
     },
+    "interfaceTabs": {
+      "general": "General",
+      "frames": "Frames",
+      "chat": "Chat",
+      "combat": "Combat"
+    },
     "chatTimestamps": {
       "show": "Vis chat-tidsstempler",
       "format": "Tidsstempelformat",
@@ -1684,7 +1690,8 @@ export const da_DK: EnTranslations = {
     },
     "nameplate": {
       "mobLevel": "{level}",
-      "mobEliteLevel": "{level}+"
+      "mobEliteLevel": "{level}+",
+      "afkTag": "AFK"
     },
     "mobTooltip": {
       "levelFamily": "Niveau {level} {family}",
@@ -2082,7 +2089,11 @@ export const da_DK: EnTranslations = {
       "blockSearchPlaceholder": "Spillernavn",
       "blockAction": "Blokér",
       "nowBlocking": "{name} blokeret.",
-      "stopBlockingTitle": "Fjern blokering af {name}"
+      "stopBlockingTitle": "Fjern blokering af {name}",
+      "onlineHeader": "Online ({n})",
+      "offlineHeader": "Offline ({n})",
+      "hideOffline": "Hide offline",
+      "hideOfflineTitle": "Hide offline guild members"
     },
     "gathering": {
       "title": "Indsamling",
@@ -5862,7 +5873,8 @@ export const da_DK: EnTranslations = {
         "offline": "Offline",
         "combat": "I kamp",
         "dungeon": "I fangekælder",
-        "dead": "Død"
+        "dead": "Død",
+        "afk": "Away"
       },
       "statusWithZone": "{status} - {zone}",
       "ranks": {

@@ -1301,7 +1301,23 @@ tables, i18n key namespaces, files created)
   common), deeds_sites (74 to 74.75 staging), deeds + deeds_reconcile
   (curve-era masteryResetApplied fixtures; the pre-curve arm pinned in
   professions_mastery_reset).
-- Phase 12d: (planned) the identical-payload merge rule in bags/bank/
+  - Phase 12c QA drift notes (2026-07-20): the rehearsal gained the
+    completeness arm (a partial reset now fails, production-copy mode
+    included) and a live GameServer online suite
+    (mastery_reset_online.test.ts). Two standing constraints for later
+    phases: (1) normalizeArchetypeState is the SINGLE load-time reader of
+    PRE-reset skill values (identity derivation only, by design, ordering
+    load-bearing); any future archetype-POWER surface must key off the live
+    post-reset skill number, never the derived attunement alone. (2) The
+    disenchant/salvage/enchant-apply commands are un-surfaced on every host
+    today (no SimEvent, not on IWorld, no server dispatch, no UI); when
+    Phase 13 wires them, EACH needs a personal SimEvent plus a sim/server
+    i18n matcher entry mirroring craftItem's craftResult path, and their new
+    'throttled' deny reason (the shared budget) surfaces then, including the
+    message-attribution question of a craft denial caused by silent
+    disenchant/salvage spend. Raw-blob readers (character sheet, armory,
+    character select) show stale pre-reset skills for a pre-curve character
+    until next login (display-only, self-heals; recorded in progress.md).
   addItemInstance, the Gathered by key + bag-grid instanced marker + the
   signed-downgrade notice event, the unified loot-and-harvest interact
   flow with the decoupled corpse lifecycle and verified town focus, mail
