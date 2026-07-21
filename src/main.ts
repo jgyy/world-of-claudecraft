@@ -5510,8 +5510,10 @@ async function changeLanguage(
 
 async function loadProjectStats(): Promise<void> {
   // Realm status now lives in the realm dropdown, both in the trigger sub-line
-  // and inside the Online option, so update every instance by class.
-  const accountEls = document.querySelectorAll<HTMLElement>('.js-stat-accounts');
+  // and inside the Online option, so update every instance by class. This shows
+  // players_online (a live headcount), never accounts_created (a lifetime total
+  // that reads as a live player count next to the green "Online" dot but isn't one).
+  const accountEls = document.querySelectorAll<HTMLElement>('.js-stat-players-online');
   if (!accountEls.length) return;
   const setAll = (els: NodeListOf<HTMLElement>, text: string): void => {
     els.forEach((el) => {
@@ -5537,7 +5539,7 @@ async function loadProjectStats(): Promise<void> {
 
   // If cache exists and is fresh (within TTL), use it and skip API request
   if (cached && Date.now() - cached.timestamp < STATS_CACHE_TTL_MS) {
-    setAll(accountEls, String(cached.accounts_created));
+    setAll(accountEls, String(cached.players_online));
     return;
   }
 
@@ -5545,7 +5547,7 @@ async function loadProjectStats(): Promise<void> {
   try {
     const data = await api.projectStats();
 
-    setAll(accountEls, String(data.accounts_created));
+    setAll(accountEls, String(data.players_online));
 
     // Save to cache with timestamp
     if (typeof localStorage !== 'undefined') {
