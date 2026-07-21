@@ -1450,10 +1450,9 @@ export async function getAccountsCount(): Promise<number> {
 }
 
 export async function getCharactersCount(realm: string): Promise<number> {
-  const res = await pool.query(
-    'SELECT COUNT(*)::int AS count FROM characters WHERE realm = $1',
-    [realm],
-  );
+  const res = await pool.query('SELECT COUNT(*)::int AS count FROM characters WHERE realm = $1', [
+    realm,
+  ]);
   return res.rows[0]?.count ?? 0;
 }
 

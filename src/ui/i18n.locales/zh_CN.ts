@@ -1091,6 +1091,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'nav.donate': '捐赠',
   'stats.title': '服务器状态',
   'stats.accountsCreated': '玩家',
+  'stats.charactersCreated': '已创建角色',
   'stats.playersOnline': '在线玩家数',
   'stats.realmName': '服务器名称',
   'footer.copyright': '2026 World of ClaudeCraft',

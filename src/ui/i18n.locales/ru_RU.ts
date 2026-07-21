@@ -1139,6 +1139,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'nav.donate': 'Пожертвовать',
   'stats.title': 'Статус игрового мира',
   'stats.accountsCreated': 'Игроки',
+  'stats.charactersCreated': 'Персонажей создано',
   'stats.playersOnline': 'Игроков в сети',
   'stats.realmName': 'Название игрового мира',
   'footer.copyright': '2026 World of ClaudeCraft',

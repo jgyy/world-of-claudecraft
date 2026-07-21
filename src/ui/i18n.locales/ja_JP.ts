@@ -1127,6 +1127,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'nav.donate': '寄付',
   'stats.title': 'ワールドステータス',
   'stats.accountsCreated': 'プレイヤー',
+  'stats.charactersCreated': '作成済みキャラクター',
   'stats.playersOnline': 'オンラインプレイヤー数',
   'stats.realmName': 'ワールド名',
   'footer.copyright': '2026 World of ClaudeCraft',

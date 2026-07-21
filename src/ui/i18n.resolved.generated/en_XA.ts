@@ -4133,7 +4133,7 @@ export const en_XA: EnTranslations = {
   "stats": {
     "title": "[Ŵóŕļð Šţáţúš]",
     "accountsCreated": "[Þļáýéŕš]",
-    "charactersCreated": "[çĥáŕáçţéŕš çŕéáţéð]",
+    "charactersCreated": "[Çĥáŕáçţéŕš Çŕéáţéð]",
     "playersOnline": "[Þļáýéŕš Óñļíñé]",
     "realmName": "[Ŵóŕļð Ñáɱé]"
   },

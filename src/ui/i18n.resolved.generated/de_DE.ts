@@ -4133,7 +4133,7 @@ export const de_DE: EnTranslations = {
   "stats": {
     "title": "Weltstatus",
     "accountsCreated": "Spieler",
-    "charactersCreated": "characters created",
+    "charactersCreated": "Characters Created",
     "playersOnline": "Spieler online",
     "realmName": "Weltname"
   },

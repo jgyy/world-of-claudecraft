@@ -222,23 +222,19 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "zh_CN": [
     "hud.social.status.afk",
-    "hudChrome.nameplate.afkTag",
-    "stats.charactersCreated"
+    "hudChrome.nameplate.afkTag"
   ],
   "zh_TW": [
     "hud.social.status.afk",
-    "hudChrome.nameplate.afkTag",
-    "stats.charactersCreated"
+    "hudChrome.nameplate.afkTag"
   ],
   "ko_KR": [
     "hud.social.status.afk",
-    "hudChrome.nameplate.afkTag",
-    "stats.charactersCreated"
+    "hudChrome.nameplate.afkTag"
   ],
   "ja_JP": [
     "hud.social.status.afk",
-    "hudChrome.nameplate.afkTag",
-    "stats.charactersCreated"
+    "hudChrome.nameplate.afkTag"
   ],
   "pt_BR": [
     "abilityUi.cast.gathering",
@@ -277,8 +273,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "ru_RU": [
     "hud.social.status.afk",
-    "hudChrome.nameplate.afkTag",
-    "stats.charactersCreated"
+    "hudChrome.nameplate.afkTag"
   ],
   "cs_CZ": [
     "abilityUi.cast.gathering",

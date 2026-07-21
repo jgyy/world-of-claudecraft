@@ -1128,6 +1128,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'nav.donate': '후원',
   'stats.title': '월드 상태',
   'stats.accountsCreated': '플레이어',
+  'stats.charactersCreated': '생성된 캐릭터',
   'stats.playersOnline': '현재 접속자 수',
   'stats.realmName': '월드 이름',
   'footer.copyright': '2026 World of ClaudeCraft',

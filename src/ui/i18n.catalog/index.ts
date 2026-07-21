@@ -263,7 +263,7 @@ export const en = {
   stats: {
     title: 'World Status',
     accountsCreated: 'Players',
-    charactersCreated: 'characters created',
+    charactersCreated: 'Characters Created',
     playersOnline: 'Players Online',
     realmName: 'World Name',
   },

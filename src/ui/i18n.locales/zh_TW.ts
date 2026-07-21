@@ -1093,6 +1093,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'nav.donate': '捐贈',
   'stats.title': '世界狀態',
   'stats.accountsCreated': '玩家',
+  'stats.charactersCreated': '已創建角色',
   'stats.playersOnline': '線上玩家數',
   'stats.realmName': '世界名稱',
   'footer.copyright': '2026 World of ClaudeCraft',

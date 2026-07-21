@@ -398,7 +398,12 @@ export async function readProjectStats(
   db: ProjectStatsReadDb,
   playersOnline: number,
   realm: string,
-): Promise<{ accounts_created: number; characters_created: number; players_online: number; realm: string }> {
+): Promise<{
+  accounts_created: number;
+  characters_created: number;
+  players_online: number;
+  realm: string;
+}> {
   const [accountsCount, charactersCount] = await Promise.all([
     db.getAccountsCount(),
     db.getCharactersCount(realm),
