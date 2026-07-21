@@ -154,9 +154,20 @@ export function perfGiltGradientBackground(): string {
 // L-shaped composition (one short arm, one long arm, both rooted in one
 // spiral) ----
 
-const CORNER_SIZE = 70;
+const CORNER_SIZE = 84;
 const CORNER_PIVOT_X = 20;
 const CORNER_PIVOT_Y = 20;
+
+/** Must equal `#options-menu.perf-wide`'s own `border-radius` (components.css),
+ * in the SAME pixel space as `CORNER_SIZE` (the tile is stamped at 1:1 scale,
+ * `mask-size: ${CORNER_SIZE}px ${CORNER_SIZE}px`). The corner motif is open
+ * filigree, not a solid block, so without an explicit trace of the rounded
+ * corner curve the panel's own dark background peeks through the gaps right
+ * at the boundary between the outer gilded edge and the panel's rounded
+ * corner, reading as a stray dark border cutting the ornament off at the
+ * radius. `cornerRadiusTraceStroke` below draws a wide band centered on that
+ * exact curve so gold ink covers it continuously. */
+const CORNER_RADIUS_TRACE = 30;
 
 /**
  * The 4 corner variants are mirrored by baking the flip into every emitted
@@ -373,7 +384,32 @@ function cornerMotifPath(m: Mirror): string {
   ].join(' ');
 
   const fills = `<path d="${[spiralLeaves, topLeaves, sideLeaves].join(' ')}"/>`;
-  return outerBody + innerDetail + topTendril + sideRun + sideCurl + sideTail + fills;
+  const radiusTrace = cornerRadiusTraceStroke(m);
+  return outerBody + innerDetail + topTendril + sideRun + sideCurl + sideTail + radiusTrace + fills;
+}
+
+/**
+ * A wide band stroked along the exact rounded-corner curve
+ * (`#options-menu.perf-wide`'s `border-radius`, in this tile's own pixel
+ * space), centered at `(CORNER_RADIUS_TRACE, CORNER_RADIUS_TRACE)` and swept
+ * from the point where the curve meets the left edge (deg 180) to where it
+ * meets the top edge (deg 270). The band is wide enough to fully overlap
+ * both the gilded frame's own outer rounding and the panel's rounded corner
+ * a few pixels further in, so no dark sliver of the panel shows through
+ * between them.
+ */
+function cornerRadiusTraceStroke(m: Mirror): string {
+  const samples = 24;
+  const r = CORNER_RADIUS_TRACE;
+  const cx = r;
+  const cy = r;
+  const pts: string[] = [];
+  for (let i = 0; i <= samples; i++) {
+    const t = i / samples;
+    const deg = 180 + t * 90;
+    pts.push(n2(polarX(cx, r, deg), polarY(cy, r, deg), m));
+  }
+  return `<path d="M ${pts.join(' L ')}" fill="none" stroke="#000" stroke-width="12" stroke-linecap="round"/>`;
 }
 
 /** One `mask-image` layer per corner (top-left orientation, then the same
@@ -396,6 +432,96 @@ export function perfCornerOrnamentMaskImage(): string {
 }
 
 export const PERF_CORNER_SIZE = CORNER_SIZE;
+
+// ---------- mid-edge ornament: a small flourish centered on each edge's
+// midpoint (between the two corner scrolls), so the frame reads as
+// continuously ornamented rather than corners-only. Built from the SAME
+// spiral/leaflet vocabulary as the corner motif, but reused directly: since
+// spiralStroke/leafletPath both work in absolute polar degrees around a
+// pivot, a "point outward" requirement is just an angle, so the one motif
+// below is reused for all 4 edges by rotating `outwardDeg` (top = -90 (up),
+// right = 0, bottom = 90 (down), left = 180) instead of needing a second
+// coordinate-mirroring scheme like the corner's `Mirror`. The two side
+// tendrils are generated at symmetric angle offsets around `outwardDeg`
+// (never independently placed), so every edge motif is exactly left-right
+// symmetric and, like the corner tendrils, grows outward (radius from the
+// pivot only increases) the whole way, never curling back toward the
+// window's interior. ----------
+
+const MID_EDGE_SIZE = 44;
+const MID_EDGE_CENTER = MID_EDGE_SIZE / 2;
+// Distance from the tile's center to the pivot, placing the pivot close to
+// the tile's OWN edge in the outward direction (never at the tile's dead
+// center): the tile is stamped with its outward side flush against the
+// window's actual edge line (`mask-position: center top` etc, components.css),
+// so a center-pivoted motif would read as growing INTO the panel, with only
+// its thin outer tip ever reaching the edge. Anchoring the pivot near the
+// edge instead, the same way the corner motif's pivot sits right at the
+// corner vertex, makes the whole motif hug and grow from the boundary line.
+const MID_EDGE_PIVOT_OFFSET = MID_EDGE_CENTER - 16;
+// Identity: the mid-edge motif needs no coordinate mirroring (unlike the
+// corner motif's 4 variants), only angle rotation.
+const MID_EDGE_IDENTITY: Mirror = { x: false, y: false, size: MID_EDGE_SIZE };
+
+function midEdgeMotifPath(outwardDeg: number, seedBase: number): string {
+  const cx = MID_EDGE_CENTER + MID_EDGE_PIVOT_OFFSET * Math.cos((outwardDeg * Math.PI) / 180);
+  const cy = MID_EDGE_CENTER + MID_EDGE_PIVOT_OFFSET * Math.sin((outwardDeg * Math.PI) / 180);
+  const m = MID_EDGE_IDENTITY;
+
+  // A short, nearly-straight stem running from the pivot straight out
+  // (`outwardDeg`, toward and slightly past the edge line), tipped with a
+  // single leaf so it doesn't dead-end bare.
+  const stem = spiralStroke(cx, cy, outwardDeg, 0.03, 2, 14, 2.4, seedBase, 1, m);
+  const stemTip = spiralPoint(
+    1,
+    cx,
+    cy,
+    outwardDeg,
+    0.03,
+    2,
+    14,
+    seededHarmonics(seedBase, 3, 0.3),
+  );
+  const stemLeaf = leafletPath(stemTip.x, stemTip.y, 7.5, 3, outwardDeg, m);
+
+  // Two side tendrils, angled symmetrically around `outwardDeg` (mirrored
+  // offsets, and mirrored `turns` sign so they curl toward each other
+  // rather than both the same way), each growing outward from the SAME
+  // edge-hugging pivot the whole way, staying close to the boundary rather
+  // than reaching back toward the tile's (and so the window's) center.
+  const spread = 50;
+  const sideADeg = outwardDeg - spread;
+  const sideBDeg = outwardDeg + spread;
+  const sideA = spiralStroke(cx, cy, sideADeg, 0.14, 2.5, 13, 2.2, seedBase + 1, 1, m);
+  const sideB = spiralStroke(cx, cy, sideBDeg, -0.14, 2.5, 13, 2.2, seedBase + 1, 1, m);
+  const sideAWobble = seededHarmonics(seedBase + 1, 3, 0.3);
+  const sideATip = spiralPoint(1, cx, cy, sideADeg, 0.14, 2.5, 13, sideAWobble);
+  const sideBTip = spiralPoint(1, cx, cy, sideBDeg, -0.14, 2.5, 13, sideAWobble);
+  const sideATipDeg = sideADeg + 0.14 * 360;
+  const sideBTipDeg = sideBDeg - 0.14 * 360;
+  const sideALeaf = leafletPath(sideATip.x, sideATip.y, 6, 2.5, sideATipDeg, m);
+  const sideBLeaf = leafletPath(sideBTip.x, sideBTip.y, 6, 2.5, sideBTipDeg, m);
+
+  const fills = `<path d="${[stemLeaf, sideALeaf, sideBLeaf].join(' ')}"/>`;
+  return stem + sideA + sideB + fills;
+}
+
+function midEdgeMotifDataUri(outwardDeg: number, seedBase: number): string {
+  return svgDataUri(midEdgeMotifPath(outwardDeg, seedBase), MID_EDGE_SIZE);
+}
+
+/** One `mask-image` layer per edge midpoint (top, bottom, left, right, in
+ * that order, matching the `mask-position` list in components.css). */
+export function perfMidEdgeOrnamentMaskImage(): string {
+  return [
+    midEdgeMotifDataUri(-90, 501),
+    midEdgeMotifDataUri(90, 502),
+    midEdgeMotifDataUri(180, 503),
+    midEdgeMotifDataUri(0, 504),
+  ].join(', ');
+}
+
+export const PERF_MID_EDGE_SIZE = MID_EDGE_SIZE;
 
 // ---------- noisy gilt edge: a seamlessly tileable ribbon. The centerline
 // stays essentially straight (a hand-gilded line follows the edge, it does
@@ -476,6 +602,7 @@ export const PERF_EDGE_TILE_THICKNESS = EDGE_TILE_THICKNESS;
  */
 export function applyPerfOrnamentVars(root: HTMLElement = document.documentElement): void {
   root.style.setProperty('--perf-ornament-corner', perfCornerOrnamentMaskImage());
+  root.style.setProperty('--perf-ornament-mid-edge', perfMidEdgeOrnamentMaskImage());
   root.style.setProperty('--perf-ornament-edge-top', perfNoisyEdgeMaskImage(1, false));
   root.style.setProperty('--perf-ornament-edge-bottom', perfNoisyEdgeMaskImage(3, false));
   root.style.setProperty('--perf-ornament-edge-left', perfNoisyEdgeMaskImage(2, true));

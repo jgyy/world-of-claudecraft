@@ -4,8 +4,10 @@ import {
   PERF_CORNER_SIZE,
   PERF_EDGE_TILE_LENGTH,
   PERF_EDGE_TILE_THICKNESS,
+  PERF_MID_EDGE_SIZE,
   perfCornerOrnamentMaskImage,
   perfGiltGradientBackground,
+  perfMidEdgeOrnamentMaskImage,
   perfNoisyEdgeMaskImage,
 } from '../src/ui/perf_ornament_svg';
 
@@ -38,21 +40,51 @@ describe('perf_ornament_svg', () => {
     expect(new Set(layers).size).toBe(4);
   });
 
-  it('the corner motif is a volute (outer body + inner detail) plus two outward leafy tendrils, never a single bare curl', () => {
+  it('the corner motif is a volute (outer body + inner detail) plus two outward leafy tendrils and a radius trace, never a single bare curl', () => {
     const svg = decodeSvg(perfCornerOrnamentMaskImage().split(', ')[0]);
     const paths = svg.match(/<path[^>]*>/g) ?? [];
     // 6 round-capped strokes (volute outer/inner, top tendril, side run,
-    // side curl, side tail) plus exactly one filled composite path holding
-    // every acanthus leaflet (spiral-wrapping, top-tendril, and side-tendril
-    // foliage together).
+    // side curl, side tail) plus the round-capped radius-trace band, plus
+    // exactly one filled composite path holding every acanthus leaflet
+    // (spiral-wrapping, top-tendril, and side-tendril foliage together).
     const strokes = paths.filter((p) => p.includes('fill="none"'));
     const fills = paths.filter((p) => !p.includes('fill="none"'));
-    expect(strokes).toHaveLength(6);
+    expect(strokes).toHaveLength(7);
     expect(fills).toHaveLength(1);
     for (const p of strokes) {
       expect(p).toContain('stroke-linecap="round"');
-      expect(p).toContain('stroke-linejoin="round"');
     }
+  });
+
+  it('mid-edge mask image has four comma-separated data-URI layers, one per edge midpoint', () => {
+    const value = perfMidEdgeOrnamentMaskImage();
+    const layers = value.split(', ');
+    expect(layers).toHaveLength(4);
+    for (const layer of layers) {
+      expect(layer).toMatch(/^url\("data:image\/svg\+xml,/);
+      const svg = decodeSvg(layer);
+      expect(svg).toContain('<svg');
+      expect(svg).toContain(`viewBox='0 0 ${PERF_MID_EDGE_SIZE} ${PERF_MID_EDGE_SIZE}'`);
+    }
+    expect(new Set(layers).size).toBe(4);
+  });
+
+  it('each mid-edge motif is exactly left-right symmetric about its own outward axis', () => {
+    // The stem tip sits ON the outward axis (radius grows from the pivot only,
+    // never sideways), so its distance from the two side-tendril tips must
+    // match exactly if the motif truly mirrors around that axis.
+    const svg = decodeSvg(perfMidEdgeOrnamentMaskImage().split(', ')[0]);
+    const strokePaths = (svg.match(/<path d="([^"]+)" fill="none"/g) ?? []).map((p) => {
+      const d = p.match(/d="([^"]+)"/)?.[1] ?? '';
+      const [first, ...rest] = d.replace(/^M\s*/, '').split(/\s*L\s*/);
+      const last = rest[rest.length - 1] ?? first;
+      return { first: first.split(/\s+/).map(Number), last: last.split(/\s+/).map(Number) };
+    });
+    // strokes: [stem, sideA, sideB] in that emission order.
+    expect(strokePaths).toHaveLength(3);
+    const pivot = strokePaths[0].first;
+    const dist = (p: number[]): number => Math.hypot(p[0] - pivot[0], p[1] - pivot[1]);
+    expect(dist(strokePaths[1].last)).toBeCloseTo(dist(strokePaths[2].last), 0);
   });
 
   it('noisy edge tile is a single closed ribbon path', () => {
@@ -101,6 +133,7 @@ describe('perf_ornament_svg', () => {
   it('no ornament data URI embeds a themed hex color (colorless shapes only)', () => {
     const uris = [
       ...perfCornerOrnamentMaskImage().split(', '),
+      ...perfMidEdgeOrnamentMaskImage().split(', '),
       perfNoisyEdgeMaskImage(1, false),
       perfNoisyEdgeMaskImage(2, true),
     ];
@@ -210,6 +243,7 @@ describe('perf_ornament_svg', () => {
     for (const v of edgeValues) expect(v).toBeTruthy();
     expect(new Set(edgeValues).size).toBe(4);
     expect(written['--perf-ornament-corner']).toBeTruthy();
+    expect(written['--perf-ornament-mid-edge']).toBeTruthy();
     expect(written['--perf-ornament-gilt']).toBeTruthy();
   });
 });

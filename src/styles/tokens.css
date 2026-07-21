@@ -230,6 +230,7 @@
        instead of just doing nothing, so every one of these needs a real (if inert)
        fallback rather than being left undefined. */
     --perf-ornament-corner: linear-gradient(transparent, transparent);
+    --perf-ornament-mid-edge: linear-gradient(transparent, transparent);
     --perf-ornament-edge-top: linear-gradient(transparent, transparent);
     --perf-ornament-edge-bottom: linear-gradient(transparent, transparent);
     --perf-ornament-edge-left: linear-gradient(transparent, transparent);
@@ -263,6 +264,7 @@
      selector specificity; only an important author declaration outranks it. */
   :root[data-fx-level="low"] {
     --perf-ornament-corner: linear-gradient(transparent, transparent) !important;
+    --perf-ornament-mid-edge: linear-gradient(transparent, transparent) !important;
     --perf-ornament-edge-top: linear-gradient(transparent, transparent) !important;
     --perf-ornament-edge-bottom: linear-gradient(transparent, transparent) !important;
     --perf-ornament-edge-left: linear-gradient(transparent, transparent) !important;
