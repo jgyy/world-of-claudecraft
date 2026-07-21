@@ -756,6 +756,65 @@ describe('the World Market: the fee-pool giveaway', () => {
     expect(winLog!.startsWith('Seller ') || winLog!.startsWith('Buyer ')).toBe(true);
   });
 
+  it("captures the seller's class at LISTING time, so a seller who logs off before their item sells still keeps their full class-eligible reward pool", () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.addItem('wolf_fang', 1, seller);
+    sim.players.get(buyer)!.copper = 200_000;
+    sim.marketList('wolf_fang', 1, 100_000, seller);
+    const listing = sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!;
+
+    // The listing captured the seller's class while they were online at the
+    // Merchant, regardless of what happens to them afterward.
+    expect(listing.sellerCls).toBe('warrior');
+
+    // The seller logs off; the listing survives (it belongs to the Merchant's
+    // book, not the player entity) and later sells while they are offline.
+    sim.removePlayer(seller);
+    sim.marketBuy(listing.id, buyer);
+
+    // The fee-pool entry still carries the seller's real class, resolved off the
+    // listing (not a live roster lookup that would fail now they are offline).
+    const participants = (
+      sim.market as unknown as {
+        feePoolParticipants: Map<string, { cls: string | undefined }>;
+      }
+    ).feePoolParticipants;
+    expect(participants.get(marketSellerKey(seller))?.cls).toBe('warrior');
+  });
+
+  it('caps any single participant key at a fraction of the total draw weight, so an alt pair round-tripping a listing cannot buy near-guaranteed odds', () => {
+    const sim = makeWorld();
+    const pickWinner = (
+      sim.market as unknown as {
+        pickFeePoolWinner: (
+          p: { key: string; name: string; cls: undefined; contributed: number }[],
+        ) => { key: string };
+      }
+    ).pickFeePoolWinner.bind(sim.market);
+    // One key contributed the overwhelming majority of a small pool (the alt-pair
+    // shape: two round-tripped trades credit the SAME key almost the whole pot).
+    const dominant = { key: 'dominant', name: 'Dominant', cls: undefined, contributed: 9900 };
+    const minor = { key: 'minor', name: 'Minor', cls: undefined, contributed: 100 };
+    // rawTotal = 10000, clamp = 40% of rawTotal = 4000, so dominant's clamped
+    // weight is 4000 and the clamped draw total is 4000 + 100 = 4100. A roll
+    // of 0.99 * 4100 = 4059 falls past dominant's 4000 into minor's slice, a
+    // point that would have landed well inside dominant's UNCLAMPED 9900 share
+    // (proving the clamp, not just chance, moved the outcome).
+    const rngSpy = vi.spyOn(sim.rng, 'next').mockReturnValue(0.99);
+    expect(pickWinner([dominant, minor]).key).toBe('minor');
+    rngSpy.mockRestore();
+
+    // A roll safely inside the capped share still lands on dominant: the clamp
+    // reduces the odds, it does not remove them.
+    const rngSpy2 = vi.spyOn(sim.rng, 'next').mockReturnValue(0.1);
+    expect(pickWinner([dominant, minor]).key).toBe('dominant');
+    rngSpy2.mockRestore();
+  });
+
   it('an unknown-class winner with no affordable reward leaves the pool intact instead of destroying the fees', () => {
     const sim = makeWorld();
     const seller = sim.addPlayer('warrior', 'Seller');

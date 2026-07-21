@@ -10,6 +10,7 @@
 // (enforced by tests/architecture.test.ts). Only the fee-pool giveaway draw
 // (updateFeePool/pickFeePoolReward) draws rng; everything else in this module does not.
 
+import { CLASSES } from './content/classes';
 import { ITEMS } from './data';
 import { formatMoney } from './format_money';
 import {
@@ -37,6 +38,10 @@ const MARKET_WIRE_LIMIT = 120; // most listings shipped to one client at a time
 // the pool into the next draw instead of forcing an empty one.
 const MARKET_FEE_POOL_DRAW_INTERVAL = 24 * 3600; // sim-seconds between giveaway draws
 const MARKET_FEE_POOL_REWARD_KINDS = new Set(['weapon', 'armor']);
+// Anti-alt-farming clamp on the weighted winner draw (see pickFeePoolWinner):
+// no single participant key's weight counts for more than this fraction of the
+// pool's total contributed weight.
+const FEE_POOL_MAX_SHARE = 0.4;
 
 // Eligibility for a fee-pool reward: epic/legendary weapon or armor, never a heroic
 // remix (those are dungeon-locked) or soulbound gear (those can't be handed out as a
@@ -78,6 +83,13 @@ export interface MarketListing {
   id: number;
   sellerKey: string; // stable seller identity (character id string); '' for house stock
   sellerName: string; // display name
+  // The seller's class, captured at LIST time (see marketList): the seller is
+  // definitionally online and at the Merchant when they list, so this is always
+  // resolvable then, unlike at sale/draw time where the seller is commonly offline
+  // (finding: an offline-at-sale seller could only ever win a necklace, the one
+  // slot the whole classless-eligible reward subset happens to cover). Undefined
+  // only for house stock, which never earns a fee-pool entry anyway.
+  sellerCls?: PlayerMeta['cls'];
   itemId: string;
   count: number;
   price: number; // total copper buyout for the whole stack
@@ -100,6 +112,7 @@ export interface MarketSave {
     id: number;
     sellerKey: string;
     sellerName: string;
+    sellerCls?: PlayerMeta['cls'];
     itemId: string;
     count: number;
     price: number;
@@ -142,7 +155,7 @@ export class Market {
   // draw fires at all (finding: a single one-copper-fee trade used to mint raid-tier
   // gear on the next daily tick, regardless of pool size). Derived from the actual
   // item table, not an invented number, and cached once since content is static.
-  private readonly feePoolMinDrawCopper = Market.computeMinDrawCopper();
+  private static readonly feePoolMinDrawCopper = Market.computeMinDrawCopper();
 
   constructor(private readonly ctx: SimContext) {}
 
@@ -289,6 +302,7 @@ export class Market {
         id: this.nextListingId++,
         sellerKey: '',
         sellerName: 'The Merchant',
+        sellerCls: undefined,
         itemId: s.itemId,
         count: s.count,
         price: s.price,
@@ -366,6 +380,10 @@ export class Market {
       id: this.nextListingId++,
       sellerKey,
       sellerName: meta.name,
+      // Always resolvable here: the seller is online and standing at the Merchant
+      // (see nearMerchant above). Carried on the listing so it survives even if the
+      // seller logs off before the eventual sale/draw (see MarketListing.sellerCls).
+      sellerCls: meta.cls,
       itemId,
       count: want,
       price: ask,
@@ -426,16 +444,12 @@ export class Market {
       if (cut > 0) {
         this.feePoolCopper += cut;
         // The buyer is resolved right here (they're the one acting), so their class
-        // is always known. The seller's listing already carries their display name
-        // (sellerName), so that never degrades to a raw key even when the seller is
-        // offline at sale time; their class is best-effort (only known if they're
-        // still online right now).
-        this.addFeePoolParticipant(
-          listing.sellerKey,
-          listing.sellerName,
-          this.metaByMarketSellerKey(listing.sellerKey)?.cls,
-          cut,
-        );
+        // is always known. The seller's class comes off the listing (captured at
+        // marketList time, when the seller was definitionally online), not a
+        // live lookup: resolving it here would collapse to undefined for the
+        // common offline-seller case, which used to shrink their reward pool to
+        // only classless items.
+        this.addFeePoolParticipant(listing.sellerKey, listing.sellerName, listing.sellerCls, cut);
         this.addFeePoolParticipant(this.marketSellerKey(meta), meta.name, meta.cls, cut);
       }
       this.marketListings.splice(idx, 1);
@@ -570,7 +584,7 @@ export class Market {
   private updateFeePool(): void {
     if (this.ctx.tickCount % 20 !== 0) return;
     if (this.ctx.time < this.feePoolNextDrawAt) return;
-    if (this.feePoolCopper < this.feePoolMinDrawCopper || this.feePoolParticipants.size === 0) {
+    if (this.feePoolCopper < Market.feePoolMinDrawCopper || this.feePoolParticipants.size === 0) {
       this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
       this.feePoolParticipants.clear();
       return;
@@ -602,12 +616,27 @@ export class Market {
   // unaffected. Every entry has contributed > 0 (only trades with cut > 0 ever call
   // addFeePoolParticipant), so the loop always lands before falling through to the
   // final element (a floating-point-rounding safety net, not a real fallback path).
+  //
+  // Each participant's weight is first clamped to at most FEE_POOL_MAX_SHARE of the
+  // UNCLAMPED total (review finding: two characters round-tripping one listing
+  // credit the FULL cut to both, so an alt pair can otherwise buy far better odds
+  // than an organic two-party trade for the same fees paid). The sim has no notion
+  // of "same real account" across two character keys, so a per-key clamp is the
+  // only sim-pure lever available; it cannot fully close a two-alt round-trip (each
+  // alt can still individually sit at the cap), but it does bound any SINGLE key's
+  // odds, which is what stops a farm from concentrating most of the draw onto one
+  // repeatedly-reused key as the participant count grows. 40% keeps a genuine
+  // whale (one key, most of the session's real volume) heavily favored over a
+  // handful of minor traders, while denying any one key a near-guaranteed win.
   private pickFeePoolWinner(participants: FeePoolParticipant[]): FeePoolParticipant {
-    const total = participants.reduce((sum, p) => sum + p.contributed, 0);
+    const rawTotal = participants.reduce((sum, p) => sum + p.contributed, 0);
+    const cap = rawTotal * FEE_POOL_MAX_SHARE;
+    const weights = participants.map((p) => Math.min(p.contributed, cap));
+    const total = weights.reduce((sum, w) => sum + w, 0);
     let roll = this.ctx.rng.next() * total;
-    for (const p of participants) {
-      if (roll < p.contributed) return p;
-      roll -= p.contributed;
+    for (let i = 0; i < participants.length; i++) {
+      if (roll < weights[i]) return participants[i];
+      roll -= weights[i];
     }
     return participants[participants.length - 1];
   }
@@ -712,6 +741,7 @@ export class Market {
           id: l.id,
           sellerKey: l.sellerKey,
           sellerName: l.sellerName,
+          sellerCls: l.sellerCls,
           itemId: l.itemId,
           count: l.count,
           price: l.price,
@@ -755,6 +785,10 @@ export class Market {
         id: l.id,
         sellerKey: String(l.sellerKey ?? ''),
         sellerName: String(l.sellerName ?? l.sellerKey ?? '?'),
+        // Undefined on a pre-feature save (predating this field, like an old
+        // pool/countdown) or a corrupted value: falls back to resolving live at
+        // sale time (the old, worse-but-safe behavior), never a crash.
+        sellerCls: l.sellerCls && CLASSES[l.sellerCls] ? l.sellerCls : undefined,
         itemId: l.itemId,
         count: Math.max(1, l.count | 0),
         price: Math.max(
