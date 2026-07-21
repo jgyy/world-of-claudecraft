@@ -36,6 +36,18 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 // "daily" degenerates to "rolled once per session" there. Only the
 // authoritative server's real 3 AM realm-local boundary gives dailies an
 // actual daily rotation.
+//
+// DST caveat: raidResetMs (server/raid_reset.ts) already resolves the realm-local
+// 3 AM boundary through the DST-aware spring-forward/fall-back handling raid
+// lockouts use, so the boundary INSTANT itself is correct across a transition.
+// What is still a proxy here is flooring that instant to UTC-day granularity: on
+// the handful of days a year the local reset lands within one DAY_MS of a UTC day
+// boundary shifted by the transition, the floored index can, in principle, repeat
+// or skip a day rather than advancing by exactly one. This has no live report
+// against it and is lower priority than the durability/cap fixes above; if it is
+// ever worth closing precisely, key `day` on the reset instant's realm-local
+// calendar date (via the same Intl machinery raid_reset.ts uses) instead of a
+// flat UTC floor.
 export function dailyResetDayIndex(nowMs: number, raidResetMs: (nowMs: number) => number): number {
   return Math.floor(raidResetMs(nowMs) / DAY_MS);
 }
