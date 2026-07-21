@@ -11,6 +11,10 @@
 export const pending: Record<string, readonly string[]> = {
   "es": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -27,10 +31,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "es_ES": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -47,10 +56,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "fr_FR": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -67,10 +81,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "fr_CA": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -87,11 +106,16 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "en_CA": [],
   "it_IT": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -108,10 +132,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "de_DE": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -128,6 +157,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "zh_CN": [],
@@ -136,6 +166,10 @@ export const pending: Record<string, readonly string[]> = {
   "ja_JP": [],
   "pt_BR": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -152,11 +186,16 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "ru_RU": [],
   "cs_CZ": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -173,10 +212,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "nl_NL": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -193,10 +237,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "pl_PL": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -213,10 +262,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "id_ID": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -233,10 +287,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "tr_TR": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -253,10 +312,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "sv_SE": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -273,10 +337,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "vi_VN": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -293,10 +362,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ],
   "da_DK": [
     "abilityUi.cast.gathering",
+    "entities.letters.mastery_reset_notice.body",
+    "entities.letters.mastery_reset_notice.sender",
+    "entities.letters.mastery_reset_notice.subject",
+    "hudChrome.crafting.difficultyMinimal",
     "hudChrome.gathering.biteLine",
     "hudChrome.gathering.catchLine",
     "hudChrome.gathering.fishing",
@@ -313,6 +387,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.gathering.toolTierUnmet.logging",
     "hudChrome.gathering.toolTierUnmet.mining",
     "hudChrome.gathering.toolTierUnmetCorpse",
+    "hudChrome.professions.nextUnlockMastered",
     "welcome.roster.title"
   ]
 };

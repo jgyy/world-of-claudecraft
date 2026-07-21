@@ -11,8 +11,9 @@ sessions merged into release/v0.29.0 (12b QA is PR #2229). The 2026-07-20
 timing and economy amendments restructured the remaining plan to 12, 12b,
 13, 14, 14b, 15; the SECOND 2026-07-20 block (mastery and provenance, see
 Locked design decisions) inserts Phases 12c and 12d after the 12b QA, so
-the remaining order is 12c, 12d, 13, 14, 14b, 15. Next: Phase 12c
-(phase-12c-mastery-curve.md, issue #2235).
+the remaining order is 12c, 12d, 13, 14, 14b, 15. Phase 12c is BUILT
+(PR #2242 off release/v0.29.0, 2026-07-20; as-landed surfaces below).
+Next: Phase 12c QA (phase-12c-qa.md) once the PR merges; then 12d.
 
 ## Locked design decisions
 
@@ -1251,12 +1252,55 @@ tables, i18n key namespaces, files created)
   pre-existing, gatherResult/fishingResult log lines use the repo's raw
   hex log-color idiom, and the six cues stay PLACEHOLDER pending #2208
   (release-notes caveat).
-- Phase 12c: (planned) the four-state curve constants in wheel.ts, the
-  enforced per-profession maxSkill content rows and four clamp arms, the
-  node-tier and band-relative gathering/fishing gain constants, the
-  one-time reset flag and its authored notice letter, the shared action
-  throttle seam, the enchanting soft-ceiling gain arm, q_prof_hobby_switch
-  xpReward 0, and the four-state difficulty + cap-aware UI states.
+- Phase 12c (built 2026-07-20, phase start 67ae62629, PR #2242): the
+  four-state curve is tierProgressMultiplier in wheel.ts (free floor
+  DELETED; REDUCED_TIER_MULTIPLIER 0.5 and the new MINIMAL_TIER_MULTIPLIER
+  0.25 both exported); gathering gain = gatherNodeGainMultiplier(prof,
+  nodeTier) with GATHER_GAIN_TIER_STEP 25 (node tier T teaches as curve
+  tier T-1: t1 grays at 75+, t3 carries to 100); fishing gain =
+  fishingCatchGain via FISHING_GAIN_SCHEDULE (1 below 50, 0.5 below 100,
+  0.1 below 150, 0.02 below 200) and FISHING_JUNK_GAIN_CUTOFF_PROFICIENCY
+  100 (junk = ItemDef.kind 'junk'). Caps as content data: CraftDef.maxSkill
+  (all ten ring crafts 125) + craftMaxSkillFor in content/professions.ts;
+  gathering maxSkill 100/100/100/200; clamps at gainCraftSkill,
+  drainGatheringGrants, normalizeCraftSkills, normalizeGatheringProficiency
+  (the legacy professions key flows through the sim.ts call-site shape
+  s.gatheringProficiency ?? s.professions). THE RESET: masteryResetApplied
+  is a CharacterState-ONLY optional boolean (serializeCharacter writes
+  literal true; NO PlayerMeta field, so samplePlayerMeta sees zero new keys
+  and only the two appendix goldens regenerated, draws byte-identical);
+  applyMasteryReset + updateMasteryResetNotices live in
+  professions/mastery_reset.ts; the transient
+  PlayerMeta.pendingMasteryResetNotice (inert false, never serialized)
+  drives the one-time mail-phase send of MASTERY_RESET_LETTER (letterId
+  mastery_reset_notice, sender The Guildhall, letters.ts + BOTH ui letter
+  registries + the coverage count pin + five non-Latin M16 fills incl. the
+  letter body). Shared pacing: professions/action_throttle.ts WRAPS the
+  meta.craftThrottle seam (historical name kept deliberately;
+  CRAFT_THROTTLE_* re-exported); crafting, disenchant, enchant-apply, and
+  salvage draw one budget, and the throttle gates disenchant/salvage BEFORE
+  their rng draw (unwired until Phase 13; wiring QA heads-up). Enchanting:
+  enchantingGainMultiplier in archetype.ts (SOFT ceiling min(input tier,
+  ceiling), never crafting's hard zero) with ENCHANTING_GAIN_TIER_BY_QUALITY
+  exported from enchanting.ts; the apply arm reads the enchant's max
+  reagent ItemDef quality via enchantGainTier (dust 0, essence 1, shard 2,
+  pinned). q_prof_hobby_switch xpReward 0. UI: CraftDifficulty four-state
+  (full/reduced/minimal/none) from the shared multiplier; DIFFICULTY_TINT
+  orange QUALITY_COLOR.legendary / yellow GOLD_ACCENT_COLOR (the new named
+  TS twin of --gold in icons.ts) / green uncommon / gray poor;
+  CRAFT_MAX_SKILL RETIRED, craftNextUnlock kind 'mastered' at cap; skill
+  readouts FLOOR and points-to-go CEIL in both view cores (fractional gains
+  never render an uncrossed threshold as crossed); new keys
+  hudChrome.crafting.difficultyMinimal +
+  hudChrome.professions.nextUnlockMastered (nextUnlockMax deleted
+  catalog-wide); S3 scan list gained mastery_reset.ts and
+  action_throttle.ts. Appendix ADDENDUM rows (old-curve premises re-pinned
+  minimally, the 12b incompleteness precedent): crafting_view (3 tests + 2
+  boundary rows), archetype_ceiling (dormant free-floor test became
+  curve-not-ceiling), professions_crafting (two-below/minimal + gray
+  common), deeds_sites (74 to 74.75 staging), deeds + deeds_reconcile
+  (curve-era masteryResetApplied fixtures; the pre-curve arm pinned in
+  professions_mastery_reset).
 - Phase 12d: (planned) the identical-payload merge rule in bags/bank/
   addItemInstance, the Gathered by key + bag-grid instanced marker + the
   signed-downgrade notice event, the unified loot-and-harvest interact
@@ -1292,8 +1336,11 @@ tables, i18n key namespaces, files created)
   tier included (the free floor is retired); enforced per-profession caps:
   nine crafts and enchanting 125, mining/logging/herbalism 100, fishing
   200; gathering gains node-tier-relative, fishing gains band-relative and
-  fractional (exact fractions land as named exported pinned constants in
-  12c). Time-to-master TARGETS to tune against: first tier-up in 15 to 20
+  fractional (AS LANDED 2026-07-20, PR #2242: gatherNodeGainMultiplier with
+  GATHER_GAIN_TIER_STEP 25 and node tier T teaching as curve tier T-1;
+  FISHING_GAIN_SCHEDULE 1 below 50, 0.5 below 100, 0.1 below 150, 0.02
+  below 200; junk zero at FISHING_JUNK_GAIN_CUTOFF_PROFICIENCY 100).
+  Time-to-master TARGETS to tune against: first tier-up in 15 to 20
   minutes; skill 50 in an evening; craft mastery (major, materials
   included) 10 to 20 focused hours spread over days; gathering 100 in 8 to
   12 hours; fishing 200 in 15 to 25 hours. If mastery should get longer,
