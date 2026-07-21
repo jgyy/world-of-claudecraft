@@ -771,6 +771,7 @@ export class Api {
 
   async projectStats(): Promise<{
     accounts_created: number;
+    characters_created: number;
     players_online: number;
     realm: string;
   }> {

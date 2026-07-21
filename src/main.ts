@@ -5514,8 +5514,8 @@ async function changeLanguage(
 async function loadProjectStats(): Promise<void> {
   // Realm status now lives in the realm dropdown, both in the trigger sub-line
   // and inside the Online option, so update every instance by class.
-  const accountEls = document.querySelectorAll<HTMLElement>('.js-stat-accounts');
-  if (!accountEls.length) return;
+  const characterEls = document.querySelectorAll<HTMLElement>('.js-stat-characters');
+  if (!characterEls.length) return;
   const setAll = (els: NodeListOf<HTMLElement>, text: string): void => {
     els.forEach((el) => {
       el.textContent = text;
@@ -5526,6 +5526,7 @@ async function loadProjectStats(): Promise<void> {
   let cached: {
     realm: string;
     accounts_created: number;
+    characters_created: number;
     players_online: number;
     timestamp: number;
   } | null = null;
@@ -5540,7 +5541,7 @@ async function loadProjectStats(): Promise<void> {
 
   // If cache exists and is fresh (within TTL), use it and skip API request
   if (cached && Date.now() - cached.timestamp < STATS_CACHE_TTL_MS) {
-    setAll(accountEls, String(cached.accounts_created));
+    setAll(characterEls, String(cached.characters_created));
     return;
   }
 
@@ -5548,7 +5549,7 @@ async function loadProjectStats(): Promise<void> {
   try {
     const data = await api.projectStats();
 
-    setAll(accountEls, String(data.accounts_created));
+    setAll(characterEls, String(data.characters_created));
 
     // Save to cache with timestamp
     if (typeof localStorage !== 'undefined') {
@@ -5564,9 +5565,9 @@ async function loadProjectStats(): Promise<void> {
     console.error('Failed to fetch project stats:', err);
     // If API fails, fall back to cached data (even if expired)
     if (cached) {
-      setAll(accountEls, String(cached.accounts_created));
+      setAll(characterEls, String(cached.characters_created ?? '–'));
     } else {
-      setAll(accountEls, '–');
+      setAll(characterEls, '–');
     }
   }
 }

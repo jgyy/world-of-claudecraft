@@ -112,6 +112,7 @@ import {
   findAccount,
   findCharacterReportTargetByName,
   getAccountsCount,
+  getCharactersCount,
   getCharacter,
   getCharacterById,
   guildNameForCharacter,
@@ -796,7 +797,12 @@ async function getDeedsRarity(): Promise<import('../src/world_api').DeedsRarity>
 // count and the inner read gets a throwaway 0 for players_online that it discards.
 const PROJECT_STATS_TTL_MS = 60_000;
 const accountsCreatedCache = createCachedRead(
-  async () => (await readProjectStats({ getAccountsCount }, 0, REALM)).accounts_created,
+  async () => (await readProjectStats({ getAccountsCount, getCharactersCount }, 0, REALM)).accounts_created,
+  { ttlMs: PROJECT_STATS_TTL_MS },
+);
+const charactersCreatedCache = createCachedRead(
+  async () =>
+    (await readProjectStats({ getAccountsCount, getCharactersCount }, 0, REALM)).characters_created,
   { ttlMs: PROJECT_STATS_TTL_MS },
 );
 
@@ -809,6 +815,15 @@ async function getAccountsCreatedCount(): Promise<number> {
     // degrade-not-throw contract getLeaderboard / getDeedsRarity already ship, so
     // /api/project-stats stays 200 when the db is unreachable.
     console.error('accounts-created count refresh failed:', err);
+    return 0;
+  }
+}
+
+async function getCharactersCreatedCount(): Promise<number> {
+  try {
+    return await charactersCreatedCache.read();
+  } catch (err) {
+    console.error('characters-created count refresh failed:', err);
     return 0;
   }
 }
@@ -1837,8 +1852,13 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
       // per-request read, so it is re-attached here rather than cached. Rate-limited
       // per IP like its migrated twin (same public-read budget, same 429 body).
       if (!publicReadRateLimited(req).allowed) return json(res, 429, { error: 'rate limited' });
+      const [accountsCreated, charactersCreated] = await Promise.all([
+        getAccountsCreatedCount(),
+        getCharactersCreatedCount(),
+      ]);
       return json(res, 200, {
-        accounts_created: await getAccountsCreatedCount(),
+        accounts_created: accountsCreated,
+        characters_created: charactersCreated,
         players_online: liveGame().clients.size,
         realm: REALM,
       });
@@ -2440,6 +2460,7 @@ configureLeaderboardRuntime({
   deedsSelfRank,
   getArenaLeaderboard,
   getAccountsCreatedCount,
+  getCharactersCreatedCount,
   getReleases,
   // A getter, not a value: configureLeaderboardRuntime runs at module load (before
   // startServer primes the config), but leaderboard.ts reads rt.githubRepo only at

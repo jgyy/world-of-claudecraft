@@ -4133,6 +4133,7 @@ export const zh_TW: EnTranslations = {
   "stats": {
     "title": "世界狀態",
     "accountsCreated": "玩家",
+    "charactersCreated": "characters created",
     "playersOnline": "線上玩家數",
     "realmName": "世界名稱"
   },

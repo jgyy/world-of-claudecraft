@@ -6878,6 +6878,7 @@ export type TranslationKeyFlat =
   | 'skinEvent.unequip'
   | 'skinEvent.unlocked'
   | 'stats.accountsCreated'
+  | 'stats.charactersCreated'
   | 'stats.playersOnline'
   | 'stats.realmName'
   | 'stats.title'

@@ -4133,6 +4133,7 @@ export const nl_NL: EnTranslations = {
   "stats": {
     "title": "Wereldstatus",
     "accountsCreated": "Spelers",
+    "charactersCreated": "characters created",
     "playersOnline": "Spelers online",
     "realmName": "Wereldnaam"
   },
