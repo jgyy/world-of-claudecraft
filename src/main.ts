@@ -143,7 +143,7 @@ import { resolveWalletCapability } from './net/wallet_capability';
 import { installWalletResumeHandlers } from './net/wallet_resume';
 import { assetsReady } from './render/assets/preload';
 import { CharacterPreview, type PreviewAppearance } from './render/characters';
-import { preloadMechAssets } from './render/characters/assets';
+import { charactersReady, preloadMechAssets } from './render/characters/assets';
 import { skinCount } from './render/characters/manifest';
 import { playerPortraitDataUrl } from './render/characters/portrait';
 import { installWebGLContextRelease } from './render/context_release';
@@ -9033,38 +9033,51 @@ function wireStartScreens(): void {
     syncLandingGraphicsSelect();
   });
 
-  // Initialize 3D character preview once assets are ready
-  assetsReady().then(() => {
-    // Resolve each panel defensively: play.html (online-only) has no #offline-select.
-    const activePanelId = ['#charselect-panel', '#offline-select'].find((id) => {
-      const panel = $(id) as HTMLElement | null;
-      return panel !== null && !panel.hasAttribute('hidden');
-    });
-    const containerId =
-      activePanelId === '#offline-select'
-        ? '#offline-preview-container'
-        : '#online-preview-container';
-    const container = $(containerId);
-    const canvas = $('#char-preview-canvas') as HTMLCanvasElement | null;
-    if (container && canvas) {
-      characterPreview = new CharacterPreview(container, canvas);
-      // If a token auto-login already rendered the roster and selected a
-      // character before assets finished, show its real appearance; otherwise
-      // fall back to the selected class chip (create/offline panels).
-      if (charselectSelected) {
-        characterPreview.setAppearance(charselectAppearance(charselectSelected));
-      } else {
-        const selSelector =
-          activePanelId === '#offline-select'
-            ? '#offline-select .mini-class.sel'
-            : '#charcreate-panel .mini-class.sel';
-        const selEl = document.querySelector(selSelector) as HTMLElement | null;
-        const cls = selEl ? (selEl.dataset.class as PlayerClass) : 'warrior';
-        characterPreview.setClass(cls);
+  // Initialize 3D character preview once its assets are ready. Gated on the
+  // narrower charactersReady() (with its own retries), not the site-wide
+  // assetsReady(): that single shared promise covers EVERY registered preload
+  // (terrain, dungeon, foliage, ...), so an unrelated failure there must never
+  // permanently blank the character-creation preview. This previously used
+  // assetsReady().then() with no failure handler at all, so on a cold,
+  // first-visit cache a single transient asset failure anywhere on the site
+  // silently stranded the preview forever (issue: new players saw no
+  // character model on their first load; a reload "fixed" it only because the
+  // browser's HTTP cache was warm by then).
+  charactersReady()
+    .catch((err: unknown) => {
+      console.error('character preview assets failed to load, preview will stay blank:', err);
+    })
+    .then(() => {
+      // Resolve each panel defensively: play.html (online-only) has no #offline-select.
+      const activePanelId = ['#charselect-panel', '#offline-select'].find((id) => {
+        const panel = $(id) as HTMLElement | null;
+        return panel !== null && !panel.hasAttribute('hidden');
+      });
+      const containerId =
+        activePanelId === '#offline-select'
+          ? '#offline-preview-container'
+          : '#online-preview-container';
+      const container = $(containerId);
+      const canvas = $('#char-preview-canvas') as HTMLCanvasElement | null;
+      if (container && canvas) {
+        characterPreview = new CharacterPreview(container, canvas);
+        // If a token auto-login already rendered the roster and selected a
+        // character before assets finished, show its real appearance; otherwise
+        // fall back to the selected class chip (create/offline panels).
+        if (charselectSelected) {
+          characterPreview.setAppearance(charselectAppearance(charselectSelected));
+        } else {
+          const selSelector =
+            activePanelId === '#offline-select'
+              ? '#offline-select .mini-class.sel'
+              : '#charcreate-panel .mini-class.sel';
+          const selEl = document.querySelector(selSelector) as HTMLElement | null;
+          const cls = selEl ? (selEl.dataset.class as PlayerClass) : 'warrior';
+          characterPreview.setClass(cls);
+        }
       }
-    }
-    decorateClassChips();
-  });
+      decorateClassChips();
+    });
 }
 
 // Looping home-page theme. Browsers block audio autoplay until a user gesture,

@@ -471,6 +471,35 @@ for (const [key, list] of Object.entries(SKINS)) {
 }
 for (const url of bootSkinUrls) registerPreload(loadSkinTexInto(url, skinTexByUrl));
 
+/** Resolve once every boot-time character GLB + skin atlas is cached, retrying
+ *  whatever is still missing instead of depending on the site-wide assetsReady()
+ *  barrier. That barrier is one shared promise over EVERY registered preload
+ *  (terrain, dungeon, foliage, ...): an unrelated failure there must not sink the
+ *  character-creation preview, and loadGltf/loadTexture already evict a failed
+ *  URL from their own cache on rejection, so a fresh call here genuinely
+ *  re-fetches rather than re-awaiting a permanently rejected promise. A transient
+ *  failure is far more likely on a cold, first-visit cache (no warm HTTP cache to
+ *  fall back on), which is exactly when this matters most. */
+export async function charactersReady(maxAttempts = 3): Promise<void> {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const missingGltf = preloadUrls.filter((u) => !gltfByUrl.has(assetUrl(u)));
+    const missingSkins = [...bootSkinUrls].filter((u) => !skinTexByUrl.has(u));
+    if (missingGltf.length === 0 && missingSkins.length === 0) return;
+    const results = await Promise.allSettled([
+      ...missingGltf.map((u) => loadGltf(u).then((g) => void gltfByUrl.set(u, g))),
+      ...missingSkins.map((u) => loadSkinTexInto(u, skinTexByUrl)),
+    ]);
+    if (attempt === maxAttempts) {
+      const failed = results.filter((r): r is PromiseRejectedResult => r.status === 'rejected');
+      if (failed.length > 0) {
+        throw new Error(
+          `character preview assets failed to load (${failed.length}): ${failed.map((f) => String(f.reason)).join('; ')}`,
+        );
+      }
+    }
+  }
+}
+
 /** Resolved skin texture for a visual key + skin index, or null for the model's
  *  embedded default (index 0, unknown key, or an atlas that is not loaded yet). */
 export function skinTexture(key: string, skinIndex: number): THREE.Texture | null {
