@@ -2163,7 +2163,7 @@ export const tr_TR: EnTranslations = {
       "tierPipAria": "Seviye {tier}",
       "nextUnlockTier": "{points} bir sonraki aşamaya işaret ediyor: şaheser olma ihtimali artıyor",
       "nextUnlockSpecialized": "{points} Uzmanlaşmış'a işaret ediyor: malzeme maliyetlerinde düşüş",
-      "nextUnlockMax": "Maksimum beceride",
+      "nextUnlockMastered": "Mastered, for now",
       "perkSpecializedLine": "{craft}: Uzmanlaşmış, malzeme maliyetleri -{pct}%",
       "perkSpecializedAt": "{threshold} becerisinde uzmanlaşmıştır",
       "switchCost": "Bir sonraki arketip değişikliği {cost} kefaret puanına mal olur",
@@ -2243,6 +2243,7 @@ export const tr_TR: EnTranslations = {
       "skillReqLine": "{craft} {skill} gerektirir",
       "difficultyFull": "Tam beceri kazanımı",
       "difficultyReduced": "Azaltılmış beceri kazanımı",
+      "difficultyMinimal": "Minimal skill gain",
       "difficultyNone": "Beceri kazanımı yok",
       "stationBadge": "Üretim Tezgâhı",
       "stationOutOfRangeNamed": "Bunu yapmak için {station}'ye gidin.",
@@ -10895,6 +10896,11 @@ export const tr_TR: EnTranslations = {
         "sender": "Üretim Loncası",
         "subject": "Zırh Üretimi ve Mühendislik alanındaki çalışmalarınız",
         "body": "Esnaf,\n\nZırh Üretimi ve Mühendislik alanındaki çalışmalarınızın Lonca'ya ulaştığı haberi: plakalar perçinlendi ve dişliler doğrulandı, iki zanaat birbirini besliyor. Birlikte çalışan komşu el sanatları, uyumlanmaya hazır bir elin işaretidir. Eastbrook'un zırhçısı Demirci Haldren'i arayın: şimdilik ustalar adına konuşuyor. Kendi ellerinizle zanaatınızı ona kanıtlayın, o da iki dalınızın uyumlu olduğunu görecektir.\n\nSaygılarımızla,\nÜretim Loncası"
+      },
+      "mastery_reset_notice": {
+        "sender": "The Guildhall",
+        "subject": "Your craft, made honest",
+        "body": "Guildmate,\n\nThe guild has adopted a new reckoning of mastery. Every hand starts the climb again: your craft skills and your gathering proficiencies have been set to zero.\n\nEverything else is yours, untouched: your recipes, your tools and materials, your bank and gold, your attunements and titles, your deeds and renown, your quests and mail.\n\nThe climb is honest now. Cheap work will not carry you. Seek harder recipes, richer veins, and deeper waters.\n\nWith respect,\nThe Guildhall"
       }
     },
     "itemSets": {

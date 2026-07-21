@@ -33,7 +33,7 @@ Update this file at the end of every implementation and QA session. Statuses:
 | 12 QA | Verify tool tier gating | complete (PR #2223 merged) | 2026-07-20 | 2026-07-20 |
 | 12b | Gathering rhythm | complete (PR #2226 merged into release/v0.29.0) | 2026-07-20 | 2026-07-20 |
 | 12b QA | Verify gathering rhythm | complete (PASS, zero blocking) | 2026-07-20 | 2026-07-20 |
-| 12c | The Mastery Curve | not started | | |
+| 12c | The Mastery Curve | built (PR #2242 open) | 2026-07-20 | 2026-07-20 |
 | 12c QA | Verify The Mastery Curve | not started | | |
 | 12d | Provenance and the harvest loop | not started | | |
 | 12d QA | Verify provenance and the harvest loop | not started | | |
@@ -534,14 +534,14 @@ were re-run green first-hand at the head before review dispatch.
 - [x] Every Pin-cost appendix row executed as briefed; no unlisted pin weakened (two pre-briefed additive extensions outside the appendix, recorded in the as-landed block: the game_audio cue census 14 to 20 and the gather_event_i18n fishingResult cue pin)
 
 ### Phase 12c: The Mastery Curve
-- [ ] The four-state curve replaces the free floor (1 / 0.5 / 0.25 / 0; every recipe tier included; zero new Rng draws)
-- [ ] Enforced per-profession caps as content data (crafts + enchanting 125, mining/logging/herbalism 100, fishing 200) at all four clamp arms
-- [ ] Gathering gains node-tier-relative; fishing gains band-relative and fractional; constants named, exported, pinned
-- [ ] The one-time reset (two maps + one flag, nothing else): keep ledger pinned, re-crossing audit green, blob-diff rehearsal evidence recorded, notice letter delivered once
-- [ ] The shared action throttle covers crafting, disenchant, enchant-apply, salvage
-- [ ] Enchanting gains quality-tiered with the soft ceiling; q_prof_hobby_switch xpReward 0
-- [ ] Four-state difficulty colors and the cap-aware mastered state in the UI
-- [ ] Pin-cost appendix executed as briefed; goldens byte-identical outside the appendix pair
+- [x] The four-state curve replaces the free floor (1 / 0.5 / 0.25 / 0; every recipe tier included; zero new Rng draws)
+- [x] Enforced per-profession caps as content data (crafts + enchanting 125, mining/logging/herbalism 100, fishing 200) at all four clamp arms
+- [x] Gathering gains node-tier-relative; fishing gains band-relative and fractional; constants named, exported, pinned
+- [x] The one-time reset (two maps + one flag, nothing else): keep ledger pinned, re-crossing audit green, blob-diff rehearsal evidence recorded (synthetic corpus; the production-copy run is the maintainer's pre-deploy step), notice letter delivered once
+- [x] The shared action throttle covers crafting, disenchant, enchant-apply, salvage
+- [x] Enchanting gains quality-tiered with the soft ceiling; q_prof_hobby_switch xpReward 0
+- [x] Four-state difficulty colors and the cap-aware mastered state in the UI
+- [x] Pin-cost appendix executed as briefed; goldens byte-identical outside the appendix pair (addendum rows recorded in both phase files)
 
 ### Phase 12d: Provenance and the harvest loop
 - [ ] Identical-payload material stacking in bags AND through the bank move path; counted instanced stacks ride trade, wire, and removal correctly
@@ -1080,3 +1080,58 @@ re-confirmed), cooking rungs are sit-heal food only (maintainer
 glance), and the retro CI reds on the release push (Release gate
 locale shards + version gate) are the branch-wide mid-cycle state,
 identical on the pre-phase push, with the Browser job green.
+
+2026-07-20 Phase 12c (The Mastery Curve) built: phase-start commit 67ae62629
+(the PR #2240 docs merge), PR #2242 off release/v0.29.0, branch
+feature/professions-2-phase-12c. Five thematic commits per the phase cadence
+plus the M16 letter-fill fix, the two appendix golden regens, a
+deeds_reconcile fixture re-pin the full gate caught, screenshots with a new
+four-states shot variant, and the review-round fix commit (six reviewers, all
+READY, zero blocking).
+- KEEP LEDGER (pinned row by row in tests/professions_mastery_reset.test.ts):
+  inventory items KEPT; bank KEPT; copper KEPT; tools KEPT; knownRecipes
+  KEPT; recipesGrandfathered KEPT; attunedPairs and switch history KEPT;
+  hobbyCraft KEPT; deeds and renown KEPT; level and XP KEPT; quest state
+  KEPT; mail KEPT; craftSkills RESET; gatheringProficiency RESET (legacy
+  professions key included); masteryResetApplied ADDED (CharacterState
+  only); perk and specialization activation DERIVED; tier capability
+  DERIVED.
+- BLOB-DIFF REHEARSAL EVIDENCE: tests/mastery_reset_rehearsal.test.ts
+  default synthetic-corpus mode (modern 12b-era blob, legacy
+  professions-key-only blob, over-cap values, minimal fresh blob,
+  already-reset blob; the corpus is built from serializeCharacter with fixed
+  seeds plus a stabilization round trip so deed retro grants never pollute
+  the diff): 7 passed, per-blob assertion that the ONLY deltas are the two
+  zeroed maps (plus the legacy professions dual-write mirror), the flag
+  true, and the documented cap clamps on over-cap rows. The PRODUCTION-COPY
+  run is the maintainer's pre-deploy step: export characters as JSON rows
+  [{id, state, playerClass?}] and run RESET_REHEARSAL_INPUT=<path>
+  npx vitest run tests/mastery_reset_rehearsal.test.ts. The deploy does not
+  ship without that run.
+- BATTLEFIELD TRICKLE SHARE (for the Phase 15 review): BATTLEFIELD_XP_TRICKLE
+  stays 0.25 through the capped gainCraftSkill. Under the curve, 0.25 per
+  qualifying observed use equals one green own craft, half a yellow, a
+  quarter of an orange; once a specialist's recipes gray out the trickle is
+  the only nonzero channel at a quarter of the old per-craft rate. Dormant
+  in shipped content.
+- MAINTAINER-VISIBLE consequences (deliberate, pinned): pre-curve characters
+  who never logged in since the Book of Deeds shipped do not receive the
+  join-time skill-proof retro deed grants at first curve-era login (the
+  reset zeroes skills before the retro sweep); they re-earn on the next real
+  action. The rollback strip-refire caveat is DESTRUCTIVE of
+  rollback-window progress (release-notes item, pinned as a conscious
+  acceptance). The reset-notice letter can be lost in the bounded
+  crash-between-saves and sub-tick-disconnect windows (the authored-letter
+  non-atomic class; skill zeroing itself is never affected).
+- Deferrals: fixture-hygiene rows deliberately left at maxSkill 300 where
+  they are pure pass-through view inputs never compared against content
+  (professions_window_focus incl. its fictional skinning row, the
+  professions_contracts type-contract record); battlefieldExperienceTrickle
+  still RETURNS 0.25 at cap while the write clamps (return-contract chore
+  candidate); craft-celebration tier-up toasts can re-fire for a reset
+  character re-crossing a tier (client-side session-scoped, cosmetic,
+  approved); herbalism/logging finish 75 to 100 on t2 nodes at 0.25 (only
+  ore ships a t3 node), roughly twice mining's time-to-cap for that stretch
+  (Phase 15 balance review). Phase 13 heads-up: the shared throttle gates
+  disenchant/salvage BEFORE their rng draw (unwired today; the wiring QA
+  should remember the budget couples them to crafting's window).

@@ -190,7 +190,12 @@ import {
 } from './deeds_view';
 import { DeedsWindow } from './deeds_window';
 import { DevCommandWindow } from './dev_command_window';
-import { devTierBadgeDataUrl, devTierByIndex, devTierDisplayName } from './dev_tier';
+import {
+  devCardBadgeClass,
+  devTierBadgeDataUrl,
+  devTierByIndex,
+  devTierDisplayName,
+} from './dev_tier';
 import { discordRoleTagLabel } from './discord_role_tag';
 import { discordStatusBadgeDataUrl, discordStatusDisplayName } from './discord_tier';
 import { dropdownKeyNav } from './dropdown_nav';
@@ -217,7 +222,12 @@ import {
   TARGET_FRAME_POS_KEY,
 } from './frame_pos_reset';
 import { gatherDeniedLineKey } from './gathering_view';
-import { holderTierBadgeDataUrl, holderTierByIndex, holderTierDisplayName } from './holder_tier';
+import {
+  holderCardBadgeClass,
+  holderTierBadgeDataUrl,
+  holderTierByIndex,
+  holderTierDisplayName,
+} from './holder_tier';
 import { isSelfOnlyAbility } from './hud/action_bar/ability_self_only';
 import { ActionBarController } from './hud/action_bar/action_bar_controller';
 import {
@@ -12506,7 +12516,7 @@ export class Hud {
     const tierDef = holderTierByIndex(e.holderTier ?? 0);
     const holderHtml = tierDef
       ? `<div class="inspect-holder">` +
-        `<img class="inspect-holder-badge" src="${holderTierBadgeDataUrl(tierDef)}" alt="" draggable="false">` +
+        `<img class="${holderCardBadgeClass(tierDef)}" style="--holder-glow:${tierDef.glow}" src="${holderTierBadgeDataUrl(tierDef)}" alt="" draggable="false">` +
         `<div class="inspect-holder-text">` +
         `<div class="inspect-holder-name">${esc(holderTierDisplayName(tierDef))}</div>` +
         `<div class="inspect-holder-sub">${e.holderBalance ? esc(t('wallet.balanceAmount', { amount: formatNumber(e.holderBalance, { maximumFractionDigits: 0 }) })) : esc(t('wallet.holder'))}</div>` +
@@ -12556,7 +12566,7 @@ export class Hud {
       : '';
     const devHtml = devTierDef
       ? `<div class="inspect-holder">` +
-        `<img class="inspect-holder-badge" src="${devTierBadgeDataUrl(devTierDef)}" alt="" draggable="false">` +
+        `<img class="${devCardBadgeClass(devTierDef)}" style="--dev-glow:${devTierDef.glow}" src="${devTierBadgeDataUrl(devTierDef)}" alt="" draggable="false">` +
         `<div class="inspect-holder-text">` +
         `<div class="inspect-holder-name">${esc(devTierDisplayName(devTierDef))}</div>` +
         `<div class="inspect-holder-sub">${esc(devSub)}</div>` +

@@ -3359,12 +3359,14 @@ describe('full self-state snapshot delta fixture', () => {
     // untouched node (never in the map) still reads ready.
     expect(client.nodeHarvestableByMe(GATHER_NODES[0].id)).toBe(false);
     expect(client.nodeHarvestableByMe('not_a_real_node')).toBe(true);
+    // Phase 12c stage 2 appendix re-pin: the enforced per-profession caps
+    // (mining/logging/herbalism 100, fishing 200) replace the old uniform 300.
     expect(client.professionsState).toEqual({
       skills: [
-        { professionId: 'mining', skill: 6, maxSkill: 300 },
-        { professionId: 'logging', skill: 0, maxSkill: 300 },
-        { professionId: 'herbalism', skill: 0, maxSkill: 300 },
-        { professionId: 'fishing', skill: 0, maxSkill: 300 },
+        { professionId: 'mining', skill: 6, maxSkill: 100 },
+        { professionId: 'logging', skill: 0, maxSkill: 100 },
+        { professionId: 'herbalism', skill: 0, maxSkill: 100 },
+        { professionId: 'fishing', skill: 0, maxSkill: 200 },
       ],
     }); // prof -> professionsState
     expect(client.craftingIdentity).toMatchObject({

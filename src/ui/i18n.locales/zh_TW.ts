@@ -6800,6 +6800,10 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'entities.letters.guild_trend_armorcrafting_engineering.subject': '關於你的護甲鍛造與工程學',
   'entities.letters.guild_trend_armorcrafting_engineering.body':
     '工匠：\n\n你鑽研護甲鍛造與工程學的名聲已傳到公會：鉚好甲片，校準齒輪，兩門技藝相輔相成。能同時打磨相鄰兩門技藝的手，正是準備好調諧的手。請到東溪鎮拜訪哈德倫鐵匠：眼下由他代諸位大師發言。用親手做出的成果向他證明你的技藝，他便會把這兩門技藝調諧為你的主修。\n\n謹此，\n工匠公會',
+  'entities.letters.mastery_reset_notice.sender': '公會會館',
+  'entities.letters.mastery_reset_notice.subject': '你的手藝，從此作數',
+  'entities.letters.mastery_reset_notice.body':
+    '公會同仁：\n\n公會已啟用全新的技藝衡量之法。人人從頭攀登：你的製作技能與採集熟練度已歸零。\n\n其餘一切分毫未動，仍歸你所有：你的配方、工具與材料、銀行與金幣、調諧與頭銜、功績與名望、任務與郵件。\n\n如今的攀登童叟無欺。廉價的活計再也帶不動你。去尋求更難的配方、更富的礦脈、更深的水域吧。\n\n謹致敬意，\n公會會館',
   'hudChrome.calendar.title': '活動日曆',
   'hudChrome.calendar.close': '關閉日曆',
   'hudChrome.calendar.keybindLabel': '活動日曆',
@@ -6925,6 +6929,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.crafting.skillReqLine': '需要{craft} {skill}',
   'hudChrome.crafting.difficultyFull': '完整技能成長',
   'hudChrome.crafting.difficultyReduced': '技能成長減少',
+  'hudChrome.crafting.difficultyMinimal': '微量技能成長',
   'hudChrome.crafting.difficultyNone': '無技能成長',
   'hudChrome.crafting.stationBadge': '製作站',
   'hudChrome.crafting.masterworkToast': '傑作！{name}',
@@ -7841,7 +7846,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.professions.tierPipAria': '階級 {tier}',
   'hudChrome.professions.nextUnlockTier': '距離下一階級還差 {points} 點：打造大師之作的機率將提升',
   'hudChrome.professions.nextUnlockSpecialized': '距離專精還差 {points} 點：材料消耗將降低',
-  'hudChrome.professions.nextUnlockMax': '已達技能上限',
+  'hudChrome.professions.nextUnlockMastered': '已精通，暫時如此',
   'hudChrome.professions.perkSpecializedLine': '{craft}：專精，材料消耗 -{pct}%',
   'hudChrome.professions.perkSpecializedAt': '技能達到 {threshold} 後專精',
   'hudChrome.professions.switchCost': '下次切換原型需要 {cost} 點補償',
