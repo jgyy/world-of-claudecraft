@@ -307,6 +307,7 @@ import {
 } from './professions/gathering';
 import { updateGuildTrendLetters } from './professions/guild_letter';
 import type { MasterworkProc } from './professions/masterwork';
+import { applyMasteryReset, updateMasteryResetNotices } from './professions/mastery_reset';
 import {
   isStationActive,
   type MobileCraftingStation,
@@ -1131,6 +1132,13 @@ export interface PlayerMeta {
   // persisted: a fresh login gets a fresh window rather than carrying a
   // logout-time cooldown across sessions.
   craftThrottle: { windowStart: number; count: number };
+  // One-time mastery reset notice pending (Professions 2.0 Phase 12c): set by
+  // the load-time masteryResetApplied branch, consumed by the tick mail phase
+  // (professions/mastery_reset.ts updateMasteryResetNotices). TRANSIENT:
+  // never serialized, and false is inert in the parity sampler, so no golden
+  // ever sees it. The one-shot flag itself lives ONLY on CharacterState
+  // (masteryResetApplied), never here, so the sampler sees zero new fields.
+  pendingMasteryResetNotice: boolean;
   // The player's own placed mobile crafting station (#1134, wired live in
   // Professions 2.0 Phase 8: see professions/mobile_station.ts). TRANSIENT:
   // never serialized to the character save (CharacterState has no field for
@@ -1341,6 +1349,12 @@ export interface CharacterState {
   // triggers the one-time PRE_TRAINING_RECIPE_IDS union on load, then true
   // is persisted so it never re-runs (it is idempotent anyway).
   recipesGrandfathered?: boolean;
+  // Phase 12c mastery reset already applied (JSONB, the recipesGrandfathered
+  // idiom): absent/false on a pre-curve save triggers the one-time
+  // applyMasteryReset on load (professions/mastery_reset.ts), then LITERAL
+  // true is serialized unconditionally (any blob written by curve-era code
+  // has the reset applied), so it can never re-fire.
+  masteryResetApplied?: boolean;
   townFocus?: Record<string, number>;
   // Active-archetype state (#1129, superseded scope; JSONB, back-compat: absent on
   // older saves loads as emptyArchetypeState, see normalizeArchetypeState).
@@ -2124,6 +2138,10 @@ export class Sim {
       // (a saved character's real flag is restored below).
       recipesGrandfathered: true,
       craftThrottle: { windowStart: 0, count: 0 },
+      // Transient (never serialized; parity-inert while false): only the
+      // load-time mastery reset branch below ever sets it, so a NEW character
+      // never carries a pending notice.
+      pendingMasteryResetNotice: false,
       // Transient (never persisted; see the PlayerMeta field doc): stays null
       // on load too, since savedState carries no mobile-station field.
       mobileStation: null,
@@ -2250,6 +2268,21 @@ export class Sim {
         s.recipesGrandfathered === true,
       );
       meta.archetype = normalizeArchetypeState(s.archetype, meta.craftSkills);
+      // The one-time mastery reset (Professions 2.0 Phase 12c, the curve
+      // deploy): a save written before the curve (flag absent/false) has its
+      // craft skills and gathering proficiencies zeroed exactly once, AFTER
+      // both normalizers above populated meta (and after the archetype
+      // normalize, so a pre-pair save's hobby default still derives from its
+      // historical skills). New characters never reach this branch (the
+      // construction path has no CharacterState), and serializeCharacter
+      // writes the flag as literal true, so the reset fires exactly once per
+      // pre-curve character across relog, reconnect, restart, and later
+      // deploys. The transient notice flag hands the authored letter to the
+      // next tick's mail phase (professions/mastery_reset.ts).
+      if (s.masteryResetApplied !== true) {
+        applyMasteryReset(meta.craftSkills, meta.gatheringProficiency);
+        meta.pendingMasteryResetNotice = true;
+      }
       meta.mailWelcomed = s.mailWelcomed === true;
       meta.guildLetterSent = s.guildLetterSent === true;
       meta.delveMarks = s.delveMarks ?? 0;
@@ -2896,6 +2929,12 @@ export class Sim {
       craftSkills: { ...meta.craftSkills },
       knownRecipes: [...meta.knownRecipes],
       recipesGrandfathered: meta.recipesGrandfathered,
+      // LITERAL true by design: any blob written by curve-era code has the
+      // mastery reset applied (the load branch ran before any save could
+      // happen, and a new character is born past the cut), so the flag
+      // serializes unconditionally. There is deliberately NO PlayerMeta
+      // mirror: the parity sampler must see zero new fields.
+      masteryResetApplied: true,
       archetype: { ...meta.archetype, attunedPairs: [...meta.archetype.attunedPairs] },
       delveMarks: meta.delveMarks,
       delveClears: { ...meta.delveClears },
@@ -4416,6 +4455,12 @@ export class Sim {
     // letter via ctx.mailAuthoredLetter), so appending it inside the mail
     // phase cannot fork the draw order.
     updateGuildTrendLetters(this.ctx);
+    // The one-time mastery reset notice (Professions 2.0 Phase 12c): drains
+    // the transient pendingMasteryResetNotice flag the load-time reset branch
+    // set. Draws ZERO rng and emits nothing itself (it only books a letter
+    // via ctx.mailAuthoredLetter), so appending it inside the mail phase
+    // cannot fork the draw order.
+    updateMasteryResetNotices(this.ctx);
     lap?.('postOffice');
     drainDelayedEvents(this.ctx);
     lap?.('delayedEv');
