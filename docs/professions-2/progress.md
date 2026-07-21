@@ -35,7 +35,7 @@ Update this file at the end of every implementation and QA session. Statuses:
 | 12b QA | Verify gathering rhythm | complete (PASS, zero blocking) | 2026-07-20 | 2026-07-20 |
 | 12c | The Mastery Curve | complete (PR #2242 merged into release/v0.29.0) | 2026-07-20 | 2026-07-20 |
 | 12c QA | Verify The Mastery Curve | complete (PASS, zero blocking) | 2026-07-20 | 2026-07-20 |
-| 12d | Provenance and the harvest loop | not started | | |
+| 12d | Provenance and the harvest loop | built (PR #2264 open) | 2026-07-21 | 2026-07-21 |
 | 12d QA | Verify provenance and the harvest loop | not started | | |
 | 13 | Enchanting reachable | not started | | |
 | 13 QA | Verify enchanting reachable | not started | | |
@@ -544,11 +544,11 @@ were re-run green first-hand at the head before review dispatch.
 - [x] Pin-cost appendix executed as briefed; goldens byte-identical outside the appendix pair (addendum rows recorded in both phase files)
 
 ### Phase 12d: Provenance and the harvest loop
-- [ ] Identical-payload material stacking in bags AND through the bank move path; counted instanced stacks ride trade, wire, and removal correctly
-- [ ] Gathered by copy, the bag-grid instanced marker, and the full-bag signed-downgrade notice
-- [ ] One interact press loots AND harvests; denial of either half never blocks the other; corpse lifecycle decoupled; town focus verified and fixed or made legible
-- [ ] Mail attachment expiry (30 days, one return cycle, system mail exempt)
-- [ ] Companion fixes landed and pinned: #2139 and the force-rename signer sweep
+- [x] Identical-payload material stacking in bags AND through the bank move path; counted instanced stacks ride trade, wire, and removal correctly
+- [x] Gathered by copy, the bag-grid instanced marker, and the full-bag signed-downgrade notice
+- [x] One interact press loots AND harvests; denial of either half never blocks the other; corpse lifecycle decoupled; town focus verified and made legible (picker pre-checked, hint copy)
+- [x] Mail attachment expiry (30 days, one return cycle, system mail exempt by construction)
+- [x] Companion fixes landed and pinned: #2139 (verify-not-refix: the filed overflow was already guarded, now pinned + merge-aware guards) and the force-rename signer sweep
 
 ### Phase 13: Enchanting reachable
 - [ ] Disenchant + enchant-apply + salvage on IWorld, wire commands, bags context UI, both hosts
@@ -1200,3 +1200,51 @@ big-diff recovery recipe); skeptics dissolved 2 of 3 SHOULD-FIX findings
   drain clamp are already pinned); a 49.99 fishing boundary pin (the 49/50
   pair already pins strict-less semantics). Comment-only free-floor drift
   fixed in place (crafting.ts CRAFT_SKILL_GAIN, wheel.ts tier-0 wording).
+
+Phase 12d (2026-07-21): built, PR #2264 open off release/v0.29.0. Phase-start commit
+a9d499291 (the Phase 12c QA merge, the release tip all session). Build =
+six-stage sequential workflow, one cadence commit each, plus follow-ups.
+- The four merge points landed together with the equality module
+  (item_instance_merge.ts); the charges carve-out is the one deliberate
+  extension of the byte-equality spec (mutate-in-place field, forward guard).
+  sanitizeBankState's count clamp flipped in the same commit (the item-loss
+  hazard); the rollback caveat is recorded in state.md and the PR body.
+- The unified press needed NO new command or IWorld member: client-side
+  composition of harvest_corpse then loot_corpse, availability-gated, with
+  the town-focus default server-derived from the components-omitted arm.
+  Sim.interact()'s TARGETED-corpse arm was missed by the build stage and
+  unified in a follow-up commit with its own pin (the scan arm alone was
+  landed first).
+- Two deliberate parity golden regens, draws verified byte-identical outside
+  the moved rows: professions_gather (merged stacks move inventory shape)
+  and l1_loot_distribution (the grace window defers the respawn wanderTimer
+  draw past the trace window).
+- The full suite caught six contract pins the build matrix missed (five
+  emptied-tagged-corpse fast-collapse pins across sim/social/fixes suites,
+  plus the retired-heroic mail round trip absorbing the deploy clock); all
+  re-pinned with comments. The recurring full-gate-catches class.
+- Review fan-out 7/7 delivered first try, zero blocking; three should-fixes
+  landed (marker accessible-name arm via hudChrome.bags.itemAriaInstanced,
+  removeItem survivor-clone pin, the rollback caveat recording).
+- #2139 verify-not-refix: the filed crossing case was ALREADY guarded by the
+  Phase 10 QA grant-order fix; the phase pinned it at the hunted seed and
+  made all signed-grant guards merge-aware (canGrantItemInstance), so a full
+  bag with a byte-equal stack keeps the signature instead of downgrading.
+- Deferred with reasons: foreign-held copies keep a renamed signer's old
+  name (own-blob scope per the phase file, flagged maintainer surface);
+  zero-loot tagged corpses never open (pre-existing, the Phase 3 note);
+  partial instanced splits and the bags/bank split-prompt gate on counted
+  instanced stacks (wave 2 polish); mail expiry has no UI countdown (the
+  return letter's arrival toast is the visibility surface).
+- Mid-PR release sync (2026-07-21): the tip moved 7 commits (loot class
+  balance #2237, the character showcase redesign #2248/#2255, offline-mode
+  dev gating #2254, the unspectate resync #2253); merged in as 4b7280cdb
+  with TWO conflicts (hud.ts import block: union of the gatherDowngrade
+  import and the release's holder_tier removal; generated pending.ts by
+  regen). Release-merge-audit CLEAN: the true branch overlap was hud.ts,
+  components.css, the catalog, and the five overlays, all intents verified
+  present post-merge; loot_roll.ts and sim_context untouched by the delta
+  so the lifecycle premises stand; the release's nythraxis_full_pull golden
+  re-pin does not overlap the phase's two regens and full parity is green
+  on the merged tree; the delta's new db-mock key (getCharactersCount) is
+  release-owned, not the branch-export trap.

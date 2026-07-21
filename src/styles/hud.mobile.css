@@ -2373,7 +2373,7 @@
     }
     body.mobile-touch .armory-card-copy {
       gap: 2px;
-      padding: 6px 7px 7px;
+      padding: 4px 7px 4px;
     }
     body.mobile-touch .armory-inspect-overlay {
       padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right))
@@ -2753,9 +2753,10 @@
   /* Loot Settings is a small dialog; JS docks it beside the party frames on desktop
      but on touch it joins the sheet. Its select is the one interactive control, so
      the sheet pin plus the touch floor below is all it needs (no reflow hazard). */
-  /* Inspect (player profile) on mobile: a full-width, scrollable window with the
-     gear stacked into a single one-item-per-row list, so each item name reads in
-     full instead of being squeezed into two narrow columns. */
+  /* Inspect (player profile) on mobile: a full-width, viewport-capped scrollable
+     window. The showcase compact language keeps the two columns flanking the
+     class-colored stage (not stacked); the shared body.mobile-touch socket / tile
+     rules below (in the character-window block) drive the sockets and stats. */
   body.mobile-touch #inspect-window {
     left: 10px;
     right: 10px;
@@ -2767,16 +2768,19 @@
     box-sizing: border-box;
     overflow-y: auto;
   }
-  body.mobile-touch .inspect-paperdoll {
-    flex-direction: column;
-  }
-  body.mobile-touch .inspect-paperdoll .equip-col {
-    width: 100%;
-  }
-  /* Drop the right column's mirrored layout so every row reads left to right. */
-  body.mobile-touch .inspect-paperdoll .equip-col-right .equip-slot {
+  /* Compact header goes horizontal; the class-colored stage shrinks to the mobile
+     stage size (the shared .char-model-panel mobile size below applies its width). */
+  body.mobile-touch #inspect-window .inspect-card {
     flex-direction: row;
-    text-align: left;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+    padding: 2px 2px 8px;
+  }
+  body.mobile-touch #inspect-window .inspect-model-panel {
+    flex: 0 0 230px;
+    width: 230px;
+    min-height: 220px;
   }
   body.mobile-touch #social-window,
   body.mobile-touch #trade-window {
@@ -3056,8 +3060,8 @@
     max-width: 100%;
     box-sizing: border-box;
   }
-  body.mobile-touch #char-window > .char-stats {
-    margin-top: 6px;
+  body.mobile-touch #char-window > .stat-panels {
+    margin-top: 8px;
   }
   body.mobile-touch #char-window .paperdoll {
     min-width: 0;
@@ -3072,10 +3076,9 @@
       padding-left: calc(var(--window-pad) + env(safe-area-inset-left));
     }
     body.mobile-touch #char-window .char-model-panel {
-      flex: 0 1 180px;
-      width: 180px;
-      min-height: 132px;
-      height: 132px;
+      flex: 0 0 230px;
+      width: 230px;
+      min-height: 220px;
     }
     body.mobile-touch #char-window .char-model-preview {
       min-height: 0;
@@ -3096,28 +3099,110 @@
     margin-inline: 0;
     overflow-wrap: anywhere;
   }
-  /* Narrow the flanking equip columns so both fit beside the model on a phone. */
+  /* ---- Mobile showcase: compact sockets, tiles, panels, corner chips ---- */
+  /* Two flexing columns still flank the stage (compacted, not stacked); the shared
+     .paperdoll / .equip-col / .equip-slot family from components.css carries over. */
+  /* gap matches the mobile window's horizontal padding so the window-edge -> unit
+     gap equals the unit -> stage gap (the band-centering contract holds on mobile
+     too; verified by the centering probe at 844x390). */
+  body.mobile-touch .paperdoll {
+    gap: 14px;
+    padding-top: 8px;
+  }
   body.mobile-touch .equip-col {
-    width: 108px;
+    width: auto;
+    flex: 1 1 0;
+    gap: 8px;
+  }
+  body.mobile-touch .equip-slot {
+    gap: 8px;
+  }
+  /* 38px sockets, 92px text box. */
+  body.mobile-touch .equip-slot .item-icon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border-radius: 6px;
+  }
+  body.mobile-touch .equip-slot > div {
+    flex: 0 0 92px;
   }
   body.mobile-touch .equip-slot .slot-name {
-    font-size: 9px;
+    font-size: 8px;
   }
   body.mobile-touch .equip-slot .slot-item {
     font-size: 10px;
+    line-height: 1.25;
   }
-  /* Phones (the long-press peek audience, same body.mobile-touch gate attachTooltip
-     uses) get a comfortable >=40px long-press target per .stat-cell. Symmetric
-     vertical padding both reaches the touch floor and optically centers the single
-     line, so no flex is needed; the -5px side margins are unchanged, preserving the
-     hover/focus pill's bleed into the 12px column gap. Because the sizing applies in
-     every state (rest/hover/focus alike), rows still never reflow between states, and
-     the compact desktop sheet (no mobile-touch) is untouched. */
-  body.mobile-touch .char-stats .stat-cell {
+  /* The unequip control stays a ~22px always-visible corner chip on touch, anchored
+     to the socket's top-outer corner per column (unit is 138px = 38 + 8 + 92). */
+  body.mobile-touch .equip-slot .equip-unequip-btn {
+    top: -7px;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+  }
+  /* The chip stays visually 22px, but on touch it is the always-visible primary
+     unequip control (no right-click / hover), so its TAP TARGET must hold the
+     >=40x40 floor (src/ui/CLAUDE.md; WCAG 2.2 SC 2.5.5 / 2.5.8). An invisible,
+     centered hit-expander enlarges the touch area without growing the chip; the
+     pseudo-element is part of the button, so a tap anywhere in it unequips. */
+  body.mobile-touch .equip-slot .equip-unequip-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+  }
+  body.mobile-touch .equip-col:not(.equip-col-right) .equip-slot .equip-unequip-btn {
+    left: calc(50% - 80px);
+  }
+  body.mobile-touch .equip-col-right .equip-slot .equip-unequip-btn {
+    right: calc(50% - 80px);
+  }
+  /* Stat panels: 2-column grid, 16px tile numerals. */
+  body.mobile-touch .stat-panels {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  body.mobile-touch .stat-panel {
+    padding: 6px 10px 8px;
+  }
+  body.mobile-touch .sp-title {
+    font-size: 12px;
+    padding-bottom: 3px;
+    margin-bottom: 4px;
+  }
+  /* Comfortable >=40px long-press target per stat cell (the tooltip-peek audience). */
+  body.mobile-touch .stat-panel .stat-cell {
     min-height: 40px;
     box-sizing: border-box;
-    padding: 10px 5px;
-    margin: 0 -5px;
+    align-items: center;
+    font-size: 11px;
+  }
+  body.mobile-touch .stat-panel.attrs-tiles {
+    gap: 6px;
+    padding: 2px 0;
+  }
+  body.mobile-touch .attrs-tiles .stat-cell {
+    /* Tiles are interactive stat cells (tabindex 0, long-press tooltip peek), the
+       same family as the Offense/Defense rows, so they keep the >=40px long-press
+       floor rather than dropping under it; the content centers in the taller tile. */
+    min-height: 40px;
+    justify-content: center;
+    padding: 5px 2px;
+    font-size: 8px;
+    border-radius: 6px;
+  }
+  body.mobile-touch .attrs-tiles .stat-cell b {
+    font-size: 16px;
+  }
+  body.mobile-touch .char-progression {
+    padding: 6px 10px 8px;
+    margin-top: 8px;
   }
   body.mobile-touch .mkt-price-row {
     flex-wrap: wrap;

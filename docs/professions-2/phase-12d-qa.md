@@ -43,10 +43,15 @@ a hard 30-tool-call budget and report-first framing:
   gather, corpse rare+, specimen, masterwork, enchant-carried); the marker on desktop
   and mobile shots; the downgrade notice fires on the exact full-bag boundary and never
   otherwise; the S3 guard.
-- Companion-fix agent: reproduce the pre-fix #2139 overflow seed class and prove it
-  fixed; force-rename a character with signed items everywhere (bags, bank, mail
-  escrow, trade-received copies, equipped eqi) and prove every signer string, the
-  self-signed discount, and battlefield attribution follow the new name.
+- Companion-fix agent (as-landed scope, swept 2026-07-21): the filed #2139 overflow was
+  ALREADY dead at phase start (the Phase 10 QA grant-order fix guards it); the phase
+  pinned the hunted crossing case and made the signed-grant guards MERGE-AWARE
+  (bags.ts canGrantItemInstance), so verify the pin bites and the merge arm keeps the
+  signature at a full bag. Force-rename a character with signed items in its OWN blob
+  (bags, bank, equipped eqi) and prove every signer string, the self-signed discount,
+  and battlefield attribution follow the new name; mail escrow and market hold NO
+  instances by construction, and foreign-held (trade-received) copies keep the stale
+  name BY SCOPE (a flagged maintainer surface, not a defect).
 - Mail agent: expiry at exactly the boundary, the single return cycle, deletion only
   after it, system-mail exemption by class (author a new system letter and prove it
   never expires without touching an id list), pre-existing mail clocks starting at

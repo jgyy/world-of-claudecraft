@@ -771,6 +771,7 @@ export class Api {
 
   async projectStats(): Promise<{
     accounts_created: number;
+    characters_created: number;
     players_online: number;
     realm: string;
   }> {
@@ -891,18 +892,6 @@ export class Api {
   // Current account's Discord link status + reward points + live guild presence.
   async discordStatus(): Promise<Record<string, unknown>> {
     return this.get('/api/discord');
-  }
-
-  // Server-side Welcome Screen flags (today: the Season 1 Armory promo gate).
-  async welcomeFlags(): Promise<{ armoryPromoEnabled: boolean }> {
-    return this.get('/api/welcome/flags');
-  }
-
-  // Daily rewards status (bearer-only, no world/character needed): the Welcome
-  // Screen's chest-tile readiness read reuses the same endpoint the in-world
-  // daily rewards window polls via ClientWorld.dailyRewards().
-  async dailyRewards(): Promise<DailyRewardStatus> {
-    return this.get('/api/daily-rewards');
   }
 
   // Unlink Discord. A Discord-provisioned account (no real password yet) must send a
