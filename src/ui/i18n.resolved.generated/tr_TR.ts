@@ -3547,7 +3547,8 @@ export const tr_TR: EnTranslations = {
       "marketBrowse": "Göz atma: satışta neyin olduğunu bulmak için ilanları kaydırın ya da isme göre arayın. Her ilan malları, satıcıyı ve tüm yığın için istenen fiyatı gösterir.",
       "marketPost": "İlan verme: çantalarınızdan bir yığın seçin, fiyatınızı belirleyin ve listeleyin. Mallar biri satın alana dek Tüccar tarafından tutulur. Satılmayan ilanlar bir süre sonra size geri döner ve fikrinizi değiştirirseniz birini erkenden geri alabilirsiniz.",
       "marketCollect": "Toplama: mallarınız satıldığında, geliriniz Tüccar'da sizi bekler. Satılmadan geri gelen her şeyle birlikte altını toplamak için geri dönün. Tüccar tamamlanan her satıştan küçük bir pay alır.",
-      "marketPricing": "Fiyatlama size kalmış. Başkalarının istediğinden biraz daha düşüğe listelemek genellikle daha hızlı satar, fahiş bir fiyat ise el sürülmeden kalabilir. İlan vermeden önce piyasanın nasıl olduğunu görmek için önce göz atın."
+      "marketPricing": "Fiyatlama size kalmış. Başkalarının istediğinden biraz daha düşüğe listelemek genellikle daha hızlı satar, fahiş bir fiyat ise el sürülmeden kalabilir. İlan vermeden önce piyasanın nasıl olduğunu görmek için önce göz atın.",
+      "marketGiveawayBody": "That small cut is not just a fee: it builds into a shared pool that periodically funds a giveaway of fine gear, drawn from among the people who actually traded on the Market since the last one. You do not need to enter or claim anything; buying or selling on the Market is entry enough. A winner is announced to the world, and the prize waits with the Merchant like any other Market payout."
     },
     "social": {
       "intro": "Dünyanın çoğu tek başına yapılabilir, ama oyun başka insanlarla oynanmak üzere kurulmuştur. İşte nasıl konuşulur, takım kurulur ve kendi çevreni bulursun.",

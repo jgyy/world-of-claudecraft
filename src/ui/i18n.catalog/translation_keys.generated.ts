@@ -3369,6 +3369,7 @@ export type TranslationKeyFlat =
   | 'guide.economy.marketBody'
   | 'guide.economy.marketBrowse'
   | 'guide.economy.marketCollect'
+  | 'guide.economy.marketGiveawayBody'
   | 'guide.economy.marketPost'
   | 'guide.economy.marketPricing'
   | 'guide.economy.marketTitle'
