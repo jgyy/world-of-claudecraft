@@ -2800,7 +2800,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       text-align: center;
-      font-family: var(--title-font);
+      font-family: var(--font-heading);
       font-weight: 700;
       font-size: 26px;
       letter-spacing: 2px;
@@ -3140,7 +3140,7 @@
       display: block;
       flex: 1 1 100%;
       min-height: 44px;
-      font-family: var(--title-font);
+      font-family: var(--font-heading);
       font-size: 17px;
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -3413,7 +3413,7 @@
     border-radius: 8px;
     border: 2px solid rgba(255, 255, 255, 0.18);
     background: rgba(255, 255, 255, 0.06);
-    color: var(--color-text-secondary, #b9b9c7);
+    color: var(--color-text-secondary);
     font-size: 13px;
     font-weight: 500;
     cursor: var(--cursor-point);
@@ -3442,7 +3442,7 @@
     border-radius: 8px;
     border: 2px solid rgba(202, 164, 114, 0.48);
     background: rgba(60, 38, 28, 0.42);
-    color: var(--color-text-secondary, #d6c1a0);
+    color: var(--color-text-secondary);
     font-size: 12px;
     font-weight: 600;
     cursor: var(--cursor-point);
@@ -4189,7 +4189,7 @@
   .cs-realm {
     font-size: 11px;
     color: #7fd4ff;
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     letter-spacing: 0.3px;
   }
   .btn.btn-small {
@@ -4237,7 +4237,7 @@
     opacity: 0.55;
   }
   .realm-name {
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 15px;
     color: #f0ead8;
   }
@@ -4262,11 +4262,11 @@
   .realm-type {
     font-size: 11px;
     color: var(--color-accent);
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
   }
   .realm-pop {
     font-size: 12px;
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     min-width: 64px;
     text-align: right;
   }
@@ -5029,7 +5029,7 @@
     border-radius: 5px;
     background: linear-gradient(#201b28, #100e16);
     color: var(--color-accent);
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 12px;
     cursor: var(--cursor-point);
   }
@@ -5210,7 +5210,7 @@
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-sm);
     color: #e9e3d2;
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 13px;
     cursor: var(--cursor-point);
     transition:
@@ -5315,7 +5315,7 @@
     flex: 1 1 auto;
   }
   .cs-new-btn {
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
   }
 
   /* The detail column is the framed scroll container: its dark background +
@@ -5382,7 +5382,7 @@
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-sm);
     color: #f0ead8;
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 16px;
     letter-spacing: 0.5px;
     padding: 11px 14px;
@@ -5406,7 +5406,7 @@
   }
   .cs-section-header,
   .skin-picker-header {
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 12px;
     letter-spacing: 0.6px;
     text-transform: uppercase;
@@ -5800,7 +5800,7 @@
     height: 132px;
   }
   .inspect-name {
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 20px;
     color: #f0ead8;
   }
@@ -5855,7 +5855,7 @@
     line-height: 1.2;
   }
   .inspect-holder-name {
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 14px;
     color: #f0ead8;
   }
@@ -5872,7 +5872,7 @@
     border-top: 1px solid var(--color-border-default);
   }
   .inspect-equip-title {
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 13px;
     color: var(--color-text-muted);
     text-align: center;
@@ -6886,7 +6886,7 @@
     stroke: none;
   }
   .se-wheel-labels text {
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 9px;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -6941,7 +6941,7 @@
     border: 1px solid #6f5724;
     background: #100d08;
     color: var(--tier-color, #fff);
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 24px;
     letter-spacing: 0.6px;
     text-transform: uppercase;
@@ -7269,7 +7269,7 @@
     padding: 10px 12px;
     background: linear-gradient(180deg, #1b150d, #0f0c07);
     color: var(--tier-color, #fff);
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 18px;
     letter-spacing: 0.4px;
     text-transform: uppercase;
@@ -7307,7 +7307,7 @@
     margin-bottom: 8px;
   }
   .se-tier-name {
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     font-size: 15px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -7342,7 +7342,7 @@
     justify-content: center;
     color: var(--color-text-muted);
     font-size: 16px;
-    font-family: var(--title-font);
+    font-family: var(--font-heading);
     transition:
       box-shadow 0.12s,
       border-color 0.12s;

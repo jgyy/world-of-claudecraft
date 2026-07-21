@@ -14,21 +14,30 @@
    written per element by the HUD, never on :root. */
 @layer tokens {
   :root {
-    --gold: #ffd100;
-    --gold-dim: #c8a838;
-    --border: #6f5a2a;
+    /* DESIGN.md 4.2 classic preset knobs: src/ui/theme.ts writes these (and their
+       themeCssVars derivations below) onto documentElement at boot, which always
+       wins over this stylesheet rule. These :root values are the pre-JS / no-JS
+       fallback, kept equal to the classic preset so first paint never flashes. */
+    --gold: #d8a645;
+    --gold-dim: #a88136;
+    --border: #926321;
     /* --panel-base is the single themeable frame colour; --panel-bg derives the
        shipped gradient from it (overwritten wholesale by the theme system). */
-    --panel-base: #15151f;
-    --panel-bg: linear-gradient(170deg, #15151ff2 0%, #0b0b12f2 60%, #08080df2 100%);
-    /* Typography, Cinzel (heraldic display/headings), Alegreya Sans (UI + body),
-       Alegreya (serif flavour prose). Legacy token names alias the canonical set
-       so every existing usage resolves to the new system. */
-    --font-display: "Cinzel", "Palatino Linotype", Palatino, Georgia, serif;
+    --panel-base: #12232c;
+    --panel-bg: linear-gradient(170deg, #12232cf2 0%, #0a151cf2 60%, #0a151cf2 100%);
+    /* Typography (DESIGN.md 5.1): Alegreya is the in-world display/body/serif
+       family; Cinzel becomes the brand-only face (--font-brand), reserved for the
+       pre-game shell, logo lockups, and static pages. --font-heading is shell.css's
+       legacy alias and stays pointed at --font-brand so its 44 call sites keep
+       rendering Cinzel without a per-selector migration; --title-font is the
+       in-game HUD/window title alias and follows --font-display onto Alegreya. */
+    --font-display: "Alegreya", "Palatino Linotype", Palatino, Georgia, serif;
+    --font-brand: "Cinzel", "Palatino Linotype", Palatino, Georgia, serif;
     --font-ui: "Alegreya Sans", "Segoe UI", system-ui, "Helvetica Neue", sans-serif;
+    --font-label: "Alegreya Sans SC", "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
     --font-serif: "Alegreya", "Palatino Linotype", Palatino, Georgia, serif;
     --title-font: var(--font-display);
-    --font-heading: var(--font-display);
+    --font-heading: var(--font-brand);
     --ui-font: var(--font-ui);
     --font-sans: var(--font-ui);
     --body-font: var(--font-ui);
@@ -36,12 +45,12 @@
     /* --gold is the single source of truth for the primary accent */
     --color-primary: var(--gold);
     --color-primary-dim: var(--gold-dim);
-    --color-primary-glow: rgba(255, 209, 0, 0.2);
-    --color-primary-glow-heavy: rgba(255, 209, 0, 0.4);
+    --color-primary-glow: rgba(216, 166, 69, 0.2);
+    --color-primary-glow-heavy: rgba(216, 166, 69, 0.4);
 
     /* resource bars / unit-frame states / auras (previously hardcoded across CSS + JS) */
-    --color-hp: #1eb838;
-    --color-mana: #2b7bd4;
+    --color-hp: #25c84a;
+    --color-mana: #2d8cf0;
     --color-rage: #c0392b;
     --color-energy: #e4c531;
     --color-hostile: #ff6b5e;
@@ -63,13 +72,23 @@
 
     --color-bg-dark: #08080d;
     --color-bg-input: #0a0a0f;
-    --color-border-default: #4e3d1d;
-    --color-border-focus: #c8a838;
+    --color-border-default: #6e4a19;
+    --color-border-focus: #e1ba6e;
     --color-border-invalid: #ff8f85;
     --color-border-valid: #48e060;
+    /* DESIGN.md 4.3: the border knob's own name, for components already consuming
+       it by var() without a hand-migrated call site. */
+    --panel-border: var(--border);
 
-    --color-text-light: #f0ebd8;
-    --color-text-muted: #998d6a;
+    --color-text-light: #fff4d9;
+    --color-text-muted: #c4b590;
+    /* DESIGN.md 4.3 themed derivations (classic outputs; src/ui/theme.ts
+       recomputes all four per preset via themeCssVars, contrast-repaired). */
+    --color-accent-hover: #e1ba6e;
+    --color-accent-glint: #eacf9b;
+    --color-text-secondary: #e9dcbd;
+    --color-text-faint: #a7a694;
+    --panel-fill-strong: rgba(7, 14, 18, 0.95);
     /* Accent/gold for text on panel surfaces, and overlay text that floats
        over the 3D world. The theme system (src/ui/theme.ts) recomputes
        --color-accent/--color-gold per preset so they stay AA-readable on a
@@ -78,9 +97,18 @@
     --color-accent: var(--gold);
     --color-text-overlay: #f4eede;
     --text-outline-color: #000000;
-    --panel-edge: #08080d;
+    --panel-edge: #0a151c;
     --color-text-error: #ff8f85;
     --color-text-success: #7fdc4f;
+    /* DESIGN.md 4.3 semantic state colors: static seeds, never theme-preset
+       dependent. Used as fills/markers; themeCssVars does not currently
+       contrast-repair these (none is consumed as small body text today). */
+    --color-info: #45c9ff;
+    --color-quest: #ffd12d;
+    --color-warning: #ff9d32;
+    --color-danger: #ee4d3c;
+    --color-xp: #8f37dc;
+    --color-xp-rested: #4a8fe0;
     /* Item-name color for an item with no quality (bags_window.ts uses this token
        as the fallback when QUALITY_COLOR has no entry, so the painter carries no
        raw hex). Exact pre-existing value. */
@@ -167,6 +195,19 @@
     --color-talent-req: #caa;
     --color-talent-dormant: #e0635a;
 
+    /* DESIGN.md 4.3 static ink ramp: dark chrome depths, legitimately
+       preset-invariant (backdrops, wells, keylines stay dark on every preset). */
+    --color-ink-1000: #04090d;
+    --color-ink-950: #071117;
+    --color-ink-900: #0b171e;
+    --color-ink-850: #10212a;
+    --color-ink-800: #172b35;
+
+    /* The static gold ramp (DESIGN.md 4.3) already exists below, added by
+       PR #2196 (the Performance Overlay's gilded ornament, purely additive at
+       the time): --color-gold-900 through --color-gold-300, next to the
+       --perf-ornament-* vars. This phase 1 change reuses it as-is. */
+
     --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 16px;
@@ -174,9 +215,20 @@
 
     --radius-sm: 4px;
     --radius-md: 8px;
+    /* DESIGN.md 8.1 component-family radii: slots (action/item), buttons, windows. */
+    --radius-slot: 5px;
+    --radius-button: 7px;
+    --radius-window: 10px;
 
     --transition-speed: 0.25s;
     --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    /* DESIGN.md 11.1 chrome-specific durations: --transition-speed above stays for
+       existing consumers; new chrome work (phase 2) rides these instead. */
+    --dur-fast: 90ms;
+    --dur-press: 60ms;
+    --dur-panel: 160ms;
+    --dur-panel-close: 120ms;
+    --dur-frame: 120ms;
 
     /* Custom scrollbar tokens */
     --scrollbar-thumb: #5c4722;

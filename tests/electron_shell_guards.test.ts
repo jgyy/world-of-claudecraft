@@ -183,9 +183,10 @@ describe('buildContentSecurityPolicy', () => {
     expect(localConnectSrc).toContain('ws://127.0.0.1:8787');
   });
 
-  it('mirrors the web build: Google Fonts, worker blobs, and the Turnstile frame', () => {
-    expect(csp).toContain("style-src 'self' 'unsafe-inline' https://fonts.googleapis.com");
-    expect(csp).toContain("font-src 'self' https://fonts.gstatic.com");
+  it('mirrors the web build: self-hosted fonts (DESIGN.md 5.2), worker blobs, and the Turnstile frame', () => {
+    expect(csp).toContain("style-src 'self' 'unsafe-inline'");
+    expect(csp).not.toContain('fonts.googleapis.com');
+    expect(csp).not.toContain('fonts.gstatic.com');
     expect(csp).toContain("worker-src 'self' blob:");
     expect(csp).toContain('frame-src https://challenges.cloudflare.com');
   });

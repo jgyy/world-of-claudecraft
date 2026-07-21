@@ -4,6 +4,7 @@ import {
   DEFAULT_THEME,
   ensureReadable,
   isValidHex,
+  MIN_LARGE_CONTRAST,
   mixHex,
   PRESET_ORDER,
   parseTheme,
@@ -41,24 +42,51 @@ describe('theme pure core', () => {
     }
   });
 
-  it('classic preset reproduces the shipped gold palette', () => {
+  it('classic preset reproduces the DESIGN.md 4.2 shipped gold palette', () => {
     const vars = themeCssVars(THEME_PRESETS.classic);
-    expect(vars['--gold']).toBe('#ffd100');
-    expect(vars['--border']).toBe('#6f5a2a');
-    expect(vars['--color-text-light']).toBe('#f0ebd8');
-    expect(vars['--color-hp']).toBe('#1eb838');
+    expect(vars['--gold']).toBe('#d8a645');
+    expect(vars['--border']).toBe('#926321');
+    expect(vars['--color-text-light']).toBe('#fff4d9');
+    expect(vars['--color-hp']).toBe('#25c84a');
   });
 
   it('expands knobs into the full CSS variable set including derived colours', () => {
     const vars = themeCssVars(THEME_PRESETS.classic);
     // derived from accent
-    expect(vars['--gold-dim']).toBe(mixHex('#ffd100', '#000000', 0.22));
-    expect(vars['--color-primary-glow']).toBe(rgba('#ffd100', 0.2));
+    expect(vars['--gold-dim']).toBe(mixHex('#d8a645', '#000000', 0.22));
+    expect(vars['--color-primary-glow']).toBe(rgba('#d8a645', 0.2));
     // panel-bg is a gradient built from the panel knob
     expect(vars['--panel-bg']).toContain('linear-gradient');
-    expect(vars['--panel-base']).toBe('#15151f');
+    expect(vars['--panel-base']).toBe('#12232c');
     // scrollbar derives from border
-    expect(vars['--scrollbar-thumb-hover']).toBe('#6f5a2a');
+    expect(vars['--scrollbar-thumb-hover']).toBe('#926321');
+  });
+
+  it('DESIGN.md 4.3 themed derivations: accent-hover/glint, text-secondary/faint, panel-fill-strong', () => {
+    const vars = themeCssVars(THEME_PRESETS.classic);
+    expect(vars['--color-accent-hover']).toBe(mixHex('#d8a645', '#ffffff', 0.22));
+    expect(vars['--color-accent-glint']).toBe(mixHex('#d8a645', '#ffffff', 0.46));
+    expect(vars['--color-border-focus']).toBe(vars['--color-accent-hover']);
+    expect(vars['--panel-border']).toBe(vars['--border']);
+    expect(isValidHex(vars['--color-text-secondary'])).toBe(true);
+    expect(isValidHex(vars['--color-text-faint'])).toBe(true);
+    expect(vars['--panel-fill-strong']).toMatch(/^rgba\(/);
+    // both derived text shades clear the large-text contrast floor on every preset
+    for (const id of PRESET_ORDER) {
+      const v = themeCssVars(THEME_PRESETS[id]);
+      expect(
+        contrastRatio(v['--color-text-secondary'], THEME_PRESETS[id].panel),
+      ).toBeGreaterThanOrEqual(MIN_LARGE_CONTRAST);
+      expect(
+        contrastRatio(v['--color-text-faint'], THEME_PRESETS[id].panel),
+      ).toBeGreaterThanOrEqual(MIN_LARGE_CONTRAST);
+      // accent-hover doubles as interactive gold text and the focus-ring border,
+      // so it is contrast-repaired even on a light preset (e.g. parchment) where
+      // a naive "lighten toward white" would otherwise wash it out.
+      expect(
+        contrastRatio(v['--color-accent-hover'], THEME_PRESETS[id].panel),
+      ).toBeGreaterThanOrEqual(MIN_LARGE_CONTRAST);
+    }
   });
 
   it('custom overrides win over the preset; absent knobs fall through', () => {

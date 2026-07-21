@@ -35,8 +35,9 @@
    SUBLAYER separator, so "hud.mobile" would be the "mobile" sublayer of the early
    "hud" layer (and would lose to shell). hud-mobile / index-extra / play-extra are
    top-level layers placed exactly where this declaration puts them. */
-@layer tokens, base, layout, components, hud, shell, hud-mobile, index-extra, play-extra;
+@layer fonts, tokens, base, layout, components, hud, shell, hud-mobile, index-extra, play-extra;
 
+@import "./fonts.css";
 @import "./tokens.css";
 @import "./base.css";
 @import "./layout.css";

@@ -62,15 +62,16 @@ export const THEME_KNOB_LABEL_KEY: Record<ThemeKnob, string> = {
 export const PRESET_ORDER: PresetId[] = ['classic', 'midnight', 'parchment', 'highContrast'];
 
 // `classic` reproduces the shipped gold/dark palette; the others are alternates.
+// Values follow DESIGN.md 4.2's nine classic theme knobs.
 export const THEME_PRESETS: Record<PresetId, ThemeKnobs> = {
   classic: {
-    accent: '#ffd100',
-    border: '#6f5a2a',
-    panel: '#15151f',
-    text: '#f0ebd8',
-    textMuted: '#998d6a',
-    hp: '#1eb838',
-    mana: '#2b7bd4',
+    accent: '#d8a645',
+    border: '#926321',
+    panel: '#12232c',
+    text: '#fff4d9',
+    textMuted: '#c4b590',
+    hp: '#25c84a',
+    mana: '#2d8cf0',
     rage: '#c0392b',
     energy: '#e4c531',
   },
@@ -225,6 +226,14 @@ export function resolveTheme(state: ThemeState): ThemeKnobs {
 export function themeCssVars(knobs: ThemeKnobs): Record<string, string> {
   const { accent, border, panel, text, textMuted, hp, mana, rage, energy } = knobs;
   const accentDim = mixHex(accent, '#000000', 0.22);
+  // DESIGN.md 4.3 themed derivations: accent lightened one/two steps for hover
+  // and inner-edge-glint reads; on the classic preset this lands the accent
+  // knob (which the palette also names --color-gold-500) one and two static
+  // gold-ramp steps up. accent-hover doubles as interactive gold TEXT and the
+  // focus-ring border, so it is contrast-repaired like the base accent; glint
+  // is inner-edge-highlight decoration only and is not.
+  const accentHover = ensureReadable(mixHex(accent, '#ffffff', 0.22), panel, MIN_LARGE_CONTRAST);
+  const accentGlint = mixHex(accent, '#ffffff', 0.46);
   const lightPanel = isLightPanel(panel);
   // panelEdge: dark panels darken hard (the classic vignette); light panels only
   // tint slightly so body/muted/accent text stays above AA over the gradient's
@@ -248,22 +257,36 @@ export function themeCssVars(knobs: ThemeKnobs): Record<string, string> {
   // the glyph instead of separating it. The halo needs to sit on the opposite
   // side of the panel's lightness from the text, so flip it light there.
   const textOutline = lightPanel ? '#ffffff' : '#000000';
+  // DESIGN.md 4.3: secondary text mixes toward textMuted; faint/metadata text
+  // cools and dims textMuted further. Both are contrast-repaired at the large
+  // (muted-text) tier so a custom panel/text pair can never ship below AA.
+  const textSecondary = ensureReadable(mixHex(text, textMuted, 0.38), panel, MIN_LARGE_CONTRAST);
+  const textFaint = ensureReadable(mixHex(textMuted, '#8a9698', 0.5), panel, MIN_LARGE_CONTRAST);
+  // Tooltips, text inputs, confirm dialogs: the panel mixed harder toward
+  // black at a higher alpha than the standard panel gradient.
+  const panelFillStrong = rgba(mixHex(panel, '#000000', 0.6), 0.95);
   return {
     '--gold': accent,
     '--gold-dim': accentDim,
     '--color-gold': colorGold,
     '--color-accent': colorGold,
+    '--color-accent-hover': accentHover,
+    '--color-accent-glint': accentGlint,
     '--color-primary-glow': rgba(accent, 0.2),
     '--color-primary-glow-heavy': rgba(accent, 0.4),
-    '--color-border-focus': accentDim,
+    '--color-border-focus': accentHover,
     '--border': border,
+    '--panel-border': border,
     '--color-border-default': mixHex(border, '#000000', 0.25),
     '--panel-base': panel,
     '--panel-bg': `linear-gradient(170deg, ${rgba(panel, 0.95)} 0%, ${rgba(panelEdge, 0.95)} 60%, ${rgba(panelEdge, 0.95)} 100%)`,
     '--panel-edge': panelEdge,
+    '--panel-fill-strong': panelFillStrong,
     '--color-bg-dark': panelEdge,
     '--color-text-light': text,
     '--color-text-muted': textMuted,
+    '--color-text-secondary': textSecondary,
+    '--color-text-faint': textFaint,
     '--color-text-overlay': overlayText,
     '--text-outline-color': textOutline,
     '--scrollbar-thumb': mixHex(border, '#000000', 0.15),

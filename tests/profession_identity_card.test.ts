@@ -298,7 +298,7 @@ describe('crafting window Phase 6 QA pins', () => {
     // idiom), green (QUALITY_COLOR.uncommon), gray (QUALITY_COLOR.poor).
     const rows = [
       { difficulty: 'full' as const, tint: '#ff8000', label: 'Full skill gain' },
-      { difficulty: 'reduced' as const, tint: '#ffd100', label: 'Reduced skill gain' },
+      { difficulty: 'reduced' as const, tint: '#d8a645', label: 'Reduced skill gain' },
       { difficulty: 'minimal' as const, tint: '#1eff00', label: 'Minimal skill gain' },
       { difficulty: 'none' as const, tint: '#9d9d9d', label: 'No skill gain' },
     ];
@@ -403,7 +403,7 @@ describe('GOLD_ACCENT_COLOR lockstep (Phase 12c QA)', () => {
     const match = tokens.match(/--gold:\s*(#[0-9a-fA-F]{6})\s*;/);
     expect(match, 'tokens.css should declare --gold as a 6-digit hex').not.toBeNull();
     expect(match?.[1]).toBe(GOLD_ACCENT_COLOR);
-    expect(GOLD_ACCENT_COLOR).toBe('#ffd100');
+    expect(GOLD_ACCENT_COLOR).toBe('#d8a645');
   });
 });
 

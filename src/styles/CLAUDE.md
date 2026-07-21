@@ -10,11 +10,19 @@ inline `<style>` blocks into one directory under a single `@layer` order, import
 once from `src/main.ts` via the `index.css` barrel (admin/guide keep their own entries). No
 CSS framework; hand-authored, Lightning-compiled.
 
+**Restyle work follows the root `DESIGN.md` design-language spec**, an adopted standard
+that lands in the ordered phases of its section 15, never as isolated fragments. Phase 1
+(Foundation: tokens, theme, self-hosted Alegreya typography) has landed; the token and
+theme values below reflect it. Before touching a color, font, radius, spacing, or duration
+value, check `DESIGN.md` for the target first; this file states the mechanism, that one
+states the target.
+
 ## Module shape and the @layer order
 `index.css` is the barrel: it declares ONE `@layer` order and `@import`s every module in
 that order. Modules, in cascade order:
 | Layer | Module | What it is |
 |---|---|---|
+| `fonts` | `fonts.css` | self-hosted `@font-face` rules (DESIGN.md 5.2); Alegreya/Alegreya Sans/Alegreya Sans SC/Cinzel subsets from `public/fonts/`, shared with the guide |
 | `tokens` | `tokens.css` | `:root` design tokens + `--color-*` / `--fx-*` defaults |
 | `base` | `base.css` | element + reset + base-tier glyph styling + the a11y skip/forced-colors/print sections |
 | `layout` | `layout.css` | the generic `.window` centering/shell |
