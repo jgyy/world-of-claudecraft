@@ -99,12 +99,12 @@ describe('computeQuestState cadence gating', () => {
     // WORK_ORDER is repeatable, so a fresh character sees it available.
     expect(computeQuestState(WORK_ORDER, empty, done, 1)).toBe('available');
     // In its cadence window: unavailable. Out of window: available again.
-    expect(computeQuestState(WORK_ORDER, empty, done, 1, undefined, new Set([WORK_ORDER]))).toBe(
-      'unavailable',
-    );
-    expect(computeQuestState(WORK_ORDER, empty, done, 1, undefined, new Set(['other']))).toBe(
-      'available',
-    );
+    expect(
+      computeQuestState(WORK_ORDER, empty, done, 1, undefined, undefined, new Set([WORK_ORDER])),
+    ).toBe('unavailable');
+    expect(
+      computeQuestState(WORK_ORDER, empty, done, 1, undefined, undefined, new Set(['other'])),
+    ).toBe('available');
   });
 });
 
