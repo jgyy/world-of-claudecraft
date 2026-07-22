@@ -458,28 +458,46 @@ export const TARGETS = [
     // gathered variant hovers a signed harvest material instead: the same
     // signer line reads Gathered by there (Crafted by on the base tree, the
     // honest before side).
-    variants: [{ key: 'crafted' }, { key: 'gathered', gathered: true }],
+    variants: [
+      { key: 'crafted' },
+      { key: 'gathered', gathered: true },
+      // Phase 14b: a commissioned copy bound to its recipient, so the gold
+      // Maker's Bond line reads beside the maker's mark.
+      { key: 'commission-bound', commission: true },
+    ],
     async capture(page, variant) {
-      await page.evaluate((gathered) => {
-        document.querySelector('#gpu-notice')?.remove();
-        document.querySelector('.camera-prompt-confirm')?.click();
-        const game = window.__game;
-        try {
-          if (gathered) {
-            game?.sim?.addItemInstance('pristine_hide', { signer: 'Thorgar' });
-          } else {
-            // A dungeon-drop def the starter bag can never contain, so the
-            // aria-label lookup below is unambiguous.
-            game?.sim?.addItemInstance('gravewyrm_gauntlets', {
-              signer: 'Thorgar',
-              rolled: { masterwork: true, stats: { str: 2, sta: 1 } },
-            });
-          }
-        } catch {}
-        const el = document.querySelector('#bags');
-        if (el) el.style.display = 'none';
-        game?.hud?.toggleBags?.();
-      }, Boolean(variant?.gathered));
+      await page.evaluate(
+        (mode) => {
+          document.querySelector('#gpu-notice')?.remove();
+          document.querySelector('.camera-prompt-confirm')?.click();
+          const game = window.__game;
+          try {
+            if (mode === 'gathered') {
+              game?.sim?.addItemInstance('pristine_hide', { signer: 'Thorgar' });
+            } else if (mode === 'commission') {
+              // Phase 14b: a commissioned (bindOnTrade) copy already bound to
+              // its recipient; the tooltip composes the bound line with the
+              // maker's mark.
+              game?.sim?.addItemInstance('gravewyrm_gauntlets', {
+                signer: 'Thorgar',
+                bindOnTrade: true,
+                boundTo: game?.sim?.playerId,
+              });
+            } else {
+              // A dungeon-drop def the starter bag can never contain, so the
+              // aria-label lookup below is unambiguous.
+              game?.sim?.addItemInstance('gravewyrm_gauntlets', {
+                signer: 'Thorgar',
+                rolled: { masterwork: true, stats: { str: 2, sta: 1 } },
+              });
+            }
+          } catch {}
+          const el = document.querySelector('#bags');
+          if (el) el.style.display = 'none';
+          game?.hud?.toggleBags?.();
+        },
+        variant?.gathered ? 'gathered' : variant?.commission ? 'commission' : 'crafted',
+      );
       // toggleBags tracks logical open state, so a shared page where an earlier
       // target left the bags logically open needs a second toggle to reopen.
       let open = await pollForSize(page, '#bags');
@@ -506,6 +524,50 @@ export const TARGETS = [
       await pollForSize(page, '#tooltip');
       await wait(300);
       return {};
+    },
+  },
+  {
+    key: 'unbind-window',
+    label: "Maker's Bond unbind window (station master service)",
+    when: ['ui/hud/vendor/unbind', 'sim/professions/commission'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    // Grant a bound commissioned piece plus the fee, stand next to the forge
+    // master (the walk-away proximity close needs the player within 8yd of
+    // the NPC), and open the service window directly. The row lists the
+    // DEF-quality fee off the sim's own unbindFeeFor, so the shot proves the
+    // fee-before-confirm surface.
+    async capture(page) {
+      const staged = await page.evaluate(() => {
+        document.querySelector('#gpu-notice')?.remove();
+        document.querySelector('.camera-prompt-confirm')?.click();
+        const game = window.__game;
+        const sim = game?.sim;
+        if (!game || !sim) return { ok: false, reason: 'offline world is unavailable' };
+        try {
+          sim.addItemInstance('eastbrook_arming_sword', {
+            bindOnTrade: true,
+            boundTo: sim.playerId,
+            signer: 'Thorgar',
+          });
+        } catch {}
+        const meta = sim.players?.get(sim.primaryId);
+        if (meta) meta.copper = Math.max(meta.copper, 50000);
+        let master = null;
+        for (const e of sim.entities.values()) {
+          if (e.templateId === 'forgemistress_darva') master = e;
+        }
+        if (!master) return { ok: false, reason: 'forge master not found' };
+        const p = sim.player;
+        p.pos.x = master.pos.x + 1.5;
+        p.pos.z = master.pos.z;
+        const el = document.querySelector('#unbind-window');
+        if (el) el.style.display = 'none';
+        game.hud?.openUnbind?.(master.id);
+        return { ok: true };
+      });
+      if (!staged.ok) throw new Error(staged.reason);
+      const open = await pollForSize(page, '#unbind-window');
+      return open ? { clip: '#unbind-window' } : {};
     },
   },
   {
@@ -1422,6 +1484,102 @@ export const TARGETS = [
       // The anvil GLB and station clutter stream in on first view; wait generously.
       await wait(4500);
       await page.evaluate(() => document.querySelector('#gpu-notice')?.remove());
+      return {};
+    },
+  },
+  {
+    key: 'party-below-target',
+    label: 'Party frames clear the target buff strip',
+    when: ['party_below_target'],
+    variants: [
+      { key: 'desktop', charClass: 'paladin', charName: 'Overlap' },
+      { key: 'mobile', charClass: 'paladin', charName: 'Overlap', mobile: true },
+      // The common case: an unwrapped strip, where the full 2x2 party fits
+      // above the move joystick (the 18-aura variant shows the degraded
+      // one-row-plus-scroll extreme).
+      { key: 'mobile-light', charClass: 'paladin', charName: 'Overlap', mobile: true, auras: 6 },
+    ],
+    async capture(page, variant) {
+      await page.evaluate((auraCount) => {
+        const sim = window.__game.sim;
+        const me = sim.primaryId;
+        const p = sim.player;
+        // Party state lives on the PartyMachine (sim.party); assemble the
+        // struct directly (offline invites queue stale cards).
+        const pm = sim.party;
+        const roster = [
+          ['Brightoak', 'druid'],
+          ['Stormcaller', 'shaman'],
+          ['Nightblade', 'rogue'],
+          ['Emberlyn', 'mage'],
+        ];
+        const pids = roster.map(([name, cls], i) => {
+          const pid = sim.addPlayer(cls, name);
+          const e = sim.entities.get(pid);
+          if (e) {
+            e.pos = { x: p.pos.x + (i % 4) * 2 - 3, y: p.pos.y, z: p.pos.z + 2 };
+            e.prevPos = { ...e.pos };
+          }
+          return pid;
+        });
+        const party = {
+          id: pm.nextPartyId++,
+          leader: me,
+          members: [me, ...pids],
+          raid: false,
+          raidGroups: new Map(),
+          lootStrategies: {},
+        };
+        pm.parties.set(party.id, party);
+        pm.partyByPid.set(me, party.id);
+        for (const q of pids) pm.partyByPid.set(q, party.id);
+        // Target a nearby mob and load its strip with enough auras that the
+        // wrapped rows exceed the old hand-tuned below-target offset.
+        let mob = null;
+        for (const e of sim.entities.values()) {
+          if (e.kind === 'mob' && e.ownerId === null && !e.dead) {
+            mob = e;
+            break;
+          }
+        }
+        if (!mob) return;
+        mob.pos = { x: p.pos.x + 2, y: p.pos.y, z: p.pos.z + 8 };
+        mob.prevPos = { ...mob.pos };
+        sim.rebucket(mob);
+        sim.targetEntity(mob.id);
+        for (let i = 0; i < auraCount; i++) {
+          sim.applyAura(mob, {
+            id: `overlap_probe_${i}`,
+            name: `Probe ${i}`,
+            kind: 'dot',
+            value: 1,
+            remaining: 600,
+            duration: 600,
+            sourceId: me,
+            school: 'shadow',
+          });
+        }
+      }, variant.auras ?? 18);
+      await wait(1200);
+      // Becoming leader auto-opens Loot Settings on the frame the HUD notices
+      // the new party; close it AFTER that frame so the corner stays clean.
+      await page.evaluate(() => window.__game.hud.closeLootSettings?.());
+      if (variant.mobile) {
+        // Expand the party chip (persisted-collapse default) so the member
+        // frames render below the strip; poll its own aria-expanded state.
+        for (let i = 0; i < 8; i++) {
+          const state = await page.evaluate(() => {
+            const chip = document.querySelector('#party-frames [aria-expanded]');
+            if (!chip) return 'no-chip';
+            if (chip.getAttribute('aria-expanded') === 'true') return 'expanded';
+            chip.click();
+            return 'clicked';
+          });
+          if (state === 'expanded' || state === 'no-chip') break;
+          await wait(400);
+        }
+      }
+      await wait(600);
       return {};
     },
   },

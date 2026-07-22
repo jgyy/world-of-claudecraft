@@ -313,6 +313,8 @@ export const IWORLD_MEMBERS = [
   { name: 'lastDisenchantResult', kind: 'data' },
   { name: 'lastEnchantResult', kind: 'data' },
   { name: 'lastSalvageResult', kind: 'data' },
+  // Maker's Bond unbind service (Professions 2.0 Phase 14b).
+  { name: 'unbindItem', kind: 'method' },
   { name: 'raidLockouts', kind: 'method' }, // read-returning (5/6)
   { name: 'dungeonDifficulty', kind: 'method' }, // read-returning
   { name: 'setDungeonDifficulty', kind: 'method' },
@@ -469,12 +471,11 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // pickRowTalent; rowPicks stays off the seam, rows live on the allocation)
     // plus the release's Card Duel facet, the Professions 2.0 identity
     // surface, Phase 8's mobile-station pair (placeMobileStation +
-    // activeMobileStationCraft), the release's enchanting/disenchanting/salvage
-    // trio (applyEnchant, disenchantItem, salvageItem plus their last*Result
-    // data members), and this branch's dailyQuests member.
-    expect(IWORLD_MEMBERS.length).toBe(260);
+    // activeMobileStationCraft), Phase 14b's unbindItem command, and this
+    // branch's dailyQuests data member.
+    expect(IWORLD_MEMBERS.length).toBe(261);
     expect(DATA_MEMBERS.length).toBe(72);
-    expect(METHOD_MEMBERS.length).toBe(188);
+    expect(METHOD_MEMBERS.length).toBe(189);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -732,6 +733,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'tradeSetOffer',
       'trainRecipe',
       'turnInQuest',
+      'unbindItem',
       'unequipBag',
       'unequipItem',
       'unequipMechChroma',
@@ -1005,6 +1007,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'tradeSetOffer',
       'trainRecipe',
       'turnInQuest',
+      'unbindItem',
       'unequipBag',
       'unequipItem',
       'unequipMechChroma',
@@ -1448,6 +1451,7 @@ const FACET_PROFESSIONS = [
   'lastDisenchantResult',
   'lastEnchantResult',
   'lastSalvageResult',
+  'unbindItem',
 ] as const satisfies readonly (keyof IWorldProfessions)[];
 type _ExhaustProfessions = AssertNever<
   Exclude<keyof IWorldProfessions, (typeof FACET_PROFESSIONS)[number]>

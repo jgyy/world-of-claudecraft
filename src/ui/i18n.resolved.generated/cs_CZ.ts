@@ -1038,6 +1038,7 @@ export const cs_CZ: EnTranslations = {
       "showWalletOnPlayerCard": "Zobrazit peněženku na kartě hráče",
       "showDevBadges": "Zobrazit vývojářské odznaky",
       "showOwnNameplate": "Zobrazit mou jmenovku",
+      "showPlayerNameplates": "Show Player Nameplates",
       "uiScale": "Měřítko UI",
       "playerFrameScale": "Měřítko rámu hráče",
       "targetFrameScale": "Měřítko rámu cíle",
@@ -1840,6 +1841,7 @@ export const cs_CZ: EnTranslations = {
         "legend": "LEGENDA",
         "shill": "HLASATEL"
       },
+      "roleTagChatTitle": "Verified server role: {role}",
       "guildMember": "Ověřený člen",
       "notMember": "Zatím nejsi na serveru",
       "joinCta": "Připojit se na Discord",
@@ -2332,7 +2334,11 @@ export const cs_CZ: EnTranslations = {
       "makersMark": "Vytvořil {name}",
       "gatheredBy": "Gathered by {name}",
       "masterworkSeal": "Mistrovské dílo",
-      "enchantedLine": "Okouzlený"
+      "enchantedLine": "Okouzlený",
+      "commissionToggle": "Commission piece",
+      "commissionToggleHint": "Binds to the first character to receive it in a trade.",
+      "commissionUnbound": "Commission piece: binds to the first recipient",
+      "commissionBound": "Commission piece: bound to its recipient"
     },
     "itemMenu": {
       "use": "Use",
@@ -2383,6 +2389,25 @@ export const cs_CZ: EnTranslations = {
       "notTaughtHere": "Tento recept se zde neučí.",
       "alreadyKnown": "Ten recept už znáte.",
       "outOfRange": "Abys mohl trénovat, musíš být u řemeslné stanice."
+    },
+    "unbind": {
+      "title": "Unbinding: {name}",
+      "close": "Close unbinding",
+      "intro": "The master can release a commission piece from its bond, for a fee.",
+      "empty": "You carry no bound commission pieces.",
+      "rowSub": "Releases the bond; the piece binds again on its next trade.",
+      "unbindAria": "Unbind {name} for {fee}",
+      "dialogOption": "Unbinding",
+      "dialogOptionAria": "Unbind a commission piece with {name}",
+      "confirmTitle": "Unbind Commission Piece",
+      "confirmBody": "Unbind {name} for {fee}?",
+      "confirmOk": "Unbind",
+      "confirmCancel": "Cancel",
+      "unbound": "Unbound {name} for {fee}. It will bind again on its next trade.",
+      "notEligible": "That item cannot be unbound.",
+      "notBound": "That item is not bound.",
+      "cannotAfford": "You cannot afford the unbinding fee.",
+      "outOfRange": "You must be at a crafting station to unbind."
     },
     "finder": {
       "title": "Hledač dungeonů",
