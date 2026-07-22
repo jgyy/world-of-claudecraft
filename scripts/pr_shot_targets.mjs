@@ -244,7 +244,14 @@ export const TARGETS = [
     // the base tree honestly shows the loot line alone) or open the loot window
     // to show the harvest picker pre-checked from the player's town focus (the
     // base tree opens it empty).
-    variants: [{ key: 'chat-outcome' }, { key: 'picker-preselected', picker: true }],
+    variants: [
+      { key: 'chat-outcome' },
+      { key: 'picker-preselected', picker: true },
+      // The centered mobile-touch layout of the same picker window (the 12d QA
+      // legibility pass renamed the corpse arm's button and added the footer
+      // hint, both of which render on mobile too).
+      { key: 'picker-preselected-mobile', picker: true, mobile: true },
+    ],
     async capture(page, variant) {
       await page.evaluate(() => {
         document.querySelector('.camera-prompt-confirm')?.click();
@@ -1304,6 +1311,87 @@ export const TARGETS = [
     },
   },
   {
+    key: 'attunement-legibility',
+    label: 'Attunement legibility: quest-dialog preview with return cost, first-tier tutorial',
+    when: [
+      'ui/hud/quest/quest_dialog_controller',
+      'sim/quests/profession_quest_effects',
+      'ui/profession_tutorial_window',
+      'ui/profession_identity_view.ts',
+    ],
+    // The Phase 14 legibility rule: the full pre-commit picture (majors, hobby,
+    // dormancy, and the escalating make-amends return cost) must be visible in
+    // the lore-quest dialog BEFORE the player commits, and the one-time tier
+    // tutorial must fire at the first tier-1 crossing. The quest variants shoot
+    // the q_prof_attune_smith detail at Forgemistress Darva for a fresh
+    // unattuned character; the tutorial variant crosses weaponcrafting to
+    // skill 26 and lets the REAL 1 Hz sweep emit the event that opens the panel.
+    variants: [
+      { key: 'quest-desktop' },
+      { key: 'quest-mobile', mobile: true },
+      { key: 'tutorial-desktop', tutorial: true },
+      { key: 'tutorial-mobile', tutorial: true, mobile: true },
+    ],
+    async capture(page, variant) {
+      await page.evaluate(() => {
+        document.querySelector('.camera-prompt-confirm')?.click();
+        document.querySelector('.tut-skip')?.click();
+        document.querySelector('#gpu-notice')?.remove();
+      });
+      await wait(300);
+      if (variant?.tutorial) {
+        const armed = await page.evaluate(() => {
+          const sim = window.__game?.sim;
+          const meta = sim?.players?.get(sim.primaryId);
+          if (!meta) return { ok: false, reason: 'no primary player meta' };
+          meta.craftSkills = { ...meta.craftSkills, weaponcrafting: 26 };
+          return { ok: true };
+        });
+        if (!armed.ok) throw new Error(`tutorial setup failed: ${armed.reason}`);
+        // The prof-nudges sweep runs at 1 Hz on sim ticks; the panel opens on
+        // the resulting profTierTutorial event, so poll rather than guess.
+        const open = await pollForSize(page, '#profession-tutorial');
+        if (!open) throw new Error('profession tutorial did not open');
+        return { clip: '#profession-tutorial' };
+      }
+      // Quest-dialog variants: stand beside Darva (the dialog auto-closes on
+      // distance like the train window) and open her quest list, then the
+      // lore-quest detail row.
+      const setup = await page.evaluate(() => {
+        const game = window.__game;
+        const sim = game?.sim;
+        if (!sim) return { ok: false, reason: 'no sim' };
+        const master = [...sim.entities.values()].find(
+          (e) => e.templateId === 'forgemistress_darva',
+        );
+        if (!master) return { ok: false, reason: 'no forgemistress_darva entity' };
+        const p = sim.player;
+        if (p?.pos) {
+          p.pos.x = master.pos.x;
+          p.pos.z = master.pos.z - 2;
+        }
+        const el = document.querySelector('#quest-dialog');
+        if (el) el.style.display = 'none';
+        game.hud.openQuestDialog(master.id);
+        return { ok: true };
+      });
+      if (!setup.ok) throw new Error(`quest-dialog setup failed: ${setup.reason}`);
+      const open = await pollForSize(page, '#quest-dialog');
+      if (!open) throw new Error('quest dialog did not open');
+      await page.evaluate(() => {
+        document.querySelector('#quest-dialog [data-quest="q_prof_attune_smith"]')?.click();
+      });
+      await wait(400);
+      // The detail must carry the pinned-pair preview with the return-cost
+      // sentence (the whole point of the shot).
+      const hasPreview = await page.evaluate(() =>
+        Boolean(document.querySelector('#quest-dialog [data-profession-preview]')),
+      );
+      if (!hasPreview) throw new Error('attunement preview line missing from the quest detail');
+      return { clip: '#quest-dialog' };
+    },
+  },
+  {
     key: 'station-props',
     label: 'Crafting-station scenery (Eastbrook forge)',
     when: ['render/stations', 'src/sim/content/professions'],
@@ -1808,6 +1896,114 @@ export const TARGETS = [
       }
       await wait(300);
       return {};
+    },
+  },
+  {
+    key: 'p13-bag-actions',
+    label: 'Bag item action menu (disenchant / salvage / apply enchant)',
+    when: ['bag_item_context_menu', 'bag_item_action_menu', 'enchant_apply_view'],
+    // Four states of the Phase 13 surface: the desktop right-click menu, the same
+    // menu from a mobile tap (the phase acceptance's mobile arm), the stronger
+    // destruction warning (the only held copy is signed masterwork), and the
+    // Apply Enchant picker (the first render sink for enchant names). The recipe
+    // branches on variant.key; menu opening goes through the REAL bound events
+    // (contextmenu / click on the bag row), never a debug hook.
+    variants: [
+      { key: 'menu-desktop' },
+      { key: 'menu-mobile', mobile: true },
+      { key: 'confirm-special', confirm: true },
+      { key: 'picker', picker: true },
+      { key: 'picker-mobile', picker: true, mobile: true },
+    ],
+    async capture(page, variant) {
+      await page.evaluate(() => {
+        document.querySelector('.camera-prompt-confirm')?.click();
+        document.querySelector('.tut-skip')?.click();
+        document.querySelector('.gpu-notice-dismiss')?.click();
+      });
+      const staged = await page.evaluate(
+        (wantsConfirm, wantsPicker) => {
+          const game = window.__game;
+          const sim = game?.sim;
+          if (!game || !sim?.player) return { ok: false, reason: 'offline world unavailable' };
+          if (wantsPicker) {
+            // Enough dust to afford the base weapon enchants, so the picker's
+            // affordability lines show a mix of ready and short rows.
+            sim.addItem('arcane_dust', 6);
+            sim.addItem('arcane_essence', 1);
+            return { ok: true, itemName: 'Arcane Dust' };
+          }
+          if (wantsConfirm) {
+            // The ONLY held copy is a signed masterwork instance, so the confirm
+            // must take the stronger-warning path.
+            sim.addItemInstance('eastbrook_arming_sword', {
+              signer: 'Aldric',
+              rolled: { masterwork: true, stats: { str: 2 } },
+            });
+            return { ok: true, itemName: 'Eastbrook Arming Sword' };
+          }
+          sim.addItem('eastbrook_arming_sword', 1);
+          return { ok: true, itemName: 'Eastbrook Arming Sword' };
+        },
+        Boolean(variant?.confirm),
+        Boolean(variant?.picker),
+      );
+      if (!staged.ok) throw new Error(staged.reason);
+      await page.evaluate(() => {
+        const game = window.__game;
+        if (!document.querySelector('#bags')?.checkVisibility?.()) game.hud.toggleBags();
+      });
+      if (!(await pollForSize(page, '#bags'))) throw new Error('bags window did not open');
+      // Open the menu through the real handler: contextmenu on desktop, a plain
+      // tap (click) on the mobile-touch variant, on the granted item's bag row.
+      const opened = await page.evaluate((itemName) => {
+        // Occupied squares only: empty cells share the bag-item class (with
+        // .empty) and would swallow the dispatch. The staged stack is found by
+        // its aria-label (which carries the localized display name).
+        const rows = [...document.querySelectorAll('#bags .bag-item:not(.empty)')];
+        const el =
+          rows.find((r) => (r.getAttribute('aria-label') ?? '').includes(itemName)) ??
+          rows[rows.length - 1];
+        if (!el) return false;
+        const r = el.getBoundingClientRect();
+        const ev = new MouseEvent(
+          document.body.classList.contains('mobile-touch') ? 'click' : 'contextmenu',
+          {
+            bubbles: true,
+            cancelable: true,
+            clientX: r.x + r.width / 2,
+            clientY: r.y + r.height / 2,
+          },
+        );
+        el.dispatchEvent(ev);
+        return true;
+      }, staged.itemName);
+      if (!opened) throw new Error('no bag row to open the action menu on');
+      if (!(await pollForSize(page, '#ctx-menu'))) throw new Error('action menu did not open');
+      if (variant?.confirm) {
+        // Click the Disenchant row (row two: the classic action is row one).
+        await page.evaluate(() => {
+          const rows = [...document.querySelectorAll('#ctx-menu .ctx-item')];
+          rows[1]?.click();
+        });
+        if (!(await pollForSize(page, '#confirm-dialog')))
+          throw new Error('destruction confirm did not open');
+        await wait(300);
+        return { clip: '#ui' };
+      }
+      if (variant?.picker) {
+        // Click the Apply Enchant row (the staged reagent's only Phase 13 action).
+        await page.evaluate(() => {
+          const rows = [...document.querySelectorAll('#ctx-menu .ctx-item')];
+          rows[rows.length - 1]?.click();
+        });
+        await wait(500);
+        if (!(await pollForSize(page, '#ctx-menu'))) throw new Error('enchant picker did not open');
+        await wait(300);
+        return { clip: '#ui' };
+      }
+      await wait(300);
+      return { clip: '#ui' };
     },
   },
 ];

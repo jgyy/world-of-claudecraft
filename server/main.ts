@@ -2182,6 +2182,7 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
       const mode = discordStartUrl.searchParams.get('mode') === 'link' ? 'link' : 'login';
       const native = discordStartUrl.searchParams.get('native') === '1';
       const nativeChallenge = discordStartUrl.searchParams.get('challenge') ?? undefined;
+      const desktop = mode === 'login' && discordStartUrl.searchParams.get('desktop') === '1';
       let accountId: number | null = null;
       if (mode === 'link') {
         accountId = await bearerActiveAccount(req, res);
@@ -2196,6 +2197,7 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
         native,
         nativeChallenge,
         nativeAttestation: body.nativeAttestation,
+        desktop,
       });
     }
     if (req.method === 'GET' && url === '/api/auth/discord/callback') {

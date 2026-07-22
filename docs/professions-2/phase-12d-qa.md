@@ -62,6 +62,18 @@ filtering; resume truncated agents.
 
 STEP 3 - FIX: apply every BLOCKING and SHOULD-FIX finding test-first; rerun failed rows
 until green; commit with explicit paths, Conventional Commits with a body.
+- DIRECTED SHOULD-FIX (user, 2026-07-21, loot-window legibility; approved wording, land
+  it in this QA pass): rename the loot window's "Take All" button to "Take Loot" (the
+  old label promised the harvest too) and add tooltips to both buttons via the shared
+  attachTooltip idiom, hover and mobile long-press alike:
+  - Take Loot: "Takes the coins and dropped items. Does not use up the harvest."
+  - Harvest: "Gathers the checked components. Each corpse can be harvested once, first
+    come. Does not take the loot."
+  Plus the footer hint line (approved, not optional): "The interact key loots and
+  harvests in one press, using your town focus." on the loot window, the town-focus
+  hint-line idiom. The new strings are wordy (M16):
+  English catalog rows plus the five non-Latin overlay fills each. Pin the renamed
+  label and both tooltip bindings; the Harvest button id/behavior is unchanged.
 
 STEP 4 - UPDATE DOCS + MEMORY: progress.md QA row and verdict; state.md drift
 corrections; append the QA post-inventory to the phase file's as-landed block; record
