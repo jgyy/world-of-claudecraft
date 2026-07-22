@@ -1839,6 +1839,7 @@ export const ru_RU: EnTranslations = {
         "legend": "ЛЕГЕНДА",
         "shill": "ГЛАШАТАЙ"
       },
+      "roleTagChatTitle": "Подтвержденная роль на сервере: {role}",
       "guildMember": "Подтвержденный участник",
       "notMember": "Еще не на сервере",
       "joinCta": "Присоединиться к Discord",
@@ -2331,7 +2332,11 @@ export const ru_RU: EnTranslations = {
       "makersMark": "Создатель: {name}",
       "gatheredBy": "Сборщик: {name}",
       "masterworkSeal": "Шедевр",
-      "enchantedLine": "Зачаровано"
+      "enchantedLine": "Зачаровано",
+      "commissionToggle": "Изделие на заказ",
+      "commissionToggleHint": "Привязывается к первому персонажу, получившему его при обмене.",
+      "commissionUnbound": "Изделие на заказ: привяжется к первому получателю",
+      "commissionBound": "Изделие на заказ: привязано к получателю"
     },
     "itemMenu": {
       "use": "Use",
@@ -2382,6 +2387,25 @@ export const ru_RU: EnTranslations = {
       "notTaughtHere": "Этот рецепт здесь не преподают.",
       "alreadyKnown": "Вы уже знаете этот рецепт.",
       "outOfRange": "Для обучения нужно стоять у мастерской."
+    },
+    "unbind": {
+      "title": "Снятие привязки: {name}",
+      "close": "Закрыть снятие привязки",
+      "intro": "Мастер может снять привязку с изделия на заказ за плату.",
+      "empty": "У вас нет привязанных изделий на заказ.",
+      "rowSub": "Снимает привязку; при следующем обмене изделие привяжется снова.",
+      "unbindAria": "Снять привязку с {name} за {fee}",
+      "dialogOption": "Снятие привязки",
+      "dialogOptionAria": "Снять привязку с изделия на заказ у {name}",
+      "confirmTitle": "Снять привязку с изделия",
+      "confirmBody": "Снять привязку с {name} за {fee}?",
+      "confirmOk": "Снять привязку",
+      "confirmCancel": "Отмена",
+      "unbound": "Привязка с {name} снята за {fee}. При следующем обмене изделие привяжется снова.",
+      "notEligible": "С этого предмета нельзя снять привязку.",
+      "notBound": "Этот предмет не привязан.",
+      "cannotAfford": "Вам не хватает денег на снятие привязки.",
+      "outOfRange": "Для снятия привязки нужно стоять у мастерской."
     },
     "finder": {
       "title": "Поиск подземелий",

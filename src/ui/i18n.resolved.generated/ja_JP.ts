@@ -1839,6 +1839,7 @@ export const ja_JP: EnTranslations = {
         "legend": "レジェンド",
         "shill": "サポーター"
       },
+      "roleTagChatTitle": "認証済みサーバーロール: {role}",
       "guildMember": "認証済みメンバー",
       "notMember": "まだサーバーに参加していません",
       "joinCta": "Discordに参加",
@@ -2331,7 +2332,11 @@ export const ja_JP: EnTranslations = {
       "makersMark": "製作者：{name}",
       "gatheredBy": "採集者：{name}",
       "masterworkSeal": "傑作",
-      "enchantedLine": "エンチャント済み"
+      "enchantedLine": "エンチャント済み",
+      "commissionToggle": "受注品として制作",
+      "commissionToggleHint": "取引で最初に受け取ったキャラクターにバインドされます。",
+      "commissionUnbound": "受注品：最初の受取人にバインドされる",
+      "commissionBound": "受注品：受取人にバインド済み"
     },
     "itemMenu": {
       "use": "Use",
@@ -2382,6 +2387,25 @@ export const ja_JP: EnTranslations = {
       "notTaughtHere": "そのレシピはここでは教えていません。",
       "alreadyKnown": "そのレシピはすでに習得しています。",
       "outOfRange": "訓練するには作業台のそばにいる必要があります。"
+    },
+    "unbind": {
+      "title": "バインド解除：{name}",
+      "close": "バインド解除を閉じる",
+      "intro": "親方は手数料と引き換えに受注品のバインドを解除できます。",
+      "empty": "バインドされた受注品を持っていません。",
+      "rowSub": "バインドを解除します。次の取引で再びバインドされます。",
+      "unbindAria": "{fee}で{name}のバインドを解除",
+      "dialogOption": "バインド解除",
+      "dialogOptionAria": "{name}に受注品のバインド解除を依頼",
+      "confirmTitle": "受注品のバインド解除",
+      "confirmBody": "{fee}で{name}のバインドを解除しますか？",
+      "confirmOk": "バインド解除",
+      "confirmCancel": "キャンセル",
+      "unbound": "{fee}で{name}のバインドを解除しました。次の取引で再びバインドされます。",
+      "notEligible": "そのアイテムはバインド解除できません。",
+      "notBound": "そのアイテムはバインドされていません。",
+      "cannotAfford": "バインド解除の手数料を支払えません。",
+      "outOfRange": "バインド解除するには作業台のそばにいる必要があります。"
     },
     "finder": {
       "title": "ダンジョンファインダー",
