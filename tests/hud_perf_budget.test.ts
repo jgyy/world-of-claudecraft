@@ -120,25 +120,27 @@ function readBaselineSkipRateFloor(): number {
 
 // The DURABLE, RUN-LENGTH-INDEPENDENT anchor: the elision-bypass write COUNT
 // (`hudHotDomWrites`). Unlike the skip RATIO (skipped / total), this does not move with the
-// frame count, so it is the same on desktop, mobile, and every re-run (the baseline pins it
-// at 153, the post-extraction steady state, byte-identical across profiles). A collapse
-// of write-elision makes it BALLOON toward the frame count; a healthy run holds it. This is the
-// signal ARM 3 gates on instead of the frame-count-dependent ratio. The baseline records it as
-// the canonical table row `| hudHotDomWrites | <count> | ...`; this parses THAT row specifically
-// (not the first prose mention) so doc prose order or a historical figure in the narrative can
-// never silently move the anchor. Throw if absent. A DELIBERATE future hot-write change (a new
-// per-frame element) updates the table row in the baseline, like any golden value.
+// frame count, so within a viewport it is stable across re-runs and hardware (a longer run
+// adds only skips, never new bypass writes once the world is steady). It does differ by
+// VIEWPORT (mobile boots extra hot elements: measured desktop 467, mobile 548 at the PR head),
+// so the baseline records one `hudHotDomWrites` row per viewport and this takes the STRICTEST
+// (max) committed row, exactly as the skip-rate floor does. ARM 3 gates every viewport against
+// that single max anchor, so a doc reorder that floats the lower desktop row up can never
+// silently weaken the mobile ceiling. A collapse of write-elision makes the count BALLOON
+// toward the frame count; a healthy run holds it. Throw if absent. A DELIBERATE future hot-write
+// change (a new per-frame element) updates the table rows in the baseline, like any golden value.
 function readBaselineBypassCount(): number {
-  const line = baselineMd
+  const counts = baselineMd
     .split('\n')
-    .find((l) => /\|\s*hudHotDomWrites\s*\|\s*\d{2,}\s*\|/.test(l));
-  const match = line?.match(/\|\s*hudHotDomWrites\s*\|\s*(\d{2,})\s*\|/);
-  if (!match) {
+    .map((l) => l.match(/\|\s*hudHotDomWrites\s*\|\s*(\d{2,})\s*\|/)?.[1])
+    .filter((v): v is string => v !== undefined)
+    .map(Number);
+  if (counts.length === 0) {
     throw new Error(
       'hud_perf_budget.baseline.md: the canonical hudHotDomWrites anchor row (`| hudHotDomWrites | <count> |`) is missing. The committed baseline is absent or the key was removed; the bypass-count budget cannot be grounded.',
     );
   }
-  return Number(match[1]);
+  return Math.max(...counts);
 }
 
 // frameP95 is SAME-MACHINE-RELATIVE only (software-WebGL ms, not portable). ARM 3 reads

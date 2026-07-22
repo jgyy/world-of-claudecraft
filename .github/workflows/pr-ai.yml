@@ -199,6 +199,18 @@ jobs:
           fi
           echo "tmp/perf-tour.json present ($(wc -c < tmp/perf-tour.json) bytes)."
 
+      # Persist the raw tour JSON so a CI-only frame-budget failure can be diagnosed from
+      # the recorded metrics instead of reproducing the whole browser tour locally. Uploaded
+      # even on failure (if: always()) since a failing run is exactly when it is needed; the
+      # tour dies with the runner otherwise.
+      - name: Upload the perf tour JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-tour-json
+          path: tmp/perf-tour.json
+          if-no-files-found: warn
+
       - name: Check the desktop frame budget
         env:
           HUD_PERF_BUDGET_TOUR: '1'
@@ -206,7 +218,10 @@ jobs:
           HUD_PERF_BUDGET_TOUR_RESULT: tmp/perf-tour.json
         run: npx vitest run tests/hud_perf_budget.test.ts
 
+      # if: always() so a desktop failure never MASKS a mobile regression: without it the
+      # mobile arm is skipped whenever desktop fails, surfacing mobile a CI cycle later.
       - name: Check the mobile frame budget
+        if: always()
         env:
           HUD_PERF_BUDGET_TOUR: '1'
           HUD_PERF_BUDGET_TOUR_VIEWPORT: mobile

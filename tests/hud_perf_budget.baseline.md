@@ -11,11 +11,12 @@ The numbers are not interpreted the same way:
 - **`hudHotDomWrites` (the elision-bypass count) is the durable, run-length-independent
   anchor.** It counts the hot-DOM writes that bypassed the write-elision cache (boot plus the
   occasional state-change write). A longer run adds only skips, never new bypass writes once the
-  world is steady, so the count does not move with frame count, CPU or GPU speed, or machine
-  load: it is byte-identical on desktop, mobile, and every re-run. A collapse of write-elision
-  makes it balloon toward the frame count, so the standing gate (ARM 3) asserts the count stays
-  at or below the committed anchor on every viewport. This is the number that travels across
-  hardware.
+  world is steady, so within a viewport the count does not move with frame count, CPU or GPU
+  speed, or machine load: it is stable across re-runs and hardware. It does differ BY VIEWPORT
+  (mobile boots additional hot elements: measured 548 mobile versus 467 desktop), so the baseline
+  records one row per viewport. A collapse of write-elision makes it balloon toward the frame
+  count, so the standing gate (ARM 3) asserts the count stays at or below the strictest (max)
+  committed viewport row on every viewport. This is the number that travels across hardware.
 - **`hudHotDomSkipRate` (the skip ratio) is derived and frame-count-dependent.** It is
   `skipped / (skipped + bypassed)`; the denominator is the total frame count, which jitters with
   software-WebGL fps and machine load run to run. It is reported for human context and used as a
@@ -27,6 +28,14 @@ The numbers are not interpreted the same way:
   absolute values below are dominated by software rasterization, not by HUD cost. Compare them
   only against a fresh same-machine re-run of this baseline, never against the literal
   milliseconds on different hardware or a different renderer.
+  - **The ARM 3 CI `frameP95` arm is a same-machine-manual signal, NOT a portable regression
+    gate.** `src/game/perf.ts` clamps every recorded frame sample to a 250 ms ceiling, and the
+    committed `frameP95` baseline is exactly that 250 ms, so `frameP95 <= baseline` cannot fail
+    on any machine that hits the clamp (which software-WebGL CI always does). The perf-budget
+    report job therefore surfaces `frameP95` for human context only; the portable regression
+    signal on CI is the `hudHotDomWrites` bypass count. To make the frameP95 arm a real gate,
+    run the tour on non-software-WebGL hardware and pin a genuine sub-250 ms value via
+    `HUD_PERF_BUDGET_TOUR_FRAME_BASELINE`.
 
 ## Regenerating
 
@@ -69,7 +78,8 @@ viewport hits the `#rotate-device` gate and never boots.
 | Metric | Value | Role |
 |---|---|---|
 | **hudHotDomSkipRate** | **0.962** (38 hot writes / 950 skipped, 988 total) | ARM 2 deterministic-loop floor |
-| frameP95 | 250 ms | same-machine-relative only |
+| hudHotDomWrites | 467 | ARM 3 bypass-count anchor (desktop; gate uses the max viewport row) |
+| frameP95 | 250 ms | same-machine-relative only (see the frameP95 note below) |
 | inputIntentToFrameP95 | 652.7 ms | same-machine-relative only |
 | inputIntentToVisibleP95 | 658.2 ms | same-machine-relative only |
 | fps (full / last 10s) | 1.29 / 1.58 | software-WebGL artifact, context only |
@@ -82,16 +92,22 @@ viewport hits the `#rotate-device` gate and never boots.
 
 | Metric | Value | Role |
 |---|---|---|
-| **hudHotDomSkipRate** | **0.961** | within the boot-write band; the bypass count is identical to desktop |
-| hudHotDomWrites | 153 | the durable invariant (the elision-bypass count, byte-identical to desktop) |
-| frameP95 | 250 ms | same-machine-relative only |
+| **hudHotDomSkipRate** | **0.961** | within the boot-write band |
+| hudHotDomWrites | 548 | ARM 3 bypass-count anchor (mobile; this is the max viewport row the gate uses) |
+| frameP95 | 250 ms | same-machine-relative only (see the frameP95 note below) |
 | fct burst | [64, 64, 64] | FCT pool cap-bounded (FCT_POOL_CAP=64) under the 3x400 AoE waves |
 | bootMiB | 55.066 | |
 
-The desktop and mobile skip ratios differ only in the denominator (frame count): the
-elision-bypass count `hudHotDomWrites` is 153 on both, so write-elision is invariant across
-viewport. The durable per-frame anchor is `hudHotDomWrites`, byte-identical viewport to
-viewport; the gate keys on it, not on the frame-count-dependent ratio.
+The elision-bypass count `hudHotDomWrites` is run-length-independent (a longer run adds only
+skips, never new bypass writes once the world is steady), so within a viewport it holds across
+re-runs and hardware. It does differ BY VIEWPORT: mobile boots additional hot elements, so the
+count is 548 on mobile versus 467 on desktop. ARM 3 gates every viewport against the single
+strictest (max) committed `hudHotDomWrites` row (548), the same max-of-rows rule the
+`hudHotDomSkipRate` floor uses. An earlier revision of this baseline pinned a single 153 row
+captured 2026-06-24 and claimed the count was byte-identical across viewport; a month of HUD
+features landed on the release branch since (the attunement tutorial panel, the minimap
+ornament, the bags enchant/salvage actions, the professions UI), lifting the steady-state boot
+writes, so the count was re-minted per viewport at the PR head.
 
 ## How the gate uses this
 

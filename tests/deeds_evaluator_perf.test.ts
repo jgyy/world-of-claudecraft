@@ -30,6 +30,7 @@ function buildDirtyRoster(sim: Sim, count: number): number[] {
 
 function measureDeedsPhaseMedian(playerCount: number): {
   median: number;
+  total: number;
   sim: Sim;
   pids: number[];
 } {
@@ -38,10 +39,14 @@ function measureDeedsPhaseMedian(playerCount: number): {
 
   let mark = 0;
   let deedsPhaseThisTick = 0;
+  let lapTotal = 0;
   const lap = (phase: string): void => {
     const t = performance.now();
     const dt = t - mark;
-    if (phase === 'deeds') deedsPhaseThisTick += dt;
+    if (phase === 'deeds') {
+      deedsPhaseThisTick += dt;
+      lapTotal += dt;
+    }
     mark = t;
   };
   (sim as unknown as { cfg: { perfLap: typeof lap } }).cfg.perfLap = lap;
@@ -63,15 +68,21 @@ function measureDeedsPhaseMedian(playerCount: number): {
     samples.push(deedsPhaseThisTick);
   }
   samples.sort((a, b) => a - b);
-  return { median: samples[Math.floor(samples.length / 2)], sim, pids };
+  return { median: samples[Math.floor(samples.length / 2)], total: lapTotal, sim, pids };
 }
 
 describe('deeds evaluator (updateDeeds tick-tail) high-load regression budget', () => {
   it('bounds the per-tick cost of a raid-wide dirty-everyone event', () => {
     const COUNT = 200;
-    const { median } = measureDeedsPhaseMedian(COUNT);
+    const { median, total } = measureDeedsPhaseMedian(COUNT);
 
     console.log(`[deeds evaluator perf] dirtyPlayers=${COUNT} median=${median.toFixed(2)}ms`);
+
+    // Instrumentation contract (same guard as aura_tick_perf / mob_update_perf): the
+    // phase-matching lap hook is installed through an `as unknown as` cast, so a 'deeds'
+    // phase-string rename in sim.tick() keeps this file compiling while the accumulator
+    // silently stays 0 and the budget assertion below passes vacuously. Guard it.
+    expect(total).toBeGreaterThan(0);
 
     // Generous by design (see mob_update_perf.test.ts): a full non-manual catalog walk
     // per dirty player is proportional to the deed count, not entity population, so a
@@ -87,6 +98,11 @@ describe('deeds evaluator (updateDeeds tick-tail) high-load regression budget', 
 
     const smallResult = measureDeedsPhaseMedian(SMALL);
     const largeResult = measureDeedsPhaseMedian(LARGE);
+
+    // Guard the phase hook actually fired for both measurements (see the note above):
+    // a vacuous 0/0 must never satisfy the scaling bound.
+    expect(smallResult.total).toBeGreaterThan(0);
+    expect(largeResult.total).toBeGreaterThan(0);
 
     console.log(
       `[deeds evaluator perf] scaling small=${SMALL}players(${smallResult.median.toFixed(2)}ms) ` +
