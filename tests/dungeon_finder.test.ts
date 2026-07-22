@@ -55,6 +55,23 @@ function addPlayers(
   });
 }
 
+// Form a premade party (first def leads, the rest accept) and queue the whole
+// unit for `activityIds`. Returns the member pids, leader first.
+function queuePremade(
+  sim: Sim,
+  defs: { cls: PlayerClass; roles: Role[]; level: number; name?: string }[],
+  activityIds: string[],
+): number[] {
+  const pids = addPlayers(sim, defs);
+  const [leader, ...mates] = pids;
+  for (const mate of mates) {
+    sim.partyInvite(mate, leader);
+    sim.partyAccept(mate);
+  }
+  sim.dungeonFinderQueueJoin(activityIds, leader);
+  return pids;
+}
+
 function tickAll(sim: Sim, ticks: number): SimEvent[] {
   const out: SimEvent[] = [];
   for (let i = 0; i < ticks; i++) out.push(...sim.tick());
@@ -897,6 +914,117 @@ describe('automatic queue', () => {
     // idle and starved a still-formable backlog until this test's bound
     // happened to keep ticking anyway.
     expect(idleWithFormableContentTicks).toBeLessThan(30);
+  });
+
+  it('does not falsely latch idle when a dregs last-activity truncation mis-marks a never-fully-searched anchor', () => {
+    // Blocking H1: when the shared node budget dies INSIDE tryAssemble on an
+    // anchor's LAST eligible activity, the inner activity loop ends naturally
+    // without the top-of-loop budget check ever firing, so the anchor was
+    // never marked truncated and fell through to the "fully attempted" mark +
+    // cursor advance. A dregs anchor (one that started its search on the
+    // scraps of an already-spent budget) thereby got counted as visited, and
+    // enough such mis-marks let matchLapVisitedAnchorIds reach the queue size
+    // and latch matchProvenIdleSeq over a queue that was never fully searched,
+    // parking the realm with no wake-up (unlike the round-2 stall, there is no
+    // proposal-expiry rescue here). The tank queued last can seat a
+    // {tank, healer, 3 dps} group at a couple hundred nodes, but only if it
+    // ever gets a turn as a fresh-budget pass-starter before the false latch.
+    const sim = makeSim();
+    // FIFO: solo healer, then 12 two-tank premade pairs (unusable for a
+    // one-tank comp), 3 solo dps, a large four-dps premade backlog, solo tank.
+    const healer = addPlayers(sim, [{ cls: 'priest', roles: ['healer'], level: 8 }])[0];
+    sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], healer);
+    for (let i = 0; i < 12; i++) {
+      queuePremade(
+        sim,
+        [
+          { cls: 'warrior', roles: ['tank'], level: 8, name: `TP${i}a` },
+          { cls: 'paladin', roles: ['tank'], level: 8, name: `TP${i}b` },
+        ],
+        ['hollow_crypt_normal'],
+      );
+    }
+    const soloDps = addPlayers(
+      sim,
+      Array.from({ length: 3 }, (_, i) => ({
+        cls: 'mage' as PlayerClass,
+        roles: ['dps'] as Role[],
+        level: 8,
+        name: `SD${i}`,
+      })),
+    );
+    for (const pid of soloDps) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
+    for (let i = 0; i < 148; i++) {
+      queuePremade(
+        sim,
+        Array.from({ length: 4 }, (_, j) => ({
+          cls: 'mage' as PlayerClass,
+          roles: ['dps'] as Role[],
+          level: 8,
+          name: `Q${i}_${j}`,
+        })),
+        ['hollow_crypt_normal'],
+      );
+    }
+    const tank = addPlayers(sim, [
+      { cls: 'warrior', roles: ['tank'], level: 8, name: 'LastTank' },
+    ])[0];
+    sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], tank);
+
+    // The tank must eventually anchor a pass with a full budget and form the
+    // {tank, healer, 3 solo dps} group. A false idle latch parks it forever.
+    let proposal: DungeonFinderProposalView | null = null;
+    for (let i = 0; i < 400 && !proposal; i++) {
+      tickAll(sim, 1);
+      proposal = sim.dungeonFinderInfoFor(tank)?.proposal ?? null;
+    }
+    expect(proposal).not.toBeNull();
+    expect(proposal?.role).toBe('tank');
+    expect(sim.dungeonFinderInfoFor(healer)?.proposal?.role).toBe('healer');
+  });
+
+  it('does not churn forever when a fresh first-activity truncation on a multi-activity anchor is never marked', () => {
+    // Blocking H1 mirror: when the budget dies inside the FIRST activity of a
+    // two-activity anchor, the NEXT activity's top-of-loop check set truncated
+    // and broke BEFORE the mark + cursor-advance lines ran, so the anchor was
+    // never marked and the cursor never advanced. The lap could then never
+    // complete, the idle latch never fired, and matching re-armed and burned a
+    // full budget EVERY tick forever, permanently starving every later anchor.
+    // Solo dps queued for BOTH heroics (catalogue order runs hollow first, so
+    // the budget dies in the hollow DFS), then a tank and healer for sunken
+    // only: the tank must still seat a sunken group once the cursor advances.
+    // The dps count is chosen so the tank+healer stay inside the anchor's FIFO
+    // candidate window (FINDER_MATCH_UNIT_WINDOW), so a formable comp actually
+    // exists behind the churn (the bug is that the cursor never reaches it).
+    const sim = makeSim();
+    const dps = addPlayers(
+      sim,
+      Array.from({ length: 22 }, (_, i) => ({
+        cls: 'mage' as PlayerClass,
+        roles: ['dps'] as Role[],
+        level: 20,
+        name: `D${i}`,
+      })),
+    );
+    for (const pid of dps) {
+      sim.dungeonFinderQueueJoin(['hollow_crypt_heroic', 'sunken_bastion_heroic'], pid);
+    }
+    const [tank, healer] = addPlayers(sim, [
+      { cls: 'warrior', roles: ['tank'], level: 20, name: 'Tank' },
+      { cls: 'priest', roles: ['healer'], level: 20, name: 'Heal' },
+    ]);
+    sim.dungeonFinderQueueJoin(['sunken_bastion_heroic'], tank);
+    sim.dungeonFinderQueueJoin(['sunken_bastion_heroic'], healer);
+
+    let proposal: DungeonFinderProposalView | null = null;
+    for (let i = 0; i < 200 && !proposal; i++) {
+      tickAll(sim, 1);
+      proposal = sim.dungeonFinderInfoFor(tank)?.proposal ?? null;
+    }
+    expect(proposal).not.toBeNull();
+    expect(proposal?.role).toBe('tank');
+    expect(proposal?.activityId).toBe('sunken_bastion_heroic');
+    expect(sim.dungeonFinderInfoFor(healer)?.proposal?.role).toBe('healer');
   });
 });
 

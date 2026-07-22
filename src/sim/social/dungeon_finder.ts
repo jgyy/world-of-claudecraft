@@ -973,29 +973,63 @@ export class DungeonFinderMachine {
           truncated = true;
           break;
         }
+        // Did THIS anchor's search begin with the whole fresh budget? A
+        // truncation that STARTS full is bounded BY DESIGN (the anchor was
+        // handed every node and still could not finish): it counts as a real
+        // attempt, so we mark it and advance the cursor past it. A truncation
+        // that starts on the DREGS of an already-spent budget is NOT a real
+        // attempt: it must not advance the cursor, so a later pass retries
+        // this anchor as a pass-starter with a full budget. Conflating the
+        // two is what opened both lap-accounting holes: a dregs last-activity
+        // truncation being mis-marked as fully visited (latching idle over a
+        // never-fully-searched queue, with no wake-up), and a fresh
+        // first-activity truncation never being marked (re-arming a full
+        // matching pass every tick forever, starving every later anchor).
+        const anchorStartedFresh = budgetBox.remaining === FINDER_MATCH_NODE_BUDGET;
         const anchorActivities = this.eligibleActivitiesFor(anchor);
+        let anchorTruncated = false;
         for (const activityId of anchorActivities) {
           if (budgetBox.remaining <= 0) {
-            truncated = true;
+            anchorTruncated = true;
             break;
           }
           const activity = finderActivity(activityId);
           if (!activity || activity.composition === null) continue;
           const match = this.tryAssemble(sorted, anchor, activity, budgetBox);
-          if (!match) continue;
-          this.createProposal(activity, match.units, match.roles);
-          changed = true;
-          // createProposal() just bumped matchMutationSeq: the lap we were
-          // walking started against a backlog this pass itself has now
-          // mutated. Resync immediately so the anchors-visited accounting
-          // below reflects the CURRENT (post-proposal) backlog rather than
-          // the stale one, whether or not this same iteration also runs the
-          // budget out (see matchLapSeq).
-          this.matchLapSeq = this.matchMutationSeq;
-          this.matchLapVisitedAnchorIds.clear();
+          if (match) {
+            this.createProposal(activity, match.units, match.roles);
+            changed = true;
+            // createProposal() just bumped matchMutationSeq: the lap we were
+            // walking started against a backlog this pass itself has now
+            // mutated. Resync immediately so the anchors-visited accounting
+            // below reflects the CURRENT (post-proposal) backlog rather than
+            // the stale one, whether or not this same iteration also runs the
+            // budget out (see matchLapSeq).
+            this.matchLapSeq = this.matchMutationSeq;
+            this.matchLapVisitedAnchorIds.clear();
+            break;
+          }
+          // tryAssemble() may have run the shared budget to zero mid-DFS: that
+          // is a truncation of THIS anchor's search, distinct from "searched
+          // fully within budget, no group possible".
+          if (budgetBox.remaining <= 0) {
+            anchorTruncated = true;
+            break;
+          }
+        }
+        if (changed) break;
+        if (anchorTruncated) {
+          truncated = true;
+          if (anchorStartedFresh) {
+            // Bounded by design: count it and advance so the next pass moves
+            // on to a later anchor instead of re-searching this one first.
+            this.matchCursorUnitId = anchor.id;
+            this.matchLapVisitedAnchorIds.add(anchor.id);
+          }
+          // Dregs truncation: leave the cursor and the visited set untouched
+          // so a later pass retries this anchor with a full budget.
           break;
         }
-        if (changed || truncated) break;
         // Fully attempted this anchor within budget: resume after it next
         // pass so a later pass advances past it instead of retrying it first.
         this.matchCursorUnitId = anchor.id;
