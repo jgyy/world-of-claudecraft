@@ -86,11 +86,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
     'Mau Duel Kartu? Tiga babak terbaik, pemenang mendapat hak membual.',
   'entities.npcs.card_master.name': 'Ahli Kartu',
   'entities.npcs.card_master.title': 'Penyebar Nasib',
-  'entities.quests.q_archetype_acceptance.completion':
-    'Janji itu terpenuhi. Kedua kerajinan ini kini menjadi bidang utamamu, dan pengetahuan di hadapannya menjadi hobimu.',
-  'entities.quests.q_archetype_acceptance.objectives.0.label': 'Urat bijih dipanen',
-  'entities.quests.q_archetype_acceptance.text':
-    'Keahlian adalah pengetahuan, {playerName}, namun penyelarasan adalah sebuah janji. Pilih dua kerajinan bertetangga yang caranya akan kamu emban sebagai bidang utama, lalu bawakan aku bijih yang kamu kerjakan dari Lembah dengan tanganmu sendiri.',
   'entities.quests.q_prof_hobby_switch.completion':
     'Pilihan yang lebih ringan, namun berguna. Ikuti rasa ingin tahumu sejauh karya langka dapat membawanya.',
   'entities.quests.q_prof_hobby_switch.objectives.0.label': 'Petak herba dipanen',
@@ -102,10 +97,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_prof_intro.objectives.0.label': 'Urat bijih dipanen',
   'entities.quests.q_prof_intro.text':
     'Setiap jiwa di Eastbrook menekuni perdagangan selain pedang, {playerName}. Ada urat bijih di bebatuan sekitar Galian Tembaga, barat daya kota. Pergi ayunkan beliung dan kerjakan 5 di antaranya sendiri, ingat; aku tahu bedanya.',
-  'entities.quests.q_prof_make_amends.completion':
-    'Irama lama kembali. Pasangan lamamu aktif kembali.',
-  'entities.quests.q_prof_make_amends.text':
-    'Kamu pernah membawa pasangan itu sebelumnya, {playerName}. Kembali bukan sumpah baru. Bantu jaga jalan Lembah tetap bersih, dan pekerjaan itu akan mengingatkan tanganmu apa yang pernah mereka ketahui.',
   'gpuNotice.bodyDesktop':
     'Permainan berjalan tanpa akselerasi GPU dan akan lambat. Perbarui driver grafismu, lalu nyalakan ulang permainan. Di Windows, juga atur permainan ke Performa tinggi di Pengaturan > Sistem > Tampilan > Grafis.',
   'gpuNotice.bodyWeb':
@@ -7240,9 +7231,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mobile.targetCycleShort': 'Target',
   'hudChrome.options.mobileCameraJoystick': 'Joystick kamera',
   'hudChrome.options.mobileLeftHanded': 'Tata letak kidal',
-  'entities.quests.q_archetype_acceptance.title': 'Sebuah Kerajinan untuk Disebut Milik Anda',
-  'entities.quests.q_prof_make_amends.title': 'Membuat Perubahan',
-  'entities.quests.q_prof_make_amends.objectives.0.label': 'Serigala Hutan dibunuh',
   'entities.npcs.bursar_aldous_crane.name': 'Bendahara Aldous Crane',
   'entities.npcs.bursar_aldous_crane.title': 'Brankas Bersepuh Emas',
   'entities.npcs.bursar_aldous_crane.greeting':
@@ -7749,11 +7737,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.claudium.unavailable':
     'Toko Claudium tidak tersedia saat ini. Saldo dan pembelian Anda tidak terpengaruh; harap segera periksa kembali.',
   'hudChrome.claudium.wocBalance': 'WOC: {amount}',
-  'hudChrome.corpseHarvest.harvestButtonTooltip':
-    'Panen: kumpulkan bahan kerajinan dari mayat ini (kulit, taring, sutra, dan komponen serupa), pisahkan dari jarahan apa pun. Siapapun bisa memanen; hanya satu pemain yang dapat memanen mayat tertentu.',
   'hudChrome.deeds.openBookHint': 'Buka Kitab Jasa',
-  'hudChrome.loot.takeAllTooltip':
-    'Ambil Semua: kumpulkan setiap koin dan item di jendela jarahan ini.',
   'hudChrome.statInfo.desc.warfare':
     'Meningkatkan kerusakan yang diberikan kepada pemain sebesar {increase}% dan mengurangi kerusakan yang diterima dari pemain sebesar {reduction}%.',
   'hudChrome.statInfo.names.warfare': 'Perang',
@@ -8239,21 +8223,8 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.partyFrames.styleRaid': 'Bingkai Raid',
   'hudChrome.partyFrames.unlock': 'Pindahkan bingkai grup dan raid',
   'hudChrome.partyFrames.width': 'Lebar Bingkai',
-  'apiError.welcome.invalid_input': 'Data yang dimasukkan tidak valid.',
-  'welcome.back': 'Selamat datang kembali, {name}',
-  'welcome.level': 'Level {level}',
-  'welcome.lastPlayed': 'Terakhir dimainkan: {when}',
-  'welcome.continue': 'Masuki Dunia',
-  'welcome.continueHint': 'Tekan Enter untuk melanjutkan, Esc untuk melewati',
-  'welcome.continueHintTouch': 'Ketuk untuk melanjutkan',
-  'welcome.discord.title': 'Komunitas berkumpul di Discord',
-  'welcome.discord.sub':
-    'Pratinjau pembaruan, acara, obrolan pengembang, serta 2 slot bank bonus saat Discord ditautkan.',
-  'welcome.discord.join': 'Gabung ke Discord kami',
-  'welcome.chest.ready': 'Peti harian siap dibuka',
-  'welcome.armory.cta': 'Masuki dunia dan jelajahi Gudang Senjata',
-  'welcome.news.new': 'Baru',
-  'welcome.news.viewAll': 'Lihat semua pembaruan di GitHub',
+  'news.new': 'Baru',
+  'news.viewAll': 'Lihat semua pembaruan di GitHub',
   'entities.letters.heroic_marks_reward.sender': 'Perbekal heroik',
   'entities.letters.heroic_marks_reward.subject': 'Tanda Heroik milikmu',
   'entities.letters.heroic_marks_reward.body':

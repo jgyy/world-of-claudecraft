@@ -86,11 +86,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
     'Zin in een Kaartduel? Beste van drie, de winnaar pakt de praatrechten.',
   'entities.npcs.card_master.name': 'Kaartmeester',
   'entities.npcs.card_master.title': 'Verdeler van het Lot',
-  'entities.quests.q_archetype_acceptance.completion':
-    'De belofte staat. Deze twee ambachten zijn nu je hoofdambachten, en de kennis die er tegenover staat wordt je liefhebberij.',
-  'entities.quests.q_archetype_acceptance.objectives.0.label': 'Ertsslagader geoogst',
-  'entities.quests.q_archetype_acceptance.text':
-    'Vaardigheid is kennis, {playerName}, maar afstemming is een belofte. Kies twee naburige ambachten waarvan je de methoden als je hoofdambachten zult dragen, en breng me dan erts dat je zelf met je eigen handen uit het Dal hebt gewonnen.',
   'entities.quests.q_prof_hobby_switch.completion':
     'Een lichtere keuze, maar een nuttige. Volg die nieuwsgierigheid zo ver als zeldzaam werk haar draagt.',
   'entities.quests.q_prof_hobby_switch.objectives.0.label': 'Kruidenveld geoogst',
@@ -102,10 +97,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_prof_intro.objectives.0.label': 'Ertsslagader geoogst',
   'entities.quests.q_prof_intro.text':
     'Elke ziel in Oostbeekdal beoefent een ambacht naast het zwaard, {playerName}. Er zijn ertsslagaders in de rotsen rond de Kopergat, ten zuidwesten van de stad. Ga zelf een houweel zwaaien en bewerk er 5; ik zie het verschil.',
-  'entities.quests.q_prof_make_amends.completion':
-    'Het oude ritme keert terug. Je vroegere ambachtspaar is opnieuw actief.',
-  'entities.quests.q_prof_make_amends.text':
-    'Je hebt dat paar eerder gedragen, {playerName}. Terugkeren is geen nieuwe gelofte. Help de Dalweg vrijhouden, en het werk zal je handen herinneren wat ze ooit kenden.',
   'gpuNotice.bodyDesktop':
     "Het spel draait zonder GPU-versnelling en zal traag zijn. Werk je grafische stuurprogramma's bij en herstart het spel. Stel op Windows ook het spel in op Hoge prestaties via Instellingen, Systeem, Beeldscherm, Afbeeldingen.",
   'gpuNotice.bodyWeb':
@@ -7192,9 +7183,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mobile.targetCycleShort': 'Doel',
   'hudChrome.options.mobileCameraJoystick': 'Camerajoystick',
   'hudChrome.options.mobileLeftHanded': 'Linkshandige indeling',
-  'entities.quests.q_archetype_acceptance.title': 'Een ambacht dat u het uwe kunt noemen',
-  'entities.quests.q_prof_make_amends.title': 'Het goedmaken',
-  'entities.quests.q_prof_make_amends.objectives.0.label': 'Boswolf gedood',
   'entities.npcs.bursar_aldous_crane.greeting':
     'Elke kist, koffer en snuisterij is veilig bij de Vergulde Geldkist.',
   'entities.npcs.bursar_aldous_crane.name': 'Thesaurier Aldous Crane',
@@ -7747,11 +7735,7 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hudChrome.claudium.unavailable':
     'De Claudium-winkel is momenteel niet beschikbaar. Je saldo en aankopen zijn niet aangetast. Probeer het binnenkort opnieuw.',
   'hudChrome.claudium.wocBalance': 'WOC: {amount}',
-  'hudChrome.corpseHarvest.harvestButtonTooltip':
-    'Oogsten: verzamel ambachtsmaterialen van dit lijk (vel, hoektand, zijde en vergelijkbare onderdelen), los van de buit. Iedereen kan oogsten, maar elk lijk kan maar door één speler worden geoogst.',
   'hudChrome.deeds.openBookHint': 'Open het Boek der Daden',
-  'hudChrome.loot.takeAllTooltip':
-    'Alles nemen: verzamel alle munten en voorwerpen in dit buitvenster.',
   'hudChrome.statInfo.desc.warfare':
     'Verhoogt de schade die aan spelers wordt toegebracht met {increase}% en vermindert de schade die aan spelers wordt toegebracht met {reduction}%.',
   'hudChrome.statInfo.names.warfare': 'Oorlogvoering',
@@ -8243,21 +8227,8 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hudChrome.partyFrames.styleRaid': 'Raidframes',
   'hudChrome.partyFrames.unlock': 'Groeps- en raidframes verplaatsen',
   'hudChrome.partyFrames.width': 'Framebreedte',
-  'apiError.welcome.invalid_input': 'Ongeldige invoer.',
-  'welcome.back': 'Welkom terug, {name}',
-  'welcome.level': 'Niveau {level}',
-  'welcome.lastPlayed': 'Laatst gespeeld: {when}',
-  'welcome.continue': 'Wereld betreden',
-  'welcome.continueHint': 'Enter om door te gaan, Esc om over te slaan',
-  'welcome.continueHintTouch': 'Tik om door te gaan',
-  'welcome.discord.title': 'De community leeft op Discord',
-  'welcome.discord.sub':
-    'Voorproefjes van patches, evenementen, chat met de ontwikkelaars en 2 bonusvakken in de bank als je je Discord-account koppelt.',
-  'welcome.discord.join': 'Word lid van onze Discord',
-  'welcome.chest.ready': 'Kist met dagelijkse beloningen staat klaar',
-  'welcome.armory.cta': 'Wereld betreden en het Arsenaal bekijken',
-  'welcome.news.new': 'Nieuw',
-  'welcome.news.viewAll': 'Bekijk alle updates op GitHub',
+  'news.new': 'Nieuw',
+  'news.viewAll': 'Bekijk alle updates op GitHub',
   'entities.letters.heroic_marks_reward.sender': 'Heroïsche kwartiermeester',
   'entities.letters.heroic_marks_reward.subject': 'Je heroïsche marken',
   'entities.letters.heroic_marks_reward.body':
