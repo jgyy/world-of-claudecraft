@@ -247,3 +247,20 @@ export function parseChatTabs(raw: string | null): ChatOpenTab[] {
 export function serializeChatTabs(tabs: ChatOpenTab[]): string {
   return JSON.stringify(tabs);
 }
+
+// Move the tab `moved` to sit just before `before` in the persisted tab order
+// (drag-to-reorder). `before` of null moves it to the end. Both must already be
+// open tabs; an unknown tab, or moving a tab in front of itself, is a no-op that
+// returns the input unchanged (by identity) so callers can skip a re-render.
+export function reorderChatTabs(
+  tabs: readonly ChatOpenTab[],
+  moved: ChatOpenTab,
+  before: ChatOpenTab | null,
+): ChatOpenTab[] {
+  const fromIndex = tabs.indexOf(moved);
+  if (fromIndex < 0 || moved === before) return [...tabs];
+  if (before !== null && tabs.indexOf(before) < 0) return [...tabs];
+  const rest = tabs.filter((tab) => tab !== moved);
+  const insertAt = before === null ? rest.length : rest.indexOf(before);
+  return [...rest.slice(0, insertAt), moved, ...rest.slice(insertAt)];
+}

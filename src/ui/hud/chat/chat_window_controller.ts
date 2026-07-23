@@ -17,6 +17,7 @@ import {
   isChatOpenTab,
   isChatTabChannel,
   parseChatTabs,
+  reorderChatTabs,
   sentLineTargetForHost,
   serializeChatTabs,
   WHISPER_TAB,
@@ -70,6 +71,10 @@ export class ChatWindowController {
   // going instead of snapping the input back to the previous standing channel.
   private stickyTarget: ChatInputTintTarget = 'say';
   private tabsWheelBound = false;
+  // The channel tab currently being dragged for reordering, or null between drags.
+  // Tracked locally (not read back from dataTransfer) since drop targets only need
+  // to know a drag is in progress and which tab it started from.
+  private draggingTab: ChatOpenTab | null = null;
   private initialized = false;
   private pendingLinks: readonly { display: string; token: string }[] = [];
 
@@ -235,6 +240,7 @@ export class ChatWindowController {
         event.preventDefault();
         this.removeTab(channel);
       });
+      this.bindTabDrag(button, channel);
       bar.append(button);
     }
     const add = this.deps.document.createElement('button');
@@ -251,6 +257,16 @@ export class ChatWindowController {
       }
       const rect = add.getBoundingClientRect();
       this.openChannelMenu(rect.left, rect.bottom, add);
+    });
+    // Dropping a dragged tab on the "+" button moves it to the end of the strip.
+    add.addEventListener('dragover', (event) => {
+      if (this.draggingTab === null) return;
+      event.preventDefault();
+    });
+    add.addEventListener('drop', (event) => {
+      event.preventDefault();
+      if (this.draggingTab === null) return;
+      this.reorderTab(this.draggingTab, null);
     });
     bar.append(add);
     this.updateActiveTabStyles();
@@ -290,6 +306,46 @@ export class ChatWindowController {
       this.persist();
     }
     if (select) this.selectTab(channel, true);
+  }
+
+  // Wire drag-to-reorder onto an open channel tab button: dragstart marks it as
+  // the tab in flight, dragover on a sibling tab allows the drop, and drop there
+  // reorders it to sit just before that sibling. The "all"/"combat" views and the
+  // "+" add button are not draggable and never move.
+  private bindTabDrag(button: HTMLButtonElement, channel: ChatOpenTab): void {
+    button.draggable = true;
+    button.addEventListener('dragstart', (event) => {
+      this.draggingTab = channel;
+      button.classList.add('chat-tab-dragging');
+      event.dataTransfer?.setData('text/plain', channel);
+      if (event.dataTransfer) event.dataTransfer.effectAllowed = 'move';
+    });
+    button.addEventListener('dragend', () => {
+      this.draggingTab = null;
+      button.classList.remove('chat-tab-dragging');
+    });
+    button.addEventListener('dragover', (event) => {
+      if (this.draggingTab === null) return;
+      event.preventDefault();
+      if (event.dataTransfer) event.dataTransfer.dropEffect = 'move';
+    });
+    button.addEventListener('drop', (event) => {
+      event.preventDefault();
+      if (this.draggingTab === null) return;
+      this.reorderTab(this.draggingTab, channel);
+    });
+  }
+
+  // Applies a drag-to-reorder move and persists the new order, skipping the
+  // re-render when the move is a no-op (dropped on itself, or an unknown tab).
+  private reorderTab(moved: ChatOpenTab, before: ChatOpenTab | null): void {
+    const next = reorderChatTabs(this.chatTabs, moved, before);
+    const unchanged =
+      next.length === this.chatTabs.length && next.every((tab, i) => tab === this.chatTabs[i]);
+    if (unchanged) return;
+    this.chatTabs = next;
+    this.renderTabs();
+    this.persist();
   }
 
   private removeTab(channel: ChatOpenTab): void {

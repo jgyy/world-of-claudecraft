@@ -11,6 +11,7 @@ import {
   isChatOpenTab,
   isChatTabChannel,
   parseChatTabs,
+  reorderChatTabs,
   sentLineChannel,
   sentLineTarget,
   sentLineTargetForHost,
@@ -93,6 +94,59 @@ describe('chat channel tabs — pure model', () => {
 
     it('drops duplicate entries, keeping first occurrence order', () => {
       expect(parseChatTabs('["lfg","world","lfg"]')).toEqual(['lfg', 'world']);
+    });
+  });
+
+  describe('reorderChatTabs (drag-to-reorder)', () => {
+    it('moves a tab to sit just before another tab', () => {
+      expect(reorderChatTabs(['world', 'party', 'guild'], 'guild', 'world')).toEqual([
+        'guild',
+        'world',
+        'party',
+      ]);
+      expect(reorderChatTabs(['world', 'party', 'guild'], 'world', 'guild')).toEqual([
+        'party',
+        'world',
+        'guild',
+      ]);
+    });
+
+    it('moves a tab to the end when before is null', () => {
+      expect(reorderChatTabs(['world', 'party', 'guild'], 'world', null)).toEqual([
+        'party',
+        'guild',
+        'world',
+      ]);
+      // already last: still a well-formed no-op result
+      expect(reorderChatTabs(['world', 'party', 'guild'], 'guild', null)).toEqual([
+        'world',
+        'party',
+        'guild',
+      ]);
+    });
+
+    it('is a no-op when dropped on itself', () => {
+      expect(reorderChatTabs(['world', 'party', 'guild'], 'party', 'party')).toEqual([
+        'world',
+        'party',
+        'guild',
+      ]);
+    });
+
+    it('is a no-op for an unknown moved tab or an unknown before-target', () => {
+      expect(reorderChatTabs(['world', 'party'], 'guild' as never, 'party')).toEqual([
+        'world',
+        'party',
+      ]);
+      expect(reorderChatTabs(['world', 'party'], 'world', 'guild' as never)).toEqual([
+        'world',
+        'party',
+      ]);
+    });
+
+    it('round-trips through persistence after a reorder', () => {
+      const reordered = reorderChatTabs(['world', 'party', WHISPER_TAB], WHISPER_TAB, 'world');
+      expect(parseChatTabs(serializeChatTabs(reordered))).toEqual(reordered);
     });
   });
 

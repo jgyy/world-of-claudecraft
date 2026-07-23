@@ -1098,6 +1098,46 @@ export const TARGETS = [
     },
   },
   {
+    key: 'chat-tab-reorder',
+    label: 'Chat window: tab strip after drag-to-reorder',
+    when: ['ui/hud/chat/chat_window_controller', 'ui/hud/chat/chat_channels'],
+    // Opens Party, World, and Guild tabs through the real "+" add-channel menu (the
+    // same click flow a player uses), then drags the Guild tab in front of World via
+    // the same dragstart/dragover/drop sequence the browser fires, so the shot proves
+    // the reordered strip actually persists to storage, not just that the handlers
+    // exist.
+    async capture(page) {
+      await pollForSize(page, '#chatlog-wrap', 60, 500);
+      const openTab = async (id) => {
+        await page.evaluate(() => {
+          document.querySelector('.chat-tab-add')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        });
+        await pollForSize(page, '#ctx-menu', 20, 100);
+        await page.evaluate((tabId) => {
+          document.querySelector(`#ctx-menu .ctx-item[data-act="${tabId}"]`)?.dispatchEvent(
+            new MouseEvent('click', { bubbles: true }),
+          );
+        }, id);
+        await wait(150);
+      };
+      for (const channel of ['party', 'world', 'guild']) await openTab(channel);
+      await page.evaluate(() => {
+        const bar = document.getElementById('chatlog-tabs');
+        const tab = (id) =>
+          [...bar.querySelectorAll('.chat-tab')].find((el) => el.dataset.tab === id);
+        const guild = tab('guild');
+        const world = tab('world');
+        const fire = (el, type) => el.dispatchEvent(new Event(type, { bubbles: true }));
+        fire(guild, 'dragstart');
+        fire(world, 'dragover');
+        fire(world, 'drop');
+        fire(guild, 'dragend');
+      });
+      await wait(200);
+      return { clip: '#chatlog-wrap' };
+    },
+  },
+  {
     key: 'chat-flair-class-color',
     label: 'Chat: class-colored name + verified-streamer badge',
     when: ['ui/hud/chat/chat_line'],

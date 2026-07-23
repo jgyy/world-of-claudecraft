@@ -2018,6 +2018,10 @@
   .chat-tab-add:hover {
     color: var(--gold);
   }
+  /* the tab currently being dragged to reorder, so the strip shows what's moving */
+  .chat-tab-dragging {
+    opacity: 0.5;
+  }
   /* a channel tab filters the shared chat pane to its own messages */
   .chat-pane .chat-hidden {
     display: none;

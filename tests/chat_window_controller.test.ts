@@ -151,4 +151,67 @@ describe('ChatWindowController', () => {
     expect(harness.controller.composeSend('ready')).toBe('/r ready');
     expect(harness.input.style.color).toBe('#ff80ff');
   });
+
+  it('drags a channel tab onto another to reorder and persist the tab strip', () => {
+    const harness = makeHarness({
+      woc_chat_tabs: '["world","party","guild"]',
+      woc_chat_active_tab: 'world',
+    });
+    harness.controller.init();
+    const tabsBar = harness.document.getElementById('chatlog-tabs') as FakeElement;
+    const chatTabs = (): FakeElement[] =>
+      tabsBar.querySelectorAll('.chat-tab') as unknown as FakeElement[];
+    const tab = (id: string): FakeElement => chatTabs().find((el) => el.dataset.tab === id)!;
+
+    tab('guild').dispatchEvent(new Event('dragstart'));
+    tab('world').dispatchEvent(new Event('dragover'));
+    tab('world').dispatchEvent(new Event('drop'));
+    tab('guild').dispatchEvent(new Event('dragend'));
+
+    expect(harness.storage.getItem('woc_chat_tabs')).toBe('["guild","world","party"]');
+    // the DOM is rebuilt in the new order too
+    expect(
+      chatTabs()
+        .map((el) => el.dataset.tab)
+        .filter((id) => id === 'guild' || id === 'world' || id === 'party'),
+    ).toEqual(['guild', 'world', 'party']);
+  });
+
+  it('dropping a dragged tab on the "+" button moves it to the end', () => {
+    const harness = makeHarness({
+      woc_chat_tabs: '["world","party","guild"]',
+      woc_chat_active_tab: 'world',
+    });
+    harness.controller.init();
+    const tabsBar = harness.document.getElementById('chatlog-tabs') as FakeElement;
+    const chatTabs = (): FakeElement[] =>
+      tabsBar.querySelectorAll('.chat-tab') as unknown as FakeElement[];
+    const tab = (id: string): FakeElement => chatTabs().find((el) => el.dataset.tab === id)!;
+    const addButton = chatTabs().find((el) => el.classList.contains('chat-tab-add'))!;
+
+    tab('world').dispatchEvent(new Event('dragstart'));
+    addButton.dispatchEvent(new Event('dragover'));
+    addButton.dispatchEvent(new Event('drop'));
+
+    expect(harness.storage.getItem('woc_chat_tabs')).toBe('["party","guild","world"]');
+  });
+
+  it('dropping a tab on itself is a no-op that does not persist a redundant write', () => {
+    const harness = makeHarness({
+      woc_chat_tabs: '["world","party"]',
+      woc_chat_active_tab: 'world',
+    });
+    harness.controller.init();
+    const tabsBar = harness.document.getElementById('chatlog-tabs') as FakeElement;
+    const tab = (id: string): FakeElement =>
+      (tabsBar.querySelectorAll('.chat-tab') as unknown as FakeElement[]).find(
+        (el) => el.dataset.tab === id,
+      )!;
+
+    tab('party').dispatchEvent(new Event('dragstart'));
+    tab('party').dispatchEvent(new Event('dragover'));
+    tab('party').dispatchEvent(new Event('drop'));
+
+    expect(harness.storage.getItem('woc_chat_tabs')).toBe('["world","party"]');
+  });
 });
