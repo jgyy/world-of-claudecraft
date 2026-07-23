@@ -20,6 +20,7 @@ import {
   reorderChatTabs,
   sentLineTargetForHost,
   serializeChatTabs,
+  stepChatTab,
   WHISPER_TAB,
   WHISPER_TAB_LABEL_KEY,
 } from './chat_channels';
@@ -241,6 +242,7 @@ export class ChatWindowController {
         this.removeTab(channel);
       });
       this.bindTabDrag(button, channel);
+      this.bindTabReorderKeys(button, channel, label);
       bar.append(button);
     }
     const add = this.deps.document.createElement('button');
@@ -346,6 +348,38 @@ export class ChatWindowController {
     this.chatTabs = next;
     this.renderTabs();
     this.persist();
+  }
+
+  // Non-drag reorder path for keyboard/switch/screen-reader users: Alt+Left / Alt+Right
+  // on a focused channel tab swaps it with its immediate neighbor. Exposed as aria labels
+  // (not just a title tooltip) so assistive tech announces the shortcut, and focus is
+  // restored to the moved tab's button after renderTabs() rebuilds the strip.
+  private bindTabReorderKeys(button: HTMLButtonElement, channel: ChatOpenTab, label: string): void {
+    button.setAttribute('aria-keyshortcuts', 'Alt+ArrowLeft Alt+ArrowRight');
+    button.setAttribute('aria-label', t('hud.core.chatChannels.moveHint', { channel: label }));
+    button.addEventListener('keydown', (event) => {
+      if (!event.altKey || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
+      event.preventDefault();
+      this.stepTab(channel, event.key === 'ArrowLeft' ? -1 : 1);
+    });
+  }
+
+  // Swaps `channel` with its immediate neighbor and persists, skipping the re-render
+  // when already at that edge. Refocuses the moved tab's button after the strip
+  // rebuilds so a keyboard user's focus follows the tab they just moved.
+  private stepTab(channel: ChatOpenTab, step: -1 | 1): void {
+    const next = stepChatTab(this.chatTabs, channel, step);
+    const unchanged =
+      next.length === this.chatTabs.length && next.every((tab, i) => tab === this.chatTabs[i]);
+    if (unchanged) return;
+    this.chatTabs = next;
+    this.renderTabs();
+    this.persist();
+    this.requireElement('chatlog-tabs')
+      .querySelectorAll<HTMLButtonElement>('.chat-tab')
+      .forEach((button) => {
+        if (button.dataset.tab === channel) button.focus();
+      });
   }
 
   private removeTab(channel: ChatOpenTab): void {

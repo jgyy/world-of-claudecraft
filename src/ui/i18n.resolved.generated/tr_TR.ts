@@ -5823,6 +5823,7 @@ export const tr_TR: EnTranslations = {
         "add": "Sohbet kanalı ekle",
         "addTitle": "Kanal ekle",
         "close": "{channel} sekmesini kapat",
+        "moveHint": "{channel} tab, Alt+Left or Alt+Right to reorder",
         "sendingTo": "{channel} kanalına mesaj",
         "names": {
           "say": "Söyle",

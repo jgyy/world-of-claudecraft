@@ -5823,6 +5823,7 @@ export const vi_VN: EnTranslations = {
         "add": "Thêm kênh trò chuyện",
         "addTitle": "Thêm kênh",
         "close": "Đóng thẻ {channel}",
+        "moveHint": "{channel} tab, Alt+Left or Alt+Right to reorder",
         "sendingTo": "Nhắn {channel}",
         "names": {
           "say": "Nói",

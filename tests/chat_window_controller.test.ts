@@ -196,6 +196,68 @@ describe('ChatWindowController', () => {
     expect(harness.storage.getItem('woc_chat_tabs')).toBe('["party","guild","world"]');
   });
 
+  it('reorders a channel tab with Alt+ArrowLeft/Right, the non-drag accessible path', () => {
+    const harness = makeHarness({
+      woc_chat_tabs: '["world","party","guild"]',
+      woc_chat_active_tab: 'world',
+    });
+    harness.controller.init();
+    const tabsBar = harness.document.getElementById('chatlog-tabs') as FakeElement;
+    const chatTabs = (): FakeElement[] =>
+      tabsBar.querySelectorAll('.chat-tab') as unknown as FakeElement[];
+    const tab = (id: string): FakeElement => chatTabs().find((el) => el.dataset.tab === id)!;
+
+    tab('party').dispatchEvent(
+      Object.assign(new Event('keydown'), { key: 'ArrowLeft', altKey: true }),
+    );
+
+    expect(harness.storage.getItem('woc_chat_tabs')).toBe('["party","world","guild"]');
+    // focus follows the moved tab through the strip rebuild
+    expect(tab('party').focused).toBe(true);
+
+    tab('party').dispatchEvent(
+      Object.assign(new Event('keydown'), { key: 'ArrowRight', altKey: true }),
+    );
+
+    expect(harness.storage.getItem('woc_chat_tabs')).toBe('["world","party","guild"]');
+  });
+
+  it('Alt+ArrowLeft at the leftmost tab is a no-op that does not persist a redundant write', () => {
+    const harness = makeHarness({
+      woc_chat_tabs: '["world","party"]',
+      woc_chat_active_tab: 'world',
+    });
+    harness.controller.init();
+    const tabsBar = harness.document.getElementById('chatlog-tabs') as FakeElement;
+    const tab = (id: string): FakeElement =>
+      (tabsBar.querySelectorAll('.chat-tab') as unknown as FakeElement[]).find(
+        (el) => el.dataset.tab === id,
+      )!;
+
+    tab('world').dispatchEvent(
+      Object.assign(new Event('keydown'), { key: 'ArrowLeft', altKey: true }),
+    );
+
+    expect(harness.storage.getItem('woc_chat_tabs')).toBe('["world","party"]');
+  });
+
+  it('plain ArrowLeft (no Alt) does not reorder, so focus navigation is unaffected', () => {
+    const harness = makeHarness({
+      woc_chat_tabs: '["world","party"]',
+      woc_chat_active_tab: 'world',
+    });
+    harness.controller.init();
+    const tabsBar = harness.document.getElementById('chatlog-tabs') as FakeElement;
+    const tab = (id: string): FakeElement =>
+      (tabsBar.querySelectorAll('.chat-tab') as unknown as FakeElement[]).find(
+        (el) => el.dataset.tab === id,
+      )!;
+
+    tab('party').dispatchEvent(Object.assign(new Event('keydown'), { key: 'ArrowLeft' }));
+
+    expect(harness.storage.getItem('woc_chat_tabs')).toBe('["world","party"]');
+  });
+
   it('dropping a tab on itself is a no-op that does not persist a redundant write', () => {
     const harness = makeHarness({
       woc_chat_tabs: '["world","party"]',

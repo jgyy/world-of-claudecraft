@@ -5823,6 +5823,7 @@ export const id_ID: EnTranslations = {
         "add": "Tambah saluran obrolan",
         "addTitle": "Tambah saluran",
         "close": "Tutup tab {channel}",
+        "moveHint": "{channel} tab, Alt+Left or Alt+Right to reorder",
         "sendingTo": "Pesan {channel}",
         "names": {
           "say": "Berkata",

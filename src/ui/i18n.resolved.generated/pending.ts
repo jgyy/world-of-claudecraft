@@ -9,25 +9,65 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "es_ES": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "fr_FR": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "fr_CA": [
+    "hud.core.chatChannels.moveHint"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
-  "pt_BR": [],
-  "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "it_IT": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "de_DE": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "zh_CN": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "zh_TW": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "ko_KR": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "ja_JP": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "pt_BR": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "ru_RU": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "cs_CZ": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "nl_NL": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "pl_PL": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "id_ID": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "tr_TR": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "sv_SE": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "vi_VN": [
+    "hud.core.chatChannels.moveHint"
+  ],
+  "da_DK": [
+    "hud.core.chatChannels.moveHint"
+  ]
 };

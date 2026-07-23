@@ -5823,6 +5823,7 @@ export const ru_RU: EnTranslations = {
         "add": "Добавить канал чата",
         "addTitle": "Добавить канал",
         "close": "Закрыть вкладку {channel}",
+        "moveHint": "{channel} tab, Alt+Left or Alt+Right to reorder",
         "sendingTo": "Сообщение в {channel}",
         "names": {
           "say": "Сказать",

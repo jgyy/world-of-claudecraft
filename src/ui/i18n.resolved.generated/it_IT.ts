@@ -5823,6 +5823,7 @@ export const it_IT: EnTranslations = {
         "add": "Aggiungi canale di chat",
         "addTitle": "Aggiungi canale",
         "close": "Chiudi la scheda {channel}",
+        "moveHint": "{channel} tab, Alt+Left or Alt+Right to reorder",
         "sendingTo": "Messaggio in {channel}",
         "names": {
           "say": "Dire",

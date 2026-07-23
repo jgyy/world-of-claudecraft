@@ -16,6 +16,7 @@ import {
   sentLineTarget,
   sentLineTargetForHost,
   serializeChatTabs,
+  stepChatTab,
   WHISPER_TAB,
   WHISPER_TAB_LABEL_KEY,
 } from '../src/ui/hud/chat/chat_channels';
@@ -147,6 +148,44 @@ describe('chat channel tabs — pure model', () => {
     it('round-trips through persistence after a reorder', () => {
       const reordered = reorderChatTabs(['world', 'party', WHISPER_TAB], WHISPER_TAB, 'world');
       expect(parseChatTabs(serializeChatTabs(reordered))).toEqual(reordered);
+    });
+  });
+
+  describe('stepChatTab (keyboard reorder)', () => {
+    it('swaps a tab with its left neighbor on step -1', () => {
+      expect(stepChatTab(['world', 'party', 'guild'], 'party', -1)).toEqual([
+        'party',
+        'world',
+        'guild',
+      ]);
+    });
+
+    it('swaps a tab with its right neighbor on step 1', () => {
+      expect(stepChatTab(['world', 'party', 'guild'], 'party', 1)).toEqual([
+        'world',
+        'guild',
+        'party',
+      ]);
+    });
+
+    it('is a no-op at the left edge for step -1', () => {
+      expect(stepChatTab(['world', 'party', 'guild'], 'world', -1)).toEqual([
+        'world',
+        'party',
+        'guild',
+      ]);
+    });
+
+    it('is a no-op at the right edge for step 1', () => {
+      expect(stepChatTab(['world', 'party', 'guild'], 'guild', 1)).toEqual([
+        'world',
+        'party',
+        'guild',
+      ]);
+    });
+
+    it('is a no-op for an unknown tab', () => {
+      expect(stepChatTab(['world', 'party'], 'guild' as never, 1)).toEqual(['world', 'party']);
     });
   });
 

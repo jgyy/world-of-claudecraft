@@ -5823,6 +5823,7 @@ export const ja_JP: EnTranslations = {
         "add": "チャットチャンネルを追加",
         "addTitle": "チャンネルを追加",
         "close": "{channel}タブを閉じる",
+        "moveHint": "{channel} tab, Alt+Left or Alt+Right to reorder",
         "sendingTo": "{channel}に送信",
         "names": {
           "say": "発言",

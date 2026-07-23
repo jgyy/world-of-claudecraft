@@ -33,6 +33,7 @@ const hudStringsEn = {
         add: 'Add chat channel',
         addTitle: 'Add channel',
         close: 'Close {channel} tab',
+        moveHint: '{channel} tab, Alt+Left or Alt+Right to reorder',
         sendingTo: 'Message {channel}',
         names: {
           say: 'Say',

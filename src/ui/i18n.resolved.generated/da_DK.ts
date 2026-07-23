@@ -5823,6 +5823,7 @@ export const da_DK: EnTranslations = {
         "add": "Tilføj chatkanal",
         "addTitle": "Tilføj kanal",
         "close": "Luk {channel}-fanen",
+        "moveHint": "{channel} tab, Alt+Left or Alt+Right to reorder",
         "sendingTo": "Besked til {channel}",
         "names": {
           "say": "Sig",

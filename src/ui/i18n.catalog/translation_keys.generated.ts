@@ -4522,6 +4522,7 @@ export type TranslationKeyFlat =
   | 'hud.core.chatChannels.add'
   | 'hud.core.chatChannels.addTitle'
   | 'hud.core.chatChannels.close'
+  | 'hud.core.chatChannels.moveHint'
   | 'hud.core.chatChannels.names.general'
   | 'hud.core.chatChannels.names.guild'
   | 'hud.core.chatChannels.names.lfg'

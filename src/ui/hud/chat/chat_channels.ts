@@ -264,3 +264,21 @@ export function reorderChatTabs(
   const insertAt = before === null ? rest.length : rest.indexOf(before);
   return [...rest.slice(0, insertAt), moved, ...rest.slice(insertAt)];
 }
+
+// Non-drag reorder path (Alt+Left / Alt+Right on a focused tab): swap `moved` with its
+// immediate neighbor in the given step direction. A no-op (unknown tab, or already at
+// the edge in that direction) returns the input unchanged by identity, so callers can
+// skip a re-render and keep focus where it already is.
+export function stepChatTab(
+  tabs: readonly ChatOpenTab[],
+  moved: ChatOpenTab,
+  step: -1 | 1,
+): ChatOpenTab[] {
+  const fromIndex = tabs.indexOf(moved);
+  const toIndex = fromIndex + step;
+  if (fromIndex < 0 || toIndex < 0 || toIndex >= tabs.length) return [...tabs];
+  const next = [...tabs];
+  next[fromIndex] = next[toIndex];
+  next[toIndex] = moved;
+  return next;
+}
