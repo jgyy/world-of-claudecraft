@@ -3618,9 +3618,9 @@ describe('gather node cooldown wire round trip (ncd)', () => {
 });
 
 describe('delta-key contract pins (anti-drift)', () => {
-  it('ALL_DELTA_KEYS contains exactly 55 unique keys in sorted order', () => {
-    expect(ALL_DELTA_KEYS).toHaveLength(55);
-    expect(new Set(ALL_DELTA_KEYS).size).toBe(55);
+  it('ALL_DELTA_KEYS contains exactly 56 unique keys in sorted order', () => {
+    expect(ALL_DELTA_KEYS).toHaveLength(56);
+    expect(new Set(ALL_DELTA_KEYS).size).toBe(56);
     expect([...ALL_DELTA_KEYS]).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
@@ -3639,7 +3639,7 @@ describe('delta-key contract pins (anti-drift)', () => {
     expect(scraped.has('lockouts')).toBe(true); // the multi-line call IS captured
     expect(scraped.has('vcupb')).toBe(true); // the maybeRaw calls ARE captured by the widened regex
     expect(scraped.has('dfb')).toBe(true); // incl. the multi-line maybeRaw('dfb', ...) form
-    expect(scraped.size).toBe(55);
+    expect(scraped.size).toBe(56);
     expect([...scraped].sort()).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
