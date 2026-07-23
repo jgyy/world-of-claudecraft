@@ -80,7 +80,7 @@ export interface MarketSellMeta {
   cutPct: number;
   myListingCount: number;
   maxListings: number;
-  // The fee-pool jackpot (copper) building toward the next giveaway draw.
+  // The fee-pool copper building toward the next house-stock restock.
   feePoolCopper: number;
 }
 

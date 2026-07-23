@@ -3947,7 +3947,7 @@ export const vi_VN: EnTranslations = {
       "marketPost": "Đăng bán: chọn một chồng hàng từ túi của bạn, đặt giá, và rao lên. Hàng hóa được Thương Nhân giữ cho đến khi có người mua. Những mục chưa bán sẽ trở về với bạn sau một thời gian, và bạn có thể lấy lại sớm một mục nếu đổi ý.",
       "marketCollect": "Thu nhận: khi hàng của bạn bán được, tiền lời chờ bạn tại Thương Nhân. Hãy quay lại nhận bạc, cùng với bất cứ thứ gì trả về chưa bán được. Thương Nhân lấy một khoản nhỏ từ mỗi giao dịch hoàn tất.",
       "marketPricing": "Định giá là tùy bạn. Rao thấp hơn một chút so với người khác thường bán nhanh hơn, trong khi giá cao ngất có thể nằm im không ai động đến. Hãy duyệt trước để xem mức giá hiện hành trông thế nào trước khi đăng.",
-      "marketGiveawayBody": "That small cut is not just a fee: it builds into a shared pool that periodically funds a giveaway of fine gear, drawn from among the people who actually traded on the Market since the last one. You do not need to enter or claim anything; buying or selling on the Market is entry enough. A winner is announced to the world, and the prize waits with the Merchant like any other Market payout."
+      "marketGiveawayBody": "That small cut is not just a fee: it builds into a shared pool that periodically restocks the Merchant's own shelves with fresh gear, funded entirely by trading fees. There is nothing to enter or claim; the new stock simply appears among the Merchant's standing goods, there for anyone to buy, same as any other house listing."
     },
     "social": {
       "intro": "Phần lớn thế giới có thể chơi đơn, nhưng trò chơi được tạo ra để chơi cùng người khác. Đây là cách trò chuyện, hợp sức, và tìm thấy nhóm của bạn.",
@@ -6616,7 +6616,7 @@ export const vi_VN: EnTranslations = {
       "buyAria": "Mua {item} với giá {price}",
       "reclaimAria": "Thu hồi {item}",
       "sellNote": "Rao bán hàng hóa từ túi của bạn. Thương Nhân thu {cut}% phí khi vật phẩm được bán. Bạn đang dùng {used}/{max} ô rao bán.",
-      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next stock restock.",
       "sellPickEmpty": "Nhấp vào một vật phẩm trong túi để chọn món muốn bán.",
       "quantity": "Số lượng",
       "quantityOf": "trong {count}",

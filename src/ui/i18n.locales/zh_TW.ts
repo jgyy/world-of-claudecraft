@@ -2297,7 +2297,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.reclaimAria': '取回 {item}',
   'itemUi.market.sellNote':
     '從背包上架貨物。物品售出時商人抽取 {cut}%。你正在使用 {used}/{max} 個上架位。',
-  'itemUi.market.jackpotNote': '商人持有 {pool} 的手續費，將用於下一次抽獎。',
+  'itemUi.market.jackpotNote': '商人持有 {pool} 的手續費，將用於下一次補貨。',
   'itemUi.market.sellPickEmpty': '點擊背包中的物品來選擇要出售的貨物。',
   'itemUi.market.quantity': '數量',
   'itemUi.market.quantityOf': '共 {count}',
@@ -5235,6 +5235,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
     '收取：當你的貨物售出後，所得款項會在商人處等著你。回去領取錢幣，連同任何未售出而退回的物品。每筆完成的交易，商人都會抽取一小筆費用。',
   'guide.economy.marketGiveawayBody':
     '那一小筆費用不只是手續費：它會不斷累積成一筆共同基金，定期用來舉辦一場精良裝備的抽獎。中獎者是從自上一次抽獎以來，真正在市場上交易過的人當中抽出。你不需要報名或申領，只要在市場上買賣過，就已經算是參與其中。中獎結果會向全世界公布，獎品會像其他市場收益一樣在商人處等你領取。',
+    '這筆小小的抽成不只是手續費：它匯入一個共享資金池，定期為商人的貨架補充新裝備，全部由交易手續費出資。無需報名或領取任何東西；新貨品會直接出現在商人的常備商品中，任何人都可以購買，就像其他常駐掛單一樣。',
   'guide.economy.marketPost':
     '刊登：從背包中選一堆物品，設定你的價格，然後刊登出去。在有人買下之前，貨物會由商人代為保管。未售出的刊登過一陣子會退回給你，若你改變心意，也可以提早取回其中一筆。',
   'guide.economy.marketPricing':

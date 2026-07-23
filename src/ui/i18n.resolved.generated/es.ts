@@ -3947,7 +3947,7 @@ export const es: EnTranslations = {
       "marketPost": "Publicar: elige un lote de tus bolsas, fija tu precio y ponlo a la venta. El Mercader retiene la mercancía hasta que alguien la compra. Los anuncios sin vender regresan a ti pasado un tiempo, y puedes recuperar uno antes si cambias de idea.",
       "marketCollect": "Cobrar: cuando se vende tu mercancía, tus ganancias te esperan en el Mercader. Vuelve a recoger las monedas, junto con cuanto regrese sin vender. El Mercader se queda una pequeña parte de cada venta completada.",
       "marketPricing": "El precio depende de ti. Poner el anuncio un poco por debajo de lo que piden los demás suele venderse más rápido, mientras que un precio desorbitado puede quedarse sin tocar. Explora primero para ver cuál es el precio de mercado antes de publicar.",
-      "marketGiveawayBody": "That small cut is not just a fee: it builds into a shared pool that periodically funds a giveaway of fine gear, drawn from among the people who actually traded on the Market since the last one. You do not need to enter or claim anything; buying or selling on the Market is entry enough. A winner is announced to the world, and the prize waits with the Merchant like any other Market payout."
+      "marketGiveawayBody": "That small cut is not just a fee: it builds into a shared pool that periodically restocks the Merchant's own shelves with fresh gear, funded entirely by trading fees. There is nothing to enter or claim; the new stock simply appears among the Merchant's standing goods, there for anyone to buy, same as any other house listing."
     },
     "social": {
       "intro": "La mayor parte del mundo se puede recorrer en solitario, pero el juego está hecho para jugarse con otras personas. Aquí tienes cómo hablar, formar equipo y encontrar a tu gente.",
@@ -6616,7 +6616,7 @@ export const es: EnTranslations = {
       "buyAria": "Comprar {item} por {price}",
       "reclaimAria": "Recuperar {item}",
       "sellNote": "Publica mercancías de tus bolsas. El Mercader toma un {cut}% cuando un objeto se vende. Usas {used}/{max} espacios de venta.",
-      "jackpotNote": "The Merchant is holding {pool} in fees toward the next giveaway drawing.",
+      "jackpotNote": "The Merchant is holding {pool} in fees toward the next stock restock.",
       "sellPickEmpty": "Haz clic en un objeto de tus bolsas para elegir qué vender.",
       "quantity": "Cantidad",
       "quantityOf": "de {count}",

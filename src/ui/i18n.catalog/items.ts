@@ -163,7 +163,7 @@ const itemStringsEn = {
       reclaimAria: 'Reclaim {item}',
       sellNote:
         'List goods from your bags. The Merchant takes a {cut}% cut when an item sells. You are using {used}/{max} listing slots.',
-      jackpotNote: 'The Merchant is holding {pool} in fees toward the next giveaway drawing.',
+      jackpotNote: 'The Merchant is holding {pool} in fees toward the next stock restock.',
       sellPickEmpty: 'Click an item in your bags to choose what to sell.',
       quantity: 'Quantity',
       quantityOf: 'of {count}',

@@ -2396,7 +2396,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.reclaimAria': '{item}を回収',
   'itemUi.market.sellNote':
     'バッグから品物を出品します。売れると商人が{cut}%を受け取ります。出品枠 {used}/{max} を使用中です。',
-  'itemUi.market.jackpotNote': '商人は次の抽選に向けて{pool}の手数料を貯めています。',
+  'itemUi.market.jackpotNote': '商人は次の在庫補充に向けて{pool}の手数料を貯めています。',
   'itemUi.market.sellPickEmpty': '売るものを選ぶにはバッグ内のアイテムをクリックしてください。',
   'itemUi.market.quantity': '数量',
   'itemUi.market.quantityOf': '/ {count}',
@@ -5487,6 +5487,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '受け取り：品物が売れると、その代金は商人のもとで待っています。戻ってコインを受け取りましょう。売れ残って戻ってきたものも一緒です。商人は成立した売却ごとにわずかな手数料を取ります。',
   'guide.economy.marketGiveawayBody':
     'その少しの手数料はただの手数料ではありません。積み重なって共通の基金となり、定期的に上質な装備の抽選会の元手になります。当選者は前回の抽選以降にマーケットで実際に取引した人々の中から選ばれます。参加登録や受け取り申請は不要で、マーケットで売買していること自体が参加資格です。当選は世界に告知され、賞品は他のマーケットの代金と同じく商人のもとで待っています。',
+    'その小さな手数料はただの手数料ではありません。共有プールに積み立てられ、定期的に商人の棚に新しい装備を補充します。すべて取引手数料で賄われます。参加や受け取りは不要で、新しい在庫はただ商人の常備品の中に現れ、他のハウス出品と同様に誰でも購入できます。',
   'guide.economy.marketPost':
     '出品：バッグからスタックを選び、価格を決めて出品します。品物は誰かが買うまで商人が預かります。売れ残った出品はしばらくすると手元に戻り、気が変われば早めに引き取ることもできます。',
   'guide.economy.marketPricing':

@@ -7,10 +7,9 @@
 // IWorld surface, and the /listings readout call sites resolve unchanged.
 //
 // `src/sim`-pure: no DOM/Three/render-ui-game-net imports, no Math.random/Date.now
-// (enforced by tests/architecture.test.ts). Only the fee-pool giveaway draw
-// (updateFeePool/pickFeePoolReward) draws rng; everything else in this module does not.
+// (enforced by tests/architecture.test.ts). Only the fee-pool restock draw
+// (updateFeePool) draws rng; everything else in this module does not.
 
-import { CLASSES } from './content/classes';
 import { ITEMS } from './data';
 import { formatMoney } from './format_money';
 import {
@@ -39,63 +38,38 @@ export const MARKET_LISTING_DEPOSIT_COPPER = 0;
 const MARKET_LISTING_DURATION = 48 * 3600; // sim-seconds an unsold listing lingers before returning
 const MARKET_WIRE_LIMIT = 120; // most listings shipped to one client at a time
 // RS-style Grand Exchange tax sink: rather than simply destroying the Merchant's cut,
-// it accumulates into a shared pool that periodically funds a giveaway (see
-// updateFeePool). Roughly a daily cadence in sim time; a quiet trade week just carries
-// the pool into the next draw instead of forcing an empty one.
-const MARKET_FEE_POOL_DRAW_INTERVAL = 24 * 3600; // sim-seconds between giveaway draws
-const MARKET_FEE_POOL_REWARD_KINDS = new Set(['weapon', 'armor']);
-// Anti-alt-farming clamp on the weighted winner draw (see pickFeePoolWinner):
-// no single participant key's weight counts for more than this fraction of the
-// pool's total contributed weight.
-const FEE_POOL_MAX_SHARE = 0.4;
+// it accumulates into a shared pool that periodically funds a restock of the
+// Merchant's own house stock (see updateFeePool). Roughly a daily cadence in sim
+// time; a quiet trade week just carries the pool into the next check instead of
+// forcing an empty one.
+const MARKET_FEE_POOL_DRAW_INTERVAL = 24 * 3600; // sim-seconds between restock checks
+const MARKET_FEE_POOL_RESTOCK_KINDS = new Set(['weapon', 'armor']);
+// Cap on how many items one restock adds, so a very fat pool can't flood the
+// house stock in a single draw; any leftover budget just carries into the pool
+// for the next check.
+const FEE_POOL_MAX_RESTOCK_ITEMS = 5;
 
-// Eligibility for a fee-pool reward: epic/legendary weapon or armor, never a heroic
-// remix (those are dungeon-locked) or soulbound gear (those can't be handed out as a
-// tradeable prize). Shared by the minimum-draw-threshold calc and the reward roll
-// itself so the two can never drift.
-function isFeePoolRewardItem(d: ItemDef): boolean {
+// Eligibility for a fee-pool restock item: uncommon (green) or rare (blue) weapon
+// or armor, gear-up tiers for leveling players rather than raid-tier drops, never a
+// heroic remix (those are dungeon-locked) or soulbound gear (those can't sit on the
+// open market), and never a class-restricted piece: house stock has no buyer
+// identity to filter by class, so only something anyone can equip belongs here.
+// Shared by the minimum-draw-threshold calc and the restock roll itself so the two
+// can never drift.
+function isFeePoolRestockItem(d: ItemDef): boolean {
   return (
-    (d.quality === 'epic' || d.quality === 'legendary') &&
-    MARKET_FEE_POOL_REWARD_KINDS.has(d.kind) &&
+    (d.quality === 'uncommon' || d.quality === 'rare') &&
+    MARKET_FEE_POOL_RESTOCK_KINDS.has(d.kind) &&
     !d.heroicOf &&
-    !d.soulbound
+    !d.soulbound &&
+    !d.requiredClass
   );
-}
-
-// A participant's identity captured at TRADE time (not resolved later from the
-// live roster at draw time). This is the fix for a real bug: the pool accumulates
-// over a full MARKET_FEE_POOL_DRAW_INTERVAL (24 sim-hours), so a winner who has
-// since logged out is the common case, not an edge case. Resolving `name`/`cls`
-// from `ctx.players` at draw time meant an offline winner's raw character/entity
-// id leaked into the server-wide announcement, and their class-eligible reward
-// pool silently shrank to only classless items. Capturing the display name (always
-// known, straight off the listing/meta) and class (best effort - only knowable if
-// the trader happened to still be online at their OWN trade) at participation time
-// removes both failure modes.
-// `contributed` is the sum of the Merchant's cut across every trade this participant
-// was a party to since the last draw (buyer and seller both get the full cut of their
-// own trade credited, not half). It weights the winner draw so the lottery tracks what
-// you put in, not just how many distinct trades you touched: two alts splitting a
-// single 20-copper listing (1 copper of fees) no longer buy the same odds as a trader
-// who fed the pool 500 copper across a real session.
-interface FeePoolParticipant {
-  key: string;
-  name: string;
-  cls: PlayerMeta['cls'] | undefined;
-  contributed: number;
 }
 
 export interface MarketListing {
   id: number;
   sellerKey: string; // stable seller identity (character id string); '' for house stock
   sellerName: string; // display name
-  // The seller's class, captured at LIST time (see marketList): the seller is
-  // definitionally online and at the Merchant when they list, so this is always
-  // resolvable then, unlike at sale/draw time where the seller is commonly offline
-  // (finding: an offline-at-sale seller could only ever win a necklace, the one
-  // slot the whole classless-eligible reward subset happens to cover). Undefined
-  // only for house stock, which never earns a fee-pool entry anyway.
-  sellerCls?: PlayerMeta['cls'];
   itemId: string;
   count: number;
   price: number; // total copper buyout for the whole stack
@@ -118,7 +92,6 @@ export interface MarketSave {
     id: number;
     sellerKey: string;
     sellerName: string;
-    sellerCls?: PlayerMeta['cls'];
     itemId: string;
     count: number;
     price: number;
@@ -126,7 +99,7 @@ export interface MarketSave {
   }[];
   collections: { key: string; copper: number; items: InvSlot[] }[];
   nextListingId: number;
-  // The fee-pool giveaway (see MARKET_FEE_POOL_DRAW_INTERVAL). Optional so an old
+  // The fee-pool restock (see MARKET_FEE_POOL_DRAW_INTERVAL). Optional so an old
   // save (predating this feature) loads with an empty pool and a fresh countdown,
   // exactly like an absent listing/collection field.
   feePoolCopper?: number;
@@ -146,21 +119,19 @@ export class Market {
   // any of these merchants is a valid place to stand and deal, so a player can use the
   // auction house at whichever auctioneer is closest.
   merchantIds: number[] = [];
-  // Fee-pool giveaway state (see MARKET_FEE_POOL_DRAW_INTERVAL). `feePoolParticipants`
-  // is every seller/buyer key that traded since the last draw, so the winner is drawn
-  // from people who actually used the market, not the whole player roster.
+  // Fee-pool restock state (see MARKET_FEE_POOL_DRAW_INTERVAL).
   feePoolCopper = 0;
-  // Keyed by seller/buyer key so a repeat trader within one draw cycle only gets one
-  // entry (dedupes), but the VALUE is captured at participation time - see
-  // FeePoolParticipant above.
-  private feePoolParticipants = new Map<string, FeePoolParticipant>();
-  // Public like MarketListing.expiresAt: tests force a draw the same way they force a
+  // Trades since the last restock check, so a quiet stretch (pool has leftover
+  // copper but nobody traded) doesn't restock on carried-over fees alone.
+  private feePoolTradeCount = 0;
+  // Public like MarketListing.expiresAt: tests force a check the same way they force a
   // listing expiry, by moving the deadline into the past then ticking.
   feePoolNextDrawAt = 0;
-  // The pool must be able to afford at least the cheapest eligible reward before a
-  // draw fires at all (finding: a single one-copper-fee trade used to mint raid-tier
-  // gear on the next daily tick, regardless of pool size). Derived from the actual
-  // item table, not an invented number, and cached once since content is static.
+  // The pool must be able to afford at least the cheapest eligible item before a
+  // restock fires at all (finding, carried over from the pre-restock design: a
+  // single one-copper-fee trade must not mint gear on the next daily tick regardless
+  // of pool size). Derived from the actual item table, not an invented number, and
+  // cached once since content is static.
   private static readonly feePoolMinDrawCopper = Market.computeMinDrawCopper();
 
   constructor(private readonly ctx: SimContext) {}
@@ -168,7 +139,7 @@ export class Market {
   private static computeMinDrawCopper(): number {
     let min = Infinity;
     for (const d of Object.values(ITEMS)) {
-      if (isFeePoolRewardItem(d)) min = Math.min(min, d.sellValue);
+      if (isFeePoolRestockItem(d)) min = Math.min(min, d.sellValue);
     }
     return Number.isFinite(min) ? min : 0;
   }
@@ -210,22 +181,6 @@ export class Market {
       if (this.marketSellerKey(m) === key || m.name === key) return m;
     }
     return null;
-  }
-
-  private addFeePoolParticipant(
-    key: string,
-    name: string,
-    cls: PlayerMeta['cls'] | undefined,
-    cut: number,
-  ): void {
-    if (!key) return;
-    const existing = this.feePoolParticipants.get(key);
-    this.feePoolParticipants.set(key, {
-      key,
-      name,
-      cls: cls ?? existing?.cls,
-      contributed: (existing?.contributed ?? 0) + cut,
-    });
   }
 
   private collectionFor(key: string): MarketCollection {
@@ -308,7 +263,6 @@ export class Market {
         id: this.nextListingId++,
         sellerKey: '',
         sellerName: 'The Merchant',
-        sellerCls: undefined,
         itemId: s.itemId,
         count: s.count,
         price: s.price,
@@ -386,10 +340,6 @@ export class Market {
       id: this.nextListingId++,
       sellerKey,
       sellerName: meta.name,
-      // Always resolvable here: the seller is online and standing at the Merchant
-      // (see nearMerchant above). Carried on the listing so it survives even if the
-      // seller logs off before the eventual sale/draw (see MarketListing.sellerCls).
-      sellerCls: meta.cls,
       itemId,
       count: want,
       price: ask,
@@ -449,14 +399,7 @@ export class Market {
       this.collectionFor(listing.sellerKey).copper += proceeds;
       if (cut > 0) {
         this.feePoolCopper += cut;
-        // The buyer is resolved right here (they're the one acting), so their class
-        // is always known. The seller's class comes off the listing (captured at
-        // marketList time, when the seller was definitionally online), not a
-        // live lookup: resolving it here would collapse to undefined for the
-        // common offline-seller case, which used to shrink their reward pool to
-        // only classless items.
-        this.addFeePoolParticipant(listing.sellerKey, listing.sellerName, listing.sellerCls, cut);
-        this.addFeePoolParticipant(this.marketSellerKey(meta), meta.name, meta.cls, cut);
+        this.feePoolTradeCount++;
       }
       this.marketListings.splice(idx, 1);
       const sellerMeta = this.metaByMarketSellerKey(listing.sellerKey);
@@ -573,105 +516,62 @@ export class Market {
   }
 
   // Roughly once a day: if the pool has matured past feePoolMinDrawCopper and at
-  // least one participant traded since the last draw, pick a random participant and
-  // hand them a reward the pool can actually afford (see pickFeePoolReward), funded
-  // entirely by the pool. A pool that hasn't matured yet is left untouched to carry
-  // into the next check (same "quiet week just carries the pool forward" idea as
-  // before, just gated on value now instead of firing regardless of size), and its
-  // participants are cleared too so eligibility always tracks "since the last draw",
-  // never accumulating traders from long-past quiet stretches. The reward is resolved
-  // BEFORE the pool is touched: if no affordable reward exists for the drawn winner
-  // (e.g. an offline seller whose class couldn't be resolved, and the pool falls
-  // between the classless min-draw threshold and the true classless-eligible min
-  // price), the pool and its participants are left intact to carry into the next
-  // draw, exactly like the below-threshold path, instead of destroying the fees with
-  // nobody announced as a winner. Only once a draw actually resolves a reward does
-  // the pool drain and reschedule.
+  // least one trade happened since the last check, spend the pool restocking the
+  // Merchant's house stock with a handful of uncommon/rare gear pieces (see
+  // restockFromFeePool), instead of destroying the fees. A pool that hasn't matured
+  // yet, or that saw no trading, is left untouched to carry into the next check (a
+  // quiet stretch just carries the pool forward). Only the copper actually spent
+  // drains from the pool; any leftover (nothing affordable, or the per-draw item
+  // cap was hit before the budget ran out) carries into the next check too.
   private updateFeePool(): void {
     if (this.ctx.tickCount % 20 !== 0) return;
     if (this.ctx.time < this.feePoolNextDrawAt) return;
-    if (this.feePoolCopper < Market.feePoolMinDrawCopper || this.feePoolParticipants.size === 0) {
-      this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
-      this.feePoolParticipants.clear();
-      return;
-    }
-    const spent = this.feePoolCopper;
-    const participants = [...this.feePoolParticipants.values()];
-    const winner = this.pickFeePoolWinner(participants);
-    const rewardId = this.pickFeePoolReward(winner.cls, spent);
     this.feePoolNextDrawAt = this.ctx.time + MARKET_FEE_POOL_DRAW_INTERVAL;
-    if (!rewardId) return;
-    this.feePoolCopper = 0;
-    this.feePoolParticipants.clear();
-    this.collectionFor(winner.key).items.push({ itemId: rewardId, count: 1 });
-    const def = ITEMS[rewardId];
+    const tradeCount = this.feePoolTradeCount;
+    this.feePoolTradeCount = 0;
+    if (this.feePoolCopper < Market.feePoolMinDrawCopper || tradeCount === 0) return;
+    const spent = this.restockFromFeePool(this.feePoolCopper);
+    if (spent <= 0) return;
+    this.feePoolCopper -= spent;
     for (const m of this.ctx.players.values()) {
       this.ctx.emit({
         type: 'log',
-        text: `${winner.name} won ${def.name} from the World Market's fee giveaway, funded by ${formatMoney(spent)} in trading fees!`,
+        text: `The World Market restocked its shelves with new gear, funded by ${formatMoney(spent)} in trading fees!`,
         color: '#ffd35c',
         pid: m.entityId,
       });
     }
   }
 
-  // Weighted by what each participant actually fed the pool (see FeePoolParticipant),
-  // not a flat one-entry-per-trader draw: a single rng.next() picks a point in
-  // [0, totalContributed) and walks the list until it lands, same one draw per
-  // updateFeePool call as the old rng.pick(participants), so parity draw-order is
-  // unaffected. Every entry has contributed > 0 (only trades with cut > 0 ever call
-  // addFeePoolParticipant), so the loop always lands before falling through to the
-  // final element (a floating-point-rounding safety net, not a real fallback path).
-  //
-  // Each participant's weight is first clamped to at most FEE_POOL_MAX_SHARE of the
-  // UNCLAMPED total (review finding: two characters round-tripping one listing
-  // credit the FULL cut to both, so an alt pair can otherwise buy far better odds
-  // than an organic two-party trade for the same fees paid). The sim has no notion
-  // of "same real account" across two character keys, so a per-key clamp is the
-  // only sim-pure lever available; it cannot fully close a two-alt round-trip (each
-  // alt can still individually sit at the cap), but it does bound any SINGLE key's
-  // odds, which is what stops a farm from concentrating most of the draw onto one
-  // repeatedly-reused key as the participant count grows. 40% keeps a genuine
-  // whale (one key, most of the session's real volume) heavily favored over a
-  // handful of minor traders, while denying any one key a near-guaranteed win.
-  private pickFeePoolWinner(participants: FeePoolParticipant[]): FeePoolParticipant {
-    const rawTotal = participants.reduce((sum, p) => sum + p.contributed, 0);
-    const cap = rawTotal * FEE_POOL_MAX_SHARE;
-    const weights = participants.map((p) => Math.min(p.contributed, cap));
-    const total = weights.reduce((sum, w) => sum + w, 0);
-    let roll = this.ctx.rng.next() * total;
-    for (let i = 0; i < participants.length; i++) {
-      if (roll < weights[i]) return participants[i];
-      roll -= weights[i];
+  // Spends up to `budget` copper adding uncommon/rare weapon/armor pieces to the
+  // Merchant's house stock (see isFeePoolRestockItem), one `rng.pick` per item so
+  // draw order stays a single deterministic stream. Stops at
+  // FEE_POOL_MAX_RESTOCK_ITEMS or as soon as nothing eligible is affordable with
+  // what's left, whichever comes first. Returns the total actually spent (0 if
+  // nothing in ITEMS is both eligible and affordable, which the caller leaves the
+  // pool intact for).
+  private restockFromFeePool(budget: number): number {
+    const pool = Object.values(ITEMS).filter(isFeePoolRestockItem);
+    let remaining = budget;
+    let spent = 0;
+    for (let i = 0; i < FEE_POOL_MAX_RESTOCK_ITEMS; i++) {
+      const affordable = pool.filter((d) => d.sellValue <= remaining);
+      if (affordable.length === 0) break;
+      const d = this.ctx.rng.pick(affordable);
+      this.marketListings.push({
+        id: this.nextListingId++,
+        sellerKey: '',
+        sellerName: 'The Merchant',
+        itemId: d.id,
+        count: 1,
+        price: d.sellValue,
+        expiresAt: Infinity,
+        house: true,
+      });
+      remaining -= d.sellValue;
+      spent += d.sellValue;
     }
-    return participants[participants.length - 1];
-  }
-
-  // Reward pool: epic/legendary gear the pool can actually afford (sellValue <= the
-  // banked fees), preferring pieces the winner can equip (no requiredClass, or one
-  // that lists their class) so the giveaway is never wasted on an off-class drop.
-  // `forClass` already contains the FULL classless subset (no requiredClass at all),
-  // so there is no separate classless fallback here: a second lookup over that same
-  // subset can never find anything `weightedPick(forClass)` did not already see (a
-  // prior revision carried one and it was provably dead code, see PR review). Among
-  // what's affordable, the roll is weighted toward the pricier half so a well-fed
-  // pool tends to buy something worth the wait instead of always defaulting to the
-  // cheapest eligible item. Returns null (pool carries into the next draw, see
-  // updateFeePool) when nothing in ITEMS eligible for this winner's class is
-  // affordable yet, e.g. an offline seller whose class couldn't be resolved and the
-  // pool sits above the global min-draw threshold but below the classless-eligible
-  // minimum price.
-  private pickFeePoolReward(cls: PlayerMeta['cls'] | undefined, poolCopper: number): string | null {
-    const forClass = Object.values(ITEMS).filter(
-      (d) =>
-        isFeePoolRewardItem(d) &&
-        (!d.requiredClass || (cls && d.requiredClass.includes(cls))) &&
-        d.sellValue <= poolCopper,
-    );
-    if (forClass.length === 0) return null;
-    const maxValue = Math.max(...forClass.map((d) => d.sellValue));
-    const topTier = forClass.filter((d) => d.sellValue >= maxValue / 2);
-    return this.ctx.rng.pick(topTier.length > 0 ? topTier : forClass).id;
+    return spent;
   }
 
   marketInfoFor(pid: number): import('../world_api').MarketInfo | null {
@@ -747,7 +647,6 @@ export class Market {
           id: l.id,
           sellerKey: l.sellerKey,
           sellerName: l.sellerName,
-          sellerCls: l.sellerCls,
           itemId: l.itemId,
           count: l.count,
           price: l.price,
@@ -769,9 +668,9 @@ export class Market {
   loadMarket(save: MarketSave | null | undefined): void {
     if (!save) return;
     this.feePoolCopper = Math.max(0, Math.floor(save.feePoolCopper ?? 0) || 0);
-    // Participants never persist (a session-only eligibility list): a fee earned
-    // before a restart still counts toward the pool, but who gets to win it is
-    // decided only by trades since the server has been back up.
+    // Trade count never persists (a session-only gate): a fee earned before a
+    // restart still counts toward the pool, but whether the pool restocks on the
+    // next check is decided only by trades since the server has been back up.
     this.feePoolNextDrawAt =
       this.ctx.time +
       (Number.isFinite(save.feePoolDrawSecondsLeft)
@@ -791,10 +690,6 @@ export class Market {
         id: l.id,
         sellerKey: String(l.sellerKey ?? ''),
         sellerName: String(l.sellerName ?? l.sellerKey ?? '?'),
-        // Undefined on a pre-feature save (predating this field, like an old
-        // pool/countdown) or a corrupted value: falls back to resolving live at
-        // sale time (the old, worse-but-safe behavior), never a crash.
-        sellerCls: l.sellerCls && CLASSES[l.sellerCls] ? l.sellerCls : undefined,
         itemId: l.itemId,
         count: Math.max(1, l.count | 0),
         price: Math.max(

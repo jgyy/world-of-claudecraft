@@ -1850,7 +1850,7 @@ export const guideStrings = {
     marketPricing:
       'Pricing is up to you. Listing a little under what others are asking tends to sell faster, while a steep price may sit untouched. Browse first to see what the going rate looks like before you post.',
     marketGiveawayBody:
-      'That small cut is not just a fee: it builds into a shared pool that periodically funds a giveaway of fine gear, drawn from among the people who actually traded on the Market since the last one. You do not need to enter or claim anything; buying or selling on the Market is entry enough. A winner is announced to the world, and the prize waits with the Merchant like any other Market payout.',
+      "That small cut is not just a fee: it builds into a shared pool that periodically restocks the Merchant's own shelves with fresh gear, funded entirely by trading fees. There is nothing to enter or claim; the new stock simply appears among the Merchant's standing goods, there for anyone to buy, same as any other house listing.",
   },
 
   // Social and Groups: chat channels, parties, party loot, friends, ignore, guilds.

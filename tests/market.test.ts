@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { ITEMS } from '../src/sim/data';
 import type { MarketQuery } from '../src/sim/market_query';
 import { Sim } from '../src/sim/sim';
@@ -602,7 +602,7 @@ describe('World Market: a now-soulbound listing is returned to the seller', () =
   });
 });
 
-describe('the World Market: the fee-pool giveaway', () => {
+describe('the World Market: the fee-pool restock', () => {
   it("a sale's cut accumulates in the pool instead of only paying the seller", () => {
     const sim = makeWorld();
     const seller = sim.addPlayer('warrior', 'Seller');
@@ -634,7 +634,7 @@ describe('the World Market: the fee-pool giveaway', () => {
     expect(sim.market.feePoolCopper).toBe(0);
   });
 
-  it('draws a winner from recent traders and grants them an epic/legendary reward once the pool matures', () => {
+  it('restocks the house stock with uncommon/rare gear once the pool matures, funded by trading fees', () => {
     const sim = makeWorld();
     const seller = sim.addPlayer('warrior', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
@@ -642,40 +642,49 @@ describe('the World Market: the fee-pool giveaway', () => {
     standAtMerchant(sim, buyer);
     sim.addItem('wolf_fang', 1, seller);
     // Priced so the 5% cut clears the minimum-draw threshold (the cheapest eligible
-    // reward's sellValue): a trivial trade must not fund a raid-tier drop.
+    // restock item's sellValue): a trivial trade must not fund a restock.
     sim.players.get(buyer)!.copper = 200_000;
     sim.marketList('wolf_fang', 1, 100_000, seller);
     sim.marketBuy(
       sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
       buyer,
     );
-    expect(sim.market.feePoolCopper).toBeGreaterThan(0);
-    sim.market.feePoolNextDrawAt = sim.time - 1; // force the draw due
+    const pooled = sim.market.feePoolCopper;
+    expect(pooled).toBeGreaterThan(0);
+    const houseCountBefore = sim.marketListings.filter((l) => l.house).length;
+    sim.market.feePoolNextDrawAt = sim.time - 1; // force the check due
 
     // tick() drains its own events into its return value each call, so collect
     // across the loop rather than reading sim.events afterward.
     const allEvents = [];
     for (let i = 0; i < 20; i++) allEvents.push(...sim.tick()); // updateFeePool runs once a second
 
-    // The pool always drains and reschedules on a due draw, win or not.
-    expect(sim.market.feePoolCopper).toBe(0);
-    expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
+    // New house stock appeared, all of it uncommon/rare weapon or armor, none of
+    // it class-restricted (no buyer identity to filter on).
+    const newHouse = sim.marketListings.filter((l) => l.house).slice(houseCountBefore);
+    expect(newHouse.length).toBeGreaterThan(0);
+    for (const l of newHouse) {
+      const def = ITEMS[l.itemId]!;
+      expect(['uncommon', 'rare']).toContain(def.quality);
+      expect(['weapon', 'armor']).toContain(def.kind);
+      expect(def.requiredClass).toBeUndefined();
+      expect(l.expiresAt).toBe(Infinity);
+      expect(l.sellerKey).toBe('');
+    }
 
-    // One of the two traders won a reward, delivered to their Merchant collection.
-    const sellerItems = sim.marketInfoFor(seller)!.collectionItems;
-    const buyerItems = sim.marketInfoFor(buyer)!.collectionItems;
-    const won = [...sellerItems, ...buyerItems];
-    expect(won.length).toBe(1);
-    const def = ITEMS[won[0].itemId]!;
-    expect(['epic', 'legendary']).toContain(def.quality);
-    expect(['weapon', 'armor']).toContain(def.kind);
+    // Only what was actually spent drains from the pool; no player got a personal
+    // reward (nobody's collection changed).
+    expect(sim.market.feePoolCopper).toBeLessThan(pooled);
+    expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
+    expect(sim.marketInfoFor(seller)!.collectionItems).toEqual([]);
+    expect(sim.marketInfoFor(buyer)!.collectionItems).toEqual([]);
 
     // The whole server heard about it.
     const logs = allEvents.filter((e) => e.type === 'log').map((e) => (e as { text: string }).text);
-    expect(logs.some((t) => t.includes('fee giveaway'))).toBe(true);
+    expect(logs.some((t) => t.includes('restocked'))).toBe(true);
   });
 
-  it('a pool below the minimum-draw threshold carries forward instead of minting a reward off a trivial trade', () => {
+  it('a pool below the minimum-draw threshold carries forward instead of restocking off a trivial trade', () => {
     const sim = makeWorld();
     const seller = sim.addPlayer('warrior', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
@@ -684,34 +693,26 @@ describe('the World Market: the fee-pool giveaway', () => {
     sim.addItem('wolf_fang', 1, seller);
     sim.players.get(buyer)!.copper = 1000;
     // A trivial 200-copper trade only banks 10 copper of fees - nowhere near enough
-    // to afford the cheapest epic/legendary weapon or armor piece.
+    // to afford the cheapest eligible restock item.
     sim.marketList('wolf_fang', 1, 200, seller);
     sim.marketBuy(
       sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
       buyer,
     );
     expect(sim.market.feePoolCopper).toBe(10);
+    const houseCountBefore = sim.marketListings.filter((l) => l.house).length;
     sim.market.feePoolNextDrawAt = sim.time - 1; // force the check due
 
     for (let i = 0; i < 20; i++) sim.tick();
 
-    // The pool is untouched (not drained) and no reward was granted: the draw did
-    // not fire because 10 copper cannot afford anything in the reward table.
+    // The pool is untouched (not drained) and the house stock is unchanged: the
+    // check did not fire because 10 copper cannot afford anything eligible.
     expect(sim.market.feePoolCopper).toBe(10);
     expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
-    expect(sim.marketInfoFor(seller)!.collectionItems).toEqual([]);
-    expect(sim.marketInfoFor(buyer)!.collectionItems).toEqual([]);
-    // Participants are cleared on the below-threshold reschedule too, so eligibility
-    // tracks "since the last draw" (matching the giveaway comment) instead of
-    // accumulating traders from a long-past quiet stretch until the pool eventually
-    // matures.
-    expect(
-      (sim.market as unknown as { feePoolParticipants: Map<string, unknown> }).feePoolParticipants
-        .size,
-    ).toBe(0);
+    expect(sim.marketListings.filter((l) => l.house).length).toBe(houseCountBefore);
   });
 
-  it('an offline winner is announced by their real name, not a raw character key, and keeps their class-eligible pool', () => {
+  it('leftover copper from a prior draw does not restock again on its own without a new trade', () => {
     const sim = makeWorld();
     const seller = sim.addPlayer('warrior', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
@@ -724,204 +725,31 @@ describe('the World Market: the fee-pool giveaway', () => {
       sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
       buyer,
     );
-    const sellerKey = marketSellerKey(seller);
-    expect(sim.market.feePoolCopper).toBeGreaterThan(0);
-
-    // The seller logs out before the draw fires - the common case, since the pool
-    // accumulates over a full 24 sim-hour interval.
-    sim.removePlayer(seller);
     sim.market.feePoolNextDrawAt = sim.time - 1;
+    for (let i = 0; i < 20; i++) sim.tick(); // first restock consumes the trade count
+    const pooledAfterFirst = sim.market.feePoolCopper;
+    const houseCountAfterFirst = sim.marketListings.filter((l) => l.house).length;
 
-    const allEvents = [];
-    for (let i = 0; i < 20; i++) allEvents.push(...sim.tick());
-
-    // The reward, if the offline seller won, is still delivered to their collection
-    // by stable key (recoverable on relog), not lost or rerouted.
-    const sellerItems = sim.marketInfoFor(buyer)!.collectionItems; // buyer stays online
-    const collections = (
-      sim.market as unknown as {
-        marketCollections: Map<string, { items: { itemId: string; count: number }[] }>;
-      }
-    ).marketCollections;
-    const sellerCollected = collections.get(sellerKey)?.items ?? [];
-    const won = [...sellerItems, ...sellerCollected];
-    expect(won.length).toBe(1);
-
-    // Whoever won, the broadcast text never contains the raw seller key (only a
-    // display name): 'Seller' if the offline seller won, 'Buyer' otherwise.
-    const logs = allEvents.filter((e) => e.type === 'log').map((e) => (e as { text: string }).text);
-    const winLog = logs.find((t) => t.includes('fee giveaway'));
-    expect(winLog).toBeDefined();
-    expect(winLog).not.toContain(sellerKey);
-    expect(winLog!.startsWith('Seller ') || winLog!.startsWith('Buyer ')).toBe(true);
-  });
-
-  it("captures the seller's class at LISTING time, so a seller who logs off before their item sells still keeps their full class-eligible reward pool", () => {
-    const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
-    const buyer = sim.addPlayer('mage', 'Buyer');
-    standAtMerchant(sim, seller);
-    standAtMerchant(sim, buyer);
-    sim.addItem('wolf_fang', 1, seller);
-    sim.players.get(buyer)!.copper = 200_000;
-    sim.marketList('wolf_fang', 1, 100_000, seller);
-    const listing = sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!;
-
-    // The listing captured the seller's class while they were online at the
-    // Merchant, regardless of what happens to them afterward.
-    expect(listing.sellerCls).toBe('warrior');
-
-    // The seller logs off; the listing survives (it belongs to the Merchant's
-    // book, not the player entity) and later sells while they are offline.
-    sim.removePlayer(seller);
-    sim.marketBuy(listing.id, buyer);
-
-    // The fee-pool entry still carries the seller's real class, resolved off the
-    // listing (not a live roster lookup that would fail now they are offline).
-    const participants = (
-      sim.market as unknown as {
-        feePoolParticipants: Map<string, { cls: string | undefined }>;
-      }
-    ).feePoolParticipants;
-    expect(participants.get(marketSellerKey(seller))?.cls).toBe('warrior');
-  });
-
-  it('an offline-at-sale-time seller with a real class can win a non-neck item appropriate to their class', () => {
-    const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
-    const buyer = sim.addPlayer('mage', 'Buyer');
-    standAtMerchant(sim, seller);
-    standAtMerchant(sim, buyer);
-    sim.addItem('wolf_fang', 1, seller);
-    sim.players.get(buyer)!.copper = 200_000;
-    // The seller lists while online (cls is captured here) then logs off; the
-    // sale, the fee-pool participation, and the eventual draw all happen while
-    // they are offline, which is the scenario finding 1 regressed on: resolving
-    // `cls` lazily at sale/draw time instead of capturing it at listing time.
-    sim.marketList('wolf_fang', 1, 100_000, seller);
-    sim.removePlayer(seller);
-    sim.marketBuy(
-      sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
-      buyer,
-    );
-    expect(sim.market.feePoolCopper).toBeGreaterThan(0);
-    const pooled = sim.market.feePoolCopper;
-
-    // Force the seller to win the draw deterministically, isolating the class-
-    // eligibility fix from the (already separately tested) weighted-draw logic.
-    const pickWinnerSpy = vi
-      .spyOn(sim.market as unknown as { pickFeePoolWinner: () => unknown }, 'pickFeePoolWinner')
-      .mockReturnValue({
-        key: marketSellerKey(seller),
-        name: 'Seller',
-        cls: 'warrior',
-        contributed: pooled,
-      });
+    // Force the next check due with no trade in between.
     sim.market.feePoolNextDrawAt = sim.time - 1;
     for (let i = 0; i < 20; i++) sim.tick();
-    pickWinnerSpy.mockRestore();
 
-    const collections = (
-      sim.market as unknown as {
-        marketCollections: Map<string, { items: { itemId: string; count: number }[] }>;
-      }
-    ).marketCollections;
-    const won = collections.get(marketSellerKey(seller))?.items ?? [];
-    expect(won.length).toBe(1);
-    const wonItem = ITEMS[won[0].itemId];
-    // The old bug: an unresolved (undefined) class collapsed the eligible pool to
-    // the 10 classless neck items. With cls captured at listing time, the warrior
-    // seller's reward comes from the full class-eligible weapon/armor set instead.
-    expect(wonItem.kind === 'weapon' || wonItem.kind === 'armor').toBe(true);
-    expect(wonItem.slot).not.toBe('neck');
-    if (wonItem.requiredClass) expect(wonItem.requiredClass).toContain('warrior');
+    expect(sim.market.feePoolCopper).toBe(pooledAfterFirst);
+    expect(sim.marketListings.filter((l) => l.house).length).toBe(houseCountAfterFirst);
   });
 
-  it('caps any single participant key at a fraction of the total draw weight, so an alt pair round-tripping a listing cannot buy near-guaranteed odds', () => {
-    const sim = makeWorld();
-    const pickWinner = (
-      sim.market as unknown as {
-        pickFeePoolWinner: (
-          p: { key: string; name: string; cls: undefined; contributed: number }[],
-        ) => { key: string };
-      }
-    ).pickFeePoolWinner.bind(sim.market);
-    // One key contributed the overwhelming majority of a small pool (the alt-pair
-    // shape: two round-tripped trades credit the SAME key almost the whole pot).
-    const dominant = { key: 'dominant', name: 'Dominant', cls: undefined, contributed: 9900 };
-    const minor = { key: 'minor', name: 'Minor', cls: undefined, contributed: 100 };
-    // rawTotal = 10000, clamp = 40% of rawTotal = 4000, so dominant's clamped
-    // weight is 4000 and the clamped draw total is 4000 + 100 = 4100. A roll
-    // of 0.99 * 4100 = 4059 falls past dominant's 4000 into minor's slice, a
-    // point that would have landed well inside dominant's UNCLAMPED 9900 share
-    // (proving the clamp, not just chance, moved the outcome).
-    const rngSpy = vi.spyOn(sim.rng, 'next').mockReturnValue(0.99);
-    expect(pickWinner([dominant, minor]).key).toBe('minor');
-    rngSpy.mockRestore();
-
-    // A roll safely inside the capped share still lands on dominant: the clamp
-    // reduces the odds, it does not remove them.
-    const rngSpy2 = vi.spyOn(sim.rng, 'next').mockReturnValue(0.1);
-    expect(pickWinner([dominant, minor]).key).toBe('dominant');
-    rngSpy2.mockRestore();
-  });
-
-  it('an unknown-class winner with no affordable reward leaves the pool intact instead of destroying the fees', () => {
-    const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
-    const buyer = sim.addPlayer('mage', 'Buyer');
-    standAtMerchant(sim, seller);
-    standAtMerchant(sim, buyer);
-    sim.addItem('wolf_fang', 1, seller);
-    sim.players.get(buyer)!.copper = 200_000;
-    sim.marketList('wolf_fang', 1, 100_000, seller);
-    sim.marketBuy(
-      sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
-      buyer,
-    );
-    expect(sim.market.feePoolCopper).toBeGreaterThan(0);
-    const pooled = sim.market.feePoolCopper;
-    sim.market.feePoolNextDrawAt = sim.time - 1; // force the draw due
-
-    // Simulate the real-world gap this regression guards: an offline seller whose
-    // class couldn't be resolved (see FeePoolParticipant), drawn as the winner, with
-    // the pool landing between the classless min-draw threshold and the true
-    // classless-eligible min price, so no reward can be found for either arm of
-    // pickFeePoolReward. Spying on the private method keeps the test independent of
-    // the live item table's exact price gaps.
-    const pickSpy = vi
-      .spyOn(
-        sim.market as unknown as { pickFeePoolReward: () => string | null },
-        'pickFeePoolReward',
-      )
-      .mockReturnValue(null);
-
-    const allEvents = [];
-    for (let i = 0; i < 20; i++) allEvents.push(...sim.tick());
-
-    // The fees are NOT destroyed: the pool and its participants carry into the next
-    // draw, exactly like the below-threshold path, and nobody is announced a winner.
-    expect(sim.market.feePoolCopper).toBe(pooled);
-    expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
-    expect(sim.marketInfoFor(seller)!.collectionItems).toEqual([]);
-    expect(sim.marketInfoFor(buyer)!.collectionItems).toEqual([]);
-    const logs = allEvents.filter((e) => e.type === 'log').map((e) => (e as { text: string }).text);
-    expect(logs.some((t) => t.includes('fee giveaway'))).toBe(false);
-
-    pickSpy.mockRestore();
-  });
-
-  it('an empty pool at the draw deadline just reschedules, with no winner and no error', () => {
+  it('an empty pool at the check deadline just reschedules, with no restock and no error', () => {
     const sim = makeWorld();
     const seller = sim.addPlayer('warrior', 'Seller');
     standAtMerchant(sim, seller);
+    const houseCountBefore = sim.marketListings.filter((l) => l.house).length;
     sim.market.feePoolNextDrawAt = sim.time - 1;
 
     for (let i = 0; i < 20; i++) sim.tick();
 
     expect(sim.market.feePoolCopper).toBe(0);
     expect(sim.market.feePoolNextDrawAt).toBeGreaterThan(sim.time);
-    expect(sim.marketInfoFor(seller)!.collectionItems).toEqual([]);
+    expect(sim.marketListings.filter((l) => l.house).length).toBe(houseCountBefore);
   });
 
   it('persists the pool and the draw countdown across a save/load round trip', () => {
@@ -952,29 +780,33 @@ describe('the World Market: the fee-pool giveaway', () => {
     expect(sim2.market.feePoolNextDrawAt).toBe(sim2.time + save.feePoolDrawSecondsLeft!);
   });
 
-  it('weights the winner draw by copper contributed, not by a flat one-entry-per-trader count', () => {
-    // A whale who fed the pool 9900 of its 10000 copper must win far more often than
-    // a trader who fed it 100, even though both are single entries in the
-    // participant map (the exact bug the review flagged: two alts splitting a tiny
-    // listing used to buy the same odds as a real trader).
+  it('restocks at most FEE_POOL_MAX_RESTOCK_ITEMS pieces per check, carrying any leftover budget forward', () => {
     const sim = makeWorld();
-    const pickWinner = (
-      sim.market as unknown as {
-        pickFeePoolWinner: (
-          p: { key: string; name: string; cls: undefined; contributed: number }[],
-        ) => { key: string };
-      }
-    ).pickFeePoolWinner.bind(sim.market);
-    const whale = { key: 'whale', name: 'Whale', cls: undefined, contributed: 9900 };
-    const minnow = { key: 'minnow', name: 'Minnow', cls: undefined, contributed: 100 };
-    let whaleWins = 0;
-    for (let i = 0; i < 200; i++) {
-      if (pickWinner([whale, minnow]).key === 'whale') whaleWins++;
-    }
-    expect(whaleWins).toBeGreaterThan(150); // expected ~99%, well clear of a 50/50 flat draw
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.addItem('wolf_fang', 1, seller);
+    // A very large sale banks far more than five eligible items could ever cost.
+    sim.players.get(buyer)!.copper = 20_000_000;
+    sim.marketList('wolf_fang', 1, 4_000_000, seller);
+    sim.marketBuy(
+      sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
+      buyer,
+    );
+    const houseCountBefore = sim.marketListings.filter((l) => l.house).length;
+    sim.market.feePoolNextDrawAt = sim.time - 1;
+
+    for (let i = 0; i < 20; i++) sim.tick();
+
+    const added = sim.marketListings.filter((l) => l.house).length - houseCountBefore;
+    expect(added).toBeGreaterThan(0);
+    expect(added).toBeLessThanOrEqual(5);
+    // A fat pool could not have been fully spent on at most 5 modest-value items.
+    expect(sim.market.feePoolCopper).toBeGreaterThan(0);
   });
 
-  it('credits the FULL cut of each trade to both parties, accumulating across repeat trades', () => {
+  it('credits the fee cut to the pool on repeat trades, accumulating across trades', () => {
     const sim = makeWorld();
     const seller = sim.addPlayer('warrior', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
@@ -989,14 +821,7 @@ describe('the World Market: the fee-pool giveaway', () => {
         buyer,
       );
     }
-    // 3 trades x 10 copper cut each = 30 copper contributed by EACH party (not split).
-    const participants = (
-      sim.market as unknown as {
-        feePoolParticipants: Map<string, { contributed: number }>;
-      }
-    ).feePoolParticipants;
-    expect(participants.get(marketSellerKey(seller))?.contributed).toBe(30);
-    expect(participants.get(marketSellerKey(buyer))?.contributed).toBe(30);
+    // 3 trades x 10 copper cut each = 30 copper banked.
     expect(sim.market.feePoolCopper).toBe(30);
   });
 

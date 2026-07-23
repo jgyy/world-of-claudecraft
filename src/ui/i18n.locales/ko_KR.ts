@@ -2378,7 +2378,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'itemUi.market.reclaimAria': '{item} 회수',
   'itemUi.market.sellNote':
     '가방의 상품을 올립니다. 아이템이 팔리면 상인이 {cut}%를 가져갑니다. 등록 칸 {used}/{max}개 사용 중입니다.',
-  'itemUi.market.jackpotNote': '상인이 다음 추첨을 위해 수수료 {pool}을(를) 모으고 있습니다.',
+  'itemUi.market.jackpotNote': '상인이 다음 재입고를 위해 수수료 {pool}을(를) 모으고 있습니다.',
   'itemUi.market.sellPickEmpty': '판매할 아이템을 선택하려면 가방에서 클릭하세요.',
   'itemUi.market.quantity': '수량',
   'itemUi.market.quantityOf': '/ {count}',
@@ -5483,6 +5483,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '수령하기: 물품이 팔리면 그 수익이 상인에게서 당신을 기다립니다. 돌아가 동전을, 그리고 팔리지 않고 돌아온 물건이 있다면 함께 수령하세요. 상인은 성사된 거래마다 약간의 수수료를 가져갑니다.',
   'guide.economy.marketGiveawayBody':
     '그 작은 수수료는 단순한 비용이 아닙니다. 차곡차곡 쌓여 공동 기금이 되고, 이 기금은 주기적으로 고급 장비를 나누어 주는 경품 추첨의 재원이 됩니다. 당첨자는 지난 추첨 이후 마켓에서 실제로 거래한 사람들 중에서 뽑힙니다. 따로 참가 신청이나 수령 신청을 할 필요는 없으며, 마켓에서 사고파는 것 자체가 참가 자격입니다. 당첨 결과는 전 세계에 발표되며, 상품은 다른 마켓 정산금과 마찬가지로 상인에게서 당신을 기다립니다.',
+    '그 작은 수수료는 단순한 수수료가 아닙니다. 공동 기금으로 쌓여 정기적으로 상인의 진열대에 새 장비를 채워 넣으며, 전액 거래 수수료로 조달됩니다. 참가하거나 받을 필요가 없습니다. 새 물건은 그냥 상인의 상시 재고 속에 나타나며, 다른 상시 매물과 마찬가지로 누구나 구매할 수 있습니다.',
   'guide.economy.marketPost':
     '등록하기: 가방에서 묶음을 고르고 가격을 매겨 매물로 올리세요. 누군가 살 때까지 물품은 상인이 보관합니다. 팔리지 않은 매물은 얼마 뒤 당신에게 돌아오며, 마음이 바뀌면 하나를 일찍 되찾을 수도 있습니다.',
   'guide.economy.marketPricing':
