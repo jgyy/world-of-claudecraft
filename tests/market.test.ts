@@ -786,6 +786,57 @@ describe('the World Market: the fee-pool giveaway', () => {
     expect(participants.get(marketSellerKey(seller))?.cls).toBe('warrior');
   });
 
+  it('an offline-at-sale-time seller with a real class can win a non-neck item appropriate to their class', () => {
+    const sim = makeWorld();
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('mage', 'Buyer');
+    standAtMerchant(sim, seller);
+    standAtMerchant(sim, buyer);
+    sim.addItem('wolf_fang', 1, seller);
+    sim.players.get(buyer)!.copper = 200_000;
+    // The seller lists while online (cls is captured here) then logs off; the
+    // sale, the fee-pool participation, and the eventual draw all happen while
+    // they are offline, which is the scenario finding 1 regressed on: resolving
+    // `cls` lazily at sale/draw time instead of capturing it at listing time.
+    sim.marketList('wolf_fang', 1, 100_000, seller);
+    sim.removePlayer(seller);
+    sim.marketBuy(
+      sim.marketListings.find((l) => l.sellerKey === marketSellerKey(seller))!.id,
+      buyer,
+    );
+    expect(sim.market.feePoolCopper).toBeGreaterThan(0);
+    const pooled = sim.market.feePoolCopper;
+
+    // Force the seller to win the draw deterministically, isolating the class-
+    // eligibility fix from the (already separately tested) weighted-draw logic.
+    const pickWinnerSpy = vi
+      .spyOn(sim.market as unknown as { pickFeePoolWinner: () => unknown }, 'pickFeePoolWinner')
+      .mockReturnValue({
+        key: marketSellerKey(seller),
+        name: 'Seller',
+        cls: 'warrior',
+        contributed: pooled,
+      });
+    sim.market.feePoolNextDrawAt = sim.time - 1;
+    for (let i = 0; i < 20; i++) sim.tick();
+    pickWinnerSpy.mockRestore();
+
+    const collections = (
+      sim.market as unknown as {
+        marketCollections: Map<string, { items: { itemId: string; count: number }[] }>;
+      }
+    ).marketCollections;
+    const won = collections.get(marketSellerKey(seller))?.items ?? [];
+    expect(won.length).toBe(1);
+    const wonItem = ITEMS[won[0].itemId];
+    // The old bug: an unresolved (undefined) class collapsed the eligible pool to
+    // the 10 classless neck items. With cls captured at listing time, the warrior
+    // seller's reward comes from the full class-eligible weapon/armor set instead.
+    expect(wonItem.kind === 'weapon' || wonItem.kind === 'armor').toBe(true);
+    expect(wonItem.slot).not.toBe('neck');
+    if (wonItem.requiredClass) expect(wonItem.requiredClass).toContain('warrior');
+  });
+
   it('caps any single participant key at a fraction of the total draw weight, so an alt pair round-tripping a listing cannot buy near-guaranteed odds', () => {
     const sim = makeWorld();
     const pickWinner = (
