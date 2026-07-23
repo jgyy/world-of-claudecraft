@@ -1110,13 +1110,15 @@ export const TARGETS = [
       await pollForSize(page, '#chatlog-wrap', 60, 500);
       const openTab = async (id) => {
         await page.evaluate(() => {
-          document.querySelector('.chat-tab-add')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+          document
+            .querySelector('.chat-tab-add')
+            ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         });
         await pollForSize(page, '#ctx-menu', 20, 100);
         await page.evaluate((tabId) => {
-          document.querySelector(`#ctx-menu .ctx-item[data-act="${tabId}"]`)?.dispatchEvent(
-            new MouseEvent('click', { bubbles: true }),
-          );
+          document
+            .querySelector(`#ctx-menu .ctx-item[data-act="${tabId}"]`)
+            ?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         }, id);
         await wait(150);
       };
