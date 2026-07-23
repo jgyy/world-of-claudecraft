@@ -1,6 +1,6 @@
-// Commissions and the Maker's Bond (Professions 2.0 Phase 14b, issue #2207).
+// Commissions and the Maker's Bond (Professions 2.0, issue #2207).
 //
-// An opt-in commission craft arms its output with the Phase 13 bind-on-trade
+// An opt-in commission craft arms its output with the bind-on-trade
 // primitive (ItemInstancePayload.bindOnTrade; boundTo IS the lock, stamped by
 // trade.ts grantOffer on first trade), so a piece made FOR someone binds to
 // its recipient the moment it changes hands and the existing trade gate
@@ -145,7 +145,7 @@ export function resolveUnbind(
  * caller's own player entity, validates via resolveUnbind, and on ok charges
  * the fee exactly once and clears boundTo on EXACTLY ONE copy (the earliest
  * bound slot). A bound stack holding several byte-equal copies (identical-
- * payload stacking, Phase 12d) is split, never blanket-cleared: one copy is
+ * payload stacking) is split, never blanket-cleared: one copy is
  * peeled off and re-granted through ctx.addItemInstance with the bond
  * removed (so it merges with any existing unbound armed stack), and the
  * remaining copies stay bound at full price each. A single-copy slot is
@@ -159,11 +159,15 @@ export function unbindItem(ctx: SimContext, itemId: string, pid?: number): Unbin
   const meta = r.meta;
   const result = resolveUnbind(meta, r.e.pos, itemId);
   if (!result.ok) return result;
-  meta.copper -= result.fee;
   const slotIdx = firstBoundSlotIndex(meta, itemId);
   const slot = meta.inventory[slotIdx];
-  const instance = slot.instance;
-  if (instance === undefined) return result; // unreachable: the resolver found it bound
+  const instance = slot?.instance;
+  // Unreachable: the resolver found a bound slot on this same meta within the
+  // same synchronous call. Guarded BEFORE the charge below so that, were a
+  // future refactor ever to let the resolver and the mutation diverge, the
+  // failure mode is a no-op, never a fee charged with nothing cleared.
+  if (instance === undefined) return result;
+  meta.copper -= result.fee;
   if (slot.count === 1) {
     delete instance.boundTo;
   } else {

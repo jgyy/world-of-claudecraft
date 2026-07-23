@@ -376,7 +376,7 @@ export function turnInQuestCore(
   const rewardItem = questRewardItemId(quest, meta.cls);
   if (rewardItem) ctx.addItem(rewardItem, 1, meta.entityId);
   ctx.grantXp(quest.xpReward, meta);
-  // Arm the repeat-cadence window (Phase 14 work orders): the quest stays
+  // Arm the repeat-cadence window (work orders): the quest stays
   // unavailable (computeQuestState) until now + repeatCadenceTicks, server-
   // authoritative and persisted per character with zero-default omission.
   if (quest.repeatCadenceTicks && quest.repeatCadenceTicks > 0) {

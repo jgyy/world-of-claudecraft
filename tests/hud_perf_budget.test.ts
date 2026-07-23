@@ -495,6 +495,7 @@ function buildHarnesses(shape: WorldShape, facet: PainterHostWriters): PainterHa
       keybindEl: fakeEl(),
       cdOverlay: fakeEl(),
       cdText: fakeEl(),
+      rechargeOverlay: fakeEl(),
     };
     const descriptor: ActionBarPaintDescriptor = { container: fakeEl(), slots: [slot] };
     const painter = new ActionBarPainter(facet, descriptor, (key) => `URL(${key})`);
@@ -511,6 +512,8 @@ function buildHarnesses(shape: WorldShape, facet: PainterHostWriters): PainterHa
           cooldownPercent: 0,
           cdText: '',
           count: '',
+          isCharges: false,
+          rechargePercent: 0,
           usable: true,
           outOfRange: false,
           queued: false,
