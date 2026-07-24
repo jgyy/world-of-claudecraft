@@ -138,7 +138,8 @@ export interface CraftResult {
     | 'combo_requirement_unmet'
     | 'recipe_not_learned'
     | 'throttled'
-    | 'station_required';
+    | 'station_required'
+    | 'bags_full';
 }
 
 /** Whether `meta` currently knows `recipe` (issue #1299): a recipe with no
@@ -348,6 +349,18 @@ export function resolveCraftForRecipe(
   }
   if (!hasRecipeMaterials(ctx, recipe, pid)) {
     return { ok: false, recipeId: recipe.id, reason: 'insufficient_materials' };
+  }
+  // Bag-space pre-gate (mirrors the same-shape checks gathering.ts/fishing.ts/
+  // items.ts vendor-buy already run before their grant): the output item id
+  // and count are both known here, before any reagent is consumed or the
+  // single masterwork rng draw happens, so a full-bag denial has zero side
+  // effect (no reagents lost, no gold sink charged, no skill gained) and
+  // cannot shift the world's rng draw order. Without this gate the grant hub
+  // (Sim.addItem/addItemInstance) never capacity-caps by design (an async
+  // award must not destroy items), so a craft with too little bag space would
+  // silently overfill the player's bags past their slot cap.
+  if (!ctx.canAddItem(recipe.resultItemId, recipe.resultCount, pid)) {
+    return { ok: false, recipeId: recipe.id, reason: 'bags_full' };
   }
   // #1301 output throttle, shared: one action window paced across
   // crafting, disenchant, enchant-apply, and salvage (action_throttle.ts),

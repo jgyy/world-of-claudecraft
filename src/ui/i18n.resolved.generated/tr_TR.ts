@@ -2261,6 +2261,7 @@ export const tr_TR: EnTranslations = {
       "resultAria": "{name} zanaatı",
       "craftedToast": "Hazırlanma Tarihi: {name}",
       "insufficientMaterials": "Bunun için malzemeleriniz yok.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "O tarif mevcut değil.",
       "comboRequirementUnmet": "O tarif için gereken iki zanaata da gereken kademede sahip değilsin.",
       "comboRequires": "Uyum: {craftA} + {craftB}, kademe {tier}.",

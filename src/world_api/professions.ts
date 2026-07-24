@@ -71,7 +71,12 @@ export interface CraftResultView {
     // activity and type, never distance). The ui resolves
     // WHICH station from recipeById(recipeId)?.stationType (static content,
     // identical in both worlds): no station field rides the event.
-    | 'station_required';
+    | 'station_required'
+    // Denied because granting the recipe's output would overfill the
+    // player's bags: checked before any reagent is consumed or the craft's
+    // rng draw happens, so a full-bag denial has zero side effect (see
+    // src/sim/professions/crafting.ts resolveCraftForRecipe).
+    | 'bags_full';
   // Professions 2.0: true only when the masterwork effect applied to
   // this craft's output. `quality` now reports the output def's static
   // quality (outputs are deterministic; the quality roll is retired).

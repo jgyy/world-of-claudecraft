@@ -2261,6 +2261,7 @@ export const id_ID: EnTranslations = {
       "resultAria": "Kerajinan {name}",
       "craftedToast": "Dibuat: {name}",
       "insufficientMaterials": "Anda tidak memiliki bahan untuk itu.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "Resep itu tidak ada.",
       "comboRequirementUnmet": "Kamu tidak memiliki kedua keahlian yang diperlukan pada tingkat yang disyaratkan untuk resep itu.",
       "comboRequires": "Penyelarasan: {craftA} + {craftB}, tingkat {tier}.",

@@ -6042,6 +6042,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.crafting.resultAria': '製作{name}',
   'hudChrome.crafting.craftedToast': '已製作:{name}',
   'hudChrome.crafting.insufficientMaterials': '你沒有足夠的材料。',
+  'hudChrome.crafting.bagsFull': '你的背包太滿，無法製作該物品。',
   'hudChrome.crafting.unknownRecipe': '該配方不存在。',
   'hudChrome.crafting.comboRequires': '調諧要求：{craftA} + {craftB}，階級 {tier}。',
   'hudChrome.crafting.comboMet': '已就緒。',

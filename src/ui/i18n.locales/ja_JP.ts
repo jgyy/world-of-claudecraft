@@ -6324,6 +6324,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.crafting.resultAria': '{name}を製作',
   'hudChrome.crafting.craftedToast': '製作しました:{name}',
   'hudChrome.crafting.insufficientMaterials': '材料が不足しています。',
+  'hudChrome.crafting.bagsFull': 'カバンがいっぱいで、それを製作できません。',
   'hudChrome.crafting.unknownRecipe': 'そのレシピは存在しません。',
   'hudChrome.crafting.comboRequires': '調律条件：{craftA} + {craftB}、ティア {tier}。',
   'hudChrome.crafting.comboMet': '準備完了。',

@@ -6435,6 +6435,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.crafting.resultAria': 'Создать {name}',
   'hudChrome.crafting.craftedToast': 'Создано: {name}',
   'hudChrome.crafting.insufficientMaterials': 'У вас недостаточно материалов.',
+  'hudChrome.crafting.bagsFull': 'Ваши сумки слишком полны, чтобы изготовить это.',
   'hudChrome.crafting.unknownRecipe': 'Такого рецепта не существует.',
   'hudChrome.crafting.comboRequires': 'Настройка: {craftA} + {craftB}, ранг {tier}.',
   'hudChrome.crafting.comboMet': 'Готово.',

@@ -2261,6 +2261,7 @@ export const cs_CZ: EnTranslations = {
       "resultAria": "Vyrobit {name}",
       "craftedToast": "Vyrobeno: {name}",
       "insufficientMaterials": "Na to nemáš materiály.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "Tento recept neexistuje.",
       "comboRequirementUnmet": "Nemáš obě požadovaná řemesla na potřebné úrovni pro tento recept.",
       "comboRequires": "Ladění: {craftA} + {craftB}, úroveň {tier}.",

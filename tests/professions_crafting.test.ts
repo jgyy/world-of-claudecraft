@@ -286,6 +286,53 @@ describe('resolveCraft (#1127)', () => {
     expect(sim.countItem('eastbrook_arming_sword', pid)).toBe(0);
   });
 
+  it('denies with bags_full when granting the output would overfill the bags, consuming NOTHING (bug: crafting let bags overfill)', () => {
+    const sim = makeSim();
+    const pid = sim.playerId;
+    const recipe = recipeById('recipe_eastbrook_arming_sword')!;
+    grantItem(sim, 'wolf_fang', 2, pid);
+    grantItem(sim, 'bone_fragments', 4, pid);
+    grantItem(sim, 'smithing_flux', 6, pid);
+    // Fill every one of the 16 backpack slots with distinct, non-stacking
+    // equipment (none of which overlaps the recipe's reagents or output), so
+    // there is zero free slot and zero same-item stack room for the crafted
+    // eastbrook_arming_sword to land in.
+    const fillerItems = [
+      'worn_sword',
+      'gnarled_staff',
+      'rusty_dagger',
+      'training_mace',
+      'rusty_hatchet',
+      'recruit_tunic',
+      'apprentice_robe',
+      'footpad_jerkin',
+      'redbrook_blade',
+      'apprentice_staff',
+      'keen_dirk',
+      'militia_vest',
+      'woven_robe',
+      'shadow_jerkin',
+      'oiled_boots',
+      'quilted_trousers',
+    ];
+    for (const itemId of fillerItems) grantItem(sim, itemId, 1, pid);
+    const slotsBefore = sim.inventory.length;
+
+    const result = resolveCraft((sim as any).ctx, pid, recipe.id);
+
+    expect(result.ok).toBe(false);
+    expect(result.reason).toBe('bags_full');
+    // No reagent lost, no output granted, no gold fee charged, no skill
+    // gained, and the bag slot count never crosses the cap: a denied craft
+    // for lack of bag space is a complete no-op, exactly like every other
+    // resolveCraftForRecipe denial.
+    expect(sim.countItem('wolf_fang', pid)).toBe(2);
+    expect(sim.countItem('bone_fragments', pid)).toBe(4);
+    expect(sim.countItem('smithing_flux', pid)).toBe(6);
+    expect(sim.countItem('eastbrook_arming_sword', pid)).toBe(0);
+    expect(sim.inventory.length).toBe(slotsBefore);
+  });
+
   it('denies an unknown recipe id with no side effects', () => {
     const sim = makeSim();
     const pid = sim.playerId;

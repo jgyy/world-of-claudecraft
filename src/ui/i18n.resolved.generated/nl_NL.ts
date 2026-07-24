@@ -2261,6 +2261,7 @@ export const nl_NL: EnTranslations = {
       "resultAria": "Ambacht {name}",
       "craftedToast": "Gemaakt: {name}",
       "insufficientMaterials": "Daar heb je de materialen niet voor.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "Dat recept bestaat niet.",
       "comboRequirementUnmet": "Je hebt niet beide vereiste ambachten op het vereiste niveau voor dat recept.",
       "comboRequires": "Afstemming: {craftA} + {craftB}, rang {tier}.",

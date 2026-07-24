@@ -2261,6 +2261,7 @@ export const es_ES: EnTranslations = {
       "resultAria": "Elaboración {name}",
       "craftedToast": "Elaborado: {name}",
       "insufficientMaterials": "No tienes los materiales para eso.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "Esa receta no existe.",
       "comboRequirementUnmet": "No tienes las dos profesiones requeridas al nivel necesario para esa receta.",
       "comboRequires": "Sintonización: {craftA} + {craftB}, nivel {tier}.",

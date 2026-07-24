@@ -2261,6 +2261,7 @@ export const vi_VN: EnTranslations = {
       "resultAria": "Thủ công {name}",
       "craftedToast": "Đã chế tác: {name}",
       "insufficientMaterials": "Bạn không có tài liệu cho việc đó.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "Công thức đó không tồn tại.",
       "comboRequirementUnmet": "Bạn chưa có cả hai nghề chế tạo cần thiết ở bậc yêu cầu cho công thức đó.",
       "comboRequires": "Thụ ngộ: {craftA} + {craftB}, bậc {tier}.",

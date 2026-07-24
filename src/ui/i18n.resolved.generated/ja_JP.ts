@@ -2261,6 +2261,7 @@ export const ja_JP: EnTranslations = {
       "resultAria": "{name}を製作",
       "craftedToast": "製作しました:{name}",
       "insufficientMaterials": "材料が不足しています。",
+      "bagsFull": "カバンがいっぱいで、それを製作できません。",
       "unknownRecipe": "そのレシピは存在しません。",
       "comboRequirementUnmet": "その組み合わせレシピに必要な両方の生産スキルの熟練度に達していません。",
       "comboRequires": "調律条件：{craftA} + {craftB}、ティア {tier}。",

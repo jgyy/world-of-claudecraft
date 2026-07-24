@@ -5398,6 +5398,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.crafting.attunedZoneLine'
   | 'hudChrome.crafting.attunementPreview'
   | 'hudChrome.crafting.attunementReturnCost'
+  | 'hudChrome.crafting.bagsFull'
   | 'hudChrome.crafting.close'
   | 'hudChrome.crafting.comboMet'
   | 'hudChrome.crafting.comboNotAttuned'

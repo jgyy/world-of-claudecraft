@@ -2261,6 +2261,7 @@ export const pt_BR: EnTranslations = {
       "resultAria": "Artesanato {name}",
       "craftedToast": "Feito: {name}",
       "insufficientMaterials": "Você não tem os materiais para isso.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "Essa receita não existe.",
       "comboRequirementUnmet": "Você não possui os dois ofícios exigidos no nível necessário para essa receita.",
       "comboRequires": "Afinidade: {craftA} + {craftB}, nível {tier}.",

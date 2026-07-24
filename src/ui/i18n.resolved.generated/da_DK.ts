@@ -2261,6 +2261,7 @@ export const da_DK: EnTranslations = {
       "resultAria": "Håndværk {name}",
       "craftedToast": "Udformet: {name}",
       "insufficientMaterials": "Det har du ikke materialerne til.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "Den opskrift findes ikke.",
       "comboRequirementUnmet": "Du har ikke begge de krævede håndværk på det krævede niveau til den opskrift.",
       "comboRequires": "Indstilling: {craftA} + {craftB}, niveau {tier}.",

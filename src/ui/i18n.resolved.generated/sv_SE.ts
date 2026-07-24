@@ -2261,6 +2261,7 @@ export const sv_SE: EnTranslations = {
       "resultAria": "Hantverk {name}",
       "craftedToast": "Tillverkad: {name}",
       "insufficientMaterials": "Du har inte materialet för det.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "Det receptet finns inte.",
       "comboRequirementUnmet": "Du har inte båda de hantverk som krävs på den nivå receptet kräver.",
       "comboRequires": "Inriktning: {craftA} + {craftB}, nivå {tier}.",

@@ -2261,6 +2261,7 @@ export const fr_CA: EnTranslations = {
       "resultAria": "Artisanat {name}",
       "craftedToast": "Fabriqué$1 {name}",
       "insufficientMaterials": "Vous n'avez pas le matériel pour cela.",
+      "bagsFull": "Your bags are too full to craft that.",
       "unknownRecipe": "Cette recette n'existe pas.",
       "comboRequirementUnmet": "Vous ne possédez pas les deux métiers requis au palier nécessaire pour cette recette.",
       "comboRequires": "Communion : {craftA} + {craftB}, palier {tier}.",

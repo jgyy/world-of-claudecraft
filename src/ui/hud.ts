@@ -9055,7 +9055,9 @@ export class Hud {
                           ? 'hudChrome.crafting.throttled'
                           : ev.reason === 'recipe_not_learned'
                             ? 'hudChrome.crafting.recipeNotLearned'
-                            : 'hudChrome.crafting.insufficientMaterials',
+                            : ev.reason === 'bags_full'
+                              ? 'hudChrome.crafting.bagsFull'
+                              : 'hudChrome.crafting.insufficientMaterials',
                   ),
               '#ff6b6b',
             );

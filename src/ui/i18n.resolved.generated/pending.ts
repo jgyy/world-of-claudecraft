@@ -9,25 +9,55 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "es_ES": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "fr_FR": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "fr_CA": [
+    "hudChrome.crafting.bagsFull"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
+  "it_IT": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "de_DE": [
+    "hudChrome.crafting.bagsFull"
+  ],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
-  "pt_BR": [],
+  "pt_BR": [
+    "hudChrome.crafting.bagsFull"
+  ],
   "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "cs_CZ": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "nl_NL": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "pl_PL": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "id_ID": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "tr_TR": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "sv_SE": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "vi_VN": [
+    "hudChrome.crafting.bagsFull"
+  ],
+  "da_DK": [
+    "hudChrome.crafting.bagsFull"
+  ]
 };

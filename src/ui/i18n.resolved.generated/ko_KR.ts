@@ -2261,6 +2261,7 @@ export const ko_KR: EnTranslations = {
       "resultAria": "{name} 제작",
       "craftedToast": "제작 완료:{name}",
       "insufficientMaterials": "재료가 부족합니다.",
+      "bagsFull": "가방이 가득 차서 그것을 제작할 수 없습니다.",
       "unknownRecipe": "해당 제작법이 존재하지 않습니다.",
       "comboRequirementUnmet": "이 조합 제작법에 필요한 두 제작 기술의 숙련도에 도달하지 못했습니다.",
       "comboRequires": "조율 조건: {craftA} + {craftB}, 티어 {tier}.",

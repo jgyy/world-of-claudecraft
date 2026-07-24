@@ -2261,6 +2261,7 @@ export const zh_CN: EnTranslations = {
       "resultAria": "制作{name}",
       "craftedToast": "已制作:{name}",
       "insufficientMaterials": "你没有足够的材料。",
+      "bagsFull": "你的背包太满，无法制作该物品。",
       "unknownRecipe": "该配方不存在。",
       "comboRequirementUnmet": "你没有达到该配方所需组合的两项制造技能等级。",
       "comboRequires": "调谐要求：{craftA} + {craftB}，阶级 {tier}。",
