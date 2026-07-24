@@ -4194,6 +4194,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hud.core.chatChannels.add': 'チャットチャンネルを追加',
   'hud.core.chatChannels.addTitle': 'チャンネルを追加',
   'hud.core.chatChannels.close': '{channel}タブを閉じる',
+  'hud.core.chatChannels.moveHint': '{channel}タブ、Alt+左またはAlt+右で並べ替え',
   'hud.core.chatChannels.names.general': '一般',
   'hud.core.chatChannels.names.guild': 'ギルド',
   'hud.core.chatChannels.names.lfg': '仲間募集',

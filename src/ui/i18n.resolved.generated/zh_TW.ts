@@ -5823,7 +5823,7 @@ export const zh_TW: EnTranslations = {
         "add": "新增聊天頻道",
         "addTitle": "新增頻道",
         "close": "關閉{channel}分頁",
-        "moveHint": "{channel} tab, Alt+Left or Alt+Right to reorder",
+        "moveHint": "{channel}分頁，按Alt+左方向鍵或Alt+右方向鍵調整順序",
         "sendingTo": "傳訊至{channel}",
         "names": {
           "say": "說話",

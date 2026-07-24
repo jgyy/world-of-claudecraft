@@ -28,24 +28,14 @@ export const pending: Record<string, readonly string[]> = {
   "de_DE": [
     "hud.core.chatChannels.moveHint"
   ],
-  "zh_CN": [
-    "hud.core.chatChannels.moveHint"
-  ],
-  "zh_TW": [
-    "hud.core.chatChannels.moveHint"
-  ],
-  "ko_KR": [
-    "hud.core.chatChannels.moveHint"
-  ],
-  "ja_JP": [
-    "hud.core.chatChannels.moveHint"
-  ],
+  "zh_CN": [],
+  "zh_TW": [],
+  "ko_KR": [],
+  "ja_JP": [],
   "pt_BR": [
     "hud.core.chatChannels.moveHint"
   ],
-  "ru_RU": [
-    "hud.core.chatChannels.moveHint"
-  ],
+  "ru_RU": [],
   "cs_CZ": [
     "hud.core.chatChannels.moveHint"
   ],

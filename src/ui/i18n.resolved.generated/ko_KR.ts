@@ -5823,7 +5823,7 @@ export const ko_KR: EnTranslations = {
         "add": "채팅 채널 추가",
         "addTitle": "채널 추가",
         "close": "{channel} 탭 닫기",
-        "moveHint": "{channel} tab, Alt+Left or Alt+Right to reorder",
+        "moveHint": "{channel} 탭, Alt+왼쪽 또는 Alt+오른쪽으로 순서 변경",
         "sendingTo": "{channel} 채널에 보내기",
         "names": {
           "say": "말하기",
