@@ -142,20 +142,26 @@ function isCosmeticItem(item: ItemDef): boolean {
 
 function itemMatchesType(item: ItemDef, filter: MarketItemTypeFilter): boolean {
   if (filter === 'all') return true;
-  if (filter === 'weapon') return item.kind === 'weapon' && item.slot === 'mainhand';
-  if (filter === 'armor')
-    return (item.kind === 'armor' || item.kind === 'held_offhand') && item.slot !== undefined;
-  if (filter === 'consumable')
-    return (
-      item.kind === 'food' ||
-      item.kind === 'drink' ||
-      item.kind === 'potion' ||
-      item.kind === 'elixir'
-    );
-  if (filter === 'material')
-    return !isCosmeticItem(item) && (item.kind === 'junk' || item.kind === 'tool');
-  if (filter === 'cosmetic') return isCosmeticItem(item);
-  return item.kind === 'quest';
+  const isWeapon = item.kind === 'weapon' && item.slot === 'mainhand';
+  if (filter === 'weapon') return isWeapon;
+  const isArmor =
+    (item.kind === 'armor' || item.kind === 'held_offhand') && item.slot !== undefined;
+  if (filter === 'armor') return isArmor;
+  const isConsumable =
+    item.kind === 'food' ||
+    item.kind === 'drink' ||
+    item.kind === 'potion' ||
+    item.kind === 'elixir';
+  if (filter === 'consumable') return isConsumable;
+  const isCosmetic = isCosmeticItem(item);
+  const isMaterial = !isCosmetic && (item.kind === 'junk' || item.kind === 'tool');
+  if (filter === 'material') return isMaterial;
+  if (filter === 'cosmetic') return isCosmetic;
+  // 'other' is the true catch-all: anything the specific buckets above do not claim
+  // (bags, and any future item kind that does not fit elsewhere). Quest items also
+  // fall here, but they are structurally unlistable (src/sim/market.ts marketList
+  // refuses kind:'quest'), so this never actually surfaces one.
+  return !isWeapon && !isArmor && !isConsumable && !isMaterial && !isCosmetic;
 }
 
 function weaponFamily(item: ItemDef): MarketWeaponTypeFilter {

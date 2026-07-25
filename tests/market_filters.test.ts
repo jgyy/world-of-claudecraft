@@ -310,6 +310,27 @@ describe('World Market filters', () => {
     expect(invalid.primaryStat).toBe('all');
   });
 
+  it('catches bags (and anything else uncovered) under the Other filter', () => {
+    // Bags are real, listable items (src/sim/market.ts only refuses kind:'quest' and
+    // noMarketList/soulbound items at list time) but have no dedicated bucket, so
+    // 'other' must be a true catch-all or a listed bag becomes unfilterable under
+    // every option except 'all'.
+    const mixed = [
+      'linen_pouch',
+      'wolfhide_satchel',
+      'keen_dirk',
+      'greyjaw_pelt_cloak',
+      'roasted_boar',
+      'bone_fragments',
+    ];
+    expect(filterIds(mixed, { itemType: 'other' })).toEqual(['linen_pouch', 'wolfhide_satchel']);
+    // A bag never leaks into any of the more specific buckets either.
+    expect(filterIds(mixed, { itemType: 'weapon' })).toEqual(['keen_dirk']);
+    expect(filterIds(mixed, { itemType: 'armor' })).toEqual(['greyjaw_pelt_cloak']);
+    expect(filterIds(mixed, { itemType: 'consumable' })).toEqual(['roasted_boar']);
+    expect(filterIds(mixed, { itemType: 'material' })).toEqual(['bone_fragments']);
+  });
+
   it('narrows weapon filters by weapon family', () => {
     const weapons = ['worn_sword', 'keen_dirk', 'gnarled_staff', 'training_mace', 'rusty_hatchet'];
     expect(filterIds(weapons, { itemType: 'weapon', subtype: 'sword' })).toEqual(['worn_sword']);
