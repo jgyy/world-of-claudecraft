@@ -2849,7 +2849,10 @@ export const ABILITIES: Record<string, AbilityDef> = {
     school: 'physical',
     requiresTarget: true,
     spendsCombo: true,
-    effects: [{ type: 'dot', total: 96, duration: 16, interval: 2 }],
+    // 16 base + 16/combo point: totals 96 at 5 combo points, same max payoff as
+    // the old flat total, but now scales with combo points banked like every
+    // other finisher in this kit.
+    effects: [{ type: 'dot', total: 16, duration: 16, interval: 2, perCombo: 16 }],
     description: 'Finishing move that wounds the target, causing it to bleed for $d over 16 sec.',
   },
   vanish: {
@@ -4948,7 +4951,10 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: true,
     spendsCombo: true,
     requiresForm: 'cat',
-    effects: [{ type: 'dot', total: 60, duration: 12, interval: 2 }],
+    // 10 base + 10/combo point: totals 60 at 5 combo points, same max payoff as
+    // the old flat total, but now scales with combo points banked like every
+    // other finisher in this kit.
+    effects: [{ type: 'dot', total: 10, duration: 12, interval: 2, perCombo: 10 }],
     description:
       'Finishing move that causes $d Bleed damage over 12 sec. Consumes combo points. Wolf Form only.',
   },

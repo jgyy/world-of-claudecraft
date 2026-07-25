@@ -88,6 +88,48 @@ describe('effect_dispatch: a single cast fans into every listed effect', () => {
     expect(p.comboPoints).toBe(0); // spendsCombo reset, AFTER the effect loop
   });
 
+  it('rogue rupture: dot damage scales with combo points spent (bleed finisher, not flat)', () => {
+    const dotValueAt = (combo: number): number => {
+      const { sim, p, meta } = makeSim('rogue', 20);
+      const mob = spawnTarget(sim, p);
+      p.comboPoints = combo;
+      const res = resolve(sim, 'rupture', p.id);
+      runEffects(sim.ctx, p, meta, mob, res);
+      const dot = mob.auras.find((a: Aura) => a.kind === 'dot' && a.sourceId === p.id);
+      if (!dot) throw new Error('rupture dot did not land');
+      return dot.value;
+    };
+
+    const at1 = dotValueAt(1);
+    const at5 = dotValueAt(5);
+
+    // Rupture is a combo-point finisher (spendsCombo: true); banking to 5 combo
+    // points must deal more per-tick damage than spending it at 1, mirroring the
+    // repo's other finishers (eviscerate/ferocious_bite finisherDamage,
+    // slice_and_dice finisherHaste, kidney_shot finisherStun) that all scale with
+    // spentCombo. Before the fix, the 'dot' effect had no perCombo term, so this
+    // was flat regardless of combo points banked.
+    expect(at5).toBeGreaterThan(at1);
+  });
+
+  it('druid rip: dot damage scales with combo points spent (bleed finisher, not flat)', () => {
+    const dotValueAt = (combo: number): number => {
+      const { sim, p, meta } = makeSim('druid', 20);
+      const mob = spawnTarget(sim, p);
+      p.comboPoints = combo;
+      const res = resolve(sim, 'rip', p.id);
+      runEffects(sim.ctx, p, meta, mob, res);
+      const dot = mob.auras.find((a: Aura) => a.kind === 'dot' && a.sourceId === p.id);
+      if (!dot) throw new Error('rip dot did not land');
+      return dot.value;
+    };
+
+    const at1 = dotValueAt(1);
+    const at5 = dotValueAt(5);
+
+    expect(at5).toBeGreaterThan(at1);
+  });
+
   it('paladin consecration: the groundAoE case pushes a ground effect and fires the on-cast pulse', () => {
     const { sim, p, meta } = makeSim('paladin', 20);
     const mob = spawnTarget(sim, p, 8, 2); // within the 8yd consecration radius
