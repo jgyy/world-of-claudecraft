@@ -5438,6 +5438,7 @@ export const nl_NL: EnTranslations = {
     },
     "augment": {
       "choose": "Kies een Versterking",
+      "cardAria": "{name} ({category}) - {description}",
       "aug_brutality": {
         "name": "Brutaliteit",
         "desc": "Je fysieke slagen treffen 15% harder."
