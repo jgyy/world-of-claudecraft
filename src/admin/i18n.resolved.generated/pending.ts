@@ -10,25 +10,65 @@
 // and `pretest`). Reproducibility is checked by tests/i18n_admin_catalog.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "error.tooManyFailedAttempts"
+  ],
+  "es_ES": [
+    "error.tooManyFailedAttempts"
+  ],
+  "fr_FR": [
+    "error.tooManyFailedAttempts"
+  ],
+  "fr_CA": [
+    "error.tooManyFailedAttempts"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
-  "pt_BR": [],
-  "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "it_IT": [
+    "error.tooManyFailedAttempts"
+  ],
+  "de_DE": [
+    "error.tooManyFailedAttempts"
+  ],
+  "zh_CN": [
+    "error.tooManyFailedAttempts"
+  ],
+  "zh_TW": [
+    "error.tooManyFailedAttempts"
+  ],
+  "ko_KR": [
+    "error.tooManyFailedAttempts"
+  ],
+  "ja_JP": [
+    "error.tooManyFailedAttempts"
+  ],
+  "pt_BR": [
+    "error.tooManyFailedAttempts"
+  ],
+  "ru_RU": [
+    "error.tooManyFailedAttempts"
+  ],
+  "cs_CZ": [
+    "error.tooManyFailedAttempts"
+  ],
+  "nl_NL": [
+    "error.tooManyFailedAttempts"
+  ],
+  "pl_PL": [
+    "error.tooManyFailedAttempts"
+  ],
+  "id_ID": [
+    "error.tooManyFailedAttempts"
+  ],
+  "tr_TR": [
+    "error.tooManyFailedAttempts"
+  ],
+  "sv_SE": [
+    "error.tooManyFailedAttempts"
+  ],
+  "vi_VN": [
+    "error.tooManyFailedAttempts"
+  ],
+  "da_DK": [
+    "error.tooManyFailedAttempts"
+  ]
 };
