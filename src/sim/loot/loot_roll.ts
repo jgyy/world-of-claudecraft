@@ -596,7 +596,11 @@ export function assignMasterLoot(
   if (!roll || roll.masterLooter === undefined) return;
   if (r.meta.entityId !== roll.masterLooter) return; // only the master looter decides
   // Keep only still-eligible targets; ignore anyone no longer a candidate.
-  const targets = targetPids.filter((p) => roll.candidates.includes(p));
+  // Dedupe first: a repeated pid (double-click, modified client) must count as
+  // one voter, or the need/greed roll it opens gets a candidates.length that
+  // outnumbers the distinct real voters, and submitLootRoll's
+  // choices.size >= candidates.length auto-resolve gate can never fire.
+  const targets = [...new Set(targetPids)].filter((p) => roll.candidates.includes(p));
   if (targets.length === 0) return; // nothing valid selected: leave the prompt open
   if (targets.length === 1) {
     // The target can have logged out during the up-to-5min curate window

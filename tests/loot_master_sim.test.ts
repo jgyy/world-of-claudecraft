@@ -195,6 +195,35 @@ describe('master loot', () => {
     expect(sim.countItem(PREMIUM, a)).toBe(0);
   });
 
+  it('auto-resolves once every distinct candidate has voted, even with a duplicated target pid', () => {
+    const sim = makeSim();
+    const { a, b, mob } = partyOnCorpse(sim, PREMIUM);
+    const c = sim.addPlayer('rogue', 'Cara');
+    sim.partyInvite(c, a);
+    sim.partyAccept(c);
+    teleportTo(sim, 21, 21, c); // within loot range of the corpse
+    sim.setPartyLootMaster(true, 0, 'uncommon', a);
+
+    sim.events.length = 0;
+    sim.lootCorpse(mob.id, a);
+    const rollId = sim.events.find((e) => e.type === 'masterLoot')!.rollId;
+
+    sim.events.length = 0;
+    // b appears twice (double-click, modified client, whatever): the roll must
+    // still only require the two DISTINCT checked members, b and c, to vote,
+    // not "b twice", or the choices.size >= candidates.length auto-resolve
+    // gate can never be satisfied and the roll stalls until the 60s timeout.
+    sim.assignMasterLoot(rollId, [b, b, c], a);
+
+    sim.submitLootRoll(rollId, 'need', b);
+    sim.submitLootRoll(rollId, 'pass', c);
+
+    expect(sim.countItem(PREMIUM, b)).toBe(1); // b won among {b, c}
+    // The roll must have auto-resolved on the last distinct vote, not merely
+    // still be sitting open waiting for a duplicate vote that will never come.
+    expect(sim.lootRollGroupStatus(b).some((entry) => entry.rollId === rollId)).toBe(false);
+  });
+
   it('rejects an empty or out-of-candidate selection (prompt stays in the curate phase)', () => {
     const sim = makeSim();
     const { a, b, mob } = partyOnCorpse(sim, PREMIUM);
