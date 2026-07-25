@@ -1927,6 +1927,12 @@ export class GameServer {
       for (const id of ids) {
         const other = this.sessionByCharacterId(id);
         if (!other) continue; // offline — snapshots own the online/offline flip
+        // A friend/guild edge on the OTHER side survives a block (blockAdd only
+        // cleans the blocker's own outgoing friend edge, never guild
+        // membership), so this tracked id can stay in socialTrackedIds long
+        // after a block either way. Refuse to leak live position across it,
+        // the same bidirectional rule canShowInWho already applies to /who.
+        if (!this.canShowInWho(session, other)) continue;
         const loc = this.presenceOf(other);
         if (loc.x === undefined || loc.z === undefined) continue;
         // The live Book of Deeds title (sim meta, no DB read); the `social`
