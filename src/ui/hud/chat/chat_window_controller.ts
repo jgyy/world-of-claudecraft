@@ -76,6 +76,12 @@ export class ChatWindowController {
   // Tracked locally (not read back from dataTransfer) since drop targets only need
   // to know a drag is in progress and which tab it started from.
   private draggingTab: ChatOpenTab | null = null;
+  // Roving-tabindex focus target for the tablist (WAI-ARIA APG Tabs pattern):
+  // decoupled from `activeChatTab` so a keyboard user can move focus with plain
+  // ArrowLeft/ArrowRight across every open channel tab, not just whichever one is
+  // currently active. Null defers to `activeChatTab` (the initial/click-through
+  // state); set on click and on every arrow-key move. See bindTabRovingNav.
+  private rovingChatTab: ChatTabId | null = null;
   private initialized = false;
   private pendingLinks: readonly { display: string; token: string }[] = [];
 
@@ -226,7 +232,11 @@ export class ChatWindowController {
       button.dataset.tab = id;
       button.setAttribute('role', 'tab');
       button.textContent = label;
-      button.addEventListener('click', () => this.selectTab(id, true));
+      button.addEventListener('click', () => {
+        this.rovingChatTab = id;
+        this.selectTab(id, true);
+      });
+      this.bindTabRovingNav(button, id);
       return button;
     };
     bar.append(
@@ -275,6 +285,12 @@ export class ChatWindowController {
   }
 
   private updateActiveTabStyles(): void {
+    // Roving tabindex (WAI-ARIA APG Tabs): tab-key reachability follows
+    // `rovingChatTab` (the last focused tab), not `activeChatTab` (the
+    // selected/shown one), so a keyboard user who arrowed to an inactive
+    // channel tab keeps it Tab-reachable instead of snapping back to
+    // whichever tab is currently active.
+    const focusTarget = this.rovingChatTab ?? this.activeChatTab;
     this.requireElement('chatlog-tabs')
       .querySelectorAll<HTMLButtonElement>('.chat-tab')
       .forEach((button) => {
@@ -282,7 +298,7 @@ export class ChatWindowController {
         const active = button.dataset.tab === this.activeChatTab;
         button.classList.toggle('active', active);
         button.setAttribute('aria-selected', active ? 'true' : 'false');
-        button.tabIndex = active ? 0 : -1;
+        button.tabIndex = button.dataset.tab === focusTarget ? 0 : -1;
       });
   }
 
@@ -366,13 +382,15 @@ export class ChatWindowController {
 
   // Swaps `channel` with its immediate neighbor and persists, skipping the re-render
   // when already at that edge. Refocuses the moved tab's button after the strip
-  // rebuilds so a keyboard user's focus follows the tab they just moved.
+  // rebuilds so a keyboard user's focus follows the tab they just moved, and keeps
+  // it roving-tabindex-reachable even when it is not the active tab.
   private stepTab(channel: ChatOpenTab, step: -1 | 1): void {
     const next = stepChatTab(this.chatTabs, channel, step);
     const unchanged =
       next.length === this.chatTabs.length && next.every((tab, i) => tab === this.chatTabs[i]);
     if (unchanged) return;
     this.chatTabs = next;
+    this.rovingChatTab = channel;
     this.renderTabs();
     this.persist();
     this.requireElement('chatlog-tabs')
@@ -382,10 +400,36 @@ export class ChatWindowController {
       });
   }
 
+  // Roving-tabindex arrow navigation across the whole tablist (all/combat/every open
+  // channel tab, never the "+" add button): plain ArrowLeft/ArrowRight (no Alt, which
+  // is reserved for reordering, see bindTabReorderKeys) moves focus to the previous/next
+  // tab, wrapping at the ends, WITHOUT activating it. This is what makes every channel
+  // tab keyboard-reachable in the first place: `updateActiveTabStyles` only gives
+  // tabIndex 0 to one button (the roving target, defaulting to the active tab), so
+  // without this, Tab-key users starting on "All" could never reach, let alone reorder,
+  // any other tab (Rubsey review).
+  private bindTabRovingNav(button: HTMLButtonElement, id: ChatTabId): void {
+    button.addEventListener('keydown', (event) => {
+      if (event.altKey || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
+      const order = Array.from(
+        this.requireElement('chatlog-tabs').querySelectorAll<HTMLButtonElement>('.chat-tab'),
+      ).filter((el) => !el.classList.contains('chat-tab-add'));
+      const from = order.findIndex((b) => b.dataset.tab === id);
+      if (from < 0) return;
+      event.preventDefault();
+      const to = (from + (event.key === 'ArrowLeft' ? -1 : 1) + order.length) % order.length;
+      const target = order[to]!;
+      this.rovingChatTab = (target.dataset.tab as ChatTabId | undefined) ?? null;
+      this.updateActiveTabStyles();
+      target.focus();
+    });
+  }
+
   private removeTab(channel: ChatOpenTab): void {
     const index = this.chatTabs.indexOf(channel);
     if (index < 0) return;
     this.chatTabs.splice(index, 1);
+    if (this.rovingChatTab === channel) this.rovingChatTab = null;
     if (this.activeChatTab === channel) this.activeChatTab = 'all';
     this.renderTabs();
     this.selectTab(this.activeChatTab, true);

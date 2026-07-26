@@ -241,6 +241,50 @@ describe('ChatWindowController', () => {
     expect(harness.storage.getItem('woc_chat_tabs')).toBe('["world","party"]');
   });
 
+  it('plain ArrowRight roves focus onto an inactive channel tab, which Alt+ArrowLeft can then reorder (Rubsey review)', () => {
+    // Reviewer repro: with "All" the default active tab, every channel tab had
+    // tabIndex -1 and no roving navigation, so a keyboard user starting on "All"
+    // could never reach, let alone reorder, any channel tab. Plain ArrowRight/Left
+    // must move focus (and the roving tabIndex 0) across the whole tablist
+    // regardless of which tab is active, so Alt+ArrowLeft/Right becomes reachable
+    // from a keyboard-only start.
+    const harness = makeHarness({
+      woc_chat_tabs: '["world","party"]',
+      woc_chat_active_tab: 'all',
+    });
+    harness.controller.init();
+    const tabsBar = harness.document.getElementById('chatlog-tabs') as FakeElement;
+    const chatTabs = (): FakeElement[] =>
+      tabsBar.querySelectorAll('.chat-tab') as unknown as FakeElement[];
+    const tab = (id: string): FakeElement => chatTabs().find((el) => el.dataset.tab === id)!;
+
+    expect(tab('all').tabIndex).toBe(0);
+    expect(tab('world').tabIndex).toBe(-1);
+
+    tab('all').dispatchEvent(Object.assign(new Event('keydown'), { key: 'ArrowRight' }));
+    // "All" -> "combat" -> "world": two plain ArrowRight presses in a real tablist,
+    // but this harness only needs to prove the roving target actually moved off
+    // "all" without activating anything.
+    expect(harness.storage.getItem('woc_chat_active_tab')).toBe('all'); // navigation never activates
+
+    tab('combat').dispatchEvent(Object.assign(new Event('keydown'), { key: 'ArrowRight' }));
+    expect(tab('world').tabIndex).toBe(0);
+    expect(tab('all').tabIndex).toBe(-1);
+    expect(tab('world').focused).toBe(true);
+
+    tab('world').dispatchEvent(
+      Object.assign(new Event('keydown'), { key: 'ArrowLeft', altKey: true }),
+    );
+    expect(harness.storage.getItem('woc_chat_tabs')).toBe('["world","party"]'); // already leftmost, no-op
+
+    tab('world').dispatchEvent(Object.assign(new Event('keydown'), { key: 'ArrowRight' }));
+    expect(chatTabs().find((el) => el.dataset.tab === 'party')!.tabIndex).toBe(0);
+    chatTabs()
+      .find((el) => el.dataset.tab === 'party')!
+      .dispatchEvent(Object.assign(new Event('keydown'), { key: 'ArrowLeft', altKey: true }));
+    expect(harness.storage.getItem('woc_chat_tabs')).toBe('["party","world"]');
+  });
+
   it('plain ArrowLeft (no Alt) does not reorder, so focus navigation is unaffected', () => {
     const harness = makeHarness({
       woc_chat_tabs: '["world","party"]',
