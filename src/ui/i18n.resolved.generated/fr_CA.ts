@@ -38,6 +38,14 @@ export const fr_CA: EnTranslations = {
     "filterLabel": "Filtrer les commandes",
     "filterPlaceholder": "Rechercher dans cette catégorie",
     "noMatches": "Aucune commande correspondante.",
+    "itemSearchPlaceholder": "Rechercher par nom ou id",
+    "itemResultsAria": "Objets correspondants",
+    "itemNoMatches": "Aucun objet correspondant.",
+    "itemMore": "Affichage de {shown} sur {total}. Continuez à taper pour affiner.",
+    "itemChosen": "Sélectionné : {name}",
+    "itemUnknown": "Aucun objet ne correspond à cet id.",
+    "itemHeroicTag": "Héroïque",
+    "kitCurrentSpec": "Spécialisation actuelle",
     "serverRequirement": "Les commandes de triche du serveur exigent toujours ALLOW_DEV_COMMANDS=1.",
     "invalidValues": "Choisissez des valeurs valides avant d’exécuter cette commande.",
     "sent": "Envoyé : {command}",
@@ -55,7 +63,8 @@ export const fr_CA: EnTranslations = {
       "z": "Z",
       "dungeon": "Donjon",
       "difficulty": "Difficulté",
-      "name": "Nom"
+      "name": "Nom",
+      "spec": "Spécialisation"
     },
     "difficulty": {
       "normal": "Normal",
@@ -113,6 +122,10 @@ export const fr_CA: EnTranslations = {
       "give": {
         "label": "Donner un objet",
         "description": "Ajoute un objet à l’inventaire du joueur."
+      },
+      "kit": {
+        "label": "Équiper un kit de niveau 20 fraîchement atteint",
+        "description": "Enfile le kit de spécialisation niveau 20 pré-Sanctuaire, sacs d'abord. Équipement seul."
       },
       "gold": {
         "label": "Ajouter de l’or",
@@ -1049,6 +1062,7 @@ export const fr_CA: EnTranslations = {
       "walkByAutoloot": "Ramassage auto au passage",
       "groundReticle": "Réticule de ciblage au sol",
       "mouseoverCast": "Lancement au survol sur les cadres de groupe",
+      "stickyTarget": "Conserver la cible au clic au sol",
       "showItemLevel": "Afficher le niveau d'objet",
       "itemLevelLine": "Niveau d'objet {level}",
       "itemScoreLine": "Score {score}",
@@ -1529,6 +1543,8 @@ export const fr_CA: EnTranslations = {
       "dragDestroyHint": "Faites glisser dans le monde pour détruire",
       "reorderNeedsRecent": "Effacez le filtre et triez par Récents pour réorganiser vos sacs",
       "itemAriaInstanced": "{item}, quantité {count}, copie marquée par le fabricant",
+      "itemAriaEnchanted": "{item}, quantité {count}, copie enchantée",
+      "itemAriaBound": "{item}, quantité {count}, copie liée",
       "itemAriaMasterwork": "{item}, quantité {count}, chef-d'oeuvre",
       "filterGroupAria": "Filtrer les sacs par catégorie",
       "filterAll": "Tous",
@@ -1753,7 +1769,19 @@ export const fr_CA: EnTranslations = {
       "label": "Réinitialiser la position des cadres"
     },
     "itemTooltip": {
-      "requiresLevel": "Niveau requis : {level}"
+      "requiresLevel": "Niveau requis : {level}",
+      "statEnchanted": "+{value} {stat} (Enchanté)",
+      "enchantedFallback": "Enchanté"
+    },
+    "materialHint": {
+      "arcaneDust": "Réactif d'enchantement. Obtenu en désenchantant de l'équipement commun et peu commun.",
+      "arcaneEssence": "Réactif d'enchantement. Obtenu en désenchantant de l'équipement rare.",
+      "arcaneShard": "Réactif d'enchantement. Obtenu en désenchantant de l'équipement épique et légendaire.",
+      "resonantThread": "Réactif d'enchantement. Obtenu en désenchantant de l'armure en tissu rare ou mieux.",
+      "resonantHide": "Réactif d'enchantement. Obtenu en désenchantant de l'armure en cuir rare ou mieux.",
+      "resonantLinks": "Réactif d'enchantement. Obtenu en désenchantant de l'armure de mailles rare ou mieux.",
+      "resonantSteel": "Réactif d'enchantement. Obtenu en désenchantant des armes de mêlée rares ou mieux.",
+      "resonantTimber": "Réactif d'enchantement obtenu de bâtons, baguettes, arcs et arbalètes rares ou mieux."
     },
     "discord": {
       "title": "Discord",
@@ -1994,6 +2022,10 @@ export const fr_CA: EnTranslations = {
         "takeParcelsFirst": "Retirez les colis avant de jeter la lettre."
       }
     },
+    "marketIndicator": {
+      "aria": "Collecte du Marché mondial en attente",
+      "tip": "De l'or ou des objets vous attendent chez le Marchand."
+    },
     "noticeboard": {
       "empty": "Rien ne semble affiché."
     },
@@ -2113,7 +2145,19 @@ export const fr_CA: EnTranslations = {
       "onlineHeader": "En ligne ({n})",
       "offlineHeader": "Hors ligne ({n})",
       "hideOffline": "Masquer les hors ligne",
-      "hideOfflineTitle": "Masquer les membres de guilde hors ligne"
+      "hideOfflineTitle": "Masquer les membres de guilde hors ligne",
+      "billboard": {
+        "label": "Tableau d'affichage de la guilde",
+        "empty": "Rien sur le tableau d'affichage pour le moment.",
+        "setBy": "Défini par {name}",
+        "save": "Enregistrer",
+        "placeholder": "Écrivez un message pour la guilde",
+        "inputLabel": "Message du tableau d'affichage de la guilde",
+        "result": {
+          "set": "Le tableau d'affichage de la guilde a été mis à jour.",
+          "notOfficer": "Seuls les officiers et le maître de guilde peuvent modifier le tableau d'affichage."
+        }
+      }
     },
     "gathering": {
       "title": "Récolte",
@@ -2305,6 +2349,7 @@ export const fr_CA: EnTranslations = {
       "empty": "Aucune recette connue pour l'instant.",
       "resultAria": "Artisanat {name}",
       "craftedToast": "Fabriqué$1 {name}",
+      "craftedToastQty": "Crafted: {name} x{qty}",
       "insufficientMaterials": "Vous n'avez pas le matériel pour cela.",
       "unknownRecipe": "Cette recette n'existe pas.",
       "comboRequirementUnmet": "Vous ne possédez pas les deux métiers requis au palier nécessaire pour cette recette.",
@@ -2383,7 +2428,6 @@ export const fr_CA: EnTranslations = {
       "makersMark": "Fabriqué par {name}",
       "gatheredBy": "Collecté par {name}",
       "masterworkSeal": "Chef-d'œuvre",
-      "enchantedLine": "Enchanté",
       "commissionToggle": "Pièce de commande",
       "commissionToggleHint": "Se lie au premier personnage qui la reçoit lors d'un échange.",
       "commissionUnbound": "Pièce de commande : se lie au premier destinataire",
@@ -2398,7 +2442,13 @@ export const fr_CA: EnTranslations = {
     },
     "enchanting": {
       "disenchantedLine": "Vous désenchantez {item}.",
+      "disenchantedYield": "You disenchant {item} into {material}.",
+      "disenchantedYieldQty": "You disenchant {item} into {material} x{qty}.",
+      "disenchantedAlso": "You also recover {material}.",
+      "disenchantedAlsoQty": "You also recover {material} x{qty}.",
       "salvagedLine": "Vous récupérez {item}.",
+      "salvagedYield": "You salvage {item} into {material}.",
+      "salvagedYieldQty": "You salvage {item} into {material} x{qty}.",
       "enchantAppliedLine": "Vous enchantez {item} avec {enchant}.",
       "notHeld": "Vous n'avez pas cet objet.",
       "notDisenchantable": "Vous ne pouvez pas désenchanter cela.",
@@ -2421,7 +2471,31 @@ export const fr_CA: EnTranslations = {
       "pickerTitle": "Appliquer un enchantement",
       "targetTitle": "Choisissez un objet à enchanter",
       "noEnchants": "Aucun enchantement n'utilise ce réactif.",
-      "noTargets": "Aucun objet éligible à enchanter."
+      "noTargets": "Aucun objet éligible à enchanter.",
+      "wornTag": "Équipé ({slot})",
+      "tier": {
+        "base": "Enchantements de base",
+        "runed": "Enchantements Runiques",
+        "greater": "Enchantements Supérieurs"
+      },
+      "yieldHeader": "Matériaux attendus :",
+      "yieldLineExact": "{count} {item}",
+      "yieldLineRange": "{min} à {max} {item}",
+      "alreadyEnchanted": "Cet objet est déjà enchanté.",
+      "sameEnchant": "Cet objet a déjà cet enchantement.",
+      "replaceTag": "Remplace {enchant}",
+      "sameEnchantTag": "Déjà appliqué",
+      "plainTag": "Not enchanted",
+      "replaceConfirmTitle": "Remplacer l'enchantement sur {item} ?",
+      "replaceConfirmBody": "Cela remplace {old} sur {item} par {new}.",
+      "replaceConfirmNoRefund": "L'ancien enchantement est détruit sans remboursement. Cette action est irréversible.",
+      "replaceConfirmKeeps": "Kept: {kept}",
+      "replaceConfirmKeepsSigner": "Maker's mark",
+      "replaceConfirmKeepsMasterwork": "Masterwork bonus",
+      "replaceConfirmKeepsBond": "Commission bond",
+      "replaceConfirmCost": "Coût : {cost}",
+      "replaceConfirmCostItem": "{name} x{count}",
+      "replaceConfirmAccept": "Remplacer"
     },
     "training": {
       "title": "Formation : {name}",
@@ -3819,7 +3893,7 @@ export const fr_CA: EnTranslations = {
           "levelingHeading": "Comment l'Enchantement progresse",
           "levelingBody": "Deux actions font progresser la compétence : désenchanter une pièce, et appliquer un enchantement. Chaque succès vaut jusqu'à un point, mis à l'échelle selon l'importance du travail : la rareté de la pièce que vous démantèlez, ou le palier de réactif de l'enchantement que vous appliquez. Les désenchantements communs et les enchantements à base de poussière uniquement valent un travail commun ; les désenchantements inhabituels et les enchantements à base d'essence, un travail inhabituel ; les désenchantements rares et tous les enchantements Runique ou Supérieur, un travail rare ; les désenchantements épiques et légendaires, un niveau encore supérieur.\n\nL'estompement de maîtrise habituel s'applique par tranches de 25 points, de sorte que le travail de qualité commune devient gris à la compétence 75, le travail inhabituel à 100, et le travail de palier rare exactement au plafond de 125. L'Enchantement a aussi une gentillesse particulière : le gain au-delà du plafond de votre archétype est arrondi à ce plafond plutôt qu'annulé, si bien qu'avant l'harmonisation, un désenchantement épique vaut simplement un travail rare plutôt que d'enseigner quoi que ce soit. Si l'Enchantement finit en sommeil derrière une autre identité, tout vaut un travail commun et la progression stagne à 75 ; gardez-le comme passe-temps et le travail de palier rare rapporte quand même, juste plus lentement après 75.",
           "marketHeading": "Les copies enchantées, la provenance et le marché",
-          "marketBody": "Appliquer un enchantement consomme une copie en sacoche, non équipée de l'objet plus les réactifs, et restitue une copie enchantée distincte ; équipez-la et le bonus suit la pièce indéfiniment, après déséquipement, séjours en banque et échanges. Un seul enchantement par pièce : une copie enchantée ne peut jamais être enchantée à nouveau ni désenchantée, et vendre, jeter et désenchanter préfèrent toujours les copies normales en premier, votre pièce finie ne se fait donc pas dévorer par accident. Des copies identiquement enchantées s'empilent même dans vos sacs.\n\nL'équipement de chef-d'oeuvre et l'Enchantement s'entendent bien : une pièce de chef-d'oeuvre reste entièrement enchantable, et l'enchantement s'ajoute par-dessus le bonus du chef-d'oeuvre sans le perturber ni effacer la signature du créateur. En cumulant toutes les sources, une pièce signée de chef-d'oeuvre portant un enchantement Supérieur est le meilleur qu'une pièce artisanale puisse atteindre, et elle reste en dessous du butin de raid par conception.\n\nSur le marché, le Marché mondial ne négocie que des stocks ordinaires, non modifiés ; les pièces enchantées et signées changent donc de mains en face à face via la fenêtre d'échange. Les matériaux sont la moitié commercialisable du métier : la Poussière, l'Essence et les Éclats se mettent en vente librement, sans frais de mise en vente, et le Marchand prélève seulement 5 % d'une vente conclue. Cela donne deux revenus classiques d'enchanteur : vendre des matériaux sur le marché, et prendre la pièce d'un client en échange, l'enchanter, et la lui rendre."
+          "marketBody": "Appliquer un enchantement consomme les réactifs et marque une copie précise de l'objet. Visez une copie en sacoche et vous recevez une copie enchantée distincte ; visez une pièce déjà équipée et elle est enchantée sur place, sans déséquiper ni rééquiper. Dans les deux cas le bonus suit la pièce indéfiniment, après déséquipement, séjours en banque et échanges. Un seul enchantement par pièce : appliquer un enchantement différent à une copie enchantée demande d'abord confirmation, puis remplace l'ancien enchantement purement et simplement ; il est détruit sans remboursement de ses matériaux. Vendre, jeter et désenchanter préfèrent toujours les copies normales en premier, votre pièce finie ne se fait donc pas dévorer par accident. Des copies identiquement enchantées s'empilent même dans vos sacs.\n\nL'équipement de chef-d'oeuvre et l'Enchantement s'entendent bien : une pièce de chef-d'oeuvre reste entièrement enchantable, et l'enchantement s'ajoute par-dessus le bonus du chef-d'oeuvre sans le perturber ni effacer la signature du créateur. En cumulant toutes les sources, une pièce signée de chef-d'oeuvre portant un enchantement Supérieur est le meilleur qu'une pièce artisanale puisse atteindre, et elle reste en dessous du butin de raid par conception.\n\nSur le marché, le Marché mondial ne négocie que des stocks ordinaires, non modifiés ; les pièces enchantées et signées changent donc de mains en face à face via la fenêtre d'échange. Les matériaux sont la moitié commercialisable du métier : la Poussière, l'Essence et les Éclats se mettent en vente librement, sans frais de mise en vente, et le Marchand prélève seulement 5 % d'une vente conclue. Cela donne deux revenus classiques d'enchanteur : vendre des matériaux sur le marché, et prendre la pièce d'un client en échange, l'enchanter, et la lui rendre."
         }
       },
       "howHeading": "Comment fonctionne l'artisanat",
@@ -6182,6 +6256,7 @@ export const fr_CA: EnTranslations = {
       "arenaJoin": "Vous rejoignez la file du Colisée cendré. Attendez un adversaire digne...",
       "arenaLeave": "Vous quittez la file du Colisée cendré.",
       "arenaSands": "Vous foulez le sable du Colisée cendré.",
+      "arenaSandsDrowned": "Vous foulez les pierres inondées de la Cour noyée.",
       "tradeRequestSent": "Vous avez demandé un échange avec {name}.",
       "tradeOpened": "Fenêtre d'échange ouverte.",
       "tradeComplete": "Échange terminé.",
@@ -6350,6 +6425,11 @@ export const fr_CA: EnTranslations = {
       "playerLevelClassTitle": "{name} - Niv. {level} {className}",
       "noChallengers": "Aucun prétendant classé pour l'instant - soyez le premier.",
       "matchInProgress": "Match en cours contre {name}.",
+      "mapName": "Carte : {name}",
+      "map": {
+        "coliseum": "Colisée cendré",
+        "drownedCourt": "La Cour noyée"
+      },
       "leaveQueue": "Quitter la file",
       "searching": "Recherche d'un adversaire... ({count} en file)",
       "enterQueue": "Entrer en file",
@@ -6642,18 +6722,29 @@ export const fr_CA: EnTranslations = {
       "pageNextAria": "Page suivante du marché",
       "pageStatus": "Page {current} sur {total}",
       "filters": "Filtres du marché",
+      "filterValueAria": "{label} : {value}",
       "filterType": "Type",
       "filterTypeAll": "Tous les types",
       "filterTypeWeapon": "Armes",
       "filterTypeArmor": "Armure",
+      "filterTypeBag": "Sacs",
       "filterTypeConsumable": "Consommables",
       "filterTypeMaterial": "Matériaux",
       "filterTypeCosmetic": "Cosmétiques",
       "filterTypeOther": "Autres",
       "filterArmorType": "Type d'armure",
       "filterArmorAll": "Toute l'armure",
+      "filterArmorSlot": "Emplacement d'armure",
+      "filterArmorClassAll": "Tous les types d'armure",
+      "armorCloth": "Tissu",
+      "armorLeather": "Cuir",
+      "armorMail": "Mailles",
       "filterWeaponType": "Type d'arme",
       "filterWeaponAll": "Toutes les armes",
+      "filterBagSize": "Taille de sac",
+      "filterBagAll": "Tous les sacs",
+      "filterPrimaryStat": "Caractéristique principale",
+      "filterPrimaryStatAll": "Toute caractéristique principale",
       "filterRarity": "Rareté",
       "filterRarityAll": "Toutes les raretés",
       "weaponSword": "Épées",

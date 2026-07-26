@@ -387,7 +387,13 @@ export function harvestNode(ctx: SimContext, nodeId: string, pid?: number): bool
   p.castTargetId = null;
   p.channeling = false;
   p.gatherCastNodeId = node.id;
-  ctx.emit({ type: 'castStart', entityId: p.id, ability: GATHER_CAST_ID, time: duration });
+  ctx.emit({
+    type: 'castStart',
+    entityId: p.id,
+    ability: GATHER_CAST_ID,
+    time: duration,
+    gatherNodeType: node.type,
+  });
   return true;
 }
 
@@ -497,7 +503,13 @@ export function completeGatherCast(ctx: SimContext, p: Entity, meta: PlayerMeta)
   const grantFungibleFit = (): number => {
     let fit = qty;
     while (fit > 1 && !ctx.canAddItem(itemId, fit, meta.entityId)) fit--;
-    ctx.addItem(itemId, fit, meta.entityId);
+    // silent + callerLogs: the gatherResult event below owns BOTH halves of
+    // the player feedback for this harvest. It plays its own node-type cue
+    // (audio.gather in src/game/audio.ts), so the generic loot ding would
+    // stack on top of it, and it logs the rarity-colored, item-linked gather
+    // line, so the hub's "You receive:" line would be a second line for the
+    // one grant (#2430).
+    ctx.addItem(itemId, fit, meta.entityId, { silent: true, callerLogs: true });
     return fit;
   };
   if (signed) {
@@ -514,9 +526,15 @@ export function completeGatherCast(ctx: SimContext, p: Entity, meta: PlayerMeta)
     const capacity = bagCapacity(meta.bags);
     const fit = countFit(meta.inventory, capacity, itemId, qty, { signer: meta.name });
     if (fit > 0) {
-      // One batched grant: a x5 windfall lands as ONE "You receive: X x5."
-      // line and cue instead of five (the recorded loot-burst polish).
-      ctx.addItemInstance(itemId, { signer: meta.name }, meta.entityId, fit);
+      // One batched grant: a x5 windfall lands as ONE hub loot event
+      // instead of five (the recorded loot-burst polish), which the gather
+      // line then renders as a single "You gather: X x5." line.
+      // silent + callerLogs: see grantFungibleFit's matching comment above,
+      // same reasons.
+      ctx.addItemInstance(itemId, { signer: meta.name }, meta.entityId, fit, {
+        silent: true,
+        callerLogs: true,
+      });
       grantedQty = fit;
     }
     if (grantedQty === 0) {
