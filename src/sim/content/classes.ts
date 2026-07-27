@@ -6327,7 +6327,12 @@ function scaleEffect(
       // fraction again would double-apply the talent/global damage modifier.
       return eff.directPct
         ? { ...eff }
-        : { ...eff, total: Math.round(eff.total * dmgMult * dotMult + flat) };
+        : {
+            ...eff,
+            total: Math.round(eff.total * dmgMult * dotMult + flat),
+            perCombo:
+              eff.perCombo === undefined ? undefined : Math.round(eff.perCombo * dmgMult * dotMult),
+          };
     case 'aoeDamage':
     case 'aoeHeal':
       return {

@@ -109,7 +109,15 @@ describe('effect_dispatch: a single cast fans into every listed effect', () => {
     // slice_and_dice finisherHaste, kidney_shot finisherStun) that all scale with
     // spentCombo. Before the fix, the 'dot' effect had no perCombo term, so this
     // was flat regardless of combo points banked.
-    expect(at5).toBeGreaterThan(at1);
+    //
+    // Pin the exact tick-value delta rather than a loose greater-than: Rupture's
+    // content record is { total: 16, perCombo: 16, duration: 16, interval: 2 },
+    // so the DoT coefficient is total + perCombo*spentCombo, spread across
+    // duration/interval = 8 ticks. Attack-power scaling (dotSp) is identical at
+    // both combo counts (same character, same gear), so it cancels out of the
+    // delta: dotBase(1) = round((16+16*1)/8) = 4, dotBase(5) = round((16+16*5)/8)
+    // = 12, an exact +8 delta this pin locks in.
+    expect(at5 - at1).toBe(8);
   });
 
   it('druid rip: dot damage scales with combo points spent (bleed finisher, not flat)', () => {
@@ -127,7 +135,47 @@ describe('effect_dispatch: a single cast fans into every listed effect', () => {
     const at1 = dotValueAt(1);
     const at5 = dotValueAt(5);
 
-    expect(at5).toBeGreaterThan(at1);
+    // Rip's content record is { total: 10, perCombo: 10, duration: 12, interval: 2 },
+    // 6 ticks. dotBase(1) = round((10+10*1)/6) = 3, dotBase(5) = round((10+10*5)/6)
+    // = 10, an exact +7 delta (attack-power scaling cancels out of the delta the
+    // same way it does for Rupture above).
+    expect(at5 - at1).toBe(7);
+  });
+
+  it('rogue rupture: a melee damage-percent modifier scales BOTH the base total and the perCombo term of the dot', () => {
+    // Regression test for the scaleEffect gap the reviewer found on PR #2447: the
+    // 'dot' case in scaleEffect (src/sim/content/classes.ts) only scaled `total`,
+    // leaving `perCombo` (which carries most of Rupture's damage at high combo
+    // points) almost inert against damage modifiers. Assassination's spec
+    // baseline (src/sim/content/spec_baselines.ts) grants global.meleeDmgPct:
+    // 0.08, a physical-school modifier that must now multiply BOTH total and
+    // perCombo through applyTalentMods -> scaleEffect.
+    const dotValueAt = (combo: number, spec: string | null): number => {
+      const { sim, p, meta } = makeSim('rogue', 20);
+      if (spec) sim.setSpec(spec, p.id);
+      const mob = spawnTarget(sim, p);
+      p.comboPoints = combo;
+      const res = resolve(sim, 'rupture', p.id);
+      runEffects(sim.ctx, p, meta, mob, res);
+      const dot = mob.auras.find((a: Aura) => a.kind === 'dot' && a.sourceId === p.id);
+      if (!dot) throw new Error('rupture dot did not land');
+      return dot.value;
+    };
+
+    const baseAt1 = dotValueAt(1, null);
+    const baseAt5 = dotValueAt(5, null);
+    const modAt1 = dotValueAt(1, 'assassination');
+    const modAt5 = dotValueAt(5, 'assassination');
+
+    // The 5-combo-point payload (where perCombo dominates the total) must be
+    // strictly higher under the +8% melee damage modifier.
+    expect(modAt5).toBeGreaterThan(baseAt5);
+    // The whole payload scales: the delta attributable to perCombo (4 combo
+    // points' worth) must ALSO grow under the modifier, not stay flat. Before
+    // the fix, scaleEffect's 'dot' case scaled only `total`, so this delta
+    // (driven entirely by perCombo) was IDENTICAL with or without meleeDmgPct;
+    // this assertion is the direct regression check for that gap.
+    expect(modAt5 - modAt1).toBeGreaterThan(baseAt5 - baseAt1);
   });
 
   it('paladin consecration: the groundAoE case pushes a ground effect and fires the on-cast pulse', () => {
