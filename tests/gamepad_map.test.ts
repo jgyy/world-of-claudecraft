@@ -109,6 +109,16 @@ describe('stickToLook', () => {
     expect(stickToLook(1, 0, 0.2, 2, false, 0.016).active).toBe(true);
     expect(stickToLook(0, 0, 0.2, 2, false, 0.016).active).toBe(false);
   });
+
+  it('pushing the stick up (y < 0) with invertY off looks up, matching mouse/touch (negative pitch delta)', () => {
+    // camPitch accumulates this delta directly (Input.applyGamepadLook); the
+    // renderer raises the camera and tilts the view DOWN as camPitch increases
+    // (see the eyeY + sin(pitch)*dist orbit in renderer.ts), so "look up" means
+    // a negative delta here, the same sign mouse's lookPitchSign and touch's
+    // touchPitchSign both apply by default for a physically-up input.
+    const up = stickToLook(0, -1, 0.2, 2, false, 0.016);
+    expect(up.pitch).toBeLessThan(0);
+  });
 });
 
 describe('risingEdges', () => {
