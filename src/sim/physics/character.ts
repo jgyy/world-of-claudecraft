@@ -205,7 +205,12 @@ function blocksAt(
 ): boolean {
   if (params.ignoreFences && c.type === 'obb' && c.isFence) return false;
   if (c.moveTopY === undefined) return true; // full height: buildings, trees, walls
-  const lift = !params.grounded && c.standable === true ? MANTLE_REACH : 0;
+  // The airborne pass-over lift must never regress below what a grounded stride
+  // already permits (params.stepHeight), or an obstacle whose top sits between
+  // MANTLE_REACH and the stride band would newly wall the body off mid-air even
+  // though the identical geometry is a non-event when walked into on the ground.
+  const lift =
+    !params.grounded && c.standable === true ? Math.max(MANTLE_REACH, params.stepHeight) : 0;
   return colliderTopAt(c, x, z) > feetY + lift + TOP_EPS;
 }
 

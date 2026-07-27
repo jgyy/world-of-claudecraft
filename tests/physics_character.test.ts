@@ -132,6 +132,40 @@ function findStrideableStone(): { x: number; z: number; scale: number } | undefi
   return undefined;
 }
 
+// A collidable stone whose TRUE climb from the approach footing sits strictly
+// above MANTLE_REACH but still within MAX_STEP_HEIGHT: the band a grounded
+// stride freely crosses but that a naive airborne mantle allowance would wall
+// off, since MANTLE_REACH < MAX_STEP_HEIGHT.
+function findLadderBandStone(): { x: number; z: number; scale: number } | undefined {
+  for (const d of generateDecorations(SEED)) {
+    if (d.kind !== 'rock' || d.scale < ROCK_COLLIDER_MIN_SCALE) continue;
+    if (Math.abs(d.x) > 160) continue;
+    const top = groundHeight(d.x, d.z, SEED) + rockHeight(d.x, d.z, d.scale, SEED);
+    const climb = top - groundHeight(d.x, d.z - 1.2, SEED);
+    if (climb <= MANTLE_REACH || climb > MAX_STEP_HEIGHT) continue;
+    let clean = true;
+    for (let t = -2.6; t <= 1.6 && clean; t += 0.4) {
+      const z = d.z + t;
+      if (terrainSteepnessAt(d.x, z, SEED) > 0.4) clean = false;
+      if (terrainHeight(d.x, z, SEED) < WATER_LEVEL + 2) clean = false;
+    }
+    if (!clean) continue;
+    const near: ReturnType<typeof queryOpenWorldColliders> = [];
+    queryOpenWorldColliders(SEED, d.x - 5, d.z - 5, d.x + 5, d.z + 5, near);
+    const blocksCorridor = near.some((c) => {
+      const cx = c.x ?? 0;
+      const cz = c.z ?? 0;
+      if (Math.hypot(cx - d.x, cz - d.z) <= 0.25) return false;
+      if (cz < d.z - 3 || cz > d.z + 2) return false;
+      const reach = (c.type === 'circle' ? c.r : Math.hypot(c.hw, c.hd)) + 0.6;
+      return Math.abs(cx - d.x) < reach;
+    });
+    if (blocksCorridor) continue;
+    return { x: d.x, z: d.z, scale: d.scale };
+  }
+  return undefined;
+}
+
 function findSteepFace(): { x: number; z: number } | undefined {
   for (let z = -60; z <= 200; z += 7) {
     for (let x = -130; x >= -184; x -= 0.25) {
@@ -315,6 +349,22 @@ describe('step up: walking over low obstacles', () => {
     const g = groundHeight(stone.x, stone.z, SEED);
     moveCharacter(params({ grounded: false }), stone.x, g, stone.z - 2, 0, 4, out);
     expect(out.stepped).toBe(0);
+  });
+
+  it('does not wall off an airborne body against a stride-band obstacle', () => {
+    // A body that leaves the ground must not lose ground it could freely
+    // stride over: an obstacle whose top sits within MAX_STEP_HEIGHT of the
+    // feet is never a wall for an airborne body either, even though the
+    // legacy MANTLE_REACH lift alone (0.7yd) is smaller than the stride
+    // band (0.9yd) and would otherwise block it as a new mid-air wall.
+    setActiveWorldContent(null);
+    const stone = findLadderBandStone();
+    expect(stone).toBeDefined();
+    if (!stone) return;
+    const g = groundHeight(stone.x, stone.z - 2, SEED);
+    moveCharacter(params({ grounded: false }), stone.x, g, stone.z - 2, 0, 4, out);
+    expect(out.blocked).toBe(false);
+    expect(out.z).toBeGreaterThan(stone.z - 2);
   });
 
   it('never steps onto something taller than the step height', () => {
