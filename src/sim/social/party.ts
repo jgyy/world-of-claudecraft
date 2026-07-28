@@ -562,6 +562,12 @@ export class PartyMachine {
     if (party.members.length <= 1) {
       for (const mPid of party.members) {
         this.partyByPid.delete(mPid);
+        // The members left behind lose their group too, so any curate-phase roll
+        // they still master is orphaned: without this it would sit invisible to
+        // activeLootRolls (which skips masterLooter !== undefined) for the full
+        // 300s master timeout, and the only way out would be the read-side gate
+        // in assignMasterLoot. Convert it to need/greed immediately instead.
+        revokeMasterLooterAuthority(this.ctx, mPid);
         this.ctx.emit({ type: 'log', text: 'Your party has disbanded.', color: '#aaf', pid: mPid });
       }
       this.parties.delete(party.id);

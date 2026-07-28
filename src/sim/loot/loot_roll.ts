@@ -645,7 +645,10 @@ export function removePlayerFromLootRolls(ctx: SimContext, pid: number): void {
 // candidates, exactly like the uncurated 5-minute timeout fallback in
 // resolveLootRoll above.
 export function revokeMasterLooterAuthority(ctx: SimContext, pid: number): void {
-  for (const roll of ctx.pendingLootRolls.values()) {
+  // Snapshot before iterating, matching removePlayerFromLootRolls: the
+  // conversion never deletes an entry today, but the sibling's convention keeps
+  // this safe if it ever does.
+  for (const roll of [...ctx.pendingLootRolls.values()]) {
     if (roll.masterLooter === pid) convertMasterRollToNeedGreed(ctx, roll, [...roll.candidates]);
   }
 }
@@ -672,11 +675,17 @@ export function assignMasterLoot(
   // member left to stop a self-assign. Re-check live party membership here,
   // not just the stale masterLooter field, so the same collapse is closed
   // regardless of which membership-mutating path caused it (kick, leave, or
-  // disconnect). Treat a lost party the same as an explicit revoke: convert
-  // to need/greed rather than silently deny, so the corpse stays distributable.
+  // disconnect). Anchor the check on THE ROLL'S OWN group (`roll.partyMembers`,
+  // the creation-time snapshot the rest of this module already broadcasts to):
+  // merely holding some party of 2+ would let a collapsed master looter regroup
+  // with unrelated players inside the 5-minute curate window and assign anyway.
+  // Treat a lost group the same as an explicit revoke: convert to need/greed
+  // rather than silently deny, so the corpse stays distributable.
   const party = ctx.partyOf(roll.masterLooter);
-  if (!party || party.members.length <= 1) {
-    convertMasterRollToNeedGreed(ctx, roll, roll.candidates);
+  const stillGroupedWithTheRoll =
+    !!party && party.members.some((m) => m !== roll.masterLooter && roll.partyMembers.includes(m));
+  if (!stillGroupedWithTheRoll) {
+    convertMasterRollToNeedGreed(ctx, roll, [...roll.candidates]);
     return;
   }
   // Keep only still-eligible targets, each counted once; ignore anyone no longer
