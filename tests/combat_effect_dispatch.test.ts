@@ -9,7 +9,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { runEffects } from '../src/sim/combat/effect_dispatch';
-import { MOBS } from '../src/sim/data';
+import { ABILITIES, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import type { PlayerMeta, ResolvedAbility } from '../src/sim/sim';
 import { Sim } from '../src/sim/sim';
@@ -140,6 +140,26 @@ describe('effect_dispatch: a single cast fans into every listed effect', () => {
     // = 10, an exact +7 delta (attack-power scaling cancels out of the delta the
     // same way it does for Rupture above).
     expect(at5 - at1).toBe(7);
+  });
+
+  it('rupture and rip: the 5-combo-point payload is UNCHANGED from the old flat totals', () => {
+    // The delta pins above lock the SHAPE of the combo scaling but not its
+    // absolute magnitude: a retune of total/perCombo that keeps the same 1-to-5
+    // delta would slip past them. This is the PR's actual behavioral promise
+    // (adding scaling must not change the ability's power at max combo points),
+    // so pin the unmodified content coefficients at 5 combo points to literals.
+    const dotAt5 = (id: 'rupture' | 'rip') => {
+      const eff = ABILITIES[id].effects.find((e) => e.type === 'dot');
+      if (!eff || eff.type !== 'dot') throw new Error(`${id} has no dot effect`);
+      if (eff.perCombo === undefined) throw new Error(`${id} lost its perCombo term`);
+      const total = eff.total + eff.perCombo * 5;
+      return { total, perTick: Math.round(total / (eff.duration / eff.interval)) };
+    };
+
+    // Rupture was a flat 96 over 16 sec at a 2 sec interval (8 ticks) before the
+    // combo term existed; Rip was a flat 60 over 12 sec (6 ticks).
+    expect(dotAt5('rupture')).toEqual({ total: 96, perTick: 12 });
+    expect(dotAt5('rip')).toEqual({ total: 60, perTick: 10 });
   });
 
   it('rogue rupture: a melee damage-percent modifier scales BOTH the base total and the perCombo term of the dot', () => {

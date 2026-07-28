@@ -2852,6 +2852,12 @@ export const ABILITIES: Record<string, AbilityDef> = {
     // 16 base + 16/combo point: totals 96 at 5 combo points, same max payoff as
     // the old flat total, but now scales with combo points banked like every
     // other finisher in this kit.
+    // Deliberate divergence from classic Rupture, which scales its DURATION
+    // with combo points (8 sec plus 2 sec per point) at a roughly flat per-tick
+    // value. This world's 1 to 20 level band compresses fight lengths, so a
+    // fixed 16 sec window with a combo-scaled tick reads better and keeps the
+    // bleed comparable to the other finishers here. Do not "fix" it back to
+    // duration scaling without retuning the whole rogue bleed budget.
     effects: [{ type: 'dot', total: 16, duration: 16, interval: 2, perCombo: 16 }],
     description: 'Finishing move that wounds the target, causing it to bleed for $d over 16 sec.',
   },
