@@ -7032,6 +7032,9 @@ export class GameServer {
   }
 
   private canShowInWho(viewer: ClientSession, candidate: ClientSession): boolean {
+    // Fail closed while the candidate's block list is still loading: showing
+    // them in /who before we know their blocks could leak presence to
+    // someone they've blocked.
     if (!candidate.blockListLoaded) return false;
     if (viewer.blockedIds.has(candidate.characterId)) return false;
     if (

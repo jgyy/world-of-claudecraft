@@ -489,6 +489,16 @@ describe('ignore / block', () => {
     expect(h.tx.blockSets.get(1)).toEqual([]);
   });
 
+  it('pushes a snapshot refresh to the blocked target too, not just the actor (#2437)', async () => {
+    h.tx.setOnline(2);
+    h.tx.clear();
+    await h.svc.blockAdd(h.actor(1), 'Bet');
+    expect(h.tx.snapshotCount.get(2)).toBe(1);
+    h.tx.clear();
+    await h.svc.blockRemove(h.actor(1), 'Bet');
+    expect(h.tx.snapshotCount.get(2)).toBe(1);
+  });
+
   it('does not claim success when unignoring someone who is not ignored', async () => {
     await h.svc.blockRemove(h.actor(1), 'Bet');
     expect(h.tx.errorsFor(1).join()).toMatch(/not on your block list/i);

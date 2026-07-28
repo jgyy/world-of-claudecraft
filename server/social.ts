@@ -546,6 +546,9 @@ export class SocialService {
     this.info(actor.characterId, `${target.name} is now blocked.`);
     this.tx.onBlocksChanged(actor.characterId, await this.db.blockedIds(actor.characterId));
     this.push(actor.characterId);
+    // The target's own panel must lose the actor's presence too, or it stays
+    // frozen "online" on their side for the rest of the session (#2437).
+    this.push(target.id);
   }
 
   async blockRemove(actor: SocialActor, name: string): Promise<void> {
@@ -563,6 +566,7 @@ export class SocialService {
     this.info(actor.characterId, `${target.name} is no longer blocked.`);
     this.tx.onBlocksChanged(actor.characterId, await this.db.blockedIds(actor.characterId));
     this.push(actor.characterId);
+    this.push(target.id);
   }
 
   // "/blocklist": echo the blocked names back to the actor.
