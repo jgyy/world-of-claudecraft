@@ -58,6 +58,7 @@ import {
   type LootRollChoice,
   type LootRollGroupStatus,
   type LootRollPrompt,
+  type MasterLootPrompt,
   type MasterLootThreshold,
   type MoveInput,
   type PlayerClass,
@@ -1079,8 +1080,11 @@ const ACTION_BAR_SAVE_DEBOUNCE_MS = 1500;
 // schedule reaches the cap, so across 40 attempts the total runs from roughly
 // 4.6 minutes (every draw at the floor) to 9.4 minutes (every draw at the
 // ceiling), with an expected total near 8 minutes, before giving up for good.
-const RECONNECT_BASE_DELAY_MS = 1_000;
-const RECONNECT_MAX_DELAY_MS = 15_000;
+// Exported for the reconnect-overlay show-grace pin (tests/reconnect_overlay
+// .test.ts): the grace must clear attempt 1's full jitter band, and a band
+// widened here without that pin would quietly reintroduce the veil blink.
+export const RECONNECT_BASE_DELAY_MS = 1_000;
+export const RECONNECT_MAX_DELAY_MS = 15_000;
 const RECONNECT_MAX_ATTEMPTS = 40;
 // A pre-layout-gate server accepts only `t:'auth'`, so it rejects our current
 // discriminator with this otherwise-generic literal. During a handshake only,
@@ -1513,6 +1517,10 @@ export class ClientWorld implements IWorld {
   private lootRollPrompts: LootRollPrompt[] = []; // open need-greed rolls, mirrored from the self-wire
   // group-visible choices on the open rolls (the vote strip), mirrored from the self-wire
   private lootRollGroup: LootRollGroupStatus[] = [];
+  // curate-phase master-loot assignments this player is the master looter of,
+  // mirrored from the self-wire. Server-filtered to the master looter, so an
+  // ordinary candidate's mirror is always empty.
+  private masterLootPrompts: MasterLootPrompt[] = [];
   // bumped whenever a fresh social snapshot lands, so an open panel re-renders
   private socialDirty = false;
   // snapshot interpolation
@@ -2524,6 +2532,10 @@ export class ClientWorld implements IWorld {
       e.castTotal = w.castTot ?? 0;
       e.channeling = !!w.chan;
       e.sitting = !!w.sit;
+      e.climbing = !!w.cl;
+      // Quantized 1..99 progress through the pull (see server snapshot);
+      // undefined when not climbing so the visual falls back to its own clock.
+      e.climbProgress = typeof w.cl === 'number' && w.cl > 0 ? w.cl / 100 : undefined;
       e.afk = !!w.ak; // /afk display bit: drives the nameplate tag + social presence dot
       e.weaponStowed = !!w.ws;
       e.aggroTargetId = w.aggro ?? null;
@@ -2805,6 +2817,8 @@ export class ClientWorld implements IWorld {
       e.spellHaste = s.sh ?? 0;
       e.critChance = s.crit ?? 0.05;
       e.dodgeChance = s.dodge ?? 0.05;
+      e.blockChance = s.blk ?? 0;
+      e.blockValue = s.bval ?? 0;
       // Crit/haste/hit RATING are informational paper-doll stats (combat values ride
       // crit/sh above, and hit resolves server-side); sent always like the other self
       // stats so the online character sheet shows them instead of the blankEntity 0.
@@ -2964,6 +2978,7 @@ export class ClientWorld implements IWorld {
       if (s.atitle !== undefined) this.activeTitle = s.atitle ?? null;
       if (s.lroll !== undefined) this.lootRollPrompts = s.lroll ?? [];
       if (s.lrollg !== undefined) this.lootRollGroup = s.lrollg ?? [];
+      if (s.mloot !== undefined) this.masterLootPrompts = s.mloot ?? [];
       if (s.drun !== undefined) this.delveRun = s.drun;
       if (s.dcompanion !== undefined) this.companionState = s.dcompanion;
       if (s.dmarks !== undefined) this.delveMarks = s.dmarks ?? 0;
@@ -3327,6 +3342,9 @@ export class ClientWorld implements IWorld {
   lootRollGroupStatus(): LootRollGroupStatus[] {
     return this.lootRollGroup;
   }
+  activeMasterLootRolls(): MasterLootPrompt[] {
+    return this.masterLootPrompts;
+  }
   pickUpObject(id: number): Promise<boolean> {
     return this.cmdWithOutcome({ cmd: 'pickup', id });
   }
@@ -3411,8 +3429,12 @@ export class ClientWorld implements IWorld {
   // never predicted. The server re-validates ownership/eligibility/throttle in
   // the sim resolvers and answers with the personal disenchantResult/
   // enchantResult/salvageResult event plus the denc/ench/salv self-delta.
-  disenchantItem(itemId: string): void {
-    this.cmd({ cmd: 'disenchant_item', item: itemId });
+  disenchantItem(itemId: string, target?: { slotIndex: number }): void {
+    if (target === undefined) {
+      this.cmd({ cmd: 'disenchant_item', item: itemId });
+    } else {
+      this.cmd({ cmd: 'disenchant_item', item: itemId, slot: target.slotIndex });
+    }
   }
   // `slot` rides only when the target is a WORN piece (the in-place arm); a
   // bagged target sends a message byte-identical to the pre-feature form. The
@@ -3451,8 +3473,13 @@ export class ClientWorld implements IWorld {
   sellAllJunk(): void {
     this.cmd({ cmd: 'sell_all_junk' });
   }
-  buyBackItem(itemId: string): void {
-    this.cmd({ cmd: 'buyback', item: itemId });
+  buyBackItem(
+    itemId: string,
+    index?: number,
+    instance?: ItemInstancePayload,
+    craftedRecipeId?: string,
+  ): void {
+    this.cmd({ cmd: 'buyback', item: itemId, index, instance, craftedRecipeId });
   }
   // --- IWorldCosmetics: skin + mech-chroma equips. Optimistic local nudge, then
   // the snake_case cmd (change_skin/claim_event_skin/unequip_mech_chroma); the
