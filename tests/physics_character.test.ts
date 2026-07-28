@@ -24,6 +24,7 @@ import {
   physicsStats,
   resetPhysicsStats,
 } from '../src/sim/physics';
+import { LEDGE_GRAB_MIN } from '../src/sim/physics/ledge';
 import { GRAVITY, JUMP_VELOCITY } from '../src/sim/player_motion';
 import { Sim } from '../src/sim/sim';
 import type { WorldContent } from '../src/sim/types';
@@ -123,40 +124,6 @@ function findStrideableStone(): { x: number; z: number; scale: number } | undefi
       const cz = c.z ?? 0;
       if (Math.hypot(cx - d.x, cz - d.z) <= 0.25) return false; // the stone itself
       if (cz < d.z - 3 || cz > d.z + 2) return false; // outside the walk
-      const reach = (c.type === 'circle' ? c.r : Math.hypot(c.hw, c.hd)) + 0.6;
-      return Math.abs(cx - d.x) < reach;
-    });
-    if (blocksCorridor) continue;
-    return { x: d.x, z: d.z, scale: d.scale };
-  }
-  return undefined;
-}
-
-// A collidable stone whose TRUE climb from the approach footing sits strictly
-// above MANTLE_REACH but still within MAX_STEP_HEIGHT: the band a grounded
-// stride freely crosses but that a naive airborne mantle allowance would wall
-// off, since MANTLE_REACH < MAX_STEP_HEIGHT.
-function findLadderBandStone(): { x: number; z: number; scale: number } | undefined {
-  for (const d of generateDecorations(SEED)) {
-    if (d.kind !== 'rock' || d.scale < ROCK_COLLIDER_MIN_SCALE) continue;
-    if (Math.abs(d.x) > 160) continue;
-    const top = groundHeight(d.x, d.z, SEED) + rockHeight(d.x, d.z, d.scale, SEED);
-    const climb = top - groundHeight(d.x, d.z - 1.2, SEED);
-    if (climb <= MANTLE_REACH || climb > MAX_STEP_HEIGHT) continue;
-    let clean = true;
-    for (let t = -2.6; t <= 1.6 && clean; t += 0.4) {
-      const z = d.z + t;
-      if (terrainSteepnessAt(d.x, z, SEED) > 0.4) clean = false;
-      if (terrainHeight(d.x, z, SEED) < WATER_LEVEL + 2) clean = false;
-    }
-    if (!clean) continue;
-    const near: ReturnType<typeof queryOpenWorldColliders> = [];
-    queryOpenWorldColliders(SEED, d.x - 5, d.z - 5, d.x + 5, d.z + 5, near);
-    const blocksCorridor = near.some((c) => {
-      const cx = c.x ?? 0;
-      const cz = c.z ?? 0;
-      if (Math.hypot(cx - d.x, cz - d.z) <= 0.25) return false;
-      if (cz < d.z - 3 || cz > d.z + 2) return false;
       const reach = (c.type === 'circle' ? c.r : Math.hypot(c.hw, c.hd)) + 0.6;
       return Math.abs(cx - d.x) < reach;
     });
@@ -351,20 +318,47 @@ describe('step up: walking over low obstacles', () => {
     expect(out.stepped).toBe(0);
   });
 
-  it('does not wall off an airborne body against a stride-band obstacle', () => {
-    // A body that leaves the ground must not lose ground it could freely
-    // stride over: an obstacle whose top sits within MAX_STEP_HEIGHT of the
-    // feet is never a wall for an airborne body either, even though the
-    // legacy MANTLE_REACH lift alone (0.7yd) is smaller than the stride
-    // band (0.9yd) and would otherwise block it as a new mid-air wall.
-    setActiveWorldContent(null);
-    const stone = findLadderBandStone();
-    expect(stone).toBeDefined();
-    if (!stone) return;
-    const g = groundHeight(stone.x, stone.z - 2, SEED);
-    moveCharacter(params({ grounded: false }), stone.x, g, stone.z - 2, 0, 4, out);
-    expect(out.blocked).toBe(false);
-    expect(out.z).toBeGreaterThan(stone.z - 2);
+  it('pins the airborne allowance to the grounded stride band', () => {
+    // One number, three consumers: the horizontal gates (blocksAt here,
+    // passesOver in colliders.ts) and the vertical support query in
+    // player_motion.ts all read MANTLE_REACH. Holding it equal to the stride
+    // band means leaving the ground never costs a body a top it could have
+    // strided over, and holding it equal to LEDGE_GRAB_MIN leaves no band
+    // between "vault over it" and "grab it" for a top to be a wall in.
+    expect(MANTLE_REACH).toBe(MAX_STEP_HEIGHT);
+    expect(LEDGE_GRAB_MIN).toBe(MAX_STEP_HEIGHT);
+  });
+
+  it('admits exactly the airborne tops the landing pass can seat', () => {
+    // The pass-over gate and the landing snap must agree on every top. A top
+    // the horizontal solver waves through but floorHeightAt refuses is a top
+    // the body tunnels INTO: it lands on the terrain inside the prop and gets
+    // ejected sideways the next grounded tick. So both arms are asserted, on
+    // both sides of the allowance, at a realistic per-tick displacement.
+    const cz = SPOT.z + 2;
+    setActiveWorldContent(world({ crates: [[SPOT.x, cz]] }));
+    const g = groundHeight(SPOT.x, cz, SEED);
+    const top = g + campCrateShape(SPOT.x, cz, 0).top;
+    // Feet just INSIDE the allowance: crosses, and lands on the crate top.
+    const inBand = top - MANTLE_REACH + 0.02;
+    let px = SPOT.x;
+    let pz = SPOT.z;
+    for (let i = 0; i < 20 && pz < cz; i++) {
+      moveCharacter(params({ grounded: false }), px, inBand, pz, 0, 0.35, out);
+      expect(out.blocked).toBe(false);
+      px = out.x;
+      pz = out.z;
+    }
+    expect(pz).toBeGreaterThanOrEqual(cz);
+    expect(floorHeightAt(SEED, px, pz, R, inBand + MANTLE_REACH)).toBeCloseTo(top, 6);
+    // Feet just OUTSIDE it: still a wall, and the landing pass agrees by
+    // refusing the same top. This is the negative arm the allowance needs:
+    // raising the horizontal gate alone would turn this into a tunnel.
+    const below = top - MANTLE_REACH - 0.05;
+    moveCharacter(params({ grounded: false }), SPOT.x, below, SPOT.z, 0, 4, out);
+    expect(out.blocked).toBe(true);
+    expect(out.z).toBeLessThan(cz);
+    expect(floorHeightAt(SEED, SPOT.x, cz, R, below + MANTLE_REACH)).toBeLessThan(top);
   });
 
   it('never steps onto something taller than the step height', () => {
