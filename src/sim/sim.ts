@@ -1833,6 +1833,10 @@ export class Sim {
   // the sim runs at 20 Hz wall speed, so the interval is real hours.
   private worldBossNextAt: number[] = WORLD_BOSSES.map((b) => b.intervalSeconds);
   private worldBossEntityIds: (number | null)[] = WORLD_BOSSES.map(() => null);
+  // One-shot gate for takeActionBarLayoutRestore (IWorldActionBar): mirrors
+  // ClientWorld's null-out pattern so the offline arm honors the same
+  // consumed-once contract instead of returning the 'noop' value forever.
+  private actionBarLayoutRestoreServed = false;
 
   // Per-world key for the rift collision registry in colliders.ts. Allocated per
   // Sim INSTANCE (not per seed): two same-seed Sims in one process must never
@@ -3633,6 +3637,8 @@ export class Sim {
   }
 
   takeActionBarLayoutRestore(): ActionBarLayoutRestore | undefined {
+    if (this.actionBarLayoutRestoreServed) return undefined;
+    this.actionBarLayoutRestoreServed = true;
     return { source: 'noop' };
   }
 
