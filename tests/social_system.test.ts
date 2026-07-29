@@ -258,6 +258,10 @@ class FakeTransport implements SocialTransport {
   isBlocking(recipientId: number, senderCharacterId: number): boolean {
     return !!this.db.blocks.get(recipientId)?.has(senderCharacterId);
   }
+  notLoaded = new Set<number>();
+  blockListLoaded(characterId: number): boolean {
+    return !this.notLoaded.has(characterId);
+  }
   onIgnoresChanged(id: number, ids: number[]): void {
     this.ignoreSets.set(id, ids);
   }
@@ -455,6 +459,27 @@ describe('friends', () => {
     expect(snap.friends[0].online).toBe(false);
     expect(snap.friends[0].x).toBeUndefined();
     expect(snap.friends[0].zone).toBeUndefined();
+  });
+
+  it('fails closed on a snapshot when the friend has a persisted block but their live block list has not loaded yet (#2437)', async () => {
+    await h.svc.friendAdd(h.actor(1), 'Bet'); // Aleph friends Bet
+    await h.db.addBlock(2, 1); // Bet has persisted a block on Aleph
+    h.tx.setOnline(2, { zone: 'Mirewood', status: 'online', x: 5, z: 9 });
+    h.tx.notLoaded.add(2); // but Bet's session block list has not loaded yet
+    const snap = await h.svc.snapshot(1);
+    expect(snap.friends[0].online).toBe(false);
+    expect(snap.friends[0].x).toBeUndefined();
+    expect(snap.friends[0].zone).toBeUndefined();
+  });
+
+  it('does not notify or refresh a watcher whose own block list has not loaded yet (#2437)', async () => {
+    await h.svc.friendAdd(h.actor(1), 'Bet'); // Aleph watches Bet
+    h.tx.setOnline(1);
+    h.tx.notLoaded.add(1); // Aleph's session block list has not loaded yet
+    h.tx.clear();
+    await h.svc.announcePresence(h.actor(2), true);
+    expect(h.tx.textFor(1)).toHaveLength(0);
+    expect(h.tx.snapshotCount.get(1) ?? 0).toBe(0);
   });
 });
 

@@ -1873,6 +1873,13 @@ export class GameServer {
         const s = this.sessionByCharacterId(recipientId);
         return s ? s.blockedIds.has(senderCharacterId) : false;
       },
+      // Offline characters have nothing loaded and no live presence to leak,
+      // so they report loaded (true); an online session reports its own
+      // blockListLoaded flag, set once initSocial's DB read resolves.
+      blockListLoaded: (characterId) => {
+        const s = this.sessionByCharacterId(characterId);
+        return s ? s.blockListLoaded : true;
+      },
       onIgnoresChanged: (id, ids) => {
         const s = this.sessionByCharacterId(id);
         if (s) s.ignoredIds = new Set(ids);
