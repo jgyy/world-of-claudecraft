@@ -229,6 +229,35 @@ describe('the climb move', () => {
     expect(p.climb).toBeNull();
   });
 
+  it('a lip inside the vault ceiling stays a silent vault, even below the stall roof ridge', () => {
+    // CLIMB_MIN_OVERHEAD must track the true vault ceiling (jump apex plus
+    // MANTLE_REACH): anything the silent vault already reaches should never
+    // be forced into the scripted climb. Probe a point partway up the stall
+    // canopy's pitched gable, well short of its 2.54 ridge, so the overhead
+    // above the floor lands inside vault reach.
+    const sz = SPOT.z + 2.2;
+    setActiveWorldContent(world({ stalls: [{ x: SPOT.x, z: sz, rot: 0, r: 1.7 }] }));
+    const bodyZ = sz - 0.6 - (R + 0.5);
+    const startY = groundHeight(SPOT.x, bodyZ, SEED) + 0.6;
+    const grab = findLedgeGrab(q(), SPOT.x, startY, bodyZ);
+    expect(grab).not.toBeNull();
+    if (!grab) return;
+    const floorY = Math.max(
+      groundHeight(SPOT.x, bodyZ, SEED),
+      supportHeightAt(SEED, SPOT.x, bodyZ, R, startY + 1e-3),
+    );
+    const overhead = grab.topY - floorY;
+    const apex = (JUMP_VELOCITY * JUMP_VELOCITY) / (2 * GRAVITY);
+    // Comfortably inside the vault ceiling, so the silent vault already
+    // carries the body up here without any scripted animation.
+    expect(overhead).toBeLessThan(apex + MANTLE_REACH);
+    expect(overhead).toBeGreaterThan(1); // clear of the step/vault floor too
+
+    const p = makeBody(SPOT.x, startY, bodyZ);
+    expect(tryStartClimb(p, SEED)).toBe(false);
+    expect(p.climb).toBeNull();
+  });
+
   it('drops the body when a stun lands mid-climb', () => {
     const cz = SPOT.z + 2.2;
     setActiveWorldContent(world({ stalls: [{ x: SPOT.x, z: cz, rot: Math.PI / 2, r: 1.7 }] }));
@@ -319,8 +348,11 @@ describe('the climb against real world geometry', () => {
     expect(crossHeight).toBeLessThanOrEqual(climbReach);
     // No dead band in the ladder: everything below the climb's above-the-head
     // floor is inside the silent vault's reach from flat ground, so gating
-    // the pull-up on tall lips never makes any height unreachable.
-    expect(CLIMB_MIN_OVERHEAD).toBeLessThanOrEqual(vaultReach);
+    // the pull-up on tall lips never makes any height unreachable. Pinned
+    // to the exact vault ceiling, not just "under it": a looser bound let
+    // CLIMB_MIN_OVERHEAD drift stale under a later MANTLE_REACH tune and
+    // still pass.
+    expect(CLIMB_MIN_OVERHEAD).toBeCloseTo(vaultReach, 6);
     // And the cross itself still earns the pull-up.
     expect(crossHeight).toBeGreaterThanOrEqual(CLIMB_MIN_OVERHEAD);
   });
