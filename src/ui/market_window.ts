@@ -15,7 +15,7 @@
 
 import { audio } from '../game/audio';
 import type { ItemSlot } from '../sim/types';
-import type { IWorld } from '../world_api';
+import { type IWorld, queryDiffersFromEcho } from '../world_api';
 import { markDialogRoot } from './dialog_root';
 import { dropdownKeyNav } from './dropdown_nav';
 import { computeDropdownPlacement } from './dropdown_position';
@@ -173,6 +173,20 @@ export class MarketWindow {
   // per-frame refreshIfChanged repaints when the new page arrives.
   private pushQuery(): void {
     this.deps.world().marketSearch(this.currentQuery());
+  }
+
+  // Reconnect resync (issue 2416). A fresh join (the server's linkdead grace
+  // expired before the socket came back) hands the reconnecting character a
+  // brand-new session, whose browse query starts back at default; this window's
+  // own filter controls live in the client and survive the socket drop untouched,
+  // so without this the buttons keep showing a query the server silently stopped
+  // running. An ordinary resume keeps the same session (the echoed query still
+  // matches), so this is a no-op then: only a real drift re-pushes.
+  onReconnected(): void {
+    if (!this.opened) return;
+    const info = this.deps.world().marketInfo;
+    if (!info || !queryDiffersFromEcho(this.currentQuery(), info)) return;
+    this.pushQuery();
   }
 
   // Per-frame (slow divider): refresh the live lists (Browse/Collect) when they

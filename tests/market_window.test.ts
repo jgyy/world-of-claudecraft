@@ -17,6 +17,7 @@ const mobileCss = readFileSync(
   'utf8',
 ).replace(/\r\n/g, '\n');
 const hud = readFileSync(new URL('../src/ui/hud.ts', import.meta.url), 'utf8');
+const mainSrc = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8');
 
 describe('market_window: no magic values', () => {
   it('carries no literal color in TS (colors live in the extracted stylesheet/tokens)', () => {
@@ -363,6 +364,52 @@ describe('market_window: stale tooltip on re-filter (#2456)', () => {
     const render = painter.slice(painter.indexOf('render(): void {'));
     expect(render.indexOf('this.deps.hideTooltip();')).toBeLessThan(
       render.indexOf('this.renderContent();'),
+    );
+  });
+});
+
+describe('market_window: reconnect resync (#2416)', () => {
+  // A fresh join (the server's linkdead grace expired before the socket came back)
+  // resets the session-only browse query to default; the window's own filter
+  // controls live in the client and survive the drop untouched. onReconnected must
+  // detect that drift off the echoed query, not blindly re-push on every reconnect
+  // (an ordinary resume keeps the same session, so nothing changed to re-send).
+  it('exists, is a no-op when closed or the echo still matches, and re-pushes only on real drift', () => {
+    const method = painter.slice(
+      painter.indexOf('onReconnected(): void {'),
+      painter.indexOf('// Per-frame (slow divider)'),
+    );
+    expect(method, 'onReconnected must exist').toContain('onReconnected(): void {');
+    expect(method).toContain('if (!this.opened) return;');
+    expect(method).toContain('queryDiffersFromEcho(this.currentQuery(), info)');
+    expect(method).toContain('this.pushQuery();');
+  });
+
+  it('imports queryDiffersFromEcho from the world_api seam (the pure drift check, not a re-derived comparison)', () => {
+    expect(painter).toContain("import { type IWorld, queryDiffersFromEcho } from '../world_api';");
+  });
+
+  it('wires the window through a hud.ts method, chained onto the ClientWorld reconnect hook in main.ts', () => {
+    const method = hud.slice(
+      hud.indexOf('marketResyncAfterReconnect(): void {'),
+      hud.indexOf('marketResyncAfterReconnect(): void {') + 200,
+    );
+    expect(method, 'Hud.marketResyncAfterReconnect must exist').toContain(
+      'this.marketWindow.onReconnected();',
+    );
+    // hud does not exist yet when enterWorld() first arms world.onReconnected (the
+    // reconnect-overlay teardown), so startGame chains its own handler onto
+    // whatever enterWorld already set, once hud is actually constructed, instead
+    // of replacing it.
+    const chain = mainSrc.slice(
+      mainSrc.indexOf('const priorOnReconnected = online.onReconnected;'),
+      mainSrc.indexOf('const priorOnReconnected = online.onReconnected;') + 300,
+    );
+    expect(chain, 'main.ts must chain onto the prior handler, not replace it').toContain(
+      'priorOnReconnected?.();',
+    );
+    expect(chain, 'main.ts must call the hud resync hook on reconnect').toContain(
+      'hud.marketResyncAfterReconnect();',
     );
   });
 });
