@@ -11,64 +11,144 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "es_ES": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "fr_FR": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "fr_CA": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "en_CA": [],
   "it_IT": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "de_DE": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "zh_CN": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "zh_TW": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "ko_KR": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "ja_JP": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "pt_BR": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "ru_RU": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "cs_CZ": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "nl_NL": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "pl_PL": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "id_ID": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "tr_TR": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "sv_SE": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "vi_VN": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ],
   "da_DK": [
-    "error.tooManyFailedAttempts"
+    "dialog.actionResetChatStrikes",
+    "dialog.confirmResetChatStrikes",
+    "error.tooManyFailedAttempts",
+    "moderationHistory.actionReactivate",
+    "moderationHistory.actionResetChatStrikes"
   ]
 };

@@ -261,12 +261,12 @@ describe('admin envelope contract (frozen)', () => {
   });
 
   it('a data:{ ok:true } body rides inside the same envelope', async () => {
-    authedAdminDb({ setAccountDeactivated: async () => {} });
+    authedAdminDb({ reactivateAccountAudited: async () => {} });
     installAdminRuntime();
     const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/reactivate', {
       headers: { authorization: BEARER },
       params: { id: '5' },
-      body: {},
+      body: { reason: 'appeal accepted' },
     });
     expect(r.status).toBe(200);
     expect(r.body).toEqual({ success: true, data: { ok: true }, error: null });
@@ -583,12 +583,12 @@ describe('POST /admin/api/login', () => {
 
 describe('operator :id loader + enum :action', () => {
   it('reaches the handler with a valid numeric :id', async () => {
-    authedAdminDb({ setAccountDeactivated: async () => {} });
+    authedAdminDb({ reactivateAccountAudited: async () => {} });
     installAdminRuntime();
     const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/reactivate', {
       headers: { authorization: BEARER },
       params: { id: '5' },
-      body: {},
+      body: { reason: 'appeal accepted' },
     });
     expect(r.status).toBe(200);
     expect(r.reached).toBe(true);
@@ -599,27 +599,27 @@ describe('operator :id loader + enum :action', () => {
     // permission and the central gate 404s it, byte-identical to the legacy arm's
     // fail-closed preamble. This supersedes the old adminIdParamDecode 422 for the
     // non-NUMERIC case; a numeric-but-invalid id (0, below) still reaches the decode.
-    const setAccountDeactivated = vi.fn(async () => {});
-    authedAdminDb({ setAccountDeactivated });
+    const reactivateAccountAudited = vi.fn(async () => {});
+    authedAdminDb({ reactivateAccountAudited });
     installAdminRuntime();
     const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/reactivate', {
       headers: { authorization: BEARER },
       params: { id: 'abc' },
-      body: {},
+      body: { reason: 'appeal accepted' },
     });
     expect(r.status).toBe(404);
     expect(r.body).toEqual({ success: false, data: null, error: 'unknown admin endpoint' });
     expect(r.reached).toBe(false);
-    expect(setAccountDeactivated).not.toHaveBeenCalled();
+    expect(reactivateAccountAudited).not.toHaveBeenCalled();
   });
 
   it('422s a non-positive :id (0)', async () => {
-    authedAdminDb({ setAccountDeactivated: async () => {} });
+    authedAdminDb({ reactivateAccountAudited: async () => {} });
     installAdminRuntime();
     const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/reactivate', {
       headers: { authorization: BEARER },
       params: { id: '0' },
-      body: {},
+      body: { reason: 'appeal accepted' },
     });
     expect(r.status).toBe(422);
     expect(r.body).toEqual({ success: false, data: null, error: 'validation.failed' });
@@ -628,7 +628,8 @@ describe('operator :id loader + enum :action', () => {
   for (const action of ['suspend', 'unsuspend', 'ban', 'unban'] as const) {
     it(`decodes the valid action "${action}" and reaches moderateAccount`, async () => {
       const moderateAccount = vi.fn(async () => {});
-      authedAdminDb({ moderateAccount, accountMailTarget: async () => null });
+      const revokeTokensExcept = vi.fn(async () => {});
+      authedAdminDb({ moderateAccount, accountMailTarget: async () => null, revokeTokensExcept });
       installAdminRuntime();
       const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/:action', {
         headers: { authorization: BEARER },
@@ -640,6 +641,13 @@ describe('operator :id loader + enum :action', () => {
       expect(moderateAccount).toHaveBeenCalledWith(
         expect.objectContaining({ accountId: 5, adminAccountId: ADMIN_ACCOUNT_ID, action }),
       );
+      // suspend/ban sign the target out of every device (mirrors reset-password);
+      // unsuspend/unban are non-punitive reversals and must never touch tokens.
+      if (action === 'suspend' || action === 'ban') {
+        expect(revokeTokensExcept).toHaveBeenCalledWith(5, null);
+      } else {
+        expect(revokeTokensExcept).not.toHaveBeenCalled();
+      }
     });
   }
 
@@ -760,11 +768,13 @@ describe('game.* side effects preserved', () => {
 
   it('a suspend disconnects the target account and fires the best-effort mail', async () => {
     const emailSecurityIncident = vi.fn();
+    const revokeTokensExcept = vi.fn(async () => {});
     authedAdminDb({
       moderateAccount: async () => {},
       accountMailTarget: async () =>
         ({ id: 5, username: 'x', email: 'x@y.z', locale: 'en', marketing_opt_in: false }) as never,
       emailSecurityIncident,
+      revokeTokensExcept,
     });
     const rt = installAdminRuntime();
     const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/:action', {
@@ -773,6 +783,7 @@ describe('game.* side effects preserved', () => {
       body: { reason: 'griefing' },
     });
     expect(r.status).toBe(200);
+    expect(revokeTokensExcept).toHaveBeenCalledWith(5, null);
     expect(rt.disconnectAccount).toHaveBeenCalledWith(5, 'This account is suspended.');
   });
 
@@ -899,12 +910,12 @@ describe('game.* side effects preserved', () => {
   });
 
   it('reset-strikes pushes the live reset when a row was updated', async () => {
-    authedAdminDb({ resetChatStrikes: async () => true });
+    authedAdminDb({ resetChatStrikesAudited: async () => true });
     const rt = installAdminRuntime();
     const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/reset-strikes', {
       headers: { authorization: BEARER },
       params: { id: '5' },
-      body: {},
+      body: { reason: 'appeal accepted' },
     });
     expect(r.status).toBe(200);
     expect(rt.resetChatStrikesLive).toHaveBeenCalledWith(5);
@@ -927,6 +938,7 @@ describe('game.* side effects preserved', () => {
       accountMailTarget: async () => {
         throw new Error('mail db down');
       },
+      revokeTokensExcept: vi.fn(async () => {}),
     });
     const rt = installAdminRuntime();
     // The email is fired as a void .then().catch(), so the 200 is written synchronously
@@ -1307,6 +1319,40 @@ describe('migrated read handlers (QA gate parity coverage)', () => {
         page: 1,
         limit: 25,
         blocked: true,
+        blockable: true,
+      },
+      error: null,
+    });
+  });
+
+  it('ip-associations reads the stored unknown marker without treating it as blockable', async () => {
+    const associationsForIp = vi.fn(async (ip: string, page: number, limit: number) => ({
+      ip,
+      accounts: [{ accountId: 20 }],
+      total: 1,
+      page,
+      limit,
+    }));
+    authedAdminDb({ associationsForIp });
+    const rt = installAdminRuntime();
+
+    const r = await runRoute('GET', '/admin/api/ip-associations', {
+      url: '/admin/api/ip-associations?ip=unknown&page=1&limit=25',
+      headers: { authorization: BEARER },
+    });
+
+    expect(associationsForIp).toHaveBeenCalledWith('unknown', 1, 25);
+    expect(rt.isIpBlocked).not.toHaveBeenCalled();
+    expect(r.body).toEqual({
+      success: true,
+      data: {
+        ip: 'unknown',
+        accounts: [{ accountId: 20, online: false }],
+        total: 1,
+        page: 1,
+        limit: 25,
+        blocked: false,
+        blockable: false,
       },
       error: null,
     });
@@ -1498,6 +1544,43 @@ describe('migrated write handlers + side effects (QA gate parity coverage)', () 
     expect(rt.liftChatMuteLive).toHaveBeenCalledWith(5);
   });
 
+  it('reactivate forwards the reason and admin id to the audited reactivation', async () => {
+    const reactivateAccountAudited = vi.fn(async () => {});
+    authedAdminDb({ reactivateAccountAudited });
+    installAdminRuntime();
+    const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/reactivate', {
+      headers: { authorization: BEARER },
+      params: { id: '5' },
+      body: { reason: 'appeal accepted' },
+    });
+    expect(r.status).toBe(200);
+    expect(r.body).toEqual({ success: true, data: { ok: true }, error: null });
+    expect(reactivateAccountAudited).toHaveBeenCalledWith({
+      accountId: 5,
+      adminAccountId: ADMIN_ACCOUNT_ID,
+      reason: 'appeal accepted',
+    });
+  });
+
+  it('reset-strikes forwards the reason and admin id to the audited reset', async () => {
+    const resetChatStrikesAudited = vi.fn(async () => true);
+    authedAdminDb({ resetChatStrikesAudited });
+    const rt = installAdminRuntime();
+    const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/reset-strikes', {
+      headers: { authorization: BEARER },
+      params: { id: '5' },
+      body: { reason: 'appeal accepted' },
+    });
+    expect(r.status).toBe(200);
+    expect(r.body).toEqual({ success: true, data: { ok: true }, error: null });
+    expect(resetChatStrikesAudited).toHaveBeenCalledWith({
+      accountId: 5,
+      adminAccountId: ADMIN_ACCOUNT_ID,
+      reason: 'appeal accepted',
+    });
+    expect(rt.resetChatStrikesLive).toHaveBeenCalledWith(5);
+  });
+
   it('note appends the audit note from body.reason (the legacy field name)', async () => {
     const addAccountNote = vi.fn(async () => {});
     authedAdminDb({ addAccountNote });
@@ -1522,6 +1605,7 @@ describe('migrated write handlers + side effects (QA gate parity coverage)', () 
       moderateAccount: async () => {},
       accountMailTarget: async () => target,
       emailSecurityIncident,
+      revokeTokensExcept: vi.fn(async () => {}),
     });
     installAdminRuntime();
     const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/:action', {
@@ -1543,6 +1627,7 @@ describe('migrated write handlers + side effects (QA gate parity coverage)', () 
       moderateAccount: async () => {},
       accountMailTarget: async () => target,
       emailSecurityIncident,
+      revokeTokensExcept: vi.fn(async () => {}),
     });
     installAdminRuntime();
     await runRoute('POST', '/admin/api/moderation/accounts/:id/:action', {
@@ -1623,12 +1708,12 @@ describe('migrated write handlers + side effects (QA gate parity coverage)', () 
   });
 
   it('404s a reset-strikes for an unknown account and skips the live push', async () => {
-    authedAdminDb({ resetChatStrikes: async () => false });
+    authedAdminDb({ resetChatStrikesAudited: async () => false });
     const rt = installAdminRuntime();
     const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/reset-strikes', {
       headers: { authorization: BEARER },
       params: { id: '5' },
-      body: {},
+      body: { reason: 'appeal accepted' },
     });
     expect(r.status).toBe(404);
     expect(r.body).toEqual({ success: false, data: null, error: 'account not found' });
@@ -2047,7 +2132,7 @@ describe('catch -> 400 err.message remap (legacy prose passthrough, per write ha
       label: 'reactivate',
       path: '/admin/api/moderation/accounts/:id/reactivate',
       params: { id: '5' },
-      fake: 'setAccountDeactivated',
+      fake: 'reactivateAccountAudited',
     },
     {
       label: 'chat-mute',
@@ -2073,6 +2158,12 @@ describe('catch -> 400 err.message remap (legacy prose passthrough, per write ha
       params: { id: '5' },
       fake: 'addAccountNote',
     },
+    {
+      label: 'reset-strikes',
+      path: '/admin/api/moderation/accounts/:id/reset-strikes',
+      params: { id: '5' },
+      fake: 'resetChatStrikesAudited',
+    },
     { label: 'blocked-ips add', path: '/admin/api/blocked-ips', fake: 'addBlockedIp' },
   ];
 
@@ -2087,7 +2178,7 @@ describe('catch -> 400 err.message remap (legacy prose passthrough, per write ha
       const r = await runRoute('POST', c.path, {
         headers: { authorization: BEARER },
         params: c.params,
-        body: {},
+        body: c.label === 'blocked-ips add' ? { ip: '9.9.9.9' } : {},
       });
       expect(r.status).toBe(400);
       expect(r.body).toEqual({ success: false, data: null, error: `${c.label} exploded` });
@@ -2096,7 +2187,7 @@ describe('catch -> 400 err.message remap (legacy prose passthrough, per write ha
 
   it('a NON-Error throw falls back to the per-route legacy prose (reactivation failed)', async () => {
     authedAdminDb({
-      setAccountDeactivated: async () => {
+      reactivateAccountAudited: async () => {
         // The legacy catch only reads .message off an Error; anything else gets the fallback.
         throw 'boom';
       },
@@ -2105,7 +2196,7 @@ describe('catch -> 400 err.message remap (legacy prose passthrough, per write ha
     const r = await runRoute('POST', '/admin/api/moderation/accounts/:id/reactivate', {
       headers: { authorization: BEARER },
       params: { id: '5' },
-      body: {},
+      body: { reason: 'appeal accepted' },
     });
     expect(r.status).toBe(400);
     expect(r.body).toEqual({ success: false, data: null, error: 'reactivation failed' });
@@ -2136,6 +2227,7 @@ describe('remaining legacy guard negatives (re-verification audit)', () => {
       moderateAccount: async () => {},
       accountMailTarget: async () => target,
       emailSecurityIncident,
+      revokeTokensExcept: vi.fn(async () => {}),
     });
     installAdminRuntime();
     await runRoute('POST', '/admin/api/moderation/accounts/:id/:action', {
@@ -2185,14 +2277,32 @@ describe('remaining legacy guard negatives (re-verification audit)', () => {
   });
 
   it('400s a blocked-ips add when addBlockedIp rejects the ip (falsy), no reload and no kick', async () => {
-    authedAdminDb({ addBlockedIp: async () => '' });
+    const addBlockedIp = vi.fn(async () => '');
+    authedAdminDb({ cleanIp: () => '9.9.9.9', addBlockedIp });
     const rt = installAdminRuntime();
     const r = await runRoute('POST', '/admin/api/blocked-ips', {
       headers: { authorization: BEARER },
-      body: { ip: 'not-an-ip' },
+      body: { ip: '9.9.9.9' },
     });
     expect(r.status).toBe(400);
     expect(r.body).toEqual({ success: false, data: null, error: 'a valid IP address is required' });
+    expect(addBlockedIp).toHaveBeenCalledWith(expect.objectContaining({ ip: '9.9.9.9' }));
+    expect(rt.reloadBlockedIps).not.toHaveBeenCalled();
+    expect(rt.disconnectByIp).not.toHaveBeenCalled();
+  });
+
+  it('400s a blocked-ips add for unknown before the write boundary', async () => {
+    const addBlockedIp = vi.fn(async () => 'unknown');
+    authedAdminDb({ addBlockedIp });
+    const rt = installAdminRuntime();
+
+    const r = await runRoute('POST', '/admin/api/blocked-ips', {
+      headers: { authorization: BEARER },
+      body: { ip: 'unknown' },
+    });
+
+    expect(r.status).toBe(400);
+    expect(addBlockedIp).not.toHaveBeenCalled();
     expect(rt.reloadBlockedIps).not.toHaveBeenCalled();
     expect(rt.disconnectByIp).not.toHaveBeenCalled();
   });
