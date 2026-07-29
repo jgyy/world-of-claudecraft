@@ -20,6 +20,7 @@ import {
   removeMatchingInstance,
   sanitizeEscrowSlot,
 } from './item_instance_transfer';
+import { removeVendorSellUnits } from './items';
 import { planListingIds, playerListingIdFloor } from './market_listing_ids';
 import {
   MARKET_PAGE_SIZE,
@@ -111,6 +112,15 @@ export interface MarketListing {
    *  for the plain fungible listings, whose rows stay byte-identical. Wire
    *  browse rows carry only its publicInstanceView projection. */
   instance?: ItemInstancePayload;
+  // Recipe id that crafted every unit in this stack (bags.ts InvSlot.craftedRecipeId,
+  // professions/crafting.ts), when the seller's stock carried one. Absent for a
+  // plain, never-crafted stack (and always absent on an instanced row: `instance`
+  // and `craftedRecipeId` are mutually exclusive, one row is either a single
+  // instanced copy or a plain fungible stack). Threaded through buy/cancel/collect
+  // (BUG #9) so a market round trip never launders a crafted item's provenance
+  // and reopens the disenchant anti-farming gate
+  // (professions/enchanting.ts isCraftedDisenchantVictim).
+  craftedRecipeId?: string;
 }
 
 // Gold + items awaiting pickup at the Merchant (sale proceeds, expired
@@ -135,6 +145,7 @@ export interface MarketSave {
     /** Additive (#1165): the escrowed payload of an instanced listing. Absent
      *  on plain rows and on every pre-payload save, which load unchanged. */
     instance?: ItemInstancePayload;
+    craftedRecipeId?: string;
   }[];
   collections: { key: string; copper: number; items: InvSlot[] }[];
   nextListingId: number;
@@ -327,16 +338,45 @@ export class Market {
       );
       return;
     }
-    this.ctx.removeFungibleItem(itemId, want, meta.entityId); // escrow (fungible-only, #1165)
-    this.marketListings.push({
-      id: this.nextListingId++,
-      sellerKey,
-      sellerName: meta.name,
-      itemId,
-      count: want,
-      price: ask,
-      expiresAt: this.ctx.time + MARKET_LISTING_DURATION,
-      house: false,
+    // Escrow per unit instead of the old blind fungible bulk-decrement, so each
+    // removed unit's craftedRecipeId marker (bags.ts InvSlot.craftedRecipeId,
+    // professions/crafting.ts) is known (BUG #9: losing it here let a crafted
+    // item launder its provenance through the World Market, reopening the
+    // disenchant anti-farming gate, professions/enchanting.ts
+    // isCraftedDisenchantVictim). The always-skip predicate is defence in
+    // depth on top of the countFungibleItem gate above: the market stays
+    // fungible-only (#1165), never touching an instanced or bound copy.
+    // A single sell request can legitimately span two provenance buckets: some
+    // content ships the same item id both crafted and drop-sourced
+    // (recipes.ts: boundstone_helm, gravewyrm_gauntlets), so this groups the
+    // removed units by marker and lists each bucket as its own row rather than
+    // merging them, keeping every listing's craftedRecipeId exact for every
+    // unit in it. The ask splits proportionally by bucket size (remainder on
+    // the last bucket) so the rows this call creates always sum to `ask`
+    // exactly; in the ordinary single-bucket case that is just `ask` on the
+    // one row, unchanged from before.
+    const units = removeVendorSellUnits(this.ctx, itemId, want, meta.entityId, () => true);
+    const byRecipe = new Map<string | undefined, number>();
+    for (const unit of units) {
+      byRecipe.set(unit.craftedRecipeId, (byRecipe.get(unit.craftedRecipeId) ?? 0) + 1);
+    }
+    const buckets = [...byRecipe.entries()];
+    let priceLeft = ask;
+    buckets.forEach(([craftedRecipeId, bucketCount], i) => {
+      const bucketPrice =
+        i === buckets.length - 1 ? priceLeft : Math.floor((ask * bucketCount) / want);
+      priceLeft -= bucketPrice;
+      this.marketListings.push({
+        id: this.nextListingId++,
+        sellerKey,
+        sellerName: meta.name,
+        itemId,
+        count: bucketCount,
+        price: bucketPrice,
+        expiresAt: this.ctx.time + MARKET_LISTING_DURATION,
+        house: false,
+        ...(craftedRecipeId === undefined ? {} : { craftedRecipeId }),
+      });
     });
     this.ctx.emit({
       type: 'loot',
@@ -475,7 +515,14 @@ export class Market {
       return;
     }
     meta.copper -= listing.price;
-    grantCopies(this.ctx, meta.entityId, listing.itemId, listing.count, listing.instance);
+    grantCopies(
+      this.ctx,
+      meta.entityId,
+      listing.itemId,
+      listing.count,
+      listing.instance,
+      listing.craftedRecipeId,
+    );
     if (!listing.house) {
       const proceeds = Math.max(0, Math.floor(listing.price * (1 - MARKET_CUT)));
       this.collectionFor(listing.sellerKey).copper += proceeds;
@@ -526,7 +573,14 @@ export class Market {
       return;
     }
     this.marketListings.splice(idx, 1);
-    grantCopies(this.ctx, meta.entityId, listing.itemId, listing.count, listing.instance);
+    grantCopies(
+      this.ctx,
+      meta.entityId,
+      listing.itemId,
+      listing.count,
+      listing.instance,
+      listing.craftedRecipeId,
+    );
     const def = ITEMS[listing.itemId];
     this.ctx.emit({
       type: 'loot',
@@ -568,7 +622,7 @@ export class Market {
     const kept: typeof col.items = [];
     for (const s of col.items) {
       if (canGrantCopies(meta.inventory, bagCapacity(meta.bags), s.itemId, s.count, s.instance)) {
-        grantCopies(this.ctx, meta.entityId, s.itemId, s.count, s.instance);
+        grantCopies(this.ctx, meta.entityId, s.itemId, s.count, s.instance, s.craftedRecipeId);
       } else {
         kept.push(s);
       }
@@ -588,12 +642,14 @@ export class Market {
       const l = this.marketListings[i];
       if (l.house || this.ctx.time < l.expiresAt) continue;
       this.marketListings.splice(i, 1);
-      // Conditional spread: a plain row must not grow an `instance: undefined`
-      // key (rows are persisted and diffed byte-for-byte).
+      // Conditional spread: a plain row must not grow an `instance: undefined`/
+      // `craftedRecipeId: undefined` key (rows are persisted and diffed
+      // byte-for-byte). instance and craftedRecipeId are mutually exclusive.
       this.collectionFor(l.sellerKey).items.push({
         itemId: l.itemId,
         count: l.count,
         ...(l.instance ? { instance: l.instance } : {}),
+        ...(l.craftedRecipeId === undefined ? {} : { craftedRecipeId: l.craftedRecipeId }),
       });
       const sellerMeta = this.metaByMarketSellerKey(l.sellerKey);
       if (sellerMeta) {
@@ -719,6 +775,7 @@ export class Market {
           // Deep-cloned (never spread): the save must not alias the live book's
           // mutable rolled/charges maps. Conditional so plain rows are unchanged.
           ...(l.instance ? { instance: cloneItemInstancePayload(l.instance) } : {}),
+          ...(l.craftedRecipeId === undefined ? {} : { craftedRecipeId: l.craftedRecipeId }),
         })),
       collections: [...this.marketCollections.entries()].map(([key, c]) => ({
         key,
@@ -785,6 +842,7 @@ export class Market {
           (Number.isFinite(l.secondsLeft) ? Math.max(0, l.secondsLeft) : MARKET_LISTING_DURATION),
         house: false,
         ...(instance ? { instance } : {}),
+        ...(typeof l.craftedRecipeId === 'string' ? { craftedRecipeId: l.craftedRecipeId } : {}),
       });
     }
     for (const c of save.collections ?? []) {
@@ -798,7 +856,12 @@ export class Market {
         // its count to the identical-payload merge cap (the character-load rule).
         items: (c.items ?? [])
           .filter((s) => s && typeof s.itemId === 'string')
-          .map((s) => sanitizeEscrowSlot(s, instancedCountCap(ITEMS[s.itemId], s.instance))),
+          .map((s) => ({
+            ...sanitizeEscrowSlot(s, instancedCountCap(ITEMS[s.itemId], s.instance)),
+            ...(typeof s.craftedRecipeId === 'string'
+              ? { craftedRecipeId: s.craftedRecipeId }
+              : {}),
+          })),
       });
     }
     this.nextListingId = plan.nextListingId;
@@ -831,6 +894,7 @@ export class Market {
         itemId: l.itemId,
         count: l.count,
         ...(l.instance ? { instance: l.instance } : {}),
+        ...(l.craftedRecipeId === undefined ? {} : { craftedRecipeId: l.craftedRecipeId }),
       });
     }
   }

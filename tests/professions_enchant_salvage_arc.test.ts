@@ -27,6 +27,7 @@ vi.mock('../server/db', () => ({
 import { type ClientSession, GameServer } from '../server/game';
 import { ClientWorld } from '../src/net/online';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
+import * as tradeMod from '../src/sim/social/trade';
 import type { Entity, InvSlot, PlayerClass, SimEvent } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
@@ -249,6 +250,19 @@ function moveToVendor(sim: Sim): void {
   player.prevPos = { ...player.pos };
 }
 
+// The World Market's Merchant NPC (market.ts nearMerchant), distinct from
+// trader_wilkes above (vendor buyback only, never market: true).
+function moveToMerchant(sim: Sim, pid: number): void {
+  const merchant = [...sim.ctx.entities.values()].find((e) => e.templateId === 'the_merchant');
+  if (!merchant) throw new Error('missing the_merchant');
+  const player = sim.ctx.entities.get(pid);
+  if (!player) throw new Error(`missing player ${pid}`);
+  player.pos.x = merchant.pos.x + 2;
+  player.pos.z = merchant.pos.z;
+  player.pos.y = terrainHeight(player.pos.x, player.pos.z, sim.cfg.seed);
+  player.prevPos = { ...player.pos };
+}
+
 describe('offline Sim end-to-end (IWorld surface)', () => {
   it('crafted Eastbrook Chainmail Vest stacks yield materials but never teach Enchanting', () => {
     const sim = new Sim({ seed: 20260726, playerClass: 'warrior', autoEquip: false });
@@ -361,6 +375,121 @@ describe('offline Sim end-to-end (IWorld surface)', () => {
     expect(sim.countItem(DUST, pid)).toBeGreaterThan(dustBefore);
     expect(sim.countItem(CRAFTED_COMMON_ARMOR, pid)).toBe(0);
     expect(meta.craftSkills.enchanting).toBe(0);
+  });
+
+  // BUG #9: the same craftedRecipeId marker used to have no equivalent on
+  // PendingGrant (social/trade.ts), so a plain crafted stack re-granted to the
+  // trade recipient with no marker at all, laundering its provenance and
+  // letting the recipient disenchant it for full Enchanting skill.
+  it('crafted Eastbrook Chainmail Vest keeps provenance across a player trade before disenchant', () => {
+    const sim = new Sim({
+      seed: 20260731,
+      playerClass: 'warrior',
+      autoEquip: false,
+      noPlayer: true,
+    });
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('warrior', 'Buyer');
+    const sellerEntity = sim.ctx.entities.get(seller);
+    const buyerEntity = sim.ctx.entities.get(buyer);
+    if (!sellerEntity || !buyerEntity) throw new Error('missing trade entities');
+    buyerEntity.pos.x = sellerEntity.pos.x + 2;
+    buyerEntity.pos.z = sellerEntity.pos.z;
+
+    grantVestMaterials(sim, seller);
+    sim.craftItem(CRAFTED_COMMON_ARMOR_RECIPE, false, seller);
+    expect(metaFor(sim, seller).lastCraftResult?.ok).toBe(true);
+    expect(craftedVestSlotIndex(sim, seller)).toBeGreaterThanOrEqual(0);
+
+    tradeMod.tradeRequest(sim.ctx, buyer, seller);
+    tradeMod.tradeAccept(sim.ctx, buyer);
+    tradeMod.tradeSetOffer(sim.ctx, [{ itemId: CRAFTED_COMMON_ARMOR, count: 1 }], 0, seller);
+    tradeMod.tradeConfirm(sim.ctx, seller);
+    tradeMod.tradeConfirm(sim.ctx, buyer);
+
+    expect(sim.countItem(CRAFTED_COMMON_ARMOR, seller)).toBe(0);
+    expect(sim.countItem(CRAFTED_COMMON_ARMOR, buyer)).toBe(1);
+    const buyerSlotIndex = craftedVestSlotIndex(sim, buyer);
+    expect(buyerSlotIndex).toBeGreaterThanOrEqual(0);
+
+    sim.disenchantItem(CRAFTED_COMMON_ARMOR, buyer, buyerSlotIndex);
+    expect(sim.lastDisenchantResultFor(buyer)?.ok).toBe(true);
+    expect(metaFor(sim, buyer).craftSkills.enchanting).toBe(0);
+  });
+
+  // BUG #9's other half: MarketListing had no craftedRecipeId field either, so a
+  // crafted stack bought off the World Market re-granted to the buyer bare,
+  // with the same skill-farming consequence.
+  it('crafted Eastbrook Chainmail Vest keeps provenance across a World Market sale before disenchant', () => {
+    const sim = new Sim({
+      seed: 20260732,
+      playerClass: 'warrior',
+      autoEquip: false,
+      noPlayer: true,
+    });
+    const seller = sim.addPlayer('warrior', 'Seller');
+    const buyer = sim.addPlayer('warrior', 'Buyer');
+    moveToMerchant(sim, seller);
+    moveToMerchant(sim, buyer);
+    metaFor(sim, buyer).copper = 1000;
+
+    grantVestMaterials(sim, seller);
+    sim.craftItem(CRAFTED_COMMON_ARMOR_RECIPE, false, seller);
+    expect(metaFor(sim, seller).lastCraftResult?.ok).toBe(true);
+    expect(craftedVestSlotIndex(sim, seller)).toBeGreaterThanOrEqual(0);
+
+    sim.marketList(CRAFTED_COMMON_ARMOR, 1, 100, seller);
+    expect(sim.countItem(CRAFTED_COMMON_ARMOR, seller)).toBe(0);
+    const listing = sim.marketListings.find((l) => l.itemId === CRAFTED_COMMON_ARMOR && !l.house);
+    expect(listing).toBeDefined();
+    expect(listing?.craftedRecipeId).toBe(CRAFTED_COMMON_ARMOR_RECIPE);
+
+    sim.marketBuy(listing!.id, buyer);
+    expect(sim.countItem(CRAFTED_COMMON_ARMOR, buyer)).toBe(1);
+    const buyerSlotIndex = craftedVestSlotIndex(sim, buyer);
+    expect(buyerSlotIndex).toBeGreaterThanOrEqual(0);
+
+    sim.disenchantItem(CRAFTED_COMMON_ARMOR, buyer, buyerSlotIndex);
+    expect(sim.lastDisenchantResultFor(buyer)?.ok).toBe(true);
+    expect(metaFor(sim, buyer).craftSkills.enchanting).toBe(0);
+  });
+
+  // BUG #9 edge case the fix must not reopen: some items are BOTH craftable and
+  // drop-sourced (recipes.ts: boundstone_helm off two dungeon bosses), so a
+  // seller can hold a crafted stack and a plain (dropped) stack of the same
+  // item id at once. Listing both together must split into two listings, one
+  // per provenance, rather than merging the crafted units into a marker-free
+  // listing (which would silently launder them the same way BUG #9 did).
+  it('a sell request spanning two provenance buckets splits into two listings, prices summing to the ask', () => {
+    const sim = new Sim({
+      seed: 20260734,
+      playerClass: 'warrior',
+      autoEquip: false,
+      noPlayer: true,
+    });
+    const seller = sim.addPlayer('warrior', 'Seller');
+    moveToMerchant(sim, seller);
+    const meta = metaFor(sim, seller);
+    const BOUNDSTONE_HELM = 'boundstone_helm';
+    const BOUNDSTONE_HELM_RECIPE = 'recipe_ironbound_warplate_helm';
+    meta.inventory.push({ itemId: BOUNDSTONE_HELM, count: 1 }); // dungeon-dropped, no marker
+    meta.inventory.push({
+      itemId: BOUNDSTONE_HELM,
+      count: 1,
+      craftedRecipeId: BOUNDSTONE_HELM_RECIPE,
+    });
+
+    sim.marketList(BOUNDSTONE_HELM, 2, 101, seller);
+    expect(sim.countItem(BOUNDSTONE_HELM, seller)).toBe(0);
+    const listings = sim.marketListings.filter((l) => l.itemId === BOUNDSTONE_HELM && !l.house);
+    expect(listings).toHaveLength(2);
+    const plain = listings.find((l) => l.craftedRecipeId === undefined);
+    const crafted = listings.find((l) => l.craftedRecipeId === BOUNDSTONE_HELM_RECIPE);
+    expect(plain?.count).toBe(1);
+    expect(crafted?.count).toBe(1);
+    // No copper minted or lost by the split: the two rows' prices sum to the
+    // exact ask the seller named for the whole batch.
+    expect((plain?.price ?? 0) + (crafted?.price ?? 0)).toBe(101);
   });
 
   it('a non-crafted eligible item still gains Enchanting skill when disenchanted', () => {

@@ -17,16 +17,25 @@ function makeTradeCtx() {
   const tradeInvites = new Map<number, { fromPid: number; expires: number }>();
   const partyInvites = new Map<number, { fromPid: number; expires: number }>();
   const duelInvites = new Map<number, { fromPid: number; expires: number }>();
-  const bags = new Map<number, Map<string, number>>();
   const events: any[] = [];
   let time = 0;
+  // A thin Map-like view over the player's real `inventory` array (the
+  // PlayerMeta shape), not a second, independent store: trade.ts's removal
+  // path (removeVendorSellUnits, BUG #9) walks meta.inventory directly to
+  // track each removed unit's craftedRecipeId marker, so this fake ctx has
+  // to keep the SAME one source of truth a real Sim does, or the walk finds
+  // nothing to remove. One plain (non-instanced) slot per itemId is enough
+  // for this fake's documented simplification: every held copy is fungible.
   const bag = (pid: number) => {
-    let b = bags.get(pid);
-    if (!b) {
-      b = new Map();
-      bags.set(pid, b);
-    }
-    return b;
+    const inv: { itemId: string; count: number }[] = players.get(pid)!.inventory;
+    return {
+      get: (itemId: string): number | undefined => inv.find((s) => s.itemId === itemId)?.count,
+      set: (itemId: string, count: number): void => {
+        const slot = inv.find((s) => s.itemId === itemId);
+        if (slot) slot.count = count;
+        else inv.push({ itemId, count });
+      },
+    };
   };
   const ctx = {
     get time() {
