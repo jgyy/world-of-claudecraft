@@ -80,10 +80,13 @@ export interface MoveResult {
  *    mergeable dest stack with room and otherwise land in a fresh deep-cloned
  *    dest slot (countFit/addStacked carry the payload), refusing 'no_fit' only
  *    when the whole count cannot land.
- *  - A fungible slot reuses the bags.ts stacking rules (countFit/addStacked): the
- *    move fits only when every requested copy fits, then tops up dest stacks and
- *    appends fresh ones. A partial count decrements the source; a whole-stack move
- *    splices the source entry out. */
+ *  - A fungible slot reuses the bags.ts stacking rules (countFit/addStacked),
+ *    threading slot.craftedRecipeId through both calls so a plain crafted stack
+ *    (InvSlot.craftedRecipeId, no `instance`) keeps its provenance marker and
+ *    only merges with a same-recipe dest stack: the move fits only when every
+ *    requested copy fits, then tops up dest stacks and appends fresh ones. A
+ *    partial count decrements the source; a whole-stack move splices the
+ *    source entry out. */
 export function moveBetweenContainers(
   source: InvSlot[],
   sourceIndex: number,
@@ -110,10 +113,10 @@ export function moveBetweenContainers(
 
   const want = count === undefined ? slot.count : Math.floor(count);
   if (!(want > 0) || want > slot.count) return { moved: 0, refusal: 'invalid' };
-  if (countFit(dest, destCapacity, slot.itemId, want) < want) {
+  if (countFit(dest, destCapacity, slot.itemId, want, undefined, slot.craftedRecipeId) < want) {
     return { moved: 0, refusal: 'no_fit' };
   }
-  addStacked(dest, slot.itemId, want);
+  addStacked(dest, slot.itemId, want, undefined, slot.craftedRecipeId);
   if (want >= slot.count) source.splice(sourceIndex, 1);
   else slot.count -= want;
   return { moved: want };
