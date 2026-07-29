@@ -292,6 +292,7 @@ import { gatherToolNoNodeKey } from './ui/gathering_view';
 import { loadHighscoresInto } from './ui/highscore_board';
 import { type ClaudiumHooks, Hud } from './ui/hud';
 import { resolveActionBarVisibility } from './ui/hud/action_bar/action_bar_visibility_core';
+import { anchorChatInputToWrap } from './ui/hud/chat/chat_input_anchor';
 import { autosizeChatInput } from './ui/hud/chat/chat_input_autosize';
 import { wireSkinPicker } from './ui/hud/cosmetics/skin_picker';
 import {
@@ -1404,16 +1405,17 @@ async function startGame(
       borderY,
     );
   };
-  // Re-anchor the bar just above the (possibly moved / resized / tab-wrapped)
-  // chat box so it never overlaps it. Mobile keeps its own CSS placement.
+  // Re-anchor the bar just above the (possibly moved / resized / tab-wrapped /
+  // narrowed) chat box so it never overlaps or overhangs it. Mobile keeps its
+  // own CSS placement. #chatlog-wrap's width is responsive (narrower than its
+  // 370px cap under 1400px viewports), so left/width are re-measured from its
+  // rect on every pass too, not just bottom (issue #1365).
   const CHAT_INPUT_GAP = 6;
   const anchorChatInput = (): void => {
     if (document.body.classList.contains('mobile-touch')) return;
     const wrap = document.getElementById('chatlog-wrap');
     if (!wrap) return;
-    const rect = wrap.getBoundingClientRect();
-    if (rect.height <= 0) return;
-    chatInput.style.bottom = `${Math.round(window.innerHeight - rect.top + CHAT_INPUT_GAP)}px`;
+    anchorChatInputToWrap(chatInput, wrap, window.innerHeight, CHAT_INPUT_GAP);
   };
   const recoverFromMobileKeyboard = (): void => {
     document.body.classList.remove('mobile-chat-open');
