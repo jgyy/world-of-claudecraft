@@ -313,8 +313,3 @@ export async function chatModeratedAccounts(limit = 200): Promise<ChatModeratedA
     chatMutedUntil: r.chat_muted_until ? new Date(r.chat_muted_until).toISOString() : null,
   }));
 }
-
-export async function resetChatStrikes(accountId: number): Promise<boolean> {
-  const res = await pool.query(`UPDATE accounts SET chat_strikes = 0 WHERE id = $1`, [accountId]);
-  return (res.rowCount ?? 0) > 0;
-}
