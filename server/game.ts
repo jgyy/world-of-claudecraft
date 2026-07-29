@@ -52,6 +52,7 @@ import {
 } from '../src/sim/party_frame_info';
 import type { PetState, PlayerMeta } from '../src/sim/sim';
 import { MAX_CHAT_MESSAGE_LEN, Sim } from '../src/sim/sim';
+import { RAID_MAX } from '../src/sim/social/party';
 import type { VcMatch } from '../src/sim/social/vale_cup';
 import {
   parseTalentAllocation,
@@ -4610,6 +4611,17 @@ export class GameServer {
           typeof msg.rollId === 'number' &&
           Array.isArray(msg.pids) &&
           msg.pids.length > 0 &&
+          // A curate-phase roll's candidates are the tapping group's loot-eligible
+          // members, so a full raid roster is the most an honest client can check
+          // (#2524). Over cap the frame is rejected outright, the way the other
+          // capped cases here reject theirs, rather than truncated to a selection
+          // the master looter never made. Tested BEFORE the element scan so the
+          // per-element work is bounded too; the Sim re-validates every pid.
+          // Never tighten this below the honest ceiling: the reject path is
+          // silent, so a cap a real roster can exceed would not fail visibly, it
+          // would livelock the looter against the #2526 regrace (the row clears,
+          // returns after the grace, and re-sending is dropped again).
+          msg.pids.length <= RAID_MAX &&
           msg.pids.every((p: unknown) => typeof p === 'number')
         )
           sim.assignMasterLoot(msg.rollId, msg.pids, pid);
@@ -5983,6 +5995,14 @@ export class GameServer {
     // so every party member's roll frame shows the live vote strip and stays up
     // after they answer. Per-tick for the same reason as lroll.
     maybe('lrollg', this.sim.lootRollGroupStatus(anchorSession.pid));
+    // curate-phase master-loot assignments this player is the MASTER LOOTER of,
+    // so a refused assignment (the sim leaves the roll open) or a missed
+    // masterLoot event can restore the prompt inside the 300s window instead of
+    // stranding the looter (#2526). Empty for every non-looter, so after the first
+    // snapshot of a session (which carries `"mloot":[]`, as every registered key
+    // does while lastSent is empty) the key delta-elides away for them. Per-tick
+    // like lroll, and like lroll it costs one pendingLootRolls scan per session.
+    maybe('mloot', this.sim.activeMasterLootRolls(anchorSession.pid));
     maybe('drun', this.sim.delveRunWire(anchorSession.pid));
     maybe('dcompanion', this.sim.delveCompanionWire(anchorSession.pid));
     maybe('dmarks', this.sim.delveMarksFor(anchorSession.pid));
