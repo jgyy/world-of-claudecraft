@@ -481,12 +481,16 @@ export function dealDamage(
     }
   }
 
-  // duels end at 1 hp, nobody dies
+  // duels end at 1 hp, nobody dies. A duel that already ended earlier THIS
+  // SAME tick (endDuel defers the ctx.duels delete to tick-tail, see
+  // social/duel.ts) still matches here on purpose: a reciprocal lethal hit
+  // against the other duelist, resolving later in the same tick, must be
+  // clamped too instead of producing a real death on a simultaneous double-kill.
   const duel = target.kind === 'player' ? ctx.duels.get(target.id) : undefined;
   if (
     guardianWardRestore === 0 &&
     duel &&
-    duel.state === 'active' &&
+    (duel.state === 'active' || duel.endedTick === ctx.tickCount) &&
     sourcePlayer &&
     (sourcePlayer.id === duel.a || sourcePlayer.id === duel.b)
   ) {
