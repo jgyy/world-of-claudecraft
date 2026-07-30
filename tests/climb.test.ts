@@ -52,6 +52,24 @@ function findFlatSpot(): { x: number; z: number } {
 }
 
 const SPOT = findFlatSpot();
+
+// Stricter than findFlatSpot: an interior spot with a near-zero terrain grade,
+// for the one test below that reads an exact overhead value (not just whether
+// a collider is present) off a wide (dz -3..5) probe span.
+function findLevelSpot(): { x: number; z: number } {
+  for (let x = -40; x <= 40; x += 3) {
+    for (let z = -40; z <= 40; z += 3) {
+      if (terrainHeight(x, z, SEED) < WATER_LEVEL + 2) continue;
+      let ok = true;
+      for (let dz = -3; dz <= 5 && ok; dz += 1) {
+        if (terrainSteepnessAt(x, z + dz, SEED) > 0.3) ok = false;
+        if (isBlocked(SEED, x, z + dz, 2.2)) ok = false;
+      }
+      if (ok) return { x, z };
+    }
+  }
+  throw new Error('no level spot');
+}
 const q = (over: Partial<Parameters<typeof findLedgeGrab>[0]> = {}) => ({
   seed: SEED,
   radius: R,
@@ -235,16 +253,23 @@ describe('the climb move', () => {
     // be forced into the scripted climb. Probe a point partway up the stall
     // canopy's pitched gable, well short of its 2.54 ridge, so the overhead
     // above the floor lands inside vault reach.
-    const sz = SPOT.z + 2.2;
-    setActiveWorldContent(world({ stalls: [{ x: SPOT.x, z: sz, rot: 0, r: 1.7 }] }));
+    //
+    // The shared SPOT fixture (used everywhere else in this file, where only
+    // "flat enough to be collider-free" matters) can resolve to a spot with a
+    // subtle residual terrain grade that this probe is sensitive to (it reads
+    // an exact overhead value, not just presence/absence of a collider), so
+    // this one test finds its own interior, near-zero-grade spot instead.
+    const spot = findLevelSpot();
+    const sz = spot.z + 2.2;
+    setActiveWorldContent(world({ stalls: [{ x: spot.x, z: sz, rot: 0, r: 1.7 }] }));
     const bodyZ = sz - 0.6 - (R + 0.5);
-    const startY = groundHeight(SPOT.x, bodyZ, SEED) + 0.6;
-    const grab = findLedgeGrab(q(), SPOT.x, startY, bodyZ);
+    const startY = groundHeight(spot.x, bodyZ, SEED) + 0.6;
+    const grab = findLedgeGrab(q(), spot.x, startY, bodyZ);
     expect(grab).not.toBeNull();
     if (!grab) return;
     const floorY = Math.max(
-      groundHeight(SPOT.x, bodyZ, SEED),
-      supportHeightAt(SEED, SPOT.x, bodyZ, R, startY + 1e-3),
+      groundHeight(spot.x, bodyZ, SEED),
+      supportHeightAt(SEED, spot.x, bodyZ, R, startY + 1e-3),
     );
     const overhead = grab.topY - floorY;
     const apex = (JUMP_VELOCITY * JUMP_VELOCITY) / (2 * GRAVITY);
@@ -253,7 +278,7 @@ describe('the climb move', () => {
     expect(overhead).toBeLessThan(apex + MANTLE_REACH);
     expect(overhead).toBeGreaterThan(1); // clear of the step/vault floor too
 
-    const p = makeBody(SPOT.x, startY, bodyZ);
+    const p = makeBody(spot.x, startY, bodyZ);
     expect(tryStartClimb(p, SEED)).toBe(false);
     expect(p.climb).toBeNull();
   });
