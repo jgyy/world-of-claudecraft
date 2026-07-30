@@ -78,6 +78,7 @@ import {
 } from './chronomancy';
 import { extendOwnedDot } from './dot_mutation';
 import {
+  consumeAuraKind,
   consumeFreeCostFor,
   consumeNextAttackCrit,
   consumeNextCastCheap,
@@ -1695,6 +1696,15 @@ function applyAbility(
         : Math.min(p.resource, ability.spendResourceCap);
     res = { ...res, cost: spend };
   }
+
+  // The cast is committed from this point on (target resolved, cost payable):
+  // consume the gating aura (Glacial Spike's full Icicles stack, Victory Rush's
+  // kill window) HERE, atomically with the cost/cooldown billing below, rather
+  // than inside runEffects. A ranged ability's runEffects can run ticks later,
+  // once its projectile lands (projectile_travel.ts); leaving the consume there
+  // left the Icicles aura alive for a second castAbility press made in that
+  // window, wrongly accepting a duplicate cast off the same stack (issue #2632).
+  if (ability.requiresAuraKind) consumeAuraKind(ctx, p, ability.requiresAuraKind);
 
   // helpful spells never miss
   if (
