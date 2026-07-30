@@ -580,6 +580,14 @@ describe('Sim loadouts and stable hot-path bake', () => {
     expect(sim.loadouts).toHaveLength(0);
   });
 
+  it('rejects an empty-named save without committing the submitted talent allocation', () => {
+    const sim = warriorAtCap();
+    const before = cloneAllocation(sim.talents);
+    expect(sim.saveLoadout('   ', [], allocation('arms', { 5: 'war_row_double_charge' }))).toBe(-1);
+    expect(sim.loadouts).toHaveLength(0);
+    expect(sim.talents).toEqual(before);
+  });
+
   it('repairs an untrusted next loadout before auto-applying it on deletion', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warrior' });
     sim.setPlayerLevel(8);
