@@ -3725,7 +3725,8 @@ export class Hud {
   });
   // Overworld world-map painter (the delve branch stays with delvePainter). Owns
   // the cached current-zone decorations; redraws from the mediumHud band while open.
-  private readonly mapPainter = new MapWindowPainter();
+  // classCss colors party member dots the same way it colors the minimap/delve ones.
+  private readonly mapPainter = new MapWindowPainter(classCss);
   // Continent overview painter (the world map's "zoom out to the whole world"
   // level). Loads the painted world_overview plate once; redraws from the
   // mediumHud band like the per-zone map.
