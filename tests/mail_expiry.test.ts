@@ -366,7 +366,7 @@ describe('a full sender mailbox', () => {
 });
 
 describe('a full-bags player parcel keeps its real deadline', () => {
-  it('does not pause the attachment clock: an old sentAt is still eligible for return-to-sender', () => {
+  it('does not pause the attachment clock: an elapsed expiresAt is still eligible for return-to-sender', () => {
     // Regression pin: a comment on the mailTake bags-full branch used to claim
     // the expiry clock stays paused (Infinity) whenever a letter is kept for
     // lack of room, but that is only true for system/npc mail. A player
@@ -395,8 +395,8 @@ describe('a full-bags player parcel keeps its real deadline', () => {
     // branch, unlike system/npc mail.
     expect(Number.isFinite(raw.expiresAt)).toBe(true);
 
-    // An old sentAt (the real deadline already elapsed) is still swept into
-    // the return-to-sender flight, exactly as any other unclaimed parcel.
+    // An elapsed expiresAt (the real deadline already reached) is still swept
+    // into the return-to-sender flight, exactly as any other unclaimed parcel.
     raw.expiresAt = sim.time;
     tickFor(sim, 2);
     expect(raw.returned).toBe(true);
