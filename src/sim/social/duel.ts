@@ -30,7 +30,7 @@ export function duelRequest(ctx: SimContext, targetPid: number, pid?: number): v
     ctx.error(r.meta.entityId, 'You cannot duel in Nythraxis Raid Arena.');
     return;
   }
-  if (ctx.duels.has(r.meta.entityId) || ctx.duels.has(targetPid)) {
+  if (duelFor(ctx, r.meta.entityId) || duelFor(ctx, targetPid)) {
     ctx.error(r.meta.entityId, 'A duel is already in progress.');
     return;
   }
@@ -77,7 +77,7 @@ export function duelAccept(ctx: SimContext, pid?: number): void {
     ctx.error(r.meta.entityId, 'You cannot duel in Nythraxis Raid Arena.');
     return;
   }
-  if (ctx.duels.has(invite.fromPid) || ctx.duels.has(r.meta.entityId)) {
+  if (duelFor(ctx, invite.fromPid) || duelFor(ctx, r.meta.entityId)) {
     ctx.error(r.meta.entityId, 'A duel is already in progress.');
     return;
   }
