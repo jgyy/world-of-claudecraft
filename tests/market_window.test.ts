@@ -374,19 +374,59 @@ describe('market_window: reconnect resync (#2416)', () => {
   // controls live in the client and survive the drop untouched. onReconnected must
   // detect that drift off the echoed query, not blindly re-push on every reconnect
   // (an ordinary resume keeps the same session, so nothing changed to re-send).
-  it('exists, is a no-op when closed or the echo still matches, and re-pushes only on real drift', () => {
+  // onReconnected() fires synchronously inside the client's `hello` handler,
+  // before the resent world's first snapshot has decoded: at that instant
+  // marketInfo (if present at all) is still the pre-drop echo, which by
+  // construction matches currentQuery(), so comparing right there would never
+  // detect the fresh-join reset. It arms a flag instead; the drift check runs
+  // later, once refreshIfChanged() actually observes a MarketInfo.
+  it('is a no-op when closed, otherwise only arms the deferred resync flag', () => {
     const method = painter.slice(
       painter.indexOf('onReconnected(): void {'),
-      painter.indexOf('// Per-frame (slow divider)'),
+      painter.indexOf('// Runs the deferred reconnect-drift check'),
     );
     expect(method, 'onReconnected must exist').toContain('onReconnected(): void {');
     expect(method).toContain('if (!this.opened) return;');
-    expect(method).toContain('queryDiffersFromEcho(this.currentQuery(), info)');
+    expect(method).toContain('this.pendingReconnectResync = true;');
+    expect(method, 'must not compare against a possibly-stale echo inline').not.toContain(
+      'queryDiffersFromEcho',
+    );
+  });
+
+  it('resolvePendingReconnectResync compares both filter axes and the settled search box, and re-pushes only on real drift', () => {
+    const method = painter.slice(
+      painter.indexOf('private resolvePendingReconnectResync'),
+      painter.indexOf('refreshIfChanged(): void {'),
+    );
+    expect(method, 'resolvePendingReconnectResync must exist').toContain(
+      'resolvePendingReconnectResync',
+    );
+    expect(method).toContain('if (!this.pendingReconnectResync || !info) return;');
+    expect(method).toContain('this.pendingReconnectResync = false;');
+    expect(method).toContain('queryDiffersFromEcho(query, info)');
+    expect(method).toContain('searchDiffersFromEcho(query, info)');
     expect(method).toContain('this.pushQuery();');
   });
 
-  it('imports queryDiffersFromEcho from the world_api seam (the pure drift check, not a re-derived comparison)', () => {
-    expect(painter).toContain("import { type IWorld, queryDiffersFromEcho } from '../world_api';");
+  it('refreshIfChanged resolves the pending resync even on the Sell tab (before the sell-tab early return)', () => {
+    const method = painter.slice(
+      painter.indexOf('refreshIfChanged(): void {'),
+      painter.indexOf('render(): void {'),
+    );
+    const resolveIdx = method.indexOf('this.resolvePendingReconnectResync(info);');
+    const sellReturnIdx = method.indexOf("if (this.tab === 'sell') return;");
+    expect(resolveIdx, 'must call resolvePendingReconnectResync').toBeGreaterThan(-1);
+    expect(
+      sellReturnIdx,
+      'must still early-return before the browse/collect signature work',
+    ).toBeGreaterThan(-1);
+    expect(resolveIdx).toBeLessThan(sellReturnIdx);
+  });
+
+  it('imports queryDiffersFromEcho and searchDiffersFromEcho from the world_api seam (the pure drift checks, not re-derived comparisons)', () => {
+    expect(painter).toContain(
+      "import {\n  type IWorld,\n  type MarketInfo,\n  queryDiffersFromEcho,\n  searchDiffersFromEcho,\n} from '../world_api';",
+    );
   });
 
   it('wires the window through a hud.ts method, chained onto the ClientWorld reconnect hook in main.ts', () => {

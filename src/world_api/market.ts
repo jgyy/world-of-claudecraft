@@ -85,3 +85,18 @@ export function queryDiffersFromEcho(query: MarketQuery, info: MarketInfo): bool
     query.rarity !== info.rarity
   );
 }
+
+// True when a settled search box no longer matches what the server actually
+// applied. Deliberately NOT folded into queryDiffersFromEcho above: that
+// check runs on every filter-button click (including mid-typed-in searches),
+// where `filter` is not a safe comparison because it is not sanitized the
+// same way `search` is on the client side as the player types. This one is
+// reconnect-only (MarketWindow.onReconnected, once the socket is settled and
+// no keystroke is in flight), where the stored server-side query is exactly
+// `search.slice(0, MARKET_SEARCH_MAX_LEN)` (sanitizeMarketQuery in
+// src/sim/market_query.ts) and so is directly comparable to the echo.
+export const MARKET_SEARCH_MAX_LEN = 40;
+
+export function searchDiffersFromEcho(query: MarketQuery, info: MarketInfo): boolean {
+  return info.filter !== query.search.slice(0, MARKET_SEARCH_MAX_LEN);
+}
