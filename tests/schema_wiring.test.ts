@@ -535,7 +535,31 @@ describe('ensureSchema wires every schema module at boot', () => {
       'daily_reward_events_account_day_created_id',
       'play_sessions_open_character',
       'client_perf_reports_worst10s_created',
+      'email_log_sent',
     ]);
+  });
+
+  it('applies the retention age indexes for password_reset_requests, email_change_requests, and email_log', async () => {
+    // password_reset_requests and email_change_requests are small per-account
+    // tables, so their age indexes ride inline boot DDL like their sibling
+    // retention indexes above. email_log ships with no pruning story before
+    // this change, so on the first deploy it is the biggest of the three;
+    // its age index rides the CONCURRENTLY seam instead (never boot DDL), so
+    // the build never holds the boot transaction's lock over a full scan.
+    // pruneEmailLogBatch/pruneEmailChangeRequestsBatch/prunePasswordResetRequestsBatch
+    // (server/db.ts) all claim to ride these via an oldest-first ORDER BY: pin
+    // them here so a dropped index leaves that comment lying rather than a red test.
+    await ensureSchema();
+    const applied = h.calls.join('\n');
+    expect(applied).toContain('CREATE INDEX IF NOT EXISTS password_reset_requests_created');
+    expect(applied).toContain('CREATE INDEX IF NOT EXISTS email_change_requests_created');
+    expect(applied).not.toContain('CREATE INDEX IF NOT EXISTS email_log_sent');
+    const emailLogIndex = CONCURRENT_INDEX_MIGRATIONS.find((m) => m.name === 'email_log_sent');
+    expect(emailLogIndex).toBeDefined();
+    expect(emailLogIndex?.createSql).toContain(
+      'CREATE INDEX CONCURRENTLY IF NOT EXISTS email_log_sent',
+    );
+    expect(emailLogIndex?.createSql).toContain('ON email_log(sent_at)');
   });
 
   it('applies the rate-limit schema idempotently (a second boot re-issues the same DDL)', async () => {

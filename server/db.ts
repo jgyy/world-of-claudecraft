@@ -423,8 +423,11 @@ CREATE TABLE IF NOT EXISTS email_log (
 );
 CREATE INDEX IF NOT EXISTS email_log_account ON email_log(account_id, sent_at DESC);
 -- email_log_account leads on account_id, so it cannot serve pruneEmailLogBatch's
--- account-agnostic age scan; this plain sent_at index is the one that does.
-CREATE INDEX IF NOT EXISTS email_log_sent ON email_log(sent_at);
+-- account-agnostic age scan. Before this PR nothing pruned email_log, so on
+-- the first deploy it is likely the largest of the three newly-swept tables;
+-- the age index therefore ships via the CONCURRENTLY seam (email_log_indexes.ts
+-- + concurrent_indexes.ts), NOT here, so its build never holds boot's
+-- transactional lock over a full-table scan.
 -- Optional TOTP two-factor auth. totp_secret holds the confirmed base32 secret
 -- (NULL until 2FA is fully enabled); totp_pending_secret holds a secret minted
 -- by setup but not yet confirmed with a live code, so a botched enrolment never
@@ -1967,6 +1970,16 @@ export async function consumePasswordResetRequest(
     client.release();
   }
 }
+
+// The email_log age index (ridden by pruneEmailLogBatch below). Defined in the
+// dependency-free email_log_indexes.ts (same reasoning as the client_perf
+// worst-10s index above: the registry evaluates before this module's body)
+// and re-exported here beside the table's accessors.
+export {
+  EMAIL_LOG_SENT_INDEX_SQL,
+  EMAIL_LOG_SENT_INVALID_INDEX_CHECK_SQL,
+  EMAIL_LOG_SENT_INVALID_INDEX_DROP_SQL,
+} from './email_log_indexes';
 
 export interface EmailLogEntry {
   accountId: number | null;
