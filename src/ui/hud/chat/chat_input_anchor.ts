@@ -41,7 +41,27 @@ export function computeChatInputAnchor(
 
 /** The structural slice of the chat input element this module writes to. */
 export interface ChatInputAnchorTarget {
-  style: { left: string; width: string; bottom: string };
+  style: {
+    left: string;
+    width: string;
+    bottom: string;
+    removeProperty(property: string): void;
+  };
+}
+
+// Undo a prior desktop anchor pass. The desktop anchor writes `left`/`width`/
+// `bottom` as inline styles, which win over any CSS rule without `!important`
+// (including the touch-HUD's own `#chat-input` placement rules in
+// hud.mobile.css). If the touch HUD activates mid-session (Interface Mode
+// switch, or narrowing below the touch threshold) after a desktop anchor pass
+// already ran, those stale inline styles pin the composer to its desktop
+// position/width inside the touch panel instead of letting the mobile CSS
+// place it. Call this from the mobile-touch early return so control reverts
+// to CSS the next time the touch layout applies.
+export function clearChatInputAnchor(chatInput: ChatInputAnchorTarget): void {
+  chatInput.style.removeProperty('left');
+  chatInput.style.removeProperty('width');
+  chatInput.style.removeProperty('bottom');
 }
 
 /** The structural slice of the chat log wrap element this module reads. */

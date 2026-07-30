@@ -3,6 +3,7 @@ import {
   anchorChatInputToWrap,
   type ChatInputAnchorTarget,
   type ChatInputAnchorWrap,
+  clearChatInputAnchor,
   computeChatInputAnchor,
 } from '../src/ui/hud/chat/chat_input_anchor';
 
@@ -41,7 +42,17 @@ describe('computeChatInputAnchor', () => {
 });
 
 function fakeChatInput(): ChatInputAnchorTarget {
-  return { style: { left: '', width: '', bottom: '' } };
+  const style = {
+    left: '',
+    width: '',
+    bottom: '',
+    removeProperty(property: string): void {
+      if (property === 'left') style.left = '';
+      else if (property === 'width') style.width = '';
+      else if (property === 'bottom') style.bottom = '';
+    },
+  };
+  return { style };
 }
 
 function fakeWrap(rect: { left: number; top: number; width: number; height: number }) {
@@ -84,6 +95,23 @@ describe('anchorChatInputToWrap', () => {
     expect(applied).toBe(false);
     expect(input.style.width).toBe('');
     expect(input.style.left).toBe('');
+    expect(input.style.bottom).toBe('');
+  });
+});
+
+describe('clearChatInputAnchor', () => {
+  it('removes a prior desktop anchor pass so touch CSS placement can take over', () => {
+    const input = fakeChatInput();
+    const wrap = fakeWrap({ left: 12, top: 502, width: 270, height: 206 });
+    anchorChatInputToWrap(input, wrap, 720, GAP);
+    expect(input.style.left).toBe('12px');
+    expect(input.style.width).toBe('270px');
+    expect(input.style.bottom).toBe('224px');
+
+    clearChatInputAnchor(input);
+
+    expect(input.style.left).toBe('');
+    expect(input.style.width).toBe('');
     expect(input.style.bottom).toBe('');
   });
 });

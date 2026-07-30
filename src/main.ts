@@ -292,7 +292,7 @@ import { gatherToolNoNodeKey } from './ui/gathering_view';
 import { loadHighscoresInto } from './ui/highscore_board';
 import { type ClaudiumHooks, Hud } from './ui/hud';
 import { resolveActionBarVisibility } from './ui/hud/action_bar/action_bar_visibility_core';
-import { anchorChatInputToWrap } from './ui/hud/chat/chat_input_anchor';
+import { anchorChatInputToWrap, clearChatInputAnchor } from './ui/hud/chat/chat_input_anchor';
 import { autosizeChatInput } from './ui/hud/chat/chat_input_autosize';
 import { wireSkinPicker } from './ui/hud/cosmetics/skin_picker';
 import {
@@ -1412,7 +1412,14 @@ async function startGame(
   // rect on every pass too, not just bottom (issue #1365).
   const CHAT_INPUT_GAP = 6;
   const anchorChatInput = (): void => {
-    if (document.body.classList.contains('mobile-touch')) return;
+    if (document.body.classList.contains('mobile-touch')) {
+      // A desktop anchor pass may have already stamped inline left/width/bottom
+      // before the touch HUD activated (Interface Mode switch, or narrowing below
+      // the touch threshold mid-session); clear them so the touch CSS placement
+      // rules in hud.mobile.css apply instead of the stale desktop position.
+      clearChatInputAnchor(chatInput);
+      return;
+    }
     const wrap = document.getElementById('chatlog-wrap');
     if (!wrap) return;
     anchorChatInputToWrap(chatInput, wrap, window.innerHeight, CHAT_INPUT_GAP);
