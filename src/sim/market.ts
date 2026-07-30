@@ -351,10 +351,41 @@ export class Market {
     // (recipes.ts: boundstone_helm, gravewyrm_gauntlets), so this groups the
     // removed units by marker and lists each bucket as its own row rather than
     // merging them, keeping every listing's craftedRecipeId exact for every
-    // unit in it. The ask splits proportionally by bucket size (remainder on
-    // the last bucket) so the rows this call creates always sum to `ask`
-    // exactly; in the ordinary single-bucket case that is just `ask` on the
-    // one row, unchanged from before.
+    // unit in it. The ask splits so every row gets at least MARKET_MIN_PRICE
+    // and the rows this call creates always sum to `ask` exactly; in the
+    // ordinary single-bucket case that is just `ask` on the one row, unchanged
+    // from before.
+    // Preview the bucket split BEFORE escrowing anything: the market only
+    // ever sells fungible (non-instanced) stock here (countFungibleItem
+    // gated `want` above), so this walks the same plain-slot,
+    // highest-index-first order removeVendorSellUnits uses, without
+    // mutating, purely to learn how many distinct craftedRecipeId buckets
+    // the removal will produce. Both the MARKET_MAX_LISTINGS and
+    // MARKET_MIN_PRICE-per-row invariants must hold for the split BEFORE any
+    // item leaves the seller's bag (#2605 review: a dual-provenance stack
+    // could otherwise push the seller over the listing cap, or price a
+    // bucket at 0 copper and hand the item away for free).
+    const previewByRecipe = new Map<string | undefined, number>();
+    let previewLeft = want;
+    for (let i = meta.inventory.length - 1; i >= 0 && previewLeft > 0; i--) {
+      const s = meta.inventory[i];
+      if (s.itemId !== itemId || s.instance) continue;
+      const take = Math.min(s.count, previewLeft);
+      previewByRecipe.set(s.craftedRecipeId, (previewByRecipe.get(s.craftedRecipeId) ?? 0) + take);
+      previewLeft -= take;
+    }
+    const bucketCountPreview = previewByRecipe.size;
+    if (mine + bucketCountPreview > MARKET_MAX_LISTINGS) {
+      this.ctx.error(
+        meta.entityId,
+        `You may keep at most ${MARKET_MAX_LISTINGS} goods on the market at once.`,
+      );
+      return;
+    }
+    if (ask < bucketCountPreview) {
+      this.ctx.error(meta.entityId, 'Name a price of at least 1 copper.');
+      return;
+    }
     const units = removeVendorSellUnits(this.ctx, itemId, want, meta.entityId, () => true);
     const byRecipe = new Map<string | undefined, number>();
     for (const unit of units) {
@@ -363,8 +394,17 @@ export class Market {
     const buckets = [...byRecipe.entries()];
     let priceLeft = ask;
     buckets.forEach(([craftedRecipeId, bucketCount], i) => {
+      const remainingBuckets = buckets.length - i;
       const bucketPrice =
-        i === buckets.length - 1 ? priceLeft : Math.floor((ask * bucketCount) / want);
+        i === buckets.length - 1
+          ? priceLeft
+          : Math.max(
+              MARKET_MIN_PRICE,
+              Math.min(
+                priceLeft - (remainingBuckets - 1) * MARKET_MIN_PRICE,
+                Math.floor((ask * bucketCount) / want),
+              ),
+            );
       priceLeft -= bucketPrice;
       this.marketListings.push({
         id: this.nextListingId++,

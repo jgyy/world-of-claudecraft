@@ -26,6 +26,7 @@ vi.mock('../server/db', () => ({
 
 import { type ClientSession, GameServer } from '../server/game';
 import { ClientWorld } from '../src/net/online';
+import { MARKET_MAX_LISTINGS } from '../src/sim/market';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
 import * as tradeMod from '../src/sim/social/trade';
 import type { Entity, InvSlot, PlayerClass, SimEvent } from '../src/sim/types';
@@ -490,6 +491,76 @@ describe('offline Sim end-to-end (IWorld surface)', () => {
     // No copper minted or lost by the split: the two rows' prices sum to the
     // exact ask the seller named for the whole batch.
     expect((plain?.price ?? 0) + (crafted?.price ?? 0)).toBe(101);
+  });
+
+  // Review follow-up on #2605: the provenance split must not reopen the two
+  // per-seller invariants marketList already enforced for a single-bucket
+  // listing. A dual-provenance stack turns one sell request into two rows,
+  // so both gates must account for the split BEFORE anything leaves the bag.
+  it('refuses a dual-provenance sell that would push the seller over MARKET_MAX_LISTINGS', () => {
+    const sim = new Sim({
+      seed: 20260735,
+      playerClass: 'warrior',
+      autoEquip: false,
+      noPlayer: true,
+    });
+    const seller = sim.addPlayer('warrior', 'Seller');
+    moveToMerchant(sim, seller);
+    const meta = metaFor(sim, seller);
+    const BOUNDSTONE_HELM = 'boundstone_helm';
+    const BOUNDSTONE_HELM_RECIPE = 'recipe_ironbound_warplate_helm';
+    meta.inventory.push({ itemId: BOUNDSTONE_HELM, count: 1 });
+    meta.inventory.push({
+      itemId: BOUNDSTONE_HELM,
+      count: 1,
+      craftedRecipeId: BOUNDSTONE_HELM_RECIPE,
+    });
+    // Fill the seller up to one below the cap with unrelated single-row listings.
+    for (let i = 0; i < MARKET_MAX_LISTINGS - 1; i++) {
+      meta.inventory.push({ itemId: COMMON_WEAPON, count: 1 });
+      sim.marketList(COMMON_WEAPON, 1, 10, seller);
+    }
+    const mineBefore = sim.marketListings.filter((l) => l.sellerKey === String(seller)).length;
+    expect(mineBefore).toBe(MARKET_MAX_LISTINGS - 1);
+
+    // The dual-provenance sell would add 2 rows and land at cap + 1: refused,
+    // and neither item leaves the seller's bag.
+    sim.marketList(BOUNDSTONE_HELM, 2, 101, seller);
+    expect(sim.countItem(BOUNDSTONE_HELM, seller)).toBe(2);
+    expect(sim.marketListings.filter((l) => l.itemId === BOUNDSTONE_HELM && !l.house)).toHaveLength(
+      0,
+    );
+    expect(sim.marketListings.filter((l) => l.sellerKey === String(seller)).length).toBe(
+      mineBefore,
+    );
+  });
+
+  it('refuses a dual-provenance sell whose ask cannot give every bucket at least 1 copper', () => {
+    const sim = new Sim({
+      seed: 20260736,
+      playerClass: 'warrior',
+      autoEquip: false,
+      noPlayer: true,
+    });
+    const seller = sim.addPlayer('warrior', 'Seller');
+    moveToMerchant(sim, seller);
+    const meta = metaFor(sim, seller);
+    const BOUNDSTONE_HELM = 'boundstone_helm';
+    const BOUNDSTONE_HELM_RECIPE = 'recipe_ironbound_warplate_helm';
+    meta.inventory.push({ itemId: BOUNDSTONE_HELM, count: 1 });
+    meta.inventory.push({
+      itemId: BOUNDSTONE_HELM,
+      count: 1,
+      craftedRecipeId: BOUNDSTONE_HELM_RECIPE,
+    });
+
+    // ask=1 for a 2-bucket split cannot give both rows >= MARKET_MIN_PRICE:
+    // refused rather than pricing one row at 0 copper.
+    sim.marketList(BOUNDSTONE_HELM, 2, 1, seller);
+    expect(sim.countItem(BOUNDSTONE_HELM, seller)).toBe(2);
+    expect(sim.marketListings.filter((l) => l.itemId === BOUNDSTONE_HELM && !l.house)).toHaveLength(
+      0,
+    );
   });
 
   it('a non-crafted eligible item still gains Enchanting skill when disenchanted', () => {
