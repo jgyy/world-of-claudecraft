@@ -231,14 +231,22 @@ exempt from the procedural rank-mechanic budget so the citadel identity is never
 A scheduler opens ranked portals automatically. Tuning is `RIFT_TIER_INFO` plus the
 `RIFT_PORTAL_*` constants at the top of the module.
 
-- **Cadence.** First portal ~2 min after boot (so a fresh realm is not empty),
-  then one roughly every `RIFT_PORTAL_INTERVAL` (~3 hours of sim time, which is
-  real time on the 20 Hz live server); at most `RIFT_PORTAL_MAX_OPEN` (3) open
-  world-wide. Enabled by `SimConfig.riftPortals` (on for the live server and the
-  offline client; OFF by default so tests / parity / the RL env stay portal-free).
-- **Determinism.** Each spawn rolls zone, rank, position and rift seed from a
-  DEDICATED `Rng` derived from `(worldSeed, spawnOrdinal)`, never the shared
-  stream, so adding the scheduler shifts no existing draw order.
+- **Cadence.** First portal ~2 min after boot (`RIFT_PORTAL_FIRST_AT`, so a fresh
+  realm is not empty). Past that, each ELIGIBLE ZONE keeps its own hourly respawn
+  boundary (`RIFT_PORTAL_ZONE_CYCLE`, 1 h), anchored on that zone's own last
+  opening: at a boundary the zone gets a new rift UNLESS its current one is still
+  open, in which case that boundary is skipped and the zone is re-judged at the
+  next one (`riftZoneNextOpenAt`, derived purely from the zone's own event
+  history: no per-zone persisted field, no schema change). At most
+  `RIFT_PORTAL_MAX_OPEN` (3) portals stand world-wide, and the scheduler still
+  spawns at most one per pass even when several zones are due at once. Enabled
+  by `SimConfig.riftPortals` (on for the live server and the offline client; OFF
+  by default so tests / parity / the RL env stay portal-free).
+- **Determinism.** Each spawn rolls zone (among the zones currently due),
+  rank, position and rift seed from a DEDICATED `Rng` derived from `(worldSeed,
+  spawnOrdinal)`, never the shared stream, so the scheduler shifts no existing
+  draw order. Which zones are due is itself rng-free: pure arithmetic over each
+  zone's own event history.
 - **Zone to rank pool** (`riftTierForZone`): eligible regions are The Amberfall,
   The Drakelands, The Evergarden, The Farshore, The Frostveil Reach, The
   Galecrest, The Nightbloom, The Palmreach, The Veiled Hollow, The Willowfen,
@@ -246,8 +254,10 @@ A scheduler opens ranked portals automatically. Tuning is `RIFT_TIER_INFO` plus 
   generated dungeon's `baseLevel` (C=20 up to S=28, so B+ runs above the level
   cap) and the reward.
 - **Lifecycle:** a portal ANNOUNCES world-visibly on open, stays until its rift's
-  final boss dies (SEALED) or `RIFT_PORTAL_LIFETIME` (1 h) passes uncleared
-  (COLLAPSED), each with its own world announcement.
+  final boss dies (SEALED) or `RIFT_PORTAL_LIFETIME` (2 h) passes uncleared
+  (COLLAPSED), each with its own world announcement. The close time feeding the
+  zone's hourly schedule is read straight off the event record: the first-clear
+  timestamp for a sealed rift, `expiresAt` itself for a collapsed one.
 - **Rewards.** Rifts pay NO Heroic Marks at any rank (maintainer decision: marks
   stay a heroic dungeon/raid currency). The clear prize is the rank-gated gear
   ladder on the boss corpse (C a guaranteed themed rare + coin; B/A/S the epic
@@ -338,3 +348,9 @@ LETTER is a game glyph (like item-quality colour), not translated.
   you can climb a staircase to a raised tier, but not walk UNDER it. This is the only
   form the shared `groundHeight`/2D-collision model allows; true stacked geometry
   would need a second collision layer across all three hosts and is out of scope.
+- **`RIFT_PORTAL_MAX_OPEN` (3) is a global concurrency cap** left over from the
+  pre-cadence random-zone model, unchanged by the per-zone hourly schedule above.
+  With 11 eligible zones each keeping their own boundary, the cap can leave a due
+  zone waiting behind whichever three portals are already open; raising it (or
+  dropping it in favor of a purely per-zone cap) is a balance call for a follow-up,
+  not assumed here.
