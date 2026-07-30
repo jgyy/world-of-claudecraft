@@ -302,9 +302,18 @@ export function sanitizeBankState(raw: unknown): BankState {
   if (Array.isArray(r.inventory)) {
     for (const entry of r.inventory) {
       if (!entry || typeof entry !== 'object') continue;
-      const e = entry as { itemId?: unknown; count?: unknown; instance?: unknown };
+      const e = entry as {
+        itemId?: unknown;
+        count?: unknown;
+        instance?: unknown;
+        craftedRecipeId?: unknown;
+      };
       if (typeof e.itemId !== 'string' || e.itemId === '') continue;
       const hasInstance = !!e.instance && typeof e.instance === 'object';
+      const craftedRecipeId =
+        typeof e.craftedRecipeId === 'string' && e.craftedRecipeId !== ''
+          ? e.craftedRecipeId
+          : undefined;
       // The shared tamper ceiling (bags.ts instancedCountCap, also applied to
       // the carried-inventory hydration in Sim.addPlayer): merge-legal stack
       // cap for a counted instanced slot, 1 for a charge-bearing payload, and
@@ -317,6 +326,7 @@ export function sanitizeBankState(raw: unknown): BankState {
       const slot: InvSlot = hasInstance
         ? { itemId: e.itemId, count, instance: e.instance as InvSlot['instance'] }
         : { itemId: e.itemId, count };
+      if (craftedRecipeId !== undefined) slot.craftedRecipeId = craftedRecipeId;
       inventory.push(cloneInvSlot(slot));
     }
   }

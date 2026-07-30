@@ -929,6 +929,49 @@ describe('persistence and back-compat', () => {
     expect(returned.craftedRecipeId).toBe('recipe_test_crafted');
   });
 
+  it('survives a serializeCharacter -> load round trip on a plain crafted bank stack', () => {
+    // The previous test only proves the marker survives a bank move WITHIN one
+    // live session. sanitizeBankState (the one load path, run on relog) rebuilt
+    // every bank slot field by field and dropped craftedRecipeId, so a deposit
+    // then relog then withdraw laundered the item exactly like the pre-fix
+    // moveBetweenContainers bug, just one step later. Drive the real save/load
+    // boundary to pin the whole path closed.
+    const sim = makeSim();
+    const m = meta(sim);
+    sim.addItem('wolf_fang', 5, sim.playerId, { craftedRecipeId: 'recipe_test_crafted' });
+    const idx = m.inventory.findIndex((s) => s.itemId === 'wolf_fang');
+    sim.bankDeposit(idx);
+    expect(m.bank.inventory.find((s) => s.itemId === 'wolf_fang')?.craftedRecipeId).toBe(
+      'recipe_test_crafted',
+    );
+
+    const state = sim.serializeCharacter(sim.playerId)!;
+    expect(
+      (state.bank as { inventory: InvSlot[] }).inventory.find((s) => s.itemId === 'wolf_fang')
+        ?.craftedRecipeId,
+    ).toBe('recipe_test_crafted');
+
+    const sim2 = new Sim({
+      seed: 1,
+      playerClass: 'warrior',
+      noPlayer: true,
+      world: BANK_TEST_WORLD,
+    });
+    const pid = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const m2 = meta(sim2, pid);
+    const reloadedBanked = m2.bank.inventory.find((s) => s.itemId === 'wolf_fang');
+    expect(reloadedBanked?.craftedRecipeId).toBe('recipe_test_crafted');
+
+    moveToBanker(sim2, pid);
+    sim2.bankWithdraw(
+      m2.bank.inventory.findIndex((s) => s.itemId === 'wolf_fang'),
+      undefined,
+      pid,
+    );
+    const returned = m2.inventory.find((s) => s.itemId === 'wolf_fang')!;
+    expect(returned.craftedRecipeId).toBe('recipe_test_crafted');
+  });
+
   it('loads a legacy save with no bank field, defaulting to an empty bank', () => {
     const sim = makeSim();
     const state = sim.serializeCharacter(sim.playerId)!;
