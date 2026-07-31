@@ -1,16 +1,25 @@
-// Visual capture for issue 2652 (zone map shows no party markers, only the
-// minimap does). Boots the offline game at MAX graphics (?gfx=ultra), builds
-// a real small party in the Sim (leader + an alive mage + a dead priest,
-// bypassing invite/accept the way raid_to_party_shot.mjs does), opens the
-// zone map window, and screenshots it. Run once against the unmodified
-// upstream build (BEFORE: no party markers) and once against the fixed build
-// (AFTER: a class-colored dot + name per member). Needs `npm run dev` running
-// at GAME_URL: run it once against a checkout of the base commit and once
-// against the fixed build, on two different ports if both need to run at once.
+// Visual capture for issue 2652 (the map window draws no party markers, only
+// the minimap does). Boots the offline game at MAX graphics (?gfx=ultra),
+// builds a real small party in the Sim (bypassing invite/accept the way
+// raid_to_party_shot.mjs does), then screenshots BOTH levels of the map
+// window: the per-zone detail map and the continent "World Map" overview.
+//
+// The roster is deliberately split so one run proves both levels: two members
+// stand inside the player's own zone (they appear on the zone map, which drops
+// anyone out of zone) and two stand several zones north (they appear only on
+// the world map, which is the surface that answers "which zone is the rest of
+// my group in").
+//
+// Run once against the unmodified upstream build (BEFORE: no party markers on
+// either level) and once against the fixed build (AFTER). Needs `npm run dev`
+// running at GAME_URL: run it once against a checkout of the base commit and
+// once against the fixed build, on two different ports if both need to run at
+// once.
 //
 // Usage: GAME_URL=http://localhost:5173 OUT_PREFIX=tmp/before node scripts/zone_map_party_markers_shot.mjs
 //        GAME_URL=http://localhost:5174 OUT_PREFIX=tmp/after  node scripts/zone_map_party_markers_shot.mjs
-// Add MOBILE=1 to also capture a 390x844 mobile-viewport shot.
+// Writes <prefix>-desktop.png (zone map) and <prefix>-world-desktop.png
+// (continent). Add MOBILE=1 to also capture the 844x390 mobile-viewport pair.
 
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
@@ -24,49 +33,63 @@ fs.mkdirSync('tmp', { recursive: true });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function buildPartyAndOpenMap(page) {
-  // Build a real 3-member party (self + alive mage + dead priest) directly in
-  // the Sim, positioned a few yards from the player inside the current zone's
-  // view, the same technique raid_to_party_shot.mjs uses (going through
-  // invite/accept in a single offline HUD queues a stale invite card).
+  // Build a real 4-member party directly in the Sim, the same technique
+  // raid_to_party_shot.mjs uses (going through invite/accept in a single
+  // offline HUD queues a stale invite card). Two members sit a few yards from
+  // the player (in zone, so the zone map plots them) and two sit far north in
+  // other zones (only the continent level plots them).
   const built = await page.evaluate(() => {
     const sim = window.__game.sim;
     const me = sim.primaryId;
     const p = sim.player;
-    const alivePid = sim.addPlayer('mage', 'Emberlyn');
-    const deadPid = sim.addPlayer('priest', 'Fallenora');
-    const alive = sim.entities.get(alivePid);
-    if (alive) {
-      alive.pos = { x: p.pos.x + 12, y: p.pos.y, z: p.pos.z + 4 };
-      alive.prevPos = { ...alive.pos };
-    }
-    const dead = sim.entities.get(deadPid);
-    if (dead) {
-      dead.pos = { x: p.pos.x - 12, y: p.pos.y, z: p.pos.z - 6 };
-      dead.prevPos = { ...dead.pos };
-      dead.dead = true;
-      dead.hp = 0;
+    const roster = [
+      // [class, name, x, z, dead]
+      ['mage', 'Emberlyn', p.pos.x + 12, p.pos.z + 4, false],
+      ['priest', 'Fallenora', p.pos.x - 12, p.pos.z - 6, true],
+      ['rogue', 'Sableknife', 120, 620, false],
+      ['druid', 'Thistlebark', -200, 1500, false],
+    ];
+    const pids = [me];
+    for (const [cls, name, x, z, dead] of roster) {
+      const pid = sim.addPlayer(cls, name);
+      const e = sim.entities.get(pid);
+      if (e) {
+        e.pos = { x, y: p.pos.y, z };
+        e.prevPos = { ...e.pos };
+        if (dead) {
+          e.dead = true;
+          e.hp = 0;
+        }
+      }
+      pids.push(pid);
     }
     const party = {
       id: sim.party.nextPartyId++,
       leader: me,
-      members: [me, alivePid, deadPid],
+      members: pids,
       raid: false,
       raidGroups: new Map(),
       lootStrategies: {},
     };
     sim.party.parties.set(party.id, party);
-    sim.party.partyByPid.set(me, party.id);
-    sim.party.partyByPid.set(alivePid, party.id);
-    sim.party.partyByPid.set(deadPid, party.id);
+    for (const pid of pids) sim.party.partyByPid.set(pid, party.id);
     const info = sim.partyInfo;
     return { members: info?.members?.map((m) => ({ name: m.name, cls: m.cls, dead: m.dead })) };
   });
   console.log('party built:', JSON.stringify(built));
 
-  // Open the zone map window (M / minimap click both route to Hud.toggleMap()).
+  // Open the map window (M / minimap click both route to Hud.toggleMap()). It
+  // always opens on the per-zone detail level.
   await page.evaluate(() => window.__game.hud.toggleMap());
   await sleep(700);
   return built;
+}
+
+/** Switch the open map window to the continent overview (the level toggle
+ *  button, the same control a right-click on the zone map drives). */
+async function showWorldMap(page) {
+  await page.evaluate(() => document.querySelector('#map-level-toggle').click());
+  await sleep(900);
 }
 
 async function clipElement(page, selector, path, margin = 8) {
@@ -93,7 +116,7 @@ async function clipElement(page, selector, path, margin = 8) {
   await page.screenshot({ path, clip: box });
 }
 
-async function run(viewport, outPath) {
+async function run(viewport, zonePath, worldPath) {
   const browser = await puppeteer.launch({
     executablePath: BROWSER_PATH,
     headless: 'new',
@@ -122,7 +145,7 @@ async function run(viewport, outPath) {
       mobilePreflightTimeoutMs: 10000,
     });
     if (!booted) {
-      console.log(`world never booted for ${outPath}`);
+      console.log(`world never booted for ${zonePath}`);
       return false;
     }
     if (viewport.isMobile) {
@@ -132,8 +155,11 @@ async function run(viewport, outPath) {
       await sleep(300);
     }
     await buildPartyAndOpenMap(page);
-    await clipElement(page, '#map-window', outPath);
-    console.log(`saved ${outPath}`);
+    await clipElement(page, '#map-window', zonePath);
+    console.log(`saved ${zonePath}`);
+    await showWorldMap(page);
+    await clipElement(page, '#map-window', worldPath);
+    console.log(`saved ${worldPath}`);
     return true;
   } finally {
     await browser.close();
@@ -148,9 +174,17 @@ const MOBILE_LANDSCAPE = { width: 844, height: 390, isMobile: true, hasTouch: tr
 
 // DESKTOP_ONLY=1 skips the mobile variant; desktop always captures.
 const DESKTOP_ONLY = process.env.DESKTOP_ONLY === '1';
-const okDesktop = await run(DESKTOP, `${OUT_PREFIX}-desktop.png`);
+const okDesktop = await run(
+  DESKTOP,
+  `${OUT_PREFIX}-desktop.png`,
+  `${OUT_PREFIX}-world-desktop.png`,
+);
 let okMobile = true;
 if (MOBILE && !DESKTOP_ONLY) {
-  okMobile = await run(MOBILE_LANDSCAPE, `${OUT_PREFIX}-mobile.png`);
+  okMobile = await run(
+    MOBILE_LANDSCAPE,
+    `${OUT_PREFIX}-mobile.png`,
+    `${OUT_PREFIX}-world-mobile.png`,
+  );
 }
 process.exit(okDesktop && okMobile ? 0 : 1);

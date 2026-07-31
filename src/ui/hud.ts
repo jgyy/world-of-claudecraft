@@ -3729,8 +3729,8 @@ export class Hud {
   private readonly mapPainter = new MapWindowPainter(classCss);
   // Continent overview painter (the world map's "zoom out to the whole world"
   // level). Loads the painted world_overview plate once; redraws from the
-  // mediumHud band like the per-zone map.
-  private readonly continentPainter = new ContinentMapPainter();
+  // mediumHud band like the per-zone map. classCss colors its party dots too.
+  private readonly continentPainter = new ContinentMapPainter(classCss);
   // The aura strips are the keyed-pool aura painter, two instances of the
   // auras_view core + AurasPainter: the player buff bar (#buff-bar, mode
   // 'all') and the target strip (#tf-debuffs, mode 'all' too: a target's buffs AND
