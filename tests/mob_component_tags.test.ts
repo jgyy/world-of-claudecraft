@@ -52,9 +52,7 @@ describe('mob component-type tags', () => {
     expect(allUnmapped).toEqual(['fen_troll']);
     // The complement, so an always-false predicate could not pass the row above
     // by emptying the sweep.
-    // 36 since the farm-economy pass added mapped tags to 15 coinless trash
-    // templates; fen_troll is still the only all-unmapped one.
-    expect(tagged.filter((mob) => isHarvestableCorpse(mob.componentTags))).toHaveLength(36);
+    expect(tagged.filter((mob) => isHarvestableCorpse(mob.componentTags))).toHaveLength(21);
   });
 
   it('never lets a template out-pay the tag list it advertises (#2514)', () => {

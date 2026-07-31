@@ -25,7 +25,6 @@ function installBrowserGlobals(search = ''): { appendChild: ReturnType<typeof vi
     createElement: () => ({
       style: {},
       addEventListener: () => {},
-      appendChild: () => {},
     }),
   };
   Object.defineProperty(globalThis, 'navigator', {

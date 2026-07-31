@@ -10,8 +10,7 @@
 // DOM/Three-free (registered in tests/architecture.test.ts UI_PURE_CORES).
 
 import { type BagCells, layoutBagCells } from '../sim/inventory_order';
-import { isTransferLockedInstance } from '../sim/item_instance_transfer';
-import type { InvSlot, ItemInstancePayload } from '../sim/types';
+import type { InvSlot } from '../sim/types';
 import {
   applyBagFilter,
   type BagFilterState,
@@ -59,11 +58,9 @@ export type BagAction =
   | 'trade'
   | 'mailAttach'
   | 'mailAttachBlocked'
-  | 'mailAttachBlockedBound'
   | 'marketSell'
   | 'marketSellBlockedQuest'
   | 'marketSellBlockedNoMarket'
-  | 'marketSellBlockedBound'
   | 'vendorSell'
   | 'bankDeposit'
   | 'bankDepositBlockedQuest'
@@ -95,28 +92,19 @@ export type BagTooltipHintKey =
 
 /** Decide what a click on a bag item does. Mirrors the original click handler's
  *  priority order exactly: trade > mail-attach > market-sell > vendor > bank-deposit
- *  > pet-feed > quest > use. `instance` is the clicked SLOT's payload (issue 1165):
- *  a transfer-locked copy (bindOnTrade-armed or boundTo-bound,
- *  isTransferLockedInstance, the sim's pipe rule) blocks mail-attach and
- *  market-sell in place; an unlocked instanced copy stages as itself. */
-export function bagItemAction(
-  item: BagItemInfo,
-  mode: BagMode,
-  instance?: ItemInstancePayload,
-): BagAction {
+ *  > pet-feed > quest > use. */
+export function bagItemAction(item: BagItemInfo, mode: BagMode): BagAction {
   if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
     return 'transferBlockedSoulbound';
   if (mode.tradeOpen) return 'trade';
   if (mode.mailAttach) {
     // Mirrors the sim's mail escrow rule: quest and unmailable items refuse.
     if (item.kind === 'quest' || item.noMarketList) return 'mailAttachBlocked';
-    if (isTransferLockedInstance(instance)) return 'mailAttachBlockedBound';
     return 'mailAttach';
   }
   if (mode.marketSell) {
     if (item.kind === 'quest') return 'marketSellBlockedQuest';
     if (item.noMarketList) return 'marketSellBlockedNoMarket';
-    if (isTransferLockedInstance(instance)) return 'marketSellBlockedBound';
     return 'marketSell';
   }
   if (mode.vendorOpen) return 'vendorSell';
@@ -229,24 +217,18 @@ export function bagDestroyAction(item: BagItemInfo, mode: BagMode): BagDestroyAc
 }
 
 /** The tooltip hint sub-line for a bag item, matching the original tooltip's
- *  mode-then-kind branch. Returns '' when no hint applies (e.g. a material).
- *  `instance` mirrors bagItemAction's third parameter: a transfer-locked copy
- *  reads the same cannot-mail / cannot-market hint its click deny shows. */
-export function bagTooltipHintKey(
-  item: BagItemInfo,
-  mode: BagMode,
-  instance?: ItemInstancePayload,
-): BagTooltipHintKey {
+ *  mode-then-kind branch. Returns '' when no hint applies (e.g. a material). */
+export function bagTooltipHintKey(item: BagItemInfo, mode: BagMode): BagTooltipHintKey {
   if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
     return 'hudChrome.itemSoulbound';
   if (mode.tradeOpen) return 'itemUi.tooltip.clickTradeOffer';
   if (mode.mailAttach) {
-    return item.kind === 'quest' || item.noMarketList || isTransferLockedInstance(instance)
+    return item.kind === 'quest' || item.noMarketList
       ? 'hudChrome.mailbox.cannotMail'
       : 'hudChrome.mailbox.clickAttach';
   }
   if (mode.marketSell) {
-    return item.kind === 'quest' || item.noMarketList || isTransferLockedInstance(instance)
+    return item.kind === 'quest' || item.noMarketList
       ? 'itemUi.tooltip.cannotMarket'
       : 'itemUi.tooltip.clickMarketList';
   }

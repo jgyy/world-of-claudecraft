@@ -1250,6 +1250,7 @@ function blankEntity(id: number): Entity {
     detonateTimer: Infinity,
     firedSummons: 0,
     summonedIds: [],
+    summonedAdd: false,
     enraged: false,
     healedThisPull: false,
     threat: new Map(),
@@ -2064,6 +2065,15 @@ export class ClientWorld implements IWorld {
         this.cfg.playerClass = this.ownPlayerClass;
         this.spectateFacingPending = false;
         this.pendingSpectateFacing = null;
+        // marketInfo is delta-omitted (s.market only streams when it changes),
+        // so the mirror otherwise still holds the pre-drop echo at the instant
+        // onReconnected() below fires: that echo was pushed and echoed back
+        // before the socket died, so it trivially matches the window's own
+        // query and the reconnect resync (issue #2416) would never detect the
+        // fresh-join reset. Nulling it here forces MarketWindow to treat the
+        // resync as pending until a genuinely post-reconnect market snapshot
+        // decodes.
+        this.marketInfo = null;
         this.onReconnected?.();
       }
       this.connected = true;
@@ -4209,12 +4219,6 @@ export class ClientWorld implements IWorld {
   marketList(itemId: string, count: number, price: number): void {
     this.cmd({ cmd: 'market_list', item: itemId, count, price });
   }
-  marketListInstance(itemId: string, price: number, instance: ItemInstancePayload): void {
-    // The payload is a SELECTOR, not content: the server re-resolves it against
-    // the sender's own inventory and escrows the actual held copy, so nothing
-    // here can mint state.
-    this.cmd({ cmd: 'market_list_instance', item: itemId, price, instance });
-  }
   marketBuy(listingId: number): void {
     this.cmd({ cmd: 'market_buy', id: listingId });
   }
@@ -4233,13 +4237,7 @@ export class ClientWorld implements IWorld {
       subject,
       body,
       copper,
-      items: items.map((s) => ({
-        itemId: s.itemId,
-        count: s.count,
-        // The payload is a SELECTOR (the market_list_instance rule): the
-        // server re-resolves it against the sender's own bags.
-        ...(s.instance ? { instance: s.instance } : {}),
-      })),
+      items: items.map((s) => ({ itemId: s.itemId, count: s.count })),
     });
   }
   mailTake(mailId: number): void {

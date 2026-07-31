@@ -46,6 +46,11 @@ export const hudChromeStrings = {
     help: 'Recovery: /unstuck starts a stationary countdown to move you to a nearby reachable safe spot.',
     helpAtGraveyard:
       "Recovery: /unstuck starts a stationary countdown, then sends your spirit to the nearest graveyard. Returning through the Pale Keeper requires The Keeper's Toll.",
+    // v0.32.1: Unstuck no longer kills, and charges Unstuck Sickness instead of routing
+    // through the Pale Keeper. New key, because the shipped locale rows for the one above
+    // still promise the old outcome.
+    helpUnstuckSickness:
+      'Recovery: /unstuck starts a stationary countdown, then moves you to the nearest graveyard, reviving you if you had fallen. It leaves you with Unstuck Sickness for up to 5 minutes.',
     started:
       'Unstuck in {seconds} seconds. Moving, fighting, taking damage, or starting another action cancels it.',
     countdown: 'Unstuck: {seconds}',
@@ -54,6 +59,12 @@ export const hudChromeStrings = {
       "Your spirit has returned to the nearest graveyard. Speak to the Pale Keeper to accept The Keeper's Toll.",
     revivedAtGraveyard:
       "You have been returned to the nearest graveyard and revived. The Keeper's Toll weighs on you.",
+    // The two v0.32.1 outcomes. Separate keys from the two above for the same reason as
+    // helpUnstuckSickness: the shipped translations there name The Keeper's Toll.
+    movedToGraveyard:
+      'You have been moved to the nearest graveyard. Unstuck Sickness weighs on you.',
+    revivedAtGraveyardUnstuck:
+      'You have been moved to the nearest graveyard and revived. Unstuck Sickness weighs on you.',
     cancelledMoved: 'Unstuck cancelled because you moved.',
     cancelledDamaged: 'Unstuck cancelled because you took damage.',
     cancelledCombat: 'Unstuck cancelled because you entered combat.',
@@ -2311,8 +2322,6 @@ export const hudChromeStrings = {
       noRecipient: 'No one by that name holds a mailbox here.',
       tooManyParcels: 'A letter carries at most {count} parcels.',
       noMailQuestItems: 'You cannot mail quest items.',
-      // Wordy, M16: the five non-Latin fills land in this same change.
-      noMailBound: 'That item is bound and cannot be mailed.',
       notEnoughItems: 'You do not have that many to send.',
       cantAffordPostage: 'You cannot afford the postage.',
       recipientBoxFull: 'Their mailbox is full.',
