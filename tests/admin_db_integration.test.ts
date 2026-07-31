@@ -23,6 +23,22 @@ function planNodes(node: Record<string, unknown>): Record<string, unknown>[] {
   return nodes;
 }
 
+// DB-free pin: the plan-shape assertions below this point only run when
+// TEST_DATABASE_URL is set, so nothing in the default CI suite would catch a
+// regression back to the un-sargable `COALESCE(ended_at, now()) > cutoff`
+// form. This text pin runs unconditionally and fails immediately on that
+// regression, independent of a live Postgres instance.
+describe('OVERVIEW_COUNTS_SQL stays sargable (no DB required)', () => {
+  it('never reintroduces COALESCE(ended_at, now()) in the active/returning-account filters', () => {
+    expect(OVERVIEW_COUNTS_SQL).not.toContain('COALESCE(ended_at, now()) >');
+    expect(OVERVIEW_COUNTS_SQL).not.toContain('COALESCE(ps.ended_at, now()) >');
+  });
+
+  it('uses the sargable (ended_at IS NULL OR ended_at > cutoff) form for all four subqueries', () => {
+    expect(OVERVIEW_COUNTS_SQL.match(/ended_at IS NULL OR (ps\.)?ended_at >/g)).toHaveLength(4);
+  });
+});
+
 describeDb('admin overview active/returning-account subqueries (real Postgres)', () => {
   let pool: Pool;
 
