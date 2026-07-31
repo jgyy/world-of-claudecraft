@@ -8,7 +8,7 @@ import { NORTH_UP_YAW, nudgeDelta } from '../src/editor/placement_transform_core
 // player_motion.ts right vector, (-cos yaw, sin yaw)): pressing D, or
 // drag-panning right, must move toward screen-right, never away from it.
 
-describe('EditorCamera.fly (WASD) agrees with nudgeDelta on "right")', () => {
+describe('EditorCamera.fly (WASD) agrees with nudgeDelta on "right"', () => {
   it.each([0, 0.7, Math.PI / 2, NORTH_UP_YAW, 4.2])(
     'strafing right (D) moves the same ground direction as ArrowRight at yaw=%p',
     (yaw) => {
