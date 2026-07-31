@@ -55,9 +55,18 @@ describe('riftFloorTrackerModel', () => {
     expect(model?.timerSeconds).toBe(65);
   });
 
-  it('clamps a negative or expired remaining span to zero rather than going negative', () => {
+  it('hides the timer once the countdown reaches zero rather than sticking at "0:00"', () => {
+    // riftEventMsRemaining() keeps answering 0 after the backing RiftEvent's portal
+    // closes (the party inside keeps playing; the event is not deleted until
+    // trimEventHistory purges it), so the model degrades the same way it does for a
+    // dev-spawned rift: floor progress stays, the timer line disappears.
+    expect(riftFloorTrackerModel(world(floor(), 0))?.timerSeconds).toBeNull();
+    expect(riftFloorTrackerModel(world(floor(), 500))?.timerSeconds).toBeNull();
+  });
+
+  it('hides the timer for a negative or expired remaining span rather than going negative', () => {
     const model = riftFloorTrackerModel(world(floor(), -500));
-    expect(model?.timerSeconds).toBe(0);
+    expect(model?.timerSeconds).toBeNull();
   });
 
   it('same-input-same-output against both a Sim- and a ClientWorld-shaped stub', () => {

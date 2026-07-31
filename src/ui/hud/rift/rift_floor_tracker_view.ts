@@ -8,6 +8,13 @@
 // timerSeconds is null for a rift with no backing RiftEvent (a /dev-spawned
 // rift, see sim/rift/race.ts: dev portals are "deliberately outside the global
 // race"), so the HUD degrades to floor-progress-only rather than a bogus timer.
+// It is ALSO null once the countdown reaches zero: riftEventMsRemaining() keeps
+// returning 0 after the backing RiftEvent's portal closes (the run inside keeps
+// playing out, so the event is not deleted until trimEventHistory purges it), and
+// a "Closes in 0:00" line stuck on screen indefinitely reads as broken rather than
+// informative. Hiding it the moment it hits zero degrades the same way the
+// dev-portal case already does, in both worlds at once (this core is the single
+// place both Sim and ClientWorld route through).
 // It is derived from IWorld.riftEventMsRemaining(), which each world (offline
 // Sim, online ClientWorld) recomputes fresh from its own clock on every call
 // (the same "no snapshot round trip" idiom as raidLockouts()), so simply
@@ -32,10 +39,11 @@ export function riftFloorTrackerModel(
   const floor = world.riftFloor;
   if (!floor) return null;
   const msRemaining = world.riftEventMsRemaining();
+  const wholeSeconds = msRemaining === null ? null : Math.floor(msRemaining / 1000);
   return {
     floor: floor.floorIndex + 1,
     floorCount: floor.floorCount,
-    timerSeconds: msRemaining === null ? null : Math.max(0, Math.floor(msRemaining / 1000)),
+    timerSeconds: wholeSeconds === null || wholeSeconds <= 0 ? null : wholeSeconds,
   };
 }
 
