@@ -333,8 +333,6 @@ export const MOB_UPDATE_BUCKETS = [
   'elemental',
   'dragonkin',
   'demon',
-  'kobold',
-  'murloc',
   'reptile',
   'other',
 ] as const satisfies readonly (MobFamily | 'other')[];
