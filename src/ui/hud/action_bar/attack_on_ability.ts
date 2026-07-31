@@ -170,6 +170,12 @@ export function hasAutoAttackTarget(
  * already computes for nameplate coloring (`src/render/renderer.ts`), so the "Auto-Attack
  * on Ability Use" QoL setting recognizes the same PvP-hostile state instead of gating on
  * the mob-only `hostile` flag, which a player target never carries.
+ *
+ * Deliberately narrower than the sim's `isHostileTo`: it does not cover the jail brawl,
+ * the warden arm, an enemy player's PET (resolved through `pvpController`), or the Vale
+ * Cup cross-team arm. That matches the renderer's own nameplate predicate (a parity
+ * choice, not a defect); if a third copy of this verdict shows up, extract one shared
+ * pure module both the renderer and this file consume.
  */
 export function isPvpHostileTarget(
   targetId: number | null | undefined,
