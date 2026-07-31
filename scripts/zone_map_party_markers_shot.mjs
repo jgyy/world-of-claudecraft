@@ -5,10 +5,11 @@
 // zone map window, and screenshots it. Run once against the unmodified
 // upstream build (BEFORE: no party markers) and once against the fixed build
 // (AFTER: a class-colored dot + name per member). Needs `npm run dev` running
-// at GAME_URL (see the two dev servers this task started on :5198 / :5199).
+// at GAME_URL: run it once against a checkout of the base commit and once
+// against the fixed build, on two different ports if both need to run at once.
 //
-// Usage: GAME_URL=http://localhost:5198 OUT_PREFIX=tmp/before node scripts/zone_map_party_markers_shot.mjs
-//        GAME_URL=http://localhost:5199 OUT_PREFIX=tmp/after  node scripts/zone_map_party_markers_shot.mjs
+// Usage: GAME_URL=http://localhost:5173 OUT_PREFIX=tmp/before node scripts/zone_map_party_markers_shot.mjs
+//        GAME_URL=http://localhost:5174 OUT_PREFIX=tmp/after  node scripts/zone_map_party_markers_shot.mjs
 // Add MOBILE=1 to also capture a 390x844 mobile-viewport shot.
 
 import fs from 'node:fs';

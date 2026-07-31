@@ -522,6 +522,20 @@ describe('buildOverworldMapModel (pure draw model)', () => {
       );
       expect(fromSim.party).toEqual(fromClient.party);
     });
+
+    it('draws a party member who is also an online friend once, as the party marker, not twice', () => {
+      const world = makeOverworldWorldWithParty('sim') as unknown as {
+        socialInfo: {
+          friends: { id: number; name: string; online: boolean; x: number; z: number }[];
+        };
+      };
+      // 'Ally' is party pid 5 at x=15; also list them as an online friend at the
+      // same spot, the common case of partying with someone on your friends list.
+      world.socialInfo.friends.push({ id: 99, name: 'Ally', online: true, x: 15, z: ZONE_CZ });
+      const model = buildOverworldMapModel(input(world as unknown as IWorld, LABELS_ZOOM));
+      expect(model.party.filter((m) => m.name === 'Ally')).toHaveLength(1);
+      expect(model.allies.filter((a) => a.name === 'Ally')).toHaveLength(0);
+    });
   });
 
   it('drops player, NPC, and ally markers outside the committed zone', () => {

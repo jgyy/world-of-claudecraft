@@ -465,9 +465,31 @@ export function buildOverworldMapModel(input: OverworldMapInput): OverworldMapMo
     player = { mx, my, angle: -p.facing };
   }
 
+  // Party members (issue 2652): the minimap's already-consumed
+  // partyInfo.members, projected the same way as every other in-zone marker.
+  // Self is excluded (the player already has its own arrow); gated on `labels`
+  // like the ally dots above, since a party marker also carries a name label.
+  // Built before the ally loop so `partyNames` can gate it (see below).
+  const party: MapPartyMarker[] = [];
+  const partyNames = new Set<string>();
+  const partyInfo = world.partyInfo;
+  if (labels && partyInfo) {
+    for (const m of partyInfo.members) {
+      if (m.pid === p.id) continue;
+      partyNames.add(m.name);
+      if (!inZone(m.x, m.z) || !inView(m.x, m.z)) continue;
+      const { mx, my } = toMap(m.x, m.z);
+      party.push({ mx, my, name: m.name, cls: m.cls, dead: m.dead !== 0 });
+    }
+  }
+
   // Friends (green) and guild members (blue), plotted from the live positions the
   // server streams for online allies. socialInfo is null offline, so this is
-  // online-only; friends are plotted first and win ties (dedup by id).
+  // online-only; friends are plotted first and win ties (dedup by id). A friend
+  // or guildmate who is also a party member is skipped here: the party loop
+  // above already draws them with their class color, matching how
+  // minimap_markers.ts excludes partyPids from its entity loop to avoid the
+  // same double dot.
   const allies: MapAllyMarker[] = [];
   const social = world.socialInfo;
   if (labels && social) {
@@ -479,7 +501,8 @@ export function buildOverworldMapModel(input: OverworldMapInput): OverworldMapMo
         m.x === undefined ||
         m.z === undefined ||
         m.name === selfName ||
-        drawn.has(m.id)
+        drawn.has(m.id) ||
+        partyNames.has(m.name)
       )
         return;
       if (!inZone(m.x, m.z) || !inView(m.x, m.z)) return;
@@ -489,21 +512,6 @@ export function buildOverworldMapModel(input: OverworldMapInput): OverworldMapMo
     };
     for (const f of social.friends) plotAlly(f, 'friend');
     if (social.guild) for (const m of social.guild.members) plotAlly(m, 'guild');
-  }
-
-  // Party members (issue 2652): the minimap's already-consumed
-  // partyInfo.members, projected the same way as every other in-zone marker.
-  // Self is excluded (the player already has its own arrow); gated on `labels`
-  // like the ally dots above, since a party marker also carries a name label.
-  const party: MapPartyMarker[] = [];
-  const partyInfo = world.partyInfo;
-  if (labels && partyInfo) {
-    for (const m of partyInfo.members) {
-      if (m.pid === p.id) continue;
-      if (!inZone(m.x, m.z) || !inView(m.x, m.z)) continue;
-      const { mx, my } = toMap(m.x, m.z);
-      party.push({ mx, my, name: m.name, cls: m.cls, dead: m.dead !== 0 });
-    }
   }
 
   return {
