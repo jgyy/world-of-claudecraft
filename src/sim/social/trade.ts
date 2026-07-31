@@ -302,8 +302,28 @@ export function tradeConfirm(ctx: SimContext, pid?: number): void {
     for (const s of receives) {
       const plainCount = Math.min(s.count, ctx.countFungibleItem(s.itemId, giver.entityId));
       if (plainCount > 0) {
-        if (countFit(scratch, capacity, s.itemId, plainCount) < plainCount) return false;
-        addStacked(scratch, s.itemId, plainCount);
+        // grantOffer re-grants the plain units bucketed by craftedRecipeId (a
+        // marker-free stack and a crafted stack of the same itemId never merge
+        // on arrival, bags.ts addStacked keys on the marker); model that same
+        // bucket split here, walking the giver's plain slots highest-index-
+        // first (removeVendorSellUnits's order) instead of one flat
+        // marker-free countFit/addStacked call, or this capacity pre-check
+        // can see room in a stack the real grant cannot merge into and
+        // underpredict the receiver's slot usage (#2605 review).
+        const plainByRecipe = new Map<string | undefined, number>();
+        let plainLeft = plainCount;
+        for (let i = giver.inventory.length - 1; i >= 0 && plainLeft > 0; i--) {
+          const g = giver.inventory[i];
+          if (g.itemId !== s.itemId || g.instance) continue;
+          const take = Math.min(g.count, plainLeft);
+          plainByRecipe.set(g.craftedRecipeId, (plainByRecipe.get(g.craftedRecipeId) ?? 0) + take);
+          plainLeft -= take;
+        }
+        for (const [craftedRecipeId, count] of plainByRecipe) {
+          if (countFit(scratch, capacity, s.itemId, count, undefined, craftedRecipeId) < count)
+            return false;
+          addStacked(scratch, s.itemId, count, undefined, craftedRecipeId);
+        }
       }
       let remaining = s.count - plainCount;
       for (let i = giver.inventory.length - 1; i >= 0 && remaining > 0; i--) {

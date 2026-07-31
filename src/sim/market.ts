@@ -549,6 +549,7 @@ export class Market {
         listing.itemId,
         listing.count,
         listing.instance,
+        listing.craftedRecipeId,
       )
     ) {
       this.ctx.error(meta.entityId, 'Your bags are full.');
@@ -607,6 +608,7 @@ export class Market {
         listing.itemId,
         listing.count,
         listing.instance,
+        listing.craftedRecipeId,
       )
     ) {
       this.ctx.error(meta.entityId, 'Your bags are full.');
@@ -661,7 +663,16 @@ export class Market {
     // arms so a returned instanced listing keeps its payload here too.
     const kept: typeof col.items = [];
     for (const s of col.items) {
-      if (canGrantCopies(meta.inventory, bagCapacity(meta.bags), s.itemId, s.count, s.instance)) {
+      if (
+        canGrantCopies(
+          meta.inventory,
+          bagCapacity(meta.bags),
+          s.itemId,
+          s.count,
+          s.instance,
+          s.craftedRecipeId,
+        )
+      ) {
         grantCopies(this.ctx, meta.entityId, s.itemId, s.count, s.instance, s.craftedRecipeId);
       } else {
         kept.push(s);

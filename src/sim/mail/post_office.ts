@@ -479,7 +479,13 @@ export class PostOffice {
         if (escrowed) parcels.push({ itemId: s.itemId, count: 1, instance: escrowed });
       } else {
         const count = Math.floor(s.count);
-        const consumed = removeVendorSellUnits(this.ctx, s.itemId, count, meta.entityId, () => true);
+        const consumed = removeVendorSellUnits(
+          this.ctx,
+          s.itemId,
+          count,
+          meta.entityId,
+          () => true,
+        );
         const byRecipe = new Map<string | undefined, number>();
         for (const unit of consumed) {
           byRecipe.set(unit.craftedRecipeId, (byRecipe.get(unit.craftedRecipeId) ?? 0) + 1);
@@ -544,7 +550,16 @@ export class PostOffice {
       // addItemInstance so its payload survives delivery; a plain parcel
       // threads its craftedRecipeId marker through so a mailed crafted item
       // keeps its provenance on arrival, the same as the market fix.
-      if (canGrantCopies(meta.inventory, bagCapacity(meta.bags), s.itemId, s.count, s.instance)) {
+      if (
+        canGrantCopies(
+          meta.inventory,
+          bagCapacity(meta.bags),
+          s.itemId,
+          s.count,
+          s.instance,
+          s.craftedRecipeId,
+        )
+      ) {
         grantCopies(this.ctx, meta.entityId, s.itemId, s.count, s.instance, s.craftedRecipeId);
       } else {
         kept.push(s);
