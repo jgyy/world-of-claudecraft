@@ -886,6 +886,25 @@ describe('client HTML shell', () => {
     expect(characterPreviewTs).toContain('this.renderer.dispose();');
   });
 
+  it('keeps the character preview render loop dormant while its host is hidden', () => {
+    expect(characterPreviewTs.match(/requestAnimationFrame\(this\.animate\)/g)).toHaveLength(1);
+    expect(characterPreviewTs).toContain('if (!this.renderActive) return;');
+    expect(characterPreviewTs).toContain('this.renderActive = width > 0 && height > 0;');
+  });
+
+  it('warms contextual Canvas HUD assets before gameplay becomes visible', () => {
+    expect(mainTs).toContain('hud.prewarmStaticUiAssets();');
+    expect(hudTs).toContain('prewarmStaticUiAssets(): void {');
+    expect(hudTs).toContain('raidMarkerDataUrl(marker);');
+    const crestWarm = mainTs.slice(
+      mainTs.indexOf('for (const cls of ALL_CLASSES)'),
+      mainTs.indexOf('for (const slot of world.inventory)'),
+    );
+    expect(crestWarm).toContain("kind: 'crest'");
+    expect(crestWarm).toContain('size: 20');
+    expect(crestWarm).toContain('size: 96');
+  });
+
   it('keeps the desktop character roster readable inside a centered cinematic stage', () => {
     expect(shellCss).toContain('--cs-stage-gutter: max(26px, calc((100vw - 1780px) / 2));');
     expect(shellCss).toContain('--cs-roster-width: clamp(340px, 28vw, 440px);');
@@ -1598,12 +1617,13 @@ describe('client HTML shell', () => {
       );
     }
     expect(html).toContain('<div id="mobile-extra-grid">');
-    // Daily Rewards, the Book of Deeds, and Crafting ride the More grid in BOTH
+    // Daily Rewards, the Book of Deeds, Mount / Dismount, and Crafting ride the More grid in BOTH
     // entries (play.html historically lags index.html; these pins keep them in
     // step).
     for (const entry of [html, playHtml]) {
       expect(entry).toContain('id="mobile-daily-rewards"');
       expect(entry).toContain('id="mobile-deeds"');
+      expect(entry).toContain('id="mobile-mounts"');
       expect(entry).toContain('id="mobile-crafting"');
     }
     expect(hudMobileCss).not.toContain('body.mobile-touch.mobile-more-open #mobile-controls');
@@ -2046,6 +2066,12 @@ describe('client HTML shell', () => {
     // corpse-claim mirror online); the call now closes right after the
     // nothing-to-interact string.
     expect(mainTs).toContain("t('errors.nothingInteract'),\n      ),");
+    // The escort away line sits immediately before it (escort_interact.ts): an
+    // escort run has no other client entry point, so an unwired argument here
+    // would silently make those quests uncompletable again.
+    expect(mainTs).toContain(
+      "t('questUi.errors.escortAway'),\n        t('errors.nothingInteract'),",
+    );
     expect(mainTs).not.toContain('online === null');
     expect(mainTs).toContain('const interactionOutcome = handlePickedEntity(');
     expect(mainTs).toContain(

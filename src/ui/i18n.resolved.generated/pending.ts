@@ -10,174 +10,54 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "es_ES": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "fr_FR": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "fr_CA": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "en_CA": [],
   "it_IT": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "de_DE": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
-  "zh_CN": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
-  ],
-  "zh_TW": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
-  ],
-  "ko_KR": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
-  ],
-  "ja_JP": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
-  ],
+  "zh_CN": [],
+  "zh_TW": [],
+  "ko_KR": [],
+  "ja_JP": [],
   "pt_BR": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
-  "ru_RU": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
-  ],
+  "ru_RU": [],
   "cs_CZ": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "nl_NL": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "pl_PL": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "id_ID": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "tr_TR": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "sv_SE": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "vi_VN": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ],
   "da_DK": [
-    "fiesta.augment.cardAria",
-    "hudChrome.meters.breakdownOther",
-    "hudChrome.meters.breakdownRow",
-    "hudChrome.meters.breakdownSummary",
-    "hudChrome.meters.melee",
-    "hudChrome.meters.percent",
-    "hudChrome.meters.petAbility"
+    "hud.errors.tradeAlreadyTrading"
   ]
 };

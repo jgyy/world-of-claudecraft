@@ -96,16 +96,20 @@ export const GROUND_PICKUP_PROVING_QUESTS: readonly string[] = [
   'q_glimmermere_light',
 ];
 
-// The highest level any giantslayer-creditable mob can ever spawn at: heroic
-// instances pin every mob to 22 (content/dungeon_difficulty.ts), two above
-// the player cap, and nothing outside heroic exceeds the cap itself (dummies,
-// the world boss, and owned pets are excluded from the killing-blow credit).
-// cmb_giantslayer needs a blow five levels up, so past this ceiling minus
-// five the deed is permanently out of reach for the character. PINNED:
-// shipping a higher-level creditable mob is a conscious re-decision of the
-// stranded threshold (the content-integrity test cross-checks the ceiling
+// The highest level any giantslayer-creditable mob can ever spawn at: S-rank
+// rift floors now hold a flat level 23 (rift/ranks.ts RIFT_MAX_MOB_LEVEL),
+// heroic instances pin every mob to 22 (content/dungeon_difficulty.ts), and
+// nothing else exceeds the player cap itself (dummies, the world boss, and
+// owned pets are excluded from the killing-blow credit). cmb_giantslayer needs
+// a blow five levels up, so past this ceiling minus five (23 - 5 = 18) the
+// deed is permanently out of reach; a capped player (20) is at level 20 which
+// is above 18, so the deed IS permanently stranded in rifts for capped
+// characters and the retro auto-heal DOES fire. Giantslayer is no longer
+// earnable inside S-rank rifts (maintainer-accepted in v0.23.0 rank retune).
+// PINNED: shipping a higher-level creditable mob is a conscious re-decision of
+// the stranded threshold (the content-integrity test cross-checks the ceiling
 // against the real tables).
-export const MAX_CREDITABLE_MOB_LEVEL = 22;
+export const MAX_CREDITABLE_MOB_LEVEL = 23;
 
 // Dungeon final bosses whose kill credit bumps deedStats.dungeonClears (keys
 // '<dungeonId>' and '<dungeonId>:heroic') and the dungeonFinalBossKills
@@ -191,8 +195,12 @@ const SANCTUM_SPEED_DEED = 'dgn_sanctum_speed';
 
 // The named overworld terrors whose kill credit feeds a 'slain:<templateId>'
 // visited mark (the chr_*_rares deeds). Pinned so the visited set stays
-// bounded by construction.
-const RARE_SLAIN_TEMPLATES = new Set([
+// bounded by construction; every live rare CAMPS mob belongs here UNLESS it
+// already has an alternate credit path (the content-integrity test in
+// tests/deeds_content.test.ts cross-checks the exact set against CAMPS/MOBS,
+// with sethrael_palecoil as the one documented exception: its kill is
+// required by q_palecoil, which already feeds prog_mere_at_rest).
+export const RARE_SLAIN_TEMPLATES = new Set([
   'old_greyjaw',
   'mogger',
   'grix_the_tunnelking',
@@ -201,10 +209,16 @@ const RARE_SLAIN_TEMPLATES = new Set([
   'mirejaw_the_ravenous',
   'sloomtooth_the_drowned',
   'sister_nhalia',
+  'grubjaw',
   'ironvein_foreman',
   'brutok_skullsmasher',
   'voskar_emberwing',
   'marrowlord_varkas',
+  'old_cragmaw',
+  'shardlord_kazzix',
+  'gleamstag',
+  'old_marrowshell',
+  'aurelhorn',
 ]);
 
 // Zone fishing catches that count as "a fish" for the chr_ first-cast deeds
@@ -970,7 +984,7 @@ function sweepProximityMarks(ctx: SimContext): void {
   for (const meta of ctx.players.values()) {
     const e = ctx.entities.get(meta.entityId);
     if (!e || e.dead) continue;
-    const zone = zoneAt(e.pos.z);
+    const zone = zoneAt(e.pos.x, e.pos.z);
     for (const poi of zone.pois ?? []) {
       // The mark keys on the stable poi id, never the display label (a label copy
       // edit must not strand exploration progress). Custom-map pois may omit the
