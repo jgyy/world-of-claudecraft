@@ -309,7 +309,11 @@ describe('vendor: plain and armed copies sell, stamped copies are refused (wash 
     sim.sellItem(R, 1, pid);
     sim.drainEvents();
     expect(slotsOf(sim, pid, R)).toHaveLength(0);
-    sim.buyBackItem(R, undefined, undefined, pid);
+    // Exercise the load-bearing discriminator path (index + expected payload),
+    // not just the legacy itemId-only fallback: this is the resolution order
+    // buyBackItem actually uses when a vendor's buyback row holds more than
+    // one line for the same itemId.
+    sim.buyBackItem(R, 0, { ...ARMED }, pid);
     expect(errorTexts(sim.drainEvents())).toHaveLength(0);
     const back = slotsOf(sim, pid, R);
     expect(back).toHaveLength(1);
