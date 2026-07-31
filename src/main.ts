@@ -294,6 +294,7 @@ import { type ClaudiumHooks, Hud } from './ui/hud';
 import { resolveActionBarVisibility } from './ui/hud/action_bar/action_bar_visibility_core';
 import { anchorChatInputToWrap, clearChatInputAnchor } from './ui/hud/chat/chat_input_anchor';
 import { autosizeChatInput } from './ui/hud/chat/chat_input_autosize';
+import { CHAT_BOX_LIMITS } from './ui/hud/chat/chat_window';
 import { wireSkinPicker } from './ui/hud/cosmetics/skin_picker';
 import {
   absolutePublishedCardUrl,
@@ -1422,7 +1423,13 @@ async function startGame(
     }
     const wrap = document.getElementById('chatlog-wrap');
     if (!wrap) return;
-    anchorChatInputToWrap(chatInput, wrap, window.innerHeight, CHAT_INPUT_GAP);
+    anchorChatInputToWrap(
+      chatInput,
+      wrap,
+      window.innerHeight,
+      CHAT_INPUT_GAP,
+      CHAT_BOX_LIMITS.minWidth,
+    );
   };
   const recoverFromMobileKeyboard = (): void => {
     document.body.classList.remove('mobile-chat-open');
