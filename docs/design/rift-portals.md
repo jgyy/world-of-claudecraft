@@ -237,11 +237,18 @@ A scheduler opens ranked portals automatically. Tuning is `RIFT_TIER_INFO` plus 
   opening: at a boundary the zone gets a new rift UNLESS its current one is still
   open, in which case that boundary is skipped and the zone is re-judged at the
   next one (`riftZoneNextOpenAt`, derived purely from the zone's own event
-  history: no per-zone persisted field, no schema change). At most
-  `RIFT_PORTAL_MAX_OPEN` (3) portals stand world-wide, and the scheduler still
-  spawns at most one per pass even when several zones are due at once. Enabled
-  by `SimConfig.riftPortals` (on for the live server and the offline client; OFF
-  by default so tests / parity / the RL env stay portal-free).
+  history: no per-zone persisted field, no schema change). The scheduler still
+  spawns at most one portal per pass even when several zones are due at once,
+  and after each successful spawn `riftPortalNextAt` holds for
+  `RIFT_PORTAL_SPAWN_FLOOR` (45 s) before the next one is allowed, so a fresh
+  world with every zone simultaneously due trickles portals open instead of
+  bursting them all within a couple of seconds. `RIFT_PORTAL_MAX_OPEN` tracks the
+  eligible-zone count itself (currently 11, one per eligible region), so the cap
+  no longer sits far below that count and queue a due zone behind portals that
+  have nothing to do with it: each zone can stand its own hourly rift
+  concurrently with every other zone's. Enabled by `SimConfig.riftPortals` (on
+  for the live server and the offline client; OFF by default so tests / parity /
+  the RL env stay portal-free).
 - **Determinism.** Each spawn rolls zone (among the zones currently due),
   rank, position and rift seed from a DEDICATED `Rng` derived from `(worldSeed,
   spawnOrdinal)`, never the shared stream, so the scheduler shifts no existing
@@ -348,9 +355,17 @@ LETTER is a game glyph (like item-quality colour), not translated.
   you can climb a staircase to a raised tier, but not walk UNDER it. This is the only
   form the shared `groundHeight`/2D-collision model allows; true stacked geometry
   would need a second collision layer across all three hosts and is out of scope.
-- **`RIFT_PORTAL_MAX_OPEN` (3) is a global concurrency cap** left over from the
-  pre-cadence random-zone model, unchanged by the per-zone hourly schedule above.
-  With 11 eligible zones each keeping their own boundary, the cap can leave a due
-  zone waiting behind whichever three portals are already open; raising it (or
-  dropping it in favor of a purely per-zone cap) is a balance call for a follow-up,
-  not assumed here.
+- **`RIFT_PORTAL_MAX_OPEN` now tracks the eligible-zone count**, resolved in the
+  same change that introduced the per-zone hourly cadence rather than deferred:
+  the old fixed cap of 3 sat far below the (then 11) eligible-zone count, so it
+  was almost always the binding constraint and the per-zone hourly boundary was
+  effectively unreachable. `RIFT_PORTAL_SPAWN_FLOOR` (45 s) is the companion
+  fix: without a real floor between successful spawns, a fresh world with every
+  zone due at once bursts all its portals open within a couple of scheduler
+  passes instead of trickling them in.
+- `trimEventHistory` keeps the most recent `RIFT_EVENT_HISTORY_LIMIT` (64)
+  completed events across ALL zones combined, not per zone. A quiet zone's
+  latest event can in principle be trimmed away by busier zones elsewhere,
+  after which that zone's schedule reads as "no history" and it becomes due
+  immediately rather than waiting out its real boundary. Harmless at today's
+  cadence and zone count, but the schedule is silently coupled to this limit.

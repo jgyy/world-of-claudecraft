@@ -10,7 +10,10 @@ import { loadRiftWorldState, serializeRiftWorldState } from '../src/sim/rift/per
 import {
   closeNaturalRiftPortal,
   RIFT_MIN_LEVEL,
+  RIFT_PORTAL_FIRST_AT,
   RIFT_PORTAL_LIFETIME,
+  RIFT_PORTAL_MAX_OPEN,
+  RIFT_PORTAL_SPAWN_FLOOR,
   RIFT_PORTAL_ZONE_CYCLE,
   RIFT_TIER_INFO,
   riftTierForZone,
@@ -374,6 +377,41 @@ describe('rift portals: per-zone hourly cadence', () => {
     const stillOpen = target.naturalRiftPortals.filter((p) => p.zoneId === openZoneId);
     expect(stillOpen).toHaveLength(1);
     expect(stillOpen[0].eventId).toBe(openPortal.eventId);
+  });
+});
+
+describe('rift portals: boot cadence and standing density (review #2668 regression)', () => {
+  it('a fresh boot trickles portals in via the spawn floor instead of bursting every due zone open at once, and the cap tracks the eligible-zone count', () => {
+    const sim = makeSim();
+    const eligibleCount = eligibleRiftZoneIds().length;
+    expect(RIFT_PORTAL_MAX_OPEN).toBe(eligibleCount);
+
+    // Drive the once-per-second scheduler pass directly, one simulated
+    // second at a time, well past the point every eligible zone (all
+    // history-free at boot) would have had a chance to spawn.
+    const window = RIFT_PORTAL_FIRST_AT + eligibleCount * RIFT_PORTAL_SPAWN_FLOOR + 60;
+    const openCountAtSecond: number[] = new Array(window + 1);
+    for (let t = 0; t <= window; t++) {
+      advanceToScheduledTick(sim, t);
+      updateRiftPortals(sim.ctx);
+      openCountAtSecond[t] = sim.naturalRiftPortals.length;
+    }
+
+    const firstOpenAt = openCountAtSecond.findIndex((n) => n > 0);
+    expect(firstOpenAt).toBeGreaterThanOrEqual(RIFT_PORTAL_FIRST_AT);
+    // The bug this pins: with no real inter-spawn floor, a second and third
+    // portal opened within two seconds of the first (t, t+1, t+2 each up one).
+    // The floor must hold the count at 1 for the whole gap between spawns.
+    expect(openCountAtSecond[firstOpenAt + 1]).toBe(1);
+    expect(openCountAtSecond[firstOpenAt + RIFT_PORTAL_SPAWN_FLOOR - 1]).toBe(1);
+
+    // By the end of the window, every eligible zone has had the chance to
+    // stand its own portal: the raised cap actually lets the per-zone hourly
+    // schedule bind instead of queuing behind a handful of unrelated zones
+    // that happen to fill a cap far below the zone count.
+    expect(sim.naturalRiftPortals.length).toBe(eligibleCount);
+    const openZoneIds = new Set(sim.naturalRiftPortals.map((p) => p.zoneId));
+    expect(openZoneIds.size).toBe(eligibleCount);
   });
 });
 

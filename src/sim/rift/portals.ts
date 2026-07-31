@@ -32,7 +32,20 @@ export const RIFT_PORTAL_LIFETIME = 2 * 60 * 60;
  * zone's own last opening (NOT tied to RIFT_PORTAL_LIFETIME: a portal can now
  * outlive one boundary and still be judged against the next). */
 export const RIFT_PORTAL_ZONE_CYCLE = 60 * 60;
-export const RIFT_PORTAL_MAX_OPEN = 3;
+/** Real floor between two successful natural spawns, not just a "nothing was
+ * spawnable" backoff: without it every zone that is simultaneously due (all of
+ * them, on a fresh world) bursts open within a couple of scheduler passes
+ * instead of trickling in one per pass. */
+export const RIFT_PORTAL_SPAWN_FLOOR = 45;
+/** A global concurrency cap used to sit far below the eligible-zone count (3),
+ * which pinned the world at the cap for most of a day and made the per-zone
+ * hourly boundary unreachable (it is almost never the binding constraint while
+ * three portals already fill every slot). The cap now tracks the eligible-zone
+ * count itself, so once every zone is due it CAN actually stand open on its own
+ * hourly schedule instead of queuing behind a stale global limit. */
+export const RIFT_PORTAL_MAX_OPEN = ZONES.filter(
+  (zone) => zone.riftPortalEligible && zone.riftTierWeights !== undefined,
+).length;
 export const COMMUNITY_RIFT_PORTAL_TARGET = 8;
 export const COMMUNITY_RIFT_PORTAL_LIFETIME = 6 * 60 * 60;
 export const COMMUNITY_RIFT_PORTAL_REFILL_DELAY = 60;
@@ -395,10 +408,13 @@ function updateCommunityRiftPortals(ctx: SimContext): void {
 /** Once-per-second scheduler. A full world cap postpones the due event instead of
  * consuming it. Each eligible zone is judged against its OWN hourly boundary
  * (`zonesNotDueForNaturalPortal`), so `riftPortalNextAt` no longer paces a
- * single shared random delay between spawns: it only backs off briefly when
- * nothing was spawnable this pass (no due zone, or no valid position), and the
+ * single shared random delay between spawns: it now only enforces
+ * `RIFT_PORTAL_SPAWN_FLOOR` between two successful spawns (so a fresh world
+ * with every zone simultaneously due trickles portals in rather than bursting
+ * them all open within a couple of passes) plus a short retry backoff when
+ * nothing was spawnable this pass (no due zone, or no valid position). The
  * legacy boot floor (`RIFT_PORTAL_FIRST_AT`) still keeps a fresh world from
- * bursting portals before it has been up for a couple of minutes. */
+ * opening its first portal before it has been up for a couple of minutes. */
 export function updateRiftPortals(ctx: SimContext): void {
   if (ctx.tickCount % 20 !== 10) return;
   if (ctx.cfg.communityRifts) {
@@ -423,5 +439,5 @@ export function updateRiftPortals(ctx: SimContext): void {
     return;
   }
   ctx.riftPortalSpawnCount += 1;
-  ctx.riftPortalNextAt = ctx.time;
+  ctx.riftPortalNextAt = ctx.time + RIFT_PORTAL_SPAWN_FLOOR;
 }
