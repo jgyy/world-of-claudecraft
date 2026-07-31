@@ -2189,6 +2189,7 @@ export const pt_BR: EnTranslations = {
         "noRecipient": "Ninguém com esse nome possui caixa de correio aqui.",
         "tooManyParcels": "Uma carta carrega no máximo {count} encomendas.",
         "noMailQuestItems": "Você não pode enviar itens de missão pelo correio.",
+        "noMailBound": "That item is bound and cannot be mailed.",
         "notEnoughItems": "Você não tem tantos assim para enviar.",
         "cantAffordPostage": "Você não pode pagar a postagem.",
         "recipientBoxFull": "A caixa de correio do destinatário está cheia.",
@@ -6565,7 +6566,8 @@ export const pt_BR: EnTranslations = {
       "tradeTooFar": "O alvo está longe demais para trocar.",
       "tradeExpired": "A solicitação de troca expirou.",
       "tradeFailed": "Troca falhou: itens ou dinheiro não estão mais disponíveis.",
-      "tradeBound": "Esse item está vinculado e não pode ser negociado."
+      "tradeBound": "Esse item está vinculado e não pode ser negociado.",
+      "marketListBound": "That item is bound and cannot be listed."
     },
     "logs": {
       "standUp": "Você se levanta.",
