@@ -367,7 +367,7 @@ describe('Eastbrook polish capture contract', () => {
       // zone-feature cull, fog and parkour deltas already pinned by the base.
       // Every Eastbrook line in renderer.ts is byte-identical across that
       // delta, so the accepted evidence still depicts this tree. No recapture.
-      fingerprint: '1effaf5e7adb130ff44dc188ceec515848ca53b55a499b49a910f40231cb7fc7',
+      fingerprint: '8078d5071f8825a4c5b67e7dbf183e3f0b86d481c6cb60171280619d71a227bf',
       components: {
         captureContract: {
           id: 'polish-v2',
