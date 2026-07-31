@@ -7637,10 +7637,11 @@ export class Hud {
       // elided toggleClass writer so the per-frame hot path stays write-elided. Normal
       // mode is unaffected (the rule lives only inside @media (forced-colors: active)).
       this.toggleClass(this.targetNameEl, 'hostile', target.hostile);
-      // Tier the target-debuff refresh (tick) granularity like the buff
-      // bar. A target SWAP (targetChanged) forces an immediate repaint so the strip never
-      // shows the previous target's debuffs while throttled on low; otherwise the full
-      // tiers repaint every frame and low coarsens to ~4Hz.
+      // Tier the target-debuff refresh (tick) granularity: this is NOT the player's own
+      // actionable information (unlike the player's own buff/debuff bars, which paint every
+      // frame on every preset). A target SWAP (targetChanged) forces an immediate repaint so
+      // the strip never shows the previous target's debuffs while throttled on low; otherwise
+      // the full tiers repaint every frame and low coarsens to ~4Hz.
       if (
         nonSelfRepaintDue(
           targetChanged,
