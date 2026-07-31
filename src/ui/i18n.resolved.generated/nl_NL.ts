@@ -2120,6 +2120,7 @@ export const nl_NL: EnTranslations = {
         "noRecipient": "Niemand met die naam heeft hier een brievenbus.",
         "tooManyParcels": "Een brief draagt hoogstens {count} pakketten.",
         "noMailQuestItems": "Je kunt geen opdrachtvoorwerpen versturen.",
+        "noMailBound": "That item is bound and cannot be mailed.",
         "notEnoughItems": "Zoveel heb je er niet om te versturen.",
         "cantAffordPostage": "Je kunt de porto niet betalen.",
         "recipientBoxFull": "Hun brievenbus is vol.",
@@ -6483,7 +6484,8 @@ export const nl_NL: EnTranslations = {
       "tradeTooFar": "Het doelwit is te ver weg om mee te ruilen.",
       "tradeExpired": "Het ruilverzoek is verlopen.",
       "tradeFailed": "Ruil mislukt: voorwerpen of geld niet langer beschikbaar.",
-      "tradeBound": "Dat voorwerp is gebonden en kan niet worden verhandeld."
+      "tradeBound": "Dat voorwerp is gebonden en kan niet worden verhandeld.",
+      "marketListBound": "That item is bound and cannot be listed."
     },
     "logs": {
       "standUp": "Je staat op.",
