@@ -708,9 +708,11 @@ export function castAbility(
     return;
   }
   // Kill-window abilities (Victory Rush): usable only while the enabling aura
-  // is worn; runEffects consumes it on a successful cast. Reuses the existing
-  // not-ready error literal so no new client matcher is needed. requiresAuraStacks
-  // (Glacial Spike's full 5-stack Icicles) additionally gates on the stack count.
+  // is worn; applyAbility consumes it atomically at cast commit, right before the
+  // cost/cooldown billing, so no early-return path can eat the aura without also
+  // committing the cast. Reuses the existing not-ready error literal so no new
+  // client matcher is needed. requiresAuraStacks (Glacial Spike's full 5-stack
+  // Icicles) additionally gates on the stack count.
   if (
     ability.requiresAuraKind &&
     !p.auras.some(
