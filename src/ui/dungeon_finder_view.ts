@@ -206,6 +206,11 @@ export interface DungeonFinderViewInput {
   specRole: Role | null;
   // Derived from partyInfo by the painter (null = solo).
   party: { leader: number; size: number } | null;
+  // The current party leader's name (mine, if I lead), used only to recognize
+  // a board listing as MY OWN group when I am a non-leader member (the board
+  // carries no member pids, only class/level/role; character names are
+  // globally unique, so a name match is exact). Null when solo.
+  partyLeaderName: string | null;
   lockouts: RaidLockout[];
   // Painter-local UI state.
   tab: FinderTab;
@@ -431,8 +436,14 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
   for (const listing of board) {
     const activity = finderActivity(listing.activityId);
     if (!activity) continue;
-    const blocked = blockReasonFor(activity, level, specRole);
     const mine = info.myListing?.id === listing.id;
+    // Hide a listing for the group I am ALREADY part of, whether I lead it
+    // (mine) or I am one of the leader's party members browsing the same
+    // board (matched by leader name: the board carries no member pids).
+    const alreadyInGroup =
+      mine || (input.partyLeaderName !== null && listing.leaderName === input.partyLeaderName);
+    if (alreadyInGroup) continue;
+    const blocked = blockReasonFor(activity, level, specRole);
     const roleFit =
       activity.composition === null || info.roles.some((r) => (listing.needed?.[r] ?? 0) > 0);
     listings.push({
