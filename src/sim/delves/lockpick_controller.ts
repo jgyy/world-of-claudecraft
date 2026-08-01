@@ -2,7 +2,9 @@
 // MOVED verbatim out of the 17.5k-line Sim class behind SimContext. This module
 // owns the per-attempt lock SESSION state machine: engage an ante, submit one pick
 // action per step, time a step out on the sim clock, burn a try (regenerating a
-// fresh board), and succeed or jam. It drives the pure `../lockpick` grid engine
+// fresh board), and grant the ante's loot tier on success OR once tries run out
+// (the final delve chest is guaranteed, never jammed; issue #2585). It drives
+// the pure `../lockpick` grid engine
 // (generateLockPages/stepLock/visibleCells) and is invoked from the delve runs
 // coordinator (I2a, via ctx.tickLockpickTimeout / ctx.abandonLockpick) and from the
 // IWorld/server lockpick commands (Sim keeps thin delegates lockpickEngage/
@@ -210,7 +212,10 @@ function lockpickStepTimeout(ctx: SimContext, run: DelveRun, session: LockSessio
     visible: visibleCells(spec, session.col, spec.tier.visibilityWindow),
     pid: session.ownerId,
   });
-  if (result === 'fail') lockpickFail(ctx, run, session);
+  // Running out of tries no longer jams the chest: a delve's final reward is
+  // guaranteed once the boss is dead, so exhausting tries grants the ante's
+  // loot tier the same as a clean solve (see lockpickSucceed / issue #2585).
+  if (result === 'fail') lockpickSucceed(ctx, run, session);
 }
 
 /** Submit one pick action on the player's active attempt. Abort ends it
@@ -287,16 +292,18 @@ export function lockpickAction(
     pid: r.meta.entityId,
   });
 
-  if (result === 'success') {
+  if (result === 'success' || result === 'fail') {
+    // Both a clean solve and running out of tries open the chest: the final
+    // delve reward is guaranteed once the boss is dead (issue #2585), so
+    // exhausting tries grants the ante's loot tier rather than jamming it.
     lockpickSucceed(ctx, run, session);
-  } else if (result === 'fail') {
-    lockpickFail(ctx, run, session);
   }
 }
 
 /** A try failed (slip/bind/trap or timeout). Consume one try; if any remain,
  * regenerate a fresh page set and reset to the start, returning 'retry'.
- * Otherwise return 'fail' (caller jams the chest). */
+ * Otherwise return 'fail' (caller grants the guaranteed reward instead of
+ * jamming the chest, see lockpickAction / lockpickStepTimeout). */
 function lockpickBurnTry(ctx: SimContext, session: LockSession): 'retry' | 'fail' {
   session.triesLeft -= 1;
   if (session.triesLeft <= 0) return 'fail';
@@ -387,33 +394,6 @@ function lockpickSucceed(ctx: SimContext, run: DelveRun, session: LockSession): 
     pid: session.ownerId,
   });
   deedsMod.onLockpickSuccessForDeeds(ctx, session.ownerId, session.ante, isCoffer);
-  run.lockpick = null;
-}
-
-function lockpickFail(ctx: SimContext, run: DelveRun, session: LockSession): void {
-  session.state = 'FAILED';
-  const state = run.objectState[session.chestId];
-  if (state) state.attemptAvailable = false; // chest lost, re-clear the delve
-  ctx.emit({
-    type: 'lockpickEnd',
-    sessionId: session.sessionId,
-    outcome: 'fail',
-    pid: session.ownerId,
-  });
-  if (run.partyKey) {
-    for (const pid of ctx.partyMembersForKey(run.partyKey)) {
-      ctx.emit({
-        type: 'log',
-        text: 'The last pick snaps. The lock jams. The chest is lost unless you clear the delve again.',
-        color: '#f88',
-        pid,
-      });
-    }
-  }
-  // The boss is already dead and the chest is now jammed: open the surface exit
-  // so a failed pick can never strand the party in a cleared delve. (Success
-  // opens it via lockpickSuccess; this mirrors that for the failure path.)
-  openDelveSurfaceExit(ctx, run);
   run.lockpick = null;
 }
 

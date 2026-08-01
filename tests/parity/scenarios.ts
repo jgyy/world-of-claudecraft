@@ -1155,19 +1155,21 @@ function delveLockpick(): Scenario {
   };
 }
 
-// Delve + lockpick FAIL/jam: enter the same Collapsed Reliquary finale, engage the
-// reward chest, then idle past the server-authoritative per-step clock so the single
-// premium try burns -> the chest jams (attemptAvailable=false) and the surface exit
-// opens (the party is never stranded). Pins the timeout/burn-try/fail path the
-// success-only delve_lockpick golden does not exercise.
+// Delve + lockpick tries-exhausted: enter the same Collapsed Reliquary finale, engage
+// the reward chest, then idle past the server-authoritative per-step clock so the
+// single premium try burns -> tries run out but the chest STILL opens at the ante
+// loot tier (attemptAvailable=false because the reward was granted, not because it
+// jammed; issue #2585 removed the "lose the chest" failure outcome) and the surface
+// exit opens. Pins the timeout/burn-try/guaranteed-grant path the success-only
+// delve_lockpick golden does not exercise.
 function delveLockpickFail(): Scenario {
   return {
     name: 'delve_lockpick_fail',
     coverage: [
       'delve run (collapsed_reliquary finale)',
-      'lockpick minigame (server-authoritative timeout jam)',
-      'tickLockpickTimeout -> lockpickStepTimeout -> lockpickBurnTry -> lockpickFail',
-      'jammed chest (attemptAvailable=false) + surface exit opens',
+      'lockpick minigame (server-authoritative timeout -> guaranteed grant)',
+      'tickLockpickTimeout -> lockpickStepTimeout -> lockpickBurnTry -> lockpickSucceed',
+      'chest opens (attemptAvailable=false, looted=true) + surface exit opens',
     ],
     sampleEvery: 10,
     build: () => new Sim({ seed: 2024, playerClass: 'rogue', autoEquip: true }),

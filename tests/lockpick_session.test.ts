@@ -122,7 +122,7 @@ describe('lockpick controller (I2b module), success', () => {
 });
 
 describe('lockpick controller (I2b module), fail / abandon', () => {
-  it('tickLockpickTimeout burns the single premium try -> chest jams + surface exit opens', () => {
+  it('tickLockpickTimeout burns the single premium try -> chest still opens with the ante loot tier (issue #2585)', () => {
     const sim = makeSim(7);
     const { run, chestId } = setup(sim);
     lockpick.lockpickEngage(sim.ctx, chestId, 1); // premium: one try
@@ -133,12 +133,18 @@ describe('lockpick controller (I2b module), fail / abandon', () => {
     lockpick.tickLockpickTimeout(sim.ctx, run);
 
     expect(run.lockpick).toBeNull();
-    expect(run.objectState[chestId].attemptAvailable).toBe(false); // jammed (lost until re-clear)
-    expect(run.objectState[chestId].looted).toBeFalsy();
+    // Running out of tries no longer jams the final delve chest: the boss is
+    // already dead, so the player is guaranteed the reward instead of losing
+    // the chest and having to re-clear the delve.
+    expect(run.objectState[chestId].attemptAvailable).toBe(false); // consumed by the grant, not a jam
+    expect(run.objectState[chestId].looted).toBe(true);
+    expect(run.objectState[chestId].lootedTier).toBe('premium'); // = ANTE_TO_TIER[1]
     expect(run.surfaceExitId).not.toBeNull(); // the party is never stranded
+    const events = sim.tick();
     expect(
-      sim.tick().find((e) => e.type === 'lockpickEnd' && (e as any).outcome === 'fail'),
+      events.find((e) => e.type === 'lockpickEnd' && (e as any).outcome === 'success'),
     ).toBeDefined();
+    expect(events.find((e) => e.type === 'delveChestLoot' && (e as any).chestId === chestId)).toBeDefined();
   });
 
   it('abandonLockpick (leave/disconnect teardown) PRESERVES the attempt (re-pickable)', () => {
