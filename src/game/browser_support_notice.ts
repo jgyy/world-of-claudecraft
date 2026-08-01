@@ -34,7 +34,9 @@ export function isSupportedBrowser(userAgent: string, hasBraveApi: boolean): boo
 }
 
 /** Read the browser's own "am I Brave" signal. False everywhere but Brave. */
-export function readHasBraveApi(nav: { brave?: unknown } = navigator): boolean {
+export function readHasBraveApi(
+  nav: { brave?: unknown } = navigator as Navigator & { brave?: unknown },
+): boolean {
   return typeof nav.brave === 'object' && nav.brave !== null;
 }
 

@@ -3058,8 +3058,11 @@
        KEEP the site menu bar (pinned below); only the offline quick-play
        panel still parks the whole chrome. The online arms keep the touch
        gate, matching their layout arms. */
-    body[data-start-panel="offline-select"]
-      :is(.homepage-header, .homepage-footer, .official-site-copy),
+    body[data-start-panel="offline-select"] :is(
+        .homepage-header,
+        .homepage-footer,
+        .official-site-copy
+      ),
     body:not(.mobile-touch)[data-start-panel="charselect-panel"]
       :is(.homepage-footer, .official-site-copy),
     body:not(.mobile-touch)[data-start-panel="charcreate-panel"]
@@ -3128,8 +3131,7 @@
        beside actions, separator border-top), which the card/mobile layouts
        keep. Each card still starts hidden until its own advert / link state
        lights it. */
-    body:not(.mobile-touch)
-      #charselect-panel.cs-wow
+    body:not(.mobile-touch) #charselect-panel.cs-wow
       :is(.cs-wallet-group, .cs-github-group, .cs-steam-group, .cs-epic-group) {
       flex-direction: column;
       align-items: stretch;
