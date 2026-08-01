@@ -104,11 +104,11 @@ describe('CI workflow parity', () => {
     }
   });
 
-  it('shards the PR and release test steps four ways and keeps the checks single-shard', () => {
+  it('shards the PR and release test steps six ways and keeps the checks single-shard', () => {
     const prGate = jobSource('pr-gate');
     const prChecks = jobSource('pr-checks');
     const releaseGate = jobSource('release-gate');
-    // Both test jobs fan the ONE suite across the same 4-shard matrix. The run
+    // Both test jobs fan the ONE suite across the same 6-shard matrix. The run
     // line stays `npm test` (whose pretest regenerates the i18n artifacts in
     // every shard: the S3 guard, guide freshness, and the git-subprocess suites
     // need them regardless of which shard they hash into), never a bare vitest
@@ -119,11 +119,11 @@ describe('CI workflow parity', () => {
     for (const job of [prGate, releaseGate]) {
       expect(job).toContain('strategy:');
       expect(job).toContain('fail-fast: false');
-      expect(job).toContain('shard: [1, 2, 3, 4]');
-      expect(job).toContain('run: npm test -- --shard=${{ matrix.shard }}/4');
+      expect(job).toContain('shard: [1, 2, 3, 4, 5, 6]');
+      expect(job).toContain('run: npm test -- --shard=${{ matrix.shard }}/6');
       expect(job).toContain(halfCoreCap);
     }
-    expect(workflow.match(/run: npm test -- --shard=\$\{\{ matrix\.shard \}\}\/4/g)).toHaveLength(
+    expect(workflow.match(/run: npm test -- --shard=\$\{\{ matrix\.shard \}\}\/6/g)).toHaveLength(
       2,
     );
     expect(workflow).not.toContain('npx vitest');
@@ -141,7 +141,7 @@ describe('CI workflow parity', () => {
     // pr-gate is tests-only, so nothing in it is gated to a single shard...
     expect(prGate).not.toContain('matrix.shard == 1');
     // ...while release-gate keeps its serialized checks and builds on exactly
-    // one shard each (they are not partitionable and must not run four times):
+    // one shard each (they are not partitionable and must not run six times):
     // i18n:gen, the freshness diff, the coverage summary, the malware gate,
     // typecheck, and the three builds. Every new non-test step added to
     // release-gate needs the same single-shard condition, and this count.
@@ -149,15 +149,15 @@ describe('CI workflow parity', () => {
     // The release TEST step itself must stay un-gated (run on every shard):
     // name-to-run adjacency proves no if: line sits between them, so a
     // compensating double-edit (gate the test step, un-gate a build; count
-    // still 8) cannot silently shrink the release tier to a quarter of the
+    // still 8) cannot silently shrink the release tier to a sixth of the
     // suite.
     expect(releaseGate).toMatch(
-      /- name: Run tests \(release tier[^\n]*\n {8}run: npm test -- --shard=\$\{\{ matrix\.shard \}\}\/4/,
+      /- name: Run tests \(release tier[^\n]*\n {8}run: npm test -- --shard=\$\{\{ matrix\.shard \}\}\/6/,
     );
     // Structural step counts close the remaining direction: a NEW step added
     // to either matrix job changes these totals and must consciously update
     // this test (an unconditioned addition to release-gate would otherwise
-    // run four times per release push; pr-gate stays exactly checkout,
+    // run six times per release push; pr-gate stays exactly checkout,
     // setup-node, npm ci, and the sharded test run).
     expect(prGate.match(/\n {6}- name: /g)).toHaveLength(4);
     expect(releaseGate.match(/\n {6}- name: /g)).toHaveLength(12);
