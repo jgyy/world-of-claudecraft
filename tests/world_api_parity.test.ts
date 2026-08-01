@@ -499,9 +499,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // riftEventMsRemaining and the instance-payload pipes add
     // marketListInstance, leaving 276. Reactive aura timing adds
     // reactiveAbilityWindowRemaining, leaving 277; the stop-auto-attack-on-
-    // target-switch setting adds setStopAutoAttackOnTargetSwitch, leaving 278.
-    expect(IWORLD_MEMBERS.length).toBe(278);
-    expect(DATA_MEMBERS.length).toBe(72);
+    // target-switch setting adds setStopAutoAttackOnTargetSwitch, leaving 277.
+    expect(IWORLD_MEMBERS.length).toBe(277);
+    expect(DATA_MEMBERS.length).toBe(71);
     expect(METHOD_MEMBERS.length).toBe(206);
   });
   it('has no duplicate member names', () => {
@@ -1618,8 +1618,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
 
   it('the facet union equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(278);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(278);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(277);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(277);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);
