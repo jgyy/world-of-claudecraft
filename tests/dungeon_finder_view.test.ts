@@ -302,6 +302,36 @@ describe('dungeon finder view core', () => {
     expect(applied.board.listings[0].canApply).toBe(false);
   });
 
+  it('hides premade listings for a dungeon the viewer is locked out of (#2030)', () => {
+    const heroicListing = {
+      id: 8,
+      activityId: 'hollow_crypt_heroic',
+      leaderName: 'Lead',
+      tags: [],
+      size: 1,
+      capacity: 5,
+      needed: { tank: 0, healer: 1, dps: 3 },
+      members: [{ cls: 'warrior' as const, level: 20, role: 'tank' as const }],
+    };
+    const unlocked = live(
+      buildDungeonFinderView(
+        input({ tab: 'board', playerLevel: 20, board: [heroicListing], lockouts: [] }),
+      ),
+    );
+    expect(unlocked.board.listings.map((l) => l.id)).toEqual([8]);
+    const locked = live(
+      buildDungeonFinderView(
+        input({
+          tab: 'board',
+          playerLevel: 20,
+          board: [heroicListing],
+          lockouts: [{ id: 'hollow_crypt:heroic', msRemaining: 3_600_000 }],
+        }),
+      ),
+    );
+    expect(locked.board.listings).toEqual([]);
+  });
+
   it('keeps the 1 Hz clock numbers OUT of the render-skip signature', () => {
     const base = input({
       info: makeInfo('sim', {

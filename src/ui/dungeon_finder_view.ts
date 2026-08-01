@@ -431,6 +431,12 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
   for (const listing of board) {
     const activity = finderActivity(listing.activityId);
     if (!activity) continue;
+    // Issue #2030: a listing for a dungeon/raid I am currently locked out of
+    // is not something I can usefully apply to, and showing it invites a
+    // player to join a group only to discover the lockout at the door. Hide
+    // it from the browse list; my own listing is unaffected (it lives in
+    // `myListing`, a separate panel this loop never touches).
+    if (lockoutMinutesFor(activity, input.lockouts) > 0) continue;
     const blocked = blockReasonFor(activity, level, specRole);
     const mine = info.myListing?.id === listing.id;
     const roleFit =
