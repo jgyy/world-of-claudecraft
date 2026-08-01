@@ -16,6 +16,7 @@ import {
   cssEffectsTier,
   readBrowserEnv,
 } from './game/browser_env';
+import { initBrowserSupportNotice } from './game/browser_support_notice';
 import { isCameraDrivenFacingActive } from './game/camera_driven_facing';
 import {
   cameraFollowShouldSettle,
@@ -9333,6 +9334,7 @@ function wireStartScreens(): void {
   });
   setupNavBtn(navBtnDownload, '#download-view');
   initDesktopDownload();
+  initBrowserSupportNotice();
   setupNavBtn(navBtnLogin, '#hero-view', () => {
     show('#login-panel');
   });
