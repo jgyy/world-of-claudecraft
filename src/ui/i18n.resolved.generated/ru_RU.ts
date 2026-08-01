@@ -1179,6 +1179,7 @@ export const ru_RU: EnTranslations = {
       "aurasOnPlayerFrame": "Баффы у рамки игрока",
       "highContrastBackground": "Фон высокой контрастности",
       "startAttackOnAbility": "Автоатака при использовании способности",
+      "stopAutoAttackOnTargetSwitch": "Stop Auto-Attack on Target Switch",
       "walkByAutoloot": "Автосбор добычи при проходе",
       "groundReticle": "Прицел наземного наведения",
       "mouseoverCast": "Применение по наведению на рамки группы",

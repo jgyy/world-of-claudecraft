@@ -3500,6 +3500,9 @@ export class ClientWorld implements IWorld {
     this.pendingTargetEcho = null; // server-resolved retarget, as tabTarget
     this.cmd({ cmd: 'tabFriendly' });
   }
+  setStopAutoAttackOnTargetSwitch(enabled: boolean): void {
+    this.cmd({ cmd: 'stopAutoAttackOnTargetSwitch', enabled });
+  }
 
   // --- IWorldTelemetry: fire-and-forget metrics sink ---
   reportTelemetry(kind: string, data: Record<string, number>): void {

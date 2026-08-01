@@ -1179,6 +1179,7 @@ export const ja_JP: EnTranslations = {
       "aurasOnPlayerFrame": "バフをプレイヤーフレームに表示",
       "highContrastBackground": "高コントラスト背景",
       "startAttackOnAbility": "アビリティ使用時に自動攻撃",
+      "stopAutoAttackOnTargetSwitch": "Stop Auto-Attack on Target Switch",
       "walkByAutoloot": "通りがかり自動ルート",
       "groundReticle": "地面ターゲットのレティクル",
       "mouseoverCast": "パーティフレームでマウスオーバーキャスト",

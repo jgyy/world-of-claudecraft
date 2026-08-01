@@ -1049,6 +1049,10 @@ async function startGame(
   // hoisting them ahead of mountGameUi is safe; everything DOM-bound (canvas
   // lookups, the context-lost listeners) stays below, after the template mounts.
   const settings = new Settings();
+  // "Stop Auto-Attack on Target Switch" (issue #1358) is authoritative on the
+  // sim, so a stored player preference must be re-pushed on every world entry
+  // (offline sim or online server), not just when the Options toggle changes.
+  world.setStopAutoAttackOnTargetSwitch(settings.get('stopAutoAttackOnTargetSwitch'));
   // First-run graphics default: until a device default has been applied (the dedicated
   // graphicsDefaultApplied marker, NOT the graphicsPreset key, which save() def-fills the moment
   // any unrelated setting is stored), probe the device (GPU name, memory, cores, touch) and
@@ -2080,6 +2084,13 @@ async function startGame(
       // No live subsystem to update: the HUD reads this setting at ability-cast
       // time (see hud.castSlot). Persist the choice and we are done.
       settings.set('startAttackOnAbilityUse', !!value);
+      return;
+    }
+    if (key === 'stopAutoAttackOnTargetSwitch') {
+      // Authoritative on the sim (issue #1358): persist locally AND mirror the
+      // live value onto the player, so the very next target switch honors it.
+      const v = settings.set('stopAutoAttackOnTargetSwitch', !!value);
+      world.setStopAutoAttackOnTargetSwitch(v);
       return;
     }
     if (key === 'showAttackButton') {

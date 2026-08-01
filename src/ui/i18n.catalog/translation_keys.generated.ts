@@ -7398,6 +7398,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.options.showWalletOnPlayerCard'
   | 'hudChrome.options.startAttackOnAbility'
   | 'hudChrome.options.stickyTarget'
+  | 'hudChrome.options.stopAutoAttackOnTargetSwitch'
   | 'hudChrome.options.targetFrameScale'
   | 'hudChrome.options.uiScale'
   | 'hudChrome.options.version'

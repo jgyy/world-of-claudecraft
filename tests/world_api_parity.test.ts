@@ -123,6 +123,7 @@ export const IWORLD_MEMBERS = [
   { name: 'tabTarget', kind: 'method' },
   { name: 'targetNearestFriendly', kind: 'method' },
   { name: 'friendlyTabTarget', kind: 'method' },
+  { name: 'setStopAutoAttackOnTargetSwitch', kind: 'method' },
   { name: 'startAutoAttack', kind: 'method' },
   { name: 'stopAutoAttack', kind: 'method' },
   { name: 'interact', kind: 'method' },
@@ -745,6 +746,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'setPetAutoWaterJet',
       'setPetMode',
       'setSpec',
+      'setStopAutoAttackOnTargetSwitch',
       'setTownFocus',
       'socialInfo',
       'socketRiftGem',
@@ -1041,6 +1043,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'setPetAutoWaterJet',
       'setPetMode',
       'setSpec',
+      'setStopAutoAttackOnTargetSwitch',
       'setTownFocus',
       'socketRiftGem',
       'spinDailyReward',
@@ -1171,6 +1174,7 @@ const FACET_TARGETING = [
   'tabTarget',
   'targetNearestFriendly',
   'friendlyTabTarget',
+  'setStopAutoAttackOnTargetSwitch',
 ] as const satisfies readonly (keyof IWorldTargeting)[];
 type _ExhaustTargeting = AssertNever<
   Exclude<keyof IWorldTargeting, (typeof FACET_TARGETING)[number]>

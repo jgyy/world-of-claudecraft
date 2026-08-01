@@ -488,6 +488,11 @@ export const COMMAND_NAMES = [
   // Guild billboard: set (or clear, with '') the officer-editable message
   // pinned atop the social window's Guild tab (SocialService.guildSetMotd).
   'guild_set_motd',
+  // "Stop Auto-Attack on Target Switch" QoL preference (issue #1358): mirrors
+  // the client setting onto the authoritative Targeting slice so every
+  // target-switch selector can gate on it (Sim.setStopAutoAttackOnTargetSwitch
+  // via src/sim/targeting.ts).
+  'stopAutoAttackOnTargetSwitch',
 ] as const;
 
 // The union both the send path (`online.ts`) and the dispatch switch
@@ -588,6 +593,7 @@ export const COMMAND_FACETS = {
   tab: 'IWorldTargeting',
   targetNearestFriendly: 'IWorldTargeting',
   tabFriendly: 'IWorldTargeting',
+  stopAutoAttackOnTargetSwitch: 'IWorldTargeting',
   // IWorldLoot: need-greed roll submit.
   lootRoll: 'IWorldLoot',
   // IWorldInventory: non-fungible Rift gear progression. These mutate the
