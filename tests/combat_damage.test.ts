@@ -283,3 +283,82 @@ describe('combat/damage handleDeath', () => {
     expect(pet.hp).toBe(hpBefore - 5);
   });
 });
+
+describe('combat/damage death recap', () => {
+  it('names the killing mob and its ability in a self-only log line', () => {
+    const sim = makeSim();
+    sim.setPlayerLevel(10);
+    const p = sim.player as AnyEntity;
+    const mob = spawnHostileMob(sim, 'forest_wolf', 5);
+    p.hp = 1;
+    sim.drainEvents();
+
+    dealDamage(sim.ctx, mob, p, 100, false, 'physical', 'Bite', 'hit');
+
+    const events = sim.drainEvents();
+    const recap = events.find(
+      (e) =>
+        e.type === 'log' && (e as any).pid === p.id && (e as any).text.startsWith('You have died'),
+    ) as any;
+    expect(recap).toBeTruthy();
+    expect(recap.text).toBe(`You have died. Slain by ${mob.name}'s Bite.`);
+  });
+
+  it('names the killing mob with no ability for a plain melee swing', () => {
+    const sim = makeSim();
+    sim.setPlayerLevel(10);
+    const p = sim.player as AnyEntity;
+    const mob = spawnHostileMob(sim, 'forest_wolf', 5);
+    p.hp = 1;
+    sim.drainEvents();
+
+    dealDamage(sim.ctx, mob, p, 100, false, 'physical', null, 'hit');
+
+    const events = sim.drainEvents();
+    const recap = events.find(
+      (e) =>
+        e.type === 'log' && (e as any).pid === p.id && (e as any).text.startsWith('You have died'),
+    ) as any;
+    expect(recap).toBeTruthy();
+    expect(recap.text).toBe(`You have died. Slain by ${mob.name}.`);
+  });
+
+  it('names the killing player in a PvP (duel/arena-style) kill', () => {
+    const sim = new Sim({ seed: 1717, playerClass: 'warrior', noPlayer: true, autoEquip: true });
+    const killerId = sim.addPlayer('warrior', 'Killer');
+    const victimId = sim.addPlayer('warrior', 'Victim');
+    sim.setPlayerLevel(20, killerId);
+    sim.setPlayerLevel(20, victimId);
+    const killer = sim.entities.get(killerId) as AnyEntity;
+    const victim = sim.entities.get(victimId) as AnyEntity;
+    victim.hp = 1;
+    sim.drainEvents();
+
+    dealDamage(sim.ctx, killer, victim, 100, false, 'physical', 'Mortal Strike', 'hit');
+
+    const events = sim.drainEvents();
+    const recap = events.find(
+      (e) =>
+        e.type === 'log' &&
+        (e as any).pid === victim.id &&
+        (e as any).text.startsWith('You have died'),
+    ) as any;
+    expect(recap).toBeTruthy();
+    expect(recap.text).toBe("You have died. Slain by Killer's Mortal Strike.");
+  });
+
+  it('falls back to a plain death line with no killer entity', () => {
+    const sim = makeSim();
+    sim.setPlayerLevel(10);
+    const p = sim.player as AnyEntity;
+    sim.drainEvents();
+
+    handleDeath(sim.ctx, p, null);
+
+    const events = sim.drainEvents();
+    const recap = events.find(
+      (e) => e.type === 'log' && (e as any).pid === p.id && (e as any).text === 'You have died.',
+    );
+    expect(recap).toBeTruthy();
+  });
+});

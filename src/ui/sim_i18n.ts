@@ -276,6 +276,9 @@ const baseEnTable = {
   'log.summonDemon': 'You summon {name}.',
   'log.tamedPet': '{name} is now your loyal companion.',
   'log.entityDies': '{name} dies.',
+  'log.deathRecapAbility': "You have died. Slain by {killer}'s {ability}.",
+  'log.deathRecapPlain': 'You have died. Slain by {killer}.',
+  'log.deathRecapUnknown': 'You have died.',
   'log.prestiged': 'You have prestiged! Prestige Rank {rank}.',
   'log.enraged': '{name} becomes enraged!',
   'log.callsForAid': '{name} calls for aid!',
@@ -8894,6 +8897,15 @@ const RULES: Rule[] = [
     build: (m) => tSim('log.petMode', { name: locMob(m[1]), mode: locPetMode(m[2]) }),
   },
   { re: /^(.+) dies\.$/, build: (m) => tSim('log.entityDies', { name: locMob(m[1]) }) },
+  {
+    re: /^You have died\. Slain by (.+)'s (.+)\.$/,
+    build: (m) =>
+      tSim('log.deathRecapAbility', { killer: locMob(m[1]), ability: locAbility(m[2]) }),
+  },
+  {
+    re: /^You have died\. Slain by (.+)\.$/,
+    build: (m) => tSim('log.deathRecapPlain', { killer: locMob(m[1]) }),
+  },
   {
     re: /^You have prestiged! Prestige Rank (\d+)\.$/,
     build: (m) => tSim('log.prestiged', { rank: m[1] }),
