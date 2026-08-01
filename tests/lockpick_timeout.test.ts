@@ -88,26 +88,29 @@ describe('lockpick per-step clock is enforced by the sim tick (server-authoritat
     expect(ANTE_TO_STEP_TIMEOUT_MS[3]).toBe(9000); // modest, easy
   });
 
-  it('idling past the deadline burns a try (premium = instant jam) with NO client call', () => {
+  it('idling past the deadline burns a try (premium = instant grant) with NO client call, issue #2585', () => {
     const sim = makeSim(7);
     const { run, chestId } = enterFinale(sim);
     sim.lockpickEngage(chestId, 1); // premium ante: 1 try
     expect(run.lockpick.state).toBe('IN_PROGRESS');
-    // Tick past the deadline without acting. The sim, not the client, fails it.
+    // Tick past the deadline without acting. The sim, not the client, resolves it.
     idle(sim, budgetTicks(sim) + 2);
     expect(run.lockpick).toBeNull();
-    expect(run.objectState[chestId].looted).toBeFalsy();
-    expect(run.objectState[chestId].attemptAvailable).toBe(false); // chest jammed
+    // Running out of tries no longer jams the final delve chest: the reward is
+    // guaranteed once the boss is dead, so this grants the ante loot tier instead
+    // of losing the chest.
+    expect(run.objectState[chestId].looted).toBe(true);
+    expect(run.objectState[chestId].attemptAvailable).toBe(false); // consumed by the grant
   });
 
-  it('a jammed lockpick opens the surface exit so the player is never stranded', () => {
+  it('a tries-exhausted lockpick opens the surface exit so the player is never stranded', () => {
     const sim = makeSim(7);
     const { run, chestId } = enterFinale(sim);
     sim.lockpickEngage(chestId, 1); // premium ante: a single try
     expect(run.surfaceExitId).toBeNull(); // not open until the pick resolves
-    idle(sim, budgetTicks(sim) + 2); // let the try burn -> chest jams
+    idle(sim, budgetTicks(sim) + 2); // let the try burn -> chest opens at the ante tier
     expect(run.objectState[chestId].attemptAvailable).toBe(false);
-    // The boss is dead and the chest is lost, but the way out must still open.
+    // The boss is dead and the reward is granted, and the way out opens too.
     expect(run.surfaceExitId).not.toBeNull();
     expect(run.objectState[run.surfaceExitId!].kind).toBe('surface_exit');
     expect(run.objectState[run.surfaceExitId!].open).toBe(true);
