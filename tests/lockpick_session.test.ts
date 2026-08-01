@@ -144,7 +144,9 @@ describe('lockpick controller (I2b module), fail / abandon', () => {
     expect(
       events.find((e) => e.type === 'lockpickEnd' && (e as any).outcome === 'success'),
     ).toBeDefined();
-    expect(events.find((e) => e.type === 'delveChestLoot' && (e as any).chestId === chestId)).toBeDefined();
+    expect(
+      events.find((e) => e.type === 'delveChestLoot' && (e as any).chestId === chestId),
+    ).toBeDefined();
   });
 
   it('abandonLockpick (leave/disconnect teardown) PRESERVES the attempt (re-pickable)', () => {
