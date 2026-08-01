@@ -461,19 +461,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.targetAuras.visibleRows"
   ],
   "zh_CN": [
-    "hudChrome.options.stopAutoAttackOnTargetSwitch",
     "hudChrome.targetAuras.all"
   ],
   "zh_TW": [
-    "hudChrome.options.stopAutoAttackOnTargetSwitch",
     "hudChrome.targetAuras.all"
   ],
   "ko_KR": [
-    "hudChrome.options.stopAutoAttackOnTargetSwitch",
     "hudChrome.targetAuras.all"
   ],
   "ja_JP": [
-    "hudChrome.options.stopAutoAttackOnTargetSwitch",
     "hudChrome.targetAuras.all"
   ],
   "pt_BR": [
@@ -552,7 +548,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.targetAuras.visibleRows"
   ],
   "ru_RU": [
-    "hudChrome.options.stopAutoAttackOnTargetSwitch",
     "hudChrome.targetAuras.all"
   ],
   "cs_CZ": [
