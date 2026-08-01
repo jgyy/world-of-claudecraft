@@ -7380,6 +7380,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.options.itemLevelLine'
   | 'hudChrome.options.itemScoreLine'
   | 'hudChrome.options.keybindHelpLockCursorOnRotate'
+  | 'hudChrome.options.lockActionBars'
   | 'hudChrome.options.lockCursorOnRotate'
   | 'hudChrome.options.mobileCameraJoystick'
   | 'hudChrome.options.mobileLeftHanded'

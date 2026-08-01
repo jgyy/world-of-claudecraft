@@ -282,6 +282,7 @@ import {
   captureActionBarLayout,
   planActionBarRestore,
 } from './hud/action_bar/action_bar_layout_sync';
+import { isActionBarEditAllowed } from './hud/action_bar/action_bar_lock';
 import { ActionBarPainter, type ActionBarSlotElements } from './hud/action_bar/action_bar_painter';
 import {
   ABILITY_ICON_PREFIX,
@@ -6162,6 +6163,10 @@ export class Hud {
     return true;
   }
 
+  private actionBarsLocked(): boolean {
+    return Boolean(this.optionsHooks?.settings.get('lockActionBars'));
+  }
+
   private buildActionBar(): void {
     const bar = $('#actionbar');
     const bar2 = $('#actionbar2');
@@ -6247,6 +6252,7 @@ export class Hud {
         // slot 0 (Attack) stays fixed
         btn.draggable = true;
         const clearSlot = () => {
+          if (!isActionBarEditAllowed(this.actionBarsLocked(), 'clear')) return;
           this.hotbarActions = clearHotbarSlot(this.hotbarActions, slot - 1);
           this.saveSlotMap();
           btn.classList.add('empty');
@@ -6260,6 +6266,10 @@ export class Hud {
           handleShiftClearKeydown(e, clearSlot);
         });
         btn.addEventListener('dragstart', (e) => {
+          if (!isActionBarEditAllowed(this.actionBarsLocked(), 'drag')) {
+            e.preventDefault();
+            return;
+          }
           const action = this.actionForSlot(slot);
           if (!action) {
             e.preventDefault();
@@ -6271,6 +6281,7 @@ export class Hud {
           this.hideTooltip();
         });
         btn.addEventListener('dragover', (e) => {
+          if (!isActionBarEditAllowed(this.actionBarsLocked(), 'drop')) return;
           if (this.tryAcceptAttackDrag(e, btn, slot, 'over')) return;
           const dragged = this.dragAction?.action ?? this.readDraggedAction(e.dataTransfer);
           if (!dragged) return;
@@ -6288,6 +6299,7 @@ export class Hud {
         });
         btn.addEventListener('dragleave', () => btn.classList.remove('drop-target'));
         btn.addEventListener('drop', (e) => {
+          if (!isActionBarEditAllowed(this.actionBarsLocked(), 'drop')) return;
           if (this.tryAcceptAttackDrag(e, btn, slot, 'drop')) return;
           e.preventDefault();
           btn.classList.remove('drop-target');
@@ -6332,12 +6344,14 @@ export class Hud {
         // for a normal action. The Options toggle restores Attack at any time.
         btn.draggable = true;
         const clearAttackSlotAction = () => {
+          if (!isActionBarEditAllowed(this.actionBarsLocked(), 'clear')) return;
           if (this.attackSlotAction === null) return;
           this.attackSlotAction = null;
           this.saveAttackSlotAction();
           this.hideTooltip();
         };
         btn.addEventListener('contextmenu', (e) => {
+          if (!isActionBarEditAllowed(this.actionBarsLocked(), 'clear')) return;
           if (this.attackSlotIsAttack()) {
             e.preventDefault();
             this.optionsHooks?.settings.set('showAttackButton', false);
@@ -6351,6 +6365,10 @@ export class Hud {
           handleShiftClearKeydown(e, clearAttackSlotAction);
         });
         btn.addEventListener('dragstart', (e) => {
+          if (!isActionBarEditAllowed(this.actionBarsLocked(), 'drag')) {
+            e.preventDefault();
+            return;
+          }
           const action = this.actionForSlot(0);
           if (!action) {
             e.preventDefault();
@@ -6363,6 +6381,7 @@ export class Hud {
         });
         // With Attack removed, the freed slot accepts a drag like any other slot.
         btn.addEventListener('dragover', (e) => {
+          if (!isActionBarEditAllowed(this.actionBarsLocked(), 'drop')) return;
           if (this.tryAcceptAttackDrag(e, btn, slot, 'over')) return;
           if (this.attackSlotIsAttack()) return;
           if (this.dragAction?.sourceAttackSlot) return;
@@ -6374,6 +6393,7 @@ export class Hud {
         });
         btn.addEventListener('dragleave', () => btn.classList.remove('drop-target'));
         btn.addEventListener('drop', (e) => {
+          if (!isActionBarEditAllowed(this.actionBarsLocked(), 'drop')) return;
           if (this.tryAcceptAttackDrag(e, btn, slot, 'drop')) return;
           e.preventDefault();
           btn.classList.remove('drop-target');
@@ -6804,6 +6824,7 @@ export class Hud {
 
   private bindMobileActionDrag(btn: HTMLButtonElement, slot: number): void {
     btn.addEventListener('pointerdown', (e) => {
+      if (!isActionBarEditAllowed(this.actionBarsLocked(), 'drag')) return;
       if (!document.body.classList.contains('mobile-touch') || e.pointerType !== 'touch') return;
       if (this.empoweredAbilityIdForSlot(slot)) return;
       // Any populated slot (ability or item) can be picked up and swapped by
@@ -6897,6 +6918,7 @@ export class Hud {
   // position's underlying bar slot depends on the current paged page.
   private bindMobileRingDrag(btn: HTMLButtonElement, ringIndex: number): void {
     btn.addEventListener('pointerdown', (e) => {
+      if (!isActionBarEditAllowed(this.actionBarsLocked(), 'drag')) return;
       if (!document.body.classList.contains('mobile-touch') || e.pointerType !== 'touch') return;
       const sourceSlot = this.mobileSourceSlotForButton(ringIndex);
       if (this.empoweredAbilityIdForSlot(sourceSlot)) return;
