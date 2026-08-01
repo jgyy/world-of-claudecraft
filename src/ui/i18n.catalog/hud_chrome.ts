@@ -2471,6 +2471,8 @@ export const hudChromeStrings = {
     // Deposit-all-materials button + its transient summary line. {count} is
     // the number of material stacks moved.
     depositAll: 'Deposit all materials',
+    depositAllTooltip:
+      'Sends every crafting reagent, junk item, and gathering tool from your bags to the bank in one trip. Equipped gear, quest items, and consumables are never touched.',
     depositAllDone: 'Materials deposited: {count}.',
     depositAllFull: 'Materials deposited: {count}. Bank now full.',
     depositAllNone: 'Bank full: nothing deposited.',

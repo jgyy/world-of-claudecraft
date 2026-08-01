@@ -11,28 +11,34 @@
 export const pending: Record<string, readonly string[]> = {
   "es": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "es_ES": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "fr_FR": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "fr_CA": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "en_CA": [],
   "it_IT": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "de_DE": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "zh_CN": [],
   "zh_TW": [],
@@ -40,39 +46,48 @@ export const pending: Record<string, readonly string[]> = {
   "ja_JP": [],
   "pt_BR": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "ru_RU": [],
   "cs_CZ": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "nl_NL": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "pl_PL": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "id_ID": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "tr_TR": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "sv_SE": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "vi_VN": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ],
   "da_DK": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hudChrome.bank.depositAllTooltip"
   ]
 };

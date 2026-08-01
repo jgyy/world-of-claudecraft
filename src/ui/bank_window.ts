@@ -556,6 +556,7 @@ export class BankWindow {
     deposit.type = 'button';
     deposit.className = 'bank-deposit-all';
     deposit.textContent = t('hudChrome.bank.depositAll');
+    deposit.title = t('hudChrome.bank.depositAllTooltip');
     deposit.disabled =
       this.depositAllPending ||
       !hasDepositableMaterials(this.deps.world().inventory, (id) => ITEMS[id]);

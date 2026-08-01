@@ -6285,6 +6285,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.bank.depositAllDone'
   | 'hudChrome.bank.depositAllFull'
   | 'hudChrome.bank.depositAllNone'
+  | 'hudChrome.bank.depositAllTooltip'
   | 'hudChrome.bank.depositHint'
   | 'hudChrome.bank.depositPartialHint'
   | 'hudChrome.bank.depositQuantityConfirm'

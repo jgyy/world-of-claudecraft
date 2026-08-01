@@ -303,6 +303,10 @@ describe('bank_window: search / sort / deposit-all', () => {
     );
   });
 
+  it('gives the deposit-all button a tooltip clarifying which items it moves (issue #2132)', () => {
+    expect(painter).toContain("deposit.title = t('hudChrome.bank.depositAllTooltip')");
+  });
+
   it('snapshots the plan against the click-time state (no mid-run re-read under mirror lag)', () => {
     const body = painter.slice(
       painter.indexOf('private onDepositAll(): void {'),

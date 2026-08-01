@@ -2241,6 +2241,7 @@ export const cs_CZ: EnTranslations = {
       "sortAria": "Seřadit předměty v bance",
       "searchAria": "Hledat předměty v bance podle názvu",
       "depositAll": "Uložit všechny materiály",
+      "depositAllTooltip": "Sends every crafting reagent, junk item, and gathering tool from your bags to the bank in one trip. Equipped gear, quest items, and consumables are never touched.",
       "depositAllDone": "Uloženo materiálů: {count}.",
       "depositAllFull": "Uloženo materiálů: {count}. Banka je teď plná.",
       "depositAllNone": "Banka je plná: nic nebylo uloženo.",

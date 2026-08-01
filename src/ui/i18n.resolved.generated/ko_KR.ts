@@ -2241,6 +2241,7 @@ export const ko_KR: EnTranslations = {
       "sortAria": "은행 아이템 정렬",
       "searchAria": "이름으로 은행 아이템 검색",
       "depositAll": "모든 재료 보관",
+      "depositAllTooltip": "가방에 있는 모든 제작 재료, 잡동사니, 채집 도구를 한 번에 은행에 보관합니다. 장착한 장비, 퀘스트 아이템, 소모품은 영향을 받지 않습니다.",
       "depositAllDone": "보관한 재료: {count}.",
       "depositAllFull": "보관한 재료: {count}. 은행이 가득 찼습니다.",
       "depositAllNone": "은행이 가득 참: 아무것도 보관하지 못했습니다.",

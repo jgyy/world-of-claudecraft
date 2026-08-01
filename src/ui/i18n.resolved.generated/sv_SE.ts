@@ -2241,6 +2241,7 @@ export const sv_SE: EnTranslations = {
       "sortAria": "Sortera bankföremål",
       "searchAria": "Sök bankföremål efter namn",
       "depositAll": "Sätt in alla material",
+      "depositAllTooltip": "Sends every crafting reagent, junk item, and gathering tool from your bags to the bank in one trip. Equipped gear, quest items, and consumables are never touched.",
       "depositAllDone": "Material insatta: {count}.",
       "depositAllFull": "Material insatta: {count}. Banken är nu full.",
       "depositAllNone": "Banken är full: inget sattes in.",
