@@ -8,10 +8,11 @@
 // local x=35 inside the origin(0,0) room band).
 
 import { describe, expect, it } from 'vitest';
-import { setRiftRegion } from '../src/sim/colliders';
+import { isBlocked, setRiftRegion } from '../src/sim/colliders';
 import { relocateSwept } from '../src/sim/combat/heroic_leap';
 import { riftInstanceOrigin } from '../src/sim/data';
 import { layoutColliders } from '../src/sim/dungeon_layout';
+import { PLAYER_BODY_RADIUS } from '../src/sim/pathfind';
 import { generateRiftFloor } from '../src/sim/rift/rift_gen';
 import { Sim } from '../src/sim/sim';
 import { MAX_LEVEL } from '../src/sim/types';
@@ -64,5 +65,30 @@ describe('rift walls stop swept relocations (Blink, Shadowstep, Heroic Leap)', (
     relocateSwept(sim.ctx, p, { x: origin.x + 46.5, y: p.pos.y, z: origin.z + 61 });
     const localX = p.pos.x - origin.x;
     expect(localX, 'relocateSwept crossed the rift wall').toBeLessThan(36);
+  });
+});
+
+describe('click-to-move A* cell walkability respects a rift wall (isBlocked riftToken)', () => {
+  it('a cell just past the wall is walkable with no token but blocked with the live token', () => {
+    // This is the exact check findPlayerPath's A* grid runs per candidate cell
+    // (playerDestinationWalkable / resolvePlayerDestination run the equivalent
+    // check for the click-to-move destination). main.ts's two findPlayerPath
+    // call sites (clickMovePathTo, the stuck reroute) used to omit the token,
+    // so the A* grid treated this rift wall as open floor and could string-pull
+    // a route straight through it even though the destination itself was
+    // already correctly rift-aware.
+    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const { origin } = armWithRiftWall(sim);
+    const x = origin.x + 35;
+    const z = origin.z + 61;
+
+    expect(
+      isBlocked(sim.cfg.seed, x, z, PLAYER_BODY_RADIUS, true, undefined, 0),
+      'sanity: without a token the wall cell reads as open floor',
+    ).toBe(false);
+    expect(
+      isBlocked(sim.cfg.seed, x, z, PLAYER_BODY_RADIUS, true, undefined, sim.riftCollisionToken),
+      'with the live token the wall cell must be blocked',
+    ).toBe(true);
   });
 });
