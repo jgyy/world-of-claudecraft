@@ -1,6 +1,8 @@
 // Online play: REST auth client + WebSocket world mirror.
 
-import { apiUrl, DESKTOP_API_ORIGIN, NATIVE_API_ORIGIN } from '../client_origin';
+import { App } from '@capacitor/app';
+import type { PluginListenerHandle } from '@capacitor/core';
+import { apiUrl, DESKTOP_API_ORIGIN, NATIVE_API_ORIGIN, NATIVE_APP } from '../client_origin';
 import { normalizeOrigin, runtimeWebSocketUrl } from '../runtime';
 import {
   hasStreamerLink,
@@ -1680,6 +1682,10 @@ export class ClientWorld implements IWorld {
   // set by close() and by a server 'error' frame: the session is over for
   // good, so a subsequent socket close must not schedule a reconnect
   private sessionEnded = false;
+  // The native app-lifecycle listener handle (see handleAppStateChange below),
+  // resolved asynchronously by Capacitor's addListener. Undefined until it
+  // resolves, and also whenever NATIVE_APP is false.
+  private nativeLifecycleHandle: PluginListenerHandle | undefined;
   readonly characterId: number;
 
   // assigned by openSocket() from the ctor, and reassigned on every reconnect
@@ -1751,6 +1757,33 @@ export class ClientWorld implements IWorld {
     if (typeof document !== 'undefined') {
       document.addEventListener('visibilitychange', this.handleVisibilityChange);
     }
+    // Inside a Capacitor WebView, document.visibilitychange above is the ONLY
+    // signal driving the zombie-socket recovery below, but it is an indirect
+    // one the WebView itself must derive and forward: real-world Android/iOS
+    // WebViews are documented as inconsistent about firing it on every
+    // OS-level backgrounding path (task-switcher swipe, home button, OEM
+    // battery-management kills), unlike a browser tab, which gets first-party
+    // engineering behind the event. Capacitor's App plugin exists precisely
+    // for this: 'appStateChange' is wired directly to the native
+    // Activity.onPause/onResume (Android) and UIApplication background/
+    // foreground notifications (iOS), so it fires reliably where
+    // visibilitychange might not. Reported as frequent mobile disconnects
+    // "no matter how good the network is": the trigger to recover was
+    // missing, not the connection. Drives the exact same recovery path as the
+    // DOM listener; harmless to run both when visibilitychange also fires.
+    if (NATIVE_APP) {
+      void App.addListener('appStateChange', ({ isActive }) => {
+        this.handleForegroundBackground(isActive);
+      }).then((handle) => {
+        // The session may have already ended by the time this resolves
+        // (addListener is async); don't leak a listener onto a dead world.
+        if (this.sessionEnded) {
+          void handle.remove();
+        } else {
+          this.nativeLifecycleHandle = handle;
+        }
+      });
+    }
   }
 
   // Mobile browsers suspend JS timers AND the network stack together while a
@@ -1765,7 +1798,15 @@ export class ClientWorld implements IWorld {
   // resume, force a real state check and retry immediately instead of
   // waiting for a close event or the rest of the backoff delay.
   private readonly handleVisibilityChange = (): void => {
-    if (document.visibilityState === 'hidden') {
+    this.handleForegroundBackground(document.visibilityState === 'visible');
+  };
+
+  // Shared foreground/background handler driven by BOTH the DOM
+  // visibilitychange listener and (NATIVE_APP) the Capacitor App
+  // 'appStateChange' listener above, so a native app recovers a zombie socket
+  // on the native lifecycle signal even when visibilitychange never fires.
+  private handleForegroundBackground(visible: boolean): void {
+    if (!visible) {
       // Backgrounding (tab switch, tab close, phone lock) is the last reliable
       // beat to get an in-flight debounced layout edit to the server while the
       // socket is still open, so a "rearrange then close the tab" never strands
@@ -1775,7 +1816,6 @@ export class ClientWorld implements IWorld {
       this.flushActionBarLayoutSave();
       return;
     }
-    if (document.visibilityState !== 'visible') return;
     if (this.sessionEnded) return;
     if (this.ws.readyState === WebSocket.OPEN) return;
     if (this.reconnectTimer !== undefined) {
@@ -1801,7 +1841,7 @@ export class ClientWorld implements IWorld {
     // never delivered while suspended (the zombie-socket case). Drive the
     // same path a real close would have.
     if (this.connected) this.socketClosed();
-  };
+  }
 
   private openSocket(): void {
     // when a realm was picked, connect to that realm's origin; otherwise the
@@ -1879,6 +1919,13 @@ export class ClientWorld implements IWorld {
     if (this.reconnectTimer !== undefined) clearTimeout(this.reconnectTimer);
     if (typeof document !== 'undefined') {
       document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+    }
+    // If the App.addListener promise in the constructor has not resolved yet,
+    // its .then() callback checks sessionEnded itself and removes the handle
+    // as soon as it lands; this covers the already-resolved case.
+    if (this.nativeLifecycleHandle) {
+      void this.nativeLifecycleHandle.remove();
+      this.nativeLifecycleHandle = undefined;
     }
   }
 
