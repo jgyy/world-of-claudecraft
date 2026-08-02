@@ -12,24 +12,44 @@ export const pending: Record<string, readonly string[]> = {
   "es": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "es_ES": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "fr_FR": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "fr_CA": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
@@ -37,12 +57,22 @@ export const pending: Record<string, readonly string[]> = {
   "it_IT": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "de_DE": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
@@ -65,6 +95,11 @@ export const pending: Record<string, readonly string[]> = {
   "pt_BR": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
@@ -75,48 +110,88 @@ export const pending: Record<string, readonly string[]> = {
   "cs_CZ": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "nl_NL": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "pl_PL": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "id_ID": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "tr_TR": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "sv_SE": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "vi_VN": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ],
   "da_DK": [
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
+    "hudChrome.landing.browserSupport.body",
+    "hudChrome.landing.browserSupport.continueInBrowser",
+    "hudChrome.landing.browserSupport.dismissAria",
+    "hudChrome.landing.browserSupport.getDesktopApp",
+    "hudChrome.landing.browserSupport.title",
     "itemUi.vendor.buyStack",
     "itemUi.vendor.buyStackAria"
   ]
