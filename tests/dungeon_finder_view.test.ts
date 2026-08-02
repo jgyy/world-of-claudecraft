@@ -359,6 +359,74 @@ describe('dungeon finder view core', () => {
     expect(view.board.listings[0].canApply).toBe(false);
   });
 
+  it('keeps a leader listing visible in Open listings when its OWN dungeon goes locked (#2030 followup)', () => {
+    const heroicListing = {
+      id: 8,
+      activityId: 'hollow_crypt_heroic',
+      leaderName: 'Lead',
+      tags: [],
+      size: 1,
+      capacity: 5,
+      needed: { tank: 0, healer: 1, dps: 3 },
+      members: [{ cls: 'warrior' as const, level: 20, role: 'tank' as const }],
+    };
+    const view = live(
+      buildDungeonFinderView(
+        input({
+          tab: 'board',
+          playerLevel: 20,
+          board: [heroicListing],
+          info: makeInfo('sim', {
+            myListing: { id: 8, activityId: 'hollow_crypt_heroic', tags: [], applicants: [] },
+          }),
+          lockouts: [{ id: 'hollow_crypt:heroic', msRemaining: 3_600_000 }],
+        }),
+      ),
+    );
+    expect(view.board.listings.map((l) => l.id)).toEqual([8]);
+    expect(view.board.listings[0].mine).toBe(true);
+  });
+
+  it('does not hide a listing over a lockout on a DIFFERENT dungeon or a lockout-free difficulty (#2030 followup)', () => {
+    const heroicListing = {
+      id: 8,
+      activityId: 'hollow_crypt_heroic',
+      leaderName: 'Lead',
+      tags: [],
+      size: 1,
+      capacity: 5,
+      needed: { tank: 0, healer: 1, dps: 3 },
+      members: [{ cls: 'warrior' as const, level: 20, role: 'tank' as const }],
+    };
+    // A lockout on an unrelated dungeon must not hide this listing.
+    const otherDungeonLocked = live(
+      buildDungeonFinderView(
+        input({
+          tab: 'board',
+          playerLevel: 20,
+          board: [heroicListing],
+          lockouts: [{ id: 'sunken_temple:heroic', msRemaining: 3_600_000 }],
+        }),
+      ),
+    );
+    expect(otherDungeonLocked.board.listings.map((l) => l.id)).toEqual([8]);
+
+    // hollow_crypt normal has lockout:'none', so a listing for it must stay
+    // visible even if the (unrelated) heroic difficulty is locked.
+    const normalListing = { ...heroicListing, id: 9, activityId: 'hollow_crypt_normal' };
+    const normalDifficultyUnaffected = live(
+      buildDungeonFinderView(
+        input({
+          tab: 'board',
+          playerLevel: 20,
+          board: [normalListing],
+          lockouts: [{ id: 'hollow_crypt:heroic', msRemaining: 3_600_000 }],
+        }),
+      ),
+    );
+    expect(normalDifficultyUnaffected.board.listings.map((l) => l.id)).toEqual([9]);
+  });
+
   it('keeps the 1 Hz clock numbers OUT of the render-skip signature', () => {
     const base = input({
       info: makeInfo('sim', {
