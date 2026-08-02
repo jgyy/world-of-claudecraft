@@ -2466,9 +2466,13 @@ async function startGame(
       hud.marketResyncAfterReconnect();
       // A fresh join (as opposed to a resume within the linkdead grace window)
       // hands the server a brand-new PlayerMeta with stopAutoAttackOnTargetSwitch
-      // undefined, so the stored preference has to be re-pushed here too, the
-      // same way it is pushed once on world entry above.
-      world.setStopAutoAttackOnTargetSwitch(settings.get('stopAutoAttackOnTargetSwitch'));
+      // undefined, so the stored preference needs a re-push, the same way it is
+      // pushed once on world entry above. onReconnected fires before ClientWorld
+      // marks itself connected again, so any send from here would be silently
+      // dropped; ClientWorld owns the re-push itself (it remembers the last
+      // value passed to setStopAutoAttackOnTargetSwitch and replays it right
+      // after connected flips true, and again after spectate ends), so nothing
+      // needs to happen on this side.
     };
     // A hosted dev/PBE realm booted with ALLOW_DEV_COMMANDS=1 lights the /dev GUI
     // even in a production client build, where import.meta.env.DEV is false. That

@@ -498,8 +498,10 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // activeMasterLootRolls, leaving 274; the rift floor timer HUD adds
     // riftEventMsRemaining and the instance-payload pipes add
     // marketListInstance, leaving 276. Reactive aura timing adds
-    // reactiveAbilityWindowRemaining, leaving 277; the stop-auto-attack-on-
-    // target-switch setting adds setStopAutoAttackOnTargetSwitch, leaving 277.
+    // reactiveAbilityWindowRemaining, leaving 277; a later commit removed the
+    // then-renderer-only riftCollisionToken with third-person camera collision,
+    // leaving 276; the stop-auto-attack-on-target-switch setting adds
+    // setStopAutoAttackOnTargetSwitch, leaving 277.
     expect(IWORLD_MEMBERS.length).toBe(277);
     expect(DATA_MEMBERS.length).toBe(71);
     expect(METHOD_MEMBERS.length).toBe(206);
