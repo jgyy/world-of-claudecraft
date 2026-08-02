@@ -10,22 +10,34 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "es_ES": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "fr_FR": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "fr_CA": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "en_CA": [],
   "it_IT": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "de_DE": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "zh_CN": [],
@@ -33,31 +45,49 @@ export const pending: Record<string, readonly string[]> = {
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "ru_RU": [],
   "cs_CZ": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "nl_NL": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "pl_PL": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "id_ID": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "tr_TR": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "sv_SE": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "vi_VN": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ],
   "da_DK": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.lockActionBars"
   ]
 };
