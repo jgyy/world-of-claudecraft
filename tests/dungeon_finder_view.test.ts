@@ -332,6 +332,33 @@ describe('dungeon finder view core', () => {
     expect(locked.board.listings).toEqual([]);
   });
 
+  it('keeps a listing visible for withdraw when the viewer applied before going locked (#2030)', () => {
+    const heroicListing = {
+      id: 8,
+      activityId: 'hollow_crypt_heroic',
+      leaderName: 'Lead',
+      tags: [],
+      size: 1,
+      capacity: 5,
+      needed: { tank: 0, healer: 1, dps: 3 },
+      members: [{ cls: 'warrior' as const, level: 20, role: 'tank' as const }],
+    };
+    const view = live(
+      buildDungeonFinderView(
+        input({
+          tab: 'board',
+          playerLevel: 20,
+          board: [heroicListing],
+          info: makeInfo('sim', { myApplication: { listingId: 8 } }),
+          lockouts: [{ id: 'hollow_crypt:heroic', msRemaining: 3_600_000 }],
+        }),
+      ),
+    );
+    expect(view.board.listings.map((l) => l.id)).toEqual([8]);
+    expect(view.board.listings[0].applied).toBe(true);
+    expect(view.board.listings[0].canApply).toBe(false);
+  });
+
   it('keeps the 1 Hz clock numbers OUT of the render-skip signature', () => {
     const base = input({
       info: makeInfo('sim', {

@@ -435,8 +435,12 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
     // is not something I can usefully apply to, and showing it invites a
     // player to join a group only to discover the lockout at the door. Hide
     // it from the browse list; my own listing is unaffected (it lives in
-    // `myListing`, a separate panel this loop never touches).
-    if (lockoutMinutesFor(activity, input.lockouts) > 0) continue;
+    // `myListing`, a separate panel this loop never touches). A listing I
+    // have already applied to stays visible even while locked out, so its
+    // row (and withdraw control) keep existing: otherwise a pending
+    // application could never be withdrawn once the lockout landed.
+    const applied = info.myApplication?.listingId === listing.id;
+    if (!applied && lockoutMinutesFor(activity, input.lockouts) > 0) continue;
     const blocked = blockReasonFor(activity, level, specRole);
     const mine = info.myListing?.id === listing.id;
     const roleFit =
@@ -447,7 +451,7 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
       difficulty: activity.difficulty,
       kind: activity.kind,
       mine,
-      applied: info.myApplication?.listingId === listing.id,
+      applied,
       blocked,
       canApply:
         !mine &&
