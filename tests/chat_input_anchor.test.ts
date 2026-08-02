@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   anchorChatInputToWrap,
@@ -61,6 +63,22 @@ describe('computeChatInputAnchor', () => {
       width: 240,
       bottom: 224,
     });
+  });
+});
+
+describe('#chatlog-wrap CSS width floor', () => {
+  it('floors the wrap itself at CHAT_BOX_LIMITS.minWidth (240px), matching the anchor clamp', () => {
+    // The anchor clamp (above) floors the COMPOSER at MIN_WIDTH, but on a very
+    // narrow windowed/split-screen desktop viewport #chatlog-wrap's own CSS
+    // width could still measure narrower than that floor (min(370px, calc(50vw
+    // - 330px)) has no floor of its own below ~1000px), which would leave the
+    // composer wider than the wrap it is meant to match and reintroduce the
+    // overhang the anchor module exists to fix. #chatlog-wrap must carry the
+    // same 240px floor so the two surfaces can never diverge.
+    const css = readFileSync(path.join(__dirname, '../src/styles/hud.css'), 'utf8');
+    const match = css.match(/#chatlog-wrap\s*\{[^}]*\bwidth:\s*([^;]+);/);
+    expect(match).not.toBeNull();
+    expect(match?.[1].trim()).toBe(`max(${MIN_WIDTH}px, min(370px, calc(50vw - 330px)))`);
   });
 });
 

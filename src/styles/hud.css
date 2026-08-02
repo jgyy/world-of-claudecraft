@@ -2015,12 +2015,17 @@
 
   /* ---------- chat frame ---------- */
   /* width shrinks on narrower screens so the chat never overlaps the centred
-     bottom bar (≈612px wide); caps at 370px when there's room. */
+     bottom bar (≈612px wide); caps at 370px when there's room. Floors at
+     CHAT_BOX_LIMITS.minWidth (240px, chat_window.ts) so a very narrow
+     windowed/split-screen desktop viewport never shrinks the wrap below the
+     floor the composer's anchor (chat_input_anchor.ts) already enforces;
+     without this floor the wrap could measure narrower than the composer's
+     clamped width and the composer would overhang the wrap's edge again. */
   #chatlog-wrap {
     position: absolute;
     left: 12px;
     bottom: 8px;
-    width: min(370px, calc(50vw - 330px));
+    width: max(240px, min(370px, calc(50vw - 330px)));
   }
   #chatlog-tabs {
     display: flex;
