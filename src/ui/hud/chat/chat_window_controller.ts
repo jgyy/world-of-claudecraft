@@ -17,8 +17,10 @@ import {
   isChatOpenTab,
   isChatTabChannel,
   parseChatTabs,
+  reorderChatTabs,
   sentLineTargetForHost,
   serializeChatTabs,
+  stepChatTab,
   WHISPER_TAB,
   WHISPER_TAB_LABEL_KEY,
 } from './chat_channels';
@@ -72,6 +74,17 @@ export class ChatWindowController {
   private tabsWheelBound = false;
   private initialized = false;
   private pendingLinks: readonly { display: string; token: string }[] = [];
+  // Drag-to-reorder state: the channel tab currently being dragged, cleared on
+  // drop or dragend. Held on the controller rather than DataTransfer so drop
+  // handling never depends on a browser's DataTransfer read support.
+  private draggingTab: ChatOpenTab | null = null;
+  // The tab that currently holds the roving tabindex (WAI-ARIA APG tabs
+  // pattern): the one plain ArrowLeft/ArrowRight reached most recently, or
+  // null to fall back to the active tab. Kept separate from activeChatTab so
+  // arrowing onto an inactive tab (to reorder it with Alt+Arrow) does not
+  // select it, and re-latched (never cleared) across a renderTabs() rebuild
+  // so a tab moved by drag or reorder stays the keyboard focus target.
+  private rovingChatTab: ChatTabId | null = null;
 
   constructor(private readonly deps: ChatWindowControllerDeps) {}
 
@@ -231,6 +244,9 @@ export class ChatWindowController {
     }
     bar.innerHTML = '';
     bar.setAttribute('role', 'tablist');
+    // The full roving-tabindex order (WAI-ARIA APG tabs pattern): All, Combat,
+    // then every open channel tab, never the "+" add button.
+    const order: ChatTabId[] = ['all', 'combat', ...this.chatTabs];
     const makeTab = (id: ChatTabId, label: string): HTMLButtonElement => {
       const button = this.deps.document.createElement('button');
       button.type = 'button';
@@ -239,6 +255,7 @@ export class ChatWindowController {
       button.setAttribute('role', 'tab');
       button.textContent = label;
       button.addEventListener('click', () => this.selectTab(id, true));
+      button.addEventListener('keydown', (event) => this.onTabKeyDown(id, order, event));
       return button;
     };
     bar.append(
@@ -249,9 +266,35 @@ export class ChatWindowController {
       const label = t(chatOpenTabLabelKey(channel));
       const button = makeTab(channel, label);
       button.title = t('hud.core.chatChannels.close', { channel: label });
+      button.setAttribute('aria-keyshortcuts', 'Alt+ArrowLeft Alt+ArrowRight');
+      button.setAttribute('aria-label', t('hud.core.chatChannels.moveHint', { channel: label }));
+      button.draggable = true;
       button.addEventListener('contextmenu', (event) => {
         event.preventDefault();
         this.removeTab(channel);
+      });
+      button.addEventListener('dragstart', (event) => {
+        this.draggingTab = channel;
+        const transfer = event.dataTransfer;
+        if (transfer) {
+          transfer.effectAllowed = 'move';
+          // Firefox will not start a drag without data on the transfer, even
+          // though this drop is resolved entirely from `draggingTab` above.
+          transfer.setData('text/plain', channel);
+        }
+      });
+      button.addEventListener('dragover', (event) => {
+        if (this.draggingTab === null) return;
+        event.preventDefault();
+        const transfer = event.dataTransfer;
+        if (transfer) transfer.dropEffect = 'move';
+      });
+      button.addEventListener('drop', (event) => {
+        event.preventDefault();
+        this.dropDraggingTab(channel);
+      });
+      button.addEventListener('dragend', () => {
+        this.draggingTab = null;
       });
       bar.append(button);
     }
@@ -270,8 +313,68 @@ export class ChatWindowController {
       const rect = add.getBoundingClientRect();
       this.openChannelMenu(rect.left, rect.bottom, add);
     });
+    // Dragging a tab onto "+" moves it to the end of the strip.
+    add.addEventListener('dragover', (event) => {
+      if (this.draggingTab === null) return;
+      event.preventDefault();
+      const transfer = event.dataTransfer;
+      if (transfer) transfer.dropEffect = 'move';
+    });
+    add.addEventListener('drop', (event) => {
+      event.preventDefault();
+      this.dropDraggingTab(null);
+    });
     bar.append(add);
     this.updateActiveTabStyles();
+  }
+
+  // Alt+ArrowLeft / Alt+ArrowRight on a channel tab reorders it (the keyboard-
+  // accessible equivalent of a drag); plain ArrowLeft/ArrowRight roves focus
+  // across the whole tablist (WAI-ARIA APG) without activating a tab. All/
+  // Combat never reorder (they are not entries in `chatTabs`), so Alt+Arrow on
+  // either is left alone, including for the browser's own back/forward accelerator.
+  private onTabKeyDown(id: ChatTabId, order: readonly ChatTabId[], event: KeyboardEvent): void {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    const step = event.key === 'ArrowLeft' ? -1 : 1;
+    if (event.altKey) {
+      if (!isChatOpenTab(id)) return;
+      const next = stepChatTab(this.chatTabs, id, step);
+      if (next === this.chatTabs) return;
+      event.preventDefault();
+      this.chatTabs = next;
+      this.persist();
+      this.rovingChatTab = id;
+      this.renderTabs();
+      this.focusTab(id);
+      return;
+    }
+    const index = order.indexOf(id);
+    if (index < 0) return;
+    event.preventDefault();
+    const nextId = order[(index + step + order.length) % order.length];
+    this.rovingChatTab = nextId;
+    this.updateActiveTabStyles();
+    this.focusTab(nextId);
+  }
+
+  private dropDraggingTab(before: ChatOpenTab | null): void {
+    const moved = this.draggingTab;
+    this.draggingTab = null;
+    if (moved === null) return;
+    const next = reorderChatTabs(this.chatTabs, moved, before);
+    if (next === this.chatTabs) return;
+    this.chatTabs = next;
+    this.persist();
+    this.rovingChatTab = moved;
+    this.renderTabs();
+    this.focusTab(moved);
+  }
+
+  private focusTab(id: ChatTabId): void {
+    const button = Array.from(
+      this.requireElement('chatlog-tabs').querySelectorAll<HTMLButtonElement>('.chat-tab'),
+    ).find((candidate) => candidate.dataset.tab === id);
+    button?.focus();
   }
 
   private updateActiveTabStyles(): void {
@@ -282,7 +385,8 @@ export class ChatWindowController {
         const active = button.dataset.tab === this.activeChatTab;
         button.classList.toggle('active', active);
         button.setAttribute('aria-selected', active ? 'true' : 'false');
-        button.tabIndex = active ? 0 : -1;
+        button.tabIndex =
+          button.dataset.tab === (this.rovingChatTab ?? this.activeChatTab) ? 0 : -1;
       });
   }
 
@@ -315,6 +419,7 @@ export class ChatWindowController {
     if (index < 0) return;
     this.chatTabs.splice(index, 1);
     if (this.activeChatTab === channel) this.activeChatTab = 'all';
+    if (this.rovingChatTab === channel) this.rovingChatTab = null;
     this.renderTabs();
     this.selectTab(this.activeChatTab, true);
   }
