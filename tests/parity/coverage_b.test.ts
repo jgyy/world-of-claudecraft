@@ -55,19 +55,24 @@ describe('coverage: each scenario fires its subsystem', () => {
     expect(ev.some((e) => e.type === 'lockpickStep')).toBe(true);
   });
 
-  it('delve_lockpick_fail: idling past the step clock still opens the chest (issue #2585)', () => {
+  it('delve_lockpick_fail: idling past the step clock still opens the chest at the LOW consolation tier (issue #2585)', () => {
     const rec = run('delve_lockpick_fail');
     const sim = rec.sim as any;
     const ev = rec.allEvents as Ev[];
     // The attempt engaged, then the server clock (not the client) burned the single
-    // try, but tries running out grants the ante loot tier instead of jamming.
+    // try. Tries running out grants the chest instead of jamming it, but this is NOT
+    // a solve: the reward is capped at the base `low` tier, not the Premium ante's tier.
     expect(ev.some((e) => e.type === 'lockpickSession')).toBe(true);
     expect(ev.some((e) => e.type === 'lockpickEnd' && e.outcome === 'success')).toBe(true);
-    expect(ev.some((e) => e.type === 'delveChestLoot')).toBe(true);
+    const loot = ev.find((e) => e.type === 'delveChestLoot') as any;
+    expect(loot).toBeDefined();
+    expect(loot.lootTier).toBe('low');
+    expect(loot.bountiful).toBe(false);
     const r = sim.delveRunForPlayer(sim.playerId);
     const chestId = rec.notes.chestId as number;
     expect(r.objectState[chestId].attemptAvailable).toBe(false); // consumed by the grant
     expect(r.objectState[chestId].looted).toBe(true);
+    expect(r.objectState[chestId].lootedTier).toBe('low');
     expect(r.surfaceExitId).not.toBeNull();
     expect(r.objectState[r.surfaceExitId].open).toBe(true);
   });

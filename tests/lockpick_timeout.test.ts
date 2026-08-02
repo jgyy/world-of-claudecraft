@@ -88,7 +88,7 @@ describe('lockpick per-step clock is enforced by the sim tick (server-authoritat
     expect(ANTE_TO_STEP_TIMEOUT_MS[3]).toBe(9000); // modest, easy
   });
 
-  it('idling past the deadline burns a try (premium = instant grant) with NO client call, issue #2585', () => {
+  it('idling past the deadline burns the last try but still grants the LOW consolation tier (issue #2585) with NO client call', () => {
     const sim = makeSim(7);
     const { run, chestId } = enterFinale(sim);
     sim.lockpickEngage(chestId, 1); // premium ante: 1 try
@@ -96,10 +96,13 @@ describe('lockpick per-step clock is enforced by the sim tick (server-authoritat
     // Tick past the deadline without acting. The sim, not the client, resolves it.
     idle(sim, budgetTicks(sim) + 2);
     expect(run.lockpick).toBeNull();
-    // Running out of tries no longer jams the final delve chest: the reward is
-    // guaranteed once the boss is dead, so this grants the ante loot tier instead
-    // of losing the chest.
+    // Running out of tries no longer jams the final delve chest: the boss is
+    // already dead, so the chest still opens and the run keeps its clear
+    // credit. But this was NOT a solve, so only the base `low` tier is
+    // granted, not the Premium ante's loot tier: idling out a high ante must
+    // never beat actually picking the lock.
     expect(run.objectState[chestId].looted).toBe(true);
+    expect(run.objectState[chestId].lootedTier).toBe('low');
     expect(run.objectState[chestId].attemptAvailable).toBe(false); // consumed by the grant
   });
 
@@ -108,9 +111,10 @@ describe('lockpick per-step clock is enforced by the sim tick (server-authoritat
     const { run, chestId } = enterFinale(sim);
     sim.lockpickEngage(chestId, 1); // premium ante: a single try
     expect(run.surfaceExitId).toBeNull(); // not open until the pick resolves
-    idle(sim, budgetTicks(sim) + 2); // let the try burn -> chest opens at the ante tier
+    idle(sim, budgetTicks(sim) + 2); // let the try burn -> low consolation grant
     expect(run.objectState[chestId].attemptAvailable).toBe(false);
-    // The boss is dead and the reward is granted, and the way out opens too.
+    expect(run.objectState[chestId].looted).toBe(true);
+    // The boss is dead and the reward is granted, and the way out still opens.
     expect(run.surfaceExitId).not.toBeNull();
     expect(run.objectState[run.surfaceExitId!].kind).toBe('surface_exit');
     expect(run.objectState[run.surfaceExitId!].open).toBe(true);

@@ -2,8 +2,12 @@
 // MOVED verbatim out of the 17.5k-line Sim class behind SimContext. This module
 // owns the per-attempt lock SESSION state machine: engage an ante, submit one pick
 // action per step, time a step out on the sim clock, burn a try (regenerating a
-// fresh board), and grant the ante's loot tier on success OR once tries run out
-// (the final delve chest is guaranteed, never jammed; issue #2585). It drives
+// fresh board), and grant a reward on success OR once tries run out (the final
+// delve chest is guaranteed, never jammed; issue #2585). A clean solve grants
+// the full ante loot tier (plus the flawless-solve deeds); running out of
+// tries still opens the chest and keeps the run's clear credit, but only at
+// the base `low` loot tier, with no Bountiful Coffer guarantee and no
+// flawless-solve deed, so idling is never better than picking. It drives
 // the pure `../lockpick` grid engine
 // (generateLockPages/stepLock/visibleCells) and is invoked from the delve runs
 // coordinator (I2a, via ctx.tickLockpickTimeout / ctx.abandonLockpick) and from the
@@ -42,6 +46,7 @@ import {
   type Ante,
   generateLockPages,
   type LockSession,
+  type LootTier,
   type PickAction,
   stepLock,
   visibleCells,
@@ -106,13 +111,10 @@ export function lockpickEngage(ctx: SimContext, objectId: number, ante: Ante, pi
     ctx.emit({ type: 'log', text: 'The chest is empty.', color: '#aaa', pid: r.meta.entityId });
     return;
   }
-  if (!state.attemptAvailable) {
-    ctx.error(
-      r.meta.entityId,
-      'The lock is jammed beyond picking. Clear the delve again for another attempt.',
-    );
-    return;
-  }
+  // attemptAvailable only ever goes false alongside `looted` (lockpickSucceed
+  // sets both together, and running out of tries now grants the consolation
+  // reward the same way), so the `state.looted` check above already covers a
+  // spent chest; no separate jammed guard is reachable here.
   if (run.lockpick && run.lockpick.state === 'IN_PROGRESS') {
     ctx.error(r.meta.entityId, 'Someone is already working the lock.');
     return;
@@ -198,24 +200,29 @@ export function tickLockpickTimeout(ctx: SimContext, run: DelveRun): void {
  * tries run out), mirroring a slip. lockpickBurnTry re-arms the clock on retry. */
 function lockpickStepTimeout(ctx: SimContext, run: DelveRun, session: LockSession): void {
   const result = lockpickBurnTry(ctx, session);
-  const spec = session.pages[session.pageIndex];
-  ctx.emit({
-    type: 'lockpickStep',
-    sessionId: session.sessionId,
-    col: session.col,
-    row: session.row,
-    page: session.pageIndex + 1,
-    pageCount: session.pages.length,
-    tries: session.triesLeft,
-    triesTotal: session.triesTotal,
-    result,
-    visible: visibleCells(spec, session.col, spec.tier.visibilityWindow),
-    pid: session.ownerId,
-  });
-  // Running out of tries no longer jams the chest: a delve's final reward is
-  // guaranteed once the boss is dead, so exhausting tries grants the ante's
-  // loot tier the same as a clean solve (see lockpickSucceed / issue #2585).
-  if (result === 'fail') lockpickSucceed(ctx, run, session);
+  if (result === 'retry') {
+    const spec = session.pages[session.pageIndex];
+    ctx.emit({
+      type: 'lockpickStep',
+      sessionId: session.sessionId,
+      col: session.col,
+      row: session.row,
+      page: session.pageIndex + 1,
+      pageCount: session.pages.length,
+      tries: session.triesLeft,
+      triesTotal: session.triesTotal,
+      result,
+      visible: visibleCells(spec, session.col, spec.tier.visibilityWindow),
+      pid: session.ownerId,
+    });
+    return;
+  }
+  // Tries exhausted: the boss is already dead, so the chest still opens
+  // rather than jamming (issue #2585), but this was NOT a solve. Skip the
+  // interim 'fail' step (its "the lock seizes" copy and SFX would contradict
+  // the reward that immediately follows) and go straight to the unsolved,
+  // consolation-tier grant.
+  lockpickSucceed(ctx, run, session, false);
 }
 
 /** Submit one pick action on the player's active attempt. Abort ends it
@@ -261,6 +268,13 @@ export function lockpickAction(
     // The try failed. Burn one try; if any remain, reset to a fresh board so
     // the player can try again. Only when tries run out does the chest jam.
     result = lockpickBurnTry(ctx, session);
+    if (result === 'fail') {
+      // Tries exhausted: skip the interim 'fail' step (its copy/SFX would
+      // contradict the guaranteed, unsolved consolation grant that follows)
+      // and resolve straight to it.
+      lockpickSucceed(ctx, run, session, false);
+      return;
+    }
     spec = session.pages[session.pageIndex];
   } else {
     session.col = step.col;
@@ -292,11 +306,10 @@ export function lockpickAction(
     pid: r.meta.entityId,
   });
 
-  if (result === 'success' || result === 'fail') {
-    // Both a clean solve and running out of tries open the chest: the final
-    // delve reward is guaranteed once the boss is dead (issue #2585), so
-    // exhausting tries grants the ante's loot tier rather than jamming it.
-    lockpickSucceed(ctx, run, session);
+  if (result === 'success') {
+    // The tries-exhausted 'fail' path already resolved (and returned) above,
+    // so the only result reaching here is a genuine solve.
+    lockpickSucceed(ctx, run, session, true);
   }
 }
 
@@ -350,20 +363,33 @@ export function abandonLockpick(ctx: SimContext, run: DelveRun): void {
   });
 }
 
-function lockpickSucceed(ctx: SimContext, run: DelveRun, session: LockSession): void {
+/** Resolve the lockpick attempt and grant the chest reward. `solved` is false when the
+ * grant is the tries-exhausted consolation (the ante's tries ran out with the lock still
+ * unpicked): the chest still opens and the run still keeps its clear credit (issue #2585),
+ * but ONLY the base `low` loot tier is granted, the Bountiful Coffer's guaranteed
+ * signature rare is withheld, and the flawless-solve deed hook does not fire, so idling
+ * out a Premium ante is never better than actually picking the lock (see PR #2717 review). */
+function lockpickSucceed(
+  ctx: SimContext,
+  run: DelveRun,
+  session: LockSession,
+  solved: boolean,
+): void {
   session.state = 'SUCCESS';
   const state = run.objectState[session.chestId];
   const obj = ctx.entities.get(session.chestId);
   const ownerCls = ctx.players.get(session.ownerId)?.cls ?? 'warrior';
-  // A solved Bountiful Coffer guarantees the signature rare (see §7.6).
-  const isCoffer = run.bountiful && session.chestId === run.rewardChestId;
-  const items = delveChestItemsForTier(session.lootTier, ownerCls, ctx.rng, isCoffer);
+  // A solved Bountiful Coffer guarantees the signature rare (see §7.6); an
+  // unsolved (tries-exhausted) attempt never qualifies, coffer or not.
+  const isCoffer = solved && run.bountiful && session.chestId === run.rewardChestId;
+  const grantedTier: LootTier = solved ? session.lootTier : 'low';
+  const items = delveChestItemsForTier(grantedTier, ownerCls, ctx.rng, isCoffer);
   if (state) {
     state.looted = true;
     state.open = true;
     state.triggered = true;
     state.attemptAvailable = false;
-    state.lootedTier = session.lootTier;
+    state.lootedTier = grantedTier;
     state.pendingLoot = items.map((s) => ({ ...s }));
     // Loot belongs to the picker; record it so a non-picker party member who is
     // also standing on the chest cannot front-run the collect.
@@ -374,14 +400,14 @@ function lockpickSucceed(ctx: SimContext, run: DelveRun, session: LockSession): 
     obj.templateId = 'delve_reward_chest';
   }
   grantDelveRewards(ctx, run);
-  grantLockpickBonus(ctx, run, session.lootTier);
+  grantLockpickBonus(ctx, run, grantedTier);
   openDelveSurfaceExit(ctx, run);
   ctx.emit({
     type: 'delveChestLoot',
     chestId: session.chestId,
     delveId: run.delveId,
     tierId: run.tierId,
-    lootTier: session.lootTier,
+    lootTier: grantedTier,
     bountiful: isCoffer,
     items,
     pid: session.ownerId,
@@ -390,10 +416,12 @@ function lockpickSucceed(ctx: SimContext, run: DelveRun, session: LockSession): 
     type: 'lockpickEnd',
     sessionId: session.sessionId,
     outcome: 'success',
-    lootTier: session.lootTier,
+    lootTier: grantedTier,
     pid: session.ownerId,
   });
-  deedsMod.onLockpickSuccessForDeeds(ctx, session.ownerId, session.ante, isCoffer);
+  // The flawless-solve deeds (e.g. the Premium-ante "solve on your only try"
+  // titles) only fire on an actual solve, never on the tries-exhausted grant.
+  if (solved) deedsMod.onLockpickSuccessForDeeds(ctx, session.ownerId, session.ante, isCoffer);
   run.lockpick = null;
 }
 

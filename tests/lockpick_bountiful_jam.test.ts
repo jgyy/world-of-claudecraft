@@ -146,11 +146,14 @@ describe('Bountiful lockpick, timeout and session guards', () => {
     drain(sim);
     // The clock is server-authoritative: force the active step's deadline due and
     // tick. The sim, not the client, burns the single premium try; tries running
-    // out grants the ante loot tier instead of jamming the chest (issue #2585).
+    // out still opens the chest instead of jamming it (issue #2585), but grants
+    // only the base LOW consolation tier, not the Bountiful Coffer's guaranteed
+    // signature rare: an unsolved lock never qualifies for the coffer bonus.
     run.lockpick!.stepDeadlineTick = 0;
     sim.tick();
     expect(run.lockpick).toBeNull();
     expect(run.objectState[chestId].looted).toBe(true);
+    expect(run.objectState[chestId].lootedTier).toBe('low');
     expect(run.objectState[chestId].attemptAvailable).toBe(false); // consumed by the grant
     // No live session: the per-tick guard means no further ticks can re-fire.
     for (let i = 0; i < 5; i++) sim.tick();

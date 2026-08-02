@@ -106,7 +106,7 @@ describe('lockpick, engage + ante→tier', () => {
 });
 
 describe('lockpick, failure & abandon', () => {
-  it('ante 1, one slip → tries exhausted, chest still opens at the ante loot tier (issue #2585)', () => {
+  it('ante 1, one slip -> tries exhausted, chest still opens but only at the LOW consolation tier (issue #2585)', () => {
     const sim = makeSim();
     const run = enterFinale(sim);
     killBoss(sim, run);
@@ -134,16 +134,18 @@ describe('lockpick, failure & abandon', () => {
       guard++;
     }
     const events = flush(sim);
-    // Running out of tries no longer jams the final delve chest: the reward is
-    // guaranteed once the boss is dead, so this grants the ante loot tier
-    // instead of losing the chest.
+    // Running out of tries no longer jams the final delve chest: the boss is
+    // already dead, so the chest still opens and the run keeps its clear
+    // credit. This was NOT a solve though, so the grant is capped at the base
+    // `low` tier rather than the Premium ante's loot tier, so idling/failing
+    // out a high ante is never better than actually solving the lock.
     expect(
       events.find((e) => e.type === 'lockpickEnd' && (e as any).outcome === 'success'),
     ).toBeDefined();
     expect(run.lockpick).toBeNull();
     expect(run.objectState[chestId].attemptAvailable).toBe(false); // consumed by the grant
     expect(run.objectState[chestId].looted).toBe(true);
-    expect(run.objectState[chestId].lootedTier).toBe('premium'); // = ANTE_TO_TIER[1]
+    expect(run.objectState[chestId].lootedTier).toBe('low');
 
     // Re-engage is rejected (already looted, not jammed).
     sim.lockpickEngage(chestId, 1);
