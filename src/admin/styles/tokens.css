@@ -1,7 +1,18 @@
 /* @layer tokens: the :root design tokens (palette, typography, font sizes). Semantic
    color tokens are the single source of truth for values that recur across this sheet
    and the scoped component <style> blocks; genuinely one-off colors stay inline at
-   their call site. Imported first by the admin.css barrel. */
+   their call site. Imported first by the admin.css barrel.
+
+   Light/dark theme: the block below is the DEFAULT (dark, unchanged from the original
+   shipped palette). `:root[data-theme="light"]` overrides every color token with a
+   parchment-flavored light palette; nothing outside this file needs to know a second
+   theme exists, since every consumer already reads the semantic --tokens rather than a
+   literal hex. `state/theme.svelte.ts` stamps the `data-theme` attribute (persisted via
+   `theme.ts`); `admin.html` stamps it synchronously pre-paint for a returning
+   light-mode operator so there is no flash of the dark default on load. Every light
+   value below was checked against WCAG AA (>=4.5:1 body text, >=3:1 large text/non-text
+   UI) against the panel/bg-app pairing it is actually read against; see
+   `tests/admin/theme_contrast.test.ts`. */
 @layer tokens {
   :root {
     --gold: #ffd100;
@@ -10,10 +21,26 @@
     --border-soft: #463a1c;
     --border-subtle: #2a2414;
     --panel-bg: linear-gradient(170deg, #15151f 0%, #0b0b12 60%, #08080d 100%);
+    --panel-vignette: inset 0 0 24px #0006;
     --bg-app: #060609;
     --surface-sunken: #090910;
     --surface-inset: #0d0d14;
+    --surface-active: #241a0e;
     --btn-flat-bg: #1a1410;
+    --btn-grad-from: #211b10;
+    --btn-grad-to: #151109;
+    --btn-grad-from-hover: #2a2112;
+    --btn-grad-to-hover: #18120a;
+    --btn-accent-grad-from: #4a3a14;
+    --btn-accent-grad-to: #241c08;
+    --btn-accent-text: #ffd100;
+    --nav-bg: #0b0b11;
+    --nav-hover-bg: #1a160f;
+    --callout-bg: #171207;
+    --callout-border: #8a6f2d;
+    --focus-glow: #c8a83833;
+    --calendar-icon-filter: invert(72%) sepia(60%) saturate(450%) hue-rotate(2deg) brightness(95%);
+    --native-color-scheme: dark;
     --title-font: "Palatino Linotype", Palatino, Georgia, serif;
     --ui-font: "Arial", "Helvetica", sans-serif;
     --text: #e8d8a8;
@@ -28,9 +55,68 @@
     --control-border: #51462d;
     --control-border-hover: #68572c;
     --control-placeholder: #746b52;
+    --chart-secondary: #8cc7ff;
+    --badge-warn-border: #c98c36;
+    --badge-warn-text: #ffbf66;
+    --badge-neutral-border: #5d5645;
+    --badge-neutral-text: #b8ad91;
+    --badge-success-border: #348b56;
+    --badge-success-text: #7bea9f;
+    --badge-success-bg: #0c2114;
+    --toggle-on-bg: #17301f;
     --font-size-base: 14px;
     --font-size-small: 12px;
     --font-size-table: 14px;
     --font-size-section: 14px;
+  }
+
+  :root[data-theme="light"] {
+    --gold: #8a5a1a;
+    --gold-dim: #7d5820;
+    --border: #c7b184;
+    --border-soft: #d3c090;
+    --border-subtle: #e2d3a8;
+    --panel-bg: linear-gradient(170deg, #fbf5e4 0%, #f2e7c8 60%, #ecdfb9 100%);
+    --panel-vignette: inset 0 0 16px #0000000f;
+    --bg-app: #f3e9cd;
+    --surface-sunken: #ecdfb9;
+    --surface-inset: #f1e6c8;
+    --surface-active: #f6e9bf;
+    --btn-flat-bg: #ecdfb9;
+    --btn-grad-from: #f4e8c9;
+    --btn-grad-to: #e8d7a8;
+    --btn-grad-from-hover: #f8eeda;
+    --btn-grad-to-hover: #ecdfb9;
+    --btn-accent-grad-from: #916a2c;
+    --btn-accent-grad-to: #7d5a1e;
+    --btn-accent-text: #fff8e6;
+    --nav-bg: #f2e6c4;
+    --nav-hover-bg: #ecdcae;
+    --callout-bg: #f7ecc8;
+    --callout-border: #a9793a;
+    --focus-glow: #8a5a1a33;
+    --calendar-icon-filter: none;
+    --native-color-scheme: light;
+    --text: #2e2410;
+    --text-bright: #140f05;
+    --text-soft: #4a3a1e;
+    --text-dim: #6b5d3e;
+    --color-danger: #a83a2a;
+    --color-danger-border: #7d2d20;
+    --row-hover: #f0e2bc;
+    --control-bg: #faf2dd;
+    --control-bg-hover: #f1e5c4;
+    --control-border: #c7b184;
+    --control-border-hover: #8a5a1a;
+    --control-placeholder: #7a6b4a;
+    --chart-secondary: #2f6fb0;
+    --badge-warn-border: #96631c;
+    --badge-warn-text: #7a4a12;
+    --badge-neutral-border: #8d7e58;
+    --badge-neutral-text: #5c4f30;
+    --badge-success-border: #2f7a4a;
+    --badge-success-text: #1f6b3a;
+    --badge-success-bg: #dcefdf;
+    --toggle-on-bg: #cfe8d6;
   }
 }
