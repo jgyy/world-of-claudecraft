@@ -336,6 +336,17 @@ import {
 } from './professions/cadence';
 import { unbindItem as unbindItemImpl } from './professions/commission';
 import {
+  acceptCommissionOrder as acceptCommissionOrderImpl,
+  type CommissionOrder,
+  type CommissionOrderRow,
+  type CommissionOrderScope,
+  cancelCommissionOrder as cancelCommissionOrderImpl,
+  commissionOrdersFor as commissionOrderRowsFor,
+  deliverCommissionOrder as deliverCommissionOrderImpl,
+  openCommissionOrder as openCommissionOrderImpl,
+  updateCommissionOrders,
+} from './professions/commission_order';
+import {
   type AcquireRecipeResult,
   acquireRecipe as acquireRecipeImpl,
   type CraftResult,
@@ -1788,6 +1799,15 @@ export class Sim {
   // sim needs, and any banker is a valid place to stand and use the bank. Exposed
   // as a live SimContext view so bank.ts gates deposit/withdraw/buy on proximity.
   bankerIds: number[] = [];
+  // Commission order board (Professions 2.0, issue #1298): the live order
+  // list and its id counter, exposed as a live SimContext view (like trades
+  // above); professions/commission_order.ts owns every mutation. Named
+  // `commissionOrderBoard`, not `commissionOrders`, so it never collides with
+  // the IWorldProfessions per-viewer projection below of the same name.
+  // In-memory only, like trades/duels, swept by updateCommissionOrders in
+  // the end-of-tick block.
+  commissionOrderBoard: CommissionOrder[] = [];
+  private nextCommissionOrderId = 1;
   /** When true, /dev level|tp|give chat commands are accepted (local dev only). */
   readonly devCommands: boolean;
   // Entities spawned by the last /dev sandbox (dummy + practice bots), so re-running
@@ -4378,6 +4398,17 @@ export class Sim {
       get bankerIds() {
         return sim.bankerIds;
       },
+      // Commission order board (issue #1298): the live order list (mutated
+      // in place by professions/commission_order.ts) and its id counter.
+      get commissionOrderBoard() {
+        return sim.commissionOrderBoard;
+      },
+      get nextCommissionOrderId() {
+        return sim.nextCommissionOrderId;
+      },
+      set nextCommissionOrderId(v) {
+        sim.nextCommissionOrderId = v;
+      },
       // The Vale Cup holder (queues/deserters/botPids mutated in place; the
       // match slot reassigned inside the holder, so no setter is needed).
       get vcup() {
@@ -5171,6 +5202,10 @@ export class Sim {
     this.updateTradesAndInvites();
     this.updateReadyChecks();
     resurrectionOfferMod.updateResurrectionOffers(this.ctx);
+    // Commission order board retention sweep (issue #1298): draws no rng, so
+    // appending here is safe (the Vale Cup zero-rng-phase precedent); expires
+    // stale open orders and prunes terminal ones past their retain window.
+    updateCommissionOrders(this.ctx);
     lap?.('trades');
     this.updateLootRolls();
     lap?.('lootRolls');
@@ -7970,6 +8005,102 @@ export class Sim {
       fee: result.fee,
       pid: meta?.entityId,
     });
+  }
+
+  // Commission order board (Professions 2.0, issue #1298): four thin
+  // entries beside unbindItem above, one per verb (open/cancel/accept/
+  // deliver). Each resolves through professions/commission_order.ts (the
+  // pure validator + mutator) and emits ONE personal, text-free
+  // commissionOrderResult event; the client renders localized copy off
+  // action/reason. The durable order state itself converges through the
+  // per-viewer commissionOrders read below, which re-diffs for every
+  // affected player on the very next snapshot (no extra fan-out needed).
+  // The item id of a still-tracked order (open/accepted/or a terminal order
+  // still inside its retention window), for the open/cancel/accept success
+  // lines below: those three result shapes carry only orderId (deliver's
+  // own DeliverOrderResult is the one that already returns itemId), so this
+  // resolves it off the live board the same tick the mutation applied.
+  private commissionOrderItemId(orderId: number | undefined): string | undefined {
+    if (orderId === undefined) return undefined;
+    return this.commissionOrderBoard.find((o) => o.id === orderId)?.itemId;
+  }
+
+  openCommissionOrder(
+    recipeId: string,
+    scope: CommissionOrderScope,
+    crafterName?: string,
+    pid?: number,
+  ): void {
+    const result = openCommissionOrderImpl(this.ctx, recipeId, scope, crafterName, pid);
+    const meta = this.players.get(pid ?? this.primaryId);
+    this.emit({
+      type: 'commissionOrderResult',
+      action: 'open',
+      ok: result.ok,
+      orderId: result.orderId,
+      itemId: result.ok ? this.commissionOrderItemId(result.orderId) : undefined,
+      reason: result.reason,
+      pid: meta?.entityId,
+    });
+  }
+
+  cancelCommissionOrder(orderId: number, pid?: number): void {
+    const itemId = this.commissionOrderItemId(orderId);
+    const result = cancelCommissionOrderImpl(this.ctx, orderId, pid);
+    const meta = this.players.get(pid ?? this.primaryId);
+    this.emit({
+      type: 'commissionOrderResult',
+      action: 'cancel',
+      ok: result.ok,
+      orderId: result.orderId,
+      itemId: result.ok ? itemId : undefined,
+      reason: result.reason,
+      pid: meta?.entityId,
+    });
+  }
+
+  acceptCommissionOrder(orderId: number, pid?: number): void {
+    const itemId = this.commissionOrderItemId(orderId);
+    const result = acceptCommissionOrderImpl(this.ctx, orderId, pid);
+    const meta = this.players.get(pid ?? this.primaryId);
+    this.emit({
+      type: 'commissionOrderResult',
+      action: 'accept',
+      ok: result.ok,
+      orderId: result.orderId,
+      itemId: result.ok ? itemId : undefined,
+      reason: result.reason,
+      pid: meta?.entityId,
+    });
+  }
+
+  deliverCommissionOrder(orderId: number, pid?: number): void {
+    const result = deliverCommissionOrderImpl(this.ctx, orderId, pid);
+    const meta = this.players.get(pid ?? this.primaryId);
+    this.emit({
+      type: 'commissionOrderResult',
+      action: 'deliver',
+      ok: result.ok,
+      orderId: result.orderId,
+      itemId: result.itemId,
+      reason: result.reason,
+      pid: meta?.entityId,
+    });
+  }
+
+  // IWorld read surface (IWorldProfessions): the local viewer's projection of
+  // the order board (their own requests at any status, any order they
+  // accepted, and every currently open order the open board or a 'crafter'
+  // scope names them for), newest first.
+  get commissionOrders(): readonly CommissionOrderRow[] {
+    return commissionOrderRowsFor(this.ctx, this.primaryId);
+  }
+
+  /** Per-player form of `commissionOrders`, for the server's `corder`
+   *  self-delta (server/game.ts): a small per-player read, diffed per tick
+   *  like `prof`/`cprof`. */
+  commissionOrdersFor(pid: number): readonly CommissionOrderRow[] {
+    return commissionOrderRowsFor(this.ctx, pid);
   }
 
   // IWorld read surface (IWorldProfessions): the craft id of the

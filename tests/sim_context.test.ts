@@ -319,6 +319,8 @@ function makeFakeHost() {
     nextLootRollId: 1,
     devCommands: false,
     marketListings: [],
+    commissionOrderBoard: [],
+    nextCommissionOrderId: 1,
     bankerIds: [],
     vcup: createVcState(),
     deedDirtyPids: new Set<number>(),

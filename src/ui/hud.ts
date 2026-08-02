@@ -180,6 +180,8 @@ import {
   shouldPlayMobVoiceSfxForEntity,
   spellFxCue,
 } from './combat_sfx';
+import { buildCommissionOrderBoardModel } from './commission_order_view';
+import { renderCommissionOrderWindow } from './commission_order_window';
 import { type CardinalId, compassView } from './compass';
 import { ContinentMapPainter } from './continent_map_painter';
 import { type ContinentZoneRegion, continentZoneAt } from './continent_map_view';
@@ -1441,6 +1443,12 @@ export class Hud {
   // pick yet" and the painter falls back to the first tab. Cleared on close
   // so reopening always starts at the front of the book.
   private selectedCraftTab: string | null = null;
+  // Commission order board (issue #1298): whether #commission-board-window
+  // is the viewer's own open window this session. No opener-focus tracking
+  // (the crafting window precedent: a non-modal reference window, not a
+  // trapping dialog), and no location gate (opening/cancelling an order
+  // carries no escrow).
+  private commissionBoardOpen = false;
   private readonly delveBoard: DelveBoardController;
   private readonly delveTracker: DelveTrackerController;
   private readonly riftTracker: RiftFloorTrackerController;
@@ -3041,6 +3049,9 @@ export class Hud {
         break;
       case 'crafting-window':
         this.closeCrafting();
+        break;
+      case 'commission-board-window':
+        this.closeCommissionBoard();
         break;
       case 'loot-window':
         this.closeLoot();
@@ -10320,6 +10331,71 @@ export class Hud {
           );
           break;
         }
+        case 'commissionOrderResult': {
+          // Commission order board (issue #1298). Text-free event: derive
+          // the item name from ev.itemId (resolved sim-side off the live
+          // board for every action, not just deliver) plus static content.
+          // ONE chat line either way (the trainResult/unbindResult
+          // single-surface rule: no toast, no extra sound cue).
+          const orderItem = ev.itemId ? ITEMS[ev.itemId] : undefined;
+          const orderItemName = orderItem ? itemDisplayName(orderItem) : (ev.itemId ?? '');
+          if (ev.ok) {
+            const successKey =
+              ev.action === 'open'
+                ? 'hudChrome.commissionBoard.opened'
+                : ev.action === 'cancel'
+                  ? 'hudChrome.commissionBoard.cancelled'
+                  : ev.action === 'accept'
+                    ? 'hudChrome.commissionBoard.accepted'
+                    : 'hudChrome.commissionBoard.delivered';
+            this.log(
+              t(successKey, {
+                item: orderItemName,
+                name: this.sim.entities.get(ev.pid ?? -1)?.name ?? '',
+              }),
+              '#7fdc4f',
+            );
+          } else if (ev.reason) {
+            const denyKey =
+              ev.reason === 'unknown_recipe'
+                ? 'hudChrome.commissionBoard.denyUnknownRecipe'
+                : ev.reason === 'not_commission_eligible'
+                  ? 'hudChrome.commissionBoard.denyNotCommissionEligible'
+                  : ev.reason === 'unknown_crafter'
+                    ? 'hudChrome.commissionBoard.denyUnknownCrafter'
+                    : ev.reason === 'self_crafter'
+                      ? 'hudChrome.commissionBoard.denySelfCrafter'
+                      : ev.reason === 'too_many_open'
+                        ? 'hudChrome.commissionBoard.denyTooManyOpen'
+                        : ev.reason === 'unknown_order'
+                          ? 'hudChrome.commissionBoard.denyUnknownOrder'
+                          : ev.reason === 'order_not_open'
+                            ? 'hudChrome.commissionBoard.denyOrderNotOpen'
+                            : ev.reason === 'self_order'
+                              ? 'hudChrome.commissionBoard.denySelfOrder'
+                              : ev.reason === 'not_eligible_crafter'
+                                ? 'hudChrome.commissionBoard.denyNotEligibleCrafter'
+                                : ev.reason === 'not_your_order'
+                                  ? 'hudChrome.commissionBoard.denyNotYourOrder'
+                                  : ev.reason === 'order_not_accepted'
+                                    ? 'hudChrome.commissionBoard.denyOrderNotAccepted'
+                                    : ev.reason === 'not_your_acceptance'
+                                      ? 'hudChrome.commissionBoard.denyNotYourAcceptance'
+                                      : ev.reason === 'not_crafted'
+                                        ? 'hudChrome.commissionBoard.denyNotCrafted'
+                                        : ev.reason === 'deliver_out_of_range'
+                                          ? 'hudChrome.commissionBoard.denyOutOfRange'
+                                          : 'hudChrome.commissionBoard.denyNoSpace';
+            this.log(t(denyKey), '#ff6b6b');
+          }
+          // Refresh the board window if open (renderCommissionBoard no-ops
+          // when it is not); deliver also touches bags on the crafter's own
+          // arm (the requester's side rides the ordinary loot event's bag
+          // refresh).
+          this.renderCommissionBoard();
+          if (ev.action === 'deliver' && $('#bags').style.display !== 'none') this.renderBags();
+          break;
+        }
         case 'profTrendNudge':
         case 'profTierTutorial':
         case 'attuned':
@@ -13184,6 +13260,7 @@ export class Hud {
           if ($('#bags').style.display !== 'none') this.renderBags();
         },
         onClose: () => this.closeCrafting(),
+        onOpenOrders: () => this.openCommissionBoard(),
         commissionChecked: (recipeId) => this.craftCommissionOptIn.has(recipeId),
         onToggleCommission: (recipeId, on) => {
           if (on) this.craftCommissionOptIn.add(recipeId);
@@ -13219,6 +13296,49 @@ export class Hud {
     this.craftCommissionOptIn.clear();
     this.selectedCraftTab = null;
   }
+
+  // -------------------------------------------------------------------------
+  // Commission order board (issue #1298): a lightweight job board layered on
+  // the Maker's Bond (unbind service above). Opened from the crafting
+  // window's header; non-modal like crafting itself, so no focus trap.
+  // -------------------------------------------------------------------------
+
+  openCommissionBoard(): void {
+    this.closeOtherWindows('#commission-board-window');
+    this.commissionBoardOpen = true;
+    this.renderCommissionBoard();
+  }
+
+  private renderCommissionBoard(): void {
+    if (!this.commissionBoardOpen) return;
+    const knownRecipeIds = new Set(this.sim.craftingIdentity.knownRecipes);
+    const knownRecipes = this.sim.recipeList.filter((recipe) =>
+      isRecipeKnownForViewer(recipe, knownRecipeIds),
+    );
+    renderCommissionOrderWindow(
+      $('#commission-board-window'),
+      buildCommissionOrderBoardModel(this.sim.commissionOrders, knownRecipes, ITEMS),
+      {
+        ...this.presentationBag,
+        hideTooltip: () => this.hideTooltip(),
+        onOpen: (recipeId, scope, crafterName) => {
+          this.sim.openCommissionOrder(recipeId, scope, crafterName);
+        },
+        onCancel: (orderId) => this.sim.cancelCommissionOrder(orderId),
+        onAccept: (orderId) => this.sim.acceptCommissionOrder(orderId),
+        onDeliver: (orderId) => this.sim.deliverCommissionOrder(orderId),
+        onClose: () => this.closeCommissionBoard(),
+      },
+    );
+  }
+
+  closeCommissionBoard(): void {
+    if (!this.commissionBoardOpen) return;
+    $('#commission-board-window').style.display = 'none';
+    this.commissionBoardOpen = false;
+    this.hideTooltip();
+  }
+
   // -------------------------------------------------------------------------
   // The World Market — the Merchant's auction house
   // -------------------------------------------------------------------------

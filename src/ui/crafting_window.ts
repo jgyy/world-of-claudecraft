@@ -64,6 +64,9 @@ export interface CraftingWindowDeps extends PainterHostPresentation {
   hideTooltip(): void;
   onCraft(recipeId: string): void;
   onClose(): void;
+  /** Opens the commission order board (issue #1298), the crafting window's
+   *  one entry point to it: a header button beside the close button. */
+  onOpenOrders(): void;
   /** Commission opt-in state (Professions 2.0), held by the HUD so
    *  it survives the window's staleness repaints: whether `recipeId` is
    *  currently opted in, and the toggle callback the per-row checkbox fires.
@@ -95,7 +98,8 @@ export function renderCraftingWindow(
   // else, so carry its offset across too: a repaint the player did not ask
   // for must not scroll the craft they are reading off the screen.
   const tabScrollLeft = el.querySelector('.crafting-tabs')?.scrollLeft ?? 0;
-  el.innerHTML = `<div class="panel-title"><span>${esc(t('hudChrome.crafting.title'))}</span><button type="button" class="x-btn" data-close aria-label="${esc(t('hudChrome.crafting.close'))}">${svgIcon('close')}</button></div>`;
+  el.innerHTML = `<div class="panel-title"><span>${esc(t('hudChrome.crafting.title'))}</span><button type="button" class="crafting-orders-btn" data-open-orders aria-label="${esc(t('hudChrome.commissionBoard.openButtonAria'))}">${esc(t('hudChrome.commissionBoard.openButton'))}</button><button type="button" class="x-btn" data-close aria-label="${esc(t('hudChrome.crafting.close'))}">${svgIcon('close')}</button></div>`;
+  el.querySelector('[data-open-orders]')?.addEventListener('click', () => deps.onOpenOrders());
 
   if (identity) renderProfessionIdentityCard(el, identity);
 
