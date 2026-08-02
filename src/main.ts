@@ -2464,6 +2464,11 @@ async function startGame(
     online.onReconnected = () => {
       priorOnReconnected?.();
       hud.marketResyncAfterReconnect();
+      // A fresh join (as opposed to a resume within the linkdead grace window)
+      // hands the server a brand-new PlayerMeta with stopAutoAttackOnTargetSwitch
+      // undefined, so the stored preference has to be re-pushed here too, the
+      // same way it is pushed once on world entry above.
+      world.setStopAutoAttackOnTargetSwitch(settings.get('stopAutoAttackOnTargetSwitch'));
     };
     // A hosted dev/PBE realm booted with ALLOW_DEV_COMMANDS=1 lights the /dev GUI
     // even in a production client build, where import.meta.env.DEV is false. That

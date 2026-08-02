@@ -10,22 +10,34 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "es_ES": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "fr_FR": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "fr_CA": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "en_CA": [],
   "it_IT": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "de_DE": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "zh_CN": [],
@@ -33,31 +45,49 @@ export const pending: Record<string, readonly string[]> = {
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "ru_RU": [],
   "cs_CZ": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "nl_NL": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "pl_PL": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "id_ID": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "tr_TR": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "sv_SE": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "vi_VN": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ],
   "da_DK": [
+    "hud.prompts.guildInviteCancelled",
+    "hud.prompts.guildRenamed",
     "hudChrome.options.stopAutoAttackOnTargetSwitch"
   ]
 };

@@ -462,13 +462,23 @@ describe('market_window: reconnect resync (#2416)', () => {
     // of replacing it.
     const chain = mainSrc.slice(
       mainSrc.indexOf('const priorOnReconnected = online.onReconnected;'),
-      mainSrc.indexOf('const priorOnReconnected = online.onReconnected;') + 300,
+      mainSrc.indexOf('const priorOnReconnected = online.onReconnected;') + 600,
     );
     expect(chain, 'main.ts must chain onto the prior handler, not replace it').toContain(
       'priorOnReconnected?.();',
     );
     expect(chain, 'main.ts must call the hud resync hook on reconnect').toContain(
       'hud.marketResyncAfterReconnect();',
+    );
+    // A fresh join after a dropped connection (as opposed to a resume within the
+    // linkdead grace window) hands the server a brand-new PlayerMeta, so the
+    // stopAutoAttackOnTargetSwitch preference has to be re-pushed on reconnect
+    // too, the same way it is pushed once on world entry.
+    expect(
+      chain,
+      'main.ts must re-push stopAutoAttackOnTargetSwitch on reconnect (a fresh join resets PlayerMeta)',
+    ).toContain(
+      "world.setStopAutoAttackOnTargetSwitch(settings.get('stopAutoAttackOnTargetSwitch'));",
     );
   });
 });
