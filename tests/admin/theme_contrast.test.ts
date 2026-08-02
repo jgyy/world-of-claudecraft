@@ -36,34 +36,34 @@ const AA_LARGE = 3;
 
 // Light-theme tokens (styles/tokens.css `:root[data-theme="light"]`), paired with
 // the surface each is actually rendered over in the app.
-const PANEL_MID = '#f2e7c8'; // mid stop of --panel-bg's gradient
-const BG_APP = '#f3e9cd';
-const NAV_BG = '#f2e6c4';
-const NAV_HOVER_BG = '#ecdcae';
-const SURFACE_ACTIVE = '#f6e9bf';
+const PANEL_MID = '#faf8f3'; // mid stop of --panel-bg's gradient
+const BG_APP = '#f4f1ea';
+const NAV_BG = '#f0ebe3';
+const NAV_HOVER_BG = '#e8e0d2';
+const SURFACE_ACTIVE = '#efe6d4';
 const BADGE_SUCCESS_BG = '#dcefdf';
-const CALLOUT_BG = '#f7ecc8';
-const CONTROL_BG = '#faf2dd';
+const CALLOUT_BG = '#f2ecdf';
+const CONTROL_BG = '#ffffff';
 const BTN_ACCENT_GRAD_FROM = '#916a2c';
 const BTN_ACCENT_GRAD_TO = '#7d5a1e';
 
 describe('light theme WCAG AA text contrast', () => {
   it.each([
-    ['--text on --bg-app', '#2e2410', BG_APP, AA_TEXT],
-    ['--text on --panel-bg (mid stop)', '#2e2410', PANEL_MID, AA_TEXT],
-    ['--text-soft on --panel-bg', '#4a3a1e', PANEL_MID, AA_TEXT],
-    ['--text-dim on --panel-bg', '#6b5d3e', PANEL_MID, AA_TEXT],
-    ['--gold on --panel-bg', '#8a5a1a', PANEL_MID, AA_TEXT],
+    ['--text on --bg-app', '#1c1917', BG_APP, AA_TEXT],
+    ['--text on --panel-bg (mid stop)', '#1c1917', PANEL_MID, AA_TEXT],
+    ['--text-soft on --panel-bg', '#44403c', PANEL_MID, AA_TEXT],
+    ['--text-dim on --panel-bg', '#57534e', PANEL_MID, AA_TEXT],
+    ['--gold on --panel-bg', '#8b5e1a', PANEL_MID, AA_TEXT],
     ['--gold-dim on --panel-bg', '#7d5820', PANEL_MID, AA_TEXT],
     ['--color-danger on --panel-bg', '#a83a2a', PANEL_MID, AA_TEXT],
     ['--badge-warn-text on --panel-bg', '#7a4a12', PANEL_MID, AA_TEXT],
-    ['--badge-neutral-text on --panel-bg', '#5c4f30', PANEL_MID, AA_TEXT],
+    ['--badge-neutral-text on --panel-bg', '#57534e', PANEL_MID, AA_TEXT],
     ['--badge-success-text on --badge-success-bg', '#1f6b3a', BADGE_SUCCESS_BG, AA_TEXT],
-    ['--text-soft on --nav-bg', '#4a3a1e', NAV_BG, AA_TEXT],
-    ['--text-bright on --nav-hover-bg', '#140f05', NAV_HOVER_BG, AA_TEXT],
-    ['--gold on --surface-active (nav/range-tab active row)', '#8a5a1a', SURFACE_ACTIVE, AA_TEXT],
-    ['--gold on --callout-bg', '#8a5a1a', CALLOUT_BG, AA_TEXT],
-    ['--control-placeholder on --control-bg', '#7a6b4a', CONTROL_BG, AA_TEXT],
+    ['--text-soft on --nav-bg', '#44403c', NAV_BG, AA_TEXT],
+    ['--text-bright on --nav-hover-bg', '#100d0a', NAV_HOVER_BG, AA_TEXT],
+    ['--gold on --surface-active (nav/range-tab active row)', '#8b5e1a', SURFACE_ACTIVE, AA_TEXT],
+    ['--gold on --callout-bg', '#8b5e1a', CALLOUT_BG, AA_TEXT],
+    ['--control-placeholder on --control-bg', '#79746c', CONTROL_BG, AA_TEXT],
     ['fixed badge.admin text on fixed badge.admin bg', '#090909', '#ffd100', AA_TEXT],
     ['--btn-accent-text on --btn-accent-grad-from', '#fff8e6', BTN_ACCENT_GRAD_FROM, AA_TEXT],
     ['--btn-accent-text on --btn-accent-grad-to', '#fff8e6', BTN_ACCENT_GRAD_TO, AA_TEXT],

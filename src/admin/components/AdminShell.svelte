@@ -140,7 +140,7 @@
   .app-title {
     color: var(--gold);
     font-family: var(--title-font);
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: var(--title-shadow);
   }
 
   .app-title {

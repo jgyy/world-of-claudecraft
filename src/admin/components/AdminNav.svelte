@@ -104,7 +104,7 @@
     font-size: 19px;
     font-weight: 600;
     white-space: nowrap;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: var(--title-shadow);
   }
 
   nav,
