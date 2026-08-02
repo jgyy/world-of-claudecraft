@@ -6487,6 +6487,9 @@ export const cs_CZ: EnTranslations = {
     },
     "system": {
       "playerDeath": "Zemřel(a) jsi.",
+      "deathRecapKillerAbility": "You have died. Slain by {killer}'s {ability}.",
+      "deathRecapKiller": "You have died. Slain by {killer}.",
+      "deathRecapAbility": "You have died. Slain by {ability}.",
       "respawn": "Cítíš se odpočatě a znovu celý(á).",
       "ignoringChat": "Ignoruješ chat od {name}.",
       "noLongerIgnoring": "Už neignoruješ {name}.",

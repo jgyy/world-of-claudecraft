@@ -1153,21 +1153,18 @@ export function handleDeath(
     e.chargePath = [];
     if (e.leap !== undefined) e.leap = null;
     e.followTargetId = null;
-    // Classic-era death recap: a self-only chat line naming what killed you. Real
-    // kill credit already lives on the killer entity passed in here (kill-credit /
-    // loot resolution reuses the same source), so this reuses it rather than
-    // tracking a second "last attacker" field.
-    if (killer && killer.id !== e.id) {
-      ctx.notice(
-        e.id,
-        killerAbility
-          ? `You have died. Slain by ${killer.name}'s ${killerAbility}.`
-          : `You have died. Slain by ${killer.name}.`,
-      );
-    } else {
-      ctx.notice(e.id, 'You have died.');
-    }
-    ctx.emit({ type: 'playerDeath', pid: e.id });
+    // Classic-era death recap: the killer entity id (real kill credit already
+    // lives on the killer entity passed in here, the same source kill-credit /
+    // loot resolution reuses) plus the raw killing-ability name, if any. The
+    // client resolves and localizes both, and renders the ONE death log line
+    // (no separate sim-side notice: two lines on every death, and a doubled
+    // "You have died." for the no-killer case, was the earlier bug here).
+    ctx.emit({
+      type: 'playerDeath',
+      pid: e.id,
+      killerId: killer && killer.id !== e.id ? killer.id : undefined,
+      killerAbility: killerAbility ?? undefined,
+    });
     for (const m of ctx.entities.values()) {
       if (m.kind === 'mob' && !m.dead && m.aggroTargetId === e.id && m.aiState !== 'dead') {
         // turn on the next nearby attacker; go home only if nobody is left

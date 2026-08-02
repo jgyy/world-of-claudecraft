@@ -309,6 +309,9 @@ const hudStringsEn = {
     },
     system: {
       playerDeath: 'You have died.',
+      deathRecapKillerAbility: "You have died. Slain by {killer}'s {ability}.",
+      deathRecapKiller: 'You have died. Slain by {killer}.',
+      deathRecapAbility: 'You have died. Slain by {ability}.',
       respawn: 'You feel rested and whole again.',
       ignoringChat: 'Ignoring chat from {name}.',
       noLongerIgnoring: 'No longer ignoring {name}.',

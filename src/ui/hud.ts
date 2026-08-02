@@ -11556,7 +11556,23 @@ export class Hud {
           break;
         }
         case 'playerDeath': {
-          this.log(t('hud.system.playerDeath'), '#ff4444');
+          const killer = ev.killerId !== undefined ? sim.entities.get(ev.killerId) : undefined;
+          const killerName = killer ? entityDisplayName(killer) : undefined;
+          const abilityName = ev.killerAbility
+            ? abilityDisplayNameFromSource(ev.killerAbility)
+            : undefined;
+          const text =
+            killerName && abilityName
+              ? t('hud.system.deathRecapKillerAbility', {
+                  killer: killerName,
+                  ability: abilityName,
+                })
+              : killerName
+                ? t('hud.system.deathRecapKiller', { killer: killerName })
+                : abilityName
+                  ? t('hud.system.deathRecapAbility', { ability: abilityName })
+                  : t('hud.system.playerDeath');
+          this.log(text, '#ff4444');
           audio.playerDeath();
           break;
         }

@@ -11,28 +11,46 @@
 export const pending: Record<string, readonly string[]> = {
   "es": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "es_ES": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "fr_FR": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "fr_CA": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "en_CA": [],
   "it_IT": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "de_DE": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "zh_CN": [],
   "zh_TW": [],
@@ -40,39 +58,66 @@ export const pending: Record<string, readonly string[]> = {
   "ja_JP": [],
   "pt_BR": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "ru_RU": [],
   "cs_CZ": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "nl_NL": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "pl_PL": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "id_ID": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "tr_TR": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "sv_SE": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "vi_VN": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ],
   "da_DK": [
     "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed"
+    "hud.prompts.guildRenamed",
+    "hud.system.deathRecapAbility",
+    "hud.system.deathRecapKiller",
+    "hud.system.deathRecapKillerAbility"
   ]
 };

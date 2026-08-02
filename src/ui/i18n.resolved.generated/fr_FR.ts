@@ -6487,6 +6487,9 @@ export const fr_FR: EnTranslations = {
     },
     "system": {
       "playerDeath": "Vous êtes mort.",
+      "deathRecapKillerAbility": "You have died. Slain by {killer}'s {ability}.",
+      "deathRecapKiller": "You have died. Slain by {killer}.",
+      "deathRecapAbility": "You have died. Slain by {ability}.",
       "respawn": "Vous vous sentez reposé et entier à nouveau.",
       "ignoringChat": "Discussion de {name} ignorée.",
       "noLongerIgnoring": "Vous n'ignorez plus {name}.",

@@ -6487,6 +6487,9 @@ export const zh_TW: EnTranslations = {
     },
     "system": {
       "playerDeath": "你已經死亡。",
+      "deathRecapKillerAbility": "你已經死亡。被{killer}的{ability}擊殺。",
+      "deathRecapKiller": "你已經死亡。被{killer}擊殺。",
+      "deathRecapAbility": "你已經死亡。死於{ability}。",
       "respawn": "你再次感到精力恢復、身體完整。",
       "ignoringChat": "已封鎖來自 {name} 的聊天。",
       "noLongerIgnoring": "不再封鎖 {name}。",
