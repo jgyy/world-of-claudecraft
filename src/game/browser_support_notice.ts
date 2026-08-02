@@ -25,6 +25,11 @@ export function isSupportedBrowser(userAgent: string, hasBraveApi: boolean): boo
   if (hasBraveApi) return false;
   if (/\bEdg(?:A|iOS)?\/\d/.test(ua)) return false;
   if (/\bOPR\/\d/.test(ua)) return false;
+  // The three positive branches below are documentation of intent, not load-bearing
+  // decisions: the trailing `return true` already covers everything that reaches
+  // this point, per the "default to supported on ambiguity" rule above. Keep them
+  // named so the supported set stays legible even though removing any one changes
+  // no observable behavior.
   if (/Gecko\/\d/.test(ua) && /Firefox\/\d/.test(ua)) return true;
   if (/(?:Chrome|CriOS|Chromium)\/\d/.test(ua)) return true;
   if (/AppleWebKit/.test(ua) && /Version\/\d/.test(ua) && !/Chrome|Chromium|CriOS/.test(ua)) {
@@ -80,10 +85,15 @@ export function persistBrowserSupportNoticeDismissed(storage: Storage = localSto
 // ---------------------------------------------------------------------------
 
 import { isDesktopAppRuntime } from '../runtime';
-import { t } from '../ui/i18n';
+import { ensureLocaleLoaded, getLanguage, t } from '../ui/i18n';
 import { isNativeAppShell } from './mobile_controls';
 
-/** Builds the dismissible banner element. Exported for a future visual test. */
+/**
+ * Builds the dismissible banner element. Exported for a future visual test.
+ * `onDismiss` also fires from the "get the desktop app" button, since that
+ * click navigates the player to the download view and the notice has no
+ * further reason to sit on top of it.
+ */
 export function buildBrowserSupportNoticeElement(
   doc: Document,
   onDismiss: () => void,
@@ -112,6 +122,7 @@ export function buildBrowserSupportNoticeElement(
   desktopBtn.textContent = t('hudChrome.landing.browserSupport.getDesktopApp');
   desktopBtn.addEventListener('click', () => {
     doc.getElementById('nav-btn-download')?.dispatchEvent(new Event('click', { bubbles: true }));
+    onDismiss();
   });
   actions.appendChild(desktopBtn);
 
@@ -127,10 +138,26 @@ export function buildBrowserSupportNoticeElement(
   return el;
 }
 
+// The one live instance this boot may have shown, so `hideBrowserSupportNotice`
+// (called on world entry, a landing-only surface) can tear it down without
+// main.ts holding a reference of its own. `liveRelocalize` is the exact
+// listener function passed to `addEventListener`, kept alongside so it can be
+// removed again by reference.
+let liveNotice: HTMLElement | null = null;
+let liveRelocalize: (() => void) | null = null;
+
 /**
  * Show the notice, once, when this load's browser is genuinely unsupported and
  * the dismissal was not already persisted. No-op in the desktop app, in a
  * native mobile shell, or on an already-supported browser.
+ *
+ * The strings are localized against the CURRENT language, which may still be
+ * loading asynchronously at boot (only `en` is resident synchronously; see
+ * `ensureLocaleLoaded` in `src/ui/i18n.ts`), so building the element is
+ * deferred behind that load: `t()` would otherwise resolve every string
+ * against the English table and never correct itself. A later in-session
+ * language switch is covered by `woc:languagechange`, the same reactivity
+ * `src/ui/gpu_notice_toast.ts` uses.
  */
 export function initBrowserSupportNotice(doc: Document = document): void {
   const show = shouldShowBrowserSupportNotice({
@@ -140,10 +167,48 @@ export function initBrowserSupportNotice(doc: Document = document): void {
     dismissed: readBrowserSupportNoticeDismissed(),
   });
   if (!show) return;
+
+  const teardown = (): void => {
+    liveNotice?.remove();
+    liveNotice = null;
+    if (liveRelocalize) doc.removeEventListener('woc:languagechange', liveRelocalize);
+    liveRelocalize = null;
+  };
+
   const dismiss = (): void => {
     persistBrowserSupportNoticeDismissed();
-    el.remove();
+    teardown();
   };
-  const el = buildBrowserSupportNoticeElement(doc, dismiss);
-  doc.body.appendChild(el);
+
+  const relocalize = (): void => {
+    if (!liveNotice) return;
+    const rebuilt = buildBrowserSupportNoticeElement(doc, dismiss);
+    liveNotice.replaceWith(rebuilt);
+    liveNotice = rebuilt;
+  };
+
+  const reveal = (): void => {
+    if (readBrowserSupportNoticeDismissed()) return; // dismissed while the locale loaded
+    liveNotice = buildBrowserSupportNoticeElement(doc, dismiss);
+    doc.body.appendChild(liveNotice);
+    liveRelocalize = relocalize;
+    doc.addEventListener('woc:languagechange', liveRelocalize);
+  };
+
+  // Both arms reveal: a rejected locale load falls back to the resident
+  // English table rather than stranding the notice unshown.
+  void ensureLocaleLoaded(getLanguage()).then(reveal, reveal);
+}
+
+/**
+ * Landing-only advisory: tear it down on world entry so it never survives
+ * into the game and sits on top of in-world HUD chrome (the chat frame in
+ * particular, which shares its bottom-left corner). No-op if the notice was
+ * never shown or was already dismissed.
+ */
+export function hideBrowserSupportNotice(doc: Document = document): void {
+  liveNotice?.remove();
+  liveNotice = null;
+  if (liveRelocalize) doc.removeEventListener('woc:languagechange', liveRelocalize);
+  liveRelocalize = null;
 }

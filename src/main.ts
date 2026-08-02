@@ -16,7 +16,7 @@ import {
   cssEffectsTier,
   readBrowserEnv,
 } from './game/browser_env';
-import { initBrowserSupportNotice } from './game/browser_support_notice';
+import { hideBrowserSupportNotice, initBrowserSupportNotice } from './game/browser_support_notice';
 import { isCameraDrivenFacingActive } from './game/camera_driven_facing';
 import {
   cameraFollowShouldSettle,
@@ -979,6 +979,9 @@ function enterLoadingState(statusText: string): void {
   showLoadingScreen(statusText);
   $('#start-screen').style.display = 'none';
   releaseStartScreenPreview();
+  // Landing-only advisory: never let it survive into the world on top of
+  // in-world HUD chrome (it shares the chat frame's bottom-left corner).
+  hideBrowserSupportNotice();
 }
 
 async function prepareWorldEntry(): Promise<boolean> {
