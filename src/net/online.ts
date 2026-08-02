@@ -1774,15 +1774,21 @@ export class ClientWorld implements IWorld {
     if (NATIVE_APP) {
       void App.addListener('appStateChange', ({ isActive }) => {
         this.handleForegroundBackground(isActive);
-      }).then((handle) => {
-        // The session may have already ended by the time this resolves
-        // (addListener is async); don't leak a listener onto a dead world.
-        if (this.sessionEnded) {
-          void handle.remove();
-        } else {
-          this.nativeLifecycleHandle = handle;
-        }
-      });
+      })
+        .then((handle) => {
+          // The session may have already ended by the time this resolves
+          // (addListener is async); don't leak a listener onto a dead world.
+          if (this.sessionEnded) {
+            void handle.remove().catch((err) => {
+              console.error('[net] could not remove native lifecycle listener', err);
+            });
+          } else {
+            this.nativeLifecycleHandle = handle;
+          }
+        })
+        .catch((err) => {
+          console.error('[net] could not install native lifecycle listener', err);
+        });
     }
   }
 
@@ -1797,6 +1803,12 @@ export class ClientWorld implements IWorld {
   // disconnects even though most drops are really just late reconnects. On
   // resume, force a real state check and retry immediately instead of
   // waiting for a close event or the rest of the backoff delay.
+  //
+  // `!== 'visible'` (equivalently `=== 'hidden'`, the only other value the
+  // DocumentVisibilityState spec defines today) rather than `=== 'hidden'`
+  // explicitly: a no-op difference now, but it means a future third state
+  // would also flush on entering it, matching the "flush on anything not
+  // foregrounded" intent instead of silently skipping the flush.
   private readonly handleVisibilityChange = (): void => {
     this.handleForegroundBackground(document.visibilityState === 'visible');
   };
@@ -1924,7 +1936,9 @@ export class ClientWorld implements IWorld {
     // its .then() callback checks sessionEnded itself and removes the handle
     // as soon as it lands; this covers the already-resolved case.
     if (this.nativeLifecycleHandle) {
-      void this.nativeLifecycleHandle.remove();
+      void this.nativeLifecycleHandle.remove().catch((err) => {
+        console.error('[net] could not remove native lifecycle listener', err);
+      });
       this.nativeLifecycleHandle = undefined;
     }
   }

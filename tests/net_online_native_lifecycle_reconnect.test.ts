@@ -32,6 +32,12 @@ vi.mock('../src/client_origin', async (importOriginal) => {
 
 import { ClientWorld } from '../src/net/online';
 import type { PlayerClass } from '../src/sim/types';
+import type { ActionBarLayout } from '../src/world_api/action_bar';
+
+const STUB_LAYOUT: ActionBarLayout = {
+  v: 1,
+  forms: { normal: { bar: [{ type: 'ability', id: 'a' }] } },
+};
 
 const PROBE_CLASS: PlayerClass = 'warrior';
 
@@ -159,9 +165,23 @@ describe('ClientWorld native App-lifecycle reconnect (Capacitor appStateChange)'
   it('isActive:false (backgrounding) does not touch the socket, mirroring the DOM hidden branch', async () => {
     await withNativeStubs(async (harness) => {
       const { world, fireAppState } = await constructWithCapturedListener();
+      // canSendCommand() requires `connected`, which only flips true once the
+      // server's auth ack lands; the stub socket never sends one, so set it
+      // directly, matching the isActive:true zombie-socket case below.
+      (world as unknown as { connected: boolean }).connected = true;
+      // The one thing the background branch actually does is flush a pending
+      // action-bar layout save; queue one so the assertion below is decisive
+      // rather than just "the socket was left alone".
+      world.saveActionBarLayout(STUB_LAYOUT);
       fireAppState(false);
       expect(StubWebSocket.instances.length).toBe(1);
       expect(harness.timers.length).toBe(0);
+      const first = StubWebSocket.instances[0];
+      const sentHotbarSave = first.sent.some((frame) => {
+        const parsed = JSON.parse(frame) as { cmd?: string };
+        return parsed.cmd === 'save_hotbar_layout';
+      });
+      expect(sentHotbarSave).toBe(true);
       world.close();
     });
   });
@@ -215,11 +235,18 @@ describe('ClientWorld native App-lifecycle reconnect (Capacitor appStateChange)'
   });
 
   it('does nothing while the socket is genuinely open', async () => {
-    await withNativeStubs(async () => {
+    await withNativeStubs(async (harness) => {
       const { world, fireAppState } = await constructWithCapturedListener();
+      (world as unknown as { connected: boolean }).connected = true;
       fireAppState(false);
       fireAppState(true);
+      // A regression that routed an OPEN socket into socketClosed() would still
+      // pass an instance-count-only check (it schedules a reconnect timer rather
+      // than opening a second socket): pin that no timer was armed and that
+      // `connected` was never flipped, not just that no NEW socket appeared.
       expect(StubWebSocket.instances.length).toBe(1);
+      expect(harness.timers.length).toBe(0);
+      expect((world as unknown as { connected: boolean }).connected).toBe(true);
       world.close();
     });
   });
