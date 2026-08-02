@@ -6270,11 +6270,15 @@ export const en: EnTranslations = {
       "graphicsPresetMedium": "Medium",
       "graphicsPresetHigh": "High",
       "graphicsPresetUltra": "Ultra",
+      "graphicsPresetInsane": "Insane",
       "graphicsPresetAdvanced": "Advanced",
       "terrainDetail": "Terrain Detail",
       "foliageDensity": "Foliage Density",
       "effectsQuality": "Effects & Lighting",
       "shadowQuality": "Shadow Quality",
+      "surfaceDetail": "Surface Detail",
+      "surfaceDetailBasic": "Basic",
+      "surfaceDetailFull": "Full",
       "terrainLow": "Low",
       "terrainHigh": "High",
       "touchOpacity": "Touch Controls Opacity",
@@ -6438,6 +6442,8 @@ export const en: EnTranslations = {
       "joinParty": "Join Party",
       "guildInvite": "{name} invites you to join {guild}.",
       "joinGuild": "Join Guild",
+      "guildInviteCancelled": "A pending guild invitation was cancelled because the guild was renamed.",
+      "guildRenamed": "Your guild has been renamed to {name} by the moderation team.",
       "tradeRequest": "{name} wants to trade with you.",
       "openTrade": "Open Trade",
       "duelRequest": "{name} has challenged you to a duel!",
@@ -6451,6 +6457,7 @@ export const en: EnTranslations = {
       "floatingDodge": "Dodge",
       "floatingParry": "Parry",
       "floatingResist": "Resist",
+      "floatingEvade": "Evade",
       "floatingHealFull": "Full",
       "floatingHealAbsorbed": "Absorbed",
       "cannotMove": "Can't move!",
@@ -6463,6 +6470,7 @@ export const en: EnTranslations = {
       "dodged": "Your {ability} is dodged by {target}.",
       "parried": "Your {ability} is parried by {target}.",
       "resisted": "Your {ability} is resisted by {target}.",
+      "evaded": "Your {ability} is evaded by {target}.",
       "healSelf": "Your {ability} heals you for {amount}.",
       "healSelfCrit": "Your {ability} critically heals you for {amount}.",
       "healOther": "Your {ability} heals {target} for {amount}.",
@@ -7030,6 +7038,8 @@ export const en: EnTranslations = {
       "close": "Close vendor",
       "hint": "Click an item in your bags to sell it while this window is open.",
       "buyAria": "Buy {item} for {price}",
+      "buyStack": "Buy {count}",
+      "buyStackAria": "Buy {count} {item} for {price}",
       "buybackTitle": "Buyback",
       "buybackEmpty": "No items",
       "buybackAria": "Buy back {item} for {price}",
@@ -9648,6 +9658,18 @@ export const en: EnTranslations = {
       "wildheart_fangknife": {
         "name": "Fangknife of Zulgar"
       },
+      "fanglords_beastspear": {
+        "name": "Fanglord's Beastspear"
+      },
+      "bloodmane_warleggings": {
+        "name": "Bloodmane Warleggings"
+      },
+      "vineclaw_stalking_breeches": {
+        "name": "Vineclaw Stalking Breeches"
+      },
+      "sunbone_ritual_sarong": {
+        "name": "Sunbone Ritual Sarong"
+      },
       "thick_winter_pelt": {
         "name": "Thick Winter Pelt"
       },
@@ -10394,6 +10416,24 @@ export const en: EnTranslations = {
       },
       "wyrmchoir_handwraps": {
         "name": "Wyrmchoir Handwraps"
+      },
+      "basin_stalkers_tunic": {
+        "name": "Basin Stalker's Tunic"
+      },
+      "verdant_heart_vestment": {
+        "name": "Verdant-Heart Vestment"
+      },
+      "sunbone_ritual_hauberk": {
+        "name": "Sunbone Ritual Hauberk"
+      },
+      "greatfang_of_the_basin": {
+        "name": "Greatfang of the Basin"
+      },
+      "sunbone_oracles_crown": {
+        "name": "Sunbone Oracle's Crown"
+      },
+      "bloodmane_war_legguards": {
+        "name": "Bloodmane War-Legguards"
       },
       "deathless_greatblade": {
         "name": "Deathless Greatblade"

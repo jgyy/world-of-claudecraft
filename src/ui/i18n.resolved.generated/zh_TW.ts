@@ -926,7 +926,7 @@ export const zh_TW: EnTranslations = {
     "targetAuras": {
       "title": "目標光環",
       "keybindLabel": "目標增益與減益效果",
-      "all": "All",
+      "all": "全部",
       "debuffs": "減益",
       "buffs": "增益",
       "unlock": "移動目標光環視窗",
@@ -6270,11 +6270,15 @@ export const zh_TW: EnTranslations = {
       "graphicsPresetMedium": "中",
       "graphicsPresetHigh": "高",
       "graphicsPresetUltra": "超高",
+      "graphicsPresetInsane": "極致",
       "graphicsPresetAdvanced": "進階",
       "terrainDetail": "地形細節",
       "foliageDensity": "植被密度",
       "effectsQuality": "特效與光照",
       "shadowQuality": "陰影品質",
+      "surfaceDetail": "表面細節",
+      "surfaceDetailBasic": "基礎",
+      "surfaceDetailFull": "完整",
       "terrainLow": "低",
       "terrainHigh": "高",
       "touchOpacity": "觸控控制透明度",
@@ -6438,6 +6442,8 @@ export const zh_TW: EnTranslations = {
       "joinParty": "加入隊伍",
       "guildInvite": "{name} 邀請你加入 {guild}。",
       "joinGuild": "加入公會",
+      "guildInviteCancelled": "由於公會已重新命名，一項待處理的公會邀請已取消。",
+      "guildRenamed": "你的公會已被管理團隊重新命名為 {name}。",
       "tradeRequest": "{name} 想與你交易。",
       "openTrade": "開啟交易",
       "duelRequest": "{name} 向你發起了決鬥挑戰！",
@@ -6451,6 +6457,7 @@ export const zh_TW: EnTranslations = {
       "floatingDodge": "閃避",
       "floatingParry": "招架",
       "floatingResist": "抵抗",
+      "floatingEvade": "迴避",
       "floatingHealFull": "已滿",
       "floatingHealAbsorbed": "被吸收",
       "cannotMove": "無法移動！",
@@ -6463,6 +6470,7 @@ export const zh_TW: EnTranslations = {
       "dodged": "{target}閃避了你的{ability}。",
       "parried": "你的{ability}被{target}招架了。",
       "resisted": "{target}抵抗了你的{ability}。",
+      "evaded": "你的{ability}被{target}迴避了。",
       "healSelf": "你的{ability}為你恢復 {amount} 點生命。",
       "healSelfCrit": "你的{ability}對你造成暴擊治療，恢復 {amount} 點生命。",
       "healOther": "你的{ability}為{target}恢復 {amount} 點生命。",
@@ -7030,6 +7038,8 @@ export const zh_TW: EnTranslations = {
       "close": "關閉商人",
       "hint": "此視窗開啟時，點擊背包中的物品即可出售。",
       "buyAria": "以 {price} 購買 {item}",
+      "buyStack": "Buy {count}",
+      "buyStackAria": "Buy {count} {item} for {price}",
       "buybackTitle": "買回",
       "buybackEmpty": "沒有物品",
       "buybackAria": "以 {price} 買回 {item}",
@@ -9648,6 +9658,18 @@ export const zh_TW: EnTranslations = {
       "wildheart_fangknife": {
         "name": "祖爾加的獠牙匕首"
       },
+      "fanglords_beastspear": {
+        "name": "獠牙領主的獸矛"
+      },
+      "bloodmane_warleggings": {
+        "name": "血鬃戰爭護腿"
+      },
+      "vineclaw_stalking_breeches": {
+        "name": "藤爪潛行馬褲"
+      },
+      "sunbone_ritual_sarong": {
+        "name": "日骨儀式紗籠"
+      },
       "thick_winter_pelt": {
         "name": "厚實冬毛皮"
       },
@@ -10394,6 +10416,24 @@ export const zh_TW: EnTranslations = {
       },
       "wyrmchoir_handwraps": {
         "name": "龍唱裹手"
+      },
+      "basin_stalkers_tunic": {
+        "name": "盆地潛獵者外衣"
+      },
+      "verdant_heart_vestment": {
+        "name": "翠心法衣"
+      },
+      "sunbone_ritual_hauberk": {
+        "name": "日骨儀式鎖甲"
+      },
+      "greatfang_of_the_basin": {
+        "name": "盆地巨牙"
+      },
+      "sunbone_oracles_crown": {
+        "name": "日骨先知之冠"
+      },
+      "bloodmane_war_legguards": {
+        "name": "血鬃戰爭腿甲"
       },
       "deathless_greatblade": {
         "name": "不死巨刃"

@@ -926,7 +926,7 @@ export const ru_RU: EnTranslations = {
     "targetAuras": {
       "title": "Ауры цели",
       "keybindLabel": "Усиления и ослабления цели",
-      "all": "All",
+      "all": "Все",
       "debuffs": "Ослабления",
       "buffs": "Усиления",
       "unlock": "Переместить окно аур цели",
@@ -6270,11 +6270,15 @@ export const ru_RU: EnTranslations = {
       "graphicsPresetMedium": "Среднее",
       "graphicsPresetHigh": "Высокое",
       "graphicsPresetUltra": "Ультра",
+      "graphicsPresetInsane": "Экстремальное",
       "graphicsPresetAdvanced": "Расширенное",
       "terrainDetail": "Детализация местности",
       "foliageDensity": "Плотность растительности",
       "effectsQuality": "Эффекты и освещение",
       "shadowQuality": "Качество теней",
+      "surfaceDetail": "Детализация поверхностей",
+      "surfaceDetailBasic": "Базовая",
+      "surfaceDetailFull": "Полная",
       "terrainLow": "Низкая",
       "terrainHigh": "Высокая",
       "touchOpacity": "Прозрачность сенсорного управления",
@@ -6438,6 +6442,8 @@ export const ru_RU: EnTranslations = {
       "joinParty": "Вступить в группу",
       "guildInvite": "{name} приглашает вас в {guild}.",
       "joinGuild": "Вступить в гильдию",
+      "guildInviteCancelled": "Ожидающее приглашение в гильдию отменено, потому что гильдия была переименована.",
+      "guildRenamed": "Команда модерации переименовала вашу гильдию в {name}.",
       "tradeRequest": "{name} хочет торговать с вами.",
       "openTrade": "Открыть обмен",
       "duelRequest": "{name} вызвал вас на дуэль!",
@@ -6451,6 +6457,7 @@ export const ru_RU: EnTranslations = {
       "floatingDodge": "Уклон",
       "floatingParry": "Парировано",
       "floatingResist": "Сопротивление",
+      "floatingEvade": "Ускользание",
       "floatingHealFull": "Полное",
       "floatingHealAbsorbed": "Поглощено",
       "cannotMove": "Не двигается!",
@@ -6463,6 +6470,7 @@ export const ru_RU: EnTranslations = {
       "dodged": "{target} уклоняется от вашего {ability}.",
       "parried": "{target} парирует ваш {ability}.",
       "resisted": "{target} сопротивляется вашему {ability}.",
+      "evaded": "{target} ускользает от вашего {ability}.",
       "healSelf": "Ваше {ability} исцеляет вас на {amount}.",
       "healSelfCrit": "Ваше {ability} критически исцеляет вас на {amount}.",
       "healOther": "Ваше {ability} исцеляет {target} на {amount}.",
@@ -7030,6 +7038,8 @@ export const ru_RU: EnTranslations = {
       "close": "Закрыть торговца",
       "hint": "Нажмите на предмет в сумках, чтобы продать его, пока это окно открыто.",
       "buyAria": "Купить {item} за {price}",
+      "buyStack": "Buy {count}",
+      "buyStackAria": "Buy {count} {item} for {price}",
       "buybackTitle": "Выкуп",
       "buybackEmpty": "Нет предметов",
       "buybackAria": "Выкупить {item} за {price}",
@@ -9648,6 +9658,18 @@ export const ru_RU: EnTranslations = {
       "wildheart_fangknife": {
         "name": "Клыковый нож Зулгара"
       },
+      "fanglords_beastspear": {
+        "name": "Звериное копье Повелителя клыков"
+      },
+      "bloodmane_warleggings": {
+        "name": "Боевые поножи Кровавой Гривы"
+      },
+      "vineclaw_stalking_breeches": {
+        "name": "Штаны лазутчика Лозокогтя"
+      },
+      "sunbone_ritual_sarong": {
+        "name": "Ритуальный саронг Солнечной Кости"
+      },
       "thick_winter_pelt": {
         "name": "Плотная зимняя шкура"
       },
@@ -10394,6 +10416,24 @@ export const ru_RU: EnTranslations = {
       },
       "wyrmchoir_handwraps": {
         "name": "Обмотки змеиного хора"
+      },
+      "basin_stalkers_tunic": {
+        "name": "Туника лазутчика Котловины"
+      },
+      "verdant_heart_vestment": {
+        "name": "Облачение Зеленеющего Сердца"
+      },
+      "sunbone_ritual_hauberk": {
+        "name": "Ритуальная кольчуга Солнечной Кости"
+      },
+      "greatfang_of_the_basin": {
+        "name": "Великий клык Котловины"
+      },
+      "sunbone_oracles_crown": {
+        "name": "Корона оракула Солнечной Кости"
+      },
+      "bloodmane_war_legguards": {
+        "name": "Боевые набедренники Кровавой Гривы"
       },
       "deathless_greatblade": {
         "name": "Бессмертный великий клинок"

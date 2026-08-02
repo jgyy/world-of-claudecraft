@@ -148,6 +148,11 @@ import {
   stableDeadlineRemaining,
 } from './snapshot_timer_wire';
 
+// The online mirror decodes terse legacy wire JSON. Runtime guards below narrow
+// individual fields as they are consumed; this alias keeps the decoder local.
+// biome-ignore lint/suspicious/noExplicitAny: legacy wire JSON is intentionally loose at the boundary.
+type LooseJson = any;
+
 interface ClientWireAura {
   id: string;
   name: string;
@@ -370,7 +375,7 @@ export class Api {
     }
   }
 
-  private async post(path: string, body: unknown, base = this.base): Promise<any> {
+  private async post<T = LooseJson>(path: string, body: unknown, base = this.base): Promise<T> {
     const res = await fetch(apiUrl(path, base), {
       method: 'POST',
       headers: {
@@ -381,19 +386,19 @@ export class Api {
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw apiErrorFromBody(data, res.status);
-    return data;
+    return data as T;
   }
 
-  private async get(path: string): Promise<any> {
+  private async get<T = LooseJson>(path: string): Promise<T> {
     const res = await fetch(apiUrl(path, this.base), {
       headers: this.token ? { Authorization: `Bearer ${this.token}` } : {},
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw apiErrorFromBody(data, res.status);
-    return data;
+    return data as T;
   }
 
-  private async delete(path: string, body: unknown): Promise<any> {
+  private async delete<T = LooseJson>(path: string, body: unknown): Promise<T> {
     const res = await fetch(apiUrl(path, this.base), {
       method: 'DELETE',
       headers: {
@@ -404,7 +409,7 @@ export class Api {
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw apiErrorFromBody(data, res.status);
-    return data;
+    return data as T;
   }
 
   async register(
@@ -1313,6 +1318,9 @@ function blankEntity(id: number): Entity {
     spawnPos: { x: 0, y: 0, z: 0 },
     leashAnchor: null,
     evadeStall: 0,
+    chaseStall: 0,
+    evadeEpoch: 0,
+    combatExitHoldUntil: 0,
     fleeTimer: 0,
     fleeReturnTimer: 0,
     hasFled: false,
@@ -1496,9 +1504,6 @@ export class ClientWorld implements IWorld {
     radius: number;
     expiresAtMs: number;
   }> = [];
-  // The online client never registers rift collision regions (the server owns
-  // collision); 0 keeps rift camera occlusion a no-op here.
-  readonly riftCollisionToken = 0;
   // Lockpicking: rebuilt from the lockpick* events (there is no snapshot field).
   // Holds only the fog-windowed cells the server discloses.
   lockpickState: LockpickView | null = null;
@@ -2067,10 +2072,10 @@ export class ClientWorld implements IWorld {
   }
 
   private onMessage(raw: string): void {
-    let msg: any;
+    let msg: LooseJson;
     const parseStart = performance.now();
     try {
-      msg = JSON.parse(raw);
+      msg = JSON.parse(raw) as LooseJson;
     } catch {
       return;
     }
@@ -2209,6 +2214,7 @@ export class ClientWorld implements IWorld {
         this.applyChatFlairEvent(ev as SimEvent);
         this.applyUnstuckEvent(ev as SimEvent);
         this.applyPrestigeEvent(ev as SimEvent);
+        this.applyGuildRenamedEvent(ev as SimEvent);
         this.eventQueue.push(ev as SimEvent);
       }
       return;
@@ -2285,6 +2291,18 @@ export class ClientWorld implements IWorld {
     const v = this.socialDirty;
     this.socialDirty = false;
     return v;
+  }
+
+  private applyGuildRenamedEvent(ev: SimEvent): void {
+    if (
+      ev.type !== 'guildRenamed' ||
+      !this.socialInfo?.guild ||
+      this.socialInfo.guild.id !== ev.guildId
+    ) {
+      return;
+    }
+    this.socialInfo.guild.name = ev.newName;
+    this.socialDirty = true;
   }
 
   consumeProfanityChanged(): boolean {
@@ -2400,7 +2418,7 @@ export class ClientWorld implements IWorld {
     }
   }
 
-  private applySnapshot(snap: any): void {
+  private applySnapshot(snap: LooseJson): void {
     const now = performance.now();
     if (typeof this.spectating === 'string' && typeof snap.self?.id === 'number') {
       this.playerId = snap.self.id;
@@ -2495,7 +2513,7 @@ export class ClientWorld implements IWorld {
       return typeof aura.rem === 'number' && Number.isFinite(aura.rem) ? aura.rem : 0;
     };
 
-    const applyWire = (w: any): Entity | null => {
+    const applyWire = (w: LooseJson): Entity | null => {
       let e = this.entities.get(w.id);
       // identity fields ride only in "full" records: first sight and changes
       const hasIdentity = w.k !== undefined;
@@ -3266,7 +3284,7 @@ export class ClientWorld implements IWorld {
     // computeQuestState here exactly as it does server-side (the offline Sim
     // re-derives the same set from live PlayerMeta.questCadence).
     const cadenceBlocked =
-      identity && identity.cadenceBlockedQuests && identity.cadenceBlockedQuests.length > 0
+      identity?.cadenceBlockedQuests && identity.cadenceBlockedQuests.length > 0
         ? new Set(identity.cadenceBlockedQuests)
         : undefined;
     return optimisticQuestState(
@@ -3581,8 +3599,14 @@ export class ClientWorld implements IWorld {
   discardItem(itemId: string, count?: number): void {
     this.cmd({ cmd: 'discard', item: itemId, count });
   }
-  buyItem(npcId: number, itemId: string): void {
-    this.cmd({ cmd: 'buy', npc: npcId, item: itemId });
+  buyItem(npcId: number, itemId: string, bulk?: boolean): void {
+    // `bulk` rides the wire only when true (the craftItem `commission` idiom
+    // above): an ordinary buy stays byte-identical to the pre-#2374 message.
+    if (bulk === true) {
+      this.cmd({ cmd: 'buy', npc: npcId, item: itemId, bulk: true });
+    } else {
+      this.cmd({ cmd: 'buy', npc: npcId, item: itemId });
+    }
   }
   harvestNode(nodeId: string): Promise<boolean> {
     return this.cmdWithOutcome({ cmd: 'harvest_node', node: nodeId });
