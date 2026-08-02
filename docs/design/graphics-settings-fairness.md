@@ -62,16 +62,15 @@ What each knob does, and why it is gameplay-neutral:
   (`if (!s.isDebuff && rendered >= cap) continue`), so a debuff is never culled. Full tiers are
   byte-identical (cap is +Infinity). The player's OWN buff and debuff bars are never tier-gated:
   they repaint every frame on every preset, because your own debuffs are the ACTIONABLE read
-  named above. Only the TARGET's (non-self) debuffs strip (`createAurasView('all')`, which
-  interleaves buffs and debuffs in sim-application order) coarsens its repaint cadence to about
-  4 Hz on low via `nonSelfRepaintDue`, the same throttle mechanism the target frame body uses
-  (though the target frame body itself runs at about 10 Hz, not 4 Hz: the two are separately
-  tuned, not the same rate).
+  named above. The TARGET's (non-self) debuffs strip (`createAurasView('all')`, which
+  interleaves buffs and debuffs in sim-application order) is likewise never tier-gated: it can
+  carry a purgeable buff, an allied maintained buff, or a group-coordinated foreign debuff that a
+  player reacts to, so it repaints every frame on every preset just like the player's own bars.
 - Target frame, hud + `unit_frame_painter.ts`: on low, the target frame BODY (HP / level /
   portrait) refreshes at about 10 Hz; a target SWAP bypasses the throttle
-  (`nonSelfRepaintDue`), and the cast bar is painted OUTSIDE the throttle (full rate, so
-  interrupt timing is never degraded). Cosmetic: 100 ms is below the reaction loop and target
-  HP is a coarse read.
+  (`nonSelfRepaintDue`), and the cast bar and the debuffs strip are both painted OUTSIDE the
+  throttle (full rate, so interrupt timing and target aura reads are never degraded). Cosmetic:
+  100 ms is below the reaction loop and target HP is a coarse read.
 - Party frames: deliberately NOT tiered. Party-member HP is a healer's only actionable signal,
   so it stays on the 4 Hz mediumHud band for EVERY tier. (An earlier draft throttled it to
   2 Hz on low; the re-audit removed that. The perf win was illusory anyway, because
