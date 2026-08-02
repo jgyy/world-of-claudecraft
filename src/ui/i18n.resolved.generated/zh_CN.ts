@@ -1188,6 +1188,7 @@ export const zh_CN: EnTranslations = {
       "itemScoreLine": "评分 {score}",
       "showSecondaryActionBar": "显示副动作条",
       "showThirdActionBar": "显示第三动作条",
+      "hideUnusedActionSlots": "隐藏未使用的动作栏位",
       "showTargetOfTarget": "显示目标的目标",
       "showAttackButton": "显示攻击按钮",
       "showDailyRewardsChest": "显示每日奖励宝箱",

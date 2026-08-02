@@ -7370,6 +7370,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.options.clickMoveRight'
   | 'hudChrome.options.footstepSounds'
   | 'hudChrome.options.groundReticle'
+  | 'hudChrome.options.hideUnusedActionSlots'
   | 'hudChrome.options.highContrastBackground'
   | 'hudChrome.options.interfaceMode'
   | 'hudChrome.options.interfaceModeAuto'

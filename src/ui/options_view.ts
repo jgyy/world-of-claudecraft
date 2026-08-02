@@ -525,6 +525,7 @@ export function buildInterfaceControls(s: OptionsSettingsSource): OptionsControl
       boolToggle(s, 'showThirdActionBar', 'hudChrome.options.showThirdActionBar', {
         disabled: !s.bool('showSecondaryActionBar'),
       }),
+      boolToggle(s, 'hideUnusedActionSlots', 'hudChrome.options.hideUnusedActionSlots'),
     ]),
   ];
 }
