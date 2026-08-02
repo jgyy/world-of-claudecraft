@@ -11001,4 +11001,7 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hudChrome.riftTracker.closesIn': 'Sluit over {time}',
   'hudChrome.riftTracker.clockMs': '{minutes}:{seconds}',
   'hudChrome.riftTracker.clockHms': '{hours}:{minutes}:{seconds}',
+  'hud.prompts.guildInviteCancelled':
+    'Een openstaande uitnodiging voor je gilde is geannuleerd omdat de gilde is hernoemd.',
+  'hud.prompts.guildRenamed': 'Je gilde is door het moderatieteam hernoemd tot {name}.',
 };

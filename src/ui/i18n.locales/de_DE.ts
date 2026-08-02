@@ -11096,4 +11096,7 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.riftTracker.closesIn': 'Schließt in {time}',
   'hudChrome.riftTracker.clockMs': '{minutes}:{seconds}',
   'hudChrome.riftTracker.clockHms': '{hours}:{minutes}:{seconds}',
+  'hud.prompts.guildInviteCancelled':
+    'Eine ausstehende Gildeneinladung wurde storniert, da die Gilde umbenannt wurde.',
+  'hud.prompts.guildRenamed': 'Eure Gilde wurde vom Moderationsteam in {name} umbenannt.',
 };

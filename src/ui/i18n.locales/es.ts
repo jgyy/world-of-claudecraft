@@ -11073,4 +11073,8 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'hudChrome.riftTracker.closesIn': 'Se cierra en {time}',
   'hudChrome.riftTracker.clockMs': '{minutes}:{seconds}',
   'hudChrome.riftTracker.clockHms': '{hours}:{minutes}:{seconds}',
+  'hud.prompts.guildInviteCancelled':
+    'Se canceló una invitación de hermandad pendiente porque la hermandad cambió de nombre.',
+  'hud.prompts.guildRenamed':
+    'El equipo de moderación ha cambiado el nombre de tu hermandad a {name}.',
 };

@@ -11005,4 +11005,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.riftTracker.closesIn': 'Tutup dalam {time}',
   'hudChrome.riftTracker.clockMs': '{minutes}:{seconds}',
   'hudChrome.riftTracker.clockHms': '{hours}:{minutes}:{seconds}',
+  'hud.prompts.guildInviteCancelled':
+    'Undangan guild yang tertunda dibatalkan karena guild tersebut diganti nama.',
+  'hud.prompts.guildRenamed': 'Guild Anda telah diganti nama menjadi {name} oleh tim moderasi.',
 };

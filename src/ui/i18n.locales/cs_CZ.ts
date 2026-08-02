@@ -10818,4 +10818,7 @@ export const cs_CZ: Partial<Record<TranslationKey, string>> = {
   'hudChrome.riftTracker.closesIn': 'Zavře se za {time}',
   'hudChrome.riftTracker.clockMs': '{minutes}:{seconds}',
   'hudChrome.riftTracker.clockHms': '{hours}:{minutes}:{seconds}',
+  'hud.prompts.guildInviteCancelled':
+    'Čekající pozvánka do cechu byla zrušena, protože byl cech přejmenován.',
+  'hud.prompts.guildRenamed': 'Tvůj cech byl moderátorským týmem přejmenován na {name}.',
 };

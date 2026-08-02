@@ -10897,4 +10897,8 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.riftTracker.closesIn': '{time} içinde kapanır',
   'hudChrome.riftTracker.clockMs': '{minutes}:{seconds}',
   'hudChrome.riftTracker.clockHms': '{hours}:{minutes}:{seconds}',
+  'hud.prompts.guildInviteCancelled':
+    'Lonca yeniden adlandırıldığı için bekleyen bir lonca daveti iptal edildi.',
+  'hud.prompts.guildRenamed':
+    'Loncan, moderasyon ekibi tarafından {name} olarak yeniden adlandırıldı.',
 };
