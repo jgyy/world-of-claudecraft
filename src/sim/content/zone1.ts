@@ -1478,7 +1478,7 @@ export const ZONE1_CAMPS: CampDef[] = [
   { mobId: 'mogger', center: { x: 118, z: -26 }, radius: 5, count: 1 },
   // Spiders: eastern woods
   { mobId: 'webwood_spider', center: { x: -68, z: 2 }, radius: 28.5, count: 6 },
-  // Murlocs: lake shore northwest, camp still straddles the waterline. This camp is
+  // Murlocs: lake shore northeast, camp still straddles the waterline. This camp is
   // radius-capped by Mirror Lake, not by its neighbours: the terrain flatten disc is
   // radius * 1.8, so a radius wide enough for 11.5 yd spacing drags a 59 yd flatten
   // across the lake and lifts its bed above swim depth (the lake stops needing a
