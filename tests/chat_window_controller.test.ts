@@ -58,6 +58,7 @@ interface Harness {
 function makeHarness(
   initialStorage: Record<string, string> = {},
   selectedQuest: string | null = null,
+  isMobileLayout = false,
 ): Harness {
   const document = new FakeDocument();
   const tabs = document.element('chatlog-tabs');
@@ -90,7 +91,7 @@ function makeHarness(
     combatLog: combatLog as unknown as HTMLElement,
     contextMenu,
     sendChat: (line) => sent.push(line),
-    isMobileLayout: () => false,
+    isMobileLayout: () => isMobileLayout,
     // ODD_ITEM_ID / ODD_QUEST_ID resolve like any other content record: they are
     // in the tables and they have names. The ONLY thing wrong with them is the
     // charset, which is exactly the case #2459 is about.
@@ -387,6 +388,57 @@ describe('ChatWindowController', () => {
 
       expect(harness.storage.getItem('woc_chat_tabs')).toBe('["guild"]');
       expect(tabButton(harness, 'all').tabIndex).toBe(0);
+    });
+
+    it('clicking a tab re-latches the roving tabindex to it, even after roving elsewhere', () => {
+      const harness = makeHarness({ woc_chat_tabs: '["world","guild"]' });
+      harness.controller.init();
+
+      // Rove onto "world" without activating it (the roving target and the
+      // active tab now disagree).
+      tabButton(harness, 'all').dispatchEvent(keydown('ArrowRight'));
+      tabButton(harness, 'combat').dispatchEvent(keydown('ArrowRight'));
+      expect(tabButton(harness, 'world').tabIndex).toBe(0);
+
+      tabButton(harness, 'guild').dispatchEvent(new Event('click'));
+
+      expect(tabButton(harness, 'guild').tabIndex).toBe(0);
+      expect(tabButton(harness, 'world').tabIndex).toBe(-1);
+    });
+
+    it('shows drag-visual classes during a drag and clears them on drop and on dragend', () => {
+      const harness = makeHarness({ woc_chat_tabs: '["world","guild"]' });
+      harness.controller.init();
+
+      const source = tabButton(harness, 'world');
+      source.dispatchEvent(dragEvent('dragstart'));
+      expect(source.classList.contains('chat-tab-dragging')).toBe(true);
+
+      const target = tabButton(harness, 'guild');
+      target.dispatchEvent(dragEvent('dragover'));
+      expect(target.classList.contains('drop-target')).toBe(true);
+
+      target.dispatchEvent(dragEvent('dragleave'));
+      expect(target.classList.contains('drop-target')).toBe(false);
+
+      // Dropping "world" back onto itself is a no-op reorder (reorderChatTabs
+      // returns the same array), so dropDraggingTab returns before renderTabs()
+      // would otherwise wipe the drag-visual classes via its rebuild; dragend's
+      // explicit cleanup is what clears them here.
+      source.dispatchEvent(dragEvent('dragover'));
+      expect(source.classList.contains('drop-target')).toBe(true);
+      source.dispatchEvent(dragEvent('drop'));
+      source.dispatchEvent(dragEvent('dragend'));
+
+      expect(tabButton(harness, 'world').classList.contains('chat-tab-dragging')).toBe(false);
+      expect(tabButton(harness, 'world').classList.contains('drop-target')).toBe(false);
+    });
+
+    it('channel tabs are not draggable on mobile layout, where drag would fight swipe-to-scroll', () => {
+      const harness = makeHarness({ woc_chat_tabs: '["world"]' }, null, true);
+      harness.controller.init();
+
+      expect(tabButton(harness, 'world').draggable).toBe(false);
     });
   });
 });

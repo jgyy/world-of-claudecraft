@@ -1,6 +1,7 @@
 import { CTX_MENU_PICKER_CLASS } from '../../bag_item_action_menu';
 import { esc } from '../../esc';
 import { type TranslationKey, t } from '../../i18n';
+import { rovingTarget } from '../../roving_index';
 import { tryEncodeItemLink, tryEncodeQuestLink } from '../quest/quest_link';
 import {
   CHANNEL_LABEL_KEYS,
@@ -265,16 +266,24 @@ export class ChatWindowController {
     for (const channel of this.chatTabs) {
       const label = t(chatOpenTabLabelKey(channel));
       const button = makeTab(channel, label);
+      // `title` stays the close hint (unchanged); the accessible NAME stays the
+      // plain channel label (`textContent`, set by `makeTab`) rather than being
+      // overwritten by an aria-label, so a screen reader still announces "World"
+      // / "Guild" and not the whole reorder instruction. aria-keyshortcuts alone
+      // covers the Alt+Arrow accelerator for assistive tech.
       button.title = t('hud.core.chatChannels.close', { channel: label });
       button.setAttribute('aria-keyshortcuts', 'Alt+ArrowLeft Alt+ArrowRight');
-      button.setAttribute('aria-label', t('hud.core.chatChannels.moveHint', { channel: label }));
-      button.draggable = true;
+      // Drag-to-reorder is a desktop-only gesture (no native HTML5 drag on touch,
+      // and the mobile strip is swipe-to-scroll pan-x), so it stays off on mobile
+      // rather than half-starting a drag over the swipe gesture.
+      button.draggable = !this.deps.isMobileLayout();
       button.addEventListener('contextmenu', (event) => {
         event.preventDefault();
         this.removeTab(channel);
       });
       button.addEventListener('dragstart', (event) => {
         this.draggingTab = channel;
+        button.classList.add('chat-tab-dragging');
         const transfer = event.dataTransfer;
         if (transfer) {
           transfer.effectAllowed = 'move';
@@ -288,13 +297,19 @@ export class ChatWindowController {
         event.preventDefault();
         const transfer = event.dataTransfer;
         if (transfer) transfer.dropEffect = 'move';
+        button.classList.add('drop-target');
+      });
+      button.addEventListener('dragleave', () => {
+        button.classList.remove('drop-target');
       });
       button.addEventListener('drop', (event) => {
         event.preventDefault();
+        button.classList.remove('drop-target');
         this.dropDraggingTab(channel);
       });
       button.addEventListener('dragend', () => {
         this.draggingTab = null;
+        this.clearDragVisuals();
       });
       bar.append(button);
     }
@@ -319,9 +334,14 @@ export class ChatWindowController {
       event.preventDefault();
       const transfer = event.dataTransfer;
       if (transfer) transfer.dropEffect = 'move';
+      add.classList.add('drop-target');
+    });
+    add.addEventListener('dragleave', () => {
+      add.classList.remove('drop-target');
     });
     add.addEventListener('drop', (event) => {
       event.preventDefault();
+      add.classList.remove('drop-target');
       this.dropDraggingTab(null);
     });
     bar.append(add);
@@ -350,8 +370,13 @@ export class ChatWindowController {
     }
     const index = order.indexOf(id);
     if (index < 0) return;
+    // Reuse the shared roving-index core (Home/End come along for free) instead
+    // of hand-rolled wrap math, so chat tabs stay consistent with every other
+    // tablist in the HUD. `step` is unused here; `rovingTarget` reads the key.
+    const nextIndex = rovingTarget(event.key, index, order.length, 'horizontal');
+    if (nextIndex === null) return;
     event.preventDefault();
-    const nextId = order[(index + step + order.length) % order.length];
+    const nextId = order[nextIndex];
     this.rovingChatTab = nextId;
     this.updateActiveTabStyles();
     this.focusTab(nextId);
@@ -377,6 +402,17 @@ export class ChatWindowController {
     button?.focus();
   }
 
+  // Safety net for the reorder-is-a-no-op and same-tab-drop cases, where
+  // `dropDraggingTab` returns before `renderTabs()` would otherwise wipe the
+  // drag-visual classes via its full subtree rebuild.
+  private clearDragVisuals(): void {
+    this.requireElement('chatlog-tabs')
+      .querySelectorAll<HTMLButtonElement>('.chat-tab')
+      .forEach((button) => {
+        button.classList.remove('chat-tab-dragging', 'drop-target');
+      });
+  }
+
   private updateActiveTabStyles(): void {
     this.requireElement('chatlog-tabs')
       .querySelectorAll<HTMLButtonElement>('.chat-tab')
@@ -392,6 +428,12 @@ export class ChatWindowController {
 
   private selectTab(tab: ChatTabId, persist = true): void {
     this.activeChatTab = tab;
+    // Latch the roving tabindex to the tab that was just activated (click or
+    // Enter/Space), matching APG and the rest of this HUD (daily rewards,
+    // tab_strip_painter): the selected tab is always the roving stop, so a
+    // stale Arrow-roved target left over from before this click does not keep
+    // `tabIndex={0}` on an inactive tab.
+    this.rovingChatTab = tab;
     const showCombat = tab === 'combat';
     this.deps.chatLog.classList.toggle('active', !showCombat);
     this.deps.combatLog.classList.toggle('active', showCombat);
