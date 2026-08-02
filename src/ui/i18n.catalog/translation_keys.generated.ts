@@ -5945,6 +5945,8 @@ export type TranslationKeyFlat =
   | 'hud.system.arenaVictoryBanner'
   | 'hud.system.arenaVictoryLog'
   | 'hud.system.deathRecapAbility'
+  | 'hud.system.deathRecapDrowned'
+  | 'hud.system.deathRecapFalling'
   | 'hud.system.deathRecapKiller'
   | 'hud.system.deathRecapKillerAbility'
   | 'hud.system.duelCountdown'

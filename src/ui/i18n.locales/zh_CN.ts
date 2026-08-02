@@ -1838,6 +1838,8 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hud.system.deathRecapKillerAbility': '你已经死亡。被{killer}的{ability}击杀。',
   'hud.system.deathRecapKiller': '你已经死亡。被{killer}击杀。',
   'hud.system.deathRecapAbility': '你已经死亡。死于{ability}。',
+  'hud.system.deathRecapFalling': '你已经死亡。你摔死了。',
+  'hud.system.deathRecapDrowned': '你已经死亡。你淹死了。',
   'hud.system.respawn': '你再次感到精力恢复、身体完整。',
   'hud.system.ignoringChat': '已屏蔽来自 {name} 的聊天。',
   'hud.system.noLongerIgnoring': '不再屏蔽 {name}。',

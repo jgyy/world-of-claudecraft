@@ -1840,6 +1840,8 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hud.system.deathRecapKillerAbility': '你已經死亡。被{killer}的{ability}擊殺。',
   'hud.system.deathRecapKiller': '你已經死亡。被{killer}擊殺。',
   'hud.system.deathRecapAbility': '你已經死亡。死於{ability}。',
+  'hud.system.deathRecapFalling': '你已經死亡。你摔死了。',
+  'hud.system.deathRecapDrowned': '你已經死亡。你溺死了。',
   'hud.system.respawn': '你再次感到精力恢復、身體完整。',
   'hud.system.ignoringChat': '已封鎖來自 {name} 的聊天。',
   'hud.system.noLongerIgnoring': '不再封鎖 {name}。',

@@ -6490,6 +6490,8 @@ export const pt_BR: EnTranslations = {
       "deathRecapKillerAbility": "You have died. Slain by {killer}'s {ability}.",
       "deathRecapKiller": "You have died. Slain by {killer}.",
       "deathRecapAbility": "You have died. Slain by {ability}.",
+      "deathRecapFalling": "You have died. You fell to your death.",
+      "deathRecapDrowned": "You have died. You drowned.",
       "respawn": "Você se sente descansado e inteiro novamente.",
       "ignoringChat": "Ignorando chat de {name}.",
       "noLongerIgnoring": "Você não ignora mais {name}.",

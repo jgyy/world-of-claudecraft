@@ -6490,6 +6490,8 @@ export const en_XA: EnTranslations = {
       "deathRecapKillerAbility": "[Ýóú ĥáʋé ðíéð. Šļáíñ ƀý {killer}'š {ability}.]",
       "deathRecapKiller": "[Ýóú ĥáʋé ðíéð. Šļáíñ ƀý {killer}.]",
       "deathRecapAbility": "[Ýóú ĥáʋé ðíéð. Šļáíñ ƀý {ability}.]",
+      "deathRecapFalling": "[Ýóú ĥáʋé ðíéð. Ýóú ƒéļļ ţó ýóúŕ ðéáţĥ.]",
+      "deathRecapDrowned": "[Ýóú ĥáʋé ðíéð. Ýóú ðŕóŵñéð.]",
       "respawn": "[Ýóú ƒééļ ŕéšţéð áñð ŵĥóļé áĝáíñ.]",
       "ignoringChat": "[Íĝñóŕíñĝ çĥáţ ƒŕóɱ {name}.]",
       "noLongerIgnoring": "[Ñó ļóñĝéŕ íĝñóŕíñĝ {name}.]",

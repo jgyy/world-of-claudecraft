@@ -13,6 +13,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -20,6 +22,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -27,6 +31,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -34,6 +40,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -42,6 +50,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -49,6 +59,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -60,6 +72,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -68,6 +82,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -75,6 +91,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -82,6 +100,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -89,6 +109,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -96,6 +118,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -103,6 +127,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -110,6 +136,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ],
@@ -117,6 +145,8 @@ export const pending: Record<string, readonly string[]> = {
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
+    "hud.system.deathRecapDrowned",
+    "hud.system.deathRecapFalling",
     "hud.system.deathRecapKiller",
     "hud.system.deathRecapKillerAbility"
   ]

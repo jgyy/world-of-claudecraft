@@ -194,6 +194,7 @@ import { buildCraftingView, craftingReagentSig, craftLearnHints } from './crafti
 import { renderCraftingWindow, stationNameText } from './crafting_window';
 import { shouldRefreshDailyRewardsLauncher } from './daily_rewards_launcher_core';
 import { DailyRewardsWindow } from './daily_rewards_window';
+import { deathRecapFeedback } from './death_recap_feedback';
 import { decorativeArtImg } from './decorative_art';
 import {
   deedBroadcastLine,
@@ -11561,18 +11562,8 @@ export class Hud {
           const abilityName = ev.killerAbility
             ? abilityDisplayNameFromSource(ev.killerAbility)
             : undefined;
-          const text =
-            killerName && abilityName
-              ? t('hud.system.deathRecapKillerAbility', {
-                  killer: killerName,
-                  ability: abilityName,
-                })
-              : killerName
-                ? t('hud.system.deathRecapKiller', { killer: killerName })
-                : abilityName
-                  ? t('hud.system.deathRecapAbility', { ability: abilityName })
-                  : t('hud.system.playerDeath');
-          this.log(text, '#ff4444');
+          const feedback = deathRecapFeedback(killerName, ev.killerAbility, abilityName);
+          this.log(t(feedback.key, feedback.values), '#ff4444');
           audio.playerDeath();
           break;
         }
