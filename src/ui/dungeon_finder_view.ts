@@ -209,7 +209,8 @@ export interface DungeonFinderViewInput {
   // The current party leader's name (mine, if I lead), used only to recognize
   // a board listing as MY OWN group when I am a non-leader member (the board
   // carries no member pids, only class/level/role; character names are
-  // globally unique, so a name match is exact). Null when solo.
+  // unique PER REALM, and the board is realm-scoped, so a name match is
+  // exact in production). Null when solo.
   partyLeaderName: string | null;
   lockouts: RaidLockout[];
   // Painter-local UI state.

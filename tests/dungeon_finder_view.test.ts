@@ -338,6 +338,14 @@ describe('dungeon finder view core', () => {
       ),
     );
     expect(leaderView.board.listings.map((l) => l.id)).toEqual([8]);
+    // The browse-list filter is separate from the leader's own-listing panel: hiding id
+    // 7 from `listings` must not also drop it from `myListing`.
+    expect(leaderView.board.myListing).toEqual({
+      id: 7,
+      activityId: 'hollow_crypt_normal',
+      tags: [],
+      applicants: [],
+    });
 
     // I am a party MEMBER (not the leader) of the listed group: still hidden.
     const memberView = live(
