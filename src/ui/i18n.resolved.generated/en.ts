@@ -6221,6 +6221,7 @@ export const en: EnTranslations = {
         "add": "Add chat channel",
         "addTitle": "Add channel",
         "close": "Close {channel} tab",
+        "moveHint": "Reorder {channel} tab: drag it, or use Alt+Left and Alt+Right",
         "sendingTo": "Message {channel}",
         "names": {
           "say": "Say",

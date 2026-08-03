@@ -10,6 +10,7 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -21,6 +22,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "es_ES": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -32,6 +34,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "fr_FR": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -43,6 +46,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "fr_CA": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -55,6 +59,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "en_CA": [],
   "it_IT": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -66,6 +71,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "de_DE": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -93,6 +99,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "pt_BR": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -108,6 +115,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "cs_CZ": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -119,6 +127,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "nl_NL": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -130,6 +139,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "pl_PL": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -141,6 +151,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "id_ID": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -152,6 +163,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "tr_TR": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -163,6 +175,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "sv_SE": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -174,6 +187,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "vi_VN": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
@@ -185,6 +199,7 @@ export const pending: Record<string, readonly string[]> = {
     "itemUi.vendor.buyStackAria"
   ],
   "da_DK": [
+    "hud.core.chatChannels.moveHint",
     "hud.prompts.guildInviteCancelled",
     "hud.prompts.guildRenamed",
     "hudChrome.landing.browserSupport.body",
