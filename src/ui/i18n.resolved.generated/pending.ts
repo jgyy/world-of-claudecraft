@@ -10,9 +10,6 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -73,14 +70,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "es_ES": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -141,14 +133,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "fr_FR": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -209,14 +196,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "fr_CA": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -277,15 +259,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "en_CA": [],
   "it_IT": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -346,14 +323,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "de_DE": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -414,34 +386,21 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "zh_CN": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "zh_TW": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "ko_KR": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "ja_JP": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "pt_BR": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -502,19 +461,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "ru_RU": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "cs_CZ": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -575,14 +527,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "nl_NL": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -643,14 +590,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "pl_PL": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -711,14 +653,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "id_ID": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -779,14 +716,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "tr_TR": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -847,14 +779,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "sv_SE": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -915,14 +842,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "vi_VN": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -983,14 +905,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ],
   "da_DK": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hudChrome.actionBar.bannerCapturing",
     "hudChrome.actionBar.bannerHint",
     "hudChrome.actionBar.boundToKey",
@@ -1051,8 +968,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.commissionBoard.statusExpired",
     "hudChrome.commissionBoard.statusOpen",
     "hudChrome.commissionBoard.title",
-    "hudChrome.commissionBoard.toCraftEmpty",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.commissionBoard.toCraftEmpty"
   ]
 };
