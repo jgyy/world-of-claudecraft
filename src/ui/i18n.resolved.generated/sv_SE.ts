@@ -6267,6 +6267,7 @@ export const sv_SE: EnTranslations = {
         "add": "Lägg till chattkanal",
         "addTitle": "Lägg till kanal",
         "close": "Stäng fliken {channel}",
+        "moveHint": "Reorder {channel} tab: drag it, or use Alt+Left and Alt+Right",
         "sendingTo": "Meddela {channel}",
         "names": {
           "say": "Säg",

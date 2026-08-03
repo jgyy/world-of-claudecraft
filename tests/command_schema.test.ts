@@ -32,11 +32,12 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // (disenchant_item, apply_enchant, salvage_item), unbind_item (the
 // Maker's Bond unbind service), the Rift + mounts surface (rift and
 // forge commands, learn_riding, mount selection), market_list_instance
-// (the instance-payload market pipe), and the commission order board
-// (issue #1298: open/cancel/accept/deliver_commission_order).
+// (the instance-payload market pipe), the commission order board
+// (issue #1298: open/cancel/accept/deliver_commission_order), and the
+// profiler-only dev_profiler_invulnerable dispatch token.
 const EXPECTED_SEND_COUNT = 178; // mount_select left the wire (reins are items)
-const EXPECTED_DISPATCH_COUNT = 189; // mount_select left the wire (reins are items)
-const EXPECTED_DISPATCH_ONLY_COUNT = 11;
+const EXPECTED_DISPATCH_COUNT = 190; // profiler invulnerability is a dev-only dispatch token
+const EXPECTED_DISPATCH_ONLY_COUNT = 12;
 
 // The chat sub-channel routing switch (server/game.ts `switch
 // (session.rememberedChat.channel)`) is NOT a msg.cmd dispatch; its labels must
