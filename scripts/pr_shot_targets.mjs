@@ -941,7 +941,11 @@ export const TARGETS = [
   {
     key: 'commission-board',
     label: 'Commission order board (issue #1298)',
-    when: ['ui/commission_order_view', 'ui/commission_order_window', 'sim/professions/commission_order'],
+    when: [
+      'ui/commission_order_view',
+      'ui/commission_order_window',
+      'sim/professions/commission_order',
+    ],
     // Stages one order per section: an open request the viewer posted
     // ("My Requests"), an order a second player accepted from the viewer
     // ("My Requests" showing Accepted), and an open-board order from a third
