@@ -224,6 +224,7 @@ import {
 } from './sim/data';
 import { canEquipItem } from './sim/equipment_rules';
 import { MARKET_HOUSE_STOCK } from './sim/market';
+import { bagOwnedMounts } from './sim/mounts';
 import { findPlayerPath, resolvePlayerDestination } from './sim/pathfind';
 import { Sim } from './sim/sim';
 import { TAB_NEAR_RADIUS, TAB_QUERY_RADIUS, tabConeHalfAt } from './sim/tab_target';
@@ -1792,7 +1793,10 @@ async function startGame(
       // Dismount is the shared toggleMounted() path (unchanged); summoning an
       // owned mount from a single tap goes through its reins item directly,
       // since toggleMounted() itself never summons (src/ui/mount_quick_summon.ts).
-      const action = mobileMountAction(world.player.mountKey, world.ownedMounts());
+      // bagOwnedMounts (bags only, never bank) matches what useItem can
+      // actually summon: world.ownedMounts() includes bank-only reins that
+      // useItem would refuse (#2739 followup).
+      const action = mobileMountAction(world.player.mountKey, bagOwnedMounts(world.inventory));
       if (action.kind === 'summon') world.useItem(action.itemId);
       else world.toggleMounted();
     },

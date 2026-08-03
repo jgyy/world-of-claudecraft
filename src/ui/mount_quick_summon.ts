@@ -27,16 +27,22 @@ export type MobileMountAction =
   | { kind: 'fallback' };
 
 /** Decide what a tap of the mobile Mount/Dismount button should do.
- *  `mountedKey` is the live Entity.mountKey ('' when unmounted). `owned` is
- *  IWorldMounts.ownedMounts()'s value, already in catalog order; the first
- *  entry is the deterministic pick when more than one mount is owned, since
+ *  `mountedKey` is the live Entity.mountKey ('' when unmounted). `bagOwned` is
+ *  `sim/mounts.ts` `bagOwnedMounts(world.inventory)`'s value, already in
+ *  catalog order: BAGS ONLY, deliberately narrower than the wider
+ *  `IWorldMounts.ownedMounts()` (bags + bank), because the summon this
+ *  decides feeds `IWorldInventory.useItem`, which gates on `Sim.countItem`
+ *  (bags-only). Picking from the wider list can hand `useItem` a bank-only
+ *  itemId it refuses with "You don't have that item.", or skip past a
+ *  bagged mount sorting after a bank-only one (#2739 followup). The first
+ *  entry is the deterministic pick when more than one mount is bagged, since
  *  there is no persisted favorite to prefer over another. */
 export function mobileMountAction(
   mountedKey: string,
-  owned: readonly MountKey[],
+  bagOwned: readonly MountKey[],
 ): MobileMountAction {
   if (mountedKey) return { kind: 'dismount' };
-  const key = owned[0];
+  const key = bagOwned[0];
   const itemId = key ? mountItemId(key) : null;
   return itemId ? { kind: 'summon', itemId } : { kind: 'fallback' };
 }
