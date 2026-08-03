@@ -146,9 +146,7 @@ describe('classifyDiff', () => {
   it('maps a deed catalog copy change to the Book of Deeds target (#2767)', () => {
     const plan = classifyDiff(['src/sim/content/deeds.ts']);
     expect(plan.isVisual).toBe(true);
-    expect(plan.specific.map((t: { key: string }) => t.key)).toContain(
-      'vale-cup-skill-deed-copy',
-    );
+    expect(plan.specific.map((t: { key: string }) => t.key)).toContain('vale-cup-skill-deed-copy');
     const target = plan.specific.find(
       (candidate: { key: string }) => candidate.key === 'vale-cup-skill-deed-copy',
     );
