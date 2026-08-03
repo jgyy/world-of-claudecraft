@@ -211,7 +211,7 @@ export interface OptionsWindowDeps {
   slotActionName(slot: number): string | null;
   /** Re-sync the action-bar keycaps after a rebind/reset. */
   refreshKeybindLabels(): void;
-  /** Close this window and enter the on-bar key-binding mode (issue #1238): the
+  /** Close this window and enter the on-bar key-binding mode (issue 1238): the
    *  single "Edit action bar keys" entry that replaces the per-slot rebind rows. */
   beginActionBarKeybindMode(): void;
   /** The shared gold-themed dropdown (carries the listbox ARIA + keyboard nav). */
@@ -1649,7 +1649,7 @@ export class OptionsWindow {
       if (category === 'Action Bar') {
         // The wall of per-slot rebind rows (one per action-bar slot, 34 on this
         // branch) dominated the panel; a single entry opens the on-bar
-        // click-a-slot-then-press-a-key mode instead (issue #1238). Desktop
+        // click-a-slot-then-press-a-key mode instead (issue 1238). Desktop
         // only: the mode needs a physical keyboard, so hide it on touch, like
         // the mode entry it replaces on the primary Key Bindings surface.
         if (useTouchInterface()) continue;

@@ -603,7 +603,7 @@ let lpAdvancedLast = -1;
 // perf_overlay_settings.ts alongside the panel that consumes it.
 export interface OptionsHooks {
   logout(): void;
-  captureKey(cb: (code: string | null) => void): void;
+  captureKey(cb: ((code: string | null) => void) | null): void;
   settings: Settings;
   onSettingChange(key: keyof GameSettings, value: GameSettings[keyof GameSettings]): void;
   // Switch the active locale at runtime (loads the locale chunk, relocalizes the page,
@@ -7068,12 +7068,12 @@ export class Hud {
   // A slot is selected (a capture is armed via Input.captureNextKey) and the
   // player clicks Done or Reset with the MOUSE instead of pressing a key: the
   // armed callback is left dangling (captureNextKey is one-shot, cleared only
-  // by an actual keydown). Overwrite it with a no-op so the player's very next
-  // real keypress after leaving/resetting the mode is not silently swallowed
-  // by that stale callback instead of driving normal gameplay.
+  // by an actual keydown). Clear it so the player's very next real keypress
+  // after leaving/resetting the mode is not silently swallowed by that stale
+  // callback instead of driving normal gameplay.
   private cancelPendingActionBarBindCapture(): void {
     if (this.actionBarBind?.selectedSlot == null) return;
-    this.optionsHooks?.captureKey(() => {});
+    this.optionsHooks?.captureKey(null);
   }
 
   // A slot was clicked while the mode is active: select it, then arm the same
@@ -7104,13 +7104,18 @@ export class Hud {
   }
 
   private confirmActionBarBindReset(): void {
+    // Capture is handled before the dialog's own key handling in Input.onKeyDown,
+    // so an armed slot capture left in place while the confirm is up would bind
+    // the slot to whatever key the player presses (Escape only cancels the
+    // capture, it does not dismiss the dialog). Cancel it up front, not only in
+    // the OK callback below.
+    this.cancelPendingActionBarBindCapture();
     this.confirmDialog(
       t('hudChrome.actionBar.resetConfirmTitle'),
       t('hudChrome.actionBar.resetConfirmBody'),
       t('hudChrome.actionBar.reset'),
       t('hudChrome.actionBar.cancel'),
       () => {
-        this.cancelPendingActionBarBindCapture();
         this.keybinds.resetSlots();
         this.refreshKeybindLabels();
         this.actionBarBind = actionBarBindEnter();
