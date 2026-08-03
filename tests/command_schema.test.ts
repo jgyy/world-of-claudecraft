@@ -33,9 +33,9 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // Maker's Bond unbind service), the Rift + mounts surface (rift and
 // forge commands, learn_riding, mount selection), and market_list_instance
 // (the instance-payload market pipe).
-const EXPECTED_SEND_COUNT = 175; // + stopAutoAttackOnTargetSwitch (issue #1358)
-const EXPECTED_DISPATCH_COUNT = 186; // + stopAutoAttackOnTargetSwitch (issue #1358)
-const EXPECTED_DISPATCH_ONLY_COUNT = 11;
+const EXPECTED_SEND_COUNT = 175; // mount_select left the wire, + stopAutoAttackOnTargetSwitch (issue #1358)
+const EXPECTED_DISPATCH_COUNT = 187; // profiler invulnerability is a dev-only dispatch token, + stopAutoAttackOnTargetSwitch (issue #1358)
+const EXPECTED_DISPATCH_ONLY_COUNT = 12;
 
 // The chat sub-channel routing switch (server/game.ts `switch
 // (session.rememberedChat.channel)`) is NOT a msg.cmd dispatch; its labels must
