@@ -10,9 +10,6 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -27,14 +24,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "es_ES": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -49,14 +41,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "fr_FR": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -71,14 +58,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "fr_CA": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -93,15 +75,10 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "en_CA": [],
   "it_IT": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -116,14 +93,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "de_DE": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -138,34 +110,21 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "zh_CN": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "zh_TW": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "ko_KR": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "ja_JP": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "pt_BR": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -180,19 +139,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "ru_RU": [
-    "hudChrome.actionBar.done",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.done"
   ],
   "cs_CZ": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -207,14 +159,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "nl_NL": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -229,14 +176,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "pl_PL": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -251,14 +193,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "id_ID": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -273,14 +210,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "tr_TR": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -295,14 +227,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "sv_SE": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -317,14 +244,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "vi_VN": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -339,14 +261,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "da_DK": [
-    "hud.core.chatChannels.moveHint",
-    "hud.prompts.guildInviteCancelled",
-    "hud.prompts.guildRenamed",
     "hud.system.deathRecapAbility",
     "hud.system.deathRecapDrowned",
     "hud.system.deathRecapFalling",
@@ -361,8 +278,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
+    "hudChrome.actionBar.resetConfirmTitle"
   ]
 };
