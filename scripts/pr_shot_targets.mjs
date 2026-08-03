@@ -4353,12 +4353,20 @@ export const TARGETS = [
     // rated/3v3+/save-floor conditions, not the whole (much longer) pvp category.
     variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
     async capture(page) {
-      await page.evaluate(() => {
-        const el = document.querySelector('#deeds-window');
-        if (el) el.style.display = 'none';
-        window.__game?.hud?.openDeeds?.('pvp');
-      });
-      if (!(await pollForSize(page, '#deeds-window'))) {
+      // openDeeds occasionally does not stick on the very first call (seen on both
+      // a loaded shared sandbox and a clean CI runner): retry the open a few times
+      // rather than a single fire-and-poll, mirroring the p14-bag-glyphs target's
+      // check-before-toggle defensiveness above.
+      let opened = false;
+      for (let attempt = 0; attempt < 3 && !opened; attempt++) {
+        await page.evaluate(() => {
+          const el = document.querySelector('#deeds-window');
+          if (el) el.style.display = 'none';
+          window.__game?.hud?.openDeeds?.('pvp');
+        });
+        opened = await pollForSize(page, '#deeds-window', 10, 500);
+      }
+      if (!opened) {
         throw new Error('deeds window did not open');
       }
       await page.evaluate(() => {
