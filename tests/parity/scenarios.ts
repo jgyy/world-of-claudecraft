@@ -1165,9 +1165,9 @@ function delveLockpick(): Scenario {
 // Bountiful Coffer guarantee): idling out a high ante must never beat picking the
 // lock. Pins the timeout/burn-try/unsolved-grant path the success-only
 // delve_lockpick golden does not exercise.
-function delveLockpickFail(): Scenario {
+function delveLockpickTriesExhausted(): Scenario {
   return {
-    name: 'delve_lockpick_fail',
+    name: 'delve_lockpick_tries_exhausted',
     coverage: [
       'delve run (collapsed_reliquary finale)',
       'lockpick minigame (server-authoritative timeout -> unsolved consolation grant)',
@@ -4713,7 +4713,7 @@ export const SCENARIOS: Scenario[] = [
   duelToWinner(),
   arena2v2Wipe(),
   delveLockpick(),
-  delveLockpickFail(),
+  delveLockpickTriesExhausted(),
   drownedLitany(),
   partyLoot(),
   partyRaid(),

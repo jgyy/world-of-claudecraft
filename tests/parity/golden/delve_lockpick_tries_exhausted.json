@@ -1,5 +1,5 @@
 {
-  "scenario": "delve_lockpick_fail",
+  "scenario": "delve_lockpick_tries_exhausted",
   "seed": 2024,
   "sampleEvery": 10,
   "ticks": 71,

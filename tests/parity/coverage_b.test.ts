@@ -55,8 +55,8 @@ describe('coverage: each scenario fires its subsystem', () => {
     expect(ev.some((e) => e.type === 'lockpickStep')).toBe(true);
   });
 
-  it('delve_lockpick_fail: idling past the step clock still opens the chest at the LOW consolation tier (issue #2585)', () => {
-    const rec = run('delve_lockpick_fail');
+  it('delve_lockpick_tries_exhausted: idling past the step clock still opens the chest at the LOW consolation tier (issue #2585)', () => {
+    const rec = run('delve_lockpick_tries_exhausted');
     const sim = rec.sim as any;
     const ev = rec.allEvents as Ev[];
     // The attempt engaged, then the server clock (not the client) burned the single
