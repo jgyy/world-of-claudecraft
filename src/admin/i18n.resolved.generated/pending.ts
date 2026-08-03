@@ -10,125 +10,25 @@
 // and `pretest`). Reproducibility is checked by tests/i18n_admin_catalog.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "es_ES": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "fr_FR": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "fr_CA": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
+  "es": [],
+  "es_ES": [],
+  "fr_FR": [],
+  "fr_CA": [],
   "en_CA": [],
-  "it_IT": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "de_DE": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "zh_CN": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "zh_TW": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "ko_KR": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "ja_JP": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "pt_BR": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "ru_RU": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "cs_CZ": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "nl_NL": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "pl_PL": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "id_ID": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "tr_TR": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "sv_SE": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "vi_VN": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ],
-  "da_DK": [
-    "auth.twoFactorHint",
-    "auth.twoFactorLabel",
-    "auth.twoFactorPlaceholder",
-    "error.invalidTwoFactorCode"
-  ]
+  "it_IT": [],
+  "de_DE": [],
+  "zh_CN": [],
+  "zh_TW": [],
+  "ko_KR": [],
+  "ja_JP": [],
+  "pt_BR": [],
+  "ru_RU": [],
+  "cs_CZ": [],
+  "nl_NL": [],
+  "pl_PL": [],
+  "id_ID": [],
+  "tr_TR": [],
+  "sv_SE": [],
+  "vi_VN": [],
+  "da_DK": []
 };

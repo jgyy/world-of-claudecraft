@@ -874,4 +874,9 @@ export const cs_CZ: Record<string, string> = {
   'guilds.searchPlaceholder': 'Název cechu začíná na...',
   'moderationHistory.actionGuildRename': 'Přejmenování cechu',
   'nav.guilds': 'Cechy',
+  'auth.twoFactorLabel': 'Ověřovací kód',
+  'auth.twoFactorPlaceholder': '6místný nebo záložní kód',
+  'auth.twoFactorHint': 'Zadejte kód z aplikace ověřovatele nebo jeden ze záložních kódů.',
+  'error.invalidTwoFactorCode': 'neplatný ověřovací kód',
+  'theme.darkModeLabel': 'Tmavý režim',
 };

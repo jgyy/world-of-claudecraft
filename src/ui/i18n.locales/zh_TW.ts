@@ -4967,6 +4967,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hud.core.chatChannels.add': '新增聊天頻道',
   'hud.core.chatChannels.addTitle': '新增頻道',
   'hud.core.chatChannels.close': '關閉{channel}分頁',
+  'hud.core.chatChannels.moveHint': '重新排列{channel}分頁：拖曳，或使用 Alt+左與 Alt+右',
   'hud.core.chatChannels.names.general': '綜合',
   'hud.core.chatChannels.names.guild': '公會',
   'hud.core.chatChannels.names.lfg': '尋求組隊',
@@ -10273,4 +10274,6 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.auraOverlay.procs.heatingUp': '熱身',
   'hudChrome.auraOverlay.procs.arcaneCharge': '秘法充能',
   'hudChrome.auraOverlay.procs.aetherRush': '以太奔湧',
+  'itemUi.vendor.buyStack': '購買 {count} 個',
+  'itemUi.vendor.buyStackAria': '以 {price} 購買 {count} 個 {item}',
 };

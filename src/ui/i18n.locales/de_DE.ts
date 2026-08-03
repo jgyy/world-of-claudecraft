@@ -11099,4 +11099,8 @@ export const de_DE: Partial<Record<TranslationKey, string>> = {
   'hud.prompts.guildInviteCancelled':
     'Eine ausstehende Gildeneinladung wurde storniert, da die Gilde umbenannt wurde.',
   'hud.prompts.guildRenamed': 'Eure Gilde wurde vom Moderationsteam in {name} umbenannt.',
+  'hud.core.chatChannels.moveHint':
+    'Reiter {channel} neu anordnen: ziehen Sie ihn, oder verwenden Sie Alt+Links und Alt+Rechts',
+  'itemUi.vendor.buyStack': '{count} kaufen',
+  'itemUi.vendor.buyStackAria': '{count} {item} für {price} kaufen',
 };

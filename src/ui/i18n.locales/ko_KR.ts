@@ -5129,6 +5129,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hud.core.chatChannels.add': '채팅 채널 추가',
   'hud.core.chatChannels.addTitle': '채널 추가',
   'hud.core.chatChannels.close': '{channel} 탭 닫기',
+  'hud.core.chatChannels.moveHint':
+    '{channel} 탭 순서 변경: 드래그하거나 Alt+왼쪽 또는 Alt+오른쪽 사용',
   'hud.core.chatChannels.names.general': '일반',
   'hud.core.chatChannels.names.guild': '길드',
   'hud.core.chatChannels.names.lfg': '파티 찾기',
@@ -10745,4 +10747,6 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.auraOverlay.procs.heatingUp': '달아오름',
   'hudChrome.auraOverlay.procs.arcaneCharge': '비전 충전',
   'hudChrome.auraOverlay.procs.aetherRush': '에테르 쇄도',
+  'itemUi.vendor.buyStack': '{count}개 구매',
+  'itemUi.vendor.buyStackAria': '{price}에 {item} {count}개 구매',
 };

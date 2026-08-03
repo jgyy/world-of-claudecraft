@@ -874,4 +874,9 @@ export const ko_KR: Record<string, string> = {
   'guilds.searchPlaceholder': '다음으로 시작하는 길드 이름...',
   'moderationHistory.actionGuildRename': '길드 이름 변경',
   'nav.guilds': '길드',
+  'auth.twoFactorLabel': '인증 코드',
+  'auth.twoFactorPlaceholder': '6자리 코드 또는 복구 코드',
+  'auth.twoFactorHint': '인증 앱의 코드 또는 복구 코드 중 하나를 입력하세요.',
+  'error.invalidTwoFactorCode': '잘못된 인증 코드',
+  'theme.darkModeLabel': '다크 모드',
 };

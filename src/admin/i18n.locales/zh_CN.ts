@@ -866,4 +866,9 @@ export const zh_CN: Record<string, string> = {
   'guilds.searchPlaceholder': '公会名称开头为…',
   'moderationHistory.actionGuildRename': '公会重命名',
   'nav.guilds': '公会',
+  'auth.twoFactorLabel': '验证码',
+  'auth.twoFactorPlaceholder': '6位数字或恢复码',
+  'auth.twoFactorHint': '请输入验证器应用中的验证码，或您的恢复码之一。',
+  'error.invalidTwoFactorCode': '验证码无效',
+  'theme.darkModeLabel': '深色模式',
 };

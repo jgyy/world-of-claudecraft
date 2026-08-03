@@ -866,4 +866,9 @@ export const zh_TW: Record<string, string> = {
   'guilds.searchPlaceholder': '公會名稱開頭為...',
   'moderationHistory.actionGuildRename': '公會更名',
   'nav.guilds': '公會',
+  'auth.twoFactorLabel': '驗證碼',
+  'auth.twoFactorPlaceholder': '6位數字或復原碼',
+  'auth.twoFactorHint': '請輸入驗證器應用程式中的驗證碼，或您的復原碼之一。',
+  'error.invalidTwoFactorCode': '驗證碼無效',
+  'theme.darkModeLabel': '深色模式',
 };

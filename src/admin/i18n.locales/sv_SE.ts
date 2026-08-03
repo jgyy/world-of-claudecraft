@@ -879,4 +879,10 @@ export const sv_SE: Record<string, string> = {
   'guilds.searchPlaceholder': 'Gillesnamn börjar med...',
   'moderationHistory.actionGuildRename': 'Gillesnamn ändrat',
   'nav.guilds': 'Gillen',
+  'auth.twoFactorLabel': 'Autentiseringskod',
+  'auth.twoFactorPlaceholder': '6-siffrig kod eller återställningskod',
+  'auth.twoFactorHint':
+    'Ange koden från din autentiseringsapp, eller en av dina återställningskoder.',
+  'error.invalidTwoFactorCode': 'ogiltig autentiseringskod',
+  'theme.darkModeLabel': 'Mörkt läge',
 };

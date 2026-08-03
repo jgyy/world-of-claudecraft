@@ -9,85 +9,25 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "es_ES": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "fr_FR": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "fr_CA": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
+  "es": [],
+  "es_ES": [],
+  "fr_FR": [],
+  "fr_CA": [],
   "en_CA": [],
-  "it_IT": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "de_DE": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "zh_CN": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "zh_TW": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "ko_KR": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "ja_JP": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "pt_BR": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "ru_RU": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "cs_CZ": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "nl_NL": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "pl_PL": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "id_ID": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "tr_TR": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "sv_SE": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "vi_VN": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ],
-  "da_DK": [
-    "itemUi.vendor.buyStack",
-    "itemUi.vendor.buyStackAria"
-  ]
+  "it_IT": [],
+  "de_DE": [],
+  "zh_CN": [],
+  "zh_TW": [],
+  "ko_KR": [],
+  "ja_JP": [],
+  "pt_BR": [],
+  "ru_RU": [],
+  "cs_CZ": [],
+  "nl_NL": [],
+  "pl_PL": [],
+  "id_ID": [],
+  "tr_TR": [],
+  "sv_SE": [],
+  "vi_VN": [],
+  "da_DK": []
 };

@@ -891,4 +891,10 @@ export const de_DE: Record<string, string> = {
   'guilds.searchPlaceholder': 'Gildenname beginnt mit...',
   'moderationHistory.actionGuildRename': 'Gilde umbenannt',
   'nav.guilds': 'Gilden',
+  'auth.twoFactorLabel': 'Authentifizierungscode',
+  'auth.twoFactorPlaceholder': '6-stelliger Code oder Wiederherstellungscode',
+  'auth.twoFactorHint':
+    'Gib den Code aus deiner Authenticator-App ein, oder einen deiner Wiederherstellungscodes.',
+  'error.invalidTwoFactorCode': 'ungültiger Authentifizierungscode',
+  'theme.darkModeLabel': 'Dunkler Modus',
 };

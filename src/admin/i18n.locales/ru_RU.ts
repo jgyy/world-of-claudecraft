@@ -882,4 +882,10 @@ export const ru_RU: Record<string, string> = {
   'guilds.searchPlaceholder': 'Название гильдии начинается с...',
   'moderationHistory.actionGuildRename': 'Переименование гильдии',
   'nav.guilds': 'Гильдии',
+  'auth.twoFactorLabel': 'Код аутентификации',
+  'auth.twoFactorPlaceholder': '6-значный код или код восстановления',
+  'auth.twoFactorHint':
+    'Введите код из приложения-аутентификатора или один из кодов восстановления.',
+  'error.invalidTwoFactorCode': 'неверный код аутентификации',
+  'theme.darkModeLabel': 'Тёмная тема',
 };

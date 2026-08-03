@@ -879,4 +879,10 @@ export const id_ID: Record<string, string> = {
   'guilds.searchPlaceholder': 'Nama guild dimulai dengan...',
   'moderationHistory.actionGuildRename': 'Ganti nama guild',
   'nav.guilds': 'Guild',
+  'auth.twoFactorLabel': 'Kode autentikasi',
+  'auth.twoFactorPlaceholder': 'Kode 6 digit atau kode pemulihan',
+  'auth.twoFactorHint':
+    'Masukkan kode dari aplikasi autentikator Anda, atau salah satu kode pemulihan Anda.',
+  'error.invalidTwoFactorCode': 'kode autentikasi tidak valid',
+  'theme.darkModeLabel': 'Mode gelap',
 };

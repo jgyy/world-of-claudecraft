@@ -11008,4 +11008,8 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hud.prompts.guildInviteCancelled':
     'Undangan guild yang tertunda dibatalkan karena guild tersebut diganti nama.',
   'hud.prompts.guildRenamed': 'Guild Anda telah diganti nama menjadi {name} oleh tim moderasi.',
+  'hud.core.chatChannels.moveHint':
+    'Atur ulang tab {channel}: seret, atau gunakan Alt+Kiri dan Alt+Kanan',
+  'itemUi.vendor.buyStack': 'Beli {count}',
+  'itemUi.vendor.buyStackAria': 'Beli {count} {item} seharga {price}',
 };

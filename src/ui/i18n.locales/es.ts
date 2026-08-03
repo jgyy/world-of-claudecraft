@@ -11077,4 +11077,8 @@ export const es: Partial<Record<TranslationKey, string>> = {
     'Se canceló una invitación de hermandad pendiente porque la hermandad cambió de nombre.',
   'hud.prompts.guildRenamed':
     'El equipo de moderación ha cambiado el nombre de tu hermandad a {name}.',
+  'hud.core.chatChannels.moveHint':
+    'Reordenar la pestaña {channel}: arrástrala, o usa Alt+Izquierda y Alt+Derecha',
+  'itemUi.vendor.buyStack': 'Comprar {count}',
+  'itemUi.vendor.buyStackAria': 'Comprar {count} {item} por {price}',
 };

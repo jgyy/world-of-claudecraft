@@ -893,4 +893,10 @@ export const it_IT: Record<string, string> = {
   'guilds.searchPlaceholder': 'Il nome della gilda inizia con...',
   'moderationHistory.actionGuildRename': 'Rinomina gilda',
   'nav.guilds': 'Gilde',
+  'auth.twoFactorLabel': 'Codice di autenticazione',
+  'auth.twoFactorPlaceholder': 'Codice a 6 cifre o codice di recupero',
+  'auth.twoFactorHint':
+    'Inserisci il codice dalla tua app di autenticazione, oppure uno dei tuoi codici di recupero.',
+  'error.invalidTwoFactorCode': 'codice di autenticazione non valido',
+  'theme.darkModeLabel': 'Modalità scura',
 };

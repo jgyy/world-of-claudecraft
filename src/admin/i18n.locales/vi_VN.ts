@@ -886,4 +886,10 @@ export const vi_VN: Record<string, string> = {
   'guilds.searchPlaceholder': 'Tên bang hội bắt đầu bằng...',
   'moderationHistory.actionGuildRename': 'Đổi tên bang hội',
   'nav.guilds': 'Bang Hội',
+  'auth.twoFactorLabel': 'Mã xác thực',
+  'auth.twoFactorPlaceholder': 'Mã 6 chữ số hoặc mã khôi phục',
+  'auth.twoFactorHint':
+    'Nhập mã từ ứng dụng xác thực của bạn, hoặc một trong các mã khôi phục của bạn.',
+  'error.invalidTwoFactorCode': 'mã xác thực không hợp lệ',
+  'theme.darkModeLabel': 'Chế độ tối',
 };

@@ -886,4 +886,10 @@ export const tr_TR: Record<string, string> = {
   'guilds.searchPlaceholder': 'Lonca adı şununla başlar...',
   'moderationHistory.actionGuildRename': 'Lonca yeniden adlandırma',
   'nav.guilds': 'Loncalar',
+  'auth.twoFactorLabel': 'Kimlik doğrulama kodu',
+  'auth.twoFactorPlaceholder': '6 haneli kod veya kurtarma kodu',
+  'auth.twoFactorHint':
+    'Kimlik doğrulama uygulamanızdan gelen kodu veya kurtarma kodlarınızdan birini girin.',
+  'error.invalidTwoFactorCode': 'geçersiz kimlik doğrulama kodu',
+  'theme.darkModeLabel': 'Koyu mod',
 };

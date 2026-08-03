@@ -885,4 +885,9 @@ export const nl_NL: Record<string, string> = {
   'guilds.searchPlaceholder': 'Gildenaam begint met...',
   'moderationHistory.actionGuildRename': 'Gilde hernoemd',
   'nav.guilds': 'Gildes',
+  'auth.twoFactorLabel': 'Authenticatiecode',
+  'auth.twoFactorPlaceholder': '6-cijferige of herstelcode',
+  'auth.twoFactorHint': 'Voer de code uit je authenticator-app in, of een van je herstelcodes.',
+  'error.invalidTwoFactorCode': 'ongeldige authenticatiecode',
+  'theme.darkModeLabel': 'Donkere modus',
 };

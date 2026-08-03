@@ -892,4 +892,10 @@ export const es: Record<string, string> = {
   'guilds.searchPlaceholder': 'El nombre de la hermandad empieza por…',
   'moderationHistory.actionGuildRename': 'Cambio de nombre de hermandad',
   'nav.guilds': 'Hermandades',
+  'auth.twoFactorLabel': 'Código de autenticación',
+  'auth.twoFactorPlaceholder': 'Código de 6 dígitos o de recuperación',
+  'auth.twoFactorHint':
+    'Introduce el código de tu aplicación de autenticación, o uno de tus códigos de recuperación.',
+  'error.invalidTwoFactorCode': 'código de autenticación no válido',
+  'theme.darkModeLabel': 'Modo oscuro',
 };

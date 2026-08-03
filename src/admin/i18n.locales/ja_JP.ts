@@ -881,4 +881,9 @@ export const ja_JP: Record<string, string> = {
   'guilds.searchPlaceholder': 'ギルド名（前方一致）...',
   'moderationHistory.actionGuildRename': 'ギルド名変更',
   'nav.guilds': 'ギルド',
+  'auth.twoFactorLabel': '認証コード',
+  'auth.twoFactorPlaceholder': '6桁のコードまたはリカバリーコード',
+  'auth.twoFactorHint': '認証アプリのコード、またはリカバリーコードのいずれかを入力してください。',
+  'error.invalidTwoFactorCode': '無効な認証コード',
+  'theme.darkModeLabel': 'ダークモード',
 };

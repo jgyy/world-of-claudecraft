@@ -897,4 +897,10 @@ export const fr_FR: Record<string, string> = {
   'guilds.searchPlaceholder': 'Le nom de guilde commence par…',
   'moderationHistory.actionGuildRename': 'Renommage de guilde',
   'nav.guilds': 'Guildes',
+  'auth.twoFactorLabel': "Code d'authentification",
+  'auth.twoFactorPlaceholder': 'Code à 6 chiffres ou code de récupération',
+  'auth.twoFactorHint':
+    "Entrez le code de votre application d'authentification, ou l'un de vos codes de récupération.",
+  'error.invalidTwoFactorCode': "code d'authentification invalide",
+  'theme.darkModeLabel': 'Mode sombre',
 };

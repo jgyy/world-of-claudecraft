@@ -875,4 +875,10 @@ export const da_DK: Record<string, string> = {
   'guilds.searchPlaceholder': 'Laugsnavn starter med...',
   'moderationHistory.actionGuildRename': 'Laug omdøbt',
   'nav.guilds': 'Laug',
+  'auth.twoFactorLabel': 'Godkendelseskode',
+  'auth.twoFactorPlaceholder': '6-cifret eller gendannelseskode',
+  'auth.twoFactorHint':
+    'Indtast koden fra din godkendelsesapp, eller en af dine gendannelseskoder.',
+  'error.invalidTwoFactorCode': 'ugyldig godkendelseskode',
+  'theme.darkModeLabel': 'Mørk tilstand',
 };

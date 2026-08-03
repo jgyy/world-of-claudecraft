@@ -883,4 +883,10 @@ export const pt_BR: Record<string, string> = {
   'guilds.searchPlaceholder': 'Nome da guilda começa com...',
   'moderationHistory.actionGuildRename': 'Renomeação de guilda',
   'nav.guilds': 'Guildas',
+  'auth.twoFactorLabel': 'Código de autenticação',
+  'auth.twoFactorPlaceholder': 'Código de 6 dígitos ou código de recuperação',
+  'auth.twoFactorHint':
+    'Digite o código do seu aplicativo autenticador, ou um dos seus códigos de recuperação.',
+  'error.invalidTwoFactorCode': 'código de autenticação inválido',
+  'theme.darkModeLabel': 'Modo escuro',
 };

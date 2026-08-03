@@ -11004,4 +11004,8 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hud.prompts.guildInviteCancelled':
     'Een openstaande uitnodiging voor je gilde is geannuleerd omdat de gilde is hernoemd.',
   'hud.prompts.guildRenamed': 'Je gilde is door het moderatieteam hernoemd tot {name}.',
+  'hud.core.chatChannels.moveHint':
+    'Tabblad {channel} herschikken: sleep het, of gebruik Alt+Links en Alt+Rechts',
+  'itemUi.vendor.buyStack': 'Koop {count}',
+  'itemUi.vendor.buyStackAria': 'Koop {count} {item} voor {price}',
 };

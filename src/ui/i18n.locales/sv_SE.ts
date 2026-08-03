@@ -10887,4 +10887,8 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.riftTracker.closesIn': 'Stänger om {time}',
   'hudChrome.riftTracker.clockMs': '{minutes}:{seconds}',
   'hudChrome.riftTracker.clockHms': '{hours}:{minutes}:{seconds}',
+  'hud.core.chatChannels.moveHint':
+    'Ordna om fliken {channel}: dra den, eller använd Alt+vänster och Alt+höger',
+  'itemUi.vendor.buyStack': 'Köp {count}',
+  'itemUi.vendor.buyStackAria': 'Köp {count} {item} för {price}',
 };

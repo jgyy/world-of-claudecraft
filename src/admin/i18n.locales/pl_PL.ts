@@ -876,4 +876,10 @@ export const pl_PL: Record<string, string> = {
   'guilds.searchPlaceholder': 'Nazwa gildii zaczyna się od...',
   'moderationHistory.actionGuildRename': 'Zmiana nazwy gildii',
   'nav.guilds': 'Gildie',
+  'auth.twoFactorLabel': 'Kod uwierzytelniający',
+  'auth.twoFactorPlaceholder': '6-cyfrowy kod lub kod odzyskiwania',
+  'auth.twoFactorHint':
+    'Wprowadź kod z aplikacji uwierzytelniającej lub jeden z kodów odzyskiwania.',
+  'error.invalidTwoFactorCode': 'nieprawidłowy kod uwierzytelniający',
+  'theme.darkModeLabel': 'Tryb ciemny',
 };
