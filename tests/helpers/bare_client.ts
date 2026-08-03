@@ -163,6 +163,14 @@ export function bareClient(pid: number, overrides: BareClientOverrides = {}): Cl
   c.inputEchoSamples = [];
   c.spectateFacingPending = false;
   c.pendingSpectateFacing = null;
+  c.lootRollPrompts = [];
+  c.lootRollGroup = [];
+  c.masterLootPrompts = [];
+  c.playerFlair = new Map();
+  c.mountRaceMirror = null;
+  c.mountLessonActiveMirror = false;
+  c.activeBossDeathZones = [];
+  c.riftEventExpiresAtMs = null;
 
   Object.assign(c, rest);
   return c;
