@@ -609,15 +609,20 @@ function readJsonFile<T>(filePath: string): T {
 }
 
 const ACCEPTED_POLISH_V2_TOWN_SOURCE_FINGERPRINT =
-  '27da6a7983e32a8e8a1bbb861ec053a3cf7b699935a8dce890b8421c44d5d6f1';
+  'e15d65fda69efd04395e93dd28af8a56f2fb9bc1ff1125e3b605b07720891367';
 const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(
   POLISH_ROOT,
   'metadata/after-desktop-ultra.json',
 );
+// Re-pinned: src/render/renderer.ts is the rendererIntegration leaf of the polish
+// composite provenance, so gating the shapeshift-form visual swap on async compile
+// (#2571) in that file moves the metadata file's bytes (its polishProvenance block)
+// and the composite fingerprint it carries, the same way the compile-storm
+// gear/mount/base-visual gate fix re-pinned these before it.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  '04d9bc6caea048f3191d4ecec3393ba03576e1a08c82a80432a1f23f4f12c652';
+  '33c844c2f31361c377506f384718ee2310da2bf1607b4c8724a56303beceff38';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  '84b1e375592b0d5a0591b8f1e0e081b73fe5aa2ab57d3df0f8bfe7ef7aa31e9c';
+  '2d4e6e0ee7168a0bf25a13ba1a2754f39e8c8f168e6f369ceb6588fe2bb9b2bb';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -1474,15 +1479,13 @@ describe('Eastbrook polish performance and contact evidence', () => {
     expect(acceptedFiles).toHaveLength(4);
     // Second-order seal, recomputed LAST in the re-mint recipe: it hashes the
     // performance evidence files, which carry the composite polish provenance.
-    // The 0.33.1 version sync bumped package-lock.json, a hashed input to every
-    // GLB source fingerprint, so the town/mailbox/noticeboard leaves moved, the
-    // composite polish provenance followed (also folding in the v0.33 render
-    // recovery's renderer leaf, which re-pinned the capture contract without
-    // re-sweeping this evidence), and this seal follows the composite. Every
-    // measured value (frame timings, draw stats, triangle and scenario
-    // numbers) is byte-identical, and no capture was retaken.
+    // src/render/renderer.ts is the rendererIntegration leaf of that composite,
+    // so gating the shapeshift-form visual swap on async compile (#2571) moved
+    // the composite fingerprint and, with it, this seal follows. Every measured
+    // value (frame timings, draw stats, triangle and scenario numbers) is
+    // byte-identical, and no capture was retaken.
     expect(fingerprint.digest('hex')).toBe(
-      'cfd20e8219a5933826f222e75af9d64a957160c2dfcfcb307773cb5f35c31547',
+      'e6115e14fe78b1bc52616624a72b0837858282c74bd3a3feab9fdd312a576454',
     );
   });
 
