@@ -8025,6 +8025,14 @@ export class Sim {
     return this.commissionOrderBoard.find((o) => o.id === orderId)?.itemId;
   }
 
+  // The requester's display name off the same still-retained board entry, for
+  // the 'deliver' success line (the acting pid is the CRAFTER there, not the
+  // requester the "You deliver X to {name}" copy needs to name).
+  private commissionOrderRequesterName(orderId: number | undefined): string | undefined {
+    if (orderId === undefined) return undefined;
+    return this.commissionOrderBoard.find((o) => o.id === orderId)?.requesterName;
+  }
+
   openCommissionOrder(
     recipeId: string,
     scope: CommissionOrderScope,
@@ -8075,6 +8083,11 @@ export class Sim {
   }
 
   deliverCommissionOrder(orderId: number, pid?: number): void {
+    // Resolve the requester's name off the board BEFORE the mutation (deliver
+    // moves the order to 'delivered', so a post-mutation lookup would still
+    // find it inside its retention window, but resolve pre-mutation to match
+    // the itemId precedent above and stay correct if retention ever shrinks).
+    const requesterName = this.commissionOrderRequesterName(orderId);
     const result = deliverCommissionOrderImpl(this.ctx, orderId, pid);
     const meta = this.players.get(pid ?? this.primaryId);
     this.emit({
@@ -8083,6 +8096,7 @@ export class Sim {
       ok: result.ok,
       orderId: result.orderId,
       itemId: result.itemId,
+      requesterName: result.ok ? requesterName : undefined,
       reason: result.reason,
       pid: meta?.entityId,
     });

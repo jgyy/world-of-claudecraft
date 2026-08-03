@@ -61,7 +61,7 @@ describe('buildCommissionOrderBoardModel', () => {
     const cancelable = order({ id: 1, mine: true, status: 'open' });
     const notCancelableAccepted = order({ id: 2, mine: true, status: 'accepted' });
     const acceptable = order({ id: 3, status: 'open' });
-    const notAcceptableTargetedAtMe = order({
+    const acceptableTargetedAtMe = order({
       id: 4,
       status: 'open',
       mineToCraft: true,
@@ -70,7 +70,7 @@ describe('buildCommissionOrderBoardModel', () => {
     });
     const deliverable = order({ id: 5, mineToCraft: true, status: 'accepted' });
     const model = buildCommissionOrderBoardModel(
-      [cancelable, notCancelableAccepted, acceptable, notAcceptableTargetedAtMe, deliverable],
+      [cancelable, notCancelableAccepted, acceptable, acceptableTargetedAtMe, deliverable],
       [],
       ITEMS,
     );
@@ -81,9 +81,10 @@ describe('buildCommissionOrderBoardModel', () => {
     expect(byId.get(2)).toMatchObject({ canCancel: false, canAccept: false, canDeliver: false });
     expect(byId.get(3)).toMatchObject({ canCancel: false, canAccept: true, canDeliver: false });
     // #4 is mineToCraft (a 'crafter'-scope order still open, targeted at the
-    // viewer): NOT a general accept target (the crafting window's own
-    // "My Commissions" section owns it), and not yet accepted either.
-    expect(byId.get(4)).toMatchObject({ canCancel: false, canAccept: false, canDeliver: false });
+    // viewer): it lands in the "My Commissions" section (toCraft), and it IS
+    // acceptable there, since the named crafter is the only one who can
+    // accept a 'crafter'-scope order. Not yet accepted, so not deliverable.
+    expect(byId.get(4)).toMatchObject({ canCancel: false, canAccept: true, canDeliver: false });
     expect(byId.get(5)).toMatchObject({ canCancel: false, canAccept: false, canDeliver: true });
   });
 

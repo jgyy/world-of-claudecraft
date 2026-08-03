@@ -10361,7 +10361,11 @@ export class Hud {
             this.log(
               t(successKey, {
                 item: orderItemName,
-                name: this.sim.entities.get(ev.pid ?? -1)?.name ?? '',
+                // Only 'deliver' interpolates {name}, and it names the
+                // REQUESTER (who receives the item), not ev.pid (the
+                // acting crafter): resolve off the event's own
+                // requesterName, never the crafter's own entity name.
+                name: ev.action === 'deliver' ? (ev.requesterName ?? '') : '',
               }),
               '#7fdc4f',
             );
@@ -13330,13 +13334,15 @@ export class Hud {
 
   private renderCommissionBoard(): void {
     if (!this.commissionBoardOpen) return;
-    const knownRecipeIds = new Set(this.sim.craftingIdentity.knownRecipes);
-    const knownRecipes = this.sim.recipeList.filter((recipe) =>
-      isRecipeKnownForViewer(recipe, knownRecipeIds),
-    );
+    // The "open a new order" picker is the CUSTOMER side of the board: the
+    // sim accepts a commission for any commission-eligible recipe, whether
+    // or not the requester knows it themselves (that is the crafter's job).
+    // Pass the full recipe catalog, not craftingIdentity.knownRecipes (the
+    // crafting window's own recipe-book gate); buildCommissionOrderBoardModel
+    // narrows it to commission-eligible outputs itself.
     renderCommissionOrderWindow(
       $('#commission-board-window'),
-      buildCommissionOrderBoardModel(this.sim.commissionOrders, knownRecipes, ITEMS),
+      buildCommissionOrderBoardModel(this.sim.commissionOrders, this.sim.recipeList, ITEMS),
       {
         ...this.presentationBag,
         hideTooltip: () => this.hideTooltip(),

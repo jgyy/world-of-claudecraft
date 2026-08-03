@@ -71,7 +71,7 @@ function toRowModel(
     status: o.status,
     acceptedByName: o.acceptedByName,
     canCancel: o.mine && o.status === 'open',
-    canAccept: !o.mine && !o.mineToCraft && o.status === 'open',
+    canAccept: !o.mine && o.status === 'open',
     canDeliver: o.mineToCraft && o.status === 'accepted',
   };
 }

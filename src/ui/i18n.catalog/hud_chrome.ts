@@ -3253,7 +3253,7 @@ export const hudChromeStrings = {
     close: 'Close commission orders',
     openButton: 'Orders',
     openButtonAria: 'Open the commission order board',
-    intro: 'Commission a crafter to make you a piece, or take on someone else’s order.',
+    intro: "Commission a crafter to make you a piece, or take on someone else's order.",
     // The "open a new order" form.
     formTitle: 'Open a Commission',
     recipeLabel: 'Item',
@@ -3270,7 +3270,7 @@ export const hudChromeStrings = {
     sectionBoard: 'Open Board',
     boardEmpty: 'No open orders right now.',
     mineEmpty: 'You have not opened any commissions.',
-    toCraftEmpty: 'You are not crafting anyone’s order right now.',
+    toCraftEmpty: "You are not crafting anyone's order right now.",
     // One row's line: "{item} for {requester}" / "for {crafter}" when a
     // 'crafter'-scope order names a specific target.
     rowFor: '{item} for {requester}',
@@ -3284,7 +3284,8 @@ export const hudChromeStrings = {
     cancelButton: 'Cancel',
     acceptButton: 'Accept',
     deliverButton: 'Deliver',
-    deliverHint: 'Craft the commissioned piece (with the commission toggle on), then come back here to deliver it.',
+    deliverHint:
+      'Craft the commissioned piece (with the commission toggle on), then come back here to deliver it.',
     // commissionOrderResult chat lines, one success line per action (the
     // trainResult single-surface rule) plus the shared deny-reason set.
     opened: 'You post a commission order for {item}.',

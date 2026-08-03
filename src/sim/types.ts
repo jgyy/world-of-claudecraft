@@ -4567,6 +4567,11 @@ export type SimEvent = { pid?: number } & (
       ok: boolean;
       orderId?: number;
       itemId?: string;
+      // The requester's display name, resolved off the still-retained order
+      // record (issue #1298 follow-up): 'deliver' is the crafter's own
+      // action, so ev.pid names the crafter, not the requester the client
+      // needs to greet in the success line.
+      requesterName?: string;
       reason?:
         | 'unknown_recipe'
         | 'not_commission_eligible'
