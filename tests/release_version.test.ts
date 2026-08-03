@@ -34,12 +34,12 @@ MARKETING_VERSION = 0.20.0;`;
 
 const INDEX_HTML = `<a href="https://updates.worldofclaudecraft.com/desktop/world-of-claudecraft-0.20.0-mac-universal.dmg">Download</a>
 <a href="https://updates.worldofclaudecraft.com/desktop/world-of-claudecraft-0.20.0-linux-x86_64.AppImage">Download</a>
-<a href="https://updates.worldofclaudecraft.com/desktop/world-of-claudecraft-0.20.0-win.exe">Download</a>
+<a href="https://updates.worldofclaudecraft.com/desktop/world-of-claudecraft-0.20.0-win-x64.exe">Download</a>
 <div id="game-version">v0.10</div>`;
 
 // play.html omits Linux but carries the macOS and Windows links.
 const PLAY_HTML = `<a href="https://updates.worldofclaudecraft.com/desktop/world-of-claudecraft-0.20.0-mac-universal.dmg">Download</a>
-<a href="https://updates.worldofclaudecraft.com/desktop/world-of-claudecraft-0.20.0-win.exe">Download</a>
+<a href="https://updates.worldofclaudecraft.com/desktop/world-of-claudecraft-0.20.0-win-x64.exe">Download</a>
 <div id="game-version">v0.10</div>`;
 
 const DESKTOP_TS = `export const DESKTOP_VERSION = '0.20.0';
@@ -113,8 +113,8 @@ describe('release version transforms', () => {
 
   it('updates Windows installer artifact links', () => {
     const out = setDesktopDownloadVersion(INDEX_HTML, '0.21.0', 'index.html');
-    expect(out).toContain('world-of-claudecraft-0.21.0-win.exe');
-    expect(out).not.toContain('world-of-claudecraft-0.20.0-win.exe');
+    expect(out).toContain('world-of-claudecraft-0.21.0-win-x64.exe');
+    expect(out).not.toContain('world-of-claudecraft-0.20.0-win-x64.exe');
   });
 
   it('tolerates pages without a Linux link (play.html)', () => {
@@ -177,8 +177,8 @@ describe('planReleaseVersion', () => {
     expect(plan.htmlFiles['index.html']).toContain(
       'world-of-claudecraft-0.21.0-linux-x86_64.AppImage',
     );
-    expect(plan.htmlFiles['index.html']).toContain('world-of-claudecraft-0.21.0-win.exe');
-    expect(plan.htmlFiles['play.html']).toContain('world-of-claudecraft-0.21.0-win.exe');
+    expect(plan.htmlFiles['index.html']).toContain('world-of-claudecraft-0.21.0-win-x64.exe');
+    expect(plan.htmlFiles['play.html']).toContain('world-of-claudecraft-0.21.0-win-x64.exe');
     expect(plan.htmlFiles['play.html']).toContain('<div id="game-version">v0.21.0</div>');
     expect(plan.desktopModule).toContain("export const DESKTOP_VERSION = '0.21.0';");
     expect(plan.readmeFiles['README.md']).toContain('version-0.21.0-blue');
