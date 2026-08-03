@@ -1,6 +1,8 @@
 // Online play: REST auth client + WebSocket world mirror.
 
-import { apiUrl, DESKTOP_API_ORIGIN, NATIVE_API_ORIGIN } from '../client_origin';
+import { App } from '@capacitor/app';
+import type { PluginListenerHandle } from '@capacitor/core';
+import { apiUrl, DESKTOP_API_ORIGIN, NATIVE_API_ORIGIN, NATIVE_APP } from '../client_origin';
 import { normalizeOrigin, runtimeWebSocketUrl } from '../runtime';
 import {
   hasStreamerLink,
@@ -148,6 +150,11 @@ import {
   stableDeadlineRemaining,
 } from './snapshot_timer_wire';
 
+// The online mirror decodes terse legacy wire JSON. Runtime guards below narrow
+// individual fields as they are consumed; this alias keeps the decoder local.
+// biome-ignore lint/suspicious/noExplicitAny: legacy wire JSON is intentionally loose at the boundary.
+type LooseJson = any;
+
 interface ClientWireAura {
   id: string;
   name: string;
@@ -165,6 +172,7 @@ interface ClientWireAura {
   emp?: Aura['empowerAbilities'];
   src?: number;
   ub?: 1;
+  bt?: 1;
 }
 
 // ---------------------------------------------------------------------------
@@ -370,7 +378,7 @@ export class Api {
     }
   }
 
-  private async post(path: string, body: unknown, base = this.base): Promise<any> {
+  private async post<T = LooseJson>(path: string, body: unknown, base = this.base): Promise<T> {
     const res = await fetch(apiUrl(path, base), {
       method: 'POST',
       headers: {
@@ -381,19 +389,19 @@ export class Api {
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw apiErrorFromBody(data, res.status);
-    return data;
+    return data as T;
   }
 
-  private async get(path: string): Promise<any> {
+  private async get<T = LooseJson>(path: string): Promise<T> {
     const res = await fetch(apiUrl(path, this.base), {
       headers: this.token ? { Authorization: `Bearer ${this.token}` } : {},
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw apiErrorFromBody(data, res.status);
-    return data;
+    return data as T;
   }
 
-  private async delete(path: string, body: unknown): Promise<any> {
+  private async delete<T = LooseJson>(path: string, body: unknown): Promise<T> {
     const res = await fetch(apiUrl(path, this.base), {
       method: 'DELETE',
       headers: {
@@ -404,7 +412,7 @@ export class Api {
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw apiErrorFromBody(data, res.status);
-    return data;
+    return data as T;
   }
 
   async register(
@@ -1313,6 +1321,10 @@ function blankEntity(id: number): Entity {
     spawnPos: { x: 0, y: 0, z: 0 },
     leashAnchor: null,
     evadeStall: 0,
+    chaseStall: 0,
+    evadeEpoch: 0,
+    combatExitHoldUntil: 0,
+    chainPullInbound: false,
     fleeTimer: 0,
     fleeReturnTimer: 0,
     hasFled: false,
@@ -1478,6 +1490,11 @@ export class ClientWorld implements IWorld {
   // Active procedural Rift floor, rebuilt from the riftState event (no snapshot
   // field). The renderer regenerates geometry/style from this descriptor.
   riftFloor: RiftFloorView | null = null;
+  // The online client never registers a rift collision region of its own (collision
+  // resolution is server-authoritative); 0 keeps findPlayerPath/resolvePlayerDestination
+  // and the swept-landing crest re-resolve (see world_api/dungeons.ts) inert here, same
+  // as outside a rift.
+  readonly riftCollisionToken = 0;
   // The riftState event's expiresAtMs mirrored verbatim: an epoch-ms deadline the
   // server computed via ctx.lockoutNowMs() (real Date.now() on the live server, the
   // same clock raidLockouts() already relies on). Null while riftFloor is null or
@@ -1496,9 +1513,6 @@ export class ClientWorld implements IWorld {
     radius: number;
     expiresAtMs: number;
   }> = [];
-  // The online client never registers rift collision regions (the server owns
-  // collision); 0 keeps rift camera occlusion a no-op here.
-  readonly riftCollisionToken = 0;
   // Lockpicking: rebuilt from the lockpick* events (there is no snapshot field).
   // Holds only the fog-windowed cells the server discloses.
   lockpickState: LockpickView | null = null;
@@ -1677,6 +1691,10 @@ export class ClientWorld implements IWorld {
   // set by close() and by a server 'error' frame: the session is over for
   // good, so a subsequent socket close must not schedule a reconnect
   private sessionEnded = false;
+  // The native app-lifecycle listener handle (see handleAppStateChange below),
+  // resolved asynchronously by Capacitor's addListener. Undefined until it
+  // resolves, and also whenever NATIVE_APP is false.
+  private nativeLifecycleHandle: PluginListenerHandle | undefined;
   readonly characterId: number;
 
   // assigned by openSocket() from the ctor, and reassigned on every reconnect
@@ -1748,6 +1766,39 @@ export class ClientWorld implements IWorld {
     if (typeof document !== 'undefined') {
       document.addEventListener('visibilitychange', this.handleVisibilityChange);
     }
+    // Inside a Capacitor WebView, document.visibilitychange above is the ONLY
+    // signal driving the zombie-socket recovery below, but it is an indirect
+    // one the WebView itself must derive and forward: real-world Android/iOS
+    // WebViews are documented as inconsistent about firing it on every
+    // OS-level backgrounding path (task-switcher swipe, home button, OEM
+    // battery-management kills), unlike a browser tab, which gets first-party
+    // engineering behind the event. Capacitor's App plugin exists precisely
+    // for this: 'appStateChange' is wired directly to the native
+    // Activity.onPause/onResume (Android) and UIApplication background/
+    // foreground notifications (iOS), so it fires reliably where
+    // visibilitychange might not. Reported as frequent mobile disconnects
+    // "no matter how good the network is": the trigger to recover was
+    // missing, not the connection. Drives the exact same recovery path as the
+    // DOM listener; harmless to run both when visibilitychange also fires.
+    if (NATIVE_APP) {
+      void App.addListener('appStateChange', ({ isActive }) => {
+        this.handleForegroundBackground(isActive);
+      })
+        .then((handle) => {
+          // The session may have already ended by the time this resolves
+          // (addListener is async); don't leak a listener onto a dead world.
+          if (this.sessionEnded) {
+            void handle.remove().catch((err) => {
+              console.error('[net] could not remove native lifecycle listener', err);
+            });
+          } else {
+            this.nativeLifecycleHandle = handle;
+          }
+        })
+        .catch((err) => {
+          console.error('[net] could not install native lifecycle listener', err);
+        });
+    }
   }
 
   // Mobile browsers suspend JS timers AND the network stack together while a
@@ -1761,8 +1812,22 @@ export class ClientWorld implements IWorld {
   // disconnects even though most drops are really just late reconnects. On
   // resume, force a real state check and retry immediately instead of
   // waiting for a close event or the rest of the backoff delay.
+  //
+  // `!== 'visible'` (equivalently `=== 'hidden'`, the only other value the
+  // DocumentVisibilityState spec defines today) rather than `=== 'hidden'`
+  // explicitly: a no-op difference now, but it means a future third state
+  // would also flush on entering it, matching the "flush on anything not
+  // foregrounded" intent instead of silently skipping the flush.
   private readonly handleVisibilityChange = (): void => {
-    if (document.visibilityState === 'hidden') {
+    this.handleForegroundBackground(document.visibilityState === 'visible');
+  };
+
+  // Shared foreground/background handler driven by BOTH the DOM
+  // visibilitychange listener and (NATIVE_APP) the Capacitor App
+  // 'appStateChange' listener above, so a native app recovers a zombie socket
+  // on the native lifecycle signal even when visibilitychange never fires.
+  private handleForegroundBackground(visible: boolean): void {
+    if (!visible) {
       // Backgrounding (tab switch, tab close, phone lock) is the last reliable
       // beat to get an in-flight debounced layout edit to the server while the
       // socket is still open, so a "rearrange then close the tab" never strands
@@ -1772,7 +1837,6 @@ export class ClientWorld implements IWorld {
       this.flushActionBarLayoutSave();
       return;
     }
-    if (document.visibilityState !== 'visible') return;
     if (this.sessionEnded) return;
     if (this.ws.readyState === WebSocket.OPEN) return;
     if (this.reconnectTimer !== undefined) {
@@ -1798,7 +1862,7 @@ export class ClientWorld implements IWorld {
     // never delivered while suspended (the zombie-socket case). Drive the
     // same path a real close would have.
     if (this.connected) this.socketClosed();
-  };
+  }
 
   private openSocket(): void {
     // when a realm was picked, connect to that realm's origin; otherwise the
@@ -1876,6 +1940,15 @@ export class ClientWorld implements IWorld {
     if (this.reconnectTimer !== undefined) clearTimeout(this.reconnectTimer);
     if (typeof document !== 'undefined') {
       document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+    }
+    // If the App.addListener promise in the constructor has not resolved yet,
+    // its .then() callback checks sessionEnded itself and removes the handle
+    // as soon as it lands; this covers the already-resolved case.
+    if (this.nativeLifecycleHandle) {
+      void this.nativeLifecycleHandle.remove().catch((err) => {
+        console.error('[net] could not remove native lifecycle listener', err);
+      });
+      this.nativeLifecycleHandle = undefined;
     }
   }
 
@@ -2067,10 +2140,10 @@ export class ClientWorld implements IWorld {
   }
 
   private onMessage(raw: string): void {
-    let msg: any;
+    let msg: LooseJson;
     const parseStart = performance.now();
     try {
-      msg = JSON.parse(raw);
+      msg = JSON.parse(raw) as LooseJson;
     } catch {
       return;
     }
@@ -2209,6 +2282,7 @@ export class ClientWorld implements IWorld {
         this.applyChatFlairEvent(ev as SimEvent);
         this.applyUnstuckEvent(ev as SimEvent);
         this.applyPrestigeEvent(ev as SimEvent);
+        this.applyGuildRenamedEvent(ev as SimEvent);
         this.eventQueue.push(ev as SimEvent);
       }
       return;
@@ -2285,6 +2359,18 @@ export class ClientWorld implements IWorld {
     const v = this.socialDirty;
     this.socialDirty = false;
     return v;
+  }
+
+  private applyGuildRenamedEvent(ev: SimEvent): void {
+    if (
+      ev.type !== 'guildRenamed' ||
+      !this.socialInfo?.guild ||
+      this.socialInfo.guild.id !== ev.guildId
+    ) {
+      return;
+    }
+    this.socialInfo.guild.name = ev.newName;
+    this.socialDirty = true;
   }
 
   consumeProfanityChanged(): boolean {
@@ -2400,7 +2486,7 @@ export class ClientWorld implements IWorld {
     }
   }
 
-  private applySnapshot(snap: any): void {
+  private applySnapshot(snap: LooseJson): void {
     const now = performance.now();
     if (typeof this.spectating === 'string' && typeof snap.self?.id === 'number') {
       this.playerId = snap.self.id;
@@ -2495,7 +2581,7 @@ export class ClientWorld implements IWorld {
       return typeof aura.rem === 'number' && Number.isFinite(aura.rem) ? aura.rem : 0;
     };
 
-    const applyWire = (w: any): Entity | null => {
+    const applyWire = (w: LooseJson): Entity | null => {
       let e = this.entities.get(w.id);
       // identity fields ride only in "full" records: first sight and changes
       const hasIdentity = w.k !== undefined;
@@ -2744,6 +2830,7 @@ export class ClientWorld implements IWorld {
             // (auras_view ownFirst). An old server omits it; 0 matches no player id.
             rec.sourceId = a.src ?? 0;
             rec.unbreakableControl = a.ub === 1 ? true : undefined;
+            rec.breakThreshold = a.bt === 1 ? 1 : undefined;
           }
         } else {
           e.auras = wireAuras.map((a) => ({
@@ -2762,6 +2849,7 @@ export class ClientWorld implements IWorld {
             charges: a.charges,
             empowerAbilities: a.emp,
             unbreakableControl: a.ub === 1 ? true : undefined,
+            breakThreshold: a.bt === 1 ? 1 : undefined,
           }));
         }
       }
@@ -3266,7 +3354,7 @@ export class ClientWorld implements IWorld {
     // computeQuestState here exactly as it does server-side (the offline Sim
     // re-derives the same set from live PlayerMeta.questCadence).
     const cadenceBlocked =
-      identity && identity.cadenceBlockedQuests && identity.cadenceBlockedQuests.length > 0
+      identity?.cadenceBlockedQuests && identity.cadenceBlockedQuests.length > 0
         ? new Set(identity.cadenceBlockedQuests)
         : undefined;
     return optimisticQuestState(
@@ -3581,8 +3669,14 @@ export class ClientWorld implements IWorld {
   discardItem(itemId: string, count?: number): void {
     this.cmd({ cmd: 'discard', item: itemId, count });
   }
-  buyItem(npcId: number, itemId: string): void {
-    this.cmd({ cmd: 'buy', npc: npcId, item: itemId });
+  buyItem(npcId: number, itemId: string, bulk?: boolean): void {
+    // `bulk` rides the wire only when true (the craftItem `commission` idiom
+    // above): an ordinary buy stays byte-identical to the pre-#2374 message.
+    if (bulk === true) {
+      this.cmd({ cmd: 'buy', npc: npcId, item: itemId, bulk: true });
+    } else {
+      this.cmd({ cmd: 'buy', npc: npcId, item: itemId });
+    }
   }
   harvestNode(nodeId: string): Promise<boolean> {
     return this.cmdWithOutcome({ cmd: 'harvest_node', node: nodeId });

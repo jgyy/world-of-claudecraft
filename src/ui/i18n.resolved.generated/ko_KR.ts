@@ -926,7 +926,7 @@ export const ko_KR: EnTranslations = {
     "targetAuras": {
       "title": "대상 오라",
       "keybindLabel": "대상 강화 및 약화 효과",
-      "all": "All",
+      "all": "전체",
       "debuffs": "약화 효과",
       "buffs": "강화 효과",
       "unlock": "대상 오라 창 이동",
@@ -6214,6 +6214,7 @@ export const ko_KR: EnTranslations = {
         "add": "채팅 채널 추가",
         "addTitle": "채널 추가",
         "close": "{channel} 탭 닫기",
+        "moveHint": "{channel} 탭 순서 변경: 드래그하거나 Alt+왼쪽 또는 Alt+오른쪽 사용",
         "sendingTo": "{channel} 채널에 보내기",
         "names": {
           "say": "말하기",
@@ -6270,11 +6271,15 @@ export const ko_KR: EnTranslations = {
       "graphicsPresetMedium": "중간",
       "graphicsPresetHigh": "높음",
       "graphicsPresetUltra": "울트라",
+      "graphicsPresetInsane": "극한",
       "graphicsPresetAdvanced": "고급",
       "terrainDetail": "지형 세부 묘사",
       "foliageDensity": "초목 밀도",
       "effectsQuality": "효과 및 조명",
       "shadowQuality": "그림자 품질",
+      "surfaceDetail": "표면 디테일",
+      "surfaceDetailBasic": "기본",
+      "surfaceDetailFull": "전체",
       "terrainLow": "낮음",
       "terrainHigh": "높음",
       "touchOpacity": "터치 조작 투명도",
@@ -6438,6 +6443,8 @@ export const ko_KR: EnTranslations = {
       "joinParty": "파티 참가",
       "guildInvite": "{name}님이 {guild}에 초대했습니다.",
       "joinGuild": "길드 참가",
+      "guildInviteCancelled": "길드 이름이 변경되어 대기 중인 길드 초대가 취소되었습니다.",
+      "guildRenamed": "운영팀이 회원님의 길드 이름을 {name}(으)로 변경했습니다.",
       "tradeRequest": "{name}님이 거래를 원합니다.",
       "openTrade": "거래 열기",
       "duelRequest": "{name}님이 결투를 신청했습니다!",
@@ -6451,6 +6458,7 @@ export const ko_KR: EnTranslations = {
       "floatingDodge": "회피",
       "floatingParry": "무기 막기",
       "floatingResist": "저항",
+      "floatingEvade": "완전 회피",
       "floatingHealFull": "가득 참",
       "floatingHealAbsorbed": "흡수됨",
       "cannotMove": "이동 불가!",
@@ -6463,6 +6471,7 @@ export const ko_KR: EnTranslations = {
       "dodged": "{target}이 {ability}을 회피했습니다.",
       "parried": "{target}이 당신의 {ability}을 무기로 막았습니다.",
       "resisted": "{target}이 {ability}을 저항했습니다.",
+      "evaded": "{target}이 당신의 {ability}을 완전히 회피했습니다.",
       "healSelf": "{ability}이 자신을 {amount}만큼 치유했습니다.",
       "healSelfCrit": "{ability}이 자신을 치명타 치유로 {amount}만큼 회복했습니다.",
       "healOther": "{ability}이 {target}을 {amount}만큼 치유했습니다.",
@@ -7030,6 +7039,8 @@ export const ko_KR: EnTranslations = {
       "close": "상인 닫기",
       "hint": "이 창이 열려 있을 때 가방의 아이템을 클릭하면 판매합니다.",
       "buyAria": "{price}에 {item} 구매",
+      "buyStack": "Buy {count}",
+      "buyStackAria": "Buy {count} {item} for {price}",
       "buybackTitle": "되사기",
       "buybackEmpty": "물품 없음",
       "buybackAria": "{item}을(를) {price}에 되사기",
@@ -9648,6 +9659,18 @@ export const ko_KR: EnTranslations = {
       "wildheart_fangknife": {
         "name": "줄가르의 송곳니칼"
       },
+      "fanglords_beastspear": {
+        "name": "송곳니 군주의 야수창"
+      },
+      "bloodmane_warleggings": {
+        "name": "피갈기 전쟁 다리보호구"
+      },
+      "vineclaw_stalking_breeches": {
+        "name": "덩굴발톱 잠행 바지"
+      },
+      "sunbone_ritual_sarong": {
+        "name": "태양뼈 의식 사롱"
+      },
       "thick_winter_pelt": {
         "name": "두꺼운 겨울 모피"
       },
@@ -10394,6 +10417,24 @@ export const ko_KR: EnTranslations = {
       },
       "wyrmchoir_handwraps": {
         "name": "용노래 손싸개"
+      },
+      "basin_stalkers_tunic": {
+        "name": "분지 추적자의 튜닉"
+      },
+      "verdant_heart_vestment": {
+        "name": "신록의 심장 예복"
+      },
+      "sunbone_ritual_hauberk": {
+        "name": "태양뼈 의식 사슬갑옷"
+      },
+      "greatfang_of_the_basin": {
+        "name": "분지의 대송곳니"
+      },
+      "sunbone_oracles_crown": {
+        "name": "태양뼈 예언자의 왕관"
+      },
+      "bloodmane_war_legguards": {
+        "name": "피갈기 전쟁 다리갑옷"
       },
       "deathless_greatblade": {
         "name": "불사 대검"

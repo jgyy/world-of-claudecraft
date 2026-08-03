@@ -319,8 +319,8 @@ export const IWORLD_MEMBERS = [
   // Maker's Bond unbind service (Professions 2.0).
   { name: 'unbindItem', kind: 'method' },
   { name: 'raidLockouts', kind: 'method' }, // read-returning (5/6)
-  { name: 'riftCollisionToken', kind: 'data' }, // per-Sim rift collision registry key
   { name: 'riftFloor', kind: 'data' }, // active procedural rift floor (null outside)
+  { name: 'riftCollisionToken', kind: 'data' }, // per-Sim rift collision registry key
   { name: 'riftBossDeathZones', kind: 'method' }, // live lethal zones on the boss floor
   { name: 'riftEventMsRemaining', kind: 'method' }, // ms until the rift event stops admitting parties
   { name: 'dungeonDifficulty', kind: 'method' }, // read-returning
@@ -498,7 +498,11 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // activeMasterLootRolls, leaving 274; the rift floor timer HUD adds
     // riftEventMsRemaining and the instance-payload pipes add
     // marketListInstance, leaving 276. Reactive aura timing adds
-    // reactiveAbilityWindowRemaining, leaving 277.
+    // reactiveAbilityWindowRemaining, leaving 277; a later commit removed the
+    // then-renderer-only riftCollisionToken with third-person camera collision,
+    // leaving 276; this branch re-adds riftCollisionToken so client-side
+    // swept-landing and click-to-move pathing can treat rift walls as solid,
+    // leaving 277.
     expect(IWORLD_MEMBERS.length).toBe(277);
     expect(DATA_MEMBERS.length).toBe(72);
     expect(METHOD_MEMBERS.length).toBe(205);
@@ -1421,8 +1425,8 @@ const FACET_DUNGEONS = [
   'enterDungeon',
   'leaveDungeon',
   'raidLockouts',
-  'riftCollisionToken',
   'riftFloor',
+  'riftCollisionToken',
   'riftBossDeathZones',
   'riftEventMsRemaining',
   'dungeonDifficulty',

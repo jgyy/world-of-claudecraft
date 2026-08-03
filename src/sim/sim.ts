@@ -107,7 +107,6 @@ import { ensureWarriorStance } from './combat/warrior_stances';
 // moved to social/fiesta.ts with that logic; sim.ts keeps only the type used by
 // the PlayerMeta interface + the power-up catalog the fiestaMatchInfo accessor reads.
 import { type AugmentSpecial, type AugmentTier, POWERUPS_BY_ID } from './content/augments';
-import { MAILBOXES } from './content/mailboxes';
 import { DEFAULT_MOUNT, type MountKey } from './content/mounts';
 import type { GatheringProfessionId } from './content/professions';
 import { PTR_DEV_VENDOR_DEF } from './content/ptr_dev_vendor';
@@ -171,7 +170,6 @@ import {
   isRiftPos,
   MOBS,
   migrateLegacyInstancePos,
-  NPCS,
   QUESTS,
   RIFT_SLOT_COUNT,
   riftInstanceOrigin,
@@ -436,6 +434,7 @@ export type { MailSave } from './mail/post_office';
 export type { MarketSave } from './market';
 
 import { updateSwimFatigue } from './fatigue';
+import type { CombatExitMemory } from './instance_exit_memory';
 import { chainPullInstanceOnBossAggro } from './instances/boss_chain_pull';
 import {
   applyDungeonMobTuning,
@@ -965,6 +964,9 @@ export interface InstanceSlot {
   mobIds: number[];
   objectIds: number[];
   exitId: number | null;
+  // The exit portal a DungeonDef.bossExitPortal dungeon spawns at the final
+  // boss's death (also present in objectIds, which owns its teardown).
+  bossExitId: number | null;
   emptyFor: number;
   // Sim-time until this live claim may be manually replaced again. Claim-owned
   // authority prevents party roster or leadership churn from rotating away the
@@ -984,6 +986,12 @@ export interface InstanceSlot {
   // when they actually entered this run: a door-camper or a member parked in
   // town takes the lockout without turning roster membership into mailed income.
   enteredBy: Set<number>;
+  // Recently-exited-mid-combat memory (issue #2653): a player who left this claim
+  // while a mob was actively fighting them has their dropped threat snapshotted
+  // here for a short window. Re-entering before it lapses resumes the fight
+  // instead of granting a free, unengaged reset (instances/dungeons.ts). Session
+  // state, cleared with the claim, same as clearedBy/enteredBy above.
+  combatExitMemory: CombatExitMemory;
 }
 
 export interface ResolvedAbility {
@@ -2054,10 +2062,12 @@ export class Sim {
             mobIds: [],
             objectIds: [],
             exitId: null,
+            bossExitId: null,
             emptyFor: 0,
             resetAvailableAt: 0,
             clearedBy: new Set(),
             enteredBy: new Set(),
+            combatExitMemory: new Map(),
           });
         }
         continue;
@@ -2083,10 +2093,12 @@ export class Sim {
           mobIds: [],
           objectIds: [],
           exitId: null,
+          bossExitId: null,
           emptyFor: 0,
           resetAvailableAt: 0,
           clearedBy: new Set(),
           enteredBy: new Set(),
+          combatExitMemory: new Map(),
         });
       }
     }
@@ -2205,6 +2217,7 @@ export class Sim {
         progressed: false,
         seqResetAt: -Infinity,
         bossDeathZones: [],
+        combatExitMemory: new Map(),
       });
     }
 
@@ -3722,6 +3735,14 @@ export class Sim {
     deedsMod.markDeedsDirty(this.ctx, pid); // soc_guild_joined reads the stamped name
   }
 
+  /** Rename an existing guild identity without applying leave/join semantics. */
+  renamePlayerGuild(pid: number, oldName: string, newName: string): void {
+    const e = this.entities.get(pid);
+    if (!e || e.guild !== oldName) return;
+    valeCupMod.vcupRenameGuild(this.ctx, pid, oldName, newName);
+    e.guild = newName;
+  }
+
   /** Cosmetic skin-select event: rolls a rarity rank (once) and emits the
    *  personal `skinEvent` cue that opens the client overlay. Re-using the token
    *  re-shows the already-rolled rank — no reroll — so a player can't spam-roll.
@@ -3908,6 +3929,10 @@ export class Sim {
         prestigeRank: meta.prestigeRank,
         // the selected Book of Deeds title (a deed id), like the server fill
         title: meta.activeTitle,
+        // The guild tag beside the name, read off the passive display field the
+        // host stamps (setPlayerGuild). Omitted rather than empty, like the server
+        // fill; offline that is always the case, since guilds are server-only.
+        ...(e.guild ? { guild: e.guild } : {}),
       }));
     return Promise.resolve(paginateLeaderboard(rows, page, pageSize));
   }
@@ -5663,12 +5688,17 @@ export class Sim {
   ): void {
     const source = this.entities.get(effect.sourceId);
     if (!source || source.dead) return;
+    // The pulse cue anchors at the ZONE (the hazard is what ticks), not the
+    // caster, and names the ability so the renderer can play its authored fx.
     this.emit({
-      type: 'spellfx',
-      sourceId: source.id,
-      targetId: source.id,
+      type: 'spellfxAt',
+      x: effect.pos.x,
+      z: effect.pos.z,
       school: effect.school,
       fx: 'tick',
+      radius: effect.radius,
+      ability: effect.abilityId,
+      sourceId: source.id,
     });
     // Rune of Power (mage choice row): a FRIENDLY zone pulse. Buffs every ally
     // standing inside (refresh keeps it while they stay near, and it falls off
@@ -7731,8 +7761,32 @@ export class Sim {
     return items.useItem(this.ctx, itemId, pid);
   }
 
-  buyItem(npcId: number, itemId: string, pid?: number): void {
-    items.buyItem(this.ctx, npcId, itemId, pid);
+  // Two overloads, same trick as buyBackItem below: the IWorld shape UI/production
+  // code calls (npcId, itemId, bulk?) versus the legacy test/server shape that
+  // already threads a pid positionally in the third slot (npcId, itemId, pid?).
+  // Disambiguated by typeof so every existing `sim.buyItem(npc, item, pid)` call
+  // site keeps working unchanged.
+  buyItem(npcId: number, itemId: string, bulk?: boolean): void;
+  buyItem(npcId: number, itemId: string, pid?: number, bulk?: boolean): void;
+  buyItem(
+    npcId: number,
+    itemId: string,
+    bulkOrPid?: boolean | number,
+    pidOrBulk?: number | boolean,
+  ): void {
+    const pid =
+      typeof bulkOrPid === 'number'
+        ? bulkOrPid
+        : typeof pidOrBulk === 'number'
+          ? pidOrBulk
+          : undefined;
+    const bulk =
+      typeof bulkOrPid === 'boolean'
+        ? bulkOrPid
+        : typeof pidOrBulk === 'boolean'
+          ? pidOrBulk
+          : undefined;
+    items.buyItem(this.ctx, npcId, itemId, pid, bulk);
   }
 
   sellItem(itemId: string, count = 1, pid?: number): void {

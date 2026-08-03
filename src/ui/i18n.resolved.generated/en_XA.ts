@@ -6214,6 +6214,7 @@ export const en_XA: EnTranslations = {
         "add": "[Áðð çĥáţ çĥáññéļ]",
         "addTitle": "[Áðð çĥáññéļ]",
         "close": "[Çļóšé {channel} ţáƀ]",
+        "moveHint": "[Ŕéóŕðéŕ {channel} ţáƀ: ðŕáĝ íţ, óŕ úšé Áļţ+Ļéƒţ áñð Áļţ+Ŕíĝĥţ]",
         "sendingTo": "[Ɱéššáĝé {channel}]",
         "names": {
           "say": "[Šáý]",
@@ -6270,11 +6271,15 @@ export const en_XA: EnTranslations = {
       "graphicsPresetMedium": "[Ɱéðíúɱ]",
       "graphicsPresetHigh": "[Ĥíĝĥ]",
       "graphicsPresetUltra": "[Úļţŕá]",
+      "graphicsPresetInsane": "[Íñšáñé]",
       "graphicsPresetAdvanced": "[Áðʋáñçéð]",
       "terrainDetail": "[Ţéŕŕáíñ Ðéţáíļ]",
       "foliageDensity": "[Ƒóļíáĝé Ðéñšíţý]",
       "effectsQuality": "[Éƒƒéçţš & Ļíĝĥţíñĝ]",
       "shadowQuality": "[Šĥáðóŵ Ɋúáļíţý]",
+      "surfaceDetail": "[Šúŕƒáçé Ðéţáíļ]",
+      "surfaceDetailBasic": "[Ɓášíç]",
+      "surfaceDetailFull": "[Ƒúļļ]",
       "terrainLow": "[Ļóŵ]",
       "terrainHigh": "[Ĥíĝĥ]",
       "touchOpacity": "[Ţóúçĥ Çóñţŕóļš Óþáçíţý]",
@@ -6438,6 +6443,8 @@ export const en_XA: EnTranslations = {
       "joinParty": "[Ĵóíñ Þáŕţý]",
       "guildInvite": "[{name} íñʋíţéš ýóú ţó ĵóíñ {guild}.]",
       "joinGuild": "[Ĵóíñ Ĝúíļð]",
+      "guildInviteCancelled": "[Á þéñðíñĝ ĝúíļð íñʋíţáţíóñ ŵáš çáñçéļļéð ƀéçáúšé ţĥé ĝúíļð ŵáš ŕéñáɱéð.]",
+      "guildRenamed": "[Ýóúŕ ĝúíļð ĥáš ƀééñ ŕéñáɱéð ţó {name} ƀý ţĥé ɱóðéŕáţíóñ ţéáɱ.]",
       "tradeRequest": "[{name} ŵáñţš ţó ţŕáðé ŵíţĥ ýóú.]",
       "openTrade": "[Óþéñ Ţŕáðé]",
       "duelRequest": "[{name} ĥáš çĥáļļéñĝéð ýóú ţó á ðúéļ!]",
@@ -6451,6 +6458,7 @@ export const en_XA: EnTranslations = {
       "floatingDodge": "[Ðóðĝé]",
       "floatingParry": "[Þáŕŕý]",
       "floatingResist": "[Ŕéšíšţ]",
+      "floatingEvade": "[Éʋáðé]",
       "floatingHealFull": "[Ƒúļļ]",
       "floatingHealAbsorbed": "[Áƀšóŕƀéð]",
       "cannotMove": "[Çáñ'ţ ɱóʋé!]",
@@ -6463,6 +6471,7 @@ export const en_XA: EnTranslations = {
       "dodged": "[Ýóúŕ {ability} íš ðóðĝéð ƀý {target}.]",
       "parried": "[Ýóúŕ {ability} íš þáŕŕíéð ƀý {target}.]",
       "resisted": "[Ýóúŕ {ability} íš ŕéšíšţéð ƀý {target}.]",
+      "evaded": "[Ýóúŕ {ability} íš éʋáðéð ƀý {target}.]",
       "healSelf": "[Ýóúŕ {ability} ĥéáļš ýóú ƒóŕ {amount}.]",
       "healSelfCrit": "[Ýóúŕ {ability} çŕíţíçáļļý ĥéáļš ýóú ƒóŕ {amount}.]",
       "healOther": "[Ýóúŕ {ability} ĥéáļš {target} ƒóŕ {amount}.]",
@@ -7030,6 +7039,8 @@ export const en_XA: EnTranslations = {
       "close": "[Çļóšé ʋéñðóŕ]",
       "hint": "[Çļíçķ áñ íţéɱ íñ ýóúŕ ƀáĝš ţó šéļļ íţ ŵĥíļé ţĥíš ŵíñðóŵ íš óþéñ.]",
       "buyAria": "[Ɓúý {item} ƒóŕ {price}]",
+      "buyStack": "[Ɓúý {count}]",
+      "buyStackAria": "[Ɓúý {count} {item} ƒóŕ {price}]",
       "buybackTitle": "[Ɓúýƀáçķ]",
       "buybackEmpty": "[Ñó íţéɱš]",
       "buybackAria": "[Ɓúý ƀáçķ {item} ƒóŕ {price}]",
@@ -9648,6 +9659,18 @@ export const en_XA: EnTranslations = {
       "wildheart_fangknife": {
         "name": "[Ƒáñĝķñíƒé óƒ Žúļĝáŕ]"
       },
+      "fanglords_beastspear": {
+        "name": "[Ƒáñĝļóŕð'š Ɓéášţšþéáŕ]"
+      },
+      "bloodmane_warleggings": {
+        "name": "[Ɓļóóðɱáñé Ŵáŕļéĝĝíñĝš]"
+      },
+      "vineclaw_stalking_breeches": {
+        "name": "[Ʋíñéçļáŵ Šţáļķíñĝ Ɓŕééçĥéš]"
+      },
+      "sunbone_ritual_sarong": {
+        "name": "[Šúñƀóñé Ŕíţúáļ Šáŕóñĝ]"
+      },
       "thick_winter_pelt": {
         "name": "[Ţĥíçķ Ŵíñţéŕ Þéļţ]"
       },
@@ -10394,6 +10417,24 @@ export const en_XA: EnTranslations = {
       },
       "wyrmchoir_handwraps": {
         "name": "[Ŵýŕɱçĥóíŕ Ĥáñðŵŕáþš]"
+      },
+      "basin_stalkers_tunic": {
+        "name": "[Ɓášíñ Šţáļķéŕ'š Ţúñíç]"
+      },
+      "verdant_heart_vestment": {
+        "name": "[Ʋéŕðáñţ-Ĥéáŕţ Ʋéšţɱéñţ]"
+      },
+      "sunbone_ritual_hauberk": {
+        "name": "[Šúñƀóñé Ŕíţúáļ Ĥáúƀéŕķ]"
+      },
+      "greatfang_of_the_basin": {
+        "name": "[Ĝŕéáţƒáñĝ óƒ ţĥé Ɓášíñ]"
+      },
+      "sunbone_oracles_crown": {
+        "name": "[Šúñƀóñé Óŕáçļé'š Çŕóŵñ]"
+      },
+      "bloodmane_war_legguards": {
+        "name": "[Ɓļóóðɱáñé Ŵáŕ-Ļéĝĝúáŕðš]"
       },
       "deathless_greatblade": {
         "name": "[Ðéáţĥļéšš Ĝŕéáţƀļáðé]"

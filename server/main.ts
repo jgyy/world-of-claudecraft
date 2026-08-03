@@ -44,7 +44,12 @@ import {
   handleEmailUnsubscribe,
   verifyLoginTwoFactor,
 } from './account';
-import { configureAdminPlayersCap, configureAdminRuntime, handleAdminApi } from './admin';
+import {
+  configureAdminGuildBoardCacheBust,
+  configureAdminPlayersCap,
+  configureAdminRuntime,
+  handleAdminApi,
+} from './admin';
 import {
   currentSitePresenceUsers,
   distinctOnlineSampleRealms,
@@ -486,6 +491,10 @@ async function refreshLeaderboard(scope: 'realm' | 'global'): Promise<Leaderboar
     prestigeRank: r.prestigeRank,
     // a deed id (never display text); the client localizes via deed_i18n
     title: r.activeTitle,
+    // The guild tag shown beside the name. Omitted (not null) for an unguilded
+    // character, the `realm` treatment below, so an unguilded row is byte-unchanged
+    // on the wire.
+    ...(r.guild ? { guild: r.guild } : {}),
     ...(scope === 'global' ? { realm: r.realm } : {}),
   }));
   // Skip the install if a moderation bust landed mid-refresh (see boardEpoch).
@@ -1891,6 +1900,11 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
         // (server/leaderboard.ts) carries the same dev_commands field. Read live
         // per request, mirroring the /api/perf gate just below.
         dev_commands: process.env.ALLOW_DEV_COMMANDS === '1',
+        // Online-profiler capability handshake. Presence proves this server
+        // supports the idempotent invulnerability command; false tells the
+        // harness to stop before entry because the dev gate is off. Dual-arm
+        // edit: the migrated statusHandler carries the identical field.
+        profiler_invulnerability: process.env.ALLOW_DEV_COMMANDS === '1',
       });
     }
     // Dev-only world-loop perf profile (per-phase tick p95/max), for the load
@@ -2023,7 +2037,9 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
       const callerToken = bearerToken(req);
       if (!callerToken)
         return json(res, 401, { error: 'not authenticated', code: 'auth.required' });
-      return handleAccountChangePassword(req, res, accountId, callerToken);
+      return handleAccountChangePassword(req, res, accountId, callerToken, {
+        disconnectAccount: (id, reason) => liveGame().disconnectAccount(id, reason),
+      });
     }
     // Password reset is for users who are locked out, so both routes are
     // unauthenticated (rate-limited + web-login guarded above, and each handler is
@@ -2032,7 +2048,9 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
       return handleAccountPasswordForgot(req, res);
     }
     if (req.method === 'POST' && url === '/api/account/password/reset') {
-      return handleAccountPasswordReset(req, res);
+      return handleAccountPasswordReset(req, res, {
+        disconnectAccount: (id, reason) => liveGame().disconnectAccount(id, reason),
+      });
     }
     if (req.method === 'POST' && url === '/api/account/logout') {
       const callerToken = bearerToken(req);
@@ -2862,6 +2880,7 @@ export async function startServer(): Promise<http.Server> {
   // (unlike AdminRuntime), so it rides its own seam, fed the SAME canonical source
   // /api/status uses, keeping the cap byte-identical across the status and overview reads.
   configureAdminPlayersCap(canonicalPlayersCap);
+  configureAdminGuildBoardCacheBust(bustBoardCaches);
   configureInternalRuntime(game);
   // Bot detector: replay this realm's saved config overrides onto the fresh
   // detector. Boot applies what it can; a stale entry (schema drift after a
