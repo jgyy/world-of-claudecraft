@@ -2775,7 +2775,15 @@ async function startGame(
     // ignoreFences: the player can hop fences, so route straight over them
     // instead of around, resolveMove fires the jump as we reach the rail.
     // swim: the player can swim, so let the route cross/enter water.
-    return findPlayerPath(world.cfg.seed, world.player.pos, target, undefined, true, true);
+    return findPlayerPath(
+      world.cfg.seed,
+      world.player.pos,
+      target,
+      undefined,
+      true,
+      true,
+      world.riftCollisionToken,
+    );
   }
 
   function resolvedClickMoveTarget(target: { x: number; z: number }): {
@@ -2783,7 +2791,7 @@ async function startGame(
     z: number;
   } {
     // swim: keep a clicked water destination instead of snapping it to shore.
-    return resolvePlayerDestination(world.cfg.seed, target, true);
+    return resolvePlayerDestination(world.cfg.seed, target, true, world.riftCollisionToken);
   }
 
   function syncGroundAimReticle(): void {
@@ -3392,7 +3400,15 @@ async function startGame(
               clickMoveStuckSince = now;
               input.rerouteClickMoveTarget(
                 goal,
-                findPlayerPath(world.cfg.seed, world.player.pos, goal, undefined, false, true),
+                findPlayerPath(
+                  world.cfg.seed,
+                  world.player.pos,
+                  goal,
+                  undefined,
+                  false,
+                  true,
+                  world.riftCollisionToken,
+                ),
               );
             } else {
               input.clearClickMove();
