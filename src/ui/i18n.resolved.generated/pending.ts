@@ -19,8 +19,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "es_ES": [
     "hudChrome.actionBar.bannerCapturing",
@@ -32,8 +31,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "fr_FR": [
     "hudChrome.actionBar.bannerCapturing",
@@ -45,8 +43,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "fr_CA": [
     "hudChrome.actionBar.bannerCapturing",
@@ -58,8 +55,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "en_CA": [],
   "it_IT": [
@@ -72,8 +68,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "de_DE": [
     "hudChrome.actionBar.bannerCapturing",
@@ -85,8 +80,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "zh_CN": [
     "hudChrome.actionBar.done"
@@ -110,8 +104,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "ru_RU": [
     "hudChrome.actionBar.done"
@@ -126,8 +119,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "nl_NL": [
     "hudChrome.actionBar.bannerCapturing",
@@ -139,8 +131,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "pl_PL": [
     "hudChrome.actionBar.bannerCapturing",
@@ -152,8 +143,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "id_ID": [
     "hudChrome.actionBar.bannerCapturing",
@@ -165,8 +155,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "tr_TR": [
     "hudChrome.actionBar.bannerCapturing",
@@ -178,8 +167,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "sv_SE": [
     "hudChrome.actionBar.bannerCapturing",
@@ -191,8 +179,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "vi_VN": [
     "hudChrome.actionBar.bannerCapturing",
@@ -204,8 +191,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ],
   "da_DK": [
     "hudChrome.actionBar.bannerCapturing",
@@ -217,7 +203,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.actionBar.editKeysHint",
     "hudChrome.actionBar.reset",
     "hudChrome.actionBar.resetConfirmBody",
-    "hudChrome.actionBar.resetConfirmTitle",
-    "hudChrome.options.hideUnusedActionSlots"
+    "hudChrome.actionBar.resetConfirmTitle"
   ]
 };

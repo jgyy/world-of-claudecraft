@@ -1200,7 +1200,7 @@ export const es_ES: EnTranslations = {
       "itemScoreLine": "Puntuación {score}",
       "showSecondaryActionBar": "Mostrar barra de acción secundaria",
       "showThirdActionBar": "Mostrar tercera barra de acción",
-      "hideUnusedActionSlots": "Hide Unused Action Slots",
+      "hideUnusedActionSlots": "Ocultar casillas de acción sin usar",
       "showTargetOfTarget": "Mostrar objetivo del objetivo",
       "showAttackButton": "Mostrar boton de ataque",
       "showDailyRewardsChest": "Mostrar cofre de recompensas diarias",

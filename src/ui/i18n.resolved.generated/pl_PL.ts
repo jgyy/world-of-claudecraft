@@ -1200,7 +1200,7 @@ export const pl_PL: EnTranslations = {
       "itemScoreLine": "Ocena {score}",
       "showSecondaryActionBar": "Pokaż dodatkowy pasek akcji",
       "showThirdActionBar": "Pokaż trzeci pasek akcji",
-      "hideUnusedActionSlots": "Hide Unused Action Slots",
+      "hideUnusedActionSlots": "Ukryj nieużywane pola akcji",
       "showTargetOfTarget": "Pokaż cel celu",
       "showAttackButton": "Pokaż Przycisk Ataku",
       "showDailyRewardsChest": "Pokaż skrzynię codziennych nagród",
