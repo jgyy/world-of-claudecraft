@@ -552,16 +552,31 @@ export class BankWindow {
     // Deposit all materials: one click banks every material stack that fully fits.
     // Disabled when the bags hold no material stack; a full bank is still actionable
     // (the click reports it), so it does not disable here.
+    //
+    // The clarification (gathering tools and junk move too, not just tradeskill
+    // materials) is exposed two ways so it reaches touch and keyboard users, not
+    // only a mouse-hover title: a `title` for desktop hover, PLUS a visually-hidden
+    // aria-describedby span the button always carries. A screen reader announces
+    // aria-describedby on both hover and keyboard focus, and reading it needs no
+    // pointer at all, so it also covers touch users who tap the button directly.
     const deposit = document.createElement('button');
     deposit.type = 'button';
     deposit.className = 'bank-deposit-all';
     deposit.textContent = t('hudChrome.bank.depositAll');
-    deposit.title = t('hudChrome.bank.depositAllTooltip');
+    const depositTooltip = t('hudChrome.bank.depositAllTooltip');
+    deposit.title = depositTooltip;
+    deposit.setAttribute('aria-describedby', 'bank-deposit-all-desc');
     deposit.disabled =
       this.depositAllPending ||
       !hasDepositableMaterials(this.deps.world().inventory, (id) => ITEMS[id]);
     deposit.addEventListener('click', () => this.onDepositAll());
     tools.appendChild(deposit);
+
+    const depositDesc = document.createElement('span');
+    depositDesc.id = 'bank-deposit-all-desc';
+    depositDesc.className = 'visually-hidden';
+    depositDesc.textContent = depositTooltip;
+    tools.appendChild(depositDesc);
 
     bar.appendChild(tools);
     return bar;
