@@ -2042,7 +2042,9 @@ export const tr_TR: EnTranslations = {
       "levelFamily": "Seviye {level} {family}",
       "familyDemon": "İblis",
       "hostile": "Düşman",
-      "friendly": "Dost"
+      "friendly": "Dost",
+      "elite": "Elite",
+      "boss": "Boss"
     },
     "targetFrame": {
       "unlock": "Hedef çerçevesini taşı",

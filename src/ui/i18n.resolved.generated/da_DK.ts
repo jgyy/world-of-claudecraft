@@ -2042,7 +2042,9 @@ export const da_DK: EnTranslations = {
       "levelFamily": "Niveau {level} {family}",
       "familyDemon": "Dæmon",
       "hostile": "Fjendtlig",
-      "friendly": "Venlig"
+      "friendly": "Venlig",
+      "elite": "Elite",
+      "boss": "Boss"
     },
     "targetFrame": {
       "unlock": "Flyt målrammen",
