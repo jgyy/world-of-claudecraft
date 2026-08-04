@@ -10,6 +10,7 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -128,6 +129,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "es_ES": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -246,6 +248,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "fr_FR": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -364,6 +367,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "fr_CA": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -483,6 +487,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "en_CA": [],
   "it_IT": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -601,6 +606,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "de_DE": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -719,6 +725,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "zh_CN": [
+    "editor.status.campCapReached",
     "hudChrome.bg.clock",
     "hudChrome.materialHint.usedBy",
     "hudChrome.pvp.bracket1v1",
@@ -726,6 +733,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.pvp.launcherTitle"
   ],
   "zh_TW": [
+    "editor.status.campCapReached",
     "hudChrome.bg.clock",
     "hudChrome.materialHint.usedBy",
     "hudChrome.pvp.bracket1v1",
@@ -733,6 +741,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.pvp.launcherTitle"
   ],
   "ko_KR": [
+    "editor.status.campCapReached",
     "hudChrome.bg.clock",
     "hudChrome.materialHint.usedBy",
     "hudChrome.pvp.bracket1v1",
@@ -740,6 +749,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.pvp.launcherTitle"
   ],
   "ja_JP": [
+    "editor.status.campCapReached",
     "hudChrome.bg.clock",
     "hudChrome.materialHint.usedBy",
     "hudChrome.pvp.bracket1v1",
@@ -747,6 +757,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.pvp.launcherTitle"
   ],
   "pt_BR": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -865,6 +876,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "ru_RU": [
+    "editor.status.campCapReached",
     "hudChrome.bg.clock",
     "hudChrome.materialHint.usedBy",
     "hudChrome.pvp.bracket1v1",
@@ -872,6 +884,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.pvp.launcherTitle"
   ],
   "cs_CZ": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -990,6 +1003,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "nl_NL": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -1108,6 +1122,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "pl_PL": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -1226,6 +1241,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "id_ID": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -1344,6 +1360,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "tr_TR": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -1462,6 +1479,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "sv_SE": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -1580,6 +1598,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "vi_VN": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
@@ -1698,6 +1717,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.warfare.reasons.battlegroundWin"
   ],
   "da_DK": [
+    "editor.status.campCapReached",
     "guide.nav.thornhollow",
     "guide.thornhollowPage.carrierBody",
     "guide.thornhollowPage.carrierHeading",
