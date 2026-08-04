@@ -14,6 +14,11 @@ const LINUX_APPIMAGE_RE = /world-of-claudecraft-\d+\.\d+\.\d+-linux-x86_64\.AppI
 // buildUniversalInstaller is false, issue 2013): a per-arch installer, not
 // the old combined "-win.exe" that folded both arches into one download.
 const WINDOWS_INSTALLER_RE = /world-of-claudecraft-\d+\.\d+\.\d+-win-x64\.exe/g;
+// A page migrated before the per-arch cutover (or hand-edited afterward) can
+// still carry the legacy combined-installer filename. Both prepare and check
+// must recognize it so it gets rewritten/flagged instead of silently surviving
+// a version bump (issue: legacy Windows links bypass the release guard).
+const LEGACY_WINDOWS_INSTALLER_RE = /world-of-claudecraft-\d+\.\d+\.\d+-win\.exe/g;
 const DESKTOP_VERSION_RE = /export const DESKTOP_VERSION = '(\d+\.\d+\.\d+)';/;
 const GAME_VERSION_RE = /(<div\b[^>]*\bid=["']game-version["'][^>]*>)v[^<]*(<\/div>)/;
 const README_VERSION_BADGE_SOURCE = String.raw`img\.shields\.io/badge/version-(\d+\.\d+\.\d+)-blue`;
@@ -93,7 +98,8 @@ export function setDesktopDownloadVersion(html, version, path) {
   return html
     .replace(MAC_DMG_RE, `world-of-claudecraft-${normalized}-mac-universal.dmg`)
     .replace(LINUX_APPIMAGE_RE, `world-of-claudecraft-${normalized}-linux-x86_64.AppImage`)
-    .replace(WINDOWS_INSTALLER_RE, `world-of-claudecraft-${normalized}-win-x64.exe`);
+    .replace(WINDOWS_INSTALLER_RE, `world-of-claudecraft-${normalized}-win-x64.exe`)
+    .replace(LEGACY_WINDOWS_INSTALLER_RE, `world-of-claudecraft-${normalized}-win-x64.exe`);
 }
 
 export function setDesktopModuleVersion(source, version, path) {
@@ -242,7 +248,10 @@ export function collectReleaseVersionFailures({
       failures.push(`${path} has a stale Linux desktop download URL, expected ${expected}`);
     }
     WINDOWS_INSTALLER_RE.lastIndex = 0;
-    if (WINDOWS_INSTALLER_RE.test(html) && !html.includes(expectedWindowsArtifact)) {
+    LEGACY_WINDOWS_INSTALLER_RE.lastIndex = 0;
+    const hasWindowsInstallerLink =
+      WINDOWS_INSTALLER_RE.test(html) || LEGACY_WINDOWS_INSTALLER_RE.test(html);
+    if (hasWindowsInstallerLink && !html.includes(expectedWindowsArtifact)) {
       failures.push(`${path} has a stale Windows desktop download URL, expected ${expected}`);
     }
     if (/coming soon/i.test(html)) {
