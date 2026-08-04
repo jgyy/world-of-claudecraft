@@ -7,6 +7,8 @@ import { describe, expect, it } from 'vitest';
 // load-bearing behaviors: reusing bag_filter via buildBagGrid (not re-deriving the
 // filter) and preserving the .bag-grid scroll offset across a rebuild.
 const painter = readFileSync(new URL('../src/ui/bags_window.ts', import.meta.url), 'utf8');
+const view = readFileSync(new URL('../src/ui/bags_view.ts', import.meta.url), 'utf8');
+const promptDialog = readFileSync(new URL('../src/ui/prompt_dialog.ts', import.meta.url), 'utf8');
 const tokens = readFileSync(new URL('../src/styles/tokens.css', import.meta.url), 'utf8');
 const hud = readFileSync(new URL('../src/ui/hud.ts', import.meta.url), 'utf8');
 const components = readFileSync(new URL('../src/styles/components.css', import.meta.url), 'utf8');
@@ -63,7 +65,13 @@ describe('bags_window: load-bearing behaviors preserved', () => {
     // Without stopPropagation the keypress bubbles to the input layer's window
     // keydown, whose escape action runs closeAll: one Escape on a prompt BUTTON
     // (not tag-exempt like inputs) would dismiss the prompt AND close the bags.
-    expect(painter).toMatch(/ke\.preventDefault\(\);\s*ke\.stopPropagation\(\);/);
+    // The recipe lives in the shared module (prompt_dialog.ts) since the
+    // rule-of-three extraction; the window must still delegate to it with its
+    // own root, or the recipe protects nothing here.
+    expect(promptDialog).toMatch(/ke\.preventDefault\(\);\s*ke\.stopPropagation\(\);/);
+    expect(painter).toMatch(
+      /installModalPromptDialog\(prompt, opener, close, \{\s*inertRoot: this\.deps\.root\(\),/,
+    );
   });
 });
 
@@ -71,12 +79,29 @@ describe('bags_window: bank-deposit mode wiring', () => {
   it('reads the bank-open mode fresh each click through the injected dep', () => {
     // The mode flag is HUD state; the painter must read it via the dep each click,
     // never cache it, mirroring vendorOpen / isMailAttach.
-    expect(painter).toContain('isBankOpen(): boolean;');
-    expect(painter).toContain('bankDeposit: this.deps.isBankOpen(),');
+    expect(painter).toContain('isPersonalBankTab(): boolean;');
+    expect(painter).toContain('isGuildBankTab(): boolean;');
+    // At most ONE of the two bank modes, and possibly NEITHER: each is armed
+    // only while its own grid is on screen to drop into, so the guild pane's
+    // log view (a reading surface) arms neither. `isBankOpen && !guildTab` is
+    // NOT the personal predicate: it armed the personal deposit behind the log.
+    expect(painter).toContain('bankDeposit: this.deps.isPersonalBankTab(),');
+    expect(painter).toContain('guildBankDeposit: this.deps.isGuildBankTab(),');
+    // ...and the SUPERSET flag that says the bank cluster owns the slot at all.
+    // Without it, both deposits off is bit-identical to "no window is open",
+    // which demoted the click to the use/equip default and re-armed the destroy
+    // prompt and the item action menu over the guild pane's reading surface.
+    expect(painter).toContain('bankOpen: this.deps.isBankOpen(),');
+    // The consumers that must read the superset, not the deposit pair.
+    expect(painter).toContain('!mode.bankOpen &&');
+    expect(view).toContain("if (mode.bankOpen) return 'bankDepositBlockedNoTarget';");
+    expect(view).toContain("if (mode.bankOpen) return 'hudChrome.bank.cannotDepositNow';");
   });
 
   it('hud wires isBankOpen to the live bank-window open state', () => {
     expect(hud).toContain('isBankOpen: () => this.bankWindow.isOpen,');
+    expect(hud).toContain('isPersonalBankTab: () => this.bankWindow.personalTabActive,');
+    expect(hud).toContain('isGuildBankTab: () => this.bankWindow.guildTabActive,');
   });
 
   it('resolves the deposit target by reference index, not itemId (the index command)', () => {
@@ -104,14 +129,18 @@ describe('bags_window: bank-deposit mode wiring', () => {
   });
 
   it('the deposit prompt re-resolves the live slot at submit and refuses on a mismatch', () => {
-    // The bags can repaint under the open prompt; submit must re-read inventory[index],
-    // refuse (null) rather than deposit the wrong item, and clamp otherwise.
+    // The bags can repaint under the open prompt; the shared builder's submit
+    // (bank_quantity_prompt.ts) calls resolveCount, whose bags closure re-reads
+    // inventory[index] and refuses (null) rather than deposit the wrong item,
+    // clamping otherwise. The null arm's dismiss lives in the builder.
     expect(painter).toContain('const live = this.deps.world().inventory[index];');
-    expect(painter).toContain(
-      'const count = resolveDepositSubmit(live, captured, Number(input.value) || 0, maxCount);',
-    );
-    expect(painter).toMatch(/if \(count === null\) \{\s*dismiss\(\);/);
+    expect(painter).toContain('return resolveDepositSubmit(live, captured, requested, maxCount);');
     expect(painter).toContain('this.deps.world().bankDeposit(index, count);');
+    const builder = readFileSync(
+      new URL('../src/ui/bank_quantity_prompt.ts', import.meta.url),
+      'utf8',
+    );
+    expect(builder).toMatch(/if \(count === null\) \{\s*dismiss\(\);/);
   });
 
   it('registers the deposit prompt class so close() tears it down (no orphaned modal)', () => {
@@ -125,7 +154,10 @@ describe('bags_window: bank-deposit mode wiring', () => {
     // The tooltip shows depositPartialHint ONLY on the deposit-hint arm (never on a
     // blocked quest item) and only for a splittable stack; without this line the
     // catalog key would be dead and the affordance undiscoverable.
-    expect(painter).toContain("key === 'hudChrome.bank.depositHint' && bankDepositOpensPrompt(s)");
+    expect(painter).toContain(
+      "(key === 'hudChrome.bank.depositHint' || key === 'hudChrome.bank.guildDepositHint') &&",
+    );
+    expect(painter).toContain('bankDepositOpensPrompt(s)');
     expect(painter).toContain("t('hudChrome.bank.depositPartialHint')");
     expect(painter).toContain('+ extra + partial + equipDrag + destroy + link');
   });
@@ -222,8 +254,10 @@ describe('bags_window: touch peek + bank-cluster close', () => {
     // bind steals the WCAG 2.4.3 focus return. The prompt's own keydown listener
     // stops the bubble, and once the prompt was detached mid-dispatch it must ALSO
     // cancel the default (or the activation ghost-clicks the re-landed focus).
-    // The older Escape-only handling reds this.
-    expect(painter).toMatch(
+    // The older Escape-only handling reds this. The handler lives in the
+    // shared recipe (prompt_dialog.ts); the delegation pin rides the Escape
+    // test above.
+    expect(promptDialog).toMatch(
       /if \(ke\.key === 'Enter' \|\| ke\.key === ' ' \|\| ke\.code === 'Space'\) \{\s*ke\.stopPropagation\(\);\s*if \(!prompt\.isConnected\) ke\.preventDefault\(\);\s*return;\s*\}/,
     );
   });
@@ -320,5 +354,118 @@ describe('bags_window: per-copy instance tooltip forwarding (Professions 2.0)', 
     // reverts every bag tooltip to def-only while all pure-core suites stay
     // green (the exact regression class the widened dep was added for).
     expect(painter).toContain('this.deps.itemTooltip(item, s.instance)');
+  });
+});
+
+describe('bags_window: unknown-id stacks stay visible (stale-client guard, R34)', () => {
+  // The keep/exclude decision lives in bag_filter.ts (pinned in
+  // bag_filter.test.ts); these pins hold the painter to rendering what the
+  // core keeps. Comment-stripped so prose naming an arm cannot satisfy a pin.
+  const code = painter.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+
+  it('paints an unknown-id stack through buildUnknownStackCell in BOTH grid views', () => {
+    // The pristine view used to paint it as an EMPTY square; the list view
+    // used to drop the row entirely (`if (!item) continue`).
+    expect(code).toContain('this.buildUnknownStackCell(stack, cell)');
+    expect(code).toContain('this.buildUnknownStackCell(s, null)');
+    expect(code).not.toContain('if (!item) continue');
+    // BOTH branches resolve through the own-property predicate: a bare
+    // ITEMS read sends a prototype key down the known arm (the merge
+    // settlement caught the pristine branch keeping one).
+    expect(code).toContain('knownItemDef(ITEMS, stack.itemId)');
+    expect(code).toContain('knownItemDef(ITEMS, s.itemId)');
+    expect(code).not.toContain('stack ? ITEMS[stack.itemId] : undefined');
+  });
+
+  it('renders the fallback icon, the raw id, and an UNKNOWN accessible name', () => {
+    const start = code.indexOf('private buildUnknownStackCell(');
+    const end = code.indexOf('private bindBagCellDrop(');
+    expect(start).toBeGreaterThan(-1);
+    expect(end).toBeGreaterThan(start);
+    const body = code.slice(start, end);
+    expect(body).toContain('unknownItemIconHtml(s.itemId)');
+    // The cell keeps the shared bag-cell styling at the default rung and its
+    // count badge, so an unknown stack reads like a stack, not a hole.
+    expect(body).toContain("row.className = 'bag-item q-common'");
+    expect(body).toContain('bi-count');
+    // The aria channel carries the UNKNOWN signal (the tooltip is hover-only),
+    // plus the raw id; the tooltip title is the raw id with the unknown
+    // sub-line.
+    expect(body).toContain("t('itemUi.bags.unknownItemAria', {");
+    expect(body).toContain('id: s.itemId');
+    expect(body).toContain("t('itemUi.bags.unknownItem')");
+    // Exactly ONE click action, the def-free bank deposit, and only while
+    // the bank is open (bankDeposit is index-based like the move, so the
+    // withdraw the guard kept live is not a one-way trip); outside the bank
+    // the cell stays a focusable no-op and aria-disabled stays honest. The
+    // def-requiring action ladder (runBagAction) is still never wired. The
+    // DRAG source stays live, because a move works on indices alone; both
+    // drag arms and the touch drop's bag-cell move are pinned so the
+    // capability cannot silently vanish.
+    // The ladder decision itself moved into the pure core (bags_view.ts
+    // bagUnknownAction, unit-tested against bagItemAction's mode fixtures in
+    // tests/bags_window_unknown_cell.test.ts); the cell must read THAT one
+    // definition, never re-inline its own copy of the conjunction.
+    expect(body).toContain("bagUnknownAction(this.bagMode()) === 'bankDeposit'");
+    expect(body).toContain("if (!canDeposit) row.setAttribute('aria-disabled', 'true')");
+    expect(body).toContain('if (canDeposit) {');
+    expect(body).toContain('this.deps.world().bankDeposit(index)');
+    expect(body).toContain('this.showDepositQuantityPrompt(index, s,');
+    // The one listener sits INSIDE the canDeposit arm: no second click path.
+    const clickArms = body.split("addEventListener('click'").length - 1;
+    expect(clickArms).toBe(1);
+    // The touch drop SUPPRESSES the trailing synthetic click (the
+    // touch_item_drag contract): without this a reorganize drag with the
+    // bank open would also deposit on release. Pinned inside the unknown
+    // cell's own onDrop, before the target resolve.
+    const onDropAt = body.indexOf('onDrop: (x, y) => {');
+    expect(onDropAt).toBeGreaterThan(-1);
+    const suppressAt = body.indexOf('this.suppressNextClick = true', onDropAt);
+    expect(suppressAt).toBeGreaterThan(onDropAt);
+    expect(suppressAt).toBeLessThan(body.indexOf('resolveDropTargetAt', onDropAt));
+    expect(body.indexOf("addEventListener('click'")).toBeGreaterThan(
+      body.indexOf('if (canDeposit) {'),
+    );
+    expect(body).not.toContain('runBagAction');
+    expect(body).not.toContain('onclick');
+    // The def-free corner glyph and its aria flag survive the missing def: a
+    // bound or enchanted copy keeps its marker in both channels.
+    expect(body).toContain('bagInstanceGlyphKind(s.instance)');
+    expect(body).toContain('t(UNKNOWN_GLYPH_ARIA_KEYS[glyphKind], {');
+    // Never the known cell's keys: those drop the UNKNOWN signal.
+    expect(body).not.toContain('BAG_GLYPH_ARIA_KEYS[glyphKind]');
+    expect(body).toContain('row.draggable = !this.deps.tradeOpen() && !this.deps.vendorOpen()');
+    expect(body).toContain("row.addEventListener('dragstart'");
+    expect(body).toContain("row.addEventListener('dragend'");
+    expect(body).toContain('bindTouchItemDrag(row, {');
+    expect(body).toContain('this.dropOnBagCell(index >= 0 ? index : null, target.index)');
+    // Still a drop target in the pristine view, so re-parking other stacks
+    // around the unknown one keeps working.
+    expect(body).toContain('this.bindBagCellDrop(row, cell)');
+  });
+
+  it('styles the unknown cell without the click affordance (both CSS arms)', () => {
+    // The hover lift is suppressed outright; the cursor rule covers the
+    // non-draggable state only, because the later [draggable="true"] grab
+    // rule deliberately wins while the drag is available. Pinning both rules
+    // keeps that interplay from being "cleaned up" into a dead declaration.
+    expect(components).toContain('.bag-item[aria-disabled="true"]:hover');
+    expect(components).toMatch(
+      /\.bag-item\[aria-disabled="true"\]\s*\{\s*cursor:\s*var\(--cursor-arrow\);/,
+    );
+    expect(components).toMatch(
+      /\.bag-item\[draggable="true"\]\s*\{\s*cursor:\s*var\(--cursor-grab\);/,
+    );
+  });
+
+  it('never skips a slot in the grid fill (no continue of any wording)', () => {
+    // The shipped defect was `if (!item) continue`; a re-worded equivalent
+    // (`item == null`, a braced body) would evade a literal pin, so the whole
+    // fillGrid slice is held to zero continue statements.
+    const start = code.indexOf('private fillGrid(');
+    const end = code.indexOf('private buildStackCell(');
+    expect(start).toBeGreaterThan(-1);
+    expect(end).toBeGreaterThan(start);
+    expect(code.slice(start, end)).not.toContain('continue');
   });
 });

@@ -374,10 +374,14 @@ describe('i18n Localization Key Coverage', () => {
     delta: '+13',
     dps: '7.4',
     duration: '15s',
+    // The per-unit ask beside a stack's total (itemUi.market.buyConfirmBodyStack);
+    // a money string like `money` above, not a bare number.
+    each: '4 silver',
     form: 'Bear',
     fps: 60,
     guild: 'Night Watch',
     index: 2,
+    id: 'fine_example_ore',
     interactKey: 'F',
     moveKeys: 'W/A/S/D',
     questKey: 'L',
@@ -407,6 +411,7 @@ describe('i18n Localization Key Coverage', () => {
     range: 30,
     rank: 2,
     realm: 'Eastbrook',
+    requirement: 'Requires Mining 40',
     resource: 'Mana',
     seconds: 7,
     shown: 120,
