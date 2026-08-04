@@ -334,6 +334,32 @@ describe('bank_window: search / sort / deposit-all', () => {
     );
   });
 
+  it('gives the deposit-all button a tooltip clarifying which items it moves (issue #2132)', () => {
+    expect(painter).toContain("const depositTooltip = t('hudChrome.bank.depositAllTooltip')");
+    expect(painter).toContain('deposit.title = depositTooltip');
+  });
+
+  it('exposes the deposit-all clarification beyond hover-only title (PR #2715 review)', () => {
+    // A native `title` is hover-only in practice: unreliable on mobile touch and never
+    // read by a keyboard-only user. aria-describedby is announced by assistive tech on
+    // BOTH hover and keyboard focus, and needs no pointer at all, so it also covers a
+    // touch user who taps the button directly. The visually-hidden span carries the
+    // SAME localized text as the title so sighted and assistive-tech users read
+    // identical copy, and its id is wired to the button via aria-describedby.
+    expect(painter).toContain("deposit.setAttribute('aria-describedby', 'bank-deposit-all-desc')");
+    expect(painter).toContain("depositDesc.id = 'bank-deposit-all-desc'");
+    expect(painter).toContain("depositDesc.className = 'visually-hidden'");
+    expect(painter).toContain('depositDesc.textContent = depositTooltip');
+    expect(painter).toContain("const depositTooltip = t('hudChrome.bank.depositAllTooltip')");
+    expect(painter).toContain('tools.appendChild(depositDesc)');
+    // The description span must be appended AFTER the button so document order matches
+    // the visual/DOM relationship the aria-describedby id lookup assumes.
+    const buttonIdx = painter.indexOf('tools.appendChild(deposit);');
+    const descIdx = painter.indexOf('tools.appendChild(depositDesc);');
+    expect(buttonIdx).toBeGreaterThan(0);
+    expect(descIdx).toBeGreaterThan(buttonIdx);
+  });
+
   it('snapshots the plan against the click-time state (no mid-run re-read under mirror lag)', () => {
     const body = painter.slice(
       painter.indexOf('private onDepositAll(): void {'),
@@ -370,7 +396,10 @@ describe('bank_window: search / sort / deposit-all', () => {
     expect(body).toContain('active === searchEl');
     expect(body).toContain('searchEl.selectionStart');
     expect(body).toContain('fresh.setSelectionRange(searchFocus.start, searchFocus.end)');
-    expect(body).toContain('if (hadFocus && !searchFocus)');
+    // Non-search focus re-lands via the key ladder (the focused control by its
+    // data-focus-key, else [data-close]), never a blanket close-button yank.
+    expect(body).toContain('} else if (hadFocus) {');
+    expect(body).toContain('this.restoreControlFocus(el, focusKey)');
   });
 
   it('holds deposit-all disabled from send until the mirror echoes (double-click guard)', () => {
