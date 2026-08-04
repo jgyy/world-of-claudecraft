@@ -37,6 +37,12 @@ function directDamageEffect(effects: AbilityEffect[]) {
   return found;
 }
 
+function chainDamageEffect(effects: AbilityEffect[]) {
+  const found = effects.find((e) => e.type === 'chainDamage');
+  if (found?.type !== 'chainDamage') throw new Error('missing chainDamage effect');
+  return found;
+}
+
 function metaOf(sim: Sim, pid = sim.playerId) {
   const meta = sim.meta(pid);
   if (!meta) throw new Error('missing player meta');
@@ -189,6 +195,128 @@ describe('mastery/talent damage percent scales the whole hit, not just the base 
       const baseShield = shieldValue(baseline, spellPower);
       const boostedShield = shieldValue(boosted, spellPower);
       expect(boostedShield / baseShield).toBeCloseTo(1 + dmgPct, 1);
+    }
+  });
+
+  // Reviewer finding on PR #2757 (Rubsey/OSSBrain): chainDamage (Aura Surge /
+  // the paladin bounce ability, and Holy Shield's chained rider) had no
+  // scaleEffect case, and its SP/AP rider skipped talentDmgMult, so an
+  // ability-scoped or global spell-damage percent scaled the primary
+  // directDamage hit but silently dropped every bounce. Fixed by giving
+  // chainDamage the same scaleEffect min/max treatment as aoeDamage/
+  // directDamage, and passing talentDmgMult into its directHitBonus rider.
+  it('a chainDamage ability with an ability-scoped +30% scales base AND the Spell Power rider by the same 1.3 (pure math)', () => {
+    const dmgPct = 0.3;
+    const baseline = emptyModifiers();
+    const boosted = emptyModifiers();
+    // Aura Surge is talent-granted (talent_abilities_v2_a.ts), not part of the
+    // paladin base kit, so both variants need the grant to know it at all.
+    accumulateTalentEffect(baseline, { grant: { ability: 'aura_surge' } });
+    accumulateTalentEffect(boosted, { grant: { ability: 'aura_surge' } });
+    accumulateTalentEffect(boosted, { ability: [{ ability: 'aura_surge', dmgPct }] });
+
+    const baseAbility = abilitiesKnownAt('paladin', 20, baseline).find(
+      (a) => a.def.id === 'aura_surge',
+    );
+    const boostedAbility = abilitiesKnownAt('paladin', 20, boosted).find(
+      (a) => a.def.id === 'aura_surge',
+    );
+    if (!baseAbility || !boostedAbility) throw new Error('missing aura_surge');
+    const baseEff = chainDamageEffect(baseAbility.effects);
+    const boostedEff = chainDamageEffect(boostedAbility.effects);
+
+    // Before the fix, chainDamage had no scaleEffect case, so this bake was a
+    // no-op and boostedEff.min === baseEff.min.
+    expect(boostedEff.min).toBe(Math.round(baseEff.min * (1 + dmgPct)));
+
+    const spellPower = 900;
+    const castTime = boostedAbility.castTime;
+    const { dmgMult } = resolveTalentHitMult(boostedAbility.def, boosted);
+    expect(dmgMult).toBeCloseTo(1 + dmgPct, 10);
+
+    const baselineRider = directHitBonus(spellPower, baseAbility.def, castTime, true);
+    const fixedRider = directHitBonus(spellPower, boostedAbility.def, castTime, true, dmgMult);
+    const unfixedRider = directHitBonus(spellPower, boostedAbility.def, castTime, true); // mult defaults to 1
+
+    const baselineHit = baseEff.min + baselineRider;
+    const fixedHit = boostedEff.min + fixedRider;
+    const unfixedHit = boostedEff.min + unfixedRider;
+
+    expect(fixedHit / baselineHit).toBeCloseTo(1 + dmgPct, 2);
+    expect(unfixedHit / baselineHit).toBeLessThan(1 + dmgPct);
+  });
+
+  it('Aura Surge bounce hits (chainDamage) scale under a global spellDmgPct, matching the primary hit, end to end', () => {
+    const dmgPct = 0.3;
+
+    // Casts Hallowed Wall / holy_shield (directDamage primary + a chainDamage
+    // rider: 2 jumps, no falloff) against three hostile dummies laid out so
+    // hop selection (nearest distance, then lowest id) is deterministic, and
+    // returns the three resulting damage amounts: primary, then the two
+    // chainDamage bounces. `boost` layers a global spellDmgPct (the shape a
+    // mastery like Earthen Fury advertises) on top of the spec commit that
+    // grants holy_shield as the Protection signature, rather than replacing
+    // meta.talentMods wholesale, so the grant survives.
+    const castHits = (boost: boolean): number[] => {
+      const sim = new Sim({ seed: 41, playerClass: 'paladin', autoEquip: true });
+      sim.setPlayerLevel(20);
+      // holy_shield (Hallowed Wall) is granted as the Protection signature
+      // ability (talents.ts: spec.signature), not base kit by def alone.
+      if (!sim.setSpec('protection')) throw new Error('failed to set protection spec');
+      const meta = sim.meta(sim.playerId);
+      if (!meta) throw new Error('missing player meta');
+      const mods: TalentModifiers = { ...meta.talentMods };
+      if (boost) accumulateTalentEffect(mods, { global: { spellDmgPct: dmgPct } });
+      meta.talentMods = mods;
+      meta.known = abilitiesKnownAt(meta.cls, 20, mods) as typeof meta.known;
+      sim.player.spellPower = 400;
+      sim.player.resource = sim.player.maxResource;
+
+      const spawn = (id: number, dz: number): Entity => {
+        const m = createMob(id, MOBS.forest_wolf, 20, {
+          x: sim.player.pos.x,
+          y: sim.player.pos.y,
+          z: sim.player.pos.z + dz,
+        });
+        m.hostile = true;
+        m.maxHp = m.hp = 1_000_000;
+        (sim as unknown as { addEntity(e: Entity): void }).addEntity(m);
+        return m;
+      };
+      const primary = spawn(9401, 3);
+      spawn(9402, 5); // nearest to primary: first bounce
+      spawn(9403, 8); // nearest to the first bounce: second bounce
+
+      sim.targetEntity(primary.id);
+      sim.player.facing = Math.atan2(
+        primary.pos.x - sim.player.pos.x,
+        primary.pos.z - sim.player.pos.z,
+      );
+      sim.drainEvents();
+      sim.castAbility('holy_shield');
+      // tick() itself drains and returns the events queued so far (including
+      // the ones the instant cast above just emitted), so collect from its
+      // return value rather than a trailing drainEvents() call. Filter to the
+      // cast's OWN damage events (by ability name), since the same ticks also
+      // resolve the dummies' retaliation swings on the player.
+      const ticked: import('../src/sim/types').SimEvent[] = [];
+      for (let i = 0; i < 5; i++) ticked.push(...sim.tick());
+      const hits = ticked
+        .filter(
+          (e) => e.type === 'damage' && (e as { ability?: string }).ability === 'Hallowed Wall',
+        )
+        .map((e) => (e as unknown as { amount: number }).amount);
+      expect(hits).toHaveLength(3); // directDamage primary + 2 chainDamage bounces
+      return hits;
+    };
+
+    const baseHits = castHits(false);
+    const boostedHits = castHits(true);
+    expect(boostedHits).toHaveLength(baseHits.length);
+    for (let i = 0; i < baseHits.length; i++) {
+      // Before the fix, every bounce (i > 0) stayed at the unscaled baseline
+      // amount while only the primary hit (i === 0) moved.
+      expect(boostedHits[i] / baseHits[i]).toBeCloseTo(1 + dmgPct, 1);
     }
   });
 });

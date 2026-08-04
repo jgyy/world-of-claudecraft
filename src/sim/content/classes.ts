@@ -6363,6 +6363,12 @@ function scaleEffect(
         min: Math.round(eff.min * (eff.type === 'aoeHeal' ? healMult : dmgMult) + flat),
         max: Math.round(eff.max * (eff.type === 'aoeHeal' ? healMult : dmgMult) + flat),
       };
+    case 'chainDamage':
+      return {
+        ...eff,
+        min: Math.round(eff.min * dmgMult + flat),
+        max: Math.round(eff.max * dmgMult + flat),
+      };
     case 'aoeRoot':
       return { ...eff, min: Math.round(eff.min * dmgMult), max: Math.round(eff.max * dmgMult) };
     case 'drainTick':

@@ -1641,15 +1641,17 @@ export function runEffects(
         // hop selection is deterministic (nearest squared distance, then lowest id) and
         // the chain uses one shared damage roll without additional RNG draws.
         const origin = target ?? p;
-        // NOTE: unlike directDamage/aoeDamage, `chainDamage`'s own base (min/max)
-        // has no scaleEffect case in classes.ts, so it is not talent-scaled today
-        // either; leaving its SP/AP rider unscaled here keeps that pre-existing
-        // (separate) gap consistent instead of scaling only the rider.
+        // Like directDamage/aoeDamage, chainDamage's base (min/max) is talent
+        // scaled by its scaleEffect case in classes.ts, and talentDmgMult
+        // reaches the SP/AP rider here too, so the whole bounce (base roll
+        // plus rider), not just the primary hit, scales with global spell
+        // damage / mastery / talent multipliers.
         const chainSpBonus = directHitBonus(
           abilityScalingPower(p, ability),
           ability,
           res.castTime,
           true,
+          talentDmgMult,
         );
         // Resolve the shared primary amount once before applying hop falloff.
         // Fractional spell-power coefficients must not make later hops round
