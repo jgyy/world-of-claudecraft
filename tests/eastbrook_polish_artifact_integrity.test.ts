@@ -614,15 +614,15 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(
   POLISH_ROOT,
   'metadata/after-desktop-ultra.json',
 );
-// Re-pinned: src/render/renderer.ts is the rendererIntegration leaf of the polish
-// composite provenance, so gating the shapeshift-form visual swap on async compile
-// (#2571) in that file moves the metadata file's bytes (its polishProvenance block)
-// and the composite fingerprint it carries, the same way the compile-storm
-// gear/mount/base-visual gate fix re-pinned these before it.
+// Re-pinned after merging the live graphics rebuild (context recycle plus
+// profile-aware Eastbrook runtime inputs, the rendererIntegration leaf) onto the
+// base that already carries PR #2720's fence-removal layout evidence. The
+// accepted file still points at the same captured view; only its provenance
+// bytes follow the merged inputs.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  '33c844c2f31361c377506f384718ee2310da2bf1607b4c8724a56303beceff38';
+  'cca5690d8e306a68a247803dba40948921a6cb689a14825197c3e8794b960a8c';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  '2d4e6e0ee7168a0bf25a13ba1a2754f39e8c8f168e6f369ceb6588fe2bb9b2bb';
+  '707c6fbee3c5d9681bb717870125dc1632533b9bd0117b922fdf2767edf47952';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -924,7 +924,7 @@ describe('Eastbrook polish committed capture artifacts', () => {
   // implicit fact resting on two sha comparisons above.
   it('declares the frozen evidence triangle count as deliberately stale against the live contract', () => {
     expect(ACCEPTED_POLISH_V2_TOWN_CONTRACT.townTriangles).toBe(28_330);
-    expect(EASTBROOK_TOWN_CAPTURE_CONTRACTS['polish-v2'].townTriangles).toBe(29_110);
+    expect(EASTBROOK_TOWN_CAPTURE_CONTRACTS['polish-v2'].townTriangles).toBe(28_902);
   });
 
   it('pins the exact historical metadata inventory to every base capture and motion frame', () => {
@@ -1479,13 +1479,14 @@ describe('Eastbrook polish performance and contact evidence', () => {
     expect(acceptedFiles).toHaveLength(4);
     // Second-order seal, recomputed LAST in the re-mint recipe: it hashes the
     // performance evidence files, which carry the composite polish provenance.
-    // src/render/renderer.ts is the rendererIntegration leaf of that composite,
-    // so gating the shapeshift-form visual swap on async compile (#2571) moved
-    // the composite fingerprint and, with it, this seal follows. Every measured
-    // value (frame timings, draw stats, triangle and scenario numbers) is
-    // byte-identical, and no capture was retaken.
+    // After merging the live graphics rebuild (context recycle plus
+    // profile-aware Eastbrook runtime inputs, the rendererIntegration leaf)
+    // onto the base carrying PR #2720's fence-removal layout evidence, this
+    // seal follows the merged composite. Every measured value (frame timings,
+    // draw stats, triangle and scenario numbers) is byte-identical, neither
+    // parent's literal matched the merged tree, and no capture was retaken.
     expect(fingerprint.digest('hex')).toBe(
-      'e6115e14fe78b1bc52616624a72b0837858282c74bd3a3feab9fdd312a576454',
+      '44fbe6961a5d81e50111aee89a4601fdf304d05fc1c7c6b54d77c793fb6f28d6',
     );
   });
 

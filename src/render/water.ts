@@ -4,7 +4,7 @@ import type { ZoneDef } from '../sim/types';
 import { waterLevel } from '../sim/world';
 import { loadTexture } from './assets/loader';
 import { registerDeferredPreload } from './assets/preload';
-import { GFX, SUN_DIR, sharedUniforms } from './gfx';
+import { GFX, type GfxSettings, SUN_DIR, sharedUniforms } from './gfx';
 import { idleSlot, runIdleQueue } from './idle_queue';
 import { waterNormalish, waterNormalMaps } from './textures';
 import {
@@ -119,20 +119,35 @@ const APRON_TERRAIN_FADE_YARDS = 240;
 // preload only for the shader tier. Low/mobile uses generated canvas water
 // so it does not pay network/decode/upload cost for water detail.
 const WATER_TEX: Record<string, THREE.Texture> = {};
-function kickWaterTex(key: string, file: string): void {
-  registerDeferredPreload(() =>
-    loadTexture(`/textures/water/${file}`, { repeat: true }).then((tex) => {
+const waterTexTasks = new Map<string, Promise<void>>();
+function prepareWaterTex(key: string, file: string): Promise<void> {
+  if (WATER_TEX[key]) return Promise.resolve();
+  const existing = waterTexTasks.get(key);
+  if (existing) return existing;
+  const task = loadTexture(`/textures/water/${file}`, { repeat: true })
+    .then((tex) => {
       tex.anisotropy = 4;
       WATER_TEX[key] = tex;
-      return tex;
-    }),
-  );
+    })
+    .catch((err) => {
+      waterTexTasks.delete(key);
+      throw err;
+    });
+  waterTexTasks.set(key, task);
+  return task;
 }
-if (GFX.standardMaterials) {
-  kickWaterTex('n1', 'water_1_normal.jpg');
-  kickWaterTex('n2', 'water_2_normal.jpg');
-  kickWaterTex('broad', 'waternormals.jpg');
+
+/** Prepare the water texture channel selected by an explicit target profile. */
+export function prepareWaterProfileAssets(target: Readonly<GfxSettings>): Promise<void> {
+  if (!target.standardMaterials) return Promise.resolve();
+  return Promise.all([
+    prepareWaterTex('n1', 'water_1_normal.jpg'),
+    prepareWaterTex('n2', 'water_2_normal.jpg'),
+    prepareWaterTex('broad', 'waternormals.jpg'),
+  ]).then(() => undefined);
 }
+
+registerDeferredPreload(() => prepareWaterProfileAssets(GFX));
 
 export function hasWaterShaderAssets(): boolean {
   return Boolean(WATER_TEX.n1 && WATER_TEX.n2 && WATER_TEX.broad);
@@ -297,7 +312,10 @@ const WATER_FRAG = /* glsl */ `
     }
     vec3 N = normalize(vec3(nm + waveSlope * 9.5, 3.1).xzy);
     vec3 V = normalize(cameraPosition - vWPos);
-    float fresnel = 0.05 + 0.95 * pow(1.0 - max(dot(N, V), 0.0), 4.0);
+    // clamp(), not max(): max() leaves the upper bound open, and a normalized
+    // dot product that overshoots 1.0 by an ulp makes the pow() base negative,
+    // which is NaN. One NaN pixel becomes a black rectangle after the bloom blur.
+    float fresnel = 0.05 + 0.95 * pow(1.0 - clamp(dot(N, V), 0.0, 1.0), 4.0);
     // The seabed is hard clamped at ${WATER_SEABED_CLAMP_YARDS} yards. A linear ramp spends the
     // whole palette in the shallows, and an exponential is still climbing when
     // it reaches the clamp, which creases the colour field along the clamp

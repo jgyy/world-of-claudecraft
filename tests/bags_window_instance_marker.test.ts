@@ -53,6 +53,8 @@ function windowFor(inventory: InvSlot[]): HTMLElement {
     isMarketSell: () => false,
     isMailAttach: () => false,
     isBankOpen: () => false,
+    isPersonalBankTab: () => false,
+    isGuildBankTab: () => false,
     pendingPetFeed: () => false,
     closeVendor: noop,
     closeBank: noop,
@@ -73,6 +75,8 @@ function windowFor(inventory: InvSlot[]): HTMLElement {
     isTouchHud: () => false,
     markEquipDropTargets: noop,
     dropOnEquipSlot: noop,
+    dropOnActionSlot: noop,
+    dropOnActionRingSlot: noop,
     openItemActionMenu: noop,
   };
   new BagsWindow(deps).render();
