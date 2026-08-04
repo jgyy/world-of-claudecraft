@@ -853,8 +853,8 @@ export class BankWindow {
     // Disabled when the bags hold no material stack; a full bank is still actionable
     // (the click reports it), so it does not disable here.
     //
-    // The clarification (gathering tools and junk move too, not just tradeskill
-    // materials) is exposed two ways so it reaches touch and keyboard users, not
+    // The clarification (junk moves too, not just tradeskill materials, and
+    // gathering tools never do) is exposed two ways so it reaches touch and keyboard users, not
     // only a mouse-hover title: a `title` for desktop hover, PLUS a visually-hidden
     // aria-describedby span the button always carries. A screen reader announces
     // aria-describedby on both hover and keyboard focus, and reading it needs no

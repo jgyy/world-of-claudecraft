@@ -2261,7 +2261,7 @@ export const es_ES: EnTranslations = {
       "sortAria": "Ordenar los objetos del banco",
       "searchAria": "Buscar objetos del banco por nombre",
       "depositAll": "Depositar todos los materiales",
-      "depositAllTooltip": "Sends every crafting reagent, junk item, and gathering tool from your bags to the bank in one trip. Equipped gear, quest items, and consumables are never touched.",
+      "depositAllTooltip": "Sends every crafting reagent and junk item from your bags to the bank in one trip. Gathering tools, equipped gear, quest items, and consumables are never touched.",
       "depositAllDone": "Materiales depositados: {count}.",
       "depositAllFull": "Materiales depositados: {count}. El banco está ahora lleno.",
       "depositAllNone": "Banco lleno: no se depositó nada.",
