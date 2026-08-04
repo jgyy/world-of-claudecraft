@@ -4940,6 +4940,20 @@ export const GUIDE_DEEDS: GuideDeed[] = [
     "category": "chronicle",
     "renown": 10,
     "feat": false
+  },
+  {
+    "id": "dgn_rift",
+    "name": "Riftwalker",
+    "category": "dungeon",
+    "renown": 5,
+    "feat": false
+  },
+  {
+    "id": "dgn_rift_s_rank",
+    "name": "Rift Sovereign",
+    "category": "dungeon",
+    "renown": 25,
+    "feat": false
   }
 ];
 

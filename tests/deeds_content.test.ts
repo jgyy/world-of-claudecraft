@@ -61,9 +61,9 @@ const PREFIX_CATEGORY: Record<string, DeedCategory> = {
 };
 
 describe('audited launch totals (literals: update deliberately with the catalog)', () => {
-  it('ships exactly 238 deeds worth 2900 total Renown', () => {
-    expect(DEED_ORDER.length).toBe(238);
-    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(2900);
+  it('ships exactly 240 deeds worth 2930 total Renown', () => {
+    expect(DEED_ORDER.length).toBe(240);
+    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(2930);
   });
 
   it('ships the audited per-category counts', () => {
@@ -72,7 +72,7 @@ describe('audited launch totals (literals: update deliberately with the catalog)
     expect(byCategory).toEqual({
       progression: 50,
       combat: 10,
-      dungeon: 29,
+      dungeon: 31,
       delve: 13,
       chronicle: 37,
       collection: 28,
@@ -156,6 +156,10 @@ describe('audited launch totals (literals: update deliberately with the catalog)
       // shipped capstone the first reckoning never credited.
       'chr_drakemaw_broodlord',
       'chr_maw_matriarch',
+      // Rift coverage (procedural infinite-dungeon system, no fixed
+      // dungeonId to key a dungeonClears trigger against).
+      'dgn_rift',
+      'dgn_rift_s_rank',
     ]);
     expect(DEEDS.dgn_wildheart_basin.renown).toBe(10);
     expect(DEEDS.dgn_wildheart_basin_heroic.renown).toBe(10);
@@ -233,6 +237,23 @@ describe('audited launch totals (literals: update deliberately with the catalog)
       kind: 'quest',
       questId: 'q_dk_matriarch_of_the_maw',
     });
+  });
+
+  it('pins the Rift coverage: renown and trigger literals', () => {
+    expect(DEEDS.dgn_rift.category).toBe('dungeon');
+    expect(DEEDS.dgn_rift.renown).toBe(5);
+    expect(DEEDS.dgn_rift.trigger).toEqual({ kind: 'stat', stat: 'riftClears', count: 1 });
+    expect(DEEDS.dgn_rift.hidden ?? false).toBe(false);
+    expect(DEEDS.dgn_rift.feat ?? false).toBe(false);
+    expect(DEEDS.dgn_rift_s_rank.category).toBe('dungeon');
+    expect(DEEDS.dgn_rift_s_rank.renown).toBe(25);
+    expect(DEEDS.dgn_rift_s_rank.trigger).toEqual({
+      kind: 'stat',
+      stat: 'riftSRankClears',
+      count: 1,
+    });
+    expect(DEEDS.dgn_rift_s_rank.hidden ?? false).toBe(false);
+    expect(DEEDS.dgn_rift_s_rank.feat ?? false).toBe(false);
   });
 
   it('pins the professions additions: renown and trigger literals', () => {
@@ -406,7 +427,9 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // Re-baselined at the v0.35.0 base merge, which unions the brood pair with
   // the four Thornhollow Fields battleground deeds. No shipped trigger or
   // renown changed on either side.
-  const FROZEN_CATALOG_SHA256 = '675132ec4e311f46999c76ea1cb0763c8f556021600f5f1269fdd2504fe8e210';
+  // Re-baselined for Rift coverage (dgn_rift, dgn_rift_s_rank): two more
+  // appended deeds; no shipped trigger or renown changed on either side.
+  const FROZEN_CATALOG_SHA256 = 'd15314bb16d0d7f3eaa30ce9ec53f906a846b40b241def754a99ce967971b10c';
 
   it('every shipped deed keeps its trigger and renown unchanged', () => {
     const canonical = JSON.stringify(
@@ -600,7 +623,7 @@ describe('table shape', () => {
     // (forbidden: the order is an append-only determinism contract; new
     // deeds append). hid_codfather's index is pinned in the refresh test.
     expect(DEED_ORDER[0]).toBe('prog_first_steps');
-    expect(DEED_ORDER[DEED_ORDER.length - 1]).toBe('chr_maw_matriarch');
+    expect(DEED_ORDER[DEED_ORDER.length - 1]).toBe('dgn_rift_s_rank');
   });
 
   it('every entry key matches its id and its prefix matches its category', () => {
