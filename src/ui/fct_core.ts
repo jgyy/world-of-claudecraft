@@ -23,7 +23,10 @@
  * plus showSelfNote). damage-done splits into -ability vs -auto because the live color
  * differs by whether an ability fired; miss/dodge share the same color logic but stay
  * distinct kinds because their text differs (and the self-vs-other color split rides
- * the separate isSelf flag, not the kind).
+ * the separate isSelf flag, not the kind). damage-done-block / damage-taken-block are
+ * the shield-block counterpart of the plain damage-done and damage-taken kinds: a block
+ * still lands real (reduced) damage, unlike a full avoidance word, so it keeps the amount
+ * but reads with its own colour instead of a plain hit's.
  */
 export type FctKind =
   | 'miss'
@@ -32,7 +35,9 @@ export type FctKind =
   | 'evade'
   | 'damage-done-ability'
   | 'damage-done-auto'
+  | 'damage-done-block'
   | 'damage-taken'
+  | 'damage-taken-block'
   | 'absorb'
   | 'heal'
   | 'xp'
@@ -49,7 +54,9 @@ export type FctKind =
 export const DAMAGE_FCT_KINDS: ReadonlySet<FctKind> = new Set<FctKind>([
   'damage-done-ability',
   'damage-done-auto',
+  'damage-done-block',
   'damage-taken',
+  'damage-taken-block',
 ]);
 
 /** Whether `kind` is a combat-damage floater (a damage number, not a word/info floater). */
@@ -71,7 +78,9 @@ export type FctColorToken =
   | 'dodge-other'
   | 'damage-done-ability'
   | 'damage-done-auto'
+  | 'damage-done-block'
   | 'damage-taken'
+  | 'damage-taken-block'
   | 'absorb'
   | 'heal'
   | 'xp'

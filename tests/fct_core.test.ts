@@ -74,7 +74,9 @@ describe('describeFct: color token by kind + flags', () => {
     evade: { self: 'miss-self', other: 'miss-other' },
     'damage-done-ability': { self: 'damage-done-ability', other: 'damage-done-ability' },
     'damage-done-auto': { self: 'damage-done-auto', other: 'damage-done-auto' },
+    'damage-done-block': { self: 'damage-done-block', other: 'damage-done-block' },
     'damage-taken': { self: 'damage-taken', other: 'damage-taken' },
+    'damage-taken-block': { self: 'damage-taken-block', other: 'damage-taken-block' },
     absorb: { self: 'absorb', other: 'absorb' },
     heal: { self: 'heal', other: 'heal' },
     xp: { self: 'xp', other: 'xp' },
@@ -126,7 +128,9 @@ describe('describeFct: ttl is a pure function of kind (constant across kinds, ex
       'dodge',
       'damage-done-ability',
       'damage-done-auto',
+      'damage-done-block',
       'damage-taken',
+      'damage-taken-block',
       'absorb',
       'heal',
       'honor',
@@ -214,11 +218,13 @@ describe('describeFct: ClientWorld-vs-Sim parity', () => {
 });
 
 describe('isDamageFctKind: the combat-damage taxonomy (damage-number classifier)', () => {
-  it('classifies exactly the three damage-number kinds as damage', () => {
+  it('classifies exactly the five damage-number kinds as damage', () => {
     expect([...DAMAGE_FCT_KINDS].sort()).toEqual([
       'damage-done-ability',
       'damage-done-auto',
+      'damage-done-block',
       'damage-taken',
+      'damage-taken-block',
     ]);
     for (const kind of DAMAGE_FCT_KINDS) expect(isDamageFctKind(kind)).toBe(true);
   });
