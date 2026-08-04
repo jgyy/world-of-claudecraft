@@ -33,7 +33,7 @@ export interface ModerationHost<TSession extends ModerationSession> {
 
 export interface ModerationAudit {
   recordAction(input: {
-    action: 'kick' | 'kill' | 'jail' | 'unjail';
+    action: 'kick' | 'kill' | 'jail' | 'unjail' | 'spectate' | 'unspectate';
     accountId: number;
     adminAccountId: number;
     reason: string;
@@ -64,6 +64,8 @@ const RENAME_MESSAGE = 'A moderator requires one of your characters to be rename
 const NO_PERMISSION_MESSAGE = "You don't have permission to do that.";
 const JAIL_REASON = 'Jailed by in-game moderator command';
 const UNJAIL_REASON = 'Released by in-game moderator command';
+const SPECTATE_REASON = 'Spectated via in-game moderator command';
+const UNSPECTATE_REASON = 'Stopped spectating via in-game moderator command';
 
 type ModerationCommandKind = NonNullable<ReturnType<typeof parseModerationChatCommand>>['kind'];
 
@@ -126,7 +128,7 @@ export class ModerationService<TSession extends ModerationSession> {
         this.spectate(actor, command.name);
         break;
       case 'unspectate':
-        this.host.exitSpectate(actor);
+        this.unspectate(actor);
         break;
       case 'jail':
         this.jail(actor, command.name, command.minutes, command.reason, command.malformed);
@@ -256,7 +258,35 @@ export class ModerationService<TSession extends ModerationSession> {
       this.host.notice(actor, "You can't moderate that player.");
       return;
     }
-    this.host.enterSpectate(actor, target);
+    void this.audit
+      .recordAction({
+        action: 'spectate',
+        accountId: target.accountId,
+        adminAccountId: actor.accountId,
+        reason: SPECTATE_REASON,
+      })
+      .then(() => {
+        this.host.enterSpectate(actor, target);
+      })
+      .catch((err) => logger.error({ err }, 'failed to audit in-game spectate'));
+  }
+
+  // Unlike spectate (which targets a named player), exiting always ends the
+  // ACTOR's own spectate session: the service holds no state on who they were
+  // watching, so the audit row is recorded against the actor's own account
+  // rather than a resolved target.
+  private unspectate(actor: TSession): void {
+    void this.audit
+      .recordAction({
+        action: 'unspectate',
+        accountId: actor.accountId,
+        adminAccountId: actor.accountId,
+        reason: UNSPECTATE_REASON,
+      })
+      .then(() => {
+        this.host.exitSpectate(actor);
+      })
+      .catch((err) => logger.error({ err }, 'failed to audit in-game unspectate'));
   }
 
   // Jailing always carries an explicit sentence: /jail "<name>" <minutes>

@@ -247,7 +247,7 @@ describe('ModerationService', () => {
     expect(context.systemNotices).toEqual([]);
   });
 
-  it('refuses commands outside the actor permission set, per command', () => {
+  it('refuses commands outside the actor permission set, per command', async () => {
     const actorActOnly = admin(1, 11, ['moderation.act']);
     const actorSpectateOnly = admin(2, 22, ['moderation.spectate']);
     const target = player(3, 33);
@@ -274,10 +274,14 @@ describe('ModerationService', () => {
     expect(spectateContext.service.handleChatCommand(actorSpectateOnly, '/spectate Player3')).toBe(
       true,
     );
+    await Promise.resolve();
+    await Promise.resolve();
     expect(spectateContext.spectated).toEqual([{ moderator: actorSpectateOnly, target }]);
 
     // /unspectate follows the spectate permission, not moderation.act.
     expect(spectateContext.service.handleChatCommand(actorSpectateOnly, '/unspectate')).toBe(true);
+    await Promise.resolve();
+    await Promise.resolve();
     expect(spectateContext.unspectated).toEqual([actorSpectateOnly]);
     expect(actContext.service.handleChatCommand(actorActOnly, '/unspectate')).toBe(true);
     expect(actContext.unspectated).toEqual([]);
@@ -291,22 +295,68 @@ describe('ModerationService', () => {
     expect(canAttemptModerationCommands(player(1, 11))).toBe(false);
   });
 
-  it('starts, switches, and stops spectating without an audit write', () => {
+  it('audits spectate and unspectate before applying their live effect', async () => {
     const actor = admin(1, 11);
     const first = player(2, 22);
     const second = { ...player(3, 33), name: 'Mira Sun' };
     const context = setup({ actor, sessions: [first, second] });
 
-    context.service.handleChatCommand(actor, '/spectate player2');
-    context.service.handleChatCommand(actor, '/spectate "Mira Sun"');
-    context.service.handleChatCommand(actor, '/unspectate');
+    expect(context.service.handleChatCommand(actor, '/spectate player2')).toBe(true);
+    // The audit write is awaited, so nothing is applied synchronously.
+    expect(context.spectated).toEqual([]);
+    await Promise.resolve();
+    await Promise.resolve();
 
+    expect(context.recordAction).toHaveBeenNthCalledWith(1, {
+      action: 'spectate',
+      accountId: 22,
+      adminAccountId: 11,
+      reason: 'Spectated via in-game moderator command',
+    });
+    expect(context.spectated).toEqual([{ moderator: actor, target: first }]);
+
+    expect(context.service.handleChatCommand(actor, '/spectate "Mira Sun"')).toBe(true);
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(context.recordAction).toHaveBeenNthCalledWith(2, {
+      action: 'spectate',
+      accountId: 33,
+      adminAccountId: 11,
+      reason: 'Spectated via in-game moderator command',
+    });
     expect(context.spectated).toEqual([
       { moderator: actor, target: first },
       { moderator: actor, target: second },
     ]);
+
+    expect(context.service.handleChatCommand(actor, '/unspectate')).toBe(true);
+    expect(context.unspectated).toEqual([]);
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(context.recordAction).toHaveBeenNthCalledWith(3, {
+      action: 'unspectate',
+      accountId: 11,
+      adminAccountId: 11,
+      reason: 'Stopped spectating via in-game moderator command',
+    });
     expect(context.unspectated).toEqual([actor]);
-    expect(context.recordAction).not.toHaveBeenCalled();
+  });
+
+  it('does not apply spectate when the audit write fails', async () => {
+    const actor = admin(1, 11);
+    const target = player(2, 22);
+    const context = setup({ actor, sessions: [target] });
+    context.recordAction.mockRejectedValueOnce(new Error('db down'));
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    context.service.handleChatCommand(actor, '/spectate Player2');
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(context.spectated).toEqual([]);
+    consoleError.mockRestore();
   });
 
   it('visits and leaves jail without an audit write', () => {
