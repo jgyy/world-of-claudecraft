@@ -254,6 +254,7 @@ import {
 } from './entity_i18n';
 import { ERROR_LOG_COLOR, shouldMirrorErrorToast } from './error_toast_log';
 import { esc } from './esc';
+import { blockFctAmountText } from './fct_core';
 import { fctSpawnShape } from './fct_event';
 import { FctPainter } from './fct_painter';
 import { FocusManager, type FocusTrapHandle } from './focus_manager';
@@ -10632,7 +10633,7 @@ export class Hud {
               {
                 ...hitShape,
                 text: t('hud.combat.floatingBlock', {
-                  amount: `${ev.amount}${ev.crit ? '!' : ''}`,
+                  amount: blockFctAmountText(ev.amount, ev.crit, false),
                 }),
                 target: tgt,
               },
@@ -10656,7 +10657,7 @@ export class Hud {
               {
                 ...hitShape,
                 text: t('hud.combat.floatingBlock', {
-                  amount: `-${ev.amount}${ev.crit ? '!' : ''}`,
+                  amount: blockFctAmountText(ev.amount, ev.crit, true),
                 }),
                 target: tgt,
               },

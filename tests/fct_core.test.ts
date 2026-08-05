@@ -11,6 +11,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import {
+  blockFctAmountText,
   DAMAGE_FCT_KINDS,
   describeFct,
   FCT_ANCHOR_HEAD_OFFSET,
@@ -244,5 +245,17 @@ describe('isDamageFctKind: the combat-damage taxonomy (damage-number classifier)
       'self-note',
     ];
     for (const kind of nonDamage) expect(isDamageFctKind(kind)).toBe(false);
+  });
+});
+
+describe('blockFctAmountText: the shield-block floater keeps the incoming/outgoing sign convention', () => {
+  it('signs an incoming block negative, matching the damage-taken floater convention', () => {
+    expect(blockFctAmountText(12, false, true)).toBe('-12');
+    expect(blockFctAmountText(12, true, true)).toBe('-12!');
+  });
+
+  it('leaves an outgoing block unsigned, matching the damage-done floater convention', () => {
+    expect(blockFctAmountText(12, false, false)).toBe('12');
+    expect(blockFctAmountText(12, true, false)).toBe('12!');
   });
 });

@@ -197,6 +197,18 @@ function colorToken(kind: FctKind, isSelf: boolean): FctColorToken {
  * purpose: time-relative animation and ttl eviction are the driver's per-frame concern
  * (it stamps the spawn clock), which keeps this core deterministic with nothing to inject.
  */
+/**
+ * Format the numeric amount interpolated into `hud.combat.floatingBlock` for a shield
+ * block. A block still lands real damage, so it must follow the SAME sign convention
+ * as the plain damage-done / damage-taken floaters it sits next to: outgoing (`taken:
+ * false`) stays unsigned like `damageDone`, incoming (`taken: true`) is prefixed with
+ * `-` like `damageTaken`, so a blocked incoming hit never reads as a positive number.
+ */
+export function blockFctAmountText(amount: number, crit: boolean, taken: boolean): string {
+  const sign = taken ? '-' : '';
+  return `${sign}${amount}${crit ? '!' : ''}`;
+}
+
 export function describeFct(event: FctEvent, jitter01: number): FctDescriptor {
   const { pos, scale } = event.target;
   return {
