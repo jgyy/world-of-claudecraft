@@ -449,7 +449,7 @@ describe('scripted playthrough (one sim, live sites only)', () => {
 
     moveToNpc('tinker_gizzel'); // engineering: station_eastbrook_toolworks
     meta.craftThrottle.count = 0;
-    sim.addItem('thorium_ore', 4, pid);
+    sim.addItem('fine_iron_ore', 4, pid);
     sim.addItem('mithril_mining_pick', 1, pid);
     sim.craftItem('recipe_thorium_mining_pick', false, pid);
     expect(sim.lastCraftResult?.ok, 'engineering craft').toBe(true);

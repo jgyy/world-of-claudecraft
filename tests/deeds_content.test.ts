@@ -71,7 +71,7 @@ describe('audited launch totals (literals: update deliberately with the catalog)
     const byCategory: Record<string, number> = {};
     for (const d of ALL) byCategory[d.category] = (byCategory[d.category] ?? 0) + 1;
     expect(byCategory).toEqual({
-      progression: 64,
+      progression: 57,
       combat: 10,
       dungeon: 29,
       delve: 13,
@@ -354,15 +354,21 @@ describe('audited launch totals (literals: update deliberately with the catalog)
 
   it('pins the basic universal profession deeds (issue #2055): renown and trigger literals', () => {
     // Per-craft rare-tier milestones: exactly the crafts that ship a
-    // rare-or-better recipe today (re-derived from the real content tables,
-    // never hand-copied), each at standard renown with no reward. Enchanting
-    // has no item-def output to grade; jewelcrafting/inscription stay
+    // rare-or-better GEAR/CONSUMABLE recipe today (re-derived from the real
+    // content tables, never hand-copied), each at standard renown with no
+    // reward. Enchanting's only rare-quality outputs are the tool-effect
+    // charms (gatherers_cache/artisans_eye, TOOL_EFFECT_RECIPES): consumable
+    // recharge implements, not the graded gear/food/potion class this deed
+    // rewards, so they are excluded from the derivation the same way the
+    // deed's own comment excludes enchanting; jewelcrafting/inscription stay
     // deferred with prog_ringwright (no live recipes).
     const rareTierCrafts = [...new Set(ALL_RECIPES.map((r) => r.professionId))]
       .filter((craftId) =>
         ALL_RECIPES.some((r) => {
           if (r.professionId !== craftId) return false;
-          const quality = ITEMS[r.resultItemId]?.quality;
+          const item = ITEMS[r.resultItemId];
+          if (item?.use?.type === 'toolEffect') return false;
+          const quality = item?.quality;
           return quality === 'rare' || quality === 'epic' || quality === 'legendary';
         }),
       )
