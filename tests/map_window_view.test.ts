@@ -13,6 +13,7 @@ import { describe, expect, it } from 'vitest';
 import {
   CAMPS,
   DELVE_X_MIN,
+  GATHER_NODES,
   PROPS,
   QUESTS,
   STRIP_MAX_X,
@@ -27,8 +28,11 @@ import {
   type ZonePropsDef,
 } from '../src/sim/types';
 import type { Decoration } from '../src/sim/world';
+import { isNodeToolLockedFor } from '../src/ui/gathering_view';
 import {
   buildOverworldMapModel,
+  gatherNodeMarkerAt,
+  MAP_GATHER_NODE_HIT_RADIUS,
   MAP_MAX_ZOOM,
   mapBuildingMarkerKind,
   mapWindowMode,
@@ -104,6 +108,15 @@ function makeOverworldWorld(
       ],
     },
   };
+  // The quest-marker inputs both worlds expose (the phase 23 classifier):
+  // questsDone always, and the crafting identity whose cadenceBlockedQuests
+  // mirror drives the cooldown variant. The sim shape carries the fuller
+  // identity a live Sim builds; the client shape carries only what the cprof
+  // mirror guarantees, so the core must not read past it.
+  const craftingIdentity =
+    shape === 'sim'
+      ? { version: 1, synced: true, attunedPairs: [], cadenceBlockedQuests: [] }
+      : { version: 1, synced: false, cadenceBlockedQuests: [] };
   return {
     player,
     entities,
@@ -113,6 +126,14 @@ function makeOverworldWorld(
     playerId: 1,
     questState: (q: string) => (q === GIVER_QUEST.id ? 'available' : 'unavailable'),
     questLog,
+    questsDone: new Set<string>(),
+    craftingIdentity,
+    // Gather-node marker inputs (mirrors minimap_markers fixture): inventory
+    // + harvestability so a zone with real GATHER_NODES content does not throw
+    // on the tool scan / ready read the core runs for every in-zone node.
+    inventory: [],
+    gatheringProficiency: {},
+    nodeHarvestableByMe: () => true,
   } as unknown as IWorld;
 }
 
@@ -419,11 +440,11 @@ describe('buildOverworldMapModel (pure draw model)', () => {
     const model = buildOverworldMapModel(input(makeOverworldWorld('sim'), LABELS_ZOOM));
     expect(model.player).not.toBeNull();
     expect(model.player?.angle).toBe(-0.5);
-    // the npc has an available quest from its own giver -> one '!' (not ready) glyph
+    // the npc has an available quest from its own giver -> one gold '!' glyph
     expect(model.npcs).toHaveLength(1);
-    expect(model.npcs[0].ready).toBe(false);
+    expect(model.npcs[0].kind).toBe('available');
     // the glyph carries its quest identity for the hover tooltip
-    expect(model.npcs[0].quests).toEqual([{ questId: GIVER_QUEST.id, ready: false }]);
+    expect(model.npcs[0].quests).toEqual([{ questId: GIVER_QUEST.id, kind: 'available' }]);
   });
 
   it('hit-tests the nearest glyph within the hover radius (and misses outside it)', () => {
@@ -444,8 +465,8 @@ describe('buildOverworldMapModel (pure draw model)', () => {
     world.entities.delete(2); // the seeded giver npc; only the player remains
     const model = buildOverworldMapModel(input(world as unknown as IWorld, 1));
     expect(model.npcs).toHaveLength(1);
-    expect(model.npcs[0].ready).toBe(false);
-    expect(model.npcs[0].quests).toEqual([{ questId: GIVER_QUEST.id, ready: false }]);
+    expect(model.npcs[0].kind).toBe('available');
+    expect(model.npcs[0].quests).toEqual([{ questId: GIVER_QUEST.id, kind: 'available' }]);
   });
 
   it("marks the glyph ready when a turn-in is ready (the '?' branch, not '!')", () => {
@@ -462,7 +483,43 @@ describe('buildOverworldMapModel (pure draw model)', () => {
     world.questState = (q) => (q === READY_QUEST.id ? 'ready' : 'unavailable');
     const model = buildOverworldMapModel(input(world as unknown as IWorld, LABELS_ZOOM));
     expect(model.npcs).toHaveLength(1);
-    expect(model.npcs[0].ready).toBe(true);
+    expect(model.npcs[0].kind).toBe('ready');
+  });
+
+  it('classifies the repeat and cooldown variants identically for both world shapes', () => {
+    // Acceptance (a)'s both-worlds arm at the map surface: a real cadenced
+    // work order (giver in this test's zone), driven through a Sim-shaped
+    // and a ClientWorld-mirror-shaped stub. After one completion the offer
+    // is the blue repeat glyph; inside the window it is the dimmed cooldown
+    // glyph; and a non-repeatable quest stays pixel-identical gold
+    // (acceptance (b)'s negative, the GIVER_QUEST arm above). This pins the
+    // CLASSIFIER over each world's data shape; true world-to-world parity
+    // of the inputs rests on the online cadence/attunement suites pinning
+    // the qdone and cprof mirrors.
+    const workOrder = QUESTS['q_prof_workorder_forge'];
+    expect(workOrder.repeatable).toBe(true);
+    for (const shape of ['sim', 'client'] as const) {
+      const world = makeOverworldWorld(shape) as unknown as {
+        questsDone: Set<string>;
+        craftingIdentity: { cadenceBlockedQuests: string[] };
+        questState: (q: string) => string;
+      };
+      world.questsDone = new Set([workOrder.id]);
+      world.questState = (q) => (q === workOrder.id ? 'available' : 'unavailable');
+      const offered = buildOverworldMapModel(input(world as unknown as IWorld, 1));
+      const offeredGlyph = offered.npcs.find((n) =>
+        n.quests.some((q) => q.questId === workOrder.id),
+      );
+      expect(offeredGlyph?.kind, `${shape}: offered again`).toBe('repeat');
+
+      world.questState = () => 'unavailable';
+      world.craftingIdentity.cadenceBlockedQuests = [workOrder.id];
+      const blocked = buildOverworldMapModel(input(world as unknown as IWorld, 1));
+      const blockedGlyph = blocked.npcs.find((n) =>
+        n.quests.some((q) => q.questId === workOrder.id),
+      );
+      expect(blockedGlyph?.kind, `${shape}: inside the window`).toBe('cooldown');
+    }
   });
 
   it('projects only current-zone POIs and portals by the zone-local transform', () => {
@@ -702,6 +759,53 @@ describe('active-quest objective areas (the classic POI blobs)', () => {
     for (const a of model.questAreas) expect(a.numbers).toEqual([1]);
   });
 
+  it('plots one blob per gather-node cluster, and the zone cull keeps them', () => {
+    // The gather branch of questObjectiveAreas is the one that groups a flat node
+    // table into clusters (quest_targets.ts pushNodeCluster), and it is the one
+    // this pure core can silently swallow: the zone-band cull here reads a
+    // circle's CENTRE, so a cluster centroid landing outside the committed band
+    // drops the blob from every map with nothing red. Nothing exercised a gather
+    // objective through this core before, so nothing would have caught it.
+    const gatherQuest = Object.values(QUESTS).find((q) =>
+      q.objectives.some((o) => o.type === 'gather' && o.nodeType === 'ore'),
+    );
+    expect(gatherQuest, 'expected a quest with an ore gather objective').toBeDefined();
+    if (!gatherQuest) return;
+    const log: Map<string, QuestProgress> = new Map([
+      [
+        gatherQuest.id,
+        {
+          questId: gatherQuest.id,
+          counts: gatherQuest.objectives.map(() => 0),
+          state: 'active' as const,
+        },
+      ],
+    ]);
+    const model = buildOverworldMapModel(input(makeOverworldWorld('sim', log), 1));
+    // Both IWorld shapes, through the clustering path specifically. The existing
+    // two-shape identity test above runs with an EMPTY quest log, so it never
+    // reaches the gather branch at all; this makes the host-parity claim for that
+    // branch real rather than structural.
+    const client = buildOverworldMapModel(input(makeOverworldWorld('client', log), 1));
+    expect(client.questAreas).toEqual(model.questAreas);
+    const zoneOre = GATHER_NODES.filter(
+      (n) => n.type === 'ore' && n.pos.z >= ZONE.zMin && n.pos.z < ZONE.zMax,
+    );
+    expect(zoneOre.length).toBeGreaterThan(1);
+    // Survived the cull, and fewer blobs than nodes: a per-node implementation
+    // would put one on each, which is the smear this replaced.
+    expect(model.questAreas.length).toBeGreaterThan(0);
+    expect(
+      model.questAreas.length,
+      `${model.questAreas.length} blobs for ${zoneOre.length} in-zone ore nodes`,
+    ).toBeLessThan(zoneOre.length);
+    for (const a of model.questAreas) {
+      expect(Number.isFinite(a.mx)).toBe(true);
+      expect(Number.isFinite(a.my)).toBe(true);
+      expect(a.radius).toBeGreaterThan(0);
+    }
+  });
+
   it('hit-tests a hovered point to the objective identities under it (deduped)', () => {
     const model = buildOverworldMapModel(input(makeOverworldWorld('sim', activeLog()), 1));
     const a = model.questAreas[0];
@@ -715,5 +819,262 @@ describe('active-quest objective areas (the classic POI blobs)', () => {
     // overlapping duplicates never repeat a ref
     const dup = questAreaObjectivesAt([...model.questAreas, ...model.questAreas], a.mx, a.my);
     expect(dup).toEqual(inside);
+  });
+});
+
+// Zone-map gather nodes: every authored ore/wood/herb in the committed zone,
+// at full-zone zoom (the surface the player asked for) and when zoomed in.
+// Distinct from the quest-area gather blobs above (those only mark active
+// collect objectives and cluster them).
+describe('zone-map gather nodes', () => {
+  const zoneNodes = GATHER_NODES.filter((n) => n.zoneId === ZONE.id);
+
+  it('emits every in-zone node at full-zone zoom (zoom 1), with both world shapes equal', () => {
+    expect(zoneNodes.length).toBeGreaterThan(0);
+    const sim = buildOverworldMapModel(input(makeOverworldWorld('sim'), 1));
+    const client = buildOverworldMapModel(input(makeOverworldWorld('client'), 1));
+    expect(sim.gatherNodes).toEqual(client.gatherNodes);
+    expect(sim.gatherNodes).toHaveLength(zoneNodes.length);
+    // All three profession types appear (eastbrook has six of each).
+    const types = new Set(sim.gatherNodes.map((n) => n.type));
+    expect(types).toEqual(new Set(['ore', 'wood', 'herb']));
+    // Toolless viewer: every node is locked (#2343), and the stub marks ready.
+    for (const n of sim.gatherNodes) {
+      expect(n.locked).toBe(true);
+      expect(n.ready).toBe(true);
+      expect(n.nodeId).toMatch(/^(ore|wood|herb)_/);
+      expect(Number.isFinite(n.mx)).toBe(true);
+      expect(Number.isFinite(n.my)).toBe(true);
+    }
+  });
+
+  it('projects a known node to the world-region transform (+X is map-left)', () => {
+    const vein = zoneNodes.find((n) => n.id === 'ore_eastbrook_1');
+    expect(vein, 'ore_eastbrook_1 is the Copper Dig pin').toBeDefined();
+    if (!vein) return;
+    const model = buildOverworldMapModel(input(makeOverworldWorld('sim'), 1));
+    const marker = model.gatherNodes.find((n) => n.nodeId === vein.id);
+    expect(marker).toBeDefined();
+    if (!marker) return;
+    const r = model.region;
+    expect(marker.mx).toBeCloseTo(((r.maxX - vein.pos.x) / (r.maxX - r.minX)) * CANVAS, 6);
+    expect(marker.my).toBeCloseTo(((r.maxZ - vein.pos.z) / (r.maxZ - r.minZ)) * CANVAS, 6);
+  });
+
+  it('composes ready and locked independently (cooldown can still be unlocked)', () => {
+    const world = makeOverworldWorld('sim') as unknown as {
+      inventory: { itemId: string; count: number }[];
+      gatheringProficiency: Record<string, number>;
+      nodeHarvestableByMe: (id: string) => boolean;
+    };
+    // A copper pick (tier 1 mining) unlocks ore; wood AND herb stay locked
+    // without their tools (each profession resolves its own tool scan, so a
+    // wrong NODE_HARVEST_TABLE professionId shows here). Mark the first
+    // eastbrook ore on cooldown for this viewer.
+    world.inventory = [{ itemId: 'copper_mining_pick', count: 1 }];
+    world.gatheringProficiency = { mining: 1 };
+    const coolId = 'ore_eastbrook_1';
+    world.nodeHarvestableByMe = (id) => id !== coolId;
+    const model = buildOverworldMapModel(input(world as unknown as IWorld, 1));
+    const ore = model.gatherNodes.filter((n) => n.type === 'ore');
+    const wood = model.gatherNodes.filter((n) => n.type === 'wood');
+    const herb = model.gatherNodes.filter((n) => n.type === 'herb');
+    expect(ore.length).toBeGreaterThan(0);
+    expect(wood.length).toBeGreaterThan(0);
+    expect(herb.length).toBeGreaterThan(0);
+    for (const n of ore) expect(n.locked).toBe(false);
+    for (const n of wood) expect(n.locked).toBe(true);
+    for (const n of herb) expect(n.locked).toBe(true);
+    const cooled = model.gatherNodes.find((n) => n.nodeId === coolId);
+    expect(cooled).toMatchObject({ ready: false, locked: false, type: 'ore' });
+  });
+
+  it('reads each node tier through the wield gate (mixed-tier zone, both boundary sides)', () => {
+    const mirefen = ZONES[1];
+    expect(mirefen.id, 'the mixed-tier zone this test leans on').toBe('mirefen_marsh');
+    const build = (
+      inventory: { itemId: string; count: number }[],
+      proficiency: Record<string, number> | undefined,
+    ) => {
+      const world = makeOverworldWorld('sim') as unknown as {
+        inventory: unknown;
+        gatheringProficiency: unknown;
+      };
+      world.inventory = inventory;
+      world.gatheringProficiency = proficiency;
+      return buildOverworldMapModel({
+        ...input(world as unknown as IWorld, 1),
+        zone: mirefen,
+      });
+    };
+    const lockOf = (model: { gatherNodes: { nodeId: string; locked: boolean }[] }, id: string) =>
+      model.gatherNodes.find((n) => n.nodeId === id)?.locked;
+    // A tier-1 pick works tier-1 veins only: the per-node tier read.
+    const copper = build([{ itemId: 'copper_mining_pick', count: 1 }], { mining: 1 });
+    expect(lockOf(copper, 'ore_mirefen_1')).toBe(false);
+    expect(lockOf(copper, 'ore_mirefen_t2')).toBe(true);
+    // An iron (tier 2) pick wields at proficiency 40 exactly (the shipped
+    // TIER2 wield floor, pinned as a literal)...
+    const wields = build([{ itemId: 'iron_mining_pick', count: 1 }], { mining: 40 });
+    expect(lockOf(wields, 'ore_mirefen_1')).toBe(false);
+    expect(lockOf(wields, 'ore_mirefen_t2')).toBe(false);
+    // ...and is wield-filtered out at 39: no usable tool at all, so even the
+    // tier-1 veins lock (the wield arm, not the tier compare).
+    const under = build([{ itemId: 'iron_mining_pick', count: 1 }], { mining: 39 });
+    expect(lockOf(under, 'ore_mirefen_1')).toBe(true);
+    expect(lockOf(under, 'ore_mirefen_t2')).toBe(true);
+    // A client mirror before its first gprof delta has NO proficiency map at
+    // all: the read fails closed (coerced to 0), never open.
+    const preGprof = build([{ itemId: 'iron_mining_pick', count: 1 }], undefined);
+    expect(lockOf(preGprof, 'ore_mirefen_1')).toBe(true);
+    expect(lockOf(preGprof, 'ore_mirefen_t2')).toBe(true);
+  });
+
+  it('locked agrees with the minimap classifier for every in-zone node', () => {
+    // The map inlines the memoized lock resolve; isNodeToolLockedFor is the
+    // classifier the minimap and the node tooltip share. A mixed inventory
+    // (ore unlocked, wood/herb locked) keeps both arms of the comparison live.
+    const world = makeOverworldWorld('sim') as unknown as {
+      inventory: { itemId: string; count: number }[];
+      gatheringProficiency: Record<string, number>;
+    };
+    world.inventory = [{ itemId: 'copper_mining_pick', count: 1 }];
+    world.gatheringProficiency = { mining: 1 };
+    const model = buildOverworldMapModel(input(world as unknown as IWorld, 1));
+    const locks = new Set(model.gatherNodes.map((n) => n.locked));
+    expect(locks).toEqual(new Set([true, false]));
+    for (const marker of model.gatherNodes) {
+      const content = GATHER_NODES.find((c) => c.id === marker.nodeId);
+      expect(content).toBeDefined();
+      if (!content) continue;
+      expect(marker.locked, `${marker.nodeId} lock agrees with isNodeToolLockedFor`).toBe(
+        isNodeToolLockedFor(world as unknown as IWorld, content),
+      );
+    }
+  });
+
+  it('memoizes the tool scan per profession and reads proficiency once per build', () => {
+    let inventoryReads = 0;
+    let proficiencyReads = 0;
+    const world = makeOverworldWorld('sim') as unknown as Record<string, unknown>;
+    Object.defineProperty(world, 'inventory', {
+      get: () => {
+        inventoryReads += 1;
+        return [];
+      },
+    });
+    Object.defineProperty(world, 'gatheringProficiency', {
+      get: () => {
+        proficiencyReads += 1;
+        return {};
+      },
+    });
+    const model = buildOverworldMapModel(input(world as unknown as IWorld, 1));
+    // The loop genuinely crossed every node (the count proves the scan ran).
+    expect(model.gatherNodes).toHaveLength(zoneNodes.length);
+    // One viewerUsableToolTier resolve per profession, never per node.
+    expect(inventoryReads).toBe(3);
+    // The proficiency map is hoisted beside the memo: one read for a defined
+    // map like this stub's. (An undefined getter cannot stick in `??=` and
+    // re-reads per profession; that pre-gprof arm is covered by the wield
+    // test above, and correctness there is the fail-closed lock.)
+    expect(proficiencyReads).toBe(1);
+  });
+
+  it('hit-tests the nearest gather icon and misses outside the radius', () => {
+    const model = buildOverworldMapModel(input(makeOverworldWorld('sim'), 1));
+    // Copper Dig ores sit on top of each other at zone scale, so pick the
+    // node that is farthest from every other gather marker: a tiny offset
+    // then still resolves to THAT icon, not a neighbour.
+    let node = model.gatherNodes[0];
+    let bestMin = -1;
+    for (const candidate of model.gatherNodes) {
+      let minD2 = Number.POSITIVE_INFINITY;
+      for (const other of model.gatherNodes) {
+        if (other === candidate) continue;
+        const dx = other.mx - candidate.mx;
+        const dy = other.my - candidate.my;
+        minD2 = Math.min(minD2, dx * dx + dy * dy);
+      }
+      if (minD2 > bestMin) {
+        bestMin = minD2;
+        node = candidate;
+      }
+    }
+    expect(gatherNodeMarkerAt(model.gatherNodes, node.mx, node.my)).toBe(node);
+    expect(gatherNodeMarkerAt(model.gatherNodes, node.mx + 2, node.my - 2)).toBe(node);
+    // Pin the radius itself, both sides of the boundary (an isolated node, so
+    // no neighbour can absorb the outside probe).
+    expect(
+      gatherNodeMarkerAt(model.gatherNodes, node.mx + MAP_GATHER_NODE_HIT_RADIUS - 0.5, node.my),
+    ).toBe(node);
+    expect(
+      gatherNodeMarkerAt(model.gatherNodes, node.mx + MAP_GATHER_NODE_HIT_RADIUS + 0.5, node.my),
+    ).toBeNull();
+    expect(gatherNodeMarkerAt([], node.mx, node.my)).toBeNull();
+  });
+
+  it('resolves the NEAREST icon in a tight field (not the first, not the last)', () => {
+    const model = buildOverworldMapModel(input(makeOverworldWorld('sim'), 1));
+    // The three Copper Dig veins project ~7.8px apart at zone scale, so a
+    // probe near one keeps its neighbours inside the radius too: first-wins,
+    // last-wins, and nearest-wins genuinely disagree here.
+    const first = model.gatherNodes.find((n) => n.nodeId === 'ore_eastbrook_1');
+    const last = model.gatherNodes.find((n) => n.nodeId === 'ore_eastbrook_3');
+    expect(first).toBeDefined();
+    expect(last).toBeDefined();
+    if (!first || !last) return;
+    const d2 = (ax: number, ay: number, bx: number, by: number) =>
+      (ax - bx) * (ax - bx) + (ay - by) * (ay - by);
+    const r2 = MAP_GATHER_NODE_HIT_RADIUS * MAP_GATHER_NODE_HIT_RADIUS;
+    // Fixture guard: each probe keeps BOTH veins in radius, so the scan has a
+    // real choice to make (a drifted content layout would silently defuse
+    // this test without it).
+    const probeFirst = { mx: first.mx + 1, my: first.my + 1 };
+    const probeLast = { mx: last.mx + 1, my: last.my + 1 };
+    expect(d2(probeFirst.mx, probeFirst.my, last.mx, last.my)).toBeLessThanOrEqual(r2);
+    expect(d2(probeLast.mx, probeLast.my, first.mx, first.my)).toBeLessThanOrEqual(r2);
+    // Biased toward the FIRST vein in model order: a last-wins scan fails.
+    expect(gatherNodeMarkerAt(model.gatherNodes, probeFirst.mx, probeFirst.my)).toBe(first);
+    // Biased toward the LAST vein in the field: a first-wins scan fails.
+    expect(gatherNodeMarkerAt(model.gatherNodes, probeLast.mx, probeLast.my)).toBe(last);
+  });
+
+  it('drops every node when only the committed zone id differs (the id filter alone)', () => {
+    // Same frame as Eastbrook, a different committed zone id: every Eastbrook
+    // node still projects inside the view rect, so ONLY the zone-id guard can
+    // empty this model. No authored foreign node currently falls inside the
+    // Eastbrook frame, so the leak test below cannot see a deleted id filter;
+    // this one can.
+    const model = buildOverworldMapModel({
+      ...input(makeOverworldWorld('sim'), 1),
+      zone: { ...ZONE, id: ZONES[1].id },
+    });
+    expect(model.gatherNodes).toEqual([]);
+  });
+
+  it('culls nodes outside the zoomed view rect (pan pays only for what is on screen)', () => {
+    // zoom 3 framed at the player (0, 0): the visible square is 120yd wide
+    // and the cull pads it by the marker margin. The Copper Dig west field
+    // stays inside the pad; the far-west veins and the outlying wood / herb
+    // spawns drop.
+    const model = buildOverworldMapModel(input(makeOverworldWorld('sim'), 3));
+    const kept = new Set(model.gatherNodes.map((n) => n.nodeId));
+    expect(kept.has('wood_eastbrook_2')).toBe(true); // (-57, -6): in view
+    expect(kept.has('ore_eastbrook_1')).toBe(true); // (-70, -53): inside the pad
+    expect(kept.has('ore_eastbrook_4')).toBe(false); // (-92, -48): west of the pad
+    expect(kept.has('herb_eastbrook_4')).toBe(false); // (23, -99): south of the pad
+    expect(model.gatherNodes).toHaveLength(8);
+  });
+
+  it('never leaks nodes from another zone into the committed zone model', () => {
+    const foreign = GATHER_NODES.find((n) => n.zoneId !== ZONE.id);
+    expect(foreign).toBeDefined();
+    const model = buildOverworldMapModel(input(makeOverworldWorld('sim'), 1));
+    expect(model.gatherNodes.some((n) => n.nodeId === foreign?.id)).toBe(false);
+    for (const n of model.gatherNodes) {
+      const content = GATHER_NODES.find((c) => c.id === n.nodeId);
+      expect(content?.zoneId).toBe(ZONE.id);
+    }
   });
 });

@@ -6,6 +6,8 @@
     "GATE_MAX_WORKERS",
     "GATE_WORKER_TIER",
     "WOC_SKIP_DEP_SYNC",
+    "GATE_SHADOW_LOG",
+    "GATE_SELECT_BASE",
     "WOC_SKIP_PRETEST",
     "I18N_RELEASE_TIER",
     "CI",
@@ -61,10 +63,12 @@
         "src/**",
         "server/**",
         "headless/**",
+        "bot/**",
         "tests/**",
         "private/**",
         "tsconfig.json",
         "tsconfig.admin.json",
+        "tsconfig.bot.json",
         "package.json"
       ],
       "outputs": ["node_modules/.cache/tsc/**"]
@@ -83,6 +87,10 @@
         "package.json"
       ],
       "outputs": ["dist-server/**"]
+    },
+    "build:bot": {
+      "inputs": ["bot/**", "src/**", "scripts/build_bot.mjs", "tsconfig.json", "package.json"],
+      "outputs": ["dist-bot/**"]
     },
     "build:bundle": {
       "dependsOn": ["i18n:gen", "wiki:content"],

@@ -1,3 +1,4 @@
+import { WORLD_SEED } from '../../sim/world_seed';
 // The 3D in-world editor viewport. Reuses the real game Renderer over a frozen Sim
 // built from the editor's CustomMap, drives a free editor camera, and applies edits
 // through the Renderer's live editing APIs: chunk-local terrain rebuilds during a
@@ -84,7 +85,7 @@ export class Editor3DViewport {
   private raf = 0;
   private lastT = 0;
   private disposed = false;
-  private seed = 20061;
+  private seed = WORLD_SEED;
   private map: CustomMap;
   // Bumped by start()/reload()/dispose(); an in-flight start() that awoke with a
   // stale token abandons, so a reload during the assets await never leaves two
@@ -183,7 +184,12 @@ export class Editor3DViewport {
       playerClass: 'warrior',
       world: { ...world, placements: undefined },
     });
-    this.renderer = new Renderer(this.sim, this.canvas, this.nameplates);
+    // Polite far-vista pacing: this construction happens against live editor
+    // frames on every document load, never behind an opaque curtain, so the
+    // eager macrotask build lane must stay off (see RendererCreateOptions).
+    this.renderer = new Renderer(this.sim, this.canvas, this.nameplates, {
+      eagerFarVista: false,
+    });
     this.renderer.placedAssets.rebuildAll(placementsToRenderAssets(this.map.placements), true);
     // A fresh build reflects the whole document: drop any hidden-time debts
     // (before the spawn ring below, which must build even while hidden).
@@ -611,17 +617,16 @@ export class Editor3DViewport {
     cancelAnimationFrame(this.raf);
     this.raf = 0;
     if (this.renderer) {
-      try {
-        // Stop terrain streaming FIRST: it owns a pool of module workers that
-        // nothing else tears down when the whole renderer is discarded.
-        this.renderer.cancelTerrainStreaming();
-        this.renderer.editorCam = null;
-        this.renderer.webgl.setAnimationLoop(null);
-        this.renderer.webgl.dispose();
-        this.renderer.webgl.forceContextLoss();
-      } catch {
-        // GL teardown is best-effort.
-      }
+      const renderer = this.renderer;
+      renderer.editorCam = null;
+      void renderer
+        .shutdown()
+        .then(({ context }) => {
+          context.getExtension('WEBGL_lose_context')?.loseContext();
+        })
+        .catch(() => {
+          // GL teardown is best-effort.
+        });
     }
     this.renderer = null;
     this.sim = null;

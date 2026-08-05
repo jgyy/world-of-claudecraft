@@ -9,7 +9,7 @@
 import type { ClientSession, GameServer } from '../../server/game';
 import { ClientWorld } from '../../src/net/online';
 import { emptyAllocation } from '../../src/sim/content/talents';
-import { ALL_RECIPES, STATIONS } from '../../src/sim/data';
+import { ALL_RECIPES } from '../../src/sim/data';
 import { freshDeedStats } from '../../src/sim/deeds';
 import { emptyCraftSkills } from '../../src/sim/professions/wheel';
 import { emptyMoveInput, type PlayerClass } from '../../src/sim/types';
@@ -85,6 +85,7 @@ export function bareClient(pid: number, overrides: BareClientOverrides = {}): Cl
   c.selectedDungeonDifficulty = 'normal';
   c.tradeInfo = null;
   c.duelInfo = null;
+  c.bgInfo = null;
   c.arenaInfo = null;
   c.dungeonFinderInfo = null;
   c.dungeonFinderBoard = null;
@@ -108,6 +109,7 @@ export function bareClient(pid: number, overrides: BareClientOverrides = {}): Cl
   c.delveRun = null;
   c.companionState = null;
   c.riftFloor = null;
+  c.riftCollisionToken = 0;
   c.lockpickState = null;
   c.delveMarks = 0;
   c.companionUpgrades = {};
@@ -133,7 +135,9 @@ export function bareClient(pid: number, overrides: BareClientOverrides = {}): Cl
   c.townFocus = {};
   c.nodeCooldowns = new Map();
   c.recipeList = ALL_RECIPES;
-  c.stationPlacements = STATIONS;
+  // stationPlacements is a getter on ClientWorld (it resolves the active
+  // content bundle, which wraps the builtin STATIONS on shipped hosts), so
+  // the bare client already reads STATIONS without an assignment here.
   c.lastCraftResult = null;
   c.lastMasterwork = null;
   c.lastDisenchantResult = null;

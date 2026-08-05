@@ -290,6 +290,21 @@
   .np-marker.active {
     color: #b9b9b9;
   }
+  /* repeatable turn-in (completed at least once): the rare-item blue "!",
+     matching the map/minimap repeat tokens */
+  .np-marker.repeat {
+    color: #0070dd;
+    text-shadow:
+      0 0 6px #0070dd88,
+      1px 1px 2px #000;
+  }
+  /* a work order inside its cadence window: the blue mark dimmed at the same
+     0.55 the canvas surfaces blit with, where the plate showed nothing */
+  .np-marker.cooldown {
+    color: #0070dd;
+    opacity: 0.55;
+    text-shadow: 1px 1px 2px #000;
+  }
   .np-marker.loot {
     color: var(--gold);
     font-size: 14px;
@@ -2395,6 +2410,22 @@
     outline: 2px solid var(--color-border-focus);
     outline-offset: 2px;
   }
+  /* Deed chat link (the unlock/broadcast announcements): the color inherits
+     the line's own announcement color (gold for your unlock, guild green for
+     a broadcast), so the underline and hover are what mark it as a jump. */
+  .chat-deed-link {
+    cursor: var(--cursor-point);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  .chat-deed-link:hover {
+    filter: brightness(1.25);
+  }
+  .chat-deed-link:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
   .chat-pane::-webkit-scrollbar {
     width: 8px;
   }
@@ -2602,6 +2633,15 @@
   #quest-tracker .qt-title:hover {
     color: #fff;
   }
+  /* Bag-hover highlight: matching quest title while a quest stack is hovered
+     in bags. Information-add, always-on (no --fx gate). Quest gold wash, not
+     a second yellow. Shape of the title row is unchanged. */
+  #quest-tracker .qt-title.qt-bag-hover {
+    color: var(--color-quest-tracker-bag-hover);
+    text-shadow:
+      0 0 6px color-mix(in srgb, var(--color-quest-tracker-bag-hover) 55%, transparent),
+      1px 1px 2px #000;
+  }
   #quest-tracker .qt-title:focus-visible {
     outline: 2px solid var(--gold);
     outline-offset: 2px;
@@ -2635,6 +2675,26 @@
   .qd-obj.done,
   .quest-complete {
     color: var(--color-text-success);
+  }
+  /* Repeatable-quest glyphs and tags (the phase 23 blue "!"): the rare-item
+     blue, matching the map/minimap repeat tokens. Plain color classes so the
+     marker reads on every graphics tier (fairness invariant). */
+  .quest-repeat {
+    color: #0070dd;
+  }
+  /* The map tooltip's TAG texts are 13.5px prose over the panel gradient,
+     where #0070dd reads 4.07:1 (under the 4.5:1 AA floor for text) and a
+     0.55 dim about 2:1, so the TEXT channel lifts to the theme-repaired
+     tag token at full opacity; the glyph channels (the gossip '!', the
+     nameplate marks, both canvas painters) keep the #0070dd anchor and
+     carry the dim. One grouped rule so the accessible blue is stated once,
+     both arms #tooltip-scoped so a future reuse outside the tooltip never
+     silently inherits the text lift: .quest-repeat falls back to its glyph
+     rule above, and .quest-cooldown (tooltip-tag-only, no base rule) would
+     surface unstyled as a prompt to decide its channel. */
+  #tooltip .quest-cooldown,
+  #tooltip .quest-repeat {
+    color: var(--color-quest-tag-text, #3d9bff);
   }
 
   /* ---------- deed tracker ---------- */
@@ -3507,6 +3567,29 @@
     color: var(--color-text-muted);
     white-space: nowrap;
   }
+  /* Contributor subtotal on the damage/healing breakdown: the member, then each
+     pet that acted. It reads as a heading over the abilities nested beneath it,
+     which is what lets a hunter separate their own output from the pet's. */
+  #tooltip .mt-tip-head {
+    color: var(--color-text);
+    font-weight: 600;
+    margin-top: 3px;
+  }
+  #tooltip .mt-tip-head:first-child {
+    margin-top: 0;
+  }
+  #tooltip .mt-tip-head .mt-tip-val {
+    color: var(--color-text);
+  }
+  /* The abilities belonging to the subtotal directly above. Indented rather than
+     boxed: the tooltip is narrow, and a border would compete with the mini bars
+     already drawn behind every row. */
+  #tooltip .mt-tip-group {
+    padding-left: 10px;
+  }
+  #tooltip .mt-tip-group .mt-tip-name {
+    color: var(--color-text-muted);
+  }
   body.mobile-touch #meters-window .mt-rows {
     max-height: 82px;
     overflow-y: auto;
@@ -4025,9 +4108,9 @@
   body.native-app #mobile-donate,
   body.native-app #token-ca,
   body.native-app #nav-btn-download,
-  body.native-app .cs-wallet,
-  body.native-app .cs-wallet-hidden-note,
-  body.native-app .account-wallet-card,
+  body.native-app:not(.seeker-wallet-enabled) .cs-wallet,
+  body.native-app:not(.seeker-wallet-enabled) .cs-wallet-hidden-note,
+  body.native-app:not(.seeker-wallet-enabled) .account-wallet-card,
   body.native-app #performance-tip,
   body.native-app .official-site-copy {
     display: none !important;
@@ -4181,6 +4264,17 @@
     color: var(--color-accent);
     margin-top: 4px;
     font-size: 11.5px;
+  }
+  /* Profession affinity on honest materials ("Used by Leatherworking, ...").
+     Soft craft-teal wash on the accent so multi-use reagents scan apart from
+     food/potion use lines without inventing a new rarity color. The color is
+     a theme-emitted token (src/ui/theme.ts), NOT a color-mix over
+     --color-accent: mixing a fixed light teal into the contrast-repaired
+     accent re-lightens it below the large-text floor on the light Parchment
+     panel, so the wash is repaired per preset like --color-quest-tag-text.
+     Always-on (no --fx gate; fairness). */
+  #tooltip .tt-desc.tt-material-use {
+    color: var(--color-material-use, #d6ce3b);
   }
   #tooltip .tt-stat {
     color: #fff;
@@ -5207,6 +5301,13 @@
     font-weight: 600;
     letter-spacing: 0;
   }
+  /* A banner may carry SEVERAL secondary lines (the battleground verdict: the
+     score and rating swing, why the match ended, the first-win bonus). Only the
+     first one needs the gap under the title; the rest stack tight so three lines
+     still read as one block rather than a list. */
+  #banner .banner-subtext + .banner-subtext {
+    margin-top: 2px;
+  }
   #banner.banner-with-art {
     display: flex;
     align-items: center;
@@ -5219,6 +5320,80 @@
     height: 46px;
     object-fit: contain;
     filter: drop-shadow(var(--art-shadow-lg));
+  }
+  /* Art AND subtext on one plate (hud.ts paintBanner's .banner-art-copy
+     wrapper): has-subtext alone stacks title over subtext; with art the
+     plate becomes a row and the title/detail column moves into the wrapper.
+     Variant-agnostic on purpose: any future art-plus-detail banner lays out
+     correctly without borrowing a variant's cosmetic class. */
+  #banner.banner-with-art.has-subtext {
+    flex-direction: row;
+    align-items: center;
+  }
+  #banner.banner-with-art.has-subtext .banner-art-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    min-width: 0;
+  }
+  /* The Book of Deeds variant (hud.ts showBanner variant='deed'). A deed
+     unlock used to fire this element with the level-up's exact colour, size
+     and lifetime, and since an early character trips several deeds inside its
+     first few gathering actions, that is a known cause of players reading
+     routine gathering as leveling. So the deed moment gets its OWN language:
+     a framed parchment plate in the Book of Deeds palette, at a quieter size,
+     against the level-up's bare oversized gold text. Copy and lifetime are
+     untouched: presentation only, never information. */
+  #banner.banner-deed {
+    color: var(--color-deed-banner-text);
+    font-size: 26px;
+    letter-spacing: 0.5px;
+    padding: 8px 22px;
+    border: 1px solid var(--color-deed-banner-border);
+    border-radius: 8px;
+    background: var(--color-deed-banner-bg);
+    /* Scales with the graphics tier like every other decorative shadow here:
+       at the low preset --fx-shadow is 0 and the plate sheds its lift with
+       the rest of the HUD instead of keeping a full-blur outlier. */
+    box-shadow: 0 3px calc(14px * var(--fx-shadow, 1)) var(--color-art-shadow);
+    text-shadow:
+      0 0 10px #00000088,
+      1px 1px 4px #000;
+  }
+  /* Gathering skill milestone plate (hud.ts showBanner variant='skill').
+     Framed copper craft card with the profession crest: distinct from the
+     bare gold character level-up AND the parchment deed plate, so a Mining
+     milestone never steals the "I leveled" reading. Layout comes from the
+     variant-agnostic banner-with-art rules above; this class is cosmetic. */
+  #banner.banner-skill {
+    color: var(--color-skill-banner-text);
+    font-size: 28px;
+    letter-spacing: 0.6px;
+    padding: 10px 26px 12px;
+    border: 1px solid var(--color-skill-banner-border);
+    border-radius: 10px;
+    background: var(--skill-banner-bg);
+    box-shadow:
+      0 0 0 1px var(--color-skill-banner-inset) inset,
+      0 4px calc(18px * var(--fx-shadow, 1)) var(--color-art-shadow);
+    text-shadow:
+      0 0 12px #00000099,
+      1px 1px 4px #000;
+  }
+  #banner.banner-skill .banner-subtext {
+    color: var(--color-skill-banner-subtext);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    margin-top: 4px;
+  }
+  #banner.banner-skill.banner-with-art {
+    gap: 12px;
+  }
+  #banner.banner-skill .banner-art {
+    width: 52px;
+    height: 52px;
   }
   /* Reduced-motion celebrations (hud.ts showBanner motion=false): the banner
      appears and clears instantly, same text and duration, no fade. */
@@ -6118,6 +6293,20 @@
   .prompt .prompt-number:focus {
     outline: 1px solid var(--gold-dim);
   }
+  /* Touch floor for the .prompt family's action buttons: the three quantity
+     prompts (bags discard/sell, bank withdraw/deposit, vendor buy-quantity)
+     plus the generic invite/trade/duel/ready-check prompts that share the
+     class. The base .btn renders around 30px tall, under the 40px
+     coarse-pointer tap target the rest of the vendor family floors; the
+     vendor prompt made this a mobile PURCHASE surface, so the floor lives on
+     the shared rule and lifts every prompt at once. */
+  @media (pointer: coarse) {
+    .prompt .btn {
+      min-width: 40px;
+      min-height: 40px;
+      box-sizing: border-box;
+    }
+  }
 
   /* ---------- trade window ---------- */
   #trade-window {
@@ -6350,12 +6539,17 @@
   }
   /* ---------- World Market collect indicator ---------- */
   /* The Merchant's coin: sale proceeds or returned items wait for collection.
-     Same rim-satellite family as the envelope; claims the top-RIGHT corner
-     (raid-lockout owns bottom-left, the envelope bottom-right; guarded by
-     tests/minimap_rim_badges.test.ts). */
+     Same rim-satellite family as the envelope, and it claims the top-LEFT
+     corner (raid-lockout owns bottom-left, the envelope bottom-right, the
+     day/night dial top-right). It shipped at top/right, which the dial already
+     held, and the dial is later in the DOM at the same z-index, so the coin was
+     painted over completely: an actionable control buried under an aria-hidden
+     decoration, visible together only when proceeds happen to be waiting, which
+     is why it went unnoticed. tests/minimap_rim_badges.test.ts keeps the four
+     corners one-to-one and holds the touch sheet's re-anchoring to match. */
   #market-indicator {
     position: absolute;
-    right: 4px;
+    left: 4px;
     top: 4px;
     z-index: 3;
     display: inline-flex;

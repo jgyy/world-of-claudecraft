@@ -22,7 +22,9 @@
 //
 // `src/sim`-pure: no DOM/Three/render/ui/game/net imports, no Math.random/Date.now.
 
+import { BG_GRAVEYARDS } from './battleground_layout';
 import {
+  battlegroundOrigin,
   DELVES,
   dungeonAt,
   isDelvePos,
@@ -37,6 +39,7 @@ import {
 } from './data';
 import { createNpc, recalcPlayerStats } from './entity';
 import { releaseSpiritInDelve } from './entity_roster';
+import { cancelProfessionSessionOnDisplacement } from './professions/session_teardown';
 import {
   aurasSurvivingDeath,
   RES_SICKNESS_STAT_MULT,
@@ -49,6 +52,7 @@ import {
 } from './resurrection';
 import type { PlayerMeta } from './sim';
 import type { SimContext } from './sim_context';
+import type { BgMatch } from './social/battleground';
 import { dist2d, type Entity, emptyMoveInput, type Vec3 } from './types';
 
 // --- tuning -----------------------------------------------------------------
@@ -107,6 +111,12 @@ function ghostGraveyard(
   graveyards: readonly { x: number; z: number }[] = OVERWORLD_GRAVEYARDS,
   fallback: { x: number; z: number } = PLAYER_START,
 ): { x: number; z: number } {
+  // Thornhollow Fields keeps the classic release: the spirit rises in its own
+  // team's keep graveyard plot and waits there for the wave, never walking out
+  // to an overworld yard. Checked FIRST, so a live match outranks every band
+  // rule below it.
+  const bgMatch = ctx.bgMatches.get(p.id) ?? null;
+  if (bgMatch) return bgGraveyardSpot(bgMatch, p.id);
   const dungeon = dungeonAt(p.pos.x);
   if (dungeon) {
     return nearestOverworldGraveyard(dungeon.doorPos.x, dungeon.doorPos.z, graveyards, fallback);
@@ -149,7 +159,10 @@ export function releasePlayerSpirit(
   if (!r) return;
   const { meta, e: p } = r;
   if (!p.dead || p.ghost) return; // not dead, or already a spirit
-  if (ctx.arenaMatches.has(p.id)) return; // arena/fiesta run their own respawn
+  // Arena/fiesta run their own respawn, BUT a live Thornhollow Fields membership wins:
+  // a stale arenaMatches entry (jail/cross-queue leaks) once held this gate
+  // shut for a whole bg match, so the guard must never outrank the bg arm.
+  if (ctx.arenaMatches.has(p.id) && !ctx.bgMatches.has(p.id)) return;
   if (isDelvePos(p.pos.x)) {
     // Delves keep their own bounded respawn rules (see entity_roster), no ghost run.
     releaseSpiritInDelve(ctx, meta.entityId);
@@ -172,6 +185,12 @@ export function moveToGraveyardForUnstuck(ctx: SimContext, pid?: number): void {
   const r = ctx.resolve(pid);
   if (!r || r.e.dead || r.e.ghost) return;
   const { meta, e: p } = r;
+  // The unstuck gates reject a casting player, so no live gather or fishing
+  // session can reach this today; the shared displacement teardown still
+  // runs because EVERY living-player teleport routes through it (the
+  // professions doctrine), keeping this path safe if a session state ever
+  // stops riding castingAbility.
+  cancelProfessionSessionOnDisplacement(ctx, p);
   // Resolve the graveyard before the move takes the player out of its instance band.
   const gy = ghostGraveyard(ctx, p);
   p.pos = ctx.groundPos(gy.x, gy.z);
@@ -268,12 +287,26 @@ function releaseAtNearestGraveyard(
   // No event: the client transitions to the ghost UI from the snapshot's ghost flag.
 }
 
+// The waiting spot inside the team's graveyard plot: a small deterministic
+// grid keyed by roster index, mirrored between teams like the plot itself.
+export function bgGraveyardSpot(match: BgMatch, pid: number): { x: number; z: number } {
+  const team = match.teams[1].includes(pid) ? 1 : 0;
+  const origin = battlegroundOrigin(match.slot);
+  const plot = BG_GRAVEYARDS[team];
+  const idx = Math.max(0, match.teams[team].indexOf(pid));
+  const m = team === 0 ? 1 : -1;
+  const dx = ((idx % 2) * 6 - 3) * m;
+  const dz = (Math.floor(idx / 2) - 1) * 3 * m;
+  return { x: origin.x + plot.x + dx, z: origin.z + plot.z + dz };
+}
+
 // Resurrect at the corpse (no penalty) once the ghost is within range of its body.
 export function resurrectAtCorpse(ctx: SimContext, pid?: number): void {
   const r = ctx.resolve(pid);
   if (!r) return;
   const { meta, e: p } = r;
   if (!p.dead || !p.ghost || !p.corpsePos) return;
+  if (ctx.bgMatches.has(p.id)) return; // Thornhollow Fields revives on the wave only
   // Server-authoritative range gate; the client only offers the button in range.
   if (dist2d(p.pos, p.corpsePos) > CORPSE_REZ_RANGE) return;
   // Revive where the ghost is standing (it ran back to within range of the body), not
@@ -288,6 +321,7 @@ export function resurrectAtSpiritHealer(ctx: SimContext, pid?: number): boolean 
   if (!r) return false;
   const { meta, e: p } = r;
   if (!p.dead || !p.ghost) return false;
+  if (ctx.bgMatches.has(p.id)) return false; // Thornhollow Fields revives on the wave only
   if (!spiritHealerInRange(ctx, p)) return false;
   // The Spirit Healer always inflicts Resurrection Sickness and returns you at only
   // RES_HEALER_HP_FRACTION of your pools (the corpse run is the penalty-free choice).
@@ -347,6 +381,9 @@ function reviveAt(
   p.ghost = false;
   p.corpsePos = null;
   p.corpseInstanceId = null;
+  // revivePlayerAt teleports even a LIVE target (wasDead only gates the
+  // respawn event), so a running gather/fishing session must end here too.
+  cancelProfessionSessionOnDisplacement(ctx, p);
   p.pos = ctx.groundPos(pos.x, pos.z);
   p.prevPos = { ...p.pos };
   ctx.rebucket(p);
@@ -407,6 +444,11 @@ function applySickness(
     value,
     sourceId: p.id,
     school: 'shadow',
+    // The penalty is the whole point of both sicknesses, so no player counter may take
+    // it off: a dispel (warlock Voidfeast, paladin Cleansing Verdict), a cleanse (mage
+    // Cold Coffin), and the buff-bar right-click all skip it, exactly as dying and
+    // relogging already do (aurasSurvivingDeath). Only the timer clears it.
+    undispellable: true,
   });
 }
 

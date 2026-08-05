@@ -33,11 +33,18 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // Maker's Bond unbind service), the Rift + mounts surface (rift and
 // forge commands, learn_riding, mount selection), market_list_instance
 // (the instance-payload market pipe), the commission order board
-// (issue #1298: open/cancel/accept/deliver_commission_order), and the
-// profiler-only dev_profiler_invulnerable dispatch token.
-const EXPECTED_SEND_COUNT = 178; // mount_select left the wire (reins are items)
-const EXPECTED_DISPATCH_COUNT = 190; // profiler invulnerability is a dev-only dispatch token
-const EXPECTED_DISPATCH_ONLY_COUNT = 12;
+// (issue #1298: open/cancel/accept/deliver_commission_order), the
+// profiler-only dev_profiler_invulnerable dispatch token, slot_tool_effect
+// (attach a catalog effect to one gathering profession's tool, keyed per
+// profession rather than per tool item because the live harvest path
+// resolves a tier and never a tool), recharge_tool_effect (the acquisition
+// craft), the guild_bank_* cluster (Guild Bank Phase 2) plus guild_bank_log
+// (the activity log's on-demand READ request; its answer comes back on its own
+// one-shot 'gbanklog' frame, not the snapshot), and the battleground surface
+// (bg_queue/bg_leave/bg_flag sends plus the dev-only bg_queue force start).
+const EXPECTED_SEND_COUNT = 189;
+const EXPECTED_DISPATCH_COUNT = 202;
+const EXPECTED_DISPATCH_ONLY_COUNT = 13;
 
 // The chat sub-channel routing switch (server/game.ts `switch
 // (session.rememberedChat.channel)`) is NOT a msg.cmd dispatch; its labels must

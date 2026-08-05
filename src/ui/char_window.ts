@@ -23,10 +23,12 @@ import type { EquipSlot } from '../sim/types';
 import type { IWorld } from '../world_api';
 import { STAT_PANELS } from './char_stats_view';
 import { buildPaperdollView, type PaperdollSlot } from './char_view';
+import { craftNameText } from './craft_name_view';
 import { markDialogRoot } from './dialog_root';
 import { classDisplayName, itemDisplayName } from './entity_i18n';
 import { dropRequiredLevel, paperdollDropAction } from './equip_drop_core';
 import { esc } from './esc';
+import { gatheringProfessionNameKey } from './gathering_profession_name';
 import { buildGatheringProficiencyRows } from './gathering_view';
 import { formatNumber, type TranslationKey, t } from './i18n';
 import { iconDataUrl, QUALITY_COLOR } from './icons';
@@ -66,21 +68,12 @@ const ARCHETYPE_PAIR_TITLE_KEYS: Record<string, TranslationKey> = {
   'armorcrafting+engineering': 'hudChrome.archetypePair.armorcrafting+engineering',
 };
 
-// The ten per-craft display-name keys, one per craft id on the ring (see
-// src/sim/content/professions.ts CRAFT_RING). Used wherever a CRAFT (not a
-// title) is meant: the hobby line, skill rows, section headers, combo labels.
-const CRAFT_NAME_KEYS: Record<string, TranslationKey> = {
-  armorcrafting: 'hudChrome.craftName.armorcrafting',
-  weaponcrafting: 'hudChrome.craftName.weaponcrafting',
-  jewelcrafting: 'hudChrome.craftName.jewelcrafting',
-  alchemy: 'hudChrome.craftName.alchemy',
-  engineering: 'hudChrome.craftName.engineering',
-  cooking: 'hudChrome.craftName.cooking',
-  inscription: 'hudChrome.craftName.inscription',
-  enchanting: 'hudChrome.craftName.enchanting',
-  tailoring: 'hudChrome.craftName.tailoring',
-  leatherworking: 'hudChrome.craftName.leatherworking',
-};
+// The per-craft display-name table lives in the shared craft_name_view.ts
+// pure core (the material_profession_hint_view Used-by line reads it too, and
+// a pure core may not import a *_window module). Re-exported here so the
+// historical import sites (crafting window, identity card, quest dialog,
+// train window, professions window, hud) keep resolving unchanged.
+export { craftNameText };
 
 /** Localized text for the granted pair-archetype title (the input is the
  *  canonical pair id from IWorld `archetypeTitle`), or the "no title yet" copy
@@ -88,14 +81,6 @@ const CRAFT_NAME_KEYS: Record<string, TranslationKey> = {
  *  somehow unrecognized). Exported for the view-model test. */
 export function archetypeTitleText(pairId: string | null): string {
   const key = pairId !== null ? ARCHETYPE_PAIR_TITLE_KEYS[pairId] : undefined;
-  return t(key ?? 'hudChrome.archetypeTitle.none');
-}
-
-/** Localized display name for one craft on the ring, or the same "none" copy
- *  for null/unrecognized ids. Exported for the crafting window, identity card,
- *  and quest dialog (every surface that names a CRAFT rather than a title). */
-export function craftNameText(craftId: string | null): string {
-  const key = craftId !== null ? CRAFT_NAME_KEYS[craftId] : undefined;
   return t(key ?? 'hudChrome.archetypeTitle.none');
 }
 
@@ -150,24 +135,11 @@ export interface CharWindowDeps extends PainterHostPresentation {
   showError(text: string): void;
 }
 
-// Maps each gathering profession id to its hud_chrome display-name key (issue
-// 1124). String-keyed like the sibling professions_window.ts GATHERING_NAME_KEYS
-// (and this file's CRAFT_NAME_KEYS): an id with no key here renders no row
-// (fishing landed with Professions 2.0).
-const GATHERING_PROFESSION_LABEL_KEY: Record<string, TranslationKey> = {
-  mining: 'hudChrome.gathering.mining',
-  logging: 'hudChrome.gathering.logging',
-  herbalism: 'hudChrome.gathering.herbalism',
-  fishing: 'hudChrome.gathering.fishing',
-};
-
 const SHARE_GLYPH =
   '<svg class="pc-share-ico" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M18 16.1a3 3 0 0 0-2.3 1.1l-6.7-3.9a3 3 0 0 0 0-2.6l6.7-3.9A3 3 0 1 0 15 4l-6.7 3.9a3 3 0 1 0 0 8.2L15 20a3 3 0 1 0 3-3.9z"/></svg>';
 
 export class CharWindow {
   private openerFocus: HTMLElement | null = null;
-  // One-shot: the mount card to ring + scroll to on the next render (a bag
-  // click on a reins item lands here). Cleared after that render paints it.
 
   constructor(private readonly deps: CharWindowDeps) {}
 
@@ -276,17 +248,24 @@ export class CharWindow {
   // The "Gathering" section (issue 1124): one row per gathering profession, showing
   // the viewer's own proficiency points (IWorldProfessions#professionsState).
   // Data comes from the pure gathering_view.ts core; this painter only formats it.
+  // The value renders "12 / 100" through the SAME hudChrome.professions.skillValue
+  // key the professions window uses, never a bare integer: an unbounded number
+  // that ticks up +1 per harvest is what players read as a character level.
   private gatheringHtml(world: IWorld): string {
     const rows = buildGatheringProficiencyRows(world);
     const items = rows
       .map((r) => {
-        const key = GATHERING_PROFESSION_LABEL_KEY[r.professionId];
+        const key = gatheringProfessionNameKey(r.professionId);
         if (key === undefined) return '';
         const imageUrl = professionImageUrl(`gather_${r.professionId}`);
         const icon = imageUrl
           ? `<img class="char-gather-icon" src="${esc(imageUrl)}" alt="" draggable="false">`
           : '';
-        return `<span class="char-gather-row">${icon}<span>${esc(t(key))}: <b>${formatNumber(r.displayValue, { maximumFractionDigits: 0 })}</b></span></span>`;
+        const skillValue = t('hudChrome.professions.skillValue', {
+          skill: formatNumber(r.displayValue, { maximumFractionDigits: 0 }),
+          max: formatNumber(r.maxSkill, { maximumFractionDigits: 0 }),
+        });
+        return `<span class="char-gather-row">${icon}<span>${esc(t(key))}: <b>${esc(skillValue)}</b></span></span>`;
       })
       .join('');
     return `<div class="char-progression"><div class="cp-title">${esc(t('hudChrome.gathering.title'))}</div><div class="char-stats cp-stats">${items}</div></div>`;

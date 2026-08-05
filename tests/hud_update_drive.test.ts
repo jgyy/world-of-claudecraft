@@ -102,7 +102,8 @@ function splitTopLevelAnd(cond: string): string[] {
  * The band token can share its condition with a real gate (`slowHud && this.bankWindow
  * .isOpen`), so the token is removed from the condition that carries it and whatever remains
  * joins the gate. A part holding a top-level `||` is parenthesized on the way in, because
- * joining `!npc || dist2d(...) > 8` onto a preceding condition with a bare ` && ` would print
+ * joining `!npc || dist2d(...) > NPC_WINDOW_CLOSE_RANGE` onto a preceding condition with a bare
+ * ` && ` would print
  * a gate that reads as a different expression than the source it came from.
  */
 function splitBand(conditions: readonly string[]): { band: Band; gate: string } {
@@ -173,6 +174,9 @@ interface DriveRow {
 
 const SIG_RETURN = 'if (sig === this.lastSig) return;';
 const VIEW_SIG_RETURN = 'if (view.sig === this.lastSig) return;';
+// The merged PvP window guards its two tab arms with the same shape against the same
+// field, so the Thornhollow Fields arm names its signature apart to stay pinnable.
+const RAVENRIFT_SIG_RETURN = 'if (ravenriftSig === this.lastSig) return;';
 const VIEW_SIG_BLOCK = 'if (view.sig !== this.lastSig) {';
 
 /**
@@ -687,17 +691,17 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
   {
     call: 'this.setDisplay',
     band: 'frame',
-    gate: 'ghost',
+    gate: 'ghost && !ghostInBgMatch',
     sites: 3,
     surface: 'chrome',
-    why: 'the ghost prompt and its two resurrect buttons',
+    why: 'the ghost prompt and its two resurrect buttons; a battleground spirit is exempt because the respawn wave is its only way back',
   },
   {
     call: 'this.setDisplay',
     band: 'frame',
-    gate: '!(ghost)',
+    gate: '!(ghost && !ghostInBgMatch)',
     surface: 'chrome',
-    why: 'hides the ghost prompt while not a ghost',
+    why: 'hides the ghost prompt while not a corpse-running ghost',
   },
   {
     call: 'this.showBanner',
@@ -839,6 +843,20 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
     why: 'the fiesta score, respawn, offer and augment overlays',
   },
   {
+    call: 'this.bgScoreboard.update',
+    band: 'medium',
+    gate: '',
+    surface: 'chrome',
+    why: 'the Thornhollow Fields in-match strip, the wave-respawn overlay and the spawn-protection line; the view core short-circuits an inactive match',
+  },
+  {
+    call: 'this.bgKillFeed.update',
+    band: 'medium',
+    gate: '',
+    surface: 'chrome',
+    why: 'ages out the Thornhollow Fields banner kill feed on its own clock, so an entry expires with no new event to drive it',
+  },
+  {
     call: 'this.yumiPainter.update',
     band: 'medium',
     gate: '',
@@ -898,8 +916,8 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
     band: 'medium',
     gate: "$('#arena-window').style.display === 'block'",
     surface: 'window',
-    guard: { kind: 'module', module: 'arena_window.ts', proof: VIEW_SIG_RETURN },
-    why: 'the arena queue window',
+    guard: { kind: 'module', module: 'arena_window.ts', proof: RAVENRIFT_SIG_RETURN },
+    why: 'the merged PvP window (Thornhollow Fields and arena tabs); each tab arm builds its\n      own signature and returns on an unchanged one',
   },
   {
     call: 'this.dungeonFinderWindow.render',
@@ -963,7 +981,7 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
   {
     call: 'this.closeVendor',
     band: 'medium',
-    gate: 'this.openVendorNpcId !== null && (!npc || dist2d(p.pos, npc.pos) > 8)',
+    gate: 'this.openVendorNpcId !== null && (!npc || dist2d(p.pos, npc.pos) > NPC_WINDOW_CLOSE_RANGE)',
     surface: 'window',
     guard: { kind: 'callsite' },
     why: 'closes the vendor window out of range',
@@ -971,7 +989,7 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
   {
     call: 'this.closeHeroicVendor',
     band: 'medium',
-    gate: 'this.openHeroicVendorNpcId !== null && (!npc || dist2d(p.pos, npc.pos) > 8)',
+    gate: 'this.openHeroicVendorNpcId !== null && (!npc || dist2d(p.pos, npc.pos) > NPC_WINDOW_CLOSE_RANGE)',
     surface: 'window',
     guard: { kind: 'callsite' },
     why: 'closes the heroic vendor window out of range',
@@ -979,7 +997,7 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
   {
     call: 'this.closeTrain',
     band: 'medium',
-    gate: 'this.openTrainNpcId !== null && (!npc || dist2d(p.pos, npc.pos) > 8)',
+    gate: 'this.openTrainNpcId !== null && (!npc || dist2d(p.pos, npc.pos) > NPC_WINDOW_CLOSE_RANGE)',
     surface: 'window',
     guard: { kind: 'callsite' },
     why: 'closes the trainer window out of range',
@@ -987,7 +1005,7 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
   {
     call: 'this.closeUnbind',
     band: 'medium',
-    gate: 'this.openUnbindNpcId !== null && (!npc || dist2d(p.pos, npc.pos) > 8)',
+    gate: 'this.openUnbindNpcId !== null && (!npc || dist2d(p.pos, npc.pos) > NPC_WINDOW_CLOSE_RANGE)',
     surface: 'window',
     guard: { kind: 'callsite' },
     why: 'closes the unbind window out of range',
@@ -1010,6 +1028,14 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
     surface: 'window',
     guard: { kind: 'callsite' },
     why: 'gets the arena queue window out of the way when a bout starts; the seen latch makes it an edge',
+  },
+  {
+    call: 'this.arenaWindow.close',
+    band: 'frame',
+    gate: "inBgMatch && !this.bgMatchSeen && $('#arena-window').style.display === 'block'",
+    surface: 'window',
+    guard: { kind: 'callsite' },
+    why: "the same edge close when a Thornhollow Fields match seats: the queue lives on that window's Thornhollow Fields tab",
   },
   {
     call: 'this.valeCupWindow.close',
@@ -1065,6 +1091,13 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
       proof: 'if (struct !== this.lastStruct) {',
     },
     why: 'the social window; a struct change rebuilds, a content change refreshes the list only',
+  },
+  {
+    call: 'this.updateGuildBillboardEcho',
+    band: 'slow',
+    gate: '',
+    surface: 'chrome',
+    why: 'appends one guild-billboard line to the chat log, latched on the MOTD value in guild_motd_login.ts (login and mid-session changes only, never on unrelated social re-pushes)',
   },
   {
     call: 'this.marketWindow.close',
@@ -1132,7 +1165,15 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
     band: 'slow',
     gate: 'this.professionsWindow.isOpen',
     surface: 'window',
-    guard: { kind: 'module', module: 'professions_window.ts', proof: SIG_RETURN },
+    guard: {
+      kind: 'module',
+      module: 'professions_window.ts',
+      // The guard compares the freshly built input's signature directly (no
+      // local sig binding): render() re-latches lastSig from the one input it
+      // painted, so this band never re-acts on a stale one.
+      proof:
+        'const input = this.buildInput(); const sig = professionsRefreshSig(input); if (sig === this.lastSig) return;',
+    },
     why: 'the professions window',
   },
   {
@@ -1143,9 +1184,10 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
     guard: {
       kind: 'module',
       module: 'hud/quest/quest_dialog_controller.ts',
-      proof: 'if (this.introHintVisibleFor(npc) !== this.lastIntroHintVisible) this.refresh();',
+      proof:
+        'if (this.introHintVisibleFor(npc) !== this.lastIntroHintVisible || gossipRowSig(this.offerableRows(npc)) !== this.lastGossipRowSig) { this.refresh(); }',
     },
-    why: "the gossip dialog's intro hint row, which watches an online edge no quest event fires for",
+    why: "the gossip dialog's intro hint row plus the offerable-row set (phase 23: a cadence lapse re-offers a work order), both edges no quest event fires for",
   },
   {
     call: 'this.updateDeedTracker',
@@ -1405,7 +1447,7 @@ describe('Hud.update() drives exactly the registered set, on the registered band
     expect(
       bySurface,
       "the surface split moved. A new call needs its surface decided; a CHANGED one means a repaint was reclassified, which is the one edit that can quietly drop a window row's invalidation guard.",
-    ).toEqual({ window: 41, chrome: 71, none: 15 });
+    ).toEqual({ window: 42, chrome: 74, none: 15 });
     const windows = HUD_UPDATE_DRIVES.filter((r) => r.surface === 'window');
     expect(windows.map((r) => r.call)).toContain('this.spellbookWindow.tickOpen');
     expect(windows.map((r) => r.call)).toContain('this.refreshOpenTownFocusIfChanged');
@@ -1419,7 +1461,7 @@ describe('Hud.update() drives exactly the registered set, on the registered band
     expect(byKind, 'a guard kind changed: say why in the PR, not only in the table').toEqual({
       module: 22,
       hud: 5,
-      callsite: 10,
+      callsite: 11,
       none: 4,
     });
     // ...and the honest-exception list by NAME, because that is the one that should never
@@ -1450,7 +1492,7 @@ describe('Hud.update() drives exactly the registered set, on the registered band
       'the resolved guard list moved. A row changed which module it points at, which line it looks for, or dropped to a guard kind that names no source at all.',
     ).toEqual(
       [
-        'arena_window.ts: if (view.sig === this.lastSig) return;',
+        'arena_window.ts: if (ravenriftSig === this.lastSig) return;',
         'bags_window.ts: if (!bagsMoneyRowStale(el.style.display, this.deps.world().copper, this.lastMoneyCopper)) return;',
         'bank_window.ts: if (sig === this.lastSig) return;',
         'calendar_window.ts: if (sig === this.lastSig) return;',
@@ -1464,13 +1506,16 @@ describe('Hud.update() drives exactly the registered set, on the registered band
         'hud.ts: if (sig === this.lastTownFocusSig) return;',
         'hud.ts: if (sig === this.lastTradeSig) return;',
         'hud/delve/lockpick_window.ts: if (lockpickRenderSig(view) !== this.lastSig) this.renderBoard();',
-        'hud/quest/quest_dialog_controller.ts: if (this.introHintVisibleFor(npc) !== this.lastIntroHintVisible) this.refresh();',
+        'hud/quest/quest_dialog_controller.ts: if (this.introHintVisibleFor(npc) !== this.lastIntroHintVisible || gossipRowSig(this.offerableRows(npc)) !== this.lastGossipRowSig) { this.refresh(); }',
         'mailbox_window.ts: if (sig === this.lastSig) return;',
         'market_window.ts: if (sig === this.lastSig) return;',
         'meters.ts: if (!this.isOpen || now - this.lastRender < 250) return;',
         'mount_race_controls.ts: if (!button || mode === this.buttonMode) return;',
         'mount_race_strip.ts: if (view.raceId !== this.lastRaceId || view.phase !== this.lastPhase || second !== this.lastSecond) {',
-        'professions_window.ts: if (sig === this.lastSig) return;',
+        // The professions guard hashes the freshly built input inline (no local
+        // sig binding): render() re-latches lastSig from the one input it
+        // painted, so the band never re-acts on a stale signature.
+        'professions_window.ts: const input = this.buildInput(); const sig = professionsRefreshSig(input); if (sig === this.lastSig) return;',
         'social_window.ts: if (struct !== this.lastStruct) {',
         // #2519 replaced the joined signature string this used to build every frame with
         // an in-place comparison against the retained numbers; same guard, same place, no
