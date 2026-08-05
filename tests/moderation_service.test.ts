@@ -359,6 +359,68 @@ describe('ModerationService', () => {
     consoleError.mockRestore();
   });
 
+  it('drops a stale spectate audit completion that resolves after a later unspectate', async () => {
+    const actor = admin(1, 11);
+    const target = player(2, 22);
+    const context = setup({ actor, sessions: [target] });
+
+    // Make the /spectate audit write resolve AFTER the /unspectate one, even
+    // though /spectate was issued first, to reproduce the out-of-order
+    // completion the reviewer flagged.
+    let resolveSpectateAudit!: () => void;
+    context.recordAction.mockImplementationOnce(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveSpectateAudit = resolve;
+        }),
+    );
+
+    expect(context.service.handleChatCommand(actor, '/spectate Player2')).toBe(true);
+    expect(context.service.handleChatCommand(actor, '/unspectate')).toBe(true);
+    // /unspectate's own audit write resolves first.
+    await Promise.resolve();
+    await Promise.resolve();
+    expect(context.unspectated).toEqual([actor]);
+    expect(context.spectated).toEqual([]);
+
+    // The stale /spectate audit write finally resolves. It must NOT re-enter
+    // spectate mode, since /unspectate already superseded it.
+    resolveSpectateAudit();
+    await Promise.resolve();
+    await Promise.resolve();
+    expect(context.spectated).toEqual([]);
+    expect(context.unspectated).toEqual([actor]);
+  });
+
+  it('drops a stale spectate audit completion when the target was switched', async () => {
+    const actor = admin(1, 11);
+    const first = player(2, 22);
+    const second = { ...player(3, 33), name: 'Mira Sun' };
+    const context = setup({ actor, sessions: [first, second] });
+
+    let resolveFirstAudit!: () => void;
+    context.recordAction.mockImplementationOnce(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveFirstAudit = resolve;
+        }),
+    );
+
+    expect(context.service.handleChatCommand(actor, '/spectate Player2')).toBe(true);
+    expect(context.service.handleChatCommand(actor, '/spectate "Mira Sun"')).toBe(true);
+    // The second /spectate's own audit write resolves first.
+    await Promise.resolve();
+    await Promise.resolve();
+    expect(context.spectated).toEqual([{ moderator: actor, target: second }]);
+
+    // The stale first /spectate audit write resolves afterwards. It must NOT
+    // switch spectate back to the first target.
+    resolveFirstAudit();
+    await Promise.resolve();
+    await Promise.resolve();
+    expect(context.spectated).toEqual([{ moderator: actor, target: second }]);
+  });
+
   it('visits and leaves jail without an audit write', () => {
     const actor = admin(1, 11);
     const context = setup({ actor });

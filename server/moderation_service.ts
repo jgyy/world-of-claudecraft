@@ -89,6 +89,24 @@ export class ModerationService<TSession extends ModerationSession> {
     private readonly audit: ModerationAudit,
   ) {}
 
+  // Spectate state changes are audit-gated (the audit write must resolve
+  // before the live effect applies), but a moderator can issue /spectate,
+  // /unspectate, or a target switch again before that write resolves. Track
+  // the most recently issued spectate-family command per moderator so a
+  // stale audit completion never applies enterSpectate/exitSpectate after a
+  // newer command already changed the moderator's intent.
+  private readonly spectateOpSeq = new Map<number, number>();
+
+  private nextSpectateOp(actor: TSession): number {
+    const seq = (this.spectateOpSeq.get(actor.pid) ?? 0) + 1;
+    this.spectateOpSeq.set(actor.pid, seq);
+    return seq;
+  }
+
+  private isCurrentSpectateOp(actor: TSession, op: number): boolean {
+    return this.spectateOpSeq.get(actor.pid) === op;
+  }
+
   // True means the text belonged to this command family, including rejected
   // commands. The caller must not continue through ordinary chat routing.
   handleChatCommand(actor: TSession, text: string): boolean {
@@ -258,6 +276,7 @@ export class ModerationService<TSession extends ModerationSession> {
       this.host.notice(actor, "You can't moderate that player.");
       return;
     }
+    const op = this.nextSpectateOp(actor);
     void this.audit
       .recordAction({
         action: 'spectate',
@@ -266,6 +285,10 @@ export class ModerationService<TSession extends ModerationSession> {
         reason: SPECTATE_REASON,
       })
       .then(() => {
+        // A later /spectate, /unspectate, or target switch already
+        // superseded this command while the audit write was in flight:
+        // applying it now would silently reorder the moderator's commands.
+        if (!this.isCurrentSpectateOp(actor, op)) return;
         this.host.enterSpectate(actor, target);
       })
       .catch((err) => logger.error({ err }, 'failed to audit in-game spectate'));
@@ -276,6 +299,7 @@ export class ModerationService<TSession extends ModerationSession> {
   // watching, so the audit row is recorded against the actor's own account
   // rather than a resolved target.
   private unspectate(actor: TSession): void {
+    const op = this.nextSpectateOp(actor);
     void this.audit
       .recordAction({
         action: 'unspectate',
@@ -284,6 +308,7 @@ export class ModerationService<TSession extends ModerationSession> {
         reason: UNSPECTATE_REASON,
       })
       .then(() => {
+        if (!this.isCurrentSpectateOp(actor, op)) return;
         this.host.exitSpectate(actor);
       })
       .catch((err) => logger.error({ err }, 'failed to audit in-game unspectate'));
