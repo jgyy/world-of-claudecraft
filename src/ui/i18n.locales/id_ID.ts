@@ -2,6 +2,121 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const id_ID: Partial<Record<TranslationKey, string>> = {
+  'hud.system.deathRecapAbility': 'Kamu telah tewas. Tewas oleh {ability}.',
+  'hud.system.deathRecapDrowned': 'Kamu telah tewas. Kamu tenggelam.',
+  'hud.system.deathRecapFalling': 'Kamu telah tewas. Kamu jatuh hingga tewas.',
+  'hud.system.deathRecapKiller': 'Kamu telah tewas. Tewas oleh {killer}.',
+  'hud.system.deathRecapKillerAbility': 'Kamu telah tewas. Tewas oleh {ability} milik {killer}.',
+  'hudChrome.bags.filterQuestCountAria': 'Misi, {count} barang',
+  'hudChrome.bags.itemAriaQuest': '{item}, jumlah {count}, barang misi',
+  'hudChrome.bags.noQuestItems': 'Tidak ada barang misi di dalam tasmu.',
+  'hudChrome.bank.cannotDepositNow': 'Tidak dapat disetor saat ini',
+  'hudChrome.bank.depositAllTooltip':
+    'Mengirim semua reagen kerajinan dan barang rongsokan dari tasmu ke bank dalam satu kali jalan. Alat pengumpul, perlengkapan yang dipakai, barang misi, dan barang habis pakai tidak pernah disentuh.',
+  'hudChrome.bank.guildBuyConfirm':
+    'Beli {count} slot bank guild tambahan seharga {price} dari kas guild?',
+  'hudChrome.bank.guildBuyNote': 'Dibayar dari kas guild',
+  'hudChrome.bank.guildCannotDeposit': 'Tidak dapat disimpan di bank guild',
+  'hudChrome.bank.guildCapacityAria': 'Slot bank guild terpakai: {used} dari {total}',
+  'hudChrome.bank.guildContentsTab': 'Isi',
+  'hudChrome.bank.guildDepositGold': 'Setor uang',
+  'hudChrome.bank.guildDepositGoldTitle': 'Setor uang ke kas guild',
+  'hudChrome.bank.guildDepositHint': 'Klik untuk menyetor ke bank guild',
+  'hudChrome.bank.guildDormantAria': '{item}, jumlah {count}, tidak dapat ditarik',
+  'hudChrome.bank.guildDormantHint': 'Barang ini terkunci di bank guild dan tidak dapat ditarik.',
+  'hudChrome.bank.guildDormantNote':
+    'Barang yang terkunci tidak dapat ditarik dan mencegah guild dibubarkan.',
+  'hudChrome.bank.guildEmpty': 'Bank guild kosong.',
+  'hudChrome.bank.guildGoldAvailable': 'Tersedia: {amount}',
+  'hudChrome.bank.guildGoldCannotMove': 'Jumlah itu tidak dapat dipindahkan saat ini.',
+  'hudChrome.bank.guildLogTab': 'Log',
+  'hudChrome.bank.guildOpenAccept': 'Buka',
+  'hudChrome.bank.guildOpenBank': 'Buka bank guild',
+  'hudChrome.bank.guildOpenConfirm':
+    'Buka bank guild seharga {price}? Ini dibayar dari uangmu sendiri.',
+  'hudChrome.bank.guildOpenNote': 'Dibayar dari uangmu sendiri, bukan dari kas guild',
+  'hudChrome.bank.guildPurseShort': 'Uang tidak cukup',
+  'hudChrome.bank.guildTab': 'Guild',
+  'hudChrome.bank.guildTreasury': 'Kas guild',
+  'hudChrome.bank.guildTreasuryShort': 'Kas kurang',
+  'hudChrome.bank.guildUnknownItem': 'Barang tidak dikenal',
+  'hudChrome.bank.guildViewsAria': 'Tampilan bank guild',
+  'hudChrome.bank.guildWithdrawGold': 'Tarik uang',
+  'hudChrome.bank.guildWithdrawGoldTitle': 'Tarik uang dari kas guild',
+  'hudChrome.bank.logAdminPurge': 'Seorang administrator menghapus {count} {item}',
+  'hudChrome.bank.logAria': 'Log aktivitas bank guild',
+  'hudChrome.bank.logBuySlots': '{actor} membeli perluasan bank seharga {amount}',
+  'hudChrome.bank.logCharterFee': '{actor} membayar biaya piagam guild sebesar {amount}',
+  'hudChrome.bank.logDepositItem': '{actor} menyetor {count} {item}',
+  'hudChrome.bank.logDepositMoney': '{actor} menyetor {amount}',
+  'hudChrome.bank.logEmpty': 'Belum ada yang keluar masuk bank guild.',
+  'hudChrome.bank.logFormerMember': 'Mantan anggota guild',
+  'hudChrome.bank.logLoading': 'Memuat log bank guild...',
+  'hudChrome.bank.logNote': '{count} tindakan bank guild terbaru.',
+  'hudChrome.bank.logOpenBank': '{actor} membuka bank guild seharga {amount}',
+  'hudChrome.bank.logRefused': 'Hanya perwira guild yang dapat membaca log bank guild.',
+  'hudChrome.bank.logWithdrawItem': '{actor} menarik {count} {item}',
+  'hudChrome.bank.logWithdrawMoney': '{actor} menarik {amount}',
+  'hudChrome.bank.personalTab': 'Pribadi',
+  'hudChrome.bank.tabsAria': 'Tab bank',
+  'hudChrome.crafting.dialogOption': 'Kerajinan',
+  'hudChrome.crafting.dialogOptionAria': 'Buka jendela kerajinan untuk {craft}',
+  'hudChrome.deeds.recentJumpAria': 'Lompat ke {name}',
+  'hudChrome.landing.browserSupport.body':
+    'Kamu mungkin mengalami performa yang menurun di peramban ini. Untuk pengalaman terbaik, dapatkan aplikasi desktop untuk Windows, macOS, atau Linux. Lebih suka bermain di peramban? Chrome memberikan performa terbaik, dan Firefox serta Safari juga didukung.',
+  'hudChrome.landing.browserSupport.continueInBrowser': 'Lanjutkan di peramban',
+  'hudChrome.landing.browserSupport.dismissAria':
+    'Tutup pemberitahuan peramban yang tidak didukung',
+  'hudChrome.landing.browserSupport.getDesktopApp': 'Dapatkan aplikasi desktop',
+  'hudChrome.landing.browserSupport.title': 'Perhatian: peramban tidak didukung',
+  'hudChrome.materialHint.cookingCatch': 'Bahan masakan. Harus dimasak sebelum dimakan.',
+  'hudChrome.mounts.desc_drakemaw_raptor':
+    'Seekor raptor sarang dari Kaldera Drakemaw yang telah dijinakkan untuk ditunggangi, seluruhnya otot dan kecepatan, masih samar berbau abu.',
+  'hudChrome.mounts.name_drakemaw_raptor': 'Raptor Drakemaw',
+  'hudChrome.options.graphicsApplied': 'Pengaturan grafis diterapkan.',
+  'hudChrome.options.graphicsApply': 'Terapkan Grafis',
+  'hudChrome.options.graphicsApplying': 'Menerapkan pengaturan grafis...',
+  'hudChrome.options.graphicsDraftChanged': 'Perubahan grafis siap diterapkan.',
+  'hudChrome.options.graphicsFailed':
+    'Grafis tidak dapat diterapkan. Pengaturan Anda yang sebelumnya masih aktif.',
+  'hudChrome.options.graphicsFatal': 'Pemulihan grafis gagal. Muat ulang game untuk melanjutkan.',
+  'hudChrome.options.graphicsReload': 'Muat Ulang Game',
+  'hudChrome.options.graphicsRetry': 'Coba Lagi Grafis',
+  'hudChrome.options.graphicsSaved':
+    'Pengaturan grafis disimpan. Perender aktif sudah sesuai dengannya.',
+  'hudChrome.options.lockActionBars': 'Kunci Bilah Aksi',
+  'itemUi.kind.material': 'Bahan',
+  'itemUi.market.buyChanged':
+    'Daftar itu berubah sebelum kamu mengonfirmasi. Periksa harganya dan coba lagi.',
+  'itemUi.market.buyConfirmAccept': 'Beli',
+  'itemUi.market.buyConfirmBody': 'Beli {item} seharga {price}?',
+  'itemUi.market.buyConfirmBodyStack': 'Beli {item} x{count} seharga {price} ({each} per buah)?',
+  'itemUi.market.buyConfirmCancel': 'Batal',
+  'itemUi.market.buyConfirmTitle': 'Konfirmasi Pembelian',
+  'itemUi.tooltip.questOrphaned': 'Tidak dibutuhkan untuk misi aktif mana pun.',
+  'itemUi.tooltip.questRelated': 'Misi: {quest}',
+  'itemUi.tooltip.questRules': 'Tidak dapat dijual, disimpan di bank, atau ditukar.',
+  'desktop.update.checkingBody': 'Versi baru diunduh selagi kamu bermain.',
+  'desktop.update.checkingTitle': 'Memeriksa pembaruan...',
+  'desktop.update.dismiss': 'Tutup',
+  'desktop.update.downloadingBody': 'Kamu tetap bisa bermain. Ini akan terpasang saat kamu keluar.',
+  'desktop.update.uptodateTitle': 'Kamu sudah menggunakan versi terbaru',
+  'entities.items.firebottle.name': 'Botol Api',
+  'entities.items.murloc_hut.name': 'Gubuk Mudfin',
+  'entities.items.reins_drakemaw_raptor.name': 'Tali Kekang Raptor Drakemaw',
+  'entities.items.restless_skull.name': 'Tengkorak Gelisah',
+  'entities.items.vanguard_bone.name': 'Tulang Garda Depan',
+  'entities.mobs.brakka_wallbreaker.name': 'Brakka sang Pendobrak Tembok',
+  'entities.mobs.dragonkin_broodguard.name': 'Penjaga Sarang Naga',
+  'entities.mobs.dragonkin_egg.name': 'Telur Naga',
+  'entities.mobs.dragonkin_whelp.name': 'Tukik Naga',
+  'entities.mobs.drakemaw_broodlord.name': 'Penguasa Sarang Drakemaw',
+  'entities.mobs.drowned_warlord.name': 'Sang Panglima Tenggelam',
+  'entities.mobs.spider_egg.name': 'Telur Induk Sarang',
+  'entities.mobs.threnos_first_voice.name': 'Threnos sang Suara Pertama',
+  'entities.mobs.widow_hatchling.name': 'Tukik Janda',
+  'entities.quests.q_no_rest.text':
+    'Ritus pada pedupaan itu mengikat yang tenggelam untuk bangkit, dan kini ritus itu telah membangkitkan satu yang cukup kuat untuk memimpin mereka. Para penjaga menyebutnya Sang Panglima Tenggelam, dan selama ia menguasai Kapel Tenggelam, yang mati tetap berbaris. Tumpaskan dia, {playerName}, dan sisanya akan tercerai-berai kembali ke rawa.',
   'hud.social.tenure.recruit': 'Rekrut',
   'hud.social.tenure.veteran': 'Veteran',
   'hudChrome.keybinds.mouseHint':
@@ -2260,9 +2375,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hudChrome.calendar.events.delveDay.note':
     'Bruder Halven menandai petanya: hari yang baik untuk menantang Relikuari Runtuh.',
   'hudChrome.calendar.events.delveDay.title': 'Hari Delve',
-  'hudChrome.calendar.events.fiestaNight.note':
-    'Gelanggang Fiesta 2v2 menarik penonton paling riuh malam ini.',
-  'hudChrome.calendar.events.fiestaNight.title': 'Malam Fiesta',
   'hudChrome.calendar.events.fishingDerby.note':
     'Para pemancing berjajar di tepi danau. Bawalah joran dan saling bertukar kisah memancing.',
   'hudChrome.calendar.events.fishingDerby.title': 'Lomba Memancing',
@@ -3500,6 +3612,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.items.crag_warden_cudgel.name': 'Pentungan Crag Warden',
   'entities.items.craghorn_staff.name': 'Tongkat Craghorn',
   'entities.items.cragmaw_huntcord.name': 'Tali Buru Cragmaw',
+  'entities.items.cragmaw_huntquiver.name': 'Tabung Panah Buru Cragmaw',
   'entities.items.cragmaw_prowlboots.name': 'Bot Endap Cragmaw',
   'entities.items.cragwalker_boots.name': 'Bot Cragwalker',
   'entities.items.crimson_amber_armor_plate.name': 'Ambar Merah Tua',
@@ -3579,6 +3692,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.items.gravewardens_shiv.name': 'Belati Penjaga Makam',
   'entities.items.gravewoven_raiment.name': 'Busana Tenun Makam',
   'entities.items.gravewyrm_gauntlets.name': 'Sarung Tangan Gravewyrm',
+  'entities.items.gravewyrm_bone_quiver.name': 'Tabung Panah Tulang Gravewyrm',
   'entities.items.gravewyrm_mantle.name': 'Mantel Gravewyrm',
   'entities.items.gravewyrm_sabatons.name': 'Sabaton Gravewyrm',
   'entities.items.gravewyrm_scale_hauberk.name': 'Baju Zirah Sisik Gravewyrm',
@@ -3639,6 +3753,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.items.mistveil_grips.name': 'Sarung Tangan Tabir Kabut',
   'entities.items.moggers_copper_cudgel.name': 'Pentungan Tembaga Mogger',
   'entities.items.moggers_shiv.name': 'Belati Mogger',
+  'entities.items.moggers_hide_quiver.name': 'Tabung Panah Kulit Mogger',
   'entities.items.moggers_stomper_boots.name': 'Bot Penginjak Mogger',
   'entities.items.monarch_crown_helm.name': 'Mahkota Sang Raja',
   'entities.items.copper_mining_pick.name': 'Beliung Tambang Tembaga',
@@ -3762,6 +3877,7 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.items.stormcallers_spaulders.name': 'Pelindung Bahu Galecall',
   'entities.items.bonewrought_greatsword.name': 'Pedang Besar Bonewrought',
   'entities.items.direfang_greatblade.name': 'Bilah Besar Direfang',
+  'entities.items.direfang_quiver.name': 'Tabung Panah Direfang',
   'entities.items.bonewrought_bulwark.name': 'Perisai Benteng Bonewrought',
   'entities.items.wraithfire_orb.name': 'Orb Wraithfire',
   'entities.items.stormshard_leggings.name': 'Legging Serpihan Badai',
@@ -4104,7 +4220,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_cult_orders.completion':
     'Aksara ini... terakhir kulihat yang serupa di grimoir Morthen, di Eastbrook. Tangan yang sama telah menuntun setiap makam yang kita perebutkan, {playerName}.',
   'entities.quests.q_cult_orders.objectives.0.label': 'Fanatik Wyrmcult terbunuh',
-  'entities.quests.q_cult_orders.objectives.1.label': 'Perintah Wyrmcult',
   'entities.quests.q_cult_orders.text':
     'Para fanatik kini bergerak dengan tujuan, jaga ditempatkan, perbekalan dihitung, bagai prajurit sebelum pengepungan. Pengikut yang terorganisir adalah pengikut yang menerima perintah, {playerName}. Bunuh delapan lagi dan bawakan padaku empat berkas perintah tertulis mereka. Aku ingin tahu tangan yang memimpin mereka.',
   'entities.quests.q_cult_orders.title': 'Perintah dari Kedalaman',
@@ -4280,15 +4395,12 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_necromancers.completion':
     'Semoga Cahaya mengampuni kita. Ini menampung para mati dari Lembah dan rawa - setiap mayat yang pernah dibangkitkan para Gravecaller, dipanen. Mereka tidak pernah membangun pasukan, {playerName}. Mereka sedang mengumpulkan upeti.',
   'entities.quests.q_necromancers.objectives.0.label': 'Wyrmcult Necromancer dibunuh',
-  'entities.quests.q_necromancers.objectives.1.label': 'Filakteri Ritual',
   'entities.quests.q_necromancers.text':
     'Perintah-perintah itu menyebut sebuah "cincin filakteri" - bejana jiwa, {playerName}, yang ditempatkan mengelilingi Sanktum untuk memberinya makan. Para necromancer sekte itu membawanya seperti relik suci. Bunuh delapan necromancer dan bawakan aku tiga filakteri yang utuh. Aku harus tahu jiwa siapa yang mereka tampung.',
   'entities.quests.q_necromancers.title': 'Cincin Filakteri',
   'entities.quests.q_no_rest.completion':
     'Kau memberi para mati lebih banyak belas kasih daripada yang pernah diberikan tuan-tuan mereka. Ambillah ini - kau lebih dari pantas mendapatkannya.',
   'entities.quests.q_no_rest.objectives.0.label': 'Drowned Dead diistirahatkan',
-  'entities.quests.q_no_rest.text':
-    'Ritus pada pedupaan itu mengikat para tenggelam untuk bangkit di mana pun rawa menyentuh mereka - dan rawa menyentuh segalanya. Tidak akan ada ketenangan di antara alang-alang ini sampai para mati melebihi jumlah yang hidup. Kita belum bisa membatalkan ritus itu, tapi kita bisa menguras prajuritnya. Istirahatkan 14 lagi dari Drowned Dead.',
   'entities.quests.q_no_rest.title': 'Tiada Ketenangan di Antara Alang-Alang',
   'entities.quests.q_nythraxis_bound_guardian.completion':
     'Ketiga relik itu menceritakan kisah yang sama: Aldren berjuang membela rajanya, Malric mendobrak batas kematian, dan Voss berusaha menghentikan apa yang menyusul. Segel itu melemah, dan cincin-meterai ini adalah kunci ke makam Nythraxis. Kau kini selaras untuk memasuki Kripta Nythraxis. Kembalilah ke kripta terbengkalai, buka pintu kerajaan, dan hadapi Nythraxis sebelum murka sang raja tua tumpah melampaui Thornpeak.',
@@ -5417,7 +5529,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'fiesta.end.draw': 'FIESTA SERI! Terlalu ketat untuk diputuskan!',
   'fiesta.end.loss': 'FIESTA KALAH! Coba lagi!',
   'fiesta.end.win': 'FIESTA MENANG! 🎉 Pesta yang luar biasa!',
-  'fiesta.enterQueue': 'Gabung Fiesta!',
   'fiesta.error.leaderOnly': 'Hanya pemimpin party yang boleh mendaftarkan timmu untuk {label}.',
   'fiesta.error.noAugment': 'Kau tak punya augment untuk dipilih saat ini.',
   'fiesta.error.notOnOffer': 'Augment itu tidak tersedia.',
@@ -5434,9 +5545,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'fiesta.powerup.pow_colossus.name': 'Kolosus',
   'fiesta.powerup.pow_moon_boots.name': 'Sepatu Bulan',
   'fiesta.powerup.pow_speed_demon.name': 'Iblis Kecepatan',
-  'fiesta.practice': '🎉 Latihan vs Bot',
-  'fiesta.practiceNote':
-    'Latihan offline: memunculkan 3 bot AI dan mendaftarkanmu untuk Fiesta 2v2. Klik lagi untuk berhenti.',
   'fiesta.queue.join': 'Kau bergabung ke antrean Fiesta 2v2. Bersiaplah untuk PESTA…',
   'fiesta.queue.leave': 'Kau meninggalkan antrean Fiesta 2v2.',
   'fiesta.queue.teamLeave': 'Timmu meninggalkan antrean Fiesta 2v2.',
@@ -5683,38 +5791,18 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
     'Menghantam segala sesuatu di sekitarmu dan melambatkan serangan mereka.',
   'guide.abilityHook.wrath':
     'Anak panah alam yang dilontarkan ke sasaran dari kejauhan, serangan andalanmu.',
-  'guide.arenaPage.augmentsNote':
-    'Augmen dan penguat hanya bertahan selama pertandingan. Semuanya tentang rakitan jenaka dan dadakan, bukan kekuatan abadi, sehingga tak seorang pun bisa membeli kemenangan.',
   'guide.arenaPage.coliseumBody':
     'Coliseum adalah arena realm, tempat kamu menghadapi pemain lain dalam pertandingan berperingkat, satu lawan satu atau dua lawan dua. Setiap bracket menyimpan peringkatnya sendiri, jadi sebuah kemenangan mengangkatmu di tangga itu untuk dilihat seluruh realm. Buka jendela Arena untuk mendaftar ke sebuah bracket, sendiri atau bersama pasanganmu.',
   'guide.arenaPage.coliseumHeading': 'Coliseum Abu',
   'guide.arenaPage.duelsBody':
     'Tantang pemain mana pun yang kamu temui untuk duel persahabatan. Tak ada yang dipertaruhkan selain harga diri, jadi inilah cara termudah mempelajari sebuah pertandingan atau menyelesaikan perselisihan ramah.',
   'guide.arenaPage.duelsHeading': 'Duel',
-  'guide.arenaPage.fiestaBody':
-    'Fiesta adalah perkelahian dua lawan dua yang cepat, dimainkan sebagai satu pertarungan tanpa jeda, dengan tiap petarung dibawa ke titik pijak yang setara. Seiring pertarungan berjalan kamu memilih augmen, dorongan cepat yang membentuk ulang perlengkapanmu secara spontan, sehingga tak ada dua pertandingan yang sama persis.',
-  'guide.arenaPage.fiestaHeading': 'Fiesta dua lawan dua',
   'guide.arenaPage.heading': 'Arena dan PvP',
   'guide.arenaPage.intro':
     'Ingin menguji dirimu melawan pemain lain? Pemain lawan pemain sudah tersedia, dan ini selalu pilihanmu, tak pernah dipaksakan padamu.',
   'guide.arenaPage.ladderBody':
     'Permainan berperingkat melacak kedudukanmu dari waktu ke waktu. Lihat papan peringkat untuk mengetahui posisimu dan siapa yang memuncaki realm.',
   'guide.arenaPage.ladderHeading': 'Menaiki tangga peringkat',
-  'guide.arenaPage.powerupsBody':
-    'Bola bercahaya juga jatuh ke arena di tengah pertarungan, bebas bagi siapa pun yang meraihnya lebih dulu. Sengaja dibuat berlebihan dan hanya bertahan sebentar: Speed Demon untuk laju membutakan sekejap, Colossus untuk membengkak menjadi raksasa lamban, Moon Boots untuk lompatan memantul gravitasi rendah, dan Berserker untuk lonjakan amarah mendadak.',
-  'guide.arenaPage.powerupsTitle': 'Penguat di dalam arena',
-  'guide.arenaPage.waveGoldBody':
-    'Gelombang tengah: kombo bermata dua tempat rakitanmu mulai terbentuk dan berpadu.',
-  'guide.arenaPage.waveGoldTitle': 'Emas',
-  'guide.arenaPage.wavePrismaticBody':
-    'Gelombang terakhir: lonjakan penentu-rakitan yang melelehkan layar, dirancang terasa konyol dengan cara terbaik.',
-  'guide.arenaPage.wavePrismaticTitle': 'Prismatik',
-  'guide.arenaPage.waveSilverBody':
-    'Gelombang pembuka: penguatan satu-statistik yang bersih, mempertajam dasar-dasar kelasmu.',
-  'guide.arenaPage.waveSilverTitle': 'Perak',
-  'guide.arenaPage.wavesBody':
-    'Sebuah pertarungan Fiesta memberimu pilihan baru seiring jalannya, dan pilihannya makin berani makin lama pertarungan berlangsung. Kamu membangun dari satu gelombang ke berikutnya, memilih salah satu dari beberapa opsi tiap kali dan menyimpannya sampai sisa pertarungan.',
-  'guide.arenaPage.wavesTitle': 'Augmen datang bergelombang',
   'guide.bestiary.flavor.gravecaller_cultist':
     'Pelayan berjubah dari pemuja kematian yang ulahnya mencemari kuburan dari Lembah sampai puncak. Di mana mereka berkumpul, yang mati tak beristirahat.',
   'guide.bestiary.flavor.grubjaw':
@@ -6728,7 +6816,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hud.core.mapCanvasLabel': 'Peta',
   'hud.core.mapSummary': 'Peta {zone}.',
   'hud.core.maxLevel': 'LEVEL MAKS',
-  'hud.core.mobileArena': 'Arena',
   'hud.core.mobileAttack': 'Serang',
   'hud.core.mobileCamera': 'Kamera — ketuk dua kali untuk memusatkan ulang',
   'hud.core.mobileChat': 'Obrolan',
@@ -6824,7 +6911,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'hud.errors.whisperMissing': "Tidak ada pemain bernama '{name}' yang sedang daring.",
   'hud.errors.whisperSelf': 'Kamu menggumam kepada dirimu sendiri. Tak seorang pun mendengarnya.',
   'hud.keybinds.actions.actionBarSlot': 'Bilah Aksi {slot}',
-  'hud.keybinds.actions.arena': 'Arena (Ashen Coliseum)',
   'hud.keybinds.actions.attack': 'Serang',
   'hud.keybinds.actions.attackMove': 'Serang Bergerak',
   'hud.keybinds.actions.autorun': 'Alihkan Lari Otomatis',
@@ -8965,9 +9051,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
     'Merobek zirah target, menguranginya sebesar {damage}% per penerapan. Menumpuk hingga 5 kali. Menghasilkan ancaman dalam jumlah besar.',
   'entities.mobs.training_dummy.name': 'Boneka Latihan',
   'entities.mobs.yumi_cat.name': 'Yumi',
-  'guide.arenaPage.yumiBody':
-    'Lindungi Yumi adalah mode objektif tim yang dimainkan di dalam labirin: masing-masing pihak menjaga peliharaan kucingnya sendiri sambil memburu milik lawan. Sesekali kedua kucing berkelebat ke sudut-sudut baru labirin, sehingga pertarungan berayun antara bertahan, memburu, dan berpacu untuk menemukannya lagi. Masuk antrean sebagai tiga lawan tiga atau lima lawan lima; tumbang dalam pertempuran hanya membuatmu absen sejenak.',
-  'guide.arenaPage.yumiHeading': 'Lindungi Yumi',
   'hudChrome.archetypeTitle.hobbyLabel': 'Hobi',
   'hudChrome.auraEffect.armorPct': 'Mengurangi zirah sebesar {pct}%',
   'hudChrome.auraEffect.armorPctStacks': 'Mengurangi zirah sebesar {pct}% ({stacks} tumpukan)',
@@ -8987,7 +9070,6 @@ export const id_ID: Partial<Record<TranslationKey, string>> = {
   'yumi.bracket5': 'Yumi 5 lawan 5',
   'yumi.end.loss': 'KEKALAHAN! Yumi-mu telah tumbang.',
   'yumi.end.win': 'KEMENANGAN! Yumi selamat!',
-  'yumi.enterQueue': 'Ikut Lindungi Yumi!',
   'yumi.error.partyTooBig3': 'Lindungi Yumi 3 lawan 3 hanya membolehkan party hingga tiga orang.',
   'yumi.error.partyTooBig5': 'Lindungi Yumi 5 lawan 5 hanya membolehkan party hingga lima orang.',
   'yumi.hud.aria': 'Yumi-mu pada {mine} dari {max} kesehatan, Yumi musuh pada {theirs}.',

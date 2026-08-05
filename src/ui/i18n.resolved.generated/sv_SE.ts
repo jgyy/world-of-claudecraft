@@ -911,6 +911,7 @@ export const sv_SE: EnTranslations = {
       "minutesSeconds": "{m} m {s} s",
       "seconds": "{s} s",
       "autoShowHint": "Rader visas automatiskt när din grupp gör skada eller helar, och detta segment stängs några sekunder efter att striden avslutas.",
+      "threatFallback": "No live threat: showing damage to {name}",
       "breakdownSummary": "{tab}: {value}",
       "breakdownRow": "{value} ({percent})",
       "breakdownOther": "Övrigt ({count})",
@@ -950,6 +951,7 @@ export const sv_SE: EnTranslations = {
       "targetFriendlyNext": "Växla vänligt mål",
       "discord": "Discord",
       "valecup": "Dalcupen",
+      "bgFlag": "Battleground Flag Action",
       "sheathe": "Slida/Ta fram vapen",
       "categoryPet": "Djur",
       "petAttack": "Djur: Anfall",
@@ -997,6 +999,7 @@ export const sv_SE: EnTranslations = {
       "name_stormfeather_griffin": "Himmelsvidd Stormfjäder",
       "name_thunderstrut_gobbler": "Åskstoltsern, Den stora kalkonen",
       "name_terrorspark_groundshaker": "Skräckgnista, markskakaren",
+      "name_drakemaw_raptor": "Drakgapsraptor",
       "desc_valorsteed": "En uthållig, säkerfotad stridshäst som ger ökad reshastighet.",
       "desc_grag_bear": "En uthållig, säkerfotad björn som ger ökad reshastighet.",
       "desc_stalkglider_snail": "En robust, långsamt brinnande snigel som ger ökad reshastighet.",
@@ -1004,7 +1007,8 @@ export const sv_SE: EnTranslations = {
       "desc_shadowjump_toad": "En massiv, säkerfotad jättepadda, tränad i blixtsnabba skuggsprång som täcker all terräng.",
       "desc_stormfeather_griffin": "En kunglig stormgrip som smyger fram på runskodda klor, med vingarna hopfällda.",
       "desc_thunderstrut_gobbler": "En kolossal stormkläckt kalkon som stoltserar ner från Den vaknande toppen, med stjärten spretande som ett åskmoln.",
-      "desc_terrorspark_groundshaker": "En kompakt bepansrad maskin med tunga larvband, en grovkalibrig kanon och en sadel byggd för orädda förare."
+      "desc_terrorspark_groundshaker": "En kompakt bepansrad maskin med tunga larvband, en grovkalibrig kanon och en sadel byggd för orädda förare.",
+      "desc_drakemaw_raptor": "En sadeltämjd kullraptor från Drakgapets kaldera, ren sena och sprint, som fortfarande doftar svagt av aska."
     },
     "mountTraining": {
       "mountPrompt": "Tryck på {key} för att sitta upp på övnings-Tapperhetshästen.",
@@ -1024,6 +1028,93 @@ export const sv_SE: EnTranslations = {
       "timeout": "Loppet misslyckades",
       "progress": "Portar {n} av {total}",
       "timeLeft": "{seconds} s"
+    },
+    "pvp": {
+      "launcherTitle": "PvP",
+      "mobileLabel": "PvP",
+      "bracket1v1": "1v1",
+      "bracket2v2": "2v2"
+    },
+    "bg": {
+      "title": "Thornhollow Fields",
+      "blurb": "Two ruined keeps face each other across a walled hollow in the shadow of Thornpeak: Crimson to the south, Azure to the north, and the older Ruin Courtyard between them that neither has ever held. Five a side, one banner each, and the first to carry three of theirs home takes the field.",
+      "modeTag": "5v5 Capture the Flag",
+      "offlineNote": "Thornhollow Fields is syncing. The queue opens once the realm answers.",
+      "ratingSummary": "Rating. {wins} wins / {losses} losses",
+      "careerCaptures": "Career captures: {count}",
+      "enterQueue": "Enter the Queue",
+      "enterQueueParty": "Enter the Queue (party of {count})",
+      "leaveQueue": "Leave Queue",
+      "searching": "Searching. {count}/{size} in queue.",
+      "queuedParty": "Party of {count}.",
+      "queueNote": "Two teams of five. Steal the enemy banner and run it to your keep. First to 3 captures wins. Group up to 5 and queue together; grab Sprint Runes and weave the cover to lose your pursuers.",
+      "matchInProgress": "Battle in progress. {crimson}:{azure}.",
+      "ladderAllTime": "Ladder. All-Time",
+      "noRanked": "No champions ranked yet. Be the first.",
+      "ladderOnline": "Ladder. Online Now",
+      "noChallengers": "No champions online right now. Be the first.",
+      "playerLevelClassTitle": "{name}. Level {level} {className}",
+      "playerClassTitle": "{name}. {className}",
+      "crimson": "Crimson",
+      "azure": "Azure",
+      "yourTeamTitle": "Your team",
+      "clock": "{minutes}:{seconds}",
+      "formUp": "Form up: {seconds}",
+      "firstTo": "First to {caps} captures",
+      "flagState": {
+        "home": "Flag at the keep",
+        "carried": "Flag stolen!",
+        "dropped": "Flag on the ground"
+      },
+      "respawnIn": "Next wave: respawning in {seconds}",
+      "resultVictory": "Victory!",
+      "resultDefeat": "Defeat",
+      "resultDraw": "Draw",
+      "leavingIn": "Leaving the battleground in {seconds}",
+      "killFeed": "{killer} felled {victim}",
+      "killFeedFallen": "{victim} has fallen",
+      "foundBanner": "Battle found. You fight for the {team}!",
+      "countdownBanner": "Thornhollow Fields begins in {seconds}",
+      "startBanner": "Capture the flag!",
+      "flagTakenLog": "{name} has taken the {team} flag!",
+      "flagDroppedLog": "The {team} flag was dropped.",
+      "flagReturnedLog": "The {team} flag was returned.",
+      "dropFlagConfirmTitle": "Drop the flag?",
+      "dropFlagConfirmBody": "You are carrying the enemy flag. Dropping it leaves it on the ground, where either team can reach it.",
+      "dropFlagConfirmAccept": "Drop the flag",
+      "boardToggleLabel": "Match scoreboard. Press Enter to pin the full board open.",
+      "levelRequirement": "You must reach level {level} to unlock queueing for this battleground.",
+      "board": {
+        "kills": "Kills",
+        "assists": "Assists",
+        "deaths": "Deaths",
+        "captures": "Captures"
+      },
+      "flagTakenBanner": "The {takers} have taken the {team} flag!",
+      "flagReturnedBanner": "The {team} flag was returned!",
+      "capturedTeamBanner": "The {takers} have captured the {team} flag! {crimson}:{azure}",
+      "capturedLog": "{name} captured the {team} flag. Score {crimson}:{azure}.",
+      "victoryBanner": "Victory! Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "defeatBanner": "Defeat. Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "drawBanner": "Thornhollow Fields draw {crimson}:{azure}. Rating {rating} ({delta})",
+      "endBannerDetail": "Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "endLog": "Thornhollow Fields ended {crimson}:{azure}. Rating {rating} ({delta}).",
+      "endedTimer": "Time expired",
+      "endedForfeit": "The match was forfeited",
+      "endedTimerLog": "The match clock ran out; the higher score took the field.",
+      "endedForfeitLog": "The match was forfeited.",
+      "firstWinBonusLine": "First win of the day: +{honor} Honor",
+      "firstWinBonusLog": "First win of the day: you gain {honor} bonus Honor.",
+      "timeWarningMinutes": "{minutes} minutes remain",
+      "timeWarningOneMinute": "One minute remains",
+      "timeWarningMinutesLog": "{minutes} minutes remain in the battle.",
+      "timeWarningOneMinuteLog": "One minute remains in the battle.",
+      "map": {
+        "crimsonKeep": "Crimson Keep",
+        "azureKeep": "Azure Keep",
+        "ruinCourtyard": "The Ruin Courtyard",
+        "graveyard": "Graveyard"
+      }
     },
     "vcup": {
       "title": "Dalcupen",
@@ -1175,6 +1266,15 @@ export const sv_SE: EnTranslations = {
       "browserEffectsReduced": "Reducerad",
       "browserEffectsMinimal": "Minimal",
       "browserEffectsNote": "Auto dämpar tunga CSS-effekter (oskärpa, glöd, bakgrundsrörelse) baserat på din webbläsare och enhet. Sänk den manuellt om gränssnittet känns trögt.",
+      "graphicsApply": "Tillämpa grafik",
+      "graphicsApplying": "Tillämpar grafikinställningar...",
+      "graphicsApplied": "Grafikinställningarna har tillämpats.",
+      "graphicsSaved": "Grafikinställningarna har sparats. Den aktiva renderaren matchar dem redan.",
+      "graphicsFailed": "Grafiken kunde inte tillämpas. Dina tidigare inställningar är fortfarande aktiva.",
+      "graphicsRetry": "Försök igen med grafiken",
+      "graphicsFatal": "Grafikåterställningen misslyckades. Ladda om spelet för att fortsätta.",
+      "graphicsReload": "Ladda om spelet",
+      "graphicsDraftChanged": "Grafikändringarna är redo att tillämpas.",
       "interfaceMode": "Gränssnittsläge",
       "interfaceModeAuto": "Auto",
       "interfaceModeDesktop": "Skrivbord",
@@ -1206,6 +1306,7 @@ export const sv_SE: EnTranslations = {
       "itemScoreLine": "Poäng {score}",
       "showSecondaryActionBar": "Visa sekundärt handlingsfält",
       "showThirdActionBar": "Visa tredje åtgärdsfältet",
+      "lockActionBars": "Lås åtgärdsfälten",
       "showTargetOfTarget": "Visa målets mål",
       "showAttackButton": "Visa attackknapp",
       "showDailyRewardsChest": "Visa kistan för dagliga belöningar",
@@ -1367,20 +1468,38 @@ export const sv_SE: EnTranslations = {
     },
     "landing": {
       "highContrast": "Hög kontrast",
-      "highContrastAria": "Växla bakgrund med hög kontrast: inaktiverar den rörliga trailern så att texten på startskärmen förblir läsbar"
+      "highContrastAria": "Växla bakgrund med hög kontrast: inaktiverar den rörliga trailern så att texten på startskärmen förblir läsbar",
+      "browserSupport": {
+        "title": "Observera: webbläsaren stöds inte",
+        "body": "Du kan uppleva sämre prestanda i den här webbläsaren. För bästa upplevelse, hämta skrivbordsappen för Windows, macOS eller Linux. Föredrar du att spela i en webbläsare? Chrome fungerar bäst, och Firefox och Safari stöds också.",
+        "getDesktopApp": "Hämta skrivbordsappen",
+        "continueInBrowser": "Fortsätt i webbläsaren",
+        "dismissAria": "Stäng meddelandet om webbläsare som inte stöds"
+      }
     },
     "warfare": {
       "honorAmount": "{amount} Heder",
       "dualPrice": "{money} + {honor}",
       "balance": "Heder: {amount}",
       "honorFloat": "+{amount} Heder",
+      "honorFloatReason": "+{amount} Honor ({reason})",
       "honorGain": "Du får {amount} Heder ({reason}).",
       "notEnoughHonor": "Inte tillräckligt med heder.",
       "reasons": {
         "arenaWin": "Arenaseger",
         "fiestaKill": "Fiesta-nedtagning",
         "fiestaComplete": "Fiesta avklarad",
-        "fiestaWin": "Fiesta-seger"
+        "fiestaWin": "Fiesta-seger",
+        "battlegroundWin": "Thornhollow Fields victory",
+        "battlegroundFirstWin": "first Thornhollow Fields win today",
+        "battlegroundComplete": "Thornhollow Fields battle fought",
+        "battlegroundKill": "honorable kill",
+        "battlegroundAssist": "killing blow assisted"
+      },
+      "floatReasons": {
+        "kill": "Kill",
+        "assist": "Assist",
+        "firstWin": "First Win"
       }
     },
     "charSheet": {
@@ -1736,6 +1855,7 @@ export const sv_SE: EnTranslations = {
       "itemAriaEnchanted": "{item}, antal {count}, förtrollad kopia",
       "itemAriaBound": "{item}, antal {count}, bunden kopia",
       "itemAriaMasterwork": "{item}, antal {count}, mästerverk",
+      "itemAriaQuest": "{item}, antal {count}, uppdragsföremål",
       "filterGroupAria": "Filtrera väskor efter kategori",
       "filterAll": "Alla",
       "filterWeapon": "Vapen",
@@ -1744,6 +1864,7 @@ export const sv_SE: EnTranslations = {
       "filterMaterial": "Material",
       "filterTool": "Verktyg",
       "filterQuest": "Uppdrag",
+      "filterQuestCountAria": "Uppdrag, {count} föremål",
       "filterMount": "Riddjur",
       "sortAria": "Sortera väskföremål",
       "sortRecent": "Senaste",
@@ -1752,6 +1873,7 @@ export const sv_SE: EnTranslations = {
       "searchPlaceholder": "Sök föremål",
       "searchAria": "Sök väskföremål efter namn",
       "noMatch": "Inga föremål matchar dina filter.",
+      "noQuestItems": "Inga uppdragsföremål i dina väskor.",
       "capacity": "{used}/{total}",
       "capacityAria": "Använda väskplatser: {used} av {total}",
       "backpack": "Ryggsäck",
@@ -1785,6 +1907,7 @@ export const sv_SE: EnTranslations = {
       "dmgDoneReduce": "Minskar orsakad skada med {pct}%",
       "heatingUp": "Ditt nästa på varandra följande kritiska Eld-byggarslag ger Het svit; ett icke-kritiskt byggarslag tar bort Värms upp",
       "elementalConvergencePrimed": "Din nästa besvärjelse från den andra elementarskolan ger Elementär konvergens",
+      "carriedFlag": "You are carrying the enemy flag. Cancel this buff to drop it.",
       "battleStance": "Stridsställning: 10% mer raserigenerering",
       "berserkerStance": "Bärsärkaställning: kritiska träffar sker 3% oftare och slår 3% hårdare",
       "crit": "Ökar kritisk träffchans med {pct}%",
@@ -1970,6 +2093,8 @@ export const sv_SE: EnTranslations = {
     },
     "materialHint": {
       "fineGrade": "Fin kvalitet. Bruten ur en åder av full nivå med ett verktyg som rankar över materialet, och räknas som den vanliga versionen varhelst en sådan krävs.",
+      "cookingCatch": "Ingrediens för matlagning. Måste tillagas innan den kan ätas.",
+      "usedBy": "Used by {crafts}.",
       "arcaneDust": "Förtrollningsreagens. Fås genom avförtrollning av vanlig och ovanlig utrustning.",
       "arcaneEssence": "Förtrollningsreagens. Fås genom avförtrollning av sällsynt utrustning.",
       "arcaneShard": "Förtrollningsreagens. Fås genom avförtrollning av episk och legendarisk utrustning.",
@@ -2251,6 +2376,7 @@ export const sv_SE: EnTranslations = {
       "depositHint": "Klicka för att sätta in",
       "depositPartialHint": "Skift-klicka för att sätta in en del av antalet",
       "cannotDeposit": "Kan inte förvaras i banken",
+      "cannotDepositNow": "Kan inte sättas in just nu",
       "depositQuantityTitle": "Sätt in {item}",
       "depositQuantityInput": "Antal att sätta in",
       "depositQuantityConfirm": "Sätt in",
@@ -2261,6 +2387,7 @@ export const sv_SE: EnTranslations = {
       "sortAria": "Sortera bankföremål",
       "searchAria": "Sök bankföremål efter namn",
       "depositAll": "Sätt in alla material",
+      "depositAllTooltip": "Skickar alla hantverksreagenser och skräpföremål från dina väskor till banken i en enda resa. Insamlingsverktyg, utrustad utrustning, uppdragsföremål och förbrukningsvaror rörs aldrig.",
       "depositAllDone": "Material insatta: {count}.",
       "depositAllFull": "Material insatta: {count}. Banken är nu full.",
       "depositAllNone": "Banken är full: inget sattes in.",
@@ -2276,7 +2403,50 @@ export const sv_SE: EnTranslations = {
       "bonusAdvertWallet": "Länka en plånbok för att tjäna 2 fack.",
       "bonusReferralProgress": "{count}/{cap}",
       "bonusReferralExplainer": "Bjud in en vän: när vännen når nivå 10 tjänar ni 2 fack var, upp till 5 vänner.",
-      "bonusSectionAria": "Bonusbankfack och hur du tjänar fler"
+      "bonusSectionAria": "Bonusbankfack och hur du tjänar fler",
+      "tabsAria": "Bankflikar",
+      "personalTab": "Personligt",
+      "guildTab": "Gille",
+      "guildCapacityAria": "Använda fack i gillesbanken: {used} av {total}",
+      "guildEmpty": "Gillesbanken är tom.",
+      "guildTreasury": "Gillets kassa",
+      "guildDepositGold": "Sätt in pengar",
+      "guildWithdrawGold": "Ta ut pengar",
+      "guildDepositGoldTitle": "Sätt in pengar i gillets kassa",
+      "guildWithdrawGoldTitle": "Ta ut pengar från gillets kassa",
+      "guildGoldAvailable": "Tillgängligt: {amount}",
+      "guildBuyConfirm": "Köp {count} extra fack i gillesbanken för {price} från gillets kassa?",
+      "guildBuyNote": "Betalas från gillets kassa",
+      "guildTreasuryShort": "Kassan räcker inte",
+      "guildOpenBank": "Öppna gillesbanken",
+      "guildOpenConfirm": "Öppna gillesbanken för {price}? Detta betalas med dina egna pengar.",
+      "guildOpenAccept": "Öppna",
+      "guildOpenNote": "Betalas med dina egna pengar, inte gillets kassa",
+      "guildPurseShort": "Otillräckligt med pengar",
+      "guildDormantNote": "Fastlåsta föremål kan inte tas ut och hindrar gillet från att upplösas.",
+      "guildDormantHint": "Det här föremålet är fastlåst i gillesbanken och kan inte tas ut.",
+      "guildDormantAria": "{item}, antal {count}, kan inte tas ut",
+      "guildUnknownItem": "Okänt föremål",
+      "guildDepositHint": "Klicka för att sätta in i gillesbanken",
+      "guildCannotDeposit": "Kan inte läggas i gillesbanken",
+      "guildGoldCannotMove": "Det beloppet kan inte flyttas just nu.",
+      "guildViewsAria": "Vyer för gillesbanken",
+      "guildContentsTab": "Innehåll",
+      "guildLogTab": "Logg",
+      "logAria": "Aktivitetslogg för gillesbanken",
+      "logNote": "De {count} senaste händelserna i gillesbanken.",
+      "logLoading": "Laddar gillesbankens logg...",
+      "logEmpty": "Inget har flyttats in i eller ut ur gillesbanken ännu.",
+      "logRefused": "Endast gillesofficerare kan läsa gillesbankens logg.",
+      "logFormerMember": "En tidigare gillesmedlem",
+      "logDepositItem": "{actor} satte in {count} {item}",
+      "logWithdrawItem": "{actor} tog ut {count} {item}",
+      "logDepositMoney": "{actor} satte in {amount}",
+      "logWithdrawMoney": "{actor} tog ut {amount}",
+      "logBuySlots": "{actor} köpte en bankutökning för {amount}",
+      "logOpenBank": "{actor} öppnade gillesbanken för {amount}",
+      "logCharterFee": "{actor} betalade gillets stadgeavgift på {amount}",
+      "logAdminPurge": "En administratör tog bort {count} {item}"
     },
     "calendar": {
       "title": "Evenemangskalender",
@@ -2313,10 +2483,6 @@ export const sv_SE: EnTranslations = {
         "marketDay": {
           "title": "Marknadsdag",
           "note": "Köpmannen väntar färska varor. En fin dag att botanisera på Världsmarknaden."
-        },
-        "fiestaNight": {
-          "title": "Fiestanatt",
-          "note": "2v2-fiestans ring drar sin högljuddaste publik i kväll."
         },
         "arenaClash": {
           "title": "Arenadrabbning",
@@ -2555,6 +2721,18 @@ export const sv_SE: EnTranslations = {
         "artisansEye": "Hantverkarens öga",
         "quickeningCharm": "Spänstamulett"
       },
+      "toolEffectTooltip": {
+        "kind": "Tool charm",
+        "bonus": {
+          "gatherersCache": "+1 yield per harvest while charged.",
+          "artisansEye": "Raises the harvest grade by 1 tool tier while charged.",
+          "quickeningCharm": "Shortens the node respawn timer it triggers."
+        },
+        "howToSlot": "Slot onto a mining, logging, or herbalism tool from the Professions window. Consumed when slotted.",
+        "charges": "Starts with {base} charges on a common tool (+{bonus} per rarity rung).",
+        "landOnly": "Does not slot on fishing rods.",
+        "openProfessions": "Open Professions to slot this onto a gathering tool."
+      },
       "toolEffectSlotButton": "Montera {effect}",
       "toolEffectRechargeButton": "Ladda om",
       "toolEffectSlotted": "{effect} monterad på {profession}.",
@@ -2591,8 +2769,8 @@ export const sv_SE: EnTranslations = {
     "crafting": {
       "title": "Hantverk",
       "close": "Nära hantverk",
-      "dialogOption": "Crafting",
-      "dialogOptionAria": "Open the crafting window for {craft}",
+      "dialogOption": "Hantverk",
+      "dialogOptionAria": "Öppna hantverksfönstret för {craft}",
       "craft": "Hantverk",
       "reagentsNeeded": "Kräver:",
       "reagentLine": "{name}: {have}/{required}",
@@ -2667,6 +2845,8 @@ export const sv_SE: EnTranslations = {
       "masterworkToast": "Mästerverk! {name}",
       "masterworkZoneLine": "{crafter} skapade ett mästerverk {name}!",
       "tierUpToast": "{craft} avancerat till nivå {tier}!",
+      "skillUpToast": "{skill} skill increased to {level}!",
+      "skillUpSubtext": "Skill increased to {level}!",
       "trendNudge": "Dina händer lutar mot {archetype}. Dess inriktning väntar hos {master}.",
       "trendNudgeNoMaster": "Dina händer lutar mot {archetype}. Sök en hantverksmästare för att ta det upp.",
       "attunedZoneLine": "{name} har inriktats som {archetype}!",
@@ -2902,7 +3082,7 @@ export const sv_SE: EnTranslations = {
       "countLabel": "{earned}/{total} bedrifter",
       "completionAria": "Fullbordade bedrifter: {earned} av {total}",
       "recentLabel": "Nyligen:",
-      "recentJumpAria": "Jump to {name}",
+      "recentJumpAria": "Hoppa till {name}",
       "nearestLabel": "Nästan framme:",
       "filterGroupAria": "Filtrera bedrifter",
       "filterAll": "Alla",
@@ -3128,6 +3308,7 @@ export const sv_SE: EnTranslations = {
       "talents": "Talanger",
       "arena": "Arena och PvP",
       "valeCup": "Dalcupen",
+      "thornhollow": "Thornhollow Fields",
       "deeds": "Bedrifternas bok",
       "glossary": "Ordlista",
       "wishIKnew": "Saker jag önskar att jag visste",
@@ -3898,23 +4079,25 @@ export const sv_SE: EnTranslations = {
       "duelsBody": "Utmana vilken spelare du än möter till en vänskaplig duell. Inget står på spel utom stoltheten, så det är det enklaste sättet att lära sig en matchning eller göra upp en vänskaplig tvist.",
       "coliseumHeading": "Det askgråa colosseumet",
       "coliseumBody": "Coliseum är rikets arena, där du möter andra spelare i rankade matcher, en mot en eller två mot två. Varje division håller sin egen ställning, så en seger lyfter dig uppför den stegen för hela riket att se. Öppna Arena-fönstret för att anmäla dig till en division, ensam eller med din partner.",
-      "fiestaHeading": "Två-mot-två-fiesta",
-      "fiestaBody": "Fiesta är ett snabbt slagsmål två mot två som utkämpas som en enda sammanhängande drabbning, med varje kämpe ställd på jämn fot. Medan striden pågår draftar du förstärkningar, snabba boostar som omformar din uppsättning i farten, så att inga två matcher spelas riktigt likadant.",
-      "augmentsNote": "Förstärkningar och kraftuppladdningar håller bara under matchen. De handlar om lekfulla, improviserade byggen, inte varaktig makt, så ingen köper sig till en seger.",
-      "wavesTitle": "Förstärkningar kommer i vågor",
-      "wavesBody": "En Fiesta-drabbning ger dig färska val efter hand, och valen blir djärvare ju längre striden pågår. Du bygger från en våg till nästa, väljer ett av några få alternativ varje gång och behåller det resten av drabbningen.",
-      "waveSilverTitle": "Silver",
-      "waveSilverBody": "Den inledande vågen: rena boostar för en enda egenskap som skärper grunderna i din klass.",
-      "waveGoldTitle": "Guld",
-      "waveGoldBody": "Den mellersta vågen: tveeggade kombinationer där ditt bygge börjar ta form och sjunga.",
-      "wavePrismaticTitle": "Prismatisk",
-      "wavePrismaticBody": "Den sista vågen: byggesdefinierande, skärmsmältande toppar avsedda att kännas löjliga på bästa sätt.",
-      "yumiHeading": "Skydda Yumi",
-      "yumiBody": "Skydda Yumi är ett lagbaserat målläge som spelas i en labyrint: varje sida vaktar sin egen kattföljeslagare samtidigt som den jagar den andra. Med jämna mellanrum blinkar båda katterna till nya hörn av labyrinten, så striden pendlar mellan att försvara, jaga och kappas om att hitta dem igen. Köa som tre mot tre eller fem mot fem; att falla i strid sätter dig bara på bänken en kort stund.",
-      "powerupsTitle": "Kraftuppladdningar i ringen",
-      "powerupsBody": "Glödande klot faller också ner i arenan mitt i striden, fria för den som når dem först. De är medvetet överdrivna och håller bara en kort stund: Fartdemon för en blinkning av bländande fart, Koloss för att svälla upp till en lufsande jätte, Månstövlar för ett studsande hopp med låg gravitation, och Bärsärk för en plötslig våg av ursinne.",
       "ladderHeading": "Klättra på rankingstegen",
       "ladderBody": "Rankat spel följer din ställning över tid. Kolla topplistan för att se var du befinner dig och vem som håller rikets topp."
+    },
+    "thornhollowPage": {
+      "heading": "Thornhollow Fields",
+      "intro": "A ranked 5v5 capture-the-flag battleground fought in a walled hollow in the old growth below Thornpeak, where two ruined keeps face each other down the length of a ravine and an older courtyard sits between them that neither has ever held. Two teams of five, two keeps, one goal: steal the enemy banner and run it home before they run yours.",
+      "queueHeading": "Queueing up",
+      "queueBody": "Open the Thornhollow Fields panel and enter the queue solo, or bring a party of up to five and queue together: parties are always kept on one team, and the remaining seats fill with solo champions. When ten stand ready, the match seats both teams at their keeps for a short form-up before the flags go live.",
+      "fieldHeading": "The field",
+      "fieldBody": "A walled, open-air field carved into three chambers: each team has its own field before its keep, and the walled Ruin Courtyard sits between them. Two curtain walls span the full width, and every move between chambers passes a contested crossing: the wide main gate, or the gatehouse, a small room straddling the wall whose offset doors force a jog past an ambush corner. Each keep is sealed except its mouth, so every flag run starts and ends through the same opening, and a low barricade breaks the straight charge into it. The courtyard holds the hollow heart ruin and the two flank Sprint Runes; the other two wait on the flag approaches. A Battle or Ward Rune (more damage dealt, or less damage taken, for a few seconds) waits at each main gate's courtyard mouth: both pads open the match on the same face and flip with every claim.",
+      "flagsHeading": "Flags",
+      "flagsBody": "Each keep holds its team flag. Take the enemy flag and carry it to your own stand to score; the first team to three captures wins, and a timed-out battle resolves on score. A slain carrier drops the flag where they fell: an enemy can take it up again, while its own team returns it home instantly just by reaching it. The flag also refuses to hide: picking it up breaks stealth, and a carrier who turns invisible by any means drops it on the spot.",
+      "pickupNote": "Picking a flag up is always a deliberate press of the battleground action key: nobody ever becomes the carrier by strafing through the wrong spot.",
+      "respawnHeading": "Falling in battle",
+      "respawnBody": "Death keeps the classic rite: your corpse lies where it fell until YOU release, and the spirit rises in the fenced graveyard beside your keep, warded there until your team's next respawn wave. The wave raises every waiting spirit together, and the two team waves are deliberately staggered, so the fight never fully resets at once. There is no corpse run and no Spirit Healer bargain: release, wait out the wave, fight.",
+      "carrierHeading": "Carrying the flag",
+      "carrierBody": "A carrier who holds the enemy flag too long grows more and more vulnerable, taking ever-increasing damage until the flag is captured, dropped, or returned. Hiding with the flag is a losing plan; running it home is the winning one.",
+      "ladderHeading": "The ladder",
+      "ladderBody": "Every match moves a persistent per-character battleground rating, win or lose, and the all-time board ranks the realm champions. Wins and hard-fought losses also pay Honor through the Warfare system."
     },
     "valeCupPage": {
       "heading": "Dalcupen",
@@ -5802,7 +5985,6 @@ export const sv_SE: EnTranslations = {
   "yumi": {
     "bracket3": "Yumi 3 mot 3",
     "bracket5": "Yumi 5 mot 5",
-    "enterQueue": "Gå med i Skydda Yumi!",
     "queue": {
       "join": "Du går med i kön till Skydda Yumi. Vakta din följeslagare…",
       "leave": "Du lämnar kön till Skydda Yumi.",
@@ -5840,9 +6022,6 @@ export const sv_SE: EnTranslations = {
   },
   "fiesta": {
     "bracket": "Fiesta",
-    "enterQueue": "Gå med i Fiestan!",
-    "practice": "🎉 Öva mot bottar",
-    "practiceNote": "Offlineträning: skapar 3 AI-bottar och ställer dig i kö för en 2v2-Fiesta. Klicka igen för att sluta.",
     "banner": {
       "wave": "VÅG {wave}/{total} - VÄLJ EN FÖRSTÄRKNING!",
       "augmentGained": "Förstärkning erhållen: {name}!",
@@ -6099,16 +6278,16 @@ export const sv_SE: EnTranslations = {
   },
   "desktop": {
     "update": {
-      "checkingTitle": "Checking for updates...",
-      "checkingBody": "New versions download while you play.",
-      "uptodateTitle": "You're up to date",
+      "checkingTitle": "Söker efter uppdateringar...",
+      "checkingBody": "Nya versioner laddas ner medan du spelar.",
+      "uptodateTitle": "Du har den senaste versionen",
       "downloadingTitle": "Laddar ner uppdatering {version}...",
-      "downloadingBody": "You can keep playing. It installs when you quit.",
+      "downloadingBody": "Du kan fortsätta spela. Den installeras när du avslutar.",
       "readyTitle": "Uppdatering {version} är klar",
       "readyBody": "Den installeras när du avslutar, eller starta om nu.",
       "restart": "Starta om nu",
       "later": "Senare",
-      "dismiss": "Dismiss"
+      "dismiss": "Stäng"
     },
     "crash": {
       "title": "World of ClaudeCraft",
@@ -6324,7 +6503,6 @@ export const sv_SE: EnTranslations = {
       "mobileMore": "Mer",
       "mobileMoreAria": "Visa fler menyer",
       "mobileSocial": "Socialt",
-      "mobileArena": "Arena",
       "mobileMenu": "Meny",
       "mobileSettings": "Inställningar",
       "mobileUse": "Använd",
@@ -6441,7 +6619,7 @@ export const sv_SE: EnTranslations = {
         "nameplates": "Växla namnskyltar",
         "meters": "Skademätare",
         "social": "Vänner och gille",
-        "arena": "Arena (Askgrå kolosseum)",
+        "arena": "PvP (Thornhollow Fields and Arenas)",
         "chat": "Öppna chatt",
         "attack": "Anfall",
         "actionBarSlot": "Handlingsfält {slot}"
@@ -6575,6 +6753,11 @@ export const sv_SE: EnTranslations = {
     },
     "system": {
       "playerDeath": "Du har dött.",
+      "deathRecapKillerAbility": "Du har dött. Dräpt av {killer}s {ability}.",
+      "deathRecapKiller": "Du har dött. Dräpt av {killer}.",
+      "deathRecapAbility": "Du har dött. Dräpt av {ability}.",
+      "deathRecapFalling": "Du har dött. Du föll till din död.",
+      "deathRecapDrowned": "Du har dött. Du drunknade.",
       "respawn": "Du känner dig utvilad och hel igen.",
       "ignoringChat": "Ignorerar chatt från {name}.",
       "noLongerIgnoring": "Ignorerar inte längre {name}.",
@@ -7065,6 +7248,7 @@ export const sv_SE: EnTranslations = {
       "quest": "Uppdragsföremål",
       "junk": "Skräp",
       "fineMaterial": "Fint material",
+      "material": "Material",
       "food": "Mat",
       "drink": "Dryck",
       "tool": "Verktyg",
@@ -7097,6 +7281,9 @@ export const sv_SE: EnTranslations = {
       "useFood": "Använd: Återställer {amount} hälsa under {seconds} sek. Du måste förbli sittande medan du äter.",
       "useDrink": "Använd: Återställer {amount} mana under {seconds} sek. Du måste förbli sittande medan du dricker.",
       "questItem": "Uppdragsföremål",
+      "questRelated": "Uppdrag: {quest}",
+      "questRules": "Kan inte säljas, bankas eller bytas bort.",
+      "questOrphaned": "Behövs inte för något aktivt uppdrag.",
       "classes": "Klasser: {classes}",
       "sellPrice": "Försäljningspris: {money}",
       "clickBuy": "Klicka för att köpa",
@@ -7232,6 +7419,12 @@ export const sv_SE: EnTranslations = {
       "reclaim": "Återkalla",
       "buyAria": "Köp {item} för {price}",
       "reclaimAria": "Återkalla {item}",
+      "buyConfirmTitle": "Bekräfta köp",
+      "buyConfirmBody": "Köp {item} för {price}?",
+      "buyConfirmBodyStack": "Köp {item} x{count} för {price} ({each} styck)?",
+      "buyConfirmAccept": "Köp",
+      "buyConfirmCancel": "Avbryt",
+      "buyChanged": "Den listningen ändrades innan du bekräftade. Kontrollera priset och försök igen.",
       "sellNote": "Lägg upp varor från dina väskor. Köpmannen tar {cut}% i provision när ett föremål säljs. Du använder {used}/{max} listningsplatser.",
       "sellPickEmpty": "Klicka på ett föremål i dina väskor för att välja vad du vill sälja.",
       "quantity": "Antal",
@@ -8719,6 +8912,18 @@ export const sv_SE: EnTranslations = {
       "fen_muster_order": {
         "name": "Kärrbros mönstringsorder"
       },
+      "firebottle": {
+        "name": "Eldflaska"
+      },
+      "murloc_hut": {
+        "name": "Dyfenehydda"
+      },
+      "restless_skull": {
+        "name": "Rastlös skalle"
+      },
+      "vanguard_bone": {
+        "name": "Förtruppsben"
+      },
       "mire_prowler_pelt": {
         "name": "Kärrstrykarpäls"
       },
@@ -9994,6 +10199,21 @@ export const sv_SE: EnTranslations = {
       "reins_terrorspark_groundshaker": {
         "name": "Tändningsnyckel: Skräckgnista, markskakaren"
       },
+      "reins_drakemaw_raptor": {
+        "name": "Tyglar till Drakgapsraptorn"
+      },
+      "moggers_hide_quiver": {
+        "name": "Moggers skinnkoger"
+      },
+      "cragmaw_huntquiver": {
+        "name": "Klippkäftens jaktkoger"
+      },
+      "gravewyrm_bone_quiver": {
+        "name": "Gravlindormens benkoger"
+      },
+      "direfang_quiver": {
+        "name": "Direfang-koger"
+      },
       "conjured_water4": {
         "name": "Frambesvärjt källvatten"
       },
@@ -10989,6 +11209,21 @@ export const sv_SE: EnTranslations = {
       "spider_egg_sac": {
         "name": "Spindeläggsäck"
       },
+      "spider_egg": {
+        "name": "Yngelmoderns ägg"
+      },
+      "widow_hatchling": {
+        "name": "Änkeyngel"
+      },
+      "drowned_warlord": {
+        "name": "Den drunknade krigsherren"
+      },
+      "brakka_wallbreaker": {
+        "name": "Brakka Murbrytaren"
+      },
+      "threnos_first_voice": {
+        "name": "Threnos, den första rösten"
+      },
       "grave_silt_bulwark": {
         "name": "Gravslamsbålverk"
       },
@@ -11168,6 +11403,18 @@ export const sv_SE: EnTranslations = {
       },
       "cindraleth_maw_matriarch": {
         "name": "Cindraleth, Gapets matriark"
+      },
+      "dragonkin_egg": {
+        "name": "Drakättsägg"
+      },
+      "dragonkin_whelp": {
+        "name": "Drakättsunge"
+      },
+      "dragonkin_broodguard": {
+        "name": "Drakättskullvakt"
+      },
+      "drakemaw_broodlord": {
+        "name": "Drakgapets kullherre"
       },
       "gilded_stag": {
         "name": "Förgylld hjort"
@@ -12201,7 +12448,7 @@ export const sv_SE: EnTranslations = {
       },
       "q_no_rest": {
         "title": "Ingen ro i vassen",
-        "text": "Riten på de där rökelsekaren binder de dränkta att resa sig var än kärret rör vid dem - och kärret rör vid allt. Det finns ingen ro i dessa vassar förrän de döda är fler än de levande. Vi kan inte upphäva riten ännu, men vi kan tömma den på soldater. Lägg ytterligare 14 av de dränkta döda till ro.",
+        "text": "Riten på dessa rökelsekar binder de drunknade att resa sig, och nu har den väckt en stark nog att leda dem. Väktarna kallar honom Den drunknade krigsherren, och så länge han håller Det dränkta kapellet behåller de döda sina led. Krossa honom, {playerName}, så sprids resten tillbaka ut i kärret.",
         "completion": "Du ger de döda mer nåd än deras mästare någonsin gjorde. Ta detta - du har mer än förtjänat det.",
         "objectives": {
           "0": {
@@ -12479,9 +12726,6 @@ export const sv_SE: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Lindormskultsivrare dräpt"
-          },
-          "1": {
-            "label": "Lindormskultens order"
           }
         }
       },
@@ -12492,9 +12736,6 @@ export const sv_SE: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Lindormssektens nekromant dräpt"
-          },
-          "1": {
-            "label": "Rituellt fylakterium"
           }
         }
       },

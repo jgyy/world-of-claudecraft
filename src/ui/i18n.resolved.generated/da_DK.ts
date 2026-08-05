@@ -911,6 +911,7 @@ export const da_DK: EnTranslations = {
       "minutesSeconds": "{m}m {s}s",
       "seconds": "{s}s",
       "autoShowHint": "Rækker vises automatisk, når din gruppe påfører skade eller heling, og dette segment lukker et par sekunder efter kampens afslutning.",
+      "threatFallback": "No live threat: showing damage to {name}",
       "breakdownSummary": "{tab}: {value}",
       "breakdownRow": "{value} ({percent})",
       "breakdownOther": "Andet ({count})",
@@ -950,6 +951,7 @@ export const da_DK: EnTranslations = {
       "targetFriendlyNext": "Skift allieret mål",
       "discord": "Discord",
       "valecup": "Dalpokalen",
+      "bgFlag": "Battleground Flag Action",
       "sheathe": "Gem/fremvis våben",
       "categoryPet": "Kæledyr",
       "petAttack": "Kæledyr: Angrib",
@@ -997,6 +999,7 @@ export const da_DK: EnTranslations = {
       "name_stormfeather_griffin": "Himmelrækkende Stormfjer",
       "name_thunderstrut_gobbler": "Tordenspanker den Store Kalkun",
       "name_terrorspark_groundshaker": "Skrækgnist, jordrysteren",
+      "name_drakemaw_raptor": "Dragegabets Raptor",
       "desc_valorsteed": "En hårdfør, sikker ganger, der giver øget rejsehastighed.",
       "desc_grag_bear": "En hårdfør, sikker bjørn, der giver øget rejsehastighed.",
       "desc_stalkglider_snail": "En robust, langsomt forbrændende snegl, der giver øget rejsehastighed.",
@@ -1004,7 +1007,8 @@ export const da_DK: EnTranslations = {
       "desc_shadowjump_toad": "En enorm, sikker kæmpetudse, trænet i lynhurtige skyggehop, der dækker ethvert terræn.",
       "desc_stormfeather_griffin": "En kongelig stormgrif, der bevæger sig hen over jorden på runebeslåede kløer, med sammenfoldede vinger.",
       "desc_thunderstrut_gobbler": "En kolossal, stormudklækket kalkun, der spankulerer ned fra Den Opvågnende Tinde, med halen udfoldet som en tordensky.",
-      "desc_terrorspark_groundshaker": "En kompakt panseret maskine med tunge larvebånd, en grovkalibret kanon og en saddel bygget til frygtløse førere."
+      "desc_terrorspark_groundshaker": "En kompakt panseret maskine med tunge larvebånd, en grovkalibret kanon og en saddel bygget til frygtløse førere.",
+      "desc_drakemaw_raptor": "En saddelvant yngelraptor fra Dragegabets Caldera, kun sener og spurt, som stadig lugter svagt af aske."
     },
     "mountTraining": {
       "mountPrompt": "Tryk på {key} for at stige op på trænings-Modgangeren.",
@@ -1024,6 +1028,93 @@ export const da_DK: EnTranslations = {
       "timeout": "Løb Mislykkedes",
       "progress": "Port {n} af {total}",
       "timeLeft": "{seconds}s"
+    },
+    "pvp": {
+      "launcherTitle": "PvP",
+      "mobileLabel": "PvP",
+      "bracket1v1": "1v1",
+      "bracket2v2": "2v2"
+    },
+    "bg": {
+      "title": "Thornhollow Fields",
+      "blurb": "Two ruined keeps face each other across a walled hollow in the shadow of Thornpeak: Crimson to the south, Azure to the north, and the older Ruin Courtyard between them that neither has ever held. Five a side, one banner each, and the first to carry three of theirs home takes the field.",
+      "modeTag": "5v5 Capture the Flag",
+      "offlineNote": "Thornhollow Fields is syncing. The queue opens once the realm answers.",
+      "ratingSummary": "Rating. {wins} wins / {losses} losses",
+      "careerCaptures": "Career captures: {count}",
+      "enterQueue": "Enter the Queue",
+      "enterQueueParty": "Enter the Queue (party of {count})",
+      "leaveQueue": "Leave Queue",
+      "searching": "Searching. {count}/{size} in queue.",
+      "queuedParty": "Party of {count}.",
+      "queueNote": "Two teams of five. Steal the enemy banner and run it to your keep. First to 3 captures wins. Group up to 5 and queue together; grab Sprint Runes and weave the cover to lose your pursuers.",
+      "matchInProgress": "Battle in progress. {crimson}:{azure}.",
+      "ladderAllTime": "Ladder. All-Time",
+      "noRanked": "No champions ranked yet. Be the first.",
+      "ladderOnline": "Ladder. Online Now",
+      "noChallengers": "No champions online right now. Be the first.",
+      "playerLevelClassTitle": "{name}. Level {level} {className}",
+      "playerClassTitle": "{name}. {className}",
+      "crimson": "Crimson",
+      "azure": "Azure",
+      "yourTeamTitle": "Your team",
+      "clock": "{minutes}:{seconds}",
+      "formUp": "Form up: {seconds}",
+      "firstTo": "First to {caps} captures",
+      "flagState": {
+        "home": "Flag at the keep",
+        "carried": "Flag stolen!",
+        "dropped": "Flag on the ground"
+      },
+      "respawnIn": "Next wave: respawning in {seconds}",
+      "resultVictory": "Victory!",
+      "resultDefeat": "Defeat",
+      "resultDraw": "Draw",
+      "leavingIn": "Leaving the battleground in {seconds}",
+      "killFeed": "{killer} felled {victim}",
+      "killFeedFallen": "{victim} has fallen",
+      "foundBanner": "Battle found. You fight for the {team}!",
+      "countdownBanner": "Thornhollow Fields begins in {seconds}",
+      "startBanner": "Capture the flag!",
+      "flagTakenLog": "{name} has taken the {team} flag!",
+      "flagDroppedLog": "The {team} flag was dropped.",
+      "flagReturnedLog": "The {team} flag was returned.",
+      "dropFlagConfirmTitle": "Drop the flag?",
+      "dropFlagConfirmBody": "You are carrying the enemy flag. Dropping it leaves it on the ground, where either team can reach it.",
+      "dropFlagConfirmAccept": "Drop the flag",
+      "boardToggleLabel": "Match scoreboard. Press Enter to pin the full board open.",
+      "levelRequirement": "You must reach level {level} to unlock queueing for this battleground.",
+      "board": {
+        "kills": "Kills",
+        "assists": "Assists",
+        "deaths": "Deaths",
+        "captures": "Captures"
+      },
+      "flagTakenBanner": "The {takers} have taken the {team} flag!",
+      "flagReturnedBanner": "The {team} flag was returned!",
+      "capturedTeamBanner": "The {takers} have captured the {team} flag! {crimson}:{azure}",
+      "capturedLog": "{name} captured the {team} flag. Score {crimson}:{azure}.",
+      "victoryBanner": "Victory! Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "defeatBanner": "Defeat. Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "drawBanner": "Thornhollow Fields draw {crimson}:{azure}. Rating {rating} ({delta})",
+      "endBannerDetail": "Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "endLog": "Thornhollow Fields ended {crimson}:{azure}. Rating {rating} ({delta}).",
+      "endedTimer": "Time expired",
+      "endedForfeit": "The match was forfeited",
+      "endedTimerLog": "The match clock ran out; the higher score took the field.",
+      "endedForfeitLog": "The match was forfeited.",
+      "firstWinBonusLine": "First win of the day: +{honor} Honor",
+      "firstWinBonusLog": "First win of the day: you gain {honor} bonus Honor.",
+      "timeWarningMinutes": "{minutes} minutes remain",
+      "timeWarningOneMinute": "One minute remains",
+      "timeWarningMinutesLog": "{minutes} minutes remain in the battle.",
+      "timeWarningOneMinuteLog": "One minute remains in the battle.",
+      "map": {
+        "crimsonKeep": "Crimson Keep",
+        "azureKeep": "Azure Keep",
+        "ruinCourtyard": "The Ruin Courtyard",
+        "graveyard": "Graveyard"
+      }
     },
     "vcup": {
       "title": "Dalpokalen",
@@ -1175,6 +1266,15 @@ export const da_DK: EnTranslations = {
       "browserEffectsReduced": "Reduceret",
       "browserEffectsMinimal": "Minimal",
       "browserEffectsNote": "Auto dæmper tunge CSS-effekter (slør, glød, baggrundsbevægelse) baseret på din browser og enhed. Sænk den manuelt, hvis grænsefladen føles træg.",
+      "graphicsApply": "Anvend grafik",
+      "graphicsApplying": "Anvender grafikindstillinger...",
+      "graphicsApplied": "Grafikindstillinger anvendt.",
+      "graphicsSaved": "Grafikindstillinger gemt. Den aktive grafikmotor matcher dem allerede.",
+      "graphicsFailed": "Grafikken kunne ikke anvendes. Dine tidligere indstillinger er stadig aktive.",
+      "graphicsRetry": "Prøv grafik igen",
+      "graphicsFatal": "Gendannelse af grafik mislykkedes. Genindlæs spillet for at fortsætte.",
+      "graphicsReload": "Genindlæs spillet",
+      "graphicsDraftChanged": "Grafikændringer er klar til at blive anvendt.",
       "interfaceMode": "Grænsefladetilstand",
       "interfaceModeAuto": "Auto",
       "interfaceModeDesktop": "Skrivebord",
@@ -1206,6 +1306,7 @@ export const da_DK: EnTranslations = {
       "itemScoreLine": "Score {score}",
       "showSecondaryActionBar": "Vis sekundær handlingslinje",
       "showThirdActionBar": "Vis tredje handlingslinje",
+      "lockActionBars": "Lås handlingsbjælker",
       "showTargetOfTarget": "Vis målets mål",
       "showAttackButton": "Vis angrebsknap",
       "showDailyRewardsChest": "Vis kisten med daglige belønninger",
@@ -1367,20 +1468,38 @@ export const da_DK: EnTranslations = {
     },
     "landing": {
       "highContrast": "Høj kontrast",
-      "highContrastAria": "Slå baggrund med høj kontrast til/fra: deaktiverer den bevægende trailer, så teksten på startskærmen forbliver læselig"
+      "highContrastAria": "Slå baggrund med høj kontrast til/fra: deaktiverer den bevægende trailer, så teksten på startskærmen forbliver læselig",
+      "browserSupport": {
+        "title": "Bemærk: ikke-understøttet browser",
+        "body": "Du kan opleve reduceret ydeevne i denne browser. For den bedste oplevelse kan du hente skrivebordsappen til Windows, macOS eller Linux. Foretrækker du at spille i en browser? Chrome fungerer bedst, og Firefox og Safari understøttes også.",
+        "getDesktopApp": "Hent skrivebordsappen",
+        "continueInBrowser": "Fortsæt i browseren",
+        "dismissAria": "Afvis meddelelsen om ikke-understøttet browser"
+      }
     },
     "warfare": {
       "honorAmount": "{amount} Ære",
       "dualPrice": "{money} + {honor}",
       "balance": "Ære: {amount}",
       "honorFloat": "+{amount} Ære",
+      "honorFloatReason": "+{amount} Honor ({reason})",
       "honorGain": "Du opnår {amount} Ære ({reason}).",
       "notEnoughHonor": "Ikke nok Ære.",
       "reasons": {
         "arenaWin": "Arenasejr",
         "fiestaKill": "Fiesta-nedlæggelse",
         "fiestaComplete": "Fiesta gennemført",
-        "fiestaWin": "Fiesta-sejr"
+        "fiestaWin": "Fiesta-sejr",
+        "battlegroundWin": "Thornhollow Fields victory",
+        "battlegroundFirstWin": "first Thornhollow Fields win today",
+        "battlegroundComplete": "Thornhollow Fields battle fought",
+        "battlegroundKill": "honorable kill",
+        "battlegroundAssist": "killing blow assisted"
+      },
+      "floatReasons": {
+        "kill": "Kill",
+        "assist": "Assist",
+        "firstWin": "First Win"
       }
     },
     "charSheet": {
@@ -1736,6 +1855,7 @@ export const da_DK: EnTranslations = {
       "itemAriaEnchanted": "{item}, antal {count}, fortryllet kopi",
       "itemAriaBound": "{item}, antal {count}, bundet kopi",
       "itemAriaMasterwork": "{item}, antal {count}, mesterværk",
+      "itemAriaQuest": "{item}, antal {count}, opgavegenstand",
       "filterGroupAria": "Filtrér tasker efter kategori",
       "filterAll": "Alle",
       "filterWeapon": "Våben",
@@ -1744,6 +1864,7 @@ export const da_DK: EnTranslations = {
       "filterMaterial": "Materialer",
       "filterTool": "Værktøjer",
       "filterQuest": "Quest",
+      "filterQuestCountAria": "Quest, {count} genstande",
       "filterMount": "Ridedyr",
       "sortAria": "Sortér taskegenstande",
       "sortRecent": "Nyeste",
@@ -1752,6 +1873,7 @@ export const da_DK: EnTranslations = {
       "searchPlaceholder": "Søg genstande",
       "searchAria": "Søg i taskegenstande efter navn",
       "noMatch": "Ingen genstande matcher dine filtre.",
+      "noQuestItems": "Ingen opgavegenstande i dine tasker.",
       "capacity": "{used}/{total}",
       "capacityAria": "Taskepladser brugt: {used} af {total}",
       "backpack": "Rygsæk",
@@ -1785,6 +1907,7 @@ export const da_DK: EnTranslations = {
       "dmgDoneReduce": "Reducerer skade gjort med {pct}%",
       "heatingUp": "Dit næste på hinanden følgende kritiske Ild-bygger-slag giver Hed Stime; et ikke-kritisk bygger-slag fjerner Opvarmning",
       "elementalConvergencePrimed": "Din næste trolddom fra den anden elementarskole giver Elementar Konvergens",
+      "carriedFlag": "You are carrying the enemy flag. Cancel this buff to drop it.",
       "battleStance": "Kampstilling: 10% mere raserigenerering",
       "berserkerStance": "Berserkerstilling: kritiske slag rammer 3% oftere og slår 3% hårdere",
       "crit": "Øger chancen for kritiske slag med {pct}%",
@@ -1970,6 +2093,8 @@ export const da_DK: EnTranslations = {
     },
     "materialHint": {
       "fineGrade": "Fin kvalitet. Indsamlet fra en åre på fuldt niveau med et værktøj, der rangerer over materialet, og tæller som den ordinære version, hvor end en sådan kræves.",
+      "cookingCatch": "Madlavningsingrediens. Skal tilberedes, før den kan spises.",
+      "usedBy": "Used by {crafts}.",
       "arcaneDust": "Fortryllelsesreagens. Fås ved affortryllelse af almindeligt og ualmindeligt udstyr.",
       "arcaneEssence": "Fortryllelsesreagens. Fås ved affortryllelse af sjældent udstyr.",
       "arcaneShard": "Fortryllelsesreagens. Fås ved affortryllelse af episk og legendarisk udstyr.",
@@ -2251,6 +2376,7 @@ export const da_DK: EnTranslations = {
       "depositHint": "Klik for at indsætte",
       "depositPartialHint": "Shift-klik for at indsætte et mindre antal",
       "cannotDeposit": "Kan ikke lægges i banken",
+      "cannotDepositNow": "Kan ikke indsættes lige nu",
       "depositQuantityTitle": "Indsæt {item}",
       "depositQuantityInput": "Antal at indsætte",
       "depositQuantityConfirm": "Indsæt",
@@ -2261,6 +2387,7 @@ export const da_DK: EnTranslations = {
       "sortAria": "Sortér bankens genstande",
       "searchAria": "Søg i bankens genstande efter navn",
       "depositAll": "Indsæt alle materialer",
+      "depositAllTooltip": "Sender alle håndværksmaterialer og skrammelgenstande fra dine tasker til banken på én gang. Indsamlingsværktøjer, udrustet udstyr, opgavegenstande og forbrugsvarer røres aldrig.",
       "depositAllDone": "Materialer indsat: {count}.",
       "depositAllFull": "Materialer indsat: {count}. Banken er nu fuld.",
       "depositAllNone": "Banken er fuld: intet indsat.",
@@ -2276,7 +2403,50 @@ export const da_DK: EnTranslations = {
       "bonusAdvertWallet": "Forbind en wallet for at optjene 2 pladser.",
       "bonusReferralProgress": "{count}/{cap}",
       "bonusReferralExplainer": "Invitér en ven: når din ven når niveau 10, optjener I hver især 2 pladser, op til 5 venner.",
-      "bonusSectionAria": "Bonuspladser i banken, og hvordan du optjener flere"
+      "bonusSectionAria": "Bonuspladser i banken, og hvordan du optjener flere",
+      "tabsAria": "Bankfaneblade",
+      "personalTab": "Personlig",
+      "guildTab": "Laug",
+      "guildCapacityAria": "Brugte laugsbankpladser: {used} af {total}",
+      "guildEmpty": "Laugsbanken er tom.",
+      "guildTreasury": "Laugets skatkammer",
+      "guildDepositGold": "Indsæt penge",
+      "guildWithdrawGold": "Tag penge ud",
+      "guildDepositGoldTitle": "Indsæt penge i laugets skatkammer",
+      "guildWithdrawGoldTitle": "Tag penge ud af laugets skatkammer",
+      "guildGoldAvailable": "Tilgængeligt: {amount}",
+      "guildBuyConfirm": "Køb {count} ekstra laugsbankpladser for {price} fra laugets skatkammer?",
+      "guildBuyNote": "Betalt fra laugets skatkammer",
+      "guildTreasuryShort": "Ikke nok i skatkammeret",
+      "guildOpenBank": "Åbn laugsbanken",
+      "guildOpenConfirm": "Åbn laugsbanken for {price}? Dette betales af dine egne penge.",
+      "guildOpenAccept": "Åbn",
+      "guildOpenNote": "Betalt af dine egne penge, ikke laugets skatkammer",
+      "guildPurseShort": "Ikke nok penge",
+      "guildDormantNote": "Låste genstande kan ikke tages ud og forhindrer, at lauget kan opløses.",
+      "guildDormantHint": "Denne genstand er låst i laugsbanken og kan ikke tages ud.",
+      "guildDormantAria": "{item}, antal {count}, kan ikke tages ud",
+      "guildUnknownItem": "Ukendt genstand",
+      "guildDepositHint": "Klik for at indsætte i laugsbanken",
+      "guildCannotDeposit": "Kan ikke lægges i laugsbanken",
+      "guildGoldCannotMove": "Det beløb kan ikke flyttes lige nu.",
+      "guildViewsAria": "Laugsbankens visninger",
+      "guildContentsTab": "Indhold",
+      "guildLogTab": "Log",
+      "logAria": "Laugsbankens aktivitetslog",
+      "logNote": "De {count} seneste handlinger i laugsbanken.",
+      "logLoading": "Indlæser laugsbankens log...",
+      "logEmpty": "Der er endnu ikke flyttet noget ind i eller ud af laugsbanken.",
+      "logRefused": "Kun laugsofficerer kan læse laugsbankens log.",
+      "logFormerMember": "Et tidligere laugsmedlem",
+      "logDepositItem": "{actor} indsatte {count} {item}",
+      "logWithdrawItem": "{actor} tog {count} {item} ud",
+      "logDepositMoney": "{actor} indsatte {amount}",
+      "logWithdrawMoney": "{actor} tog {amount} ud",
+      "logBuySlots": "{actor} købte en bankudvidelse for {amount}",
+      "logOpenBank": "{actor} åbnede laugsbanken for {amount}",
+      "logCharterFee": "{actor} betalte laugets stiftelsesgebyr på {amount}",
+      "logAdminPurge": "En administrator fjernede {count} {item}"
     },
     "calendar": {
       "title": "Begivenhedskalender",
@@ -2313,10 +2483,6 @@ export const da_DK: EnTranslations = {
         "marketDay": {
           "title": "Markedsdag",
           "note": "Købmanden venter friske varer. En fin dag at kigge på Verdensmarkedet."
-        },
-        "fiestaNight": {
-          "title": "Fiesta-Aften",
-          "note": "2v2-Fiesta-ringen trækker sine mest højrøstede tilskuere i aften."
         },
         "arenaClash": {
           "title": "Arenasammenstød",
@@ -2555,6 +2721,18 @@ export const da_DK: EnTranslations = {
         "artisansEye": "Håndværkerens Øje",
         "quickeningCharm": "Fjedrende Amulet"
       },
+      "toolEffectTooltip": {
+        "kind": "Tool charm",
+        "bonus": {
+          "gatherersCache": "+1 yield per harvest while charged.",
+          "artisansEye": "Raises the harvest grade by 1 tool tier while charged.",
+          "quickeningCharm": "Shortens the node respawn timer it triggers."
+        },
+        "howToSlot": "Slot onto a mining, logging, or herbalism tool from the Professions window. Consumed when slotted.",
+        "charges": "Starts with {base} charges on a common tool (+{bonus} per rarity rung).",
+        "landOnly": "Does not slot on fishing rods.",
+        "openProfessions": "Open Professions to slot this onto a gathering tool."
+      },
       "toolEffectSlotButton": "Sæt {effect} i",
       "toolEffectRechargeButton": "Genoplad",
       "toolEffectSlotted": "{effect} sat i på {profession}.",
@@ -2591,8 +2769,8 @@ export const da_DK: EnTranslations = {
     "crafting": {
       "title": "Håndværk",
       "close": "Tæt håndværk",
-      "dialogOption": "Crafting",
-      "dialogOptionAria": "Open the crafting window for {craft}",
+      "dialogOption": "Håndværk",
+      "dialogOptionAria": "Åbn håndværksvinduet for {craft}",
       "craft": "Håndværk",
       "reagentsNeeded": "Kræver:",
       "reagentLine": "{name}: {have}/{required}",
@@ -2667,6 +2845,8 @@ export const da_DK: EnTranslations = {
       "masterworkToast": "Mesterværk! {name}",
       "masterworkZoneLine": "{crafter} lavede et mesterværk {name}!",
       "tierUpToast": "{craft} avanceret til niveau {tier}!",
+      "skillUpToast": "{skill} skill increased to {level}!",
+      "skillUpSubtext": "Skill increased to {level}!",
       "trendNudge": "Dine hænder læner sig mod {archetype}. Dens indstilling venter hos {master}.",
       "trendNudgeNoMaster": "Dine hænder læner sig mod {archetype}. Søg en håndværksmester for at tage det op.",
       "attunedZoneLine": "{name} er indstillet som {archetype}!",
@@ -2902,7 +3082,7 @@ export const da_DK: EnTranslations = {
       "countLabel": "{earned}/{total} bedrifter",
       "completionAria": "Bedrifter opnået: {earned} af {total}",
       "recentLabel": "Seneste:",
-      "recentJumpAria": "Jump to {name}",
+      "recentJumpAria": "Hop til {name}",
       "nearestLabel": "Næsten i mål:",
       "filterGroupAria": "Filtrer bedrifter",
       "filterAll": "Alle",
@@ -3128,6 +3308,7 @@ export const da_DK: EnTranslations = {
       "talents": "Talenter",
       "arena": "Arena & PvP",
       "valeCup": "Dalpokalen",
+      "thornhollow": "Thornhollow Fields",
       "deeds": "Bedrifternes Bog",
       "glossary": "Ordliste",
       "wishIKnew": "Ting jeg ville ønske jeg vidste",
@@ -3898,23 +4079,25 @@ export const da_DK: EnTranslations = {
       "duelsBody": "Udfordr enhver spiller du møder til en venskabelig duel. Intet andet end stolthed står på spil, så det er den nemmeste måde at lære en kamp at kende eller bilægge en venskabelig uenighed.",
       "coliseumHeading": "Det Askegrå Colosseum",
       "coliseumBody": "Coliseum er rigets arena, hvor du møder andre spillere i rangerede kampe, en mod en eller to mod to. Hver kategori har sin egen placering, så en sejr løfter dig op ad den rangliste for hele riget at se. Åbn Arena-vinduet for at melde dig til en kategori, alene eller med din makker.",
-      "fiestaHeading": "To mod to Fiesta",
-      "fiestaBody": "Fiesta er en hurtig to-mod-to-kamp, spillet som én sammenhængende dyst, hvor hver kæmper stilles lige. Efterhånden som kampen skrider frem, vælger du forstærkninger, hurtige boosts der omformer dit udstyr undervejs, så ingen kampe spilles helt ens.",
-      "augmentsNote": "Forstærkninger og power-ups varer kun under kampen. De handler om legende, spontane builds, ikke om varig styrke, så ingen køber sig til en sejr.",
-      "wavesTitle": "Forstærkninger ankommer i bølger",
-      "wavesBody": "En Fiesta-dyst rækker dig friske valg undervejs, og valgene bliver dristigere, jo længere kampen kører. Du bygger fra én bølge til den næste, vælger en af nogle få muligheder hver gang og beholder den resten af dysten.",
-      "waveSilverTitle": "Sølv",
-      "waveSilverBody": "Den indledende bølge: rene boosts på én egenskab der skærper grundlaget for din klasse.",
-      "waveGoldTitle": "Guld",
-      "waveGoldBody": "Den midterste bølge: tveæggede kombinationer hvor din build begynder at tage form og synge.",
-      "wavePrismaticTitle": "Prismatisk",
-      "wavePrismaticBody": "Den sidste bølge: build-definerende, skærm-smeltende spidser der skal føles latterlige på den bedste måde.",
-      "yumiHeading": "Beskyt Yumi",
-      "yumiBody": "Beskyt Yumi er en holdbaseret måltilstand, der spilles i en labyrint: hver side vogter sin egen katfølgesvend, mens den jager modstanderens. Med jævne mellemrum blinker begge katte til nye hjørner af labyrinten, så kampen svinger mellem at forsvare, jage og kapløbet om at finde dem igen. Stil op som tre mod tre eller fem mod fem; at falde i kamp sætter dig kun på bænken et øjeblik.",
-      "powerupsTitle": "Power-ups i ringen",
-      "powerupsBody": "Glødende kugler falder også ned i arenaen midt i kampen, gratis for den der når dem først. De er bevidst overdrevne og varer kun et kort øjeblik: Speed Demon for et glimt af blændende fart, Colossus for at svulme op til en kluntet kæmpe, Moon Boots for et hoppende, lavtyngdekrafts-hop, og Berserker for et pludseligt udbrud af raseri.",
       "ladderHeading": "At klatre op ad rangstigen",
       "ladderBody": "Rangeret spil følger din placering over tid. Tjek ranglisten for at se hvor du ligger og hvem der holder toppen af riget."
+    },
+    "thornhollowPage": {
+      "heading": "Thornhollow Fields",
+      "intro": "A ranked 5v5 capture-the-flag battleground fought in a walled hollow in the old growth below Thornpeak, where two ruined keeps face each other down the length of a ravine and an older courtyard sits between them that neither has ever held. Two teams of five, two keeps, one goal: steal the enemy banner and run it home before they run yours.",
+      "queueHeading": "Queueing up",
+      "queueBody": "Open the Thornhollow Fields panel and enter the queue solo, or bring a party of up to five and queue together: parties are always kept on one team, and the remaining seats fill with solo champions. When ten stand ready, the match seats both teams at their keeps for a short form-up before the flags go live.",
+      "fieldHeading": "The field",
+      "fieldBody": "A walled, open-air field carved into three chambers: each team has its own field before its keep, and the walled Ruin Courtyard sits between them. Two curtain walls span the full width, and every move between chambers passes a contested crossing: the wide main gate, or the gatehouse, a small room straddling the wall whose offset doors force a jog past an ambush corner. Each keep is sealed except its mouth, so every flag run starts and ends through the same opening, and a low barricade breaks the straight charge into it. The courtyard holds the hollow heart ruin and the two flank Sprint Runes; the other two wait on the flag approaches. A Battle or Ward Rune (more damage dealt, or less damage taken, for a few seconds) waits at each main gate's courtyard mouth: both pads open the match on the same face and flip with every claim.",
+      "flagsHeading": "Flags",
+      "flagsBody": "Each keep holds its team flag. Take the enemy flag and carry it to your own stand to score; the first team to three captures wins, and a timed-out battle resolves on score. A slain carrier drops the flag where they fell: an enemy can take it up again, while its own team returns it home instantly just by reaching it. The flag also refuses to hide: picking it up breaks stealth, and a carrier who turns invisible by any means drops it on the spot.",
+      "pickupNote": "Picking a flag up is always a deliberate press of the battleground action key: nobody ever becomes the carrier by strafing through the wrong spot.",
+      "respawnHeading": "Falling in battle",
+      "respawnBody": "Death keeps the classic rite: your corpse lies where it fell until YOU release, and the spirit rises in the fenced graveyard beside your keep, warded there until your team's next respawn wave. The wave raises every waiting spirit together, and the two team waves are deliberately staggered, so the fight never fully resets at once. There is no corpse run and no Spirit Healer bargain: release, wait out the wave, fight.",
+      "carrierHeading": "Carrying the flag",
+      "carrierBody": "A carrier who holds the enemy flag too long grows more and more vulnerable, taking ever-increasing damage until the flag is captured, dropped, or returned. Hiding with the flag is a losing plan; running it home is the winning one.",
+      "ladderHeading": "The ladder",
+      "ladderBody": "Every match moves a persistent per-character battleground rating, win or lose, and the all-time board ranks the realm champions. Wins and hard-fought losses also pay Honor through the Warfare system."
     },
     "valeCupPage": {
       "heading": "Dalpokalen",
@@ -5802,7 +5985,6 @@ export const da_DK: EnTranslations = {
   "yumi": {
     "bracket3": "Yumi 3 mod 3",
     "bracket5": "Yumi 5 mod 5",
-    "enterQueue": "Tilmeld dig Beskyt Yumi!",
     "queue": {
       "join": "Du stiller dig i Beskyt Yumi-køen. Vogt din følgesvend…",
       "leave": "Du forlader Beskyt Yumi-køen.",
@@ -5840,9 +6022,6 @@ export const da_DK: EnTranslations = {
   },
   "fiesta": {
     "bracket": "Fiesta",
-    "enterQueue": "Deltag i Fiestaen!",
-    "practice": "🎉 Træning mod Bots",
-    "practiceNote": "Offline-træning: frembringer 3 AI-bots og sætter dig i kø til en 2v2 Fiesta. Klik igen for at stoppe.",
     "banner": {
       "wave": "BØLGE {wave}/{total}, VÆLG EN FORSTÆRKNING!",
       "augmentGained": "Forstærkning opnået: {name}!",
@@ -6099,16 +6278,16 @@ export const da_DK: EnTranslations = {
   },
   "desktop": {
     "update": {
-      "checkingTitle": "Checking for updates...",
-      "checkingBody": "New versions download while you play.",
-      "uptodateTitle": "You're up to date",
+      "checkingTitle": "Tjekker for opdateringer...",
+      "checkingBody": "Nye versioner downloades, mens du spiller.",
+      "uptodateTitle": "Du er opdateret",
       "downloadingTitle": "Downloader opdatering {version}...",
-      "downloadingBody": "You can keep playing. It installs when you quit.",
+      "downloadingBody": "Du kan blive ved med at spille. Den installeres, når du lukker spillet.",
       "readyTitle": "Opdatering {version} er klar",
       "readyBody": "Den installeres, når du afslutter, eller genstart nu.",
       "restart": "Genstart nu",
       "later": "Senere",
-      "dismiss": "Dismiss"
+      "dismiss": "Afvis"
     },
     "crash": {
       "title": "World of ClaudeCraft",
@@ -6324,7 +6503,6 @@ export const da_DK: EnTranslations = {
       "mobileMore": "Mere",
       "mobileMoreAria": "Vis flere menuer",
       "mobileSocial": "Socialt",
-      "mobileArena": "Arena",
       "mobileMenu": "Menu",
       "mobileSettings": "Indstillinger",
       "mobileUse": "Brug",
@@ -6441,7 +6619,7 @@ export const da_DK: EnTranslations = {
         "nameplates": "Skift navneskilte",
         "meters": "Skademålere",
         "social": "Venner og Lav",
-        "arena": "Arena (Ashen Coliseum)",
+        "arena": "PvP (Thornhollow Fields and Arenas)",
         "chat": "Åbn chat",
         "attack": "Angrib",
         "actionBarSlot": "Handlingslinje {slot}"
@@ -6575,6 +6753,11 @@ export const da_DK: EnTranslations = {
     },
     "system": {
       "playerDeath": "Du er død.",
+      "deathRecapKillerAbility": "Du er død. Dræbt af {killer}s {ability}.",
+      "deathRecapKiller": "Du er død. Dræbt af {killer}.",
+      "deathRecapAbility": "Du er død. Dræbt af {ability}.",
+      "deathRecapFalling": "Du er død. Du faldt i døden.",
+      "deathRecapDrowned": "Du er død. Du druknede.",
       "respawn": "Du føler dig udhvilet og hel igen.",
       "ignoringChat": "Ignorerer chat fra {name}.",
       "noLongerIgnoring": "Ignorerer ikke længere {name}.",
@@ -7065,6 +7248,7 @@ export const da_DK: EnTranslations = {
       "quest": "Opgavegenstand",
       "junk": "Skrammel",
       "fineMaterial": "Fint materiale",
+      "material": "Materiale",
       "food": "Mad",
       "drink": "Drikke",
       "tool": "Værktøj",
@@ -7097,6 +7281,9 @@ export const da_DK: EnTranslations = {
       "useFood": "Brug: Genopretter {amount} helbred over {seconds} sek. Skal forblive siddende mens du spiser.",
       "useDrink": "Brug: Genopretter {amount} mana over {seconds} sek. Skal forblive siddende mens du drikker.",
       "questItem": "Questgenstand",
+      "questRelated": "Opgave: {quest}",
+      "questRules": "Kan ikke sælges, lægges i banken eller byttes.",
+      "questOrphaned": "Ikke nødvendig for nogen aktiv quest.",
       "classes": "Klasser: {classes}",
       "sellPrice": "Salgspris: {money}",
       "clickBuy": "Klik for at købe",
@@ -7232,6 +7419,12 @@ export const da_DK: EnTranslations = {
       "reclaim": "Tag tilbage",
       "buyAria": "Køb {item} for {price}",
       "reclaimAria": "Tag {item} tilbage",
+      "buyConfirmTitle": "Bekræft køb",
+      "buyConfirmBody": "Køb {item} for {price}?",
+      "buyConfirmBodyStack": "Køb {item} x{count} for {price} ({each} stykket)?",
+      "buyConfirmAccept": "Køb",
+      "buyConfirmCancel": "Annullér",
+      "buyChanged": "Den vare ændrede sig, før du bekræftede. Tjek prisen, og prøv igen.",
       "sellNote": "Sæt varer fra dine tasker til salg. Købmanden tager {cut}% i afgift, når en genstand sælges. Du bruger {used}/{max} salgspladser.",
       "sellPickEmpty": "Klik på en genstand i dine tasker for at vælge, hvad du vil sælge.",
       "quantity": "Antal",
@@ -8719,6 +8912,18 @@ export const da_DK: EnTranslations = {
       "fen_muster_order": {
         "name": "Kærbro Mønstringsordre"
       },
+      "firebottle": {
+        "name": "Ildflaske"
+      },
+      "murloc_hut": {
+        "name": "Mudfin-hytte"
+      },
+      "restless_skull": {
+        "name": "Rastløst Kranie"
+      },
+      "vanguard_bone": {
+        "name": "Fortrops Ben"
+      },
       "mire_prowler_pelt": {
         "name": "Sumplusker-Pels"
       },
@@ -9994,6 +10199,21 @@ export const da_DK: EnTranslations = {
       "reins_terrorspark_groundshaker": {
         "name": "Tændingsnøgle: Skrækgnist, jordrysteren"
       },
+      "reins_drakemaw_raptor": {
+        "name": "Tøjler til Dragegabets Raptor"
+      },
+      "moggers_hide_quiver": {
+        "name": "Moggers Skindkogger"
+      },
+      "cragmaw_huntquiver": {
+        "name": "Klippegabs Jagtkogger"
+      },
+      "gravewyrm_bone_quiver": {
+        "name": "Gravorm-Benkogger"
+      },
+      "direfang_quiver": {
+        "name": "Direfang-Kogger"
+      },
       "conjured_water4": {
         "name": "Fremmanet kildevand"
       },
@@ -10989,6 +11209,21 @@ export const da_DK: EnTranslations = {
       "spider_egg_sac": {
         "name": "Edderkoppe-Ægsæk"
       },
+      "spider_egg": {
+        "name": "Yngelmoder-Æg"
+      },
+      "widow_hatchling": {
+        "name": "Enkeyngel"
+      },
+      "drowned_warlord": {
+        "name": "Den Druknede Krigsherre"
+      },
+      "brakka_wallbreaker": {
+        "name": "Brakka Murbryderen"
+      },
+      "threnos_first_voice": {
+        "name": "Threnos Førstestemmen"
+      },
       "grave_silt_bulwark": {
         "name": "Gravdynd-Bolværk"
       },
@@ -11168,6 +11403,18 @@ export const da_DK: EnTranslations = {
       },
       "cindraleth_maw_matriarch": {
         "name": "Cindraleth Gabmatriarken"
+      },
+      "dragonkin_egg": {
+        "name": "Drageæts Æg"
+      },
+      "dragonkin_whelp": {
+        "name": "Drageæts Unge"
+      },
+      "dragonkin_broodguard": {
+        "name": "Drageæts Yngelvagt"
+      },
+      "drakemaw_broodlord": {
+        "name": "Dragegabets Yngelherre"
       },
       "gilded_stag": {
         "name": "Forgyldt Hjort"
@@ -12201,7 +12448,7 @@ export const da_DK: EnTranslations = {
       },
       "q_no_rest": {
         "title": "Ingen Hvile i Sivene",
-        "text": "Riten på de røgelseskar binder de druknede til at rejse sig, hvor end sumpen rører dem - og sumpen rører alt. Der bliver ingen hvile i disse siv, før de døde er flere end de levende. Vi kan ikke ophæve riten endnu, men vi kan tømme den for soldater. Sted 14 flere af de Druknede Døde til hvile.",
+        "text": "Riten på de røgelseskar binder de druknede til at rejse sig, og nu har den oprejst én, der er stærk nok til at lede dem. Vogterne kalder ham Den Druknede Krigsherre, og mens han holder Det Druknede Kapel, holder de døde deres rækker. Knæk ham, {playerName}, og resten vil spredes tilbage i mosen.",
         "completion": "Du giver de døde mere nåde, end deres mestre nogensinde gjorde. Tag dette - du har mere end fortjent det.",
         "objectives": {
           "0": {
@@ -12479,9 +12726,6 @@ export const da_DK: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Ormekult-Zelot dræbt"
-          },
-          "1": {
-            "label": "Ormekult-Ordrer"
           }
         }
       },
@@ -12492,9 +12736,6 @@ export const da_DK: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Ormekult-Nekromantiker dræbt"
-          },
-          "1": {
-            "label": "Rituelt Fylakterie"
           }
         }
       },

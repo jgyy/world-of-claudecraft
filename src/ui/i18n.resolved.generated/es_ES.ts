@@ -911,6 +911,7 @@ export const es_ES: EnTranslations = {
       "minutesSeconds": "{m} min {s} s",
       "seconds": "{s} s",
       "autoShowHint": "Las filas aparecen automaticamente cuando tu grupo inflige dano o curacion, y este panel se cierra unos segundos despues de que el combate termine.",
+      "threatFallback": "No live threat: showing damage to {name}",
       "breakdownSummary": "{tab}: {value}",
       "breakdownRow": "{value} ({percent})",
       "breakdownOther": "Otros ({count})",
@@ -950,6 +951,7 @@ export const es_ES: EnTranslations = {
       "targetFriendlyNext": "Objetivo amistoso siguiente",
       "discord": "Discord",
       "valecup": "Copa del Valle",
+      "bgFlag": "Battleground Flag Action",
       "sheathe": "Envainar/Desenvainar arma",
       "categoryPet": "Mascota",
       "petAttack": "Mascota: atacar",
@@ -997,6 +999,7 @@ export const es_ES: EnTranslations = {
       "name_stormfeather_griffin": "Plumatormenta Alcanzacielos",
       "name_thunderstrut_gobbler": "Pavoneatruenos, el Gran Pavo",
       "name_terrorspark_groundshaker": "Aterrachispa, Sacudetierras",
+      "name_drakemaw_raptor": "Raptor de Drakemaw",
       "desc_valorsteed": "Un corcel resistente y de paso firme que aumenta la velocidad de viaje.",
       "desc_grag_bear": "Un oso resistente y de paso firme que aumenta la velocidad de viaje.",
       "desc_stalkglider_snail": "Un caracol recio y de combustión lenta que aumenta la velocidad de viaje.",
@@ -1004,7 +1007,8 @@ export const es_ES: EnTranslations = {
       "desc_shadowjump_toad": "Un sapo gigante, macizo y de paso firme, adiestrado en saltos sombríos relámpago que cubren cualquier terreno.",
       "desc_stormfeather_griffin": "Un grifo de tormenta majestuoso que acecha por tierra sobre garras rúnicas, con las alas plegadas.",
       "desc_thunderstrut_gobbler": "Un pavo colosal nacido de la tormenta que baja pavoneándose del Pico Despierto, con la cola desplegada como un frente de tormenta.",
-      "desc_terrorspark_groundshaker": "Una máquina blindada y compacta con orugas pesadas, un cañón de gran calibre y una silla hecha para pilotos intrépidos."
+      "desc_terrorspark_groundshaker": "Una máquina blindada y compacta con orugas pesadas, un cañón de gran calibre y una silla hecha para pilotos intrépidos.",
+      "desc_drakemaw_raptor": "Un raptor de cría domado para la silla, procedente de la Caldera de Drakemaw, puro tendón y arranque, que aún huele ligeramente a ceniza."
     },
     "mountTraining": {
       "mountPrompt": "Pulsa {key} para montar el Corcel del Valor de entrenamiento.",
@@ -1024,6 +1028,93 @@ export const es_ES: EnTranslations = {
       "timeout": "Carrera Fallida",
       "progress": "Puertas {n} de {total}",
       "timeLeft": "{seconds}s"
+    },
+    "pvp": {
+      "launcherTitle": "PvP",
+      "mobileLabel": "PvP",
+      "bracket1v1": "1v1",
+      "bracket2v2": "2v2"
+    },
+    "bg": {
+      "title": "Thornhollow Fields",
+      "blurb": "Two ruined keeps face each other across a walled hollow in the shadow of Thornpeak: Crimson to the south, Azure to the north, and the older Ruin Courtyard between them that neither has ever held. Five a side, one banner each, and the first to carry three of theirs home takes the field.",
+      "modeTag": "5v5 Capture the Flag",
+      "offlineNote": "Thornhollow Fields is syncing. The queue opens once the realm answers.",
+      "ratingSummary": "Rating. {wins} wins / {losses} losses",
+      "careerCaptures": "Career captures: {count}",
+      "enterQueue": "Enter the Queue",
+      "enterQueueParty": "Enter the Queue (party of {count})",
+      "leaveQueue": "Leave Queue",
+      "searching": "Searching. {count}/{size} in queue.",
+      "queuedParty": "Party of {count}.",
+      "queueNote": "Two teams of five. Steal the enemy banner and run it to your keep. First to 3 captures wins. Group up to 5 and queue together; grab Sprint Runes and weave the cover to lose your pursuers.",
+      "matchInProgress": "Battle in progress. {crimson}:{azure}.",
+      "ladderAllTime": "Ladder. All-Time",
+      "noRanked": "No champions ranked yet. Be the first.",
+      "ladderOnline": "Ladder. Online Now",
+      "noChallengers": "No champions online right now. Be the first.",
+      "playerLevelClassTitle": "{name}. Level {level} {className}",
+      "playerClassTitle": "{name}. {className}",
+      "crimson": "Crimson",
+      "azure": "Azure",
+      "yourTeamTitle": "Your team",
+      "clock": "{minutes}:{seconds}",
+      "formUp": "Form up: {seconds}",
+      "firstTo": "First to {caps} captures",
+      "flagState": {
+        "home": "Flag at the keep",
+        "carried": "Flag stolen!",
+        "dropped": "Flag on the ground"
+      },
+      "respawnIn": "Next wave: respawning in {seconds}",
+      "resultVictory": "Victory!",
+      "resultDefeat": "Defeat",
+      "resultDraw": "Draw",
+      "leavingIn": "Leaving the battleground in {seconds}",
+      "killFeed": "{killer} felled {victim}",
+      "killFeedFallen": "{victim} has fallen",
+      "foundBanner": "Battle found. You fight for the {team}!",
+      "countdownBanner": "Thornhollow Fields begins in {seconds}",
+      "startBanner": "Capture the flag!",
+      "flagTakenLog": "{name} has taken the {team} flag!",
+      "flagDroppedLog": "The {team} flag was dropped.",
+      "flagReturnedLog": "The {team} flag was returned.",
+      "dropFlagConfirmTitle": "Drop the flag?",
+      "dropFlagConfirmBody": "You are carrying the enemy flag. Dropping it leaves it on the ground, where either team can reach it.",
+      "dropFlagConfirmAccept": "Drop the flag",
+      "boardToggleLabel": "Match scoreboard. Press Enter to pin the full board open.",
+      "levelRequirement": "You must reach level {level} to unlock queueing for this battleground.",
+      "board": {
+        "kills": "Kills",
+        "assists": "Assists",
+        "deaths": "Deaths",
+        "captures": "Captures"
+      },
+      "flagTakenBanner": "The {takers} have taken the {team} flag!",
+      "flagReturnedBanner": "The {team} flag was returned!",
+      "capturedTeamBanner": "The {takers} have captured the {team} flag! {crimson}:{azure}",
+      "capturedLog": "{name} captured the {team} flag. Score {crimson}:{azure}.",
+      "victoryBanner": "Victory! Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "defeatBanner": "Defeat. Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "drawBanner": "Thornhollow Fields draw {crimson}:{azure}. Rating {rating} ({delta})",
+      "endBannerDetail": "Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "endLog": "Thornhollow Fields ended {crimson}:{azure}. Rating {rating} ({delta}).",
+      "endedTimer": "Time expired",
+      "endedForfeit": "The match was forfeited",
+      "endedTimerLog": "The match clock ran out; the higher score took the field.",
+      "endedForfeitLog": "The match was forfeited.",
+      "firstWinBonusLine": "First win of the day: +{honor} Honor",
+      "firstWinBonusLog": "First win of the day: you gain {honor} bonus Honor.",
+      "timeWarningMinutes": "{minutes} minutes remain",
+      "timeWarningOneMinute": "One minute remains",
+      "timeWarningMinutesLog": "{minutes} minutes remain in the battle.",
+      "timeWarningOneMinuteLog": "One minute remains in the battle.",
+      "map": {
+        "crimsonKeep": "Crimson Keep",
+        "azureKeep": "Azure Keep",
+        "ruinCourtyard": "The Ruin Courtyard",
+        "graveyard": "Graveyard"
+      }
     },
     "vcup": {
       "title": "La Copa del Valle",
@@ -1175,6 +1266,15 @@ export const es_ES: EnTranslations = {
       "browserEffectsReduced": "Reducidos",
       "browserEffectsMinimal": "Mínimos",
       "browserEffectsNote": "El modo automático atenúa los efectos CSS pesados (desenfoque, brillo, movimiento de fondo) según tu navegador y dispositivo. Redúcelo manualmente si la interfaz va lenta.",
+      "graphicsApply": "Aplicar gráficos",
+      "graphicsApplying": "Aplicando ajustes gráficos...",
+      "graphicsApplied": "Ajustes gráficos aplicados.",
+      "graphicsSaved": "Ajustes gráficos guardados. El renderizador activo ya coincide con ellos.",
+      "graphicsFailed": "No se pudieron aplicar los gráficos. Tus ajustes anteriores siguen activos.",
+      "graphicsRetry": "Reintentar gráficos",
+      "graphicsFatal": "La recuperación gráfica falló. Recarga el juego para continuar.",
+      "graphicsReload": "Recargar juego",
+      "graphicsDraftChanged": "Los cambios gráficos están listos para aplicarse.",
       "interfaceMode": "Modo de interfaz",
       "interfaceModeAuto": "Auto",
       "interfaceModeDesktop": "Escritorio",
@@ -1206,6 +1306,7 @@ export const es_ES: EnTranslations = {
       "itemScoreLine": "Puntuación {score}",
       "showSecondaryActionBar": "Mostrar barra de acción secundaria",
       "showThirdActionBar": "Mostrar tercera barra de acción",
+      "lockActionBars": "Bloquear barras de acción",
       "showTargetOfTarget": "Mostrar objetivo del objetivo",
       "showAttackButton": "Mostrar boton de ataque",
       "showDailyRewardsChest": "Mostrar cofre de recompensas diarias",
@@ -1367,20 +1468,38 @@ export const es_ES: EnTranslations = {
     },
     "landing": {
       "highContrast": "Alto contraste",
-      "highContrastAria": "Alternar el fondo de alto contraste: desactiva el tráiler en movimiento para que el texto de la pantalla de inicio siga siendo legible"
+      "highContrastAria": "Alternar el fondo de alto contraste: desactiva el tráiler en movimiento para que el texto de la pantalla de inicio siga siendo legible",
+      "browserSupport": {
+        "title": "Aviso: navegador no compatible",
+        "body": "Es posible que notes un rendimiento reducido en este navegador. Para la mejor experiencia, consigue la aplicación de escritorio para Windows, macOS o Linux. ¿Prefieres jugar en un navegador? Chrome ofrece el mejor rendimiento, y Firefox y Safari también son compatibles.",
+        "getDesktopApp": "Obtener la aplicación de escritorio",
+        "continueInBrowser": "Continuar en el navegador",
+        "dismissAria": "Descartar el aviso de navegador no compatible"
+      }
     },
     "warfare": {
       "honorAmount": "{amount} de Honor",
       "dualPrice": "{money} + {honor}",
       "balance": "Honor: {amount}",
       "honorFloat": "+{amount} de Honor",
+      "honorFloatReason": "+{amount} Honor ({reason})",
       "honorGain": "Obtienes {amount} de Honor ({reason}).",
       "notEnoughHonor": "No tienes suficiente Honor.",
       "reasons": {
         "arenaWin": "Victoria en la arena",
         "fiestaKill": "Derribo en Fiesta",
         "fiestaComplete": "Fiesta completada",
-        "fiestaWin": "Victoria en Fiesta"
+        "fiestaWin": "Victoria en Fiesta",
+        "battlegroundWin": "Thornhollow Fields victory",
+        "battlegroundFirstWin": "first Thornhollow Fields win today",
+        "battlegroundComplete": "Thornhollow Fields battle fought",
+        "battlegroundKill": "honorable kill",
+        "battlegroundAssist": "killing blow assisted"
+      },
+      "floatReasons": {
+        "kill": "Kill",
+        "assist": "Assist",
+        "firstWin": "First Win"
       }
     },
     "charSheet": {
@@ -1736,6 +1855,7 @@ export const es_ES: EnTranslations = {
       "itemAriaEnchanted": "{item}, cantidad {count}, copia encantada",
       "itemAriaBound": "{item}, cantidad {count}, copia vinculada",
       "itemAriaMasterwork": "{item}, cantidad {count}, obra maestra",
+      "itemAriaQuest": "{item}, cantidad {count}, objeto de misión",
       "filterGroupAria": "Filtrar bolsas por categoría",
       "filterAll": "Todos",
       "filterWeapon": "Armas",
@@ -1744,6 +1864,7 @@ export const es_ES: EnTranslations = {
       "filterMaterial": "Materiales",
       "filterTool": "Herramientas",
       "filterQuest": "Misión",
+      "filterQuestCountAria": "Misión, {count} objetos",
       "filterMount": "Monturas",
       "sortAria": "Ordenar objetos de la bolsa",
       "sortRecent": "Recientes",
@@ -1752,6 +1873,7 @@ export const es_ES: EnTranslations = {
       "searchPlaceholder": "Buscar objetos",
       "searchAria": "Buscar objetos de la bolsa por nombre",
       "noMatch": "Ningún objeto coincide con tus filtros.",
+      "noQuestItems": "No tienes objetos de misión en tus bolsas.",
       "capacity": "{used}/{total}",
       "capacityAria": "Espacios de bolsa usados: {used} de {total}",
       "backpack": "Mochila",
@@ -1785,6 +1907,7 @@ export const es_ES: EnTranslations = {
       "dmgDoneReduce": "Reduce el daño infligido un {pct}%",
       "heatingUp": "Tu siguiente golpe crítico consecutivo de Fuego activa Buena Racha; un golpe no crítico elimina Calentando Motores",
       "elementalConvergencePrimed": "Tu próximo hechizo de la otra escuela elemental otorga Convergencia Elemental",
+      "carriedFlag": "You are carrying the enemy flag. Cancel this buff to drop it.",
       "battleStance": "Actitud de Combate: un 10% más de generación de ira",
       "berserkerStance": "Actitud Rabiosa: los críticos aciertan un 3% más a menudo y golpean un 3% más fuerte",
       "crit": "Incrementa la probabilidad de golpe crítico un {pct}%",
@@ -1970,6 +2093,8 @@ export const es_ES: EnTranslations = {
     },
     "materialHint": {
       "fineGrade": "Calidad fina. Recolectada de una veta de nivel completo con una herramienta de rango superior al material, y cuenta como la versión ordinaria dondequiera que se pida una.",
+      "cookingCatch": "Ingrediente de cocina. Debe cocinarse antes de comerlo.",
+      "usedBy": "Used by {crafts}.",
       "arcaneDust": "Reactivo de encantamiento. Se obtiene desencantando equipo común y poco común.",
       "arcaneEssence": "Reactivo de encantamiento. Se obtiene desencantando equipo raro.",
       "arcaneShard": "Reactivo de encantamiento. Se obtiene desencantando equipo épico y legendario.",
@@ -2251,6 +2376,7 @@ export const es_ES: EnTranslations = {
       "depositHint": "Clic para depositar",
       "depositPartialHint": "Mayús+clic para depositar una cantidad parcial",
       "cannotDeposit": "No se puede guardar en el banco",
+      "cannotDepositNow": "No se puede depositar en este momento",
       "depositQuantityTitle": "Depositar {item}",
       "depositQuantityInput": "Cantidad a depositar",
       "depositQuantityConfirm": "Depositar",
@@ -2261,6 +2387,7 @@ export const es_ES: EnTranslations = {
       "sortAria": "Ordenar los objetos del banco",
       "searchAria": "Buscar objetos del banco por nombre",
       "depositAll": "Depositar todos los materiales",
+      "depositAllTooltip": "Envía al banco de una vez todos los reactivos de fabricación y objetos de chatarra de tus bolsas. Las herramientas de recolección, el equipo puesto, los objetos de misión y los consumibles nunca se tocan.",
       "depositAllDone": "Materiales depositados: {count}.",
       "depositAllFull": "Materiales depositados: {count}. El banco está ahora lleno.",
       "depositAllNone": "Banco lleno: no se depositó nada.",
@@ -2276,7 +2403,50 @@ export const es_ES: EnTranslations = {
       "bonusAdvertWallet": "Vincula una cartera para ganar 2 espacios.",
       "bonusReferralProgress": "{count}/{cap}",
       "bonusReferralExplainer": "Invita a un amigo: cuando alcance el nivel 10, cada uno gana 2 espacios, hasta 5 amigos.",
-      "bonusSectionAria": "Espacios de banco extra y cómo ganar más"
+      "bonusSectionAria": "Espacios de banco extra y cómo ganar más",
+      "tabsAria": "Pestañas del banco",
+      "personalTab": "Privado",
+      "guildTab": "Hermandad",
+      "guildCapacityAria": "Espacios del banco de la hermandad usados: {used} de {total}",
+      "guildEmpty": "El banco de la hermandad está vacío.",
+      "guildTreasury": "Tesorería de la hermandad",
+      "guildDepositGold": "Depositar dinero",
+      "guildWithdrawGold": "Retirar dinero",
+      "guildDepositGoldTitle": "Depositar dinero en la tesorería de la hermandad",
+      "guildWithdrawGoldTitle": "Retirar dinero de la tesorería de la hermandad",
+      "guildGoldAvailable": "Disponible: {amount}",
+      "guildBuyConfirm": "¿Comprar {count} espacios adicionales del banco de la hermandad por {price} de la tesorería de la hermandad?",
+      "guildBuyNote": "Pagado desde la tesorería de la hermandad",
+      "guildTreasuryShort": "Tesorería insuficiente",
+      "guildOpenBank": "Abrir el banco de la hermandad",
+      "guildOpenConfirm": "¿Abrir el banco de la hermandad por {price}? Esto se paga con tu propio dinero.",
+      "guildOpenAccept": "Abrir",
+      "guildOpenNote": "Pagado con tu propio dinero, no con la tesorería de la hermandad",
+      "guildPurseShort": "Dinero insuficiente",
+      "guildDormantNote": "Los objetos bloqueados no se pueden retirar e impiden disolver la hermandad.",
+      "guildDormantHint": "Este objeto está bloqueado en el banco de la hermandad y no se puede retirar.",
+      "guildDormantAria": "{item}, cantidad {count}, no se puede retirar",
+      "guildUnknownItem": "Objeto desconocido",
+      "guildDepositHint": "Clic para depositar en el banco de la hermandad",
+      "guildCannotDeposit": "No se puede guardar en el banco de la hermandad",
+      "guildGoldCannotMove": "Esa cantidad no se puede mover en este momento.",
+      "guildViewsAria": "Vistas del banco de la hermandad",
+      "guildContentsTab": "Contenido",
+      "guildLogTab": "Registro",
+      "logAria": "Registro de actividad del banco de la hermandad",
+      "logNote": "Las {count} acciones más recientes del banco de la hermandad.",
+      "logLoading": "Cargando el registro del banco de la hermandad...",
+      "logEmpty": "Aún no se ha movido nada dentro o fuera del banco de la hermandad.",
+      "logRefused": "Solo los oficiales de la hermandad pueden leer el registro del banco de la hermandad.",
+      "logFormerMember": "Un antiguo miembro de la hermandad",
+      "logDepositItem": "{actor} depositó {count} {item}",
+      "logWithdrawItem": "{actor} retiró {count} {item}",
+      "logDepositMoney": "{actor} depositó {amount}",
+      "logWithdrawMoney": "{actor} retiró {amount}",
+      "logBuySlots": "{actor} compró una ampliación del banco por {amount}",
+      "logOpenBank": "{actor} abrió el banco de la hermandad por {amount}",
+      "logCharterFee": "{actor} pagó la cuota de fundación de la hermandad de {amount}",
+      "logAdminPurge": "Un administrador eliminó {count} {item}"
     },
     "calendar": {
       "title": "Calendario de Eventos",
@@ -2313,10 +2483,6 @@ export const es_ES: EnTranslations = {
         "marketDay": {
           "title": "Día de Mercado",
           "note": "El Mercader espera género fresco. Un buen día para echar un vistazo al Mercado Mundial."
-        },
-        "fiestaNight": {
-          "title": "Noche de Fiesta",
-          "note": "El anillo de la Fiesta 2c2 reúne esta noche a su público más ruidoso."
         },
         "arenaClash": {
           "title": "Choque en la Arena",
@@ -2555,6 +2721,18 @@ export const es_ES: EnTranslations = {
         "artisansEye": "Ojo del Artesano",
         "quickeningCharm": "Amuleto de Rebrote"
       },
+      "toolEffectTooltip": {
+        "kind": "Tool charm",
+        "bonus": {
+          "gatherersCache": "+1 yield per harvest while charged.",
+          "artisansEye": "Raises the harvest grade by 1 tool tier while charged.",
+          "quickeningCharm": "Shortens the node respawn timer it triggers."
+        },
+        "howToSlot": "Slot onto a mining, logging, or herbalism tool from the Professions window. Consumed when slotted.",
+        "charges": "Starts with {base} charges on a common tool (+{bonus} per rarity rung).",
+        "landOnly": "Does not slot on fishing rods.",
+        "openProfessions": "Open Professions to slot this onto a gathering tool."
+      },
       "toolEffectSlotButton": "Colocar {effect}",
       "toolEffectRechargeButton": "Recargar",
       "toolEffectSlotted": "{effect} colocado en {profession}.",
@@ -2591,8 +2769,8 @@ export const es_ES: EnTranslations = {
     "crafting": {
       "title": "Elaboración",
       "close": "Cerrar elaboración",
-      "dialogOption": "Crafting",
-      "dialogOptionAria": "Open the crafting window for {craft}",
+      "dialogOption": "Fabricación",
+      "dialogOptionAria": "Abrir la ventana de fabricación de {craft}",
       "craft": "Artesanía",
       "reagentsNeeded": "Requiere:",
       "reagentLine": "{name}: {have}/{required}",
@@ -2667,6 +2845,8 @@ export const es_ES: EnTranslations = {
       "masterworkToast": "¡Obra maestra! {name}",
       "masterworkZoneLine": "¡{crafter} creó una obra maestra {name}!",
       "tierUpToast": "¡{craft} avanzó al nivel {tier}!",
+      "skillUpToast": "{skill} skill increased to {level}!",
+      "skillUpSubtext": "Skill increased to {level}!",
       "trendNudge": "Tus manos se inclinan hacia el {archetype}. Su sintonización te espera con {master}.",
       "trendNudgeNoMaster": "Tus manos se inclinan hacia el {archetype}. Busca un maestro artesano para llevarlo adelante.",
       "attunedZoneLine": "{name} se ha sintonizado como {archetype}!",
@@ -2902,7 +3082,7 @@ export const es_ES: EnTranslations = {
       "countLabel": "{earned}/{total} gestas",
       "completionAria": "Gestas conseguidas: {earned} de {total}",
       "recentLabel": "Recientes:",
-      "recentJumpAria": "Jump to {name}",
+      "recentJumpAria": "Ir a {name}",
       "nearestLabel": "A un paso:",
       "filterGroupAria": "Filtrar gestas",
       "filterAll": "Todas",
@@ -3128,6 +3308,7 @@ export const es_ES: EnTranslations = {
       "talents": "Talentos",
       "arena": "Arena y JcJ",
       "valeCup": "Copa del Valle",
+      "thornhollow": "Thornhollow Fields",
       "deeds": "Libro de Gestas",
       "glossary": "Glosario",
       "wishIKnew": "Lo que me habría gustado saber",
@@ -3898,23 +4079,25 @@ export const es_ES: EnTranslations = {
       "duelsBody": "Reta a un duelo amistoso a cualquier jugador que encuentres. No hay nada en juego salvo el orgullo, así que es la forma más sencilla de aprender un enfrentamiento o zanjar una discusión amistosa.",
       "coliseumHeading": "El Coliseo Ceniciento",
       "coliseumBody": "El Coliseo es la arena del reino, donde te enfrentas a otros jugadores en partidas clasificatorias, uno contra uno o dos contra dos. Cada categoría conserva su propia clasificación, así que una victoria te hace subir por esa escala a la vista del reino entero. Abre la ventana de Arena para inscribirte en una categoría, solo o con tu compañero.",
-      "fiestaHeading": "Fiesta dos contra dos",
-      "fiestaBody": "Fiesta es una reyerta rápida de dos contra dos que se disputa como un único combate continuo, con cada luchador puesto en igualdad de condiciones. Conforme avanza la pelea eliges mejoras, refuerzos rápidos que reconfiguran tu repertorio sobre la marcha, así que no hay dos partidas iguales.",
-      "augmentsNote": "Las mejoras y potenciadores duran solo lo que dura la partida. Buscan combinaciones divertidas e improvisadas, no un poder duradero, así que nadie compra su camino a la victoria.",
-      "wavesTitle": "Las mejoras llegan en oleadas",
-      "wavesBody": "Un combate de Fiesta te entrega nuevas elecciones sobre la marcha, y las elecciones se vuelven más audaces cuanto más se alarga la pelea. Construyes de una oleada a la siguiente, eligiendo una de unas pocas opciones cada vez y conservándola durante el resto del combate.",
-      "waveSilverTitle": "Plata",
-      "waveSilverBody": "La oleada inicial: mejoras limpias de una sola característica que afinan lo esencial de tu clase.",
-      "waveGoldTitle": "Oro",
-      "waveGoldBody": "La oleada intermedia: combinaciones de doble filo donde tu construcción empieza a tomar forma y a lucirse.",
-      "wavePrismaticTitle": "Prismático",
-      "wavePrismaticBody": "La oleada final: picos que definen tu construcción y derriten la pantalla, pensados para sentirse ridículos en el mejor de los sentidos.",
-      "yumiHeading": "Protege a Yumi",
-      "yumiBody": "Protege a Yumi es un modo de objetivos por equipos que se juega en un laberinto: cada bando protege a su propio familiar felino mientras da caza al del rival. Cada cierto tiempo ambos gatos se teletransportan a nuevos rincones del laberinto, así que el combate oscila entre defender, cazar y correr para volver a encontrarlos. Entra en cola como tres contra tres o cinco contra cinco; caer en batalla solo te deja en el banquillo un instante.",
-      "powerupsTitle": "Potenciadores en el ruedo",
-      "powerupsBody": "Esferas brillantes también caen en la arena en mitad del combate, libres para quien las alcance primero. Son deliberadamente exageradas y duran solo un instante: Demonio de Velocidad para un parpadeo de paso cegador, Coloso para hincharte hasta volverte un gigante torpe, Botas Lunares para un salto rebotante de baja gravedad y Berserker para una repentina oleada de furia.",
       "ladderHeading": "Ascender en la clasificación",
       "ladderBody": "El juego clasificatorio registra tu posición a lo largo del tiempo. Consulta la clasificación para ver dónde estás y quién ocupa la cima del reino."
+    },
+    "thornhollowPage": {
+      "heading": "Thornhollow Fields",
+      "intro": "A ranked 5v5 capture-the-flag battleground fought in a walled hollow in the old growth below Thornpeak, where two ruined keeps face each other down the length of a ravine and an older courtyard sits between them that neither has ever held. Two teams of five, two keeps, one goal: steal the enemy banner and run it home before they run yours.",
+      "queueHeading": "Queueing up",
+      "queueBody": "Open the Thornhollow Fields panel and enter the queue solo, or bring a party of up to five and queue together: parties are always kept on one team, and the remaining seats fill with solo champions. When ten stand ready, the match seats both teams at their keeps for a short form-up before the flags go live.",
+      "fieldHeading": "The field",
+      "fieldBody": "A walled, open-air field carved into three chambers: each team has its own field before its keep, and the walled Ruin Courtyard sits between them. Two curtain walls span the full width, and every move between chambers passes a contested crossing: the wide main gate, or the gatehouse, a small room straddling the wall whose offset doors force a jog past an ambush corner. Each keep is sealed except its mouth, so every flag run starts and ends through the same opening, and a low barricade breaks the straight charge into it. The courtyard holds the hollow heart ruin and the two flank Sprint Runes; the other two wait on the flag approaches. A Battle or Ward Rune (more damage dealt, or less damage taken, for a few seconds) waits at each main gate's courtyard mouth: both pads open the match on the same face and flip with every claim.",
+      "flagsHeading": "Flags",
+      "flagsBody": "Each keep holds its team flag. Take the enemy flag and carry it to your own stand to score; the first team to three captures wins, and a timed-out battle resolves on score. A slain carrier drops the flag where they fell: an enemy can take it up again, while its own team returns it home instantly just by reaching it. The flag also refuses to hide: picking it up breaks stealth, and a carrier who turns invisible by any means drops it on the spot.",
+      "pickupNote": "Picking a flag up is always a deliberate press of the battleground action key: nobody ever becomes the carrier by strafing through the wrong spot.",
+      "respawnHeading": "Falling in battle",
+      "respawnBody": "Death keeps the classic rite: your corpse lies where it fell until YOU release, and the spirit rises in the fenced graveyard beside your keep, warded there until your team's next respawn wave. The wave raises every waiting spirit together, and the two team waves are deliberately staggered, so the fight never fully resets at once. There is no corpse run and no Spirit Healer bargain: release, wait out the wave, fight.",
+      "carrierHeading": "Carrying the flag",
+      "carrierBody": "A carrier who holds the enemy flag too long grows more and more vulnerable, taking ever-increasing damage until the flag is captured, dropped, or returned. Hiding with the flag is a losing plan; running it home is the winning one.",
+      "ladderHeading": "The ladder",
+      "ladderBody": "Every match moves a persistent per-character battleground rating, win or lose, and the all-time board ranks the realm champions. Wins and hard-fought losses also pay Honor through the Warfare system."
     },
     "valeCupPage": {
       "heading": "La Copa del Valle",
@@ -5802,7 +5985,6 @@ export const es_ES: EnTranslations = {
   "yumi": {
     "bracket3": "Yumi 3c3",
     "bracket5": "Yumi 5c5",
-    "enterQueue": "¡Únete a Protege a Yumi!",
     "queue": {
       "join": "Entras en la cola de Protege a Yumi. Protege a tu familiar…",
       "leave": "Sales de la cola de Protege a Yumi.",
@@ -5840,9 +6022,6 @@ export const es_ES: EnTranslations = {
   },
   "fiesta": {
     "bracket": "Fiesta",
-    "enterQueue": "¡Únete a la Fiesta!",
-    "practice": "🎉 Práctica contra bots",
-    "practiceNote": "Práctica sin conexión: genera 3 bots con IA y te pone en cola para una Fiesta 2c2. Haz clic de nuevo para detener.",
     "banner": {
       "wave": "¡OLEADA {wave}/{total} — ELIGE UNA MEJORA!",
       "augmentGained": "¡Mejora obtenida: {name}!",
@@ -6099,16 +6278,16 @@ export const es_ES: EnTranslations = {
   },
   "desktop": {
     "update": {
-      "checkingTitle": "Checking for updates...",
-      "checkingBody": "New versions download while you play.",
-      "uptodateTitle": "You're up to date",
+      "checkingTitle": "Buscando actualizaciones...",
+      "checkingBody": "Las nuevas versiones se descargan mientras juegas.",
+      "uptodateTitle": "Estás al día",
       "downloadingTitle": "Descargando actualización {version}...",
-      "downloadingBody": "You can keep playing. It installs when you quit.",
+      "downloadingBody": "Puedes seguir jugando. Se instala cuando salgas.",
       "readyTitle": "La actualización {version} está lista",
       "readyBody": "Se instala al salir, o reinicia ahora.",
       "restart": "Reiniciar ahora",
       "later": "Más tarde",
-      "dismiss": "Dismiss"
+      "dismiss": "Descartar"
     },
     "crash": {
       "title": "World of ClaudeCraft",
@@ -6324,7 +6503,6 @@ export const es_ES: EnTranslations = {
       "mobileMore": "Más",
       "mobileMoreAria": "Mostrar más menús",
       "mobileSocial": "Comunidad",
-      "mobileArena": "Arena",
       "mobileMenu": "Menú",
       "mobileSettings": "Ajustes",
       "mobileUse": "Usar",
@@ -6441,7 +6619,7 @@ export const es_ES: EnTranslations = {
         "nameplates": "Alternar placas de nombre",
         "meters": "Medidores de daño",
         "social": "Amigos y hermandad",
-        "arena": "Arena (Coliseo Cinéreo)",
+        "arena": "PvP (Thornhollow Fields and Arenas)",
         "chat": "Abrir chat",
         "attack": "Atacar",
         "actionBarSlot": "Barra de acción {slot}"
@@ -6575,6 +6753,11 @@ export const es_ES: EnTranslations = {
     },
     "system": {
       "playerDeath": "Has muerto.",
+      "deathRecapKillerAbility": "Has muerto. Te mató {killer} con {ability}.",
+      "deathRecapKiller": "Has muerto. Te mató {killer}.",
+      "deathRecapAbility": "Has muerto. Te mató {ability}.",
+      "deathRecapFalling": "Has muerto. Moriste al caer.",
+      "deathRecapDrowned": "Has muerto. Te ahogaste.",
       "respawn": "Te sientes descansado y completo de nuevo.",
       "ignoringChat": "Ignorando el chat de {name}.",
       "noLongerIgnoring": "Ya no ignoras a {name}.",
@@ -7065,6 +7248,7 @@ export const es_ES: EnTranslations = {
       "quest": "Objeto de misión",
       "junk": "Chatarra",
       "fineMaterial": "Material fino",
+      "material": "Materia",
       "food": "Comida",
       "drink": "Bebida",
       "tool": "Herramienta",
@@ -7097,6 +7281,9 @@ export const es_ES: EnTranslations = {
       "useFood": "Uso: restaura {amount} de salud durante {seconds} s. Debes permanecer sentado mientras comes.",
       "useDrink": "Uso: restaura {amount} de maná durante {seconds} s. Debes permanecer sentado mientras bebes.",
       "questItem": "Objeto de misión",
+      "questRelated": "Misión: {quest}",
+      "questRules": "No se puede vender, guardar en el banco ni intercambiar.",
+      "questOrphaned": "No se necesita para ninguna misión activa.",
       "classes": "Clases: {classes}",
       "sellPrice": "Precio de venta: {money}",
       "clickBuy": "Haz clic para comprar",
@@ -7232,6 +7419,12 @@ export const es_ES: EnTranslations = {
       "reclaim": "Recuperar",
       "buyAria": "Comprar {item} por {price}",
       "reclaimAria": "Recuperar {item}",
+      "buyConfirmTitle": "Confirmar compra",
+      "buyConfirmBody": "¿Comprar {item} por {price}?",
+      "buyConfirmBodyStack": "¿Comprar {item} x{count} por {price} ({each} cada uno)?",
+      "buyConfirmAccept": "Comprar",
+      "buyConfirmCancel": "Cancelar",
+      "buyChanged": "Esa publicación cambió antes de que confirmaras. Revisa el precio e inténtalo de nuevo.",
       "sellNote": "Publica mercancías de tus bolsas. El Mercader toma un {cut}% cuando un objeto se vende. Usas {used}/{max} espacios de venta.",
       "sellPickEmpty": "Haz clic en un objeto de tus bolsas para elegir qué vender.",
       "quantity": "Cantidad",
@@ -8719,6 +8912,18 @@ export const es_ES: EnTranslations = {
       "fen_muster_order": {
         "name": "Orden de alistamiento de Fenbridge"
       },
+      "firebottle": {
+        "name": "Botella Incendiaria"
+      },
+      "murloc_hut": {
+        "name": "Choza de Mudfin"
+      },
+      "restless_skull": {
+        "name": "Cráneo Inquieto"
+      },
+      "vanguard_bone": {
+        "name": "Hueso de la Vanguardia"
+      },
       "mire_prowler_pelt": {
         "name": "Piel de merodeador del pantano"
       },
@@ -9994,6 +10199,21 @@ export const es_ES: EnTranslations = {
       "reins_terrorspark_groundshaker": {
         "name": "Llave de encendido: Aterrachispa, Sacudetierras"
       },
+      "reins_drakemaw_raptor": {
+        "name": "Riendas del Raptor de Drakemaw"
+      },
+      "moggers_hide_quiver": {
+        "name": "Carcaj de cuero de Mogger"
+      },
+      "cragmaw_huntquiver": {
+        "name": "Carcaj de caza de Cragmaw"
+      },
+      "gravewyrm_bone_quiver": {
+        "name": "Carcaj de hueso del Gravewyrm"
+      },
+      "direfang_quiver": {
+        "name": "Carcaj Direfang"
+      },
       "conjured_water4": {
         "name": "Agua de Manantial Invocada"
       },
@@ -10989,6 +11209,21 @@ export const es_ES: EnTranslations = {
       "spider_egg_sac": {
         "name": "Saco de huevos de araña"
       },
+      "spider_egg": {
+        "name": "Huevo de la Madre de la Nidada"
+      },
+      "widow_hatchling": {
+        "name": "Cría de Viuda"
+      },
+      "drowned_warlord": {
+        "name": "El Señor de la Guerra Ahogado"
+      },
+      "brakka_wallbreaker": {
+        "name": "Brakka el Rompemuros"
+      },
+      "threnos_first_voice": {
+        "name": "Threnos, la Primera Voz"
+      },
       "grave_silt_bulwark": {
         "name": "Baluarte de limo sepulcral"
       },
@@ -11168,6 +11403,18 @@ export const es_ES: EnTranslations = {
       },
       "cindraleth_maw_matriarch": {
         "name": "Cindraleth, la Matriarca de las Fauces"
+      },
+      "dragonkin_egg": {
+        "name": "Huevo de Dracónido"
+      },
+      "dragonkin_whelp": {
+        "name": "Cría de Dracónido"
+      },
+      "dragonkin_broodguard": {
+        "name": "Guardián Dracónido de la Nidada"
+      },
+      "drakemaw_broodlord": {
+        "name": "Señor de la Nidada de Drakemaw"
       },
       "gilded_stag": {
         "name": "Ciervo Dorado"
@@ -12201,11 +12448,11 @@ export const es_ES: EnTranslations = {
       },
       "q_no_rest": {
         "title": "Sin descanso entre los juncos",
-        "text": "Ese rito hace levantarse a los ahogados donde la ciénaga los toca. No podemos deshacerlo aún; deja 14 muertos menos a sus amos.",
+        "text": "El rito grabado en esos incensarios obliga a los ahogados a levantarse, y ahora ha alzado a uno lo bastante fuerte para liderarlos. Los guardianes lo llaman el Señor de la Guerra Ahogado, y mientras controle la Capilla Ahogada, los muertos mantienen sus filas. Acaba con él, {playerName}, y el resto se dispersará de vuelta hacia la ciénaga.",
         "completion": "Das más misericordia a los muertos que sus señores. Toma esto, lo mereces.",
         "objectives": {
           "0": {
-            "label": "Muerto ahogado devuelto al descanso"
+            "label": "El Señor de la Guerra Ahogado abatido"
           }
         }
       },
@@ -12479,9 +12726,6 @@ export const es_ES: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Fanático del Culto del Wyrm abatido"
-          },
-          "1": {
-            "label": "Órdenes del Culto del Wyrm"
           }
         }
       },
@@ -12492,9 +12736,6 @@ export const es_ES: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Nigromante del Culto del Wyrm abatido"
-          },
-          "1": {
-            "label": "Filacteria ritual"
           }
         }
       },

@@ -2,6 +2,122 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const da_DK: Partial<Record<TranslationKey, string>> = {
+  'hud.system.deathRecapAbility': 'Du er død. Dræbt af {ability}.',
+  'hud.system.deathRecapDrowned': 'Du er død. Du druknede.',
+  'hud.system.deathRecapFalling': 'Du er død. Du faldt i døden.',
+  'hud.system.deathRecapKiller': 'Du er død. Dræbt af {killer}.',
+  'hud.system.deathRecapKillerAbility': 'Du er død. Dræbt af {killer}s {ability}.',
+  'hudChrome.bags.filterQuestCountAria': 'Quest, {count} genstande',
+  'hudChrome.bags.itemAriaQuest': '{item}, antal {count}, opgavegenstand',
+  'hudChrome.bags.noQuestItems': 'Ingen opgavegenstande i dine tasker.',
+  'hudChrome.bank.cannotDepositNow': 'Kan ikke indsættes lige nu',
+  'hudChrome.bank.depositAllTooltip':
+    'Sender alle håndværksmaterialer og skrammelgenstande fra dine tasker til banken på én gang. Indsamlingsværktøjer, udrustet udstyr, opgavegenstande og forbrugsvarer røres aldrig.',
+  'hudChrome.bank.guildBuyConfirm':
+    'Køb {count} ekstra laugsbankpladser for {price} fra laugets skatkammer?',
+  'hudChrome.bank.guildBuyNote': 'Betalt fra laugets skatkammer',
+  'hudChrome.bank.guildCannotDeposit': 'Kan ikke lægges i laugsbanken',
+  'hudChrome.bank.guildCapacityAria': 'Brugte laugsbankpladser: {used} af {total}',
+  'hudChrome.bank.guildContentsTab': 'Indhold',
+  'hudChrome.bank.guildDepositGold': 'Indsæt penge',
+  'hudChrome.bank.guildDepositGoldTitle': 'Indsæt penge i laugets skatkammer',
+  'hudChrome.bank.guildDepositHint': 'Klik for at indsætte i laugsbanken',
+  'hudChrome.bank.guildDormantAria': '{item}, antal {count}, kan ikke tages ud',
+  'hudChrome.bank.guildDormantHint': 'Denne genstand er låst i laugsbanken og kan ikke tages ud.',
+  'hudChrome.bank.guildDormantNote':
+    'Låste genstande kan ikke tages ud og forhindrer, at lauget kan opløses.',
+  'hudChrome.bank.guildEmpty': 'Laugsbanken er tom.',
+  'hudChrome.bank.guildGoldAvailable': 'Tilgængeligt: {amount}',
+  'hudChrome.bank.guildGoldCannotMove': 'Det beløb kan ikke flyttes lige nu.',
+  'hudChrome.bank.guildLogTab': 'Log',
+  'hudChrome.bank.guildOpenAccept': 'Åbn',
+  'hudChrome.bank.guildOpenBank': 'Åbn laugsbanken',
+  'hudChrome.bank.guildOpenConfirm':
+    'Åbn laugsbanken for {price}? Dette betales af dine egne penge.',
+  'hudChrome.bank.guildOpenNote': 'Betalt af dine egne penge, ikke laugets skatkammer',
+  'hudChrome.bank.guildPurseShort': 'Ikke nok penge',
+  'hudChrome.bank.guildTab': 'Laug',
+  'hudChrome.bank.guildTreasury': 'Laugets skatkammer',
+  'hudChrome.bank.guildTreasuryShort': 'Ikke nok i skatkammeret',
+  'hudChrome.bank.guildUnknownItem': 'Ukendt genstand',
+  'hudChrome.bank.guildViewsAria': 'Laugsbankens visninger',
+  'hudChrome.bank.guildWithdrawGold': 'Tag penge ud',
+  'hudChrome.bank.guildWithdrawGoldTitle': 'Tag penge ud af laugets skatkammer',
+  'hudChrome.bank.logAdminPurge': 'En administrator fjernede {count} {item}',
+  'hudChrome.bank.logAria': 'Laugsbankens aktivitetslog',
+  'hudChrome.bank.logBuySlots': '{actor} købte en bankudvidelse for {amount}',
+  'hudChrome.bank.logCharterFee': '{actor} betalte laugets stiftelsesgebyr på {amount}',
+  'hudChrome.bank.logDepositItem': '{actor} indsatte {count} {item}',
+  'hudChrome.bank.logDepositMoney': '{actor} indsatte {amount}',
+  'hudChrome.bank.logEmpty': 'Der er endnu ikke flyttet noget ind i eller ud af laugsbanken.',
+  'hudChrome.bank.logFormerMember': 'Et tidligere laugsmedlem',
+  'hudChrome.bank.logLoading': 'Indlæser laugsbankens log...',
+  'hudChrome.bank.logNote': 'De {count} seneste handlinger i laugsbanken.',
+  'hudChrome.bank.logOpenBank': '{actor} åbnede laugsbanken for {amount}',
+  'hudChrome.bank.logRefused': 'Kun laugsofficerer kan læse laugsbankens log.',
+  'hudChrome.bank.logWithdrawItem': '{actor} tog {count} {item} ud',
+  'hudChrome.bank.logWithdrawMoney': '{actor} tog {amount} ud',
+  'hudChrome.bank.personalTab': 'Personlig',
+  'hudChrome.bank.tabsAria': 'Bankfaneblade',
+  'hudChrome.crafting.dialogOption': 'Håndværk',
+  'hudChrome.crafting.dialogOptionAria': 'Åbn håndværksvinduet for {craft}',
+  'hudChrome.deeds.recentJumpAria': 'Hop til {name}',
+  'hudChrome.landing.browserSupport.body':
+    'Du kan opleve reduceret ydeevne i denne browser. For den bedste oplevelse kan du hente skrivebordsappen til Windows, macOS eller Linux. Foretrækker du at spille i en browser? Chrome fungerer bedst, og Firefox og Safari understøttes også.',
+  'hudChrome.landing.browserSupport.continueInBrowser': 'Fortsæt i browseren',
+  'hudChrome.landing.browserSupport.dismissAria': 'Afvis meddelelsen om ikke-understøttet browser',
+  'hudChrome.landing.browserSupport.getDesktopApp': 'Hent skrivebordsappen',
+  'hudChrome.landing.browserSupport.title': 'Bemærk: ikke-understøttet browser',
+  'hudChrome.materialHint.cookingCatch':
+    'Madlavningsingrediens. Skal tilberedes, før den kan spises.',
+  'hudChrome.mounts.desc_drakemaw_raptor':
+    'En saddelvant yngelraptor fra Dragegabets Caldera, kun sener og spurt, som stadig lugter svagt af aske.',
+  'hudChrome.mounts.name_drakemaw_raptor': 'Dragegabets Raptor',
+  'hudChrome.options.graphicsApplied': 'Grafikindstillinger anvendt.',
+  'hudChrome.options.graphicsApply': 'Anvend grafik',
+  'hudChrome.options.graphicsApplying': 'Anvender grafikindstillinger...',
+  'hudChrome.options.graphicsDraftChanged': 'Grafikændringer er klar til at blive anvendt.',
+  'hudChrome.options.graphicsFailed':
+    'Grafikken kunne ikke anvendes. Dine tidligere indstillinger er stadig aktive.',
+  'hudChrome.options.graphicsFatal':
+    'Gendannelse af grafik mislykkedes. Genindlæs spillet for at fortsætte.',
+  'hudChrome.options.graphicsReload': 'Genindlæs spillet',
+  'hudChrome.options.graphicsRetry': 'Prøv grafik igen',
+  'hudChrome.options.graphicsSaved':
+    'Grafikindstillinger gemt. Den aktive grafikmotor matcher dem allerede.',
+  'hudChrome.options.lockActionBars': 'Lås handlingsbjælker',
+  'itemUi.kind.material': 'Materiale',
+  'itemUi.market.buyChanged': 'Den vare ændrede sig, før du bekræftede. Tjek prisen, og prøv igen.',
+  'itemUi.market.buyConfirmAccept': 'Køb',
+  'itemUi.market.buyConfirmBody': 'Køb {item} for {price}?',
+  'itemUi.market.buyConfirmBodyStack': 'Køb {item} x{count} for {price} ({each} stykket)?',
+  'itemUi.market.buyConfirmCancel': 'Annullér',
+  'itemUi.market.buyConfirmTitle': 'Bekræft køb',
+  'itemUi.tooltip.questOrphaned': 'Ikke nødvendig for nogen aktiv quest.',
+  'itemUi.tooltip.questRelated': 'Opgave: {quest}',
+  'itemUi.tooltip.questRules': 'Kan ikke sælges, lægges i banken eller byttes.',
+  'desktop.update.checkingBody': 'Nye versioner downloades, mens du spiller.',
+  'desktop.update.checkingTitle': 'Tjekker for opdateringer...',
+  'desktop.update.dismiss': 'Afvis',
+  'desktop.update.downloadingBody':
+    'Du kan blive ved med at spille. Den installeres, når du lukker spillet.',
+  'desktop.update.uptodateTitle': 'Du er opdateret',
+  'entities.items.firebottle.name': 'Ildflaske',
+  'entities.items.murloc_hut.name': 'Mudfin-hytte',
+  'entities.items.reins_drakemaw_raptor.name': 'Tøjler til Dragegabets Raptor',
+  'entities.items.restless_skull.name': 'Rastløst Kranie',
+  'entities.items.vanguard_bone.name': 'Fortrops Ben',
+  'entities.mobs.brakka_wallbreaker.name': 'Brakka Murbryderen',
+  'entities.mobs.dragonkin_broodguard.name': 'Drageæts Yngelvagt',
+  'entities.mobs.dragonkin_egg.name': 'Drageæts Æg',
+  'entities.mobs.dragonkin_whelp.name': 'Drageæts Unge',
+  'entities.mobs.drakemaw_broodlord.name': 'Dragegabets Yngelherre',
+  'entities.mobs.drowned_warlord.name': 'Den Druknede Krigsherre',
+  'entities.mobs.spider_egg.name': 'Yngelmoder-Æg',
+  'entities.mobs.threnos_first_voice.name': 'Threnos Førstestemmen',
+  'entities.mobs.widow_hatchling.name': 'Enkeyngel',
+  'entities.quests.q_no_rest.text':
+    'Riten på de røgelseskar binder de druknede til at rejse sig, og nu har den oprejst én, der er stærk nok til at lede dem. Vogterne kalder ham Den Druknede Krigsherre, og mens han holder Det Druknede Kapel, holder de døde deres rækker. Knæk ham, {playerName}, og resten vil spredes tilbage i mosen.',
   'hud.social.tenure.recruit': 'Rekrut',
   'hud.social.tenure.veteran': 'Veteran',
   'hudChrome.keybinds.mouseHint':
@@ -2150,9 +2266,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hudChrome.calendar.events.delveDay.note':
     'Broder Halven markerer sine kort: en fin dag at trodse Det Sammenstyrtede Relikvarium.',
   'hudChrome.calendar.events.delveDay.title': 'Delve-Dag',
-  'hudChrome.calendar.events.fiestaNight.note':
-    '2v2-Fiesta-ringen trækker sine mest højrøstede tilskuere i aften.',
-  'hudChrome.calendar.events.fiestaNight.title': 'Fiesta-Aften',
   'hudChrome.calendar.events.fishingDerby.note':
     'Lystfiskere står langs søerne. Tag en stang med, og udveksl fiskehistorier.',
   'hudChrome.calendar.events.fishingDerby.title': 'Fiskederby',
@@ -3339,6 +3452,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.items.crag_warden_cudgel.name': 'Klippevogterkølle',
   'entities.items.craghorn_staff.name': 'Klippehorn-Stav',
   'entities.items.cragmaw_huntcord.name': 'Klippegabs Jagtsnor',
+  'entities.items.cragmaw_huntquiver.name': 'Klippegabs Jagtkogger',
   'entities.items.cragmaw_prowlboots.name': 'Klippegab Luskestøvler',
   'entities.items.cragprowl_belt.name': 'Klippeluske-Bælte',
   'entities.items.cragthorn_greatstaff.name': 'Klippetoerne Storstav',
@@ -3426,6 +3540,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.items.gravewardens_shiv.name': 'Gravvogterens Dolk',
   'entities.items.gravewoven_raiment.name': 'Gravvævet Dragt',
   'entities.items.gravewyrm_gauntlets.name': 'Gravorm-Panserhandsker',
+  'entities.items.gravewyrm_bone_quiver.name': 'Gravorm-Benkogger',
   'entities.items.gravewyrm_mantle.name': 'Gravorm-Kappe',
   'entities.items.gravewyrm_sabatons.name': 'Gravorm-Jernstøvler',
   'entities.items.gravewyrm_scale_hauberk.name': 'Gravorm-Skælbrynje',
@@ -3490,6 +3605,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.items.mistveil_grips.name': 'Tågeslør-Greb',
   'entities.items.moggers_copper_cudgel.name': 'Moggers Kobberkølle',
   'entities.items.moggers_shiv.name': 'Moggers Dolk',
+  'entities.items.moggers_hide_quiver.name': 'Moggers Skindkogger',
   'entities.items.moggers_stomper_boots.name': 'Moggers Trampestøvler',
   'entities.items.monarch_crown_helm.name': 'Monarkens Krone',
   'entities.items.copper_mining_pick.name': 'Kobberminehakke',
@@ -3626,6 +3742,7 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.items.stormcallers_spaulders.name': 'Galecall-Skulderplader',
   'entities.items.bonewrought_greatsword.name': 'Bonewrought-Storsværd',
   'entities.items.direfang_greatblade.name': 'Direfang-Storklinge',
+  'entities.items.direfang_quiver.name': 'Direfang-Kogger',
   'entities.items.bonewrought_bulwark.name': 'Bonewrought-Bolværk',
   'entities.items.wraithfire_orb.name': 'Wraithfire-Kugle',
   'entities.items.stormroot_cowl.name': 'Stormrod-Hætte',
@@ -3972,7 +4089,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_cult_orders.completion':
     'Denne skrift... jeg så sidst dens lige i Morthens grimoire, i Østbæk. Den samme hånd har styret hver eneste grav, vi har kæmpet om, {playerName}.',
   'entities.quests.q_cult_orders.objectives.0.label': 'Ormekult-Zelot dræbt',
-  'entities.quests.q_cult_orders.objectives.1.label': 'Ormekult-Ordrer',
   'entities.quests.q_cult_orders.text':
     'Zeloterne bevæger sig med formål nu - vagter sat, forsyninger talt, som soldater før en belejring. Kultister, der organiserer sig, er kultister, der tager imod ordrer, {playerName}. Dræb otte til, og bring mig fire sæt af deres skrevne ordrer. Jeg vil kende den hånd, der befaler dem.',
   'entities.quests.q_cult_orders.title': 'Ordrer fra Det Dybe',
@@ -4148,15 +4264,12 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_necromancers.completion':
     'Lyset tilgive os. Disse rummer de døde fra Dalen og sumpen - hvert lig Gravkalderne nogensinde rejste, høstet. De byggede aldrig en hær, {playerName}. De indsamlede en tiende.',
   'entities.quests.q_necromancers.objectives.0.label': 'Ormekult-Nekromantiker dræbt',
-  'entities.quests.q_necromancers.objectives.1.label': 'Rituelt Fylakterie',
   'entities.quests.q_necromancers.text':
     'Ordrerne taler om en "ring af fylakterier" - sjælebeholdere, {playerName}, sat omkring Helligdommen for at nære den. Kultens nekromantikere bærer dem som hellige relikvier. Dræb otte nekromantikere og bring mig tre fylakterier ubrudte. Jeg må vide, hvilke sjæle de rummer.',
   'entities.quests.q_necromancers.title': 'Fylakterieringen',
   'entities.quests.q_no_rest.completion':
     'Du giver de døde mere nåde, end deres mestre nogensinde gjorde. Tag dette - du har mere end fortjent det.',
   'entities.quests.q_no_rest.objectives.0.label': 'Druknede Døde stedt til hvile',
-  'entities.quests.q_no_rest.text':
-    'Riten på de røgelseskar binder de druknede til at rejse sig, hvor end sumpen rører dem - og sumpen rører alt. Der bliver ingen hvile i disse siv, før de døde er flere end de levende. Vi kan ikke ophæve riten endnu, men vi kan tømme den for soldater. Sted 14 flere af de Druknede Døde til hvile.',
   'entities.quests.q_no_rest.title': 'Ingen Hvile i Sivene',
   'entities.quests.q_nythraxis_bound_guardian.completion':
     "De tre relikvier fortæller den samme historie: Aldren kæmpede for at forsvare sin konge, Malric brød dødens grænse, og Voss forsøgte at standse, hvad der fulgte. Seglet svækkes, og denne signetring er nøglen til Nythraxis' grav. Du er nu indviet til at træde ind i Nythraxis' Krypt. Vend tilbage til den forladte krypt, lås den kongelige dør op, og mød Nythraxis, før den gamle konges raseri vælder ud over Tornetop.",
@@ -4516,7 +4629,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'fiesta.end.draw': 'FIESTA UAFGJORT! Alt for tæt på!',
   'fiesta.end.loss': 'FIESTA TABT! Tag revanche!',
   'fiesta.end.win': 'FIESTA VUNDET! 🎉 Sikke en fest!',
-  'fiesta.enterQueue': 'Deltag i Fiestaen!',
   'fiesta.error.leaderOnly': 'Kun gruppelederen kan sætte jeres hold i kø til {label}.',
   'fiesta.error.noAugment': 'Du har ingen forstærkning at vælge lige nu.',
   'fiesta.error.notOnOffer': 'Den forstærkning tilbydes ikke.',
@@ -4533,9 +4645,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'fiesta.powerup.pow_colossus.name': 'Koloss',
   'fiesta.powerup.pow_moon_boots.name': 'Månestøvler',
   'fiesta.powerup.pow_speed_demon.name': 'Fartdæmon',
-  'fiesta.practice': '🎉 Træning mod Bots',
-  'fiesta.practiceNote':
-    'Offline-træning: frembringer 3 AI-bots og sætter dig i kø til en 2v2 Fiesta. Klik igen for at stoppe.',
   'fiesta.queue.join': 'Du går i kø til 2v2 Fiesta. Gør dig klar til at FESTE…',
   'fiesta.queue.leave': 'Du forlader 2v2 Fiesta-køen.',
   'fiesta.queue.teamLeave': 'Dit hold forlader 2v2 Fiesta-køen.',
@@ -4772,38 +4881,18 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
     'Beskytter en allieret så nærkampsangribere skader sig selv når de slår.',
   'guide.abilityHook.thunder_clap': 'Rammer alt omkring dig og sløver deres angreb.',
   'guide.abilityHook.wrath': 'Et naturlyn kastet mod et mål på afstand, din foretrukne bombe.',
-  'guide.arenaPage.augmentsNote':
-    'Forstærkninger og power-ups varer kun under kampen. De handler om legende, spontane builds, ikke om varig styrke, så ingen køber sig til en sejr.',
   'guide.arenaPage.coliseumBody':
     'Coliseum er rigets arena, hvor du møder andre spillere i rangerede kampe, en mod en eller to mod to. Hver kategori har sin egen placering, så en sejr løfter dig op ad den rangliste for hele riget at se. Åbn Arena-vinduet for at melde dig til en kategori, alene eller med din makker.',
   'guide.arenaPage.coliseumHeading': 'Det Askegrå Colosseum',
   'guide.arenaPage.duelsBody':
     'Udfordr enhver spiller du møder til en venskabelig duel. Intet andet end stolthed står på spil, så det er den nemmeste måde at lære en kamp at kende eller bilægge en venskabelig uenighed.',
   'guide.arenaPage.duelsHeading': 'Dueller',
-  'guide.arenaPage.fiestaBody':
-    'Fiesta er en hurtig to-mod-to-kamp, spillet som én sammenhængende dyst, hvor hver kæmper stilles lige. Efterhånden som kampen skrider frem, vælger du forstærkninger, hurtige boosts der omformer dit udstyr undervejs, så ingen kampe spilles helt ens.',
-  'guide.arenaPage.fiestaHeading': 'To mod to Fiesta',
   'guide.arenaPage.heading': 'Arena og PvP',
   'guide.arenaPage.intro':
     'Vil du teste dig selv mod andre spillere? Spiller mod spiller er indbygget, og det er altid noget du vælger, aldrig noget der tvinges på dig.',
   'guide.arenaPage.ladderBody':
     'Rangeret spil følger din placering over tid. Tjek ranglisten for at se hvor du ligger og hvem der holder toppen af riget.',
   'guide.arenaPage.ladderHeading': 'At klatre op ad rangstigen',
-  'guide.arenaPage.powerupsBody':
-    'Glødende kugler falder også ned i arenaen midt i kampen, gratis for den der når dem først. De er bevidst overdrevne og varer kun et kort øjeblik: Speed Demon for et glimt af blændende fart, Colossus for at svulme op til en kluntet kæmpe, Moon Boots for et hoppende, lavtyngdekrafts-hop, og Berserker for et pludseligt udbrud af raseri.',
-  'guide.arenaPage.powerupsTitle': 'Power-ups i ringen',
-  'guide.arenaPage.waveGoldBody':
-    'Den midterste bølge: tveæggede kombinationer hvor din build begynder at tage form og synge.',
-  'guide.arenaPage.waveGoldTitle': 'Guld',
-  'guide.arenaPage.wavePrismaticBody':
-    'Den sidste bølge: build-definerende, skærm-smeltende spidser der skal føles latterlige på den bedste måde.',
-  'guide.arenaPage.wavePrismaticTitle': 'Prismatisk',
-  'guide.arenaPage.waveSilverBody':
-    'Den indledende bølge: rene boosts på én egenskab der skærper grundlaget for din klasse.',
-  'guide.arenaPage.waveSilverTitle': 'Sølv',
-  'guide.arenaPage.wavesBody':
-    'En Fiesta-dyst rækker dig friske valg undervejs, og valgene bliver dristigere, jo længere kampen kører. Du bygger fra én bølge til den næste, vælger en af nogle få muligheder hver gang og beholder den resten af dysten.',
-  'guide.arenaPage.wavesTitle': 'Forstærkninger ankommer i bølger',
   'guide.bestiary.flavor.gravecaller_cultist':
     'Kappeklædte tjenere af dødskulten hvis virke besudler gravene fra Dalen til toppene. Hvor de samles, hviler de døde ikke.',
   'guide.bestiary.flavor.grubjaw':
@@ -5877,7 +5966,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hud.core.mapCanvasLabel': 'Kort',
   'hud.core.mapSummary': 'Kort over {zone}.',
   'hud.core.maxLevel': 'MAKS NIVEAU',
-  'hud.core.mobileArena': 'Arena',
   'hud.core.mobileAttack': 'Angrib',
   'hud.core.mobileCamera': 'Kamera — dobbelttryk for at centrere',
   'hud.core.mobileChat': 'Chat',
@@ -5973,7 +6061,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'hud.errors.whisperMissing': "Der er ingen spiller ved navn '{name}' online.",
   'hud.errors.whisperSelf': 'Du mumler for dig selv. Ingen hører det.',
   'hud.keybinds.actions.actionBarSlot': 'Handlingslinje {slot}',
-  'hud.keybinds.actions.arena': 'Arena (Ashen Coliseum)',
   'hud.keybinds.actions.attack': 'Angrib',
   'hud.keybinds.actions.attackMove': 'Angrebsbevægelse',
   'hud.keybinds.actions.autorun': 'Skift automatisk løb',
@@ -8187,9 +8274,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
     'Flænger målets rustning og sænker den med {damage}% pr. anvendelse. Stakker op til 5 gange. Skaber en stor mængde trussel.',
   'entities.mobs.training_dummy.name': 'Træningsdukke',
   'entities.mobs.yumi_cat.name': 'Yumi',
-  'guide.arenaPage.yumiBody':
-    'Beskyt Yumi er en holdbaseret måltilstand, der spilles i en labyrint: hver side vogter sin egen katfølgesvend, mens den jager modstanderens. Med jævne mellemrum blinker begge katte til nye hjørner af labyrinten, så kampen svinger mellem at forsvare, jage og kapløbet om at finde dem igen. Stil op som tre mod tre eller fem mod fem; at falde i kamp sætter dig kun på bænken et øjeblik.',
-  'guide.arenaPage.yumiHeading': 'Beskyt Yumi',
   'hudChrome.archetypeTitle.hobbyLabel': 'Fritid',
   'hudChrome.auraEffect.armorPct': 'Reducerer rustning med {pct}%',
   'hudChrome.auraEffect.armorPctStacks': 'Reducerer rustning med {pct}% ({stacks} stakke)',
@@ -8209,7 +8293,6 @@ export const da_DK: Partial<Record<TranslationKey, string>> = {
   'yumi.bracket5': 'Yumi 5 mod 5',
   'yumi.end.loss': 'NEDERLAG! Din Yumi er faldet.',
   'yumi.end.win': 'SEJR! Yumi er i sikkerhed!',
-  'yumi.enterQueue': 'Tilmeld dig Beskyt Yumi!',
   'yumi.error.partyTooBig3': 'Beskyt Yumi 3 mod 3 tillader en gruppe på op til tre.',
   'yumi.error.partyTooBig5': 'Beskyt Yumi 5 mod 5 tillader en gruppe på op til fem.',
   'yumi.hud.aria': 'Din Yumi på {mine} af {max} helbred, fjendens Yumi på {theirs}.',

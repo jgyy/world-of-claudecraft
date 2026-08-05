@@ -40,6 +40,7 @@ import { OVERHEAD_EMOTE_IDS, type PlayerClass } from '../src/sim/types';
 // type-only to pin each facet's runtime member array to its interface key-set below.
 import type { IWorldActionBar } from '../src/world_api/action_bar';
 import type { IWorldBank } from '../src/world_api/bank';
+import type { IWorldBattleground } from '../src/world_api/battleground';
 import type { IWorldCardMinigame } from '../src/world_api/card_minigame';
 import type { IWorldChat } from '../src/world_api/chat';
 // The overhead-emote runtime surface the chat facet derives locally (see the
@@ -56,6 +57,7 @@ import type { IWorldDuelArena } from '../src/world_api/duel_arena';
 import type { IWorldDungeonFinder } from '../src/world_api/dungeon_finder';
 import type { IWorldDungeons } from '../src/world_api/dungeons';
 import type { IWorldEntityRoster } from '../src/world_api/entity_roster';
+import type { IWorldGuildBank } from '../src/world_api/guild_bank';
 import type { IWorldInteraction } from '../src/world_api/interaction';
 import type { IWorldInventory } from '../src/world_api/inventory';
 import type { IWorldLoot } from '../src/world_api/loot';
@@ -187,6 +189,8 @@ export const IWORLD_MEMBERS = [
   { name: 'arenaInfo', kind: 'data' },
   { name: 'honor', kind: 'data' },
   { name: 'lifetimeHonor', kind: 'data' },
+  // --- Thornhollow Fields battleground (IWorldBattleground) ---
+  { name: 'bgInfo', kind: 'data' },
   { name: 'cardMinigameInfo', kind: 'data' },
   { name: 'joinCardDuelQueue', kind: 'method' },
   { name: 'leaveCardDuelQueue', kind: 'method' },
@@ -250,6 +254,10 @@ export const IWORLD_MEMBERS = [
   { name: 'arenaQueueJoin', kind: 'method' },
   { name: 'arenaQueueLeave', kind: 'method' },
   { name: 'arenaAugmentPick', kind: 'method' },
+  // --- Thornhollow Fields battleground (IWorldBattleground) ---
+  { name: 'bgQueueJoin', kind: 'method' },
+  { name: 'bgQueueLeave', kind: 'method' },
+  { name: 'bgFlagAction', kind: 'method' },
   // --- the Vale Cup boarball minigame (IWorldValeCup) ---
   { name: 'vcupQueueJoin', kind: 'method' },
   { name: 'vcupQueueLeave', kind: 'method' },
@@ -276,6 +284,15 @@ export const IWORLD_MEMBERS = [
   { name: 'bankDeposit', kind: 'method' },
   { name: 'bankWithdraw', kind: 'method' },
   { name: 'bankBuySlots', kind: 'method' },
+  // --- guild bank: officer-plus proximity-gated read + gold/item/buy commands
+  //     (Phase 1 stubs in both worlds; the wire lands in Phase 2) ---
+  { name: 'guildBankInfo', kind: 'data' },
+  { name: 'guildBankDepositGold', kind: 'method' },
+  { name: 'guildBankWithdrawGold', kind: 'method' },
+  { name: 'guildBankDeposit', kind: 'method' },
+  { name: 'guildBankWithdraw', kind: 'method' },
+  { name: 'guildBankBuySlots', kind: 'method' },
+  { name: 'guildBankLog', kind: 'method' },
   // --- dungeons + delves commands and reads ---
   { name: 'enterDungeon', kind: 'method' },
   { name: 'leaveDungeon', kind: 'method' },
@@ -515,13 +532,19 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // riftCollisionToken (data) with third-person camera collision,
     // leaving 280; a later v0.34.0 sync re-adds riftCollisionToken (data)
     // so client-side swept-landing and click-to-move pathing can treat
-    // rift walls as solid, leaving 281; the Book of Deeds recent strip adds
-    // the deedsRecent order read (method) for 282; the
-    // stop-auto-attack-on-target-switch setting adds
-    // setStopAutoAttackOnTargetSwitch (method), leaving 283.
-    expect(IWORLD_MEMBERS.length).toBe(283);
-    expect(DATA_MEMBERS.length).toBe(73);
-    expect(METHOD_MEMBERS.length).toBe(210);
+    // rift walls as solid, leaving 281. The Guild Bank foundation adds the six
+    // IWorldGuildBank members (guildBankInfo, one data read, plus five
+    // commands), leaving 287. The guild bank ACTIVITY LOG adds one read member
+    // (guildBankLog, a method because reading it is what requests the cold
+    // payload on demand: it has no snapshot key), leaving 288. Thornhollow
+    // Fields adds the four battleground facet members on top of that base:
+    // the bgInfo data member plus the bgQueueJoin / bgQueueLeave / bgFlagAction
+    // commands, leaving 293 (this base tip already carries the Book of Deeds
+    // recent strip's deedsRecent read). The stop-auto-attack-on-target-switch
+    // setting adds setStopAutoAttackOnTargetSwitch (method), leaving 294.
+    expect(IWORLD_MEMBERS.length).toBe(294);
+    expect(DATA_MEMBERS.length).toBe(75);
+    expect(METHOD_MEMBERS.length).toBe(219);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -560,6 +583,10 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'bankDeposit',
       'bankInfo',
       'bankWithdraw',
+      'bgFlagAction',
+      'bgInfo',
+      'bgQueueJoin',
+      'bgQueueLeave',
       'blockAdd',
       'blockRemove',
       'buyBackItem',
@@ -640,6 +667,13 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'friendlyTabTarget',
       'gatheringProficiency',
       'guildAccept',
+      'guildBankBuySlots',
+      'guildBankDeposit',
+      'guildBankDepositGold',
+      'guildBankInfo',
+      'guildBankLog',
+      'guildBankWithdraw',
+      'guildBankWithdrawGold',
       'guildCreate',
       'guildDecline',
       'guildDemote',
@@ -831,6 +865,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'bagCapacity',
       'bags',
       'bankInfo',
+      'bgInfo',
       'cardMinigameInfo',
       'cfg',
       'companionState',
@@ -851,6 +886,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'equipment',
       'equipmentInstances',
       'gatheringProficiency',
+      'guildBankInfo',
       'hobbyCraft',
       'honor',
       'inventory',
@@ -915,6 +951,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'bankBuySlots',
       'bankDeposit',
       'bankWithdraw',
+      'bgFlagAction',
+      'bgQueueJoin',
+      'bgQueueLeave',
       'blockAdd',
       'blockRemove',
       'buyBackItem',
@@ -975,6 +1014,12 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'friendRemove',
       'friendlyTabTarget',
       'guildAccept',
+      'guildBankBuySlots',
+      'guildBankDeposit',
+      'guildBankDepositGold',
+      'guildBankLog',
+      'guildBankWithdraw',
+      'guildBankWithdrawGold',
       'guildCreate',
       'guildDecline',
       'guildDemote',
@@ -1380,6 +1425,16 @@ type _ExhaustDuelArena = AssertNever<
   Exclude<keyof IWorldDuelArena, (typeof FACET_DUEL_ARENA)[number]>
 >;
 
+const FACET_BATTLEGROUND = [
+  'bgInfo',
+  'bgQueueJoin',
+  'bgQueueLeave',
+  'bgFlagAction',
+] as const satisfies readonly (keyof IWorldBattleground)[];
+type _ExhaustBattleground = AssertNever<
+  Exclude<keyof IWorldBattleground, (typeof FACET_BATTLEGROUND)[number]>
+>;
+
 const FACET_CARD_MINIGAME = [
   'cardMinigameInfo',
   'joinCardDuelQueue',
@@ -1449,6 +1504,19 @@ const FACET_BANK = [
   'bankBuySlots',
 ] as const satisfies readonly (keyof IWorldBank)[];
 type _ExhaustBank = AssertNever<Exclude<keyof IWorldBank, (typeof FACET_BANK)[number]>>;
+
+const FACET_GUILD_BANK = [
+  'guildBankInfo',
+  'guildBankDepositGold',
+  'guildBankWithdrawGold',
+  'guildBankDeposit',
+  'guildBankWithdraw',
+  'guildBankBuySlots',
+  'guildBankLog',
+] as const satisfies readonly (keyof IWorldGuildBank)[];
+type _ExhaustGuildBank = AssertNever<
+  Exclude<keyof IWorldGuildBank, (typeof FACET_GUILD_BANK)[number]>
+>;
 
 const FACET_DUNGEONS = [
   'enterDungeon',
@@ -1608,11 +1676,13 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   trade: FACET_TRADE,
   chat: FACET_CHAT,
   duelArena: FACET_DUEL_ARENA,
+  battleground: FACET_BATTLEGROUND,
   cardMinigame: FACET_CARD_MINIGAME,
   socialGraph: FACET_SOCIAL_GRAPH,
   market: FACET_MARKET,
   mail: FACET_MAIL,
   bank: FACET_BANK,
+  guildBank: FACET_GUILD_BANK,
   dungeons: FACET_DUNGEONS,
   delves: FACET_DELVES,
   dailyRewards: FACET_DAILY_REWARDS,
@@ -1627,7 +1697,7 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
 
 describe('W1: aggregate IWorld member set equals the disjoint union of the facets', () => {
   it('pins the facet count', () => {
-    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(30);
+    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(32);
   });
 
   it('each facet array is non-empty and internally duplicate-free', () => {
@@ -1655,8 +1725,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
 
   it('the facet union equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(283);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(283);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(294);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(294);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

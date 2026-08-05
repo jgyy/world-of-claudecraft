@@ -35,6 +35,7 @@ import {
   allocRiftCollisionToken,
   lineOfSightClear,
   moverHeight,
+  placementFloorHeight,
   resolveMovement,
   resolvePosition,
   seatGroundedAt,
@@ -167,6 +168,7 @@ import {
   INSTANCE_SLOT_COUNT,
   ITEMS,
   isArenaPos,
+  isBgPos,
   isDelvePos,
   isRiftPos,
   MOBS,
@@ -225,6 +227,8 @@ import * as escortMod from './escort';
 import { initEscorts as initEscortsImpl, updateEscorts as updateEscortsImpl } from './escort';
 import { fleeSpeed } from './flee_speed';
 import { formatMoney } from './format_money';
+import type { GuildBankState, GuildMembership } from './guild_bank';
+import * as guildBankMod from './guild_bank';
 import * as interaction from './interaction';
 import {
   boundCraftedRecipeIdOnLoad,
@@ -271,7 +275,9 @@ import {
   mobEffectiveMeleeRange as mobEffectiveMeleeRangeImpl,
   tryMobMeleeSwingInRange as tryMobMeleeSwingInRangeImpl,
 } from './mob/combat_profile';
+import { updateDragonkinBrood } from './mob/dragonkin_brood';
 import { NYTHRAXIS_SPIRIT_MENDING_CAST_ID } from './mob/healer_channel';
+import { wanderPause } from './mob/idle_rng';
 import * as lifecycle from './mob/lifecycle';
 import { resetEvadingMob as resetEvadingMobFn, updateMob as updateMobFn } from './mob/locomotion';
 import { runMobSwingAffixes } from './mob/mob_swing';
@@ -314,6 +320,7 @@ import {
 } from './pathfind';
 import * as petAi from './pet/pet_ai';
 import * as petCommands from './pet/pet_commands';
+import type { MatchPetSnapshot } from './pet/pet_match_return';
 import {
   isSwimming as isSwimmingImpl,
   moveSpeedMult as moveSpeedMultImpl,
@@ -332,6 +339,7 @@ import {
   hobbyCraftFor,
   normalizeArchetypeState,
   requiredAmendsProgress,
+  serializeArchetypeState,
   switchArchetype as switchArchetypeImpl,
 } from './professions/archetype';
 import {
@@ -504,6 +512,7 @@ import {
   onNodeGatheredForQuests,
   onRecipeCraftedForQuests,
 } from './quests/quest_credit';
+import { migrateRestoredQuestProgress } from './quests/quest_progress_migration';
 import { type NaturalRiftPortal, updateRiftPortals as updateRiftPortalsImpl } from './rift/portals';
 import {
   enchantRiftItem as enchantRiftItemImpl,
@@ -543,6 +552,8 @@ export { computeQuestState } from './quests/quest_commands';
 import { completeCurrentQuestsForDev, completeQuestForDev } from './quests/dev_quest_commands';
 import * as arenaMod from './social/arena';
 import { clearAfkOnMove } from './social/away';
+import * as bgMod from './social/battleground';
+import * as bgOutcomesMod from './social/battleground_outcomes';
 import type { CardDuelMatch } from './social/card_duel';
 import * as cardDuelMod from './social/card_duel';
 import * as duelMod from './social/duel';
@@ -600,6 +611,7 @@ import {
   type AuraKind,
   angleTo,
   assertCanonicalEastbrookNoticeboardDef,
+  type CampDef,
   type CrowdControlDrCategory,
   type CrowdControlDrState,
   cloneInvSlot,
@@ -903,6 +915,11 @@ export interface ArenaReturnPools {
   cooldowns: Map<string, number>;
   abilityCharges: Record<string, AbilityChargeState>;
   ccDr: Map<CrowdControlDrCategory, CrowdControlDrState>;
+  // The recovery sickness the fighter owed on the way in, by id and remaining
+  // seconds. The bout runs on the arena clean slate, but the debt follows them out
+  // (restoreArenaReturnPools), so queueing is not a way to shed the penalty.
+  // Absent when they entered healthy.
+  sickness?: { id: string; remaining: number };
 }
 
 export interface ArenaMatch {
@@ -918,6 +935,12 @@ export interface ArenaMatch {
   // so no arena format can be farmed as a free full-restore (issue #1600).
   // Optional only for compatibility with synthetic/legacy ArenaMatch fixtures.
   preMatchPools?: Map<number, ArenaReturnPools>;
+  // The LIVING pet each fighter walked in with (absent pid = none), so the return
+  // path can stand a beast the bout killed back up instead of sending its owner
+  // home with a corpse. Kept beside the pools rather than inside them because it is
+  // applied LATER: the pet is placed only after its owner is back at their queue
+  // spot. Optional for the same synthetic-fixture reason as preMatchPools.
+  preMatchPets?: Map<number, MatchPetSnapshot>;
   ratingA: number; // team avg at start
   ratingB: number;
   defeated: Set<number>;
@@ -1106,6 +1129,9 @@ export interface PlayerMeta {
   isDevBot?: boolean;
   // Offline Fiesta practice opponent. Session-only and never serialized.
   isFiestaBot?: boolean;
+  // Firebottle throw cooldown (q_deepfen_purge): sim time the player's next hut
+  // torch is ready. Session-only, never serialized.
+  firebottleReadyAt?: number;
   skin: number; // appearance index into the render SKINS[player_<cls>]; persisted, synced
   skinCatalog: SkinCatalog;
   // Cosmetic skin-select event: the rank rolled when the event token was used,
@@ -1165,6 +1191,14 @@ export interface PlayerMeta {
   // never persisted, never sim-mutated, always [] offline; capacity itself rides
   // bank.bonusSlots. Excluded from the parity meta sample (tests/parity/trace.ts).
   bankBonusSources: BankBonusSource[];
+  // Server-stamped guild membership (guild id + rank), the authorization input
+  // the Guild Bank's officer-plus gate reads; written only through
+  // setPlayerGuildMembership (guild_bank.ts). Session-only exactly like
+  // bankBonusSources: guilds live in the server social DB, so this is never
+  // serialized into CharacterState (the server re-stamps at join and on every
+  // membership or rank change), never sim-mutated, always null offline.
+  // Excluded from the parity meta sample (tests/parity/trace.ts).
+  guildMembership: GuildMembership | null;
   vendorBuyback: InvSlot[];
   copper: number;
   equipment: PlayerEquipment;
@@ -1280,6 +1314,13 @@ export interface PlayerMeta {
   arena2v2Rating: number;
   arena2v2Wins: number;
   arena2v2Losses: number;
+  // Thornhollow Fields 5v5 battleground standing (rated, not matched); bgCaptures is
+  // the career flag-capture count feeding the Book of Deeds meters. All
+  // persisted in CharacterState, absent until the first result.
+  bgRating: number;
+  bgWins: number;
+  bgLosses: number;
+  bgCaptures: number;
   // The Vale Cup (docs/prd/vale-cup.md). `sportRole` is the temporary sport-kit
   // role while seated in a Sowfield match: SESSION-ONLY, never serialized
   // (known is derived on load, so persistence is naturally safe with no restore
@@ -1541,6 +1582,13 @@ export interface CharacterState {
   arena2v2Rating?: number;
   arena2v2Wins?: number;
   arena2v2Losses?: number;
+  // Thornhollow Fields battleground standing (JSONB; optional and written only once a
+  // result or capture exists, so pre-Thornhollow Fields saves load cleanly and
+  // unchanged saves stay byte-equal).
+  bgRating?: number;
+  bgWins?: number;
+  bgLosses?: number;
+  bgCaptures?: number;
   // The Vale Cup standing (JSONB; optional and written only once a result
   // exists, so pre-cup saves load cleanly and unchanged saves stay byte-equal).
   vcupWins?: number;
@@ -1737,6 +1785,16 @@ function freshCounters(): RewardCounters {
   };
 }
 
+// The offline guild bank log answer: a FROZEN empty ready view. Offline play
+// never has a guild (guilds live in the server social DB) and there is no
+// bank_ledger to read, so the log is empty rather than loading or refused. One
+// shared frozen instance so the inert facet arm can never be mutated by a
+// caller into a per-Sim divergence.
+const OFFLINE_GUILD_BANK_LOG: import('../world_api').GuildBankLogView = Object.freeze({
+  state: 'ready' as const,
+  entries: Object.freeze([]) as readonly import('../world_api').GuildBankLogEntry[],
+});
+
 // isPetClass relocated to types.ts (P1b; imported in the './types' block above). The
 // cast-toggle predicates (isFormToggle/isToggleBuff/isStealthToggle/preservesStealth/
 // isShamanShock/ignoresDamagePushback) live in combat/casting_lifecycle.ts (C4a).
@@ -1843,6 +1901,18 @@ export class Sim {
   private yumiBusySlots = new Set<number>();
   private yumiCatMatches = new Map<number, ArenaMatch>();
   private nextArenaMatchId = 1;
+  // Thornhollow Fields battleground: queued party-groups, live matches keyed by every
+  // member pid, and the band's own busy-slot pool (slot numbers collide across
+  // pools, so it must never share the arena's). social/battleground.ts owns
+  // the behavior; these are its ctx live views.
+  bgQueue: bgMod.BgQueueGroup[] = [];
+  bgMatches = new Map<number, bgMod.BgMatch>(); // pid -> shared match (all members)
+  private bgBusySlots = new Set<number>();
+  private nextBgMatchId = 1;
+  // Resolved rated-match records, drained post-tick by the authoritative host
+  // (server/game.ts) and by nobody else; the log caps itself, so the offline
+  // and headless hosts that never drain hold a fixed, trivial tail.
+  readonly bgOutcomes: bgOutcomesMod.BgOutcomeRecord[] = bgOutcomesMod.createBgOutcomeLog();
   // The Vale Cup boarball state (social/vale_cup.ts): ONE holder object (the
   // per-bracket queues, the single Sowfield match slot, the Groundskeeper's
   // deserter book, and the live bot pids), exposed as the live ctx.vcup view.
@@ -1897,6 +1967,11 @@ export class Sim {
   // sim needs, and any banker is a valid place to stand and use the bank. Exposed
   // as a live SimContext view so bank.ts gates deposit/withdraw/buy on proximity.
   bankerIds: number[] = [];
+  // Guild Bank books: guild id -> live GuildBankState, loaded by the server per
+  // realm through loadGuildBank (guild_bank.ts owns the shape; Phase 3 wires the
+  // DB) and exposed as a live SimContext view. Always empty offline: guilds are
+  // a server social system, so the offline sim never creates a book.
+  guildBanks: Map<number, GuildBankState> = new Map();
   /** When true, /dev level|tp|give chat commands are accepted (local dev only). */
   readonly devCommands: boolean;
   // Entities spawned by the last /dev sandbox (dummy + practice bots), so re-running
@@ -2100,13 +2175,21 @@ export class Sim {
           this.addEntity(mob);
           continue;
         }
+        // An offStream camp scatters off a PRIVATE sub-stream, so it draws no
+        // shared rng at all and adding it leaves every later world draw (and
+        // therefore every seeded gameplay roll) bit-identical. Same principle
+        // as the dummy/ambient branch above, but it still gets real scatter.
+        // Seeded from the world seed plus the camp's AUTHORED identity (never
+        // its array index, so reordering the list cannot move it), and never
+        // from wall-clock, so all three hosts agree.
+        const campRng = camp.offStream ? this.campPrivateRng(camp, i) : this.rng;
         // Spread the camp's mobs with even nearest-neighbor spacing (a sunflower
         // spiral) instead of independent uniform sampling, which let mobs stack.
         // The two draws below feed campSpawnOffset as jitter and are consumed in the
         // SAME order/count as the old angle/radius rolls, so the global rng stream
         // position is unchanged: only spawn positions move (see camp_scatter.ts).
-        const jitterAngle = this.rng.range(0, Math.PI * 2);
-        const jitterFrac = this.rng.next();
+        const jitterAngle = campRng.range(0, Math.PI * 2);
+        const jitterFrac = campRng.next();
         const off = campSpawnOffset(i, camp.count, camp.radius, jitterAngle, jitterFrac);
         // Keep camp mobs out of every dungeon door's clear ring so approaching or
         // zoning out of a dungeon never lands the player in a pack's aggro radius.
@@ -2121,11 +2204,17 @@ export class Sim {
         const grounded = this.findSafePos(cleared.x, cleared.z, minHeight);
         const safe = projectOutsideDungeonDoors(grounded.x, grounded.z);
         const pos = this.groundPos(safe.x, safe.z);
-        const level = this.rng.int(template.minLevel, template.maxLevel);
+        const level = campRng.int(template.minLevel, template.maxLevel);
         const mob = createMob(this.nextId++, template, level, pos);
-        mob.facing = this.rng.range(-Math.PI, Math.PI);
+        mob.facing = campRng.range(-Math.PI, Math.PI);
         mob.prevFacing = mob.facing;
-        mob.wanderTimer = this.rng.range(2, 10);
+        mob.wanderTimer = wanderPause(campRng, mob, 2, 10);
+        // Carry the off-stream contract onto the spawn: its passive idle draws
+        // must stay private too, or the herd drifts the shared stream anyway
+        // (see Entity.offStreamRng). This is the CAMP arm only; the TEMPLATE arm
+        // (MobTemplate.offStreamIdle, which also covers a shared-stream camp slot)
+        // is stamped for every spawn path in createMob.
+        if (camp.offStream) mob.offStreamRng = true;
         this.addEntity(mob);
       }
     }
@@ -2536,7 +2625,12 @@ export class Sim {
         legacyInstanceExit = true;
       }
     }
-    if (savedPos && isDelvePos(savedPos.x)) {
+    if (savedPos && isBgPos(savedPos.x)) {
+      // A save inside the Thornhollow Fields band (a crash mid-match) has no match to
+      // rejoin: resume at the world start (dungeonAt() knows nothing about
+      // this band, so the dungeon-door fallback below must never see it).
+      savedPos = null;
+    } else if (savedPos && isDelvePos(savedPos.x)) {
       const delve = delveAt(savedPos.x) ?? DELVE_LIST[0];
       savedPos = { x: delve.doorPos.x, z: delve.doorPos.z - 4 };
     } else if (savedPos && savedPos.x > DUNGEON_X_THRESHOLD) {
@@ -2583,6 +2677,7 @@ export class Sim {
       bags: Array<string | null>(BAG_SOCKETS).fill(null),
       bank: { inventory: [], purchasedSlots: 0, bonusSlots: 0 },
       bankBonusSources: [],
+      guildMembership: null,
       vendorBuyback: [],
       copper: 0,
       equipment: {
@@ -2622,6 +2717,18 @@ export class Sim {
       arena2v2Rating: savedArena2v2.rating,
       arena2v2Wins: savedArena2v2.wins,
       arena2v2Losses: savedArena2v2.losses,
+      // Finite-clamped like the arena standings above: bgRating feeds Elo
+      // math, so a corrupt row must never flow NaN through a match result.
+      bgRating: Number.isFinite(savedState?.bgRating)
+        ? (savedState?.bgRating as number)
+        : bgMod.BG_BASE_RATING,
+      bgWins: Number.isFinite(savedState?.bgWins) ? Math.max(0, savedState?.bgWins as number) : 0,
+      bgLosses: Number.isFinite(savedState?.bgLosses)
+        ? Math.max(0, savedState?.bgLosses as number)
+        : 0,
+      bgCaptures: Number.isFinite(savedState?.bgCaptures)
+        ? Math.max(0, savedState?.bgCaptures as number)
+        : 0,
       sportRole: null,
       vcupWins: savedState?.vcupWins ?? 0,
       vcupLosses: savedState?.vcupLosses ?? 0,
@@ -2882,6 +2989,7 @@ export class Sim {
       // field and sanitizes to an empty bank). See bank.ts sanitizeBankState.
       meta.bank = sanitizeBankState(s.bank, meta.name, droppedInstanceJunk, player.id);
       warnDroppedInstanceKeys(meta.name, droppedInstanceJunk);
+      let questRevReset = false;
       for (const q of s.questLog) {
         // Prune unknown quest ids at load (normalize on load, never crash): a save
         // mid a since-deleted quest (e.g. the retirement of
@@ -2894,17 +3002,40 @@ export class Sim {
         // the per-object interact ledger existed, which grants that player their
         // remaining interacts rather than dead-ending a part-way-done quest.
         const creditedObjects = sanitizeCreditedObjects(q.creditedObjects);
-        if (q.state !== 'done' && QUESTS[q.questId])
-          meta.questLog.set(q.questId, {
+        if (q.state !== 'done' && QUESTS[q.questId]) {
+          // migrateRestoredQuestProgress resets an in-flight run whose QuestDef.rev
+          // moved under it (the objective rework migration); a reset drops the
+          // per-run scratch (burnedObjects, creditedObjects) with the counts. The
+          // burnedObjects filter drops pre-stable-key rows (a legacy {id, at}
+          // save) so they can never alias a live hut key.
+          const restored = {
             questId: q.questId,
             counts: [...q.counts],
             state: q.state,
             ...(q.selection === undefined ? {} : { selection: q.selection }),
             ...(q.resolvedCounts === undefined ? {} : { resolvedCounts: [...q.resolvedCounts] }),
+            ...(q.burnedObjects === undefined
+              ? {}
+              : {
+                  burnedObjects: q.burnedObjects
+                    .filter((b) => typeof b.key === 'string')
+                    .map((b) => ({ key: b.key, at: b.at })),
+                }),
             ...(creditedObjects === undefined ? {} : { creditedObjects }),
-          });
+            ...(q.rev === undefined ? {} : { rev: q.rev }),
+          };
+          const migrated = migrateRestoredQuestProgress(QUESTS[q.questId], restored);
+          if (migrated !== restored) questRevReset = true;
+          meta.questLog.set(q.questId, migrated);
+        }
       }
       for (const q of s.questsDone) meta.questsDone.add(q);
+      // A rev reset zeroes COLLECT counts too, and those are derived state only
+      // onInventoryChangedForQuests re-credits: re-sync once (inventory is already
+      // restored above) so a migrated character holding the collect items is not
+      // stuck at 0 of N until an unrelated inventory change. Non-migrated quests
+      // are already in sync, so this emits nothing for them.
+      if (questRevReset) this.ctx.onInventoryChangedForQuests(meta);
       if (s.talents)
         // Revalidate the persisted build against the current rules + level budget
         // before it is baked into the flat mods below. A stored allocation replays
@@ -3448,6 +3579,11 @@ export class Sim {
     // arena: leaving the queue is free; disconnecting mid-bout forfeits it
     this.arenaDequeue(pid);
     this.arenaResolveDesertion(pid);
+    // battleground: drop out of the queue; leaving a live match drops any
+    // carried flag and the team fights on a player down (a fully vacated
+    // side forfeits). social/battleground.ts owns the rule.
+    bgMod.bgDequeue(this.ctx, pid);
+    bgMod.bgResolveDesertion(this.ctx, pid);
     // Card Duel: leaving the queue is free; a live match is forfeited to the
     // opponent (mirrors the disconnect/jail paths in server/game.ts, and keeps
     // the offline Sim / headless env from leaking cardDuels/cardDuelQueue
@@ -3603,6 +3739,16 @@ export class Sim {
               fiestaCompletionsByOpponent: {
                 ...meta.honorArenaDaily.fiestaCompletionsByOpponent,
               },
+              // Optional Thornhollow Fields DR window: omitted when empty so pre-Thornhollow Fields
+              // saves stay byte-equal (mirrors normalizeHonorDailyState).
+              ...(meta.honorArenaDaily.bgResultsByOpponent &&
+              Object.keys(meta.honorArenaDaily.bgResultsByOpponent).length > 0
+                ? { bgResultsByOpponent: { ...meta.honorArenaDaily.bgResultsByOpponent } }
+                : {}),
+              // Same absent-until-claimed rule as the DR window above: a day that
+              // has not paid the first-win bonus writes nothing (back-compat +
+              // parity-stable saves).
+              ...(meta.honorArenaDaily.bgFirstWinClaimed ? { bgFirstWinClaimed: true } : {}),
               totalWins: meta.honorArenaDaily.totalWins,
             },
           }
@@ -3668,8 +3814,12 @@ export class Sim {
         state: q.state,
         ...(q.selection === undefined ? {} : { selection: q.selection }),
         ...(q.resolvedCounts === undefined ? {} : { resolvedCounts: [...q.resolvedCounts] }),
+        ...(q.burnedObjects === undefined
+          ? {}
+          : { burnedObjects: q.burnedObjects.map((b) => ({ key: b.key, at: b.at })) }),
         // Absent until the first interact credit (parity-stable saves).
         ...(q.creditedObjects === undefined ? {} : { creditedObjects: [...q.creditedObjects] }),
+        ...(q.rev === undefined ? {} : { rev: q.rev }),
       })),
       questsDone: [...meta.questsDone],
       arenaRating: meta.arenaRating,
@@ -3681,6 +3831,16 @@ export class Sim {
       arena2v2Rating: meta.arena2v2Rating,
       arena2v2Wins: meta.arena2v2Wins,
       arena2v2Losses: meta.arena2v2Losses,
+      // Absent until the first Thornhollow Fields result or capture moves something
+      // (back-compat + parity-stable saves).
+      ...(meta.bgWins || meta.bgLosses || meta.bgCaptures || meta.bgRating !== bgMod.BG_BASE_RATING
+        ? {
+            bgRating: meta.bgRating,
+            bgWins: meta.bgWins,
+            bgLosses: meta.bgLosses,
+            bgCaptures: meta.bgCaptures,
+          }
+        : {}),
       // Absent until sheathed (back-compat + parity-stable saves).
       ...(e.weaponStowed ? { weaponStowed: true } : {}),
       // Absent until the first cup result (back-compat + parity-stable saves).
@@ -3747,7 +3907,7 @@ export class Sim {
       // floored display makes the heal unrepeatable by design. No PlayerMeta
       // mirror here either.
       proficiencyDisplayHealApplied: true,
-      archetype: { ...meta.archetype, attunedPairs: [...meta.archetype.attunedPairs] },
+      archetype: serializeArchetypeState(meta.archetype),
       delveMarks: meta.delveMarks,
       delveClears: { ...meta.delveClears },
       companionUpgrades: { ...meta.companionUpgrades },
@@ -4031,6 +4191,16 @@ export class Sim {
     if (!e || e.guild !== oldName) return;
     valeCupMod.vcupRenameGuild(this.ctx, pid, oldName, newName);
     e.guild = newName;
+  }
+
+  /** Server-callable session stamp of a player's guild membership (id + rank),
+   *  the authorization input the Guild Bank gates on; the id/rank contract and
+   *  the session-only rationale live on PlayerMeta.guildMembership. Called at
+   *  join and on every membership or rank change; pass null on leave, kick, or
+   *  disband. Offline/headless never call it, so the stamp stays null there.
+   *  Thin delegate into guild_bank.ts. */
+  setPlayerGuildMembership(pid: number, membership: GuildMembership | null): void {
+    guildBankMod.stampGuildMembership(this.ctx, pid, membership);
   }
 
   /** Cosmetic skin-select event: rolls a rarity rank (once) and emits the
@@ -4386,7 +4556,31 @@ export class Sim {
   }
 
   groundPos(x: number, z: number): Vec3 {
-    return { x, y: groundHeight(x, z, this.cfg.seed), z };
+    // The floor, not the terrain: on the battleground field an authored deck
+    // (a flag podium, a stair landing) IS the ground a flag or a body rests on.
+    return { x, y: placementFloorHeight(this.cfg.seed, x, z), z };
+  }
+
+  /** The private scatter stream for an `offStream` camp (see CampDef.offStream).
+   *  Seeded from the world seed plus the camp's AUTHORED identity (mob id,
+   *  centre, radius, count) and the index WITHIN that camp, never the camp's
+   *  position in the CAMPS array, so reordering or inserting camps cannot move
+   *  an existing one. Pure and wall-clock-free, so offline, server and headless
+   *  all place these spawns identically. */
+  private campPrivateRng(camp: CampDef, index: number): Rng {
+    let h = 0x811c9dc5 ^ (this.cfg.seed >>> 0);
+    const mix = (n: number): void => {
+      h = (h ^ (n >>> 0)) >>> 0;
+      h = Math.imul(h, 0x01000193) >>> 0;
+    };
+    for (let i = 0; i < camp.mobId.length; i++) mix(camp.mobId.charCodeAt(i));
+    // Quantized so a float re-authored to the same place cannot drift the seed.
+    mix(Math.round(camp.center.x * 100));
+    mix(Math.round(camp.center.z * 100));
+    mix(Math.round(camp.radius * 100));
+    mix(camp.count);
+    mix(index);
+    return new Rng(h >>> 0);
   }
 
   // Deterministic outward spiral to the nearest spot that is on dry-enough
@@ -4624,6 +4818,28 @@ export class Sim {
       set nextArenaMatchId(v) {
         sim.nextArenaMatchId = v;
       },
+      // Thornhollow Fields battleground live views (social/battleground.ts).
+      get bgQueue() {
+        return sim.bgQueue;
+      },
+      set bgQueue(v) {
+        sim.bgQueue = v;
+      },
+      get bgMatches() {
+        return sim.bgMatches;
+      },
+      get bgBusySlots() {
+        return sim.bgBusySlots;
+      },
+      get bgOutcomes() {
+        return sim.bgOutcomes;
+      },
+      get nextBgMatchId() {
+        return sim.nextBgMatchId;
+      },
+      set nextBgMatchId(v) {
+        sim.nextBgMatchId = v;
+      },
       get delveRuns() {
         return sim.delveRuns;
       },
@@ -4678,6 +4894,11 @@ export class Sim {
       // NPC id, read by bank.ts's proximity gate. Sim-owned, never reassigned.
       get bankerIds() {
         return sim.bankerIds;
+      },
+      // Guild Bank book map: guild id -> live book, read and written only
+      // through the guild_bank.ts helpers. Sim-owned, never reassigned.
+      get guildBanks() {
+        return sim.guildBanks;
       },
       // The Vale Cup holder (queues/deserters/botPids mutated in place; the
       // match slot reassigned inside the holder, so no setter is needed).
@@ -5102,6 +5323,11 @@ export class Sim {
         valeCupMod.vcupSportDash(sim.ctx, caster, distance, catchBall),
       vcupSportShove: (caster, target, distance) =>
         valeCupMod.vcupSportShove(sim.ctx, caster, target, distance),
+      // Thornhollow Fields battleground hooks (social/battleground.ts).
+      bgOnPlayerDeath: (e, killer) => bgMod.bgOnPlayerDeath(sim.ctx, e, killer),
+      bgOnPlayerDamaged: (victim, source) => bgMod.bgOnPlayerDamaged(sim.ctx, victim, source),
+      bgOnPlayerHealed: (target, source) => bgMod.bgOnPlayerHealed(sim.ctx, target, source),
+      bgCancelFlagAura: (e, auraId) => bgMod.bgCancelCarriedFlagAura(sim.ctx, e, auraId),
     };
     return createSimContext(host);
   }
@@ -5433,6 +5659,15 @@ export class Sim {
     }
     lap?.('ent.misc');
 
+    // The dragonkin brood pass (mob/dragonkin_brood.ts): egg proximity
+    // ambushes, due chain ripples, hatches off freshly-cracked eggs, whelp
+    // pounce/ward upkeep, and the broodlord counter-stun. Runs AFTER the
+    // per-entity loop so eggs cracked by this tick's swings hatch here, and
+    // BEFORE the engaged pass so a fresh hatchling's victim is flagged
+    // in-combat the same tick. Draws rng only when an egg hatches.
+    updateDragonkinBrood(this.ctx);
+    lap?.('dragonkinBrood');
+
     // one pass over the entities collects every player a mob is engaged
     // with, instead of one full scan per player
     this.engagedPids.clear();
@@ -5496,6 +5731,12 @@ export class Sim {
     // tick-staggered bots), so appending it here cannot fork the draw order.
     this.updateValeCup();
     lap?.('valecup');
+    // Thornhollow Fields' ACTIVE phase draws ZERO rng (queue-order matchmaking,
+    // tick-math wave and rune clocks; the one seeded draw is the power-rune
+    // face at match START), so its tick position cannot fork the draw order
+    // mid-match.
+    bgMod.updateBattleground(this.ctx);
+    lap?.('battleground');
     // The Dungeon Finder phase draws ZERO rng (queue bookkeeping + role
     // matching on the sim clock), so appending it here cannot fork the draw order.
     this.updateDungeonFinder();
@@ -6175,6 +6416,12 @@ export class Sim {
     const r = this.resolve(pid);
     if (!r) return;
     const { e, meta } = r;
+    // The battleground's carried-flag buff is a DROP affordance wearing a buff's
+    // clothes, so it is offered to its owner FIRST: cancelling it must route
+    // through the authoritative flag drop (flag at the runner's feet, catchable,
+    // the bgFlag 'dropped' call to all ten), never the generic splice below,
+    // which would strip the buff and leave the flag carried.
+    if (this.ctx.bgCancelFlagAura(e, auraId)) return;
     const removed = removeCancelableAura(e.auras, auraId);
     if (!removed) return;
     this.emit({ type: 'aura', targetId: e.id, name: removed.name, gained: false });
@@ -6782,10 +7029,10 @@ export class Sim {
     }
   }
 
-  private handleDeath(e: Entity, killer: Entity | null): void {
+  private handleDeath(e: Entity, killer: Entity | null, killerAbility?: string | null): void {
     // Body moved to combat/damage.ts (C1). The moved copy routes its quest-credit
     // call through ctx.onMobKilledForQuests (points-at quest_credit, Q1).
-    handleDeathImpl(this.ctx, e, killer);
+    handleDeathImpl(this.ctx, e, killer, killerAbility);
   }
 
   grantXp(amount: number, meta: PlayerMeta = this.primary, opts?: { fromKill?: boolean }): void {
@@ -8611,6 +8858,10 @@ export class Sim {
 
   private interactNpcForQuests(npc: Entity, meta: PlayerMeta): boolean {
     let progressed = false;
+    // Talking to the giver of an active quest re-grants a lost required item
+    // (quests/quest_commands.ts regrantMissingQuestItems, the accept grant's
+    // in-progress twin, on the same recoverable-stores predicate).
+    questCommands.regrantMissingQuestItems(this.ctx, meta, npc.templateId);
     for (const qp of meta.questLog.values()) {
       if (qp.state !== 'active') continue;
       const quest = QUESTS[qp.questId];
@@ -8798,6 +9049,13 @@ export class Sim {
         this.isArenaCrossTeam(match, attackerPlayer.id, target.id)
       ) {
         return true;
+      }
+      // Thornhollow Fields: hostile to the other team while the battle is live,
+      // friendly to your own (isFriendlyTo derives from this arm, so
+      // cross-team heals are refused too).
+      const bg = this.bgMatches.get(attackerPlayer.id);
+      if (bg && bg.state === 'active' && this.bgMatches.get(target.id) === bg) {
+        return bgMod.bgTeamOf(bg, attackerPlayer.id) !== bgMod.bgTeamOf(bg, target.id);
       }
       // The jail brawl: prisoners are hostile to each other, always (pets
       // resolve to their owner via pvpController above, so a prisoner's pet
@@ -9141,6 +9399,24 @@ export class Sim {
   guildEventCreate(_day: string, _hour: number | null, _title: string, _note: string): void {}
   guildEventRemove(_eventId: number): void {}
   guildSetMotd(_text: string): void {}
+  // The Guild Bank is a guild feature, and guilds live in the server social DB,
+  // so offline play never has one: the read is null and the commands are inert
+  // (the socialInfo idiom), forever. The online path is live: ClientWorld sends
+  // the guild_bank_* tokens and the server acts for an explicit pid through the
+  // guildBank*For entry points (see the Guild Bank facade section below).
+  guildBankInfo: null = null;
+  guildBankDepositGold(_amount: number): void {}
+  guildBankWithdrawGold(_amount: number): void {}
+  guildBankDeposit(_slotIndex: number, _count?: number): void {}
+  guildBankWithdraw(_slotIndex: number, _count?: number): void {}
+  guildBankBuySlots(): void {}
+  /** Offline has no guild and no bank_ledger, so the log is EMPTY and READY,
+   *  never 'loading' (nothing is ever in flight) and never 'refused' (nothing
+   *  declined it). The Guild pane never renders offline anyway, so this is the
+   *  inert-arm answer that keeps the facet total: no request, no wire send. */
+  guildBankLog(): import('../world_api').GuildBankLogView {
+    return OFFLINE_GUILD_BANK_LOG;
+  }
   searchCharacters(_query: string): Promise<import('../world_api').CharacterSearchResult[]> {
     return Promise.resolve([]);
   }
@@ -9348,6 +9624,59 @@ export class Sim {
 
   arenaMatchFor(pid: number): ArenaMatch | null {
     return arenaMod.arenaMatchFor(this.ctx, pid);
+  }
+
+  // -------------------------------------------------------------------------
+  // Thornhollow Fields, the 5v5 capture-the-flag battleground. Thin delegates onto
+  // social/battleground.ts (the arena-slice pattern): the wire command path,
+  // tests, and the server resolve these on the facade.
+  // -------------------------------------------------------------------------
+
+  bgQueueJoin(pid?: number): void {
+    bgMod.bgQueueJoin(this.ctx, pid);
+  }
+
+  bgQueueLeave(pid?: number): void {
+    bgMod.bgQueueLeave(this.ctx, pid);
+  }
+
+  bgFlagAction(pid?: number): void {
+    bgMod.bgFlagAction(this.ctx, pid);
+  }
+
+  bgMatchFor(pid: number): bgMod.BgMatch | null {
+    return bgMod.bgMatchFor(this.ctx, pid);
+  }
+
+  // The live online battleground ladder (the arenaLadder twin). Viewer-
+  // identical, so the server builds ONE per broadcast pass and hands it to
+  // every bgInfoFor call in that pass.
+  bgLadder(): import('../world_api').BgLadderEntry[] {
+    return bgMod.bgLadder(this.ctx);
+  }
+
+  bgInfoFor(
+    pid: number,
+    ladder?: import('../world_api').BgLadderEntry[],
+  ): import('../world_api').BgInfo | null {
+    return bgMod.bgInfoFor(this.ctx, pid, ladder);
+  }
+
+  // Resolve a mid-match leave/jail/disconnect before the server's leave save:
+  // the deserter takes the rating loss, drops any carried flag, and leaves the
+  // roster (idempotent; removePlayer repeats it harmlessly).
+  bgResolveDesertion(pid: number): void {
+    bgMod.bgResolveDesertion(this.ctx, pid);
+  }
+
+  // Dev/test only: force-start a match from whoever is queued (server-gated
+  // behind ALLOW_DEV_COMMANDS; see social/battleground.ts).
+  devStartBg(): void {
+    bgMod.devStartBg(this.ctx);
+  }
+
+  get bgInfo(): import('../world_api').BgInfo | null {
+    return this.primaryId === -1 ? null : this.bgInfoFor(this.primaryId);
   }
 
   // -------------------------------------------------------------------------
@@ -9742,6 +10071,103 @@ export class Sim {
 
   bankInfoFor(pid: number): import('../world_api').BankInfo | null {
     return bankMod.bankInfoFor(this.ctx, pid);
+  }
+
+  // -------------------------------------------------------------------------
+  // The Guild Bank: the shared guild treasury + item store (Phase 1 foundation)
+  // -------------------------------------------------------------------------
+
+  // Thin delegates to the guild bank free functions (guild_bank.ts). The books
+  // live on Sim (guildBanks, a SimContext view keyed by guild id); the server
+  // feeds and drains them through this pure shape-in/shape-out seam in Phase 3
+  // (it owns the SQL).
+
+  loadGuildBank(guildId: number, raw: unknown): void {
+    guildBankMod.loadGuildBank(this.ctx, guildId, raw);
+  }
+
+  serializeGuildBank(guildId: number): GuildBankState | null {
+    return guildBankMod.serializeGuildBank(this.ctx, guildId);
+  }
+
+  // The sanctioned evict (disband, or the first half of an evict-then-load
+  // reload). The server's guild_banks row cascades away with the guilds DELETE.
+  evictGuildBank(guildId: number): void {
+    guildBankMod.evictGuildBank(this.ctx, guildId);
+  }
+
+  // The disband guard's read: what the LIVE book holds, or null when no book
+  // is loaded (callers fail closed on null; an unloaded book proves nothing).
+  guildBankHoldings(guildId: number): { copper: number; items: number } | null {
+    return guildBankMod.guildBankHoldings(this.ctx, guildId);
+  }
+
+  // Reserve-at-gate (state.md, revised by Phase 3 QA): the server charges this
+  // synchronously at the guild_create dispatch gate, before any DB work, and
+  // refunds on every refusal arm. Returns the copper actually charged.
+  chargeGuildCreationFeeFor(pid: number): number {
+    return guildBankMod.chargeGuildCreationFee(this.ctx, pid);
+  }
+
+  // The refusal arm of the reserve-at-gate flow: return a reserved creation
+  // fee to the purse. Returns the copper actually refunded.
+  refundGuildCreationFeeFor(pid: number, amount: number): number {
+    return guildBankMod.refundGuildCreationFee(this.ctx, pid, amount);
+  }
+
+  // Surgically undo a dead session's unflushed guild bank ops on the live book
+  // (the fence-out arm where another session's legitimate unflushed ops make
+  // an evict-and-reload destructive). See guild_bank.ts revertGuildBankDeltas.
+  revertGuildBankDeltas(guildId: number, deltas: readonly guildBankMod.GuildBankOpDelta[]): void {
+    guildBankMod.revertGuildBankDeltas(this.ctx, guildId, deltas);
+  }
+
+  // The five op bodies + the gated info read, as pid-first SERVER entry points
+  // (the bankInfoFor pattern). These are deliberately distinct from the IWorld
+  // facet members (guildBankDeposit etc. in the social no-op block above): the
+  // offline facet arm is inert forever because offline play never has a guild,
+  // while the authoritative server acts for an explicit pid through these. All
+  // gameplay rules (proximity, rank, quest-bind, caps, capacity) live in
+  // guild_bank.ts; the server validates shape only.
+
+  guildBankDepositGoldFor(pid: number, amount: number): void {
+    guildBankMod.guildBankDepositGold(this.ctx, amount, pid);
+  }
+
+  guildBankWithdrawGoldFor(pid: number, amount: number): void {
+    guildBankMod.guildBankWithdrawGold(this.ctx, amount, pid);
+  }
+
+  guildBankDepositFor(pid: number, slotIndex: number, count?: number): void {
+    guildBankMod.guildBankDeposit(this.ctx, slotIndex, count, pid);
+  }
+
+  guildBankWithdrawFor(pid: number, slotIndex: number, count?: number): void {
+    guildBankMod.guildBankWithdraw(this.ctx, slotIndex, count, pid);
+  }
+
+  guildBankBuySlotsFor(pid: number): void {
+    guildBankMod.guildBankBuySlots(this.ctx, pid);
+  }
+
+  guildBankInfoFor(pid: number): import('../world_api').GuildBankInfo | null {
+    return guildBankMod.guildBankInfoFor(this.ctx, pid);
+  }
+
+  // The OPERATOR pair (server-only, never IWorld): the ungated guild-id-scoped
+  // book read the admin escape hatch diffs around its mutation, and the hatch
+  // itself, which removes exactly one DORMANT (pipe-refused) slot and returns
+  // the removed copy as evidence. See guild_bank.ts for the scope contract.
+  guildBankInfoForGuild(guildId: number): import('../world_api').GuildBankInfo | null {
+    return guildBankMod.guildBankInfoForGuild(this.ctx, guildId);
+  }
+
+  purgeDormantGuildBankSlot(
+    guildId: number,
+    slotIndex: number,
+    expectItemId: string,
+  ): InvSlot | null {
+    return guildBankMod.purgeDormantGuildBankSlot(this.ctx, guildId, slotIndex, expectItemId);
   }
 
   // -------------------------------------------------------------------------

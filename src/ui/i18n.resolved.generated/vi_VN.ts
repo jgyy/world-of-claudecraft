@@ -911,6 +911,7 @@ export const vi_VN: EnTranslations = {
       "minutesSeconds": "{m}p {s}g",
       "seconds": "{s}g",
       "autoShowHint": "Các hàng xuất hiện tự động sau khi nhóm của bạn gây sát thương hoặc hồi máu, và phần này đóng lại vài giây sau khi chiến đấu kết thúc.",
+      "threatFallback": "No live threat: showing damage to {name}",
       "breakdownSummary": "{tab}: {value}",
       "breakdownRow": "{value} ({percent})",
       "breakdownOther": "Khác ({count})",
@@ -950,6 +951,7 @@ export const vi_VN: EnTranslations = {
       "targetFriendlyNext": "Luân Phiên Mục Tiêu Đồng Minh",
       "discord": "Discord",
       "valecup": "Cúp Thung Lũng",
+      "bgFlag": "Battleground Flag Action",
       "sheathe": "Tra/Rút Vũ Khí",
       "categoryPet": "Thú Cưng",
       "petAttack": "Thú Cưng: Tấn Công",
@@ -997,6 +999,7 @@ export const vi_VN: EnTranslations = {
       "name_stormfeather_griffin": "Stormfeather Vươn Trời",
       "name_thunderstrut_gobbler": "Thunderstrut, Gà Tây Vĩ Đại",
       "name_terrorspark_groundshaker": "Tia Kinh Hoàng, Kẻ Rung Chuyển Mặt Đất",
+      "name_drakemaw_raptor": "Cuồng Long Drakemaw",
       "desc_valorsteed": "Một con chiến mã khỏe mạnh, bước chân vững chãi, giúp tăng tốc độ di chuyển.",
       "desc_grag_bear": "Một chú gấu khỏe mạnh, bước chân vững chãi, giúp tăng tốc độ di chuyển.",
       "desc_stalkglider_snail": "Một chú ốc sên bền bỉ, dẻo dai, giúp tăng tốc độ di chuyển.",
@@ -1004,7 +1007,8 @@ export const vi_VN: EnTranslations = {
       "desc_shadowjump_toad": "Một con cóc khổng lồ, bước chân vững chãi, được huấn luyện những cú nhảy bóng tối nhanh như chớp có thể vượt qua mọi địa hình.",
       "desc_stormfeather_griffin": "Một con sư tử đầu chim bão uy nghi, rảo bước trên mặt đất bằng những móng vuốt được bọc rune, đôi cánh xếp gọn.",
       "desc_thunderstrut_gobbler": "Một con gà tây khổng lồ nở ra từ giông bão, sải bước xuống từ Đỉnh Tỉnh Thức, đuôi xòe rộng như đám mây giông.",
-      "desc_terrorspark_groundshaker": "Một cỗ máy bọc giáp nhỏ gọn với bánh xích nặng, pháo nòng lớn và yên ngồi dành cho những người lái gan dạ."
+      "desc_terrorspark_groundshaker": "Một cỗ máy bọc giáp nhỏ gọn với bánh xích nặng, pháo nòng lớn và yên ngồi dành cho những người lái gan dạ.",
+      "desc_drakemaw_raptor": "Một con Cuồng Long thuộc bầy đàn đã được thuần yên cương từ Miệng Núi Lửa Drakemaw, toàn thân gân cốt và tốc lực, vẫn còn phảng phất mùi tro tàn."
     },
     "mountTraining": {
       "mountPrompt": "Nhấn {key} để cưỡi Valorsteed huấn luyện.",
@@ -1024,6 +1028,93 @@ export const vi_VN: EnTranslations = {
       "timeout": "Đua Thất Bại",
       "progress": "Cổng {n}/{total}",
       "timeLeft": "{seconds} giây"
+    },
+    "pvp": {
+      "launcherTitle": "PvP",
+      "mobileLabel": "PvP",
+      "bracket1v1": "1v1",
+      "bracket2v2": "2v2"
+    },
+    "bg": {
+      "title": "Thornhollow Fields",
+      "blurb": "Two ruined keeps face each other across a walled hollow in the shadow of Thornpeak: Crimson to the south, Azure to the north, and the older Ruin Courtyard between them that neither has ever held. Five a side, one banner each, and the first to carry three of theirs home takes the field.",
+      "modeTag": "5v5 Capture the Flag",
+      "offlineNote": "Thornhollow Fields is syncing. The queue opens once the realm answers.",
+      "ratingSummary": "Rating. {wins} wins / {losses} losses",
+      "careerCaptures": "Career captures: {count}",
+      "enterQueue": "Enter the Queue",
+      "enterQueueParty": "Enter the Queue (party of {count})",
+      "leaveQueue": "Leave Queue",
+      "searching": "Searching. {count}/{size} in queue.",
+      "queuedParty": "Party of {count}.",
+      "queueNote": "Two teams of five. Steal the enemy banner and run it to your keep. First to 3 captures wins. Group up to 5 and queue together; grab Sprint Runes and weave the cover to lose your pursuers.",
+      "matchInProgress": "Battle in progress. {crimson}:{azure}.",
+      "ladderAllTime": "Ladder. All-Time",
+      "noRanked": "No champions ranked yet. Be the first.",
+      "ladderOnline": "Ladder. Online Now",
+      "noChallengers": "No champions online right now. Be the first.",
+      "playerLevelClassTitle": "{name}. Level {level} {className}",
+      "playerClassTitle": "{name}. {className}",
+      "crimson": "Crimson",
+      "azure": "Azure",
+      "yourTeamTitle": "Your team",
+      "clock": "{minutes}:{seconds}",
+      "formUp": "Form up: {seconds}",
+      "firstTo": "First to {caps} captures",
+      "flagState": {
+        "home": "Flag at the keep",
+        "carried": "Flag stolen!",
+        "dropped": "Flag on the ground"
+      },
+      "respawnIn": "Next wave: respawning in {seconds}",
+      "resultVictory": "Victory!",
+      "resultDefeat": "Defeat",
+      "resultDraw": "Draw",
+      "leavingIn": "Leaving the battleground in {seconds}",
+      "killFeed": "{killer} felled {victim}",
+      "killFeedFallen": "{victim} has fallen",
+      "foundBanner": "Battle found. You fight for the {team}!",
+      "countdownBanner": "Thornhollow Fields begins in {seconds}",
+      "startBanner": "Capture the flag!",
+      "flagTakenLog": "{name} has taken the {team} flag!",
+      "flagDroppedLog": "The {team} flag was dropped.",
+      "flagReturnedLog": "The {team} flag was returned.",
+      "dropFlagConfirmTitle": "Drop the flag?",
+      "dropFlagConfirmBody": "You are carrying the enemy flag. Dropping it leaves it on the ground, where either team can reach it.",
+      "dropFlagConfirmAccept": "Drop the flag",
+      "boardToggleLabel": "Match scoreboard. Press Enter to pin the full board open.",
+      "levelRequirement": "You must reach level {level} to unlock queueing for this battleground.",
+      "board": {
+        "kills": "Kills",
+        "assists": "Assists",
+        "deaths": "Deaths",
+        "captures": "Captures"
+      },
+      "flagTakenBanner": "The {takers} have taken the {team} flag!",
+      "flagReturnedBanner": "The {team} flag was returned!",
+      "capturedTeamBanner": "The {takers} have captured the {team} flag! {crimson}:{azure}",
+      "capturedLog": "{name} captured the {team} flag. Score {crimson}:{azure}.",
+      "victoryBanner": "Victory! Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "defeatBanner": "Defeat. Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "drawBanner": "Thornhollow Fields draw {crimson}:{azure}. Rating {rating} ({delta})",
+      "endBannerDetail": "Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "endLog": "Thornhollow Fields ended {crimson}:{azure}. Rating {rating} ({delta}).",
+      "endedTimer": "Time expired",
+      "endedForfeit": "The match was forfeited",
+      "endedTimerLog": "The match clock ran out; the higher score took the field.",
+      "endedForfeitLog": "The match was forfeited.",
+      "firstWinBonusLine": "First win of the day: +{honor} Honor",
+      "firstWinBonusLog": "First win of the day: you gain {honor} bonus Honor.",
+      "timeWarningMinutes": "{minutes} minutes remain",
+      "timeWarningOneMinute": "One minute remains",
+      "timeWarningMinutesLog": "{minutes} minutes remain in the battle.",
+      "timeWarningOneMinuteLog": "One minute remains in the battle.",
+      "map": {
+        "crimsonKeep": "Crimson Keep",
+        "azureKeep": "Azure Keep",
+        "ruinCourtyard": "The Ruin Courtyard",
+        "graveyard": "Graveyard"
+      }
     },
     "vcup": {
       "title": "Cúp Thung Lũng",
@@ -1175,6 +1266,15 @@ export const vi_VN: EnTranslations = {
       "browserEffectsReduced": "Giảm Bớt",
       "browserEffectsMinimal": "Tối Thiểu",
       "browserEffectsNote": "Tự Động giảm bớt các hiệu ứng CSS nặng (làm mờ, phát sáng, chuyển động nền) dựa trên trình duyệt và thiết bị của bạn. Hãy hạ thủ công nếu giao diện cảm thấy chậm chạp.",
+      "graphicsApply": "Áp Dụng Đồ Họa",
+      "graphicsApplying": "Đang áp dụng cài đặt đồ họa...",
+      "graphicsApplied": "Đã áp dụng cài đặt đồ họa.",
+      "graphicsSaved": "Đã lưu cài đặt đồ họa. Bộ kết xuất hiện tại đã khớp với cài đặt này.",
+      "graphicsFailed": "Không thể áp dụng cài đặt đồ họa. Cài đặt trước đó của bạn vẫn đang hoạt động.",
+      "graphicsRetry": "Thử Lại Đồ Họa",
+      "graphicsFatal": "Khôi phục đồ họa thất bại. Hãy tải lại trò chơi để tiếp tục.",
+      "graphicsReload": "Tải Lại Trò Chơi",
+      "graphicsDraftChanged": "Các thay đổi đồ họa đã sẵn sàng để áp dụng.",
       "interfaceMode": "Chế Độ Giao Diện",
       "interfaceModeAuto": "Tự Động",
       "interfaceModeDesktop": "Máy Tính",
@@ -1206,6 +1306,7 @@ export const vi_VN: EnTranslations = {
       "itemScoreLine": "Điểm {score}",
       "showSecondaryActionBar": "Hiện Thanh Hành Động Phụ",
       "showThirdActionBar": "Hiển thị thanh hành động thứ ba",
+      "lockActionBars": "Khóa Thanh Hành Động",
       "showTargetOfTarget": "Hiện Mục Tiêu Của Mục Tiêu",
       "showAttackButton": "Hiển Thị Nút Tấn Công",
       "showDailyRewardsChest": "Hiện Rương Phần Thưởng Hằng Ngày",
@@ -1367,20 +1468,38 @@ export const vi_VN: EnTranslations = {
     },
     "landing": {
       "highContrast": "Tương Phản Cao",
-      "highContrastAria": "Bật/tắt nền tương phản cao: tắt đoạn phim nền chuyển động để chữ trên màn hình bắt đầu vẫn dễ đọc"
+      "highContrastAria": "Bật/tắt nền tương phản cao: tắt đoạn phim nền chuyển động để chữ trên màn hình bắt đầu vẫn dễ đọc",
+      "browserSupport": {
+        "title": "Lưu ý: trình duyệt không được hỗ trợ",
+        "body": "Bạn có thể gặp hiệu năng giảm sút trên trình duyệt này. Để có trải nghiệm tốt nhất, hãy tải ứng dụng máy tính cho Windows, macOS, hoặc Linux. Muốn chơi trên trình duyệt hơn? Chrome cho hiệu năng tốt nhất, và Firefox cùng Safari cũng được hỗ trợ.",
+        "getDesktopApp": "Tải ứng dụng máy tính",
+        "continueInBrowser": "Tiếp tục trên trình duyệt",
+        "dismissAria": "Bỏ qua thông báo trình duyệt không được hỗ trợ"
+      }
     },
     "warfare": {
       "honorAmount": "Danh dự {amount}",
       "dualPrice": "{money} + {honor}",
       "balance": "Danh dự: {amount}",
       "honorFloat": "+{amount} Danh dự",
+      "honorFloatReason": "+{amount} Honor ({reason})",
       "honorGain": "Bạn nhận được Danh dự {amount} ({reason}).",
       "notEnoughHonor": "Không đủ danh dự.",
       "reasons": {
         "arenaWin": "Chiến thắng đấu trường",
         "fiestaKill": "Hạ gục trong Fiesta",
         "fiestaComplete": "Fiesta đã hoàn thành",
-        "fiestaWin": "Chiến thắng Fiesta"
+        "fiestaWin": "Chiến thắng Fiesta",
+        "battlegroundWin": "Thornhollow Fields victory",
+        "battlegroundFirstWin": "first Thornhollow Fields win today",
+        "battlegroundComplete": "Thornhollow Fields battle fought",
+        "battlegroundKill": "honorable kill",
+        "battlegroundAssist": "killing blow assisted"
+      },
+      "floatReasons": {
+        "kill": "Kill",
+        "assist": "Assist",
+        "firstWin": "First Win"
       }
     },
     "charSheet": {
@@ -1736,6 +1855,7 @@ export const vi_VN: EnTranslations = {
       "itemAriaEnchanted": "{item}, số lượng {count}, bản đã pháp khắc",
       "itemAriaBound": "{item}, số lượng {count}, bản sao ràng buộc",
       "itemAriaMasterwork": "{item}, số lượng {count}, kiệt tác",
+      "itemAriaQuest": "{item}, số lượng {count}, vật phẩm nhiệm vụ",
       "filterGroupAria": "Lọc túi đồ theo danh mục",
       "filterAll": "Tất cả",
       "filterWeapon": "Vũ khí",
@@ -1744,6 +1864,7 @@ export const vi_VN: EnTranslations = {
       "filterMaterial": "Nguyên liệu",
       "filterTool": "Dụng cụ",
       "filterQuest": "Nhiệm vụ",
+      "filterQuestCountAria": "Nhiệm vụ, {count} vật phẩm",
       "filterMount": "Vật cưỡi",
       "sortAria": "Sắp xếp vật phẩm trong túi",
       "sortRecent": "Gần đây",
@@ -1752,6 +1873,7 @@ export const vi_VN: EnTranslations = {
       "searchPlaceholder": "Tìm vật phẩm",
       "searchAria": "Tìm vật phẩm trong túi theo tên",
       "noMatch": "Không có vật phẩm nào khớp với bộ lọc của bạn.",
+      "noQuestItems": "Không có vật phẩm nhiệm vụ nào trong túi đồ của bạn.",
       "capacity": "{used}/{total}",
       "capacityAria": "Ô túi đã dùng: {used} trên {total}",
       "backpack": "Ba Lô",
@@ -1785,6 +1907,7 @@ export const vi_VN: EnTranslations = {
       "dmgDoneReduce": "Giảm sát thương gây ra đi {pct}%",
       "heatingUp": "Cú chí mạng tiếp theo của kỹ năng xây dựng Lửa liên tiếp sẽ ban Hot Streak; cú không chí mạng sẽ xóa Đang Nóng Dần",
       "elementalConvergencePrimed": "Phép tiếp theo của bạn từ trường nguyên tố khác sẽ ban Hội Tụ Nguyên Tố",
+      "carriedFlag": "You are carrying the enemy flag. Cancel this buff to drop it.",
       "battleStance": "Thế Công: tạo nộ khí nhiều hơn 10%",
       "berserkerStance": "Thế Cuồng Chiến: chí mạng thường xuyên hơn 3% và mạnh hơn 3%",
       "crit": "Tăng tỉ lệ chí mạng thêm {pct}%",
@@ -1970,6 +2093,8 @@ export const vi_VN: EnTranslations = {
     },
     "materialHint": {
       "fineGrade": "Phẩm cấp hảo hạng. Thu được từ mạch đủ bậc bằng công cụ xếp trên nguyên liệu, và được tính như bản thường ở bất cứ đâu cần đến.",
+      "cookingCatch": "Nguyên liệu nấu ăn. Phải nấu chín trước khi ăn.",
+      "usedBy": "Used by {crafts}.",
       "arcaneDust": "Nguyên liệu pháp khắc. Nhận được khi hủy pháp khắc trang bị phổ thông và khác thường.",
       "arcaneEssence": "Nguyên liệu pháp khắc. Nhận được khi hủy pháp khắc trang bị hiếm.",
       "arcaneShard": "Nguyên liệu pháp khắc. Nhận được khi hủy pháp khắc trang bị sử thi và huyền thoại.",
@@ -2251,6 +2376,7 @@ export const vi_VN: EnTranslations = {
       "depositHint": "Nhấp để gửi vào",
       "depositPartialHint": "Shift-click để gửi vào một phần",
       "cannotDeposit": "Không thể gửi vào ngân hàng",
+      "cannotDepositNow": "Hiện không thể gửi vào",
       "depositQuantityTitle": "Gửi {item}",
       "depositQuantityInput": "Số lượng cần gửi",
       "depositQuantityConfirm": "Gửi Vào",
@@ -2261,6 +2387,7 @@ export const vi_VN: EnTranslations = {
       "sortAria": "Sắp xếp vật phẩm ngân hàng",
       "searchAria": "Tìm vật phẩm ngân hàng theo tên",
       "depositAll": "Gửi tất cả nguyên liệu",
+      "depositAllTooltip": "Gửi toàn bộ nguyên liệu chế tác và vật phẩm linh tinh từ túi đồ của bạn vào ngân hàng chỉ trong một lần. Dụng cụ thu thập, trang bị đang mặc, vật phẩm nhiệm vụ, và vật phẩm tiêu hao sẽ không bao giờ bị động đến.",
       "depositAllDone": "Nguyên liệu đã gửi: {count}.",
       "depositAllFull": "Nguyên liệu đã gửi: {count}. Ngân hàng hiện đã đầy.",
       "depositAllNone": "Ngân hàng đầy: không gửi được gì.",
@@ -2276,7 +2403,50 @@ export const vi_VN: EnTranslations = {
       "bonusAdvertWallet": "Liên kết một ví để nhận 2 ô.",
       "bonusReferralProgress": "{count}/{cap}",
       "bonusReferralExplainer": "Mời một người bạn: khi họ đạt cấp 10, cả bạn lẫn họ mỗi người nhận 2 ô, tối đa 5 người bạn.",
-      "bonusSectionAria": "Ô ngân hàng thưởng và cách kiếm thêm"
+      "bonusSectionAria": "Ô ngân hàng thưởng và cách kiếm thêm",
+      "tabsAria": "Các thẻ ngân hàng",
+      "personalTab": "Cá Nhân",
+      "guildTab": "Bang Hội",
+      "guildCapacityAria": "Ô ngân hàng bang hội đã dùng: {used} trên {total}",
+      "guildEmpty": "Ngân hàng bang hội trống rỗng.",
+      "guildTreasury": "Ngân khố bang hội",
+      "guildDepositGold": "Gửi tiền",
+      "guildWithdrawGold": "Rút tiền",
+      "guildDepositGoldTitle": "Gửi tiền vào ngân khố bang hội",
+      "guildWithdrawGoldTitle": "Rút tiền từ ngân khố bang hội",
+      "guildGoldAvailable": "Khả dụng: {amount}",
+      "guildBuyConfirm": "Mua thêm {count} ô ngân hàng bang hội với giá {price} từ ngân khố bang hội?",
+      "guildBuyNote": "Thanh toán từ ngân khố bang hội",
+      "guildTreasuryShort": "Ngân khố không đủ",
+      "guildOpenBank": "Mở ngân hàng bang hội",
+      "guildOpenConfirm": "Mở ngân hàng bang hội với giá {price}? Khoản này được thanh toán từ tiền của chính bạn.",
+      "guildOpenAccept": "Mở",
+      "guildOpenNote": "Thanh toán từ tiền của chính bạn, không phải từ ngân khố bang hội",
+      "guildPurseShort": "Không đủ tiền",
+      "guildDormantNote": "Vật phẩm bị khóa không thể rút ra và ngăn cản việc giải tán bang hội.",
+      "guildDormantHint": "Vật phẩm này đang bị khóa trong ngân hàng bang hội và không thể rút ra.",
+      "guildDormantAria": "{item}, số lượng {count}, không thể rút ra",
+      "guildUnknownItem": "Vật phẩm không xác định",
+      "guildDepositHint": "Nhấp để gửi vào ngân hàng bang hội",
+      "guildCannotDeposit": "Không thể cất vào ngân hàng bang hội",
+      "guildGoldCannotMove": "Số tiền đó hiện không thể chuyển được.",
+      "guildViewsAria": "Các chế độ xem ngân hàng bang hội",
+      "guildContentsTab": "Nội Dung",
+      "guildLogTab": "Nhật Ký",
+      "logAria": "Nhật ký hoạt động ngân hàng bang hội",
+      "logNote": "{count} hoạt động ngân hàng bang hội gần đây nhất.",
+      "logLoading": "Đang tải nhật ký ngân hàng bang hội...",
+      "logEmpty": "Chưa có gì được chuyển vào hoặc ra khỏi ngân hàng bang hội.",
+      "logRefused": "Chỉ sĩ quan bang hội mới có thể xem nhật ký ngân hàng bang hội.",
+      "logFormerMember": "Một cựu thành viên bang hội",
+      "logDepositItem": "{actor} đã gửi {count} {item}",
+      "logWithdrawItem": "{actor} đã rút {count} {item}",
+      "logDepositMoney": "{actor} đã gửi {amount}",
+      "logWithdrawMoney": "{actor} đã rút {amount}",
+      "logBuySlots": "{actor} đã mua mở rộng ngân hàng với giá {amount}",
+      "logOpenBank": "{actor} đã mở ngân hàng bang hội với giá {amount}",
+      "logCharterFee": "{actor} đã trả phí thành lập bang hội là {amount}",
+      "logAdminPurge": "Một quản trị viên đã xóa {count} {item}"
     },
     "calendar": {
       "title": "Lịch Sự Kiện",
@@ -2313,10 +2483,6 @@ export const vi_VN: EnTranslations = {
         "marketDay": {
           "title": "Ngày Họp Chợ",
           "note": "Thương Nhân chờ đợi hàng mới về. Một ngày lành để dạo Chợ Thế Giới."
-        },
-        "fiestaNight": {
-          "title": "Đêm Fiesta",
-          "note": "Võ đài Fiesta 2v2 đón đám đông cuồng nhiệt nhất vào tối nay."
         },
         "arenaClash": {
           "title": "Đại Chiến Đấu Trường",
@@ -2555,6 +2721,18 @@ export const vi_VN: EnTranslations = {
         "artisansEye": "Mắt Nghệ Nhân",
         "quickeningCharm": "Bùa Hồi Nhanh"
       },
+      "toolEffectTooltip": {
+        "kind": "Tool charm",
+        "bonus": {
+          "gatherersCache": "+1 yield per harvest while charged.",
+          "artisansEye": "Raises the harvest grade by 1 tool tier while charged.",
+          "quickeningCharm": "Shortens the node respawn timer it triggers."
+        },
+        "howToSlot": "Slot onto a mining, logging, or herbalism tool from the Professions window. Consumed when slotted.",
+        "charges": "Starts with {base} charges on a common tool (+{bonus} per rarity rung).",
+        "landOnly": "Does not slot on fishing rods.",
+        "openProfessions": "Open Professions to slot this onto a gathering tool."
+      },
       "toolEffectSlotButton": "Gắn {effect}",
       "toolEffectRechargeButton": "Nạp Lại",
       "toolEffectSlotted": "Đã gắn {effect} cho {profession}.",
@@ -2591,8 +2769,8 @@ export const vi_VN: EnTranslations = {
     "crafting": {
       "title": "Chế tạo",
       "close": "Đóng chế tạo",
-      "dialogOption": "Crafting",
-      "dialogOptionAria": "Open the crafting window for {craft}",
+      "dialogOption": "Chế Tác",
+      "dialogOptionAria": "Mở cửa sổ chế tác cho {craft}",
       "craft": "thủ công",
       "reagentsNeeded": "Yêu cầu:",
       "reagentLine": "{name}: {have}/{required}",
@@ -2667,6 +2845,8 @@ export const vi_VN: EnTranslations = {
       "masterworkToast": "Tuyệt tác! {name}",
       "masterworkZoneLine": "{crafter} đã tạo ra một kiệt tác {name}!",
       "tierUpToast": "{craft} đã thăng cấp lên cấp {tier}!",
+      "skillUpToast": "{skill} skill increased to {level}!",
+      "skillUpSubtext": "Skill increased to {level}!",
       "trendNudge": "Đôi bàn tay của bạn đang nghiêng về {archetype}. Sự thụ ngộ của nó đang chờ với {master}.",
       "trendNudgeNoMaster": "Đôi bàn tay của bạn đang nghiêng về {archetype}. Hãy tìm kiếm một bậc thầy thủ công để theo đuổi nó.",
       "attunedZoneLine": "{name} đã thụ ngộ là {archetype}!",
@@ -2902,7 +3082,7 @@ export const vi_VN: EnTranslations = {
       "countLabel": "{earned}/{total} kỳ công",
       "completionAria": "Kỳ công đã lập: {earned} trên {total}",
       "recentLabel": "Gần đây:",
-      "recentJumpAria": "Jump to {name}",
+      "recentJumpAria": "Nhảy đến {name}",
       "nearestLabel": "Sắp đạt:",
       "filterGroupAria": "Lọc kỳ công",
       "filterAll": "Tất Cả",
@@ -3128,6 +3308,7 @@ export const vi_VN: EnTranslations = {
       "talents": "Tài Năng",
       "arena": "Đấu Trường & PvP",
       "valeCup": "Cúp Thung Lũng",
+      "thornhollow": "Thornhollow Fields",
       "deeds": "Sách Kỳ Công",
       "glossary": "Thuật Ngữ",
       "wishIKnew": "Những Điều Tôi Ước Mình Biết Sớm",
@@ -3898,23 +4079,25 @@ export const vi_VN: EnTranslations = {
       "duelsBody": "Thách đấu giao hữu bất kỳ người chơi nào bạn gặp. Chẳng có gì đặt cược ngoài lòng tự tôn, nên đây là cách dễ nhất để học một thế đối đầu hay phân định một cuộc tranh luận thân tình.",
       "coliseumHeading": "Đấu Trường Tro Tàn",
       "coliseumBody": "Coliseum là đấu trường của vương quốc, nơi bạn đối đầu với những người chơi khác trong các trận xếp hạng, một đấu một hoặc hai đấu hai. Mỗi hạng đấu giữ bảng xếp hạng riêng, nên một chiến thắng đưa bạn leo cao trên thang đó cho cả vương quốc cùng chiêm ngưỡng. Mở cửa sổ Đấu Trường để đăng ký một hạng đấu, một mình hay cùng người đồng đội của bạn.",
-      "fiestaHeading": "Fiesta Hai Đấu Hai",
-      "fiestaBody": "Fiesta là một trận ẩu đả nhanh, hai đấu hai diễn ra như một hiệp liền mạch, với mọi đấu thủ được đưa về cùng một vạch xuất phát. Khi trận đấu diễn ra bạn chọn cường hóa, những đòn tăng lực nhanh tái định hình bộ kỹ năng của bạn ngay tức thì, nên không trận nào giống trận nào.",
-      "augmentsNote": "Cường hóa và tăng lực chỉ kéo dài trong trận đấu. Chúng là về những lối chơi ngẫu hứng, vui nhộn ngay tại chỗ, chứ không phải sức mạnh lâu dài, nên không ai mua được chiến thắng.",
-      "wavesTitle": "Cường hóa ập đến theo từng đợt",
-      "wavesBody": "Một trận Fiesta trao cho bạn những lượt chọn mới khi nó diễn ra, và các lựa chọn càng táo bạo hơn khi trận đấu kéo dài. Bạn xây dựng từ đợt này sang đợt khác, mỗi lần chọn một trong vài tùy chọn và giữ nó cho hết phần còn lại của trận.",
-      "waveSilverTitle": "Bạc",
-      "waveSilverBody": "Đợt mở màn: những đòn tăng lực đơn chỉ số gọn gàng giúp mài giũa nền tảng cơ bản của lớp nhân vật bạn.",
-      "waveGoldTitle": "Vàng",
-      "waveGoldBody": "Đợt giữa: những tổ hợp hai mặt nơi lối xây dựng của bạn bắt đầu thành hình và phát huy.",
-      "wavePrismaticTitle": "Lăng Kính",
-      "wavePrismaticBody": "Đợt cuối cùng: những đòn bùng phát định hình lối chơi, làm tan chảy màn hình, được tạo ra để cảm thấy lố bịch theo cách tuyệt vời nhất.",
-      "yumiHeading": "Bảo Vệ Yumi",
-      "yumiBody": "Bảo Vệ Yumi là chế độ tranh mục tiêu theo đội chơi trong một mê cung: mỗi bên canh giữ linh thú mèo của mình trong khi săn lùng con của đối phương. Thỉnh thoảng cả hai chú mèo lại chớp dịch tới những góc mới của mê cung, nên trận đấu xoay vần giữa việc phòng thủ, săn lùng và chạy đua đi tìm lại chúng. Xếp hàng chờ theo dạng ba đấu ba hoặc năm đấu năm; gục ngã trong trận chỉ khiến bạn phải ngồi ngoài trong chốc lát.",
-      "powerupsTitle": "Tăng lực trong vòng đấu",
-      "powerupsBody": "Những quả cầu phát sáng cũng rơi vào đấu trường giữa trận, miễn phí cho ai chạm tới đầu tiên. Chúng được thiết kế phóng đại có chủ đích và chỉ kéo dài trong chốc lát: Quỷ Tốc cho một thoáng vận tốc chói lóa, Khổng Lồ để phình to thành gã khổng lồ nặng nề, Giày Mặt Trăng cho một cú nhảy nảy bật trọng lực thấp, và Cuồng Bạo cho một đợt phẫn nộ dâng trào đột ngột.",
       "ladderHeading": "Leo Bảng Xếp Hạng",
       "ladderBody": "Chế độ xếp hạng theo dõi thứ hạng của bạn theo thời gian. Xem bảng xếp hạng để biết bạn đang ở đâu và ai đang đứng đầu vương quốc."
+    },
+    "thornhollowPage": {
+      "heading": "Thornhollow Fields",
+      "intro": "A ranked 5v5 capture-the-flag battleground fought in a walled hollow in the old growth below Thornpeak, where two ruined keeps face each other down the length of a ravine and an older courtyard sits between them that neither has ever held. Two teams of five, two keeps, one goal: steal the enemy banner and run it home before they run yours.",
+      "queueHeading": "Queueing up",
+      "queueBody": "Open the Thornhollow Fields panel and enter the queue solo, or bring a party of up to five and queue together: parties are always kept on one team, and the remaining seats fill with solo champions. When ten stand ready, the match seats both teams at their keeps for a short form-up before the flags go live.",
+      "fieldHeading": "The field",
+      "fieldBody": "A walled, open-air field carved into three chambers: each team has its own field before its keep, and the walled Ruin Courtyard sits between them. Two curtain walls span the full width, and every move between chambers passes a contested crossing: the wide main gate, or the gatehouse, a small room straddling the wall whose offset doors force a jog past an ambush corner. Each keep is sealed except its mouth, so every flag run starts and ends through the same opening, and a low barricade breaks the straight charge into it. The courtyard holds the hollow heart ruin and the two flank Sprint Runes; the other two wait on the flag approaches. A Battle or Ward Rune (more damage dealt, or less damage taken, for a few seconds) waits at each main gate's courtyard mouth: both pads open the match on the same face and flip with every claim.",
+      "flagsHeading": "Flags",
+      "flagsBody": "Each keep holds its team flag. Take the enemy flag and carry it to your own stand to score; the first team to three captures wins, and a timed-out battle resolves on score. A slain carrier drops the flag where they fell: an enemy can take it up again, while its own team returns it home instantly just by reaching it. The flag also refuses to hide: picking it up breaks stealth, and a carrier who turns invisible by any means drops it on the spot.",
+      "pickupNote": "Picking a flag up is always a deliberate press of the battleground action key: nobody ever becomes the carrier by strafing through the wrong spot.",
+      "respawnHeading": "Falling in battle",
+      "respawnBody": "Death keeps the classic rite: your corpse lies where it fell until YOU release, and the spirit rises in the fenced graveyard beside your keep, warded there until your team's next respawn wave. The wave raises every waiting spirit together, and the two team waves are deliberately staggered, so the fight never fully resets at once. There is no corpse run and no Spirit Healer bargain: release, wait out the wave, fight.",
+      "carrierHeading": "Carrying the flag",
+      "carrierBody": "A carrier who holds the enemy flag too long grows more and more vulnerable, taking ever-increasing damage until the flag is captured, dropped, or returned. Hiding with the flag is a losing plan; running it home is the winning one.",
+      "ladderHeading": "The ladder",
+      "ladderBody": "Every match moves a persistent per-character battleground rating, win or lose, and the all-time board ranks the realm champions. Wins and hard-fought losses also pay Honor through the Warfare system."
     },
     "valeCupPage": {
       "heading": "Cúp Thung Lũng",
@@ -5802,7 +5985,6 @@ export const vi_VN: EnTranslations = {
   "yumi": {
     "bracket3": "Yumi 3 đấu 3",
     "bracket5": "Yumi 5 đấu 5",
-    "enterQueue": "Tham Gia Bảo Vệ Yumi!",
     "queue": {
       "join": "Bạn vào hàng chờ Bảo Vệ Yumi. Hãy canh giữ linh thú của bạn…",
       "leave": "Bạn rời hàng chờ Bảo Vệ Yumi.",
@@ -5840,9 +6022,6 @@ export const vi_VN: EnTranslations = {
   },
   "fiesta": {
     "bracket": "Fiesta",
-    "enterQueue": "Tham gia Fiesta!",
-    "practice": "🎉 Luyện Tập với Bot",
-    "practiceNote": "Luyện tập ngoại tuyến: triệu hồi 3 bot AI và xếp hàng cho ngươi vào Fiesta 2v2. Bấm lần nữa để dừng.",
     "banner": {
       "wave": "ĐỢT {wave}/{total} — CHỌN MỘT CƯỜNG HÓA!",
       "augmentGained": "Nhận cường hóa: {name}!",
@@ -6099,16 +6278,16 @@ export const vi_VN: EnTranslations = {
   },
   "desktop": {
     "update": {
-      "checkingTitle": "Checking for updates...",
-      "checkingBody": "New versions download while you play.",
-      "uptodateTitle": "You're up to date",
+      "checkingTitle": "Đang kiểm tra cập nhật...",
+      "checkingBody": "Phiên bản mới sẽ được tải trong khi bạn chơi.",
+      "uptodateTitle": "Bạn đang dùng phiên bản mới nhất",
       "downloadingTitle": "Đang tải bản cập nhật {version}...",
-      "downloadingBody": "You can keep playing. It installs when you quit.",
+      "downloadingBody": "Bạn có thể tiếp tục chơi. Bản cập nhật sẽ được cài đặt khi bạn thoát.",
       "readyTitle": "Bản cập nhật {version} đã sẵn sàng",
       "readyBody": "Sẽ tự cài khi bạn thoát, hoặc khởi động lại ngay.",
       "restart": "Khởi động lại ngay",
       "later": "Để sau",
-      "dismiss": "Dismiss"
+      "dismiss": "Bỏ Qua"
     },
     "crash": {
       "title": "World of ClaudeCraft",
@@ -6324,7 +6503,6 @@ export const vi_VN: EnTranslations = {
       "mobileMore": "Thêm",
       "mobileMoreAria": "Hiện thêm menu",
       "mobileSocial": "Xã Hội",
-      "mobileArena": "Đấu Trường",
       "mobileMenu": "Menu",
       "mobileSettings": "Cài Đặt",
       "mobileUse": "Dùng",
@@ -6441,7 +6619,7 @@ export const vi_VN: EnTranslations = {
         "nameplates": "Bật/Tắt Bảng Tên",
         "meters": "Thước Đo Sát Thương",
         "social": "Bạn Bè & Bang Hội",
-        "arena": "Đấu Trường (Ashen Coliseum)",
+        "arena": "PvP (Thornhollow Fields and Arenas)",
         "chat": "Mở Trò Chuyện",
         "attack": "Tấn Công",
         "actionBarSlot": "Thanh Kỹ Năng {slot}"
@@ -6575,6 +6753,11 @@ export const vi_VN: EnTranslations = {
     },
     "system": {
       "playerDeath": "Bạn đã chết.",
+      "deathRecapKillerAbility": "Bạn đã chết. Bị hạ gục bởi {ability} của {killer}.",
+      "deathRecapKiller": "Bạn đã chết. Bị hạ gục bởi {killer}.",
+      "deathRecapAbility": "Bạn đã chết. Bị hạ gục bởi {ability}.",
+      "deathRecapFalling": "Bạn đã chết. Bạn đã ngã tử vong.",
+      "deathRecapDrowned": "Bạn đã chết. Bạn đã chết đuối.",
       "respawn": "Bạn cảm thấy đã được nghỉ ngơi và hồi phục hoàn toàn.",
       "ignoringChat": "Đang bỏ qua tin nhắn từ {name}.",
       "noLongerIgnoring": "Không còn bỏ qua {name} nữa.",
@@ -7065,6 +7248,7 @@ export const vi_VN: EnTranslations = {
       "quest": "Vật Phẩm Nhiệm Vụ",
       "junk": "Đồ Vụn",
       "fineMaterial": "Nguyên Liệu Hảo Hạng",
+      "material": "Nguyên Liệu",
       "food": "Thức Ăn",
       "drink": "Đồ Uống",
       "tool": "Dụng Cụ",
@@ -7097,6 +7281,9 @@ export const vi_VN: EnTranslations = {
       "useFood": "Dùng: Hồi {amount} sinh lực trong {seconds} giây. Phải ngồi yên khi ăn.",
       "useDrink": "Dùng: Hồi {amount} mana trong {seconds} giây. Phải ngồi yên khi uống.",
       "questItem": "Vật Phẩm Nhiệm Vụ",
+      "questRelated": "Nhiệm vụ: {quest}",
+      "questRules": "Không thể bán, gửi ngân hàng, hoặc trao đổi.",
+      "questOrphaned": "Không cần thiết cho bất kỳ nhiệm vụ đang thực hiện nào.",
       "classes": "Lớp nhân vật: {classes}",
       "sellPrice": "Giá bán: {money}",
       "clickBuy": "Nhấp để mua",
@@ -7232,6 +7419,12 @@ export const vi_VN: EnTranslations = {
       "reclaim": "Thu hồi",
       "buyAria": "Mua {item} với giá {price}",
       "reclaimAria": "Thu hồi {item}",
+      "buyConfirmTitle": "Xác Nhận Mua",
+      "buyConfirmBody": "Mua {item} với giá {price}?",
+      "buyConfirmBodyStack": "Mua {item} x{count} với giá {price} ({each} mỗi cái)?",
+      "buyConfirmAccept": "Mua",
+      "buyConfirmCancel": "Hủy",
+      "buyChanged": "Rao bán đó đã thay đổi trước khi bạn xác nhận. Hãy kiểm tra giá và thử lại.",
       "sellNote": "Rao bán hàng hóa từ túi của bạn. Thương Nhân thu {cut}% phí khi vật phẩm được bán. Bạn đang dùng {used}/{max} ô rao bán.",
       "sellPickEmpty": "Nhấp vào một vật phẩm trong túi để chọn món muốn bán.",
       "quantity": "Số lượng",
@@ -8719,6 +8912,18 @@ export const vi_VN: EnTranslations = {
       "fen_muster_order": {
         "name": "Lệnh Tập Hợp Fenbridge"
       },
+      "firebottle": {
+        "name": "Bình Lửa"
+      },
+      "murloc_hut": {
+        "name": "Túp Lều Mudfin"
+      },
+      "restless_skull": {
+        "name": "Hài Cốt Bất An"
+      },
+      "vanguard_bone": {
+        "name": "Xương Tiên Phong"
+      },
       "mire_prowler_pelt": {
         "name": "Da Lông Thú Rình Bùn"
       },
@@ -9994,6 +10199,21 @@ export const vi_VN: EnTranslations = {
       "reins_terrorspark_groundshaker": {
         "name": "Chìa Khóa Khởi Động: Tia Kinh Hoàng, Kẻ Rung Chuyển Mặt Đất"
       },
+      "reins_drakemaw_raptor": {
+        "name": "Dây Cương Cuồng Long Drakemaw"
+      },
+      "moggers_hide_quiver": {
+        "name": "Ống Tên Da Của Mogger"
+      },
+      "cragmaw_huntquiver": {
+        "name": "Ống Tên Săn Của Cragmaw"
+      },
+      "gravewyrm_bone_quiver": {
+        "name": "Ống Tên Xương Mộ Long"
+      },
+      "direfang_quiver": {
+        "name": "Ống Tên Direfang"
+      },
       "conjured_water4": {
         "name": "Nước Suối Được Tạo Phép"
       },
@@ -10989,6 +11209,21 @@ export const vi_VN: EnTranslations = {
       "spider_egg_sac": {
         "name": "Bọc Trứng Nhện"
       },
+      "spider_egg": {
+        "name": "Trứng Nhện Mẹ"
+      },
+      "widow_hatchling": {
+        "name": "Nhện Con Góa Phụ"
+      },
+      "drowned_warlord": {
+        "name": "Chiến Tướng Chết Chìm"
+      },
+      "brakka_wallbreaker": {
+        "name": "Brakka Kẻ Phá Thành"
+      },
+      "threnos_first_voice": {
+        "name": "Threnos Giọng Nói Đầu Tiên"
+      },
       "grave_silt_bulwark": {
         "name": "Thành Lũy Bùn Mộ"
       },
@@ -11168,6 +11403,18 @@ export const vi_VN: EnTranslations = {
       },
       "cindraleth_maw_matriarch": {
         "name": "Cindraleth Mẫu Chúa Hàm"
+      },
+      "dragonkin_egg": {
+        "name": "Trứng Long Tộc"
+      },
+      "dragonkin_whelp": {
+        "name": "Rồng Con Long Tộc"
+      },
+      "dragonkin_broodguard": {
+        "name": "Vệ Bầy Long Tộc"
+      },
+      "drakemaw_broodlord": {
+        "name": "Lãnh Chúa Bầy Drakemaw"
       },
       "gilded_stag": {
         "name": "Hươu Đực Dát Vàng"
@@ -12201,7 +12448,7 @@ export const vi_VN: EnTranslations = {
       },
       "q_no_rest": {
         "title": "Không Yên Nghỉ Giữa Lau Sậy",
-        "text": "Nghi lễ trên những chiếc lư hương ấy buộc kẻ chết chìm trỗi dậy ở bất cứ nơi nào đầm lầy chạm đến chúng - và đầm lầy chạm đến mọi thứ. Sẽ không có yên nghỉ giữa những lau sậy này cho đến khi kẻ chết đông hơn người sống. Ta chưa thể hóa giải nghi lễ, nhưng ta có thể tước đi binh lính của nó. Hãy đưa thêm 14 Kẻ Chết Chìm về an nghỉ.",
+        "text": "Nghi thức trên những chiếc lư hương đó buộc kẻ chết chìm phải trỗi dậy, và giờ nó đã dựng lên một kẻ đủ mạnh để dẫn dắt chúng. Các vệ binh gọi hắn là Chiến Tướng Chết Chìm, và chừng nào hắn còn giữ Nhà Nguyện Chết Chìm thì đám xác chết vẫn còn giữ vững hàng ngũ. Hãy đánh gục hắn, {playerName}, và phần còn lại sẽ tán loạn trở về đầm lầy.",
         "completion": "Ngươi ban cho người chết nhiều lòng thương xót hơn những kẻ chủ của chúng từng làm. Hãy nhận lấy thứ này - ngươi xứng đáng còn hơn thế.",
         "objectives": {
           "0": {
@@ -12479,9 +12726,6 @@ export const vi_VN: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Đã hạ Cuồng Tín Long Giáo"
-          },
-          "1": {
-            "label": "Mệnh Lệnh Long Giáo"
           }
         }
       },
@@ -12492,9 +12736,6 @@ export const vi_VN: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Đã hạ Pháp Sư Tử Linh Long Giáo"
-          },
-          "1": {
-            "label": "Hồn Hộp Nghi Lễ"
           }
         }
       },

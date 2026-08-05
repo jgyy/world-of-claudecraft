@@ -60,6 +60,9 @@ export const COPIED_ALLOW_IDS = [
   'admin::de_DE::moderation.colStatus',
   'admin::de_DE::moderation.badgeOnline',
   'admin::de_DE::detail.lengthHours',
+  // Admin restore item-id entry field: the placeholder must show a literal item id
+  // that operators can paste into the restore form, not a translated phrase.
+  'admin::de_DE::profInspect.itemIdPlaceholder',
   'admin::de_DE::chatMod.status',
   'admin::pt_BR::app.title',
   'admin::pt_BR::detail.status',
@@ -356,6 +359,14 @@ export const COPIED_ALLOW_IDS = [
   'admin::fr_CA::profInspect.colCharges',
   'admin::nl_NL::profInspect.colEffect',
   'admin::nl_NL::profInspect.effectLabel',
+  // True cognates: "Status" is the ordinary native noun for the guild-bank
+  // status column in German, Dutch, Swedish, Danish, and Indonesian (the same
+  // Latin-derived spelling as English).
+  'admin::de_DE::guilds.bankColStatus',
+  'admin::nl_NL::guilds.bankColStatus',
+  'admin::sv_SE::guilds.bankColStatus',
+  'admin::da_DK::guilds.bankColStatus',
+  'admin::id_ID::guilds.bankColStatus',
 ];
 
 export const V07_SLASH = [

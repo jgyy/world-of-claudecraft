@@ -911,6 +911,7 @@ export const id_ID: EnTranslations = {
       "minutesSeconds": "{m}m {s}d",
       "seconds": "{s}d",
       "autoShowHint": "Baris muncul secara otomatis setelah partaimu memberikan kerusakan atau penyembuhan, dan segmen ini tertutup beberapa detik setelah pertarungan berakhir.",
+      "threatFallback": "No live threat: showing damage to {name}",
       "breakdownSummary": "{tab}: {value}",
       "breakdownRow": "{value} ({percent})",
       "breakdownOther": "Lainnya ({count})",
@@ -950,6 +951,7 @@ export const id_ID: EnTranslations = {
       "targetFriendlyNext": "Putar Bidikan Sekutu",
       "discord": "Discord",
       "valecup": "Piala Lembah",
+      "bgFlag": "Battleground Flag Action",
       "sheathe": "Sarungkan/Cabut Senjata",
       "categoryPet": "Peliharaan",
       "petAttack": "Peliharaan: Serang",
@@ -997,6 +999,7 @@ export const id_ID: EnTranslations = {
       "name_stormfeather_griffin": "Stormfeather Penjelajah Langit",
       "name_thunderstrut_gobbler": "Thunderstrut Sang Kalkun Agung",
       "name_terrorspark_groundshaker": "Percik Teror, Pengguncang Bumi",
+      "name_drakemaw_raptor": "Raptor Drakemaw",
       "desc_valorsteed": "Kuda tunggangan tangguh berpijakan mantap yang memberikan kecepatan perjalanan tambahan.",
       "desc_grag_bear": "Beruang tangguh berpijakan mantap yang memberikan kecepatan perjalanan tambahan.",
       "desc_stalkglider_snail": "Siput ulet berenergi tahan lama yang memberikan kecepatan perjalanan tambahan.",
@@ -1004,7 +1007,8 @@ export const id_ID: EnTranslations = {
       "desc_shadowjump_toad": "Kodok raksasa masif berpijakan mantap, terlatih dalam lompatan bayangan secepat kilat yang mampu menjangkau medan apa pun.",
       "desc_stormfeather_griffin": "Griffin badai yang anggun, melangkah di tanah dengan cakar bersepatu rune, sayap terlipat rapat.",
       "desc_thunderstrut_gobbler": "Kalkun raksasa tetasan badai yang melenggak-lenggok turun dari Puncak yang Terjaga, ekornya terkembang bagai awan guntur.",
-      "desc_terrorspark_groundshaker": "Mesin lapis baja ringkas dengan rantai roda berat, meriam berkaliber besar, dan pelana yang dibuat untuk pilot tanpa rasa takut."
+      "desc_terrorspark_groundshaker": "Mesin lapis baja ringkas dengan rantai roda berat, meriam berkaliber besar, dan pelana yang dibuat untuk pilot tanpa rasa takut.",
+      "desc_drakemaw_raptor": "Seekor raptor sarang dari Kaldera Drakemaw yang telah dijinakkan untuk ditunggangi, seluruhnya otot dan kecepatan, masih samar berbau abu."
     },
     "mountTraining": {
       "mountPrompt": "Tekan {key} untuk menaiki Valorsteed latihan.",
@@ -1024,6 +1028,93 @@ export const id_ID: EnTranslations = {
       "timeout": "Balapan Gagal",
       "progress": "Gerbang {n} dari {total}",
       "timeLeft": "{seconds}s"
+    },
+    "pvp": {
+      "launcherTitle": "PvP",
+      "mobileLabel": "PvP",
+      "bracket1v1": "1v1",
+      "bracket2v2": "2v2"
+    },
+    "bg": {
+      "title": "Thornhollow Fields",
+      "blurb": "Two ruined keeps face each other across a walled hollow in the shadow of Thornpeak: Crimson to the south, Azure to the north, and the older Ruin Courtyard between them that neither has ever held. Five a side, one banner each, and the first to carry three of theirs home takes the field.",
+      "modeTag": "5v5 Capture the Flag",
+      "offlineNote": "Thornhollow Fields is syncing. The queue opens once the realm answers.",
+      "ratingSummary": "Rating. {wins} wins / {losses} losses",
+      "careerCaptures": "Career captures: {count}",
+      "enterQueue": "Enter the Queue",
+      "enterQueueParty": "Enter the Queue (party of {count})",
+      "leaveQueue": "Leave Queue",
+      "searching": "Searching. {count}/{size} in queue.",
+      "queuedParty": "Party of {count}.",
+      "queueNote": "Two teams of five. Steal the enemy banner and run it to your keep. First to 3 captures wins. Group up to 5 and queue together; grab Sprint Runes and weave the cover to lose your pursuers.",
+      "matchInProgress": "Battle in progress. {crimson}:{azure}.",
+      "ladderAllTime": "Ladder. All-Time",
+      "noRanked": "No champions ranked yet. Be the first.",
+      "ladderOnline": "Ladder. Online Now",
+      "noChallengers": "No champions online right now. Be the first.",
+      "playerLevelClassTitle": "{name}. Level {level} {className}",
+      "playerClassTitle": "{name}. {className}",
+      "crimson": "Crimson",
+      "azure": "Azure",
+      "yourTeamTitle": "Your team",
+      "clock": "{minutes}:{seconds}",
+      "formUp": "Form up: {seconds}",
+      "firstTo": "First to {caps} captures",
+      "flagState": {
+        "home": "Flag at the keep",
+        "carried": "Flag stolen!",
+        "dropped": "Flag on the ground"
+      },
+      "respawnIn": "Next wave: respawning in {seconds}",
+      "resultVictory": "Victory!",
+      "resultDefeat": "Defeat",
+      "resultDraw": "Draw",
+      "leavingIn": "Leaving the battleground in {seconds}",
+      "killFeed": "{killer} felled {victim}",
+      "killFeedFallen": "{victim} has fallen",
+      "foundBanner": "Battle found. You fight for the {team}!",
+      "countdownBanner": "Thornhollow Fields begins in {seconds}",
+      "startBanner": "Capture the flag!",
+      "flagTakenLog": "{name} has taken the {team} flag!",
+      "flagDroppedLog": "The {team} flag was dropped.",
+      "flagReturnedLog": "The {team} flag was returned.",
+      "dropFlagConfirmTitle": "Drop the flag?",
+      "dropFlagConfirmBody": "You are carrying the enemy flag. Dropping it leaves it on the ground, where either team can reach it.",
+      "dropFlagConfirmAccept": "Drop the flag",
+      "boardToggleLabel": "Match scoreboard. Press Enter to pin the full board open.",
+      "levelRequirement": "You must reach level {level} to unlock queueing for this battleground.",
+      "board": {
+        "kills": "Kills",
+        "assists": "Assists",
+        "deaths": "Deaths",
+        "captures": "Captures"
+      },
+      "flagTakenBanner": "The {takers} have taken the {team} flag!",
+      "flagReturnedBanner": "The {team} flag was returned!",
+      "capturedTeamBanner": "The {takers} have captured the {team} flag! {crimson}:{azure}",
+      "capturedLog": "{name} captured the {team} flag. Score {crimson}:{azure}.",
+      "victoryBanner": "Victory! Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "defeatBanner": "Defeat. Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "drawBanner": "Thornhollow Fields draw {crimson}:{azure}. Rating {rating} ({delta})",
+      "endBannerDetail": "Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "endLog": "Thornhollow Fields ended {crimson}:{azure}. Rating {rating} ({delta}).",
+      "endedTimer": "Time expired",
+      "endedForfeit": "The match was forfeited",
+      "endedTimerLog": "The match clock ran out; the higher score took the field.",
+      "endedForfeitLog": "The match was forfeited.",
+      "firstWinBonusLine": "First win of the day: +{honor} Honor",
+      "firstWinBonusLog": "First win of the day: you gain {honor} bonus Honor.",
+      "timeWarningMinutes": "{minutes} minutes remain",
+      "timeWarningOneMinute": "One minute remains",
+      "timeWarningMinutesLog": "{minutes} minutes remain in the battle.",
+      "timeWarningOneMinuteLog": "One minute remains in the battle.",
+      "map": {
+        "crimsonKeep": "Crimson Keep",
+        "azureKeep": "Azure Keep",
+        "ruinCourtyard": "The Ruin Courtyard",
+        "graveyard": "Graveyard"
+      }
     },
     "vcup": {
       "title": "Piala Lembah",
@@ -1175,6 +1266,15 @@ export const id_ID: EnTranslations = {
       "browserEffectsReduced": "Berkurang",
       "browserEffectsMinimal": "Minimal",
       "browserEffectsNote": "Otomatis meredam efek CSS berat (buram, cahaya, gerak latar) berdasarkan peramban dan perangkat Anda. Turunkan secara manual jika antarmuka terasa lamban.",
+      "graphicsApply": "Terapkan Grafis",
+      "graphicsApplying": "Menerapkan pengaturan grafis...",
+      "graphicsApplied": "Pengaturan grafis diterapkan.",
+      "graphicsSaved": "Pengaturan grafis disimpan. Perender aktif sudah sesuai dengannya.",
+      "graphicsFailed": "Grafis tidak dapat diterapkan. Pengaturan Anda yang sebelumnya masih aktif.",
+      "graphicsRetry": "Coba Lagi Grafis",
+      "graphicsFatal": "Pemulihan grafis gagal. Muat ulang game untuk melanjutkan.",
+      "graphicsReload": "Muat Ulang Game",
+      "graphicsDraftChanged": "Perubahan grafis siap diterapkan.",
       "interfaceMode": "Mode Antarmuka",
       "interfaceModeAuto": "Otomatis",
       "interfaceModeDesktop": "Desktop",
@@ -1206,6 +1306,7 @@ export const id_ID: EnTranslations = {
       "itemScoreLine": "Skor {score}",
       "showSecondaryActionBar": "Tampilkan Bilah Aksi Sekunder",
       "showThirdActionBar": "Tampilkan Bilah Tindakan Ketiga",
+      "lockActionBars": "Kunci Bilah Aksi",
       "showTargetOfTarget": "Tampilkan Sasaran dari Sasaran",
       "showAttackButton": "Tampilkan Tombol Serang",
       "showDailyRewardsChest": "Tampilkan Peti Hadiah Harian",
@@ -1367,20 +1468,38 @@ export const id_ID: EnTranslations = {
     },
     "landing": {
       "highContrast": "Kontras Tinggi",
-      "highContrastAria": "Alihkan latar belakang kontras tinggi: menonaktifkan cuplikan bergerak agar teks layar mulai tetap terbaca"
+      "highContrastAria": "Alihkan latar belakang kontras tinggi: menonaktifkan cuplikan bergerak agar teks layar mulai tetap terbaca",
+      "browserSupport": {
+        "title": "Perhatian: peramban tidak didukung",
+        "body": "Kamu mungkin mengalami performa yang menurun di peramban ini. Untuk pengalaman terbaik, dapatkan aplikasi desktop untuk Windows, macOS, atau Linux. Lebih suka bermain di peramban? Chrome memberikan performa terbaik, dan Firefox serta Safari juga didukung.",
+        "getDesktopApp": "Dapatkan aplikasi desktop",
+        "continueInBrowser": "Lanjutkan di peramban",
+        "dismissAria": "Tutup pemberitahuan peramban yang tidak didukung"
+      }
     },
     "warfare": {
       "honorAmount": "{amount} Kehormatan",
       "dualPrice": "{money} + {honor}",
       "balance": "Kehormatan: {amount}",
       "honorFloat": "+{amount} Kehormatan",
+      "honorFloatReason": "+{amount} Honor ({reason})",
       "honorGain": "Anda mendapatkan Kehormatan {amount} ({reason}).",
       "notEnoughHonor": "Tidak cukup Kehormatan.",
       "reasons": {
         "arenaWin": "Kemenangan arena",
         "fiestaKill": "Eliminasi Fiesta",
         "fiestaComplete": "Fiesta selesai",
-        "fiestaWin": "Kemenangan Fiesta"
+        "fiestaWin": "Kemenangan Fiesta",
+        "battlegroundWin": "Thornhollow Fields victory",
+        "battlegroundFirstWin": "first Thornhollow Fields win today",
+        "battlegroundComplete": "Thornhollow Fields battle fought",
+        "battlegroundKill": "honorable kill",
+        "battlegroundAssist": "killing blow assisted"
+      },
+      "floatReasons": {
+        "kill": "Kill",
+        "assist": "Assist",
+        "firstWin": "First Win"
       }
     },
     "charSheet": {
@@ -1736,6 +1855,7 @@ export const id_ID: EnTranslations = {
       "itemAriaEnchanted": "{item}, jumlah {count}, salinan dimantrai",
       "itemAriaBound": "{item}, jumlah {count}, salinan terikat",
       "itemAriaMasterwork": "{item}, jumlah {count}, karya master",
+      "itemAriaQuest": "{item}, jumlah {count}, barang misi",
       "filterGroupAria": "Saring tas menurut kategori",
       "filterAll": "Semua",
       "filterWeapon": "Senjata",
@@ -1744,6 +1864,7 @@ export const id_ID: EnTranslations = {
       "filterMaterial": "Bahan",
       "filterTool": "Perkakas",
       "filterQuest": "Misi",
+      "filterQuestCountAria": "Misi, {count} barang",
       "filterMount": "Tunggangan",
       "sortAria": "Urutkan barang tas",
       "sortRecent": "Terbaru",
@@ -1752,6 +1873,7 @@ export const id_ID: EnTranslations = {
       "searchPlaceholder": "Cari barang",
       "searchAria": "Cari barang tas berdasarkan nama",
       "noMatch": "Tidak ada barang yang cocok dengan saringanmu.",
+      "noQuestItems": "Tidak ada barang misi di dalam tasmu.",
       "capacity": "{used}/{total}",
       "capacityAria": "Slot tas terpakai: {used} dari {total}",
       "backpack": "Ransel",
@@ -1785,6 +1907,7 @@ export const id_ID: EnTranslations = {
       "dmgDoneReduce": "Mengurangi kerusakan yang diberikan sebesar {pct}%",
       "heatingUp": "Serangan kritis pembangun Api berturutan berikutmu memberikan Hot Streak; pembangun yang tidak kritis menghapus Heating Up",
       "elementalConvergencePrimed": "Mantra berikutmu dari sekolah elemen lain memberikan Konvergensi Elemen",
+      "carriedFlag": "You are carrying the enemy flag. Cancel this buff to drop it.",
       "battleStance": "Kuda-kuda Tempur: penghasilan amarah 10% lebih banyak",
       "berserkerStance": "Kuda-kuda Berserker: kritis 3% lebih sering dan menghantam 3% lebih keras",
       "crit": "Meningkatkan peluang serangan kritis sebesar {pct}%",
@@ -1970,6 +2093,8 @@ export const id_ID: EnTranslations = {
     },
     "materialHint": {
       "fineGrade": "Mutu halus. Dikumpulkan dari urat tingkat penuh dengan alat berperingkat di atas materialnya, dan dihitung sebagai versi biasa di mana pun versi biasa dibutuhkan.",
+      "cookingCatch": "Bahan masakan. Harus dimasak sebelum dimakan.",
+      "usedBy": "Used by {crafts}.",
       "arcaneDust": "Reagen Pemantraan. Dihasilkan dari menghancurkan pemantraan perlengkapan umum dan tak biasa.",
       "arcaneEssence": "Reagen Pemantraan. Dihasilkan dari menghancurkan pemantraan perlengkapan langka.",
       "arcaneShard": "Reagen Pemantraan. Dihasilkan dari menghancurkan pemantraan perlengkapan epik dan legendaris.",
@@ -2251,6 +2376,7 @@ export const id_ID: EnTranslations = {
       "depositHint": "Klik untuk menyetor",
       "depositPartialHint": "Shift-klik untuk menyetor sebagian",
       "cannotDeposit": "Tidak dapat disimpan di bank",
+      "cannotDepositNow": "Tidak dapat disetor saat ini",
       "depositQuantityTitle": "Setor {item}",
       "depositQuantityInput": "Jumlah yang disetor",
       "depositQuantityConfirm": "Setor",
@@ -2261,6 +2387,7 @@ export const id_ID: EnTranslations = {
       "sortAria": "Urutkan barang bank",
       "searchAria": "Cari barang bank menurut nama",
       "depositAll": "Setor semua bahan",
+      "depositAllTooltip": "Mengirim semua reagen kerajinan dan barang rongsokan dari tasmu ke bank dalam satu kali jalan. Alat pengumpul, perlengkapan yang dipakai, barang misi, dan barang habis pakai tidak pernah disentuh.",
       "depositAllDone": "Bahan disetor: {count}.",
       "depositAllFull": "Bahan disetor: {count}. Bank kini penuh.",
       "depositAllNone": "Bank penuh: tidak ada yang disetor.",
@@ -2276,7 +2403,50 @@ export const id_ID: EnTranslations = {
       "bonusAdvertWallet": "Tautkan dompet untuk mendapat 2 slot.",
       "bonusReferralProgress": "{count}/{cap}",
       "bonusReferralExplainer": "Undang seorang teman: saat ia mencapai level 10, kalian masing-masing mendapat 2 slot, hingga 5 teman.",
-      "bonusSectionAria": "Slot bank bonus dan cara mendapat lebih banyak"
+      "bonusSectionAria": "Slot bank bonus dan cara mendapat lebih banyak",
+      "tabsAria": "Tab bank",
+      "personalTab": "Pribadi",
+      "guildTab": "Guild",
+      "guildCapacityAria": "Slot bank guild terpakai: {used} dari {total}",
+      "guildEmpty": "Bank guild kosong.",
+      "guildTreasury": "Kas guild",
+      "guildDepositGold": "Setor uang",
+      "guildWithdrawGold": "Tarik uang",
+      "guildDepositGoldTitle": "Setor uang ke kas guild",
+      "guildWithdrawGoldTitle": "Tarik uang dari kas guild",
+      "guildGoldAvailable": "Tersedia: {amount}",
+      "guildBuyConfirm": "Beli {count} slot bank guild tambahan seharga {price} dari kas guild?",
+      "guildBuyNote": "Dibayar dari kas guild",
+      "guildTreasuryShort": "Kas kurang",
+      "guildOpenBank": "Buka bank guild",
+      "guildOpenConfirm": "Buka bank guild seharga {price}? Ini dibayar dari uangmu sendiri.",
+      "guildOpenAccept": "Buka",
+      "guildOpenNote": "Dibayar dari uangmu sendiri, bukan dari kas guild",
+      "guildPurseShort": "Uang tidak cukup",
+      "guildDormantNote": "Barang yang terkunci tidak dapat ditarik dan mencegah guild dibubarkan.",
+      "guildDormantHint": "Barang ini terkunci di bank guild dan tidak dapat ditarik.",
+      "guildDormantAria": "{item}, jumlah {count}, tidak dapat ditarik",
+      "guildUnknownItem": "Barang tidak dikenal",
+      "guildDepositHint": "Klik untuk menyetor ke bank guild",
+      "guildCannotDeposit": "Tidak dapat disimpan di bank guild",
+      "guildGoldCannotMove": "Jumlah itu tidak dapat dipindahkan saat ini.",
+      "guildViewsAria": "Tampilan bank guild",
+      "guildContentsTab": "Isi",
+      "guildLogTab": "Log",
+      "logAria": "Log aktivitas bank guild",
+      "logNote": "{count} tindakan bank guild terbaru.",
+      "logLoading": "Memuat log bank guild...",
+      "logEmpty": "Belum ada yang keluar masuk bank guild.",
+      "logRefused": "Hanya perwira guild yang dapat membaca log bank guild.",
+      "logFormerMember": "Mantan anggota guild",
+      "logDepositItem": "{actor} menyetor {count} {item}",
+      "logWithdrawItem": "{actor} menarik {count} {item}",
+      "logDepositMoney": "{actor} menyetor {amount}",
+      "logWithdrawMoney": "{actor} menarik {amount}",
+      "logBuySlots": "{actor} membeli perluasan bank seharga {amount}",
+      "logOpenBank": "{actor} membuka bank guild seharga {amount}",
+      "logCharterFee": "{actor} membayar biaya piagam guild sebesar {amount}",
+      "logAdminPurge": "Seorang administrator menghapus {count} {item}"
     },
     "calendar": {
       "title": "Kalender Acara",
@@ -2313,10 +2483,6 @@ export const id_ID: EnTranslations = {
         "marketDay": {
           "title": "Hari Pasar",
           "note": "Sang Pedagang menantikan stok segar. Hari yang baik untuk menjelajahi Pasar Dunia."
-        },
-        "fiestaNight": {
-          "title": "Malam Fiesta",
-          "note": "Gelanggang Fiesta 2v2 menarik penonton paling riuh malam ini."
         },
         "arenaClash": {
           "title": "Bentrokan Arena",
@@ -2555,6 +2721,18 @@ export const id_ID: EnTranslations = {
         "artisansEye": "Mata Perajin",
         "quickeningCharm": "Jimat Pegas Balik"
       },
+      "toolEffectTooltip": {
+        "kind": "Tool charm",
+        "bonus": {
+          "gatherersCache": "+1 yield per harvest while charged.",
+          "artisansEye": "Raises the harvest grade by 1 tool tier while charged.",
+          "quickeningCharm": "Shortens the node respawn timer it triggers."
+        },
+        "howToSlot": "Slot onto a mining, logging, or herbalism tool from the Professions window. Consumed when slotted.",
+        "charges": "Starts with {base} charges on a common tool (+{bonus} per rarity rung).",
+        "landOnly": "Does not slot on fishing rods.",
+        "openProfessions": "Open Professions to slot this onto a gathering tool."
+      },
       "toolEffectSlotButton": "Pasang {effect}",
       "toolEffectRechargeButton": "Isi Ulang",
       "toolEffectSlotted": "{effect} terpasang pada {profession}.",
@@ -2591,8 +2769,8 @@ export const id_ID: EnTranslations = {
     "crafting": {
       "title": "kerajinan",
       "close": "Tutup kerajinan",
-      "dialogOption": "Crafting",
-      "dialogOptionAria": "Open the crafting window for {craft}",
+      "dialogOption": "Kerajinan",
+      "dialogOptionAria": "Buka jendela kerajinan untuk {craft}",
       "craft": "Keahlian",
       "reagentsNeeded": "Memerlukan:",
       "reagentLine": "{name}: {have}/{required}",
@@ -2667,6 +2845,8 @@ export const id_ID: EnTranslations = {
       "masterworkToast": "Karya besar! {name}",
       "masterworkZoneLine": "{crafter} membuat karya besar {name}!",
       "tierUpToast": "{craft} maju ke tingkat {tier}!",
+      "skillUpToast": "{skill} skill increased to {level}!",
+      "skillUpSubtext": "Skill increased to {level}!",
       "trendNudge": "Tanganmu cenderung ke {archetype}. Penyelarasannya menunggumu dengan {master}.",
       "trendNudgeNoMaster": "Tanganmu cenderung ke {archetype}. Carilah seorang master kerajinan untuk mengambilnya.",
       "attunedZoneLine": "{name} telah selaras sebagai {archetype}!",
@@ -2902,7 +3082,7 @@ export const id_ID: EnTranslations = {
       "countLabel": "{earned}/{total} jasa",
       "completionAria": "Jasa yang diraih: {earned} dari {total}",
       "recentLabel": "Terbaru:",
-      "recentJumpAria": "Jump to {name}",
+      "recentJumpAria": "Lompat ke {name}",
       "nearestLabel": "Hampir tercapai:",
       "filterGroupAria": "Saring jasa",
       "filterAll": "Semua",
@@ -3128,6 +3308,7 @@ export const id_ID: EnTranslations = {
       "talents": "Talent",
       "arena": "Arena & PvP",
       "valeCup": "Piala Lembah",
+      "thornhollow": "Thornhollow Fields",
       "deeds": "Kitab Jasa",
       "glossary": "Glosarium",
       "wishIKnew": "Hal yang Andai Kuketahui",
@@ -3898,23 +4079,25 @@ export const id_ID: EnTranslations = {
       "duelsBody": "Tantang pemain mana pun yang kamu temui untuk duel persahabatan. Tak ada yang dipertaruhkan selain harga diri, jadi inilah cara termudah mempelajari sebuah pertandingan atau menyelesaikan perselisihan ramah.",
       "coliseumHeading": "Coliseum Abu",
       "coliseumBody": "Coliseum adalah arena realm, tempat kamu menghadapi pemain lain dalam pertandingan berperingkat, satu lawan satu atau dua lawan dua. Setiap bracket menyimpan peringkatnya sendiri, jadi sebuah kemenangan mengangkatmu di tangga itu untuk dilihat seluruh realm. Buka jendela Arena untuk mendaftar ke sebuah bracket, sendiri atau bersama pasanganmu.",
-      "fiestaHeading": "Fiesta dua lawan dua",
-      "fiestaBody": "Fiesta adalah perkelahian dua lawan dua yang cepat, dimainkan sebagai satu pertarungan tanpa jeda, dengan tiap petarung dibawa ke titik pijak yang setara. Seiring pertarungan berjalan kamu memilih augmen, dorongan cepat yang membentuk ulang perlengkapanmu secara spontan, sehingga tak ada dua pertandingan yang sama persis.",
-      "augmentsNote": "Augmen dan penguat hanya bertahan selama pertandingan. Semuanya tentang rakitan jenaka dan dadakan, bukan kekuatan abadi, sehingga tak seorang pun bisa membeli kemenangan.",
-      "wavesTitle": "Augmen datang bergelombang",
-      "wavesBody": "Sebuah pertarungan Fiesta memberimu pilihan baru seiring jalannya, dan pilihannya makin berani makin lama pertarungan berlangsung. Kamu membangun dari satu gelombang ke berikutnya, memilih salah satu dari beberapa opsi tiap kali dan menyimpannya sampai sisa pertarungan.",
-      "waveSilverTitle": "Perak",
-      "waveSilverBody": "Gelombang pembuka: penguatan satu-statistik yang bersih, mempertajam dasar-dasar kelasmu.",
-      "waveGoldTitle": "Emas",
-      "waveGoldBody": "Gelombang tengah: kombo bermata dua tempat rakitanmu mulai terbentuk dan berpadu.",
-      "wavePrismaticTitle": "Prismatik",
-      "wavePrismaticBody": "Gelombang terakhir: lonjakan penentu-rakitan yang melelehkan layar, dirancang terasa konyol dengan cara terbaik.",
-      "yumiHeading": "Lindungi Yumi",
-      "yumiBody": "Lindungi Yumi adalah mode objektif tim yang dimainkan di dalam labirin: masing-masing pihak menjaga peliharaan kucingnya sendiri sambil memburu milik lawan. Sesekali kedua kucing berkelebat ke sudut-sudut baru labirin, sehingga pertarungan berayun antara bertahan, memburu, dan berpacu untuk menemukannya lagi. Masuk antrean sebagai tiga lawan tiga atau lima lawan lima; tumbang dalam pertempuran hanya membuatmu absen sejenak.",
-      "powerupsTitle": "Penguat di dalam arena",
-      "powerupsBody": "Bola bercahaya juga jatuh ke arena di tengah pertarungan, bebas bagi siapa pun yang meraihnya lebih dulu. Sengaja dibuat berlebihan dan hanya bertahan sebentar: Speed Demon untuk laju membutakan sekejap, Colossus untuk membengkak menjadi raksasa lamban, Moon Boots untuk lompatan memantul gravitasi rendah, dan Berserker untuk lonjakan amarah mendadak.",
       "ladderHeading": "Menaiki tangga peringkat",
       "ladderBody": "Permainan berperingkat melacak kedudukanmu dari waktu ke waktu. Lihat papan peringkat untuk mengetahui posisimu dan siapa yang memuncaki realm."
+    },
+    "thornhollowPage": {
+      "heading": "Thornhollow Fields",
+      "intro": "A ranked 5v5 capture-the-flag battleground fought in a walled hollow in the old growth below Thornpeak, where two ruined keeps face each other down the length of a ravine and an older courtyard sits between them that neither has ever held. Two teams of five, two keeps, one goal: steal the enemy banner and run it home before they run yours.",
+      "queueHeading": "Queueing up",
+      "queueBody": "Open the Thornhollow Fields panel and enter the queue solo, or bring a party of up to five and queue together: parties are always kept on one team, and the remaining seats fill with solo champions. When ten stand ready, the match seats both teams at their keeps for a short form-up before the flags go live.",
+      "fieldHeading": "The field",
+      "fieldBody": "A walled, open-air field carved into three chambers: each team has its own field before its keep, and the walled Ruin Courtyard sits between them. Two curtain walls span the full width, and every move between chambers passes a contested crossing: the wide main gate, or the gatehouse, a small room straddling the wall whose offset doors force a jog past an ambush corner. Each keep is sealed except its mouth, so every flag run starts and ends through the same opening, and a low barricade breaks the straight charge into it. The courtyard holds the hollow heart ruin and the two flank Sprint Runes; the other two wait on the flag approaches. A Battle or Ward Rune (more damage dealt, or less damage taken, for a few seconds) waits at each main gate's courtyard mouth: both pads open the match on the same face and flip with every claim.",
+      "flagsHeading": "Flags",
+      "flagsBody": "Each keep holds its team flag. Take the enemy flag and carry it to your own stand to score; the first team to three captures wins, and a timed-out battle resolves on score. A slain carrier drops the flag where they fell: an enemy can take it up again, while its own team returns it home instantly just by reaching it. The flag also refuses to hide: picking it up breaks stealth, and a carrier who turns invisible by any means drops it on the spot.",
+      "pickupNote": "Picking a flag up is always a deliberate press of the battleground action key: nobody ever becomes the carrier by strafing through the wrong spot.",
+      "respawnHeading": "Falling in battle",
+      "respawnBody": "Death keeps the classic rite: your corpse lies where it fell until YOU release, and the spirit rises in the fenced graveyard beside your keep, warded there until your team's next respawn wave. The wave raises every waiting spirit together, and the two team waves are deliberately staggered, so the fight never fully resets at once. There is no corpse run and no Spirit Healer bargain: release, wait out the wave, fight.",
+      "carrierHeading": "Carrying the flag",
+      "carrierBody": "A carrier who holds the enemy flag too long grows more and more vulnerable, taking ever-increasing damage until the flag is captured, dropped, or returned. Hiding with the flag is a losing plan; running it home is the winning one.",
+      "ladderHeading": "The ladder",
+      "ladderBody": "Every match moves a persistent per-character battleground rating, win or lose, and the all-time board ranks the realm champions. Wins and hard-fought losses also pay Honor through the Warfare system."
     },
     "valeCupPage": {
       "heading": "Piala Lembah",
@@ -5802,7 +5985,6 @@ export const id_ID: EnTranslations = {
   "yumi": {
     "bracket3": "Yumi 3 lawan 3",
     "bracket5": "Yumi 5 lawan 5",
-    "enterQueue": "Ikut Lindungi Yumi!",
     "queue": {
       "join": "Kau bergabung ke antrean Lindungi Yumi. Jagalah peliharaanmu…",
       "leave": "Kau keluar dari antrean Lindungi Yumi.",
@@ -5840,9 +6022,6 @@ export const id_ID: EnTranslations = {
   },
   "fiesta": {
     "bracket": "Fiesta",
-    "enterQueue": "Gabung Fiesta!",
-    "practice": "🎉 Latihan vs Bot",
-    "practiceNote": "Latihan offline: memunculkan 3 bot AI dan mendaftarkanmu untuk Fiesta 2v2. Klik lagi untuk berhenti.",
     "banner": {
       "wave": "GELOMBANG {wave}/{total} — PILIH SEBUAH AUGMENT!",
       "augmentGained": "Augment didapat: {name}!",
@@ -6099,16 +6278,16 @@ export const id_ID: EnTranslations = {
   },
   "desktop": {
     "update": {
-      "checkingTitle": "Checking for updates...",
-      "checkingBody": "New versions download while you play.",
-      "uptodateTitle": "You're up to date",
+      "checkingTitle": "Memeriksa pembaruan...",
+      "checkingBody": "Versi baru diunduh selagi kamu bermain.",
+      "uptodateTitle": "Kamu sudah menggunakan versi terbaru",
       "downloadingTitle": "Mengunduh pembaruan {version}...",
-      "downloadingBody": "You can keep playing. It installs when you quit.",
+      "downloadingBody": "Kamu tetap bisa bermain. Ini akan terpasang saat kamu keluar.",
       "readyTitle": "Pembaruan {version} siap",
       "readyBody": "Akan terpasang saat kamu keluar, atau mulai ulang sekarang.",
       "restart": "Mulai Ulang Sekarang",
       "later": "Nanti",
-      "dismiss": "Dismiss"
+      "dismiss": "Tutup"
     },
     "crash": {
       "title": "World of ClaudeCraft",
@@ -6324,7 +6503,6 @@ export const id_ID: EnTranslations = {
       "mobileMore": "Lainnya",
       "mobileMoreAria": "Tampilkan lebih banyak menu",
       "mobileSocial": "Sosial",
-      "mobileArena": "Arena",
       "mobileMenu": "Menu",
       "mobileSettings": "Pengaturan",
       "mobileUse": "Pakai",
@@ -6441,7 +6619,7 @@ export const id_ID: EnTranslations = {
         "nameplates": "Alihkan Papan Nama",
         "meters": "Pengukur Kerusakan",
         "social": "Teman & Serikat",
-        "arena": "Arena (Ashen Coliseum)",
+        "arena": "PvP (Thornhollow Fields and Arenas)",
         "chat": "Buka Obrolan",
         "attack": "Serang",
         "actionBarSlot": "Bilah Aksi {slot}"
@@ -6575,6 +6753,11 @@ export const id_ID: EnTranslations = {
     },
     "system": {
       "playerDeath": "Kamu telah tewas.",
+      "deathRecapKillerAbility": "Kamu telah tewas. Tewas oleh {ability} milik {killer}.",
+      "deathRecapKiller": "Kamu telah tewas. Tewas oleh {killer}.",
+      "deathRecapAbility": "Kamu telah tewas. Tewas oleh {ability}.",
+      "deathRecapFalling": "Kamu telah tewas. Kamu jatuh hingga tewas.",
+      "deathRecapDrowned": "Kamu telah tewas. Kamu tenggelam.",
       "respawn": "Kamu merasa segar dan pulih kembali.",
       "ignoringChat": "Mengabaikan obrolan dari {name}.",
       "noLongerIgnoring": "Tidak lagi mengabaikan {name}.",
@@ -7065,6 +7248,7 @@ export const id_ID: EnTranslations = {
       "quest": "Barang Misi",
       "junk": "Rongsokan",
       "fineMaterial": "Bahan Halus",
+      "material": "Bahan",
       "food": "Makanan",
       "drink": "Minuman",
       "tool": "Perkakas",
@@ -7097,6 +7281,9 @@ export const id_ID: EnTranslations = {
       "useFood": "Pakai: Memulihkan {amount} nyawa selama {seconds} detik. Harus tetap duduk selama makan.",
       "useDrink": "Pakai: Memulihkan {amount} mana selama {seconds} detik. Harus tetap duduk selama minum.",
       "questItem": "Barang Misi",
+      "questRelated": "Misi: {quest}",
+      "questRules": "Tidak dapat dijual, disimpan di bank, atau ditukar.",
+      "questOrphaned": "Tidak dibutuhkan untuk misi aktif mana pun.",
       "classes": "Kelas: {classes}",
       "sellPrice": "Harga jual: {money}",
       "clickBuy": "Klik untuk membeli",
@@ -7232,6 +7419,12 @@ export const id_ID: EnTranslations = {
       "reclaim": "Tarik Kembali",
       "buyAria": "Beli {item} seharga {price}",
       "reclaimAria": "Tarik kembali {item}",
+      "buyConfirmTitle": "Konfirmasi Pembelian",
+      "buyConfirmBody": "Beli {item} seharga {price}?",
+      "buyConfirmBodyStack": "Beli {item} x{count} seharga {price} ({each} per buah)?",
+      "buyConfirmAccept": "Beli",
+      "buyConfirmCancel": "Batal",
+      "buyChanged": "Daftar itu berubah sebelum kamu mengonfirmasi. Periksa harganya dan coba lagi.",
       "sellNote": "Pajang barang dari tasmu. Pedagang mengambil potongan {cut}% saat barang terjual. Kamu memakai {used}/{max} slot daftar jual.",
       "sellPickEmpty": "Klik barang di tasmu untuk memilih yang akan dijual.",
       "quantity": "Jumlah",
@@ -8719,6 +8912,18 @@ export const id_ID: EnTranslations = {
       "fen_muster_order": {
         "name": "Perintah Mobilisasi Fenbridge"
       },
+      "firebottle": {
+        "name": "Botol Api"
+      },
+      "murloc_hut": {
+        "name": "Gubuk Mudfin"
+      },
+      "restless_skull": {
+        "name": "Tengkorak Gelisah"
+      },
+      "vanguard_bone": {
+        "name": "Tulang Garda Depan"
+      },
       "mire_prowler_pelt": {
         "name": "Kulit Bulu Pengendap Rawa"
       },
@@ -9994,6 +10199,21 @@ export const id_ID: EnTranslations = {
       "reins_terrorspark_groundshaker": {
         "name": "Kunci Kontak: Percik Teror, Pengguncang Bumi"
       },
+      "reins_drakemaw_raptor": {
+        "name": "Tali Kekang Raptor Drakemaw"
+      },
+      "moggers_hide_quiver": {
+        "name": "Tabung Panah Kulit Mogger"
+      },
+      "cragmaw_huntquiver": {
+        "name": "Tabung Panah Buru Cragmaw"
+      },
+      "gravewyrm_bone_quiver": {
+        "name": "Tabung Panah Tulang Gravewyrm"
+      },
+      "direfang_quiver": {
+        "name": "Tabung Panah Direfang"
+      },
       "conjured_water4": {
         "name": "Air Mata Air Sihir"
       },
@@ -10989,6 +11209,21 @@ export const id_ID: EnTranslations = {
       "spider_egg_sac": {
         "name": "Kantung Telur Laba-laba"
       },
+      "spider_egg": {
+        "name": "Telur Induk Sarang"
+      },
+      "widow_hatchling": {
+        "name": "Tukik Janda"
+      },
+      "drowned_warlord": {
+        "name": "Sang Panglima Tenggelam"
+      },
+      "brakka_wallbreaker": {
+        "name": "Brakka sang Pendobrak Tembok"
+      },
+      "threnos_first_voice": {
+        "name": "Threnos sang Suara Pertama"
+      },
       "grave_silt_bulwark": {
         "name": "Benteng Lanau Kubur"
       },
@@ -11168,6 +11403,18 @@ export const id_ID: EnTranslations = {
       },
       "cindraleth_maw_matriarch": {
         "name": "Cindraleth Sang Matriark Rahang"
+      },
+      "dragonkin_egg": {
+        "name": "Telur Naga"
+      },
+      "dragonkin_whelp": {
+        "name": "Tukik Naga"
+      },
+      "dragonkin_broodguard": {
+        "name": "Penjaga Sarang Naga"
+      },
+      "drakemaw_broodlord": {
+        "name": "Penguasa Sarang Drakemaw"
       },
       "gilded_stag": {
         "name": "Rusa Bersepuh Emas"
@@ -12201,7 +12448,7 @@ export const id_ID: EnTranslations = {
       },
       "q_no_rest": {
         "title": "Tiada Ketenangan di Antara Alang-Alang",
-        "text": "Ritus pada pedupaan itu mengikat para tenggelam untuk bangkit di mana pun rawa menyentuh mereka - dan rawa menyentuh segalanya. Tidak akan ada ketenangan di antara alang-alang ini sampai para mati melebihi jumlah yang hidup. Kita belum bisa membatalkan ritus itu, tapi kita bisa menguras prajuritnya. Istirahatkan 14 lagi dari Drowned Dead.",
+        "text": "Ritus pada pedupaan itu mengikat yang tenggelam untuk bangkit, dan kini ritus itu telah membangkitkan satu yang cukup kuat untuk memimpin mereka. Para penjaga menyebutnya Sang Panglima Tenggelam, dan selama ia menguasai Kapel Tenggelam, yang mati tetap berbaris. Tumpaskan dia, {playerName}, dan sisanya akan tercerai-berai kembali ke rawa.",
         "completion": "Kau memberi para mati lebih banyak belas kasih daripada yang pernah diberikan tuan-tuan mereka. Ambillah ini - kau lebih dari pantas mendapatkannya.",
         "objectives": {
           "0": {
@@ -12479,9 +12726,6 @@ export const id_ID: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Fanatik Wyrmcult terbunuh"
-          },
-          "1": {
-            "label": "Perintah Wyrmcult"
           }
         }
       },
@@ -12492,9 +12736,6 @@ export const id_ID: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wyrmcult Necromancer dibunuh"
-          },
-          "1": {
-            "label": "Filakteri Ritual"
           }
         }
       },

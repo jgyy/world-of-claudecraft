@@ -37,11 +37,16 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // resolves a tier and never a tool), and market_list_instance
 // (the instance-payload market pipe). mount_select left the wire
 // (reins are items); recharge_tool_effect joined (the acquisition craft);
-// profiler invulnerability joined as a dev-only dispatch token (no send);
-// stopAutoAttackOnTargetSwitch joined (issue #1358).
-const EXPECTED_SEND_COUNT = 177;
-const EXPECTED_DISPATCH_COUNT = 189;
-const EXPECTED_DISPATCH_ONLY_COUNT = 12;
+// profiler invulnerability joined as a dev-only dispatch token (no send).
+// 176 send / 188 dispatch on release/v0.34.0, +5 on BOTH sides for the
+// guild_bank_* cluster (Guild Bank Phase 2), +1 on both for guild_bank_log
+// (the activity log's on-demand READ request; its answer comes back on its own
+// one-shot 'gbanklog' frame, not the snapshot); the battleground adds three
+// sends plus the dev-only force start; stopAutoAttackOnTargetSwitch joined as
+// a send + dispatch pair (issue #1358).
+const EXPECTED_SEND_COUNT = 186; // +3 battleground sends, +1 stopAutoAttackOnTargetSwitch
+const EXPECTED_DISPATCH_COUNT = 199; // +3 battleground sends, +1 dev_bg_start, +1 stopAutoAttackOnTargetSwitch
+const EXPECTED_DISPATCH_ONLY_COUNT = 13; // + dev_bg_start + dev_profiler_invulnerable
 
 // The chat sub-channel routing switch (server/game.ts `switch
 // (session.rememberedChat.channel)`) is NOT a msg.cmd dispatch; its labels must

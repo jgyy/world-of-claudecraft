@@ -911,6 +911,7 @@ export const tr_TR: EnTranslations = {
       "minutesSeconds": "{m}dk {s}sn",
       "seconds": "{s}sn",
       "autoShowHint": "Satırlar, partindeki oyuncular hasar vermeye veya iyileştirmeye başladığında otomatik görünür; bu bölüm ise savaş bittikten birkaç saniye sonra kapanır.",
+      "threatFallback": "No live threat: showing damage to {name}",
       "breakdownSummary": "{tab}: {value}",
       "breakdownRow": "{value} ({percent})",
       "breakdownOther": "Diğer ({count})",
@@ -950,6 +951,7 @@ export const tr_TR: EnTranslations = {
       "targetFriendlyNext": "Dost Hedefler Arasında Geç",
       "discord": "Discord",
       "valecup": "Vadi Kupası",
+      "bgFlag": "Battleground Flag Action",
       "sheathe": "Silahı Kın'a Tak / Çıkar",
       "categoryPet": "Yoldaş",
       "petAttack": "Yoldaş: Saldır",
@@ -997,6 +999,7 @@ export const tr_TR: EnTranslations = {
       "name_stormfeather_griffin": "Gökyüzü Erişimli Fırtınatüy",
       "name_thunderstrut_gobbler": "Gürlemeadım, Büyük Hindi",
       "name_terrorspark_groundshaker": "Dehşetkıvılcım, Yer Sarsan",
+      "name_drakemaw_raptor": "Ejder Ağzı Raptoru",
       "desc_valorsteed": "Gelişmiş seyahat hızı sağlayan, dayanıklı ve sağlam adımlı bir küheylan.",
       "desc_grag_bear": "Gelişmiş seyahat hızı sağlayan, dayanıklı ve sağlam adımlı bir ayı.",
       "desc_stalkglider_snail": "Gelişmiş seyahat hızı sağlayan, dayanıklı ve yavaş yanan bir salyangoz.",
@@ -1004,7 +1007,8 @@ export const tr_TR: EnTranslations = {
       "desc_shadowjump_toad": "Her arazi türünü aşan, şimşek hızındaki gölgeli sıçramalarla eğitilmiş, dev ve sağlam adımlı bir kurbağa.",
       "desc_stormfeather_griffin": "Rün nallı pençeleriyle yerde süzülen, kanatları katlı, asil bir fırtına grifonu.",
       "desc_thunderstrut_gobbler": "Uyanan Zirve'den kabararak inen, kuyruğu bir fırtına bulutu gibi açılmış devasa bir fırtına hindisi.",
-      "desc_terrorspark_groundshaker": "Ağır paletleri, büyük çaplı bir topu ve korkusuz pilotlar için yapılmış bir eyeri olan kompakt zırhlı bir makine."
+      "desc_terrorspark_groundshaker": "Ağır paletleri, büyük çaplı bir topu ve korkusuz pilotlar için yapılmış bir eyeri olan kompakt zırhlı bir makine.",
+      "desc_drakemaw_raptor": "Ejder Ağzı Kalderası'ndan gelen, eyere alıştırılmış bir yuva raptoru: tepeden tırnağa kas ve hız, hâlâ hafiften kül kokuyor."
     },
     "mountTraining": {
       "mountPrompt": "Eğitim Yiğit Küheylanına binmek için {key} tuşuna bas.",
@@ -1024,6 +1028,93 @@ export const tr_TR: EnTranslations = {
       "timeout": "Yarış Başarısız",
       "progress": "Kapılar {n}/{total}",
       "timeLeft": "{seconds}sn"
+    },
+    "pvp": {
+      "launcherTitle": "PvP",
+      "mobileLabel": "PvP",
+      "bracket1v1": "1v1",
+      "bracket2v2": "2v2"
+    },
+    "bg": {
+      "title": "Thornhollow Fields",
+      "blurb": "Two ruined keeps face each other across a walled hollow in the shadow of Thornpeak: Crimson to the south, Azure to the north, and the older Ruin Courtyard between them that neither has ever held. Five a side, one banner each, and the first to carry three of theirs home takes the field.",
+      "modeTag": "5v5 Capture the Flag",
+      "offlineNote": "Thornhollow Fields is syncing. The queue opens once the realm answers.",
+      "ratingSummary": "Rating. {wins} wins / {losses} losses",
+      "careerCaptures": "Career captures: {count}",
+      "enterQueue": "Enter the Queue",
+      "enterQueueParty": "Enter the Queue (party of {count})",
+      "leaveQueue": "Leave Queue",
+      "searching": "Searching. {count}/{size} in queue.",
+      "queuedParty": "Party of {count}.",
+      "queueNote": "Two teams of five. Steal the enemy banner and run it to your keep. First to 3 captures wins. Group up to 5 and queue together; grab Sprint Runes and weave the cover to lose your pursuers.",
+      "matchInProgress": "Battle in progress. {crimson}:{azure}.",
+      "ladderAllTime": "Ladder. All-Time",
+      "noRanked": "No champions ranked yet. Be the first.",
+      "ladderOnline": "Ladder. Online Now",
+      "noChallengers": "No champions online right now. Be the first.",
+      "playerLevelClassTitle": "{name}. Level {level} {className}",
+      "playerClassTitle": "{name}. {className}",
+      "crimson": "Crimson",
+      "azure": "Azure",
+      "yourTeamTitle": "Your team",
+      "clock": "{minutes}:{seconds}",
+      "formUp": "Form up: {seconds}",
+      "firstTo": "First to {caps} captures",
+      "flagState": {
+        "home": "Flag at the keep",
+        "carried": "Flag stolen!",
+        "dropped": "Flag on the ground"
+      },
+      "respawnIn": "Next wave: respawning in {seconds}",
+      "resultVictory": "Victory!",
+      "resultDefeat": "Defeat",
+      "resultDraw": "Draw",
+      "leavingIn": "Leaving the battleground in {seconds}",
+      "killFeed": "{killer} felled {victim}",
+      "killFeedFallen": "{victim} has fallen",
+      "foundBanner": "Battle found. You fight for the {team}!",
+      "countdownBanner": "Thornhollow Fields begins in {seconds}",
+      "startBanner": "Capture the flag!",
+      "flagTakenLog": "{name} has taken the {team} flag!",
+      "flagDroppedLog": "The {team} flag was dropped.",
+      "flagReturnedLog": "The {team} flag was returned.",
+      "dropFlagConfirmTitle": "Drop the flag?",
+      "dropFlagConfirmBody": "You are carrying the enemy flag. Dropping it leaves it on the ground, where either team can reach it.",
+      "dropFlagConfirmAccept": "Drop the flag",
+      "boardToggleLabel": "Match scoreboard. Press Enter to pin the full board open.",
+      "levelRequirement": "You must reach level {level} to unlock queueing for this battleground.",
+      "board": {
+        "kills": "Kills",
+        "assists": "Assists",
+        "deaths": "Deaths",
+        "captures": "Captures"
+      },
+      "flagTakenBanner": "The {takers} have taken the {team} flag!",
+      "flagReturnedBanner": "The {team} flag was returned!",
+      "capturedTeamBanner": "The {takers} have captured the {team} flag! {crimson}:{azure}",
+      "capturedLog": "{name} captured the {team} flag. Score {crimson}:{azure}.",
+      "victoryBanner": "Victory! Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "defeatBanner": "Defeat. Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "drawBanner": "Thornhollow Fields draw {crimson}:{azure}. Rating {rating} ({delta})",
+      "endBannerDetail": "Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "endLog": "Thornhollow Fields ended {crimson}:{azure}. Rating {rating} ({delta}).",
+      "endedTimer": "Time expired",
+      "endedForfeit": "The match was forfeited",
+      "endedTimerLog": "The match clock ran out; the higher score took the field.",
+      "endedForfeitLog": "The match was forfeited.",
+      "firstWinBonusLine": "First win of the day: +{honor} Honor",
+      "firstWinBonusLog": "First win of the day: you gain {honor} bonus Honor.",
+      "timeWarningMinutes": "{minutes} minutes remain",
+      "timeWarningOneMinute": "One minute remains",
+      "timeWarningMinutesLog": "{minutes} minutes remain in the battle.",
+      "timeWarningOneMinuteLog": "One minute remains in the battle.",
+      "map": {
+        "crimsonKeep": "Crimson Keep",
+        "azureKeep": "Azure Keep",
+        "ruinCourtyard": "The Ruin Courtyard",
+        "graveyard": "Graveyard"
+      }
     },
     "vcup": {
       "title": "Vadi Kupası",
@@ -1175,6 +1266,15 @@ export const tr_TR: EnTranslations = {
       "browserEffectsReduced": "Azaltılmış",
       "browserEffectsMinimal": "En Az",
       "browserEffectsNote": "Otomatik, tarayıcınıza ve cihazınıza göre ağır CSS efektlerini (bulanıklık, parıltı, arka plan hareketi) azaltır. Arayüz yavaş hissettiriyorsa elle düşürün.",
+      "graphicsApply": "Grafikleri Uygula",
+      "graphicsApplying": "Grafik ayarları uygulanıyor...",
+      "graphicsApplied": "Grafik ayarları uygulandı.",
+      "graphicsSaved": "Grafik ayarları kaydedildi. Etkin oluşturucu zaten bu ayarlarla eşleşiyor.",
+      "graphicsFailed": "Grafikler uygulanamadı. Önceki ayarların hâlâ etkin.",
+      "graphicsRetry": "Grafikleri Tekrar Dene",
+      "graphicsFatal": "Grafik kurtarma başarısız oldu. Devam etmek için oyunu yeniden yükle.",
+      "graphicsReload": "Oyunu Yeniden Yükle",
+      "graphicsDraftChanged": "Grafik değişiklikleri uygulanmaya hazır.",
       "interfaceMode": "Arayüz Modu",
       "interfaceModeAuto": "Otomatik",
       "interfaceModeDesktop": "Masaüstü",
@@ -1206,6 +1306,7 @@ export const tr_TR: EnTranslations = {
       "itemScoreLine": "Puan {score}",
       "showSecondaryActionBar": "İkincil Eylem Çubuğunu Göster",
       "showThirdActionBar": "Üçüncü Eylem Çubuğunu Göster",
+      "lockActionBars": "Eylem Çubuklarını Kilitle",
       "showTargetOfTarget": "Hedefin Hedefini Göster",
       "showAttackButton": "Saldırı Düğmesini Göster",
       "showDailyRewardsChest": "Günlük Ödül Sandığını Göster",
@@ -1367,20 +1468,38 @@ export const tr_TR: EnTranslations = {
     },
     "landing": {
       "highContrast": "Yüksek Kontrast",
-      "highContrastAria": "Yüksek kontrastlı arka planı aç/kapat: hareketli tanıtımı devre dışı bırakır, böylece başlangıç ekranı metni okunaklı kalır"
+      "highContrastAria": "Yüksek kontrastlı arka planı aç/kapat: hareketli tanıtımı devre dışı bırakır, böylece başlangıç ekranı metni okunaklı kalır",
+      "browserSupport": {
+        "title": "Dikkat: desteklenmeyen tarayıcı",
+        "body": "Bu tarayıcıda performans düşüklüğü yaşayabilirsin. En iyi deneyim için Windows, macOS veya Linux masaüstü uygulamasını indir. Tarayıcıda oynamayı mı tercih edersin? Chrome en iyi performansı verir, Firefox ve Safari da desteklenir.",
+        "getDesktopApp": "Masaüstü uygulamasını indir",
+        "continueInBrowser": "Tarayıcıda devam et",
+        "dismissAria": "Desteklenmeyen tarayıcı bildirimini kapat"
+      }
     },
     "warfare": {
       "honorAmount": "{amount} Onur",
       "dualPrice": "{money} + {honor}",
       "balance": "Onur: {amount}",
       "honorFloat": "+{amount} Onur",
+      "honorFloatReason": "+{amount} Honor ({reason})",
       "honorGain": "{amount} Onur ({reason}) kazanırsınız.",
       "notEnoughHonor": "Yeterli Onur yok.",
       "reasons": {
         "arenaWin": "Arena zaferi",
         "fiestaKill": "Fiesta avlaması",
         "fiestaComplete": "Fiesta tamamlandı",
-        "fiestaWin": "Fiesta zaferi"
+        "fiestaWin": "Fiesta zaferi",
+        "battlegroundWin": "Thornhollow Fields victory",
+        "battlegroundFirstWin": "first Thornhollow Fields win today",
+        "battlegroundComplete": "Thornhollow Fields battle fought",
+        "battlegroundKill": "honorable kill",
+        "battlegroundAssist": "killing blow assisted"
+      },
+      "floatReasons": {
+        "kill": "Kill",
+        "assist": "Assist",
+        "firstWin": "First Win"
       }
     },
     "charSheet": {
@@ -1736,6 +1855,7 @@ export const tr_TR: EnTranslations = {
       "itemAriaEnchanted": "{item}, adet {count}, büyülü kopya",
       "itemAriaBound": "{item}, adet {count}, bağlı kopya",
       "itemAriaMasterwork": "{item}, adet {count}, şaheser",
+      "itemAriaQuest": "{item}, adet {count}, görev eşyası",
       "filterGroupAria": "Çantaları kategoriye göre filtrele",
       "filterAll": "Tümü",
       "filterWeapon": "Silahlar",
@@ -1744,6 +1864,7 @@ export const tr_TR: EnTranslations = {
       "filterMaterial": "Malzemeler",
       "filterTool": "Aletler",
       "filterQuest": "Görev",
+      "filterQuestCountAria": "Görev, {count} öge",
       "filterMount": "Binekler",
       "sortAria": "Çanta ögelerini sırala",
       "sortRecent": "En son",
@@ -1752,6 +1873,7 @@ export const tr_TR: EnTranslations = {
       "searchPlaceholder": "Öge ara",
       "searchAria": "Çanta ögelerini ada göre ara",
       "noMatch": "Filtrelerinizle eşleşen öge yok.",
+      "noQuestItems": "Çantalarında görev eşyası yok.",
       "capacity": "{used}/{total}",
       "capacityAria": "Kullanılan çanta yuvaları: {used} / {total}",
       "backpack": "Sırt Çantası",
@@ -1785,6 +1907,7 @@ export const tr_TR: EnTranslations = {
       "dmgDoneReduce": "Verilen hasarı {pct}% azaltır",
       "heatingUp": "Bir sonraki ardışık Ateş kurucu kritik vuruşun Sıcak Seri kazandırır; kritik olmayan bir kurucu Isınıyor'u kaldırır",
       "elementalConvergencePrimed": "Diğer element okulundan bir sonraki büyün Element Yakınsaması kazandırır",
+      "carriedFlag": "You are carrying the enemy flag. Cancel this buff to drop it.",
       "battleStance": "Savaş Duruşu: %10 daha fazla öfke üretimi",
       "berserkerStance": "Berserker Duruşu: kritikler %3 daha sık gerçekleşir ve %3 daha sert vurur",
       "crit": "Kritik vuruş şansını %{pct} artırır",
@@ -1970,6 +2093,8 @@ export const tr_TR: EnTranslations = {
     },
     "materialHint": {
       "fineGrade": "Kaliteli derece. Malzemenin üstünde kademelenmiş bir aletle tam kademeli bir damardan toplanır ve sıradan sürümün gerektiği her yerde onun yerine sayılır.",
+      "cookingCatch": "Pişirme malzemesi. Yemeden önce pişirilmelidir.",
+      "usedBy": "Used by {crafts}.",
       "arcaneDust": "Sıradan ve az bulunur eşyalardan büyü bozularak elde edilen büyü malzemesi.",
       "arcaneEssence": "Nadir eşyalardan büyü bozularak elde edilen büyü malzemesi.",
       "arcaneShard": "Destansı ve efsanevi eşyalardan büyü bozularak elde edilen büyü malzemesi.",
@@ -2251,6 +2376,7 @@ export const tr_TR: EnTranslations = {
       "depositHint": "Yatırmak için tıkla",
       "depositPartialHint": "Bir kısmını yatırmak için Shift ile tıkla",
       "cannotDeposit": "Bankaya konulamaz",
+      "cannotDepositNow": "Şu anda yatırılamaz",
       "depositQuantityTitle": "{item} yatır",
       "depositQuantityInput": "Yatırılacak miktar",
       "depositQuantityConfirm": "Yatır",
@@ -2261,6 +2387,7 @@ export const tr_TR: EnTranslations = {
       "sortAria": "Banka eşyalarını sırala",
       "searchAria": "Banka eşyalarını ada göre ara",
       "depositAll": "Tüm malzemeleri yatır",
+      "depositAllTooltip": "Çantalarındaki tüm zanaat malzemelerini ve döküntü eşyaları tek seferde bankaya gönderir. Toplama aletlerine, kuşanılan teçhizata, görev eşyalarına ve sarf malzemelerine asla dokunulmaz.",
       "depositAllDone": "Yatırılan malzeme: {count}.",
       "depositAllFull": "Yatırılan malzeme: {count}. Banka artık dolu.",
       "depositAllNone": "Banka dolu: hiçbir şey yatırılmadı.",
@@ -2276,7 +2403,50 @@ export const tr_TR: EnTranslations = {
       "bonusAdvertWallet": "2 yuva kazanmak için bir cüzdan bağla.",
       "bonusReferralProgress": "{count}/{cap}",
       "bonusReferralExplainer": "Bir arkadaşını davet et: arkadaşın 10. seviyeye ulaştığında ikiniz de 2 yuva kazanırsınız (en fazla 5 arkadaş).",
-      "bonusSectionAria": "Bonus banka yuvaları ve daha fazlasını kazanmanın yolları"
+      "bonusSectionAria": "Bonus banka yuvaları ve daha fazlasını kazanmanın yolları",
+      "tabsAria": "Banka sekmeleri",
+      "personalTab": "Kişisel",
+      "guildTab": "Lonca",
+      "guildCapacityAria": "Kullanılan lonca bankası yuvaları: {used} / {total}",
+      "guildEmpty": "Lonca bankası boş.",
+      "guildTreasury": "Lonca hazinesi",
+      "guildDepositGold": "Para Yatır",
+      "guildWithdrawGold": "Para Çek",
+      "guildDepositGoldTitle": "Lonca hazinesine para yatır",
+      "guildWithdrawGoldTitle": "Lonca hazinesinden para çek",
+      "guildGoldAvailable": "Kullanılabilir: {amount}",
+      "guildBuyConfirm": "Lonca hazinesinden {price} karşılığında {count} ek lonca bankası yuvası satın alınsın mı?",
+      "guildBuyNote": "Lonca hazinesinden ödenir",
+      "guildTreasuryShort": "Hazine yetersiz",
+      "guildOpenBank": "Lonca bankasını aç",
+      "guildOpenConfirm": "Lonca bankası {price} karşılığında açılsın mı? Bu, kendi paranından ödenir.",
+      "guildOpenAccept": "Aç",
+      "guildOpenNote": "Lonca hazinesinden değil, kendi paranından ödenir",
+      "guildPurseShort": "Yeterli para yok",
+      "guildDormantNote": "Kilitli eşyalar çekilemez ve loncanın dağıtılmasını engeller.",
+      "guildDormantHint": "Bu eşya lonca bankasında kilitli ve çekilemez.",
+      "guildDormantAria": "{item}, adet {count}, çekilemez",
+      "guildUnknownItem": "Bilinmeyen eşya",
+      "guildDepositHint": "Lonca bankasına yatırmak için tıkla",
+      "guildCannotDeposit": "Lonca bankasına konulamaz",
+      "guildGoldCannotMove": "O miktar şu anda taşınamaz.",
+      "guildViewsAria": "Lonca bankası görünümleri",
+      "guildContentsTab": "İçerik",
+      "guildLogTab": "Günlük",
+      "logAria": "Lonca bankası etkinlik günlüğü",
+      "logNote": "En son {count} lonca bankası işlemi.",
+      "logLoading": "Lonca bankası günlüğü yükleniyor...",
+      "logEmpty": "Lonca bankasına henüz bir şey girmedi ya da çıkmadı.",
+      "logRefused": "Lonca bankası günlüğünü yalnızca subaylar okuyabilir.",
+      "logFormerMember": "Eski bir lonca üyesi",
+      "logDepositItem": "{actor}, {count} {item} yatırdı",
+      "logWithdrawItem": "{actor}, {count} {item} çekti",
+      "logDepositMoney": "{actor}, {amount} yatırdı",
+      "logWithdrawMoney": "{actor}, {amount} çekti",
+      "logBuySlots": "{actor}, {amount} karşılığında banka genişletmesi satın aldı",
+      "logOpenBank": "{actor}, lonca bankasını {amount} karşılığında açtı",
+      "logCharterFee": "{actor}, {amount} tutarında lonca kuruluş ücretini ödedi",
+      "logAdminPurge": "Bir yönetici {count} {item} kaldırdı"
     },
     "calendar": {
       "title": "Etkinlik Takvimi",
@@ -2313,10 +2483,6 @@ export const tr_TR: EnTranslations = {
         "marketDay": {
           "title": "Pazar Günü",
           "note": "Tüccar taze mal bekliyor. Dünya Pazarı'na göz atmak için güzel bir gün."
-        },
-        "fiestaNight": {
-          "title": "Fiesta Gecesi",
-          "note": "İkiye iki Fiesta ringi bu gece en gürültülü kalabalığını topluyor."
         },
         "arenaClash": {
           "title": "Arena Çatışması",
@@ -2555,6 +2721,18 @@ export const tr_TR: EnTranslations = {
         "artisansEye": "Ustanın Gözü",
         "quickeningCharm": "Yaylanma Tılsımı"
       },
+      "toolEffectTooltip": {
+        "kind": "Tool charm",
+        "bonus": {
+          "gatherersCache": "+1 yield per harvest while charged.",
+          "artisansEye": "Raises the harvest grade by 1 tool tier while charged.",
+          "quickeningCharm": "Shortens the node respawn timer it triggers."
+        },
+        "howToSlot": "Slot onto a mining, logging, or herbalism tool from the Professions window. Consumed when slotted.",
+        "charges": "Starts with {base} charges on a common tool (+{bonus} per rarity rung).",
+        "landOnly": "Does not slot on fishing rods.",
+        "openProfessions": "Open Professions to slot this onto a gathering tool."
+      },
       "toolEffectSlotButton": "{effect} Tak",
       "toolEffectRechargeButton": "Şarj Et",
       "toolEffectSlotted": "{effect}, {profession} üzerine takıldı.",
@@ -2591,8 +2769,8 @@ export const tr_TR: EnTranslations = {
     "crafting": {
       "title": "işçiliği",
       "close": "İşçiliği kapat",
-      "dialogOption": "Crafting",
-      "dialogOptionAria": "Open the crafting window for {craft}",
+      "dialogOption": "Üretim",
+      "dialogOptionAria": "{craft} için üretim penceresini aç",
       "craft": "Zanaat",
       "reagentsNeeded": "Gereklilikler:",
       "reagentLine": "{name}: {have}/{required}",
@@ -2667,6 +2845,8 @@ export const tr_TR: EnTranslations = {
       "masterworkToast": "Şaheser! {name}",
       "masterworkZoneLine": "{crafter} bir şaheser {name} yarattı!",
       "tierUpToast": "{craft}, {tier} seviyesine yükseldi!",
+      "skillUpToast": "{skill} skill increased to {level}!",
+      "skillUpSubtext": "Skill increased to {level}!",
       "trendNudge": "Elleriniz {archetype} yönüne eğiliyor. Uyumu {master} ile bekliyor.",
       "trendNudgeNoMaster": "Elleriniz {archetype} yönüne eğiliyor. Onu benimsemek için bir zanaat ustası arayın.",
       "attunedZoneLine": "{name}, {archetype} olarak uyumlandı!",
@@ -2902,7 +3082,7 @@ export const tr_TR: EnTranslations = {
       "countLabel": "{earned}/{total} yiğitlik",
       "completionAria": "{total} yiğitlikten {earned} tanesi kazanıldı",
       "recentLabel": "En son:",
-      "recentJumpAria": "Jump to {name}",
+      "recentJumpAria": "{name} konumuna atla",
       "nearestLabel": "Ramak kaldı:",
       "filterGroupAria": "Yiğitlikleri filtrele",
       "filterAll": "Tümü",
@@ -3128,6 +3308,7 @@ export const tr_TR: EnTranslations = {
       "talents": "Yetenekler",
       "arena": "Arena ve PvP",
       "valeCup": "Vadi Kupası",
+      "thornhollow": "Thornhollow Fields",
       "deeds": "Yiğitlikler Kitabı",
       "glossary": "Sözlük",
       "wishIKnew": "Keşke Bilseydim Dediklerim",
@@ -3898,23 +4079,25 @@ export const tr_TR: EnTranslations = {
       "duelsBody": "Karşılaştığın herhangi bir oyuncuyu dostane bir düelloya davet et. Gururdan başka kaybedilecek bir şey yok, bu yüzden bir eşleşmeyi öğrenmenin ya da dostça bir tartışmayı çözmenin en kolay yoludur.",
       "coliseumHeading": "Kül Kolezyumu",
       "coliseumBody": "Coliseum, diyarın arenasıdır; burada dereceli maçlarda diğer oyuncularla, bire bir ya da ikiye iki karşı karşıya gelirsin. Her kademe kendi sıralamasını tutar, bu yüzden bir galibiyet seni o merdivende, tüm diyarın görmesi için yukarı taşır. Bir kademeye tek başına ya da eşinle kaydolmak için Arena penceresini aç.",
-      "fiestaHeading": "İkiye iki Fiesta",
-      "fiestaBody": "Fiesta, tek bir kesintisiz müsabaka olarak oynanan hızlı, ikiye iki bir kapışmadır; her dövüşçü eşit bir zemine getirilir. Dövüş ilerledikçe güçlendirmeler seçersin; bunlar kitini anında yeniden şekillendiren hızlı takviyelerdir, böylece hiçbir maç tam olarak aynı oynanmaz.",
-      "augmentsNote": "Güçlendirmeler ve takviyeler yalnızca maç boyunca sürer. Kalıcı güçle değil, eğlenceli, anında kurgularla ilgilidirler, yani kimse parayla zafer satın alamaz.",
-      "wavesTitle": "Güçlendirmeler dalgalar halinde gelir",
-      "wavesBody": "Bir Fiesta müsabakası ilerledikçe sana taze seçimler sunar ve dövüş uzadıkça seçimler cüretkarlaşır. Bir dalgadan diğerine kurgunu inşa edersin, her seferinde birkaç seçenekten birini seçer ve müsabakanın geri kalanı için onu elinde tutarsın.",
-      "waveSilverTitle": "Gümüş",
-      "waveSilverBody": "Açılış dalgası: sınıfının temellerini keskinleştiren temiz, tek istatistikli takviyeler.",
-      "waveGoldTitle": "Altın",
-      "waveGoldBody": "Orta dalga: kurgunun şekillenmeye ve uyum tutturmaya başladığı iki yönlü kombolar.",
-      "wavePrismaticTitle": "Prizmatik",
-      "wavePrismaticBody": "Son dalga: kurguyu belirleyen, ekran eriten, en güzel anlamda saçma hissettirmesi amaçlanan sıçramalar.",
-      "yumiHeading": "Yumi'yi Koru",
-      "yumiBody": "Yumi'yi Koru, bir labirentte oynanan bir takım hedef modudur: her taraf kendi kedi yoldaşını korurken diğerininkini avlar. Ara sıra her iki kedi de labirentin yeni köşelerine ışınlanır, bu yüzden dövüş savunma, avlanma ve onları yeniden bulmak için yarışma arasında gidip gelir. Üçe üç ya da beşe beş olarak kuyruğa gir; dövüşte düşmek seni yalnızca kısa bir süre kenara çeker.",
-      "powerupsTitle": "Ringdeki takviyeler",
-      "powerupsBody": "Parlayan küreler de dövüşün ortasında arenaya düşer, kim önce ulaşırsa onun olur. Bilerek abartılıdırlar ve yalnızca kısa bir süre dayanırlar: bir göz kırpımlık göz kamaştırıcı hız için Hız İblisi, hantal bir deve dönüşmek için Devasa, zıplayan, düşük yerçekimli bir sıçrama için Ay Botları, ve ani bir öfke dalgası için Cinnet.",
       "ladderHeading": "Merdiveni tırmanmak",
       "ladderBody": "Dereceli oyun, konumunu zaman içinde takip eder. Nerede durduğunu ve diyarın zirvesini kimin tuttuğunu görmek için lider tablosuna bak."
+    },
+    "thornhollowPage": {
+      "heading": "Thornhollow Fields",
+      "intro": "A ranked 5v5 capture-the-flag battleground fought in a walled hollow in the old growth below Thornpeak, where two ruined keeps face each other down the length of a ravine and an older courtyard sits between them that neither has ever held. Two teams of five, two keeps, one goal: steal the enemy banner and run it home before they run yours.",
+      "queueHeading": "Queueing up",
+      "queueBody": "Open the Thornhollow Fields panel and enter the queue solo, or bring a party of up to five and queue together: parties are always kept on one team, and the remaining seats fill with solo champions. When ten stand ready, the match seats both teams at their keeps for a short form-up before the flags go live.",
+      "fieldHeading": "The field",
+      "fieldBody": "A walled, open-air field carved into three chambers: each team has its own field before its keep, and the walled Ruin Courtyard sits between them. Two curtain walls span the full width, and every move between chambers passes a contested crossing: the wide main gate, or the gatehouse, a small room straddling the wall whose offset doors force a jog past an ambush corner. Each keep is sealed except its mouth, so every flag run starts and ends through the same opening, and a low barricade breaks the straight charge into it. The courtyard holds the hollow heart ruin and the two flank Sprint Runes; the other two wait on the flag approaches. A Battle or Ward Rune (more damage dealt, or less damage taken, for a few seconds) waits at each main gate's courtyard mouth: both pads open the match on the same face and flip with every claim.",
+      "flagsHeading": "Flags",
+      "flagsBody": "Each keep holds its team flag. Take the enemy flag and carry it to your own stand to score; the first team to three captures wins, and a timed-out battle resolves on score. A slain carrier drops the flag where they fell: an enemy can take it up again, while its own team returns it home instantly just by reaching it. The flag also refuses to hide: picking it up breaks stealth, and a carrier who turns invisible by any means drops it on the spot.",
+      "pickupNote": "Picking a flag up is always a deliberate press of the battleground action key: nobody ever becomes the carrier by strafing through the wrong spot.",
+      "respawnHeading": "Falling in battle",
+      "respawnBody": "Death keeps the classic rite: your corpse lies where it fell until YOU release, and the spirit rises in the fenced graveyard beside your keep, warded there until your team's next respawn wave. The wave raises every waiting spirit together, and the two team waves are deliberately staggered, so the fight never fully resets at once. There is no corpse run and no Spirit Healer bargain: release, wait out the wave, fight.",
+      "carrierHeading": "Carrying the flag",
+      "carrierBody": "A carrier who holds the enemy flag too long grows more and more vulnerable, taking ever-increasing damage until the flag is captured, dropped, or returned. Hiding with the flag is a losing plan; running it home is the winning one.",
+      "ladderHeading": "The ladder",
+      "ladderBody": "Every match moves a persistent per-character battleground rating, win or lose, and the all-time board ranks the realm champions. Wins and hard-fought losses also pay Honor through the Warfare system."
     },
     "valeCupPage": {
       "heading": "Vadi Kupası",
@@ -5802,7 +5985,6 @@ export const tr_TR: EnTranslations = {
   "yumi": {
     "bracket3": "Yumi'yi Koru 3v3",
     "bracket5": "Yumi'yi Koru 5v5",
-    "enterQueue": "Yumi'yi Koru'ya Katıl!",
     "queue": {
       "join": "Yumi'yi Koru kuyruğuna katılıyorsun. Yoldaşını koru…",
       "leave": "Yumi'yi Koru kuyruğundan ayrılıyorsun.",
@@ -5840,9 +6022,6 @@ export const tr_TR: EnTranslations = {
   },
   "fiesta": {
     "bracket": "Fiesta",
-    "enterQueue": "Fiesta'ya Katıl!",
-    "practice": "🎉 Botlara Karşı Antrenman",
-    "practiceNote": "Çevrimdışı antrenman: 3 yapay zeka botu doğurur ve seni bir 2v2 Fiesta için kuyruğa sokar. Durdurmak için tekrar tıkla.",
     "banner": {
       "wave": "DALGA {wave}/{total} — BİR GÜÇLENDİRME SEÇ!",
       "augmentGained": "Güçlendirme kazanıldı: {name}!",
@@ -6099,16 +6278,16 @@ export const tr_TR: EnTranslations = {
   },
   "desktop": {
     "update": {
-      "checkingTitle": "Checking for updates...",
-      "checkingBody": "New versions download while you play.",
-      "uptodateTitle": "You're up to date",
+      "checkingTitle": "Güncellemeler kontrol ediliyor...",
+      "checkingBody": "Yeni sürümler siz oynarken indirilir.",
+      "uptodateTitle": "En güncel sürümdesin",
       "downloadingTitle": "{version} güncellemesi indiriliyor...",
-      "downloadingBody": "You can keep playing. It installs when you quit.",
+      "downloadingBody": "Oynamaya devam edebilirsin. Çıkış yaptığında kurulur.",
       "readyTitle": "{version} güncellemesi hazır",
       "readyBody": "Çıkış yaptığında kurulur ya da şimdi yeniden başlat.",
       "restart": "Şimdi Yeniden Başlat",
       "later": "Daha Sonra",
-      "dismiss": "Dismiss"
+      "dismiss": "Kapat"
     },
     "crash": {
       "title": "World of ClaudeCraft",
@@ -6324,7 +6503,6 @@ export const tr_TR: EnTranslations = {
       "mobileMore": "Daha Fazla",
       "mobileMoreAria": "Daha fazla menü göster",
       "mobileSocial": "Sosyal",
-      "mobileArena": "Arena",
       "mobileMenu": "Menü",
       "mobileSettings": "Ayarlar",
       "mobileUse": "Kullan",
@@ -6441,7 +6619,7 @@ export const tr_TR: EnTranslations = {
         "nameplates": "İsim Levhalarını Aç/Kapat",
         "meters": "Hasar Ölçerleri",
         "social": "Arkadaşlar ve Lonca",
-        "arena": "Arena (Kül Koliseumu)",
+        "arena": "PvP (Thornhollow Fields and Arenas)",
         "chat": "Sohbeti Aç",
         "attack": "Saldır",
         "actionBarSlot": "Eylem Çubuğu {slot}"
@@ -6575,6 +6753,11 @@ export const tr_TR: EnTranslations = {
     },
     "system": {
       "playerDeath": "Öldün.",
+      "deathRecapKillerAbility": "Öldün. {killer} tarafından {ability} ile öldürüldün.",
+      "deathRecapKiller": "Öldün. {killer} tarafından öldürüldün.",
+      "deathRecapAbility": "Öldün. {ability} tarafından öldürüldün.",
+      "deathRecapFalling": "Öldün. Düşerek can verdin.",
+      "deathRecapDrowned": "Öldün. Boğuldun.",
       "respawn": "Kendini dinlenmiş ve yeniden sapasağlam hissediyorsun.",
       "ignoringChat": "{name} oyuncusunun sohbeti görmezden geliniyor.",
       "noLongerIgnoring": "{name} artık görmezden gelinmiyor.",
@@ -7065,6 +7248,7 @@ export const tr_TR: EnTranslations = {
       "quest": "Görev Eşyası",
       "junk": "Döküntü",
       "fineMaterial": "Kaliteli Malzeme",
+      "material": "Malzeme",
       "food": "Yiyecek",
       "drink": "İçecek",
       "tool": "Alet",
@@ -7097,6 +7281,9 @@ export const tr_TR: EnTranslations = {
       "useFood": "Kullanım: {seconds} saniyede {amount} can yeniler. Yerken oturur kalmalısın.",
       "useDrink": "Kullanım: {seconds} saniyede {amount} mana yeniler. İçerken oturur kalmalısın.",
       "questItem": "Görev Eşyası",
+      "questRelated": "Görev: {quest}",
+      "questRules": "Satılamaz, bankaya konulamaz veya takas edilemez.",
+      "questOrphaned": "Aktif hiçbir görev için gerekli değil.",
       "classes": "Sınıflar: {classes}",
       "sellPrice": "Satış fiyatı: {money}",
       "clickBuy": "Satın almak için tıkla",
@@ -7232,6 +7419,12 @@ export const tr_TR: EnTranslations = {
       "reclaim": "Geri al",
       "buyAria": "{item} eşyasını {price} karşılığında satın al",
       "reclaimAria": "{item} eşyasını geri al",
+      "buyConfirmTitle": "Satın Alma İşlemini Onayla",
+      "buyConfirmBody": "{item}, {price} karşılığında satın alınsın mı?",
+      "buyConfirmBodyStack": "{item} x{count}, {price} karşılığında (her biri {each}) satın alınsın mı?",
+      "buyConfirmAccept": "Satın Al",
+      "buyConfirmCancel": "İptal",
+      "buyChanged": "Bu ilan sen onaylamadan önce değişti. Fiyatı kontrol et ve tekrar dene.",
       "sellNote": "Çantalarınızdaki malları satışa koyun. Bir eşya satıldığında Tüccar %{cut} pay alır. {max} ilan yuvasından {used} tanesini kullanıyorsunuz.",
       "sellPickEmpty": "Satılacak eşyayı seçmek için çantalarınızdaki bir eşyaya tıklayın.",
       "quantity": "Miktar",
@@ -8719,6 +8912,18 @@ export const tr_TR: EnTranslations = {
       "fen_muster_order": {
         "name": "Fenbridge Seferberlik Emri"
       },
+      "firebottle": {
+        "name": "Ateş Şişesi"
+      },
+      "murloc_hut": {
+        "name": "Mudfin Kulübesi"
+      },
+      "restless_skull": {
+        "name": "Huzursuz Kafatası"
+      },
+      "vanguard_bone": {
+        "name": "Öncü Kemiği"
+      },
       "mire_prowler_pelt": {
         "name": "Bataklık Sinsisi Postu"
       },
@@ -9994,6 +10199,21 @@ export const tr_TR: EnTranslations = {
       "reins_terrorspark_groundshaker": {
         "name": "Kontak Anahtarı: Dehşetkıvılcım, Yer Sarsan"
       },
+      "reins_drakemaw_raptor": {
+        "name": "Ejder Ağzı Raptoru'nun Dizginleri"
+      },
+      "moggers_hide_quiver": {
+        "name": "Mogger'ın Deri Sadağı"
+      },
+      "cragmaw_huntquiver": {
+        "name": "Cragmaw'un Av Sadağı"
+      },
+      "gravewyrm_bone_quiver": {
+        "name": "Mezarejderi Kemik Sadağı"
+      },
+      "direfang_quiver": {
+        "name": "Direfang Sadağı"
+      },
       "conjured_water4": {
         "name": "Sihirle Yaratılmış Kaynak Suyu"
       },
@@ -10989,6 +11209,21 @@ export const tr_TR: EnTranslations = {
       "spider_egg_sac": {
         "name": "Örümcek Yumurta Kesesi"
       },
+      "spider_egg": {
+        "name": "Kuluçka Anası Yumurtası"
+      },
+      "widow_hatchling": {
+        "name": "Dul Yumurcağı"
+      },
+      "drowned_warlord": {
+        "name": "Boğulmuş Savaş Lordu"
+      },
+      "brakka_wallbreaker": {
+        "name": "Duvar Kıran Brakka"
+      },
+      "threnos_first_voice": {
+        "name": "İlk Ses Threnos"
+      },
       "grave_silt_bulwark": {
         "name": "Mezarbalçığı Siperi"
       },
@@ -11168,6 +11403,18 @@ export const tr_TR: EnTranslations = {
       },
       "cindraleth_maw_matriarch": {
         "name": "Ağız Anaerkili Cindraleth"
+      },
+      "dragonkin_egg": {
+        "name": "Ejder Soyu Yumurtası"
+      },
+      "dragonkin_whelp": {
+        "name": "Ejder Soyu Yavrusu"
+      },
+      "dragonkin_broodguard": {
+        "name": "Ejder Soyu Yuva Bekçisi"
+      },
+      "drakemaw_broodlord": {
+        "name": "Ejder Ağzı Yuva Lordu"
       },
       "gilded_stag": {
         "name": "Yaldızlı Geyik"
@@ -12201,7 +12448,7 @@ export const tr_TR: EnTranslations = {
       },
       "q_no_rest": {
         "title": "Sazlıkta Huzur Yok",
-        "text": "O buhurdanlıklardaki ayin, boğulmuşları bataklığın değdiği her yerde dirilmeye bağlıyor; bataklık ise her şeye değiyor. Ölüler, dirilerden fazla olana dek bu sazlıklarda huzur olmayacak. Ayini henüz bozamayız, ama onu askerlerinden boşaltabiliriz. 14 Boğulmuş Ölüyü daha huzura kavuştur.",
+        "text": "Bu buhurdanların üzerindeki ayin boğulmuşları ayağa kalkmaya zorluyor ve şimdi onlara önderlik edecek kadar güçlü birini de ayağa kaldırdı. Muhafızlar ona Boğulmuş Savaş Lordu diyor; o Boğulmuş Şapel'i elinde tuttuğu sürece ölüler saflarını korur. Onu yere ser, {playerName}, geri kalanlar bataklığa dağılıp gitsin.",
         "completion": "Ölülere, efendilerinin hiç göstermediği kadar merhamet gösteriyorsun. Şunu al; fazlasıyla hak ettin.",
         "objectives": {
           "0": {
@@ -12479,9 +12726,6 @@ export const tr_TR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Ejdertarikatı Bağnazı öldürüldü"
-          },
-          "1": {
-            "label": "Ejdertarikatı Emirleri"
           }
         }
       },
@@ -12492,9 +12736,6 @@ export const tr_TR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Ejder Tarikatı Nekromatiği öldürüldü"
-          },
-          "1": {
-            "label": "Ayinsel Filakter"
           }
         }
       },

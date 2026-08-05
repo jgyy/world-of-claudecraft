@@ -44,10 +44,11 @@ describe('deed_i18n English resolution', () => {
 
   it('manifests one row per name and desc plus one per title reward', () => {
     const manifest = deedTranslationManifest();
-    // 232 deeds x (name + desc) + the 30 shipped title rewards (both counts
-    // pinned by tests/deeds_content.test.ts).
-    expect(manifest.length).toBe(232 * 2 + 30);
-    expect(manifest.filter((row) => row.field === 'title').length).toBe(30);
+    // 238 deeds x (name + desc) + the 31 shipped title rewards (both counts
+    // pinned by tests/deeds_content.test.ts): the Drakelands brood pair plus
+    // the four Thornhollow Fields battleground deeds on the same base.
+    expect(manifest.length).toBe(238 * 2 + 31);
+    expect(manifest.filter((row) => row.field === 'title').length).toBe(31);
     expect(manifest).toContainEqual({
       id: 'prog_veteran',
       field: 'title',

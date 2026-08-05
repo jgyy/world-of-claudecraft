@@ -231,6 +231,11 @@ export const RARE_SLAIN_TEMPLATES = new Set([
   'gleamstag',
   'old_marrowshell',
   'aurelhorn',
+  // The Drakelands dragonkin brood rework (v0.35): the four standing
+  // broodlords (rare-flagged camp elites). Cindraleth's deed rides her kill
+  // QUEST trigger instead of a slain mark, so the shipped boss template
+  // needs no rare flag.
+  'drakemaw_broodlord',
 ]);
 
 // Zone fishing catches that count as "a fish" for the chr_ first-cast deeds
@@ -621,6 +626,8 @@ export const METER_DIRTY_KEYS: Record<DeedMeterId, readonly string[]> = {
   talentPoints: [],
   arenaRankedMatches: [],
   arenaRankedWins: [],
+  bgWins: [],
+  bgCaptures: [],
   vcupWins: [],
   vcupGuildWins: [],
   bankPurchasedSlots: [],
@@ -726,6 +733,8 @@ const METERS: Record<DeedMeterId, (meta: PlayerMeta) => number> = {
   talentPoints: (m) => pointsSpent(m.talents),
   arenaRankedMatches: (m) => m.arenaWins + m.arenaLosses + m.arena2v2Wins + m.arena2v2Losses,
   arenaRankedWins: (m) => m.arenaWins + m.arena2v2Wins,
+  bgWins: (m) => m.bgWins,
+  bgCaptures: (m) => m.bgCaptures,
   vcupWins: (m) => m.vcupWins,
   vcupGuildWins: (m) => m.vcupGuildWins,
   bankPurchasedSlots: (m) => m.bank.purchasedSlots,
