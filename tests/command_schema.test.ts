@@ -40,10 +40,11 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // resolves a tier and never a tool), recharge_tool_effect (the acquisition
 // craft), the guild_bank_* cluster (Guild Bank Phase 2) plus guild_bank_log
 // (the activity log's on-demand READ request; its answer comes back on its own
-// one-shot 'gbanklog' frame, not the snapshot), and the battleground surface
-// (bg_queue/bg_leave/bg_flag sends plus the dev-only bg_queue force start).
-const EXPECTED_SEND_COUNT = 189;
-const EXPECTED_DISPATCH_COUNT = 202;
+// one-shot 'gbanklog' frame, not the snapshot), the battleground surface
+// (bg_queue/bg_leave/bg_flag sends plus the dev-only bg_queue force start),
+// and stopAutoAttackOnTargetSwitch joining as a send + dispatch pair (issue #1358).
+const EXPECTED_SEND_COUNT = 190;
+const EXPECTED_DISPATCH_COUNT = 203;
 const EXPECTED_DISPATCH_ONLY_COUNT = 13;
 
 // The chat sub-channel routing switch (server/game.ts `switch

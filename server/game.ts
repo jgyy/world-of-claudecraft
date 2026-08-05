@@ -6078,6 +6078,9 @@ export class GameServer {
       case 'targetNearestFriendly':
         sim.targetNearestFriendly(pid);
         break;
+      case 'stopAutoAttackOnTargetSwitch':
+        sim.setStopAutoAttackOnTargetSwitch(!!msg.enabled, pid);
+        break;
       case 'attack':
         sim.startAutoAttack(pid);
         break;

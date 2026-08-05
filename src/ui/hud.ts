@@ -528,6 +528,7 @@ import { partyFrameSignature, selectPartyFrameMembers } from './party_frames';
 import { PartyFramesPainter } from './party_frames_painter';
 import type { PerfOverlayHooks } from './perf_overlay_settings';
 import { PET_ACTION_ICONS, petFeedButtonState } from './pet_action_icons';
+import { findOwnPet, petFrameDescriptorInto } from './pet_frame_view';
 import {
   chatPlayerContextActions,
   type PlayerContextAction,
@@ -1402,6 +1403,21 @@ export class Hud {
   // Cached showTargetOfTarget preference (set from main.ts applySetting via
   // setShowTargetOfTarget); when off, the frame is painted hidden every frame.
   private showTargetOfTarget = false;
+  // Pet frame (showPetFrame option): element refs for the #pet-frame strip under the
+  // player frame, resolved ONCE like the refs above. A FOURTH instance of the
+  // unit_frame family (petFramePainter below), driven by pet_frame_view.ts.
+  private petFrameEl = $('#pet-frame');
+  private petNameEl = $('#petf-name');
+  private petLevelEl = $('#petf-level');
+  private petHpEl = $('#petf-hp');
+  private petHpTextEl = $('#petf-hp-text');
+  private petPortraitEl = $('#petf-portrait') as unknown as HTMLCanvasElement;
+  // The pet whose portrait the painter's repaint gate redraws this frame; set just
+  // before the paint() call that fires the gate (mirrors totPortraitSubject).
+  private petPortraitSubject: Entity | null = null;
+  // Cached showPetFrame preference (set from main.ts applySetting via
+  // setShowPetFrame); when off, the frame is painted hidden every frame.
+  private showPetFrame = true;
   // The target whose portrait the family painter's repaint gate redraws this frame.
   // The gate fires synchronously inside the targetFramePainter.paint() call below,
   // so this holds the subject for that one call (the old inline block read `target`
@@ -3396,6 +3412,19 @@ export class Hud {
         onPositioned: (active) => this.setPlayerFrameDetached(active),
       });
     }
+    if (this.petFrameEl) {
+      // The pet frame is a select button (role=button, tabindex=0 in the markup):
+      // clicking or keying it selects your pet, the same action the targetPet
+      // keybind performs. Pets are ordinary targetable entities, and your own pet
+      // stays selectable while DEAD (src/sim/dead_target.ts) so the Revive action on
+      // the pet bar below stays reachable from here.
+      this.petFrameEl.addEventListener('click', () => this.targetOwnPet());
+      this.petFrameEl.addEventListener('keydown', (ev: KeyboardEvent) => {
+        if (ev.key !== 'Enter' && ev.key !== ' ') return;
+        ev.preventDefault();
+        this.targetOwnPet();
+      });
+    }
     this.partyFrameMover = new MovableFrame({
       frame: this.partyFramesEl,
       storageKey: PARTY_FRAME_POS_KEY,
@@ -3440,6 +3469,11 @@ export class Hud {
       const stack = $('#actionbar-stack');
       if (frame.parentElement !== stack) stack.insertBefore(frame, stack.firstChild);
     }
+    // The pet cluster (#pet-cluster: command bar plus health frame) deliberately
+    // does NOT travel with the player frame. It is its own row at the top of the
+    // action-bar stack, holding the pet's controls as well as its health, so it
+    // belongs with the bars rather than hanging off the player frame; dragging the
+    // player frame elsewhere leaves the pet UI where the player put the bars.
   }
 
   // Buffs on the Player Frame (aurasOnPlayerFrame): reparent the player's own
@@ -3831,6 +3865,7 @@ export class Hud {
   private readonly playerFrameBuffer = newUnitFrameBuffer();
   private readonly targetFrameBuffer = newUnitFrameBuffer();
   private readonly totFrameBuffer = newUnitFrameBuffer();
+  private readonly petFrameBuffer = newUnitFrameBuffer();
   private readonly playerFrameDescriptor: UnitFrameDescriptor = {
     present: true,
     hpFrac: 0,
@@ -3855,6 +3890,9 @@ export class Hud {
     ...ABSENT_TARGET_DESCRIPTOR,
   };
   private readonly totFrameDescriptor: UnitFrameDescriptor = {
+    ...ABSENT_TARGET_DESCRIPTOR,
+  };
+  private readonly petFrameDescriptor: UnitFrameDescriptor = {
     ...ABSENT_TARGET_DESCRIPTOR,
   };
   // The per-frame FCT painter: the pooled-div ring that replaced the per-event
@@ -3971,6 +4009,27 @@ export class Hud {
     {
       shownDisplay: 'flex',
       repaintPortrait: () => this.drawTargetOfTargetPortrait(),
+    },
+  );
+  // The pet frame is the FOURTH instance of the unit_frame family. Like the
+  // target-of-target it carries name + level + hp and toggles flex/none, and it
+  // passes NO resource group because a pet has no power type at all (createMob
+  // never sets resourceType) and NO absorb overlay. Unlike the tot frame it DOES
+  // take stateClasses: a dead pet is a real, actionable state (Revive is on the pet
+  // bar right below), so the frame dims itself rather than only reading "Dead".
+  private readonly petFramePainter = new UnitFramePainter(
+    this.writerFacet,
+    {
+      frame: this.petFrameEl,
+      name: this.petNameEl,
+      level: this.petLevelEl,
+      hpFill: this.petHpEl,
+      hpText: this.petHpTextEl,
+    },
+    {
+      shownDisplay: 'flex',
+      repaintPortrait: () => this.drawPetPortrait(),
+      stateClasses: true,
     },
   );
   // Deferred "Auto-Attack on Ability Use" for TIMED casts: set by castSlot when
@@ -4916,6 +4975,32 @@ export class Hud {
     this.showTargetOfTarget = on;
   }
 
+  // A pet is always an ordinary mob entity, so its portrait is the family crest the
+  // target frame draws for any mob. No player branch: a pet is never kind 'player'.
+  private drawPetPortrait(): void {
+    const pet = this.petPortraitSubject;
+    if (!pet) return;
+    this.portraits.drawCrest(
+      this.petPortraitEl,
+      crestIdForEntity(pet.kind, MOBS[pet.templateId]?.family),
+    );
+  }
+
+  // Toggle the pet frame (showPetFrame option), driven from main.ts applySetting.
+  // When off, the per-frame update paints the frame hidden.
+  setShowPetFrame(on: boolean): void {
+    this.showPetFrame = on;
+  }
+
+  /** Select the player's own pet: the pet frame's click/key action and the targetPet
+   *  keybind's handler (main.ts). A no-op when the player has no pet. Deliberately
+   *  independent of the showPetFrame option, so the keybind still works with the
+   *  frame hidden. */
+  targetOwnPet(): void {
+    const pet = this.ownPet();
+    if (pet) this.sim.targetEntity(pet.id);
+  }
+
   private itemIcon(item: ItemDef): string {
     return knownItemIconHtml(item);
   }
@@ -5826,6 +5911,10 @@ export class Hud {
     // string, so a switch can never draw the old language; clearing is about not
     // carrying dead rasters in the sprite budget.
     this.mapPainter.relocalize();
+    // The delve minimap/world-map schematic bakes the localized compass-north
+    // glyph into its cached background canvas, keyed only on module id; a
+    // language switch alone never busts that cache, so force one rebuild.
+    this.delvePainter.relocalize();
     // The unit-frame move/lock buttons' labels are set once at construction + on
     // toggle, so re-localize them in place on a language switch (same reason as
     // the party rows above).
@@ -7575,10 +7664,7 @@ export class Hud {
   }
 
   private ownPet(): Entity | null {
-    for (const e of this.sim.entities.values()) {
-      if (e.kind === 'mob' && e.ownerId === this.sim.playerId) return e;
-    }
-    return null;
+    return findOwnPet(this.sim.entities.values(), this.sim.playerId);
   }
 
   // The warrior stance bar: a small row of stance toggles stacked above the
@@ -7640,9 +7726,11 @@ export class Hud {
     }
   }
 
-  private renderPetBar(): void {
+  // `pet` is resolved ONCE per frame by update() and passed in, shared with the pet
+  // frame above it: both surfaces need the same entity, and each resolving its own
+  // would walk the interest-scoped roster twice per frame.
+  private renderPetBar(pet: Entity | null): void {
     const bar = $('#petbar') as HTMLElement;
-    const pet = this.ownPet();
     // Value-diffed body-class flag the mobile top-band layout reads (see field doc):
     // toggled only on a real transition so the per-frame path stays write-free.
     // Deliberately toggled on EVERY host, not just touch: only body.mobile-touch
@@ -8474,6 +8562,27 @@ export class Hud {
       this.totFramePainter.paint(unitFrameViewInto(this.totFrameBuffer, ABSENT_TARGET_DESCRIPTOR));
     }
 
+    // Pet frame: your own pet's health, under the player frame. Painted EVERY frame
+    // like the player frame rather than on the target frame's tier-throttled cadence,
+    // because pet health is information the owner acts on (Mend Pet, Revive, pulling
+    // it off a mob), and the gameplay-neutral-graphics invariant forbids a tier knob
+    // delaying that. It is cheap to paint at full rate: five writes, all elided, so a
+    // pet whose health has not moved costs zero DOM mutations. When the player has no
+    // pet (six of the nine classes, always) or the option is off, this paints hidden,
+    // which also resets the painter's portrait gate for the next summon or tame.
+    // ONE roster scan per frame, shared with renderPetBar below (it takes `pet` as a
+    // parameter for exactly this reason): the pet bar already resolved the pet every
+    // frame before this change, so the frame adds a surface, not a second walk.
+    const pet = this.ownPet();
+    const framedPet = this.showPetFrame ? pet : null;
+    this.petPortraitSubject = framedPet;
+    this.petFramePainter.paint(
+      unitFrameViewInto(
+        this.petFrameBuffer,
+        petFrameDescriptorInto(this.petFrameDescriptor, framedPet, t('hud.core.dead')),
+      ),
+    );
+
     // cast bar: the player instance localizes the cast id (castDisplayName), layers
     // the mount summon channel (mountSummonBarState) and the player-only eat/drink
     // overlay (consumeBarState), and clears on hide. Priority: spell cast > mount
@@ -8566,7 +8675,7 @@ export class Hud {
       };
       this.actionBarWorldInput = actionBarWorld;
     }
-    this.renderPetBar();
+    this.renderPetBar(pet);
     this.renderStanceBar();
     this.flushPendingProcAuraNotes();
     if (this.spellbookWindow.isOpen) this.spellbookWindow.tickOpen();

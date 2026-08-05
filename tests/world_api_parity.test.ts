@@ -125,6 +125,7 @@ export const IWORLD_MEMBERS = [
   { name: 'tabTarget', kind: 'method' },
   { name: 'targetNearestFriendly', kind: 'method' },
   { name: 'friendlyTabTarget', kind: 'method' },
+  { name: 'setStopAutoAttackOnTargetSwitch', kind: 'method' },
   { name: 'startAutoAttack', kind: 'method' },
   { name: 'stopAutoAttack', kind: 'method' },
   { name: 'interact', kind: 'method' },
@@ -541,16 +542,18 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // IWorldGuildBank members (guildBankInfo, one data read, plus five
     // commands), leaving 287. The guild bank ACTIVITY LOG adds one read member
     // (guildBankLog, a method because reading it is what requests the cold
-    // payload on demand: it has no snapshot key), leaving 288. The Thornhollow
-    // Fields release adds the four battleground facet members on top of
-    // that base: the bgInfo data member plus the bgQueueJoin / bgQueueLeave /
-    // bgFlagAction commands, leaving 293. This branch's commission order
-    // board (issue #1298) adds commissionOrders (data) plus
-    // openCommissionOrder/cancelCommissionOrder/acceptCommissionOrder/
-    // deliverCommissionOrder (methods), leaving 298.
-    expect(IWORLD_MEMBERS.length).toBe(298);
+    // payload on demand: it has no snapshot key), leaving 288. Thornhollow
+    // Fields adds the four battleground facet members on top of that base:
+    // the bgInfo data member plus the bgQueueJoin / bgQueueLeave / bgFlagAction
+    // commands, leaving 293 (this base tip already carries the Book of Deeds
+    // recent strip's deedsRecent read). The stop-auto-attack-on-target-switch
+    // setting adds setStopAutoAttackOnTargetSwitch (method), leaving 294. This
+    // branch's commission order board (issue #1298) adds commissionOrders
+    // (data) plus openCommissionOrder/cancelCommissionOrder/
+    // acceptCommissionOrder/deliverCommissionOrder (methods), leaving 299.
+    expect(IWORLD_MEMBERS.length).toBe(299);
     expect(DATA_MEMBERS.length).toBe(76);
-    expect(METHOD_MEMBERS.length).toBe(222);
+    expect(METHOD_MEMBERS.length).toBe(223);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -813,6 +816,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'setPetAutoWaterJet',
       'setPetMode',
       'setSpec',
+      'setStopAutoAttackOnTargetSwitch',
       'setTownFocus',
       'slotToolEffect',
       'socialInfo',
@@ -1132,6 +1136,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'setPetAutoWaterJet',
       'setPetMode',
       'setSpec',
+      'setStopAutoAttackOnTargetSwitch',
       'setTownFocus',
       'slotToolEffect',
       'socketRiftGem',
@@ -1263,6 +1268,7 @@ const FACET_TARGETING = [
   'tabTarget',
   'targetNearestFriendly',
   'friendlyTabTarget',
+  'setStopAutoAttackOnTargetSwitch',
 ] as const satisfies readonly (keyof IWorldTargeting)[];
 type _ExhaustTargeting = AssertNever<
   Exclude<keyof IWorldTargeting, (typeof FACET_TARGETING)[number]>
@@ -1743,8 +1749,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
 
   it('the facet union equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(298);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(298);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(299);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(299);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);
