@@ -388,26 +388,26 @@ describe('the worst case in shipped content (#2457)', () => {
     expect(MOBS.mire_prowler.componentTags).toEqual(['hide', 'claw', 'meat']);
     // Re-seeded 1 -> 11 (#2514) -> 104 (the v0.32.0 base merge) -> 211 (the
     // zones 1-3 quest-dedupe content pass) -> 277 (the Galecrest quest-camp fix,
-    // #2887). mire_prowler is a
-    // MIXED corpse and claw no longer costs a tier roll, so every draw after the
-    // first shifts whenever either branch touches the harvest sequence, and the
-    // old seed stops rolling the double proc entirely. This is the only fixture in
-    // shipped content that reaches the four-entry ledger through the real command,
-    // so the seed is re-HUNTED to keep the double proc, never re-recorded to
-    // whatever the new seed happens to yield: a seed that does not proc leaves the
-    // merge/append path untested rather than merely re-numbered. The expected
-    // yields below are unchanged from #2514 precisely because 277 was picked to
-    // reproduce them.
-    const { sim, a, mob } = setup(277, 'mire_prowler');
+    // #2887) -> re-hunted again for claw joining
+    // HARVEST_COMPONENT_ITEMS/HARVEST_COMPONENT_SPECIMENS (this branch).
+    // mire_prowler is a MIXED corpse and claw no longer costs a tier roll, so
+    // every draw after the first shifts whenever either branch touches the
+    // harvest sequence, and the old seed stops rolling the double proc
+    // entirely. This is the only fixture in shipped content that reaches the
+    // four-entry ledger through the real command, so the seed is re-HUNTED to
+    // keep the double proc, never re-recorded to whatever the new seed
+    // happens to yield: a seed that does not proc leaves the merge/append
+    // path untested rather than merely re-numbered.
+    const { sim, a, mob } = setup(152, 'mire_prowler');
     const { results, loots } = harvest(sim, mob.id, undefined, a);
     expect(results).toHaveLength(1);
     expect(results[0].yields).toEqual([
-      { itemId: 'rough_hide', qty: 3, rarity: 'rare', kind: 'plain' },
+      { itemId: 'rough_hide', qty: 1, rarity: 'rare', kind: 'plain' },
       { itemId: 'sharp_claw', qty: 1, rarity: 'rare', kind: 'plain' },
-      { itemId: 'game_meat', qty: 1, rarity: 'epic', kind: 'plain' },
+      { itemId: 'game_meat', qty: 2, rarity: 'rare', kind: 'plain' },
       { itemId: 'pristine_hide', qty: 1, rarity: 'rare', kind: 'specimen' },
       { itemId: 'pristine_claw', qty: 1, rarity: 'rare', kind: 'specimen' },
-      { itemId: 'prime_cut', qty: 1, rarity: 'epic', kind: 'specimen' },
+      { itemId: 'prime_cut', qty: 1, rarity: 'rare', kind: 'specimen' },
     ]);
     // All three specimens really rolled, which is what makes this the
     // triple-proc case rather than six entries reached some other way.
