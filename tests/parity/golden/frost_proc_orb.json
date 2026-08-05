@@ -183,8 +183,8 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 965,
-      "state": "9902099f",
-      "events": "20aaaa42",
+      "state": "0bebd9af",
+      "events": "54de3459",
       "rng": {
         "draws": 357,
         "digest": "4c41bac8"
@@ -208,13 +208,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 199
+            "damageDealt": 207
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 199
+              "dummyDamage": 207
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -393,7 +393,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499801,
+          "hp": 499793,
           "id": 964,
           "inCombat": true,
           "kind": "mob",
@@ -425,7 +425,7 @@
           "threat": [
             [
               959,
-              199
+              207
             ]
           ],
           "weapon": {
@@ -438,7 +438,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 965,
-      "state": "9902099f",
+      "state": "0bebd9af",
       "events": "741638a5",
       "rng": {
         "draws": 357,
@@ -463,13 +463,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 199
+            "damageDealt": 207
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 199
+              "dummyDamage": 207
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -648,7 +648,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499801,
+          "hp": 499793,
           "id": 964,
           "inCombat": true,
           "kind": "mob",
@@ -680,7 +680,7 @@
           "threat": [
             [
               959,
-              199
+              207
             ]
           ],
           "weapon": {
