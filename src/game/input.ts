@@ -85,6 +85,7 @@ export interface InputCallbacks {
       | 'social'
       | 'arena'
       | 'valecup'
+      | 'bgFlag'
       | 'dungeonFinder'
       | 'leaderboard'
       | 'calendar'
@@ -508,6 +509,40 @@ export class Input {
     // Suspending input drops any charging Vale Cup sport move (held Shoot etc.).
     this.releaseHeldSlots();
     if (hadHeldInput) this.noteIntent('move');
+  }
+
+  /**
+   * Reset every transient gameplay-input source before an in-place client
+   * transition. Unlike an ordinary modal suspension, this also drops autorun,
+   * click-to-move, controller/touch/gamepad state, and latched jumps so no old
+   * intent can resume when the transition curtain comes down.
+   */
+  resetForClientTransition(): void {
+    const emoteWheelWasOpen = this.emoteWheelHeldCodes.size > 0;
+    this.keys.clear();
+    this.keyJumpUntil = 0;
+    this.touchJumpUntil = 0;
+    this.autorun = false;
+    this.clearClickMove();
+    this.touchMove = { forward: false, back: false, strafeLeft: false, strafeRight: false };
+    this.gamepadMove = { forward: false, back: false, strafeLeft: false, strafeRight: false };
+    this.touchLookActive = false;
+    this.touchLookVector = { x: 0, y: 0 };
+    this.gamepadLookActive = false;
+    this.controllerMoveInput = null;
+    this.controllerFacing = null;
+    this.leftDown = false;
+    this.rightDown = false;
+    this.cameraDragActive = false;
+    this.downButton = -1;
+    this.pointerLockRequestedForDrag = false;
+    this.releaseHeldSlots();
+    this.emoteWheelHeldCodes.clear();
+    if (emoteWheelWasOpen) this.cb.onEmoteWheel(false);
+    if (document.pointerLockElement === this.canvas) document.exitPointerLock?.();
+    this.suspendMovement = true;
+    this.updateCursor();
+    this.noteIntent('move');
   }
 
   // Passing null clears an armed capture without invoking a callback, so a
@@ -1057,6 +1092,9 @@ export class Input {
         return;
       case 'valecup':
         this.cb.onUiKey('valecup');
+        return;
+      case 'bgFlag':
+        this.cb.onUiKey('bgFlag');
         return;
       case 'leaderboard':
         this.cb.onUiKey('leaderboard');

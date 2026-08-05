@@ -2,6 +2,124 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const nl_NL: Partial<Record<TranslationKey, string>> = {
+  'hud.system.deathRecapAbility': 'Je bent gestorven. Gedood door {ability}.',
+  'hud.system.deathRecapDrowned': 'Je bent gestorven. Je bent verdronken.',
+  'hud.system.deathRecapFalling': 'Je bent gestorven. Je bent te pletter gevallen.',
+  'hud.system.deathRecapKiller': 'Je bent gestorven. Gedood door {killer}.',
+  'hud.system.deathRecapKillerAbility': "Je bent gestorven. Gedood door {killer}'s {ability}.",
+  'hudChrome.bags.filterQuestCountAria': 'Quest, {count} voorwerpen',
+  'hudChrome.bags.itemAriaQuest': '{item}, aantal {count}, questvoorwerp',
+  'hudChrome.bags.noQuestItems': 'Geen questvoorwerpen in je tassen.',
+  'hudChrome.bank.cannotDepositNow': 'Kan nu niet worden gestort',
+  'hudChrome.bank.depositAllTooltip':
+    'Stuurt in één keer elk ambachtsreagens en rommelvoorwerp uit je tassen naar de bank. Verzamelgereedschap, gedragen uitrusting, questvoorwerpen en verbruiksartikelen worden nooit aangeraakt.',
+  'hudChrome.bank.guildBuyConfirm':
+    '{count} extra gildebankvakken kopen voor {price} uit de gildekas?',
+  'hudChrome.bank.guildBuyNote': 'Betaald uit de gildekas',
+  'hudChrome.bank.guildCannotDeposit': 'Kan niet in de gildebank',
+  'hudChrome.bank.guildCapacityAria': 'Gildebankvakken gebruikt: {used} van {total}',
+  'hudChrome.bank.guildContentsTab': 'Inhoud',
+  'hudChrome.bank.guildDepositGold': 'Geld storten',
+  'hudChrome.bank.guildDepositGoldTitle': 'Geld storten in de gildekas',
+  'hudChrome.bank.guildDepositHint': 'Klik om in de gildebank te storten',
+  'hudChrome.bank.guildDormantAria': '{item}, aantal {count}, kan niet worden opgenomen',
+  'hudChrome.bank.guildDormantHint':
+    'Dit voorwerp is vergrendeld in de gildebank en kan niet worden opgenomen.',
+  'hudChrome.bank.guildDormantNote':
+    'Vergrendelde voorwerpen kunnen niet worden opgenomen en verhinderen het ontbinden van de gilde.',
+  'hudChrome.bank.guildEmpty': 'De gildebank is leeg.',
+  'hudChrome.bank.guildGoldAvailable': 'Beschikbaar: {amount}',
+  'hudChrome.bank.guildGoldCannotMove': 'Dat bedrag kan nu niet worden verplaatst.',
+  'hudChrome.bank.guildLogTab': 'Logboek',
+  'hudChrome.bank.guildOpenAccept': 'Openen',
+  'hudChrome.bank.guildOpenBank': 'De gildebank openen',
+  'hudChrome.bank.guildOpenConfirm':
+    'De gildebank openen voor {price}? Dit wordt betaald uit je eigen geld.',
+  'hudChrome.bank.guildOpenNote': 'Betaald uit je eigen geld, niet uit de gildekas',
+  'hudChrome.bank.guildPurseShort': 'Niet genoeg geld',
+  'hudChrome.bank.guildTab': 'Gilde',
+  'hudChrome.bank.guildTreasury': 'Gildekas',
+  'hudChrome.bank.guildTreasuryShort': 'Kastekort',
+  'hudChrome.bank.guildUnknownItem': 'Onbekend voorwerp',
+  'hudChrome.bank.guildViewsAria': 'Gildebankweergaven',
+  'hudChrome.bank.guildWithdrawGold': 'Geld opnemen',
+  'hudChrome.bank.guildWithdrawGoldTitle': 'Geld opnemen uit de gildekas',
+  'hudChrome.bank.logAdminPurge': 'Een beheerder verwijderde {count} {item}',
+  'hudChrome.bank.logAria': 'Activiteitenlogboek van de gildebank',
+  'hudChrome.bank.logBuySlots': '{actor} kocht een bankuitbreiding voor {amount}',
+  'hudChrome.bank.logCharterFee': '{actor} betaalde de gildeoprichtingskosten van {amount}',
+  'hudChrome.bank.logDepositItem': '{actor} stortte {count} {item}',
+  'hudChrome.bank.logDepositMoney': '{actor} stortte {amount}',
+  'hudChrome.bank.logEmpty': 'Er is nog niets in of uit de gildebank verplaatst.',
+  'hudChrome.bank.logFormerMember': 'Een oud-gildelid',
+  'hudChrome.bank.logLoading': 'Het logboek van de gildebank wordt geladen...',
+  'hudChrome.bank.logNote': 'De {count} meest recente gildebankacties.',
+  'hudChrome.bank.logOpenBank': '{actor} opende de gildebank voor {amount}',
+  'hudChrome.bank.logRefused': 'Alleen gildeofficieren kunnen het logboek van de gildebank lezen.',
+  'hudChrome.bank.logWithdrawItem': '{actor} nam {count} {item} op',
+  'hudChrome.bank.logWithdrawMoney': '{actor} nam {amount} op',
+  'hudChrome.bank.personalTab': 'Persoonlijk',
+  'hudChrome.bank.tabsAria': 'Banktabbladen',
+  'hudChrome.crafting.dialogOption': 'Vervaardigen',
+  'hudChrome.crafting.dialogOptionAria': 'Het vervaardigingsvenster openen voor {craft}',
+  'hudChrome.deeds.recentJumpAria': 'Ga naar {name}',
+  'hudChrome.landing.browserSupport.body':
+    'Je kunt verminderde prestaties ondervinden in deze browser. Download voor de beste ervaring de desktop-app voor Windows, macOS of Linux. Speel je liever in een browser? Chrome presteert het best, en Firefox en Safari worden ook ondersteund.',
+  'hudChrome.landing.browserSupport.continueInBrowser': 'Doorgaan in de browser',
+  'hudChrome.landing.browserSupport.dismissAria':
+    'De melding over niet-ondersteunde browser sluiten',
+  'hudChrome.landing.browserSupport.getDesktopApp': 'Download de desktop-app',
+  'hudChrome.landing.browserSupport.title': 'Let op: niet-ondersteunde browser',
+  'hudChrome.materialHint.cookingCatch':
+    'Kookingrediënt. Moet worden gekookt voordat het gegeten wordt.',
+  'hudChrome.mounts.desc_drakemaw_raptor':
+    'Een zadelmakke broedraptor uit de Drakenmuil-Caldera, één en al pezen en vaart, nog altijd zwak naar as geurend.',
+  'hudChrome.mounts.name_drakemaw_raptor': 'Drakenmuil-Raptor',
+  'hudChrome.options.graphicsApplied': 'Grafische instellingen toegepast.',
+  'hudChrome.options.graphicsApply': 'Grafica toepassen',
+  'hudChrome.options.graphicsApplying': 'Grafische instellingen worden toegepast...',
+  'hudChrome.options.graphicsDraftChanged': 'Grafische wijzigingen zijn klaar om toe te passen.',
+  'hudChrome.options.graphicsFailed':
+    'Grafica kon niet worden toegepast. Je vorige instellingen zijn nog actief.',
+  'hudChrome.options.graphicsFatal':
+    'Herstel van de grafische instellingen is mislukt. Herlaad het spel om door te gaan.',
+  'hudChrome.options.graphicsReload': 'Spel herladen',
+  'hudChrome.options.graphicsRetry': 'Grafica opnieuw proberen',
+  'hudChrome.options.graphicsSaved':
+    'Grafische instellingen opgeslagen. De actieve renderer komt al overeen.',
+  'hudChrome.options.lockActionBars': 'Actiebalken vergrendelen',
+  'itemUi.kind.material': 'Materiaal',
+  'itemUi.market.buyChanged':
+    'Die vermelding is veranderd voordat je bevestigde. Controleer de prijs en probeer het opnieuw.',
+  'itemUi.market.buyConfirmAccept': 'Kopen',
+  'itemUi.market.buyConfirmBody': '{item} kopen voor {price}?',
+  'itemUi.market.buyConfirmBodyStack': '{item} x{count} kopen voor {price} ({each} per stuk)?',
+  'itemUi.market.buyConfirmCancel': 'Annuleren',
+  'itemUi.market.buyConfirmTitle': 'Bevestig aankoop',
+  'itemUi.tooltip.questOrphaned': 'Niet nodig voor een actieve quest.',
+  'itemUi.tooltip.questRelated': 'Quest: {quest}',
+  'itemUi.tooltip.questRules': 'Kan niet worden verkocht, in de bank gezet of geruild.',
+  'desktop.update.checkingBody': 'Nieuwe versies worden gedownload terwijl je speelt.',
+  'desktop.update.checkingTitle': 'Controleren op updates...',
+  'desktop.update.dismiss': 'Sluiten',
+  'desktop.update.downloadingBody': 'Je kunt blijven spelen. Het installeert zodra je stopt.',
+  'desktop.update.uptodateTitle': 'Je hebt de nieuwste versie',
+  'entities.items.firebottle.name': 'Vuurfles',
+  'entities.items.murloc_hut.name': 'Mudfin-Hut',
+  'entities.items.reins_drakemaw_raptor.name': 'Teugels van de Drakenmuil-Raptor',
+  'entities.items.restless_skull.name': 'Rusteloze Schedel',
+  'entities.items.vanguard_bone.name': 'Bot van de Voorhoede',
+  'entities.mobs.brakka_wallbreaker.name': 'Brakka de Muurbreker',
+  'entities.mobs.dragonkin_broodguard.name': 'Drakenvolk-Broedwacht',
+  'entities.mobs.dragonkin_egg.name': 'Drakenvolk-Ei',
+  'entities.mobs.dragonkin_whelp.name': 'Drakenvolk-Welp',
+  'entities.mobs.drakemaw_broodlord.name': 'Drakenmuil-Broedheer',
+  'entities.mobs.drowned_warlord.name': 'De Verdronken Krijgsheer',
+  'entities.mobs.spider_egg.name': 'Broedmoeder-Ei',
+  'entities.mobs.threnos_first_voice.name': 'Threnos de Eerste Stem',
+  'entities.mobs.widow_hatchling.name': 'Weduwenjong',
+  'entities.quests.q_no_rest.text':
+    'De rite op die wierookvaten dwingt de verdronkenen om op te staan, en nu heeft ze er een opgewekt die sterk genoeg is om hen te leiden. De wachters noemen hem de Verdronken Krijgsheer, en zolang hij de Verdronken Kapel in bezit houdt, blijven de doden in het gelid. Breek hem, {playerName}, en de rest stuift uiteen, terug het moeras in.',
   'hud.social.tenure.recruit': 'Rekruut',
   'hud.social.tenure.veteran': 'Veteraan',
   'hudChrome.keybinds.mouseHint':
@@ -2384,9 +2502,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hudChrome.calendar.events.delveDay.note':
     'Broeder Halven markeert zijn kaarten: een mooie dag om het Ingestorte Reliekschrijn te trotseren.',
   'hudChrome.calendar.events.delveDay.title': 'Delvedag',
-  'hudChrome.calendar.events.fiestaNight.note':
-    'De 2v2 Fiesta-ring trekt vanavond zijn luidruchtigste publiek.',
-  'hudChrome.calendar.events.fiestaNight.title': 'Fiesta-avond',
   'hudChrome.calendar.events.fishingDerby.note':
     'Hengelaars staan langs de meren. Neem een hengel mee en wissel visverhalen uit.',
   'hudChrome.calendar.events.fishingDerby.title': 'Visderby',
@@ -3593,6 +3708,7 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'entities.items.crag_warden_cudgel.name': 'Knuppel van de Rotswachter',
   'entities.items.craghorn_staff.name': 'Rotshoorn-Staf',
   'entities.items.cragmaw_huntcord.name': 'Cragmaws Jachtkoord',
+  'entities.items.cragmaw_huntquiver.name': 'Cragmaws Jachtpijlkoker',
   'entities.items.cragmaw_prowlboots.name': 'Cragmaw-Sluiplaarzen',
   'entities.items.cragwalker_boots.name': 'Rotsloperlaarzen',
   'entities.items.crimson_amber_armor_plate.name': 'Karmijnen Amber',
@@ -3672,6 +3788,7 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'entities.items.gravewardens_shiv.name': 'Grafwachters Steekmes',
   'entities.items.gravewoven_raiment.name': 'Grafgeweven Gewaad',
   'entities.items.gravewyrm_gauntlets.name': 'Grafwurm-Handschoenen',
+  'entities.items.gravewyrm_bone_quiver.name': 'Grafwurm-Beenpijlkoker',
   'entities.items.gravewyrm_mantle.name': 'Grafwurm-Mantel',
   'entities.items.gravewyrm_sabatons.name': 'Grafwurm-Sabatons',
   'entities.items.gravewyrm_scale_hauberk.name': 'Grafwurm-Schubmaliënkolder',
@@ -3732,6 +3849,7 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'entities.items.mistveil_grips.name': 'Nevelsluier-Grepen',
   'entities.items.moggers_copper_cudgel.name': 'Moggers Koperen Knuppel',
   'entities.items.moggers_shiv.name': 'Moggers Steekmes',
+  'entities.items.moggers_hide_quiver.name': 'Moggers Leren Pijlkoker',
   'entities.items.moggers_stomper_boots.name': 'Moggers Stamplaarzen',
   'entities.items.monarch_crown_helm.name': 'Monarchenkroon',
   'entities.items.copper_mining_pick.name': 'Koperen Mijnpik',
@@ -3855,6 +3973,7 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'entities.items.stormcallers_spaulders.name': 'Galecall-Schouderstukken',
   'entities.items.bonewrought_greatsword.name': 'Bonewrought-Grootzwaard',
   'entities.items.direfang_greatblade.name': 'Direfang-Grootkling',
+  'entities.items.direfang_quiver.name': 'Direfang-Pijlkoker',
   'entities.items.bonewrought_bulwark.name': 'Bonewrought-Bolwerk',
   'entities.items.wraithfire_orb.name': 'Wraithfire-Orb',
   'entities.items.stormshard_leggings.name': 'Stormscherf-Beenbescherming',
@@ -4192,7 +4311,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_cult_orders.completion':
     'Dit schrift... Ik zag het laatst in Morthens grimoire, in Oostbeek. Dezelfde hand heeft elk graf geleid waarover wij gevochten hebben, {playerName}.',
   'entities.quests.q_cult_orders.objectives.0.label': 'Wurmsekte-Dweper gedood',
-  'entities.quests.q_cult_orders.objectives.1.label': 'Wurmsekte-Bevelen',
   'entities.quests.q_cult_orders.text':
     'De dwepers bewegen nu doelgericht, wachten uitgezet, voorraden geteld, als soldaten voor een belegering. Sektariërs die zich organiseren, zijn sektariërs die bevelen opvolgen, {playerName}. Dood er acht meer en breng me vier sets van hun geschreven bevelen. Ik wil de hand kennen die hen aanvoert.',
   'entities.quests.q_cult_orders.title': 'Bevelen van Beneden',
@@ -4369,15 +4487,12 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_necromancers.completion':
     'Moge het Licht ons vergeven. Deze bevatten de doden van het Dal en het veen - elk lijk dat de Grafroepers ooit hebben opgewekt, geoogst. Ze bouwden nooit een leger, {playerName}. Ze inden een tiend.',
   'entities.quests.q_necromancers.objectives.0.label': 'Wurmsekte-Necromancer gedood',
-  'entities.quests.q_necromancers.objectives.1.label': 'Rituele Phylacterie',
   'entities.quests.q_necromancers.text':
     'De bevelen spreken van een "ring van phylacterieën" - zielenvaten, {playerName}, rond het Heiligdom geplaatst om het te voeden. De necromancers van de sekte dragen ze als heilige relikwieën. Dood acht necromancers en breng me drie ongebroken phylacterieën. Ik moet weten welke zielen ze bevatten.',
   'entities.quests.q_necromancers.title': 'De Phylacterie-Ring',
   'entities.quests.q_no_rest.completion':
     'Je geeft de doden meer genade dan hun meesters ooit deden. Neem dit aan - je hebt het meer dan verdiend.',
   'entities.quests.q_no_rest.objectives.0.label': 'Verdronken Doden ter ruste gelegd',
-  'entities.quests.q_no_rest.text':
-    'Het ritueel op die wierookvaten bindt de verdronkenen om op te staan waar het moeras hen ook raakt - en het moeras raakt alles. Er zal geen rust zijn in dit riet tot de doden de levenden overtreffen. We kunnen het ritueel nog niet ongedaan maken, maar we kunnen het van soldaten ontdoen. Leg nog 14 van de Verdronken Doden ter ruste.',
   'entities.quests.q_no_rest.title': 'Geen Rust in het Riet',
   'entities.quests.q_nythraxis_bound_guardian.completion':
     "De drie relikwieën vertellen hetzelfde verhaal: Aldren vocht om zijn koning te verdedigen, Malric doorbrak de grens van de dood, en Voss probeerde te stoppen wat volgde. Het zegel verzwakt, en deze zegelring is de sleutel tot Nythraxis' tombe. Je bent nu afgestemd om De Crypte van Nythraxis te betreden. Keer terug naar de verlaten crypte, ontgrendel de koninklijke deur, en treed Nythraxis tegemoet voordat de woede van de oude koning zich buiten Doorntop verspreidt.",
@@ -4741,7 +4856,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'fiesta.end.draw': 'FIESTA GELIJKSPEL! Te dichtbij om te zeggen!',
   'fiesta.end.loss': 'FIESTA VERLOREN! Op naar de revanche!',
   'fiesta.end.win': 'FIESTA GEWONNEN! 🎉 Wat een feest!',
-  'fiesta.enterQueue': 'Doe mee aan de Fiesta!',
   'fiesta.error.leaderOnly':
     'Alleen de groepsleider mag je team in de wachtrij zetten voor {label}.',
   'fiesta.error.noAugment': 'Je hebt op dit moment geen versterking om te kiezen.',
@@ -4759,9 +4873,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'fiesta.powerup.pow_colossus.name': 'Kolos',
   'fiesta.powerup.pow_moon_boots.name': 'Maanlaarzen',
   'fiesta.powerup.pow_speed_demon.name': 'Snelheidsduivel',
-  'fiesta.practice': '🎉 Oefenen tegen Bots',
-  'fiesta.practiceNote':
-    'Offline oefenen: brengt 3 AI-bots voort en zet je in de wachtrij voor een 2v2-Fiesta. Klik nogmaals om te stoppen.',
   'fiesta.queue.join': 'Je sluit je aan bij de 2v2-Fiesta-wachtrij. Maak je klaar om te FEESTEN…',
   'fiesta.queue.leave': 'Je verlaat de 2v2-Fiesta-wachtrij.',
   'fiesta.queue.teamLeave': 'Je team verlaat de 2v2-Fiesta-wachtrij.',
@@ -5010,38 +5121,18 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'guide.abilityHook.thunder_clap': 'Raakt alles om je heen en vertraagt hun aanvallen.',
   'guide.abilityHook.wrath':
     'Een natuurbout die van afstand op een doelwit wordt geworpen, je vertrouwde nuke.',
-  'guide.arenaPage.augmentsNote':
-    'Augments en power-ups gelden alleen voor de wedstrijd. Ze draaien om speelse, ter plekke bedachte builds, niet om blijvende macht, zodat niemand zich een weg naar de winst koopt.',
   'guide.arenaPage.coliseumBody':
     'Het Coliseum is de arena van het rijk, waar je andere spelers tegemoet treedt in ranglijstwedstrijden, één tegen één of twee tegen twee. Elke categorie heeft zijn eigen ranglijst, dus een overwinning tilt je hoger op die ladder, zichtbaar voor het hele rijk. Open het Arenavenster om je in te schrijven voor een categorie, alleen of met je partner.',
   'guide.arenaPage.coliseumHeading': 'Het Asgrauwe Colosseum',
   'guide.arenaPage.duelsBody':
     'Daag elke speler die je tegenkomt uit voor een vriendschappelijk duel. Er staat niets op het spel behalve trots, dus het is de makkelijkste manier om een matchup te leren of een vriendschappelijk meningsverschil te beslechten.',
   'guide.arenaPage.duelsHeading': 'Duels',
-  'guide.arenaPage.fiestaBody':
-    'Fiesta is een snel, twee-tegen-twee gevecht dat als één doorlopende partij wordt uitgevochten, waarbij elke strijder op gelijke voet wordt gebracht. Terwijl het gevecht loopt, draft je augments, snelle boosts die je kit gaandeweg hervormen, zodat geen twee wedstrijden helemaal hetzelfde spelen.',
-  'guide.arenaPage.fiestaHeading': 'Twee tegen twee Fiesta',
   'guide.arenaPage.heading': 'Arena en PvP',
   'guide.arenaPage.intro':
     'Wil je jezelf meten met andere spelers? Speler tegen speler is ingebouwd, en het is altijd iets wat je kiest, nooit iets wat je opgedrongen wordt.',
   'guide.arenaPage.ladderBody':
     'Ranglijstspel volgt je positie over de tijd. Bekijk het scorebord om te zien waar je staat en wie de top van het rijk bezit.',
   'guide.arenaPage.ladderHeading': 'De ladder beklimmen',
-  'guide.arenaPage.powerupsBody':
-    'Gloeiende bollen vallen ook middenin het gevecht in de arena, gratis voor wie ze als eerste bereikt. Ze zijn opzettelijk over de top en duren maar even: Speed Demon voor een flits van verblindend tempo, Colossus om uit te dijen tot een logge reus, Moon Boots voor een stuiterende sprong met lage zwaartekracht, en Berserker voor een plotselinge golf van razernij.',
-  'guide.arenaPage.powerupsTitle': 'Power-ups in de ring',
-  'guide.arenaPage.waveGoldBody':
-    "De middelste golf: tweesnijdende combo's waar je build vorm begint te krijgen en gaat zingen.",
-  'guide.arenaPage.waveGoldTitle': 'Goud',
-  'guide.arenaPage.wavePrismaticBody':
-    'De laatste golf: build-bepalende, schermversmeltende pieken bedoeld om belachelijk aan te voelen op de beste manier.',
-  'guide.arenaPage.wavePrismaticTitle': 'Prismatisch',
-  'guide.arenaPage.waveSilverBody':
-    'De openingsgolf: schone, enkelvoudige statboosts die de basis van je klasse aanscherpen.',
-  'guide.arenaPage.waveSilverTitle': 'Zilver',
-  'guide.arenaPage.wavesBody':
-    'Een Fiesta-partij reikt je gaandeweg verse keuzes aan, en de keuzes worden gewaagder naarmate het gevecht langer duurt. Je bouwt van de ene golf naar de volgende, kiest elke keer een van een paar opties en houdt het voor de rest van de partij.',
-  'guide.arenaPage.wavesTitle': 'Augments komen in golven',
   'guide.bestiary.flavor.gravecaller_cultist':
     'Gewaden dragende dienaren van de doodscultus wier werk de graven bezoedelt van het Dal tot de toppen. Waar ze samenkomen, rusten de doden niet.',
   'guide.bestiary.flavor.grubjaw':
@@ -6118,7 +6209,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hud.core.mapCanvasLabel': 'Kaart',
   'hud.core.mapSummary': 'Kaart van {zone}.',
   'hud.core.maxLevel': 'MAX NIVEAU',
-  'hud.core.mobileArena': 'Arena',
   'hud.core.mobileAttack': 'Aanvallen',
   'hud.core.mobileCamera': 'Camera — dubbeltik om te centreren',
   'hud.core.mobileChat': 'Chat',
@@ -6216,7 +6306,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'hud.errors.whisperMissing': "Er is geen speler met de naam '{name}' online.",
   'hud.errors.whisperSelf': 'Je mompelt in jezelf. Niemand hoort het.',
   'hud.keybinds.actions.actionBarSlot': 'Actiebalk {slot}',
-  'hud.keybinds.actions.arena': 'Arena (Ashen Coliseum)',
   'hud.keybinds.actions.attack': 'Aanvallen',
   'hud.keybinds.actions.attackMove': 'Aanvalsverplaatsing',
   'hud.keybinds.actions.autorun': 'Automatisch rennen aan/uit',
@@ -8290,9 +8379,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
     'Scheurt het pantser van het doelwit open en verlaagt het met {damage}% per toepassing. Stapelt tot 5 keer. Genereert veel dreiging.',
   'entities.mobs.training_dummy.name': 'Oefenpop',
   'entities.mobs.yumi_cat.name': 'Yumi',
-  'guide.arenaPage.yumiBody':
-    'Bescherm Yumi is een teamdoelspel dat in een doolhof wordt gespeeld: elke kant bewaakt zijn eigen kattenmetgezel terwijl hij die van de ander bejaagt. Zo nu en dan flitsen beide katten naar nieuwe hoeken van het doolhof, zodat het gevecht heen en weer gaat tussen verdedigen, jagen en de race om ze opnieuw te vinden. Sluit aan als drie tegen drie of vijf tegen vijf; sneuvelen in de strijd zet je maar even op de bank.',
-  'guide.arenaPage.yumiHeading': 'Bescherm Yumi',
   'hudChrome.archetypeTitle.hobbyLabel': 'Liefhebberij',
   'hudChrome.auraEffect.armorPct': 'Vermindert pantser met {pct}%',
   'hudChrome.auraEffect.armorPctStacks': 'Vermindert pantser met {pct}% ({stacks} stapels)',
@@ -8312,7 +8398,6 @@ export const nl_NL: Partial<Record<TranslationKey, string>> = {
   'yumi.bracket5': 'Bescherm Yumi 5v5',
   'yumi.end.loss': 'NEDERLAAG! Jouw Yumi is gevallen.',
   'yumi.end.win': 'OVERWINNING! Yumi is veilig!',
-  'yumi.enterQueue': 'Doe mee met Bescherm Yumi!',
   'yumi.error.partyTooBig3': 'Bescherm Yumi 3v3 staat een groep van maximaal drie toe.',
   'yumi.error.partyTooBig5': 'Bescherm Yumi 5v5 staat een groep van maximaal vijf toe.',
   'yumi.hud.aria': 'Jouw Yumi op {mine} van {max} gezondheid, vijandige Yumi op {theirs}.',

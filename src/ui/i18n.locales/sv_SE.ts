@@ -2,6 +2,123 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const sv_SE: Partial<Record<TranslationKey, string>> = {
+  'hud.system.deathRecapAbility': 'Du har dött. Dräpt av {ability}.',
+  'hud.system.deathRecapDrowned': 'Du har dött. Du drunknade.',
+  'hud.system.deathRecapFalling': 'Du har dött. Du föll till din död.',
+  'hud.system.deathRecapKiller': 'Du har dött. Dräpt av {killer}.',
+  'hud.system.deathRecapKillerAbility': 'Du har dött. Dräpt av {killer}s {ability}.',
+  'hudChrome.bags.filterQuestCountAria': 'Uppdrag, {count} föremål',
+  'hudChrome.bags.itemAriaQuest': '{item}, antal {count}, uppdragsföremål',
+  'hudChrome.bags.noQuestItems': 'Inga uppdragsföremål i dina väskor.',
+  'hudChrome.bank.cannotDepositNow': 'Kan inte sättas in just nu',
+  'hudChrome.bank.depositAllTooltip':
+    'Skickar alla hantverksreagenser och skräpföremål från dina väskor till banken i en enda resa. Insamlingsverktyg, utrustad utrustning, uppdragsföremål och förbrukningsvaror rörs aldrig.',
+  'hudChrome.bank.guildBuyConfirm':
+    'Köp {count} extra fack i gillesbanken för {price} från gillets kassa?',
+  'hudChrome.bank.guildBuyNote': 'Betalas från gillets kassa',
+  'hudChrome.bank.guildCannotDeposit': 'Kan inte läggas i gillesbanken',
+  'hudChrome.bank.guildCapacityAria': 'Använda fack i gillesbanken: {used} av {total}',
+  'hudChrome.bank.guildContentsTab': 'Innehåll',
+  'hudChrome.bank.guildDepositGold': 'Sätt in pengar',
+  'hudChrome.bank.guildDepositGoldTitle': 'Sätt in pengar i gillets kassa',
+  'hudChrome.bank.guildDepositHint': 'Klicka för att sätta in i gillesbanken',
+  'hudChrome.bank.guildDormantAria': '{item}, antal {count}, kan inte tas ut',
+  'hudChrome.bank.guildDormantHint':
+    'Det här föremålet är fastlåst i gillesbanken och kan inte tas ut.',
+  'hudChrome.bank.guildDormantNote':
+    'Fastlåsta föremål kan inte tas ut och hindrar gillet från att upplösas.',
+  'hudChrome.bank.guildEmpty': 'Gillesbanken är tom.',
+  'hudChrome.bank.guildGoldAvailable': 'Tillgängligt: {amount}',
+  'hudChrome.bank.guildGoldCannotMove': 'Det beloppet kan inte flyttas just nu.',
+  'hudChrome.bank.guildLogTab': 'Logg',
+  'hudChrome.bank.guildOpenAccept': 'Öppna',
+  'hudChrome.bank.guildOpenBank': 'Öppna gillesbanken',
+  'hudChrome.bank.guildOpenConfirm':
+    'Öppna gillesbanken för {price}? Detta betalas med dina egna pengar.',
+  'hudChrome.bank.guildOpenNote': 'Betalas med dina egna pengar, inte gillets kassa',
+  'hudChrome.bank.guildPurseShort': 'Otillräckligt med pengar',
+  'hudChrome.bank.guildTab': 'Gille',
+  'hudChrome.bank.guildTreasury': 'Gillets kassa',
+  'hudChrome.bank.guildTreasuryShort': 'Kassan räcker inte',
+  'hudChrome.bank.guildUnknownItem': 'Okänt föremål',
+  'hudChrome.bank.guildViewsAria': 'Vyer för gillesbanken',
+  'hudChrome.bank.guildWithdrawGold': 'Ta ut pengar',
+  'hudChrome.bank.guildWithdrawGoldTitle': 'Ta ut pengar från gillets kassa',
+  'hudChrome.bank.logAdminPurge': 'En administratör tog bort {count} {item}',
+  'hudChrome.bank.logAria': 'Aktivitetslogg för gillesbanken',
+  'hudChrome.bank.logBuySlots': '{actor} köpte en bankutökning för {amount}',
+  'hudChrome.bank.logCharterFee': '{actor} betalade gillets stadgeavgift på {amount}',
+  'hudChrome.bank.logDepositItem': '{actor} satte in {count} {item}',
+  'hudChrome.bank.logDepositMoney': '{actor} satte in {amount}',
+  'hudChrome.bank.logEmpty': 'Inget har flyttats in i eller ut ur gillesbanken ännu.',
+  'hudChrome.bank.logFormerMember': 'En tidigare gillesmedlem',
+  'hudChrome.bank.logLoading': 'Laddar gillesbankens logg...',
+  'hudChrome.bank.logNote': 'De {count} senaste händelserna i gillesbanken.',
+  'hudChrome.bank.logOpenBank': '{actor} öppnade gillesbanken för {amount}',
+  'hudChrome.bank.logRefused': 'Endast gillesofficerare kan läsa gillesbankens logg.',
+  'hudChrome.bank.logWithdrawItem': '{actor} tog ut {count} {item}',
+  'hudChrome.bank.logWithdrawMoney': '{actor} tog ut {amount}',
+  'hudChrome.bank.personalTab': 'Personligt',
+  'hudChrome.bank.tabsAria': 'Bankflikar',
+  'hudChrome.crafting.dialogOption': 'Hantverk',
+  'hudChrome.crafting.dialogOptionAria': 'Öppna hantverksfönstret för {craft}',
+  'hudChrome.deeds.recentJumpAria': 'Hoppa till {name}',
+  'hudChrome.landing.browserSupport.body':
+    'Du kan uppleva sämre prestanda i den här webbläsaren. För bästa upplevelse, hämta skrivbordsappen för Windows, macOS eller Linux. Föredrar du att spela i en webbläsare? Chrome fungerar bäst, och Firefox och Safari stöds också.',
+  'hudChrome.landing.browserSupport.continueInBrowser': 'Fortsätt i webbläsaren',
+  'hudChrome.landing.browserSupport.dismissAria': 'Stäng meddelandet om webbläsare som inte stöds',
+  'hudChrome.landing.browserSupport.getDesktopApp': 'Hämta skrivbordsappen',
+  'hudChrome.landing.browserSupport.title': 'Observera: webbläsaren stöds inte',
+  'hudChrome.materialHint.cookingCatch':
+    'Ingrediens för matlagning. Måste tillagas innan den kan ätas.',
+  'hudChrome.mounts.desc_drakemaw_raptor':
+    'En sadeltämjd kullraptor från Drakgapets kaldera, ren sena och sprint, som fortfarande doftar svagt av aska.',
+  'hudChrome.mounts.name_drakemaw_raptor': 'Drakgapsraptor',
+  'hudChrome.options.graphicsApplied': 'Grafikinställningarna har tillämpats.',
+  'hudChrome.options.graphicsApply': 'Tillämpa grafik',
+  'hudChrome.options.graphicsApplying': 'Tillämpar grafikinställningar...',
+  'hudChrome.options.graphicsDraftChanged': 'Grafikändringarna är redo att tillämpas.',
+  'hudChrome.options.graphicsFailed':
+    'Grafiken kunde inte tillämpas. Dina tidigare inställningar är fortfarande aktiva.',
+  'hudChrome.options.graphicsFatal':
+    'Grafikåterställningen misslyckades. Ladda om spelet för att fortsätta.',
+  'hudChrome.options.graphicsReload': 'Ladda om spelet',
+  'hudChrome.options.graphicsRetry': 'Försök igen med grafiken',
+  'hudChrome.options.graphicsSaved':
+    'Grafikinställningarna har sparats. Den aktiva renderaren matchar dem redan.',
+  'hudChrome.options.lockActionBars': 'Lås åtgärdsfälten',
+  'itemUi.kind.material': 'Material',
+  'itemUi.market.buyChanged':
+    'Den listningen ändrades innan du bekräftade. Kontrollera priset och försök igen.',
+  'itemUi.market.buyConfirmAccept': 'Köp',
+  'itemUi.market.buyConfirmBody': 'Köp {item} för {price}?',
+  'itemUi.market.buyConfirmBodyStack': 'Köp {item} x{count} för {price} ({each} styck)?',
+  'itemUi.market.buyConfirmCancel': 'Avbryt',
+  'itemUi.market.buyConfirmTitle': 'Bekräfta köp',
+  'itemUi.tooltip.questOrphaned': 'Behövs inte för något aktivt uppdrag.',
+  'itemUi.tooltip.questRelated': 'Uppdrag: {quest}',
+  'itemUi.tooltip.questRules': 'Kan inte säljas, bankas eller bytas bort.',
+  'desktop.update.checkingBody': 'Nya versioner laddas ner medan du spelar.',
+  'desktop.update.checkingTitle': 'Söker efter uppdateringar...',
+  'desktop.update.dismiss': 'Stäng',
+  'desktop.update.downloadingBody': 'Du kan fortsätta spela. Den installeras när du avslutar.',
+  'desktop.update.uptodateTitle': 'Du har den senaste versionen',
+  'entities.items.firebottle.name': 'Eldflaska',
+  'entities.items.murloc_hut.name': 'Dyfenehydda',
+  'entities.items.reins_drakemaw_raptor.name': 'Tyglar till Drakgapsraptorn',
+  'entities.items.restless_skull.name': 'Rastlös skalle',
+  'entities.items.vanguard_bone.name': 'Förtruppsben',
+  'entities.mobs.brakka_wallbreaker.name': 'Brakka Murbrytaren',
+  'entities.mobs.dragonkin_broodguard.name': 'Drakättskullvakt',
+  'entities.mobs.dragonkin_egg.name': 'Drakättsägg',
+  'entities.mobs.dragonkin_whelp.name': 'Drakättsunge',
+  'entities.mobs.drakemaw_broodlord.name': 'Drakgapets kullherre',
+  'entities.mobs.drowned_warlord.name': 'Den drunknade krigsherren',
+  'entities.mobs.spider_egg.name': 'Yngelmoderns ägg',
+  'entities.mobs.threnos_first_voice.name': 'Threnos, den första rösten',
+  'entities.mobs.widow_hatchling.name': 'Änkeyngel',
+  'entities.quests.q_no_rest.text':
+    'Riten på dessa rökelsekar binder de drunknade att resa sig, och nu har den väckt en stark nog att leda dem. Väktarna kallar honom Den drunknade krigsherren, och så länge han håller Det dränkta kapellet behåller de döda sina led. Krossa honom, {playerName}, så sprids resten tillbaka ut i kärret.',
   'hud.social.tenure.recruit': 'Rekryt',
   'hud.social.tenure.veteran': 'Veteran',
   'hudChrome.keybinds.mouseHint':
@@ -2148,9 +2265,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hudChrome.calendar.events.delveDay.note':
     'Broder Halven markerar i sina tabeller: en fin dag att trotsa Det rasade relikvariet.',
   'hudChrome.calendar.events.delveDay.title': 'Delve-dag',
-  'hudChrome.calendar.events.fiestaNight.note':
-    '2v2-fiestans ring drar sin högljuddaste publik i kväll.',
-  'hudChrome.calendar.events.fiestaNight.title': 'Fiestanatt',
   'hudChrome.calendar.events.fishingDerby.note':
     'Metare kantar sjöarna. Ta med ett spö och byt fiskehistorier.',
   'hudChrome.calendar.events.fishingDerby.title': 'Fisketävling',
@@ -3335,6 +3449,7 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.items.cragthorn_greatstaff.name': 'Klipptörnets storstav',
   'entities.items.cragward_pauldrons.name': 'Klippvärnets axelplåtar',
   'entities.items.cragmaw_huntcord.name': 'Klippkäftens jaktlina',
+  'entities.items.cragmaw_huntquiver.name': 'Klippkäftens jaktkoger',
   'entities.items.cragmaw_prowlboots.name': 'Klippkäftens smygstövlar',
   'entities.items.cragwalker_boots.name': 'Klippvandrarstövlar',
   'entities.items.crimson_amber_armor_plate.name': 'Karmosinbärnsten',
@@ -3420,6 +3535,7 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.items.gravewardens_shiv.name': 'Gravväktarens stickkniv',
   'entities.items.gravewoven_raiment.name': 'Gravvävd skrud',
   'entities.items.gravewyrm_gauntlets.name': 'Gravlindormens pansarhandskar',
+  'entities.items.gravewyrm_bone_quiver.name': 'Gravlindormens benkoger',
   'entities.items.gravewyrm_thornmaul.name': 'Gravlindormens törnklubba',
   'entities.items.gravewyrm_mantle.name': 'Gravlindormsmantel',
   'entities.items.gravewyrm_sabatons.name': 'Gravlindormssabatoner',
@@ -3486,6 +3602,7 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.items.mistveil_grips.name': 'Dimslöjehandskar',
   'entities.items.moggers_copper_cudgel.name': 'Moggers kopparklubba',
   'entities.items.moggers_shiv.name': 'Moggers dolk',
+  'entities.items.moggers_hide_quiver.name': 'Moggers skinnkoger',
   'entities.items.moggers_stomper_boots.name': 'Moggers stampstövlar',
   'entities.items.monarch_crown_helm.name': 'Monarkens krona',
   'entities.items.moonbark_vestments.name': 'Månbarksklädsel',
@@ -3626,6 +3743,7 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.items.stormcallers_spaulders.name': 'Galecall-axelskydd',
   'entities.items.bonewrought_greatsword.name': 'Bonewrought storsvärd',
   'entities.items.direfang_greatblade.name': 'Direfang-storklinga',
+  'entities.items.direfang_quiver.name': 'Direfang-koger',
   'entities.items.bonewrought_bulwark.name': 'Bonewrought bålverk',
   'entities.items.wraithfire_orb.name': 'Wraithfire-sfär',
   'entities.items.stormshard_leggings.name': 'Stormskärvebenkläder',
@@ -3975,7 +4093,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_cult_orders.completion':
     'Denna skrift... jag såg senast något liknande i Morthens grimoar, i Östbäck. Samma hand har styrt varje grav vi har stridit om, {playerName}.',
   'entities.quests.q_cult_orders.objectives.0.label': 'Lindormskultsivrare dräpt',
-  'entities.quests.q_cult_orders.objectives.1.label': 'Lindormskultens order',
   'entities.quests.q_cult_orders.text':
     'Ivrarna rör sig med syfte nu - vakter utsatta, förråd räknade, som soldater inför en belägring. Kultister som organiserar sig är kultister som tar order, {playerName}. Döda åtta till och hämta mig fyra uppsättningar av deras skrivna order. Jag vill känna handen som befaller dem.',
   'entities.quests.q_cult_orders.title': 'Order nedifrån',
@@ -4150,15 +4267,12 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_necromancers.completion':
     'Ljuset förlåte oss. Dessa rymmer dalens och kärrets döda - varje lik Gravkallarna någonsin reste, skördat. De byggde aldrig en armé, {playerName}. De samlade in en tionde.',
   'entities.quests.q_necromancers.objectives.0.label': 'Lindormssektens nekromant dräpt',
-  'entities.quests.q_necromancers.objectives.1.label': 'Rituellt fylakterium',
   'entities.quests.q_necromancers.text':
     'Orderna talar om en "ring av fylakterier" - själsbehållare, {playerName}, utplacerade runt helgedomen för att nära den. Sektens nekromanter bär dem som heliga reliker. Döda åtta nekromanter och hämta tre oskadda fylakterier åt mig. Jag måste veta vilka själar de rymmer.',
   'entities.quests.q_necromancers.title': 'Fylakteriernas ring',
   'entities.quests.q_no_rest.completion':
     'Du ger de döda mer nåd än deras mästare någonsin gjorde. Ta detta - du har mer än förtjänat det.',
   'entities.quests.q_no_rest.objectives.0.label': 'Dränkt död lagd till ro',
-  'entities.quests.q_no_rest.text':
-    'Riten på de där rökelsekaren binder de dränkta att resa sig var än kärret rör vid dem - och kärret rör vid allt. Det finns ingen ro i dessa vassar förrän de döda är fler än de levande. Vi kan inte upphäva riten ännu, men vi kan tömma den på soldater. Lägg ytterligare 14 av de dränkta döda till ro.',
   'entities.quests.q_no_rest.title': 'Ingen ro i vassen',
   'entities.quests.q_nythraxis_bound_guardian.completion':
     'De tre relikerna berättar samma historia: Aldren stred för att försvara sin kung, Malric bröt dödens gräns, och Voss försökte stoppa det som följde. Sigillet försvagas, och denna signetring är nyckeln till Nythraxis grav. Du är nu invigd att träda in i Nythraxis krypta. Återvänd till den övergivna kryptan, lås upp den kungliga dörren, och möt Nythraxis innan den gamle kungens vrede svämmar bortom Törntopp.',
@@ -4628,7 +4742,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'fiesta.end.draw': 'FIESTA OAVGJORT! För jämnt för att avgöra!',
   'fiesta.end.loss': 'FIESTA FÖRLORAD! Kör igen!',
   'fiesta.end.win': 'FIESTA VUNNEN! 🎉 Vilket kalas!',
-  'fiesta.enterQueue': 'Gå med i Fiestan!',
   'fiesta.error.leaderOnly': 'Endast gruppledaren får ställa ditt lag i kö för {label}.',
   'fiesta.error.noAugment': 'Du har ingen förstärkning att välja just nu.',
   'fiesta.error.notOnOffer': 'Den förstärkningen erbjuds inte.',
@@ -4645,9 +4758,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'fiesta.powerup.pow_colossus.name': 'Koloss',
   'fiesta.powerup.pow_moon_boots.name': 'Månstövlar',
   'fiesta.powerup.pow_speed_demon.name': 'Fartdemon',
-  'fiesta.practice': '🎉 Öva mot bottar',
-  'fiesta.practiceNote':
-    'Offlineträning: skapar 3 AI-bottar och ställer dig i kö för en 2v2-Fiesta. Klicka igen för att sluta.',
   'fiesta.queue.join': 'Du går med i 2v2-Fiestans kö. Gör dig redo att FESTA…',
   'fiesta.queue.leave': 'Du lämnar 2v2-Fiestans kö.',
   'fiesta.queue.teamLeave': 'Ditt lag lämnar 2v2-Fiestans kö.',
@@ -4886,38 +4996,18 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
     'Skyddar en allierad så att närstridsangripare skadar sig själva när de slår.',
   'guide.abilityHook.thunder_clap': 'Slår allt runt omkring dig och saktar ner deras attacker.',
   'guide.abilityHook.wrath': 'En naturpil kastad mot ett mål från avstånd, din förstavalskanon.',
-  'guide.arenaPage.augmentsNote':
-    'Förstärkningar och kraftuppladdningar håller bara under matchen. De handlar om lekfulla, improviserade byggen, inte varaktig makt, så ingen köper sig till en seger.',
   'guide.arenaPage.coliseumBody':
     'Coliseum är rikets arena, där du möter andra spelare i rankade matcher, en mot en eller två mot två. Varje division håller sin egen ställning, så en seger lyfter dig uppför den stegen för hela riket att se. Öppna Arena-fönstret för att anmäla dig till en division, ensam eller med din partner.',
   'guide.arenaPage.coliseumHeading': 'Det askgråa colosseumet',
   'guide.arenaPage.duelsBody':
     'Utmana vilken spelare du än möter till en vänskaplig duell. Inget står på spel utom stoltheten, så det är det enklaste sättet att lära sig en matchning eller göra upp en vänskaplig tvist.',
   'guide.arenaPage.duelsHeading': 'Dueller',
-  'guide.arenaPage.fiestaBody':
-    'Fiesta är ett snabbt slagsmål två mot två som utkämpas som en enda sammanhängande drabbning, med varje kämpe ställd på jämn fot. Medan striden pågår draftar du förstärkningar, snabba boostar som omformar din uppsättning i farten, så att inga två matcher spelas riktigt likadant.',
-  'guide.arenaPage.fiestaHeading': 'Två-mot-två-fiesta',
   'guide.arenaPage.heading': 'Arena och PvP',
   'guide.arenaPage.intro':
     'Vill du testa dig själv mot andra spelare? Spelare mot spelare är inbyggt, och det är alltid något du väljer, aldrig något som påtvingas dig.',
   'guide.arenaPage.ladderBody':
     'Rankat spel följer din ställning över tid. Kolla topplistan för att se var du befinner dig och vem som håller rikets topp.',
   'guide.arenaPage.ladderHeading': 'Klättra på rankingstegen',
-  'guide.arenaPage.powerupsBody':
-    'Glödande klot faller också ner i arenan mitt i striden, fria för den som når dem först. De är medvetet överdrivna och håller bara en kort stund: Fartdemon för en blinkning av bländande fart, Koloss för att svälla upp till en lufsande jätte, Månstövlar för ett studsande hopp med låg gravitation, och Bärsärk för en plötslig våg av ursinne.',
-  'guide.arenaPage.powerupsTitle': 'Kraftuppladdningar i ringen',
-  'guide.arenaPage.waveGoldBody':
-    'Den mellersta vågen: tveeggade kombinationer där ditt bygge börjar ta form och sjunga.',
-  'guide.arenaPage.waveGoldTitle': 'Guld',
-  'guide.arenaPage.wavePrismaticBody':
-    'Den sista vågen: byggesdefinierande, skärmsmältande toppar avsedda att kännas löjliga på bästa sätt.',
-  'guide.arenaPage.wavePrismaticTitle': 'Prismatisk',
-  'guide.arenaPage.waveSilverBody':
-    'Den inledande vågen: rena boostar för en enda egenskap som skärper grunderna i din klass.',
-  'guide.arenaPage.waveSilverTitle': 'Silver',
-  'guide.arenaPage.wavesBody':
-    'En Fiesta-drabbning ger dig färska val efter hand, och valen blir djärvare ju längre striden pågår. Du bygger från en våg till nästa, väljer ett av några få alternativ varje gång och behåller det resten av drabbningen.',
-  'guide.arenaPage.wavesTitle': 'Förstärkningar kommer i vågor',
   'guide.bestiary.flavor.gravecaller_cultist':
     'Kåpklädda tjänare till dödskulten vars verk besudlar gravarna från dalen till topparna. Där de samlas vilar inte de döda.',
   'guide.bestiary.flavor.grubjaw':
@@ -5922,7 +6012,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hud.core.mapCanvasLabel': 'Karta',
   'hud.core.mapSummary': 'Karta över {zone}.',
   'hud.core.maxLevel': 'MAXNIVÅ',
-  'hud.core.mobileArena': 'Arena',
   'hud.core.mobileAttack': 'Anfall',
   'hud.core.mobileCamera': 'Kamera — dubbeltryck för att centrera',
   'hud.core.mobileChat': 'Chatt',
@@ -6018,7 +6107,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'hud.errors.whisperMissing': "Det finns ingen spelare vid namn '{name}' uppkopplad.",
   'hud.errors.whisperSelf': 'Du muttrar för dig själv. Ingen hör det.',
   'hud.keybinds.actions.actionBarSlot': 'Handlingsfält {slot}',
-  'hud.keybinds.actions.arena': 'Arena (Askgrå kolosseum)',
   'hud.keybinds.actions.attack': 'Anfall',
   'hud.keybinds.actions.attackMove': 'Anfallsförflyttning',
   'hud.keybinds.actions.autorun': 'Växla automatisk löpning',
@@ -8127,9 +8215,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
     'Klyver målets rustning och sänker den med {damage}% per applicering. Stackas upp till 5 gånger. Vållar en stor mängd hot.',
   'entities.mobs.training_dummy.name': 'Träningsdocka',
   'entities.mobs.yumi_cat.name': 'Yumi',
-  'guide.arenaPage.yumiBody':
-    'Skydda Yumi är ett lagbaserat målläge som spelas i en labyrint: varje sida vaktar sin egen kattföljeslagare samtidigt som den jagar den andra. Med jämna mellanrum blinkar båda katterna till nya hörn av labyrinten, så striden pendlar mellan att försvara, jaga och kappas om att hitta dem igen. Köa som tre mot tre eller fem mot fem; att falla i strid sätter dig bara på bänken en kort stund.',
-  'guide.arenaPage.yumiHeading': 'Skydda Yumi',
   'hudChrome.archetypeTitle.hobbyLabel': 'Fritidssyssla',
   'hudChrome.auraEffect.armorPct': 'Minskar rustningen med {pct}%',
   'hudChrome.auraEffect.armorPctStacks': 'Minskar rustningen med {pct}% ({stacks} stackar)',
@@ -8149,7 +8234,6 @@ export const sv_SE: Partial<Record<TranslationKey, string>> = {
   'yumi.bracket5': 'Yumi 5 mot 5',
   'yumi.end.loss': 'NEDERLAG! Din Yumi har fallit.',
   'yumi.end.win': 'SEGER! Yumi är trygg!',
-  'yumi.enterQueue': 'Gå med i Skydda Yumi!',
   'yumi.error.partyTooBig3': 'Skydda Yumi 3 mot 3 tillåter ett sällskap på upp till tre.',
   'yumi.error.partyTooBig5': 'Skydda Yumi 5 mot 5 tillåter ett sällskap på upp till fem.',
   'yumi.hud.aria': 'Din Yumi på {mine} av {max} hälsa, fiendens Yumi på {theirs}.',

@@ -911,6 +911,7 @@ export const nl_NL: EnTranslations = {
       "minutesSeconds": "{m}m {s}s",
       "seconds": "{s}s",
       "autoShowHint": "Rijen verschijnen automatisch zodra je groep schade aanricht of geneest, en dit segment sluit een paar seconden na het einde van het gevecht.",
+      "threatFallback": "No live threat: showing damage to {name}",
       "breakdownSummary": "{tab}: {value}",
       "breakdownRow": "{value} ({percent})",
       "breakdownOther": "Overig ({count})",
@@ -950,6 +951,7 @@ export const nl_NL: EnTranslations = {
       "targetFriendlyNext": "Door Bondgenoten Bladeren",
       "discord": "Discord",
       "valecup": "Dalbeker",
+      "bgFlag": "Battleground Flag Action",
       "sheathe": "Wapen Schede In/Uit",
       "categoryPet": "Huisdier",
       "petAttack": "Huisdier: Aanvallen",
@@ -997,6 +999,7 @@ export const nl_NL: EnTranslations = {
       "name_stormfeather_griffin": "Hemelreik Stormveder",
       "name_thunderstrut_gobbler": "Donderstap de Grote Kalkoen",
       "name_terrorspark_groundshaker": "Schrikvonk, de Grondschudder",
+      "name_drakemaw_raptor": "Drakenmuil-Raptor",
       "desc_valorsteed": "Een sterk, standvastig strijdros dat extra reissnelheid geeft.",
       "desc_grag_bear": "Een sterke, standvastige beer die extra reissnelheid geeft.",
       "desc_stalkglider_snail": "Een taaie, langzaam brandende slak die extra reissnelheid geeft.",
@@ -1004,7 +1007,8 @@ export const nl_NL: EnTranslations = {
       "desc_shadowjump_toad": "Een enorme, standvastige reuzenpad, getraind in bliksemsnelle schaduwsprongen die elk terrein overbruggen.",
       "desc_stormfeather_griffin": "Een koninklijke stormgriffioen die met runenbeslagen klauwen over de grond sluipt, vleugels opgevouwen.",
       "desc_thunderstrut_gobbler": "Een kolossale, uit de storm geboren kalkoen die vanaf de Ontwakende Piek naar beneden stapt, staart gespreid als een onweerswolk.",
-      "desc_terrorspark_groundshaker": "Een compacte gepantserde machine met zware rupsbanden, een grootkaliberkanon en een zadel gebouwd voor onverschrokken piloten."
+      "desc_terrorspark_groundshaker": "Een compacte gepantserde machine met zware rupsbanden, een grootkaliberkanon en een zadel gebouwd voor onverschrokken piloten.",
+      "desc_drakemaw_raptor": "Een zadelmakke broedraptor uit de Drakenmuil-Caldera, één en al pezen en vaart, nog altijd zwak naar as geurend."
     },
     "mountTraining": {
       "mountPrompt": "Druk op {key} om op de trainings-Moedros te stijgen.",
@@ -1024,6 +1028,93 @@ export const nl_NL: EnTranslations = {
       "timeout": "Race Mislukt",
       "progress": "Poort {n} van {total}",
       "timeLeft": "{seconds}s"
+    },
+    "pvp": {
+      "launcherTitle": "PvP",
+      "mobileLabel": "PvP",
+      "bracket1v1": "1v1",
+      "bracket2v2": "2v2"
+    },
+    "bg": {
+      "title": "Thornhollow Fields",
+      "blurb": "Two ruined keeps face each other across a walled hollow in the shadow of Thornpeak: Crimson to the south, Azure to the north, and the older Ruin Courtyard between them that neither has ever held. Five a side, one banner each, and the first to carry three of theirs home takes the field.",
+      "modeTag": "5v5 Capture the Flag",
+      "offlineNote": "Thornhollow Fields is syncing. The queue opens once the realm answers.",
+      "ratingSummary": "Rating. {wins} wins / {losses} losses",
+      "careerCaptures": "Career captures: {count}",
+      "enterQueue": "Enter the Queue",
+      "enterQueueParty": "Enter the Queue (party of {count})",
+      "leaveQueue": "Leave Queue",
+      "searching": "Searching. {count}/{size} in queue.",
+      "queuedParty": "Party of {count}.",
+      "queueNote": "Two teams of five. Steal the enemy banner and run it to your keep. First to 3 captures wins. Group up to 5 and queue together; grab Sprint Runes and weave the cover to lose your pursuers.",
+      "matchInProgress": "Battle in progress. {crimson}:{azure}.",
+      "ladderAllTime": "Ladder. All-Time",
+      "noRanked": "No champions ranked yet. Be the first.",
+      "ladderOnline": "Ladder. Online Now",
+      "noChallengers": "No champions online right now. Be the first.",
+      "playerLevelClassTitle": "{name}. Level {level} {className}",
+      "playerClassTitle": "{name}. {className}",
+      "crimson": "Crimson",
+      "azure": "Azure",
+      "yourTeamTitle": "Your team",
+      "clock": "{minutes}:{seconds}",
+      "formUp": "Form up: {seconds}",
+      "firstTo": "First to {caps} captures",
+      "flagState": {
+        "home": "Flag at the keep",
+        "carried": "Flag stolen!",
+        "dropped": "Flag on the ground"
+      },
+      "respawnIn": "Next wave: respawning in {seconds}",
+      "resultVictory": "Victory!",
+      "resultDefeat": "Defeat",
+      "resultDraw": "Draw",
+      "leavingIn": "Leaving the battleground in {seconds}",
+      "killFeed": "{killer} felled {victim}",
+      "killFeedFallen": "{victim} has fallen",
+      "foundBanner": "Battle found. You fight for the {team}!",
+      "countdownBanner": "Thornhollow Fields begins in {seconds}",
+      "startBanner": "Capture the flag!",
+      "flagTakenLog": "{name} has taken the {team} flag!",
+      "flagDroppedLog": "The {team} flag was dropped.",
+      "flagReturnedLog": "The {team} flag was returned.",
+      "dropFlagConfirmTitle": "Drop the flag?",
+      "dropFlagConfirmBody": "You are carrying the enemy flag. Dropping it leaves it on the ground, where either team can reach it.",
+      "dropFlagConfirmAccept": "Drop the flag",
+      "boardToggleLabel": "Match scoreboard. Press Enter to pin the full board open.",
+      "levelRequirement": "You must reach level {level} to unlock queueing for this battleground.",
+      "board": {
+        "kills": "Kills",
+        "assists": "Assists",
+        "deaths": "Deaths",
+        "captures": "Captures"
+      },
+      "flagTakenBanner": "The {takers} have taken the {team} flag!",
+      "flagReturnedBanner": "The {team} flag was returned!",
+      "capturedTeamBanner": "The {takers} have captured the {team} flag! {crimson}:{azure}",
+      "capturedLog": "{name} captured the {team} flag. Score {crimson}:{azure}.",
+      "victoryBanner": "Victory! Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "defeatBanner": "Defeat. Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "drawBanner": "Thornhollow Fields draw {crimson}:{azure}. Rating {rating} ({delta})",
+      "endBannerDetail": "Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "endLog": "Thornhollow Fields ended {crimson}:{azure}. Rating {rating} ({delta}).",
+      "endedTimer": "Time expired",
+      "endedForfeit": "The match was forfeited",
+      "endedTimerLog": "The match clock ran out; the higher score took the field.",
+      "endedForfeitLog": "The match was forfeited.",
+      "firstWinBonusLine": "First win of the day: +{honor} Honor",
+      "firstWinBonusLog": "First win of the day: you gain {honor} bonus Honor.",
+      "timeWarningMinutes": "{minutes} minutes remain",
+      "timeWarningOneMinute": "One minute remains",
+      "timeWarningMinutesLog": "{minutes} minutes remain in the battle.",
+      "timeWarningOneMinuteLog": "One minute remains in the battle.",
+      "map": {
+        "crimsonKeep": "Crimson Keep",
+        "azureKeep": "Azure Keep",
+        "ruinCourtyard": "The Ruin Courtyard",
+        "graveyard": "Graveyard"
+      }
     },
     "vcup": {
       "title": "De Dalbeker",
@@ -1175,6 +1266,15 @@ export const nl_NL: EnTranslations = {
       "browserEffectsReduced": "Beperkt",
       "browserEffectsMinimal": "Minimaal",
       "browserEffectsNote": "Automatisch tempert zware CSS-effecten (vervaging, gloed, achtergrondbeweging) op basis van je browser en apparaat. Verlaag het handmatig als de interface traag aanvoelt.",
+      "graphicsApply": "Grafica toepassen",
+      "graphicsApplying": "Grafische instellingen worden toegepast...",
+      "graphicsApplied": "Grafische instellingen toegepast.",
+      "graphicsSaved": "Grafische instellingen opgeslagen. De actieve renderer komt al overeen.",
+      "graphicsFailed": "Grafica kon niet worden toegepast. Je vorige instellingen zijn nog actief.",
+      "graphicsRetry": "Grafica opnieuw proberen",
+      "graphicsFatal": "Herstel van de grafische instellingen is mislukt. Herlaad het spel om door te gaan.",
+      "graphicsReload": "Spel herladen",
+      "graphicsDraftChanged": "Grafische wijzigingen zijn klaar om toe te passen.",
       "interfaceMode": "Interfacemodus",
       "interfaceModeAuto": "Automatisch",
       "interfaceModeDesktop": "Desktop",
@@ -1205,7 +1305,7 @@ export const nl_NL: EnTranslations = {
       "itemScoreLine": "Score {score}",
       "showSecondaryActionBar": "Secundaire actiebalk tonen",
       "showThirdActionBar": "Derde actiebalk tonen",
-      "hideUnusedActionSlots": "Ongebruikte actievakjes verbergen",
+      "lockActionBars": "Actiebalken vergrendelen",
       "showTargetOfTarget": "Doelwit van doelwit tonen",
       "showAttackButton": "Aanvalsknop Tonen",
       "showDailyRewardsChest": "Kist met dagelijkse beloningen tonen",
@@ -1367,20 +1467,38 @@ export const nl_NL: EnTranslations = {
     },
     "landing": {
       "highContrast": "Hoog contrast",
-      "highContrastAria": "Hoog-contrastachtergrond aan/uit: schakelt de bewegende trailer uit zodat de tekst op het startscherm leesbaar blijft"
+      "highContrastAria": "Hoog-contrastachtergrond aan/uit: schakelt de bewegende trailer uit zodat de tekst op het startscherm leesbaar blijft",
+      "browserSupport": {
+        "title": "Let op: niet-ondersteunde browser",
+        "body": "Je kunt verminderde prestaties ondervinden in deze browser. Download voor de beste ervaring de desktop-app voor Windows, macOS of Linux. Speel je liever in een browser? Chrome presteert het best, en Firefox en Safari worden ook ondersteund.",
+        "getDesktopApp": "Download de desktop-app",
+        "continueInBrowser": "Doorgaan in de browser",
+        "dismissAria": "De melding over niet-ondersteunde browser sluiten"
+      }
     },
     "warfare": {
       "honorAmount": "{amount} Eer",
       "dualPrice": "{money} + {honor}",
       "balance": "Eer: {amount}",
       "honorFloat": "+{amount} Eer",
+      "honorFloatReason": "+{amount} Honor ({reason})",
       "honorGain": "Je krijgt {amount} eer ({reason}).",
       "notEnoughHonor": "Niet genoeg eer.",
       "reasons": {
         "arenaWin": "Arena-overwinning",
         "fiestaKill": "Fiesta-uitschakeling",
         "fiestaComplete": "Fiesta voltooid",
-        "fiestaWin": "Fiesta-overwinning"
+        "fiestaWin": "Fiesta-overwinning",
+        "battlegroundWin": "Thornhollow Fields victory",
+        "battlegroundFirstWin": "first Thornhollow Fields win today",
+        "battlegroundComplete": "Thornhollow Fields battle fought",
+        "battlegroundKill": "honorable kill",
+        "battlegroundAssist": "killing blow assisted"
+      },
+      "floatReasons": {
+        "kill": "Kill",
+        "assist": "Assist",
+        "firstWin": "First Win"
       }
     },
     "charSheet": {
@@ -1736,6 +1854,7 @@ export const nl_NL: EnTranslations = {
       "itemAriaEnchanted": "{item}, aantal {count}, betoverd exemplaar",
       "itemAriaBound": "{item}, aantal {count}, gebonden exemplaar",
       "itemAriaMasterwork": "{item}, hoeveelheid {count}, meesterwerk",
+      "itemAriaQuest": "{item}, aantal {count}, questvoorwerp",
       "filterGroupAria": "Tassen filteren op categorie",
       "filterAll": "Alle",
       "filterWeapon": "Wapens",
@@ -1744,6 +1863,7 @@ export const nl_NL: EnTranslations = {
       "filterMaterial": "Materialen",
       "filterTool": "Gereedschap",
       "filterQuest": "Quest",
+      "filterQuestCountAria": "Quest, {count} voorwerpen",
       "filterMount": "Rijdieren",
       "sortAria": "Tasitems sorteren",
       "sortRecent": "Recent",
@@ -1752,6 +1872,7 @@ export const nl_NL: EnTranslations = {
       "searchPlaceholder": "Items zoeken",
       "searchAria": "Tasitems zoeken op naam",
       "noMatch": "Geen items komen overeen met je filters.",
+      "noQuestItems": "Geen questvoorwerpen in je tassen.",
       "capacity": "{used}/{total}",
       "capacityAria": "Tasvakken gebruikt: {used} van {total}",
       "backpack": "Rugzak",
@@ -1785,6 +1906,7 @@ export const nl_NL: EnTranslations = {
       "dmgDoneReduce": "Vermindert aangerichte schade met {pct}%",
       "heatingUp": "Je volgende opeenvolgende kritieke treffer van een Vuur-opbouwer verleent Hete reeks; een niet-kritieke opbouwer verwijdert Opwarmen",
       "elementalConvergencePrimed": "Je volgende spreuk van de andere elementaire school verleent Elementaire Convergentie",
+      "carriedFlag": "You are carrying the enemy flag. Cancel this buff to drop it.",
       "battleStance": "Strijdhouding: 10% meer woedeopbouw",
       "berserkerStance": "Berserkerhouding: kritieke treffers landen 3% vaker en raken 3% harder",
       "crit": "Verhoogt kans op kritieke treffers met {pct}%",
@@ -1970,6 +2092,8 @@ export const nl_NL: EnTranslations = {
     },
     "materialHint": {
       "fineGrade": "Fijne kwaliteit. Verzameld uit een grondstoffenpunt op volle rang met gereedschap boven de rang van het materiaal, en telt overal waar de gewone versie vereist is als die versie.",
+      "cookingCatch": "Kookingrediënt. Moet worden gekookt voordat het gegeten wordt.",
+      "usedBy": "Used by {crafts}.",
       "arcaneDust": "Betoveringsreagens. Verkregen door het onbetoveren van gewone en ongewone uitrusting.",
       "arcaneEssence": "Betoveringsreagens. Verkregen door het onbetoveren van zeldzame uitrusting.",
       "arcaneShard": "Betoveringsreagens. Verkregen door het onbetoveren van epische en legendarische uitrusting.",
@@ -2251,6 +2375,7 @@ export const nl_NL: EnTranslations = {
       "depositHint": "Klik om te storten",
       "depositPartialHint": "Shift-klik om een deel te storten",
       "cannotDeposit": "Kan niet in de bank",
+      "cannotDepositNow": "Kan nu niet worden gestort",
       "depositQuantityTitle": "{item} storten",
       "depositQuantityInput": "Aantal om te storten",
       "depositQuantityConfirm": "Storten",
@@ -2261,6 +2386,7 @@ export const nl_NL: EnTranslations = {
       "sortAria": "Bankvoorwerpen sorteren",
       "searchAria": "Bankvoorwerpen zoeken op naam",
       "depositAll": "Alle materialen storten",
+      "depositAllTooltip": "Stuurt in één keer elk ambachtsreagens en rommelvoorwerp uit je tassen naar de bank. Verzamelgereedschap, gedragen uitrusting, questvoorwerpen en verbruiksartikelen worden nooit aangeraakt.",
       "depositAllDone": "Materialen gestort: {count}.",
       "depositAllFull": "Materialen gestort: {count}. De bank is nu vol.",
       "depositAllNone": "Bank vol: niets gestort.",
@@ -2276,7 +2402,50 @@ export const nl_NL: EnTranslations = {
       "bonusAdvertWallet": "Koppel een portemonnee om 2 vakken te verdienen.",
       "bonusReferralProgress": "{count}/{cap}",
       "bonusReferralExplainer": "Nodig een vriend uit: wanneer die niveau 10 bereikt, verdienen jullie allebei 2 vakken, tot 5 vrienden.",
-      "bonusSectionAria": "Bonusbankvakken en hoe je er meer verdient"
+      "bonusSectionAria": "Bonusbankvakken en hoe je er meer verdient",
+      "tabsAria": "Banktabbladen",
+      "personalTab": "Persoonlijk",
+      "guildTab": "Gilde",
+      "guildCapacityAria": "Gildebankvakken gebruikt: {used} van {total}",
+      "guildEmpty": "De gildebank is leeg.",
+      "guildTreasury": "Gildekas",
+      "guildDepositGold": "Geld storten",
+      "guildWithdrawGold": "Geld opnemen",
+      "guildDepositGoldTitle": "Geld storten in de gildekas",
+      "guildWithdrawGoldTitle": "Geld opnemen uit de gildekas",
+      "guildGoldAvailable": "Beschikbaar: {amount}",
+      "guildBuyConfirm": "{count} extra gildebankvakken kopen voor {price} uit de gildekas?",
+      "guildBuyNote": "Betaald uit de gildekas",
+      "guildTreasuryShort": "Kastekort",
+      "guildOpenBank": "De gildebank openen",
+      "guildOpenConfirm": "De gildebank openen voor {price}? Dit wordt betaald uit je eigen geld.",
+      "guildOpenAccept": "Openen",
+      "guildOpenNote": "Betaald uit je eigen geld, niet uit de gildekas",
+      "guildPurseShort": "Niet genoeg geld",
+      "guildDormantNote": "Vergrendelde voorwerpen kunnen niet worden opgenomen en verhinderen het ontbinden van de gilde.",
+      "guildDormantHint": "Dit voorwerp is vergrendeld in de gildebank en kan niet worden opgenomen.",
+      "guildDormantAria": "{item}, aantal {count}, kan niet worden opgenomen",
+      "guildUnknownItem": "Onbekend voorwerp",
+      "guildDepositHint": "Klik om in de gildebank te storten",
+      "guildCannotDeposit": "Kan niet in de gildebank",
+      "guildGoldCannotMove": "Dat bedrag kan nu niet worden verplaatst.",
+      "guildViewsAria": "Gildebankweergaven",
+      "guildContentsTab": "Inhoud",
+      "guildLogTab": "Logboek",
+      "logAria": "Activiteitenlogboek van de gildebank",
+      "logNote": "De {count} meest recente gildebankacties.",
+      "logLoading": "Het logboek van de gildebank wordt geladen...",
+      "logEmpty": "Er is nog niets in of uit de gildebank verplaatst.",
+      "logRefused": "Alleen gildeofficieren kunnen het logboek van de gildebank lezen.",
+      "logFormerMember": "Een oud-gildelid",
+      "logDepositItem": "{actor} stortte {count} {item}",
+      "logWithdrawItem": "{actor} nam {count} {item} op",
+      "logDepositMoney": "{actor} stortte {amount}",
+      "logWithdrawMoney": "{actor} nam {amount} op",
+      "logBuySlots": "{actor} kocht een bankuitbreiding voor {amount}",
+      "logOpenBank": "{actor} opende de gildebank voor {amount}",
+      "logCharterFee": "{actor} betaalde de gildeoprichtingskosten van {amount}",
+      "logAdminPurge": "Een beheerder verwijderde {count} {item}"
     },
     "calendar": {
       "title": "Evenementenkalender",
@@ -2313,10 +2482,6 @@ export const nl_NL: EnTranslations = {
         "marketDay": {
           "title": "Marktdag",
           "note": "De Koopman verwacht verse voorraad. Een mooie dag om de Wereldmarkt af te struinen."
-        },
-        "fiestaNight": {
-          "title": "Fiesta-avond",
-          "note": "De 2v2 Fiesta-ring trekt vanavond zijn luidruchtigste publiek."
         },
         "arenaClash": {
           "title": "Arenatreffen",
@@ -2555,6 +2720,18 @@ export const nl_NL: EnTranslations = {
         "artisansEye": "Ambachtsoog",
         "quickeningCharm": "Veerkrachtamulet"
       },
+      "toolEffectTooltip": {
+        "kind": "Tool charm",
+        "bonus": {
+          "gatherersCache": "+1 yield per harvest while charged.",
+          "artisansEye": "Raises the harvest grade by 1 tool tier while charged.",
+          "quickeningCharm": "Shortens the node respawn timer it triggers."
+        },
+        "howToSlot": "Slot onto a mining, logging, or herbalism tool from the Professions window. Consumed when slotted.",
+        "charges": "Starts with {base} charges on a common tool (+{bonus} per rarity rung).",
+        "landOnly": "Does not slot on fishing rods.",
+        "openProfessions": "Open Professions to slot this onto a gathering tool."
+      },
       "toolEffectSlotButton": "{effect} plaatsen",
       "toolEffectRechargeButton": "Opladen",
       "toolEffectSlotted": "{effect} geplaatst op {profession}.",
@@ -2591,8 +2768,8 @@ export const nl_NL: EnTranslations = {
     "crafting": {
       "title": "Knutselen",
       "close": "Sluit het maken",
-      "dialogOption": "Crafting",
-      "dialogOptionAria": "Open the crafting window for {craft}",
+      "dialogOption": "Vervaardigen",
+      "dialogOptionAria": "Het vervaardigingsvenster openen voor {craft}",
       "craft": "Ambacht",
       "reagentsNeeded": "Vereist:",
       "reagentLine": "{name}: {have}/{required}",
@@ -2667,6 +2844,8 @@ export const nl_NL: EnTranslations = {
       "masterworkToast": "Meesterwerk! {name}",
       "masterworkZoneLine": "{crafter} heeft het meesterwerk {name} gemaakt!",
       "tierUpToast": "{craft} is doorgegaan naar niveau {tier}!",
+      "skillUpToast": "{skill} skill increased to {level}!",
+      "skillUpSubtext": "Skill increased to {level}!",
       "trendNudge": "Je handen neigen naar {archetype}. De afstemming wacht bij {master}.",
       "trendNudgeNoMaster": "Je handen neigen naar {archetype}. Zoek een ambachtsmeester om dit op te pakken.",
       "attunedZoneLine": "{name} is afgestemd als {archetype}!",
@@ -2902,7 +3081,7 @@ export const nl_NL: EnTranslations = {
       "countLabel": "{earned}/{total} daden",
       "completionAria": "Daden behaald: {earned} van {total}",
       "recentLabel": "Recent:",
-      "recentJumpAria": "Jump to {name}",
+      "recentJumpAria": "Ga naar {name}",
       "nearestLabel": "Bijna zover:",
       "filterGroupAria": "Filter de daden",
       "filterAll": "Alle",
@@ -3128,6 +3307,7 @@ export const nl_NL: EnTranslations = {
       "talents": "Talenten",
       "arena": "Arena & PvP",
       "valeCup": "Dalbeker",
+      "thornhollow": "Thornhollow Fields",
       "deeds": "Boek der Daden",
       "glossary": "Begrippenlijst",
       "wishIKnew": "Dingen die ik graag eerder had geweten",
@@ -3898,23 +4078,25 @@ export const nl_NL: EnTranslations = {
       "duelsBody": "Daag elke speler die je tegenkomt uit voor een vriendschappelijk duel. Er staat niets op het spel behalve trots, dus het is de makkelijkste manier om een matchup te leren of een vriendschappelijk meningsverschil te beslechten.",
       "coliseumHeading": "Het Asgrauwe Colosseum",
       "coliseumBody": "Het Coliseum is de arena van het rijk, waar je andere spelers tegemoet treedt in ranglijstwedstrijden, één tegen één of twee tegen twee. Elke categorie heeft zijn eigen ranglijst, dus een overwinning tilt je hoger op die ladder, zichtbaar voor het hele rijk. Open het Arenavenster om je in te schrijven voor een categorie, alleen of met je partner.",
-      "fiestaHeading": "Twee tegen twee Fiesta",
-      "fiestaBody": "Fiesta is een snel, twee-tegen-twee gevecht dat als één doorlopende partij wordt uitgevochten, waarbij elke strijder op gelijke voet wordt gebracht. Terwijl het gevecht loopt, draft je augments, snelle boosts die je kit gaandeweg hervormen, zodat geen twee wedstrijden helemaal hetzelfde spelen.",
-      "augmentsNote": "Augments en power-ups gelden alleen voor de wedstrijd. Ze draaien om speelse, ter plekke bedachte builds, niet om blijvende macht, zodat niemand zich een weg naar de winst koopt.",
-      "wavesTitle": "Augments komen in golven",
-      "wavesBody": "Een Fiesta-partij reikt je gaandeweg verse keuzes aan, en de keuzes worden gewaagder naarmate het gevecht langer duurt. Je bouwt van de ene golf naar de volgende, kiest elke keer een van een paar opties en houdt het voor de rest van de partij.",
-      "waveSilverTitle": "Zilver",
-      "waveSilverBody": "De openingsgolf: schone, enkelvoudige statboosts die de basis van je klasse aanscherpen.",
-      "waveGoldTitle": "Goud",
-      "waveGoldBody": "De middelste golf: tweesnijdende combo's waar je build vorm begint te krijgen en gaat zingen.",
-      "wavePrismaticTitle": "Prismatisch",
-      "wavePrismaticBody": "De laatste golf: build-bepalende, schermversmeltende pieken bedoeld om belachelijk aan te voelen op de beste manier.",
-      "yumiHeading": "Bescherm Yumi",
-      "yumiBody": "Bescherm Yumi is een teamdoelspel dat in een doolhof wordt gespeeld: elke kant bewaakt zijn eigen kattenmetgezel terwijl hij die van de ander bejaagt. Zo nu en dan flitsen beide katten naar nieuwe hoeken van het doolhof, zodat het gevecht heen en weer gaat tussen verdedigen, jagen en de race om ze opnieuw te vinden. Sluit aan als drie tegen drie of vijf tegen vijf; sneuvelen in de strijd zet je maar even op de bank.",
-      "powerupsTitle": "Power-ups in de ring",
-      "powerupsBody": "Gloeiende bollen vallen ook middenin het gevecht in de arena, gratis voor wie ze als eerste bereikt. Ze zijn opzettelijk over de top en duren maar even: Speed Demon voor een flits van verblindend tempo, Colossus om uit te dijen tot een logge reus, Moon Boots voor een stuiterende sprong met lage zwaartekracht, en Berserker voor een plotselinge golf van razernij.",
       "ladderHeading": "De ladder beklimmen",
       "ladderBody": "Ranglijstspel volgt je positie over de tijd. Bekijk het scorebord om te zien waar je staat en wie de top van het rijk bezit."
+    },
+    "thornhollowPage": {
+      "heading": "Thornhollow Fields",
+      "intro": "A ranked 5v5 capture-the-flag battleground fought in a walled hollow in the old growth below Thornpeak, where two ruined keeps face each other down the length of a ravine and an older courtyard sits between them that neither has ever held. Two teams of five, two keeps, one goal: steal the enemy banner and run it home before they run yours.",
+      "queueHeading": "Queueing up",
+      "queueBody": "Open the Thornhollow Fields panel and enter the queue solo, or bring a party of up to five and queue together: parties are always kept on one team, and the remaining seats fill with solo champions. When ten stand ready, the match seats both teams at their keeps for a short form-up before the flags go live.",
+      "fieldHeading": "The field",
+      "fieldBody": "A walled, open-air field carved into three chambers: each team has its own field before its keep, and the walled Ruin Courtyard sits between them. Two curtain walls span the full width, and every move between chambers passes a contested crossing: the wide main gate, or the gatehouse, a small room straddling the wall whose offset doors force a jog past an ambush corner. Each keep is sealed except its mouth, so every flag run starts and ends through the same opening, and a low barricade breaks the straight charge into it. The courtyard holds the hollow heart ruin and the two flank Sprint Runes; the other two wait on the flag approaches. A Battle or Ward Rune (more damage dealt, or less damage taken, for a few seconds) waits at each main gate's courtyard mouth: both pads open the match on the same face and flip with every claim.",
+      "flagsHeading": "Flags",
+      "flagsBody": "Each keep holds its team flag. Take the enemy flag and carry it to your own stand to score; the first team to three captures wins, and a timed-out battle resolves on score. A slain carrier drops the flag where they fell: an enemy can take it up again, while its own team returns it home instantly just by reaching it. The flag also refuses to hide: picking it up breaks stealth, and a carrier who turns invisible by any means drops it on the spot.",
+      "pickupNote": "Picking a flag up is always a deliberate press of the battleground action key: nobody ever becomes the carrier by strafing through the wrong spot.",
+      "respawnHeading": "Falling in battle",
+      "respawnBody": "Death keeps the classic rite: your corpse lies where it fell until YOU release, and the spirit rises in the fenced graveyard beside your keep, warded there until your team's next respawn wave. The wave raises every waiting spirit together, and the two team waves are deliberately staggered, so the fight never fully resets at once. There is no corpse run and no Spirit Healer bargain: release, wait out the wave, fight.",
+      "carrierHeading": "Carrying the flag",
+      "carrierBody": "A carrier who holds the enemy flag too long grows more and more vulnerable, taking ever-increasing damage until the flag is captured, dropped, or returned. Hiding with the flag is a losing plan; running it home is the winning one.",
+      "ladderHeading": "The ladder",
+      "ladderBody": "Every match moves a persistent per-character battleground rating, win or lose, and the all-time board ranks the realm champions. Wins and hard-fought losses also pay Honor through the Warfare system."
     },
     "valeCupPage": {
       "heading": "De Dalbeker",
@@ -5802,7 +5984,6 @@ export const nl_NL: EnTranslations = {
   "yumi": {
     "bracket3": "Bescherm Yumi 3v3",
     "bracket5": "Bescherm Yumi 5v5",
-    "enterQueue": "Doe mee met Bescherm Yumi!",
     "queue": {
       "join": "Je sluit je aan bij de Bescherm Yumi-wachtrij. Bewaak je metgezel…",
       "leave": "Je verlaat de Bescherm Yumi-wachtrij.",
@@ -5840,9 +6021,6 @@ export const nl_NL: EnTranslations = {
   },
   "fiesta": {
     "bracket": "Fiesta",
-    "enterQueue": "Doe mee aan de Fiesta!",
-    "practice": "🎉 Oefenen tegen Bots",
-    "practiceNote": "Offline oefenen: brengt 3 AI-bots voort en zet je in de wachtrij voor een 2v2-Fiesta. Klik nogmaals om te stoppen.",
     "banner": {
       "wave": "GOLF {wave}/{total}, KIES EEN VERSTERKING!",
       "augmentGained": "Versterking verkregen: {name}!",
@@ -6099,16 +6277,16 @@ export const nl_NL: EnTranslations = {
   },
   "desktop": {
     "update": {
-      "checkingTitle": "Checking for updates...",
-      "checkingBody": "New versions download while you play.",
-      "uptodateTitle": "You're up to date",
+      "checkingTitle": "Controleren op updates...",
+      "checkingBody": "Nieuwe versies worden gedownload terwijl je speelt.",
+      "uptodateTitle": "Je hebt de nieuwste versie",
       "downloadingTitle": "Update {version} wordt gedownload...",
-      "downloadingBody": "You can keep playing. It installs when you quit.",
+      "downloadingBody": "Je kunt blijven spelen. Het installeert zodra je stopt.",
       "readyTitle": "Update {version} is klaar",
       "readyBody": "Deze wordt geïnstalleerd wanneer je afsluit, of herstart nu.",
       "restart": "Nu herstarten",
       "later": "Later",
-      "dismiss": "Dismiss"
+      "dismiss": "Sluiten"
     },
     "crash": {
       "title": "World of ClaudeCraft",
@@ -6324,7 +6502,6 @@ export const nl_NL: EnTranslations = {
       "mobileMore": "Meer",
       "mobileMoreAria": "Meer menu's tonen",
       "mobileSocial": "Sociaal",
-      "mobileArena": "Arena",
       "mobileMenu": "Menu",
       "mobileSettings": "Instellingen",
       "mobileUse": "Gebruiken",
@@ -6441,7 +6618,7 @@ export const nl_NL: EnTranslations = {
         "nameplates": "Naamplaatjes aan/uit",
         "meters": "Schademeters",
         "social": "Vrienden & Gilde",
-        "arena": "Arena (Ashen Coliseum)",
+        "arena": "PvP (Thornhollow Fields and Arenas)",
         "chat": "Chat openen",
         "attack": "Aanvallen",
         "actionBarSlot": "Actiebalk {slot}"
@@ -6575,6 +6752,11 @@ export const nl_NL: EnTranslations = {
     },
     "system": {
       "playerDeath": "Je bent gestorven.",
+      "deathRecapKillerAbility": "Je bent gestorven. Gedood door {killer}'s {ability}.",
+      "deathRecapKiller": "Je bent gestorven. Gedood door {killer}.",
+      "deathRecapAbility": "Je bent gestorven. Gedood door {ability}.",
+      "deathRecapFalling": "Je bent gestorven. Je bent te pletter gevallen.",
+      "deathRecapDrowned": "Je bent gestorven. Je bent verdronken.",
       "respawn": "Je voelt je uitgerust en weer heel.",
       "ignoringChat": "Chat van {name} wordt genegeerd.",
       "noLongerIgnoring": "{name} wordt niet langer genegeerd.",
@@ -7065,6 +7247,7 @@ export const nl_NL: EnTranslations = {
       "quest": "Opdrachtvoorwerp",
       "junk": "Rommel",
       "fineMaterial": "Fijn Materiaal",
+      "material": "Materiaal",
       "food": "Voedsel",
       "drink": "Drank",
       "tool": "Gereedschap",
@@ -7097,6 +7280,9 @@ export const nl_NL: EnTranslations = {
       "useFood": "Gebruik: Herstelt {amount} levenskracht over {seconds} sec. Je moet blijven zitten tijdens het eten.",
       "useDrink": "Gebruik: Herstelt {amount} mana over {seconds} sec. Je moet blijven zitten tijdens het drinken.",
       "questItem": "Questvoorwerp",
+      "questRelated": "Quest: {quest}",
+      "questRules": "Kan niet worden verkocht, in de bank gezet of geruild.",
+      "questOrphaned": "Niet nodig voor een actieve quest.",
       "classes": "Klassen: {classes}",
       "sellPrice": "Verkoopprijs: {money}",
       "clickBuy": "Klik om te kopen",
@@ -7232,6 +7418,12 @@ export const nl_NL: EnTranslations = {
       "reclaim": "Terugnemen",
       "buyAria": "{item} kopen voor {price}",
       "reclaimAria": "{item} terugnemen",
+      "buyConfirmTitle": "Bevestig aankoop",
+      "buyConfirmBody": "{item} kopen voor {price}?",
+      "buyConfirmBodyStack": "{item} x{count} kopen voor {price} ({each} per stuk)?",
+      "buyConfirmAccept": "Kopen",
+      "buyConfirmCancel": "Annuleren",
+      "buyChanged": "Die vermelding is veranderd voordat je bevestigde. Controleer de prijs en probeer het opnieuw.",
       "sellNote": "Bied goederen uit je tassen aan. De handelaar neemt een aandeel van {cut}% wanneer een voorwerp verkocht wordt. Je gebruikt {used}/{max} aanbiedingsplekken.",
       "sellPickEmpty": "Klik op een voorwerp in je tassen om te kiezen wat je verkoopt.",
       "quantity": "Aantal",
@@ -8719,6 +8911,18 @@ export const nl_NL: EnTranslations = {
       "fen_muster_order": {
         "name": "Veenbrug-Mobilisatiebevel"
       },
+      "firebottle": {
+        "name": "Vuurfles"
+      },
+      "murloc_hut": {
+        "name": "Mudfin-Hut"
+      },
+      "restless_skull": {
+        "name": "Rusteloze Schedel"
+      },
+      "vanguard_bone": {
+        "name": "Bot van de Voorhoede"
+      },
       "mire_prowler_pelt": {
         "name": "Slijksluiper-Vacht"
       },
@@ -9994,6 +10198,21 @@ export const nl_NL: EnTranslations = {
       "reins_terrorspark_groundshaker": {
         "name": "Contactsleutel: Schrikvonk, de Grondschudder"
       },
+      "reins_drakemaw_raptor": {
+        "name": "Teugels van de Drakenmuil-Raptor"
+      },
+      "moggers_hide_quiver": {
+        "name": "Moggers Leren Pijlkoker"
+      },
+      "cragmaw_huntquiver": {
+        "name": "Cragmaws Jachtpijlkoker"
+      },
+      "gravewyrm_bone_quiver": {
+        "name": "Grafwurm-Beenpijlkoker"
+      },
+      "direfang_quiver": {
+        "name": "Direfang-Pijlkoker"
+      },
       "conjured_water4": {
         "name": "Getoverd bronwater"
       },
@@ -10989,6 +11208,21 @@ export const nl_NL: EnTranslations = {
       "spider_egg_sac": {
         "name": "Spinnen-Eierzak"
       },
+      "spider_egg": {
+        "name": "Broedmoeder-Ei"
+      },
+      "widow_hatchling": {
+        "name": "Weduwenjong"
+      },
+      "drowned_warlord": {
+        "name": "De Verdronken Krijgsheer"
+      },
+      "brakka_wallbreaker": {
+        "name": "Brakka de Muurbreker"
+      },
+      "threnos_first_voice": {
+        "name": "Threnos de Eerste Stem"
+      },
       "grave_silt_bulwark": {
         "name": "Grafslib-Bolwerk"
       },
@@ -11168,6 +11402,18 @@ export const nl_NL: EnTranslations = {
       },
       "cindraleth_maw_matriarch": {
         "name": "Cindraleth de Muilmatriarch"
+      },
+      "dragonkin_egg": {
+        "name": "Drakenvolk-Ei"
+      },
+      "dragonkin_whelp": {
+        "name": "Drakenvolk-Welp"
+      },
+      "dragonkin_broodguard": {
+        "name": "Drakenvolk-Broedwacht"
+      },
+      "drakemaw_broodlord": {
+        "name": "Drakenmuil-Broedheer"
       },
       "gilded_stag": {
         "name": "Vergulde Hert"
@@ -12201,7 +12447,7 @@ export const nl_NL: EnTranslations = {
       },
       "q_no_rest": {
         "title": "Geen Rust in het Riet",
-        "text": "Het ritueel op die wierookvaten bindt de verdronkenen om op te staan waar het moeras hen ook raakt - en het moeras raakt alles. Er zal geen rust zijn in dit riet tot de doden de levenden overtreffen. We kunnen het ritueel nog niet ongedaan maken, maar we kunnen het van soldaten ontdoen. Leg nog 14 van de Verdronken Doden ter ruste.",
+        "text": "De rite op die wierookvaten dwingt de verdronkenen om op te staan, en nu heeft ze er een opgewekt die sterk genoeg is om hen te leiden. De wachters noemen hem de Verdronken Krijgsheer, en zolang hij de Verdronken Kapel in bezit houdt, blijven de doden in het gelid. Breek hem, {playerName}, en de rest stuift uiteen, terug het moeras in.",
         "completion": "Je geeft de doden meer genade dan hun meesters ooit deden. Neem dit aan - je hebt het meer dan verdiend.",
         "objectives": {
           "0": {
@@ -12479,9 +12725,6 @@ export const nl_NL: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wurmsekte-Dweper gedood"
-          },
-          "1": {
-            "label": "Wurmsekte-Bevelen"
           }
         }
       },
@@ -12492,9 +12735,6 @@ export const nl_NL: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Wurmsekte-Necromancer gedood"
-          },
-          "1": {
-            "label": "Rituele Phylacterie"
           }
         }
       },

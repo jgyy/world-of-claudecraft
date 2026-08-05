@@ -2,6 +2,121 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const tr_TR: Partial<Record<TranslationKey, string>> = {
+  'hud.system.deathRecapAbility': 'Öldün. {ability} tarafından öldürüldün.',
+  'hud.system.deathRecapDrowned': 'Öldün. Boğuldun.',
+  'hud.system.deathRecapFalling': 'Öldün. Düşerek can verdin.',
+  'hud.system.deathRecapKiller': 'Öldün. {killer} tarafından öldürüldün.',
+  'hud.system.deathRecapKillerAbility': 'Öldün. {killer} tarafından {ability} ile öldürüldün.',
+  'hudChrome.bags.filterQuestCountAria': 'Görev, {count} öge',
+  'hudChrome.bags.itemAriaQuest': '{item}, adet {count}, görev eşyası',
+  'hudChrome.bags.noQuestItems': 'Çantalarında görev eşyası yok.',
+  'hudChrome.bank.cannotDepositNow': 'Şu anda yatırılamaz',
+  'hudChrome.bank.depositAllTooltip':
+    'Çantalarındaki tüm zanaat malzemelerini ve döküntü eşyaları tek seferde bankaya gönderir. Toplama aletlerine, kuşanılan teçhizata, görev eşyalarına ve sarf malzemelerine asla dokunulmaz.',
+  'hudChrome.bank.guildBuyConfirm':
+    'Lonca hazinesinden {price} karşılığında {count} ek lonca bankası yuvası satın alınsın mı?',
+  'hudChrome.bank.guildBuyNote': 'Lonca hazinesinden ödenir',
+  'hudChrome.bank.guildCannotDeposit': 'Lonca bankasına konulamaz',
+  'hudChrome.bank.guildCapacityAria': 'Kullanılan lonca bankası yuvaları: {used} / {total}',
+  'hudChrome.bank.guildContentsTab': 'İçerik',
+  'hudChrome.bank.guildDepositGold': 'Para Yatır',
+  'hudChrome.bank.guildDepositGoldTitle': 'Lonca hazinesine para yatır',
+  'hudChrome.bank.guildDepositHint': 'Lonca bankasına yatırmak için tıkla',
+  'hudChrome.bank.guildDormantAria': '{item}, adet {count}, çekilemez',
+  'hudChrome.bank.guildDormantHint': 'Bu eşya lonca bankasında kilitli ve çekilemez.',
+  'hudChrome.bank.guildDormantNote':
+    'Kilitli eşyalar çekilemez ve loncanın dağıtılmasını engeller.',
+  'hudChrome.bank.guildEmpty': 'Lonca bankası boş.',
+  'hudChrome.bank.guildGoldAvailable': 'Kullanılabilir: {amount}',
+  'hudChrome.bank.guildGoldCannotMove': 'O miktar şu anda taşınamaz.',
+  'hudChrome.bank.guildLogTab': 'Günlük',
+  'hudChrome.bank.guildOpenAccept': 'Aç',
+  'hudChrome.bank.guildOpenBank': 'Lonca bankasını aç',
+  'hudChrome.bank.guildOpenConfirm':
+    'Lonca bankası {price} karşılığında açılsın mı? Bu, kendi paranından ödenir.',
+  'hudChrome.bank.guildOpenNote': 'Lonca hazinesinden değil, kendi paranından ödenir',
+  'hudChrome.bank.guildPurseShort': 'Yeterli para yok',
+  'hudChrome.bank.guildTab': 'Lonca',
+  'hudChrome.bank.guildTreasury': 'Lonca hazinesi',
+  'hudChrome.bank.guildTreasuryShort': 'Hazine yetersiz',
+  'hudChrome.bank.guildUnknownItem': 'Bilinmeyen eşya',
+  'hudChrome.bank.guildViewsAria': 'Lonca bankası görünümleri',
+  'hudChrome.bank.guildWithdrawGold': 'Para Çek',
+  'hudChrome.bank.guildWithdrawGoldTitle': 'Lonca hazinesinden para çek',
+  'hudChrome.bank.logAdminPurge': 'Bir yönetici {count} {item} kaldırdı',
+  'hudChrome.bank.logAria': 'Lonca bankası etkinlik günlüğü',
+  'hudChrome.bank.logBuySlots': '{actor}, {amount} karşılığında banka genişletmesi satın aldı',
+  'hudChrome.bank.logCharterFee': '{actor}, {amount} tutarında lonca kuruluş ücretini ödedi',
+  'hudChrome.bank.logDepositItem': '{actor}, {count} {item} yatırdı',
+  'hudChrome.bank.logDepositMoney': '{actor}, {amount} yatırdı',
+  'hudChrome.bank.logEmpty': 'Lonca bankasına henüz bir şey girmedi ya da çıkmadı.',
+  'hudChrome.bank.logFormerMember': 'Eski bir lonca üyesi',
+  'hudChrome.bank.logLoading': 'Lonca bankası günlüğü yükleniyor...',
+  'hudChrome.bank.logNote': 'En son {count} lonca bankası işlemi.',
+  'hudChrome.bank.logOpenBank': '{actor}, lonca bankasını {amount} karşılığında açtı',
+  'hudChrome.bank.logRefused': 'Lonca bankası günlüğünü yalnızca subaylar okuyabilir.',
+  'hudChrome.bank.logWithdrawItem': '{actor}, {count} {item} çekti',
+  'hudChrome.bank.logWithdrawMoney': '{actor}, {amount} çekti',
+  'hudChrome.bank.personalTab': 'Kişisel',
+  'hudChrome.bank.tabsAria': 'Banka sekmeleri',
+  'hudChrome.crafting.dialogOption': 'Üretim',
+  'hudChrome.crafting.dialogOptionAria': '{craft} için üretim penceresini aç',
+  'hudChrome.deeds.recentJumpAria': '{name} konumuna atla',
+  'hudChrome.landing.browserSupport.body':
+    'Bu tarayıcıda performans düşüklüğü yaşayabilirsin. En iyi deneyim için Windows, macOS veya Linux masaüstü uygulamasını indir. Tarayıcıda oynamayı mı tercih edersin? Chrome en iyi performansı verir, Firefox ve Safari da desteklenir.',
+  'hudChrome.landing.browserSupport.continueInBrowser': 'Tarayıcıda devam et',
+  'hudChrome.landing.browserSupport.dismissAria': 'Desteklenmeyen tarayıcı bildirimini kapat',
+  'hudChrome.landing.browserSupport.getDesktopApp': 'Masaüstü uygulamasını indir',
+  'hudChrome.landing.browserSupport.title': 'Dikkat: desteklenmeyen tarayıcı',
+  'hudChrome.materialHint.cookingCatch': 'Pişirme malzemesi. Yemeden önce pişirilmelidir.',
+  'hudChrome.mounts.desc_drakemaw_raptor':
+    "Ejder Ağzı Kalderası'ndan gelen, eyere alıştırılmış bir yuva raptoru: tepeden tırnağa kas ve hız, hâlâ hafiften kül kokuyor.",
+  'hudChrome.mounts.name_drakemaw_raptor': 'Ejder Ağzı Raptoru',
+  'hudChrome.options.graphicsApplied': 'Grafik ayarları uygulandı.',
+  'hudChrome.options.graphicsApply': 'Grafikleri Uygula',
+  'hudChrome.options.graphicsApplying': 'Grafik ayarları uygulanıyor...',
+  'hudChrome.options.graphicsDraftChanged': 'Grafik değişiklikleri uygulanmaya hazır.',
+  'hudChrome.options.graphicsFailed': 'Grafikler uygulanamadı. Önceki ayarların hâlâ etkin.',
+  'hudChrome.options.graphicsFatal':
+    'Grafik kurtarma başarısız oldu. Devam etmek için oyunu yeniden yükle.',
+  'hudChrome.options.graphicsReload': 'Oyunu Yeniden Yükle',
+  'hudChrome.options.graphicsRetry': 'Grafikleri Tekrar Dene',
+  'hudChrome.options.graphicsSaved':
+    'Grafik ayarları kaydedildi. Etkin oluşturucu zaten bu ayarlarla eşleşiyor.',
+  'hudChrome.options.lockActionBars': 'Eylem Çubuklarını Kilitle',
+  'itemUi.kind.material': 'Malzeme',
+  'itemUi.market.buyChanged':
+    'Bu ilan sen onaylamadan önce değişti. Fiyatı kontrol et ve tekrar dene.',
+  'itemUi.market.buyConfirmAccept': 'Satın Al',
+  'itemUi.market.buyConfirmBody': '{item}, {price} karşılığında satın alınsın mı?',
+  'itemUi.market.buyConfirmBodyStack':
+    '{item} x{count}, {price} karşılığında (her biri {each}) satın alınsın mı?',
+  'itemUi.market.buyConfirmCancel': 'İptal',
+  'itemUi.market.buyConfirmTitle': 'Satın Alma İşlemini Onayla',
+  'itemUi.tooltip.questOrphaned': 'Aktif hiçbir görev için gerekli değil.',
+  'itemUi.tooltip.questRelated': 'Görev: {quest}',
+  'itemUi.tooltip.questRules': 'Satılamaz, bankaya konulamaz veya takas edilemez.',
+  'desktop.update.checkingBody': 'Yeni sürümler siz oynarken indirilir.',
+  'desktop.update.checkingTitle': 'Güncellemeler kontrol ediliyor...',
+  'desktop.update.dismiss': 'Kapat',
+  'desktop.update.downloadingBody': 'Oynamaya devam edebilirsin. Çıkış yaptığında kurulur.',
+  'desktop.update.uptodateTitle': 'En güncel sürümdesin',
+  'entities.items.firebottle.name': 'Ateş Şişesi',
+  'entities.items.murloc_hut.name': 'Mudfin Kulübesi',
+  'entities.items.reins_drakemaw_raptor.name': "Ejder Ağzı Raptoru'nun Dizginleri",
+  'entities.items.restless_skull.name': 'Huzursuz Kafatası',
+  'entities.items.vanguard_bone.name': 'Öncü Kemiği',
+  'entities.mobs.brakka_wallbreaker.name': 'Duvar Kıran Brakka',
+  'entities.mobs.dragonkin_broodguard.name': 'Ejder Soyu Yuva Bekçisi',
+  'entities.mobs.dragonkin_egg.name': 'Ejder Soyu Yumurtası',
+  'entities.mobs.dragonkin_whelp.name': 'Ejder Soyu Yavrusu',
+  'entities.mobs.drakemaw_broodlord.name': 'Ejder Ağzı Yuva Lordu',
+  'entities.mobs.drowned_warlord.name': 'Boğulmuş Savaş Lordu',
+  'entities.mobs.spider_egg.name': 'Kuluçka Anası Yumurtası',
+  'entities.mobs.threnos_first_voice.name': 'İlk Ses Threnos',
+  'entities.mobs.widow_hatchling.name': 'Dul Yumurcağı',
+  'entities.quests.q_no_rest.text':
+    "Bu buhurdanların üzerindeki ayin boğulmuşları ayağa kalkmaya zorluyor ve şimdi onlara önderlik edecek kadar güçlü birini de ayağa kaldırdı. Muhafızlar ona Boğulmuş Savaş Lordu diyor; o Boğulmuş Şapel'i elinde tuttuğu sürece ölüler saflarını korur. Onu yere ser, {playerName}, geri kalanlar bataklığa dağılıp gitsin.",
   'hud.social.tenure.recruit': 'Acemi',
   'hud.social.tenure.veteran': 'Kıdemli',
   'hudChrome.keybinds.mouseHint':
@@ -2247,9 +2362,6 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.calendar.events.delveDay.note':
     "Birader Halven haritalarını işaretliyor: Çökmüş Emanetlik'e meydan okumak için güzel bir gün.",
   'hudChrome.calendar.events.delveDay.title': 'Mağara Günü',
-  'hudChrome.calendar.events.fiestaNight.note':
-    'İkiye iki Fiesta ringi bu gece en gürültülü kalabalığını topluyor.',
-  'hudChrome.calendar.events.fiestaNight.title': 'Fiesta Gecesi',
   'hudChrome.calendar.events.fishingDerby.note':
     'Oltacılar göl kıyılarını doldurdu. Bir olta kap ve balıkçı hikayeleri paylaş.',
   'hudChrome.calendar.events.fishingDerby.title': 'Balık Tutma Yarışması',
@@ -3461,6 +3573,7 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'entities.items.crag_warden_cudgel.name': 'Kayalık Bekçisi Topuzu',
   'entities.items.craghorn_staff.name': 'Kayaboynuz Asası',
   'entities.items.cragmaw_huntcord.name': "Cragmaw'un Av Kuşağı",
+  'entities.items.cragmaw_huntquiver.name': "Cragmaw'un Av Sadağı",
   'entities.items.cragmaw_prowlboots.name': 'Cragmaw Sinsi Çizmeleri',
   'entities.items.cragwalker_boots.name': 'Kayayürüyen Çizmeleri',
   'entities.items.crimson_amber_armor_plate.name': 'Koyu Kırmızı Kehribar',
@@ -3540,6 +3653,7 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'entities.items.gravewardens_shiv.name': 'Mezar Bekçisi Şişi',
   'entities.items.gravewoven_raiment.name': 'Mezardokuma Kıyafeti',
   'entities.items.gravewyrm_gauntlets.name': 'Mezarejderi Eldivenleri',
+  'entities.items.gravewyrm_bone_quiver.name': 'Mezarejderi Kemik Sadağı',
   'entities.items.gravewyrm_mantle.name': 'Mezarejderi Pelerini',
   'entities.items.gravewyrm_sabatons.name': 'Mezarejderi Demir Çizmeleri',
   'entities.items.gravewyrm_scale_hauberk.name': 'Mezarejderi Pul Zırhı',
@@ -3600,6 +3714,7 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'entities.items.mistveil_grips.name': 'Sis Tülü Eldivenleri',
   'entities.items.moggers_copper_cudgel.name': "Mogger'ın Bakır Topuzu",
   'entities.items.moggers_shiv.name': "Mogger'ın Şişi",
+  'entities.items.moggers_hide_quiver.name': "Mogger'ın Deri Sadağı",
   'entities.items.moggers_stomper_boots.name': "Mogger'ın Ezici Çizmeleri",
   'entities.items.monarch_crown_helm.name': "Hükümdar'ın Tacı",
   'entities.items.copper_mining_pick.name': 'Bakır Maden Kazması',
@@ -3723,6 +3838,7 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'entities.items.stormcallers_spaulders.name': 'Galecall Omuzlukları',
   'entities.items.bonewrought_greatsword.name': 'Bonewrought Büyük Kılıcı',
   'entities.items.direfang_greatblade.name': 'Direfang Palası',
+  'entities.items.direfang_quiver.name': 'Direfang Sadağı',
   'entities.items.bonewrought_bulwark.name': 'Bonewrought Siperi',
   'entities.items.wraithfire_orb.name': 'Wraithfire Küresi',
   'entities.items.stormshard_leggings.name': 'Fırtınaparçası Tozlukları',
@@ -4062,7 +4178,6 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_cult_orders.completion':
     "Bu yazı... Benzerini en son Morthen'in büyü kitabında, Doğudere'de görmüştüm. Uğruna savaştığımız her mezarı aynı el yönlendirmiş, {playerName}.",
   'entities.quests.q_cult_orders.objectives.0.label': 'Ejdertarikatı Bağnazı öldürüldü',
-  'entities.quests.q_cult_orders.objectives.1.label': 'Ejdertarikatı Emirleri',
   'entities.quests.q_cult_orders.text':
     'Bağnazlar artık bir amaçla hareket ediyor, nöbetler kuruldu, erzaklar sayıldı, kuşatmadan önceki askerler gibi. Örgütlenen tarikatçılar, emir alan tarikatçılardır, {playerName}. Sekiz tane daha öldür ve bana yazılı emirlerinden dört takım getir. Onlara komuta eden eli öğrenmek istiyorum.',
   'entities.quests.q_cult_orders.title': 'Aşağıdan Gelen Emirler',
@@ -4237,15 +4352,12 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_necromancers.completion':
     "Işık bizi affetsin. Bunlar Vadi'nin ve bataklığın ölülerini barındırıyor; Mezarçağıranların dirilttiği her ceset, hasat edilmiş. Hiç ordu kurmuyorlarmış, {playerName}. Bir haraç topluyorlarmış.",
   'entities.quests.q_necromancers.objectives.0.label': 'Ejder Tarikatı Nekromatiği öldürüldü',
-  'entities.quests.q_necromancers.objectives.1.label': 'Ayinsel Filakter',
   'entities.quests.q_necromancers.text':
     'Emirler bir "filakter halkasından" söz ediyor; ruh kapları, {playerName}, Mabedi beslemek için çevresine yerleştirilmiş. Tarikatın nekromatikleri onları kutsal emanetler gibi taşıyor. Sekiz nekromatik öldür ve bana üç filakteri kırılmamış hâlde getir. İçlerinde hangi ruhların olduğunu bilmeliyim.',
   'entities.quests.q_necromancers.title': 'Filakter Halkası',
   'entities.quests.q_no_rest.completion':
     'Ölülere, efendilerinin hiç göstermediği kadar merhamet gösteriyorsun. Şunu al; fazlasıyla hak ettin.',
   'entities.quests.q_no_rest.objectives.0.label': 'Boğulmuş Ölü huzura kavuşturuldu',
-  'entities.quests.q_no_rest.text':
-    'O buhurdanlıklardaki ayin, boğulmuşları bataklığın değdiği her yerde dirilmeye bağlıyor; bataklık ise her şeye değiyor. Ölüler, dirilerden fazla olana dek bu sazlıklarda huzur olmayacak. Ayini henüz bozamayız, ama onu askerlerinden boşaltabiliriz. 14 Boğulmuş Ölüyü daha huzura kavuştur.',
   'entities.quests.q_no_rest.title': 'Sazlıkta Huzur Yok',
   'entities.quests.q_nythraxis_bound_guardian.completion':
     "Üç emanet aynı hikâyeyi anlatıyor: Aldren kralını savunmak için savaştı, Malric ölümün sınırını yıktı ve Voss ardından geleni durdurmaya çalıştı. Mühür zayıflıyor ve bu mühür yüzüğü, Nythraxis'in mezarının anahtarı. Artık Nythraxis'in Mahzeni'ne girmeye uyumlandın. Terk edilmiş mahzene dön, kraliyet kapısını aç ve eski kralın öfkesi Dikenzirve'nin ötesine taşmadan Nythraxis ile yüzleş.",
@@ -5365,7 +5477,6 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'fiesta.end.draw': 'FIESTA BERABERE! Sonuç çok yakın!',
   'fiesta.end.loss': 'FIESTA KAYBEDİLDİ! Tekrar dene!',
   'fiesta.end.win': 'FIESTA KAZANILDI! 🎉 Ne parti ama!',
-  'fiesta.enterQueue': "Fiesta'ya Katıl!",
   'fiesta.error.leaderOnly': 'Takımını {label} için kuyruğa yalnızca grup lideri sokabilir.',
   'fiesta.error.noAugment': 'Şu anda seçebileceğin bir güçlendirme yok.',
   'fiesta.error.notOnOffer': 'O güçlendirme sunulmuyor.',
@@ -5381,9 +5492,6 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'fiesta.powerup.pow_colossus.name': 'Dev Heykel',
   'fiesta.powerup.pow_moon_boots.name': 'Ay Çizmeleri',
   'fiesta.powerup.pow_speed_demon.name': 'Hız Şeytanı',
-  'fiesta.practice': '🎉 Botlara Karşı Antrenman',
-  'fiesta.practiceNote':
-    'Çevrimdışı antrenman: 3 yapay zeka botu doğurur ve seni bir 2v2 Fiesta için kuyruğa sokar. Durdurmak için tekrar tıkla.',
   'fiesta.queue.join': '2v2 Fiesta kuyruğuna katılıyorsun. PARTİYE hazır ol…',
   'fiesta.queue.leave': '2v2 Fiesta kuyruğundan ayrılıyorsun.',
   'fiesta.queue.teamLeave': 'Takımın 2v2 Fiesta kuyruğundan ayrılıyor.',
@@ -5614,38 +5722,18 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
     'Bir dostu korur, böylece yakın dövüş saldırganları vurdukları için kendilerine zarar verir.',
   'guide.abilityHook.thunder_clap': 'Çevrendeki her şeye vurur ve saldırılarını yavaşlatır.',
   'guide.abilityHook.wrath': 'Bir hedefe menzilden fırlatılan bir doğa oku; başvuru bomban.',
-  'guide.arenaPage.augmentsNote':
-    'Güçlendirmeler ve takviyeler yalnızca maç boyunca sürer. Kalıcı güçle değil, eğlenceli, anında kurgularla ilgilidirler, yani kimse parayla zafer satın alamaz.',
   'guide.arenaPage.coliseumBody':
     'Coliseum, diyarın arenasıdır; burada dereceli maçlarda diğer oyuncularla, bire bir ya da ikiye iki karşı karşıya gelirsin. Her kademe kendi sıralamasını tutar, bu yüzden bir galibiyet seni o merdivende, tüm diyarın görmesi için yukarı taşır. Bir kademeye tek başına ya da eşinle kaydolmak için Arena penceresini aç.',
   'guide.arenaPage.coliseumHeading': 'Kül Kolezyumu',
   'guide.arenaPage.duelsBody':
     'Karşılaştığın herhangi bir oyuncuyu dostane bir düelloya davet et. Gururdan başka kaybedilecek bir şey yok, bu yüzden bir eşleşmeyi öğrenmenin ya da dostça bir tartışmayı çözmenin en kolay yoludur.',
   'guide.arenaPage.duelsHeading': 'Düellolar',
-  'guide.arenaPage.fiestaBody':
-    'Fiesta, tek bir kesintisiz müsabaka olarak oynanan hızlı, ikiye iki bir kapışmadır; her dövüşçü eşit bir zemine getirilir. Dövüş ilerledikçe güçlendirmeler seçersin; bunlar kitini anında yeniden şekillendiren hızlı takviyelerdir, böylece hiçbir maç tam olarak aynı oynanmaz.',
-  'guide.arenaPage.fiestaHeading': 'İkiye iki Fiesta',
   'guide.arenaPage.heading': 'Arena ve PvP',
   'guide.arenaPage.intro':
     'Kendini diğer oyunculara karşı sınamak ister misin? Oyuncuya karşı oyuncu içeride hazır, ve bu her zaman senin seçtiğin bir şeydir, asla sana dayatılan bir şey değil.',
   'guide.arenaPage.ladderBody':
     'Dereceli oyun, konumunu zaman içinde takip eder. Nerede durduğunu ve diyarın zirvesini kimin tuttuğunu görmek için lider tablosuna bak.',
   'guide.arenaPage.ladderHeading': 'Merdiveni tırmanmak',
-  'guide.arenaPage.powerupsBody':
-    'Parlayan küreler de dövüşün ortasında arenaya düşer, kim önce ulaşırsa onun olur. Bilerek abartılıdırlar ve yalnızca kısa bir süre dayanırlar: bir göz kırpımlık göz kamaştırıcı hız için Hız İblisi, hantal bir deve dönüşmek için Devasa, zıplayan, düşük yerçekimli bir sıçrama için Ay Botları, ve ani bir öfke dalgası için Cinnet.',
-  'guide.arenaPage.powerupsTitle': 'Ringdeki takviyeler',
-  'guide.arenaPage.waveGoldBody':
-    'Orta dalga: kurgunun şekillenmeye ve uyum tutturmaya başladığı iki yönlü kombolar.',
-  'guide.arenaPage.waveGoldTitle': 'Altın',
-  'guide.arenaPage.wavePrismaticBody':
-    'Son dalga: kurguyu belirleyen, ekran eriten, en güzel anlamda saçma hissettirmesi amaçlanan sıçramalar.',
-  'guide.arenaPage.wavePrismaticTitle': 'Prizmatik',
-  'guide.arenaPage.waveSilverBody':
-    'Açılış dalgası: sınıfının temellerini keskinleştiren temiz, tek istatistikli takviyeler.',
-  'guide.arenaPage.waveSilverTitle': 'Gümüş',
-  'guide.arenaPage.wavesBody':
-    'Bir Fiesta müsabakası ilerledikçe sana taze seçimler sunar ve dövüş uzadıkça seçimler cüretkarlaşır. Bir dalgadan diğerine kurgunu inşa edersin, her seferinde birkaç seçenekten birini seçer ve müsabakanın geri kalanı için onu elinde tutarsın.',
-  'guide.arenaPage.wavesTitle': 'Güçlendirmeler dalgalar halinde gelir',
   'guide.bestiary.flavor.gravecaller_cultist':
     'Vadiden zirvelere kadar mezarları kirleten ölüm tarikatının cüppeli hizmetkarları. Toplandıkları yerde, ölüler huzur bulmaz.',
   'guide.bestiary.flavor.grubjaw':
@@ -6655,7 +6743,6 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'hud.core.mapCanvasLabel': 'Harita',
   'hud.core.mapSummary': '{zone} haritası.',
   'hud.core.maxLevel': 'AZAMİ SEVİYE',
-  'hud.core.mobileArena': 'Arena',
   'hud.core.mobileAttack': 'Saldır',
   'hud.core.mobileCamera': 'Kamera — yeniden ortalamak için çift dokun',
   'hud.core.mobileChat': 'Sohbet',
@@ -6752,7 +6839,6 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'hud.errors.whisperMissing': "Çevrimiçi olan '{name}' adlı bir oyuncu yok.",
   'hud.errors.whisperSelf': 'Kendi kendine mırıldanıyorsun. Kimse duymuyor.',
   'hud.keybinds.actions.actionBarSlot': 'Eylem Çubuğu {slot}',
-  'hud.keybinds.actions.arena': 'Arena (Kül Koliseumu)',
   'hud.keybinds.actions.attack': 'Saldır',
   'hud.keybinds.actions.attackMove': 'Saldırarak Hareket',
   'hud.keybinds.actions.autorun': 'Otomatik Koşmayı Aç/Kapat',
@@ -8843,9 +8929,6 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
     'Hedefin zırhını parçalar, her uygulamada %{damage} azaltır. 5 kez istiflenir. Yüksek miktarda tehdit üretir.',
   'entities.mobs.training_dummy.name': 'Antrenman Kuklası',
   'entities.mobs.yumi_cat.name': 'Yumi',
-  'guide.arenaPage.yumiBody':
-    "Yumi'yi Koru, bir labirentte oynanan bir takım hedef modudur: her taraf kendi kedi yoldaşını korurken diğerininkini avlar. Ara sıra her iki kedi de labirentin yeni köşelerine ışınlanır, bu yüzden dövüş savunma, avlanma ve onları yeniden bulmak için yarışma arasında gidip gelir. Üçe üç ya da beşe beş olarak kuyruğa gir; dövüşte düşmek seni yalnızca kısa bir süre kenara çeker.",
-  'guide.arenaPage.yumiHeading': "Yumi'yi Koru",
   'hudChrome.archetypeTitle.hobbyLabel': 'Hobi',
   'hudChrome.auraEffect.armorPct': 'Zırhı %{pct} azaltır',
   'hudChrome.auraEffect.armorPctStacks': 'Zırhı %{pct} azaltır ({stacks} istif)',
@@ -8865,7 +8948,6 @@ export const tr_TR: Partial<Record<TranslationKey, string>> = {
   'yumi.bracket5': "Yumi'yi Koru 5v5",
   'yumi.end.loss': "YENİLGİ! Yumi'n düştü.",
   'yumi.end.win': 'ZAFER! Yumi güvende!',
-  'yumi.enterQueue': "Yumi'yi Koru'ya Katıl!",
   'yumi.error.partyTooBig3': "Yumi'yi Koru 3v3 en fazla üç kişilik bir gruba izin verir.",
   'yumi.error.partyTooBig5': "Yumi'yi Koru 5v5 en fazla beş kişilik bir gruba izin verir.",
   'yumi.hud.aria': "Senin Yumi'n {max} candan {mine} canda, düşman Yumi'si {theirs} canda.",

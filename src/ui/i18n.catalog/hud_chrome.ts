@@ -670,9 +670,14 @@ export const hudChromeStrings = {
     // segment closes itself a few seconds after the fight ends.
     autoShowHint:
       'Rows appear automatically once your party deals damage or healing, and this segment closes a few seconds after combat ends.',
-    // Hover breakdown for one bar: a header line, then one row per ability (or,
-    // on the threat tab, per contributor). A pet is not its own bar, so its
-    // abilities carry the pet's name.
+    // Threat tab subtitle when no engaged mob has a live hate table left (the
+    // fight is over). The bars are damage dealt to {name}, not hate, and saying
+    // so is the point: a frozen damage readout under a "Threat" heading is what
+    // players read as the meter having stopped updating.
+    threatFallback: 'No live threat: showing damage to {name}',
+    // Hover breakdown for one bar: a header line, then one row per ability. On
+    // the threat tab each contributor (member or pet) has its own bar, so the
+    // panel is narrowed to that contributor's abilities.
     breakdownSummary: '{tab}: {value}',
     breakdownRow: '{value} ({percent})',
     breakdownOther: 'Other ({count})',
@@ -724,6 +729,7 @@ export const hudChromeStrings = {
     // Discord is a brand name; it stays identical across locales.
     discord: 'Discord',
     valecup: 'Vale Cup',
+    bgFlag: 'Battleground Flag Action',
     sheathe: 'Sheathe/Unsheathe Weapon',
     // Pet bar (Ctrl+1..5 by default) key-binding rows + category header.
     categoryPet: 'Pet',
@@ -797,6 +803,7 @@ export const hudChromeStrings = {
     name_stormfeather_griffin: 'Sky-Reach Stormfeather',
     name_thunderstrut_gobbler: 'Thunderstrut the Grand Gobbler',
     name_terrorspark_groundshaker: 'Terrorspark Groundshaker',
+    name_drakemaw_raptor: 'Drakemaw Raptor',
     desc_valorsteed: 'A hardy, sure-footed steed that provides enhanced travel speed.',
     desc_grag_bear: 'A hardy, sure-footed bear that provides enhanced travel speed.',
     desc_stalkglider_snail: 'A hearty, slow-burning snail that provides enhanced travel speed.',
@@ -810,6 +817,8 @@ export const hudChromeStrings = {
       'A colossal storm-hatched gobbler that struts down from the Waking Peak, tail fanned like a thunderhead.',
     desc_terrorspark_groundshaker:
       'A compact armored engine with heavy tracks, a deep-bore cannon, and a saddle built for fearless pilots.',
+    desc_drakemaw_raptor:
+      'A saddle-broken brood raptor from the Drakemaw Caldera, all sinew and sprint, still smelling faintly of ash.',
   },
   // The riding lesson at the Highwatch stables (q_riding_lessons): Stablemaster
   // Marla lends the player a training Valorsteed for the paddock race. Finishing
@@ -849,6 +858,136 @@ export const hudChromeStrings = {
   // banners / log lines. Nation names are SHORT proper names; sport ability
   // names/descriptions localize through the entity catalog
   // (i18n.catalog/abilities.ts), not here.
+  // Thornhollow Fields, the 5v5 capture-the-flag battleground: the queue window, the
+  // in-match scoreboard strip, and the event banners/log lines.
+  // The merged PvP window's chrome: the launcher (one button for Thornhollow Fields and
+  // the arenas) and the tab-strip bracket labels.
+  pvp: {
+    // Icon-button hover: the initialism alone (the window names its own tabs;
+    // the long form overflowed the tooltip).
+    launcherTitle: 'PvP',
+    mobileLabel: 'PvP',
+    bracket1v1: '1v1',
+    bracket2v2: '2v2',
+  },
+  bg: {
+    title: 'Thornhollow Fields',
+    // The one-paragraph pitch above the queue button: what the place is, then
+    // what the match is. Kept to two sentences so the panel never scrolls.
+    blurb:
+      'Two ruined keeps face each other across a walled hollow in the shadow of Thornpeak: Crimson to the south, Azure to the north, and the older Ruin Courtyard between them that neither has ever held. Five a side, one banner each, and the first to carry three of theirs home takes the field.',
+    modeTag: '5v5 Capture the Flag',
+    offlineNote: 'Thornhollow Fields is syncing. The queue opens once the realm answers.',
+    ratingSummary: 'Rating. {wins} wins / {losses} losses',
+    careerCaptures: 'Career captures: {count}',
+    enterQueue: 'Enter the Queue',
+    enterQueueParty: 'Enter the Queue (party of {count})',
+    leaveQueue: 'Leave Queue',
+    searching: 'Searching. {count}/{size} in queue.',
+    queuedParty: 'Party of {count}.',
+    queueNote:
+      'Two teams of five. Steal the enemy banner and run it to your keep. First to 3 captures wins. Group up to 5 and queue together; grab Sprint Runes and weave the cover to lose your pursuers.',
+    matchInProgress: 'Battle in progress. {crimson}:{azure}.',
+    ladderAllTime: 'Ladder. All-Time',
+    noRanked: 'No champions ranked yet. Be the first.',
+    // The live section above the all-time board: rated champions connected
+    // right now, best first (the arena tabs' hud.arena.ladderOnline twin).
+    ladderOnline: 'Ladder. Online Now',
+    noChallengers: 'No champions online right now. Be the first.',
+    playerLevelClassTitle: '{name}. Level {level} {className}',
+    // The live rows carry no level (they are drawn from the connected roster,
+    // not the stored board), so they get their own name + class title.
+    playerClassTitle: '{name}. {className}',
+    // the in-match scoreboard strip
+    crimson: 'Crimson',
+    azure: 'Azure',
+    yourTeamTitle: 'Your team',
+    clock: '{minutes}:{seconds}',
+    formUp: 'Form up: {seconds}',
+    firstTo: 'First to {caps} captures',
+    flagState: {
+      home: 'Flag at the keep',
+      carried: 'Flag stolen!',
+      dropped: 'Flag on the ground',
+    },
+    respawnIn: 'Next wave: respawning in {seconds}',
+    // the frozen post-match result screen (state 'ended')
+    resultVictory: 'Victory!',
+    resultDefeat: 'Defeat',
+    resultDraw: 'Draw',
+    leavingIn: 'Leaving the battleground in {seconds}',
+    // the top-right kill feed (and its combat-log twin lines)
+    killFeed: '{killer} felled {victim}',
+    killFeedFallen: '{victim} has fallen',
+    // event banners + combat-log lines (hud.handleEvents)
+    foundBanner: 'Battle found. You fight for the {team}!',
+    countdownBanner: 'Thornhollow Fields begins in {seconds}',
+    startBanner: 'Capture the flag!',
+    flagTakenLog: '{name} has taken the {team} flag!',
+    flagDroppedLog: 'The {team} flag was dropped.',
+    flagReturnedLog: 'The {team} flag was returned.',
+    // The touch-host confirm for the voluntary flag drop (a long press is also the
+    // tooltip-peek gesture, so this cancel is the one that must not fire by accident).
+    dropFlagConfirmTitle: 'Drop the flag?',
+    dropFlagConfirmBody:
+      'You are carrying the enemy flag. Dropping it leaves it on the ground, where either team can reach it.',
+    dropFlagConfirmAccept: 'Drop the flag',
+    // Across-screen banner variants (separate sink, separate length budget)
+    boardToggleLabel: 'Match scoreboard. Press Enter to pin the full board open.',
+    levelRequirement: 'You must reach level {level} to unlock queueing for this battleground.',
+    board: {
+      kills: 'Kills',
+      assists: 'Assists',
+      deaths: 'Deaths',
+      captures: 'Captures',
+    },
+    flagTakenBanner: 'The {takers} have taken the {team} flag!',
+    flagReturnedBanner: 'The {team} flag was returned!',
+    capturedTeamBanner: 'The {takers} have captured the {team} flag! {crimson}:{azure}',
+    capturedLog: '{name} captured the {team} flag. Score {crimson}:{azure}.',
+    // SUPERSEDED, retained: the end moment used to be one long banner sentence.
+    // It now rides the same across-screen banner family as the flag calls above
+    // but as a big one-word verdict (resultVictory / resultDefeat / resultDraw,
+    // reused from the scoreboard) over the secondary lines below. These three
+    // keys stay in `en` because their translations are already shipped in the
+    // maintainer-owned overlays, which a contributor never edits to delete a row.
+    victoryBanner: 'Victory! Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})',
+    defeatBanner: 'Defeat. Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})',
+    drawBanner: 'Thornhollow Fields draw {crimson}:{azure}. Rating {rating} ({delta})',
+    // The verdict banner's first secondary line: the score and the rating swing.
+    endBannerDetail: 'Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})',
+    endLog: 'Thornhollow Fields ended {crimson}:{azure}. Rating {rating} ({delta}).',
+    // Why the match ended, when it was not simply played to the capture target.
+    // A timer ending used to read exactly like a played-out one.
+    endedTimer: 'Time expired',
+    endedForfeit: 'The match was forfeited',
+    endedTimerLog: 'The match clock ran out; the higher score took the field.',
+    endedForfeitLog: 'The match was forfeited.',
+    // The first Thornhollow Fields win of each UTC day pays bonus Honor. ONE key
+    // for both sinks (the standing invitation chip on the queue panel and the
+    // verdict banner's bonus line): the sentence is identical, and a second key
+    // would make every locale translate the same string twice. The log line is
+    // its own key because it is past tense.
+    firstWinBonusLine: 'First win of the day: +{honor} Honor',
+    firstWinBonusLog: 'First win of the day: you gain {honor} bonus Honor.',
+    // Remaining-time calls, announced to the whole field (BG_TIME_WARNINGS).
+    timeWarningMinutes: '{minutes} minutes remain',
+    timeWarningOneMinute: 'One minute remains',
+    timeWarningMinutesLog: '{minutes} minutes remain in the battle.',
+    timeWarningOneMinuteLog: 'One minute remains in the battle.',
+    // Landmark names written onto the M-key map's atlas plate. Each names a
+    // rectangle the authored field itself declares, so they are the place names
+    // a player calls out, not decoration: short proper nouns, painted on canvas
+    // at plate-build time (battleground_map_painter). Each keep name titles its
+    // whole END of the field (the keep plus the chamber in front of it), which
+    // is the one name a player calls that ground by.
+    map: {
+      crimsonKeep: 'Crimson Keep',
+      azureKeep: 'Azure Keep',
+      ruinCourtyard: 'The Ruin Courtyard',
+      graveyard: 'Graveyard',
+    },
+  },
   vcup: {
     title: 'The Vale Cup',
     // Label on the hold-to-charge shoot power meter (short, uppercased in CSS).
@@ -1044,6 +1183,16 @@ export const hudChromeStrings = {
     browserEffectsMinimal: 'Minimal',
     browserEffectsNote:
       'Auto tones down heavy CSS effects (blur, glow, background motion) based on your browser and device. Lower it manually if the interface feels sluggish.',
+    // Renderer-bound graphics draft and its single apply/recovery action.
+    graphicsApply: 'Apply Graphics',
+    graphicsApplying: 'Applying graphics settings...',
+    graphicsApplied: 'Graphics settings applied.',
+    graphicsSaved: 'Graphics settings saved. The active renderer already matches them.',
+    graphicsFailed: 'Graphics could not be applied. Your previous settings are still active.',
+    graphicsRetry: 'Retry Graphics',
+    graphicsFatal: 'Graphics recovery failed. Reload the game to continue.',
+    graphicsReload: 'Reload Game',
+    graphicsDraftChanged: 'Graphics changes are ready to apply.',
     // Interface Mode control (Graphics panel): desktop keyboard/mouse vs the
     // on-screen touch controls. Auto detects the device; the rest force one.
     interfaceMode: 'Interface Mode',
@@ -1120,6 +1269,11 @@ export const hudChromeStrings = {
     // squares. Bound slots (and the fixed Attack button) are unaffected, so the
     // slot layout used to arrange buffs/consumables on the extra rows holds.
     hideUnusedActionSlots: 'Hide Unused Action Slots',
+    // Interface panel toggle (off by default) that locks the action bar slots
+    // against drag-to-move, drag-to-replace, and clear so an accidental
+    // click-and-drag mid-fight can't disturb a slot. Abilities still fire from
+    // keybinds and clicks while locked.
+    lockActionBars: 'Lock Action Bars',
     // Interface panel toggle for the classic "target of target" mini-frame (off by
     // default): a small unit frame under the target frame showing who your target
     // is targeting.
@@ -1321,12 +1475,25 @@ export const hudChromeStrings = {
     highContrast: 'High Contrast',
     highContrastAria:
       'Toggle high-contrast background: disables the moving trailer so start-screen text stays legible',
+    // Dismissible advisory shown at boot to a player on a browser outside the
+    // supported set (Chrome, Firefox, Safari); never shown in the desktop app or
+    // a native mobile shell (issue #2266). Purely advisory: it never blocks play.
+    browserSupport: {
+      title: 'Heads up: unsupported browser',
+      body: 'You may see reduced performance in this browser. For the best experience, get the desktop app for Windows, macOS, or Linux. Prefer playing in a browser? Chrome performs best, and Firefox and Safari are also supported.',
+      getDesktopApp: 'Get the desktop app',
+      continueInBrowser: 'Continue in browser',
+      dismissAria: 'Dismiss the unsupported browser notice',
+    },
   },
   warfare: {
     honorAmount: '{amount} Honor',
     dualPrice: '{money} + {honor}',
     balance: 'Honor: {amount}',
     honorFloat: '+{amount} Honor',
+    // The reason-naming variant of the float above (src/ui/honor_float_view.ts):
+    // the per-kill / per-assist drip says which one just paid.
+    honorFloatReason: '+{amount} Honor ({reason})',
     honorGain: 'You gain {amount} Honor ({reason}).',
     notEnoughHonor: 'Not enough Honor.',
     reasons: {
@@ -1334,6 +1501,18 @@ export const hudChromeStrings = {
       fiestaKill: 'Fiesta takedown',
       fiestaComplete: 'Fiesta completed',
       fiestaWin: 'Fiesta victory',
+      battlegroundWin: 'Thornhollow Fields victory',
+      battlegroundFirstWin: 'first Thornhollow Fields win today',
+      battlegroundComplete: 'Thornhollow Fields battle fought',
+      battlegroundKill: 'honorable kill',
+      battlegroundAssist: 'killing blow assisted',
+    },
+    // Short labels for the floating text over your own character. Kept apart from
+    // `reasons` above, which are mid-sentence fragments for the chat line.
+    floatReasons: {
+      kill: 'Kill',
+      assist: 'Assist',
+      firstWin: 'First Win',
     },
   },
   // Character sheet showcase layout: the two titled stat-panel headings under the
@@ -1858,6 +2037,11 @@ export const hudChromeStrings = {
     // Accessible-name sibling for the authored masterwork seal. Keep the whole
     // phrase in one key so punctuation and status placement remain localizable.
     itemAriaMasterwork: '{item}, quantity {count}, masterwork',
+    // Accessible-name arm of the quest-purpose bag mark (bag_quest_mark_view.ts):
+    // the corner seal is aria-hidden, so the CELL's name carries the quest fact
+    // that the rim/wash/seal show sighted players. Purpose class, not a quality
+    // tier; whole sentence in one key so punctuation stays localizable.
+    itemAriaQuest: '{item}, quantity {count}, quest item',
     filterGroupAria: 'Filter bags by category',
     filterAll: 'All',
     filterWeapon: 'Weapons',
@@ -1866,6 +2050,10 @@ export const hudChromeStrings = {
     filterMaterial: 'Materials',
     filterTool: 'Tools',
     filterQuest: 'Quest',
+    // Accessible name for the Quest chip when the bag holds quest pieces: the
+    // visible count badge is aria-hidden, so this whole phrase carries the
+    // number for assistive tech. {count} is already formatNumber'd by the host.
+    filterQuestCountAria: 'Quest, {count} items',
     filterMount: 'Mounts',
     sortAria: 'Sort bag items',
     sortRecent: 'Recent',
@@ -1874,6 +2062,9 @@ export const hudChromeStrings = {
     searchPlaceholder: 'Search items',
     searchAria: 'Search bag items by name',
     noMatch: 'No items match your filters.',
+    // Warm empty copy when the Quest category chip matches nothing. Purpose
+    // class, not a broken filter: the bag simply holds no quest pieces.
+    noQuestItems: 'No quest items in your bags.',
     // The bag bar (backpack + 4 equip sockets) and the used/capacity counter.
     capacity: '{used}/{total}',
     capacityAria: 'Bag slots used: {used} of {total}',
@@ -1925,6 +2116,9 @@ export const hudChromeStrings = {
       'Your next consecutive Fire builder critical strike grants Hot Streak; a non-critical builder removes Heating Up',
     elementalConvergencePrimed:
       'Your next spell from the other elemental school grants Elemental Convergence',
+    // The carried-flag buff's tooltip: the ONLY place the voluntary-drop
+    // affordance is spelled out, so the player can find it without folklore.
+    carriedFlag: 'You are carrying the enemy flag. Cancel this buff to drop it.',
     battleStance: 'Battle Stance: 10% more rage generation',
     berserkerStance: 'Berserker Stance: crits 3% more often and hit 3% harder',
     crit: 'Increases critical strike chance by {pct}%',
@@ -2192,6 +2386,17 @@ export const hudChromeStrings = {
     // one of them, and nine copies would be nine chances to drift.
     fineGrade:
       'Fine grade. Gathered from a full-tier vein with a tool ranked above the material, and counts as the ordinary version wherever one is required.',
+    // One key shared by every raw fishing catch (RAW_COOKING_CATCH_IDS): cooking
+    // reagents only; never edible raw. Painted via createTooltipLine, not the
+    // materialHintLine HTML-string path.
+    cookingCatch: 'Cooking ingredient. Must be cooked before eating.',
+    // Profession affinity for honest materials (material_profession_hint_view.ts).
+    // {crafts} is a locale-aware conjunction list of localized craft names
+    // (Intl.ListFormat), e.g. "Leatherworking" or "Alchemy, Cooking, and Tailoring".
+    // Kind stays junk internally; the kind line already reads Material, and this
+    // line names which craft(s) consume the stack when an item can serve more
+    // than one role (WoW Crafting Reagent + multi-profession materials pattern).
+    usedBy: 'Used by {crafts}.',
     arcaneDust: 'Enchanting reagent. Disenchanted from common and uncommon gear.',
     arcaneEssence: 'Enchanting reagent. Disenchanted from rare gear.',
     arcaneShard: 'Enchanting reagent. Disenchanted from epic and legendary gear.',
@@ -2509,6 +2714,12 @@ export const hudChromeStrings = {
     depositHint: 'Click to deposit',
     depositPartialHint: 'Shift-click to deposit a partial amount',
     cannotDeposit: 'Cannot be banked',
+    // The bank is open on a view with NO grid to deposit into (its guild pane's
+    // Log). State-based, not item-based: the item is fine, the surface has
+    // nowhere to put it. One terse key serving both the hover hint and the
+    // click's refusal toast, the way cannotVendor / cannotMarket already do.
+    // (Wordy value, M16: the five non-Latin fills land in this same change.)
+    cannotDepositNow: 'Cannot be deposited right now',
     depositQuantityTitle: 'Deposit {item}',
     depositQuantityInput: 'Quantity to deposit',
     depositQuantityConfirm: 'Deposit',
@@ -2524,6 +2735,8 @@ export const hudChromeStrings = {
     // Deposit-all-materials button + its transient summary line. {count} is
     // the number of material stacks moved.
     depositAll: 'Deposit all materials',
+    depositAllTooltip:
+      'Sends every crafting reagent and junk item from your bags to the bank in one trip. Gathering tools, equipped gear, quest items, and consumables are never touched.',
     depositAllDone: 'Materials deposited: {count}.',
     depositAllFull: 'Materials deposited: {count}. Bank now full.',
     depositAllNone: 'Bank full: nothing deposited.',
@@ -2543,6 +2756,81 @@ export const hudChromeStrings = {
     bonusReferralExplainer:
       'Invite a friend: when they reach level 10 you each earn 2 slots, up to 5 friends.',
     bonusSectionAria: 'Bonus bank slots and how to earn more',
+    // The Guild tab (guild bank): the Personal/Guild strip renders only while
+    // guildBankInfo is non-null (officer-plus standing at a banker, online).
+    // Withdraw/deposit prompt bodies reuse the personal keys above; the gold
+    // prompts reuse itemUi.money.* for the coin field labels. (Wordy values,
+    // M16: the five non-Latin fills land in this same change.)
+    tabsAria: 'Bank tabs',
+    personalTab: 'Personal',
+    guildTab: 'Guild',
+    guildCapacityAria: 'Guild bank slots used: {used} of {total}',
+    guildEmpty: 'The guild bank is empty.',
+    guildTreasury: 'Guild treasury',
+    guildDepositGold: 'Deposit money',
+    guildWithdrawGold: 'Withdraw money',
+    guildDepositGoldTitle: 'Deposit money into the guild treasury',
+    guildWithdrawGoldTitle: 'Withdraw money from the guild treasury',
+    guildGoldAvailable: 'Available: {amount}',
+    guildBuyConfirm:
+      'Purchase {count} additional guild bank slots for {price} from the guild treasury?',
+    guildBuyNote: 'Paid from the guild treasury',
+    guildTreasuryShort: 'Treasury short',
+    // The UNOPENED pane (ladder rung 0): a new guild's bank has no item slots
+    // until an officer opens it, paid from the CLICKING OFFICER'S OWN PURSE
+    // (never the treasury). The row mirrors the expansion row's contract
+    // (never disabled; visible shortfall marker; always-visible payer note).
+    // (Wordy values, M16: the five non-Latin fills land in this same change.)
+    guildOpenBank: 'Open the guild bank',
+    guildOpenConfirm: 'Open the guild bank for {price}? This is paid from your own money.',
+    guildOpenAccept: 'Open',
+    guildOpenNote: 'Paid from your own money, not the guild treasury',
+    guildPurseShort: 'Not enough money',
+    guildDormantNote: 'Locked items cannot be withdrawn and prevent disbanding the guild.',
+    guildDormantHint: 'This item is locked in the guild bank and cannot be withdrawn.',
+    guildDormantAria: '{item}, quantity {count}, cannot be withdrawn',
+    guildUnknownItem: 'Unknown item',
+    // Bags-side hints while the GUILD tab is active: distinct from the
+    // personal depositHint/cannotDeposit because the consequences differ
+    // (a shared pool any officer can take from; a refused copy would strand).
+    guildDepositHint: 'Click to deposit into the guild bank',
+    guildCannotDeposit: 'Cannot go in the guild bank',
+    // The gold prompt's refusal line when a non-zero amount cannot move at
+    // all right now (empty purse on deposit, full treasury, empty treasury).
+    guildGoldCannotMove: 'That amount cannot be moved right now.',
+    // The Guild pane's Contents / Log sub-strip and the ACTIVITY LOG itself.
+    // The log is the social trust mechanism the officer-only design rests on:
+    // every op already writes an audit row, and this is what lets the guild see
+    // who moved shared property. Sentences are plain language with the actor
+    // spliced as a VALUE (a player-authored character name is never a key), the
+    // time rendered by the i18n date formatter, and money by formatMoney.
+    // (Wordy values, M16: the five non-Latin fills land in this same change.)
+    guildViewsAria: 'Guild bank views',
+    guildContentsTab: 'Contents',
+    guildLogTab: 'Log',
+    logAria: 'Guild bank activity log',
+    // {count} is interpolated from GUILD_BANK_LOG_LIMIT at the painter
+    // boundary: a baked-in number would lie in six languages the moment the
+    // window size moved.
+    logNote: 'The {count} most recent guild bank actions.',
+    logLoading: 'Loading the guild bank log...',
+    logEmpty: 'Nothing has been moved in or out of the guild bank yet.',
+    // A refusal is deliberately NOT an empty list: "you may not read this" and
+    // "nobody has done anything" are opposite facts.
+    logRefused: 'Only guild officers can read the guild bank log.',
+    // The stand-in when a row's character no longer exists.
+    logFormerMember: 'A former guild member',
+    logDepositItem: '{actor} deposited {count} {item}',
+    logWithdrawItem: '{actor} withdrew {count} {item}',
+    logDepositMoney: '{actor} deposited {amount}',
+    logWithdrawMoney: '{actor} withdrew {amount}',
+    logBuySlots: '{actor} bought a bank expansion for {amount}',
+    logOpenBank: '{actor} opened the guild bank for {amount}',
+    logCharterFee: '{actor} paid the guild charter fee of {amount}',
+    // An operator removal is shown so a disappearance is never an unexplained
+    // gap, and it names NOBODY: the underlying row's character is the escrow
+    // carrier, a bystander who did not order it.
+    logAdminPurge: 'An administrator removed {count} {item}',
   },
   // The event calendar window: recurring system events plus the guild lane
   // (booked by officers and the Guild Master, mirrored via socialInfo).
@@ -2581,10 +2869,6 @@ export const hudChromeStrings = {
       marketDay: {
         title: 'Market Day',
         note: 'The Merchant expects fresh stock. A fine day to browse the World Market.',
-      },
-      fiestaNight: {
-        title: 'Fiesta Night',
-        note: 'The 2v2 Fiesta ring draws its loudest crowds tonight.',
       },
       arenaClash: {
         title: 'Arena Clash',
@@ -2985,6 +3269,28 @@ export const hudChromeStrings = {
       artisansEye: "Artisan's Eye",
       quickeningCharm: 'Springback Charm',
     },
+    // Tool-effect charm tooltip copy (src/ui/tool_effect_tooltip.ts): what each
+    // charm does, how to slot it, and the charge ladder. Shared by item tooltips
+    // (bags / bank / crafting / market) and the Professions window hover card so
+    // a player never has to discover the system by trial and error. Bonus lines
+    // track applyEffectBonus kinds in professions/tools.ts; charge numbers come
+    // from TOOL_EFFECTS.startingDurability and RARITY_DURABILITY_BONUS.
+    toolEffectTooltip: {
+      kind: 'Tool charm',
+      bonus: {
+        gatherersCache: '+1 yield per harvest while charged.',
+        artisansEye: 'Raises the harvest grade by 1 tool tier while charged.',
+        // Catalog-only today: slotToolEffectRefused refuses every respawnSpeed
+        // effect until the arm is wired. The name still appears on hand-sent
+        // refusal lines, so the bonus copy stays honest about the catalog claim.
+        quickeningCharm: 'Shortens the node respawn timer it triggers.',
+      },
+      howToSlot:
+        'Slot onto a mining, logging, or herbalism tool from the Professions window. Consumed when slotted.',
+      charges: 'Starts with {base} charges on a common tool (+{bonus} per rarity rung).',
+      landOnly: 'Does not slot on fishing rods.',
+      openProfessions: 'Open Professions to slot this onto a gathering tool.',
+    },
     // The toolEffectResult event's chat lines (the acquisition craft): one
     // line per outcome, rendered off ids only (the event is text-free).
     // {effect} and {profession} splice localized names; {material} splices a
@@ -3177,6 +3483,15 @@ export const hudChromeStrings = {
     masterworkToast: 'Masterwork! {name}',
     masterworkZoneLine: '{crafter} crafted a masterwork {name}!',
     tierUpToast: '{craft} advanced to tier {tier}!',
+    // Profession skill level-up (skill_level_toast_view.ts). skillUpToast is
+    // the per-point chat line (and the polite announcer line) for every
+    // floored craft or gathering skill climb. skillUpSubtext is the copper
+    // milestone plate's detail line; the plate's title is the profession
+    // name itself (already localized), so it carries no key. Distinct
+    // presentation from character level-up and from craft tier-up (which
+    // names the tier bucket, not the skill counter).
+    skillUpToast: '{skill} skill increased to {level}!',
+    skillUpSubtext: 'Skill increased to {level}!',
     // Professions 2.0 attunement + trend events (profession_event_lines
     // _core.ts). Trend nudge: the soft in-world hint that an unattuned crafter's
     // skills lean toward a pair; {archetype} is the pair's archetype title,

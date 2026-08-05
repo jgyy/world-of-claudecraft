@@ -911,6 +911,7 @@ export const cs_CZ: EnTranslations = {
       "minutesSeconds": "{m} min {s} s",
       "seconds": "{s} s",
       "autoShowHint": "Řádky se zobrazí automaticky, jakmile tvoje skupina způsobí poškození nebo léčení, a tento segment se zavře několik sekund po skončení boje.",
+      "threatFallback": "No live threat: showing damage to {name}",
       "breakdownSummary": "{tab}: {value}",
       "breakdownRow": "{value} ({percent})",
       "breakdownOther": "Ostatní ({count})",
@@ -950,6 +951,7 @@ export const cs_CZ: EnTranslations = {
       "targetFriendlyNext": "Procházet spojenecké cíle",
       "discord": "Discord",
       "valecup": "Pohár údolí",
+      "bgFlag": "Battleground Flag Action",
       "sheathe": "Zasunout/Vytasit zbraň",
       "categoryPet": "Mazlíček",
       "petAttack": "Mazlíček: Útok",
@@ -997,6 +999,7 @@ export const cs_CZ: EnTranslations = {
       "name_stormfeather_griffin": "Nebeský Bouřepero",
       "name_thunderstrut_gobbler": "Hromokrok, Velký krocan",
       "name_terrorspark_groundshaker": "Hrůzojiskra, otřásač země",
+      "name_drakemaw_raptor": "Raptor z Dračí tlamy",
       "desc_valorsteed": "Otužilý, jistonohý oř poskytující zvýšenou rychlost cestování.",
       "desc_grag_bear": "Otužilý, jistonohý medvěd poskytující zvýšenou rychlost cestování.",
       "desc_stalkglider_snail": "Statný, pomalu se pohybující plž poskytující zvýšenou rychlost cestování.",
@@ -1004,7 +1007,8 @@ export const cs_CZ: EnTranslations = {
       "desc_shadowjump_toad": "Mohutná, jistonohá obří ropucha, vycvičená v bleskurychlých stínových skocích, které zvládnou jakýkoli terén.",
       "desc_stormfeather_griffin": "Vznešený bouřný gryf, který se plíží po zemi na rounami okovaných spárech, se složenými křídly.",
       "desc_thunderstrut_gobbler": "Kolosální krocan zrozený z bouře, který se hrdě prochází z Probouzejícího se vrcholu, s ocasem rozevřeným jako bouřkový mrak.",
-      "desc_terrorspark_groundshaker": "Kompaktní obrněný stroj s těžkými pásy, velkorážním kanónem a sedlem pro nebojácné piloty."
+      "desc_terrorspark_groundshaker": "Kompaktní obrněný stroj s těžkými pásy, velkorážním kanónem a sedlem pro nebojácné piloty.",
+      "desc_drakemaw_raptor": "Osedlaný raptor z líhně v Kaldeře Dračí tlamy, samé šlachy a hbitost, ještě slabě páchnoucí popelem."
     },
     "mountTraining": {
       "mountPrompt": "Stiskni {key} pro nasednutí na cvičného Udatného oře.",
@@ -1024,6 +1028,93 @@ export const cs_CZ: EnTranslations = {
       "timeout": "Závod selhal",
       "progress": "Brány {n} z {total}",
       "timeLeft": "{seconds} s"
+    },
+    "pvp": {
+      "launcherTitle": "PvP",
+      "mobileLabel": "PvP",
+      "bracket1v1": "1v1",
+      "bracket2v2": "2v2"
+    },
+    "bg": {
+      "title": "Thornhollow Fields",
+      "blurb": "Two ruined keeps face each other across a walled hollow in the shadow of Thornpeak: Crimson to the south, Azure to the north, and the older Ruin Courtyard between them that neither has ever held. Five a side, one banner each, and the first to carry three of theirs home takes the field.",
+      "modeTag": "5v5 Capture the Flag",
+      "offlineNote": "Thornhollow Fields is syncing. The queue opens once the realm answers.",
+      "ratingSummary": "Rating. {wins} wins / {losses} losses",
+      "careerCaptures": "Career captures: {count}",
+      "enterQueue": "Enter the Queue",
+      "enterQueueParty": "Enter the Queue (party of {count})",
+      "leaveQueue": "Leave Queue",
+      "searching": "Searching. {count}/{size} in queue.",
+      "queuedParty": "Party of {count}.",
+      "queueNote": "Two teams of five. Steal the enemy banner and run it to your keep. First to 3 captures wins. Group up to 5 and queue together; grab Sprint Runes and weave the cover to lose your pursuers.",
+      "matchInProgress": "Battle in progress. {crimson}:{azure}.",
+      "ladderAllTime": "Ladder. All-Time",
+      "noRanked": "No champions ranked yet. Be the first.",
+      "ladderOnline": "Ladder. Online Now",
+      "noChallengers": "No champions online right now. Be the first.",
+      "playerLevelClassTitle": "{name}. Level {level} {className}",
+      "playerClassTitle": "{name}. {className}",
+      "crimson": "Crimson",
+      "azure": "Azure",
+      "yourTeamTitle": "Your team",
+      "clock": "{minutes}:{seconds}",
+      "formUp": "Form up: {seconds}",
+      "firstTo": "First to {caps} captures",
+      "flagState": {
+        "home": "Flag at the keep",
+        "carried": "Flag stolen!",
+        "dropped": "Flag on the ground"
+      },
+      "respawnIn": "Next wave: respawning in {seconds}",
+      "resultVictory": "Victory!",
+      "resultDefeat": "Defeat",
+      "resultDraw": "Draw",
+      "leavingIn": "Leaving the battleground in {seconds}",
+      "killFeed": "{killer} felled {victim}",
+      "killFeedFallen": "{victim} has fallen",
+      "foundBanner": "Battle found. You fight for the {team}!",
+      "countdownBanner": "Thornhollow Fields begins in {seconds}",
+      "startBanner": "Capture the flag!",
+      "flagTakenLog": "{name} has taken the {team} flag!",
+      "flagDroppedLog": "The {team} flag was dropped.",
+      "flagReturnedLog": "The {team} flag was returned.",
+      "dropFlagConfirmTitle": "Drop the flag?",
+      "dropFlagConfirmBody": "You are carrying the enemy flag. Dropping it leaves it on the ground, where either team can reach it.",
+      "dropFlagConfirmAccept": "Drop the flag",
+      "boardToggleLabel": "Match scoreboard. Press Enter to pin the full board open.",
+      "levelRequirement": "You must reach level {level} to unlock queueing for this battleground.",
+      "board": {
+        "kills": "Kills",
+        "assists": "Assists",
+        "deaths": "Deaths",
+        "captures": "Captures"
+      },
+      "flagTakenBanner": "The {takers} have taken the {team} flag!",
+      "flagReturnedBanner": "The {team} flag was returned!",
+      "capturedTeamBanner": "The {takers} have captured the {team} flag! {crimson}:{azure}",
+      "capturedLog": "{name} captured the {team} flag. Score {crimson}:{azure}.",
+      "victoryBanner": "Victory! Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "defeatBanner": "Defeat. Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "drawBanner": "Thornhollow Fields draw {crimson}:{azure}. Rating {rating} ({delta})",
+      "endBannerDetail": "Thornhollow Fields {crimson}:{azure}. Rating {rating} ({delta})",
+      "endLog": "Thornhollow Fields ended {crimson}:{azure}. Rating {rating} ({delta}).",
+      "endedTimer": "Time expired",
+      "endedForfeit": "The match was forfeited",
+      "endedTimerLog": "The match clock ran out; the higher score took the field.",
+      "endedForfeitLog": "The match was forfeited.",
+      "firstWinBonusLine": "First win of the day: +{honor} Honor",
+      "firstWinBonusLog": "First win of the day: you gain {honor} bonus Honor.",
+      "timeWarningMinutes": "{minutes} minutes remain",
+      "timeWarningOneMinute": "One minute remains",
+      "timeWarningMinutesLog": "{minutes} minutes remain in the battle.",
+      "timeWarningOneMinuteLog": "One minute remains in the battle.",
+      "map": {
+        "crimsonKeep": "Crimson Keep",
+        "azureKeep": "Azure Keep",
+        "ruinCourtyard": "The Ruin Courtyard",
+        "graveyard": "Graveyard"
+      }
     },
     "vcup": {
       "title": "Pohár údolí",
@@ -1175,6 +1266,15 @@ export const cs_CZ: EnTranslations = {
       "browserEffectsReduced": "Snížené",
       "browserEffectsMinimal": "Minimální",
       "browserEffectsNote": "Automaticky omezí náročné CSS efekty (rozmazání, záři, pohyb pozadí) podle prohlížeče a zařízení. Sniž ručně, pokud rozhraní působí pomalu.",
+      "graphicsApply": "Použít grafiku",
+      "graphicsApplying": "Nastavování grafiky...",
+      "graphicsApplied": "Nastavení grafiky použito.",
+      "graphicsSaved": "Nastavení grafiky uloženo. Aktivní renderer už mu odpovídá.",
+      "graphicsFailed": "Grafiku se nepodařilo použít. Stále platí tvé předchozí nastavení.",
+      "graphicsRetry": "Zkusit grafiku znovu",
+      "graphicsFatal": "Obnova grafiky selhala. Pro pokračování hru znovu načti.",
+      "graphicsReload": "Znovu načíst hru",
+      "graphicsDraftChanged": "Změny grafiky jsou připravené k použití.",
       "interfaceMode": "Režim rozhraní",
       "interfaceModeAuto": "Automaticky",
       "interfaceModeDesktop": "Desktop",
@@ -1205,7 +1305,7 @@ export const cs_CZ: EnTranslations = {
       "itemScoreLine": "Skóre {score}",
       "showSecondaryActionBar": "Zobrazit sekundární akční lištu",
       "showThirdActionBar": "Zobrazit třetí panel akcí",
-      "hideUnusedActionSlots": "Skrýt nepoužitá políčka akcí",
+      "lockActionBars": "Uzamknout akční lišty",
       "showTargetOfTarget": "Zobrazit cíl cíle",
       "showAttackButton": "Zobrazit tlačítko útoku",
       "showDailyRewardsChest": "Zobrazit truhlu denních odměn",
@@ -1367,20 +1467,38 @@ export const cs_CZ: EnTranslations = {
     },
     "landing": {
       "highContrast": "Vysoký kontrast",
-      "highContrastAria": "Přepnout vysoce kontrastní pozadí: vypne pohyblivý trailer, aby text úvodní obrazovky zůstal čitelný"
+      "highContrastAria": "Přepnout vysoce kontrastní pozadí: vypne pohyblivý trailer, aby text úvodní obrazovky zůstal čitelný",
+      "browserSupport": {
+        "title": "Upozornění: nepodporovaný prohlížeč",
+        "body": "V tomto prohlížeči můžeš zaznamenat nižší výkon. Pro nejlepší zážitek si stáhni desktopovou aplikaci pro Windows, macOS nebo Linux. Raději hraješ v prohlížeči? Nejlépe si vede Chrome, podporované jsou i Firefox a Safari.",
+        "getDesktopApp": "Stáhnout desktopovou aplikaci",
+        "continueInBrowser": "Pokračovat v prohlížeči",
+        "dismissAria": "Zavřít upozornění na nepodporovaný prohlížeč"
+      }
     },
     "warfare": {
       "honorAmount": "{amount} cti",
       "dualPrice": "{money} + {honor}",
       "balance": "Čest: {amount}",
       "honorFloat": "+{amount} cti",
+      "honorFloatReason": "+{amount} Honor ({reason})",
       "honorGain": "Získáváš {amount} cti ({reason}).",
       "notEnoughHonor": "Nemáš dost cti.",
       "reasons": {
         "arenaWin": "Vítězství v aréně",
         "fiestaKill": "Vyřazení ve Fiestě",
         "fiestaComplete": "Dokončení Fiesty",
-        "fiestaWin": "Vítězství ve Fiestě"
+        "fiestaWin": "Vítězství ve Fiestě",
+        "battlegroundWin": "Thornhollow Fields victory",
+        "battlegroundFirstWin": "first Thornhollow Fields win today",
+        "battlegroundComplete": "Thornhollow Fields battle fought",
+        "battlegroundKill": "honorable kill",
+        "battlegroundAssist": "killing blow assisted"
+      },
+      "floatReasons": {
+        "kill": "Kill",
+        "assist": "Assist",
+        "firstWin": "First Win"
       }
     },
     "charSheet": {
@@ -1736,6 +1854,7 @@ export const cs_CZ: EnTranslations = {
       "itemAriaEnchanted": "{item}, množství {count}, okouzlená kopie",
       "itemAriaBound": "{item}, množství {count}, vázaná kopie",
       "itemAriaMasterwork": "{item}, množství {count}, mistrovské dílo",
+      "itemAriaQuest": "{item}, množství {count}, úkolový předmět",
       "filterGroupAria": "Filtrovat batohy podle kategorie",
       "filterAll": "Vše",
       "filterWeapon": "Zbraně",
@@ -1744,6 +1863,7 @@ export const cs_CZ: EnTranslations = {
       "filterMaterial": "Materiály",
       "filterTool": "Nástroje",
       "filterQuest": "Úkolové",
+      "filterQuestCountAria": "Úkolové, {count} předmětů",
       "filterMount": "Jezdecká zvířata",
       "sortAria": "Řadit předměty v batozích",
       "sortRecent": "Nedávné",
@@ -1752,6 +1872,7 @@ export const cs_CZ: EnTranslations = {
       "searchPlaceholder": "Hledat předměty",
       "searchAria": "Hledat předměty v batozích podle názvu",
       "noMatch": "Tvým filtrům neodpovídají žádné předměty.",
+      "noQuestItems": "V batozích nemáš žádné úkolové předměty.",
       "capacity": "{used}/{total}",
       "capacityAria": "Použité sloty batohu: {used} z {total}",
       "backpack": "Batoh",
@@ -1785,6 +1906,7 @@ export const cs_CZ: EnTranslations = {
       "dmgDoneReduce": "Snižuje způsobené poškození o {pct} %",
       "heatingUp": "Tvůj příští po sobě jdoucí kritický zásah stavebního ohnivého kouzla udělí Žhavou sérii; nekritický stavební útok Rozehřívání odstraní",
       "elementalConvergencePrimed": "Tvoje příští kouzlo z jiné živlové školy udělí Živlovou konvergenci",
+      "carriedFlag": "You are carrying the enemy flag. Cancel this buff to drop it.",
       "battleStance": "Bojový postoj: o 10 % vyšší generování vzteku",
       "berserkerStance": "Postoj berserka: kritické zásahy o 3 % častěji a o 3 % tvrdší",
       "crit": "Zvyšuje šanci na kritický zásah o {pct} %",
@@ -1970,6 +2092,8 @@ export const cs_CZ: EnTranslations = {
     },
     "materialHint": {
       "fineGrade": "Jemná jakost. Sesbírána z naleziště plné úrovně nástrojem vyššího stupně, než je materiál, a počítá se jako běžná verze všude, kde je běžná verze potřeba.",
+      "cookingCatch": "Kuchařská ingredience. Před snědením ji musíš uvařit.",
+      "usedBy": "Used by {crafts}.",
       "arcaneDust": "Reagencie k okouzlení. Získává se rozzačarováním běžné a neobvyklé výbavy.",
       "arcaneEssence": "Reagencie k okouzlení. Získává se rozzačarováním vzácné výbavy.",
       "arcaneShard": "Reagencie k okouzlení. Získává se rozzačarováním epické a legendární výbavy.",
@@ -2251,6 +2375,7 @@ export const cs_CZ: EnTranslations = {
       "depositHint": "Kliknutím uložíš",
       "depositPartialHint": "Shift + kliknutí uloží jen část množství",
       "cannotDeposit": "Nelze uložit do banky",
+      "cannotDepositNow": "Teď nelze uložit",
       "depositQuantityTitle": "Uložit {item}",
       "depositQuantityInput": "Množství k uložení",
       "depositQuantityConfirm": "Uložit",
@@ -2261,6 +2386,7 @@ export const cs_CZ: EnTranslations = {
       "sortAria": "Seřadit předměty v bance",
       "searchAria": "Hledat předměty v bance podle názvu",
       "depositAll": "Uložit všechny materiály",
+      "depositAllTooltip": "Pošle všechny řemeslné suroviny a odpadní předměty z tvých batohů do banky najednou. Sběrných nástrojů, nasazené výbavy, úkolových předmětů a spotřebních předmětů se nikdy nedotkne.",
       "depositAllDone": "Uloženo materiálů: {count}.",
       "depositAllFull": "Uloženo materiálů: {count}. Banka je teď plná.",
       "depositAllNone": "Banka je plná: nic nebylo uloženo.",
@@ -2276,7 +2402,50 @@ export const cs_CZ: EnTranslations = {
       "bonusAdvertWallet": "Propoj peněženku a získej 2 sloty.",
       "bonusReferralProgress": "{count}/{cap}",
       "bonusReferralExplainer": "Pozvi přítele: až dosáhne úrovně 10, získáte oba po 2 slotech, nejvýše za 5 přátel.",
-      "bonusSectionAria": "Bonusové sloty banky a jak získat další"
+      "bonusSectionAria": "Bonusové sloty banky a jak získat další",
+      "tabsAria": "Záložky banky",
+      "personalTab": "Osobní",
+      "guildTab": "Cech",
+      "guildCapacityAria": "Využito slotů cechovní banky: {used} z {total}",
+      "guildEmpty": "Cechovní banka je prázdná.",
+      "guildTreasury": "Cechovní pokladna",
+      "guildDepositGold": "Uložit peníze",
+      "guildWithdrawGold": "Vybrat peníze",
+      "guildDepositGoldTitle": "Uložit peníze do cechovní pokladny",
+      "guildWithdrawGoldTitle": "Vybrat peníze z cechovní pokladny",
+      "guildGoldAvailable": "K dispozici: {amount}",
+      "guildBuyConfirm": "Koupit {count} dalších slotů cechovní banky za {price} z cechovní pokladny?",
+      "guildBuyNote": "Placeno z cechovní pokladny",
+      "guildTreasuryShort": "Nedostatek v pokladně",
+      "guildOpenBank": "Otevřít cechovní banku",
+      "guildOpenConfirm": "Otevřít cechovní banku za {price}? Platí se to z tvých vlastních peněz.",
+      "guildOpenAccept": "Otevřít",
+      "guildOpenNote": "Placeno z tvých vlastních peněz, ne z cechovní pokladny",
+      "guildPurseShort": "Nedostatek peněz",
+      "guildDormantNote": "Uzamčené předměty nelze vybrat a brání rozpuštění cechu.",
+      "guildDormantHint": "Tento předmět je v cechovní bance uzamčen a nelze ho vybrat.",
+      "guildDormantAria": "{item}, množství {count}, nelze vybrat",
+      "guildUnknownItem": "Neznámý předmět",
+      "guildDepositHint": "Kliknutím uložíš do cechovní banky",
+      "guildCannotDeposit": "Nelze vložit do cechovní banky",
+      "guildGoldCannotMove": "Tuto částku teď nelze přesunout.",
+      "guildViewsAria": "Zobrazení cechovní banky",
+      "guildContentsTab": "Obsah",
+      "guildLogTab": "Deník",
+      "logAria": "Deník aktivity cechovní banky",
+      "logNote": "{count} nejnovějších akcí cechovní banky.",
+      "logLoading": "Načítání deníku cechovní banky...",
+      "logEmpty": "Do cechovní banky ani z ní se zatím nic nepřesunulo.",
+      "logRefused": "Deník cechovní banky smí číst pouze důstojníci.",
+      "logFormerMember": "Bývalý člen cechu",
+      "logDepositItem": "{actor}: vklad {count}x {item}",
+      "logWithdrawItem": "{actor}: výběr {count}x {item}",
+      "logDepositMoney": "{actor}: vklad {amount}",
+      "logWithdrawMoney": "{actor}: výběr {amount}",
+      "logBuySlots": "{actor}: nákup rozšíření banky za {amount}",
+      "logOpenBank": "{actor}: otevření cechovní banky za {amount}",
+      "logCharterFee": "{actor}: úhrada cechovního zakládacího poplatku {amount}",
+      "logAdminPurge": "Administrátor: odstranění {count}x {item}"
     },
     "calendar": {
       "title": "Kalendář událostí",
@@ -2313,10 +2482,6 @@ export const cs_CZ: EnTranslations = {
         "marketDay": {
           "title": "Tržní den",
           "note": "Obchodník čeká čerstvé zásoby. Skvělý den pro procházení Světového trhu."
-        },
-        "fiestaNight": {
-          "title": "Fiesta noc",
-          "note": "Kruh 2v2 Fiesty dnes večer přitahuje nejhlasitější davy."
         },
         "arenaClash": {
           "title": "Střet v aréně",
@@ -2555,6 +2720,18 @@ export const cs_CZ: EnTranslations = {
         "artisansEye": "Řemeslníkovo oko",
         "quickeningCharm": "Odpružení"
       },
+      "toolEffectTooltip": {
+        "kind": "Tool charm",
+        "bonus": {
+          "gatherersCache": "+1 yield per harvest while charged.",
+          "artisansEye": "Raises the harvest grade by 1 tool tier while charged.",
+          "quickeningCharm": "Shortens the node respawn timer it triggers."
+        },
+        "howToSlot": "Slot onto a mining, logging, or herbalism tool from the Professions window. Consumed when slotted.",
+        "charges": "Starts with {base} charges on a common tool (+{bonus} per rarity rung).",
+        "landOnly": "Does not slot on fishing rods.",
+        "openProfessions": "Open Professions to slot this onto a gathering tool."
+      },
       "toolEffectSlotButton": "Vložit {effect}",
       "toolEffectRechargeButton": "Dobít",
       "toolEffectSlotted": "Efekt {effect} vložen do nástroje pro {profession}.",
@@ -2591,8 +2768,8 @@ export const cs_CZ: EnTranslations = {
     "crafting": {
       "title": "Výroba",
       "close": "Zavřít výrobu",
-      "dialogOption": "Crafting",
-      "dialogOptionAria": "Open the crafting window for {craft}",
+      "dialogOption": "Výroba",
+      "dialogOptionAria": "Otevřít okno výroby pro {craft}",
       "craft": "Vyrobit",
       "reagentsNeeded": "Vyžaduje:",
       "reagentLine": "{name} x{have}/{required}",
@@ -2667,6 +2844,8 @@ export const cs_CZ: EnTranslations = {
       "masterworkToast": "Mistrovské dílo! {name}",
       "masterworkZoneLine": "{crafter} vytvořil mistrovské dílo {name}!",
       "tierUpToast": "{craft} postoupilo do úrovně {tier}!",
+      "skillUpToast": "{skill} skill increased to {level}!",
+      "skillUpSubtext": "Skill increased to {level}!",
       "trendNudge": "Tvoje ruce se klonívají k {archetype}. Jeho nalaďování tě čeká u {master}.",
       "trendNudgeNoMaster": "Tvoje ruce se klonívají k {archetype}. Vyhledej mistra řemesla a ujmi se ho.",
       "attunedZoneLine": "{name} se naladit jako {archetype}!",
@@ -2902,7 +3081,7 @@ export const cs_CZ: EnTranslations = {
       "countLabel": "{earned}/{total} skutků",
       "completionAria": "Vykonáno {earned} z {total} skutků",
       "recentLabel": "Nedávné:",
-      "recentJumpAria": "Jump to {name}",
+      "recentJumpAria": "Přejít na {name}",
       "nearestLabel": "Skoro tam:",
       "filterGroupAria": "Filtrovat skutky",
       "filterAll": "Vše",
@@ -3128,6 +3307,7 @@ export const cs_CZ: EnTranslations = {
       "talents": "Talenty",
       "arena": "Aréna a PvP",
       "valeCup": "Pohár údolí",
+      "thornhollow": "Thornhollow Fields",
       "deeds": "Kniha skutků",
       "glossary": "Glosář",
       "wishIKnew": "Co bych rád věděl dřív",
@@ -3898,23 +4078,25 @@ export const cs_CZ: EnTranslations = {
       "duelsBody": "Vyzvi libovolného hráče, kterého potkáš, na přátelský duel. V sázce je jen hrdost, takže je to nejsnazší cesta, jak se naučit matchup nebo vyřešit přátelskou hádku.",
       "coliseumHeading": "Popelavé koloseum",
       "coliseumBody": "Koloseum je aréna světa, kde čelíš ostatním hráčům v hodnocených zápasech jeden na jednoho nebo dva na dva. Každý bracket má vlastní pořadí, takže výhra tě v jeho žebříku posune pro celý svět. Otevři okno Arény a přihlas se do bracketu, sám nebo se svým partnerem.",
-      "fiestaHeading": "Fiesta dva na dva",
-      "fiestaBody": "Fiesta je rychlá řež dva na dva hraná jako jeden souvislý souboj, kde jsou všichni bojovníci postaveni na stejnou startovní čáru. Jak boj běží, draftuješ augmenty, rychlá posílení, která za běhu přetvarují tvůj kit, takže žádné dva zápasy nehrají stejně.",
-      "augmentsNote": "Augmenty a power-upy trvají jen pro zápas. Jsou o hravých, okamžitých buildech, ne o trvalé síle, takže si nikdo nekoupí cestu k výhře.",
-      "wavesTitle": "Augmenty přicházejí ve vlnách",
-      "wavesBody": "Souboj Fiesty ti podává čerstvé volby, jak běží, a volby jsou s délkou boje odvážnější. Stavíš od jedné vlny k další, pokaždé vybíráš jednu z několika možností a necháváš si ji do konce souboje.",
-      "waveSilverTitle": "Stříbrná",
-      "waveSilverBody": "Úvodní vlna: čistá posílení jedné statistiky, která zostří základy třídy.",
-      "waveGoldTitle": "Zlatá",
-      "waveGoldBody": "Prostřední vlna: dvousečné kombinace, kde se build začíná tvarovat a zpívat.",
-      "wavePrismaticTitle": "Prizmatická",
-      "wavePrismaticBody": "Závěrečná vlna: build určující, obrazovku tavící špičky, které mají působit směšně tím nejlepším způsobem.",
-      "yumiHeading": "Ochraňte Yumi",
-      "yumiBody": "Ochraňte Yumi je týmový objektivní režim, který se hraje v bludišti: každá strana hlídá svého vlastního kočičího společníka a zároveň loví toho druhého. Čas od času se obě kočky přenesou do nových koutů bludiště, takže se boj přelévá mezi obranou, lovem a závodem o to, kdo je najde dřív. Zařaď se do fronty jako tři na tři nebo pět na pět; pád v boji tě odstaví jen na okamžik.",
-      "powerupsTitle": "Power-upy v ringu",
-      "powerupsBody": "Do arény během boje padají také zářící orby, volné pro toho, kdo k nim doběhne první. Záměrně přehánějí a trvají jen krátce: Rychlostní démon pro záblesk oslepujícího tempa, Kolos pro nabobtnání v těžkopádného obra, Měsíční boty pro skákavý skok s nízkou gravitací a Berserker pro náhlý příval zuřivosti.",
       "ladderHeading": "Stoupání po žebříku",
       "ladderBody": "Hodnocené hraní sleduje tvoje postavení v čase. Podívej se na žebříček, kde sedíš a kdo drží vrchol světa."
+    },
+    "thornhollowPage": {
+      "heading": "Thornhollow Fields",
+      "intro": "A ranked 5v5 capture-the-flag battleground fought in a walled hollow in the old growth below Thornpeak, where two ruined keeps face each other down the length of a ravine and an older courtyard sits between them that neither has ever held. Two teams of five, two keeps, one goal: steal the enemy banner and run it home before they run yours.",
+      "queueHeading": "Queueing up",
+      "queueBody": "Open the Thornhollow Fields panel and enter the queue solo, or bring a party of up to five and queue together: parties are always kept on one team, and the remaining seats fill with solo champions. When ten stand ready, the match seats both teams at their keeps for a short form-up before the flags go live.",
+      "fieldHeading": "The field",
+      "fieldBody": "A walled, open-air field carved into three chambers: each team has its own field before its keep, and the walled Ruin Courtyard sits between them. Two curtain walls span the full width, and every move between chambers passes a contested crossing: the wide main gate, or the gatehouse, a small room straddling the wall whose offset doors force a jog past an ambush corner. Each keep is sealed except its mouth, so every flag run starts and ends through the same opening, and a low barricade breaks the straight charge into it. The courtyard holds the hollow heart ruin and the two flank Sprint Runes; the other two wait on the flag approaches. A Battle or Ward Rune (more damage dealt, or less damage taken, for a few seconds) waits at each main gate's courtyard mouth: both pads open the match on the same face and flip with every claim.",
+      "flagsHeading": "Flags",
+      "flagsBody": "Each keep holds its team flag. Take the enemy flag and carry it to your own stand to score; the first team to three captures wins, and a timed-out battle resolves on score. A slain carrier drops the flag where they fell: an enemy can take it up again, while its own team returns it home instantly just by reaching it. The flag also refuses to hide: picking it up breaks stealth, and a carrier who turns invisible by any means drops it on the spot.",
+      "pickupNote": "Picking a flag up is always a deliberate press of the battleground action key: nobody ever becomes the carrier by strafing through the wrong spot.",
+      "respawnHeading": "Falling in battle",
+      "respawnBody": "Death keeps the classic rite: your corpse lies where it fell until YOU release, and the spirit rises in the fenced graveyard beside your keep, warded there until your team's next respawn wave. The wave raises every waiting spirit together, and the two team waves are deliberately staggered, so the fight never fully resets at once. There is no corpse run and no Spirit Healer bargain: release, wait out the wave, fight.",
+      "carrierHeading": "Carrying the flag",
+      "carrierBody": "A carrier who holds the enemy flag too long grows more and more vulnerable, taking ever-increasing damage until the flag is captured, dropped, or returned. Hiding with the flag is a losing plan; running it home is the winning one.",
+      "ladderHeading": "The ladder",
+      "ladderBody": "Every match moves a persistent per-character battleground rating, win or lose, and the all-time board ranks the realm champions. Wins and hard-fought losses also pay Honor through the Warfare system."
     },
     "valeCupPage": {
       "heading": "Pohár údolí",
@@ -5802,7 +5984,6 @@ export const cs_CZ: EnTranslations = {
   "yumi": {
     "bracket3": "Yumi 3 na 3",
     "bracket5": "Yumi 5 na 5",
-    "enterQueue": "Zapoj se do Ochraňte Yumi!",
     "queue": {
       "join": "Vstupuješ do fronty Ochraňte Yumi. Hlídej svého společníka…",
       "leave": "Opouštíš frontu Ochraňte Yumi.",
@@ -5840,9 +6021,6 @@ export const cs_CZ: EnTranslations = {
   },
   "fiesta": {
     "bracket": "Fiesta",
-    "enterQueue": "Připojit se k Fiestě!",
-    "practice": "Trénink proti botům",
-    "practiceNote": "Offline trénink: vytvoří 3 AI boty a zařadí tě do 2v2 Fiesty. Klikni znovu pro zastavení.",
     "banner": {
       "wave": "VLNA {wave}/{total} - VYBER VYLEPŠENÍ!",
       "augmentGained": "Získáno vylepšení: {name}!",
@@ -6099,16 +6277,16 @@ export const cs_CZ: EnTranslations = {
   },
   "desktop": {
     "update": {
-      "checkingTitle": "Checking for updates...",
-      "checkingBody": "New versions download while you play.",
-      "uptodateTitle": "You're up to date",
+      "checkingTitle": "Kontrola aktualizací...",
+      "checkingBody": "Nové verze se stahují, zatímco hraješ.",
+      "uptodateTitle": "Máš aktuální verzi",
       "downloadingTitle": "Stahuje se aktualizace {version}...",
-      "downloadingBody": "You can keep playing. It installs when you quit.",
+      "downloadingBody": "Můžeš dál hrát. Nainstaluje se, až hru ukončíš.",
       "readyTitle": "Aktualizace {version} je připravena",
       "readyBody": "Nainstaluje se při ukončení, nebo restartuj hned.",
       "restart": "Restartovat hned",
       "later": "Později",
-      "dismiss": "Dismiss"
+      "dismiss": "Zavřít"
     },
     "crash": {
       "title": "World of ClaudeCraft",
@@ -6324,7 +6502,6 @@ export const cs_CZ: EnTranslations = {
       "mobileMore": "Více",
       "mobileMoreAria": "Zobrazit další menu",
       "mobileSocial": "Sociální",
-      "mobileArena": "Aréna",
       "mobileMenu": "Menu",
       "mobileSettings": "Nastavení",
       "mobileUse": "Použít",
@@ -6441,7 +6618,7 @@ export const cs_CZ: EnTranslations = {
         "nameplates": "Přepnout jmenovky",
         "meters": "Měřiče poškození",
         "social": "Přátelé a cech",
-        "arena": "Aréna (Popelavé koloseum)",
+        "arena": "PvP (Thornhollow Fields and Arenas)",
         "chat": "Otevřít chat",
         "attack": "Útok",
         "actionBarSlot": "Akční lišta {slot}"
@@ -6575,6 +6752,11 @@ export const cs_CZ: EnTranslations = {
     },
     "system": {
       "playerDeath": "Zemřel(a) jsi.",
+      "deathRecapKillerAbility": "Tvá postava zemřela. Příčina: {ability} od {killer}.",
+      "deathRecapKiller": "Tvá postava zemřela. Příčina: {killer}.",
+      "deathRecapAbility": "Tvá postava zemřela. Příčina: {ability}.",
+      "deathRecapFalling": "Tvá postava zemřela. Spadla k smrti.",
+      "deathRecapDrowned": "Tvá postava zemřela. Utopila se.",
       "respawn": "Cítíš se odpočatě a znovu celý(á).",
       "ignoringChat": "Ignoruješ chat od {name}.",
       "noLongerIgnoring": "Už neignoruješ {name}.",
@@ -7065,6 +7247,7 @@ export const cs_CZ: EnTranslations = {
       "quest": "Úkolový předmět",
       "junk": "Odpad",
       "fineMaterial": "Jemný materiál",
+      "material": "Materiál",
       "food": "Jídlo",
       "drink": "Nápoj",
       "tool": "Nástroj",
@@ -7097,6 +7280,9 @@ export const cs_CZ: EnTranslations = {
       "useFood": "Použití: Obnoví {amount} zdraví během {seconds} s. Při jídle musíš zůstat sedět.",
       "useDrink": "Použití: Obnoví {amount} many během {seconds} s. Při pití musíš zůstat sedět.",
       "questItem": "Úkolový předmět",
+      "questRelated": "Úkol: {quest}",
+      "questRules": "Nelze prodat, uložit do banky ani směnit.",
+      "questOrphaned": "Není potřeba pro žádný aktivní úkol.",
       "classes": "Třídy: {classes}",
       "sellPrice": "Prodejní cena: {money}",
       "clickBuy": "Kliknutím koupíš",
@@ -7232,6 +7418,12 @@ export const cs_CZ: EnTranslations = {
       "reclaim": "Získat zpět",
       "buyAria": "Koupit {item} za {price}",
       "reclaimAria": "Získat zpět {item}",
+      "buyConfirmTitle": "Potvrdit nákup",
+      "buyConfirmBody": "Koupit {item} za {price}?",
+      "buyConfirmBodyStack": "Koupit {item} x{count} za {price} (každý {each})?",
+      "buyConfirmAccept": "Koupit",
+      "buyConfirmCancel": "Zrušit",
+      "buyChanged": "Tato nabídka se před potvrzením změnila. Zkontroluj cenu a zkus to znovu.",
       "sellNote": "Nabídni zboží ze svých batohů. Obchodník si při prodeji vezme provizi {cut} %. Používáš {used}/{max} slotů pro nabídky.",
       "sellPickEmpty": "Klikni na předmět v batozích a vyber, co chceš prodat.",
       "quantity": "Množství",
@@ -8719,6 +8911,18 @@ export const cs_CZ: EnTranslations = {
       "fen_muster_order": {
         "name": "Fenbridgeský svolávací rozkaz"
       },
+      "firebottle": {
+        "name": "Zápalná láhev"
+      },
+      "murloc_hut": {
+        "name": "Chýše bahenních ploutví"
+      },
+      "restless_skull": {
+        "name": "Neklidná lebka"
+      },
+      "vanguard_bone": {
+        "name": "Kost předvoje"
+      },
       "mire_prowler_pelt": {
         "name": "Kožešina slatinného plížence"
       },
@@ -9994,6 +10198,21 @@ export const cs_CZ: EnTranslations = {
       "reins_terrorspark_groundshaker": {
         "name": "Klíček zapalování: Hrůzojiskra, otřásač země"
       },
+      "reins_drakemaw_raptor": {
+        "name": "Otěže raptora z Dračí tlamy"
+      },
+      "moggers_hide_quiver": {
+        "name": "Moggerův kožený toulec"
+      },
+      "cragmaw_huntquiver": {
+        "name": "Lovecký toulec Cragmawa"
+      },
+      "gravewyrm_bone_quiver": {
+        "name": "Kostěný toulec Hrobodraka"
+      },
+      "direfang_quiver": {
+        "name": "Toulec děsivého tesáku"
+      },
       "conjured_water4": {
         "name": "Vyčarovaná pramenitá voda"
       },
@@ -10989,6 +11208,21 @@ export const cs_CZ: EnTranslations = {
       "spider_egg_sac": {
         "name": "Pavoučí váček vajec"
       },
+      "spider_egg": {
+        "name": "Vejce Matky snůšky"
+      },
+      "widow_hatchling": {
+        "name": "Vdoví mládě"
+      },
+      "drowned_warlord": {
+        "name": "Utopený válečný pán"
+      },
+      "brakka_wallbreaker": {
+        "name": "Brakka Hradbolam"
+      },
+      "threnos_first_voice": {
+        "name": "Threnos, První hlas"
+      },
       "grave_silt_bulwark": {
         "name": "Hradba z hrobového bahna"
       },
@@ -11168,6 +11402,18 @@ export const cs_CZ: EnTranslations = {
       },
       "cindraleth_maw_matriarch": {
         "name": "Cindraleth, matriarcha Tlamy"
+      },
+      "dragonkin_egg": {
+        "name": "Dračí vejce"
+      },
+      "dragonkin_whelp": {
+        "name": "Dračí mládě"
+      },
+      "dragonkin_broodguard": {
+        "name": "Strážce dračí líhně"
+      },
+      "drakemaw_broodlord": {
+        "name": "Pán líhně Dračí tlamy"
       },
       "gilded_stag": {
         "name": "Pozlacený jelen"
@@ -12201,7 +12447,7 @@ export const cs_CZ: EnTranslations = {
       },
       "q_no_rest": {
         "title": "Bez odpočinku v rákosí",
-        "text": "Rituál na těch kadidelnicích váže utopené, aby povstali všude, kam dosáhne močál, a močál dosáhne všude. V tomhle rákosí nebude klid, dokud mrtví nepřevýší živé. Rituál zatím zrušit neumíme, ale můžeme ho zbavit vojáků. Ulož k odpočinku dalších 14 utopených mrtvých.",
+        "text": "Obřad na těch kadidelnicích nutí utopené vstávat a teď mezi nimi pozvedl jednoho dost silného, aby je vedl. Strážci mu říkají Utopený válečný pán, a dokud drží Utopenou kapli, mrtví drží řady. Zlom ho, {playerName}, a zbytek se rozprchne zpět do bažiny.",
         "completion": "Dáváš mrtvým víc milosti, než jim kdy dali jejich páni. Vezmi si tohle, víc než sis to zasloužil.",
         "objectives": {
           "0": {
@@ -12479,9 +12725,6 @@ export const cs_CZ: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Fanatik kultu draka zabit"
-          },
-          "1": {
-            "label": "Rozkazy kultu draka"
           }
         }
       },
@@ -12492,9 +12735,6 @@ export const cs_CZ: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Nekromant kultu draka zabit"
-          },
-          "1": {
-            "label": "Rituální fylakterie"
           }
         }
       },

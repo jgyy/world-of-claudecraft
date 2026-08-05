@@ -2217,6 +2217,7 @@ export const DEEDS: Record<string, DeedDef> = {
     renown: 10,
     trigger: { kind: 'stat', stat: 'salvagesPerformed', count: 50 },
   },
+
   // Wildheart Basin (Palmreach). New records stay at the append-only tail.
   dgn_wildheart_basin: {
     id: 'dgn_wildheart_basin',
@@ -2304,6 +2305,53 @@ export const DEEDS: Record<string, DeedDef> = {
     renown: 10,
     trigger: { kind: 'visits', markIds: ['slain:old_marrowshell', 'slain:aurelhorn'] },
   },
+
+  // --- Thornhollow Fields, the 5v5 capture-the-flag battleground (src/sim/social/
+  // battleground.ts). Meters read the persisted PlayerMeta standing (bgWins /
+  // bgCaptures), so they count OUTCOMES, never attendance (rule 6), and
+  // retro-grant on load like every meter.
+  //
+  // The career-100 captures deed paces off BG_CAPS_TO_WIN, which was retuned
+  // from 5 to 3: a dominant winner now banks at most 3 captures per match
+  // rather than 5, so that deed's tail lengthens by roughly the same ratio.
+  // Left AS IS deliberately. The meter is career-cumulative with no time
+  // window, deeds are cosmetic-only (a title and Renown, never power), and
+  // re-cutting the threshold every time the match target moves would keep
+  // re-basing a number players are already partway through.
+  pvp_bg_first_capture: {
+    id: 'pvp_bg_first_capture',
+    name: 'Banner in Hand',
+    desc: 'Capture a flag in Thornhollow Fields.',
+    category: 'pvp',
+    renown: 5,
+    trigger: { kind: 'meter', meter: 'bgCaptures', amount: 1 },
+  },
+  pvp_bg_first_win: {
+    id: 'pvp_bg_first_win',
+    name: 'The Hollow Holds',
+    desc: 'Win a Thornhollow Fields battleground.',
+    category: 'pvp',
+    renown: 5,
+    trigger: { kind: 'meter', meter: 'bgWins', amount: 1 },
+  },
+  pvp_bg_wins_25: {
+    id: 'pvp_bg_wins_25',
+    name: 'Warden of the Hollow',
+    desc: 'Win 25 Thornhollow Fields battlegrounds.',
+    category: 'pvp',
+    renown: 25,
+    trigger: { kind: 'meter', meter: 'bgWins', amount: 25 },
+    reward: { kind: 'title', text: 'Flagbearer' },
+  },
+  pvp_bg_captures_100: {
+    id: 'pvp_bg_captures_100',
+    name: 'A Hundred Banners',
+    desc: 'Capture 100 flags in Thornhollow Fields across your career.',
+    category: 'pvp',
+    renown: 50,
+    trigger: { kind: 'meter', meter: 'bgCaptures', amount: 100 },
+  },
+
   // The phase 20 density pass brought the three bottom-map zones to the
   // strip's own gathering density (Q26 in
   // docs/design/professions-tuning-packet-review.md): each gets the zone
@@ -2375,6 +2423,29 @@ export const DEEDS: Record<string, DeedDef> = {
     category: 'chronicle',
     renown: 5,
     trigger: { kind: 'visit', markId: 'fish:farshore_isle' },
+  },
+  // The Drakelands dragonkin brood rework (v0.35): the Drakemaw Broodlords
+  // are the zone's new standing elites (shout, egg clutch, cleave, breath,
+  // counter-stun), and Cindraleth, the shipped quest capstone, was never
+  // wired into slain-mark credit (the Gleamstag gap class; both templates
+  // now sit in RARE_SLAIN_TEMPLATES).
+  chr_drakemaw_broodlord: {
+    id: 'chr_drakemaw_broodlord',
+    name: 'Clutch Breaker',
+    desc: 'Slay a Drakemaw Broodlord amid its eggs, through the shout, the cleave, and the fire.',
+    category: 'chronicle',
+    renown: 10,
+    trigger: { kind: 'visit', markId: 'slain:drakemaw_broodlord' },
+  },
+  chr_maw_matriarch: {
+    id: 'chr_maw_matriarch',
+    name: 'The Sky Goes Quiet',
+    desc: 'Slay Cindraleth the Maw Matriarch in her crater roost above the Drakemaw.',
+    category: 'chronicle',
+    renown: 10,
+    // Rides the shipped kill quest (retro-grantable for every veteran who
+    // already finished the chain), so the boss template needs no rare flag.
+    trigger: { kind: 'quest', questId: 'q_dk_matriarch_of_the_maw' },
   },
 };
 

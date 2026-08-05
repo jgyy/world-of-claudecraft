@@ -13,6 +13,126 @@
 import type { TranslationKey } from '../i18n.catalog';
 
 export const es: Partial<Record<TranslationKey, string>> = {
+  'hud.system.deathRecapAbility': 'Has muerto. Te mató {ability}.',
+  'hud.system.deathRecapDrowned': 'Has muerto. Te ahogaste.',
+  'hud.system.deathRecapFalling': 'Has muerto. Moriste al caer.',
+  'hud.system.deathRecapKiller': 'Has muerto. Te mató {killer}.',
+  'hud.system.deathRecapKillerAbility': 'Has muerto. Te mató {killer} con {ability}.',
+  'hudChrome.bags.filterQuestCountAria': 'Misión, {count} objetos',
+  'hudChrome.bags.itemAriaQuest': '{item}, cantidad {count}, objeto de misión',
+  'hudChrome.bags.noQuestItems': 'No tienes objetos de misión en tus bolsas.',
+  'hudChrome.bank.cannotDepositNow': 'No se puede depositar en este momento',
+  'hudChrome.bank.depositAllTooltip':
+    'Envía al banco de una vez todos los reactivos de fabricación y objetos de chatarra de tus bolsas. Las herramientas de recolección, el equipo puesto, los objetos de misión y los consumibles nunca se tocan.',
+  'hudChrome.bank.guildBuyConfirm':
+    '¿Comprar {count} espacios adicionales del banco de la hermandad por {price} de la tesorería de la hermandad?',
+  'hudChrome.bank.guildBuyNote': 'Pagado desde la tesorería de la hermandad',
+  'hudChrome.bank.guildCannotDeposit': 'No se puede guardar en el banco de la hermandad',
+  'hudChrome.bank.guildCapacityAria':
+    'Espacios del banco de la hermandad usados: {used} de {total}',
+  'hudChrome.bank.guildContentsTab': 'Contenido',
+  'hudChrome.bank.guildDepositGold': 'Depositar dinero',
+  'hudChrome.bank.guildDepositGoldTitle': 'Depositar dinero en la tesorería de la hermandad',
+  'hudChrome.bank.guildDepositHint': 'Clic para depositar en el banco de la hermandad',
+  'hudChrome.bank.guildDormantAria': '{item}, cantidad {count}, no se puede retirar',
+  'hudChrome.bank.guildDormantHint':
+    'Este objeto está bloqueado en el banco de la hermandad y no se puede retirar.',
+  'hudChrome.bank.guildDormantNote':
+    'Los objetos bloqueados no se pueden retirar e impiden disolver la hermandad.',
+  'hudChrome.bank.guildEmpty': 'El banco de la hermandad está vacío.',
+  'hudChrome.bank.guildGoldAvailable': 'Disponible: {amount}',
+  'hudChrome.bank.guildGoldCannotMove': 'Esa cantidad no se puede mover en este momento.',
+  'hudChrome.bank.guildLogTab': 'Registro',
+  'hudChrome.bank.guildOpenAccept': 'Abrir',
+  'hudChrome.bank.guildOpenBank': 'Abrir el banco de la hermandad',
+  'hudChrome.bank.guildOpenConfirm':
+    '¿Abrir el banco de la hermandad por {price}? Esto se paga con tu propio dinero.',
+  'hudChrome.bank.guildOpenNote':
+    'Pagado con tu propio dinero, no con la tesorería de la hermandad',
+  'hudChrome.bank.guildPurseShort': 'Dinero insuficiente',
+  'hudChrome.bank.guildTab': 'Hermandad',
+  'hudChrome.bank.guildTreasury': 'Tesorería de la hermandad',
+  'hudChrome.bank.guildTreasuryShort': 'Tesorería insuficiente',
+  'hudChrome.bank.guildUnknownItem': 'Objeto desconocido',
+  'hudChrome.bank.guildViewsAria': 'Vistas del banco de la hermandad',
+  'hudChrome.bank.guildWithdrawGold': 'Retirar dinero',
+  'hudChrome.bank.guildWithdrawGoldTitle': 'Retirar dinero de la tesorería de la hermandad',
+  'hudChrome.bank.logAdminPurge': 'Un administrador eliminó {count} {item}',
+  'hudChrome.bank.logAria': 'Registro de actividad del banco de la hermandad',
+  'hudChrome.bank.logBuySlots': '{actor} compró una ampliación del banco por {amount}',
+  'hudChrome.bank.logCharterFee': '{actor} pagó la cuota de fundación de la hermandad de {amount}',
+  'hudChrome.bank.logDepositItem': '{actor} depositó {count} {item}',
+  'hudChrome.bank.logDepositMoney': '{actor} depositó {amount}',
+  'hudChrome.bank.logEmpty': 'Aún no se ha movido nada dentro o fuera del banco de la hermandad.',
+  'hudChrome.bank.logFormerMember': 'Un antiguo miembro de la hermandad',
+  'hudChrome.bank.logLoading': 'Cargando el registro del banco de la hermandad...',
+  'hudChrome.bank.logNote': 'Las {count} acciones más recientes del banco de la hermandad.',
+  'hudChrome.bank.logOpenBank': '{actor} abrió el banco de la hermandad por {amount}',
+  'hudChrome.bank.logRefused':
+    'Solo los oficiales de la hermandad pueden leer el registro del banco de la hermandad.',
+  'hudChrome.bank.logWithdrawItem': '{actor} retiró {count} {item}',
+  'hudChrome.bank.logWithdrawMoney': '{actor} retiró {amount}',
+  'hudChrome.bank.personalTab': 'Privado',
+  'hudChrome.bank.tabsAria': 'Pestañas del banco',
+  'hudChrome.crafting.dialogOption': 'Fabricación',
+  'hudChrome.crafting.dialogOptionAria': 'Abrir la ventana de fabricación de {craft}',
+  'hudChrome.deeds.recentJumpAria': 'Ir a {name}',
+  'hudChrome.landing.browserSupport.body':
+    'Es posible que notes un rendimiento reducido en este navegador. Para la mejor experiencia, consigue la aplicación de escritorio para Windows, macOS o Linux. ¿Prefieres jugar en un navegador? Chrome ofrece el mejor rendimiento, y Firefox y Safari también son compatibles.',
+  'hudChrome.landing.browserSupport.continueInBrowser': 'Continuar en el navegador',
+  'hudChrome.landing.browserSupport.dismissAria': 'Descartar el aviso de navegador no compatible',
+  'hudChrome.landing.browserSupport.getDesktopApp': 'Obtener la aplicación de escritorio',
+  'hudChrome.landing.browserSupport.title': 'Aviso: navegador no compatible',
+  'hudChrome.materialHint.cookingCatch': 'Ingrediente de cocina. Debe cocinarse antes de comerlo.',
+  'hudChrome.mounts.desc_drakemaw_raptor':
+    'Un raptor de cría domado para la silla, procedente de la Caldera de Drakemaw, puro tendón y arranque, que aún huele ligeramente a ceniza.',
+  'hudChrome.mounts.name_drakemaw_raptor': 'Raptor de Drakemaw',
+  'hudChrome.options.graphicsApplied': 'Ajustes gráficos aplicados.',
+  'hudChrome.options.graphicsApply': 'Aplicar gráficos',
+  'hudChrome.options.graphicsApplying': 'Aplicando ajustes gráficos...',
+  'hudChrome.options.graphicsDraftChanged': 'Los cambios gráficos están listos para aplicarse.',
+  'hudChrome.options.graphicsFailed':
+    'No se pudieron aplicar los gráficos. Tus ajustes anteriores siguen activos.',
+  'hudChrome.options.graphicsFatal':
+    'La recuperación gráfica falló. Recarga el juego para continuar.',
+  'hudChrome.options.graphicsReload': 'Recargar juego',
+  'hudChrome.options.graphicsRetry': 'Reintentar gráficos',
+  'hudChrome.options.graphicsSaved':
+    'Ajustes gráficos guardados. El renderizador activo ya coincide con ellos.',
+  'hudChrome.options.lockActionBars': 'Bloquear barras de acción',
+  'itemUi.kind.material': 'Materia',
+  'itemUi.market.buyChanged':
+    'Esa publicación cambió antes de que confirmaras. Revisa el precio e inténtalo de nuevo.',
+  'itemUi.market.buyConfirmAccept': 'Comprar',
+  'itemUi.market.buyConfirmBody': '¿Comprar {item} por {price}?',
+  'itemUi.market.buyConfirmBodyStack': '¿Comprar {item} x{count} por {price} ({each} cada uno)?',
+  'itemUi.market.buyConfirmCancel': 'Cancelar',
+  'itemUi.market.buyConfirmTitle': 'Confirmar compra',
+  'itemUi.tooltip.questOrphaned': 'No se necesita para ninguna misión activa.',
+  'itemUi.tooltip.questRelated': 'Misión: {quest}',
+  'itemUi.tooltip.questRules': 'No se puede vender, guardar en el banco ni intercambiar.',
+  'desktop.update.checkingBody': 'Las nuevas versiones se descargan mientras juegas.',
+  'desktop.update.checkingTitle': 'Buscando actualizaciones...',
+  'desktop.update.dismiss': 'Descartar',
+  'desktop.update.downloadingBody': 'Puedes seguir jugando. Se instala cuando salgas.',
+  'desktop.update.uptodateTitle': 'Estás al día',
+  'entities.items.firebottle.name': 'Botella Incendiaria',
+  'entities.items.murloc_hut.name': 'Choza de Mudfin',
+  'entities.items.reins_drakemaw_raptor.name': 'Riendas del Raptor de Drakemaw',
+  'entities.items.restless_skull.name': 'Cráneo Inquieto',
+  'entities.items.vanguard_bone.name': 'Hueso de la Vanguardia',
+  'entities.mobs.brakka_wallbreaker.name': 'Brakka el Rompemuros',
+  'entities.mobs.dragonkin_broodguard.name': 'Guardián Dracónido de la Nidada',
+  'entities.mobs.dragonkin_egg.name': 'Huevo de Dracónido',
+  'entities.mobs.dragonkin_whelp.name': 'Cría de Dracónido',
+  'entities.mobs.drakemaw_broodlord.name': 'Señor de la Nidada de Drakemaw',
+  'entities.mobs.drowned_warlord.name': 'El Señor de la Guerra Ahogado',
+  'entities.mobs.spider_egg.name': 'Huevo de la Madre de la Nidada',
+  'entities.mobs.threnos_first_voice.name': 'Threnos, la Primera Voz',
+  'entities.mobs.widow_hatchling.name': 'Cría de Viuda',
+  'entities.quests.q_no_rest.objectives.0.label': 'El Señor de la Guerra Ahogado abatido',
+  'entities.quests.q_no_rest.text':
+    'El rito grabado en esos incensarios obliga a los ahogados a levantarse, y ahora ha alzado a uno lo bastante fuerte para liderarlos. Los guardianes lo llaman el Señor de la Guerra Ahogado, y mientras controle la Capilla Ahogada, los muertos mantienen sus filas. Acaba con él, {playerName}, y el resto se dispersará de vuelta hacia la ciénaga.',
   'hud.social.tenure.recruit': 'Recluta',
   'hud.social.tenure.veteran': 'Veterano',
   'hudChrome.keybinds.mouseHint':
@@ -2133,9 +2253,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'hudChrome.calendar.events.delveDay.note':
     'El Hermano Halven marca sus cartas: un buen día para atreverse con el Relicario Hundido.',
   'hudChrome.calendar.events.delveDay.title': 'Día de Expedición',
-  'hudChrome.calendar.events.fiestaNight.note':
-    'El anillo de la Fiesta 2c2 reúne esta noche a su público más ruidoso.',
-  'hudChrome.calendar.events.fiestaNight.title': 'Noche de Fiesta',
   'hudChrome.calendar.events.fishingDerby.note':
     'Los pescadores bordean los lagos. Trae una caña y comparte anécdotas de pesca.',
   'hudChrome.calendar.events.fishingDerby.title': 'Torneo de Pesca',
@@ -3207,7 +3324,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'hud.core.mobileMore': 'Más',
   'hud.core.mobileMoreAria': 'Mostrar más menús',
   'hud.core.mobileSocial': 'Comunidad',
-  'hud.core.mobileArena': 'Arena',
   'hud.core.mobileMenu': 'Menú',
   'hud.core.mobileSettings': 'Ajustes',
   'hud.core.mobileUse': 'Usar',
@@ -3317,7 +3433,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'hud.keybinds.actions.nameplates': 'Alternar placas de nombre',
   'hud.keybinds.actions.meters': 'Medidores de daño',
   'hud.keybinds.actions.social': 'Amigos y hermandad',
-  'hud.keybinds.actions.arena': 'Arena (Coliseo Cinéreo)',
   'hud.keybinds.actions.chat': 'Abrir chat',
   'hud.keybinds.actions.attack': 'Atacar',
   'hud.keybinds.actions.actionBarSlot': 'Barra de acción {slot}',
@@ -4683,6 +4798,7 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'entities.items.ridge_stalker_pelt.name': 'Piel de acechador de la cresta',
   'entities.items.old_cragmaws_pelt.name': 'Piel del Viejo Cragmaw',
   'entities.items.cragmaw_huntcord.name': 'Cinto de caza de Cragmaw',
+  'entities.items.cragmaw_huntquiver.name': 'Carcaj de caza de Cragmaw',
   'entities.items.glowing_wax.name': 'Cera resplandeciente',
   'entities.items.ogre_war_totem.name': 'Tótem de guerra ogro',
   'entities.items.storm_core.name': 'Núcleo de tormenta',
@@ -4759,6 +4875,7 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'entities.items.mirejaw_scale_vest.name': 'Chaleco de escamas de Mirejaw',
   'entities.items.moggers_copper_cudgel.name': 'Garrote de cobre de Mogger',
   'entities.items.moggers_shiv.name': 'Navaja de Mogger',
+  'entities.items.moggers_hide_quiver.name': 'Carcaj de cuero de Mogger',
   'entities.items.moggers_stomper_boots.name': 'Botas pisoteadoras de Mogger',
   'entities.items.necromancers_legwraps.name': 'Envolturas de piernas de Mournweave',
   'entities.items.necromancers_soulsteps.name': 'Pisadas de alma de Mournweave',
@@ -4783,6 +4900,7 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'entities.items.cryptbone_pauldrons.name': 'Hombreras Huesocripta',
   'entities.items.deathlords_dread_visage.name': 'Visaje aterrador de Barrowlord',
   'entities.items.gravewyrm_gauntlets.name': 'Guanteletes del Gravewyrm',
+  'entities.items.gravewyrm_bone_quiver.name': 'Carcaj de hueso del Gravewyrm',
   'entities.items.gravewyrm_mantle.name': 'Manto del Gravewyrm',
   'entities.items.mistveil_cord.name': 'Cordón Veloniebla',
   'entities.items.mistveil_grips.name': 'Agarraderas Veloniebla',
@@ -5152,11 +5270,8 @@ export const es: Partial<Record<TranslationKey, string>> = {
     'Tal como temía: quemaban ceniza de tumba, y el rito está firmado por Voss.',
   'entities.quests.q_drowned_censers.objectives.0.label': 'Incensario oxidado',
   'entities.quests.q_no_rest.title': 'Sin descanso entre los juncos',
-  'entities.quests.q_no_rest.text':
-    'Ese rito hace levantarse a los ahogados donde la ciénaga los toca. No podemos deshacerlo aún; deja 14 muertos menos a sus amos.',
   'entities.quests.q_no_rest.completion':
     'Das más misericordia a los muertos que sus señores. Toma esto, lo mereces.',
-  'entities.quests.q_no_rest.objectives.0.label': 'Muerto ahogado devuelto al descanso',
   'entities.quests.q_trolls.title': 'Túmulos de Mirefen',
   'entities.quests.q_trolls.text':
     'Los trolls de Mirefen abrieron túmulos más viejos que cualquier reino humano, {playerName}. Expúlsalos: 12 trolls muertos bastarán.',
@@ -5301,14 +5416,12 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'entities.quests.q_cult_orders.completion':
     'Esta letra viene del grimorio de Morthen. La misma mano guio cada tumba, {playerName}.',
   'entities.quests.q_cult_orders.objectives.0.label': 'Fanático del Culto del Wyrm abatido',
-  'entities.quests.q_cult_orders.objectives.1.label': 'Órdenes del Culto del Wyrm',
   'entities.quests.q_necromancers.title': 'El anillo de filacterias',
   'entities.quests.q_necromancers.text':
     'Las órdenes hablan de un anillo de filacterias, vasos de alma, {playerName}, alrededor del Santuario. Mata 8 nigromantes y trae 3 intactas.',
   'entities.quests.q_necromancers.completion':
     'Que la Luz nos perdone. Guardan los muertos del Valle y la ciénaga; nunca formaban un ejército, {playerName}. Eran un diezmo.',
   'entities.quests.q_necromancers.objectives.0.label': 'Nigromante del Culto del Wyrm abatido',
-  'entities.quests.q_necromancers.objectives.1.label': 'Filacteria ritual',
   'entities.quests.q_revenants.title': 'Los campos de aparecidos',
   'entities.quests.q_revenants.text':
     'Al este del camino yace un viejo campo de batalla. El culto levantó sus huesos con armaduras oxidadas. Devuelve 12 al suelo, {playerName}.',
@@ -5794,7 +5907,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'fiesta.end.draw': '¡FIESTA EN EMPATE! ¡Demasiado reñido!',
   'fiesta.end.loss': '¡FIESTA PERDIDA! ¡A la revancha!',
   'fiesta.end.win': '¡FIESTA GANADA! 🎉 ¡Vaya fiesta!',
-  'fiesta.enterQueue': '¡Únete a la Fiesta!',
   'fiesta.error.leaderOnly':
     'Solo el líder del grupo puede poner a tu equipo en cola para {label}.',
   'fiesta.error.noAugment': 'No tienes ninguna mejora que elegir ahora mismo.',
@@ -5812,9 +5924,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'fiesta.powerup.pow_colossus.name': 'Coloso',
   'fiesta.powerup.pow_moon_boots.name': 'Botas lunares',
   'fiesta.powerup.pow_speed_demon.name': 'Demonio veloz',
-  'fiesta.practice': '🎉 Práctica contra bots',
-  'fiesta.practiceNote':
-    'Práctica sin conexión: genera 3 bots con IA y te pone en cola para una Fiesta 2c2. Haz clic de nuevo para detener.',
   'fiesta.queue.join': 'Entras a la cola de la Fiesta 2c2. Prepárate para LA FIESTA…',
   'fiesta.queue.leave': 'Sales de la cola de la Fiesta 2c2.',
   'fiesta.queue.teamLeave': 'Tu equipo sale de la cola de la Fiesta 2c2.',
@@ -6010,6 +6119,7 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'entities.items.stormcallers_spaulders.name': 'Bufas de Galecall',
   'entities.items.bonewrought_greatsword.name': 'Espadón Bonewrought',
   'entities.items.direfang_greatblade.name': 'Gran hoja Direfang',
+  'entities.items.direfang_quiver.name': 'Carcaj Direfang',
   'entities.items.bonewrought_bulwark.name': 'Baluarte Bonewrought',
   'entities.items.wraithfire_orb.name': 'Orbe Wraithfire',
   'hud.chat.context.convertToRaid': 'Convertir en banda',
@@ -6651,17 +6761,12 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'guide.abilityHook.thunder_clap': 'Golpea a los enemigos a tu alrededor y ralentiza sus ataques.',
   'guide.abilityHook.wrath':
     'Una descarga de naturaleza lanzada a un objetivo a distancia, tu hechizo de ataque habitual.',
-  'guide.arenaPage.augmentsNote':
-    'Las mejoras y potenciadores duran solo lo que dura la partida. Buscan combinaciones divertidas e improvisadas, no un poder duradero, así que nadie compra su camino a la victoria.',
   'guide.arenaPage.coliseumBody':
     'El Coliseo es la arena del reino, donde te enfrentas a otros jugadores en partidas clasificatorias, uno contra uno o dos contra dos. Cada categoría conserva su propia clasificación, así que una victoria te hace subir por esa escala a la vista del reino entero. Abre la ventana de Arena para inscribirte en una categoría, solo o con tu compañero.',
   'guide.arenaPage.coliseumHeading': 'El Coliseo Ceniciento',
   'guide.arenaPage.duelsBody':
     'Reta a un duelo amistoso a cualquier jugador que encuentres. No hay nada en juego salvo el orgullo, así que es la forma más sencilla de aprender un enfrentamiento o zanjar una discusión amistosa.',
   'guide.arenaPage.duelsHeading': 'Duelos',
-  'guide.arenaPage.fiestaBody':
-    'Fiesta es una reyerta rápida de dos contra dos que se disputa como un único combate continuo, con cada luchador puesto en igualdad de condiciones. Conforme avanza la pelea eliges mejoras, refuerzos rápidos que reconfiguran tu repertorio sobre la marcha, así que no hay dos partidas iguales.',
-  'guide.arenaPage.fiestaHeading': 'Fiesta dos contra dos',
   'guide.arenaPage.heading': 'Arena y JcJ',
   'guide.arenaPage.intro':
     '¿Quieres ponerte a prueba contra otros jugadores? El combate jugador contra jugador está integrado, y siempre es algo que tú eliges, nunca algo que se te impone.',
@@ -6818,21 +6923,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
     'Tres zonas, de sur a norte, cada una un escalón más alta en nivel. Sigue el rastro de las misiones y la tierra te lleva del valle a los picos.',
   'guide.worldPage.places': 'Lugares destacados',
   'guide.worldPage.residents': 'A quién te encontrarás',
-  'guide.arenaPage.powerupsBody':
-    'Esferas brillantes también caen en la arena en mitad del combate, libres para quien las alcance primero. Son deliberadamente exageradas y duran solo un instante: Demonio de Velocidad para un parpadeo de paso cegador, Coloso para hincharte hasta volverte un gigante torpe, Botas Lunares para un salto rebotante de baja gravedad y Berserker para una repentina oleada de furia.',
-  'guide.arenaPage.powerupsTitle': 'Potenciadores en el ruedo',
-  'guide.arenaPage.waveGoldBody':
-    'La oleada intermedia: combinaciones de doble filo donde tu construcción empieza a tomar forma y a lucirse.',
-  'guide.arenaPage.waveGoldTitle': 'Oro',
-  'guide.arenaPage.wavePrismaticBody':
-    'La oleada final: picos que definen tu construcción y derriten la pantalla, pensados para sentirse ridículos en el mejor de los sentidos.',
-  'guide.arenaPage.wavePrismaticTitle': 'Prismático',
-  'guide.arenaPage.waveSilverBody':
-    'La oleada inicial: mejoras limpias de una sola característica que afinan lo esencial de tu clase.',
-  'guide.arenaPage.waveSilverTitle': 'Plata',
-  'guide.arenaPage.wavesBody':
-    'Un combate de Fiesta te entrega nuevas elecciones sobre la marcha, y las elecciones se vuelven más audaces cuanto más se alarga la pelea. Construyes de una oleada a la siguiente, eligiendo una de unas pocas opciones cada vez y conservándola durante el resto del combate.',
-  'guide.arenaPage.wavesTitle': 'Las mejoras llegan en oleadas',
   'guide.bestiary.flavor.gravecaller_cultist':
     'Sirvientes encapuchados del culto de la muerte cuya obra mancilla las tumbas desde el Valle hasta los picos. Donde se reúnen, los muertos no descansan.',
   'guide.bestiary.flavor.grubjaw':
@@ -8377,9 +8467,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'entities.mobs.willow_sprite.name': 'Duende del Sauce',
   'entities.mobs.wood_wraith.name': 'Aparecido del Bosque',
   'entities.mobs.wreck_thief.name': 'Ladrón de Wreckfield',
-  'guide.arenaPage.yumiBody':
-    'Protege a Yumi es un modo de objetivos por equipos que se juega en un laberinto: cada bando protege a su propio familiar felino mientras da caza al del rival. Cada cierto tiempo ambos gatos se teletransportan a nuevos rincones del laberinto, así que el combate oscila entre defender, cazar y correr para volver a encontrarlos. Entra en cola como tres contra tres o cinco contra cinco; caer en batalla solo te deja en el banquillo un instante.',
-  'guide.arenaPage.yumiHeading': 'Protege a Yumi',
   'hudChrome.archetypeTitle.hobbyLabel': 'Pasatiempo',
   'hudChrome.auraEffect.armorPct': 'Reduce la armadura un {pct}%',
   'hudChrome.auraEffect.armorPctStacks': 'Reduce la armadura un {pct}% ({stacks} acumulaciones)',
@@ -8400,7 +8487,6 @@ export const es: Partial<Record<TranslationKey, string>> = {
   'yumi.bracket5': 'Yumi 5c5',
   'yumi.end.loss': '¡DERROTA! Tu Yumi ha caído.',
   'yumi.end.win': '¡VICTORIA! ¡Yumi está a salvo!',
-  'yumi.enterQueue': '¡Únete a Protege a Yumi!',
   'yumi.error.partyTooBig3': 'Protege a Yumi 3c3 permite un grupo de hasta tres.',
   'yumi.error.partyTooBig5': 'Protege a Yumi 5c5 permite un grupo de hasta cinco.',
   'yumi.hud.aria': 'Tu Yumi con {mine} de {max} de salud; Yumi enemigo con {theirs}.',
