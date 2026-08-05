@@ -27,7 +27,7 @@ import {
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import { directHitBonus } from '../src/sim/spell_scaling';
+import { directHealBonus, directHitBonus } from '../src/sim/spell_scaling';
 import { resolveTalentHitMult } from '../src/sim/talent_hit_mult';
 import type { AbilityEffect, Entity } from '../src/sim/types';
 
@@ -317,6 +317,105 @@ describe('mastery/talent damage percent scales the whole hit, not just the base 
       // Before the fix, every bounce (i > 0) stayed at the unscaled baseline
       // amount while only the primary hit (i === 0) moved.
       expect(boostedHits[i] / baseHits[i]).toBeCloseTo(1 + dmgPct, 1);
+    }
+  });
+
+  // Reviewer finding on PR #2757 (Rubsey/OSSBrain): Temporal Cascade
+  // (massTemporalEcho) had no scaleEffect case, and its initial-heal SP rider
+  // skipped talentHealMult, so Chronoweave's advertised "all healing" mastery
+  // bonus never reached the group heal at all. Fixed by giving massTemporalEcho
+  // the same scaleEffect heal.min/max treatment as heal/chainHeal, and passing
+  // talentHealMult into its directHealBonus rider in effect_dispatch.ts.
+  it('a massTemporalEcho ability (Temporal Cascade) with an ability-scoped +20% scales base AND the Spell Power rider by the same 1.2 (pure math)', () => {
+    // AbilityModEffect has no separate healPct field: resolveTalentHitMult
+    // reuses the same ability-scoped dmgPct for healMult (see talent_hit_mult.ts),
+    // matching the pattern the Renew HoT test above uses.
+    const dmgPct = 0.2;
+    // temporal_cascade is gated to the arcane (Chronomancy) spec (specs: ['arcane']).
+    const baseline: TalentModifiers = { ...emptyModifiers(), spec: 'arcane' };
+    const boosted: TalentModifiers = { ...emptyModifiers(), spec: 'arcane' };
+    accumulateTalentEffect(boosted, { ability: [{ ability: 'temporal_cascade', dmgPct }] });
+
+    const baseAbility = abilitiesKnownAt('mage', 20, baseline).find(
+      (a) => a.def.id === 'temporal_cascade',
+    );
+    const boostedAbility = abilitiesKnownAt('mage', 20, boosted).find(
+      (a) => a.def.id === 'temporal_cascade',
+    );
+    if (!baseAbility || !boostedAbility) throw new Error('missing temporal_cascade');
+    const massTemporalEchoEffect = (effects: AbilityEffect[]) => {
+      const found = effects.find((e) => e.type === 'massTemporalEcho');
+      if (found?.type !== 'massTemporalEcho') throw new Error('missing massTemporalEcho effect');
+      return found;
+    };
+    const baseEff = massTemporalEchoEffect(baseAbility.effects);
+    const boostedEff = massTemporalEchoEffect(boostedAbility.effects);
+
+    // Before the fix, massTemporalEcho had no scaleEffect case, so this bake
+    // was a no-op and boostedEff.heal.min === baseEff.heal.min.
+    expect(boostedEff.heal.min).toBe(Math.round(baseEff.heal.min * (1 + dmgPct)));
+
+    const spellPower = 900;
+    const castTime = boostedAbility.castTime;
+    const { healMult } = resolveTalentHitMult(boostedAbility.def, boosted);
+    expect(healMult).toBeCloseTo(1 + dmgPct, 10);
+
+    const baselineRider = directHealBonus(spellPower, castTime);
+    const fixedRider = directHealBonus(spellPower, castTime, false, healMult);
+    const unfixedRider = directHealBonus(spellPower, castTime); // mult defaults to 1
+
+    const baselineHit = baseEff.heal.min + baselineRider;
+    const fixedHit = boostedEff.heal.min + fixedRider;
+    const unfixedHit = boostedEff.heal.min + unfixedRider;
+
+    expect(fixedHit / baselineHit).toBeCloseTo(1 + dmgPct, 2);
+    expect(unfixedHit / baselineHit).toBeLessThan(1 + dmgPct);
+  });
+
+  it('Temporal Cascade initial heals scale under a global healPct (Chronoweave shape), end to end', () => {
+    const healPct = 0.2;
+
+    const castInitialHeals = (boost: boolean): number[] => {
+      const sim = new Sim({ seed: 51, playerClass: 'mage', autoEquip: true });
+      sim.setPlayerLevel(20);
+      if (!sim.setSpec('arcane')) throw new Error('failed to set arcane spec');
+      const meta = sim.meta(sim.playerId);
+      if (!meta) throw new Error('missing player meta');
+      const mods: TalentModifiers = { ...meta.talentMods };
+      if (boost) accumulateTalentEffect(mods, { global: { healPct } });
+      meta.talentMods = mods;
+      meta.known = abilitiesKnownAt(meta.cls, 20, mods) as typeof meta.known;
+      sim.player.spellPower = 400;
+      sim.player.resource = sim.player.maxResource;
+      // A big HP pool with a deep deficit so the initial heal never clips an
+      // overheal cap: an overheal-clamped amount would read identical whether
+      // boosted or not and hide the bug this test targets.
+      sim.player.maxHp = 100_000;
+      sim.player.hp = 1;
+
+      // partyOnlyTarget only allows the caster or a group/raid member, so
+      // target self here rather than standing up a party.
+      sim.targetEntity(sim.player.id);
+      sim.castAbility('temporal_cascade');
+      const ticked: import('../src/sim/types').SimEvent[] = [];
+      // 2s cast time: give it a full 3s of ticks (60 at DT=1/20) to resolve.
+      for (let i = 0; i < 60; i++) ticked.push(...sim.tick());
+      const heals = ticked
+        .filter(
+          (e) => e.type === 'heal2' && (e as { targetId?: number }).targetId === sim.player.id,
+        )
+        .map((e) => (e as unknown as { amount: number }).amount);
+      expect(heals.length).toBeGreaterThan(0);
+      return heals;
+    };
+
+    const baseHeals = castInitialHeals(false);
+    const boostedHeals = castInitialHeals(true);
+    expect(boostedHeals.length).toBe(baseHeals.length);
+    for (let i = 0; i < baseHeals.length; i++) {
+      // Before the fix, the initial heal stayed at the unscaled baseline
+      // amount regardless of Chronoweave's global healPct.
+      expect(boostedHeals[i] / baseHeals[i]).toBeCloseTo(1 + healPct, 1);
     }
   });
 });

@@ -679,8 +679,13 @@ export function runEffects(
         const initialApplied: number[] = [];
         for (const ally of targets) {
           const before = devPlaytest ? ally.hp : 0;
+          // Like heal/chainHeal, the base roll (eff.heal.min/max) is talent scaled
+          // by the massTemporalEcho case in classes.ts, and talentHealMult reaches
+          // the SP rider here too, so Chronoweave's "all healing" bonus applies to
+          // Temporal Cascade's initial heal the same way it does every other heal.
           const healAmount =
-            ctx.rng.range(eff.heal.min, eff.heal.max) + directHealBonus(p.spellPower, res.castTime);
+            ctx.rng.range(eff.heal.min, eff.heal.max) +
+            directHealBonus(p.spellPower, res.castTime, false, talentHealMult);
           ctx.applyHeal(p, ally, healAmount, ability.name);
           if (devPlaytest) {
             const applied = ally.hp - before;

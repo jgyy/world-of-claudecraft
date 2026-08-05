@@ -6406,6 +6406,17 @@ function scaleEffect(
         min: Math.round(eff.min * healMult + flat),
         max: Math.round(eff.max * healMult + flat),
       };
+    case 'massTemporalEcho':
+      // Like heal/chainHeal, the initial-heal base is talent scaled here so it
+      // matches the SP rider talentHealMult now applies at the effect_dispatch.ts
+      // call site (Chronoweave's "all healing" bonus was previously a no-op here).
+      return {
+        ...eff,
+        heal: {
+          min: Math.round(eff.heal.min * healMult + flat),
+          max: Math.round(eff.heal.max * healMult + flat),
+        },
+      };
     case 'hot':
       return { ...eff, total: Math.round(eff.total * healMult * hotMult + flat) };
     case 'consumeAura':
