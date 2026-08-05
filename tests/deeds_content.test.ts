@@ -17,6 +17,7 @@ import {
   GATHERING_PROFESSION_IDS,
   GATHERING_PROFESSIONS,
 } from '../src/sim/content/professions';
+import { ALL_RECIPES } from '../src/sim/content/recipes';
 import { RIFT_MOBS } from '../src/sim/content/rift/mobs';
 import { WARLOCK_PET_MOBS } from '../src/sim/content/warlock_pets';
 import { YUMI_TEMPLATE_ID } from '../src/sim/content/yumi';
@@ -61,16 +62,16 @@ const PREFIX_CATEGORY: Record<string, DeedCategory> = {
 };
 
 describe('audited launch totals (literals: update deliberately with the catalog)', () => {
-  it('ships exactly 240 deeds worth 2930 total Renown', () => {
-    expect(DEED_ORDER.length).toBe(240);
-    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(2930);
+  it('ships exactly 247 deeds worth 3000 total Renown', () => {
+    expect(DEED_ORDER.length).toBe(247);
+    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(3000);
   });
 
   it('ships the audited per-category counts', () => {
     const byCategory: Record<string, number> = {};
     for (const d of ALL) byCategory[d.category] = (byCategory[d.category] ?? 0) + 1;
     expect(byCategory).toEqual({
-      progression: 50,
+      progression: 57,
       combat: 10,
       dungeon: 31,
       delve: 13,
@@ -160,6 +161,16 @@ describe('audited launch totals (literals: update deliberately with the catalog)
       // dungeonId to key a dungeonClears trigger against).
       'dgn_rift',
       'dgn_rift_s_rank',
+      // Basic universal profession deeds (issue #2055): per-craft rare-tier
+      // milestones, appended after the Rift coverage block above (the
+      // rebase onto the release base put the Rift pair first).
+      'prog_engineering_rare',
+      'prog_alchemy_rare',
+      'prog_cooking_rare',
+      'prog_leatherworking_rare',
+      'prog_tailoring_rare',
+      'prog_weaponcrafting_rare',
+      'prog_armorcrafting_rare',
     ]);
     expect(DEEDS.dgn_wildheart_basin.renown).toBe(10);
     expect(DEEDS.dgn_wildheart_basin_heroic.renown).toBe(10);
@@ -362,6 +373,51 @@ describe('audited launch totals (literals: update deliberately with the catalog)
     expect(DEEDS.prog_ringwright).toBeUndefined();
   });
 
+  it('pins the basic universal profession deeds (issue #2055): renown and trigger literals', () => {
+    // Per-craft rare-tier milestones: exactly the crafts that ship a
+    // rare-or-better GEAR/CONSUMABLE recipe today (re-derived from the real
+    // content tables, never hand-copied), each at standard renown with no
+    // reward. Enchanting's only rare-quality outputs are the tool-effect
+    // charms (gatherers_cache/artisans_eye, TOOL_EFFECT_RECIPES): consumable
+    // recharge implements, not the graded gear/food/potion class this deed
+    // rewards, so they are excluded from the derivation the same way the
+    // deed's own comment excludes enchanting; jewelcrafting/inscription stay
+    // deferred with prog_ringwright (no live recipes).
+    const rareTierCrafts = [...new Set(ALL_RECIPES.map((r) => r.professionId))]
+      .filter((craftId) =>
+        ALL_RECIPES.some((r) => {
+          if (r.professionId !== craftId) return false;
+          const item = ITEMS[r.resultItemId];
+          if (item?.use?.type === 'toolEffect') return false;
+          const quality = item?.quality;
+          return quality === 'rare' || quality === 'epic' || quality === 'legendary';
+        }),
+      )
+      .sort();
+    expect(rareTierCrafts).toEqual([
+      'alchemy',
+      'armorcrafting',
+      'cooking',
+      'engineering',
+      'leatherworking',
+      'tailoring',
+      'weaponcrafting',
+    ]);
+    for (const craftId of rareTierCrafts) {
+      const deed = DEEDS[`prog_${craftId}_rare`];
+      expect(deed, craftId).toBeDefined();
+      expect(deed.renown, deed.id).toBe(10);
+      expect(deed.reward, deed.id).toBeUndefined();
+      expect(deed.hidden ?? false, deed.id).toBe(false);
+      expect(deed.trigger).toEqual({ kind: 'visit', markId: `craft_rare:${craftId}` });
+    }
+    // No deed keys off enchanting, jewelcrafting, or inscription: those
+    // crafts stay out of the per-craft rare-tier set.
+    for (const craftId of ['enchanting', 'jewelcrafting', 'inscription']) {
+      expect(DEEDS[`prog_${craftId}_rare`], craftId).toBeUndefined();
+    }
+  });
+
   it('ships exactly 31 titles and 3 borders', () => {
     const titles = ALL.filter((d) => d.reward?.kind === 'title');
     const borders = ALL.filter((d) => d.reward?.kind === 'border');
@@ -427,9 +483,11 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // Re-baselined at the v0.35.0 base merge, which unions the brood pair with
   // the four Thornhollow Fields battleground deeds. No shipped trigger or
   // renown changed on either side.
-  // Re-baselined for Rift coverage (dgn_rift, dgn_rift_s_rank): two more
-  // appended deeds; no shipped trigger or renown changed on either side.
-  const FROZEN_CATALOG_SHA256 = 'd15314bb16d0d7f3eaa30ce9ec53f906a846b40b241def754a99ce967971b10c';
+  // Re-baselined for Rift coverage (dgn_rift, dgn_rift_s_rank) plus issue #2055
+  // (basic universal profession deeds: prog_engineering_rare through
+  // prog_armorcrafting_rare), which both append after the Drakelands brood
+  // rework block above. No shipped trigger or renown changed on either side.
+  const FROZEN_CATALOG_SHA256 = '2a868f0909a7dc3a26087f7247c1fea11c8a1ef98fef4fd7e9a02309e3f8cd63';
 
   it('every shipped deed keeps its trigger and renown unchanged', () => {
     const canonical = JSON.stringify(
@@ -623,7 +681,7 @@ describe('table shape', () => {
     // (forbidden: the order is an append-only determinism contract; new
     // deeds append). hid_codfather's index is pinned in the refresh test.
     expect(DEED_ORDER[0]).toBe('prog_first_steps');
-    expect(DEED_ORDER[DEED_ORDER.length - 1]).toBe('dgn_rift_s_rank');
+    expect(DEED_ORDER[DEED_ORDER.length - 1]).toBe('prog_armorcrafting_rare');
   });
 
   it('every entry key matches its id and its prefix matches its category', () => {
@@ -806,6 +864,13 @@ describe('trigger references resolve against the real content tables', () => {
           ['pristine_vein', 'ancient_heartwood', 'moonlit_bloom', 'perfect_specimen'],
           `${deedId}: ${mark}`,
         ).toContain(mark.slice('gather_event:'.length));
+      } else if (ns === 'craft_rare') {
+        // Written by professions/crafting.ts craftItem the first time a
+        // player crafts a rare-or-better output in that craft (#2055).
+        expect(
+          CRAFT_RING.some((c) => c.id === mark.slice('craft_rare:'.length)),
+          `${deedId}: ${mark}`,
+        ).toBe(true);
       }
     };
     for (const def of ALL) {
