@@ -94,15 +94,20 @@ describe('elemental family bespoke attack (issue #2889 batch 1)', () => {
     expect(elementalBlock).not.toContain('clips: FLOATING,');
 
     // FLOATING itself (the constant definition, not a VisualDef using it) must
-    // still read the original shared attack: the other 8 families sharing it
-    // by reference must be untouched by this change.
+    // still read the original shared attack: the families sharing it by
+    // reference must be untouched by this change (elemental migrated here;
+    // dragonkin migrates in a later stacked batch, see
+    // tests/anim_pipeline_druid_dragonkin.test.ts).
     const floatingConstBlock = manifestBlock('const FLOATING: ClipMap = {', '};');
     expect(floatingConstBlock).toContain("attack: ['Headbutt', 'Punch']");
 
-    // Every other VisualDef still pointing at the shared constant is untouched:
-    // exactly 8 remaining direct `clips: FLOATING,` usages (9 originally, minus
-    // the one migrated to ELEMENTAL_FLOATING above).
+    // Every other VisualDef still pointing at the shared constant is untouched.
+    // This count only ever goes DOWN as later batches migrate one more
+    // FLOATING-sharing family onto its own ClipMap constant (9 originally,
+    // minus elemental here; the druid/dragonkin batch stacked on top of this
+    // one takes it to 7 by also migrating mob_dragonkin, see
+    // tests/anim_pipeline_druid_dragonkin.test.ts).
     const remaining = [...MANIFEST_SRC.matchAll(/clips: FLOATING,/g)].length;
-    expect(remaining).toBe(8);
+    expect(remaining).toBe(7);
   });
 });
