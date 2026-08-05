@@ -130,8 +130,9 @@ describe('mastery/talent damage percent scales the whole hit, not just the base 
       sim.player.resource = sim.player.maxResource;
       const target = addTargetDummy(sim, 9301);
       sim.castAbility('corruption');
-      // 2s cast time; no rng draw applies a DoT snapshot, so this is deterministic.
-      for (let i = 0; i < 20 * 3; i++) sim.tick();
+      // 2s cast time plus projectile travel to a target 3yd away; no rng draw
+      // applies the DoT snapshot on impact, so this stays deterministic.
+      for (let i = 0; i < 20 * 5; i++) sim.tick();
       const dot = target.auras.find((a) => a.kind === 'dot' && a.id === 'corruption');
       if (!dot) throw new Error('corruption did not land');
       return dot.value;
