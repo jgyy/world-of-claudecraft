@@ -404,6 +404,12 @@ export const hudChromeStrings = {
     // does not trip the untranslated-leak guard; "Band" reads as your group of
     // companions, parallel to playerLabel / targetLabel.
     partyLabel: 'Your Band',
+    // petLabel names the #pet-frame region (the hunter/warlock/mage pet's health
+    // strip under the player frame, which doubles as a button that selects the
+    // pet). Kept NON-WORDY (no run of four+ lowercase) so an English-filled
+    // non-Latin locale does not trip the M16 untranslated-leak guard, parallel to
+    // playerLabel / targetLabel / partyLabel above.
+    petLabel: 'Your Pet',
     // partyChip is the caption on the mobile-only collapse chip that stands in for the
     // expanded party stack (the member frames) on the touch HUD: tap it
     // to reveal the stack, tap again to collapse. A distinct key from the chat channel
@@ -508,10 +514,13 @@ export const hudChromeStrings = {
     // The mobile chat composer's placeholder. The desktop hud.core.chatPlaceholder
     // packs the full slash-command legend (/s, /w, /r, ...), which overflows the
     // compact touch composer strip, so the touch HUD shows this short prompt instead
-    // (activeChatPlaceholder branches on the mobile layout). WORDY by M16
-    // ("something" is a four-plus consecutive-lowercase run), so the five non-Latin
-    // overlays carry real fills and the Latin overlays stay pending.
-    chatPlaceholder: 'Say something...',
+    // (activeChatPlaceholder branches on the mobile layout). Carries the same "!"
+    // community-commands hint as the desktop placeholder (issue #1230): mobile has
+    // no hover for a tooltip, so the always-visible placeholder is the one surface
+    // both platforms share. WORDY by M16 ("something" is a four-plus
+    // consecutive-lowercase run), so the five non-Latin overlays carry real fills
+    // and the Latin overlays stay pending.
+    chatPlaceholder: 'Say something... (! for community commands)',
   },
   // New-adventurer tutorial copy for the touch interface. The default tutorial
   // bodies (hud.tutorial.*Body) reference keyboard/mouse ("W/A/S/D", "press F"),
@@ -738,6 +747,10 @@ export const hudChromeStrings = {
     petTaunt: 'Pet: Taunt',
     petDefensive: 'Pet: Defensive',
     petAggressive: 'Pet: Aggressive',
+    // Selects your own pet as your current target (the pet frame's click, on a key).
+    // "Mark" is this catalog's own term for the target (unitFrame.targetLabel,
+    // targetAnnounce), which also keeps the value NON-WORDY for the M16 guard.
+    targetPet: 'Pet: Mark',
     // Rideable mounts: the Z toggle (opens the stable while nothing is picked).
     mount: 'Mount / Dismount',
     // Mouse buttons are bindable pseudo-keys (src/game/mouse_binds.ts). The note
@@ -1243,6 +1256,10 @@ export const hudChromeStrings = {
     // Interface panel toggle: also engage auto-attack when using an offensive
     // ability, so white swings start without a separate Attack press (on by default).
     startAttackOnAbility: 'Auto-Attack on Ability Use',
+    // Interface panel toggle: disengage auto-attack whenever the target
+    // switches, instead of the classic default of carrying the swing over to
+    // the new target (off by default; issue #1358).
+    stopAutoAttackOnTargetSwitch: 'Stop Auto-Attack on Target Switch',
     // Interface panel toggle: loot corpses by walking past them (off by default).
     walkByAutoloot: 'Walk-by Autoloot',
     groundReticle: 'Ground-Targeting Reticle',
@@ -1263,6 +1280,12 @@ export const hudChromeStrings = {
     // Enabled only while the secondary row is visible. Slots remain reachable
     // through keybinds and the mobile action-ring pages while this row is hidden.
     showThirdActionBar: 'Show Third Action Bar',
+    // Interface panel toggle (off by default): strips the black background,
+    // border, and keybind label from action-bar slots with no ability or item
+    // bound, so an unlearned class's bar reads clean instead of a wall of empty
+    // squares. Bound slots (and the fixed Attack button) are unaffected, so the
+    // slot layout used to arrange buffs/consumables on the extra rows holds.
+    hideUnusedActionSlots: 'Hide Unused Action Slots',
     // Interface panel toggle (off by default) that locks the action bar slots
     // against drag-to-move, drag-to-replace, and clear so an accidental
     // click-and-drag mid-fight can't disturb a slot. Abilities still fire from
@@ -1272,6 +1295,11 @@ export const hudChromeStrings = {
     // default): a small unit frame under the target frame showing who your target
     // is targeting.
     showTargetOfTarget: 'Show Target of Target',
+    // Interface panel toggle for the pet health strip under the player frame (on by
+    // default; it only appears while you actually have a pet). Phrased from the
+    // frame's own accessible name (unitFrame.petLabel) so the value stays NON-WORDY
+    // for the M16 guard.
+    showPetFrame: 'Show Your Pet',
     // Interface panel toggle for the fixed Attack button in the first action-bar
     // slot (on by default). Off frees that slot for a normal action (drag one in;
     // its key then casts it). Right-clicking the Attack button flips this off too.

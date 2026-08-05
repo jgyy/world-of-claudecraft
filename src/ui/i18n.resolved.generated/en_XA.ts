@@ -786,6 +786,7 @@ export const en_XA: EnTranslations = {
       "targetAnnounce": "[Ɱáŕķ {name}]",
       "targetOfTargetLabel": "[Ɱáŕķ'š Ɱáŕķ]",
       "partyLabel": "[Ýóúŕ Ɓáñð]",
+      "petLabel": "[Ýóúŕ Þéţ]",
       "partyChip": "[Þáŕţý]",
       "partyGroup": "[Ĝŕóúþ {n}]",
       "durationUnitSeconds": "[š]",
@@ -820,7 +821,7 @@ export const en_XA: EnTranslations = {
       "targetCycleShort": "[Ţáŕĝéţ]",
       "spellbookPageLabel": "[Þáĝé {page}]",
       "hideKeyboard": "[Ĥíðé ķéýƀóáŕð]",
-      "chatPlaceholder": "[Šáý šóɱéţĥíñĝ...]"
+      "chatPlaceholder": "[Šáý šóɱéţĥíñĝ... (! ƒóŕ çóɱɱúñíţý çóɱɱáñðš)]"
     },
     "tutorial": {
       "moveBodyTouch": "[Úšé ţĥé ɱóʋéɱéñţ šţíçķ ţó ɱóʋé áñð ðŕáĝ ţĥé šçŕééñ ţó ļóóķ áŕóúñð. Ţáķé á ƒéŵ šţéþš ţó ƀéĝíñ.]",
@@ -959,6 +960,7 @@ export const en_XA: EnTranslations = {
       "petTaunt": "[Þéţ: Ţáúñţ]",
       "petDefensive": "[Þéţ: Ðéƒéñšíʋé]",
       "petAggressive": "[Þéţ: Áĝĝŕéššíʋé]",
+      "targetPet": "[Þéţ: Ɱáŕķ]",
       "mount": "[Ɱóúñţ / Ðíšɱóúñţ]",
       "mouseHint": "[Ɱóúšé ƀúţţóñš ŵóŕķ ţóó: þŕéšš ţĥé ɱíððļé ƀúţţóñ (Ɱ3) óŕ á ţĥúɱƀ ƀúţţóñ (Ɱ4, Ɱ5) ŵĥíļé ƀíñðíñĝ. Ļéƒţ áñð ŕíĝĥţ šţáý ŕéšéŕʋéð ƒóŕ ţĥé çáɱéŕá, çļíçķ ţó ɱóʋé, áñð çļíçķíñĝ ţĥíñĝš íñ ţĥé ŵóŕļð.]"
     },
@@ -1296,6 +1298,7 @@ export const en_XA: EnTranslations = {
       "aurasOnPlayerFrame": "[Ɓúƒƒš óñ ţĥé Þļáýéŕ Ƒŕáɱé]",
       "highContrastBackground": "[Ĥíĝĥ-Çóñţŕášţ Ɓáçķĝŕóúñð]",
       "startAttackOnAbility": "[Áúţó-Áţţáçķ óñ Áƀíļíţý Úšé]",
+      "stopAutoAttackOnTargetSwitch": "[Šţóþ Áúţó-Áţţáçķ óñ Ţáŕĝéţ Šŵíţçĥ]",
       "walkByAutoloot": "[Ŵáļķ-ƀý Áúţóļóóţ]",
       "groundReticle": "[Ĝŕóúñð-Ţáŕĝéţíñĝ Ŕéţíçļé]",
       "mouseoverCast": "[Ɱóúšéóʋéŕ Çášţ óñ Þáŕţý Ƒŕáɱéš]",
@@ -1305,8 +1308,10 @@ export const en_XA: EnTranslations = {
       "itemScoreLine": "[Šçóŕé {score}]",
       "showSecondaryActionBar": "[Šĥóŵ Šéçóñðáŕý Áçţíóñ Ɓáŕ]",
       "showThirdActionBar": "[Šĥóŵ Ţĥíŕð Áçţíóñ Ɓáŕ]",
+      "hideUnusedActionSlots": "[Ĥíðé Úñúšéð Áçţíóñ Šļóţš]",
       "lockActionBars": "[Ļóçķ Áçţíóñ Ɓáŕš]",
       "showTargetOfTarget": "[Šĥóŵ Ţáŕĝéţ óƒ Ţáŕĝéţ]",
+      "showPetFrame": "[Šĥóŵ Ýóúŕ Þéţ]",
       "showAttackButton": "[Šĥóŵ Áţţáçķ Ɓúţţóñ]",
       "showDailyRewardsChest": "[Šĥóŵ Ðáíļý Ŕéŵáŕðš Çĥéšţ]",
       "mobileCameraJoystick": "[Çáɱéŕá ĵóýšţíçķ]",
@@ -6476,7 +6481,7 @@ export const en_XA: EnTranslations = {
       "releaseSpirit": "[Ŕéļéášé Šþíŕíţ]",
       "chatTab": "[Çĥáţ]",
       "combatLogTab": "[Çóɱƀáţ Ļóĝ]",
-      "chatPlaceholder": "[Šáý šóɱéţĥíñĝ... (/š šáý, /ŵ ñáɱé ŵĥíšþéŕ, /ŕ ŕéþļý, /þ þáŕţý, /ĝú ĝúíļð, /ó óƒƒíçéŕ, /ĝéñéŕáļ ĝéñéŕáļ, /ĥéļþ)]",
+      "chatPlaceholder": "[Šáý šóɱéţĥíñĝ... (/š šáý, /ŵ ñáɱé ŵĥíšþéŕ, /ŕ ŕéþļý, /þ þáŕţý, /ĝú ĝúíļð, /ó óƒƒíçéŕ, /ĝéñéŕáļ ĝéñéŕáļ, /ĥéļþ, ! ƒóŕ çóɱɱúñíţý çóɱɱáñðš)]",
       "chatChannels": {
         "add": "[Áðð çĥáţ çĥáññéļ]",
         "addTitle": "[Áðð çĥáññéļ]",

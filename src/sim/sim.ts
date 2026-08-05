@@ -320,6 +320,7 @@ import {
 } from './pathfind';
 import * as petAi from './pet/pet_ai';
 import * as petCommands from './pet/pet_commands';
+import type { MatchPetSnapshot } from './pet/pet_match_return';
 import {
   isSwimming as isSwimmingImpl,
   moveSpeedMult as moveSpeedMultImpl,
@@ -934,6 +935,12 @@ export interface ArenaMatch {
   // so no arena format can be farmed as a free full-restore (issue #1600).
   // Optional only for compatibility with synthetic/legacy ArenaMatch fixtures.
   preMatchPools?: Map<number, ArenaReturnPools>;
+  // The LIVING pet each fighter walked in with (absent pid = none), so the return
+  // path can stand a beast the bout killed back up instead of sending its owner
+  // home with a corpse. Kept beside the pools rather than inside them because it is
+  // applied LATER: the pet is placed only after its owner is back at their queue
+  // spot. Optional for the same synthetic-fixture reason as preMatchPools.
+  preMatchPets?: Map<number, MatchPetSnapshot>;
   ratingA: number; // team avg at start
   ratingB: number;
   defeated: Set<number>;
@@ -1142,6 +1149,14 @@ export interface PlayerMeta {
   // persisted: src/sim/mount_race.ts owns the rules. Strictly per-player, so
   // simultaneous racers never share or contend on anything.
   mountRace?: MountRaceSession | null;
+  // Optional QoL preference (issue #1358): when true, every target-switch
+  // selector in targeting.ts (targetEntity, tabTarget, targetNearestEnemy,
+  // targetNearestFriendly, friendlyTabTarget) disengages auto-attack instead of
+  // carrying it over to the new target. Session-only, mirrored from the client's
+  // `stopAutoAttackOnTargetSwitch` setting via setStopAutoAttackOnTargetSwitch;
+  // never persisted, and absent/false preserves the classic follow-through
+  // default.
+  stopAutoAttackOnTargetSwitch?: boolean;
   // One-time riding-lesson fee (100g), charged when the first lesson race starts
   // (or through the legacy mount_train_begin command). Optional so absent === false (pre-feature saves and a
   // fresh character stay byte-equal): never explicitly set to false, only ever
@@ -7993,6 +8008,10 @@ export class Sim {
 
   friendlyTabTarget(pid?: number): void {
     this.targeting.friendlyTabTarget(pid);
+  }
+
+  setStopAutoAttackOnTargetSwitch(enabled: boolean, pid?: number): void {
+    this.targeting.setStopAutoAttackOnTargetSwitch(enabled, pid);
   }
 
   // -------------------------------------------------------------------------

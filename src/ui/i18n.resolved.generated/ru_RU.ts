@@ -786,6 +786,7 @@ export const ru_RU: EnTranslations = {
       "targetAnnounce": "Цель: {name}",
       "targetOfTargetLabel": "Цель цели",
       "partyLabel": "Ваша группа",
+      "petLabel": "Ваш питомец",
       "partyChip": "Группа",
       "partyGroup": "Группа {n}",
       "durationUnitSeconds": "с",
@@ -820,7 +821,7 @@ export const ru_RU: EnTranslations = {
       "targetCycleShort": "Цель",
       "spellbookPageLabel": "Страница {page}",
       "hideKeyboard": "Скрыть клавиатуру",
-      "chatPlaceholder": "Напишите сообщение..."
+      "chatPlaceholder": "Напишите сообщение... (! команды сообщества)"
     },
     "tutorial": {
       "moveBodyTouch": "Используйте джойстик передвижения, чтобы двигаться, и проведите по экрану, чтобы осмотреться. Сделайте несколько шагов, чтобы начать.",
@@ -959,6 +960,7 @@ export const ru_RU: EnTranslations = {
       "petTaunt": "Питомец: провокация",
       "petDefensive": "Питомец: защита",
       "petAggressive": "Питомец: агрессия",
+      "targetPet": "Питомец: цель",
       "mount": "Сесть / Спешиться",
       "mouseHint": "Кнопки мыши тоже работают: во время назначения нажмите среднюю кнопку (M3) или боковую (M4, M5). Левая и правая остаются зарезервированы для камеры, перемещения кликом и кликов по миру."
     },
@@ -1296,6 +1298,7 @@ export const ru_RU: EnTranslations = {
       "aurasOnPlayerFrame": "Баффы у рамки игрока",
       "highContrastBackground": "Фон высокой контрастности",
       "startAttackOnAbility": "Автоатака при использовании способности",
+      "stopAutoAttackOnTargetSwitch": "Останавливать автоатаку при смене цели",
       "walkByAutoloot": "Автосбор добычи при проходе",
       "groundReticle": "Прицел наземного наведения",
       "mouseoverCast": "Применение по наведению на рамки группы",
@@ -1305,8 +1308,10 @@ export const ru_RU: EnTranslations = {
       "itemScoreLine": "Оценка {score}",
       "showSecondaryActionBar": "Показывать вторичную панель действий",
       "showThirdActionBar": "Показывать третью панель действий",
+      "hideUnusedActionSlots": "Скрыть неиспользуемые ячейки действий",
       "lockActionBars": "Заблокировать панели действий",
       "showTargetOfTarget": "Показывать цель цели",
+      "showPetFrame": "Показывать вашего питомца",
       "showAttackButton": "Показывать кнопку атаки",
       "showDailyRewardsChest": "Показывать сундук ежедневных наград",
       "mobileCameraJoystick": "Джойстик камеры",
@@ -6476,7 +6481,7 @@ export const ru_RU: EnTranslations = {
       "releaseSpirit": "Освободить дух",
       "chatTab": "Чат",
       "combatLogTab": "Журнал боя",
-      "chatPlaceholder": "Напишите сообщение... (/w имя шепот, /r ответ, /p группа, /gu гильдия, /o офицеры, /general общий)",
+      "chatPlaceholder": "Напишите сообщение... (/w имя шепот, /r ответ, /p группа, /gu гильдия, /o офицеры, /general общий, ! команды сообщества)",
       "chatChannels": {
         "add": "Добавить канал чата",
         "addTitle": "Добавить канал",

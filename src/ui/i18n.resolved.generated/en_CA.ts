@@ -786,6 +786,7 @@ export const en_CA: EnTranslations = {
       "targetAnnounce": "Mark {name}",
       "targetOfTargetLabel": "Mark's Mark",
       "partyLabel": "Your Band",
+      "petLabel": "Your Pet",
       "partyChip": "Party",
       "partyGroup": "Group {n}",
       "durationUnitSeconds": "s",
@@ -820,7 +821,7 @@ export const en_CA: EnTranslations = {
       "targetCycleShort": "Target",
       "spellbookPageLabel": "Page {page}",
       "hideKeyboard": "Hide keyboard",
-      "chatPlaceholder": "Say something..."
+      "chatPlaceholder": "Say something... (! for community commands)"
     },
     "tutorial": {
       "moveBodyTouch": "Use the movement stick to move and drag the screen to look around. Take a few steps to begin.",
@@ -959,6 +960,7 @@ export const en_CA: EnTranslations = {
       "petTaunt": "Pet: Taunt",
       "petDefensive": "Pet: Defensive",
       "petAggressive": "Pet: Aggressive",
+      "targetPet": "Pet: Mark",
       "mount": "Mount / Dismount",
       "mouseHint": "Mouse buttons work too: press the middle button (M3) or a thumb button (M4, M5) while binding. Left and right stay reserved for the camera, click to move, and clicking things in the world."
     },
@@ -1296,6 +1298,7 @@ export const en_CA: EnTranslations = {
       "aurasOnPlayerFrame": "Buffs on the Player Frame",
       "highContrastBackground": "High-Contrast Background",
       "startAttackOnAbility": "Auto-Attack on Ability Use",
+      "stopAutoAttackOnTargetSwitch": "Stop Auto-Attack on Target Switch",
       "walkByAutoloot": "Walk-by Autoloot",
       "groundReticle": "Ground-Targeting Reticle",
       "mouseoverCast": "Mouseover Cast on Party Frames",
@@ -1305,8 +1308,10 @@ export const en_CA: EnTranslations = {
       "itemScoreLine": "Score {score}",
       "showSecondaryActionBar": "Show Secondary Action Bar",
       "showThirdActionBar": "Show Third Action Bar",
+      "hideUnusedActionSlots": "Hide Unused Action Slots",
       "lockActionBars": "Lock Action Bars",
       "showTargetOfTarget": "Show Target of Target",
+      "showPetFrame": "Show Your Pet",
       "showAttackButton": "Show Attack Button",
       "showDailyRewardsChest": "Show Daily Rewards Chest",
       "mobileCameraJoystick": "Camera joystick",
@@ -6476,7 +6481,7 @@ export const en_CA: EnTranslations = {
       "releaseSpirit": "Release Spirit",
       "chatTab": "Chat",
       "combatLogTab": "Combat Log",
-      "chatPlaceholder": "Say something... (/s say, /w name whisper, /r reply, /p party, /gu guild, /o officer, /general general, /help)",
+      "chatPlaceholder": "Say something... (/s say, /w name whisper, /r reply, /p party, /gu guild, /o officer, /general general, /help, ! for community commands)",
       "chatChannels": {
         "add": "Add chat channel",
         "addTitle": "Add channel",
