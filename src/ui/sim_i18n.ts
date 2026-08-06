@@ -10011,6 +10011,31 @@ function locTalentTail(s: string): string {
 
 type Rule = { re: RegExp; build: (m: RegExpExecArray) => string };
 const RULES: Rule[] = [
+  // Profession-service in-progress countdowns (social/chat_readouts.ts
+  // castingReadout): craft/disenchant/enchant/salvage/tool-recharge each hold
+  // their own remaining/total countdown line.
+  {
+    re: /^You are crafting: (.+)s of (.+)s remaining\.$/,
+    build: (m) => t('hudChrome.professions.craftingProgress', { remaining: m[1], total: m[2] }),
+  },
+  {
+    re: /^You are disenchanting: (.+)s of (.+)s remaining\.$/,
+    build: (m) =>
+      t('hudChrome.professions.disenchantingProgress', { remaining: m[1], total: m[2] }),
+  },
+  {
+    re: /^You are enchanting: (.+)s of (.+)s remaining\.$/,
+    build: (m) => t('hudChrome.professions.enchantingProgress', { remaining: m[1], total: m[2] }),
+  },
+  {
+    re: /^You are salvaging: (.+)s of (.+)s remaining\.$/,
+    build: (m) => t('hudChrome.professions.salvagingProgress', { remaining: m[1], total: m[2] }),
+  },
+  {
+    re: /^You are recharging a tool effect: (.+)s of (.+)s remaining\.$/,
+    build: (m) =>
+      t('hudChrome.professions.rechargingToolEffectProgress', { remaining: m[1], total: m[2] }),
+  },
   // Ready-check result summary (social/ready_check.ts finalizeReadyCheck).
   {
     re: /^Ready check: (\d+) ready, (\d+) not ready, (\d+) no response\.$/,
