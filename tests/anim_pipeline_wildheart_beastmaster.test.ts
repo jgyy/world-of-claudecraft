@@ -1,9 +1,9 @@
-// Wildheart Basin round 2 (issue #2889): the Sunbone Hexcaller's own bespoke
-// attack/cast clip. mob_wildheart_hexcaller shared the literal TRIPO_BIPED_FULL_RIG
+// Wildheart Basin round 2 (issue #2889): the Fanglord Beastmaster's own bespoke
+// attack/cast clip. mob_wildheart_beastmaster shared the literal TRIPO_BIPED_FULL_RIG
 // ClipMap object, by reference, with the other 4 Wildheart Basin mobs; this clip is
 // authored by pose-sample-and-blend (scripts/anim/pose_blend.mjs,
-// scripts/build_wildheart_hexcaller_anims.mjs) off the rig's own Cast and Attack
-// donors. Follows the shipped-GLB-plus-manifest-source contract test pattern
+// scripts/build_wildheart_beastmaster_anims.mjs) off the rig's own Cast and Hit donors.
+// Follows the shipped-GLB-plus-manifest-source contract test pattern
 // (tests/anim_pipeline_batch1.test.ts's elemental family describe block).
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -35,25 +35,25 @@ function manifestBlock(startAnchor: string, endAnchor: string): string {
   return MANIFEST_SRC.slice(start, end);
 }
 
-describe('Sunbone Hexcaller bespoke attack/cast (issue #2889 round 2)', () => {
-  it('ships Wildheart_Hexcaller_Attack in a mesh-free donor GLB', () => {
-    const glbPath = 'public/models/creatures/wildheart_hexcaller_ability_anims.glb';
-    expect(clipNamesOf(glbPath)).toEqual(['Wildheart_Hexcaller_Attack']);
+describe('Fanglord Beastmaster bespoke attack/cast (issue #2889 round 2)', () => {
+  it('ships Wildheart_Beastmaster_Attack in a mesh-free donor GLB', () => {
+    const glbPath = 'public/models/creatures/wildheart_beastmaster_ability_anims.glb';
+    expect(clipNamesOf(glbPath)).toEqual(['Wildheart_Beastmaster_Attack']);
     expect(meshCountOf(glbPath)).toBe(0);
   });
 
-  it('gives mob_wildheart_hexcaller its own ClipMap (attack and cast) instead of mutating the shared TRIPO_BIPED_FULL_RIG constant', () => {
-    const hexcallerBlock = manifestBlock(
-      'mob_wildheart_hexcaller: {',
+  it('gives mob_wildheart_beastmaster its own ClipMap (attack and cast) instead of mutating the shared TRIPO_BIPED_FULL_RIG constant', () => {
+    const beastmasterBlock = manifestBlock(
       'mob_wildheart_beastmaster: {',
+      'mob_wildheart_high_priest: {',
     );
-    expect(hexcallerBlock).toContain('wildheart_hexcaller_ability_anims.glb');
-    expect(hexcallerBlock).toContain('clips: WILDHEART_HEXCALLER');
-    expect(hexcallerBlock).not.toContain('clips: TRIPO_BIPED_FULL_RIG,');
+    expect(beastmasterBlock).toContain('wildheart_beastmaster_ability_anims.glb');
+    expect(beastmasterBlock).toContain('clips: WILDHEART_BEASTMASTER');
+    expect(beastmasterBlock).not.toContain('clips: TRIPO_BIPED_FULL_RIG,');
 
-    const hexcallerConstBlock = manifestBlock('const WILDHEART_HEXCALLER: ClipMap = {', '};');
-    expect(hexcallerConstBlock).toContain("attack: ['Wildheart_Hexcaller_Attack']");
-    expect(hexcallerConstBlock).toContain("cast: 'Wildheart_Hexcaller_Attack'");
+    const beastmasterConstBlock = manifestBlock('const WILDHEART_BEASTMASTER: ClipMap = {', '};');
+    expect(beastmasterConstBlock).toContain("attack: ['Wildheart_Beastmaster_Attack']");
+    expect(beastmasterConstBlock).toContain("cast: 'Wildheart_Beastmaster_Attack'");
 
     // TRIPO_BIPED_FULL_RIG itself (the constant definition, not a VisualDef using it) must
     // still read the original shared Attack and Cast clips: the other 4 Wildheart mobs
@@ -64,9 +64,9 @@ describe('Sunbone Hexcaller bespoke attack/cast (issue #2889 round 2)', () => {
 
     // Every other VisualDef still pointing at the shared constant is untouched: exactly 2
     // remaining direct `clips: TRIPO_BIPED_FULL_RIG,` usages (5 originally, minus the one
-    // migrated to WILDHEART_HEXCALLER above and the ones migrated to WILDHEART_STALKER and
-    // WILDHEART_BEASTMASTER by issue #2889 round 2's parallel Vineclaw Stalker and Fanglord
-    // Beastmaster changes).
+    // migrated to WILDHEART_BEASTMASTER above and the ones migrated to WILDHEART_STALKER and
+    // WILDHEART_HEXCALLER by issue #2889 round 2's parallel Vineclaw Stalker and Sunbone
+    // Hexcaller changes).
     const remaining = [...MANIFEST_SRC.matchAll(/clips: TRIPO_BIPED_FULL_RIG,/g)].length;
     expect(remaining).toBe(2);
   });

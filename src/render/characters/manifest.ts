@@ -429,6 +429,18 @@ const WILDHEART_HEXCALLER: ClipMap = {
   cast: 'Wildheart_Hexcaller_Attack',
 };
 
+// The Fanglord Beastmaster's own attack/cast (scripts/build_wildheart_beastmaster_anims.mjs,
+// issue #2889 round 2): TRIPO_BIPED_FULL_RIG's Attack and Cast are shared by reference
+// across all 5 Wildheart Basin mobs. This clip is baked off wildheart_beastmaster.glb's own
+// donor poses (a wide-armed call re-timing of its own Cast clip into Hit's brace pose), so
+// only mob_wildheart_beastmaster gets it; the other 4 Wildheart mobs are untouched. Wired
+// into both attack and cast so the Beastmaster's ordinary auto-attack reads as a call too.
+const WILDHEART_BEASTMASTER: ClipMap = {
+  ...TRIPO_BIPED_FULL_RIG,
+  attack: ['Wildheart_Beastmaster_Attack'],
+  cast: 'Wildheart_Beastmaster_Attack',
+};
+
 // 2023 enemy rig (goblin/giant)
 const ENEMY7: ClipMap = {
   idle: 'Idle',
@@ -1805,7 +1817,11 @@ export const VISUALS: Record<string, VisualDef> = {
     url: `${CREATURES}/wildheart_beastmaster.glb`,
     height: 3,
     yaw: -Math.PI / 2,
-    clips: TRIPO_BIPED_FULL_RIG,
+    clips: WILDHEART_BEASTMASTER,
+    // Wildheart_Beastmaster_Attack clip donor
+    // (scripts/build_wildheart_beastmaster_anims.mjs): mesh-free, baked off this same
+    // rig's own poses.
+    animUrls: [`${CREATURES}/wildheart_beastmaster_ability_anims.glb`],
     tint: 'entity',
     tintStrength: 0.03,
   },
