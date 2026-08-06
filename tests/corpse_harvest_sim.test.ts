@@ -705,20 +705,22 @@ describe('two-specimen-family harvest capacity contract', () => {
     return boar;
   }
 
-  it('with a genuinely spare slot the jackpot still lands beside both plain yields (seed 6)', () => {
+  it('with a genuinely spare slot the jackpot still lands beside both plain yields (seed 4)', () => {
     // Seed 11 pre-verified: the hide rarity roll clears the signable floor with
     // this exact draw sequence (the rolls are inventory-independent, so this
     // arm also proves the exactly-reserved arm below EARNED its jackpot).
     //
     // Re-seeded 1 -> 11 (#2514) -> 15 (the v0.32.0 base merge) -> 6 (tusk
-    // joining HARVEST_COMPONENT_ITEMS). wild_boar is now a corpse with THREE
-    // mapped families (hide, tusk, meat), so the default harvest extracts all
-    // three and the pre-gate reserves a plain-stack slot for each: three
-    // reserved slots, not two, so "genuinely spare" is four free slots, not
-    // three. Every re-seed for the same reason as the ones before it: tusk
-    // now costs its own tier roll and rarity roll, which shifts every draw
-    // after it, so whichever seed used to land the jackpot here stops.
-    const { sim, internals, a } = setup(6);
+    // joining HARVEST_COMPONENT_ITEMS) -> 4 (re-hunted again for the final
+    // rebase onto release/v0.35.0, which shifted the shared content catalog
+    // again). wild_boar is now a corpse with THREE mapped families (hide,
+    // tusk, meat), so the default harvest extracts all three and the pre-gate
+    // reserves a plain-stack slot for each: three reserved slots, not two, so
+    // "genuinely spare" is four free slots, not three. Every re-seed for the
+    // same reason as the ones before it: any content or draw-order change
+    // shifts every draw after it, so whichever seed used to land the jackpot
+    // here stops.
+    const { sim, internals, a } = setup(4);
     const boar = addBoarCorpse(internals);
     fillBags(sim, internals, a);
     const m = internals.players.get(a)!;
@@ -3398,9 +3400,9 @@ describe('a corpse whose EVERY family is unmapped is never offered a harvest (#2
     // all-unmapped subsets fall out of refused and land in spent instead.
     // Exact totals are pinned against the shipped catalog, not derived, so a
     // template that gains or loses a mapped tag moves one of them.
-    expect(spent).toBe(177);
+    expect(spent).toBe(179);
     expect(refused).toBe(5);
-    expect(spent + refused).toBe(182);
+    expect(spent + refused).toBe(184);
   });
 
   // The eight mapped families and their item ids, spelled out. Deriving them
@@ -3492,7 +3494,7 @@ describe('a corpse whose EVERY family is unmapped is never offered a harvest (#2
     // affected subset now extracts. Exact totals are pinned against the
     // shipped catalog, not derived.
     expect(unmappedOffered).toBe(12);
-    expect(extracted).toBe(273);
+    expect(extracted).toBe(275);
   });
 
   it('keeps every mixed template harvestable, so the gate is not a blanket refusal', () => {
@@ -3557,7 +3559,7 @@ describe('a corpse whose EVERY family is unmapped is never offered a harvest (#2
 // only ever concentrate on hide, the same as before).
 describe('the concentration bonus on a mixed corpse, moved on purpose (#2514)', () => {
   function yieldOf(components: string[] | undefined) {
-    const { sim, internals, a } = setup(15);
+    const { sim, internals, a } = setup(9);
     const template = MOBS.sethrael_palecoil;
     const corpse = createMob(7511, template, template.maxLevel, { x: 0, y: 0, z: 0 });
     corpse.dead = true;
@@ -3583,7 +3585,9 @@ describe('the concentration bonus on a mixed corpse, moved on purpose (#2514)', 
     };
   }
 
-  // sethrael_palecoil, tags hide/claw/horn, seed 15. Every pick shape that
+  // sethrael_palecoil, tags hide/claw/horn, seed 9 (re-hunted for the final
+  // rebase onto release/v0.35.0, which shifted the shared content catalog and
+  // with it the world-gen draw sequence once more). Every pick shape that
   // yields something, so the size and direction of the concentration bonus is
   // on the record rather than only its endpoint. `bonus` is not asserted
   // directly (the roll is internal); the tier-driven quantities and the draw
@@ -3597,23 +3601,23 @@ describe('the concentration bonus on a mixed corpse, moved on purpose (#2514)', 
   }[] = [
     // The default harvest: two of the three tags are mapped (hide, claw), so
     // the widest pick this corpse offers is 2 of 3 at bonus 1.
-    { pick: undefined, draws: 4, hide: 6, claw: 5, pristine: 0 },
-    { pick: [], draws: 4, hide: 6, claw: 5, pristine: 0 },
+    { pick: undefined, draws: 4, hide: 2, claw: 6, pristine: 0 },
+    { pick: [], draws: 4, hide: 2, claw: 6, pristine: 0 },
     // An explicit FULL cover lands the identical world to the empty pick:
     // both collapse to the corpse's tags inside effectiveFocusComponents
     // before anything else looks at them.
-    { pick: ['hide', 'claw', 'horn'], draws: 4, hide: 6, claw: 5, pristine: 0 },
+    { pick: ['hide', 'claw', 'horn'], draws: 4, hide: 2, claw: 6, pristine: 0 },
     // ...and so does the cover of just the MAPPED families: horn is never
     // extracted whether or not it is named, so naming it changes nothing.
-    { pick: ['hide', 'claw'], draws: 4, hide: 6, claw: 5, pristine: 0 },
+    { pick: ['hide', 'claw'], draws: 4, hide: 2, claw: 6, pristine: 0 },
     // Concentrate on one mapped family: bonus 2, and the extra tier shift is
     // what lands the signed pristine_hide. The row that pins the denominator:
     // it would be bonus 1 here if the denominator had moved to the
     // mapped-family count along with the numerator.
-    { pick: ['hide'], draws: 2, hide: 6, claw: 0, pristine: 1 },
+    { pick: ['hide'], draws: 2, hide: 3, claw: 0, pristine: 1 },
     // The #2514 story itself: ticking Horn (still unmapped) beside Hide costs
     // nothing at all, byte-identical to concentrating on hide alone.
-    { pick: ['hide', 'horn'], draws: 2, hide: 6, claw: 0, pristine: 1 },
+    { pick: ['hide', 'horn'], draws: 2, hide: 3, claw: 0, pristine: 1 },
   ];
 
   for (const c of CASES) {
