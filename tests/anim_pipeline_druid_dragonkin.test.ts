@@ -110,18 +110,19 @@ describe('dragonkin family bespoke attack (issue #2889)', () => {
     expect(dragonkinBlock).not.toContain('clips: FLOATING,');
 
     // FLOATING itself (the constant definition, not a VisualDef using it) must
-    // still read the original shared attack: the other 7 families sharing it
+    // still read the original shared attack: the other families sharing it
     // by reference (after batch 1 also moved the elemental off it) must be
     // untouched by this change.
     const floatingConstBlock = manifestBlock('const FLOATING: ClipMap = {', '};');
     expect(floatingConstBlock).toContain("attack: ['Headbutt', 'Punch']");
 
     // Every other VisualDef still pointing at the shared constant is
-    // untouched: exactly 7 remaining direct `clips: FLOATING,` usages (9
+    // untouched: exactly 6 remaining direct `clips: FLOATING,` usages (9
     // originally, minus batch 1's elemental migration, minus this batch's
-    // dragonkin migration).
+    // dragonkin migration, minus the nightkin migration from
+    // tests/anim_pipeline_warlock_nightkin.test.ts landed on the same base).
     const remaining = [...MANIFEST_SRC.matchAll(/clips: FLOATING,/g)].length;
-    expect(remaining).toBe(7);
+    expect(remaining).toBe(6);
   });
 
   it('does not touch the mage or elemental object literals from batch 1', () => {
