@@ -199,4 +199,29 @@ describe('Mage meteor visual', () => {
     fx.update(12);
     expect(scene.getObjectByName('mage-rune-power')).toBeUndefined();
   });
+
+  it('tints the windup rune ring by the emitted school (issue #2917)', () => {
+    const scene = new THREE.Scene();
+    const heightAt = (): number => 0;
+
+    const fireFx = new MageGroundFx(scene, heightAt, vi.fn());
+    fireFx.spawnRune({ x: 0, z: 0, radius: 6, duration: 12, school: 'fire' });
+    const fireRing = scene.getObjectByName('mage-rune-power-outer-ring') as THREE.Mesh;
+    const fireMat = fireRing.material as THREE.MeshBasicMaterial;
+    // spawnRune multiplies the base school color by 1.6 before storing it.
+    const expectedFire = new THREE.Color(0xff5a16).multiplyScalar(1.6);
+    expect(fireMat.color.r).toBeCloseTo(expectedFire.r, 4);
+    expect(fireMat.color.g).toBeCloseTo(expectedFire.g, 4);
+    expect(fireMat.color.b).toBeCloseTo(expectedFire.b, 4);
+    fireFx.update(12);
+
+    const arcaneFx = new MageGroundFx(scene, heightAt, vi.fn());
+    arcaneFx.spawnRune({ x: 0, z: 0, radius: 6, duration: 12 });
+    const arcaneRing = scene.getObjectByName('mage-rune-power-outer-ring') as THREE.Mesh;
+    const arcaneMat = arcaneRing.material as THREE.MeshBasicMaterial;
+    const expectedArcane = new THREE.Color(0xa86cff).multiplyScalar(1.6);
+    expect(arcaneMat.color.r).toBeCloseTo(expectedArcane.r, 4);
+    expect(arcaneMat.color.g).toBeCloseTo(expectedArcane.g, 4);
+    expect(arcaneMat.color.b).toBeCloseTo(expectedArcane.b, 4);
+  });
 });

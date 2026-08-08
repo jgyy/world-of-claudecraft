@@ -6558,6 +6558,7 @@ export class Renderer {
             z: ev.z,
             radius: ev.radius ?? 8,
             duration: ev.duration ?? 15,
+            school: ev.school,
           });
           break;
         }

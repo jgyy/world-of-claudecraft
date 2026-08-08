@@ -39,6 +39,12 @@ export interface RuneCircleSpawn {
   z: number;
   radius: number;
   duration: number;
+  // The emitted ability's damage school, so the windup ring tints as that
+  // school's danger color instead of a hardcoded arcane violet (a fire boss
+  // winding up behind a violet ring does not read as danger). Falls back to
+  // arcane when omitted so the original Rune of Power caster visual is
+  // unaffected.
+  school?: string;
 }
 
 export interface SnowZoneSpawn {
@@ -502,7 +508,7 @@ export class MageGroundFx {
   }
 
   spawnRune(opts: RuneCircleSpawn): void {
-    const arcane = new THREE.Color(SCHOOL_COLORS.arcane);
+    const arcane = new THREE.Color(SCHOOL_COLORS[opts.school ?? 'arcane'] ?? SCHOOL_COLORS.arcane);
     const group = new THREE.Group();
     group.name = 'mage-rune-power';
     const mats: THREE.Material[] = [];

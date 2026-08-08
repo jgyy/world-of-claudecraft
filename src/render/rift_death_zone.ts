@@ -5,21 +5,29 @@
 //
 // Fairness note: this is an actionable cue (a player reacts to it), so it MUST
 // draw at every graphics tier and NEVER be hidden by the FPS governor. The
-// ring geometry is minimal (a LineLoop, < 100 vertices) and has negligible cost.
+// ring is a triangulated annulus (a filled mesh) with WORLD-UNIT thickness
+// rather than a 1px THREE.LineLoop: browsers clamp LineBasicMaterial's
+// gl_LineWidth to 1 regardless of the requested value, which on a high-DPI
+// screen over busy rift terrain made the ring easy to lose entirely (issue
+// #2917). A mesh's apparent screen thickness scales with world-space size
+// like everything else in the scene, so it stays visible at any zoom or DPI.
+// The rim is also sampled PER VERTEX against the live ground height (see
+// rift_ring_geometry_core.ts), so a rim crossing a raised dais or sanctum
+// platform follows the surface instead of clipping under it.
 
 import * as THREE from 'three';
 import type { RiftBossDeathZoneView } from '../world_api/dungeons';
+import { buildAnnulusGeometryData, DEFAULT_RING_THICKNESS } from './rift_ring_geometry_core';
 
-const SEGMENTS = 64;
+const SEGMENTS = 32;
 const BASE_COLOR = 0xff2200;
 const BASE_OPACITY = 0.85;
 const PULSE_SPEED = 4.0; // full pulse cycle per second
-const LINE_WIDTH = 1; // THREE LineBasicMaterial uses pixel width; browsers cap at 1
 
-/** One live death zone visual (a terrain-draped red danger ring). */
+/** One live death zone visual (a terrain-draped red danger ring mesh). */
 interface ZoneVisual {
-  loop: THREE.LineLoop;
-  mat: THREE.LineBasicMaterial;
+  mesh: THREE.Mesh;
+  mat: THREE.MeshBasicMaterial;
   x: number;
   z: number;
   radius: number;
@@ -52,9 +60,9 @@ export class RiftDeathZoneVisuals {
     }
     for (const [key, visual] of this.zones) {
       if (!seen.has(key)) {
-        this.scene.remove(visual.loop);
+        this.scene.remove(visual.mesh);
         visual.mat.dispose();
-        visual.loop.geometry.dispose();
+        visual.mesh.geometry.dispose();
         this.zones.delete(key);
       }
     }
@@ -72,32 +80,35 @@ export class RiftDeathZoneVisuals {
   }
 
   private create(key: string, zone: RiftBossDeathZoneView): void {
-    // Build a horizontal circle at terrain height. The groundY callback already
-    // includes the rift platform lift (applied in the renderer constructor),
-    // so the ring sits on the correct floor even on elevated boss sanctums.
-    const y = this.groundY(zone.x, zone.z) + 0.08; // slight lift to avoid z-fight
-    const pts: THREE.Vector3[] = [];
-    for (let i = 0; i <= SEGMENTS; i++) {
-      const angle = (i / SEGMENTS) * Math.PI * 2;
-      pts.push(
-        new THREE.Vector3(
-          zone.x + Math.cos(angle) * zone.radius,
-          y,
-          zone.z + Math.sin(angle) * zone.radius,
-        ),
-      );
-    }
-    const geo = new THREE.BufferGeometry().setFromPoints(pts);
-    const mat = new THREE.LineBasicMaterial({
+    // Sample the ground height at every rim vertex (both the raised dais and
+    // the rift platform lift are baked into the groundY callback the renderer
+    // passes in), not once at the zone center, so the ring follows a platform
+    // edge instead of dipping under it.
+    const { positions, indices } = buildAnnulusGeometryData(
+      zone.x,
+      zone.z,
+      zone.radius,
+      DEFAULT_RING_THICKNESS,
+      SEGMENTS,
+      this.groundY,
+    );
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setIndex(new THREE.BufferAttribute(indices, 1));
+    const mat = new THREE.MeshBasicMaterial({
       color: BASE_COLOR,
       transparent: true,
       opacity: BASE_OPACITY,
-      linewidth: LINE_WIDTH,
       depthWrite: false,
+      side: THREE.DoubleSide,
     });
-    const loop = new THREE.LineLoop(geo, mat);
-    loop.renderOrder = 10; // above terrain, below entities
-    this.scene.add(loop);
-    this.zones.set(key, { loop, mat, x: zone.x, z: zone.z, radius: zone.radius, phase: 0 });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.renderOrder = 10; // above terrain, below entities
+    // Actionable telegraph: never let the frustum-culling fast path drop it
+    // (the ring can span past the camera-relative bounding box at close
+    // range while the boss is still tanked on its edge).
+    mesh.frustumCulled = false;
+    this.scene.add(mesh);
+    this.zones.set(key, { mesh, mat, x: zone.x, z: zone.z, radius: zone.radius, phase: 0 });
   }
 }
