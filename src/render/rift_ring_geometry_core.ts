@@ -103,7 +103,6 @@ export function buildAnnulusGeometryData(
     positions[i * 3 + 2] = verts[i].z;
   }
   const rawIndices = triangulateAnnulusStrip(segments);
-  const indices =
-    verts.length > 65535 ? new Uint32Array(rawIndices) : new Uint16Array(rawIndices);
+  const indices = verts.length > 65535 ? new Uint32Array(rawIndices) : new Uint16Array(rawIndices);
   return { positions, indices };
 }
