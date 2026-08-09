@@ -10,11 +10,18 @@ import {
   writeFileSync,
 } from 'node:fs';
 import path from 'node:path';
+import {
+  buildCacheEntry,
+  isCacheEntryFresh,
+  loadHashCache,
+  saveHashCache,
+} from './lib/media_manifest_hash_cache.mjs';
 
 const root = process.cwd();
 const publicDir = path.join(root, 'public');
 const distDir = path.join(root, 'dist');
 const generatedPath = path.join(root, 'src/render/assets/manifest.generated.ts');
+const hashCachePath = path.join(root, 'node_modules/.cache/media-manifest-hash-cache.json');
 
 const MEDIA_ROOTS = ['models', 'textures', 'env', 'vfx'];
 const HASH_LEN = 12;
@@ -51,15 +58,32 @@ function mediaFiles() {
   return files.sort();
 }
 
+/**
+ * sha256 of one media file, reused from the persisted cache when the file's
+ * mtime and size have not changed since it was last hashed. `cache` is
+ * mutated in place with a fresh entry on a miss so the caller can persist it
+ * once after the whole walk.
+ */
+function fileSha256(file, rel, cache) {
+  const stat = statSync(file);
+  const cached = cache[rel];
+  if (isCacheEntryFresh(cached, stat)) return cached.sha256;
+  const sha256 = createHash('sha256').update(readFileSync(file)).digest('hex');
+  cache[rel] = buildCacheEntry(stat, sha256);
+  return sha256;
+}
+
 function manifestEntries() {
+  const cache = loadHashCache(hashCachePath);
   const entries = {};
   for (const file of mediaFiles()) {
     const rel = path.relative(publicDir, file).split(path.sep).join('/');
     const parsed = path.posix.parse(rel);
-    const hash = createHash('sha256').update(readFileSync(file)).digest('hex').slice(0, HASH_LEN);
+    const hash = fileSha256(file, rel, cache).slice(0, HASH_LEN);
     const hashed = path.posix.join('/media', parsed.dir, `${parsed.name}.${hash}${parsed.ext}`);
     entries[rel] = hashed;
   }
+  saveHashCache(hashCachePath, cache);
   return entries;
 }
 
