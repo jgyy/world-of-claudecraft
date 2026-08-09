@@ -62,12 +62,12 @@ describe('Fanglord Beastmaster bespoke attack/cast (issue #2889 round 2)', () =>
     expect(rigConstBlock).toContain("attack: ['Attack']");
     expect(rigConstBlock).toContain("cast: 'Cast'");
 
-    // Every other VisualDef still pointing at the shared constant is untouched: exactly 1
-    // remaining direct `clips: TRIPO_BIPED_FULL_RIG,` usage (5 originally, minus the one
+    // Every other VisualDef still pointing at the shared constant is untouched: zero
+    // remaining direct `clips: TRIPO_BIPED_FULL_RIG,` usages (5 originally, minus the one
     // migrated to WILDHEART_BEASTMASTER above and the ones migrated to WILDHEART_STALKER,
-    // WILDHEART_HEXCALLER, and WILDHEART_RAVAGER by issue #2889 round 2's parallel Vineclaw
-    // Stalker, Sunbone Hexcaller, and Ravager changes), leaving only mob_wildheart_high_priest.
+    // WILDHEART_HEXCALLER, WILDHEART_RAVAGER, and WILDHEART_HIGH_PRIEST by issue #2889 round
+    // 2's parallel Vineclaw Stalker, Sunbone Hexcaller, Ravager, and High Priest changes).
     const remaining = [...MANIFEST_SRC.matchAll(/clips: TRIPO_BIPED_FULL_RIG,/g)].length;
-    expect(remaining).toBe(1);
+    expect(remaining).toBe(0);
   });
 });
