@@ -48,6 +48,17 @@ const scratchBox = new THREE.Box3();
 const scratchCenter = new THREE.Vector3();
 const scratchSize = new THREE.Vector3();
 
+// The offscreen rig's four pieces are always created together (ensureRig) and
+// torn down together (resetPortraitRendererForGraphicsRebuild), so a caller
+// that has one is guaranteed to have all four; PortraitRig captures that as a
+// single non-null bundle instead of four separately-nullable fields.
+interface PortraitRig {
+  renderer: THREE.WebGLRenderer;
+  scene: THREE.Scene;
+  camera: THREE.PerspectiveCamera;
+  mount: THREE.Group;
+}
+
 let renderer: THREE.WebGLRenderer | null = null;
 let scene: THREE.Scene | null = null;
 let camera: THREE.PerspectiveCamera | null = null;
@@ -70,38 +81,50 @@ void assetsReady()
        keep falling back to the class crest. */
   });
 
-function ensureRig(): void {
-  if (renderer) return;
+function ensureRig(): PortraitRig {
+  // Narrow once: the four fields are only ever set together below, so this
+  // single check is enough to prove all four non-null to the compiler.
+  if (renderer && scene && camera && mount) {
+    return { renderer, scene, camera, mount };
+  }
+
   const canvas = document.createElement('canvas');
-  renderer = new THREE.WebGLRenderer({
+  const newRenderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
     antialias: true,
     preserveDrawingBuffer: true,
   });
-  renderer.setPixelRatio(1);
-  renderer.setSize(PORTRAIT_SIZE, PORTRAIT_SIZE, false);
-  renderer.shadowMap.enabled = false;
+  newRenderer.setPixelRatio(1);
+  newRenderer.setSize(PORTRAIT_SIZE, PORTRAIT_SIZE, false);
+  newRenderer.shadowMap.enabled = false;
   // Hand this offscreen context back on page teardown (see context_release.ts).
-  unregisterContext = trackWebGLContext(renderer);
+  unregisterContext = trackWebGLContext(newRenderer);
 
-  scene = new THREE.Scene();
+  const newScene = new THREE.Scene();
   // fov/position/aim are recomputed per-model per-framing from its bounding
   // box in the capture (see portraitFrameParams); the constructor fov is a
   // placeholder, always overwritten before the first render.
-  camera = new THREE.PerspectiveCamera(portraitFrameParams('headshot').fov, 1, 0.1, 100);
+  const newCamera = new THREE.PerspectiveCamera(portraitFrameParams('headshot').fov, 1, 0.1, 100);
 
-  mount = new THREE.Group();
-  scene.add(mount);
+  const newMount = new THREE.Group();
+  newScene.add(newMount);
 
   // Soft, even key/fill so faces read clearly at thumbnail size.
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.5));
+  newScene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.5));
   const key = new THREE.DirectionalLight(0xffffff, 1.7);
   key.position.set(2.5, 4, 4);
-  scene.add(key);
+  newScene.add(key);
   const fill = new THREE.DirectionalLight(0xffffff, 0.7);
   fill.position.set(-3, 2, -2);
-  scene.add(fill);
+  newScene.add(fill);
+
+  renderer = newRenderer;
+  scene = newScene;
+  camera = newCamera;
+  mount = newMount;
+
+  return { renderer: newRenderer, scene: newScene, camera: newCamera, mount: newMount };
 }
 
 /**
@@ -204,12 +227,15 @@ function capture(
   build: () => CharacterVisual,
   framing: PortraitFraming,
 ): string | null {
-  let visual: CharacterVisual | null = null;
+  // Paired so cleanup below can prove the rig is available whenever there is
+  // a visual to dispose, with no non-null assertions on either side.
+  let active: { rig: PortraitRig; visual: CharacterVisual } | null = null;
   try {
-    ensureRig();
-    visual = build();
-    mount!.add(visual.root);
-    mount!.rotation.y = 0;
+    const rig = ensureRig();
+    const visual = build();
+    active = { rig, visual };
+    rig.mount.add(visual.root);
+    rig.mount.rotation.y = 0;
     // Settle the rig into a stable idle frame before measuring/capturing.
     visual.update(0.4, PORTRAIT_ANIM_STATE, true);
 
@@ -241,25 +267,29 @@ function capture(
     }
     const h = scratchSize.y || 1.8;
     const { fov, targetYFromFeetFrac, extentFrac } = portraitFrameParams(framing);
-    camera!.fov = fov;
+    rig.camera.fov = fov;
     const targetY = scratchBox.min.y + targetYFromFeetFrac * h;
     const extent = extentFrac * h;
     const dist = extent / 2 / Math.tan((fov * Math.PI) / 180 / 2);
-    camera!.position.set(scratchCenter.x + 0.04 * h, targetY + 0.02 * h, scratchBox.max.z + dist);
-    camera!.lookAt(scratchCenter.x, targetY, scratchCenter.z);
-    camera!.updateProjectionMatrix();
+    rig.camera.position.set(
+      scratchCenter.x + 0.04 * h,
+      targetY + 0.02 * h,
+      scratchBox.max.z + dist,
+    );
+    rig.camera.lookAt(scratchCenter.x, targetY, scratchCenter.z);
+    rig.camera.updateProjectionMatrix();
 
-    renderer!.render(scene!, camera!);
-    const url = renderer!.domElement.toDataURL('image/png');
+    rig.renderer.render(rig.scene, rig.camera);
+    const url = rig.renderer.domElement.toDataURL('image/png');
     cache.set(key, url);
     return url;
   } catch (err) {
     if (import.meta.env?.DEV) console.warn(`[portrait] failed for ${key}`, err);
     return null;
   } finally {
-    if (visual) {
-      mount!.remove(visual.root);
-      visual.dispose();
+    if (active) {
+      active.rig.mount.remove(active.visual.root);
+      active.visual.dispose();
     }
   }
 }
