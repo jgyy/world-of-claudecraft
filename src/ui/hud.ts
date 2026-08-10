@@ -554,6 +554,7 @@ import { MovableFrame } from './movable_frame';
 import { NPC_WINDOW_CLOSE_RANGE } from './npc_service_range';
 import { OptionsWindow } from './options_window';
 import { makeWriterFacet, type PainterHostPresentation } from './painter_host';
+import { parseSimMoney } from './parse_sim_money';
 import { PartyBelowTargetPainter } from './party_below_target_painter';
 import { loadPartyCollapsed, savePartyCollapsed } from './party_collapse';
 import type { PartyRowAuraDeps } from './party_frame_row';
@@ -18030,19 +18031,8 @@ function resourceDisplayName(resourceType: ResourceType | null): string {
 // its old name here), so the pure view cores can read the same shared-label facts
 // the HUD does (#2466).
 
-function parseSimMoney(text: string): number | null {
-  let copper = 0;
-  let matched = false;
-  for (const match of text.matchAll(/(\d+)\s*([gsc])/gi)) {
-    matched = true;
-    const amount = Number(match[1]);
-    const unit = match[2].toLowerCase();
-    if (unit === 'g') copper += amount * 10000;
-    else if (unit === 's') copper += amount * 100;
-    else copper += amount;
-  }
-  return matched ? copper : null;
-}
+// parseSimMoney moved to ./parse_sim_money (imported above), the client-side
+// reverse of the sim's Ng Ns Nc money fragments.
 
 function formatAbilityNumber(value: number): string {
   return formatNumber(value, { maximumFractionDigits: 1 });
