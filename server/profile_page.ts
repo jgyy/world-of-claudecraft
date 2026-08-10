@@ -20,9 +20,9 @@ import {
   getCharacterById,
   guildNameForCharacter,
   lifetimeXpRankForCharacter,
-  listCharacterNamesForSitemap,
 } from './db';
 import { logger } from './http/logger';
+import { readSitemapCharacterNames } from './profile_sitemap_cache';
 import { publicReadRateLimited } from './ratelimit';
 import { publicOriginFromRequest, REALM } from './realm';
 
@@ -263,15 +263,13 @@ export async function handleAvatar(
 
 // ── GET /sitemap-characters.xml ────────────────────────────────────────────
 
-const SITEMAP_MAX = 50000; // sitemap protocol per-file URL cap
-
 export async function handleCharacterSitemap(
   req: http.IncomingMessage,
   res: http.ServerResponse,
 ): Promise<void> {
   try {
     const origin = publicOrigin(req);
-    const names = await listCharacterNamesForSitemap(SITEMAP_MAX);
+    const names = await readSitemapCharacterNames();
     const urls = names
       .map(
         (name) =>
