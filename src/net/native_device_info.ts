@@ -1,4 +1,5 @@
 import { deviceMemoryGbFromBytes, storeDeviceMemoryGb } from '../device_memory_hint';
+import { type NativePluginScope, resolveNativePlugin } from './native_plugin';
 import { NATIVE_APP } from './online';
 
 // Native device-info bridge (iOS): the WKWebView cannot see the device's RAM
@@ -13,14 +14,11 @@ interface NativeDeviceInfoPlugin {
 }
 
 function nativePlugin(): NativeDeviceInfoPlugin | null {
-  const cap = (window as unknown as { Capacitor?: { Plugins?: Record<string, unknown> } })
-    .Capacitor;
-  const plugin = cap?.Plugins?.NativeDeviceInfo;
-  if (!plugin || typeof plugin !== 'object') return null;
-  const candidate = plugin as Partial<NativeDeviceInfoPlugin>;
-  return typeof candidate.getMemoryInfo === 'function'
-    ? (candidate as NativeDeviceInfoPlugin)
-    : null;
+  return resolveNativePlugin<NativeDeviceInfoPlugin>(
+    window as unknown as NativePluginScope,
+    'NativeDeviceInfo',
+    ['getMemoryInfo'],
+  );
 }
 
 /** Measure once per boot and cache; the value is stable hardware truth, so a

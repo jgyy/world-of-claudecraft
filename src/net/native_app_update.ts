@@ -1,3 +1,4 @@
+import { type NativePluginScope, resolveNativePlugin } from './native_plugin';
 import { NATIVE_APP } from './online';
 
 export interface NativeUpdateStatus {
@@ -14,15 +15,11 @@ interface NativeAppUpdatePlugin {
 }
 
 function nativePlugin(): NativeAppUpdatePlugin | null {
-  const cap = (window as unknown as { Capacitor?: { Plugins?: Record<string, unknown> } })
-    .Capacitor;
-  const plugin = cap?.Plugins?.NativeAppUpdate;
-  if (!plugin || typeof plugin !== 'object') return null;
-  const candidate = plugin as Partial<NativeAppUpdatePlugin>;
-  return typeof candidate.checkForUpdate === 'function' &&
-    typeof candidate.openUpdate === 'function'
-    ? (candidate as NativeAppUpdatePlugin)
-    : null;
+  return resolveNativePlugin<NativeAppUpdatePlugin>(
+    window as unknown as NativePluginScope,
+    'NativeAppUpdate',
+    ['checkForUpdate', 'openUpdate'],
+  );
 }
 
 function normalizeStatus(value: Partial<NativeUpdateStatus> | null): NativeUpdateStatus | null {

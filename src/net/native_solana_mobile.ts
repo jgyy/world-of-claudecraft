@@ -1,3 +1,4 @@
+import { type NativePluginScope, resolveNativePlugin } from './native_plugin';
 import type {
   SolanaMobileCapabilities,
   SolanaMobileDevice,
@@ -15,19 +16,18 @@ interface NativeSolanaMobilePlugin {
 }
 
 function nativePlugin(): NativeSolanaMobilePlugin | null {
-  const capacitor = (window as unknown as { Capacitor?: { Plugins?: Record<string, unknown> } })
-    .Capacitor;
-  const plugin = capacitor?.Plugins?.NativeSolanaMobile;
-  if (!plugin || typeof plugin !== 'object') return null;
-  const candidate = plugin as Partial<NativeSolanaMobilePlugin>;
-  return typeof candidate.getCapabilities === 'function' &&
-    typeof candidate.current === 'function' &&
-    typeof candidate.connect === 'function' &&
-    typeof candidate.disconnect === 'function' &&
-    typeof candidate.signMessage === 'function' &&
-    typeof candidate.signAndSendTransaction === 'function'
-    ? (candidate as NativeSolanaMobilePlugin)
-    : null;
+  return resolveNativePlugin<NativeSolanaMobilePlugin>(
+    window as unknown as NativePluginScope,
+    'NativeSolanaMobile',
+    [
+      'getCapabilities',
+      'current',
+      'connect',
+      'disconnect',
+      'signMessage',
+      'signAndSendTransaction',
+    ],
+  );
 }
 
 function distribution(value: unknown): SolanaMobileDistribution {

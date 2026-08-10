@@ -13,6 +13,7 @@
 // bridge injects every registered native plugin there), so the web bundle
 // never imports the plugin package and non-native hosts no-op.
 
+import { type NativePluginScope, resolveNativePlugin } from './native_plugin';
 import { NATIVE_APP } from './online';
 
 interface CapacitorUpdaterPlugin {
@@ -20,17 +21,10 @@ interface CapacitorUpdaterPlugin {
 }
 
 /** The global-scope shape the duck-typed plugin lookup reads; injectable for tests. */
-export interface OtaGlobalScope {
-  Capacitor?: { Plugins?: Record<string, unknown> };
-}
+export type OtaGlobalScope = NativePluginScope;
 
 function updaterPlugin(scope: OtaGlobalScope): CapacitorUpdaterPlugin | null {
-  const plugin = scope.Capacitor?.Plugins?.CapacitorUpdater;
-  if (!plugin || typeof plugin !== 'object') return null;
-  const candidate = plugin as Partial<CapacitorUpdaterPlugin>;
-  return typeof candidate.notifyAppReady === 'function'
-    ? (candidate as CapacitorUpdaterPlugin)
-    : null;
+  return resolveNativePlugin<CapacitorUpdaterPlugin>(scope, 'CapacitorUpdater', ['notifyAppReady']);
 }
 
 /**

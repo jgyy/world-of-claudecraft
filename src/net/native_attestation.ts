@@ -1,4 +1,5 @@
 import { apiUrl, NATIVE_APP } from '../client_origin';
+import { type NativePluginScope, resolveNativePlugin } from './native_plugin';
 
 export interface NativeAttestationProof {
   platform: 'android' | 'ios';
@@ -17,12 +18,11 @@ interface NativeAttestationPlugin {
 }
 
 function nativePlugin(): NativeAttestationPlugin | null {
-  const cap = (window as unknown as { Capacitor?: { Plugins?: Record<string, unknown> } })
-    .Capacitor;
-  const plugin = cap?.Plugins?.NativeAttestation;
-  if (!plugin || typeof plugin !== 'object') return null;
-  const candidate = plugin as Partial<NativeAttestationPlugin>;
-  return typeof candidate.getToken === 'function' ? (candidate as NativeAttestationPlugin) : null;
+  return resolveNativePlugin<NativeAttestationPlugin>(
+    window as unknown as NativePluginScope,
+    'NativeAttestation',
+    ['getToken'],
+  );
 }
 
 export async function createNativeAttestationProof(
