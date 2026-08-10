@@ -31,9 +31,9 @@
 // nothing to act on, so they stay on the long-standing `resolveMove` path and
 // keep their behavior (and their tests) byte-identical.
 
+import { colliderTopAt } from '../collider_top';
 import {
   type Collider,
-  colliderTopAt,
   MANTLE_REACH,
   queryOpenWorldColliders,
   SUPPORT_OVERLAP,

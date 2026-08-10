@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
+import { colliderTopAt } from '../src/sim/collider_top';
 import {
   bankerChestSpots,
   type Collider,
   campCrateShape,
-  colliderTopAt,
   DOCK_HUT_ROOF_EAVE,
   DOCK_HUT_ROOF_TOP,
   interiorColliderFrame,

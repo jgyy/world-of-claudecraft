@@ -22,9 +22,9 @@
 // No rng, no wall clock, no allocation beyond the single result object the
 // caller owns.
 
+import { colliderTopAt } from '../collider_top';
 import {
   type Collider,
-  colliderTopAt,
   interiorColliderFrame,
   queryOpenWorldColliders,
   supportHeightAt,
