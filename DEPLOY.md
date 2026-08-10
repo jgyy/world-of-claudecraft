@@ -64,7 +64,7 @@ echo 'play.example.com {
 		reverse_proxy localhost:8080
 	}
 	reverse_proxy localhost:8787
-	encode gzip
+	encode zstd gzip
 }' | sudo tee /etc/caddy/Caddyfile
 sudo systemctl reload caddy
 ```

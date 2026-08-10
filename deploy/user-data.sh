@@ -97,7 +97,7 @@ $SITE {
 	handle {
 		reverse_proxy localhost:8787
 	}
-	encode gzip
+	encode zstd gzip
 }
 CADDY
 if [ -n "$ADMIN_DOMAIN" ]; then
@@ -117,7 +117,7 @@ $ADMIN_DOMAIN {
 	handle {
 		reverse_proxy localhost:8787
 	}
-	encode gzip
+	encode zstd gzip
 }
 CADDY
 fi
