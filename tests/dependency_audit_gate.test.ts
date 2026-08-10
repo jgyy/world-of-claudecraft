@@ -83,8 +83,36 @@ describe('dependency audit gate', () => {
   // time rather than run to GitHub's 360-minute default: this workflow fires on
   // every push touching the lockfile plus a weekly cron, so a wedged runner would
   // sit unnoticed until someone happens to look at the Actions tab.
-  it('bounds the job with an explicit timeout', () => {
-    expect(workflow).toMatch(/^ {4}timeout-minutes: \d+$/m);
+  //
+  // Job-scoped and exact-value, like ci.yml's checkout-stall bounds
+  // (tests/ci_workflow.test.ts) and the nightly workflow's per-job pin
+  // (tests/nightly_workflow.test.ts): a file-scoped `\d+` pin would pass
+  // unnoticed if the bound were resized from 10 to 1, or if a second job
+  // were added to this file with no bound of its own at all. The span is
+  // sliced from this job key to the next top-level job key (or EOF), so the
+  // job-level assertion cannot be satisfied by a step-level timeout instead.
+  it('bounds the audit job with an explicit, exact timeout', () => {
+    const jobsSection = workflow.slice(workflow.indexOf('\njobs:'));
+    const jobKeys = [
+      ...jobsSection.matchAll(/\n {2}([A-Za-z][A-Za-z0-9_-]*):[ \t]*(?:#[^\n]*)?\n/g),
+    ].map((m) => m[1]);
+    // Completeness: every job in this file must appear here. A future second
+    // job therefore cannot arrive unbounded and hang toward GitHub's 360
+    // minute default without failing this equality.
+    expect(jobKeys).toEqual(['audit']);
+
+    const start = workflow.indexOf('\n  audit:');
+    expect(start).toBeGreaterThanOrEqual(0);
+    const rest = workflow.slice(start + 1);
+    const next = rest.search(/\n {2}[A-Za-z][A-Za-z0-9_-]*:[ \t]*(?:#[^\n]*)?\n/);
+    const jobSpan = next === -1 ? rest : rest.slice(0, next);
+
+    const jobLevel = jobSpan.match(/^ {4}timeout-minutes: \d+$/gm) ?? [];
+    expect(jobLevel).toEqual(['    timeout-minutes: 10']);
+    // A step bound can also legally sit as the FIRST key of a step item;
+    // reject that form too so the job-level bound cannot be swapped out for
+    // one that leaves the rest of the job free to hang.
+    expect(jobSpan).not.toMatch(/\n {6}- timeout-minutes:/);
   });
 
   // The audit must fail the job on a finding. Every way this gate turns decorative
