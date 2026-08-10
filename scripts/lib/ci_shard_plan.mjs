@@ -161,19 +161,21 @@ export function buildFloor({ alwaysRun, testFiles, changedTestFiles }) {
  * Resolve a locally installed CLI binary from node_modules/.bin so the
  * `vitest related` leg spawns the exact vitest binary `npm test` already
  * resolves, instead of paying npx's extra registry-aware resolution path for
- * a binary this monorepo always has installed. This planner always runs from
- * the repo root (CI invokes it there, and so does the local gate), so the
- * binary is resolved against process.cwd() rather than adding a repoRoot
- * input every caller would have to start threading through. win32-aware:
+ * a binary this monorepo always has installed. Resolved against the caller's
+ * repoRoot, the same root-relative-input convention every other input this
+ * planner takes already follows (the exists closure, the spawn cwd), so this
+ * still resolves correctly when invoked from outside the repo root, matching
+ * the old npx leg's behavior of spawning with cwd: repoRoot. win32-aware:
  * pnpm links a .cmd shim there; every other platform ships the bare POSIX
  * script npm/pnpm links.
  *
  * @param {string} name
+ * @param {string} repoRoot
  * @returns {string}
  */
-export function resolveLocalBin(name) {
+export function resolveLocalBin(name, repoRoot) {
   const bin = process.platform === 'win32' ? `${name}.cmd` : name;
-  return path.join(process.cwd(), 'node_modules', '.bin', bin);
+  return path.join(repoRoot, 'node_modules', '.bin', bin);
 }
 
 /**
@@ -269,6 +271,7 @@ function resolveSelectiveInputs({ changedPaths, alwaysRun, testFiles, exists }) 
  *   shard: { index: number, total: number },
  *   workers: number,
  *   exists: (p: string) => boolean,
+ *   repoRoot: string,
  * }} opts
  * @returns {{ mode: 'full' | 'selective', reason: string, legs: ShardLeg[], floorCount?: number, relatedCount?: number, outsideFloorCount?: number, laneExcluded: string[], laneFloorCount?: number }}
  */
@@ -280,6 +283,7 @@ export function buildShardPlan({
   shard,
   workers,
   exists,
+  repoRoot,
 }) {
   const shardArg = `--shard=${shard.index}/${shard.total}`;
   const workersArg = `--maxWorkers=${workers}`;
@@ -340,7 +344,7 @@ export function buildShardPlan({
       // changed sources and fed-through generated i18n artifacts; the mode
       // reason carries the split counts.
       name: `vitest related (${liveSources.length} path(s), shard ${shard.index}/${shard.total})`,
-      cmd: resolveLocalBin('vitest'),
+      cmd: resolveLocalBin('vitest', repoRoot),
       args: ['related', ...liveSources, '--run', '--passWithNoTests', shardArg, workersArg],
     });
   }

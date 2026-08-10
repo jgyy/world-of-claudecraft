@@ -37,6 +37,7 @@ const BASE = {
   shard: { index: 3, total: 8 },
   workers: 2,
   exists: () => true,
+  repoRoot: REPO_ROOT,
 };
 
 describe('parseShardArg', () => {
@@ -55,24 +56,33 @@ describe('parseShardArg', () => {
 });
 
 describe('resolveLocalBin', () => {
-  it('resolves the binary under node_modules/.bin, win32-aware', () => {
-    // Independently computed, not by calling the function under test: the
-    // shard plan's own comparison (below) reuses resolveLocalBin to build its
-    // expectation, which only pins internal consistency, not the resolved
-    // shape.
-    const expected = path.join(
-      process.cwd(),
+  it('resolves under repoRoot/node_modules/.bin, win32-aware', () => {
+    // Pins the tail rather than re-typing the implementation's join, so this
+    // survives a change to how repoRoot is resolved and still catches a
+    // wrong suffix or directory.
+    const suffix = path.join(
       'node_modules',
       '.bin',
       process.platform === 'win32' ? 'vitest.cmd' : 'vitest',
     );
-    expect(resolveLocalBin('vitest')).toBe(expected);
+    const resolved = resolveLocalBin('vitest', REPO_ROOT);
+    expect(resolved.endsWith(suffix)).toBe(true);
+    expect(resolved).toBe(path.join(REPO_ROOT, suffix));
   });
 
   it('resolves to a binary that actually exists in this tree', () => {
     // A wrong suffix or directory would otherwise only surface as an ENOENT
     // deep inside a real CI spawn, far from this test.
-    expect(existsSync(resolveLocalBin('vitest'))).toBe(true);
+    expect(existsSync(resolveLocalBin('vitest', REPO_ROOT))).toBe(true);
+  });
+
+  it('resolves against the given repoRoot, not process.cwd()', () => {
+    // The old npx leg spawned with cwd: repoRoot, so this helper must resolve
+    // the same way even when invoked from outside the repo root (regression
+    // guard for the process.cwd() bug flagged in PR review).
+    const otherRoot = path.join(REPO_ROOT, 'scripts');
+    expect(resolveLocalBin('vitest', otherRoot)).not.toBe(resolveLocalBin('vitest', REPO_ROOT));
+    expect(resolveLocalBin('vitest', REPO_ROOT).startsWith(REPO_ROOT)).toBe(true);
   });
 });
 
@@ -183,7 +193,7 @@ describe('buildShardPlan: selective mode', () => {
     expect(floorLeg.args).not.toContain('--passWithNoTests');
     // Resolved directly, not through npx: the same binary `npm test` already
     // uses, without paying npx's extra registry-aware resolution path.
-    expect(relatedLeg.cmd).toBe(resolveLocalBin('vitest'));
+    expect(relatedLeg.cmd).toBe(resolveLocalBin('vitest', REPO_ROOT));
     expect(relatedLeg.args).toEqual([
       'related',
       'src/ui/unit_portrait.ts',
@@ -638,16 +648,12 @@ describe('ci_shard_test.mjs entry (subprocess, --plan-only)', () => {
     // If a vitest bump changed either semantic, the lane files would run in
     // both halves (duplicate work, never a gap) and the perf win would vanish
     // silently; this spawn makes that loud. `vitest list --filesOnly` prints
-    // the collected set without running anything.
+    // the collected set without running anything. Resolved directly (not
+    // through npx) so npm's "Unknown project config" warnings from .npmrc
+    // never land in the stderr this test merges and parses.
     const child = spawn(
-      'npx',
-      [
-        '--no-install',
-        'vitest',
-        'list',
-        '--filesOnly',
-        `--exclude=${'tests/battleground.test.ts'}`,
-      ],
+      resolveLocalBin('vitest', repoRoot),
+      ['list', '--filesOnly', `--exclude=${'tests/battleground.test.ts'}`],
       { cwd: repoRoot, env: { ...process.env } },
     );
     let out = '';

@@ -112,6 +112,7 @@ const plan = lane
       shard,
       workers,
       exists,
+      repoRoot,
     });
 
 console.log(
