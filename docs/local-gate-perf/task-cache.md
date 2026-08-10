@@ -7,7 +7,7 @@ their declared inputs are unchanged. Tests never use a "passed" cache.
 
 | Option | Why chosen / not |
 |---|---|
-| **turbo** (kept) | Precise `inputs` / `outputs` per task, local disk cache, one CLI multi-task run for independent pure steps (`check:types` // `build:env` // `build:server`), Windows-safe via `npx turbo` + gate `shell` on win32. Future remote cache is optional and not required. |
+| **turbo** (kept) | Precise `inputs` / `outputs` per task, local disk cache, one CLI multi-task run for independent pure steps (`check:types` // `build:env` // `build:server`). Gate steps resolve the pnpm-hoisted `node_modules/.bin/turbo` binary directly (`resolveTurboBin`) instead of dispatching through `npx turbo`, skipping npx's own package-resolution and version-check overhead; the spawn site quotes that resolved path when `shell` is true (win32), since Node's `shell: true` concatenates `cmd` and `args` verbatim and an absolute path containing a space (an everyday Windows path) would otherwise be split into two words. Future remote cache is optional and not required. |
 | wireit | Lighter per-script incremental, but would rewrite many `package.json` scripts to `"wireit"` with a large config block and weaker multi-task parallel UX for the gate orchestrator. Dropped for this phase. |
 
 Config: root `turbo.json`. Cache dir: `.turbo/` (gitignored). Install: `turbo` is a
@@ -47,15 +47,23 @@ and `ci:changed` so an accidental `turbo run test` never stores a pass.
 
 `scripts/gate.mjs` builds steps from `scripts/lib/gate_steps.mjs`:
 
-1. Preflights: dependency sync, ffmpeg/ffprobe (unchanged).
-2. `npx turbo run i18n:gen` then **always** i18n freshness `git diff`.
-3. `npx turbo run wiki:content`.
+1. Preflights: dependency sync, ffmpeg/ffprobe, turbo binary present (unchanged in
+   spirit; the turbo-binary check is new since the direct-resolution switch).
+2. `<repoRoot>/node_modules/.bin/turbo run i18n:gen` then **always** i18n freshness
+   `git diff`.
+3. `<repoRoot>/node_modules/.bin/turbo run wiki:content`.
 4. Malware + biome via npm (always).
-5. `npx turbo run sfx:check`.
+5. `<repoRoot>/node_modules/.bin/turbo run sfx:check`.
 6. Full vitest with `WOC_SKIP_PRETEST=1` (Phase 2 generate-once; not turbo-cached).
 7. Browser suite via npm.
-8. `npx turbo run check:types build:env build:server` (parallel when independent).
-9. `npx turbo run build:bundle`.
+8. `<repoRoot>/node_modules/.bin/turbo run check:types build:env build:server`
+   (parallel when independent).
+9. `<repoRoot>/node_modules/.bin/turbo run build:bundle`.
+
+`i18n:gen`, `wiki:content`, and `sfx:check` actually run as one combined multi-task
+turbo step (`turbo run i18n:gen wiki:content sfx:check`) for wall-clock overlap on a
+cold cache; they are numbered separately above only to show where the i18n freshness
+check sits relative to `i18n:gen`.
 
 Phase 2 rules still hold: standalone `pnpm test` / `pnpm run build` regenerate i18n
 and wiki; the gate does not triple-generate.
@@ -65,7 +73,7 @@ and wiki; the gate does not triple-generate.
 On an unchanged tree, pure artifact multi-task:
 
 ```text
-npx turbo run i18n:gen wiki:content sfx:check check:types build:env build:server build:bundle
+node_modules/.bin/turbo run i18n:gen wiki:content sfx:check check:types build:env build:server build:bundle
 # second run: Cached: 7 cached, 7 total  Time: ~87ms >>> FULL TURBO
 ```
 
@@ -75,6 +83,14 @@ A catalog edit (any file under `src/ui/i18n.catalog/**`) forces `i18n:gen` cache
 
 - Clear local cache: `rm -rf .turbo` (or `npx turbo run <task> --force`).
 - Cache hits print in the gate log (`cache hit, replaying logs` / `FULL TURBO`).
-- Windows: gate still sets `shell = true` for `npx`/`npm`; turbo binary is cross-platform.
+- Windows: gate still sets `shell = true` for `npm`/`git`; the resolved turbo binary
+  (`turbo.cmd` on win32) is spawned through the same shell, and the spawn site quotes
+  its path when it contains a space (`quoteForShell` in `scripts/lib/gate_shell.mjs`).
+- Missing/stale `node_modules/.bin/turbo` (e.g. a checkout skipped `pnpm install`)
+  fails fast with a `pnpm install --frozen-lockfile` pointer rather than a bare
+  ENOENT: `resolveTurboBin` stays a pure path resolver (safe to call with any
+  `repoRoot`, including in tests), and `checkTurboBinExists` is the separate,
+  existence-checking preflight `runGatePreflights` and `gate_profile.mjs` call before
+  spawning.
 - Do not add vitest to a cacheable turbo task. If a new pure step is added, declare
   precise `inputs`/`outputs` in `turbo.json` and extend `GATE_CACHE_TASK_INVENTORY`.

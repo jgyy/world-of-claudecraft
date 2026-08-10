@@ -21,6 +21,7 @@
 // cacheable step skips npx's own package-resolution and version-check overhead
 // on top of an install `pnpm install --frozen-lockfile` already guarantees.
 
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 /** Tasks the full gate runs through turbo for local disk cache. */
@@ -147,6 +148,11 @@ export const GATE_TURBO_UI_ARGS = Object.freeze(['--ui=stream']);
  * steps spawn this directly instead of `npx turbo`, matching how gate.mjs and
  * gate_select.mjs already resolve their own repoRoot (fileURLToPath, not cwd,
  * so the path is correct regardless of the invoking process's working directory).
+ * Pure path resolution, deliberately not existence-checked here: this runs
+ * for every step in buildFullGateSteps (including in tests that pass an
+ * arbitrary repoRoot to pin the resolved path), so it must not throw on a
+ * path that happens not to exist. Callers that actually spawn the binary
+ * should check `assertTurboBinExists` once, up front.
  * @param {string} repoRoot
  * @returns {string}
  */
@@ -156,6 +162,28 @@ export function resolveTurboBin(repoRoot) {
     'node_modules',
     '.bin',
     `turbo${process.platform === 'win32' ? '.cmd' : ''}`,
+  );
+}
+
+/**
+ * Verify the resolved turbo binary actually exists BEFORE the gate spawns it,
+ * so a missing/stale install surfaces as a legible pointer at
+ * `pnpm install --frozen-lockfile` instead of spawnSync's bare ENOENT, which
+ * the gate step loop reports only as "(exit killed)". `npx turbo` never
+ * needed this guard because npx walks up the tree to find node_modules/.bin
+ * itself; the direct resolution here does not. The dependency-sync preflight
+ * (checkDependencySync) already catches a stale/missing install in the
+ * common case, but WOC_SKIP_DEP_SYNC=1 is a documented escape hatch that
+ * bypasses it, so this guard still has value as a legible fallback.
+ * @param {string} turboBin absolute path from resolveTurboBin
+ * @param {string} label gate label for the error prefix (e.g. "gate", "gate:select")
+ * @returns {string | null} error text, or null when the binary exists
+ */
+export function checkTurboBinExists(turboBin, label) {
+  if (existsSync(turboBin)) return null;
+  return (
+    `[${label}] turbo binary not found at ${turboBin}\n` +
+    `[${label}] node_modules is missing or stale: reinstall with pnpm install --frozen-lockfile`
   );
 }
 

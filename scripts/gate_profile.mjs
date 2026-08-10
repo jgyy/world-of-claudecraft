@@ -21,6 +21,8 @@ import {
   parseGateProfileArgs,
   rankSlowestFiles,
 } from './lib/gate_profile.mjs';
+import { quoteForShell } from './lib/gate_shell.mjs';
+import { checkTurboBinExists, resolveTurboBin } from './lib/gate_task_cache.mjs';
 import { computeGateWorkers, resolveGateWorkerTierCap } from './lib/gate_workers.mjs';
 import {
   formatInstallSyncFailure,
@@ -131,10 +133,17 @@ if (args.steps) {
       failed = true;
       if (!args.continueOnError) finishAndExit(1, timed, null);
     }
+    const turbo = timePreflight('turbo binary probe', runTurboBinProbe);
+    timed.push(turbo);
+    if (turbo.status === 'fail') {
+      failed = true;
+      if (!args.continueOnError) finishAndExit(1, timed, null);
+    }
   } else {
     timed.push(
       { name: 'dependency sync', seconds: 0, status: 'skipped' },
       { name: 'ffmpeg/ffprobe probe', seconds: 0, status: 'skipped' },
+      { name: 'turbo binary probe', seconds: 0, status: 'skipped' },
     );
   }
 
@@ -190,7 +199,7 @@ if (args.steps) {
       console.log(`\n[gate_profile] ${step.name}: ${step.cmd} ${step.args.join(' ')}`);
       const started = performance.now();
       const stepEnv = step.env ? { ...env, ...step.env } : env;
-      const res = spawnSync(step.cmd, step.args, {
+      const res = spawnSync(quoteForShell(step.cmd, shell), step.args, {
         stdio: 'inherit',
         env: stepEnv,
         shell,
@@ -340,12 +349,24 @@ function runDependencySync() {
   return { ok: true };
 }
 
+function runTurboBinProbe() {
+  const turboError = checkTurboBinExists(resolveTurboBin(ROOT), 'gate_profile');
+  if (turboError) {
+    console.error(turboError);
+    return { ok: false, exitCode: 1 };
+  }
+  return { ok: true };
+}
+
 function runAudioToolProbe() {
   const missing = [
     ['ffmpeg', FFMPEG_PATH],
     ['ffprobe', FFPROBE_PATH],
   ].filter(([, toolPath]) => {
-    const probe = spawnSync(toolPath, ['-version'], { stdio: 'ignore', shell });
+    const probe = spawnSync(quoteForShell(toolPath, shell), ['-version'], {
+      stdio: 'ignore',
+      shell,
+    });
     return probe.error !== undefined || probe.status !== 0;
   });
   if (missing.length > 0) {

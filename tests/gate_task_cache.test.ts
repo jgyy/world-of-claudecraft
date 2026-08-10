@@ -156,6 +156,23 @@ describe('buildFullGateSteps orchestration', () => {
     expect(byName['client build'].args).toContain('build:bundle');
   });
 
+  it('threads an explicit repoRoot into every turbo step, not just the process.cwd() fallback', () => {
+    // Deliberately NOT process.cwd(): a pin derived from calling the function under
+    // test at process.cwd() (like EXPECTED_TURBO_BIN above) would still pass even if
+    // repoRoot threading were deleted entirely, since buildFullGateSteps falls back
+    // to process.cwd() when repoRoot is absent. This fixed, unrelated path proves the
+    // opt actually reaches resolveTurboBin.
+    const explicitRoot = path.join('some', 'other', 'repo', 'root');
+    const suffix = process.platform === 'win32' ? '.cmd' : '';
+    const expected = path.join(explicitRoot, 'node_modules', '.bin', `turbo${suffix}`);
+    const steps = buildFullGateSteps(8, { repoRoot: explicitRoot });
+    const byName = Object.fromEntries(steps.map((s) => [s.name, s]));
+    expect(byName['i18n + wiki + sfx artifacts'].cmd).toBe(expected);
+    expect(byName['typecheck + env/server/bot builds'].cmd).toBe(expected);
+    expect(byName['client build'].cmd).toBe(expected);
+    expect(expected).not.toBe(EXPECTED_TURBO_BIN);
+  });
+
   it('preserves generate-once ordering: artifacts before freshness before biome before vitest', () => {
     const names = buildFullGateSteps(4).map((s) => s.name);
     const artifacts = names.indexOf('i18n + wiki + sfx artifacts');

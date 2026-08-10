@@ -25,6 +25,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveAvailableMemoryBytes } from './lib/gate_memory.mjs';
 import { runGatePreflights } from './lib/gate_preflight.mjs';
+import { quoteForShell } from './lib/gate_shell.mjs';
 import { buildFullGateSteps } from './lib/gate_steps.mjs';
 import { computeGateWorkers, resolveGateWorkerTierCap } from './lib/gate_workers.mjs';
 
@@ -71,7 +72,7 @@ const shell = process.platform === 'win32';
 // side effect of an empty PATH also making `npm` itself unspawnable.
 // Both preflights now live in lib/gate_preflight.mjs so gate:select shares them
 // rather than silently losing the early, clear failure they exist to produce.
-runGatePreflights({ label: 'gate', shell });
+runGatePreflights({ label: 'gate', shell, repoRoot });
 
 const branch =
   spawnSync('git', ['branch', '--show-current'], { encoding: 'utf8', shell }).stdout?.trim() ?? '';
@@ -97,7 +98,12 @@ if (releaseTier) {
 for (const { name, cmd, args, hint, env: envOverlay } of steps) {
   console.log(`\n[gate] ${name}: ${cmd} ${args.join(' ')}`);
   const env = envOverlay ? { ...baseEnv, ...envOverlay } : baseEnv;
-  const res = spawnSync(cmd, args, { stdio: 'inherit', env, shell });
+  const res = spawnSync(quoteForShell(cmd, shell), args, {
+    stdio: 'inherit',
+    env,
+    shell,
+    cwd: repoRoot,
+  });
   if (res.status !== 0) {
     console.error(`\n[gate] FAIL at "${name}" (exit ${res.status ?? 'killed'})`);
     if (hint) console.error(`[gate] hint: ${hint}`);

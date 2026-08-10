@@ -10,6 +10,8 @@
 // will run most often.
 import { spawnSync } from 'node:child_process';
 import { FFMPEG_PATH, FFPROBE_PATH } from '../sfx/ffmpeg_paths.mjs';
+import { quoteForShell } from './gate_shell.mjs';
+import { checkTurboBinExists, resolveTurboBin } from './gate_task_cache.mjs';
 import {
   formatInstallSyncFailure,
   parseInstallProblems,
@@ -53,7 +55,10 @@ export function checkAudioTooling({ label, shell }) {
     ['ffmpeg', FFMPEG_PATH],
     ['ffprobe', FFPROBE_PATH],
   ].filter(([, toolPath]) => {
-    const probe = spawnSync(toolPath, ['-version'], { stdio: 'ignore', shell });
+    const probe = spawnSync(quoteForShell(toolPath, shell), ['-version'], {
+      stdio: 'ignore',
+      shell,
+    });
     return probe.error !== undefined || probe.status !== 0;
   });
   if (missing.length === 0) return null;
@@ -68,11 +73,16 @@ export function checkAudioTooling({ label, shell }) {
 }
 
 /**
- * Run both preflights, printing and exiting on the first failure.
+ * Run every preflight, printing and exiting on the first failure.
  *
- * @param {{ label: string, shell: boolean, env?: Record<string, string | undefined> }} opts
+ * @param {{
+ *   label: string,
+ *   shell: boolean,
+ *   env?: Record<string, string | undefined>,
+ *   repoRoot?: string,
+ * }} opts
  */
-export function runGatePreflights({ label, shell, env = process.env }) {
+export function runGatePreflights({ label, shell, env = process.env, repoRoot }) {
   const depError = checkDependencySync({ label, shell, env });
   if (depError) {
     console.error(depError);
@@ -82,5 +92,15 @@ export function runGatePreflights({ label, shell, env = process.env }) {
   if (audioError) {
     console.error(audioError);
     process.exit(1);
+  }
+  // repoRoot is optional: a caller that has not yet threaded it through (or a
+  // test exercising the other preflights in isolation) simply skips this one
+  // rather than resolving a binary path it cannot verify.
+  if (repoRoot) {
+    const turboError = checkTurboBinExists(resolveTurboBin(repoRoot), label);
+    if (turboError) {
+      console.error(turboError);
+      process.exit(1);
+    }
   }
 }

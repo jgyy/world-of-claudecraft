@@ -57,6 +57,7 @@ import {
   buildRelatedArgs,
   buildSelectPlan,
 } from './lib/gate_select_plan.mjs';
+import { quoteForShell } from './lib/gate_shell.mjs';
 import {
   buildFullGateSteps,
   I18N_RELEASE_TIER_SUITES,
@@ -73,7 +74,7 @@ const git = (cmd, args) => spawnSync(cmd, args, { encoding: 'utf8', shell, cwd: 
 // Same preflights as gate.mjs (dependency sync, then ffmpeg/ffprobe by
 // execution). They exist to turn a confusing mid-gate failure into a clear early
 // one, and this path is the one people run most.
-runGatePreflights({ label: 'gate:select', shell });
+runGatePreflights({ label: 'gate:select', shell, repoRoot });
 
 const workers = computeGateWorkers({
   cpuCount: os.availableParallelism(),
@@ -208,7 +209,12 @@ steps.splice(anchor >= 0 ? anchor + 1 : steps.length, 0, ...vitestSteps);
 for (const { name, cmd, args, hint, env: envOverlay } of steps) {
   console.log(`\n[gate:select] ${name}: ${cmd} ${args.join(' ')}`);
   const env = envOverlay ? { ...process.env, ...envOverlay } : process.env;
-  const res = spawnSync(cmd, args, { stdio: 'inherit', env, shell, cwd: repoRoot });
+  const res = spawnSync(quoteForShell(cmd, shell), args, {
+    stdio: 'inherit',
+    env,
+    shell,
+    cwd: repoRoot,
+  });
   if (res.status !== 0) {
     console.error(`\n[gate:select] FAIL at "${name}" (exit ${res.status ?? 'killed'})`);
     if (hint) console.error(`[gate:select] hint: ${hint}`);

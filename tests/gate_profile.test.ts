@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   buildGateProfileSteps,
@@ -262,6 +263,23 @@ describe('buildGateProfileSteps', () => {
     const client = steps.find((s) => s.name === 'client build');
     expect(client?.cmd).toBe(EXPECTED_TURBO_BIN);
     expect(client?.args).toEqual(expect.arrayContaining(['run', 'build:bundle']));
+  });
+
+  it('threads an explicit repoRoot into every turbo step, not just the process.cwd() fallback', () => {
+    // Deliberately NOT process.cwd(): a pin derived from calling the function under
+    // test at process.cwd() (like EXPECTED_TURBO_BIN above) would still pass even if
+    // repoRoot threading were deleted entirely, since buildGateProfileSteps forwards
+    // opts to buildFullGateSteps, which falls back to process.cwd() when repoRoot is
+    // absent. This fixed, unrelated path proves the opt actually reaches resolveTurboBin.
+    const explicitRoot = path.join('some', 'other', 'repo', 'root');
+    const suffix = process.platform === 'win32' ? '.cmd' : '';
+    const expected = path.join(explicitRoot, 'node_modules', '.bin', `turbo${suffix}`);
+    const steps = buildGateProfileSteps(8, { repoRoot: explicitRoot });
+    const i18n = steps.find((s) => s.name === 'i18n + wiki + sfx artifacts');
+    const client = steps.find((s) => s.name === 'client build');
+    expect(i18n?.cmd).toBe(expected);
+    expect(client?.cmd).toBe(expected);
+    expect(expected).not.toBe(EXPECTED_TURBO_BIN);
   });
 
   it('honors skip flags without dropping unskipped steps', () => {
