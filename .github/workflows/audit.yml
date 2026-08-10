@@ -49,6 +49,15 @@ jobs:
   audit:
     name: pnpm audit
     runs-on: ubuntu-latest
+    # Checkout, pnpm install, and one network audit call: comparable in shape
+    # to release-version-gate's checkout-plus-toolchain-plus-one-check job.
+    # Measured over the last 58 runs: p50 1.12 min, healthy worst case 1.53
+    # min, so 10 is roughly 6x margin over healthy work, same reasoning as
+    # release-version-gate. One outlier succeeded in 9.55 min on 2026-08-07
+    # (run 31211440073), entirely spent inside actions/checkout (9m11s): a
+    # known runner-side stall class, not job work, documented at 9.6 to 24.4
+    # minutes in ci.yml's checkout-stall bound. 10 sits at the bottom edge of
+    # that band, so this run would have survived by 27 seconds.
     timeout-minutes: 10
 
     steps:
