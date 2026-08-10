@@ -63,11 +63,18 @@ describe('entity_update_cadence: isUpdateDue', () => {
     expect(isUpdateDue(104, e, d2, viewer, 100)).toBe(true); // 4 ticks since last send
   });
 
-  it('is deterministic: the same inputs always produce the same verdict', () => {
+  it('is always due exactly at the 55yd full-rate boundary (d2 == 55 * 55)', () => {
     const e = mkEntity({ id: 2 });
     const viewer = mkEntity({ id: 1 });
-    const d2 = 90 * 90;
-    const run = () => isUpdateDue(103, e, d2, viewer, 100);
-    expect(run()).toBe(run());
+    const d2 = 55 * 55;
+    expect(isUpdateDue(100, e, d2, viewer, 100)).toBe(true); // sent this very tick
+  });
+
+  it('is still half-rate, not quarter-rate, exactly at the 80yd boundary (d2 == 80 * 80)', () => {
+    const e = mkEntity({ id: 2 });
+    const viewer = mkEntity({ id: 1 });
+    const d2 = 80 * 80;
+    expect(isUpdateDue(101, e, d2, viewer, 100)).toBe(false); // 1 tick since last send
+    expect(isUpdateDue(102, e, d2, viewer, 100)).toBe(true); // 2 ticks since last send: half rate, not quarter
   });
 });
