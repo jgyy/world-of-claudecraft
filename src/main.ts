@@ -109,6 +109,7 @@ import {
 } from './game/mobile_controls';
 import { applyMobileHudLayout } from './game/mobile_hud_layout_applier';
 import { watchMobileMoreState } from './game/mobile_more_diagnostics';
+import { mobilePlatform, mobilePreflightCopy } from './game/mobile_preflight';
 import { mouselookReleaseFacing } from './game/mouselook_release';
 import { diagonalMovementVisualFacing } from './game/movement_visual';
 import { music } from './game/music';
@@ -762,53 +763,6 @@ function requestMobileFullscreenLandscape(): void {
   } catch {
     /* browser declined orientation lock */
   }
-}
-
-function mobilePlatform(): 'ios' | 'android' | 'other' {
-  const ua = navigator.userAgent;
-  const platform = navigator.platform;
-  if (/iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1))
-    return 'ios';
-  if (/Android/.test(ua)) return 'android';
-  return 'other';
-}
-
-function isStandaloneDisplay(): boolean {
-  return (
-    window.matchMedia('(display-mode: standalone)').matches ||
-    (navigator as Navigator & { standalone?: boolean }).standalone === true
-  );
-}
-
-function mobilePreflightCopy(): { detail: string; steps: string[] } {
-  const standalone = isStandaloneDisplay();
-  const base = [t('mobilePreflight.baseLandscape'), t('mobilePreflight.basePerformance')];
-  if (mobilePlatform() === 'ios') {
-    return {
-      detail: standalone
-        ? t('mobilePreflight.iosStandaloneDetail')
-        : t('mobilePreflight.iosInstallDetail'),
-      steps: standalone
-        ? base
-        : [t('mobilePreflight.iosShareStep'), t('mobilePreflight.iosOpenStep'), ...base],
-    };
-  }
-  if (mobilePlatform() === 'android') {
-    return {
-      detail: standalone
-        ? t('mobilePreflight.androidStandaloneDetail')
-        : t('mobilePreflight.androidInstallDetail'),
-      steps: standalone
-        ? base
-        : [t('mobilePreflight.androidInstallStep'), t('mobilePreflight.androidOpenStep'), ...base],
-    };
-  }
-  return {
-    detail: standalone
-      ? t('mobilePreflight.otherStandaloneDetail')
-      : t('mobilePreflight.otherInstallDetail'),
-    steps: base,
-  };
 }
 
 let mobilePreflightPromptPromise: Promise<void> | null = null;
