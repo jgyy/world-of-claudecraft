@@ -133,6 +133,7 @@ export const GATE_CACHE_TASK_INVENTORY = Object.freeze({
       'scripts/build_sitemap.mjs',
       'scripts/build_sfx_manifest.mjs',
       'scripts/build_media_manifest.mjs',
+      'scripts/lib/media_manifest_hash_cache.mjs',
       'scripts/check_backdrop_survival.mjs',
       'package.json',
     ],
