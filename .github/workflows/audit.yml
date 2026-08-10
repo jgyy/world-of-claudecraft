@@ -49,6 +49,16 @@ jobs:
   audit:
     name: pnpm audit
     runs-on: ubuntu-latest
+    # Checkout, pnpm install, one `pnpm audit` call: the last 58 runs of this job
+    # measured p50 1.12 min, healthy worst 1.53 min, plus one 9.55 min success on
+    # 2026-08-07 (run 31211440073) where `actions/checkout` alone took 9m11s, the
+    # known runner-side stall class. 10 gives roughly 6x margin over healthy work,
+    # matching release-version-gate (ci.yml:130), a job of the same checkout plus
+    # install plus one small check shape, and sits at the bottom edge of the
+    # documented 9.6 to 24.4 minute stall band (docs/merge-queue.md), so that
+    # 9.55 min run would still have survived, by 27 seconds. That trade is right
+    # here: this job is not a required check, so a false kill only costs a rerun
+    # that blocks nobody.
     timeout-minutes: 10
 
     steps:

@@ -84,7 +84,26 @@ describe('dependency audit gate', () => {
   // every push touching the lockfile plus a weekly cron, so a wedged runner would
   // sit unnoticed until someone happens to look at the Actions tab.
   it('bounds the job with an explicit timeout', () => {
-    expect(workflow).toMatch(/^ {4}timeout-minutes: \d+$/m);
+    // Job-scoped and exact-value, matching the ci.yml pattern
+    // (tests/ci_workflow.test.ts): a file-scoped presence check would stay green
+    // if a second job arrived unbounded, and an unpinned `\d+` would stay green
+    // across a resize from 10 to 1. jobsSection isolates the audit job's own body
+    // (from its key to end of file, this workflow has only the one job) so a
+    // step-level timeout cannot be mistaken for the job-level one.
+    const jobsSection = workflow.slice(workflow.indexOf('\n  audit:'));
+    const jobLevel = jobsSection.match(/^ {4}timeout-minutes: \d+$/gm) ?? [];
+    expect(jobLevel).toEqual(['    timeout-minutes: 10']);
+    expect(jobsSection).not.toMatch(/\n {8}timeout-minutes:/);
+    expect(jobsSection).not.toMatch(/\n {6}- timeout-minutes:/);
+    // Completeness: this workflow must keep exactly one job, `audit`. A second
+    // job added here would otherwise not be covered by the pin above, the same
+    // gap ci.yml's job-key equality check closes.
+    const jobKeys = [
+      ...workflow
+        .slice(workflow.indexOf('\njobs:'))
+        .matchAll(/\n {2}([A-Za-z][A-Za-z0-9_-]*):[ \t]*(?:#[^\n]*)?\n/g),
+    ].map((m) => m[1]);
+    expect(jobKeys).toEqual(['audit']);
   });
 
   // The audit must fail the job on a finding. Every way this gate turns decorative
