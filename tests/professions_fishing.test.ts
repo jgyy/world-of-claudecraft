@@ -1666,8 +1666,10 @@ describe('fishing over the live server (pin 8)', () => {
     // log line), but the event still rides the same personal routing, and
     // this is the one arm of the four that had no online pin.
     // Explicit budget (vite.config.ts's "deliberately long walkers keep their own explicit
-    // budgets"): up to 100 sessions * 200 ticks, 10x the sibling test above, occasionally
-    // brushes the shared 20s default under full-suite parallel load.
+    // budgets"): the loop bound is up to 100 sessions * 200 ticks, 10x the sibling test
+    // above, but is seeded and deterministic so it always runs the same number of sessions;
+    // measured at 5.2s against the sibling's 0.57s, which occasionally brushes the shared
+    // 20s default under full-suite parallel load.
     const { server, fcA, fcB, sa, angler } = setupAngler();
     let empty = false;
     for (let session = 0; session < 100 && !empty; session++) {

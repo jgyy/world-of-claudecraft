@@ -618,31 +618,38 @@ describe('ci_shard_test.mjs entry (subprocess, --plan-only)', () => {
         'list',
         '--filesOnly',
         `--exclude=${excludePath}`,
-        // vite.config.ts turns on experimental.fsModuleCache for warm-rerun speed, but its
-        // cache key does not fully account for a varying --exclude flag: a prior `vitest
-        // list` invocation (with a different or no --exclude) can leave a stale cached file
-        // set that this spawn then inherits, making the exclude look like it silently failed
-        // even though the real, uncached behavior is correct (repro'd directly:
-        // `npx vitest --clearCache` or this flag both make it consistently correct; neither
-        // is used elsewhere in the outer gate run, so this does not affect its own cache).
-        // This is a correctness check of vitest's live --exclude semantics, so it must not
-        // read a cache in the first place.
+        // The root cause of the original flake is not identified. `experimental.fsModuleCache`
+        // is disabled on this one spawn as a low-risk mitigation that empirically makes the
+        // failure stop reproducing, but the mechanism is NOT "a stale collected file set from
+        // a prior --exclude run": that flag is a per-module transform cache keyed by a sha1
+        // over module id, module source, config contents, NODE_ENV, and the cache format
+        // version (entries live under node_modules/.experimental-vitest-cache), and it never
+        // holds a collected file set. `vitest list --filesOnly` calls
+        // getRelevantTestSpecifications -> globTestFiles, a plain fs glob whose only memo
+        // (testFilesList) is in-process and dies with the subprocess, so nothing can be
+        // inherited across spawns. Keep the flag as defense-in-depth; do not rely on this
+        // comment for the real cause.
         '--experimental.fsModuleCache=false',
       ],
       { cwd: repoRoot, env: { ...process.env } },
     );
     let out = '';
+    let errOut = '';
     child.stdout.on('data', (chunk) => {
       out += String(chunk);
     });
     child.stderr.on('data', (chunk) => {
-      out += String(chunk);
+      errOut += String(chunk);
     });
     const exitCode = await new Promise<number | null>((resolve, reject) => {
       const killer = setTimeout(() => {
         child.kill('SIGKILL');
-        reject(new Error(`vitest list did not exit within 120s; output:\n${out.slice(0, 4000)}`));
-      }, 120_000);
+        reject(
+          new Error(
+            `vitest list did not exit within 60s; stdout:\n${out.slice(0, 4000)}\nstderr:\n${errOut.slice(0, 4000)}`,
+          ),
+        );
+      }, 60_000);
       killer.unref();
       child.on('error', reject);
       child.on('close', (code) => {
@@ -650,7 +657,9 @@ describe('ci_shard_test.mjs entry (subprocess, --plan-only)', () => {
         resolve(code);
       });
     });
-    expect(exitCode).toBe(0);
+    if (exitCode !== 0) {
+      throw new Error(`vitest list exited ${exitCode}; stdout:\n${out}\nstderr:\n${errOut}`);
+    }
     return out.split('\n').map((l) => l.trim());
   }
 
@@ -664,23 +673,28 @@ describe('ci_shard_test.mjs entry (subprocess, --plan-only)', () => {
     //
     // This test spawns a real `npx vitest` subprocess from INSIDE a vitest run, sharing the
     // same module/transform cache the outer run is concurrently writing to under full-suite
-    // parallel load, which occasionally races the spawned list into a stale read. One retry
-    // with a fresh subprocess distinguishes that from a real vitest exclude-semantics
-    // regression: a real regression fails identically both times, transient cache noise does
-    // not.
-    let files = await listVitestFilesExcluding('tests/battleground.test.ts');
-    if (files.some((f) => f.endsWith('tests/battleground.test.ts'))) {
-      files = await listVitestFilesExcluding('tests/battleground.test.ts');
+    // parallel load, which occasionally races the spawned list into a stale read (or a real
+    // subprocess flake: dies, exits non-zero, or noisy output on stdout). The whole check
+    // (both spawns plus every assertion below) retries once as one block: a real
+    // vitest exclude-semantics regression fails identically on the retry, transient noise
+    // does not.
+    async function checkExcludeSemantics(): Promise<void> {
+      const files = await listVitestFilesExcluding('tests/battleground.test.ts');
+      // Exact, not glob-broadened: the excluded file is gone, its many
+      // same-prefix siblings survive.
+      expect(files.some((f) => f.endsWith('tests/battleground.test.ts'))).toBe(false);
+      expect(files.some((f) => f.endsWith('tests/battleground_band.test.ts'))).toBe(true);
+      expect(files.some((f) => f.endsWith('tests/battleground_hud.test.ts'))).toBe(true);
+      // Additive to the config excludes, never replacing them.
+      expect(files.some((f) => f.includes('tests/browser/'))).toBe(false);
+      expect(files.some((f) => f.includes('node_modules/'))).toBe(false);
     }
-    // Exact, not glob-broadened: the excluded file is gone, its many
-    // same-prefix siblings survive.
-    expect(files.some((f) => f.endsWith('tests/battleground.test.ts'))).toBe(false);
-    expect(files.some((f) => f.endsWith('tests/battleground_band.test.ts'))).toBe(true);
-    expect(files.some((f) => f.endsWith('tests/battleground_hud.test.ts'))).toBe(true);
-    // Additive to the config excludes, never replacing them.
-    expect(files.some((f) => f.includes('tests/browser/'))).toBe(false);
-    expect(files.some((f) => f.includes('node_modules/'))).toBe(false);
-  }, 260_000);
+    try {
+      await checkExcludeSemantics();
+    } catch {
+      await checkExcludeSemantics();
+    }
+  }, 130_000);
 
   it('shard mode passes the lane exclusions through to the real leg argv', async () => {
     const run = await runEntry(['--shard=2/8', '--plan-only'], {
