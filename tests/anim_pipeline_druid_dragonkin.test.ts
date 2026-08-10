@@ -55,14 +55,14 @@ describe('druid caster-side ability-specific spellcasts (issue #2889)', () => {
   });
 
   it('wires the donor GLB and an attackByAbility override for every mapped ability', () => {
-    const block = manifestBlock('player_druid: {', 'player_mech: {');
+    const block = manifestBlock('player_druid: swims({', 'player_mech: swims({');
     expect(block).toContain('druid_ability_anims.glb');
     expect(block).toContain('attackByAbility');
     for (const clip of DRUID_CAST_CLIPS) expect(block).toContain(`'${clip}'`);
   });
 
   it('every mapped ability id is a real druid ability, and every referenced clip is shipped', () => {
-    const druidBlock = manifestBlock('player_druid: {', 'player_mech: {');
+    const druidBlock = manifestBlock('player_druid: swims({', 'player_mech: swims({');
     const abilityStart = druidBlock.indexOf('attackByAbility: {');
     expect(abilityStart).toBeGreaterThanOrEqual(0);
     const abilityEnd = druidBlock.indexOf('\n      },', abilityStart);
@@ -130,7 +130,7 @@ describe('dragonkin family bespoke attack (issue #2889)', () => {
     // batch 1's (#2954) player_mage / mob_elemental blocks, or the other two
     // in-flight batches' player_paladin / mob_undead and player_hunter /
     // mob_ghost families.
-    const mageBlock = manifestBlock('player_mage: {', 'player_warlock: {');
+    const mageBlock = manifestBlock('player_mage: swims({', 'player_warlock: swims({');
     expect(mageBlock).not.toContain('druid_ability_anims.glb');
     expect(mageBlock).not.toContain('Cast_Nature');
 
