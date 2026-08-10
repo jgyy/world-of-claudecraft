@@ -48,10 +48,8 @@ const scratchBox = new THREE.Box3();
 const scratchCenter = new THREE.Vector3();
 const scratchSize = new THREE.Vector3();
 
-// The offscreen rig's four pieces are always created together (ensureRig) and
-// torn down together (resetPortraitRendererForGraphicsRebuild), so a caller
-// that has one is guaranteed to have all four; PortraitRig captures that as a
-// single non-null bundle instead of four separately-nullable fields.
+// The offscreen rig's pieces are always created and torn down together
+// (ensureRig / resetPortraitRendererForGraphicsRebuild).
 interface PortraitRig {
   renderer: THREE.WebGLRenderer;
   scene: THREE.Scene;
@@ -59,10 +57,7 @@ interface PortraitRig {
   mount: THREE.Group;
 }
 
-let renderer: THREE.WebGLRenderer | null = null;
-let scene: THREE.Scene | null = null;
-let camera: THREE.PerspectiveCamera | null = null;
-let mount: THREE.Group | null = null;
+let rig: PortraitRig | null = null;
 let unregisterContext: (() => void) | null = null;
 
 const cache = new Map<string, string>();
@@ -82,11 +77,7 @@ void assetsReady()
   });
 
 function ensureRig(): PortraitRig {
-  // Narrow once: the four fields are only ever set together below, so this
-  // single check is enough to prove all four non-null to the compiler.
-  if (renderer && scene && camera && mount) {
-    return { renderer, scene, camera, mount };
-  }
+  if (rig) return rig;
 
   const canvas = document.createElement('canvas');
   const newRenderer = new THREE.WebGLRenderer({
@@ -119,12 +110,8 @@ function ensureRig(): PortraitRig {
   fill.position.set(-3, 2, -2);
   newScene.add(fill);
 
-  renderer = newRenderer;
-  scene = newScene;
-  camera = newCamera;
-  mount = newMount;
-
-  return { renderer: newRenderer, scene: newScene, camera: newCamera, mount: newMount };
+  rig = { renderer: newRenderer, scene: newScene, camera: newCamera, mount: newMount };
+  return rig;
 }
 
 /**
@@ -319,19 +306,16 @@ export function portraitsReady(): boolean {
  */
 export function resetPortraitRendererForGraphicsRebuild(): void {
   cache.clear();
-  if (mount && scene) scene.remove(mount);
-  unregisterContext?.();
-  unregisterContext = null;
-  if (renderer) {
+  if (rig) {
+    rig.scene.remove(rig.mount);
     try {
-      renderer.forceContextLoss();
+      rig.renderer.forceContextLoss();
     } catch {
       // The context may already have been evicted by the browser.
     }
-    renderer.dispose();
+    rig.renderer.dispose();
   }
-  renderer = null;
-  scene = null;
-  camera = null;
-  mount = null;
+  unregisterContext?.();
+  unregisterContext = null;
+  rig = null;
 }
