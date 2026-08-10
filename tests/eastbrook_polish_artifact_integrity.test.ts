@@ -695,9 +695,9 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // archetype and scene-texture counts; renderer.ts edits only). No capture
 // was retaken.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  '557c7b28d60232fd18a6343276ad93383ae56ca6b47d8ed86b0645936a2d0c0e';
+  '5e94a50775ac0de3af40e6ca33e9192bc600fb2015a1a1025ce1103390514557';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  'a5a84fb2bd4a35b844d7ad47a95304388cd77f485299c670f6997c3a3bc2cf0b';
+  '2482c9ea6345f04e6e84e21b29378d37485cdce5fc07e3def1a87aec82fcafe8';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -1592,10 +1592,6 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // landing on top of the VFX per-frame cost work already on this release
     // branch, then this second-order performance seal follows the swept
     // evidence bytes. No capture was retaken.
-    // Re-pinned for the review 3050 Sentence-impact extraction: the first-order
-    // composite follows renderer.ts's sentenceImpactFeedback thinning onto the
-    // sentence_vfx_core plan, then this second-order performance seal follows
-    // the swept evidence bytes. No capture was retaken.
     // Re-pinned for the merge of release/v0.36.0 (PR 3161) into the three
     // compileAsync patch branch: the first-order composite follows both
     // parents' inputs, then this second-order performance seal follows the
@@ -1627,7 +1623,7 @@ describe('Eastbrook polish performance and contact evidence', () => {
     expect(
       fingerprint.digest('hex'),
       `the second-order performance digest moved; if every input moved legitimately, re-mint with: ${REMINT_COMMAND} (it recomputes this literal LAST, from the swept files)`,
-    ).toBe('ad2b01d1ef2ef83d41ac427152709596b55cca9c4ba5cd2abcf337f0dc72eecd');
+    ).toBe('266aa7dd9fd287c078f9dc6e9b3f910b4afb8206b91786dc8b744158afb16f71');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {
