@@ -59,11 +59,11 @@ describe('Zulgar, Voice of the Basin bespoke attack/cast (issue #2889 round 2)',
     expect(rigConstBlock).toContain("attack: ['Attack']");
     expect(rigConstBlock).toContain("cast: 'Cast'");
 
-    // Every other VisualDef still pointing at the shared constant is untouched: exactly 1
-    // remaining direct `clips: TRIPO_BIPED_FULL_RIG,` usage (mob_wildheart_beastmaster; 5
-    // originally, minus the ones migrated to WILDHEART_STALKER, WILDHEART_RAVAGER,
-    // WILDHEART_HEXCALLER, and WILDHEART_HIGH_PRIEST above).
+    // No VisualDef still points at the shared constant directly: 0 remaining
+    // `clips: TRIPO_BIPED_FULL_RIG,` usages (5 originally, all migrated to their own
+    // clips const: WILDHEART_STALKER, WILDHEART_RAVAGER, WILDHEART_HEXCALLER,
+    // WILDHEART_BEASTMASTER, and WILDHEART_HIGH_PRIEST above).
     const remaining = [...MANIFEST_SRC.matchAll(/clips: TRIPO_BIPED_FULL_RIG,/g)].length;
-    expect(remaining).toBe(1);
+    expect(remaining).toBe(0);
   });
 });
