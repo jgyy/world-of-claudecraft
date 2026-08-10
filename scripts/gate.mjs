@@ -26,7 +26,9 @@ import { fileURLToPath } from 'node:url';
 import { resolveAvailableMemoryBytes } from './lib/gate_memory.mjs';
 import { runGatePreflights } from './lib/gate_preflight.mjs';
 import { buildFullGateSteps } from './lib/gate_steps.mjs';
+import { checkTurboBinExists } from './lib/gate_task_cache.mjs';
 import { computeGateWorkers, resolveGateWorkerTierCap } from './lib/gate_workers.mjs';
+import { quoteForShell } from './lib/shell_quote.mjs';
 
 // Same fileURLToPath-based resolution gate_select.mjs already uses: correct
 // regardless of the invoking process's cwd, unlike process.cwd(). Threaded
@@ -72,6 +74,11 @@ const shell = process.platform === 'win32';
 // Both preflights now live in lib/gate_preflight.mjs so gate:select shares them
 // rather than silently losing the early, clear failure they exist to produce.
 runGatePreflights({ label: 'gate', shell });
+const turboBinError = checkTurboBinExists(repoRoot, 'gate');
+if (turboBinError) {
+  console.error(turboBinError);
+  process.exit(1);
+}
 
 const branch =
   spawnSync('git', ['branch', '--show-current'], { encoding: 'utf8', shell }).stdout?.trim() ?? '';
@@ -97,7 +104,15 @@ if (releaseTier) {
 for (const { name, cmd, args, hint, env: envOverlay } of steps) {
   console.log(`\n[gate] ${name}: ${cmd} ${args.join(' ')}`);
   const env = envOverlay ? { ...baseEnv, ...envOverlay } : baseEnv;
-  const res = spawnSync(cmd, args, { stdio: 'inherit', env, shell });
+  // shell: true does not quote cmd for us; an absolute path with a space (a
+  // resolved turbo binary under a repo checked out at a spaced path) would
+  // otherwise split into two shell tokens. See scripts/lib/shell_quote.mjs.
+  const res = spawnSync(shell ? quoteForShell(cmd) : cmd, args, {
+    stdio: 'inherit',
+    env,
+    shell,
+    cwd: repoRoot,
+  });
   if (res.status !== 0) {
     console.error(`\n[gate] FAIL at "${name}" (exit ${res.status ?? 'killed'})`);
     if (hint) console.error(`[gate] hint: ${hint}`);

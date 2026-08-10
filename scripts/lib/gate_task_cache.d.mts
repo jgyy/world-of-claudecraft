@@ -12,6 +12,8 @@ export const GATE_TURBO_UI_ARGS: readonly string[];
 
 export function resolveTurboBin(repoRoot: string): string;
 
+export function checkTurboBinExists(repoRoot: string, label?: string): string | null;
+
 export function turboRunArgs(tasks: readonly string[]): string[];
 
 export function isTurboGateStep(cmd: string, args: readonly string[]): boolean;

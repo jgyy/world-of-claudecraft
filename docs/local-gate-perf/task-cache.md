@@ -7,7 +7,7 @@ their declared inputs are unchanged. Tests never use a "passed" cache.
 
 | Option | Why chosen / not |
 |---|---|
-| **turbo** (kept) | Precise `inputs` / `outputs` per task, local disk cache, one CLI multi-task run for independent pure steps (`check:types` // `build:env` // `build:server`), Windows-safe via `npx turbo` + gate `shell` on win32. Future remote cache is optional and not required. |
+| **turbo** (kept) | Precise `inputs` / `outputs` per task, local disk cache, one CLI multi-task run for independent pure steps (`check:types` // `build:env` // `build:server`). Future remote cache is optional and not required. |
 | wireit | Lighter per-script incremental, but would rewrite many `package.json` scripts to `"wireit"` with a large config block and weaker multi-task parallel UX for the gate orchestrator. Dropped for this phase. |
 
 Config: root `turbo.json`. Cache dir: `.turbo/` (gitignored). Install: `turbo` is a
@@ -45,17 +45,23 @@ and `ci:changed` so an accidental `turbo run test` never stores a pass.
 
 ## How `pnpm run gate` uses it
 
-`scripts/gate.mjs` builds steps from `scripts/lib/gate_steps.mjs`:
+`scripts/gate.mjs` builds steps from `scripts/lib/gate_steps.mjs`. Turbo steps spawn
+the pnpm-hoisted `node_modules/.bin/turbo` binary directly (`resolveTurboBin`), not
+`npx turbo`: no `npx` dispatch overhead on top of an install `pnpm install
+--frozen-lockfile` already guarantees. A preflight (`checkTurboBinExists`) verifies
+the resolved binary exists before the step loop, so a missing/incomplete
+`node_modules` fails with a clear hint instead of a bare spawn error mid-gate.
 
-1. Preflights: dependency sync, ffmpeg/ffprobe (unchanged).
-2. `npx turbo run i18n:gen` then **always** i18n freshness `git diff`.
-3. `npx turbo run wiki:content`.
+1. Preflights: dependency sync, turbo binary presence, ffmpeg/ffprobe (unchanged
+   for the latter two).
+2. `turbo run i18n:gen` then **always** i18n freshness `git diff`.
+3. `turbo run wiki:content`.
 4. Malware + biome via npm (always).
-5. `npx turbo run sfx:check`.
+5. `turbo run sfx:check`.
 6. Full vitest with `WOC_SKIP_PRETEST=1` (Phase 2 generate-once; not turbo-cached).
 7. Browser suite via npm.
-8. `npx turbo run check:types build:env build:server` (parallel when independent).
-9. `npx turbo run build:bundle`.
+8. `turbo run check:types build:env build:server` (parallel when independent).
+9. `turbo run build:bundle`.
 
 Phase 2 rules still hold: standalone `pnpm test` / `pnpm run build` regenerate i18n
 and wiki; the gate does not triple-generate.
@@ -65,7 +71,7 @@ and wiki; the gate does not triple-generate.
 On an unchanged tree, pure artifact multi-task:
 
 ```text
-npx turbo run i18n:gen wiki:content sfx:check check:types build:env build:server build:bundle
+turbo run i18n:gen wiki:content sfx:check check:types build:env build:server build:bundle
 # second run: Cached: 7 cached, 7 total  Time: ~87ms >>> FULL TURBO
 ```
 

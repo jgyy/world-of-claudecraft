@@ -27,6 +27,7 @@ import {
   parseInstallProblems,
   shouldCheckInstallSync,
 } from './lib/npm_install_sync.mjs';
+import { quoteForShell } from './lib/shell_quote.mjs';
 import { FFMPEG_PATH, FFPROBE_PATH } from './sfx/ffmpeg_paths.mjs';
 
 const shell = process.platform === 'win32';
@@ -190,7 +191,9 @@ if (args.steps) {
       console.log(`\n[gate_profile] ${step.name}: ${step.cmd} ${step.args.join(' ')}`);
       const started = performance.now();
       const stepEnv = step.env ? { ...env, ...step.env } : env;
-      const res = spawnSync(step.cmd, step.args, {
+      // See scripts/lib/shell_quote.mjs: shell: true does not quote cmd for
+      // us, and step.cmd can be an absolute resolved-binary path with a space.
+      const res = spawnSync(shell ? quoteForShell(step.cmd) : step.cmd, step.args, {
         stdio: 'inherit',
         env: stepEnv,
         shell,
@@ -345,7 +348,10 @@ function runAudioToolProbe() {
     ['ffmpeg', FFMPEG_PATH],
     ['ffprobe', FFPROBE_PATH],
   ].filter(([, toolPath]) => {
-    const probe = spawnSync(toolPath, ['-version'], { stdio: 'ignore', shell });
+    const probe = spawnSync(shell ? quoteForShell(toolPath) : toolPath, ['-version'], {
+      stdio: 'ignore',
+      shell,
+    });
     return probe.error !== undefined || probe.status !== 0;
   });
   if (missing.length > 0) {

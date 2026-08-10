@@ -15,6 +15,7 @@ import {
   parseInstallProblems,
   shouldCheckInstallSync,
 } from './npm_install_sync.mjs';
+import { quoteForShell } from './shell_quote.mjs';
 
 /**
  * Verify node_modules matches pnpm-lock.yaml. Returns an error string, or null.
@@ -53,7 +54,10 @@ export function checkAudioTooling({ label, shell }) {
     ['ffmpeg', FFMPEG_PATH],
     ['ffprobe', FFPROBE_PATH],
   ].filter(([, toolPath]) => {
-    const probe = spawnSync(toolPath, ['-version'], { stdio: 'ignore', shell });
+    const probe = spawnSync(shell ? quoteForShell(toolPath) : toolPath, ['-version'], {
+      stdio: 'ignore',
+      shell,
+    });
     return probe.error !== undefined || probe.status !== 0;
   });
   if (missing.length === 0) return null;

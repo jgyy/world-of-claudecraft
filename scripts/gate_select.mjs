@@ -62,7 +62,9 @@ import {
   I18N_RELEASE_TIER_SUITES,
   PRE_VITEST_STEP_NAME,
 } from './lib/gate_steps.mjs';
+import { checkTurboBinExists } from './lib/gate_task_cache.mjs';
 import { computeGateWorkers, resolveGateWorkerTierCap } from './lib/gate_workers.mjs';
+import { quoteForShell } from './lib/shell_quote.mjs';
 
 const shell = process.platform === 'win32';
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -74,6 +76,11 @@ const git = (cmd, args) => spawnSync(cmd, args, { encoding: 'utf8', shell, cwd: 
 // execution). They exist to turn a confusing mid-gate failure into a clear early
 // one, and this path is the one people run most.
 runGatePreflights({ label: 'gate:select', shell });
+const turboBinError = checkTurboBinExists(repoRoot, 'gate:select');
+if (turboBinError) {
+  console.error(turboBinError);
+  process.exit(1);
+}
 
 const workers = computeGateWorkers({
   cpuCount: os.availableParallelism(),
@@ -208,7 +215,14 @@ steps.splice(anchor >= 0 ? anchor + 1 : steps.length, 0, ...vitestSteps);
 for (const { name, cmd, args, hint, env: envOverlay } of steps) {
   console.log(`\n[gate:select] ${name}: ${cmd} ${args.join(' ')}`);
   const env = envOverlay ? { ...process.env, ...envOverlay } : process.env;
-  const res = spawnSync(cmd, args, { stdio: 'inherit', env, shell, cwd: repoRoot });
+  // See scripts/lib/shell_quote.mjs: shell: true does not quote cmd for us,
+  // and cmd here can be an absolute resolved-binary path with a space in it.
+  const res = spawnSync(shell ? quoteForShell(cmd) : cmd, args, {
+    stdio: 'inherit',
+    env,
+    shell,
+    cwd: repoRoot,
+  });
   if (res.status !== 0) {
     console.error(`\n[gate:select] FAIL at "${name}" (exit ${res.status ?? 'killed'})`);
     if (hint) console.error(`[gate:select] hint: ${hint}`);

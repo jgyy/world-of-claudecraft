@@ -21,6 +21,7 @@
 // cacheable step skips npx's own package-resolution and version-check overhead
 // on top of an install `pnpm install --frozen-lockfile` already guarantees.
 
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 /** Tasks the full gate runs through turbo for local disk cache. */
@@ -156,6 +157,27 @@ export function resolveTurboBin(repoRoot) {
     'node_modules',
     '.bin',
     `turbo${process.platform === 'win32' ? '.cmd' : ''}`,
+  );
+}
+
+/**
+ * Verify the resolved turbo binary actually exists before a gate step spawns
+ * it directly. `npx turbo` used to walk up the tree to find `node_modules/.bin`
+ * (so it still worked from a worktree with no `node_modules` of its own); the
+ * direct resolved path does not, and a missing binary otherwise surfaces as a
+ * bare ENOENT deep in a gate step with no hint at the cause. The dependency-sync
+ * preflight catches the common case, but `WOC_SKIP_DEP_SYNC=1` bypasses it, so
+ * this is a second, cheap, always-on check right at the point of use.
+ * @param {string} repoRoot
+ * @returns {string | null} error text, or null when the binary is present
+ */
+export function checkTurboBinExists(repoRoot, label = 'gate') {
+  const bin = resolveTurboBin(repoRoot);
+  if (existsSync(bin)) return null;
+  return (
+    `[${label}] FAIL: resolved turbo binary not found at ${bin}\n` +
+    `[${label}] node_modules looks incomplete or out of sync: reinstall with\n` +
+    `[${label}] pnpm install --frozen-lockfile`
   );
 }
 
