@@ -199,6 +199,34 @@ export function isOnPitch(x: number, z: number): boolean {
   return x >= PITCH.xMin && x <= PITCH.xMax && z >= PITCH.zMin && z <= PITCH.zMax;
 }
 
+/** The goal-box rectangle a team's keeper grip applies inside, shifted onto a
+ *  match's pitch copy by its origin (the real Sowfield match uses {0,0}; a
+ *  practice instance uses vcPracticeOrigin). */
+export function keeperBox(
+  team: 'A' | 'B',
+  origin: { x: number; z: number },
+): { xMin: number; xMax: number; zMin: number; zMax: number } {
+  // Team A defends the WEST goal. Shifted onto this match's pitch copy.
+  const xMin = (team === 'A' ? GOAL_LINE_WEST_X : GOAL_LINE_EAST_X - GOAL_BOX_DEPTH) + origin.x;
+  return {
+    xMin,
+    xMax: xMin + GOAL_BOX_DEPTH,
+    zMin: PITCH_CENTER.z - GOAL_BOX_HALF_W + origin.z,
+    zMax: PITCH_CENTER.z + GOAL_BOX_HALF_W + origin.z,
+  };
+}
+
+/** Point-in-box test for `keeperBox`. */
+export function inKeeperBox(
+  team: 'A' | 'B',
+  x: number,
+  z: number,
+  origin: { x: number; z: number },
+): boolean {
+  const box = keeperBox(team, origin);
+  return x >= box.xMin && x <= box.xMax && z >= box.zMin && z <= box.zMax;
+}
+
 // ---------------------------------------------------------------------------
 // Parallel practice instances. Practice matches play on private copies of the
 // pitch far from the one physical Sowfield, so many run at once without touching

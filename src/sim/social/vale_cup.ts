@@ -61,13 +61,12 @@ import {
   type VcBallKinematics,
 } from '../vale_cup_ball';
 import {
-  GOAL_BOX_DEPTH,
-  GOAL_BOX_HALF_W,
   GOAL_HALF_W,
   GOAL_LINE_EAST_X,
   GOAL_LINE_WEST_X,
   GOAL_Z_MAX,
   GOAL_Z_MIN,
+  inKeeperBox,
   isAtSowfield,
   isOnPitch,
   PITCH,
@@ -1749,30 +1748,6 @@ function updateHeldBall(ctx: SimContext, match: VcMatch): void {
   ball.z = holder.pos.z + Math.cos(holder.facing) * VC_HOLD_CARRY_DIST;
   ball.y = ctx.groundPos(ball.x, ball.z).y;
   writeBallEntity(ctx, ball);
-}
-
-function keeperBox(
-  team: 'A' | 'B',
-  origin: { x: number; z: number },
-): { xMin: number; xMax: number; zMin: number; zMax: number } {
-  // Team A defends the WEST goal. Shifted onto this match's pitch copy.
-  const xMin = (team === 'A' ? GOAL_LINE_WEST_X : GOAL_LINE_EAST_X - GOAL_BOX_DEPTH) + origin.x;
-  return {
-    xMin,
-    xMax: xMin + GOAL_BOX_DEPTH,
-    zMin: PITCH_CENTER.z - GOAL_BOX_HALF_W + origin.z,
-    zMax: PITCH_CENTER.z + GOAL_BOX_HALF_W + origin.z,
-  };
-}
-
-function inKeeperBox(
-  team: 'A' | 'B',
-  x: number,
-  z: number,
-  origin: { x: number; z: number },
-): boolean {
-  const box = keeperBox(team, origin);
-  return x >= box.xMin && x <= box.xMax && z >= box.zMin && z <= box.zMax;
 }
 
 // Keeper's grip, body traps, and dribbling contacts, in fixed team/pid order

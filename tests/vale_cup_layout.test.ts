@@ -7,10 +7,13 @@ import { ZONES } from '../src/sim/data';
 import {
   BRAM_POS,
   GATE,
+  GOAL_BOX_DEPTH,
+  GOAL_BOX_HALF_W,
   GOAL_LINE_EAST_X,
   GOAL_LINE_WEST_X,
   GOAL_Z_MAX,
   GOAL_Z_MIN,
+  inKeeperBox,
   isOnPitch,
   PITCH,
   PITCH_CENTER,
@@ -71,6 +74,62 @@ describe('Sowfield walls', () => {
     expect(GOAL_LINE_WEST_X).toBe(PITCH.xMin);
     expect(GOAL_LINE_EAST_X).toBe(PITCH.xMax);
     expect((GOAL_Z_MIN + GOAL_Z_MAX) / 2).toBeCloseTo(PITCH_CENTER.z, 6);
+  });
+});
+
+describe('Sowfield keeper box (the Grip catch region, moved from social/vale_cup.ts)', () => {
+  const ORIGIN = { x: 0, z: 0 };
+
+  it('team A (west) box sits on the west goal line, GOAL_BOX_DEPTH deep and GOAL_BOX_HALF_W wide', () => {
+    expect(inKeeperBox('A', GOAL_LINE_WEST_X, PITCH_CENTER.z, ORIGIN)).toBe(true);
+    // Just inside the box depth/width bounds.
+    expect(inKeeperBox('A', GOAL_LINE_WEST_X + GOAL_BOX_DEPTH - 0.01, PITCH_CENTER.z, ORIGIN)).toBe(
+      true,
+    );
+    expect(
+      inKeeperBox('A', GOAL_LINE_WEST_X, PITCH_CENTER.z + GOAL_BOX_HALF_W - 0.01, ORIGIN),
+    ).toBe(true);
+    // Just outside the box depth (further into the pitch than the box reaches).
+    expect(inKeeperBox('A', GOAL_LINE_WEST_X + GOAL_BOX_DEPTH + 0.01, PITCH_CENTER.z, ORIGIN)).toBe(
+      false,
+    );
+    // Just outside the box half width.
+    expect(
+      inKeeperBox('A', GOAL_LINE_WEST_X, PITCH_CENTER.z + GOAL_BOX_HALF_W + 0.01, ORIGIN),
+    ).toBe(false);
+  });
+
+  it('team B (east) box sits on the east goal line, mirrored', () => {
+    expect(inKeeperBox('B', GOAL_LINE_EAST_X, PITCH_CENTER.z, ORIGIN)).toBe(true);
+    expect(
+      inKeeperBox('B', GOAL_LINE_EAST_X - GOAL_BOX_DEPTH + 0.01, PITCH_CENTER.z, ORIGIN),
+    ).toBe(true);
+    expect(
+      inKeeperBox('B', GOAL_LINE_EAST_X, PITCH_CENTER.z - GOAL_BOX_HALF_W + 0.01, ORIGIN),
+    ).toBe(true);
+    expect(
+      inKeeperBox('B', GOAL_LINE_EAST_X - GOAL_BOX_DEPTH - 0.01, PITCH_CENTER.z, ORIGIN),
+    ).toBe(false);
+    expect(
+      inKeeperBox('B', GOAL_LINE_EAST_X, PITCH_CENTER.z - GOAL_BOX_HALF_W - 0.01, ORIGIN),
+    ).toBe(false);
+  });
+
+  it('a non-zero match origin shifts the accepted region by exactly that offset (the practice-instance case)', () => {
+    const origin = { x: 400, z: -1200 };
+    const insideAtZero = { x: GOAL_LINE_WEST_X, z: PITCH_CENTER.z };
+    const outsideAtZero = { x: GOAL_LINE_WEST_X + GOAL_BOX_DEPTH + 0.01, z: PITCH_CENTER.z };
+    // A point inside the real-pitch box is inside once both it and the query
+    // are shifted by the same origin, and a point outside stays outside.
+    expect(
+      inKeeperBox('A', insideAtZero.x + origin.x, insideAtZero.z + origin.z, origin),
+    ).toBe(true);
+    expect(
+      inKeeperBox('A', outsideAtZero.x + origin.x, outsideAtZero.z + origin.z, origin),
+    ).toBe(false);
+    // The un-shifted real-pitch coordinates are NOT inside the shifted
+    // practice box: the origin actually moves the region, it does not widen it.
+    expect(inKeeperBox('A', insideAtZero.x, insideAtZero.z, origin)).toBe(false);
   });
 });
 
