@@ -96,7 +96,6 @@ function bodyCenterXOf(root: THREE.Object3D): number | null {
 function ensureRig(): PortraitRig {
   if (rig) return rig;
 
-
   const canvas = document.createElement('canvas');
   const newRenderer = new THREE.WebGLRenderer({
     canvas,
