@@ -20,6 +20,7 @@ import {
   occluderSegmentHitsBox,
   stepOccluderFade,
 } from './occluder_fade_core';
+import { type ScenerySphere, sphereIntersectsRange } from './resident_scenery_core';
 import { stoneTexture } from './textures';
 
 // GLB-backed static bodies (Tripo-generated, see public/models/props), with a
@@ -79,6 +80,19 @@ const BRAZIER_LIGHT_Y = 5.4;
 const BRAZIER_FLAME_Y = 1.9;
 const BRAZIER_FLAME_EMISSIVE = EMISSIVE_LIGHT;
 const WARM_FLAME = 0xffb054;
+// A built match view is never disposed (it persists like an authored dungeon
+// copy), so once a player has ever visited a Yumi maze slot, its per-frame
+// occluder-fade sweep over every wall stub keeps running forever, even long
+// after the player has left for another zone or a different match. Skip the
+// whole update when the eye (the player's own look-at point, the only anchor
+// the occluder test cares about) cannot possibly reach the maze: the chase
+// camera orbits the eye at pose.dist, hard-capped at 55 by the camera
+// director (camera_director_core.ts), so any point within CAMERA_EYE_REACH
+// of the eye covers the whole eye-to-camera segment the fade tests against.
+const CAMERA_EYE_REACH = 60;
+// Slack past the shell walls' outer face for wall-mounted torches, the gate
+// arch, and other trim that pokes a little past layout.halfExtent.
+const MAZE_BOUNDS_MARGIN = 6;
 
 /** The renderer-owned pools the maze's braziers plug into. */
 export interface YumiMazeLightHooks {
@@ -139,6 +153,17 @@ export function buildYumiMaze(
   const layout = yumiMazeLayout();
   const floorY = groundHeight(origin.x, origin.z, seed);
   group.position.set(origin.x, floorY, origin.z);
+
+  // Whole-scene reach sphere (resident_scenery_core.ts): center + radius, in
+  // world space, generously covering every wall stub, the beacons, and the
+  // trim mounted on the shell walls.
+  const boundsVerticalHalf = Math.max(YUMI_MAZE_WALL_HEIGHT, BEACON_HEIGHT) / 2;
+  const bounds: ScenerySphere = {
+    x: origin.x,
+    y: floorY + boundsVerticalHalf,
+    z: origin.z,
+    radius: Math.hypot(layout.halfExtent * Math.SQRT2, boundsVerticalHalf) + MAZE_BOUNDS_MARGIN,
+  };
 
   // Walls: every stub (interior + shell) is one instance of a unit box,
   // scaled to its rect, so the whole maze is a single draw call.
@@ -434,6 +459,10 @@ export function buildYumiMaze(
       dt: number,
       reducedMotion = false,
     ): void {
+      // A built view lives for the rest of the session (see dispose(), never
+      // called on this path); skip the beacon anchor and per-stub occluder
+      // sweep once the maze cannot possibly be on screen.
+      if (!sphereIntersectsRange(bounds, { x: eyeX, y: eyeY, z: eyeZ }, CAMERA_EYE_REACH)) return;
       const yumi = world.arenaInfo?.match?.yumi;
       if (!yumi && teleported.size > 0) teleported.clear();
       place(beaconA, lastA, yumi?.yumiA);
