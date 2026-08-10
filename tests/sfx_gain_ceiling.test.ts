@@ -5,7 +5,15 @@
 // one, so the fixture must use real keys; discoverSfxTracks gracefully skips
 // any catalog key with no file present, so only the keys under test matter).
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, utimesSync } from 'node:fs';
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  utimesSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import ffmpegPath from 'ffmpeg-static';
@@ -13,6 +21,8 @@ import { describe, expect, it } from 'vitest';
 import {
   computeSfxGainCeilingRecords,
   computeSfxGainCeilings,
+  readSfxGainCeilings,
+  SFX_GAIN_CEILING_PATH,
   writeSfxGainCeilings,
 } from '../scripts/sfx/sfx_gain_ceiling.mjs';
 
@@ -127,7 +137,7 @@ describe('skip-unchanged fingerprint cache', () => {
       expect(stored.buff_apply.tracks).toEqual([
         {
           filename: 'buff_apply.mp3',
-          mtimeMs: expect.any(Number),
+          sha256: expect.any(String),
           size: expect.any(Number),
           peakDb: expect.any(Number),
         },
@@ -182,7 +192,7 @@ describe('skip-unchanged fingerprint cache', () => {
     }
   });
 
-  it('re-measures a track whose mtime is untouched but whose byte size changed', () => {
+  it('re-measures a track whose mtime is untouched but whose content changed', () => {
     const root = mkdtempSync(join(tmpdir(), 'wocc-gain-ceiling-'));
     try {
       const sfxDir = join(root, 'public/audio/sfx');
@@ -201,6 +211,78 @@ describe('skip-unchanged fingerprint cache', () => {
       const records = computeSfxGainCeilingRecords(root, ffmpegPath as string);
       expect(records.buff_apply.ceilingDb).toBe(0);
       expect(records.buff_apply.ceilingDb).not.toBe(first.ceilings.buff_apply);
+    } finally {
+      rmSync(root, { force: true, recursive: true });
+    }
+  });
+
+  it('treats a pre-fingerprint flat-number record as nothing cached and re-measures every track', () => {
+    const root = mkdtempSync(join(tmpdir(), 'wocc-gain-ceiling-'));
+    try {
+      const sfxDir = join(root, 'public/audio/sfx');
+      mkdirSync(sfxDir, { recursive: true });
+      mkdirSync(join(root, 'scripts/sfx'), { recursive: true });
+      synthesizeTone(join(sfxDir, 'buff_apply.mp3'), 0.5);
+
+      // Old (pre-fingerprint) generated shape: a bare number per key, not a
+      // { ceilingDb, tracks } record.
+      writeFileSync(
+        join(root, SFX_GAIN_CEILING_PATH),
+        JSON.stringify({ buff_apply: 3, foot_grass: 1.5 }),
+      );
+
+      const records = computeSfxGainCeilingRecords(root, ffmpegPath as string);
+      expect(records.buff_apply.ceilingDb).toBeGreaterThanOrEqual(3);
+      expect(records.buff_apply.ceilingDb).toBeLessThan(7);
+      expect(records.buff_apply.tracks).toEqual([
+        {
+          filename: 'buff_apply.mp3',
+          sha256: expect.any(String),
+          size: expect.any(Number),
+          peakDb: expect.any(Number),
+        },
+      ]);
+    } finally {
+      rmSync(root, { force: true, recursive: true });
+    }
+  });
+
+  it('readSfxGainCeilings reads a pre-fingerprint flat-number file directly', () => {
+    const root = mkdtempSync(join(tmpdir(), 'wocc-gain-ceiling-'));
+    try {
+      mkdirSync(join(root, 'scripts/sfx'), { recursive: true });
+      writeFileSync(join(root, SFX_GAIN_CEILING_PATH), JSON.stringify({ buff_apply: 3 }));
+
+      expect(readSfxGainCeilings(root)).toEqual({ buff_apply: 3 });
+    } finally {
+      rmSync(root, { force: true, recursive: true });
+    }
+  });
+
+  it('readSfxGainCeilings throws on a corrupt ceilings file instead of silently dropping every key', () => {
+    const root = mkdtempSync(join(tmpdir(), 'wocc-gain-ceiling-'));
+    try {
+      mkdirSync(join(root, 'scripts/sfx'), { recursive: true });
+      writeFileSync(join(root, SFX_GAIN_CEILING_PATH), '{ not valid json');
+
+      expect(() => readSfxGainCeilings(root)).toThrow();
+    } finally {
+      rmSync(root, { force: true, recursive: true });
+    }
+  });
+
+  it('a corrupt ceilings file is treated as nothing cached by the compute path, never a hard failure', () => {
+    const root = mkdtempSync(join(tmpdir(), 'wocc-gain-ceiling-'));
+    try {
+      const sfxDir = join(root, 'public/audio/sfx');
+      mkdirSync(sfxDir, { recursive: true });
+      mkdirSync(join(root, 'scripts/sfx'), { recursive: true });
+      synthesizeTone(join(sfxDir, 'buff_apply.mp3'), 0.5);
+      writeFileSync(join(root, SFX_GAIN_CEILING_PATH), '{ not valid json');
+
+      const ceilings = computeSfxGainCeilings(root, ffmpegPath as string);
+      expect(ceilings.buff_apply).toBeGreaterThanOrEqual(3);
+      expect(ceilings.buff_apply).toBeLessThan(7);
     } finally {
       rmSync(root, { force: true, recursive: true });
     }

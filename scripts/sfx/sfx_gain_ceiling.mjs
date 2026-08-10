@@ -21,12 +21,17 @@
 // measureSfxTruePeakDb spawns ffmpeg, so re-running this over the whole
 // custom-key catalog (every `sfx:manifest` build) is one subprocess per take
 // even when nobody touched the audio since the last run. The generated JSON
-// therefore also carries each take's fingerprint (mtime + byte size) and its
-// measured peak alongside the key's ceiling: a track whose fingerprint still
-// matches the stored one reuses the stored peak instead of re-invoking
-// ffmpeg, and only a changed (or new) take pays the measurement cost.
+// therefore also carries each take's fingerprint (a sha256 content hash plus
+// byte size) and its measured peak alongside the key's ceiling: a track whose
+// fingerprint still matches the stored one reuses the stored peak instead of
+// re-invoking ffmpeg, and only a changed (or new) take pays the measurement
+// cost. The fingerprint is content-based, not mtime-based, on purpose: git
+// does not preserve mtimes, so a fresh clone, a new worktree, or a CI
+// checkout would otherwise miss the cache on every single track and rewrite
+// this file with machine-local timestamps on the first build.
 
-import { existsSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { measureSfxTruePeakDb } from './conform_audio.mjs';
 import { discoverSfxTracks } from './sfx_manifest_builder.mjs';
@@ -39,7 +44,10 @@ export const SFX_GAIN_CEILING_PATH = 'scripts/sfx/sfx_gain_ceiling.generated.jso
 // enforcement already uses (see conform_audio.mjs's LONG_FORM_LIMIT_DB).
 const SAFETY_FLOOR_DBFS = -1;
 
-function readStoredGainCeilingRecords(repoRoot) {
+// Tolerant read used only by the cache lookup: a corrupt or missing file just
+// means "nothing cached", never a hard failure (computeSfxGainCeilingRecords
+// re-measures everything from scratch in that case).
+function readCachedGainCeilingRecords(repoRoot) {
   const path = join(repoRoot, SFX_GAIN_CEILING_PATH);
   if (!existsSync(path)) return {};
   try {
@@ -49,16 +57,26 @@ function readStoredGainCeilingRecords(repoRoot) {
   }
 }
 
-// mtime + size is cheap to stat and good enough to detect "this take was
-// re-recorded, re-conformed, or replaced since we last measured it": either
-// one moving forces a re-measure, both matching skips the ffmpeg subprocess.
+// Strict read used by consumers (the playback_profile.mjs validator): a
+// present-but-corrupt ceilings file must fail loudly here, not silently drop
+// every custom key to a flat 0dB ceiling and fail later somewhere else with a
+// confusing "resolved gain out of range" error.
+function readGainCeilingRecords(repoRoot) {
+  const path = join(repoRoot, SFX_GAIN_CEILING_PATH);
+  if (!existsSync(path)) return {};
+  return JSON.parse(readFileSync(path, 'utf8'));
+}
+
+// A sha256 content hash is a true fingerprint: it survives a fresh clone, a
+// new worktree, or a CI checkout, none of which preserve mtime. Byte size
+// rides along purely as a cheap sanity check.
 function trackFingerprint(path) {
-  const stat = statSync(path);
-  return { mtimeMs: stat.mtimeMs, size: stat.size };
+  const bytes = readFileSync(path);
+  return { sha256: createHash('sha256').update(bytes).digest('hex'), size: bytes.length };
 }
 
 function fingerprintsMatch(a, b) {
-  return !!a && !!b && a.mtimeMs === b.mtimeMs && a.size === b.size;
+  return !!a && !!b && a.sha256 === b.sha256 && a.size === b.size;
 }
 
 // Older (pre-fingerprint) generated files stored a bare number per key; treat
@@ -80,7 +98,7 @@ export function computeSfxGainCeilingRecords(repoRoot, ffmpegPath) {
   const customKeys = new Set(
     SFX.filter((entry) => entry.custom === true).map((entry) => entry.key),
   );
-  const stored = readStoredGainCeilingRecords(repoRoot);
+  const stored = readCachedGainCeilingRecords(repoRoot);
   const records = {};
   for (const key of [...customKeys].sort()) {
     const source = discovered.entries[key];
@@ -114,7 +132,7 @@ export function computeSfxGainCeilings(repoRoot, ffmpegPath) {
 }
 
 export function readSfxGainCeilings(repoRoot) {
-  const records = readStoredGainCeilingRecords(repoRoot);
+  const records = readGainCeilingRecords(repoRoot);
   const ceilings = {};
   for (const [key, value] of Object.entries(records)) {
     ceilings[key] = typeof value === 'number' ? value : value?.ceilingDb;
