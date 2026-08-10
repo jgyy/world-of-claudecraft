@@ -60,30 +60,36 @@ function mediaFiles() {
 
 /**
  * sha256 of one media file, reused from the persisted cache when the file's
- * mtime and size have not changed since it was last hashed. `cache` is
- * mutated in place with a fresh entry on a miss so the caller can persist it
- * once after the whole walk.
+ * mtime and size have not changed since it was last hashed. The entry (fresh
+ * or freshly computed) is written into `next`, a cache the caller is
+ * building from scratch, so a file that no longer exists on disk (deleted
+ * or renamed) never gets copied forward and the cache cannot grow without
+ * bound.
  */
-function fileSha256(file, rel, cache) {
+function fileSha256(file, rel, cache, next) {
   const stat = statSync(file);
   const cached = cache[rel];
-  if (isCacheEntryFresh(cached, stat)) return cached.sha256;
+  if (isCacheEntryFresh(cached, stat)) {
+    next[rel] = cached;
+    return cached.sha256;
+  }
   const sha256 = createHash('sha256').update(readFileSync(file)).digest('hex');
-  cache[rel] = buildCacheEntry(stat, sha256);
+  next[rel] = buildCacheEntry(stat, sha256);
   return sha256;
 }
 
 function manifestEntries() {
   const cache = loadHashCache(hashCachePath);
+  const next = {};
   const entries = {};
   for (const file of mediaFiles()) {
     const rel = path.relative(publicDir, file).split(path.sep).join('/');
     const parsed = path.posix.parse(rel);
-    const hash = fileSha256(file, rel, cache).slice(0, HASH_LEN);
+    const hash = fileSha256(file, rel, cache, next).slice(0, HASH_LEN);
     const hashed = path.posix.join('/media', parsed.dir, `${parsed.name}.${hash}${parsed.ext}`);
     entries[rel] = hashed;
   }
-  saveHashCache(hashCachePath, cache);
+  saveHashCache(hashCachePath, next);
   return entries;
 }
 
