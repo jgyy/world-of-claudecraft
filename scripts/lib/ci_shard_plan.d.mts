@@ -16,8 +16,6 @@ export function buildFloor(opts: {
   changedTestFiles: string[];
 }): { floor: string[]; missingGuards: string[] };
 
-export function resolveLocalBin(name: string): string;
-
 export interface ShardLeg {
   name: string;
   cmd: string;
@@ -32,6 +30,7 @@ export function buildShardPlan(opts: {
   shard: { index: number; total: number };
   workers: number;
   exists: (p: string) => boolean;
+  repoRoot: string;
 }): {
   mode: 'full' | 'selective';
   reason: string;
