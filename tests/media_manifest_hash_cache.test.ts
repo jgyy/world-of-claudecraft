@@ -205,4 +205,23 @@ describe('build_media_manifest.mjs generate (cache wiring)', () => {
 
     expect(secondManifest).not.toBe(firstManifest);
   });
+
+  it('drops entries for assets no longer on disk instead of keeping them forever', () => {
+    dir = mkdtempSync(path.join(tmpdir(), 'wocc-media-manifest-gen-'));
+    mkdirSync(path.join(dir, 'public/models'), { recursive: true });
+    writeFileSync(path.join(dir, 'public/models/crate.glb'), 'fixture content v1');
+    writeFileSync(path.join(dir, 'public/models/barrel.glb'), 'fixture content v2');
+
+    const first = runGenerate(dir);
+    expect(first.status, first.stderr).toBe(0);
+    const firstCache = JSON.parse(readFileSync(cachePathFor(dir), 'utf8'));
+    expect(Object.keys(firstCache).sort()).toEqual(['models/barrel.glb', 'models/crate.glb']);
+
+    rmSync(path.join(dir, 'public/models/barrel.glb'));
+    const second = runGenerate(dir);
+    expect(second.status, second.stderr).toBe(0);
+
+    const secondCache = JSON.parse(readFileSync(cachePathFor(dir), 'utf8'));
+    expect(Object.keys(secondCache)).toEqual(['models/crate.glb']);
+  });
 });
