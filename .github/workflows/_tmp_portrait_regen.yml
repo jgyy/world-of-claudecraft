@@ -8,6 +8,9 @@ name: Temp portrait fingerprint regen
 # Delete this file once the artifact has been fetched and applied.
 
 on:
+  push:
+    branches:
+      - feature/veil-wraith-courser-mount
   workflow_dispatch:
 
 permissions:
