@@ -1172,9 +1172,10 @@ describe('the completionist feat', () => {
   });
 
   it('stays reachable: the unearnable Reliquary capstone is OUT, its earnable ladder is IN', () => {
-    // col_reliquary_complete is unearnable while three catalog slots stay
+    // col_reliquary_complete is unearnable while five catalog slots stay
     // owner-pended (masterwork:engineering, reins_drakemaw_raptor,
-    // reins_terrorspark_groundshaker); as a Book requirement it would
+    // reins_terrorspark_groundshaker, reins_veil_wraith_courser,
+    // reins_grimtusk_boar); as a Book requirement it would
     // dead-end The Whole Book for every player, the exact failure the
     // retroFallbackGrants stranded-heal doctrine names. The feat flag is the
     // exclusion mechanism; this arm reds the moment anyone drops it. The
