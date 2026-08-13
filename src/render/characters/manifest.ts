@@ -1698,6 +1698,11 @@ export const VISUALS: Record<string, VisualDef> = {
     url: `${MOUNTS_DIR}/veil_wraith_courser.glb`,
     height: 3.9,
     clips: MOUNT_RIGGED,
+    // The baked rig rests facing -z, unlike every other mount's native +z
+    // (see the fwd: 'z-' override in scripts/render_mount_icons.mjs); yaw
+    // swings it onto the game's +z-forward convention so a ridden courser
+    // faces its direction of travel instead of the rider's back.
+    yaw: Math.PI,
     walkRef: 2.6,
     runRef: 9,
     lazyPreload: true,

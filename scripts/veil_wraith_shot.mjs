@@ -16,14 +16,46 @@ const browser = await puppeteer.launch({
   executablePath: EDGE,
   headless: 'new',
   args: ['--window-size=1600,900', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
-  defaultViewport: { width: 1600, height: 900 },
+  defaultViewport: { width: 1600, height: 900, deviceScaleFactor: 2 },
 });
 const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
 
+// Content showcase, not a graphics-tier comparison, so this rig deliberately
+// departs from the lowest-preset capture default: seed the top canned preset
+// (6, Insane; see src/ui/options_view.ts) before boot for the sharpest look.
+await page.evaluateOnNewDocument(() => {
+  try {
+    localStorage.setItem('woc_settings', JSON.stringify({ graphicsPreset: 6 }));
+  } catch {
+    /* ignore */
+  }
+});
+
 await page.goto(URL, { waitUntil: 'load', timeout: 90000 });
 const booted = await enterOfflineGame(page, { charClass: 'priest', charName: 'Vesper' });
 if (!booted) throw new Error('world did not boot');
+
+// Dismiss the boot-time software-rendering notice (src/ui/gpu_notice_toast.ts,
+// .gpu-notice-dismiss): expected under swiftshader and not part of the
+// capture's content. NOT the same toast as perf_nudge_toast.ts (that one
+// only checks every 30s, src/game/perf_nudge.ts, so it never fires in this
+// script's runtime); poll briefly since it mounts a beat after boot.
+async function dismissPerfNudgeIfShown() {
+  for (let i = 0; i < 8; i++) {
+    const clicked = await page
+      .evaluate(() => {
+        const btn = document.querySelector('.gpu-notice-dismiss');
+        if (!btn) return false;
+        btn.click();
+        return true;
+      })
+      .catch(() => false);
+    if (clicked) return;
+    await sleep(300);
+  }
+}
+await dismissPerfNudgeIfShown();
 
 await page.evaluate(() => {
   const sim = window.__game.sim;
@@ -59,6 +91,7 @@ for (let i = 0; i < 4; i++) {
   await sleep(50);
 }
 await sleep(400);
+await dismissPerfNudgeIfShown();
 
 // Idle stance shot.
 await page.screenshot({ path: `${OUT_DIR}/veil-wraith-courser-idle.png` });
@@ -67,6 +100,7 @@ console.log('idle:', `${OUT_DIR}/veil-wraith-courser-idle.png`);
 // A short run so the shot shows the gait mid-stride.
 await page.keyboard.down('w');
 await sleep(1200);
+await dismissPerfNudgeIfShown();
 await page.screenshot({ path: `${OUT_DIR}/veil-wraith-courser-run.png` });
 await page.keyboard.up('w');
 console.log('run:', `${OUT_DIR}/veil-wraith-courser-run.png`);
