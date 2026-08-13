@@ -358,6 +358,7 @@ import { buildMailboxPillar } from './mailbox';
 import { buildMobNightGlow, type MobNightGlowView } from './mob_night_glow';
 import { buildMotes, type MotesView } from './motes';
 import { MountBeacon } from './mount_beacon';
+import { applyMountFx } from './mount_fx';
 import { mountBobY, mountVisualSpec } from './mount_visuals';
 import { NameplatePainter } from './nameplate_painter';
 import {
@@ -11973,18 +11974,10 @@ export class Renderer {
           const bob = mountBobY(mountSpec, this.time, moving);
           v.mountVisual.root.position.y = bob;
           v.visual.root.position.y = v.mountLift + bob;
-          // ambient mount particles: the snail paints its slime path while
-          // gliding, the hover cycle streams aether exhaust off its tail,
-          // the boar kicks up hoof dust, the courser trails holy/shadow wisps
-          if (mountSpec.fx === 'slime') {
-            if (moving) this.vfx.mountSlimeTrail(v.group.position, dt);
-          } else if (mountSpec.fx === 'exhaust') {
-            this.vfx.mountExhaust(v.group.position, facing, dt, moving);
-          } else if (mountSpec.fx === 'dust') {
-            if (moving) this.vfx.mountDustTrail(v.group.position, dt, st.running);
-          } else if (mountSpec.fx === 'wisp') {
-            if (moving) this.vfx.mountWispTrail(v.group.position, dt);
-          }
+          // ambient mount particles (src/render/mount_fx.ts): the snail
+          // paints its slime path, the hover cycle streams exhaust, the boar
+          // kicks up hoof dust, the courser trails holy/shadow wisps
+          applyMountFx(this.vfx, mountSpec.fx, v.group.position, facing, dt, moving, st.running);
         } else {
           v.mountVisual.advanceOffscreen(dt);
         }

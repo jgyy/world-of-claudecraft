@@ -1709,18 +1709,29 @@ export const VISUALS: Record<string, VisualDef> = {
   },
   // Grimtusk the Ironhide Boar: Tripo quadruped rig with its retarget
   // discarded and Idle/Walk/Run/Death baked locally by
-  // scripts/bake_mount_gaits.mjs like the bear/toad/griffin/raptor, but with
-  // two real firsts for this catalog: Walk and Run are DISTINCT authored
-  // cycles (not one clip time-scaled to cover both speeds, like every other
-  // baked mount here), and its tail bone (bone_21, 110 skinned vertices) gets
-  // a genuine wag: no other mount's rig carries a tail joint at all.
-  // walkRef/runRef are measured off the baked clip's foot excursion.
+  // scripts/bake_mount_gaits.mjs, same recipe as the bear/toad/griffin/raptor
+  // (every baked mount there already gets distinct Walk/Run timing from the
+  // shared GAITS table, so that part is not new). The real contrast is with
+  // the Veil-Wraith Courser above: its Run clip is literally Walk's keyframe
+  // data replayed at a different timeScale (an artifact of keeping its raw
+  // Tripo retarget), where the boar's Walk and Run are two separately
+  // authored cycles. Its tail bone (bone_21, 110 skinned vertices) gets a
+  // genuine wag: no other TRIPO-BAKED rig in this catalog has a tail joint
+  // (valorsteed's authored-clip rig does, but that is a different asset
+  // pipeline entirely).
+  // runRef is set to the RIDDEN speed (RUN_SPEED 7 x +80% = 12.6), same
+  // choice drakemaw_raptor makes above and for the same reason: a measured
+  // foot-match runRef (9, matching the herd default) gives timeScale 1.4 and
+  // a ~3.3 strides/sec cadence, faster than the 2.96/sec the raptor's own
+  // comment already rejects as "badly sped up" for a heavy-bodied mount. This
+  // way the Run clip plays at its authored 1/0.42s cadence with some
+  // foot-slide as the tradeoff, which reads right for a lumbering charge.
   mount_grimtusk_boar: {
     url: `${MOUNTS_DIR}/grimtusk_boar.glb`,
     height: 2.6,
     clips: MOUNT_RIGGED,
     walkRef: 3.0,
-    runRef: 9,
+    runRef: 12.6,
     lazyPreload: true,
   },
   mount_drakemaw_raptor: {

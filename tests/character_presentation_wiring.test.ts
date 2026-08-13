@@ -7,6 +7,7 @@ const characterVisual = readFileSync(
   'utf8',
 );
 const main = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8');
+const mountFx = readFileSync(new URL('../src/render/mount_fx.ts', import.meta.url), 'utf8');
 
 describe('character presentation sleep wiring', () => {
   it('routes hidden cosmetic rigs through bounded off-screen advancement', () => {
@@ -59,12 +60,25 @@ describe('character presentation sleep wiring', () => {
 
     const mountBlock = renderer.slice(mountStart, abilityStart);
     expect(mountBlock).toContain('if (runCharacterPresentation) {');
-    expect(mountBlock).toContain('this.vfx.mountSlimeTrail');
-    expect(mountBlock).toContain('this.vfx.mountExhaust');
+    // The four ambient mount particle kinds are dispatched via
+    // src/render/mount_fx.ts (extracted so renderer.ts, a monolith-budget
+    // coordinator, does not grow a branch per fx kind); pin the call site
+    // here and the exhaustive dispatch itself below.
+    expect(mountBlock).toContain('applyMountFx(this.vfx, mountSpec.fx,');
     expect(renderer.slice(abilityStart)).toContain(
       'this.abilityVfx.syncEntity(e, runCharacterPresentation);',
     );
     expect(renderer.slice(abilityStart)).toContain('if (runCharacterPresentation) {');
+  });
+
+  it('exhaustively dispatches every ambient mount fx kind (src/render/mount_fx.ts)', () => {
+    expect(mountFx).toContain('vfx.mountSlimeTrail');
+    expect(mountFx).toContain('vfx.mountExhaust');
+    expect(mountFx).toContain('vfx.mountDustTrail');
+    expect(mountFx).toContain('vfx.mountWispTrail');
+    // A `never` default is what makes a fifth MountVisualSpec.fx kind fail
+    // tsc here instead of silently rendering nothing.
+    expect(mountFx).toContain('const _exhaustive: never = fx;');
   });
 });
 

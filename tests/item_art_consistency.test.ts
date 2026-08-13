@@ -333,8 +333,8 @@ describe('item-art consistency accepted-art provenance', () => {
       },
       {
         path: `${evidenceDir}/final-item-art-audit-verdict.json`,
-        acceptedSha256: '603bd7b8eb99eb6a9f4b13a844e7453c66cd701b09c2122ae4afe17f5f4d35c2',
-        acceptedBytes: 110_676,
+        acceptedSha256: 'a6bbc8371c1dfd817c81a33fb4be6a0eb66038fb685a06c34874eb64e0ea605d',
+        acceptedBytes: 111_649,
       },
     ]);
     for (const evidence of [...value.sourceEvidence, ...value.generationReports]) {
@@ -449,9 +449,9 @@ describe('item-art consistency accepted-art provenance', () => {
     expect(readme).toContain('node scripts/item_art_audit.mjs\n');
     expect(readme).toContain('node scripts/item_art_audit.mjs --refresh-verdict');
     const verdictBytes = readFileSync(path.join(repoRoot, verdictPath));
-    expect(verdictBytes.length).toBe(110_676);
+    expect(verdictBytes.length).toBe(111_649);
     expect(sha256(verdictBytes)).toBe(
-      '603bd7b8eb99eb6a9f4b13a844e7453c66cd701b09c2122ae4afe17f5f4d35c2',
+      'a6bbc8371c1dfd817c81a33fb4be6a0eb66038fb685a06c34874eb64e0ea605d',
     );
     const verdict = JSON.parse(verdictBytes.toString('utf8')) as FinalAuditVerdict;
 
@@ -522,7 +522,7 @@ describe('item-art consistency accepted-art provenance', () => {
       rejectCount: 0,
       reject: [],
       summary:
-        'All 824 shipping item-art files pass the visual contract: 817 reviewed in the 2026-08-09 campaign (documented retries included), plus the five class-overhaul integration additions owner-reviewed and passed on 2026-08-10, plus the Veil-Wraith Courser and Grimtusk the Ironhide Boar mount reins icons reviewed and passed on 2026-08-13.',
+        'All 824 shipping item-art files pass the MACHINE-CHECKABLE contract (dimensions, format, opacity, size, uniqueness; see machineChecks below): 817 reviewed in the 2026-08-09 campaign (documented retries included), plus the five class-overhaul integration additions owner-reviewed and passed on 2026-08-10, plus the Veil-Wraith Courser and Grimtusk the Ironhide Boar mount reins icons added on 2026-08-13. Of those two, only the Veil-Wraith Courser icon also satisfies the full woc-item-icon-v1 STYLE contract (repainted 2026-08-13, see the correction entry below): reins_grimtusk_boar is a raw 3D camera render, a known, deliberately unresolved style-contract gap tracked in public/ui/items/mapping.json (batchId grimtusk-boar-mount-2026-08-13), not a passed style review. passIds below is a shipping-catalog membership list (every current owner id, all machine-check clean), not a claim that every id also clears the style contract.',
     });
     expect(verdict.visualVerdict.passIds).toEqual(currentIds);
     expect(verdict.nonVisualContentWatch).toEqual([

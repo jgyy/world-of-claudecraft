@@ -171,11 +171,20 @@ describe('procedural bob math', () => {
     expect(mountBobY(spec, 0.5, true)).toBe(0);
   });
 
-  it('pins the ambient particle effects: snail slime, hover-cycle exhaust', () => {
+  it('pins the ambient particle effects: snail slime, hover-cycle exhaust, boar dust, courser wisp', () => {
     expect(MOUNT_VISUAL_SPECS.stalkglider_snail.fx).toBe('slime');
     expect(MOUNT_VISUAL_SPECS.aether_hover_cycle.fx).toBe('exhaust');
+    expect(MOUNT_VISUAL_SPECS.grimtusk_boar.fx).toBe('dust');
+    expect(MOUNT_VISUAL_SPECS.veil_wraith_courser.fx).toBe('wisp');
     expect(MOUNT_VISUAL_SPECS.valorsteed.fx).toBeNull();
     expect(MOUNT_VISUAL_SPECS.stormfeather_griffin.fx).toBeNull();
     expect(MOUNT_VISUAL_SPECS.terrorspark_groundshaker.fx).toBeNull();
+  });
+
+  it('every mount fx value is one of the known ambient kinds', () => {
+    const KNOWN_FX = new Set(['slime', 'exhaust', 'dust', 'wisp', null]);
+    for (const [key, spec] of Object.entries(MOUNT_VISUAL_SPECS)) {
+      expect(KNOWN_FX.has(spec.fx), `${key}.fx = ${String(spec.fx)}`).toBe(true);
+    }
   });
 });
