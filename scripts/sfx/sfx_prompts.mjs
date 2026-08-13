@@ -139,6 +139,13 @@ export const SFX = [
     custom: true,
   },
   {
+    // The Veil-Wraith Courser: the valorsteed gallop donor (the closest body
+    // plan, a four-legged charger), pitched up slightly in sfx_speed_map.json
+    // for a lighter, less earthbound stride.
+    key: 'mount_run_veil_wraith_courser',
+    custom: true,
+  },
+  {
     key: 'mount_run_terrorspark_groundshaker_stop',
     custom: true,
   },

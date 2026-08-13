@@ -103,8 +103,8 @@ function ride(sim: Sim, pid: number, key: string): void {
 }
 
 describe('mount catalog', () => {
-  it('has exactly nine mounts with the horse first and the developer tank last', () => {
-    expect(MOUNT_KEYS).toHaveLength(9);
+  it('has exactly ten mounts with the horse first and the developer tank last', () => {
+    expect(MOUNT_KEYS).toHaveLength(10);
     expect(MOUNT_KEYS[0]).toBe('valorsteed');
     expect(MOUNT_KEYS.at(-1)).toBe('terrorspark_groundshaker');
     expect(DEFAULT_MOUNT).toBe('valorsteed');
@@ -122,6 +122,8 @@ describe('mount catalog', () => {
     expect(spec('stalkglider_snail')).toEqual(['rare', 0.75]);
     expect(spec('aether_hover_cycle')).toEqual(['epic', 0.8]);
     expect(spec('thunderstrut_gobbler')).toEqual(['epic', 0.8]);
+    expect(spec('drakemaw_raptor')).toEqual(['epic', 0.8]);
+    expect(spec('veil_wraith_courser')).toEqual(['epic', 0.8]);
     expect(spec('terrorspark_groundshaker')).toEqual(['epic', 0.8]);
     // The level field is GONE, not merely unused: it never fired (reins carry no
     // requiredLevel and every source is level-20 content) and leaving it would
@@ -243,7 +245,13 @@ describe('mount reins items (the collection: owning the item is owning the mount
     // acquisition path at all. Listed EXPLICITLY so a sourceless mount is a
     // decision and never an accident: when the world boss lands, delete the entry
     // and the rarity-derived rule below takes back over.
-    const NO_SOURCE_YET: readonly string[] = ['reins_drakemaw_raptor'];
+    // The Veil-Wraith Courser is the same kind of decision, for a different
+    // reason: it is earmarked for the Claudium store once mounts are wired into
+    // that category (docs/claudium-store.md), not a gameplay drop.
+    const NO_SOURCE_YET: readonly string[] = [
+      'reins_drakemaw_raptor',
+      'reins_veil_wraith_courser',
+    ];
     const FIVE_MAN_SOURCES: Record<string, readonly string[]> = {
       reins_stormfeather_griffin: ['morthen'],
       reins_shadowjump_toad: ['vael_the_mistcaller'],

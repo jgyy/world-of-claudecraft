@@ -1687,6 +1687,21 @@ export const VISUALS: Record<string, VisualDef> = {
   // the saddle and lurched it every stride; the baker authors rotation-only
   // keys plus a root Y bob, so that cannot recur. walkRef is MEASURED off the
   // baked clip (tmp/dragonkin_gait_measure.mjs): walk 3.02 yd/s.
+  // The Veil-Wraith Courser: earmarked for the Claudium store, currently no
+  // player-facing acquisition path (content/mounts.ts). Tripo quadruped rig,
+  // gait-baked by its own Walk clip (front-left/right and rear-left/right
+  // limb chains each carry real per-frame rotation, unlike the sparse
+  // near-static quadruped preset the other Tripo mounts started from); Idle
+  // is a single held frame from Walk rather than a looping gait, so a parked
+  // mount stands still instead of visibly walking in place.
+  mount_veil_wraith_courser: {
+    url: `${MOUNTS_DIR}/veil_wraith_courser.glb`,
+    height: 3.9,
+    clips: MOUNT_RIGGED,
+    walkRef: 2.6,
+    runRef: 9,
+    lazyPreload: true,
+  },
   mount_drakemaw_raptor: {
     url: `${MOUNTS_DIR}/drakemaw_raptor.glb`,
     height: 3.4,

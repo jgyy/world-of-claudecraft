@@ -6035,6 +6035,17 @@
     "marrowpoint",
     "rimefang"
    ]
+  },
+  {
+   "batchId": "veil-wraith-courser-mount-2026-08-13",
+   "source": "Tripo API 3D asset pipeline (scripts/asset_pipeline/), screenshot-rendered from the shipped GLB via scripts/render_mount_icons.mjs",
+   "owner": "World of ClaudeCraft",
+   "license": "World of ClaudeCraft project-generated art, project asset, rights reserved",
+   "styleReference": "Not a painted icon: the source is a real-time camera render of the shipped 3D model (public/models/mounts/veil_wraith_courser.glb) at a close three-quarter head framing, matching the existing mount reins icon set's own camera-render convention (see the other reins_* entries and scripts/render_mount_icons.mjs JOBS list). No separate reference images.",
+   "commonPrompt": "N/A: produced by camera framing parameters (headFwd/headUp/fill/yaw/pitch in scripts/render_mount_icons.mjs), not a text-to-image prompt.",
+   "itemIds": [
+    "reins_veil_wraith_courser"
+   ]
   }
  ]
 }

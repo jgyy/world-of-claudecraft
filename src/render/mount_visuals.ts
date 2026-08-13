@@ -81,6 +81,10 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // The Drakemaw Raptor: authored saddle sits over the hips behind the neck
   // spines (hence the slight rear shift), gait-rigged Walk/Run cycles.
   drakemaw_raptor: spec('mount_drakemaw_raptor', 2.35, true, undefined, -0.1),
+  // The Veil-Wraith Courser: a hart-shaped body like the horse, saddle just
+  // behind the neck over the withers (small forward shift), real Idle/Walk/
+  // Run clips from its own Walk animation (see manifest.ts).
+  veil_wraith_courser: spec('mount_veil_wraith_courser', 2.6, true, undefined, 0.1),
 };
 
 /** Spec for an entity's active mountKey, or null when dismounted/unknown. */

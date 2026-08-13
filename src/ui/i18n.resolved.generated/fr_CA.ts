@@ -1077,6 +1077,7 @@ export const fr_CA: EnTranslations = {
       "name_thunderstrut_gobbler": "Pavane-Tonnerre, le Grand Dindon",
       "name_terrorspark_groundshaker": "Terrétincelle, l’Ébranleur de sol",
       "name_drakemaw_raptor": "Raptor du Drakemaw",
+      "name_veil_wraith_courser": "Veil-Wraith Courser",
       "desc_valorsteed": "Un destrier robuste au pied sûr qui accroît la vitesse de déplacement.",
       "desc_grag_bear": "Un ours robuste au pied sûr qui accroît la vitesse de déplacement.",
       "desc_stalkglider_snail": "Un escargot vaillant à combustion lente qui accroît la vitesse de déplacement.",
@@ -1085,7 +1086,8 @@ export const fr_CA: EnTranslations = {
       "desc_stormfeather_griffin": "Un griffon d’orage majestueux qui arpente le sol sur des serres runiques, ailes repliées.",
       "desc_thunderstrut_gobbler": "Un dindon colossal né de l’orage qui descend du Pic Éveillé en se pavanant, la queue déployée comme un front d’orage.",
       "desc_terrorspark_groundshaker": "Un engin blindé compact doté de chenilles lourdes, d’un canon de gros calibre et d’une selle conçue pour les pilotes intrépides.",
-      "desc_drakemaw_raptor": "Un raptor de couvée dressé à la selle, originaire de la Caldeira de Drakemaw : tout en muscles et en vitesse, encore empreint d'une légère odeur de cendre."
+      "desc_drakemaw_raptor": "Un raptor de couvée dressé à la selle, originaire de la Caldeira de Drakemaw : tout en muscles et en vitesse, encore empreint d'une légère odeur de cendre.",
+      "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Appuyez sur {key} pour monter le Valorsteed d'entraînement.",
@@ -12360,6 +12362,9 @@ export const fr_CA: EnTranslations = {
       },
       "reins_drakemaw_raptor": {
         "name": "Rênes du Raptor du Drakemaw"
+      },
+      "reins_veil_wraith_courser": {
+        "name": "Reins of the Veil-Wraith Courser"
       },
       "rimefang": {
         "name": "Croc de givre"

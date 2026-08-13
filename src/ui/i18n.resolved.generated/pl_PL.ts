@@ -1077,6 +1077,7 @@ export const pl_PL: EnTranslations = {
       "name_thunderstrut_gobbler": "Grzmotokroczek, Wielki Indyk",
       "name_terrorspark_groundshaker": "Groziskra, Wstrząsacz Ziemi",
       "name_drakemaw_raptor": "Raptor Smoczej Paszczy",
+      "name_veil_wraith_courser": "Veil-Wraith Courser",
       "desc_valorsteed": "Wytrzymały, pewny kroku rumak, który zapewnia zwiększoną prędkość podróżowania.",
       "desc_grag_bear": "Wytrzymały, pewny kroku niedźwiedź, który zapewnia zwiększoną prędkość podróżowania.",
       "desc_stalkglider_snail": "Krzepki, powoli, lecz niezmordowanie pełznący ślimak, który zapewnia zwiększoną prędkość podróżowania.",
@@ -1085,7 +1086,8 @@ export const pl_PL: EnTranslations = {
       "desc_stormfeather_griffin": "Dostojny gryf burzy, który skrada się po ziemi na szponach okutych runami, ze złożonymi skrzydłami.",
       "desc_thunderstrut_gobbler": "Kolosalny, wylęgły z burzy indyk, który dumnie kroczy z Przebudzonego Szczytu, z ogonem rozłożonym jak burzowa chmura.",
       "desc_terrorspark_groundshaker": "Zwarta opancerzona maszyna z ciężkimi gąsienicami, wielkokalibrowym działem i siodłem stworzonym dla nieustraszonych pilotów.",
-      "desc_drakemaw_raptor": "Ujeżdżony wylęgowy raptor z Kaldery Smoczej Paszczy: same ścięgna i pęd, wciąż pachnący z lekka popiołem."
+      "desc_drakemaw_raptor": "Ujeżdżony wylęgowy raptor z Kaldery Smoczej Paszczy: same ścięgna i pęd, wciąż pachnący z lekka popiołem.",
+      "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Naciśnij {key}, aby dosiąść treningowego Rumaka Męstwa.",
@@ -12360,6 +12362,9 @@ export const pl_PL: EnTranslations = {
       },
       "reins_drakemaw_raptor": {
         "name": "Wodze Raptora Smoczej Paszczy"
+      },
+      "reins_veil_wraith_courser": {
+        "name": "Reins of the Veil-Wraith Courser"
       },
       "rimefang": {
         "name": "Szronowy Kieł"

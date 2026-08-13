@@ -1,10 +1,14 @@
 // Render 3D face/front icons for the rideable mounts, for use as the 2D bag/tooltip
 // icons on their reins items (and the mount-picker cards). Mirrors the headless-Chrome +
-// swiftshader harness of scripts/render_weapon_icons.mjs and the transparent-WebP + blank
+// swiftshader harness of scripts/render_weapon_icons.mjs and the transparent-render + blank
 // alpha check of scripts/wiki/render_model_stills.mjs, but frames a front three-quarter
 // close-up of each mount's head from its own bounding box (see scripts/mount_icon_entry.js
-// for the framing rule). Output: public/ui/items/reins_<mount>.webp (128px, transparent),
-// wired into ITEM_IMAGE_IDS in src/ui/icons.ts and gated by tests/item_icons.test.ts.
+// for the framing rule). The render itself stays transparent (so the blank-frame alpha
+// check below has a signal), then gets flattened onto a near-black background before
+// encoding: every shipped item icon is opaque (tests/item_art_consistency.test.ts),
+// matching the dark-vignette look the other item art carries. Output:
+// public/ui/items/reins_<mount>.webp (128px, opaque), wired into ITEM_IMAGE_IDS in
+// src/ui/icons.ts and gated by tests/item_icons.test.ts.
 //
 // Self-contained (no dev server): the GLB bytes are passed to the page as base64, like the
 // weapon renderer. Run: `node scripts/render_mount_icons.mjs` (ONLY=valorsteed,grag_bear to
@@ -22,6 +26,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const mountsDir = path.join(root, 'public/models/mounts');
 const outDir = path.join(root, 'public/ui/items');
 const OUT_PX = 128; // matches the existing public/ui/items icon size (mapping.json iconSize)
+// The shipped item-icon opacity floor (tests/item_art_consistency.test.ts): a near-black
+// flatten, close to the dark vignette corners the painted item icons carry.
+const SHIP_BACKGROUND = { r: 12, g: 10, b: 10 };
 const debugDir = process.env.DEBUG_DIR || null;
 mkdirSync(outDir, { recursive: true });
 if (debugDir) mkdirSync(debugDir, { recursive: true });
@@ -85,6 +92,13 @@ const JOBS = [
     id: 'reins_drakemaw_raptor',
     cfg: { headFwd: 0.95, headUp: 0.82, fill: 0.55, yaw: 0.52, pitch: 0.14 },
   },
+  {
+    // The hart carries its antler crown high and well forward: anchor high
+    // and forward, wide enough that the antlers stay in frame.
+    file: 'veil_wraith_courser.glb',
+    id: 'reins_veil_wraith_courser',
+    cfg: { headFwd: 0.85, headUp: 0.45, fill: 0.38, yaw: 0.45, pitch: 0.14, fwd: 'z-' },
+  },
 ];
 
 const only = process.env.ONLY ? new Set(process.env.ONLY.split(',')) : null;
@@ -147,6 +161,7 @@ for (const job of JOBS) {
     }
     const webp = await sharp(png)
       .resize(OUT_PX, OUT_PX, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .flatten({ background: SHIP_BACKGROUND })
       .webp({ quality: 90, alphaQuality: 100, effort: 6 })
       .toBuffer();
     writeFileSync(path.join(outDir, `${job.id}.webp`), webp);

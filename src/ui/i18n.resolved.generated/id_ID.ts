@@ -1077,6 +1077,7 @@ export const id_ID: EnTranslations = {
       "name_thunderstrut_gobbler": "Thunderstrut Sang Kalkun Agung",
       "name_terrorspark_groundshaker": "Percik Teror, Pengguncang Bumi",
       "name_drakemaw_raptor": "Raptor Drakemaw",
+      "name_veil_wraith_courser": "Veil-Wraith Courser",
       "desc_valorsteed": "Kuda tunggangan tangguh berpijakan mantap yang memberikan kecepatan perjalanan tambahan.",
       "desc_grag_bear": "Beruang tangguh berpijakan mantap yang memberikan kecepatan perjalanan tambahan.",
       "desc_stalkglider_snail": "Siput ulet berenergi tahan lama yang memberikan kecepatan perjalanan tambahan.",
@@ -1085,7 +1086,8 @@ export const id_ID: EnTranslations = {
       "desc_stormfeather_griffin": "Griffin badai yang anggun, melangkah di tanah dengan cakar bersepatu rune, sayap terlipat rapat.",
       "desc_thunderstrut_gobbler": "Kalkun raksasa tetasan badai yang melenggak-lenggok turun dari Puncak yang Terjaga, ekornya terkembang bagai awan guntur.",
       "desc_terrorspark_groundshaker": "Mesin lapis baja ringkas dengan rantai roda berat, meriam berkaliber besar, dan pelana yang dibuat untuk pilot tanpa rasa takut.",
-      "desc_drakemaw_raptor": "Seekor raptor sarang dari Kaldera Drakemaw yang telah dijinakkan untuk ditunggangi, seluruhnya otot dan kecepatan, masih samar berbau abu."
+      "desc_drakemaw_raptor": "Seekor raptor sarang dari Kaldera Drakemaw yang telah dijinakkan untuk ditunggangi, seluruhnya otot dan kecepatan, masih samar berbau abu.",
+      "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Tekan {key} untuk menaiki Valorsteed latihan.",
@@ -12360,6 +12362,9 @@ export const id_ID: EnTranslations = {
       },
       "reins_drakemaw_raptor": {
         "name": "Tali Kekang Raptor Drakemaw"
+      },
+      "reins_veil_wraith_courser": {
+        "name": "Reins of the Veil-Wraith Courser"
       },
       "rimefang": {
         "name": "Taring Beku"

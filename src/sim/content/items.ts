@@ -414,6 +414,22 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     noDiscard: true,
     sellValue: 0,
   },
+  // The Veil-Wraith Courser: earmarked for the Claudium store once mounts are
+  // wired into that category (docs/claudium-store.md); it currently has NO
+  // player-facing acquisition path (see content/mounts.ts). Unbound like
+  // every player reins (the tradable-reins policy): only the dev tank stays
+  // soulbound, and while this has no acquisition path there is nothing to
+  // trade anyway.
+  reins_veil_wraith_courser: {
+    id: 'reins_veil_wraith_courser',
+    name: 'Reins of the Veil-Wraith Courser',
+    kind: 'mount',
+    mount: 'veil_wraith_courser',
+    quality: 'epic',
+    noVendorSell: true,
+    noDiscard: true,
+    sellValue: 0,
+  },
   mistveil_cord: {
     id: 'mistveil_cord',
     name: 'Mistveil Cord',

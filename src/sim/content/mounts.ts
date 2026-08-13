@@ -20,6 +20,7 @@ export type MountKey =
   | 'stormfeather_griffin'
   | 'thunderstrut_gobbler'
   | 'drakemaw_raptor'
+  | 'veil_wraith_courser'
   | 'terrorspark_groundshaker';
 
 export type MountRarity = 'common' | 'uncommon' | 'rare' | 'epic';
@@ -100,6 +101,16 @@ export const MOUNTS: Record<MountKey, MountDef> = {
   drakemaw_raptor: {
     key: 'drakemaw_raptor',
     name: 'Drakemaw Raptor',
+    rarity: 'epic',
+    moveSpeedPct: 0.8,
+  },
+  // The Veil-Wraith Courser: a spectral hart earmarked for the Claudium store
+  // once mounts are wired into that category (docs/claudium-store.md). It
+  // currently ships with no player-facing acquisition path, same as the
+  // Drakemaw Raptor above (see reins_veil_wraith_courser, content/items.ts).
+  veil_wraith_courser: {
+    key: 'veil_wraith_courser',
+    name: 'Veil-Wraith Courser',
     rarity: 'epic',
     moveSpeedPct: 0.8,
   },

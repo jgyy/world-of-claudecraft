@@ -6498,6 +6498,10 @@ export const GUIDE_RELIQUARY: GuideReliquaryPage[] = [
       },
       {
         "kind": "mount",
+        "name": "Veil-Wraith Courser"
+      },
+      {
+        "kind": "mount",
         "name": "Terrorspark Groundshaker"
       }
     ]

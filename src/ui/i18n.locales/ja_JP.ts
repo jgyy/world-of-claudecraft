@@ -8402,6 +8402,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_shadowjump_toad.name': '影跳びのカマカゲの手綱',
   'entities.items.reins_stormfeather_griffin.name': 'スカイリーチ・ストームフェザーの手綱',
   'entities.items.reins_drakemaw_raptor.name': '火口のラプトルの手綱',
+  'entities.items.reins_veil_wraith_courser.name': '帳の亡霊駿馬の手綱',
   'entities.items.reins_thunderstrut_gobbler.name': '大七面鳥サンダーストラットの手綱',
   'entities.mobs.drowned_cantor.name': '溺れた聖歌者',
   'entities.mobs.reedbound_acolyte.name': '葦縛りの信徒',
@@ -9609,6 +9610,9 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_shadowjump_toad': '影跳びのカマカゲ',
   'hudChrome.mounts.name_stormfeather_griffin': 'スカイリーチ・ストームフェザー',
   'hudChrome.mounts.name_drakemaw_raptor': '火口のラプトル',
+  'hudChrome.mounts.name_veil_wraith_courser': '帳の亡霊駿馬',
+  'hudChrome.mounts.desc_veil_wraith_courser':
+    '二つの世界を隔てる帳の狭間を歩む亡霊の牡鹿。一歩ごとに毛並みが神々しい光と影の霧へと移ろう。',
   'hudChrome.mounts.desc_drakemaw_raptor':
     '火口のカルデラで鞍慣らしされた巣育ちのラプトル。筋肉と疾走のかたまりで、いまなお灰の匂いをかすかに漂わせている。',
   'hudChrome.mounts.name_thunderstrut_gobbler': '大七面鳥サンダーストラット',

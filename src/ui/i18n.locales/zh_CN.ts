@@ -8046,6 +8046,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_shadowjump_toad.name': '影跃蟾蜍卡玛影的缰绳',
   'entities.items.reins_stormfeather_griffin.name': '凌天风暴之羽的缰绳',
   'entities.items.reins_drakemaw_raptor.name': '龙喉迅猛龙的缰绳',
+  'entities.items.reins_veil_wraith_courser.name': '帷幽灵驹的缰绳',
   'entities.items.reins_thunderstrut_gobbler.name': '雷霆阔步大火鸡的缰绳',
   'entities.mobs.drowned_cantor.name': '溺亡诵经者',
   'entities.mobs.reedbound_acolyte.name': '芦苇缚信徒',
@@ -9198,6 +9199,9 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_shadowjump_toad': '影跃蟾蜍卡玛影',
   'hudChrome.mounts.name_stormfeather_griffin': '凌天风暴之羽',
   'hudChrome.mounts.name_drakemaw_raptor': '龙喉迅猛龙',
+  'hudChrome.mounts.name_veil_wraith_courser': '帷幽灵驹',
+  'hudChrome.mounts.desc_veil_wraith_courser':
+    '一头行走于两界帷幕之间的幽灵牡鹿，周身光影随步伐在圣辉与暗影雾气间流转变幻。',
   'hudChrome.mounts.desc_drakemaw_raptor':
     '来自龙喉火山口的驯服巢生迅猛龙，浑身筋肉、疾若奔雷，身上仍带着淡淡的灰烬气味。',
   'hudChrome.mounts.name_thunderstrut_gobbler': '雷霆阔步大火鸡',
