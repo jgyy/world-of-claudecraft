@@ -22,11 +22,34 @@ const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
 
 // Content showcase, not a graphics-tier comparison, so this rig deliberately
-// departs from the lowest-preset capture default: seed the top canned preset
-// (6, Insane; see src/ui/options_view.ts) before boot for the sharpest look.
+// departs from the lowest-preset capture default: seed the Advanced expert
+// profile (5) with every sub-dial pinned to its max (src/game/settings.ts
+// SETTING_RANGES), which is strictly higher than the canned Insane preset
+// (shadowQuality/effectsQuality cap at 1 either way; the ladders here all sit
+// at their top rung). Mirrors the seeding MECHANISM scripts/climb_stall_shot.mjs
+// uses for its own graphics-focused capture.
 await page.evaluateOnNewDocument(() => {
   try {
-    localStorage.setItem('woc_settings', JSON.stringify({ graphicsPreset: 6 }));
+    localStorage.setItem(
+      'woc_settings',
+      JSON.stringify({
+        graphicsPreset: 5,
+        terrainDetail: 2,
+        foliageDensity: 2,
+        effectsQuality: 1,
+        shadowQuality: 1,
+        surfaceDetail: 2,
+        antiAliasing: 1,
+        bloomQuality: 1,
+        ambientOcclusion: 1,
+        viewDistance: 2,
+        waterQuality: 2,
+        characterDetail: 1,
+        dynamicLights: 1,
+        particleEffects: 1,
+        renderScale: 1,
+      }),
+    );
   } catch {
     /* ignore */
   }
@@ -57,6 +80,47 @@ async function dismissPerfNudgeIfShown() {
 }
 await dismissPerfNudgeIfShown();
 
+// A nicer-looking authored appearance than the default bald/neutral quick-start
+// look: the renderer diffs e.modularAppearance against the view's cached copy
+// every sync (src/render/renderer.ts) and rebuilds the composed body on a
+// change, so setting this after boot recomposes the ALREADY-created player
+// visual live (src/render/characters/modular.ts DEFAULT_APPEARANCE for the
+// field shapes and value ranges).
+await page.evaluate(() => {
+  const sim = window.__game.sim;
+  sim.player.modularAppearance = {
+    gender: 'female',
+    hair: 'longwavy',
+    beard: 'none',
+    brows: 'soft',
+    earrings: 'none',
+    earringMaterial: 'default',
+    skinHue: 24,
+    skinSat: 0.42,
+    skinLight: 0.64,
+    hairHue: 18,
+    hairSat: 0.62,
+    hairLight: 0.32,
+    face: 'neutral',
+    body: 'neutral',
+    mouth: 'neutral',
+    eyeShape: 'almond',
+    ears: 'round',
+    lashes: true,
+    lashHue: 18,
+    lashSat: 0.62,
+    lashLight: 0.32,
+    eyeHue: 195,
+    eyeSat: 0.55,
+    eyeLight: 0.4,
+    lipstick: 'none',
+    blush: 'peach',
+    eyeshadow: 'teal',
+    outfit: 'classic',
+  };
+});
+await sleep(500);
+
 await page.evaluate(() => {
   const sim = window.__game.sim;
   sim.setPlayerLevel(20, sim.playerId);
@@ -83,27 +147,57 @@ await page.waitForFunction(
 );
 await sleep(1000);
 
-// Zoom the chase camera in for a closer look at the coat pattern (scroll
-// wheel, the same input a player would use).
-await page.mouse.move(800, 450);
-for (let i = 0; i < 4; i++) {
-  await page.mouse.wheel({ deltaY: -80 });
-  await sleep(50);
+// Camera framing: set the orbit yaw/pitch/distance directly on the live
+// Input instance (src/game/input.ts, plain public fields the free-orbit drag
+// also writes) rather than simulating an imprecise mouse drag. camYaw is
+// measured the same way facing is, and camYaw === facing is BEHIND the
+// character (src/game/input.ts recenterCamera(): "snap the orbit camera back
+// BEHIND the character" sets camYaw = facing), so facing + PI is the front.
+async function setCamera(yaw, { pitch = 0.5, dist = 7.5 } = {}) {
+  await page.evaluate(
+    (y, p, d) => {
+      const input = window.__game.input;
+      input.camYaw = y;
+      input.camPitch = p;
+      input.camDist = d;
+    },
+    yaw,
+    pitch,
+    dist,
+  );
+  await sleep(200);
 }
-await sleep(400);
-await dismissPerfNudgeIfShown();
 
-// Idle stance shot.
-await page.screenshot({ path: `${OUT_DIR}/veil-wraith-courser-idle.png` });
-console.log('idle:', `${OUT_DIR}/veil-wraith-courser-idle.png`);
+const facing = await page.evaluate(() => window.__game.sim.player.facing);
+const front = facing + Math.PI;
 
-// A short run so the shot shows the gait mid-stride.
+// Four diagonal isometric corners, 90 degrees apart and offset 45 degrees
+// from straight front/back/side so every shot is a 3/4 view (never a flat
+// silhouette), full coverage of the model in one pass.
+const ISO_SHOTS = [
+  { name: 'front-right', yaw: front - Math.PI / 4 },
+  { name: 'back-right', yaw: front - (3 * Math.PI) / 4 },
+  { name: 'back-left', yaw: front + (3 * Math.PI) / 4 },
+  { name: 'front-left', yaw: front + Math.PI / 4 },
+];
+for (const shot of ISO_SHOTS) {
+  await setCamera(shot.yaw);
+  await dismissPerfNudgeIfShown();
+  const path = `${OUT_DIR}/veil-wraith-courser-iso-${shot.name}.png`;
+  await page.screenshot({ path });
+  console.log(`iso ${shot.name}:`, path);
+}
+
+// Side profile, mid-gallop: the best angle to read the real per-leg gait
+// (all four limb chains carry per-frame rotation, unlike a frozen-leg
+// fallback), which a straight-behind shot cannot show at all.
+await setCamera(facing + Math.PI / 2, { pitch: 0.22, dist: 7 });
 await page.keyboard.down('w');
 await sleep(1200);
 await dismissPerfNudgeIfShown();
 await page.screenshot({ path: `${OUT_DIR}/veil-wraith-courser-run.png` });
 await page.keyboard.up('w');
-console.log('run:', `${OUT_DIR}/veil-wraith-courser-run.png`);
+console.log('side (running):', `${OUT_DIR}/veil-wraith-courser-run.png`);
 
 console.log('state:', await page.evaluate(() => ({ mountKey: window.__game.sim.player.mountKey })));
 
