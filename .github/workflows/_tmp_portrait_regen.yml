@@ -1,0 +1,72 @@
+name: Temp portrait fingerprint regen
+
+# ONE-OFF, throwaway workflow: regenerates the mob-portrait source manifest
+# on the same ubuntu-latest hardware the real CI gate runs on, since local
+# sandboxes with a different CPU (AVX-512 vs the runner's narrower SIMD
+# profile) cannot reproduce the checked-in WebP bytes. Uploads the changed
+# files as a build artifact for download; never commits anything itself.
+# Delete this file once the artifact has been fetched and applied.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 26
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Resolve Playwright version for cache key
+        id: playwright-version
+        run: echo "version=$(node -p "require('playwright/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright Chromium browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Render portraits with a receipt
+        run: PORTRAIT_RECEIPT=/tmp/portrait-receipt.json node scripts/render_finder_portraits.mjs
+
+      - name: Write the manifest from the receipt
+        run: node scripts/build_mob_portrait_source_manifest.mjs --write --receipt /tmp/portrait-receipt.json
+
+      - name: Show what changed
+        run: git status --short public/ui/mobs/ public/ui/dungeons/ docs/achievements/placeholder-art-completion-2026-08-09/
+
+      - name: Package changed files
+        run: |
+          mkdir -p /tmp/portrait-regen-out
+          git status --short public/ui/mobs/ public/ui/dungeons/ docs/achievements/placeholder-art-completion-2026-08-09/ \
+            | awk '{print $2}' > /tmp/portrait-regen-out/changed-files.txt
+          tar -czf /tmp/portrait-regen-out/changed.tar.gz -T /tmp/portrait-regen-out/changed-files.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: portrait-regen
+          path: /tmp/portrait-regen-out/changed.tar.gz
+          retention-days: 3
