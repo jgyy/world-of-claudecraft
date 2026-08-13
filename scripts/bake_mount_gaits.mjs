@@ -580,7 +580,9 @@ for (const key of targets) {
         const tailAmp =
           typeof cfg.tail.amp === 'number'
             ? cfg.tail.amp
-            : (name === 'Run' ? cfg.tail.amp.run : cfg.tail.amp.walk);
+            : name === 'Run'
+              ? cfg.tail.amp.run
+              : cfg.tail.amp.walk;
         addRot(bone(cfg.tail.bone), (u) => ({
           axis: cfg.tail.axis,
           angle: tailAmp * DEG * wave(u, cfg.tail.phase ?? 0),
