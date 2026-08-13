@@ -41,10 +41,10 @@ await sleep(300);
 await page.evaluate(() => {
   window.__game.sim.useItem('reins_veil_wraith_courser');
 });
-await page.waitForFunction(
-  () => window.__game.sim.player.mountKey === 'veil_wraith_courser',
-  { timeout: 15000, polling: 250 },
-);
+await page.waitForFunction(() => window.__game.sim.player.mountKey === 'veil_wraith_courser', {
+  timeout: 15000,
+  polling: 250,
+});
 await page.waitForFunction(
   () => !!window.__game.renderer?.views?.get(window.__game.sim.playerId)?.mountVisual,
   { timeout: 20000, polling: 300 },
@@ -71,9 +71,6 @@ await page.screenshot({ path: `${OUT_DIR}/veil-wraith-courser-run.png` });
 await page.keyboard.up('w');
 console.log('run:', `${OUT_DIR}/veil-wraith-courser-run.png`);
 
-console.log(
-  'state:',
-  await page.evaluate(() => ({ mountKey: window.__game.sim.player.mountKey })),
-);
+console.log('state:', await page.evaluate(() => ({ mountKey: window.__game.sim.player.mountKey })));
 
 await browser.close();

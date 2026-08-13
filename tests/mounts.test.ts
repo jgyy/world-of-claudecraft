@@ -248,10 +248,7 @@ describe('mount reins items (the collection: owning the item is owning the mount
     // The Veil-Wraith Courser is the same kind of decision, for a different
     // reason: it is earmarked for the Claudium store once mounts are wired into
     // that category (docs/claudium-store.md), not a gameplay drop.
-    const NO_SOURCE_YET: readonly string[] = [
-      'reins_drakemaw_raptor',
-      'reins_veil_wraith_courser',
-    ];
+    const NO_SOURCE_YET: readonly string[] = ['reins_drakemaw_raptor', 'reins_veil_wraith_courser'];
     const FIVE_MAN_SOURCES: Record<string, readonly string[]> = {
       reins_stormfeather_griffin: ['morthen'],
       reins_shadowjump_toad: ['vael_the_mistcaller'],
