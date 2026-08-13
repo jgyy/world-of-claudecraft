@@ -267,6 +267,7 @@ export const RELIQUARY_HORIZON_MOUNTS = [
   'thunderstrut_gobbler',
   'drakemaw_raptor',
   'veil_wraith_courser',
+  'grimtusk_boar',
   'terrorspark_groundshaker',
 ] as const;
 
@@ -283,13 +284,13 @@ export const RELIQUARY_HORIZON_MOUNTS = [
 // def in content/zone3.ts), so a quest hint there would name a door that hands
 // out nothing.
 //
-// drakemaw_raptor, veil_wraith_courser, and terrorspark_groundshaker are
-// absent, and that absence IS the answer: no live table awards any of them
-// (drakemaw_raptor has no acquisition path, veil_wraith_courser is earmarked
-// for the Claudium store and has none yet either, terrorspark_groundshaker is
-// dev-grant only). They are the catalog's three SOURCE_PENDING_RULING mounts;
-// masterwork:engineering on the professions shelf is a fourth pending slot
-// (QA ruling 2026-08-07).
+// drakemaw_raptor, veil_wraith_courser, grimtusk_boar, and
+// terrorspark_groundshaker are absent, and that absence IS the answer: no
+// live table awards any of them (drakemaw_raptor has no acquisition path,
+// veil_wraith_courser and grimtusk_boar are earmarked for the Claudium store
+// and have none yet either, terrorspark_groundshaker is dev-grant only). They
+// are the catalog's four SOURCE_PENDING_RULING mounts; masterwork:engineering
+// on the professions shelf is a fifth pending slot (QA ruling 2026-08-07).
 //
 // Keys are typed against the live mount ladder so a misspelled or renamed key
 // fails tsc at the authoring site instead of falling through to the pending
@@ -1307,14 +1308,14 @@ export const RELIQUARY_PAGES: readonly ReliquaryPageDef[] = freezePageTable([
     name: 'Mounts',
     desc: 'Rideable mounts from the stable, heroic reins, Rift epics, and rarer saddles. Ownership follows the live reins seam (bags and bank).',
     clearSource: { kind: 'none' },
-    // Seven of the ten mounts name every door that awards their reins (see
+    // Seven of the eleven mounts name every door that awards their reins (see
     // MOUNT_SOURCES above): the four heroic reins each drop from two or three
     // HEROIC_BOSS_LOOT bosses AND from their Rift rank's ladder, the two epic
     // reins are Rift-only, and valorsteed is Marla's counter. The page-wide
-    // pending ruling that used to cover all nine is executed; the three that
-    // remain (drakemaw_raptor, veil_wraith_courser, terrorspark_groundshaker)
-    // are content gaps, not vocabulary gaps, and stay hand-listed in
-    // SOURCE_PENDING_RULING.
+    // pending ruling that used to cover all nine is executed; the four that
+    // remain (drakemaw_raptor, veil_wraith_courser, grimtusk_boar,
+    // terrorspark_groundshaker) are content gaps, not vocabulary gaps, and
+    // stay hand-listed in SOURCE_PENDING_RULING.
     relics: mounts(...mountEntries(RELIQUARY_HORIZON_MOUNTS)),
   },
   {

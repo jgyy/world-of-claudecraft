@@ -1707,6 +1707,22 @@ export const VISUALS: Record<string, VisualDef> = {
     runRef: 9,
     lazyPreload: true,
   },
+  // Grimtusk the Ironhide Boar: Tripo quadruped rig with its retarget
+  // discarded and Idle/Walk/Run/Death baked locally by
+  // scripts/bake_mount_gaits.mjs like the bear/toad/griffin/raptor, but with
+  // two real firsts for this catalog: Walk and Run are DISTINCT authored
+  // cycles (not one clip time-scaled to cover both speeds, like every other
+  // baked mount here), and its tail bone (bone_21, 110 skinned vertices) gets
+  // a genuine wag: no other mount's rig carries a tail joint at all.
+  // walkRef/runRef are measured off the baked clip's foot excursion.
+  mount_grimtusk_boar: {
+    url: `${MOUNTS_DIR}/grimtusk_boar.glb`,
+    height: 2.6,
+    clips: MOUNT_RIGGED,
+    walkRef: 3.0,
+    runRef: 9,
+    lazyPreload: true,
+  },
   mount_drakemaw_raptor: {
     url: `${MOUNTS_DIR}/drakemaw_raptor.glb`,
     height: 3.4,

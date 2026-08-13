@@ -72,6 +72,7 @@ await page.evaluate(() => {
     'reins_thunderstrut_gobbler',
     'reins_drakemaw_raptor',
     'reins_veil_wraith_courser',
+    'reins_grimtusk_boar',
     'reins_terrorspark_groundshaker',
   ])
     sim.addItem(id, 1);

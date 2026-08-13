@@ -163,6 +163,35 @@ const RIGS = {
     sway: { bone: 'Waist', walk: 1.5, run: 2.8 },
     head: { bone: 'Head', amp: 3 },
   },
+  // Grimtusk the Ironhide Boar: a genuinely 4-legged Tripo quadruped rig (front
+  // legs 2-joint, rear legs asymmetric: left carries a 4-joint chain, right only
+  // 2, so both sides here use the shared upper/lower pair) PLUS a real skinned
+  // tail joint (bone_21, 110 vertices), which no other mount in the catalog has:
+  // every other rig either has no tail bone at all or ships it as static mesh.
+  // Walk and Run are deliberately DISTINCT authored cycles (different duration,
+  // stride amplitude, and hop height), not one clip time-scaled to fit both
+  // speeds: a boar's charge is a heavy driving gallop, not a sped-up trot.
+  grimtusk_boar: {
+    root: 'tripo::Root',
+    fwd: -1,
+    legs: [
+      ['tripo::0_Left_Limb_0', 'tripo::0_Left_Limb_1', 0, 1], // front left
+      ['tripo::0_Right_Limb_0', 'tripo::0_Right_Limb_1', 0.5, 1], // front right
+      ['tripo::1_Left_Limb_0', 'tripo::1_Left_Limb_1', 0.5, 1, 'rear'], // rear left
+      ['tripo::1_Right_Limb_0', 'tripo::1_Right_Limb_1', 0, 1, 'rear'], // rear right
+    ],
+    gaits: {
+      Walk: { dur: 0.85, upper: 24, lower: 20, bob: 0.012 },
+      Run: { dur: 0.42, upper: 40, lower: 30, bob: 0.02 },
+    },
+    // a boar carries its weight low and forward; roll (sway) does more of the
+    // work than pitch (rock) on a stocky low-slung body
+    rock: { bone: 'tripo::Spine_1', walk: 1.4, run: 2.6 },
+    sway: { bone: 'tripo::Spine_0', walk: 2, run: 3.6 },
+    head: { bone: 'tripo::Head_0', amp: 4 },
+    // yaw wag, faster and wider at a charge than at a trot
+    tail: { bone: 'bone_21', axis: 'yaw', amp: { walk: 10, run: 18 } },
+  },
 };
 
 // gait parameters (angles in degrees, translations in model units; the
@@ -547,11 +576,16 @@ for (const key of targets) {
           axis: 'pitch',
           angle: cfg.head.amp * DEG * wave(u, 0.25) * 2 * 0.5,
         }));
-      if (cfg.tail)
+      if (cfg.tail) {
+        const tailAmp =
+          typeof cfg.tail.amp === 'number'
+            ? cfg.tail.amp
+            : (name === 'Run' ? cfg.tail.amp.run : cfg.tail.amp.walk);
         addRot(bone(cfg.tail.bone), (u) => ({
           axis: cfg.tail.axis,
-          angle: cfg.tail.amp * DEG * wave(u),
+          angle: tailAmp * DEG * wave(u, cfg.tail.phase ?? 0),
         }));
+      }
       if (cfg.tail2)
         addRot(bone(cfg.tail2.bone), (u) => ({
           axis: cfg.tail2.axis,

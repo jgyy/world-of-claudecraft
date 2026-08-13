@@ -20,6 +20,7 @@ export const MOUNT_NAME_KEYS: Record<string, TranslationKey> = {
   thunderstrut_gobbler: 'hudChrome.mounts.name_thunderstrut_gobbler',
   drakemaw_raptor: 'hudChrome.mounts.name_drakemaw_raptor',
   veil_wraith_courser: 'hudChrome.mounts.name_veil_wraith_courser',
+  grimtusk_boar: 'hudChrome.mounts.name_grimtusk_boar',
   terrorspark_groundshaker: 'hudChrome.mounts.name_terrorspark_groundshaker',
 };
 
@@ -33,6 +34,7 @@ export const MOUNT_DESC_KEYS: Record<string, TranslationKey> = {
   thunderstrut_gobbler: 'hudChrome.mounts.desc_thunderstrut_gobbler',
   drakemaw_raptor: 'hudChrome.mounts.desc_drakemaw_raptor',
   veil_wraith_courser: 'hudChrome.mounts.desc_veil_wraith_courser',
+  grimtusk_boar: 'hudChrome.mounts.desc_grimtusk_boar',
   terrorspark_groundshaker: 'hudChrome.mounts.desc_terrorspark_groundshaker',
 };
 

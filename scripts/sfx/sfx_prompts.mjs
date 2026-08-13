@@ -146,6 +146,13 @@ export const SFX = [
     custom: true,
   },
   {
+    // Grimtusk the Ironhide Boar: the grag_bear footfall donor (the closest
+    // body plan and weight class, a heavy stomping quadruped), pitched down
+    // in sfx_speed_map.json for an even heavier, more grinding stride.
+    key: 'mount_run_grimtusk_boar',
+    custom: true,
+  },
+  {
     key: 'mount_run_terrorspark_groundshaker_stop',
     custom: true,
   },

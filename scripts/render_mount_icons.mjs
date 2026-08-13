@@ -99,6 +99,14 @@ const JOBS = [
     id: 'reins_veil_wraith_courser',
     cfg: { headFwd: 0.85, headUp: 0.45, fill: 0.38, yaw: 0.45, pitch: 0.14, fwd: 'z-' },
   },
+  {
+    // The boar carries its tusked head low and forward, below a saddle set
+    // over the back: anchor low (small headUp) and look near level, same
+    // shape as the bear above.
+    file: 'grimtusk_boar.glb',
+    id: 'reins_grimtusk_boar',
+    cfg: { headFwd: 0.92, headUp: 0.32, fill: 0.55, yaw: 0.48, pitch: 0.08 },
+  },
 ];
 
 const only = process.env.ONLY ? new Set(process.env.ONLY.split(',')) : null;

@@ -1078,6 +1078,7 @@ export const ja_JP: EnTranslations = {
       "name_terrorspark_groundshaker": "地揺らしのテラースパーク",
       "name_drakemaw_raptor": "火口のラプトル",
       "name_veil_wraith_courser": "帳の亡霊駿馬",
+      "name_grimtusk_boar": "鉄皮のグリムタスク",
       "desc_valorsteed": "頑健で足取り確かな駿馬。移動速度を高める。",
       "desc_grag_bear": "頑健で足取り確かな熊。移動速度を高める。",
       "desc_stalkglider_snail": "粘り強くゆっくり燃えるカタツムリ。移動速度を高める。",
@@ -1087,7 +1088,8 @@ export const ja_JP: EnTranslations = {
       "desc_thunderstrut_gobbler": "嵐より生まれた巨大な七面鳥。目覚めし峰から尾羽を雷雲のごとく広げ、闊歩して降りてくる。",
       "desc_terrorspark_groundshaker": "重厚な履帯と大口径砲、恐れ知らずの操縦士向けの鞍を備えた小型装甲車両。",
       "desc_drakemaw_raptor": "火口のカルデラで鞍慣らしされた巣育ちのラプトル。筋肉と疾走のかたまりで、いまなお灰の匂いをかすかに漂わせている。",
-      "desc_veil_wraith_courser": "二つの世界を隔てる帳の狭間を歩む亡霊の牡鹿。一歩ごとに毛並みが神々しい光と影の霧へと移ろう。"
+      "desc_veil_wraith_courser": "二つの世界を隔てる帳の狭間を歩む亡霊の牡鹿。一歩ごとに毛並みが神々しい光と影の霧へと移ろう。",
+      "desc_grimtusk_boar": "鋼のような鉄皮をまとった巨大な牙の軍猪。ただ勢いと悪意だけを推進力に突き進む。"
     },
     "mountTraining": {
       "mountPrompt": "{key} キーを押して訓練用ヴァロースティードに騎乗する。",
@@ -12365,6 +12367,9 @@ export const ja_JP: EnTranslations = {
       },
       "reins_veil_wraith_courser": {
         "name": "帳の亡霊駿馬の手綱"
+      },
+      "reins_grimtusk_boar": {
+        "name": "鉄皮のグリムタスクの手綱"
       },
       "rimefang": {
         "name": "霜牙"

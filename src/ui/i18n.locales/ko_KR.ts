@@ -8381,6 +8381,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_stormfeather_griffin.name': '하늘닿이 폭풍깃의 고삐',
   'entities.items.reins_drakemaw_raptor.name': '화산구 랩터의 고삐',
   'entities.items.reins_veil_wraith_courser.name': '베일의 망령 준마의 고삐',
+  'entities.items.reins_grimtusk_boar.name': '무쇠가죽 멧돼지 그림터스크의 고삐',
   'entities.items.reins_thunderstrut_gobbler.name': '천둥활보 대왕 칠면조의 고삐',
   'entities.mobs.drowned_cantor.name': '익사한 영창자',
   'entities.mobs.reedbound_acolyte.name': '갈대에 묶인 신도',
@@ -9595,6 +9596,9 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_veil_wraith_courser': '베일의 망령 준마',
   'hudChrome.mounts.desc_veil_wraith_courser':
     '두 세계를 가르는 베일 사이를 걷는 망령 수사슴. 걸음마다 털빛이 신성한 빛과 그림자 안개 사이를 오간다.',
+  'hudChrome.mounts.name_grimtusk_boar': '무쇠가죽 멧돼지 그림터스크',
+  'hudChrome.mounts.desc_grimtusk_boar':
+    '무쇠 같은 가죽을 두른 거대한 엄니의 전투 멧돼지. 오직 돌진하는 기세와 악의만으로 나아간다.',
   'hudChrome.mounts.desc_drakemaw_raptor':
     '화산구 칼데라에서 길들여진 둥지 태생 랩터. 온몸이 힘줄과 질주로 이루어졌으며, 아직도 희미한 재 냄새가 난다.',
   'hudChrome.mounts.name_thunderstrut_gobbler': '천둥활보 대왕 칠면조',

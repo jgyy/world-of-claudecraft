@@ -1925,6 +1925,47 @@ export class Vfx {
     );
   }
 
+  /** Heavy hoof-dust kicked up behind a charging boar mount: low, drifting
+   *  earth-tone puffs, thicker and more frequent at a run than a walk. */
+  mountDustTrail(at: THREE.Vector3, dt: number, running: boolean): void {
+    if (!this.emitChance(running ? 30 : 14, dt)) return;
+    const a = Math.random() * Math.PI * 2;
+    this.spawn(
+      at.x + Math.sin(a) * 0.3,
+      at.y + 0.05,
+      at.z + Math.cos(a) * 0.3,
+      Math.sin(a) * 0.4,
+      0.15 + Math.random() * 0.2,
+      Math.cos(a) * 0.4,
+      Math.random() < 0.5 ? 0xc2a878 : 0x8b7355,
+      0.32 + Math.random() * 0.18,
+      0.5 + Math.random() * (running ? 0.5 : 0.25),
+      0.4,
+      SPR.smoke,
+    );
+  }
+
+  /** The Veil-Wraith Courser's coat shifting between holy radiance and
+   *  shadow mist with every stride: alternating pale-gold and violet motes
+   *  drifting up off its flanks while moving. */
+  mountWispTrail(at: THREE.Vector3, dt: number): void {
+    if (!this.emitChance(20, dt)) return;
+    const holy = Math.random() < 0.5;
+    this.spawn(
+      at.x + (Math.random() - 0.5) * 0.6,
+      at.y + 0.5 + Math.random() * 0.4,
+      at.z + (Math.random() - 0.5) * 0.6,
+      (Math.random() - 0.5) * 0.2,
+      0.35 + Math.random() * 0.25,
+      (Math.random() - 0.5) * 0.2,
+      holy ? 0xfff0c0 : 0x4a2a6a,
+      0.4 + Math.random() * 0.25,
+      0.3 + Math.random() * 0.2,
+      -0.15,
+      SPR.magicWisp,
+    );
+  }
+
   /**
    * Ground impact puff: the visual weight of a landing, and the scuff of a
    * body striding up onto a ledge. `power` (0..1) scales count, spread, and

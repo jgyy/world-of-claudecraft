@@ -1078,6 +1078,7 @@ export const ko_KR: EnTranslations = {
       "name_terrorspark_groundshaker": "대지를 뒤흔드는 테러스파크",
       "name_drakemaw_raptor": "화산구 랩터",
       "name_veil_wraith_courser": "베일의 망령 준마",
+      "name_grimtusk_boar": "무쇠가죽 멧돼지 그림터스크",
       "desc_valorsteed": "여행 속도를 높여 주는 튼튼하고 발이 안정된 군마입니다.",
       "desc_grag_bear": "여행 속도를 높여 주는 튼튼하고 발이 안정된 곰입니다.",
       "desc_stalkglider_snail": "여행 속도를 높여 주는 끈질기고 느긋한 달팽이입니다.",
@@ -1087,7 +1088,8 @@ export const ko_KR: EnTranslations = {
       "desc_thunderstrut_gobbler": "깨어나는 봉우리에서 꼬리깃을 뇌운처럼 펼친 채 활보하며 내려오는, 폭풍이 낳은 거대한 칠면조입니다.",
       "desc_terrorspark_groundshaker": "묵직한 궤도와 대구경 포, 겁 없는 조종사를 위한 안장을 갖춘 소형 장갑 기계입니다.",
       "desc_drakemaw_raptor": "화산구 칼데라에서 길들여진 둥지 태생 랩터. 온몸이 힘줄과 질주로 이루어졌으며, 아직도 희미한 재 냄새가 난다.",
-      "desc_veil_wraith_courser": "두 세계를 가르는 베일 사이를 걷는 망령 수사슴. 걸음마다 털빛이 신성한 빛과 그림자 안개 사이를 오간다."
+      "desc_veil_wraith_courser": "두 세계를 가르는 베일 사이를 걷는 망령 수사슴. 걸음마다 털빛이 신성한 빛과 그림자 안개 사이를 오간다.",
+      "desc_grimtusk_boar": "무쇠 같은 가죽을 두른 거대한 엄니의 전투 멧돼지. 오직 돌진하는 기세와 악의만으로 나아간다."
     },
     "mountTraining": {
       "mountPrompt": "{key} 키를 눌러 훈련용 발러스티드에 탑승한다.",
@@ -12365,6 +12367,9 @@ export const ko_KR: EnTranslations = {
       },
       "reins_veil_wraith_courser": {
         "name": "베일의 망령 준마의 고삐"
+      },
+      "reins_grimtusk_boar": {
+        "name": "무쇠가죽 멧돼지 그림터스크의 고삐"
       },
       "rimefang": {
         "name": "서리엄니"

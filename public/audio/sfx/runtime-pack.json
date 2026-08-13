@@ -1,8 +1,8 @@
 {
   "format": "woc-sfx-runtime-pack",
   "version": 1,
-  "bundleId": "ab3689ff9e964f5d772fccec1695c543d6d13ab4a25658acfbb8de505f56eb48",
-  "catalogHash": "4add91ab5ec63b58dae213be275ae044a6e29f52c778ee8e3d8475b9c9fe92a0",
+  "bundleId": "17188397cad955e9e54ffa4d6ff88d7b561073bffe16fd6e75e560e39c2be2fa",
+  "catalogHash": "4e48568df58a251c6e61da713dbb84b6aaa9c05ae5d601e9f4394a73a4d54c21",
   "clips": {
     "amb_birds": {
       "variants": [
@@ -2889,6 +2889,18 @@
       ],
       "gain": 1,
       "playbackRate": 1
+    },
+    "mount_run_grimtusk_boar": {
+      "variants": [
+        {
+          "id": "main",
+          "url": "/audio/sfx/mount_run_grimtusk_boar.mp3?v=eba127f1f821",
+          "bytes": 18224,
+          "sha256": "eba127f1f8219e5d6a7512c4797735399e154e9f129bfc8c67a187941cb59fe7"
+        }
+      ],
+      "gain": 1,
+      "playbackRate": 0.85
     },
     "mount_run_shadowjump_toad": {
       "variants": [

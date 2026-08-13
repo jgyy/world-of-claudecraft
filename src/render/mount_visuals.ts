@@ -29,8 +29,9 @@ export interface MountVisualSpec {
   /** Bob shape: a smooth hover sine, or gallop-style hops (abs sine). */
   bobShape: 'hover' | 'hop';
   /** Ambient particle effect the renderer emits for this mount: the snail's
-   *  slime path while moving, the hover cycle's aether exhaust. */
-  fx: 'slime' | 'exhaust' | null;
+   *  slime path while moving, the hover cycle's aether exhaust, the boar's
+   *  hoof dust, the courser's holy/shadow coat-shift wisps. */
+  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | null;
 }
 
 const spec = (
@@ -39,7 +40,7 @@ const spec = (
   rigged: boolean,
   bob?: { amp: number; hz: number; idle?: boolean; shape?: 'hover' | 'hop' },
   seatFwd = 0,
-  fx: 'slime' | 'exhaust' | null = null,
+  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | null = null,
 ): MountVisualSpec => ({
   visualKey,
   seat,
@@ -83,8 +84,16 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   drakemaw_raptor: spec('mount_drakemaw_raptor', 2.35, true, undefined, -0.1),
   // The Veil-Wraith Courser: a hart-shaped body like the horse, saddle just
   // behind the neck over the withers (small forward shift), real Idle/Walk/
-  // Run clips from its own Walk animation (see manifest.ts).
-  veil_wraith_courser: spec('mount_veil_wraith_courser', 2.6, true, undefined, 0.1),
+  // Run clips from its own Walk animation (see manifest.ts). 'wisp': its coat
+  // shifting between holy radiance and shadow mist is otherwise flavor text
+  // with nothing behind it in-world, so it earns the ambient particle trail.
+  veil_wraith_courser: spec('mount_veil_wraith_courser', 2.6, true, undefined, 0.1, 'wisp'),
+  // Grimtusk the Ironhide Boar: a stocky, low-slung quadruped, so the seat
+  // sits well under the taller mounts above; the saddle rides centered over
+  // the back, roughly over the withers. 'dust': a heavy charging boar kicks
+  // up hoof dust the way the snail leaves slime and the hover cycle streams
+  // exhaust.
+  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, 0, 'dust'),
 };
 
 /** Spec for an entity's active mountKey, or null when dismounted/unknown. */

@@ -6037,14 +6037,30 @@
    ]
   },
   {
-   "batchId": "veil-wraith-courser-mount-2026-08-13",
+   "batchId": "veil-wraith-courser-mount-painted-2026-08-13",
+   "source": "OpenAI built-in image generation",
+   "owner": "World of ClaudeCraft",
+   "license": "World of ClaudeCraft project-generated art, project asset, rights reserved",
+   "styleContract": {
+    "id": "woc-item-icon-v1",
+    "document": "docs/design/item-icon-art-style.md"
+   },
+   "styleReference": "Supersedes batchId veil-wraith-courser-mount-2026-08-13 (a raw 3D camera render, rejected in review: the style contract forbids raw 3D thumbnails for item icons). Painted three-quarter bust of the spectral hart: dark holy/shadow-duality coat, glowing blue eyes, curling antlers, opaque near-black painted vignette, matching the painted convention every other reins_* icon already uses.",
+   "commonPrompt": "Painted three-quarter bust portrait of a spectral hart mount, coat shifting between holy radiance and shadow mist, glowing blue eyes, ornate curling antlers, opaque dark atmospheric vignette, classic dark-fantasy MMORPG inventory painting style (woc-item-icon-v1).",
+   "provenanceRecord": "tmp/imagegen/mount-icons-2026-08-13/",
+   "itemIds": [
+    "reins_veil_wraith_courser"
+   ]
+  },
+  {
+   "batchId": "grimtusk-boar-mount-2026-08-13",
    "source": "Tripo API 3D asset pipeline (scripts/asset_pipeline/), screenshot-rendered from the shipped GLB via scripts/render_mount_icons.mjs",
    "owner": "World of ClaudeCraft",
    "license": "World of ClaudeCraft project-generated art, project asset, rights reserved",
-   "styleReference": "Not a painted icon: the source is a real-time camera render of the shipped 3D model (public/models/mounts/veil_wraith_courser.glb) at a close three-quarter head framing, matching the existing mount reins icon set's own camera-render convention (see the other reins_* entries and scripts/render_mount_icons.mjs JOBS list). No separate reference images.",
+   "styleReference": "KNOWN GAP, flagged in review: this is a raw 3D camera render, not a painted icon, and the style contract (docs/design/item-icon-art-style.md, woc-item-icon-v1) forbids raw 3D thumbnails for item icons; every other reins_* icon in the catalog is painted. reins_veil_wraith_courser had the identical defect and was repainted in this same change (see batchId veil-wraith-courser-mount-painted-2026-08-13); this one is a deliberately scoped follow-up pending a reference image, not an oversight. Source: a real-time camera render of the shipped 3D model (public/models/mounts/grimtusk_boar.glb) via scripts/render_mount_icons.mjs. No separate reference images.",
    "commonPrompt": "N/A: produced by camera framing parameters (headFwd/headUp/fill/yaw/pitch in scripts/render_mount_icons.mjs), not a text-to-image prompt.",
    "itemIds": [
-    "reins_veil_wraith_courser"
+    "reins_grimtusk_boar"
    ]
   }
  ]

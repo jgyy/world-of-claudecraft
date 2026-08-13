@@ -11974,11 +11974,16 @@ export class Renderer {
           v.mountVisual.root.position.y = bob;
           v.visual.root.position.y = v.mountLift + bob;
           // ambient mount particles: the snail paints its slime path while
-          // gliding, the hover cycle streams aether exhaust off its tail
+          // gliding, the hover cycle streams aether exhaust off its tail,
+          // the boar kicks up hoof dust, the courser trails holy/shadow wisps
           if (mountSpec.fx === 'slime') {
             if (moving) this.vfx.mountSlimeTrail(v.group.position, dt);
           } else if (mountSpec.fx === 'exhaust') {
             this.vfx.mountExhaust(v.group.position, facing, dt, moving);
+          } else if (mountSpec.fx === 'dust') {
+            if (moving) this.vfx.mountDustTrail(v.group.position, dt, st.running);
+          } else if (mountSpec.fx === 'wisp') {
+            if (moving) this.vfx.mountWispTrail(v.group.position, dt);
           }
         } else {
           v.mountVisual.advanceOffscreen(dt);

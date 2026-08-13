@@ -2435,6 +2435,7 @@ const ITEM_ENTITY_IDS = [
   'reins_terrorspark_groundshaker',
   'reins_drakemaw_raptor',
   'reins_veil_wraith_courser',
+  'reins_grimtusk_boar',
   'rimefang',
   'marrowpoint',
   'duskwhisper',
@@ -2556,6 +2557,7 @@ const APPENDED_ITEM_NAMES: Partial<Record<ItemEntityId, string>> = {
   // Dragonkin brood rebuild (PR #2811), same English-appended treatment.
   reins_drakemaw_raptor: 'Reins of the Drakemaw Raptor',
   reins_veil_wraith_courser: 'Reins of the Veil-Wraith Courser',
+  reins_grimtusk_boar: 'Reins of Grimtusk the Ironhide Boar',
   restless_skull: 'Restless Skull',
   vanguard_bone: 'Vanguard Bone',
   // Hunter quivers, the class's first held-offhand ladder; same English-appended

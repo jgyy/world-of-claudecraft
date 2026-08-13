@@ -355,15 +355,15 @@ describe('Reliquary Conqueror catalog structure', () => {
     // 242 + 16 + 29 + 47 + 3 = 337, plus the three daggers the v0.36.0 release
     // merge added to live content (rimefang on the Rift page, duskwhisper on
     // Wildheart Basin, boneglass_shiv on Spoils): 340, plus the Veil-Wraith
-    // Courser mount slot: 341. Catalog growth reverts page completion for
-    // finished players, per docs/design/reliquary.md. The two
-    // excludeFromCompletion pages add slots and 0 to BOTH pairs: the Vault of
-    // Ages contributes four retired slots and horizons_riftbound the three
-    // class-personal Riftbound bands, and the flag keeps each whole page out
-    // of owned AND total (the dedicated vault and riftbound pins in this file
-    // and tests/reliquary_state.test.ts hold both sides), so neither page
-    // moves these two literals.
-    expect(full).toEqual({ owned: 341, total: 341 });
+    // Courser mount slot: 341, plus the Grimtusk the Ironhide Boar mount slot:
+    // 342. Catalog growth reverts page completion for finished players, per
+    // docs/design/reliquary.md. The two excludeFromCompletion pages add slots
+    // and 0 to BOTH pairs: the Vault of Ages contributes four retired slots
+    // and horizons_riftbound the three class-personal Riftbound bands, and
+    // the flag keeps each whole page out of owned AND total (the dedicated
+    // vault and riftbound pins in this file and tests/reliquary_state.test.ts
+    // hold both sides), so neither page moves these two literals.
+    expect(full).toEqual({ owned: 342, total: 342 });
     const character = catalogCharacterCompletion({
       itemsDiscovered: allOwned,
       marks: allOwned,
@@ -372,9 +372,10 @@ describe('Reliquary Conqueror catalog structure', () => {
     });
     // Literal: update when catalog content lands (same deltas as the overview
     // pair above, including the three release-merged daggers and the
-    // Veil-Wraith Courser mount slot; marks are character-scoped, so this
-    // trails the overview by the 29 account-scoped weapon skins).
-    expect(character).toEqual({ owned: 312, total: 312 });
+    // Veil-Wraith Courser and Grimtusk the Ironhide Boar mount slots; marks
+    // are character-scoped, so this trails the overview by the 29
+    // account-scoped weapon skins).
+    expect(character).toEqual({ owned: 313, total: 313 });
   });
 
   it('pins the final measured catalog shape: total slots and distinct marks', () => {
@@ -385,7 +386,8 @@ describe('Reliquary Conqueror catalog structure', () => {
     // pages add 123 slots (16 Rift + 19 slain marks + 31 Spoils + 47
     // Warfare + 3 fishing + 4 retired vault + 3 Riftbound bands): 372, plus the
     // three daggers the v0.36.0 release merge added to live content: 375, plus
-    // the Veil-Wraith Courser mount slot: 376 total.
+    // the Veil-Wraith Courser mount slot: 376, plus the Grimtusk the Ironhide
+    // Boar mount slot: 377 total.
     // Slots, not unique relics: the two Spoils set repeats count again here,
     // and the seven excludeFromCompletion slots (four vault, three bands)
     // count here while adding zero to every completion pair, which is why this
@@ -396,7 +398,7 @@ describe('Reliquary Conqueror catalog structure', () => {
     expect(
       slots,
       `slot total moved; per page: ${RELIQUARY_PAGES.map((p) => `${p.id}=${p.relics.length}`).join(', ')}`,
-    ).toBe(376);
+    ).toBe(377);
     // Distinct mark ids: the 10 shipped before Phase 21 plus the 19
     // rare-slain proofs of conquerors_rares_of_the_realm.
     expect(
@@ -2364,7 +2366,7 @@ const RELIC_SLOTS = RELIQUARY_PAGES.flatMap((page) =>
  * row here in the same change.
  */
 const SOURCE_PENDING_RULING: Readonly<Record<string, readonly string[]>> = {
-  // The four gaps are CONTENT gaps, not vocabulary gaps: no live table awards
+  // The five gaps are CONTENT gaps, not vocabulary gaps: no live table awards
   // any of them, so there is no door to name. Every other slot the catalog
   // used to leave pending turned out to be a several-doors slot rather than a
   // no-answer slot, and Phase 13b authored all of them (a relic lists every
@@ -2376,9 +2378,17 @@ const SOURCE_PENDING_RULING: Readonly<Record<string, readonly string[]>> = {
   // veil_wraith_courser: earmarked for the Claudium store once mounts are
   // wired into that category (docs/claudium-store.md), see the def comment in
   // content/items.ts; no live table awards it either.
+  // grimtusk_boar: same shape as veil_wraith_courser, earmarked for the
+  // Claudium store, no live table awards it either (see the def comment in
+  // content/items.ts).
   // terrorspark_groundshaker: dev-grant only, deliberately absent from vendors,
   // quests, mob loot, heroic loot, and the rift reins pools.
-  horizons_mounts: ['drakemaw_raptor', 'terrorspark_groundshaker', 'veil_wraith_courser'],
+  horizons_mounts: [
+    'drakemaw_raptor',
+    'grimtusk_boar',
+    'terrorspark_groundshaker',
+    'veil_wraith_courser',
+  ],
   // masterwork:engineering: unearnable, QA ruling 2026-08-07. Every live
   // engineering recipe produces a slotless, statless tool, masterworkBonusStats
   // returns null for all of them, so the masterwork proc can never fire and
@@ -3330,7 +3340,7 @@ describe('Reliquary source hint coverage', () => {
     ).toBe(true);
   });
 
-  it('the surviving pending rows are the four slots content awards no route at all', () => {
+  it('the surviving pending rows are the five slots content awards no route at all', () => {
     // The page-wide Horizons rulings are EXECUTED: mounts and skins are no
     // longer derived from the catalog lists (the derivation era ended when the
     // rulings landed), so the identity pins to RELIQUARY_HORIZON_MOUNTS and
@@ -3343,6 +3353,7 @@ describe('Reliquary source hint coverage', () => {
     ]);
     expect(SOURCE_PENDING_RULING.horizons_mounts).toEqual([
       'drakemaw_raptor',
+      'grimtusk_boar',
       'terrorspark_groundshaker',
       'veil_wraith_courser',
     ]);

@@ -103,8 +103,8 @@ function ride(sim: Sim, pid: number, key: string): void {
 }
 
 describe('mount catalog', () => {
-  it('has exactly ten mounts with the horse first and the developer tank last', () => {
-    expect(MOUNT_KEYS).toHaveLength(10);
+  it('has exactly eleven mounts with the horse first and the developer tank last', () => {
+    expect(MOUNT_KEYS).toHaveLength(11);
     expect(MOUNT_KEYS[0]).toBe('valorsteed');
     expect(MOUNT_KEYS.at(-1)).toBe('terrorspark_groundshaker');
     expect(DEFAULT_MOUNT).toBe('valorsteed');
@@ -248,7 +248,11 @@ describe('mount reins items (the collection: owning the item is owning the mount
     // The Veil-Wraith Courser is the same kind of decision, for a different
     // reason: it is earmarked for the Claudium store once mounts are wired into
     // that category (docs/claudium-store.md), not a gameplay drop.
-    const NO_SOURCE_YET: readonly string[] = ['reins_drakemaw_raptor', 'reins_veil_wraith_courser'];
+    const NO_SOURCE_YET: readonly string[] = [
+      'reins_drakemaw_raptor',
+      'reins_veil_wraith_courser',
+      'reins_grimtusk_boar',
+    ];
     const FIVE_MAN_SOURCES: Record<string, readonly string[]> = {
       reins_stormfeather_griffin: ['morthen'],
       reins_shadowjump_toad: ['vael_the_mistcaller'],

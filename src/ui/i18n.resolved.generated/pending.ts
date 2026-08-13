@@ -10,34 +10,52 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "es_ES": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "fr_FR": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "fr_CA": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "en_CA": [],
   "it_IT": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "de_DE": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "zh_CN": [],
@@ -45,49 +63,76 @@ export const pending: Record<string, readonly string[]> = {
   "ko_KR": [],
   "ja_JP": [],
   "pt_BR": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "ru_RU": [],
   "cs_CZ": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "nl_NL": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "pl_PL": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "id_ID": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "tr_TR": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "sv_SE": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "vi_VN": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ],
   "da_DK": [
+    "entities.items.reins_grimtusk_boar.name",
     "entities.items.reins_veil_wraith_courser.name",
+    "hudChrome.mounts.desc_grimtusk_boar",
     "hudChrome.mounts.desc_veil_wraith_courser",
+    "hudChrome.mounts.name_grimtusk_boar",
     "hudChrome.mounts.name_veil_wraith_courser"
   ]
 };

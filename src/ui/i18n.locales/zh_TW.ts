@@ -8047,6 +8047,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_stormfeather_griffin.name': '凌天風暴之羽的韁繩',
   'entities.items.reins_drakemaw_raptor.name': '龍喉迅猛龍的韁繩',
   'entities.items.reins_veil_wraith_courser.name': '帷幽靈駒的韁繩',
+  'entities.items.reins_grimtusk_boar.name': '鐵甲猙牙野豬的韁繩',
   'entities.items.reins_thunderstrut_gobbler.name': '雷霆闊步大火雞的韁繩',
   'entities.mobs.drowned_cantor.name': '溺亡誦經者',
   'entities.mobs.reedbound_acolyte.name': '蘆葦縛信徒',
@@ -9201,6 +9202,9 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_veil_wraith_courser': '帷幽靈駒',
   'hudChrome.mounts.desc_veil_wraith_courser':
     '一頭行走於兩界帷幕之間的幽靈牡鹿，周身光影隨步伐在聖輝與暗影霧氣間流轉變幻。',
+  'hudChrome.mounts.name_grimtusk_boar': '鐵甲猙牙野豬',
+  'hudChrome.mounts.desc_grimtusk_boar':
+    '一頭身披鐵甲、獠牙猙獰的戰豬，除了衝撞的勢頭和滿腔戾氣，什麼也不管不顧。',
   'hudChrome.mounts.desc_drakemaw_raptor':
     '來自龍喉火山口的馴服巢生迅猛龍，渾身筋肉、疾若奔雷，身上仍帶著淡淡的灰燼氣味。',
   'hudChrome.mounts.name_thunderstrut_gobbler': '雷霆闊步大火雞',

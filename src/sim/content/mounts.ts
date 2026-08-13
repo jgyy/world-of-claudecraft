@@ -21,6 +21,7 @@ export type MountKey =
   | 'thunderstrut_gobbler'
   | 'drakemaw_raptor'
   | 'veil_wraith_courser'
+  | 'grimtusk_boar'
   | 'terrorspark_groundshaker';
 
 export type MountRarity = 'common' | 'uncommon' | 'rare' | 'epic';
@@ -111,6 +112,16 @@ export const MOUNTS: Record<MountKey, MountDef> = {
   veil_wraith_courser: {
     key: 'veil_wraith_courser',
     name: 'Veil-Wraith Courser',
+    rarity: 'epic',
+    moveSpeedPct: 0.8,
+  },
+  // Grimtusk the Ironhide Boar: another community mount-store candidate
+  // (see docs/claudium-store.md), same shape as the Courser above: no
+  // player-facing acquisition path yet (see reins_grimtusk_boar,
+  // content/items.ts).
+  grimtusk_boar: {
+    key: 'grimtusk_boar',
+    name: 'Grimtusk the Ironhide Boar',
     rarity: 'epic',
     moveSpeedPct: 0.8,
   },

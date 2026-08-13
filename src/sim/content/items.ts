@@ -430,6 +430,20 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     noDiscard: true,
     sellValue: 0,
   },
+  // Grimtusk the Ironhide Boar: earmarked for the Claudium store once mounts
+  // are wired into that category (docs/claudium-store.md); same shape as the
+  // Courser above, no player-facing acquisition path yet (see content/mounts.ts).
+  // Unbound like every player reins (the tradable-reins policy).
+  reins_grimtusk_boar: {
+    id: 'reins_grimtusk_boar',
+    name: 'Reins of Grimtusk the Ironhide Boar',
+    kind: 'mount',
+    mount: 'grimtusk_boar',
+    quality: 'epic',
+    noVendorSell: true,
+    noDiscard: true,
+    sellValue: 0,
+  },
   mistveil_cord: {
     id: 'mistveil_cord',
     name: 'Mistveil Cord',
