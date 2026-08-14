@@ -94,10 +94,14 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // back over the haunches, well behind the model origin (the boar's head and
   // shoulders dominate the front half of the mesh), hence the large rearward
   // shift; a seatFwd of 0 left the rider hovering over the neck with the
-  // empty saddle visible behind them. 'dust': a heavy charging boar kicks up
-  // hoof dust the way the snail leaves slime and the hover cycle streams
-  // exhaust.
-  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, -0.7, 'dust'),
+  // empty saddle visible behind them, and -0.7 (the prior attempt) still left
+  // the rider straddling the front edge of the saddle near the head, short of
+  // the visible seat. Re-measured directly against the saddle prop with a
+  // side-on capture of the mounted rig: -1.4 seats the rider on the leather
+  // at the buckle line, matching the reference before/after screenshots.
+  // 'dust': a heavy charging boar kicks up hoof dust the way the snail leaves
+  // slime and the hover cycle streams exhaust.
+  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, -1.4, 'dust'),
   // Ashfang the Cinderhide Hound: a warlock-flavored demonic war-mount (see
   // content/classes.ts, the Cinderhide ability), taller-standing than the
   // boar with the harness/tack riding centered over its shoulders rather
