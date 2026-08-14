@@ -148,8 +148,22 @@ interface AttributionTargetFixture {
 // Re-minted for the Grimtusk the Ironhide Boar mount PR: extracting the
 // ambient-mount-fx dispatch out of renderer.ts into src/render/mount_fx.ts
 // moves the rendererIntegration leaf. No capture was retaken.
+// Re-minted after the point-light adoption seam moved the fire-light budget
+// pass out of renderer.ts into fire_light_registry.ts. renderer.ts is a
+// provenance input, so its bytes move the composite. No capture was retaken.
+// Re-minted again for the review fixes on the same PR: the stranded-light
+// reparent moved out of renderer.ts too, and the budget-pass descriptor became
+// a pooled field. renderer.ts bytes only. No capture was retaken.
+// Re-minted for the merge of release/v0.38.0 into the night-lighting branch:
+// both parents move renderer.ts (the release's point-light seam, this branch's
+// moon-phase grade threading), so the merged tree mints a value matching
+// neither parent. No capture was retaken.
+// Re-minted for the merge of release/v0.38.0 into feature/veil-wraith-courser-mount:
+// both parents move renderer.ts (this branch's mount_fx.ts extraction, the
+// release's fire-light-registry extraction and moon-phase grade threading), so
+// the merged tree mints a value matching neither parent. No capture was retaken.
 const PINNED_POLISH_COMPOSITE_FINGERPRINT =
-  'ee86f855914765f1765f21d70bc24d7b9f999069e157eb536876e3609f860c82';
+  'f969eed7c6d5f2a0ad5bbfd73cb257333b44d1c7a467d77ac1091da312ab2b32';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [

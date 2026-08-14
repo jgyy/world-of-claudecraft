@@ -166,8 +166,10 @@ const RIGS = {
   // Grimtusk the Ironhide Boar: a genuinely 4-legged Tripo quadruped rig (front
   // legs 2-joint, rear legs asymmetric: left carries a 4-joint chain, right only
   // 2, so both sides here use the shared upper/lower pair) PLUS a real skinned
-  // tail joint (bone_21, 110 vertices), which no other mount in the catalog has:
-  // every other rig either has no tail bone at all or ships it as static mesh.
+  // tail joint (bone_21, 110 vertices): no other TRIPO-BAKED rig in this catalog
+  // has a tail joint (valorsteed's authored-clip rig does, but that is a
+  // different asset pipeline entirely); every other baked rig here either has
+  // no tail bone at all or ships it as static mesh.
   // Walk and Run are deliberately DISTINCT authored cycles (different duration,
   // stride amplitude, and hop height), not one clip time-scaled to fit both
   // speeds: a boar's charge is a heavy driving gallop, not a sped-up trot.

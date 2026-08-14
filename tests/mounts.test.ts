@@ -124,6 +124,7 @@ describe('mount catalog', () => {
     expect(spec('thunderstrut_gobbler')).toEqual(['epic', 0.8]);
     expect(spec('drakemaw_raptor')).toEqual(['epic', 0.8]);
     expect(spec('veil_wraith_courser')).toEqual(['epic', 0.8]);
+    expect(spec('grimtusk_boar')).toEqual(['epic', 0.8]);
     expect(spec('terrorspark_groundshaker')).toEqual(['epic', 0.8]);
     // The level field is GONE, not merely unused: it never fired (reins carry no
     // requiredLevel and every source is level-20 content) and leaving it would

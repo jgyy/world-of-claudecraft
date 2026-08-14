@@ -727,10 +727,27 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // Re-minted for the Grimtusk the Ironhide Boar mount PR: extracting the
 // ambient-mount-fx dispatch out of renderer.ts into src/render/mount_fx.ts
 // moves the rendererIntegration leaf. No capture was retaken.
+// Re-minted after the point-light adoption seam moved the fire-light budget
+// pass out of renderer.ts into fire_light_registry.ts. renderer.ts is a
+// provenance input, so the composite moves and the swept evidence bytes follow.
+// No capture was retaken.
+// Re-minted again for the review fixes on the same PR (stranded-light reparent
+// extracted, pooled budget-pass descriptor): renderer.ts bytes only, so the
+// composite follows it and the swept evidence bytes follow the composite. No
+// capture was retaken.
+// Re-minted for the merge of release/v0.38.0 into the night-lighting branch:
+// both parents move renderer.ts, so the composite mints a value matching neither
+// parent and this metadata authority sha follows the swept bytes. No capture was
+// retaken.
+// Re-minted for the merge of release/v0.38.0 into feature/veil-wraith-courser-mount:
+// both parents move renderer.ts (this branch's mount_fx.ts extraction, the
+// release's fire-light-registry extraction and moon-phase grade threading), so
+// the composite mints a value matching neither parent and this metadata
+// authority sha follows the swept bytes. No capture was retaken.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  'e9679d54c4c9d2f3bee999ff10069444bba5a63491809e5d50ccb0560295e33f';
+  'eb6f886e8f4556b604ab00ec6636b1e1afd0b02eac9faf957bf6fa490d4ae05d';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  'ee86f855914765f1765f21d70bc24d7b9f999069e157eb536876e3609f860c82';
+  'f969eed7c6d5f2a0ad5bbfd73cb257333b44d1c7a467d77ac1091da312ab2b32';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -1635,6 +1652,10 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // the first-order composite follows both parents' renderer.ts and
     // prewarm_policy.ts inputs, then this second-order performance seal follows
     // the swept evidence bytes. No capture was retaken.
+    // Re-minted after the point-light adoption seam moved the fire-light budget
+    // pass out of renderer.ts: the first-order composite follows renderer.ts,
+    // then this second-order seal follows the swept evidence bytes. No capture
+    // was retaken.
     // Re-pinned for the merge of release/v0.36.0 (post PR 3220/3221) into the
     // KTX2 mip-release branch: the first-order composite follows both parents'
     // renderer.ts inputs, then this second-order performance seal follows the
@@ -1696,10 +1717,19 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // renderer.ts into src/render/mount_fx.ts, then this second-order
     // performance seal follows the swept evidence bytes. No capture was
     // retaken.
+    // Re-minted for the merge of release/v0.38.0 into the night-lighting branch:
+    // both parents move renderer.ts, so the first-order composite mints anew and
+    // this second-order seal follows the swept evidence bytes. No capture was
+    // retaken.
+    // Re-minted for the merge of release/v0.38.0 into feature/veil-wraith-courser-mount:
+    // both parents move renderer.ts (this branch's mount_fx.ts extraction, the
+    // release's fire-light-registry extraction and moon-phase grade threading), so
+    // the first-order composite mints anew and this second-order seal follows the
+    // swept evidence bytes. No capture was retaken.
     expect(
       fingerprint.digest('hex'),
       `the second-order performance digest moved; if every input moved legitimately, re-mint with: ${REMINT_COMMAND} (it recomputes this literal LAST, from the swept files)`,
-    ).toBe('e891dfbb04a21f9da522f2c613086a9edbdf2652d3cc7237f62a9f39eaaf69a6');
+    ).toBe('92bc17eea7227883da4629cdf9cd0fe986eb6e2b47c64854d95648bba5560cef');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {
