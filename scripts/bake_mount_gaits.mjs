@@ -194,6 +194,37 @@ const RIGS = {
     // yaw wag, faster and wider at a charge than at a trot
     tail: { bone: 'bone_21', axis: 'yaw', amp: { walk: 10, run: 18 } },
   },
+  // Ashfang the Cinderhide Hound: a demonic obsidian-hided war-mount, the
+  // warlock counterpart to the Courser's priest duality (Cinderhide,
+  // src/sim/content/classes.ts, "hardens your skin to cooling slag"). A
+  // heavier, more predatory gait than the boar's trot: a loping canine/ursine
+  // stride with a pronounced driving head-lower on the down-step (a hound
+  // digging in, not a boar's stiff-legged charge) and a whip-fast pitch tail
+  // lash (vs the boar's slower yaw wag) that reads as agitated even at a walk.
+  cinderhide_hound: {
+    root: 'tripo::Root',
+    fwd: -1,
+    legs: [
+      ['tripo::0_Left_Limb_0', 'tripo::0_Left_Limb_1', 0, 1], // front left
+      ['tripo::0_Right_Limb_0', 'tripo::0_Right_Limb_1', 0.5, 1], // front right
+      ['tripo::1_Left_Limb_0', 'tripo::1_Left_Limb_1', 0.5, 1, 'rear'], // rear left
+      ['tripo::1_Right_Limb_0', 'tripo::1_Right_Limb_1', 0, 1, 'rear'], // rear right
+    ],
+    gaits: {
+      Walk: { dur: 0.78, upper: 26, lower: 22, bob: 0.014 },
+      Run: { dur: 0.36, upper: 44, lower: 34, bob: 0.024 },
+    },
+    // a stocky, muscular quadruped like the boar, but reads predatory rather
+    // than lumbering: pitch (rock, a driving lunge-forward on each stride)
+    // leads over roll (sway), the inverse balance from the boar's low-slung
+    // waddle.
+    rock: { bone: 'tripo::Spine_1', walk: 2, run: 3.4 },
+    sway: { bone: 'tripo::Spine_0', walk: 1.2, run: 2.2 },
+    head: { bone: 'tripo::Head_0', amp: 5 },
+    // pitch lash (nod up/down), faster and tighter than the boar's tail wag:
+    // an agitated hound's tail, not a contented trot.
+    tail: { bone: 'bone_33', axis: 'pitch', amp: { walk: 14, run: 24 } },
+  },
 };
 
 // gait parameters (angles in degrees, translations in model units; the

@@ -1079,6 +1079,7 @@ export const de_DE: EnTranslations = {
       "name_drakemaw_raptor": "Drakenrachen-Raptor",
       "name_veil_wraith_courser": "Veil-Wraith Courser",
       "name_grimtusk_boar": "Grimtusk the Ironhide Boar",
+      "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
       "desc_valorsteed": "Ein robustes, trittsicheres Ross, das die Reisegeschwindigkeit erhöht.",
       "desc_grag_bear": "Ein robuster, trittsicherer Bär, der die Reisegeschwindigkeit erhöht.",
       "desc_stalkglider_snail": "Eine herzhafte, ausdauernde Schnecke, die die Reisegeschwindigkeit erhöht.",
@@ -1089,7 +1090,8 @@ export const de_DE: EnTranslations = {
       "desc_terrorspark_groundshaker": "Eine kompakte gepanzerte Maschine mit schweren Ketten, einer großkalibrigen Kanone und einem Sattel für furchtlose Piloten.",
       "desc_drakemaw_raptor": "Ein zugerittener Brutraptor aus der Drakenrachen-Caldera, ganz Sehne und Sprint, der noch schwach nach Asche riecht.",
       "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride.",
-      "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite."
+      "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
+      "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Drücke {key}, um das Übungs-Valorross zu besteigen.",
@@ -12370,6 +12372,9 @@ export const de_DE: EnTranslations = {
       },
       "reins_grimtusk_boar": {
         "name": "Reins of Grimtusk the Ironhide Boar"
+      },
+      "reins_cinderhide_hound": {
+        "name": "Reins of Ashfang the Cinderhide Hound"
       },
       "rimefang": {
         "name": "Reiffang"

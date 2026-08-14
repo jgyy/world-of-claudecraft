@@ -8530,6 +8530,8 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_drakemaw_raptor.name': 'Поводья раптора Дрейкмо',
   'entities.items.reins_veil_wraith_courser.name': 'Поводья Призрачного Скакуна Завесы',
   'entities.items.reins_grimtusk_boar.name': 'Поводья Мрачноклыка, вепря в железной шкуре',
+  'entities.items.reins_cinderhide_hound.name':
+    'Поводья Пепеклыка, демонического пса в шкуре из тлеющей золы',
   'entities.items.reins_thunderstrut_gobbler.name': 'Поводья Громоступа, великого индюка',
   'entities.mobs.drowned_cantor.name': 'Утопший Кантор',
   'entities.mobs.reedbound_acolyte.name': 'Тростниковый Послушник',
@@ -9769,6 +9771,9 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_grimtusk_boar': 'Мрачноклык, вепрь в железной шкуре',
   'hudChrome.mounts.desc_grimtusk_boar':
     'Огромный клыкастый боевой вепрь в несокрушимой стальной шкуре, которого несёт вперёд лишь инерция и злоба.',
+  'hudChrome.mounts.name_cinderhide_hound': 'Пепеклык, демонический пёс в шкуре из тлеющей золы',
+  'hudChrome.mounts.desc_cinderhide_hound':
+    'Демонический боевой пёс с обсидиановой шкурой, испещрённой трещинами стынущего шлака; при каждом шаге с неё срываются искры пепла.',
   'hudChrome.mounts.desc_drakemaw_raptor': 'Приученный к седлу выводковый раптор из кальдеры Дрейкмо: сплошные жилы и бег, и от него всё ещё едва пахнет пеплом.',
   'hudChrome.mounts.name_thunderstrut_gobbler': 'Громоступ, великий индюк',
   'hudChrome.mounts.name_terrorspark_groundshaker': 'Страхоискр, сотрясатель земли',

@@ -103,8 +103,8 @@ function ride(sim: Sim, pid: number, key: string): void {
 }
 
 describe('mount catalog', () => {
-  it('has exactly eleven mounts with the horse first and the developer tank last', () => {
-    expect(MOUNT_KEYS).toHaveLength(11);
+  it('has exactly twelve mounts with the horse first and the developer tank last', () => {
+    expect(MOUNT_KEYS).toHaveLength(12);
     expect(MOUNT_KEYS[0]).toBe('valorsteed');
     expect(MOUNT_KEYS.at(-1)).toBe('terrorspark_groundshaker');
     expect(DEFAULT_MOUNT).toBe('valorsteed');
@@ -125,6 +125,7 @@ describe('mount catalog', () => {
     expect(spec('drakemaw_raptor')).toEqual(['epic', 0.8]);
     expect(spec('veil_wraith_courser')).toEqual(['epic', 0.8]);
     expect(spec('grimtusk_boar')).toEqual(['epic', 0.8]);
+    expect(spec('cinderhide_hound')).toEqual(['epic', 0.8]);
     expect(spec('terrorspark_groundshaker')).toEqual(['epic', 0.8]);
     // The level field is GONE, not merely unused: it never fired (reins carry no
     // requiredLevel and every source is level-20 content) and leaving it would
@@ -248,11 +249,13 @@ describe('mount reins items (the collection: owning the item is owning the mount
     // and the rarity-derived rule below takes back over.
     // The Veil-Wraith Courser is the same kind of decision, for a different
     // reason: it is earmarked for the Claudium store once mounts are wired into
-    // that category (docs/claudium-store.md), not a gameplay drop.
+    // that category (docs/claudium-store.md), not a gameplay drop. Grimtusk the
+    // Ironhide Boar and Ashfang the Cinderhide Hound are the same shape.
     const NO_SOURCE_YET: readonly string[] = [
       'reins_drakemaw_raptor',
       'reins_veil_wraith_courser',
       'reins_grimtusk_boar',
+      'reins_cinderhide_hound',
     ];
     const FIVE_MAN_SOURCES: Record<string, readonly string[]> = {
       reins_stormfeather_griffin: ['morthen'],

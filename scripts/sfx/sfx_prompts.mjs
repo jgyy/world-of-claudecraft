@@ -153,6 +153,15 @@ export const SFX = [
     custom: true,
   },
   {
+    // Ashfang the Cinderhide Hound: the same grag_bear quadruped donor as the
+    // boar above, but pitched UP in sfx_speed_map.json instead of down: a
+    // predatory hound reads fast and light-footed, the opposite tuning
+    // direction from the boar's heavy grinding stride off the identical
+    // source clip.
+    key: 'mount_run_cinderhide_hound',
+    custom: true,
+  },
+  {
     key: 'mount_run_terrorspark_groundshaker_stop',
     custom: true,
   },

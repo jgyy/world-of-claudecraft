@@ -6506,6 +6506,10 @@ export const GUIDE_RELIQUARY: GuideReliquaryPage[] = [
       },
       {
         "kind": "mount",
+        "name": "Ashfang the Cinderhide Hound"
+      },
+      {
+        "kind": "mount",
         "name": "Terrorspark Groundshaker"
       }
     ]

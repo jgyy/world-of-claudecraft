@@ -444,6 +444,21 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     noDiscard: true,
     sellValue: 0,
   },
+  // Ashfang the Cinderhide Hound: earmarked for the Claudium store once
+  // mounts are wired into that category (docs/claudium-store.md), same shape
+  // as the Courser and the Boar above, no player-facing acquisition path yet
+  // (see content/mounts.ts). Unbound like every player reins (the
+  // tradable-reins policy).
+  reins_cinderhide_hound: {
+    id: 'reins_cinderhide_hound',
+    name: 'Reins of Ashfang the Cinderhide Hound',
+    kind: 'mount',
+    mount: 'cinderhide_hound',
+    quality: 'epic',
+    noVendorSell: true,
+    noDiscard: true,
+    sellValue: 0,
+  },
   mistveil_cord: {
     id: 'mistveil_cord',
     name: 'Mistveil Cord',

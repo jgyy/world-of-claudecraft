@@ -21,6 +21,7 @@ export const MOUNT_NAME_KEYS: Record<string, TranslationKey> = {
   drakemaw_raptor: 'hudChrome.mounts.name_drakemaw_raptor',
   veil_wraith_courser: 'hudChrome.mounts.name_veil_wraith_courser',
   grimtusk_boar: 'hudChrome.mounts.name_grimtusk_boar',
+  cinderhide_hound: 'hudChrome.mounts.name_cinderhide_hound',
   terrorspark_groundshaker: 'hudChrome.mounts.name_terrorspark_groundshaker',
 };
 
@@ -35,6 +36,7 @@ export const MOUNT_DESC_KEYS: Record<string, TranslationKey> = {
   drakemaw_raptor: 'hudChrome.mounts.desc_drakemaw_raptor',
   veil_wraith_courser: 'hudChrome.mounts.desc_veil_wraith_courser',
   grimtusk_boar: 'hudChrome.mounts.desc_grimtusk_boar',
+  cinderhide_hound: 'hudChrome.mounts.desc_cinderhide_hound',
   terrorspark_groundshaker: 'hudChrome.mounts.desc_terrorspark_groundshaker',
 };
 

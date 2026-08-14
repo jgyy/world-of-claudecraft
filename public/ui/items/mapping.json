@@ -6053,14 +6053,26 @@
    ]
   },
   {
-   "batchId": "grimtusk-boar-mount-2026-08-13",
+   "batchId": "grimtusk-boar-mount-composition-fix-2026-08-14",
+   "source": "Owner-supplied reference photo, normalized (trimmed to content, centered, padded to the woc-item-icon-v1 fill and margin targets, encoded through the standard public/ui/items pipeline).",
+   "owner": "World of ClaudeCraft",
+   "license": "World of ClaudeCraft project-generated art, project asset, rights reserved",
+   "styleReference": "PARTIALLY ADDRESSES the review's should-fix, KNOWN GAP remains: supersedes batchId grimtusk-boar-mount-2026-08-13 (an uncomposed, edge-cropped raw 3D camera render). The subject is now centered with safe padding on all four sides and fills the contract's 68-76 percent target, using an owner-supplied high-resolution render as source art. It is still a photographic 3D render rather than hand-painted brushwork, which docs/design/item-icon-art-style.md (woc-item-icon-v1) separately and explicitly forbids as a medium, independent of composition. Every other reins_* icon in the catalog is painted. Tracked as a deliberately scoped follow-up pending a true painted pass (requires OPENAI_API_KEY for the gpt-image-2 image-edit lane, unavailable in this change), not an oversight.",
+   "commonPrompt": "N/A: composition-only fix (crop to content bbox, center, pad to target fill) applied with sharp over the owner-supplied photo; not a text-to-image prompt.",
+   "provenanceRecord": "tmp/imagegen/grimtusk-boar-mount-2026-08-14/",
+   "itemIds": [
+    "reins_grimtusk_boar"
+   ]
+  },
+  {
+   "batchId": "cinderhide-hound-mount-2026-08-14",
    "source": "Tripo API 3D asset pipeline (scripts/asset_pipeline/), screenshot-rendered from the shipped GLB via scripts/render_mount_icons.mjs",
    "owner": "World of ClaudeCraft",
    "license": "World of ClaudeCraft project-generated art, project asset, rights reserved",
-   "styleReference": "KNOWN GAP, flagged in review: this is a raw 3D camera render, not a painted icon, and the style contract (docs/design/item-icon-art-style.md, woc-item-icon-v1) forbids raw 3D thumbnails for item icons; every other reins_* icon in the catalog is painted. reins_veil_wraith_courser had the identical defect and was repainted in this same change (see batchId veil-wraith-courser-mount-painted-2026-08-13); this one is a deliberately scoped follow-up pending a reference image, not an oversight. Source: a real-time camera render of the shipped 3D model (public/models/mounts/grimtusk_boar.glb) via scripts/render_mount_icons.mjs. No separate reference images.",
-   "commonPrompt": "N/A: produced by camera framing parameters (headFwd/headUp/fill/yaw/pitch in scripts/render_mount_icons.mjs), not a text-to-image prompt.",
+   "styleReference": "KNOWN GAP, same shape as grimtusk-boar-mount-2026-08-13 before its follow-up: this is a raw 3D camera render, not a painted icon, and the style contract (docs/design/item-icon-art-style.md, woc-item-icon-v1) forbids raw 3D thumbnails for item icons; every other reins_* icon in the catalog is painted. A deliberately scoped follow-up pending a true painted pass (requires OPENAI_API_KEY for the gpt-image-2 image-edit lane, unavailable in this change), not an oversight. Source: a camera render of the shipped 3D model (public/models/mounts/cinderhide_hound.glb) via scripts/render_mount_icons.mjs. No separate reference images.",
+   "commonPrompt": "N/A: produced by camera framing parameters (headFwd/headUp/fill/yaw/pitch/fwd in scripts/render_mount_icons.mjs), not a text-to-image prompt.",
    "itemIds": [
-    "reins_grimtusk_boar"
+    "reins_cinderhide_hound"
    ]
   }
  ]

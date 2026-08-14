@@ -1079,6 +1079,7 @@ export const en_CA: EnTranslations = {
       "name_drakemaw_raptor": "Drakemaw Raptor",
       "name_veil_wraith_courser": "Veil-Wraith Courser",
       "name_grimtusk_boar": "Grimtusk the Ironhide Boar",
+      "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
       "desc_valorsteed": "A hardy, sure-footed steed that provides enhanced travel speed.",
       "desc_grag_bear": "A hardy, sure-footed bear that provides enhanced travel speed.",
       "desc_stalkglider_snail": "A hearty, slow-burning snail that provides enhanced travel speed.",
@@ -1089,7 +1090,8 @@ export const en_CA: EnTranslations = {
       "desc_terrorspark_groundshaker": "A compact armored engine with heavy tracks, a deep-bore cannon, and a saddle built for fearless pilots.",
       "desc_drakemaw_raptor": "A saddle-broken brood raptor from the Drakemaw Caldera, all sinew and sprint, still smelling faintly of ash.",
       "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride.",
-      "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite."
+      "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
+      "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Press {key} to mount the training Valorsteed.",
@@ -12370,6 +12372,9 @@ export const en_CA: EnTranslations = {
       },
       "reins_grimtusk_boar": {
         "name": "Reins of Grimtusk the Ironhide Boar"
+      },
+      "reins_cinderhide_hound": {
+        "name": "Reins of Ashfang the Cinderhide Hound"
       },
       "rimefang": {
         "name": "Rimefang"

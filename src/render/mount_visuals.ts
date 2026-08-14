@@ -30,8 +30,9 @@ export interface MountVisualSpec {
   bobShape: 'hover' | 'hop';
   /** Ambient particle effect the renderer emits for this mount: the snail's
    *  slime path while moving, the hover cycle's aether exhaust, the boar's
-   *  hoof dust, the courser's holy/shadow coat-shift wisps. */
-  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | null;
+   *  hoof dust, the courser's holy/shadow coat-shift wisps, the hound's
+   *  ember-crack sparks. */
+  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | null;
 }
 
 const spec = (
@@ -40,7 +41,7 @@ const spec = (
   rigged: boolean,
   bob?: { amp: number; hz: number; idle?: boolean; shape?: 'hover' | 'hop' },
   seatFwd = 0,
-  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | null = null,
+  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | null = null,
 ): MountVisualSpec => ({
   visualKey,
   seat,
@@ -89,11 +90,21 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // with nothing behind it in-world, so it earns the ambient particle trail.
   veil_wraith_courser: spec('mount_veil_wraith_courser', 2.6, true, undefined, 0.1, 'wisp'),
   // Grimtusk the Ironhide Boar: a stocky, low-slung quadruped, so the seat
-  // sits well under the taller mounts above; the saddle rides centered over
-  // the back, roughly over the withers. 'dust': a heavy charging boar kicks
-  // up hoof dust the way the snail leaves slime and the hover cycle streams
+  // sits well under the taller mounts above. Its actual saddle prop rides the
+  // back over the haunches, well behind the model origin (the boar's head and
+  // shoulders dominate the front half of the mesh), hence the large rearward
+  // shift; a seatFwd of 0 left the rider hovering over the neck with the
+  // empty saddle visible behind them. 'dust': a heavy charging boar kicks up
+  // hoof dust the way the snail leaves slime and the hover cycle streams
   // exhaust.
-  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, 0, 'dust'),
+  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, -0.7, 'dust'),
+  // Ashfang the Cinderhide Hound: a warlock-flavored demonic war-mount (see
+  // content/classes.ts, the Cinderhide ability), taller-standing than the
+  // boar with the harness/tack riding centered over its shoulders rather
+  // than set far back. 'ember': its obsidian hide is fractured with glowing
+  // cracks of cooling slag, so it trails rising embers the way the boar
+  // kicks up ground dust and the courser streams holy/shadow wisps.
+  cinderhide_hound: spec('mount_cinderhide_hound', 2.35, true, undefined, -0.35, 'ember'),
 };
 
 /** Spec for an entity's active mountKey, or null when dismounted/unknown. */

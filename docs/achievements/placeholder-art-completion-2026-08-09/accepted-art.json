@@ -366,7 +366,7 @@
   "sourceManifests": [
     {
       "path": "docs/achievements/placeholder-art-completion-2026-08-09/mob-portrait-source-manifest.json",
-      "acceptedSha256": "983ccf4de67e5a46a499e6e08ea499538aae26ae971d180cc1478c05a0d0f697",
+      "acceptedSha256": "00168da601483a82bb1ea95f63ca3f242988ec32a6c131d4f2c3f3fa38ca5cf1",
       "acceptedBytes": 264926
     }
   ],
@@ -2115,8 +2115,8 @@
       "kind": "mobPortrait",
       "id": "bogtoad",
       "runtimeUrl": "/ui/mobs/bogtoad.webp",
-      "acceptedSha256": "1e23b41efff2235f42ab7dfc5cc467c782f4e6e9bbcf5f691019d5aa84618b0b",
-      "acceptedBytes": 1844,
+      "acceptedSha256": "98edb3581974c42c519d7558f1cac0848d0f22b817125c0f1d7a28cb516a6575",
+      "acceptedBytes": 1866,
       "origin": "deterministic-rerender"
     },
     {

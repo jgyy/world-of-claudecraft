@@ -22,6 +22,7 @@ export type MountKey =
   | 'drakemaw_raptor'
   | 'veil_wraith_courser'
   | 'grimtusk_boar'
+  | 'cinderhide_hound'
   | 'terrorspark_groundshaker';
 
 export type MountRarity = 'common' | 'uncommon' | 'rare' | 'epic';
@@ -122,6 +123,17 @@ export const MOUNTS: Record<MountKey, MountDef> = {
   grimtusk_boar: {
     key: 'grimtusk_boar',
     name: 'Grimtusk the Ironhide Boar',
+    rarity: 'epic',
+    moveSpeedPct: 0.8,
+  },
+  // Ashfang the Cinderhide Hound: a third community mount-store candidate
+  // (see docs/claudium-store.md), the warlock counterpart to the Courser's
+  // priest duality (Cinderhide, content/classes.ts). Same shape as the two
+  // above: no player-facing acquisition path yet (see reins_cinderhide_hound,
+  // content/items.ts).
+  cinderhide_hound: {
+    key: 'cinderhide_hound',
+    name: 'Ashfang the Cinderhide Hound',
     rarity: 'epic',
     moveSpeedPct: 0.8,
   },

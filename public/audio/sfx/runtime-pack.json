@@ -1,8 +1,8 @@
 {
   "format": "woc-sfx-runtime-pack",
   "version": 1,
-  "bundleId": "17188397cad955e9e54ffa4d6ff88d7b561073bffe16fd6e75e560e39c2be2fa",
-  "catalogHash": "4e48568df58a251c6e61da713dbb84b6aaa9c05ae5d601e9f4394a73a4d54c21",
+  "bundleId": "0e0ff72e19cd8e77878258309b66c6004b55758482fc23d2c7cc4450d1e8bc32",
+  "catalogHash": "09b64c2e38b25761ab5773af0b1a4144521a78c85b37cfb02350f4017c3ae2cc",
   "clips": {
     "amb_birds": {
       "variants": [
@@ -2865,6 +2865,18 @@
       ],
       "gain": 1,
       "playbackRate": 1
+    },
+    "mount_run_cinderhide_hound": {
+      "variants": [
+        {
+          "id": "main",
+          "url": "/audio/sfx/mount_run_cinderhide_hound.mp3?v=eba127f1f821",
+          "bytes": 18224,
+          "sha256": "eba127f1f8219e5d6a7512c4797735399e154e9f129bfc8c67a187941cb59fe7"
+        }
+      ],
+      "gain": 1,
+      "playbackRate": 1.18
     },
     "mount_run_drakemaw_raptor": {
       "variants": [

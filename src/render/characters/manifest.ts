@@ -1734,6 +1734,20 @@ export const VISUALS: Record<string, VisualDef> = {
     runRef: 12.6,
     lazyPreload: true,
   },
+  // Ashfang the Cinderhide Hound: same recipe as the boar above (Tripo
+  // quadruped rig, Idle/Walk/Run/Death baked locally by
+  // scripts/bake_mount_gaits.mjs), a stockier and taller-standing build.
+  // runRef is the ridden speed (RUN_SPEED 7 x +80% = 12.6), same choice as
+  // the boar and raptor above, so its authored Run cadence plays at 1.0x
+  // instead of being sped up to match a perfect foot-plant.
+  mount_cinderhide_hound: {
+    url: `${MOUNTS_DIR}/cinderhide_hound.glb`,
+    height: 3.1,
+    clips: MOUNT_RIGGED,
+    walkRef: 3.0,
+    runRef: 12.6,
+    lazyPreload: true,
+  },
   mount_drakemaw_raptor: {
     url: `${MOUNTS_DIR}/drakemaw_raptor.glb`,
     height: 3.4,

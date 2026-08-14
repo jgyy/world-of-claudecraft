@@ -166,6 +166,20 @@ describe('procedural bob math', () => {
     expect(mountBobY(spec, 0.7, true)).toBe(0);
   });
 
+  it('the boar seat sits rearward, over its saddle behind the neck and shoulders (#saddle-fix)', () => {
+    // Regression pin: seatFwd 0 left the rider hovering over the model
+    // origin near the neck while the boar's actual saddle prop rides the
+    // back over the haunches, well behind it (confirmed via
+    // scripts/mount_showcase_shot.mjs grimtusk_boar; see
+    // docs/screenshots/grimtusk-boar-saddle-fix). A rearward (negative)
+    // seatFwd is the shape every other stocky/rear-saddled mount uses
+    // (grag_bear -0.8, thunderstrut_gobbler -0.15, terrorspark_groundshaker
+    // -0.3): this pins the sign, not just a bare "not 0".
+    const spec = MOUNT_VISUAL_SPECS.grimtusk_boar;
+    expect(spec.seat).toBe(1.9);
+    expect(spec.seatFwd).toBeLessThan(-0.5);
+  });
+
   it('the snail glides flat (no bob at all)', () => {
     const spec = MOUNT_VISUAL_SPECS.stalkglider_snail;
     expect(mountBobY(spec, 0.5, true)).toBe(0);
@@ -182,7 +196,7 @@ describe('procedural bob math', () => {
   });
 
   it('every mount fx value is one of the known ambient kinds', () => {
-    const KNOWN_FX = new Set(['slime', 'exhaust', 'dust', 'wisp', null]);
+    const KNOWN_FX = new Set(['slime', 'exhaust', 'dust', 'wisp', 'ember', null]);
     for (const [key, spec] of Object.entries(MOUNT_VISUAL_SPECS)) {
       expect(KNOWN_FX.has(spec.fx), `${key}.fx = ${String(spec.fx)}`).toBe(true);
     }

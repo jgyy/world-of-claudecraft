@@ -8404,6 +8404,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_drakemaw_raptor.name': '火口のラプトルの手綱',
   'entities.items.reins_veil_wraith_courser.name': '帳の亡霊駿馬の手綱',
   'entities.items.reins_grimtusk_boar.name': '鉄皮のグリムタスクの手綱',
+  'entities.items.reins_cinderhide_hound.name': '灰皮のアッシュファングの手綱',
   'entities.items.reins_thunderstrut_gobbler.name': '大七面鳥サンダーストラットの手綱',
   'entities.mobs.drowned_cantor.name': '溺れた聖歌者',
   'entities.mobs.reedbound_acolyte.name': '葦縛りの信徒',
@@ -9617,6 +9618,9 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_grimtusk_boar': '鉄皮のグリムタスク',
   'hudChrome.mounts.desc_grimtusk_boar':
     '鋼のような鉄皮をまとった巨大な牙の軍猪。ただ勢いと悪意だけを推進力に突き進む。',
+  'hudChrome.mounts.name_cinderhide_hound': '灰皮のアッシュファング',
+  'hudChrome.mounts.desc_cinderhide_hound':
+    '黒曜石の毛皮に冷えゆく溶滓の亀裂が走る悪魔の軍用犬。駆けるたびに燠火を散らす。',
   'hudChrome.mounts.desc_drakemaw_raptor':
     '火口のカルデラで鞍慣らしされた巣育ちのラプトル。筋肉と疾走のかたまりで、いまなお灰の匂いをかすかに漂わせている。',
   'hudChrome.mounts.name_thunderstrut_gobbler': '大七面鳥サンダーストラット',

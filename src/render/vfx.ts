@@ -1966,6 +1966,27 @@ export class Vfx {
     );
   }
 
+  /** The Cinderhide Hound's fractured obsidian hide venting cooling slag:
+   *  rising embers off its flanks, brighter and more frequent at a run than
+   *  a walk, drifting slowly upward instead of falling like the boar's dust
+   *  or hanging level like the courser's wisps. */
+  mountEmberTrail(at: THREE.Vector3, dt: number, running: boolean): void {
+    if (!this.emitChance(running ? 26 : 11, dt)) return;
+    this.spawn(
+      at.x + (Math.random() - 0.5) * 0.7,
+      at.y + 0.15 + Math.random() * 0.3,
+      at.z + (Math.random() - 0.5) * 0.7,
+      (Math.random() - 0.5) * 0.15,
+      0.5 + Math.random() * (running ? 0.5 : 0.25),
+      (Math.random() - 0.5) * 0.15,
+      Math.random() < 0.4 ? 0xffcf6b : 0xff6a1f,
+      0.22 + Math.random() * 0.14,
+      0.4 + Math.random() * 0.3,
+      -0.05,
+      SPR.flame,
+    );
+  }
+
   /**
    * Ground impact puff: the visual weight of a landing, and the scuff of a
    * body striding up onto a ledge. `power` (0..1) scales count, spread, and

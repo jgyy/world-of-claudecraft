@@ -1079,6 +1079,7 @@ export const da_DK: EnTranslations = {
       "name_drakemaw_raptor": "Dragegabets Raptor",
       "name_veil_wraith_courser": "Veil-Wraith Courser",
       "name_grimtusk_boar": "Grimtusk the Ironhide Boar",
+      "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
       "desc_valorsteed": "En hårdfør, sikker ganger, der giver øget rejsehastighed.",
       "desc_grag_bear": "En hårdfør, sikker bjørn, der giver øget rejsehastighed.",
       "desc_stalkglider_snail": "En robust, langsomt forbrændende snegl, der giver øget rejsehastighed.",
@@ -1089,7 +1090,8 @@ export const da_DK: EnTranslations = {
       "desc_terrorspark_groundshaker": "En kompakt panseret maskine med tunge larvebånd, en grovkalibret kanon og en saddel bygget til frygtløse førere.",
       "desc_drakemaw_raptor": "En saddelvant yngelraptor fra Dragegabets Caldera, kun sener og spurt, som stadig lugter svagt af aske.",
       "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride.",
-      "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite."
+      "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
+      "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Tryk på {key} for at stige op på trænings-Modgangeren.",
@@ -12370,6 +12372,9 @@ export const da_DK: EnTranslations = {
       },
       "reins_grimtusk_boar": {
         "name": "Reins of Grimtusk the Ironhide Boar"
+      },
+      "reins_cinderhide_hound": {
+        "name": "Reins of Ashfang the Cinderhide Hound"
       },
       "rimefang": {
         "name": "Rimhugtand"

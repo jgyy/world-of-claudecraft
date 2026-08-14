@@ -1079,6 +1079,7 @@ export const zh_TW: EnTranslations = {
       "name_drakemaw_raptor": "龍喉迅猛龍",
       "name_veil_wraith_courser": "帷幽靈駒",
       "name_grimtusk_boar": "鐵甲猙牙野豬",
+      "name_cinderhide_hound": "燼甲灰牙魔犬",
       "desc_valorsteed": "一匹堅韌穩健的駿馬，可提升旅行速度。",
       "desc_grag_bear": "一頭堅韌穩健的巨熊，可提升旅行速度。",
       "desc_stalkglider_snail": "一隻堅毅耐久的蝸牛，可提升旅行速度。",
@@ -1089,7 +1090,8 @@ export const zh_TW: EnTranslations = {
       "desc_terrorspark_groundshaker": "一台緊湊的裝甲機械，配備重型履帶、大口徑火炮，以及為無畏駕駛員打造的鞍座。",
       "desc_drakemaw_raptor": "來自龍喉火山口的馴服巢生迅猛龍，渾身筋肉、疾若奔雷，身上仍帶著淡淡的灰燼氣味。",
       "desc_veil_wraith_courser": "一頭行走於兩界帷幕之間的幽靈牡鹿，周身光影隨步伐在聖輝與暗影霧氣間流轉變幻。",
-      "desc_grimtusk_boar": "一頭身披鐵甲、獠牙猙獰的戰豬，除了衝撞的勢頭和滿腔戾氣，什麼也不管不顧。"
+      "desc_grimtusk_boar": "一頭身披鐵甲、獠牙猙獰的戰豬，除了衝撞的勢頭和滿腔戾氣，什麼也不管不顧。",
+      "desc_cinderhide_hound": "一頭黑曜石毛皮佈滿漸冷熔渣裂痕的惡魔獵犬，每一步都揚起點點餘燼。"
     },
     "mountTraining": {
       "mountPrompt": "按 {key} 鍵騎上訓練用英勇戰馬。",
@@ -12370,6 +12372,9 @@ export const zh_TW: EnTranslations = {
       },
       "reins_grimtusk_boar": {
         "name": "鐵甲猙牙野豬的韁繩"
+      },
+      "reins_cinderhide_hound": {
+        "name": "燼甲灰牙魔犬的韁繩"
       },
       "rimefang": {
         "name": "霜牙"

@@ -107,6 +107,14 @@ const JOBS = [
     id: 'reins_grimtusk_boar',
     cfg: { headFwd: 0.92, headUp: 0.32, fill: 0.55, yaw: 0.48, pitch: 0.08 },
   },
+  {
+    // Stocky bear-proportioned build, head held low and slightly forward
+    // like the boar above; a horned, glowing-eyed demonic face reads best
+    // close and near-level.
+    file: 'cinderhide_hound.glb',
+    id: 'reins_cinderhide_hound',
+    cfg: { headFwd: 0.85, headUp: 0.28, fill: 0.42, yaw: 0.22, pitch: 0.05, fwd: 'z-' },
+  },
 ];
 
 const only = process.env.ONLY ? new Set(process.env.ONLY.split(',')) : null;

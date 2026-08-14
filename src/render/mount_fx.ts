@@ -31,6 +31,9 @@ export function applyMountFx(
     case 'wisp':
       if (moving) vfx.mountWispTrail(position, dt);
       break;
+    case 'ember':
+      if (moving) vfx.mountEmberTrail(position, dt, running);
+      break;
     case null:
       break;
     default: {

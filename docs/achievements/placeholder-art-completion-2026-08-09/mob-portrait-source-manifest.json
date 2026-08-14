@@ -6,7 +6,7 @@
     "bytes": 1510,
     "sha256": "bb0b6bacba9acb12568c3bbbe536e4442cb2964266cffef890f27ee4915dcf2a"
   },
-  "rendererFingerprint": "d6e29e529395a92788c86194ddc1b3670e9edeb4b37da848d86ca14fabaf3d86",
+  "rendererFingerprint": "13e471d6793a9b41f9ba2ba4e234bb7ba9707544143b7631be7fba08a0ea7c4f",
   "renderer": {
     "trackedFiles": [
       {
@@ -27,8 +27,8 @@
     ],
     "browserBundle": {
       "entry": "scripts/wiki/stills_render_entry.js",
-      "bytes": 3827076,
-      "sha256": "06d2c966707ad65e2eb8b1ccd39f427f656004a29fa74ccd8500e08458c8a616",
+      "bytes": 3828274,
+      "sha256": "7a59b9fe32820f43c189c3384aa7499e1c51ff68575471e62150aa45a14b3f13",
       "esbuildVersion": "0.28.1"
     },
     "output": {
