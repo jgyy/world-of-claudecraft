@@ -1080,6 +1080,7 @@ export const fr_FR: EnTranslations = {
       "name_veil_wraith_courser": "Veil-Wraith Courser",
       "name_grimtusk_boar": "Grimtusk the Ironhide Boar",
       "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
+      "name_nightprowl_panther": "Nightprowl the Duskveil Panther",
       "desc_valorsteed": "Un destrier robuste au pied sûr qui accroît la vitesse de déplacement.",
       "desc_grag_bear": "Un ours robuste au pied sûr qui accroît la vitesse de déplacement.",
       "desc_stalkglider_snail": "Un escargot vaillant à combustion lente qui accroît la vitesse de déplacement.",
@@ -1091,7 +1092,8 @@ export const fr_FR: EnTranslations = {
       "desc_drakemaw_raptor": "Un raptor de couvée dressé à la selle, originaire de la Caldeira de Drakemaw : tout en muscles et en vitesse, encore empreint d'une légère odeur de cendre.",
       "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride.",
       "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
-      "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride."
+      "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride.",
+      "desc_nightprowl_panther": "A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Appuyez sur {key} pour monter le Valorsteed d'entraînement.",
@@ -12375,6 +12377,9 @@ export const fr_FR: EnTranslations = {
       },
       "reins_cinderhide_hound": {
         "name": "Reins of Ashfang the Cinderhide Hound"
+      },
+      "reins_nightprowl_panther": {
+        "name": "Reins of Nightprowl the Duskveil Panther"
       },
       "rimefang": {
         "name": "Croc de givre"

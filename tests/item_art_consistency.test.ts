@@ -333,8 +333,8 @@ describe('item-art consistency accepted-art provenance', () => {
       },
       {
         path: `${evidenceDir}/final-item-art-audit-verdict.json`,
-        acceptedSha256: '3c73bb16ae76c1becda1ae424b4e5a3a16d05eb26fbc42469e2c32c223c06bda',
-        acceptedBytes: 111_889,
+        acceptedSha256: 'ba2298a7d9191c9d2dc5de963cff506bec42cdfdfb90394348603a3c1535f087',
+        acceptedBytes: 112_099,
       },
     ]);
     for (const evidence of [...value.sourceEvidence, ...value.generationReports]) {
@@ -449,9 +449,9 @@ describe('item-art consistency accepted-art provenance', () => {
     expect(readme).toContain('node scripts/item_art_audit.mjs\n');
     expect(readme).toContain('node scripts/item_art_audit.mjs --refresh-verdict');
     const verdictBytes = readFileSync(path.join(repoRoot, verdictPath));
-    expect(verdictBytes.length).toBe(111_889);
+    expect(verdictBytes.length).toBe(112_099);
     expect(sha256(verdictBytes)).toBe(
-      '3c73bb16ae76c1becda1ae424b4e5a3a16d05eb26fbc42469e2c32c223c06bda',
+      'ba2298a7d9191c9d2dc5de963cff506bec42cdfdfb90394348603a3c1535f087',
     );
     const verdict = JSON.parse(verdictBytes.toString('utf8')) as FinalAuditVerdict;
 
@@ -460,8 +460,8 @@ describe('item-art consistency accepted-art provenance', () => {
       baselineCommit: 'aee195551b5aef628eb7a72192117d7e3079818e',
       branch: 'feature/placeholder-art-completion-v036',
       shippingDirectory: 'public/ui/items',
-      itemArtFilesReviewed: 825,
-      liveItemDefinitions: 840,
+      itemArtFilesReviewed: 826,
+      liveItemDefinitions: 841,
       generatedHeroicDefinitions: 64,
       heroicDefinitionsWithOwnWebp: 48,
       heroicWeaponArtAliases: 16,
@@ -471,7 +471,7 @@ describe('item-art consistency accepted-art provenance', () => {
       manifest().targetSets.items.map((id) => `public/ui/items/${id}.webp`),
     );
     expect(Object.values(verdict.auditScope.groups).reduce((sum, count) => sum + count, 0)).toBe(
-      825,
+      826,
     );
     expect(Object.keys(verdict.auditScope.groups)).toHaveLength(22);
     const shippingIds = new Set(
@@ -516,13 +516,13 @@ describe('item-art consistency accepted-art provenance', () => {
     ]);
     expect(verdict.visualVerdict).toMatchObject({
       status: 'pass',
-      passCount: 825,
+      passCount: 826,
       watchCount: 0,
       watch: [],
       rejectCount: 0,
       reject: [],
       summary:
-        'All 825 shipping item-art files pass the MACHINE-CHECKABLE contract (dimensions, format, opacity, size, uniqueness; see machineChecks below): 817 reviewed in the 2026-08-09 campaign (documented retries included), plus the five class-overhaul integration additions owner-reviewed and passed on 2026-08-10, plus the Veil-Wraith Courser and Grimtusk the Ironhide Boar mount reins icons added on 2026-08-13, plus the Ashfang the Cinderhide Hound mount reins icon added on 2026-08-14. Of those three, only the Veil-Wraith Courser icon fully satisfies the woc-item-icon-v1 STYLE contract (repainted 2026-08-13, see the correction entry below): reins_grimtusk_boar is a composed-but-still-photographic render (batchId grimtusk-boar-mount-composition-fix-2026-08-14) and reins_cinderhide_hound is a raw 3D camera render (batchId cinderhide-hound-mount-2026-08-14), both known, deliberately unresolved style-contract gaps tracked in public/ui/items/mapping.json, not passed style reviews. passIds below is a shipping-catalog membership list (every current owner id, all machine-check clean), not a claim that every id also clears the style contract.',
+        'All 826 shipping item-art files pass the MACHINE-CHECKABLE contract (dimensions, format, opacity, size, uniqueness; see machineChecks below): 817 reviewed in the 2026-08-09 campaign (documented retries included), plus the five class-overhaul integration additions owner-reviewed and passed on 2026-08-10, plus the Veil-Wraith Courser and Grimtusk the Ironhide Boar mount reins icons added on 2026-08-13, plus the Ashfang the Cinderhide Hound mount reins icon added on 2026-08-14, plus the Nightprowl the Duskveil Panther mount reins icon added on 2026-08-14. Of those four, only the Veil-Wraith Courser icon fully satisfies the woc-item-icon-v1 STYLE contract (repainted 2026-08-13, see the correction entry below): reins_grimtusk_boar is a composed-but-still-photographic render (batchId grimtusk-boar-mount-composition-fix-2026-08-14), reins_cinderhide_hound is a raw 3D camera render (batchId cinderhide-hound-mount-2026-08-14), and reins_nightprowl_panther is a raw 3D camera render (batchId nightprowl-panther-mount-2026-08-14), all known, deliberately unresolved style-contract gaps tracked in public/ui/items/mapping.json, not passed style reviews. passIds below is a shipping-catalog membership list (every current owner id, all machine-check clean), not a claim that every id also clears the style contract.',
     });
     expect(verdict.visualVerdict.passIds).toEqual(currentIds);
     expect(verdict.nonVisualContentWatch).toEqual([
@@ -626,7 +626,7 @@ describe('item-art consistency accepted-art provenance', () => {
       shippingCatalogDigest.update(`${id}\0${sha256(bytes)}\0${bytes.length}\n`);
     }
     expect(verdict.evidence.shippingCatalogSha256).toBe(
-      '128a58a6afe777346e19e2f84cd2c06d3f6882046c5bb7575a4c1e5f4e166ebb',
+      'ea2a3c466c0131c8cfd1c67db38e026268041d61923fe63c40d7d1510d6e1857',
     );
     expect(shippingCatalogDigest.digest('hex')).toBe(verdict.evidence.shippingCatalogSha256);
   });
@@ -738,7 +738,7 @@ describe('item-art consistency accepted-art provenance', () => {
     ).toBeUndefined();
     expect(mapping.entries).toHaveLength(39);
     expect(mapping.entries.every(({ license }) => Boolean(license))).toBe(true);
-    expect(mapping.generatedBatches).toHaveLength(19);
+    expect(mapping.generatedBatches).toHaveLength(20);
     const batch = mapping.generatedBatches.find(({ batchId }) => batchId === BATCH_ID);
     expect(batch).toBeDefined();
     expect(batch).toMatchObject({
@@ -755,13 +755,13 @@ describe('item-art consistency accepted-art provenance', () => {
     const oldGeneratedIds = mapping.generatedBatches
       .filter(({ batchId }) => batchId !== BATCH_ID)
       .flatMap(({ itemIds }) => itemIds);
-    expect(oldGeneratedIds).toHaveLength(512);
+    expect(oldGeneratedIds).toHaveLength(513);
     const allCurrentOwnerIds = [
       ...mapping.entries.map(({ itemId }) => itemId),
       ...mapping.generatedBatches.flatMap(({ itemIds }) => itemIds),
     ];
-    expect(allCurrentOwnerIds).toHaveLength(825);
-    expect(new Set(allCurrentOwnerIds).size).toBe(825);
+    expect(allCurrentOwnerIds).toHaveLength(826);
+    expect(new Set(allCurrentOwnerIds).size).toBe(826);
     expect(batch?.provenanceRecords).toEqual([
       `${evidenceDir}/accepted-art.json`,
       `${evidenceDir}/supersession-audit.json`,
@@ -897,8 +897,8 @@ describe('item-art consistency accepted-art provenance', () => {
     for (const id of ownerIds) ownerCountById.set(id, (ownerCountById.get(id) ?? 0) + 1);
 
     const violations: string[] = [];
-    if (ownerIds.length !== 825) violations.push(`mapping owner count: ${ownerIds.length} != 825`);
-    if (fileIds.length !== 825) violations.push(`shipping WebP count: ${fileIds.length} != 825`);
+    if (ownerIds.length !== 826) violations.push(`mapping owner count: ${ownerIds.length} != 826`);
+    if (fileIds.length !== 826) violations.push(`shipping WebP count: ${fileIds.length} != 826`);
     for (const id of ids) {
       const ownerCount = ownerCountById.get(id) ?? 0;
       if (ownerCount !== 1) violations.push(`${id}: current owner count ${ownerCount} != 1`);

@@ -225,6 +225,38 @@ const RIGS = {
     // an agitated hound's tail, not a contented trot.
     tail: { bone: 'bone_33', axis: 'pitch', amp: { walk: 14, run: 24 } },
   },
+  // Nightprowl the Duskveil Panther: a lithe, low-slung big cat (the rogue
+  // counterpart to the Courser's priest duality and the Hound's warlock one,
+  // tied to Smokestep/Duskveil, src/sim/content/classes.ts id: 'vanish'). A
+  // quicker, tighter-cadence prowl than the boar's charge or the hound's
+  // lope: short walk/run durations and a wide stride for a cat's springy
+  // gait rather than a heavy quadruped's driving trot.
+  //
+  // No tail entry on purpose: this rig's auto-rigger nested the rear-right
+  // leg (tripo::1_Right_Limb_0 -> bone_6) as a scene-graph DESCENDANT of the
+  // tail chain (bone_1 -> bone_2 -> Tail_0 -> Tail_1), unlike every other
+  // baked rig here where the tail is a leaf off the spine. Driving any bone
+  // in that chain would compose onto the rear-right leg's own walk rotation
+  // and desync its stride from the other three; the rig also ships no head
+  // bone at all (the head is rigid on the spine), so head-bob is skipped too.
+  nightprowl_panther: {
+    root: 'tripo::Root',
+    fwd: -1,
+    legs: [
+      ['tripo::0_Left_Limb_0', 'tripo::0_Left_Limb_1', 0, 1], // front left
+      ['tripo::0_Right_Limb_0', 'tripo::0_Right_Limb_1', 0.5, 1], // front right
+      ['tripo::1_Left_Limb_0', 'tripo::1_Left_Limb_1', 0.5, 1, 'rear'], // rear left
+      ['tripo::1_Right_Limb_0', 'bone_6', 0, 1, 'rear'], // rear right
+    ],
+    gaits: {
+      Walk: { dur: 0.62, upper: 30, lower: 26, bob: 0.016 },
+      Run: { dur: 0.26, upper: 48, lower: 38, bob: 0.03 },
+    },
+    // a cat's spine does most of the work: pronounced roll (sway) from the
+    // low prowling gait, plus a real pitch (rock) flex on the gallop bound.
+    rock: { bone: 'tripo::Spine_1', walk: 1.6, run: 3.2 },
+    sway: { bone: 'tripo::Spine_0', walk: 2.4, run: 3.8 },
+  },
 };
 
 // gait parameters (angles in degrees, translations in model units; the

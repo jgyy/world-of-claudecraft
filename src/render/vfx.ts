@@ -1987,6 +1987,29 @@ export class Vfx {
     );
   }
 
+  /** The Duskveil Panther's own Smokestep shadow trailing off its paws and
+   *  flanks: dark violet-black wisps that drift low and sideways rather than
+   *  rising like the hound's embers or hanging level like the courser's
+   *  holy/shadow motes, reading as the same shadow it melts into on
+   *  Smokestep, not a fire or dust effect. */
+  mountShadeTrail(at: THREE.Vector3, dt: number, running: boolean): void {
+    if (!this.emitChance(running ? 24 : 10, dt)) return;
+    const a = Math.random() * Math.PI * 2;
+    this.spawn(
+      at.x + Math.sin(a) * 0.35,
+      at.y + 0.2 + Math.random() * 0.25,
+      at.z + Math.cos(a) * 0.35,
+      Math.sin(a) * 0.25,
+      0.08 + Math.random() * 0.1,
+      Math.cos(a) * 0.25,
+      Math.random() < 0.5 ? 0x2a1a3a : 0x150a20,
+      0.3 + Math.random() * 0.2,
+      0.45 + Math.random() * (running ? 0.3 : 0.2),
+      -0.02,
+      SPR.smoke,
+    );
+  }
+
   /**
    * Ground impact puff: the visual weight of a landing, and the scuff of a
    * body striding up onto a ledge. `power` (0..1) scales count, spread, and

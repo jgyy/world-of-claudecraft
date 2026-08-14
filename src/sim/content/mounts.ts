@@ -23,6 +23,7 @@ export type MountKey =
   | 'veil_wraith_courser'
   | 'grimtusk_boar'
   | 'cinderhide_hound'
+  | 'nightprowl_panther'
   | 'terrorspark_groundshaker';
 
 export type MountRarity = 'common' | 'uncommon' | 'rare' | 'epic';
@@ -134,6 +135,18 @@ export const MOUNTS: Record<MountKey, MountDef> = {
   cinderhide_hound: {
     key: 'cinderhide_hound',
     name: 'Ashfang the Cinderhide Hound',
+    rarity: 'epic',
+    moveSpeedPct: 0.8,
+  },
+  // Nightprowl the Duskveil Panther: a fourth community mount-store candidate
+  // (see docs/claudium-store.md), the rogue counterpart to the Courser's
+  // priest duality and the Hound's warlock one (Smokestep/Duskveil,
+  // content/classes.ts id: 'vanish'). Same shape as the three above: no
+  // player-facing acquisition path yet (see reins_nightprowl_panther,
+  // content/items.ts).
+  nightprowl_panther: {
+    key: 'nightprowl_panther',
+    name: 'Nightprowl the Duskveil Panther',
     rarity: 'epic',
     moveSpeedPct: 0.8,
   },

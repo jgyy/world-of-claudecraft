@@ -1740,10 +1740,42 @@ export const VISUALS: Record<string, VisualDef> = {
   // runRef is the ridden speed (RUN_SPEED 7 x +80% = 12.6), same choice as
   // the boar and raptor above, so its authored Run cadence plays at 1.0x
   // instead of being sped up to match a perfect foot-plant.
+  // The baked rig rests facing -z, same as the Veil-Wraith Courser above
+  // (see the fwd: 'z-' override in scripts/render_mount_icons.mjs); without
+  // this yaw the hound faced away from the rider and away from the travel
+  // direction, an artifact of the raw Tripo retarget carried over unfixed.
+  // yaw swings it onto the game's +z-forward convention so it walks and
+  // faces the same way as its rider.
   mount_cinderhide_hound: {
     url: `${MOUNTS_DIR}/cinderhide_hound.glb`,
     height: 3.1,
     clips: MOUNT_RIGGED,
+    yaw: Math.PI,
+    walkRef: 3.0,
+    runRef: 12.6,
+    lazyPreload: true,
+  },
+  // Nightprowl the Duskveil Panther: same recipe as the boar and hound above
+  // (Tripo quadruped rig, Idle/Walk/Run/Death baked locally by
+  // scripts/bake_mount_gaits.mjs), a lower-slung, lither build than either.
+  // runRef is the ridden speed (RUN_SPEED 7 x +80% = 12.6), same choice as
+  // the boar and hound, so the authored Run cadence plays close to 1.0x
+  // instead of a foot-matched sprint.
+  // This rig's bind pose is a genuinely different case from the courser's
+  // and hound's own facing bugs (both a flat 180, fixed with yaw: Math.PI):
+  // its raw mesh bounding box is nearly 4x wider along X than deep along Z
+  // (measured directly off the accessor min/max before baking), so the
+  // model's own long axis rests along X, not Z at all. A true side-on
+  // capture with 0/Math.PI yaw rendered the whole body edge-on, a nearly
+  // invisible sliver behind the rider. yaw: Math.PI / 2 swings the long axis
+  // onto the game's Z-forward convention; verified with an isolated,
+  // prop-free side capture (docs/screenshots/nightprowl-panther-mount) that
+  // the fixed orientation also walks and faces the same way as the rider.
+  mount_nightprowl_panther: {
+    url: `${MOUNTS_DIR}/nightprowl_panther.glb`,
+    height: 2.3,
+    clips: MOUNT_RIGGED,
+    yaw: Math.PI / 2,
     walkRef: 3.0,
     runRef: 12.6,
     lazyPreload: true,

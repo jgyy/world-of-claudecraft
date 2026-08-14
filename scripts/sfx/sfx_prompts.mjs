@@ -162,6 +162,15 @@ export const SFX = [
     custom: true,
   },
   {
+    // Nightprowl the Duskveil Panther: the valorsteed gallop donor, the same
+    // one the Veil-Wraith Courser reuses above, pitched up further in
+    // sfx_speed_map.json (1.3 vs the courser's 1.05) for a lighter, quicker
+    // big-cat cadence distinct from both the courser's own tuning and the
+    // boar/hound's shared grag_bear donor.
+    key: 'mount_run_nightprowl_panther',
+    custom: true,
+  },
+  {
     key: 'mount_run_terrorspark_groundshaker_stop',
     custom: true,
   },

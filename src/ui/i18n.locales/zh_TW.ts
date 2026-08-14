@@ -8049,6 +8049,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_veil_wraith_courser.name': '帷幽靈駒的韁繩',
   'entities.items.reins_grimtusk_boar.name': '鐵甲猙牙野豬的韁繩',
   'entities.items.reins_cinderhide_hound.name': '燼甲灰牙魔犬的韁繩',
+  'entities.items.reins_nightprowl_panther.name': '暮紗夜行豹的韁繩',
   'entities.items.reins_thunderstrut_gobbler.name': '雷霆闊步大火雞的韁繩',
   'entities.mobs.drowned_cantor.name': '溺亡誦經者',
   'entities.mobs.reedbound_acolyte.name': '蘆葦縛信徒',
@@ -9209,6 +9210,9 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_cinderhide_hound': '燼甲灰牙魔犬',
   'hudChrome.mounts.desc_cinderhide_hound':
     '一頭黑曜石毛皮佈滿漸冷熔渣裂痕的惡魔獵犬，每一步都揚起點點餘燼。',
+  'hudChrome.mounts.name_nightprowl_panther': '暮紗夜行豹',
+  'hudChrome.mounts.desc_nightprowl_panther':
+    '一語便融入黑暗的矯健暗影豹，每一步都拖曳著牠藏身其中的同一縷暗影。',
   'hudChrome.mounts.desc_drakemaw_raptor':
     '來自龍喉火山口的馴服巢生迅猛龍，渾身筋肉、疾若奔雷，身上仍帶著淡淡的灰燼氣味。',
   'hudChrome.mounts.name_thunderstrut_gobbler': '雷霆闊步大火雞',

@@ -803,8 +803,8 @@ describe('table shape', () => {
     // keeps its col_ id and Collection shelf beside its ladder, but carries
     // feat: true because it is a dynamic meta over a growing catalog (the
     // feat_book_complete class) and the flag is what keeps it out of
-    // BOOK_COMPLETE_REQUIREMENTS: six catalog slots are owner-pended today
-    // (masterwork:engineering, five pending reins), so a non-feat capstone
+    // BOOK_COMPLETE_REQUIREMENTS: seven catalog slots are owner-pended today
+    // (masterwork:engineering, six pending reins), so a non-feat capstone
     // would dead-end The Whole Book for every player. Growing this set is a
     // deliberate design act; prefer the feat_ prefix for anything new.
     const OFF_PREFIX_FEATS = new Set(['col_reliquary_complete']);
@@ -1172,15 +1172,16 @@ describe('the completionist feat', () => {
   });
 
   it('stays reachable: the unearnable Reliquary capstone is OUT, its earnable ladder is IN', () => {
-    // col_reliquary_complete is unearnable while six catalog slots stay
+    // col_reliquary_complete is unearnable while seven catalog slots stay
     // owner-pended (masterwork:engineering, reins_drakemaw_raptor,
     // reins_terrorspark_groundshaker, reins_veil_wraith_courser,
-    // reins_grimtusk_boar, reins_cinderhide_hound); as a Book requirement it
-    // would dead-end The Whole Book for every player, the exact failure the
-    // retroFallbackGrants stranded-heal doctrine names. The feat flag is the
-    // exclusion mechanism; this arm reds the moment anyone drops it. The
-    // derivation pin above cannot catch that regression on its own, because
-    // both its sides read the same flag.
+    // reins_grimtusk_boar, reins_cinderhide_hound, reins_nightprowl_panther);
+    // as a Book requirement it would dead-end The Whole Book for every
+    // player, the exact failure the retroFallbackGrants stranded-heal
+    // doctrine names. The feat flag is the exclusion mechanism; this arm
+    // reds the moment anyone drops it. The derivation pin above cannot
+    // catch that regression on its own, because both its sides read the
+    // same flag.
     const t = DEEDS.feat_book_complete.trigger;
     if (t.kind !== 'meta') throw new Error('feat_book_complete lost its meta trigger');
     expect(t.deedIds).not.toContain('col_reliquary_complete');

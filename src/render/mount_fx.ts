@@ -34,6 +34,9 @@ export function applyMountFx(
     case 'ember':
       if (moving) vfx.mountEmberTrail(position, dt, running);
       break;
+    case 'shade':
+      if (moving) vfx.mountShadeTrail(position, dt, running);
+      break;
     case null:
       break;
     default: {

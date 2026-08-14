@@ -115,6 +115,14 @@ const JOBS = [
     id: 'reins_cinderhide_hound',
     cfg: { headFwd: 0.85, headUp: 0.28, fill: 0.42, yaw: 0.22, pitch: 0.05, fwd: 'z-' },
   },
+  {
+    // Its raw mesh rests facing +X, not Z at all (see the yaw: Math.PI / 2
+    // comment on mount_nightprowl_panther in characters/manifest.ts): a
+    // lithe, low-carried head, so anchor low and close like the hound above.
+    file: 'nightprowl_panther.glb',
+    id: 'reins_nightprowl_panther',
+    cfg: { headFwd: 0.85, headUp: 0.42, fill: 0.56, yaw: 0.34, pitch: 0.16, fwd: 'x+' },
+  },
 ];
 
 const only = process.env.ONLY ? new Set(process.env.ONLY.split(',')) : null;

@@ -1080,6 +1080,7 @@ export const ja_JP: EnTranslations = {
       "name_veil_wraith_courser": "帳の亡霊駿馬",
       "name_grimtusk_boar": "鉄皮のグリムタスク",
       "name_cinderhide_hound": "灰皮のアッシュファング",
+      "name_nightprowl_panther": "黄昏帳のナイトプロウル",
       "desc_valorsteed": "頑健で足取り確かな駿馬。移動速度を高める。",
       "desc_grag_bear": "頑健で足取り確かな熊。移動速度を高める。",
       "desc_stalkglider_snail": "粘り強くゆっくり燃えるカタツムリ。移動速度を高める。",
@@ -1091,7 +1092,8 @@ export const ja_JP: EnTranslations = {
       "desc_drakemaw_raptor": "火口のカルデラで鞍慣らしされた巣育ちのラプトル。筋肉と疾走のかたまりで、いまなお灰の匂いをかすかに漂わせている。",
       "desc_veil_wraith_courser": "二つの世界を隔てる帳の狭間を歩む亡霊の牡鹿。一歩ごとに毛並みが神々しい光と影の霧へと移ろう。",
       "desc_grimtusk_boar": "鋼のような鉄皮をまとった巨大な牙の軍猪。ただ勢いと悪意だけを推進力に突き進む。",
-      "desc_cinderhide_hound": "黒曜石の毛皮に冷えゆく溶滓の亀裂が走る悪魔の軍用犬。駆けるたびに燠火を散らす。"
+      "desc_cinderhide_hound": "黒曜石の毛皮に冷えゆく溶滓の亀裂が走る悪魔の軍用犬。駆けるたびに燠火を散らす。",
+      "desc_nightprowl_panther": "一言で闇に溶ける、しなやかな影の豹。駆けるたびに己が溶け込む影と同じ靄を引く。"
     },
     "mountTraining": {
       "mountPrompt": "{key} キーを押して訓練用ヴァロースティードに騎乗する。",
@@ -12375,6 +12377,9 @@ export const ja_JP: EnTranslations = {
       },
       "reins_cinderhide_hound": {
         "name": "灰皮のアッシュファングの手綱"
+      },
+      "reins_nightprowl_panther": {
+        "name": "黄昏帳のナイトプロウルの手綱"
       },
       "rimefang": {
         "name": "霜牙"

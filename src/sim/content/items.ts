@@ -459,6 +459,21 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     noDiscard: true,
     sellValue: 0,
   },
+  // Nightprowl the Duskveil Panther: earmarked for the Claudium store once
+  // mounts are wired into that category (docs/claudium-store.md), same shape
+  // as the Courser, the Boar, and the Hound above, no player-facing
+  // acquisition path yet (see content/mounts.ts). Unbound like every player
+  // reins (the tradable-reins policy).
+  reins_nightprowl_panther: {
+    id: 'reins_nightprowl_panther',
+    name: 'Reins of Nightprowl the Duskveil Panther',
+    kind: 'mount',
+    mount: 'nightprowl_panther',
+    quality: 'epic',
+    noVendorSell: true,
+    noDiscard: true,
+    sellValue: 0,
+  },
   mistveil_cord: {
     id: 'mistveil_cord',
     name: 'Mistveil Cord',

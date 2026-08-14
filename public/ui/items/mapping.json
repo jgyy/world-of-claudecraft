@@ -6074,6 +6074,17 @@
    "itemIds": [
     "reins_cinderhide_hound"
    ]
+  },
+  {
+   "batchId": "nightprowl-panther-mount-2026-08-14",
+   "source": "Tripo API 3D asset pipeline (scripts/asset_pipeline/), screenshot-rendered from the shipped GLB via scripts/render_mount_icons.mjs",
+   "owner": "World of ClaudeCraft",
+   "license": "World of ClaudeCraft project-generated art, project asset, rights reserved",
+   "styleReference": "KNOWN GAP, same shape as grimtusk-boar-mount-2026-08-13 and cinderhide-hound-mount-2026-08-14 before their follow-ups: this is a raw 3D camera render, not a painted icon, and the style contract (docs/design/item-icon-art-style.md, woc-item-icon-v1) forbids raw 3D thumbnails for item icons; every other reins_* icon in the catalog is painted. A deliberately scoped follow-up pending a true painted pass (requires an owner-supplied reference image for the gpt-image-2 image-edit lane, unavailable in this change, an OPENAI_API_KEY text-to-image attempt without a reference risks a less game-consistent result than the camera render), not an oversight. Source: a camera render of the shipped 3D model (public/models/mounts/nightprowl_panther.glb) via scripts/render_mount_icons.mjs. No separate reference images.",
+   "commonPrompt": "N/A: produced by camera framing parameters (headFwd/headUp/fill/yaw/pitch/fwd in scripts/render_mount_icons.mjs), not a text-to-image prompt.",
+   "itemIds": [
+    "reins_nightprowl_panther"
+   ]
   }
  ]
 }

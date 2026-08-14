@@ -164,9 +164,9 @@ describe('buildManifest', () => {
     expect(manifest).toContain('cast_lightning_bolt');
   });
 
-  it('keeps the release catalog, all 12 mount cues, and all 63 UI cues in one 268-key inventory', () => {
+  it('keeps the release catalog, all 13 mount cues, and all 63 UI cues in one 269-key inventory', () => {
     const keys = new Set(SFX.map((entry) => entry.key));
-    expect(keys.size).toBe(268);
+    expect(keys.size).toBe(269);
     expect([...keys].filter((key) => key.startsWith('ui_'))).toHaveLength(63);
     expect(keys.has('ui_craft_cast')).toBe(true);
     for (const key of [
@@ -193,6 +193,8 @@ describe('buildManifest', () => {
       'mount_run_veil_wraith_courser',
       // Grimtusk the Ironhide Boar, the eleventh mount cue (the grag_bear footfall donor)
       'mount_run_grimtusk_boar',
+      // Nightprowl the Duskveil Panther, the thirteenth mount cue (the valorsteed gallop donor)
+      'mount_run_nightprowl_panther',
       'fear_shout',
       'fear',
       'intimidating_shout',
@@ -248,7 +250,7 @@ describe('buildManifest', () => {
     // purely filesystem-discovered.
     const mobFamilyKeys = [...keys].filter((key) => key.startsWith('mob_'));
     expect(mobFamilyKeys).toHaveLength(65); // 13 families x 5 actions
-    expect(SFX_FIXED_CATALOG_KEYS).toHaveLength(268);
+    expect(SFX_FIXED_CATALOG_KEYS).toHaveLength(269);
   });
 });
 

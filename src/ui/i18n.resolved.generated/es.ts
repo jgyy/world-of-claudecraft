@@ -1080,6 +1080,7 @@ export const es: EnTranslations = {
       "name_veil_wraith_courser": "Veil-Wraith Courser",
       "name_grimtusk_boar": "Grimtusk the Ironhide Boar",
       "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
+      "name_nightprowl_panther": "Nightprowl the Duskveil Panther",
       "desc_valorsteed": "Un corcel resistente y de paso firme que aumenta la velocidad de viaje.",
       "desc_grag_bear": "Un oso resistente y de paso firme que aumenta la velocidad de viaje.",
       "desc_stalkglider_snail": "Un caracol recio y de combustión lenta que aumenta la velocidad de viaje.",
@@ -1091,7 +1092,8 @@ export const es: EnTranslations = {
       "desc_drakemaw_raptor": "Un raptor de cría domado para la silla, procedente de la Caldera de Drakemaw, puro tendón y arranque, que aún huele ligeramente a ceniza.",
       "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride.",
       "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
-      "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride."
+      "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride.",
+      "desc_nightprowl_panther": "A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Pulsa {key} para montar el Corcel del Valor de entrenamiento.",
@@ -12375,6 +12377,9 @@ export const es: EnTranslations = {
       },
       "reins_cinderhide_hound": {
         "name": "Reins of Ashfang the Cinderhide Hound"
+      },
+      "reins_nightprowl_panther": {
+        "name": "Reins of Nightprowl the Duskveil Panther"
       },
       "rimefang": {
         "name": "Colmillo de Escarcha"

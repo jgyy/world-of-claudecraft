@@ -1080,6 +1080,7 @@ export const nl_NL: EnTranslations = {
       "name_veil_wraith_courser": "Veil-Wraith Courser",
       "name_grimtusk_boar": "Grimtusk the Ironhide Boar",
       "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
+      "name_nightprowl_panther": "Nightprowl the Duskveil Panther",
       "desc_valorsteed": "Een sterk, standvastig strijdros dat extra reissnelheid geeft.",
       "desc_grag_bear": "Een sterke, standvastige beer die extra reissnelheid geeft.",
       "desc_stalkglider_snail": "Een taaie, langzaam brandende slak die extra reissnelheid geeft.",
@@ -1091,7 +1092,8 @@ export const nl_NL: EnTranslations = {
       "desc_drakemaw_raptor": "Een zadelmakke broedraptor uit de Drakenmuil-Caldera, één en al pezen en vaart, nog altijd zwak naar as geurend.",
       "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride.",
       "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
-      "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride."
+      "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride.",
+      "desc_nightprowl_panther": "A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Druk op {key} om op de trainings-Moedros te stijgen.",
@@ -12375,6 +12377,9 @@ export const nl_NL: EnTranslations = {
       },
       "reins_cinderhide_hound": {
         "name": "Reins of Ashfang the Cinderhide Hound"
+      },
+      "reins_nightprowl_panther": {
+        "name": "Reins of Nightprowl the Duskveil Panther"
       },
       "rimefang": {
         "name": "Rijptand"

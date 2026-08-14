@@ -174,10 +174,15 @@ describe('procedural bob math', () => {
     // docs/screenshots/grimtusk-boar-saddle-fix). A rearward (negative)
     // seatFwd is the shape every other stocky/rear-saddled mount uses
     // (grag_bear -0.8, thunderstrut_gobbler -0.15, terrorspark_groundshaker
-    // -0.3): this pins the sign, not just a bare "not 0".
+    // -0.3): this pins the sign, not just a bare "not 0". An UPPER bound is
+    // pinned too: -1.4 (a later attempt) overshot past the saddle's rear
+    // edge onto the bare haunches, confirmed via a clean top-down capture
+    // with the mount isolated from every other prop; -1.15 is the
+    // re-measured value with the model isolated the same way.
     const spec = MOUNT_VISUAL_SPECS.grimtusk_boar;
     expect(spec.seat).toBe(1.9);
-    expect(spec.seatFwd).toBeLessThan(-0.5);
+    expect(spec.seatFwd).toBeLessThan(-0.9);
+    expect(spec.seatFwd).toBeGreaterThan(-1.3);
   });
 
   it('the snail glides flat (no bob at all)', () => {
@@ -196,9 +201,22 @@ describe('procedural bob math', () => {
   });
 
   it('every mount fx value is one of the known ambient kinds', () => {
-    const KNOWN_FX = new Set(['slime', 'exhaust', 'dust', 'wisp', 'ember', null]);
+    const KNOWN_FX = new Set(['slime', 'exhaust', 'dust', 'wisp', 'ember', 'shade', null]);
     for (const [key, spec] of Object.entries(MOUNT_VISUAL_SPECS)) {
       expect(KNOWN_FX.has(spec.fx), `${key}.fx = ${String(spec.fx)}`).toBe(true);
     }
+  });
+
+  it('the hound faces the same way as its rider (#facing-fix)', () => {
+    // Regression pin: the cinderhide_hound.glb rig rests facing -z, the same
+    // Tripo-retarget artifact the veil_wraith_courser rig has (both are
+    // fwd: 'z-' in scripts/render_mount_icons.mjs). The courser's VisualDef
+    // carries yaw: Math.PI to correct onto the game's +z-forward convention;
+    // the hound's shipped without it, so the mount rendered facing away from
+    // its own rider and direction of travel. Pin both the fix and the
+    // contrast: the boar's native rig needs no correction at all.
+    expect(VISUALS.mount_cinderhide_hound.yaw).toBe(Math.PI);
+    expect(VISUALS.mount_veil_wraith_courser.yaw).toBe(Math.PI);
+    expect(VISUALS.mount_grimtusk_boar.yaw ?? 0).toBe(0);
   });
 });

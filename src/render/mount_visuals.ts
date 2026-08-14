@@ -31,8 +31,8 @@ export interface MountVisualSpec {
   /** Ambient particle effect the renderer emits for this mount: the snail's
    *  slime path while moving, the hover cycle's aether exhaust, the boar's
    *  hoof dust, the courser's holy/shadow coat-shift wisps, the hound's
-   *  ember-crack sparks. */
-  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | null;
+   *  ember-crack sparks, the panther's trailing shadow wisps. */
+  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | 'shade' | null;
 }
 
 const spec = (
@@ -41,7 +41,7 @@ const spec = (
   rigged: boolean,
   bob?: { amp: number; hz: number; idle?: boolean; shape?: 'hover' | 'hop' },
   seatFwd = 0,
-  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | null = null,
+  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | 'shade' | null = null,
 ): MountVisualSpec => ({
   visualKey,
   seat,
@@ -94,14 +94,17 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // back over the haunches, well behind the model origin (the boar's head and
   // shoulders dominate the front half of the mesh), hence the large rearward
   // shift; a seatFwd of 0 left the rider hovering over the neck with the
-  // empty saddle visible behind them, and -0.7 (the prior attempt) still left
-  // the rider straddling the front edge of the saddle near the head, short of
-  // the visible seat. Re-measured directly against the saddle prop with a
-  // side-on capture of the mounted rig: -1.4 seats the rider on the leather
-  // at the buckle line, matching the reference before/after screenshots.
+  // empty saddle visible behind them, and -0.7 (an earlier attempt) still
+  // left the rider straddling the front edge of the saddle near the head,
+  // short of the visible seat. -1.4 (a later attempt) overshot the other way:
+  // a clean top-down capture with the mount clear of every other prop showed
+  // the rider sitting past the saddle's rear edge, near the haunches, with no
+  // hindquarters visible past them at all. Re-measured the same way with the
+  // model isolated: -1.15 centers the rider on the saddle's leather panel
+  // (buckle line under the seat, tail and hind legs still visible behind).
   // 'dust': a heavy charging boar kicks up hoof dust the way the snail leaves
   // slime and the hover cycle streams exhaust.
-  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, -1.4, 'dust'),
+  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, -1.15, 'dust'),
   // Ashfang the Cinderhide Hound: a warlock-flavored demonic war-mount (see
   // content/classes.ts, the Cinderhide ability), taller-standing than the
   // boar with the harness/tack riding centered over its shoulders rather
@@ -109,6 +112,14 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // cracks of cooling slag, so it trails rising embers the way the boar
   // kicks up ground dust and the courser streams holy/shadow wisps.
   cinderhide_hound: spec('mount_cinderhide_hound', 2.35, true, undefined, -0.35, 'ember'),
+  // Nightprowl the Duskveil Panther: a rogue-flavored shadow panther (see
+  // content/classes.ts, the Smokestep ability that grants Duskveil stealth),
+  // lower-slung and lither than the hound, with a real 3D saddle prop (not
+  // baked flat into the hide texture like the boar's/hound's). Its saddle
+  // sits over the shoulders. 'shade': it trails wisps of the same shadow it
+  // melts into on Smokestep, the way the hound trails embers off its cracked
+  // hide and the courser streams holy/shadow wisps off its coat.
+  nightprowl_panther: spec('mount_nightprowl_panther', 2.0, true, undefined, -0.3, 'shade'),
 };
 
 /** Spec for an entity's active mountKey, or null when dismounted/unknown. */

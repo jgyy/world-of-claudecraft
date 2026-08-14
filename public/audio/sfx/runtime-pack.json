@@ -1,8 +1,8 @@
 {
   "format": "woc-sfx-runtime-pack",
   "version": 1,
-  "bundleId": "0e0ff72e19cd8e77878258309b66c6004b55758482fc23d2c7cc4450d1e8bc32",
-  "catalogHash": "09b64c2e38b25761ab5773af0b1a4144521a78c85b37cfb02350f4017c3ae2cc",
+  "bundleId": "661db7754fd595b063be16ca883726e8522d2039aac1347d956ea88c1ee9a123",
+  "catalogHash": "0e1d4a91c74cf7a78f9ff6ccd02c4c02824e725f7e4ce313d3c81e72144d8982",
   "clips": {
     "amb_birds": {
       "variants": [
@@ -2913,6 +2913,18 @@
       ],
       "gain": 1,
       "playbackRate": 0.85
+    },
+    "mount_run_nightprowl_panther": {
+      "variants": [
+        {
+          "id": "main",
+          "url": "/audio/sfx/mount_run_nightprowl_panther.mp3?v=d4e79277b2cb",
+          "bytes": 10701,
+          "sha256": "d4e79277b2cb1da5d5941c6116136f2ca7104376e12d455c6306919a3e862002"
+        }
+      ],
+      "gain": 1,
+      "playbackRate": 1.3
     },
     "mount_run_shadowjump_toad": {
       "variants": [

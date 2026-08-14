@@ -2403,6 +2403,17 @@
       }
     ]
   },
+  "mount_run_nightprowl_panther": {
+    "ceilingDb": 5.2,
+    "tracks": [
+      {
+        "filename": "mount_run_nightprowl_panther.mp3",
+        "sha256": "d4e79277b2cb1da5d5941c6116136f2ca7104376e12d455c6306919a3e862002",
+        "size": 10701,
+        "peakDb": -6.2
+      }
+    ]
+  },
   "mount_run_shadowjump_toad": {
     "ceilingDb": 5.3,
     "tracks": [
