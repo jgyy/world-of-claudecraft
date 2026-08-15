@@ -1707,7 +1707,10 @@ export const VISUALS: Record<string, VisualDef> = {
   // mount stands still instead of visibly walking in place.
   mount_veil_wraith_courser: {
     url: `${MOUNTS_DIR}/veil_wraith_courser.glb`,
-    height: 3.9,
+    // Sized up +20% (was 3.9) with the rest of the PR #3365 catalog: read as
+    // visually undersized next to the player at the old height. mount_visuals.ts
+    // seat/seatFwd scale by the same factor so the saddle position holds.
+    height: 4.68,
     clips: MOUNT_RIGGED,
     // The baked rig rests facing -z, unlike every other mount's native +z
     // (see the fwd: 'z-' override in scripts/render_mount_icons.mjs); yaw
@@ -1739,7 +1742,9 @@ export const VISUALS: Record<string, VisualDef> = {
   // foot-slide as the tradeoff, which reads right for a lumbering charge.
   mount_grimtusk_boar: {
     url: `${MOUNTS_DIR}/grimtusk_boar.glb`,
-    height: 2.6,
+    // Sized up +20% (was 2.6) with the rest of the catalog; mount_visuals.ts
+    // seat/seatFwd scale by the same factor so the saddle position holds.
+    height: 3.12,
     clips: MOUNT_RIGGED_JUMP,
     walkRef: 3.0,
     runRef: 12.6,
@@ -1751,17 +1756,27 @@ export const VISUALS: Record<string, VisualDef> = {
   // runRef is the ridden speed (RUN_SPEED 7 x +80% = 12.6), same choice as
   // the boar and raptor above, so its authored Run cadence plays at 1.0x
   // instead of being sped up to match a perfect foot-plant.
-  // The baked rig rests facing -z, same as the Veil-Wraith Courser above
-  // (see the fwd: 'z-' override in scripts/render_mount_icons.mjs); without
-  // this yaw the hound faced away from the rider and away from the travel
-  // direction, an artifact of the raw Tripo retarget carried over unfixed.
-  // yaw swings it onto the game's +z-forward convention so it walks and
-  // faces the same way as its rider.
+  // yaw was Math.PI (a flat 180, copied from the Courser's fix) until a live
+  // orientation check (comparing the model wrap's actual world-space forward
+  // vector against the real movement delta while running, not a screenshot)
+  // showed it pointing dead OPPOSITE the travel direction: dot product -1.
+  // Math.PI only ever corrects a Z-forward rig's 180-degree flip, but this
+  // rig's own bind pose puts its head at +X from the rear legs with an
+  // essentially zero Z offset (measured the same way the panther's own
+  // bodyAxis finding was), the SAME non-standard axis the panther has, not a
+  // flat-180 case at all. -Math.PI / 2 swings local +X onto the game's
+  // +z-forward convention (the same correction the panther uses, and
+  // verified against the same live orientation check: dot product +1 after
+  // the fix). scripts/bake_mount_gaits.mjs also needs bodyAxis: 'x' for this
+  // rig now, so the Walk/Run leg swing moves fore-aft instead of sideways;
+  // the GLB was re-baked in the same change.
   mount_cinderhide_hound: {
     url: `${MOUNTS_DIR}/cinderhide_hound.glb`,
-    height: 3.1,
+    // Sized up +20% (was 3.1) with the rest of the catalog; mount_visuals.ts
+    // seat/seatFwd scale by the same factor so the saddle position holds.
+    height: 3.72,
     clips: MOUNT_RIGGED_JUMP,
-    yaw: Math.PI,
+    yaw: -Math.PI / 2,
     walkRef: 3.0,
     runRef: 12.6,
     lazyPreload: true,
@@ -1789,7 +1804,9 @@ export const VISUALS: Record<string, VisualDef> = {
   // of travel.
   mount_nightprowl_panther: {
     url: `${MOUNTS_DIR}/nightprowl_panther.glb`,
-    height: 2.3,
+    // Sized up +20% (was 2.3) with the rest of the catalog; mount_visuals.ts
+    // seat/seatFwd scale by the same factor so the saddle position holds.
+    height: 2.76,
     clips: MOUNT_RIGGED_JUMP,
     yaw: -Math.PI / 2,
     walkRef: 3.0,
@@ -1811,7 +1828,9 @@ export const VISUALS: Record<string, VisualDef> = {
   // phase-delayed-tip ripple, the trick the hound introduced).
   mount_windrend_stormveil_shadewolf: {
     url: `${MOUNTS_DIR}/windrend_stormveil_shadewolf.glb`,
-    height: 2.4,
+    // Sized up +20% (was 2.4) with the rest of the catalog; mount_visuals.ts
+    // seat/seatFwd scale by the same factor so the saddle position holds.
+    height: 2.88,
     clips: MOUNT_RIGGED_JUMP,
     walkRef: 3.0,
     runRef: 12.6,

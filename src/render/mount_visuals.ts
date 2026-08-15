@@ -111,7 +111,9 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // Run clips from its own Walk animation (see manifest.ts). 'wisp': its coat
   // shifting between holy radiance and shadow mist is otherwise flavor text
   // with nothing behind it in-world, so it earns the ambient particle trail.
-  veil_wraith_courser: spec('mount_veil_wraith_courser', 2.6, true, undefined, 0.1, 'wisp'),
+  // seat/seatFwd scaled x1.2 with the +20% model size bump (manifest.ts
+  // height 3.9 -> 4.68) so the saddle position holds at the new scale.
+  veil_wraith_courser: spec('mount_veil_wraith_courser', 3.12, true, undefined, 0.12, 'wisp'),
   // Grimtusk the Ironhide Boar: a stocky, low-slung quadruped, so the seat
   // sits well under the taller mounts above. Its actual saddle prop rides the
   // back over the haunches, well behind the model origin (the boar's head and
@@ -127,14 +129,18 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // (buckle line under the seat, tail and hind legs still visible behind).
   // 'dust': a heavy charging boar kicks up hoof dust the way the snail leaves
   // slime and the hover cycle streams exhaust.
-  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, -0.85, 'dust'),
+  // seat/seatFwd scaled x1.2 with the +20% model size bump (manifest.ts
+  // height 2.6 -> 3.12) so the saddle position holds at the new scale.
+  grimtusk_boar: spec('mount_grimtusk_boar', 2.28, true, undefined, -1.02, 'dust'),
   // Ashfang the Cinderhide Hound: a warlock-flavored demonic war-mount (see
   // content/classes.ts, the Cinderhide ability), taller-standing than the
   // boar with the harness/tack riding centered over its shoulders rather
   // than set far back. 'ember': its obsidian hide is fractured with glowing
   // cracks of cooling slag, so it trails rising embers the way the boar
   // kicks up ground dust and the courser streams holy/shadow wisps.
-  cinderhide_hound: spec('mount_cinderhide_hound', 2.35, true, undefined, -0.35, 'ember'),
+  // seat/seatFwd scaled x1.2 with the +20% model size bump (manifest.ts
+  // height 3.1 -> 3.72) so the saddle position holds at the new scale.
+  cinderhide_hound: spec('mount_cinderhide_hound', 2.82, true, undefined, -0.42, 'ember'),
   // Nightprowl the Duskveil Panther: a rogue-flavored shadow panther (see
   // content/classes.ts, the Smokestep ability that grants Duskveil stealth),
   // lower-slung and lither than the hound, with a real 3D saddle prop (not
@@ -142,7 +148,15 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // sits over the shoulders. 'shade': it trails wisps of the same shadow it
   // melts into on Smokestep, the way the hound trails embers off its cracked
   // hide and the courser streams holy/shadow wisps off its coat.
-  nightprowl_panther: spec('mount_nightprowl_panther', 2.0, true, undefined, -0.3, 'shade'),
+  // seat was 2.0, well above the actual spine/back height (measured off the
+  // live rig's own spine-bone world position, calibrated against the boar's
+  // already-confirmed seat margin above its own spine bone): the rider
+  // floated visibly clear of the saddle. 1.59 (at the old 2.3 model height)
+  // landed the rider on the back, confirmed with a close low side-on capture
+  // matching the boar's own reference framing, not assumed from the math
+  // alone. Scaled to 1.908 with the +20% model size bump (manifest.ts height
+  // 2.3 -> 2.76) so that fix holds at the new scale.
+  nightprowl_panther: spec('mount_nightprowl_panther', 1.908, true, undefined, -0.36, 'shade'),
   // Windrend the Stormveil Shadewolf: a shaman-flavored spectral wolf (see
   // content/classes.ts, the ghost_wolf ability, in-game name "Shadewolf"),
   // leggier and more upright than the panther's low prowl, saddle riding
@@ -151,12 +165,21 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // pinned, absolute camera angles, not a screenshot read alone). 'frost':
   // its translucent hide sheds a cold spectral mist that spreads outward as
   // it drifts, distinct from every other mount's ambient trail.
+  // seat was 2.15, well clear of the actual back height (same live spine-bone
+  // measurement + close low side-on re-verification as the panther above).
+  // The spine-bone-derived first guess (1.58) still floated visibly on a
+  // live capture; the wolf's back sits lower relative to its spine bones
+  // than the boar's calibration predicted, so it was walked down further and
+  // re-verified against the same close low side-on framing until the rider's
+  // legs actually overlapped the saddle: 1.22 (at the old 2.4 model height).
+  // Scaled to 1.464 with the +20% model size bump (manifest.ts height
+  // 2.4 -> 2.88) so that fix holds at the new scale.
   windrend_stormveil_shadewolf: spec(
     'mount_windrend_stormveil_shadewolf',
-    2.15,
+    1.464,
     true,
     undefined,
-    -0.15,
+    -0.18,
     'frost',
   ),
 };

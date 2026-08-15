@@ -178,11 +178,14 @@ describe('procedural bob math', () => {
     // front edge, behind the visible leather panel rather than on it
     // (confirmed live in-client with player.facing pinned and an isolated
     // side capture, not a screenshot alone: #3365's known-issue follow-up).
-    // -0.85 centers the rider on the panel.
+    // -0.85 centers the rider on the panel (at the model's original height).
+    // seat/seatFwd both scale x1.2 with the whole catalog's +20% size bump
+    // (manifest.ts height 2.6 -> 3.12), re-verified against a live close
+    // side-on capture at the new scale, not assumed from the ratio alone.
     const spec = MOUNT_VISUAL_SPECS.grimtusk_boar;
-    expect(spec.seat).toBe(1.9);
-    expect(spec.seatFwd).toBeLessThan(-0.65);
-    expect(spec.seatFwd).toBeGreaterThan(-1.05);
+    expect(spec.seat).toBe(2.28);
+    expect(spec.seatFwd).toBeLessThan(-0.78);
+    expect(spec.seatFwd).toBeGreaterThan(-1.26);
   });
 
   it('the snail glides flat while moving, but breathes gently at idle (#jump-idle-pass)', () => {
@@ -215,14 +218,22 @@ describe('procedural bob math', () => {
   });
 
   it('the hound faces the same way as its rider (#facing-fix)', () => {
-    // Regression pin: the cinderhide_hound.glb rig rests facing -z, the same
-    // Tripo-retarget artifact the veil_wraith_courser rig has (both are
-    // fwd: 'z-' in scripts/render_mount_icons.mjs). The courser's VisualDef
-    // carries yaw: Math.PI to correct onto the game's +z-forward convention;
-    // the hound's shipped without it, so the mount rendered facing away from
-    // its own rider and direction of travel. Pin both the fix and the
-    // contrast: the boar's native rig needs no correction at all.
-    expect(VISUALS.mount_cinderhide_hound.yaw).toBe(Math.PI);
+    // Regression pin, corrected a second time: yaw: Math.PI (a flat 180,
+    // copied from the courser's fix) was itself the bug. A live orientation
+    // check (the model wrap's actual world-space forward vector vs. the real
+    // movement delta while running, not a screenshot) showed dot product -1
+    // at yaw: Math.PI, i.e. facing dead opposite the travel direction. The
+    // cinderhide_hound.glb rig's own bind pose puts its head at +X from the
+    // rear legs with an essentially zero Z offset (measured the same way the
+    // panther's own bodyAxis finding was), the SAME non-standard axis the
+    // panther has, not the courser's flat-180 case at all. -Math.PI / 2 is
+    // the correction (swings local +X onto the game's +z-forward
+    // convention, the same sign the panther uses), re-verified with the same
+    // live orientation check: dot product +1 after the fix. The courser's
+    // own rig genuinely IS the flat-180 case, so it keeps Math.PI; the
+    // boar's native rig needs no correction at all.
+    expect(VISUALS.mount_cinderhide_hound.yaw).toBe(-Math.PI / 2);
+    expect(VISUALS.mount_nightprowl_panther.yaw).toBe(-Math.PI / 2);
     expect(VISUALS.mount_veil_wraith_courser.yaw).toBe(Math.PI);
     expect(VISUALS.mount_grimtusk_boar.yaw ?? 0).toBe(0);
   });

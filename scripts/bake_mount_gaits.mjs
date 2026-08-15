@@ -216,9 +216,19 @@ const RIGS = {
   // stride with a pronounced driving head-lower on the down-step (a hound
   // digging in, not a boar's stiff-legged charge) and a whip-fast pitch tail
   // lash (vs the boar's slower yaw wag) that reads as agitated even at a walk.
+  // bodyAxis: 'x' (found live: the yaw: Math.PI facing fix was copied from
+  // the Courser's Z-forward rig without independently re-verifying this
+  // rig's own axis). The head bone sits at +X from the rear-leg average with
+  // an essentially zero Z offset (measured directly off the bind pose, the
+  // same head-to-rear-leg method the panther's own bodyAxis finding used),
+  // so this rig's fore-aft axis is X, not Z, exactly like the panther: the
+  // leg-swing and rock/sway body motion below need bodyAxes()'s real
+  // fore-aft/lateral split or the stride swings the foot sideways instead of
+  // forward-back.
   cinderhide_hound: {
     root: 'tripo::Root',
     fwd: -1,
+    bodyAxis: 'x',
     legs: [
       ['tripo::0_Left_Limb_0', 'tripo::0_Left_Limb_1', 0, 1], // front left
       ['tripo::0_Right_Limb_0', 'tripo::0_Right_Limb_1', 0.5, 1], // front right
