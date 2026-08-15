@@ -925,6 +925,7 @@ export const hudChromeStrings = {
     name_grimtusk_boar: 'Grimtusk the Ironhide Boar',
     name_cinderhide_hound: 'Ashfang the Cinderhide Hound',
     name_nightprowl_panther: 'Nightprowl the Duskveil Panther',
+    name_windrend_stormveil_shadewolf: 'Windrend the Stormveil Shadewolf',
     desc_valorsteed: 'A hardy, sure-footed steed that provides enhanced travel speed.',
     desc_grag_bear: 'A hardy, sure-footed bear that provides enhanced travel speed.',
     desc_stalkglider_snail: 'A hearty, slow-burning snail that provides enhanced travel speed.',
@@ -948,6 +949,8 @@ export const hudChromeStrings = {
       'A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride.',
     desc_nightprowl_panther:
       'A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride.',
+    desc_windrend_stormveil_shadewolf:
+      'A storm-wreathed dire wolf that runs the same paths as a shaman turned Shadewolf, trailing crackling static with every stride.',
   },
   // The riding lesson at the Highwatch stables (q_riding_lessons): Stablemaster
   // Marla lends the player a training Valorsteed for the paddock race. Finishing

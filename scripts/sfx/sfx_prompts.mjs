@@ -171,6 +171,15 @@ export const SFX = [
     custom: true,
   },
   {
+    // Windrend the Stormveil Shadewolf: the same grag_bear quadruped donor as
+    // the boar and hound, pitched up further still (1.35 in
+    // sfx_speed_map.json, versus the hound's 1.18) for the quickest,
+    // lightest-footed cadence off that shared source clip, distinct from the
+    // panther's own valorsteed-donor tuning.
+    key: 'mount_run_windrend_stormveil_shadewolf',
+    custom: true,
+  },
+  {
     key: 'mount_run_terrorspark_groundshaker_stop',
     custom: true,
   },

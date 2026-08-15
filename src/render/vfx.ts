@@ -2010,6 +2010,31 @@ export class Vfx {
     );
   }
 
+  /** The Stormveil Shadewolf's own spectral chill billowing off its
+   *  translucent hide: pale frost-blue motes that spread OUTWARD and drift
+   *  slowly upward like cold mist unfurling, distinct from the courser's
+   *  level-hanging wisps, the hound's fast-rising embers, and the panther's
+   *  low sideways shade (this is the only ambient mount trail that visibly
+   *  widens as it lives, no gravity pulling it back in). */
+  mountFrostTrail(at: THREE.Vector3, dt: number, running: boolean): void {
+    if (!this.emitChance(running ? 22 : 9, dt)) return;
+    const a = Math.random() * Math.PI * 2;
+    const spread = 0.15 + Math.random() * 0.35;
+    this.spawn(
+      at.x + Math.sin(a) * 0.3,
+      at.y + 0.15 + Math.random() * 0.35,
+      at.z + Math.cos(a) * 0.3,
+      Math.sin(a) * spread,
+      0.18 + Math.random() * (running ? 0.28 : 0.16),
+      Math.cos(a) * spread,
+      Math.random() < 0.5 ? 0x8ed2ff : 0xe8f6ff,
+      0.32 + Math.random() * 0.22,
+      0.5 + Math.random() * (running ? 0.35 : 0.25),
+      0,
+      SPR.magicWisp,
+    );
+  }
+
   /**
    * Ground impact puff: the visual weight of a landing, and the scuff of a
    * body striding up onto a ledge. `power` (0..1) scales count, spread, and

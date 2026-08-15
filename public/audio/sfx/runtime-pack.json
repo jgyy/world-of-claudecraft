@@ -1,8 +1,8 @@
 {
   "format": "woc-sfx-runtime-pack",
   "version": 1,
-  "bundleId": "661db7754fd595b063be16ca883726e8522d2039aac1347d956ea88c1ee9a123",
-  "catalogHash": "0e1d4a91c74cf7a78f9ff6ccd02c4c02824e725f7e4ce313d3c81e72144d8982",
+  "bundleId": "535f3755837171812b564be2bcf149d74aae38cdb259f46749c9a7bf41568b09",
+  "catalogHash": "555d01d72ed424d649e0c84d3e38d60f49a76f3a6211c7a8a339f5f48f33b2db",
   "clips": {
     "amb_birds": {
       "variants": [
@@ -3033,6 +3033,18 @@
       ],
       "gain": 1,
       "playbackRate": 1.05
+    },
+    "mount_run_windrend_stormveil_shadewolf": {
+      "variants": [
+        {
+          "id": "main",
+          "url": "/audio/sfx/mount_run_windrend_stormveil_shadewolf.mp3?v=eba127f1f821",
+          "bytes": 18224,
+          "sha256": "eba127f1f8219e5d6a7512c4797735399e154e9f129bfc8c67a187941cb59fe7"
+        }
+      ],
+      "gain": 1,
+      "playbackRate": 1.35
     },
     "move_jump": {
       "variants": [

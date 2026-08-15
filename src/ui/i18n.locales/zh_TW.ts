@@ -8050,6 +8050,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_grimtusk_boar.name': '鐵甲猙牙野豬的韁繩',
   'entities.items.reins_cinderhide_hound.name': '燼甲灰牙魔犬的韁繩',
   'entities.items.reins_nightprowl_panther.name': '暮紗夜行豹的韁繩',
+  'entities.items.reins_windrend_stormveil_shadewolf.name': '暴紗風裂影狼的韁繩',
   'entities.items.reins_thunderstrut_gobbler.name': '雷霆闊步大火雞的韁繩',
   'entities.mobs.drowned_cantor.name': '溺亡誦經者',
   'entities.mobs.reedbound_acolyte.name': '蘆葦縛信徒',
@@ -9213,6 +9214,9 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_nightprowl_panther': '暮紗夜行豹',
   'hudChrome.mounts.desc_nightprowl_panther':
     '一語便融入黑暗的矯健暗影豹，每一步都拖曳著牠藏身其中的同一縷暗影。',
+  'hudChrome.mounts.name_windrend_stormveil_shadewolf': '暴紗風裂影狼',
+  'hudChrome.mounts.desc_windrend_stormveil_shadewolf':
+    '一頭籠罩風暴的巨狼，奔行的正是薩滿化身影狼時踏過的同一條路，每一步都拖曳著劈啪作響的電光。',
   'hudChrome.mounts.desc_drakemaw_raptor':
     '來自龍喉火山口的馴服巢生迅猛龍，渾身筋肉、疾若奔雷，身上仍帶著淡淡的灰燼氣味。',
   'hudChrome.mounts.name_thunderstrut_gobbler': '雷霆闊步大火雞',

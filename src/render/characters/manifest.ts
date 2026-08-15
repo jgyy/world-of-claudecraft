@@ -234,6 +234,17 @@ const MOUNT_RIGGED: ClipMap = {
   death: 'Death',
 };
 
+// Every scripts/bake_mount_gaits.mjs RIGS entry also bakes a real looping
+// Jump pose (a held, legs-tucked airborne silhouette; see its `Jump` GAITS
+// timing), unlike the authored horse/gobbler/courser clips above, which have
+// no jump/land clip in their source and keep the baseAction() fallback that
+// held their Idle pose while airborne before this existed (visual.ts
+// `case 'jump': return this.action(c.jump) ?? this.action(c.idle)`). A
+// SEPARATE map rather than adding `jump` to MOUNT_RIGGED itself: the
+// character_clipmaps completeness sweep requires every named clip to exist
+// in the GLB, and the authored three have no Jump clip to point at.
+const MOUNT_RIGGED_JUMP: ClipMap = { ...MOUNT_RIGGED, jump: 'Jump' };
+
 // The Drakelands dragonkin brood (tmp/dragonkin_build.mjs bakes): artist
 // clips on the 25-bone mixamorig core. Run reuses the walk cycle (the rigs
 // ship no separate sprint; visual timeScale matching covers the chase). The
@@ -1625,7 +1636,7 @@ export const VISUALS: Record<string, VisualDef> = {
   mount_grag_bear: {
     url: `${MOUNTS_DIR}/grag_bear.glb`,
     height: 4.0,
-    clips: MOUNT_RIGGED,
+    clips: MOUNT_RIGGED_JUMP,
     walkRef: 2.6,
     runRef: 9,
     lazyPreload: true,
@@ -1646,7 +1657,7 @@ export const VISUALS: Record<string, VisualDef> = {
   mount_shadowjump_toad: {
     url: `${MOUNTS_DIR}/shadowjump_toad.glb`,
     height: 3.2,
-    clips: MOUNT_RIGGED,
+    clips: MOUNT_RIGGED_JUMP,
     walkRef: 2.6,
     runRef: 9,
     lazyPreload: true,
@@ -1654,7 +1665,7 @@ export const VISUALS: Record<string, VisualDef> = {
   mount_stormfeather_griffin: {
     url: `${MOUNTS_DIR}/stormfeather_griffin.glb`,
     height: 4.1,
-    clips: MOUNT_RIGGED,
+    clips: MOUNT_RIGGED_JUMP,
     walkRef: 2.6,
     runRef: 9,
     lazyPreload: true,
@@ -1729,7 +1740,7 @@ export const VISUALS: Record<string, VisualDef> = {
   mount_grimtusk_boar: {
     url: `${MOUNTS_DIR}/grimtusk_boar.glb`,
     height: 2.6,
-    clips: MOUNT_RIGGED,
+    clips: MOUNT_RIGGED_JUMP,
     walkRef: 3.0,
     runRef: 12.6,
     lazyPreload: true,
@@ -1749,7 +1760,7 @@ export const VISUALS: Record<string, VisualDef> = {
   mount_cinderhide_hound: {
     url: `${MOUNTS_DIR}/cinderhide_hound.glb`,
     height: 3.1,
-    clips: MOUNT_RIGGED,
+    clips: MOUNT_RIGGED_JUMP,
     yaw: Math.PI,
     walkRef: 3.0,
     runRef: 12.6,
@@ -1767,15 +1778,41 @@ export const VISUALS: Record<string, VisualDef> = {
   // (measured directly off the accessor min/max before baking), so the
   // model's own long axis rests along X, not Z at all. A true side-on
   // capture with 0/Math.PI yaw rendered the whole body edge-on, a nearly
-  // invisible sliver behind the rider. yaw: Math.PI / 2 swings the long axis
-  // onto the game's Z-forward convention; verified with an isolated,
-  // prop-free side capture (docs/screenshots/nightprowl-panther-mount) that
-  // the fixed orientation also walks and faces the same way as the rider.
+  // invisible sliver behind the rider. The +Math.PI/2 first tried here swung
+  // the raw +X-facing nose onto local -Z instead of +Z (a rotation-sign
+  // error the prior side capture did not actually catch: it confirmed the
+  // body was no longer edge-on but not which end was the head), so the
+  // panther walked and faced backwards, opposite the rider and the travel
+  // direction. -Math.PI/2 is the correct sign: verified live (a fixed
+  // player.facing plus an absolute-camYaw front/back/side capture, not a
+  // facing-relative angle) that the head, not the tail, leads the direction
+  // of travel.
   mount_nightprowl_panther: {
     url: `${MOUNTS_DIR}/nightprowl_panther.glb`,
     height: 2.3,
-    clips: MOUNT_RIGGED,
-    yaw: Math.PI / 2,
+    clips: MOUNT_RIGGED_JUMP,
+    yaw: -Math.PI / 2,
+    walkRef: 3.0,
+    runRef: 12.6,
+    lazyPreload: true,
+  },
+  // Windrend the Stormveil Shadewolf: a lithe spectral wolf, the shaman
+  // counterpart to the Courser's priest duality, the Hound's warlock one, and
+  // the Panther's rogue one, tied to the shaman's own Ghost Wolf ability
+  // (content/classes.ts id: 'ghost_wolf', whose in-game name IS "Shadewolf"),
+  // same shape as the three above: epic, +80% move speed, source-pending
+  // Reliquary slot, no live acquisition path yet.
+  // Its raw rig rests facing +Z natively (see the RIGS entry comment in
+  // scripts/bake_mount_gaits.mjs for the skin-weighted verification), so no
+  // yaw correction, unlike the courser/hound's flat 180 or the panther's
+  // quarter turn. First mount in the catalog with a real baked Jump on day
+  // one (every other mount's jump landed as a follow-up this same pass) and
+  // the longest tail chain (6 joints; tail+tail2 drives a genuine base-plus-
+  // phase-delayed-tip ripple, the trick the hound introduced).
+  mount_windrend_stormveil_shadewolf: {
+    url: `${MOUNTS_DIR}/windrend_stormveil_shadewolf.glb`,
+    height: 2.4,
+    clips: MOUNT_RIGGED_JUMP,
     walkRef: 3.0,
     runRef: 12.6,
     lazyPreload: true,
@@ -1783,7 +1820,7 @@ export const VISUALS: Record<string, VisualDef> = {
   mount_drakemaw_raptor: {
     url: `${MOUNTS_DIR}/drakemaw_raptor.glb`,
     height: 3.4,
-    clips: MOUNT_RIGGED,
+    clips: MOUNT_RIGGED_JUMP,
     walkRef: 3.0,
     // runRef is deliberately the RIDDEN speed (RUN_SPEED 7 x +80% = 12.6), not
     // the Run clip's measured 9.04 yd/s, so timeScale lands on exactly 1.0 and

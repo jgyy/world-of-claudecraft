@@ -169,39 +169,46 @@ describe('procedural bob math', () => {
   it('the boar seat sits rearward, over its saddle behind the neck and shoulders (#saddle-fix)', () => {
     // Regression pin: seatFwd 0 left the rider hovering over the model
     // origin near the neck while the boar's actual saddle prop rides the
-    // back over the haunches, well behind it (confirmed via
-    // scripts/mount_showcase_shot.mjs grimtusk_boar; see
-    // docs/screenshots/grimtusk-boar-saddle-fix). A rearward (negative)
-    // seatFwd is the shape every other stocky/rear-saddled mount uses
-    // (grag_bear -0.8, thunderstrut_gobbler -0.15, terrorspark_groundshaker
-    // -0.3): this pins the sign, not just a bare "not 0". An UPPER bound is
-    // pinned too: -1.4 (a later attempt) overshot past the saddle's rear
-    // edge onto the bare haunches, confirmed via a clean top-down capture
-    // with the mount isolated from every other prop; -1.15 is the
-    // re-measured value with the model isolated the same way.
+    // back over the haunches, well behind it. A rearward (negative) seatFwd
+    // is the shape every other stocky/rear-saddled mount uses (grag_bear
+    // -0.8, thunderstrut_gobbler -0.15, terrorspark_groundshaker -0.3): this
+    // pins the sign, not just a bare "not 0". An upper bound is pinned too:
+    // -1.4 overshot past the saddle's rear edge onto the bare haunches, and
+    // the following -1.15 still left the rider a step short of the saddle's
+    // front edge, behind the visible leather panel rather than on it
+    // (confirmed live in-client with player.facing pinned and an isolated
+    // side capture, not a screenshot alone: #3365's known-issue follow-up).
+    // -0.85 centers the rider on the panel.
     const spec = MOUNT_VISUAL_SPECS.grimtusk_boar;
     expect(spec.seat).toBe(1.9);
-    expect(spec.seatFwd).toBeLessThan(-0.9);
-    expect(spec.seatFwd).toBeGreaterThan(-1.3);
+    expect(spec.seatFwd).toBeLessThan(-0.65);
+    expect(spec.seatFwd).toBeGreaterThan(-1.05);
   });
 
-  it('the snail glides flat (no bob at all)', () => {
+  it('the snail glides flat while moving, but breathes gently at idle (#jump-idle-pass)', () => {
+    // Regression pin: the snail was the only mount with NO idle motion at
+    // all (rigged: false, so no baked Idle loop, and no bob meant it stood
+    // frozen between glides). A gentle idle-only bob fixes that without
+    // touching its deliberately flat glide (bobWhileMoving: false keeps the
+    // moving case at exactly 0, same as before).
     const spec = MOUNT_VISUAL_SPECS.stalkglider_snail;
     expect(mountBobY(spec, 0.5, true)).toBe(0);
+    expect(mountBobY(spec, 0.5, false)).not.toBe(0);
   });
 
-  it('pins the ambient particle effects: snail slime, hover-cycle exhaust, boar dust, courser wisp', () => {
+  it('pins the ambient particle effects: snail slime, hover-cycle exhaust, boar dust, courser wisp, shadewolf frost', () => {
     expect(MOUNT_VISUAL_SPECS.stalkglider_snail.fx).toBe('slime');
     expect(MOUNT_VISUAL_SPECS.aether_hover_cycle.fx).toBe('exhaust');
     expect(MOUNT_VISUAL_SPECS.grimtusk_boar.fx).toBe('dust');
     expect(MOUNT_VISUAL_SPECS.veil_wraith_courser.fx).toBe('wisp');
+    expect(MOUNT_VISUAL_SPECS.windrend_stormveil_shadewolf.fx).toBe('frost');
     expect(MOUNT_VISUAL_SPECS.valorsteed.fx).toBeNull();
     expect(MOUNT_VISUAL_SPECS.stormfeather_griffin.fx).toBeNull();
     expect(MOUNT_VISUAL_SPECS.terrorspark_groundshaker.fx).toBeNull();
   });
 
   it('every mount fx value is one of the known ambient kinds', () => {
-    const KNOWN_FX = new Set(['slime', 'exhaust', 'dust', 'wisp', 'ember', 'shade', null]);
+    const KNOWN_FX = new Set(['slime', 'exhaust', 'dust', 'wisp', 'ember', 'shade', 'frost', null]);
     for (const [key, spec] of Object.entries(MOUNT_VISUAL_SPECS)) {
       expect(KNOWN_FX.has(spec.fx), `${key}.fx = ${String(spec.fx)}`).toBe(true);
     }
@@ -218,5 +225,21 @@ describe('procedural bob math', () => {
     expect(VISUALS.mount_cinderhide_hound.yaw).toBe(Math.PI);
     expect(VISUALS.mount_veil_wraith_courser.yaw).toBe(Math.PI);
     expect(VISUALS.mount_grimtusk_boar.yaw ?? 0).toBe(0);
+  });
+
+  it('the panther faces the same way as its rider (#3365 known-issue follow-up)', () => {
+    // Regression pin: the nightprowl_panther.glb rig's raw mesh faces along
+    // +X (a genuinely different bind pose from the courser/hound's flat -Z,
+    // see the manifest comment on mount_nightprowl_panther), so the fix
+    // needs a quarter turn rather than a half turn. The FIRST attempt here
+    // was +Math.PI/2, which (per three.js's Y-rotation matrix) swings a
+    // +X-facing point onto LOCAL -Z, not +Z: the panther rendered facing and
+    // walking backwards, the opposite direction from its rider and its own
+    // travel, exactly the #3365 "complete opposite direction" report.
+    // -Math.PI/2 is the correct sign; verified live with player.facing
+    // pinned to a known value and an absolute (not facing-relative) camera
+    // angle, not a screenshot read alone.
+    expect(VISUALS.mount_nightprowl_panther.yaw).toBe(-Math.PI / 2);
+    expect(VISUALS.mount_nightprowl_panther.yaw).not.toBe(Math.PI / 2);
   });
 });

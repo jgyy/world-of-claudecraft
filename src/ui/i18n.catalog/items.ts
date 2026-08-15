@@ -2438,6 +2438,7 @@ const ITEM_ENTITY_IDS = [
   'reins_grimtusk_boar',
   'reins_cinderhide_hound',
   'reins_nightprowl_panther',
+  'reins_windrend_stormveil_shadewolf',
   'rimefang',
   'marrowpoint',
   'duskwhisper',
@@ -2562,6 +2563,7 @@ const APPENDED_ITEM_NAMES: Partial<Record<ItemEntityId, string>> = {
   reins_grimtusk_boar: 'Reins of Grimtusk the Ironhide Boar',
   reins_cinderhide_hound: 'Reins of Ashfang the Cinderhide Hound',
   reins_nightprowl_panther: 'Reins of Nightprowl the Duskveil Panther',
+  reins_windrend_stormveil_shadewolf: 'Reins of Windrend the Stormveil Shadewolf',
   restless_skull: 'Restless Skull',
   vanguard_bone: 'Vanguard Bone',
   // Hunter quivers, the class's first held-offhand ladder; same English-appended

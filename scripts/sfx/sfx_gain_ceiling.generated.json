@@ -2513,6 +2513,17 @@
       }
     ]
   },
+  "mount_run_windrend_stormveil_shadewolf": {
+    "ceilingDb": 5.3,
+    "tracks": [
+      {
+        "filename": "mount_run_windrend_stormveil_shadewolf.mp3",
+        "sha256": "eba127f1f8219e5d6a7512c4797735399e154e9f129bfc8c67a187941cb59fe7",
+        "size": 18224,
+        "peakDb": -6.3
+      }
+    ]
+  },
   "move_jump": {
     "ceilingDb": 4.6,
     "tracks": [

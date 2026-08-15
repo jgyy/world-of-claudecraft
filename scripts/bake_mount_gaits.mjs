@@ -1,4 +1,4 @@
-// Bake procedural gait clips (Idle/Walk/Run/Death) into the rigged Tripo
+// Bake procedural gait clips (Idle/Walk/Run/Jump/Death) into the rigged Tripo
 // mount GLBs, replacing the Tripo quadruped retarget output. That retarget
 // (rig model v2.5) returns a single near-static "walk" that animates only 4-5
 // of the 20-33 joints, so mounts glided with frozen legs. These clips are
@@ -52,6 +52,21 @@ const rotv = (q, v) => {
 const DEG = Math.PI / 180;
 const AXES = { pitch: [1, 0, 0], yaw: [0, 1, 0], roll: [0, 0, 1] };
 
+// A rotation about a world axis only ever moves points along the OTHER two
+// axes, never along itself, so which axis a leg swing (or the rock/sway/
+// head-bob body motion) rotates about decides whether the foot moves
+// forward-back or sideways. Every rig here has its fore-aft axis on world Z
+// (bodyAxis omitted, the default) except the panther, whose raw mesh's long
+// axis is X (bodyAxis: 'x'; see its RIGS entry). lateralAxis is the axis
+// perpendicular to both fore-aft and up (Y), what the leg swing/rock/head-bob
+// rotate about; forwardAxis is the fore-aft axis itself, what sway (the
+// body's side-to-side roll as weight shifts between footfalls) rotates about.
+function bodyAxes(cfg) {
+  return cfg.bodyAxis === 'x'
+    ? { lateralAxis: 'roll', forwardAxis: 'pitch' }
+    : { lateralAxis: 'pitch', forwardAxis: 'roll' };
+}
+
 // ---------------------------------------------------------------------------
 // Per-mount rig maps. Bone names as authored by the Tripo auto-rig (raw, the
 // "tripo::" prefixes are sanitized by GLTFLoader at load, not here). `fwd`
@@ -72,7 +87,7 @@ const RIGS = {
       ['bone_18', 'bone_19', 0.5, 0.55], // rear left
       ['bone_22', 'bone_23', 0, 0.55], // rear right
     ],
-    sway: { bone: 'tripo::0_Left_Limb_0', walk: 2.5, run: 3.5 }, // lumbering roll
+    sway: { bone: 'tripo::0_Left_Limb_0', walk: 4, run: 5.5 }, // lumbering roll
     head: { bone: 'tripo::Head_0', amp: 3.5 },
   },
   shadowjump_toad: {
@@ -115,7 +130,7 @@ const RIGS = {
       ['rig_leg_fr', null, 0.5, 1],
       ['rig_leg_rl', null, 0.5, 1],
     ],
-    rock: { bone: 'rig_root', walk: 1.5, run: 2.5 },
+    rock: { bone: 'rig_root', walk: 2.4, run: 4 },
   },
   drakemaw_raptor: {
     root: 'Root',
@@ -159,8 +174,8 @@ const RIGS = {
     },
     // a running theropod carries its spine level and counter-rotates its
     // shoulders, so keep the pitch small and let the roll do the work
-    rock: { bone: 'Spine01', walk: 1.2, run: 2.2 },
-    sway: { bone: 'Waist', walk: 1.5, run: 2.8 },
+    rock: { bone: 'Spine01', walk: 2, run: 3.5 },
+    sway: { bone: 'Waist', walk: 2.4, run: 4.5 },
     head: { bone: 'Head', amp: 3 },
   },
   // Grimtusk the Ironhide Boar: a genuinely 4-legged Tripo quadruped rig (front
@@ -188,8 +203,8 @@ const RIGS = {
     },
     // a boar carries its weight low and forward; roll (sway) does more of the
     // work than pitch (rock) on a stocky low-slung body
-    rock: { bone: 'tripo::Spine_1', walk: 1.4, run: 2.6 },
-    sway: { bone: 'tripo::Spine_0', walk: 2, run: 3.6 },
+    rock: { bone: 'tripo::Spine_1', walk: 2.2, run: 4.2 },
+    sway: { bone: 'tripo::Spine_0', walk: 3.2, run: 5.8 },
     head: { bone: 'tripo::Head_0', amp: 4 },
     // yaw wag, faster and wider at a charge than at a trot
     tail: { bone: 'bone_21', axis: 'yaw', amp: { walk: 10, run: 18 } },
@@ -218,8 +233,8 @@ const RIGS = {
     // than lumbering: pitch (rock, a driving lunge-forward on each stride)
     // leads over roll (sway), the inverse balance from the boar's low-slung
     // waddle.
-    rock: { bone: 'tripo::Spine_1', walk: 2, run: 3.4 },
-    sway: { bone: 'tripo::Spine_0', walk: 1.2, run: 2.2 },
+    rock: { bone: 'tripo::Spine_1', walk: 3.2, run: 5.5 },
+    sway: { bone: 'tripo::Spine_0', walk: 2, run: 3.5 },
     head: { bone: 'tripo::Head_0', amp: 5 },
     // pitch lash (nod up/down), faster and tighter than the boar's tail wag:
     // an agitated hound's tail, not a contented trot.
@@ -242,6 +257,12 @@ const RIGS = {
   nightprowl_panther: {
     root: 'tripo::Root',
     fwd: -1,
+    // Its raw mesh's long axis rests along X, not Z (see the yaw comment on
+    // mount_nightprowl_panther in characters/manifest.ts): the leg swing and
+    // rock/sway body motion below need the world axis that actually lines up
+    // with this rig's own fore-aft/lateral split, or the stride swings the
+    // foot sideways instead of forward-back (see bodyAxes() above).
+    bodyAxis: 'x',
     legs: [
       ['tripo::0_Left_Limb_0', 'tripo::0_Left_Limb_1', 0, 1], // front left
       ['tripo::0_Right_Limb_0', 'tripo::0_Right_Limb_1', 0.5, 1], // front right
@@ -254,8 +275,47 @@ const RIGS = {
     },
     // a cat's spine does most of the work: pronounced roll (sway) from the
     // low prowling gait, plus a real pitch (rock) flex on the gallop bound.
-    rock: { bone: 'tripo::Spine_1', walk: 1.6, run: 3.2 },
-    sway: { bone: 'tripo::Spine_0', walk: 2.4, run: 3.8 },
+    rock: { bone: 'tripo::Spine_1', walk: 2.6, run: 5 },
+    sway: { bone: 'tripo::Spine_0', walk: 3.8, run: 6 },
+  },
+  // Windrend the Stormveil Shadewolf: a lithe spectral wolf (the shaman
+  // counterpart to the Courser's priest duality, the Hound's warlock one, and
+  // the Panther's rogue one, tied to the shaman's own Ghost Wolf ability,
+  // content/classes.ts id: 'ghost_wolf', whose in-game name IS "Shadewolf").
+  // A quick, loping run between the hound's heavier lope and the panther's
+  // tight prowl. Its raw rig rests facing +Z natively (verified by the
+  // skin-weighted average vertex position of the head vs. tail joints, not
+  // just the node translations: Head_2 sits at z=+0.43, Tail_5 at z=-0.43,
+  // and 0_Left_Limb_1 sits at x=+0.08 against 0_Right_Limb_1's x=-0.08, the
+  // same z-native, x-lateral convention the boar/bear/toad/griffin/raptor
+  // rigs use), so no yaw correction and the default lateralAxis apply. The
+  // longest tail chain in the catalog (6 joints, Tail_0 through Tail_5,
+  // versus the hound's 5): both a base wag and a phase-delayed tip on Tail_3
+  // for a real multi-segment ripple, the same tail+tail2 trick the hound
+  // introduced.
+  windrend_stormveil_shadewolf: {
+    root: 'tripo::Root',
+    fwd: -1,
+    legs: [
+      ['tripo::0_Left_Limb_0', 'tripo::0_Left_Limb_1', 0, 1], // front left
+      ['tripo::0_Right_Limb_0', 'tripo::0_Right_Limb_1', 0.5, 1], // front right
+      ['tripo::1_Left_Limb_0', 'tripo::1_Left_Limb_1', 0.5, 1, 'rear'], // rear left
+      ['tripo::1_Right_Limb_0', 'tripo::1_Right_Limb_1', 0, 1, 'rear'], // rear right
+    ],
+    gaits: {
+      Walk: { dur: 0.68, upper: 28, lower: 18, bob: 0.013 },
+      Run: { dur: 0.3, upper: 44, lower: 30, bob: 0.024 },
+    },
+    // a wolf's spine drives a loping bound: roll (sway) from the prowling
+    // gait leads, with a real pitch (rock) flex at a full run, between the
+    // hound's rock-led lunge and the panther's roll-led prowl.
+    rock: { bone: 'tripo::Spine_1', walk: 2.2, run: 4.5 },
+    sway: { bone: 'tripo::Spine_0', walk: 3, run: 5.2 },
+    head: { bone: 'tripo::Head_0', amp: 4.5 },
+    // yaw wag on the base joint, phase-delayed on the tip for a genuine
+    // ripple rather than one rigid segment swinging as a unit.
+    tail: { bone: 'tripo::Tail_0', axis: 'yaw', amp: { walk: 12, run: 20 } },
+    tail2: { bone: 'tripo::Tail_3', axis: 'yaw', amp: 10, phase: 0.18 },
   },
 };
 
@@ -267,10 +327,24 @@ const RIGS = {
 // stretch a clip to 1.6x before it clamps, so a rig whose natural gait is far
 // under its mounted speed cannot be fixed by walkRef/runRef alone.
 const GAITS = {
-  Idle: { dur: 3.6, keys: 25 },
-  Walk: { dur: 0.9, keys: 19, upper: 26, lower: 16, bob: 0.01, hopH: 0.05 },
-  Run: { dur: 0.55, keys: 15, upper: 40, lower: 24, bob: 0.02, hopH: 0.09 },
+  // `keys` is LINEAR-interpolated against a smooth sin() curve (addRot's fn
+  // closures), so it is the resolution that curve gets sampled at, not the
+  // curve shape itself: too few keys chords a sine wave into visible straight
+  // segments, which reads as a stiff, mechanical stride rather than a fluid
+  // one, worse at the direction-reversal peaks where curvature is highest.
+  // Roughly doubled across the board from the original bake (which chorded
+  // some rigs' Run clips as coarsely as one key per ~28ms) so every rig's
+  // per-second key density comfortably beats a 60fps frame.
+  Idle: { dur: 3.6, keys: 33 },
+  Walk: { dur: 0.9, keys: 33, upper: 26, lower: 16, bob: 0.01, hopH: 0.05 },
+  Run: { dur: 0.55, keys: 27, upper: 40, lower: 24, bob: 0.02, hopH: 0.09 },
   Death: { dur: 1.0, keys: 5 },
+  // A held, looping airborne silhouette (VISUALS `jump` clip): legs tucked up
+  // under the body rather than a locomotion cycle, since a jump's actual
+  // airtime varies with the player's own jump physics and this loops for
+  // however long that takes (visual.ts baseAction 'jump'). tuck is in
+  // degrees, same fwd/lateralAxis convention as Walk/Run.
+  Jump: { dur: 0.5, keys: 15, tuck: 32, tuckLower: 46, bob: 0.02 },
 };
 
 await MeshoptDecoder.ready;
@@ -504,6 +578,7 @@ for (const key of targets) {
     if (moved) console.log(`  ${key}: reweighted ${moved} influences ${rw.from} -> ${rw.to}`);
   }
 
+  const { lateralAxis } = bodyAxes(cfg);
   const makeClip = (name) => {
     const g = { ...GAITS[name], ...(cfg.gaits?.[name] ?? {}) };
     const anim = doc.createAnimation(name);
@@ -583,7 +658,7 @@ for (const key of targets) {
 
     if (name === 'Idle') {
       if (cfg.head)
-        addRot(bone(cfg.head.bone), (u) => ({ axis: 'pitch', angle: 2.5 * DEG * wave(u) }));
+        addRot(bone(cfg.head.bone), (u) => ({ axis: lateralAxis, angle: 2.5 * DEG * wave(u) }));
       if (cfg.tail)
         addRot(bone(cfg.tail.bone), (u) => ({
           axis: cfg.tail.axis,
@@ -597,6 +672,33 @@ for (const key of targets) {
       addRootY((u) => 0.006 * wave(u));
     } else if (name === 'Death') {
       addRootY((u) => -0.01 * Math.min(1, u * 2));
+    } else if (name === 'Jump') {
+      // A held airborne tuck: every leg folds up under the body by the SAME
+      // sign (unlike Walk/Run's alternating per-leg phase, a jump is not a
+      // stride), with a small continuous sway so a variable-length jump never
+      // reads as a frozen screenshot. A negative multiple of the "toward
+      // nose" amplitude is what the hop gait's own crouch pose already uses
+      // for a folded leg, so this reuses that sign rather than inventing one.
+      for (const [upper, lower, , scale] of cfg.legs) {
+        const ampU = -g.tuck * scale * DEG * cfg.fwd;
+        const ampL = -g.tuckLower * scale * DEG * cfg.fwd;
+        addRot(bone(upper), (u) => ({ axis: lateralAxis, angle: ampU * (0.88 + 0.12 * wave(u)) }));
+        if (lower)
+          addRot(bone(lower), (u) => ({
+            axis: lateralAxis,
+            angle: ampL * (0.88 + 0.12 * wave(u, 0.1)),
+          }));
+      }
+      if (cfg.rock)
+        addRot(bone(cfg.rock.bone), (u) => ({ axis: lateralAxis, angle: 6 * DEG * wave(u) }));
+      if (cfg.tail) {
+        const tailAmp = typeof cfg.tail.amp === 'number' ? cfg.tail.amp : cfg.tail.amp.walk;
+        addRot(bone(cfg.tail.bone), (u) => ({
+          axis: cfg.tail.axis,
+          angle: tailAmp * 0.6 * DEG * wave(u, cfg.tail.phase ?? 0),
+        }));
+      }
+      addRootY((u) => g.bob * wave(u, 0.25));
     } else if (cfg.hop) {
       // Walk/Run as a hop: crouch into the jump, extend through the air.
       // Rear legs fold at the crouch (u=0) and extend mid-cycle; the body
@@ -605,40 +707,50 @@ for (const key of targets) {
         const rear = tag === 'rear';
         const amp = g.upper * scale * DEG * cfg.fwd;
         addRot(bone(upper), (u) => ({
-          axis: 'pitch',
+          axis: lateralAxis,
           angle: -amp * 0.6 * Math.cos(u * Math.PI * 2),
         }));
         if (lower)
           addRot(bone(lower), (u) => ({
-            axis: 'pitch',
+            axis: lateralAxis,
             angle: (rear ? 0.55 : -0.6) * amp * 0.7 * Math.cos((u + 0.1) * Math.PI * 2),
           }));
       }
       if (cfg.head)
         addRot(bone(cfg.head.bone), (u) => ({
-          axis: 'pitch',
+          axis: lateralAxis,
           angle: cfg.head.amp * DEG * wave(u, 0.25),
         }));
       addRootY((u) => g.hopH * Math.max(0, Math.sin(u * Math.PI * 2)) ** 0.7);
     } else {
+      // A leg swing (and the rock/sway/head-bob body motion below) is a
+      // rotation about ONE world axis, which moves the other two: the foot
+      // needs that rotation to mix the rig's own fore-aft axis with Y (up),
+      // so the swing axis is the rig's LATERAL axis (the one neither fore-aft
+      // nor vertical), never assumed to be world X. Every rig here faces Z
+      // (lateral = X = 'pitch') except the panther, which faces X (lateral =
+      // Z = 'roll'); see bodyAxes() below. Getting this wrong doesn't flip
+      // the stride, it swings the foot SIDEWAYS instead of forward/back,
+      // since a rotation about an axis never moves points along that axis.
+      const { forwardAxis } = bodyAxes(cfg);
       for (const [upper, lower, phase, scale] of cfg.legs) {
         const ampU = g.upper * scale * DEG * cfg.fwd;
         const ampL = g.lower * scale * DEG * cfg.fwd;
-        addRot(bone(upper), (u) => ({ axis: 'pitch', angle: ampU * wave(u, phase) }));
+        addRot(bone(upper), (u) => ({ axis: lateralAxis, angle: ampU * wave(u, phase) }));
         if (lower)
-          addRot(bone(lower), (u) => ({ axis: 'pitch', angle: ampL * wave(u, phase + 0.14) }));
+          addRot(bone(lower), (u) => ({ axis: lateralAxis, angle: ampL * wave(u, phase + 0.14) }));
       }
       if (cfg.rock) {
         const amp = (name === 'Run' ? cfg.rock.run : cfg.rock.walk) * DEG;
-        addRot(bone(cfg.rock.bone), (u) => ({ axis: 'pitch', angle: amp * wave(u, 0.25) }));
+        addRot(bone(cfg.rock.bone), (u) => ({ axis: lateralAxis, angle: amp * wave(u, 0.25) }));
       }
       if (cfg.sway) {
         const amp = (name === 'Run' ? cfg.sway.run : cfg.sway.walk) * DEG;
-        addRot(bone(cfg.sway.bone), (u) => ({ axis: 'roll', angle: amp * wave(u) }));
+        addRot(bone(cfg.sway.bone), (u) => ({ axis: forwardAxis, angle: amp * wave(u) }));
       }
       if (cfg.head)
         addRot(bone(cfg.head.bone), (u) => ({
-          axis: 'pitch',
+          axis: lateralAxis,
           angle: cfg.head.amp * DEG * wave(u, 0.25) * 2 * 0.5,
         }));
       if (cfg.tail) {
@@ -664,7 +776,7 @@ for (const key of targets) {
     return anim;
   };
 
-  for (const clip of ['Idle', 'Walk', 'Run', 'Death']) makeClip(clip);
+  for (const clip of ['Idle', 'Walk', 'Run', 'Jump', 'Death']) makeClip(clip);
   await io.write(path, doc);
-  console.log(`${path}: baked Idle/Walk/Run/Death onto ${root.listNodes().length} nodes`);
+  console.log(`${path}: baked Idle/Walk/Run/Jump/Death onto ${root.listNodes().length} nodes`);
 }

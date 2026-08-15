@@ -357,7 +357,8 @@ describe('Reliquary Conqueror catalog structure', () => {
     // Wildheart Basin, boneglass_shiv on Spoils): 340, plus the Veil-Wraith
     // Courser mount slot: 341, plus the Grimtusk the Ironhide Boar mount slot:
     // 342, plus the Ashfang the Cinderhide Hound mount slot: 343, plus the
-    // Nightprowl the Duskveil Panther mount slot: 344. Catalog growth reverts
+    // Nightprowl the Duskveil Panther mount slot: 344, plus the Windrend the
+    // Stormveil Shadewolf mount slot: 345. Catalog growth reverts
     // page completion for finished players, per docs/design/reliquary.md. The
     // two excludeFromCompletion pages add slots
     // and 0 to BOTH pairs: the Vault of Ages contributes four retired slots
@@ -365,7 +366,7 @@ describe('Reliquary Conqueror catalog structure', () => {
     // the flag keeps each whole page out of owned AND total (the dedicated
     // vault and riftbound pins in this file and tests/reliquary_state.test.ts
     // hold both sides), so neither page moves these two literals.
-    expect(full).toEqual({ owned: 344, total: 344 });
+    expect(full).toEqual({ owned: 345, total: 345 });
     const character = catalogCharacterCompletion({
       itemsDiscovered: allOwned,
       marks: allOwned,
@@ -375,10 +376,10 @@ describe('Reliquary Conqueror catalog structure', () => {
     // Literal: update when catalog content lands (same deltas as the overview
     // pair above, including the three release-merged daggers and the
     // Veil-Wraith Courser, Grimtusk the Ironhide Boar, Ashfang the Cinderhide
-    // Hound, and Nightprowl the Duskveil Panther mount slots; marks are
-    // character-scoped, so this trails the overview by the 29 account-scoped
-    // weapon skins).
-    expect(character).toEqual({ owned: 315, total: 315 });
+    // Hound, Nightprowl the Duskveil Panther, and Windrend the Stormveil
+    // Shadewolf mount slots; marks are character-scoped, so this trails the
+    // overview by the 29 account-scoped weapon skins).
+    expect(character).toEqual({ owned: 316, total: 316 });
   });
 
   it('pins the final measured catalog shape: total slots and distinct marks', () => {
@@ -391,7 +392,8 @@ describe('Reliquary Conqueror catalog structure', () => {
     // three daggers the v0.36.0 release merge added to live content: 375, plus
     // the Veil-Wraith Courser mount slot: 376, plus the Grimtusk the Ironhide
     // Boar mount slot: 377, plus the Ashfang the Cinderhide Hound mount slot:
-    // 378, plus the Nightprowl the Duskveil Panther mount slot: 379 total.
+    // 378, plus the Nightprowl the Duskveil Panther mount slot: 379, plus the
+    // Windrend the Stormveil Shadewolf mount slot: 380 total.
     // Slots, not unique relics: the two Spoils set repeats count again here,
     // and the seven excludeFromCompletion slots (four vault, three bands)
     // count here while adding zero to every completion pair, which is why this
@@ -402,7 +404,7 @@ describe('Reliquary Conqueror catalog structure', () => {
     expect(
       slots,
       `slot total moved; per page: ${RELIQUARY_PAGES.map((p) => `${p.id}=${p.relics.length}`).join(', ')}`,
-    ).toBe(379);
+    ).toBe(380);
     // Distinct mark ids: the 10 shipped before Phase 21 plus the 19
     // rare-slain proofs of conquerors_rares_of_the_realm.
     expect(
@@ -2370,7 +2372,7 @@ const RELIC_SLOTS = RELIQUARY_PAGES.flatMap((page) =>
  * row here in the same change.
  */
 const SOURCE_PENDING_RULING: Readonly<Record<string, readonly string[]>> = {
-  // The seven gaps are CONTENT gaps, not vocabulary gaps: no live table awards
+  // The eight gaps are CONTENT gaps, not vocabulary gaps: no live table awards
   // any of them, so there is no door to name. Every other slot the catalog
   // used to leave pending turned out to be a several-doors slot rather than a
   // no-answer slot, and Phase 13b authored all of them (a relic lists every
@@ -2391,6 +2393,9 @@ const SOURCE_PENDING_RULING: Readonly<Record<string, readonly string[]>> = {
   // nightprowl_panther: same shape as the three above, earmarked for the
   // Claudium store, no live table awards it either (see the def comment in
   // content/items.ts).
+  // windrend_stormveil_shadewolf: same shape as the four above, earmarked for
+  // the Claudium store, no live table awards it either (see the def comment
+  // in content/items.ts).
   // terrorspark_groundshaker: dev-grant only, deliberately absent from vendors,
   // quests, mob loot, heroic loot, and the rift reins pools.
   horizons_mounts: [
@@ -2400,6 +2405,7 @@ const SOURCE_PENDING_RULING: Readonly<Record<string, readonly string[]>> = {
     'nightprowl_panther',
     'terrorspark_groundshaker',
     'veil_wraith_courser',
+    'windrend_stormveil_shadewolf',
   ],
   // masterwork:engineering: unearnable, QA ruling 2026-08-07. Every live
   // engineering recipe produces a slotless, statless tool, masterworkBonusStats
@@ -3352,7 +3358,7 @@ describe('Reliquary source hint coverage', () => {
     ).toBe(true);
   });
 
-  it('the surviving pending rows are the seven slots content awards no route at all', () => {
+  it('the surviving pending rows are the eight slots content awards no route at all', () => {
     // The page-wide Horizons rulings are EXECUTED: mounts and skins are no
     // longer derived from the catalog lists (the derivation era ended when the
     // rulings landed), so the identity pins to RELIQUARY_HORIZON_MOUNTS and
@@ -3370,6 +3376,7 @@ describe('Reliquary source hint coverage', () => {
       'nightprowl_panther',
       'terrorspark_groundshaker',
       'veil_wraith_courser',
+      'windrend_stormveil_shadewolf',
     ]);
     // masterwork:engineering pended by the QA ruling 2026-08-07: no
     // engineering recipe can proc a masterwork (see the gear-capability pin),

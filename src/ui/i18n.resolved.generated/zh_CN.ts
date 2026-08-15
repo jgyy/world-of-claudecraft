@@ -1081,6 +1081,7 @@ export const zh_CN: EnTranslations = {
       "name_grimtusk_boar": "铁甲狰牙野猪",
       "name_cinderhide_hound": "烬甲灰牙魔犬",
       "name_nightprowl_panther": "暮纱夜行豹",
+      "name_windrend_stormveil_shadewolf": "暴纱风裂影狼",
       "desc_valorsteed": "一匹坚韧稳健的骏马，可提升旅行速度。",
       "desc_grag_bear": "一头坚韧稳健的巨熊，可提升旅行速度。",
       "desc_stalkglider_snail": "一只坚毅耐久的蜗牛，可提升旅行速度。",
@@ -1093,7 +1094,8 @@ export const zh_CN: EnTranslations = {
       "desc_veil_wraith_courser": "一头行走于两界帷幕之间的幽灵牡鹿，周身光影随步伐在圣辉与暗影雾气间流转变幻。",
       "desc_grimtusk_boar": "一头身披铁甲、獠牙狰狞的战猪，除了冲撞的势头和满腔戾气，什么也不管不顾。",
       "desc_cinderhide_hound": "一头黑曜石毛皮布满渐冷熔渣裂痕的恶魔猎犬，每一步都扬起点点余烬。",
-      "desc_nightprowl_panther": "一言便融入黑暗的矫健暗影豹，每一步都拖曳着它藏身其中的同一缕暗影。"
+      "desc_nightprowl_panther": "一言便融入黑暗的矫健暗影豹，每一步都拖曳着它藏身其中的同一缕暗影。",
+      "desc_windrend_stormveil_shadewolf": "一头笼罩风暴的巨狼，奔行的正是萨满化身影狼时踏过的同一条路，每一步都拖曳着噼啪作响的电光。"
     },
     "mountTraining": {
       "mountPrompt": "按 {key} 键骑上训练用英勇战马。",
@@ -12380,6 +12382,9 @@ export const zh_CN: EnTranslations = {
       },
       "reins_nightprowl_panther": {
         "name": "暮纱夜行豹的缰绳"
+      },
+      "reins_windrend_stormveil_shadewolf": {
+        "name": "暴纱风裂影狼的缰绳"
       },
       "rimefang": {
         "name": "霜牙"

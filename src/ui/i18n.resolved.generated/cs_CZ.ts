@@ -1081,6 +1081,7 @@ export const cs_CZ: EnTranslations = {
       "name_grimtusk_boar": "Grimtusk the Ironhide Boar",
       "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
       "name_nightprowl_panther": "Nightprowl the Duskveil Panther",
+      "name_windrend_stormveil_shadewolf": "Windrend the Stormveil Shadewolf",
       "desc_valorsteed": "Otužilý, jistonohý oř poskytující zvýšenou rychlost cestování.",
       "desc_grag_bear": "Otužilý, jistonohý medvěd poskytující zvýšenou rychlost cestování.",
       "desc_stalkglider_snail": "Statný, pomalu se pohybující plž poskytující zvýšenou rychlost cestování.",
@@ -1093,7 +1094,8 @@ export const cs_CZ: EnTranslations = {
       "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride.",
       "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
       "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride.",
-      "desc_nightprowl_panther": "A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride."
+      "desc_nightprowl_panther": "A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride.",
+      "desc_windrend_stormveil_shadewolf": "A storm-wreathed dire wolf that runs the same paths as a shaman turned Shadewolf, trailing crackling static with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Stiskni {key} pro nasednutí na cvičného Udatného oře.",
@@ -12380,6 +12382,9 @@ export const cs_CZ: EnTranslations = {
       },
       "reins_nightprowl_panther": {
         "name": "Reins of Nightprowl the Duskveil Panther"
+      },
+      "reins_windrend_stormveil_shadewolf": {
+        "name": "Reins of Windrend the Stormveil Shadewolf"
       },
       "rimefang": {
         "name": "Jinovatkový tesák"

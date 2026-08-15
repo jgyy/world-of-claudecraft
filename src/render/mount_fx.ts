@@ -37,6 +37,9 @@ export function applyMountFx(
     case 'shade':
       if (moving) vfx.mountShadeTrail(position, dt, running);
       break;
+    case 'frost':
+      if (moving) vfx.mountFrostTrail(position, dt, running);
+      break;
     case null:
       break;
     default: {

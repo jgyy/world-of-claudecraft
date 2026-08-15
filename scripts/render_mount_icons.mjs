@@ -123,6 +123,15 @@ const JOBS = [
     id: 'reins_nightprowl_panther',
     cfg: { headFwd: 0.85, headUp: 0.42, fill: 0.56, yaw: 0.34, pitch: 0.16, fwd: 'x+' },
   },
+  {
+    // Its raw mesh rests facing +Z natively (see the RIGS entry comment in
+    // scripts/bake_mount_gaits.mjs for the skin-weighted verification), so no
+    // fwd override; a leggier, more upright carriage than the panther's low
+    // prowl, so anchor the head a touch higher.
+    file: 'windrend_stormveil_shadewolf.glb',
+    id: 'reins_windrend_stormveil_shadewolf',
+    cfg: { headFwd: 0.85, headUp: 0.44, fill: 0.54, yaw: 0.4, pitch: 0.14 },
+  },
 ];
 
 const only = process.env.ONLY ? new Set(process.env.ONLY.split(',')) : null;

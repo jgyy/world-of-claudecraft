@@ -1081,6 +1081,7 @@ export const tr_TR: EnTranslations = {
       "name_grimtusk_boar": "Grimtusk the Ironhide Boar",
       "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
       "name_nightprowl_panther": "Nightprowl the Duskveil Panther",
+      "name_windrend_stormveil_shadewolf": "Windrend the Stormveil Shadewolf",
       "desc_valorsteed": "Gelişmiş seyahat hızı sağlayan, dayanıklı ve sağlam adımlı bir küheylan.",
       "desc_grag_bear": "Gelişmiş seyahat hızı sağlayan, dayanıklı ve sağlam adımlı bir ayı.",
       "desc_stalkglider_snail": "Gelişmiş seyahat hızı sağlayan, dayanıklı ve yavaş yanan bir salyangoz.",
@@ -1093,7 +1094,8 @@ export const tr_TR: EnTranslations = {
       "desc_veil_wraith_courser": "A spectral hart that steps between worlds, its coat shifting from holy radiance to shadow mist with every stride.",
       "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
       "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride.",
-      "desc_nightprowl_panther": "A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride."
+      "desc_nightprowl_panther": "A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride.",
+      "desc_windrend_stormveil_shadewolf": "A storm-wreathed dire wolf that runs the same paths as a shaman turned Shadewolf, trailing crackling static with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Eğitim Yiğit Küheylanına binmek için {key} tuşuna bas.",
@@ -12380,6 +12382,9 @@ export const tr_TR: EnTranslations = {
       },
       "reins_nightprowl_panther": {
         "name": "Reins of Nightprowl the Duskveil Panther"
+      },
+      "reins_windrend_stormveil_shadewolf": {
+        "name": "Reins of Windrend the Stormveil Shadewolf"
       },
       "rimefang": {
         "name": "Kırağı Dişi"

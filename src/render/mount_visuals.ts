@@ -26,22 +26,32 @@ export interface MountVisualSpec {
   bobHz: number;
   /** Bob even while standing (the hover cycle floats in place). */
   bobIdle: boolean;
+  /** Suppress the bob while moving (the snail glides flat: bobIdle gives it
+   *  idle motion without disturbing its already-flat glide). Default true
+   *  (every other bobbed mount also bobs on the move). */
+  bobWhileMoving: boolean;
   /** Bob shape: a smooth hover sine, or gallop-style hops (abs sine). */
   bobShape: 'hover' | 'hop';
   /** Ambient particle effect the renderer emits for this mount: the snail's
    *  slime path while moving, the hover cycle's aether exhaust, the boar's
    *  hoof dust, the courser's holy/shadow coat-shift wisps, the hound's
    *  ember-crack sparks, the panther's trailing shadow wisps. */
-  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | 'shade' | null;
+  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | 'shade' | 'frost' | null;
 }
 
 const spec = (
   visualKey: string,
   seat: number,
   rigged: boolean,
-  bob?: { amp: number; hz: number; idle?: boolean; shape?: 'hover' | 'hop' },
+  bob?: {
+    amp: number;
+    hz: number;
+    idle?: boolean;
+    shape?: 'hover' | 'hop';
+    whileMoving?: boolean;
+  },
   seatFwd = 0,
-  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | 'shade' | null = null,
+  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | 'shade' | 'frost' | null = null,
 ): MountVisualSpec => ({
   visualKey,
   seat,
@@ -50,6 +60,7 @@ const spec = (
   bobAmp: bob?.amp ?? 0,
   bobHz: bob?.hz ?? 0,
   bobIdle: bob?.idle ?? false,
+  bobWhileMoving: bob?.whileMoving ?? true,
   bobShape: bob?.shape ?? 'hop',
   fx,
 });
@@ -60,7 +71,19 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // neck and drops a touch
   valorsteed: spec('mount_valorsteed', 2.4, true, undefined, 0.15),
   grag_bear: spec('mount_grag_bear', 3.35, true, undefined, -0.8),
-  stalkglider_snail: spec('mount_stalkglider_snail', 2.65, false, undefined, -0.3, 'slime'),
+  // A gentle idle bob (the snail otherwise has no motion at all while
+  // standing: rigged is false, so it carries no baked Idle loop, and no bob
+  // meant it stood as a frozen statue between glides, the only mount that
+  // did). Slow and low-amplitude to read as a slow-breathing glide, not the
+  // hover cycle's mechanical float.
+  stalkglider_snail: spec(
+    'mount_stalkglider_snail',
+    2.65,
+    false,
+    { amp: 0.05, hz: 0.4, idle: true, shape: 'hover', whileMoving: false },
+    -0.3,
+    'slime',
+  ),
   aether_hover_cycle: spec(
     'mount_aether_hover_cycle',
     2.1,
@@ -104,7 +127,7 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // (buckle line under the seat, tail and hind legs still visible behind).
   // 'dust': a heavy charging boar kicks up hoof dust the way the snail leaves
   // slime and the hover cycle streams exhaust.
-  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, -1.15, 'dust'),
+  grimtusk_boar: spec('mount_grimtusk_boar', 1.9, true, undefined, -0.85, 'dust'),
   // Ashfang the Cinderhide Hound: a warlock-flavored demonic war-mount (see
   // content/classes.ts, the Cinderhide ability), taller-standing than the
   // boar with the harness/tack riding centered over its shoulders rather
@@ -120,6 +143,22 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // melts into on Smokestep, the way the hound trails embers off its cracked
   // hide and the courser streams holy/shadow wisps off its coat.
   nightprowl_panther: spec('mount_nightprowl_panther', 2.0, true, undefined, -0.3, 'shade'),
+  // Windrend the Stormveil Shadewolf: a shaman-flavored spectral wolf (see
+  // content/classes.ts, the ghost_wolf ability, in-game name "Shadewolf"),
+  // leggier and more upright than the panther's low prowl, saddle riding
+  // just behind the shoulders like the hound's and courser's (small forward
+  // shift, verified live the same way the boar's seat fix was: player.facing
+  // pinned, absolute camera angles, not a screenshot read alone). 'frost':
+  // its translucent hide sheds a cold spectral mist that spreads outward as
+  // it drifts, distinct from every other mount's ambient trail.
+  windrend_stormveil_shadewolf: spec(
+    'mount_windrend_stormveil_shadewolf',
+    2.15,
+    true,
+    undefined,
+    -0.15,
+    'frost',
+  ),
 };
 
 /** Spec for an entity's active mountKey, or null when dismounted/unknown. */
@@ -135,7 +174,7 @@ export function mountSeatLift(mountKey: string): number {
 /** Procedural vertical offset for a clipless mount at time t (seconds). */
 export function mountBobY(spec: MountVisualSpec, timeSec: number, moving: boolean): number {
   if (spec.bobAmp <= 0) return 0;
-  if (!moving && !spec.bobIdle) return 0;
+  if (moving ? !spec.bobWhileMoving : !spec.bobIdle) return 0;
   const wave = Math.sin(timeSec * Math.PI * 2 * spec.bobHz);
   return (spec.bobShape === 'hover' ? wave : Math.abs(wave)) * spec.bobAmp;
 }

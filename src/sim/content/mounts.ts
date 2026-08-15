@@ -24,6 +24,7 @@ export type MountKey =
   | 'grimtusk_boar'
   | 'cinderhide_hound'
   | 'nightprowl_panther'
+  | 'windrend_stormveil_shadewolf'
   | 'terrorspark_groundshaker';
 
 export type MountRarity = 'common' | 'uncommon' | 'rare' | 'epic';
@@ -147,6 +148,18 @@ export const MOUNTS: Record<MountKey, MountDef> = {
   nightprowl_panther: {
     key: 'nightprowl_panther',
     name: 'Nightprowl the Duskveil Panther',
+    rarity: 'epic',
+    moveSpeedPct: 0.8,
+  },
+  // Windrend the Stormveil Shadewolf: a fifth community mount-store candidate
+  // (see docs/claudium-store.md), the shaman counterpart to the Courser's
+  // priest duality, the Hound's warlock one, and the Panther's rogue one
+  // (Ghost Wolf, content/classes.ts id: 'ghost_wolf', whose in-game name IS
+  // "Shadewolf"). Same shape as the three above: no player-facing acquisition
+  // path yet (see reins_windrend_stormveil_shadewolf, content/items.ts).
+  windrend_stormveil_shadewolf: {
+    key: 'windrend_stormveil_shadewolf',
+    name: 'Windrend the Stormveil Shadewolf',
     rarity: 'epic',
     moveSpeedPct: 0.8,
   },

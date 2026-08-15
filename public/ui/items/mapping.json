@@ -6085,6 +6085,17 @@
    "itemIds": [
     "reins_nightprowl_panther"
    ]
+  },
+  {
+   "batchId": "windrend-stormveil-shadewolf-mount-2026-08-15",
+   "source": "Tripo API 3D asset pipeline (scripts/asset_pipeline/), screenshot-rendered from the shipped GLB via scripts/render_mount_icons.mjs",
+   "owner": "World of ClaudeCraft",
+   "license": "World of ClaudeCraft project-generated art, project asset, rights reserved",
+   "styleReference": "KNOWN GAP, same shape as grimtusk-boar-mount-2026-08-13, cinderhide-hound-mount-2026-08-14, and nightprowl-panther-mount-2026-08-14 before their follow-ups: this is a raw 3D camera render, not a painted icon, and the style contract (docs/design/item-icon-art-style.md, woc-item-icon-v1) forbids raw 3D thumbnails for item icons; every other reins_* icon in the catalog is painted. Attempted the gpt-image-1 (gpt-image-2 successor) text-to-image lane directly against the OpenAI API in this same session: every request returned rate_limit_exceeded (\"Limit 0\" on input-images for this org), the same platform-side quota/verification state the prior mounts hit, confirmed still unresolved rather than assumed. A deliberately scoped follow-up pending a true painted pass, not an oversight. Source: a camera render of the shipped 3D model (public/models/mounts/windrend_stormveil_shadewolf.glb) via scripts/render_mount_icons.mjs. No separate reference images.",
+   "commonPrompt": "N/A: produced by camera framing parameters (headFwd/headUp/fill/yaw/pitch in scripts/render_mount_icons.mjs), not a text-to-image prompt.",
+   "itemIds": [
+    "reins_windrend_stormveil_shadewolf"
+   ]
   }
  ]
 }

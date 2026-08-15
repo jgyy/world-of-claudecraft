@@ -474,6 +474,21 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     noDiscard: true,
     sellValue: 0,
   },
+  // Windrend the Stormveil Shadewolf: earmarked for the Claudium store once
+  // mounts are wired into that category (docs/claudium-store.md), same shape
+  // as the Courser, the Boar, the Hound, and the Panther above, no
+  // player-facing acquisition path yet (see content/mounts.ts). Unbound like
+  // every player reins (the tradable-reins policy).
+  reins_windrend_stormveil_shadewolf: {
+    id: 'reins_windrend_stormveil_shadewolf',
+    name: 'Reins of Windrend the Stormveil Shadewolf',
+    kind: 'mount',
+    mount: 'windrend_stormveil_shadewolf',
+    quality: 'epic',
+    noVendorSell: true,
+    noDiscard: true,
+    sellValue: 0,
+  },
   mistveil_cord: {
     id: 'mistveil_cord',
     name: 'Mistveil Cord',
