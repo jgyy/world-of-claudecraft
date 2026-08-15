@@ -1,4 +1,4 @@
-# Mount fixes: Grimtusk saddle, Cinderhide facing, Nightprowl panther
+# Mount fixes: Grimtusk saddle, Cinderhide facing, Nightprowl panther, Windrend shadewolf
 
 One-off record of the PR #3365 follow-up fixes, referenced here so the CI
 sparse-checkout cone for their screenshot evidence has a real coupling
@@ -21,3 +21,10 @@ every referenced screenshot subtree").
 Full catalog wiring for the panther (mounts/items/reliquary/deeds, i18n
 catalog plus the five M16 non-Latin locale fills, KTX2-compressed GLB, wiki
 regen) shipped in the same change as the boar/hound fixes.
+
+- **Windrend the Stormveil Shadewolf**: a fifth rideable mount, the shaman
+  counterpart to the Courser/priest, Hound/warlock, and Panther/rogue
+  mount-lore pattern (tied to the shaman's Shadewolf travel form). Same full
+  catalog wiring as the panther, plus jump and idle animations added to every
+  mount in this PR and improved gait keyframe density/amplitude on the
+  rigged mounts. Evidence: `docs/screenshots/windrend-stormveil-shadewolf-mount/`.
