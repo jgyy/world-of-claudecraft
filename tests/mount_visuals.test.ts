@@ -180,12 +180,16 @@ describe('procedural bob math', () => {
     // side capture, not a screenshot alone: #3365's known-issue follow-up).
     // -0.85 centers the rider on the panel (at the model's original height).
     // seat/seatFwd both scale x1.2 with the whole catalog's +20% size bump
-    // (manifest.ts height 2.6 -> 3.12), re-verified against a live close
-    // side-on capture at the new scale, not assumed from the ratio alone.
+    // (manifest.ts height 2.6 -> 3.12): -0.85 * 1.2 = -1.02. That scaled
+    // value still left the rider a step behind the saddle on a live close
+    // side-on capture at the new scale (user follow-up on #3365), so it was
+    // walked forward again to -0.75, re-verified the same way: the rider now
+    // sits centered on the leather panel, matching the boar's own before/
+    // after PR screenshots.
     const spec = MOUNT_VISUAL_SPECS.grimtusk_boar;
     expect(spec.seat).toBe(2.28);
-    expect(spec.seatFwd).toBeLessThan(-0.78);
-    expect(spec.seatFwd).toBeGreaterThan(-1.26);
+    expect(spec.seatFwd).toBeLessThan(-0.55);
+    expect(spec.seatFwd).toBeGreaterThan(-0.95);
   });
 
   it('the snail glides flat while moving, but breathes gently at idle (#jump-idle-pass)', () => {

@@ -130,8 +130,11 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // 'dust': a heavy charging boar kicks up hoof dust the way the snail leaves
   // slime and the hover cycle streams exhaust.
   // seat/seatFwd scaled x1.2 with the +20% model size bump (manifest.ts
-  // height 2.6 -> 3.12) so the saddle position holds at the new scale.
-  grimtusk_boar: spec('mount_grimtusk_boar', 2.28, true, undefined, -1.02, 'dust'),
+  // height 2.6 -> 3.12): -0.85 * 1.2 = -1.02. That scaled value still left
+  // the rider a step behind the saddle on a live close side-on capture at
+  // the new scale (user follow-up on #3365); walked forward to -0.75,
+  // re-verified the same way, which centers the rider on the leather panel.
+  grimtusk_boar: spec('mount_grimtusk_boar', 2.28, true, undefined, -0.75, 'dust'),
   // Ashfang the Cinderhide Hound: a warlock-flavored demonic war-mount (see
   // content/classes.ts, the Cinderhide ability), taller-standing than the
   // boar with the harness/tack riding centered over its shoulders rather
@@ -156,7 +159,12 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // matching the boar's own reference framing, not assumed from the math
   // alone. Scaled to 1.908 with the +20% model size bump (manifest.ts height
   // 2.3 -> 2.76) so that fix holds at the new scale.
-  nightprowl_panther: spec('mount_nightprowl_panther', 1.908, true, undefined, -0.36, 'shade'),
+  // seatFwd (the fore-aft offset, separate from the seat-height fix above)
+  // was -0.36: the rider sat well behind the saddle, over the midback rather
+  // than the shoulders it actually rides over (user follow-up on #3365,
+  // confirmed on a live close side-on capture). Moved forward to 0.05,
+  // centering the rider on the saddle prop, re-verified the same way.
+  nightprowl_panther: spec('mount_nightprowl_panther', 1.908, true, undefined, 0.05, 'shade'),
   // Windrend the Stormveil Shadewolf: a shaman-flavored spectral wolf (see
   // content/classes.ts, the ghost_wolf ability, in-game name "Shadewolf"),
   // leggier and more upright than the panther's low prowl, saddle riding
@@ -174,12 +182,20 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
   // legs actually overlapped the saddle: 1.22 (at the old 2.4 model height).
   // Scaled to 1.464 with the +20% model size bump (manifest.ts height
   // 2.4 -> 2.88) so that fix holds at the new scale.
+  // Both values still read badly wrong on a live capture after that scale
+  // (user follow-up on #3365: "rider is floating off the saddle... make it
+  // lower... position higher and in front"): seatFwd -0.18 left the rider
+  // well behind the saddle prop over the midback, and 1.464 sat the rider
+  // low relative to the saddle's top, which rides higher on this leggier,
+  // more upright rig than the panther's low prowl. Raised to seat 1.7 and
+  // moved forward to seatFwd 0.32, re-verified with the same close low
+  // side-on capture until the rider's legs actually overlapped the saddle.
   windrend_stormveil_shadewolf: spec(
     'mount_windrend_stormveil_shadewolf',
-    1.464,
+    1.7,
     true,
     undefined,
-    -0.18,
+    0.32,
     'frost',
   ),
 };
