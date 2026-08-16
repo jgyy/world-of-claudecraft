@@ -1082,6 +1082,7 @@ export const pt_BR: EnTranslations = {
       "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
       "name_nightprowl_panther": "Nightprowl the Duskveil Panther",
       "name_windrend_stormveil_shadewolf": "Windrend the Stormveil Shadewolf",
+      "name_solmane_charger": "Solmane the Sunveil Charger",
       "desc_valorsteed": "Um corcel resistente e de passo firme que aumenta a velocidade de viagem.",
       "desc_grag_bear": "Um urso resistente e de passo firme que aumenta a velocidade de viagem.",
       "desc_stalkglider_snail": "Um caracol valente e de queima lenta que aumenta a velocidade de viagem.",
@@ -1095,7 +1096,8 @@ export const pt_BR: EnTranslations = {
       "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
       "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride.",
       "desc_nightprowl_panther": "A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride.",
-      "desc_windrend_stormveil_shadewolf": "A storm-wreathed dire wolf that runs the same paths as a shaman turned Shadewolf, trailing crackling static with every stride."
+      "desc_windrend_stormveil_shadewolf": "A storm-wreathed dire wolf that runs the same paths as a shaman turned Shadewolf, trailing crackling static with every stride.",
+      "desc_solmane_charger": "A radiant charger that runs the same road as a paladin's own Solar Step, its mane and tail blazing like living sunlight with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Pressione {key} para montar no Valorsteed de treinamento.",
@@ -12385,6 +12387,9 @@ export const pt_BR: EnTranslations = {
       },
       "reins_windrend_stormveil_shadewolf": {
         "name": "Reins of Windrend the Stormveil Shadewolf"
+      },
+      "reins_solmane_charger": {
+        "name": "Reins of Solmane the Sunveil Charger"
       },
       "rimefang": {
         "name": "Presa de Geada"

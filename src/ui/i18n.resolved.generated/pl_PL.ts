@@ -1082,6 +1082,7 @@ export const pl_PL: EnTranslations = {
       "name_cinderhide_hound": "Ashfang the Cinderhide Hound",
       "name_nightprowl_panther": "Nightprowl the Duskveil Panther",
       "name_windrend_stormveil_shadewolf": "Windrend the Stormveil Shadewolf",
+      "name_solmane_charger": "Solmane the Sunveil Charger",
       "desc_valorsteed": "Wytrzymały, pewny kroku rumak, który zapewnia zwiększoną prędkość podróżowania.",
       "desc_grag_bear": "Wytrzymały, pewny kroku niedźwiedź, który zapewnia zwiększoną prędkość podróżowania.",
       "desc_stalkglider_snail": "Krzepki, powoli, lecz niezmordowanie pełznący ślimak, który zapewnia zwiększoną prędkość podróżowania.",
@@ -1095,7 +1096,8 @@ export const pl_PL: EnTranslations = {
       "desc_grimtusk_boar": "A massive tusked war boar in an ironclad hide, driven forward by nothing but momentum and spite.",
       "desc_cinderhide_hound": "A demonic war-hound with an obsidian hide fractured by veins of cooling slag, trailing embers with every stride.",
       "desc_nightprowl_panther": "A lithe shadow panther that melts into darkness at a word, trailing wisps of the same shadow with every stride.",
-      "desc_windrend_stormveil_shadewolf": "A storm-wreathed dire wolf that runs the same paths as a shaman turned Shadewolf, trailing crackling static with every stride."
+      "desc_windrend_stormveil_shadewolf": "A storm-wreathed dire wolf that runs the same paths as a shaman turned Shadewolf, trailing crackling static with every stride.",
+      "desc_solmane_charger": "A radiant charger that runs the same road as a paladin's own Solar Step, its mane and tail blazing like living sunlight with every stride."
     },
     "mountTraining": {
       "mountPrompt": "Naciśnij {key}, aby dosiąść treningowego Rumaka Męstwa.",
@@ -12385,6 +12387,9 @@ export const pl_PL: EnTranslations = {
       },
       "reins_windrend_stormveil_shadewolf": {
         "name": "Reins of Windrend the Stormveil Shadewolf"
+      },
+      "reins_solmane_charger": {
+        "name": "Reins of Solmane the Sunveil Charger"
       },
       "rimefang": {
         "name": "Szronowy Kieł"

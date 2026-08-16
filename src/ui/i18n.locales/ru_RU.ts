@@ -8536,6 +8536,8 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
     'Поводья Найтпроула, пантеры из-под сумеречной вуали',
   'entities.items.reins_windrend_stormveil_shadewolf.name':
     'Поводья Ветрореза, сумрачного волка из-под штормовой вуали',
+  'entities.items.reins_solmane_charger.name':
+    'Поводья Солмейна, скакуна солнечной вуали',
   'entities.items.reins_thunderstrut_gobbler.name': 'Поводья Громоступа, великого индюка',
   'entities.mobs.drowned_cantor.name': 'Утопший Кантор',
   'entities.mobs.reedbound_acolyte.name': 'Тростниковый Послушник',
@@ -9785,6 +9787,10 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
     'Ветрорез, сумрачный волк из-под штормовой вуали',
   'hudChrome.mounts.desc_windrend_stormveil_shadewolf':
     'Окутанный бурей матёрый волк, что бежит теми же тропами, что и шаман, обернувшийся Сумрачным волком, оставляя за собой потрескивающие искры статического электричества с каждым шагом.',
+  'hudChrome.mounts.name_solmane_charger':
+    'Солмейн, скакун солнечной вуали',
+  'hudChrome.mounts.desc_solmane_charger':
+    'Лучезарный скакун, что бежит той же тропой, что и паладин, творящий Солнечный Шаг, а его грива и хвост пылают, точно живой солнечный свет, с каждым шагом.',
   'hudChrome.mounts.desc_drakemaw_raptor': 'Приученный к седлу выводковый раптор из кальдеры Дрейкмо: сплошные жилы и бег, и от него всё ещё едва пахнет пеплом.',
   'hudChrome.mounts.name_thunderstrut_gobbler': 'Громоступ, великий индюк',
   'hudChrome.mounts.name_terrorspark_groundshaker': 'Страхоискр, сотрясатель земли',

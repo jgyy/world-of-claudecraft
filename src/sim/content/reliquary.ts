@@ -271,6 +271,7 @@ export const RELIQUARY_HORIZON_MOUNTS = [
   'cinderhide_hound',
   'nightprowl_panther',
   'windrend_stormveil_shadewolf',
+  'solmane_charger',
   'terrorspark_groundshaker',
 ] as const;
 
@@ -288,14 +289,15 @@ export const RELIQUARY_HORIZON_MOUNTS = [
 // out nothing.
 //
 // drakemaw_raptor, veil_wraith_courser, grimtusk_boar, cinderhide_hound,
-// nightprowl_panther, windrend_stormveil_shadewolf, and
+// nightprowl_panther, windrend_stormveil_shadewolf, solmane_charger, and
 // terrorspark_groundshaker are absent, and that absence IS the answer: no
 // live table awards any of them (drakemaw_raptor has no acquisition path,
 // veil_wraith_courser, grimtusk_boar, cinderhide_hound, nightprowl_panther,
-// and windrend_stormveil_shadewolf are earmarked for the Claudium store and
-// have none yet either, terrorspark_groundshaker is dev-grant only). They are
-// the catalog's seven SOURCE_PENDING_RULING mounts; masterwork:engineering on
-// the professions shelf is an eighth pending slot (QA ruling 2026-08-07).
+// windrend_stormveil_shadewolf, and solmane_charger are earmarked for the
+// Claudium store and have none yet either, terrorspark_groundshaker is
+// dev-grant only). They are the catalog's eight SOURCE_PENDING_RULING mounts;
+// masterwork:engineering on the professions shelf is a ninth pending slot
+// (QA ruling 2026-08-07).
 //
 // Keys are typed against the live mount ladder so a misspelled or renamed key
 // fails tsc at the authoring site instead of falling through to the pending
@@ -1236,7 +1238,7 @@ export const RELIQUARY_PAGES: readonly ReliquaryPageDef[] = freezePageTable([
       // masterwork:engineering stays a BARE entry (no hint): no engineering
       // recipe can proc a masterwork (see the masterworkByCraft comment), so
       // a profession hint here would name a door that awards nothing. The
-      // slot rides SOURCE_PENDING_RULING with the six gap mounts; the
+      // slot rides SOURCE_PENDING_RULING with the eight gap mounts; the
       // gear-capability pin in tests/reliquary_content.test.ts derives the
       // eligible set from masterworkBonusStats and reds if either side moves.
       ...RELIQUARY_PROFESSION_MARKS.masterworkByCraft.map((markId) =>
@@ -1313,15 +1315,15 @@ export const RELIQUARY_PAGES: readonly ReliquaryPageDef[] = freezePageTable([
     name: 'Mounts',
     desc: 'Rideable mounts from the stable, heroic reins, Rift epics, and rarer saddles. Ownership follows the live reins seam (bags and bank).',
     clearSource: { kind: 'none' },
-    // Seven of the fourteen mounts name every door that awards their reins
+    // Seven of the fifteen mounts name every door that awards their reins
     // (see MOUNT_SOURCES above): the four heroic reins each drop from two or
     // three HEROIC_BOSS_LOOT bosses AND from their Rift rank's ladder, the
     // two epic reins are Rift-only, and valorsteed is Marla's counter. The
     // page-wide pending ruling that used to cover all nine is executed; the
-    // seven that remain (drakemaw_raptor, veil_wraith_courser, grimtusk_boar,
+    // eight that remain (drakemaw_raptor, veil_wraith_courser, grimtusk_boar,
     // cinderhide_hound, nightprowl_panther, windrend_stormveil_shadewolf,
-    // terrorspark_groundshaker) are content gaps, not vocabulary gaps, and
-    // stay hand-listed in SOURCE_PENDING_RULING.
+    // solmane_charger, terrorspark_groundshaker) are content gaps, not
+    // vocabulary gaps, and stay hand-listed in SOURCE_PENDING_RULING.
     relics: mounts(...mountEntries(RELIQUARY_HORIZON_MOUNTS)),
   },
   {

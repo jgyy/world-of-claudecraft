@@ -1,8 +1,8 @@
 {
   "format": "woc-sfx-runtime-pack",
   "version": 1,
-  "bundleId": "535f3755837171812b564be2bcf149d74aae38cdb259f46749c9a7bf41568b09",
-  "catalogHash": "555d01d72ed424d649e0c84d3e38d60f49a76f3a6211c7a8a339f5f48f33b2db",
+  "bundleId": "3db6c2e882b2635c594fe08063ab7e96adca562c85e96759a8aee7627753a43d",
+  "catalogHash": "908b1dc3673abca304deaf0d3ca6a124296a428a726c637241fcfc0288ae0e38",
   "clips": {
     "amb_birds": {
       "variants": [
@@ -2937,6 +2937,18 @@
       ],
       "gain": 1,
       "playbackRate": 1
+    },
+    "mount_run_solmane_charger": {
+      "variants": [
+        {
+          "id": "main",
+          "url": "/audio/sfx/mount_run_solmane_charger.mp3?v=d4e79277b2cb",
+          "bytes": 10701,
+          "sha256": "d4e79277b2cb1da5d5941c6116136f2ca7104376e12d455c6306919a3e862002"
+        }
+      ],
+      "gain": 1,
+      "playbackRate": 0.98
     },
     "mount_run_stalkglider_snail": {
       "variants": [

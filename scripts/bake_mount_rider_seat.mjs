@@ -31,6 +31,40 @@ const TARGETS = {
     hipSpread: 0.09,
     parentBoneName: 'tripo::Spine_1',
   },
+  // Solmane the Sunveil Charger: the paladin's story mount (Solar Step,
+  // src/sim/content/paladin_core_abilities.ts), generated via the
+  // asset-pipeline creature lane. This rig's auto-rigger output is a longer,
+  // finer Spine_0..Spine_5 chain (vs the courser's Spine_0/1) and an
+  // ambiguous, asymmetric leg topology (its "0_Left/Right_Limb" chains climb
+  // UPWARD off the head bones rather than descending toward hooves, most
+  // likely the flowing mane confusing the limb-detection heuristic, not a
+  // usable leg chain), so this mount ships on its Tripo-retargeted Walk/Idle/
+  // Run/Attack/Death clips rather than a custom scripts/bake_mount_gaits.mjs
+  // RIGS entry (same sanctioned shape as valorsteed/thunderstrut_gobbler's
+  // authored clips; see that file's header). height/yaw/seatY/seatFwd start
+  // from the Veil-Wraith Courser's own already-tuned values (a similarly
+  // proportioned horse-shaped rig, raw bind height ~0.87 vs the courser's
+  // ~0.8, scaled to the same 4.68 world-unit height): a reasoned FIRST GUESS,
+  // not a live-verified one (this session had no working browser
+  // environment to capture a live reference), so re-verify the seat and yaw
+  // with a live close side-on capture before merge, the same as every other
+  // mount's seat in this PR. yaw: bounding-box measurement shows this rig's
+  // long (fore-aft) axis is raw X, nose at the +X extreme (Head_0 sits at the
+  // spine chain's own +X end), the same non-standard axis the hound and
+  // panther have, so it takes their same -Math.PI/2 correction (swings local
+  // +X onto the game's +Z-forward convention) by direct analogy, not an
+  // independent live check. tripo::Spine_4 sits near the model's own
+  // geometric center along that chain (Spine_0 at the hindquarters, Head_0
+  // at the muzzle), a reasonable withers/saddle landmark on a 6-segment
+  // spine.
+  solmane_charger: {
+    height: 4.68,
+    yaw: -Math.PI / 2,
+    seatY: 3.12,
+    seatFwd: 0.12,
+    hipSpread: 0.09,
+    parentBoneName: 'tripo::Spine_4',
+  },
 };
 
 await MeshoptDecoder.ready;

@@ -2035,6 +2035,29 @@ export class Vfx {
     );
   }
 
+  /** The Sunveil Charger's own solar warmth trailing off its coat: bright
+   *  gold-white motes hanging level and drifting gently upward, like the
+   *  courser's wisps but always warm-toned (no alternating dark color, this
+   *  is the one bright, heroic ambient mount trail among the shadow/ember/
+   *  shade/frost set) and reading as a glint of living light rather than the
+   *  courser's smoky duality. */
+  mountRadianceTrail(at: THREE.Vector3, dt: number, running: boolean): void {
+    if (!this.emitChance(running ? 24 : 10, dt)) return;
+    this.spawn(
+      at.x + (Math.random() - 0.5) * 0.6,
+      at.y + 0.45 + Math.random() * 0.4,
+      at.z + (Math.random() - 0.5) * 0.6,
+      (Math.random() - 0.5) * 0.2,
+      0.4 + Math.random() * (running ? 0.35 : 0.22),
+      (Math.random() - 0.5) * 0.2,
+      Math.random() < 0.5 ? 0xfff4d6 : 0xffd873,
+      0.3 + Math.random() * 0.2,
+      0.35 + Math.random() * 0.2,
+      -0.1,
+      SPR.sparkle,
+    );
+  }
+
   /**
    * Ground impact puff: the visual weight of a landing, and the scuff of a
    * body striding up onto a ledge. `power` (0..1) scales count, spread, and

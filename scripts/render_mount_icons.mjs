@@ -132,6 +132,17 @@ const JOBS = [
     id: 'reins_windrend_stormveil_shadewolf',
     cfg: { headFwd: 0.85, headUp: 0.44, fill: 0.54, yaw: 0.4, pitch: 0.14 },
   },
+  {
+    // Its raw mesh rests facing +X, not Z (bounding-box measurement: the long
+    // axis is X and the spine chain's head end sits at the +X extreme, the
+    // same axis the panther has, see the yaw comment on mount_solmane_charger
+    // in characters/manifest.ts): a tall, proud carriage with the head held
+    // high, so anchor forward and high like the courser above, but without
+    // its narrow antler-crown fill.
+    file: 'solmane_charger.glb',
+    id: 'reins_solmane_charger',
+    cfg: { headFwd: 0.85, headUp: 0.5, fill: 0.5, yaw: 0.45, pitch: 0.14, fwd: 'x+' },
+  },
 ];
 
 const only = process.env.ONLY ? new Set(process.env.ONLY.split(',')) : null;

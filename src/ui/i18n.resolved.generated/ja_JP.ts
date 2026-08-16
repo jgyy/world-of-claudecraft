@@ -1082,6 +1082,7 @@ export const ja_JP: EnTranslations = {
       "name_cinderhide_hound": "灰皮のアッシュファング",
       "name_nightprowl_panther": "黄昏帳のナイトプロウル",
       "name_windrend_stormveil_shadewolf": "嵐帳のウィンドレンド",
+      "name_solmane_charger": "陽紗のソルメイン",
       "desc_valorsteed": "頑健で足取り確かな駿馬。移動速度を高める。",
       "desc_grag_bear": "頑健で足取り確かな熊。移動速度を高める。",
       "desc_stalkglider_snail": "粘り強くゆっくり燃えるカタツムリ。移動速度を高める。",
@@ -1095,7 +1096,8 @@ export const ja_JP: EnTranslations = {
       "desc_grimtusk_boar": "鋼のような鉄皮をまとった巨大な牙の軍猪。ただ勢いと悪意だけを推進力に突き進む。",
       "desc_cinderhide_hound": "黒曜石の毛皮に冷えゆく溶滓の亀裂が走る悪魔の軍用犬。駆けるたびに燠火を散らす。",
       "desc_nightprowl_panther": "一言で闇に溶ける、しなやかな影の豹。駆けるたびに己が溶け込む影と同じ靄を引く。",
-      "desc_windrend_stormveil_shadewolf": "嵐をまとう巨狼で、シャーマンがシェイドウルフと化して駆ける道をそのまま走る。駆けるたびに、パチパチと音を立てる静電気を引く。"
+      "desc_windrend_stormveil_shadewolf": "嵐をまとう巨狼で、シャーマンがシェイドウルフと化して駆ける道をそのまま走る。駆けるたびに、パチパチと音を立てる静電気を引く。",
+      "desc_solmane_charger": "陽光をまとう気高い軍馬で、パラディンが自らのソーラーステップを繰り出す道をそのまま走る。駆けるたびに、たてがみと尾が生きた陽光のように輝く。"
     },
     "mountTraining": {
       "mountPrompt": "{key} キーを押して訓練用ヴァロースティードに騎乗する。",
@@ -12385,6 +12387,9 @@ export const ja_JP: EnTranslations = {
       },
       "reins_windrend_stormveil_shadewolf": {
         "name": "嵐帳のウィンドレンドの手綱"
+      },
+      "reins_solmane_charger": {
+        "name": "陽紗のソルメインの手綱"
       },
       "rimefang": {
         "name": "霜牙"

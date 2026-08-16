@@ -35,8 +35,9 @@ export interface MountVisualSpec {
   /** Ambient particle effect the renderer emits for this mount: the snail's
    *  slime path while moving, the hover cycle's aether exhaust, the boar's
    *  hoof dust, the courser's holy/shadow coat-shift wisps, the hound's
-   *  ember-crack sparks, the panther's trailing shadow wisps. */
-  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | 'shade' | 'frost' | null;
+   *  ember-crack sparks, the panther's trailing shadow wisps, the charger's
+   *  trailing solar radiance. */
+  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | 'shade' | 'frost' | 'radiance' | null;
 }
 
 const spec = (
@@ -51,7 +52,16 @@ const spec = (
     whileMoving?: boolean;
   },
   seatFwd = 0,
-  fx: 'slime' | 'exhaust' | 'dust' | 'wisp' | 'ember' | 'shade' | 'frost' | null = null,
+  fx:
+    | 'slime'
+    | 'exhaust'
+    | 'dust'
+    | 'wisp'
+    | 'ember'
+    | 'shade'
+    | 'frost'
+    | 'radiance'
+    | null = null,
 ): MountVisualSpec => ({
   visualKey,
   seat,
@@ -198,6 +208,14 @@ export const MOUNT_VISUAL_SPECS: Record<MountKey, MountVisualSpec> = {
     0.32,
     'frost',
   ),
+  // Solmane the Sunveil Charger: the paladin's story mount (Solar Step,
+  // src/sim/content/classes.ts). seat/seatFwd start from the Veil-Wraith
+  // Courser's own already-tuned values (a similarly proportioned raw rig
+  // scaled to the same 4.68 world-unit height); re-verify live before merge,
+  // same as every other mount's first-guess seat in this PR. 'radiance': a
+  // trailing warm solar-gold glow, the bright counterpoint to the other four
+  // story mounts' shadow/ember/frost trails.
+  solmane_charger: spec('mount_solmane_charger', 3.12, true, undefined, 0.12, 'radiance'),
 };
 
 /** Spec for an entity's active mountKey, or null when dismounted/unknown. */

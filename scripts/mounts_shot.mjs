@@ -76,6 +76,7 @@ await page.evaluate(() => {
     'reins_cinderhide_hound',
     'reins_nightprowl_panther',
     'reins_windrend_stormveil_shadewolf',
+    'reins_solmane_charger',
     'reins_terrorspark_groundshaker',
   ])
     sim.addItem(id, 1);

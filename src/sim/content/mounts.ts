@@ -25,6 +25,7 @@ export type MountKey =
   | 'cinderhide_hound'
   | 'nightprowl_panther'
   | 'windrend_stormveil_shadewolf'
+  | 'solmane_charger'
   | 'terrorspark_groundshaker';
 
 export type MountRarity = 'common' | 'uncommon' | 'rare' | 'epic';
@@ -160,6 +161,18 @@ export const MOUNTS: Record<MountKey, MountDef> = {
   windrend_stormveil_shadewolf: {
     key: 'windrend_stormveil_shadewolf',
     name: 'Windrend the Stormveil Shadewolf',
+    rarity: 'epic',
+    moveSpeedPct: 0.8,
+  },
+  // Solmane the Sunveil Charger: a sixth community mount-store candidate (see
+  // docs/claudium-store.md), the paladin counterpart to the Courser's priest
+  // duality, the Hound's warlock one, the Panther's rogue one, and the
+  // Shadewolf's shaman one (Solar Step, content/paladin_core_abilities.ts id:
+  // 'solar_step'). Same shape as the four above: no player-facing acquisition
+  // path yet (see reins_solmane_charger, content/items.ts).
+  solmane_charger: {
+    key: 'solmane_charger',
+    name: 'Solmane the Sunveil Charger',
     rarity: 'epic',
     moveSpeedPct: 0.8,
   },

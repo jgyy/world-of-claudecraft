@@ -103,8 +103,8 @@ function ride(sim: Sim, pid: number, key: string): void {
 }
 
 describe('mount catalog', () => {
-  it('has exactly fourteen mounts with the horse first and the developer tank last', () => {
-    expect(MOUNT_KEYS).toHaveLength(14);
+  it('has exactly fifteen mounts with the horse first and the developer tank last', () => {
+    expect(MOUNT_KEYS).toHaveLength(15);
     expect(MOUNT_KEYS[0]).toBe('valorsteed');
     expect(MOUNT_KEYS.at(-1)).toBe('terrorspark_groundshaker');
     expect(DEFAULT_MOUNT).toBe('valorsteed');
@@ -128,6 +128,7 @@ describe('mount catalog', () => {
     expect(spec('cinderhide_hound')).toEqual(['epic', 0.8]);
     expect(spec('nightprowl_panther')).toEqual(['epic', 0.8]);
     expect(spec('windrend_stormveil_shadewolf')).toEqual(['epic', 0.8]);
+    expect(spec('solmane_charger')).toEqual(['epic', 0.8]);
     expect(spec('terrorspark_groundshaker')).toEqual(['epic', 0.8]);
     // The level field is GONE, not merely unused: it never fired (reins carry no
     // requiredLevel and every source is level-20 content) and leaving it would
@@ -253,7 +254,8 @@ describe('mount reins items (the collection: owning the item is owning the mount
     // reason: it is earmarked for the Claudium store once mounts are wired into
     // that category (docs/claudium-store.md), not a gameplay drop. Grimtusk the
     // Ironhide Boar, Ashfang the Cinderhide Hound, Nightprowl the Duskveil
-    // Panther, and Windrend the Stormveil Shadewolf are the same shape.
+    // Panther, Windrend the Stormveil Shadewolf, and Solmane the Sunveil
+    // Charger are the same shape.
     const NO_SOURCE_YET: readonly string[] = [
       'reins_drakemaw_raptor',
       'reins_veil_wraith_courser',
@@ -261,6 +263,7 @@ describe('mount reins items (the collection: owning the item is owning the mount
       'reins_cinderhide_hound',
       'reins_nightprowl_panther',
       'reins_windrend_stormveil_shadewolf',
+      'reins_solmane_charger',
     ];
     const FIVE_MAN_SOURCES: Record<string, readonly string[]> = {
       reins_stormfeather_griffin: ['morthen'],

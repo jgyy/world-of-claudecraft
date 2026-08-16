@@ -5,8 +5,8 @@
     "baselineCommit": "aee195551b5aef628eb7a72192117d7e3079818e",
     "branch": "feature/placeholder-art-completion-v036",
     "shippingDirectory": "public/ui/items",
-    "itemArtFilesReviewed": 827,
-    "liveItemDefinitions": 842,
+    "itemArtFilesReviewed": 829,
+    "liveItemDefinitions": 844,
     "generatedHeroicDefinitions": 64,
     "heroicDefinitionsWithOwnWebp": 48,
     "heroicWeaponArtAliases": 16,
@@ -303,8 +303,8 @@
       "elixir": 4,
       "food": 21,
       "held_offhand": 9,
-      "junk": 81,
-      "mount": 14,
+      "junk": 82,
+      "mount": 15,
       "potion": 13,
       "quest": 97,
       "tool": 45,
@@ -418,7 +418,7 @@
   },
   "visualVerdict": {
     "status": "pass",
-    "passCount": 827,
+    "passCount": 829,
     "passIds": [
       "abyssal_loop",
       "abysswrought_band",
@@ -559,6 +559,7 @@
       "cultist_flayer",
       "curved_tusk",
       "cyan_magenta_armor_plate",
+      "dawnhold_posy",
       "deacon_reliquary_helm",
       "deacons_cleaver",
       "deathless_greatblade",
@@ -977,6 +978,7 @@
       "reins_grimtusk_boar",
       "reins_nightprowl_panther",
       "reins_shadowjump_toad",
+      "reins_solmane_charger",
       "reins_stalkglider_snail",
       "reins_stormfeather_griffin",
       "reins_terrorspark_groundshaker",
@@ -1252,7 +1254,7 @@
     "watch": [],
     "rejectCount": 0,
     "reject": [],
-    "summary": "All 827 shipping item-art files pass the MACHINE-CHECKABLE contract (dimensions, format, opacity, size, uniqueness; see machineChecks below): 817 reviewed in the 2026-08-09 campaign (documented retries included), plus the five class-overhaul integration additions owner-reviewed and passed on 2026-08-10, plus the Veil-Wraith Courser and Grimtusk the Ironhide Boar mount reins icons added on 2026-08-13, plus the Ashfang the Cinderhide Hound mount reins icon added on 2026-08-14, plus the Nightprowl the Duskveil Panther mount reins icon added on 2026-08-14, plus the Windrend the Stormveil Shadewolf mount reins icon added on 2026-08-15. Of those five, only the Veil-Wraith Courser icon fully satisfies the woc-item-icon-v1 STYLE contract (repainted 2026-08-13, see the correction entry below): reins_grimtusk_boar is a composed-but-still-photographic render (batchId grimtusk-boar-mount-composition-fix-2026-08-14), reins_cinderhide_hound is a raw 3D camera render (batchId cinderhide-hound-mount-2026-08-14), reins_nightprowl_panther is a raw 3D camera render (batchId nightprowl-panther-mount-2026-08-14), and reins_windrend_stormveil_shadewolf is a raw 3D camera render (batchId windrend-stormveil-shadewolf-mount-2026-08-15), all known, deliberately unresolved style-contract gaps tracked in public/ui/items/mapping.json, not passed style reviews. passIds below is a shipping-catalog membership list (every current owner id, all machine-check clean), not a claim that every id also clears the style contract."
+    "summary": "All 829 shipping item-art files pass the MACHINE-CHECKABLE contract (dimensions, format, opacity, size, uniqueness; see machineChecks below): 817 reviewed in the 2026-08-09 campaign (documented retries included), plus the five class-overhaul integration additions owner-reviewed and passed on 2026-08-10, plus the Dawnhold posy addition (project-authored vector illustration) owner-reviewed and passed on 2026-08-12, plus the Veil-Wraith Courser and Grimtusk the Ironhide Boar mount reins icons added on 2026-08-13, plus the Ashfang the Cinderhide Hound mount reins icon added on 2026-08-14, plus the Nightprowl the Duskveil Panther mount reins icon added on 2026-08-14, plus the Windrend the Stormveil Shadewolf mount reins icon added on 2026-08-15, plus the Solmane the Sunveil Charger mount reins icon added on 2026-08-16. Of those six, only the Veil-Wraith Courser icon fully satisfies the woc-item-icon-v1 STYLE contract (repainted 2026-08-13, see the correction entry below): reins_grimtusk_boar is a composed-but-still-photographic render (batchId grimtusk-boar-mount-composition-fix-2026-08-14), reins_cinderhide_hound is a raw 3D camera render (batchId cinderhide-hound-mount-2026-08-14), reins_nightprowl_panther is a raw 3D camera render (batchId nightprowl-panther-mount-2026-08-14), reins_windrend_stormveil_shadewolf is a raw 3D camera render (batchId windrend-stormveil-shadewolf-mount-2026-08-15), and reins_solmane_charger is a raw 3D camera render sourced from the asset-generation pipeline's own preview render rather than scripts/render_mount_icons.mjs (batchId solmane-charger-mount-2026-08-16, see mapping.json for why), all known, deliberately unresolved style-contract gaps tracked in public/ui/items/mapping.json, not passed style reviews. passIds below is a shipping-catalog membership list (every current owner id, all machine-check clean), not a claim that every id also clears the style contract."
   },
   "nonVisualContentWatch": [
     {
@@ -1409,8 +1411,8 @@
   "evidence": {
     "catalog": {
       "path": "tmp/imagegen/item-art-consistency/final-audit/catalog.json",
-      "sha256": "a548b8c52a94344b360ee7a3c8c8597585afba4e10af2c424ac9ffd23d613173",
-      "bytes": 454010
+      "sha256": "65b50263b7ae64af3dd11615d218060930d189943e304d3885b63456359b3fde",
+      "bytes": 454552
     },
     "rendererFingerprint": "fd92c41a206cd55b05a1de94c4789f6eb6ca4200d063f4bbd284c21ae03b6082",
     "sheetCount": 208,
@@ -1424,7 +1426,7 @@
       "small-multiview": 26,
       "identity": 26
     },
-    "sheetSetSha256": "cfcb2c116fc0a682eea300492143c20bb5b5f1c07e8de731c917522941e8de9f",
+    "sheetSetSha256": "1408573d53242e336381c4d1a968339081360c4a4469e358d5e705987ef31feb",
     "sheets": [
       {
         "path": "tmp/imagegen/item-art-consistency/final-audit/sheets/armor-chest--p01--128-color.png",
@@ -2580,64 +2582,64 @@
       },
       {
         "path": "tmp/imagegen/item-art-consistency/final-audit/sheets/mount--p01--128-color.png",
-        "sha256": "9041fab4924205ff1630c7c1ffa1f5ef712a8de694cfc0f7efa9a17a1c7f16cd",
-        "bytes": 420289,
+        "sha256": "29b4f7f65eac74f54c3159bf1d474683a1e47e0e3bce2f0890dbe45f092e3b31",
+        "bytes": 432479,
         "width": 1600,
         "height": 376,
         "format": "png"
       },
       {
         "path": "tmp/imagegen/item-art-consistency/final-audit/sheets/mount--p01--40-color.png",
-        "sha256": "469590a75a315cb1bf8f319fbf3f069063a378706ac1fea17c3af2ba4a4049e6",
-        "bytes": 81794,
+        "sha256": "5938f0937d621477abfc1d5cc0ee4fffb281e6c4a0c0c4f717c3ee1c3766ac5e",
+        "bytes": 83749,
         "width": 1600,
         "height": 288,
         "format": "png"
       },
       {
         "path": "tmp/imagegen/item-art-consistency/final-audit/sheets/mount--p01--28-color.png",
-        "sha256": "576b946ab6a825d0a53ae35033f94840e100bf1089feba70883f98f8cefc0ce1",
-        "bytes": 58909,
+        "sha256": "10ae1a00922bb607d6b0f4d978c3feccdec3dab5f3c63c769b0f533809dde0f6",
+        "bytes": 60662,
         "width": 1600,
         "height": 376,
         "format": "png"
       },
       {
         "path": "tmp/imagegen/item-art-consistency/final-audit/sheets/mount--p01--22-color.png",
-        "sha256": "18b82321bafb5faaea2185ee7501d28260ffa9d1ba8d50f899c6f9ed50c186c8",
-        "bytes": 47419,
+        "sha256": "e73287687ad33cee4bc85b9c55d1a9f66ba0498896805e89343facfa505fb63a",
+        "bytes": 48768,
         "width": 1600,
         "height": 376,
         "format": "png"
       },
       {
         "path": "tmp/imagegen/item-art-consistency/final-audit/sheets/mount--p01--28-grayscale.png",
-        "sha256": "ea646356dd3f5637555c1d56d89bfd1557a5ae58618136c26006a9416d9ad0c8",
-        "bytes": 46895,
+        "sha256": "13a9f64def8b26fceb352669ac1ae3b1b69e67613e52041da26880b14b630b14",
+        "bytes": 48523,
         "width": 1600,
         "height": 376,
         "format": "png"
       },
       {
         "path": "tmp/imagegen/item-art-consistency/final-audit/sheets/mount--p01--64-circle.png",
-        "sha256": "16a6a1f57b27224e1935f5018a44b1802efa7f337bfd6b113df4cb7e2b554b79",
-        "bytes": 138547,
+        "sha256": "e98c272574dd8f14e749617fc859e38eb376c8178f0665116e392724455e49be",
+        "bytes": 142859,
         "width": 1600,
         "height": 376,
         "format": "png"
       },
       {
         "path": "tmp/imagegen/item-art-consistency/final-audit/sheets/mount--p01--small-multiview.png",
-        "sha256": "2bfb78de5a7493385ce4035656ea616383110face10fb0e113c1db3d44170719",
-        "bytes": 247896,
+        "sha256": "877f9c23518cb74a7f5be14969aeb639f83141dc79f7aaf1a11f1ba03d778553",
+        "bytes": 255217,
         "width": 1800,
         "height": 480,
         "format": "png"
       },
       {
         "path": "tmp/imagegen/item-art-consistency/final-audit/sheets/mount--p01--identity.png",
-        "sha256": "851292c708dbca469bdb2e94798f7065553bd8ee2469f40b3ecc8b818b6f1df4",
-        "bytes": 444669,
+        "sha256": "ee90e1373073dc06e975256640565021aefad4854f4b46be1771b0d30ca13958",
+        "bytes": 457872,
         "width": 1800,
         "height": 452,
         "format": "png"
@@ -3091,6 +3093,6 @@
         "format": "png"
       }
     ],
-    "shippingCatalogSha256": "60677c2c4ead22d8d51d80dae236089dafad2045b18817e1641380650ffbe6d8"
+    "shippingCatalogSha256": "ca8fe4cc6d84019cb96fd61467b7e153b7ff554b179a96a9e4f6e2fb5a066a6f"
   }
 }

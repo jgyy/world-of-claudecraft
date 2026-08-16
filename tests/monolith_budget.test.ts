@@ -80,11 +80,17 @@ const MONOLITHS: MonolithRow[] = [
     // Lowered again by the castle branch's interior_light_rig.ts extraction;
     // after merging main the merged file lands below both prior pins, so the
     // ceiling is the exact merged count.
-    // Raised for this branch's mount rideable content (thin-consumer wiring to
-    // mount_visuals.ts / mount_fx.ts) across several commits; not yet the final
-    // count for this rebase (see the last mount commit's re-pin for the true
-    // merged ceiling).
-    ceiling: 13760,
+    // This branch (#3365, six class-fantasy mounts) adds mount rideable
+    // content as thin-consumer wiring to extracted modules
+    // (mount_visuals.ts, mount_fx.ts, and its own ambient-mount-fx dispatch
+    // extraction), then lowers the pin again by extracting the per-frame
+    // mounted-rider update (mount anim-state fill, the live rider-seat-socket
+    // position lock, and the ambient-mount-fx call site) into
+    // src/render/mount_rider_lock.ts (the rider-lock follow-up). Rebased onto
+    // release/v0.39.0: the file lands between this branch's own pin and
+    // upstream's release/v0.39.0 pin, so the ceiling is the exact merged
+    // count per the ratchet's rule: any further growth reds again.
+    ceiling: 13678,
     seam: 'a new src/render/<thing>.ts module the renderer calls (src/render/CLAUDE.md)',
   },
   {

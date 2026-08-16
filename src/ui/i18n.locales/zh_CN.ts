@@ -8051,6 +8051,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_cinderhide_hound.name': '烬甲灰牙魔犬的缰绳',
   'entities.items.reins_nightprowl_panther.name': '暮纱夜行豹的缰绳',
   'entities.items.reins_windrend_stormveil_shadewolf.name': '暴纱风裂影狼的缰绳',
+  'entities.items.reins_solmane_charger.name': '阳纱日鬃战马的缰绳',
   'entities.items.reins_thunderstrut_gobbler.name': '雷霆阔步大火鸡的缰绳',
   'entities.mobs.drowned_cantor.name': '溺亡诵经者',
   'entities.mobs.reedbound_acolyte.name': '芦苇缚信徒',
@@ -9218,6 +9219,9 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_windrend_stormveil_shadewolf': '暴纱风裂影狼',
   'hudChrome.mounts.desc_windrend_stormveil_shadewolf':
     '一头笼罩风暴的巨狼，奔行的正是萨满化身影狼时踏过的同一条路，每一步都拖曳着噼啪作响的电光。',
+  'hudChrome.mounts.name_solmane_charger': '阳纱日鬃战马',
+  'hudChrome.mounts.desc_solmane_charger':
+    '一匹圣洁的骑士战马，奔行的正是圣骑士施展日行之步时踏过的同一条路，鬃尾如烈日流光，每一步都焕发着温暖的荣光。',
   'hudChrome.mounts.desc_drakemaw_raptor':
     '来自龙喉火山口的驯服巢生迅猛龙，浑身筋肉、疾若奔雷，身上仍带着淡淡的灰烬气味。',
   'hudChrome.mounts.name_thunderstrut_gobbler': '雷霆阔步大火鸡',

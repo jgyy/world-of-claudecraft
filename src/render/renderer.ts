@@ -358,8 +358,8 @@ import { buildMailboxPillar } from './mailbox';
 import { buildMobNightGlow, type MobNightGlowView } from './mob_night_glow';
 import { buildMotes, type MotesView } from './motes';
 import { MountBeacon } from './mount_beacon';
-import { applyMountFx } from './mount_fx';
-import { mountBobY, mountVisualSpec } from './mount_visuals';
+import { updateMountedRiderFrame } from './mount_rider_lock';
+import { mountVisualSpec } from './mount_visuals';
 import { NameplatePainter } from './nameplate_painter';
 import {
   isProjectedNameplateAnchorVisible,
@@ -1519,8 +1519,7 @@ export class Renderer {
   private sloppyCandidates: SloppyPickCandidate[] = [];
   private tmpV2 = new THREE.Vector3();
   private tmpV3 = new THREE.Vector3();
-  // Scratch for the live rider-seat bone lookup (mountSeatWorldPosition):
-  // reused per entity per frame so a mounted crowd allocates nothing here.
+  // Scratch for updateMountedRiderFrame (mount_rider_lock.ts).
   private tmpMountSeat = new THREE.Vector3();
   // Manual frustum cull for characters. Their skinned meshes keep
   // frustumCulled=false (a skinned mesh's bind-pose bounds don't follow the
@@ -11956,46 +11955,24 @@ export class Renderer {
       // skin VFX point light on it) is rebuilt inside update(), not at the diff.
       if (v.visual.consumeWeaponGraphDirty()) this.reconcileViewLights(v);
 
-      // The mount animates from the same locomotion inputs as its rider: the
-      // rigged quadrupeds run their baked gait clips (a live Idle loop while
-      // standing, Walk/Run on the move, scripts/bake_mount_gaits.mjs), and
-      // the clipless mounts bob procedurally (the hover cycle floats, the
-      // griffin canters, the snail glides flat). `airborne` here is the real
-      // flag, not the rider's suppressed one: the mount carries the jump.
-      if (v.mountVisual && mountSpec && mountShown) {
-        const mst = this.mountAnimScratch;
-        mst.speed = st.speed;
-        mst.moving = st.moving;
-        mst.running = st.running;
-        mst.airborne = airborne;
-        mst.backwards = st.backwards;
-        mst.swimming = st.swimming;
-        if (runCharacterPresentation) {
-          v.mountVisual.update(dt, mst, animate);
-          // the rider floats WITH the procedural bob (the hover cycle's idle
-          // float), not just the mount body
-          const bob = mountBobY(mountSpec, this.time, moving);
-          v.mountVisual.root.position.y = bob;
-          // Rigs baked with rider-seat sockets (scripts/bake_mount_gaits.mjs)
-          // track the mount's ACTUAL animated saddle position every frame
-          // (twist/stomp included) instead of a fixed offset on top of the
-          // rest pose. Sockets are read AFTER the bob assignment above so the
-          // seat bones' world matrices already include it. Clipless mounts
-          // and any rig without sockets fall back to the static seat height.
-          if (v.mountVisual.mountSeatWorldPosition(this.tmpMountSeat)) {
-            v.group.worldToLocal(this.tmpMountSeat);
-            v.visual.root.position.copy(this.tmpMountSeat);
-          } else {
-            v.visual.root.position.y = v.mountLift + bob;
-          }
-          // ambient mount particles (src/render/mount_fx.ts): the snail
-          // paints its slime path, the hover cycle streams exhaust, the boar
-          // kicks up hoof dust, the courser trails holy/shadow wisps
-          applyMountFx(this.vfx, mountSpec.fx, v.group.position, facing, dt, moving, st.running);
-        } else {
-          v.mountVisual.advanceOffscreen(dt);
-        }
-      }
+      // `airborne` here is the real flag, not the rider's suppressed one:
+      // the mount carries the jump (src/render/mount_rider_lock.ts).
+      updateMountedRiderFrame(
+        v,
+        mountSpec,
+        mountShown,
+        this.mountAnimScratch,
+        st,
+        airborne,
+        dt,
+        animate,
+        runCharacterPresentation,
+        moving,
+        facing,
+        this.vfx,
+        this.time,
+        this.tmpMountSeat,
+      );
 
       const emoteId =
         e.kind === 'player' && e.overheadEmoteId && !e.dead ? e.overheadEmoteId : null;

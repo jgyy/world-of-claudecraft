@@ -1082,6 +1082,7 @@ export const ko_KR: EnTranslations = {
       "name_cinderhide_hound": "잿불가죽 마견 애쉬팽",
       "name_nightprowl_panther": "황혼의 베일 나이트프롤",
       "name_windrend_stormveil_shadewolf": "폭풍베일 그림자늑대 윈드렌드",
+      "name_solmane_charger": "선베일 성전마 솔메인",
       "desc_valorsteed": "여행 속도를 높여 주는 튼튼하고 발이 안정된 군마입니다.",
       "desc_grag_bear": "여행 속도를 높여 주는 튼튼하고 발이 안정된 곰입니다.",
       "desc_stalkglider_snail": "여행 속도를 높여 주는 끈질기고 느긋한 달팽이입니다.",
@@ -1095,7 +1096,8 @@ export const ko_KR: EnTranslations = {
       "desc_grimtusk_boar": "무쇠 같은 가죽을 두른 거대한 엄니의 전투 멧돼지. 오직 돌진하는 기세와 악의만으로 나아간다.",
       "desc_cinderhide_hound": "식어가는 용암 균열이 흑요석 가죽을 뒤덮은 악마의 군용견. 내달릴 때마다 잉걸불을 흩날린다.",
       "desc_nightprowl_panther": "한마디에 어둠 속으로 녹아드는 날렵한 그림자 표범. 내달릴 때마다 자신이 녹아드는 것과 같은 그림자 안개를 남긴다.",
-      "desc_windrend_stormveil_shadewolf": "폭풍을 두른 그림자늑대로, 샤먼이 그림자늑대로 변신해 내달리는 것과 같은 길을 달린다. 내달릴 때마다 타닥거리는 정전기를 흩날린다."
+      "desc_windrend_stormveil_shadewolf": "폭풍을 두른 그림자늑대로, 샤먼이 그림자늑대로 변신해 내달리는 것과 같은 길을 달린다. 내달릴 때마다 타닥거리는 정전기를 흩날린다.",
+      "desc_solmane_charger": "성스러운 빛을 두른 준마로, 성기사가 솔라 스텝을 펼칠 때와 같은 길을 달린다. 내달릴 때마다 갈기와 꼬리가 살아있는 햇살처럼 타오른다."
     },
     "mountTraining": {
       "mountPrompt": "{key} 키를 눌러 훈련용 발러스티드에 탑승한다.",
@@ -12385,6 +12387,9 @@ export const ko_KR: EnTranslations = {
       },
       "reins_windrend_stormveil_shadewolf": {
         "name": "폭풍베일 그림자늑대 윈드렌드의 고삐"
+      },
+      "reins_solmane_charger": {
+        "name": "선베일 성전마 솔메인의 고삐"
       },
       "rimefang": {
         "name": "서리엄니"

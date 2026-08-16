@@ -180,6 +180,15 @@ export const SFX = [
     custom: true,
   },
   {
+    // Solmane the Sunveil Charger: the same valorsteed gallop donor as the
+    // Veil-Wraith Courser above (the closest body plan, a tall four-legged
+    // charger), pitched down slightly (0.98 vs the courser's 1.05 in
+    // sfx_speed_map.json) for a heavier, more solid stride befitting an
+    // armored warhorse rather than the courser's lighter spectral gait.
+    key: 'mount_run_solmane_charger',
+    custom: true,
+  },
+  {
     key: 'mount_run_terrorspark_groundshaker_stop',
     custom: true,
   },

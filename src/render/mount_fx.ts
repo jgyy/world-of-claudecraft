@@ -1,6 +1,7 @@
 // Ambient mount particle dispatch: the snail paints its slime path while
 // gliding, the hover cycle streams aether exhaust off its tail, the boar
-// kicks up hoof dust, the courser trails holy/shadow wisps. Extracted out of
+// kicks up hoof dust, the courser trails holy/shadow wisps, the charger
+// trails warm solar radiance. Extracted out of
 // renderer.ts (a monolith-budget coordinator) so a fifth MountVisualSpec.fx
 // kind added later lands here, not as another branch grown on the
 // coordinator; the switch's `never` default keeps it exhaustive against the
@@ -39,6 +40,9 @@ export function applyMountFx(
       break;
     case 'frost':
       if (moving) vfx.mountFrostTrail(position, dt, running);
+      break;
+    case 'radiance':
+      if (moving) vfx.mountRadianceTrail(position, dt, running);
       break;
     case null:
       break;

@@ -8385,6 +8385,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'entities.items.reins_cinderhide_hound.name': '잿불가죽 마견 애쉬팽의 고삐',
   'entities.items.reins_nightprowl_panther.name': '황혼의 베일 나이트프롤의 고삐',
   'entities.items.reins_windrend_stormveil_shadewolf.name': '폭풍베일 그림자늑대 윈드렌드의 고삐',
+  'entities.items.reins_solmane_charger.name': '선베일 성전마 솔메인의 고삐',
   'entities.items.reins_thunderstrut_gobbler.name': '천둥활보 대왕 칠면조의 고삐',
   'entities.mobs.drowned_cantor.name': '익사한 영창자',
   'entities.mobs.reedbound_acolyte.name': '갈대에 묶인 신도',
@@ -9611,6 +9612,9 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.mounts.name_windrend_stormveil_shadewolf': '폭풍베일 그림자늑대 윈드렌드',
   'hudChrome.mounts.desc_windrend_stormveil_shadewolf':
     '폭풍을 두른 그림자늑대로, 샤먼이 그림자늑대로 변신해 내달리는 것과 같은 길을 달린다. 내달릴 때마다 타닥거리는 정전기를 흩날린다.',
+  'hudChrome.mounts.name_solmane_charger': '선베일 성전마 솔메인',
+  'hudChrome.mounts.desc_solmane_charger':
+    '성스러운 빛을 두른 준마로, 성기사가 솔라 스텝을 펼칠 때와 같은 길을 달린다. 내달릴 때마다 갈기와 꼬리가 살아있는 햇살처럼 타오른다.',
   'hudChrome.mounts.desc_drakemaw_raptor':
     '화산구 칼데라에서 길들여진 둥지 태생 랩터. 온몸이 힘줄과 질주로 이루어졌으며, 아직도 희미한 재 냄새가 난다.',
   'hudChrome.mounts.name_thunderstrut_gobbler': '천둥활보 대왕 칠면조',

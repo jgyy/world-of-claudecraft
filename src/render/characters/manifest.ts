@@ -1836,6 +1836,32 @@ export const VISUALS: Record<string, VisualDef> = {
     runRef: 12.6,
     lazyPreload: true,
   },
+  // Solmane the Sunveil Charger: the paladin's story mount (Solar Step,
+  // src/sim/content/paladin_core_abilities.ts, a movement-speed buff; the
+  // same "class fantasy mount" pattern as the courser/priest, hound/warlock,
+  // panther/rogue, and shadewolf/shaman above), generated via the
+  // asset-pipeline creature lane. Ships on its Tripo-retargeted Idle/Walk/
+  // Run/Death clips (MOUNT_RIGGED, no jump/attack: same shape as the
+  // Veil-Wraith Courser above) rather than a custom
+  // scripts/bake_mount_gaits.mjs RIGS entry: this rig's auto-rigged leg
+  // chains are ambiguous (its "0_Left/Right_Limb" joints climb UPWARD off
+  // the head bones, most likely the flowing mane confusing the
+  // limb-detection heuristic, not usable leg data), so a hand-authored gait
+  // bake could not be verified without live capture (unavailable this
+  // session; see scripts/bake_mount_rider_seat.mjs's own comment on this
+  // mount). yaw/height/walkRef/runRef mirror the courser's own values as a
+  // reasoned starting point (a similarly proportioned raw rig scaled to the
+  // same world height): re-verify facing and stride cadence live before
+  // merge, the same as every other mount's first-guess values in this PR.
+  mount_solmane_charger: {
+    url: `${MOUNTS_DIR}/solmane_charger.glb`,
+    height: 4.68,
+    clips: MOUNT_RIGGED,
+    yaw: -Math.PI / 2,
+    walkRef: 2.6,
+    runRef: 9,
+    lazyPreload: true,
+  },
   mount_drakemaw_raptor: {
     url: `${MOUNTS_DIR}/drakemaw_raptor.glb`,
     height: 3.4,

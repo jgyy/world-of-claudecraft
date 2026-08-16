@@ -6096,6 +6096,17 @@
    "itemIds": [
     "reins_windrend_stormveil_shadewolf"
    ]
+  },
+  {
+   "batchId": "solmane-charger-mount-2026-08-16",
+   "source": "Tripo API 3D asset pipeline (scripts/asset_pipeline/), the pipeline's own concept-generation preview render (tmp/asset_pipeline/creature_solmane_charger_msvdho77/preview/hero.png), cropped/flattened to the shipping square the same way scripts/render_mount_icons.mjs does",
+   "owner": "World of ClaudeCraft",
+   "license": "World of ClaudeCraft project-generated art, project asset, rights reserved",
+   "styleReference": "KNOWN GAP, same shape as grimtusk-boar-mount-2026-08-13, cinderhide-hound-mount-2026-08-14, nightprowl-panther-mount-2026-08-14, and windrend-stormveil-shadewolf-mount-2026-08-15 before their follow-ups: this is a raw 3D camera render, not a painted icon, and the style contract (docs/design/item-icon-art-style.md, woc-item-icon-v1) forbids raw 3D thumbnails for item icons; every other reins_* icon in the catalog is painted. Two tooling paths were unavailable in this session rather than merely unattempted: gpt-image-2 text-to-image returned HTTP 429 rate_limit_exceeded during the creature generation itself (visible in the pipeline job log), and scripts/render_mount_icons.mjs's headless-Chrome harness threw \"Failed to construct 'URL': Invalid URL\" from a page.setContent(about:blank) document even for an ALREADY-SHIPPED mount (valorsteed), confirming a session-wide headless-browser regression unrelated to this mount specifically (a page.goto('file://...') swap was tried and did not resolve it; reverted rather than leave an unverified change in shared tooling). This icon is therefore sourced from the asset-generation pipeline's OWN preview render (produced through a separate, working code path, not the broken standalone renderer), cropped and flattened with sharp using the exact same resize/flatten/webp settings scripts/render_mount_icons.mjs uses, so it matches the established camera-render convention pixel-for-pixel in treatment even though the source path differs. A deliberately scoped follow-up pending a true painted pass once gpt-image-2 quota and the headless-Chrome regression are both resolved, not an oversight. No separate reference images.",
+   "commonPrompt": "N/A: produced by cropping an existing 3D render, not a text-to-image prompt.",
+   "itemIds": [
+    "reins_solmane_charger"
+   ]
   }
  ]
 }
