@@ -1519,6 +1519,9 @@ export class Renderer {
   private sloppyCandidates: SloppyPickCandidate[] = [];
   private tmpV2 = new THREE.Vector3();
   private tmpV3 = new THREE.Vector3();
+  // Scratch for the live rider-seat bone lookup (mountSeatWorldPosition):
+  // reused per entity per frame so a mounted crowd allocates nothing here.
+  private tmpMountSeat = new THREE.Vector3();
   // Manual frustum cull for characters. Their skinned meshes keep
   // frustumCulled=false (a skinned mesh's bind-pose bounds don't follow the
   // animated pose, so Three's own cull pops visible rigs out), which means an
@@ -11973,7 +11976,18 @@ export class Renderer {
           // float), not just the mount body
           const bob = mountBobY(mountSpec, this.time, moving);
           v.mountVisual.root.position.y = bob;
-          v.visual.root.position.y = v.mountLift + bob;
+          // Rigs baked with rider-seat sockets (scripts/bake_mount_gaits.mjs)
+          // track the mount's ACTUAL animated saddle position every frame
+          // (twist/stomp included) instead of a fixed offset on top of the
+          // rest pose. Sockets are read AFTER the bob assignment above so the
+          // seat bones' world matrices already include it. Clipless mounts
+          // and any rig without sockets fall back to the static seat height.
+          if (v.mountVisual.mountSeatWorldPosition(this.tmpMountSeat)) {
+            v.group.worldToLocal(this.tmpMountSeat);
+            v.visual.root.position.copy(this.tmpMountSeat);
+          } else {
+            v.visual.root.position.y = v.mountLift + bob;
+          }
           // ambient mount particles (src/render/mount_fx.ts): the snail
           // paints its slime path, the hover cycle streams exhaust, the boar
           // kicks up hoof dust, the courser trails holy/shadow wisps

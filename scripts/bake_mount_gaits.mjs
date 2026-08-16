@@ -18,6 +18,7 @@
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer';
+import { addRiderSeatSockets } from './lib/mount_rider_seat_sockets.mjs';
 
 // ---------------------------------------------------------------------------
 // Quaternion helpers ([x, y, z, w], Hamilton product; R(a mul b) = R(a)R(b))
@@ -204,10 +205,25 @@ const RIGS = {
     // a boar carries its weight low and forward; roll (sway) does more of the
     // work than pitch (rock) on a stocky low-slung body
     rock: { bone: 'tripo::Spine_1', walk: 2.2, run: 4.2 },
+    // A stocky, low-slung, wide-stanced build: the least torso twist in the
+    // catalog, a subtle counter-rotation under the driving roll (sway) above,
+    // reference: a trotting quadruped's shoulders/hips counter-rotate as
+    // weight shifts between diagonal leg pairs (composed onto the rock bone
+    // above; see addRot's header comment for why a shared bone composes).
+    twist: { walk: 1, run: 1.8 },
     sway: { bone: 'tripo::Spine_0', walk: 3.2, run: 5.8 },
     head: { bone: 'tripo::Head_0', amp: 4 },
     // yaw wag, faster and wider at a charge than at a trot
     tail: { bone: 'bone_21', axis: 'yaw', amp: { walk: 10, run: 18 } },
+    // Rider-seat sockets (#3365 rider-lock follow-up): two hip-line child
+    // nodes baked onto the rock bone above, so the renderer reads the
+    // saddle's LIVE animated position instead of a fixed offset (see
+    // addRiderSeatSockets below). height/yaw mirror manifest.ts
+    // mount_grimtusk_boar; seatY/seatFwd mirror the already hand-tuned
+    // MOUNT_VISUAL_SPECS.grimtusk_boar world-space seat, so the rider lands
+    // in the SAME already-verified spot at rest, and now also tracks the
+    // stride. hipSpread is a stocky, wide-set saddle for this low-slung build.
+    riderSeat: { height: 3.12, yaw: 0, seatY: 2.28, seatFwd: -0.75, hipSpread: 0.11 },
   },
   // Ashfang the Cinderhide Hound: a demonic obsidian-hided war-mount, the
   // warlock counterpart to the Courser's priest duality (Cinderhide,
@@ -244,11 +260,20 @@ const RIGS = {
     // leads over roll (sway), the inverse balance from the boar's low-slung
     // waddle.
     rock: { bone: 'tripo::Spine_1', walk: 3.2, run: 5.5 },
+    // A moderate torso twist under the driving pitch lunge above: a
+    // predatory quadruped digging in, not the boar's stiff-legged waddle
+    // (composed onto the rock bone above; see addRot's header comment).
+    twist: { walk: 1.4, run: 2.4 },
     sway: { bone: 'tripo::Spine_0', walk: 2, run: 3.5 },
     head: { bone: 'tripo::Head_0', amp: 5 },
     // pitch lash (nod up/down), faster and tighter than the boar's tail wag:
     // an agitated hound's tail, not a contented trot.
     tail: { bone: 'bone_33', axis: 'pitch', amp: { walk: 14, run: 24 } },
+    // Rider-seat sockets (#3365 rider-lock follow-up), see the boar's own
+    // riderSeat comment above for the mechanism. height/yaw mirror
+    // manifest.ts mount_cinderhide_hound; seatY/seatFwd mirror
+    // MOUNT_VISUAL_SPECS.cinderhide_hound.
+    riderSeat: { height: 3.72, yaw: -Math.PI / 2, seatY: 2.82, seatFwd: -0.42, hipSpread: 0.1 },
   },
   // Nightprowl the Duskveil Panther: a lithe, low-slung big cat (the rogue
   // counterpart to the Courser's priest duality and the Hound's warlock one,
@@ -286,7 +311,17 @@ const RIGS = {
     // a cat's spine does most of the work: pronounced roll (sway) from the
     // low prowling gait, plus a real pitch (rock) flex on the gallop bound.
     rock: { bone: 'tripo::Spine_1', walk: 2.6, run: 5 },
+    // A cat's spine is the most flexible in the catalog: the biggest torso
+    // twist here too, under the pronounced roll (sway) below, composed onto
+    // the rock bone above (see addRot's header comment).
+    twist: { walk: 1.4, run: 2.7 },
     sway: { bone: 'tripo::Spine_0', walk: 3.8, run: 6 },
+    // Rider-seat sockets (#3365 rider-lock follow-up), see the boar's own
+    // riderSeat comment above for the mechanism. height/yaw mirror
+    // manifest.ts mount_nightprowl_panther; seatY/seatFwd mirror
+    // MOUNT_VISUAL_SPECS.nightprowl_panther. hipSpread is narrower than the
+    // boar/hound: a lither, lower-slung prowling build.
+    riderSeat: { height: 2.76, yaw: -Math.PI / 2, seatY: 1.908, seatFwd: 0.05, hipSpread: 0.08 },
   },
   // Windrend the Stormveil Shadewolf: a lithe spectral wolf (the shaman
   // counterpart to the Courser's priest duality, the Hound's warlock one, and
@@ -320,12 +355,21 @@ const RIGS = {
     // gait leads, with a real pitch (rock) flex at a full run, between the
     // hound's rock-led lunge and the panther's roll-led prowl.
     rock: { bone: 'tripo::Spine_1', walk: 2.2, run: 4.5 },
+    // A moderate torso twist between the hound's lunge and the panther's
+    // prowl, matching this rig's own rock/sway balance (composed onto the
+    // rock bone above; see addRot's header comment).
+    twist: { walk: 1, run: 2 },
     sway: { bone: 'tripo::Spine_0', walk: 3, run: 5.2 },
     head: { bone: 'tripo::Head_0', amp: 4.5 },
     // yaw wag on the base joint, phase-delayed on the tip for a genuine
     // ripple rather than one rigid segment swinging as a unit.
     tail: { bone: 'tripo::Tail_0', axis: 'yaw', amp: { walk: 12, run: 20 } },
     tail2: { bone: 'tripo::Tail_3', axis: 'yaw', amp: 10, phase: 0.18 },
+    // Rider-seat sockets (#3365 rider-lock follow-up), see the boar's own
+    // riderSeat comment above for the mechanism. height/yaw mirror
+    // manifest.ts mount_windrend_stormveil_shadewolf; seatY/seatFwd mirror
+    // MOUNT_VISUAL_SPECS.windrend_stormveil_shadewolf.
+    riderSeat: { height: 2.88, yaw: 0, seatY: 1.7, seatFwd: 0.32, hipSpread: 0.09 },
   },
 };
 
@@ -588,6 +632,12 @@ for (const key of targets) {
     if (moved) console.log(`  ${key}: reweighted ${moved} influences ${rw.from} -> ${rw.to}`);
   }
 
+  // Rider-seat sockets (RiderSeatL/R, scripts/lib/mount_rider_seat_sockets.mjs):
+  // see that module's header for the mechanism (#3365 rider-lock follow-up).
+  if (cfg.riderSeat) {
+    addRiderSeatSockets(doc, { ...cfg.riderSeat, parentBoneName: cfg.rock.bone });
+  }
+
   const { lateralAxis } = bodyAxes(cfg);
   const makeClip = (name) => {
     const g = { ...GAITS[name], ...(cfg.gaits?.[name] ?? {}) };
@@ -599,6 +649,12 @@ for (const key of targets) {
       .setArray(times)
       .setBuffer(buffer);
 
+    // fn may return a single {axis, angle} (every existing caller) or an
+    // ARRAY of them, composed in order into one local delta rotation before
+    // the rest/parent sandwich below: this is how a bone carries two
+    // simultaneous motions (e.g. the rock+twist compound on the spine bone),
+    // without opening a second animation channel on the same node/property,
+    // which glTF does not support.
     const addRot = (node, fn) => {
       const rest = [...node.getRotation()];
       const rwp = worldRot(parentOf.get(node));
@@ -606,8 +662,11 @@ for (const key of targets) {
       const out = new Float32Array(g.keys * 4);
       let prev = null;
       for (let i = 0; i < g.keys; i++) {
-        const { axis, angle } = fn(times[i] / g.dur);
-        let q = qnorm(qmul(qmul(qmul(inv, qaxis(AXES[axis], angle)), rwp), rest));
+        const result = fn(times[i] / g.dur);
+        const parts = Array.isArray(result) ? result : [result];
+        let delta = [0, 0, 0, 1];
+        for (const { axis, angle } of parts) delta = qmul(qaxis(AXES[axis], angle), delta);
+        let q = qnorm(qmul(qmul(qmul(inv, delta), rwp), rest));
         // keep neighbors on the same hemisphere so LERP never goes the long way
         if (prev && q[0] * prev[0] + q[1] * prev[1] + q[2] * prev[2] + q[3] * prev[3] < 0) {
           q = q.map((v) => -v);
@@ -752,7 +811,25 @@ for (const key of targets) {
       }
       if (cfg.rock) {
         const amp = (name === 'Run' ? cfg.rock.run : cfg.rock.walk) * DEG;
-        addRot(bone(cfg.rock.bone), (u) => ({ axis: lateralAxis, angle: amp * wave(u, 0.25) }));
+        // Optional torso yaw-twist, composed onto the SAME rock bone (a
+        // spine bone can only carry one 'rotation' channel per glTF
+        // animation, see addRot's comment above): the shoulders/hips
+        // counter-rotate as weight shifts between diagonal leg pairs during
+        // a trot. Deliberately OUT of phase with the vertical rock (phase 0
+        // vs rock's 0.25): sharing one phase would make the two angles
+        // proportional at every instant, which collapses (for the small
+        // angles here) to a single FIXED oblique axis rather than a torso
+        // that genuinely twists independently of its up/down flex over the
+        // stride, the same reason a real quadruped's twist and bob read as
+        // two distinct motions rather than one diagonal wobble. A rig with
+        // no twist entry keeps the exact pre-existing single-axis rock
+        // motion.
+        const twistAmp = cfg.twist ? (name === 'Run' ? cfg.twist.run : cfg.twist.walk) * DEG : 0;
+        addRot(bone(cfg.rock.bone), (u) => {
+          const parts = [{ axis: lateralAxis, angle: amp * wave(u, 0.25) }];
+          if (twistAmp) parts.push({ axis: 'yaw', angle: twistAmp * wave(u) });
+          return parts;
+        });
       }
       if (cfg.sway) {
         const amp = (name === 'Run' ? cfg.sway.run : cfg.sway.walk) * DEG;

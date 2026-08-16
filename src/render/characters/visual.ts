@@ -590,6 +590,10 @@ export class CharacterVisual {
   private metamorphRightWingRest = new THREE.Euler();
   private metamorphLeftHand: THREE.Object3D | null = null;
   private metamorphRightHand: THREE.Object3D | null = null;
+  private mountSeatLeft: THREE.Object3D | null = null;
+  private mountSeatRight: THREE.Object3D | null = null;
+  private readonly mountSeatScratchL = new THREE.Vector3();
+  private readonly mountSeatScratchR = new THREE.Vector3();
   private metamorphWingPose = createMetamorphWingPose();
   private metamorphElapsed = 0;
   private metamorphPulse = 0;
@@ -672,6 +676,16 @@ export class CharacterVisual {
           this.model.getObjectByName('handslot.r') ??
           this.model.getObjectByName('R_Hand') ??
           null;
+      }
+      // Rideable mounts: two socket nodes baked onto the saddle's hip line by
+      // scripts/bake_mount_gaits.mjs (RiderSeatL/R), children of the rig's own
+      // spine bone so they inherit its animated transform every frame. Absent
+      // on the clipless bob-driven mounts and any rig not yet re-baked with
+      // the sockets; mountSeatWorldPosition below fails soft to the static
+      // MountVisualSpec.seat/seatFwd offset in that case.
+      if (key.startsWith('mount_')) {
+        this.mountSeatLeft = this.model.getObjectByName('RiderSeatL') ?? null;
+        this.mountSeatRight = this.model.getObjectByName('RiderSeatR') ?? null;
       }
       // Class halo (the priest's Light): a glowing ring behind the head bone.
       // Added AFTER applyMaterials (its additive material must not be re-mapped)
@@ -1722,6 +1736,28 @@ export class CharacterVisual {
     this.metamorphRightHand.updateWorldMatrix(true, false);
     this.metamorphLeftHand.getWorldPosition(left);
     this.metamorphRightHand.getWorldPosition(right);
+    return true;
+  }
+
+  /** Live world-space rider seat: the midpoint of the two RiderSeatL/R hip
+   *  sockets (see the constructor comment), so the rider tracks the mount's
+   *  ACTUAL animated saddle position every frame instead of a fixed offset
+   *  applied on top of an un-animated rest pose (the "rider stays glued to a
+   *  fixed point while the model twists/stomps under it" bug). False when the
+   *  rig carries no sockets or is not currently drawn; the renderer falls
+   *  back to the static MountVisualSpec.seat/seatFwd offset in that case. */
+  mountSeatWorldPosition(out: THREE.Vector3): boolean {
+    if (!this.root.visible || this.far || !this.mountSeatLeft || !this.mountSeatRight) {
+      return false;
+    }
+    const owner = this.root.parent;
+    if (owner && (!owner.visible || !owner.matrixWorldAutoUpdate)) return false;
+    owner?.updateWorldMatrix(true, false);
+    this.mountSeatLeft.updateWorldMatrix(true, false);
+    this.mountSeatRight.updateWorldMatrix(true, false);
+    this.mountSeatLeft.getWorldPosition(this.mountSeatScratchL);
+    this.mountSeatRight.getWorldPosition(this.mountSeatScratchR);
+    out.addVectors(this.mountSeatScratchL, this.mountSeatScratchR).multiplyScalar(0.5);
     return true;
   }
 
