@@ -1,4 +1,4 @@
-# Mount fixes: Grimtusk saddle, Cinderhide facing, Nightprowl panther, Windrend shadewolf
+# Mount fixes: Grimtusk saddle, Cinderhide facing, Nightprowl panther, Windrend shadewolf, Solmane rider-hip-bone lock
 
 One-off record of the PR #3365 follow-up fixes, referenced here so the CI
 sparse-checkout cone for their screenshot evidence has a real coupling
@@ -28,3 +28,13 @@ regen) shipped in the same change as the boar/hound fixes.
   catalog wiring as the panther, plus jump and idle animations added to every
   mount in this PR and improved gait keyframe density/amplitude on the
   rigged mounts. Evidence: `docs/screenshots/windrend-stormveil-shadewolf-mount/`.
+- **Solmane the Sunveil Charger**: a sixth rideable mount, the paladin's story
+  mount (Solar Step ability), the best-rigged and best-VFX'd mount in the
+  catalog. Also lands the rider-hip-bone lock across all six mounts: sockets
+  baked into each rig (`RiderSeatL`/`RiderSeatR`, `scripts/lib/mount_rider_seat_sockets.mjs`)
+  track the mount's actual animated saddle position every frame, read live via
+  `CharacterVisual.mountSeatWorldPosition` (extracted into
+  `src/render/mount_rider_lock.ts`), so a rider no longer stays glued to a
+  fixed world-space offset through twist/stomp animations. Evidence,
+  captured the same way as the other five (real in-game ride, not a bare
+  asset-pipeline preview): `docs/screenshots/solmane-charger-mount/`.

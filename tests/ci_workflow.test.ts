@@ -262,6 +262,7 @@ describe('CI workflow parity', () => {
       '            /docs/screenshots/placeholder-art-completion-2026-08-09/',
       '            /docs/screenshots/r35-admin-professions-inspector/',
       '            /docs/screenshots/release-v036-skill-normalization-2026-08-10/',
+      '            /docs/screenshots/solmane-charger-mount/',
       '            /docs/screenshots/wildheart/',
       '            /docs/screenshots/windrend-stormveil-shadewolf-mount/',
       '          sparse-checkout-cone-mode: false',
