@@ -8,6 +8,10 @@ const characterVisual = readFileSync(
 );
 const main = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8');
 const mountFx = readFileSync(new URL('../src/render/mount_fx.ts', import.meta.url), 'utf8');
+const mountRiderLock = readFileSync(
+  new URL('../src/render/mount_rider_lock.ts', import.meta.url),
+  'utf8',
+);
 
 describe('character presentation sleep wiring', () => {
   it('routes hidden cosmetic rigs through bounded off-screen advancement', () => {
@@ -30,7 +34,11 @@ describe('character presentation sleep wiring', () => {
     expect(renderer).toContain(
       'if (runCharacterPresentation) {\n        v.visual.updateWeaponVfx(dt, weaponVfxShedScale(d2, this.appliedBudgetLevels?.vfx ?? 1));\n      }',
     );
-    expect(renderer).toContain('v.mountVisual.advanceOffscreen(dt);');
+    // The mounted-rider frame update (bob, live saddle-socket lock, ambient
+    // mount fx) is extracted into mount_rider_lock.ts; a hidden rig's bounded
+    // off-screen advancement lives there now, gated the same way.
+    expect(renderer).toContain('updateMountedRiderFrame(');
+    expect(mountRiderLock).toContain('v.mountVisual.advanceOffscreen(dt);');
   });
 
   it('ticks deferred weapon stow transitions while a rig is off screen', () => {
@@ -53,18 +61,23 @@ describe('character presentation sleep wiring', () => {
   });
 
   it('sleeps ability VFX semantically while mount particles remain presentation-gated', () => {
-    const mountStart = renderer.indexOf('if (v.mountVisual && mountSpec && mountShown) {');
+    // The mounted-rider dispatch (gait, saddle-socket lock, ambient mount fx)
+    // is extracted into mount_rider_lock.ts (#3365 rider-lock follow-up); the
+    // call site here must still precede the ability-VFX block so a mount's
+    // presentation-gated work is decided before ability VFX runs.
+    const mountCallStart = renderer.indexOf('updateMountedRiderFrame(');
     const abilityStart = renderer.indexOf('// per-ability windup orb + buff-orbit bands');
-    expect(mountStart).toBeGreaterThan(-1);
-    expect(abilityStart).toBeGreaterThan(mountStart);
+    expect(mountCallStart).toBeGreaterThan(-1);
+    expect(abilityStart).toBeGreaterThan(mountCallStart);
 
-    const mountBlock = renderer.slice(mountStart, abilityStart);
-    expect(mountBlock).toContain('if (runCharacterPresentation) {');
-    // The four ambient mount particle kinds are dispatched via
+    // updateMountedRiderFrame itself gates the mount update proper (as
+    // opposed to the bounded off-screen advancement above) on
+    // runCharacterPresentation, and dispatches ambient mount particles via
     // src/render/mount_fx.ts (extracted so renderer.ts, a monolith-budget
     // coordinator, does not grow a branch per fx kind); pin the call site
     // here and the exhaustive dispatch itself below.
-    expect(mountBlock).toContain('applyMountFx(this.vfx, mountSpec.fx,');
+    expect(mountRiderLock).toContain('if (!runCharacterPresentation) {');
+    expect(mountRiderLock).toContain('applyMountFx(vfx, mountSpec.fx,');
     expect(renderer.slice(abilityStart)).toContain(
       'this.abilityVfx.syncEntity(e, runCharacterPresentation);',
     );

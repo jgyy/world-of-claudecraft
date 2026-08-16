@@ -744,10 +744,40 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // release's fire-light-registry extraction and moon-phase grade threading), so
 // the composite mints a value matching neither parent and this metadata
 // authority sha follows the swept bytes. No capture was retaken.
+// Re-minted for the quest-collectable spawn gate: this branch's renderer.ts
+// edits (the view gate call sites and the ground-object pool key move) shift
+// the runtimeRender.renderer leaf, the only leaf that moved. No Eastbrook
+// input, geometry value, or capture moved.
+// Re-minted for the merge of PR #3359's quest-collectable spawn gate with the
+// release branch's extracted entity-view policy. Both renderer.ts and the
+// entityViewPolicy leaf are provenance inputs; no capture was retaken.
+// Re-minted for the review fixes on this branch (Soul Rend warms every rig a
+// live body can take, plus the lazy form-visual fold): the first-order
+// composite follows renderer.ts, then this seal follows the swept evidence
+// bytes. No capture was retaken.
+// Re-minted for the merge of the Windrend the Stormveil Shadewolf mount branch
+// (mount_fx.ts's frost-trail dispatch case) with the release branch's further
+// renderer.ts extractions: both parents move renderer.ts, so the composite
+// mints a value matching neither parent and this metadata authority sha
+// follows the swept bytes. No capture was retaken.
+// Re-minted for the r185 frozen-camera aim fix: the first-order composite
+// follows renderer.ts, then this seal follows the swept evidence bytes. No
+// capture was retaken.
+// Re-minted for the merge of release/v0.39.0 into the Windrend the Stormveil
+// Shadewolf mount branch: the first-order composite mints anew and this
+// metadata authority sha follows the swept bytes. No capture was retaken.
+// Re-minted for the mounted-rider frame update extraction into
+// src/render/mount_rider_lock.ts (#3365 rider-lock follow-up): the first-order
+// composite follows renderer.ts, then this seal follows the swept evidence
+// bytes. No capture was retaken.
+// Re-minted for rebasing feature/veil-wraith-courser-mount (#3365) onto the
+// latest release/v0.39.0: renderer.ts moved on both sides since this branch
+// last synced, so the composite mints a value matching neither and this
+// metadata authority sha follows the swept bytes. No capture was retaken.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  'eb6f886e8f4556b604ab00ec6636b1e1afd0b02eac9faf957bf6fa490d4ae05d';
+  '97df3088c5274685ca24bf679a731bbae087ce34b51d82c5a744604721d582fc';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  'f969eed7c6d5f2a0ad5bbfd73cb257333b44d1c7a467d77ac1091da312ab2b32';
+  'abbcf3b7ec90806ce4d5862c643051c7d9b71e44751360131d3d22ee392b80cd';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -1726,10 +1756,46 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // release's fire-light-registry extraction and moon-phase grade threading), so
     // the first-order composite mints anew and this second-order seal follows the
     // swept evidence bytes. No capture was retaken.
+    // Re-minted for the merge of release/v0.38.0 into the Armory warming
+    // branch: the first-order composite follows the merged renderer.ts bytes,
+    // then this second-order performance seal follows the swept evidence
+    // bytes. No capture was retaken.
+    // Re-pinned for the quest-collectable spawn gate. The first-order
+    // composite follows renderer.ts, then this second-order seal follows the
+    // swept evidence bytes. No capture was retaken.
+    // Re-pinned for the merge of PR #3359's quest-collectable spawn gate with
+    // the release branch's extracted entity-view policy. The first-order
+    // composite follows renderer.ts and entityViewPolicy, then this seal
+    // follows the swept bytes. No capture was retaken.
+    // Re-minted for the review fixes on this branch (Soul Rend warms every rig
+    // a live body can take, plus the lazy form-visual fold): the first-order
+    // composite follows renderer.ts, then this seal follows the swept evidence
+    // bytes. No capture was retaken.
+    // Re-minted for the merge of the Windrend the Stormveil Shadewolf mount
+    // branch (mount_fx.ts's frost-trail dispatch case) with the release
+    // branch's further renderer.ts extractions: the first-order composite
+    // mints anew and this second-order seal follows the swept evidence bytes.
+    // No capture was retaken.
+    // Re-minted for the r185 frozen-camera aim fix. The first-order composite
+    // follows renderer.ts, then this second-order performance seal follows the
+    // swept evidence bytes. No capture was retaken.
+    // Re-minted for the merge of release/v0.39.0 into the Windrend the
+    // Stormveil Shadewolf mount branch: the first-order composite mints anew
+    // and this second-order seal follows the swept evidence bytes. No capture
+    // was retaken.
+    // Re-minted for the mounted-rider frame update extraction into
+    // src/render/mount_rider_lock.ts (#3365 rider-lock follow-up): the
+    // first-order composite follows renderer.ts, then this second-order seal
+    // follows the swept evidence bytes. No capture was retaken.
+    // Re-minted for rebasing feature/veil-wraith-courser-mount (#3365) onto
+    // the latest release/v0.39.0: renderer.ts moved on both sides since this
+    // branch last synced, so the first-order composite mints anew and this
+    // second-order seal follows the swept evidence bytes. No capture was
+    // retaken.
     expect(
       fingerprint.digest('hex'),
       `the second-order performance digest moved; if every input moved legitimately, re-mint with: ${REMINT_COMMAND} (it recomputes this literal LAST, from the swept files)`,
-    ).toBe('92bc17eea7227883da4629cdf9cd0fe986eb6e2b47c64854d95648bba5560cef');
+    ).toBe('7c0c6d4fc3c44bd039ecb86bba584688216e1da151fe8a717c3c74c19fb61789');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {

@@ -333,8 +333,8 @@ describe('item-art consistency accepted-art provenance', () => {
       },
       {
         path: `${evidenceDir}/final-item-art-audit-verdict.json`,
-        acceptedSha256: '19861a85c5c86ea205eaeba3c322af1e572db61558539a58a5a4e701e097f92d',
-        acceptedBytes: 113_881,
+        acceptedSha256: 'c5cba7ad7f9483c3db02cdf024201bbae5d7f5cfdb5f16c958645e257daa7e2c',
+        acceptedBytes: 114_019,
       },
     ]);
     for (const evidence of [...value.sourceEvidence, ...value.generationReports]) {
@@ -449,9 +449,9 @@ describe('item-art consistency accepted-art provenance', () => {
     expect(readme).toContain('node scripts/item_art_audit.mjs\n');
     expect(readme).toContain('node scripts/item_art_audit.mjs --refresh-verdict');
     const verdictBytes = readFileSync(path.join(repoRoot, verdictPath));
-    expect(verdictBytes.length).toBe(113_881);
+    expect(verdictBytes.length).toBe(114_019);
     expect(sha256(verdictBytes)).toBe(
-      '19861a85c5c86ea205eaeba3c322af1e572db61558539a58a5a4e701e097f92d',
+      'c5cba7ad7f9483c3db02cdf024201bbae5d7f5cfdb5f16c958645e257daa7e2c',
     );
     const verdict = JSON.parse(verdictBytes.toString('utf8')) as FinalAuditVerdict;
 
@@ -460,8 +460,8 @@ describe('item-art consistency accepted-art provenance', () => {
       baselineCommit: 'aee195551b5aef628eb7a72192117d7e3079818e',
       branch: 'feature/placeholder-art-completion-v036',
       shippingDirectory: 'public/ui/items',
-      itemArtFilesReviewed: 828,
-      liveItemDefinitions: 843,
+      itemArtFilesReviewed: 829,
+      liveItemDefinitions: 844,
       generatedHeroicDefinitions: 64,
       heroicDefinitionsWithOwnWebp: 48,
       heroicWeaponArtAliases: 16,
@@ -471,7 +471,7 @@ describe('item-art consistency accepted-art provenance', () => {
       manifest().targetSets.items.map((id) => `public/ui/items/${id}.webp`),
     );
     expect(Object.values(verdict.auditScope.groups).reduce((sum, count) => sum + count, 0)).toBe(
-      828,
+      829,
     );
     expect(Object.keys(verdict.auditScope.groups)).toHaveLength(22);
     const shippingIds = new Set(
@@ -516,13 +516,13 @@ describe('item-art consistency accepted-art provenance', () => {
     ]);
     expect(verdict.visualVerdict).toMatchObject({
       status: 'pass',
-      passCount: 828,
+      passCount: 829,
       watchCount: 0,
       watch: [],
       rejectCount: 0,
       reject: [],
       summary:
-        "All 828 shipping item-art files pass the MACHINE-CHECKABLE contract (dimensions, format, opacity, size, uniqueness; see machineChecks below): 817 reviewed in the 2026-08-09 campaign (documented retries included), plus the five class-overhaul integration additions owner-reviewed and passed on 2026-08-10, plus the Veil-Wraith Courser and Grimtusk the Ironhide Boar mount reins icons added on 2026-08-13, plus the Ashfang the Cinderhide Hound mount reins icon added on 2026-08-14, plus the Nightprowl the Duskveil Panther mount reins icon added on 2026-08-14, plus the Windrend the Stormveil Shadewolf mount reins icon added on 2026-08-15, plus the Solmane the Sunveil Charger mount reins icon added on 2026-08-16. Of those six, only the Veil-Wraith Courser icon fully satisfies the woc-item-icon-v1 STYLE contract (repainted 2026-08-13, see the correction entry below): reins_grimtusk_boar is a composed-but-still-photographic render (batchId grimtusk-boar-mount-composition-fix-2026-08-14), reins_cinderhide_hound is a raw 3D camera render (batchId cinderhide-hound-mount-2026-08-14), reins_nightprowl_panther is a raw 3D camera render (batchId nightprowl-panther-mount-2026-08-14), reins_windrend_stormveil_shadewolf is a raw 3D camera render (batchId windrend-stormveil-shadewolf-mount-2026-08-15), and reins_solmane_charger is a raw 3D camera render sourced from the asset-generation pipeline's own preview render rather than scripts/render_mount_icons.mjs (batchId solmane-charger-mount-2026-08-16, see mapping.json for why), all known, deliberately unresolved style-contract gaps tracked in public/ui/items/mapping.json, not passed style reviews. passIds below is a shipping-catalog membership list (every current owner id, all machine-check clean), not a claim that every id also clears the style contract.",
+        "All 829 shipping item-art files pass the MACHINE-CHECKABLE contract (dimensions, format, opacity, size, uniqueness; see machineChecks below): 817 reviewed in the 2026-08-09 campaign (documented retries included), plus the five class-overhaul integration additions owner-reviewed and passed on 2026-08-10, plus the Dawnhold posy addition (project-authored vector illustration) owner-reviewed and passed on 2026-08-12, plus the Veil-Wraith Courser and Grimtusk the Ironhide Boar mount reins icons added on 2026-08-13, plus the Ashfang the Cinderhide Hound mount reins icon added on 2026-08-14, plus the Nightprowl the Duskveil Panther mount reins icon added on 2026-08-14, plus the Windrend the Stormveil Shadewolf mount reins icon added on 2026-08-15, plus the Solmane the Sunveil Charger mount reins icon added on 2026-08-16. Of those six, only the Veil-Wraith Courser icon fully satisfies the woc-item-icon-v1 STYLE contract (repainted 2026-08-13, see the correction entry below): reins_grimtusk_boar is a composed-but-still-photographic render (batchId grimtusk-boar-mount-composition-fix-2026-08-14), reins_cinderhide_hound is a raw 3D camera render (batchId cinderhide-hound-mount-2026-08-14), reins_nightprowl_panther is a raw 3D camera render (batchId nightprowl-panther-mount-2026-08-14), reins_windrend_stormveil_shadewolf is a raw 3D camera render (batchId windrend-stormveil-shadewolf-mount-2026-08-15), and reins_solmane_charger is a raw 3D camera render sourced from the asset-generation pipeline's own preview render rather than scripts/render_mount_icons.mjs (batchId solmane-charger-mount-2026-08-16, see mapping.json for why), all known, deliberately unresolved style-contract gaps tracked in public/ui/items/mapping.json, not passed style reviews. passIds below is a shipping-catalog membership list (every current owner id, all machine-check clean), not a claim that every id also clears the style contract.",
     });
     expect(verdict.visualVerdict.passIds).toEqual(currentIds);
     expect(verdict.nonVisualContentWatch).toEqual([
@@ -562,8 +562,8 @@ describe('item-art consistency accepted-art provenance', () => {
 
     expect(verdict.evidence.catalog).toEqual({
       path: 'tmp/imagegen/item-art-consistency/final-audit/catalog.json',
-      sha256: '65b50263b7ae64af3dd11615d218060930d189943e304d3885b63456359b3fde',
-      bytes: 454_552,
+      sha256: 'b7bdefadf5e57307d6c4850e403efcd75c1a24d22dfc93aeb8f0d377d7ad6da2',
+      bytes: 455_058,
     });
     expect(verdict.evidence.rendererFingerprint).toBe(
       'fd92c41a206cd55b05a1de94c4789f6eb6ca4200d063f4bbd284c21ae03b6082',
@@ -616,7 +616,7 @@ describe('item-art consistency accepted-art provenance', () => {
       sheetSetDigest.update(`${sheet.path}\0${sheet.sha256}\0${sheet.bytes}\n`);
     }
     expect(verdict.evidence.sheetSetSha256).toBe(
-      '1408573d53242e336381c4d1a968339081360c4a4469e358d5e705987ef31feb',
+      'ca1dc6d91df9e09fb0adbe08216a373a36d1046c8502baf8a701b66d16847dc3',
     );
     expect(sheetSetDigest.digest('hex')).toBe(verdict.evidence.sheetSetSha256);
 
@@ -626,7 +626,7 @@ describe('item-art consistency accepted-art provenance', () => {
       shippingCatalogDigest.update(`${id}\0${sha256(bytes)}\0${bytes.length}\n`);
     }
     expect(verdict.evidence.shippingCatalogSha256).toBe(
-      'dd447695bcae8aaecb38698072dac2808e41caa6b806d75bae6b05464afcdaff',
+      'ca8fe4cc6d84019cb96fd61467b7e153b7ff554b179a96a9e4f6e2fb5a066a6f',
     );
     expect(shippingCatalogDigest.digest('hex')).toBe(verdict.evidence.shippingCatalogSha256);
   });
@@ -736,7 +736,7 @@ describe('item-art consistency accepted-art provenance', () => {
       mapping.license,
       'no ordinary item inherits the retired CraftPix default',
     ).toBeUndefined();
-    expect(mapping.entries).toHaveLength(39);
+    expect(mapping.entries).toHaveLength(40);
     expect(mapping.entries.every(({ license }) => Boolean(license))).toBe(true);
     expect(mapping.generatedBatches).toHaveLength(22);
     const batch = mapping.generatedBatches.find(({ batchId }) => batchId === BATCH_ID);
@@ -760,8 +760,8 @@ describe('item-art consistency accepted-art provenance', () => {
       ...mapping.entries.map(({ itemId }) => itemId),
       ...mapping.generatedBatches.flatMap(({ itemIds }) => itemIds),
     ];
-    expect(allCurrentOwnerIds).toHaveLength(828);
-    expect(new Set(allCurrentOwnerIds).size).toBe(828);
+    expect(allCurrentOwnerIds).toHaveLength(829);
+    expect(new Set(allCurrentOwnerIds).size).toBe(829);
     expect(batch?.provenanceRecords).toEqual([
       `${evidenceDir}/accepted-art.json`,
       `${evidenceDir}/supersession-audit.json`,
@@ -897,8 +897,8 @@ describe('item-art consistency accepted-art provenance', () => {
     for (const id of ownerIds) ownerCountById.set(id, (ownerCountById.get(id) ?? 0) + 1);
 
     const violations: string[] = [];
-    if (ownerIds.length !== 828) violations.push(`mapping owner count: ${ownerIds.length} != 828`);
-    if (fileIds.length !== 828) violations.push(`shipping WebP count: ${fileIds.length} != 828`);
+    if (ownerIds.length !== 829) violations.push(`mapping owner count: ${ownerIds.length} != 829`);
+    if (fileIds.length !== 829) violations.push(`shipping WebP count: ${fileIds.length} != 829`);
     for (const id of ids) {
       const ownerCount = ownerCountById.get(id) ?? 0;
       if (ownerCount !== 1) violations.push(`${id}: current owner count ${ownerCount} != 1`);

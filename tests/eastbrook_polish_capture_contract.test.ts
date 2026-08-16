@@ -162,8 +162,38 @@ interface AttributionTargetFixture {
 // both parents move renderer.ts (this branch's mount_fx.ts extraction, the
 // release's fire-light-registry extraction and moon-phase grade threading), so
 // the merged tree mints a value matching neither parent. No capture was retaken.
+// Re-minted for the merge of release/v0.38.0 into the Armory warming branch:
+// both parents move renderer.ts, so the merged tree mints a value matching
+// neither parent. No capture was retaken.
+// Re-minted for the quest-collectable spawn gate: this branch's renderer.ts
+// edits (the view gate call sites and the ground-object pool key move) shift
+// the runtimeRender.renderer leaf, the only leaf that moved. No Eastbrook
+// input, geometry value, or capture moved.
+// Re-minted for the merge of PR #3359's quest-collectable spawn gate with the
+// release branch's extracted entity-view policy. Both renderer.ts and the
+// entityViewPolicy leaf are provenance inputs; no capture was retaken.
+// Re-minted for the review fixes on this branch (Soul Rend warms every rig a
+// live body can take, plus the lazy form-visual fold): renderer.ts moves
+// again, so the composite follows its bytes. No capture was retaken.
+// Re-minted for the merge of the Windrend the Stormveil Shadewolf mount branch
+// (mount_fx.ts's frost-trail dispatch case) with the release branch's further
+// renderer.ts extractions: both parents move renderer.ts, so the merged tree
+// mints a value matching neither parent. No capture was retaken.
+// Re-minted for the r185 frozen-camera aim fix: updateCamera now aims through
+// lookAtFrozen, so renderer.ts moves and the composite follows its bytes. No
+// capture was retaken.
+// Re-minted for the merge of release/v0.39.0 into the Windrend the Stormveil
+// Shadewolf mount branch: both parents move renderer.ts, so the merged tree
+// mints a value matching neither parent. No capture was retaken.
+// Re-minted for the mounted-rider frame update extraction into
+// src/render/mount_rider_lock.ts (#3365 rider-lock follow-up): renderer.ts
+// moves and the composite follows its bytes. No capture was retaken.
+// Re-minted for rebasing feature/veil-wraith-courser-mount (#3365) onto the
+// latest release/v0.39.0: renderer.ts moved on both sides since this branch
+// last synced, so the merged tree mints a value matching neither parent. No
+// capture was retaken.
 const PINNED_POLISH_COMPOSITE_FINGERPRINT =
-  'f969eed7c6d5f2a0ad5bbfd73cb257333b44d1c7a467d77ac1091da312ab2b32';
+  'abbcf3b7ec90806ce4d5862c643051c7d9b71e44751360131d3d22ee392b80cd';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [
@@ -456,7 +486,7 @@ describe('Eastbrook polish capture contract', () => {
       createHash('sha256')
         .update(await readFile(new URL(relativePath, repoRoot)))
         .digest('hex');
-    const provenance = deriveEastbrookPolishCompositeProvenance({
+    const provenanceInputs = {
       townAssetSourceFingerprint: townFingerprint.eastbrookTownSourceFingerprint(),
       authoritativeLayoutSha256: await fileSha256(
         EASTBROOK_POLISH_PROVENANCE_INPUTS.authoritativeLayout,
@@ -470,6 +500,7 @@ describe('Eastbrook polish capture contract', () => {
       rendererIntegrationSha256: await fileSha256(
         EASTBROOK_POLISH_PROVENANCE_INPUTS.rendererIntegration,
       ),
+      entityViewPolicySha256: await fileSha256(EASTBROOK_POLISH_PROVENANCE_INPUTS.entityViewPolicy),
       viewPriorityPolicySha256: await fileSha256(
         EASTBROOK_POLISH_PROVENANCE_INPUTS.viewPriorityPolicy,
       ),
@@ -477,7 +508,14 @@ describe('Eastbrook polish capture contract', () => {
       mailboxGlbSha256: await fileSha256(EASTBROOK_POLISH_PROVENANCE_INPUTS.mailboxGlb),
       noticeboardSourceFingerprint: noticeboardFingerprint.eastbrookNoticeboardSourceFingerprint(),
       noticeboardGlbSha256: await fileSha256(EASTBROOK_POLISH_PROVENANCE_INPUTS.noticeboardGlb),
+    };
+    const provenance = deriveEastbrookPolishCompositeProvenance(provenanceInputs);
+    const policyOnlyChange = deriveEastbrookPolishCompositeProvenance({
+      ...provenanceInputs,
+      entityViewPolicySha256: '0'.repeat(64),
     });
+    expect(policyOnlyChange.fingerprint).not.toBe(provenance.fingerprint);
+    expect(policyOnlyChange.components.runtimeRender.entityViewPolicy.sha256).toBe('0'.repeat(64));
     // On a mismatch the diagnostics module names the moved leaf against the
     // committed evidence seal, reports whether any fingerprinted input is
     // dirty vs HEAD (the stale-mint hazard: the 2026-08-05 craft-cast pin
@@ -519,6 +557,10 @@ describe('Eastbrook polish capture contract', () => {
           sha256: expect.stringMatching(/^[a-f0-9]{64}$/),
         },
         runtimeRender: {
+          entityViewPolicy: {
+            path: 'src/render/entity_view_policy_core.ts',
+            sha256: expect.stringMatching(/^[a-f0-9]{64}$/),
+          },
           viewPriorityPolicy: {
             path: 'src/render/prewarm_policy.ts',
             sha256: expect.stringMatching(/^[a-f0-9]{64}$/),
@@ -1359,6 +1401,7 @@ describe('Eastbrook polish capture contract', () => {
       'npcFacings:',
       'polishProvenance',
       'deriveEastbrookPolishCompositeProvenance({',
+      'EASTBROOK_POLISH_PROVENANCE_INPUTS.entityViewPolicy',
       'TOWN_CONTRACT',
     ]) {
       expect(source, call).toContain(call);
