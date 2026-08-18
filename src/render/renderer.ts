@@ -9662,7 +9662,14 @@ export class Renderer {
     if (Math.abs(px - origin.x) >= 120) return;
     const stackEndZ = origin.z + delveModuleStackEndRelZ(modules);
     if (pz < origin.z + DELVE_MODULE_Z_START - 30 || pz > stackEndZ) return;
-    buildDelveModulesInSlot(this.delveResidency, this.ensureDungeons(), delve.id, slot, origin, modules);
+    buildDelveModulesInSlot(
+      this.delveResidency,
+      this.ensureDungeons(),
+      delve.id,
+      slot,
+      origin,
+      modules,
+    );
   }
 
   // Which futuristic sky this practice bout flies: hashed off the match id so it

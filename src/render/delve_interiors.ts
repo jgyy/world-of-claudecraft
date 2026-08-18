@@ -175,7 +175,12 @@ export function prebuildDelveModuleResidency(
   residency: DelveInteriorResidency,
   dungeons: DungeonInteriors,
   delveId: string,
-  run: { delveId: string; slot: number; origin: { x: number; z: number }; modules: readonly string[] },
+  run: {
+    delveId: string;
+    slot: number;
+    origin: { x: number; z: number };
+    modules: readonly string[];
+  },
   retireGroup: (group: THREE.Group) => void,
   onBuildFailed?: (moduleId: DelveModuleId, ox: number, oz: number, err: unknown) => void,
 ): void {

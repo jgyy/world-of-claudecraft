@@ -85,7 +85,7 @@ const MONOLITHS: MonolithRow[] = [
     // into src/render/delve_interiors.ts and src/render/
     // delve_interior_residency_core.ts (the fix for stale delve-slot
     // interiors persisting across a recycled slot's re-shuffled module run).
-    ceiling: 13679,
+    ceiling: 13686,
     seam: 'a new src/render/<thing>.ts module the renderer calls (src/render/CLAUDE.md)',
   },
   {

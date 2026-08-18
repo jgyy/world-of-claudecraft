@@ -189,7 +189,7 @@ interface AttributionTargetFixture {
 // extracted to delve_interiors.ts), so the composite follows its bytes. No
 // capture was retaken.
 const PINNED_POLISH_COMPOSITE_FINGERPRINT =
-  '41721506a5c07d36d0852147ab3e16fe7c4fee482e23798d6c241730adecd70f';
+  '1ee4edd56df4594d4f310293082d76cd7f4ae83c447e2b6cc39bf77dfa2d7fc5';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [

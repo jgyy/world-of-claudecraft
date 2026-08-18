@@ -19,9 +19,9 @@ describe('isDelveSlotInteriorKey', () => {
     expect(isDelveSlotInteriorKey('delve:drowned_litany:3:litany_apse', 'drowned_litany', 3)).toBe(
       true,
     );
-    expect(isDelveSlotInteriorKey('delve:drowned_litany:3:litany_sluice', 'drowned_litany', 3)).toBe(
-      true,
-    );
+    expect(
+      isDelveSlotInteriorKey('delve:drowned_litany:3:litany_sluice', 'drowned_litany', 3),
+    ).toBe(true);
   });
 
   it('does not match a different slot on the same delve', () => {

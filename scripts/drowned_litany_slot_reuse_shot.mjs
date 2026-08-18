@@ -86,24 +86,21 @@ const info = await page.evaluate(() => {
 // between orders (always DELVE_MODULE_Z_START), so it is the exact spot
 // where a stale/correct rebuild is visible.
 async function shootModuleZero(filename) {
-  await page.evaluate(
-    ({ filename, origin }) => {
-      const sim = window.__game.sim;
-      const run = sim.delveRunForPlayer(sim.playerId);
-      const id = run.modules[0];
-      const b = window.__LITANY_BOUNDS(id);
-      const zBase = window.__delveModuleZOffset(run.modules, 0);
-      const p = sim.player;
-      p.pos.x = origin.x;
-      p.pos.z = origin.z + zBase + b.zMin + 8;
-      p.pos.y = 0;
-      p.prevPos = { ...p.pos };
-      p.facing = 0; // look up-room (+z)
-      p.prevFacing = 0;
-      window.__shotModuleId = id;
-    },
-    { filename, origin: info.origin },
-  );
+  await page.evaluate((origin) => {
+    const sim = window.__game.sim;
+    const run = sim.delveRunForPlayer(sim.playerId);
+    const id = run.modules[0];
+    const b = window.__LITANY_BOUNDS(id);
+    const zBase = window.__delveModuleZOffset(run.modules, 0);
+    const p = sim.player;
+    p.pos.x = origin.x;
+    p.pos.z = origin.z + zBase + b.zMin + 8;
+    p.pos.y = 0;
+    p.prevPos = { ...p.pos };
+    p.facing = 0; // look up-room (+z)
+    p.prevFacing = 0;
+    window.__shotModuleId = id;
+  }, info.origin);
   await sleep(1700); // let the chase cam swing around, matching shotModule
   await page.screenshot({ path: `${OUT}/${filename}` });
   console.log('shot', filename);
