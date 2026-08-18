@@ -766,10 +766,14 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // Re-minted for the r185 frozen-camera aim fix: the first-order composite
 // follows renderer.ts, then this seal follows the swept evidence bytes. No
 // capture was retaken.
+// Re-minted for the Drowned Litany delve-slot residency fix: the first-order
+// composite follows renderer.ts (the delve module interior schedule/build/
+// retire orchestration extracted to delve_interiors.ts), then this seal
+// follows the swept evidence bytes. No capture was retaken.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  '3fd2ffdb3833ef360657aeeb0ad17039279e5fad08c279dea19fb96522db30b9';
+  '45ac5d22fe50bde90839f216651a6ca8d7e83c213d77a5a8037cfe3b650787ae';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  '63eae2164f990137dccffd0df83eb3c048a1c8927d125501b717ea3b27b39495';
+  '41721506a5c07d36d0852147ab3e16fe7c4fee482e23798d6c241730adecd70f';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -1772,10 +1776,15 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // Re-minted for the r185 frozen-camera aim fix. The first-order composite
     // follows renderer.ts, then this second-order performance seal follows the
     // swept evidence bytes. No capture was retaken.
+    // Re-minted for the Drowned Litany delve-slot residency fix: the
+    // first-order composite follows renderer.ts (the delve module interior
+    // schedule/build/retire orchestration extracted to delve_interiors.ts),
+    // then this second-order performance seal follows the swept evidence
+    // bytes. No capture was retaken.
     expect(
       fingerprint.digest('hex'),
       `the second-order performance digest moved; if every input moved legitimately, re-mint with: ${REMINT_COMMAND} (it recomputes this literal LAST, from the swept files)`,
-    ).toBe('3e5298f95d8f76bff403ab31aa4ce1bbd45f981cb1630f2d40f52839f08340dd');
+    ).toBe('d748f5da6766bfabaf03b6550295911fd0bcc370c4737341a8035b78d9293d4e');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {
